@@ -26,7 +26,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "16b84389fa9e6fdb59df11923ff0932a6faf240d5962bfbfeb5ac9ae24cac981"
+      "sha256": "c02e7304db86600187a76637cafbb47539c67874f499c9e1c5cd34021de98ec4"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -74,7 +74,7 @@
     },
     "docs/engineering/templates/README.md": {
       "mode": "managed",
-      "sha256": "23166bbeba4de52dfb45a22b1bea79dff6edb6f2a17998aade8423d7a8706f27"
+      "sha256": "d8b1a1de9ff26d7e888de1bf6b9d1f24f86488ea4801d09138991c4113c8f2c9"
     },
     "docs/engineering/templates/RELEASE_CONTRACT.template.md": {
       "mode": "managed",
@@ -104,6 +104,10 @@
       "mode": "managed",
       "sha256": "7d0e4d79bd26c83edc3d76406f8037f13a1c5e4761e8e7a1eeac88a7df8b031d"
     },
+    "scripts/artifact_layout_registry.py": {
+      "mode": "managed",
+      "sha256": "c9b9601ce49449304bdd5be497f911caff780d13fa3801667451ec23bf7df7ad"
+    },
     "scripts/check_engineering_harness.ps1": {
       "mode": "managed",
       "sha256": "59bf668130aee9a05b183d3b90d6aa98d6aa44355d75fcdad7474b82674281fe"
@@ -126,7 +130,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "7b30ba2a2260745ff6a530b194f5cb8d643a636d36612b85304de64b087f5577"
+      "sha256": "02629e74edda587cfd04ba10061e2a8ab1eb3ef8d36b84bddfa35dea09822b61"
     }
   },
   "hash_algorithm": "sha256",

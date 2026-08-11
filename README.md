@@ -76,6 +76,15 @@ Adoption preserves ordinary repository files and writes `docs/engineering/ADOPTI
 
 After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. Installation does not approve product facts or work: accountable humans must confirm the context and author and approve the first formal engineering chain.
 
+Create a product domain and let the coding agent place new drafts consistently:
+
+```powershell
+harnessctl scaffold-domain C:\path\to\repository --domain simulation --title "Simulation"
+harnessctl create-artifact C:\path\to\repository --domain simulation --type requirement --id REQ-MOK-001
+```
+
+The second command creates an incomplete `draft` at `docs/engineering/simulation/requirements/REQ-MOK-001.md`; it does not invent owners, relations, approval, or product authority. Existing valid flat layouts remain usable and receive nonblocking canonical-path guidance rather than automatic migration.
+
 ## What this looks like in practice
 
 Suppose you ask your coding agent:
@@ -290,7 +299,7 @@ harnessctl capture-verification C:\path\to\repository `
   --evidence docs/engineering/DOMAIN/evidence/WO-001-verification.md
 ```
 
-The command derives the full SHA-1 or SHA-256 `HEAD`, checks the graph and evidence path, captures the dashboard snapshot hash, and writes only a `ready` `VREC-*`. It does not approve, commit, tag, release, push, or publish.
+The command derives the full SHA-1 or SHA-256 `HEAD`, checks the graph and evidence path, captures the dashboard snapshot hash, and writes only a `ready` `VREC-*`. When every selected work order belongs to one domain, the record defaults to that domain's `verification-records/`; cross-domain or ambiguous work uses the repository-wide aggregate directory. `--domain` selects an explicit safe domain and `--output` has highest placement precedence. None of these paths grants authority. The command does not approve, commit, tag, release, push, or publish.
 
 For a final candidate containing multiple release-bearing work orders, repeat the scope options. The selected verification contracts must equal the union declared by the work orders, and evidence must be retained for each work order:
 
@@ -321,7 +330,7 @@ harnessctl prepare-release C:\path\to\repository `
   --authorized-by release-owner
 ```
 
-The resulting `ready` `RLS-*` copies candidate commit C from the verification record. It does not point to the later governance commit and does not create or verify a Git tag.
+The resulting `ready` `RLS-*` copies candidate commit C from the verification record. It follows the same domain, aggregate-root, explicit `--domain`, and highest-precedence `--output` placement rules. It does not point to the later governance commit and does not create or verify a Git tag.
 
 An aggregate release repeats `--work-order` and, when needed, `--verification-record`. Its released-work set must exactly equal the union covered by the included verification records, every work order must be gated by the release contract, and all included records must name the same candidate commit:
 
@@ -359,8 +368,10 @@ A `different` state is review information, not automatic proof of failure. Commi
 | `preflight` | Performs read-only start or review readiness checks for one explicit work order and prints its governing manifest. |
 | `upgrade` | Plans a managed-file upgrade without writing by default. |
 | `upgrade --apply` | Transactionally applies additions, integrations, safe ownership migrations, and updates only when no customization or conflict exists. |
-| `capture-verification` | Prepares a `ready` single or aggregate verification record at one final candidate commit. |
-| `prepare-release` | Prepares a `ready` single or aggregate release record using that same candidate commit. |
+| `scaffold-domain` | Safely creates the canonical type directories and an absent repository-owned domain index; supports `--dry-run`. |
+| `create-artifact` | Exclusively creates one incomplete `draft` from the canonical template and type mapping; supports `--dry-run`. |
+| `capture-verification` | Prepares a `ready` single or aggregate verification record at one final candidate commit, defaulting single-domain work to that domain. |
+| `prepare-release` | Prepares a `ready` single or aggregate release record using that same candidate commit and domain-aware placement. |
 
 Use `harnessctl <command> --help` for all arguments.
 
@@ -398,7 +409,13 @@ docs/engineering/
   TRACEABILITY.md                     relation and evidence model
   WORKFLOW.md                         operating sequence
   templates/                          formal artifact templates
+  <domain>/                           repository-owned product/governance domain
+    intent/ capabilities/ requirements/
+    specifications/ architecture/adr/ verification/
+    work-orders/ evidence/ verification-records/
+    release/ releases/ operations/ acceptance/
 scripts/
+  artifact_layout_registry.py        portable canonical-layout registry
   validate_engineering_artifacts.py   deterministic validator
   generate_harness_dashboard.py      deterministic Explorer generator
   select_harness_work_order.py       strict GitHub event field parser

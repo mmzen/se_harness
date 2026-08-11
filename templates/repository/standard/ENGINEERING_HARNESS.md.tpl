@@ -8,6 +8,12 @@ This repository uses SE Harness {{HARNESS_VERSION}}. This file is the single man
 - Formal artifacts under `docs/engineering/` are the only repository-native source of product intent, requirements, architecture decisions, work authorization, verification contracts, and release constraints.
 - Source, tests, conversations, dashboards, preflight, and CI are observations or evidence. They do not approve work, verification, or release.
 
+## Author engineering artifacts
+
+Use `harnessctl scaffold-domain . --domain <lowercase-kebab-domain>` to establish the canonical domain organization. Use `harnessctl create-artifact . --domain <domain> --type <type> --id <ID>` to create one incomplete draft from the installed template in its canonical type directory. Complete accountable fields and validate the graph before approval.
+
+Canonical paths make repositories predictable, but paths never establish artifact identity, type, relations, lifecycle state, or authority. Existing valid flat layouts remain supported and may produce nonblocking migration guidance. Installation and upgrade never move repository-owned artifacts automatically.
+
 ## Start implementation
 
 1. Select one bounded work order.

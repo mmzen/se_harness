@@ -581,7 +581,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
         self.assertIn("ready verification record", output)
-        vrec_path = self.root / "docs/engineering/verification-records/VREC-001.md"
+        vrec_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         self.assertIn(f'commit = "{candidate}"', vrec_path.read_text(encoding="utf-8"))
         self.assertIn('status = "ready"', vrec_path.read_text(encoding="utf-8"))
         self.assertEqual(candidate, self.git("rev-parse", "HEAD"))
@@ -603,15 +603,86 @@ class RevisionCliTests(unittest.TestCase):
             "--version", "1.0.0",
             "--authorized-by", "release-owner",
             "--tag", "v1.0.0",
+            "--domain", "delivery",
         )
         self.assertEqual(0, code, error)
         self.assertIn("ready release record", output)
-        release_path = self.root / "docs/engineering/releases/RLS-001.md"
+        release_path = self.root / "docs/engineering/delivery/releases/RLS-001.md"
         release_text = release_path.read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', release_text)
         self.assertIn('status = "ready"', release_text)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
+        self.assertTrue(validate_repository(self.root).valid)
+
+    def test_explicit_domain_and_output_precedence_are_deterministic(self) -> None:
+        self.initialize_candidate()
+        explicit_output = "docs/engineering/governance/VREC-001.md"
+        code, output, error = self.invoke(
+            "capture-verification",
+            str(self.root),
+            "--id", "VREC-001",
+            "--work-order", "WO-001",
+            "--verification", "VER-001",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--domain", "assurance",
+            "--output", explicit_output,
+        )
+        self.assertEqual(0, code, error)
+        self.assertIn(explicit_output.replace("/", os.sep), output)
+        self.assertTrue((self.root / explicit_output).is_file())
+        self.assertFalse((self.root / "docs/engineering/assurance/verification-records/VREC-001.md").exists())
+
+        (self.root / explicit_output).unlink()
+        code, _, error = self.invoke(
+            "capture-verification",
+            str(self.root),
+            "--id", "VREC-001",
+            "--work-order", "WO-001",
+            "--verification", "VER-001",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--domain", "requirements",
+            "--output", explicit_output,
+        )
+        self.assertEqual(2, code)
+        self.assertIn("reserved", error)
+        self.assertFalse((self.root / explicit_output).exists())
+
+        code, _, error = self.invoke(
+            "capture-verification",
+            str(self.root),
+            "--id", "VREC-002",
+            "--work-order", "WO-001",
+            "--verification", "VER-001",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--domain", "assurance",
+        )
+        self.assertEqual(0, code, error)
+        self.assertTrue((self.root / "docs/engineering/assurance/verification-records/VREC-002.md").is_file())
+
+    def test_cross_domain_verification_defaults_to_repository_aggregate_root(self) -> None:
+        self.initialize_candidate(aggregate=True)
+        source = self.root / "docs/engineering/product/work-orders/WO-002.md"
+        destination = self.root / "docs/engineering/billing/work-orders/WO-002.md"
+        destination.parent.mkdir(parents=True)
+        self.git("mv", str(source), str(destination))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "place second work order in billing")
+
+        code, _, error = self.invoke(
+            "capture-verification",
+            str(self.root),
+            "--id", "VREC-002",
+            "--work-order", "WO-001",
+            "--work-order", "WO-002",
+            "--verification", "VER-001",
+            "--verification", "VER-002",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--evidence", "docs/engineering/product/evidence/WO-002-verification.md",
+        )
+        self.assertEqual(0, code, error)
+        aggregate = self.root / "docs/engineering/verification-records/VREC-002.md"
+        self.assertTrue(aggregate.is_file())
+        self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
         self.assertTrue(validate_repository(self.root).valid)
 
     def test_capture_fails_for_dirty_worktree_without_output(self) -> None:
@@ -627,7 +698,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(2, code)
         self.assertIn("clean Git worktree", error)
-        self.assertFalse((self.root / "docs/engineering/verification-records/VREC-001.md").exists())
+        self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-001.md").exists())
 
     def test_capture_and_prepare_aggregate_scope_deterministically(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
@@ -644,7 +715,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
         self.assertIn("ready verification record", output)
-        vrec_path = self.root / "docs/engineering/verification-records/VREC-002.md"
+        vrec_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
         vrec = vrec_path.read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', vrec)
         self.assertIn('verifies_work_order = ["WO-001", "WO-002"]', vrec)
@@ -669,7 +740,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
         self.assertIn("ready release record", output)
-        release = (self.root / "docs/engineering/releases/RLS-002.md").read_text(encoding="utf-8")
+        release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', release)
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
@@ -701,7 +772,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(2, code)
         self.assertIn("missing VER-002", error)
-        self.assertFalse((self.root / "docs/engineering/verification-records/VREC-002.md").exists())
+        self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
 
     def test_prepare_release_combines_multiple_records_at_one_commit(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
@@ -732,7 +803,7 @@ class RevisionCliTests(unittest.TestCase):
             "--authorized-by", "release-owner",
         )
         self.assertEqual(0, code, error)
-        release = (self.root / "docs/engineering/releases/RLS-002.md").read_text(encoding="utf-8")
+        release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertIn('includes_verification = ["VREC-001", "VREC-002"]', release)
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
         self.assertTrue(validate_repository(self.root).valid)
@@ -766,7 +837,7 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(2, code)
         self.assertIn("one candidate commit", error)
-        self.assertFalse((self.root / "docs/engineering/releases/RLS-002.md").exists())
+        self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
 
     def test_prepare_release_rejects_superseded_verification_record(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
@@ -797,11 +868,11 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(2, code)
         self.assertIn("must be ready, verified, or released", error)
-        self.assertFalse((self.root / "docs/engineering/releases/RLS-002.md").exists())
+        self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
 
     def test_capture_refuses_existing_output(self) -> None:
         self.initialize_candidate()
-        output = self.root / "docs/engineering/verification-records/VREC-001.md"
+        output = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         write(output, "repository owned")
         code, _, error = self.invoke(
             "capture-verification",

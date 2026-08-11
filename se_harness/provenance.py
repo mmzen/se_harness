@@ -16,6 +16,7 @@ from typing import Any
 
 import tomllib
 
+from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import HarnessError, ensure_target, safe_destination, template_root
 
 
@@ -184,6 +185,23 @@ def _output_path(repository_root: Path, supplied: str | None, default: Path) -> 
     return output
 
 
+def _record_domain(
+    catalog: dict[str, dict[str, Any]],
+    work_order_ids: list[str],
+    explicit_domain: str | None,
+) -> str | None:
+    if explicit_domain is not None:
+        return validate_domain(explicit_domain)
+    paths: list[str] = []
+    for work_order_id in work_order_ids:
+        artifact = catalog.get(work_order_id)
+        path = artifact.get("path") if isinstance(artifact, dict) else None
+        if not isinstance(path, str):
+            return None
+        paths.append(path)
+    return common_artifact_domain(paths)
+
+
 def _atomic_write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
@@ -229,6 +247,7 @@ def capture_verification(
     evidence_paths: list[str] | str,
     owner: str,
     output: str | None,
+    domain: str | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "VREC-")
@@ -268,10 +287,11 @@ def capture_verification(
         ]
         if uncovered:
             raise HarnessError(f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}")
+    selected_domain = _record_domain(catalog, selected_work, domain)
     destination = _output_path(
         root,
         output,
-        Path("docs") / "engineering" / "verification-records" / f"{record_id}.md",
+        repository_record_relative_path("verification_record", record_id, selected_domain),
     )
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
@@ -324,6 +344,7 @@ def prepare_release(
     authorized_by: str,
     tag: str | None,
     output: str | None,
+    domain: str | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "RLS-")
@@ -376,10 +397,11 @@ def prepare_release(
     if len(identities) != 1:
         raise HarnessError("included verification records do not identify one candidate commit and object format")
     commit, object_format = next(iter(identities))
+    selected_domain = _record_domain(catalog, selected_work, domain)
     destination = _output_path(
         root,
         output,
-        Path("docs") / "engineering" / "releases" / f"{record_id}.md",
+        repository_record_relative_path("release_record", record_id, selected_domain),
     )
     require_clean_worktree(root)
     now = _timestamp()

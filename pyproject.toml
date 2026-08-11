@@ -41,6 +41,7 @@ include = ["se_harness*"]
 ]
 "share/se-harness/templates/repository/standard/docs/engineering/templates" = ["templates/repository/standard/docs/engineering/templates/*"]
 "share/se-harness/templates/repository/standard/scripts" = [
+  "templates/repository/standard/scripts/artifact_layout_registry.py",
   "templates/repository/standard/scripts/check_engineering_harness.ps1",
   "templates/repository/standard/scripts/check_engineering_harness.sh",
 "templates/repository/standard/scripts/generate_harness_dashboard.py",
