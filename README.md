@@ -4,59 +4,93 @@ SE Harness turns a repository into a governed software-engineering workspace for
 
 The objective is practical: make every material change explainable from intent to evidence and an exact Git commit, while keeping approval and release authority with accountable humans.
 
-SE Harness is specification-driven, uses Python 3.11 or later, and gives each installed repository local validation and dashboard scripts that do not require an external service.
+SE Harness is specification-driven, supports Python 3.11 or later, and gives each installed repository local validation and dashboard scripts that do not require an external service.
+
+[PyPI](https://pypi.org/project/se-harness/) | [Repository](https://github.com/mmzen/se_harness) | [Issues](https://github.com/mmzen/se_harness/issues) | [Releases](https://github.com/mmzen/se_harness/releases)
+
+## Install from PyPI
+
+SE Harness requires Python 3.11 or later. Install the released package in a dedicated virtual environment so the interpreter, package, and `harnessctl` launcher have one explicit owner.
+
+### Windows PowerShell
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install se-harness
+harnessctl --version
+```
+
+For a reproducible installation, select the exact released version:
+
+```powershell
+python -m pip install "se-harness==0.2.1"
+```
+
+The launcher is stored at `.venv\Scripts\harnessctl.exe`. Activation adds that directory to command discovery for the current shell; it does not move or duplicate the launcher. Without activation, invoke it directly:
+
+```powershell
+.\.venv\Scripts\harnessctl.exe --version
+```
+
+### Linux and macOS
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install se-harness
+harnessctl --version
+```
+
+The launcher is `.venv/bin/harnessctl` and can be invoked directly without activation:
+
+```bash
+.venv/bin/harnessctl --version
+```
+
+On every platform, commands can alternatively be scoped to the selected interpreter:
+
+```powershell
+python -m se_harness --version
+```
+
+## Quick start
+
+Initialize an absent or empty repository, or safely adopt an existing one:
+
+```powershell
+harnessctl init C:\path\to\new-repository --project-name my-project
+harnessctl adopt C:\path\to\existing-repository --project-name my-project
+```
+
+Then inspect the installed harness and generate its local Explorer:
+
+```powershell
+harnessctl doctor C:\path\to\repository
+harnessctl dashboard C:\path\to\repository
+```
+
+Adoption preserves ordinary repository files and writes `docs/engineering/ADOPTION_REPORT.md`. That report contains bounded observations, not approved intent, requirements, architecture, or release authority.
+
+After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. Installation does not approve product facts or work: accountable humans must confirm the context and author and approve the first formal engineering chain.
 
 ## What it provides
 
 Every installation receives the same standard harness:
 
 - formal Markdown artifacts for intent, capabilities, requirements, specifications, architecture, decisions, verification, work orders, releases, and operations;
-- one managed engineering contract and router, reached by Codex through a bounded `AGENTS.md` gate and by Claude Code through a thin `CLAUDE.md` import;
-- a repository-owned context file for confirmed purpose, commands, architecture, and constraints;
-- a deterministic validator for artifact structure, coverage, relations, evidence paths, and commit provenance;
-- Harness Explorer, a self-contained dashboard for traceability, readiness, findings, and anomalies;
-- commit-bound verification and release records;
-- retained evidence conventions and reusable artifact templates;
+- one canonical managed route from `AGENTS.md` through `ENGINEERING_HARNESS.md`, with a thin `CLAUDE.md` adapter and room for repository-owned instructions;
+- an explicit work-order lifecycle of `approved -> in_progress -> implemented`, separate from commit-bound verification and release decisions;
+- deterministic validation and Harness Explorer views for traceability, readiness, findings, and anomalies;
+- aggregate VREC and RLS provenance binding exact work, evidence, and a clean candidate commit;
+- explicit retention of abandoned ready verification records as `superseded` through accountable decisions;
 - safe adoption and hash-based upgrades that preserve repository customizations;
-- a GitHub Actions workflow separating an exact released baseline checker from candidate behavior and binding pull requests to one explicit work order.
+- a GitHub Actions workflow separating the exact configured released baseline from candidate behavior and binding pull requests to one explicit work order;
+- protected OIDC publication that promotes exact GitHub release assets to PyPI without rebuilding them and retains PyPI attestations.
 
 There is exactly one standard installation. Minimal, offline, and selectable installation profiles are deliberately unsupported.
-
-## Install the CLI
-
-From a checkout of this repository:
-
-```powershell
-cd C:\path\to\se_harness
-python -m pip install .
-harnessctl --version
-```
-
-For editable local development:
-
-```powershell
-python -m pip install -e .
-```
-
-Commands can also be invoked as `python -m se_harness` while this source tree is importable.
-
-## Initialize or adopt a repository
-
-Initialize an absent or empty target:
-
-```powershell
-harnessctl init C:\path\to\new-repository --project-name my-project
-```
-
-Adopt an existing repository without replacing its ordinary files:
-
-```powershell
-harnessctl adopt C:\path\to\existing-repository --project-name my-project
-```
-
-Adoption writes `docs/engineering/ADOPTION_REPORT.md`. The report contains bounded observations about the repository, not approved intent, requirements, architecture, or release authority. Accountable humans must author and approve the first formal engineering chain.
-
-After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. The installer seeds its structure but never infers commands, architectural claims, or product authority from observed repository content.
 
 ## Agent instructions and repository context
 
@@ -295,19 +329,28 @@ Target repositories own their product artifacts and customizations after install
 
 ## Safe upgrades
 
-Inspect an upgrade plan:
+Updating the Python package and updating an initialized or adopted repository are separate operations. Upgrading the Python package does not modify an initialized or adopted repository; it only changes the CLI and canonical distribution available inside the selected environment.
+
+Use this sequence:
 
 ```powershell
+python -m pip install --upgrade se-harness
 harnessctl upgrade C:\path\to\repository
-```
-
-Apply safe managed changes:
-
-```powershell
 harnessctl upgrade C:\path\to\repository --apply
+harnessctl doctor C:\path\to\repository
 ```
 
-Schema-2 locks use SHA-256 over `utf8-text-lf-v1`, so LF, CRLF, and CR checkout representations compare equally while every other content distinction remains significant. Schema-1 raw-byte locks remain readable and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. A managed file may become an owner seed only when its old bytes still match the prior lock. Customized, missing, or ambiguous migrations block the whole apply and require human reconciliation.
+The first `harnessctl upgrade` is a read-only plan. `--apply` is an explicit transactional repository mutation and stops without partial writes when managed content is customized, missing, conflicting, or ambiguous. `doctor` then checks the resulting installed integrity.
+
+Schema-2 locks use SHA-256 over `utf8-text-lf-v1`, so LF, CRLF, and CR checkout representations compare equally while every other content distinction remains significant. Schema-1 raw-byte locks remain readable and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. A managed file may become an owner seed only when its old bytes still match the prior lock.
+
+## Release integrity
+
+The [PyPI project](https://pypi.org/project/se-harness/) is the normal released installation source. Corresponding immutable artifacts and checksum manifests are retained under [GitHub Releases](https://github.com/mmzen/se_harness/releases).
+
+Production publication is a separate release-owner decision. The protected OIDC workflow selects one final GitHub release, verifies the exact wheel and source-distribution hashes, and promotes those files to PyPI without rebuilding them or storing a long-lived PyPI credential. PyPI attestations connect each published file to the repository, workflow, and protected environment. Availability on either service remains distribution evidence, not approval of a target repository's product artifacts.
+
+The metadata of an existing PyPI version is immutable. README and project-metadata improvements become visible on PyPI only in a later separately verified release.
 
 ## Pull-request enforcement and bootstrap
 
@@ -315,14 +358,28 @@ The installed pull-request template declares exactly one standalone `Harness-Wor
 
 The required workflow has two assurance lanes:
 
-- an independent baseline installs the exact `se-harness==0.2.0` wheel with its retained SHA-256 and runs the validator packaged by that release;
+- the independent lane installs the exact configured released baseline with its retained SHA-256 and runs the validator packaged by that release; `.github/workflows/engineering-harness.yml` is the observation of the current pin;
 - the candidate lane exercises the declared harness version, strict work-order selection, review preflight, current validator, and Harness Explorer.
 
 The harness repository necessarily has a one-release bootstrap lag: unreleased checker behavior is candidate verification, not independent proof. After publication, a separate governed pin update promotes that behavior into the external baseline. Required status checks, CODEOWNERS review, and branch protection remain accountable repository-host settings; installation does not claim to configure them automatically.
 
 Install or adopt target repositories from an actual released distribution. A source checkout can exercise the candidate lane for harness development, but an unreleased version is intentionally not treated as an externally available target-repository checker.
 
-## Distribution repository
+## Distribution development
+
+The PyPI path above is for released use. A source checkout is an unreleased development input and is not independently released proof. From a trusted checkout, install locally with:
+
+```powershell
+python -m pip install .
+```
+
+For editable development:
+
+```powershell
+python -m pip install -e .
+```
+
+Repository structure:
 
 ```text
 se_harness/                              CLI and safe installation control plane
@@ -341,4 +398,4 @@ python -m unittest discover -s tests -p "test_*.py"
 python -m se_harness --help
 ```
 
-The validator, Explorer generator, and view at the repository root are byte-identical to their canonical managed-template copies. This allows the distribution repository to validate and visualize itself using the same machinery installed elsewhere.
+The validator, Explorer generator, and view at the repository root are byte-identical to their canonical managed-template copies. This allows the distribution repository to validate and visualize itself using the same machinery installed elsewhere. Development checks do not substitute for the verified release and publication sequence.
