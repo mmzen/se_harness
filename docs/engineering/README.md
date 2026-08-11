@@ -2,7 +2,7 @@
 
 This directory is the machine-readable engineering memory of SE Harness. Formal artifacts use TOML front matter between `+++` delimiters; stable IDs establish typed traceability independent of file paths.
 
-The distribution packet is under `harness-distribution/`. Commit-bound intent-to-revision traceability is governed by `revision-provenance/`. Draft aggregate multi-work-order release behavior is specified under `aggregate-release/`. The corrective portable managed-file integrity proposal is under `portable-managed-integrity/`. Verification-record supersession behavior is governed under `verification-supersession/`. Templates and evidence are excluded from active-artifact parsing.
+The distribution packet is under `harness-distribution/`. Commit-bound intent-to-revision traceability is governed by `revision-provenance/`. Draft aggregate multi-work-order release behavior is specified under `aggregate-release/`. The corrective portable managed-file integrity proposal is under `portable-managed-integrity/`. Verification-record supersession behavior is governed under `verification-supersession/`. Governed PyPI Trusted Publishing is specified under `pypi-publication/`. Templates and evidence are excluded from active-artifact parsing.
 
 Repository-specific commands, entry points, and constraints are curated in `REPOSITORY_CONTEXT.md`. It is repository-owned operating context, not a formal artifact or source of approval authority.
 
