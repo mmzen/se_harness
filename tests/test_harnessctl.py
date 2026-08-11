@@ -262,7 +262,7 @@ class HarnessCtlTests(unittest.TestCase):
         lock = self.make_schema_one_lock(target)
         config_path = target / ".engineering-harness.toml"
         current = config_path.read_text(encoding="utf-8")
-        legacy = current.replace("schema_version = 2", "schema_version = 1").replace('tool_version = "0.2.0"', 'tool_version = "0.1.0"')
+        legacy = current.replace("schema_version = 2", "schema_version = 1").replace('tool_version = "0.2.1"', 'tool_version = "0.1.0"')
         legacy = legacy.split("\n[revision_provenance]", 1)[0].rstrip() + "\n"
         config_path.write_bytes(legacy.encode("utf-8"))
         new_templates = [

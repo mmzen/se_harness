@@ -51,7 +51,7 @@ jobs:
             python -c "import se_harness; print('using reviewed repository candidate')"
           else
             python -m pip install --disable-pip-version-check --no-deps \
-              --only-binary=:all: "se-harness==0.2.0"
+              --only-binary=:all: "se-harness==0.2.1"
           fi
       - name: Select the pull-request work order
         if: github.event_name == 'pull_request'
