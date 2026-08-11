@@ -35,3 +35,9 @@ python -m se_harness --help
 Retain verification evidence with exact commands, results, deviations, and residual risks. A verified work order must have evidence keyed to its ID.
 
 For commit-bound provenance, commit the candidate and evidence before creating `VREC-*`; retain the ready record in a later governance commit. `RLS-*` must copy the same candidate commit from its included verified record.
+
+<!-- se-harness:begin -->
+## Software engineering harness
+
+Before implementation, read `ENGINEERING_HARNESS.md`, validate the artifact graph, identify one approved work order, and read its complete governing chain. Do not infer or approve product intent from source code or conversation. Preserve unrelated changes and retain executable verification evidence. Automation may prepare ready commit-bound records, but must not transition verification or release authority, create tags, commit, or publish.
+<!-- se-harness:end -->
