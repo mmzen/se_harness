@@ -2,7 +2,7 @@
 id = "VREC-SEH-001"
 type = "verification_record"
 title = "Verification candidate for 10 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
@@ -20,6 +20,8 @@ conforms_to = ["VER-AGR-001", "VER-DST-001", "VER-DST-002", "VER-PMI-001", "VER-
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-AGR-001`, `WO-DOC-001`, `WO-DOC-002`, `WO-DST-001`, `WO-DST-002`, `WO-DST-003`, `WO-PMI-001`, `WO-REV-001`, `WO-RLS-001`, `WO-VSP-001` to candidate commit `1329c7a4472f323c4b21d869545cad3c647fe568`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-AGR-001`, `WO-DOC-001`, `WO-DOC-002`, `WO-DST-001`, `WO-DST-002`, `WO-DST-003`, `WO-PMI-001`, `WO-REV-001`, `WO-RLS-001`, `WO-VSP-001` to candidate commit `1329c7a4472f323c4b21d869545cad3c647fe568`. The capture command originally prepared it as `ready` and did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+The accountable repository owner reviewed the complete retained evidence for the ten-work-order 0.2.0 candidate and explicitly instructed `i validate, then transition and governance commit` on 2026-08-11. That human decision, authorized and recorded by `WO-REV-006`, transitioned this record from `ready` to `verified`; automation did not grant the authority.
