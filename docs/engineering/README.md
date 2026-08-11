@@ -4,6 +4,8 @@ This directory is the machine-readable engineering memory of SE Harness. Formal 
 
 The distribution packet is under `harness-distribution/`. Commit-bound intent-to-revision traceability is governed by `revision-provenance/`. Templates and evidence are excluded from active-artifact parsing.
 
+Repository-specific commands, entry points, and constraints are curated in `REPOSITORY_CONTEXT.md`. It is repository-owned operating context, not a formal artifact or source of approval authority.
+
 Validate and visualize with:
 
 ```powershell

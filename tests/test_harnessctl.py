@@ -52,8 +52,10 @@ class HarnessCtlTests(unittest.TestCase):
             ".engineering-harness.toml",
             ".engineering-harness.lock",
             "AGENTS.md",
+            "CLAUDE.md",
             "ENGINEERING_HARNESS.md",
             ".github/workflows/engineering-harness.yml",
+            "docs/engineering/REPOSITORY_CONTEXT.md",
             "docs/engineering/templates/REQUIREMENT.template.md",
             "docs/engineering/templates/VERIFICATION_RECORD.template.md",
             "docs/engineering/templates/RELEASE_RECORD.template.md",
@@ -65,6 +67,10 @@ class HarnessCtlTests(unittest.TestCase):
             self.assertTrue((target / relative).is_file(), relative)
         self.assertIn('project_name = "Example"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertIn("schema_version = 2", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
+        self.assertIn("@AGENTS.md", (target / "CLAUDE.md").read_text(encoding="utf-8"))
+        context = (target / "docs/engineering/REPOSITORY_CONTEXT.md").read_text(encoding="utf-8")
+        self.assertIn("Repository Context for Example", context)
+        self.assertIn("repository-owned", context.lower())
 
         validation = subprocess.run(
             [sys.executable, str(target / "scripts/validate_engineering_artifacts.py"), "--root", str(target)],
@@ -87,16 +93,25 @@ class HarnessCtlTests(unittest.TestCase):
         target.mkdir()
         (target / "Cargo.toml").write_text("[package]\nname='existing'\n", encoding="utf-8")
         (target / "AGENTS.md").write_text("# Existing agent rules\n", encoding="utf-8")
+        (target / "CLAUDE.md").write_text("# Existing Claude rules\n", encoding="utf-8")
         (target / ".gitignore").write_text("/build/\n", encoding="utf-8")
+        context_path = target / "docs/engineering/REPOSITORY_CONTEXT.md"
+        context_path.parent.mkdir(parents=True)
+        context_path.write_text("# Owner-curated context\n", encoding="utf-8")
 
         code, _, error = self.invoke("adopt", str(target))
         self.assertEqual(0, code, error)
         agents = (target / "AGENTS.md").read_text(encoding="utf-8")
+        claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
         ignored = (target / ".gitignore").read_text(encoding="utf-8")
         self.assertTrue(agents.startswith("# Existing agent rules"))
         self.assertIn(BEGIN_MARKER, agents)
         self.assertIn(END_MARKER, agents)
+        self.assertTrue(claude.startswith("# Existing Claude rules"))
+        self.assertIn("@AGENTS.md", claude)
+        self.assertIn(BEGIN_MARKER, claude)
         self.assertTrue(ignored.startswith("/build/"))
+        self.assertEqual("# Owner-curated context\n", context_path.read_text(encoding="utf-8"))
         report = (target / "docs/engineering/ADOPTION_REPORT.md").read_text(encoding="utf-8")
         self.assertIn("Detected ecosystems: Rust", report)
         self.assertIn("does not approve or infer product intent", report)
@@ -158,6 +173,54 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("markers", error)
         self.assertEqual(f"rules\n{BEGIN_MARKER}\nbroken\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
 
+        claude_target = self.root / "bad-claude-markers"
+        claude_target.mkdir()
+        (claude_target / "CLAUDE.md").write_text(f"rules\n{END_MARKER}\n", encoding="utf-8")
+        code, _, error = self.invoke("adopt", str(claude_target))
+        self.assertEqual(2, code)
+        self.assertIn("markers", error)
+        self.assertFalse((claude_target / ".engineering-harness.lock").exists())
+
+    def test_upgrade_adds_cross_agent_and_context_files_to_older_installation(self) -> None:
+        target = self.root / "older-installation"
+        self.assertEqual(0, self.invoke("init", str(target), "--project-name", "Legacy Project")[0])
+        claude_path = target / "CLAUDE.md"
+        context_path = target / "docs/engineering/REPOSITORY_CONTEXT.md"
+        claude_path.unlink()
+        context_path.unlink()
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["files"].pop("CLAUDE.md")
+        lock["files"].pop("docs/engineering/REPOSITORY_CONTEXT.md")
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("add        CLAUDE.md", output)
+        self.assertIn("add        docs/engineering/REPOSITORY_CONTEXT.md", output)
+        self.assertIn("@AGENTS.md", claude_path.read_text(encoding="utf-8"))
+        self.assertIn("Repository Context for Legacy Project", context_path.read_text(encoding="utf-8"))
+
+    def test_upgrade_preserves_claude_customization_and_repository_context(self) -> None:
+        target = self.root / "repository-owned-context"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        claude_path = target / "CLAUDE.md"
+        context_path = target / "docs/engineering/REPOSITORY_CONTEXT.md"
+        claude_path.write_text(claude_path.read_text(encoding="utf-8") + "\n## Claude-specific\nKeep this.\n", encoding="utf-8")
+        context_path.write_text("# Curated\nUse `python -m unittest`.\n", encoding="utf-8")
+
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("Keep this.", claude_path.read_text(encoding="utf-8"))
+        self.assertEqual("# Curated\nUse `python -m unittest`.\n", context_path.read_text(encoding="utf-8"))
+
+        context_path.unlink()
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertFalse(context_path.exists())
+        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual({"mode": "seed", "state": "removed"}, lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"])
+
     def test_upgrade_migrates_unmodified_schema_one_installation(self) -> None:
         target = self.root / "schema-one"
         self.assertEqual(0, self.invoke("init", str(target), "--project-name", "Legacy")[0])
@@ -198,6 +261,18 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
 
+    def test_doctor_detects_missing_claude_import_and_repository_context(self) -> None:
+        target = self.root / "doctor-instructions"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        claude_path = target / "CLAUDE.md"
+        claude_path.write_text(claude_path.read_text(encoding="utf-8").replace("@AGENTS.md", "Claude rules only."), encoding="utf-8")
+        (target / "docs/engineering/REPOSITORY_CONTEXT.md").unlink()
+
+        code, output, _ = self.invoke("doctor", str(target))
+        self.assertEqual(1, code)
+        self.assertIn("FAIL docs/engineering/REPOSITORY_CONTEXT.md", output)
+        self.assertIn("FAIL claude-import", output)
+
     def test_validate_and_dashboard_commands_preserve_success(self) -> None:
         target = self.root / "operate"
         self.assertEqual(0, self.invoke("init", str(target))[0])
@@ -212,6 +287,8 @@ class HarnessCtlTests(unittest.TestCase):
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual(1, lock["schema"])
         self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
+        self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
+        self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"])
         self.assertNotIn("docs/engineering/ADOPTION_REPORT.md", lock["files"])
 
     def test_symlinked_destination_directory_is_rejected_when_supported(self) -> None:

@@ -5,10 +5,11 @@ This repository uses SE Harness {{HARNESS_VERSION}}. Formal engineering memory l
 ## Start work
 
 1. Read `docs/engineering/README.md`.
-2. Run `python scripts/validate_engineering_artifacts.py --root .`.
-3. Select one approved work order and read its complete linked artifact chain.
-4. Inspect the affected code, tests, and documentation.
-5. Implement only the bounded authorized change and retain verification evidence.
+2. Read the repository-owned facts in `docs/engineering/REPOSITORY_CONTEXT.md`.
+3. Run `python scripts/validate_engineering_artifacts.py --root .`.
+4. Select one approved work order and read its complete linked artifact chain.
+5. Inspect the affected code, tests, and documentation.
+6. Implement only the bounded authorized change and retain verification evidence.
 
 ## Visual review
 

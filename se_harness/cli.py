@@ -53,10 +53,11 @@ def _scan_repository(target: Path) -> bytes:
         "",
         "## Human decisions required",
         "",
-        "1. Name the accountable owners for product intent, engineering, assurance, release, and operations.",
-        "2. Create and approve the first intent-to-verification artifact chain using `docs/engineering/templates/`.",
-        "3. Select one bounded approved work order before implementation begins.",
-        "4. Add repository-specific formatter, linter, test, security, build, release, and operating checks to the verification contract.",
+        "1. Curate `docs/engineering/REPOSITORY_CONTEXT.md` with owner-confirmed purpose, commands, architecture, and constraints.",
+        "2. Name the accountable owners for product intent, engineering, assurance, release, and operations.",
+        "3. Create and approve the first intent-to-verification artifact chain using `docs/engineering/templates/`.",
+        "4. Select one bounded approved work order before implementation begins.",
+        "5. Add repository-specific formatter, linter, test, security, build, release, and operating checks to the verification contract.",
         "",
     ]
     return "\n".join(lines).encode("utf-8")
@@ -112,7 +113,9 @@ def _doctor(args: argparse.Namespace) -> int:
     checks.append(("lock", lock_path.is_file(), lock_path.name))
     required = [
         "AGENTS.md",
+        "CLAUDE.md",
         "ENGINEERING_HARNESS.md",
+        "docs/engineering/REPOSITORY_CONTEXT.md",
         "docs/engineering/README.md",
         "scripts/validate_engineering_artifacts.py",
         "scripts/generate_harness_dashboard.py",
@@ -120,12 +123,19 @@ def _doctor(args: argparse.Namespace) -> int:
     ]
     for relative in required:
         checks.append((relative, (target / relative).is_file(), "required"))
+    claude_path = target / "CLAUDE.md"
+    if claude_path.is_file():
+        try:
+            imports_agents = any(line.strip() == "@AGENTS.md" for line in claude_path.read_text(encoding="utf-8").splitlines())
+            checks.append(("claude-import", imports_agents, "@AGENTS.md" if imports_agents else "missing standalone @AGENTS.md import"))
+        except (OSError, UnicodeError) as exc:
+            checks.append(("claude-import", False, str(exc)))
     if lock_path.is_file():
         try:
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
             for relative, entry in lock.get("files", {}).items():
                 path = safe_destination(target, Path(relative))
-                if entry.get("mode") == "fragment":
+                if entry.get("mode") in {"fragment", "seed"}:
                     continue
                 actual = sha256(path.read_bytes()) if path.is_file() else None
                 checks.append((f"managed:{relative}", actual == entry.get("sha256"), "unchanged" if actual == entry.get("sha256") else "customized or missing"))

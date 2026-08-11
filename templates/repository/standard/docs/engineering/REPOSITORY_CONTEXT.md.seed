@@ -1,0 +1,34 @@
+# Repository Context for {{PROJECT_NAME}}
+
+> Repository-owned after installation. This context helps engineering agents operate the repository, but it is not approved product intent, a requirement, architecture approval, or release authority. Replace every `TODO` with owner-confirmed facts.
+
+## Purpose
+
+- Repository purpose: TODO
+- Primary users or operators: TODO
+- Accountable repository owner: TODO
+
+## Commands
+
+- Setup: TODO
+- Build: TODO
+- Test: TODO
+- Lint or format: TODO
+- Additional required verification: TODO
+
+## Architecture
+
+- Entry points: TODO
+- Major components and responsibilities: TODO
+- External services or dependencies: TODO
+
+## Repository constraints
+
+- Generated paths: TODO
+- Restricted or sensitive paths: TODO
+- Files requiring specialized review: TODO
+- Local conventions not captured elsewhere: TODO
+
+## Maintenance
+
+Review this file when commands, boundaries, ownership, or repository structure change. Put product decisions and approvals in the formal artifact chain under `docs/engineering/`, not in this context file.

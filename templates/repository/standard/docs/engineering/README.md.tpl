@@ -2,14 +2,17 @@
 
 This directory is the machine-readable engineering memory of the repository. It separates intent, capability, requirements, specification, architecture decisions, verification, bounded work authorization, release conditions, and operating assurance.
 
+`REPOSITORY_CONTEXT.md` is the repository-owned operating companion for confirmed commands, entry points, and constraints. It is not a formal artifact and cannot grant product, verification, or release authority.
+
 ## Workflow
 
-1. Copy the required starting points from `templates/` into a product or domain subdirectory.
-2. Allocate stable IDs and complete every metadata field and body section.
-3. Keep new artifacts in `draft` until accountable humans review them.
-4. Approve a complete intent-to-verification chain and one bounded work order.
-5. Validate before and after implementation.
-6. Retain work-order-keyed verification evidence before marking work verified.
+1. Curate `REPOSITORY_CONTEXT.md` with owner-confirmed repository facts.
+2. Copy the required formal starting points from `templates/` into a product or domain subdirectory.
+3. Allocate stable IDs and complete every metadata field and body section.
+4. Keep new artifacts in `draft` until accountable humans review them.
+5. Approve a complete intent-to-verification chain and one bounded work order.
+6. Validate before and after implementation.
+7. Retain work-order-keyed verification evidence before marking work verified.
 
 ## Commands
 

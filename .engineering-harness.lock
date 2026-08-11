@@ -14,7 +14,11 @@
     },
     "AGENTS.md": {
       "mode": "fragment",
-      "sha256": "be2d77426099de9150d4622f7b3d8da77b799e0b14ad6d87032d15302b0aa432"
+      "sha256": "57b983c2a57668b69902d07452b9ccb54d0f58da11da15e90350d02de3670268"
+    },
+    "CLAUDE.md": {
+      "mode": "fragment",
+      "sha256": "a5d3b02b3200e5dc147578f81f2b80ca4a0f055a0a4a1c94a535352572ade2cd"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -23,6 +27,10 @@
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
       "sha256": "87e3966112b15ed28d6145795a80b7d041e26ed50909850ac05c3abf90e80580"
+    },
+    "docs/engineering/REPOSITORY_CONTEXT.md": {
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",

@@ -8,15 +8,28 @@ Feature: Reuse the standard software engineering harness
     And the dashboard can be generated
 
   Scenario: Adopt an existing repository safely
-    Given an existing repository with agent and ignore files
+    Given an existing repository with agent, Claude, context, and ignore files
     When the user adopts the harness
     Then existing content is preserved
     And bounded harness instructions are integrated
+    And Claude imports the shared AGENTS contract
+    And the repository context remains repository-owned
     And the adoption report does not infer approved intent
+
+  Scenario: Initialize shared agent instructions
+    Given an empty target directory
+    When the user initializes the harness
+    Then AGENTS contains the bounded shared contract
+    And CLAUDE imports AGENTS without duplicating the contract
+
+  Scenario: Preserve repository-owned context
+    Given a harness installation with curated repository context
+    When an upgrade is applied
+    Then the curated context remains unchanged
+    And an intentionally removed accounted seed is not regenerated
 
   Scenario: Preserve a customized managed file
     Given a harness installation whose managed workflow was customized
     When an upgrade is applied
     Then the customized workflow remains unchanged
     And manual reconciliation is reported
-

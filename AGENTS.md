@@ -39,5 +39,5 @@ For commit-bound provenance, commit the candidate and evidence before creating `
 <!-- se-harness:begin -->
 ## Software engineering harness
 
-Before implementation, read `ENGINEERING_HARNESS.md`, validate the artifact graph, identify one approved work order, and read its complete governing chain. Do not infer or approve product intent from source code or conversation. Preserve unrelated changes and retain executable verification evidence. Automation may prepare ready commit-bound records, but must not transition verification or release authority, create tags, commit, or publish.
+Before implementation, read `ENGINEERING_HARNESS.md` and `docs/engineering/REPOSITORY_CONTEXT.md`, validate the artifact graph, identify one approved work order, and read its complete governing chain. Treat repository context as owner-curated operating information, not product authority. Do not infer or approve product intent from source code or conversation. Preserve unrelated changes and retain executable verification evidence. Automation may prepare ready commit-bound records, but must not transition verification or release authority, create tags, commit, or publish.
 <!-- se-harness:end -->

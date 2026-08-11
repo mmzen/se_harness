@@ -11,7 +11,8 @@ SE Harness is specification-driven, uses Python 3.11 or later, and gives each in
 Every installation receives the same standard harness:
 
 - formal Markdown artifacts for intent, capabilities, requirements, specifications, architecture, decisions, verification, work orders, releases, and operations;
-- repository-local instructions that constrain agent execution;
+- one shared repository-local agent contract, loaded by Codex through `AGENTS.md` and by Claude Code through a thin `CLAUDE.md` import;
+- a repository-owned context file for confirmed purpose, commands, architecture, and constraints;
 - a deterministic validator for artifact structure, coverage, relations, evidence paths, and commit provenance;
 - Harness Explorer, a self-contained dashboard for traceability, readiness, findings, and anomalies;
 - commit-bound verification and release records;
@@ -54,6 +55,18 @@ harnessctl adopt C:\path\to\existing-repository --project-name my-project
 ```
 
 Adoption writes `docs/engineering/ADOPTION_REPORT.md`. The report contains bounded observations about the repository, not approved intent, requirements, architecture, or release authority. Accountable humans must author and approve the first formal engineering chain.
+
+After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. The installer seeds its structure but never infers commands, architectural claims, or product authority from observed repository content.
+
+## Agent instructions and repository context
+
+`AGENTS.md` is the canonical shared operating contract. The harness owns only its bounded `se-harness` block; repositories own all content outside that block and may add nested `AGENTS.md` or `AGENTS.override.md` files for component-specific rules.
+
+`CLAUDE.md` is a thin compatibility adapter containing `@AGENTS.md` inside the same kind of bounded block. Repository-specific Claude Code instructions may be kept outside the block. This avoids maintaining a second copy of shared rules.
+
+`docs/engineering/REPOSITORY_CONTEXT.md` is seeded once and immediately becomes repository-owned. Confirm the exact setup, build, test, lint, entry points, generated paths, sensitive paths, and specialized review constraints there. It informs execution but cannot replace approved intent, requirements, architecture decisions, or a work order.
+
+During upgrade, shared managed fragments are hash-checked; customized content is preserved. Repository context is neither content-hashed nor overwritten. If its accounted seed is intentionally removed, upgrade does not silently recreate it, while `doctor` reports the missing required context for explicit resolution.
 
 ## Five-minute operating workflow
 
@@ -202,7 +215,8 @@ Use `harnessctl <command> --help` for all arguments.
 
 - Installation resolves and plans every destination before writing.
 - Ordinary destination conflicts stop initialization or adoption without known partial writes.
-- Existing `AGENTS.md` and `.gitignore` receive bounded managed blocks rather than wholesale replacement.
+- Existing `AGENTS.md`, `CLAUDE.md`, and `.gitignore` receive bounded managed blocks rather than wholesale replacement.
+- Repository context is seeded only when absent and then remains repository-owned.
 - `.engineering-harness.lock` records hashes and management modes for tool-owned content.
 - Upgrade changes only missing or unmodified managed content; customized files remain untouched for manual reconciliation.
 - Symlink traversal, repository escape, unsafe evidence paths, absent Git `HEAD`, dirty verification state, duplicate output, and inconsistent provenance fail closed.
@@ -217,10 +231,12 @@ Use `harnessctl <command> --help` for all arguments.
 .engineering-harness.toml            harness configuration and schema
 .engineering-harness.lock            managed-content hashes and modes
 AGENTS.md                             bounded agent operating contract
+CLAUDE.md                             thin import of the shared AGENTS contract
 ENGINEERING_HARNESS.md                repository engineering entry point
 .github/workflows/
   engineering-harness.yml            CI validation
 docs/engineering/
+  REPOSITORY_CONTEXT.md               repository-owned commands and constraints
   DECISION_RIGHTS.md                  human and automation authority
   QUALITY_GATES.md                    G0-G5 gate definitions
   TRACEABILITY.md                     relation and evidence model
