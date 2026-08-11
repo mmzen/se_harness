@@ -12,7 +12,8 @@ from unittest import mock
 from pathlib import Path
 
 from se_harness.cli import build_parser, main
-from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, sha256, template_root
+from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, sha256, template_root, tracked_content
+from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, IntegrityError, canonical_sha256, canonical_text_bytes, digest_for_schema, parse_lock
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -33,6 +34,22 @@ class HarnessCtlTests(unittest.TestCase):
             result = main(list(arguments))
         return result, stdout.getvalue(), stderr.getvalue()
 
+    def make_schema_one_lock(self, target: Path) -> dict:
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        for relative, entry in lock["files"].items():
+            if entry.get("mode") not in {"managed", "fragment"}:
+                continue
+            content = (target / relative).read_bytes()
+            tracked = tracked_content(entry["mode"], content)
+            self.assertIsNotNone(tracked)
+            entry["sha256"] = digest_for_schema(tracked, 1, entry["mode"])
+        lock["schema"] = 1
+        lock.pop("hash_algorithm", None)
+        lock.pop("hash_mode", None)
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        return lock
+
     def test_cli_and_template_expose_one_standard_installation(self) -> None:
         parser = build_parser()
         help_text = parser.format_help()
@@ -42,6 +59,24 @@ class HarnessCtlTests(unittest.TestCase):
 
         with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             parser.parse_args(["init", str(self.root / "target"), "--profile", "minimal"])
+
+    def test_canonical_text_integrity_vectors(self) -> None:
+        lf = b"alpha\nbeta\n"
+        self.assertEqual(canonical_text_bytes(lf), canonical_text_bytes(b"alpha\r\nbeta\r\n"))
+        self.assertEqual(canonical_text_bytes(lf), canonical_text_bytes(b"alpha\rbeta\r"))
+        self.assertEqual(canonical_sha256(lf), canonical_sha256(b"alpha\r\nbeta\r\n"))
+        self.assertNotEqual(canonical_sha256(lf), canonical_sha256(b"alpha\nbeta"))
+        self.assertNotEqual(canonical_sha256(lf), canonical_sha256(b"alpha\nBeta\n"))
+        with self.assertRaises(IntegrityError):
+            canonical_text_bytes(b"\xff")
+
+    def test_lock_schema_validation_rejects_ambiguous_or_unsupported_input(self) -> None:
+        with self.assertRaisesRegex(IntegrityError, "duplicate JSON key"):
+            parse_lock('{"schema": 1, "schema": 1, "files": {}}')
+        with self.assertRaisesRegex(IntegrityError, "unsupported lock schema"):
+            parse_lock('{"schema": true, "files": {}}')
+        with self.assertRaisesRegex(IntegrityError, "unsupported lock hash mode"):
+            parse_lock('{"schema": 2, "hash_algorithm": "sha256", "hash_mode": "unknown", "files": {}}')
 
     def test_init_installs_complete_valid_harness_and_dashboard(self) -> None:
         target = self.root / "new-repository"
@@ -224,6 +259,7 @@ class HarnessCtlTests(unittest.TestCase):
     def test_upgrade_migrates_unmodified_schema_one_installation(self) -> None:
         target = self.root / "schema-one"
         self.assertEqual(0, self.invoke("init", str(target), "--project-name", "Legacy")[0])
+        lock = self.make_schema_one_lock(target)
         config_path = target / ".engineering-harness.toml"
         current = config_path.read_text(encoding="utf-8")
         legacy = current.replace("schema_version = 2", "schema_version = 1").replace('tool_version = "0.2.0"', 'tool_version = "0.1.0"')
@@ -236,7 +272,6 @@ class HarnessCtlTests(unittest.TestCase):
         for path in new_templates:
             path.unlink()
         lock_path = target / ".engineering-harness.lock"
-        lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["tool_version"] = "0.1.0"
         lock["files"][".engineering-harness.toml"]["sha256"] = sha256(config_path.read_bytes())
         for path in new_templates:
@@ -250,6 +285,90 @@ class HarnessCtlTests(unittest.TestCase):
         migrated = config_path.read_text(encoding="utf-8")
         self.assertIn("schema_version = 2", migrated)
         self.assertIn("[revision_provenance]", migrated)
+        migrated_lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        self.assertEqual(2, migrated_lock["schema"])
+        self.assertEqual(HASH_MODE, migrated_lock["hash_mode"])
+
+    def test_schema_two_doctor_and_upgrade_ignore_newline_representation(self) -> None:
+        target = self.root / "portable-newlines"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        for relative in ("docs/engineering/WORKFLOW.md", "AGENTS.md"):
+            path = target / relative
+            path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+
+        code, output, error = self.invoke("doctor", str(target))
+        self.assertEqual(0, code, error)
+        self.assertIn("PASS managed:docs/engineering/WORKFLOW.md", output)
+        self.assertIn("PASS managed:AGENTS.md", output)
+
+        code, output, error = self.invoke("upgrade", str(target))
+        self.assertEqual(0, code, error)
+        self.assertNotIn("docs/engineering/WORKFLOW.md", output)
+        self.assertNotIn("AGENTS.md", output)
+
+    def test_schema_one_canonical_advisory_migrates_safely(self) -> None:
+        target = self.root / "legacy-newlines"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        self.make_schema_one_lock(target)
+        workflow = target / "docs/engineering/WORKFLOW.md"
+        workflow.write_bytes(workflow.read_bytes().replace(b"\n", b"\r\n"))
+
+        code, output, error = self.invoke("doctor", str(target))
+        self.assertEqual(0, code, error)
+        self.assertIn("legacy canonical match; upgrade recommended", output)
+
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual(2, lock["schema"])
+        self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
+        self.assertEqual(HASH_MODE, lock["hash_mode"])
+
+    def test_ambiguous_schema_one_customization_is_preserved(self) -> None:
+        target = self.root / "legacy-customized"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        self.make_schema_one_lock(target)
+        workflow = target / "docs/engineering/WORKFLOW.md"
+        workflow.write_bytes(workflow.read_bytes() + b"\nOwner customization.\n")
+        original = workflow.read_bytes()
+
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(1, code)
+        self.assertIn("manual review", error)
+        self.assertEqual(original, workflow.read_bytes())
+        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual(1, lock["schema"])
+
+    def test_untracked_customization_does_not_block_safe_lock_migration(self) -> None:
+        target = self.root / "legacy-untracked-customized"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        lock = self.make_schema_one_lock(target)
+        lock["files"].pop("ENGINEERING_HARNESS.md")
+        lock_path = target / ".engineering-harness.lock"
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        contract = target / "ENGINEERING_HARNESS.md"
+        contract.write_bytes(contract.read_bytes() + b"\nOwner customization.\n")
+        original = contract.read_bytes()
+
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(1, code)
+        self.assertIn("manual review", error)
+        self.assertEqual(original, contract.read_bytes())
+        migrated = json.loads(lock_path.read_text(encoding="utf-8"))
+        self.assertEqual(2, migrated["schema"])
+        self.assertNotIn("ENGINEERING_HARNESS.md", migrated["files"])
+
+    def test_doctor_hashes_only_the_managed_fragment(self) -> None:
+        target = self.root / "fragment-doctor"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        agents = target / "AGENTS.md"
+        agents.write_text("# Owner rules\n\n" + agents.read_text(encoding="utf-8") + "\nOwner tail.\n", encoding="utf-8")
+        self.assertEqual(0, self.invoke("doctor", str(target))[0])
+
+        agents.write_text(agents.read_text(encoding="utf-8").replace("Before implementation", "Before unsafe implementation"), encoding="utf-8")
+        code, output, _ = self.invoke("doctor", str(target))
+        self.assertEqual(1, code)
+        self.assertIn("FAIL managed:AGENTS.md", output)
 
     def test_doctor_detects_managed_drift(self) -> None:
         target = self.root / "doctor"
@@ -257,6 +376,17 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, self.invoke("doctor", str(target))[0])
         path = target / "docs/engineering/WORKFLOW.md"
         path.write_text("changed\n", encoding="utf-8")
+        code, output, _ = self.invoke("doctor", str(target))
+        self.assertEqual(1, code)
+        self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
+
+    def test_doctor_detects_stale_schema_two_digest(self) -> None:
+        target = self.root / "stale-lock"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = "0" * 64
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         code, output, _ = self.invoke("doctor", str(target))
         self.assertEqual(1, code)
         self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
@@ -285,7 +415,9 @@ class HarnessCtlTests(unittest.TestCase):
         target.mkdir()
         self.assertEqual(0, self.invoke("adopt", str(target))[0])
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(1, lock["schema"])
+        self.assertEqual(2, lock["schema"])
+        self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
+        self.assertEqual(HASH_MODE, lock["hash_mode"])
         self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"])

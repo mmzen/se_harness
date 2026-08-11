@@ -38,7 +38,7 @@
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "37fc350b66fac659636f2cdc384e49e709f148f71b4bd572f92abb7ec878d8fe"
+      "sha256": "b1084ea8c3bf46c3395613b129238ea56a8f8c7d3825f00fdb7994c877b0122f"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -92,6 +92,14 @@
       "mode": "managed",
       "sha256": "9893f7833aefe87af51084e8d94d9b0d9bcba1aea6f9d58326579cff34a26abe"
     },
+    "scripts/check_engineering_harness.ps1": {
+      "mode": "managed",
+      "sha256": "59bf668130aee9a05b183d3b90d6aa98d6aa44355d75fcdad7474b82674281fe"
+    },
+    "scripts/check_engineering_harness.sh": {
+      "mode": "managed",
+      "sha256": "053f2b3f7816405c856dfd4934348eee9d32e39e3d59d265fa321b437058f67d"
+    },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
       "sha256": "df0a476155d409212da0871c4db66da8b30cab6ed2646054f6b1cccec00261d9"
@@ -102,9 +110,11 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "09ccfdcdcfd40d45fcc7704985374f6bfebc00aa1c1a924d221e0af6a1495c6f"
+      "sha256": "a3a24d64e0855a9bcb7940103879031936e95102345ba19012f5e2550e22d5c7"
     }
   },
-  "schema": 1,
+  "hash_algorithm": "sha256",
+  "hash_mode": "utf8-text-lf-v1",
+  "schema": 2,
   "tool_version": "0.2.0"
 }

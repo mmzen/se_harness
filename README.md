@@ -246,7 +246,7 @@ Use `harnessctl <command> --help` for all arguments.
 - Ordinary destination conflicts stop initialization or adoption without known partial writes.
 - Existing `AGENTS.md`, `CLAUDE.md`, and `.gitignore` receive bounded managed blocks rather than wholesale replacement.
 - Repository context is seeded only when absent and then remains repository-owned.
-- `.engineering-harness.lock` records hashes and management modes for tool-owned content.
+- `.engineering-harness.lock` records explicit schema-2 canonical UTF-8 text hashes and management modes for tool-owned content.
 - Upgrade changes only missing or unmodified managed content; customized files remain untouched for manual reconciliation.
 - Symlink traversal, repository escape, unsafe evidence paths, absent Git `HEAD`, dirty verification state, duplicate output, and inconsistent provenance fail closed.
 - Adoption inventories observable repository signals but never manufactures approved product authority.
@@ -294,7 +294,7 @@ Apply safe managed changes:
 harnessctl upgrade C:\path\to\repository --apply
 ```
 
-Customized managed files are reported for human reconciliation and are not overwritten.
+Schema-2 locks use SHA-256 over `utf8-text-lf-v1`, so LF, CRLF, and CR checkout representations compare equally while every other content distinction remains significant. Schema-1 raw-byte locks remain readable and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. Customized or ambiguous managed files are reported for human reconciliation and are not overwritten.
 
 ## Distribution repository
 

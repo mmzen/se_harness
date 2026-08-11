@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import platform
 import subprocess
 import sys
@@ -16,10 +15,12 @@ from se_harness.installer import (
     apply_changes,
     ensure_target,
     format_plan,
+    load_lock,
     plan_install,
     safe_destination,
-    sha256,
+    tracked_content,
 )
+from se_harness.integrity import IntegrityError, compare_lock_entry
 from se_harness.provenance import capture_verification, prepare_release
 
 
@@ -132,14 +133,37 @@ def _doctor(args: argparse.Namespace) -> int:
             checks.append(("claude-import", False, str(exc)))
     if lock_path.is_file():
         try:
-            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            lock = load_lock(target)
+            changes, _ = plan_install(target, project_name=None, mode="upgrade")
+            desired_by_path = {item.path: item for item in changes}
             for relative, entry in lock.get("files", {}).items():
                 path = safe_destination(target, Path(relative))
-                if entry.get("mode") in {"fragment", "seed"}:
+                mode = entry.get("mode")
+                if mode == "seed":
+                    expected = entry.get("state")
+                    present = path.is_file()
+                    passed = present if expected == "present" else not path.exists()
+                    checks.append((f"seed:{relative}", passed, expected if passed else "state mismatch"))
                     continue
-                actual = sha256(path.read_bytes()) if path.is_file() else None
-                checks.append((f"managed:{relative}", actual == entry.get("sha256"), "unchanged" if actual == entry.get("sha256") else "customized or missing"))
-        except (OSError, json.JSONDecodeError, AttributeError) as exc:
+                if not path.is_file():
+                    checks.append((f"managed:{relative}", False, "missing"))
+                    continue
+                current = tracked_content(mode, path.read_bytes())
+                if current is None:
+                    checks.append((f"managed:{relative}", False, "managed fragment missing"))
+                    continue
+                desired_change = desired_by_path.get(relative)
+                desired = tracked_content(mode, desired_change.desired) if desired_change is not None else None
+                result = compare_lock_entry(lock, entry, current, desired=desired)
+                passed = result != "mismatch"
+                detail = {
+                    "exact": "unchanged (legacy exact)",
+                    "canonical": "unchanged",
+                    "legacy-canonical": "legacy canonical match; upgrade recommended",
+                    "mismatch": "customized",
+                }[result]
+                checks.append((f"managed:{relative}", passed, detail))
+        except (OSError, UnicodeError, IntegrityError, AttributeError) as exc:
             checks.append(("lock-schema", False, str(exc)))
     for name, passed, detail in checks:
         print(f"{'PASS' if passed else 'FAIL'} {name}: {detail}")

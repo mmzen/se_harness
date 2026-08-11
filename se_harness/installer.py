@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import re
@@ -14,6 +13,17 @@ from pathlib import Path
 from typing import Iterable
 
 from se_harness import __version__
+from se_harness.integrity import (
+    HASH_ALGORITHM,
+    HASH_MODE,
+    LOCK_SCHEMA,
+    IntegrityError,
+    canonical_text_equal,
+    compare_lock_entry,
+    digest_for_schema,
+    parse_lock,
+    raw_sha256,
+)
 
 
 LOCK_NAME = ".engineering-harness.lock"
@@ -49,7 +59,9 @@ class Change:
 
 
 def sha256(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
+    """Retain the legacy raw-byte helper for schema-1 compatibility."""
+
+    return raw_sha256(value)
 
 
 def template_root() -> Path:
@@ -79,7 +91,7 @@ def _render(raw: bytes, variables: dict[str, str]) -> bytes:
         raise HarnessError("template files must be UTF-8") from exc
     for key, value in variables.items():
         text = text.replace("{{" + key + "}}", value)
-    return text.replace("\r\n", "\n").encode("utf-8")
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
 
 
 def _templates() -> list[TemplateFile]:
@@ -129,7 +141,15 @@ def _extract_block(content: bytes) -> bytes | None:
         end += 2
     elif end < len(content) and content[end : end + 1] == b"\n":
         end += 1
-    return content[start:end].replace(b"\r\n", b"\n")
+    return content[start:end]
+
+
+def tracked_content(mode: str, content: bytes) -> bytes | None:
+    if mode == "fragment":
+        return _extract_block(content)
+    if mode == "managed":
+        return content
+    return None
 
 
 def _merge_block(current: bytes | None, desired_block: bytes) -> bytes:
@@ -165,12 +185,16 @@ def _load_lock(target: Path) -> dict:
     if not lock_path.exists():
         return {"schema": 1, "tool_version": None, "files": {}}
     try:
-        value = json.loads(lock_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        value = parse_lock(lock_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, IntegrityError) as exc:
         raise HarnessError(f"cannot read {LOCK_NAME}: {exc}") from exc
-    if not isinstance(value, dict) or value.get("schema") != 1 or not isinstance(value.get("files"), dict):
-        raise HarnessError(f"unsupported {LOCK_NAME} schema")
     return value
+
+
+def load_lock(target: Path) -> dict:
+    """Load and validate a schema-1 or schema-2 managed-file lock."""
+
+    return _load_lock(target)
 
 
 def _variables(target: Path, project_name: str | None, installed_at: str | None = None) -> dict[str, str]:
@@ -225,27 +249,47 @@ def plan_install(
             # A prior lock entry remembers intentional removal and prevents later
             # upgrades from recreating the file.
             action = "add" if current is None and old_entry.get("mode") != "seed" else "unchanged"
-        elif current == desired:
-            action = "unchanged"
         elif current is None:
             action = "add"
-        elif mode in {"init", "adopt"}:
-            if item.mode == "fragment" and _extract_block(current) is None:
-                action = "integrate"
-            else:
-                action = "conflict"
+        elif current == desired:
+            action = "unchanged"
         elif item.mode == "fragment":
             current_block = _extract_block(current)
+            desired_block = _extract_block(desired)
+            if desired_block is None:
+                raise HarnessError(f"rendered managed fragment is missing markers: {relative}")
             if current_block is None:
                 action = "integrate"
-            elif sha256(current_block) == old_entry.get("sha256"):
-                action = "update"
             else:
-                action = "customized"
-        elif sha256(current) == old_entry.get("sha256"):
-            action = "update"
+                try:
+                    desired_match = canonical_text_equal(current_block, desired_block)
+                except IntegrityError as exc:
+                    raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+                if desired_match:
+                    action = "unchanged"
+                elif mode in {"init", "adopt"}:
+                    action = "conflict"
+                else:
+                    try:
+                        match = compare_lock_entry(old_lock, old_entry, current_block, desired=desired_block)
+                    except IntegrityError as exc:
+                        raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+                    action = "update" if match != "mismatch" else "customized"
         else:
-            action = "customized"
+            try:
+                desired_match = canonical_text_equal(current, desired)
+            except IntegrityError as exc:
+                raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+            if desired_match:
+                action = "unchanged"
+            elif mode in {"init", "adopt"}:
+                action = "conflict"
+            else:
+                try:
+                    match = compare_lock_entry(old_lock, old_entry, current, desired=desired)
+                except IntegrityError as exc:
+                    raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+                action = "update" if match != "mismatch" else "customized"
         changes.append(Change(relative, action, item.mode, desired, current))
 
     if adoption_report is not None:
@@ -286,6 +330,8 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
 
     files: dict[str, dict[str, str]] = {}
     old_files = old_lock.get("files", {}) if isinstance(old_lock.get("files"), dict) else {}
+    legacy_customized = any(item.action == "customized" and item.path in old_files for item in changes)
+    output_schema = 1 if old_lock.get("schema") == 1 and legacy_customized else LOCK_SCHEMA
     for item in changes:
         destination = target / item.path
         if item.action == "customized":
@@ -301,11 +347,18 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
         if not destination.exists() or item.mode == "generated":
             continue
         content = destination.read_bytes()
-        tracked = _extract_block(content) if item.mode == "fragment" else content
+        tracked = tracked_content(item.mode, content)
         if tracked is not None:
-            files[item.path] = {"mode": item.mode, "sha256": sha256(tracked)}
+            try:
+                digest = digest_for_schema(tracked, output_schema, item.mode)
+            except IntegrityError as exc:
+                raise HarnessError(f"invalid managed text at {item.path}: {exc}") from exc
+            files[item.path] = {"mode": item.mode, "sha256": digest}
 
-    lock = {"schema": 1, "tool_version": __version__, "files": dict(sorted(files.items()))}
+    lock = {"schema": output_schema, "tool_version": __version__, "files": dict(sorted(files.items()))}
+    if output_schema == LOCK_SCHEMA:
+        lock["hash_algorithm"] = HASH_ALGORITHM
+        lock["hash_mode"] = HASH_MODE
     lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
     lock_path = target / LOCK_NAME
     fd, temporary_name = tempfile.mkstemp(prefix=f".{LOCK_NAME}.", dir=target)
