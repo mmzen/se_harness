@@ -409,6 +409,9 @@
         appendTextRow(list, "Evidence", artifact.evidence_paths ? artifact.evidence_paths.join(", ") : null);
         const provenance = (snapshot.revision_provenance || []).find((item) => item.id === artifact.id);
         if (provenance) {
+          appendTextRow(list, provenance.kind === "release" ? "Released work" : "Verified work", provenance.work_orders.join(", "));
+          appendTextRow(list, "Included verification records", provenance.verification_records.join(", "));
+          appendTextRow(list, "Governing contracts", provenance.contracts.join(", "));
           appendTextRow(list, "Observed checkout", provenance.observed_revision);
           appendTextRow(list, "Checkout comparison", provenance.match_state.replaceAll("_", " "));
           appendTextRow(list, "Commit available locally", provenance.commit_available === null ? "not assessable" : provenance.commit_available ? "yes" : "no");

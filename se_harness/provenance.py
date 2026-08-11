@@ -24,6 +24,7 @@ VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$")
 OWNER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9@._ -]{0,127}$")
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/+-]{0,127}$")
 ACTIVE_STATUSES = {"approved", "in_progress", "implemented", "verified", "released"}
+RELEASABLE_WORK_STATUSES = {"implemented", "verified", "released"}
 
 
 def _run(command: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -128,6 +129,39 @@ def _validate_owner(value: str) -> str:
     return value
 
 
+def _normalized_unique(values: str | list[str], label: str) -> list[str]:
+    supplied = [values] if isinstance(values, str) else list(values)
+    if not supplied or any(not isinstance(item, str) or not item.strip() for item in supplied):
+        raise HarnessError(f"{label} must contain at least one non-empty value")
+    normalized = [item.strip() for item in supplied]
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for item in normalized:
+        if item in seen:
+            duplicates.add(item)
+        seen.add(item)
+    if duplicates:
+        raise HarnessError(f"{label} contains duplicate values: {', '.join(sorted(duplicates))}")
+    return sorted(normalized)
+
+
+def _toml_array(values: list[str]) -> str:
+    return "[" + ", ".join(json.dumps(item) for item in values) + "]"
+
+
+def _evidence_is_keyed_to(evidence_path: str, work_order_id: str) -> bool:
+    return re.match(rf"^{re.escape(work_order_id)}(?:-|\.|$)", Path(evidence_path).name) is not None
+
+
+def _supported_commit(metadata: dict[str, Any], record_id: str) -> tuple[str, str]:
+    commit = metadata.get("commit")
+    object_format = metadata.get("git_object_format")
+    expected = 40 if object_format == "sha1" else 64 if object_format == "sha256" else 0
+    if not isinstance(commit, str) or len(commit) != expected or re.fullmatch(r"[0-9a-f]+", commit) is None:
+        raise HarnessError(f"verification record {record_id} does not contain a supported full commit")
+    return commit, object_format
+
+
 def _relative_file(repository_root: Path, value: str) -> tuple[Path, str]:
     raw = Path(value)
     if raw.is_absolute() or "\\" in value or ".." in raw.parts:
@@ -190,26 +224,50 @@ def capture_verification(
     repository: Path,
     *,
     record_id: str,
-    work_order_id: str,
-    verification_id: str,
-    evidence: str,
+    work_order_ids: list[str] | str,
+    verification_ids: list[str] | str,
+    evidence_paths: list[str] | str,
     owner: str,
     output: str | None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "VREC-")
     _validate_owner(owner)
+    selected_work = _normalized_unique(work_order_ids, "work orders")
+    selected_verification = _normalized_unique(verification_ids, "verification contracts")
+    selected_evidence = _normalized_unique(evidence_paths, "evidence paths")
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
-    work_order = _require_artifact(catalog, work_order_id, "work_order")
-    verification = _require_artifact(catalog, verification_id, "verification")
-    if work_order.get("status") not in ACTIVE_STATUSES or verification.get("status") not in ACTIVE_STATUSES:
-        raise HarnessError("work order and verification contract must be active")
-    work_order_metadata = _load_metadata(root, work_order)
-    if verification_id not in _relation_targets(work_order_metadata, "verification"):
-        raise HarnessError(f"work order {work_order_id} does not declare verification contract {verification_id}")
-    _, evidence_relative = _relative_file(root, evidence)
+    declared_verification: set[str] = set()
+    for work_order_id in selected_work:
+        work_order = _require_artifact(catalog, work_order_id, "work_order")
+        if work_order.get("status") not in ACTIVE_STATUSES:
+            raise HarnessError(f"work order {work_order_id} must be active")
+        declared_verification.update(_relation_targets(_load_metadata(root, work_order), "verification"))
+    for verification_id in selected_verification:
+        verification = _require_artifact(catalog, verification_id, "verification")
+        if verification.get("status") not in ACTIVE_STATUSES:
+            raise HarnessError(f"verification contract {verification_id} must be active")
+    supplied_verification = set(selected_verification)
+    missing_verification = declared_verification - supplied_verification
+    extra_verification = supplied_verification - declared_verification
+    if (len(selected_work) > 1 and missing_verification) or extra_verification:
+        details: list[str] = []
+        if len(selected_work) > 1 and missing_verification:
+            details.append(f"missing {', '.join(sorted(missing_verification))}")
+        if extra_verification:
+            details.append(f"not declared by selected work {', '.join(sorted(extra_verification))}")
+        raise HarnessError(f"verification contract selection does not match selected work orders: {'; '.join(details)}")
+    normalized_evidence = [_relative_file(root, evidence)[1] for evidence in selected_evidence]
+    if len(selected_work) > 1:
+        uncovered = [
+            work_order_id
+            for work_order_id in selected_work
+            if not any(_evidence_is_keyed_to(evidence, work_order_id) for evidence in normalized_evidence)
+        ]
+        if uncovered:
+            raise HarnessError(f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}")
     destination = _output_path(
         root,
         output,
@@ -220,10 +278,15 @@ def capture_verification(
     snapshot_hash = _generate_snapshot(root)
     require_clean_worktree(root)
     now = _timestamp()
+    title_scope = selected_work[0] if len(selected_work) == 1 else f"{len(selected_work)} work orders"
+    evidence_array = _toml_array(normalized_evidence)
+    work_array = _toml_array(selected_work)
+    verification_array = _toml_array(selected_verification)
+    readable_work = ", ".join(f"`{item}`" for item in selected_work)
     content = f'''+++
 id = "{record_id}"
 type = "verification_record"
-title = "Verification candidate for {work_order_id}"
+title = "Verification candidate for {title_scope}"
 status = "ready"
 owners = ["{owner}"]
 created = "{now[:10]}"
@@ -233,16 +296,16 @@ git_object_format = "{object_format}"
 worktree_state = "clean"
 verified_at = "{now}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
-evidence_paths = ["{evidence_relative}"]
+evidence_paths = {evidence_array}
 
 [relations]
-verifies_work_order = ["{work_order_id}"]
-conforms_to = ["{verification_id}"]
+verifies_work_order = {work_array}
+conforms_to = {verification_array}
 +++
 
 # Verification Record Candidate
 
-This ready record binds retained evidence to candidate commit `{commit}`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This ready record binds retained evidence for {readable_work} to candidate commit `{commit}`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 '''
@@ -255,8 +318,8 @@ def prepare_release(
     *,
     record_id: str,
     release_contract_id: str,
-    verification_record_id: str,
-    work_order_id: str,
+    verification_record_ids: list[str] | str,
+    work_order_ids: list[str] | str,
     version: str,
     authorized_by: str,
     tag: str | None,
@@ -269,31 +332,50 @@ def prepare_release(
         raise HarnessError("version must use 1-64 letters, numbers, dots, underscores, pluses, or hyphens")
     if tag is not None and TAG_PATTERN.fullmatch(tag) is None:
         raise HarnessError("tag contains unsupported characters")
+    selected_verification_records = _normalized_unique(verification_record_ids, "verification records")
+    selected_work = _normalized_unique(work_order_ids, "work orders")
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
     contract = _require_artifact(catalog, release_contract_id, "release_contract")
-    verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-    _require_artifact(catalog, work_order_id, "work_order")
-    if contract.get("status") not in ACTIVE_STATUSES or verification_record.get("status") not in {"ready", "verified", "released"}:
-        raise HarnessError("release contract and verification record must be active or ready")
+    if contract.get("status") not in ACTIVE_STATUSES:
+        raise HarnessError("release contract must be active")
     contract_metadata = _load_metadata(root, contract)
-    verification_metadata = _load_metadata(root, verification_record)
+    for work_order_id in selected_work:
+        work_order = _require_artifact(catalog, work_order_id, "work_order")
+        if work_order.get("status") not in RELEASABLE_WORK_STATUSES:
+            raise HarnessError(f"work order {work_order_id} must be implemented, verified, or released")
     for artifact in catalog.values():
         if artifact.get("type") != "release_record":
             continue
         existing_metadata = _load_metadata(root, artifact)
         if existing_metadata.get("version") == version:
             raise HarnessError(f"release version already exists: {version}")
-    if work_order_id not in _relation_targets(contract_metadata, "gates"):
-        raise HarnessError(f"release contract {release_contract_id} does not gate {work_order_id}")
-    if work_order_id not in _relation_targets(verification_metadata, "verifies_work_order"):
-        raise HarnessError(f"verification record {verification_record_id} does not cover {work_order_id}")
-    commit = verification_metadata.get("commit")
-    object_format = verification_metadata.get("git_object_format")
-    expected = 40 if object_format == "sha1" else 64 if object_format == "sha256" else 0
-    if not isinstance(commit, str) or len(commit) != expected or re.fullmatch(r"[0-9a-f]+", commit) is None:
-        raise HarnessError("verification record does not contain a supported full commit")
+    ungated = set(selected_work) - _relation_targets(contract_metadata, "gates")
+    if ungated:
+        raise HarnessError(f"release contract {release_contract_id} does not gate work orders: {', '.join(sorted(ungated))}")
+    verification_work: set[str] = set()
+    identities: set[tuple[str, str]] = set()
+    for verification_record_id in selected_verification_records:
+        verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
+        if verification_record.get("status") not in {"ready", "verified", "released"}:
+            raise HarnessError(f"verification record {verification_record_id} must be ready or active")
+        verification_metadata = _load_metadata(root, verification_record)
+        verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
+        identities.add(_supported_commit(verification_metadata, verification_record_id))
+    released_work = set(selected_work)
+    verified_only = verification_work - released_work
+    released_only = released_work - verification_work
+    if verified_only or released_only:
+        details = []
+        if verified_only:
+            details.append(f"verified but not released {', '.join(sorted(verified_only))}")
+        if released_only:
+            details.append(f"released but not verified {', '.join(sorted(released_only))}")
+        raise HarnessError(f"released work does not match verification coverage: {'; '.join(details)}")
+    if len(identities) != 1:
+        raise HarnessError("included verification records do not identify one candidate commit and object format")
+    commit, object_format = next(iter(identities))
     destination = _output_path(
         root,
         output,
@@ -302,6 +384,9 @@ def prepare_release(
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
+    verification_array = _toml_array(selected_verification_records)
+    work_array = _toml_array(selected_work)
+    readable_work = ", ".join(f"`{item}`" for item in selected_work)
     content = f'''+++
 id = "{record_id}"
 type = "release_record"
@@ -318,13 +403,13 @@ authorized_by = "{authorized_by}"
 {tag_line}
 [relations]
 satisfies = ["{release_contract_id}"]
-includes_verification = ["{verification_record_id}"]
-releases_work = ["{work_order_id}"]
+includes_verification = {verification_array}
+releases_work = {work_array}
 +++
 
 # Release Record Candidate
 
-This ready record proposes release `{version}` from candidate commit `{commit}` using `{verification_record_id}`. An accountable release owner must review and transition it to `released`; this command did not approve, commit, tag, release, or publish anything.
+This ready record proposes release `{version}` for {readable_work} from candidate commit `{commit}`. An accountable release owner must review and transition it to `released`; this command did not approve, commit, tag, release, or publish anything.
 
 The release candidate commit may precede the governance commit retaining this record. Any release tag must be created and checked by the authorized release process.
 '''

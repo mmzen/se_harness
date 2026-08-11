@@ -5,12 +5,14 @@
 3. Specify exact behavior, architecture constraints, and independent verification.
 4. Approve one bounded work order referencing the complete governing chain.
 5. Implement, validate, and run repository-specific quality checks.
-6. Retain evidence keyed to the work-order ID.
-7. Commit the clean candidate source and evidence, then run `harnessctl capture-verification`; commit the resulting ready verification record in a later governance commit.
+6. Retain evidence keyed to every release-bearing work-order ID.
+7. Commit the clean final candidate source and evidence, then run `harnessctl capture-verification`; repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Commit the resulting ready verification record in a later governance commit.
 8. Have the assurance owner review and transition the verification record to `verified`.
-9. Run `harnessctl prepare-release`, have the release owner review it, and separately create any authorized tag against the candidate commit.
+9. Run `harnessctl prepare-release`; repeat `--work-order` and `--verification-record` so released work exactly matches verified coverage. Have the release owner review it, and separately create any authorized tag against the candidate commit.
 10. Evaluate operating contracts through accountable humans.
 
 Lifecycle values are `draft`, `ready`, `approved`, `in_progress`, `implemented`, `verified`, `released`, `superseded`, and `rejected`. A status change records authority; it is not a confidence estimate.
 
 A record cannot contain the hash of its own commit. The verified or released candidate commit therefore precedes the later governance commit containing `VREC-*` or `RLS-*`.
+
+Release payload is explicit. Include implementation work that the version intentionally delivers; do not automatically include publication, approval, verification-transition, or other governance-only work orders. One aggregate release remains bound to one exact final candidate commit; ancestor commits are history, not proof of final integration.
