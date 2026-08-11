@@ -19,7 +19,6 @@ import subprocess
 import sys
 import tempfile
 import time
-import tomllib
 from collections import Counter, defaultdict, deque
 from datetime import UTC, datetime
 from pathlib import Path
@@ -30,13 +29,14 @@ from validate_engineering_artifacts import (
     Artifact,
     Diagnostic,
     ValidationReport,
+    load_revision_policy,
     validate_repository,
 )
 
 
 SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v3"
+FINDING_RULES_VERSION = "harness-findings-v4"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -623,20 +623,6 @@ def build_findings(
         if artifact["type"] != "work_order":
             continue
         if (
-            revision_policy["required_for_verified_work"]
-            and artifact["status"] in {"verified", "released"}
-            and not verified_by_work.get(artifact["id"])
-        ):
-            findings.append(
-                _finding(
-                    "W-REV-001",
-                    "warning",
-                    f"{artifact['id']} is {artifact['status']} but has no verified commit-bound verification record.",
-                    [artifact["id"]],
-                    [artifact["path"]],
-                )
-            )
-        if (
             revision_policy["required_for_release"]
             and artifact["status"] == "released"
             and not released_by_work.get(artifact["id"])
@@ -915,24 +901,6 @@ def build_readiness(
             }
         )
     return sorted(readiness, key=lambda item: item["work_order"])
-
-
-def load_revision_policy(repository_root: Path) -> dict[str, bool]:
-    defaults = {"required_for_verified_work": False, "required_for_release": False}
-    path = repository_root / ".engineering-harness.toml"
-    if not path.is_file():
-        return defaults
-    try:
-        metadata = tomllib.loads(path.read_text(encoding="utf-8-sig"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
-        return defaults
-    policy = metadata.get("revision_provenance", {})
-    if not isinstance(policy, dict):
-        return defaults
-    return {
-        key: value if isinstance((value := policy.get(key)), bool) else default
-        for key, default in defaults.items()
-    }
 
 
 def build_revision_provenance(

@@ -2,7 +2,7 @@
 id = "WO-PUB-003"
 type = "work_order"
 title = "Publish the ready WO-DST-003 verification record for review"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

@@ -33,7 +33,7 @@ Both commands refuse an existing output and contain output and evidence paths be
 
 The snapshot includes structured `revision_provenance` entries for every parsed verification and release record: record ID, kind, declared commit, observed revision, match state (`exact`, `different`, or `not_assessable`), related work orders, and release version. Formal nodes and declared edges remain in the normal graph, enabling requirement-to-commit traversal.
 
-Derived findings cover active verified work without a verification record, released work without a release record, declared commit mismatch, dirty active verification, and checkout drift. The observed repository revision is always labeled derived, never authoritative.
+When configured provenance requires commit-bound verification, formal validation rejects a `verified` or `released` work order without coverage from a verified or released VREC. Explorer exposes that authoritative diagnostic without adding the former duplicate `W-REV-001` warning. Derived findings continue to cover released work without a release record, declared commit mismatch, dirty active verification, and checkout drift. The observed repository revision is always labeled derived, never authoritative.
 
 ## Compatibility
 

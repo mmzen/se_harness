@@ -153,6 +153,24 @@ class ValidationReport:
         }
 
 
+def load_revision_policy(repository_root: Path) -> dict[str, bool]:
+    defaults = {"required_for_verified_work": False, "required_for_release": False}
+    path = repository_root / ".engineering-harness.toml"
+    if not path.is_file():
+        return defaults
+    try:
+        metadata = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        return defaults
+    policy = metadata.get("revision_provenance", {})
+    if not isinstance(policy, dict):
+        return defaults
+    return {
+        key: value if isinstance((value := policy.get(key)), bool) else default
+        for key, default in defaults.items()
+    }
+
+
 def _display_path(path: Path, root: Path) -> str:
     try:
         return path.resolve().relative_to(root.resolve()).as_posix()
@@ -592,11 +610,37 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
     return errors
 
 
-def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
+def validate_revision_consistency(
+    artifacts: list[Artifact],
+    report_root: Path,
+    *,
+    require_verified_work: bool = False,
+) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     catalog = {artifact.artifact_id: artifact for artifact in artifacts if artifact.artifact_id != "<unknown>"}
     release_versions: dict[str, list[Artifact]] = {}
     supersession_cycle_nodes = _supersession_cycle_nodes(artifacts)
+
+    if require_verified_work:
+        verified_work = {
+            work_order_id
+            for record in artifacts
+            if record.artifact_type == "verification_record" and record.status in {"verified", "released"}
+            for work_order_id in _relation_targets(record, "verifies_work_order")
+        }
+        for work_order in artifacts:
+            if (
+                work_order.artifact_type == "work_order"
+                and work_order.status in {"verified", "released"}
+                and work_order.artifact_id not in verified_work
+            ):
+                _add_error(
+                    errors,
+                    work_order,
+                    report_root,
+                    "E010",
+                    f"{work_order.status} work order requires coverage by a verified or released verification record",
+                )
 
     for artifact in artifacts:
         if artifact.artifact_type == "verification_record":
@@ -935,6 +979,7 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
 def validate_repository(repository_root: Path, artifact_root: Path | None = None) -> ValidationReport:
     repository_root = repository_root.resolve()
     selected_artifact_root = (artifact_root or repository_root / "docs" / "engineering").resolve()
+    revision_policy = load_revision_policy(repository_root)
 
     artifacts, parse_errors = load_artifacts(selected_artifact_root, repository_root)
     errors = list(parse_errors)
@@ -951,7 +996,13 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
         errors.extend(validate_relations(artifacts, repository_root))
-        errors.extend(validate_revision_consistency(artifacts, repository_root))
+        errors.extend(
+            validate_revision_consistency(
+                artifacts,
+                repository_root,
+                require_verified_work=revision_policy["required_for_verified_work"],
+            )
+        )
         errors.extend(validate_requirement_coverage(artifacts, repository_root))
 
     return ValidationReport(

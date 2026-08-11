@@ -2,7 +2,7 @@
 id = "WO-PUB-004"
 type = "work_order"
 title = "Publish the VREC-DST-003 verification decision for review"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

@@ -2,7 +2,7 @@
 id = "WO-PYP-002"
 type = "work_order"
 title = "Commit and publish PyPI automation for review"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
