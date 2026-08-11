@@ -2,7 +2,7 @@
 id = "WO-REV-004"
 type = "work_order"
 title = "Approve aggregate verification of portable managed integrity"
-status = "verified"
+status = "implemented"
 owners = ["repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

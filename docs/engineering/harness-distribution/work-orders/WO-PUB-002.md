@@ -2,7 +2,7 @@
 id = "WO-PUB-002"
 type = "work_order"
 title = "Publish cross-agent harness changes for review"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

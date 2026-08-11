@@ -27,6 +27,15 @@ def write(path: Path, content: str) -> None:
     path.write_text(content.strip() + "\n", encoding="utf-8")
 
 
+def write_revision_policy(root: Path, *, required_for_verified_work: bool) -> None:
+    write(
+        root / ".engineering-harness.toml",
+        f'''[revision_provenance]
+required_for_verified_work = {str(required_for_verified_work).lower()}
+required_for_release = false''',
+    )
+
+
 def formal(
     artifact_id: str,
     artifact_type: str,
@@ -267,6 +276,39 @@ class RevisionValidatorTests(unittest.TestCase):
 
     def test_existing_chain_without_records_remains_valid(self) -> None:
         self.assertEqual([], validate_repository(self.root).errors)
+
+        write_revision_policy(self.root, required_for_verified_work=False)
+        self.assertEqual([], validate_repository(self.root).errors)
+
+    def test_configured_verified_work_requires_eligible_verification_record(self) -> None:
+        write_revision_policy(self.root, required_for_verified_work=True)
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertIn(
+            "released work order requires coverage by a verified or released verification record",
+            messages,
+        )
+
+        record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        write(record_path, verification_record("a" * 40, status="ready"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertIn(
+            "released work order requires coverage by a verified or released verification record",
+            messages,
+        )
+
+        write(record_path, verification_record("a" * 40, status="verified"))
+        self.assertEqual([], validate_repository(self.root).errors)
+
+        write(record_path, verification_record("a" * 40, status="released"))
+        self.assertEqual([], validate_repository(self.root).errors)
+
+    def test_dashboard_uses_authoritative_verified_work_error_without_duplicate_warning(self) -> None:
+        write_revision_policy(self.root, required_for_verified_work=True)
+        snapshot, report, _ = generate_snapshot(self.root)
+
+        self.assertFalse(report.valid)
+        self.assertIn("E010", {item["code"] for item in snapshot["diagnostics"]})
+        self.assertNotIn("W-REV-001", {item["rule"] for item in snapshot["findings"]})
 
     def test_existing_single_work_record_may_select_declared_contract_subset(self) -> None:
         base = self.root / "docs/engineering/product"

@@ -2,7 +2,7 @@
 id = "WO-REV-002"
 type = "work_order"
 title = "Establish the initial commit-bound verification baseline"
-status = "verified"
+status = "implemented"
 owners = ["repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

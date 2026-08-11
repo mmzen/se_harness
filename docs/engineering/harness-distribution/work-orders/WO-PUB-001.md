@@ -2,7 +2,7 @@
 id = "WO-PUB-001"
 type = "work_order"
 title = "Publish the governed main branch to origin"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

@@ -2,7 +2,7 @@
 id = "WO-REV-003"
 type = "work_order"
 title = "Approve verification of the merged cross-agent harness change"
-status = "verified"
+status = "implemented"
 owners = ["repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"

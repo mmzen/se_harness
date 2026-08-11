@@ -13,6 +13,10 @@
 
 Lifecycle values are `draft`, `ready`, `approved`, `in_progress`, `implemented`, `verified`, `released`, `superseded`, and `rejected`. A status change records authority; it is not a confidence estimate.
 
+For work orders, the normal path is `draft -> approved -> in_progress -> implemented`: approval authorizes bounded execution, while implementation records completed work and retained evidence. Use work-order status `verified` or `released` only when an eligible commit-bound VREC explicitly covers that work and configured provenance requires it. Governance-only work that authorizes verification, release, tagging, review, or publication stops at `implemented` unless a distinct later VREC selects it; the status of the target VREC does not recursively verify the governance work order.
+
+The VREC is the authoritative commit-bound assurance record: it moves separately from `ready` to `verified` through an accountable human decision. The RLS is the authoritative release record and moves separately from `ready` to `released`. Work-order status never substitutes for either record.
+
 A record cannot contain the hash of its own commit. The verified or released candidate commit therefore precedes the later governance commit containing `VREC-*` or `RLS-*`.
 
 Release payload is explicit. Include implementation work that the version intentionally delivers; do not automatically include publication, approval, verification-transition, or other governance-only work orders. One aggregate release remains bound to one exact final candidate commit; ancestor commits are history, not proof of final integration.

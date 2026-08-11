@@ -2,7 +2,7 @@
 id = "WO-REV-006"
 type = "work_order"
 title = "Approve aggregate verification of the se-harness 0.2.0 candidate"
-status = "verified"
+status = "implemented"
 owners = ["repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
