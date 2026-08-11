@@ -76,6 +76,87 @@ Adoption preserves ordinary repository files and writes `docs/engineering/ADOPTI
 
 After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. Installation does not approve product facts or work: accountable humans must confirm the context and author and approve the first formal engineering chain.
 
+## What this looks like in practice
+
+Suppose you ask your coding agent:
+
+> Add per-customer API rate limiting. Preserve existing clients, return `429` with `Retry-After`, and prepare everything I need to review before implementation.
+
+The agent translates that outcome into requirements, design constraints, verification criteria, and a proposed bounded work order. It exposes missing decisions and waits for you to approve the scope before changing code.
+
+> Approved. Implement the work order.
+
+The agent runs preflight, implements only the approved scope, executes the repository checks, retains evidence, commits a clean candidate, and prepares a verification record tied to that exact commit.
+
+> I reviewed the evidence and accept the change. Prepare the pull request.
+
+After your human assurance review, the agent records the decision in a separate governance commit and opens the pull request. Pull-request CI checks its declared work order and engineering chain. Release remains a separate human decision.
+
+The coding agent normally runs `doctor`, `preflight`, `validate`, `dashboard`, and `capture-verification` behind the scenes. You retain authority over intent, scope, assurance, and release.
+
+The representative engineering graph makes those boundaries visible:
+
+```mermaid
+flowchart LR
+    USER["Your approved outcome"] --> INT["Intent"]
+    INT --> CAP["Capability"]
+    CAP --> REQ["Requirement"]
+
+    REQ --> SPEC["Specification"]
+    REQ --> ARCH["Architecture"]
+    REQ --> ADR{"Architecture decision"}
+    REQ --> VER["Verification contract"]
+
+    SPEC --> WO["Approved work order"]
+    ARCH --> WO
+    ADR --> WO
+    VER --> WO
+
+    WO --> CHANGE["Agent implementation"]
+    CHANGE --> EVIDENCE["Tests and evidence"]
+    EVIDENCE --> COMMIT["Exact candidate commit"]
+
+    WO --> READY["Ready verification record"]
+    VER --> READY
+    EVIDENCE --> READY
+    COMMIT --> READY
+
+    READY --> ASSURANCE{"Human assurance decision"}
+    ASSURANCE --> VREC["Verified record"]
+    VREC --> RELEASE{"Human release decision"}
+    RELEASE --> RLS["Released revision"]
+
+    EXPLORER["Harness Explorer"] -. "traceability and anomalies" .-> REQ
+    EXPLORER -. "scope and evidence" .-> WO
+    EXPLORER -. "commit provenance" .-> VREC
+
+    classDef human fill:#1D4ED8,stroke:#93C5FD,color:#FFFFFF,stroke-width:2px
+    classDef intent fill:#6D28D9,stroke:#C4B5FD,color:#FFFFFF
+    classDef design fill:#0F766E,stroke:#5EEAD4,color:#FFFFFF
+    classDef work fill:#B45309,stroke:#FCD34D,color:#FFFFFF
+    classDef execution fill:#475569,stroke:#CBD5E1,color:#FFFFFF
+    classDef evidence fill:#15803D,stroke:#86EFAC,color:#FFFFFF
+    classDef provenance fill:#4338CA,stroke:#A5B4FC,color:#FFFFFF
+    classDef verified fill:#047857,stroke:#6EE7B7,color:#FFFFFF
+    classDef release fill:#BE185D,stroke:#F9A8D4,color:#FFFFFF
+    classDef explorer fill:#334155,stroke:#E2E8F0,color:#FFFFFF
+
+    class USER,ASSURANCE,RELEASE human
+    class INT,CAP,REQ intent
+    class SPEC,ARCH,ADR design
+    class WO work
+    class CHANGE execution
+    class VER,EVIDENCE evidence
+    class COMMIT,READY provenance
+    class VREC verified
+    class RLS release
+    class EXPLORER explorer
+```
+
+When Mermaid is not rendered, the labels, shapes, and prose still describe the same authority and provenance chain. The diagram is explanatory; the repository's validated formal artifacts remain authoritative.
+
+The result is more than code that passes tests: every material change has an approved purpose, controlled scope, retained evidence, exact commit provenance, visible anomalies, and a separately authorized path to release.
+
 ## What it provides
 
 Every installation receives the same standard harness:
