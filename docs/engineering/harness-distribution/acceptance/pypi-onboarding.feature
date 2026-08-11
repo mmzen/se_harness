@@ -39,3 +39,12 @@ Feature: Install and understand SE Harness from its released package
     And conceptual CI text refers to the configured released baseline
     And the workflow remains the observation of the current exact pin
     And README changes do not advance that pin
+
+  Scenario: Understand the value without operating the control plane manually
+    Given a repository owner delegates a representative engineering change to a coding agent
+    When the user reads the practical README example
+    Then the agent prepares and executes only an approved governed scope
+    And the user retains work approval, assurance, and release decisions
+    And the resulting graph connects purpose, evidence, and the exact candidate revision
+    And Harness Explorer exposes traceability, readiness, and anomalies
+    And the explanation remains useful when Mermaid is displayed as source

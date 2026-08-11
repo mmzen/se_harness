@@ -93,6 +93,114 @@ class PublicOnboardingTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, features)
 
+    def test_practical_example_keeps_agent_mechanics_and_human_authority_distinct(self) -> None:
+        practical = self.section("What this looks like in practice")
+        headings = (
+            self.readme.index("## Quick start\n"),
+            self.readme.index("## What this looks like in practice\n"),
+            self.readme.index("## What it provides\n"),
+        )
+        self.assertEqual(tuple(sorted(headings)), headings)
+
+        for phrase in (
+            "per-customer API rate limiting",
+            "`429`",
+            "`Retry-After`",
+            "review before implementation",
+            "approved scope",
+            "clean candidate",
+            "exact commit",
+            "human assurance",
+            "separate human decision",
+            "pull-request CI",
+            "visible anomalies",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase.lower(), practical.lower())
+
+        quoted_requests = "\n".join(
+            line for line in practical.splitlines() if line.startswith(">")
+        )
+        for operation in (
+            "doctor",
+            "preflight",
+            "validate",
+            "dashboard",
+            "capture-verification",
+        ):
+            with self.subTest(operation=operation):
+                self.assertIn(f"`{operation}`", practical)
+                self.assertNotIn(operation, quoted_requests)
+
+    def test_practical_graph_has_semantic_styles_decisions_and_text_fallback(self) -> None:
+        practical = self.section("What this looks like in practice")
+        mermaid_blocks = re.findall(r"```mermaid\n(.*?)\n```", practical, flags=re.DOTALL)
+        self.assertEqual(1, len(mermaid_blocks))
+        graph = mermaid_blocks[0]
+
+        for node in (
+            'USER["Your approved outcome"]',
+            'INT["Intent"]',
+            'CAP["Capability"]',
+            'REQ["Requirement"]',
+            'SPEC["Specification"]',
+            'ARCH["Architecture"]',
+            'ADR{"Architecture decision"}',
+            'VER["Verification contract"]',
+            'WO["Approved work order"]',
+            'CHANGE["Agent implementation"]',
+            'EVIDENCE["Tests and evidence"]',
+            'COMMIT["Exact candidate commit"]',
+            'READY["Ready verification record"]',
+            'ASSURANCE{"Human assurance decision"}',
+            'VREC["Verified record"]',
+            'RELEASE{"Human release decision"}',
+            'RLS["Released revision"]',
+            'EXPLORER["Harness Explorer"]',
+        ):
+            with self.subTest(node=node):
+                self.assertIn(node, graph)
+
+        for relation in (
+            'USER["Your approved outcome"] --> INT["Intent"]',
+            "INT --> CAP",
+            "CAP --> REQ",
+            "WO --> CHANGE",
+            "CHANGE --> EVIDENCE",
+            "EVIDENCE --> COMMIT",
+            "READY --> ASSURANCE",
+            "ASSURANCE --> VREC",
+            "VREC --> RELEASE",
+            "RELEASE --> RLS",
+            'EXPLORER["Harness Explorer"] -. "traceability and anomalies" .-> REQ',
+        ):
+            with self.subTest(relation=relation):
+                self.assertIn(relation, graph)
+
+        for style in (
+            "human",
+            "intent",
+            "design",
+            "work",
+            "execution",
+            "evidence",
+            "provenance",
+            "verified",
+            "release",
+            "explorer",
+        ):
+            with self.subTest(style=style):
+                self.assertRegex(graph, rf"(?m)^\s*classDef {style} ")
+        self.assertIn("class USER,ASSURANCE,RELEASE human", graph)
+        self.assertIn("class INT,CAP,REQ intent", graph)
+        self.assertIn("class VREC verified", graph)
+        self.assertIn("class RLS release", graph)
+
+        self.assertNotIn("![", practical)
+        self.assertNotRegex(practical, r"(?i)<(?:script|style)\b")
+        self.assertIn("When Mermaid is not rendered", practical)
+        self.assertIn("labels, shapes, and prose", practical)
+
     def test_package_and_repository_upgrades_are_separate(self) -> None:
         upgrade = self.section("Safe upgrades")
         commands = (
