@@ -108,6 +108,7 @@
     .badge.warning, .badge.not_assessable { color: var(--warning); background: var(--warning-soft); border-color: transparent; }
     .badge.info { color: var(--info); background: var(--info-soft); border-color: transparent; }
     .badge.satisfied, .badge.complete { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
+    .badge.superseded { color: var(--muted); background: var(--line); border-color: transparent; }
 
     .lane-grid { display: grid; grid-template-columns: repeat(6, minmax(180px, 1fr)); gap: 10px; align-items: start; }
     .lane { min-width: 0; border-top: 3px solid var(--line-strong); padding-top: 10px; }
@@ -412,6 +413,11 @@
           appendTextRow(list, provenance.kind === "release" ? "Released work" : "Verified work", provenance.work_orders.join(", "));
           appendTextRow(list, "Included verification records", provenance.verification_records.join(", "));
           appendTextRow(list, "Governing contracts", provenance.contracts.join(", "));
+          appendTextRow(list, "Lifecycle class", provenance.lifecycle_class.replaceAll("_", " "));
+          appendTextRow(list, "Superseded by", provenance.superseded_by.join(", "));
+          appendTextRow(list, "Supersedes", provenance.supersedes.join(", "));
+          appendTextRow(list, "Superseded at", provenance.superseded_at);
+          appendTextRow(list, "Supersession authorized by", provenance.supersession_authorized_by);
           appendTextRow(list, "Observed checkout", provenance.observed_revision);
           appendTextRow(list, "Checkout comparison", provenance.match_state.replaceAll("_", " "));
           appendTextRow(list, "Commit available locally", provenance.commit_available === null ? "not assessable" : provenance.commit_available ? "yes" : "no");

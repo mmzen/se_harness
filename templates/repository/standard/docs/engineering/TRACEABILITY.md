@@ -21,3 +21,5 @@ Only declared relations in formal TOML metadata establish authority. Source comm
 `verification_record` binds one or more release-bearing work orders, their declared verification contracts, and retained evidence to one clean final candidate commit. `release_record` binds a release contract to the same commit and an exact released-work set equal to included verification coverage. Single-work-order records remain aggregates of cardinality one.
 
 Governance-only work may authorize review, verification transition, release transition, tagging, or publication in later commits, but it is not automatically release payload. The dashboard's observed checkout revision is derived context, not release authority.
+
+A stale `ready` verification record may be retained as `superseded` only through a separate accountable governance decision. Its `superseded_by` relation names one distinct verified or released VREC that covers every original work order. Supersession preserves the old candidate and evidence facts, is terminal, and never contributes verification or release readiness. Dashboard overlap findings are non-authoritative prompts, not lifecycle decisions.

@@ -133,7 +133,7 @@ Harness Explorer is a derived, read-only view. It never approves work or release
 
 1. **Why does this work exist?** Trace a work order or requirement back through capability to approved intent.
 2. **Is the engineering chain complete?** Identify active requirements without specification or verification coverage and relations with missing or incorrect targets.
-3. **Where are the inconsistencies or anomalies?** Surface validation errors, missing work-order evidence, lifecycle inconsistencies, unsafe evidence paths, duplicate release versions, commit mismatches, and unavailable commits.
+3. **Where are the inconsistencies or anomalies?** Surface validation errors, missing work-order evidence, lifecycle inconsistencies, potentially stale ready verification records, unsafe evidence paths, duplicate release versions, commit mismatches, and unavailable commits.
 4. **What exact revision was verified or released?** Show declared candidate commits, related evidence and work orders, local commit availability, and comparison with the observed checkout.
 5. **How ready is the work?** Show gates G0 through G5 as `satisfied`, `unsatisfied`, or `not_assessable` from intent readiness through operational acceptance.
 
@@ -185,6 +185,8 @@ harnessctl capture-verification C:\path\to\repository `
 ```
 
 An accountable human reviews the evidence and decides whether to transition the record to `verified`. The record is retained in a later governance commit because a file cannot contain the hash of the commit that contains itself.
+
+If a later verified or released VREC fully covers the work of an older `ready` VREC, an accountable assurance owner may retire the older attempt as `superseded`. The governance edit must preserve its captured candidate and evidence metadata, record `superseded_at` and `supersession_authorized_by`, and add exactly one typed `superseded_by` relation. The successor must be distinct, already verified or released, and cover every work order from the old record. Superseded records remain visible history but cannot qualify release preparation. Harness Explorer may flag possible stale-ready records, but that derived warning never chooses or applies a successor.
 
 After verification and separate release authorization, prepare a release record:
 
