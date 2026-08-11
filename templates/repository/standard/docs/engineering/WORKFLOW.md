@@ -16,3 +16,5 @@ Lifecycle values are `draft`, `ready`, `approved`, `in_progress`, `implemented`,
 A record cannot contain the hash of its own commit. The verified or released candidate commit therefore precedes the later governance commit containing `VREC-*` or `RLS-*`.
 
 Release payload is explicit. Include implementation work that the version intentionally delivers; do not automatically include publication, approval, verification-transition, or other governance-only work orders. One aggregate release remains bound to one exact final candidate commit; ancestor commits are history, not proof of final integration.
+
+Managed-file integrity uses schema-2 SHA-256 over the versioned `utf8-text-lf-v1` representation. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema-1 locks retain raw-byte semantics and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. `doctor` is read-only, and customized or ambiguous content is never overwritten.
