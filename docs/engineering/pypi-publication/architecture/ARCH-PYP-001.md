@@ -8,7 +8,7 @@ created = "2026-08-11"
 updated = "2026-08-11"
 
 [relations]
-constrains = ["SPEC-PYP-001"]
+constrains = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
 +++
 
 # Architecture: Separated exact-asset PyPI publication boundary
