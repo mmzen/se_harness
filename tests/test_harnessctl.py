@@ -188,9 +188,9 @@ class HarnessCtlTests(unittest.TestCase):
 
         code, _, error = self.invoke("upgrade", str(target), "--apply")
         self.assertEqual(1, code)
-        self.assertIn("manual review", error)
+        self.assertIn("manual review; no files were written", error)
         self.assertEqual(original, managed.read_bytes())
-        self.assertTrue(missing.is_file())
+        self.assertFalse(missing.exists())
         self.assertIn('project_name = "Stable Name"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
 
     def test_invalid_project_name_and_malformed_markers_fail_closed(self) -> None:
@@ -355,7 +355,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("manual review", error)
         self.assertEqual(original, contract.read_bytes())
         migrated = json.loads(lock_path.read_text(encoding="utf-8"))
-        self.assertEqual(2, migrated["schema"])
+        self.assertEqual(1, migrated["schema"])
         self.assertNotIn("ENGINEERING_HARNESS.md", migrated["files"])
 
     def test_doctor_hashes_only_the_managed_fragment(self) -> None:
@@ -365,7 +365,7 @@ class HarnessCtlTests(unittest.TestCase):
         agents.write_text("# Owner rules\n\n" + agents.read_text(encoding="utf-8") + "\nOwner tail.\n", encoding="utf-8")
         self.assertEqual(0, self.invoke("doctor", str(target))[0])
 
-        agents.write_text(agents.read_text(encoding="utf-8").replace("Before implementation", "Before unsafe implementation"), encoding="utf-8")
+        agents.write_text(agents.read_text(encoding="utf-8").replace("Read `ENGINEERING_HARNESS.md`", "Skip `ENGINEERING_HARNESS.md`"), encoding="utf-8")
         code, output, _ = self.invoke("doctor", str(target))
         self.assertEqual(1, code)
         self.assertIn("FAIL managed:AGENTS.md", output)
@@ -421,6 +421,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"])
+        self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/README.md"])
         self.assertNotIn("docs/engineering/ADOPTION_REPORT.md", lock["files"])
 
     def test_symlinked_destination_directory_is_rejected_when_supported(self) -> None:
@@ -447,9 +448,9 @@ class HarnessCtlTests(unittest.TestCase):
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["files"]["../outside.txt"] = {"mode": "managed", "sha256": "0" * 64}
         lock_path.write_text(json.dumps(lock), encoding="utf-8")
-        code, _, error = self.invoke("doctor", str(target))
-        self.assertEqual(2, code)
-        self.assertIn("escapes the target", error)
+        code, output, _ = self.invoke("doctor", str(target))
+        self.assertEqual(1, code)
+        self.assertIn("escapes the target", output)
 
     def test_distribution_metadata_covers_every_template_directory(self) -> None:
         pyproject = (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")

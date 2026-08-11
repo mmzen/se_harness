@@ -14,12 +14,12 @@
 - Build: under an approved release work order, run `python -m build --wheel --sdist --no-isolation --outdir <raw-output> .`, then create the final sdist with `python scripts/normalize_sdist.py <raw-sdist> <release-sdist> --epoch <candidate-commit-unix-timestamp>`.
 - Test: `python -m unittest discover -s tests -p "test_*.py"`
 - Lint or format: no formatter or linter command is currently defined; do not invent one as a required gate.
-- Additional required verification: `python scripts/validate_engineering_artifacts.py --root .`, `python -m se_harness --help`, and `python -m se_harness doctor .`
+- Additional required verification: `python scripts/validate_engineering_artifacts.py --root .`, `python -m se_harness --help`, `python -m se_harness doctor .`, and phase-appropriate `python -m se_harness preflight . --work-order WO-...`
 
 ## Architecture
 
 - Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
-- Major components and responsibilities: `se_harness/` is the safe control plane; `templates/repository/standard/` is the one canonical installation; `scripts/` validates and renders the local Explorer and contains repository release-build support; `tests/` verifies installer, upgrade, diagnostics, provenance, and deterministic distribution behavior; `docs/engineering/` contains the governing artifact graph.
+- Major components and responsibilities: `se_harness/` is the safe control plane, including read-only preflight; `templates/repository/standard/` is the one canonical installation; `scripts/` validates, selects structured CI work orders, renders the local Explorer, and contains repository release-build support; `tests/` verifies installer, upgrade, diagnostics, instruction routing, preflight, CI, provenance, and deterministic distribution behavior; `docs/engineering/` contains the governing artifact graph.
 - External services or dependencies: Python 3.11 or later is the only runtime dependency. Runtime behavior uses the standard library and installed repositories do not require an external service. Package building uses the separately provisioned build environment declared by `pyproject.toml`.
 
 ## Repository constraints

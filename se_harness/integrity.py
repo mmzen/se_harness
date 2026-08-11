@@ -46,6 +46,20 @@ def canonical_text_equal(left: bytes, right: bytes) -> bool:
     return canonical_text_bytes(left) == canonical_text_bytes(right)
 
 
+def matches_legacy_newline_variant(value: bytes, expected_sha256: str) -> bool:
+    """Return true when a schema-1 digest differs only by text newlines."""
+
+    if not isinstance(expected_sha256, str) or SHA256_PATTERN.fullmatch(expected_sha256) is None:
+        return False
+    canonical = canonical_text_bytes(value)
+    variants = {
+        canonical,
+        canonical.replace(b"\n", b"\r\n"),
+        canonical.replace(b"\n", b"\r"),
+    }
+    return any(raw_sha256(item) == expected_sha256 for item in variants)
+
+
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
     for key, value in pairs:

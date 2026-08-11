@@ -1,0 +1,16 @@
+# Engineering Artifacts for {{PROJECT_NAME}}
+
+> Repository-owned after installation. Maintain this file as the index of local artifact domains and supporting engineering documentation. Shared harness policy is routed from `ENGINEERING_HARNESS.md` and remains managed separately.
+
+## Artifact domains
+
+- TODO[artifact-domain]: describe the domain and link its packet directory.
+
+## Repository-specific engineering documentation
+
+- `REPOSITORY_CONTEXT.md`: owner-confirmed commands, entry points, and constraints.
+- TODO[engineering-document]: link architecture overviews, runbooks, or contribution guidance that is specific to this repository.
+
+## Maintenance
+
+Update this index when domains or local engineering documents are added, moved, or retired. Formal authority comes from typed artifact metadata and accountable lifecycle decisions, not from this index.
