@@ -2,7 +2,7 @@
 id = "WO-RLS-003"
 type = "work_order"
 title = "Approve and publish se-harness 0.2.1"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "quality-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
