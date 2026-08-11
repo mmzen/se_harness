@@ -7,7 +7,8 @@ from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "publish-pypi.yml"
-PUBLISH_ACTION_SHA = "a892a5a61159132606e93a2fa6f4358831b04d26"
+PUBLISH_ACTION_SHA = "dc37677b2e1c63e2034f94d8a5b11f265b73ba33"
+PUBLISH_ACTION_TAG_OBJECT_SHA = "a892a5a61159132606e93a2fa6f4358831b04d26"
 
 
 class PyPIPublishingWorkflowTests(unittest.TestCase):
@@ -77,9 +78,11 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
     def test_publisher_is_immutable_and_preserves_strict_pypi_behavior(self) -> None:
         workflow = self.workflow
         self.assertIn(
-            f"uses: pypa/gh-action-pypi-publish@{PUBLISH_ACTION_SHA} # v1.14.2",
+            f"uses: pypa/gh-action-pypi-publish@{PUBLISH_ACTION_SHA} # v1.14.2 peeled commit",
             workflow,
         )
+        self.assertNotIn(PUBLISH_ACTION_TAG_OBJECT_SHA, workflow)
+        self.assertRegex(PUBLISH_ACTION_SHA, r"\A[0-9a-f]{40}\Z")
         self.assertNotRegex(workflow, r"pypa/gh-action-pypi-publish@(release/|v?\d)")
         self.assertIn("          packages-dir: dist/\n", workflow)
         self.assertIn("          verify-metadata: true\n", workflow)
