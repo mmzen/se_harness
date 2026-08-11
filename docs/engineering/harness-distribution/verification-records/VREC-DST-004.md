@@ -2,7 +2,7 @@
 id = "VREC-DST-004"
 type = "verification_record"
 title = "Verification candidate for WO-DST-004"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
@@ -20,6 +20,8 @@ conforms_to = ["VER-DST-005"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-DST-004` to candidate commit `fd0a6af2bcbe95ddac2440d101640c4053a83e12`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-DST-004` to candidate commit `fd0a6af2bcbe95ddac2440d101640c4053a83e12`. The capture command originally prepared it as `ready` and did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+After pull request #26 merged the candidate and ready record with all required checks passing, the accountable repository owner reviewed the retained evidence and explicitly instructed `i merged, then transition and governance commit + PR` on 2026-08-11. That human decision, authorized and recorded by `WO-DST-005`, transitioned this record from `ready` to `verified`; automation did not grant the authority.
