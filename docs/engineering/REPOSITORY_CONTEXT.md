@@ -11,7 +11,7 @@
 ## Commands
 
 - Setup: `python -m pip install -e .`
-- Build: no repository build command is currently defined; packaging or publication requires separate release authority.
+- Build: under an approved release work order, run `python -m build --wheel --sdist --no-isolation --outdir <raw-output> .`, then create the final sdist with `python scripts/normalize_sdist.py <raw-sdist> <release-sdist> --epoch <candidate-commit-unix-timestamp>`.
 - Test: `python -m unittest discover -s tests -p "test_*.py"`
 - Lint or format: no formatter or linter command is currently defined; do not invent one as a required gate.
 - Additional required verification: `python scripts/validate_engineering_artifacts.py --root .`, `python -m se_harness --help`, and `python -m se_harness doctor .`
@@ -19,14 +19,14 @@
 ## Architecture
 
 - Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
-- Major components and responsibilities: `se_harness/` is the safe control plane; `templates/repository/standard/` is the one canonical installation; `scripts/` validates and renders the local Explorer; `tests/` verifies installer, upgrade, diagnostics, and provenance behavior; `docs/engineering/` contains the governing artifact graph.
-- External services or dependencies: Python 3.11 or later is the only runtime dependency. Runtime behavior uses the standard library and installed repositories do not require an external service.
+- Major components and responsibilities: `se_harness/` is the safe control plane; `templates/repository/standard/` is the one canonical installation; `scripts/` validates and renders the local Explorer and contains repository release-build support; `tests/` verifies installer, upgrade, diagnostics, provenance, and deterministic distribution behavior; `docs/engineering/` contains the governing artifact graph.
+- External services or dependencies: Python 3.11 or later is the only runtime dependency. Runtime behavior uses the standard library and installed repositories do not require an external service. Package building uses the separately provisioned build environment declared by `pyproject.toml`.
 
 ## Repository constraints
 
-- Generated paths: `target/harness-dashboard/`, Python bytecode, build metadata, and temporary files are derived and must not become formal authority.
+- Generated paths: `target/harness-dashboard/`, Python bytecode, build metadata, raw and normalized distribution artifacts, and temporary files are derived and must not become formal authority.
 - Restricted or sensitive paths: preserve `.git/`, `.engineering-harness.lock`, managed `se-harness` marker blocks, and repository-owned content outside those blocks.
-- Files requiring specialized review: changes to installer ownership modes, safe path handling, lock behavior, canonical templates, artifact validation, or provenance rules require deterministic boundary and upgrade tests.
+- Files requiring specialized review: changes to installer ownership modes, safe path handling, lock behavior, canonical templates, artifact validation, provenance rules, or release archive normalization require deterministic boundary and failure tests.
 - Local conventions not captured elsewhere: maintain exactly one standard installation; treat target content as untrusted; preserve customizations; never infer product authority; and do not commit, tag, push, publish, verify, or release without separately authorized work and accountable human action.
 
 ## Maintenance
