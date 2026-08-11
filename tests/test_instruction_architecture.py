@@ -307,7 +307,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertIn("independent-baseline:", workflow)
         self.assertIn("candidate:", workflow)
-        self.assertIn("se-harness==0.2.0", workflow)
+        self.assertIn("se-harness==0.2.1", workflow)
         self.assertIn(WHEEL_SHA256, workflow)
         self.assertIn("releases/download/v0.2.0/se_harness-0.2.0-py3-none-any.whl", workflow)
         self.assertIn("sha256sum --check", workflow)
