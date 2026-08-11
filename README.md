@@ -153,9 +153,9 @@ Missing human judgment or external evidence remains `not_assessable`; it is neve
 The authoritative lineage is:
 
 ```text
-Intent -> Capability -> Requirement -> Work order
-       -> Verification record at candidate commit C
-       -> Release record for the same candidate commit C
+Intent -> Capability -> Requirement -> Work order(s)
+       -> Aggregate verification record at final candidate commit C
+       -> Aggregate release record for the same candidate commit C
        -> Operating assurance
 ```
 
@@ -170,6 +170,19 @@ harnessctl capture-verification C:\path\to\repository `
 ```
 
 The command derives the full SHA-1 or SHA-256 `HEAD`, checks the graph and evidence path, captures the dashboard snapshot hash, and writes only a `ready` `VREC-*`. It does not approve, commit, tag, release, push, or publish.
+
+For a final candidate containing multiple release-bearing work orders, repeat the scope options. The selected verification contracts must equal the union declared by the work orders, and evidence must be retained for each work order:
+
+```powershell
+harnessctl capture-verification C:\path\to\repository `
+  --id VREC-SEH-001 `
+  --work-order WO-DST-001 `
+  --work-order WO-REV-001 `
+  --verification VER-DST-001 `
+  --verification VER-REV-001 `
+  --evidence docs/engineering/distribution/evidence/WO-DST-001-verification.md `
+  --evidence docs/engineering/provenance/evidence/WO-REV-001-verification.md
+```
 
 An accountable human reviews the evidence and decides whether to transition the record to `verified`. The record is retained in a later governance commit because a file cannot contain the hash of the commit that contains itself.
 
@@ -186,6 +199,22 @@ harnessctl prepare-release C:\path\to\repository `
 ```
 
 The resulting `ready` `RLS-*` copies candidate commit C from the verification record. It does not point to the later governance commit and does not create or verify a Git tag.
+
+An aggregate release repeats `--work-order` and, when needed, `--verification-record`. Its released-work set must exactly equal the union covered by the included verification records, every work order must be gated by the release contract, and all included records must name the same candidate commit:
+
+```powershell
+harnessctl prepare-release C:\path\to\repository `
+  --id RLS-SEH-001 `
+  --release-contract REL-SEH-001 `
+  --verification-record VREC-SEH-001 `
+  --work-order WO-DST-001 `
+  --work-order WO-REV-001 `
+  --version 1.0.0 `
+  --authorized-by release-owner `
+  --tag v1.0.0
+```
+
+Only release-bearing implementation work belongs in `releases_work`. Publication, approval, verification-transition, and other governance-only work orders remain auditable on the governing branch but are not automatically shipped in the wheel.
 
 Explorer compares each declared candidate commit with the observed checkout:
 
@@ -206,8 +235,8 @@ A `different` state is review information, not automatic proof of failure. Commi
 | `doctor` | Checks runtime compatibility, configuration, lock integrity, required files, and managed-file drift. |
 | `upgrade` | Plans a managed-file upgrade without writing by default. |
 | `upgrade --apply` | Applies only additions, integrations, and updates to unmodified managed content. |
-| `capture-verification` | Prepares a `ready` commit-bound verification record. |
-| `prepare-release` | Prepares a `ready` release record using the verified candidate commit. |
+| `capture-verification` | Prepares a `ready` single or aggregate verification record at one final candidate commit. |
+| `prepare-release` | Prepares a `ready` single or aggregate release record using that same candidate commit. |
 
 Use `harnessctl <command> --help` for all arguments.
 

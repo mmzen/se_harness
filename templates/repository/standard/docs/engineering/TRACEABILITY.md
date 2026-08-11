@@ -7,7 +7,7 @@ Intent -> Capability -> Requirement -> Specification
                              |-> Architecture / ADR
                              |-> Verification
                                       |
-                                  Work order
+                              Work order(s)
                                       |
                      Verification record + commit
                                       |
@@ -18,4 +18,6 @@ Intent -> Capability -> Requirement -> Specification
 
 Only declared relations in formal TOML metadata establish authority. Source comments, filenames, commits, tickets, and conversational references may aid discovery but do not satisfy formal coverage.
 
-`verification_record` binds a work order and verification contract to a clean candidate commit and evidence. `release_record` binds a release contract to that same verified commit. The dashboard's observed checkout revision is derived context, not release authority.
+`verification_record` binds one or more release-bearing work orders, their declared verification contracts, and retained evidence to one clean final candidate commit. `release_record` binds a release contract to the same commit and an exact released-work set equal to included verification coverage. Single-work-order records remain aggregates of cardinality one.
+
+Governance-only work may authorize review, verification transition, release transition, tagging, or publication in later commits, but it is not automatically release payload. The dashboard's observed checkout revision is derived context, not release authority.

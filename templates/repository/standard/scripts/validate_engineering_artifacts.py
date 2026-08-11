@@ -65,6 +65,12 @@ GIT_COMMIT_PATTERNS = {
     "sha1": re.compile(r"^[0-9a-f]{40}$"),
     "sha256": re.compile(r"^[0-9a-f]{64}$"),
 }
+
+RELEASABLE_WORK_STATUSES = {
+    "implemented",
+    "verified",
+    "released",
+}
 EXCLUDED_DIRECTORY_NAMES = {"templates", "evidence", ".git", ".idea", "target", "node_modules"}
 
 PROVENANCE_RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
@@ -549,30 +555,128 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
 
     for artifact in artifacts:
         if artifact.artifact_type == "verification_record":
-            verification_ids = _relation_targets(artifact, "conforms_to")
-            for work_order_id in _relation_targets(artifact, "verifies_work_order"):
-                work_order = catalog.get(work_order_id)
-                if work_order is None or work_order.artifact_type != "work_order":
-                    continue
-                declared = _relation_targets(work_order, "verification")
-                missing = verification_ids - declared
-                if missing:
+            for field_name in ("evidence_paths",):
+                duplicates = _duplicate_strings(artifact.metadata.get(field_name))
+                if duplicates:
                     _add_error(
                         errors,
                         artifact,
                         report_root,
                         "E010",
-                        f"verification contracts {', '.join(sorted(missing))} are not declared by work order '{work_order_id}'",
+                        f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
+                    )
+            for relation_name in ("verifies_work_order", "conforms_to"):
+                duplicates = _duplicate_strings(artifact.relations.get(relation_name))
+                if duplicates:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E010",
+                        f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                    )
+            work_order_ids = _relation_targets(artifact, "verifies_work_order")
+            verification_ids = _relation_targets(artifact, "conforms_to")
+            declared_verification: set[str] = set()
+            for work_order_id in work_order_ids:
+                work_order = catalog.get(work_order_id)
+                if work_order is None or work_order.artifact_type != "work_order":
+                    continue
+                declared_verification.update(_relation_targets(work_order, "verification"))
+                if artifact.status in {"ready", "verified", "released"} and work_order.status not in ACTIVE_COVERAGE_STATUSES:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E010",
+                        f"active verification record requires active work order '{work_order_id}'",
+                    )
+            for verification_id in verification_ids:
+                verification = catalog.get(verification_id)
+                if (
+                    verification is not None
+                    and verification.artifact_type == "verification"
+                    and artifact.status in {"ready", "verified", "released"}
+                    and verification.status not in ACTIVE_COVERAGE_STATUSES
+                ):
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E010",
+                        f"active verification record requires active verification contract '{verification_id}'",
+                    )
+            missing_verification = declared_verification - verification_ids
+            extra_verification = verification_ids - declared_verification
+            if len(work_order_ids) > 1 and missing_verification:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"verification record is missing contracts declared by selected work: {', '.join(sorted(missing_verification))}",
+                )
+            if extra_verification:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
+                )
+            if len(work_order_ids) > 1:
+                evidence_paths = artifact.metadata.get("evidence_paths", [])
+                normalized_paths = [item for item in evidence_paths if isinstance(item, str)] if isinstance(evidence_paths, list) else []
+                uncovered = [
+                    work_order_id
+                    for work_order_id in sorted(work_order_ids)
+                    if not any(
+                        re.match(rf"^{re.escape(work_order_id)}(?:-|\.|$)", Path(path).name)
+                        for path in normalized_paths
+                    )
+                ]
+                if uncovered:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E010",
+                        f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
                     )
 
         if artifact.artifact_type != "release_record":
             continue
+        for relation_name in ("satisfies", "includes_verification", "releases_work"):
+            duplicates = _duplicate_strings(artifact.relations.get(relation_name))
+            if duplicates:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                )
         version = artifact.metadata.get("version")
         if isinstance(version, str) and version.strip():
             release_versions.setdefault(version.strip(), []).append(artifact)
         release_commit = artifact.metadata.get("commit")
         release_format = artifact.metadata.get("git_object_format")
         released_work = _relation_targets(artifact, "releases_work")
+        for work_order_id in released_work:
+            work_order = catalog.get(work_order_id)
+            if (
+                work_order is not None
+                and work_order.artifact_type == "work_order"
+                and artifact.status in {"ready", "released"}
+                and work_order.status not in RELEASABLE_WORK_STATUSES
+            ):
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"active release record requires implemented, verified, or released work order '{work_order_id}'",
+                )
         verification_work: set[str] = set()
         for verification_id in _relation_targets(artifact, "includes_verification"):
             verification = catalog.get(verification_id)
@@ -604,10 +708,27 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
                 "E010",
                 f"released work orders are not covered by included verification records: {', '.join(sorted(missing_work))}",
             )
+        extra_work = verification_work - released_work
+        if extra_work:
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E010",
+                f"included verification records cover work orders absent from the release: {', '.join(sorted(extra_work))}",
+            )
         for contract_id in _relation_targets(artifact, "satisfies"):
             contract = catalog.get(contract_id)
             if contract is None or contract.artifact_type != "release_contract":
                 continue
+            if artifact.status in {"ready", "released"} and contract.status not in ACTIVE_COVERAGE_STATUSES:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"active release record requires active release contract '{contract_id}'",
+                )
             ungated = released_work - _relation_targets(contract, "gates")
             if ungated:
                 _add_error(
@@ -632,6 +753,19 @@ def _relation_targets(artifact: Artifact, relation_name: str) -> set[str]:
     if not isinstance(value, list):
         return set()
     return {item for item in value if isinstance(item, str)}
+
+
+def _duplicate_strings(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    strings = [item.strip() for item in value if isinstance(item, str) and item.strip()]
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for item in strings:
+        if item in seen:
+            duplicates.add(item)
+        seen.add(item)
+    return sorted(duplicates)
 
 
 def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:

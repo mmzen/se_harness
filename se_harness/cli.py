@@ -150,9 +150,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
     output = capture_verification(
         Path(args.target),
         record_id=args.record_id,
-        work_order_id=args.work_order,
-        verification_id=args.verification,
-        evidence=args.evidence,
+        work_order_ids=args.work_order,
+        verification_ids=args.verification,
+        evidence_paths=args.evidence,
         owner=args.owner,
         output=args.output,
     )
@@ -165,8 +165,8 @@ def _prepare_release(args: argparse.Namespace) -> int:
         Path(args.target),
         record_id=args.record_id,
         release_contract_id=args.release_contract,
-        verification_record_id=args.verification_record,
-        work_order_id=args.work_order,
+        verification_record_ids=args.verification_record,
+        work_order_ids=args.work_order,
         version=args.release_version,
         authorized_by=args.authorized_by,
         tag=args.tag,
@@ -210,9 +210,9 @@ def build_parser() -> argparse.ArgumentParser:
     capture = commands.add_parser("capture-verification", help="prepare a ready commit-bound verification record")
     capture.add_argument("target", nargs="?", default=".")
     capture.add_argument("--id", required=True, dest="record_id")
-    capture.add_argument("--work-order", required=True)
-    capture.add_argument("--verification", required=True)
-    capture.add_argument("--evidence", required=True)
+    capture.add_argument("--work-order", required=True, action="append", help="work order to verify; repeat for aggregate candidates")
+    capture.add_argument("--verification", required=True, action="append", help="applicable verification contract; repeat for aggregate candidates")
+    capture.add_argument("--evidence", required=True, action="append", help="retained evidence path; repeat for aggregate candidates")
     capture.add_argument("--owner", default="quality-owner")
     capture.add_argument("--output")
     capture.set_defaults(handler=_capture_verification)
@@ -221,8 +221,8 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("target", nargs="?", default=".")
     release.add_argument("--id", required=True, dest="record_id")
     release.add_argument("--release-contract", required=True)
-    release.add_argument("--verification-record", required=True)
-    release.add_argument("--work-order", required=True)
+    release.add_argument("--verification-record", required=True, action="append", help="included verification record; repeat for aggregate releases")
+    release.add_argument("--work-order", required=True, action="append", help="released work order; repeat for aggregate releases")
     release.add_argument("--version", required=True, dest="release_version")
     release.add_argument("--authorized-by", required=True)
     release.add_argument("--tag")
