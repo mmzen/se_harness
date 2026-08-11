@@ -3,24 +3,19 @@
 from __future__ import annotations
 
 import argparse
-import platform
 import subprocess
 import sys
 from pathlib import Path
 
 from se_harness import __version__
 from se_harness.installer import (
-    CONFIG_NAME,
     HarnessError,
     apply_changes,
     ensure_target,
     format_plan,
-    load_lock,
     plan_install,
-    safe_destination,
-    tracked_content,
 )
-from se_harness.integrity import IntegrityError, compare_lock_entry
+from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
 
 
@@ -85,13 +80,13 @@ def _upgrade(args: argparse.Namespace) -> int:
     print(format_plan(changes))
     if not args.apply:
         return 0
-    apply_changes(target, changes, old_lock, allow_updates=True)
     customized = [item.path for item in changes if item.action == "customized"]
     if customized:
-        print("customized files were preserved and require manual review:", file=sys.stderr)
+        print("customized files were preserved and require manual review; no files were written:", file=sys.stderr)
         for path in customized:
             print(f"  {path}", file=sys.stderr)
         return 1
+    apply_changes(target, changes, old_lock, allow_updates=True)
     print(f"upgraded managed files to se-harness {__version__}")
     return 0
 
@@ -107,67 +102,20 @@ def _run_repository_script(target: Path, script: str, extra: list[str]) -> int:
 
 def _doctor(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    checks: list[tuple[str, bool, str]] = []
-    checks.append(("python", sys.version_info >= (3, 11), platform.python_version()))
-    checks.append(("config", (target / CONFIG_NAME).is_file(), CONFIG_NAME))
-    lock_path = target / ".engineering-harness.lock"
-    checks.append(("lock", lock_path.is_file(), lock_path.name))
-    required = [
-        "AGENTS.md",
-        "CLAUDE.md",
-        "ENGINEERING_HARNESS.md",
-        "docs/engineering/REPOSITORY_CONTEXT.md",
-        "docs/engineering/README.md",
-        "scripts/validate_engineering_artifacts.py",
-        "scripts/generate_harness_dashboard.py",
-        "scripts/harness_explorer/index.template.html",
-    ]
-    for relative in required:
-        checks.append((relative, (target / relative).is_file(), "required"))
-    claude_path = target / "CLAUDE.md"
-    if claude_path.is_file():
-        try:
-            imports_agents = any(line.strip() == "@AGENTS.md" for line in claude_path.read_text(encoding="utf-8").splitlines())
-            checks.append(("claude-import", imports_agents, "@AGENTS.md" if imports_agents else "missing standalone @AGENTS.md import"))
-        except (OSError, UnicodeError) as exc:
-            checks.append(("claude-import", False, str(exc)))
-    if lock_path.is_file():
-        try:
-            lock = load_lock(target)
-            changes, _ = plan_install(target, project_name=None, mode="upgrade")
-            desired_by_path = {item.path: item for item in changes}
-            for relative, entry in lock.get("files", {}).items():
-                path = safe_destination(target, Path(relative))
-                mode = entry.get("mode")
-                if mode == "seed":
-                    expected = entry.get("state")
-                    present = path.is_file()
-                    passed = present if expected == "present" else not path.exists()
-                    checks.append((f"seed:{relative}", passed, expected if passed else "state mismatch"))
-                    continue
-                if not path.is_file():
-                    checks.append((f"managed:{relative}", False, "missing"))
-                    continue
-                current = tracked_content(mode, path.read_bytes())
-                if current is None:
-                    checks.append((f"managed:{relative}", False, "managed fragment missing"))
-                    continue
-                desired_change = desired_by_path.get(relative)
-                desired = tracked_content(mode, desired_change.desired) if desired_change is not None else None
-                result = compare_lock_entry(lock, entry, current, desired=desired)
-                passed = result != "mismatch"
-                detail = {
-                    "exact": "unchanged (legacy exact)",
-                    "canonical": "unchanged",
-                    "legacy-canonical": "legacy canonical match; upgrade recommended",
-                    "mismatch": "customized",
-                }[result]
-                checks.append((f"managed:{relative}", passed, detail))
-        except (OSError, UnicodeError, IntegrityError, AttributeError) as exc:
-            checks.append(("lock-schema", False, str(exc)))
-    for name, passed, detail in checks:
-        print(f"{'PASS' if passed else 'FAIL'} {name}: {detail}")
-    return 0 if all(item[1] for item in checks) else 1
+    checks = inspect_installation(target)
+    for check in checks:
+        print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
+    return 0 if all(item.passed for item in checks) else 1
+
+
+def _preflight(args: argparse.Namespace) -> int:
+    report = run_preflight(
+        Path(args.target),
+        work_order_id=args.work_order,
+        phase=args.phase,
+    )
+    print(render_preflight_json(report) if args.json else render_preflight(report))
+    return 0 if report.ready else 1
 
 
 def _capture_verification(args: argparse.Namespace) -> int:
@@ -225,6 +173,13 @@ def build_parser() -> argparse.ArgumentParser:
     doctor = commands.add_parser("doctor", help="check an installed harness")
     doctor.add_argument("target", nargs="?", default=".")
     doctor.set_defaults(handler=_doctor)
+
+    preflight = commands.add_parser("preflight", help="check work-order implementation or review readiness")
+    preflight.add_argument("target", nargs="?", default=".")
+    preflight.add_argument("--work-order", required=True)
+    preflight.add_argument("--phase", choices=("start", "review"), default="start")
+    preflight.add_argument("--json", action="store_true")
+    preflight.set_defaults(handler=_preflight)
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
     upgrade.add_argument("target", nargs="?", default=".")

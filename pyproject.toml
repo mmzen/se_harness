@@ -24,10 +24,10 @@ include = ["se_harness*"]
   "templates/repository/standard/gitignore.fragment",
 ]
 "share/se-harness/templates/repository/standard/docs/engineering" = [
-  "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
-  "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
-  "templates/repository/standard/docs/engineering/README.md.tpl",
-  "templates/repository/standard/docs/engineering/REPOSITORY_CONTEXT.md.seed",
+"templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+"templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+  "templates/repository/standard/docs/engineering/README.md.seed",
+"templates/repository/standard/docs/engineering/REPOSITORY_CONTEXT.md.seed",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
 ]
@@ -35,10 +35,12 @@ include = ["se_harness*"]
 "share/se-harness/templates/repository/standard/scripts" = [
   "templates/repository/standard/scripts/check_engineering_harness.ps1",
   "templates/repository/standard/scripts/check_engineering_harness.sh",
-  "templates/repository/standard/scripts/generate_harness_dashboard.py",
-  "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+"templates/repository/standard/scripts/generate_harness_dashboard.py",
+  "templates/repository/standard/scripts/select_harness_work_order.py",
+"templates/repository/standard/scripts/validate_engineering_artifacts.py",
 ]
 "share/se-harness/templates/repository/standard/scripts/harness_explorer" = ["templates/repository/standard/scripts/harness_explorer/*"]
+"share/se-harness/templates/repository/standard/.github" = ["templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed"]
 "share/se-harness/templates/repository/standard/.github/workflows" = ["templates/repository/standard/.github/workflows/engineering-harness.yml"]
 
 [tool.unittest]

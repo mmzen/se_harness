@@ -1,18 +1,26 @@
-# Engineering Artifact System
+# SE Harness Engineering Artifact Index
 
-This directory is the machine-readable engineering memory of SE Harness. Formal artifacts use TOML front matter between `+++` delimiters; stable IDs establish typed traceability independent of file paths.
+> Repository-owned index for the self-governing `se_harness` repository. Shared workflow, decision rights, quality gates, and traceability policy are routed from `ENGINEERING_HARNESS.md` and remain managed separately.
 
-The distribution packet is under `harness-distribution/`. Commit-bound intent-to-revision traceability is governed by `revision-provenance/`. Draft aggregate multi-work-order release behavior is specified under `aggregate-release/`. The corrective portable managed-file integrity proposal is under `portable-managed-integrity/`. Verification-record supersession behavior is governed under `verification-supersession/`. Governed PyPI Trusted Publishing is specified under `pypi-publication/`. Templates and evidence are excluded from active-artifact parsing.
+## Product and governance domains
 
-Repository-specific commands, entry points, and constraints are curated in `REPOSITORY_CONTEXT.md`. It is repository-owned operating context, not a formal artifact or source of approval authority.
+- `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.
+- `revision-provenance/`: commit-bound verification and release record preparation.
+- `aggregate-release/`: exact multi-work-order release coverage.
+- `portable-managed-integrity/`: portable schema-2 managed-file integrity and migration.
+- `verification-supersession/`: explicit retention and supersession of stale ready VRECs.
+- `pypi-publication/`: governed promotion of released artifacts to PyPI.
+- `work-order-lifecycle/`: lifecycle meanings and configured verified-work consistency.
+- `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
+- `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 
-Validate and visualize with:
+## Repository-specific engineering documentation
 
-```powershell
-python scripts/validate_engineering_artifacts.py --root .
-python scripts/generate_harness_dashboard.py --root .
-```
+- `REPOSITORY_CONTEXT.md`: confirmed commands, entry points, ownership, architecture, and repository constraints.
+- `templates/`: non-authoritative starting points for new formal artifacts.
 
-The governing order is intent, capability, requirement, specification, architecture and ADR, verification, approved work order, implementation evidence, release contract, and operating contract.
+Formal artifacts use TOML front matter between `+++` delimiters. Stable IDs and declared typed relations establish authority independent of file paths. Evidence, templates, generated dashboards, source, commits, and this index remain non-authoritative unless referenced by the applicable formal record.
 
-Commit-bound instance records extend that chain: a `VREC-*` binds a work order and verification contract to a clean candidate commit and evidence; an `RLS-*` binds a release contract to that same commit. These later governance records must not claim the hash of the commit containing themselves.
+## Maintenance
+
+Update this index when an engineering domain or repository-specific guide is added, moved, superseded, or retired. Do not copy managed policy or lifecycle instructions into this owner-controlled file.

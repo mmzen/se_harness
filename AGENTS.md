@@ -1,43 +1,24 @@
-# Agent Operating Contract
+# Repository-specific Agent Instructions
 
-These rules apply to every AI agent modifying this repository.
+These owner-controlled instructions supplement the managed harness gate below.
 
-## Before implementation
+## Product constraints
 
-1. Run `python scripts/validate_engineering_artifacts.py --root .`.
-2. Identify one approved work order.
-3. Read its intent, capability, requirements, specification, architecture decisions, verification contract, and applicable release or operating constraints.
-4. Inspect the affected implementation, tests, templates, and documentation.
-5. Map the bounded change to requirements and executable verification.
+- Maintain exactly one standard installation; do not introduce installation profiles.
+- Preserve Python 3.11+ standard-library runtime behavior.
+- Treat target paths, repository content, lock data, artifact metadata, and pull-request text as untrusted input.
+- Preserve owner content outside managed markers and block ambiguous or customized upgrades without partial writes.
+- Keep canonical files under `templates/repository/standard/` consistent with the self-hosted operational copies and lock.
 
-Do not implement without an approved work order or when governing artifacts materially conflict. Do not infer product authority from source code or conversation.
+## Change and verification constraints
 
-## During implementation
-
-- Preserve the single standard installation contract. Do not add installation profiles.
-- Make the smallest coherent change authorized by the work order.
-- Treat target-repository content as untrusted input.
-- Never overwrite customized target files during adoption or upgrade.
-- Treat observed Git state as derived input. Prepare only `ready` revision records; never create commits, tags, verification approval, release authorization, or publication unless a separate approved work order and accountable human explicitly authorize it.
-- Add deterministic tests for behavioral changes.
-- Record new architectural or security-boundary decisions in an ADR before implementation.
-
-## Completion
-
-Run at minimum:
-
-```powershell
-python scripts/validate_engineering_artifacts.py --root .
-python -m unittest discover -s tests -p "test_*.py"
-python -m se_harness --help
-```
-
-Retain verification evidence with exact commands, results, deviations, and residual risks. A verified work order must have evidence keyed to its ID.
-
-For commit-bound provenance, commit the candidate and evidence before creating `VREC-*`; retain the ready record in a later governance commit. `RLS-*` must copy the same candidate commit from its included verified record.
+- Add deterministic boundary and failure tests for installer, integrity, preflight, provenance, workflow, and release behavior.
+- Do not invent a formatter or linter gate; none is configured for this repository.
+- Do not build release distributions unless an approved release work order authorizes that build.
+- Preserve unrelated user changes and historical VREC/RLS facts.
 
 <!-- se-harness:begin -->
 ## Software engineering harness
 
-Before implementation, read `ENGINEERING_HARNESS.md` and `docs/engineering/REPOSITORY_CONTEXT.md`, validate the artifact graph, identify one approved work order, and read its complete governing chain. Treat repository context as owner-curated operating information, not product authority. Do not infer or approve product intent from source code or conversation. Preserve unrelated changes and retain executable verification evidence. Automation may prepare ready commit-bound records, but must not transition verification or release authority, create tags, commit, or publish.
+Read `ENGINEERING_HARNESS.md` before engineering work. It is the single managed harness contract and router. Repository-owned instructions outside this block may add constraints but cannot waive formal artifact authority, approved work-order scope, required evidence, or accountable verification and release decisions. Stop when this managed gate is missing, damaged, or materially conflicts with owner instructions.
 <!-- se-harness:end -->

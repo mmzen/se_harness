@@ -21,6 +21,7 @@ from se_harness.integrity import (
     canonical_text_equal,
     compare_lock_entry,
     digest_for_schema,
+    matches_legacy_newline_variant,
     parse_lock,
     raw_sha256,
 )
@@ -36,6 +37,10 @@ FRAGMENT_TARGETS = {
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
+BASELINE_HARNESS_VERSION = "0.2.0"
+BASELINE_HARNESS_TAG = "v0.2.0"
+BASELINE_HARNESS_WHEEL = "se_harness-0.2.0-py3-none-any.whl"
+BASELINE_HARNESS_WHEEL_SHA256 = "56db717e5287492c421e11157545586b1e8f0ec2dd4011a9932ccf35f233d63d"
 
 
 class HarnessError(RuntimeError):
@@ -116,6 +121,12 @@ def _templates() -> list[TemplateFile]:
         else:
             result.append(TemplateFile(source, relative, "managed"))
     return result
+
+
+def template_files() -> list[TemplateFile]:
+    """Return the deterministic standard-template manifest."""
+
+    return _templates()
 
 
 def _block(fragment: bytes) -> bytes:
@@ -206,6 +217,10 @@ def _variables(target: Path, project_name: str | None, installed_at: str | None 
         "PROJECT_NAME": selected_name,
         "HARNESS_VERSION": __version__,
         "INSTALL_DATE": selected_date,
+        "BASELINE_HARNESS_VERSION": BASELINE_HARNESS_VERSION,
+        "BASELINE_HARNESS_TAG": BASELINE_HARNESS_TAG,
+        "BASELINE_HARNESS_WHEEL": BASELINE_HARNESS_WHEEL,
+        "BASELINE_HARNESS_WHEEL_SHA256": BASELINE_HARNESS_WHEEL_SHA256,
     }
 
 
@@ -246,9 +261,37 @@ def plan_install(
 
         if item.mode == "seed":
             # Seed files become repository-owned as soon as they are installed.
-            # A prior lock entry remembers intentional removal and prevents later
-            # upgrades from recreating the file.
-            action = "add" if current is None and old_entry.get("mode") != "seed" else "unchanged"
+            # A prior seed entry remembers intentional removal and prevents later
+            # upgrades from recreating the file. A prior managed entry is an
+            # explicit ownership-mode migration and is safe only when the old
+            # managed bytes still match their lock entry.
+            old_mode = old_entry.get("mode")
+            if old_mode == "seed":
+                action = "unchanged"
+            elif old_mode in {"managed", "fragment"}:
+                if current is None:
+                    action = "customized"
+                else:
+                    try:
+                        old_tracked = tracked_content(str(old_mode), current)
+                        if old_tracked is None:
+                            raise HarnessError(f"prior managed content is unavailable: {relative}")
+                        match = compare_lock_entry(old_lock, old_entry, old_tracked)
+                        if (
+                            match == "mismatch"
+                            and old_lock.get("schema") == 1
+                            and matches_legacy_newline_variant(old_tracked, old_entry.get("sha256"))
+                        ):
+                            match = "legacy-canonical"
+                    except IntegrityError as exc:
+                        raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+                    action = "update" if mode == "upgrade" and match != "mismatch" else "customized"
+            elif current is None:
+                action = "add"
+            else:
+                # Existing untracked content is explicitly adopted as an
+                # owner-controlled seed. Its bytes are never replaced.
+                action = "adopt"
         elif current is None:
             action = "add"
         elif current == desired:
@@ -305,9 +348,9 @@ def plan_install(
 def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, allow_updates: bool) -> dict:
     target.mkdir(parents=True, exist_ok=True)
     changes = list(changes)
-    blocking = {"conflict"} if not allow_updates else set()
+    blocking = {"conflict", "customized"}
     if any(item.action in blocking for item in changes):
-        raise HarnessError("installation has conflicts; no files were written")
+        raise HarnessError("installation has conflicts or customizations; no files were written")
 
     safe_actions = {"add", "integrate"}
     if allow_updates:

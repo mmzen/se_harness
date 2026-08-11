@@ -1,33 +1,33 @@
 # Repository Context for {{PROJECT_NAME}}
 
-> Repository-owned after installation. This context helps engineering agents operate the repository, but it is not approved product intent, a requirement, architecture approval, or release authority. Replace every `TODO` with owner-confirmed facts.
+> Repository-owned after installation. This context helps engineering agents operate the repository, but it is not approved product intent, a requirement, architecture approval, work authorization, verification, or release authority. Replace every named placeholder with owner-confirmed facts before implementation preflight.
 
 ## Purpose
 
-- Repository purpose: TODO
-- Primary users or operators: TODO
-- Accountable repository owner: TODO
+- Repository purpose: TODO[repository-purpose]
+- Primary users or operators: TODO[primary-users]
+- Accountable repository owners: TODO[accountable-owners]
 
 ## Commands
 
-- Setup: TODO
-- Build: TODO
-- Test: TODO
-- Lint or format: TODO
-- Additional required verification: TODO
+- Setup: TODO[setup-command]
+- Build: TODO[build-command]
+- Test: TODO[test-command]
+- Lint or format: TODO[lint-command-or-none]
+- Additional required verification: TODO[additional-verification]
 
 ## Architecture
 
-- Entry points: TODO
-- Major components and responsibilities: TODO
-- External services or dependencies: TODO
+- Entry points: TODO[entry-points]
+- Major components and responsibilities: TODO[major-components]
+- External services or dependencies: TODO[external-dependencies-or-none]
 
 ## Repository constraints
 
-- Generated paths: TODO
-- Restricted or sensitive paths: TODO
-- Files requiring specialized review: TODO
-- Local conventions not captured elsewhere: TODO
+- Generated paths: TODO[generated-paths]
+- Restricted or sensitive paths: TODO[restricted-paths]
+- Files requiring specialized review: TODO[specialized-review-paths]
+- Local conventions not captured elsewhere: TODO[local-conventions]
 
 ## Maintenance
 

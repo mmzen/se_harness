@@ -11,14 +11,14 @@ SE Harness is specification-driven, uses Python 3.11 or later, and gives each in
 Every installation receives the same standard harness:
 
 - formal Markdown artifacts for intent, capabilities, requirements, specifications, architecture, decisions, verification, work orders, releases, and operations;
-- one shared repository-local agent contract, loaded by Codex through `AGENTS.md` and by Claude Code through a thin `CLAUDE.md` import;
+- one managed engineering contract and router, reached by Codex through a bounded `AGENTS.md` gate and by Claude Code through a thin `CLAUDE.md` import;
 - a repository-owned context file for confirmed purpose, commands, architecture, and constraints;
 - a deterministic validator for artifact structure, coverage, relations, evidence paths, and commit provenance;
 - Harness Explorer, a self-contained dashboard for traceability, readiness, findings, and anomalies;
 - commit-bound verification and release records;
 - retained evidence conventions and reusable artifact templates;
 - safe adoption and hash-based upgrades that preserve repository customizations;
-- a GitHub Actions workflow using the same repository-local checks.
+- a GitHub Actions workflow separating an exact released baseline checker from candidate behavior and binding pull requests to one explicit work order.
 
 There is exactly one standard installation. Minimal, offline, and selectable installation profiles are deliberately unsupported.
 
@@ -60,20 +60,22 @@ After either command, curate `docs/engineering/REPOSITORY_CONTEXT.md`. The insta
 
 ## Agent instructions and repository context
 
-`AGENTS.md` is the canonical shared operating contract. The harness owns only its bounded `se-harness` block; repositories own all content outside that block and may add nested `AGENTS.md` or `AGENTS.override.md` files for component-specific rules.
+`AGENTS.md` is the universal repository entry. The harness owns only its short bounded `se-harness` gate; repositories own all content outside that block and may add nested `AGENTS.md` or `AGENTS.override.md` files for component-specific rules. The managed gate points only to `ENGINEERING_HARNESS.md`, which is the single fully managed contract and stage-aware router.
 
 `CLAUDE.md` is a thin compatibility adapter containing `@AGENTS.md` inside the same kind of bounded block. Repository-specific Claude Code instructions may be kept outside the block. This avoids maintaining a second copy of shared rules.
 
 `docs/engineering/REPOSITORY_CONTEXT.md` is seeded once and immediately becomes repository-owned. Confirm the exact setup, build, test, lint, entry points, generated paths, sensitive paths, and specialized review constraints there. It informs execution but cannot replace approved intent, requirements, architecture decisions, or a work order.
 
-During upgrade, shared managed fragments are hash-checked; customized content is preserved. Repository context is neither content-hashed nor overwritten. If its accounted seed is intentionally removed, upgrade does not silently recreate it, while `doctor` reports the missing required context for explicit resolution.
+`docs/engineering/README.md` is also an owner-owned seed. Use it only to index local artifact domains and repository-specific engineering documentation. Managed workflow, decision rights, quality gates, and traceability remain focused files linked directly by `ENGINEERING_HARNESS.md`.
+
+During upgrade, shared managed fragments are hash-checked; customized content is preserved. Repository-owned seeds are neither content-hashed nor overwritten. If a required seed is intentionally removed, upgrade does not silently recreate it, while `doctor` reports the missing file for explicit resolution.
 
 ## Five-minute operating workflow
 
 1. Run `init` for a new repository or `adopt` for an existing one.
 2. Author the intent, capability, requirements, specifications, architecture, decisions, verification contract, and work order in `docs/engineering/`.
 3. Obtain explicit human approval for the governing artifacts and work order.
-4. Validate the graph and open Harness Explorer.
+4. Run `harnessctl preflight . --work-order WO-...` and read its complete manifest.
 5. Implement only the approved work order and retain evidence keyed to its ID.
 6. Run the required tests and checks, then commit the clean candidate source and evidence.
 7. Prepare a commit-bound verification record, obtain human assurance review, and retain the record in a later governance commit.
@@ -83,9 +85,13 @@ Typical operating commands:
 
 ```powershell
 harnessctl doctor C:\path\to\repository
+harnessctl preflight C:\path\to\repository --work-order WO-001
+harnessctl preflight C:\path\to\repository --work-order WO-001 --phase review
 harnessctl validate C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
+
+Start preflight accepts `approved` or `in_progress` work. Review preflight additionally accepts `implemented`, `verified`, or `released` so pull-request checks do not require dishonest lifecycle status. Preflight checks installed integrity, named context fields, the formal graph, and the selected complete chain, then reports exact files and repository commands without executing or modifying them.
 
 Harness Explorer is generated at:
 
@@ -235,8 +241,9 @@ A `different` state is review information, not automatic proof of failure. Commi
 | `validate` | Validates the formal artifact graph and preserves the validator exit status. |
 | `dashboard` | Generates the deterministic Harness Explorer and preserves generator status. |
 | `doctor` | Checks runtime compatibility, configuration, lock integrity, required files, and managed-file drift. |
+| `preflight` | Performs read-only start or review readiness checks for one explicit work order and prints its governing manifest. |
 | `upgrade` | Plans a managed-file upgrade without writing by default. |
-| `upgrade --apply` | Applies only additions, integrations, and updates to unmodified managed content. |
+| `upgrade --apply` | Transactionally applies additions, integrations, safe ownership migrations, and updates only when no customization or conflict exists. |
 | `capture-verification` | Prepares a `ready` single or aggregate verification record at one final candidate commit. |
 | `prepare-release` | Prepares a `ready` single or aggregate release record using that same candidate commit. |
 
@@ -249,7 +256,7 @@ Use `harnessctl <command> --help` for all arguments.
 - Existing `AGENTS.md`, `CLAUDE.md`, and `.gitignore` receive bounded managed blocks rather than wholesale replacement.
 - Repository context is seeded only when absent and then remains repository-owned.
 - `.engineering-harness.lock` records explicit schema-2 canonical UTF-8 text hashes and management modes for tool-owned content.
-- Upgrade changes only missing or unmodified managed content; customized files remain untouched for manual reconciliation.
+- Upgrade changes only missing or unmodified managed content; any customization or conflict blocks the entire apply so the repository and lock remain unchanged.
 - Symlink traversal, repository escape, unsafe evidence paths, absent Git `HEAD`, dirty verification state, duplicate output, and inconsistent provenance fail closed.
 - Adoption inventories observable repository signals but never manufactures approved product authority.
 - Automation may prepare `ready` records but never grants verification or release authority.
@@ -264,9 +271,12 @@ Use `harnessctl <command> --help` for all arguments.
 AGENTS.md                             bounded agent operating contract
 CLAUDE.md                             thin import of the shared AGENTS contract
 ENGINEERING_HARNESS.md                repository engineering entry point
+.github/
+  PULL_REQUEST_TEMPLATE.md             owner-editable structured work-order declaration
 .github/workflows/
-  engineering-harness.yml            CI validation
+  engineering-harness.yml            released-baseline and candidate CI checks
 docs/engineering/
+  README.md                            repository-owned artifact-domain index
   REPOSITORY_CONTEXT.md               repository-owned commands and constraints
   DECISION_RIGHTS.md                  human and automation authority
   QUALITY_GATES.md                    G0-G5 gate definitions
@@ -276,6 +286,7 @@ docs/engineering/
 scripts/
   validate_engineering_artifacts.py   deterministic validator
   generate_harness_dashboard.py      deterministic Explorer generator
+  select_harness_work_order.py       strict GitHub event field parser
   harness_explorer/                   self-contained Explorer view
 target/harness-dashboard/             generated read-only dashboard
 ```
@@ -296,7 +307,20 @@ Apply safe managed changes:
 harnessctl upgrade C:\path\to\repository --apply
 ```
 
-Schema-2 locks use SHA-256 over `utf8-text-lf-v1`, so LF, CRLF, and CR checkout representations compare equally while every other content distinction remains significant. Schema-1 raw-byte locks remain readable and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. Customized or ambiguous managed files are reported for human reconciliation and are not overwritten.
+Schema-2 locks use SHA-256 over `utf8-text-lf-v1`, so LF, CRLF, and CR checkout representations compare equally while every other content distinction remains significant. Schema-1 raw-byte locks remain readable and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. A managed file may become an owner seed only when its old bytes still match the prior lock. Customized, missing, or ambiguous migrations block the whole apply and require human reconciliation.
+
+## Pull-request enforcement and bootstrap
+
+The installed pull-request template declares exactly one standalone `Harness-Work-Order: WO-...` field. CI parses it as untrusted data, rejects zero, multiple, malformed, or injection-shaped values, and runs review preflight. Reviewers still decide whether the diff semantically stays within that work order.
+
+The required workflow has two assurance lanes:
+
+- an independent baseline installs the exact `se-harness==0.2.0` wheel with its retained SHA-256 and runs the validator packaged by that release;
+- the candidate lane exercises the declared harness version, strict work-order selection, review preflight, current validator, and Harness Explorer.
+
+The harness repository necessarily has a one-release bootstrap lag: unreleased checker behavior is candidate verification, not independent proof. After publication, a separate governed pin update promotes that behavior into the external baseline. Required status checks, CODEOWNERS review, and branch protection remain accountable repository-host settings; installation does not claim to configure them automatically.
+
+Install or adopt target repositories from an actual released distribution. A source checkout can exercise the candidate lane for harness development, but an unreleased version is intentionally not treated as an externally available target-repository checker.
 
 ## Distribution repository
 
