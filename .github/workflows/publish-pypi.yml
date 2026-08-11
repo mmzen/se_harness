@@ -1,0 +1,120 @@
+name: Publish release assets to PyPI
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Final GitHub release tag (vMAJOR.MINOR.PATCH)
+        required: true
+        type: string
+      wheel_sha256:
+        description: Expected lowercase SHA-256 of the released wheel
+        required: true
+        type: string
+      sdist_sha256:
+        description: Expected lowercase SHA-256 of the released source distribution
+        required: true
+        type: string
+
+concurrency:
+  group: pypi-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Promote verified release assets
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/se-harness
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download and verify the authorized GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          WHEEL_SHA256: ${{ inputs.wheel_sha256 }}
+          SDIST_SHA256: ${{ inputs.sdist_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "release tag must match vMAJOR.MINOR.PATCH" >&2
+            exit 1
+          fi
+          if [[ ! "$WHEEL_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+            echo "wheel SHA-256 must be 64 lowercase hexadecimal characters" >&2
+            exit 1
+          fi
+          if [[ ! "$SDIST_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+            echo "sdist SHA-256 must be 64 lowercase hexadecimal characters" >&2
+            exit 1
+          fi
+
+          release_state="$(gh release view "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --json tagName,isDraft,isPrerelease)"
+          if [[ "$(jq -r '.tagName' <<<"$release_state")" != "$RELEASE_TAG" ]]; then
+            echo "GitHub release tag does not match the requested tag" >&2
+            exit 1
+          fi
+          if [[ "$(jq -r '.isDraft' <<<"$release_state")" != "false" ]]; then
+            echo "draft GitHub releases cannot be published to production PyPI" >&2
+            exit 1
+          fi
+          if [[ "$(jq -r '.isPrerelease' <<<"$release_state")" != "false" ]]; then
+            echo "prerelease GitHub releases are outside this production workflow" >&2
+            exit 1
+          fi
+
+          version="${RELEASE_TAG#v}"
+          wheel_name="se_harness-${version}-py3-none-any.whl"
+          sdist_name="se_harness-${version}.tar.gz"
+
+          mkdir release-assets dist
+          gh release download "$RELEASE_TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --dir release-assets
+
+          for asset in "$wheel_name" "$sdist_name" SHA256SUMS; do
+            if [[ ! -f "release-assets/$asset" ]]; then
+              echo "required release asset is missing: $asset" >&2
+              exit 1
+            fi
+          done
+
+          actual_wheel_sha256="$(sha256sum "release-assets/$wheel_name" | awk '{print $1}')"
+          actual_sdist_sha256="$(sha256sum "release-assets/$sdist_name" | awk '{print $1}')"
+          if [[ "$actual_wheel_sha256" != "$WHEEL_SHA256" ]]; then
+            echo "released wheel SHA-256 does not match authorized evidence" >&2
+            exit 1
+          fi
+          if [[ "$actual_sdist_sha256" != "$SDIST_SHA256" ]]; then
+            echo "released sdist SHA-256 does not match authorized evidence" >&2
+            exit 1
+          fi
+
+          expected_manifest="$(mktemp)"
+          trap 'rm -f "$expected_manifest"' EXIT
+          printf '%s  %s\n%s  %s\n' \
+            "$WHEEL_SHA256" "$wheel_name" \
+            "$SDIST_SHA256" "$sdist_name" >"$expected_manifest"
+          if ! cmp --silent "$expected_manifest" release-assets/SHA256SUMS; then
+            echo "SHA256SUMS does not exactly match the authorized artifacts" >&2
+            exit 1
+          fi
+
+          cp -- "release-assets/$wheel_name" "release-assets/$sdist_name" dist/
+
+      - name: Publish exact distributions with Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@a892a5a61159132606e93a2fa6f4358831b04d26 # v1.14.2
+        with:
+          packages-dir: dist/
+          verify-metadata: true
+          attestations: true
+          print-hash: true
