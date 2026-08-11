@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "se-harness"
+version = "0.2.0"
+description = "A repository-native, specification-driven software-engineering harness"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+harnessctl = "se_harness.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["se_harness*"]
+
+[tool.setuptools.data-files]
+"share/se-harness/templates/repository/standard" = [
+  "templates/repository/standard/.engineering-harness.toml.tpl",
+  "templates/repository/standard/AGENTS.md.fragment",
+  "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+  "templates/repository/standard/gitignore.fragment",
+]
+"share/se-harness/templates/repository/standard/docs/engineering" = [
+  "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+  "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+  "templates/repository/standard/docs/engineering/README.md.tpl",
+  "templates/repository/standard/docs/engineering/TRACEABILITY.md",
+  "templates/repository/standard/docs/engineering/WORKFLOW.md",
+]
+"share/se-harness/templates/repository/standard/docs/engineering/templates" = ["templates/repository/standard/docs/engineering/templates/*"]
+"share/se-harness/templates/repository/standard/scripts" = [
+  "templates/repository/standard/scripts/check_engineering_harness.ps1",
+  "templates/repository/standard/scripts/check_engineering_harness.sh",
+  "templates/repository/standard/scripts/generate_harness_dashboard.py",
+  "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+]
+"share/se-harness/templates/repository/standard/scripts/harness_explorer" = ["templates/repository/standard/scripts/harness_explorer/*"]
+"share/se-harness/templates/repository/standard/.github/workflows" = ["templates/repository/standard/.github/workflows/engineering-harness.yml"]
+
+[tool.unittest]
+start-directory = "tests"

@@ -1,0 +1,3 @@
+## Software engineering harness
+
+Before implementation, read `ENGINEERING_HARNESS.md`, validate the artifact graph, identify one approved work order, and read its complete governing chain. Do not infer or approve product intent from source code or conversation. Preserve unrelated changes and retain executable verification evidence. Automation may prepare ready commit-bound records, but must not transition verification or release authority, create tags, commit, or publish.
