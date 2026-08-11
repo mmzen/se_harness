@@ -8,9 +8,11 @@ run before the repository's normal toolchain is available.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
 import sys
+from collections import Counter
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
@@ -20,6 +22,19 @@ try:
     import tomllib
 except ModuleNotFoundError as exc:  # pragma: no cover - version guard
     raise SystemExit("Python 3.11 or later is required (missing tomllib).") from exc
+
+_LAYOUT_PATH = Path(__file__).with_name("artifact_layout_registry.py")
+_LAYOUT_SPEC = importlib.util.spec_from_file_location("_se_harness_artifact_layout_registry", _LAYOUT_PATH)
+if _LAYOUT_SPEC is None or _LAYOUT_SPEC.loader is None:
+    raise RuntimeError(f"cannot load artifact layout registry: {_LAYOUT_PATH}")
+_LAYOUT = importlib.util.module_from_spec(_LAYOUT_SPEC)
+_LAYOUT_SPEC.loader.exec_module(_LAYOUT)
+ARTIFACT_DIRECTORIES = _LAYOUT.ARTIFACT_DIRECTORIES
+ARTIFACT_PREFIXES = _LAYOUT.ARTIFACT_PREFIXES
+artifact_domain_from_relative_path = _LAYOUT.artifact_domain_from_relative_path
+canonical_artifact_relative_path = _LAYOUT.canonical_artifact_relative_path
+common_artifact_domain = _LAYOUT.common_artifact_domain
+repository_record_relative_path = _LAYOUT.repository_record_relative_path
 
 
 ALLOWED_STATUSES = {
@@ -42,21 +57,7 @@ ACTIVE_COVERAGE_STATUSES = {
     "released",
 }
 
-TYPE_PREFIX = {
-    "intent": "INT-",
-    "capability": "CAP-",
-    "requirement": "REQ-",
-    "specification": "SPEC-",
-    "architecture": "ARCH-",
-    "adr": "ADR-",
-    "verification": "VER-",
-    "work_order": "WO-",
-    "release_contract": "REL-",
-    "verification_record": "VREC-",
-    "release_record": "RLS-",
-    "operating_contract": "OPS-",
-    "risk_acceptance": "RISK-",
-}
+TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -976,6 +977,71 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
     return errors
 
 
+def validate_canonical_layout(
+    artifacts: list[Artifact],
+    repository_root: Path,
+    artifact_root: Path,
+    errors: list[Diagnostic],
+) -> list[Diagnostic]:
+    canonical_root = repository_root / "docs" / "engineering"
+    if artifact_root.resolve() != canonical_root.resolve():
+        return []
+
+    invalid_paths = {item.path for item in errors}
+    id_counts = Counter(artifact.artifact_id for artifact in artifacts)
+    catalog = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_id != "<unknown>" and id_counts[artifact.artifact_id] == 1
+    }
+    warnings: list[Diagnostic] = []
+
+    for artifact in artifacts:
+        actual = _display_path(artifact.path, repository_root)
+        artifact_type = artifact.artifact_type
+        artifact_id = artifact.artifact_id
+        if (
+            actual in invalid_paths
+            or artifact_type not in ARTIFACT_DIRECTORIES
+            or id_counts[artifact_id] != 1
+            or ID_PATTERN.fullmatch(artifact_id) is None
+            or not artifact_id.startswith(ARTIFACT_PREFIXES[artifact_type])
+        ):
+            continue
+
+        if artifact_type in {"verification_record", "release_record"}:
+            relation = "verifies_work_order" if artifact_type == "verification_record" else "releases_work"
+            work_order_ids = sorted(_relation_targets(artifact, relation))
+            work_order_paths: list[str] = []
+            complete = bool(work_order_ids)
+            for work_order_id in work_order_ids:
+                work_order = catalog.get(work_order_id)
+                if work_order is None or work_order.artifact_type != "work_order":
+                    complete = False
+                    break
+                work_order_paths.append(_display_path(work_order.path, repository_root))
+            if not complete:
+                continue
+            domain = common_artifact_domain(work_order_paths)
+            expected = repository_record_relative_path(artifact_type, artifact_id, domain)
+        else:
+            domain = artifact_domain_from_relative_path(actual)
+            if domain is None:
+                continue
+            expected = canonical_artifact_relative_path(domain, artifact_type, artifact_id)
+
+        expected_text = expected.as_posix()
+        if actual != expected_text:
+            warnings.append(
+                Diagnostic(
+                    actual,
+                    "W013",
+                    f"artifact '{artifact_id}' is valid outside its canonical location; expected '{expected_text}'",
+                )
+            )
+    return sorted(set(warnings))
+
+
 def validate_repository(repository_root: Path, artifact_root: Path | None = None) -> ValidationReport:
     repository_root = repository_root.resolve()
     selected_artifact_root = (artifact_root or repository_root / "docs" / "engineering").resolve()
@@ -1005,10 +1071,11 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         )
         errors.extend(validate_requirement_coverage(artifacts, repository_root))
 
+    warnings = validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors)
     return ValidationReport(
         artifacts=artifacts,
         errors=sorted(set(errors)),
-        warnings=[],
+        warnings=warnings,
     )
 
 

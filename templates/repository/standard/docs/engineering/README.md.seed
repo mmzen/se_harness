@@ -6,6 +6,8 @@
 
 - TODO[artifact-domain]: describe the domain and link its packet directory.
 
+Create a domain with `harnessctl scaffold-domain . --domain <lowercase-kebab-domain>`, then create incomplete draft artifacts with `harnessctl create-artifact`. Each domain uses canonical type directories for navigation; stable metadata, typed relations, and lifecycle decisions remain authoritative.
+
 ## Repository-specific engineering documentation
 
 - `REPOSITORY_CONTEXT.md`: owner-confirmed commands, entry points, and constraints.
@@ -13,4 +15,4 @@
 
 ## Maintenance
 
-Update this index when domains or local engineering documents are added, moved, or retired. Formal authority comes from typed artifact metadata and accountable lifecycle decisions, not from this index.
+Update this index when domains or local engineering documents are added, moved, or retired. Upgrade never rewrites this repository-owned index or moves product artifacts. Formal authority comes from typed artifact metadata and accountable lifecycle decisions, not from this index.
