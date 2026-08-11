@@ -2,7 +2,7 @@
 id = "VREC-VSP-001"
 type = "verification_record"
 title = "Verification candidate for WO-VSP-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
@@ -20,6 +20,8 @@ conforms_to = ["VER-VSP-001"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-VSP-001` to candidate commit `9ceecd74469d96be8dd94f8023938fadf9b74980`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-VSP-001` to candidate commit `9ceecd74469d96be8dd94f8023938fadf9b74980`. The capture command originally prepared it as `ready` and did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+The accountable repository owner reviewed the retained evidence and explicitly instructed `i validate, then transition and governance commit` on 2026-08-11. That human decision, authorized and recorded by `WO-REV-005`, transitioned this record from `ready` to `verified`; automation did not grant the authority.
