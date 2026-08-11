@@ -76,6 +76,7 @@ EXCLUDED_DIRECTORY_NAMES = {"templates", "evidence", ".git", ".idea", "target", 
 PROVENANCE_RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("verification_record", "verifies_work_order"): {"work_order"},
     ("verification_record", "conforms_to"): {"verification"},
+    ("verification_record", "superseded_by"): {"verification_record"},
     ("release_record", "satisfies"): {"release_contract"},
     ("release_record", "includes_verification"): {"verification_record"},
     ("release_record", "releases_work"): {"work_order"},
@@ -451,8 +452,51 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "field 'artifact_snapshot_sha256' must be a lowercase SHA-256 value",
                 )
             _validate_evidence_paths(artifact, errors, report_root)
-            if artifact.status not in {"ready", "verified", "released"}:
-                _add_error(errors, artifact, report_root, "E009", "verification_record status must be ready, verified, or released")
+            if artifact.status not in {"ready", "verified", "released", "superseded"}:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E009",
+                    "verification_record status must be ready, verified, released, or superseded",
+                )
+            if artifact.status == "superseded":
+                _validate_timestamp(artifact, "superseded_at", errors, report_root)
+                _require_non_empty_string(artifact, "supersession_authorized_by", errors, report_root)
+                successors = _require_non_empty_string_list(
+                    artifact,
+                    "superseded_by",
+                    errors,
+                    report_root,
+                    code="E009",
+                    container=artifact.relations,
+                )
+                if successors is not None and len(successors) != 1:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E009",
+                        "relation 'superseded_by' must contain exactly one verification record",
+                    )
+            else:
+                for field_name in ("superseded_at", "supersession_authorized_by"):
+                    if field_name in artifact.metadata:
+                        _add_error(
+                            errors,
+                            artifact,
+                            report_root,
+                            "E009",
+                            f"field '{field_name}' is allowed only when verification_record status is superseded",
+                        )
+                if "superseded_by" in artifact.relations:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E009",
+                        "relation 'superseded_by' is allowed only when verification_record status is superseded",
+                    )
 
         if artifact_type == "release_record":
             _validate_git_identity(artifact, errors, report_root)
@@ -552,6 +596,7 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
     errors: list[Diagnostic] = []
     catalog = {artifact.artifact_id: artifact for artifact in artifacts if artifact.artifact_id != "<unknown>"}
     release_versions: dict[str, list[Artifact]] = {}
+    supersession_cycle_nodes = _supersession_cycle_nodes(artifacts)
 
     for artifact in artifacts:
         if artifact.artifact_type == "verification_record":
@@ -565,7 +610,7 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
                         "E010",
                         f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
                     )
-            for relation_name in ("verifies_work_order", "conforms_to"):
+            for relation_name in ("verifies_work_order", "conforms_to", "superseded_by"):
                 duplicates = _duplicate_strings(artifact.relations.get(relation_name))
                 if duplicates:
                     _add_error(
@@ -643,6 +688,37 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
                         "E010",
                         f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
                     )
+            if artifact.status == "superseded":
+                successor_ids = sorted(_relation_targets(artifact, "superseded_by"))
+                if len(successor_ids) == 1:
+                    successor_id = successor_ids[0]
+                    successor = catalog.get(successor_id)
+                    if successor is not None and successor.artifact_type == "verification_record":
+                        if successor.status not in {"verified", "released"}:
+                            _add_error(
+                                errors,
+                                artifact,
+                                report_root,
+                                "E010",
+                                f"superseding verification record '{successor_id}' must be verified or released",
+                            )
+                        missing_work = work_order_ids - _relation_targets(successor, "verifies_work_order")
+                        if missing_work:
+                            _add_error(
+                                errors,
+                                artifact,
+                                report_root,
+                                "E010",
+                                f"superseding verification record '{successor_id}' omits work orders: {', '.join(sorted(missing_work))}",
+                            )
+            if artifact.artifact_id in supersession_cycle_nodes:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"verification supersession cycle detected among: {', '.join(sorted(supersession_cycle_nodes))}",
+                )
 
         if artifact.artifact_type != "release_record":
             continue
@@ -682,7 +758,16 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
             verification = catalog.get(verification_id)
             if verification is None or verification.artifact_type != "verification_record":
                 continue
-            verification_work.update(_relation_targets(verification, "verifies_work_order"))
+            if verification.status in {"ready", "verified", "released"}:
+                verification_work.update(_relation_targets(verification, "verifies_work_order"))
+            if artifact.status in {"ready", "released"} and verification.status == "superseded":
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E010",
+                    f"active release record must not include superseded verification record '{verification_id}'",
+                )
             if release_commit != verification.metadata.get("commit") or release_format != verification.metadata.get("git_object_format"):
                 _add_error(
                     errors,
@@ -746,6 +831,46 @@ def validate_revision_consistency(artifacts: list[Artifact], report_root: Path) 
         for record in records:
             _add_error(errors, record, report_root, "E010", f"duplicate release record version '{version}' among {record_ids}")
     return errors
+
+
+def _supersession_cycle_nodes(artifacts: list[Artifact]) -> set[str]:
+    graph = {
+        artifact.artifact_id: sorted(_relation_targets(artifact, "superseded_by"))
+        for artifact in artifacts
+        if artifact.artifact_type == "verification_record"
+    }
+    state: dict[str, int] = {}
+    cycle_nodes: set[str] = set()
+
+    for start in sorted(graph):
+        if state.get(start, 0) != 0:
+            continue
+        path = [start]
+        positions = {start: 0}
+        frames = [(start, 0)]
+        state[start] = 1
+        while frames:
+            node, successor_index = frames[-1]
+            successors = graph.get(node, [])
+            if successor_index >= len(successors):
+                frames.pop()
+                path.pop()
+                positions.pop(node, None)
+                state[node] = 2
+                continue
+            successor = successors[successor_index]
+            frames[-1] = (node, successor_index + 1)
+            if successor not in graph:
+                continue
+            successor_state = state.get(successor, 0)
+            if successor_state == 0:
+                state[successor] = 1
+                positions[successor] = len(path)
+                path.append(successor)
+                frames.append((successor, 0))
+            elif successor_state == 1:
+                cycle_nodes.update(path[positions[successor] :])
+    return cycle_nodes
 
 
 def _relation_targets(artifact: Artifact, relation_name: str) -> set[str]:

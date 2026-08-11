@@ -16,7 +16,7 @@ SCRIPTS = REPOSITORY_ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from generate_harness_dashboard import generate_snapshot  # noqa: E402
+from generate_harness_dashboard import generate_snapshot, render_dashboard  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
 
 from se_harness.cli import main  # noqa: E402
@@ -195,6 +195,20 @@ tag = "v2.0.0"''',
     ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
 
 
+def superseded_record(record: str, successor_id: str) -> str:
+    lines = record.splitlines()
+    lines = ['status = "superseded"' if line.startswith("status = ") else line for line in lines]
+    relation_index = lines.index("[relations]")
+    lines[relation_index:relation_index] = [
+        'superseded_at = "2026-08-11T15:00:00Z"',
+        'supersession_authorized_by = "quality-owner"',
+        "",
+    ]
+    closing_index = lines.index("+++", relation_index)
+    lines[closing_index:closing_index] = [f'superseded_by = ["{successor_id}"]']
+    return "\n".join(lines) + "\n"
+
+
 class RevisionValidatorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -341,6 +355,141 @@ class RevisionValidatorTests(unittest.TestCase):
         snapshot, _, _ = generate_snapshot(self.root)
         self.assertEqual("different", snapshot["revision_provenance"][0]["match_state"])
         self.assertIn("I-REV-001", {item["rule"] for item in snapshot["findings"]})
+
+    def test_valid_supersession_preserves_coverage_and_projects_lineage(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        source = superseded_record(verification_record("a" * 40), "VREC-002")
+        write(self.root / "docs/engineering/product/verification-records/VREC-001.md", source)
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-002.md",
+            aggregate_verification_record("b" * 40),
+        )
+
+        report = validate_repository(self.root)
+        self.assertEqual([], report.errors)
+        snapshot, _, _ = generate_snapshot(self.root)
+        source_projection = next(item for item in snapshot["revision_provenance"] if item["id"] == "VREC-001")
+        successor_projection = next(item for item in snapshot["revision_provenance"] if item["id"] == "VREC-002")
+        self.assertEqual("historical", source_projection["lifecycle_class"])
+        self.assertEqual(["VREC-002"], source_projection["superseded_by"])
+        self.assertEqual("2026-08-11T15:00:00Z", source_projection["superseded_at"])
+        self.assertEqual("quality-owner", source_projection["supersession_authorized_by"])
+        self.assertEqual(["VREC-001"], successor_projection["supersedes"])
+        self.assertNotIn("W-REV-004", {item["rule"] for item in snapshot["findings"]})
+        dashboard = render_dashboard(snapshot)
+        self.assertIn("Superseded by", dashboard)
+        self.assertIn("Supersession authorized by", dashboard)
+
+    def test_supersession_requires_structured_fields_only_on_superseded_records(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        write(record_path, verification_record("a" * 40, status="superseded"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("superseded_at" in message for message in messages))
+        self.assertTrue(any("supersession_authorized_by" in message for message in messages))
+        self.assertTrue(any("superseded_by" in message for message in messages))
+
+        invalid_ready = superseded_record(verification_record("a" * 40, status="ready"), "VREC-002").replace(
+            'status = "superseded"', 'status = "ready"', 1
+        )
+        write(record_path, invalid_ready)
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("allowed only" in message and "superseded_at" in message for message in messages))
+        self.assertTrue(any("allowed only" in message and "superseded_by" in message for message in messages))
+
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-002.md",
+            aggregate_verification_record("b" * 40),
+        )
+        invalid_fields = superseded_record(verification_record("a" * 40), "VREC-002").replace(
+            'superseded_at = "2026-08-11T15:00:00Z"',
+            'superseded_at = "2026-08-11"',
+        ).replace(
+            'supersession_authorized_by = "quality-owner"',
+            'supersession_authorized_by = " "',
+        )
+        write(record_path, invalid_fields)
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("superseded_at" in message and "YYYY-MM-DDTHH:MM:SSZ" in message for message in messages))
+        self.assertTrue(any("supersession_authorized_by" in message and "non-empty string" in message for message in messages))
+
+    def test_supersession_rejects_ineligible_target_lost_coverage_and_cycles(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        first_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        second_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
+
+        write(first_path, superseded_record(verification_record("a" * 40), "VREC-002"))
+        write(second_path, aggregate_verification_record("b" * 40, status="ready"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("must be verified or released" in message for message in messages))
+
+        aggregate_source = superseded_record(aggregate_verification_record("b" * 40), "VREC-001")
+        write(first_path, verification_record("a" * 40))
+        write(second_path, aggregate_source)
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("omits work orders: WO-002" in message for message in messages))
+
+        write(first_path, superseded_record(verification_record("a" * 40), "VREC-002"))
+        write(second_path, superseded_record(aggregate_verification_record("b" * 40), "VREC-001"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("supersession cycle detected" in message for message in messages))
+
+    def test_supersession_rejects_wrong_type_duplicate_and_active_release_reference(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        source_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        successor_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
+        write(successor_path, aggregate_verification_record("a" * 40))
+
+        write(source_path, superseded_record(verification_record("a" * 40), "VER-001"))
+        self.assertIn("E011", self.errors())
+
+        write(source_path, superseded_record(verification_record("a" * 40), "VREC-999"))
+        self.assertIn("E006", self.errors())
+
+        write(source_path, superseded_record(verification_record("a" * 40), "VREC-001"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("supersession cycle detected" in message for message in messages))
+
+        third = aggregate_verification_record("c" * 40).replace("VREC-002", "VREC-003")
+        write(self.root / "docs/engineering/product/verification-records/VREC-003.md", third)
+        multiple = superseded_record(verification_record("a" * 40), "VREC-002").replace(
+            'superseded_by = ["VREC-002"]',
+            'superseded_by = ["VREC-002", "VREC-003"]',
+        )
+        write(source_path, multiple)
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("must contain exactly one verification record" in message for message in messages))
+
+        duplicate = superseded_record(verification_record("a" * 40), "VREC-002").replace(
+            'superseded_by = ["VREC-002"]',
+            'superseded_by = ["VREC-002", "VREC-002"]',
+        )
+        write(source_path, duplicate)
+        self.assertTrue({"E009", "E010"}.issubset(self.errors()))
+
+        write(source_path, superseded_record(verification_record("a" * 40), "VREC-002"))
+        write(self.root / "docs/engineering/releases/RLS-001.md", release_record("a" * 40, status="ready"))
+        messages = {item.message for item in validate_repository(self.root).errors}
+        self.assertTrue(any("must not include superseded" in message for message in messages))
+
+    def test_dashboard_reports_stale_ready_without_inferring_supersession(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-001.md",
+            verification_record("a" * 40, status="ready"),
+        )
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-002.md",
+            aggregate_verification_record("b" * 40),
+        )
+        snapshot, report, _ = generate_snapshot(self.root)
+        self.assertTrue(report.valid)
+        findings = [item for item in snapshot["findings"] if item["rule"] == "W-REV-004"]
+        self.assertEqual(1, len(findings))
+        self.assertEqual(["VREC-001", "VREC-002"], findings[0]["artifacts"])
+        source = next(item for item in snapshot["revision_provenance"] if item["id"] == "VREC-001")
+        self.assertEqual("ready", source["status"])
+        self.assertEqual([], source["superseded_by"])
 
 
 class RevisionCliTests(unittest.TestCase):
@@ -575,6 +724,37 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(2, code)
         self.assertIn("one candidate commit", error)
+        self.assertFalse((self.root / "docs/engineering/releases/RLS-002.md").exists())
+
+    def test_prepare_release_rejects_superseded_verification_record(self) -> None:
+        candidate = self.initialize_candidate(aggregate=True)
+        source_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        successor_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
+        write(source_path, superseded_record(verification_record(candidate), "VREC-002"))
+        write(successor_path, aggregate_verification_record(candidate))
+        self.git(
+            "-c", "user.name=Harness Test",
+            "-c", "user.email=harness@example.invalid",
+            "add", str(source_path), str(successor_path),
+        )
+        self.git(
+            "-c", "user.name=Harness Test",
+            "-c", "user.email=harness@example.invalid",
+            "commit", "-m", "verification supersession governance",
+        )
+
+        code, _, error = self.invoke(
+            "prepare-release",
+            str(self.root),
+            "--id", "RLS-002",
+            "--release-contract", "REL-001",
+            "--verification-record", "VREC-001",
+            "--work-order", "WO-001",
+            "--version", "2.0.0",
+            "--authorized-by", "release-owner",
+        )
+        self.assertEqual(2, code)
+        self.assertIn("must be ready, verified, or released", error)
         self.assertFalse((self.root / "docs/engineering/releases/RLS-002.md").exists())
 
     def test_capture_refuses_existing_output(self) -> None:

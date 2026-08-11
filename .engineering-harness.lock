@@ -34,11 +34,11 @@
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "dc35f9e2b2697aa04d12d1b6a9ebd3555bbd335e56298d896a3d2784d547adfd"
+      "sha256": "9b021991c9a90d84dd16120ec4e84b2a93133aadc869e0a86408eb8309488cc6"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "b1084ea8c3bf46c3395613b129238ea56a8f8c7d3825f00fdb7994c877b0122f"
+      "sha256": "43abd87fb43232b30034bc7451c9d9e23068510b711f6a90fa85a9eedb03b165"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -86,7 +86,7 @@
     },
     "docs/engineering/templates/VERIFICATION_RECORD.template.md": {
       "mode": "managed",
-      "sha256": "4725b1bbf400a7a3a9b37002ba2802d4009a89a5f1e74659a971e716217c2a96"
+      "sha256": "9e3074bc439c5f58b18045b6a4a2fc64c380fceba47ef2b3b1fc8d613beb19d7"
     },
     "docs/engineering/templates/WORK_ORDER.template.md": {
       "mode": "managed",
@@ -102,15 +102,15 @@
     },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
-      "sha256": "df0a476155d409212da0871c4db66da8b30cab6ed2646054f6b1cccec00261d9"
+      "sha256": "3b95681e60e79a7acf7036743cfb19ea65846fdc4d4b74be26b9a643b2773183"
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "c168b3a6a858d19bcb994ab13780c0c7473ea586850b1d3f7d1b2a5b9da66f4f"
+      "sha256": "30f6908ece9404ad34262ab63760ee2e84e1c0724388c73a9961ad6b63a28481"
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "a3a24d64e0855a9bcb7940103879031936e95102345ba19012f5e2550e22d5c7"
+      "sha256": "11ee1e95f93f98808b52d08a96629730abd9f4130bc07d9e9ce83015a3a8363e"
     }
   },
   "hash_algorithm": "sha256",

@@ -36,7 +36,7 @@ from validate_engineering_artifacts import (
 
 SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v2"
+FINDING_RULES_VERSION = "harness-findings-v3"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -207,6 +207,8 @@ def normalize_artifacts(report: ValidationReport, repository_root: Path) -> list
             item["verified_at"] = _string(artifact.metadata.get("verified_at")) or None
             item["artifact_snapshot_sha256"] = _string(artifact.metadata.get("artifact_snapshot_sha256")) or None
             item["evidence_paths"] = _string_list(artifact.metadata.get("evidence_paths"))
+            item["superseded_at"] = _string(artifact.metadata.get("superseded_at")) or None
+            item["supersession_authorized_by"] = _string(artifact.metadata.get("supersession_authorized_by")) or None
         if artifact.artifact_type == "release_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
@@ -572,7 +574,7 @@ def build_findings(
                 verified_by_work[work_order].add(entry["id"])
             if entry["kind"] == "release" and entry["status"] == "released":
                 released_by_work[work_order].add(entry["id"])
-        if entry["match_state"] == "different":
+        if entry["match_state"] == "different" and entry["status"] != "superseded":
             findings.append(
                 _finding(
                     "I-REV-001",
@@ -590,6 +592,30 @@ def build_findings(
                     f"Declared candidate commit on {entry['id']} is unavailable in the current clone.",
                     [entry["id"]],
                     evidence=[f"declared={entry['commit']}"],
+                )
+            )
+
+    verification_entries = [entry for entry in revision_provenance if entry["kind"] == "verification"]
+    for source in verification_entries:
+        source_work = set(source["work_orders"])
+        if source["status"] != "ready" or not source_work or source["superseded_by"]:
+            continue
+        possible_successors = sorted(
+            target["id"]
+            for target in verification_entries
+            if target["id"] != source["id"]
+            and target["status"] in {"verified", "released"}
+            and source_work <= set(target["work_orders"])
+        )
+        if possible_successors:
+            findings.append(
+                _finding(
+                    "W-REV-004",
+                    "warning",
+                    f"{source['id']} is ready but its work is fully covered by verified or released records; review possible supersession without inferring authority.",
+                    [source["id"], *possible_successors],
+                    [artifacts[source["id"]]["path"], *(artifacts[item]["path"] for item in possible_successors)],
+                    [f"possible_successors={','.join(possible_successors)}"],
                 )
             )
 
@@ -916,9 +942,11 @@ def build_revision_provenance(
     commit_availability: dict[str, bool | None],
 ) -> list[dict[str, Any]]:
     relations_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    relations_by_target: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for relation in relations:
         if relation["target_exists"]:
             relations_by_source[relation["source"]].append(relation)
+            relations_by_target[relation["target"]].append(relation)
     result: list[dict[str, Any]] = []
     for artifact in normalized_artifacts:
         if artifact["type"] not in {"verification_record", "release_record"}:
@@ -935,6 +963,20 @@ def build_revision_provenance(
         for relation in relations_by_source[artifact["id"]]:
             relation_names[relation["relation"]].append(relation["target"])
         work_relation = "verifies_work_order" if artifact["type"] == "verification_record" else "releases_work"
+        supersedes = sorted(
+            {
+                relation["source"]
+                for relation in relations_by_target[artifact["id"]]
+                if relation["relation"] == "superseded_by"
+            }
+        )
+        lifecycle_class = (
+            "historical"
+            if artifact["status"] == "superseded"
+            else "active_candidate"
+            if artifact["status"] == "ready"
+            else "assured"
+        )
         result.append(
             {
                 "id": artifact["id"],
@@ -948,6 +990,11 @@ def build_revision_provenance(
                 "work_orders": sorted(set(relation_names.get(work_relation, []))),
                 "verification_records": sorted(set(relation_names.get("includes_verification", []))),
                 "contracts": sorted(set(relation_names.get("conforms_to", []) + relation_names.get("satisfies", []))),
+                "superseded_by": sorted(set(relation_names.get("superseded_by", []))),
+                "supersedes": supersedes,
+                "superseded_at": artifact.get("superseded_at"),
+                "supersession_authorized_by": artifact.get("supersession_authorized_by"),
+                "lifecycle_class": lifecycle_class,
                 "version": artifact.get("version"),
                 "tag": artifact.get("tag"),
                 "authority": "declared",

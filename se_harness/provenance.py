@@ -359,7 +359,7 @@ def prepare_release(
     for verification_record_id in selected_verification_records:
         verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
         if verification_record.get("status") not in {"ready", "verified", "released"}:
-            raise HarnessError(f"verification record {verification_record_id} must be ready or active")
+            raise HarnessError(f"verification record {verification_record_id} must be ready, verified, or released")
         verification_metadata = _load_metadata(root, verification_record)
         verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
         identities.add(_supported_commit(verification_metadata, verification_record_id))
