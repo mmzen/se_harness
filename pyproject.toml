@@ -19,6 +19,7 @@ include = ["se_harness*"]
 "share/se-harness/templates/repository/standard" = [
   "templates/repository/standard/.engineering-harness.toml.tpl",
   "templates/repository/standard/AGENTS.md.fragment",
+  "templates/repository/standard/CLAUDE.md.fragment",
   "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
   "templates/repository/standard/gitignore.fragment",
 ]
@@ -26,6 +27,7 @@ include = ["se_harness*"]
   "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
   "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/README.md.tpl",
+  "templates/repository/standard/docs/engineering/REPOSITORY_CONTEXT.md.seed",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
 ]

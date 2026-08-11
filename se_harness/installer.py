@@ -22,8 +22,10 @@ BEGIN_MARKER = "<!-- se-harness:begin -->"
 END_MARKER = "<!-- se-harness:end -->"
 FRAGMENT_TARGETS = {
     "AGENTS.md.fragment": "AGENTS.md",
+    "CLAUDE.md.fragment": "CLAUDE.md",
     "gitignore.fragment": ".gitignore",
 }
+SEED_SUFFIX = ".seed"
 
 
 class HarnessError(RuntimeError):
@@ -95,6 +97,8 @@ def _templates() -> list[TemplateFile]:
         name = relative.name
         if name in FRAGMENT_TARGETS:
             result.append(TemplateFile(source, Path(FRAGMENT_TARGETS[name]), "fragment"))
+        elif name.endswith(SEED_SUFFIX):
+            result.append(TemplateFile(source, relative.with_name(name[: -len(SEED_SUFFIX)]), "seed"))
         elif name.endswith(".tpl"):
             result.append(TemplateFile(source, relative.with_name(name[:-4]), "managed"))
         else:
@@ -216,7 +220,12 @@ def plan_install(
         relative = item.target.as_posix()
         old_entry = old_files.get(relative, {}) if isinstance(old_files.get(relative, {}), dict) else {}
 
-        if current == desired:
+        if item.mode == "seed":
+            # Seed files become repository-owned as soon as they are installed.
+            # A prior lock entry remembers intentional removal and prevents later
+            # upgrades from recreating the file.
+            action = "add" if current is None and old_entry.get("mode") != "seed" else "unchanged"
+        elif current == desired:
             action = "unchanged"
         elif current is None:
             action = "add"
@@ -282,6 +291,12 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
         if item.action == "customized":
             if item.path in old_files:
                 files[item.path] = old_files[item.path]
+            continue
+        if item.mode == "seed":
+            files[item.path] = {
+                "mode": "seed",
+                "state": "present" if destination.is_file() else "removed",
+            }
             continue
         if not destination.exists() or item.mode == "generated":
             continue
