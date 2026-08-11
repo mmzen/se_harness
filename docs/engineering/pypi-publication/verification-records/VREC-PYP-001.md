@@ -2,7 +2,7 @@
 id = "VREC-PYP-001"
 type = "verification_record"
 title = "Verification candidate for WO-PYP-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
@@ -20,6 +20,8 @@ conforms_to = ["VER-PYP-001"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-PYP-001` to candidate commit `01fc231dc1fc4501fd1f74aee9eecfea9c1d9db9`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-PYP-001` to candidate commit `01fc231dc1fc4501fd1f74aee9eecfea9c1d9db9`. The capture command originally prepared it as `ready` and did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+The accountable repository owner reviewed the retained PyPI publication evidence after pull request #13 was merged and explicitly instructed `i merged, then transition and governance commit + PR` on 2026-08-11. That human decision, authorized and recorded by `WO-PYP-003`, transitioned this record from `ready` to `verified`; automation did not grant the authority.
