@@ -41,188 +41,199 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertEqual([], self.project["dependencies"])
         self.assertEqual("se_harness.cli:main", self.project["scripts"]["harnessctl"])
 
-    def test_pypi_installation_is_primary_and_environment_scoped(self) -> None:
-        install = self.section("Install from PyPI")
-        required = (
+    def test_root_is_a_bounded_human_entry_point(self) -> None:
+        self.assertLessEqual(len(self.readme.splitlines()), 200)
+        headings = re.findall(r"(?m)^## (.+)$", self.readme)
+        self.assertLessEqual(len(headings), 9)
+        self.assertEqual(
+            [
+                "Who it is for",
+                "Install or upgrade",
+                "Start using it",
+                "What this looks like in practice",
+                "What you get",
+                "Who does what",
+                "Known limitations",
+                "Learn more",
+                "Developing SE Harness",
+            ],
+            headings,
+        )
+        self.assertIn("<!-- Target expertise: 6/10.", self.readme)
+        self.assertIn("knowledge expected from the reader", self.readme)
+        self.assertNotIn("> **Target expertise:", self.readme)
+
+    def test_audience_section_is_specific_and_honest_about_assurance(self) -> None:
+        audience = self.section("Who it is for")
+        for phrase in (
+            "<!-- Target expertise: 5/10. -->",
+            "teams adopting coding agents",
+            "audited, safety-sensitive, security-sensitive, or high-impact systems",
+            "consistent engineering governance across repositories",
+            "small teams and solo developers",
+            "less suitable for throwaway code or rapid experiments",
+            "strongest assurance comes from genuine role separation",
+            "but not independent assurance",
+            "does not by itself certify regulatory compliance",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, audience)
+
+        for removed_heading in (
+            "Engineering artifact model",
+            "Command reference",
+            "Installed repository layout",
+            "Commit-bound verification and release lineage",
+            "Pull-request enforcement and bootstrap",
+            "Safe upgrades",
+            "Distribution development",
+        ):
+            with self.subTest(removed_heading=removed_heading):
+                self.assertNotIn(f"## {removed_heading}\n", self.readme)
+
+    def test_installation_is_short_released_and_upgrade_aware(self) -> None:
+        install = self.section("Install or upgrade")
+        for text in (
             "Python 3.11 or later",
             "python -m venv .venv",
-            ".\\.venv\\Scripts\\Activate.ps1",
             "python -m pip install --upgrade pip",
             "python -m pip install se-harness",
             f'python -m pip install "se-harness=={self.project["version"]}"',
-            ".\\.venv\\Scripts\\harnessctl.exe --version",
-            "source .venv/bin/activate",
-            ".venv/bin/harnessctl --version",
-            "python -m se_harness --version",
-        )
-        for text in required:
+            "harnessctl --version",
+            "does **not** update",
+            "explicitly authorized transactional apply",
+            "harness-installation-and-upgrades.md",
+        ):
             with self.subTest(text=text):
                 self.assertIn(text, install)
+        self.assertNotIn("harnessctl upgrade", install)
         self.assertNotIn("python -m pip install .", install)
-        self.assertNotIn("python -m pip install -e .", install)
-        self.assertNotRegex(install, r"(?m)^py(?:\.exe)?\s+-3")
-        self.assertIn("virtual environment", install.lower())
-        self.assertIn("does not move", install.lower())
         self.assertEqual(self.project["version"], __version__)
 
-    def test_quick_start_covers_new_and_existing_repositories(self) -> None:
-        quick_start = self.section("Quick start")
-        for command in (
+    def test_start_exposes_only_the_human_repository_surface(self) -> None:
+        start = self.section("Start using it")
+        commands = (
             "harnessctl init C:\\path\\to\\new-repository --project-name my-project",
             "harnessctl adopt C:\\path\\to\\existing-repository --project-name my-project",
             "harnessctl doctor C:\\path\\to\\repository",
+            "harnessctl validate C:\\path\\to\\repository",
             "harnessctl dashboard C:\\path\\to\\repository",
-        ):
-            with self.subTest(command=command):
-                self.assertIn(command, quick_start)
-        self.assertIn("REPOSITORY_CONTEXT.md", quick_start)
-        self.assertIn("does not approve", quick_start)
-
-    def test_feature_summary_surfaces_recently_implemented_controls(self) -> None:
-        features = self.section("What it provides")
-        for phrase in (
-            "PyPI",
-            "AGENTS.md",
-            "ENGINEERING_HARNESS.md",
-            "approved -> in_progress -> implemented",
-            "aggregate",
-            "superseded",
-            "OIDC",
-            "attestations",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, features)
-
-    def test_practical_example_keeps_agent_mechanics_and_human_authority_distinct(self) -> None:
-        practical = self.section("What this looks like in practice")
-        headings = (
-            self.readme.index("## Quick start\n"),
-            self.readme.index("## What this looks like in practice\n"),
-            self.readme.index("## What it provides\n"),
         )
-        self.assertEqual(tuple(sorted(headings)), headings)
+        for command in commands:
+            with self.subTest(command=command):
+                self.assertIn(command, start)
+        self.assertIn("checks installed-harness integrity", start)
+        self.assertIn("checks the formal artifact graph", start)
+        self.assertIn("generates the read-only Harness Explorer", start)
+        self.assertIn("does not invent or approve product intent", start)
 
+    def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
+        fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
+        subcommands = set(re.findall(r"(?m)^harnessctl\s+([a-z][a-z-]*)\b", fenced))
+        self.assertEqual({"init", "adopt", "doctor", "validate", "dashboard"}, subcommands)
+        for forbidden in (
+            "preflight",
+            "upgrade",
+            "scaffold-domain",
+            "create-artifact",
+            "identity",
+            "capture-verification",
+            "prepare-release",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotRegex(fenced, rf"(?m)^harnessctl\s+{re.escape(forbidden)}\b")
+
+    def test_practical_example_preserves_value_and_human_authority(self) -> None:
+        practical = self.section("What this looks like in practice")
         for phrase in (
             "per-customer API rate limiting",
             "`429`",
             "`Retry-After`",
-            "review before implementation",
-            "approved scope",
-            "clean candidate",
-            "exact commit",
-            "human assurance",
-            "separate human decision",
-            "pull-request CI",
-            "visible anomalies",
+            "waits for approval",
+            "implements only that scope",
+            "retains evidence",
+            "exact candidate commit",
+            "assurance owner",
+            "release owner",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase.lower(), practical.lower())
 
-        quoted_requests = "\n".join(
-            line for line in practical.splitlines() if line.startswith(">")
-        )
-        for operation in (
-            "doctor",
-            "preflight",
-            "validate",
-            "dashboard",
-            "capture-verification",
-        ):
-            with self.subTest(operation=operation):
-                self.assertIn(f"`{operation}`", practical)
-                self.assertNotIn(operation, quoted_requests)
-
-    def test_practical_graph_has_semantic_styles_decisions_and_text_fallback(self) -> None:
-        practical = self.section("What this looks like in practice")
         mermaid_blocks = re.findall(r"```mermaid\n(.*?)\n```", practical, flags=re.DOTALL)
         self.assertEqual(1, len(mermaid_blocks))
         graph = mermaid_blocks[0]
-
-        for node in (
-            'USER["Your approved outcome"]',
-            'INT["Intent"]',
-            'CAP["Capability"]',
-            'REQ["Requirement"]',
-            'SPEC["Specification"]',
-            'ARCH["Architecture"]',
-            'ADR{"Architecture decision"}',
-            'VER["Verification contract"]',
-            'WO["Approved work order"]',
-            'CHANGE["Agent implementation"]',
-            'EVIDENCE["Tests and evidence"]',
-            'COMMIT["Exact candidate commit"]',
-            'READY["Ready verification record"]',
-            'ASSURANCE{"Human assurance decision"}',
-            'VREC["Verified record"]',
-            'RELEASE{"Human release decision"}',
-            'RLS["Released revision"]',
-            'EXPLORER["Harness Explorer"]',
-        ):
-            with self.subTest(node=node):
-                self.assertIn(node, graph)
-
-        for relation in (
-            'USER["Your approved outcome"] --> INT["Intent"]',
-            "INT --> CAP",
-            "CAP --> REQ",
-            "WO --> CHANGE",
-            "CHANGE --> EVIDENCE",
-            "EVIDENCE --> COMMIT",
-            "READY --> ASSURANCE",
-            "ASSURANCE --> VREC",
-            "VREC --> RELEASE",
-            "RELEASE --> RLS",
-            'EXPLORER["Harness Explorer"] -. "traceability and anomalies" .-> REQ',
-        ):
-            with self.subTest(relation=relation):
-                self.assertIn(relation, graph)
-
-        for style in (
-            "human",
-            "intent",
-            "design",
-            "work",
-            "execution",
-            "evidence",
-            "provenance",
-            "verified",
-            "release",
-            "explorer",
-        ):
-            with self.subTest(style=style):
-                self.assertRegex(graph, rf"(?m)^\s*classDef {style} ")
-        self.assertIn("class USER,ASSURANCE,RELEASE human", graph)
-        self.assertIn("class INT,CAP,REQ intent", graph)
-        self.assertIn("class VREC verified", graph)
-        self.assertIn("class RLS release", graph)
-
-        self.assertNotIn("![", practical)
-        self.assertNotRegex(practical, r"(?i)<(?:script|style)\b")
-        self.assertIn("When Mermaid is not rendered", practical)
-        self.assertIn("labels, shapes, and prose", practical)
-
-    def test_package_and_repository_upgrades_are_separate(self) -> None:
-        upgrade = self.section("Safe upgrades")
-        commands = (
-            "python -m pip install --upgrade se-harness",
-            "harnessctl upgrade C:\\path\\to\\repository",
-            "harnessctl upgrade C:\\path\\to\\repository --apply",
-            "harnessctl doctor C:\\path\\to\\repository",
+        node_ids = set(re.findall(r"\b([A-Z][A-Z0-9_]*)\s*[\[{]", graph))
+        self.assertEqual(
+            {"HUMAN", "DEF", "WORK", "AGENT", "CANDIDATE", "VERIFY", "RELEASE", "EXPLORER"},
+            node_ids,
         )
-        positions = [upgrade.index(command) for command in commands]
-        self.assertEqual(sorted(positions), positions)
-        self.assertIn("does not modify an initialized or adopted repository", upgrade)
-        self.assertIn("read-only", upgrade)
-        self.assertIn("transactional", upgrade)
+        self.assertLessEqual(len(node_ids), 9)
+        self.assertIn('VERIFY{"Human verification"}', graph)
+        self.assertIn('RELEASE{"Human release decision"}', graph)
+        self.assertIn('EXPLORER["Harness Explorer"] -. "traceability and anomalies" .-> DEF', graph)
+        self.assertIn("classDef human", graph)
+        self.assertIn("classDef explorer", graph)
+        self.assertIn("When Mermaid is not rendered", practical)
+        self.assertIn("Color is supplementary", practical)
 
-    def test_source_installation_is_development_only(self) -> None:
-        development = self.section("Distribution development")
-        self.assertIn("python -m pip install .", development)
-        self.assertIn("python -m pip install -e .", development)
-        self.assertIn("unreleased", development)
-        self.assertIn("python -m unittest discover", development)
+    def test_value_and_responsibility_boundaries_remain_visible(self) -> None:
+        value = self.section("What you get")
+        for phrase in (
+            "repository-native",
+            "managed instruction route",
+            "exact candidate commit",
+            "safe adoption",
+            "Harness Explorer",
+            "never approves work",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, value)
 
-    def test_release_links_and_baseline_language_remain_truthful(self) -> None:
+        responsibility = self.section("Who does what")
+        for phrase in (
+            "Human owners",
+            "Coding agent",
+            "Repository policy and hosting controls",
+            "run preflight",
+            "never commit, push, approve, verify, release, tag, publish, or deploy",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, responsibility)
+
+    def test_known_limitations_remain_explicit_and_unresolved(self) -> None:
+        limitations = self.section("Known limitations")
+        self.assertIn("reuse G0-G5 for different groupings", limitations)
+        self.assertIn("non-empty work-order `architecture` relation", limitations)
+        self.assertIn("not corrections made by documentation", limitations)
+        self.assertIn("harness-uml-model.md", limitations)
+        self.assertIn("harness-operational-phasing.md", limitations)
+
+    def test_deeper_user_and_contributor_routes_are_discoverable(self) -> None:
+        learning = self.section("Learn more")
+        development = self.section("Developing SE Harness")
+        self.assertIn("harness-overview.md", learning)
+        self.assertIn("[overview](docs/notes/harness-overview.md)", learning)
+        self.assertNotIn("[4/10 overview]", learning)
+        self.assertIn("docs/notes/README.md", learning)
+        self.assertIn("ENGINEERING_HARNESS.md", learning)
+        self.assertIn("developing-se-harness.md", development)
+        self.assertIn("candidate development evidence", development)
+        self.assertNotIn("python -m pip install -e .", development)
+
+    def test_internal_documentation_links_are_repository_relative(self) -> None:
+        for target in (
+            "docs/notes/harness-installation-and-upgrades.md",
+            "docs/notes/harness-uml-model.md",
+            "docs/notes/harness-operational-phasing.md",
+            "docs/notes/harness-overview.md",
+            "docs/notes/README.md",
+            "docs/notes/developing-se-harness.md",
+        ):
+            with self.subTest(target=target):
+                self.assertIn(f"]({target})", self.readme)
+        self.assertNotIn("https://github.com/mmzen/se_harness/blob/main/", self.readme)
+
+    def test_release_links_and_public_project_routes_remain(self) -> None:
         for url in (
             "https://pypi.org/project/se-harness/",
             "https://github.com/mmzen/se_harness",
@@ -231,18 +242,13 @@ class PublicOnboardingTests(unittest.TestCase):
         ):
             with self.subTest(url=url):
                 self.assertIn(url, self.readme)
-        baseline = self.section("Pull-request enforcement and bootstrap")
-        self.assertIn("exact configured released baseline", baseline)
-        self.assertIn(".github/workflows/engineering-harness.yml", baseline)
-        self.assertNotRegex(baseline, r"se-harness==\d+\.\d+\.\d+")
-        self.assertIn("OIDC", self.readme)
-        self.assertIn("without rebuilding", self.readme)
-        self.assertIn("attestations", self.readme)
 
     def test_public_markdown_has_no_placeholders_mojibake_or_missing_local_links(self) -> None:
         for marker in ("PENDING_", "TODO", "FIXME", "\ufffd", "\u00c3", "\u00e2\u20ac"):
             with self.subTest(marker=marker):
                 self.assertNotIn(marker, self.readme)
+        self.assertEqual(0, self.readme.count("```") % 2)
+        self.assertNotRegex(self.readme, r"(?i)<(?:script|style)\b")
         for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", self.readme):
             if re.match(r"(?:https?://|mailto:|#)", target):
                 continue

@@ -1,0 +1,61 @@
++++
+id = "WO-PUB-005"
+type = "work_order"
+title = "Publish aggregate documentation candidate for review"
+status = "in_progress"
+owners = ["repository-owner", "engineering-owner"]
+created = "2026-08-12"
+updated = "2026-08-12"
+
+[relations]
+implements = ["REQ-DST-019", "REQ-DST-020", "REQ-DST-021", "REQ-DST-022", "REQ-DST-023", "REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
+specifications = ["SPEC-DST-006", "SPEC-DST-007"]
+architecture = ["ARCH-DST-006", "ADR-DST-006", "ARCH-DST-007", "ADR-DST-007"]
+verification = ["VER-DST-006", "VER-DST-007"]
++++
+
+# Work Order: Publish aggregate documentation candidate for review
+
+## Lifecycle and authorization
+
+The accountable repository owner explicitly instructed `this becomes the commit candidate, you can commit, create the PR, and create the validation record` on 2026-08-12. That instruction authorizes the aggregate candidate commit, one ready verification record, the later governance commit retaining that record, a normal branch push, and one pull request against `main`.
+
+This governance-only work order remains `in_progress` until the branch is pushed and the pull request exists. It is not release payload and is not included in the aggregate VREC it authorizes.
+
+## Objective
+
+Retain the completed `WO-DOC-007` and `WO-DOC-008` documentation, tests, packets, and evidence as one clean candidate commit; prepare and retain one aggregate ready verification record bound to that commit; publish the branch normally; and open one reviewable pull request declaring this work order.
+
+## In scope
+
+- Audit the complete current branch diff against `origin/main` and protected surfaces.
+- Run candidate checks and phase-appropriate preflight for both implementation work orders and this publication work order.
+- Create one candidate commit containing the approved documentation implementation, focused tests, packets, honest work-order lifecycle states, and retained evidence.
+- From the clean candidate commit, run `harnessctl capture-verification` for `WO-DOC-007` and `WO-DOC-008`, their exact `VER-DST-006` and `VER-DST-007` union, and both work-order evidence paths.
+- Use new ID `VREC-DST-005` and retain its `ready` record in a later governance commit.
+- Push `docs/update-readme` normally to `origin` with upstream tracking.
+- Open one GitHub pull request against `main` whose standalone declaration is `Harness-Work-Order: WO-PUB-005` and whose summary identifies the aggregate work and ready VREC.
+- After the pull request exists, retain this work order's `implemented` transition and exact publication evidence in one final governance commit and push it normally to the open branch.
+
+## Out of scope
+
+- Transitioning `VREC-DST-005` to `verified` or any work order to `verified` or `released`.
+- Preparing or transitioning a release record; changing a version; building a distribution; creating a tag or GitHub Release; publishing to PyPI; deploying; or promoting the self-hosting governor.
+- Merging the pull request, force pushing, rewriting history, modifying remote `main`, or changing branch protection and other external configuration.
+- Changing implementation content after candidate selection except to correct a blocking verification or publication defect through a new explicitly reported candidate.
+- Including this governance-only work order in release-bearing VREC coverage.
+
+## Required verification
+
+- Formal validation has zero errors and only the 38 classified historical warnings.
+- `doctor`, review preflight, 27 focused documentation tests, and the 140-test complete suite pass.
+- The root remains at 140 lines and nine level-two sections, with protected managed/runtime surfaces unchanged.
+- The worktree is clean at verification capture and the VREC records full Git object identity, clean state, both evidence paths, both work orders, both verification contracts, and the deterministic artifact snapshot.
+- The ready record validates before its governance commit.
+- The normal push and PR creation succeed without rewriting history.
+
+## Evidence and completion
+
+Retain candidate SHA, candidate tree, VREC metadata, governance commit, branch/upstream, pull request URL and number, PR declaration, exact checks, warning classification, and prohibited-action confirmation in `docs/engineering/harness-distribution/evidence/WO-PUB-005-publication.md`.
+
+After that evidence exists, transition this work order to `implemented` in a later governance commit and push it to the same open pull request. The completed state records publication work only and grants no assurance or release authority.

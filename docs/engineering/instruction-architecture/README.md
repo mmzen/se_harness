@@ -1,4 +1,4 @@
-# Instruction Architecture Rationalization Proposal
+# Instruction Architecture Rationalization
 
 This packet defines the implemented instruction architecture for repositories installed or adopted by SE Harness. `WO-IAR-001` retains exact evidence for the bounded implementation. Commit-bound verification and release authority remain separate.
 
@@ -6,7 +6,7 @@ This packet defines the implemented instruction architecture for repositories in
 
 The incremental `IAR-002` packet addresses residual procedural duplication between `ENGINEERING_HARNESS.md` and `WORKFLOW.md`. It reuses the approved `INT-IAR-001` and `CAP-IAR-001` authority because the change refines the already selected one-router, focused-policy architecture rather than introducing a new product outcome.
 
-The proposed boundary keeps stable provenance, authority, and side-effect invariants visible in the managed router while assigning ordered verification and release procedure to `WORKFLOW.md`. It changes no command behavior, lifecycle rule, historical record, or accountable decision right.
+The implemented boundary keeps stable provenance, authority, and side-effect invariants visible in the managed router while assigning ordered verification and release procedure to `WORKFLOW.md`. It changes no command behavior, lifecycle rule, historical record, or accountable decision right.
 
 ### Incremental packet index
 
@@ -56,7 +56,7 @@ The `IAR-005` packet resolves the overloaded `architecture.constrains` relation.
 - Verification contract: `VER-IAR-005`
 - Implemented work order: `WO-IAR-005`
 
-## Proposed instruction route
+## Implemented instruction route
 
 ```text
 CLAUDE.md (managed adapter inside owner content)
@@ -76,7 +76,7 @@ The managed block in `AGENTS.md` has exactly one harness destination: `ENGINEERI
 
 ## Ownership model
 
-| File | Proposed installation mode | Responsibility |
+| File | Current installation mode | Responsibility |
 | --- | --- | --- |
 | `AGENTS.md` | managed fragment in owner-controlled file | Repository-specific instructions plus the short non-waivable harness gate |
 | `CLAUDE.md` | managed fragment in owner-controlled file | Tool adapter importing `AGENTS.md` |
@@ -98,15 +98,15 @@ Documentation alone is not treated as enforcement. Branch protection, protected 
 
 The harness repository has an unavoidable one-release bootstrap lag: the last released distribution independently enforces the prior baseline, while candidate tests and human verification assess new checker behavior. After publication, a separate governed pin update activates that new behavior as the independent baseline. The proposal does not claim that unreleased code independently verifies itself.
 
-## Implementation plan
+## Implemented delivery
 
-1. Update canonical standard templates and document the ownership-mode contract.
-2. Add safe installer migrations, including managed-to-seed transitions and self-hosting lock reconciliation.
-3. Add the read-only preflight command with deterministic text and JSON output.
-4. Update the installed GitHub workflow to use an exact external harness pin and an explicit pull-request work-order input, including the self-hosting bootstrap rule.
-5. Update the self-hosted operational copies only through the supported upgrade path.
-6. Add adoption, upgrade, conflict, preflight, CI-template, parity, and full-regression tests.
-7. Retain work-order-keyed evidence; commit and capture verification only under later explicit authority.
+1. Canonical standard templates document the ownership-mode contract.
+2. Safe installer migrations cover managed-to-seed transitions and self-hosting lock reconciliation.
+3. Read-only preflight provides deterministic text and JSON output.
+4. The installed GitHub workflow uses an exact external harness pin and an explicit pull-request work-order input, including the self-hosting bootstrap rule.
+5. Self-hosted operational copies are updated through the supported upgrade path.
+6. Adoption, upgrade, conflict, preflight, CI-template, parity, and regression tests retain executable evidence.
+7. Work-order-keyed evidence and later commit-bound records preserve the decision boundary.
 
 ## Approved decisions
 
@@ -124,7 +124,7 @@ The harness repository has an unavoidable one-release bootstrap lag: the last re
 - Architecture: `ARCH-IAR-001`
 - Decision: `ADR-IAR-001`
 - Verification contract: `VER-IAR-001`
-- Draft work order: `WO-IAR-001`
+- Implemented work order: `WO-IAR-001`
 - Draft release contract: `REL-IAR-001`
 - Draft operating contract: `OPS-IAR-001`
 - Acceptance scenarios: `acceptance/instruction-architecture.feature`
