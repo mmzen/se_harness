@@ -399,6 +399,22 @@
         appendTextRow(list, "Owners", artifact.owners.join(", "));
         appendTextRow(list, "Updated", artifact.updated);
         appendTextRow(list, "Verification", artifact.verification_method);
+        if (artifact.architecture_traceability) {
+          appendTextRow(list, "Architecture traceability", artifact.architecture_traceability.state.replaceAll("_", " "));
+          appendTextRow(list, "Addressed requirements", artifact.architecture_traceability.addresses.join(", "));
+          appendTextRow(list, "Conforming specifications", artifact.architecture_traceability.conforms_to.join(", "));
+          appendTextRow(list, "Transitive requirements", artifact.architecture_traceability.transitive_requirements.join(", "));
+          appendTextRow(list, "Missing from conforming specifications", artifact.architecture_traceability.missing_from_conforming_specifications.join(", "));
+          appendTextRow(list, "Legacy targets", artifact.architecture_traceability.legacy_targets.join(", "));
+        }
+        if (artifact.decision_assessment) {
+          appendTextRow(list, "Decision assessment", artifact.decision_assessment.state.replaceAll("_", " "));
+          appendTextRow(list, "Assessment outcome", artifact.decision_assessment.outcome ? artifact.decision_assessment.outcome.replaceAll("_", " ") : null);
+          appendTextRow(list, "Significance triggers", artifact.decision_assessment.triggers.join(", "));
+          appendTextRow(list, "Assessment rationale", artifact.decision_assessment.rationale);
+          appendTextRow(list, "Assessed by", artifact.decision_assessment.assessed_by);
+          appendTextRow(list, "Deciding ADRs", artifact.decision_assessment.deciding_adrs.join(", "));
+        }
         appendTextRow(list, "Declared commit", artifact.commit);
         appendTextRow(list, "Git object format", artifact.git_object_format);
         appendTextRow(list, "Worktree state", artifact.worktree_state);
@@ -456,12 +472,13 @@
             unique.push(relation);
           }
         });
-        document.getElementById("relation-summary").textContent = `${unique.length} typed relations in this view`;
+        document.getElementById("relation-summary").textContent = `${unique.length} declared and derived relations in this view`;
         const relationList = document.getElementById("relation-list");
         relationList.replaceChildren();
         unique.forEach((relation) => {
           const row = element("div", "relation-row");
           row.append(element("code", "", relation.source), element("span", "relation-name", relation.relation), element("code", "", relation.target));
+          if (relation.authority === "derived") row.append(badge(`derived via ${(relation.via || []).join(", ")}`, "info"));
           if (!relation.target_exists) row.append(badge("missing target", "error"));
           relationList.append(row);
         });

@@ -19,6 +19,39 @@ from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, canonical_sha256
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PACKET_ROOT = REPOSITORY_ROOT / "docs" / "engineering" / "instruction-architecture"
 WHEEL_SHA256 = "56db717e5287492c421e11157545586b1e8f0ec2dd4011a9932ccf35f233d63d"
+OLD_ROUTER_PROCEDURE = (
+    "After a separately authorized candidate commit contains implementation and evidence, "
+    "`harnessctl capture-verification` may prepare a `ready` VREC in a later governance commit. "
+    "After accountable assurance review, `harnessctl prepare-release` may prepare a `ready` "
+    "release record bound to the same candidate commit. These commands never commit, push, "
+    "tag, approve, release, publish, or deploy."
+)
+ROUTER_INVARIANT_SUMMARY = (
+    "Verification and release follow `docs/engineering/WORKFLOW.md`, subject to "
+    "`QUALITY_GATES.md`, `TRACEABILITY.md`, and `DECISION_RIGHTS.md`. VRECs and release "
+    "records must identify the exact candidate commit they govern and therefore reside in "
+    "later governance commits. Harness commands may prepare records, but never exercise "
+    "accountable decision rights or commit, push, tag, release, publish, or deploy."
+)
+OLD_REVIEW_PROCEDURE = (
+    "Run `harnessctl preflight . --work-order WO-... --phase review` for a completed "
+    "pull-request candidate. Generate Harness Explorer with `harnessctl dashboard .` and "
+    "open `target/harness-dashboard/index.html`. Both outputs are derived, read-only evidence."
+)
+ROUTER_REVIEW_SUMMARY = (
+    "Review readiness and visualization follow `docs/engineering/WORKFLOW.md`, subject to "
+    "`QUALITY_GATES.md`. Preflight and Harness Explorer outputs are derived, read-only "
+    "evidence; neither approves work nor verifies a candidate."
+)
+OLD_WORKFLOW_REVIEW_STEP = (
+    "6. Retain evidence keyed to every release-bearing work-order ID and run review preflight "
+    "with `--phase review`."
+)
+WORKFLOW_REVIEW_STEP = (
+    "6. Retain evidence keyed to every release-bearing work-order ID, run `harnessctl preflight "
+    ". --work-order WO-... --phase review`, generate Harness Explorer with `harnessctl "
+    "dashboard .`, and inspect the candidate's consistency and anomaly findings."
+)
 
 
 class InstructionArchitectureTests(unittest.TestCase):
@@ -79,6 +112,156 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"]["mode"])
         self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
+
+    def test_router_keeps_invariants_while_workflow_owns_ordered_procedure(self) -> None:
+        target = self.installed_target()
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(ROUTER_INVARIANT_SUMMARY, router)
+        self.assertNotIn(OLD_ROUTER_PROCEDURE, router)
+        self.assertNotIn("`harnessctl capture-verification` may prepare", router)
+        for required in (
+            "harnessctl capture-verification",
+            "transition the verification record to `verified`",
+            "harnessctl prepare-release",
+            "repeat `--work-order` and `--verification-record`",
+            "separately create any authorized tag",
+        ):
+            self.assertIn(required, workflow)
+
+    def test_router_responsibility_refinement_upgrades_safely(self) -> None:
+        target = self.installed_target("prior-router")
+        router_path = target / "ENGINEERING_HARNESS.md"
+        current = router_path.read_text(encoding="utf-8")
+        prior = current.replace(ROUTER_INVARIANT_SUMMARY, OLD_ROUTER_PROCEDURE)
+        self.assertNotEqual(current, prior)
+        router_path.write_text(prior, encoding="utf-8")
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
+            prior.encode("utf-8")
+        )
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("update     ENGINEERING_HARNESS.md", output)
+        self.assertEqual(current, router_path.read_text(encoding="utf-8"))
+        first_lock = lock_path.read_bytes()
+        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(current, router_path.read_text(encoding="utf-8"))
+        self.assertEqual(first_lock, lock_path.read_bytes())
+
+        customized = self.installed_target("customized-router")
+        customized_router = customized / "ENGINEERING_HARNESS.md"
+        desired = customized_router.read_text(encoding="utf-8")
+        prior = desired.replace(ROUTER_INVARIANT_SUMMARY, OLD_ROUTER_PROCEDURE)
+        customized_content = prior + "\nRepository-local edit inside managed content.\n"
+        customized_router.write_text(customized_content, encoding="utf-8")
+        customized_lock_path = customized / ".engineering-harness.lock"
+        customized_lock = json.loads(customized_lock_path.read_text(encoding="utf-8"))
+        customized_lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
+            prior.encode("utf-8")
+        )
+        customized_lock_path.write_text(
+            json.dumps(customized_lock, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        original_router = customized_router.read_bytes()
+        original_lock = customized_lock_path.read_bytes()
+
+        code, output, error = self.invoke("upgrade", str(customized), "--apply")
+        self.assertEqual(1, code)
+        self.assertIn("customized ENGINEERING_HARNESS.md", output)
+        self.assertIn("no files were written", error)
+        self.assertEqual(original_router, customized_router.read_bytes())
+        self.assertEqual(original_lock, customized_lock_path.read_bytes())
+
+    def test_workflow_owns_review_and_visualization_procedure(self) -> None:
+        target = self.installed_target()
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(ROUTER_REVIEW_SUMMARY, router)
+        self.assertNotIn(OLD_REVIEW_PROCEDURE, router)
+        review_section = router.split("## Review and visualization", 1)[1].split("\n## ", 1)[0]
+        self.assertNotIn("--phase review", review_section)
+        self.assertNotIn("harnessctl dashboard .", review_section)
+        self.assertIn(WORKFLOW_REVIEW_STEP, workflow)
+        self.assertNotIn(OLD_WORKFLOW_REVIEW_STEP, workflow)
+
+    def test_review_routing_upgrade_is_transactional_and_idempotent(self) -> None:
+        target = self.installed_target("prior-review-routing")
+        router_path = target / "ENGINEERING_HARNESS.md"
+        workflow_path = target / "docs" / "engineering" / "WORKFLOW.md"
+        desired_router = router_path.read_text(encoding="utf-8")
+        desired_workflow = workflow_path.read_text(encoding="utf-8")
+        prior_router = desired_router.replace(ROUTER_REVIEW_SUMMARY, OLD_REVIEW_PROCEDURE)
+        prior_workflow = desired_workflow.replace(WORKFLOW_REVIEW_STEP, OLD_WORKFLOW_REVIEW_STEP)
+        self.assertNotEqual(desired_router, prior_router)
+        self.assertNotEqual(desired_workflow, prior_workflow)
+        router_path.write_text(prior_router, encoding="utf-8")
+        workflow_path.write_text(prior_workflow, encoding="utf-8")
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
+            prior_router.encode("utf-8")
+        )
+        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
+            prior_workflow.encode("utf-8")
+        )
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("update     ENGINEERING_HARNESS.md", output)
+        self.assertIn("update     docs/engineering/WORKFLOW.md", output)
+        self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
+        self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
+        first_lock = lock_path.read_bytes()
+        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(first_lock, lock_path.read_bytes())
+
+        customized = self.installed_target("customized-review-routing")
+        customized_router = customized / "ENGINEERING_HARNESS.md"
+        customized_workflow = customized / "docs" / "engineering" / "WORKFLOW.md"
+        desired_router = customized_router.read_text(encoding="utf-8")
+        desired_workflow = customized_workflow.read_text(encoding="utf-8")
+        prior_router = desired_router.replace(ROUTER_REVIEW_SUMMARY, OLD_REVIEW_PROCEDURE)
+        prior_workflow = desired_workflow.replace(WORKFLOW_REVIEW_STEP, OLD_WORKFLOW_REVIEW_STEP)
+        customized_router.write_text(prior_router, encoding="utf-8")
+        customized_workflow.write_text(
+            prior_workflow + "\nRepository-local edit inside managed workflow.\n",
+            encoding="utf-8",
+        )
+        customized_lock_path = customized / ".engineering-harness.lock"
+        customized_lock = json.loads(customized_lock_path.read_text(encoding="utf-8"))
+        customized_lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
+            prior_router.encode("utf-8")
+        )
+        customized_lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
+            prior_workflow.encode("utf-8")
+        )
+        customized_lock_path.write_text(
+            json.dumps(customized_lock, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        original_router = customized_router.read_bytes()
+        original_workflow = customized_workflow.read_bytes()
+        original_lock = customized_lock_path.read_bytes()
+
+        code, output, error = self.invoke("upgrade", str(customized), "--apply")
+        self.assertEqual(1, code)
+        self.assertIn("customized docs/engineering/WORKFLOW.md", output)
+        self.assertIn("no files were written", error)
+        self.assertEqual(original_router, customized_router.read_bytes())
+        self.assertEqual(original_workflow, customized_workflow.read_bytes())
+        self.assertEqual(original_lock, customized_lock_path.read_bytes())
 
     def test_managed_readme_to_seed_migration_is_safe_and_transactional(self) -> None:
         target = self.installed_target("exact")

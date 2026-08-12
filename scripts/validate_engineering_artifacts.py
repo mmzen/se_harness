@@ -72,9 +72,30 @@ RELEASABLE_WORK_STATUSES = {
     "verified",
     "released",
 }
+DECISION_ASSESSMENT_OUTCOMES = {"adr_required", "no_significant_decision"}
+DECISION_TRIGGERS = {
+    "system-boundary",
+    "responsibility-or-dependency-direction",
+    "public-interface-or-protocol",
+    "data-ownership-or-persistence",
+    "security-privacy-or-trust-boundary",
+    "deployment-or-operating-model",
+    "concurrency-consistency-reliability-or-failure-strategy",
+    "technology-framework-vendor-or-external-service",
+    "material-performance-scalability-or-cost-tradeoff",
+    "cross-cutting-policy",
+    "difficult-to-reverse",
+    "material-alternatives",
+}
+LEGACY_ARCHITECTURE_STATUSES = {"implemented", "verified", "released"}
+MAX_ASSESSMENT_RATIONALE_LENGTH = 2000
+MAX_ASSESSOR_LENGTH = 128
 EXCLUDED_DIRECTORY_NAMES = {"templates", "evidence", ".git", ".idea", "target", "node_modules"}
 
-PROVENANCE_RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
+RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
+    ("architecture", "addresses"): {"requirement"},
+    ("architecture", "conforms_to"): {"specification"},
+    ("architecture", "constrains"): {"requirement", "specification"},
     ("verification_record", "verifies_work_order"): {"work_order"},
     ("verification_record", "conforms_to"): {"verification"},
     ("verification_record", "superseded_by"): {"verification_record"},
@@ -434,7 +455,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "capability": ("derives_from",),
         "requirement": ("derives_from",),
         "specification": ("specifies",),
-        "architecture": ("constrains",),
+        "architecture": (),
         "adr": ("decides",),
         "verification": ("verifies",),
         "work_order": ("implements", "specifications", "architecture", "verification"),
@@ -597,7 +618,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         f"artifact '{artifact.artifact_id}' relation '{relation_name}' references unknown target '{target}'",
                     )
                 else:
-                    allowed_types = PROVENANCE_RELATION_TARGET_TYPES.get((artifact.artifact_type, relation_name))
+                    allowed_types = RELATION_TARGET_TYPES.get((artifact.artifact_type, relation_name))
                     target_type = catalog[target].artifact_type
                     if allowed_types is not None and target_type not in allowed_types:
                         expected = ", ".join(sorted(allowed_types))
@@ -938,6 +959,318 @@ def _duplicate_strings(value: Any) -> list[str]:
     return sorted(duplicates)
 
 
+def architecture_traceability_state(
+    artifact: Artifact,
+    catalog: dict[str, Artifact],
+) -> dict[str, Any]:
+    """Return deterministic typed or compatibility architecture traceability."""
+
+    if artifact.artifact_type != "architecture":
+        return {
+            "state": "not_applicable",
+            "addresses": [],
+            "conforms_to": [],
+            "transitive_requirements": [],
+            "missing_from_conforming_specifications": [],
+            "legacy_targets": [],
+            "issues": [],
+        }
+
+    relations = artifact.relations
+    issues: list[str] = []
+
+    def values(name: str, *, required: bool) -> list[str]:
+        raw = relations.get(name)
+        if raw is None:
+            if required:
+                issues.append(f"architecture relation '{name}' is required")
+            return []
+        if not isinstance(raw, list):
+            issues.append(f"architecture relation '{name}' must be an array")
+            return []
+        invalid = [item for item in raw if not isinstance(item, str) or not item.strip()]
+        if invalid:
+            issues.append(f"architecture relation '{name}' contains a non-string or empty target")
+        clean = [item.strip() for item in raw if isinstance(item, str) and item.strip()]
+        duplicates = _duplicate_strings(raw)
+        if duplicates:
+            issues.append(f"architecture relation '{name}' contains duplicates: {', '.join(duplicates)}")
+        if required and not clean:
+            issues.append(f"architecture relation '{name}' must not be empty")
+        return sorted(set(clean))
+
+    typed_present = "addresses" in relations or "conforms_to" in relations
+    legacy_present = "constrains" in relations
+    addresses = values("addresses", required=typed_present)
+    conforms_to = values("conforms_to", required=typed_present)
+    legacy_targets = values("constrains", required=legacy_present)
+
+    transitive_requirements: set[str] = set()
+    for specification_id in conforms_to:
+        specification = catalog.get(specification_id)
+        if specification is None or specification.artifact_type != "specification":
+            continue
+        transitive_requirements.update(_relation_targets(specification, "specifies"))
+        if (
+            artifact.status in ACTIVE_COVERAGE_STATUSES
+            and specification.status not in ACTIVE_COVERAGE_STATUSES
+        ):
+            issues.append(
+                f"active architecture conforms to inactive specification '{specification_id}'"
+            )
+
+    if artifact.status in ACTIVE_COVERAGE_STATUSES:
+        for requirement_id in addresses:
+            requirement = catalog.get(requirement_id)
+            if (
+                requirement is not None
+                and requirement.artifact_type == "requirement"
+                and requirement.status not in ACTIVE_COVERAGE_STATUSES
+            ):
+                issues.append(
+                    f"active architecture addresses inactive requirement '{requirement_id}'"
+                )
+
+    missing = sorted(set(addresses) - transitive_requirements)
+    if typed_present and missing:
+        issues.append(
+            "addressed requirements are not specified by a conforming specification: "
+            + ", ".join(missing)
+        )
+
+    state = "typed"
+    if typed_present:
+        if legacy_present:
+            for target_id in legacy_targets:
+                target = catalog.get(target_id)
+                if target is None:
+                    continue
+                if target.artifact_type == "requirement" and target_id not in addresses:
+                    issues.append(
+                        f"legacy requirement target '{target_id}' is absent from addresses"
+                    )
+                elif target.artifact_type == "specification" and target_id not in conforms_to:
+                    issues.append(
+                        f"legacy specification target '{target_id}' is absent from conforms_to"
+                    )
+                elif target.artifact_type not in {"requirement", "specification"}:
+                    issues.append(
+                        f"legacy target '{target_id}' has unsupported type '{target.artifact_type}'"
+                    )
+            state = "dual_declared"
+    elif legacy_present and artifact.status in LEGACY_ARCHITECTURE_STATUSES:
+        target_types = {
+            catalog[target_id].artifact_type
+            for target_id in legacy_targets
+            if target_id in catalog
+        }
+        if target_types == {"requirement"}:
+            state = "legacy_requirement_trace"
+        elif target_types == {"specification"}:
+            state = "legacy_specification_trace"
+        else:
+            state = "legacy_ambiguous"
+            issues.append(
+                "completed legacy architecture constrains relation must target only requirements or only specifications"
+            )
+    else:
+        state = "missing_typed_relations"
+        issues.append(
+            "new or ongoing architecture requires typed addresses and conforms_to relations"
+        )
+
+    if issues:
+        state = "invalid"
+    return {
+        "state": state,
+        "addresses": addresses,
+        "conforms_to": conforms_to,
+        "transitive_requirements": sorted(transitive_requirements),
+        "missing_from_conforming_specifications": missing,
+        "legacy_targets": legacy_targets,
+        "issues": sorted(set(issues)),
+    }
+
+
+def validate_architecture_traceability(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    catalog = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_id != "<unknown>"
+    }
+    for artifact in artifacts:
+        if artifact.artifact_type != "architecture":
+            continue
+        traceability = architecture_traceability_state(artifact, catalog)
+        for issue in traceability["issues"]:
+            _add_error(errors, artifact, report_root, "E016", issue)
+        if traceability["state"] in {
+            "dual_declared",
+            "legacy_requirement_trace",
+            "legacy_specification_trace",
+        }:
+            warnings.append(
+                Diagnostic(
+                    _display_path(artifact.path, report_root),
+                    "W015",
+                    f"architecture uses deprecated constrains relation ({traceability['state']}); migrate through accountable governance",
+                )
+            )
+    return errors, warnings
+
+
+def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
+    """Return a deterministic, non-authoritative architecture assessment state."""
+
+    raw = artifact.metadata.get("decision_assessment")
+    if artifact.artifact_type != "architecture":
+        return {
+            "state": "invalid" if raw is not None else "not_applicable",
+            "outcome": None,
+            "triggers": [],
+            "rationale": None,
+            "assessed_by": None,
+            "issues": ["decision_assessment is allowed only on architecture artifacts"] if raw is not None else [],
+        }
+    if raw is None:
+        legacy = artifact.status in LEGACY_ARCHITECTURE_STATUSES
+        return {
+            "state": "legacy_missing" if legacy else "missing",
+            "outcome": None,
+            "triggers": [],
+            "rationale": None,
+            "assessed_by": None,
+            "issues": [] if legacy else ["architecture decision assessment is required"],
+        }
+    if not isinstance(raw, dict):
+        return {
+            "state": "invalid",
+            "outcome": None,
+            "triggers": [],
+            "rationale": None,
+            "assessed_by": None,
+            "issues": ["decision_assessment must be a TOML table"],
+        }
+
+    issues: list[str] = []
+    outcome_value = raw.get("outcome")
+    outcome = outcome_value.strip() if isinstance(outcome_value, str) else None
+    if outcome not in DECISION_ASSESSMENT_OUTCOMES:
+        issues.append("decision_assessment outcome must be adr_required or no_significant_decision")
+
+    triggers_value = raw.get("triggers")
+    triggers: list[str] = []
+    if not isinstance(triggers_value, list):
+        issues.append("decision_assessment triggers must be an array")
+    else:
+        invalid_items = [item for item in triggers_value if not isinstance(item, str) or not item.strip()]
+        if invalid_items:
+            issues.append("decision_assessment triggers contain a non-string or empty value")
+        triggers = [item.strip() for item in triggers_value if isinstance(item, str) and item.strip()]
+        duplicates = _duplicate_strings(triggers_value)
+        if duplicates:
+            issues.append(f"decision_assessment triggers contain duplicates: {', '.join(duplicates)}")
+        unknown = sorted(set(triggers) - DECISION_TRIGGERS)
+        if unknown:
+            issues.append(f"decision_assessment triggers are unknown: {', '.join(unknown)}")
+
+    rationale_value = raw.get("rationale")
+    rationale = rationale_value.strip() if isinstance(rationale_value, str) else None
+    if not rationale:
+        issues.append("decision_assessment rationale must be a non-empty string")
+    elif len(rationale) > MAX_ASSESSMENT_RATIONALE_LENGTH:
+        issues.append(
+            f"decision_assessment rationale exceeds {MAX_ASSESSMENT_RATIONALE_LENGTH} characters"
+        )
+
+    assessor_value = raw.get("assessed_by")
+    assessed_by = assessor_value.strip() if isinstance(assessor_value, str) else None
+    if not assessed_by:
+        issues.append("decision_assessment assessed_by must be a non-empty string")
+    elif len(assessed_by) > MAX_ASSESSOR_LENGTH:
+        issues.append(f"decision_assessment assessed_by exceeds {MAX_ASSESSOR_LENGTH} characters")
+
+    unknown_fields = sorted(set(raw) - {"outcome", "triggers", "rationale", "assessed_by"})
+    if unknown_fields:
+        issues.append(f"decision_assessment contains unknown fields: {', '.join(unknown_fields)}")
+    if outcome == "adr_required" and not triggers:
+        issues.append("adr_required decision assessment must declare at least one trigger")
+    if outcome == "no_significant_decision" and triggers:
+        issues.append("no_significant_decision assessment must not declare triggers")
+
+    return {
+        "state": "invalid" if issues else "valid",
+        "outcome": outcome,
+        "triggers": sorted(set(triggers)),
+        "rationale": rationale,
+        "assessed_by": assessed_by,
+        "issues": issues,
+    }
+
+
+def validate_decision_assessments(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    active_decisions_by_architecture: dict[str, set[str]] = {}
+    for decision in artifacts:
+        if decision.artifact_type != "adr" or decision.status not in ACTIVE_COVERAGE_STATUSES:
+            continue
+        for architecture_id in _relation_targets(decision, "decides"):
+            active_decisions_by_architecture.setdefault(architecture_id, set()).add(decision.artifact_id)
+
+    for artifact in artifacts:
+        assessment = decision_assessment_state(artifact)
+        if artifact.artifact_type != "architecture":
+            for issue in assessment["issues"]:
+                _add_error(errors, artifact, report_root, "E014", issue)
+            continue
+
+        state = assessment["state"]
+        if state in {"missing", "invalid"}:
+            for issue in assessment["issues"]:
+                _add_error(errors, artifact, report_root, "E014", issue)
+            continue
+        deciding = active_decisions_by_architecture.get(artifact.artifact_id, set())
+        if state == "legacy_missing":
+            warnings.append(
+                Diagnostic(
+                    _display_path(artifact.path, report_root),
+                    "W014",
+                    "completed legacy architecture has no decision_assessment; migrate during the compatibility window",
+                )
+            )
+            if not deciding:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E015",
+                    "completed legacy architecture without decision_assessment requires an active deciding ADR",
+                )
+            continue
+        if (
+            artifact.status in ACTIVE_COVERAGE_STATUSES
+            and assessment["outcome"] == "adr_required"
+            and not deciding
+        ):
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E015",
+                "adr_required architecture has no active ADR whose decides relation targets it",
+            )
+    return errors, warnings
+
+
 def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     active_specs = [
@@ -1050,6 +1383,8 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     artifacts, parse_errors = load_artifacts(selected_artifact_root, repository_root)
     errors = list(parse_errors)
 
+    assessment_warnings: list[Diagnostic] = []
+    traceability_warnings: list[Diagnostic] = []
     if not selected_artifact_root.exists():
         errors.append(
             Diagnostic(
@@ -1062,6 +1397,16 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
         errors.extend(validate_relations(artifacts, repository_root))
+        traceability_errors, traceability_warnings = validate_architecture_traceability(
+            artifacts,
+            repository_root,
+        )
+        errors.extend(traceability_errors)
+        assessment_errors, assessment_warnings = validate_decision_assessments(
+            artifacts,
+            repository_root,
+        )
+        errors.extend(assessment_errors)
         errors.extend(
             validate_revision_consistency(
                 artifacts,
@@ -1071,11 +1416,15 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         )
         errors.extend(validate_requirement_coverage(artifacts, repository_root))
 
-    warnings = validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors)
+    warnings = [
+        *assessment_warnings,
+        *traceability_warnings,
+        *validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors),
+    ]
     return ValidationReport(
         artifacts=artifacts,
         errors=sorted(set(errors)),
-        warnings=warnings,
+        warnings=sorted(set(warnings)),
     )
 
 

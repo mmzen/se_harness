@@ -8,6 +8,75 @@ Feature: Rationalized and enforceable repository instructions
     Then the only next harness document is ENGINEERING_HARNESS.md
     And that router directly identifies repository context, formal authority, and each policy module
 
+  Scenario: The managed router does not duplicate ordered workflow procedure
+    Given ENGINEERING_HARNESS.md and the focused policy modules are installed
+    When an actor reads commit-bound verification and release guidance
+    Then the router states the exact-commit, later-governance-commit, and accountable-authority invariants
+    And WORKFLOW.md owns the ordered capture, transition, release-preparation, and tagging procedure
+    And the router does not repeat that ordered procedure
+
+  Scenario: The focused workflow owns review and visualization procedure
+    Given ENGINEERING_HARNESS.md and WORKFLOW.md are installed
+    When an actor prepares a completed candidate for review
+    Then the router identifies workflow and quality-gate policy and retains the evidence boundary
+    And WORKFLOW.md owns the exact review-preflight and dashboard commands
+    And neither preflight nor Harness Explorer approves or verifies the candidate
+
+  Scenario: Significant first-design choices require an ADR
+    Given a new architecture selects system boundaries and persistent data ownership
+    And its decision assessment identifies those significant triggers
+    When preflight evaluates the implementing work order
+    Then each significant architecture requires a selected active ADR that decides it
+    And an unrelated ADR cannot satisfy the requirement
+
+  Scenario: Routine architecture conformance does not create a ceremonial ADR
+    Given a change applies an existing approved architecture without a significant trigger
+    And the technical owner records no significant decision with a non-empty rationale
+    When preflight evaluates the implementing work order
+    Then it may pass without an ADR for that architecture
+    And the explicit assessment remains visible in Harness Explorer
+
+  Scenario: Missing assessment is not implicit non-applicability
+    Given a selected architecture has neither decision assessment nor deciding ADR
+    When validation and preflight evaluate the repository
+    Then the missing assessment is reported visibly
+    And implementation readiness fails without inferring agent intent
+
+  Scenario: ADR cardinality follows coherent decisions
+    Given one significant decision affects several requirements and architectures
+    When one ADR records the coherent trade-off and decides every applicable architecture
+    Then coverage may pass without duplicating the ADR per requirement
+
+  Scenario: Architecture preserves both its driver and detailed contract
+    Given an architecturally significant requirement is specified by an applicable behavioral contract
+    When architecture addresses the requirement and conforms to the specification
+    Then the graph exposes both declared relations with their distinct meanings
+    And the transitive specification path remains derived rather than authoritative
+
+  Scenario: Routine requirements do not receive nominal architecture coverage
+    Given a conforming specification includes routine behavior that does not influence structure
+    When architecture traceability is validated
+    Then that routine requirement need not appear in the architecture addresses relation
+    And definition and verification coverage remain required independently
+
+  Scenario: Work-order architecture applicability is explicit
+    Given an active architecture addresses one requirement implemented by a work order
+    When preflight evaluates the selected governing chain
+    Then the applicable architecture and any required deciding ADR must be selected
+    And every selected architecture shares a conforming specification with the work order
+
+  Scenario: Historical architecture relations are classified without rewriting
+    Given a completed architecture contains only an unambiguous legacy constrains relation
+    When validation and Harness Explorer evaluate it during the compatibility window
+    Then they report its legacy target class and migration advisory
+    And no formal artifact is modified or assigned inferred architectural significance
+
+  Scenario: Ambiguous historical architecture traceability fails closed
+    Given a legacy constrains relation mixes requirement and specification targets
+    When the graph is validated
+    Then a deterministic ambiguity error is reported
+    And automation neither chooses a meaning nor migrates the relation
+
   Scenario: Claude receives the same instructions
     Given a repository with owner content in CLAUDE.md
     When the harness is adopted
