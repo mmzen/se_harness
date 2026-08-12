@@ -29,6 +29,12 @@
 - Files requiring specialized review: changes to installer ownership modes, safe path handling, lock behavior, canonical templates, runtime identity, the governor descriptor, self-hosting CI, artifact validation, provenance rules, or release archive normalization require deterministic boundary and failure tests.
 - Local conventions not captured elsewhere: maintain exactly one consumer installation; keep the released governor isolated from candidate source and candidate packages; treat target content as untrusted; preserve customizations; never infer product authority; and do not commit, tag, push, publish, verify, or release without separately authorized work and accountable human action.
 
+## Git workflow context
+
+This repository integrates reviewed work through branches and pull requests, but it does not currently declare one mandatory branch-prefix or release-branch scheme in this owner context. Every pull request subject to the installed workflow declares exactly one standalone `Harness-Work-Order: WO-...` field; branch naming does not substitute for that declaration or for approved scope.
+
+The non-authoritative [`docs/notes/harness-branching-model.md`](../notes/harness-branching-model.md) shows one main-plus-short-lived-branch example. It is a teaching aid, not repository policy or a universal SE Harness rule. Hosting controls such as branch protection, required checks, and merge permissions remain owner-managed external configuration.
+
 ## Maintenance
 
 Review this file when commands, boundaries, ownership, or repository structure change. Put product decisions and approvals in the formal artifact chain under `docs/engineering/`, not in this context file.

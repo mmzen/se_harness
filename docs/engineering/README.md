@@ -15,12 +15,13 @@
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
-- `release-0.2.2/`: integrated instruction-architecture qualification and aggregate provenance for version 0.2.2.
+- `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.
 
 ## Repository-specific engineering documentation
 
 - `REPOSITORY_CONTEXT.md`: confirmed commands, entry points, ownership, architecture, and repository constraints.
 - `templates/`: non-authoritative starting points for new formal artifacts.
+- `../notes/`: non-authoritative progressive explanations for human readers from conceptual overview through practical usage.
 
 Formal artifacts use TOML front matter between `+++` delimiters. Stable IDs and declared typed relations establish authority independent of file paths. Evidence, templates, generated dashboards, source, commits, and this index remain non-authoritative unless referenced by the applicable formal record.
 

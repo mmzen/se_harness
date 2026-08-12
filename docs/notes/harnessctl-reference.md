@@ -1,0 +1,126 @@
+# `harnessctl` command reference
+
+<!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
+> This is a non-authoritative reference to the current 0.2.2 CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
+
+## Invocation
+
+After activating the environment that owns SE Harness:
+
+```text
+harnessctl COMMAND [arguments]
+```
+
+The equivalent interpreter-scoped form is `python -m se_harness COMMAND [arguments]`. Run `harnessctl COMMAND --help` for the exact parser help installed in the selected environment.
+
+## Command inventory
+
+| Command | Principal actor | State effect | Intended use |
+| --- | --- | --- | --- |
+| `init` | repository owner or authorized agent | writes a complete standard harness | initialize an absent or empty repository |
+| `adopt` | repository owner or authorized agent | preserves existing content and writes the harness plus adoption observations | introduce the harness into an existing repository |
+| `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
+| `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
+| `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, scripts, and configured self-hosting controls |
+| `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
+| `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
+| `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
+| `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
+| `identity` | CI or advanced contributor | read-only identity report/check | prove governor, candidate-source, or candidate-package runtime origin and boundary |
+| `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC | bind selected work, verification contracts, evidence, snapshot, and exact clean `HEAD` |
+| `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS | bind release policy, eligible VRECs, exact work coverage, version, and the same candidate commit |
+
+## Repository setup and inspection
+
+```text
+harnessctl init [TARGET] [--project-name NAME] [--dry-run]
+harnessctl adopt [TARGET] [--project-name NAME] [--dry-run]
+harnessctl validate [TARGET] [--json]
+harnessctl dashboard [TARGET] [--output PATH]
+harnessctl doctor [TARGET]
+```
+
+`TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
+
+Validation reports deterministic errors and warnings but does not edit artifacts. Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+
+## Work readiness
+
+```text
+harnessctl preflight [TARGET] --work-order WO-... [--phase start|review] [--json]
+```
+
+`start` is the default phase. Preflight checks lifecycle eligibility and the governing chain, then returns the material an agent or reviewer must read. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, assurance, or release.
+
+## Safe repository upgrade
+
+```text
+harnessctl upgrade [TARGET]
+harnessctl upgrade [TARGET] --apply
+```
+
+The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+
+## Domain and artifact authoring
+
+```text
+harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run]
+harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-run]
+```
+
+Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. Existing valid flat layouts remain discoverable and are not automatically migrated.
+
+## Self-hosting runtime identity
+
+```text
+harnessctl identity --role governor|candidate-source|candidate-package \
+  --expected-version VERSION --expected-root PATH [options]
+```
+
+Key role-specific options are `--checkout-root`, `--candidate-commit`, `--governor-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. This command is primarily for the implementation repository's self-hosting CI. It verifies declared runtime origin; it does not promote a governor or approve a candidate.
+
+## Commit-bound verification preparation
+
+```text
+harnessctl capture-verification [TARGET] \
+  --id VREC-... \
+  --work-order WO-... \
+  --verification VER-... \
+  --evidence PATH \
+  [--owner ROLE] [--domain DOMAIN] [--output PATH]
+```
+
+Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, captures the graph snapshot, and writes only `status = "ready"`.
+
+An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
+
+## Commit-bound release preparation
+
+```text
+harnessctl prepare-release [TARGET] \
+  --id RLS-... \
+  --release-contract REL-... \
+  --verification-record VREC-... \
+  --work-order WO-... \
+  --version VERSION \
+  --authorized-by ROLE \
+  [--tag TAG] [--domain DOMAIN] [--output PATH]
+```
+
+Repeat `--verification-record` and `--work-order` for aggregate releases. The selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, included records must be eligible, and every record must bind the same candidate commit.
+
+The command writes only `status = "ready"`. It does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, deploy, or promote the self-hosting governor.
+
+## Authority summary
+
+| Result | Meaning |
+| --- | --- |
+| successful check | derived observation about the inspected repository or runtime |
+| generated dashboard | derived navigation and anomaly evidence |
+| generated `draft` | incomplete authoring starting point |
+| generated `ready` VREC/RLS | structurally prepared proposal awaiting accountable review |
+| human transition to `verified` | assurance decision about the exact candidate and evidence |
+| human transition to `released` | release authorization for that same candidate |
+
+For lifecycle timing, see [operational phasing](harness-operational-phasing.md). For complete examples, see [practical SE Harness examples](harness-lineage-example.md).

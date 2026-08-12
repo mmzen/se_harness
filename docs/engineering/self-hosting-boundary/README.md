@@ -23,4 +23,6 @@ Closed PR #28 and its branch retain the failed `VREC-SEH-003` and `RLS-SEH-003` 
 
 ## Status
 
-The accountable owner approved implementation with the instruction `go for implementation` on 2026-08-12. The bounded implementation is complete and `WO-SHB-001` is `implemented`. After the failed CI attempt, the owner approved `REL-SHB-001` as the clean 0.2.2 recovery contract. It authorizes qualification, the replacement candidate commit, push, pull request, and later preparation of `VREC-SEH-004` as `ready`; assurance transition, release-record approval, merge, tag, publication, deployment, and governor promotion remain separate decisions.
+The accountable owner approved implementation with the instruction `go for implementation` on 2026-08-12. The bounded implementation is complete and `WO-SHB-001` is `implemented`. After the failed CI attempt, the owner approved `REL-SHB-001` as the clean 0.2.2 recovery contract. `VREC-SEH-004` is `verified` and `RLS-SEH-004` is `released`; both bind candidate commit `8ffb5e9386c3dc75b637092f93d372936ae7a290`, selected by tag `v0.2.2`.
+
+The repository's public release and PyPI promotion were later completed under separate accountable actions. That external availability does not itself promote the independent self-hosting governor: `.self-hosting/governor.toml` still selects released version 0.2.1. Moving the governor pin to 0.2.2 remains a distinct governed change so candidate publication cannot silently make a candidate its own baseline.
