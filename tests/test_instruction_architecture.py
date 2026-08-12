@@ -18,7 +18,7 @@ from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, canonical_sha256
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PACKET_ROOT = REPOSITORY_ROOT / "docs" / "engineering" / "instruction-architecture"
-WHEEL_SHA256 = "56db717e5287492c421e11157545586b1e8f0ec2dd4011a9932ccf35f233d63d"
+WHEEL_SHA256 = "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
 OLD_ROUTER_PROCEDURE = (
     "After a separately authorized candidate commit contains implementation and evidence, "
     "`harnessctl capture-verification` may prepare a `ready` VREC in a later governance commit. "
@@ -490,9 +490,9 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertIn("independent-baseline:", workflow)
         self.assertIn("candidate:", workflow)
-        self.assertIn("se-harness==0.2.1", workflow)
+        self.assertIn("se-harness==0.2.2", workflow)
         self.assertIn(WHEEL_SHA256, workflow)
-        self.assertIn("releases/download/v0.2.0/se_harness-0.2.0-py3-none-any.whl", workflow)
+        self.assertIn("releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl", workflow)
         self.assertIn("sha256sum --check", workflow)
         self.assertIn("template_root()", workflow)
         self.assertIn("select_harness_work_order.py", workflow)

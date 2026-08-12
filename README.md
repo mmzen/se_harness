@@ -25,7 +25,7 @@ harnessctl --version
 For a reproducible installation, select the exact released version:
 
 ```powershell
-python -m pip install "se-harness==0.2.1"
+python -m pip install "se-harness==0.2.2"
 ```
 
 The launcher is stored at `.venv\Scripts\harnessctl.exe`. Activation adds that directory to command discovery for the current shell; it does not move or duplicate the launcher. Without activation, invoke it directly:

@@ -19,14 +19,14 @@ jobs:
         shell: bash
         run: |
           curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-            --output "$RUNNER_TEMP/se_harness-0.2.0-py3-none-any.whl" \
-            "https://github.com/mmzen/se_harness/releases/download/v0.2.0/se_harness-0.2.0-py3-none-any.whl"
+            --output "$RUNNER_TEMP/se_harness-0.2.1-py3-none-any.whl" \
+            "https://github.com/mmzen/se_harness/releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl"
           printf '%s  %s\n' \
-            '56db717e5287492c421e11157545586b1e8f0ec2dd4011a9932ccf35f233d63d' \
-            "$RUNNER_TEMP/se_harness-0.2.0-py3-none-any.whl" |
+            '533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454' \
+            "$RUNNER_TEMP/se_harness-0.2.1-py3-none-any.whl" |
             sha256sum --check -
           python -m pip install --disable-pip-version-check --no-deps \
-            "$RUNNER_TEMP/se_harness-0.2.0-py3-none-any.whl"
+            "$RUNNER_TEMP/se_harness-0.2.1-py3-none-any.whl"
       - name: Check installed structure and integrity
         run: harnessctl doctor .
       - name: Validate with the released distribution
@@ -51,7 +51,7 @@ jobs:
             python -c "import se_harness; print('using reviewed repository candidate')"
           else
             python -m pip install --disable-pip-version-check --no-deps \
-              --only-binary=:all: "se-harness==0.2.1"
+              --only-binary=:all: "se-harness==0.2.2"
           fi
       - name: Select the pull-request work order
         if: github.event_name == 'pull_request'

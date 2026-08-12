@@ -14,6 +14,7 @@
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
+- `release-0.2.2/`: integrated instruction-architecture qualification and aggregate provenance for version 0.2.2.
 
 ## Repository-specific engineering documentation
 
