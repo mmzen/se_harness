@@ -28,6 +28,8 @@ Workflow YAML was parsed after rendering the consumer placeholders. The reposito
 
 The first hosted recovery run exposed a Linux virtual-environment portability defect: resolving `bin/python` follows its normal symlink to the base interpreter outside the environment. The corrected identity model verifies the lexical launcher path and exact `sys.prefix`, while continuing to resolve and constrain module, distribution, template, entry-point, checkout, and import-search origins. A focused cross-platform regression test covers that distinction; a fresh hosted run remains required.
 
+The next hosted candidate-source run proved the governor correction and then exposed an older diagnostic-order difference for a symlinked managed destination: Linux resolved the escape before the explicit symlink check. `safe_destination` now rejects absolute or parent traversal first, then checks unresolved parent and final symlinks, and only then resolves containment. The operation remained fail-closed before and after the correction; the new order makes the security diagnosis deterministic across platforms.
+
 ## Released governor execution
 
 The retained 0.2.1 wheel was hash-checked before installation into a fresh temporary environment. Python ran in isolated mode outside the checkout and resolved:
@@ -44,7 +46,7 @@ Governor `init` and `doctor` passed against a governor-created temporary reposit
 An explicitly non-promotable wheel was built from the working tree in a disposable export, installed without dependencies in a fresh environment, and exercised only outside the checkout. This local worktree wheel is not a release artifact and its hash is evidence only:
 
 - wheel: `se_harness-0.2.2-py3-none-any.whl`;
-- SHA-256: `690287c9e9ad7ccdd3874b3c2ea4056ca997d15f3719c0f698d07608991d68df`;
+- SHA-256: `242af3810fa18d826fc018c318d64323bc168f8c65ee367406cdeddd2a36d488`;
 - installed version: `0.2.2`;
 - identity role: `candidate-package`;
 - isolated Python: true;

@@ -176,18 +176,22 @@ def _merge_block(current: bytes | None, desired_block: bytes) -> bytes:
 
 
 def safe_destination(root: Path, relative: Path) -> Path:
-    destination = (root / relative).resolve()
+    if relative.is_absolute() or ".." in relative.parts:
+        raise HarnessError(f"template destination escapes the target: {relative}")
+    root = root.resolve()
+    probe = root
+    for part in relative.parts[:-1]:
+        probe = probe / part
+        if probe.is_symlink():
+            raise HarnessError(f"refusing to traverse a symlinked directory: {probe}")
+    unresolved_destination = root / relative
+    if unresolved_destination.is_symlink():
+        raise HarnessError(f"refusing to replace a symlink: {unresolved_destination}")
+    destination = unresolved_destination.resolve()
     try:
         destination.relative_to(root)
     except ValueError as exc:
         raise HarnessError(f"template destination escapes the target: {relative}") from exc
-    probe = root
-    for part in relative.parts[:-1]:
-        probe = probe / part
-        if probe.exists() and probe.is_symlink():
-            raise HarnessError(f"refusing to traverse a symlinked directory: {probe}")
-    if destination.exists() and destination.is_symlink():
-        raise HarnessError(f"refusing to replace a symlink: {destination}")
     return destination
 
 
