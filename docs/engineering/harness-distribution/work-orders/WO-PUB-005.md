@@ -39,7 +39,7 @@ Retain the completed `WO-DOC-007` and `WO-DOC-008` documentation, tests, packets
 
 ## Out of scope
 
-- Transitioning `VREC-DST-005` to `verified` or any work order to `verified` or `released`.
+- At the time of candidate publication, transitioning `VREC-DST-005` to `verified` or any work order to `verified` or `released`. The later, separately accountable approval recorded by `WO-DST-006` extends only the existing PR envelope as described below; it does not retroactively make transition authority part of the original publication decision.
 - Preparing or transitioning a release record; changing a version; building a distribution; creating a tag or GitHub Release; publishing to PyPI; deploying; or promoting the self-hosting governor.
 - Merging the pull request, force pushing, rewriting history, modifying remote `main`, or changing branch protection and other external configuration.
 - Changing implementation content after candidate selection except to correct a blocking verification or publication defect through a new explicitly reported candidate.
@@ -59,3 +59,9 @@ Retain the completed `WO-DOC-007` and `WO-DOC-008` documentation, tests, packets
 Retain candidate SHA, candidate tree, VREC metadata, governance commit, branch/upstream, pull request URL and number, PR declaration, exact checks, warning classification, and prohibited-action confirmation in `docs/engineering/harness-distribution/evidence/WO-PUB-005-publication.md`.
 
 The branch and ready VREC were retained, and pull request 32 was opened against `main`; exact publication evidence is retained at the path above. The `implemented` state records publication work only and grants no assurance or release authority.
+
+## Later assurance publication extension
+
+After pull request 32 passed its required checks, the accountable repository owner separately instructed `verification record approved` on 2026-08-12. `WO-DST-006` records that assurance authority and the bounded `VREC-DST-005` transition. This later decision also authorizes carrying the four-file assurance governance commit on the already-open `docs/update-readme` branch under this PR-level publication envelope, so the standalone declaration `Harness-Work-Order: WO-PUB-005` remains an honest aggregate scope selector.
+
+This extension does not authorize any other VREC or work-order transition, release preparation or approval, merge, build, tag, publication, deployment, force push, or history rewrite. It does not add `WO-PUB-005` or `WO-DST-006` to the release-bearing verification claim.
