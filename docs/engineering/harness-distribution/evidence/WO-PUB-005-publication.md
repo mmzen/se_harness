@@ -56,5 +56,8 @@ The record intentionally covers only the two release-bearing documentation work 
 - Base/head: `main` <- `docs/update-readme`
 - Pull request title: `docs: streamline harness onboarding`
 - Standalone declaration: `Harness-Work-Order: WO-PUB-005`
+- Declaration transport: normalized from PowerShell CRLF to LF after the strict repository selector rejected the otherwise identical visible field; the work-order ID and PR scope did not change.
 
-The pull request was created after the candidate and ready-record governance commits were pushed. This evidence and the work order's `implemented` state are retained afterward in a final governance commit on the same open branch; they do not alter the candidate named by `VREC-DST-005`.
+The pull request was created after the candidate and ready-record governance commits were pushed. This evidence and the work order's `implemented` state are retained afterward in governance-only commits on the same open branch; they do not alter the candidate named by `VREC-DST-005`.
+
+The first PR event carried CRLF line endings and failed `Select the pull-request work order` because the selector intentionally accepts a strict LF-delimited standalone field. The body was normalized through GitHub without changing its content. Because a body edit is not one of the workflow's default triggering pull-request events, this evidence correction was committed and pushed normally to create a fresh `synchronize` event against the corrected body. An unrelated released-governor attempt also received an external HTTP 503 while downloading the pinned wheel; a parallel PR run subsequently acquired the same checksum-pinned governor successfully.
