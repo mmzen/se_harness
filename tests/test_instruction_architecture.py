@@ -483,23 +483,24 @@ class InstructionArchitectureTests(unittest.TestCase):
             self.assertEqual(2, completed.returncode)
             self.assertIn("expected exactly one", completed.stderr)
 
-    def test_workflow_separates_exact_baseline_and_candidate_assurance(self) -> None:
+    def test_workflow_separates_exact_governor_and_candidate_assurance(self) -> None:
         target = self.installed_target()
         workflow = (target / ".github" / "workflows" / "engineering-harness.yml").read_text(
             encoding="utf-8"
         )
-        self.assertIn("independent-baseline:", workflow)
+        self.assertIn("governor:", workflow)
         self.assertIn("candidate:", workflow)
         self.assertIn("se-harness==0.2.2", workflow)
         self.assertIn(WHEEL_SHA256, workflow)
         self.assertIn("releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl", workflow)
         self.assertIn("sha256sum --check", workflow)
-        self.assertIn("template_root()", workflow)
+        self.assertIn("governor-target", workflow)
+        self.assertIn("-I -c", workflow)
         self.assertIn("select_harness_work_order.py", workflow)
         self.assertIn("--phase review", workflow)
         self.assertNotIn("${{ github.event.pull_request.body", workflow)
         self.assertNotIn("{{HARNESS", workflow)
-        self.assertNotIn("{{BASELINE", workflow)
+        self.assertNotIn("{{GOVERNOR", workflow)
 
     def test_lock_remains_schema_two_after_instruction_install(self) -> None:
         target = self.installed_target()

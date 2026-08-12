@@ -19,6 +19,7 @@ from se_harness.installer import (
 )
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
+from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 
 
 def _scan_repository(target: Path) -> bytes:
@@ -199,6 +200,22 @@ def _create_artifact(args: argparse.Namespace) -> int:
     return 0
 
 
+def _identity(args: argparse.Namespace) -> int:
+    report = inspect_runtime_identity(
+        role=args.role,
+        expected_version=args.expected_version,
+        expected_root=Path(args.expected_root),
+        checkout_root=Path(args.checkout_root) if args.checkout_root else None,
+        candidate_commit=args.candidate_commit,
+        governor_wheel_sha256=args.governor_wheel_sha256,
+        entry_point=Path(args.entry_point) if args.entry_point else None,
+        require_isolated_python=args.require_isolated_python,
+        require_entry_point=args.require_entry_point,
+    )
+    print(render_runtime_identity(report))
+    return 0 if report.passed else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -251,6 +268,18 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--id", required=True, dest="artifact_id")
     create.add_argument("--dry-run", action="store_true")
     create.set_defaults(handler=_create_artifact)
+
+    identity = commands.add_parser("identity", help="emit and verify one self-hosting runtime identity")
+    identity.add_argument("--role", required=True, choices=("governor", "candidate-source", "candidate-package"))
+    identity.add_argument("--expected-version", required=True)
+    identity.add_argument("--expected-root", required=True)
+    identity.add_argument("--checkout-root")
+    identity.add_argument("--candidate-commit")
+    identity.add_argument("--governor-wheel-sha256")
+    identity.add_argument("--entry-point")
+    identity.add_argument("--require-isolated-python", action="store_true")
+    identity.add_argument("--require-entry-point", action="store_true")
+    identity.set_defaults(handler=_identity)
 
     capture = commands.add_parser("capture-verification", help="prepare a ready commit-bound verification record")
     capture.add_argument("target", nargs="?", default=".")

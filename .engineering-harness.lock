@@ -2,7 +2,7 @@
   "files": {
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "f7ffa86c98db4e6baf044d0811e32115bd015630158627ccc28ab1345f6fbd90"
+      "sha256": "449288bcf6cf62086cb8b1e7c7781f732093f02dda0de407d0196bcb43e190f4"
     },
     ".github/PULL_REQUEST_TEMPLATE.md": {
       "mode": "seed",
@@ -10,7 +10,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "9780a707e55310551f0735ee242d4913932d8a79272f6dba866b554a84c4de64"
+      "sha256": "ff0fdb8dc720f800cb354916e6b7ffd67e3e37ea04667dbfceef36830c2886eb"
     },
     ".gitignore": {
       "mode": "fragment",
