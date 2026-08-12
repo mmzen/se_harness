@@ -2,7 +2,7 @@
 id = "WO-PUB-005"
 type = "work_order"
 title = "Publish aggregate documentation candidate for review"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
@@ -20,7 +20,7 @@ verification = ["VER-DST-006", "VER-DST-007"]
 
 The accountable repository owner explicitly instructed `this becomes the commit candidate, you can commit, create the PR, and create the validation record` on 2026-08-12. That instruction authorizes the aggregate candidate commit, one ready verification record, the later governance commit retaining that record, a normal branch push, and one pull request against `main`.
 
-This governance-only work order remains `in_progress` until the branch is pushed and the pull request exists. It is not release payload and is not included in the aggregate VREC it authorizes.
+This governance-only work order reached `implemented` after the branch was pushed and pull request 32 existed. It is not release payload and is not included in the aggregate VREC it authorized.
 
 ## Objective
 
@@ -58,4 +58,4 @@ Retain the completed `WO-DOC-007` and `WO-DOC-008` documentation, tests, packets
 
 Retain candidate SHA, candidate tree, VREC metadata, governance commit, branch/upstream, pull request URL and number, PR declaration, exact checks, warning classification, and prohibited-action confirmation in `docs/engineering/harness-distribution/evidence/WO-PUB-005-publication.md`.
 
-After that evidence exists, transition this work order to `implemented` in a later governance commit and push it to the same open pull request. The completed state records publication work only and grants no assurance or release authority.
+The branch and ready VREC were retained, and pull request 32 was opened against `main`; exact publication evidence is retained at the path above. The `implemented` state records publication work only and grants no assurance or release authority.
