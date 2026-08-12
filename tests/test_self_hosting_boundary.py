@@ -12,7 +12,7 @@ from unittest import mock
 
 from se_harness import __version__
 from se_harness.preflight import inspect_installation
-from se_harness.runtime_identity import _within, inspect_runtime_identity
+from se_harness.runtime_identity import _lexically_within, _within, inspect_runtime_identity
 from se_harness.self_hosting import (
     DESCRIPTOR_PATH,
     load_governor_descriptor,
@@ -82,6 +82,15 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         self.assertTrue(first.passed, first.diagnostics)
         self.assertEqual(first.to_dict(), second.to_dict())
         self.assertNotIn("must-not-appear", json.dumps(first.to_dict(), sort_keys=True))
+
+    def test_virtualenv_launcher_boundary_does_not_follow_base_interpreter_symlink(self) -> None:
+        environment = Path("/tmp/candidate-env")
+        launcher = environment / "bin/python"
+        base_interpreter = Path("/opt/python/bin/python3.11")
+
+        self.assertTrue(_lexically_within(launcher, environment))
+        self.assertFalse(_lexically_within(base_interpreter, environment))
+        self.assertFalse(_within(base_interpreter, environment))
 
     def test_equal_version_cannot_substitute_checkout_source_for_installed_role(self) -> None:
         identity = inspect_runtime_identity(
@@ -195,6 +204,8 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("pull_request_target", workflow)
         self.assertNotIn("permissions:\n  contents: write", workflow)
+        self.assertIn("python_launcher = pathlib.Path(sys.executable).absolute()", workflow)
+        self.assertNotIn("pathlib.Path(sys.executable).resolve())", workflow)
 
     def test_failed_pr_records_are_excluded_from_recovery_candidate(self) -> None:
         for relative in FAILED_PR_RECORDS:

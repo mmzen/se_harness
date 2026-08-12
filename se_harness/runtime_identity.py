@@ -63,9 +63,25 @@ def _resolved(path: Path) -> Path:
         return path.expanduser().resolve(strict=False)
 
 
+def _absolute(path: Path) -> Path:
+    """Return a normalized absolute path without resolving its final symlink."""
+
+    return Path(os.path.abspath(path.expanduser()))
+
+
 def _within(path: Path, boundary: Path) -> bool:
     try:
         _resolved(path).relative_to(_resolved(boundary))
+    except ValueError:
+        return False
+    return True
+
+
+def _lexically_within(path: Path, boundary: Path) -> bool:
+    """Check launcher placement without following a normal virtualenv symlink."""
+
+    try:
+        _absolute(path).relative_to(_absolute(boundary))
     except ValueError:
         return False
     return True
@@ -108,7 +124,8 @@ def inspect_runtime_identity(
     module = _resolved(Path(__file__))
     distribution = _distribution_root()
     templates = _resolved(template_root())
-    executable = _resolved(Path(sys.executable))
+    executable = _absolute(Path(sys.executable))
+    runtime_prefix = _resolved(Path(sys.prefix))
     discovered_entry_point = shutil.which("harnessctl") or shutil.which("harnessctl.exe")
     resolved_entry_point = (
         _resolved(entry_point)
@@ -144,14 +161,18 @@ def inspect_runtime_identity(
             )
 
     if role in {"governor", "candidate-package"}:
-        for label, path in (
-            ("python_executable", executable),
-            ("distribution_origin", distribution),
-        ):
-            if not _within(path, expected):
-                diagnostics.append(
-                    IdentityDiagnostic("RID004", label, "installed-runtime path is outside its environment")
-                )
+        if runtime_prefix != expected:
+            diagnostics.append(
+                IdentityDiagnostic("RID004", "runtime_prefix", "runtime prefix differs from the expected environment")
+            )
+        if not _lexically_within(executable, expected):
+            diagnostics.append(
+                IdentityDiagnostic("RID004", "python_executable", "virtualenv launcher is outside its environment")
+            )
+        if not _within(distribution, expected):
+            diagnostics.append(
+                IdentityDiagnostic("RID004", "distribution_origin", "installed-runtime path is outside its environment")
+            )
         if checkout is None:
             diagnostics.append(IdentityDiagnostic("RID005", "checkout_root", "checkout boundary is required"))
         else:
@@ -159,12 +180,15 @@ def inspect_runtime_identity(
                 ("module_origin", module),
                 ("distribution_origin", distribution),
                 ("template_origin", templates),
-                ("python_executable", executable),
             ):
                 if _within(path, checkout):
                     diagnostics.append(
                         IdentityDiagnostic("RID006", label, "installed runtime resolves inside the checkout")
                     )
+            if _lexically_within(executable, checkout):
+                diagnostics.append(
+                    IdentityDiagnostic("RID006", "python_executable", "installed runtime launcher is inside the checkout")
+                )
             contaminated = [path for path in _effective_search_paths() if _within(path, checkout)]
             if contaminated:
                 diagnostics.append(

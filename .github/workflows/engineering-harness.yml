@@ -60,10 +60,14 @@ jobs:
           module = pathlib.Path(se_harness.__file__).resolve()
           distribution = pathlib.Path(importlib.metadata.distribution("se-harness").locate_file("")).resolve()
           templates = template_root().resolve()
-          origins = (module, distribution, templates, pathlib.Path(sys.executable).resolve())
+          python_launcher = pathlib.Path(sys.executable).absolute()
+          resolved_origins = (module, distribution, templates)
           assert se_harness.__version__ == expected_version
-          assert all(path.is_relative_to(environment) for path in origins)
-          assert all(not path.is_relative_to(checkout) for path in origins)
+          assert pathlib.Path(sys.prefix).resolve() == environment
+          assert python_launcher.is_relative_to(environment)
+          assert all(path.is_relative_to(environment) for path in resolved_origins)
+          assert all(not path.is_relative_to(checkout) for path in resolved_origins)
+          assert not python_launcher.is_relative_to(checkout)
           assert all(not path.resolve().is_relative_to(checkout) for path in map(pathlib.Path, sys.path) if str(path))
           print(json.dumps({
               "role": "governor",

@@ -22,9 +22,11 @@ The selected released governor is 0.2.1 from GitHub release `v0.2.1`, wheel `se_
 
 ## Tests and graph
 
-Focused identity, descriptor, workflow, parity-boundary, and failed-attempt exclusion tests passed. The complete local suite passed with 122 tests and three pre-existing conditional skips. Formal validation passed with 241 artifacts, zero errors, and 36 pre-existing legacy/location warnings. Review preflight passed for `WO-SHB-001`. `doctor` passed and reported governor 0.2.1. Explorer generated 241 artifacts and 799 relations with zero errors, 37 warnings, and final snapshot `2f330fc5882e8ad251c3d0de1b24424f914ef6a84bdce22cdf4274d5674f27c0`.
+Focused identity, descriptor, workflow, parity-boundary, and failed-attempt exclusion tests passed. The complete local suite passed with 123 tests and three pre-existing conditional skips. Formal validation passed with 241 artifacts, zero errors, and 36 pre-existing legacy/location warnings. Review preflight passed for `WO-SHB-001`. `doctor` passed and reported governor 0.2.1. Explorer generated 241 artifacts and 799 relations with zero errors, 37 warnings, and observed snapshot `2f330fc5882e8ad251c3d0de1b24424f914ef6a84bdce22cdf4274d5674f27c0`.
 
 Workflow YAML was parsed after rendering the consumer placeholders. The repository-specific workflow exposed exactly `governor`, `candidate-source`, and `candidate-package` jobs.
+
+The first hosted recovery run exposed a Linux virtual-environment portability defect: resolving `bin/python` follows its normal symlink to the base interpreter outside the environment. The corrected identity model verifies the lexical launcher path and exact `sys.prefix`, while continuing to resolve and constrain module, distribution, template, entry-point, checkout, and import-search origins. A focused cross-platform regression test covers that distinction; a fresh hosted run remains required.
 
 ## Released governor execution
 
