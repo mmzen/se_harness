@@ -2,6 +2,60 @@
 
 This packet defines the implemented instruction architecture for repositories installed or adopted by SE Harness. `WO-IAR-001` retains exact evidence for the bounded implementation. Commit-bound verification and release authority remain separate.
 
+## Implemented policy-responsibility refinement
+
+The incremental `IAR-002` packet addresses residual procedural duplication between `ENGINEERING_HARNESS.md` and `WORKFLOW.md`. It reuses the approved `INT-IAR-001` and `CAP-IAR-001` authority because the change refines the already selected one-router, focused-policy architecture rather than introducing a new product outcome.
+
+The proposed boundary keeps stable provenance, authority, and side-effect invariants visible in the managed router while assigning ordered verification and release procedure to `WORKFLOW.md`. It changes no command behavior, lifecycle rule, historical record, or accountable decision right.
+
+### Incremental packet index
+
+- Requirement: `REQ-IAR-010`
+- Specification: `SPEC-IAR-002`
+- Architecture: `ARCH-IAR-002`
+- Decision: `ADR-IAR-002`
+- Verification contract: `VER-IAR-002`
+- Implemented work order: `WO-IAR-002`
+
+## Implemented review-routing refinement
+
+The `IAR-003` packet applies the same responsibility boundary to review and visualization. The router retains evidence and authority invariants; `WORKFLOW.md` becomes the single owner of exact review-preflight, dashboard, and candidate-inspection procedure.
+
+### Review-routing packet index
+
+- Requirement: `REQ-IAR-011`
+- Specification: `SPEC-IAR-003`
+- Architecture: `ARCH-IAR-003`
+- Decision: `ADR-IAR-003`
+- Verification contract: `VER-IAR-003`
+- Implemented work order: `WO-IAR-003`
+
+## Implemented conditional-ADR assurance
+
+The `IAR-004` packet responds to observed usage where significant first-design choices were recorded in architecture without an ADR. It makes applicability assessment mandatory while keeping ADR creation conditional: significant decisions require related ADR coverage; routine conformance requires an explicit accountable no-ADR rationale.
+
+### Conditional-ADR packet index
+
+- Requirement: `REQ-IAR-012`
+- Specification: `SPEC-IAR-004`
+- Architecture: `ARCH-IAR-004`
+- Decision: `ADR-IAR-004`
+- Verification contract: `VER-IAR-004`
+- Implemented work order: `WO-IAR-004`
+
+## Implemented typed architecture-traceability change
+
+The `IAR-005` packet resolves the overloaded `architecture.constrains` relation. It preserves direct traceability to architecturally significant requirement drivers through `addresses`, adds explicit specification contracts through `conforms_to`, and keeps direct declarations distinct from transitive graph projections. Routine requirements do not receive artificial architecture coverage, and completed historical relations remain read-only under a bounded compatibility classifier.
+
+### Typed-traceability packet index
+
+- Requirement: `REQ-IAR-013`
+- Specification: `SPEC-IAR-005`
+- Architecture: `ARCH-IAR-005`
+- Decision: `ADR-IAR-005`
+- Verification contract: `VER-IAR-005`
+- Implemented work order: `WO-IAR-005`
+
 ## Proposed instruction route
 
 ```text

@@ -1,10 +1,14 @@
 [harness]
 schema_version = 2
-tool_version = "0.2.1"
+tool_version = "0.2.2"
 installed_at = "2026-08-11"
 project_name = "se_harness"
 artifact_root = "docs/engineering"
 dashboard_output = "target/harness-dashboard"
+
+[self_hosting]
+role = "implementation-repository"
+governor_descriptor = ".self-hosting/governor.toml"
 
 [revision_provenance]
 require_full_commit = true

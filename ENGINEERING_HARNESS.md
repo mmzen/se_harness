@@ -1,6 +1,6 @@
 # Engineering Harness for se_harness
 
-This repository uses SE Harness 0.2.1. This file is the single managed contract and router. Repository-owned instructions may add stricter local constraints, but they cannot waive this contract.
+This repository uses SE Harness 0.2.2. This file is the single managed contract and router. Repository-owned instructions may add stricter local constraints, but they cannot waive this contract.
 
 ## Authority model
 
@@ -37,11 +37,11 @@ Use the repository-owned `docs/engineering/README.md` only as the index of local
 
 ## Review and visualization
 
-Run `harnessctl preflight . --work-order WO-... --phase review` for a completed pull-request candidate. Generate Harness Explorer with `harnessctl dashboard .` and open `target/harness-dashboard/index.html`. Both outputs are derived, read-only evidence.
+Review readiness and visualization follow `docs/engineering/WORKFLOW.md`, subject to `QUALITY_GATES.md`. Preflight and Harness Explorer outputs are derived, read-only evidence; neither approves work nor verifies a candidate.
 
 ## Commit-bound verification and release
 
-After a separately authorized candidate commit contains implementation and evidence, `harnessctl capture-verification` may prepare a `ready` VREC in a later governance commit. After accountable assurance review, `harnessctl prepare-release` may prepare a `ready` release record bound to the same candidate commit. These commands never commit, push, tag, approve, release, publish, or deploy.
+Verification and release follow `docs/engineering/WORKFLOW.md`, subject to `QUALITY_GATES.md`, `TRACEABILITY.md`, and `DECISION_RIGHTS.md`. VRECs and release records must identify the exact candidate commit they govern and therefore reside in later governance commits. Harness commands may prepare records, but never exercise accountable decision rights or commit, push, tag, release, publish, or deploy.
 
 ## Stop conditions
 

@@ -25,7 +25,7 @@ harnessctl --version
 For a reproducible installation, select the exact released version:
 
 ```powershell
-python -m pip install "se-harness==0.2.1"
+python -m pip install "se-harness==0.2.2"
 ```
 
 The launcher is stored at `.venv\Scripts\harnessctl.exe`. Activation adds that directory to command discovery for the current shell; it does not move or duplicate the launcher. Without activation, invoke it directly:
@@ -177,7 +177,7 @@ Every installation receives the same standard harness:
 - aggregate VREC and RLS provenance binding exact work, evidence, and a clean candidate commit;
 - explicit retention of abandoned ready verification records as `superseded` through accountable decisions;
 - safe adoption and hash-based upgrades that preserve repository customizations;
-- a GitHub Actions workflow separating the exact configured released baseline from candidate behavior and binding pull requests to one explicit work order;
+- a GitHub Actions workflow separating the exact configured released governor from candidate behavior, proving runtime origin, and binding pull requests to one explicit work order;
 - protected OIDC publication that promotes exact GitHub release assets to PyPI without rebuilding them and retains PyPI attestations.
 
 There is exactly one standard installation. Minimal, offline, and selectable installation profiles are deliberately unsupported.
@@ -400,7 +400,7 @@ ENGINEERING_HARNESS.md                repository engineering entry point
 .github/
   PULL_REQUEST_TEMPLATE.md             owner-editable structured work-order declaration
 .github/workflows/
-  engineering-harness.yml            released-baseline and candidate CI checks
+  engineering-harness.yml            released-governor and candidate CI checks
 docs/engineering/
   README.md                            repository-owned artifact-domain index
   REPOSITORY_CONTEXT.md               repository-owned commands and constraints
@@ -454,12 +454,14 @@ The metadata of an existing PyPI version is immutable. README and project-metada
 
 The installed pull-request template declares exactly one standalone `Harness-Work-Order: WO-...` field. CI parses it as untrusted data, rejects zero, multiple, malformed, or injection-shaped values, and runs review preflight. Reviewers still decide whether the diff semantically stays within that work order.
 
-The required workflow has two assurance lanes:
+The standard installed workflow at `.github/workflows/engineering-harness.yml` has two non-substitutable assurance roles:
 
-- the independent lane installs the exact configured released baseline with its retained SHA-256 and runs the validator packaged by that release; `.github/workflows/engineering-harness.yml` is the observation of the current pin;
-- the candidate lane exercises the declared harness version, strict work-order selection, review preflight, current validator, and Harness Explorer.
+- the exact configured released baseline, called the governor, is acquired by immutable URL and retained SHA-256, imported outside the checkout, and runs same-version `doctor` only against a disposable repository it created;
+- the candidate role exercises the declared harness version against the target repository, including strict work-order selection, review preflight, current `doctor`, validator, and Harness Explorer.
 
-The harness repository necessarily has a one-release bootstrap lag: unreleased checker behavior is candidate verification, not independent proof. After publication, a separate governed pin update promotes that behavior into the external baseline. Required status checks, CODEOWNERS review, and branch protection remain accountable repository-host settings; installation does not claim to configure them automatically.
+The harness implementation repository strengthens this boundary into three gates: released governor, candidate source, and a candidate wheel installed in a fresh environment. `harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, and commit or wheel digest machine-assessable. Governor checks never interpret candidate semantics they do not understand; candidate-package acceptance occurs only in disposable repositories outside the checkout.
+
+The harness repository necessarily has a one-release bootstrap lag: unreleased checker behavior is candidate verification, not independent proof. After immutable publication, a separate governed promotion updates the governor descriptor and pin; publication alone never promotes the candidate. Required status checks, CODEOWNERS review, and branch protection remain accountable repository-host settings; installation does not claim to configure them automatically.
 
 Install or adopt target repositories from an actual released distribution. A source checkout can exercise the candidate lane for harness development, but an unreleased version is intentionally not treated as an externally available target-repository checker.
 

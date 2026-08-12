@@ -37,10 +37,10 @@ FRAGMENT_TARGETS = {
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
-BASELINE_HARNESS_VERSION = "0.2.0"
-BASELINE_HARNESS_TAG = "v0.2.0"
-BASELINE_HARNESS_WHEEL = "se_harness-0.2.0-py3-none-any.whl"
-BASELINE_HARNESS_WHEEL_SHA256 = "56db717e5287492c421e11157545586b1e8f0ec2dd4011a9932ccf35f233d63d"
+GOVERNOR_HARNESS_VERSION = "0.2.1"
+GOVERNOR_HARNESS_TAG = "v0.2.1"
+GOVERNOR_HARNESS_WHEEL = "se_harness-0.2.1-py3-none-any.whl"
+GOVERNOR_HARNESS_WHEEL_SHA256 = "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
 
 
 class HarnessError(RuntimeError):
@@ -176,18 +176,22 @@ def _merge_block(current: bytes | None, desired_block: bytes) -> bytes:
 
 
 def safe_destination(root: Path, relative: Path) -> Path:
-    destination = (root / relative).resolve()
+    if relative.is_absolute() or ".." in relative.parts:
+        raise HarnessError(f"template destination escapes the target: {relative}")
+    root = root.resolve()
+    probe = root
+    for part in relative.parts[:-1]:
+        probe = probe / part
+        if probe.is_symlink():
+            raise HarnessError(f"refusing to traverse a symlinked directory: {probe}")
+    unresolved_destination = root / relative
+    if unresolved_destination.is_symlink():
+        raise HarnessError(f"refusing to replace a symlink: {unresolved_destination}")
+    destination = unresolved_destination.resolve()
     try:
         destination.relative_to(root)
     except ValueError as exc:
         raise HarnessError(f"template destination escapes the target: {relative}") from exc
-    probe = root
-    for part in relative.parts[:-1]:
-        probe = probe / part
-        if probe.exists() and probe.is_symlink():
-            raise HarnessError(f"refusing to traverse a symlinked directory: {probe}")
-    if destination.exists() and destination.is_symlink():
-        raise HarnessError(f"refusing to replace a symlink: {destination}")
     return destination
 
 
@@ -217,10 +221,10 @@ def _variables(target: Path, project_name: str | None, installed_at: str | None 
         "PROJECT_NAME": selected_name,
         "HARNESS_VERSION": __version__,
         "INSTALL_DATE": selected_date,
-        "BASELINE_HARNESS_VERSION": BASELINE_HARNESS_VERSION,
-        "BASELINE_HARNESS_TAG": BASELINE_HARNESS_TAG,
-        "BASELINE_HARNESS_WHEEL": BASELINE_HARNESS_WHEEL,
-        "BASELINE_HARNESS_WHEEL_SHA256": BASELINE_HARNESS_WHEEL_SHA256,
+        "GOVERNOR_HARNESS_VERSION": GOVERNOR_HARNESS_VERSION,
+        "GOVERNOR_HARNESS_TAG": GOVERNOR_HARNESS_TAG,
+        "GOVERNOR_HARNESS_WHEEL": GOVERNOR_HARNESS_WHEEL,
+        "GOVERNOR_HARNESS_WHEEL_SHA256": GOVERNOR_HARNESS_WHEEL_SHA256,
     }
 
 
