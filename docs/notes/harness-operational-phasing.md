@@ -36,6 +36,16 @@ Automation assists between decision points. Blueprints, test results, a clean Gi
 | 7. Release decision | After eligible verification and release-contract checks, automation may prepare a `ready` RLS, again in a later governance commit. The release owner may transition it to `released`. | The RLS and all included VRECs bind the same C. `released` records authorization; it does not prove that an external action succeeded. |
 | 8. Promotion and operation | Authorized automation or humans may tag C, create a GitHub Release, publish the already verified distribution, or deploy it. Operational evidence is evaluated against operating contracts. | Tags, publication, deployment, hosting controls, and service operation are external actions governed by repository policy and accountable owners. |
 
+## When verification is refused
+
+An assurance owner refuses verification by withholding the `ready -> verified` transition. A VREC has no `rejected` status and no negative assurance claim is created. The work order honestly remains `implemented`: that status records completed work and retained evidence, not correctness.
+
+Release is then blocked by formal checks. A work order cannot claim `verified` or `released` without coverage from a verified or released VREC. A released RLS may include only verified or released VRECs, and their commit identities must match the RLS. `prepare-release` can technically prepare a `ready` RLS from a ready VREC, but the result is only a proposal and is not release-eligible. Follow the managed workflow order and retain an RLS only after verification. In the current model, a committed ready RLS also prevents its VREC from being superseded, while an RLS has no `rejected` or `superseded` state; stop and escalate if that situation already exists rather than inventing a transition.
+
+If the generated ready VREC was never committed, no formal VREC enters repository history. An accountable refusal rationale may instead be retained under `docs/engineering/<domain>/evidence/` in an authorized commit; evidence is supporting material and has no artifact lifecycle status. If the ready VREC was committed, it must not be deleted, rewritten, or marked rejected. It remains ready until an accountable later decision may mark it `superseded`, and only after a distinct verified or released VREC covers all of its work. The [conceptual model](harness-uml-model.md#important-multiplicities-and-invariants) shows that successor relation. Explorer warning `W-REV-004` is emitted only when such covering verified or released records already exist; it is a derived prompt and never chooses or performs the transition.
+
+A defective payload is corrected in a new clean candidate with its own bounded work and evidence; the old commit is not repaired retroactively. The [illustrative branching model](harness-branching-model.md#when-assurance-refuses-a-candidate) explains the Git consequence. If a requirement, specification, ADR, work order, or another definition artifact is itself wrong, an accountable owner may use `rejected` for that artifact rather than for the VREC. Rejected artifacts leave active coverage, so any still-active dependants must also be reconciled until the graph validates again.
+
 ## Why the records come later
 
 A Git commit cannot contain its own hash. Therefore the record that names candidate C cannot be part of C:
