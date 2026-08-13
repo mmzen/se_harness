@@ -127,11 +127,51 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("SE Harness does **not** require this branch model", branching)
-        self.assertIn("one short-lived work branch", branching)
-        self.assertIn("Harness-Work-Order: WO-EX-001", branching)
+        self.assertEqual(2, branching.count("gitGraph"))
+        self.assertIn("Example 1: one change from implementation to release", branching)
         self.assertIn("tag points back to **candidate C**", branching)
+        self.assertIn("Example 2: continuous integration, delayed release", branching)
+        self.assertIn("`main` is the only integration branch for normal development", branching)
+        self.assertIn("Harness-Work-Order: WO-FEAT-001", branching)
+        self.assertIn("G5: ready VREC-C binds C3", branching)
+        self.assertIn("WO-QUAL-030", branching)
+        self.assertIn("aggregate VREC re-evaluates the release-bearing work at R", branching)
+        self.assertIn("`release/0.3` is not used for new features", branching)
+        self.assertIn("v0.3.0` and `release/0.3` are created only after G10", branching)
         self.assertNotIn("feature/<short-description>", context)
         self.assertIn("harness-branching-model.md", context)
+        self.assertIn("release/x.y", context)
+        self.assertIn("REL-031", branching)
+        self.assertIn("VER-FIX-014", branching)
+        self.assertIn("WO-QUAL-031", branching)
+        self.assertIn("docs/engineering/verification-records/VREC-030.md", branching)
+        self.assertIn("W013` advisory, never a validation error", branching)
+
+    def test_refused_verification_paths_are_explained_without_invented_authority(self) -> None:
+        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
+        branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
+
+        for required in (
+            "## When verification is refused",
+            "A VREC has no `rejected` status",
+            "The work order honestly remains `implemented`",
+            "only a proposal and is not release-eligible",
+            "an RLS has no `rejected` or `superseded` state",
+            "W-REV-004",
+            "harness-uml-model.md#important-multiplicities-and-invariants",
+            "harness-branching-model.md#when-assurance-refuses-a-candidate",
+        ):
+            self.assertIn(required, phasing)
+
+        for required in (
+            "### When assurance refuses a candidate",
+            "does not remove the candidate from `main` or rewrite branch history",
+            "a revert is also an append-only commit and becomes its own candidate",
+            "harness-operational-phasing.md#when-verification-is-refused",
+        ):
+            self.assertIn(required, branching)
+
+        self.assertEqual(2, branching.count("gitGraph"))
 
     def test_example_commands_exist_in_current_cli(self) -> None:
         parser = build_parser()

@@ -33,7 +33,7 @@
 
 This repository integrates reviewed work through branches and pull requests, but it does not currently declare one mandatory branch-prefix or release-branch scheme in this owner context. Every pull request subject to the installed workflow declares exactly one standalone `Harness-Work-Order: WO-...` field; branch naming does not substitute for that declaration or for approved scope.
 
-The non-authoritative [`docs/notes/harness-branching-model.md`](../notes/harness-branching-model.md) shows one main-plus-short-lived-branch example. It is a teaching aid, not repository policy or a universal SE Harness rule. Hosting controls such as branch protection, required checks, and merge permissions remain owner-managed external configuration.
+The non-authoritative [`docs/notes/harness-branching-model.md`](../notes/harness-branching-model.md) presents one illustrative trunk-based model through a compact lifecycle example and a detailed example with short-lived work branches, later governance commits, and supported `release/x.y` maintenance lines. It is a teaching aid, not repository policy or a universal SE Harness rule. Hosting controls such as branch protection, required checks, and merge permissions remain owner-managed external configuration.
 
 ## Maintenance
 
