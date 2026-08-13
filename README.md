@@ -101,6 +101,24 @@ flowchart LR
 
 When Mermaid is not rendered, the labels, decision shapes, dotted Explorer observations, and surrounding prose preserve the same authority and provenance story. Color is supplementary.
 
+### Harness Explorer in action
+
+The generated dashboard makes the repository's connected engineering evidence practical to review:
+
+**Overview — see the artifact graph, lifecycle distribution, and current operator queue.**
+
+![Harness Explorer Overview showing the repository graph, lifecycle distribution, and operator queue](docs/images/harness-explorer-overview.png)
+
+**Lineage — follow a focused path from intent through definition, authorized work, and verification.**
+
+![Harness Explorer Lineage showing the connected path from intent to a verification record](docs/images/harness-explorer-lineage.png)
+
+**Readiness — inspect the current assurance boundary and the evidence behind the next human decision.**
+
+![Harness Explorer Readiness showing quality-gate evidence and the pending accountable decision](docs/images/harness-explorer-readiness.png)
+
+These are derived, read-only views: they expose traceability, evidence, and anomalies without approving work, verifying a commit, or authorizing a release.
+
 ## What you get
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;

@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harness-dashboard-data.schema.json",
+  "title": "SE Harness canonical Explorer snapshot",
+  "type": "object",
+  "required": [
+    "schema",
+    "finding_rules_version",
+    "quality_gates_version",
+    "repository",
+    "artifacts",
+    "relations",
+    "diagnostics",
+    "findings",
+    "coverage",
+    "readiness",
+    "revision_provenance",
+    "revision_policy",
+    "experiments",
+    "evidence"
+  ],
+  "properties": {
+    "schema": { "const": "harness-dashboard-snapshot-v1" },
+    "finding_rules_version": { "type": "string", "minLength": 1 },
+    "quality_gates_version": { "type": "string", "minLength": 1 },
+    "repository": { "$ref": "#/$defs/repository" },
+    "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" } },
+    "relations": { "type": "array", "items": { "$ref": "#/$defs/relation" } },
+    "diagnostics": { "type": "array", "items": { "$ref": "#/$defs/diagnostic" } },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "coverage": { "type": "array", "items": { "$ref": "#/$defs/coverage" } },
+    "readiness": { "type": "array", "items": { "$ref": "#/$defs/readiness" } },
+    "revision_provenance": { "type": "array", "items": { "$ref": "#/$defs/revisionProvenance" } },
+    "revision_policy": { "$ref": "#/$defs/revisionPolicy" },
+    "experiments": { "type": "array", "items": { "type": "object", "additionalProperties": true },
+    "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "nullableString": { "type": ["string", "null"] },
+    "stringArray": { "type": "array", "items": { "type": "string" } },
+    "state": { "enum": ["satisfied", "unsatisfied", "not_assessable"] },
+    "repository": {
+      "type": "object",
+      "required": ["name", "revision", "artifact_root", "valid"],
+      "properties": {
+        "name": { "type": "string" },
+        "revision": { "$ref": "#/$defs/nullableString" },
+        "artifact_root": { "type": "string" },
+        "valid": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["id", "type", "title", "status", "owners", "path", "authority"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "status": { "type": "string", "minLength": 1 },
+        "owners": { "$ref": "#/$defs/stringArray" },
+        "path": { "type": "string" },
+        "authority": { "type": "string" },
+        "created": { "$ref": "#/$defs/nullableString" },
+        "updated": { "$ref": "#/$defs/nullableString" },
+        "statement": { "$ref": "#/$defs/nullableString" },
+        "verification_method": { "$ref": "#/$defs/nullableString" },
+        "commit": { "$ref": "#/$defs/nullableString" },
+        "git_object_format": { "$ref": "#/$defs/nullableString" },
+        "worktree_state": { "$ref": "#/$defs/nullableString" },
+        "version": { "$ref": "#/$defs/nullableString" },
+        "tag": { "$ref": "#/$defs/nullableString" },
+        "verified_at": { "$ref": "#/$defs/nullableString" },
+        "released_at": { "$ref": "#/$defs/nullableString" },
+        "artifact_snapshot_sha256": { "$ref": "#/$defs/nullableString" },
+        "evidence_paths": { "$ref": "#/$defs/stringArray" },
+        "architecture_traceability": { "type": "object", "additionalProperties": true },
+        "decision_assessment": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    },
+    "relation": {
+      "type": "object",
+      "required": ["source", "relation", "target", "authority", "target_exists"],
+      "properties": {
+        "source": { "$ref": "#/$defs/id" },
+        "relation": { "type": "string", "minLength": 1 },
+        "target": { "$ref": "#/$defs/id" },
+        "authority": { "enum": ["declared", "derived"] },
+        "target_exists": { "type": "boolean" },
+        "via": { "$ref": "#/$defs/stringArray" }
+      },
+      "additionalProperties": true
+    },
+    "diagnostic": {
+      "type": "object",
+      "required": ["code", "severity", "message", "path", "artifacts", "authority"],
+      "properties": {
+        "code": { "type": "string" },
+        "severity": { "enum": ["error", "warning", "info"] },
+        "message": { "type": "string" },
+        "path": { "type": "string" },
+        "artifacts": { "$ref": "#/$defs/stringArray" },
+        "authority": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "finding": {
+      "type": "object",
+      "required": ["rule", "severity", "message", "artifacts", "paths", "authority", "evidence"],
+      "properties": {
+        "rule": { "type": "string" },
+        "severity": { "enum": ["error", "warning", "info"] },
+        "message": { "type": "string" },
+        "artifacts": { "$ref": "#/$defs/stringArray" },
+        "paths": { "$ref": "#/$defs/stringArray" },
+        "authority": { "type": "string" },
+        "evidence": { "$ref": "#/$defs/stringArray" }
+      },
+      "additionalProperties": true
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["requirement", "status", "active", "specifications", "verifications", "specified", "verified", "missing"],
+      "properties": {
+        "requirement": { "$ref": "#/$defs/id" },
+        "status": { "type": "string" },
+        "active": { "type": "boolean" },
+        "specifications": { "$ref": "#/$defs/stringArray" },
+        "verifications": { "$ref": "#/$defs/stringArray" },
+        "specified": { "type": "boolean" },
+        "verified": { "type": "boolean" },
+        "missing": { "$ref": "#/$defs/stringArray" }
+      },
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "required": ["id", "label", "state", "evidence"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "state": { "$ref": "#/$defs/state" },
+        "evidence": { "$ref": "#/$defs/stringArray" }
+      },
+      "additionalProperties": false
+    },
+    "gate": {
+      "type": "object",
+      "required": ["gate", "label", "state", "conditions"],
+      "properties": {
+        "gate": { "pattern": "^G[0-5]$" },
+        "label": { "type": "string" },
+        "state": { "$ref": "#/$defs/state" },
+        "conditions": { "type": "array", "items": { "$ref": "#/$defs/condition" } }
+      },
+      "additionalProperties": false
+    },
+    "readiness": {
+      "type": "object",
+      "required": ["work_order", "status", "gates"],
+      "properties": {
+        "work_order": { "$ref": "#/$defs/id" },
+        "status": { "type": "string" },
+        "gates": { "type": "array", "items": { "$ref": "#/$defs/gate" } }
+      },
+      "additionalProperties": false
+    },
+    "revisionProvenance": {
+      "type": "object",
+      "required": ["id", "kind", "status", "authority", "commit", "git_object_format", "work_orders", "verification_records", "contracts", "lifecycle_class", "superseded_by", "supersedes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["verification", "release"] },
+        "status": { "type": "string" },
+        "authority": { "type": "string" },
+        "commit": { "type": "string" },
+        "git_object_format": { "type": "string" },
+        "work_orders": { "$ref": "#/$defs/stringArray" },
+        "verification_records": { "$ref": "#/$defs/stringArray" },
+        "contracts": { "$ref": "#/$defs/stringArray" },
+        "version": { "$ref": "#/$defs/nullableString" },
+        "tag": { "$ref": "#/$defs/nullableString" },
+        "lifecycle_class": { "type": "string" },
+        "superseded_by": { "$ref": "#/$defs/stringArray" },
+        "supersedes": { "$ref": "#/$defs/stringArray" },
+        "superseded_at": { "$ref": "#/$defs/nullableString" },
+        "supersession_authorized_by": { "$ref": "#/$defs/nullableString" },
+        "observed_revision": { "$ref": "#/$defs/nullableString" },
+        "match_state": { "type": "string" },
+        "commit_available": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "revisionPolicy": {
+      "type": "object",
+      "required": ["required_for_verified_work", "required_for_release"],
+      "properties": {
+        "required_for_verified_work": { "type": "boolean" },
+        "required_for_release": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["work_order", "paths"],
+      "properties": {
+        "work_order": { "$ref": "#/$defs/id" },
+        "paths": { "$ref": "#/$defs/stringArray" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+}

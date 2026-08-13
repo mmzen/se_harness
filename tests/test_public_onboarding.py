@@ -176,6 +176,26 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertIn("When Mermaid is not rendered", practical)
         self.assertIn("Color is supplementary", practical)
 
+    def test_practical_example_uses_repository_owned_explorer_screenshots(self) -> None:
+        practical = self.section("What this looks like in practice")
+        expected_images = (
+            "docs/images/harness-explorer-overview.png",
+            "docs/images/harness-explorer-lineage.png",
+            "docs/images/harness-explorer-readiness.png",
+        )
+        image_links = re.findall(r"!\[[^]]+\]\(([^)]+)\)", practical)
+        self.assertEqual(list(expected_images), image_links)
+        for target in expected_images:
+            with self.subTest(target=target):
+                self.assertFalse(Path(target).is_absolute())
+                image_path = (REPOSITORY_ROOT / target).resolve()
+                self.assertTrue(image_path.is_relative_to(REPOSITORY_ROOT.resolve()))
+                self.assertTrue(image_path.is_file(), f"missing README image: {target}")
+                self.assertEqual(b"\x89PNG\r\n\x1a\n", image_path.read_bytes()[:8])
+
+        self.assertIn("derived, read-only views", practical)
+        self.assertIn("without approving work, verifying a commit, or authorizing a release", practical)
+
     def test_value_and_responsibility_boundaries_remain_visible(self) -> None:
         value = self.section("What you get")
         for phrase in (
