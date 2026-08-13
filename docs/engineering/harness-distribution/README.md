@@ -32,6 +32,10 @@ Concise public entry-point and layered-reference extension:
 
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-024..028` -> `SPEC-DST-007`, `ARCH-DST-007`, `ADR-DST-007`, `VER-DST-007` -> `WO-DOC-008`.
 
+Canonical Harness Explorer WebUI extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-029..033` -> `SPEC-DST-008`, `ARCH-DST-008`, `ADR-DST-008`, `VER-DST-008` -> `WO-DST-007`.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.
@@ -47,3 +51,5 @@ The accountable human requested the `WO-DST-004` artifact packet on 2026-08-11 a
 The accountable human requested the `WO-DOC-007` packet on 2026-08-12 to make the public README and human notes current, progressive, and explicit about reader expertise, then authorized the bounded work with `go for implementation`. The work-order artifact records the current implementation lifecycle. Runtime behavior, Explorer gate computation, managed policy, commit, push, pull request, verification transition, and release actions remain outside this documentation implementation authority.
 
 The accountable human agreed with the concise-root proposal, requested `WO-DOC-008` and its governing packet, then explicitly authorized implementation on 2026-08-12 with `go for implementation`. The bounded documentation and focused-test work is complete with retained evidence. Behavior changes, commit-bound verification, commit, push, pull request, build, release, publication, deployment, and external configuration remain separately controlled.
+
+The accountable human reviewed the canonical Explorer WebUI proposal and its `REQ-DST-029..033` packet, then explicitly authorized `WO-DST-007` on 2026-08-13 with `go implementation`. During review of the uncommitted candidate, the owner required preservation of the original prototype structure, visual identity, and CDN-backed `3d-force-graph`; `ADR-DST-008` records the accepted runtime risk. The model-faithful, deterministic, secure, and distributable integration is complete with retained evidence. Commit-bound verification, commit, push, pull request, release, publication, and deployment remain separately controlled.
