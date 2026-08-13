@@ -4,7 +4,11 @@ Date: 2026-08-13
 
 ## Accountable supersession decision
 
-After `VREC-DST-008` was retained in a separate ready-record commit, transitioned through the owner's accountable assurance decision, and retained as verified, the repository owner explicitly instructed `ok for WO-DST-007 supersession then so the graph is clean`. In context, the requested target is ready record `VREC-DST-007`; work order `WO-DST-007` remains implemented and unchanged. This is the separate human decision authorizing the record's `ready -> superseded` transition and normal retention on PR 35. Automation validates and visualizes the decision but does not grant it.
+After `VREC-DST-008` was retained in a separate ready-record commit, transitioned through the owner's accountable assurance decision, and retained as verified, the repository owner explicitly instructed `ok for WO-DST-007 supersession then so the graph is clean`. In context, the requested target is ready record `VREC-DST-007`; work order `WO-DST-007` remains implemented and unchanged. This is the separate human decision authorizing the record's `ready -> superseded` transition and normal review publication. Automation validates and visualizes the decision but does not grant it.
+
+## Pull-request sequencing
+
+PR 35 merged at head `7941f1c8a76f8b41056a901b2d276622b402d68c` before supersession commit `6cf5199` was pushed to `feature/dashboard-ui`. GitHub therefore reports PR 35 as merged without that later commit. After fetching merged `origin/main` at `3e96372`, `git diff origin/main...HEAD` showed exactly the three authorized paths: `VREC-DST-007`, `WO-VSP-002`, and this evidence. The supersession is consequently published through a dedicated follow-up PR declaring `Harness-Work-Order: WO-VSP-002`; no force push, history rewrite, or amendment of the merged PR occurs.
 
 ## Source and successor
 
@@ -59,4 +63,4 @@ The final governance change is limited to `docs/engineering/harness-distribution
 
 ## Authority boundary
 
-This decision supersedes only `VREC-DST-007` and retains the explicit historical edge. It does not verify or release `WO-VSP-002`, change `WO-DST-007`, supersede another record, prepare or approve a release, merge PR 35, build or publish a package, create or move a tag, mutate a GitHub Release, deploy, force push, or rewrite history.
+This decision supersedes only `VREC-DST-007` and retains the explicit historical edge. It does not verify or release `WO-VSP-002`, change `WO-DST-007`, supersede another record, prepare or approve a release, merge the follow-up PR, build or publish a package, create or move a tag, mutate a GitHub Release, deploy, force push, or rewrite history.
