@@ -147,6 +147,32 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("docs/engineering/verification-records/VREC-030.md", branching)
         self.assertIn("W013` advisory, never a validation error", branching)
 
+    def test_refused_verification_paths_are_explained_without_invented_authority(self) -> None:
+        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
+        branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
+
+        for required in (
+            "## When verification is refused",
+            "A VREC has no `rejected` status",
+            "The work order honestly remains `implemented`",
+            "only a proposal and is not release-eligible",
+            "an RLS has no `rejected` or `superseded` state",
+            "W-REV-004",
+            "harness-uml-model.md#important-multiplicities-and-invariants",
+            "harness-branching-model.md#when-assurance-refuses-a-candidate",
+        ):
+            self.assertIn(required, phasing)
+
+        for required in (
+            "### When assurance refuses a candidate",
+            "does not remove the candidate from `main` or rewrite branch history",
+            "a revert is also an append-only commit and becomes its own candidate",
+            "harness-operational-phasing.md#when-verification-is-refused",
+        ):
+            self.assertIn(required, branching)
+
+        self.assertEqual(2, branching.count("gitGraph"))
+
     def test_example_commands_exist_in_current_cli(self) -> None:
         parser = build_parser()
         command_action = next(
