@@ -6,10 +6,6 @@ project_name = "se_harness"
 artifact_root = "docs/engineering"
 dashboard_output = "target/harness-dashboard"
 
-[self_hosting]
-role = "implementation-repository"
-governor_descriptor = ".self-hosting/governor.toml"
-
 [revision_provenance]
 require_full_commit = true
 require_clean_worktree = true

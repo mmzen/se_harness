@@ -2,7 +2,7 @@
   "files": {
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "449288bcf6cf62086cb8b1e7c7781f732093f02dda0de407d0196bcb43e190f4"
+      "sha256": "f7ffa86c98db4e6baf044d0811e32115bd015630158627ccc28ab1345f6fbd90"
     },
     ".github/PULL_REQUEST_TEMPLATE.md": {
       "mode": "seed",
@@ -10,7 +10,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "acc531fccd239135861c7a3ca34fbbec0abdc7332f068ccc8482a12ac5dfff34"
+      "sha256": "bf6aec83d2df3f3d5b5ccf84880c67f610b5a0890db0f43b2f13512e4f65fb91"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -122,7 +122,7 @@
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "7f6622a755cc8dcaa885a2de85f3df9f13fbec23a5c5415599defe8cada0732c"
+      "sha256": "a672ea81e88bc015d291cc51774ac73b6c88c295672f7cf0b4ff81fe9c9e1ab1"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",
