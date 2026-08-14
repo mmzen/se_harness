@@ -122,7 +122,7 @@
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "a672ea81e88bc015d291cc51774ac73b6c88c295672f7cf0b4ff81fe9c9e1ab1"
+      "sha256": "6867f662ba5e3fc0c9c9216109fc851d180905c39e78f82b66aebe883022a930"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",
