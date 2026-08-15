@@ -50,7 +50,7 @@
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "4f549eb8af46131a074412146e000931cb57abd6c3d79929accfa61438ffec86"
+      "sha256": "7d9f2c3690acef0a28e94703ac1ee045f1f01c0a96acda0e33c1e35b494eac2a"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -123,6 +123,10 @@
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
       "sha256": "8c923a7dfc3b0722cca77d3c52804e81e8a25e875190aa8d6d6455d2505319e7"
+    },
+    "scripts/inspect_engineering_artifacts.py": {
+      "mode": "managed",
+      "sha256": "a5597305be227374daafec1f126174e606d35e96e92d8aff6259a9883e1eb742"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",

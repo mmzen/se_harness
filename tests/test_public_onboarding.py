@@ -117,6 +117,7 @@ class PublicOnboardingTests(unittest.TestCase):
             "harnessctl adopt C:\\path\\to\\existing-repository --project-name my-project",
             "harnessctl doctor C:\\path\\to\\repository",
             "harnessctl validate C:\\path\\to\\repository",
+            "harnessctl inspect C:\\path\\to\\repository",
             "harnessctl dashboard C:\\path\\to\\repository",
         )
         for command in commands:
@@ -124,13 +125,14 @@ class PublicOnboardingTests(unittest.TestCase):
                 self.assertIn(command, start)
         self.assertIn("checks installed-harness integrity", start)
         self.assertIn("checks the formal artifact graph", start)
+        self.assertIn("summarizes current lifecycle attention", start)
         self.assertIn("generates the read-only Harness Explorer", start)
         self.assertIn("does not invent or approve product intent", start)
 
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
         subcommands = set(re.findall(r"(?m)^harnessctl\s+([a-z][a-z-]*)\b", fenced))
-        self.assertEqual({"init", "adopt", "doctor", "validate", "dashboard"}, subcommands)
+        self.assertEqual({"init", "adopt", "doctor", "validate", "inspect", "dashboard"}, subcommands)
         for forbidden in (
             "preflight",
             "upgrade",

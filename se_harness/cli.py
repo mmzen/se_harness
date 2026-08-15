@@ -124,12 +124,22 @@ def _reconcile_governor(args: argparse.Namespace) -> int:
     return 0
 
 
-def _run_repository_script(target: Path, script: str, extra: list[str]) -> int:
+def _run_repository_script(
+    target: Path,
+    script: str,
+    extra: list[str],
+    *,
+    prevent_bytecode: bool = False,
+) -> int:
     target = ensure_target(target, must_exist=True)
     path = target / "scripts" / script
     if not path.is_file():
         raise HarnessError(f"missing managed script: {path}")
-    completed = subprocess.run([sys.executable, str(path), "--root", str(target), *extra], check=False)
+    interpreter_options = ["-B"] if prevent_bytecode else []
+    completed = subprocess.run(
+        [sys.executable, *interpreter_options, str(path), "--root", str(target), *extra],
+        check=False,
+    )
     return completed.returncode
 
 
@@ -279,6 +289,18 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("target", nargs="?", default=".")
     validate.add_argument("--json", action="store_true")
     validate.set_defaults(handler=lambda args: _run_repository_script(Path(args.target), "validate_engineering_artifacts.py", ["--json"] if args.json else []))
+
+    inspect = commands.add_parser("inspect", help="inspect repository attention and lifecycle queues")
+    inspect.add_argument("target", nargs="?", default=".")
+    inspect.add_argument("--json", action="store_true")
+    inspect.set_defaults(
+        handler=lambda args: _run_repository_script(
+            Path(args.target),
+            "inspect_engineering_artifacts.py",
+            ["--json"] if args.json else [],
+            prevent_bytecode=True,
+        )
+    )
 
     dashboard = commands.add_parser("dashboard", help="generate the repository Harness Explorer")
     dashboard.add_argument("target", nargs="?", default=".")

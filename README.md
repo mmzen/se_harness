@@ -61,10 +61,11 @@ Then inspect the installed harness and its engineering information:
 ```powershell
 harnessctl doctor C:\path\to\repository
 harnessctl validate C:\path\to\repository
+harnessctl inspect C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
 
-`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `dashboard` generates the read-only Harness Explorer at `target/harness-dashboard/index.html`.
+`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `inspect` summarizes current lifecycle attention, existing consistency findings, and bounded non-authoritative next-step suggestions in the terminal without acting as a gate. `dashboard` generates the read-only Harness Explorer at `target/harness-dashboard/index.html`.
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners curate `docs/engineering/REPOSITORY_CONTEXT.md` and approve the first formal engineering chain.
 
@@ -126,7 +127,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;
 - safe adoption and hash-based upgrades that preserve repository customization;
-- Harness Explorer views answering: why work exists, whether its definition is connected, where anomalies exist, which revision is covered, and what readiness observations are available.
+- terminal inspection and Harness Explorer views answering: why work exists, whether its definition is connected, where anomalies exist, which revision is covered, and what readiness observations are available.
 
 The dashboard is derived evidence. It never approves work, verifies a commit, or releases software.
 

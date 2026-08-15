@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a non-authoritative reference to the current 0.3.0 CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
+> This is a non-authoritative reference to the current repository CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
 
 ## Invocation
 
@@ -21,6 +21,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `init` | repository owner or authorized agent | writes a complete standard harness | initialize an absent or empty repository |
 | `adopt` | repository owner or authorized agent | preserves existing content and writes the harness plus adoption observations | introduce the harness into an existing repository |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
+| `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, scripts, and configured self-hosting controls |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
@@ -39,13 +40,22 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 harnessctl init [TARGET] [--project-name NAME] [--dry-run]
 harnessctl adopt [TARGET] [--project-name NAME] [--dry-run]
 harnessctl validate [TARGET] [--json]
+harnessctl inspect [TARGET] [--json]
 harnessctl dashboard [TARGET] [--output PATH]
 harnessctl doctor [TARGET]
 ```
 
 `TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
 
-Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score. Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
+
+Inspection reuses the existing validator and Harness Explorer snapshot. It reports formal validity, ready decisions, draft definitions, approved or in-progress work, and the existing validator and Explorer findings. Human output groups repeated rule instances for readability; `--json` retains every finding.
+
+For existing lifecycle queues and a closed set of actionable derived warning rules, inspection also reports deterministic suggested next steps. Each suggestion identifies its source, affected artifacts, action class, accountable role, and `automatic = false`. Suggestions contain no executable command and never assert eligibility or authority. Validator findings, informational observations, and unknown rules remain visible without guessed advice.
+
+A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
+
+Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
 
 ## Work readiness
 

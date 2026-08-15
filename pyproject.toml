@@ -45,6 +45,7 @@ include = ["se_harness*"]
   "templates/repository/standard/scripts/check_engineering_harness.ps1",
   "templates/repository/standard/scripts/check_engineering_harness.sh",
 "templates/repository/standard/scripts/generate_harness_dashboard.py",
+  "templates/repository/standard/scripts/inspect_engineering_artifacts.py",
   "templates/repository/standard/scripts/select_harness_work_order.py",
 "templates/repository/standard/scripts/validate_engineering_artifacts.py",
 ]
