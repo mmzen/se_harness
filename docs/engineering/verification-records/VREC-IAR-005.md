@@ -2,7 +2,7 @@
 id = "VREC-IAR-005"
 type = "verification_record"
 title = "Verification candidate for 3 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
@@ -20,6 +20,8 @@ conforms_to = ["VER-DST-009", "VER-IAR-008", "VER-IAR-009"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-DOC-012`, `WO-IAR-008`, `WO-IAR-009` to candidate commit `7c18dcd59e3197f5f2d66c6a29d37af9101d7c39`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-DOC-012`, `WO-IAR-008`, `WO-IAR-009` to candidate commit `7c18dcd59e3197f5f2d66c6a29d37af9101d7c39`. The capture command originally prepared it as `ready` and did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+On 2026-08-15, the accountable assurance owner reviewed the aggregate record and explicitly instructed `i validate VREC-IAR-005, then you can commit + push`. That human assurance decision transitioned this record from `ready` to `verified`; automation did not grant the authority. The captured commit, timestamp, artifact snapshot, evidence paths, work-order coverage, and verification-contract coverage remain unchanged.
