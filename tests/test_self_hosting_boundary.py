@@ -43,7 +43,8 @@ from se_harness.self_hosting_policy import PROTECTED_CONTROL_PATHS, classify_sel
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-GOVERNOR_SHA256 = "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
+GOVERNOR_COMMIT = "dd06660a94f06d934adb1df0352b81e709f2ffd3"
+GOVERNOR_SHA256 = "260e22371b05e5bb6c59143a1f0229855305a6bf7994984be50aa147a02ea516"
 FAILED_PR_RECORDS = (
     "docs/engineering/release-0.2.2/verification-records/VREC-SEH-003.md",
     "docs/engineering/release-0.2.2/releases/RLS-SEH-003.md",
@@ -151,10 +152,11 @@ class SelfHostingBoundaryTests(unittest.TestCase):
 
     def test_governor_descriptor_is_exact_and_matches_self_hosting_workflow(self) -> None:
         descriptor = load_governor_descriptor(REPOSITORY_ROOT)
-        self.assertEqual("0.2.1", descriptor.version)
-        self.assertEqual("v0.2.1", descriptor.tag)
+        self.assertEqual("0.3.0", descriptor.version)
+        self.assertEqual("v0.3.0", descriptor.tag)
         self.assertEqual(GOVERNOR_SHA256, descriptor.sha256)
-        self.assertEqual("RLS-SEH-002", descriptor.selected_release_record)
+        self.assertEqual("RLS-SEH-005", descriptor.selected_release_record)
+        self.assertEqual(GOVERNOR_COMMIT, descriptor.selected_candidate_commit)
 
         workflow = (REPOSITORY_ROOT / ".github/workflows/engineering-harness.yml").read_text(
             encoding="utf-8"
@@ -165,6 +167,8 @@ class SelfHostingBoundaryTests(unittest.TestCase):
             descriptor.wheel,
             descriptor.url,
             descriptor.sha256,
+            descriptor.selected_release_record,
+            descriptor.selected_candidate_commit,
         ):
             self.assertIn(value, workflow)
 
@@ -612,29 +616,41 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         workflow = (REPOSITORY_ROOT / ".github/workflows/engineering-harness.yml").read_text(
             encoding="utf-8"
         )
-        self.assertRegex(workflow, r"(?m)^  governor:$")
-        self.assertRegex(workflow, r"(?m)^  candidate-source:$")
-        self.assertRegex(workflow, r"(?m)^  candidate-package:$")
-        self.assertRegex(workflow, r"(?s)candidate-source:.*?needs: governor")
-        self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
-        self.assertIn('doctor "$RUNNER_TEMP/governor-target"', workflow)
-        self.assertNotIn("harnessctl doctor .", workflow)
-        self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
-        self.assertIn("non-promotable candidate wheel", workflow)
-        candidate_workflow = (REPOSITORY_ROOT / "self_hosting/self-hosting-governor.yml").read_text(
+        self.assertIn(
+            "uses: mmzen/se_harness/.github/workflows/self-hosting-governor.yml@"
+            + GOVERNOR_COMMIT,
+            workflow,
+        )
+        self.assertIn('governor-version: "0.3.0"', workflow)
+        self.assertIn('governor-release-record: "RLS-SEH-005"', workflow)
+        reusable_workflow = (
+            REPOSITORY_ROOT / "self_hosting/self-hosting-governor.yml"
+        ).read_text(
             encoding="utf-8"
         )
-        self.assertIn("--candidate-wheel-sha256", candidate_workflow)
-        self.assertIn("--require-isolated-python", workflow)
-        self.assertIn("--entry-point", workflow)
-        governor_lane = workflow.split("  governor:", 1)[1].split("  candidate-source:", 1)[0]
+        self.assertRegex(reusable_workflow, r"(?m)^  governor:$")
+        self.assertRegex(reusable_workflow, r"(?m)^  candidate-source:$")
+        self.assertRegex(reusable_workflow, r"(?m)^  candidate-package:$")
+        self.assertRegex(reusable_workflow, r"(?s)candidate-source:.*?needs: governor")
+        self.assertRegex(reusable_workflow, r"(?s)candidate-package:.*?needs: candidate-source")
+        self.assertIn("doctor governor-target", reusable_workflow)
+        self.assertNotIn("harnessctl doctor .", reusable_workflow)
+        self.assertIn("git archive \"$GITHUB_SHA\"", reusable_workflow)
+        self.assertIn("non-promotable candidate wheel", reusable_workflow)
+        self.assertIn("--candidate-wheel-sha256", reusable_workflow)
+        self.assertIn("--require-isolated-python", reusable_workflow)
+        self.assertIn("--entry-point", reusable_workflow)
+        governor_lane = reusable_workflow.split("  governor:", 1)[1].split(
+            "  candidate-source:", 1
+        )[0]
         self.assertNotIn("validate_engineering_artifacts.py", governor_lane)
-        self.assertIn("compatibility_scope", governor_lane)
-        self.assertIn("git diff --exit-code", workflow)
-        self.assertNotIn("pull_request_target", workflow)
-        self.assertNotIn("permissions:\n  contents: write", workflow)
-        self.assertIn("python_launcher = pathlib.Path(sys.executable).absolute()", workflow)
-        self.assertNotIn("pathlib.Path(sys.executable).resolve())", workflow)
+        self.assertIn("--role governor", governor_lane)
+        self.assertIn("--governor-wheel-sha256", governor_lane)
+        self.assertIn("--require-isolated-python --require-entry-point", governor_lane)
+        self.assertIn("git diff --exit-code", reusable_workflow)
+        self.assertNotIn("pull_request_target", workflow + reusable_workflow)
+        self.assertNotIn("permissions:\n  contents: write", workflow + reusable_workflow)
+        self.assertNotIn("python_launcher =", reusable_workflow)
 
     def test_failed_pr_records_are_excluded_from_recovery_candidate(self) -> None:
         for relative in FAILED_PR_RECORDS:

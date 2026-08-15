@@ -10,7 +10,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "60ea04e290629b197cb3b78591df348c18980e6210551bf148221867747d8f4a"
+      "sha256": "d63208334f4ce3e648116442bc31c238d5bc4e1f50ff2c0fb685c754e2022e59"
     },
     ".gitignore": {
       "mode": "fragment",
