@@ -68,9 +68,12 @@ It reads the returned manifest, transitions the approved work order to `in_progr
 python -m unittest discover -s tests -p "test_*.py"
 
 harnessctl validate .
+harnessctl inspect .
 harnessctl dashboard .
 harnessctl preflight . --work-order WO-EX-001 --phase review
 ```
+
+`validate` supplies gate-oriented graph results. `inspect` then groups current lifecycle attention, retained findings, and bounded suggestions for possible accountable next steps; it executes nothing and does not establish eligibility or approval. The dashboard provides the visual view of the same repository evidence.
 
 The agent retains an evidence report at:
 

@@ -5,7 +5,7 @@ title = "Verify concise public README and layered reference notes"
 status = "approved"
 owners = ["quality-owner", "documentation-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-08-15"
 
 [relations]
 verifies = ["REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
@@ -22,7 +22,7 @@ Derive assertions from the five requirements and `SPEC-DST-007`, not from the im
 | Requirement | Method | Pass condition |
 | --- | --- | --- |
 | `REQ-DST-024` | deterministic line/heading count and 6/10 reader review | root has at most 200 lines and nine level-two sections while retaining all essential entry-point responsibilities |
-| `REQ-DST-025` | fenced-command extraction and actor review | only the five allowed routine harness subcommands appear in root examples; agent mechanics remain understandable without syntax |
+| `REQ-DST-025` | fenced-command extraction and actor review | only the six allowed routine harness subcommands appear in root examples; `validate`, `inspect`, and `dashboard` remain distinct; agent mechanics remain understandable without syntax |
 | `REQ-DST-026` | note inventory, content ownership, CLI comparison, and link traversal | all useful relocated detail has one expertise-labeled owner; local links resolve; managed policy is not duplicated as note authority |
 | `REQ-DST-027` | installation and upgrade scenario walkthrough | fresh install remains usable and package versus repository upgrade is explicit, safe, and owner-controlled |
 | `REQ-DST-028` | scenario, graph, responsibility, Explorer, limitations, and contributor-route review | shortening preserves the product value and all material authority/provenance boundaries |
@@ -30,9 +30,9 @@ Derive assertions from the five requirements and `SPEC-DST-007`, not from the im
 ## Automated checks
 
 - Count `README.md` physical lines and `## ` headings; reject more than 200 lines or nine level-two sections.
-- Assert root target expertise, project links, Python requirement, virtual environment, PyPI install, exact synchronized package version, `init`, `adopt`, `doctor`, `validate`, and `dashboard`.
+- Assert root target expertise, project links, Python requirement, virtual environment, PyPI install, exact synchronized package version, `init`, `adopt`, `doctor`, `validate`, `inspect`, and `dashboard`.
 - Extract fenced blocks and reject agent-only harness subcommands: `preflight`, `upgrade`, `scaffold-domain`, `create-artifact`, `identity`, `capture-verification`, and `prepare-release`.
-- Assert `doctor`, `validate`, and `dashboard` have distinct plain-language outcomes.
+- Assert `doctor`, `validate`, `inspect`, and `dashboard` have distinct plain-language outcomes, including that successful inspection-report production is not a passed validation gate.
 - Assert exactly one Mermaid block, no more than nine conceptual node declarations, human verification and release decision shapes, Explorer observation, exact-commit meaning, prose fallback, and no unique color-only distinction.
 - Assert the responsibility boundary names human owners, coding agent, and repository policy or hosting control.
 - Assert both known 0.2.2 limitations remain and no prose claims they were corrected.
@@ -46,7 +46,7 @@ Derive assertions from the five requirements and `SPEC-DST-007`, not from the im
 ## Manual assessments
 
 - **Public scan:** a 6/10 reader finds purpose, installation, start, inspection, authority, limitations, and next links without searching a 500-line page.
-- **Human command surface:** a repository owner can distinguish the five ordinary operations and is not asked to execute agent-only lifecycle commands.
+- **Human command surface:** a repository owner can distinguish the six ordinary operations and is not asked to execute agent-only lifecycle commands.
 - **Agent transparency:** removing syntax does not hide that the agent checks authorization, works within scope, retains evidence, and only prepares proposals.
 - **Upgrade safety:** a current user cannot reasonably infer that upgrading the Python package updates repository-managed content.
 - **Relocation completeness:** each removed block is mapped to one note, existing owner, or explicit retirement rationale.
@@ -57,7 +57,7 @@ Derive assertions from the five requirements and `SPEC-DST-007`, not from the im
 
 ### Scenario: new repository owner
 
-Given a reader starts at the root README, when they install the package and choose a new or existing repository, then they can reach `init` or `adopt`, inspect with `doctor`, `validate`, and `dashboard`, and understand who retains approval.
+Given a reader starts at the root README, when they install the package and choose a new or existing repository, then they can reach `init` or `adopt`, inspect with `doctor`, `validate`, `inspect`, and `dashboard`, distinguish a gate from a derived report, and understand who retains approval.
 
 ### Scenario: coding agent mechanics stay behind the interface
 
@@ -77,7 +77,7 @@ All automated and manual checks pass; formal validation has zero errors; only cl
 
 ## Evidence retention
 
-Retain commands, versions, root line/heading counts, fenced-command inventory, content-disposition ledger, note expertise inventory, CLI-reference comparison, link results, graph review, reader assessments, focused and complete test counts, validator and doctor results, preflight manifest, dashboard snapshot, warning classification, changed/protected paths, deviations, and residual risks in `docs/engineering/harness-distribution/evidence/WO-DOC-008-verification.md`.
+For the original concise-root candidate, retain commands, versions, root line/heading counts, fenced-command inventory, content-disposition ledger, note expertise inventory, CLI-reference comparison, link results, graph review, reader assessments, focused and complete test counts, validator and doctor results, preflight manifest, dashboard snapshot, warning classification, changed/protected paths, deviations, and residual risks in `docs/engineering/harness-distribution/evidence/WO-DOC-008-verification.md`. The current six-command revision is verified separately by `VER-DST-009` and retained under `WO-DOC-012`; do not rewrite the original evidence.
 
 ## Residual uncertainty
 

@@ -122,9 +122,38 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         model = self.contents[NOTES_ROOT / "harness-uml-model.md"]
         phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
         self.assertIn("None of these commands approves work", overview)
+        self.assertIn("inspection summarizes current attention", overview)
         self.assertIn("Only an accountable assurance decision", model)
         self.assertIn("ready` is a proposal", phasing)
         self.assertIn("separate human release decision", overview)
+
+    def test_validation_and_inspection_documentation_is_synchronized(self) -> None:
+        overview = self.contents[NOTES_ROOT / "harness-overview.md"]
+        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
+        installation = self.contents[NOTES_ROOT / "harness-installation-and-upgrades.md"]
+        example = self.contents[NOTES_ROOT / "harness-lineage-example.md"]
+
+        self.assertIn("`harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard`", overview)
+        self.assertIn("`harnessctl inspect .`", phasing)
+        self.assertIn("successfully produced `inspect` report can still show an invalid graph", phasing)
+        self.assertIn("harnessctl inspect C:\\path\\to\\repository", installation)
+        self.assertIn("successful `inspect` report production can still describe an invalid graph", installation)
+        self.assertIn("harnessctl inspect .", example)
+        self.assertIn("bounded suggestions for possible accountable next steps", example)
+        self.assertIn("it executes nothing and does not establish eligibility or approval", example)
+
+    def test_active_public_command_contract_uses_six_commands(self) -> None:
+        distribution = REPOSITORY_ROOT / "docs" / "engineering" / "harness-distribution"
+        requirement = (distribution / "requirements" / "REQ-DST-025.md").read_text(encoding="utf-8")
+        specification = (distribution / "specifications" / "SPEC-DST-007.md").read_text(encoding="utf-8")
+        verification = (distribution / "verification" / "VER-DST-007.md").read_text(encoding="utf-8")
+
+        self.assertIn("six ordinary human-facing subcommands", requirement)
+        self.assertIn("harnessctl inspect", specification)
+        self.assertIn("six allowed routine harness subcommands", verification)
+        for obsolete in ("five ordinary human-facing subcommands", "five allowed routine harness subcommands"):
+            with self.subTest(obsolete=obsolete):
+                self.assertNotIn(obsolete, requirement + specification + verification)
 
     def test_branching_guide_is_one_explicitly_non_authoritative_model(self) -> None:
         branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
@@ -189,6 +218,7 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             "doctor",
             "preflight",
             "validate",
+            "inspect",
             "dashboard",
             "capture-verification",
             "prepare-release",
