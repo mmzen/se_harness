@@ -10,12 +10,18 @@ from pathlib import Path
 
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
+from se_harness.candidate_acceptance import assess_candidate_wheel, write_acceptance_manifest
 from se_harness.installer import (
     HarnessError,
     apply_changes,
     ensure_target,
     format_plan,
     plan_install,
+)
+from se_harness.governor_reconciliation import (
+    apply_governor_reconciliation,
+    format_reconciliation_plan,
+    plan_governor_reconciliation,
 )
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
@@ -83,14 +89,38 @@ def _upgrade(args: argparse.Namespace) -> int:
     print(format_plan(changes))
     if not args.apply:
         return 0
-    customized = [item.path for item in changes if item.action == "customized"]
-    if customized:
-        print("customized files were preserved and require manual review; no files were written:", file=sys.stderr)
-        for path in customized:
+    blocked = [item for item in changes if item.action in {"customized", "protected-mismatch"}]
+    if blocked:
+        print("customized or protected files require manual review; no files were written:", file=sys.stderr)
+        for item in blocked:
+            path = item.path
             print(f"  {path}", file=sys.stderr)
         return 1
     apply_changes(target, changes, old_lock, allow_updates=True)
     print(f"upgraded managed files to se-harness {__version__}")
+    return 0
+
+
+def _reconcile_governor(args: argparse.Namespace) -> int:
+    target = ensure_target(Path(args.target), must_exist=True)
+    plan = plan_governor_reconciliation(
+        target,
+        version=args.target_version,
+        commit=args.target_commit,
+        release_record=args.target_release_record,
+        sha256=args.target_sha256,
+        work_order=args.work_order,
+        wheel_path=Path(args.target_wheel) if args.target_wheel else None,
+        decisions=args.decisions,
+    )
+    print(format_reconciliation_plan(plan))
+    if not args.apply:
+        return 1 if plan.blocked else 0
+    if plan.blocked:
+        print("governor reconciliation requires explicit resolution; no files were written", file=sys.stderr)
+        return 1
+    apply_governor_reconciliation(target, plan)
+    print(f"reconciled self-hosting controls to published governor {args.target_version}")
     return 0
 
 
@@ -216,6 +246,23 @@ def _identity(args: argparse.Namespace) -> int:
     return 0 if report.passed else 1
 
 
+def _accept_candidate(args: argparse.Namespace) -> int:
+    manifest = assess_candidate_wheel(
+        Path(args.wheel),
+        candidate_commit=args.candidate_commit,
+        candidate_wheel_sha256=args.candidate_wheel_sha256,
+        verifier_wheel_sha256=args.governor_wheel_sha256,
+        checkout_root=Path(args.checkout_root) if args.checkout_root else None,
+    )
+    output = Path(args.output)
+    write_acceptance_manifest(output, manifest)
+    print(
+        f"candidate acceptance passed: {len(manifest.scenarios)} scenarios; "
+        f"manifest {output.expanduser().resolve()}"
+    )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -254,6 +301,28 @@ def build_parser() -> argparse.ArgumentParser:
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
     upgrade.set_defaults(handler=_upgrade)
 
+    reconcile = commands.add_parser(
+        "reconcile-governor",
+        help="plan or apply an authorized transition to an exact published self-hosting governor",
+    )
+    reconcile.add_argument("target", nargs="?", default=".")
+    reconcile.add_argument("--to", required=True, dest="target_version")
+    reconcile.add_argument("--target-commit", required=True)
+    reconcile.add_argument("--target-release-record", required=True)
+    reconcile.add_argument("--target-sha256", required=True)
+    reconcile.add_argument("--target-wheel", help="use an exact local wheel after SHA-256 verification")
+    reconcile.add_argument("--work-order", required=True)
+    reconcile.add_argument(
+        "--set",
+        action="append",
+        default=[],
+        dest="decisions",
+        metavar="DOTTED.PATH=TOML_VALUE",
+        help="supply one explicitly governed repository-policy value; repeat as needed",
+    )
+    reconcile.add_argument("--apply", action="store_true", help="apply the complete recoverable control transaction")
+    reconcile.set_defaults(handler=_reconcile_governor)
+
     scaffold = commands.add_parser("scaffold-domain", help="safely create the canonical organization for one engineering domain")
     scaffold.add_argument("target", nargs="?", default=".")
     scaffold.add_argument("--domain", required=True)
@@ -280,6 +349,18 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--require-isolated-python", action="store_true")
     identity.add_argument("--require-entry-point", action="store_true")
     identity.set_defaults(handler=_identity)
+
+    accept = commands.add_parser(
+        "accept-candidate",
+        help="run the released verifier-owned black-box contract against an exact candidate wheel",
+    )
+    accept.add_argument("--wheel", required=True)
+    accept.add_argument("--candidate-commit", required=True)
+    accept.add_argument("--candidate-wheel-sha256", required=True)
+    accept.add_argument("--governor-wheel-sha256", required=True)
+    accept.add_argument("--checkout-root")
+    accept.add_argument("--output", required=True)
+    accept.set_defaults(handler=_accept_candidate)
 
     capture = commands.add_parser("capture-verification", help="prepare a ready commit-bound verification record")
     capture.add_argument("target", nargs="?", default=".")

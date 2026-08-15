@@ -2,6 +2,10 @@
 
 This guide applies only while developing `se_harness`. It does not create a consumer installation profile and it grants no implementation, verification, release, publication, or governor-promotion authority.
 
+## Effect on normal governance operations
+
+This self-hosting boundary does not change the normal intent-to-release lifecycle, formal artifact statuses, decision rights, or active repository workflow. `harnessctl reconcile-governor` is invoked only for a separately authorized transition to an exact published governor. `harnessctl accept-candidate` adds package-assurance evidence for developing `se_harness`; it never creates or transitions a VREC, authorizes release, or promotes a governor. The reusable self-hosting workflow remains inactive until it is independently published and selected through a later governed promotion.
+
 ## Runtime planes
 
 | Plane | Identity source | Permitted target | Assurance meaning |
@@ -10,13 +14,13 @@ This guide applies only while developing `se_harness`. It does not create a cons
 | Candidate source | The reviewed checkout at `GITHUB_SHA` | Candidate tests and declared ignored derived output | Source implementation evidence |
 | Candidate package | A wheel built from an exported candidate commit and installed in a fresh environment | Fresh and upgrade acceptance repositories outside the checkout | Packaged behavior evidence |
 
-`harnessctl identity` emits the role, Python executable and version, harness version, module, distribution and template origins, expected boundary, and the applicable candidate commit or governor digest. A mismatch fails the lane.
+`harnessctl identity` emits the role, Python executable and version, harness version, module, distribution and template origins, expected boundary, and the applicable candidate commit or governor digest. A mismatch fails the lane. Once independently published and selected, `harnessctl accept-candidate` supplies the released verifier-owned black-box scenario contract and deterministic evidence manifest for later candidate wheels.
 
 ## CI composition
 
 The repository-specific workflow runs `governor -> candidate-source -> candidate-package`. The governor is acquired by immutable release URL and SHA-256, imported with isolated Python outside the checkout, and doctored only against a repository it created. Candidate package construction uses a Git export and writes only below the runner temporary directory. Every lane proves that it did not modify the checkout.
 
-The checkout is candidate source. All normal managed files retain candidate distribution parity. The self-hosting workflow and root `[self_hosting]` configuration are the only repository-specific control files that intentionally differ from the rendered standard template, and both remain protected by the root lock. The governor creates its own same-version managed target outside the checkout. These controls are not alternative product profiles.
+The checkout is candidate source. All normal managed files retain candidate distribution parity. The self-hosting workflow and root `[self_hosting]` configuration are the only repository-specific managed control files that intentionally differ from the rendered standard template, and both remain protected by the root lock during ordinary upgrade. Release-owned material under `self_hosting/` is verifier and migration data, not a second consumer installation profile. The governor creates its own same-version managed target outside the checkout.
 
 ## Initial migration
 
@@ -30,8 +34,10 @@ After a candidate is immutably published, use a separate approved work order to:
 
 1. name the previous and proposed governor, published release record, immutable URL, wheel name, and SHA-256;
 2. acquire the published wheel independently and verify its digest before installation;
-3. test its identity, fresh installation, transactional upgrade, customized-content failure, doctor, validation, and rollback path outside the checkout;
-4. update `.self-hosting/governor.toml` and the repository-specific CI constants in one reviewable change;
-5. retain the previous descriptor through Git history and capture a new commit-bound VREC if configured provenance requires it.
+3. test its identity and run the released verifier-owned acceptance contract outside the checkout;
+4. run the current released governor's `reconcile-governor` plan with the exact target release, commit, wheel digest, release record, and work order;
+5. review field ownership, safe defaults, explicit policy or authority decisions, the selected self-hosting workflow, permissions, and transaction write set;
+6. apply the descriptor, configuration, workflow, and lock transaction only after that review;
+7. retain the previous descriptor through Git history and capture a new commit-bound VREC if configured provenance requires it.
 
-Publication does not update the governor automatically. Until the separate promotion change is accepted, the prior descriptor remains authoritative.
+The target wheel supplies data only during reconciliation; its modules are never imported or executed. Unsupported migration protocols require a compatible bridge release. Publication does not update the governor automatically, and the release that first implements reconciliation must be promoted through the previously trusted process before its reconciler can govern later targets. Until the separate promotion change is accepted, the prior descriptor remains authoritative.

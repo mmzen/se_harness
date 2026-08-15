@@ -25,7 +25,8 @@ from se_harness.installer import (
     tracked_content,
 )
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
-from se_harness.self_hosting import load_governor_descriptor, self_hosting_enabled
+from se_harness.self_hosting import load_governor_descriptor
+from se_harness.self_hosting_policy import PROTECTED_CONTROL_PATHS, classify_self_hosting
 
 
 PREFLIGHT_SCHEMA = "se-harness-preflight-v1"
@@ -86,12 +87,6 @@ COMMAND_KEYS = {
 }
 UNRESOLVED_CONTEXT = re.compile(r"^TODO(?:\[[A-Za-z0-9-]+\])?$")
 _VALIDATOR_MODULE: ModuleType | None = None
-SELF_HOSTING_CONTROL_PATHS = {
-    ".engineering-harness.toml",
-    ".github/workflows/engineering-harness.yml",
-}
-
-
 @dataclass(frozen=True, order=True)
 class InstallationCheck:
     name: str
@@ -139,12 +134,15 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
     """Return deterministic read-only installation and managed-integrity checks."""
 
     target = ensure_target(target, must_exist=True)
-    self_hosting = self_hosting_enabled(target)
+    classification = classify_self_hosting(target)
+    self_hosting = classification.enabled
     checks: list[InstallationCheck] = [
         InstallationCheck("python", sys.version_info >= (3, 11), platform.python_version()),
         InstallationCheck("config", (target / CONFIG_NAME).is_file(), CONFIG_NAME),
         InstallationCheck("lock", (target / LOCK_NAME).is_file(), LOCK_NAME),
     ]
+    if classification.kind == "ambiguous":
+        checks.append(InstallationCheck("self-hosting-classification", False, classification.detail))
     if self_hosting:
         try:
             governor = load_governor_descriptor(target)
@@ -238,7 +236,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
             }[result]
             checks.append(InstallationCheck(f"managed:{relative}", passed, detail))
             if desired is not None and not (
-                self_hosting and relative in SELF_HOSTING_CONTROL_PATHS
+                self_hosting and relative in PROTECTED_CONTROL_PATHS
             ):
                 distribution_match = canonical_text_equal(current, desired)
                 checks.append(
