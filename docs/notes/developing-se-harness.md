@@ -23,12 +23,14 @@ python -m se_harness --version
 ```text
 se_harness/                              CLI and safe installation control plane
 templates/repository/standard/           one canonical consumer installation
+self_hosting/                             published migration and self-hosting workflow data; not an installation profile
 scripts/                                 portable validation, Explorer, CI selection, release support
 tests/                                   installer, policy, provenance, identity, and regression tests
 docs/notes/                              non-authoritative human explanations
 docs/engineering/                        self-governing formal artifact graph and evidence
 .self-hosting/governor.toml              exact independently released governor selection
 .github/workflows/engineering-harness.yml repository-specific three-plane assurance workflow
+.github/workflows/self-hosting-governor.yml candidate reusable workflow published for later governors
 ```
 
 The root validator and Explorer sources remain byte-identical to their canonical managed-template copies. The self-hosting workflow and root self-hosting configuration are intentional repository-specific controls protected by the root lock, not alternative consumer profiles.
@@ -58,7 +60,7 @@ The harness implementation cannot use unreleased candidate behavior as its only 
 | Candidate source | reviewed checkout at the candidate commit | source tests and declared ignored derived output | source implementation evidence |
 | Candidate package | wheel built from a Git export and installed in a fresh environment | fresh-install and upgrade acceptance repositories outside the checkout | packaged behavior evidence |
 
-`harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, candidate commit, or governor digest machine-assessable. A mismatch fails its lane.
+`harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, candidate commit, or governor digest machine-assessable. A mismatch fails its lane. A published governor may also run `harnessctl accept-candidate` against an exact wheel; its deterministic manifest remains evidence until an accountable assurance decision.
 
 The current package and source version is 0.2.2, while `.self-hosting/governor.toml` intentionally still selects the independently published 0.2.1 wheel and digest. Publication does not automatically promote a candidate to govern itself.
 
@@ -76,10 +78,12 @@ clean candidate C -> ready VREC -> human verification
 
 The tag selects C, not a later governance commit. Production PyPI promotion verifies the already released wheel and sdist hashes and publishes those files without rebuilding. It remains a separate protected-environment decision.
 
-No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or promotes the governor.
+No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable promotion authority.
 
 ## Promoting a new governor
 
-After a candidate is immutably published, a separate approved work order must identify the previous and proposed governor, release record, immutable wheel URL/name, and SHA-256; independently acquire and test that wheel; update the governor descriptor and matching CI constants; and retain commit-bound evidence. Until that change is accepted, the prior descriptor remains authoritative.
+After a candidate is immutably published, a separate approved work order must identify the previous and proposed governor, release record, full released commit, immutable wheel URL/name, and SHA-256. A governor version that already contains the reconciliation protocol can then run `harnessctl reconcile-governor` as a read-only plan and, after review, with `--apply`. The command reads the target's migration contract and self-hosting workflow as verified data, never imports target code, preserves field-owned repository policy, and stops for authority-bearing decisions or incompatible schema jumps.
+
+The descriptor, `.engineering-harness.toml`, `.github/workflows/engineering-harness.yml`, and `.engineering-harness.lock` change as one recoverable transaction. The implementation release that introduces this mechanism cannot use it to promote itself: publish it first, select it through the previously trusted promotion process, and use its released reconciler only for later targets. Until a promotion change is accepted, the prior descriptor remains authoritative.
 
 See the authoritative [`SELF_HOSTING.md`](../engineering/self-hosting-boundary/SELF_HOSTING.md), repository [`REPOSITORY_CONTEXT.md`](../engineering/REPOSITORY_CONTEXT.md), and managed entry point [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md) before changing self-hosting controls.

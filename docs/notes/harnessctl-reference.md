@@ -25,9 +25,11 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, scripts, and configured self-hosting controls |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
+| `reconcile-governor` | authorized self-hosting maintainer using the current released governor | plan is read-only; `--apply` performs one recoverable descriptor/configuration/workflow/lock transaction | adopt an exact published governor without executing target code or losing repository policy |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove governor, candidate-source, or candidate-package runtime origin and boundary |
+| `accept-candidate` | released governor CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC | bind selected work, verification contracts, evidence, snapshot, and exact clean `HEAD` |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS | bind release policy, eligible VRECs, exact work coverage, version, and the same candidate commit |
 
@@ -79,6 +81,32 @@ harnessctl identity --role governor|candidate-source|candidate-package \
 ```
 
 Key role-specific options are `--checkout-root`, `--candidate-commit`, `--governor-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. This command is primarily for the implementation repository's self-hosting CI. It verifies declared runtime origin; it does not promote a governor or approve a candidate.
+
+## Self-hosting governor reconciliation and candidate acceptance
+
+These commands apply to `se_harness` development, not ordinary consumer repositories:
+
+```text
+harnessctl reconcile-governor [TARGET] \
+  --to VERSION \
+  --target-commit FULL_COMMIT \
+  --target-release-record RLS-... \
+  --target-sha256 SHA256 \
+  --work-order WO-... \
+  [--target-wheel PATH] [--set DOTTED.PATH=TOML_VALUE] [--apply]
+
+harnessctl accept-candidate \
+  --wheel PATH \
+  --candidate-commit FULL_COMMIT \
+  --candidate-wheel-sha256 SHA256 \
+  --governor-wheel-sha256 SHA256 \
+  --output PATH \
+  [--checkout-root PATH]
+```
+
+`reconcile-governor` must execute from the currently selected released governor outside the implementation checkout. It verifies the immutable target wheel, reads its migration and workflow contracts as data, preserves declared repository policy, and refuses unsupported schema jumps, missing decisions, consumer-workflow substitution, or undocumented workflow customization. Plan is the default. Apply changes only the governor descriptor, protected TOML, self-hosting workflow, transaction metadata, and matching lock state. The selected work order supplies authority; the command does not approve or publish the target.
+
+`accept-candidate` verifies the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, rejects checkout import fallback and authority substitution, and emits deterministic JSON only when every required scenario passes. Its output is evidence for human assurance review, never a VREC transition.
 
 ## Commit-bound verification preparation
 

@@ -25,6 +25,7 @@ from se_harness.integrity import (
     parse_lock,
     raw_sha256,
 )
+from se_harness.self_hosting_policy import PROTECTED_CONTROL_PATHS, classify_self_hosting
 
 
 LOCK_NAME = ".engineering-harness.lock"
@@ -239,6 +240,11 @@ def plan_install(
     if mode == "init" and target.exists() and any(target.iterdir()):
         raise HarnessError("init requires an empty or absent directory; use adopt for an existing repository")
     old_lock = _load_lock(target) if target.exists() else {"schema": 1, "tool_version": None, "files": {}}
+    self_hosting = None
+    if mode == "upgrade":
+        self_hosting = classify_self_hosting(target)
+        if self_hosting.kind == "ambiguous":
+            raise HarnessError(f"ambiguous self-hosting target: {self_hosting.detail}")
     installed_at = None
     configured_project_name = None
     config_path = target / CONFIG_NAME
@@ -262,6 +268,31 @@ def plan_install(
         desired = _merge_block(current, _block(rendered)) if item.mode == "fragment" else rendered
         relative = item.target.as_posix()
         old_entry = old_files.get(relative, {}) if isinstance(old_files.get(relative, {}), dict) else {}
+
+        if (
+            mode == "upgrade"
+            and self_hosting is not None
+            and self_hosting.enabled
+            and relative in PROTECTED_CONTROL_PATHS
+        ):
+            action = "protected-mismatch"
+            if current is not None and item.mode in {"managed", "fragment"} and old_entry.get("mode") == item.mode:
+                try:
+                    current_tracked = tracked_content(item.mode, current)
+                    if current_tracked is not None:
+                        match = compare_lock_entry(old_lock, old_entry, current_tracked)
+                        if (
+                            match == "mismatch"
+                            and old_lock.get("schema") == 1
+                            and matches_legacy_newline_variant(current_tracked, old_entry.get("sha256"))
+                        ):
+                            match = "legacy-canonical"
+                        if match != "mismatch":
+                            action = "protected"
+                except IntegrityError as exc:
+                    raise HarnessError(f"invalid protected self-hosting control at {relative}: {exc}") from exc
+            changes.append(Change(relative, action, item.mode, desired, current))
+            continue
 
         if item.mode == "seed":
             # Seed files become repository-owned as soon as they are installed.
@@ -352,9 +383,9 @@ def plan_install(
 def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, allow_updates: bool) -> dict:
     target.mkdir(parents=True, exist_ok=True)
     changes = list(changes)
-    blocking = {"conflict", "customized"}
+    blocking = {"conflict", "customized", "protected-mismatch"}
     if any(item.action in blocking for item in changes):
-        raise HarnessError("installation has conflicts or customizations; no files were written")
+        raise HarnessError("installation has conflicts, customizations, or protected-control mismatches; no files were written")
 
     safe_actions = {"add", "integrate"}
     if allow_updates:
@@ -381,7 +412,7 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
     output_schema = 1 if old_lock.get("schema") == 1 and legacy_customized else LOCK_SCHEMA
     for item in changes:
         destination = target / item.path
-        if item.action == "customized":
+        if item.action in {"customized", "protected-mismatch"}:
             if item.path in old_files:
                 files[item.path] = old_files[item.path]
             continue

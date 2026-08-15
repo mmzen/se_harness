@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
+from se_harness.self_hosting_policy import DESCRIPTOR_PATH, classify_self_hosting
 
 
-DESCRIPTOR_PATH = Path(".self-hosting/governor.toml")
 VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
@@ -29,27 +29,8 @@ class GovernorDescriptor:
 
 
 def self_hosting_enabled(target: Path) -> bool:
-    root = ensure_target(target, must_exist=True)
-    config_path = root / ".engineering-harness.toml"
-    if not config_path.is_file():
-        return False
-    try:
-        config = tomllib.loads(config_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
-        return False
-    section = config.get("self_hosting")
-    if not isinstance(section, dict) or section.get("role") != "implementation-repository":
-        return False
-    project_path = root / "pyproject.toml"
-    try:
-        project = tomllib.loads(project_path.read_text(encoding="utf-8")).get("project", {})
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
-        return False
-    return (
-        isinstance(project, dict)
-        and project.get("name") == "se-harness"
-        and (root / "se_harness" / "__init__.py").is_file()
-    )
+    ensure_target(target, must_exist=True)
+    return classify_self_hosting(target).enabled
 
 
 def load_governor_descriptor(target: Path) -> GovernorDescriptor:

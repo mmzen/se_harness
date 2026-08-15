@@ -51,6 +51,7 @@ include = ["se_harness*"]
 "share/se-harness/templates/repository/standard/scripts/harness_explorer" = ["templates/repository/standard/scripts/harness_explorer/*"]
 "share/se-harness/templates/repository/standard/.github" = ["templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed"]
 "share/se-harness/templates/repository/standard/.github/workflows" = ["templates/repository/standard/.github/workflows/engineering-harness.yml"]
+"share/se-harness/self-hosting" = ["self_hosting/*"]
 
 [tool.unittest]
 start-directory = "tests"
