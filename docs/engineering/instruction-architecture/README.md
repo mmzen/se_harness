@@ -71,6 +71,19 @@ The implementation also resolves the documented routine-work contradiction. A wo
 - Verification contract: `VER-IAR-006`
 - Implemented work order: `WO-IAR-006`
 
+## Implemented validation diagnostic taxonomy
+
+The `IAR-007` packet proposes one small reporting improvement: every existing validator finding states whether it concerns `structure`, `governance`, configured `policy`, or `maintenance`. It preserves all current rules, codes, severities, messages, pass/fail results, and exit behavior. Profiles, new inspection rules, evaluator identity, pending/orphan heuristics, and aggregate scores remain follow-on ideas outside this packet.
+
+### Validation-taxonomy packet index
+
+- Requirement: `REQ-IAR-015`
+- Specification: `SPEC-IAR-007`
+- Architecture: `ARCH-IAR-007`
+- Approved decision: `ADR-IAR-007`
+- Verification contract: `VER-IAR-007`
+- Implemented work order: `WO-IAR-007`
+
 ## Implemented instruction route
 
 ```text

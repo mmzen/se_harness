@@ -34,7 +34,7 @@
     },
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
-      "sha256": "cdbfdb041d2d9be093c63869650fab7b0cb7b5ecb5d51326a0f523e8dc10fdd6"
+      "sha256": "b68b28e8f999e6d8dd63d2901c43b16f1b73ad309ab545381b822eac018eb8ad"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
@@ -130,7 +130,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "4e365d15569cc5ced4eb8ab4d14477684132a4e7049a857690a4869fa854d87c"
+      "sha256": "8bebd1a4bc667c204ae40f15097532d632a29e05548b44df91f7d2dab66eefc5"
     }
   },
   "hash_algorithm": "sha256",

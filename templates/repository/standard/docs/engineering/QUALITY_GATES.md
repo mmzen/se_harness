@@ -10,3 +10,7 @@
 | G5 Release and operation | A released `RLS-*` binds the same commit and accountable owners accept release and operating contracts |
 
 Missing or externally held evidence is `not assessable`, not implicitly satisfied. Do not replace these gates with an aggregate health score.
+
+## Validation assessment planes
+
+Validator findings identify one explanatory plane: `structure` for formal graph shape, `governance` for non-waivable assurance invariants, `policy` for rules activated by explicit repository configuration, and `maintenance` for non-blocking compatibility or placement advice. The plane does not change error versus warning severity, lifecycle authority, or process exit behavior, and it is never an aggregate health score.

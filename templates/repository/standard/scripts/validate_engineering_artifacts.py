@@ -49,6 +49,9 @@ ALLOWED_STATUSES = {
     "rejected",
 }
 
+TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
+VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
+
 ACTIVE_COVERAGE_STATUSES = {
     "approved",
     "in_progress",
@@ -110,6 +113,11 @@ class Diagnostic:
     path: str
     code: str
     message: str
+    plane: str
+
+    def __post_init__(self) -> None:
+        if self.plane not in VALIDATION_PLANES:
+            raise ValueError(f"unknown validation plane: {self.plane!r}")
 
 
 @dataclass
@@ -156,13 +164,22 @@ class ValidationReport:
             except ValueError:
                 return path.as_posix()
 
+        plane_counts = {
+            plane: {
+                "errors": sum(item.plane == plane for item in self.errors),
+                "warnings": sum(item.plane == plane for item in self.warnings),
+            }
+            for plane in VALIDATION_PLANES
+        }
         return {
+            "taxonomy": TAXONOMY_VERSION,
             "valid": self.valid,
             "artifact_count": len(self.artifacts),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
             "errors": [asdict(item) for item in sorted(self.errors)],
             "warnings": [asdict(item) for item in sorted(self.warnings)],
+            "plane_counts": plane_counts,
             "artifacts": [
                 {
                     "id": artifact.artifact_id,
@@ -222,7 +239,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
     try:
         text = path.read_text(encoding="utf-8-sig")
     except (OSError, UnicodeError) as exc:
-        return None, Diagnostic(_display_path(path, report_root), "E001", f"cannot read artifact: {exc}")
+        return None, Diagnostic(_display_path(path, report_root), "E001", f"cannot read artifact: {exc}", "structure")
 
     if not text.startswith("+++\n") and text != "+++":
         return None, None
@@ -235,6 +252,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
             _display_path(path, report_root),
             "E001",
             "formal artifact starts TOML front matter but has no closing +++ delimiter",
+            "structure",
         )
 
     front_matter_text = "\n".join(lines[1:closing_index])
@@ -247,10 +265,16 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
             _display_path(path, report_root),
             "E001",
             f"invalid TOML front matter: {exc}",
+            "structure",
         )
 
     if not isinstance(metadata, dict):
-        return None, Diagnostic(_display_path(path, report_root), "E001", "front matter must be a TOML table")
+        return None, Diagnostic(
+            _display_path(path, report_root),
+            "E001",
+            "front matter must be a TOML table",
+            "structure",
+        )
 
     return Artifact(path=path, metadata=metadata, body=body), None
 
@@ -267,8 +291,16 @@ def load_artifacts(artifact_root: Path, report_root: Path) -> tuple[list[Artifac
     return artifacts, errors
 
 
-def _add_error(errors: list[Diagnostic], artifact: Artifact, report_root: Path, code: str, message: str) -> None:
-    errors.append(Diagnostic(_display_path(artifact.path, report_root), code, message))
+def _add_error(
+    errors: list[Diagnostic],
+    artifact: Artifact,
+    report_root: Path,
+    code: str,
+    message: str,
+    *,
+    plane: str,
+) -> None:
+    errors.append(Diagnostic(_display_path(artifact.path, report_root), code, message, plane))
 
 
 def _require_non_empty_string(
@@ -276,10 +308,19 @@ def _require_non_empty_string(
     field: str,
     errors: list[Diagnostic],
     report_root: Path,
+    *,
+    plane: str = "structure",
 ) -> str | None:
     value = artifact.metadata.get(field)
     if not isinstance(value, str) or not value.strip():
-        _add_error(errors, artifact, report_root, "E002", f"field '{field}' must be a non-empty string")
+        _add_error(
+            errors,
+            artifact,
+            report_root,
+            "E002",
+            f"field '{field}' must be a non-empty string",
+            plane=plane,
+        )
         return None
     return value.strip()
 
@@ -292,11 +333,19 @@ def _require_non_empty_string_list(
     *,
     code: str = "E002",
     container: dict[str, Any] | None = None,
+    plane: str = "structure",
 ) -> list[str] | None:
     source = artifact.metadata if container is None else container
     value = source.get(field)
     if not isinstance(value, list) or not value or any(not isinstance(item, str) or not item.strip() for item in value):
-        _add_error(errors, artifact, report_root, code, f"field '{field}' must be a non-empty array of strings")
+        _add_error(
+            errors,
+            artifact,
+            report_root,
+            code,
+            f"field '{field}' must be a non-empty array of strings",
+            plane=plane,
+        )
         return None
     return [item.strip() for item in value]
 
@@ -306,8 +355,12 @@ def _validate_git_identity(
     errors: list[Diagnostic],
     report_root: Path,
 ) -> tuple[str | None, str | None]:
-    commit = _require_non_empty_string(artifact, "commit", errors, report_root)
-    object_format = _require_non_empty_string(artifact, "git_object_format", errors, report_root)
+    commit = _require_non_empty_string(
+        artifact, "commit", errors, report_root, plane="governance"
+    )
+    object_format = _require_non_empty_string(
+        artifact, "git_object_format", errors, report_root, plane="governance"
+    )
     if object_format is not None and object_format not in GIT_COMMIT_PATTERNS:
         _add_error(
             errors,
@@ -315,6 +368,7 @@ def _validate_git_identity(
             report_root,
             "E009",
             "field 'git_object_format' must be 'sha1' or 'sha256'",
+            plane="governance",
         )
     elif commit is not None and object_format is not None and not GIT_COMMIT_PATTERNS[object_format].fullmatch(commit):
         _add_error(
@@ -323,6 +377,7 @@ def _validate_git_identity(
             report_root,
             "E009",
             f"field 'commit' must be a full lowercase {object_format} Git object ID",
+            plane="governance",
         )
     return commit, object_format
 
@@ -333,12 +388,21 @@ def _validate_timestamp(
     errors: list[Diagnostic],
     report_root: Path,
 ) -> None:
-    value = _require_non_empty_string(artifact, field, errors, report_root)
+    value = _require_non_empty_string(
+        artifact, field, errors, report_root, plane="governance"
+    )
     if value is not None:
         try:
             datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
         except ValueError:
-            _add_error(errors, artifact, report_root, "E009", f"field '{field}' must use a valid YYYY-MM-DDTHH:MM:SSZ timestamp")
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E009",
+                f"field '{field}' must use a valid YYYY-MM-DDTHH:MM:SSZ timestamp",
+                plane="governance",
+            )
 
 
 def _validate_evidence_paths(
@@ -346,7 +410,13 @@ def _validate_evidence_paths(
     errors: list[Diagnostic],
     repository_root: Path,
 ) -> None:
-    paths = _require_non_empty_string_list(artifact, "evidence_paths", errors, repository_root)
+    paths = _require_non_empty_string_list(
+        artifact,
+        "evidence_paths",
+        errors,
+        repository_root,
+        plane="governance",
+    )
     if paths is None:
         return
     resolved_root = repository_root.resolve()
@@ -359,6 +429,7 @@ def _validate_evidence_paths(
                 repository_root,
                 "E012",
                 f"evidence path must be a normalized repository-relative path: '{raw_path}'",
+                plane="governance",
             )
             continue
         candidate = repository_root / relative
@@ -373,12 +444,33 @@ def _validate_evidence_paths(
             resolved = candidate.resolve()
             resolved.relative_to(resolved_root)
         except (OSError, ValueError):
-            _add_error(errors, artifact, repository_root, "E012", f"evidence path escapes the repository: '{raw_path}'")
+            _add_error(
+                errors,
+                artifact,
+                repository_root,
+                "E012",
+                f"evidence path escapes the repository: '{raw_path}'",
+                plane="governance",
+            )
             continue
         if symlinked:
-            _add_error(errors, artifact, repository_root, "E012", f"evidence path must not traverse a symlink: '{raw_path}'")
+            _add_error(
+                errors,
+                artifact,
+                repository_root,
+                "E012",
+                f"evidence path must not traverse a symlink: '{raw_path}'",
+                plane="governance",
+            )
         elif not candidate.is_file():
-            _add_error(errors, artifact, repository_root, "E012", f"evidence path does not identify an existing file: '{raw_path}'")
+            _add_error(
+                errors,
+                artifact,
+                repository_root,
+                "E012",
+                f"evidence path does not identify an existing file: '{raw_path}'",
+                plane="governance",
+            )
 
 
 def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
@@ -402,6 +494,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     report_root,
                     "E002",
                     f"id '{artifact_id}' must use uppercase letters/digits/hyphens and end in a three-digit sequence",
+                    plane="structure",
                 )
             previous = seen.get(artifact_id)
             if previous is not None:
@@ -411,6 +504,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     report_root,
                     "E003",
                     f"duplicate id '{artifact_id}' also declared in {_display_path(previous.path, report_root)}",
+                    plane="structure",
                 )
             else:
                 seen[artifact_id] = artifact
@@ -418,7 +512,14 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
         if artifact_type is not None:
             expected_prefix = TYPE_PREFIX.get(artifact_type)
             if expected_prefix is None:
-                _add_error(errors, artifact, report_root, "E002", f"unknown artifact type '{artifact_type}'")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E002",
+                    f"unknown artifact type '{artifact_type}'",
+                    plane="structure",
+                )
             elif artifact_id is not None and not artifact_id.startswith(expected_prefix):
                 _add_error(
                     errors,
@@ -426,10 +527,18 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     report_root,
                     "E004",
                     f"id '{artifact_id}' must start with '{expected_prefix}' for type '{artifact_type}'",
+                    plane="structure",
                 )
 
         if status is not None and status not in ALLOWED_STATUSES:
-            _add_error(errors, artifact, report_root, "E002", f"unknown status '{status}'")
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E002",
+                f"unknown status '{status}'",
+                plane="structure",
+            )
 
         for field_name, field_value in (("created", created), ("updated", updated)):
             if field_value is not None and not ISO_DATE_PATTERN.fullmatch(field_value):
@@ -439,11 +548,19 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     report_root,
                     "E002",
                     f"field '{field_name}' must use YYYY-MM-DD",
+                    plane="structure",
                 )
 
         relations = artifact.metadata.get("relations", {})
         if not isinstance(relations, dict):
-            _add_error(errors, artifact, report_root, "E006", "field 'relations' must be a TOML table")
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E006",
+                "field 'relations' must be a TOML table",
+                plane="structure",
+            )
 
     return errors
 
@@ -474,15 +591,37 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
             statement = _require_non_empty_string(artifact, "statement", errors, report_root)
             _require_non_empty_string(artifact, "verification_method", errors, report_root)
             if statement is not None and re.search(r"\bSHALL\b", statement) is None:
-                _add_error(errors, artifact, report_root, "E005", "requirement statement must contain normative keyword SHALL")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E005",
+                    "requirement statement must contain normative keyword SHALL",
+                    plane="structure",
+                )
 
         if artifact_type == "verification_record":
             _validate_git_identity(artifact, errors, report_root)
-            worktree_state = _require_non_empty_string(artifact, "worktree_state", errors, report_root)
+            worktree_state = _require_non_empty_string(
+                artifact, "worktree_state", errors, report_root, plane="governance"
+            )
             if worktree_state is not None and worktree_state != "clean":
-                _add_error(errors, artifact, report_root, "E009", "field 'worktree_state' must be 'clean'")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E009",
+                    "field 'worktree_state' must be 'clean'",
+                    plane="governance",
+                )
             _validate_timestamp(artifact, "verified_at", errors, report_root)
-            snapshot_hash = _require_non_empty_string(artifact, "artifact_snapshot_sha256", errors, report_root)
+            snapshot_hash = _require_non_empty_string(
+                artifact,
+                "artifact_snapshot_sha256",
+                errors,
+                report_root,
+                plane="governance",
+            )
             if snapshot_hash is not None and not SHA256_PATTERN.fullmatch(snapshot_hash):
                 _add_error(
                     errors,
@@ -490,6 +629,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     report_root,
                     "E009",
                     "field 'artifact_snapshot_sha256' must be a lowercase SHA-256 value",
+                    plane="governance",
                 )
             _validate_evidence_paths(artifact, errors, report_root)
             if artifact.status not in {"ready", "verified", "released", "superseded"}:
@@ -499,6 +639,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     report_root,
                     "E009",
                     "verification_record status must be ready, verified, released, or superseded",
+                    plane="governance",
                 )
             if artifact.status == "superseded":
                 _validate_timestamp(artifact, "superseded_at", errors, report_root)
@@ -510,6 +651,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     report_root,
                     code="E009",
                     container=artifact.relations,
+                    plane="governance",
                 )
                 if successors is not None and len(successors) != 1:
                     _add_error(
@@ -518,6 +660,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                         report_root,
                         "E009",
                         "relation 'superseded_by' must contain exactly one verification record",
+                        plane="governance",
                     )
             else:
                 for field_name in ("superseded_at", "supersession_authorized_by"):
@@ -528,6 +671,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                             report_root,
                             "E009",
                             f"field '{field_name}' is allowed only when verification_record status is superseded",
+                            plane="governance",
                         )
                 if "superseded_by" in artifact.relations:
                     _add_error(
@@ -536,21 +680,47 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                         report_root,
                         "E009",
                         "relation 'superseded_by' is allowed only when verification_record status is superseded",
+                        plane="governance",
                     )
 
         if artifact_type == "release_record":
             _validate_git_identity(artifact, errors, report_root)
-            _require_non_empty_string(artifact, "version", errors, report_root)
+            _require_non_empty_string(
+                artifact, "version", errors, report_root, plane="governance"
+            )
             _validate_timestamp(artifact, "released_at", errors, report_root)
-            authorized_by = _require_non_empty_string(artifact, "authorized_by", errors, report_root)
+            authorized_by = _require_non_empty_string(
+                artifact, "authorized_by", errors, report_root, plane="governance"
+            )
             owners = artifact.metadata.get("owners", [])
             if authorized_by is not None and isinstance(owners, list) and authorized_by not in owners:
-                _add_error(errors, artifact, report_root, "E009", "field 'authorized_by' must identify one of the record owners")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E009",
+                    "field 'authorized_by' must identify one of the record owners",
+                    plane="governance",
+                )
             tag = artifact.metadata.get("tag")
             if tag is not None and (not isinstance(tag, str) or not tag.strip()):
-                _add_error(errors, artifact, report_root, "E009", "field 'tag' must be a non-empty string when present")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E009",
+                    "field 'tag' must be a non-empty string when present",
+                    plane="governance",
+                )
             if artifact.status not in {"ready", "released"}:
-                _add_error(errors, artifact, report_root, "E009", "release_record status must be ready or released")
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E009",
+                    "release_record status must be ready or released",
+                    plane="governance",
+                )
 
         if artifact_type == "work_order" and "architecture" in artifact.relations:
             _require_non_empty_string_list(
@@ -599,6 +769,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                     report_root,
                     "E006",
                     f"relation '{relation_name}' must be an array of artifact IDs",
+                    plane="structure",
                 )
                 continue
             for target in targets:
@@ -609,6 +780,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         report_root,
                         "E006",
                         f"relation '{relation_name}' contains a non-string or empty target",
+                        plane="structure",
                     )
                     continue
                 if target == artifact.artifact_id:
@@ -618,6 +790,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         report_root,
                         "E006",
                         f"artifact '{artifact.artifact_id}' must not reference itself via '{relation_name}'",
+                        plane="structure",
                     )
                 elif target not in catalog:
                     _add_error(
@@ -626,6 +799,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         report_root,
                         "E006",
                         f"artifact '{artifact.artifact_id}' relation '{relation_name}' references unknown target '{target}'",
+                        plane="structure",
                     )
                 else:
                     allowed_types = RELATION_TARGET_TYPES.get((artifact.artifact_type, relation_name))
@@ -638,6 +812,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                             report_root,
                             "E011",
                             f"relation '{relation_name}' target '{target}' must have type {expected}, found {target_type}",
+                            plane="structure",
                         )
     return errors
 
@@ -672,6 +847,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"{work_order.status} work order requires coverage by a verified or released verification record",
+                    plane="policy",
                 )
 
     for artifact in artifacts:
@@ -685,6 +861,7 @@ def validate_revision_consistency(
                         report_root,
                         "E010",
                         f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
+                        plane="governance",
                     )
             for relation_name in ("verifies_work_order", "conforms_to", "superseded_by"):
                 duplicates = _duplicate_strings(artifact.relations.get(relation_name))
@@ -695,6 +872,7 @@ def validate_revision_consistency(
                         report_root,
                         "E010",
                         f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                        plane="governance",
                     )
             work_order_ids = _relation_targets(artifact, "verifies_work_order")
             verification_ids = _relation_targets(artifact, "conforms_to")
@@ -711,6 +889,7 @@ def validate_revision_consistency(
                         report_root,
                         "E010",
                         f"active verification record requires active work order '{work_order_id}'",
+                        plane="governance",
                     )
             for verification_id in verification_ids:
                 verification = catalog.get(verification_id)
@@ -726,6 +905,7 @@ def validate_revision_consistency(
                         report_root,
                         "E010",
                         f"active verification record requires active verification contract '{verification_id}'",
+                        plane="governance",
                     )
             missing_verification = declared_verification - verification_ids
             extra_verification = verification_ids - declared_verification
@@ -736,6 +916,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"verification record is missing contracts declared by selected work: {', '.join(sorted(missing_verification))}",
+                    plane="governance",
                 )
             if extra_verification:
                 _add_error(
@@ -744,6 +925,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
+                    plane="governance",
                 )
             if len(work_order_ids) > 1:
                 evidence_paths = artifact.metadata.get("evidence_paths", [])
@@ -763,6 +945,7 @@ def validate_revision_consistency(
                         report_root,
                         "E010",
                         f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
+                        plane="governance",
                     )
             if artifact.status == "superseded":
                 successor_ids = sorted(_relation_targets(artifact, "superseded_by"))
@@ -777,6 +960,7 @@ def validate_revision_consistency(
                                 report_root,
                                 "E010",
                                 f"superseding verification record '{successor_id}' must be verified or released",
+                                plane="governance",
                             )
                         missing_work = work_order_ids - _relation_targets(successor, "verifies_work_order")
                         if missing_work:
@@ -786,6 +970,7 @@ def validate_revision_consistency(
                                 report_root,
                                 "E010",
                                 f"superseding verification record '{successor_id}' omits work orders: {', '.join(sorted(missing_work))}",
+                                plane="governance",
                             )
             if artifact.artifact_id in supersession_cycle_nodes:
                 _add_error(
@@ -794,6 +979,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"verification supersession cycle detected among: {', '.join(sorted(supersession_cycle_nodes))}",
+                    plane="governance",
                 )
 
         if artifact.artifact_type != "release_record":
@@ -807,6 +993,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                    plane="governance",
                 )
         version = artifact.metadata.get("version")
         if isinstance(version, str) and version.strip():
@@ -828,6 +1015,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"active release record requires implemented, verified, or released work order '{work_order_id}'",
+                    plane="governance",
                 )
         verification_work: set[str] = set()
         for verification_id in _relation_targets(artifact, "includes_verification"):
@@ -843,6 +1031,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"active release record must not include superseded verification record '{verification_id}'",
+                    plane="governance",
                 )
             if release_commit != verification.metadata.get("commit") or release_format != verification.metadata.get("git_object_format"):
                 _add_error(
@@ -851,6 +1040,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"release commit does not match verification record '{verification_id}'",
+                    plane="governance",
                 )
             if artifact.status == "released" and verification.status not in {"verified", "released"}:
                 _add_error(
@@ -859,6 +1049,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"released record requires verified included record '{verification_id}'",
+                    plane="governance",
                 )
         missing_work = released_work - verification_work
         if missing_work:
@@ -868,6 +1059,7 @@ def validate_revision_consistency(
                 report_root,
                 "E010",
                 f"released work orders are not covered by included verification records: {', '.join(sorted(missing_work))}",
+                plane="governance",
             )
         extra_work = verification_work - released_work
         if extra_work:
@@ -877,6 +1069,7 @@ def validate_revision_consistency(
                 report_root,
                 "E010",
                 f"included verification records cover work orders absent from the release: {', '.join(sorted(extra_work))}",
+                plane="governance",
             )
         for contract_id in _relation_targets(artifact, "satisfies"):
             contract = catalog.get(contract_id)
@@ -889,6 +1082,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"active release record requires active release contract '{contract_id}'",
+                    plane="governance",
                 )
             ungated = released_work - _relation_targets(contract, "gates")
             if ungated:
@@ -898,6 +1092,7 @@ def validate_revision_consistency(
                     report_root,
                     "E010",
                     f"release contract '{contract_id}' does not gate work orders: {', '.join(sorted(ungated))}",
+                    plane="governance",
                 )
 
     for version, records in sorted(release_versions.items()):
@@ -905,7 +1100,14 @@ def validate_revision_consistency(
             continue
         record_ids = ", ".join(sorted(record.artifact_id for record in records))
         for record in records:
-            _add_error(errors, record, report_root, "E010", f"duplicate release record version '{version}' among {record_ids}")
+            _add_error(
+                errors,
+                record,
+                report_root,
+                "E010",
+                f"duplicate release record version '{version}' among {record_ids}",
+                plane="governance",
+            )
     return errors
 
 
@@ -1118,7 +1320,14 @@ def validate_architecture_traceability(
             continue
         traceability = architecture_traceability_state(artifact, catalog)
         for issue in traceability["issues"]:
-            _add_error(errors, artifact, report_root, "E016", issue)
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E016",
+                issue,
+                plane="governance",
+            )
         if traceability["state"] in {
             "dual_declared",
             "legacy_requirement_trace",
@@ -1129,6 +1338,7 @@ def validate_architecture_traceability(
                     _display_path(artifact.path, report_root),
                     "W015",
                     f"architecture uses deprecated constrains relation ({traceability['state']}); migrate through accountable governance",
+                    "maintenance",
                 )
             )
     return errors, warnings
@@ -1240,13 +1450,27 @@ def validate_decision_assessments(
         assessment = decision_assessment_state(artifact)
         if artifact.artifact_type != "architecture":
             for issue in assessment["issues"]:
-                _add_error(errors, artifact, report_root, "E014", issue)
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E014",
+                    issue,
+                    plane="governance",
+                )
             continue
 
         state = assessment["state"]
         if state in {"missing", "invalid"}:
             for issue in assessment["issues"]:
-                _add_error(errors, artifact, report_root, "E014", issue)
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E014",
+                    issue,
+                    plane="governance",
+                )
             continue
         deciding = active_decisions_by_architecture.get(artifact.artifact_id, set())
         if state == "legacy_missing":
@@ -1255,6 +1479,7 @@ def validate_decision_assessments(
                     _display_path(artifact.path, report_root),
                     "W014",
                     "completed legacy architecture has no decision_assessment; migrate during the compatibility window",
+                    "maintenance",
                 )
             )
             if not deciding:
@@ -1264,6 +1489,7 @@ def validate_decision_assessments(
                     report_root,
                     "E015",
                     "completed legacy architecture without decision_assessment requires an active deciding ADR",
+                    plane="governance",
                 )
             continue
         if (
@@ -1277,6 +1503,7 @@ def validate_decision_assessments(
                 report_root,
                 "E015",
                 "adr_required architecture has no active ADR whose decides relation targets it",
+                plane="governance",
             )
     return errors, warnings
 
@@ -1307,6 +1534,7 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
                 report_root,
                 "E007",
                 f"active requirement '{artifact.artifact_id}' has no active specification coverage",
+                plane="governance",
             )
         if artifact.artifact_id not in verified:
             _add_error(
@@ -1315,6 +1543,7 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
                 report_root,
                 "E008",
                 f"active requirement '{artifact.artifact_id}' has no active verification coverage",
+                plane="governance",
             )
 
     return errors
@@ -1380,6 +1609,7 @@ def validate_canonical_layout(
                     actual,
                     "W013",
                     f"artifact '{artifact_id}' is valid outside its canonical location; expected '{expected_text}'",
+                    "maintenance",
                 )
             )
     return sorted(set(warnings))
@@ -1401,6 +1631,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
                 _display_path(selected_artifact_root, repository_root),
                 "E001",
                 "artifact root does not exist",
+                "structure",
             )
         )
     else:
@@ -1440,20 +1671,29 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
 
 def render_human(report: ValidationReport) -> str:
     status = "PASS" if report.valid else "FAIL"
+    plane_summary = " | ".join(
+        f"{plane} E{sum(item.plane == plane for item in report.errors)}/W{sum(item.plane == plane for item in report.warnings)}"
+        for plane in VALIDATION_PLANES
+    )
     lines = [
         f"Engineering artifact validation: {status}",
         f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)}",
+        f"Planes: {plane_summary}",
     ]
     if report.errors:
         lines.append("")
         lines.append("Errors:")
         for diagnostic in sorted(report.errors):
-            lines.append(f"- [{diagnostic.code}] {diagnostic.path}: {diagnostic.message}")
+            lines.append(
+                f"- [{diagnostic.code}] [{diagnostic.plane}] {diagnostic.path}: {diagnostic.message}"
+            )
     if report.warnings:
         lines.append("")
         lines.append("Warnings:")
         for diagnostic in sorted(report.warnings):
-            lines.append(f"- [{diagnostic.code}] {diagnostic.path}: {diagnostic.message}")
+            lines.append(
+                f"- [{diagnostic.code}] [{diagnostic.plane}] {diagnostic.path}: {diagnostic.message}"
+            )
     return "\n".join(lines)
 
 
