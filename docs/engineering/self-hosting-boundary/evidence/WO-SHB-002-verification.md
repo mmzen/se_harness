@@ -61,8 +61,8 @@ Focused tests cover exact target resolution, target-code non-execution, field ow
 
 Complete source suites passed from the checkout:
 
-- Python 3.14.6: 159 tests in 50.453 seconds; three conditional skips; zero failures.
-- Python 3.11.9: 159 tests in 51.853 seconds; three conditional skips; zero failures.
+- Python 3.14.6: 160 tests in 53.171 seconds; three conditional skips; zero failures.
+- Python 3.11.9: 160 tests in 53.510 seconds; three conditional skips; zero failures.
 
 Formal artifact validation passed with 294 artifacts, zero errors, and 38 pre-existing legacy/location warnings. `git diff --check` passed; its only output was the repository's Windows LF-to-CRLF conversion warnings.
 
@@ -77,6 +77,12 @@ An explicitly non-promotable wheel was built from the uncommitted working tree f
 - no `templates/repository/self-hosting` profile exists.
 
 The wheel was installed without dependencies into fresh Python 3.14 and Python 3.11 virtual environments outside the checkout. In both environments the installed `harnessctl` exposed `reconcile-governor` and `accept-candidate`; fresh consumer `init` and `doctor` passed. The Python 3.11 environment resolved Python 3.11.9 and `se-harness` 0.2.2. The acceptance interface requires the caller-selected candidate SHA-256, reads and checks the candidate bytes once, and installs a private snapshot of those bytes; target reconciliation likewise inspects its checked in-memory target bytes rather than reopening a mutable path. These are candidate-package observations only.
+
+## First commit-bound replay attempt and correction
+
+Candidate commit `addcf26a9db91afebcd4d5fb8d3b759ed78e9e6f` was exported with `git archive` and built as non-promotable wheel SHA-256 `2d204347ac0e2d0d41bb5116c5f5a19e4262504ec895487fe39d852454855a66`. Two fresh Python 3.11 bootstrap executions passed all 11 scenarios, but their canonical manifest SHA-256 values differed: `4c277a734e37ab4e6d009dd5ccd230cece308992931736af6f91e25fbf1c42e2` versus `9ef836a1d96731f169db328c88618206b569e6b4c64c43ce92db6773f62f8d08`. Only `installed-identity` differed.
+
+Diagnosis showed that Windows paths inside JSON output contain doubled backslashes. Normalization converted those escapes before replacing the disposable root, leaving the random temporary directory in the hashed output. The candidate therefore failed the deterministic replay condition even though behavior and every scenario outcome matched. The correction replaces raw, slash-normalized, and JSON-escaped path representations before separator normalization and adds a cross-platform regression test. The failed attempt remains retained evidence and does not authorize a VREC. The enclosing correction commit requires a fresh exact-commit wheel and two equal replay manifests.
 
 ## Adversarial and recovery coverage
 

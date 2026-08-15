@@ -561,6 +561,20 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         self.assertEqual(list(SCENARIO_IDS), [item["scenario_id"] for item in parsed["scenarios"]])
         self.assertEqual(CONTRACT_SHA256, parsed["verifier"]["contract_sha256"])
 
+    def test_acceptance_normalizes_json_escaped_temporary_paths(self) -> None:
+        from se_harness.candidate_acceptance import _normalize
+
+        with tempfile.TemporaryDirectory() as temporary:
+            parent = Path(temporary)
+            first = parent / "first"
+            second = parent / "second"
+            first_value = json.dumps({"path": str(first / "candidate-env" / "python")})
+            second_value = json.dumps({"path": str(second / "candidate-env" / "python")})
+            first_normalized = _normalize(first_value, first, first / "candidate.whl", None)
+            second_normalized = _normalize(second_value, second, second / "candidate.whl", None)
+            self.assertEqual(first_normalized, second_normalized)
+            self.assertIn("<TEMP>", first_normalized)
+
     def test_candidate_checkout_cannot_supply_released_acceptance_runner(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             wheel, _ = self.make_target_wheel(Path(temporary))

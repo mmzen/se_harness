@@ -148,14 +148,19 @@ def _launcher(environment: Path, name: str) -> Path:
 
 
 def _normalize(value: str, temporary: Path, wheel: Path, checkout: Path | None) -> str:
-    normalized = value.replace("\r\n", "\n").replace("\r", "\n").replace("\\", "/")
+    normalized = value.replace("\r\n", "\n").replace("\r", "\n")
     replacements = [(temporary, "<TEMP>"), (wheel, "<WHEEL>")]
     if checkout is not None:
         replacements.append((checkout, "<CHECKOUT>"))
     for path, label in replacements:
+        representations: set[str] = set()
         for representation in {str(path), str(path.resolve())}:
-            normalized = normalized.replace(representation.replace("\\", "/"), label)
-    return normalized
+            representations.add(representation)
+            representations.add(representation.replace("\\", "/"))
+            representations.add(json.dumps(representation)[1:-1])
+        for representation in sorted(representations, key=len, reverse=True):
+            normalized = normalized.replace(representation, label)
+    return normalized.replace("\\", "/")
 
 
 def _result(
