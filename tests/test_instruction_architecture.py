@@ -11,6 +11,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from se_harness import __version__
 from se_harness.cli import main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, canonical_sha256
@@ -490,7 +491,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertIn("governor:", workflow)
         self.assertIn("candidate:", workflow)
-        self.assertIn("se-harness==0.2.2", workflow)
+        self.assertIn(f"se-harness=={__version__}", workflow)
         self.assertIn(WHEEL_SHA256, workflow)
         self.assertIn("releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl", workflow)
         self.assertIn("sha256sum --check", workflow)

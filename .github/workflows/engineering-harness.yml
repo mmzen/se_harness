@@ -13,7 +13,7 @@ env:
   GOVERNOR_WHEEL: "se_harness-0.2.1-py3-none-any.whl"
   GOVERNOR_URL: "https://github.com/mmzen/se_harness/releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl"
   GOVERNOR_WHEEL_SHA256: "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
-  CANDIDATE_VERSION: "0.2.2"
+  CANDIDATE_VERSION: "0.3.0"
 
 jobs:
   governor:

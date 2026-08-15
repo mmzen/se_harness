@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a non-authoritative reference to the current 0.2.2 CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
+> This is a non-authoritative reference to the current 0.3.0 CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
 
 ## Invocation
 

@@ -42,7 +42,7 @@ harnessctl --version
 For a reproducible installation, select the exact release:
 
 ```powershell
-python -m pip install "se-harness==0.2.2"
+python -m pip install "se-harness==0.3.0"
 ```
 
 Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, and the complete upgrade procedure.
@@ -142,7 +142,7 @@ Harness commands may prepare observations or `ready` proposals. They never commi
 
 ## Known limitations
 
-- In 0.2.2, managed `QUALITY_GATES.md` and Harness Explorer reuse G0-G5 for different groupings. Managed policy owns gate meaning; Explorer remains a navigation and anomaly view.
+- Managed `QUALITY_GATES.md` and Harness Explorer currently reuse G0-G5 for different groupings. Managed policy owns gate meaning; Explorer remains a navigation and anomaly view.
 - Typed architecture policy says routine requirements must not receive fabricated architecture coverage, while the validator still requires a non-empty work-order `architecture` relation. For a purely routine change, stop and seek a governed decision rather than inventing an artifact.
 
 These are documented product tensions, not corrections made by documentation. The [conceptual model](docs/notes/harness-uml-model.md) and [operational phasing](docs/notes/harness-operational-phasing.md) provide context.
