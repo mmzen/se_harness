@@ -89,7 +89,7 @@ Intent -> Capability -> Requirement <- Specification.specifies
 
 Historical completed artifacts may retain the compatibility-era `constrains` relation. New authoring uses `addresses` and `conforms_to`; historical records are not rewritten merely to modernize their vocabulary.
 
-**Current limitation:** the validator still requires every work order's `architecture` relation to be non-empty, while the typed architecture policy says routine requirements must not receive fabricated architecture coverage. A work order containing only routine, non-architectural requirements therefore exposes an unresolved policy/checker tension. Stop and obtain a governed decision rather than inventing an architecture item to satisfy the schema.
+A work order omits its `architecture` relation when no active architecture addresses any implemented requirement. When architecture does apply, the work order selects every applicable architecture and each ADR required by its decision assessment. The authoritative [artifact applicability catalog](../engineering/TRACEABILITY.md#artifact-applicability-catalog) defines the complete required, omission, and reuse rules for every standard formal type.
 
 ## Authorized work
 

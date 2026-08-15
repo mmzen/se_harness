@@ -47,6 +47,7 @@ This does not guarantee that a decision is wise. It makes the claim attributable
 | Release record | A separate release-owner decision tied to the same candidate commit. |
 
 The [simplified UML model](harness-uml-model.md) shows the relationships at a glance.
+The authoritative [artifact applicability catalog](../engineering/TRACEABILITY.md#artifact-applicability-catalog) defines every standard formal type, its objective, when it applies, when it may be omitted or reused, its accountable owner, and its primary relations.
 
 ## How it fits into a change
 

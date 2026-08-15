@@ -31,7 +31,7 @@ Preflight is read-only. It validates installed integrity, repository-context com
 | Creating or changing artifacts and lifecycle state | `docs/engineering/WORKFLOW.md` |
 | Approving work, assurance, release, risk, or operations | `docs/engineering/DECISION_RIGHTS.md` |
 | Defining or executing verification and release gates | `docs/engineering/QUALITY_GATES.md` |
-| Creating relations, evidence, VRECs, supersession, or releases | `docs/engineering/TRACEABILITY.md` |
+| Defining artifact purpose, applicability, reuse, or relations; recording evidence, VRECs, supersession, or releases | `docs/engineering/TRACEABILITY.md` |
 
 Use the repository-owned `docs/engineering/README.md` only as the index of local artifact domains and supporting engineering documentation.
 

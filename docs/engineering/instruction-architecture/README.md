@@ -56,6 +56,21 @@ The `IAR-005` packet resolves the overloaded `architecture.constrains` relation.
 - Verification contract: `VER-IAR-005`
 - Implemented work order: `WO-IAR-005`
 
+## Implemented authoritative artifact applicability catalog
+
+The `IAR-006` packet gives humans and coding agents one normative source for every standard artifact type's objective, applicability, omission or reuse, accountable owner, and primary relations. `TRACEABILITY.md` owns the catalog; the managed router points to it; progressive notes and authoring templates retain focused responsibilities without becoming competing authority.
+
+The implementation also resolves the documented routine-work contradiction. A work order may omit its `architecture` relation when no active architecture addresses an implemented requirement. Applicable architecture and required deciding ADRs remain mandatory, and a present empty relation remains invalid. A structural test keeps the twelve-type registry and catalog membership synchronized.
+
+### Artifact-applicability packet index
+
+- Requirement: `REQ-IAR-014`
+- Specification: `SPEC-IAR-006`
+- Architecture: `ARCH-IAR-006`
+- Decision: `ADR-IAR-006`
+- Verification contract: `VER-IAR-006`
+- Implemented work order: `WO-IAR-006`
+
 ## Implemented instruction route
 
 ```text

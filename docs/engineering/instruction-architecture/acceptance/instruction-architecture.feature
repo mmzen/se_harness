@@ -65,6 +65,20 @@ Feature: Rationalized and enforceable repository instructions
     Then the applicable architecture and any required deciding ADR must be selected
     And every selected architecture shares a conforming specification with the work order
 
+  Scenario: Routine work may omit architecture honestly
+    Given a work order has complete requirement, specification, and verification coverage
+    And no active architecture addresses an implemented requirement
+    When validation and preflight evaluate the work order without an architecture relation
+    Then the work order may pass without a placeholder architecture
+    And a present empty architecture relation remains invalid
+
+  Scenario: Humans and agents share one artifact applicability catalog
+    Given the canonical standard artifact registry and managed policies are installed
+    When an operator or coding agent needs to decide whether an artifact applies
+    Then TRACEABILITY.md defines every standard type's purpose, applicability, omission or reuse, owner, and primary relations
+    And the managed router points to that catalog
+    And human notes and templates do not become competing authority
+
   Scenario: Historical architecture relations are classified without rewriting
     Given a completed architecture contains only an unambiguous legacy constrains relation
     When validation and Harness Explorer evaluate it during the compatibility window

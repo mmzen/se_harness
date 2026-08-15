@@ -10,7 +10,6 @@ updated = "YYYY-MM-DD"
 [relations]
 implements = ["REQ-xxx"]
 specifications = ["SPEC-xxx"]
-architecture = ["ARCH-xxx", "ADR-xxx"]
 verification = ["VER-xxx"]
 +++
 
@@ -20,9 +19,9 @@ verification = ["VER-xxx"]
 
 Use `approved` to authorize bounded execution and `implemented` after the work and retained evidence are complete. Governance-only work normally stops at `implemented`. Use `verified` or `released` only when an eligible commit-bound VREC explicitly covers this work order under the repository's configured provenance policy.
 
-The `architecture` relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
+Add `architecture = ["ARCH-xxx", "ADR-xxx"]` under `[relations]` when architecture applies. The relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
 
-An architecture is applicable when it addresses an architecturally significant requirement implemented by this work order. Every selected architecture must conform to at least one of the selected specifications. Routine requirements without an active `addresses` edge do not require fabricated architecture coverage.
+An architecture is applicable when it addresses an architecturally significant requirement implemented by this work order. Every selected architecture must conform to at least one of the selected specifications. Omit the `architecture` relation only when no active architecture addresses any implemented requirement. Routine requirements without an active `addresses` edge do not require fabricated architecture coverage. A present `architecture` relation must not be empty.
 
 ## Objective
 

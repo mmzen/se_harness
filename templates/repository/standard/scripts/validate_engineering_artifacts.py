@@ -458,7 +458,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "architecture": (),
         "adr": ("decides",),
         "verification": ("verifies",),
-        "work_order": ("implements", "specifications", "architecture", "verification"),
+        "work_order": ("implements", "specifications", "verification"),
         "release_contract": ("gates",),
         "verification_record": ("verifies_work_order", "conforms_to"),
         "release_record": ("satisfies", "includes_verification", "releases_work"),
@@ -551,6 +551,16 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 _add_error(errors, artifact, report_root, "E009", "field 'tag' must be a non-empty string when present")
             if artifact.status not in {"ready", "released"}:
                 _add_error(errors, artifact, report_root, "E009", "release_record status must be ready or released")
+
+        if artifact_type == "work_order" and "architecture" in artifact.relations:
+            _require_non_empty_string_list(
+                artifact,
+                "architecture",
+                errors,
+                report_root,
+                code="E005",
+                container=artifact.relations,
+            )
 
         required_relations = relation_requirements.get(artifact_type, ())
         relations = artifact.metadata.get("relations", {})
