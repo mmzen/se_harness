@@ -5,7 +5,7 @@ title = "Verify canonical Harness Explorer WebUI"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-13"
-updated = "2026-08-13"
+updated = "2026-08-15"
 
 [relations]
 verifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-032", "REQ-DST-033"]
@@ -54,7 +54,7 @@ Verification derives expected model fields and authority semantics from the appr
 - Repository strings reach the DOM only through text-safe operations.
 - Root and canonical managed copies plus any asset inventories are equivalent.
 - CLI dispatch and exit-code behavior remain unchanged unless an approved deviation is recorded.
-- The revised WebUI schema documentation, handoff, manifest, brand contract, and prototype agree with `SPEC-DST-008` and contain no missing asset references.
+- The active and canonical templates are byte-equivalent, the canonical template is the only reusable WebUI source, and no redundant `templates/webui/` directory remains.
 
 ## Security and privacy checks
 
@@ -64,11 +64,11 @@ Confirm that blocking the CDN produces the explicit 3D-unavailable state while O
 
 ## Manual assessments
 
-At desktop and narrow widths, a reviewer must confirm the original prototype's structure and visual identity remain recognizable; the five questions are easy to find; every canonical artifact type remains exact and selectable; relation direction and authority are clear; definition coverage is not confused with VREC assurance; gates and conditions are readable; observed and authoritative commits are distinct; superseded history remains understandable; CDN failure is explicit; focus and keyboard navigation work; and color is not the only carrier of meaning.
+At desktop and narrow widths, a reviewer must confirm the canonical template's reviewed structure and visual identity remain recognizable; the five questions are easy to find; every canonical artifact type remains exact and selectable; relation direction and authority are clear; definition coverage is not confused with VREC assurance; gates and conditions are readable; observed and authoritative commits are distinct; superseded history remains understandable; CDN failure is explicit; focus and keyboard navigation work; and color is not the only carrier of meaning.
 
 ## Evidence retention
 
-Retain exact commands, runtimes, changed paths, snapshot and output hashes, test counts, hostile-input cases, model-field inventory, asset provenance if applicable, browser widths, accessibility observations, managed parity, package inspection, fresh-install results, deviations, and residual risks under `docs/engineering/harness-distribution/evidence/WO-DST-007-verification.md`.
+Retain exact commands, runtimes, changed paths, snapshot and output hashes, test counts, hostile-input cases, model-field inventory, asset provenance if applicable, browser widths, accessibility observations, managed parity, package inspection, fresh-install results, deviations, and residual risks under the selected work order's `docs/engineering/<domain>/evidence/<WO-ID>-verification.md` path.
 
 ## Residual uncertainty
 

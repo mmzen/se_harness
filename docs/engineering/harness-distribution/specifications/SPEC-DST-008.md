@@ -5,7 +5,7 @@ title = "Canonical Harness Explorer WebUI"
 status = "implemented"
 owners = ["technical-owner", "product-owner", "quality-owner", "security-owner"]
 created = "2026-08-13"
-updated = "2026-08-13"
+updated = "2026-08-15"
 
 [relations]
 specifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-032", "REQ-DST-033"]
@@ -15,7 +15,7 @@ specifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-032", "REQ-DS
 
 ## Scope
 
-Integrate the reviewed WebUI prototype while retaining its page structure, visual identity, responsive behavior, and `3d-force-graph` interaction. Keep the existing deterministic generator and canonical snapshot as the model boundary, reconcile the prototype terminology with the actual harness, and distribute one managed implementation.
+Maintain the reviewed WebUI design embodied by the canonical repository template while retaining its page structure, visual identity, responsive behavior, and `3d-force-graph` interaction. Keep the existing deterministic generator and canonical snapshot as the model boundary, use exact harness terminology, and distribute one managed implementation without a redundant design-source directory.
 
 This contract changes presentation and presentation-side derivation. It does not change formal artifacts, relation authority, validator rules, lifecycle transitions, quality-gate meaning, verification capture, release eligibility, or the `harnessctl dashboard` command boundary.
 
@@ -58,11 +58,11 @@ This contract changes presentation and presentation-side derivation. It does not
 
 ## Visual and accessibility behavior
 
-26. Preserve the original prototype's sidebar, Overview/Lineage/Readiness structure, topology-led composition, typography, colors, spacing, responsive behavior, and 3D interaction. Change the page only where required for canonical model fidelity, safe data handling, accessibility, and explicit failure states.
+26. Preserve the reviewed design's sidebar, Overview/Lineage/Readiness structure, topology-led composition, typography, colors, spacing, responsive behavior, and 3D interaction. Change the page only where required for canonical model fidelity, safe data handling, accessibility, and explicit failure states.
 27. Status, authority, derived state, warning, error, and supersession cannot depend on color alone. Focus remains visible and interactive controls remain keyboard operable.
 28. Desktop and narrow-width layouts must preserve every question, gate condition, finding, and provenance field. A visualization fallback may be simpler but not semantically empty.
 29. Empty, invalid, unsupported, no-experiment, no-evidence, missing-target, and optional-visualization-failure states receive explicit copy.
-30. Missing preview PNGs are removed from the design manifest and handoff rather than represented as shipped assets.
+30. No preview image, design handoff, or other design-only asset is required to install, render, test, or understand the owned Explorer implementation.
 
 ## Distribution and integration
 
@@ -70,7 +70,7 @@ This contract changes presentation and presentation-side derivation. It does not
 32. The active root template and canonical copy under `templates/repository/standard/` remain byte-equivalent where managed parity applies.
 33. Any new local asset is included in package data, installation planning, lock generation, safe upgrade, doctor, and package-parity tests.
 34. Output remains transactional and contains deterministic `dashboard-data.json`, non-canonical `generation-summary.json`, and `index.html`. Snapshot data and all non-3D evidence views are embedded; the optional 3D renderer is the single documented CDN exception.
-35. The revised `templates/webui/` handoff, schema documentation, manifest, brand contract, and prototype describe this same implementation model and do not claim independent authority.
+35. `templates/repository/standard/scripts/harness_explorer/index.template.html` is the sole reusable WebUI design/template source. The active root copy remains byte-equivalent. No redundant `templates/webui/` handoff, prototype, schema, manifest, or brand copy is retained.
 
 ## Compatibility and migration
 
@@ -78,4 +78,4 @@ Existing valid artifact repositories and the `harness-dashboard-snapshot-v1` con
 
 ## Explicitly unspecified decisions
 
-The implementation agent may choose bounded traversal limits and the in-memory adapter from the canonical snapshot to the preserved prototype modules. It may not substantially reinterpret the original layout or visual identity, introduce a second persisted snapshot schema, add any runtime dependency beyond the exact accepted `3d-force-graph` URL, add an aggregate assurance score, infer lifecycle authority, rename artifact types, or lose canonical fields.
+The implementation agent may choose bounded traversal limits and the in-memory adapter from the canonical snapshot to the canonical template's reviewed modules. It may not substantially reinterpret the reviewed layout or visual identity, introduce a second persisted snapshot schema, add any runtime dependency beyond the exact accepted `3d-force-graph` URL, add an aggregate assurance score, infer lifecycle authority, rename artifact types, or lose canonical fields.
