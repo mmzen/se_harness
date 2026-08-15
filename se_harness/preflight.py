@@ -395,9 +395,15 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
 
     catalog = {item.artifact_id: item for item in artifacts}
 
-    def require_targets(source: Any, relation: str, allowed_types: set[str]) -> list[Any]:
+    def require_targets(
+        source: Any,
+        relation: str,
+        allowed_types: set[str],
+        *,
+        required: bool = True,
+    ) -> list[Any]:
         targets = _targets(source, relation)
-        if not targets:
+        if required and not targets:
             diagnostics.append(
                 PreflightDiagnostic(
                     "W010",
@@ -441,12 +447,15 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
     if work_order is not None:
         requirements = require_targets(work_order, "implements", {"requirement"})
         specifications = require_targets(work_order, "specifications", {"specification"})
-        architecture_items = require_targets(work_order, "architecture", {"architecture", "adr"})
+        architecture_items = require_targets(
+            work_order,
+            "architecture",
+            {"architecture", "adr"},
+            required=False,
+        )
         architectures = [item for item in architecture_items if item.artifact_type == "architecture"]
         decisions = [item for item in architecture_items if item.artifact_type == "adr"]
         verifications = require_targets(work_order, "verification", {"verification"})
-        if not architectures:
-            diagnostics.append(PreflightDiagnostic("W014", work_order_summary["path"], "no architecture is selected"))
 
         for requirement in requirements:
             capabilities.extend(require_targets(requirement, "derives_from", {"capability"}))

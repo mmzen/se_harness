@@ -109,6 +109,7 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
         selected_specifications: list[str] | None = None,
         second_architecture: bool = False,
         second_specification: bool = False,
+        omit_architecture_relation: bool = False,
     ) -> None:
         base = "docs/engineering/product"
         self.write(f"{base}/intent/INT-TRC-001.md", formal("INT-TRC-001", "intent", "approved", {}))
@@ -162,20 +163,26 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
             f"{base}/verification/VER-TRC-001.md",
             formal("VER-TRC-001", "verification", "approved", {"verifies": requirements}),
         )
-        architecture_selection = selected_architectures or ["ARCH-TRC-001", "ADR-TRC-001"]
+        architecture_selection = (
+            ["ARCH-TRC-001", "ADR-TRC-001"]
+            if selected_architectures is None
+            else selected_architectures
+        )
         specification_selection = selected_specifications or ["SPEC-TRC-001"]
+        work_order_relations = {
+            "implements": requirements,
+            "specifications": specification_selection,
+            "verification": ["VER-TRC-001"],
+        }
+        if not omit_architecture_relation:
+            work_order_relations["architecture"] = architecture_selection
         self.write(
             f"{base}/work-orders/WO-TRC-001.md",
             formal(
                 "WO-TRC-001",
                 "work_order",
                 "approved",
-                {
-                    "implements": requirements,
-                    "specifications": specification_selection,
-                    "architecture": architecture_selection,
-                    "verification": ["VER-TRC-001"],
-                },
+                work_order_relations,
             ),
         )
 
@@ -289,6 +296,36 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
         self.assertEqual(0, first[0], first[2])
         self.assertEqual(first[1], second[1])
         self.assertTrue(json.loads(first[1])["ready"])
+
+    def test_work_order_may_omit_architecture_when_none_is_active(self) -> None:
+        self.build_chain(architecture_status="draft", omit_architecture_relation=True)
+        self.assertTrue(validate_repository(self.root).valid)
+        code, output, error = self.preflight()
+        self.assertEqual(0, code, error)
+        self.assertIn("Harness preflight: PASS", output)
+        self.assertNotIn("[W014]", output)
+
+    def test_present_empty_work_order_architecture_relation_is_invalid(self) -> None:
+        self.build_chain(selected_architectures=[])
+        report = validate_repository(self.root)
+        self.assertFalse(report.valid)
+        self.assertTrue(
+            any(
+                item.code == "E005"
+                and "architecture" in item.message
+                and "non-empty array" in item.message
+                for item in report.errors
+            ),
+            report.errors,
+        )
+
+    def test_preflight_rejects_omitted_applicable_architecture(self) -> None:
+        self.build_chain(omit_architecture_relation=True)
+        self.assertTrue(validate_repository(self.root).valid)
+        code, output, _ = self.preflight()
+        self.assertEqual(1, code)
+        self.assertIn("[W022]", output)
+        self.assertIn("ARCH-TRC-001", output)
 
     def test_preflight_requires_every_applicable_architecture(self) -> None:
         self.build_chain(second_architecture=True)

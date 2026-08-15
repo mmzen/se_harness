@@ -110,7 +110,12 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("adr_required", model)
         self.assertIn("no_significant_decision", model)
         self.assertNotIn("ARCH.constrains", model + example)
-        self.assertIn("requires every work order's `architecture` relation to be non-empty", model)
+        self.assertIn("omits its `architecture` relation", model)
+        self.assertNotIn("Current limitation", model)
+        self.assertIn(
+            "../engineering/TRACEABILITY.md#artifact-applicability-catalog",
+            model,
+        )
 
     def test_observations_do_not_claim_human_authority(self) -> None:
         overview = self.contents[NOTES_ROOT / "harness-overview.md"]
