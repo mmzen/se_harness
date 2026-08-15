@@ -45,7 +45,7 @@ harnessctl doctor [TARGET]
 
 `TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
 
-Validation reports deterministic errors and warnings but does not edit artifacts. Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score. Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
 
 ## Work readiness
 
