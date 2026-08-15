@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import importlib.util
-import json
 import sys
 import unittest
 from pathlib import Path
@@ -27,19 +26,22 @@ class DashboardWebUIContractTests(unittest.TestCase):
     def setUp(self) -> None:
         self.template = ROOT / "scripts/harness_explorer/index.template.html"
         self.canonical = ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html"
-        self.prototype = ROOT / "templates/webui/harness-lineage-prototype.html"
-        self.webui = ROOT / "templates/webui"
 
-    def test_templates_preserve_the_original_3d_design_and_canonical_boundary(self) -> None:
+    def test_templates_preserve_the_reviewed_3d_design_and_canonical_boundary(self) -> None:
         content = self.template.read_text(encoding="utf-8")
         self.assertEqual(content, self.canonical.read_text(encoding="utf-8"))
-        self.assertEqual(content, self.prototype.read_text(encoding="utf-8"))
         self.assertEqual(1, content.count("__HARNESS_SNAPSHOT_JSON__"))
         self.assertIn('raw.schema!=="harness-dashboard-snapshot-v1"', content)
         self.assertIn('data-current-view="overview"', content)
         self.assertIn('data-view="lineage"', content)
         self.assertIn('data-view="readiness"', content)
         self.assertIn('data-od-id="three-dimensional-graph"', content)
+        self.assertIn('data-od-id="graph-color-legend"', content)
+        self.assertIn('id="lineageGraph" role="group"', content)
+        self.assertIn('data-od-id="zoom-in"', content)
+        self.assertIn('linkDirectionalArrowLength(1.8)', content)
+        self.assertIn('clip:rect(0 0 0 0)', content)
+        self.assertEqual(1, content.count("function renderLineage(){"))
         self.assertIn('const GRAPH_SOURCE="https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"', content)
         self.assertIn('Interactive 3D topology unavailable', content)
         for forbidden in (
@@ -75,37 +77,35 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn("const artifactTypes", content)
         self.assertNotIn("switch(node.type)", content)
 
-    def test_design_materials_describe_the_canonical_contract(self) -> None:
-        manifest = json.loads((self.webui / "DESIGN-MANIFEST.json").read_text(encoding="utf-8"))
-        schema = json.loads((self.webui / "harness-dashboard-data.schema.json").read_text(encoding="utf-8"))
-        contract = (self.webui / "harness-dashboard-data.md").read_text(encoding="utf-8")
-        handoff = (self.webui / "DESIGN-HANDOFF.md").read_text(encoding="utf-8")
-
-        self.assertEqual("harness-dashboard-snapshot-v1", manifest["dataContract"]["schema"])
-        self.assertFalse(manifest["dataContract"]["persistedPresentationSchema"])
-        self.assertTrue(manifest["security"]["runtimeNetwork"])
-        self.assertEqual(
-            "https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js",
-            manifest["security"]["thirdPartyRuntimeAssets"][0]["url"],
-        )
-        self.assertFalse(manifest["security"]["thirdPartyRuntimeAssets"][0]["integrityPinned"])
-        self.assertEqual([], manifest["sourceFiles"]["missing"])
-        self.assertEqual("harness-dashboard-snapshot-v1", schema["properties"]["schema"]["const"])
-        self.assertNotIn("generatedAt", schema.get("properties", {}))
-        self.assertIn("definition coverage", contract.lower())
-        self.assertIn("ADR-DST-008", handoff)
-        self.assertIn("3d-force-graph@1.79.0", handoff)
-
-        for relative in manifest["sourceFiles"]["all"]:
-            self.assertTrue((self.webui / relative).is_file(), relative)
-        self.assertFalse(any(path.suffix.lower() == ".png" for path in self.webui.iterdir()))
+    def test_canonical_template_is_the_only_committed_webui_source(self) -> None:
+        self.assertTrue(self.template.is_file())
+        self.assertTrue(self.canonical.is_file())
+        self.assertFalse((ROOT / "templates/webui").exists())
+        self.assertEqual([], list(ROOT.rglob("harness-lineage-prototype.html")))
 
     def test_real_snapshot_matches_documented_top_level_contract(self) -> None:
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
         self.assertTrue(report.valid)
-        schema = json.loads((self.webui / "harness-dashboard-data.schema.json").read_text(encoding="utf-8"))
-        self.assertEqual("harness-dashboard-snapshot-v1", snapshot["schema"])
-        self.assertEqual(set(schema["required"]), set(snapshot))
+        self.assertEqual(GENERATOR.SNAPSHOT_SCHEMA, snapshot["schema"])
+        self.assertEqual(
+            {
+                "schema",
+                "finding_rules_version",
+                "quality_gates_version",
+                "repository",
+                "artifacts",
+                "relations",
+                "diagnostics",
+                "findings",
+                "coverage",
+                "readiness",
+                "revision_provenance",
+                "revision_policy",
+                "experiments",
+                "evidence",
+            },
+            set(snapshot),
+        )
         self.assertNotIn("generatedAt", snapshot)
         self.assertNotIn("metrics", snapshot)
         self.assertNotIn("graph", snapshot)
