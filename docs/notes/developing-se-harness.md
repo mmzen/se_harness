@@ -4,6 +4,8 @@
 
 > This note applies to contributors developing `se_harness` itself. It does not define a consumer installation profile and grants no implementation, verification, release, publication, or governor-promotion authority.
 
+The self-hosting controls add implementation-specific assurance without changing normal artifact lifecycle or decision rights. See [Self-Hosting Operations](../engineering/self-hosting-boundary/SELF_HOSTING.md#effect-on-normal-governance-operations) for the explicit boundary.
+
 ## Development environment
 
 SE Harness requires Python 3.11 or later and has no runtime dependencies outside the standard library. From a trusted source checkout, install candidate source into a dedicated environment:

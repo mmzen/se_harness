@@ -2,6 +2,10 @@
 
 This guide applies only while developing `se_harness`. It does not create a consumer installation profile and it grants no implementation, verification, release, publication, or governor-promotion authority.
 
+## Effect on normal governance operations
+
+This self-hosting boundary does not change the normal intent-to-release lifecycle, formal artifact statuses, decision rights, or active repository workflow. `harnessctl reconcile-governor` is invoked only for a separately authorized transition to an exact published governor. `harnessctl accept-candidate` adds package-assurance evidence for developing `se_harness`; it never creates or transitions a VREC, authorizes release, or promotes a governor. The reusable self-hosting workflow remains inactive until it is independently published and selected through a later governed promotion.
+
 ## Runtime planes
 
 | Plane | Identity source | Permitted target | Assurance meaning |
