@@ -11,6 +11,7 @@ import unittest
 from unittest import mock
 from pathlib import Path
 
+from se_harness import __version__
 from se_harness.cli import build_parser, main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, sha256, template_root, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, IntegrityError, canonical_sha256, canonical_text_bytes, digest_for_schema, parse_lock
@@ -262,7 +263,7 @@ class HarnessCtlTests(unittest.TestCase):
         lock = self.make_schema_one_lock(target)
         config_path = target / ".engineering-harness.toml"
         current = config_path.read_text(encoding="utf-8")
-        legacy = current.replace("schema_version = 2", "schema_version = 1").replace('tool_version = "0.2.2"', 'tool_version = "0.1.0"')
+        legacy = current.replace("schema_version = 2", "schema_version = 1").replace(f'tool_version = "{__version__}"', 'tool_version = "0.1.0"')
         legacy = legacy.split("\n[revision_provenance]", 1)[0].rstrip() + "\n"
         config_path.write_bytes(legacy.encode("utf-8"))
         new_templates = [

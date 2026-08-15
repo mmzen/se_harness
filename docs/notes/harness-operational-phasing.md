@@ -76,6 +76,6 @@ The coding agent normally operates these commands; the accountable human makes t
 
 The authoritative gates in `docs/engineering/QUALITY_GATES.md` are G0 Intent, G1 Definition, G2 Architecture, G3 Work authorization, G4 Verification, and G5 Release and operation.
 
-In version 0.2.2, Harness Explorer reuses G0-G5 labels for a differently grouped, derived per-work-order readiness view. Use Explorer to navigate traceability and anomalies, but use the managed policy for gate meaning. This documentation reports the mismatch; correcting the generator requires separate authorized behavior work.
+Currently, Harness Explorer reuses G0-G5 labels for a differently grouped, derived per-work-order readiness view. Use Explorer to navigate traceability and anomalies, but use the managed policy for gate meaning. This documentation reports the mismatch; correcting the generator requires separate authorized behavior work.
 
 For one possible mapping onto Git branches and pull requests, continue to the [illustrative branching model](harness-branching-model.md).

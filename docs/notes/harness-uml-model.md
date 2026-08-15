@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This conceptual model explains current 0.2.2 authoring. It is not an implementation class diagram or a policy source. Follow `ENGINEERING_HARNESS.md` and the managed policies for authoritative rules.
+> This conceptual model explains current 0.3.0 authoring. It is not an implementation class diagram or a policy source. Follow `ENGINEERING_HARNESS.md` and the managed policies for authoritative rules.
 
 ## Model at a glance
 
@@ -89,7 +89,7 @@ Intent -> Capability -> Requirement <- Specification.specifies
 
 Historical completed artifacts may retain the compatibility-era `constrains` relation. New authoring uses `addresses` and `conforms_to`; historical records are not rewritten merely to modernize their vocabulary.
 
-**Current 0.2.2 limitation:** the validator still requires every work order's `architecture` relation to be non-empty, while the typed architecture policy says routine requirements must not receive fabricated architecture coverage. A work order containing only routine, non-architectural requirements therefore exposes an unresolved policy/checker tension. Stop and obtain a governed decision rather than inventing an architecture item to satisfy the schema.
+**Current limitation:** the validator still requires every work order's `architecture` relation to be non-empty, while the typed architecture policy says routine requirements must not receive fabricated architecture coverage. A work order containing only routine, non-architectural requirements therefore exposes an unresolved policy/checker tension. Stop and obtain a governed decision rather than inventing an architecture item to satisfy the schema.
 
 ## Authorized work
 

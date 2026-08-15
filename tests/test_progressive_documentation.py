@@ -232,7 +232,7 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             "Released governor",
             "Candidate source",
             "Candidate package",
-            "0.2.2",
+            __version__,
             "0.2.1",
             ".self-hosting/governor.toml",
             "does not automatically promote",
