@@ -5,8 +5,8 @@ title = "Human operational command surface"
 status = "approved"
 owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
-statement = "WHEN the root README demonstrates routine repository operation, THE SYSTEM SHALL limit explicit harness subcommand examples to init, adopt, doctor, validate, and dashboard while describing agent-only mechanics without requiring humans to learn their syntax."
+updated = "2026-08-15"
+statement = "WHEN the root README demonstrates routine repository operation, THE SYSTEM SHALL limit explicit harness subcommand examples to init, adopt, doctor, validate, inspect, and dashboard while describing agent-only mechanics without requiring humans to learn their syntax."
 verification_method = "automated-static-test"
 
 [relations]
@@ -31,6 +31,7 @@ The examples explain:
 - `adopt`: preserve and introduce the harness into an existing repository;
 - `doctor`: inspect installed-harness integrity;
 - `validate`: inspect the formal engineering graph;
+- `inspect`: summarize lifecycle attention, existing findings, and bounded non-authoritative next steps without acting as a gate;
 - `dashboard`: generate the read-only Harness Explorer.
 
 Package installation, virtual-environment activation, and `harnessctl --version` are setup checks rather than repository subcommands and may remain.
@@ -39,13 +40,13 @@ The README states in plain language that the coding agent performs preflight, fo
 
 ## Failure and boundary behavior
 
-Removing syntax must not make agent operation magical or imply that the agent can approve its own work. The detailed command reference remains linked and explicitly classifies actor, side effects, and authority.
+Removing syntax must not make agent operation magical or imply that the agent can approve its own work. The detailed command reference remains linked and explicitly classifies actor, side effects, exit behavior, and authority. A successful inspection report must not be presented as a valid graph, verified candidate, or substitute for `validate`.
 
 ## Constraints
 
 - Do not present `upgrade --apply` as automatic or agent-authorized mutation.
 - Do not put tool commands inside quoted user requests.
-- Keep `doctor` and `validate` visibly distinct.
+- Keep `doctor`, `validate`, `inspect`, and `dashboard` visibly distinct.
 
 ## Acceptance examples
 
@@ -55,7 +56,7 @@ Removing syntax must not make agent operation magical or imply that the agent ca
 
 **When** they inspect its harness command blocks,
 
-**Then** they see only the five ordinary human-facing subcommands.
+**Then** they see only the six ordinary human-facing subcommands.
 
 ### Example: agent execution boundary
 
@@ -67,4 +68,4 @@ Removing syntax must not make agent operation magical or imply that the agent ca
 
 ## Open decisions
 
-The implementation may combine commands into one or more short blocks if actor and target-path meaning remain clear.
+The implementation may combine commands into one or more short blocks if actor and target-path meaning remain clear. This requirement was revised under `WO-DOC-012`; earlier commit-bound evidence continues to describe the five-command surface that existed at those recorded candidates.

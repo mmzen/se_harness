@@ -96,6 +96,7 @@ class HarnessCtlTests(unittest.TestCase):
             "docs/engineering/templates/VERIFICATION_RECORD.template.md",
             "docs/engineering/templates/RELEASE_RECORD.template.md",
             "scripts/validate_engineering_artifacts.py",
+            "scripts/inspect_engineering_artifacts.py",
             "scripts/generate_harness_dashboard.py",
             "scripts/harness_explorer/index.template.html",
         ]
@@ -404,10 +405,31 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("FAIL docs/engineering/REPOSITORY_CONTEXT.md", output)
         self.assertIn("FAIL claude-import", output)
 
-    def test_validate_and_dashboard_commands_preserve_success(self) -> None:
+    def test_validate_inspect_and_dashboard_commands_preserve_success(self) -> None:
         target = self.root / "operate"
         self.assertEqual(0, self.invoke("init", str(target))[0])
         self.assertEqual(0, self.invoke("validate", str(target))[0])
+        before = sorted(path.relative_to(target).as_posix() for path in target.rglob("*"))
+        inspection = subprocess.run(
+            [sys.executable, "-m", "se_harness", "inspect", str(target)],
+            cwd=REPOSITORY_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, inspection.returncode, inspection.stderr)
+        self.assertIn("Harness inspection", inspection.stdout)
+        self.assertIn("repository-local, derived observation", inspection.stdout)
+        inspection_json = subprocess.run(
+            [sys.executable, "-m", "se_harness", "inspect", str(target), "--json"],
+            cwd=REPOSITORY_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, inspection_json.returncode, inspection_json.stderr)
+        self.assertEqual("se-harness-inspection-v1", json.loads(inspection_json.stdout)["schema"])
+        self.assertEqual(before, sorted(path.relative_to(target).as_posix() for path in target.rglob("*")))
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
         self.assertTrue((target / "target/harness-dashboard/dashboard-data.json").is_file())
 
@@ -420,6 +442,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
         self.assertEqual(HASH_MODE, lock["hash_mode"])
         self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
+        self.assertIn("scripts/inspect_engineering_artifacts.py", lock["files"])
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/README.md"])

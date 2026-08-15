@@ -80,6 +80,7 @@ After installation:
 ```powershell
 harnessctl doctor C:\path\to\repository
 harnessctl validate C:\path\to\repository
+harnessctl inspect C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
 
@@ -113,7 +114,7 @@ Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout 
 - Prefer one explicit virtual environment owner rather than relying on an unknown global launcher.
 - Pin an exact package version when reproducibility matters.
 - Treat `--apply` as a repository change requiring owner authorization and review.
-- Do not interpret a successful install, upgrade, `doctor`, validation, or dashboard as product approval or commit-bound verification.
+- Do not interpret a successful install, upgrade, `doctor`, validation, inspection report, or dashboard as product approval or commit-bound verification. In particular, successful `inspect` report production can still describe an invalid graph or unresolved attention.
 - Installation does not configure branch protection, permissions, required checks, publishing environments, or deployment systems on an external host.
 
 See the [complete command reference](harnessctl-reference.md) for command actors and side effects, and the [Tier-0 overview](harness-overview.md) for the governance model.

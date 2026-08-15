@@ -84,6 +84,34 @@ The `IAR-007` packet proposes one small reporting improvement: every existing va
 - Verification contract: `VER-IAR-007`
 - Implemented work order: `WO-IAR-007`
 
+## Implemented repository inspection command
+
+The `IAR-008` packet implements a first read-only `harnessctl inspect` command. It reuses the current validator and Harness Explorer snapshot to present formal validity, lifecycle attention queues, and existing derived findings in deterministic human or JSON output. It adds no validation rule, finding heuristic, score, remediation, lifecycle authority, or independent-governor claim.
+
+### Inspection-command packet index
+
+- Requirement: `REQ-IAR-016`
+- Specification: `SPEC-IAR-008`
+- Architecture: `ARCH-IAR-008`
+- Approved decision: `ADR-IAR-008`
+- Verification contract: `VER-IAR-008`
+- Implemented work order: `WO-IAR-008`
+
+## Implemented bounded inspection guidance
+
+The implemented `IAR-009` packet adds deterministic next-step suggestions for the existing inspection queues and a closed set of actionable derived warning rules. Guidance remains separate from its source observation, carries `automatic = false`, identifies an accountable review role, and never infers eligibility or emits executable remediation. Unknown, informational, and validator-owned findings remain visible without guessed advice.
+
+This proposal also makes the aggregate-candidate boundary explicit: if approved and implemented on the current branch, `WO-IAR-008` and `WO-IAR-009` will retain separate evidence and may be covered by one later VREC bound to their shared clean candidate commit.
+
+### Inspection-guidance packet index
+
+- Requirement: `REQ-IAR-017`
+- Specification: `SPEC-IAR-009`
+- Architecture: `ARCH-IAR-009`
+- Approved decision: `ADR-IAR-009`
+- Verification contract: `VER-IAR-009`
+- Implemented work order: `WO-IAR-009`
+
 ## Implemented instruction route
 
 ```text

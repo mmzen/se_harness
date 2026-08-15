@@ -5,7 +5,7 @@ title = "Concise public entry point and relocated reference contract"
 status = "approved"
 owners = ["technical-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-08-15"
 
 [relations]
 specifies = ["REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
@@ -56,10 +56,11 @@ harnessctl init
 harnessctl adopt
 harnessctl doctor
 harnessctl validate
+harnessctl inspect
 harnessctl dashboard
 ```
 
-They must explain `doctor` as installed-integrity inspection, `validate` as formal graph inspection, and `dashboard` as generation of a derived read-only Explorer. Setup may additionally use `harnessctl --version`; it is not a repository subcommand.
+They must explain `doctor` as installed-integrity inspection, `validate` as the gate-oriented formal graph check, `inspect` as a derived non-gating terminal summary of lifecycle attention, existing findings, and bounded non-authoritative suggestions, and `dashboard` as generation of a derived read-only Explorer. Successful inspection-report production does not imply graph validity, verification, or approval. Setup may additionally use `harnessctl --version`; it is not a repository subcommand.
 
 The root must not include syntax for `preflight`, `upgrade`, `scaffold-domain`, `create-artifact`, `identity`, `capture-verification`, or `prepare-release`. These commands remain current and discoverable through notes. Their names may appear in concise explanatory prose only when necessary to identify the agent's lifecycle, but prefer role-level language over a list of mechanics.
 
@@ -140,7 +141,7 @@ Update `docs/notes/README.md` so the primary 4/10-to-7/10 learning path remains 
 Update focused standard-library tests to assert:
 
 - root line count is at most 200 and level-two section count is at most nine;
-- the expertise label, public links, PyPI install, exact synchronized version, virtual environment, init/adopt, doctor/validate/dashboard distinctions, scenario, compact Mermaid, responsibility boundary, Explorer value, known limitations, and deeper routes remain;
+- the expertise label, public links, PyPI install, exact synchronized version, virtual environment, init/adopt, doctor/validate/inspect/dashboard distinctions, scenario, compact Mermaid, responsibility boundary, Explorer value, known limitations, and deeper routes remain;
 - fenced root command examples contain no agent-only harness subcommands;
 - exactly one root Mermaid block exists and it has no more than nine declared conceptual nodes;
 - all three new notes exist with exact expertise labels and required topic markers;
@@ -153,4 +154,4 @@ Run focused tests, the complete unit suite, formal artifact validation, doctor, 
 
 ## Explicitly unspecified decisions
 
-Exact prose, Markdown wrapping, diagram style and colors, link wording, and allocation of content between existing and new notes are delegated within this contract. CLI behavior, managed policy, Explorer computation, templates, workflows, package metadata/version, release records, governor selection, Git configuration, external hosting controls, and consumer repositories are outside scope.
+Exact prose, Markdown wrapping, diagram style and colors, link wording, and allocation of content between existing and new notes are delegated within this contract. CLI behavior, managed policy, Explorer computation, templates, workflows, package metadata/version, release records, governor selection, Git configuration, external hosting controls, and consumer repositories are outside scope. This current contract was revised under `WO-DOC-012`; retained evidence and commit-bound records for earlier candidates remain historical facts and are not rewritten.

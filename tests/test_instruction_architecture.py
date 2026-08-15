@@ -50,8 +50,9 @@ OLD_WORKFLOW_REVIEW_STEP = (
 )
 WORKFLOW_REVIEW_STEP = (
     "6. Retain evidence keyed to every release-bearing work-order ID, run `harnessctl preflight "
-    ". --work-order WO-... --phase review`, generate Harness Explorer with `harnessctl "
-    "dashboard .`, and inspect the candidate's consistency and anomaly findings."
+    ". --work-order WO-... --phase review`, inspect current attention with `harnessctl inspect "
+    ".`, generate Harness Explorer with `harnessctl dashboard .`, and review the candidate's "
+    "consistency and anomaly findings."
 )
 
 
@@ -113,6 +114,35 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"]["mode"])
         self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
+
+    def test_inspection_guidance_packet_preserves_the_authority_boundary(self) -> None:
+        requirement = (PACKET_ROOT / "requirements" / "REQ-IAR-017.md").read_text(encoding="utf-8")
+        specification = (PACKET_ROOT / "specifications" / "SPEC-IAR-009.md").read_text(
+            encoding="utf-8"
+        )
+        decision = (PACKET_ROOT / "architecture" / "adr" / "ADR-IAR-009.md").read_text(
+            encoding="utf-8"
+        )
+        work_order = (PACKET_ROOT / "work-orders" / "WO-IAR-009.md").read_text(
+            encoding="utf-8"
+        )
+        baseline = (PACKET_ROOT / "requirements" / "REQ-IAR-016.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn('status = "implemented"', requirement)
+        self.assertIn('status = "implemented"', specification)
+        self.assertIn('status = "approved"', decision)
+        self.assertIn(
+            'status = "implemented"',
+            (PACKET_ROOT / "architecture" / "ARCH-IAR-009.md").read_text(encoding="utf-8"),
+        )
+        self.assertIn('status = "implemented"', work_order)
+        self.assertIn("automatic = false", requirement)
+        self.assertIn("closed catalog", specification.lower())
+        self.assertIn("unknown rule IDs", specification)
+        self.assertIn("Do not include executable commands", decision)
+        self.assertIn("free-form recommendation", baseline)
 
     def test_router_keeps_invariants_while_workflow_owns_ordered_procedure(self) -> None:
         target = self.installed_target()

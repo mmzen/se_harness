@@ -36,6 +36,12 @@ Canonical Harness Explorer WebUI extension:
 
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-029..033` -> `SPEC-DST-008`, `ARCH-DST-008`, `ADR-DST-008`, `VER-DST-008` -> `WO-DST-007`.
 
+Validation and inspection documentation synchronization extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-034` -> `SPEC-DST-009`, `VER-DST-009` -> `WO-DOC-012`.
+
+No architecture or ADR is selected for `REQ-DST-034`: the correction preserves the existing layered documentation responsibilities and introduces no architecturally significant requirement driver.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.
@@ -55,3 +61,5 @@ The accountable human agreed with the concise-root proposal, requested `WO-DOC-0
 The accountable human reviewed the canonical Explorer WebUI proposal and its `REQ-DST-029..033` packet, then explicitly authorized `WO-DST-007` on 2026-08-13 with `go implementation`. During review of the uncommitted candidate, the owner required preservation of the original prototype structure, visual identity, and CDN-backed `3d-force-graph`; `ADR-DST-008` records the accepted runtime risk. The model-faithful, deterministic, secure, and distributable integration is complete with retained evidence. Commit-bound verification, commit, push, pull request, release, publication, and deployment remain separately controlled.
 
 The accountable human created and authorized `WO-DST-009` to integrate a refined Explorer presentation, then explicitly directed removal of the redundant `templates/webui/` design-source directory on 2026-08-15. The canonical standard template is now the sole reusable WebUI source, with a byte-equivalent active root copy and retained verification evidence. Historical artifacts continue to describe the prototype review that led to the canonical implementation; they do not require a duplicate runtime or design source to remain installed.
+
+After reviewing the documentation impact of the layered validator and new inspection command, the accountable human instructed `yes go for the correction artifact packet` on 2026-08-15, then approved `REQ-DST-034`, `SPEC-DST-009`, `VER-DST-009`, and `WO-DOC-012` with `ok go for implementation`. The active six-command documentation contract, four progressive notes, focused assertions, and retained work-order evidence are complete. Runtime behavior and historical assurance facts remain unchanged. Candidate commit, deletion or replacement of the existing ready VREC, VREC preparation or transition, push, pull-request mutation, merge, release, publication, and deployment remain separately controlled.
