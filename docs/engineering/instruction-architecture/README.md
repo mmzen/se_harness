@@ -112,6 +112,19 @@ This proposal also makes the aggregate-candidate boundary explicit: if approved 
 - Verification contract: `VER-IAR-009`
 - Implemented work order: `WO-IAR-009`
 
+## Implemented typed temporal reassessment
+
+The `IAR-010` packet narrows the existing `W-HEX-003` inspection observation to supported declared dependencies whose source remains meaningfully reassessable. Completed work orders, commit-bound verification and release records, inactive definitions, supersession lineage, derived projections, and unknown extension relations no longer receive generic date-based reassessment advice. The finding remains a derived warning and its existing suggestion remains non-automatic and non-authoritative.
+
+### Temporal-reassessment packet index
+
+- Requirement: `REQ-IAR-018`
+- Specification: `SPEC-IAR-010`
+- Architecture: `ARCH-IAR-010`
+- Approved decision: `ADR-IAR-010`
+- Verification contract: `VER-IAR-010`
+- Implemented work order: `WO-IAR-010`
+
 ## Implemented instruction route
 
 ```text
