@@ -2,7 +2,7 @@
 id = "OPS-DPG-001"
 type = "operating_contract"
 title = "Operate the public Explorer demonstration"
-status = "draft"
+status = "approved"
 owners = ["service-owner", "repository-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
@@ -15,7 +15,9 @@ assures = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
 
 ## Activation
 
-The repository owner approved this proposed operating behavior as part of the `WO-DPG-001` implementation packet on 2026-08-16. Keep the contract in `draft` until a verified or released VREC covers the completed implementing work; only then may an accountable transition activate its assurance claim. That later activation would install the operating boundary, not itself deploy the public site.
+The repository owner approved this proposed operating behavior as part of the `WO-DPG-001` implementation packet on 2026-08-16. After `VREC-DPG-001` transitioned to `verified`, the accountable owner explicitly instructed `transition OPS-DPG-001` on 2026-08-16. That human decision activates this contract from `draft` to `approved`; automation only confirmed eligibility.
+
+This activation installs the operating and assurance boundary. It does not itself deploy the public site, merge the pull request, alter a release, or publish a package.
 
 ## Service level objectives
 

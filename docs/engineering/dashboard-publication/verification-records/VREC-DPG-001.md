@@ -2,7 +2,7 @@
 id = "VREC-DPG-001"
 type = "verification_record"
 title = "Verification candidate for WO-DPG-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
@@ -20,6 +20,10 @@ conforms_to = ["VER-DPG-001"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-DPG-001` to candidate commit `450e9c52944b593c30c260f677c618c5f58ea614`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+On 2026-08-16, after reviewing the prepared record and retained evidence, the accountable assurance owner explicitly stated `ok, I validate the verification record`. That human decision transitions this record from `ready` to `verified`; automation did not grant the authority.
+
+This record binds retained evidence for `WO-DPG-001` to candidate commit `450e9c52944b593c30c260f677c618c5f58ea614`. The captured candidate commit, object format, clean worktree state, capture timestamp, artifact snapshot, evidence path, work-order coverage, and verification-contract coverage remain unchanged.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+This verification decision does not activate `OPS-DPG-001`, merge the pull request, deploy GitHub Pages, create or alter a release, publish a package, or grant any further authority.
