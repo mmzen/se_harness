@@ -8,7 +8,7 @@ The practical promise is simple: every material change can explain **why it exis
 
 SE Harness requires Python 3.11 or later, uses no runtime dependency outside the standard library, and installs repository-local validation and Harness Explorer tooling without requiring an external service.
 
-[PyPI](https://pypi.org/project/se-harness/) | [Repository](https://github.com/mmzen/se_harness) | [Issues](https://github.com/mmzen/se_harness/issues) | [Releases](https://github.com/mmzen/se_harness/releases)
+[Live Explorer demonstration](https://mmzen.github.io/se_harness/) | [PyPI](https://pypi.org/project/se-harness/) | [Repository](https://github.com/mmzen/se_harness) | [Issues](https://github.com/mmzen/se_harness/issues) | [Releases](https://github.com/mmzen/se_harness/releases)
 
 ## Who it is for
 
@@ -105,6 +105,8 @@ When Mermaid is not rendered, the labels, decision shapes, dotted Explorer obser
 ### Harness Explorer in action
 
 The generated dashboard makes the repository's connected engineering evidence practical to review:
+
+Explore the [live release-bound demonstration](https://mmzen.github.io/se_harness/) generated from the governance of SE Harness itself. It is a derived, read-only promotional view; repository artifacts and accountable human decisions remain authoritative.
 
 **Overview — see the artifact graph, lifecycle distribution, and current operator queue.**
 

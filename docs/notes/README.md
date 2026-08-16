@@ -23,6 +23,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [`harnessctl` command reference](harnessctl-reference.md) | Which commands exist, who normally runs them, and what can they change? |
 | [Developing and self-hosting SE Harness](developing-se-harness.md) | How is the harness itself developed without letting a candidate govern itself? |
+| [Publishing the SE Harness development dashboard](harness-dashboard-publication.md) | How is the repository's release-bound public Explorer demonstration deployed and replayed? |
 
 ## Know what is authoritative
 
