@@ -65,6 +65,16 @@ def formal(
                 'verification_method = "automated-test"',
             ]
         )
+    if artifact_type == "work_order":
+        lines.extend(
+            [
+                "",
+                "[assurance]",
+                'commit_bound_verification = "required"',
+                'rationale = "The fixture changes trusted engineering behavior."',
+                'decided_by = "test-owner"',
+            ]
+        )
     lines.extend(["", "[relations]"])
     lines.extend(f"{name} = {_array(values)}" for name, values in relations.items())
     if assessment is not None:

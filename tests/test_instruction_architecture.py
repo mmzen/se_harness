@@ -49,7 +49,7 @@ OLD_WORKFLOW_REVIEW_STEP = (
     "with `--phase review`."
 )
 WORKFLOW_REVIEW_STEP = (
-    "6. Retain evidence keyed to every release-bearing work-order ID, run `harnessctl preflight "
+    "6. Retain evidence keyed to every work-order ID, run `harnessctl preflight "
     ". --work-order WO-... --phase review`, inspect current attention with `harnessctl inspect "
     ".`, generate Harness Explorer with `harnessctl dashboard .`, and review the candidate's "
     "consistency and anomaly findings."
@@ -87,6 +87,16 @@ class InstructionArchitectureTests(unittest.TestCase):
         work_order = destination / "work-orders" / "WO-IAR-001.md"
         text = work_order.read_text(encoding="utf-8")
         text = re.sub(r'^status = "[^"]+"$', f'status = "{status}"', text, count=1, flags=re.MULTILINE)
+        if "[assurance]" not in text:
+            text = text.replace(
+                "\n[relations]\n",
+                "\n[assurance]\n"
+                'commit_bound_verification = "required"\n'
+                'rationale = "The fixture changes trusted engineering behavior."\n'
+                'decided_by = "test-owner"\n\n'
+                "[relations]\n",
+                1,
+            )
         work_order.write_text(text, encoding="utf-8")
 
     def curate_context(self, target: Path) -> None:
@@ -394,6 +404,8 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertTrue(report["ready"])
         self.assertEqual("start", report["phase"])
         self.assertEqual("in_progress", report["work_order"]["status"])
+        self.assertEqual("required", report["assurance"]["commit_bound_verification"])
+        self.assertEqual("test-owner", report["assurance"]["decided_by"])
         self.assertEqual([], report["diagnostics"])
         for path in (
             "ENGINEERING_HARNESS.md",
@@ -462,6 +474,60 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertEqual(1, code)
         self.assertIn("[W001]", output)
+
+    def test_preflight_requires_and_projects_explicit_assurance_for_selected_work(self) -> None:
+        target = self.installed_target("assurance-preflight")
+        self.curate_context(target)
+        self.add_active_packet(target)
+
+        code, output, error = self.invoke(
+            "preflight",
+            str(target),
+            "--work-order",
+            "WO-IAR-001",
+        )
+        self.assertEqual(0, code, error)
+        self.assertIn("Assurance classification:", output)
+        self.assertIn("Commit-bound verification: required", output)
+        self.assertIn("Decided by: test-owner", output)
+
+        work_order = target / "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md"
+        text = work_order.read_text(encoding="utf-8")
+        text = re.sub(
+            r"\n\[assurance\]\n.*?(?=\n\[relations\]\n)",
+            "\n",
+            text,
+            count=1,
+            flags=re.DOTALL,
+        )
+        work_order.write_text(text, encoding="utf-8")
+
+        code, output, _ = self.invoke(
+            "preflight",
+            str(target),
+            "--work-order",
+            "WO-IAR-001",
+        )
+        self.assertEqual(1, code)
+        self.assertIn("[A-E019]", output)
+        self.assertIn("[W023]", output)
+        self.assertIn("accountable explicit assurance decision", output)
+
+        text = work_order.read_text(encoding="utf-8").replace(
+            'status = "in_progress"', 'status = "implemented"', 1
+        )
+        work_order.write_text(text, encoding="utf-8")
+        code, output, _ = self.invoke(
+            "preflight",
+            str(target),
+            "--work-order",
+            "WO-IAR-001",
+            "--phase",
+            "review",
+        )
+        self.assertEqual(1, code)
+        self.assertNotIn("[A-E019]", output)
+        self.assertIn("[W023]", output)
 
     def test_distribution_comparison_detects_coordinated_file_and_lock_change(self) -> None:
         target = self.installed_target()

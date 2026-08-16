@@ -20,10 +20,11 @@ from validate_engineering_artifacts import (
     TAXONOMY_VERSION,
     VALIDATION_PLANES,
     ValidationReport,
+    work_order_assurance_state,
 )
 
 
-INSPECTION_SCHEMA = "se-harness-inspection-v1"
+INSPECTION_SCHEMA = "se-harness-inspection-v2"
 SEVERITIES = ("error", "warning", "info")
 SEVERITY_ORDER = {value: index for index, value in enumerate(SEVERITIES)}
 QUEUE_SUGGESTION_CATALOG = {
@@ -56,6 +57,11 @@ QUEUE_SUGGESTION_CATALOG = {
         "continue-bounded-work",
         "engineering-owner",
         "Continue only the authorized scope and retain work-order-keyed evidence.",
+    ),
+    "prepare-commit-bound-verification": (
+        "prepare-commit-bound-verification",
+        "engineering-owner",
+        "After retaining the selected work in one clean candidate commit, prepare a ready verification record for explicit accountable review.",
     ),
 }
 FINDING_SUGGESTION_CATALOG = {
@@ -224,7 +230,12 @@ def _build_suggestions(
     findings: Sequence[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
     suggestions: list[dict[str, Any]] = []
-    for queue_name in ("decision_required", "definition_pending", "active_work"):
+    for queue_name in (
+        "decision_required",
+        "definition_pending",
+        "active_work",
+        "assurance_pending",
+    ):
         for item in queues[queue_name]:
             action = _text(item.get("action"), "queue action")
             definition = QUEUE_SUGGESTION_CATALOG.get(action)
@@ -327,7 +338,39 @@ def build_inspection(
     decision_required: list[dict[str, Any]] = []
     definition_pending: list[dict[str, Any]] = []
     active_work: list[dict[str, Any]] = []
+    assurance_pending: list[dict[str, Any]] = []
+    assurance_by_id: dict[str, Mapping[str, Any]] = {}
+    if validation_report is not None:
+        assurance_by_id = {
+            artifact.artifact_id: work_order_assurance_state(artifact)
+            for artifact in validation_report.artifacts
+            if artifact.artifact_type == "work_order"
+        }
+
+    artifact_by_id = {
+        _text(artifact.get("id"), "artifact id"): artifact
+        for artifact in artifacts
+    }
+    actively_covered_work: set[str] = set()
+    for relation in relations:
+        if (
+            relation.get("relation") != "verifies_work_order"
+            or relation.get("authority") != "declared"
+        ):
+            continue
+        source_id = _text(relation.get("source"), "relation source")
+        target_id = _text(relation.get("target"), "relation target")
+        source = artifact_by_id.get(source_id)
+        if source is None:
+            continue
+        if (
+            source.get("type") == "verification_record"
+            and source.get("status") in {"ready", "verified", "released"}
+        ):
+            actively_covered_work.add(target_id)
+
     for artifact in artifacts:
+        artifact_id = _text(artifact.get("id"), "artifact id")
         artifact_type = _text(artifact.get("type"), "artifact type")
         status = _text(artifact.get("status"), "artifact status")
         if status == "ready":
@@ -337,6 +380,18 @@ def build_inspection(
         if artifact_type == "work_order" and status in {"approved", "in_progress"}:
             action = "start-authorized-work" if status == "approved" else "continue-authorized-work"
             active_work.append(_queue_entry(artifact, action))
+        assurance = assurance_by_id.get(artifact_id)
+        if (
+            artifact_type == "work_order"
+            and status == "implemented"
+            and assurance is not None
+            and assurance.get("state") == "valid"
+            and assurance.get("commit_bound_verification") == "required"
+            and artifact_id not in actively_covered_work
+        ):
+            assurance_pending.append(
+                _queue_entry(artifact, "prepare-commit-bound-verification")
+            )
 
     error_count, warning_count, plane_counts = _diagnostic_plane_counts(
         diagnostics,
@@ -357,6 +412,7 @@ def build_inspection(
         "decision_required": sorted(decision_required, key=_queue_sort),
         "definition_pending": sorted(definition_pending, key=_queue_sort),
         "active_work": sorted(active_work, key=_queue_sort),
+        "assurance_pending": sorted(assurance_pending, key=_queue_sort),
     }
     return {
         "schema": INSPECTION_SCHEMA,
@@ -542,6 +598,13 @@ def render_human(report: Mapping[str, Any]) -> str:
         _render_queue(
             "Active work",
             _mapping_list(queues.get("active_work"), "active work queue"),
+        )
+    )
+    lines.append("")
+    lines.extend(
+        _render_queue(
+            "Assurance pending",
+            _mapping_list(queues.get("assurance_pending"), "assurance pending queue"),
         )
     )
     lines.extend(["", f"Findings ({len(findings)}):"])

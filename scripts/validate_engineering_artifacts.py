@@ -93,6 +93,14 @@ DECISION_TRIGGERS = {
 LEGACY_ARCHITECTURE_STATUSES = {"implemented", "verified", "released"}
 MAX_ASSESSMENT_RATIONALE_LENGTH = 2000
 MAX_ASSESSOR_LENGTH = 128
+WORK_ORDER_ASSURANCE_VALUES = {"required", "not_required"}
+WORK_ORDER_ASSURANCE_FIELDS = {
+    "commit_bound_verification",
+    "rationale",
+    "decided_by",
+}
+MAX_ASSURANCE_RATIONALE_LENGTH = 2000
+MAX_ASSURANCE_DECIDER_LENGTH = 128
 EXCLUDED_DIRECTORY_NAMES = {"templates", "evidence", ".git", ".idea", "target", "node_modules"}
 
 RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
@@ -1515,6 +1523,110 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
     }
 
 
+def work_order_assurance_state(artifact: Artifact) -> dict[str, Any]:
+    """Return the explicit commit-bound assurance classification for a work order."""
+
+    raw = artifact.metadata.get("assurance")
+    if artifact.artifact_type != "work_order":
+        return {
+            "state": "invalid" if raw is not None else "not_applicable",
+            "commit_bound_verification": None,
+            "rationale": None,
+            "decided_by": None,
+            "issues": ["assurance is allowed only on work-order artifacts"] if raw is not None else [],
+        }
+    if raw is None:
+        return {
+            "state": "missing",
+            "commit_bound_verification": None,
+            "rationale": None,
+            "decided_by": None,
+            "issues": [],
+        }
+    if not isinstance(raw, dict):
+        return {
+            "state": "invalid",
+            "commit_bound_verification": None,
+            "rationale": None,
+            "decided_by": None,
+            "issues": ["assurance must be a TOML table"],
+        }
+
+    issues: list[str] = []
+    classification_value = raw.get("commit_bound_verification")
+    classification = (
+        classification_value.strip()
+        if isinstance(classification_value, str)
+        else None
+    )
+    if classification not in WORK_ORDER_ASSURANCE_VALUES:
+        issues.append(
+            "assurance commit_bound_verification must be required or not_required"
+        )
+
+    rationale_value = raw.get("rationale")
+    rationale = rationale_value.strip() if isinstance(rationale_value, str) else None
+    if not rationale:
+        issues.append("assurance rationale must be a non-empty string")
+    elif len(rationale) > MAX_ASSURANCE_RATIONALE_LENGTH:
+        issues.append(
+            f"assurance rationale exceeds {MAX_ASSURANCE_RATIONALE_LENGTH} characters"
+        )
+
+    decider_value = raw.get("decided_by")
+    decided_by = decider_value.strip() if isinstance(decider_value, str) else None
+    if not decided_by:
+        issues.append("assurance decided_by must be a non-empty string")
+    elif len(decided_by) > MAX_ASSURANCE_DECIDER_LENGTH:
+        issues.append(
+            f"assurance decided_by exceeds {MAX_ASSURANCE_DECIDER_LENGTH} characters"
+        )
+
+    unknown_fields = sorted(set(raw) - WORK_ORDER_ASSURANCE_FIELDS)
+    if unknown_fields:
+        issues.append(f"assurance contains unknown fields: {', '.join(unknown_fields)}")
+
+    return {
+        "state": "invalid" if issues else "valid",
+        "commit_bound_verification": classification,
+        "rationale": rationale,
+        "decided_by": decided_by,
+        "issues": issues,
+    }
+
+
+def validate_work_order_assurance(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> list[Diagnostic]:
+    errors: list[Diagnostic] = []
+    for artifact in artifacts:
+        assurance = work_order_assurance_state(artifact)
+        for issue in assurance["issues"]:
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E019",
+                issue,
+                plane="governance",
+            )
+        if (
+            artifact.artifact_type == "work_order"
+            and assurance["state"] == "missing"
+            and artifact.status in {"approved", "in_progress"}
+        ):
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E019",
+                "approved or in-progress work order requires an explicit assurance classification",
+                plane="governance",
+            )
+    return errors
+
+
 def validate_decision_assessments(
     artifacts: list[Artifact],
     report_root: Path,
@@ -1730,6 +1842,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
             repository_root,
         )
         errors.extend(assessment_errors)
+        errors.extend(validate_work_order_assurance(artifacts, repository_root))
         errors.extend(
             validate_revision_consistency(
                 artifacts,

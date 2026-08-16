@@ -428,7 +428,7 @@ class HarnessCtlTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(0, inspection_json.returncode, inspection_json.stderr)
-        self.assertEqual("se-harness-inspection-v1", json.loads(inspection_json.stdout)["schema"])
+        self.assertEqual("se-harness-inspection-v2", json.loads(inspection_json.stdout)["schema"])
         self.assertEqual(before, sorted(path.relative_to(target).as_posix() for path in target.rglob("*")))
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
         self.assertTrue((target / "target/harness-dashboard/dashboard-data.json").is_file())

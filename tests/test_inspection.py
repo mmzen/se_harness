@@ -23,6 +23,7 @@ from inspect_engineering_artifacts import (  # noqa: E402
     render_human,
     serialize_json,
 )
+from validate_engineering_artifacts import Artifact, ValidationReport  # noqa: E402
 
 
 def sample_snapshot(*, valid: bool = False) -> dict:
@@ -136,6 +137,108 @@ def sample_snapshot(*, valid: bool = False) -> dict:
 
 
 class InspectionReportTests(unittest.TestCase):
+    def test_assurance_pending_uses_explicit_classification_and_active_direct_coverage(self) -> None:
+        snapshot = sample_snapshot(valid=True)
+        work_ids = (
+            "WO-PENDING",
+            "WO-NOT-REQUIRED",
+            "WO-LEGACY",
+            "WO-READY-COVERED",
+            "WO-VERIFIED-COVERED",
+            "WO-RELEASED-COVERED",
+            "WO-SUPERSEDED-ONLY",
+        )
+        for work_id in work_ids:
+            snapshot["artifacts"].append(
+                {
+                    "id": work_id,
+                    "type": "work_order",
+                    "title": work_id,
+                    "status": "implemented",
+                    "owners": ["engineering-owner"],
+                    "path": f"docs/engineering/work-orders/{work_id}.md",
+                }
+            )
+        verification_states = {
+            "VREC-READY-COVERAGE": ("ready", "WO-READY-COVERED"),
+            "VREC-VERIFIED-COVERAGE": ("verified", "WO-VERIFIED-COVERED"),
+            "VREC-RELEASED-COVERAGE": ("released", "WO-RELEASED-COVERED"),
+            "VREC-SUPERSEDED-COVERAGE": ("superseded", "WO-SUPERSEDED-ONLY"),
+        }
+        for record_id, (status, work_id) in verification_states.items():
+            snapshot["artifacts"].append(
+                {
+                    "id": record_id,
+                    "type": "verification_record",
+                    "title": record_id,
+                    "status": status,
+                    "owners": ["quality-owner"],
+                    "path": f"docs/engineering/verification-records/{record_id}.md",
+                }
+            )
+            snapshot["relations"].append(
+                {
+                    "source": record_id,
+                    "relation": "verifies_work_order",
+                    "target": work_id,
+                    "authority": "declared",
+                }
+            )
+        snapshot["relations"].append(
+            {
+                "source": "VREC-READY-COVERAGE",
+                "relation": "verifies_work_order",
+                "target": "WO-PENDING",
+                "authority": "derived",
+            }
+        )
+
+        validation_artifacts = []
+        for work_id in work_ids:
+            metadata = {
+                "id": work_id,
+                "type": "work_order",
+                "title": work_id,
+                "status": "implemented",
+                "owners": ["engineering-owner"],
+                "created": "2026-08-16",
+                "updated": "2026-08-16",
+                "relations": {},
+            }
+            if work_id != "WO-LEGACY":
+                metadata["assurance"] = {
+                    "commit_bound_verification": (
+                        "not_required" if work_id == "WO-NOT-REQUIRED" else "required"
+                    ),
+                    "rationale": "Fixture classification.",
+                    "decided_by": "quality-owner",
+                }
+            validation_artifacts.append(
+                Artifact(Path(f"{work_id}.md"), metadata, "")
+            )
+        validation = ValidationReport(validation_artifacts, [], [])
+
+        report = build_inspection(snapshot, validation)
+        self.assertEqual(
+            ["WO-PENDING", "WO-SUPERSEDED-ONLY"],
+            [item["id"] for item in report["queues"]["assurance_pending"]],
+        )
+        pending_suggestions = [
+            item
+            for item in report["suggestions"]
+            if item["source_id"] == "assurance_pending"
+        ]
+        self.assertEqual(2, len(pending_suggestions))
+        self.assertEqual(
+            {"prepare-commit-bound-verification"},
+            {item["action"] for item in pending_suggestions},
+        )
+        self.assertTrue(all(item["automatic"] is False for item in pending_suggestions))
+        self.assertIn(
+            "VREC-READY-COVERAGE",
+            [item["id"] for item in report["queues"]["decision_required"]],
+        )
+
     def test_builds_mechanical_queues_and_preserves_findings(self) -> None:
         snapshot = sample_snapshot()
         report = build_inspection(snapshot)
@@ -309,11 +412,12 @@ class InspectionReportTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertTrue(first.endswith("\n"))
         decoded = json.loads(first)
-        self.assertEqual("se-harness-inspection-v1", decoded["schema"])
+        self.assertEqual("se-harness-inspection-v2", decoded["schema"])
 
         human = render_human(report)
         self.assertIn("Formal validation: FAIL", human)
         self.assertIn("Decision required (2)", human)
+        self.assertIn("Assurance pending (0)", human)
         self.assertIn("W-HEX-005", human)
         self.assertIn("Suggested next steps (6)", human)
         self.assertIn("review-unlinked-artifact", human)
