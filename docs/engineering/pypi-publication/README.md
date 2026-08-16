@@ -11,4 +11,4 @@ python scripts/validate_engineering_artifacts.py --root .
 python -m unittest tests.test_pypi_publishing
 ```
 
-`OPS-PYP-001` was separately reviewed and approved through `WO-OCA-001` on 2026-08-16. It accepts the continuing controls for exact released-asset selection, least-privilege Trusted Publishing, no-rebuild promotion, explicit human authorization, and retained publication evidence. `REL-PYP-001` remains a draft release proposal; the operating contract does not authorize a workflow dispatch or PyPI upload.
+`OPS-PYP-001` was separately reviewed and approved through `WO-OCA-001` on 2026-08-16. It accepts the continuing controls for exact released-asset selection, least-privilege Trusted Publishing, no-rebuild promotion, explicit human authorization, and retained publication evidence. `REL-PYP-001` is a rejected historical proposal: `WO-PYP-001` was released through `REL-SEH-002` and `RLS-SEH-002` in `v0.2.1` instead. The operating contract does not authorize a workflow dispatch or PyPI upload.

@@ -2,10 +2,10 @@
 id = "REL-AGR-001"
 type = "release_contract"
 title = "Release aggregate provenance support"
-status = "draft"
+status = "rejected"
 owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
 gates = ["WO-AGR-001"]
@@ -44,3 +44,7 @@ Do not publish when provenance, scope, installation, or smoke verification fails
 ## Post-release observation window
 
 Review the first aggregate release installation, upgrade, dashboard, and provenance workflow before using the feature for the next production version.
+
+## Disposition
+
+This per-feature proposal was never selected as release authority. `WO-AGR-001` was released in `0.2.0` under aggregate contract `REL-DST-001` and released record `RLS-SEH-001` at tag `v0.2.0`. The rejected status disposes of this unused proposal; it does not reject the released implementation.

@@ -5,7 +5,7 @@ title = "Direct canonical-snapshot Explorer architecture"
 status = "implemented"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-13"
-updated = "2026-08-13"
+updated = "2026-08-16"
 
 [relations]
 addresses = ["REQ-DST-029", "REQ-DST-031", "REQ-DST-032", "REQ-DST-033"]
@@ -37,7 +37,7 @@ Harness Explorer is a static view over validator-derived repository state. The r
 
 Formal artifacts and Git observation feed the validator and snapshot builder. The renderer consumes the snapshot. The browser consumes the embedded snapshot. No data or decision flows from browser presentation back into formal artifacts, lifecycle state, verification capture, or release authority.
 
-The source candidate and canonical installed-template copy are reconciled under existing managed ownership. Target repositories do not depend on this checkout or a hosted application, but viewing the optional 3D topology currently depends on `unpkg.com` serving the pinned library URL.
+The canonical standard-distribution template and active managed root copy are reconciled under existing managed ownership. Target repositories do not depend on this checkout or a hosted application, but viewing the optional 3D topology currently depends on `unpkg.com` serving the pinned library URL.
 
 ## Data and control flow
 
@@ -81,6 +81,12 @@ Repository metadata, prose, paths, evidence, experiments, and Git observations a
 ## Quality attributes and conformance
 
 The architecture prioritizes semantic fidelity, prototype fidelity, deterministic evidence, hostile-input safety, graceful degradation, accessibility, explainability, and distributable parity. Complete offline 3D availability is explicitly not guaranteed. `ADR-DST-008` records both the model-boundary decision and accepted CDN risk. `VER-DST-008` verifies contract mapping, determinism, escaping, bounded behavior, five-question coverage, exact artifact-type presentation, the permitted network boundary, fallback behavior, accessibility, managed integrity, and fresh-install parity.
+
+## Dependency reassessment: 2026-08-16
+
+The technical and security owners reassessed this architecture against the 2026-08-15 revision of `SPEC-DST-008`. That revision removed the redundant `templates/webui/` handoff and made `templates/repository/standard/scripts/harness_explorer/index.template.html` the sole reusable Explorer source, with the active root file retained as its managed operational copy.
+
+This consolidation strengthens the architecture's existing single-model and managed-distribution boundaries. It does not change the canonical snapshot interface, browser data flow, DOM safety rules, external CDN trust boundary, non-3D fallback, accessibility obligations, or the risk accepted by `ADR-DST-008`. The architecture remains applicable; only the formerly ambiguous source-copy sentence was corrected.
 
 ## Related ADRs
 
