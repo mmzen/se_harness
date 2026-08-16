@@ -65,7 +65,12 @@ updated = "2026-08-11"
 '''
 
 
-def create_base_chain(root: Path, *, work_order_status: str = "implemented") -> None:
+def create_base_chain(
+    root: Path,
+    *,
+    work_order_status: str = "implemented",
+    operating_contract_status: str = "approved",
+) -> None:
     base = root / "docs/engineering/product"
     write(base / "intent/INT-001.md", formal("INT-001", "intent", "approved", {}))
     write(base / "capabilities/CAP-001.md", formal("CAP-001", "capability", "approved", {"derives_from": ["INT-001"]}))
@@ -98,7 +103,15 @@ def create_base_chain(root: Path, *, work_order_status: str = "implemented") -> 
         ),
     )
     write(base / "release/REL-001.md", formal("REL-001", "release_contract", "approved", {"gates": ["WO-001"]}))
-    write(base / "operations/OPS-001.md", formal("OPS-001", "operating_contract", "approved", {"assures": ["REL-001"]}))
+    write(
+        base / "operations/OPS-001.md",
+        formal(
+            "OPS-001",
+            "operating_contract",
+            operating_contract_status,
+            {"assures": ["REQ-001"]},
+        ),
+    )
     write(base / "evidence/WO-001-verification.md", "# Evidence\n\nCandidate checks passed.")
 
 
@@ -561,7 +574,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def initialize_candidate(self, *, aggregate: bool = False) -> str:
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Revision Sample")[0])
-        create_base_chain(self.root)
+        create_base_chain(self.root, operating_contract_status="draft")
         if aggregate:
             create_additional_chain(self.root)
         self.git("init", "-b", "main")
@@ -888,7 +901,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def test_capture_fails_when_repository_has_no_head(self) -> None:
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "No Head")[0])
-        create_base_chain(self.root)
+        create_base_chain(self.root, operating_contract_status="draft")
         self.git("init", "-b", "main")
         info_exclude = self.root / ".git/info/exclude"
         info_exclude.write_text("*\n", encoding="utf-8")

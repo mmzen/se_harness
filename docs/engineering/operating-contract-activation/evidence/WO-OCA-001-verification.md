@@ -17,7 +17,7 @@ Exactly these six records changed from `draft` to `approved`:
 | `OPS-VSP-001` | `REQ-VSP-001..007` | 9 |
 | `OPS-WLC-001` | `REQ-WLC-001..006` | 9 |
 
-Every `assures` relation now targets an active requirement in deterministic numeric order. No operating contract assures a release contract. The two previously partial contracts, `OPS-IAR-001` and `OPS-WLC-001`, now define service objectives, observability, alert and escalation behavior, capacity and cost boundaries, backup and recovery, security and compliance controls, automated-remediation limits, runbooks, and evidence retention. The other four contracts were reviewed against current commands and authority boundaries.
+For the six contracts activated by `WO-OCA-001`, every `assures` relation targets an active requirement in deterministic numeric order. This statement did not assess the older `OPS-DST-001` and `OPS-REV-001` relations; their explicit migration is governed separately by `WO-OCA-002`. The two previously partial contracts, `OPS-IAR-001` and `OPS-WLC-001`, now define service objectives, observability, alert and escalation behavior, capacity and cost boundaries, backup and recovery, security and compliance controls, automated-remediation limits, runbooks, and evidence retention. The other four contracts were reviewed against current commands and authority boundaries.
 
 The six domain indexes identify the approved operating obligation independently from the unchanged draft release proposal. The repository artifact index now includes the cross-domain activation packet.
 

@@ -8,4 +8,13 @@ The repository owner explicitly approved this packet and authorized `WO-OCA-001`
 
 The bounded implementation is complete. All six contracts are `approved`, assure only their domain requirements, and contain the canonical operating sections. The managed authoring example and lock are synchronized, the six release contracts remain `draft`, and exact results are retained in `evidence/WO-OCA-001-verification.md`. `WO-OCA-001` is `implemented`; one later aggregate VREC may cover this work together with the preceding supersession maintenance at their shared clean candidate commit.
 
-No architecture artifact or ADR applies. The work changes governance definitions and one authoring example; it introduces no structural software choice and no active architecture addresses `REQ-OCA-001`.
+## Executable assurance readiness
+
+The implemented `OCA-002` packet adds only two follow-up controls: enforce `OPS.assures -> REQ` target typing, and require every active operating contract's assured requirement to have active status, completed implementing work, and eligible VREC coverage when commit-bound provenance is configured. It also migrates the two older approved contracts that predate the requirement-only model. No release-to-OPS relation, traceability-diagram redesign, recurring operational assessment artifact, or other operating-model extension is included.
+
+- Requirement: `REQ-OCA-002`
+- Specification: `SPEC-OCA-002`
+- Verification contract: `VER-OCA-002`
+- Implemented work order: `WO-OCA-002`
+
+No architecture artifact or ADR applies. The work changes a local validation invariant and managed policy wording; it introduces no structural software choice and no active architecture addresses `REQ-OCA-002`.

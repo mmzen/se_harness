@@ -44,6 +44,8 @@ Evidence, acceptance scenarios, source files, candidate commits, dashboards, tic
 
 Lifecycle transitions remain defined by [`WORKFLOW.md`](WORKFLOW.md), accountable roles by [`DECISION_RIGHTS.md`](DECISION_RIGHTS.md), gates by [`QUALITY_GATES.md`](QUALITY_GATES.md), and canonical authoring locations by [`templates/README.md`](templates/README.md).
 
+An active `OPS.assures -> REQ` claim requires more than accepted operating prose. Each assured requirement must be active and have at least one completed implementing work order. When commit-bound verified-work provenance is enabled, at least one such work order must also be covered by a verified or released VREC. These reachability checks establish an evidence-backed implementation path; they do not approve the OPS or prove continuing operational conformance.
+
 `ARCH.addresses -> REQ` declares only architecturally significant requirement drivers. `ARCH.conforms_to -> SPEC` declares the detailed behavioral or interface contracts relevant to that architecture. Every addressed requirement must be reachable through a conforming specification's `SPEC.specifies -> REQ` relation, but a specification may also cover routine requirements that do not drive architecture. Explorer may show that transitive path as derived context; it never replaces the direct declared relations or creates authority.
 
 Work-order definition and verification coverage remain independent: every implemented requirement needs selected specification and verification coverage. Architecture is applicable when an active architecture directly addresses an implemented requirement, and every selected architecture must share a conforming specification with the work order. Do not fabricate architecture coverage for routine requirements.
