@@ -99,6 +99,7 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("architecture", "addresses"): {"requirement"},
     ("architecture", "conforms_to"): {"specification"},
     ("architecture", "constrains"): {"requirement", "specification"},
+    ("operating_contract", "assures"): {"requirement"},
     ("verification_record", "verifies_work_order"): {"work_order"},
     ("verification_record", "conforms_to"): {"verification"},
     ("verification_record", "superseded_by"): {"verification_record"},
@@ -1171,6 +1172,87 @@ def _duplicate_strings(value: Any) -> list[str]:
     return sorted(duplicates)
 
 
+def validate_operating_contract_readiness(
+    artifacts: list[Artifact],
+    report_root: Path,
+    *,
+    require_verified_work: bool = False,
+) -> list[Diagnostic]:
+    """Validate the implementation path behind each active OPS assurance claim."""
+
+    errors: list[Diagnostic] = []
+    catalog = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_id != "<unknown>"
+    }
+    completed_work_by_requirement: dict[str, set[str]] = {}
+    for work_order in artifacts:
+        if (
+            work_order.artifact_type != "work_order"
+            or work_order.status not in RELEASABLE_WORK_STATUSES
+        ):
+            continue
+        for requirement_id in _relation_targets(work_order, "implements"):
+            completed_work_by_requirement.setdefault(requirement_id, set()).add(
+                work_order.artifact_id
+            )
+
+    verified_work = {
+        work_order_id
+        for record in artifacts
+        if record.artifact_type == "verification_record"
+        and record.status in {"verified", "released"}
+        for work_order_id in _relation_targets(record, "verifies_work_order")
+    }
+
+    for contract in artifacts:
+        if (
+            contract.artifact_type != "operating_contract"
+            or contract.status not in ACTIVE_COVERAGE_STATUSES
+        ):
+            continue
+        for requirement_id in sorted(_relation_targets(contract, "assures")):
+            requirement = catalog.get(requirement_id)
+            # Missing and wrong-type targets are owned by validate_relations.
+            if requirement is None or requirement.artifact_type != "requirement":
+                continue
+            if requirement.status not in ACTIVE_COVERAGE_STATUSES:
+                _add_error(
+                    errors,
+                    contract,
+                    report_root,
+                    "E017",
+                    f"active operating contract assures inactive requirement '{requirement_id}'",
+                    plane="governance",
+                )
+                continue
+
+            completed_work = completed_work_by_requirement.get(requirement_id, set())
+            if not completed_work:
+                _add_error(
+                    errors,
+                    contract,
+                    report_root,
+                    "E017",
+                    f"active operating contract assures requirement '{requirement_id}' without completed implementing work",
+                    plane="governance",
+                )
+                continue
+
+            if require_verified_work and completed_work.isdisjoint(verified_work):
+                _add_error(
+                    errors,
+                    contract,
+                    report_root,
+                    "E018",
+                    f"active operating contract assures requirement '{requirement_id}' without a verified or released VREC covering completed implementing work",
+                    plane="policy",
+                )
+
+    return errors
+
+
 def architecture_traceability_state(
     artifact: Artifact,
     catalog: dict[str, Artifact],
@@ -1650,6 +1732,13 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(assessment_errors)
         errors.extend(
             validate_revision_consistency(
+                artifacts,
+                repository_root,
+                require_verified_work=revision_policy["required_for_verified_work"],
+            )
+        )
+        errors.extend(
+            validate_operating_contract_readiness(
                 artifacts,
                 repository_root,
                 require_verified_work=revision_policy["required_for_verified_work"],

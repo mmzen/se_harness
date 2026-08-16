@@ -80,6 +80,10 @@ class InstructionArchitectureTests(unittest.TestCase):
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
         destination = target / "docs" / "engineering" / "instruction-architecture"
         shutil.copytree(PACKET_ROOT, destination)
+        operating_contract = destination / "operations" / "OPS-IAR-001.md"
+        text = operating_contract.read_text(encoding="utf-8")
+        text = re.sub(r'^status = "[^"]+"$', 'status = "draft"', text, count=1, flags=re.MULTILINE)
+        operating_contract.write_text(text, encoding="utf-8")
         work_order = destination / "work-orders" / "WO-IAR-001.md"
         text = work_order.read_text(encoding="utf-8")
         text = re.sub(r'^status = "[^"]+"$', f'status = "{status}"', text, count=1, flags=re.MULTILINE)

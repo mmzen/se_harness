@@ -46,7 +46,7 @@
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "0e4adb0a7b51ed9645069025e3cbe49e775c2595470e0049fa5ca74d5d98767f"
+      "sha256": "e176200abde80cd4a9e9a8f02aef9c20ea1de0843ba436492778928420e714aa"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
@@ -70,7 +70,7 @@
     },
     "docs/engineering/templates/OPERATING_CONTRACT.template.md": {
       "mode": "managed",
-      "sha256": "68cdd0b736374729614022ccb7391999d30a5c190f20d22b616960136bfbfb3a"
+      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
     },
     "docs/engineering/templates/README.md": {
       "mode": "managed",
@@ -134,7 +134,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "8bebd1a4bc667c204ae40f15097532d632a29e05548b44df91f7d2dab66eefc5"
+      "sha256": "4c9f0cfb193d32872e6c9b6fcb052d770bb732a5176f6050855f7a0bbbe63000"
     }
   },
   "hash_algorithm": "sha256",

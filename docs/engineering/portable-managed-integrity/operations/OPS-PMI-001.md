@@ -2,13 +2,13 @@
 id = "OPS-PMI-001"
 type = "operating_contract"
 title = "Operate portable managed-file integrity"
-status = "draft"
+status = "approved"
 owners = ["service-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
-assures = ["REQ-PMI-002", "REQ-PMI-003", "REQ-PMI-004", "REQ-PMI-006", "REQ-PMI-007", "REL-PMI-001"]
+assures = ["REQ-PMI-001", "REQ-PMI-002", "REQ-PMI-003", "REQ-PMI-004", "REQ-PMI-005", "REQ-PMI-006", "REQ-PMI-007"]
 +++
 
 # Operating Contract: Operate portable managed-file integrity

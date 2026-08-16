@@ -13,6 +13,7 @@
 - `work-order-lifecycle/`: lifecycle meanings and configured verified-work consistency.
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.
+- `operating-contract-activation/`: accountable activation and maintenance of continuing operational assurance obligations.
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
 - `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.

@@ -2,13 +2,13 @@
 id = "OPS-AGR-001"
 type = "operating_contract"
 title = "Maintain aggregate release lineage"
-status = "draft"
+status = "approved"
 owners = ["service-owner", "quality-owner", "release-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
-assures = ["REQ-AGR-003", "REQ-AGR-005", "REQ-AGR-006", "REQ-AGR-007", "REQ-AGR-008", "REL-AGR-001"]
+assures = ["REQ-AGR-001", "REQ-AGR-002", "REQ-AGR-003", "REQ-AGR-004", "REQ-AGR-005", "REQ-AGR-006", "REQ-AGR-007", "REQ-AGR-008"]
 +++
 
 # Operating Contract: Maintain aggregate release lineage
@@ -19,7 +19,7 @@ Every retained aggregate graph validates deterministically, and every released v
 
 ## Observability
 
-Use the artifact validator and Harness Explorer to inspect aggregate scope, lifecycle, commit equality, checkout drift, and intent-to-release paths.
+Use `harnessctl validate .`, `harnessctl inspect .`, and `harnessctl dashboard .` to inspect aggregate scope, lifecycle, commit equality, checkout drift, and intent-to-release paths. Retain `capture-verification` and `prepare-release` output when those commands are authorized.
 
 ## Alerts and escalation
 
@@ -43,7 +43,7 @@ Automation may regenerate derived dashboards and prepare new ready records. It m
 
 ## Runbooks
 
-Follow `docs/engineering/WORKFLOW.md`, the aggregate-release specification, the applicable release contract, and repository context commands.
+Follow `docs/engineering/WORKFLOW.md`, `SPEC-AGR-001`, the applicable approved release contract, and repository-context commands. A draft release contract is a proposal and grants no release authority.
 
 ## Evidence retention
 

@@ -2,13 +2,13 @@
 id = "OPS-VSP-001"
 type = "operating_contract"
 title = "Operate verification-supersession lineage"
-status = "draft"
+status = "approved"
 owners = ["service-owner", "quality-owner", "release-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
-assures = ["REQ-VSP-001", "REQ-VSP-002", "REQ-VSP-003", "REQ-VSP-004", "REQ-VSP-005", "REQ-VSP-006", "REQ-VSP-007", "REL-VSP-001"]
+assures = ["REQ-VSP-001", "REQ-VSP-002", "REQ-VSP-003", "REQ-VSP-004", "REQ-VSP-005", "REQ-VSP-006", "REQ-VSP-007"]
 +++
 
 # Operating Contract: Operate verification-supersession lineage
