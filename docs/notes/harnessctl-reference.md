@@ -49,7 +49,9 @@ harnessctl doctor [TARGET]
 
 Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
 
-Inspection reuses the existing validator and Harness Explorer snapshot. It reports formal validity, ready decisions, draft definitions, approved or in-progress work, and the existing validator and Explorer findings. Human output groups repeated rule instances for readability; `--json` retains every finding.
+Inspection reuses the existing validator and Harness Explorer snapshot. It reports formal validity, ready decisions, draft definitions, approved or in-progress work, implemented work explicitly awaiting commit-bound assurance preparation, and the existing validator and Explorer findings. Human output groups repeated rule instances for readability; `--json` retains every finding.
+
+The `assurance_pending` queue contains only an `implemented` work order whose explicit `[assurance]` classification is `required` and which has no direct `ready`, `verified`, or `released` VREC coverage. It suggests non-automatic preparation after one clean candidate commit; it does not select aggregate scope, create a record, or make the assurance decision. Completed legacy work without a classification and work explicitly classified `not_required` are not inferred into this queue.
 
 The temporal reassessment observation `W-HEX-003` is deliberately narrow: it compares dates only for supported declared dependency relations whose source can still be meaningfully reassessed. It does not reopen completed work orders, reinterpret commit-bound verification or release records, or treat derived graph projections as declared dependencies.
 
@@ -65,7 +67,7 @@ Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidenc
 harnessctl preflight [TARGET] --work-order WO-... [--phase start|review] [--json]
 ```
 
-`start` is the default phase. Preflight checks lifecycle eligibility and the governing chain, then returns the material an agent or reviewer must read. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, assurance, or release.
+`start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
 
 ## Safe repository upgrade
 

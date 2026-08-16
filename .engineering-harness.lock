@@ -46,11 +46,11 @@
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "e176200abde80cd4a9e9a8f02aef9c20ea1de0843ba436492778928420e714aa"
+      "sha256": "3ee0039ef5e342fd4b64b472587ebbb4d7985a9633dadc662120c4ae4c506c67"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "7d9f2c3690acef0a28e94703ac1ee045f1f01c0a96acda0e33c1e35b494eac2a"
+      "sha256": "8d0c32dbb9b00fb03b577933e135f79f19c853cafc26ca9b40cc24eacd958e97"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -102,7 +102,7 @@
     },
     "docs/engineering/templates/WORK_ORDER.template.md": {
       "mode": "managed",
-      "sha256": "c941272e463825923e45a5514680b3f68c15576d24cc109ffc1ae6a6a774980b"
+      "sha256": "465a5dce3c76886c8e6d853fcaee32845f178333eb8e71e6ee9436ee603a9c75"
     },
     "scripts/artifact_layout_registry.py": {
       "mode": "managed",
@@ -126,7 +126,7 @@
     },
     "scripts/inspect_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "a5597305be227374daafec1f126174e606d35e96e92d8aff6259a9883e1eb742"
+      "sha256": "78ce4988c98ffa45fb927f54435d3a7525b13e0cb113950b1beeafe4f41e9831"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",
@@ -134,7 +134,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "4c9f0cfb193d32872e6c9b6fcb052d770bb732a5176f6050855f7a0bbbe63000"
+      "sha256": "7c09ea29d076ef82be869f997bd002cb87dcaf2beabab4135b4bc20281f82667"
     }
   },
   "hash_algorithm": "sha256",

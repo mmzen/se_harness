@@ -106,6 +106,7 @@ class PreflightReport:
     ready: bool
     phase: str
     work_order: dict[str, str]
+    assurance: dict[str, str]
     diagnostics: tuple[PreflightDiagnostic, ...]
     reading_manifest: tuple[str, ...]
     repository_commands: dict[str, str]
@@ -116,6 +117,7 @@ class PreflightReport:
             "ready": self.ready,
             "phase": self.phase,
             "work_order": self.work_order,
+            "assurance": self.assurance,
             "diagnostics": [asdict(item) for item in self.diagnostics],
             "reading_manifest": list(self.reading_manifest),
             "repository_commands": self.repository_commands,
@@ -363,6 +365,11 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
 
     work_order: Any | None = None
     work_order_summary = {"id": work_order_id, "status": "unknown", "path": ""}
+    assurance_summary = {
+        "commit_bound_verification": "unknown",
+        "rationale": "",
+        "decided_by": "",
+    }
     if WORK_ORDER_PATTERN.fullmatch(work_order_id) is None:
         diagnostics.append(PreflightDiagnostic("W001", work_order_id, "invalid work-order ID"))
     else:
@@ -382,6 +389,26 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
                 diagnostics.append(PreflightDiagnostic("W004", work_order_id, "selected artifact is not a work order"))
             else:
                 work_order = candidate
+                if validator is not None:
+                    assurance = validator.work_order_assurance_state(candidate)
+                    if assurance["state"] == "valid":
+                        assurance_summary = {
+                            "commit_bound_verification": assurance["commit_bound_verification"],
+                            "rationale": assurance["rationale"],
+                            "decided_by": assurance["decided_by"],
+                        }
+                    else:
+                        details = "; ".join(assurance["issues"])
+                        if not details:
+                            details = "assurance classification is missing"
+                        diagnostics.append(
+                            PreflightDiagnostic(
+                                "W023",
+                                work_order_summary["path"],
+                                "selected work order requires an accountable explicit assurance decision: "
+                                + details,
+                            )
+                        )
                 allowed = START_STATUSES if phase == "start" else REVIEW_STATUSES
                 if candidate.status not in allowed:
                     expected = ", ".join(sorted(allowed))
@@ -602,6 +629,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
         ready=not ordered_diagnostics,
         phase=phase,
         work_order=work_order_summary,
+        assurance=assurance_summary,
         diagnostics=ordered_diagnostics,
         reading_manifest=manifest,
         repository_commands=dict(sorted(commands.items())),
@@ -614,6 +642,11 @@ def render_preflight(report: PreflightReport) -> str:
         f"Harness preflight: {status}",
         f"Phase: {report.phase}",
         f"Work order: {report.work_order['id']} ({report.work_order['status']})",
+        "",
+        "Assurance classification:",
+        f"- Commit-bound verification: {report.assurance['commit_bound_verification']}",
+        f"- Decided by: {report.assurance['decided_by'] or 'unavailable'}",
+        f"- Rationale: {report.assurance['rationale'] or 'unavailable'}",
     ]
     if report.diagnostics:
         lines.extend(["", "Diagnostics:"])
