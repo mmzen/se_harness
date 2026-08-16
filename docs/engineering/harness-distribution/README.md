@@ -42,6 +42,12 @@ Validation and inspection documentation synchronization extension:
 
 No architecture or ADR is selected for `REQ-DST-034`: the correction preserves the existing layered documentation responsibilities and introduces no architecturally significant requirement driver.
 
+Concise Explorer Overview and bounded graph-context extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-035..039` -> `SPEC-DST-010`, `VER-DST-010` -> `WO-DST-011`.
+
+No new architecture or ADR is selected for `REQ-DST-035..039`: the proposed presentation refinement remains within `ARCH-DST-008` and `ADR-DST-008` without changing the canonical model, provenance identity, dependency direction, trust boundary, runtime dependency, or deployment architecture.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.
@@ -67,3 +73,5 @@ After reviewing the documentation impact of the layered validator and new inspec
 On 2026-08-16, `WO-OCA-002` explicitly migrated `OPS-DST-001.assures` from the legacy release-contract target to `REQ-DST-001..006`, the requirement scope of its original accepted distribution packet. The approved contract's meaning and status are unchanged; later distribution requirements are not inferred into its scope.
 
 On 2026-08-16, the repository owner authorized `WO-DST-010` to reassess `ARCH-DST-007` and `ARCH-DST-008` against their newer declared definitions, then explicitly authorized the resulting ADR reaffirmation. The reassessment confirmed that both architectures and accepted ADR outcomes remain applicable, corrected one source-copy phrase and one obsolete command list, and removed the resulting `W-HEX-003` observations without changing product behavior, governing definitions, inspection rules, or external lifecycle state. Retained evidence records the bounded review.
+
+On 2026-08-16, after challenging the initial arbitrary-depth proposal, the repository owner requested the `WO-DST-011` packet for a shorter Explorer Overview and bounded `0 / 1 / 2` context around graph-filter matches. During definition, the owner accepted additional requirements for legible presentation-only observed-revision prefixes, generic sidebar containment, and a direct artifact-filter clear control while preserving full provenance identity and other graph choices, then explicitly authorized the complete bounded implementation. Before candidate commit, owner review identified duplicate state/type/assurance colors caused by the five-slot hash palette and required stable distinct colors within each analysis mode. `REQ-DST-035..039`, `SPEC-DST-010`, and `VER-DST-010` are approved; `WO-DST-011` is implemented with retained evidence. Commit, VREC, pull request, release, package publication, public-demonstrator update, and deployment remain separately controlled.
