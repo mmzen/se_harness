@@ -33,6 +33,8 @@ docs/engineering/                        self-governing formal artifact graph an
 .self-hosting/governor.toml              exact independently released governor selection
 .github/workflows/engineering-harness.yml repository-specific three-plane assurance workflow
 .github/workflows/self-hosting-governor.yml candidate reusable workflow published for later governors
+.github/workflows/publish-dashboard-pages.yml repository-specific release-bound demonstration deployment
+.github/scripts/publish_dashboard.py          Pages provenance and public-payload gate; not consumer tooling
 ```
 
 The root validator and Explorer sources remain byte-identical to their canonical managed-template copies. The self-hosting workflow and root self-hosting configuration are intentional repository-specific controls protected by the root lock, not alternative consumer profiles.
@@ -79,6 +81,8 @@ clean candidate C -> ready VREC -> human verification
 ```
 
 The tag selects C, not a later governance commit. Production PyPI promotion verifies the already released wheel and sdist hashes and publishes those files without rebuilding. It remains a separate protected-environment decision.
+
+The repository-specific Pages workflow may then publish a public Explorer demonstration of the completed release graph. It keeps the tagged candidate commit distinct from the later main commit containing the released governance record, validates that immutable snapshot with its released governor, and uses target-local code only to render derived post-release output. It is not copied into the consumer template and does not govern, verify, release, or promote the candidate. See [Publishing the SE Harness development dashboard](harness-dashboard-publication.md).
 
 No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable promotion authority.
 
