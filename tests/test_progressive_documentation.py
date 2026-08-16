@@ -263,12 +263,15 @@ class ProgressiveDocumentationTests(unittest.TestCase):
 
     def test_development_note_explains_three_self_hosting_planes(self) -> None:
         development = self.contents[NOTES_ROOT / "developing-se-harness.md"]
+        governor_version = tomllib.loads(
+            (REPOSITORY_ROOT / ".self-hosting" / "governor.toml").read_text(encoding="utf-8")
+        )["version"]
         for phrase in (
             "Released governor",
             "Candidate source",
             "Candidate package",
             __version__,
-            "0.2.1",
+            governor_version,
             ".self-hosting/governor.toml",
             "does not automatically promote",
             "python -m unittest discover",

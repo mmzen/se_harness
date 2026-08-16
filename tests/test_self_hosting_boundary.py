@@ -623,6 +623,7 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         )
         self.assertIn('governor-version: "0.3.0"', workflow)
         self.assertIn('governor-release-record: "RLS-SEH-005"', workflow)
+        self.assertIn(f'candidate-version: "{__version__}"', workflow)
         reusable_workflow = (
             REPOSITORY_ROOT / "self_hosting/self-hosting-governor.yml"
         ).read_text(

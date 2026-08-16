@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This conceptual model explains current 0.3.0 authoring. It is not an implementation class diagram or a policy source. Follow `ENGINEERING_HARNESS.md` and the managed policies for authoritative rules.
+> This conceptual model explains current 0.4.0 authoring. It is not an implementation class diagram or a policy source. Follow `ENGINEERING_HARNESS.md` and the managed policies for authoritative rules.
 
 ## Model at a glance
 

@@ -1,6 +1,6 @@
 # Engineering Harness for se_harness
 
-This repository uses SE Harness 0.3.0. This file is the single managed contract and router. Repository-owned instructions may add stricter local constraints, but they cannot waive this contract.
+This repository uses SE Harness 0.4.0. This file is the single managed contract and router. Repository-owned instructions may add stricter local constraints, but they cannot waive this contract.
 
 ## Authority model
 
