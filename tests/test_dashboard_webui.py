@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -106,6 +107,58 @@ class DashboardWebUIContractTests(unittest.TestCase):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, content)
 
+    def test_overview_is_concise_and_context_projection_is_bounded(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+        self.assertNotIn('data-od-id="definition-coverage"', content)
+        self.assertNotIn('id="coverageRows"', content)
+        self.assertNotIn('$("coverageRows")', content)
+        self.assertIn('id="metricCoverage"', content)
+        self.assertIn('id="metricCoverageDetail"', content)
+        self.assertIn('coverage:{label:definition?', content)
+
+        self.assertIn('id="graphDepth"', content)
+        self.assertIn('<option value="0">0 — matches only</option>', content)
+        self.assertIn('<option value="1">1 — direct neighbors</option>', content)
+        self.assertIn('<option value="2">2 — two hops</option>', content)
+        self.assertIn('CONTEXT_NODE_LIMIT=100', content)
+        self.assertIn('function overviewScope(){', content)
+        self.assertIn('for(let head=0;head<queue.length;head+=1)', content)
+        self.assertIn('scopeRole:"match"', content)
+        self.assertIn('scopeRole:"context"', content)
+        self.assertIn('TRUNCATED AT ${CONTEXT_NODE_LIMIT} CONTEXT NODES', content)
+        self.assertIn('node.scopeRole==="match"?9:4', content)
+        self.assertIn('Node size distinguishes filter matches from context nodes', content)
+        self.assertIn('$("graphDepth").value="0"', content)
+
+    def test_search_clear_and_revision_presentation_preserve_state_and_provenance(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+        self.assertIn('id="clearSearch"', content)
+        self.assertIn('data-od-id="artifact-search-clear"', content)
+        self.assertIn('aria-label="Clear artifact filter" disabled', content)
+        self.assertIn('function updateSearch(){', content)
+        self.assertIn('function clearSearch(){', content)
+        self.assertIn('$("search").addEventListener("input",updateSearch)', content)
+        self.assertIn('$("clearSearch").addEventListener("click",clearSearch)', content)
+        self.assertIn('$("search").focus()', content)
+        self.assertIn('$("clearSearch").disabled=$("search").value.length===0', content)
+        self.assertIn('.search-control:focus-within{outline:3px solid var(--accent);outline-offset:2px}', content)
+        self.assertIn('.search-control .search:focus-visible,.search-control .icon-btn:focus-visible{outline:none}', content)
+
+        self.assertIn('function displayedRevision(value)', content)
+        self.assertIn('[0-9a-f]{40}|[0-9a-f]{64}', content)
+        self.assertIn('revision.slice(0,12)', content)
+        self.assertIn('Observed revision ${displayedRevision(revision)}', content)
+        self.assertIn('Full observed revision ${revision}', content)
+        self.assertIn('overflow-wrap:anywhere', content)
+        self.assertIn('word-break:break-word', content)
+
+        snapshot, _, _ = GENERATOR.generate_snapshot(ROOT)
+        for revision in ("a" * 40, "B" * 64, "unavailable", "not-a-full-object-id"):
+            with self.subTest(revision=revision):
+                fixture = {**snapshot, "repository": {**snapshot["repository"], "revision": revision}}
+                rendered = GENERATOR.render_dashboard(fixture)
+                self.assertIn(f'"revision":"{revision}"', rendered)
+
     def test_five_questions_and_semantic_states_remain_explicit(self) -> None:
         content = self.template.read_text(encoding="utf-8")
         for phrase in (
@@ -127,6 +180,19 @@ class DashboardWebUIContractTests(unittest.TestCase):
 
         self.assertNotIn("const artifactTypes", content)
         self.assertNotIn("switch(node.type)", content)
+
+    def test_graph_analysis_modes_use_stable_distinct_category_colors(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+        palette = re.findall(r"--graph-(\d+):([^;]+)", content)
+        self.assertEqual([str(index) for index in range(1, 13)], [index for index, _ in palette])
+        self.assertEqual(len(palette), len({color for _, color in palette}))
+        self.assertIn("SEMANTIC_COLOR_TOKENS=Object.freeze", content)
+        self.assertIn("function semanticValueForMode(node,mode)", content)
+        self.assertIn("function semanticModePalette(mode)", content)
+        self.assertIn("nodes().map(node=>String(semanticValueForMode(node,mode)))", content)
+        self.assertIn("semanticPalettes.set(mode,new Map(values.map", content)
+        self.assertIn("colors[index]??fallbackSemanticColor(index)", content)
+        self.assertNotIn("Math.abs(hash)%semanticPalette.length", content)
 
     def test_canonical_template_is_the_only_committed_webui_source(self) -> None:
         self.assertTrue(self.template.is_file())
