@@ -21,7 +21,7 @@ import tempfile
 import time
 from collections import Counter, defaultdict, deque
 from datetime import UTC, datetime
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Sequence
 
 from validate_engineering_artifacts import (
@@ -44,6 +44,9 @@ DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
 DEFAULT_EXPERIMENT_ROOT = Path("docs") / "engineering" / "experiments" / "results"
 MAX_EXPERIMENT_BYTES = 1_000_000
+MAX_CONTENT_DOCUMENT_BYTES = 262_144
+MAX_CONTENT_TOTAL_BYTES = 16_777_216
+ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
 ACTIVE_WORK_ORDER_STATUSES = ACTIVE_COVERAGE_STATUSES
 IMPLEMENTED_STATUSES = {"implemented", "verified", "released"}
 INACTIVE_GOVERNING_STATUSES = {"draft", "rejected", "superseded"}
@@ -74,6 +77,49 @@ EXPERIMENT_MEASURES = (
 
 class GenerationError(RuntimeError):
     """A bounded configuration or generation failure."""
+
+
+class ContentBudget:
+    """Apply deterministic whole-document limits to projected Markdown."""
+
+    def __init__(self) -> None:
+        self.projected_bytes = 0
+        self.included_documents = 0
+        self.omitted_documents = 0
+
+    def project(self, value: str) -> dict[str, Any]:
+        markdown = value.replace("\r\n", "\n").replace("\r", "\n")
+        payload = markdown.encode("utf-8")
+        digest = hashlib.sha256(payload).hexdigest()
+        base: dict[str, Any] = {
+            "format": "markdown",
+            "bytes": len(payload),
+            "sha256": digest,
+        }
+        if len(payload) > MAX_CONTENT_DOCUMENT_BYTES:
+            self.omitted_documents += 1
+            return {**base, "state": "omitted", "reason": "document_too_large"}
+        if self.projected_bytes + len(payload) > MAX_CONTENT_TOTAL_BYTES:
+            self.omitted_documents += 1
+            return {**base, "state": "omitted", "reason": "total_content_budget_exceeded"}
+        self.projected_bytes += len(payload)
+        self.included_documents += 1
+        return {**base, "state": "included", "markdown": markdown}
+
+    def omit(
+        self,
+        reason: str,
+        *,
+        observed_bytes: int | None = None,
+    ) -> dict[str, Any]:
+        self.omitted_documents += 1
+        return {
+            "format": "markdown",
+            "state": "omitted",
+            "reason": reason,
+            "bytes": observed_bytes,
+            "sha256": None,
+        }
 
 
 def _is_within(path: Path, parent: Path) -> bool:
@@ -198,7 +244,12 @@ def _string_list(value: Any) -> list[str]:
     return [item.strip() for item in value if isinstance(item, str) and item.strip()]
 
 
-def normalize_artifacts(report: ValidationReport, repository_root: Path) -> list[dict[str, Any]]:
+def normalize_artifacts(
+    report: ValidationReport,
+    repository_root: Path,
+    content_budget: ContentBudget | None = None,
+) -> list[dict[str, Any]]:
+    budget = content_budget or ContentBudget()
     catalog = {
         artifact.artifact_id: artifact
         for artifact in report.artifacts
@@ -212,7 +263,7 @@ def normalize_artifacts(report: ValidationReport, repository_root: Path) -> list
             active_decisions_by_architecture[architecture_id].add(decision.artifact_id)
 
     normalized: list[dict[str, Any]] = []
-    for artifact in report.artifacts:
+    for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
         item: dict[str, Any] = {
             "id": artifact.artifact_id,
             "type": artifact.artifact_type,
@@ -223,6 +274,7 @@ def normalize_artifacts(report: ValidationReport, repository_root: Path) -> list
             "updated": _string(artifact.metadata.get("updated")) or None,
             "path": repository_relative(artifact.path, repository_root),
             "authority": "formal",
+            "content": budget.project(artifact.body),
         }
         if artifact.artifact_type == "requirement":
             item["statement"] = _string(artifact.metadata.get("statement")) or None
@@ -251,6 +303,14 @@ def normalize_artifacts(report: ValidationReport, repository_root: Path) -> list
                 "assessed_by": assessment["assessed_by"],
                 "deciding_adrs": deciding_adrs,
             }
+        if artifact.artifact_type == "work_order":
+            assurance = artifact.metadata.get("assurance")
+            if isinstance(assurance, dict):
+                item["assurance_classification"] = {
+                    "commit_bound_verification": _string(assurance.get("commit_bound_verification")) or None,
+                    "rationale": _string(assurance.get("rationale")) or None,
+                    "decided_by": _string(assurance.get("decided_by")) or None,
+                }
         if artifact.artifact_type == "verification_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
@@ -380,6 +440,111 @@ def discover_evidence(repository_root: Path) -> dict[str, list[str]]:
         if match is not None:
             evidence[match.group(1)].append(repository_relative(path, repository_root))
     return {key: sorted(set(paths)) for key, paths in sorted(evidence.items())}
+
+
+def _evidence_path_has_symlink(repository_root: Path, relative: Path) -> bool:
+    current = repository_root
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink() or bool(
+            getattr(current, "is_junction", lambda: False)()
+        ):
+            return True
+    return False
+
+
+def _project_evidence_document(
+    repository_root: Path,
+    path_value: str,
+    associations: Sequence[str],
+    budget: ContentBudget,
+) -> dict[str, Any]:
+    normalized_value = path_value.replace("\\", "/")
+    relative = Path(normalized_value)
+    base = {
+        "path": normalized_value,
+        "associations": sorted(set(associations)),
+    }
+    if (
+        relative.is_absolute()
+        or not relative.parts
+        or ".." in relative.parts
+        or relative.parts[:2] != ("docs", "engineering")
+        or "evidence" not in relative.parts
+    ):
+        return {**base, **budget.omit("unsafe_evidence_path")}
+    if relative.suffix.lower() not in ALLOWED_EVIDENCE_SUFFIXES:
+        return {**base, **budget.omit("unsupported_evidence_format")}
+    source = repository_root.joinpath(*relative.parts)
+    try:
+        if _evidence_path_has_symlink(repository_root, relative):
+            return {**base, **budget.omit("symlink_not_allowed")}
+        resolved = source.resolve(strict=True)
+        engineering_root = (repository_root / "docs" / "engineering").resolve(strict=True)
+        resolved_relative = resolved.relative_to(engineering_root)
+        if "evidence" not in resolved_relative.parts or not source.is_file():
+            return {**base, **budget.omit("unsafe_evidence_path")}
+        before = source.stat()
+        observed_bytes = before.st_size
+        if observed_bytes > MAX_CONTENT_DOCUMENT_BYTES:
+            return {
+                **base,
+                **budget.omit("document_too_large", observed_bytes=observed_bytes),
+            }
+        raw = source.read_bytes()
+        after = source.stat()
+        resolved_after = source.resolve(strict=True)
+        if (
+            resolved_after != resolved
+            or _evidence_path_has_symlink(repository_root, relative)
+            or (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
+            != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns)
+            or len(raw) != after.st_size
+        ):
+            return {
+                **base,
+                **budget.omit(
+                    "evidence_changed_during_generation",
+                    observed_bytes=len(raw),
+                ),
+            }
+        markdown = raw.decode("utf-8-sig")
+    except FileNotFoundError:
+        return {**base, **budget.omit("evidence_unavailable")}
+    except UnicodeDecodeError:
+        return {**base, **budget.omit("evidence_not_utf8")}
+    except (OSError, RuntimeError, ValueError):
+        return {**base, **budget.omit("evidence_unreadable")}
+    projected = budget.project(markdown)
+    if projected["state"] == "included":
+        projected["raw_path"] = f"content/{projected['sha256']}.txt"
+    return {**base, **projected}
+
+
+def build_evidence_documents(
+    report: ValidationReport,
+    repository_root: Path,
+    evidence_by_work_order: dict[str, list[str]],
+    budget: ContentBudget,
+) -> list[dict[str, Any]]:
+    associations_by_path: dict[str, set[str]] = defaultdict(set)
+    for work_order, paths in sorted(evidence_by_work_order.items()):
+        for path in paths:
+            associations_by_path[path].add(work_order)
+    for artifact in report.artifacts:
+        if artifact.artifact_type != "verification_record":
+            continue
+        for path in _string_list(artifact.metadata.get("evidence_paths")):
+            associations_by_path[path.replace("\\", "/")].add(artifact.artifact_id)
+    return [
+        _project_evidence_document(
+            repository_root,
+            path,
+            sorted(associations),
+            budget,
+        )
+        for path, associations in sorted(associations_by_path.items())
+    ]
 
 
 def _valid_relations(relations: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1247,7 +1412,8 @@ def build_snapshot(
     artifact_root: Path,
     report: ValidationReport,
 ) -> dict[str, Any]:
-    normalized_artifacts = normalize_artifacts(report, repository_root)
+    content_budget = ContentBudget()
+    normalized_artifacts = normalize_artifacts(report, repository_root, content_budget)
     relations = sorted(
         [
             *build_declared_relations(report.artifacts),
@@ -1274,6 +1440,12 @@ def build_snapshot(
         commit_availability,
     )
     evidence_by_work_order = discover_evidence(repository_root)
+    evidence_documents = build_evidence_documents(
+        report,
+        repository_root,
+        evidence_by_work_order,
+        content_budget,
+    )
     evidence = [
         {"work_order": work_order, "paths": paths}
         for work_order, paths in sorted(evidence_by_work_order.items())
@@ -1312,6 +1484,7 @@ def build_snapshot(
         "revision_policy": revision_policy,
         "experiments": import_experiments(repository_root),
         "evidence": evidence,
+        "evidence_documents": evidence_documents,
     }
 
 
@@ -1380,11 +1553,32 @@ def write_output_transactionally(output_root: Path, files: dict[str, str]) -> No
     backup: Path | None = None
     promoted = False
     try:
+        normalized_names: dict[str, str] = {}
         for name, content in sorted(files.items()):
-            destination = temporary / name
+            relative = PurePosixPath(name)
+            if (
+                not relative.parts
+                or relative.is_absolute()
+                or ".." in relative.parts
+                or any(not part or ":" in part for part in relative.parts)
+            ):
+                raise GenerationError(f"unsafe generated output path: {name}")
+            collision_key = relative.as_posix().casefold()
+            previous = normalized_names.get(collision_key)
+            if previous is not None and previous != relative.as_posix():
+                raise GenerationError(f"generated output path collision: {name}")
+            normalized_names[collision_key] = relative.as_posix()
+            destination = temporary.joinpath(*relative.parts)
+            if not _is_within(destination.resolve(), temporary.resolve()):
+                raise GenerationError(f"generated output path escapes transaction: {name}")
+            destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_text(content, encoding="utf-8", newline="\n")
-        expected = set(files)
-        actual = {path.name for path in temporary.iterdir() if path.is_file()}
+        expected = {PurePosixPath(name).as_posix() for name in files}
+        actual = {
+            path.relative_to(temporary).as_posix()
+            for path in temporary.rglob("*")
+            if path.is_file()
+        }
         if actual != expected:
             raise GenerationError("temporary output is incomplete")
 
@@ -1444,6 +1638,18 @@ def main(argv: Iterable[str] | None = None) -> int:
         snapshot = build_snapshot(repository_root, artifact_root, report)
         snapshot_text = serialize_json(snapshot)
         dashboard_text = render_dashboard(snapshot)
+        content_records = [
+            artifact["content"]
+            for artifact in snapshot["artifacts"]
+            if isinstance(artifact.get("content"), dict)
+        ] + list(snapshot.get("evidence_documents", []))
+        raw_content = {
+            document["raw_path"]: document["markdown"]
+            for document in snapshot.get("evidence_documents", [])
+            if document.get("state") == "included"
+            and isinstance(document.get("raw_path"), str)
+            and isinstance(document.get("markdown"), str)
+        }
         outcome = "generated-valid" if report.valid else "generated-invalid"
         summary = {
             "schema": "harness-dashboard-generation-v1",
@@ -1454,6 +1660,13 @@ def main(argv: Iterable[str] | None = None) -> int:
             "relation_count": len(snapshot["relations"]),
             "validator_error_count": len(report.errors),
             "warning_count": sum(1 for item in snapshot["findings"] if item["severity"] == "warning"),
+            "content_document_count": sum(1 for item in content_records if item.get("state") == "included"),
+            "content_omitted_count": sum(1 for item in content_records if item.get("state") == "omitted"),
+            "content_projected_bytes": sum(
+                int(item.get("bytes") or 0)
+                for item in content_records
+                if item.get("state") == "included"
+            ),
             "output": _display_output(output_root, repository_root),
             "snapshot_sha256": _sha256(snapshot_text),
             "dashboard_sha256": _sha256(dashboard_text),
@@ -1465,6 +1678,7 @@ def main(argv: Iterable[str] | None = None) -> int:
                 "dashboard-data.json": snapshot_text,
                 "generation-summary.json": serialize_json(summary),
                 "index.html": dashboard_text,
+                **raw_content,
             },
         )
         label = "PASS" if report.valid else "INVALID"

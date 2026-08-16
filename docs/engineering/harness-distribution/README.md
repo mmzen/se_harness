@@ -48,6 +48,18 @@ Concise Explorer Overview and bounded graph-context extension:
 
 No new architecture or ADR is selected for `REQ-DST-035..039`: the proposed presentation refinement remains within `ARCH-DST-008` and `ADR-DST-008` without changing the canonical model, provenance identity, dependency direction, trust boundary, runtime dependency, or deployment architecture.
 
+Structured and reversible Explorer Lineage extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-040..041` -> `SPEC-DST-011`, `VER-DST-011` -> `WO-DST-012`.
+
+No architecture or ADR relation is selected for `REQ-DST-040..041`: the Lineage board and in-memory navigation history are routine browser-presentation refinements inside the responsibilities and boundaries of `ARCH-DST-008` and `ADR-DST-008`; those architecture artifacts do not declare that they address the new requirements.
+
+Safe content-rich Explorer detail extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-042..047` -> `SPEC-DST-012`, `ARCH-DST-009`, `ADR-DST-009`, `VER-DST-012` -> `WO-DST-013`.
+
+`ARCH-DST-009` addresses the architecturally significant untrusted-content and evidence-publication drivers in `REQ-DST-043` and `REQ-DST-046`, conforms to `SPEC-DST-012`, and records `adr_required`. `ADR-DST-009` accepts the additive, bounded, locally rendered and sanitized content pipeline; the remaining requirements are presentation behavior governed by the same specification without fabricated architecture coverage.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.
@@ -75,3 +87,7 @@ On 2026-08-16, `WO-OCA-002` explicitly migrated `OPS-DST-001.assures` from the l
 On 2026-08-16, the repository owner authorized `WO-DST-010` to reassess `ARCH-DST-007` and `ARCH-DST-008` against their newer declared definitions, then explicitly authorized the resulting ADR reaffirmation. The reassessment confirmed that both architectures and accepted ADR outcomes remain applicable, corrected one source-copy phrase and one obsolete command list, and removed the resulting `W-HEX-003` observations without changing product behavior, governing definitions, inspection rules, or external lifecycle state. Retained evidence records the bounded review.
 
 On 2026-08-16, after challenging the initial arbitrary-depth proposal, the repository owner requested the `WO-DST-011` packet for a shorter Explorer Overview and bounded `0 / 1 / 2` context around graph-filter matches. During definition, the owner accepted additional requirements for legible presentation-only observed-revision prefixes, generic sidebar containment, and a direct artifact-filter clear control while preserving full provenance identity and other graph choices, then explicitly authorized the complete bounded implementation. Before candidate commit, owner review identified duplicate state/type/assurance colors caused by the five-slot hash palette and required stable distinct colors within each analysis mode. `REQ-DST-035..039`, `SPEC-DST-010`, and `VER-DST-010` are approved; `WO-DST-011` is implemented with retained evidence. Commit, VREC, pull request, release, package publication, public-demonstrator update, and deployment remain separately controlled.
+
+After that candidate was verified and merged on 2026-08-16, the repository owner requested a separate `WO-DST-012` packet for the accepted focused-Lineage evolution, then explicitly authorized its bounded implementation with `go for implementation`. `REQ-DST-040..041`, `SPEC-DST-011`, `VER-DST-011`, and `WO-DST-012` define a deterministic conceptual-stage/exact-type board, complete direct context, bounded optional second-level context, preserved relation authority, and non-hierarchical reversible navigation. The implementation and retained evidence are complete; candidate commit, VREC, pull request, release, publication, and deployment remain separately controlled.
+
+During review of that uncommitted candidate, the repository owner requested a richer selected-artifact detail panel and accepted the challenged separation between presentation, canonical content projection, trust, and publication. On 2026-08-16 the owner authorized creation of the `WO-DST-013` packet, then explicitly accepted its definitions and authorized bounded implementation with `go implementation`. `REQ-DST-042..047`, `SPEC-DST-012`, `ADR-DST-009`, and `VER-DST-012` remain approved; `ARCH-DST-009` and `WO-DST-013` are implemented with retained evidence. Candidate commit, VREC, pull request, release, package publication, public-demonstrator publication, and deployment remain separately controlled.
