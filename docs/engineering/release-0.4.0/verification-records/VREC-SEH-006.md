@@ -2,7 +2,7 @@
 id = "VREC-SEH-006"
 type = "verification_record"
 title = "Verification candidate for 10 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
@@ -20,7 +20,7 @@ conforms_to = ["VER-DST-001", "VER-DST-009", "VER-IAR-006", "VER-IAR-007", "VER-
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-DOC-012`, `WO-IAR-006`, `WO-IAR-007`, `WO-IAR-008`, `WO-IAR-009`, `WO-IAR-010`, `WO-OCA-001`, `WO-OCA-002`, `WO-RLS-006`, `WO-WAC-001` to candidate commit `2acc63af8933ee1dfa5ef78b67e2dbe6fb9a4e61`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+On 2026-08-16, after pull request #60 run `31942798447` passed the released-governor, candidate-source, and candidate-package planes for the exact candidate, the accountable owner explicitly instructed `i approve`. That human assurance decision transitions this record from `ready` to `verified`; automation did not grant the authority. The captured candidate commit, object format, clean worktree state, capture timestamp, artifact snapshot, evidence paths, work-order coverage, and verification-contract coverage remain unchanged.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 
@@ -75,6 +75,6 @@ A fresh Python 3.11.9 environment installed the wheel reconstructed from the nor
 
 - One preliminary fresh-install invocation was launched from the source checkout, so Python correctly placed the checkout ahead of site-packages. That run was discarded as package-origin evidence and repeated successfully from an external working directory.
 - Setuptools emitted the existing non-blocking deprecation warning for the TOML-table form of `project.license`, with a stated 2027-02-18 deadline. This does not affect current metadata, archive safety, or reproducibility and requires a later governed maintenance change.
-- Hosted pull-request CI has not run because this ready record and branch have not been pushed. The released-governor, candidate-source, and candidate-package jobs must all pass before accountable verification or merge.
+- Hosted pull-request CI run `31942798447` passed the released-governor, candidate-source, and candidate-package jobs after the PR body was corrected to declare the standalone `Harness-Work-Order: WO-RLS-006` field. This metadata-only repair did not change the candidate commit or the ready record committed at `eca66ea7170f5ae1084823046cd7392d3d728d3e`.
 
-This record is `ready`, not `verified`. An accountable assurance owner must review the exact candidate, retained evidence, hashes, independent governor manifests, warnings, and later hosted CI. The capture and qualification process did not commit this record, push, open or merge a pull request, approve verification, prepare or approve a release record, create a tag, publish to GitHub or PyPI, deploy, promote the governor, force-push, or rewrite history.
+This record is `verified` by the accountable human decision above. That decision does not prepare or authorize a release record, merge the pull request, create a tag, publish to GitHub or PyPI, deploy, promote the governor, force-push, or rewrite history.
