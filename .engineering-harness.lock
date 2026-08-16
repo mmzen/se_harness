@@ -70,7 +70,7 @@
     },
     "docs/engineering/templates/OPERATING_CONTRACT.template.md": {
       "mode": "managed",
-      "sha256": "68cdd0b736374729614022ccb7391999d30a5c190f20d22b616960136bfbfb3a"
+      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
     },
     "docs/engineering/templates/README.md": {
       "mode": "managed",

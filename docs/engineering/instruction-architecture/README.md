@@ -195,5 +195,7 @@ The harness repository has an unavoidable one-release bootstrap lag: the last re
 - Verification contract: `VER-IAR-001`
 - Implemented work order: `WO-IAR-001`
 - Draft release contract: `REL-IAR-001`
-- Draft operating contract: `OPS-IAR-001`
+- Approved operating contract: `OPS-IAR-001`
 - Acceptance scenarios: `acceptance/instruction-architecture.feature`
+
+`OPS-IAR-001` was separately reviewed and approved through `WO-OCA-001` on 2026-08-16. It accepts continuing operation of the implemented instruction and enforcement requirements, including released-governor separation, managed integrity, preflight, layered validation, inspection, and bounded guidance. `REL-IAR-001` remains a draft release proposal; operating approval does not imply release authority.

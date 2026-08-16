@@ -2,13 +2,13 @@
 id = "OPS-PYP-001"
 type = "operating_contract"
 title = "Operate the PyPI publication channel"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
-assures = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005", "REL-PYP-001"]
+assures = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
 +++
 
 # Operating Contract: Operate the PyPI publication channel
