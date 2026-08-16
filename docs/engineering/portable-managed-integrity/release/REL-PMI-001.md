@@ -2,10 +2,10 @@
 id = "REL-PMI-001"
 type = "release_contract"
 title = "Release portable managed-file integrity"
-status = "draft"
+status = "rejected"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
 gates = ["WO-PMI-001"]
@@ -44,3 +44,7 @@ Do not publish if real customization is missed, newline-only content fails after
 ## Post-release observation window
 
 Observe the first installations and upgrades on Windows and a LF-native platform through one subsequent release cycle. Review customized classifications and legacy migration advisories before closing the change.
+
+## Disposition
+
+This per-feature proposal was never selected as release authority. `WO-PMI-001` was released in `0.2.0` under aggregate contract `REL-DST-001` and released record `RLS-SEH-001` at tag `v0.2.0`. The rejected status disposes of this unused proposal; it does not reject the released implementation.

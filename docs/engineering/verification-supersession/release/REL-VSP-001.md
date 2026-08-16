@@ -2,10 +2,10 @@
 id = "REL-VSP-001"
 type = "release_contract"
 title = "Release verification-supersession support"
-status = "draft"
+status = "rejected"
 owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
 gates = ["WO-VSP-001"]
@@ -44,3 +44,7 @@ Do not publish if existing records regress, invalid supersession passes, release
 ## Post-release observation window
 
 Observe the first real governance supersession, validation, dashboard rendering, upgrade, and subsequent release preparation before broad lifecycle extension.
+
+## Disposition
+
+This per-feature proposal was never selected as release authority. `WO-VSP-001` was released in `0.2.0` under aggregate contract `REL-DST-001` and released record `RLS-SEH-001` at tag `v0.2.0`. The rejected status disposes of this unused proposal; it does not reject the released implementation.

@@ -2,10 +2,10 @@
 id = "REL-PYP-001"
 type = "release_contract"
 title = "Activate governed PyPI publication automation"
-status = "draft"
+status = "rejected"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-16"
 
 [relations]
 gates = ["WO-PYP-001"]
@@ -44,3 +44,7 @@ Disable the workflow and PyPI trusted publisher if identity, permissions, action
 ## Post-release observation window
 
 Review the first authorized publication end to end and inspect configuration before each subsequent release until at least two successful versions establish stable operation.
+
+## Disposition
+
+This capability-activation proposal was never selected as release authority. `WO-PYP-001` was released in `0.2.1` under aggregate contract `REL-SEH-002` and released record `RLS-SEH-002` at tag `v0.2.1`. The rejected status disposes of this unused proposal; it does not reject the released implementation or the separately governed publication channel.
