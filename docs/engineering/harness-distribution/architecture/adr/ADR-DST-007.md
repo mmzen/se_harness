@@ -5,7 +5,7 @@ title = "Concise root with audience-layered reference notes"
 status = "approved"
 owners = ["technical-owner", "documentation-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-08-16"
 
 [relations]
 decides = ["ARCH-DST-007"]
@@ -42,7 +42,7 @@ The repository owner agreed that the root should contain only important human-fa
 
 ## Decision
 
-Adopt option 4. Limit the root README to 200 physical lines and at most nine level-two sections. Keep installation, start, product value, compact lineage, responsibility, Explorer value, known limitations, and deeper routes. Limit routine root harness subcommand examples to `init`, `adopt`, `doctor`, `validate`, and `dashboard`.
+Adopt option 4. Limit the root README to 200 physical lines and at most nine level-two sections. Keep installation, start, product value, compact lineage, responsibility, Explorer value, known limitations, and deeper routes. Limit routine root harness subcommand examples to `init`, `adopt`, `doctor`, `validate`, `inspect`, and `dashboard`.
 
 Move platform and upgrade detail, full CLI reference, and distribution development/self-hosting guidance into three expertise-labeled notes. Reuse existing model, phasing, branching, and practical-example notes for the responsibilities they already own. Route normative questions to `ENGINEERING_HARNESS.md` and managed policy.
 
@@ -53,6 +53,12 @@ The public page becomes substantially faster to scan and better aligned with rep
 The 200-line limit creates maintenance pressure toward concise phrasing and explicit relocation. Some facts will be intentionally retired because they duplicate policy or existing notes; evidence must record those decisions. The command reference requires synchronization tests when CLI subcommands change.
 
 No runtime, governance, installer, release, or self-hosting behavior changes. Existing formal packet history remains immutable.
+
+## Reassessment: 2026-08-16
+
+The technical and documentation owners reaffirmed this decision after `REQ-DST-025`, `SPEC-DST-007`, and `ARCH-DST-007` were updated to include the read-only, non-gating `inspect` command. `inspect` remains part of the command-reference and public-orientation responsibilities already assigned by option 4; it does not create another documentation layer or authority source.
+
+The selected option, information architecture, consequences, and authority boundary remain unchanged. The command allowlist above was corrected from five to six commands so the accepted decision matches the current governing requirement and specification.
 
 ## Validation
 

@@ -5,7 +5,7 @@ title = "Layered public, operator, and governance documentation"
 status = "approved"
 owners = ["technical-owner", "documentation-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-08-16"
 
 [relations]
 addresses = ["REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
@@ -96,6 +96,12 @@ Prioritize scanability, truthful progressive disclosure, accessibility without d
 ## Conformance checks
 
 Apply `VER-DST-007`. Measure root line/section budgets, classify fenced commands, inspect graph size and fallback, validate new-note inventory and expertise labels, compare command reference against the CLI parser, resolve local links, run full documentation and repository regression checks, and audit protected surfaces.
+
+## Dependency reassessment: 2026-08-16
+
+The technical and documentation owners reassessed this architecture against the 2026-08-15 revisions of `REQ-DST-025` and `SPEC-DST-007`. Those revisions add the read-only, non-gating `inspect` command to the human operational surface and clarify its distinction from `validate` and `dashboard`.
+
+The change remains inside the existing notes/reference responsibility and the existing tests-to-public-documentation conformance boundary. It does not alter a component, dependency direction, source of authority, trust boundary, required or prohibited pattern, or quality attribute. `ARCH-DST-007` and the decision recorded by `ADR-DST-007` therefore remain applicable without structural change.
 
 ## Related ADRs
 

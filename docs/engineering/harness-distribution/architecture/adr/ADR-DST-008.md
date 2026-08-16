@@ -5,7 +5,7 @@ title = "Use the canonical snapshot as the WebUI boundary"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-13"
-updated = "2026-08-13"
+updated = "2026-08-16"
 
 [relations]
 decides = ["ARCH-DST-008"]
@@ -62,6 +62,12 @@ The exact package version in the URL reduces accidental version drift, but the r
 - browser or organizational network policy may block the script.
 
 The accountable owner accepts these risks for the current candidate to preserve the reviewed 3D experience. Controls are the exact versioned URL, a CSP restricted to that origin, no repository-data transmission, no other remote assets, a 15-second timeout, a visible failure state, and complete embedded non-3D evidence views. Reconsider local vendoring, an independently verified SRI digest, or a dependency-free renderer before a security-sensitive or offline deployment, when the dependency version changes, if unpkg/package provenance changes, or if organizational policy prohibits runtime third-party code.
+
+## Reassessment: 2026-08-16
+
+The technical and security owners reaffirmed this decision after `SPEC-DST-008` and `ARCH-DST-008` were updated to remove the redundant `templates/webui/` handoff and identify the canonical standard-distribution template as the sole reusable Explorer source. That consolidation is compatible with selected option 4 and strengthens its single-model, consistent-distribution consequence.
+
+The canonical snapshot boundary, browser adapter, safe embedding, UI fidelity, exact CDN exception, fallback, accepted residual risks, and reconsideration triggers remain unchanged. No alternative, outcome, or accepted risk was modified.
 
 ## Validation
 
