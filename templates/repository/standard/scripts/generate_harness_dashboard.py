@@ -38,7 +38,7 @@ from validate_engineering_artifacts import (
 
 SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v6"
+FINDING_RULES_VERSION = "harness-findings-v7"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -49,6 +49,19 @@ IMPLEMENTED_STATUSES = {"implemented", "verified", "released"}
 INACTIVE_GOVERNING_STATUSES = {"draft", "rejected", "superseded"}
 SEVERITY_ORDER = {"error": 0, "warning": 1, "info": 2}
 WORK_ORDER_RELATIONS = ("implements", "specifications", "architecture", "verification")
+TEMPORAL_REASSESSMENT_RELATIONS = {
+    "capability": frozenset({"derives_from"}),
+    "requirement": frozenset({"derives_from"}),
+    "specification": frozenset({"specifies"}),
+    "architecture": frozenset({"addresses", "conforms_to", "constrains"}),
+    "adr": frozenset({"decides"}),
+    "verification": frozenset({"verifies"}),
+    "release_contract": frozenset({"gates"}),
+    "operating_contract": frozenset({"assures"}),
+    "work_order": frozenset(WORK_ORDER_RELATIONS),
+}
+TEMPORAL_REASSESSMENT_INACTIVE_STATUSES = frozenset({"rejected", "superseded"})
+TEMPORAL_REASSESSMENT_WORK_ORDER_STATUSES = frozenset({"draft", "approved", "in_progress"})
 EXPERIMENT_MEASURES = (
     "clarifications",
     "retries",
@@ -507,6 +520,24 @@ def _finding(
     }
 
 
+def _supports_temporal_reassessment(
+    source: dict[str, Any],
+    relation: dict[str, Any],
+) -> bool:
+    """Return whether a declared edge has governed reassessment meaning."""
+
+    if relation.get("authority") != "declared":
+        return False
+    supported = TEMPORAL_REASSESSMENT_RELATIONS.get(source["type"], frozenset())
+    if relation["relation"] not in supported:
+        return False
+    if source["status"] in TEMPORAL_REASSESSMENT_INACTIVE_STATUSES:
+        return False
+    if source["type"] == "work_order":
+        return source["status"] in TEMPORAL_REASSESSMENT_WORK_ORDER_STATUSES
+    return True
+
+
 def build_findings(
     normalized_artifacts: Sequence[dict[str, Any]],
     relations: Sequence[dict[str, Any]],
@@ -569,7 +600,7 @@ def build_findings(
                 )
             )
 
-    stale_pairs: set[tuple[str, str]] = set()
+    stale_relations: set[tuple[str, str, str]] = set()
     for relation in relations:
         if not relation["target_exists"]:
             continue
@@ -577,16 +608,24 @@ def build_findings(
         target = artifacts.get(relation["target"])
         if source is None or target is None or not source["updated"] or not target["updated"]:
             continue
-        if source["updated"] < target["updated"] and (source["id"], target["id"]) not in stale_pairs:
-            stale_pairs.add((source["id"], target["id"]))
+        relation_key = (source["id"], relation["relation"], target["id"])
+        if (
+            _supports_temporal_reassessment(source, relation)
+            and source["updated"] < target["updated"]
+            and relation_key not in stale_relations
+        ):
+            stale_relations.add(relation_key)
             findings.append(
                 _finding(
                     "W-HEX-003",
                     "warning",
-                    f"{source['id']} predates newer declared dependency or parent {target['id']} and may require reassessment.",
+                    f"{source['id']} predates newer declared {relation['relation']} target {target['id']} and may require reassessment.",
                     [source["id"], target["id"]],
                     [source["path"], target["path"]],
-                    [f"{source['updated']} < {target['updated']}"],
+                    [
+                        f"relation={relation['relation']}",
+                        f"{source['updated']} < {target['updated']}",
+                    ],
                 )
             )
 

@@ -22,6 +22,57 @@ sys.modules[GENERATOR_SPEC.name] = GENERATOR
 GENERATOR_SPEC.loader.exec_module(GENERATOR)
 
 
+def temporal_findings(
+    *,
+    source_type: str,
+    source_status: str,
+    relation_name: str,
+    authority: str = "declared",
+    source_updated: str = "2026-08-01",
+    target_updated: str = "2026-08-02",
+    target_exists: bool = True,
+    relation_count: int = 1,
+) -> list[dict]:
+    artifacts = [
+        {
+            "id": "SOURCE-001",
+            "type": source_type,
+            "status": source_status,
+            "updated": source_updated,
+            "path": "docs/engineering/source.md",
+        },
+        {
+            "id": "TARGET-001",
+            "type": "requirement",
+            "status": "approved",
+            "updated": target_updated,
+            "path": "docs/engineering/target.md",
+        },
+    ]
+    relation = {
+        "source": "SOURCE-001",
+        "relation": relation_name,
+        "target": "TARGET-001",
+        "authority": authority,
+        "target_exists": target_exists,
+    }
+    relations = [
+        {
+            **relation,
+        }
+        for _ in range(relation_count)
+    ]
+    findings = GENERATOR.build_findings(
+        artifacts,
+        relations,
+        [],
+        {},
+        [],
+        {"required_for_release": False},
+    )
+    return [item for item in findings if item["rule"] == "W-HEX-003"]
+
+
 class DashboardWebUIContractTests(unittest.TestCase):
     def setUp(self) -> None:
         self.template = ROOT / "scripts/harness_explorer/index.template.html"
@@ -87,6 +138,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
         self.assertTrue(report.valid)
         self.assertEqual(GENERATOR.SNAPSHOT_SCHEMA, snapshot["schema"])
+        self.assertEqual("harness-findings-v7", snapshot["finding_rules_version"])
         self.assertEqual(
             {
                 "schema",
@@ -130,6 +182,123 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn("\\u0026\\u2028\\u2029__HARNESS_SNAPSHOT_JSON__", rendered)
         self.assertEqual(2, rendered.count("<script"))
         self.assertNotIn("__HARNESS_SNAPSHOT_JSON__</script>", rendered)
+
+    def test_temporal_reassessment_supports_only_governed_declared_dependencies(self) -> None:
+        supported = {
+            "capability": ("derives_from",),
+            "requirement": ("derives_from",),
+            "specification": ("specifies",),
+            "architecture": ("addresses", "conforms_to", "constrains"),
+            "adr": ("decides",),
+            "verification": ("verifies",),
+            "release_contract": ("gates",),
+            "operating_contract": ("assures",),
+        }
+        for source_type, relation_names in supported.items():
+            for relation_name in relation_names:
+                with self.subTest(source_type=source_type, relation=relation_name):
+                    findings = temporal_findings(
+                        source_type=source_type,
+                        source_status="implemented",
+                        relation_name=relation_name,
+                    )
+                    self.assertEqual(1, len(findings))
+
+        for relation_name in ("implements", "specifications", "architecture", "verification"):
+            with self.subTest(work_order_relation=relation_name):
+                self.assertEqual(
+                    1,
+                    len(
+                        temporal_findings(
+                            source_type="work_order",
+                            source_status="approved",
+                            relation_name=relation_name,
+                        )
+                    ),
+                )
+
+        for status in ("draft", "approved", "in_progress"):
+            with self.subTest(work_order_status=status):
+                self.assertEqual(
+                    1,
+                    len(
+                        temporal_findings(
+                            source_type="work_order",
+                            source_status=status,
+                            relation_name="verification",
+                        )
+                    ),
+                )
+
+    def test_temporal_reassessment_excludes_history_and_unsupported_edges(self) -> None:
+        cases = [
+            ("work_order", "implemented", "verification", "declared", "2026-08-01", "2026-08-02"),
+            ("work_order", "verified", "implements", "declared", "2026-08-01", "2026-08-02"),
+            ("work_order", "released", "implements", "declared", "2026-08-01", "2026-08-02"),
+            ("work_order", "rejected", "implements", "declared", "2026-08-01", "2026-08-02"),
+            ("work_order", "superseded", "implements", "declared", "2026-08-01", "2026-08-02"),
+            ("verification_record", "ready", "verification", "declared", "2026-08-01", "2026-08-02"),
+            ("verification_record", "verified", "verification", "declared", "2026-08-01", "2026-08-02"),
+            ("verification_record", "released", "verification", "declared", "2026-08-01", "2026-08-02"),
+            ("verification_record", "superseded", "superseded_by", "declared", "2026-08-01", "2026-08-02"),
+            ("release_record", "ready", "release_contract", "declared", "2026-08-01", "2026-08-02"),
+            ("release_record", "released", "verification_records", "declared", "2026-08-01", "2026-08-02"),
+            ("architecture", "rejected", "conforms_to", "declared", "2026-08-01", "2026-08-02"),
+            ("architecture", "superseded", "conforms_to", "declared", "2026-08-01", "2026-08-02"),
+            ("architecture", "implemented", "conforms_transitively_to_requirement", "derived", "2026-08-01", "2026-08-02"),
+            ("architecture", "implemented", "future_relation", "declared", "2026-08-01", "2026-08-02"),
+            ("architecture", "implemented", "conforms_to", "declared", "2026-08-02", "2026-08-02"),
+            ("architecture", "implemented", "conforms_to", "declared", "2026-08-03", "2026-08-02"),
+            ("architecture", "implemented", "conforms_to", "declared", "", "2026-08-02"),
+            ("architecture", "implemented", "conforms_to", "declared", "2026-08-01", ""),
+            ("architecture", "implemented", "conforms_to", "derived", "2026-08-01", "2026-08-02"),
+            ("future_control", "implemented", "conforms_to", "declared", "2026-08-01", "2026-08-02"),
+        ]
+        for case in cases:
+            with self.subTest(case=case):
+                self.assertEqual(
+                    [],
+                    temporal_findings(
+                        source_type=case[0],
+                        source_status=case[1],
+                        relation_name=case[2],
+                        authority=case[3],
+                        source_updated=case[4],
+                        target_updated=case[5],
+                    ),
+                )
+
+        self.assertEqual(
+            [],
+            temporal_findings(
+                source_type="architecture",
+                source_status="implemented",
+                relation_name="conforms_to",
+                target_exists=False,
+            ),
+        )
+
+    def test_temporal_reassessment_identifies_relation_and_preserves_contract(self) -> None:
+        findings = temporal_findings(
+            source_type="architecture",
+            source_status="implemented",
+            relation_name="conforms_to",
+            relation_count=2,
+        )
+        self.assertEqual(
+            [
+                {
+                    "rule": "W-HEX-003",
+                    "severity": "warning",
+                    "message": "SOURCE-001 predates newer declared conforms_to target TARGET-001 and may require reassessment.",
+                    "artifacts": ["SOURCE-001", "TARGET-001"],
+                    "paths": ["docs/engineering/source.md", "docs/engineering/target.md"],
+                    "evidence": ["2026-08-01 < 2026-08-02", "relation=conforms_to"],
+                    "authority": "derived",
+                }
+            ],
+            findings,
+        )
 
     def test_only_the_explicitly_accepted_runtime_url_is_present(self) -> None:
         content = self.template.read_text(encoding="utf-8")
