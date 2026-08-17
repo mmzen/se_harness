@@ -19,7 +19,6 @@ from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, canonical_sha256
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PACKET_ROOT = REPOSITORY_ROOT / "docs" / "engineering" / "instruction-architecture"
-WHEEL_SHA256 = "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
 OLD_ROUTER_PROCEDURE = (
     "After a separately authorized candidate commit contains implementation and evidence, "
     "`harnessctl capture-verification` may prepare a `ready` VREC in a later governance commit. "
@@ -567,6 +566,9 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertEqual(0, completed.returncode, completed.stderr)
         self.assertEqual("WO-IAR-001", completed.stdout.strip())
+        code, output, error = self.invoke("select-work-order", "--event", str(event))
+        self.assertEqual(0, code, error)
+        self.assertEqual("WO-IAR-001", output.strip())
 
         for body in (
             "No declaration",
@@ -583,22 +585,51 @@ class InstructionArchitectureTests(unittest.TestCase):
             )
             self.assertEqual(2, completed.returncode)
             self.assertIn("expected exactly one", completed.stderr)
+            code, _, error = self.invoke("select-work-order", "--event", str(event))
+            self.assertEqual(2, code)
+            self.assertIn("expected exactly one", error)
 
-    def test_workflow_separates_exact_governor_and_candidate_assurance(self) -> None:
+        event.write_text(
+            '{"pull_request":{"body":"Harness-Work-Order: WO-IAR-001"},'
+            '"pull_request":{"body":"Harness-Work-Order: WO-IAR-002"}}',
+            encoding="utf-8",
+        )
+        code, _, error = self.invoke("select-work-order", "--event", str(event))
+        self.assertEqual(2, code)
+        self.assertIn("duplicate JSON key", error)
+
+        event.write_bytes(b" " * (2 * 1024 * 1024 + 1))
+        code, _, error = self.invoke("select-work-order", "--event", str(event))
+        self.assertEqual(2, code)
+        self.assertIn("exceeds the size limit", error)
+
+    def test_consumer_workflow_uses_one_released_package_evaluator(self) -> None:
         target = self.installed_target()
         workflow = (target / ".github" / "workflows" / "engineering-harness.yml").read_text(
             encoding="utf-8"
         )
-        self.assertIn("governor:", workflow)
-        self.assertIn("candidate:", workflow)
-        self.assertIn(f"se-harness=={__version__}", workflow)
-        self.assertIn(WHEEL_SHA256, workflow)
-        self.assertIn("releases/download/v0.2.1/se_harness-0.2.1-py3-none-any.whl", workflow)
-        self.assertIn("sha256sum --check", workflow)
-        self.assertIn("governor-target", workflow)
+        self.assertRegex(workflow, r"(?m)^  validate:$")
+        self.assertEqual(1, len(re.findall(r"(?m)^  [a-z][a-z-]*:$", workflow.split("jobs:\n", 1)[1])))
+        self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', workflow)
+        self.assertIn('"se-harness==$SE_HARNESS_VERSION"', workflow)
+        self.assertIn("--only-binary=:all:", workflow)
+        self.assertIn("permissions:\n  contents: read", workflow)
         self.assertIn("-I -c", workflow)
-        self.assertIn("select_harness_work_order.py", workflow)
+        self.assertIn("'role':'consumer-evaluator'", workflow)
+        self.assertIn("select-work-order --event", workflow)
         self.assertIn("--phase review", workflow)
+        self.assertIn("-I -m se_harness preflight .", workflow)
+        self.assertIn("-I -m se_harness doctor .", workflow)
+        self.assertIn("-I -m se_harness validate .", workflow)
+        self.assertIn("-I -m se_harness dashboard .", workflow)
+        self.assertNotIn("/harnessctl", workflow)
+        self.assertNotIn("select_harness_work_order.py", workflow)
+        self.assertNotIn("validate_engineering_artifacts.py", workflow)
+        self.assertNotIn("generate_harness_dashboard.py", workflow)
+        self.assertNotIn("governor:", workflow)
+        self.assertNotIn("candidate:", workflow)
+        self.assertNotIn("GOVERNOR_", workflow)
+        self.assertNotIn("governor-target", workflow)
         self.assertNotIn("${{ github.event.pull_request.body", workflow)
         self.assertNotIn("{{HARNESS", workflow)
         self.assertNotIn("{{GOVERNOR", workflow)

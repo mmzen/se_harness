@@ -25,6 +25,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, scripts, and configured self-hosting controls |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
+| `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `reconcile-governor` | authorized self-hosting maintainer using the current released governor | plan is read-only; `--apply` performs one recoverable descriptor/configuration/workflow/lock transaction | adopt an exact published governor without executing target code or losing repository policy |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
@@ -65,9 +66,12 @@ Dashboard defaults to `target/harness-dashboard/`; its generated files are deriv
 
 ```text
 harnessctl preflight [TARGET] --work-order WO-... [--phase start|review] [--json]
+harnessctl select-work-order --event GITHUB_EVENT_PATH
 ```
 
 `start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
+
+`select-work-order` is the narrow automation-facing parser used by the managed consumer workflow. It accepts one bounded GitHub event file and emits one exact `WO-...` ID only when the pull-request body contains exactly one standalone `Harness-Work-Order:` field. It does not inspect branches, diffs, commits, or artifact eligibility and grants no work authority.
 
 ## Safe repository upgrade
 
@@ -76,7 +80,7 @@ harnessctl upgrade [TARGET]
 harnessctl upgrade [TARGET] --apply
 ```
 
-The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. The standard consumer workflow follows this same transaction and uses one exact released evaluator; no consumer CI or governor-reconciliation command is required. GitHub discovers it beside existing workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
 
 ## Domain and artifact authoring
 

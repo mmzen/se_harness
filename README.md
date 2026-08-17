@@ -69,6 +69,8 @@ harnessctl dashboard C:\path\to\repository
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners curate `docs/engineering/REPOSITORY_CONTEXT.md` and approve the first formal engineering chain.
 
+On GitHub, installation adds one dedicated managed `.github/workflows/engineering-harness.yml` beside any existing workflows. GitHub discovers and runs each workflow independently; repository owners separately decide whether the stable SE Harness check is required by branch protection or a ruleset.
+
 ## What this looks like in practice
 
 Suppose you ask your coding agent:
