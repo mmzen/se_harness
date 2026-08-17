@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -201,6 +202,91 @@ selected_candidate_commit = "{'b' * 40}"
 
 
 class PayloadPackagingTests(unittest.TestCase):
+    def write_bundle(
+        self,
+        *,
+        revision: str | None = None,
+        extra_resources: list[tuple[str, str, str, bytes]] | None = None,
+    ) -> None:
+        for directory in (self.source / "data", self.source / "content"):
+            if directory.exists():
+                shutil.rmtree(directory)
+        observed_revision = revision or self.governance
+        resources: list[tuple[str, str, str, bytes]] = []
+        for role, schema, prefix, value in (
+            (
+                "summary",
+                "harness-dashboard-summary-v2",
+                "data/summary",
+                {
+                    "schema": "harness-dashboard-summary-v2",
+                    "repository": {"name": "governance", "revision": observed_revision, "git_object_format": "sha1", "valid": True},
+                },
+            ),
+            (
+                "topology",
+                "harness-dashboard-topology-v2",
+                "data/topology",
+                {"schema": "harness-dashboard-topology-v2", "repository_revision": observed_revision, "artifacts": [], "relations": []},
+            ),
+            (
+                "readiness",
+                "harness-dashboard-readiness-v2",
+                "data/readiness",
+                {"schema": "harness-dashboard-readiness-v2", "repository_revision": observed_revision, "readiness": [], "revision_provenance": []},
+            ),
+        ):
+            resources.append((role, schema, prefix, PUBLICATION._json_bytes(value)))
+        resources.extend(extra_resources or [])
+        descriptors: list[dict] = []
+        entrypoints: dict[str, dict] = {}
+        for role, schema, prefix, content in resources:
+            digest = sha256(content)
+            suffix = "txt" if schema == "utf8-markdown-v1" else "json"
+            path = f"{prefix}/{digest}.{suffix}"
+            descriptor = {"role": role, "schema": schema, "path": path, "bytes": len(content), "sha256": digest}
+            descriptors.append(descriptor)
+            if role in {"summary", "topology", "readiness"}:
+                entrypoints[role] = dict(descriptor)
+            target = self.source.joinpath(*path.split("/"))
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
+        manifest = {
+            "schema": "harness-dashboard-bundle-v2",
+            "repository": {"name": "governance", "revision": observed_revision, "git_object_format": "sha1", "valid": True},
+            "entrypoints": entrypoints,
+            "resources": sorted(descriptors, key=lambda item: item["path"]),
+        }
+        self.manifest_bytes = PUBLICATION._json_bytes(manifest)
+        (self.source / "dashboard-manifest.json").write_bytes(self.manifest_bytes)
+        bootstrap = {
+            "schema": "harness-dashboard-bootstrap-v2",
+            "bundle_schema": "harness-dashboard-bundle-v2",
+            "repository_revision": observed_revision,
+            "manifest": {"path": "dashboard-manifest.json", "bytes": len(self.manifest_bytes), "sha256": sha256(self.manifest_bytes)},
+        }
+        bootstrap_json = json.dumps(bootstrap, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        self.dashboard_bytes = (
+            '<html><body><div class="workspace">Explorer</div>'
+            f'<script id="harness-dashboard-bootstrap" type="application/json">{bootstrap_json}</script>'
+            "</body></html>\n"
+        ).encode("utf-8")
+        (self.source / "index.html").write_bytes(self.dashboard_bytes)
+        (self.source / "generation-summary.json").write_bytes(
+            PUBLICATION._json_bytes(
+                {
+                    "schema": "harness-dashboard-generation-v2",
+                    "bundle_schema": "harness-dashboard-bundle-v2",
+                    "outcome": "generated-valid",
+                    "repository_revision": observed_revision,
+                    "validator_error_count": 0,
+                    "manifest_sha256": sha256(self.manifest_bytes),
+                    "dashboard_sha256": sha256(self.dashboard_bytes),
+                    "resource_count": len(descriptors),
+                }
+            )
+        )
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
@@ -221,33 +307,7 @@ class PayloadPackagingTests(unittest.TestCase):
         )
         self.provenance_path = self.root / "provenance.json"
         self.provenance_path.write_text(json.dumps(asdict(self.provenance)), encoding="utf-8")
-        self.snapshot_bytes = PUBLICATION._json_bytes(
-            {
-                "schema": "harness-dashboard-snapshot-v1",
-                "repository": {
-                    "name": "governance",
-                    "revision": self.governance,
-                    "valid": True,
-                },
-                "artifacts": [],
-                "relations": [],
-            }
-        )
-        self.dashboard_bytes = b'<html><body><div class="workspace">Explorer</div></body></html>\n'
-        (self.source / "dashboard-data.json").write_bytes(self.snapshot_bytes)
-        (self.source / "index.html").write_bytes(self.dashboard_bytes)
-        (self.source / "generation-summary.json").write_bytes(
-            PUBLICATION._json_bytes(
-                {
-                    "schema": "harness-dashboard-generation-v1",
-                    "outcome": "generated-valid",
-                    "repository_revision": self.governance,
-                    "validator_error_count": 0,
-                    "snapshot_sha256": sha256(self.snapshot_bytes),
-                    "dashboard_sha256": sha256(self.dashboard_bytes),
-                }
-            )
-        )
+        self.write_bundle()
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -255,14 +315,14 @@ class PayloadPackagingTests(unittest.TestCase):
     def test_packaging_adds_constant_notice_and_exact_manifest(self) -> None:
         destination = self.root / "site"
         manifest = PUBLICATION.package_dashboard(self.source, destination, self.provenance_path)
-        self.assertEqual(PUBLICATION.PUBLISHED_FIXED_FILES, {path.name for path in destination.iterdir()})
+        self.assertTrue(PUBLICATION.PUBLISHED_FIXED_FILES <= {path.name for path in destination.iterdir()})
         published = (destination / "index.html").read_bytes()
         self.assertIn(b"SE Harness development demonstration", published)
         self.assertIn(b"derived, read-only view", published)
         self.assertIn(b"Included artifact bodies and retained evidence are public", published)
-        self.assertEqual(sha256(self.snapshot_bytes), manifest["snapshot_sha256"])
+        self.assertEqual(sha256(self.manifest_bytes), manifest["bundle_manifest_sha256"])
         self.assertEqual(sha256(published), manifest["published_dashboard_sha256"])
-        self.assertEqual([], manifest["raw_evidence_files"])
+        self.assertEqual(3, len(manifest["resource_files"]))
         summary = json.loads((destination / "generation-summary.json").read_text(encoding="utf-8"))
         self.assertEqual(sha256(published), summary["dashboard_sha256"])
         self.assertTrue(summary["publication"]["derived_non_authoritative"])
@@ -275,53 +335,27 @@ class PayloadPackagingTests(unittest.TestCase):
         for name in PUBLICATION.PUBLISHED_FIXED_FILES:
             self.assertEqual((first / name).read_bytes(), (second / name).read_bytes())
 
-    def test_snapshot_declared_raw_evidence_is_hash_verified_and_published(self) -> None:
+    def test_manifest_declared_raw_evidence_is_hash_verified_and_published(self) -> None:
         raw = b"# Retained evidence\n\nExact content.\n"
         digest = sha256(raw)
         raw_path = f"content/{digest}.txt"
-        content_root = self.source / "content"
-        content_root.mkdir()
-        (content_root / f"{digest}.txt").write_bytes(raw)
-        snapshot = json.loads(self.snapshot_bytes)
-        snapshot["evidence_documents"] = [
-            {
-                "path": "docs/engineering/example/evidence/WO-TST-001-verification.md",
-                "associations": ["WO-TST-001"],
-                "format": "markdown",
-                "state": "included",
-                "bytes": len(raw),
-                "sha256": digest,
-                "markdown": raw.decode("utf-8"),
-                "raw_path": raw_path,
-            }
-        ]
-        self.snapshot_bytes = PUBLICATION._json_bytes(snapshot)
-        (self.source / "dashboard-data.json").write_bytes(self.snapshot_bytes)
-        summary = json.loads((self.source / "generation-summary.json").read_text(encoding="utf-8"))
-        summary["snapshot_sha256"] = sha256(self.snapshot_bytes)
-        (self.source / "generation-summary.json").write_bytes(PUBLICATION._json_bytes(summary))
+        self.write_bundle(extra_resources=[("evidence", "utf8-markdown-v1", "content", raw)])
 
         destination = self.root / "content-site"
         manifest = PUBLICATION.package_dashboard(self.source, destination, self.provenance_path)
         self.assertEqual(raw, (destination / raw_path).read_bytes())
-        self.assertEqual([raw_path], manifest["raw_evidence_files"])
+        self.assertIn(raw_path, manifest["resource_files"])
 
-        (content_root / f"{digest}.txt").write_bytes(b"tampered\n")
-        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from its snapshot"):
+        (self.source / raw_path).write_bytes(b"tampered\n")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from its descriptor"):
             PUBLICATION.package_dashboard(self.source, self.root / "tampered", self.provenance_path)
 
     def test_unexpected_file_and_revision_mismatch_fail_closed(self) -> None:
         (self.source / "secret.txt").write_text("not public", encoding="utf-8")
-        with self.assertRaisesRegex(PUBLICATION.PublicationError, "allowlist"):
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from its manifest"):
             PUBLICATION.package_dashboard(self.source, self.root / "unexpected", self.provenance_path)
         (self.source / "secret.txt").unlink()
-        snapshot = json.loads(self.snapshot_bytes)
-        snapshot["repository"]["revision"] = "d" * 40
-        changed = PUBLICATION._json_bytes(snapshot)
-        (self.source / "dashboard-data.json").write_bytes(changed)
-        summary = json.loads((self.source / "generation-summary.json").read_text(encoding="utf-8"))
-        summary["snapshot_sha256"] = sha256(changed)
-        (self.source / "generation-summary.json").write_bytes(PUBLICATION._json_bytes(summary))
+        self.write_bundle(revision="d" * 40)
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "selected governance snapshot"):
             PUBLICATION.package_dashboard(self.source, self.root / "mismatch", self.provenance_path)
 

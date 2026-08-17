@@ -84,6 +84,8 @@ harnessctl inspect C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
 
+Explorer is a progressive static bundle. Serve `target/harness-dashboard/` over HTTP rather than opening `index.html` directly; for example, run `python -m http.server 8000 --directory target/harness-dashboard` from the repository and open `http://localhost:8000/`.
+
 ## Upgrade an existing installation
 
 First upgrade the package in the environment selected to operate the repository:

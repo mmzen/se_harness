@@ -65,7 +65,7 @@ harnessctl inspect C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
 
-`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `inspect` summarizes current lifecycle attention, existing consistency findings, and bounded non-authoritative next-step suggestions in the terminal without acting as a gate. `dashboard` generates the read-only Harness Explorer at `target/harness-dashboard/index.html`.
+`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `inspect` summarizes current lifecycle attention, existing consistency findings, and bounded non-authoritative next-step suggestions in the terminal without acting as a gate. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners curate `docs/engineering/REPOSITORY_CONTEXT.md` and approve the first formal engineering chain.
 

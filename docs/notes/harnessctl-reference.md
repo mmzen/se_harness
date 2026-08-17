@@ -59,7 +59,7 @@ For existing lifecycle queues and a closed set of actionable derived warning rul
 
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
-Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. The bundle can include bounded artifact bodies and retained evidence bodies plus digest-named passive raw evidence files. Generation remains local, but publishing or sharing that directory exposes all included content; the command does not scan for secrets or redact repository material. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
 
 ## Work readiness
 
@@ -133,7 +133,7 @@ harnessctl capture-verification [TARGET] \
   [--owner ROLE] [--domain DOMAIN] [--output PATH]
 ```
 
-Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, captures the graph snapshot, and writes only `status = "ready"`.
+Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, and writes only `status = "ready"`.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 

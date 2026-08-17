@@ -33,7 +33,7 @@ When a new GitHub Release is published, `.github/workflows/publish-dashboard-pag
 3. finds the first main first-parent commit that integrated the released record;
 4. checks out that governance commit in a clean detached worktree;
 5. validates it with the independently released governor selected by that snapshot;
-6. generates the Explorer using the snapshot's target-local generator;
+6. generates the Explorer bundle using the snapshot's target-local generator;
 7. checks the exact public file allowlist, schema, provenance, and hashes;
 8. uploads one Pages artifact and deploys it through the `github-pages` environment.
 
@@ -64,19 +64,19 @@ gh workflow run publish-dashboard-pages.yml --ref main `
   -f governance_commit=a702d187084ba72d2c8b8b61c66b2a1be5d6f403
 ```
 
-The workflow rejects short commits, arbitrary branches, later main commits, ambiguous release records, tag mismatches, invalid graphs, unexpected upload files, and prereleases. A replay is expected to reproduce the same canonical snapshot hash.
+The workflow rejects short commits, arbitrary branches, later main commits, ambiguous release records, tag mismatches, invalid graphs, unexpected upload files, and prereleases. A replay is expected to reproduce the same bundle-manifest hash and manifest-declared resource bytes.
 
 ## What is public
 
 The Pages artifact contains only:
 
-- `index.html`, with a constant demonstration, content-disclosure, and non-authority notice;
-- `dashboard-data.json`, the unchanged canonical snapshot, including projected artifact and evidence Markdown when present;
-- `generation-summary.json`, including publication hashes and provenance; and
-- `publication-manifest.json`, the bounded release/candidate/governance attestation for the static deployment; and
-- zero or more `content/<sha256>.txt` files, each declared by the snapshot and verified against its digest before upload.
+- `index.html`, with a bounded bootstrap plus the constant demonstration, content-disclosure, and non-authority notice;
+- `dashboard-manifest.json`, which identifies every progressively loadable resource by controlled path, role, schema, byte count, and SHA-256;
+- digest-named summary, topology, readiness, per-artifact detail, and retained-evidence resources declared exactly by that manifest;
+- `generation-summary.json`, including publication hashes, size observations, and provenance; and
+- `publication-manifest.json`, the bounded release/candidate/governance attestation for the static deployment.
 
-Publishing the generated bundle makes every included artifact body, evidence body, and raw evidence file public. The workflow does not scan for secrets or redact content; maintainers must keep sensitive material out of the selected governance snapshot. It rejects undeclared files, path-shaped raw names, hash mismatches, repository source outside the bounded Explorer contract, credentials, Git metadata, and distribution packages.
+Publishing the generated bundle makes every manifest-declared artifact body, evidence body, and raw evidence file public. The workflow independently rejects missing, additional, redirected, malformed, or hash-mismatched resources; it does not glob a directory into the Pages payload. It does not scan for secrets or redact content, so maintainers must keep sensitive material out of the selected governance snapshot.
 
 The optional 3D topology retains the exact unpkg dependency, CSP, timeout, and non-3D fallback accepted by `ADR-DST-008`. GitHub Actions, GitHub Pages, and that CDN remain external availability and trust dependencies.
 

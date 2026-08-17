@@ -431,7 +431,13 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual("se-harness-inspection-v2", json.loads(inspection_json.stdout)["schema"])
         self.assertEqual(before, sorted(path.relative_to(target).as_posix() for path in target.rglob("*")))
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
-        self.assertTrue((target / "target/harness-dashboard/dashboard-data.json").is_file())
+        dashboard = target / "target/harness-dashboard"
+        self.assertTrue((dashboard / "dashboard-manifest.json").is_file())
+        self.assertTrue((dashboard / "data/summary").is_dir())
+        self.assertTrue((dashboard / "data/topology").is_dir())
+        self.assertTrue((dashboard / "data/readiness").is_dir())
+        manifest = json.loads((dashboard / "dashboard-manifest.json").read_text(encoding="utf-8"))
+        self.assertFalse(any(item["role"] == "artifact" for item in manifest["resources"]))
 
     def test_lock_contains_hashes_without_generated_adoption_report(self) -> None:
         target = self.root / "lock"
