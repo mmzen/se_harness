@@ -2,7 +2,7 @@
 id = "VREC-DST-012"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
@@ -18,8 +18,8 @@ verifies_work_order = ["WO-DST-014", "WO-DST-015"]
 conforms_to = ["VER-DST-013", "VER-DST-014"]
 +++
 
-# Verification Record Candidate
+# Verified Verification Record
 
-This ready record binds retained evidence for `WO-DST-014`, `WO-DST-015` to candidate commit `0d722d29fd3ffbdecd6672e1dc36b6ecdd84353d`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This record binds retained evidence for `WO-DST-014` and `WO-DST-015` to candidate commit `0d722d29fd3ffbdecd6672e1dc36b6ecdd84353d`. After reviewing the ready verification record and retained evidence, the accountable repository owner explicitly instructed `i validate it` on 2026-08-17. This transition records that human assurance decision; automation does not grant release authority.
 
-The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+The ready record was retained unchanged in governance commit `2059751`. Its candidate commit, Git object format, clean worktree state, capture timestamp, artifact snapshot, evidence paths, work-order coverage, and verification contracts remain unchanged by this later transition.
