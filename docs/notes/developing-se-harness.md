@@ -64,6 +64,8 @@ The harness implementation cannot use unreleased candidate behavior as its only 
 | Candidate source | reviewed checkout at the candidate commit | source tests and declared ignored derived output | source implementation evidence |
 | Candidate package | wheel built from a Git export and installed in a fresh environment | fresh-install and upgrade acceptance repositories outside the checkout | packaged behavior evidence |
 
+This is deliberately different from consumer CI. A consumer selects an already released SE Harness package, so its dedicated managed workflow uses one exact isolated released evaluator for all harness checks. It neither runs an older bootstrap that validates only itself nor calls `reconcile-governor`. The three-plane topology exists only because this repository is changing the evaluator implementation itself.
+
 `harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, candidate commit, or governor digest machine-assessable. A mismatch fails its lane. A published governor may also run `harnessctl accept-candidate` against an exact wheel; its deterministic manifest remains evidence until an accountable assurance decision.
 
 The current package and source candidate is version 0.4.0, while `.self-hosting/governor.toml` intentionally continues to select the independently published 0.3.0 wheel and digest. Publication does not automatically promote a candidate to govern itself.

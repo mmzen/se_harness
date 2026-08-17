@@ -157,6 +157,40 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
         self.assertTrue((target / "target/harness-dashboard/index.html").is_file())
 
+    def test_adopt_adds_dedicated_workflow_without_changing_existing_ci(self) -> None:
+        target = self.root / "existing-ci"
+        workflows = target / ".github" / "workflows"
+        workflows.mkdir(parents=True)
+        existing = {
+            "build.yml": b"name: Build\non: [push]\n",
+            "deploy.yml": b"name: Deploy\non: workflow_dispatch\n",
+        }
+        for name, content in existing.items():
+            (workflows / name).write_bytes(content)
+
+        code, _, error = self.invoke("adopt", str(target), "--project-name", "Existing CI")
+        self.assertEqual(0, code, error)
+        for name, content in existing.items():
+            self.assertEqual(content, (workflows / name).read_bytes())
+        managed = workflows / "engineering-harness.yml"
+        self.assertTrue(managed.is_file())
+        self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', managed.read_text(encoding="utf-8"))
+
+    def test_adopt_rejects_unknown_dedicated_workflow_without_writes(self) -> None:
+        target = self.root / "workflow-conflict"
+        workflows = target / ".github" / "workflows"
+        workflows.mkdir(parents=True)
+        managed = workflows / "engineering-harness.yml"
+        original = b"name: Repository owned\non: [push]\n"
+        managed.write_bytes(original)
+
+        code, output, error = self.invoke("adopt", str(target))
+        self.assertEqual(1, code)
+        self.assertIn("conflict", output)
+        self.assertIn("another workflow filename", error)
+        self.assertEqual(original, managed.read_bytes())
+        self.assertFalse((target / ".engineering-harness.lock").exists())
+
     def test_adopt_conflict_causes_no_partial_writes(self) -> None:
         target = self.root / "conflict"
         target.mkdir()
@@ -194,6 +228,33 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(original, managed.read_bytes())
         self.assertFalse(missing.exists())
         self.assertIn('project_name = "Stable Name"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
+
+    def test_upgrade_migrates_unmodified_consumer_workflow_and_blocks_customization(self) -> None:
+        target = self.root / "workflow-upgrade"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        workflow = target / ".github" / "workflows" / "engineering-harness.yml"
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        legacy = b"name: Legacy managed consumer workflow\non: [push]\n"
+        workflow.write_bytes(legacy)
+        lock["files"][".github/workflows/engineering-harness.yml"]["sha256"] = canonical_sha256(legacy)
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("update     .github/workflows/engineering-harness.yml", output)
+        self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', workflow.read_text(encoding="utf-8"))
+        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+
+        workflow.write_text(workflow.read_text(encoding="utf-8") + "\n# Owner edit\n", encoding="utf-8")
+        original = workflow.read_bytes()
+        missing = target / "docs" / "engineering" / "TRACEABILITY.md"
+        missing.unlink()
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(1, code)
+        self.assertIn("separate workflow", error)
+        self.assertEqual(original, workflow.read_bytes())
+        self.assertFalse(missing.exists())
 
     def test_invalid_project_name_and_malformed_markers_fail_closed(self) -> None:
         invalid = self.root / "invalid-name"
@@ -438,6 +499,23 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertTrue((dashboard / "data/readiness").is_dir())
         manifest = json.loads((dashboard / "dashboard-manifest.json").read_text(encoding="utf-8"))
         self.assertFalse(any(item["role"] == "artifact" for item in manifest["resources"]))
+
+    def test_harness_commands_execute_distribution_scripts_not_target_copies(self) -> None:
+        target = self.root / "distribution-commands"
+        self.assertEqual(0, self.invoke("init", str(target))[0])
+        for name in (
+            "validate_engineering_artifacts.py",
+            "inspect_engineering_artifacts.py",
+            "generate_harness_dashboard.py",
+        ):
+            (target / "scripts" / name).write_text("raise SystemExit(73)\n", encoding="utf-8")
+
+        self.assertEqual(0, self.invoke("validate", str(target))[0])
+        self.assertEqual(0, self.invoke("inspect", str(target))[0])
+        self.assertEqual(0, self.invoke("dashboard", str(target))[0])
+        code, output, error = self.invoke("doctor", str(target))
+        self.assertEqual(1, code, error)
+        self.assertIn("FAIL managed:scripts/validate_engineering_artifacts.py", output)
 
     def test_lock_contains_hashes_without_generated_adoption_report(self) -> None:
         target = self.root / "lock"

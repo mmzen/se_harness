@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -17,12 +18,14 @@ from se_harness.installer import (
     ensure_target,
     format_plan,
     plan_install,
+    template_root,
 )
 from se_harness.governor_reconciliation import (
     apply_governor_reconciliation,
     format_reconciliation_plan,
     plan_governor_reconciliation,
 )
+from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
@@ -75,6 +78,15 @@ def _install(args: argparse.Namespace, mode: str) -> int:
     print(format_plan(changes))
     if any(item.action == "conflict" for item in changes):
         print("conflicts must be resolved before installation; no files were written", file=sys.stderr)
+        if any(
+            item.action == "conflict"
+            and item.path == ".github/workflows/engineering-harness.yml"
+            for item in changes
+        ):
+            print(
+                "preserve repository-specific CI under another workflow filename, then rerun installation",
+                file=sys.stderr,
+            )
         return 1
     if args.dry_run:
         return 0
@@ -95,6 +107,11 @@ def _upgrade(args: argparse.Namespace) -> int:
         for item in blocked:
             path = item.path
             print(f"  {path}", file=sys.stderr)
+        if any(item.path == ".github/workflows/engineering-harness.yml" for item in blocked):
+            print(
+                "preserve repository-specific CI in a separate workflow and restore the managed destination before retrying",
+                file=sys.stderr,
+            )
         return 1
     apply_changes(target, changes, old_lock, allow_updates=True)
     print(f"upgraded managed files to se-harness {__version__}")
@@ -124,20 +141,31 @@ def _reconcile_governor(args: argparse.Namespace) -> int:
     return 0
 
 
-def _run_repository_script(
+def _distribution_script(script: str) -> Path:
+    path = template_root() / "scripts" / script
+    if not path.is_file():
+        raise HarnessError(f"missing distribution script: {path}")
+    return path
+
+
+def _distribution_environment() -> dict[str, str]:
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    environment["PYTHONNOUSERSITE"] = "1"
+    return environment
+
+
+def _run_distribution_script(
     target: Path,
     script: str,
     extra: list[str],
-    *,
-    prevent_bytecode: bool = False,
 ) -> int:
     target = ensure_target(target, must_exist=True)
-    path = target / "scripts" / script
-    if not path.is_file():
-        raise HarnessError(f"missing managed script: {path}")
-    interpreter_options = ["-B"] if prevent_bytecode else []
+    path = _distribution_script(script)
     completed = subprocess.run(
-        [sys.executable, *interpreter_options, str(path), "--root", str(target), *extra],
+        [sys.executable, "-B", str(path), "--root", str(target), *extra],
+        cwd=target,
+        env=_distribution_environment(),
         check=False,
     )
     return completed.returncode
@@ -148,10 +176,12 @@ def _doctor(args: argparse.Namespace) -> int:
     checks = inspect_installation(target)
     for check in checks:
         print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
-    validator = target / "scripts" / "validate_engineering_artifacts.py"
+    validator = _distribution_script("validate_engineering_artifacts.py")
     if validator.is_file():
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(target), "--json"],
+            [sys.executable, "-B", str(validator), "--root", str(target), "--json"],
+            cwd=target,
+            env=_distribution_environment(),
             check=False,
             capture_output=True,
             text=True,
@@ -174,6 +204,14 @@ def _preflight(args: argparse.Namespace) -> int:
     )
     print(render_preflight_json(report) if args.json else render_preflight(report))
     return 0 if report.ready else 1
+
+
+def _select_work_order(args: argparse.Namespace) -> int:
+    try:
+        print(select_from_event(Path(args.event)))
+        return 0
+    except SelectionError as exc:
+        raise HarnessError(f"work-order selection: {exc}") from exc
 
 
 def _capture_verification(args: argparse.Namespace) -> int:
@@ -288,24 +326,23 @@ def build_parser() -> argparse.ArgumentParser:
     validate = commands.add_parser("validate", help="validate the repository artifact graph")
     validate.add_argument("target", nargs="?", default=".")
     validate.add_argument("--json", action="store_true")
-    validate.set_defaults(handler=lambda args: _run_repository_script(Path(args.target), "validate_engineering_artifacts.py", ["--json"] if args.json else []))
+    validate.set_defaults(handler=lambda args: _run_distribution_script(Path(args.target), "validate_engineering_artifacts.py", ["--json"] if args.json else []))
 
     inspect = commands.add_parser("inspect", help="inspect repository attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")
     inspect.add_argument("--json", action="store_true")
     inspect.set_defaults(
-        handler=lambda args: _run_repository_script(
+        handler=lambda args: _run_distribution_script(
             Path(args.target),
             "inspect_engineering_artifacts.py",
             ["--json"] if args.json else [],
-            prevent_bytecode=True,
         )
     )
 
     dashboard = commands.add_parser("dashboard", help="generate the repository Harness Explorer")
     dashboard.add_argument("target", nargs="?", default=".")
     dashboard.add_argument("--output")
-    dashboard.set_defaults(handler=lambda args: _run_repository_script(Path(args.target), "generate_harness_dashboard.py", ["--output", args.output] if args.output else []))
+    dashboard.set_defaults(handler=lambda args: _run_distribution_script(Path(args.target), "generate_harness_dashboard.py", ["--output", args.output] if args.output else []))
 
     doctor = commands.add_parser("doctor", help="check an installed harness")
     doctor.add_argument("target", nargs="?", default=".")
@@ -317,6 +354,13 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--phase", choices=("start", "review"), default="start")
     preflight.add_argument("--json", action="store_true")
     preflight.set_defaults(handler=_preflight)
+
+    select_work = commands.add_parser(
+        "select-work-order",
+        help="select one structured work-order field from a GitHub pull-request event",
+    )
+    select_work.add_argument("--event", required=True)
+    select_work.set_defaults(handler=_select_work_order)
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
     upgrade.add_argument("target", nargs="?", default=".")

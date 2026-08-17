@@ -75,6 +75,10 @@ harnessctl adopt C:\path\to\existing-repository --project-name my-project
 - `--dry-run` resolves and reports the complete plan without writing.
 - Neither operation invents approved product facts. Curate `docs/engineering/REPOSITORY_CONTEXT.md` and establish the first formal chain through accountable review.
 
+For GitHub repositories, both operations install one dedicated managed `.github/workflows/engineering-harness.yml`. GitHub automatically discovers it beside zero or more existing workflows; SE Harness does not edit unrelated workflow files. Workflow presence does not configure branch protection, required checks, deployment ordering, or any other hosting policy.
+
+If that exact destination already contains unknown content, installation reports a conflict and writes nothing. Preserve repository-specific CI under another workflow filename, then rerun installation. GitHub does not assign execution meaning to the filename itself.
+
 After installation:
 
 ```powershell
@@ -107,7 +111,9 @@ harnessctl upgrade C:\path\to\repository --apply
 harnessctl doctor C:\path\to\repository
 ```
 
-The apply operation is transactional: customized, missing, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. Owner-controlled content and managed fragments outside their bounded markers are preserved.
+The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
+
+The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 
 Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout representation does not create false customization. This portability rule does not excuse a real content mismatch.
 

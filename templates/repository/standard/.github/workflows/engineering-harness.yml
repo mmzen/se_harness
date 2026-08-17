@@ -8,81 +8,52 @@ permissions:
   contents: read
 
 env:
-  GOVERNOR_VERSION: "{{GOVERNOR_HARNESS_VERSION}}"
-  GOVERNOR_TAG: "{{GOVERNOR_HARNESS_TAG}}"
-  GOVERNOR_WHEEL: "{{GOVERNOR_HARNESS_WHEEL}}"
-  GOVERNOR_URL: "https://github.com/mmzen/se_harness/releases/download/{{GOVERNOR_HARNESS_TAG}}/{{GOVERNOR_HARNESS_WHEEL}}"
-  GOVERNOR_WHEEL_SHA256: "{{GOVERNOR_HARNESS_WHEEL_SHA256}}"
+  SE_HARNESS_VERSION: "{{HARNESS_VERSION}}"
 
 jobs:
-  governor:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Acquire the exact released governor
+      - name: Install the exact released evaluator
         shell: bash
         run: |
-          python -m venv "$RUNNER_TEMP/governor-env"
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-            --output "$RUNNER_TEMP/$GOVERNOR_WHEEL" \
-            "$GOVERNOR_URL"
-          printf '%s  %s\n' "$GOVERNOR_WHEEL_SHA256" "$RUNNER_TEMP/$GOVERNOR_WHEEL" |
-            sha256sum --check -
-          "$RUNNER_TEMP/governor-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps "$RUNNER_TEMP/$GOVERNOR_WHEEL"
-      - name: Prove governor origin and same-version integrity
+          python -m venv "$RUNNER_TEMP/se-harness-env"
+          "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps --only-binary=:all: \
+            "se-harness==$SE_HARNESS_VERSION"
+      - name: Prove evaluator identity and isolation
         shell: bash
         run: |
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1
-          "$RUNNER_TEMP/governor-env/bin/python" -I -c \
-            "import pathlib, se_harness, sys; from se_harness.installer import template_root; boundary=pathlib.Path(sys.prefix).resolve(); checkout=pathlib.Path('$GITHUB_WORKSPACE').resolve(); origins=(pathlib.Path(se_harness.__file__).resolve(), template_root().resolve()); assert se_harness.__version__ == '$GOVERNOR_VERSION'; assert all(path.is_relative_to(boundary) and not path.is_relative_to(checkout) for path in origins); print({'role':'governor','version':se_harness.__version__,'module':str(origins[0]),'templates':str(origins[1]),'wheel_sha256':'$GOVERNOR_WHEEL_SHA256'})"
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" init "$RUNNER_TEMP/governor-target" \
-            --project-name GovernorIntegrity
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" doctor "$RUNNER_TEMP/governor-target"
-      - name: Record the governor compatibility boundary
-        run: >-
-          echo "The governor proves exact bootstrap identity and same-version integrity only;
-          candidate semantics are validated by the declared candidate runtime."
-
-  candidate:
-    needs: governor
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Prepare the declared candidate runtime
-        shell: bash
-        run: |
-          if [[ -f "se_harness/__init__.py" && -f "pyproject.toml" ]]; then
-            python -c "import se_harness; print('candidate source:', se_harness.__file__)"
-          else
-            python -m pip install --disable-pip-version-check --no-deps \
-              --only-binary=:all: "se-harness=={{HARNESS_VERSION}}"
-          fi
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -c \
+            "import os, pathlib, se_harness, sys; from se_harness.installer import template_root; boundary=pathlib.Path(sys.prefix).resolve(); checkout=pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve(); origins=(pathlib.Path(se_harness.__file__).resolve(), template_root().resolve()); assert se_harness.__version__ == '$SE_HARNESS_VERSION'; assert all(path.is_relative_to(boundary) and not path.is_relative_to(checkout) for path in origins); print({'role':'consumer-evaluator','version':se_harness.__version__,'module':str(origins[0]),'templates':str(origins[1])})"
       - name: Select the pull-request work order
         if: github.event_name == 'pull_request'
         id: work_order
         shell: bash
         run: |
-          work_order="$(python scripts/select_harness_work_order.py --event "$GITHUB_EVENT_PATH")"
+          work_order="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
+            select-work-order --event "$GITHUB_EVENT_PATH")"
           printf 'work_order=%s\n' "$work_order" >> "$GITHUB_OUTPUT"
       - name: Review preflight
         if: github.event_name == 'pull_request'
         env:
           HARNESS_WORK_ORDER: ${{ steps.work_order.outputs.work_order }}
-        run: python -m se_harness preflight . --work-order "$HARNESS_WORK_ORDER" --phase review
-      - name: Check candidate installation and graph
+        run: >-
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight .
+          --work-order "$HARNESS_WORK_ORDER" --phase review
+      - name: Check installed harness and graph
         run: |
-          python -m se_harness doctor .
-          python scripts/validate_engineering_artifacts.py --root .
-      - name: Generate candidate Harness Explorer
-        run: python scripts/generate_harness_dashboard.py --root .
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness doctor .
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness validate .
+      - name: Generate Harness Explorer
+        run: |
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness dashboard .
       - uses: actions/upload-artifact@v4
         if: always()
         with:

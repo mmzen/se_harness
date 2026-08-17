@@ -38,10 +38,6 @@ FRAGMENT_TARGETS = {
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
-GOVERNOR_HARNESS_VERSION = "0.2.1"
-GOVERNOR_HARNESS_TAG = "v0.2.1"
-GOVERNOR_HARNESS_WHEEL = "se_harness-0.2.1-py3-none-any.whl"
-GOVERNOR_HARNESS_WHEEL_SHA256 = "533f6f87f5a1060d5d0070702969f643525ca3b91e2ecdbbd029f1530d093454"
 
 
 class HarnessError(RuntimeError):
@@ -222,10 +218,6 @@ def _variables(target: Path, project_name: str | None, installed_at: str | None 
         "PROJECT_NAME": selected_name,
         "HARNESS_VERSION": __version__,
         "INSTALL_DATE": selected_date,
-        "GOVERNOR_HARNESS_VERSION": GOVERNOR_HARNESS_VERSION,
-        "GOVERNOR_HARNESS_TAG": GOVERNOR_HARNESS_TAG,
-        "GOVERNOR_HARNESS_WHEEL": GOVERNOR_HARNESS_WHEEL,
-        "GOVERNOR_HARNESS_WHEEL_SHA256": GOVERNOR_HARNESS_WHEEL_SHA256,
     }
 
 
