@@ -17,4 +17,4 @@ jobs:
       governor-url: "https://github.com/mmzen/se_harness/releases/download/v0.3.0/se_harness-0.3.0-py3-none-any.whl"
       governor-wheel-sha256: "260e22371b05e5bb6c59143a1f0229855305a6bf7994984be50aa147a02ea516"
       governor-release-record: "RLS-SEH-005"
-      candidate-version: "0.4.0"
+      candidate-version: "0.4.1"

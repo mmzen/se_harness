@@ -68,7 +68,7 @@ This is deliberately different from consumer CI. A consumer selects an already r
 
 `harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, candidate commit, or governor digest machine-assessable. A mismatch fails its lane. A published governor may also run `harnessctl accept-candidate` against an exact wheel; its deterministic manifest remains evidence until an accountable assurance decision.
 
-The current package and source candidate is version 0.4.0, while `.self-hosting/governor.toml` intentionally continues to select the independently published 0.3.0 wheel and digest. Publication does not automatically promote a candidate to govern itself.
+The current package and source candidate is version 0.4.1, while `.self-hosting/governor.toml` intentionally continues to select the independently published 0.3.0 wheel and digest. Publication does not automatically promote a candidate to govern itself.
 
 ## Building and releasing
 

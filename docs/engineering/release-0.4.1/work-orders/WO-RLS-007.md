@@ -2,7 +2,7 @@
 id = "WO-RLS-007"
 type = "work_order"
 title = "Qualify the integrated se-harness 0.4.1 candidate"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
@@ -26,6 +26,10 @@ verification = ["VER-DST-001"]
 On 2026-08-17 the repository owner requested release 0.4.1, reviewed how release-bearing work is selected, and instructed `go`, authorizing creation of the draft packet. After reviewing `REL-SEH-006` and this exact work order, the owner explicitly stated `i validate`. That decision approves both artifacts and authorizes bounded 0.4.1 versioning, integrated qualification, retained evidence, one clean candidate commit, and later preparation of `VREC-SEH-007` as a `ready` proposal after exact-commit replay.
 
 The approval does not authorize push, pull-request creation or merge, the VREC's verification transition, release-record preparation or transition, tag creation, GitHub Release, PyPI publication, Pages deployment, governor reconciliation, force push, or history rewriting.
+
+Start preflight passed with this work order in `approved`, so the bounded 0.4.1 candidate implementation is now `in_progress`.
+
+The bounded implementation and preliminary qualification completed on 2026-08-17. Candidate identity is consistently 0.4.1, protected candidate controls and their lock agree, the selected released governor remains exactly 0.3.0, both supported-runtime suites pass, deterministic graph and Explorer payload checks pass, reproducible distributions agree, and a fresh external Python 3.11 installation passes the consumer workflow. Evidence is retained at `docs/engineering/release-0.4.1/evidence/WO-RLS-007-verification.md`. This transition to `implemented` records completed work and retained evidence only; exact-commit replay and the later `VREC-SEH-007` proposal remain after the clean candidate commit and do not assert verification or release.
 
 ## Objective
 
