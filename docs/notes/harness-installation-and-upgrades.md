@@ -28,7 +28,7 @@ harnessctl --version
 For an exact released version:
 
 ```powershell
-python -m pip install "se-harness==0.4.0"
+python -m pip install "se-harness==0.4.1"
 ```
 
 Activation adds `.venv\Scripts` to command discovery for the current shell. The launcher remains `.venv\Scripts\harnessctl.exe`; activation does not move it. Without activation:
