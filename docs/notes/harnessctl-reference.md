@@ -59,7 +59,7 @@ For existing lifecycle queues and a closed set of actionable derived warning rul
 
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
-Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+Dashboard defaults to `target/harness-dashboard/`; its HTML is generated evidence, not formal authority. The bundle can include bounded artifact bodies and retained evidence bodies plus digest-named passive raw evidence files. Generation remains local, but publishing or sharing that directory exposes all included content; the command does not scan for secrets or redact repository material. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
 
 ## Work readiness
 

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import re
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,10 +93,10 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('data-od-id="three-dimensional-graph"', content)
         self.assertIn('data-od-id="graph-color-legend"', content)
         self.assertIn('id="lineageGraph" role="group"', content)
-        self.assertIn('data-od-id="zoom-in"', content)
+        self.assertIn('data-od-id="lineage-navigation-history"', content)
         self.assertIn('linkDirectionalArrowLength(1.8)', content)
         self.assertIn('clip:rect(0 0 0 0)', content)
-        self.assertEqual(1, content.count("function renderLineage(){"))
+        self.assertEqual(1, content.count("function renderLineage(focusTarget=null){"))
         self.assertIn('const GRAPH_SOURCE="https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"', content)
         self.assertIn('Interactive 3D topology unavailable', content)
         for forbidden in (
@@ -114,7 +117,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn('$("coverageRows")', content)
         self.assertIn('id="metricCoverage"', content)
         self.assertIn('id="metricCoverageDetail"', content)
-        self.assertIn('coverage:{label:definition?', content)
+        self.assertIn('coverage:definition?{applicable:true', content)
 
         self.assertIn('id="graphDepth"', content)
         self.assertIn('<option value="0">0 — matches only</option>', content)
@@ -129,6 +132,68 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('node.scopeRole==="match"?9:4', content)
         self.assertIn('Node size distinguishes filter matches from context nodes', content)
         self.assertIn('$("graphDepth").value="0"', content)
+
+    def test_lineage_board_is_structured_bounded_and_reversibly_navigable(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+
+        self.assertIn('id="lineageDepth"', content)
+        self.assertIn('<option value="1">1 - direct relations</option>', content)
+        self.assertIn('<option value="2">2 - second-level context</option>', content)
+        self.assertIn('LINEAGE_CONTEXT_NODE_LIMIT=100', content)
+        self.assertIn('LINEAGE_HISTORY_LIMIT=20', content)
+        self.assertIn('const LINEAGE_STAGES=Object.freeze([', content)
+        for stage, types in (
+            ('id:"purpose",label:"Purpose"', '["intent","capability"]'),
+            ('id:"definition",label:"Definition"', '["requirement","specification"]'),
+            ('id:"design",label:"Design"', '["architecture","adr"]'),
+            ('id:"delivery",label:"Delivery"', '["work_order"]'),
+            ('id:"assurance",label:"Assurance"', '["verification","verification_record"]'),
+            (
+                'id:"release-operation",label:"Release and operation"',
+                '["release_contract","release_record","operating_contract"]',
+            ),
+        ):
+            with self.subTest(stage=stage):
+                self.assertIn(stage, content)
+                self.assertIn(f"types:{types}", content)
+
+        self.assertIn('function lineageScope(root,depth=1)', content)
+        self.assertIn('const directRelations=lineageIncident(root.id,true)', content)
+        self.assertIn('eligibleSecond.slice(0,LINEAGE_CONTEXT_NODE_LIMIT)', content)
+        self.assertIn('function renderLineageEdges()', content)
+        self.assertIn('sourceId===scope.root.id||targetId===scope.root.id', content)
+        self.assertIn('link.derived?" derived":""', content)
+        self.assertIn('Unresolved target ${esc(endpoint(link.target))}', content)
+        self.assertIn('data-stage="${esc(group.id)}"', content)
+        self.assertIn('Unknown type', content)
+        self.assertNotIn('function neighborhood(root,maxDepth=2,maxNodes=9)', content)
+        self.assertNotIn('function setLineageZoom', content)
+        self.assertNotIn('data-od-id="zoom-in"', content)
+
+        for control in (
+            'id="lineageBack"',
+            'id="lineageForward"',
+            'id="lineageHistory"',
+            'id="lineageInitial"',
+            'aria-live="polite"',
+            'Visited artifacts only - this is not a formal lineage relation.',
+        ):
+            with self.subTest(control=control):
+                self.assertIn(control, content)
+        self.assertIn('lineageHistory=lineageHistory.slice(0,lineageHistoryIndex+1)', content)
+        self.assertIn('if(lineageHistory.length>LINEAGE_HISTORY_LIMIT)', content)
+        self.assertIn('lineageHistory.shift()', content)
+        self.assertIn('function revealCurrentLineageHistory(){', content)
+        self.assertIn("querySelector('[aria-current=\"true\"]')", content)
+        self.assertIn('list.scrollLeft-=listRect.left+margin-currentRect.left', content)
+        self.assertIn('list.scrollLeft+=currentRect.right-listRect.right+margin', content)
+        self.assertIn('requestAnimationFrame(revealCurrentLineageHistory)', content)
+        self.assertNotIn('current.scrollIntoView', content)
+        self.assertIn('renderLineage("history")', content)
+        self.assertIn('resetLineageHistory(id)', content)
+        for forbidden in ("history.pushState", "localStorage", "sessionStorage", "document.cookie"):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, content)
 
     def test_search_clear_and_revision_presentation_preserve_state_and_provenance(self) -> None:
         content = self.template.read_text(encoding="utf-8")
@@ -221,6 +286,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 "revision_policy",
                 "experiments",
                 "evidence",
+                "evidence_documents",
             },
             set(snapshot),
         )
@@ -237,6 +303,189 @@ class DashboardWebUIContractTests(unittest.TestCase):
         rendered = GENERATOR.render_dashboard(future)
         self.assertIn('"type":"future_control"', rendered)
         self.assertIn("new Option(v,v)", rendered)
+
+    def test_content_projection_is_additive_bounded_and_deterministic(self) -> None:
+        snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
+        parsed = {artifact.artifact_id: artifact for artifact in report.artifacts}
+        self.assertTrue(snapshot["artifacts"])
+        for projected in snapshot["artifacts"]:
+            content = projected["content"]
+            source = parsed[projected["id"]]
+            expected = source.body.replace("\r\n", "\n").replace("\r", "\n")
+            self.assertEqual("markdown", content["format"])
+            self.assertEqual("included", content["state"])
+            self.assertEqual(expected, content["markdown"])
+            self.assertEqual(len(expected.encode("utf-8")), content["bytes"])
+            self.assertEqual(hashlib.sha256(expected.encode("utf-8")).hexdigest(), content["sha256"])
+
+        evidence_documents = snapshot["evidence_documents"]
+        self.assertEqual(
+            sorted(document["path"] for document in evidence_documents),
+            [document["path"] for document in evidence_documents],
+        )
+        for document in evidence_documents:
+            self.assertEqual(sorted(set(document["associations"])), document["associations"])
+            if document["state"] == "included":
+                self.assertEqual(f"content/{document['sha256']}.txt", document["raw_path"])
+
+        budget = GENERATOR.ContentBudget()
+        oversized = budget.project("x" * (GENERATOR.MAX_CONTENT_DOCUMENT_BYTES + 1))
+        self.assertEqual("omitted", oversized["state"])
+        self.assertEqual("document_too_large", oversized["reason"])
+        self.assertNotIn("markdown", oversized)
+
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "dashboard"
+            GENERATOR.write_output_transactionally(
+                output,
+                {"index.html": "ok\n", "content/" + "a" * 64 + ".txt": "raw\n"},
+            )
+            self.assertEqual("raw\n", (output / "content" / ("a" * 64 + ".txt")).read_text(encoding="utf-8"))
+
+    def test_content_capacity_and_evidence_path_boundaries_fail_closed(self) -> None:
+        for size, state in (
+            (0, "included"),
+            (1, "included"),
+            (GENERATOR.MAX_CONTENT_DOCUMENT_BYTES - 1, "included"),
+            (GENERATOR.MAX_CONTENT_DOCUMENT_BYTES, "included"),
+            (GENERATOR.MAX_CONTENT_DOCUMENT_BYTES + 1, "omitted"),
+        ):
+            with self.subTest(size=size):
+                projected = GENERATOR.ContentBudget().project("x" * size)
+                self.assertEqual(state, projected["state"])
+                self.assertEqual(size, projected["bytes"])
+                if state == "omitted":
+                    self.assertEqual("document_too_large", projected["reason"])
+
+        total_budget = GENERATOR.ContentBudget()
+        full_document = "x" * GENERATOR.MAX_CONTENT_DOCUMENT_BYTES
+        for _ in range(GENERATOR.MAX_CONTENT_TOTAL_BYTES // GENERATOR.MAX_CONTENT_DOCUMENT_BYTES):
+            self.assertEqual("included", total_budget.project(full_document)["state"])
+        overflow = total_budget.project("x")
+        self.assertEqual("omitted", overflow["state"])
+        self.assertEqual("total_content_budget_exceeded", overflow["reason"])
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            evidence_root = root / "docs/engineering/example/evidence"
+            evidence_root.mkdir(parents=True)
+            valid = evidence_root / "WO-TST-001-verification.md"
+            valid.write_bytes(b"# Evidence\r\n\r\nExact.\r\n")
+            projected = GENERATOR._project_evidence_document(
+                root,
+                "docs/engineering/example/evidence/WO-TST-001-verification.md",
+                ["WO-TST-001", "VREC-TST-001"],
+                GENERATOR.ContentBudget(),
+            )
+            self.assertEqual("included", projected["state"])
+            self.assertEqual("# Evidence\n\nExact.\n", projected["markdown"])
+            self.assertEqual(["VREC-TST-001", "WO-TST-001"], projected["associations"])
+
+            original_read_bytes = Path.read_bytes
+
+            def read_then_change(path: Path) -> bytes:
+                content = original_read_bytes(path)
+                if path == valid:
+                    path.write_bytes(content + b"changed")
+                return content
+
+            with mock.patch.object(Path, "read_bytes", read_then_change):
+                changed = GENERATOR._project_evidence_document(
+                    root,
+                    "docs/engineering/example/evidence/WO-TST-001-verification.md",
+                    ["WO-TST-001"],
+                    GENERATOR.ContentBudget(),
+                )
+            self.assertEqual("omitted", changed["state"])
+            self.assertEqual("evidence_changed_during_generation", changed["reason"])
+            valid.write_bytes(b"# Evidence\r\n\r\nExact.\r\n")
+
+            invalid_utf8 = evidence_root / "WO-TST-002-verification.md"
+            invalid_utf8.write_bytes(b"\xff\xfe\x00")
+            cases = (
+                ("../outside.md", "unsafe_evidence_path"),
+                ("docs/engineering/example/evidence/unsupported.html", "unsupported_evidence_format"),
+                ("docs/engineering/example/evidence/missing.md", "evidence_unavailable"),
+                ("docs/engineering/example/evidence/WO-TST-002-verification.md", "evidence_not_utf8"),
+            )
+            for path, reason in cases:
+                with self.subTest(path=path):
+                    omitted = GENERATOR._project_evidence_document(
+                        root,
+                        path,
+                        ["WO-TST-002"],
+                        GENERATOR.ContentBudget(),
+                    )
+                    self.assertEqual("omitted", omitted["state"])
+                    self.assertEqual(reason, omitted["reason"])
+
+            link = evidence_root / "WO-TST-003-verification.md"
+            try:
+                link.symlink_to(valid)
+            except OSError:
+                pass
+            else:
+                omitted = GENERATOR._project_evidence_document(
+                    root,
+                    "docs/engineering/example/evidence/WO-TST-003-verification.md",
+                    ["WO-TST-003"],
+                    GENERATOR.ContentBudget(),
+                )
+                self.assertEqual("symlink_not_allowed", omitted["reason"])
+
+    def test_nested_output_failure_preserves_the_previous_dashboard(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            parent = Path(temporary)
+            output = parent / "dashboard"
+            output.mkdir()
+            (output / "index.html").write_text("previous\n", encoding="utf-8")
+            with self.assertRaises(GENERATOR.GenerationError):
+                GENERATOR.write_output_transactionally(
+                    output,
+                    {"../escape.txt": "escape\n", "index.html": "replacement\n"},
+                )
+            self.assertEqual("previous\n", (output / "index.html").read_text(encoding="utf-8"))
+            self.assertFalse((parent / "escape.txt").exists())
+
+            with self.assertRaisesRegex(GENERATOR.GenerationError, "collision"):
+                GENERATOR.write_output_transactionally(
+                    output,
+                    {"content/A.txt": "first\n", "content/a.txt": "second\n"},
+                )
+            self.assertEqual("previous\n", (output / "index.html").read_text(encoding="utf-8"))
+
+    def test_rich_detail_contract_is_local_safe_and_navigable(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+        for marker in (
+            'id="detailLabels"',
+            'detailLabelMarkup("Type",n.type)',
+            'detailLabelMarkup("State",n.status)',
+            'detailLabelMarkup("Assurance",assurance(n))',
+            'n.id+" - "+n.title',
+            "function safeMarkdownHref(value)",
+            "function sanitizeMarkdownMarkup(markup)",
+            "function renderMarkdown(value)",
+            "function earsMarkup(statement)",
+            "Presentation only, not validation.",
+            "Specification coverage",
+            "Verification-contract coverage",
+            "function artifactReference(id,resolved=true)",
+            "visitLineage(artifact.dataset.artifactId)",
+            "Open raw evidence",
+            "Evidence presence is retained material only",
+            "Publishing the bundle exposes all included content and raw evidence files",
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, content)
+        for forbidden in (
+            'id="detailbadge"',
+            "javascript:",
+            "data:text/html",
+            "marked.min.js",
+            "dompurify",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, content.lower())
 
     def test_renderer_context_escapes_hostile_repository_text(self) -> None:
         snapshot, _, _ = GENERATOR.generate_snapshot(ROOT)

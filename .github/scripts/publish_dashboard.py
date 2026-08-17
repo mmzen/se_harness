@@ -24,7 +24,8 @@ SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
 GENERATION_SCHEMA = "harness-dashboard-generation-v1"
 PUBLICATION_SCHEMA = "se-harness-pages-publication-v1"
 SOURCE_FILES = frozenset({"dashboard-data.json", "generation-summary.json", "index.html"})
-PUBLISHED_FILES = frozenset({*SOURCE_FILES, "publication-manifest.json"})
+PUBLISHED_FIXED_FILES = frozenset({*SOURCE_FILES, "publication-manifest.json"})
+CONTENT_FILE_PATTERN = re.compile(r"content/(?P<sha256>[0-9a-f]{64})\.txt")
 TAG_PATTERN = re.compile(r"v(?P<version>0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)")
 RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9]+-[0-9]{3}")
 HEX_PATTERN = re.compile(r"[0-9a-f]+")
@@ -434,20 +435,80 @@ def _validated_provenance(path: Path) -> ReleaseProvenance:
 def _source_payload(source: Path) -> dict[str, bytes]:
     if not source.is_dir() or source.is_symlink():
         raise PublicationError("generated dashboard source must be a real directory")
-    paths = list(source.iterdir())
-    if any(path.is_symlink() or not path.is_file() for path in paths):
-        raise PublicationError("generated dashboard source may contain only regular files")
-    names = {path.name for path in paths}
-    if names != SOURCE_FILES:
-        missing = sorted(SOURCE_FILES - names)
-        unexpected = sorted(names - SOURCE_FILES)
+    entries = sorted(source.iterdir(), key=lambda path: path.name)
+    top_level_names = {path.name for path in entries}
+    allowed_top_level = {*SOURCE_FILES, "content"}
+    missing = sorted(SOURCE_FILES - top_level_names)
+    unexpected = sorted(top_level_names - allowed_top_level)
+    if missing or unexpected:
         raise PublicationError(
             f"generated dashboard file set differs from the allowlist; missing={missing}, unexpected={unexpected}"
         )
-    payload = {name: (source / name).read_bytes() for name in sorted(names)}
+    payload: dict[str, bytes] = {}
+    for name in sorted(SOURCE_FILES):
+        path = source / name
+        if path.is_symlink() or not path.is_file():
+            raise PublicationError(f"generated dashboard source is not a regular file: {name}")
+        payload[name] = path.read_bytes()
+    content_root = source / "content"
+    if content_root.exists():
+        if content_root.is_symlink() or not content_root.is_dir():
+            raise PublicationError("generated dashboard content must be a real directory")
+        for path in sorted(content_root.iterdir(), key=lambda item: item.name):
+            relative = f"content/{path.name}"
+            if (
+                path.is_symlink()
+                or not path.is_file()
+                or CONTENT_FILE_PATTERN.fullmatch(relative) is None
+            ):
+                raise PublicationError(
+                    f"generated dashboard content differs from the allowlist: {relative}"
+                )
+            payload[relative] = path.read_bytes()
     if sum(len(value) for value in payload.values()) > MAX_PAYLOAD_BYTES:
         raise PublicationError("generated dashboard exceeds the publication size boundary")
     return payload
+
+
+def _validated_raw_content(
+    snapshot: dict[str, Any],
+    payload: dict[str, bytes],
+) -> list[str]:
+    documents = snapshot.get("evidence_documents", [])
+    if not isinstance(documents, list):
+        raise PublicationError("snapshot evidence_documents must be an array")
+    expected: dict[str, bytes] = {}
+    for document in documents:
+        if not isinstance(document, dict):
+            raise PublicationError("snapshot evidence document must be an object")
+        if document.get("state") != "included":
+            continue
+        raw_path = document.get("raw_path")
+        digest = document.get("sha256")
+        markdown = document.get("markdown")
+        observed_bytes = document.get("bytes")
+        if not isinstance(raw_path, str) or CONTENT_FILE_PATTERN.fullmatch(raw_path) is None:
+            raise PublicationError("included evidence document has an invalid raw path")
+        if not isinstance(digest, str) or raw_path != f"content/{digest}.txt":
+            raise PublicationError("included evidence document raw path differs from its digest")
+        if not isinstance(markdown, str):
+            raise PublicationError("included evidence document has no projected Markdown")
+        encoded = markdown.encode("utf-8")
+        if _sha256(encoded) != digest or observed_bytes != len(encoded):
+            raise PublicationError("included evidence document content metadata is inconsistent")
+        previous = expected.get(raw_path)
+        if previous is not None and previous != encoded:
+            raise PublicationError("included evidence documents collide on one raw path")
+        expected[raw_path] = encoded
+    actual_paths = sorted(name for name in payload if name.startswith("content/"))
+    if set(actual_paths) != set(expected):
+        raise PublicationError(
+            "generated raw evidence set differs from the canonical snapshot"
+        )
+    for path, expected_bytes in expected.items():
+        if payload[path] != expected_bytes:
+            raise PublicationError(f"generated raw evidence differs from its snapshot: {path}")
+    return actual_paths
 
 
 def _demonstration_notice(provenance: ReleaseProvenance) -> str:
@@ -458,7 +519,7 @@ def _demonstration_notice(provenance: ReleaseProvenance) -> str:
         'background:#eff6ff;color:#1e3a8a;font:13px/1.45 system-ui,sans-serif">'
         '<strong>SE Harness development demonstration.</strong> '
         'This public Explorer is a derived, read-only view; repository artifacts and accountable '
-        'human decisions remain authoritative. '
+        'human decisions remain authoritative. Included artifact bodies and retained evidence are public. '
         f'<a href="{html.escape(release_url, quote=True)}">Release {html.escape(provenance.tag)}</a> '
         f'uses candidate <code>{html.escape(provenance.candidate_commit[:12])}</code> and governance '
         f'snapshot <code>{html.escape(provenance.governance_commit[:12])}</code>.'
@@ -488,6 +549,7 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
         raise PublicationError("generated dashboard summary is not valid")
     if summary.get("repository_revision") != provenance.governance_commit:
         raise PublicationError("generation summary revision differs from the governance snapshot")
+    raw_content_paths = _validated_raw_content(snapshot, payload)
 
     snapshot_digest = _sha256(payload["dashboard-data.json"])
     generated_dashboard_digest = _sha256(payload["index.html"])
@@ -514,6 +576,7 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
         "governance_commit": provenance.governance_commit,
         "generated_dashboard_sha256": generated_dashboard_digest,
         "published_dashboard_sha256": published_dashboard_digest,
+        "raw_evidence_file_count": len(raw_content_paths),
     }
     published_summary = _json_bytes(summary)
     manifest = {
@@ -529,14 +592,16 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
         "generated_dashboard_sha256": generated_dashboard_digest,
         "published_dashboard_sha256": published_dashboard_digest,
         "generation_summary_sha256": _sha256(published_summary),
+        "raw_evidence_files": raw_content_paths,
     }
     published_payload = {
         "dashboard-data.json": payload["dashboard-data.json"],
         "generation-summary.json": published_summary,
         "index.html": published_html,
         "publication-manifest.json": _json_bytes(manifest),
+        **{path: payload[path] for path in raw_content_paths},
     }
-    if set(published_payload) != PUBLISHED_FILES:
+    if set(published_payload) != {*PUBLISHED_FIXED_FILES, *raw_content_paths}:
         raise PublicationError("internal publication payload differs from the allowlist")
 
     destination = destination.resolve()
@@ -546,7 +611,9 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
     temporary = Path(tempfile.mkdtemp(prefix=f".{destination.name}.", dir=destination.parent))
     try:
         for name, content in published_payload.items():
-            (temporary / name).write_bytes(content)
+            target = temporary.joinpath(*name.split("/"))
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(content)
         temporary.replace(destination)
     except Exception:
         shutil.rmtree(temporary, ignore_errors=True)

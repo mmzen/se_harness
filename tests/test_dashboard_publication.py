@@ -255,12 +255,14 @@ class PayloadPackagingTests(unittest.TestCase):
     def test_packaging_adds_constant_notice_and_exact_manifest(self) -> None:
         destination = self.root / "site"
         manifest = PUBLICATION.package_dashboard(self.source, destination, self.provenance_path)
-        self.assertEqual(PUBLICATION.PUBLISHED_FILES, {path.name for path in destination.iterdir()})
+        self.assertEqual(PUBLICATION.PUBLISHED_FIXED_FILES, {path.name for path in destination.iterdir()})
         published = (destination / "index.html").read_bytes()
         self.assertIn(b"SE Harness development demonstration", published)
         self.assertIn(b"derived, read-only view", published)
+        self.assertIn(b"Included artifact bodies and retained evidence are public", published)
         self.assertEqual(sha256(self.snapshot_bytes), manifest["snapshot_sha256"])
         self.assertEqual(sha256(published), manifest["published_dashboard_sha256"])
+        self.assertEqual([], manifest["raw_evidence_files"])
         summary = json.loads((destination / "generation-summary.json").read_text(encoding="utf-8"))
         self.assertEqual(sha256(published), summary["dashboard_sha256"])
         self.assertTrue(summary["publication"]["derived_non_authoritative"])
@@ -270,8 +272,43 @@ class PayloadPackagingTests(unittest.TestCase):
         second = self.root / "second"
         PUBLICATION.package_dashboard(self.source, first, self.provenance_path)
         PUBLICATION.package_dashboard(self.source, second, self.provenance_path)
-        for name in PUBLICATION.PUBLISHED_FILES:
+        for name in PUBLICATION.PUBLISHED_FIXED_FILES:
             self.assertEqual((first / name).read_bytes(), (second / name).read_bytes())
+
+    def test_snapshot_declared_raw_evidence_is_hash_verified_and_published(self) -> None:
+        raw = b"# Retained evidence\n\nExact content.\n"
+        digest = sha256(raw)
+        raw_path = f"content/{digest}.txt"
+        content_root = self.source / "content"
+        content_root.mkdir()
+        (content_root / f"{digest}.txt").write_bytes(raw)
+        snapshot = json.loads(self.snapshot_bytes)
+        snapshot["evidence_documents"] = [
+            {
+                "path": "docs/engineering/example/evidence/WO-TST-001-verification.md",
+                "associations": ["WO-TST-001"],
+                "format": "markdown",
+                "state": "included",
+                "bytes": len(raw),
+                "sha256": digest,
+                "markdown": raw.decode("utf-8"),
+                "raw_path": raw_path,
+            }
+        ]
+        self.snapshot_bytes = PUBLICATION._json_bytes(snapshot)
+        (self.source / "dashboard-data.json").write_bytes(self.snapshot_bytes)
+        summary = json.loads((self.source / "generation-summary.json").read_text(encoding="utf-8"))
+        summary["snapshot_sha256"] = sha256(self.snapshot_bytes)
+        (self.source / "generation-summary.json").write_bytes(PUBLICATION._json_bytes(summary))
+
+        destination = self.root / "content-site"
+        manifest = PUBLICATION.package_dashboard(self.source, destination, self.provenance_path)
+        self.assertEqual(raw, (destination / raw_path).read_bytes())
+        self.assertEqual([raw_path], manifest["raw_evidence_files"])
+
+        (content_root / f"{digest}.txt").write_bytes(b"tampered\n")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from its snapshot"):
+            PUBLICATION.package_dashboard(self.source, self.root / "tampered", self.provenance_path)
 
     def test_unexpected_file_and_revision_mismatch_fail_closed(self) -> None:
         (self.source / "secret.txt").write_text("not public", encoding="utf-8")

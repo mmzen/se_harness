@@ -70,12 +70,13 @@ The workflow rejects short commits, arbitrary branches, later main commits, ambi
 
 The Pages artifact contains only:
 
-- `index.html`, with a constant demonstration and non-authority notice;
-- `dashboard-data.json`, the unchanged canonical snapshot;
+- `index.html`, with a constant demonstration, content-disclosure, and non-authority notice;
+- `dashboard-data.json`, the unchanged canonical snapshot, including projected artifact and evidence Markdown when present;
 - `generation-summary.json`, including publication hashes and provenance; and
-- `publication-manifest.json`, the bounded release/candidate/governance attestation for the static deployment.
+- `publication-manifest.json`, the bounded release/candidate/governance attestation for the static deployment; and
+- zero or more `content/<sha256>.txt` files, each declared by the snapshot and verified against its digest before upload.
 
-The workflow does not upload repository source, credentials, Git metadata, distribution packages, or retained evidence file bodies beyond information already represented by the canonical Explorer contract.
+Publishing the generated bundle makes every included artifact body, evidence body, and raw evidence file public. The workflow does not scan for secrets or redact content; maintainers must keep sensitive material out of the selected governance snapshot. It rejects undeclared files, path-shaped raw names, hash mismatches, repository source outside the bounded Explorer contract, credentials, Git metadata, and distribution packages.
 
 The optional 3D topology retains the exact unpkg dependency, CSP, timeout, and non-3D fallback accepted by `ADR-DST-008`. GitHub Actions, GitHub Pages, and that CDN remain external availability and trust dependencies.
 
