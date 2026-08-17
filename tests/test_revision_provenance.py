@@ -16,7 +16,7 @@ SCRIPTS = REPOSITORY_ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-from generate_harness_dashboard import generate_snapshot, render_dashboard  # noqa: E402
+from generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
 
 from se_harness.cli import main  # noqa: E402
@@ -431,9 +431,11 @@ class RevisionValidatorTests(unittest.TestCase):
         self.assertEqual("quality-owner", source_projection["supersession_authorized_by"])
         self.assertEqual(["VREC-001"], successor_projection["supersedes"])
         self.assertNotIn("W-REV-004", {item["rule"] for item in snapshot["findings"]})
-        dashboard = render_dashboard(snapshot)
-        self.assertIn("Superseded by", dashboard)
-        self.assertIn("Supersession authorized by", dashboard)
+        _, manifest, resources, _ = build_dashboard_bundle(snapshot)
+        readiness = json.loads(resources[manifest["entrypoints"]["readiness"]["path"]])
+        source = next(item for item in readiness["revision_provenance"] if item["id"] == "VREC-001")
+        self.assertEqual(["VREC-002"], source["superseded_by"])
+        self.assertEqual("quality-owner", source["supersession_authorized_by"])
 
     def test_supersession_requires_structured_fields_only_on_superseded_records(self) -> None:
         create_additional_chain(self.root, work_order_status="released")

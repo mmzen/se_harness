@@ -20,12 +20,20 @@ from urllib.parse import urlparse
 
 
 EXPECTED_REPOSITORY = "mmzen/se_harness"
-SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
-GENERATION_SCHEMA = "harness-dashboard-generation-v1"
+BUNDLE_SCHEMA = "harness-dashboard-bundle-v2"
+BOOTSTRAP_SCHEMA = "harness-dashboard-bootstrap-v2"
+GENERATION_SCHEMA = "harness-dashboard-generation-v2"
 PUBLICATION_SCHEMA = "se-harness-pages-publication-v1"
-SOURCE_FILES = frozenset({"dashboard-data.json", "generation-summary.json", "index.html"})
+SOURCE_FILES = frozenset({"dashboard-manifest.json", "generation-summary.json", "index.html"})
 PUBLISHED_FIXED_FILES = frozenset({*SOURCE_FILES, "publication-manifest.json"})
 CONTENT_FILE_PATTERN = re.compile(r"content/(?P<sha256>[0-9a-f]{64})\.txt")
+RESOURCE_FILE_PATTERN = re.compile(
+    r"(?:data/(?:summary|topology|readiness|artifacts)/[0-9a-f]{64}\.json|content/[0-9a-f]{64}\.txt)"
+)
+BOOTSTRAP_PATTERN = re.compile(
+    r'<script id="harness-dashboard-bootstrap" type="application/json">(?P<payload>.*?)</script>',
+    re.DOTALL,
+)
 TAG_PATTERN = re.compile(r"v(?P<version>0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)")
 RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9]+-[0-9]{3}")
 HEX_PATTERN = re.compile(r"[0-9a-f]+")
@@ -70,14 +78,33 @@ def _json_bytes(value: Any) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
+def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, item in pairs:
+        if key in value:
+            raise PublicationError(f"JSON object contains duplicate key: {key}")
+        value[key] = item
+    return value
+
+
+def _loads_json_bytes(payload: bytes, *, label: str) -> dict[str, Any]:
+    try:
+        value = json.loads(
+            payload.decode("utf-8"),
+            object_pairs_hook=_reject_duplicate_keys,
+        )
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise PublicationError(f"invalid UTF-8/JSON document: {label}") from exc
+    if not isinstance(value, dict):
+        raise PublicationError(f"JSON document must be an object: {label}")
+    return value
+
+
 def _read_json(path: Path) -> dict[str, Any]:
     try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        return _loads_json_bytes(path.read_bytes(), label=str(path))
+    except OSError as exc:
         raise PublicationError(f"invalid JSON file: {path}") from exc
-    if not isinstance(value, dict):
-        raise PublicationError(f"JSON document must be an object: {path}")
-    return value
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -435,80 +462,143 @@ def _validated_provenance(path: Path) -> ReleaseProvenance:
 def _source_payload(source: Path) -> dict[str, bytes]:
     if not source.is_dir() or source.is_symlink():
         raise PublicationError("generated dashboard source must be a real directory")
-    entries = sorted(source.iterdir(), key=lambda path: path.name)
-    top_level_names = {path.name for path in entries}
-    allowed_top_level = {*SOURCE_FILES, "content"}
-    missing = sorted(SOURCE_FILES - top_level_names)
-    unexpected = sorted(top_level_names - allowed_top_level)
-    if missing or unexpected:
-        raise PublicationError(
-            f"generated dashboard file set differs from the allowlist; missing={missing}, unexpected={unexpected}"
-        )
     payload: dict[str, bytes] = {}
-    for name in sorted(SOURCE_FILES):
-        path = source / name
-        if path.is_symlink() or not path.is_file():
-            raise PublicationError(f"generated dashboard source is not a regular file: {name}")
-        payload[name] = path.read_bytes()
-    content_root = source / "content"
-    if content_root.exists():
-        if content_root.is_symlink() or not content_root.is_dir():
-            raise PublicationError("generated dashboard content must be a real directory")
-        for path in sorted(content_root.iterdir(), key=lambda item: item.name):
-            relative = f"content/{path.name}"
-            if (
-                path.is_symlink()
-                or not path.is_file()
-                or CONTENT_FILE_PATTERN.fullmatch(relative) is None
-            ):
-                raise PublicationError(
-                    f"generated dashboard content differs from the allowlist: {relative}"
-                )
-            payload[relative] = path.read_bytes()
+    for path in sorted(source.rglob("*"), key=lambda item: item.as_posix()):
+        relative = path.relative_to(source).as_posix()
+        if path.is_symlink():
+            raise PublicationError(f"generated dashboard source contains a symbolic link: {relative}")
+        if path.is_dir():
+            continue
+        if not path.is_file():
+            raise PublicationError(f"generated dashboard source is not a regular file: {relative}")
+        payload[relative] = path.read_bytes()
     if sum(len(value) for value in payload.values()) > MAX_PAYLOAD_BYTES:
         raise PublicationError("generated dashboard exceeds the publication size boundary")
     return payload
 
 
-def _validated_raw_content(
-    snapshot: dict[str, Any],
-    payload: dict[str, bytes],
-) -> list[str]:
-    documents = snapshot.get("evidence_documents", [])
-    if not isinstance(documents, list):
-        raise PublicationError("snapshot evidence_documents must be an array")
-    expected: dict[str, bytes] = {}
-    for document in documents:
-        if not isinstance(document, dict):
-            raise PublicationError("snapshot evidence document must be an object")
-        if document.get("state") != "included":
-            continue
-        raw_path = document.get("raw_path")
-        digest = document.get("sha256")
-        markdown = document.get("markdown")
-        observed_bytes = document.get("bytes")
-        if not isinstance(raw_path, str) or CONTENT_FILE_PATTERN.fullmatch(raw_path) is None:
-            raise PublicationError("included evidence document has an invalid raw path")
-        if not isinstance(digest, str) or raw_path != f"content/{digest}.txt":
-            raise PublicationError("included evidence document raw path differs from its digest")
-        if not isinstance(markdown, str):
-            raise PublicationError("included evidence document has no projected Markdown")
-        encoded = markdown.encode("utf-8")
-        if _sha256(encoded) != digest or observed_bytes != len(encoded):
-            raise PublicationError("included evidence document content metadata is inconsistent")
-        previous = expected.get(raw_path)
-        if previous is not None and previous != encoded:
-            raise PublicationError("included evidence documents collide on one raw path")
-        expected[raw_path] = encoded
-    actual_paths = sorted(name for name in payload if name.startswith("content/"))
-    if set(actual_paths) != set(expected):
+def _descriptor(value: Any, *, label: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise PublicationError(f"{label} must be an object")
+    path = value.get("path")
+    digest = value.get("sha256")
+    size = value.get("bytes")
+    role = value.get("role")
+    schema = value.get("schema")
+    if (
+        not isinstance(path, str)
+        or RESOURCE_FILE_PATTERN.fullmatch(path) is None
+        or not isinstance(digest, str)
+        or not re.fullmatch(r"[0-9a-f]{64}", digest)
+        or not isinstance(size, int)
+        or isinstance(size, bool)
+        or size < 0
+        or not isinstance(role, str)
+        or not role
+        or not isinstance(schema, str)
+        or not schema
+    ):
+        raise PublicationError(f"{label} is invalid")
+    if Path(path).stem != digest:
+        raise PublicationError(f"{label} path differs from its digest")
+    return value
+
+
+def _validated_bundle(manifest: dict[str, Any], payload: dict[str, bytes]) -> list[str]:
+    if manifest.get("schema") != BUNDLE_SCHEMA:
+        raise PublicationError("generated dashboard uses an unsupported bundle schema")
+    repository = manifest.get("repository")
+    if not isinstance(repository, dict) or repository.get("valid") is not True:
+        raise PublicationError("generated dashboard does not describe a valid repository")
+    resources = manifest.get("resources")
+    if not isinstance(resources, list):
+        raise PublicationError("bundle resources must be an array")
+    declared: dict[str, dict[str, Any]] = {}
+    for index, candidate in enumerate(resources):
+        descriptor = _descriptor(candidate, label=f"bundle resource {index}")
+        path = descriptor["path"]
+        role = descriptor["role"]
+        schema = descriptor["schema"]
+        accepted = {
+            "summary": ("harness-dashboard-summary-v2", "data/summary/"),
+            "topology": ("harness-dashboard-topology-v2", "data/topology/"),
+            "readiness": ("harness-dashboard-readiness-v2", "data/readiness/"),
+            "artifact": ("harness-dashboard-artifact-v2", "data/artifacts/"),
+            "evidence": ("utf8-markdown-v1", "content/"),
+        }.get(role)
+        if accepted is None or schema != accepted[0] or not path.startswith(accepted[1]):
+            raise PublicationError(f"bundle resource role, schema, or path is unsupported: {path}")
+        if path in declared:
+            raise PublicationError(f"bundle resource path is duplicated: {path}")
+        declared[path] = descriptor
+    expected_files = {*SOURCE_FILES, *declared}
+    if set(payload) != expected_files:
+        missing = sorted(expected_files - set(payload))
+        unexpected = sorted(set(payload) - expected_files)
         raise PublicationError(
-            "generated raw evidence set differs from the canonical snapshot"
+            f"generated dashboard file set differs from its manifest; missing={missing}, unexpected={unexpected}"
         )
-    for path, expected_bytes in expected.items():
-        if payload[path] != expected_bytes:
-            raise PublicationError(f"generated raw evidence differs from its snapshot: {path}")
-    return actual_paths
+    for path, descriptor in declared.items():
+        content = payload[path]
+        if len(content) != descriptor["bytes"] or _sha256(content) != descriptor["sha256"]:
+            raise PublicationError(f"bundle resource differs from its descriptor: {path}")
+        if descriptor["schema"] == "utf8-markdown-v1":
+            try:
+                content.decode("utf-8")
+            except UnicodeError as exc:
+                raise PublicationError(f"evidence resource is not UTF-8: {path}") from exc
+            if descriptor["role"] != "evidence" or CONTENT_FILE_PATTERN.fullmatch(path) is None:
+                raise PublicationError(f"evidence resource role or path is invalid: {path}")
+            continue
+        try:
+            value = _loads_json_bytes(content, label=path)
+        except PublicationError as exc:
+            raise PublicationError(f"JSON resource is invalid: {path}") from exc
+        if not isinstance(value, dict) or value.get("schema") != descriptor["schema"]:
+            raise PublicationError(f"JSON resource schema differs from its descriptor: {path}")
+        if descriptor["role"] == "artifact":
+            artifact_id = descriptor.get("artifact_id")
+            artifact = value.get("artifact")
+            if (
+                not isinstance(artifact_id, str)
+                or not isinstance(artifact, dict)
+                or artifact.get("id") != artifact_id
+            ):
+                raise PublicationError(f"artifact resource identity is invalid: {path}")
+    entrypoints = manifest.get("entrypoints")
+    if not isinstance(entrypoints, dict):
+        raise PublicationError("bundle entrypoints must be an object")
+    for role in ("summary", "topology", "readiness"):
+        descriptor = _descriptor(entrypoints.get(role), label=f"bundle {role} entrypoint")
+        if descriptor.get("role") != role or declared.get(descriptor["path"]) != descriptor:
+            raise PublicationError(f"bundle {role} entrypoint is not declared exactly")
+    return sorted(declared)
+
+
+def _validated_bootstrap(generated_html: str, manifest_bytes: bytes, revision: str) -> None:
+    matches = list(BOOTSTRAP_PATTERN.finditer(generated_html))
+    if len(matches) != 1:
+        raise PublicationError("generated dashboard has no unique bootstrap descriptor")
+    try:
+        bootstrap = json.loads(
+            matches[0].group("payload"),
+            object_pairs_hook=_reject_duplicate_keys,
+        )
+    except json.JSONDecodeError as exc:
+        raise PublicationError("generated dashboard bootstrap is invalid JSON") from exc
+    expected = {
+        "path": "dashboard-manifest.json",
+        "bytes": len(manifest_bytes),
+        "sha256": _sha256(manifest_bytes),
+    }
+    if (
+        not isinstance(bootstrap, dict)
+        or bootstrap.get("schema") != BOOTSTRAP_SCHEMA
+        or bootstrap.get("bundle_schema") != BUNDLE_SCHEMA
+        or bootstrap.get("repository_revision") != revision
+        or bootstrap.get("manifest") != expected
+    ):
+        raise PublicationError("generated dashboard bootstrap differs from its manifest")
 
 
 def _demonstration_notice(provenance: ReleaseProvenance) -> str:
@@ -531,32 +621,35 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
     provenance = _validated_provenance(provenance_path)
     payload = _source_payload(source.resolve())
     try:
-        snapshot = json.loads(payload["dashboard-data.json"].decode("utf-8"))
-        summary = json.loads(payload["generation-summary.json"].decode("utf-8"))
+        bundle_manifest = _loads_json_bytes(payload["dashboard-manifest.json"], label="dashboard-manifest.json")
+        summary = _loads_json_bytes(payload["generation-summary.json"], label="generation-summary.json")
         generated_html = payload["index.html"].decode("utf-8")
-    except (UnicodeError, json.JSONDecodeError) as exc:
+    except (KeyError, UnicodeError) as exc:
         raise PublicationError("generated dashboard output is not valid UTF-8/JSON") from exc
-    if not isinstance(snapshot, dict) or snapshot.get("schema") != SNAPSHOT_SCHEMA:
-        raise PublicationError("generated dashboard uses an unsupported snapshot schema")
-    repository = snapshot.get("repository")
-    if not isinstance(repository, dict) or repository.get("valid") is not True:
-        raise PublicationError("generated dashboard does not describe a valid repository")
+    if not isinstance(bundle_manifest, dict):
+        raise PublicationError("generated dashboard manifest must be an object")
+    resource_paths = _validated_bundle(bundle_manifest, payload)
+    repository = bundle_manifest.get("repository")
     if repository.get("name") != "governance" or repository.get("revision") != provenance.governance_commit:
         raise PublicationError("generated dashboard repository provenance is not the selected governance snapshot")
+    if repository.get("git_object_format") != provenance.git_object_format:
+        raise PublicationError("generated dashboard Git object format differs from release provenance")
     if not isinstance(summary, dict) or summary.get("schema") != GENERATION_SCHEMA:
         raise PublicationError("generated dashboard uses an unsupported generation-summary schema")
     if summary.get("outcome") != "generated-valid" or summary.get("validator_error_count") != 0:
         raise PublicationError("generated dashboard summary is not valid")
     if summary.get("repository_revision") != provenance.governance_commit:
         raise PublicationError("generation summary revision differs from the governance snapshot")
-    raw_content_paths = _validated_raw_content(snapshot, payload)
 
-    snapshot_digest = _sha256(payload["dashboard-data.json"])
+    manifest_digest = _sha256(payload["dashboard-manifest.json"])
     generated_dashboard_digest = _sha256(payload["index.html"])
-    if summary.get("snapshot_sha256") != snapshot_digest:
-        raise PublicationError("generation summary snapshot hash is incorrect")
+    if summary.get("bundle_schema") != BUNDLE_SCHEMA or summary.get("manifest_sha256") != manifest_digest:
+        raise PublicationError("generation summary bundle manifest hash is incorrect")
     if summary.get("dashboard_sha256") != generated_dashboard_digest:
         raise PublicationError("generation summary dashboard hash is incorrect")
+    if summary.get("resource_count") != len(resource_paths):
+        raise PublicationError("generation summary resource count is incorrect")
+    _validated_bootstrap(generated_html, payload["dashboard-manifest.json"], provenance.governance_commit)
     if generated_html.count(WORKSPACE_MARKER) != 1:
         raise PublicationError("generated dashboard has no unique publication notice boundary")
 
@@ -576,7 +669,8 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
         "governance_commit": provenance.governance_commit,
         "generated_dashboard_sha256": generated_dashboard_digest,
         "published_dashboard_sha256": published_dashboard_digest,
-        "raw_evidence_file_count": len(raw_content_paths),
+        "resource_file_count": len(resource_paths),
+        "raw_evidence_file_count": sum(1 for path in resource_paths if path.startswith("content/")),
     }
     published_summary = _json_bytes(summary)
     manifest = {
@@ -588,20 +682,20 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
         "release_record": provenance.release_record,
         "candidate_commit": provenance.candidate_commit,
         "governance_commit": provenance.governance_commit,
-        "snapshot_sha256": snapshot_digest,
+        "bundle_manifest_sha256": manifest_digest,
         "generated_dashboard_sha256": generated_dashboard_digest,
         "published_dashboard_sha256": published_dashboard_digest,
         "generation_summary_sha256": _sha256(published_summary),
-        "raw_evidence_files": raw_content_paths,
+        "resource_files": resource_paths,
     }
     published_payload = {
-        "dashboard-data.json": payload["dashboard-data.json"],
+        "dashboard-manifest.json": payload["dashboard-manifest.json"],
         "generation-summary.json": published_summary,
         "index.html": published_html,
         "publication-manifest.json": _json_bytes(manifest),
-        **{path: payload[path] for path in raw_content_paths},
+        **{path: payload[path] for path in resource_paths},
     }
-    if set(published_payload) != {*PUBLISHED_FIXED_FILES, *raw_content_paths}:
+    if set(published_payload) != {*PUBLISHED_FIXED_FILES, *resource_paths}:
         raise PublicationError("internal publication payload differs from the allowlist")
 
     destination = destination.resolve()

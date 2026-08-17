@@ -232,10 +232,12 @@ def _generate_snapshot(repository_root: Path) -> str:
     completed = _run([sys.executable, str(script), "--root", str(repository_root)], cwd=repository_root)
     if completed.returncode != 0:
         raise HarnessError("dashboard generation must pass before recording verification")
-    snapshot = repository_root / "target" / "harness-dashboard" / "dashboard-data.json"
-    if not snapshot.is_file():
-        raise HarnessError("dashboard generator did not create dashboard-data.json")
-    return hashlib.sha256(snapshot.read_bytes()).hexdigest()
+    manifest = repository_root / "target" / "harness-dashboard" / "dashboard-manifest.json"
+    if not manifest.is_file():
+        raise HarnessError("dashboard generator did not create dashboard-manifest.json")
+    # The v2 manifest recursively binds every deterministic artifact, relation,
+    # readiness, provenance, and retained-content resource for this revision.
+    return hashlib.sha256(manifest.read_bytes()).hexdigest()
 
 
 def capture_verification(

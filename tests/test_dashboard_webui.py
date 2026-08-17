@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 import re
 import sys
 import tempfile
@@ -85,7 +86,8 @@ class DashboardWebUIContractTests(unittest.TestCase):
     def test_templates_preserve_the_reviewed_3d_design_and_canonical_boundary(self) -> None:
         content = self.template.read_text(encoding="utf-8")
         self.assertEqual(content, self.canonical.read_text(encoding="utf-8"))
-        self.assertEqual(1, content.count("__HARNESS_SNAPSHOT_JSON__"))
+        self.assertEqual(1, content.count("__HARNESS_BOOTSTRAP_JSON__"))
+        self.assertIn('id="harness-dashboard-bootstrap"', content)
         self.assertIn('raw.schema!=="harness-dashboard-snapshot-v1"', content)
         self.assertIn('data-current-view="overview"', content)
         self.assertIn('data-view="lineage"', content)
@@ -101,7 +103,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('Interactive 3D topology unavailable', content)
         for forbidden in (
             "<script src=",
-            "fetch(",
             "WebSocket(",
             "generatedAt",
             "Show complete graph",
@@ -194,6 +195,8 @@ class DashboardWebUIContractTests(unittest.TestCase):
         for forbidden in ("history.pushState", "localStorage", "sessionStorage", "document.cookie"):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, content)
+        self.assertIn("async function fetchBoundResource", content)
+        self.assertIn('crypto.subtle.digest("SHA-256",bytes)', content)
 
     def test_search_clear_and_revision_presentation_preserve_state_and_provenance(self) -> None:
         content = self.template.read_text(encoding="utf-8")
@@ -221,8 +224,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         for revision in ("a" * 40, "B" * 64, "unavailable", "not-a-full-object-id"):
             with self.subTest(revision=revision):
                 fixture = {**snapshot, "repository": {**snapshot["repository"], "revision": revision}}
-                rendered = GENERATOR.render_dashboard(fixture)
-                self.assertIn(f'"revision":"{revision}"', rendered)
+                bootstrap, _, _, _ = GENERATOR.build_dashboard_bundle(fixture)
+                rendered = GENERATOR.render_dashboard(bootstrap)
+                self.assertIn(f'"repository_revision":"{revision}"', rendered)
 
     def test_five_questions_and_semantic_states_remain_explicit(self) -> None:
         content = self.template.read_text(encoding="utf-8")
@@ -299,10 +303,88 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(GENERATOR.serialize_json(snapshot), GENERATOR.serialize_json(snapshot))
 
         future = dict(snapshot)
+        future["repository"] = {**snapshot["repository"], "revision": "a" * 40}
         future["artifacts"] = [*snapshot["artifacts"], {"id": "FUTURE-001", "type": "future_control", "title": "Future control", "status": "draft", "owners": [], "path": "future.md"}]
-        rendered = GENERATOR.render_dashboard(future)
-        self.assertIn('"type":"future_control"', rendered)
+        bootstrap, manifest, resources, observations = GENERATOR.build_dashboard_bundle(future)
+        rendered = GENERATOR.render_dashboard(bootstrap)
+        topology = json.loads(resources[manifest["entrypoints"]["topology"]["path"]])
+        self.assertTrue(any(item.get("type") == "future_control" for item in topology["artifacts"]))
         self.assertIn("new Option(v,v)", rendered)
+        self.assertEqual(GENERATOR.BUNDLE_SCHEMA, manifest["schema"])
+        self.assertEqual(len(manifest["resources"]), observations["resource_count"])
+        self.assertLessEqual(len(rendered.encode("utf-8")), GENERATOR.MAX_INDEX_BYTES)
+        self.assertNotIn("# SE Harness", rendered)
+
+    def test_progressive_bundle_is_deterministic_partitioned_and_bounded(self) -> None:
+        snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
+        self.assertTrue(report.valid)
+        snapshot["repository"] = {**snapshot["repository"], "revision": "a" * 40}
+        first = GENERATOR.build_dashboard_bundle(snapshot)
+        second = GENERATOR.build_dashboard_bundle(snapshot)
+        self.assertEqual(first, second)
+        bootstrap, manifest, resources, observations = first
+
+        manifest_bytes = GENERATOR.serialize_json(manifest).encode("utf-8")
+        self.assertEqual(GENERATOR.BUNDLE_SCHEMA, manifest["schema"])
+        self.assertEqual(hashlib.sha256(manifest_bytes).hexdigest(), bootstrap["manifest"]["sha256"])
+        self.assertEqual(len(manifest_bytes), bootstrap["manifest"]["bytes"])
+        paths = [item["path"] for item in manifest["resources"]]
+        self.assertEqual(sorted(paths), paths)
+        self.assertEqual(len(paths), len(set(paths)))
+        self.assertEqual(set(paths), set(resources))
+        for descriptor in manifest["resources"]:
+            encoded = resources[descriptor["path"]].encode("utf-8")
+            self.assertEqual(descriptor["bytes"], len(encoded))
+            self.assertEqual(descriptor["sha256"], hashlib.sha256(encoded).hexdigest())
+            self.assertEqual(descriptor["sha256"], Path(descriptor["path"]).stem)
+
+        summary = json.loads(resources[manifest["entrypoints"]["summary"]["path"]])
+        topology = json.loads(resources[manifest["entrypoints"]["topology"]["path"]])
+        readiness = json.loads(resources[manifest["entrypoints"]["readiness"]["path"]])
+        self.assertNotIn("artifacts", summary)
+        self.assertNotIn("relations", summary)
+        self.assertEqual({"draft", "ready", "unresolved_relations"}, set(summary["queue_counts"]))
+        self.assertTrue(all("content" not in item and "detail" in item for item in topology["artifacts"]))
+        self.assertTrue(all(item["authority"] == "formal" for item in topology["artifacts"]))
+        self.assertNotIn('"markdown"', resources[manifest["entrypoints"]["topology"]["path"]])
+        self.assertNotIn('"markdown"', resources[manifest["entrypoints"]["readiness"]["path"]])
+        self.assertEqual(len(snapshot["readiness"]), len(readiness["readiness"]))
+        detail_descriptors = [item for item in manifest["resources"] if item["role"] == "artifact"]
+        self.assertEqual(len(snapshot["artifacts"]), len(detail_descriptors))
+        detail = json.loads(resources[detail_descriptors[0]["path"]])
+        self.assertIn("content", detail["artifact"])
+        self.assertTrue(all("markdown" not in item for item in detail["evidence_documents"]))
+        rendered = GENERATOR.render_dashboard(bootstrap)
+        self.assertLessEqual(len(rendered.encode("utf-8")), GENERATOR.MAX_INDEX_BYTES)
+        self.assertLessEqual(manifest["entrypoints"]["summary"]["bytes"], GENERATOR.MAX_SUMMARY_BYTES)
+        self.assertLessEqual(manifest["entrypoints"]["topology"]["bytes"], GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
+        self.assertFalse(observations["topology_target_exceeded"])
+
+    def test_progressive_browser_contract_is_verified_lazy_and_race_safe(self) -> None:
+        content = self.template.read_text(encoding="utf-8")
+        for marker in (
+            'redirect:"error",cache:"no-cache"',
+            'crypto.subtle.digest("SHA-256",bytes)',
+            'response.url,location.href',
+            'if(location.protocol==="file:")',
+            'async function ensureTopology()',
+            'async function ensureReadiness()',
+            'async function ensureArtifactDetail(id,generation)',
+            'selectedId===id&&selectionGeneration===generation',
+            'details[data-evidence-path]',
+            'async function ensureEvidence(details)',
+            'requestCache=new Map()',
+            'verifiedCache=new Map()',
+            'data-retry="topology"',
+            'async function retryLoad(scope,trigger)',
+            'clearVerified(manifest?.entrypoints?.readiness)',
+            'clearVerified(node?.detail)',
+            'clearVerified(resourceByPath.get(details.dataset.evidencePath))',
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, content)
+        self.assertNotIn("localStorage", content)
+        self.assertNotIn("sessionStorage", content)
 
     def test_content_projection_is_additive_bounded_and_deterministic(self) -> None:
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
@@ -473,7 +555,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             "visitLineage(artifact.dataset.artifactId)",
             "Open raw evidence",
             "Evidence presence is retained material only",
-            "Publishing the bundle exposes all included content and raw evidence files",
+            "publishing the bundle exposes every declared resource",
         ):
             with self.subTest(marker=marker):
                 self.assertIn(marker, content)
@@ -488,15 +570,19 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 self.assertNotIn(forbidden, content.lower())
 
     def test_renderer_context_escapes_hostile_repository_text(self) -> None:
-        snapshot, _, _ = GENERATOR.generate_snapshot(ROOT)
-        hostile = '</script><img src=x onerror="alert(1)">&\u2028\u2029__HARNESS_SNAPSHOT_JSON__'
-        snapshot["artifacts"][0]["title"] = hostile
-        rendered = GENERATOR.render_dashboard(snapshot)
+        hostile = '</script><img src=x onerror="alert(1)">&\u2028\u2029__HARNESS_BOOTSTRAP_JSON__'
+        bootstrap = {
+            "schema": GENERATOR.BOOTSTRAP_SCHEMA,
+            "bundle_schema": GENERATOR.BUNDLE_SCHEMA,
+            "repository_revision": hostile,
+            "manifest": {"path": "dashboard-manifest.json", "bytes": 1, "sha256": "a" * 64},
+        }
+        rendered = GENERATOR.render_dashboard(bootstrap)
         self.assertNotIn('</script><img src=x onerror="alert(1)">', rendered)
         self.assertIn("\\u003c/script\\u003e", rendered)
-        self.assertIn("\\u0026\\u2028\\u2029__HARNESS_SNAPSHOT_JSON__", rendered)
+        self.assertIn("\\u0026\\u2028\\u2029__HARNESS_BOOTSTRAP_JSON__", rendered)
         self.assertEqual(2, rendered.count("<script"))
-        self.assertNotIn("__HARNESS_SNAPSHOT_JSON__</script>", rendered)
+        self.assertNotIn("__HARNESS_BOOTSTRAP_JSON__</script>", rendered)
 
     def test_temporal_reassessment_supports_only_governed_declared_dependencies(self) -> None:
         supported = {
@@ -619,7 +705,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         content = self.template.read_text(encoding="utf-8")
         self.assertEqual(1, content.count("https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"))
         self.assertIn("script-src 'unsafe-inline' https://unpkg.com", content)
-        self.assertIn("connect-src 'none'", content)
+        self.assertIn("connect-src 'self'", content)
         self.assertNotIn("integrity=", content)
 
 
