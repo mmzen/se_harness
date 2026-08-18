@@ -2,7 +2,7 @@
 id = "VREC-RLO-001"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
@@ -18,8 +18,8 @@ verifies_work_order = ["WO-RLO-001"]
 conforms_to = ["VER-DPG-001", "VER-PYP-001", "VER-RLO-001"]
 +++
 
-# Verification Record Candidate
+# Verified Verification Record
 
-This ready record binds retained evidence for `WO-RLO-001` to candidate commit `3cf47076d4e64ba190736c453c120fe50907032d`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+This record binds retained evidence for `WO-RLO-001` to candidate commit `3cf47076d4e64ba190736c453c120fe50907032d`. After reviewing the ready record and retained evidence, the accountable repository owner explicitly instructed `i validate you can transition / commit` on 2026-08-18. The ready record was retained unchanged in governance commit `7de7865`; this separate transition records that human assurance decision. Automation only records it and does not grant release authority.
 
-The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+The record was intentionally created after the candidate commit it names, avoiding self-referential commit metadata. Its captured candidate, object format, clean worktree state, timestamp, artifact snapshot, evidence paths, work order, and verification contracts remain unchanged by the transition.
