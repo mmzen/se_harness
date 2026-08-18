@@ -82,7 +82,7 @@
     },
     "docs/engineering/templates/RELEASE_RECORD.template.md": {
       "mode": "managed",
-      "sha256": "61b30eb7f9f104e0278e953a3fa8d8397f5c346e680e0320890344e49fa43bb3"
+      "sha256": "81170faa7fcfe71d64bb8121aa02e01b723182157af086cc3776107ecc7910ab"
     },
     "docs/engineering/templates/REQUIREMENT.template.md": {
       "mode": "managed",
@@ -134,7 +134,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "7c09ea29d076ef82be869f997bd002cb87dcaf2beabab4135b4bc20281f82667"
+      "sha256": "8393da7e1f804acb6ec4f2f011d11fba8c78247ac42fa504e9b43916c018d54b"
     }
   },
   "hash_algorithm": "sha256",

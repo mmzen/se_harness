@@ -5,7 +5,7 @@ title = "Release-bound static demonstration deployment"
 status = "implemented"
 owners = ["technical-owner", "security-owner", "service-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 
 [relations]
 addresses = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
@@ -26,7 +26,7 @@ SE Harness already generates a self-contained Explorer from a deterministic cano
 
 ## Components and responsibilities
 
-- The GitHub release event or accountable replay supplies the selected release identity.
+- The main-context released-record orchestrator or accountable Pages-only replay supplies the selected RLS identity.
 - A provenance resolver reads main-history release records and Git objects, then selects one immutable governance commit or fails.
 - The independently released governor validates the formal graph at that commit.
 - The target-local canonical Explorer generator creates the static demonstration from the validated checkout.
@@ -37,14 +37,14 @@ SE Harness already generates a self-contained Explorer from a deterministic cano
 
 ## Dependency direction
 
-The release event and Git history feed provenance resolution. The immutable checkout feeds independent validation and the existing one-way Explorer pipeline from repository artifacts to canonical snapshot to safe static presentation. The payload gate feeds Pages upload and deployment. Nothing flows from Pages back into repository artifacts, Git history, releases, packages, or lifecycle state.
+The released-record plan and Git history feed provenance resolution. The immutable checkout feeds independent validation and the existing one-way Explorer pipeline from repository artifacts to canonical snapshot to safe static presentation. The payload gate feeds Pages upload and deployment. Nothing flows from Pages back into repository artifacts, Git history, releases, packages, or lifecycle state.
 
 Consumer repositories do not depend on this workflow. The standard distribution, installed `harnessctl`, and self-hosting governor do not depend on the public site.
 
 ## Data and control flow
 
 ```text
-published GitHub Release or authorized replay
+main-context released-record orchestration or authorized Pages replay
   -> unique released RLS + tag/candidate checks
   -> immutable main-history governance commit
   -> released-governor graph validation

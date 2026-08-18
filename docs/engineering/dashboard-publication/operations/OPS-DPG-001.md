@@ -5,7 +5,7 @@ title = "Operate the public Explorer demonstration"
 status = "approved"
 owners = ["service-owner", "repository-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 
 [relations]
 assures = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
@@ -25,7 +25,7 @@ The site is a best-effort promotional demonstration, not a production assurance 
 
 ## Observability
 
-Observe the GitHub Release, Actions run conclusion, selected release record, candidate and governance commits, generated hashes, Pages environment deployment, deployed URL, and visitor-visible provenance notice. Platform workflow and deployment history are operational observations, not formal lifecycle authority.
+Observe the released-record orchestration, GitHub Release, Actions run conclusion, selected release record, candidate and governance commits, generated hashes, Pages environment deployment, deployed URL, and visitor-visible provenance notice. Platform workflow and deployment history are operational observations, not formal lifecycle authority.
 
 ## Alerts and escalation
 
@@ -33,11 +33,11 @@ GitHub's failed-workflow and environment notifications are the primary signals. 
 
 ## Capacity and cost boundaries
 
-Run only on selected published releases and authorized replays. Publish one bounded static dashboard; do not add a persistent application, database, analytics service, high-frequency schedule, or paid infrastructure without new authority.
+Run only inside selected released-record orchestrations and authorized main-only replays. Publish one bounded static dashboard; do not add a persistent application, database, analytics service, high-frequency schedule, or paid infrastructure without new authority.
 
 ## Backup and recovery
 
-Formal artifacts and Git history are the durable source. Rebuild the Pages artifact from the recorded release tag, release record, and immutable governance commit. The previous successful Pages deployment may remain live while a replacement fails. Generated output requires no repository backup branch.
+Formal artifacts and Git history are the durable source. Rebuild the Pages artifact from the released RLS and immutable governance commit; derive the tag rather than re-entering it. The previous successful Pages deployment may remain live while a replacement fails. Generated output requires no repository backup branch.
 
 ## Security and compliance controls
 
@@ -52,7 +52,7 @@ Automation may validate, generate, upload, deploy, report, serialize, and retry 
 ### Publish after release
 
 1. Confirm the formal release record is `released` and the GitHub Release exists.
-2. Observe the automatic workflow's resolved RLS, candidate, governance commit, and hashes.
+2. Observe the orchestrator's resolved RLS, candidate, governance commit, and hashes.
 3. Review the deployed URL and demonstration notice.
 
 ### Replay a failed deployment

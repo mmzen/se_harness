@@ -379,13 +379,14 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
 
-    def test_workflow_has_only_release_and_controlled_replay_triggers(self) -> None:
-        self.assertIn("  release:\n    types: [published]\n", self.workflow)
+    def test_workflow_has_only_main_controlled_replay_trigger(self) -> None:
+        self.assertNotIn("  release:\n", self.workflow)
         self.assertIn("  workflow_dispatch:\n", self.workflow)
         self.assertNotIn("  push:\n", self.workflow)
         self.assertNotIn("  pull_request:\n", self.workflow)
-        for name in ("release_tag", "release_record", "governance_commit"):
+        for name in ("release_record", "governance_commit"):
             self.assertIn(f"      {name}:\n", self.workflow)
+        self.assertNotIn("      release_tag:\n", self.workflow)
         self.assertIn("github.repository == 'mmzen/se_harness'", self.workflow)
         self.assertIn("github.ref == 'refs/heads/main'", self.workflow)
 

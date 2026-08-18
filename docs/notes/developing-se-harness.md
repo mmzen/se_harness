@@ -35,6 +35,9 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/workflows/self-hosting-governor.yml candidate reusable workflow published for later governors
 .github/workflows/publish-dashboard-pages.yml repository-specific release-bound demonstration deployment
 .github/scripts/publish_dashboard.py          Pages provenance and public-payload gate; not consumer tooling
+.github/workflows/publish-pypi.yml             one-input release orchestrator and stable PyPI publisher identity
+.github/scripts/publish_release.py              trusted release resolution, reconciliation, and result helper
+scripts/create_release_bundle_manifest.py       deterministic pre-RLS distribution evidence producer
 ```
 
 The root validator and Explorer sources remain byte-identical to their canonical managed-template copies. The self-hosting workflow and root self-hosting configuration are intentional repository-specific controls protected by the root lock, not alternative consumer profiles.
@@ -72,19 +75,19 @@ The current package and source candidate is version 0.4.1, while `.self-hosting/
 
 ## Building and releasing
 
-A distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic sequence: build the wheel and raw sdist in a provisioned build environment, then normalize the final sdist using the candidate commit timestamp.
+A distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic sequence: build the wheel and raw sdist in a provisioned build environment, normalize the final sdist using the candidate commit timestamp, and use `scripts/create_release_bundle_manifest.py` to retain the exact filenames, hashes, epoch, candidate tree identity, and canonical checksum bytes. `harnessctl prepare-release --distribution-manifest <bundle.json>` validates and copies that structured identity into the ready RLS proposal. Historical RLS files remain valid without the optional block, but they cannot drive the new publication path.
 
 Build success is evidence, not release authorization. The release lineage remains:
 
 ```text
-clean candidate C -> ready VREC -> human verification
-                  -> ready RLS  -> human release decision
-                  -> authorized tag/GitHub Release/publication
+clean candidate C -> exact bundle manifest -> ready VREC -> human verification
+                                         -> ready RLS  -> human release decision
+                                         -> one-input authorized publication
 ```
 
-The tag selects C, not a later governance commit. Production PyPI promotion verifies the already released wheel and sdist hashes and publishes those files without rebuilding. It remains a separate protected-environment decision.
+The tag selects C, not a later governance commit. After the released RLS is integrated into `main`, the release owner dispatches **Publish authorized SE Harness release** from `main` with only its `RLS-*` ID. The workflow derives every other identity, rebuilds C twice without credentials, creates or verifies the immutable tag and exact GitHub Release, and passes those final assets into the checkout-free PyPI job. The protected `pypi` environment remains a separate human decision. Exact existing state is replay-complete; partial or mismatched immutable state blocks without replacement.
 
-The repository-specific Pages workflow may then publish a public Explorer demonstration of the completed release graph. It keeps the tagged candidate commit distinct from the later main commit containing the released governance record, validates that immutable snapshot with its released governor, and uses target-local code only to render derived post-release output. It is not copied into the consumer template and does not govern, verify, release, or promote the candidate. See [Publishing the SE Harness development dashboard](harness-dashboard-publication.md).
+The same main-context orchestration publishes the public Explorer demonstration from the later governance commit containing the released record. It keeps that snapshot distinct from the tagged candidate, validates it with the released governor, and uses target-local code only to render derived post-release output. `publish-dashboard-pages.yml` remains a main-only Pages recovery action taking the same RLS plus its explicit governance commit; it no longer deploys from a tag-ref release event. Neither workflow is copied into the consumer template or grants formal lifecycle authority. See [Publishing the SE Harness development dashboard](harness-dashboard-publication.md).
 
 No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable promotion authority.
 

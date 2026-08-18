@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import io
 import json
 import os
@@ -760,6 +761,57 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
+        self.assertTrue(validate_repository(self.root).valid)
+
+    def test_prepare_release_binds_a_complete_distribution_manifest(self) -> None:
+        candidate = self.initialize_candidate()
+        record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        write(record_path, verification_record(candidate))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
+        version = "1.2.3"
+        wheel_hash = "1" * 64
+        sdist_hash = "2" * 64
+        checksum_bytes = (
+            f"{wheel_hash}  se_harness-{version}-py3-none-any.whl\n"
+            f"{sdist_hash}  se_harness-{version}.tar.gz\n"
+        ).encode("utf-8")
+        manifest = {
+            "schema": "se-harness-release-bundle/v1",
+            "version": version,
+            "commit": candidate,
+            "git_object_format": "sha1",
+            "source_date_epoch": int(self.git("show", "-s", "--format=%ct", candidate)),
+            "wheel": f"se_harness-{version}-py3-none-any.whl",
+            "wheel_sha256": wheel_hash,
+            "sdist": f"se_harness-{version}.tar.gz",
+            "sdist_sha256": sdist_hash,
+            "checksums": "SHA256SUMS",
+            "checksums_sha256": hashlib.sha256(checksum_bytes).hexdigest(),
+            "checksums_content": checksum_bytes.decode("utf-8"),
+            "source_manifest_sha256": "3" * 64,
+        }
+        manifest_path = self.root / "bundle.json"
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(manifest_path))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "retain distribution manifest")
+
+        code, _, error = self.invoke(
+            "prepare-release",
+            str(self.root),
+            "--id", "RLS-002",
+            "--release-contract", "REL-001",
+            "--verification-record", "VREC-001",
+            "--work-order", "WO-001",
+            "--version", version,
+            "--authorized-by", "release-owner",
+            "--tag", f"v{version}",
+            "--distribution-manifest", "bundle.json",
+        )
+        self.assertEqual(0, code, error)
+        release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
+        self.assertIn("[distribution]", release)
+        self.assertIn(f'wheel_sha256 = "{wheel_hash}"', release)
         self.assertTrue(validate_repository(self.root).valid)
 
     def test_aggregate_capture_rejects_duplicate_and_incomplete_scope(self) -> None:

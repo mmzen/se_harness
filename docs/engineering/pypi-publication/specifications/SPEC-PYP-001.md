@@ -5,7 +5,7 @@ title = "Exact-asset PyPI Trusted Publishing contract"
 status = "implemented"
 owners = ["engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-18"
 
 [relations]
 specifies = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
@@ -19,7 +19,7 @@ Define `.github/workflows/publish-pypi.yml`, the GitHub `pypi` environment, dete
 
 ## Actors and external systems
 
-- A release owner supplies an authorized tag and expected hashes and approves the protected environment deployment.
+- A release owner supplies one released RLS ID and approves the protected environment deployment; the workflow derives the tag and expected hashes.
 - GitHub Releases supplies public release metadata and files.
 - GitHub Actions supplies an ephemeral runner, repository token, protected environment, and OIDC identity.
 - PyPI trusts the exact repository/workflow/environment identity and receives distributions.
@@ -27,9 +27,8 @@ Define `.github/workflows/publish-pypi.yml`, the GitHub `pypi` environment, dete
 
 ## Inputs
 
-- `tag`: exact `vMAJOR.MINOR.PATCH` GitHub release tag.
-- `wheel_sha256`: lowercase 64-character SHA-256 from retained release evidence.
-- `sdist_sha256`: lowercase 64-character SHA-256 from retained release evidence.
+- `release_record`: one canonical released `RLS-*` identifier integrated into trusted `main` history.
+- Derived from that record: exact tag, candidate, version, wheel/sdist/checksum filenames and lowercase SHA-256 values.
 - External configuration: GitHub environment `pypi`; PyPI publisher owner `mmzen`, repository `se_harness`, workflow `publish-pypi.yml`, environment `pypi`.
 
 ## Outputs
@@ -41,7 +40,7 @@ Define `.github/workflows/publish-pypi.yml`, the GitHub `pypi` environment, dete
 ## State model
 
 1. **Configured:** workflow and environment exist; no publication authority is implied.
-2. **Authorized:** a separate release-owner record names tag, hashes, and PyPI destination.
+2. **Authorized:** a released RLS names the candidate, tag, structured distribution identities, and release scope.
 3. **Awaiting approval:** manual workflow dispatch is blocked on the `pypi` environment.
 4. **Preflight:** release state, filenames, hashes, and manifest are checked.
 5. **Publishing:** the pinned PyPA action alone exchanges OIDC and uploads.
@@ -49,17 +48,18 @@ Define `.github/workflows/publish-pypi.yml`, the GitHub `pypi` environment, dete
 
 ## Behavioral rules
 
-1. The workflow exposes only `workflow_dispatch` with required tag, wheel hash, and sdist hash inputs.
-2. The tag must match `^v[0-9]+\.[0-9]+\.[0-9]+$` and name a non-draft, non-prerelease GitHub release.
+1. The top-level workflow exposes only `workflow_dispatch` with one required `release_record` input; it accepts no tag, version, candidate, filename, hash, force, or skip override.
+2. Trusted resolution requires the record to be `released` on first-parent `main`, derives a tag matching `^v[0-9]+\.[0-9]+\.[0-9]+$`, and requires the final GitHub Release to be non-draft and non-prerelease before PyPI promotion.
 3. `VERSION` is the tag without `v`; exact expected files are `se_harness-${VERSION}-py3-none-any.whl`, `se_harness-${VERSION}.tar.gz`, and `SHA256SUMS`.
-4. Both supplied hashes must match `^[0-9a-f]{64}$`.
+4. Both RLS-derived distribution hashes must match `^[0-9a-f]{64}$`; downstream jobs cannot replace them.
 5. Download occurs with the job's read-only repository token into an isolated asset directory.
-6. SHA-256 verification uses the supplied hashes independently and requires the downloaded manifest to be byte-identical to a deterministic two-line manifest containing those values and filenames.
+6. SHA-256 verification uses the RLS-derived hashes independently and requires the downloaded manifest to be byte-identical to a deterministic two-line manifest containing those values and filenames.
 7. Only the wheel and sdist are copied into a separate `dist/` directory.
 8. The publication job runs only when `github.ref` is `refs/heads/main`; the `pypi` environment permits only `main`; the job has job-scoped `contents: read` and `id-token: write`, stores no PyPI secret, checks out no repository content, and executes no repository code.
-9. The publisher is `pypa/gh-action-pypi-publish` pinned to reviewed commit `a892a5a61159132606e93a2fa6f4358831b04d26` (`v1.14.2`). Metadata verification, hash reporting, and attestations are explicit; `skip-existing` is absent.
-10. A failed preflight or upload stops. Correction uses a new verified version and a new authorization.
-11. Workflow availability, a successful dry static check, or GitHub environment configuration never grants publication authority.
+9. The publisher is `pypa/gh-action-pypi-publish` pinned to reviewed peeled commit `dc37677b2e1c63e2034f94d8a5b11f265b73ba33` (`v1.14.2`). Metadata verification, hash reporting, and attestations are explicit; `skip-existing` is absent.
+10. Before the publisher, public PyPI state is classified: no files is eligible, both exact files is replay-complete without upload, and any partial, unexpected, or mismatched state blocks.
+11. A failed preflight or upload stops. Correction uses a new verified version and a new authorization; immutable state is not deleted or replaced.
+12. Workflow availability, a successful dry static check, or GitHub environment configuration never grants publication authority.
 
 ## Error and recovery behavior
 
@@ -67,7 +67,7 @@ All validation errors exit nonzero before the publisher step. External upload er
 
 ## Data and interface contracts
 
-The workflow filename and environment name are stable identity inputs to PyPI. Renaming either requires coordinated PyPI configuration and an approved artifact change. Hash inputs are lowercase hex and are never inferred from the colocated checksum file.
+The workflow filename and environment name are stable identity inputs to PyPI. Renaming either requires coordinated PyPI configuration and an approved artifact change. Hashes are lowercase hex derived from the released RLS and are never inferred from the colocated checksum file.
 
 ## Security and privacy properties
 
@@ -79,7 +79,7 @@ The job downloads and hashes one small wheel and one small sdist. No cache, matr
 
 ## Observability
 
-GitHub retains dispatch inputs, environment deployment approval, logs, action revision, and outcome. PyPI exposes release files, hashes, metadata, and attestations. Repository evidence connects them to the prior GitHub release and governing authorization.
+GitHub retains the RLS dispatch input, derived plan, environment deployment approval, logs, action revision, and outcome. PyPI exposes release files, hashes, metadata, and attestations. The orchestration result connects them to the GitHub release and governing authorization.
 
 ## Compatibility and migration
 
