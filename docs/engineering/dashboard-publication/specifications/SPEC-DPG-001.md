@@ -5,7 +5,7 @@ title = "Release dashboard Pages publication contract"
 status = "implemented"
 owners = ["technical-owner", "release-owner", "security-owner", "service-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 
 [relations]
 specifies = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
@@ -15,7 +15,7 @@ specifies = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
 
 ## Scope
 
-Add one repository-specific GitHub Actions workflow that publishes the SE Harness development repository's canonical Explorer to GitHub Pages after a completed release. Support automatic publication from a published GitHub Release and an accountable manual replay. Preserve the existing Explorer model, generator, security boundary, and non-authoritative semantics.
+Publish the SE Harness development repository's canonical Explorer to GitHub Pages after a completed release. Normal publication is a main-context stage of the released-record orchestrator; the repository-specific Pages workflow remains an accountable main-only recovery path. Preserve the existing Explorer model, generator, security boundary, and non-authoritative semantics.
 
 This contract does not add a Pages workflow to `templates/repository/standard/`, modify consumer installation or upgrade, create a hosted multi-repository service, or alter formal governance transitions.
 
@@ -30,7 +30,7 @@ This contract does not add a Pages workflow to `templates/repository/standard/`,
 
 ## Inputs
 
-Automatic publication receives a `release.published` event and uses its repository and tag identity. Manual replay receives a release tag, release-record ID, and full governance commit. All values are data, not command fragments, and must pass strict format and repository-identity checks.
+Normal publication receives the released-record orchestrator's trusted plan. Manual replay receives a release-record ID and full governance commit and derives the tag from the record. All values are data, not command fragments, and must pass strict format and repository-identity checks.
 
 The resolver may read full default-branch first-parent Git history, formal release records, the selected Git tag, `.engineering-harness.toml`, the released-governor descriptor, and canonical dashboard inputs. It must not use a mutable branch head as the published identity.
 
@@ -63,10 +63,10 @@ Every transition before `deployed` may fail closed. A failed replacement leaves 
 ## Behavioral rules
 
 1. The workflow is repository-specific and is not included in the managed standard template, managed lock, installer, adopter, upgrader, or governor reconciliation surface.
-2. Automatic publication runs only for a published GitHub Release in `mmzen/se_harness`; manual replay uses `workflow_dispatch` with explicit bounded inputs.
-3. The automatic resolver selects exactly one formal `release_record` whose `status` is `released` and whose `tag` equals the GitHub Release tag. Zero or multiple matches fail.
+2. Normal publication runs as a main-context job after the orchestrator verifies a final GitHub Release in `mmzen/se_harness`; manual replay uses a separate main-only `workflow_dispatch` with one RLS ID and an explicit governance commit. A tag-ref `release` event is not a Pages deployment trigger.
+3. The resolver selects exactly one formal `release_record` whose `status` is `released` and derives the GitHub Release tag from it. Zero or multiple matches fail.
 4. The Git tag must resolve, including annotated-tag peeling, to the full candidate commit recorded by the release record using its declared object format. The version and release identity must also agree.
-5. The automatic governance commit is the unique first-parent commit on the default integration history where the matching release record first appears in `released` state while its first parent does not contain that released state. The result must be immutable, full length, and reachable from the default branch.
+5. The normal governance commit is the unique first-parent commit on the default integration history where the matching release record first appears in `released` state while its first parent does not contain that released state. The result must be immutable, full length, and reachable from the default branch.
 6. A manual governance commit must be full length, reachable from the default branch, contain the matching released record, and satisfy the same tag, candidate, version, and validation checks. A replay cannot select arbitrary branch content.
 7. Generation occurs in a clean detached checkout of the resolved governance commit. The released independent governor validates the formal graph; the checked-out target-local generator produces the demonstration and grants no authority.
 8. `harnessctl dashboard` or the equivalent managed generator writes to a new empty staging directory. Generation failure or nonzero validation exits stop publication.

@@ -26,7 +26,7 @@ Publishing only the tag would omit those later decisions. Publishing the current
 
 ## Normal release behavior
 
-When a new GitHub Release is published, `.github/workflows/publish-dashboard-pages.yml`:
+After a released RLS is integrated into `main`, the release owner runs **Publish authorized SE Harness release** with that one RLS ID. Its main-context Pages stage:
 
 1. finds exactly one matching released formal release record;
 2. proves that the Git tag resolves to the record's candidate commit;
@@ -41,16 +41,16 @@ A failure stops the replacement. It does not rewrite Git history, alter the GitH
 
 ## Replaying a deployment
 
-Use an accountable manual replay for an older release or after a transient Pages failure. In GitHub, open **Actions -> Publish SE Harness Explorer demonstration -> Run workflow** on `main` and provide:
+Use the separate accountable manual replay for an older release or after a transient Pages failure. In GitHub, open **Actions -> Publish SE Harness Explorer demonstration -> Run workflow** on `main` and provide:
 
-- the published release tag;
 - the released formal record ID; and
 - the full governance integration commit.
+
+The workflow derives the tag and candidate from that record. It does not accept an override for either identity and has no automatic tag-ref release trigger.
 
 For the first deployment of release 0.4.0, the inputs are:
 
 ```text
-release_tag:       v0.4.0
 release_record:    RLS-SEH-006
 governance_commit: a702d187084ba72d2c8b8b61c66b2a1be5d6f403
 ```
@@ -59,7 +59,6 @@ The same request can be made with GitHub CLI after deployment is explicitly auth
 
 ```powershell
 gh workflow run publish-dashboard-pages.yml --ref main `
-  -f release_tag=v0.4.0 `
   -f release_record=RLS-SEH-006 `
   -f governance_commit=a702d187084ba72d2c8b8b61c66b2a1be5d6f403
 ```

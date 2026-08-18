@@ -5,7 +5,7 @@ title = "Separated exact-asset PyPI publication boundary"
 status = "implemented"
 owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-18"
 
 [relations]
 constrains = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
@@ -20,7 +20,8 @@ Production package publication combines mutable repository administration, exter
 ## Components and responsibilities
 
 - **Verified GitHub release:** retains the candidate-derived wheel, normalized sdist, and checksum manifest.
-- **Manual dispatch preflight:** validates explicit release identity and copies only exact verified distributions into `dist/`.
+- **Released-record orchestration:** accepts one RLS ID on `main`, derives the exact release identity, and passes only verified immutable identities to the publication boundary.
+- **PyPI preflight:** downloads the final GitHub assets, classifies public PyPI state, and copies only exact verified distributions into `dist/`.
 - **GitHub `pypi` environment:** applies human deployment approval and binds the OIDC subject expected by PyPI.
 - **Pinned PyPA publisher:** validates metadata, exchanges the OIDC identity, creates attestations, and uploads.
 - **Governance evidence:** records authorization before dispatch and observed PyPI state after completion.
@@ -31,7 +32,7 @@ Publication depends on an already verified and released artifact set. Build, tes
 
 ## Data and control flow
 
-The release owner selects a tag and retained hashes; environment approval releases the job; GitHub provides release metadata/assets; shell preflight validates state and integrity; only two distribution files cross into `dist/`; the pinned publisher obtains a short-lived PyPI token and uploads; humans retain observed evidence.
+The release owner selects one released RLS; trusted orchestration derives its tag and hashes; environment approval releases the PyPI job; GitHub provides final release metadata/assets; shell preflight validates state and integrity; only two distribution files cross into `dist/`; the pinned publisher obtains a short-lived PyPI token and uploads; humans retain observed evidence.
 
 ## Trust boundaries
 
@@ -39,7 +40,7 @@ Workflow inputs, GitHub release state, downloaded bytes, checksum manifests, mut
 
 ## Required patterns
 
-- Manual explicit inputs and environment approval.
+- One explicit released-record input and environment approval.
 - Main-only job and environment deployment policy.
 - Independent expected hashes plus exact manifest comparison.
 - Job-scoped least privilege and OIDC.
@@ -49,7 +50,7 @@ Workflow inputs, GitHub release state, downloaded bytes, checksum manifests, mut
 
 ## Prohibited patterns
 
-- `on: release` automatic production publication.
+- Tag-ref or latest-release automatic production publication.
 - `actions/checkout` or package building in the OIDC job.
 - PyPI API tokens, passwords, `.pypirc`, or secret-based fallback.
 - Mutable third-party action references.

@@ -241,6 +241,7 @@ def _prepare_release(args: argparse.Namespace) -> int:
         tag=args.tag,
         output=args.output,
         domain=args.domain,
+        distribution_manifest=args.distribution_manifest,
     )
     print(f"prepared ready release record: {output}")
     return 0
@@ -448,6 +449,10 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--version", required=True, dest="release_version")
     release.add_argument("--authorized-by", required=True)
     release.add_argument("--tag")
+    release.add_argument(
+        "--distribution-manifest",
+        help="candidate bundle manifest to bind as structured distribution provenance",
+    )
     release.add_argument("--output")
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
     release.set_defaults(handler=_prepare_release)

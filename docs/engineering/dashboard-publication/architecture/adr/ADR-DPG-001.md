@@ -5,7 +5,7 @@ title = "Deploy an exact governance snapshot through Pages artifacts"
 status = "approved"
 owners = ["technical-owner", "repository-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 
 [relations]
 decides = ["ARCH-DPG-001"]
@@ -42,7 +42,9 @@ The site is promotional and derived. It must not become another authority surfac
 
 ## Decision
 
-Adopt option 5. A repository-specific workflow handles a published GitHub Release and supports a controlled manual replay. It uniquely resolves the released formal record, proves that its tag targets its recorded candidate, identifies the immutable main first-parent governance commit where the released state was integrated, validates that checkout using the released governor, and generates the canonical Explorer using the target-local managed generator.
+Adopt option 5. A repository-specific publication path uniquely resolves the released formal record, proves that its tag targets its recorded candidate, identifies the immutable main first-parent governance commit where the released state was integrated, validates that checkout using the released governor, and generates the canonical Explorer using the target-local managed generator.
+
+Amended on 2026-08-18 by `ADR-RLO-001`: normal deployment is a main-context stage of the one-input released-record orchestrator. The separate repository-specific Pages workflow is retained only for main-only controlled recovery using the same RLS plus an explicit governance commit. A tag-ref `release` event no longer enters the main-protected Pages environment. The immutable snapshot, payload, permission, and non-authority decisions are unchanged.
 
 After an exact payload gate, official Pages actions pinned to full commit SHAs upload and deploy the artifact through the protected `github-pages` environment. The site visibly identifies itself as a derived, non-authoritative demonstration of SE Harness governing its own development. Generated output is never committed.
 

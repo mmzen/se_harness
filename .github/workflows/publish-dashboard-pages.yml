@@ -1,14 +1,8 @@
 name: Publish SE Harness Explorer demonstration
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
-      release_tag:
-        description: Published GitHub Release tag (vMAJOR.MINOR.PATCH)
-        required: true
-        type: string
       release_record:
         description: Released formal record (for example RLS-SEH-006)
         required: true
@@ -30,14 +24,13 @@ jobs:
     name: Build release-bound demonstration
     if: >-
       github.repository == 'mmzen/se_harness' &&
-      (github.event_name == 'release' || github.ref == 'refs/heads/main')
+      github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
     env:
-      RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
-      RELEASE_RECORD: ${{ github.event_name == 'workflow_dispatch' && inputs.release_record || '' }}
-      GOVERNANCE_COMMIT: ${{ github.event_name == 'workflow_dispatch' && inputs.governance_commit || '' }}
+      RELEASE_RECORD: ${{ inputs.release_record }}
+      GOVERNANCE_COMMIT: ${{ inputs.governance_commit }}
     outputs:
       release_tag: ${{ steps.resolve.outputs.tag }}
       release_record: ${{ steps.resolve.outputs.release_record }}
@@ -59,9 +52,23 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Derive the release identity from the released record
+        id: plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py resolve \
+            --repository "$GITHUB_WORKSPACE" \
+            --default-ref refs/heads/main \
+            --release-record "$RELEASE_RECORD" \
+            --output "$RUNNER_TEMP/release-plan.json" \
+            --github-output "$GITHUB_OUTPUT"
+          test "${{ steps.plan.outputs.governance_commit }}" = "$GOVERNANCE_COMMIT"
+
       - name: Verify the published GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.plan.outputs.tag }}
         shell: bash
         run: |
           set -euo pipefail
@@ -78,20 +85,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          arguments=(
-            --repository "$GITHUB_WORKSPACE"
-            --default-ref refs/remotes/origin/main
-            --tag "$RELEASE_TAG"
-            --output "$RUNNER_TEMP/release-provenance.json"
+          python .github/scripts/publish_dashboard.py resolve \
+            --repository "$GITHUB_WORKSPACE" \
+            --default-ref refs/heads/main \
+            --tag "${{ steps.plan.outputs.tag }}" \
+            --release-record "$RELEASE_RECORD" \
+            --governance-commit "$GOVERNANCE_COMMIT" \
+            --output "$RUNNER_TEMP/release-provenance.json" \
             --github-output "$GITHUB_OUTPUT"
-          )
-          if [[ -n "$RELEASE_RECORD" ]]; then
-            arguments+=(--release-record "$RELEASE_RECORD")
-          fi
-          if [[ -n "$GOVERNANCE_COMMIT" ]]; then
-            arguments+=(--governance-commit "$GOVERNANCE_COMMIT")
-          fi
-          python .github/scripts/publish_dashboard.py resolve "${arguments[@]}"
 
       - name: Check out the immutable governance snapshot
         env:
@@ -182,6 +183,7 @@ jobs:
 
       - name: Summarize the prepared demonstration
         env:
+          RELEASE_TAG: ${{ steps.resolve.outputs.tag }}
           RESOLVED_RELEASE_RECORD: ${{ steps.resolve.outputs.release_record }}
           RESOLVED_CANDIDATE_COMMIT: ${{ steps.resolve.outputs.candidate_commit }}
           RESOLVED_GOVERNANCE_COMMIT: ${{ steps.resolve.outputs.governance_commit }}

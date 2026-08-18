@@ -5,7 +5,7 @@ title = "Operate a controlled replayable Pages deployment"
 status = "implemented"
 owners = ["service-owner", "repository-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 statement = "WHEN the release dashboard workflow uploads or deploys a Pages artifact, THE SYSTEM SHALL use least privilege, serialize deployments, retain observable provenance, and support an idempotent authorized replay without committing generated output."
 verification_method = "automated-workflow-policy-test-and-deployment-review"
 
@@ -30,7 +30,7 @@ Repository Pages settings select GitHub Actions as the source. The workflow runs
 - Upload one bounded Pages artifact and deploy it through the `github-pages` environment.
 - Serialize deployments with a dedicated concurrency group and avoid cancelling an active deployment midway.
 - Record the GitHub Release tag, release record, candidate commit, governance commit, snapshot SHA-256, generated dashboard SHA-256, workflow run, and resulting Pages URL.
-- Provide an authorized manual replay using explicit release and governance inputs, subject to the same checks as automatic publication.
+- Provide an authorized main-only manual replay using the released RLS ID and explicit governance commit; derive the tag and other release identities, subject to the same checks as normal publication.
 - Never commit generated dashboard output to `main`, `gh-pages`, a release branch, or a work branch.
 
 ## Failure and boundary behavior

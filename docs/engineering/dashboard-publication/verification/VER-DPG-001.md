@@ -5,7 +5,7 @@ title = "Verify release-bound Pages demonstration"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 
 [relations]
 verifies = ["REQ-DPG-001", "REQ-DPG-002", "REQ-DPG-003"]
@@ -23,7 +23,7 @@ Expected provenance comes from formal release-record fields, Git object semantic
 | --- | --- | --- | --- |
 | `REQ-DPG-001` | Git-history fixtures, formal validation, generation, and provenance comparison | completed release, annotated tag, later main commits, zero/multiple RLS matches, candidate mismatch, unreachable or abbreviated replay commit | exactly one immutable governance snapshot is selected; released RLS, tag, candidate, version, object format, reachability, validation, and generated provenance agree or publication fails before upload |
 | `REQ-DPG-002` | payload inspection, hostile-input regression, semantic review, and consumer-parity checks | canonical output, public demonstration notice, malformed schema, unexpected file, blocked CDN, consumer standard template | output preserves Explorer meaning and fallback, is visibly derived/non-authoritative, contains only allowed public static files, and changes no consumer-managed surface |
-| `REQ-DPG-003` | workflow policy tests, pin review, replay test, concurrency inspection, and controlled deployment review | automatic event, manual replay, overlapping requests, upload/deploy failure, protected environment | permissions are least privilege, actions are immutable, deployments serialize without mid-run cancellation, provenance is observable, replay is idempotent, and no Git output branch or formal mutation occurs |
+| `REQ-DPG-003` | workflow policy tests, pin review, replay test, concurrency inspection, and controlled deployment review | main-context orchestration, manual replay, tag-ref refusal, overlapping requests, upload/deploy failure, protected environment | permissions are least privilege, actions are immutable, deployments serialize without mid-run cancellation, provenance is observable, replay is idempotent, and no Git output branch or formal mutation occurs |
 
 ## Acceptance scenarios
 
@@ -38,7 +38,7 @@ Expected provenance comes from formal release-record fields, Git object semantic
 
 ## Property and invariant tests
 
-- Provenance resolution is deterministic for the same Git graph and release tag.
+- Provenance resolution is deterministic for the same Git graph and released RLS.
 - The selected governance commit is full length, immutable, main-reachable, and contains the exact matching released record.
 - Tag peeling produces exactly the release record's candidate object ID.
 - No current branch head, timestamp, directory enumeration order, or later unrelated commit changes the selected snapshot.
@@ -48,7 +48,7 @@ Expected provenance comes from formal release-record fields, Git object semantic
 
 ## Static and architecture checks
 
-- The repository-specific workflow handles `release.published` and bounded `workflow_dispatch` replay.
+- Normal publication is a main-context orchestrator stage; the repository-specific recovery workflow handles only bounded main-branch `workflow_dispatch` replay and has no `release.published` trigger.
 - Workflow default permissions are read-only; only deployment has `pages: write` and `id-token: write`.
 - The deployment uses `github-pages`, declares the resulting URL, and uses a non-cancelling concurrency policy.
 - Every third-party action reference is a reviewed full commit SHA with its upstream version documented.

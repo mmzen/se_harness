@@ -5,7 +5,7 @@ title = "Publish an immutable release-bound dashboard"
 status = "implemented"
 owners = ["repository-owner", "release-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-18"
 statement = "WHEN publication is requested for a completed SE Harness release, THE SYSTEM SHALL deploy an Explorer generated from one validated immutable governance commit whose released record and candidate commit match the published Git tag."
 verification_method = "automated-provenance-and-deployment-test"
 
@@ -21,7 +21,7 @@ The release tag points to the software candidate, while the completed governance
 
 ## Preconditions and trigger
 
-Publication starts after a GitHub Release is published or through an explicitly authorized replay. A matching formal release record must be `released`, its recorded tag must resolve to its recorded candidate commit, and the governance snapshot must be a full immutable commit reachable from the repository's main integration history.
+Normal publication starts inside the main-context released-record orchestrator after the exact GitHub Release is final. A separate main-only action supports an explicitly authorized Pages replay. In both paths, the matching formal release record must be `released`, its recorded tag must resolve to its recorded candidate commit, and the governance snapshot must be a full immutable commit reachable from the repository's main integration history.
 
 ## Required response
 

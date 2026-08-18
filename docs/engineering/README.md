@@ -10,6 +10,7 @@
 - `portable-managed-integrity/`: portable schema-2 managed-file integrity and migration.
 - `verification-supersession/`: explicit retention and supersession of stale ready VRECs.
 - `pypi-publication/`: governed promotion of released artifacts to PyPI.
+- `release-orchestration/`: deterministic last-mile publication from one released RLS identity.
 - `work-order-lifecycle/`: lifecycle meanings and configured verified-work consistency.
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.

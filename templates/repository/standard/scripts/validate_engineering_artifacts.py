@@ -8,6 +8,7 @@ run before the repository's normal toolchain is available.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import re
@@ -65,6 +66,19 @@ TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+SAFE_DISTRIBUTION_BASENAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,199}$")
+DISTRIBUTION_FIELDS = {
+    "schema",
+    "kind",
+    "source_date_epoch",
+    "wheel",
+    "wheel_sha256",
+    "sdist",
+    "sdist_sha256",
+    "checksums",
+    "checksums_sha256",
+    "source_manifest_sha256",
+}
 GIT_COMMIT_PATTERNS = {
     "sha1": re.compile(r"^[0-9a-f]{40}$"),
     "sha256": re.compile(r"^[0-9a-f]{64}$"),
@@ -391,6 +405,68 @@ def _validate_git_identity(
     return commit, object_format
 
 
+def _validate_release_distribution(
+    artifact: Artifact,
+    version: str | None,
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    value = artifact.metadata.get("distribution")
+    if value is None:
+        return
+    if not isinstance(value, dict) or set(value) != DISTRIBUTION_FIELDS:
+        _add_error(
+            errors,
+            artifact,
+            report_root,
+            "E009",
+            "optional distribution block must contain exactly the complete schema-1 field set",
+            plane="governance",
+        )
+        return
+    if value.get("schema") != 1 or value.get("kind") != "python-wheel-sdist":
+        _add_error(
+            errors,
+            artifact,
+            report_root,
+            "E009",
+            "distribution must use schema 1 and kind 'python-wheel-sdist'",
+            plane="governance",
+        )
+        return
+    epoch = value.get("source_date_epoch")
+    if not isinstance(epoch, int) or isinstance(epoch, bool) or epoch < 1:
+        _add_error(errors, artifact, report_root, "E009", "distribution source_date_epoch must be a positive integer", plane="governance")
+        return
+    if not isinstance(version, str) or not version.strip():
+        return
+    wheel = value.get("wheel")
+    sdist = value.get("sdist")
+    checksums = value.get("checksums")
+    basenames = (wheel, sdist, checksums)
+    if any(
+        not isinstance(item, str)
+        or SAFE_DISTRIBUTION_BASENAME_PATTERN.fullmatch(item) is None
+        or Path(item).name != item
+        for item in basenames
+    ):
+        _add_error(errors, artifact, report_root, "E009", "distribution filenames must be safe ASCII basenames", plane="governance")
+        return
+    if wheel != f"se_harness-{version}-py3-none-any.whl" or sdist != f"se_harness-{version}.tar.gz" or checksums != "SHA256SUMS":
+        _add_error(errors, artifact, report_root, "E009", "distribution filenames must exactly match the release version", plane="governance")
+        return
+    digest_fields = ("wheel_sha256", "sdist_sha256", "checksums_sha256", "source_manifest_sha256")
+    if any(not isinstance(value.get(field), str) or SHA256_PATTERN.fullmatch(value[field]) is None for field in digest_fields):
+        _add_error(errors, artifact, report_root, "E009", "distribution digests must be lowercase SHA-256 values", plane="governance")
+        return
+    checksum_bytes = (
+        f"{value['wheel_sha256']}  {wheel}\n"
+        f"{value['sdist_sha256']}  {sdist}\n"
+    ).encode("utf-8")
+    if hashlib.sha256(checksum_bytes).hexdigest() != value["checksums_sha256"]:
+        _add_error(errors, artifact, report_root, "E009", "distribution checksums_sha256 must identify canonical SHA256SUMS bytes", plane="governance")
+
+
 def _validate_timestamp(
     artifact: Artifact,
     field: str,
@@ -694,9 +770,10 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
 
         if artifact_type == "release_record":
             _validate_git_identity(artifact, errors, report_root)
-            _require_non_empty_string(
+            release_version = _require_non_empty_string(
                 artifact, "version", errors, report_root, plane="governance"
             )
+            _validate_release_distribution(artifact, release_version, errors, report_root)
             _validate_timestamp(artifact, "released_at", errors, report_root)
             authorized_by = _require_non_empty_string(
                 artifact, "authorized_by", errors, report_root, plane="governance"
