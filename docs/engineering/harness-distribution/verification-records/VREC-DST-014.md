@@ -2,7 +2,7 @@
 id = "VREC-DST-014"
 type = "verification_record"
 title = "Verification candidate for WO-DST-017"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
@@ -18,9 +18,11 @@ verifies_work_order = ["WO-DST-017"]
 conforms_to = ["VER-DST-016"]
 +++
 
-# Verification Record Candidate
+# Verified Verification Record
 
-This ready record binds retained evidence for `WO-DST-017` to candidate commit `d397e58ac9a02356a085be11b960298579faebed`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+After reviewing the ready verification record, retained evidence, and exact-candidate qualification, the accountable repository owner explicitly instructed `i validate the verification record, you can transition and commit, then I will merge` on 2026-08-18. That human assurance decision transitions this record from `ready` to `verified`; automation did not supply the decision or grant merge or release authority.
+
+The ready record was retained in governance commit `730e4e508488063e6f06558725b520beff289d05`. It binds retained evidence for `WO-DST-017` to candidate commit `d397e58ac9a02356a085be11b960298579faebed`. The captured candidate commit, Git object format, clean-worktree state, capture timestamp, artifact snapshot, evidence path, work-order coverage, and verification-contract coverage remain unchanged by this later transition.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 
@@ -39,4 +41,4 @@ The record is intentionally created after the candidate commit it names, avoidin
 
 ## Authority boundary
 
-The repository owner authorized preparation and retention of this `ready` record, the later governance commit, branch push, and pull-request creation. No accountable decision has transitioned this record to `verified`. Hosted pull-request checks remain additional evidence only and cannot supply that transition authority.
+The accountable human decision recorded above verifies this record. The owner stated that they will merge PR #68; this transition and commit do not merge it. They also do not prepare or authorize a release, tag, publication, deployment, or governor promotion. Hosted pull-request checks remain additional evidence and did not supply the verification authority.
