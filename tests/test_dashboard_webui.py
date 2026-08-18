@@ -228,14 +228,28 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 rendered = GENERATOR.render_dashboard(bootstrap)
                 self.assertIn(f'"repository_revision":"{revision}"', rendered)
 
-    def test_five_questions_and_semantic_states_remain_explicit(self) -> None:
+    def test_semantic_routes_and_authority_boundaries_remain_explicit(self) -> None:
         content = self.template.read_text(encoding="utf-8")
-        for phrase in (
+        for retired_phrase in (
             "Why does this exist?",
             "Is the definition covered?",
             "What needs reassessment?",
             "What is inconsistent or unassessable?",
             "Does the harness help?",
+        ):
+            with self.subTest(retired_phrase=retired_phrase):
+                self.assertNotIn(retired_phrase, content)
+
+        for phrase in (
+            'data-view="overview"',
+            'data-view="lineage"',
+            'data-view="readiness"',
+            "DERIVED · READ-ONLY",
+            "No approval, verification, or release decision is inferred here.",
+            "Explorer gate groupings",
+            "NAVIGATION LABELS · NOT POLICY",
+            "QUALITY_GATES.md",
+            "[data-od-id=graph-lens-summary] .lens{grid-template-columns:repeat(2,minmax(0,1fr))",
             "Definition coverage",
             "Commit-bound provenance",
             "not_assessable",
