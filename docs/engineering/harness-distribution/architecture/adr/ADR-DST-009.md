@@ -5,7 +5,7 @@ title = "Project repository Markdown through a bounded local content pipeline"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 decides = ["ARCH-DST-009"]
@@ -16,6 +16,8 @@ decides = ["ARCH-DST-009"]
 ## Status
 
 Accepted.
+
+Reassessed on 2026-08-19 against the directory-aware evidence-path convention in `SPEC-EVK-001`. The selected bounded local content pipeline remains applicable because discovery still supplies only safe repository-local associations and all content, rendering, capacity, and publication controls are unchanged.
 
 ## Context
 

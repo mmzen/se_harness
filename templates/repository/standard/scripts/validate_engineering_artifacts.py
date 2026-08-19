@@ -16,7 +16,7 @@ import sys
 from collections import Counter
 from dataclasses import asdict, dataclass
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 try:
@@ -64,6 +64,9 @@ ACTIVE_COVERAGE_STATUSES = {
 TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
+EVIDENCE_WORK_ORDER_PATTERN = re.compile(
+    r"^(WO-(?:[A-Z0-9-]*-)?\d{3})(?:-|\.|$)"
+)
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 SAFE_DISTRIBUTION_BASENAME_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,199}$")
@@ -129,6 +132,26 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("release_record", "includes_verification"): {"verification_record"},
     ("release_record", "releases_work"): {"work_order"},
 }
+
+
+def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
+    """Extract exact work-order keys from a normalized repository path."""
+    parts = PurePosixPath(evidence_path).parts
+    if not parts:
+        return ()
+    candidates = [parts[-1]]
+    if "evidence" in parts:
+        candidates.extend(parts[parts.index("evidence") + 1 :])
+    keys = {
+        match.group(1)
+        for component in candidates
+        if (match := EVIDENCE_WORK_ORDER_PATTERN.match(component)) is not None
+    }
+    return tuple(sorted(keys))
+
+
+def evidence_path_is_keyed_to(evidence_path: str, work_order_id: str) -> bool:
+    return work_order_id in evidence_work_order_keys(evidence_path)
 
 
 @dataclass(frozen=True, order=True)
@@ -1019,10 +1042,7 @@ def validate_revision_consistency(
                 uncovered = [
                     work_order_id
                     for work_order_id in sorted(work_order_ids)
-                    if not any(
-                        re.match(rf"^{re.escape(work_order_id)}(?:-|\.|$)", Path(path).name)
-                        for path in normalized_paths
-                    )
+                    if not any(evidence_path_is_keyed_to(path, work_order_id) for path in normalized_paths)
                 ]
                 if uncovered:
                     _add_error(

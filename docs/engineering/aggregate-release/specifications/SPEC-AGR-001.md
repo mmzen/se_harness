@@ -5,7 +5,7 @@ title = "Aggregate verification and release manifests"
 status = "implemented"
 owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-19"
 
 [relations]
 specifies = ["REQ-AGR-001", "REQ-AGR-002", "REQ-AGR-003", "REQ-AGR-004", "REQ-AGR-005", "REQ-AGR-006", "REQ-AGR-007", "REQ-AGR-008"]
@@ -68,7 +68,7 @@ releases_work = ["WO-A-001", "WO-B-001"]
 1. Each repeatable collection must contain at least one value and must reject duplicate values.
 2. All referenced IDs must exist, have the expected artifact type, and be in a lifecycle state accepted by the existing provenance workflow.
 3. For multi-work-order aggregate verification, the selected verification-contract set must equal the union of `verification` relations declared by the selected work orders. A single-work-order record may retain the existing behavior of selecting a non-empty declared subset.
-4. For a multi-work-order candidate, each selected work order must have at least one repository-contained retained evidence path keyed to that work-order ID. All listed evidence paths must exist and pass existing containment and symlink checks; the existing single-work-order path behavior remains compatible.
+4. For a multi-work-order candidate, each selected work order must have at least one repository-contained retained evidence path keyed to that work-order ID under `SPEC-EVK-001`: the exact key starts the filename or a component at or below a literal `evidence` directory and is followed by `-`, `.`, or the end of that component. All listed evidence paths must exist and pass existing containment and symlink checks; the existing single-work-order path behavior remains compatible.
 5. Aggregate verification uses one clean full `HEAD`, one Git object format, one timestamp, and one artifact snapshot hash for the complete set.
 6. For aggregate release, the selected released-work set must equal the union of `verifies_work_order` relations from included verification records.
 7. Every released work order must occur in the selected release contract's `gates` relation. A contract may gate additional work not selected for this instance.

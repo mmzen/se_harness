@@ -18,9 +18,33 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 from generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from inspect_engineering_artifacts import build_inspection  # noqa: E402
+from validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
 
 from se_harness.cli import main  # noqa: E402
+from se_harness.provenance import _evidence_work_order_keys  # noqa: E402
+
+
+EVIDENCE_KEY_CASES = (
+    ("docs/engineering/example/evidence/WO-ABC-001-check.md", ("WO-ABC-001",)),
+    ("docs/engineering/example/evidence/WO-ABC-001/check.md", ("WO-ABC-001",)),
+    ("docs/engineering/example/evidence/archive/WO-ABC-001/check.md", ("WO-ABC-001",)),
+    ("docs/engineering/WO-ABC-001/evidence/check.md", ()),
+    ("docs/engineering/example/evidence/X-WO-ABC-001/check.md", ()),
+    ("docs/engineering/example/evidence/wo-abc-001/check.md", ()),
+    ("docs/engineering/example/evidence/WO-ABC-0010/check.md", ()),
+    ("docs/engineering/example/evidence/WO-ABC-001_check.md", ()),
+    ("docs/engineering/example/Evidence/WO-ABC-001/check.md", ()),
+    (
+        "docs/engineering/example/evidence/WO-ABC-001/WO-ABC-001-check.md",
+        ("WO-ABC-001",),
+    ),
+    (
+        "docs/engineering/example/evidence/WO-XYZ-002/WO-ABC-001-check.md",
+        ("WO-ABC-001", "WO-XYZ-002"),
+    ),
+    ("reports/WO-ABC-001.md", ("WO-ABC-001",)),
+)
 
 
 def write(path: Path, content: str) -> None:
@@ -232,6 +256,14 @@ def superseded_record(record: str, successor_id: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+class EvidenceKeyContractTests(unittest.TestCase):
+    def test_package_and_portable_predicates_share_the_complete_contract_matrix(self) -> None:
+        for path, expected in EVIDENCE_KEY_CASES:
+            with self.subTest(path=path):
+                self.assertEqual(expected, _evidence_work_order_keys(path))
+                self.assertEqual(expected, evidence_work_order_keys(path))
+
+
 class RevisionValidatorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -352,6 +384,59 @@ class RevisionValidatorTests(unittest.TestCase):
         release = next(item for item in snapshot["revision_provenance"] if item["id"] == "RLS-002")
         self.assertEqual(["WO-001", "WO-002"], release["work_orders"])
         self.assertEqual(["VREC-002"], release["verification_records"])
+
+    def test_directory_keyed_aggregate_record_drives_validation_findings_and_readiness(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        flat_one = self.root / "docs/engineering/product/evidence/WO-001-verification.md"
+        flat_two = self.root / "docs/engineering/product/evidence/WO-002-verification.md"
+        flat_one.unlink()
+        flat_two.unlink()
+        first_path = "docs/engineering/product/evidence/WO-001/check.md"
+        second_path = "docs/engineering/product/evidence/archive/WO-002/check.md"
+        write(self.root / first_path, "# Evidence one")
+        write(self.root / second_path, "# Evidence two")
+        record = aggregate_verification_record("a" * 40).replace(
+            'evidence_paths = ["docs/engineering/product/evidence/WO-001-verification.md", "docs/engineering/product/evidence/WO-002-verification.md"]',
+            f'evidence_paths = ["{first_path}", "{second_path}"]',
+        )
+        write(self.root / "docs/engineering/product/verification-records/VREC-002.md", record)
+
+        snapshot, report, _ = generate_snapshot(self.root)
+        self.assertTrue(report.valid)
+        self.assertNotIn(
+            "W-HEX-001",
+            {
+                finding["rule"]
+                for finding in snapshot["findings"]
+                if set(finding["artifacts"]) & {"WO-001", "WO-002"}
+            },
+        )
+        inspection = build_inspection(snapshot, report)
+        self.assertNotIn(
+            "W-HEX-001",
+            {
+                finding["rule"]
+                for finding in inspection["findings"]
+                if set(finding["artifacts"]) & {"WO-001", "WO-002"}
+            },
+        )
+        evidence = {item["work_order"]: item["paths"] for item in snapshot["evidence"]}
+        self.assertEqual([first_path], evidence["WO-001"])
+        self.assertEqual([second_path], evidence["WO-002"])
+        for work_order_id, expected_path in (("WO-001", first_path), ("WO-002", second_path)):
+            readiness = next(
+                item for item in snapshot["readiness"] if item["work_order"] == work_order_id
+            )
+            implementation_gate = next(
+                gate for gate in readiness["gates"] if gate["gate"] == "G3"
+            )
+            evidence_condition = next(
+                condition
+                for condition in implementation_gate["conditions"]
+                if condition["id"] == "verification_evidence"
+            )
+            self.assertEqual("satisfied", evidence_condition["state"])
+            self.assertEqual([expected_path], evidence_condition["evidence"])
 
     def test_aggregate_records_reject_incomplete_or_extra_scope(self) -> None:
         create_additional_chain(self.root, work_order_status="released")
@@ -716,8 +801,25 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn("clean Git worktree", error)
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-001.md").exists())
 
-    def test_capture_and_prepare_aggregate_scope_deterministically(self) -> None:
-        candidate = self.initialize_candidate(aggregate=True)
+    def test_capture_and_prepare_mixed_layout_aggregate_scope_deterministically(self) -> None:
+        self.initialize_candidate(aggregate=True)
+        directory_evidence = "docs/engineering/product/evidence/WO-002/check.md"
+        (self.root / directory_evidence).parent.mkdir(parents=True)
+        self.git(
+            "mv",
+            "docs/engineering/product/evidence/WO-002-verification.md",
+            directory_evidence,
+        )
+        self.git(
+            "-c",
+            "user.name=Harness Test",
+            "-c",
+            "user.email=harness@example.invalid",
+            "commit",
+            "-m",
+            "organize evidence by work order",
+        )
+        candidate = self.git("rev-parse", "HEAD")
         code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
@@ -726,7 +828,7 @@ class RevisionCliTests(unittest.TestCase):
             "--work-order", "WO-001",
             "--verification", "VER-002",
             "--verification", "VER-001",
-            "--evidence", "docs/engineering/product/evidence/WO-002-verification.md",
+            "--evidence", directory_evidence,
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
         self.assertEqual(0, code, error)
@@ -736,6 +838,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn(f'commit = "{candidate}"', vrec)
         self.assertIn('verifies_work_order = ["WO-001", "WO-002"]', vrec)
         self.assertIn('conforms_to = ["VER-001", "VER-002"]', vrec)
+        self.assertIn(directory_evidence, vrec)
         self.assertTrue(validate_repository(self.root).valid)
 
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(vrec_path))

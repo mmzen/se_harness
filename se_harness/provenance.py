@@ -11,7 +11,7 @@ import subprocess
 import sys
 import tempfile
 from datetime import UTC, datetime
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 import tomllib
@@ -22,6 +22,9 @@ from se_harness.release_distribution import read_bundle_manifest
 
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
+EVIDENCE_WORK_ORDER_PATTERN = re.compile(
+    r"^(WO-(?:[A-Z0-9-]*-)?\d{3})(?:-|\.|$)"
+)
 VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$")
 OWNER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9@._ -]{0,127}$")
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/+-]{0,127}$")
@@ -151,8 +154,24 @@ def _toml_array(values: list[str]) -> str:
     return "[" + ", ".join(json.dumps(item) for item in values) + "]"
 
 
+def _evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
+    """Extract exact work-order keys from a normalized repository path."""
+    parts = PurePosixPath(evidence_path).parts
+    if not parts:
+        return ()
+    candidates = [parts[-1]]
+    if "evidence" in parts:
+        candidates.extend(parts[parts.index("evidence") + 1 :])
+    keys = {
+        match.group(1)
+        for component in candidates
+        if (match := EVIDENCE_WORK_ORDER_PATTERN.match(component)) is not None
+    }
+    return tuple(sorted(keys))
+
+
 def _evidence_is_keyed_to(evidence_path: str, work_order_id: str) -> bool:
-    return re.match(rf"^{re.escape(work_order_id)}(?:-|\.|$)", Path(evidence_path).name) is not None
+    return work_order_id in _evidence_work_order_keys(evidence_path)
 
 
 def _supported_commit(metadata: dict[str, Any], record_id: str) -> tuple[str, str]:

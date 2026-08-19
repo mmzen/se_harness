@@ -5,7 +5,7 @@ title = "Extend existing provenance records with explicit aggregate scope"
 status = "approved"
 owners = ["technical-owner", "quality-owner", "release-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-19"
 
 [relations]
 decides = ["ARCH-AGR-001"]
@@ -16,6 +16,8 @@ decides = ["ARCH-AGR-001"]
 ## Status
 
 Accepted.
+
+Reassessed on 2026-08-19 against `SPEC-EVK-001`. Exact keyed coverage now recognizes both governed layouts, while the selected aggregate record model, final-candidate identity, explicit scope, and accountable authority boundaries remain applicable.
 
 ## Context
 

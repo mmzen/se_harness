@@ -118,7 +118,7 @@
     },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
-      "sha256": "faddbe105379a57fd845a355712e09d4239d89ce0d235d6571b9e3409b74f232"
+      "sha256": "d7e801b5c8d9955408d72919b67429162f8f5f5b6de95be501a004b7620ad9d1"
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
@@ -134,7 +134,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "8393da7e1f804acb6ec4f2f011d11fba8c78247ac42fa504e9b43916c018d54b"
+      "sha256": "07c64027779b920be3a6ad33b2183d63f5c442ca9f996d5933799ff162bf0530"
     }
   },
   "hash_algorithm": "sha256",
