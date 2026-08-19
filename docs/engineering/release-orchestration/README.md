@@ -28,7 +28,7 @@ Issue [#71](https://github.com/mmzen/se_harness/issues/71) identified that the r
 - `SPEC-RLO-002`: exact responsibility, compatibility, state, and failure contract.
 - `ARCH-RLO-002` and `ADR-RLO-002`: one-way dependency from repository policy to portable governance, without a plugin framework.
 - `VER-RLO-002`: package, consumer, binder, workflow, and failure-oriented verification.
-- `WO-RLO-002`: implemented bounded correction awaiting separate commit-bound assurance.
+- `WO-RLO-002`: implemented bounded correction with commit-bound assurance recorded by verified `VREC-RLO-002`; no release or publication is implied.
 
 Correction acceptance scenarios are retained in `acceptance/release-policy-boundary.feature`; implementation evidence is retained in `evidence/WO-RLO-002-verification.md`. The approved RLO-001 artifacts and their verification records remain unchanged historical authority.
 
@@ -40,6 +40,6 @@ The repository release workflow currently materializes the exact tag, GitHub Rel
 - `SPEC-RLO-003`: exact derivation, creation, replay, conflict, and failure contract.
 - `ARCH-RLO-003` and `ADR-RLO-003`: repository-owned mutable-ref boundary with fail-closed reconciliation.
 - `VER-RLO-003`: workflow, state, security, replay, and portable-boundary verification.
-- `WO-RLO-003`: completed bounded repository workflow implementation awaiting separate commit-bound assurance.
+- `WO-RLO-003`: completed bounded repository workflow implementation with commit-bound assurance recorded by verified `VREC-RLO-003`; no release, publication, or branch action is implied.
 
 Acceptance scenarios are retained in `acceptance/maintenance-line-reconciliation.feature`; implementation evidence is retained in `evidence/WO-RLO-003-verification.md`. The completed work creates no production branch and implies no VREC, release, publication, or deployment.

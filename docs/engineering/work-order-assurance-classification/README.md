@@ -12,4 +12,4 @@ On 2026-08-16, the repository owner instructed `ok go`, approving the complete r
 
 The term **validation** remains reserved for structural, governance, policy, and maintenance checks. The new declaration answers a narrower question: whether an implemented candidate requires commit-bound assurance through a VREC.
 
-Implementation completed on 2026-08-16 within `WO-WAC-001`: validator, preflight, inspection schema v2, canonical distribution, policy, templates, documentation, acceptance scenarios, and regression coverage now implement the approved contract. The work order remains awaiting a separately authorized candidate commit and commit-bound verification record.
+Implementation completed on 2026-08-16 within `WO-WAC-001`: validator, preflight, inspection schema v2, canonical distribution, policy, templates, documentation, acceptance scenarios, and regression coverage now implement the approved contract. `VREC-SEH-006` records verified aggregate assurance for that work, and `RLS-SEH-006` releases it as part of version 0.4.0. The records preserve separate assurance and release decisions; they do not imply publication, deployment, or governor promotion.

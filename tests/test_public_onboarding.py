@@ -239,13 +239,13 @@ class PublicOnboardingTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, responsibility)
 
-    def test_known_limitations_remain_explicit_and_unresolved(self) -> None:
+    def test_known_limitations_remain_explicit_and_current(self) -> None:
         limitations = self.section("Known limitations")
         self.assertIn("reuse G0-G5 for different groupings", limitations)
-        self.assertIn("non-empty work-order `architecture` relation", limitations)
-        self.assertIn("not corrections made by documentation", limitations)
-        self.assertIn("harness-uml-model.md", limitations)
+        self.assertIn("documented product tension", limitations)
         self.assertIn("harness-operational-phasing.md", limitations)
+        self.assertNotIn("non-empty work-order `architecture` relation", limitations)
+        self.assertNotIn("validator still requires", limitations)
 
     def test_deeper_user_and_contributor_routes_are_discoverable(self) -> None:
         learning = self.section("Learn more")
@@ -262,7 +262,6 @@ class PublicOnboardingTests(unittest.TestCase):
     def test_internal_documentation_links_are_repository_relative(self) -> None:
         for target in (
             "docs/notes/harness-installation-and-upgrades.md",
-            "docs/notes/harness-uml-model.md",
             "docs/notes/harness-operational-phasing.md",
             "docs/notes/harness-overview.md",
             "docs/notes/README.md",

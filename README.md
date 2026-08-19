@@ -162,9 +162,8 @@ Harness commands may prepare observations or `ready` proposals. They never commi
 ## Known limitations
 
 - Managed `QUALITY_GATES.md` and Harness Explorer currently reuse G0-G5 for different groupings. Managed policy owns gate meaning; Explorer remains a navigation and anomaly view.
-- Typed architecture policy says routine requirements must not receive fabricated architecture coverage, while the validator still requires a non-empty work-order `architecture` relation. For a purely routine change, stop and seek a governed decision rather than inventing an artifact.
 
-These are documented product tensions, not corrections made by documentation. The [conceptual model](docs/notes/harness-uml-model.md) and [operational phasing](docs/notes/harness-operational-phasing.md) provide context.
+This is a documented product tension, not a correction made by documentation. The [operational phasing](docs/notes/harness-operational-phasing.md) provides context.
 
 ## Learn more
 
