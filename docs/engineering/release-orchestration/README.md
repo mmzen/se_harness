@@ -30,4 +30,16 @@ Issue [#71](https://github.com/mmzen/se_harness/issues/71) identified that the r
 - `VER-RLO-002`: package, consumer, binder, workflow, and failure-oriented verification.
 - `WO-RLO-002`: implemented bounded correction awaiting separate commit-bound assurance.
 
-Correction acceptance scenarios are retained in `acceptance/release-policy-boundary.feature`; implementation evidence is retained in `evidence/WO-RLO-002-verification.md`. The approved RLO-001 artifacts and `VREC-RLO-001` remain unchanged historical authority.
+Correction acceptance scenarios are retained in `acceptance/release-policy-boundary.feature`; implementation evidence is retained in `evidence/WO-RLO-002-verification.md`. The approved RLO-001 artifacts and their verification records remain unchanged historical authority.
+
+## Maintenance-line packet
+
+The repository release workflow currently materializes the exact tag, GitHub Release, PyPI files, and demonstration but leaves maintenance-line creation as a separate manual action. RLO-003 proposes closing that repository-local gap without adding branching policy to portable SE Harness.
+
+- `REQ-RLO-012`: create or verify the canonical `release/MAJOR.MINOR` line from the released candidate.
+- `SPEC-RLO-003`: exact derivation, creation, replay, conflict, and failure contract.
+- `ARCH-RLO-003` and `ADR-RLO-003`: repository-owned mutable-ref boundary with fail-closed reconciliation.
+- `VER-RLO-003`: workflow, state, security, replay, and portable-boundary verification.
+- `WO-RLO-003`: completed bounded repository workflow implementation awaiting separate commit-bound assurance.
+
+Acceptance scenarios are retained in `acceptance/maintenance-line-reconciliation.feature`; implementation evidence is retained in `evidence/WO-RLO-003-verification.md`. The completed work creates no production branch and implies no VREC, release, publication, or deployment.

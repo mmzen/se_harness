@@ -256,6 +256,8 @@ jobs:
     outputs:
       state: ${{ steps.final.outputs.state }}
       url: ${{ steps.publish.outputs.url }}
+      maintenance_branch: ${{ steps.maintenance.outputs.branch }}
+      maintenance_state: ${{ steps.maintenance.outputs.state }}
     steps:
       - name: Check out trusted main orchestration only
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -350,6 +352,29 @@ jobs:
           gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$RUNNER_TEMP/final-release.json"
           python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$RUNNER_TEMP/final-release.json" --github-output "$GITHUB_OUTPUT"
           test "$(jq -r '.isDraft' "$RUNNER_TEMP/final-release.json")" = false
+
+      - name: Create or verify the maintenance line
+        id: maintenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.resolve.outputs.version }}
+          CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/scripts/reconcile_maintenance_branch.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --version "$VERSION" \
+            --candidate "$CANDIDATE_COMMIT" \
+            --output "$RUNNER_TEMP/maintenance-line.json" \
+            --github-output "$GITHUB_OUTPUT"
+          {
+            printf '### Maintenance line\n\n'
+            printf -- '- Branch: `%s`\n' "$(jq -r '.branch' "$RUNNER_TEMP/maintenance-line.json")"
+            printf -- '- State: `%s`\n' "$(jq -r '.state' "$RUNNER_TEMP/maintenance-line.json")"
+            printf -- '- Candidate: `%s`\n' "$CANDIDATE_COMMIT"
+            printf -- '- Existing refs are never moved by this workflow.\n'
+          } >>"$GITHUB_STEP_SUMMARY"
 
   pypi:
     name: Promote exact GitHub assets to PyPI
@@ -557,6 +582,8 @@ jobs:
           QUALIFICATION_RESULT: ${{ needs.qualify.result }}
           GITHUB_RESULT: ${{ needs.github_release.result }}
           GITHUB_URL: ${{ needs.github_release.outputs.url }}
+          MAINTENANCE_BRANCH: ${{ needs.github_release.outputs.maintenance_branch }}
+          MAINTENANCE_STATE: ${{ needs.github_release.outputs.maintenance_state }}
           PYPI_RESULT: ${{ needs.pypi.result }}
           PYPI_URL: https://pypi.org/project/se-harness/${{ needs.resolve.outputs.version }}/
           PAGES_RESULT: ${{ needs.pages_deploy.result }}
@@ -567,15 +594,17 @@ jobs:
         run: |
           set -euo pipefail
           jq -n --arg qualification "$QUALIFICATION_RESULT" --arg github "$GITHUB_RESULT" --arg github_url "$GITHUB_URL" \
+            --arg maintenance_branch "$MAINTENANCE_BRANCH" --arg maintenance_state "$MAINTENANCE_STATE" \
             --arg pypi "$PYPI_RESULT" --arg pypi_url "$PYPI_URL" --arg pages "$PAGES_RESULT" --arg pages_url "$PAGES_URL" \
             --arg public_install "$PUBLIC_RESULT" --arg workflow_url "$WORKFLOW_URL" \
-            '{resolution:{state:"exact",workflow_url:$workflow_url},qualification:{state:(if $qualification=="success" then "exact" else "failed" end)},github:{state:(if $github=="success" then "exact" else "failed" end),url:$github_url},pypi:{state:(if $pypi=="success" then "exact" else "failed" end),url:$pypi_url},pages:{state:(if $pages=="success" then "exact" else "failed" end),url:$pages_url},public_install:{state:(if $public_install=="success" then "exact" else "failed" end)}}' >"$RUNNER_TEMP/stages.json"
+            '{resolution:{state:"exact",workflow_url:$workflow_url},qualification:{state:(if $qualification=="success" then "exact" else "failed" end)},github:{state:(if $github=="success" then "exact" else "failed" end),url:$github_url,maintenance_branch:(if $maintenance_branch=="" then null else $maintenance_branch end),maintenance_state:(if $maintenance_state=="" then "not_run" else $maintenance_state end)},pypi:{state:(if $pypi=="success" then "exact" else "failed" end),url:$pypi_url},pages:{state:(if $pages=="success" then "exact" else "failed" end),url:$pages_url},public_install:{state:(if $public_install=="success" then "exact" else "failed" end)}}' >"$RUNNER_TEMP/stages.json"
           python .github/scripts/publish_release.py result --plan "$RUNNER_TEMP/plan/release-plan.json" --stages "$RUNNER_TEMP/stages.json" --output "$RUNNER_TEMP/release-result.json"
           {
             printf '### SE Harness release transaction\n\n'
             printf -- '- Released record: `%s`\n' "$RELEASE_RECORD"
             printf -- '- Candidate: `%s`\n' '${{ needs.resolve.outputs.candidate_commit }}'
             printf -- '- Governance: `%s`\n' '${{ needs.resolve.outputs.governance_commit }}'
+            printf -- '- Maintenance line: `%s` (`%s`)\n' "${MAINTENANCE_BRANCH:-not reached}" "${MAINTENANCE_STATE:-not_run}"
             printf -- '- GitHub / PyPI / Pages: `%s` / `%s` / `%s`\n' "$GITHUB_RESULT" "$PYPI_RESULT" "$PAGES_RESULT"
             printf -- '- Authority: derived operational evidence; no formal lifecycle transition.\n'
           } >>"$GITHUB_STEP_SUMMARY"
