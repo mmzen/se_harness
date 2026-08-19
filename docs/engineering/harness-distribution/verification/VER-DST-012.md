@@ -5,7 +5,7 @@ title = "Verify content-rich Explorer artifact details"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 verifies = ["REQ-DST-042", "REQ-DST-043", "REQ-DST-044", "REQ-DST-045", "REQ-DST-046", "REQ-DST-047"]
@@ -61,7 +61,7 @@ Expected metadata, content identity, Markdown safety, EARS clause meaning, relat
 
 ## Evidence filesystem and output tests
 
-- Cover work-order filename discovery and VREC `evidence_paths`, deduplication, multiple associations, identical contents, and stable ordering.
+- Cover flat-filename and directory-component work-order discovery under `SPEC-EVK-001`, VREC `evidence_paths`, deduplication, multiple associations, identical contents, and stable ordering.
 - Reject absolute paths, traversal, alternate separators, symlinks/junctions escaping the root, directories, devices, nonregular files, non-UTF-8 bytes, unsafe extensions where applicable, and files changed during generation.
 - Assert each included evidence SHA-256 equals `content/<sha256>.txt`, raw bytes, projected Markdown, and displayed metadata.
 - Force nested-directory creation, filename collision, incomplete expected file set, write failure, and promotion failure; assert no partial output replaces the previous valid dashboard and rollback stays within the intended output parent.

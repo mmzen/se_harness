@@ -79,9 +79,23 @@ Suppose you ask your coding agent:
 
 The agent drafts the requirements, design and verification approach, identifies significant decisions, and proposes a bounded work order. It waits for approval before changing code.
 
+> **Completed:** drafted the rate-limit packet and bounded `WO-RATE-001`.
+>
+> **Current lifecycle state:** the packet is `draft`; implementation is not authorized.
+>
+> **Recommended next step:** review the packet and approve it or request revisions.
+>
+> **Human decision or approval required:** the named product, technical, assurance, and engineering owners decide the artifacts they own.
+>
+> **Command or suggested response:** `Approve WO-RATE-001 and its governing artifacts for implementation.`
+
 > Approved. Implement the work order.
 
 The agent checks the approved scope, implements only that scope, performs repository checks, retains evidence, and prepares material tied to the exact candidate commit. An assurance owner judges the evidence; a release owner makes a later, separate decision.
+
+If a required check failed, the handoff would identify the diagnostic and safe retry, report `WO-RATE-001` as still `in_progress`, and say the formal state is unchanged. It would recommend remediation or escalation rather than imply completion.
+
+After an assurance owner verifies `VREC-RATE-001`, a later handoff may include **Alternative next steps:** request authorization to open or update the pull request, or—only with separate release-preparation authority—prepare a release record. The recommendation still names one preferred path and does not perform either action.
 
 ```mermaid
 flowchart LR

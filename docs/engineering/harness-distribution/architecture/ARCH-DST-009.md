@@ -5,7 +5,7 @@ title = "Bounded repository-content Explorer pipeline"
 status = "implemented"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 addresses = ["REQ-DST-043", "REQ-DST-046"]
@@ -25,6 +25,10 @@ assessed_by = "technical-owner"
 `ARCH-DST-008` establishes the canonical snapshot as Explorer's only persisted data boundary and keeps repository strings inert. The detail panel now needs artifact and evidence bodies, which are larger and structurally richer than the current metadata/path projection. This architecture extends that one-way pipeline without creating a second model or letting Markdown become executable repository code.
 
 The scope begins at validator-parsed artifact bodies and governed evidence references and ends at deterministic snapshot fields, safe rendered DOM, and passive raw content files inside the generated dashboard bundle. Formal validation, relation authority, assurance decisions, repository writes, publication authority, and external hosting remain outside the component.
+
+## Evidence-keying reassessment
+
+The 2026-08-19 reconciliation of `REQ-DST-046` and `SPEC-DST-012` expands governed discovery from filename-only keys to the exact path-component convention in `SPEC-EVK-001`. The content pipeline still receives only repository-contained, nonsymlink evidence associations from the managed generator and retains the same projection, sanitization, capacity, output, and publication boundaries. No component, dependency direction, trust boundary, or decision outcome changes.
 
 ## Components and responsibilities
 

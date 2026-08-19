@@ -31,6 +31,7 @@ from validate_engineering_artifacts import (
     ValidationReport,
     architecture_traceability_state,
     decision_assessment_state,
+    evidence_work_order_keys,
     load_revision_policy,
     validate_repository,
 )
@@ -45,7 +46,7 @@ READINESS_RESOURCE_SCHEMA = "harness-dashboard-readiness-v2"
 ARTIFACT_RESOURCE_SCHEMA = "harness-dashboard-artifact-v2"
 GENERATION_SCHEMA = "harness-dashboard-generation-v2"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v7"
+FINDING_RULES_VERSION = "harness-findings-v8"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -460,13 +461,17 @@ def discover_evidence(repository_root: Path) -> dict[str, list[str]]:
     evidence: dict[str, list[str]] = defaultdict(list)
     if not engineering_root.exists():
         return {}
-    work_order_pattern = re.compile(r"^(WO-[A-Z0-9-]*\d{3})(?:-|\.|$)")
     for path in sorted(engineering_root.rglob("*")):
-        if not path.is_file() or "evidence" not in path.parts:
+        if not path.is_file():
             continue
-        match = work_order_pattern.match(path.name)
-        if match is not None:
-            evidence[match.group(1)].append(repository_relative(path, repository_root))
+        relative_path = repository_relative(path, repository_root)
+        if (
+            "evidence" not in PurePosixPath(relative_path).parts
+            or _evidence_path_has_symlink(repository_root, Path(relative_path))
+        ):
+            continue
+        for work_order_id in evidence_work_order_keys(relative_path):
+            evidence[work_order_id].append(relative_path)
     return {key: sorted(set(paths)) for key, paths in sorted(evidence.items())}
 
 

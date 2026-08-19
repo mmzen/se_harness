@@ -303,7 +303,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
         self.assertTrue(report.valid)
         self.assertEqual(GENERATOR.SNAPSHOT_SCHEMA, snapshot["schema"])
-        self.assertEqual("harness-findings-v7", snapshot["finding_rules_version"])
+        self.assertEqual("harness-findings-v8", snapshot["finding_rules_version"])
         self.assertEqual(
             {
                 "schema",
@@ -344,6 +344,52 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(len(manifest["resources"]), observations["resource_count"])
         self.assertLessEqual(len(rendered.encode("utf-8")), GENERATOR.MAX_INDEX_BYTES)
         self.assertNotIn("# SE Harness", rendered)
+
+    def test_evidence_discovery_supports_flat_directory_nested_and_multi_key_layouts(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            paths = (
+                "docs/engineering/example/evidence/WO-AAA-001-check.md",
+                "docs/engineering/example/evidence/WO-BBB-002/check.md",
+                "docs/engineering/example/evidence/archive/WO-CCC-003/check.md",
+                "docs/engineering/example/evidence/WO-ZZZ-009/WO-AAA-001-extra.md",
+                "docs/engineering/WO-DDD-004/evidence/check.md",
+                "docs/engineering/example/not-evidence/WO-EEE-005.md",
+            )
+            for relative in paths:
+                path = root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("evidence\n", encoding="utf-8")
+
+            self.assertEqual(
+                {
+                    "WO-AAA-001": [
+                        "docs/engineering/example/evidence/WO-AAA-001-check.md",
+                        "docs/engineering/example/evidence/WO-ZZZ-009/WO-AAA-001-extra.md",
+                    ],
+                    "WO-BBB-002": ["docs/engineering/example/evidence/WO-BBB-002/check.md"],
+                    "WO-CCC-003": [
+                        "docs/engineering/example/evidence/archive/WO-CCC-003/check.md"
+                    ],
+                    "WO-ZZZ-009": [
+                        "docs/engineering/example/evidence/WO-ZZZ-009/WO-AAA-001-extra.md"
+                    ],
+                },
+                GENERATOR.discover_evidence(root),
+            )
+
+    def test_evidence_discovery_does_not_associate_a_symlinked_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            target = root / "outside.md"
+            target.write_text("outside\n", encoding="utf-8")
+            link = root / "docs/engineering/example/evidence/WO-LNK-001/check.md"
+            link.parent.mkdir(parents=True)
+            try:
+                link.symlink_to(target)
+            except OSError as exc:
+                self.skipTest(f"host cannot create test symlink: {exc}")
+            self.assertEqual({}, GENERATOR.discover_evidence(root))
 
     def test_progressive_bundle_is_deterministic_partitioned_and_bounded(self) -> None:
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)

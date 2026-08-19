@@ -5,7 +5,7 @@ title = "Aggregate release provenance architecture"
 status = "implemented"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-19"
 
 [relations]
 constrains = ["SPEC-AGR-001"]
@@ -16,6 +16,10 @@ constrains = ["SPEC-AGR-001"]
 ## Context and scope
 
 Revision provenance already models relations as arrays, but the CLI preparation boundary is scalar and validation assumes a single work-order-to-verification pairing. This architecture extends the existing model into an aggregate release manifest without introducing parallel record types or weakening exact-commit assurance.
+
+## Evidence-keying reassessment
+
+The 2026-08-19 reconciliation of `SPEC-AGR-001` makes the existing keyed-evidence obligation explicit for both flat filenames and components at or below a literal `evidence` directory. Aggregate set coverage, path safety, exact-candidate binding, record structure, dependency direction, and human authority remain unchanged. The package and repository-local assurance planes retain independent predicates aligned by contract tests under `SPEC-EVK-001`.
 
 ## Components and responsibilities
 
