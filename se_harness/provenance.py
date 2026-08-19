@@ -18,7 +18,6 @@ import tomllib
 
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import HarnessError, ensure_target, safe_destination, template_root
-from se_harness.release_distribution import read_bundle_manifest
 
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
@@ -367,7 +366,6 @@ def prepare_release(
     tag: str | None,
     output: str | None,
     domain: str | None = None,
-    distribution_manifest: str | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "RLS-")
@@ -420,20 +418,6 @@ def prepare_release(
     if len(identities) != 1:
         raise HarnessError("included verification records do not identify one candidate commit and object format")
     commit, object_format = next(iter(identities))
-    distribution = None
-    if distribution_manifest is not None:
-        try:
-            epoch = int(_git(root, "show", "-s", "--format=%ct", commit))
-        except ValueError as exc:
-            raise HarnessError("candidate commit timestamp is not an integer") from exc
-        distribution_path = safe_destination(root, Path(distribution_manifest))
-        distribution = read_bundle_manifest(
-            distribution_path,
-            version=version,
-            commit=commit,
-            git_object_format=object_format,
-            source_date_epoch=epoch,
-        )
     selected_domain = _record_domain(catalog, selected_work, domain)
     destination = _output_path(
         root,
@@ -443,7 +427,6 @@ def prepare_release(
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
-    distribution_block = f"{distribution.toml()}\n\n" if distribution is not None else ""
     verification_array = _toml_array(selected_verification_records)
     work_array = _toml_array(selected_work)
     readable_work = ", ".join(f"`{item}`" for item in selected_work)
@@ -461,7 +444,7 @@ git_object_format = "{object_format}"
 released_at = "{now}"
 authorized_by = "{authorized_by}"
 {tag_line}
-{distribution_block}[relations]
+[relations]
 satisfies = ["{release_contract_id}"]
 includes_verification = {verification_array}
 releases_work = {work_array}

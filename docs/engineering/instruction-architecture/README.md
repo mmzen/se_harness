@@ -125,6 +125,19 @@ The `IAR-010` packet narrows the existing `W-HEX-003` inspection observation to 
 - Verification contract: `VER-IAR-010`
 - Implemented work order: `WO-IAR-010`
 
+## Implemented stage-aware lifecycle handoffs
+
+The implemented `IAR-011` packet responds to issue 31 by requiring coding agents to end a completed lifecycle stage with the completed work, current formal state, one recommended next authorized step, required human authority, an applicable exact command or suggested response, and bounded alternatives. The stable obligation belongs in the managed router, while managed `WORKFLOW.md` retains the detailed stage mapping and ordered procedure.
+
+The packet keeps conversational handoffs separate from `harnessctl inspect` suggestions, changes no CLI or machine-readable schema, and grants no automatic approval or external action. It adds no new architecture artifact because it preserves the established router/workflow responsibility boundary; that applicability assessment was accepted with the packet approval.
+
+### Lifecycle-handoff packet index
+
+- Implemented requirement: `REQ-IAR-019`
+- Implemented specification: `SPEC-IAR-011`
+- Approved verification contract: `VER-IAR-011`
+- Implemented work order: `WO-IAR-011`
+
 ## Implemented instruction route
 
 ```text

@@ -53,6 +53,16 @@ WORKFLOW_REVIEW_STEP = (
     ".`, generate Harness Explorer with `harnessctl dashboard .`, and review the candidate's "
     "consistency and anomaly findings."
 )
+ROUTER_HANDOFF_HEADING = "## Lifecycle handoffs"
+WORKFLOW_HANDOFF_HEADING = "## Lifecycle handoff procedure"
+HANDOFF_FIELDS = (
+    "Completed",
+    "Current lifecycle state",
+    "Recommended next step",
+    "Human decision or approval required",
+    "Command or suggested response",
+    "Alternative next steps",
+)
 
 
 class InstructionArchitectureTests(unittest.TestCase):
@@ -175,6 +185,86 @@ class InstructionArchitectureTests(unittest.TestCase):
             "separately create any authorized tag",
         ):
             self.assertIn(required, workflow)
+
+    def test_stage_aware_handoffs_preserve_authority_and_policy_ownership(self) -> None:
+        target = self.installed_target()
+        agents = (target / "AGENTS.md").read_text(encoding="utf-8")
+        managed = agents.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(ROUTER_HANDOFF_HEADING, router)
+        router_handoff = router.split(ROUTER_HANDOFF_HEADING, 1)[1].split("\n## ", 1)[0]
+        for field in HANDOFF_FIELDS:
+            with self.subTest(field=field):
+                self.assertIn(field, router_handoff)
+        self.assertIn("actual artifact IDs", router_handoff)
+        self.assertIn("never performs that step without its separate authority", router_handoff)
+        self.assertIn("WORKFLOW.md", router_handoff)
+        self.assertNotIn("--phase review", router_handoff)
+        self.assertNotIn("capture-verification", router_handoff)
+        self.assertNotIn("Current lifecycle state", managed)
+
+        self.assertIn(WORKFLOW_HANDOFF_HEADING, workflow)
+        workflow_handoff = workflow.split(WORKFLOW_HANDOFF_HEADING, 1)[1]
+        for phrase in (
+            "Draft definition and work order",
+            "Approved work order; implementation not begun",
+            "Implementation, checks, and evidence complete; no candidate commit",
+            "Clean committed candidate requiring verification",
+            "Ready verification record",
+            "Verified verification record",
+            "Ready release record",
+            "Released release record",
+            "Failed command, incomplete check, or stop condition",
+            "capture-verification . --id VREC-... --work-order WO-...",
+            "prepare-release . --id RLS-... --release-contract REL-...",
+            "--verification-record VREC-... --work-order WO-... --version <version>",
+            "--authorized-by <release-owner>",
+            "state remains unchanged",
+            "What would you like me to do next?",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, workflow_handoff)
+
+    def test_stage_aware_handoff_upgrade_is_safe_and_idempotent(self) -> None:
+        target = self.installed_target("prior-handoff")
+        router_path = target / "ENGINEERING_HARNESS.md"
+        workflow_path = target / "docs" / "engineering" / "WORKFLOW.md"
+        desired_router = router_path.read_text(encoding="utf-8")
+        desired_workflow = workflow_path.read_text(encoding="utf-8")
+        router_parts = desired_router.split(f"\n{ROUTER_HANDOFF_HEADING}\n", 1)
+        workflow_parts = desired_workflow.split(f"\n{WORKFLOW_HANDOFF_HEADING}\n", 1)
+        self.assertEqual(2, len(router_parts))
+        self.assertEqual(2, len(workflow_parts))
+        _, next_router_section = router_parts[1].split("\n## ", 1)
+        prior_router = router_parts[0] + "\n## " + next_router_section
+        prior_workflow = workflow_parts[0] + "\n"
+        self.assertNotEqual(desired_router, prior_router)
+        self.assertNotEqual(desired_workflow, prior_workflow)
+        router_path.write_text(prior_router, encoding="utf-8")
+        workflow_path.write_text(prior_workflow, encoding="utf-8")
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
+            prior_router.encode("utf-8")
+        )
+        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
+            prior_workflow.encode("utf-8")
+        )
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        self.assertIn("update     ENGINEERING_HARNESS.md", output)
+        self.assertIn("update     docs/engineering/WORKFLOW.md", output)
+        self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
+        self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
+        first_lock = lock_path.read_bytes()
+        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(first_lock, lock_path.read_bytes())
 
     def test_router_responsibility_refinement_upgrades_safely(self) -> None:
         target = self.installed_target("prior-router")

@@ -26,7 +26,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "2aa3532b9e8f589eba69e2cbee053b02ad86a80cddefa7ea182fe31f5cae960e"
+      "sha256": "74e805ad85b007a719508ae92d38cd8b93255d40fb2d339c9bbfc9aefd30dc59"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -50,7 +50,7 @@
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "8d0c32dbb9b00fb03b577933e135f79f19c853cafc26ca9b40cc24eacd958e97"
+      "sha256": "b006759796d79666b0dac654d75a9022cc210727de464c581c856fef0caf3a8b"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -82,7 +82,7 @@
     },
     "docs/engineering/templates/RELEASE_RECORD.template.md": {
       "mode": "managed",
-      "sha256": "81170faa7fcfe71d64bb8121aa02e01b723182157af086cc3776107ecc7910ab"
+      "sha256": "a9c08f70535215afe33f5d090109dfab09c0f0d8481c58cbb9e4f95f7e9ff380"
     },
     "docs/engineering/templates/REQUIREMENT.template.md": {
       "mode": "managed",
@@ -134,7 +134,7 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "07c64027779b920be3a6ad33b2183d63f5c442ca9f996d5933799ff162bf0530"
+      "sha256": "543017353bfe8757904e6fc402e36c2c22d2e04095a9bf296deacf10ff6e4807"
     }
   },
   "hash_algorithm": "sha256",

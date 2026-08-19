@@ -35,6 +35,12 @@ Preflight is read-only. It validates installed integrity, repository-context com
 
 Use the repository-owned `docs/engineering/README.md` only as the index of local artifact domains and supporting engineering documentation.
 
+## Lifecycle handoffs
+
+Whenever it yields after completing a lifecycle stage or reaching a stop condition, a coding agent reports: `Completed`; `Current lifecycle state`; `Recommended next step`; `Human decision or approval required`; and `Command or suggested response`. It adds `Alternative next steps` only when more than one valid authorized path exists.
+
+The agent reports the final state reached when one response spans multiple stages, uses actual artifact IDs when known, recommends one bounded next authorized step instead of asking a generic follow-up question, and never performs that step without its separate authority. Stage-specific mapping, failure remediation, and ordered procedure belong to `docs/engineering/WORKFLOW.md`, subject to `DECISION_RIGHTS.md`.
+
 ## Review and visualization
 
 Review readiness and visualization follow `docs/engineering/WORKFLOW.md`, subject to `QUALITY_GATES.md`. Preflight and Harness Explorer outputs are derived, read-only evidence; neither approves work nor verifies a candidate.

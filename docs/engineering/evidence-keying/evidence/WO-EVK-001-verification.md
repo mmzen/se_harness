@@ -86,6 +86,22 @@ Commands used the repository editable environment at `.venv/Scripts/python.exe` 
 - Verification: `tests/test_revision_provenance.py` and `tests/test_dashboard_webui.py`.
 - Repository domain index: `docs/engineering/README.md`.
 
+## Current-main integration qualification
+
+After pull request 76 reported a merge conflict, the verified feature-governance head `32071624151960593ea70469e68e7b5353083cbe` was merged with current `origin/main` at `91c26aa0a41cda570e11b1452363ea0f9d05de6e` without rewriting either history. The only textual conflict was the schema-2 managed lock digest for `scripts/validate_engineering_artifacts.py`; the validator itself, package provenance, canonical validator template, and revision-provenance tests merged automatically.
+
+The lock conflict was resolved to canonical `utf8-text-lf-v1` SHA-256 `543017353bfe8757904e6fc402e36c2c22d2e04095a9bf296deacf10ff6e4807` for the combined validator. The active and canonical-template validator files are byte-identical and contain both the evidence-keying contract and current-main release-distribution validation. Package provenance contains both the evidence-keying contract and current-main repository-tool boundary. No historical verification record, release record, or governor descriptor was rewritten.
+
+Integration checks before committing the merge candidate:
+
+- formal validation passed with 502 artifacts, zero errors, and the same 44 maintenance warnings;
+- managed-integrity doctor passed, including the combined validator lock and exact released governor;
+- changed Python sources and tests compiled;
+- the complete suite passed 269 tests with four conditional skips and zero failures;
+- no unresolved conflict marker or unmerged path remained.
+
+Because this integration creates a new exact candidate, `VREC-EVK-001` remains immutable evidence for its earlier candidate. A new `VREC-EVK-002` must bind the merge candidate and receive a separate accountable assurance decision.
+
 ## Deviations and residual risk
 
 No authorized-scope deviation is known. Structural attribution cannot prove that evidence content is substantively adequate for every associated work order. A later approved issue-49 change may enforce keying for single-work-order VRECs; this work intentionally preserves their current behavior. Commit-bound verification, release, build, commit, tag, push, publication, deployment, and governor promotion remain outside this implementation evidence.

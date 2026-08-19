@@ -113,6 +113,8 @@ jobs:
         run: python -m unittest discover -s tests -p "test_*.py"
       - name: Validate candidate artifact graph
         run: python scripts/validate_engineering_artifacts.py --root .
+      - name: Validate repository release-distribution policy
+        run: python scripts/validate_release_distributions.py --root .
       - name: Prove candidate source made no checkout change
         run: |
           git diff --exit-code
@@ -144,6 +146,11 @@ jobs:
           python -m pip wheel --disable-pip-version-check --no-deps \
             --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"
           test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
+      - name: Prove candidate wheel excludes repository release policy
+        shell: bash
+        run: |
+          candidate_wheel="$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl')"
+          python scripts/check_portable_release_surface.py --wheel "$candidate_wheel"
       - name: Install candidate and prove package identity
         shell: bash
         run: |
@@ -161,6 +168,8 @@ jobs:
             --candidate-commit "$GITHUB_SHA" \
             --entry-point "$RUNNER_TEMP/candidate-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
+          python "$GITHUB_WORKSPACE/scripts/check_portable_release_surface.py" \
+            --harnessctl "$RUNNER_TEMP/candidate-env/bin/harnessctl"
       - name: Run released-governor black-box acceptance
         shell: bash
         run: |

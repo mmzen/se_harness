@@ -178,6 +178,23 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertIn("When Mermaid is not rendered", practical)
         self.assertIn("Color is supplementary", practical)
 
+    def test_practical_example_shows_stage_aware_handoffs(self) -> None:
+        practical = self.section("What this looks like in practice")
+        for phrase in (
+            "Completed",
+            "Current lifecycle state",
+            "Recommended next step",
+            "Human decision or approval required",
+            "Command or suggested response",
+            "Alternative next steps",
+            "WO-RATE-001",
+            "VREC-RATE-001",
+            "state is unchanged",
+            "failed",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, practical)
+
     def test_practical_example_uses_repository_owned_explorer_screenshots(self) -> None:
         practical = self.section("What this looks like in practice")
         expected_images = (
