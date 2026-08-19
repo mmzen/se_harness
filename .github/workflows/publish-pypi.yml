@@ -1,618 +1,91 @@
-name: Publish authorized SE Harness release
+name: Emergency publish SE Harness 0.5.0a1
 
 on:
-  workflow_dispatch:
-    inputs:
-      release_record:
-        description: Released formal record on main (for example RLS-SEH-008)
-        required: true
-        type: string
+  push:
+    branches:
+      - emergency/publish-0.5.0a1
 
 permissions: {}
 
 concurrency:
-  group: se-harness-release-${{ inputs.release_record }}
+  group: emergency-se-harness-0.5.0a1
   cancel-in-progress: false
 
-env:
-  PYTHON_VERSION: "3.11"
-
 jobs:
-  resolve:
-    name: Resolve released authority from main
-    if: github.repository == 'mmzen/se_harness' && github.ref == 'refs/heads/main'
+  publish:
+    name: Publish immutable emergency alpha
+    if: github.repository == 'mmzen/se_harness'
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/se-harness/0.5.0a1/
     permissions:
-      contents: read
-    outputs:
-      version: ${{ steps.plan.outputs.version }}
-      tag: ${{ steps.plan.outputs.tag }}
-      candidate_commit: ${{ steps.plan.outputs.candidate_commit }}
-      governance_commit: ${{ steps.plan.outputs.governance_commit }}
-      released_at: ${{ steps.plan.outputs.released_at }}
-      wheel: ${{ steps.plan.outputs.wheel }}
-      wheel_sha256: ${{ steps.plan.outputs.wheel_sha256 }}
-      sdist: ${{ steps.plan.outputs.sdist }}
-      sdist_sha256: ${{ steps.plan.outputs.sdist_sha256 }}
-      checksums: ${{ steps.plan.outputs.checksums }}
-      checksums_sha256: ${{ steps.plan.outputs.checksums_sha256 }}
-      source_date_epoch: ${{ steps.plan.outputs.source_date_epoch }}
+      contents: write
+      id-token: write
     steps:
-      - name: Check out trusted main history
+      - name: Check out the immutable alpha tag
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: v0.5.0a1
           fetch-depth: 0
           persist-credentials: false
 
       - name: Select Python 3.11
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: "3.11"
 
-      - name: Validate the selected RLS input
-        env:
-          RELEASE_RECORD: ${{ inputs.release_record }}
+      - name: Verify the immutable source identity
         shell: bash
         run: |
           set -euo pipefail
-          if [[ ! "$RELEASE_RECORD" =~ ^RLS-[A-Z0-9-]+-[0-9]{3}$ ]]; then
-            echo "release_record must be a canonical RLS identifier" >&2
-            exit 1
-          fi
+          test "$(git rev-parse HEAD)" = "5ba079f54cc121b76d20d394317ce05f48df3c9d"
+          test "$(python -c 'import se_harness; print(se_harness.__version__)')" = "0.5.0a1"
 
-      - name: Resolve the independently released governor
-        id: governor
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py governor \
-            --repository "$GITHUB_WORKSPACE" \
-            --output "$RUNNER_TEMP/governor.json" \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Acquire and prove the released governor
-        env:
-          GOVERNOR_VERSION: ${{ steps.governor.outputs.governor_version }}
-          GOVERNOR_WHEEL: ${{ steps.governor.outputs.governor_wheel }}
-          GOVERNOR_URL: ${{ steps.governor.outputs.governor_url }}
-          GOVERNOR_WHEEL_SHA256: ${{ steps.governor.outputs.governor_sha256 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m venv "$RUNNER_TEMP/governor-env"
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-            --output "$RUNNER_TEMP/$GOVERNOR_WHEEL" "$GOVERNOR_URL"
-          printf '%s  %s\n' "$GOVERNOR_WHEEL_SHA256" "$RUNNER_TEMP/$GOVERNOR_WHEEL" | sha256sum --check -
-          "$RUNNER_TEMP/governor-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps "$RUNNER_TEMP/$GOVERNOR_WHEEL"
-          cd "$RUNNER_TEMP"
-          export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/governor-env/bin/python" -I -m se_harness identity \
-            --role governor \
-            --expected-version "$GOVERNOR_VERSION" \
-            --expected-root "$RUNNER_TEMP/governor-env" \
-            --checkout-root "$GITHUB_WORKSPACE" \
-            --governor-wheel-sha256 "$GOVERNOR_WHEEL_SHA256" \
-            --entry-point "$RUNNER_TEMP/governor-env/bin/harnessctl" \
-            --require-isolated-python --require-entry-point
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"
-
-      - name: Derive one canonical release plan
-        id: plan
-        env:
-          RELEASE_RECORD: ${{ inputs.release_record }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python scripts/validate_release_distributions.py \
-            --root "$GITHUB_WORKSPACE" \
-            --require-record "$RELEASE_RECORD"
-          python .github/scripts/publish_release.py resolve \
-            --repository "$GITHUB_WORKSPACE" \
-            --default-ref refs/heads/main \
-            --release-record "$RELEASE_RECORD" \
-            --output "$RUNNER_TEMP/release-plan.json" \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Retain the canonical release plan
-        if: success()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: release-plan-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/release-plan.json
-          if-no-files-found: error
-          retention-days: 14
-
-      - name: Retain a bounded resolution refusal
-        if: failure()
-        env:
-          RELEASE_RECORD: ${{ inputs.release_record }}
-        shell: bash
-        run: |
-          jq -n --arg release_record "$RELEASE_RECORD" \
-            '{schema:"se-harness-release-result/v1",authority:"derived operational evidence; no formal lifecycle transition",release:{release_record:$release_record},stages:{resolution:{state:"failed"},qualification:{state:"not_run"},github:{state:"not_run"},pypi:{state:"not_run"},pages:{state:"not_run"},public_install:{state:"not_run"}}}' \
-            >"$RUNNER_TEMP/release-refusal.json"
-
-      - name: Upload the resolution refusal
-        if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: release-refusal
-          path: ${{ runner.temp }}/release-refusal.json
-          if-no-files-found: error
-          retention-days: 90
-
-  qualify:
-    name: Rebuild and qualify exact candidate
-    needs: resolve
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Check out trusted orchestration and full history
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Select Python 3.11
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Download the trusted release plan
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
-        with:
-          name: release-plan-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/plan
-
-      - name: Export the exact candidate twice
-        env:
-          CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir "$RUNNER_TEMP/source-a" "$RUNNER_TEMP/source-b"
-          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-a"
-          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-b"
-
-      - name: Run candidate verification without publication credentials
+      - name: Build the emergency alpha without lifecycle controls
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check build==1.3.0
-          cd "$RUNNER_TEMP/source-a"
-          python scripts/validate_engineering_artifacts.py --root .
-          python -m unittest discover -s tests -p 'test_*.py'
-          python -m se_harness --help >/dev/null
-          python -m se_harness doctor .
+          python -m build --wheel --sdist --no-isolation --outdir dist .
+          test "$(find dist -maxdepth 1 -type f -name '*.whl' | wc -l)" -eq 1
+          test "$(find dist -maxdepth 1 -type f -name '*.tar.gz' | wc -l)" -eq 1
+          python scripts/check_portable_release_surface.py \
+            --wheel dist/se_harness-0.5.0a1-py3-none-any.whl
+          (
+            cd dist
+            sha256sum se_harness-0.5.0a1-py3-none-any.whl se_harness-0.5.0a1.tar.gz >../SHA256SUMS
+          )
 
-      - name: Build both deterministic distribution sets
-        env:
-          SOURCE_DATE_EPOCH: ${{ needs.resolve.outputs.source_date_epoch }}
-          SDIST_NAME: ${{ needs.resolve.outputs.sdist }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          for suffix in a b; do
-            source="$RUNNER_TEMP/source-$suffix"
-            raw="$RUNNER_TEMP/raw-$suffix"
-            final="$RUNNER_TEMP/final-$suffix"
-            mkdir "$raw" "$final"
-            (cd "$source" && python -m build --wheel --sdist --no-isolation --outdir "$raw" .)
-            test "$(find "$raw" -maxdepth 1 -type f -name '*.whl' | wc -l)" -eq 1
-            test "$(find "$raw" -maxdepth 1 -type f -name '*.tar.gz' | wc -l)" -eq 1
-            cp "$raw"/*.whl "$final/"
-            python "$source/scripts/normalize_sdist.py" "$raw/$SDIST_NAME" "$final/$SDIST_NAME" --epoch "$SOURCE_DATE_EPOCH"
-          done
-          cmp "$RUNNER_TEMP/final-a/${{ needs.resolve.outputs.wheel }}" "$RUNNER_TEMP/final-b/${{ needs.resolve.outputs.wheel }}"
-          cmp "$RUNNER_TEMP/final-a/${{ needs.resolve.outputs.sdist }}" "$RUNNER_TEMP/final-b/${{ needs.resolve.outputs.sdist }}"
-
-      - name: Assemble and verify the exact release bundle
-        env:
-          WHEEL: ${{ needs.resolve.outputs.wheel }}
-          WHEEL_SHA256: ${{ needs.resolve.outputs.wheel_sha256 }}
-          SDIST: ${{ needs.resolve.outputs.sdist }}
-          SDIST_SHA256: ${{ needs.resolve.outputs.sdist_sha256 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir "$RUNNER_TEMP/release-bundle"
-          cp "$RUNNER_TEMP/final-a/$WHEEL" "$RUNNER_TEMP/release-bundle/$WHEEL"
-          cp "$RUNNER_TEMP/final-a/$SDIST" "$RUNNER_TEMP/release-bundle/$SDIST"
-          printf '%s  %s\n%s  %s\n' "$WHEEL_SHA256" "$WHEEL" "$SDIST_SHA256" "$SDIST" > "$RUNNER_TEMP/release-bundle/SHA256SUMS"
-          python scripts/create_release_bundle_manifest.py \
-            --repository "$GITHUB_WORKSPACE" \
-            --commit "${{ needs.resolve.outputs.candidate_commit }}" \
-            --version "${{ needs.resolve.outputs.version }}" \
-            --wheel "$RUNNER_TEMP/release-bundle/$WHEEL" \
-            --sdist "$RUNNER_TEMP/release-bundle/$SDIST" \
-            --output "$RUNNER_TEMP/rebuilt-bundle.json"
-          python .github/scripts/publish_release.py verify-build-manifest \
-            --plan "$RUNNER_TEMP/plan/release-plan.json" \
-            --manifest "$RUNNER_TEMP/rebuilt-bundle.json" \
-            --output "$RUNNER_TEMP/rebuilt-manifest-result.json"
-          python .github/scripts/publish_release.py verify-bundle \
-            --plan "$RUNNER_TEMP/plan/release-plan.json" \
-            --directory "$RUNNER_TEMP/release-bundle" \
-            --output "$RUNNER_TEMP/qualification.json"
-
-      - name: Transfer only verified inert release bytes
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: release-bundle-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/release-bundle/
-          if-no-files-found: error
-          retention-days: 2
-
-  github_release:
-    name: Materialize exact GitHub tag and release
-    needs: [resolve, qualify]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    outputs:
-      state: ${{ steps.final.outputs.state }}
-      url: ${{ steps.publish.outputs.url }}
-      maintenance_branch: ${{ steps.maintenance.outputs.branch }}
-      maintenance_state: ${{ steps.maintenance.outputs.state }}
-    steps:
-      - name: Check out trusted main orchestration only
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Download trusted plan and qualified bundle
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
-        with:
-          pattern: release-*-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/transfer
-
-      - name: Reverify transferred bytes
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_release.py verify-bundle \
-            --plan "$RUNNER_TEMP/transfer/release-plan-${{ inputs.release_record }}/release-plan.json" \
-            --directory "$RUNNER_TEMP/transfer/release-bundle-${{ inputs.release_record }}"
-
-      - name: Create or verify the immutable annotated tag
+      - name: Create the GitHub prerelease from the same bytes
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ needs.resolve.outputs.tag }}
-          CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
-          RELEASED_AT: ${{ needs.resolve.outputs.released_at }}
-          RELEASE_RECORD: ${{ inputs.release_record }}
         shell: bash
         run: |
           set -euo pipefail
-          ref_json="$RUNNER_TEMP/tag-ref.json"
-          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" >"$ref_json" 2>/dev/null; then
-            object_sha="$(jq -r '.object.sha' "$ref_json")"
-            object_type="$(jq -r '.object.type' "$ref_json")"
-            if [[ "$object_type" = tag ]]; then
-              object_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$object_sha" --jq '.object.sha')"
-            fi
-            test "$object_sha" = "$CANDIDATE_COMMIT"
+          if gh release view v0.5.0a1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            mkdir existing
+            gh release download v0.5.0a1 --repo "$GITHUB_REPOSITORY" --dir existing
+            cmp dist/se_harness-0.5.0a1-py3-none-any.whl existing/se_harness-0.5.0a1-py3-none-any.whl
+            cmp dist/se_harness-0.5.0a1.tar.gz existing/se_harness-0.5.0a1.tar.gz
+            cmp SHA256SUMS existing/SHA256SUMS
           else
-            tag_object="$(jq -n --arg tag "$TAG" --arg message "SE Harness $TAG ($RELEASE_RECORD)" \
-              --arg object "$CANDIDATE_COMMIT" --arg date "$RELEASED_AT" \
-              '{tag:$tag,message:$message,object:$object,type:"commit",tagger:{name:"SE Harness release automation",email:"release-automation@users.noreply.github.com",date:$date}}' \
-              | gh api "repos/$GITHUB_REPOSITORY/git/tags" --method POST --input - --jq '.sha')"
-            jq -n --arg ref "refs/tags/$TAG" --arg sha "$tag_object" '{ref:$ref,sha:$sha}' \
-              | gh api "repos/$GITHUB_REPOSITORY/git/refs" --method POST --input - >/dev/null
+            gh release create v0.5.0a1 \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --prerelease \
+              --latest=false \
+              --title "SE Harness 0.5.0a1 emergency bootstrap" \
+              --notes "Emergency pre-1.0 bootstrap release used only to convert this repository from its retired self-hosted governor lifecycle to the standard repository lifecycle." \
+              dist/se_harness-0.5.0a1-py3-none-any.whl \
+              dist/se_harness-0.5.0a1.tar.gz \
+              SHA256SUMS
           fi
 
-      - name: Stage, verify, and publish the exact GitHub Release
-        id: publish
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ needs.resolve.outputs.tag }}
-          VERSION: ${{ needs.resolve.outputs.version }}
-          PLAN: ${{ runner.temp }}/transfer/release-plan-${{ inputs.release_record }}/release-plan.json
-          BUNDLE: ${{ runner.temp }}/transfer/release-bundle-${{ inputs.release_record }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          metadata="$RUNNER_TEMP/github-release.json"
-          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata" 2>/dev/null; then
-            printf '{"absent":true}\n' >"$metadata"
-          fi
-          state="$(python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$metadata" | jq -r '.state')"
-          if [[ "$state" = absent ]]; then
-            python .github/scripts/publish_release.py notes --plan "$PLAN" --output "$RUNNER_TEMP/release-notes.md"
-            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --draft --latest=false \
-              --title "SE Harness $VERSION" --notes-file "$RUNNER_TEMP/release-notes.md" \
-              "$BUNDLE/${{ needs.resolve.outputs.wheel }}" "$BUNDLE/${{ needs.resolve.outputs.sdist }}" "$BUNDLE/${{ needs.resolve.outputs.checksums }}"
-          elif [[ "$state" != exact ]]; then
-            echo "GitHub Release is $state; immutable state was not changed" >&2
-            exit 1
-          fi
-          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata"
-          python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$metadata" --output "$RUNNER_TEMP/github-state.json"
-          test "$(jq -r '.state' "$RUNNER_TEMP/github-state.json")" = exact
-          if [[ "$(jq -r '.isDraft' "$metadata")" = true ]]; then
-            gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --draft=false --latest=false
-          fi
-          echo "url=https://github.com/$GITHUB_REPOSITORY/releases/tag/$TAG" >>"$GITHUB_OUTPUT"
-
-      - name: Record final GitHub state
-        id: final
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TAG: ${{ needs.resolve.outputs.tag }}
-          PLAN: ${{ runner.temp }}/transfer/release-plan-${{ inputs.release_record }}/release-plan.json
-        shell: bash
-        run: |
-          set -euo pipefail
-          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$RUNNER_TEMP/final-release.json"
-          python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$RUNNER_TEMP/final-release.json" --github-output "$GITHUB_OUTPUT"
-          test "$(jq -r '.isDraft' "$RUNNER_TEMP/final-release.json")" = false
-
-      - name: Create or verify the maintenance line
-        id: maintenance
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VERSION: ${{ needs.resolve.outputs.version }}
-          CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/reconcile_maintenance_branch.py \
-            --repository "$GITHUB_REPOSITORY" \
-            --version "$VERSION" \
-            --candidate "$CANDIDATE_COMMIT" \
-            --output "$RUNNER_TEMP/maintenance-line.json" \
-            --github-output "$GITHUB_OUTPUT"
-          {
-            printf '### Maintenance line\n\n'
-            printf -- '- Branch: `%s`\n' "$(jq -r '.branch' "$RUNNER_TEMP/maintenance-line.json")"
-            printf -- '- State: `%s`\n' "$(jq -r '.state' "$RUNNER_TEMP/maintenance-line.json")"
-            printf -- '- Candidate: `%s`\n' "$CANDIDATE_COMMIT"
-            printf -- '- Existing refs are never moved by this workflow.\n'
-          } >>"$GITHUB_STEP_SUMMARY"
-
-  pypi:
-    name: Promote exact GitHub assets to PyPI
-    needs: [resolve, github_release]
-    if: needs.github_release.result == 'success'
-    runs-on: ubuntu-latest
-    concurrency:
-      group: pypi-production
-      cancel-in-progress: false
-    permissions:
-      contents: read
-      id-token: write
-    environment:
-      name: pypi
-      url: https://pypi.org/p/se-harness
-    steps:
-      - name: Download and verify exact final GitHub assets
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
-          WHEEL: ${{ needs.resolve.outputs.wheel }}
-          WHEEL_SHA256: ${{ needs.resolve.outputs.wheel_sha256 }}
-          SDIST: ${{ needs.resolve.outputs.sdist }}
-          SDIST_SHA256: ${{ needs.resolve.outputs.sdist_sha256 }}
-          CHECKSUMS_SHA256: ${{ needs.resolve.outputs.checksums_sha256 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir release-assets dist
-          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir release-assets
-          test "$(find release-assets -maxdepth 1 -type f | wc -l)" -eq 3
-          printf '%s  %s\n%s  %s\n%s  %s\n' "$WHEEL_SHA256" "release-assets/$WHEEL" "$SDIST_SHA256" "release-assets/$SDIST" "$CHECKSUMS_SHA256" "release-assets/SHA256SUMS" | sha256sum --check -
-          printf '%s  %s\n%s  %s\n' "$WHEEL_SHA256" "$WHEEL" "$SDIST_SHA256" "$SDIST" | cmp --silent - release-assets/SHA256SUMS
-          cp -- "release-assets/$WHEEL" "release-assets/$SDIST" dist/
-
-      - name: Reconcile immutable PyPI version state
-        id: state
-        env:
-          VERSION: ${{ needs.resolve.outputs.version }}
-          WHEEL: ${{ needs.resolve.outputs.wheel }}
-          WHEEL_SHA256: ${{ needs.resolve.outputs.wheel_sha256 }}
-          SDIST: ${{ needs.resolve.outputs.sdist }}
-          SDIST_SHA256: ${{ needs.resolve.outputs.sdist_sha256 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          code="$(curl --proto '=https' --tlsv1.2 --silent --show-error --location --output "$RUNNER_TEMP/pypi.json" --write-out '%{http_code}' "https://pypi.org/pypi/se-harness/$VERSION/json")"
-          if [[ "$code" = 404 ]]; then
-            echo "publish=true" >>"$GITHUB_OUTPUT"
-            echo "state=absent" >>"$GITHUB_OUTPUT"
-          elif [[ "$code" = 200 ]]; then
-            actual="$(jq -c '[.urls[] | {filename,sha256:.digests.sha256}] | sort_by(.filename)' "$RUNNER_TEMP/pypi.json")"
-            expected="$(jq -cn --arg w "$WHEEL" --arg wh "$WHEEL_SHA256" --arg s "$SDIST" --arg sh "$SDIST_SHA256" '[{filename:$s,sha256:$sh},{filename:$w,sha256:$wh}] | sort_by(.filename)')"
-            test "$actual" = "$expected"
-            echo "publish=false" >>"$GITHUB_OUTPUT"
-            echo "state=exact" >>"$GITHUB_OUTPUT"
-          else
-            echo "PyPI returned unexpected HTTP status $code" >&2
-            exit 1
-          fi
-
-      - name: Publish exact distributions with Trusted Publishing
-        if: steps.state.outputs.publish == 'true'
+      - name: Publish the exact distributions with Trusted Publishing
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2 peeled commit
         with:
           packages-dir: dist/
           verify-metadata: true
           attestations: true
           print-hash: true
-
-  pages_build:
-    name: Build release-bound Explorer from main governance
-    needs: [resolve, github_release]
-    if: needs.github_release.result == 'success'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    outputs:
-      snapshot_sha256: ${{ steps.package.outputs.snapshot_sha256 }}
-      dashboard_sha256: ${{ steps.package.outputs.published_dashboard_sha256 }}
-    steps:
-      - name: Check out trusted main history
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Select Python 3.11
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Resolve immutable demonstration provenance
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py resolve --repository "$GITHUB_WORKSPACE" --default-ref refs/heads/main \
-            --tag "${{ needs.resolve.outputs.tag }}" --release-record "${{ inputs.release_record }}" \
-            --governance-commit "${{ needs.resolve.outputs.governance_commit }}" --output "$RUNNER_TEMP/pages-provenance.json"
-          git worktree add --detach "$RUNNER_TEMP/governance" "${{ needs.resolve.outputs.governance_commit }}"
-
-      - name: Resolve the released governor
-        id: governor
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py governor --repository "$RUNNER_TEMP/governance" --output "$RUNNER_TEMP/governor.json" --github-output "$GITHUB_OUTPUT"
-
-      - name: Acquire and apply the released governor
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m venv "$RUNNER_TEMP/governor-env"
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error --output "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}" "${{ steps.governor.outputs.governor_url }}"
-          printf '%s  %s\n' "${{ steps.governor.outputs.governor_sha256 }}" "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}" | sha256sum --check -
-          "$RUNNER_TEMP/governor-env/bin/python" -m pip install --disable-pip-version-check --no-deps "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}"
-          cd "$RUNNER_TEMP"
-          export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"
-
-      - name: Generate and package the exact Explorer payload
-        id: package
-        shell: bash
-        run: |
-          set -euo pipefail
-          python "$RUNNER_TEMP/governance/scripts/generate_harness_dashboard.py" --root "$RUNNER_TEMP/governance" --output "$RUNNER_TEMP/generated-dashboard"
-          python .github/scripts/publish_dashboard.py package --source "$RUNNER_TEMP/generated-dashboard" --destination "$RUNNER_TEMP/pages-site" \
-            --provenance "$RUNNER_TEMP/pages-provenance.json" --output "$RUNNER_TEMP/pages-publication.json" --github-output "$GITHUB_OUTPUT"
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-
-      - name: Upload exact Pages payload
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: ${{ runner.temp }}/pages-site
-          retention-days: 1
-
-  pages_deploy:
-    name: Deploy release-bound Explorer
-    needs: [resolve, pages_build]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    outputs:
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy the Pages artifact
-        id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-
-  observe:
-    name: Retain public release observations
-    if: always() && needs.resolve.result == 'success'
-    needs: [resolve, qualify, github_release, pypi, pages_build, pages_deploy]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Check out trusted reporting code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
-          persist-credentials: false
-
-      - name: Download the canonical plan
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
-        with:
-          name: release-plan-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/plan
-
-      - name: Observe public install and Pages provenance
-        id: public
-        continue-on-error: true
-        env:
-          VERSION: ${{ needs.resolve.outputs.version }}
-          WHEEL: ${{ needs.resolve.outputs.wheel }}
-          SDIST: ${{ needs.resolve.outputs.sdist }}
-          PAGE_URL: ${{ needs.pages_deploy.outputs.url }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m venv "$RUNNER_TEMP/public-env"
-          "$RUNNER_TEMP/public-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --index-url https://pypi.org/simple "se-harness==$VERSION"
-          test "$("$RUNNER_TEMP/public-env/bin/harnessctl" --version)" = "$VERSION"
-          for filename in "$WHEEL" "$SDIST"; do
-            curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-              -H 'Accept: application/vnd.pypi.integrity.v1+json' \
-              "https://pypi.org/integrity/se-harness/$VERSION/$filename/provenance" \
-              >"$RUNNER_TEMP/$filename.provenance.json"
-            test "$(jq '.attestation_bundles | length' "$RUNNER_TEMP/$filename.provenance.json")" -ge 1
-          done
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error "${PAGE_URL%/}/publication-manifest.json" >"$RUNNER_TEMP/publication-manifest.json"
-          test "$(jq -r '.release_record' "$RUNNER_TEMP/publication-manifest.json")" = "${{ inputs.release_record }}"
-
-      - name: Emit stage-specific result
-        env:
-          RELEASE_RECORD: ${{ inputs.release_record }}
-          QUALIFICATION_RESULT: ${{ needs.qualify.result }}
-          GITHUB_RESULT: ${{ needs.github_release.result }}
-          GITHUB_URL: ${{ needs.github_release.outputs.url }}
-          MAINTENANCE_BRANCH: ${{ needs.github_release.outputs.maintenance_branch }}
-          MAINTENANCE_STATE: ${{ needs.github_release.outputs.maintenance_state }}
-          PYPI_RESULT: ${{ needs.pypi.result }}
-          PYPI_URL: https://pypi.org/project/se-harness/${{ needs.resolve.outputs.version }}/
-          PAGES_RESULT: ${{ needs.pages_deploy.result }}
-          PAGES_URL: ${{ needs.pages_deploy.outputs.url }}
-          PUBLIC_RESULT: ${{ steps.public.outcome }}
-          WORKFLOW_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          jq -n --arg qualification "$QUALIFICATION_RESULT" --arg github "$GITHUB_RESULT" --arg github_url "$GITHUB_URL" \
-            --arg maintenance_branch "$MAINTENANCE_BRANCH" --arg maintenance_state "$MAINTENANCE_STATE" \
-            --arg pypi "$PYPI_RESULT" --arg pypi_url "$PYPI_URL" --arg pages "$PAGES_RESULT" --arg pages_url "$PAGES_URL" \
-            --arg public_install "$PUBLIC_RESULT" --arg workflow_url "$WORKFLOW_URL" \
-            '{resolution:{state:"exact",workflow_url:$workflow_url},qualification:{state:(if $qualification=="success" then "exact" else "failed" end)},github:{state:(if $github=="success" then "exact" else "failed" end),url:$github_url,maintenance_branch:(if $maintenance_branch=="" then null else $maintenance_branch end),maintenance_state:(if $maintenance_state=="" then "not_run" else $maintenance_state end)},pypi:{state:(if $pypi=="success" then "exact" else "failed" end),url:$pypi_url},pages:{state:(if $pages=="success" then "exact" else "failed" end),url:$pages_url},public_install:{state:(if $public_install=="success" then "exact" else "failed" end)}}' >"$RUNNER_TEMP/stages.json"
-          python .github/scripts/publish_release.py result --plan "$RUNNER_TEMP/plan/release-plan.json" --stages "$RUNNER_TEMP/stages.json" --output "$RUNNER_TEMP/release-result.json"
-          {
-            printf '### SE Harness release transaction\n\n'
-            printf -- '- Released record: `%s`\n' "$RELEASE_RECORD"
-            printf -- '- Candidate: `%s`\n' '${{ needs.resolve.outputs.candidate_commit }}'
-            printf -- '- Governance: `%s`\n' '${{ needs.resolve.outputs.governance_commit }}'
-            printf -- '- Maintenance line: `%s` (`%s`)\n' "${MAINTENANCE_BRANCH:-not reached}" "${MAINTENANCE_STATE:-not_run}"
-            printf -- '- GitHub / PyPI / Pages: `%s` / `%s` / `%s`\n' "$GITHUB_RESULT" "$PYPI_RESULT" "$PAGES_RESULT"
-            printf -- '- Authority: derived operational evidence; no formal lifecycle transition.\n'
-          } >>"$GITHUB_STEP_SUMMARY"
-
-      - name: Retain machine-readable release result
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: release-result-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/release-result.json
-          if-no-files-found: error
-          retention-days: 90
