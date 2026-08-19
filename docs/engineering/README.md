@@ -12,6 +12,7 @@
 - `verification-supersession/`: explicit retention and supersession of stale ready VRECs.
 - `pypi-publication/`: governed promotion of released artifacts to PyPI.
 - `release-orchestration/`: deterministic last-mile publication from one released RLS identity.
+- `dashboard-publication/`: repository-specific, release-bound Harness Explorer demonstration publication and replay controls.
 - `work-order-lifecycle/`: lifecycle meanings and configured verified-work consistency.
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.
@@ -21,6 +22,9 @@
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
 - `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.
+- `release-0.3.0/`: aggregate qualification, provenance, and the released record for version 0.3.0.
+- `release-0.4.0/`: aggregate qualification, provenance, and the released record for version 0.4.0.
+- `release-0.4.1/`: aggregate qualification, provenance, and the released record for version 0.4.1.
 
 ## Repository-specific engineering documentation
 
