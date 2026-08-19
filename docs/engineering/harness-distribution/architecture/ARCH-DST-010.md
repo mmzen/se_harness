@@ -5,7 +5,7 @@ title = "Integrity-addressed progressive Explorer bundle"
 status = "implemented"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-08-19"
 
 [relations]
 addresses = ["REQ-DST-049", "REQ-DST-050", "REQ-DST-052", "REQ-DST-054", "REQ-DST-055"]
@@ -97,6 +97,10 @@ The design prioritizes fast first comprehension, deterministic reproducibility, 
 ## Conformance checks
 
 `VER-DST-013` proves schemas, deterministic partitioning, controlled paths, exact manifest/resource hashes, budgets, recursive transaction behavior, publication validation, static portability, managed distribution, and unchanged authority. `VER-DST-014` proves verified fetch ordering, deferred network behavior, cache and race invariants, history continuity, panel-local recovery, hostile resources, safe rendering, CSP, accessibility, and browser performance.
+
+## Dependency reassessment: 2026-08-19
+
+The repository owner's revision of `REQ-DST-055` and `SPEC-DST-013` raises only the generated shell ceiling from 153,600 to 262,144 UTF-8 bytes. The separately authorized fragment and History API presentation state remains within the browser-navigation responsibility already assigned by this architecture and persists no canonical content. The static bundle protocol, data ownership, manifest trust chain, progressive acquisition, same-origin boundary, in-memory cache, failure containment, publication model, and all other budgets remain unchanged. The architecture therefore continues to conform without a new significant structural decision; `ADR-DST-010` records the corresponding reaffirmation.
 
 ## Related ADRs
 

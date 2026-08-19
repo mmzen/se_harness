@@ -66,6 +66,10 @@ Integrity-addressed progressive Explorer extension:
 
 `WO-DST-014` owns deterministic static partitioning, manifest integrity, transactional output, payload budgets, static hosting, and Pages exact-set validation. `WO-DST-015` owns verified progressive browser acquisition, revision-scoped caching, asynchronous failure/race containment, and preserved navigation/rendering semantics. `ARCH-DST-010` addresses the significant protocol, data-partition, trust, deployment, reliability, and performance drivers in `REQ-DST-049`, `REQ-DST-050`, `REQ-DST-052`, `REQ-DST-054`, and `REQ-DST-055`, conforms to both specifications, and records `adr_required`; `ADR-DST-010` selects content-addressed static sharding rather than compression-only, page-only bulk data, a backend, persistent browser storage, or binary range access.
 
+Owner-authorized Explorer dashboard revision:
+
+`REQ-DST-030`, `REQ-DST-032..033`, `REQ-DST-035`, `REQ-DST-040..042`, `REQ-DST-045`, `REQ-DST-047`, `REQ-DST-050`, and `REQ-DST-055` -> `SPEC-DST-017`, `VER-DST-017` -> `WO-DST-018`, within the boundaries selected by `ARCH-DST-008`, `ADR-DST-008`, `ARCH-DST-010`, and `ADR-DST-010`. The repository owner authorized the supplied template revision, two later browser-identified route-safety corrections, a 262,144-byte generated `index.html` ceiling, and controlled same-document URL fragments plus History API state for Explorer navigation. Persistent browser storage, additional runtime URLs, transferred authority, publication, and deployment remain excluded.
+
 Additive single-runtime consumer GitHub CI extension:
 
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-056..059` -> `SPEC-DST-015`, `ARCH-DST-011`, `ADR-DST-011`, `VER-DST-015` -> `WO-DST-016`.

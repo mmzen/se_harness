@@ -5,7 +5,7 @@ title = "Deterministic sharded Explorer bundle"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-08-19"
 
 [relations]
 specifies = ["REQ-DST-048", "REQ-DST-049", "REQ-DST-054", "REQ-DST-055"]
@@ -89,7 +89,7 @@ Treat all repository content and paths as untrusted. Preserve path containment, 
 
 ## Performance and capacity
 
-- `index.html` maximum: 153,600 UTF-8 bytes.
+- `index.html` maximum: 262,144 UTF-8 bytes.
 - summary maximum: 262,144 UTF-8 bytes.
 - artifact/evidence source maximum: existing 262,144 bytes each.
 - combined projected-content maximum: existing 16,777,216 bytes.

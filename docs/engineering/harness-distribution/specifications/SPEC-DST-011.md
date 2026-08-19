@@ -5,7 +5,7 @@ title = "Structured and reversible Explorer Lineage"
 status = "approved"
 owners = ["technical-owner", "product-owner", "quality-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 specifies = ["REQ-DST-040", "REQ-DST-041"]
@@ -73,7 +73,7 @@ This contract changes only the Lineage browser presentation and its bounded in-m
 31. Retain at most 20 visits. On the twenty-first append, remove the oldest entry that is not current, adjust the cursor, preserve `lineageInitialId` separately, and announce that older visit history was discarded.
 32. Return to initial focuses `lineageInitialId`. If it is still a retained history entry, move to that visit; otherwise append it using the ordinary branch rule without exceeding the bound.
 33. If a retained ID no longer resolves in the loaded snapshot, mark its control unavailable and do not substitute another artifact. If the current entry becomes unavailable, show a bounded empty state and allow navigation to another retained entry or the initial artifact.
-34. A page reload or newly generated page begins a new navigation session. Do not use `history.pushState`, URL fragments, query parameters, storage, cookies, telemetry, network calls, or repository writes.
+34. A page reload or newly generated page begins a new bounded visit-history session. Controlled same-document URL fragments and `history.pushState`/`history.replaceState` may route only Overview, a selected Lineage artifact, the Readiness index, a selected Readiness subject, or a gate-state listing. Route parsing must reject or safely ignore unknown values, must not serialize the visit trail or canonical content, and must not add runtime network calls. Do not use local or session storage, cookies, telemetry, repository writes, or cross-document route state.
 35. After a card selection rerenders the board, move focus to the corresponding selected card or its board heading. Back, Forward, history-chip, and Return actions retain predictable focus on the activating control or its replacement.
 36. After history is rendered for an append, Back, Forward, history-chip jump, or Return to initial, compare the current visit control with the visible bounds of the history list and adjust only that list's horizontal scroll position by the minimum amount needed to reveal the current control fully. The reveal must work toward either edge, must not scroll the document or board, and must not assign focus.
 

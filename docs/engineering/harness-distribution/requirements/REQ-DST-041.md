@@ -5,7 +5,7 @@ title = "Provide reversible Lineage navigation history"
 status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 statement = "WHEN a reader follows artifact selections in focused Lineage, THE SYSTEM SHALL retain a bounded reversible navigation history so earlier and later focused boards can be restored without representing visits as formal artifact ancestry or governance relations."
 verification_method = "automated-test-and-manual-review"
 
@@ -43,7 +43,7 @@ This requirement applies when a reader enters focused Lineage from Overview, ano
 
 If a history entry no longer resolves in the loaded snapshot, disable or skip that entry with an explicit unavailable state; never substitute a different artifact. Empty history, one-entry history, repeated non-consecutive visits, cycles, and rapid selection must remain safe.
 
-Reloading the generated page starts a new history. Navigation state must not be written into formal artifacts, canonical snapshot data, URLs, browser history, local storage, cookies, analytics, or repository files.
+Reloading the generated page starts a new bounded visit history. The page may encode only the controlled Explorer view, current selected artifact or Readiness selection in a same-document URL fragment and may add those routes to browser history through the History API. It must not serialize the full visit trail, artifact or evidence content, canonical snapshot data, lifecycle decisions, or authority claims into the URL or history state. Navigation state must not be written into formal artifacts, local storage, cookies, analytics, or repository files.
 
 ## Constraints
 

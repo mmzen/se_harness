@@ -5,7 +5,7 @@ title = "Keep the initial Explorer payload bounded and observable"
 status = "approved"
 owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-08-19"
 statement = "WHEN an Explorer bundle is generated and acceptance-tested, THE SYSTEM SHALL enforce fixed shell and initial-summary budgets, exclude deferred Markdown from the initial path, and report deterministic resource-size measurements without converting them into an assurance score."
 verification_method = "automated-performance-budget-test"
 
@@ -27,7 +27,7 @@ Generation has produced the complete bundle and the test suite evaluates the cur
 
 The generated output must:
 
-- keep `index.html` at or below 153,600 UTF-8 bytes;
+- keep `index.html` at or below 262,144 UTF-8 bytes;
 - keep the immediate summary resource at or below 262,144 UTF-8 bytes;
 - contain no artifact-body or evidence-body Markdown in `index.html`, summary, topology, or readiness resources;
 - retain the existing 262,144-byte per-source-document and 16,777,216-byte total projected-content bounds;
