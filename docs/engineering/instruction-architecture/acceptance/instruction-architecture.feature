@@ -22,6 +22,15 @@ Feature: Rationalized and enforceable repository instructions
     And WORKFLOW.md owns the exact review-preflight and dashboard commands
     And neither preflight nor Harness Explorer approves or verifies the candidate
 
+  Scenario: Every completed lifecycle stage ends with a bounded handoff
+    Given an agent completes a lifecycle stage or reaches a stop condition
+    When it yields control to a human
+    Then it reports completed work, current state, one recommended next authorized step, required human authority, and an exact command or suggested response
+    And it includes alternatives only when multiple valid authorized paths exist
+    And WORKFLOW.md maps draft, implementation, verification, release, and failure states to that handoff
+    And a failed stage leaves formal state unchanged and recommends remediation or escalation
+    And the agent does not perform the separately authorized next step
+
   Scenario: Significant first-design choices require an ADR
     Given a new architecture selects system boundaries and persistent data ownership
     And its decision assessment identifies those significant triggers

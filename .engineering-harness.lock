@@ -26,7 +26,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "2aa3532b9e8f589eba69e2cbee053b02ad86a80cddefa7ea182fe31f5cae960e"
+      "sha256": "74e805ad85b007a719508ae92d38cd8b93255d40fb2d339c9bbfc9aefd30dc59"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -50,7 +50,7 @@
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "8d0c32dbb9b00fb03b577933e135f79f19c853cafc26ca9b40cc24eacd958e97"
+      "sha256": "b006759796d79666b0dac654d75a9022cc210727de464c581c856fef0caf3a8b"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
