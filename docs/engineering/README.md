@@ -4,6 +4,7 @@
 
 ## Product and governance domains
 
+- `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.
 - `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.
 - `revision-provenance/`: commit-bound verification and release record preparation.
 - `aggregate-release/`: exact multi-work-order release coverage.

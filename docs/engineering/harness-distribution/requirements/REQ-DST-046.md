@@ -5,7 +5,7 @@ title = "Present retained evidence content portably"
 status = "approved"
 owners = ["quality-owner", "security-owner", "product-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 statement = "WHEN a focused artifact has an allowed retained-evidence reference, THE SYSTEM SHALL present its repository identity, safe rendered content, and portable raw source within the generated dashboard boundary."
 verification_method = "automated-test-and-security-review"
 
@@ -21,7 +21,7 @@ Explorer currently lists evidence paths without the retained evidence itself. A 
 
 ## Preconditions and trigger
 
-This requirement applies to evidence discovered by the governed work-order filename convention and to safe repository evidence paths explicitly referenced by verification records. Only regular UTF-8 files inside the repository's allowed engineering evidence roots are eligible.
+This requirement applies to evidence discovered by the governed work-order evidence-path convention and to safe repository evidence paths explicitly referenced by verification records. The convention accepts an exact work-order key in the filename or in a component at or below a literal `evidence` directory, as defined by `SPEC-EVK-001`. Only regular UTF-8 files inside the repository's allowed engineering evidence roots are eligible.
 
 ## Required response
 

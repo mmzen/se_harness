@@ -5,7 +5,7 @@ title = "Verify aggregate release provenance"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-19"
 
 [relations]
 verifies = ["REQ-AGR-001", "REQ-AGR-002", "REQ-AGR-003", "REQ-AGR-004", "REQ-AGR-005", "REQ-AGR-006", "REQ-AGR-007", "REQ-AGR-008"]
@@ -21,7 +21,7 @@ Verification is derived from the normative artifact graph and public CLI behavio
 
 | Requirement | Method | Case/evidence | Pass condition |
 |---|---|---|---|
-| REQ-AGR-001 | CLI integration | two work orders, distinct contracts, evidence for each | one ready aggregate VREC contains the exact sorted sets at clean HEAD |
+| REQ-AGR-001 | CLI integration | two work orders, distinct contracts, flat-filename and directory-component evidence for each | one ready aggregate VREC contains the exact sorted sets at clean HEAD and both governed evidence layouts key exact work-order IDs |
 | REQ-AGR-002 | CLI integration | aggregate VREC and contract gating all selected work | one ready RLS contains the exact verified work set |
 | REQ-AGR-003 | validator and CLI tests | SHA-1, SHA-256, mixed commits and formats | matching candidates pass; every mismatch fails |
 | REQ-AGR-004 | regression and property cases | repeated, single, duplicate, reordered, unknown, unsafe input | valid output is deterministic; invalid input is atomic and specific |
@@ -42,6 +42,7 @@ The executable feature scenarios under `acceptance/aggregate-release.feature` ar
 - Selected verification contracts equal the union declared by aggregate work orders.
 - All candidate identities in one release are identical.
 - Single-item input remains a valid aggregate of cardinality one.
+- Flat filenames and components at or below a literal `evidence` directory produce the same exact aggregate key coverage under `SPEC-EVK-001`.
 
 ## Static and architecture checks
 

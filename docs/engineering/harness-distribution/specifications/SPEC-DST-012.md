@@ -5,7 +5,7 @@ title = "Safe content-rich Explorer artifact details"
 status = "approved"
 owners = ["technical-owner", "product-owner", "security-owner", "quality-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 specifies = ["REQ-DST-042", "REQ-DST-043", "REQ-DST-044", "REQ-DST-045", "REQ-DST-046", "REQ-DST-047"]
@@ -27,7 +27,7 @@ The change is additive to `harness-dashboard-snapshot-v1`: existing fields keep 
 4. Normalize body line endings to LF in the same deterministic parsing boundary used by the artifact model. Do not otherwise rewrite Markdown.
 5. Preserve the existing top-level `evidence` entries and their `work_order` and `paths` fields unchanged. Add an optional top-level `evidence_documents` collection so document content is projected once without changing the meaning of existing path indexes.
 6. Each unique evidence-document entry contains all explicit work-order and verification-record associations, the exact repository-relative path, format, UTF-8 byte count, SHA-256 when readable, included or omitted state, omission reason when applicable, LF-normalized projected Markdown when included, and generator-owned raw output path when included.
-7. Work-order evidence is discovered only through the existing governed filename convention. Verification-record evidence is selected only from its explicit `evidence_paths`; duplicate paths are projected once and may have multiple artifact associations.
+7. Work-order evidence is discovered only through the governed evidence-path convention in `SPEC-EVK-001`: an exact work-order key in the filename or in a component at or below a literal `evidence` directory. Verification-record evidence is selected only from its explicit `evidence_paths`; duplicate paths are projected once and may have multiple artifact associations.
 8. Resolve candidate evidence paths against the repository root and allowed `docs/engineering/**/evidence/` roots. Require a regular nonsymlink UTF-8 file whose final resolved location remains inside the allowed root.
 9. Order artifact and evidence content records by canonical artifact ID and repository-relative path. Identical repository state produces byte-identical snapshot and raw content files.
 
