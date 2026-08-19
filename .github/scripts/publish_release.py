@@ -21,7 +21,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 import publish_dashboard as dashboard
-from se_harness.release_distribution import ReleaseDistribution, validate_distribution_block
+from repository_tools.release_distribution import ReleaseDistribution, validate_distribution_block
 
 
 RESULT_SCHEMA = "se-harness-release-result/v1"

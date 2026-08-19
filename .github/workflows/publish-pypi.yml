@@ -105,6 +105,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python scripts/validate_release_distributions.py \
+            --root "$GITHUB_WORKSPACE" \
+            --require-record "$RELEASE_RECORD"
           python .github/scripts/publish_release.py resolve \
             --repository "$GITHUB_WORKSPACE" \
             --default-ref refs/heads/main \
