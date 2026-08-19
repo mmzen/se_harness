@@ -2,7 +2,7 @@
 id = "VREC-EVK-002"
 type = "verification_record"
 title = "Verification candidate for WO-EVK-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
@@ -18,8 +18,10 @@ verifies_work_order = ["WO-EVK-001"]
 conforms_to = ["VER-EVK-001"]
 +++
 
-# Verification Record Candidate
+# Verification Record
 
-This ready record binds retained evidence for `WO-EVK-001` to candidate commit `ccf9ea7a0c71a3ec0f780bd8af5ca1f78eea6623`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+On 2026-08-19, after the current-main integration evidence, exact candidate binding, and green hosted checks were presented, the accountable owner explicitly stated `ok, I validate the verification record, I already merged, so push again`. That human assurance decision transitions this record from `ready` to `verified`; automation did not grant the authority. The captured candidate commit, object format, clean worktree state, capture timestamp, artifact snapshot, evidence path, work-order coverage, and verification-contract coverage remain unchanged.
 
-The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+This verified record binds retained evidence for `WO-EVK-001` to integrated candidate commit `ccf9ea7a0c71a3ec0f780bd8af5ca1f78eea6623`, whose parents are the verified feature-governance head and current `main` at conflict resolution. The candidate passed 269 repository tests with four conditional skips, formal validation with zero errors, managed-integrity doctor, review preflight, deterministic Explorer generation, and all refreshed governed-self-hosting checks. Pull request 76 subsequently merged as `d5967be6feb77b95b196e426fed5416d6337d380`.
+
+The record was intentionally created after the candidate commit it names, avoiding self-referential commit metadata. This separate accountable transition does not prepare or authorize a release, create a tag, publish, deploy, or promote the governor.
