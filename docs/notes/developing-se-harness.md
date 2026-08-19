@@ -38,6 +38,7 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/scripts/publish_dashboard.py          Pages provenance and public-payload gate; not consumer tooling
 .github/workflows/publish-pypi.yml             one-input release orchestrator and stable PyPI publisher identity
 .github/scripts/publish_release.py              trusted release resolution, reconciliation, and result helper
+.github/scripts/reconcile_maintenance_branch.py repository-only maintenance-line reconciliation
 scripts/create_release_bundle_manifest.py       deterministic pre-RLS distribution evidence producer
 scripts/bind_release_distribution.py            atomic repository distribution-to-RLS binder
 scripts/validate_release_distributions.py       repository-only distribution policy validator
@@ -92,7 +93,9 @@ clean candidate C -> exact bundle manifest -> ready VREC -> human verification
                                                               -> one-input authorized publication
 ```
 
-The tag selects C, not a later governance commit. After the released RLS is integrated into `main`, the release owner dispatches **Publish authorized SE Harness release** from `main` with only its `RLS-*` ID. The workflow derives every other identity, rebuilds C twice without credentials, creates or verifies the immutable tag and exact GitHub Release, and passes those final assets into the checkout-free PyPI job. The protected `pypi` environment remains a separate human decision. Exact existing state is replay-complete; partial or mismatched immutable state blocks without replacement.
+The tag selects C, not a later governance commit. After the released RLS is integrated into `main`, the release owner dispatches **Publish authorized SE Harness release** from `main` with only its `RLS-*` ID. The workflow derives every other identity, rebuilds C twice without credentials, and creates or verifies the immutable tag and exact GitHub Release. It then derives `release/MAJOR.MINOR`: an absent line is created at C, while an existing line is accepted unchanged only if it contains C. Conflicting history blocks and is never force-updated. The exact GitHub assets then enter the checkout-free PyPI job. The protected `pypi` environment remains a separate human decision. Exact existing state is replay-complete; partial or mismatched state blocks without replacement.
+
+Maintenance-line reconciliation is policy of this repository, not a `harnessctl` capability or consumer installation feature. It creates no maintenance work authority: every patch still needs its own approved bounded work, evidence, assurance, and release decision. Historical manually named per-patch branches are not renamed or deleted automatically.
 
 The same main-context orchestration publishes the public Explorer demonstration from the later governance commit containing the released record. It keeps that snapshot distinct from the tagged candidate, validates it with the released governor, and uses target-local code only to render derived post-release output. `publish-dashboard-pages.yml` remains a main-only Pages recovery action taking the same RLS plus its explicit governance commit; it no longer deploys from a tag-ref release event. Neither workflow is copied into the consumer template or grants formal lifecycle authority. See [Publishing the SE Harness development dashboard](harness-dashboard-publication.md).
 
