@@ -35,6 +35,22 @@ class HarnessCtlTests(unittest.TestCase):
             result = main(list(arguments))
         return result, stdout.getvalue(), stderr.getvalue()
 
+    def assert_portable_release_surfaces(self, target: Path) -> None:
+        release_template = (target / "docs/engineering/templates/RELEASE_RECORD.template.md").read_text(
+            encoding="utf-8"
+        )
+        validator_source = (target / "scripts/validate_engineering_artifacts.py").read_text(
+            encoding="utf-8"
+        )
+        for forbidden in (
+            "distribution-manifest",
+            "python-wheel-sdist",
+            "se_harness-VERSION",
+            "SHA256SUMS",
+        ):
+            self.assertNotIn(forbidden, release_template)
+            self.assertNotIn(forbidden, validator_source)
+
     def make_schema_one_lock(self, target: Path) -> dict:
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -55,6 +71,11 @@ class HarnessCtlTests(unittest.TestCase):
         parser = build_parser()
         help_text = parser.format_help()
         self.assertNotIn("--profile", help_text)
+        command_action = next(
+            action for action in parser._actions if isinstance(getattr(action, "choices", None), dict)
+        )
+        prepare_help = command_action.choices["prepare-release"].format_help()
+        self.assertNotIn("--distribution-manifest", prepare_help)
         repository_templates = template_root().parent
         self.assertEqual(["standard"], sorted(item.name for item in repository_templates.iterdir() if item.is_dir()))
 
@@ -108,6 +129,7 @@ class HarnessCtlTests(unittest.TestCase):
         context = (target / "docs/engineering/REPOSITORY_CONTEXT.md").read_text(encoding="utf-8")
         self.assertIn("Repository Context for Example", context)
         self.assertIn("repository-owned", context.lower())
+        self.assert_portable_release_surfaces(target)
 
         validation = subprocess.run(
             [sys.executable, str(target / "scripts/validate_engineering_artifacts.py"), "--root", str(target)],
@@ -156,6 +178,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, self.invoke("validate", str(target))[0])
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
         self.assertTrue((target / "target/harness-dashboard/index.html").is_file())
+        self.assert_portable_release_surfaces(target)
 
     def test_adopt_adds_dedicated_workflow_without_changing_existing_ci(self) -> None:
         target = self.root / "existing-ci"
@@ -351,6 +374,7 @@ class HarnessCtlTests(unittest.TestCase):
         migrated_lock = json.loads(lock_path.read_text(encoding="utf-8"))
         self.assertEqual(2, migrated_lock["schema"])
         self.assertEqual(HASH_MODE, migrated_lock["hash_mode"])
+        self.assert_portable_release_surfaces(target)
 
     def test_schema_two_doctor_and_upgrade_ignore_newline_representation(self) -> None:
         target = self.root / "portable-newlines"

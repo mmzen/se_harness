@@ -629,6 +629,10 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         ).read_text(
             encoding="utf-8"
         )
+        active_reusable_workflow = (
+            REPOSITORY_ROOT / ".github/workflows/self-hosting-governor.yml"
+        ).read_text(encoding="utf-8")
+        self.assertEqual(reusable_workflow, active_reusable_workflow)
         self.assertRegex(reusable_workflow, r"(?m)^  governor:$")
         self.assertRegex(reusable_workflow, r"(?m)^  candidate-source:$")
         self.assertRegex(reusable_workflow, r"(?m)^  candidate-package:$")
@@ -641,6 +645,11 @@ class SelfHostingBoundaryTests(unittest.TestCase):
         self.assertIn("--candidate-wheel-sha256", reusable_workflow)
         self.assertIn("--require-isolated-python", reusable_workflow)
         self.assertIn("--entry-point", reusable_workflow)
+        self.assertIn("Validate repository release-distribution policy", reusable_workflow)
+        self.assertIn("Prove candidate wheel excludes repository release policy", reusable_workflow)
+        self.assertIn("scripts/check_portable_release_surface.py --wheel", reusable_workflow)
+        self.assertIn("--harnessctl", reusable_workflow)
+        self.assertNotIn("--distribution-manifest", reusable_workflow)
         governor_lane = reusable_workflow.split("  governor:", 1)[1].split(
             "  candidate-source:", 1
         )[0]

@@ -27,6 +27,7 @@ se_harness/                              CLI and safe installation control plane
 templates/repository/standard/           one canonical consumer installation
 self_hosting/                             published migration and self-hosting workflow data; not an installation profile
 scripts/                                 portable validation, Explorer, CI selection, release support
+repository_tools/                        non-packaged SE Harness distribution and publication policy
 tests/                                   installer, policy, provenance, identity, and regression tests
 docs/notes/                              non-authoritative human explanations
 docs/engineering/                        self-governing formal artifact graph and evidence
@@ -38,6 +39,9 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/workflows/publish-pypi.yml             one-input release orchestrator and stable PyPI publisher identity
 .github/scripts/publish_release.py              trusted release resolution, reconciliation, and result helper
 scripts/create_release_bundle_manifest.py       deterministic pre-RLS distribution evidence producer
+scripts/bind_release_distribution.py            atomic repository distribution-to-RLS binder
+scripts/validate_release_distributions.py       repository-only distribution policy validator
+scripts/check_portable_release_surface.py       wheel and installed-CLI boundary check
 ```
 
 The root validator and Explorer sources remain byte-identical to their canonical managed-template copies. The self-hosting workflow and root self-hosting configuration are intentional repository-specific controls protected by the root lock, not alternative consumer profiles.
@@ -75,14 +79,17 @@ The current package and source candidate is version 0.4.1, while `.self-hosting/
 
 ## Building and releasing
 
-A distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic sequence: build the wheel and raw sdist in a provisioned build environment, normalize the final sdist using the candidate commit timestamp, and use `scripts/create_release_bundle_manifest.py` to retain the exact filenames, hashes, epoch, candidate tree identity, and canonical checksum bytes. `harnessctl prepare-release --distribution-manifest <bundle.json>` validates and copies that structured identity into the ready RLS proposal. Historical RLS files remain valid without the optional block, but they cannot drive the new publication path.
+A distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic sequence: build the wheel and raw sdist in a provisioned build environment, normalize the final sdist using the candidate commit timestamp, and use `scripts/create_release_bundle_manifest.py` to retain the exact filenames, hashes, epoch, candidate tree identity, and canonical checksum bytes.
+
+Release preparation has two explicit agent-run steps. Generic `harnessctl prepare-release` creates the ready, format-neutral RLS. Then `scripts/bind_release_distribution.py` validates the retained bundle against that RLS and atomically adds the repository-owned distribution table. Run `scripts/validate_release_distributions.py --root .` as a separate local policy check. These two repository scripts and `repository_tools/` are development-repository controls: they are not packaged in the wheel or copied into consumer installations. Historical RLS files remain valid without the optional table, but they cannot drive this repository's publication path.
 
 Build success is evidence, not release authorization. The release lineage remains:
 
 ```text
 clean candidate C -> exact bundle manifest -> ready VREC -> human verification
-                                         -> ready RLS  -> human release decision
-                                         -> one-input authorized publication
+                                         -> generic ready RLS -> bind repository distribution
+                                                              -> human release decision
+                                                              -> one-input authorized publication
 ```
 
 The tag selects C, not a later governance commit. After the released RLS is integrated into `main`, the release owner dispatches **Publish authorized SE Harness release** from `main` with only its `RLS-*` ID. The workflow derives every other identity, rebuilds C twice without credentials, creates or verifies the immutable tag and exact GitHub Release, and passes those final assets into the checkout-free PyPI job. The protected `pypi` environment remains a separate human decision. Exact existing state is replay-complete; partial or mismatched immutable state blocks without replacement.
