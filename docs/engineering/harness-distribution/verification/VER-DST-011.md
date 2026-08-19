@@ -5,7 +5,7 @@ title = "Verify structured and reversible Explorer Lineage"
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-08-19"
 
 [relations]
 verifies = ["REQ-DST-040", "REQ-DST-041"]
@@ -56,7 +56,9 @@ For a fixture with 150 direct neighbors and 150 additional second-level candidat
 - With history wider than its viewport, assert the current chip lies completely within the history-list bounds after append, Back, Forward, chip jump, and Return to initial; assert only the list's horizontal scroll position changes for reveal.
 - Inject an unavailable retained ID and assert no fallback artifact is substituted.
 - Assert external entry resets history/depth while internal card and relation selection appends.
-- Reload the page and assert no history is recovered from URL, browser history, storage, cookies, snapshot, or repository state.
+- Route Overview, Lineage selections, Readiness subjects, gate-state listings, Back, and Forward through controlled same-document fragments. Reload each supported route and assert that the intended view or selected subject is restored while the bounded Lineage visit trail begins a new session.
+- Supply unknown, malformed, and encoded fragment values and assert they are ignored or reduced to a safe supported route without repository-derived execution, external navigation, or network acquisition.
+- Assert no visit trail or canonical content is recovered from History API state, local or session storage, cookies, snapshot mutation, or repository state.
 - Assert history chips and controls do not create connector edges, relation rows, findings, evidence, or canonical output.
 
 ## Static, security, and architecture checks
@@ -65,7 +67,7 @@ For a fixture with 150 direct neighbors and 150 additional second-level candidat
 - Assert exact artifact-type labels and relation fields are consumed from normalized canonical data and unknown values remain inert text.
 - Assert dynamic artifact, relation, missing-target, and history text cannot create markup, style, selectors, URLs, scripts, storage keys, or executable behavior.
 - Assert traversal and history algorithms are iterative, cycle-safe, and bounded; no force simulation or new dependency is used for Lineage.
-- Assert the only runtime URL remains the accepted `3d-force-graph@1.79.0` URL used by Overview; CSP, no-fetch/no-WebSocket controls, and CDN fallback remain unchanged.
+- Assert the only runtime URL remains the accepted `3d-force-graph@1.79.0` URL used by Overview; controlled fragments and History API calls are same-document presentation state; CSP, no-fetch/no-WebSocket controls, and CDN fallback remain unchanged.
 - Confirm no canonical schema, generator, validator, CLI, workflow, readiness, VREC/RLS, architecture, or ADR behavior changes.
 - Generate dashboard data twice from identical repository state and assert byte-identical `dashboard-data.json`, snapshot SHA-256, artifact list, relations, readiness, findings, and provenance. Presentation-only HTML changes are expected.
 

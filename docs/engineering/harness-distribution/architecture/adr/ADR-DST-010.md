@@ -5,7 +5,7 @@ title = "Content-addressed static sharding for progressive Explorer access"
 status = "approved"
 owners = ["technical-owner", "security-owner", "product-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-08-19"
 
 [relations]
 decides = ["ARCH-DST-010"]
@@ -61,6 +61,10 @@ Security consequences are mixed: fetching creates more substitution surfaces, mi
 Migration is forward-only for newly generated output. Historical v1 HTML remains self-contained. Generator, Explorer, managed templates, lock data, tests, Pages packager, and documentation must move together.
 
 Include positive, negative, operational, security, and migration consequences.
+
+## Reassessment: 2026-08-19
+
+The technical boundary was reassessed after the repository owner authorized a 262,144-byte shell ceiling and controlled same-document fragment/History API presentation state. Neither change selects a different bundle partition, persistence model, trust boundary, static-hosting contract, cache strategy, failure model, or publication mechanism. The shell remains bounded well below the former monolith, routes contain only controlled current-view selection, and no canonical content or visit trail is persisted. Option 3 and its accepted consequences remain selected; no new significant architectural decision or risk acceptance is introduced.
 
 ## Validation
 

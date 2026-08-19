@@ -192,7 +192,23 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn('current.scrollIntoView', content)
         self.assertIn('renderLineage("history")', content)
         self.assertIn('resetLineageHistory(id)', content)
-        for forbidden in ("history.pushState", "localStorage", "sessionStorage", "document.cookie"):
+        for route_marker in (
+            'history.pushState(null,"",route)',
+            'history.replaceState(null,"",route)',
+            'window.addEventListener("popstate",applyRoute)',
+            'location.hash',
+            'new URLSearchParams(query||"")',
+            'function decodeRoutePart(value){try{return decodeURIComponent(value);}catch{return null;}}',
+            '`#lineage/${encodeURIComponent(selectedId)}`',
+            '`#readiness/subject/${encodeURIComponent(currentSubject.id)}`',
+            '`#readiness?gate=${encodeURIComponent(gateSelection.id)}&state=${encodeURIComponent(gateSelection.state)}`',
+        ):
+            with self.subTest(route_marker=route_marker):
+                self.assertIn(route_marker, content)
+        self.assertIn('resetLineageHistory(selectedId);}applyRoute();renderOverviewGraph();', content)
+        self.assertNotIn('decodeURIComponent(parts[1])', content)
+        self.assertNotIn('decodeURIComponent(parts[2])', content)
+        for forbidden in ("localStorage", "sessionStorage", "document.cookie"):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, content)
         self.assertIn("async function fetchBoundResource", content)
@@ -766,7 +782,8 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(1, content.count("https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"))
         self.assertIn("script-src 'unsafe-inline' https://unpkg.com", content)
         self.assertIn("connect-src 'self'", content)
-        self.assertNotIn("integrity=", content)
+        self.assertIn("data-integrity", content)
+        self.assertIsNone(re.search(r"<script\b[^>]*\sintegrity\s*=", content, re.IGNORECASE))
 
 
 if __name__ == "__main__":
