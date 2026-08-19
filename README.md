@@ -42,7 +42,7 @@ harnessctl --version
 For a reproducible installation, select the exact release:
 
 ```powershell
-python -m pip install "se-harness==0.4.1"
+python -m pip install "se-harness==0.5.0a1"
 ```
 
 Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, and the complete upgrade procedure.
@@ -173,4 +173,4 @@ The notes explain the system; they grant no authority. In an installed repositor
 
 ## Developing SE Harness
 
-The PyPI path above is for released use. A source checkout is candidate development evidence, not an independently released governor. Contributors should read [Developing and self-hosting SE Harness](docs/notes/developing-se-harness.md) for source setup, tests, repository structure, the three assurance planes, and release boundaries.
+The PyPI path above is for released use. A source checkout is candidate development evidence, not the repository's released evaluator. Contributors should read [Developing SE Harness](docs/notes/developing-se-harness.md) for source setup, tests, repository structure, evaluator/candidate evidence separation, and release boundaries.

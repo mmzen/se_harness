@@ -261,19 +261,19 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("read-only plan", installation)
         self.assertIn("explicitly owner-authorized transactional mutation", installation)
 
-    def test_development_note_explains_three_self_hosting_planes(self) -> None:
+    def test_development_note_explains_standard_evaluator_and_candidate_planes(self) -> None:
         development = self.contents[NOTES_ROOT / "developing-se-harness.md"]
-        governor_version = tomllib.loads(
-            (REPOSITORY_ROOT / ".self-hosting" / "governor.toml").read_text(encoding="utf-8")
-        )["version"]
+        evaluator_version = tomllib.loads(
+            (REPOSITORY_ROOT / ".engineering-harness.toml").read_text(encoding="utf-8")
+        )["harness"]["tool_version"]
         for phrase in (
-            "Released governor",
+            "Released evaluator",
             "Candidate source",
             "Candidate package",
             __version__,
-            governor_version,
-            ".self-hosting/governor.toml",
-            "does not automatically promote",
+            evaluator_version,
+            ".engineering-harness.toml",
+            "Candidate success never changes",
             "python -m unittest discover",
             "SELF_HOSTING.md",
         ):

@@ -23,15 +23,14 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
-| `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, scripts, and configured self-hosting controls |
+| `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
-| `reconcile-governor` | authorized self-hosting maintainer using the current released governor | plan is read-only; `--apply` performs one recoverable descriptor/configuration/workflow/lock transaction | adopt an exact published governor without executing target code or losing repository policy |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
-| `identity` | CI or advanced contributor | read-only identity report/check | prove governor, candidate-source, or candidate-package runtime origin and boundary |
-| `accept-candidate` | released governor CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
+| `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
+| `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC | bind selected work, verification contracts, evidence, snapshot, and exact clean `HEAD` |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS | bind release policy, eligible VRECs, exact work coverage, version, and the same candidate commit |
 
@@ -60,7 +59,7 @@ For existing lifecycle queues and a closed set of actionable derived warning rul
 
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 
-Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the installed contract against `.engineering-harness.lock` and the current distribution while respecting documented repository-specific self-hosting controls.
+Dashboard defaults to `target/harness-dashboard/`; its generated files are derived evidence, not formal authority. The small `index.html` bootstrap verifies `dashboard-manifest.json`, then loads a summary, compact topology, readiness data, individual artifact details, and explicitly expanded evidence from digest-named static resources. Serve the directory from one HTTP origin, for example with `python -m http.server 8000 --directory target/harness-dashboard`; direct `file://` opening is intentionally rejected because progressive resource loading and integrity checks require an origin. Generation remains local and needs no application server, but publishing or sharing the directory exposes every manifest-declared artifact and evidence body; the command does not scan for secrets or redact repository material. Doctor checks the standard installed contract against `.engineering-harness.lock` and the current distribution.
 
 ## Work readiness
 
@@ -80,7 +79,7 @@ harnessctl upgrade [TARGET]
 harnessctl upgrade [TARGET] --apply
 ```
 
-The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. The standard consumer workflow follows this same transaction and uses one exact released evaluator; no consumer CI or governor-reconciliation command is required. GitHub discovers it beside existing workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
 
 ## Domain and artifact authoring
 
@@ -91,38 +90,26 @@ harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-r
 
 Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. Existing valid flat layouts remain discoverable and are not automatically migrated.
 
-## Self-hosting runtime identity
+## Runtime identity
 
 ```text
-harnessctl identity --role governor|candidate-source|candidate-package \
+harnessctl identity --role released-evaluator|candidate-source|candidate-package \
   --expected-version VERSION --expected-root PATH [options]
 ```
 
-Key role-specific options are `--checkout-root`, `--candidate-commit`, `--governor-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. This command is primarily for the implementation repository's self-hosting CI. It verifies declared runtime origin; it does not promote a governor or approve a candidate.
+Key role-specific options are `--checkout-root`, `--candidate-commit`, `--evaluator-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. The command verifies declared runtime origin; it does not select an evaluator or approve a candidate.
 
-## Self-hosting governor reconciliation and candidate acceptance
-
-These commands apply to `se_harness` development, not ordinary consumer repositories:
+## Candidate acceptance
 
 ```text
-harnessctl reconcile-governor [TARGET] \
-  --to VERSION \
-  --target-commit FULL_COMMIT \
-  --target-release-record RLS-... \
-  --target-sha256 SHA256 \
-  --work-order WO-... \
-  [--target-wheel PATH] [--set DOTTED.PATH=TOML_VALUE] [--apply]
-
 harnessctl accept-candidate \
   --wheel PATH \
   --candidate-commit FULL_COMMIT \
   --candidate-wheel-sha256 SHA256 \
-  --governor-wheel-sha256 SHA256 \
+  --verifier-wheel-sha256 SHA256 \
   --output PATH \
   [--checkout-root PATH]
 ```
-
-`reconcile-governor` must execute from the currently selected released governor outside the implementation checkout. It verifies the immutable target wheel, reads its migration and workflow contracts as data, preserves declared repository policy, and refuses unsupported schema jumps, missing decisions, consumer-workflow substitution, or undocumented workflow customization. Plan is the default. Apply changes only the governor descriptor, protected TOML, self-hosting workflow, transaction metadata, and matching lock state. The selected work order supplies authority; the command does not approve or publish the target.
 
 `accept-candidate` verifies the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, rejects checkout import fallback and authority substitution, and emits deterministic JSON only when every required scenario passes. Its output is evidence for human assurance review, never a VREC transition.
 
@@ -156,7 +143,7 @@ harnessctl prepare-release [TARGET] \
 
 Repeat `--verification-record` and `--work-order` for aggregate releases. The selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, included records must be eligible, and every record must bind the same candidate commit.
 
-The command writes only `status = "ready"`. It does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, deploy, or promote the self-hosting governor.
+The command writes only `status = "ready"`. It does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 
 ## Authority summary
 

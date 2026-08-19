@@ -25,8 +25,6 @@ from se_harness.installer import (
     tracked_content,
 )
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
-from se_harness.self_hosting import load_governor_descriptor
-from se_harness.self_hosting_policy import PROTECTED_CONTROL_PATHS, classify_self_hosting
 
 
 PREFLIGHT_SCHEMA = "se-harness-preflight-v1"
@@ -136,27 +134,11 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
     """Return deterministic read-only installation and managed-integrity checks."""
 
     target = ensure_target(target, must_exist=True)
-    classification = classify_self_hosting(target)
-    self_hosting = classification.enabled
     checks: list[InstallationCheck] = [
         InstallationCheck("python", sys.version_info >= (3, 11), platform.python_version()),
         InstallationCheck("config", (target / CONFIG_NAME).is_file(), CONFIG_NAME),
         InstallationCheck("lock", (target / LOCK_NAME).is_file(), LOCK_NAME),
     ]
-    if classification.kind == "ambiguous":
-        checks.append(InstallationCheck("self-hosting-classification", False, classification.detail))
-    if self_hosting:
-        try:
-            governor = load_governor_descriptor(target)
-            checks.append(
-                InstallationCheck(
-                    "self-hosting-governor",
-                    True,
-                    f"{governor.version} {governor.sha256}",
-                )
-            )
-        except HarnessError as exc:
-            checks.append(InstallationCheck("self-hosting-governor", False, str(exc)))
     for relative in REQUIRED_PATHS:
         checks.append(InstallationCheck(relative, (target / relative).is_file(), "required"))
 
@@ -237,9 +219,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
                 "mismatch": "customized",
             }[result]
             checks.append(InstallationCheck(f"managed:{relative}", passed, detail))
-            if desired is not None and not (
-                self_hosting and relative in PROTECTED_CONTROL_PATHS
-            ):
+            if desired is not None:
                 distribution_match = canonical_text_equal(current, desired)
                 checks.append(
                     InstallationCheck(
@@ -248,15 +228,6 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
                         "matches distribution" if distribution_match else "differs from distribution template",
                     )
                 )
-            elif desired is not None:
-                checks.append(
-                    InstallationCheck(
-                        f"distribution:{relative}",
-                        True,
-                        "repository-specific self-hosting control",
-                    )
-                )
-
         for relative in sorted(set(lock_files) - set(expected_by_path)):
             safe_destination(target, Path(relative))
             checks.append(InstallationCheck(f"lock-extra:{relative}", False, "not in standard template"))

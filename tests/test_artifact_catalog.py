@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import sys
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -12,9 +13,6 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 from artifact_layout_registry import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES  # noqa: E402
-from se_harness import __version__  # noqa: E402
-
-
 CATALOG_BEGIN = "<!-- artifact-catalog:begin -->"
 CATALOG_END = "<!-- artifact-catalog:end -->"
 CATALOG_COLUMNS = (
@@ -111,10 +109,13 @@ class ArtifactCatalogTests(unittest.TestCase):
         router_template = (
             REPOSITORY_ROOT / "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
         ).read_text(encoding="utf-8")
+        evaluator_version = tomllib.loads(
+            (REPOSITORY_ROOT / ".engineering-harness.toml").read_text(encoding="utf-8")
+        )["harness"]["tool_version"]
         self.assertEqual(
             router,
             router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
-                "{{HARNESS_VERSION}}", __version__
+                "{{HARNESS_VERSION}}", evaluator_version
             ),
         )
 

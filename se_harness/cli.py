@@ -20,11 +20,6 @@ from se_harness.installer import (
     plan_install,
     template_root,
 )
-from se_harness.governor_reconciliation import (
-    apply_governor_reconciliation,
-    format_reconciliation_plan,
-    plan_governor_reconciliation,
-)
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
@@ -101,9 +96,9 @@ def _upgrade(args: argparse.Namespace) -> int:
     print(format_plan(changes))
     if not args.apply:
         return 0
-    blocked = [item for item in changes if item.action in {"customized", "protected-mismatch"}]
+    blocked = [item for item in changes if item.action == "customized"]
     if blocked:
-        print("customized or protected files require manual review; no files were written:", file=sys.stderr)
+        print("customized files require manual review; no files were written:", file=sys.stderr)
         for item in blocked:
             path = item.path
             print(f"  {path}", file=sys.stderr)
@@ -115,29 +110,6 @@ def _upgrade(args: argparse.Namespace) -> int:
         return 1
     apply_changes(target, changes, old_lock, allow_updates=True)
     print(f"upgraded managed files to se-harness {__version__}")
-    return 0
-
-
-def _reconcile_governor(args: argparse.Namespace) -> int:
-    target = ensure_target(Path(args.target), must_exist=True)
-    plan = plan_governor_reconciliation(
-        target,
-        version=args.target_version,
-        commit=args.target_commit,
-        release_record=args.target_release_record,
-        sha256=args.target_sha256,
-        work_order=args.work_order,
-        wheel_path=Path(args.target_wheel) if args.target_wheel else None,
-        decisions=args.decisions,
-    )
-    print(format_reconciliation_plan(plan))
-    if not args.apply:
-        return 1 if plan.blocked else 0
-    if plan.blocked:
-        print("governor reconciliation requires explicit resolution; no files were written", file=sys.stderr)
-        return 1
-    apply_governor_reconciliation(target, plan)
-    print(f"reconciled self-hosting controls to published governor {args.target_version}")
     return 0
 
 
@@ -285,7 +257,7 @@ def _identity(args: argparse.Namespace) -> int:
         expected_root=Path(args.expected_root),
         checkout_root=Path(args.checkout_root) if args.checkout_root else None,
         candidate_commit=args.candidate_commit,
-        governor_wheel_sha256=args.governor_wheel_sha256,
+        evaluator_wheel_sha256=args.evaluator_wheel_sha256,
         entry_point=Path(args.entry_point) if args.entry_point else None,
         require_isolated_python=args.require_isolated_python,
         require_entry_point=args.require_entry_point,
@@ -299,7 +271,7 @@ def _accept_candidate(args: argparse.Namespace) -> int:
         Path(args.wheel),
         candidate_commit=args.candidate_commit,
         candidate_wheel_sha256=args.candidate_wheel_sha256,
-        verifier_wheel_sha256=args.governor_wheel_sha256,
+        verifier_wheel_sha256=args.verifier_wheel_sha256,
         checkout_root=Path(args.checkout_root) if args.checkout_root else None,
     )
     output = Path(args.output)
@@ -367,28 +339,6 @@ def build_parser() -> argparse.ArgumentParser:
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
     upgrade.set_defaults(handler=_upgrade)
 
-    reconcile = commands.add_parser(
-        "reconcile-governor",
-        help="plan or apply an authorized transition to an exact published self-hosting governor",
-    )
-    reconcile.add_argument("target", nargs="?", default=".")
-    reconcile.add_argument("--to", required=True, dest="target_version")
-    reconcile.add_argument("--target-commit", required=True)
-    reconcile.add_argument("--target-release-record", required=True)
-    reconcile.add_argument("--target-sha256", required=True)
-    reconcile.add_argument("--target-wheel", help="use an exact local wheel after SHA-256 verification")
-    reconcile.add_argument("--work-order", required=True)
-    reconcile.add_argument(
-        "--set",
-        action="append",
-        default=[],
-        dest="decisions",
-        metavar="DOTTED.PATH=TOML_VALUE",
-        help="supply one explicitly governed repository-policy value; repeat as needed",
-    )
-    reconcile.add_argument("--apply", action="store_true", help="apply the complete recoverable control transaction")
-    reconcile.set_defaults(handler=_reconcile_governor)
-
     scaffold = commands.add_parser("scaffold-domain", help="safely create the canonical organization for one engineering domain")
     scaffold.add_argument("target", nargs="?", default=".")
     scaffold.add_argument("--domain", required=True)
@@ -404,13 +354,13 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--dry-run", action="store_true")
     create.set_defaults(handler=_create_artifact)
 
-    identity = commands.add_parser("identity", help="emit and verify one self-hosting runtime identity")
-    identity.add_argument("--role", required=True, choices=("governor", "candidate-source", "candidate-package"))
+    identity = commands.add_parser("identity", help="emit and verify one evaluator or candidate runtime identity")
+    identity.add_argument("--role", required=True, choices=("released-evaluator", "candidate-source", "candidate-package"))
     identity.add_argument("--expected-version", required=True)
     identity.add_argument("--expected-root", required=True)
     identity.add_argument("--checkout-root")
     identity.add_argument("--candidate-commit")
-    identity.add_argument("--governor-wheel-sha256")
+    identity.add_argument("--evaluator-wheel-sha256")
     identity.add_argument("--entry-point")
     identity.add_argument("--require-isolated-python", action="store_true")
     identity.add_argument("--require-entry-point", action="store_true")
@@ -423,7 +373,7 @@ def build_parser() -> argparse.ArgumentParser:
     accept.add_argument("--wheel", required=True)
     accept.add_argument("--candidate-commit", required=True)
     accept.add_argument("--candidate-wheel-sha256", required=True)
-    accept.add_argument("--governor-wheel-sha256", required=True)
+    accept.add_argument("--verifier-wheel-sha256", required=True)
     accept.add_argument("--checkout-root")
     accept.add_argument("--output", required=True)
     accept.set_defaults(handler=_accept_candidate)

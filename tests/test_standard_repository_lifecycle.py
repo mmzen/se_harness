@@ -1,0 +1,382 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import tomllib
+import unittest
+import zipfile
+from pathlib import Path
+from unittest import mock
+
+from se_harness import __version__
+from se_harness.candidate_acceptance import (
+    ACCEPTANCE_SCHEMA,
+    CONTRACT_SHA256,
+    SCENARIO_IDS,
+    AcceptanceManifest,
+    ScenarioResult,
+    assess_candidate_wheel,
+)
+from se_harness.installer import HarnessError, apply_changes, plan_install
+from se_harness.integrity import canonical_sha256
+from se_harness.preflight import inspect_installation
+from se_harness.runtime_identity import _lexically_within, _within, inspect_runtime_identity
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+FAILED_PR_RECORDS = (
+    "docs/engineering/release-0.2.2/verification-records/VREC-SEH-003.md",
+    "docs/engineering/release-0.2.2/releases/RLS-SEH-003.md",
+)
+
+
+class StandardRepositoryLifecycleTests(unittest.TestCase):
+    def make_candidate_wheel(self, root: Path, version: str = "0.4.1") -> tuple[Path, str]:
+        wheel = root / f"se_harness-{version}-py3-none-any.whl"
+        with zipfile.ZipFile(wheel, "w") as archive:
+            archive.writestr(
+                f"se_harness-{version}.dist-info/METADATA",
+                f"Metadata-Version: 2.1\nName: se-harness\nVersion: {version}\n",
+            )
+        return wheel, hashlib.sha256(wheel.read_bytes()).hexdigest()
+
+    def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="se_harness", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+
+            legacy_paths = (
+                ".engineering-harness.toml",
+                ".github/workflows/engineering-harness.yml",
+            )
+            legacy_bytes = {
+                ".engineering-harness.toml": (
+                    "[harness]\n"
+                    "schema = 2\n"
+                    "tool_version = \"0.4.1\"\n"
+                    "installed_at = \"2026-01-01T00:00:00Z\"\n"
+                    "project_name = \"se_harness\"\n"
+                    "artifact_root = \"docs/engineering\"\n\n"
+                    "[dashboard]\n"
+                    "output = \"docs/engineering/dashboard\"\n\n"
+                    "[self_hosting]\n"
+                    "enabled = true\n"
+                    "governor_version = \"0.3.0\"\n"
+                    "governor_descriptor = \".self-hosting/governor.toml\"\n"
+                ).encode(),
+                ".github/workflows/engineering-harness.yml": (
+                    "name: Legacy engineering harness\n"
+                    "on: [push]\n"
+                    "permissions:\n"
+                    "  contents: read\n"
+                    "jobs:\n"
+                    "  legacy-governor:\n"
+                    "    runs-on: ubuntu-latest\n"
+                    "    steps:\n"
+                    "      - run: echo legacy\n"
+                ).encode(),
+            }
+            lock_path = target / ".engineering-harness.lock"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            for relative in legacy_paths:
+                destination = target / relative
+                destination.write_bytes(legacy_bytes[relative])
+                lock["files"][relative]["sha256"] = canonical_sha256(destination.read_bytes())
+            lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            descriptor = target / ".self-hosting/governor.toml"
+            descriptor.parent.mkdir(parents=True)
+            descriptor.write_text(
+                "schema = 1\n"
+                "governor_version = \"0.3.0\"\n"
+                "governor_python = \"python3\"\n"
+                "governor_module = \"se_harness\"\n"
+                "governor_workflow = \".github/workflows/self-hosting-governor.yml\"\n"
+                "governor_template = \"self_hosting/engineering-harness.yml.tpl\"\n"
+                "migration_metadata = \"self_hosting/governor-migration.toml\"\n"
+                "active_config = \".engineering-harness.toml\"\n"
+                "active_lock = \".engineering-harness.lock\"\n"
+                "active_workflow = \".github/workflows/engineering-harness.yml\"\n",
+                encoding="utf-8",
+            )
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertEqual(
+                {relative: "update" for relative in legacy_paths},
+                {relative: actions[relative] for relative in legacy_paths},
+            )
+            apply_changes(target, changes, old_lock, allow_updates=True)
+            descriptor.unlink()
+
+            config = tomllib.loads((target / ".engineering-harness.toml").read_text(encoding="utf-8"))
+            self.assertNotIn("self_hosting", config)
+            self.assertEqual(__version__, config["harness"]["tool_version"])
+            workflow = (target / ".github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
+            self.assertEqual(1, workflow.count(f'SE_HARNESS_VERSION: "{__version__}"'))
+            self.assertNotIn("self-hosting-governor", workflow)
+            self.assertEqual([], [item for item in inspect_installation(target) if not item.passed])
+
+    def test_candidate_evidence_is_repository_owned_and_non_authoritative(self) -> None:
+        workflow = (REPOSITORY_ROOT / ".github/workflows/candidate-evidence.yml").read_text(encoding="utf-8")
+        self.assertRegex(workflow, r"(?m)^  candidate-source:$")
+        self.assertRegex(workflow, r"(?m)^  candidate-package:$")
+        self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
+        self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
+        self.assertIn("non-promotable candidate wheel", workflow)
+        self.assertIn("python -m unittest discover", workflow)
+        self.assertIn("--role candidate-source", workflow)
+        self.assertIn("--role candidate-package", workflow)
+        self.assertIn("--require-isolated-python", workflow)
+        self.assertIn("git diff --exit-code", workflow)
+        self.assertNotIn("Review preflight", workflow)
+        self.assertNotIn("Validate candidate artifact graph", workflow)
+        self.assertNotIn("Validate repository release-distribution policy", workflow)
+        self.assertNotIn("pull_request_target", workflow)
+        self.assertNotIn("contents: write", workflow)
+        self.assertNotIn("id-token: write", workflow)
+
+    def test_specialized_product_surface_is_absent(self) -> None:
+        for relative in (
+            "se_harness/governor_reconciliation.py",
+            "se_harness/self_hosting.py",
+            "se_harness/self_hosting_policy.py",
+            "self_hosting",
+        ):
+            with self.subTest(relative=relative):
+                self.assertFalse((REPOSITORY_ROOT / relative).exists())
+        pyproject = (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        self.assertNotIn("share/se-harness/self-hosting", pyproject)
+        completed = subprocess.run(
+            [sys.executable, "-m", "se_harness", "--help"],
+            cwd=REPOSITORY_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertNotIn("reconcile-governor", completed.stdout)
+
+    def test_standard_upgrade_restores_every_file_after_interrupted_apply(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Transaction", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+
+            lock_path = target / ".engineering-harness.lock"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            managed = ("ENGINEERING_HARNESS.md", "docs/engineering/QUALITY_GATES.md")
+            for relative in managed:
+                path = target / relative
+                path.write_bytes(path.read_bytes() + b"\nLegacy released content.\n")
+                lock["files"][relative]["sha256"] = canonical_sha256(path.read_bytes())
+            lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertEqual({relative: "update" for relative in managed}, {relative: actions[relative] for relative in managed})
+            before = {
+                path.relative_to(target).as_posix(): path.read_bytes()
+                for path in target.rglob("*")
+                if path.is_file()
+            }
+            real_replace = os.replace
+            failed = False
+
+            def interrupt_once(source: str | bytes | os.PathLike[str] | os.PathLike[bytes], destination: str | bytes | os.PathLike[str] | os.PathLike[bytes]) -> None:
+                nonlocal failed
+                if not failed and Path(destination).name == "QUALITY_GATES.md":
+                    failed = True
+                    raise OSError("injected transaction interruption")
+                real_replace(source, destination)
+
+            with mock.patch("se_harness.installer.os.replace", side_effect=interrupt_once):
+                with self.assertRaisesRegex(OSError, "injected transaction interruption"):
+                    apply_changes(target, changes, old_lock, allow_updates=True)
+
+            after = {
+                path.relative_to(target).as_posix(): path.read_bytes()
+                for path in target.rglob("*")
+                if path.is_file()
+            }
+            self.assertEqual(before, after)
+
+    def test_candidate_source_identity_is_deterministic_and_bounded(self) -> None:
+        commit = "a" * 40
+        with mock.patch.dict(os.environ, {"EXAMPLE_SECRET_TOKEN": "must-not-appear"}, clear=True), mock.patch(
+            "se_harness.runtime_identity.site.ENABLE_USER_SITE", False
+        ):
+            first = inspect_runtime_identity(
+                role="candidate-source",
+                expected_version=__version__,
+                expected_root=REPOSITORY_ROOT,
+                checkout_root=REPOSITORY_ROOT,
+                candidate_commit=commit,
+            )
+            second = inspect_runtime_identity(
+                role="candidate-source",
+                expected_version=__version__,
+                expected_root=REPOSITORY_ROOT,
+                checkout_root=REPOSITORY_ROOT,
+                candidate_commit=commit,
+            )
+        self.assertTrue(first.passed, first.diagnostics)
+        self.assertEqual(first.to_dict(), second.to_dict())
+        self.assertNotIn("must-not-appear", json.dumps(first.to_dict(), sort_keys=True))
+
+    def test_virtualenv_launcher_boundary_does_not_follow_base_interpreter_symlink(self) -> None:
+        environment = Path("/tmp/candidate-env")
+        self.assertTrue(_lexically_within(environment / "bin/python", environment))
+        self.assertFalse(_lexically_within(Path("/opt/python/bin/python3.11"), environment))
+
+    def test_equal_version_cannot_substitute_checkout_source_for_installed_role(self) -> None:
+        identity = inspect_runtime_identity(
+            role="candidate-package",
+            expected_version=__version__,
+            expected_root=Path(sys.prefix),
+            checkout_root=REPOSITORY_ROOT,
+            candidate_commit="b" * 40,
+        )
+        self.assertFalse(identity.passed)
+        codes = {item.code for item in identity.diagnostics}
+        self.assertTrue({"RID003", "RID006"}.intersection(codes), codes)
+
+    def test_candidate_source_rejects_external_distribution_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary, mock.patch(
+            "se_harness.runtime_identity._distribution_root", return_value=Path(temporary)
+        ):
+            identity = inspect_runtime_identity(
+                role="candidate-source",
+                expected_version=__version__,
+                expected_root=REPOSITORY_ROOT,
+                checkout_root=REPOSITORY_ROOT,
+                candidate_commit="d" * 40,
+            )
+        self.assertIn("RID018", {item.code for item in identity.diagnostics})
+
+    def test_installed_role_rejects_entry_point_from_another_environment(self) -> None:
+        identity = inspect_runtime_identity(
+            role="candidate-package",
+            expected_version=__version__,
+            expected_root=Path(sys.prefix),
+            checkout_root=REPOSITORY_ROOT,
+            candidate_commit="e" * 40,
+            entry_point=REPOSITORY_ROOT / "foreign-harnessctl",
+            require_entry_point=True,
+        )
+        self.assertIn("RID010", {item.code for item in identity.diagnostics})
+
+    def test_released_evaluator_rejects_inherited_pythonpath(self) -> None:
+        with mock.patch.dict(os.environ, {"PYTHONPATH": str(REPOSITORY_ROOT)}):
+            identity = inspect_runtime_identity(
+                role="released-evaluator",
+                expected_version=__version__,
+                expected_root=Path(sys.prefix),
+                checkout_root=REPOSITORY_ROOT,
+                evaluator_wheel_sha256="c" * 64,
+            )
+        self.assertIn("RID008", {item.code for item in identity.diagnostics})
+
+    def test_candidate_identity_cannot_claim_released_evaluator_digest(self) -> None:
+        identity = inspect_runtime_identity(
+            role="candidate-source",
+            expected_version=__version__,
+            expected_root=REPOSITORY_ROOT,
+            checkout_root=REPOSITORY_ROOT,
+            candidate_commit="f" * 40,
+            evaluator_wheel_sha256="a" * 64,
+        )
+        self.assertIn("RID016", {item.code for item in identity.diagnostics})
+
+    def test_path_containment_is_component_aware(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            boundary = root / "candidate"
+            inside = boundary / "package" / "module.py"
+            sibling = root / "candidate-shadow" / "module.py"
+            inside.parent.mkdir(parents=True)
+            sibling.parent.mkdir(parents=True)
+            inside.write_text("", encoding="utf-8")
+            sibling.write_text("", encoding="utf-8")
+            self.assertTrue(_within(inside, boundary))
+            self.assertFalse(_within(sibling, boundary))
+
+    def test_acceptance_manifest_is_canonical_and_contract_is_complete(self) -> None:
+        scenarios = tuple(
+            ScenarioResult(item, "passed", hashlib.sha256(item.encode("utf-8")).hexdigest())
+            for item in SCENARIO_IDS
+        )
+        manifest = AcceptanceManifest(
+            schema=ACCEPTANCE_SCHEMA,
+            verifier_version=__version__,
+            verifier_wheel_sha256="a" * 64,
+            contract_sha256=CONTRACT_SHA256,
+            candidate_version="0.4.1",
+            candidate_commit="b" * 40,
+            candidate_wheel_sha256="c" * 64,
+            python_version="3.11.0",
+            scenarios=scenarios,
+        )
+        parsed = json.loads(manifest.canonical_bytes())
+        self.assertEqual(list(SCENARIO_IDS), [item["scenario_id"] for item in parsed["scenarios"]])
+        self.assertEqual(CONTRACT_SHA256, parsed["verifier"]["contract_sha256"])
+
+    def test_acceptance_normalizes_json_escaped_temporary_paths(self) -> None:
+        from se_harness.candidate_acceptance import _normalize
+
+        with tempfile.TemporaryDirectory() as temporary:
+            parent = Path(temporary)
+            first = parent / "first"
+            second = parent / "second"
+            first_value = json.dumps({"path": str(first / "candidate-env" / "python")})
+            second_value = json.dumps({"path": str(second / "candidate-env" / "python")})
+            self.assertEqual(
+                _normalize(first_value, first, first / "candidate.whl", None),
+                _normalize(second_value, second, second / "candidate.whl", None),
+            )
+
+    def test_candidate_checkout_cannot_supply_released_acceptance_runner(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            wheel, digest = self.make_candidate_wheel(Path(temporary))
+            with self.assertRaisesRegex(HarnessError, "checkout cannot supply"):
+                assess_candidate_wheel(
+                    wheel,
+                    candidate_commit="b" * 40,
+                    candidate_wheel_sha256=digest,
+                    verifier_wheel_sha256="a" * 64,
+                    checkout_root=REPOSITORY_ROOT,
+                )
+
+    def test_candidate_acceptance_requires_the_selected_wheel_digest(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            wheel, _ = self.make_candidate_wheel(Path(temporary))
+            with self.assertRaisesRegex(HarnessError, "candidate wheel SHA-256 mismatch"):
+                assess_candidate_wheel(
+                    wheel,
+                    candidate_commit="b" * 40,
+                    candidate_wheel_sha256="0" * 64,
+                    verifier_wheel_sha256="a" * 64,
+                )
+
+    def test_checkout_snapshot_is_bounded(self) -> None:
+        from se_harness.candidate_acceptance import _snapshot
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "one").write_text("1", encoding="utf-8")
+            with mock.patch("se_harness.candidate_acceptance.MAX_SNAPSHOT_FILES", 0):
+                with self.assertRaisesRegex(HarnessError, "bounded file count"):
+                    _snapshot(root)
+
+    def test_failed_pr_records_are_excluded_from_recovery_candidate(self) -> None:
+        for relative in FAILED_PR_RECORDS:
+            with self.subTest(relative=relative):
+                self.assertFalse((REPOSITORY_ROOT / relative).exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

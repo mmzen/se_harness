@@ -1,4 +1,4 @@
-"""Released-governor black-box acceptance for an exact candidate wheel."""
+"""Released-verifier black-box acceptance for an exact candidate wheel."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import io
 import json
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -19,8 +20,7 @@ from typing import Any
 
 from se_harness import __version__
 from se_harness.installer import HarnessError
-from se_harness.integrity import canonical_sha256
-from se_harness.self_hosting import COMMIT_PATTERN, SHA256_PATTERN, VERSION_PATTERN
+from se_harness.runtime_identity import COMMIT_PATTERN, SHA256_PATTERN
 
 
 ACCEPTANCE_SCHEMA = "se-harness-functional-acceptance-v1"
@@ -34,7 +34,6 @@ SCENARIO_IDS = (
     "safe-upgrade",
     "customized-content-refusal",
     "corrupted-integrity-refusal",
-    "protected-self-hosting-upgrade",
     "authority-denial",
 )
 CONTRACT_SHA256 = hashlib.sha256(
@@ -43,6 +42,7 @@ CONTRACT_SHA256 = hashlib.sha256(
 MAX_CANDIDATE_WHEEL_BYTES = 100 * 1024 * 1024
 MAX_SNAPSHOT_FILES = 20_000
 MAX_SNAPSHOT_BYTES = 250 * 1024 * 1024
+VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+")
 
 
 @dataclass(frozen=True)
@@ -254,44 +254,6 @@ def _snapshot(root: Path) -> dict[str, str]:
     return result
 
 
-def _write_self_hosting_fixture(target: Path, version: str) -> None:
-    config = target / ".engineering-harness.toml"
-    config.write_text(
-        config.read_text(encoding="utf-8")
-        + '\n[self_hosting]\nrole = "implementation-repository"\ngovernor_descriptor = ".self-hosting/governor.toml"\n',
-        encoding="utf-8",
-    )
-    (target / "se_harness").mkdir()
-    (target / "se_harness/__init__.py").write_text("", encoding="utf-8")
-    (target / "pyproject.toml").write_text('[project]\nname = "se-harness"\n', encoding="utf-8")
-    descriptor = target / ".self-hosting/governor.toml"
-    descriptor.parent.mkdir()
-    descriptor.write_text(
-        "\n".join(
-            (
-                "schema = 1",
-                f'version = "{version}"',
-                f'tag = "v{version}"',
-                f'wheel = "se_harness-{version}-py3-none-any.whl"',
-                f'url = "https://github.com/mmzen/se_harness/releases/download/v{version}/se_harness-{version}-py3-none-any.whl"',
-                f'sha256 = "{"d" * 64}"',
-                'selected_release_record = "RLS-ACC-001"',
-                f'selected_candidate_commit = "{"e" * 40}"',
-                "",
-            )
-        ),
-        encoding="utf-8",
-    )
-    lock_path = target / ".engineering-harness.lock"
-    lock = json.loads(lock_path.read_text(encoding="utf-8"))
-    for relative in (".engineering-harness.toml", ".github/workflows/engineering-harness.yml"):
-        lock["files"][relative] = {
-            "mode": "managed",
-            "sha256": canonical_sha256((target / relative).read_bytes()),
-        }
-    lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-
 def assess_candidate_wheel(
     wheel: Path,
     *,
@@ -431,45 +393,10 @@ def assess_candidate_wheel(
                 expected_returncode=1,
             )
         )
-        protected = temporary / "self-hosting"
-        shutil.copytree(initialized, protected)
-        _write_self_hosting_fixture(protected, candidate_version)
-        protected_before = {
-            relative: (protected / relative).read_bytes()
-            for relative in (".engineering-harness.toml", ".github/workflows/engineering-harness.yml")
-        }
-        protected_result = _run(
-            "protected-self-hosting-upgrade",
-            [str(harnessctl), "upgrade", str(protected), "--apply"],
-            cwd=temporary,
-            temporary=temporary,
-            wheel=wheel,
-            checkout=checkout,
-        )
-        if protected_before != {relative: (protected / relative).read_bytes() for relative in protected_before}:
-            protected_result = ScenarioResult(protected_result.scenario_id, "failed", protected_result.output_sha256)
-        results.append(protected_result)
         consumer_before = _snapshot(initialized)
         authority = _run(
             "authority-denial",
-            [
-                str(harnessctl),
-                "reconcile-governor",
-                str(initialized),
-                "--to",
-                candidate_version,
-                "--target-commit",
-                candidate_commit,
-                "--target-release-record",
-                "RLS-ACC-001",
-                "--target-sha256",
-                candidate_digest,
-                "--target-wheel",
-                str(wheel),
-                "--work-order",
-                "WO-ACC-001",
-                "--apply",
-            ],
+            [str(harnessctl), "approve", str(initialized)],
             cwd=temporary,
             temporary=temporary,
             wheel=wheel,

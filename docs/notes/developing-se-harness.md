@@ -1,10 +1,10 @@
-# Developing and self-hosting SE Harness
+# Developing SE Harness
 
 <!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This note applies to contributors developing `se_harness` itself. It does not define a consumer installation profile and grants no implementation, verification, release, publication, or governor-promotion authority.
+> This note applies to contributors developing `se_harness`. It grants no implementation, verification, release, publication, deployment, or repository-upgrade authority.
 
-The self-hosting controls add implementation-specific assurance without changing normal artifact lifecycle or decision rights. See [Self-Hosting Operations](../engineering/self-hosting-boundary/SELF_HOSTING.md#effect-on-normal-governance-operations) for the explicit boundary.
+The emergency bootstrap candidate is version 0.5.0a1. Until that exact alpha is immutably published and used for the one-time root conversion, the implementation checkout retains its legacy released controls: the active installation records 0.4.1 while the separate self-hosted governor descriptor still selects 0.3.0. Candidate source and packages are evidence only and must not create artifacts, run root preflight, or manage lifecycle state. After conversion, the checkout uses the ordinary standard released-evaluator lifecycle with no self-hosting installation profile, governor descriptor, or special promotion command.
 
 ## Development environment
 
@@ -24,28 +24,20 @@ python -m se_harness --version
 
 ```text
 se_harness/                              CLI and safe installation control plane
-templates/repository/standard/           one canonical consumer installation
-self_hosting/                             published migration and self-hosting workflow data; not an installation profile
+templates/repository/standard/           one canonical repository installation
 scripts/                                 portable validation, Explorer, CI selection, release support
-repository_tools/                        non-packaged SE Harness distribution and publication policy
-tests/                                   installer, policy, provenance, identity, and regression tests
+repository_tools/                        non-packaged distribution and publication policy
+tests/                                   installer, provenance, identity, package, and regression tests
 docs/notes/                              non-authoritative human explanations
 docs/engineering/                        self-governing formal artifact graph and evidence
-.self-hosting/governor.toml              exact independently released governor selection
-.github/workflows/engineering-harness.yml repository-specific three-plane assurance workflow
-.github/workflows/self-hosting-governor.yml candidate reusable workflow published for later governors
-.github/workflows/publish-dashboard-pages.yml repository-specific release-bound demonstration deployment
-.github/scripts/publish_dashboard.py          Pages provenance and public-payload gate; not consumer tooling
-.github/workflows/publish-pypi.yml             one-input release orchestrator and stable PyPI publisher identity
-.github/scripts/publish_release.py              trusted release resolution, reconciliation, and result helper
-.github/scripts/reconcile_maintenance_branch.py repository-only maintenance-line reconciliation
-scripts/create_release_bundle_manifest.py       deterministic pre-RLS distribution evidence producer
-scripts/bind_release_distribution.py            atomic repository distribution-to-RLS binder
-scripts/validate_release_distributions.py       repository-only distribution policy validator
-scripts/check_portable_release_surface.py       wheel and installed-CLI boundary check
+.engineering-harness.toml                exact released root evaluator version and repository policy
+.github/workflows/engineering-harness.yml exact released standard evaluator workflow
+.github/workflows/candidate-evidence.yml  repository-owned source and package evidence
+.github/workflows/publish-pypi.yml        one-input release orchestrator
+.github/workflows/publish-dashboard-pages.yml release-bound Explorer recovery
 ```
 
-The root validator and Explorer sources remain byte-identical to their canonical managed-template copies. The self-hosting workflow and root self-hosting configuration are intentional repository-specific controls protected by the root lock, not alternative consumer profiles.
+The root validator and Explorer sources remain managed by the selected released installation. Candidate templates may evolve without overwriting root managed files before the candidate is published.
 
 ## Ordinary development checks
 
@@ -53,38 +45,35 @@ Use the commands confirmed by `docs/engineering/REPOSITORY_CONTEXT.md`:
 
 ```powershell
 python scripts/validate_engineering_artifacts.py --root .
+python scripts/validate_release_distributions.py --root .
 python -m unittest discover -s tests -p "test_*.py"
 python -m se_harness --help
 python -m se_harness doctor .
 ```
 
-Run phase-appropriate work-order preflight and any focused tests required by the governing verification contract. No formatter or linter is currently declared as a repository gate; do not invent one and report it as required evidence.
+Run phase-appropriate work-order preflight and focused checks required by the governing verification contract. No formatter or linter is currently declared as a repository gate.
 
 Generated dashboards, bytecode, environments, raw build output, normalized distributions, and disposable acceptance repositories are derived and must not become formal authority.
 
-## Why self-hosting needs three planes
+## Evaluator and candidate evidence
 
-The harness implementation cannot use unreleased candidate behavior as its only independent governor. Its workflow separates:
+CI separates three identities without creating a second repository lifecycle:
 
-| Plane | Origin | Target | Assurance meaning |
+| Plane | Origin | Purpose | Authority |
 | --- | --- | --- | --- |
-| Released governor | hash-pinned published wheel selected by `.self-hosting/governor.toml` | a governor-created disposable repository and explicitly compatible read-only candidate data | independent bootstrap evidence |
-| Candidate source | reviewed checkout at the candidate commit | source tests and declared ignored derived output | source implementation evidence |
-| Candidate package | wheel built from a Git export and installed in a fresh environment | fresh-install and upgrade acceptance repositories outside the checkout | packaged behavior evidence |
+| Released evaluator | exact version recorded by the standard root installation, installed outside the checkout | root doctor, preflight, validation, and Explorer | evidence only; lifecycle authority remains human |
+| Candidate source | reviewed checkout at `GITHUB_SHA` | full source regression and graph checks | evidence only |
+| Candidate package | wheel built from an exact Git export and installed in a fresh environment | installed-origin, archive, init/adopt/upgrade, and package behavior | evidence only |
 
-This is deliberately different from consumer CI. A consumer selects an already released SE Harness package, so its dedicated managed workflow uses one exact isolated released evaluator for all harness checks. It neither runs an older bootstrap that validates only itself nor calls `reconcile-governor`. The three-plane topology exists only because this repository is changing the evaluator implementation itself.
+The standard managed workflow owns the released-evaluator lane. `.github/workflows/candidate-evidence.yml` owns candidate source and package jobs. Each job identifies its origin and proves it did not mutate the checkout. Passing candidate jobs cannot approve work, verify a VREC, release an RLS, publish, or update the root installation.
 
-`harnessctl identity` makes the role, Python executable, harness version, module/distribution/template origins, expected boundary, candidate commit, or governor digest machine-assessable. A mismatch fails its lane. A published governor may also run `harnessctl accept-candidate` against an exact wheel; its deterministic manifest remains evidence until an accountable assurance decision.
-
-The current package and source candidate is version 0.4.1, while `.self-hosting/governor.toml` intentionally continues to select the independently published 0.3.0 wheel and digest. Publication does not automatically promote a candidate to govern itself.
+`harnessctl identity` supports `released-evaluator`, `candidate-source`, and `candidate-package` roles. `harnessctl accept-candidate` remains a generic verifier-owned black-box package contract; its manifest is evidence, not an assurance decision.
 
 ## Building and releasing
 
-A distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic sequence: build the wheel and raw sdist in a provisioned build environment, normalize the final sdist using the candidate commit timestamp, and use `scripts/create_release_bundle_manifest.py` to retain the exact filenames, hashes, epoch, candidate tree identity, and canonical checksum bytes.
+A promotable distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic build, normalized sdist, bundle manifest, VREC, RLS binding, and publication sequence.
 
-Release preparation has two explicit agent-run steps. Generic `harnessctl prepare-release` creates the ready, format-neutral RLS. Then `scripts/bind_release_distribution.py` validates the retained bundle against that RLS and atomically adds the repository-owned distribution table. Run `scripts/validate_release_distributions.py --root .` as a separate local policy check. These two repository scripts and `repository_tools/` are development-repository controls: they are not packaged in the wheel or copied into consumer installations. Historical RLS files remain valid without the optional table, but they cannot drive this repository's publication path.
-
-Build success is evidence, not release authorization. The release lineage remains:
+Build success is evidence, not release authorization:
 
 ```text
 clean candidate C -> exact bundle manifest -> ready VREC -> human verification
@@ -93,18 +82,10 @@ clean candidate C -> exact bundle manifest -> ready VREC -> human verification
                                                               -> one-input authorized publication
 ```
 
-The tag selects C, not a later governance commit. After the released RLS is integrated into `main`, the release owner dispatches **Publish authorized SE Harness release** from `main` with only its `RLS-*` ID. The workflow derives every other identity, rebuilds C twice without credentials, and creates or verifies the immutable tag and exact GitHub Release. It then derives `release/MAJOR.MINOR`: an absent line is created at C, while an existing line is accepted unchanged only if it contains C. Conflicting history blocks and is never force-updated. The exact GitHub assets then enter the checkout-free PyPI job. The protected `pypi` environment remains a separate human decision. Exact existing state is replay-complete; partial or mismatched state blocks without replacement.
+The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their governance snapshots with the exact standard released evaluator selected by those snapshots. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
-Maintenance-line reconciliation is policy of this repository, not a `harnessctl` capability or consumer installation feature. It creates no maintenance work authority: every patch still needs its own approved bounded work, evidence, assurance, and release decision. Historical manually named per-patch branches are not renamed or deleted automatically.
+## Advancing the root evaluator
 
-The same main-context orchestration publishes the public Explorer demonstration from the later governance commit containing the released record. It keeps that snapshot distinct from the tagged candidate, validates it with the released governor, and uses target-local code only to render derived post-release output. `publish-dashboard-pages.yml` remains a main-only Pages recovery action taking the same RLS plus its explicit governance commit; it no longer deploys from a tag-ref release event. Neither workflow is copied into the consumer template or grants formal lifecycle authority. See [Publishing the SE Harness development dashboard](harness-dashboard-publication.md).
+Candidate success never changes the root evaluator. After a later SE Harness version is immutably published, maintainers select it under a separate approved repository-upgrade work order, install that exact release outside the checkout, review ordinary `harnessctl upgrade`, and authorize `--apply` only when the plan is safe. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
 
-No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable promotion authority.
-
-## Promoting a new governor
-
-After a candidate is immutably published, a separate approved work order must identify the previous and proposed governor, release record, full released commit, immutable wheel URL/name, and SHA-256. A governor version that already contains the reconciliation protocol can then run `harnessctl reconcile-governor` as a read-only plan and, after review, with `--apply`. The command reads the target's migration contract and self-hosting workflow as verified data, never imports target code, preserves field-owned repository policy, and stops for authority-bearing decisions or incompatible schema jumps.
-
-The descriptor, `.engineering-harness.toml`, `.github/workflows/engineering-harness.yml`, and `.engineering-harness.lock` change as one recoverable transaction. The implementation release that introduces this mechanism cannot use it to promote itself: publish it first, select it through the previously trusted promotion process, and use its released reconciler only for later targets. Until a promotion change is accepted, the prior descriptor remains authoritative.
-
-See the authoritative [`SELF_HOSTING.md`](../engineering/self-hosting-boundary/SELF_HOSTING.md), repository [`REPOSITORY_CONTEXT.md`](../engineering/REPOSITORY_CONTEXT.md), and managed entry point [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md) before changing self-hosting controls.
+See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), repository [`REPOSITORY_CONTEXT.md`](../engineering/REPOSITORY_CONTEXT.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).

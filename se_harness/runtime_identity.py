@@ -1,4 +1,4 @@
-"""Bounded runtime-identity evidence for self-hosting assurance lanes."""
+"""Bounded runtime-identity evidence for released evaluators and candidates."""
 
 from __future__ import annotations
 
@@ -16,8 +16,8 @@ from se_harness import __version__
 from se_harness.installer import HarnessError, template_root
 
 
-IDENTITY_SCHEMA = "se-harness-runtime-identity-v1"
-ROLES = {"governor", "candidate-source", "candidate-package"}
+IDENTITY_SCHEMA = "se-harness-runtime-identity-v2"
+ROLES = {"released-evaluator", "candidate-source", "candidate-package"}
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 
@@ -44,7 +44,7 @@ class RuntimeIdentity:
     expected_root: str
     checkout_root: str | None
     candidate_commit: str | None
-    governor_wheel_sha256: str | None
+    evaluator_wheel_sha256: str | None
     isolated_python: bool
     user_site_enabled: bool
     pythonpath_present: bool
@@ -111,7 +111,7 @@ def inspect_runtime_identity(
     expected_root: Path,
     checkout_root: Path | None = None,
     candidate_commit: str | None = None,
-    governor_wheel_sha256: str | None = None,
+    evaluator_wheel_sha256: str | None = None,
     entry_point: Path | None = None,
     require_isolated_python: bool = False,
     require_entry_point: bool = False,
@@ -160,7 +160,7 @@ def inspect_runtime_identity(
                 IdentityDiagnostic("RID003", label, "origin is outside the expected runtime root")
             )
 
-    if role in {"governor", "candidate-package"}:
+    if role in {"released-evaluator", "candidate-package"}:
         if runtime_prefix != expected:
             diagnostics.append(
                 IdentityDiagnostic("RID004", "runtime_prefix", "runtime prefix differs from the expected environment")
@@ -215,23 +215,23 @@ def inspect_runtime_identity(
                 IdentityDiagnostic("RID018", "distribution_origin", "source distribution metadata resolves outside the checkout")
             )
 
-    if role == "governor":
-        if governor_wheel_sha256 is None or SHA256_PATTERN.fullmatch(governor_wheel_sha256) is None:
+    if role == "released-evaluator":
+        if evaluator_wheel_sha256 is not None and SHA256_PATTERN.fullmatch(evaluator_wheel_sha256) is None:
             diagnostics.append(
-                IdentityDiagnostic("RID013", "governor_wheel_sha256", "a lowercase SHA-256 is required")
+                IdentityDiagnostic("RID013", "evaluator_wheel_sha256", "the optional digest must be a lowercase SHA-256")
             )
         if candidate_commit is not None:
             diagnostics.append(
-                IdentityDiagnostic("RID014", "candidate_commit", "governor identity cannot claim a candidate commit")
+                IdentityDiagnostic("RID014", "candidate_commit", "released evaluator identity cannot claim a candidate commit")
             )
     elif role in {"candidate-source", "candidate-package"}:
         if candidate_commit is None or COMMIT_PATTERN.fullmatch(candidate_commit) is None:
             diagnostics.append(
                 IdentityDiagnostic("RID015", "candidate_commit", "a full lowercase candidate commit is required")
             )
-        if governor_wheel_sha256 is not None:
+        if evaluator_wheel_sha256 is not None:
             diagnostics.append(
-                IdentityDiagnostic("RID016", "governor_wheel_sha256", "candidate identity cannot claim a governor digest")
+                IdentityDiagnostic("RID016", "evaluator_wheel_sha256", "candidate identity cannot claim a released evaluator digest")
             )
 
     if require_isolated_python and not isolated:
@@ -254,7 +254,7 @@ def inspect_runtime_identity(
         expected_root=str(expected),
         checkout_root=str(checkout) if checkout is not None else None,
         candidate_commit=candidate_commit,
-        governor_wheel_sha256=governor_wheel_sha256,
+        evaluator_wheel_sha256=evaluator_wheel_sha256,
         isolated_python=isolated,
         user_site_enabled=user_site_enabled,
         pythonpath_present=pythonpath_present,

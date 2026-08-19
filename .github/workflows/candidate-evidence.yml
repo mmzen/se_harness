@@ -1,0 +1,128 @@
+name: SE Harness Candidate Evidence
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-source:
+    name: Candidate source evidence
+    runs-on: ubuntu-latest
+    env:
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Resolve candidate version
+        id: candidate
+        shell: bash
+        run: |
+          version="$(python -c 'import se_harness; print(se_harness.__version__)')"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Prove candidate-source identity
+        env:
+          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+        run: >-
+          python -m se_harness identity
+          --role candidate-source
+          --expected-version "$CANDIDATE_VERSION"
+          --expected-root "$GITHUB_WORKSPACE"
+          --checkout-root "$GITHUB_WORKSPACE"
+          --candidate-commit "$GITHUB_SHA"
+      - name: Run complete candidate-source regression
+        run: python -m unittest discover -s tests -p "test_*.py"
+      - name: Prove candidate source made no checkout change
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+
+  candidate-package:
+    name: Candidate package evidence
+    needs: candidate-source
+    runs-on: ubuntu-latest
+    env:
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Resolve candidate version
+        id: candidate
+        shell: bash
+        run: |
+          version="$(python -c 'import se_harness; print(se_harness.__version__)')"
+          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Export and build one non-promotable candidate wheel
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/candidate-export" "$RUNNER_TEMP/candidate-dist"
+          git archive "$GITHUB_SHA" | tar -x -C "$RUNNER_TEMP/candidate-export"
+          python -m pip wheel --disable-pip-version-check --no-deps \
+            --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"
+          test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
+      - name: Prove candidate wheel has the portable standard surface
+        env:
+          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+        shell: bash
+        run: |
+          candidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
+          python scripts/check_portable_release_surface.py --wheel "$candidate_wheel"
+          python - "$candidate_wheel" <<'PY'
+          import sys, zipfile
+          with zipfile.ZipFile(sys.argv[1]) as archive:
+              names = archive.namelist()
+          forbidden = (
+              "share/se-harness/self-hosting/",
+              "se_harness/governor_reconciliation.py",
+              "se_harness/self_hosting.py",
+              "se_harness/self_hosting_policy.py",
+          )
+          assert not any(any(marker in name for marker in forbidden) for name in names)
+          PY
+      - name: Install candidate and prove package identity
+        env:
+          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+        shell: bash
+        run: |
+          python -m venv "$RUNNER_TEMP/candidate-env"
+          candidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
+          "$RUNNER_TEMP/candidate-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps "$candidate_wheel"
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/candidate-env/bin/python" -I -m se_harness identity \
+            --role candidate-package \
+            --expected-version "$CANDIDATE_VERSION" \
+            --expected-root "$RUNNER_TEMP/candidate-env" \
+            --checkout-root "$GITHUB_WORKSPACE" \
+            --candidate-commit "$GITHUB_SHA" \
+            --entry-point "$RUNNER_TEMP/candidate-env/bin/harnessctl" \
+            --require-isolated-python --require-entry-point
+          python "$GITHUB_WORKSPACE/scripts/check_portable_release_surface.py" \
+            --harnessctl "$RUNNER_TEMP/candidate-env/bin/harnessctl"
+      - name: Exercise a disposable standard repository
+        shell: bash
+        run: |
+          harnessctl="$RUNNER_TEMP/candidate-env/bin/harnessctl"
+          cd "$RUNNER_TEMP"
+          "$harnessctl" init candidate-target --project-name CandidatePackage
+          "$harnessctl" doctor candidate-target
+          "$harnessctl" validate candidate-target
+          "$harnessctl" dashboard candidate-target
+          "$harnessctl" upgrade candidate-target --apply
+          if "$harnessctl" --help | grep -q 'reconcile-governor'; then
+            echo "retired reconcile-governor command is still exposed" >&2
+            exit 1
+          fi
+      - name: Prove package evidence made no checkout change
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"

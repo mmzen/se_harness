@@ -15,6 +15,15 @@ FORBIDDEN_CONTENT = (
     b"python-wheel-sdist",
     b"SHA256SUMS",
 )
+FORBIDDEN_MEMBERS = frozenset(
+    {
+        "se_harness/governor_reconciliation.py",
+        "se_harness/self_hosting.py",
+        "se_harness/self_hosting_policy.py",
+    }
+)
+FORBIDDEN_MEMBER_PREFIXES = ("share/se-harness/self-hosting/",)
+FORBIDDEN_CLI = (b"reconcile-governor", b"--governor-wheel-sha256", b"--role governor")
 MAX_MEMBER_SIZE = 16 * 1024 * 1024
 MAX_MEMBER_COUNT = 4096
 MAX_TOTAL_SIZE = 128 * 1024 * 1024
@@ -38,8 +47,10 @@ def inspect_wheel(path: Path) -> None:
                 raise SurfaceError("wheel expands beyond the inspection limit")
             for member in members:
                 name = member.filename
-                if name == "se_harness/release_distribution.py" or name.startswith(
-                    "repository_tools/"
+                if (
+                    name == "se_harness/release_distribution.py"
+                    or name in FORBIDDEN_MEMBERS
+                    or name.startswith(("repository_tools/", *FORBIDDEN_MEMBER_PREFIXES))
                 ):
                     hits.append(name)
                     continue
@@ -60,18 +71,24 @@ def inspect_harnessctl(path: Path) -> None:
     if not path.is_file() or path.is_symlink():
         raise SurfaceError("harnessctl must be an ordinary file")
     try:
-        completed = subprocess.run(
+        commands = (
+            [str(path), "--help"],
             [str(path), "prepare-release", "--help"],
-            check=False,
-            capture_output=True,
-            timeout=30,
+            [str(path), "identity", "--help"],
         )
+        completed = [
+            subprocess.run(command, check=False, capture_output=True, timeout=30)
+            for command in commands
+        ]
     except (OSError, subprocess.SubprocessError) as exc:
         raise SurfaceError("installed harnessctl help could not be inspected") from exc
-    if completed.returncode != 0:
-        raise SurfaceError("installed harnessctl prepare-release help failed")
-    if FORBIDDEN_CONTENT[0] in completed.stdout + completed.stderr:
+    if any(item.returncode != 0 for item in completed):
+        raise SurfaceError("installed harnessctl help inspection failed")
+    output = b"\n".join(item.stdout + item.stderr for item in completed)
+    if FORBIDDEN_CONTENT[0] in output:
         raise SurfaceError("repository distribution option leaked into installed harnessctl")
+    if any(term in output for term in FORBIDDEN_CLI):
+        raise SurfaceError("retired specialized lifecycle leaked into installed harnessctl")
 
 
 def build_parser() -> argparse.ArgumentParser:
