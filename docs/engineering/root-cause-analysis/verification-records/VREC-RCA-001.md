@@ -2,7 +2,7 @@
 id = "VREC-RCA-001"
 type = "verification_record"
 title = "Verification candidate for WO-RCA-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
@@ -19,6 +19,8 @@ conforms_to = ["VER-RCA-001"]
 +++
 
 # Verification Record Candidate
+
+On 2026-08-20, after the retained evidence and green hosted checks were presented, the accountable owner explicitly stated `I validate the verification record, you can transition it, push it and make the PR ready to merge`. That human assurance decision transitions this record from `ready` to `verified`; automation did not grant the authority. The captured candidate commit, object format, clean worktree state, capture timestamp, artifact snapshot, evidence paths, work-order coverage, and verification-contract coverage remain unchanged.
 
 This ready record binds retained evidence for `WO-RCA-001` to candidate commit `6debffd90a05f253c969f59738ba17d3c171deb0`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
