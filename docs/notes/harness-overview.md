@@ -80,7 +80,7 @@ The harness can enforce supported repository policy when configured, but it does
 
 ## What the tools can and cannot do
 
-`harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard` produce observations or enforce configured checks. Validation can act as a formal gate; inspection summarizes current attention and possible accountable next steps without deciding or performing them. `capture-verification` and `prepare-release` may prepare records in `ready` state. None of these commands approves work, changes a record to `verified` or `released`, commits, pushes, tags, publishes, or deploys.
+`harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard` produce observations or enforce configured checks. `focus` returns one selected-scope handoff, while inspection summarizes current attention repository-wide. `capture-verification` and `prepare-release` may prepare records in `ready` state. `transition` records only explicit accountable decisions and plans by default; `--apply` changes exactly the selected formal artifacts. None of these commands approves work or grants authority, implicitly changes related records, commits, pushes, tags, publishes, or deploys.
 
 Green tests are evidence. A generated dashboard is a derived view. Human decisions remain separate.
 

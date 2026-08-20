@@ -33,6 +33,14 @@ from se_harness.renumber import (
     render_json_error as render_renumber_json_error,
 )
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
+from se_harness.workflow import (
+    failed_result,
+    focus,
+    plan_transition,
+    preparation_result,
+    render_human as render_workflow_human,
+    render_json as render_workflow_json,
+)
 
 
 def _scan_repository(target: Path) -> bytes:
@@ -196,35 +204,132 @@ def _select_work_order(args: argparse.Namespace) -> int:
 
 
 def _capture_verification(args: argparse.Namespace) -> int:
-    output = capture_verification(
-        Path(args.target),
-        record_id=args.record_id,
-        work_order_ids=args.work_order,
-        verification_ids=args.verification,
-        evidence_paths=args.evidence,
-        owner=args.owner,
-        output=args.output,
-        domain=args.domain,
-    )
-    print(f"prepared ready verification record: {output}")
+    try:
+        output = capture_verification(
+            Path(args.target),
+            record_id=args.record_id,
+            work_order_ids=args.work_order,
+            verification_ids=args.verification,
+            evidence_paths=args.evidence,
+            owner=args.owner,
+            output=args.output,
+            domain=args.domain,
+        )
+        result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
+    except HarnessError as exc:
+        result = failed_result("capture-verification", args.record_id, str(exc), code="WEX301")
+        print(
+            render_workflow_json(result) if args.json else render_workflow_human(result),
+            end="",
+            file=sys.stdout if args.json else sys.stderr,
+        )
+        return 2
+    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
     return 0
 
 
 def _prepare_release(args: argparse.Namespace) -> int:
-    output = prepare_release(
-        Path(args.target),
-        record_id=args.record_id,
-        release_contract_id=args.release_contract,
-        verification_record_ids=args.verification_record,
-        work_order_ids=args.work_order,
-        version=args.release_version,
-        authorized_by=args.authorized_by,
-        tag=args.tag,
-        output=args.output,
-        domain=args.domain,
-    )
-    print(f"prepared ready release record: {output}")
+    try:
+        output = prepare_release(
+            Path(args.target),
+            record_id=args.record_id,
+            release_contract_id=args.release_contract,
+            verification_record_ids=args.verification_record,
+            work_order_ids=args.work_order,
+            version=args.release_version,
+            authorized_by=args.authorized_by,
+            tag=args.tag,
+            output=args.output,
+            domain=args.domain,
+        )
+        result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
+    except HarnessError as exc:
+        result = failed_result("prepare-release", args.record_id, str(exc), code="WEX401")
+        print(
+            render_workflow_json(result) if args.json else render_workflow_human(result),
+            end="",
+            file=sys.stdout if args.json else sys.stderr,
+        )
+        return 2
+    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
     return 0
+
+
+def _focus(args: argparse.Namespace) -> int:
+    try:
+        result = focus(
+            Path(args.target),
+            args.artifact,
+            include_background=args.include_background,
+        )
+    except HarnessError as exc:
+        message = str(exc)
+        result = failed_result(
+            "focus",
+            args.artifact,
+            message,
+            code="WEX101",
+            repository_blocker=_repository_workflow_error(message),
+        )
+    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
+def _assignments(values: list[str], label: str) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for value in values:
+        if "=" not in value:
+            raise HarnessError(f"{label} must use ID=VALUE")
+        artifact_id, selected = value.split("=", 1)
+        artifact_id = artifact_id.strip()
+        selected = selected.strip()
+        if not artifact_id or not selected:
+            raise HarnessError(f"{label} must use a non-empty ID and value")
+        if artifact_id in result:
+            raise HarnessError(f"duplicate {label} for {artifact_id}")
+        result[artifact_id] = selected
+    return result
+
+
+def _repository_workflow_error(message: str) -> bool:
+    return any(
+        marker in message
+        for marker in (
+            "[E001]",
+            "[E003]",
+            "formal artifact IDs are not unique",
+            "validator did not return",
+            "validator unavailable",
+        )
+    )
+
+
+def _transition(args: argparse.Namespace) -> int:
+    primary: str | None = None
+    try:
+        transitions = _assignments(args.transitions, "--set")
+        primary = sorted(transitions)[0] if transitions else None
+        decisions = _assignments(args.decisions, "--decision")
+        reasons = _assignments(args.reasons, "--reason")
+        plan = plan_transition(
+            Path(args.target),
+            transitions,
+            decisions,
+            reasons,
+            apply=args.apply,
+        )
+        result = plan.result
+    except HarnessError as exc:
+        message = str(exc)
+        result = failed_result(
+            "transition",
+            primary,
+            message,
+            code="WEX201",
+            repository_blocker=_repository_workflow_error(message),
+        )
+    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    return 0 if result["operation"]["outcome"] in {"planned", "completed"} else 1
 
 
 def _scaffold_domain(args: argparse.Namespace) -> int:
@@ -355,6 +460,22 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--json", action="store_true")
     preflight.set_defaults(handler=_preflight)
 
+    selected_focus = commands.add_parser("focus", help="project one selected WO, VREC, or RLS workflow scope")
+    selected_focus.add_argument("target", nargs="?", default=".")
+    selected_focus.add_argument("--artifact", required=True)
+    selected_focus.add_argument("--json", action="store_true")
+    selected_focus.add_argument("--include-background", action="store_true")
+    selected_focus.set_defaults(handler=_focus)
+
+    transition = commands.add_parser("transition", help="plan or atomically apply explicit lifecycle transitions")
+    transition.add_argument("target", nargs="?", default=".")
+    transition.add_argument("--set", required=True, action="append", dest="transitions", help="explicit ID=STATUS transition; repeat for packets")
+    transition.add_argument("--decision", required=True, action="append", dest="decisions", help="ID=ACTOR assertion; repeat for every selected artifact")
+    transition.add_argument("--reason", action="append", default=[], dest="reasons", help="ID=TEXT reason; required for rejection, or use successor VREC ID for supersession")
+    transition.add_argument("--apply", action="store_true", help="apply the exact validated transaction; default is read-only planning")
+    transition.add_argument("--json", action="store_true")
+    transition.set_defaults(handler=_transition)
+
     select_work = commands.add_parser(
         "select-work-order",
         help="select one structured work-order field from a GitHub pull-request event",
@@ -433,9 +554,10 @@ def build_parser() -> argparse.ArgumentParser:
     capture.add_argument("--work-order", required=True, action="append", help="work order to verify; repeat for aggregate candidates")
     capture.add_argument("--verification", required=True, action="append", help="applicable verification contract; repeat for aggregate candidates")
     capture.add_argument("--evidence", required=True, action="append", help="retained evidence path; repeat for aggregate candidates")
-    capture.add_argument("--owner", default="quality-owner")
+    capture.add_argument("--owner", default="quality-owner", help="preparation actor and record owner; does not verify the record")
     capture.add_argument("--output")
     capture.add_argument("--domain", help="place the record in an explicit engineering domain")
+    capture.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
     capture.set_defaults(handler=_capture_verification)
 
     release = commands.add_parser("prepare-release", help="prepare a ready commit-bound release record")
@@ -445,10 +567,15 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--verification-record", required=True, action="append", help="included verification record; repeat for aggregate releases")
     release.add_argument("--work-order", required=True, action="append", help="released work order; repeat for aggregate releases")
     release.add_argument("--version", required=True, dest="release_version")
-    release.add_argument("--authorized-by", required=True)
+    release.add_argument(
+        "--authorized-by",
+        required=True,
+        help="retained compatibility name for the preparation actor and owner; does not authorize release",
+    )
     release.add_argument("--tag")
     release.add_argument("--output")
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
+    release.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
     release.set_defaults(handler=_prepare_release)
     return parser
 

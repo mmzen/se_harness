@@ -25,6 +25,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
+| `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its canonical handoff |
+| `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
@@ -72,6 +74,22 @@ harnessctl select-work-order --event GITHUB_EVENT_PATH
 `start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
 
 `select-work-order` is the narrow automation-facing parser used by the managed consumer workflow. It accepts one bounded GitHub event file and emits one exact `WO-...` ID only when the pull-request body contains exactly one standalone `Harness-Work-Order:` field. It does not inspect branches, diffs, commits, or artifact eligibility and grants no work authority.
+
+## Selected-scope workflow execution
+
+```text
+harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... [--json] [--include-background]
+harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
+  [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] [--apply] [--json]
+```
+
+`focus` projects only the selected artifact's governing chain and direct lifecycle dependencies. Unrelated repository findings remain a background count; `--include-background` expands their categories without turning them into current-scope work.
+
+`transition` resolves IDs from formal metadata and plans by default. Every selected ID needs exactly one actor assertion. Rejection needs a non-empty reason; VREC supersession uses the reason value as the exact eligible successor VREC ID. A packet is assessed as one proposed final graph, so mutually dependent definitions do not pass through invalid intermediate states. `--apply` rechecks every input byte, stages same-filesystem replacements outside artifact discovery, and rolls back earlier replacements if a later write fails.
+
+The command records actor text as an assertion, not proof of authority. A VREC transition changes no WO. An RLS transition changes no VREC or WO. Related lifecycle projections require separate explicit transitions and their own preconditions.
+
+Human and JSON output are rendered from the same versioned workflow result and always identify one recommended next step, required authority, and a command or suggested response.
 
 ## Safe repository upgrade
 
@@ -139,10 +157,10 @@ harnessctl capture-verification [TARGET] \
   --work-order WO-... \
   --verification VER-... \
   --evidence PATH \
-  [--owner ROLE] [--domain DOMAIN] [--output PATH]
+  [--owner ROLE] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, and writes only `status = "ready"`.
+Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Every selected work order must be exactly `implemented`, the selected verification contracts must equal their declared union, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, and writes only `status = "ready"`. It records `prepared_at` and `prepared_by`, never `verified_at` or `verified_by`.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
@@ -156,12 +174,12 @@ harnessctl prepare-release [TARGET] \
   --work-order WO-... \
   --version VERSION \
   --authorized-by ROLE \
-  [--tag TAG] [--domain DOMAIN] [--output PATH]
+  [--tag TAG] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--verification-record` and `--work-order` for aggregate releases. The selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, included records must be eligible, and every record must bind the same candidate commit.
+Repeat `--verification-record` and `--work-order` for aggregate releases. Every included VREC must be exactly `verified`, the selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, and every record must bind the same candidate commit.
 
-The command writes only `status = "ready"`. It does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
+The command writes only `status = "ready"` with `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. It does not commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 
 ## Authority summary
 

@@ -340,11 +340,26 @@ def normalize_artifacts(
                     "rationale": _string(assurance.get("rationale")) or None,
                     "decided_by": _string(assurance.get("decided_by")) or None,
                 }
+        lifecycle_events = artifact.metadata.get("lifecycle_events")
+        item["lifecycle_events"] = [
+            {
+                key: _string(event.get(key)) or None
+                for key in ("from", "to", "decided_at", "decided_by", "reason")
+            }
+            for event in lifecycle_events
+            if isinstance(event, dict)
+        ] if isinstance(lifecycle_events, list) else []
+        item["rejected_at"] = _string(artifact.metadata.get("rejected_at")) or None
+        item["rejected_by"] = _string(artifact.metadata.get("rejected_by")) or None
+        item["rejection_reason"] = _string(artifact.metadata.get("rejection_reason")) or None
         if artifact.artifact_type == "verification_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
             item["worktree_state"] = _string(artifact.metadata.get("worktree_state")) or None
+            item["prepared_at"] = _string(artifact.metadata.get("prepared_at")) or None
+            item["prepared_by"] = _string(artifact.metadata.get("prepared_by")) or None
             item["verified_at"] = _string(artifact.metadata.get("verified_at")) or None
+            item["verified_by"] = _string(artifact.metadata.get("verified_by")) or None
             item["artifact_snapshot_sha256"] = _string(artifact.metadata.get("artifact_snapshot_sha256")) or None
             item["evidence_paths"] = _string_list(artifact.metadata.get("evidence_paths"))
             item["superseded_at"] = _string(artifact.metadata.get("superseded_at")) or None
@@ -354,6 +369,8 @@ def normalize_artifacts(
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
             item["version"] = _string(artifact.metadata.get("version")) or None
             item["tag"] = _string(artifact.metadata.get("tag")) or None
+            item["prepared_at"] = _string(artifact.metadata.get("prepared_at")) or None
+            item["prepared_by"] = _string(artifact.metadata.get("prepared_by")) or None
             item["released_at"] = _string(artifact.metadata.get("released_at")) or None
             item["authorized_by"] = _string(artifact.metadata.get("authorized_by")) or None
         normalized.append(item)
@@ -1270,6 +1287,10 @@ def build_revision_provenance(
                 "supersedes": supersedes,
                 "superseded_at": artifact.get("superseded_at"),
                 "supersession_authorized_by": artifact.get("supersession_authorized_by"),
+                "prepared_at": artifact.get("prepared_at"),
+                "prepared_by": artifact.get("prepared_by"),
+                "decided_at": artifact.get("verified_at") or artifact.get("released_at"),
+                "decided_by": artifact.get("verified_by") or artifact.get("authorized_by"),
                 "lifecycle_class": lifecycle_class,
                 "version": artifact.get("version"),
                 "tag": artifact.get("tag"),

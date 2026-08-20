@@ -282,8 +282,8 @@ def capture_verification(
     declared_verification: set[str] = set()
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.get("status") not in ACTIVE_STATUSES:
-            raise HarnessError(f"work order {work_order_id} must be active")
+        if work_order.get("status") != "implemented":
+            raise HarnessError(f"work order {work_order_id} must be implemented")
         declared_verification.update(_relation_targets(_load_metadata(root, work_order), "verification"))
     for verification_id in selected_verification:
         verification = _require_artifact(catalog, verification_id, "verification")
@@ -292,9 +292,9 @@ def capture_verification(
     supplied_verification = set(selected_verification)
     missing_verification = declared_verification - supplied_verification
     extra_verification = supplied_verification - declared_verification
-    if (len(selected_work) > 1 and missing_verification) or extra_verification:
+    if missing_verification or extra_verification:
         details: list[str] = []
-        if len(selected_work) > 1 and missing_verification:
+        if missing_verification:
             details.append(f"missing {', '.join(sorted(missing_verification))}")
         if extra_verification:
             details.append(f"not declared by selected work {', '.join(sorted(extra_verification))}")
@@ -335,7 +335,8 @@ updated = "{now[:10]}"
 commit = "{commit}"
 git_object_format = "{object_format}"
 worktree_state = "clean"
-verified_at = "{now}"
+prepared_at = "{now}"
+prepared_by = "{owner}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
 
@@ -400,8 +401,8 @@ def prepare_release(
     identities: set[tuple[str, str]] = set()
     for verification_record_id in selected_verification_records:
         verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-        if verification_record.get("status") not in {"ready", "verified", "released"}:
-            raise HarnessError(f"verification record {verification_record_id} must be ready, verified, or released")
+        if verification_record.get("status") != "verified":
+            raise HarnessError(f"verification record {verification_record_id} must be verified")
         verification_metadata = _load_metadata(root, verification_record)
         verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
         identities.add(_supported_commit(verification_metadata, verification_record_id))
@@ -441,8 +442,8 @@ updated = "{now[:10]}"
 version = "{version}"
 commit = "{commit}"
 git_object_format = "{object_format}"
-released_at = "{now}"
-authorized_by = "{authorized_by}"
+prepared_at = "{now}"
+prepared_by = "{authorized_by}"
 {tag_line}
 [relations]
 satisfies = ["{release_contract_id}"]

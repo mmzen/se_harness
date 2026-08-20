@@ -17,7 +17,7 @@ Canonical paths make repositories predictable, but paths never establish artifac
 ## Start implementation
 
 1. Select one bounded work order.
-2. Run `harnessctl preflight . --work-order WO-...`.
+2. Run `harnessctl focus . --artifact WO-...`, then `harnessctl preflight . --work-order WO-...`.
 3. Read every file in the returned manifest.
 4. Inspect the affected implementation, tests, templates, and documentation.
 5. Implement only the authorized scope and retain work-order-keyed evidence.
@@ -37,9 +37,9 @@ Use the repository-owned `docs/engineering/README.md` only as the index of local
 
 ## Lifecycle handoffs
 
-Whenever it yields after completing a lifecycle stage or reaching a stop condition, a coding agent reports: `Completed`; `Current lifecycle state`; `Recommended next step`; `Human decision or approval required`; and `Command or suggested response`. It adds `Alternative next steps` only when more than one valid authorized path exists.
+Whenever it yields after completing a lifecycle stage or reaching a stop condition, a coding agent uses the `harnessctl focus` or `transition` result and reports: `Completed`; `Current lifecycle state`; `Recommended next step`; `Human decision or approval required`; and `Command or suggested response`. It adds `Alternative next steps` only when the canonical result contains them.
 
-The agent reports the final state reached when one response spans multiple stages, uses actual artifact IDs when known, recommends one bounded next authorized step instead of asking a generic follow-up question, and never performs that step without its separate authority. Stage-specific mapping, failure remediation, and ordered procedure belong to `docs/engineering/WORKFLOW.md`, subject to `DECISION_RIGHTS.md`.
+The agent reports the final state reached when one response spans multiple stages, uses actual artifact IDs when known, and never performs that step without its separate authority. Lifecycle legality, scope, and next-step mapping belong to `harnessctl`; agent prose and optional Skills may invoke and render that result but may not redefine it. Stage-specific authority remains in `docs/engineering/WORKFLOW.md` and `DECISION_RIGHTS.md`.
 
 ## Review and visualization
 

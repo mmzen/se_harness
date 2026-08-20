@@ -87,7 +87,7 @@ class ArtifactCatalogTests(unittest.TestCase):
                 self.assertIn(link, content)
                 self.assertNotIn(CATALOG_BEGIN, content)
 
-    def test_managed_policy_and_template_copies_are_identical(self) -> None:
+    def test_released_policy_copies_match_while_candidate_router_remains_isolated(self) -> None:
         pairs = (
             (
                 REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md",
@@ -112,12 +112,12 @@ class ArtifactCatalogTests(unittest.TestCase):
         evaluator_version = tomllib.loads(
             (REPOSITORY_ROOT / ".engineering-harness.toml").read_text(encoding="utf-8")
         )["harness"]["tool_version"]
-        self.assertEqual(
-            router,
-            router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
-                "{{HARNESS_VERSION}}", evaluator_version
-            ),
+        candidate_router = router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
+            "{{HARNESS_VERSION}}", evaluator_version
         )
+        self.assertNotEqual(router, candidate_router)
+        self.assertNotIn("harnessctl focus", router)
+        self.assertIn("harnessctl focus", candidate_router)
 
     def test_work_order_template_expresses_conditional_architecture(self) -> None:
         template = (

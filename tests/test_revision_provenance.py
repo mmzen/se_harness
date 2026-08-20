@@ -22,6 +22,7 @@ from inspect_engineering_artifacts import build_inspection  # noqa: E402
 from validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
 
 from se_harness.cli import main  # noqa: E402
+from se_harness.preflight import _load_validator_module  # noqa: E402
 from se_harness.provenance import _evidence_work_order_keys  # noqa: E402
 
 
@@ -685,9 +686,19 @@ class RevisionCliTests(unittest.TestCase):
         vrec_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         self.assertIn(f'commit = "{candidate}"', vrec_path.read_text(encoding="utf-8"))
         self.assertIn('status = "ready"', vrec_path.read_text(encoding="utf-8"))
+        self.assertIn('prepared_by = "quality-owner"', vrec_path.read_text(encoding="utf-8"))
+        self.assertNotIn("verified_at =", vrec_path.read_text(encoding="utf-8"))
         self.assertEqual(candidate, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+
+        code, _, error = self.invoke(
+            "transition", str(self.root),
+            "--set", "VREC-001=verified",
+            "--decision", "VREC-001=quality-owner",
+            "--apply",
+        )
+        self.assertEqual(0, code, error)
 
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(vrec_path))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
@@ -712,9 +723,12 @@ class RevisionCliTests(unittest.TestCase):
         release_text = release_path.read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', release_text)
         self.assertIn('status = "ready"', release_text)
+        self.assertIn('prepared_by = "release-owner"', release_text)
+        self.assertNotIn("released_at =", release_text)
+        self.assertNotIn("authorized_by =", release_text)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
     def test_explicit_domain_and_output_precedence_are_deterministic(self) -> None:
         self.initialize_candidate()
@@ -730,7 +744,7 @@ class RevisionCliTests(unittest.TestCase):
             "--output", explicit_output,
         )
         self.assertEqual(0, code, error)
-        self.assertIn(explicit_output.replace("/", os.sep), output)
+        self.assertIn(explicit_output, output)
         self.assertTrue((self.root / explicit_output).is_file())
         self.assertFalse((self.root / "docs/engineering/assurance/verification-records/VREC-001.md").exists())
 
@@ -784,7 +798,7 @@ class RevisionCliTests(unittest.TestCase):
         aggregate = self.root / "docs/engineering/verification-records/VREC-002.md"
         self.assertTrue(aggregate.is_file())
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
     def test_capture_fails_for_dirty_worktree_without_output(self) -> None:
         self.initialize_candidate()
@@ -800,6 +814,32 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(2, code)
         self.assertIn("clean Git worktree", error)
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-001.md").exists())
+
+    def test_capture_requires_implemented_work_order(self) -> None:
+        self.initialize_candidate()
+        path = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        path.write_text(
+            path.read_text(encoding="utf-8")
+            .replace('status = "implemented"', 'status = "approved"')
+            .replace(
+                "\n[relations]",
+                '\n[assurance]\ncommit_bound_verification = "required"\n'
+                'rationale = "This fixture requires accountable candidate verification."\n'
+                'decided_by = "owner"\n\n[relations]',
+            ),
+            encoding="utf-8",
+        )
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(path))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "approved work only")
+        code, _, error = self.invoke(
+            "capture-verification", str(self.root),
+            "--id", "VREC-001",
+            "--work-order", "WO-001",
+            "--verification", "VER-001",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+        )
+        self.assertEqual(2, code)
+        self.assertIn("must be implemented", error)
 
     def test_capture_and_prepare_mixed_layout_aggregate_scope_deterministically(self) -> None:
         self.initialize_candidate(aggregate=True)
@@ -839,7 +879,15 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('verifies_work_order = ["WO-001", "WO-002"]', vrec)
         self.assertIn('conforms_to = ["VER-001", "VER-002"]', vrec)
         self.assertIn(directory_evidence, vrec)
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+
+        code, _, error = self.invoke(
+            "transition", str(self.root),
+            "--set", "VREC-002=verified",
+            "--decision", "VREC-002=quality-owner",
+            "--apply",
+        )
+        self.assertEqual(0, code, error)
 
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(vrec_path))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "aggregate verification governance")
@@ -864,7 +912,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
     def test_prepare_release_remains_format_neutral(self) -> None:
         candidate = self.initialize_candidate()
@@ -887,7 +935,7 @@ class RevisionCliTests(unittest.TestCase):
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertNotIn("[distribution]", release)
         self.assertNotIn("wheel", release.lower())
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
         release_path = self.root / "docs/engineering/product/releases/RLS-002.md"
         release_path.write_text(
@@ -897,7 +945,7 @@ class RevisionCliTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
     def test_aggregate_capture_rejects_duplicate_and_incomplete_scope(self) -> None:
         self.initialize_candidate(aggregate=True)
@@ -958,7 +1006,7 @@ class RevisionCliTests(unittest.TestCase):
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertIn('includes_verification = ["VREC-001", "VREC-002"]', release)
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
-        self.assertTrue(validate_repository(self.root).valid)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
     def test_prepare_release_rejects_verification_records_at_different_commits(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
@@ -1019,8 +1067,26 @@ class RevisionCliTests(unittest.TestCase):
             "--authorized-by", "release-owner",
         )
         self.assertEqual(2, code)
-        self.assertIn("must be ready, verified, or released", error)
+        self.assertIn("must be verified", error)
         self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
+
+    def test_prepare_release_rejects_ready_verification_record(self) -> None:
+        candidate = self.initialize_candidate()
+        record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        write(record_path, verification_record(candidate, status="ready"))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
+        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "ready verification candidate")
+        code, _, error = self.invoke(
+            "prepare-release", str(self.root),
+            "--id", "RLS-002",
+            "--release-contract", "REL-001",
+            "--verification-record", "VREC-001",
+            "--work-order", "WO-001",
+            "--version", "2.0.0",
+            "--authorized-by", "release-owner",
+        )
+        self.assertEqual(2, code)
+        self.assertIn("must be verified", error)
 
     def test_capture_refuses_existing_output(self) -> None:
         self.initialize_candidate()

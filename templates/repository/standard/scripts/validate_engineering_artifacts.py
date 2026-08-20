@@ -597,6 +597,171 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
     return errors
 
 
+def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
+    """Validate append-only decision events when the new contract is present.
+
+    Historical artifacts without events remain valid. Once an event exists, its
+    chain and any target-specific decision fields must be internally consistent.
+    """
+
+    errors: list[Diagnostic] = []
+    allowed: dict[str, dict[str, set[str]]] = {
+        "definition": {
+            "draft": {"approved", "rejected"},
+            "approved": {"implemented", "rejected"},
+        },
+        "work_order": {
+            "draft": {"approved", "rejected"},
+            "approved": {"in_progress", "rejected"},
+            "in_progress": {"implemented", "rejected"},
+            "implemented": {"verified", "released"},
+            "verified": {"released"},
+        },
+        "verification_record": {"ready": {"verified", "rejected", "superseded"}},
+        "release_record": {"ready": {"released", "rejected"}},
+    }
+    definitions = {
+        "intent", "capability", "requirement", "specification", "architecture",
+        "adr", "verification", "release_contract", "operating_contract",
+    }
+
+    for artifact in artifacts:
+        events = artifact.metadata.get("lifecycle_events")
+        if events is None:
+            continue
+        if not isinstance(events, list) or not events:
+            _add_error(
+                errors, artifact, report_root, "E014",
+                "field 'lifecycle_events' must be a non-empty array of tables when present",
+                plane="governance",
+            )
+            continue
+        previous_to: str | None = None
+        previous_at: str | None = None
+        valid_events: list[dict[str, str]] = []
+        family = "definition" if artifact.artifact_type in definitions else artifact.artifact_type
+        for index, event in enumerate(events):
+            if not isinstance(event, dict):
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    f"lifecycle event {index + 1} must be a TOML table",
+                    plane="governance",
+                )
+                continue
+            values: dict[str, str] = {}
+            for field in ("from", "to", "decided_at", "decided_by"):
+                value = event.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    _add_error(
+                        errors, artifact, report_root, "E014",
+                        f"lifecycle event {index + 1} field '{field}' must be a non-empty string",
+                        plane="governance",
+                    )
+                else:
+                    values[field] = value.strip()
+            reason = event.get("reason")
+            if reason is not None and (not isinstance(reason, str) or not reason.strip()):
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    f"lifecycle event {index + 1} field 'reason' must be a non-empty string when present",
+                    plane="governance",
+                )
+            decided_at = values.get("decided_at")
+            if decided_at is not None:
+                try:
+                    datetime.strptime(decided_at, "%Y-%m-%dT%H:%M:%SZ")
+                except ValueError:
+                    _add_error(
+                        errors, artifact, report_root, "E014",
+                        f"lifecycle event {index + 1} field 'decided_at' must use a valid YYYY-MM-DDTHH:MM:SSZ timestamp",
+                        plane="governance",
+                    )
+                if previous_at is not None and decided_at < previous_at:
+                    _add_error(
+                        errors, artifact, report_root, "E014",
+                        "lifecycle events must be ordered chronologically",
+                        plane="governance",
+                    )
+                previous_at = decided_at
+            source = values.get("from")
+            target = values.get("to")
+            if source is not None and target is not None:
+                if target not in allowed.get(family, {}).get(source, set()):
+                    _add_error(
+                        errors, artifact, report_root, "E014",
+                        f"lifecycle event {index + 1} contains unsupported transition {source} -> {target}",
+                        plane="governance",
+                    )
+                if previous_to is not None and source != previous_to:
+                    _add_error(
+                        errors, artifact, report_root, "E014",
+                        f"lifecycle event {index + 1} starts at '{source}' instead of previous target '{previous_to}'",
+                        plane="governance",
+                    )
+                previous_to = target
+            if len(values) == 4:
+                valid_events.append(values)
+        if previous_to is not None and previous_to != artifact.status:
+            _add_error(
+                errors, artifact, report_root, "E014",
+                f"last lifecycle event target '{previous_to}' must equal artifact status '{artifact.status}'",
+                plane="governance",
+            )
+        if not valid_events:
+            continue
+        latest = valid_events[-1]
+        expected_fields: tuple[str, str] | None = None
+        if artifact.artifact_type == "verification_record" and latest["to"] == "verified":
+            expected_fields = ("verified_at", "verified_by")
+        elif artifact.artifact_type == "release_record" and latest["to"] == "released":
+            expected_fields = ("released_at", "authorized_by")
+        elif latest["to"] == "rejected":
+            expected_fields = ("rejected_at", "rejected_by")
+            reason = events[-1].get("reason") if isinstance(events[-1], dict) else None
+            if not isinstance(reason, str) or not reason.strip():
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    "rejection lifecycle event requires a non-empty reason",
+                    plane="governance",
+                )
+            if artifact.metadata.get("rejection_reason") != reason:
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    "field 'rejection_reason' must equal the rejection lifecycle event reason",
+                    plane="governance",
+                )
+        elif artifact.artifact_type == "verification_record" and latest["to"] == "superseded":
+            expected_fields = ("superseded_at", "supersession_authorized_by")
+            reason = events[-1].get("reason") if isinstance(events[-1], dict) else None
+            successors = artifact.relations.get("superseded_by", [])
+            if not isinstance(reason, str) or successors != [reason]:
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    "supersession lifecycle event reason must equal the single superseded_by target",
+                    plane="governance",
+                )
+        if expected_fields is not None:
+            timestamp_field, actor_field = expected_fields
+            legacy_decision_record = (
+                artifact.artifact_type in {"verification_record", "release_record"}
+                and "prepared_at" not in artifact.metadata
+                and latest["to"] in {"verified", "released"}
+            )
+            if not legacy_decision_record and artifact.metadata.get(timestamp_field) != latest["decided_at"]:
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    f"field '{timestamp_field}' must equal the latest lifecycle decision timestamp",
+                    plane="governance",
+                )
+            if not legacy_decision_record and artifact.metadata.get(actor_field) != latest["decided_by"]:
+                _add_error(
+                    errors, artifact, report_root, "E014",
+                    f"field '{actor_field}' must equal the latest lifecycle decision actor",
+                    plane="governance",
+                )
+    return errors
+
+
 def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
 
@@ -646,7 +811,14 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "field 'worktree_state' must be 'clean'",
                     plane="governance",
                 )
-            _validate_timestamp(artifact, "verified_at", errors, report_root)
+            prepared = "prepared_at" in artifact.metadata or "prepared_by" in artifact.metadata
+            if prepared:
+                _validate_timestamp(artifact, "prepared_at", errors, report_root)
+                _require_non_empty_string(artifact, "prepared_by", errors, report_root, plane="governance")
+            if artifact.status in {"verified", "released", "superseded"}:
+                _validate_timestamp(artifact, "verified_at", errors, report_root)
+                if prepared:
+                    _require_non_empty_string(artifact, "verified_by", errors, report_root, plane="governance")
             snapshot_hash = _require_non_empty_string(
                 artifact,
                 "artifact_snapshot_sha256",
@@ -664,15 +836,27 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     plane="governance",
                 )
             _validate_evidence_paths(artifact, errors, report_root)
-            if artifact.status not in {"ready", "verified", "released", "superseded"}:
+            if artifact.status not in {"ready", "verified", "released", "superseded", "rejected"}:
                 _add_error(
                     errors,
                     artifact,
                     report_root,
                     "E009",
-                    "verification_record status must be ready, verified, released, or superseded",
+                    "verification_record status must be ready, verified, released, superseded, or rejected",
                     plane="governance",
                 )
+            if artifact.status == "ready" and prepared:
+                for field_name in ("verified_at", "verified_by"):
+                    if field_name in artifact.metadata:
+                        _add_error(
+                            errors, artifact, report_root, "E009",
+                            f"ready verification_record must omit decision field '{field_name}'",
+                            plane="governance",
+                        )
+            if artifact.status == "rejected":
+                _validate_timestamp(artifact, "rejected_at", errors, report_root)
+                _require_non_empty_string(artifact, "rejected_by", errors, report_root, plane="governance")
+                _require_non_empty_string(artifact, "rejection_reason", errors, report_root, plane="governance")
             if artifact.status == "superseded":
                 _validate_timestamp(artifact, "superseded_at", errors, report_root)
                 _require_non_empty_string(artifact, "supersession_authorized_by", errors, report_root)
@@ -720,10 +904,16 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
             release_version = _require_non_empty_string(
                 artifact, "version", errors, report_root, plane="governance"
             )
-            _validate_timestamp(artifact, "released_at", errors, report_root)
-            authorized_by = _require_non_empty_string(
-                artifact, "authorized_by", errors, report_root, plane="governance"
-            )
+            prepared = "prepared_at" in artifact.metadata or "prepared_by" in artifact.metadata
+            if prepared:
+                _validate_timestamp(artifact, "prepared_at", errors, report_root)
+                _require_non_empty_string(artifact, "prepared_by", errors, report_root, plane="governance")
+            authorized_by: str | None = None
+            if artifact.status == "released":
+                _validate_timestamp(artifact, "released_at", errors, report_root)
+                authorized_by = _require_non_empty_string(
+                    artifact, "authorized_by", errors, report_root, plane="governance"
+                )
             owners = artifact.metadata.get("owners", [])
             if authorized_by is not None and isinstance(owners, list) and authorized_by not in owners:
                 _add_error(
@@ -744,13 +934,25 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "field 'tag' must be a non-empty string when present",
                     plane="governance",
                 )
-            if artifact.status not in {"ready", "released"}:
+            if artifact.status == "ready" and prepared:
+                for field_name in ("released_at", "authorized_by"):
+                    if field_name in artifact.metadata:
+                        _add_error(
+                            errors, artifact, report_root, "E009",
+                            f"ready release_record must omit decision field '{field_name}'",
+                            plane="governance",
+                        )
+            if artifact.status == "rejected":
+                _validate_timestamp(artifact, "rejected_at", errors, report_root)
+                _require_non_empty_string(artifact, "rejected_by", errors, report_root, plane="governance")
+                _require_non_empty_string(artifact, "rejection_reason", errors, report_root, plane="governance")
+            if artifact.status not in {"ready", "released", "rejected"}:
                 _add_error(
                     errors,
                     artifact,
                     report_root,
                     "E009",
-                    "release_record status must be ready or released",
+                    "release_record status must be ready, released, or rejected",
                     plane="governance",
                 )
 
@@ -941,7 +1143,9 @@ def validate_revision_consistency(
                     )
             missing_verification = declared_verification - verification_ids
             extra_verification = verification_ids - declared_verification
-            if len(work_order_ids) > 1 and missing_verification:
+            if missing_verification and (
+                "prepared_at" in artifact.metadata or len(work_order_ids) > 1
+            ):
                 _add_error(
                     errors,
                     artifact,
@@ -1850,6 +2054,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         )
     else:
         errors.extend(validate_common_metadata(artifacts, repository_root))
+        errors.extend(validate_lifecycle_events(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
         errors.extend(validate_relations(artifacts, repository_root))
         traceability_errors, traceability_warnings = validate_architecture_traceability(

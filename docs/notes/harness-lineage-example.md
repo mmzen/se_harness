@@ -101,9 +101,10 @@ The command derives the full Git hash, requires a clean worktree, checks selecte
 VREC-EX-001.verifies_work_order -> WO-EX-001
 VREC-EX-001.conforms_to         -> VER-EX-001
 VREC-EX-001.commit              -> C
+VREC-EX-001.prepared_at/by       -> preparation facts only
 ```
 
-The ready record is committed later because it cannot contain the hash of its own commit. The assurance owner reads `VER-EX-001` and the retained evidence and may transition the VREC to `verified` in another governance commit. The command did not make that decision.
+The ready record is committed later because it cannot contain the hash of its own commit. The assurance owner reads `VER-EX-001` and the retained evidence. After that explicit decision, the operator applies `harnessctl transition . --set VREC-EX-001=verified --decision VREC-EX-001=<actor> --apply`; this adds the decision fields and event to the VREC only. The preparation command did not make that decision.
 
 ### Separate release decision
 
@@ -127,9 +128,10 @@ RLS-EX-001.satisfies             -> REL-EX-001
 RLS-EX-001.includes_verification -> VREC-EX-001
 RLS-EX-001.releases_work         -> WO-EX-001
 RLS-EX-001.commit                -> C
+RLS-EX-001.prepared_at/by         -> preparation facts only
 ```
 
-The release owner may later transition the record to `released`. If authorized, a human or repository automation creates `v1.4.0` at **C**, not at the later governance commit. GitHub Release creation, package publication, and deployment remain separate external actions; the harness command performs none of them.
+After an explicit release-owner decision, the operator applies `harnessctl transition . --set RLS-EX-001=released --decision RLS-EX-001=<actor> --apply`; this changes the RLS only. If separately authorized, a human or repository automation creates `v1.4.0` at **C**, not at the later governance commit. GitHub Release creation, package publication, and deployment remain separate external actions; the harness command performs none of them.
 
 ### Timeline and authority
 

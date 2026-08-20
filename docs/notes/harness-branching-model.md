@@ -218,7 +218,7 @@ Here, **integrated** means present on `main`. It does not necessarily mean publi
 
 ### When assurance refuses a candidate
 
-Refusal does not remove the candidate from `main` or rewrite branch history. Its ready VREC remains unverified. If the payload is defective, the fix arrives as a later candidate under its own bounded work order, evidence, and verification record; correcting later work does not retroactively verify the earlier candidate. For a severe defect, a revert is also an append-only commit and becomes its own candidate rather than erasing the original change. See [operational phasing](harness-operational-phasing.md#when-verification-is-refused) for the VREC, evidence, release-gate, and supersession mechanics.
+Refusal does not remove the candidate from `main` or rewrite branch history. The selected VREC records `rejected` with its decision event while the related work order remains unchanged. If the payload is defective, the fix arrives as a later candidate under its own bounded work order, evidence, and verification record; correcting later work does not retroactively verify the earlier candidate. For a severe defect, a revert is also an append-only commit and becomes its own candidate rather than erasing the original change. See [operational phasing](harness-operational-phasing.md#when-verification-is-refused) for the VREC, evidence, release-gate, and supersession mechanics.
 
 ### Phase 4: select release 0.3.0
 

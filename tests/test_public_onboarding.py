@@ -132,7 +132,10 @@ class PublicOnboardingTests(unittest.TestCase):
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
         subcommands = set(re.findall(r"(?m)^harnessctl\s+([a-z][a-z-]*)\b", fenced))
-        self.assertEqual({"init", "adopt", "doctor", "validate", "inspect", "dashboard"}, subcommands)
+        self.assertEqual(
+            {"init", "adopt", "doctor", "validate", "focus", "transition", "inspect", "dashboard"},
+            subcommands,
+        )
         for forbidden in (
             "preflight",
             "upgrade",
