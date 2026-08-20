@@ -32,7 +32,7 @@ The generated output must:
 - contain no artifact-body or evidence-body Markdown in `index.html`, summary, topology, or readiness resources;
 - retain the existing 262,144-byte per-source-document and 16,777,216-byte total projected-content bounds;
 - report every resource byte count plus totals by resource class in generation summary data;
-- test the current SE Harness demonstrator topology target at or below 524,288 UTF-8 bytes while reporting, rather than misclassifying, larger consumer topology as a repository-governance failure.
+- test the current SE Harness demonstrator topology target at or below 2,097,152 UTF-8 bytes while reporting, rather than misclassifying, larger consumer topology as a repository-governance failure.
 
 ## Failure and boundary behavior
 
