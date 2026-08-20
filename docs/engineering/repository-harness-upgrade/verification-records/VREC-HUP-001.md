@@ -2,7 +2,7 @@
 id = "VREC-HUP-001"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-001"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
@@ -20,7 +20,9 @@ conforms_to = ["VER-HUP-001"]
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-HUP-001` to candidate commit `842ad90869ac153dc7aa407611992f066de78dd5`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+On 2026-08-20, after reviewing the retained evidence and green exact-candidate hosted checks, the accountable assurance owner explicitly stated `i validate VREC-HUP-001, you can transition and commit + push and PR`. That human assurance decision transitions this record from `ready` to `verified`; automation did not grant the authority. The captured candidate commit, object format, clean worktree state, capture timestamp, artifact snapshot, evidence paths, work-order coverage, and verification-contract coverage remain unchanged.
+
+This record was originally prepared as `ready`, binding retained evidence for `WO-HUP-001` to candidate commit `842ad90869ac153dc7aa407611992f066de78dd5`. The capture command did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 
