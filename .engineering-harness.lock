@@ -2,7 +2,7 @@
   "files": {
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "e619955cdcd3cd4ec7e7c8ebf16f91afc1660e1137c49990bec8a51d1ddec844"
+      "sha256": "122083cefba68aec9900606f9457744a10d96b8f48b91b4908e20e591dd5a83f"
     },
     ".github/PULL_REQUEST_TEMPLATE.md": {
       "mode": "seed",
@@ -10,7 +10,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "373947fa2ec36b1d69ee6c2fa6fe118fec8d1ed1f14ba06e11297274ed31c5f6"
+      "sha256": "a4fd7bef3b307ed6a007bf914f9ab7ab11d8591c163fb8b4cfc2736630341a43"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -26,7 +26,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "ac62721f3de8170aa60bc62273c7902926024fe2a6dcd5f9a8055e349aae7cd0"
+      "sha256": "00aa0afd3a7708aad861944169dd120daa4f3a4443169d747717ae4f3814fa42"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -140,5 +140,5 @@
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 2,
-  "tool_version": "0.5.0a1"
+  "tool_version": "0.5.0"
 }
