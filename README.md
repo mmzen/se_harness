@@ -42,7 +42,7 @@ harnessctl --version
 For a reproducible installation, select the exact release:
 
 ```powershell
-python -m pip install "se-harness==0.5.0a1"
+python -m pip install "se-harness==0.5.0"
 ```
 
 Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, and the complete upgrade procedure.
