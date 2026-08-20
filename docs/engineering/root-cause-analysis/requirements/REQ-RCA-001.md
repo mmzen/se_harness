@@ -2,7 +2,7 @@
 id = "REQ-RCA-001"
 type = "requirement"
 title = "Publish one complete canonical incident analysis"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

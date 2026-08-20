@@ -2,7 +2,7 @@
 id = "INT-RCA-001"
 type = "intent"
 title = "Retain actionable learning from the 0.5.0 governance deadlock"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

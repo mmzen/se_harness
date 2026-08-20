@@ -2,7 +2,7 @@
 id = "REQ-RCA-002"
 type = "requirement"
 title = "Retain exact recovery evidence and provenance"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner", "security-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

@@ -2,7 +2,7 @@
 id = "WO-RCA-001"
 type = "work_order"
 title = "Publish the 0.5.0 release-governance RCA"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner", "documentation-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
@@ -20,6 +20,12 @@ verification = ["VER-RCA-001"]
 +++
 
 # Work Order: Publish the 0.5.0 release-governance RCA
+
+## Authorization
+
+On 2026-08-20, the accountable owner instructed: `I approve INT-RCA-001, CAP-RCA-001, REQ-RCA-001 through REQ-RCA-003, SPEC-RCA-001, ARCH-RCA-001 including its no-significant-decision assessment, VER-RCA-001, and WO-RCA-001 for implementation`. This decision approves the complete governing chain and authorizes only the bounded local implementation below after successful start preflight. It does not authorize a candidate commit, branch push, pull-request update or readiness transition, issue edit, merge, verification transition, release, publication, deployment, or operation.
+
+The implementation agent then ran the released `0.5.0a1` evaluator outside the checkout with `harnessctl preflight . --work-order WO-RCA-001 --phase start --json`. Preflight returned `ready: true` with no diagnostics and a complete reading manifest. After reading that manifest, the agent transitioned this work order to `in_progress` before changing the authorized implementation surface.
 
 ## Objective
 
@@ -79,6 +85,10 @@ Retain the evaluator version and wheel digest; module, template, executable, and
 ## Stop and escalate conditions
 
 Stop if the packet is not approved, the technical owner rejects the decision assessment, preflight or graph validation fails, a material fact remains unresolved, a public identity differs, the RCA implies lifecycle authority, the change requires a prohibited surface, unrelated work overlaps the isolated worktree, or any requested external action lacks separate authority.
+
+## Completion record
+
+Local implementation completed on 2026-08-20 within the approved envelope. The canonical RCA, engineering index correction, active governing packet, and work-order-keyed evidence are present; immutable and public evidence reconciled; and the required local checks passed after removing ambient candidate-source test contamination. Evidence is retained in `../evidence/WO-RCA-001-verification.md`. This `implemented` transition records completed local work only. It is not a candidate commit, commit-bound verification, pull-request update, merge, release, publication, deployment, or operation decision.
 
 ## Completion report format
 

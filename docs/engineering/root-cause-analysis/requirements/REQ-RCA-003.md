@@ -2,7 +2,7 @@
 id = "REQ-RCA-003"
 type = "requirement"
 title = "Preserve retrospective non-authority and follow-up boundaries"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

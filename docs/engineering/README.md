@@ -1,6 +1,6 @@
 # SE Harness Engineering Artifact Index
 
-> Repository-owned index for the self-governing `se_harness` repository. Shared workflow, decision rights, quality gates, and traceability policy are routed from `ENGINEERING_HARNESS.md` and remain managed separately.
+> Repository-owned index for the standard governed `se_harness` repository. Shared workflow, decision rights, quality gates, and traceability policy are routed from `ENGINEERING_HARNESS.md` and remain managed separately.
 
 ## Product and governance domains
 
@@ -16,6 +16,7 @@
 - `work-order-lifecycle/`: lifecycle meanings and configured verified-work consistency.
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.
+- `root-cause-analysis/`: governed publication of non-authoritative incident learning and prevention references.
 - `operating-contract-activation/`: accountable activation and maintenance of continuing operational assurance obligations.
 - `release-contract-disposition/`: explicit disposal of unused release proposals after authoritative aggregate release.
 - `work-order-assurance-classification/`: explicit work-order applicability for commit-bound verification and derived assurance follow-up.

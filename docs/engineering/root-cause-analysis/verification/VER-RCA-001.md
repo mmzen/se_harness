@@ -2,7 +2,7 @@
 id = "VER-RCA-001"
 type = "verification"
 title = "Verify RCA completeness, evidence, and non-authority"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

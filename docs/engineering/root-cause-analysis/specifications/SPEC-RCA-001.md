@@ -2,7 +2,7 @@
 id = "SPEC-RCA-001"
 type = "specification"
 title = "Canonical 0.5.0 governance-incident RCA contract"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "documentation-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"

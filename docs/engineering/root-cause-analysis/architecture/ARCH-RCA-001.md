@@ -2,7 +2,7 @@
 id = "ARCH-RCA-001"
 type = "architecture"
 title = "Separate retrospective documentation from lifecycle authority"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
@@ -81,4 +81,4 @@ The approved formal chain may authorize creation and review of the RCA. The RCA 
 
 ## Related ADRs
 
-No ADR is proposed. This architecture applies the existing standard-repository and authority boundaries without introducing or changing a controlled significant-decision trigger. The accountable technical owner must accept this assessment before approval.
+No ADR is required. This architecture applies the existing standard-repository and authority boundaries without introducing or changing a controlled significant-decision trigger. The accountable owner explicitly accepted this no-significant-decision assessment on 2026-08-20 as part of the complete RCA packet approval.

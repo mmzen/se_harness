@@ -2,7 +2,7 @@
 id = "CAP-RCA-001"
 type = "capability"
 title = "Review evidence-backed release incident learning"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
