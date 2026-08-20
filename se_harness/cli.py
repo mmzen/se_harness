@@ -23,6 +23,15 @@ from se_harness.installer import (
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
+from se_harness.renumber import (
+    RenumberError,
+    apply_renumber_plan,
+    build_renumber_plan,
+    render_human as render_renumber_human,
+    render_human_error as render_renumber_human_error,
+    render_json as render_renumber_json,
+    render_json_error as render_renumber_json_error,
+)
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 
 
@@ -250,6 +259,25 @@ def _create_artifact(args: argparse.Namespace) -> int:
     return 0
 
 
+def _renumber_artifacts(args: argparse.Namespace) -> int:
+    try:
+        plan = build_renumber_plan(Path(args.target), args.mappings)
+        if args.apply:
+            plan = apply_renumber_plan(plan)
+        print(
+            render_renumber_json(plan, applied=args.apply)
+            if args.json
+            else render_renumber_human(plan, applied=args.apply)
+        )
+        return 0
+    except RenumberError as exc:
+        if args.json:
+            print(render_renumber_json_error(exc))
+        else:
+            print(render_renumber_human_error(exc), file=sys.stderr)
+        return 1
+
+
 def _identity(args: argparse.Namespace) -> int:
     report = inspect_runtime_identity(
         role=args.role,
@@ -353,6 +381,27 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--id", required=True, dest="artifact_id")
     create.add_argument("--dry-run", action="store_true")
     create.set_defaults(handler=_create_artifact)
+
+    renumber = commands.add_parser(
+        "renumber-artifacts",
+        help="plan or apply explicit structured artifact renumbering",
+    )
+    renumber.add_argument("target", nargs="?", default=".")
+    renumber.add_argument(
+        "--map",
+        required=True,
+        action="append",
+        dest="mappings",
+        metavar="OLD=NEW",
+        help="explicit type-compatible identifier mapping; repeat for a set",
+    )
+    renumber.add_argument("--json", action="store_true")
+    renumber.add_argument(
+        "--apply",
+        action="store_true",
+        help="apply the validated structured changes and path moves",
+    )
+    renumber.set_defaults(handler=_renumber_artifacts)
 
     identity = commands.add_parser("identity", help="emit and verify one evaluator or candidate runtime identity")
     identity.add_argument("--role", required=True, choices=("released-evaluator", "candidate-source", "candidate-package"))
