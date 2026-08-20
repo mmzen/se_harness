@@ -143,6 +143,8 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
 
     def test_specialized_product_surface_is_absent(self) -> None:
         for relative in (
+            ".github/workflows/self-hosting-governor.yml",
+            ".self-hosting/governor.toml",
             "se_harness/governor_reconciliation.py",
             "se_harness/self_hosting.py",
             "se_harness/self_hosting_policy.py",

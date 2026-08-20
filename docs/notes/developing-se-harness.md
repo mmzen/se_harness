@@ -4,7 +4,7 @@
 
 > This note applies to contributors developing `se_harness`. It grants no implementation, verification, release, publication, deployment, or repository-upgrade authority.
 
-The emergency bootstrap candidate is version 0.5.0a1. Until that exact alpha is immutably published and used for the one-time root conversion, the implementation checkout retains its legacy released controls: the active installation records 0.4.1 while the separate self-hosted governor descriptor still selects 0.3.0. Candidate source and packages are evidence only and must not create artifacts, run root preflight, or manage lifecycle state. After conversion, the checkout uses the ordinary standard released-evaluator lifecycle with no self-hosting installation profile, governor descriptor, or special promotion command.
+The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted governor controls. The checkout now uses the ordinary standard released-evaluator lifecycle with no self-hosting installation profile, governor descriptor, or special promotion command. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
 ## Development environment
 

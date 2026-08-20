@@ -464,7 +464,6 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.workflow = (REPOSITORY_ROOT / ".github" / "workflows" / "publish-pypi.yml").read_text(encoding="utf-8")
         cls.pages = (REPOSITORY_ROOT / ".github" / "workflows" / "publish-dashboard-pages.yml").read_text(encoding="utf-8")
-        cls.self_hosting = (REPOSITORY_ROOT / ".github" / "workflows" / "self-hosting-governor.yml").read_text(encoding="utf-8")
         cls.resolver = (REPOSITORY_ROOT / ".github" / "scripts" / "publish_release.py").read_text(encoding="utf-8")
 
     def test_normal_workflow_has_one_main_only_input_and_stable_publisher_identity(self) -> None:
@@ -489,7 +488,8 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertEqual(1, pypi.count("id-token: write"))
 
     def test_repository_policy_is_explicit_and_imported_only_from_trusted_main(self) -> None:
-        self.assertIn("python scripts/validate_release_distributions.py", self.self_hosting)
+        self.assertIn("Check out trusted main history", self.workflow)
+        self.assertIn("python scripts/validate_release_distributions.py", self.workflow)
         self.assertIn("--require-record \"$RELEASE_RECORD\"", self.workflow)
         self.assertIn(
             "from repository_tools.release_distribution import",

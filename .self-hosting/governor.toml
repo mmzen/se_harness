@@ -1,8 +1,0 @@
-schema = 1
-version = "0.3.0"
-tag = "v0.3.0"
-wheel = "se_harness-0.3.0-py3-none-any.whl"
-url = "https://github.com/mmzen/se_harness/releases/download/v0.3.0/se_harness-0.3.0-py3-none-any.whl"
-sha256 = "260e22371b05e5bb6c59143a1f0229855305a6bf7994984be50aa147a02ea516"
-selected_release_record = "RLS-SEH-005"
-selected_candidate_commit = "dd06660a94f06d934adb1df0352b81e709f2ffd3"
