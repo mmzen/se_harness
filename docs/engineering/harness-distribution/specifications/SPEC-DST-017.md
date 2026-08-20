@@ -78,7 +78,7 @@ Repository content remains inert and untrusted. Route decoding cannot create HTM
 
 ## Performance and capacity
 
-The generated `index.html` hard limit is 262,144 UTF-8 bytes before compression. Summary, topology, artifact/evidence source, and total-content limits remain unchanged. The new template requires no build step or runtime framework.
+The generated `index.html` hard limit is 262,144 UTF-8 bytes before compression. Summary, artifact/evidence source, and total-content limits remain unchanged. The current repository topology acceptance target is 2,097,152 UTF-8 bytes before compression. The new template requires no build step or runtime framework.
 
 ## Observability
 

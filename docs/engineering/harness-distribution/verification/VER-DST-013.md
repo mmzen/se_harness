@@ -60,7 +60,7 @@ Verification treats the generated directory, manifest, bootstrap, and Pages inpu
 
 ## Performance and resilience checks
 
-- Measure UTF-8 bytes before compression: `index.html <= 262144`, summary `<= 262144`, and current repository topology `<= 524288`.
+- Measure UTF-8 bytes before compression: `index.html <= 262144`, summary `<= 262144`, and current repository topology `<= 2097152`.
 - Retain 262,144-byte per-document and 16,777,216-byte total-content behavior with deterministic whole-document omission.
 - Record per-role counts/totals, largest resource, and full output size in generation summary without a score.
 - Generate larger consumer topology to prove target excess is observational while hard shell/content violations fail before promotion.

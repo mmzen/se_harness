@@ -12,13 +12,14 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
+CANDIDATE_SCRIPTS = ROOT / "templates/repository/standard/scripts"
+MANAGED_GENERATOR = ROOT / "scripts/generate_harness_dashboard.py"
+if str(CANDIDATE_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(CANDIDATE_SCRIPTS))
 
 GENERATOR_SPEC = importlib.util.spec_from_file_location(
     "dashboard_webui_generator",
-    SCRIPTS / "generate_harness_dashboard.py",
+    CANDIDATE_SCRIPTS / "generate_harness_dashboard.py",
 )
 if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
     raise RuntimeError("dashboard generator is unavailable")
@@ -82,6 +83,26 @@ class DashboardWebUIContractTests(unittest.TestCase):
     def setUp(self) -> None:
         self.template = ROOT / "scripts/harness_explorer/index.template.html"
         self.canonical = ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html"
+
+    def test_candidate_topology_target_is_independent_from_the_managed_root(self) -> None:
+        candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(
+            encoding="utf-8"
+        )
+        managed_text = MANAGED_GENERATOR.read_text(encoding="utf-8")
+        self.assertEqual(2_097_152, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
+        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", candidate_text)
+        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 524_288", managed_text)
+        self.assertNotIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", managed_text)
+
+    def test_topology_target_boundary_is_strict_and_bounded(self) -> None:
+        target = GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES
+        for topology_bytes, expected in (
+            (target - 1, False),
+            (target, False),
+            (target + 1, True),
+        ):
+            with self.subTest(topology_bytes=topology_bytes):
+                self.assertEqual(expected, GENERATOR.topology_target_exceeded(topology_bytes))
 
     def test_templates_preserve_the_reviewed_3d_design_and_canonical_boundary(self) -> None:
         content = self.template.read_text(encoding="utf-8")

@@ -56,7 +56,7 @@ MAX_CONTENT_DOCUMENT_BYTES = 262_144
 MAX_CONTENT_TOTAL_BYTES = 16_777_216
 MAX_INDEX_BYTES = 262_144
 MAX_SUMMARY_BYTES = 262_144
-TOPOLOGY_ACCEPTANCE_BYTES = 524_288
+TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
 ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
 ACTIVE_WORK_ORDER_STATUSES = ACTIVE_COVERAGE_STATUSES
 IMPLEMENTED_STATUSES = {"implemented", "verified", "released"}
@@ -1571,6 +1571,11 @@ def _public_descriptor(descriptor: dict[str, Any]) -> dict[str, Any]:
     return dict(descriptor)
 
 
+def topology_target_exceeded(topology_bytes: int) -> bool:
+    """Return whether a compact topology exceeds the repository target."""
+    return topology_bytes > TOPOLOGY_ACCEPTANCE_BYTES
+
+
 def build_dashboard_bundle(
     snapshot: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, str], dict[str, Any]]:
@@ -1819,7 +1824,7 @@ def build_dashboard_bundle(
         "resource_count": len(resource_descriptors),
         "resource_bytes": sum(int(item["bytes"]) for item in resource_descriptors),
         "largest_resource": _public_descriptor(largest) if largest is not None else None,
-        "topology_target_exceeded": entrypoints["topology"]["bytes"] > TOPOLOGY_ACCEPTANCE_BYTES,
+        "topology_target_exceeded": topology_target_exceeded(entrypoints["topology"]["bytes"]),
     }
     return bootstrap, manifest, resource_files, observations
 

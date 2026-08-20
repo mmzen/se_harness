@@ -82,6 +82,12 @@ Explicit artifact-collision recovery extension:
 
 The approved packet governs the implemented plan-by-default `harnessctl renumber-artifacts` command for explicit pre-assurance identifier mappings. It transactionally changes parsed identities, typed relations, and mapped paths; reports free-form hard references for manual review and change; preserves retained evidence contents byte-for-byte; blocks any selected artifact referenced by a VREC or RLS; and leaves reviewable uncommitted changes. Identifier allocation, ref scanning, PR collision detection, VREC/RLS renumbering, semantic text rewriting, commits, and external actions remain outside the implementation.
 
+Topology acceptance headroom amendment:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-062..064` -> `SPEC-DST-020`, `ARCH-DST-013`, `VER-DST-020` -> `WO-DST-020`.
+
+The implemented packet raises only the candidate distribution's SE Harness topology acceptance target from 524,288 to 2,097,152 UTF-8 bytes. It preserves bundle-v2 data and integrity, every other content budget, the existing no-sharding architecture, and the independently installed public-0.5.0 managed root. Commit, VREC, release, root upgrade, and external actions remain separate decisions.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.

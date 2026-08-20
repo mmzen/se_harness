@@ -93,7 +93,7 @@ Treat all repository content and paths as untrusted. Preserve path containment, 
 - summary maximum: 262,144 UTF-8 bytes.
 - artifact/evidence source maximum: existing 262,144 bytes each.
 - combined projected-content maximum: existing 16,777,216 bytes.
-- current repository topology acceptance target: 524,288 bytes, measured before HTTP compression.
+- current repository topology acceptance target: 2,097,152 bytes, measured before HTTP compression.
 - Larger consumer topology is reported, not treated as a formal-graph error; topology sharding requires separate authority.
 
 ## Observability

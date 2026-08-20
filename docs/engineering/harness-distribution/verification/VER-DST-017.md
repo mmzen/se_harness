@@ -61,7 +61,7 @@ Verification derives expected semantics from the approved requirements, existing
 
 ## Performance and resilience checks
 
-- Measure `index.html <= 262144`, summary `<= 262144`, topology target `<= 524288`, per-document `<= 262144`, and total projected content `<= 16777216` before compression.
+- Measure `index.html <= 262144`, summary `<= 262144`, topology target `<= 2097152`, per-document `<= 262144`, and total projected content `<= 16777216` before compression.
 - Repeat deterministic generation and transactional failure/rollback tests.
 - Confirm the 20-entry Lineage history, 100-node context bounds, density cap, request cache and retry boundaries remain bounded.
 
