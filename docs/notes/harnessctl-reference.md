@@ -29,6 +29,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
+| `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC | bind selected work, verification contracts, evidence, snapshot, and exact clean `HEAD` |
@@ -89,6 +90,23 @@ harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-r
 ```
 
 Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. Existing valid flat layouts remain discoverable and are not automatically migrated.
+
+## Explicit artifact renumbering
+
+```text
+harnessctl renumber-artifacts [TARGET] \
+  --map OLD=NEW [--map OLD=NEW ...] [--json] [--apply]
+```
+
+The command requires an ordinary clean Git worktree and a full `HEAD`. Every mapping is explicit, one-to-one, type-compatible, and destination-disjoint; the command does not allocate an identifier, infer a related chain, inspect other refs, or reserve the result. Plan mode is the default and writes nothing. `--apply` changes only selected formal `id` fields, parsed typed relations, and exact mapped path components through a recoverable transaction, then validates the resulting graph and leaves an uncommitted diff.
+
+Free-form artifact bodies, documentation, source, and tests are not rewritten automatically. Human and JSON output instead separate:
+
+- `manual_references`, with the resulting repository path, line, and column for semantic review and manual change or disposition;
+- `preserved_evidence_references`, whose captured bytes remain unchanged and should not be rewritten; and
+- `unsupported_references`, for binary or non-UTF-8 paths requiring manual inspection.
+
+When manual or unsupported references remain, output sets `manual_action_required = true` and `repository_repair_complete = false` even after the structured transaction succeeds. Any selected identifier referenced by a verification or release record blocks the operation. Eligible selected artifacts are limited to `draft`, `approved`, `in_progress`, or `implemented`; later lifecycle and commit-bound history require accountable disposition rather than renumbering.
 
 ## Runtime identity
 
