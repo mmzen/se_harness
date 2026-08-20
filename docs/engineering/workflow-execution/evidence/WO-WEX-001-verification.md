@@ -52,7 +52,7 @@ python -m unittest tests.test_workflow_execution -v
 
 Result: PASS. Final focused run: `Ran 29 tests in 25.466s`; `OK (skipped=1)`. The scenarios include exact WO/VREC/RLS scope, agent-host and human/JSON conformance, repository-blocker classification, lifecycle-plane independence, hostile content and path inputs, full read-set concurrency, transaction-boundary failure injection, and deterministic scale checks. The file-symlink scenario is skipped on this Windows host because the process lacks the symlink privilege; lexical and case/identity path boundaries still execute.
 
-### Complete candidate-source suite
+### Initial complete candidate-source suite
 
 ```text
 python -m unittest discover -s tests -p "test_*.py"
@@ -84,7 +84,7 @@ WO-WEX-001 focus JSON SHA-256: 3881cba81600e7649ecbd0878bdf83994db2177ad461b1660
 
 The baseline commit is not represented as the candidate identity because the implementation is intentionally uncommitted. Candidate-source, future candidate-package, and released-evaluator identities remain separate.
 
-### Candidate artifact graph
+### Initial candidate artifact graph
 
 ```text
 python -m se_harness validate .
@@ -100,7 +100,7 @@ python -m se_harness focus . --artifact WO-WEX-001 --json
 
 Result: PASS. The governing set is exactly `INT-WEX-001`, `CAP-WEX-001`, `REQ-WEX-001..005`, `SPEC-WEX-001`, `ARCH-WEX-001`, `ADR-WEX-001`, and `VER-WEX-001`; the 44 unrelated warnings are one `WEX190` background summary and produce no current-scope action.
 
-### Released evaluator integrity
+### Initial released evaluator integrity
 
 ```text
 ..\work\se_harness-evaluator-venv\Scripts\python.exe -I -m se_harness --version
@@ -108,6 +108,42 @@ Result: PASS. The governing set is exactly `INT-WEX-001`, `CAP-WEX-001`, `REQ-WE
 ```
 
 Result: PASS. Released evaluator version `0.5.0a1` on Python `3.14.6`; every required, distribution, managed-lock, and seed check passed. Fifteen historical `W013` location advisories remained non-blocking. This proves candidate template changes did not overwrite the root managed installation.
+
+### Post-rebase candidate qualification
+
+After commit authority was granted, the implementation was committed and rebased without conflict onto current `origin/main` at `db854b768a7ee428c6332ab7ce9613ef66fdb126`. The exact clean implementation commit qualified below is `5f220a6c810a48da90ecda8746360445a0503c31`. Upstream's artifact-renumbering command and WEX's focus/transition commands are all present after the additive merge.
+
+```text
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+Result: PASS on the rebased commit. `Ran 308 tests in 134.059s`; `OK (skipped=5)`. The larger count includes the upstream renumbering suite. The same four existing platform/fixture skips and one WEX file-symlink privilege skip remain.
+
+The rebased scale medians were:
+
+| Formal artifacts | Validation | Focus | Transition plan |
+| ---: | ---: | ---: | ---: |
+| 100 | 0.050106 s | 0.052096 s | 0.115066 s |
+| 500 | 0.231495 s | 0.232071 s | 0.529292 s |
+| 1,000 | 0.453318 s | 0.474609 s | 1.056063 s |
+
+```text
+python -m se_harness validate .
+```
+
+Result: PASS on the combined current graph: `560` artifacts, `0` errors, and the same `44` unrelated maintenance warnings.
+
+The upstream harness upgrade made public `se-harness==0.5.0` the current released evaluator. The former 0.5.0a1 environment failed safely on the three expected upgraded managed-distribution files. A new external isolated environment installed the immutable public 0.5.0 wheel, outside the checkout, then ran:
+
+```text
+..\work\se_harness-0.5.0-evaluator-venv\Scripts\python.exe -I -m se_harness --version
+..\work\se_harness-0.5.0-evaluator-venv\Scripts\python.exe -I -m se_harness doctor .
+..\work\se_harness-0.5.0-evaluator-venv\Scripts\python.exe -I -m se_harness preflight . --work-order WO-WEX-001 --phase review --json
+```
+
+Result: PASS. The evaluator reported version `0.5.0`; every required, distribution, lock, managed, script, and seed check passed; the 15 inherited W013 advisories remained non-blocking. Review preflight reported `ready = true`, no diagnostics, the exact WEX governing manifest, and honest work-order state `in_progress`.
+
+No candidate package was built or accepted. Commit/push/PR authority did not broaden the work order into a distribution-build or assurance decision.
 
 ### Rejected-requirement negative proof and diff hygiene
 
