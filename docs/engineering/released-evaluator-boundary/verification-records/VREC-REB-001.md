@@ -1,0 +1,25 @@
++++
+id = "VREC-REB-001"
+type = "verification_record"
+title = "Verification candidate for WO-REB-001"
+status = "ready"
+owners = ["quality-owner"]
+created = "2026-08-21"
+updated = "2026-08-21"
+commit = "5ef3970a0b50b526b11c006c332dd6cb85c12edd"
+git_object_format = "sha1"
+worktree_state = "clean"
+verified_at = "2026-08-21T09:31:26Z"
+artifact_snapshot_sha256 = "3b45103abace292421a093cb379d4ba014570d5e08f946ee92ee51478970fb91"
+evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-001-implementation.md"]
+
+[relations]
+verifies_work_order = ["WO-REB-001"]
+conforms_to = ["VER-REB-001"]
++++
+
+# Verification Record Candidate
+
+This ready record binds retained evidence for `WO-REB-001` to candidate commit `5ef3970a0b50b526b11c006c332dd6cb85c12edd`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+
+The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
