@@ -46,7 +46,7 @@ READINESS_RESOURCE_SCHEMA = "harness-dashboard-readiness-v2"
 ARTIFACT_RESOURCE_SCHEMA = "harness-dashboard-artifact-v2"
 GENERATION_SCHEMA = "harness-dashboard-generation-v2"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v8"
+FINDING_RULES_VERSION = "harness-findings-v9"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -924,6 +924,107 @@ def build_findings(
                     [source["id"], *possible_successors],
                     [artifacts[source["id"]]["path"], *(artifacts[item]["path"] for item in possible_successors)],
                     [f"possible_successors={','.join(possible_successors)}"],
+                )
+            )
+
+    release_entries = [entry for entry in revision_provenance if entry["kind"] == "release"]
+    proposed_releases = [
+        entry for entry in release_entries if entry["status"] in {"draft", "ready"} and entry["version"]
+    ]
+    proposals_by_version: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for entry in proposed_releases:
+        proposals_by_version[str(entry["version"])].append(entry)
+    for version, proposals in sorted(proposals_by_version.items()):
+        if len(proposals) < 2:
+            continue
+        proposals = sorted(proposals, key=lambda item: item["id"])
+        findings.append(
+            _finding(
+                "W-REB-001",
+                "warning",
+                f"Multiple draft or ready release records declare version {version}; accountable release review is required without automatic selection.",
+                [entry["id"] for entry in proposals],
+                [artifacts[entry["id"]]["path"] for entry in proposals],
+                [
+                    f"version={version}",
+                    *(f"{entry['id']}:commit={entry['commit'] or 'unavailable'}" for entry in proposals),
+                ],
+            )
+        )
+
+    ready_verifications = sorted(
+        (entry for entry in verification_entries if entry["status"] == "ready"),
+        key=lambda item: item["id"],
+    )
+    for index, left in enumerate(ready_verifications):
+        for right in ready_verifications[index + 1 :]:
+            overlap = sorted(set(left["work_orders"]) & set(right["work_orders"]))
+            if not overlap or not left["commit"] or not right["commit"] or left["commit"] == right["commit"]:
+                continue
+            findings.append(
+                _finding(
+                    "W-REB-002",
+                    "warning",
+                    "Ready verification records at different commits overlap work-order coverage without a governed supersession disposition.",
+                    [left["id"], right["id"], *overlap],
+                    [artifacts[left["id"]]["path"], artifacts[right["id"]]["path"]],
+                    [
+                        f"{left['id']}:commit={left['commit']}",
+                        f"{right['id']}:commit={right['commit']}",
+                        f"overlap={','.join(overlap)}",
+                    ],
+                )
+            )
+
+    active_contract_ids = {
+        artifact["id"]
+        for artifact in normalized_artifacts
+        if artifact["type"] == "release_contract"
+        and artifact["status"] not in {"rejected", "superseded"}
+    }
+    gates_by_contract: dict[str, set[str]] = defaultdict(set)
+    for relation in relations:
+        if (
+            relation["target_exists"]
+            and relation["relation"] == "gates"
+            and relation["source"] in active_contract_ids
+            and artifacts.get(relation["target"], {}).get("type") == "work_order"
+        ):
+            gates_by_contract[relation["source"]].add(relation["target"])
+    for index, left in enumerate(proposed_releases):
+        for right in proposed_releases[index + 1 :]:
+            work_overlap = sorted(set(left["work_orders"]) & set(right["work_orders"]))
+            if not work_overlap or left["version"] != right["version"]:
+                continue
+            competing: list[str] = []
+            for left_contract in left["contracts"]:
+                for right_contract in right["contracts"]:
+                    gate_overlap = sorted(
+                        gates_by_contract[left_contract] & gates_by_contract[right_contract]
+                    )
+                    if left_contract != right_contract and gate_overlap:
+                        competing.append(
+                            f"{left_contract}/{right_contract}:gates={','.join(gate_overlap)}"
+                        )
+            if not competing:
+                continue
+            contract_ids = sorted(set(left["contracts"]) | set(right["contracts"]))
+            findings.append(
+                _finding(
+                    "W-REB-003",
+                    "warning",
+                    "Active release contracts and associated proposals compete for the same version and governed work.",
+                    [left["id"], right["id"], *contract_ids, *work_overlap],
+                    [
+                        artifacts[item]["path"]
+                        for item in [left["id"], right["id"], *contract_ids]
+                        if item in artifacts
+                    ],
+                    [
+                        f"version={left['version']}",
+                        f"work_overlap={','.join(work_overlap)}",
+                        *competing,
+                    ],
                 )
             )
 

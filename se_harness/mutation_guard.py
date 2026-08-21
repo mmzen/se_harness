@@ -14,6 +14,12 @@ from se_harness.evaluator_evidence import EvaluatorEvidence, build_evaluator_evi
 from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
 from se_harness.installer import CONFIG_NAME, HarnessError, ensure_target, load_lock, safe_destination
 from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identity
+from se_harness.upgrade_authorization import (
+    UpgradeAuthorization,
+    UpgradeAuthorizationError,
+    evaluator_transition_required,
+    load_upgrade_authorization,
+)
 
 
 PUBLIC_MUTATION_OPERATIONS = frozenset(
@@ -34,6 +40,7 @@ class MutationAuthority:
     operation: str
     identity: RuntimeIdentity
     evidence: EvaluatorEvidence
+    upgrade_authorization: UpgradeAuthorization | None = None
 
     @property
     def evidence_bytes(self) -> bytes:
@@ -94,6 +101,7 @@ def require_mutation_authority(
     operation: str,
     allow_upgrade_transition: bool = False,
     require_archive: bool = False,
+    upgrade_work_order: str | None = None,
 ) -> MutationAuthority:
     """Prove released-evaluator identity before an installed-root write."""
 
@@ -126,7 +134,26 @@ def require_mutation_authority(
             payload_sha256=target_identity.payload_sha256,
             archive_sha256=target_identity.archive_sha256,
         )
+        upgrade_authorization = None
+        if evaluator_transition_required(lock, target_identity) or upgrade_work_order is not None:
+            if upgrade_work_order is None:
+                raise _failure(
+                    "MG007",
+                    operation,
+                    "evaluator identity transition requires a separately approved --work-order packet",
+                )
+            try:
+                lock_bytes = (root / ".engineering-harness.lock").read_bytes()
+                upgrade_authorization = load_upgrade_authorization(
+                    root,
+                    work_order=upgrade_work_order,
+                    old_lock_bytes=lock_bytes,
+                    target_identity=target_identity,
+                )
+            except (OSError, UpgradeAuthorizationError) as exc:
+                raise _failure("MG007", operation, str(exc)) from exc
     else:
+        upgrade_authorization = None
         if lock.get("schema") != 3:
             raise _failure(
                 "MG002",
@@ -164,4 +191,4 @@ def require_mutation_authority(
         evidence = build_evaluator_evidence(report)
     except ValueError as exc:
         raise _failure("MG006", operation, f"cannot canonicalize evaluator evidence: {exc}") from exc
-    return MutationAuthority(operation, report, evidence)
+    return MutationAuthority(operation, report, evidence, upgrade_authorization)

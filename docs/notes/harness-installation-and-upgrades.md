@@ -123,6 +123,14 @@ harnessctl upgrade C:\path\to\repository --apply
 harnessctl doctor C:\path\to\repository
 ```
 
+The command above remains sufficient for same-identity managed repair. If apply would change evaluator identity, it stops unless a separate approved or in-progress evaluator-upgrade work order binds the exact prior lock and immutable target identity. After reviewing the plan, the authorized transition uses a work-order-keyed evidence destination:
+
+```powershell
+harnessctl upgrade C:\path\to\repository --apply --work-order WO-... --evidence-output docs/engineering/DOMAIN/evidence/WO-...-evaluator-upgrade.json
+```
+
+Product implementation or release authorization does not authorize this later root adoption. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md) for the maintainer-only deadlock procedure and disposable rehearsal.
+
 The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
 
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.

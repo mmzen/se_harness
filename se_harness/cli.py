@@ -32,6 +32,7 @@ from se_harness.renumber import (
     render_json as render_renumber_json,
     render_json_error as render_renumber_json_error,
 )
+from se_harness.recovery_rehearsal import RecoveryRehearsalError, run_recovery_rehearsal
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 
 
@@ -117,8 +118,33 @@ def _upgrade(args: argparse.Namespace) -> int:
                 file=sys.stderr,
             )
         return 1
-    apply_changes(target, changes, old_lock, allow_updates=True)
+    apply_changes(
+        target,
+        changes,
+        old_lock,
+        allow_updates=True,
+        upgrade_work_order=args.work_order,
+        evidence_output=Path(args.evidence_output) if args.evidence_output else None,
+    )
     print(f"upgraded managed files to se-harness {__version__}")
+    if args.evidence_output:
+        print(f"retained evaluator-upgrade evidence at {args.evidence_output}")
+    return 0
+
+
+def _rehearse_recovery(args: argparse.Namespace) -> int:
+    output = Path(args.output)
+    try:
+        report = run_recovery_rehearsal(
+            output,
+            operational_repository=Path(args.repository),
+            candidate_commit=args.candidate_commit,
+            target_version=args.target_version,
+        )
+    except RecoveryRehearsalError as exc:
+        raise HarnessError(str(exc)) from exc
+    print(f"recovery rehearsal: {report['result'].upper()}")
+    print(f"report: {(output.resolve() / 'rehearsal-report.json')}")
     return 0
 
 
@@ -366,7 +392,19 @@ def build_parser() -> argparse.ArgumentParser:
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
     upgrade.add_argument("target", nargs="?", default=".")
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
+    upgrade.add_argument("--work-order", help="separately approved evaluator-upgrade work order for an identity transition")
+    upgrade.add_argument("--evidence-output", help="WO-keyed repository JSON path for evaluator-transition evidence")
     upgrade.set_defaults(handler=_upgrade)
+
+    rehearse = commands.add_parser(
+        "rehearse-recovery",
+        help="run a no-network evaluator-recovery rehearsal in a disposable directory",
+    )
+    rehearse.add_argument("output", help="absent or empty directory outside the operational repository")
+    rehearse.add_argument("--repository", default=".", help="operational repository that must remain unchanged")
+    rehearse.add_argument("--candidate-commit", required=True, help="full synthetic immutable candidate commit")
+    rehearse.add_argument("--target-version", default="999.0.0", help="synthetic target evaluator version")
+    rehearse.set_defaults(handler=_rehearse_recovery)
 
     scaffold = commands.add_parser("scaffold-domain", help="safely create the canonical organization for one engineering domain")
     scaffold.add_argument("target", nargs="?", default=".")
