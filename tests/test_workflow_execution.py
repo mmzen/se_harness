@@ -17,6 +17,7 @@ from unittest import mock
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow import apply_transition, focus, plan_transition
+from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
 
 
@@ -27,6 +28,19 @@ class WorkflowExecutionTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
         code, _, error = self.invoke("init", str(self.root), "--project-name", "Workflow Fixture")
         self.assertEqual(0, code, error)
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"]["archive_name"] = (
+            f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
+        )
+        lock["evaluator"]["archive_sha256"] = "a" * 64
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        guard.start()
+        self.addCleanup(guard.stop)
         create_base_chain(self.root, operating_contract_status="draft")
 
     def invoke(self, *arguments: str) -> tuple[int, str, str]:
@@ -56,6 +70,15 @@ evidence_paths = ["docs/engineering/product/evidence/WO-001-verification.md"]'''
 
     def ready_rls(self) -> Path:
         path = self.root / "docs/engineering/product/releases/RLS-001.md"
+        evaluator_evidence = "docs/engineering/product/evidence/RLS-001-evaluator.json"
+        authority = trusted_mutation_authority(
+            self.root,
+            operation="prepare-release",
+            require_archive=True,
+        )
+        evidence_path = self.root / evaluator_evidence
+        evidence_path.parent.mkdir(parents=True, exist_ok=True)
+        evidence_path.write_bytes(authority.evidence_bytes)
         content = formal(
             "RLS-001",
             "release_record",
@@ -70,6 +93,8 @@ commit = "{'a' * 40}"
 git_object_format = "sha1"
 prepared_at = "2026-08-20T11:00:00Z"
 prepared_by = "release-owner"
+evaluator_evidence_path = "{evaluator_evidence}"
+evaluator_evidence_sha256 = "{authority.evidence_sha256}"
 tag = "v1.0.0"''',
         ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
         write(path, content)

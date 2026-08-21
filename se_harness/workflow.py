@@ -897,8 +897,10 @@ def _replace(staged: Path, target: Path) -> None:
 
 
 def apply_transition(plan: TransitionPlan) -> None:
+    from se_harness import mutation_guard
     from se_harness.workflow_compliance import ensure_governed_checkpoint
 
+    mutation_guard.require_mutation_authority(plan.root, operation="transition-apply")
     ensure_governed_checkpoint(plan.root, plan.result["selection"]["artifacts"])
     selected = {write.path: write.artifact_id for write in plan.writes}
     for planned_input in plan.inputs:

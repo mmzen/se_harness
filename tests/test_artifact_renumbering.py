@@ -12,6 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 import se_harness.renumber as renumber
+from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.cli import main
 from se_harness.renumber import RenumberError, normalize_mappings
 
@@ -20,6 +21,12 @@ class ArtifactRenumberingTests(unittest.TestCase):
     def setUp(self) -> None:
         if shutil.which("git") is None:
             self.skipTest("Git is required")
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Renumber Sample")[0])

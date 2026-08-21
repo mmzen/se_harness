@@ -14,7 +14,8 @@ from pathlib import Path
 from se_harness import __version__
 from se_harness.cli import build_parser, main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, sha256, template_root, tracked_content
-from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, IntegrityError, canonical_sha256, canonical_text_bytes, digest_for_schema, parse_lock
+from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, IntegrityError, canonical_sha256, canonical_text_bytes, digest_for_schema, parse_lock
+from tests.mutation_guard_support import trusted_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,12 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 class HarnessCtlTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 
@@ -64,6 +71,7 @@ class HarnessCtlTests(unittest.TestCase):
         lock["schema"] = 1
         lock.pop("hash_algorithm", None)
         lock.pop("hash_mode", None)
+        lock.pop("evaluator", None)
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         return lock
 
@@ -99,6 +107,27 @@ class HarnessCtlTests(unittest.TestCase):
             parse_lock('{"schema": true, "files": {}}')
         with self.assertRaisesRegex(IntegrityError, "unsupported lock hash mode"):
             parse_lock('{"schema": 2, "hash_algorithm": "sha256", "hash_mode": "unknown", "files": {}}')
+        valid = {
+            "schema": 3,
+            "tool_version": "1.2.3",
+            "hash_algorithm": "sha256",
+            "hash_mode": "utf8-text-lf-v1",
+            "evaluator": {
+                "version": "1.2.3",
+                "payload_manifest": "se-harness-installed-payload-v1",
+                "payload_sha256": "a" * 64,
+            },
+            "files": {},
+        }
+        self.assertEqual(valid, parse_lock(json.dumps(valid)))
+        invalid = json.loads(json.dumps(valid))
+        invalid["evaluator"]["archive_name"] = "se_harness-1.2.3-py3-none-any.whl"
+        with self.assertRaisesRegex(IntegrityError, "must appear together"):
+            parse_lock(json.dumps(invalid))
+        invalid = json.loads(json.dumps(valid))
+        invalid["evaluator"]["unexpected"] = "value"
+        with self.assertRaisesRegex(IntegrityError, "unknown evaluator lock field"):
+            parse_lock(json.dumps(invalid))
 
     def test_init_installs_complete_valid_harness_and_dashboard(self) -> None:
         target = self.root / "new-repository"
@@ -372,13 +401,20 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("schema_version = 2", migrated)
         self.assertIn("[revision_provenance]", migrated)
         migrated_lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        self.assertEqual(2, migrated_lock["schema"])
+        self.assertEqual(LOCK_SCHEMA, migrated_lock["schema"])
         self.assertEqual(HASH_MODE, migrated_lock["hash_mode"])
+        self.assertEqual(__version__, migrated_lock["evaluator"]["version"])
+        self.assertRegex(migrated_lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
         self.assert_portable_release_surfaces(target)
 
-    def test_schema_two_doctor_and_upgrade_ignore_newline_representation(self) -> None:
+    def test_schema_two_is_readable_and_upgrade_migrates_identity(self) -> None:
         target = self.root / "portable-newlines"
         self.assertEqual(0, self.invoke("init", str(target))[0])
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["schema"] = 2
+        lock.pop("evaluator")
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         for relative in ("docs/engineering/WORKFLOW.md", "AGENTS.md"):
             path = target / relative
             path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
@@ -392,6 +428,13 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         self.assertNotIn("docs/engineering/WORKFLOW.md", output)
         self.assertNotIn("AGENTS.md", output)
+        self.assertEqual(2, json.loads(lock_path.read_text(encoding="utf-8"))["schema"])
+
+        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        self.assertEqual(0, code, error)
+        migrated = json.loads(lock_path.read_text(encoding="utf-8"))
+        self.assertEqual(LOCK_SCHEMA, migrated["schema"])
+        self.assertEqual(__version__, migrated["evaluator"]["version"])
 
     def test_schema_one_canonical_advisory_migrates_safely(self) -> None:
         target = self.root / "legacy-newlines"
@@ -407,7 +450,7 @@ class HarnessCtlTests(unittest.TestCase):
         code, _, error = self.invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(2, lock["schema"])
+        self.assertEqual(LOCK_SCHEMA, lock["schema"])
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
         self.assertEqual(HASH_MODE, lock["hash_mode"])
 
@@ -467,7 +510,7 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
 
-    def test_doctor_detects_stale_schema_two_digest(self) -> None:
+    def test_doctor_detects_stale_canonical_lock_digest(self) -> None:
         target = self.root / "stale-lock"
         self.assertEqual(0, self.invoke("init", str(target))[0])
         lock_path = target / ".engineering-harness.lock"
@@ -549,9 +592,11 @@ class HarnessCtlTests(unittest.TestCase):
         target.mkdir()
         self.assertEqual(0, self.invoke("adopt", str(target))[0])
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(2, lock["schema"])
+        self.assertEqual(LOCK_SCHEMA, lock["schema"])
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
         self.assertEqual(HASH_MODE, lock["hash_mode"])
+        self.assertEqual(__version__, lock["evaluator"]["version"])
+        self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
         self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
         self.assertIn("scripts/inspect_engineering_artifacts.py", lock["files"])
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])

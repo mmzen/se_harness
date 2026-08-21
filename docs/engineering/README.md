@@ -17,6 +17,7 @@
 - `instruction-architecture/`: canonical agent routing, ownership modes, preflight, and independent CI enforcement.
 - `self-hosting-boundary/`: separation of the released governing harness from candidate source and candidate-package acceptance.
 - `root-cause-analysis/`: governed publication of non-authoritative incident learning and prevention references.
+- `released-evaluator-boundary/`: issue #81 prevention definitions for standard released-evaluator identity, pre-write mutation exclusion, release-readiness provenance, and bounded recovery.
 - `repository-harness-upgrade/`: standard-root transition from the released bootstrap evaluator to exact public se-harness 0.5.0.
 - `operating-contract-activation/`: accountable activation and maintenance of continuing operational assurance obligations.
 - `release-contract-disposition/`: explicit disposal of unused release proposals after authoritative aggregate release.

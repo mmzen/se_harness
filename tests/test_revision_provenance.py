@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +21,7 @@ if str(SCRIPTS) not in sys.path:
 from generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
 from inspect_engineering_artifacts import build_inspection  # noqa: E402
 from validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
+from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 
 from se_harness.cli import main  # noqa: E402
 from se_harness.preflight import _load_validator_module  # noqa: E402
@@ -638,6 +640,12 @@ class RevisionValidatorTests(unittest.TestCase):
 
 class RevisionCliTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
 
@@ -663,6 +671,12 @@ class RevisionCliTests(unittest.TestCase):
 
     def initialize_candidate(self, *, aggregate: bool = False) -> str:
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Revision Sample")[0])
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        evaluator = lock["evaluator"]
+        evaluator["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
+        evaluator["archive_sha256"] = "a" * 64
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         create_base_chain(self.root, operating_contract_status="draft")
         if aggregate:
             create_additional_chain(self.root)
@@ -700,7 +714,12 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
 
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(vrec_path))
+        evaluator_evidence = self.root / "docs/engineering/product/evidence/VREC-001-evaluator.json"
+        self.assertTrue(evaluator_evidence.is_file())
+        self.git(
+            "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
+            "add", str(vrec_path), str(evaluator_evidence),
+        )
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
         governance = self.git("rev-parse", "HEAD")
         self.assertNotEqual(candidate, governance)
@@ -730,6 +749,105 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual("", self.git("tag", "--list"))
         self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
+        validator = self.root / "scripts/validate_engineering_artifacts.py"
+        completed = subprocess.run(
+            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
+        historical_release = (
+            release_text
+            .replace('status = "ready"', 'status = "released"')
+            .replace(
+                'prepared_by = "release-owner"',
+                'prepared_by = "release-owner"\n'
+                'released_at = "2026-08-21T12:00:00Z"\n'
+                'authorized_by = "release-owner"',
+            )
+        )
+        release_path.write_text(historical_release, encoding="utf-8")
+        vrec_path.write_text(
+            vrec_path.read_text(encoding="utf-8").replace(
+                'status = "ready"',
+                'status = "verified"',
+            ),
+            encoding="utf-8",
+        )
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"]["payload_sha256"] = "b" * 64
+        lock["evaluator"]["archive_sha256"] = "b" * 64
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        completed = subprocess.run(
+            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
+
+        unbound = historical_release
+        unbound = "\n".join(
+            line
+            for line in unbound.splitlines()
+            if not line.startswith("evaluator_evidence_")
+        ) + "\n"
+        release_path.write_text(unbound, encoding="utf-8")
+        (self.root / "docs/engineering/delivery/evidence/RLS-001-evaluator.json").unlink()
+        completed = subprocess.run(
+            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(1, completed.returncode)
+        report = json.loads(completed.stdout)
+        self.assertIn("E012", {item["code"] for item in report["errors"]})
+
+    def test_installed_validator_rejects_modified_evaluator_evidence(self) -> None:
+        self.initialize_candidate()
+        code, _, error = self.invoke(
+            "capture-verification",
+            str(self.root),
+            "--id", "VREC-001",
+            "--work-order", "WO-001",
+            "--verification", "VER-001",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+        )
+        self.assertEqual(0, code, error)
+        validator = self.root / "scripts/validate_engineering_artifacts.py"
+        completed = subprocess.run(
+            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
+
+        evidence = self.root / "docs/engineering/product/evidence/VREC-001-evaluator.json"
+        value = json.loads(evidence.read_text(encoding="utf-8"))
+        value["environment"]["isolated_python"] = not value["environment"]["isolated_python"]
+        evidence.write_text(
+            json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        completed = subprocess.run(
+            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            cwd=self.root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(1, completed.returncode)
+        report = json.loads(completed.stdout)
+        self.assertIn("E012", {item["code"] for item in report["errors"]})
+
     def test_explicit_domain_and_output_precedence_are_deterministic(self) -> None:
         self.initialize_candidate()
         explicit_output = "docs/engineering/governance/VREC-001.md"
@@ -749,6 +867,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertFalse((self.root / "docs/engineering/assurance/verification-records/VREC-001.md").exists())
 
         (self.root / explicit_output).unlink()
+        (self.root / "docs/engineering/assurance/evidence/VREC-001-evaluator.json").unlink()
         code, _, error = self.invoke(
             "capture-verification",
             str(self.root),
@@ -889,7 +1008,12 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
 
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(vrec_path))
+        evaluator_evidence = self.root / "docs/engineering/product/evidence/VREC-002-evaluator.json"
+        self.assertTrue(evaluator_evidence.is_file())
+        self.git(
+            "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
+            "add", str(vrec_path), str(evaluator_evidence),
+        )
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "aggregate verification governance")
         governance = self.git("rev-parse", "HEAD")
 

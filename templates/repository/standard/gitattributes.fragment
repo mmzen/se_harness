@@ -1,0 +1,3 @@
+# Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.
+docs/engineering/evidence/*-evaluator.json text eol=lf
+docs/engineering/**/evidence/*-evaluator.json text eol=lf

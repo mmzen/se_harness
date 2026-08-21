@@ -36,6 +36,10 @@ and an applied permitted transition change lifecycle state.
 to a ready VREC with one eligible successor. Historical lifecycle events MUST
 remain append-only.
 
+Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1` representation and binds the installed released-evaluator payload plus its archive when available. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema-1 and schema-2 locks remain readable, but ordinary mutation requires a schema-3 evaluator match; older locks migrate only through a separately reviewed upgrade whose target evaluator is installed from already-published wheel bytes. `doctor` and mutation plans are read-only, and customized, ambiguous, or identity-mismatched content is never overwritten.
+
+Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber apply, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
+
 ## State model
 
 The permitted transitions are:

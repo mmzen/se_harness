@@ -23,6 +23,7 @@ from se_harness.candidate_acceptance import (
 )
 from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256
+from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import _lexically_within, _within, inspect_runtime_identity
 
@@ -35,6 +36,14 @@ FAILED_PR_RECORDS = (
 
 
 class StandardRepositoryLifecycleTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
+
     def make_candidate_wheel(self, root: Path, version: str = "0.4.1") -> tuple[Path, str]:
         wheel = root / f"se_harness-{version}-py3-none-any.whl"
         with zipfile.ZipFile(wheel, "w") as archive:
@@ -132,6 +141,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("python -m unittest discover", workflow)
         self.assertIn("--role candidate-source", workflow)
         self.assertIn("--role candidate-package", workflow)
+        self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("Review preflight", workflow)
@@ -162,6 +172,36 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             check=True,
         )
         self.assertNotIn("reconcile-governor", completed.stdout)
+
+    def test_evaluator_evidence_bytes_are_portable_across_git_checkouts(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Attributes", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            attributes = (target / ".gitattributes").read_text(encoding="utf-8")
+            self.assertIn("docs/engineering/evidence/*-evaluator.json text eol=lf", attributes)
+            self.assertIn("docs/engineering/**/evidence/*-evaluator.json text eol=lf", attributes)
+            lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+            self.assertEqual("fragment", lock["files"][".gitattributes"]["mode"])
+            subprocess.run(
+                ["git", "-C", str(target), "init"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            for relative in (
+                "docs/engineering/evidence/VREC-TST-001-evaluator.json",
+                "docs/engineering/product/evidence/RLS-TST-001-evaluator.json",
+            ):
+                completed = subprocess.run(
+                    ["git", "-C", str(target), "check-attr", "text", "eol", "--", relative],
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
+                self.assertEqual("", completed.stderr)
+                self.assertIn(f"{relative}: text: set", completed.stdout)
+                self.assertIn(f"{relative}: eol: lf", completed.stdout)
 
     def test_standard_upgrade_restores_every_file_after_interrupted_apply(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

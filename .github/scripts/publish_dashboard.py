@@ -14,9 +14,8 @@ import sys
 import tempfile
 import tomllib
 from dataclasses import asdict, dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
-from urllib.parse import urlparse
 
 
 EXPECTED_REPOSITORY = "mmzen/se_harness"
@@ -40,6 +39,14 @@ HEX_PATTERN = re.compile(r"[0-9a-f]+")
 DEFAULT_REFS = frozenset({"refs/heads/main", "refs/remotes/origin/main"})
 MAX_PAYLOAD_BYTES = 100 * 1024 * 1024
 WORKSPACE_MARKER = '<div class="workspace">'
+EVALUATOR_EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
+EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
+EVALUATOR_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
+EVALUATOR_VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
+EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
+LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
+    {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
+)
 
 
 class PublicationError(RuntimeError):
@@ -57,17 +64,19 @@ class ReleaseProvenance:
     git_object_format: str
     governance_commit: str
     default_head: str
+    evaluator_evidence_path: str | None = None
+    evaluator_evidence_sha256: str | None = None
 
 
 @dataclass(frozen=True)
-class GovernorDescriptor:
+class EvaluatorDescriptor:
     version: str
     tag: str
     wheel: str
     url: str
     sha256: str
-    selected_release_record: str
-    selected_candidate_commit: str
+    payload_manifest: str
+    payload_sha256: str
 
 
 def _sha256(data: bytes) -> str:
@@ -98,6 +107,13 @@ def _loads_json_bytes(payload: bytes, *, label: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise PublicationError(f"JSON document must be an object: {label}")
     return value
+
+
+def _valid_evaluator_origin(value: Any) -> bool:
+    if not isinstance(value, str) or EVALUATOR_ORIGIN_PATTERN.fullmatch(value) is None:
+        return False
+    suffix = value.removeprefix("<evaluator-root>").removeprefix("/")
+    return not suffix or all(part not in {"", ".", ".."} for part in suffix.split("/"))
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -275,6 +291,124 @@ def _validated_release_record(metadata: dict[str, Any], path: str, tag: str) -> 
     }
 
 
+def _validated_evaluator_binding(
+    repository: Path,
+    evidence_commit: str,
+    metadata: dict[str, Any],
+    *,
+    lock_commit: str | None = None,
+) -> dict[str, str | None]:
+    record_id = metadata.get("id")
+    path = metadata.get("evaluator_evidence_path")
+    digest = metadata.get("evaluator_evidence_sha256")
+    if path is None and digest is None and record_id in LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE:
+        return {"path": None, "sha256": None}
+    if not isinstance(path, str) or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise PublicationError(f"release record {record_id} has no canonical evaluator evidence binding")
+    relative = PurePosixPath(path)
+    if (
+        relative.is_absolute()
+        or "\\" in path
+        or any(part in {"", ".", ".."} for part in relative.parts)
+        or relative.suffix != ".json"
+        or relative.parts[:2] != ("docs", "engineering")
+        or "evidence" not in relative.parts
+    ):
+        raise PublicationError(f"release record {record_id} has an unsafe evaluator evidence path")
+    text = _text_at(repository, evidence_commit, path)
+    if text is None:
+        raise PublicationError(f"release record {record_id} evaluator evidence is unavailable")
+    raw = text.encode("utf-8")
+    if not raw or len(raw) > EVALUATOR_EVIDENCE_MAX_BYTES:
+        raise PublicationError(f"release record {record_id} evaluator evidence size is invalid")
+    if _sha256(raw) != digest:
+        raise PublicationError(f"release record {record_id} evaluator evidence digest differs")
+    value = _loads_json_bytes(raw, label=f"{evidence_commit}:{path}")
+    canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+    if raw != canonical:
+        raise PublicationError(f"release record {record_id} evaluator evidence is not canonical")
+    if set(value) != {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}:
+        raise PublicationError(f"release record {record_id} evaluator evidence field set differs")
+    evaluator = value.get("evaluator")
+    origins = value.get("origins")
+    environment = value.get("environment")
+    if value.get("schema") != EVALUATOR_EVIDENCE_SCHEMA or value.get("role") != "released-evaluator":
+        raise PublicationError(f"release record {record_id} evaluator evidence role is invalid")
+    if (
+        not isinstance(evaluator, dict)
+        or set(evaluator) != {"version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"}
+        or evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST
+    ):
+        raise PublicationError(f"release record {record_id} evaluator identity is invalid")
+    evaluator_version = evaluator.get("version")
+    archive_name = evaluator.get("archive_name")
+    archive_sha256 = evaluator.get("archive_sha256")
+    if (
+        not isinstance(evaluator_version, str)
+        or EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is None
+        or not isinstance(evaluator.get("payload_sha256"), str)
+        or re.fullmatch(r"[0-9a-f]{64}", evaluator["payload_sha256"]) is None
+        or (archive_name is None) != (archive_sha256 is None)
+        or archive_name is None
+        or (
+            archive_name is not None
+            and (
+                archive_name != f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
+                or not isinstance(archive_sha256, str)
+                or re.fullmatch(r"[0-9a-f]{64}", archive_sha256) is None
+            )
+        )
+    ):
+        raise PublicationError(f"release record {record_id} evaluator identity is invalid")
+    if (
+        not isinstance(origins, dict)
+        or set(origins) != {"python_executable", "module", "distribution", "templates", "entry_point"}
+        or any(not _valid_evaluator_origin(item) for item in origins.values())
+    ):
+        raise PublicationError(f"release record {record_id} evaluator origins are invalid")
+    environment_fields = {
+        "isolated_python",
+        "user_site_enabled",
+        "pythonpath_present",
+        "entry_point_resolved",
+        "checkout_excluded",
+    }
+    if (
+        not isinstance(environment, dict)
+        or set(environment) != environment_fields
+        or any(type(environment.get(field)) is not bool for field in environment_fields)
+        or environment.get("user_site_enabled")
+        or environment.get("pythonpath_present")
+        or not environment.get("entry_point_resolved")
+        or not environment.get("checkout_excluded")
+        or value.get("diagnostics") != []
+    ):
+        raise PublicationError(f"release record {record_id} evaluator environment proof is invalid")
+    selected_lock_commit = lock_commit or evidence_commit
+    lock_text = _text_at(repository, selected_lock_commit, ".engineering-harness.lock")
+    if lock_text is None:
+        raise PublicationError("standard evaluator lock is unavailable at the governance commit")
+    lock = _loads_json_bytes(
+        lock_text.encode("utf-8"),
+        label=f"{selected_lock_commit}:.engineering-harness.lock",
+    )
+    locked = lock.get("evaluator") if lock.get("schema") == 3 else None
+    expected = (
+        {
+            "version": locked.get("version"),
+            "payload_manifest": locked.get("payload_manifest"),
+            "payload_sha256": locked.get("payload_sha256"),
+            "archive_name": locked.get("archive_name"),
+            "archive_sha256": locked.get("archive_sha256"),
+        }
+        if isinstance(locked, dict)
+        else None
+    )
+    if expected is None or evaluator != expected:
+        raise PublicationError(f"release record {record_id} evaluator evidence differs from the standard lock")
+    return {"path": path, "sha256": digest}
+
+
 def _same_release_binding(metadata: dict[str, Any] | None, expected: dict[str, str]) -> bool:
     return bool(
         metadata
@@ -362,6 +496,12 @@ def resolve_release(
     assert selected_path is not None
 
     selected = _validate_full_commit(selected, object_format, "governance commit")
+    evaluator_binding = _validated_evaluator_binding(
+        repository,
+        default_head,
+        metadata,
+        lock_commit=selected,
+    )
     if governance_commit is not None:
         requested = _validate_full_commit(governance_commit, object_format, "manual governance commit")
         if _resolve_commit(repository, requested) != requested:
@@ -379,56 +519,76 @@ def resolve_release(
         git_object_format=object_format,
         governance_commit=selected,
         default_head=default_head,
+        evaluator_evidence_path=evaluator_binding["path"],
+        evaluator_evidence_sha256=evaluator_binding["sha256"],
     )
 
 
-def read_governor(repository: Path) -> GovernorDescriptor:
-    path = repository.resolve() / ".self-hosting" / "governor.toml"
+def read_evaluator(repository: Path) -> EvaluatorDescriptor:
+    root = repository.resolve()
+    if (root / ".self-hosting" / "governor.toml").exists():
+        raise PublicationError("governance snapshot contains a retired active evaluator descriptor")
+    config_path = root / ".engineering-harness.toml"
+    lock_path = root / ".engineering-harness.lock"
     try:
-        raw = tomllib.loads(path.read_text(encoding="utf-8"))
+        config = tomllib.loads(config_path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, tomllib.TOMLDecodeError) as exc:
-        raise PublicationError("governance snapshot has no valid governor descriptor") from exc
-
-    keys = (
+        raise PublicationError("governance snapshot has no valid standard configuration") from exc
+    lock = _read_json(lock_path)
+    harness = config.get("harness")
+    if not isinstance(harness, dict):
+        raise PublicationError("standard configuration has no harness table")
+    configured_version = harness.get("tool_version")
+    if not isinstance(configured_version, str) or not configured_version:
+        raise PublicationError("standard configuration has no valid tool version")
+    if lock.get("schema") != 3:
+        raise PublicationError("publication requires a schema-3 standard evaluator lock")
+    if lock.get("hash_algorithm") != "sha256" or lock.get("hash_mode") != "utf8-text-lf-v1":
+        raise PublicationError("standard evaluator lock uses unsupported integrity semantics")
+    evaluator = lock.get("evaluator")
+    if not isinstance(evaluator, dict):
+        raise PublicationError("standard evaluator lock has no evaluator identity")
+    allowed = {
         "version",
-        "tag",
-        "wheel",
-        "url",
-        "sha256",
-        "selected_release_record",
-        "selected_candidate_commit",
-    )
-    required = {key: raw.get(key) for key in keys}
-    if any(not isinstance(value, str) or not value for value in required.values()):
-        raise PublicationError("governor descriptor contains an empty or non-string field")
-    version, tag, wheel, url, digest, record, candidate = (required[key] for key in keys)
-    assert all(isinstance(value, str) for value in (version, tag, wheel, url, digest, record, candidate))
-
-    if TAG_PATTERN.fullmatch(tag) is None or tag != f"v{version}":
-        raise PublicationError("governor version and tag are inconsistent")
-    if wheel != f"se_harness-{version}-py3-none-any.whl":
-        raise PublicationError("governor wheel name is inconsistent with its version")
+        "payload_manifest",
+        "payload_sha256",
+        "archive_name",
+        "archive_sha256",
+    }
+    unknown = set(evaluator) - allowed
+    if unknown:
+        raise PublicationError(f"standard evaluator lock has unknown field: {sorted(unknown)[0]}")
+    version = evaluator.get("version")
+    payload_manifest = evaluator.get("payload_manifest")
+    payload_sha256 = evaluator.get("payload_sha256")
+    wheel = evaluator.get("archive_name")
+    digest = evaluator.get("archive_sha256")
+    if not all(isinstance(value, str) and value for value in (version, payload_manifest, payload_sha256, wheel, digest)):
+        raise PublicationError("publication requires complete standard evaluator archive identity")
+    assert all(isinstance(value, str) for value in (version, payload_manifest, payload_sha256, wheel, digest))
+    if lock.get("tool_version") != version or configured_version != version:
+        raise PublicationError("standard configuration, lock, and evaluator versions differ")
+    tag = f"v{version}"
+    if TAG_PATTERN.fullmatch(tag) is None:
+        raise PublicationError("standard evaluator version is not publication-compatible")
+    if payload_manifest != "se-harness-installed-payload-v1":
+        raise PublicationError("standard evaluator payload manifest is unsupported")
+    if re.fullmatch(r"[0-9a-f]{64}", payload_sha256) is None:
+        raise PublicationError("standard evaluator payload SHA-256 is invalid")
+    if wheel != f"se_harness-{version.replace('-', '_')}-py3-none-any.whl":
+        raise PublicationError("standard evaluator wheel name is inconsistent with its version")
     if re.fullmatch(r"[0-9a-f]{64}", digest) is None:
-        raise PublicationError("governor wheel SHA-256 is invalid")
-    if RELEASE_RECORD_PATTERN.fullmatch(record) is None:
-        raise PublicationError("governor release-record ID is invalid")
-    if re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", candidate) is None:
-        raise PublicationError("governor candidate commit is invalid")
-    parsed = urlparse(url)
-    expected_path = f"/mmzen/se_harness/releases/download/{tag}/{wheel}"
-    if parsed.scheme != "https" or parsed.netloc != "github.com" or parsed.path != expected_path:
-        raise PublicationError("governor URL is outside the accepted GitHub release boundary")
-    if parsed.params or parsed.query or parsed.fragment:
-        raise PublicationError("governor URL must not contain parameters, a query, or a fragment")
+        raise PublicationError("standard evaluator wheel SHA-256 is invalid")
+    url = f"https://github.com/mmzen/se_harness/releases/download/{tag}/{wheel}"
 
-    return GovernorDescriptor(
+    return EvaluatorDescriptor(
         version=version,
         tag=tag,
         wheel=wheel,
         url=url,
         sha256=digest,
-        selected_release_record=record,
-        selected_candidate_commit=candidate,
+        payload_manifest=payload_manifest,
+        payload_sha256=payload_sha256,
     )
 
 
@@ -752,10 +912,10 @@ def build_parser() -> argparse.ArgumentParser:
     resolve.add_argument("--output", type=Path)
     resolve.add_argument("--github-output", type=Path)
 
-    governor = subparsers.add_parser("governor", help="Validate a governance snapshot's governor descriptor.")
-    governor.add_argument("--repository", type=Path, required=True)
-    governor.add_argument("--output", type=Path)
-    governor.add_argument("--github-output", type=Path)
+    evaluator = subparsers.add_parser("evaluator", help="Resolve a governance snapshot's standard evaluator identity.")
+    evaluator.add_argument("--repository", type=Path, required=True)
+    evaluator.add_argument("--output", type=Path)
+    evaluator.add_argument("--github-output", type=Path)
 
     github_release = subparsers.add_parser(
         "verify-github-release",
@@ -786,9 +946,9 @@ def main(argv: Iterable[str] | None = None) -> int:
                 default_ref=args.default_ref,
             )
             _write_result(result, args.output, args.github_output)
-        elif args.command == "governor":
-            result = read_governor(args.repository)
-            _write_result(result, args.output, args.github_output, prefix="governor_")
+        elif args.command == "evaluator":
+            result = read_evaluator(args.repository)
+            _write_result(result, args.output, args.github_output, prefix="evaluator_")
         elif args.command == "verify-github-release":
             verify_github_release(args.metadata, args.tag)
             print(f"GitHub Release metadata: PASS | tag={args.tag}")

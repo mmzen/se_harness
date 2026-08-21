@@ -56,6 +56,8 @@ class ReleasePlan:
     checksums: str
     checksums_sha256: str
     source_manifest_sha256: str
+    evaluator_evidence_path: str | None = None
+    evaluator_evidence_sha256: str | None = None
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -205,6 +207,12 @@ def resolve_plan(
     if dashboard._resolve_commit(repository, candidate) != candidate:
         raise ReleaseError("candidate commit does not resolve exactly")
     governance_commit, record_path = _integration_commit(repository, default_head, binding)
+    evaluator_binding = dashboard._validated_evaluator_binding(
+        repository,
+        default_head,
+        metadata,
+        lock_commit=governance_commit,
+    )
     catalog = _catalog_at(repository, default_head)
     verification_records = _relations(metadata, "includes_verification")
     released_work = _relations(metadata, "releases_work")
@@ -253,6 +261,8 @@ def resolve_plan(
         checksums=distribution.checksums,
         checksums_sha256=distribution.checksums_sha256,
         source_manifest_sha256=distribution.source_manifest_sha256,
+        evaluator_evidence_path=evaluator_binding["path"],
+        evaluator_evidence_sha256=evaluator_binding["sha256"],
     )
 
 

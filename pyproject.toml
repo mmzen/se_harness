@@ -32,6 +32,7 @@ se_harness = ["workflow_contract.json", "quality_gates_contract.json"]
   "templates/repository/standard/AGENTS.md.fragment",
   "templates/repository/standard/CLAUDE.md.fragment",
   "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+  "templates/repository/standard/gitattributes.fragment",
   "templates/repository/standard/gitignore.fragment",
 ]
 "share/se-harness/templates/repository/standard/docs/engineering" = [

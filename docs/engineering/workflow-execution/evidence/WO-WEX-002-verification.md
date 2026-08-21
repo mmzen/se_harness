@@ -227,3 +227,31 @@ git diff --check
 The root validator reported `571` artifacts and `0` errors. Distribution
 validation reported `PASS (0 distribution-bearing records)`. Diff hygiene
 passed with only advisory future line-ending conversion messages.
+
+## Issue #81 merge reconciliation
+
+The branch was reconciled with main commit
+`bc77046379c90021631f872460526e1eb4d43372`, which contains the released-
+evaluator publication and mutation boundary associated with issue #81. All six
+textual conflicts were resolved by retaining both contracts: WEX selected-
+scope execution, procedures, and restitution; and the released-evaluator
+identity, archive-evidence, and fail-closed mutation rules.
+
+The integration additionally registers `transition --apply` as a guarded
+installed-root mutation. The guard runs before lifecycle writes, and the
+distributed workflow and command reference state that boundary explicitly.
+Verification and release preparation acquire evaluator authority before the
+WEX checkpoint so an untrusted runtime cannot reach candidate validation or a
+repository write.
+
+The integrated focused suite passed `206` tests with `4` expected skips. The
+complete suite passed `364` tests with `5` expected skips, including the
+100/500/1000-artifact WEX scale checks. Candidate validation reported `591`
+artifacts, `0` errors, and the unchanged `44` maintenance warnings.
+
+The isolated released 0.5.0 evaluator identity check passed with no
+diagnostics. Through that evaluator, `validate .` reported the same `591`
+artifacts and `0` errors, and `doctor .` passed all required, distribution,
+lock, managed-file, script, seed, and Python checks with only the existing
+legacy-location advisories. Both staged and unstaged `git diff --check` checks
+passed. No unresolved merge entry or conflict marker remains.

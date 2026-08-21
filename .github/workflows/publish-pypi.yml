@@ -61,42 +61,44 @@ jobs:
             exit 1
           fi
 
-      - name: Resolve the independently released governor
-        id: governor
+      - name: Resolve the independently released evaluator
+        id: evaluator
         shell: bash
         run: |
           set -euo pipefail
-          python .github/scripts/publish_dashboard.py governor \
+          python .github/scripts/publish_dashboard.py evaluator \
             --repository "$GITHUB_WORKSPACE" \
-            --output "$RUNNER_TEMP/governor.json" \
+            --output "$RUNNER_TEMP/evaluator.json" \
             --github-output "$GITHUB_OUTPUT"
 
-      - name: Acquire and prove the released governor
+      - name: Acquire and prove the released evaluator
         env:
-          GOVERNOR_VERSION: ${{ steps.governor.outputs.governor_version }}
-          GOVERNOR_WHEEL: ${{ steps.governor.outputs.governor_wheel }}
-          GOVERNOR_URL: ${{ steps.governor.outputs.governor_url }}
-          GOVERNOR_WHEEL_SHA256: ${{ steps.governor.outputs.governor_sha256 }}
+          EVALUATOR_VERSION: ${{ steps.evaluator.outputs.evaluator_version }}
+          EVALUATOR_WHEEL: ${{ steps.evaluator.outputs.evaluator_wheel }}
+          EVALUATOR_URL: ${{ steps.evaluator.outputs.evaluator_url }}
+          EVALUATOR_PAYLOAD_SHA256: ${{ steps.evaluator.outputs.evaluator_payload_sha256 }}
+          EVALUATOR_WHEEL_SHA256: ${{ steps.evaluator.outputs.evaluator_sha256 }}
         shell: bash
         run: |
           set -euo pipefail
-          python -m venv "$RUNNER_TEMP/governor-env"
+          python -m venv "$RUNNER_TEMP/evaluator-env"
           curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-            --output "$RUNNER_TEMP/$GOVERNOR_WHEEL" "$GOVERNOR_URL"
-          printf '%s  %s\n' "$GOVERNOR_WHEEL_SHA256" "$RUNNER_TEMP/$GOVERNOR_WHEEL" | sha256sum --check -
-          "$RUNNER_TEMP/governor-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps "$RUNNER_TEMP/$GOVERNOR_WHEEL"
+            --output "$RUNNER_TEMP/$EVALUATOR_WHEEL" "$EVALUATOR_URL"
+          printf '%s  %s\n' "$EVALUATOR_WHEEL_SHA256" "$RUNNER_TEMP/$EVALUATOR_WHEEL" | sha256sum --check -
+          "$RUNNER_TEMP/evaluator-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/governor-env/bin/python" -I -m se_harness identity \
-            --role governor \
-            --expected-version "$GOVERNOR_VERSION" \
-            --expected-root "$RUNNER_TEMP/governor-env" \
+          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity \
+            --role released-evaluator \
+            --expected-version "$EVALUATOR_VERSION" \
+            --expected-root "$RUNNER_TEMP/evaluator-env" \
             --checkout-root "$GITHUB_WORKSPACE" \
-            --governor-wheel-sha256 "$GOVERNOR_WHEEL_SHA256" \
-            --entry-point "$RUNNER_TEMP/governor-env/bin/harnessctl" \
+            --evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256" \
+            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256" \
+            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"
+          "$RUNNER_TEMP/evaluator-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"
 
       - name: Derive one canonical release plan
         id: plan
@@ -477,24 +479,39 @@ jobs:
             --governance-commit "${{ needs.resolve.outputs.governance_commit }}" --output "$RUNNER_TEMP/pages-provenance.json"
           git worktree add --detach "$RUNNER_TEMP/governance" "${{ needs.resolve.outputs.governance_commit }}"
 
-      - name: Resolve the released governor
-        id: governor
+      - name: Resolve the released evaluator
+        id: evaluator
         shell: bash
         run: |
           set -euo pipefail
-          python .github/scripts/publish_dashboard.py governor --repository "$RUNNER_TEMP/governance" --output "$RUNNER_TEMP/governor.json" --github-output "$GITHUB_OUTPUT"
+          python .github/scripts/publish_dashboard.py evaluator --repository "$RUNNER_TEMP/governance" --output "$RUNNER_TEMP/evaluator.json" --github-output "$GITHUB_OUTPUT"
 
-      - name: Acquire and apply the released governor
+      - name: Acquire and prove the released evaluator
+        env:
+          EVALUATOR_VERSION: ${{ steps.evaluator.outputs.evaluator_version }}
+          EVALUATOR_WHEEL: ${{ steps.evaluator.outputs.evaluator_wheel }}
+          EVALUATOR_URL: ${{ steps.evaluator.outputs.evaluator_url }}
+          EVALUATOR_PAYLOAD_SHA256: ${{ steps.evaluator.outputs.evaluator_payload_sha256 }}
+          EVALUATOR_WHEEL_SHA256: ${{ steps.evaluator.outputs.evaluator_sha256 }}
         shell: bash
         run: |
           set -euo pipefail
-          python -m venv "$RUNNER_TEMP/governor-env"
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error --output "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}" "${{ steps.governor.outputs.governor_url }}"
-          printf '%s  %s\n' "${{ steps.governor.outputs.governor_sha256 }}" "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}" | sha256sum --check -
-          "$RUNNER_TEMP/governor-env/bin/python" -m pip install --disable-pip-version-check --no-deps "$RUNNER_TEMP/${{ steps.governor.outputs.governor_wheel }}"
+          python -m venv "$RUNNER_TEMP/evaluator-env"
+          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error --output "$RUNNER_TEMP/$EVALUATOR_WHEEL" "$EVALUATOR_URL"
+          printf '%s  %s\n' "$EVALUATOR_WHEEL_SHA256" "$RUNNER_TEMP/$EVALUATOR_WHEEL" | sha256sum --check -
+          "$RUNNER_TEMP/evaluator-env/bin/python" -m pip install --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/governor-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"
+          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity \
+            --role released-evaluator \
+            --expected-version "$EVALUATOR_VERSION" \
+            --expected-root "$RUNNER_TEMP/evaluator-env" \
+            --checkout-root "$RUNNER_TEMP/governance" \
+            --evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256" \
+            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256" \
+            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
+            --require-isolated-python --require-entry-point
+          "$RUNNER_TEMP/evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"
 
       - name: Generate and package the exact Explorer payload
         id: package

@@ -13,10 +13,14 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from se_harness import __version__
+from se_harness.evaluator_identity import (
+    EvaluatorIdentityError,
+    installed_evaluator_identity,
+)
 from se_harness.installer import HarnessError, template_root
 
 
-IDENTITY_SCHEMA = "se-harness-runtime-identity-v2"
+IDENTITY_SCHEMA = "se-harness-runtime-identity-v3"
 ROLES = {"released-evaluator", "candidate-source", "candidate-package"}
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
@@ -44,6 +48,10 @@ class RuntimeIdentity:
     expected_root: str
     checkout_root: str | None
     candidate_commit: str | None
+    evaluator_payload_manifest: str | None
+    evaluator_payload_sha256: str | None
+    evaluator_archive_name: str | None
+    evaluator_archive_sha256: str | None
     evaluator_wheel_sha256: str | None
     isolated_python: bool
     user_site_enabled: bool
@@ -111,6 +119,7 @@ def inspect_runtime_identity(
     expected_root: Path,
     checkout_root: Path | None = None,
     candidate_commit: str | None = None,
+    evaluator_payload_sha256: str | None = None,
     evaluator_wheel_sha256: str | None = None,
     entry_point: Path | None = None,
     require_isolated_python: bool = False,
@@ -135,6 +144,10 @@ def inspect_runtime_identity(
     isolated = bool(getattr(sys.flags, "isolated", 0))
     user_site_enabled = bool(site.ENABLE_USER_SITE)
     pythonpath_present = bool(os.environ.get("PYTHONPATH"))
+    installed_payload_manifest: str | None = None
+    installed_payload_sha256: str | None = None
+    installed_archive_name: str | None = None
+    installed_archive_sha256: str | None = None
 
     if role not in ROLES:
         diagnostics.append(IdentityDiagnostic("RID001", "role", "unsupported runtime role"))
@@ -216,9 +229,45 @@ def inspect_runtime_identity(
             )
 
     if role == "released-evaluator":
+        try:
+            evaluator = installed_evaluator_identity()
+        except EvaluatorIdentityError as exc:
+            diagnostics.append(
+                IdentityDiagnostic("RID019", "evaluator_payload", f"installed payload identity failed: {exc}")
+            )
+        else:
+            installed_payload_manifest = evaluator.payload_manifest
+            installed_payload_sha256 = evaluator.payload_sha256
+            installed_archive_name = evaluator.archive_name
+            installed_archive_sha256 = evaluator.archive_sha256
+        if evaluator_payload_sha256 is not None:
+            if SHA256_PATTERN.fullmatch(evaluator_payload_sha256) is None:
+                diagnostics.append(
+                    IdentityDiagnostic(
+                        "RID020",
+                        "evaluator_payload_sha256",
+                        "the expected payload digest must be a lowercase SHA-256",
+                    )
+                )
+            elif installed_payload_sha256 != evaluator_payload_sha256:
+                diagnostics.append(
+                    IdentityDiagnostic(
+                        "RID021",
+                        "evaluator_payload_sha256",
+                        "installed payload digest differs from the expected evaluator payload",
+                    )
+                )
         if evaluator_wheel_sha256 is not None and SHA256_PATTERN.fullmatch(evaluator_wheel_sha256) is None:
             diagnostics.append(
                 IdentityDiagnostic("RID013", "evaluator_wheel_sha256", "the optional digest must be a lowercase SHA-256")
+            )
+        elif evaluator_wheel_sha256 is not None and installed_archive_sha256 != evaluator_wheel_sha256:
+            diagnostics.append(
+                IdentityDiagnostic(
+                    "RID022",
+                    "evaluator_wheel_sha256",
+                    "installed PEP 610 archive digest differs from the expected evaluator wheel",
+                )
             )
         if candidate_commit is not None:
             diagnostics.append(
@@ -232,6 +281,10 @@ def inspect_runtime_identity(
         if evaluator_wheel_sha256 is not None:
             diagnostics.append(
                 IdentityDiagnostic("RID016", "evaluator_wheel_sha256", "candidate identity cannot claim a released evaluator digest")
+            )
+        if evaluator_payload_sha256 is not None:
+            diagnostics.append(
+                IdentityDiagnostic("RID023", "evaluator_payload_sha256", "candidate identity cannot claim a released evaluator payload")
             )
 
     if require_isolated_python and not isolated:
@@ -254,6 +307,10 @@ def inspect_runtime_identity(
         expected_root=str(expected),
         checkout_root=str(checkout) if checkout is not None else None,
         candidate_commit=candidate_commit,
+        evaluator_payload_manifest=installed_payload_manifest,
+        evaluator_payload_sha256=installed_payload_sha256,
+        evaluator_archive_name=installed_archive_name,
+        evaluator_archive_sha256=installed_archive_sha256,
         evaluator_wheel_sha256=evaluator_wheel_sha256,
         isolated_python=isolated,
         user_site_enabled=user_site_enabled,
