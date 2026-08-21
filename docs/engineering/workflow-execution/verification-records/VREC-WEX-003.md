@@ -2,7 +2,7 @@
 id = "VREC-WEX-003"
 type = "verification_record"
 title = "Verification candidate for WO-WEX-002"
-status = "ready"
+status = "superseded"
 owners = ["quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -12,10 +12,20 @@ worktree_state = "clean"
 verified_at = "2026-08-21T11:39:16Z"
 artifact_snapshot_sha256 = "2c6d622d53edafec31a0b09856892f16b4cab29c37a52939df0fe88231a5dec5"
 evidence_paths = ["docs/engineering/workflow-execution/evidence/WO-WEX-002-verification.md"]
+superseded_at = "2026-08-21T12:50:56Z"
+supersession_authorized_by = "quality-owner"
 
 [relations]
 verifies_work_order = ["WO-WEX-002"]
 conforms_to = ["VER-WEX-002"]
+superseded_by = ["VREC-WEX-005"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "superseded"
+decided_at = "2026-08-21T12:50:56Z"
+decided_by = "quality-owner"
+reason = "VREC-WEX-005"
 +++
 
 # Verification Record Candidate
