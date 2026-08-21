@@ -167,6 +167,16 @@ The authorized command then atomically changed only `WO-WEX-001` from `in_progre
 
 The public external `se-harness==0.5.0` evaluator then passed `doctor` and review preflight again. Review preflight reported `ready = true`, no diagnostics, the exact governing manifest, and work-order state `implemented`.
 
+### Verification-record preparation compatibility blocker
+
+After exact candidate `72914f72874a9408a844b33f008b741a1eca1444` passed both hosted Engineering Harness runs, both candidate-source lanes, and both candidate-package lanes, `harnessctl capture-verification` prepared a structurally correct WEX-format ready `VREC-WEX-001` using `prepared_at` and `prepared_by` and omitting assurance decision fields.
+
+Candidate validation passed, but both hosted released-evaluator preflights failed with `A-E002` because public 0.5.0 requires `verified_at` on every ready VREC. Candidate-source regression also failed where real-repository fixtures deliberately use the released root validator. Candidate-package lanes correctly skipped after their source prerequisites failed.
+
+No compliant dual-schema record exists: adding legacy `verified_at` would violate approved `SPEC-WEX-001`, which requires ready records to omit verification decision metadata, while using candidate validation as governance authority would violate the released-evaluator boundary. The attempted record was therefore removed from the effective branch rather than misrepresenting preparation as assurance. Its record-only commit remains recoverable in Git history for diagnosis.
+
+A valid ready WEX-format verification record requires a staged compatibility release: first ship a released evaluator that accepts preparation provenance without requiring verification decision fields, upgrade this repository to that evaluator through its normal governed path, and only then prepare `VREC-WEX-001` against the still-qualified exact candidate or a newly requalified successor.
+
 ### Rejected-requirement negative proof and diff hygiene
 
 ```text
@@ -194,7 +204,7 @@ Result: PASS. `ready = true`, no diagnostics, exact released evaluator boundary 
 
 ## Remaining verification before assurance decision
 
-- Run verifier-owned candidate-package black-box acceptance after a separately authorized candidate commit and non-promotable test package are available through the released-evaluator boundary.
+- Resolve the released-evaluator schema bootstrap blocker described above through a separately governed compatibility release and repository evaluator upgrade; do not use legacy `verified_at` as preparation metadata.
 - Exercise real symlink/junction escape and native read-only/locked-file behavior on supported hosts that expose those capabilities. The current host denied file-symlink creation; disk-full, denial, interruption, concurrent edit, case collision, rollback success, rollback failure, and cleanup are covered by deterministic injection.
 - Complete accountable product, technical, assurance, repository-owner, and supported-agent usability review of the retained corpus and representative records.
 - Run final candidate/package parity and review preflight after any corrections from those assessments.
