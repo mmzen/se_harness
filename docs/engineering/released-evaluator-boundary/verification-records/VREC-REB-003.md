@@ -2,7 +2,7 @@
 id = "VREC-REB-003"
 type = "verification_record"
 title = "Verification candidate for WO-REB-003"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -23,3 +23,5 @@ conforms_to = ["VER-REB-001"]
 This ready record binds retained evidence for `WO-REB-003` to candidate commit `2d3b9ed9d4ade7733c51b2b4c9a5c583482c4654`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+On 2026-08-21, the accountable assurance owner explicitly instructed `i approve VREC-REB-001, VREC-REB-002, and VREC-REB-003`. That human assurance decision transitioned this record from `ready` to `verified`; automation did not grant the authority. The captured commit, timestamp, artifact snapshot, evidence paths, work-order coverage, and verification-contract coverage remain unchanged.
