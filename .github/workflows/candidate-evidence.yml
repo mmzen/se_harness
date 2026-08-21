@@ -35,6 +35,8 @@ jobs:
           --expected-root "$GITHUB_WORKSPACE"
           --checkout-root "$GITHUB_WORKSPACE"
           --candidate-commit "$GITHUB_SHA"
+      - name: Prove active evaluator surface
+        run: python scripts/check_portable_release_surface.py --repository .
       - name: Run complete candidate-source regression
         run: python -m unittest discover -s tests -p "test_*.py"
       - name: Prove candidate source made no checkout change

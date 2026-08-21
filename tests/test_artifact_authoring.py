@@ -28,11 +28,18 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import artifact_layout_registry as portable_layout  # noqa: E402
+from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
 
 
 class ArtifactAuthoringTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Authoring Sample")[0])

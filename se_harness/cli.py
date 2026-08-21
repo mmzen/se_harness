@@ -285,6 +285,7 @@ def _identity(args: argparse.Namespace) -> int:
         expected_root=Path(args.expected_root),
         checkout_root=Path(args.checkout_root) if args.checkout_root else None,
         candidate_commit=args.candidate_commit,
+        evaluator_payload_sha256=args.evaluator_payload_sha256,
         evaluator_wheel_sha256=args.evaluator_wheel_sha256,
         entry_point=Path(args.entry_point) if args.entry_point else None,
         require_isolated_python=args.require_isolated_python,
@@ -409,6 +410,7 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--expected-root", required=True)
     identity.add_argument("--checkout-root")
     identity.add_argument("--candidate-commit")
+    identity.add_argument("--evaluator-payload-sha256")
     identity.add_argument("--evaluator-wheel-sha256")
     identity.add_argument("--entry-point")
     identity.add_argument("--require-isolated-python", action="store_true")

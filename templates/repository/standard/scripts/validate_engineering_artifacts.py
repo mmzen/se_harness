@@ -8,6 +8,7 @@ run before the repository's normal toolchain is available.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import re
@@ -68,6 +69,14 @@ EVIDENCE_WORK_ORDER_PATTERN = re.compile(
 )
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+EVALUATOR_EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
+EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
+EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
+EVALUATOR_ORIGIN_PATTERN = re.compile(r"^<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*$")
+EVALUATOR_VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}$")
+LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
+    {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
+)
 GIT_COMMIT_PATTERNS = {
     "sha1": re.compile(r"^[0-9a-f]{40}$"),
     "sha256": re.compile(r"^[0-9a-f]{64}$"),
@@ -505,6 +514,201 @@ def _validate_evidence_paths(
             )
 
 
+def _unique_evaluator_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError(f"duplicate evaluator evidence field: {key}")
+        value[key] = item
+    return value
+
+
+def _evaluator_binding_error(
+    artifact: Artifact,
+    errors: list[Diagnostic],
+    repository_root: Path,
+    message: str,
+) -> None:
+    _add_error(errors, artifact, repository_root, "E012", message, plane="governance")
+
+
+def _valid_evaluator_origin(value: Any) -> bool:
+    if not isinstance(value, str) or EVALUATOR_ORIGIN_PATTERN.fullmatch(value) is None:
+        return False
+    suffix = value.removeprefix("<evaluator-root>").removeprefix("/")
+    return not suffix or all(part not in {"", ".", ".."} for part in suffix.split("/"))
+
+
+def _validate_evaluator_evidence_binding(
+    artifact: Artifact,
+    errors: list[Diagnostic],
+    repository_root: Path,
+    *,
+    required: bool,
+    require_archive: bool = False,
+    match_current_lock: bool = True,
+) -> None:
+    raw_path = artifact.metadata.get("evaluator_evidence_path")
+    raw_digest = artifact.metadata.get("evaluator_evidence_sha256")
+    if raw_path is None and raw_digest is None and not required:
+        return
+    if not isinstance(raw_path, str) or not raw_path:
+        _evaluator_binding_error(
+            artifact, errors, repository_root, "field 'evaluator_evidence_path' must be a non-empty string"
+        )
+        return
+    if not isinstance(raw_digest, str) or SHA256_PATTERN.fullmatch(raw_digest) is None:
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "field 'evaluator_evidence_sha256' must be a lowercase SHA-256 value",
+        )
+        return
+    relative = Path(raw_path)
+    if (
+        relative.is_absolute()
+        or "\\" in raw_path
+        or any(part in {"", ".", ".."} for part in relative.parts)
+        or relative.suffix != ".json"
+        or relative.parts[:2] != ("docs", "engineering")
+        or "evidence" not in relative.parts
+    ):
+        _evaluator_binding_error(
+            artifact, errors, repository_root, "evaluator evidence path must be normalized and repository-relative"
+        )
+        return
+    candidate = repository_root / relative
+    probe = repository_root
+    for part in relative.parts:
+        probe = probe / part
+        if probe.is_symlink():
+            _evaluator_binding_error(
+                artifact, errors, repository_root, "evaluator evidence path must not traverse a symlink"
+            )
+            return
+    try:
+        candidate.resolve().relative_to(repository_root.resolve())
+        raw = candidate.read_bytes()
+    except (OSError, ValueError):
+        _evaluator_binding_error(
+            artifact, errors, repository_root, "evaluator evidence path is unavailable or escapes the repository"
+        )
+        return
+    if not raw or len(raw) > EVALUATOR_EVIDENCE_MAX_BYTES:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence size is invalid")
+        return
+    if hashlib.sha256(raw).hexdigest() != raw_digest:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence digest does not match its bytes")
+        return
+    try:
+        value = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_evaluator_object)
+    except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+        _evaluator_binding_error(artifact, errors, repository_root, f"invalid evaluator evidence JSON: {exc}")
+        return
+    canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+    if raw != canonical or not isinstance(value, dict):
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence bytes are not canonical")
+        return
+    if set(value) != {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence field set is not canonical")
+        return
+    evaluator = value.get("evaluator")
+    origins = value.get("origins")
+    environment = value.get("environment")
+    if value.get("schema") != EVALUATOR_EVIDENCE_SCHEMA or value.get("role") != "released-evaluator":
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence schema or role is invalid")
+        return
+    if not isinstance(evaluator, dict) or set(evaluator) != {
+        "version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"
+    }:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator identity field set is not canonical")
+        return
+    if evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator payload manifest is unsupported")
+        return
+    evaluator_version = evaluator.get("version")
+    if not isinstance(evaluator_version, str) or EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is None:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator version is invalid")
+        return
+    if not isinstance(evaluator.get("payload_sha256"), str) or SHA256_PATTERN.fullmatch(evaluator["payload_sha256"]) is None:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator payload digest is invalid")
+        return
+    archive_name = evaluator.get("archive_name")
+    archive_sha256 = evaluator.get("archive_sha256")
+    if (archive_name is None) != (archive_sha256 is None):
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator archive fields must appear together")
+        return
+    if archive_name is not None and (
+        not isinstance(archive_name, str)
+        or archive_name != f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
+        or not isinstance(archive_sha256, str)
+        or SHA256_PATTERN.fullmatch(archive_sha256) is None
+    ):
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator archive identity is invalid")
+        return
+    if require_archive and archive_name is None:
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "release evaluator evidence requires an archive name and SHA-256",
+        )
+        return
+    if not isinstance(origins, dict) or set(origins) != {
+        "python_executable", "module", "distribution", "templates", "entry_point"
+    } or any(not _valid_evaluator_origin(item) for item in origins.values()):
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator origins are not canonical")
+        return
+    expected_environment = {
+        "isolated_python", "user_site_enabled", "pythonpath_present", "entry_point_resolved", "checkout_excluded"
+    }
+    if (
+        not isinstance(environment, dict)
+        or set(environment) != expected_environment
+        or any(type(environment.get(field)) is not bool for field in expected_environment)
+        or environment.get("user_site_enabled")
+        or environment.get("pythonpath_present")
+        or not environment.get("entry_point_resolved")
+        or not environment.get("checkout_excluded")
+        or value.get("diagnostics") != []
+    ):
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator environment proof is invalid")
+        return
+    if not match_current_lock:
+        return
+    try:
+        lock = json.loads(
+            (repository_root / ".engineering-harness.lock").read_text(encoding="utf-8"),
+            object_pairs_hook=_unique_evaluator_object,
+        )
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        _evaluator_binding_error(artifact, errors, repository_root, f"cannot read standard evaluator lock: {exc}")
+        return
+    expected_evaluator = lock.get("evaluator") if isinstance(lock, dict) and lock.get("schema") == 3 else None
+    expected_fields = {"version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"}
+    if (
+        not isinstance(expected_evaluator, dict)
+        or set(expected_evaluator) - expected_fields
+        or lock.get("tool_version") != expected_evaluator.get("version")
+    ):
+        _evaluator_binding_error(artifact, errors, repository_root, "standard evaluator lock identity is invalid")
+        return
+    normalized_expected = (
+        {
+            "version": expected_evaluator.get("version"),
+            "payload_manifest": expected_evaluator.get("payload_manifest"),
+            "payload_sha256": expected_evaluator.get("payload_sha256"),
+            "archive_name": expected_evaluator.get("archive_name"),
+            "archive_sha256": expected_evaluator.get("archive_sha256"),
+        }
+        if isinstance(expected_evaluator, dict)
+        else None
+    )
+    if normalized_expected is None or evaluator != normalized_expected:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence differs from the standard lock")
+
+
 def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     seen: dict[str, Artifact] = {}
@@ -664,6 +868,13 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     plane="governance",
                 )
             _validate_evidence_paths(artifact, errors, report_root)
+            _validate_evaluator_evidence_binding(
+                artifact,
+                errors,
+                report_root,
+                required=False,
+                match_current_lock=artifact.status == "ready",
+            )
             if artifact.status not in {"ready", "verified", "released", "superseded"}:
                 _add_error(
                     errors,
@@ -753,6 +964,20 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "release_record status must be ready or released",
                     plane="governance",
                 )
+            legacy_without_binding = (
+                artifact.status == "released"
+                and artifact.artifact_id in LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE
+                and artifact.metadata.get("evaluator_evidence_path") is None
+                and artifact.metadata.get("evaluator_evidence_sha256") is None
+            )
+            _validate_evaluator_evidence_binding(
+                artifact,
+                errors,
+                report_root,
+                required=not legacy_without_binding,
+                require_archive=True,
+                match_current_lock=artifact.status == "ready",
+            )
 
         if artifact_type == "work_order" and "architecture" in artifact.relations:
             _require_non_empty_string_list(
