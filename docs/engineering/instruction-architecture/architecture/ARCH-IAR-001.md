@@ -5,7 +5,7 @@ title = "Layered instruction and enforcement architecture"
 status = "implemented"
 owners = ["technical-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-21"
 
 [relations]
 constrains = ["REQ-IAR-001", "REQ-IAR-002", "REQ-IAR-003", "REQ-IAR-004", "REQ-IAR-005", "REQ-IAR-006", "REQ-IAR-007", "REQ-IAR-008", "REQ-IAR-009"]
@@ -17,9 +17,9 @@ constrains = ["REQ-IAR-001", "REQ-IAR-002", "REQ-IAR-003", "REQ-IAR-004", "REQ-I
 
 - **Tool adapters**: managed fragments in `AGENTS.md` and `CLAUDE.md` expose one common route while leaving repository-owner content intact.
 - **Managed router**: `ENGINEERING_HARNESS.md` states the non-waivable boundary and selects focused policy by engineering stage.
-- **Owner information**: `REPOSITORY_CONTEXT.md` and the engineering README hold repository facts and domain navigation without granting authority.
+- **Owner information**: the owner-controlled region of `AGENTS.md` and the engineering README hold repository facts and domain navigation without granting authority. The harness neither scaffolds nor tracks that region.
 - **Formal memory**: typed artifacts and relations hold product intent, requirements, work authorization, verification contracts, and release constraints.
-- **Local enforcement**: `harnessctl preflight` composes integrity, context, graph, status, and chain checks into a read-only readiness report.
+- **Local enforcement**: `harnessctl preflight` composes integrity, graph, status, and chain checks into a read-only readiness report.
 - **Remote enforcement**: an independently pinned harness distribution executes the required CI check; repository-host protection makes the result a merge condition.
 - **Bootstrap verification**: the harness repository separates last-release independent baseline checks from candidate tests, then advances the external pin through later governance.
 - **Safe distribution**: the installer, schema-2 lock, canonical templates, and explicit mode migration preserve managed and owner boundaries.
@@ -34,7 +34,7 @@ tool adapter -> AGENTS managed gate -> managed router
                                                     |
                          +--------------------------+----------------------+
                          |             |              |                   |
-                      integrity     context       artifact graph      WO chain
+                      integrity     policy        artifact graph      WO chain
                          +-------------+--------------+-------------------+
                                                        |
                                               readiness evidence

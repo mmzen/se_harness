@@ -82,7 +82,7 @@ def _scan_repository(target: Path) -> bytes:
         "",
         "## Human decisions required",
         "",
-        "1. Curate `docs/engineering/REPOSITORY_CONTEXT.md` with owner-confirmed purpose, commands, architecture, and constraints.",
+        "1. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`.",
         "2. Name the accountable owners for product intent, engineering, assurance, release, and operations.",
         "3. Create and approve the first intent-to-verification artifact chain using `docs/engineering/templates/`.",
         "4. Select one bounded approved work order before implementation begins.",

@@ -5,7 +5,7 @@ title = "Concise public entry point and relocated reference contract"
 status = "approved"
 owners = ["technical-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
-updated = "2026-08-15"
+updated = "2026-08-21"
 
 [relations]
 specifies = ["REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
@@ -117,7 +117,7 @@ Update `docs/notes/README.md` so the primary 4/10-to-7/10 learning path remains 
 
 - `README.md` and `docs/notes/` explain; they do not authorize.
 - `ENGINEERING_HARNESS.md` and its routed managed policy remain the governance sources.
-- `REPOSITORY_CONTEXT.md` and product artifacts remain repository-owned.
+- The owner-controlled region of `AGENTS.md` and product artifacts remain repository-owned.
 - Implementation and tests remain inspected behavior evidence.
 - If a fact was obsolete or duplicated rather than useful, record its intentional retirement in work-order evidence instead of relocating it mechanically.
 

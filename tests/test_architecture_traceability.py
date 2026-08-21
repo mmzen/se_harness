@@ -3,7 +3,6 @@ from __future__ import annotations
 import contextlib
 import io
 import json
-import re
 import sys
 import tempfile
 import unittest
@@ -98,9 +97,6 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Trace Sample")[0])
-        context = self.root / "docs" / "engineering" / "REPOSITORY_CONTEXT.md"
-        content = re.sub(r"TODO\[[A-Za-z0-9-]+\]", "confirmed", context.read_text(encoding="utf-8"))
-        context.write_text(content, encoding="utf-8")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

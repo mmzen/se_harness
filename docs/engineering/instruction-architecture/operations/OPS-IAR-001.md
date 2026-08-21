@@ -5,10 +5,10 @@ title = "Operate the instruction and enforcement architecture"
 status = "approved"
 owners = ["service-owner", "repository-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-16"
+updated = "2026-08-21"
 
 [relations]
-assures = ["REQ-IAR-001", "REQ-IAR-002", "REQ-IAR-003", "REQ-IAR-004", "REQ-IAR-005", "REQ-IAR-006", "REQ-IAR-007", "REQ-IAR-008", "REQ-IAR-009", "REQ-IAR-010", "REQ-IAR-011", "REQ-IAR-012", "REQ-IAR-013", "REQ-IAR-014", "REQ-IAR-015", "REQ-IAR-016", "REQ-IAR-017", "REQ-IAR-018"]
+assures = ["REQ-IAR-001", "REQ-IAR-002", "REQ-IAR-003", "REQ-IAR-004", "REQ-IAR-006", "REQ-IAR-007", "REQ-IAR-008", "REQ-IAR-009", "REQ-IAR-010", "REQ-IAR-011", "REQ-IAR-012", "REQ-IAR-013", "REQ-IAR-014", "REQ-IAR-015", "REQ-IAR-016", "REQ-IAR-017", "REQ-IAR-018"]
 +++
 
 # Operating Contract: Operate the instruction and enforcement architecture
@@ -43,7 +43,7 @@ Automation may validate, inspect, render derived dashboards, report suggestions 
 
 ## Runbooks
 
-Follow `ENGINEERING_HARNESS.md` for routing, `docs/engineering/WORKFLOW.md` for procedure, `TRACEABILITY.md` for artifact applicability, `REPOSITORY_CONTEXT.md` for repository commands, and the self-hosting boundary when developing SE Harness. After an upgrade, run doctor, validate, inspect, and the applicable start/review preflight; reconcile the governor only through its separate upgrade workflow.
+Follow `ENGINEERING_HARNESS.md` for routing, `docs/engineering/WORKFLOW.md` for procedure, `TRACEABILITY.md` for artifact applicability, the owner-controlled region of `AGENTS.md` for repository commands, and the self-hosting boundary when developing SE Harness. After an upgrade, run doctor, validate, inspect, and the applicable start/review preflight; reconcile the governor only through its separate upgrade workflow.
 
 ## Evidence retention
 

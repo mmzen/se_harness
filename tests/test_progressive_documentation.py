@@ -157,9 +157,6 @@ class ProgressiveDocumentationTests(unittest.TestCase):
 
     def test_branching_guide_is_one_explicitly_non_authoritative_model(self) -> None:
         branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
-        context = (REPOSITORY_ROOT / "docs" / "engineering" / "REPOSITORY_CONTEXT.md").read_text(
-            encoding="utf-8"
-        )
         self.assertIn("SE Harness does **not** require this branch model", branching)
         self.assertEqual(2, branching.count("gitGraph"))
         self.assertIn("Example 1: one change from implementation to release", branching)
@@ -172,9 +169,6 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("aggregate VREC re-evaluates the release-bearing work at R", branching)
         self.assertIn("`release/0.3` is not used for new features", branching)
         self.assertIn("v0.3.0` and `release/0.3` are created only after G10", branching)
-        self.assertNotIn("feature/<short-description>", context)
-        self.assertIn("harness-branching-model.md", context)
-        self.assertIn("release/x.y", context)
         self.assertIn("REL-031", branching)
         self.assertIn("VER-FIX-014", branching)
         self.assertIn("WO-QUAL-031", branching)

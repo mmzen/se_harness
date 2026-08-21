@@ -33,3 +33,11 @@ Feature: Reuse the standard software engineering harness
     When an upgrade is applied
     Then the customized workflow remains unchanged
     And manual reconciliation is reported
+
+  Scenario: Retire the repository-context scaffold without touching owner content
+    Given a fresh installation and an installation whose retired context path holds owner-authored bytes
+    When an upgrade is applied to each
+    Then the fresh installation has no file at the retired path
+    And the owner-authored bytes at the retired path are unchanged
+    And neither regenerated lock has an entry or tombstone for the retired path
+    And start preflight is ready with no retired context diagnostic and no repository command payload

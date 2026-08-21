@@ -5,7 +5,7 @@ title = "Instruction routing, preflight, and migration behavior"
 status = "implemented"
 owners = ["technical-owner", "repository-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-08-21"
 
 [relations]
 specifies = ["REQ-IAR-001", "REQ-IAR-002", "REQ-IAR-003", "REQ-IAR-004", "REQ-IAR-005", "REQ-IAR-006", "REQ-IAR-007", "REQ-IAR-008", "REQ-IAR-009"]
@@ -22,7 +22,6 @@ The standard installation remains one profile. Template suffix determines initia
 | `AGENTS.md` | fragment | owner file with managed harness block |
 | `CLAUDE.md` | fragment | owner file with managed adapter block |
 | `ENGINEERING_HARNESS.md` | managed | harness contract and router |
-| `docs/engineering/REPOSITORY_CONTEXT.md` | seed | repository owner after installation |
 | `docs/engineering/README.md` | seed | repository/domain index owner after installation |
 | four shared policy modules | managed | harness distribution |
 
@@ -32,7 +31,7 @@ The managed `AGENTS.md` block is short and stable. It directs the actor only to 
 
 `ENGINEERING_HARNESS.md` owns the following route without duplicating the bodies of its destinations:
 
-1. Always distinguish `REPOSITORY_CONTEXT.md` owner facts from formal artifact authority.
+1. Always distinguish repository-owned facts, including those in the owner-controlled region of `AGENTS.md`, from formal artifact authority.
 2. Before implementation, run preflight for one selected work order and read every returned file.
 3. Consult `WORKFLOW.md` for lifecycle sequence and automation boundaries.
 4. Consult `DECISION_RIGHTS.md` before approval, transition, release, or other accountable decisions.
