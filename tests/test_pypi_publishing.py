@@ -39,6 +39,21 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
         self.assertIn("cmp --silent - release-assets/SHA256SUMS", self.pypi_job)
         self.assertIn('test "$actual" = "$expected"', self.pypi_job)
 
+    def test_governance_validation_uses_only_the_standard_released_evaluator(self) -> None:
+        self.assertEqual(2, self.workflow.count("publish_dashboard.py evaluator"))
+        self.assertEqual(2, self.workflow.count("--role released-evaluator"))
+        self.assertEqual(2, self.workflow.count("--evaluator-payload-sha256"))
+        self.assertEqual(2, self.workflow.count("--evaluator-wheel-sha256"))
+        for retired in (
+            "publish_dashboard.py governor",
+            "--role governor",
+            "--governor-wheel-sha256",
+            "GOVERNOR_",
+            "governor-env",
+            "steps.governor",
+        ):
+            self.assertNotIn(retired, self.workflow)
+
     def test_oidc_job_is_least_privilege_and_does_not_execute_repository_code(self) -> None:
         self.assertEqual(1, self.pypi_job.count("id-token: write"))
         self.assertEqual(1, self.pypi_job.count("contents: read"))

@@ -132,6 +132,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("python -m unittest discover", workflow)
         self.assertIn("--role candidate-source", workflow)
         self.assertIn("--role candidate-package", workflow)
+        self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("Review preflight", workflow)

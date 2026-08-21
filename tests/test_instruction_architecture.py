@@ -14,7 +14,7 @@ from pathlib import Path
 from se_harness import __version__
 from se_harness.cli import main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
-from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, canonical_sha256
+from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -456,6 +456,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         legacy_lock["schema"] = 1
         legacy_lock.pop("hash_algorithm", None)
         legacy_lock.pop("hash_mode", None)
+        legacy_lock.pop("evaluator", None)
         legacy_lock["files"]["docs/engineering/README.md"] = {
             "mode": "managed",
             "sha256": canonical_sha256(legacy_lf),
@@ -724,12 +725,14 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertNotIn("{{HARNESS", workflow)
         self.assertNotIn("{{GOVERNOR", workflow)
 
-    def test_lock_remains_schema_two_after_instruction_install(self) -> None:
+    def test_lock_records_standard_evaluator_identity_after_instruction_install(self) -> None:
         target = self.installed_target()
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(2, lock["schema"])
+        self.assertEqual(LOCK_SCHEMA, lock["schema"])
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
         self.assertEqual(HASH_MODE, lock["hash_mode"])
+        self.assertEqual(__version__, lock["evaluator"]["version"])
+        self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
 
 
 if __name__ == "__main__":

@@ -8,12 +8,22 @@ import re
 from typing import Any
 
 
-LOCK_SCHEMA = 2
+LOCK_SCHEMA = 3
+LEGACY_CANONICAL_LOCK_SCHEMA = 2
 HASH_ALGORITHM = "sha256"
 HASH_MODE = "utf8-text-lf-v1"
+EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 MANAGED_MODES = {"managed", "fragment"}
 ENTRY_MODES = MANAGED_MODES | {"seed"}
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
+EVALUATOR_FIELDS = {
+    "version",
+    "payload_manifest",
+    "payload_sha256",
+    "archive_name",
+    "archive_sha256",
+}
+VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
 
 
 class IntegrityError(ValueError):
@@ -81,13 +91,40 @@ def validate_lock(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise IntegrityError("lock root must be an object")
     schema = value.get("schema")
-    if type(schema) is not int or schema not in {1, LOCK_SCHEMA}:
+    if type(schema) is not int or schema not in {1, LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
         raise IntegrityError("unsupported lock schema")
-    if schema == LOCK_SCHEMA:
+    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
         if value.get("hash_algorithm") != HASH_ALGORITHM:
             raise IntegrityError("unsupported lock hash algorithm")
         if value.get("hash_mode") != HASH_MODE:
             raise IntegrityError("unsupported lock hash mode")
+    if schema == LOCK_SCHEMA:
+        evaluator = value.get("evaluator")
+        if not isinstance(evaluator, dict):
+            raise IntegrityError("schema-3 lock evaluator must be an object")
+        unknown = set(evaluator) - EVALUATOR_FIELDS
+        if unknown:
+            raise IntegrityError(f"unknown evaluator lock field: {sorted(unknown)[0]}")
+        version = evaluator.get("version")
+        if not isinstance(version, str) or VERSION_PATTERN.fullmatch(version) is None:
+            raise IntegrityError("invalid evaluator version")
+        if value.get("tool_version") != version:
+            raise IntegrityError("lock tool version and evaluator version differ")
+        if evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST:
+            raise IntegrityError("unsupported evaluator payload manifest")
+        payload_sha256 = evaluator.get("payload_sha256")
+        if not isinstance(payload_sha256, str) or SHA256_PATTERN.fullmatch(payload_sha256) is None:
+            raise IntegrityError("invalid evaluator payload SHA-256")
+        archive_name = evaluator.get("archive_name")
+        archive_sha256 = evaluator.get("archive_sha256")
+        if (archive_name is None) != (archive_sha256 is None):
+            raise IntegrityError("evaluator archive name and SHA-256 must appear together")
+        if archive_name is not None:
+            expected_name = f"se_harness-{version.replace('-', '_')}-py3-none-any.whl"
+            if not isinstance(archive_name, str) or archive_name != expected_name:
+                raise IntegrityError("invalid evaluator archive name")
+            if not isinstance(archive_sha256, str) or SHA256_PATTERN.fullmatch(archive_sha256) is None:
+                raise IntegrityError("invalid evaluator archive SHA-256")
     files = value.get("files")
     if not isinstance(files, dict):
         raise IntegrityError("lock files must be an object")
@@ -119,7 +156,7 @@ def legacy_tracked_sha256(value: bytes, mode: str) -> str:
 def digest_for_schema(value: bytes, schema: int, mode: str) -> str:
     if schema == 1:
         return legacy_tracked_sha256(value, mode)
-    if schema == LOCK_SCHEMA:
+    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
         return canonical_sha256(value)
     raise IntegrityError("unsupported lock schema")
 
@@ -135,7 +172,7 @@ def compare_lock_entry(
 
     schema = lock.get("schema")
     expected = entry.get("sha256")
-    if schema == LOCK_SCHEMA:
+    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
         return "canonical" if canonical_sha256(current) == expected else "mismatch"
     if schema == 1:
         if legacy_tracked_sha256(current, str(entry.get("mode"))) == expected:

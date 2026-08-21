@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Iterable
 
 from se_harness import __version__
+from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
 from se_harness.integrity import (
     HASH_ALGORITHM,
     HASH_MODE,
@@ -203,7 +204,7 @@ def _load_lock(target: Path) -> dict:
 
 
 def load_lock(target: Path) -> dict:
-    """Load and validate a schema-1 or schema-2 managed-file lock."""
+    """Load and validate a supported standard managed-file lock."""
 
     return _load_lock(target)
 
@@ -427,6 +428,10 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
         if output_schema == LOCK_SCHEMA:
             lock["hash_algorithm"] = HASH_ALGORITHM
             lock["hash_mode"] = HASH_MODE
+            try:
+                lock["evaluator"] = installed_evaluator_identity().to_lock()
+            except EvaluatorIdentityError as exc:
+                raise HarnessError(f"cannot identify the installed evaluator payload: {exc}") from exc
         lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
         _atomic_write(lock_path, lock_bytes)
         return lock

@@ -154,51 +154,81 @@ releases_work = ["WO-TST-001"]
             PUBLICATION.resolve_release(self.root, "v1.2.3", default_ref="HEAD")
 
 
-class GovernorDescriptorTests(unittest.TestCase):
+class EvaluatorDescriptorTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
-        (self.root / ".self-hosting").mkdir()
+        (self.root / ".engineering-harness.toml").write_text(
+            '[harness]\ntool_version = "0.5.0"\n',
+            encoding="utf-8",
+        )
+        self.write_lock()
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def write_descriptor(self, url: str) -> None:
-        (self.root / ".self-hosting" / "governor.toml").write_text(
-            f'''schema = 1
-version = "0.3.0"
-tag = "v0.3.0"
-wheel = "se_harness-0.3.0-py3-none-any.whl"
-url = "{url}"
-sha256 = "{'a' * 64}"
-selected_release_record = "RLS-SEH-005"
-selected_candidate_commit = "{'b' * 40}"
-''',
+    def write_lock(self, **evaluator_changes: object) -> None:
+        evaluator = {
+            "version": "0.5.0",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "a" * 64,
+            "archive_name": "se_harness-0.5.0-py3-none-any.whl",
+            "archive_sha256": "b" * 64,
+        }
+        evaluator.update(evaluator_changes)
+        (self.root / ".engineering-harness.lock").write_text(
+            json.dumps(
+                {
+                    "schema": 3,
+                    "tool_version": "0.5.0",
+                    "hash_algorithm": "sha256",
+                    "hash_mode": "utf8-text-lf-v1",
+                    "evaluator": evaluator,
+                    "files": {},
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
             encoding="utf-8",
         )
 
-    def test_exact_github_release_governor_is_accepted(self) -> None:
-        self.write_descriptor(
+    def test_exact_standard_evaluator_is_accepted(self) -> None:
+        descriptor = PUBLICATION.read_evaluator(self.root)
+        self.assertEqual("0.5.0", descriptor.version)
+        self.assertEqual("b" * 64, descriptor.sha256)
+        self.assertEqual("a" * 64, descriptor.payload_sha256)
+        self.assertEqual(
             "https://github.com/mmzen/se_harness/releases/download/"
-            "v0.3.0/se_harness-0.3.0-py3-none-any.whl"
+            "v0.5.0/se_harness-0.5.0-py3-none-any.whl",
+            descriptor.url,
         )
-        descriptor = PUBLICATION.read_governor(self.root)
-        self.assertEqual("0.3.0", descriptor.version)
-        self.assertEqual("a" * 64, descriptor.sha256)
 
-    def test_other_host_or_query_is_rejected(self) -> None:
-        self.write_descriptor(
-            "https://example.invalid/mmzen/se_harness/releases/download/"
-            "v0.3.0/se_harness-0.3.0-py3-none-any.whl"
-        )
-        with self.assertRaisesRegex(PUBLICATION.PublicationError, "accepted GitHub release boundary"):
-            PUBLICATION.read_governor(self.root)
-        self.write_descriptor(
-            "https://github.com/mmzen/se_harness/releases/download/"
-            "v0.3.0/se_harness-0.3.0-py3-none-any.whl?replacement=1"
-        )
-        with self.assertRaises(PUBLICATION.PublicationError):
-            PUBLICATION.read_governor(self.root)
+    def test_legacy_or_incomplete_lock_is_rejected(self) -> None:
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["schema"] = 2
+        lock.pop("evaluator")
+        lock_path.write_text(json.dumps(lock), encoding="utf-8")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "schema-3"):
+            PUBLICATION.read_evaluator(self.root)
+        self.write_lock(archive_name=None, archive_sha256=None)
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "complete.*archive identity"):
+            PUBLICATION.read_evaluator(self.root)
+
+    def test_mismatch_unknown_field_and_retired_descriptor_are_rejected(self) -> None:
+        self.write_lock(unexpected="value")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "unknown field"):
+            PUBLICATION.read_evaluator(self.root)
+        self.write_lock(version="0.4.1")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "versions differ"):
+            PUBLICATION.read_evaluator(self.root)
+        self.write_lock()
+        descriptor = self.root / ".self-hosting" / "governor.toml"
+        descriptor.parent.mkdir()
+        descriptor.write_text("schema = 1\n", encoding="utf-8")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "retired active"):
+            PUBLICATION.read_evaluator(self.root)
 
 
 class PayloadPackagingTests(unittest.TestCase):
@@ -413,8 +443,14 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("persist-credentials: false", self.workflow)
         self.assertIn("fetch-depth: 0", self.workflow)
 
-    def test_workflow_preserves_governor_generator_and_payload_boundaries(self) -> None:
-        self.assertIn("governor-env/bin/harnessctl\" validate", self.workflow)
+    def test_workflow_preserves_evaluator_generator_and_payload_boundaries(self) -> None:
+        self.assertIn("evaluator-env/bin/harnessctl\" validate", self.workflow)
+        self.assertIn("publish_dashboard.py evaluator", self.workflow)
+        self.assertIn("--role released-evaluator", self.workflow)
+        self.assertIn("--evaluator-payload-sha256", self.workflow)
+        self.assertIn("--evaluator-wheel-sha256", self.workflow)
+        self.assertNotIn("GOVERNOR_", self.workflow)
+        self.assertNotIn("--role governor", self.workflow)
         self.assertIn("governance/scripts/generate_harness_dashboard.py", self.workflow)
         self.assertIn("publish_dashboard.py package", self.workflow)
         self.assertIn("--destination \"$RUNNER_TEMP/pages-site\"", self.workflow)

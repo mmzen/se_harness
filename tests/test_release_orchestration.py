@@ -113,6 +113,16 @@ class DistributionManifestTests(unittest.TestCase):
             with self.assertRaisesRegex(SURFACE.SurfaceError, "leaked into wheel"):
                 SURFACE.inspect_wheel(leaked)
 
+    def test_active_repository_checker_rejects_retired_evaluator_contracts(self) -> None:
+        SURFACE.inspect_repository(REPOSITORY_ROOT)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            workflow = root / ".github" / "workflows" / "publish.yml"
+            workflow.parent.mkdir(parents=True)
+            workflow.write_text("steps:\n  - run: harnessctl identity --role governor\n", encoding="utf-8")
+            with self.assertRaisesRegex(SURFACE.SurfaceError, "retired specialized lifecycle"):
+                SURFACE.inspect_repository(root)
+
     def test_manifest_producer_hashes_exact_files_and_candidate_tree(self) -> None:
         commit = subprocess.run(
             ["git", "-C", str(REPOSITORY_ROOT), "rev-parse", "HEAD"],
