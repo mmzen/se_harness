@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 
+from se_harness import mutation_guard
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 
 
@@ -267,6 +268,7 @@ def scaffold_domain(
     if dry_run:
         return changes
 
+    mutation_guard.require_mutation_authority(root, operation="scaffold-domain")
     created_directories: list[Path] = []
     try:
         for relative in [domain_relative, *directory_relatives]:
@@ -365,6 +367,7 @@ def create_artifact(
     if dry_run:
         return change
 
+    mutation_guard.require_mutation_authority(root, operation="create-artifact")
     missing: list[Path] = []
     probe = root
     for part in parent_relative.parts:

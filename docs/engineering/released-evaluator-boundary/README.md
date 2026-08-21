@@ -20,4 +20,4 @@ This domain defines the preventive work authorized from [GitHub issue #81](https
 2. `WO-REB-002` rejects non-matching runtimes before installed-root mutation and binds evaluator identity into release-readiness evidence.
 3. `WO-REB-003` adds conflicting-chain observations, a bounded recovery runbook, and disposable recovery rehearsal.
 
-The governing packet is `approved` and `WO-REB-001` is `implemented` with retained evidence; commit-bound assurance remains pending. `WO-REB-002` and `WO-REB-003` remain `draft`. No root-evaluator change, release, or external publication is authorized.
+The governing packet is `approved`; `WO-REB-001` and `WO-REB-002` are `implemented` with retained evidence, and their commit-bound assurance remains pending. `WO-REB-003` remains `draft`. No root-evaluator change, release, or external publication is authorized.

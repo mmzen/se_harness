@@ -2,7 +2,7 @@
 id = "WO-REB-002"
 type = "work_order"
 title = "Enforce evaluator identity for mutation and release readiness"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -23,7 +23,7 @@ verification = ["VER-REB-001"]
 
 ## Lifecycle
 
-This work order is a draft proposal. It authorizes no implementation, lifecycle transition, verification claim, or release-readiness decision until an accountable owner approves it.
+This work order is implemented with retained evidence in `docs/engineering/released-evaluator-boundary/evidence/WO-REB-002-implementation.md`. Commit-bound assurance remains pending. This state does not verify the candidate, authorize work assigned to `WO-REB-003`, or authorize external publication, release, or deployment.
 
 ## Objective
 

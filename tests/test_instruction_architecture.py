@@ -10,11 +10,13 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from se_harness import __version__
 from se_harness.cli import main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
+from tests.mutation_guard_support import trusted_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -67,6 +69,12 @@ HANDOFF_FIELDS = (
 
 class InstructionArchitectureTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 

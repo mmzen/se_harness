@@ -13,6 +13,8 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
+After initial installation, mutating commands use the repository's `.engineering-harness.lock` as the expected released-evaluator identity. Run them from a dedicated environment outside the target checkout. The guard rejects a source checkout, editable install, wrong payload or archive, unresolved or foreign launcher, enabled user site, inherited `PYTHONPATH`, and other ambiguous origins before it creates a directory, temporary file, or formal record. Read-only planning and inspection remain available when mutation authority is unavailable.
+
 ## Windows PowerShell
 
 SE Harness requires Python 3.11 or later. From the directory where you want to own the tool environment:
@@ -92,11 +94,21 @@ Explorer is a progressive static bundle. Serve `target/harness-dashboard/` over 
 
 ## Upgrade an existing installation
 
-First upgrade the package in the environment selected to operate the repository:
+The package-only shorthand remains useful for obtaining read-only planning and inspection behavior:
 
 ```powershell
 python -m pip install --upgrade se-harness
 ```
+
+That index install alone is not archive proof for an applied repository upgrade. Before apply, acquire the already-published target wheel into a directory outside the repository, independently check the digest selected by the release process, and install those exact local bytes into the external evaluator environment. A direct wheel install preserves the archive identity needed by upgrade apply and release preparation:
+
+```powershell
+python -m pip download --only-binary=:all: --no-deps "se-harness==VERSION" --dest C:\path\to\download
+Get-FileHash C:\path\to\download\se_harness-VERSION-py3-none-any.whl -Algorithm SHA256
+python -m pip install --upgrade C:\path\to\download\se_harness-VERSION-py3-none-any.whl
+```
+
+Use the equivalent `sha256sum` and path syntax on Linux or macOS. Do not treat a version string, an unverified index install, or candidate wheel as the selected archive proof.
 
 Then inspect the repository upgrade as a read-only plan:
 
@@ -116,6 +128,8 @@ The apply operation is transactional: customized, conflicting, or ambiguous mana
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 
 Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout representation does not create false customization. This portability rule does not excuse a real content mismatch.
+
+Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations under the enforcing release. Their single transition path is the reviewed `upgrade --apply` above, from an already-published target evaluator. Once schema 3 is installed, ordinary mutation requires exact agreement with the lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
 
 ## Ownership and safety
 

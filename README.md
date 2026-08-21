@@ -45,7 +45,7 @@ For a reproducible installation, select the exact release:
 python -m pip install "se-harness==0.5.0"
 ```
 
-Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, and the complete upgrade procedure.
+Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. Installed-root mutations must run from an external released-evaluator environment matching the repository lock; candidate source and ambiguous or contaminated installs fail before writing. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, exact-wheel upgrades, and the complete procedure.
 
 ## Start using it
 

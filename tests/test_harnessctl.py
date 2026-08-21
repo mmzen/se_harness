@@ -15,6 +15,7 @@ from se_harness import __version__
 from se_harness.cli import build_parser, main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, sha256, template_root, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, IntegrityError, canonical_sha256, canonical_text_bytes, digest_for_schema, parse_lock
+from tests.mutation_guard_support import trusted_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +23,12 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 class HarnessCtlTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 

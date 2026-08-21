@@ -32,8 +32,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
-| `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC | bind selected work, verification contracts, evidence, snapshot, and exact clean `HEAD` |
-| `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS | bind release policy, eligible VRECs, exact work coverage, version, and the same candidate commit |
+| `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
+| `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
 
 ## Repository setup and inspection
 
@@ -80,7 +80,7 @@ harnessctl upgrade [TARGET]
 harnessctl upgrade [TARGET] --apply
 ```
 
-The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It changes only eligible managed content and stops without a partial managed update when customization or conflict prevents a safe plan. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It requires an already-published target evaluator installed from exact wheel bytes outside the checkout, changes only eligible managed content, and stops without a partial managed update when identity, customization, or conflict prevents a safe plan. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
 
 ## Domain and artifact authoring
 
@@ -90,6 +90,8 @@ harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-r
 ```
 
 Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. Existing valid flat layouts remain discoverable and are not automatically migrated.
+
+Non-dry-run authoring uses the common pre-write mutation guard. The invoking environment must match the schema-3 released-evaluator identity locked by the target repository; candidate source and editable or contaminated installs fail without creating the requested path.
 
 ## Explicit artifact renumbering
 
@@ -142,7 +144,7 @@ harnessctl capture-verification [TARGET] \
   [--owner ROLE] [--domain DOMAIN] [--output PATH]
 ```
 
-Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. The command requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, and writes only `status = "ready"`.
+Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
@@ -161,7 +163,7 @@ harnessctl prepare-release [TARGET] \
 
 Repeat `--verification-record` and `--work-order` for aggregate releases. The selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, included records must be eligible, and every record must bind the same candidate commit.
 
-The command writes only `status = "ready"`. It does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
+Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The managed `.gitattributes` fragment preserves LF evidence bytes across platforms so the bound SHA-256 survives checkout. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 
 ## Authority summary
 

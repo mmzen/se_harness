@@ -32,9 +32,12 @@ LOCK_NAME = ".engineering-harness.lock"
 CONFIG_NAME = ".engineering-harness.toml"
 BEGIN_MARKER = "<!-- se-harness:begin -->"
 END_MARKER = "<!-- se-harness:end -->"
+ATTRIBUTE_BEGIN_MARKER = "# se-harness:begin"
+ATTRIBUTE_END_MARKER = "# se-harness:end"
 FRAGMENT_TARGETS = {
     "AGENTS.md.fragment": "AGENTS.md",
     "CLAUDE.md.fragment": "CLAUDE.md",
+    "gitattributes.fragment": ".gitattributes",
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
@@ -126,20 +129,33 @@ def template_files() -> list[TemplateFile]:
     return _templates()
 
 
-def _block(fragment: bytes) -> bytes:
+def _block(fragment: bytes, target: Path) -> bytes:
     content = fragment.decode("utf-8").strip()
+    if target == Path(".gitattributes"):
+        return f"{ATTRIBUTE_BEGIN_MARKER}\n{content}\n{ATTRIBUTE_END_MARKER}\n".encode("utf-8")
     return f"{BEGIN_MARKER}\n{content}\n{END_MARKER}\n".encode("utf-8")
 
 
 def _extract_block(content: bytes) -> bytes | None:
-    begin_marker = BEGIN_MARKER.encode("utf-8")
-    end_marker = END_MARKER.encode("utf-8")
-    begin_count = content.count(begin_marker)
-    end_count = content.count(end_marker)
-    if begin_count == 0 and end_count == 0:
+    detected: list[tuple[bytes, bytes]] = []
+    for begin_text, end_text in (
+        (BEGIN_MARKER, END_MARKER),
+        (ATTRIBUTE_BEGIN_MARKER, ATTRIBUTE_END_MARKER),
+    ):
+        begin_marker = begin_text.encode("utf-8")
+        end_marker = end_text.encode("utf-8")
+        begin_count = content.count(begin_marker)
+        end_count = content.count(end_marker)
+        if begin_count == 0 and end_count == 0:
+            continue
+        if begin_count != 1 or end_count != 1:
+            raise HarnessError("managed integration markers are incomplete or duplicated")
+        detected.append((begin_marker, end_marker))
+    if not detected:
         return None
-    if begin_count != 1 or end_count != 1:
+    if len(detected) != 1:
         raise HarnessError("managed integration markers are incomplete or duplicated")
+    begin_marker, end_marker = detected[0]
     start = content.find(begin_marker)
     end = content.find(end_marker)
     if start < 0 or end < start:
@@ -165,7 +181,7 @@ def _merge_block(current: bytes | None, desired_block: bytes) -> bytes:
         return desired_block
     existing = _extract_block(current)
     if existing is not None:
-        start = current.find(BEGIN_MARKER.encode("utf-8"))
+        start = current.find(existing)
         end = start + len(existing)
         return current[:start] + desired_block + current[end:]
     separator = b"" if current.endswith((b"\n", b"\r\n")) else b"\n"
@@ -252,7 +268,7 @@ def plan_install(
         destination = safe_destination(target, item.target)
         current = destination.read_bytes() if destination.exists() else None
         rendered = _render(item.source.read_bytes(), variables)
-        desired = _merge_block(current, _block(rendered)) if item.mode == "fragment" else rendered
+        desired = _merge_block(current, _block(rendered, item.target)) if item.mode == "fragment" else rendered
         relative = item.target.as_posix()
         old_entry = old_files.get(relative, {}) if isinstance(old_files.get(relative, {}), dict) else {}
 
@@ -370,8 +386,33 @@ def _restore_snapshot(snapshot: dict[Path, bytes | None]) -> list[str]:
 
 
 def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, allow_updates: bool) -> dict:
-    target.mkdir(parents=True, exist_ok=True)
     changes = list(changes)
+    if allow_updates:
+        refreshed_changes, refreshed_lock = plan_install(
+            target,
+            project_name=None,
+            mode="upgrade",
+        )
+        if old_lock != refreshed_lock or changes != refreshed_changes:
+            raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
+        from se_harness import mutation_guard
+
+        mutation_guard.require_mutation_authority(
+            target,
+            operation="upgrade-apply",
+            allow_upgrade_transition=True,
+        )
+    elif old_lock.get("tool_version") is not None or (target / CONFIG_NAME).exists():
+        # Init and first adoption have no installed authority to prove. A direct
+        # API call against an already-installed root is an ordinary mutation,
+        # even when its caller disables managed-file updates.
+        from se_harness import mutation_guard
+
+        mutation_guard.require_mutation_authority(
+            target,
+            operation="installed-root-apply",
+        )
+    target.mkdir(parents=True, exist_ok=True)
     blocking = {"conflict", "customized"}
     if any(item.action in blocking for item in changes):
         raise HarnessError("installation has conflicts or customizations; no files were written")

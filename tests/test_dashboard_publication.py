@@ -40,6 +40,43 @@ class GitReleaseFixture(unittest.TestCase):
         self.commit("candidate")
         self.candidate = self.git("rev-parse", "HEAD")
         self.git("tag", "-a", "v1.2.3", "-m", "release 1.2.3")
+        evaluator = {
+            "version": "0.5.0",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "a" * 64,
+            "archive_name": "se_harness-0.5.0-py3-none-any.whl",
+            "archive_sha256": "b" * 64,
+        }
+        self.write(
+            ".engineering-harness.lock",
+            json.dumps({"schema": 3, "tool_version": "0.5.0", "evaluator": evaluator, "files": {}}, sort_keys=True) + "\n",
+        )
+        evidence = {
+            "schema": "se-harness-evaluator-evidence-v1",
+            "role": "released-evaluator",
+            "evaluator": evaluator,
+            "origins": {
+                "python_executable": "<evaluator-root>/bin/python",
+                "module": "<evaluator-root>/lib/se_harness/runtime_identity.py",
+                "distribution": "<evaluator-root>/lib/site-packages",
+                "templates": "<evaluator-root>/share/se-harness/templates/repository/standard",
+                "entry_point": "<evaluator-root>/bin/harnessctl",
+            },
+            "environment": {
+                "isolated_python": True,
+                "user_site_enabled": False,
+                "pythonpath_present": False,
+                "entry_point_resolved": True,
+                "checkout_excluded": True,
+            },
+            "diagnostics": [],
+        }
+        self.evaluator_evidence_path = "docs/engineering/release/evidence/RLS-TST-001-evaluator.json"
+        self.evaluator_evidence = (
+            json.dumps(evidence, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
+        )
+        self.evaluator_evidence_sha256 = sha256(self.evaluator_evidence.encode("utf-8"))
+        self.write(self.evaluator_evidence_path, self.evaluator_evidence)
         self.record_path = "docs/engineering/release/releases/RLS-TST-001.md"
         self.write(self.record_path, self.release_record("RLS-TST-001"))
         self.commit("integrate released record")
@@ -85,6 +122,8 @@ git_object_format = "sha1"
 released_at = "2026-08-16T12:00:00Z"
 authorized_by = "release-owner"
 tag = "v1.2.3"
+evaluator_evidence_path = "{self.evaluator_evidence_path}"
+evaluator_evidence_sha256 = "{self.evaluator_evidence_sha256}"
 
 [relations]
 satisfies = ["REL-TST-001"]
@@ -152,6 +191,51 @@ releases_work = ["WO-TST-001"]
             PUBLICATION.resolve_release(self.root, "latest", default_ref="refs/heads/main")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "main integration branch"):
             PUBLICATION.resolve_release(self.root, "v1.2.3", default_ref="HEAD")
+
+    def test_missing_evaluator_binding_fails_publication_replay(self) -> None:
+        record = self.release_record("RLS-TST-001")
+        record = "\n".join(
+            line
+            for line in record.splitlines()
+            if not line.startswith("evaluator_evidence_")
+        ) + "\n"
+        self.write(self.record_path, record)
+        self.commit("remove evaluator evidence binding")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "no canonical evaluator evidence binding"):
+            self.resolve()
+
+    def test_modified_evaluator_evidence_fails_publication_replay(self) -> None:
+        value = json.loads(self.evaluator_evidence)
+        value["environment"]["isolated_python"] = False
+        self.write(
+            self.evaluator_evidence_path,
+            json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n",
+        )
+        self.commit("modify evaluator evidence")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "evaluator evidence digest differs"):
+            self.resolve()
+
+    def test_evaluator_evidence_must_match_locked_identity(self) -> None:
+        value = json.loads(self.evaluator_evidence)
+        value["evaluator"]["payload_sha256"] = "c" * 64
+        changed = json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
+        self.evaluator_evidence_sha256 = sha256(changed.encode("utf-8"))
+        self.write(self.evaluator_evidence_path, changed)
+        self.write(self.record_path, self.release_record("RLS-TST-001"))
+        self.commit("bind mismatched evaluator evidence")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from the standard lock"):
+            self.resolve()
+
+    def test_later_evaluator_upgrade_does_not_rewrite_release_history(self) -> None:
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"]["payload_sha256"] = "c" * 64
+        lock["evaluator"]["archive_sha256"] = "d" * 64
+        self.write(".engineering-harness.lock", json.dumps(lock, sort_keys=True) + "\n")
+        self.commit("advance evaluator after release")
+        result = self.resolve()
+        self.assertEqual(self.governance, result.governance_commit)
+        self.assertEqual(self.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
 
 
 class EvaluatorDescriptorTests(unittest.TestCase):

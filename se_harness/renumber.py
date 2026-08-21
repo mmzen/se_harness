@@ -1130,6 +1130,12 @@ def _postconditions(plan: RenumberPlan, state_name: str) -> dict[str, Any]:
 
 
 def apply_renumber_plan(plan: RenumberPlan) -> RenumberPlan:
+    from se_harness import mutation_guard
+
+    mutation_guard.require_mutation_authority(
+        plan.repository_root,
+        operation="renumber-artifacts-apply",
+    )
     refreshed = build_renumber_plan(
         plan.repository_root,
         [f"{item.old}={item.new}" for item in plan.mappings],

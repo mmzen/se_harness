@@ -8,8 +8,10 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from se_harness.cli import main
+from tests.mutation_guard_support import trusted_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -87,6 +89,12 @@ def formal(
 
 class ArchitectureTraceabilityTests(unittest.TestCase):
     def setUp(self) -> None:
+        self.guard = mock.patch(
+            "se_harness.mutation_guard.require_mutation_authority",
+            side_effect=trusted_mutation_authority,
+        )
+        self.guard.start()
+        self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
         self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Trace Sample")[0])

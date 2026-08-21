@@ -16,6 +16,7 @@ from typing import Any
 
 import tomllib
 
+from se_harness import mutation_guard
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import HarnessError, ensure_target, safe_destination, template_root
 
@@ -240,6 +241,62 @@ def _atomic_write(path: Path, content: str) -> None:
             os.unlink(temporary_name)
 
 
+def _atomic_write_bytes(path: Path, content: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        try:
+            os.link(temporary_name, path)
+        except FileExistsError as exc:
+            raise HarnessError(f"evaluator evidence already exists: {path}") from exc
+        except OSError as exc:
+            raise HarnessError(f"cannot create evaluator evidence atomically: {exc}") from exc
+    finally:
+        if os.path.exists(temporary_name):
+            os.unlink(temporary_name)
+
+
+def _evaluator_evidence_output(
+    repository_root: Path,
+    record_id: str,
+    domain: str | None,
+) -> tuple[Path, str]:
+    relative = Path("docs") / "engineering"
+    if domain is not None:
+        relative = relative / domain
+    relative = relative / "evidence" / f"{record_id}-evaluator.json"
+    destination = safe_destination(repository_root, relative)
+    if destination.exists():
+        raise HarnessError(f"evaluator evidence already exists: {relative.as_posix()}")
+    return destination, relative.as_posix()
+
+
+def _write_record_and_evidence(
+    record: Path,
+    content: str,
+    evidence: Path,
+    evidence_bytes: bytes,
+) -> None:
+    wrote_evidence = False
+    try:
+        _atomic_write_bytes(evidence, evidence_bytes)
+        wrote_evidence = True
+        _atomic_write(record, content)
+    except BaseException as exc:
+        if wrote_evidence:
+            try:
+                evidence.unlink()
+            except OSError as cleanup_error:
+                raise HarnessError(
+                    f"record creation failed and evaluator-evidence rollback was incomplete: {cleanup_error}"
+                ) from exc
+        raise
+
+
 def _timestamp() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -314,6 +371,15 @@ def capture_verification(
         output,
         repository_record_relative_path("verification_record", record_id, selected_domain),
     )
+    evidence_destination, evaluator_evidence_path = _evaluator_evidence_output(
+        root,
+        record_id,
+        selected_domain,
+    )
+    authority = mutation_guard.require_mutation_authority(
+        root,
+        operation="capture-verification",
+    )
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
     snapshot_hash = _generate_snapshot(root)
@@ -338,6 +404,8 @@ worktree_state = "clean"
 verified_at = "{now}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
+evaluator_evidence_path = "{evaluator_evidence_path}"
+evaluator_evidence_sha256 = "{authority.evidence_sha256}"
 
 [relations]
 verifies_work_order = {work_array}
@@ -350,7 +418,12 @@ This ready record binds retained evidence for {readable_work} to candidate commi
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 '''
-    _atomic_write(destination, content)
+    _write_record_and_evidence(
+        destination,
+        content,
+        evidence_destination,
+        authority.evidence_bytes,
+    )
     return destination
 
 
@@ -424,6 +497,16 @@ def prepare_release(
         output,
         repository_record_relative_path("release_record", record_id, selected_domain),
     )
+    evidence_destination, evaluator_evidence_path = _evaluator_evidence_output(
+        root,
+        record_id,
+        selected_domain,
+    )
+    authority = mutation_guard.require_mutation_authority(
+        root,
+        operation="prepare-release",
+        require_archive=True,
+    )
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
@@ -443,6 +526,8 @@ commit = "{commit}"
 git_object_format = "{object_format}"
 released_at = "{now}"
 authorized_by = "{authorized_by}"
+evaluator_evidence_path = "{evaluator_evidence_path}"
+evaluator_evidence_sha256 = "{authority.evidence_sha256}"
 {tag_line}
 [relations]
 satisfies = ["{release_contract_id}"]
@@ -456,5 +541,10 @@ This ready record proposes release `{version}` for {readable_work} from candidat
 
 The release candidate commit may precede the governance commit retaining this record. Any release tag must be created and checked by the authorized release process.
 '''
-    _atomic_write(destination, content)
+    _write_record_and_evidence(
+        destination,
+        content,
+        evidence_destination,
+        authority.evidence_bytes,
+    )
     return destination
