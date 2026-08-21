@@ -6,6 +6,8 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. That released alpha evaluates the final 0.5.0 candidate through the ordinary standard repository lifecycle, with no self-hosting installation profile, evaluator descriptor, or special promotion command. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
+The current source candidate version is 0.6.0. That candidate identity does not change the separately locked released root evaluator or grant verification, release, publication, deployment, or repository-upgrade authority.
+
 ## Development environment
 
 SE Harness requires Python 3.11 or later and has no runtime dependencies outside the standard library. From a trusted source checkout, install candidate source into a dedicated environment:
