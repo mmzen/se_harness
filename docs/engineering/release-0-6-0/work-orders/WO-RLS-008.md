@@ -2,7 +2,7 @@
 id = "WO-RLS-008"
 type = "work_order"
 title = "Qualify the integrated se-harness 0.6.0 candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -32,6 +32,12 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-21T13:49:23Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-21T14:47:15Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Qualify the integrated se-harness 0.6.0 candidate
@@ -49,6 +55,8 @@ After preliminary qualification found that the existing documentation contract r
 Commit-bound verification is classified `required` because the release owner, assurance owner, consumers, publication automation, and future repository upgrades will rely on the exact integrated executable package, standard template, evaluator boundary, provenance, and distribution bytes.
 
 Start preflight passed on 2026-08-21 with the isolated public 0.5.0 evaluator, and the implementation actor read every file in its 15-file manifest before changing candidate identity. The `in_progress` status records execution within the approved scope only and grants none of the excluded authorities.
+
+After the separately authorized candidate commit, local exact-candidate replay, dedicated candidate-branch push, and successful hosted candidate-source, candidate-package, and Engineering Harness lanes, the accountable owner authorized one post-candidate governance commit retaining the evidence and transitioning only this work order from `in_progress` to `implemented`. Candidate identity remains `827b2709292abaa3458bb3b4cac37b582378c585`; the decision grants no aggregate VREC or RLS authority and no push, tag, publication, deployment, maintenance mutation, credential use, external policy change, or root-evaluator upgrade.
 
 
 ## Objective

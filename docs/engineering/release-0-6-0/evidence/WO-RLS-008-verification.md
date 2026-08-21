@@ -1,10 +1,10 @@
-# WO-RLS-008 preliminary qualification evidence
+# WO-RLS-008 qualification evidence
 
 ## Evidence status and authority boundary
 
-This evidence records work performed on 2026-08-21 under the approved bounded implementation envelope for `REL-SEH-007` and `WO-RLS-008`. It is preliminary working-tree and disposable-fixture evidence. It is not a candidate commit, aggregate capture, VREC or RLS proposal or transition, release decision, tag, publication, deployment, maintenance mutation, credential use, external policy change, or root-evaluator upgrade.
+This evidence records work performed on 2026-08-21 under the approved bounded implementation envelope for `REL-SEH-007` and `WO-RLS-008`. It now includes the separately authorized operational candidate commit, local exact-candidate replay, dedicated candidate-branch push, and hosted exact-candidate results. The existing Git credential was used only for that one push. This evidence is not aggregate capture, a VREC or RLS proposal or transition, a release decision, tag, publication, deployment, maintenance mutation, external policy change, or root-evaluator upgrade.
 
-`WO-RLS-008` remains `in_progress`. The authorized documentation correction and the separately authorized historical WEX dispositions are complete, and preliminary qualification now passes on Python 3.14.6 and Python 3.11.9. Exact-candidate qualification remains stopped only because the operational candidate commit is deliberately unauthorized.
+`WO-RLS-008` is `implemented`. Candidate commit `827b2709292abaa3458bb3b4cac37b582378c585` passes local exact-candidate qualification on Python 3.14.6 and Python 3.11.9 and all push-triggered hosted qualification lanes. The separately authorized post-candidate governance commit retains only this evidence update and the work-order transition; it does not replace or mutate the candidate.
 
 ## Approved aggregate scope
 
@@ -13,7 +13,7 @@ This evidence records work performed on 2026-08-21 under the approved bounded im
 - Existing keyed evidence: the seven paths named in `WO-RLS-008`; this file is the eighth keyed evidence path.
 - Excluded release-bearing work: `WO-HUP-001`, `WO-RCA-001`, emergency publication history, merge-only commits, governance transitions, and every work order not explicitly allowed by `REL-SEH-007`.
 
-## Baseline and preliminary source identity
+## Baseline and exact candidate identity
 
 | Item | Identity |
 | --- | --- |
@@ -21,110 +21,118 @@ This evidence records work performed on 2026-08-21 under the approved bounded im
 | `v0.5.0` released candidate commit | `c42bbac20f14268ef162c9628dd1d2b45ea843af` |
 | Initial clean `main` / operational working-tree parent | `cd80f0bde9f24a069d15ba461d1257261d744e9c` |
 | Initial parent tree | `9dc1d1f9aaf9c2bc2b2c8926772b67d558ba0d85` |
-| Preliminary build epoch | `1787316550` (the initial parent commit timestamp; not a final candidate epoch) |
-| Disposable qualification-only Git fixture | `6c2c438bfd760bc680ea4cccb34fd69a7018c98c` |
+| Operational candidate commit | `827b2709292abaa3458bb3b4cac37b582378c585` |
+| Operational candidate tree | `cdeb5f5e0fe512e042dd13d8f8071dc06a1b40e0` |
+| Exact candidate build epoch | `1787322471` |
+| Exact candidate archive SHA-256 | `6ed1b6e4dcad1e24d042babb773be5e52638cb11a4a6fe458da03178a187aabc` |
 
-The disposable fixture commit exists only under `work/release-0.6.0-preliminary/export-c`. It supplies Git metadata to tests and black-box acceptance without changing the operational repository. It must not be represented as, captured as, tagged as, or promoted as the release candidate.
+The retained exact-candidate replay is under `work/release-0.6.0-exact-827b270`. All source exports came from `git -c core.autocrlf=false archive` of the operational candidate. The two test exports received fixture-only Git metadata so Git-dependent tests could execute; those disposable fixture commits are not represented as the candidate identity. All candidate, bundle, package, and verifier evidence below is explicitly bound to the operational candidate commit.
 
 ## Version and changed-path inventory
 
-The approved working tree currently has candidate identity `0.6.0` in:
+The candidate commit has candidate identity `0.6.0` in:
 
 - `pyproject.toml`;
 - `se_harness/__init__.py`; and
 - the exact public install example in `README.md`.
 - the current source-candidate statement in `docs/notes/developing-se-harness.md`.
 
-The exact released-root surfaces remain at 0.5.0 and have no Git diff:
+The exact released-root surfaces remain at 0.5.0 and have no candidate-commit diff:
 
 - `.engineering-harness.toml`;
 - `.engineering-harness.lock`;
 - `ENGINEERING_HARNESS.md`; and
 - `.github/workflows/engineering-harness.yml`.
 
-Tracked product changes are limited to `README.md`, `pyproject.toml`, and `se_harness/__init__.py`. The only untracked operational path is `docs/engineering/release-0-6-0/`. No candidate commit was created.
+The commit has exactly 13 changed paths: the three product-version files; `docs/notes/developing-se-harness.md`; the four `REL-SEH-007` / `WO-RLS-008` release-domain files; `WO-VSP-006` plus its evidence; and the three explicitly dispositioned WEX verification records. `git diff --check HEAD^ HEAD` passes. No protected released-root path changed.
 
 ## Runtime identities
 
 | Plane | Result | Evidence |
 | --- | --- | --- |
 | Released evaluator | PASS | Public `se-harness==0.5.0`, Python 3.14.6, isolated Python, user site disabled, distribution/module/templates/entry point under `work/released-evaluator-0.5.0`, no checkout fallback; wheel SHA-256 `974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f`. |
-| Candidate source | PASS, preliminary fixture | Version 0.6.0, Python 3.14.6, module/templates/distribution metadata under the disposable `export-c`, bound only to fixture commit `6c2c438bfd760bc680ea4cccb34fd69a7018c98c`. |
-| Candidate package | PASS, preliminary fixture | Fresh wheel-only environment, Python 3.14.6 with `-I`, user site disabled, package/templates/entry point outside the checkout, bound only to the disposable fixture commit. |
+| Candidate source | PASS, exact candidate | Version 0.6.0, Python 3.14.6, module/templates/distribution metadata under the exact archive export, bound to commit `827b2709292abaa3458bb3b4cac37b582378c585`, no diagnostics. |
+| Candidate package | PASS, exact candidate | Fresh wheel-only Python 3.14.6 and Python 3.11.9 environments with `-I`, user site disabled, package/templates/entry point outside the checkout, bound to the operational candidate commit. |
 
-The initial editable-install identity failure was correctly rejected because editable distribution metadata resolved outside the checkout. Removing that install and executing candidate source directly from a clean checkout/export satisfied the candidate-source role. The globally installed Python was not used as the released evaluator because it resolved an unrelated editable 0.4.1 checkout.
+The preliminary editable-install identity failure remains correctly rejected because editable distribution metadata resolved outside the checkout. Exact source identity ran from the archived candidate export; exact package identity ran only from fresh offline wheel installations. The globally installed Python was not used as the released evaluator because it resolves an unrelated editable 0.4.1 checkout.
 
 ## Root and graph checks
 
 | Check | Result |
 | --- | --- |
 | Released-0.5.0 start preflight after the complete 15-file reading manifest | PASS |
-| Released-0.5.0 review preflight for `WO-RLS-008` | PASS; `ready: true`, status `in_progress`, no diagnostics |
+| Released-0.5.0 exact-candidate review preflight for `WO-RLS-008` | PASS; `ready: true`, status `in_progress`, no diagnostics |
+| Released-0.5.0 post-hosted implementation review preflight for `WO-RLS-008` | PASS; `ready: true`, status `implemented`, no diagnostics |
+| Released-0.5.0 review preflight for `WO-VSP-006` | PASS; no diagnostics |
 | Released-0.5.0 root doctor | PASS; managed installation unchanged; existing candidate-template W013 advisories retained |
-| Candidate artifact validation | PASS: 596 artifacts, 0 errors, 44 existing maintenance warnings, 0 structure/governance/policy warnings |
+| Candidate artifact validation | PASS: 597 artifacts, 0 errors, 44 existing maintenance warnings, 0 structure/governance/policy warnings |
 | Release-distribution validation | PASS: no distribution-bearing records exist yet |
-| Released-evaluator inspection | PASS observation: 597 artifacts, 2,140 relations, 44 maintenance findings, zero decisions required, and only `WO-RLS-008` active |
-| Released-evaluator Explorer | PASS: manifest `015ee355118335b3f4560dd309a1e7a9d24f21031b13b5a11d49d1e0cd90ca59` |
-| Portable release surface, repository and both wheels | PASS |
-| `git diff --check` | PASS; Windows LF-to-CRLF notices only |
+| Released-evaluator exact-candidate inspection | PASS observation: 597 artifacts, 2,140 relations, 44 maintenance findings, zero decisions required, and only `WO-RLS-008` active |
+| Released-evaluator post-hosted implementation inspection | PASS observation: zero active work, zero decisions required, and only implemented `WO-RLS-008` in the assurance-pending queue |
+| Released-evaluator Explorer | PASS: manifest `72de5c772c3b402be48aca38fabad38d8b680c41766fbeb7b6724abc262a0715` |
+| Portable release surface, repository, both wheels, and both installed CLIs | PASS |
+| `git diff --check HEAD^ HEAD` | PASS |
 
 Under the later separate assurance authorization, governance-only `WO-VSP-006` explicitly superseded `VREC-WEX-001`, `VREC-WEX-002`, and `VREC-WEX-003` with verified, coverage-preserving `VREC-WEX-005`. Released-evaluator inspection now reports zero decision-required items. The governance work order is excluded from the exact eight-work-order release-bearing allow-list.
 
 ## Source regression results
 
-The complete Python 3.14.6 suite executed 369 tests in 183.249 seconds with five conditional skips. The first LF-export run reported two failures and one error:
+Two independent exact-archive test exports passed the complete suite:
 
-1. The release-manifest test required Git metadata that a plain `git archive` export intentionally lacked.
-2. PowerShell's first archive invocation applied Windows CRLF conversion to two Git-normalized JSON contracts.
-3. `docs/notes/developing-se-harness.md` does not contain the candidate version `0.6.0`, violating `test_development_note_explains_standard_evaluator_and_candidate_planes`.
+- Python 3.14.6: 369 tests in 199.387 seconds, five conditional skips, zero failures or errors.
+- Python 3.11.9: 369 tests in 202.662 seconds, the same five conditional skips, zero failures or errors.
 
-The first two are disposable-fixture mechanics, not product failures. Re-exporting with `git -c core.autocrlf=false archive` and initializing a fixture-only Git repository made the exact two targeted tests pass. The documentation assertion still fails alone. Because `docs/notes/developing-se-harness.md` is outside `[execution_scope].paths`, it was not modified.
+The preliminary current-version, Git-metadata, and JSON byte-parity failures remain resolved by the authorized documentation correction and LF-normalized exact exports. No candidate source byte was changed during the replay.
 
-After the narrow scope amendment and WEX dispositions entered a fresh LF-normalized fixture, the complete suite passed on both supported local runtimes:
+## Exact reproducible distributions
 
-- Python 3.14.6: 369 tests in 184.924 seconds, five conditional skips, zero failures or errors.
-- Python 3.11.9: 369 tests in 187.069 seconds, the same five conditional skips, zero failures or errors.
-
-The previously failing current-version, Git-metadata, and JSON byte-parity cases all pass in the corrected fixture.
-
-## Preliminary reproducible distributions
-
-Two builds used separate LF-normalized exports, Python 3.14.6, `SOURCE_DATE_EPOCH=1787316550`, and:
+Two builds used separate untouched exact candidate exports, Python 3.14.6, `SOURCE_DATE_EPOCH=1787322471`, and:
 
 ```text
 python -m build --wheel --sdist --no-isolation --outdir <raw-output> <export>
-python scripts/normalize_sdist.py --epoch 1787316550 <raw-sdist> <final-sdist>
+python scripts/normalize_sdist.py --epoch 1787322471 <raw-sdist> <final-sdist>
 ```
 
-| File | Build C SHA-256 | Build D SHA-256 | Result |
+| File | Build A SHA-256 | Build B SHA-256 | Result |
 | --- | --- | --- | --- |
-| `se_harness-0.6.0-py3-none-any.whl` | `d10f2f7673b1928613b508678e1b050c120ae87f5a7ff9b6f8a51f4c2f4a5b3c` | `d10f2f7673b1928613b508678e1b050c120ae87f5a7ff9b6f8a51f4c2f4a5b3c` | byte-identical |
-| `se_harness-0.6.0.tar.gz` | `cdbca8e84425314010d66987d302f483cfeca2af7c6ef7e96936e00a47d91e00` | `cdbca8e84425314010d66987d302f483cfeca2af7c6ef7e96936e00a47d91e00` | byte-identical after normalization |
+| `se_harness-0.6.0-py3-none-any.whl` | `9eb550d2fbab2ea8906aadb39ff75271ca9037267d721b8705cad93012b3ed37` | `9eb550d2fbab2ea8906aadb39ff75271ca9037267d721b8705cad93012b3ed37` | byte-identical |
+| `se_harness-0.6.0.tar.gz` | `df10d40eeebfcecf5bbd082aba3444bab8fd63146c1f7c5d2a03c0ad313d98f1` | `df10d40eeebfcecf5bbd082aba3444bab8fd63146c1f7c5d2a03c0ad313d98f1` | byte-identical after normalization |
 
 Both wheels pass the repository's portable-release-surface policy. The build emitted the existing setuptools notice that the TOML-table form of `project.license` is deprecated after 2027-02-18; it is not a current build failure and changing it is outside this release-integration scope.
 
-These hashes are preliminary and non-promotable. A final exact-candidate replay must use the actual candidate commit timestamp.
-
-The documentation and governance files are intentionally absent from the package manifest, so the amended replay retained the same wheel and normalized-sdist hashes. A wheel rebuilt offline from the normalized sdist at the same epoch is byte-identical to both direct wheels at SHA-256 `d10f2f7673b1928613b508678e1b050c120ae87f5a7ff9b6f8a51f4c2f4a5b3c`.
+An offline wheel reconstruction from the normalized sdist at the same epoch is byte-identical to both direct wheels. The release-bundle manifest is bound to the operational commit and records source-manifest SHA-256 `1fa0127abddd446a519bab667cd89cfaeff95979775f28d500ea1c993dad1832`, checksum-content SHA-256 `63a0d91bc027447449901c9733e1caee5d32d73c8e60c2eda1ce357f7550459b`, and manifest-file SHA-256 `8b6e3ad52b5e65f50b4dc0ecd98cf12f46fd100d73c23d5864678dc027fdbb89`.
 
 ## Fresh-package and verifier-owned acceptance
 
-The exact preliminary wheel installed offline with no dependencies in a fresh environment and reported version 0.6.0. Candidate-package identity passed. A disposable standard repository passed init, doctor, validate, dashboard, and same-version transactional upgrade behavior. Installed CLI portable-surface policy passed.
+The exact wheel installed offline with no dependencies into fresh Python 3.14.6 and Python 3.11.9 environments and reported version 0.6.0. Candidate-package identity and installed-CLI portable-surface policy passed on both runtimes.
 
-The isolated released 0.5.0 evaluator ran verifier-owned black-box acceptance against the amended fixture-bound wheel on Python 3.14.6 and Python 3.11.9. All ten scenarios passed on both runtimes: installed identity, init, adopt, doctor, validate, dashboard, safe upgrade, customized-content refusal, corrupted-integrity refusal, and authority denial.
+The isolated released 0.5.0 evaluator ran verifier-owned black-box acceptance against the exact operational-candidate wheel on Python 3.14.6 and Python 3.11.9. All ten scenarios passed on both runtimes: installed identity, init, adopt, doctor, validate, dashboard, safe upgrade, customized-content refusal, corrupted-integrity refusal, and authority denial.
 
-- Python 3.14.6 acceptance manifest SHA-256: `b487c344f6f77a60bfd460cdffd7553d7421e9e855b469b2b115eef8a97523b7`.
-- Python 3.11.9 acceptance manifest SHA-256: `2a39f6bc2a51b5ba5581a9dc9e91b64b8d78fe8426d93b8d7f94efbc83ccbb87`.
+- Python 3.14.6 acceptance manifest SHA-256: `6845459905f7cd27a09ab0fcb6cf18b66a26b2174876169027843adeb6bd5630`.
+- Python 3.11.9 acceptance manifest SHA-256: `72446826458a3fa2ad3270c911fb9289fc9e326291ef8c64989c965274ce55c3`.
+- Released verifier wheel SHA-256: `974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f`.
 - Released verifier contract SHA-256: `a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75`.
 
-The manifest is bound to the disposable fixture commit and is not an operational candidate manifest or assurance decision.
+Both manifests are bound to operational candidate commit `827b2709292abaa3458bb3b4cac37b582378c585`. They are retained qualification evidence, not an aggregate assurance decision or lifecycle transition.
+
+## Hosted exact-candidate qualification
+
+The separately authorized credential use created `origin/candidate/0.6.0` at exactly `827b2709292abaa3458bb3b4cac37b582378c585`. The push-triggered workflows completed against that same `head_sha` without checkout mutation:
+
+| Workflow / job | Run | Result | Timing (UTC) |
+| --- | --- | --- | --- |
+| SE Harness Candidate Evidence / Candidate source evidence | [run 97, job 96806587928](https://github.com/mmzen/se_harness/actions/runs/32493552379/job/96806587928) | PASS | 2026-08-21 14:42:10 to 14:42:48 |
+| SE Harness Candidate Evidence / Candidate package evidence | [run 97, job 96806785170](https://github.com/mmzen/se_harness/actions/runs/32493552379/job/96806785170) | PASS | 2026-08-21 14:42:51 to 14:43:08 |
+| Engineering Harness / validate | [run 397, job 96806588077](https://github.com/mmzen/se_harness/actions/runs/32493552394/job/96806588077) | PASS | 2026-08-21 14:42:10 to 14:42:26 |
+
+The complete [Candidate Evidence run 97](https://github.com/mmzen/se_harness/actions/runs/32493552379) and [Engineering Harness run 397](https://github.com/mmzen/se_harness/actions/runs/32493552394) both concluded `success`. No pull request, merge, tag, release, publication, deployment, maintenance mutation, external policy change, or root-evaluator upgrade accompanied the push.
 
 ## Required work not yet performed
 
-- No operational candidate commit, exact candidate tree or epoch, exact-source replay, release bundle manifest, source manifest, hosted candidate lanes, or aggregate capture.
-- No `VREC-SEH-008` or `RLS-SEH-008` file was prepared and no aggregate VREC or RLS status changed. The only VREC status changes are the three separately authorized WEX supersessions retained under `WO-VSP-006`.
-- No merge, tag, GitHub Release, PyPI upload, Pages deployment, maintenance-line mutation, credential use, external policy change, or root-evaluator upgrade occurred.
+- No aggregate capture occurred, no `VREC-SEH-008` or `RLS-SEH-008` file was prepared, and no aggregate VREC or RLS status changed. The only VREC status changes are the three separately authorized WEX supersessions retained under `WO-VSP-006`.
+- The post-candidate governance commit is local only and has not been pushed.
+- No merge, tag, GitHub Release, PyPI upload, Pages deployment, maintenance-line mutation, credential use beyond the single authorized branch push, external policy change, or root-evaluator upgrade occurred.
 
 ## Current stop and next accountable decisions
 
-Qualification stops here under the work order's explicit authority boundary. The documentation correction, WEX supersession decisions, dual-runtime suites, reproducibility, offline reconstruction, and fresh-package acceptance now pass. The single next accountable decision is whether to authorize one operational candidate commit containing the reviewed implementation, governance decisions, and retained evidence. Exact candidate epoch builds, bundle/source manifests, hosted lanes, and aggregate capture must occur only after that separately authorized commit; aggregate VREC preparation and transition remain independently unauthorized.
+Implementation stops here under the work order's explicit authority boundary. The candidate commit, documentation correction, WEX supersession decisions, dual-runtime suites, reproducibility, offline reconstruction, runtime identities, bundle/source manifests, verifier-owned acceptance, hosted source/package/root lanes, retained evidence, and `WO-RLS-008` implementation transition now pass. Candidate identity remains `827b2709292abaa3458bb3b4cac37b582378c585`. Aggregate VREC and RLS preparation or transition remain separately unauthorized.
