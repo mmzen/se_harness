@@ -115,12 +115,15 @@ class InstructionArchitectureTests(unittest.TestCase):
                 1,
             )
         work_order.write_text(text, encoding="utf-8")
-
-    def curate_context(self, target: Path) -> None:
-        path = target / "docs" / "engineering" / "REPOSITORY_CONTEXT.md"
-        text = re.sub(r"TODO\[[A-Za-z0-9-]+\]", "confirmed", path.read_text(encoding="utf-8"))
-        text = text.replace("- Repository purpose: confirmed", "- Repository purpose: Track TODO items safely")
-        path.write_text(text, encoding="utf-8")
+        # The copied packet is history; a synthetic active work order needs an active
+        # governing chain, so requirements superseded later are restored to implemented.
+        for requirement in sorted((destination / "requirements").glob("REQ-*.md")):
+            text = requirement.read_text(encoding="utf-8")
+            if 'status = "superseded"' in text:
+                requirement.write_text(
+                    text.replace('status = "superseded"', 'status = "implemented"', 1),
+                    encoding="utf-8",
+                )
 
     def test_instruction_route_and_ownership_modes_are_explicit(self) -> None:
         target = self.installed_target()
@@ -143,7 +146,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual("managed", lock["files"]["ENGINEERING_HARNESS.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
-        self.assertEqual("seed", lock["files"]["docs/engineering/REPOSITORY_CONTEXT.md"]["mode"])
+        self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
         self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
 
     def test_inspection_guidance_packet_preserves_the_authority_boundary(self) -> None:
@@ -480,7 +483,6 @@ class InstructionArchitectureTests(unittest.TestCase):
 
     def test_preflight_returns_deterministic_reading_manifest_without_writes(self) -> None:
         target = self.installed_target()
-        self.curate_context(target)
         self.add_active_packet(target)
         before = {
             path.relative_to(target).as_posix(): path.read_bytes()
@@ -497,7 +499,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         self.assertEqual(0, code, error)
         report = json.loads(output)
-        self.assertEqual("se-harness-preflight-v1", report["schema"])
+        self.assertEqual("se-harness-preflight-v2", report["schema"])
         self.assertTrue(report["ready"])
         self.assertEqual("start", report["phase"])
         self.assertEqual("in_progress", report["work_order"]["status"])
@@ -511,7 +513,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
             self.assertIn(path, report["reading_manifest"])
-        self.assertEqual("confirmed", report["repository_commands"]["test"])
+        self.assertNotIn("repository_commands", report)
         after = {
             path.relative_to(target).as_posix(): path.read_bytes()
             for path in target.rglob("*")
@@ -519,16 +521,15 @@ class InstructionArchitectureTests(unittest.TestCase):
         }
         self.assertEqual(before, after)
 
-    def test_preflight_reports_context_phase_integrity_and_id_failures(self) -> None:
-        incomplete = self.installed_target("incomplete")
-        self.add_active_packet(incomplete)
-        code, output, _ = self.invoke("preflight", str(incomplete), "--work-order", "WO-IAR-001")
-        self.assertEqual(1, code)
-        self.assertIn("[C004]", output)
-        self.assertIn("unresolved context field", output)
+    def test_preflight_reports_phase_integrity_and_id_failures(self) -> None:
+        fresh = self.installed_target("fresh")
+        self.add_active_packet(fresh)
+        code, output, _ = self.invoke("preflight", str(fresh), "--work-order", "WO-IAR-001")
+        self.assertEqual(0, code)
+        self.assertIn("Harness preflight: PASS", output)
+        self.assertNotIn("[C0", output)
 
         completed = self.installed_target("completed")
-        self.curate_context(completed)
         self.add_active_packet(completed, status="implemented")
         code, output, _ = self.invoke("preflight", str(completed), "--work-order", "WO-IAR-001")
         self.assertEqual(1, code)
@@ -574,7 +575,6 @@ class InstructionArchitectureTests(unittest.TestCase):
 
     def test_preflight_requires_and_projects_explicit_assurance_for_selected_work(self) -> None:
         target = self.installed_target("assurance-preflight")
-        self.curate_context(target)
         self.add_active_packet(target)
 
         code, output, error = self.invoke(

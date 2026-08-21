@@ -27,7 +27,7 @@ from se_harness.installer import (
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
 
 
-PREFLIGHT_SCHEMA = "se-harness-preflight-v1"
+PREFLIGHT_SCHEMA = "se-harness-preflight-v2"
 WORK_ORDER_PATTERN = re.compile(r"^WO-[A-Z][A-Z0-9-]*-\d{3}$")
 START_STATUSES = {"approved", "in_progress"}
 REVIEW_STATUSES = START_STATUSES | {"implemented", "verified", "released"}
@@ -40,7 +40,6 @@ REQUIRED_PATHS = (
     "AGENTS.md",
     "CLAUDE.md",
     "ENGINEERING_HARNESS.md",
-    "docs/engineering/REPOSITORY_CONTEXT.md",
     "docs/engineering/README.md",
     "docs/engineering/WORKFLOW.md",
     "docs/engineering/WORKFLOW.json",
@@ -54,7 +53,6 @@ REQUIRED_PATHS = (
 )
 POLICY_PATHS = (
     "ENGINEERING_HARNESS.md",
-    "docs/engineering/REPOSITORY_CONTEXT.md",
     "docs/engineering/README.md",
     "docs/engineering/WORKFLOW.md",
     "docs/engineering/WORKFLOW.json",
@@ -63,31 +61,6 @@ POLICY_PATHS = (
     "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
 )
-CONTEXT_FIELDS = (
-    ("Repository purpose", "repository_purpose"),
-    ("Primary users or operators", "primary_users_or_operators"),
-    ("Accountable repository owners", "accountable_repository_owners"),
-    ("Setup", "setup"),
-    ("Build", "build"),
-    ("Test", "test"),
-    ("Lint or format", "lint_or_format"),
-    ("Additional required verification", "additional_required_verification"),
-    ("Entry points", "entry_points"),
-    ("Major components and responsibilities", "major_components_and_responsibilities"),
-    ("External services or dependencies", "external_services_or_dependencies"),
-    ("Generated paths", "generated_paths"),
-    ("Restricted or sensitive paths", "restricted_or_sensitive_paths"),
-    ("Files requiring specialized review", "files_requiring_specialized_review"),
-    ("Local conventions not captured elsewhere", "local_conventions"),
-)
-COMMAND_KEYS = {
-    "Setup": "setup",
-    "Build": "build",
-    "Test": "test",
-    "Lint or format": "lint_or_format",
-    "Additional required verification": "additional_required_verification",
-}
-UNRESOLVED_CONTEXT = re.compile(r"^TODO(?:\[[A-Za-z0-9-]+\])?$")
 _VALIDATOR_MODULE: ModuleType | None = None
 @dataclass(frozen=True, order=True)
 class InstallationCheck:
@@ -111,7 +84,6 @@ class PreflightReport:
     assurance: dict[str, str]
     diagnostics: tuple[PreflightDiagnostic, ...]
     reading_manifest: tuple[str, ...]
-    repository_commands: dict[str, str]
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -122,7 +94,6 @@ class PreflightReport:
             "assurance": self.assurance,
             "diagnostics": [asdict(item) for item in self.diagnostics],
             "reading_manifest": list(self.reading_manifest),
-            "repository_commands": self.repository_commands,
             "authority_boundary": AUTHORITY_BOUNDARY,
         }
 
@@ -262,36 +233,6 @@ def _load_validator_module() -> ModuleType:
     return module
 
 
-def _parse_context(path: Path) -> tuple[dict[str, str], list[PreflightDiagnostic]]:
-    diagnostics: list[PreflightDiagnostic] = []
-    values: dict[str, list[str]] = {label: [] for label, _ in CONTEXT_FIELDS}
-    try:
-        text = path.read_text(encoding="utf-8")
-    except (OSError, UnicodeError) as exc:
-        return {}, [PreflightDiagnostic("C001", path.as_posix(), f"cannot read repository context: {exc}")]
-    for line in text.splitlines():
-        for label, _ in CONTEXT_FIELDS:
-            prefix = f"- {label}:"
-            if line.startswith(prefix):
-                values[label].append(line[len(prefix) :].strip())
-
-    resolved: dict[str, str] = {}
-    for label, key in CONTEXT_FIELDS:
-        matches = values[label]
-        if not matches:
-            diagnostics.append(PreflightDiagnostic("C002", path.as_posix(), f"missing context field: {label}"))
-            continue
-        if len(matches) > 1:
-            diagnostics.append(PreflightDiagnostic("C003", path.as_posix(), f"duplicate context field: {label}"))
-            continue
-        value = matches[0]
-        if not value or UNRESOLVED_CONTEXT.fullmatch(value):
-            diagnostics.append(PreflightDiagnostic("C004", path.as_posix(), f"unresolved context field: {label}"))
-            continue
-        resolved[key] = value
-    return resolved, diagnostics
-
-
 def _targets(artifact: Any, relation: str) -> list[str]:
     value = artifact.relations.get(relation, [])
     return sorted(item for item in value if isinstance(item, str)) if isinstance(value, list) else []
@@ -317,13 +258,6 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
     for check in inspect_installation(root):
         if not check.passed:
             diagnostics.append(PreflightDiagnostic("I001", check.name, check.detail))
-
-    context_path = root / "docs" / "engineering" / "REPOSITORY_CONTEXT.md"
-    context_values, context_diagnostics = _parse_context(context_path)
-    diagnostics.extend(
-        PreflightDiagnostic(item.code, _relative(context_path, root), item.message)
-        for item in context_diagnostics
-    )
 
     artifacts: list[Any] = []
     validator: ModuleType | None = None
@@ -594,11 +528,6 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
     manifest = _unique_paths(
         list(POLICY_PATHS) + [_relative(item.path, root) for item in artifact_order]
     )
-    commands = {
-        COMMAND_KEYS[label]: context_values[key]
-        for label, key in CONTEXT_FIELDS
-        if label in COMMAND_KEYS and key in context_values
-    }
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
     return PreflightReport(
         ready=not ordered_diagnostics,
@@ -607,7 +536,6 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
         assurance=assurance_summary,
         diagnostics=ordered_diagnostics,
         reading_manifest=manifest,
-        repository_commands=dict(sorted(commands.items())),
     )
 
 
@@ -632,9 +560,6 @@ def render_preflight(report: PreflightReport) -> str:
     if report.reading_manifest:
         lines.extend(["", "Reading manifest:"])
         lines.extend(f"- {path}" for path in report.reading_manifest)
-    if report.repository_commands:
-        lines.extend(["", "Repository commands:"])
-        lines.extend(f"- {key}: {value}" for key, value in report.repository_commands.items())
     lines.extend(["", f"Authority boundary: {AUTHORITY_BOUNDARY}"])
     return "\n".join(lines)
 

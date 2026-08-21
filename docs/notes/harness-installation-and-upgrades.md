@@ -75,7 +75,7 @@ harnessctl adopt C:\path\to\existing-repository --project-name my-project
 - `init` expects an absent or empty target.
 - `adopt` preserves ordinary existing content, inserts bounded managed fragments where supported, and writes `docs/engineering/ADOPTION_REPORT.md` with observations.
 - `--dry-run` resolves and reports the complete plan without writing.
-- Neither operation invents approved product facts. Curate `docs/engineering/REPOSITORY_CONTEXT.md` and establish the first formal chain through accountable review.
+- Neither operation invents approved product facts. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`, and establish the first formal chain through accountable review.
 
 For GitHub repositories, both operations install one dedicated managed `.github/workflows/engineering-harness.yml`. GitHub automatically discovers it beside zero or more existing workflows; SE Harness does not edit unrelated workflow files. Workflow presence does not configure branch protection, required checks, deployment ordering, or any other hosting policy.
 
@@ -147,4 +147,4 @@ Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations
 - Do not interpret a successful install, upgrade, `doctor`, validation, inspection report, or dashboard as product approval or commit-bound verification. In particular, successful `inspect` report production can still describe an invalid graph or unresolved attention.
 - Installation does not configure branch protection, permissions, required checks, publishing environments, or deployment systems on an external host.
 
-See the [complete command reference](harnessctl-reference.md) for command actors and side effects, and the [Tier-0 overview](harness-overview.md) for the governance model.
+See the [complete command reference](harnessctl-reference.md) for command actors and side effects, and the [Tier-0 overview](harness-overview.md) for the governance model. When upgrading across the release that withdraws the repository-context scaffold, read the [migration note](harness-migration-repository-context-retirement.md) first.

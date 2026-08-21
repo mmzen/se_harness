@@ -22,9 +22,10 @@ verification contracts, assurance decisions, and release decisions. Code,
 tests, commits, tickets, dashboards, and conversation text are evidence or
 observations; they MUST NOT substitute for formal authority.
 
-`HRN-002` - Repository facts and commands belong in
-`docs/engineering/REPOSITORY_CONTEXT.md`. That file MUST NOT grant product,
-engineering, assurance, release, or external-action authority.
+`HRN-002` - Repository facts and commands belong in the owner-controlled region
+of `AGENTS.md`. That content is repository-owned and MUST NOT grant product,
+engineering, assurance, release, or external-action authority. This harness does
+not scaffold, track, or require it.
 
 `HRN-003` - An actor MUST select one bounded artifact scope before acting. It
 MUST NOT report findings from unrelated work orders as findings of the selected
@@ -63,7 +64,7 @@ MUST NOT restate its rules.
 | Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
-| Repository-specific facts and commands | `docs/engineering/REPOSITORY_CONTEXT.md` |
+| Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
 source.
@@ -89,7 +90,6 @@ The actor MUST stop before changing state or scope when any of these conditions
 is true:
 
 - managed integrity fails;
-- repository context is incomplete;
 - the formal graph is invalid;
 - no phase-eligible selected work order exists;
 - a required governing artifact or gate is missing;

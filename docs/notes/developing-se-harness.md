@@ -41,7 +41,7 @@ The root validator and Explorer sources remain managed by the selected released 
 
 ## Ordinary development checks
 
-Use the commands confirmed by `docs/engineering/REPOSITORY_CONTEXT.md`:
+Use the commands confirmed by the owner-controlled region of `AGENTS.md`:
 
 ```powershell
 python scripts/validate_engineering_artifacts.py --root .
@@ -71,7 +71,7 @@ The standard managed workflow owns the released-evaluator lane. `.github/workflo
 
 ## Building and releasing
 
-A promotable distribution build is allowed only under an approved release-bearing work order. The repository context defines the deterministic build, normalized sdist, bundle manifest, VREC, RLS binding, and publication sequence.
+A promotable distribution build is allowed only under an approved release-bearing work order. In this repository the owner-authored `docs/engineering/REPOSITORY_CONTEXT.md` defines the deterministic build, normalized sdist, bundle manifest, VREC, RLS binding, and publication sequence. That file is ordinary owner content: the harness neither seeds nor requires it, and another repository may keep the same sequences anywhere its owners choose.
 
 Build success is evidence, not release authorization:
 
@@ -88,4 +88,4 @@ The tag selects C, not the later governance commit containing the released recor
 
 Candidate success never changes the root evaluator. After a later SE Harness version is immutably published, maintainers select it under a separate approved repository-upgrade work order, install that exact release outside the checkout, review ordinary `harnessctl upgrade`, and authorize `--apply` only when the plan is safe. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
 
-See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), repository [`REPOSITORY_CONTEXT.md`](../engineering/REPOSITORY_CONTEXT.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
+See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), the owner-controlled region of [`AGENTS.md`](../../AGENTS.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).

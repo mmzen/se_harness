@@ -186,3 +186,11 @@ Feature: Rationalized and enforceable repository instructions
     When the results are reported
     Then no artifact status changes
     And no commit, verification, release, tag, publication, or deployment is performed
+
+  Scenario: Repository facts route to the owner-controlled region
+    Given a repository with the standard harness installed
+    When an engineering agent needs the repository test command
+    Then the managed router names the owner-controlled region of AGENTS.md
+    And no scaffolded context document is named anywhere in the router
+    And no stop condition depends on repository-context presence or completeness
+    And a reference step declaring the withdrawn action identifier fails conformance

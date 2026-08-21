@@ -41,7 +41,7 @@ adapter conformance, and failure when required evidence is absent.
 | `REQ-WEX-007` scope confinement | black-box checkpoint fixtures and exact path-set comparisons | exact files, directory prefixes, empty complete set, outside path, malformed path, unrelated findings, separately labeled inspection | only admitted paths and artifacts pass; out-of-scope governed mutation fails without writes; unrelated details never enter selected restitution |
 | `REQ-WEX-008` executable compliance | verifier-owned gate matrix through every checkpoint | all-pass, one-fail, one-not-assessable, missing registry entry, stale evidence, transition recheck | every predicate and evidence reference is reported; aggregation follows fail/NA/pass precedence; governed action and success claim require pass |
 | `REQ-WEX-009` canonical restitution | schema validation, golden human output, semantic comparison, adapter corpus | success, partial work, blocked gate, missing decision, alternatives, empty values, many effects | exact field order and meaning; honest done/not-done; exact blocker and decision; one primary next step; no unrelated or provider-added prose |
-| `REQ-WEX-010` procedure binding | contract mutation corpus and resolved-procedure golden data | command, repeated parameter, decision stop, reference, unknown ID, cycle, missing parameter, vague directive | every action resolves to one typed step; commands are exact argument arrays; decisions stop; invalid or unbound directives fail conformance |
+| `REQ-WEX-010` procedure binding | contract mutation corpus and resolved-procedure golden data | command, repeated parameter, decision stop, procedure reference, withdrawn `action_id` reference, unknown ID, cycle, missing parameter, vague directive | every action resolves to one typed step; commands are exact argument arrays; decisions stop; a reference step declaring `action_id` is rejected before resolution with a diagnostic naming the withdrawn form; invalid or unbound directives fail conformance |
 
 ## Acceptance scenarios
 
@@ -99,9 +99,9 @@ adapter conformance, and failure when required evidence is absent.
     cycles invalidate the policy.
 24. A 64-step procedure and an eight-level acyclic reference chain validate;
     the next step or level fails. Every cycle fails regardless of depth.
-25. A `CTX-ACT-*` repository-context reference resolves exactly one matched
-    begin/end marker pair; missing, duplicate, nested, mismatched, or malformed
-    action blocks fail.
+25. A reference step declaring `action_id` is rejected at contract validation,
+    before resolution, with a diagnostic naming the withdrawn form. No resolver
+    path reads step content from a file the harness does not govern.
 26. Every actionable row in `WORKFLOW.md` names its `PROC-*` binding and matches
     the ordered machine procedure. No unbound "run", "inspect", "select",
     "resolve", or "use exact inputs" instruction remains.
@@ -188,8 +188,8 @@ adapter conformance, and failure when required evidence is absent.
   and actor text; confirm they remain inert data.
 - Confirm selected output cannot reveal unrelated messages, artifact bodies,
   evidence contents, credentials, environment secrets, or private URLs.
-- Confirm a repository-context reference is displayed or resolved as data and
-  never imported, evaluated, or executed by contract validation.
+- Confirm no contract or resolver path imports, evaluates, or executes content
+  from a repository file the harness does not govern.
 - Confirm actor assertions and passing gates are never represented as proof of
   identity, authority, approval, verification, release, or risk acceptance.
 

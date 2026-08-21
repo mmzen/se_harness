@@ -149,6 +149,27 @@ The implemented `IAR-012` packet keeps this repository's own `AGENTS.md` owner r
 - Approved verification contract: `VER-IAR-012`
 - Implemented work order: `WO-IAR-012`
 
+## Implemented owner-region routing and context-action withdrawal
+
+The implemented `IAR-013` packet responds to the repository owner's boundary assessment of 2026-08-21: repository-local operational facts concern only the local repository, so the harness should name the owner-controlled region of `AGENTS.md` as their location rather than scaffold and gate a document of its own. The packet revises `HRN-002` in place, revises the routing-table owner for repository-specific facts and commands, removes the repository-context stop condition, and withdraws the reference-step context-action form from the workflow contract and resolver.
+
+Measurement establishes that the withdrawn action form is unreachable in the shipped product rather than merely unused: no caller supplies the resolver's repository-context argument, and none of the seventeen procedures in either the released contract or the candidate template declares an action step. Removing it eliminates a latent path that would have executed content from an ungoverned file.
+
+The packet supersedes `REQ-IAR-005` and `REQ-DST-008` and revises `REQ-IAR-003`'s example only. It renumbers no `HRN-*` rule, adds no second harness destination to the managed fragment, edits no repository-root managed copy, and adds no validation over owner-region content. No architecture artifact is selected: `ARCH-IAR-001` describes the withdrawn document through the deprecated `constrains` relation and does not declare that it addresses the new requirement. The technical owner recorded that applicability decision at approval on 2026-08-21: `ARCH-IAR-001` requires no revision beyond its descriptive reference and no deciding ADR is required, because routing a repository-local fact to an owner-controlled region adds no component, dependency, or trust boundary.
+
+### Owner-region routing packet index
+
+- Implemented requirement: `REQ-IAR-021`
+- Implemented specification: `SPEC-IAR-013`
+- Approved verification contract: `VER-IAR-013`
+- Implemented work order: `WO-DST-021`, under `../harness-distribution/`, which implements both this requirement and `REQ-DST-065`
+
+The owner approved this packet on 2026-08-21 and resolved both of its open decisions: the withdrawn `reference` action-identifier form is retained as a rejected value with an explicit diagnostic rather than silently dropped, so a stale contract stays distinguishable from an unrecognized field; and `ARCH-IAR-001` requires no revision and no deciding ADR.
+
+`WO-DST-021` is deliberately the single work order for both domains. Withdrawing the scaffold without revising the router in the same change would leave readiness and the shipped template set disagreeing, so neither half can land alone.
+
+The ownership-model table, the approved-decision list, and the instruction-route diagram below were revised during implementation of `WO-DST-021` and now describe the candidate harness. The repository-root managed copies still describe the released product and are reconciled at publication; that divergence is the designed self-hosting state.
+
 ## Implemented instruction route
 
 ```text
@@ -161,7 +182,7 @@ AGENTS.md (owner instructions + short managed gate)
 ENGINEERING_HARNESS.md (single managed contract and router)
           |                    |                    |
           v                    v                    v
-repository context      formal artifact chain    policy modules
+AGENTS.md owner region  formal artifact chain    policy modules
 (owner facts)           (product authority)      (workflow and gates)
 ```
 
@@ -174,7 +195,6 @@ The managed block in `AGENTS.md` has exactly one harness destination: `ENGINEERI
 | `AGENTS.md` | managed fragment in owner-controlled file | Repository-specific instructions plus the short non-waivable harness gate |
 | `CLAUDE.md` | managed fragment in owner-controlled file | Tool adapter importing `AGENTS.md` |
 | `ENGINEERING_HARNESS.md` | fully managed | Single harness contract, stage-aware router, and authority boundary |
-| `docs/engineering/REPOSITORY_CONTEXT.md` | owner-owned seed | Confirmed repository facts and commands; never product authority |
 | `docs/engineering/README.md` | owner-owned seed | Repository/domain artifact index; no duplicated harness policy |
 | `WORKFLOW.md`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `TRACEABILITY.md` | fully managed | Focused policy modules directly indexed by the router |
 
@@ -205,7 +225,7 @@ The harness repository has an unavoidable one-release bootstrap lag: the last re
 
 - `ENGINEERING_HARNESS.md` is the single managed router.
 - `docs/engineering/README.md` becomes a repository-owned seed rather than managed policy.
-- Preflight blocks when repository context retains unresolved seed placeholders.
+- Repository facts and commands belong in the owner-controlled region of `AGENTS.md`. The harness does not scaffold, track, or gate them; `WO-DST-021` withdrew the repository-context seed and its readiness gate on 2026-08-21.
 - Independently pinned CI is the enforceable baseline boundary; repository-host protection remains an owner responsibility.
 
 ## Packet index
