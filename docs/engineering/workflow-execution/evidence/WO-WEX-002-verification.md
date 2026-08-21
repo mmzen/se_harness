@@ -255,3 +255,28 @@ artifacts and `0` errors, and `doctor .` passed all required, distribution,
 lock, managed-file, script, seed, and Python checks with only the existing
 legacy-location advisories. Both staged and unstaged `git diff --check` checks
 passed. No unresolved merge entry or conflict marker remains.
+
+## PR #93 merge reconciliation
+
+The branch was reconciled with main commit
+`2fee626342bd97e75058173de6ba0286550f8860`, which contains the `WO-REB-003`
+evaluator-recovery controls from PR #93. The combined mutation registry keeps
+the recovery authorization rules and WEX `transition-apply` authority; neither
+path creates an unregistered installed-root mutation.
+
+The single textual conflict was in revision-provenance verification. The
+resolution retains PR #93's assertion that release preparation does not mutate
+the evaluator lock and retains WEX validation through the installed candidate
+validator and the candidate validator copied into the test repository. It does
+not incorrectly apply the source repository's previous managed validator to a
+candidate-produced ready-release fixture whose decision metadata follows the
+new WEX state model.
+
+The integrated focused suite passed `215` tests with `4` expected skips. The
+complete suite passed `369` tests with `5` expected skips, including recovery,
+mutation-boundary, workflow, provenance, dashboard, inspection, release, and
+100/500/1000-artifact scale coverage. Candidate and isolated released 0.5.0
+validation both reported `593` artifacts, `0` errors, and the unchanged `44`
+maintenance warnings. Released-evaluator identity passed without diagnostics,
+and released `doctor .` passed all required checks with only the existing
+legacy-location advisories.

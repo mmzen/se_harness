@@ -723,6 +723,7 @@ class RevisionCliTests(unittest.TestCase):
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
         governance = self.git("rev-parse", "HEAD")
         self.assertNotEqual(candidate, governance)
+        lock_before_release = (self.root / ".engineering-harness.lock").read_bytes()
 
         code, output, error = self.invoke(
             "prepare-release",
@@ -747,6 +748,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertNotIn("authorized_by =", release_text)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
+        self.assertEqual(lock_before_release, (self.root / ".engineering-harness.lock").read_bytes())
         self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
         validator = self.root / "scripts/validate_engineering_artifacts.py"

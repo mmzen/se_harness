@@ -123,6 +123,13 @@ class DistributionManifestTests(unittest.TestCase):
             with self.assertRaisesRegex(SURFACE.SurfaceError, "retired specialized lifecycle"):
                 SURFACE.inspect_repository(root)
 
+            operator_note = root / "docs" / "notes" / "operator.md"
+            operator_note.parent.mkdir(parents=True)
+            workflow.unlink()
+            operator_note.write_text("Use the retired governor role.\n", encoding="utf-8")
+            with self.assertRaisesRegex(SURFACE.SurfaceError, "retired specialized lifecycle"):
+                SURFACE.inspect_repository(root)
+
     def test_manifest_producer_hashes_exact_files_and_candidate_tree(self) -> None:
         commit = subprocess.run(
             ["git", "-c", f"safe.directory={REPOSITORY_ROOT.as_posix()}", "-C", str(REPOSITORY_ROOT), "rev-parse", "HEAD"],

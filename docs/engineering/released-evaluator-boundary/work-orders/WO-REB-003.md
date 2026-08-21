@@ -2,7 +2,7 @@
 id = "WO-REB-003"
 type = "work_order"
 title = "Harden evaluator upgrades and bounded recovery"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -23,7 +23,7 @@ verification = ["VER-REB-001"]
 
 ## Lifecycle
 
-This work order is a draft proposal. It authorizes no evaluator upgrade, incident action, lifecycle transition, external publication, or release until an accountable owner approves it.
+Bounded implementation is complete with retained evidence at `docs/engineering/released-evaluator-boundary/evidence/WO-REB-003-verification.md`. This implemented state records source, tests, and disposable rehearsal only. It does not authorize an actual evaluator upgrade, incident action, external publication, release, deployment, commit-bound verification, or lifecycle disposition of conflicting chains.
 
 ## Objective
 

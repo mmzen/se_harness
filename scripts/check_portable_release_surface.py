@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import subprocess
 import sys
 import zipfile
@@ -53,6 +54,8 @@ ACTIVE_ROOTS = (
     "templates/repository/standard",
 )
 ACTIVE_SCAN_ALLOWLIST = frozenset({"scripts/check_portable_release_surface.py"})
+CURRENT_OPERATOR_ROOTS = ("README.md", "docs/notes")
+RETIRED_OPERATOR_TERM = re.compile(rb"\bgovernor\b", re.IGNORECASE)
 MAX_MEMBER_SIZE = 16 * 1024 * 1024
 MAX_MEMBER_COUNT = 4096
 MAX_TOTAL_SIZE = 128 * 1024 * 1024
@@ -147,6 +150,21 @@ def inspect_repository(path: Path) -> None:
             if len(content) > MAX_MEMBER_SIZE:
                 raise SurfaceError(f"active repository surface is too large to inspect: {relative}")
             if any(term in content for term in FORBIDDEN_ACTIVE_CONTENT):
+                hits.append(relative)
+    for operator_root in CURRENT_OPERATOR_ROOTS:
+        selected = root / operator_root
+        candidates = [selected] if selected.is_file() else sorted(selected.rglob("*.md")) if selected.is_dir() else []
+        for candidate in candidates:
+            if not candidate.is_file() or candidate.is_symlink():
+                continue
+            relative = candidate.relative_to(root).as_posix()
+            try:
+                content = candidate.read_bytes()
+            except OSError as exc:
+                raise SurfaceError(f"cannot inspect current operator surface: {relative}") from exc
+            if len(content) > MAX_MEMBER_SIZE:
+                raise SurfaceError(f"current operator surface is too large to inspect: {relative}")
+            if RETIRED_OPERATOR_TERM.search(content):
                 hits.append(relative)
     if hits:
         raise SurfaceError("retired specialized lifecycle is active in: " + ", ".join(sorted(set(hits))))

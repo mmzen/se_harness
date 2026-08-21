@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import io
 import json
 import tempfile
@@ -166,6 +167,142 @@ class MutationGuardTests(unittest.TestCase):
                 operation="prepare-release",
                 require_archive=True,
             )
+
+    def test_evaluator_transition_requires_exact_packet_and_retains_atomic_evidence(self) -> None:
+        root = self.base / "governed-transition"
+        changes, old_lock = plan_install(root, project_name="Governed Transition", mode="init")
+        apply_changes(root, changes, old_lock, allow_updates=False)
+        target_identity = InstalledEvaluatorIdentity(
+            __version__,
+            PAYLOAD_MANIFEST,
+            "a" * 64,
+            f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
+            "b" * 64,
+        )
+        lock_path = root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"] = {
+            **target_identity.to_lock(),
+            "payload_sha256": "c" * 64,
+            "archive_sha256": "d" * 64,
+        }
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        prior_lock_sha256 = hashlib.sha256(lock_path.read_bytes()).hexdigest()
+        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-001.md"
+        work_order.parent.mkdir(parents=True)
+        work_order.write_text(
+            f'''+++
+id = "WO-TST-001"
+type = "work_order"
+title = "Adopt exact released evaluator"
+status = "in_progress"
+owners = ["repository-owner"]
+created = "2026-08-21"
+updated = "2026-08-21"
+
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "{prior_lock_sha256}"
+target_version = "{target_identity.version}"
+target_payload_sha256 = "{target_identity.payload_sha256}"
+target_archive_name = "{target_identity.archive_name}"
+target_archive_sha256 = "{target_identity.archive_sha256}"
+publication = "immutable"
+authorized_by = "repository-owner"
+
+[relations]
++++
+
+# Work Order
+''',
+            encoding="utf-8",
+        )
+        changes, old_lock = plan_install(root, project_name=None, mode="upgrade")
+        before = self._snapshot(root)
+        passing = self._passing_identity(root)
+        with mock.patch(
+            "se_harness.mutation_guard.installed_evaluator_identity",
+            return_value=target_identity,
+        ), mock.patch(
+            "se_harness.installer.installed_evaluator_identity",
+            return_value=target_identity,
+        ), mock.patch(
+            "se_harness.mutation_guard._runtime_report",
+            return_value=passing,
+        ):
+            with self.assertRaisesRegex(HarnessError, r"MG007.*separately approved --work-order"):
+                apply_changes(root, changes, old_lock, allow_updates=True)
+            self.assertEqual(before, self._snapshot(root))
+
+            with self.assertRaisesRegex(HarnessError, "requires --evidence-output"):
+                apply_changes(
+                    root,
+                    changes,
+                    old_lock,
+                    allow_updates=True,
+                    upgrade_work_order="WO-TST-001",
+                )
+            self.assertEqual(before, self._snapshot(root))
+
+            evidence_relative = Path(
+                "docs/engineering/upgrade/evidence/WO-TST-001-evaluator-upgrade.json"
+            )
+            evidence_path = root / evidence_relative
+            evidence_path.parent.mkdir(parents=True)
+            evidence_path.write_text("existing evidence\n", encoding="utf-8")
+            collision_before = self._snapshot(root)
+            with self.assertRaisesRegex(HarnessError, "evidence output already exists"):
+                apply_changes(
+                    root,
+                    changes,
+                    old_lock,
+                    allow_updates=True,
+                    upgrade_work_order="WO-TST-001",
+                    evidence_output=evidence_relative,
+                )
+            self.assertEqual(collision_before, self._snapshot(root))
+            evidence_path.unlink()
+
+            changed_identity = InstalledEvaluatorIdentity(
+                __version__,
+                PAYLOAD_MANIFEST,
+                "e" * 64,
+                target_identity.archive_name,
+                target_identity.archive_sha256,
+            )
+            transition_before = self._snapshot(root)
+            with mock.patch(
+                "se_harness.installer.installed_evaluator_identity",
+                return_value=changed_identity,
+            ), self.assertRaisesRegex(HarnessError, "changed after authorization"):
+                apply_changes(
+                    root,
+                    changes,
+                    old_lock,
+                    allow_updates=True,
+                    upgrade_work_order="WO-TST-001",
+                    evidence_output=evidence_relative,
+                )
+            self.assertEqual(transition_before, self._snapshot(root))
+
+            result = apply_changes(
+                root,
+                changes,
+                old_lock,
+                allow_updates=True,
+                upgrade_work_order="WO-TST-001",
+                evidence_output=evidence_relative,
+            )
+        self.assertEqual(target_identity.to_lock(), result["evaluator"])
+        evidence = json.loads((root / evidence_relative).read_bytes())
+        self.assertEqual("se-harness-evaluator-upgrade-evidence-v1", evidence["schema"])
+        self.assertEqual("WO-TST-001", evidence["work_order"])
+        self.assertEqual(prior_lock_sha256, evidence["prior"]["lock_sha256"])
+        self.assertEqual(target_identity.to_lock(), evidence["target"])
+        self.assertTrue(evidence["transaction"]["atomic"])
+        self.assertTrue(evidence["postconditions"]["no_op_replay"])
+        self.assertFalse(evidence["postconditions"]["product_release_performed"])
 
     def test_runtime_failures_preserve_bounded_identity_codes(self) -> None:
         root = self._write_identity_root()

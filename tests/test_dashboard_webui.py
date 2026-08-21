@@ -27,6 +27,24 @@ GENERATOR = importlib.util.module_from_spec(GENERATOR_SPEC)
 sys.modules[GENERATOR_SPEC.name] = GENERATOR
 GENERATOR_SPEC.loader.exec_module(GENERATOR)
 
+INSPECTOR_SPEC = importlib.util.spec_from_file_location(
+    "dashboard_webui_inspector",
+    CANDIDATE_SCRIPTS / "inspect_engineering_artifacts.py",
+)
+if INSPECTOR_SPEC is None or INSPECTOR_SPEC.loader is None:
+    raise RuntimeError("candidate inspector is unavailable")
+INSPECTOR = importlib.util.module_from_spec(INSPECTOR_SPEC)
+sys.modules[INSPECTOR_SPEC.name] = INSPECTOR
+_prior_generator = sys.modules.get("generate_harness_dashboard")
+sys.modules["generate_harness_dashboard"] = GENERATOR
+try:
+    INSPECTOR_SPEC.loader.exec_module(INSPECTOR)
+finally:
+    if _prior_generator is None:
+        sys.modules.pop("generate_harness_dashboard", None)
+    else:
+        sys.modules["generate_harness_dashboard"] = _prior_generator
+
 
 def temporal_findings(
     *,
@@ -103,6 +121,111 @@ class DashboardWebUIContractTests(unittest.TestCase):
         ):
             with self.subTest(topology_bytes=topology_bytes):
                 self.assertEqual(expected, GENERATOR.topology_target_exceeded(topology_bytes))
+
+    def test_candidate_reports_closed_release_chain_conflicts_without_automatic_action(self) -> None:
+        def artifact(artifact_id: str, artifact_type: str, status: str) -> dict:
+            return {
+                "id": artifact_id,
+                "type": artifact_type,
+                "status": status,
+                "updated": "2026-08-21",
+                "path": f"docs/engineering/test/{artifact_id}.md",
+            }
+
+        artifacts = [
+            artifact("WO-TST-001", "work_order", "implemented"),
+            artifact("REL-TST-001", "release_contract", "approved"),
+            artifact("REL-TST-002", "release_contract", "approved"),
+            artifact("VREC-TST-001", "verification_record", "ready"),
+            artifact("VREC-TST-002", "verification_record", "ready"),
+            artifact("RLS-TST-001", "release_record", "ready"),
+            artifact("RLS-TST-002", "release_record", "draft"),
+        ]
+        relations = [
+            {
+                "source": contract,
+                "relation": "gates",
+                "target": "WO-TST-001",
+                "authority": "declared",
+                "target_exists": True,
+            }
+            for contract in ("REL-TST-001", "REL-TST-002")
+        ]
+
+        def revision(
+            artifact_id: str,
+            kind: str,
+            status: str,
+            commit: str,
+            *,
+            version: str | None = None,
+            contracts: list[str] | None = None,
+        ) -> dict:
+            return {
+                "id": artifact_id,
+                "kind": kind,
+                "status": status,
+                "commit": commit,
+                "commit_available": None,
+                "match_state": "not_assessable",
+                "work_orders": ["WO-TST-001"],
+                "contracts": contracts or [],
+                "superseded_by": [],
+                "version": version,
+            }
+
+        revisions = [
+            revision("VREC-TST-001", "verification", "ready", "a" * 40),
+            revision("VREC-TST-002", "verification", "ready", "b" * 40),
+            revision(
+                "RLS-TST-001",
+                "release",
+                "ready",
+                "a" * 40,
+                version="1.2.3",
+                contracts=["REL-TST-001"],
+            ),
+            revision(
+                "RLS-TST-002",
+                "release",
+                "draft",
+                "b" * 40,
+                version="1.2.3",
+                contracts=["REL-TST-002"],
+            ),
+        ]
+        before = json.dumps({"artifacts": artifacts, "relations": relations, "revisions": revisions}, sort_keys=True)
+        first = GENERATOR.build_findings(
+            artifacts,
+            relations,
+            [],
+            {"WO-TST-001": ["retained"]},
+            revisions,
+            {"required_for_release": False},
+        )
+        second = GENERATOR.build_findings(
+            artifacts,
+            relations,
+            [],
+            {"WO-TST-001": ["retained"]},
+            revisions,
+            {"required_for_release": False},
+        )
+        selected = [item for item in first if item["rule"].startswith("W-REB-")]
+        self.assertEqual(first, second)
+        self.assertEqual(before, json.dumps({"artifacts": artifacts, "relations": relations, "revisions": revisions}, sort_keys=True))
+        self.assertEqual({"W-REB-001", "W-REB-002", "W-REB-003"}, {item["rule"] for item in selected})
+        suggestions = INSPECTOR._build_suggestions(
+            {
+                "decision_required": [],
+                "definition_pending": [],
+                "active_work": [],
+                "assurance_pending": [],
+            },
+            selected,
+        )
+        self.assertEqual(3, len(suggestions))
+        self.assertTrue(all(item["automatic"] is False for item in suggestions))
 
     def test_templates_preserve_the_reviewed_3d_design_and_canonical_boundary(self) -> None:
         content = self.canonical.read_text(encoding="utf-8")
@@ -326,7 +449,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
         self.assertTrue(report.valid)
         self.assertEqual(GENERATOR.SNAPSHOT_SCHEMA, snapshot["schema"])
-        self.assertEqual("harness-findings-v8", snapshot["finding_rules_version"])
+        self.assertEqual("harness-findings-v9", snapshot["finding_rules_version"])
         self.assertEqual(
             {
                 "schema",

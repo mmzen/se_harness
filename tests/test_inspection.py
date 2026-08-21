@@ -9,6 +9,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from se_harness.integrity import canonical_sha256
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
@@ -494,16 +496,22 @@ class InspectionReportTests(unittest.TestCase):
         self.assertEqual("", stdout.getvalue())
         self.assertIn("inspection failed: snapshot schema", stderr.getvalue())
 
-    def test_root_and_canonical_scripts_match_and_reuse_snapshot(self) -> None:
+    def test_released_root_remains_locked_while_candidate_reuses_snapshot(self) -> None:
         root_script = ROOT / "scripts/inspect_engineering_artifacts.py"
         canonical = ROOT / "templates/repository/standard/scripts/inspect_engineering_artifacts.py"
-        self.assertEqual(root_script.read_bytes(), canonical.read_bytes())
-        source = root_script.read_text(encoding="utf-8")
+        lock = json.loads((ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual(
+            lock["files"]["scripts/inspect_engineering_artifacts.py"]["sha256"],
+            canonical_sha256(root_script.read_bytes()),
+        )
+        self.assertNotEqual(root_script.read_bytes(), canonical.read_bytes())
+        source = canonical.read_text(encoding="utf-8")
         self.assertIn("from generate_harness_dashboard import", source)
         self.assertIn("generate_snapshot", source)
         self.assertNotIn("def build_findings", source)
         self.assertNotIn("def validate_repository", source)
         self.assertNotIn("def _finding(", source)
+        self.assertIn('"W-REB-003"', source)
         self.assertIn(
             '"templates/repository/standard/scripts/inspect_engineering_artifacts.py"',
             (ROOT / "pyproject.toml").read_text(encoding="utf-8"),

@@ -10,7 +10,7 @@ import tempfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 
 from se_harness import __version__
 from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
@@ -385,8 +385,62 @@ def _restore_snapshot(snapshot: dict[Path, bytes | None]) -> list[str]:
     return failures
 
 
-def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, allow_updates: bool) -> dict:
+def _upgrade_evidence_bytes(
+    *,
+    authorization: Any,
+    old_lock: dict,
+    lock: dict,
+    changes: list[Change],
+) -> bytes:
+    from se_harness.upgrade_authorization import UPGRADE_EVIDENCE_SCHEMA
+
+    changed = [item for item in changes if item.action in {"add", "integrate", "update"}]
+    value = {
+        "schema": UPGRADE_EVIDENCE_SCHEMA,
+        "work_order": authorization.work_order,
+        "authorization_path": authorization.artifact_path,
+        "scope": "standard-root-only",
+        "authorized_by": authorization.authorized_by,
+        "prior": {
+            "lock_sha256": authorization.prior_lock_sha256,
+            "tool_version": old_lock.get("tool_version"),
+            "evaluator": old_lock.get("evaluator"),
+        },
+        "target": lock.get("evaluator"),
+        "plan": [
+            {"action": item.action, "mode": item.mode, "path": item.path}
+            for item in changed
+        ],
+        "transaction": {
+            "atomic": True,
+            "outcome": "applied",
+            "rollback": "pre-write snapshot restored on any failed write or postcondition",
+        },
+        "postconditions": {
+            "lock_matches_target": True,
+            "no_op_replay": True,
+            "product_release_performed": False,
+            "external_action_performed": False,
+        },
+        "authority": (
+            "This evidence records a bounded repository transaction. It does not verify work, "
+            "authorize a release, publish, tag, deploy, or grant incident authority."
+        ),
+    }
+    return (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+
+
+def apply_changes(
+    target: Path,
+    changes: Iterable[Change],
+    old_lock: dict,
+    *,
+    allow_updates: bool,
+    upgrade_work_order: str | None = None,
+    evidence_output: Path | None = None,
+) -> dict:
     changes = list(changes)
+    upgrade_authorization = None
     if allow_updates:
         refreshed_changes, refreshed_lock = plan_install(
             target,
@@ -397,11 +451,21 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
             raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
         from se_harness import mutation_guard
 
-        mutation_guard.require_mutation_authority(
+        authority = mutation_guard.require_mutation_authority(
             target,
             operation="upgrade-apply",
             allow_upgrade_transition=True,
+            upgrade_work_order=upgrade_work_order,
         )
+        upgrade_authorization = getattr(authority, "upgrade_authorization", None)
+        if upgrade_authorization is not None and evidence_output is None:
+            raise HarnessError(
+                "evaluator identity transition requires --evidence-output; no files were written"
+            )
+        if upgrade_authorization is None and evidence_output is not None:
+            raise HarnessError(
+                "--evidence-output is allowed only for an authorized evaluator identity transition"
+            )
     elif old_lock.get("tool_version") is not None or (target / CONFIG_NAME).exists():
         # Init and first adoption have no installed authority to prove. A direct
         # API call against an already-installed root is an ordinary mutation,
@@ -425,12 +489,35 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
         for item in changes
         if item.action in safe_actions
     }
+    evidence_destination: Path | None = None
+    if allow_updates and evidence_output is not None:
+        from se_harness.upgrade_authorization import (
+            UpgradeAuthorizationError,
+            validate_upgrade_evidence_path,
+        )
+
+        try:
+            evidence_relative = validate_upgrade_evidence_path(
+                evidence_output,
+                upgrade_authorization.work_order,
+            )
+        except UpgradeAuthorizationError as exc:
+            raise HarnessError(str(exc)) from exc
+        evidence_destination = safe_destination(target, Path(evidence_relative.as_posix()))
+        if evidence_destination in destinations.values():
+            raise HarnessError("upgrade evidence path overlaps a managed destination")
+        if evidence_destination.exists():
+            raise HarnessError("upgrade evidence output already exists; no files were written")
     lock_path = safe_destination(target, Path(LOCK_NAME))
     snapshot: dict[Path, bytes | None] = {
         destination: destination.read_bytes() if destination.is_file() else None
         for destination in destinations.values()
     }
     snapshot[lock_path] = lock_path.read_bytes() if lock_path.is_file() else None
+    if evidence_destination is not None:
+        snapshot[evidence_destination] = (
+            evidence_destination.read_bytes() if evidence_destination.is_file() else None
+        )
 
     try:
         for item in changes:
@@ -473,8 +560,37 @@ def apply_changes(target: Path, changes: Iterable[Change], old_lock: dict, *, al
                 lock["evaluator"] = installed_evaluator_identity().to_lock()
             except EvaluatorIdentityError as exc:
                 raise HarnessError(f"cannot identify the installed evaluator payload: {exc}") from exc
+        if upgrade_authorization is not None:
+            observed_target = lock.get("evaluator")
+            if not isinstance(observed_target, dict) or (
+                observed_target.get("version") != upgrade_authorization.target_version
+                or observed_target.get("payload_sha256")
+                != upgrade_authorization.target_payload_sha256
+                or observed_target.get("archive_name")
+                != upgrade_authorization.target_archive_name
+                or observed_target.get("archive_sha256")
+                != upgrade_authorization.target_archive_sha256
+            ):
+                raise HarnessError(
+                    "installed evaluator identity changed after authorization; no files were retained"
+                )
         lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
         _atomic_write(lock_path, lock_bytes)
+        if upgrade_authorization is not None:
+            replay, replay_lock = plan_install(target, project_name=None, mode="upgrade")
+            if replay_lock != lock or any(item.action != "unchanged" for item in replay):
+                raise HarnessError("upgrade postcondition failed: replay is not a no-op")
+            if evidence_destination is None:
+                raise HarnessError("upgrade transaction evidence destination is unavailable")
+            _atomic_write(
+                evidence_destination,
+                _upgrade_evidence_bytes(
+                    authorization=upgrade_authorization,
+                    old_lock=old_lock,
+                    lock=lock,
+                    changes=changes,
+                ),
+            )
         return lock
     except BaseException as exc:
         rollback_failures = _restore_snapshot(snapshot)

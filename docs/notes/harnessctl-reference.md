@@ -33,6 +33,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
+| `rehearse-recovery` | maintainer or CI rehearsal | writes only a fresh disposable directory outside the operational repository | prove bounded evaluator recovery and rollback without credentials, network, or external action |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
@@ -156,9 +157,20 @@ argument array or response from the selected procedure.
 ```text
 harnessctl upgrade [TARGET]
 harnessctl upgrade [TARGET] --apply
+harnessctl upgrade [TARGET] --apply --work-order WO-... --evidence-output docs/engineering/DOMAIN/evidence/WO-...-evaluator-upgrade.json
 ```
 
-The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. It requires an already-published target evaluator installed from exact wheel bytes outside the checkout, changes only eligible managed content, and stops without a partial managed update when identity, customization, or conflict prevents a safe plan. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. Same-identity managed repair needs no new lifecycle packet. When the installed target evaluator differs from the standard lock, apply additionally requires a distinct approved or in-progress work order with an exact `[evaluator_upgrade]` packet and a work-order-keyed JSON evidence path. The packet binds the prior lock SHA-256 and exact immutable target archive/payload identity with `scope = "standard-root-only"`; a product release decision cannot substitute for it.
+
+Apply requires the already-published target evaluator installed from exact wheel bytes outside the checkout, changes only eligible managed content, and stops without a partial managed update when identity, authority, customization, or conflict prevents a safe plan. Transition evidence, managed files, and the lock share the recoverable transaction, and successful replay must be a no-op. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+
+## Disposable recovery rehearsal
+
+```text
+harnessctl rehearse-recovery OUTPUT --repository REPOSITORY --candidate-commit FULL_COMMIT [--target-version SYNTHETIC_VERSION]
+```
+
+The output must be absent or empty and outside the operational repository. The command refuses recognized production publication credential signals, uses no network client, creates only a synthetic local archive and simulated publication, rejects candidate contamination and stale identity, stops synthetic conflicting chains without selection, injects an interrupted root migration, proves exact rollback, restores the normal standard workflows and absence invariants, and writes canonical `rehearsal-report.json`. It grants no real recovery or external-action authority. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md).
 
 ## Domain and artifact authoring
 
