@@ -530,8 +530,13 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
     def test_workflow_preserves_evaluator_generator_and_payload_boundaries(self) -> None:
         self.assertIn("evaluator-env/bin/harnessctl\" validate", self.workflow)
         self.assertIn("publish_dashboard.py evaluator", self.workflow)
+        self.assertIn('--release-record "$RELEASE_RECORD"', self.workflow)
         self.assertIn("--role released-evaluator", self.workflow)
         self.assertIn("--evaluator-payload-sha256", self.workflow)
+        self.assertIn(
+            "identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'",
+            self.workflow,
+        )
         self.assertIn("--evaluator-wheel-sha256", self.workflow)
         self.assertNotIn("GOVERNOR_", self.workflow)
         self.assertNotIn("--role governor", self.workflow)

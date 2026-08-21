@@ -42,7 +42,15 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
     def test_governance_validation_uses_only_the_standard_released_evaluator(self) -> None:
         self.assertEqual(2, self.workflow.count("publish_dashboard.py evaluator"))
         self.assertEqual(2, self.workflow.count("--role released-evaluator"))
-        self.assertEqual(2, self.workflow.count("--evaluator-payload-sha256"))
+        self.assertEqual(
+            2, self.workflow.count("identity_args+=(--evaluator-payload-sha256")
+        )
+        self.assertEqual(
+            2,
+            self.workflow.count(
+                "identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'"
+            ),
+        )
         self.assertEqual(2, self.workflow.count("--evaluator-wheel-sha256"))
         for retired in (
             "publish_dashboard.py governor",

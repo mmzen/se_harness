@@ -86,6 +86,27 @@ clean candidate C -> exact bundle manifest -> ready VREC -> human verification
 
 The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their governance snapshots with the exact standard released evaluator selected by those snapshots. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
+### One-release predecessor bootstrap
+
+Version 0.6.0 is the first candidate that requires canonical evaluator evidence on a ready release record, while this repository is still governed by a schema-2 lock and released 0.5.0. The approved `se-harness-release-bootstrap-v1` contract bridges only that transition. Released 0.5.0 still prepares and validates the RLS; candidate code merely records and rechecks an observation of that external evaluator.
+
+After a separately authorized predecessor `prepare-release` has created the exact contract-named ready RLS, the repository-only binder can first produce a read-only plan:
+
+```powershell
+python scripts/bind_release_bootstrap.py `
+  --repository . `
+  --release-record docs/engineering/<domain>/releases/RLS-...md `
+  --release-contract docs/engineering/<domain>/release/REL-...md `
+  --evaluator-python <external-env>/Scripts/python.exe `
+  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
+  --evaluator-wheel <downloaded-public-wheel> `
+  --json
+```
+
+Adding `--apply` is a separate explicit mutation. It exclusively creates one canonical evidence sidecar and atomically adds only `preparation_schema`, `evaluator_evidence_path`, and `evaluator_evidence_sha256` to the ready RLS. The command rejects any contract, lock, wheel, runtime-origin, candidate, verification, work-set, path, or existing-byte mismatch. It never creates or transitions an RLS, changes the root, commits, pushes, tags, publishes, deploys, or uses credentials.
+
+Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
+
 ## Advancing the root evaluator
 
 Candidate success never changes the root evaluator. After a later SE Harness version is immutably published, maintainers select it under a separate approved repository-upgrade work order, install that exact release outside the checkout, review ordinary `harnessctl upgrade`, and authorize `--apply` only when the plan is safe. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.

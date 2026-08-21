@@ -74,6 +74,19 @@ EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
 EVALUATOR_ORIGIN_PATTERN = re.compile(r"^<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*$")
 EVALUATOR_VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}$")
+RELEASE_BOOTSTRAP_SCHEMA = "se-harness-release-bootstrap-v1"
+PREDECESSOR_PREPARATION_SCHEMA = "se-harness-predecessor-bootstrap-v1"
+RELEASE_BOOTSTRAP_KEYS = {
+    "schema",
+    "release_record",
+    "version",
+    "from_lock_schema",
+    "from_lock_tool_version",
+    "from_lock_sha256",
+    "evaluator_version",
+    "evaluator_archive_name",
+    "evaluator_archive_sha256",
+}
 LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
     {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
 )
@@ -570,6 +583,137 @@ def _valid_evaluator_origin(value: Any) -> bool:
     return not suffix or all(part not in {"", ".", ".."} for part in suffix.split("/"))
 
 
+def _validated_release_bootstrap(
+    contract: Artifact,
+    errors: list[Diagnostic],
+    repository_root: Path,
+) -> dict[str, Any] | None:
+    value = contract.metadata.get("bootstrap")
+    if value is None:
+        return None
+    if not isinstance(value, dict) or set(value) != RELEASE_BOOTSTRAP_KEYS:
+        _add_error(
+            errors,
+            contract,
+            repository_root,
+            "E012",
+            "release bootstrap field set is not canonical",
+            plane="governance",
+        )
+        return None
+    version = value.get("version")
+    evaluator_version = value.get("evaluator_version")
+    release_record = value.get("release_record")
+    archive_name = value.get("evaluator_archive_name")
+    valid = (
+        value.get("schema") == RELEASE_BOOTSTRAP_SCHEMA
+        and isinstance(release_record, str)
+        and release_record.startswith("RLS-")
+        and ID_PATTERN.fullmatch(release_record) is not None
+        and isinstance(version, str)
+        and EVALUATOR_VERSION_PATTERN.fullmatch(version) is not None
+        and type(value.get("from_lock_schema")) is int
+        and value.get("from_lock_schema") == 2
+        and isinstance(value.get("from_lock_tool_version"), str)
+        and EVALUATOR_VERSION_PATTERN.fullmatch(value["from_lock_tool_version"]) is not None
+        and isinstance(value.get("from_lock_sha256"), str)
+        and SHA256_PATTERN.fullmatch(value["from_lock_sha256"]) is not None
+        and isinstance(evaluator_version, str)
+        and EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is not None
+        and evaluator_version == value.get("from_lock_tool_version")
+        and isinstance(archive_name, str)
+        and archive_name == f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
+        and isinstance(value.get("evaluator_archive_sha256"), str)
+        and SHA256_PATTERN.fullmatch(value["evaluator_archive_sha256"]) is not None
+    )
+    if not valid:
+        _add_error(
+            errors,
+            contract,
+            repository_root,
+            "E012",
+            "release bootstrap tuple is invalid",
+            plane="governance",
+        )
+        return None
+    return value
+
+
+def _canonical_utf8_text_lf(raw: bytes) -> bytes:
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raise ValueError("UTF-8 byte-order mark is unsupported")
+    text = raw.decode("utf-8")
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
+def _bootstrap_for_release_record(
+    artifact: Artifact,
+    artifacts: list[Artifact],
+    errors: list[Diagnostic],
+    repository_root: Path,
+) -> dict[str, Any] | None:
+    marker = artifact.metadata.get("preparation_schema")
+    if marker is None:
+        return None
+    if marker != PREDECESSOR_PREPARATION_SCHEMA:
+        _evaluator_binding_error(
+            artifact, errors, repository_root, "release preparation_schema is unsupported"
+        )
+        return None
+    satisfies = artifact.relations.get("satisfies")
+    if not isinstance(satisfies, list) or len(satisfies) != 1 or not isinstance(satisfies[0], str):
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "predecessor bootstrap release must satisfy exactly one release contract",
+        )
+        return None
+    matching = [
+        item
+        for item in artifacts
+        if item.artifact_type == "release_contract"
+        and item.artifact_id == satisfies[0]
+        and item.status == "approved"
+    ]
+    if len(matching) != 1:
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "predecessor bootstrap requires one exact approved release contract",
+        )
+        return None
+    value = _validated_release_bootstrap(matching[0], errors, repository_root)
+    if value is None:
+        return None
+    claimants = [
+        item
+        for item in artifacts
+        if item.artifact_type == "release_contract"
+        and item.status == "approved"
+        and isinstance(item.metadata.get("bootstrap"), dict)
+        and item.metadata["bootstrap"].get("release_record") == artifact.artifact_id
+    ]
+    if len(claimants) != 1 or claimants[0].artifact_id != matching[0].artifact_id:
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "predecessor bootstrap release-record declaration is ambiguous",
+        )
+        return None
+    if artifact.artifact_id != value["release_record"] or artifact.metadata.get("version") != value["version"]:
+        _evaluator_binding_error(
+            artifact,
+            errors,
+            repository_root,
+            "release record ID or version differs from the predecessor bootstrap contract",
+        )
+        return None
+    return value
+
+
 def _validate_evaluator_evidence_binding(
     artifact: Artifact,
     errors: list[Diagnostic],
@@ -578,6 +722,7 @@ def _validate_evaluator_evidence_binding(
     required: bool,
     require_archive: bool = False,
     match_current_lock: bool = True,
+    bootstrap_contract: dict[str, Any] | None = None,
 ) -> None:
     raw_path = artifact.metadata.get("evaluator_evidence_path")
     raw_digest = artifact.metadata.get("evaluator_evidence_sha256")
@@ -698,6 +843,7 @@ def _validate_evaluator_evidence_binding(
         not isinstance(environment, dict)
         or set(environment) != expected_environment
         or any(type(environment.get(field)) is not bool for field in expected_environment)
+        or not environment.get("isolated_python")
         or environment.get("user_site_enabled")
         or environment.get("pythonpath_present")
         or not environment.get("entry_point_resolved")
@@ -705,6 +851,45 @@ def _validate_evaluator_evidence_binding(
         or value.get("diagnostics") != []
     ):
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator environment proof is invalid")
+        return
+    if bootstrap_contract is not None:
+        if (
+            evaluator.get("version") != bootstrap_contract.get("evaluator_version")
+            or evaluator.get("archive_name") != bootstrap_contract.get("evaluator_archive_name")
+            or evaluator.get("archive_sha256") != bootstrap_contract.get("evaluator_archive_sha256")
+        ):
+            _evaluator_binding_error(
+                artifact, errors, repository_root, "evaluator evidence differs from the bootstrap contract"
+            )
+            return
+        if not match_current_lock:
+            return
+        try:
+            lock_raw = (repository_root / ".engineering-harness.lock").read_bytes()
+            lock = json.loads(lock_raw.decode("utf-8"), object_pairs_hook=_unique_evaluator_object)
+            config = tomllib.loads(
+                (repository_root / ".engineering-harness.toml").read_text(encoding="utf-8")
+            )
+        except (OSError, UnicodeError, json.JSONDecodeError, ValueError, tomllib.TOMLDecodeError) as exc:
+            _evaluator_binding_error(
+                artifact, errors, repository_root, f"cannot read predecessor bootstrap root: {exc}"
+            )
+            return
+        harness = config.get("harness") if isinstance(config, dict) else None
+        if (
+            hashlib.sha256(_canonical_utf8_text_lf(lock_raw)).hexdigest()
+            != bootstrap_contract.get("from_lock_sha256")
+            or not isinstance(lock, dict)
+            or lock.get("schema") != bootstrap_contract.get("from_lock_schema")
+            or lock.get("tool_version") != bootstrap_contract.get("from_lock_tool_version")
+            or lock.get("hash_algorithm") != "sha256"
+            or lock.get("hash_mode") != "utf8-text-lf-v1"
+            or not isinstance(harness, dict)
+            or harness.get("tool_version") != bootstrap_contract.get("from_lock_tool_version")
+        ):
+            _evaluator_binding_error(
+                artifact, errors, repository_root, "current predecessor root differs from the bootstrap contract"
+            )
         return
     if not match_current_lock:
         return
@@ -985,6 +1170,24 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
 def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
 
+    approved_bootstrap_contracts = [
+        artifact
+        for artifact in artifacts
+        if artifact.artifact_type == "release_contract"
+        and artifact.status == "approved"
+        and "bootstrap" in artifact.metadata
+    ]
+    if len(approved_bootstrap_contracts) > 1:
+        for contract in approved_bootstrap_contracts:
+            _add_error(
+                errors,
+                contract,
+                report_root,
+                "E012",
+                "repository must contain at most one approved predecessor bootstrap contract",
+                plane="governance",
+            )
+
     relation_requirements: dict[str, tuple[str, ...]] = {
         "capability": ("derives_from",),
         "requirement": ("derives_from",),
@@ -1016,6 +1219,9 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "requirement statement must contain normative keyword SHALL",
                     plane="structure",
                 )
+
+        if artifact_type == "release_contract" and "bootstrap" in artifact.metadata:
+            _validated_release_bootstrap(artifact, errors, report_root)
 
         if artifact_type == "verification_record":
             _validate_git_identity(artifact, errors, report_root)
@@ -1127,6 +1333,9 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     )
 
         if artifact_type == "release_record":
+            bootstrap_contract = _bootstrap_for_release_record(
+                artifact, artifacts, errors, report_root
+            )
             _validate_git_identity(artifact, errors, report_root)
             release_version = _require_non_empty_string(
                 artifact, "version", errors, report_root, plane="governance"
@@ -1169,6 +1378,33 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                             f"ready release_record must omit decision field '{field_name}'",
                             plane="governance",
                         )
+            if artifact.status == "ready" and bootstrap_contract is not None:
+                if prepared:
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E009",
+                        "predecessor-prepared ready release_record must omit successor preparation fields",
+                        plane="governance",
+                    )
+                _validate_timestamp(artifact, "released_at", errors, report_root)
+                predecessor_actor = _require_non_empty_string(
+                    artifact, "authorized_by", errors, report_root, plane="governance"
+                )
+                if (
+                    predecessor_actor is not None
+                    and isinstance(owners, list)
+                    and predecessor_actor not in owners
+                ):
+                    _add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        "E009",
+                        "predecessor preparation actor must identify one of the record owners",
+                        plane="governance",
+                    )
             if artifact.status == "rejected":
                 _validate_timestamp(artifact, "rejected_at", errors, report_root)
                 _require_non_empty_string(artifact, "rejected_by", errors, report_root, plane="governance")
@@ -1195,6 +1431,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 required=not legacy_without_binding,
                 require_archive=True,
                 match_current_lock=artifact.status == "ready",
+                bootstrap_contract=bootstrap_contract,
             )
 
         if artifact_type == "work_order" and "architecture" in artifact.relations:

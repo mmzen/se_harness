@@ -111,6 +111,7 @@ jobs:
           set -euo pipefail
           python .github/scripts/publish_dashboard.py evaluator \
             --repository "$RUNNER_TEMP/governance" \
+            --release-record "$RELEASE_RECORD" \
             --output "$RUNNER_TEMP/evaluator.json" \
             --github-output "$GITHUB_OUTPUT"
 
@@ -133,15 +134,19 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity \
-            --role released-evaluator \
-            --expected-version "$EVALUATOR_VERSION" \
-            --expected-root "$RUNNER_TEMP/evaluator-env" \
-            --checkout-root "$RUNNER_TEMP/governance" \
-            --evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256" \
-            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256" \
-            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
+          identity_args=(
+            --role released-evaluator
+            --expected-version "$EVALUATOR_VERSION"
+            --expected-root "$RUNNER_TEMP/evaluator-env"
+            --checkout-root "$RUNNER_TEMP/governance"
+            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256"
+            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"
             --require-isolated-python --require-entry-point
+          )
+          if "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'; then
+            identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
+          fi
+          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
 
       - name: Validate with the released evaluator
         shell: bash

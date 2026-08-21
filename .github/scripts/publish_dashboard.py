@@ -44,6 +44,19 @@ EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 EVALUATOR_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
 EVALUATOR_VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
 EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
+RELEASE_BOOTSTRAP_SCHEMA = "se-harness-release-bootstrap-v1"
+PREDECESSOR_PREPARATION_SCHEMA = "se-harness-predecessor-bootstrap-v1"
+RELEASE_BOOTSTRAP_KEYS = {
+    "schema",
+    "release_record",
+    "version",
+    "from_lock_schema",
+    "from_lock_tool_version",
+    "from_lock_sha256",
+    "evaluator_version",
+    "evaluator_archive_name",
+    "evaluator_archive_sha256",
+}
 LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
     {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
 )
@@ -81,6 +94,16 @@ class EvaluatorDescriptor:
 
 def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def _canonical_utf8_text_lf(raw: bytes, *, label: str) -> bytes:
+    if raw.startswith(b"\xef\xbb\xbf"):
+        raise PublicationError(f"UTF-8 byte-order mark is unsupported: {label}")
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeError as exc:
+        raise PublicationError(f"invalid UTF-8 document: {label}") from exc
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -191,6 +214,17 @@ def _text_at(repository: Path, commit: str, path: str) -> str | None:
     return completed.stdout
 
 
+def _bytes_at(repository: Path, commit: str, path: str) -> bytes | None:
+    completed = subprocess.run(
+        ["git", "-C", str(repository), "show", f"{commit}:{path}"],
+        check=False,
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        return None
+    return completed.stdout
+
+
 def _metadata_at(repository: Path, commit: str, path: str) -> dict[str, Any] | None:
     text = _text_at(repository, commit, path)
     return None if text is None else _parse_front_matter(text, f"{commit}:{path}")
@@ -291,6 +325,114 @@ def _validated_release_record(metadata: dict[str, Any], path: str, tag: str) -> 
     }
 
 
+def _validated_bootstrap_contract(
+    repository: Path,
+    commit: str,
+    metadata: dict[str, Any],
+    *,
+    lock_commit: str | None = None,
+) -> dict[str, Any] | None:
+    marker = metadata.get("preparation_schema")
+    if marker is None:
+        return None
+    record_id = metadata.get("id")
+    if marker != PREDECESSOR_PREPARATION_SCHEMA:
+        raise PublicationError(f"release record {record_id} has an unsupported preparation schema")
+    relations = metadata.get("relations")
+    satisfies = relations.get("satisfies") if isinstance(relations, dict) else None
+    released_work = relations.get("releases_work") if isinstance(relations, dict) else None
+    if (
+        not isinstance(satisfies, list)
+        or len(satisfies) != 1
+        or not isinstance(satisfies[0], str)
+        or not isinstance(released_work, list)
+        or not released_work
+        or not all(isinstance(item, str) for item in released_work)
+        or len(set(released_work)) != len(released_work)
+    ):
+        raise PublicationError(f"release record {record_id} bootstrap relations are invalid")
+    contract_id = satisfies[0]
+    contracts: list[dict[str, Any]] = []
+    approved_bootstraps: list[str] = []
+    for path in _tree_markdown_paths(repository, commit):
+        candidate = _metadata_at(repository, commit, path)
+        if not isinstance(candidate, dict) or candidate.get("type") != "release_contract":
+            continue
+        bootstrap = candidate.get("bootstrap")
+        if candidate.get("status") == "approved" and isinstance(bootstrap, dict):
+            approved_bootstraps.append(str(candidate.get("id")))
+        if candidate.get("id") == contract_id:
+            contracts.append(candidate)
+    if len(contracts) != 1 or contracts[0].get("status") != "approved":
+        raise PublicationError(f"release record {record_id} has no exact approved bootstrap contract")
+    if approved_bootstraps != [contract_id]:
+        raise PublicationError(f"release record {record_id} bootstrap declaration is ambiguous")
+    contract = contracts[0]
+    value = contract.get("bootstrap")
+    if not isinstance(value, dict) or set(value) != RELEASE_BOOTSTRAP_KEYS:
+        raise PublicationError(f"release contract {contract_id} bootstrap field set is invalid")
+    version = value.get("version")
+    evaluator_version = value.get("evaluator_version")
+    archive_name = value.get("evaluator_archive_name")
+    valid = (
+        value.get("schema") == RELEASE_BOOTSTRAP_SCHEMA
+        and value.get("release_record") == record_id
+        and version == metadata.get("version")
+        and isinstance(version, str)
+        and TAG_PATTERN.fullmatch(f"v{version}") is not None
+        and type(value.get("from_lock_schema")) is int
+        and value.get("from_lock_schema") == 2
+        and isinstance(value.get("from_lock_tool_version"), str)
+        and EVALUATOR_VERSION_PATTERN.fullmatch(value["from_lock_tool_version"]) is not None
+        and isinstance(value.get("from_lock_sha256"), str)
+        and re.fullmatch(r"[0-9a-f]{64}", value["from_lock_sha256"]) is not None
+        and isinstance(evaluator_version, str)
+        and EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is not None
+        and evaluator_version == value.get("from_lock_tool_version")
+        and archive_name == f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
+        and isinstance(value.get("evaluator_archive_sha256"), str)
+        and re.fullmatch(r"[0-9a-f]{64}", value["evaluator_archive_sha256"]) is not None
+    )
+    if not valid:
+        raise PublicationError(f"release contract {contract_id} bootstrap tuple is invalid")
+    contract_relations = contract.get("relations")
+    gates = contract_relations.get("gates") if isinstance(contract_relations, dict) else None
+    if (
+        not isinstance(gates, list)
+        or not all(isinstance(item, str) for item in gates)
+        or len(gates) != len(released_work)
+        or set(gates) != set(released_work)
+    ):
+        raise PublicationError(f"release record {record_id} work set differs from its bootstrap contract")
+    selected_lock_commit = lock_commit or commit
+    lock_raw = _bytes_at(repository, selected_lock_commit, ".engineering-harness.lock")
+    config_text = _text_at(repository, selected_lock_commit, ".engineering-harness.toml")
+    if lock_raw is None or config_text is None:
+        raise PublicationError("predecessor bootstrap root is unavailable at the governance commit")
+    lock = _loads_json_bytes(lock_raw, label=f"{selected_lock_commit}:.engineering-harness.lock")
+    try:
+        config = tomllib.loads(config_text)
+    except tomllib.TOMLDecodeError as exc:
+        raise PublicationError("predecessor bootstrap configuration is invalid") from exc
+    harness = config.get("harness") if isinstance(config, dict) else None
+    if (
+        _sha256(
+            _canonical_utf8_text_lf(
+                lock_raw, label=f"{selected_lock_commit}:.engineering-harness.lock"
+            )
+        )
+        != value.get("from_lock_sha256")
+        or lock.get("schema") != value.get("from_lock_schema")
+        or lock.get("tool_version") != value.get("from_lock_tool_version")
+        or lock.get("hash_algorithm") != "sha256"
+        or lock.get("hash_mode") != "utf8-text-lf-v1"
+        or not isinstance(harness, dict)
+        or harness.get("tool_version") != value.get("from_lock_tool_version")
+    ):
+        raise PublicationError("predecessor bootstrap root differs from the approved contract")
+    return value
+
+
 def _validated_evaluator_binding(
     repository: Path,
     evidence_commit: str,
@@ -377,6 +519,7 @@ def _validated_evaluator_binding(
         not isinstance(environment, dict)
         or set(environment) != environment_fields
         or any(type(environment.get(field)) is not bool for field in environment_fields)
+        or not environment.get("isolated_python")
         or environment.get("user_site_enabled")
         or environment.get("pythonpath_present")
         or not environment.get("entry_point_resolved")
@@ -385,6 +528,22 @@ def _validated_evaluator_binding(
     ):
         raise PublicationError(f"release record {record_id} evaluator environment proof is invalid")
     selected_lock_commit = lock_commit or evidence_commit
+    bootstrap = _validated_bootstrap_contract(
+        repository,
+        selected_lock_commit,
+        metadata,
+        lock_commit=selected_lock_commit,
+    )
+    if bootstrap is not None:
+        if (
+            evaluator.get("version") != bootstrap.get("evaluator_version")
+            or evaluator.get("archive_name") != bootstrap.get("evaluator_archive_name")
+            or evaluator.get("archive_sha256") != bootstrap.get("evaluator_archive_sha256")
+        ):
+            raise PublicationError(
+                f"release record {record_id} evaluator evidence differs from the bootstrap contract"
+            )
+        return {"path": path, "sha256": digest}
     lock_text = _text_at(repository, selected_lock_commit, ".engineering-harness.lock")
     if lock_text is None:
         raise PublicationError("standard evaluator lock is unavailable at the governance commit")
@@ -524,7 +683,7 @@ def resolve_release(
     )
 
 
-def read_evaluator(repository: Path) -> EvaluatorDescriptor:
+def read_evaluator(repository: Path, release_record: str | None = None) -> EvaluatorDescriptor:
     root = repository.resolve()
     if (root / ".self-hosting" / "governor.toml").exists():
         raise PublicationError("governance snapshot contains a retired active evaluator descriptor")
@@ -541,13 +700,47 @@ def read_evaluator(repository: Path) -> EvaluatorDescriptor:
     configured_version = harness.get("tool_version")
     if not isinstance(configured_version, str) or not configured_version:
         raise PublicationError("standard configuration has no valid tool version")
-    if lock.get("schema") != 3:
-        raise PublicationError("publication requires a schema-3 standard evaluator lock")
     if lock.get("hash_algorithm") != "sha256" or lock.get("hash_mode") != "utf8-text-lf-v1":
         raise PublicationError("standard evaluator lock uses unsupported integrity semantics")
-    evaluator = lock.get("evaluator")
-    if not isinstance(evaluator, dict):
-        raise PublicationError("standard evaluator lock has no evaluator identity")
+    evaluator: Any
+    if lock.get("schema") == 3:
+        evaluator = lock.get("evaluator")
+        if not isinstance(evaluator, dict):
+            raise PublicationError("standard evaluator lock has no evaluator identity")
+    elif lock.get("schema") == 2:
+        if release_record is None or RELEASE_RECORD_PATTERN.fullmatch(release_record) is None:
+            raise PublicationError(
+                "publication requires a schema-3 lock unless schema-2 resolution names one canonical release record"
+            )
+        head = _resolve_commit(root, "HEAD")
+        matches = [
+            metadata
+            for _path, metadata in _release_records_at(root, head)
+            if metadata.get("id") == release_record and metadata.get("status") == "released"
+        ]
+        if len(matches) != 1:
+            raise PublicationError(
+                f"expected exactly one released bootstrap record {release_record}; found {len(matches)}"
+            )
+        release_metadata = matches[0]
+        bootstrap = _validated_bootstrap_contract(root, head, release_metadata, lock_commit=head)
+        if bootstrap is None:
+            raise PublicationError(f"release record {release_record} is not a predecessor bootstrap")
+        binding = _validated_evaluator_binding(root, head, release_metadata, lock_commit=head)
+        evidence_path = binding.get("path")
+        if not isinstance(evidence_path, str):
+            raise PublicationError(f"release record {release_record} has no evaluator evidence")
+        evidence_text = _text_at(root, head, evidence_path)
+        if evidence_text is None:
+            raise PublicationError(f"release record {release_record} evaluator evidence is unavailable")
+        evidence = _loads_json_bytes(
+            evidence_text.encode("utf-8"), label=f"{head}:{evidence_path}"
+        )
+        evaluator = evidence.get("evaluator")
+        if not isinstance(evaluator, dict):
+            raise PublicationError(f"release record {release_record} evaluator evidence is invalid")
+    else:
+        raise PublicationError("publication requires a schema-3 lock or an exact schema-2 bootstrap release")
     allowed = {
         "version",
         "payload_manifest",
@@ -914,6 +1107,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     evaluator = subparsers.add_parser("evaluator", help="Resolve a governance snapshot's standard evaluator identity.")
     evaluator.add_argument("--repository", type=Path, required=True)
+    evaluator.add_argument("--release-record")
     evaluator.add_argument("--output", type=Path)
     evaluator.add_argument("--github-output", type=Path)
 
@@ -947,7 +1141,7 @@ def main(argv: Iterable[str] | None = None) -> int:
             )
             _write_result(result, args.output, args.github_output)
         elif args.command == "evaluator":
-            result = read_evaluator(args.repository)
+            result = read_evaluator(args.repository, release_record=args.release_record)
             _write_result(result, args.output, args.github_output, prefix="evaluator_")
         elif args.command == "verify-github-release":
             verify_github_release(args.metadata, args.tag)

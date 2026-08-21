@@ -522,6 +522,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
             self.resolver,
         )
         self.assertNotIn("from se_harness.release_distribution import", self.resolver)
+        self.assertGreaterEqual(self.workflow.count("--release-record"), 4)
 
     def test_pages_recovery_is_main_only_and_has_no_release_event(self) -> None:
         self.assertNotIn("  release:\n", self.pages)
