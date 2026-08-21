@@ -103,6 +103,66 @@ decided_by = "repository-owner"
         )
         self.assertEqual("prepare verification record", result["handoff"]["recommended_next_step"]["action"])
 
+    def test_focus_implemented_work_with_ready_vrec_recommends_assurance(self) -> None:
+        self.ready_vrec()
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
+        )
+        self.assertEqual(0, code, error)
+        result = json.loads(output)
+        self.assertEqual(["VREC-001"], result["scope"]["dependencies"])
+        self.assertEqual(
+            "assurance decision",
+            result["handoff"]["recommended_next_step"]["action"],
+        )
+        self.assertEqual(
+            "harnessctl focus . --artifact VREC-001",
+            result["handoff"]["command_or_suggested_response"]["value"],
+        )
+        self.assertIn(
+            "WO-001 is implemented; VREC-001 is ready.",
+            result["handoff"]["current_lifecycle_state"],
+        )
+        self.assertNotIn("prepare verification record", json.dumps(result["handoff"]))
+
+    def test_focus_implemented_work_with_verified_vrec_recommends_delivery(self) -> None:
+        self.ready_vrec()
+        code, _, error = self.invoke(
+            "transition", str(self.root),
+            "--set", "VREC-001=verified",
+            "--decision", "VREC-001=quality-owner",
+            "--apply",
+        )
+        self.assertEqual(0, code, error)
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
+        )
+        self.assertEqual(0, code, error)
+        result = json.loads(output)
+        self.assertEqual(
+            "select the separately authorized delivery path",
+            result["handoff"]["recommended_next_step"]["action"],
+        )
+        self.assertIn(
+            "WO-001 is implemented; VREC-001 is verified.",
+            result["handoff"]["current_lifecycle_state"],
+        )
+
+    def test_human_handoff_emits_alternatives_only_when_declared(self) -> None:
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001"
+        )
+        self.assertEqual(0, code, error)
+        self.assertNotIn("Alternative next steps", output)
+
+        self.ready_vrec()
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "VREC-001"
+        )
+        self.assertEqual(0, code, error)
+        self.assertIn("Alternative next steps", output)
+        self.assertIn("action: reject", output)
+
     def test_focus_projects_exact_vrec_scope_without_unrelated_work(self) -> None:
         self.ready_vrec()
         code, output, error = self.invoke(

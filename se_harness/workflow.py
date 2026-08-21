@@ -22,6 +22,7 @@ from se_harness.preflight import _load_validator_module, run_preflight
 
 
 SCHEMA = 1
+WORKFLOW_CONTRACT_SCHEMA = "se-harness-workflow-v1"
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
 DEFINITION_TYPES = {
     "intent",
@@ -34,24 +35,34 @@ DEFINITION_TYPES = {
     "release_contract",
     "operating_contract",
 }
+
+
+def _load_workflow_contract() -> dict[str, Any]:
+    path = Path(__file__).with_name("workflow_contract.json")
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"cannot load workflow contract: {path}") from exc
+    if not isinstance(value, dict) or value.get("schema") != WORKFLOW_CONTRACT_SCHEMA:
+        raise RuntimeError("workflow contract has an unsupported schema")
+    if (
+        not isinstance(value.get("transitions"), dict)
+        or not isinstance(value.get("failure"), dict)
+        or not isinstance(value.get("recommendations"), list)
+    ):
+        raise RuntimeError("workflow contract is missing transitions or recommendations")
+    return value
+
+
+WORKFLOW_CONTRACT = _load_workflow_contract()
 TRANSITIONS: dict[str, dict[str, set[str]]] = {
-    "definition": {
-        "draft": {"approved", "rejected"},
-        "approved": {"implemented", "rejected"},
-    },
-    "work_order": {
-        "draft": {"approved", "rejected"},
-        "approved": {"in_progress", "rejected"},
-        "in_progress": {"implemented", "rejected"},
-        "implemented": {"verified", "released"},
-        "verified": {"released"},
-    },
-    "verification_record": {
-        "ready": {"verified", "rejected", "superseded"},
-    },
-    "release_record": {
-        "ready": {"released", "rejected"},
-    },
+    family: {
+        source: set(targets)
+        for source, targets in sources.items()
+        if isinstance(source, str) and isinstance(targets, list)
+    }
+    for family, sources in WORKFLOW_CONTRACT["transitions"].items()
+    if isinstance(family, str) and isinstance(sources, dict)
 }
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 
@@ -161,6 +172,12 @@ def failed_result(
     repository_blocker: bool = False,
 ) -> dict[str, Any]:
     finding = {"code": code, "message": _terminal_text(message)}
+    handoff = _format_contract_value(
+        WORKFLOW_CONTRACT["failure"].get("handoff"),
+        {"message": finding["message"]},
+    )
+    if not isinstance(handoff, dict):
+        raise RuntimeError("workflow contract failure rule is missing a handoff")
     return _result(
         kind=kind,
         outcome="failed",
@@ -168,13 +185,7 @@ def failed_result(
         artifacts=([primary] if primary else []),
         scoped_blockers=[] if repository_blocker else [finding],
         repository_blockers=[finding] if repository_blocker else [],
-        handoff=_handoff(
-            completed=[],
-            current=["No lifecycle state was changed."],
-            next_step={"action": "remediate", "detail": finding["message"]},
-            authority={"required": "none until the reported blocker is resolved"},
-            command={"kind": "guidance", "value": "Resolve the reported blocker, then rerun the same command."},
-        ),
+        handoff=handoff,
     )
 
 
@@ -218,9 +229,13 @@ def render_human(result: Mapping[str, Any]) -> str:
         "Command or suggested response",
         _render_value(handoff["command_or_suggested_response"]),
         "",
-        "Alternative next steps",
-        _render_value(handoff["alternative_next_steps"]),
     ]
+    if handoff["alternative_next_steps"]:
+        lines.extend([
+            "",
+            "Alternative next steps",
+            _render_value(handoff["alternative_next_steps"]),
+        ])
     findings = result["findings"]
     blockers = [*findings["repository_blockers"], *findings["scoped_blockers"]]
     if blockers:
@@ -340,118 +355,65 @@ def _diagnostic(item: Any) -> dict[str, str]:
     }
 
 
-def _recommend(primary: Any, *, target: str | None = None) -> dict[str, Any]:
+def _contract_match(value: str, accepted: object) -> bool:
+    return isinstance(accepted, list) and ("*" in accepted or value in accepted)
+
+
+def _format_contract_value(value: Any, context: Mapping[str, str]) -> Any:
+    if isinstance(value, str):
+        return value.format_map(context)
+    if isinstance(value, list):
+        return [_format_contract_value(item, context) for item in value]
+    if isinstance(value, dict):
+        return {key: _format_contract_value(item, context) for key, item in value.items()}
+    return value
+
+
+def _recommend(
+    primary: Any,
+    *,
+    target: str | None = None,
+    related: Iterable[Any] = (),
+) -> dict[str, Any]:
     status = target or primary.status
     artifact_id = primary.artifact_id
-    if primary.artifact_type == "work_order":
-        if status == "approved":
-            return _handoff(
-                completed=[f"Projected the selected scope for {artifact_id}."],
-                current=[f"{artifact_id} is approved."],
-                next_step={"action": "implementation-start decision", "detail": "Run start preflight, then obtain an explicit instruction to begin implementation."},
-                authority={"required": "engineering owner"},
-                command={"kind": "command", "value": f"harnessctl preflight . --work-order {artifact_id} --phase start"},
-            )
-        if status == "in_progress":
-            return _handoff(
-                completed=[f"Projected the selected scope for {artifact_id}."],
-                current=[f"{artifact_id} is in_progress."],
-                next_step={"action": "implement and verify", "detail": "Complete only this work order and retain its verification evidence."},
-                authority={"required": "none for work already authorized by this work order"},
-                command={"kind": "command", "value": f"harnessctl preflight . --work-order {artifact_id} --phase review"},
-            )
-        if status == "implemented":
-            return _handoff(
-                completed=[f"{artifact_id} is implemented; no assurance decision was inferred."],
-                current=[f"{artifact_id} is implemented."],
-                next_step={"action": "prepare verification record", "detail": "Capture the exact candidate and retained evidence for assurance review."},
-                authority={"required": "assurance owner only after a ready VREC exists"},
-                command={"kind": "guidance", "value": "Run harnessctl capture-verification with the exact work, contracts, and evidence."},
-            )
-        if status in {"verified", "released"}:
-            return _handoff(
-                completed=[f"Projected completed work state for {artifact_id}."],
-                current=[f"{artifact_id} is {status}; its VREC and RLS remain independent records."],
-                next_step={"action": "review independent lifecycle records", "detail": "Do not synchronize related artifacts implicitly."},
-                authority={"required": "the owner of any separately selected record"},
-                command={"kind": "command", "value": f"harnessctl focus . --artifact {artifact_id}"},
-            )
-    if primary.artifact_type == "verification_record" and status == "ready":
-        return _handoff(
-            completed=[f"Projected assurance candidate {artifact_id}."],
-            current=[f"{artifact_id} is ready; referenced work orders were not changed."],
-            next_step={"action": "assurance decision", "detail": "Review the retained evidence and candidate identity."},
-            authority={"required": "assurance owner"},
-            command={"kind": "suggested_response", "value": f"I verify {artifact_id} as assurance owner."},
-            alternatives=[{"action": "reject", "detail": "Reject with a non-empty reason."}, {"action": "supersede", "detail": "Supersede with one eligible successor VREC."}],
-        )
-    if primary.artifact_type == "verification_record" and status == "verified":
-        return _handoff(
-            completed=[f"Recorded the assurance decision for {artifact_id}; referenced work orders were not changed."],
-            current=[f"{artifact_id} is verified."],
-            next_step={"action": "select the separately authorized delivery path", "detail": "Prepare a release only when release preparation is authorized."},
-            authority={"required": "repository owner for external repository action, or release owner for release preparation"},
-            command={"kind": "guidance", "value": "Run harnessctl prepare-release only with the exact verified coverage and authorized release values."},
-            alternatives=[{"action": "repository action", "detail": "Request authority for the exact pull-request or integration action."}],
-        )
-    if primary.artifact_type == "release_record" and status == "ready":
-        return _handoff(
-            completed=[f"Projected release candidate {artifact_id}."],
-            current=[f"{artifact_id} is ready; included VRECs and work orders were not changed."],
-            next_step={"action": "release decision", "detail": "Review exact verified coverage and candidate identity."},
-            authority={"required": "release owner"},
-            command={"kind": "suggested_response", "value": f"I authorize release record {artifact_id}."},
-            alternatives=[{"action": "reject", "detail": "Reject with a non-empty reason."}],
-        )
-    if primary.artifact_type == "release_record" and status == "released":
-        return _handoff(
-            completed=[f"Recorded the release decision for {artifact_id}; included VRECs and work orders were not changed."],
-            current=[f"{artifact_id} is released."],
-            next_step={"action": "perform only a separately authorized external action", "detail": "Release status does not create a tag, publish, deploy, or operate anything."},
-            authority={"required": "the accountable owner of the exact external action"},
-            command={"kind": "guidance", "value": "State the exact proposed external action and obtain its separate authority."},
-        )
-    if status == "rejected":
-        return _handoff(
-            completed=[f"Recorded rejection of {artifact_id}; related artifacts were not changed."],
-            current=[f"{artifact_id} is rejected and terminal."],
-            next_step={"action": "remediate through a new or revised authorized artifact", "detail": "Do not reopen or silently replace the rejected history."},
-            authority={"required": "the owner of any new definition or work scope"},
-            command={"kind": "guidance", "value": "Create or revise the bounded artifact chain, then obtain its normal approvals."},
-        )
-    if status == "superseded":
-        successor = next(iter(_targets(primary, "superseded_by")), "the declared successor")
-        return _handoff(
-            completed=[f"Recorded supersession of {artifact_id}; its captured provenance remains unchanged."],
-            current=[f"{artifact_id} is superseded by {successor}."],
-            next_step={"action": "use the eligible successor record", "detail": "The superseded record remains historical and release-ineligible."},
-            authority={"required": "none to inspect the declared successor"},
-            command={"kind": "command", "value": f"harnessctl focus . --artifact {successor}"},
-        )
-    if primary.artifact_type in DEFINITION_TYPES:
-        if status == "approved":
-            return _handoff(
-                completed=[f"Recorded approval of {artifact_id}."],
-                current=[f"{artifact_id} is approved."],
-                next_step={"action": "complete the bounded definition packet", "detail": "Approve the remaining governing artifacts or create and approve one bounded work order."},
-                authority={"required": "the accountable owner of each remaining artifact"},
-                command={"kind": "guidance", "value": "Use one explicit transition packet when definitions are mutually dependent."},
-            )
-        if status == "implemented":
-            return _handoff(
-                completed=[f"Recorded implemented definition state for {artifact_id}."],
-                current=[f"{artifact_id} is implemented and terminal."],
-                next_step={"action": "inspect the selected work order", "detail": "Continue only through a separately selected authorized WO."},
-                authority={"required": "engineering owner for the work order"},
-                command={"kind": "guidance", "value": "Run harnessctl focus with the exact related WO ID."},
-            )
-    return _handoff(
-        completed=[f"Projected the selected scope for {artifact_id}."],
-        current=[f"{artifact_id} is {status}."],
-        next_step={"action": "review current state", "detail": "No automatic related-artifact transition is permitted."},
-        authority={"required": "an accountable owner for any further formal decision"},
-        command={"kind": "guidance", "value": "Select the next independently authorized artifact transition."},
-    )
+    related_items = sorted(related, key=lambda item: item.artifact_id)
+    context = {
+        "artifact_id": artifact_id,
+        "status": status,
+        "successor_id": next(iter(sorted(_targets(primary, "superseded_by"))), "the declared successor"),
+    }
+    for rule in WORKFLOW_CONTRACT["recommendations"]:
+        if not isinstance(rule, dict) or not isinstance(rule.get("selector"), dict):
+            raise RuntimeError("workflow contract contains an invalid recommendation")
+        selector = rule["selector"]
+        if not _contract_match(primary.artifact_type, selector.get("artifact_types")):
+            continue
+        if not _contract_match(status, selector.get("statuses")):
+            continue
+        selected_related: Any | None = None
+        related_type = selector.get("related_artifact_type")
+        if related_type is not None:
+            candidates = [
+                item
+                for item in related_items
+                if item.artifact_type == related_type
+                and _contract_match(item.status, selector.get("related_statuses"))
+            ]
+            if not candidates:
+                continue
+            selected_related = candidates[0]
+        rule_context = dict(context)
+        if selected_related is not None:
+            rule_context.update({
+                "related_id": selected_related.artifact_id,
+                "related_status": selected_related.status,
+            })
+        handoff = _format_contract_value(rule.get("handoff"), rule_context)
+        if not isinstance(handoff, dict):
+            raise RuntimeError("workflow contract recommendation is missing a handoff")
+        return handoff
+    raise RuntimeError(f"workflow contract has no recommendation for {primary.artifact_type}:{status}")
 
 
 def focus(repository: Path, artifact_id: str, *, include_background: bool = False) -> dict[str, Any]:
@@ -510,7 +472,16 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
         scoped_blockers=scoped,
         repository_blockers=repository,
         background=background,
-        handoff=_recommend(primary) if outcome == "completed" else failed_result("focus", artifact_id, "Resolve selected-scope blockers before continuing.")["handoff"],
+        handoff=(
+            _recommend(
+                primary,
+                related=(catalog[item] for item in dependencies if item in catalog),
+            )
+            if outcome == "completed"
+            else failed_result(
+                "focus", artifact_id, "Resolve selected-scope blockers before continuing."
+            )["handoff"]
+        ),
     )
 
 
@@ -871,7 +842,14 @@ def plan_transition(
         if apply
         else [f"Planned {len(writes)} explicit lifecycle transition(s); no files were written."]
     )
-    handoff = _recommend(primary, target=transitions[primary_id])
+    dependencies: set[str] = set()
+    if primary.artifact_type in PRIMARY_TYPES:
+        _, dependencies = project_scope(proposed_catalog, primary)
+    handoff = _recommend(
+        primary,
+        target=transitions[primary_id],
+        related=(proposed_catalog[item] for item in dependencies if item in proposed_catalog),
+    )
     handoff["completed"] = completed
     result = _result(
         kind="transition",

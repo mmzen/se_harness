@@ -1,52 +1,170 @@
 # Workflow
 
-1. Capture the problem and accountable actors in an intent.
-2. Derive capabilities and observable normative requirements.
-3. Specify exact behavior, architecturally significant requirement drivers, conforming specification contracts, decision applicability, and independent verification. Before architecture approval, complete its typed traceability and `decision_assessment`; record an ADR for each coherent significant decision and select `no_significant_decision` only with the technical owner's accepted rationale and no active trigger.
-4. Record whether commit-bound verification is `required` or `not_required`, with an accountable rationale, then approve one bounded work order referencing the complete governing chain.
-5. Run `harnessctl focus . --artifact WO-...` and `harnessctl preflight . --work-order WO-...`, read the manifest, implement, validate, and run repository-specific quality checks.
-6. Retain evidence keyed to every work-order ID, run `harnessctl preflight . --work-order WO-... --phase review`, inspect current attention with `harnessctl inspect .`, generate Harness Explorer with `harnessctl dashboard .`, and review the candidate's consistency and anomaly findings.
-7. For work explicitly classified `required`, commit the clean final candidate source and evidence, then run `harnessctl capture-verification`; repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Commit the resulting ready verification record in a later governance commit.
-8. Have the assurance owner review and transition the verification record to `verified` by explicitly applying `harnessctl transition . --set VREC-...=verified --decision VREC-...=<actor> --apply`. If a later verified or released record fully covers an older ready record, a separate governance decision may transition only that older record to `superseded`, supplying the successor VREC ID through `--reason`, and preserve its captured provenance.
-9. Run `harnessctl prepare-release` only from verified VRECs; repeat `--work-order` and `--verification-record` so released work exactly matches eligible coverage. Superseded records are historical and cannot qualify a release. Have the release owner explicitly apply `harnessctl transition . --set RLS-...=released --decision RLS-...=<actor> --apply`, then separately create any authorized tag against the candidate commit.
-10. Evaluate operating contracts through accountable humans.
+The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
+**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and
+**OPTIONAL** in this document are to be interpreted as described in BCP 14
+(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.
 
-Lifecycle values are `draft`, `ready`, `approved`, `in_progress`, `implemented`, `verified`, `released`, `superseded`, and `rejected`. A status change records authority; it is not a confidence estimate.
+This document defines the procedure bound to the executable workflow contract.
+[`WORKFLOW.json`](WORKFLOW.json) defines the permitted transitions, ordered
+next-action rules, required handoff fields, gate IDs, and decision-right IDs.
+The installed `WORKFLOW.json` MUST be byte-identical to the contract loaded by
+`harnessctl`.
 
-For work orders, the normal path is `draft -> approved -> in_progress -> implemented`: approval authorizes bounded execution, while implementation records completed work and retained evidence. Use work-order status `verified` or `released` only when an eligible commit-bound VREC explicitly covers that work and configured provenance requires it. Governance-only work that authorizes verification, release, tagging, review, or publication stops at `implemented` unless a distinct later VREC selects it; the status of the target VREC does not recursively verify the governance work order.
+## Workflow authority
 
-Every approved or in-progress work order declares commit-bound assurance applicability under `[assurance]`. Classify `required` when later engineering, assurance, operational, or release decisions rely on the correctness of the changed trusted state. Classify `not_required` only for work whose sole purpose is to record or transport an already authorized governance decision. Mixed or uncertain scope is `required` or escalated, never inferred by automation. Completed legacy work may omit the declaration, but renewed preflight selection requires it. Inspection reports implemented `required` work without active ready, verified, or released VREC coverage as non-authoritative assurance follow-up.
+`WFL-001` - A lifecycle transition MUST appear in `WORKFLOW.json`, pass every
+gate named by the selected workflow rule, and be exercised by the role named by
+its decision-right ID. Prose, adjacency, a passed command, or the status of a
+related artifact MUST NOT authorize a transition.
 
-The VREC is the authoritative commit-bound assurance record: it moves separately from `ready` to `verified` through an accountable human decision. The RLS is the authoritative release record and moves separately from `ready` to `released`. Each transition changes only explicitly selected artifacts and appends a lifecycle event. Work-order status never substitutes for either record.
+`WFL-002` - A transition changes only the artifacts explicitly selected by the
+actor. A VREC decision MUST NOT change a referenced work order. An RLS decision
+MUST NOT change an included VREC or work order. A work-order decision MUST NOT
+change its definitions, VRECs, or RLS records.
 
-A record cannot contain the hash of its own commit. The verified or released candidate commit therefore precedes the later governance commit containing `VREC-*` or `RLS-*`.
+`WFL-003` - `harnessctl focus` and `harnessctl transition` MUST select the first
+matching recommendation in the ordered `recommendations` array. They MUST NOT
+invent, merge, or skip recommendations.
 
-Release payload is explicit. Include implementation work that the version intentionally delivers; do not automatically include publication, approval, verification-transition, or other governance-only work orders. One aggregate release remains bound to one exact final candidate commit; ancestor commits are history, not proof of final integration.
+`WFL-004` - A command that prepares, validates, inspects, captures, or renders
+information MUST NOT exercise a decision right. Only an explicit actor decision
+and an applied permitted transition change lifecycle state.
 
-Verification supersession is explicit and human-authorized. Only a `ready` VREC may become `superseded` in the current model. It must record a UTC `superseded_at`, a non-empty `supersession_authorized_by`, and one `superseded_by` relation to a distinct `verified` or `released` VREC whose work-order set covers the old record. The old commit, object format, snapshot, evidence, work orders, and verification contracts remain unchanged. Automation may report possible stale-ready records but may not transition them.
+`WFL-005` - `rejected` is terminal. `superseded` is terminal and applies only
+to a ready VREC with one eligible successor. Historical lifecycle events MUST
+remain append-only.
 
-Managed-file integrity uses schema-2 SHA-256 over the versioned `utf8-text-lf-v1` representation. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema-1 locks retain raw-byte semantics and migrate only when an exact legacy match or canonical equality to the rendered desired template proves the operation safe. `doctor` is read-only, and customized or ambiguous content is never overwritten.
+## State model
 
-Pull-request CI declares exactly one work order with a standalone `Harness-Work-Order: WO-...` field. CI never infers the ID from a branch, commit, or diff. Start preflight accepts `approved` or `in_progress`; review preflight additionally accepts `implemented`, `verified`, or `released` so completed work retains honest lifecycle status.
+The permitted transitions are:
 
-Decision applicability is explicit per architecture, not inferred from an absent ADR. `adr_required` means at least one active ADR must decide that architecture and be selected by the work order. `no_significant_decision` is valid only with no controlled triggers and an accountable rationale. One ADR may cover one coherent decision spanning several architectures or requirements; no one-ADR-per-requirement rule exists. Completed legacy architecture without an assessment remains temporarily assessable only when an already-active selected ADR decides it, and validation reports the migration advisory.
+| Artifact class | From | To |
+| --- | --- | --- |
+| Definition | `draft` | `approved`, `rejected` |
+| Definition | `approved` | `implemented`, `rejected` |
+| Work order | `draft` | `approved`, `rejected` |
+| Work order | `approved` | `in_progress`, `rejected` |
+| Work order | `in_progress` | `implemented`, `rejected` |
+| Work order | `implemented` | `verified`, `released` |
+| Work order | `verified` | `released` |
+| Verification record | `ready` | `verified`, `rejected`, `superseded` |
+| Release record | `ready` | `released`, `rejected` |
+
+The JSON contract is authoritative if this summary and the contract differ.
+Conformance tests MUST fail on such a difference.
+
+## End-to-end procedure
+
+1. The author MUST use
+   `harnessctl scaffold-domain . --domain <lowercase-kebab-domain>` once for a
+   new domain, then
+   `harnessctl create-artifact . --domain <domain> --type <type> --id <ID>` for
+   each new draft. The author MUST complete accountable fields and validate the
+   graph before requesting a decision.
+2. The product or domain owner MUST approve the intent, capabilities, and
+   requirements after `QG-G0-INTENT` and `QG-G1-DEFINITION` pass.
+3. The technical owner MUST approve specifications and architecture after
+   `QG-G1-DEFINITION` and `QG-G2-ARCHITECTURE` pass. Each architecture MUST
+   declare its decision applicability. ADR count follows coherent significant
+   decisions; no one-ADR-per-requirement rule exists.
+4. The assurance owner MUST approve the verification contracts. The engineering
+   owner MAY then approve one bounded work order after
+   `QG-G3-WORK-AUTHORIZATION` passes.
+5. Before implementation, the implementation actor MUST run
+   `harnessctl focus . --artifact WO-...` and
+   `harnessctl preflight . --work-order WO-... --phase start`, read every file
+   in the manifest, and receive an explicit start decision.
+6. The implementation actor MUST change only the authorized scope, retain
+   work-order-keyed evidence, and run
+   `harnessctl preflight . --work-order WO-... --phase review` plus the
+   repository checks named by `REPOSITORY_CONTEXT.md`.
+7. The engineering owner MAY mark only that work order `implemented` after
+   `QG-G4-IMPLEMENTATION-EVIDENCE` passes.
+8. When commit-bound verification is `required`, the authorized actor MUST
+   commit the clean candidate before preparing a VREC. `capture-verification`
+   MUST bind that exact candidate, work-order set, verification-contract set,
+   and retained evidence. The resulting VREC remains `ready`.
+9. The assurance owner MUST decide the VREC independently. A verified VREC does
+   not change its work orders. Repository integration and release preparation
+   are separate paths with separate authority.
+10. Release preparation MUST use eligible verified coverage at one exact
+   candidate commit. The release owner MUST decide the ready RLS independently.
+   A released RLS does not tag, publish, deploy, or operate anything.
+11. Each external action MUST receive its own explicit authority after
+    `QG-G5-EXTERNAL-ACTION` passes.
+
+## Bound procedures
+
+Each row is bound to the same ID in `WORKFLOW.json`. "Result" states the only
+permitted lifecycle effect; the contract's `non_effects` remain mandatory.
+
+| Workflow ID | When | Gate / decision right | Required procedure and result |
+| --- | --- | --- | --- |
+| `WFL-WO-READY-VREC` | Focused WO is `implemented`; a related VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | Focus the ready VREC. The assurance owner decides only that VREC; the WO remains `implemented`. Do not capture a duplicate VREC. |
+| `WFL-WO-VERIFIED-VREC` | Focused WO is `implemented`; a related VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | Focus the VREC, then select repository integration or release preparation. Selection changes neither record. |
+| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | Run `capture-verification` with exact inputs. Create one ready VREC; do not change or verify the WO. |
+| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | Run start preflight. Begin only after the engineering owner explicitly instructs implementation; then transition only the WO to `in_progress`. |
+| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | Implement the bounded scope, retain evidence, and run review preflight. Completion changes only the WO to `implemented`. |
+| `WFL-WO-COMPLETED` | Focused WO is `verified` or `released`. | No gate / `DR-RELATED-RECORD-SELECT` | Inspect its independent VREC and RLS records. Inspection changes nothing. |
+| `WFL-VREC-DECIDE` | Focused VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | The assurance owner verifies, rejects with a reason, or supersedes with one eligible successor. Change only the VREC. |
+| `WFL-VREC-DELIVER` | Focused VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | Select repository action or authorized release preparation. Selection changes nothing. |
+| `WFL-RLS-DECIDE` | Focused RLS is `ready`. | `QG-G5-RELEASE-DECISION` / `DR-RLS-DECIDE` | The release owner releases or rejects with a reason. Change only the RLS. |
+| `WFL-RLS-EXTERNAL` | Focused RLS is `released`. | `QG-G5-EXTERNAL-ACTION` / `DR-EXTERNAL-ACTION` | State the exact tag, publication, deployment, or operating action and obtain separate authority. Release status performs no external action. |
+| `WFL-REJECTED` | Focused artifact is `rejected`. | No gate / `DR-REMEDIATION-SCOPE` | Preserve the rejected artifact. Create or revise a bounded artifact chain and obtain normal approvals. |
+| `WFL-VREC-SUPERSEDED` | Focused VREC is `superseded`. | No gate / `DR-RELATED-RECORD-SELECT` | Focus its declared successor. Preserve the old VREC as release-ineligible history. |
+| `WFL-DEFINITION-COMPLETE` | Focused definition is `approved`. | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` / `DR-DEFINITION-DECIDE` | Complete remaining definitions or create and approve one bounded work order. Do not approve related definitions implicitly. |
+| `WFL-DEFINITION-WORK` | Focused definition is `implemented`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-SELECT` | Select the exact related work order. An implemented definition authorizes no new work. |
+| `WFL-DEFAULT-REVIEW` | No earlier rule matches. | No gate / `DR-RELATED-RECORD-SELECT` | Report the current state and select one independently authorized transition. Change nothing. |
+| `WFL-FAIL-REMEDIATE` | A workflow command fails. | No gate / `DR-REMEDIATION-SCOPE` | Report the exact blocker and unchanged state. Resolve it and rerun the same command; obtain new authority if remediation changes governed scope. |
+
+## Transition procedure
+
+For an accountable lifecycle decision:
+
+1. Run `harnessctl focus . --artifact <ID>` and read the current state,
+   recommendation, required authority, command or response, and alternatives.
+2. Identify the matching ordered workflow rule in `WORKFLOW.json`. Verify its
+   named gates pass and the actor holds its named decision right.
+3. Obtain a statement naming the artifact, target state, and actor. Rejection
+   MUST include a reason. VREC supersession MUST name the successor in `--reason`.
+4. Preview the exact transition without `--apply`:
+   `harnessctl transition . --set <ID>=<state> --decision <ID>=<actor>`.
+5. Compare the preview to the explicit decision. Apply the same command with
+   `--apply` only when they match.
+6. Run `harnessctl focus . --artifact <ID>` again and report the resulting
+   handoff. Do not transition a related artifact unless the actor separately
+   selected and authorized it.
+
+Use one transition packet when several definitions are mutually dependent and
+each transition is explicitly named. A packet MUST NOT infer an omitted target.
 
 ## Lifecycle handoff procedure
 
-Use the managed router's handoff fields after completing a stage or reaching a stop condition. Recommend exactly one next step; include alternatives only where the table identifies more than one valid path. Commands below are suggestions for an authorized actor, not authority to execute them.
+After a completed stage or a stop condition, the agent MUST emit these fields in
+this order:
 
-| Current state | Recommended next authorized step | Human decision or approval required | Command or suggested response |
-| --- | --- | --- | --- |
-| Draft definition and work order | Review the governing packet and approve it or request revisions. | The applicable product, technical, assurance, and engineering owners decide their artifacts and the bounded work order. | Suggested response: `Approve REQ-..., SPEC-..., VER-..., and WO-... for implementation`, or identify requested revisions. |
-| Approved work order; implementation not begun | Start preflight, read every manifest file, and implement only the approved scope. | No new lifecycle approval is needed; the implementation actor remains bounded by the approved work order. | `harnessctl preflight . --work-order WO-...` |
-| Implementation, checks, and evidence complete; no candidate commit | Run review preflight and inspection, resolve findings, and obtain separate commit authority. | An authorized human decides whether the reviewed changes may be committed. | `harnessctl preflight . --work-order WO-... --phase review`, then `harnessctl inspect .` and `harnessctl dashboard .` |
-| Clean committed candidate requiring verification | Prepare a ready verification record for the exact candidate commit. | Candidate-commit authority must already have been exercised; preparing the record does not verify it. | `harnessctl capture-verification . --id VREC-... --work-order WO-... --verification VER-... --evidence <path>` |
-| Ready verification record | Have the assurance owner review the evidence and transition the record to `verified`, or reject it with remediation. | The assurance owner alone verifies or rejects the record. | Suggested response: `Verify VREC-...`; after that decision, apply the exact `harnessctl transition` command. |
-| Verified verification record | Open or update a pull request, or prepare a release record when that separate path is authorized. | Repository owners authorize external pull-request action; release preparation also requires its own authority. | Alternative next steps: request authorization to open/update the pull request, or run `harnessctl prepare-release . --id RLS-... --release-contract REL-... --verification-record VREC-... --work-order WO-... --version <version> --authorized-by <release-owner>` after every value and release preparation are authorized. |
-| Ready release record | Have the release owner review and transition the record to `released`, or reject it with remediation. | The release owner alone releases or rejects the record. | Suggested response: `Release RLS-...`; after that decision, apply the exact `harnessctl transition` command. |
-| Released release record | Perform only the separately authorized external action, if any. | The accountable owner separately authorizes each tag, publication, deployment, or operating action. | State the exact proposed tag, publication, deployment, or operating action; do not perform it without that authority. |
-| Failed command, incomplete check, or stop condition | Remediate the reported failure and rerun the bounded check, or escalate when remediation exceeds scope. | The lifecycle state remains unchanged; a human decision is required when remediation changes scope, accepts risk, or exercises a reserved right. | Report the failing command or criterion and its diagnostic, then give the exact safe retry when known or a suggested escalation response. |
+1. `Completed`
+2. `Current lifecycle state`
+3. `Recommended next step`
+4. `Human decision or approval required`
+5. `Command or suggested response`
+6. `Alternative next steps` only when the selected JSON rule contains one or
+   more alternatives
 
-Use actual artifact IDs and paths available from the repository; do not fabricate identifiers hidden by an ellipsis. If an exact command does not apply, provide a suggested human response. When one response completes several stages, report only the final lifecycle state reached and recommend the next stage from that state. If work fails partway through a stage, list only successful work under `Completed`, state that the formal state remains unchanged, and make remediation or escalation the recommendation.
+The values MUST be rendered from the selected JSON rule using actual artifact
+IDs. The agent MUST recommend exactly one next step, MUST NOT replace it with an
+open-ended question, and MUST NOT report a lifecycle effect that did not occur.
+When several stages complete in one response, report only the final state and
+its next rule.
 
-Do not replace a bounded recommendation with `What would you like me to do next?`. Use `harnessctl focus` for selected-scope handoffs. This does not change the closed, non-executable suggestion catalog emitted by repository-wide `harnessctl inspect`.
+## Failure procedure
+
+On a failed command, failed gate, invalid graph, missing authority, or scope
+conflict, the agent MUST stop before the transition, report the exact failing
+criterion and unchanged state, and recommend one safe retry or one accountable
+escalation. Remediation that changes scope, accepts risk, or exercises a
+reserved decision right requires a new explicit decision.
+
+A record cannot contain the hash of its own commit. A VREC or RLS therefore
+resides in a governance commit after the exact candidate commit it governs.

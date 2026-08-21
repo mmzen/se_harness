@@ -90,10 +90,6 @@ class ArtifactCatalogTests(unittest.TestCase):
     def test_released_policy_copies_match_while_candidate_router_remains_isolated(self) -> None:
         pairs = (
             (
-                REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md",
-                REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md",
-            ),
-            (
                 REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md",
                 REPOSITORY_ROOT
                 / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
@@ -105,6 +101,16 @@ class ArtifactCatalogTests(unittest.TestCase):
                     actual.read_text(encoding="utf-8"),
                     template.read_text(encoding="utf-8"),
                 )
+        released_traceability = (
+            REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
+        ).read_text(encoding="utf-8")
+        candidate_traceability = (
+            REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotEqual(released_traceability, candidate_traceability)
+        self.assertNotIn("`TRC-001`", released_traceability)
+        self.assertIn("`TRC-001`", candidate_traceability)
+        self.assertIn("BCP 14", candidate_traceability)
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         router_template = (
             REPOSITORY_ROOT / "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
@@ -118,6 +124,8 @@ class ArtifactCatalogTests(unittest.TestCase):
         self.assertNotEqual(router, candidate_router)
         self.assertNotIn("harnessctl focus", router)
         self.assertIn("harnessctl focus", candidate_router)
+        self.assertNotIn("harnessctl preflight", candidate_router)
+        self.assertIn("WORKFLOW.json", candidate_router)
 
     def test_work_order_template_expresses_conditional_architecture(self) -> None:
         template = (

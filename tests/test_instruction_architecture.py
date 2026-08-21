@@ -27,11 +27,7 @@ OLD_ROUTER_PROCEDURE = (
     "tag, approve, release, publish, or deploy."
 )
 ROUTER_INVARIANT_SUMMARY = (
-    "Verification and release follow `docs/engineering/WORKFLOW.md`, subject to "
-    "`QUALITY_GATES.md`, `TRACEABILITY.md`, and `DECISION_RIGHTS.md`. VRECs and release "
-    "records must identify the exact candidate commit they govern and therefore reside in "
-    "later governance commits. Harness commands may prepare records, but never exercise "
-    "accountable decision rights or commit, push, tag, release, publish, or deploy."
+    "`HRN-006` - A transition MUST change only the artifacts explicitly selected by"
 )
 OLD_REVIEW_PROCEDURE = (
     "Run `harnessctl preflight . --work-order WO-... --phase review` for a completed "
@@ -39,19 +35,14 @@ OLD_REVIEW_PROCEDURE = (
     "open `target/harness-dashboard/index.html`. Both outputs are derived, read-only evidence."
 )
 ROUTER_REVIEW_SUMMARY = (
-    "Review readiness and visualization follow `docs/engineering/WORKFLOW.md`, subject to "
-    "`QUALITY_GATES.md`. Preflight and Harness Explorer outputs are derived, read-only "
-    "evidence; neither approves work nor verifies a candidate."
+    "| Lifecycle states, transitions, procedures, next actions, and handoff fields |"
 )
 OLD_WORKFLOW_REVIEW_STEP = (
     "6. Retain evidence keyed to every release-bearing work-order ID and run review preflight "
     "with `--phase review`."
 )
 WORKFLOW_REVIEW_STEP = (
-    "6. Retain evidence keyed to every work-order ID, run `harnessctl preflight "
-    ". --work-order WO-... --phase review`, inspect current attention with `harnessctl inspect "
-    ".`, generate Harness Explorer with `harnessctl dashboard .`, and review the candidate's "
-    "consistency and anomaly findings."
+    "6. The implementation actor MUST change only the authorized scope, retain"
 )
 ROUTER_HANDOFF_HEADING = "## Lifecycle handoffs"
 WORKFLOW_HANDOFF_HEADING = "## Lifecycle handoff procedure"
@@ -176,13 +167,13 @@ class InstructionArchitectureTests(unittest.TestCase):
 
         self.assertIn(ROUTER_INVARIANT_SUMMARY, router)
         self.assertNotIn(OLD_ROUTER_PROCEDURE, router)
-        self.assertNotIn("`harnessctl capture-verification` may prepare", router)
+        self.assertNotIn("capture-verification", router)
         for required in (
-            "harnessctl capture-verification",
-            "transition the verification record to `verified`",
-            "harnessctl prepare-release",
-            "repeat `--work-order` and `--verification-record`",
-            "separately create any authorized tag",
+            "`WFL-WO-PREPARE-VREC`",
+            "`WFL-VREC-DECIDE`",
+            "`WFL-RLS-DECIDE`",
+            "A VREC decision MUST NOT change a referenced work order",
+            "Release status performs no external action",
         ):
             self.assertIn(required, workflow)
 
@@ -197,11 +188,12 @@ class InstructionArchitectureTests(unittest.TestCase):
 
         self.assertIn(ROUTER_HANDOFF_HEADING, router)
         router_handoff = router.split(ROUTER_HANDOFF_HEADING, 1)[1].split("\n## ", 1)[0]
+        normalized_router_handoff = " ".join(router_handoff.split())
         for field in HANDOFF_FIELDS:
             with self.subTest(field=field):
-                self.assertIn(field, router_handoff)
-        self.assertIn("actual artifact IDs", router_handoff)
-        self.assertIn("never performs that step without its separate authority", router_handoff)
+                self.assertIn(field, normalized_router_handoff)
+        self.assertIn("actual artifact IDs", normalized_router_handoff)
+        self.assertIn("preserve every stated non-effect", normalized_router_handoff)
         self.assertIn("WORKFLOW.md", router_handoff)
         self.assertNotIn("--phase review", router_handoff)
         self.assertNotIn("capture-verification", router_handoff)
@@ -210,21 +202,16 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn(WORKFLOW_HANDOFF_HEADING, workflow)
         workflow_handoff = workflow.split(WORKFLOW_HANDOFF_HEADING, 1)[1]
         for phrase in (
-            "Draft definition and work order",
-            "Approved work order; implementation not begun",
-            "Implementation, checks, and evidence complete; no candidate commit",
-            "Clean committed candidate requiring verification",
-            "Ready verification record",
-            "Verified verification record",
-            "Ready release record",
-            "Released release record",
-            "Failed command, incomplete check, or stop condition",
-            "capture-verification . --id VREC-... --work-order WO-...",
-            "prepare-release . --id RLS-... --release-contract REL-...",
-            "--verification-record VREC-... --work-order WO-... --version <version>",
-            "--authorized-by <release-owner>",
-            "state remains unchanged",
-            "What would you like me to do next?",
+            "`Completed`",
+            "`Current lifecycle state`",
+            "`Recommended next step`",
+            "`Human decision or approval required`",
+            "`Command or suggested response`",
+            "`Alternative next steps`",
+            "actual artifact",
+            "recommend exactly one next step",
+            "open-ended question",
+            "unchanged state",
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, workflow_handoff)
@@ -323,7 +310,7 @@ class InstructionArchitectureTests(unittest.TestCase):
 
         self.assertIn(ROUTER_REVIEW_SUMMARY, router)
         self.assertNotIn(OLD_REVIEW_PROCEDURE, router)
-        review_section = router.split("## Review and visualization", 1)[1].split("\n## ", 1)[0]
+        review_section = router.split("## Routing", 1)[1].split("\n## ", 1)[0]
         self.assertNotIn("--phase review", review_section)
         self.assertNotIn("harnessctl dashboard .", review_section)
         self.assertIn(WORKFLOW_REVIEW_STEP, workflow)

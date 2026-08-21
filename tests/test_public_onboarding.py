@@ -244,8 +244,10 @@ class PublicOnboardingTests(unittest.TestCase):
 
     def test_known_limitations_remain_explicit_and_current(self) -> None:
         limitations = self.section("Known limitations")
-        self.assertIn("reuse G0-G5 for different groupings", limitations)
-        self.assertIn("documented product tension", limitations)
+        normalized = " ".join(limitations.split())
+        self.assertIn("exact `QG-*` IDs", normalized)
+        self.assertIn("derived readiness groupings", normalized)
+        self.assertIn("not gate results", normalized)
         self.assertIn("harness-operational-phasing.md", limitations)
         self.assertNotIn("non-empty work-order `architecture` relation", limitations)
         self.assertNotIn("validator still requires", limitations)

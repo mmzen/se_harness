@@ -2,7 +2,10 @@
 
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a non-authoritative reference to the current repository CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
+> This is a non-authoritative reference to command syntax, actors, and side
+> effects. The standard installation's `docs/engineering/WORKFLOW.md` and
+> `WORKFLOW.json` own lifecycle transitions, ordered next actions, gate IDs, and
+> decision-right IDs. This reference does not restate or override those rules.
 
 ## Invocation
 
@@ -77,17 +80,39 @@ harnessctl select-work-order --event GITHUB_EVENT_PATH
 
 ## Selected-scope workflow execution
 
+The command shapes below are stable interfaces. The candidate standard
+[`WORKFLOW.md`](../../templates/repository/standard/docs/engineering/WORKFLOW.md)
+defines the procedure, and
+[`WORKFLOW.json`](../../templates/repository/standard/docs/engineering/WORKFLOW.json)
+is the machine-readable contract loaded by `harnessctl`. Use the workflow rule
+selected for the artifact's exact type, state, and direct related records. Do
+not derive a new transition or next action from this reference.
+
 ```text
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... [--json] [--include-background]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] [--apply] [--json]
 ```
 
-`focus` projects only the selected artifact's governing chain and direct lifecycle dependencies. Unrelated repository findings remain a background count; `--include-background` expands their categories without turning them into current-scope work.
+`focus` projects only the selected artifact's governing chain and direct
+lifecycle dependencies. It uses the ordered recommendation registry in
+`WORKFLOW.json`. For example, `WFL-WO-READY-VREC` takes precedence over
+`WFL-WO-PREPARE-VREC`, so existing ready assurance coverage cannot produce a
+duplicate-capture recommendation. Unrelated repository findings remain a
+background count; `--include-background` expands categories without making
+them selected-scope work.
 
-`transition` resolves IDs from formal metadata and plans by default. Every selected ID needs exactly one actor assertion. Rejection needs a non-empty reason; VREC supersession uses the reason value as the exact eligible successor VREC ID. A packet is assessed as one proposed final graph, so mutually dependent definitions do not pass through invalid intermediate states. `--apply` rechecks every input byte, stages same-filesystem replacements outside artifact discovery, and rolls back earlier replacements if a later write fails.
+`transition` resolves IDs from formal metadata and plans by default. Each
+selected ID needs one actor assertion. Rejection needs a non-empty reason; VREC
+supersession uses the reason as the exact successor VREC ID. A packet is
+assessed as one proposed final graph. `--apply` rechecks every input byte,
+stages same-filesystem replacements outside artifact discovery, and rolls back
+earlier replacements if a later write fails.
 
-The command records actor text as an assertion, not proof of authority. A VREC transition changes no WO. An RLS transition changes no VREC or WO. Related lifecycle projections require separate explicit transitions and their own preconditions.
+The command records actor text as an assertion, not proof of authority. The
+effects and non-effects for each state are defined only by the matching
+`WORKFLOW.json` rule. Related artifacts require separate explicit selection,
+passing gates, and authority.
 
 Human and JSON output are rendered from the same versioned workflow result and always identify one recommended next step, required authority, and a command or suggested response.
 

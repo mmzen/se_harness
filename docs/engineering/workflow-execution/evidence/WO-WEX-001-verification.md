@@ -210,9 +210,39 @@ Result: PASS. `ready = true`, no diagnostics, exact released evaluator boundary 
 
 ## Remaining verification before assurance decision
 
-- Requalify and commit this authority correction, then prepare `VREC-WEX-001` through the independently installed public 0.5.0 governor against that exact clean candidate.
+- Commit the documentation-contract refinement, then prepare a distinct successor candidate record through the independently installed public 0.5.0 governor. The committed ready `VREC-WEX-001` remains bound to `71bb61e8f25e6a6950e4a303340bab60717a3046` and its immutable candidate facts must not be repointed.
 - Exercise real symlink/junction escape and native read-only/locked-file behavior on supported hosts that expose those capabilities. The current host denied file-symlink creation; disk-full, denial, interruption, concurrent edit, case collision, rollback success, rollback failure, and cleanup are covered by deterministic injection.
 - Complete accountable product, technical, assurance, repository-owner, and supported-agent usability review of the retained corpus and representative records.
 - Run final candidate/package parity and review preflight after any corrections from those assessments.
 
 These remaining items keep assurance separate from implementation. They do not weaken the passing `implemented` work-order state or authorize verification by themselves.
+
+## Workflow documentation contract refinement
+
+On 2026-08-21, the repository owner approved a refinement of the WEX managed documentation and executable next-action contract. The refinement remains within the approved `REQ-WEX-001` through `REQ-WEX-005` boundary and does not implement rejected `REQ-WEX-006`.
+
+Implemented surfaces:
+
+- rewrote the candidate `ENGINEERING_HARNESS`, `DECISION_RIGHTS`, `WORKFLOW`, `QUALITY_GATES`, and `TRACEABILITY` policies using BCP 14 normative language and stable rule identifiers;
+- added byte-identical runtime and installed `WORKFLOW.json` contracts for transition edges, ordered recommendations, failure handoffs, gate references, decision-right references, effects, and non-effects;
+- made the package workflow engine and installed validator load the same transition contract instead of maintaining independent transition tables;
+- corrected selected-scope recommendation precedence so an implemented WO with a ready VREC recommends the assurance decision and never recommends capturing a duplicate record;
+- made human handoffs omit an empty alternatives section while preserving the versioned JSON shape; and
+- changed operator notes to reference the normative workflow contract rather than restating lifecycle policy.
+
+Verification commands and results:
+
+```text
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+Result: PASS. `Ran 319 tests in 149.222s`; `OK (skipped=5)`. Focused conformance tests prove runtime/installed contract byte identity, closed ordered rule IDs, gate and decision-right reference resolution, runtime/validator transition equality, fresh-install management of `WORKFLOW.json`, BCP 14 declarations, ready/verified related-VREC recommendation precedence, and conditional human alternatives.
+
+```text
+python -m se_harness validate .
+git -c safe.directory=C:/Users/mathi/Documents/Codex/2026-08-20/clone-https-github-com-mmzen-se/se_harness diff --check
+```
+
+Result: PASS. Repository validation reported `561` artifacts, `0` errors, and the same `44` historical maintenance warnings. Diff hygiene reported no whitespace errors. Candidate and installed workflow-contract SHA-256 values were both `2c0a0a71af67a995d59164bdd23e01985796b8999ff78235b306c1b7738d78cd`.
+
+Candidate-source `doctor` correctly reports distribution drift for the intentionally unchanged released-root managed installation and the candidate-only required `WORKFLOW.json`. Those results are boundary evidence, not an authorization to overwrite root managed files. The separate released-governor work remains outside this refinement.

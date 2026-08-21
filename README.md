@@ -144,6 +144,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
 - one managed instruction route for coding agents, with room for stricter repository-owned guidance;
+- one machine-readable workflow contract for lifecycle transitions and canonical next actions;
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;
 - safe adoption and hash-based upgrades that preserve repository customization;
@@ -163,9 +164,11 @@ Harness commands may prepare observations or `ready` proposals. They never commi
 
 ## Known limitations
 
-- Managed `QUALITY_GATES.md` and Harness Explorer currently reuse G0-G5 for different groupings. Managed policy owns gate meaning; Explorer remains a navigation and anomaly view.
-
-This is a documented product tension, not a correction made by documentation. The [operational phasing](docs/notes/harness-operational-phasing.md) provides context.
+Normative gates use the exact `QG-*` IDs defined by managed
+`QUALITY_GATES.md`. Harness Explorer's G0-G5 labels are derived readiness
+groupings for navigation; they are not gate results and do not change selected
+scope. The [operational phasing](docs/notes/harness-operational-phasing.md)
+explains the distinction.
 
 ## Learn more
 

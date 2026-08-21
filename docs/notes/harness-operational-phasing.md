@@ -74,8 +74,13 @@ The coding agent normally operates these commands; the accountable human makes t
 
 ## Formal gates versus Explorer readiness
 
-The authoritative gates in `docs/engineering/QUALITY_GATES.md` are G0 Intent, G1 Definition, G2 Architecture, G3 Work authorization, G4 Verification, and G5 Release and operation.
+Only the exact `QG-*` IDs in `docs/engineering/QUALITY_GATES.md` identify
+normative gates. The G0-G5 portions group related gates for reporting and do not
+replace those IDs.
 
-Currently, Harness Explorer reuses G0-G5 labels for a differently grouped, derived per-work-order readiness view. Use Explorer to navigate traceability and anomalies, but use the managed policy for gate meaning. This documentation reports the mismatch; correcting the generator requires separate authorized behavior work.
+Harness Explorer uses G0-G5 labels for a differently grouped, derived
+per-work-order readiness view. Use Explorer to navigate traceability and
+anomalies; use the exact managed `QG-*` predicate for a workflow decision. An
+Explorer label is not a gate result and cannot change selected scope.
 
 For one possible mapping onto Git branches and pull requests, continue to the [illustrative branching model](harness-branching-model.md).

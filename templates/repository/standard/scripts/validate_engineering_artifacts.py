@@ -78,6 +78,34 @@ RELEASABLE_WORK_STATUSES = {
     "verified",
     "released",
 }
+
+
+def _load_workflow_transitions() -> dict[str, dict[str, set[str]]]:
+    path = Path(__file__).resolve().parent.parent / "docs" / "engineering" / "WORKFLOW.json"
+    try:
+        contract = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"cannot load managed workflow contract: {path}") from exc
+    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v1":
+        raise RuntimeError("managed workflow contract has an unsupported schema")
+    source = contract.get("transitions")
+    if not isinstance(source, dict):
+        raise RuntimeError("managed workflow contract has no transition table")
+    transitions: dict[str, dict[str, set[str]]] = {}
+    for family, states in source.items():
+        if not isinstance(family, str) or not isinstance(states, dict):
+            raise RuntimeError("managed workflow contract contains an invalid artifact family")
+        transitions[family] = {}
+        for current, targets in states.items():
+            if not isinstance(current, str) or not isinstance(targets, list) or not all(
+                isinstance(target, str) for target in targets
+            ):
+                raise RuntimeError("managed workflow contract contains an invalid transition")
+            transitions[family][current] = set(targets)
+    return transitions
+
+
+WORKFLOW_TRANSITIONS = _load_workflow_transitions()
 DECISION_ASSESSMENT_OUTCOMES = {"adr_required", "no_significant_decision"}
 DECISION_TRIGGERS = {
     "system-boundary",
@@ -605,21 +633,6 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
     """
 
     errors: list[Diagnostic] = []
-    allowed: dict[str, dict[str, set[str]]] = {
-        "definition": {
-            "draft": {"approved", "rejected"},
-            "approved": {"implemented", "rejected"},
-        },
-        "work_order": {
-            "draft": {"approved", "rejected"},
-            "approved": {"in_progress", "rejected"},
-            "in_progress": {"implemented", "rejected"},
-            "implemented": {"verified", "released"},
-            "verified": {"released"},
-        },
-        "verification_record": {"ready": {"verified", "rejected", "superseded"}},
-        "release_record": {"ready": {"released", "rejected"}},
-    }
     definitions = {
         "intent", "capability", "requirement", "specification", "architecture",
         "adr", "verification", "release_contract", "operating_contract",
@@ -686,7 +699,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             source = values.get("from")
             target = values.get("to")
             if source is not None and target is not None:
-                if target not in allowed.get(family, {}).get(source, set()):
+                if target not in WORKFLOW_TRANSITIONS.get(family, {}).get(source, set()):
                     _add_error(
                         errors, artifact, report_root, "E014",
                         f"lifecycle event {index + 1} contains unsupported transition {source} -> {target}",
