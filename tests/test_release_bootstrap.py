@@ -318,6 +318,7 @@ Body bytes are predecessor-owned.
 
         cases = (
             (lambda value: value.__setitem__("status", "draft"), "approved"),
+            (lambda value: value.__setitem__("status", "rejected"), "approved"),
             (lambda value: value.__setitem__("type", "requirement"), "approved"),
             (lambda value: value["bootstrap"].pop("from_lock_sha256"), "field set"),
             (lambda value: value["bootstrap"].__setitem__("unexpected", True), "field set"),
@@ -543,6 +544,56 @@ class CandidateBootstrapValidationTests(unittest.TestCase):
             "RLS-TST-009", CANDIDATE_VALIDATOR.LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE
         )
 
+    def test_bootstrap_lifecycle_matrix_accepts_only_closed_matching_states(self) -> None:
+        for release_status, contract_status, accepted in (
+            ("ready", "approved", True),
+            ("ready", "rejected", False),
+            ("rejected", "approved", False),
+            ("rejected", "rejected", True),
+        ):
+            with self.subTest(release=release_status, contract=contract_status):
+                self.release.metadata["status"] = release_status
+                self.contract.metadata["status"] = contract_status
+                if release_status == "rejected":
+                    self.release.metadata.update(
+                        {
+                            "rejected_at": "2026-08-21T12:30:00Z",
+                            "rejected_by": "release-owner",
+                            "rejection_reason": "retained checkout qualification failure",
+                        }
+                    )
+                else:
+                    for field in ("rejected_at", "rejected_by", "rejection_reason"):
+                        self.release.metadata.pop(field, None)
+                findings = self.diagnostics()
+                if accepted:
+                    self.assertEqual([], findings)
+                else:
+                    self.assertTrue(
+                        any("requires one exact" in item.message for item in findings),
+                        findings,
+                    )
+
+    def test_rejected_bootstrap_history_requires_its_exact_rejected_contract(self) -> None:
+        self.release.metadata.update(
+            {
+                "status": "rejected",
+                "rejected_at": "2026-08-21T12:30:00Z",
+                "rejected_by": "release-owner",
+                "rejection_reason": "retained checkout qualification failure",
+            }
+        )
+        self.contract.metadata["status"] = "rejected"
+        self.assertEqual([], self.diagnostics())
+
+        findings = CANDIDATE_VALIDATOR.validate_type_specific_metadata(
+            [self.release], self.root
+        )
+        self.assertTrue(any("exact rejected release contract" in item.message for item in findings))
+
+        self.contract.metadata["bootstrap"]["release_record"] = "RLS-TST-010"
+        self.assertTrue(any(item.code == "E012" for item in self.diagnostics()))
+
     def test_lock_archive_and_record_drift_fail_closed(self) -> None:
         mutations = (
             lambda: (self.root / ".engineering-harness.lock").write_bytes(b"{}\n"),
@@ -561,6 +612,23 @@ class CandidateBootstrapValidationTests(unittest.TestCase):
                 (self.root / ".engineering-harness.lock").write_bytes(original_lock)
                 self.release.metadata["id"] = original_id
                 self.release.metadata["evaluator_evidence_sha256"] = original_digest
+
+    def test_crlf_evidence_is_never_normalized_for_digest_or_canonical_validation(self) -> None:
+        evidence_path = self.root / self.evidence_relative
+        crlf = self.evidence_bytes.replace(b"\n", b"\r\n")
+        evidence_path.write_bytes(crlf)
+        findings = self.diagnostics()
+        self.assertTrue(
+            any("digest does not match" in item.message for item in findings),
+            findings,
+        )
+
+        self.release.metadata["evaluator_evidence_sha256"] = sha256(crlf)
+        findings = self.diagnostics()
+        self.assertTrue(
+            any("not canonical" in item.message for item in findings),
+            findings,
+        )
 
     def test_nonisolated_evidence_and_a_second_bootstrap_fail_closed(self) -> None:
         evidence_path = self.root / self.evidence_relative
@@ -819,6 +887,15 @@ releases_work = ["WO-TST-001"]
         self.write("docs/engineering/release/release/REL-TST-010.md", second)
         self.commit("add ambiguous predecessor bootstrap")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "ambiguous"):
+            PUBLICATION.read_evaluator(self.root, release_record="RLS-TST-009")
+
+    def test_rejected_bootstrap_contract_has_no_publication_authority(self) -> None:
+        self.write(
+            self.contract_path,
+            self.contract().replace('status = "approved"', 'status = "rejected"'),
+        )
+        self.commit("reject bootstrap contract")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "no exact approved"):
             PUBLICATION.read_evaluator(self.root, release_record="RLS-TST-009")
 
     def test_publication_lock_canonicalization_is_line_ending_invariant(self) -> None:

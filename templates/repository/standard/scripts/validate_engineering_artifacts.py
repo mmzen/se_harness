@@ -669,19 +669,21 @@ def _bootstrap_for_release_record(
             "predecessor bootstrap release must satisfy exactly one release contract",
         )
         return None
+    contract_status = "rejected" if artifact.status == "rejected" else "approved"
     matching = [
         item
         for item in artifacts
         if item.artifact_type == "release_contract"
         and item.artifact_id == satisfies[0]
-        and item.status == "approved"
+        and item.status == contract_status
     ]
     if len(matching) != 1:
         _evaluator_binding_error(
             artifact,
             errors,
             repository_root,
-            "predecessor bootstrap requires one exact approved release contract",
+            f"predecessor bootstrap {artifact.status} release requires one exact "
+            f"{contract_status} release contract",
         )
         return None
     value = _validated_release_bootstrap(matching[0], errors, repository_root)
@@ -691,7 +693,7 @@ def _bootstrap_for_release_record(
         item
         for item in artifacts
         if item.artifact_type == "release_contract"
-        and item.status == "approved"
+        and item.status == contract_status
         and isinstance(item.metadata.get("bootstrap"), dict)
         and item.metadata["bootstrap"].get("release_record") == artifact.artifact_id
     ]

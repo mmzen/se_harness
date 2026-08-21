@@ -178,30 +178,114 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Attributes", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
+            expected_fragment = (
+                "# Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.\n"
+                "docs/engineering/**/evidence/*.json text eol=lf\n"
+            )
+            self.assertEqual(
+                expected_fragment,
+                (REPOSITORY_ROOT / "templates/repository/standard/gitattributes.fragment")
+                .read_text(encoding="utf-8"),
+            )
             attributes = (target / ".gitattributes").read_text(encoding="utf-8")
-            self.assertIn("docs/engineering/evidence/*-evaluator.json text eol=lf", attributes)
-            self.assertIn("docs/engineering/**/evidence/*-evaluator.json text eol=lf", attributes)
+            self.assertEqual(
+                "# se-harness:begin\n" + expected_fragment + "# se-harness:end\n",
+                attributes,
+            )
+            self.assertEqual(
+                attributes,
+                (REPOSITORY_ROOT / ".gitattributes").read_text(encoding="utf-8"),
+            )
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertEqual("fragment", lock["files"][".gitattributes"]["mode"])
+            evidence_relative = "docs/engineering/product/evidence/RLS-TST-001-evaluator.json"
             subprocess.run(
                 ["git", "-C", str(target), "init"],
                 capture_output=True,
                 text=True,
                 check=True,
             )
-            for relative in (
-                "docs/engineering/evidence/VREC-TST-001-evaluator.json",
-                "docs/engineering/product/evidence/RLS-TST-001-evaluator.json",
-            ):
-                completed = subprocess.run(
-                    ["git", "-C", str(target), "check-attr", "text", "eol", "--", relative],
+            subprocess.run(
+                ["git", "-C", str(target), "config", "user.name", "Harness Test"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(target), "config", "user.email", "harness@example.invalid"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            evidence = target / evidence_relative
+            evidence.parent.mkdir(parents=True, exist_ok=True)
+            evidence_bytes = b'{"schema":"se-harness-evaluator-evidence-v1"}\n'
+            evidence.write_bytes(evidence_bytes)
+            subprocess.run(
+                ["git", "-C", str(target), "-c", "core.autocrlf=false", "add", "."],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(target), "commit", "-m", "canonical evidence"],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+            isolated_git = os.environ.copy()
+            isolated_git["GIT_CONFIG_NOSYSTEM"] = "1"
+            isolated_git["GIT_CONFIG_GLOBAL"] = str(Path(temporary) / "empty.gitconfig")
+            Path(isolated_git["GIT_CONFIG_GLOBAL"]).write_text("", encoding="utf-8")
+            expected_digest = hashlib.sha256(evidence_bytes).hexdigest()
+            for autocrlf, eol in (("true", "crlf"), ("input", "crlf"), ("false", "crlf")):
+                clone = Path(temporary) / f"clone-{autocrlf}"
+                subprocess.run(
+                    [
+                        "git",
+                        "-c",
+                        "protocol.file.allow=always",
+                        "clone",
+                        "-c",
+                        f"core.autocrlf={autocrlf}",
+                        "-c",
+                        f"core.eol={eol}",
+                        "--no-local",
+                        str(target),
+                        str(clone),
+                    ],
                     capture_output=True,
                     text=True,
                     check=True,
+                    env=isolated_git,
+                )
+                checked_out = (clone / evidence_relative).read_bytes()
+                self.assertEqual(evidence_bytes, checked_out)
+                self.assertEqual(expected_digest, hashlib.sha256(checked_out).hexdigest())
+                completed = subprocess.run(
+                    ["git", "-C", str(clone), "check-attr", "text", "eol", "--", evidence_relative],
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                    env=isolated_git,
                 )
                 self.assertEqual("", completed.stderr)
-                self.assertIn(f"{relative}: text: set", completed.stdout)
-                self.assertIn(f"{relative}: eol: lf", completed.stdout)
+                self.assertIn(f"{evidence_relative}: text: set", completed.stdout)
+                self.assertIn(f"{evidence_relative}: eol: lf", completed.stdout)
+
+            conflict = Path(temporary) / "clone-true"
+            (conflict / Path(evidence_relative).parent / ".gitattributes").write_text(
+                "*.json eol=crlf\n", encoding="utf-8", newline="\n"
+            )
+            completed = subprocess.run(
+                ["git", "-C", str(conflict), "check-attr", "eol", "--", evidence_relative],
+                capture_output=True,
+                text=True,
+                check=True,
+                env=isolated_git,
+            )
+            self.assertIn(f"{evidence_relative}: eol: crlf", completed.stdout)
 
     def test_standard_upgrade_restores_every_file_after_interrupted_apply(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

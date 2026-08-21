@@ -63,6 +63,7 @@ PERMITTED_MENTIONS = {
     "docs/engineering/instruction-architecture/work-orders/WO-IAR-012.md": "owner-region work order",
     "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-001-verification.md": "historical evidence",
     "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-001.md": "historical work order",
+    "docs/engineering/released-evaluator-boundary/evidence/WO-REB-005-verification.md": "retained released-0.5 preflight evidence",
     "docs/engineering/self-hosting-boundary/work-orders/WO-SHB-001.md": "historical work order",
     "docs/engineering/verification-supersession/engineering-README.md": "historical domain note",
     "docs/engineering/work-order-assurance-classification/evidence/WO-WAC-001-verification.md": "historical evidence",

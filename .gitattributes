@@ -1,2 +1,4 @@
+# se-harness:begin
 # Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.
 docs/engineering/**/evidence/*.json text eol=lf
+# se-harness:end

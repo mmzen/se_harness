@@ -105,7 +105,9 @@ python scripts/bind_release_bootstrap.py `
 
 Adding `--apply` is a separate explicit mutation. It exclusively creates one canonical evidence sidecar and atomically adds only `preparation_schema`, `evaluator_evidence_path`, and `evaluator_evidence_sha256` to the ready RLS. The command rejects any contract, lock, wheel, runtime-origin, candidate, verification, work-set, path, or existing-byte mismatch. It never creates or transitions an RLS, changes the root, commits, pushes, tags, publishes, deploys, or uses credentials.
 
-Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
+The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserves the canonical sidecar bytes and bound raw SHA-256 under supported Windows and non-Windows checkout configurations. Validators do not normalize evidence before hashing; changed, noncanonical, or CRLF worktree bytes still fail.
+
+Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
 
 ## Advancing the root evaluator
 
