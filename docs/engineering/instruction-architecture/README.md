@@ -138,6 +138,17 @@ The packet keeps conversational handoffs separate from `harnessctl inspect` sugg
 - Approved verification contract: `VER-IAR-011`
 - Implemented work order: `WO-IAR-011`
 
+## Implemented owner-region instruction revision
+
+The implemented `IAR-012` packet keeps this repository's own `AGENTS.md` owner region current and non-duplicating. It governs owner content only and changes no managed tracked block. Rule 3 of `SPEC-IAR-012` states the `REPOSITORY_CONTEXT.md` pointer by content rather than by harness status, so the owner region stays correct whether or not `WO-DST-021` has retired the scaffold; the two work orders are independent and were implemented in the same working tree without either depending on the other.
+
+### Owner-region packet index
+
+- Implemented requirement: `REQ-IAR-020`
+- Implemented specification: `SPEC-IAR-012`
+- Approved verification contract: `VER-IAR-012`
+- Implemented work order: `WO-IAR-012`
+
 ## Implemented instruction route
 
 ```text
