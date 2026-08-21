@@ -2,7 +2,7 @@
 id = "VREC-SEH-008"
 type = "verification_record"
 title = "Verification candidate for 8 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -10,12 +10,19 @@ commit = "827b2709292abaa3458bb3b4cac37b582378c585"
 git_object_format = "sha1"
 worktree_state = "clean"
 verified_at = "2026-08-21T14:53:14Z"
+verified_by = "quality-owner"
 artifact_snapshot_sha256 = "6845024e96fdb369f3a14c37209dc18e2da6a86dc383c0f6a8b33e1355e50326"
 evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DST-019-verification.md", "docs/engineering/harness-distribution/evidence/WO-DST-020-verification.md", "docs/engineering/release-0-6-0/evidence/WO-RLS-008-verification.md", "docs/engineering/released-evaluator-boundary/evidence/WO-REB-001-implementation.md", "docs/engineering/released-evaluator-boundary/evidence/WO-REB-002-implementation.md", "docs/engineering/released-evaluator-boundary/evidence/WO-REB-003-verification.md", "docs/engineering/workflow-execution/evidence/WO-WEX-001-verification.md", "docs/engineering/workflow-execution/evidence/WO-WEX-002-verification.md"]
 
 [relations]
 verifies_work_order = ["WO-DST-019", "WO-DST-020", "WO-REB-001", "WO-REB-002", "WO-REB-003", "WO-RLS-008", "WO-WEX-001", "WO-WEX-002"]
 conforms_to = ["VER-DST-001", "VER-DST-019", "VER-DST-020", "VER-REB-001", "VER-WEX-001", "VER-WEX-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-21T15:02:13Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
