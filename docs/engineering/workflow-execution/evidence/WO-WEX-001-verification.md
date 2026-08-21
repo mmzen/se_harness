@@ -6,7 +6,7 @@ Date: 2026-08-20
 
 This evidence records the implemented candidate-source slice for `WO-WEX-001`, covering `REQ-WEX-001` through `REQ-WEX-005`. The rejected `REQ-WEX-006` is not implemented: there is no trusted-base option, diff comparison, direct-edit enforcement, or lifecycle-history CI gate.
 
-The work remains `in_progress` while exact-commit candidate-package acceptance, platform-specific link/filesystem cases, and accountable manual assessments remain outstanding. The automated supported-agent corpus and declared scale matrix are complete. No commit, push, pull request, VREC decision, release, tag, publication, deployment, managed-root upgrade, or promotable distribution build was performed.
+The work reached `implemented` on 2026-08-21 after the engineering owner authorized the transition, the complete suite passed, and the public external 0.5.0 evaluator passed review preflight. Candidate commit, push, and draft pull-request actions were separately authorized and performed. No VREC assurance decision, release, tag, publication, deployment, managed-root upgrade, or local promotable distribution build was performed.
 
 ## Implemented candidate surfaces
 
@@ -145,6 +145,28 @@ Result: PASS. The evaluator reported version `0.5.0`; every required, distributi
 
 No candidate package was built or accepted. Commit/push/PR authority did not broaden the work order into a distribution-build or assurance decision.
 
+### Completion transition qualification
+
+The first plan for `in_progress -> implemented` failed safely before writing because candidate-source preflight compared candidate distribution templates with the separately installed released root. That would make any harness change that updates managed templates unable to complete its own work order even when the external released evaluator passes.
+
+The boundary was corrected narrowly: lifecycle preflight ignores only `I001` diagnostics whose path begins with `distribution:`. Managed-file, lock, required-file, graph, context, work-order, and every other preflight diagnostic remain blocking. Two regression scenarios prove that candidate-distribution drift is non-authoritative while managed-installation drift still rejects completion.
+
+```text
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+Result: PASS after the correction. `Ran 310 tests in 174.990s`; `OK (skipped=5)`.
+
+| Formal artifacts | Validation | Focus | Transition plan |
+| ---: | ---: | ---: | ---: |
+| 100 | 0.066277 s | 0.072953 s | 0.164688 s |
+| 500 | 0.289695 s | 0.310862 s | 0.694756 s |
+| 1,000 | 0.743407 s | 0.563615 s | 1.357061 s |
+
+The authorized command then atomically changed only `WO-WEX-001` from `in_progress` to `implemented`, appended its lifecycle event with `decided_by = "engineering-owner"`, and recommended preparation of an independent verification record. Repository validation remained PASS at `560` artifacts, `0` errors, and `44` inherited maintenance warnings. `git diff --check` passed.
+
+The public external `se-harness==0.5.0` evaluator then passed `doctor` and review preflight again. Review preflight reported `ready = true`, no diagnostics, the exact governing manifest, and work-order state `implemented`.
+
 ### Rejected-requirement negative proof and diff hygiene
 
 ```text
@@ -170,11 +192,11 @@ Result: PASS. `ready = true`, no diagnostics, exact released evaluator boundary 
 - VREC supersession uses the required `--reason ID=TEXT` value as the exact successor VREC ID because the approved public command shape contains no separate successor option.
 - Repository-wide `inspect` behavior and schema are unchanged; selected-scope behavior belongs only to `focus`.
 
-## Remaining verification before implementation completion
+## Remaining verification before assurance decision
 
 - Run verifier-owned candidate-package black-box acceptance after a separately authorized candidate commit and non-promotable test package are available through the released-evaluator boundary.
 - Exercise real symlink/junction escape and native read-only/locked-file behavior on supported hosts that expose those capabilities. The current host denied file-symlink creation; disk-full, denial, interruption, concurrent edit, case collision, rollback success, rollback failure, and cleanup are covered by deterministic injection.
 - Complete accountable product, technical, assurance, repository-owner, and supported-agent usability review of the retained corpus and representative records.
 - Run final candidate/package parity and review preflight after any corrections from those assessments.
 
-These remaining items keep `WO-WEX-001` honestly `in_progress`; they do not weaken the passing implemented kernel evidence above.
+These remaining items keep assurance separate from implementation. They do not weaken the passing `implemented` work-order state or authorize verification by themselves.

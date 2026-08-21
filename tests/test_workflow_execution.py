@@ -11,6 +11,7 @@ import time
 import tomllib
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 from se_harness.cli import main
@@ -72,6 +73,23 @@ prepared_by = "release-owner"
 tag = "v1.0.0"''',
         ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
         write(path, content)
+        return path
+
+    def in_progress_work_order(self) -> Path:
+        path = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace('status = "implemented"', 'status = "in_progress"', 1)
+        text = text.replace(
+            "[relations]",
+            '''[assurance]
+commit_bound_verification = "required"
+rationale = "The workflow change affects persistent governance state and requires exact-candidate assurance."
+decided_by = "repository-owner"
+
+[relations]''',
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
         return path
 
     def test_focus_projects_only_selected_governing_chain(self) -> None:
@@ -138,6 +156,48 @@ tag = "v1.0.0"''',
         result = json.loads(output)
         self.assertEqual("failed", result["operation"]["outcome"])
         self.assertIn("only WO, VREC, or RLS", result["findings"]["scoped_blockers"][0]["message"])
+
+    def test_work_order_completion_ignores_only_candidate_distribution_drift(self) -> None:
+        path = self.in_progress_work_order()
+        distribution_only = SimpleNamespace(
+            ready=False,
+            diagnostics=[SimpleNamespace(
+                code="I001",
+                path="distribution:ENGINEERING_HARNESS.md",
+                message="differs from distribution template",
+            )],
+        )
+        with mock.patch("se_harness.workflow.run_preflight", return_value=distribution_only):
+            plan = plan_transition(
+                self.root,
+                {"WO-001": "implemented"},
+                {"WO-001": "engineering-owner"},
+                {},
+            )
+        self.assertEqual("planned", plan.result["operation"]["outcome"])
+        self.assertEqual('status = "in_progress"', next(
+            line for line in path.read_text(encoding="utf-8").splitlines()
+            if line.startswith("status =")
+        ))
+
+    def test_work_order_completion_keeps_managed_installation_drift_blocking(self) -> None:
+        self.in_progress_work_order()
+        managed_failure = SimpleNamespace(
+            ready=False,
+            diagnostics=[SimpleNamespace(
+                code="I001",
+                path="managed:ENGINEERING_HARNESS.md",
+                message="managed file changed",
+            )],
+        )
+        with mock.patch("se_harness.workflow.run_preflight", return_value=managed_failure):
+            with self.assertRaisesRegex(Exception, "managed file changed"):
+                plan_transition(
+                    self.root,
+                    {"WO-001": "implemented"},
+                    {"WO-001": "engineering-owner"},
+                    {},
+                )
 
     def test_duplicate_identity_is_a_repository_blocker(self) -> None:
         write(

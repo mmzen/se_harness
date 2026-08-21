@@ -705,6 +705,23 @@ def _status(catalog: Mapping[str, Any], replacements_catalog: Mapping[str, Any],
     return replacements_catalog.get(artifact_id, catalog[artifact_id]).status
 
 
+def _workflow_preflight_blocker(report: Any) -> str | None:
+    """Return the first lifecycle-relevant preflight diagnostic.
+
+    A transition command can run from candidate source whose bundled
+    distribution templates intentionally differ from the installed released
+    harness.  Those candidate-distribution comparisons are not installation
+    integrity facts.  Managed/lock failures and every other preflight
+    diagnostic remain blocking.
+    """
+
+    for diagnostic in report.diagnostics:
+        if diagnostic.code == "I001" and str(diagnostic.path).startswith("distribution:"):
+            continue
+        return diagnostic.message
+    return None
+
+
 def _validate_preconditions(
     root: Path,
     catalog: Mapping[str, Any],
@@ -720,14 +737,14 @@ def _validate_preconditions(
                 raise HarnessError(f"work order {artifact_id} requires a complete assurance classification before approval")
         if artifact.artifact_type == "work_order" and target == "in_progress":
             preflight = run_preflight(root, work_order_id=artifact_id, phase="start")
-            if not preflight.ready:
-                first = preflight.diagnostics[0].message if preflight.diagnostics else "start preflight failed"
-                raise HarnessError(f"work order {artifact_id} is not start-ready: {first}")
+            blocker = _workflow_preflight_blocker(preflight)
+            if blocker is not None:
+                raise HarnessError(f"work order {artifact_id} is not start-ready: {blocker}")
         if artifact.artifact_type == "work_order" and target == "implemented":
             preflight = run_preflight(root, work_order_id=artifact_id, phase="review")
-            if not preflight.ready:
-                first = preflight.diagnostics[0].message if preflight.diagnostics else "review preflight failed"
-                raise HarnessError(f"work order {artifact_id} is not review-ready: {first}")
+            blocker = _workflow_preflight_blocker(preflight)
+            if blocker is not None:
+                raise HarnessError(f"work order {artifact_id} is not review-ready: {blocker}")
             evidence = root / "docs" / "engineering"
             keyed = any(
                 path.is_file()

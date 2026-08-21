@@ -2,10 +2,10 @@
 id = "WO-WEX-001"
 type = "work_order"
 title = "Implement deterministic scoped workflow execution"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-20"
-updated = "2026-08-20"
+updated = "2026-08-21"
 
 [assurance]
 commit_bound_verification = "required"
@@ -17,6 +17,12 @@ implements = ["REQ-WEX-001", "REQ-WEX-002", "REQ-WEX-003", "REQ-WEX-004", "REQ-W
 specifications = ["SPEC-WEX-001"]
 architecture = ["ARCH-WEX-001", "ADR-WEX-001"]
 verification = ["VER-WEX-001"]
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-21T06:21:12Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement deterministic scoped workflow execution
