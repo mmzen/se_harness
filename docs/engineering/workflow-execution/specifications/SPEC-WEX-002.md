@@ -45,7 +45,7 @@ final restitution.
   Skills, agent adapters, and dashboards are consumers, never alternative rule
   engines.
 - The filesystem and repository contain untrusted paths, artifacts, evidence,
-  procedure parameters, and repository-context references.
+  and procedure parameters.
 - Git MAY supply candidate identity to existing provenance commands. It is not
   used as a trusted change baseline by this contract.
 
@@ -129,7 +129,8 @@ for a step are forbidden:
 
 Scalar and repeated parameter cardinalities are `one`, `zero_or_one`, and
 `one_or_more`; types are closed contract enums. A `reference` step contains
-exactly one of `procedure_id` or `action_id`. The quality-gate registry contains
+exactly one `procedure_id`; a step declaring `action_id` is rejected as a
+withdrawn form. The quality-gate registry contains
 `gates[]`, each with unique `id`, `checkpoints`, and `predicates[]`; each
 predicate has unique `id`, one closed `evaluator` key, and non-empty
 `required_evidence` descriptors.
@@ -281,16 +282,15 @@ No numeric or aggregate health score participates in lifecycle eligibility.
     artifact expression, permitted outcomes, response template, effects, and
     non-effects. Procedure execution stops until that exact decision is
     supplied.
-20. A reference step contains one other procedure ID or one `CTX-ACT-*` action
-    ID. A context action is bounded by unique
-    `<!-- se-harness:action CTX-ACT-ID begin -->` and matching `end` markers in
-    `REPOSITORY_CONTEXT.md`. References cannot escape the repository, form a
-    cycle, or resolve ambiguously.
+20. A reference step contains exactly one other procedure ID. A step declaring
+    an `action_id` is rejected at contract validation as a withdrawn form,
+    before resolution. Repository-specific operations are owner prose, not
+    resolvable steps. References cannot escape the repository, form a cycle, or
+    resolve ambiguously.
 21. Resolve placeholders only from declared typed parameters. Missing required
     values block the step; unknown placeholders invalidate the contract.
 22. A procedure contains at most 64 steps. Procedure-to-procedure references
     have maximum resolved depth 8; every direct or indirect cycle is invalid.
-    Context-action blocks cannot nest.
 23. The standard `PROC-WO-START` procedure contains, in order: selected `focus`,
     start preflight, `DR-WO-START` decision, transition preview, transition
     apply, and final `focus`. Apply cannot be reached before the decision.
@@ -350,11 +350,11 @@ reports completed effects honestly, marks incomplete expected effects under
 - `se-harness-workflow-v2`, `se-harness-quality-gates-v1`, and
   `se-harness-workflow-result-v2` reject unknown required enums, duplicate IDs,
   unresolved references, and unknown placeholders.
-- A procedure has at most 64 steps, a procedure reference chain has at most 8
-  resolved levels, and a context action block cannot nest.
+- A procedure has at most 64 steps and a procedure reference chain has at most 8
+  resolved levels.
 - Predicate IDs use `QGP-*`; procedure IDs use `PROC-*`; step IDs are unique
-  within one procedure and use `STEP-*`; repository-context action IDs use
-  `CTX-ACT-*`.
+  within one procedure and use `STEP-*`. The `CTX-ACT-*` action-ID grammar is
+  withdrawn and is not reused for another purpose.
 - Procedure command templates store argument arrays, never shell command
   strings. Human display is derived from the array.
 - Evidence entries are references and digests where applicable, not arbitrary
@@ -365,7 +365,8 @@ reports completed effects honestly, marks incomplete expected effects under
 ## Security and privacy properties
 
 - Treat change manifests, path entries, procedure parameters, evidence
-  references, policy JSON, and repository-context references as untrusted.
+  references, and policy JSON as untrusted. No procedure step resolves content
+  from a file the harness does not govern.
 - Normalize and constrain all paths before matching or reading; reject path
   traversal, absolute paths, alternate separators, case ambiguity, links that
   escape the repository, and device or URI syntax.

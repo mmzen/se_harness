@@ -16,7 +16,6 @@ Create a domain with `harnessctl scaffold-domain . --domain <lowercase-kebab-dom
 
 ## Repository-specific engineering documentation
 
-- `REPOSITORY_CONTEXT.md`: owner-confirmed commands, entry points, and constraints.
 - TODO[engineering-document]: link architecture overviews, runbooks, or contribution guidance that is specific to this repository.
 
 ## Maintenance

@@ -41,7 +41,7 @@ needed to execute a step may either be bound or explicitly reported as missing.
     inputs;
   - `decision`: the decision-right ID, accountable role, selected artifact,
     permitted outcomes, and exact response fields;
-  - `reference`: one resolvable procedure ID or repository-context action ID.
+  - `reference`: exactly one resolvable procedure ID.
 - Resolve every placeholder from selected workflow data or identify the exact
   missing input before execution.
 - Expose the selected procedure ID, resolved step, required authority, expected
@@ -72,9 +72,10 @@ needed to execute a step may either be bound or explicitly reported as missing.
   it.
 - Unbound wording such as "run preflight", "inspect", "select", "resolve", or
   "use exact inputs" is forbidden when it denotes an actionable step.
-- Repository-specific operations may use a stable action ID defined in
-  `REPOSITORY_CONTEXT.md`; a generic reference to repository policy is not
-  sufficient.
+- Repository-specific operations are stated as prose in the owner-controlled
+  region of `AGENTS.md`. They are not bound as executable procedure steps, and
+  no reference step resolves step content from a file the harness does not
+  govern.
 - Exact commands and procedure schemas are versioned public interfaces.
 - A procedure MAY prepare data or apply an explicitly authorized mechanical
   transition. It MUST NOT grant authority, approve, verify, release, accept
@@ -110,6 +111,6 @@ is offered as a substitute.
 ## Open decisions
 
 The specification must define the procedure-registry schema, step and parameter
-types, reference-depth or recursion rules, repository-context action IDs,
+types, reference-depth or recursion rules,
 documentation rendering, and compatibility treatment for existing free-form
 handoff commands before this requirement is approved for implementation.

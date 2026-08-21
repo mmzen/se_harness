@@ -3,47 +3,18 @@
 from __future__ import annotations
 
 import re
-from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from se_harness.workflow_contract import ContractError
 
 
 _PLACEHOLDER = re.compile(r"\{([a-z][a-z0-9_]*)\}")
-_ACTION = re.compile(r"^<!-- se-harness:action (CTX-ACT-[A-Z0-9-]+) (begin|end) -->$")
 _ARTIFACT_ID = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 
 
 class ProcedureError(RuntimeError):
     """A typed procedure or parameter cannot resolve safely."""
-
-
-def context_actions(path: Path) -> dict[str, tuple[str, ...]]:
-    try:
-        lines = path.read_text(encoding="utf-8").splitlines()
-    except (OSError, UnicodeError) as exc:
-        raise ProcedureError(f"WEX220: cannot read repository context: {exc}") from exc
-    result: dict[str, tuple[str, ...]] = {}
-    active: tuple[str, int] | None = None
-    for index, line in enumerate(lines):
-        match = _ACTION.fullmatch(line)
-        if match is None:
-            continue
-        action_id, boundary = match.groups()
-        if boundary == "begin":
-            if active is not None or action_id in result:
-                raise ProcedureError(f"WEX220: nested or duplicate context action {action_id}")
-            active = (action_id, index + 1)
-            continue
-        if active is None or active[0] != action_id:
-            raise ProcedureError(f"WEX220: unmatched context action end {action_id}")
-        body = tuple(lines[active[1] : index])
-        result[action_id] = body
-        active = None
-    if active is not None:
-        raise ProcedureError(f"WEX220: context action {active[0]} has no end marker")
-    return result
 
 
 def _typed(value: str, parameter_type: str, name: str) -> str:
@@ -114,14 +85,11 @@ def resolve_procedure(
     procedures: Mapping[str, Mapping[str, Any]],
     procedure_id: str,
     parameters: Mapping[str, Any],
-    *,
-    repository_context: Path | None = None,
 ) -> dict[str, Any]:
     procedure = procedures.get(procedure_id)
     if procedure is None:
         raise ProcedureError(f"WEX220: unknown procedure {procedure_id}")
     values = _values(procedure, parameters)
-    actions = context_actions(repository_context) if repository_context is not None else {}
     resolved: list[dict[str, Any]] = []
     for step in procedure["steps"]:
         item: dict[str, Any] = {
@@ -145,14 +113,7 @@ def resolve_procedure(
                 }
             )
         else:
-            if "procedure_id" in step:
-                item["procedure_id"] = step["procedure_id"]
-            else:
-                action_id = step["action_id"]
-                if repository_context is None or action_id not in actions:
-                    raise ProcedureError(f"WEX220: context action {action_id} does not resolve exactly once")
-                item["action_id"] = action_id
-                item["content"] = list(actions[action_id])
+            item["procedure_id"] = step["procedure_id"]
         resolved.append(item)
     return {"id": procedure_id, "parameters": dict(values), "steps": resolved}
 
@@ -194,9 +155,7 @@ def command_or_response(step: Mapping[str, Any]) -> dict[str, Any]:
         return {"kind": "command", "argv": list(step.get("argv", []))}
     if step.get("kind") == "decision":
         return {"kind": "response", "value": str(step.get("response", ""))}
-    if "procedure_id" in step:
-        return {"kind": "response", "value": f"Continue with {step['procedure_id']}."}
-    return {"kind": "response", "value": f"Follow repository context action {step.get('action_id')}."}
+    return {"kind": "response", "value": f"Continue with {step.get('procedure_id')}."}
 
 
 def decision_required(step: Mapping[str, Any]) -> dict[str, Any] | None:

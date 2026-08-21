@@ -5,7 +5,7 @@ title = "Layered public, operator, and governance documentation"
 status = "approved"
 owners = ["technical-owner", "documentation-owner"]
 created = "2026-08-12"
-updated = "2026-08-16"
+updated = "2026-08-21"
 
 [relations]
 addresses = ["REQ-DST-024", "REQ-DST-025", "REQ-DST-026", "REQ-DST-027", "REQ-DST-028"]
@@ -39,7 +39,7 @@ README.md                          public human entry point (<= 200 lines)
 ENGINEERING_HARNESS.md             authoritative managed router
     `--> managed policy modules    workflow, rights, gates, traceability
 
-REPOSITORY_CONTEXT.md              repository-owned facts and commands
+AGENTS.md owner region             repository-owned facts and commands
 implementation + tests             behavior evidence, never authority
 ```
 

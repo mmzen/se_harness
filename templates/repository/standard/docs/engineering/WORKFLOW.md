@@ -83,7 +83,7 @@ Conformance tests MUST fail on such a difference.
 6. The implementation actor MUST change only the authorized scope, retain
    work-order-keyed evidence, and run
    `harnessctl preflight . --work-order WO-... --phase review` plus the
-   repository checks named by `REPOSITORY_CONTEXT.md`.
+   repository checks named by the owner-controlled region of `AGENTS.md`.
 7. The engineering owner MAY mark only that work order `implemented` after
    `QG-G4-IMPLEMENTATION-EVIDENCE` passes.
 8. When commit-bound verification is `required`, the authorized actor MUST

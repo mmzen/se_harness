@@ -1,0 +1,59 @@
+{
+  "source": "se-harness 0.5.0 installed from PyPI into ../se-harness-eval-1685 and read outside this checkout on 2026-08-21",
+  "retired_path": "docs/engineering/REPOSITORY_CONTEXT.md",
+  "retired_diagnostic_family": ["C001", "C002", "C003", "C004"],
+  "preflight": {
+    "schema": "se-harness-preflight-v1",
+    "payload_keys": [
+      "schema",
+      "ready",
+      "phase",
+      "work_order",
+      "assurance",
+      "diagnostics",
+      "reading_manifest",
+      "repository_commands",
+      "authority_boundary"
+    ],
+    "required_paths": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/REPOSITORY_CONTEXT.md",
+      "docs/engineering/README.md",
+      "docs/engineering/WORKFLOW.md",
+      "docs/engineering/DECISION_RIGHTS.md",
+      "docs/engineering/QUALITY_GATES.md",
+      "docs/engineering/TRACEABILITY.md",
+      "scripts/validate_engineering_artifacts.py",
+      "scripts/generate_harness_dashboard.py",
+      "scripts/harness_explorer/index.template.html"
+    ],
+    "policy_paths": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/REPOSITORY_CONTEXT.md",
+      "docs/engineering/README.md",
+      "docs/engineering/WORKFLOW.md",
+      "docs/engineering/DECISION_RIGHTS.md",
+      "docs/engineering/QUALITY_GATES.md",
+      "docs/engineering/TRACEABILITY.md"
+    ]
+  },
+  "retired_field_labels": [
+    "Repository purpose",
+    "Primary users or operators",
+    "Accountable repository owners",
+    "Setup",
+    "Build",
+    "Test",
+    "Lint or format",
+    "Additional required verification",
+    "Entry points",
+    "Major components and responsibilities",
+    "External services or dependencies",
+    "Generated paths",
+    "Restricted or sensitive paths",
+    "Files requiring specialized review",
+    "Local conventions not captured elsewhere"
+  ]
+}

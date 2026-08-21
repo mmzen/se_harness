@@ -64,7 +64,7 @@ harnessctl preflight . --work-order WO-EX-001 --phase start
 It reads the returned manifest, transitions the approved work order to `in_progress`, and implements only its scope. It then runs the commands owned by this repository, followed by harness observations:
 
 ```powershell
-# Repository-specific examples; use the actual commands in REPOSITORY_CONTEXT.md
+# Repository-specific examples; use the actual commands in the AGENTS.md owner region
 python -m unittest discover -s tests -p "test_*.py"
 
 harnessctl validate .

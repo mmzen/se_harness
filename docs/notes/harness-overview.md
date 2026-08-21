@@ -74,7 +74,7 @@ The [operational phasing guide](harness-operational-phasing.md) explains why tho
 - verification and release decisions;
 - programming language, build commands, test strategy, branch model, merge policy, and deployment process;
 - GitHub protection, required checks, permissions, and other host settings;
-- repository-owned additions to `AGENTS.md` and `REPOSITORY_CONTEXT.md`.
+- repository-owned content in the owner-controlled region of `AGENTS.md`.
 
 The harness can enforce supported repository policy when configured, but it does not silently invent that policy or claim control over external services.
 

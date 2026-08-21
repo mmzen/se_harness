@@ -5,7 +5,7 @@ title = "Progressive and current SE Harness documentation contract"
 status = "approved"
 owners = ["technical-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-08-21"
 
 [relations]
 specifies = ["REQ-DST-019", "REQ-DST-020", "REQ-DST-021", "REQ-DST-022", "REQ-DST-023"]
@@ -156,7 +156,7 @@ Show `harnessctl preflight`, repository checks, `harnessctl validate`, `harnessc
 
 ## Repository-specific branching context
 
-The owner-controlled branching section currently added to `docs/engineering/REPOSITORY_CONTEXT.md` is implementation draft, not approved policy. During implementation it shall either be aligned with the single illustrative model and labeled as current repository guidance, or removed in favor of the explicitly non-authoritative branching note. It must not contradict the branch used for the documentation work or claim an unenforced prefix set as a harness rule.
+Any owner-controlled branching guidance this repository keeps in the owner-controlled region of `AGENTS.md` is repository-owned content, not approved policy. During implementation it shall either be aligned with the single illustrative model and labeled as current repository guidance, or omitted in favor of the explicitly non-authoritative branching note. It must not contradict the branch used for the documentation work or claim an unenforced prefix set as a harness rule.
 
 ## Compatibility and migration
 

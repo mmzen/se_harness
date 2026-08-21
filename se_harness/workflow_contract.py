@@ -170,17 +170,16 @@ def _validate_procedures(workflow: Mapping[str, Any], gate_ids: set[str]) -> dic
                 _validate_placeholders(step.get("artifact"), parameters, f"procedure {procedure_id} decision {step_id}")
                 _validate_placeholders(step.get("response"), parameters, f"procedure {procedure_id} decision {step_id}")
             else:
+                if "action_id" in step:
+                    raise ContractError(
+                        f"procedure {procedure_id} reference {step_id} declares action_id, "
+                        "a withdrawn reference form; a reference step declares procedure_id only"
+                    )
                 target = step.get("procedure_id")
-                action = step.get("action_id")
-                if (isinstance(target, str)) == (isinstance(action, str)):
-                    raise ContractError(f"procedure {procedure_id} reference {step_id} must select one target")
-                if isinstance(target, str):
-                    allowed = common | {"procedure_id"}
-                    references[procedure_id].append(target)
-                else:
-                    allowed = common | {"action_id"}
-                    if not str(action).startswith("CTX-ACT-"):
-                        raise ContractError(f"procedure {procedure_id} reference {step_id} has invalid action ID")
+                if not isinstance(target, str):
+                    raise ContractError(f"procedure {procedure_id} reference {step_id} must declare a procedure ID")
+                allowed = common | {"procedure_id"}
+                references[procedure_id].append(target)
             if set(step) != allowed:
                 raise ContractError(f"procedure {procedure_id} step {step_id} has invalid fields")
             for field in ("gate_ids", "effects", "non_effects"):

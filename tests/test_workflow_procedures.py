@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 import copy
-import tempfile
+import inspect
 import unittest
-from pathlib import Path
 
-from se_harness.workflow_contract import load_validated_contracts, validate_contracts
-from se_harness.workflow_procedures import ProcedureError, context_actions, resolve_procedure
+from se_harness.workflow_contract import ContractError, load_validated_contracts, validate_contracts
+from se_harness.workflow_procedures import ProcedureError, resolve_procedure
 
 
 class WorkflowProcedureTests(unittest.TestCase):
@@ -53,22 +52,43 @@ class WorkflowProcedureTests(unittest.TestCase):
         with self.assertRaisesRegex(ProcedureError, "WEX221"):
             resolve_procedure(procedures, "PROC-WO-START", {})
 
-    def test_context_action_markers_must_match_and_cannot_nest(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            path = Path(temporary) / "REPOSITORY_CONTEXT.md"
-            path.write_text(
-                "<!-- se-harness:action CTX-ACT-CHECK begin -->\nRun tests.\n"
-                "<!-- se-harness:action CTX-ACT-CHECK end -->\n",
-                encoding="utf-8",
-            )
-            self.assertEqual(("Run tests.",), context_actions(path)["CTX-ACT-CHECK"])
-            path.write_text(
-                "<!-- se-harness:action CTX-ACT-A begin -->\n"
-                "<!-- se-harness:action CTX-ACT-B begin -->\n",
-                encoding="utf-8",
-            )
-            with self.assertRaisesRegex(ProcedureError, "nested"):
-                context_actions(path)
+    def _reference_step(self, **overrides: object) -> dict[str, object]:
+        step: dict[str, object] = {
+            "id": "STEP-REFERENCE",
+            "kind": "reference",
+            "gate_ids": [],
+            "effects": [],
+            "non_effects": [],
+        }
+        step.update(overrides)
+        return step
+
+    def test_reference_step_declaring_action_id_is_rejected_before_resolution(self) -> None:
+        workflow, quality, _, _, _ = load_validated_contracts()
+        for overrides in (
+            {"action_id": "CTX-ACT-REPOSITORY-CHECKS"},
+            {"action_id": "CTX-ACT-REPOSITORY-CHECKS", "procedure_id": workflow["procedures"][0]["id"]},
+            {"action_id": "not-an-action-identifier"},
+        ):
+            with self.subTest(overrides=sorted(overrides)):
+                mutated = copy.deepcopy(workflow)
+                mutated["procedures"][0]["steps"][0] = self._reference_step(**overrides)
+                with self.assertRaises(ContractError) as raised:
+                    validate_contracts(mutated, quality)
+                message = str(raised.exception)
+                self.assertIn("action_id", message)
+                self.assertIn("withdrawn", message)
+
+    def test_reference_step_without_a_procedure_id_is_rejected(self) -> None:
+        workflow, quality, _, _, _ = load_validated_contracts()
+        mutated = copy.deepcopy(workflow)
+        mutated["procedures"][0]["steps"][0] = self._reference_step()
+        with self.assertRaisesRegex(ContractError, "must declare a procedure ID"):
+            validate_contracts(mutated, quality)
+
+    def test_resolver_exposes_no_repository_context_argument(self) -> None:
+        parameters = inspect.signature(resolve_procedure).parameters
+        self.assertEqual(["procedures", "procedure_id", "parameters"], list(parameters))
 
     def test_unknown_reference_and_cycles_invalidate_policy(self) -> None:
         workflow, quality, _, _, _ = load_validated_contracts()
