@@ -2,7 +2,7 @@
 id = "REL-SEH-009"
 type = "release_contract"
 title = "Release se-harness 0.6.0 from an LF-stable successor candidate"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -20,6 +20,12 @@ evaluator_archive_sha256 = "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc
 
 [relations]
 gates = ["WO-DST-019", "WO-DST-020", "WO-DST-021", "WO-IAR-012", "WO-WEX-001", "WO-WEX-002", "WO-REB-001", "WO-REB-002", "WO-REB-003", "WO-RLS-008", "WO-REB-004", "WO-REB-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-21T21:50:56Z"
+decided_by = "release-owner"
 +++
 
 # Release Contract: Release se-harness 0.6.0 from an LF-stable successor candidate

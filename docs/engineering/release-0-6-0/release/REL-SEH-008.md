@@ -2,10 +2,13 @@
 id = "REL-SEH-008"
 type = "release_contract"
 title = "Correct and release se-harness 0.6.0 from a successor candidate"
-status = "approved"
+status = "rejected"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
+rejected_at = "2026-08-21T21:49:26Z"
+rejected_by = "release-owner"
+rejection_reason = "Its declared C2 release record is rejected and no longer promotable."
 
 [bootstrap]
 schema = "se-harness-release-bootstrap-v1"
@@ -26,6 +29,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-21T15:40:28Z"
 decided_by = "release-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "rejected"
+decided_at = "2026-08-21T21:49:26Z"
+decided_by = "release-owner"
+reason = "Its declared C2 release record is rejected and no longer promotable."
 +++
 
 # Release Contract: Correct and release se-harness 0.6.0 from a successor candidate
