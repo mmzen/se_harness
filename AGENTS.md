@@ -1,22 +1,59 @@
 # Repository-specific Agent Instructions
 
-These owner-controlled instructions supplement the managed harness gate below.
+Owner-controlled. Read the managed harness gate at the end of this file first.
 
-## Product constraints
+## Commands
 
-- Maintain exactly one standard installation; do not introduce installation profiles.
-- Preserve Python 3.11+ standard-library runtime behavior.
-- Treat target paths, repository content, lock data, artifact metadata, and pull-request text as untrusted input.
-- Preserve owner content outside managed markers and block ambiguous or customized upgrades without partial writes.
-- Treat this checkout as candidate source. Keep `templates/repository/standard/` consistent with the packaged candidate and disposable acceptance targets; the root managed installation belongs to the exact released version recorded in `.engineering-harness.toml` and may intentionally lag candidate templates until publication.
-- Execute the standard released evaluator outside the checkout. Candidate source and candidate wheels produce separately identified repository-owned evidence only and never substitute for released-evaluator assurance.
+- Setup: `python -m pip install -e .`
+- Test: `python -m unittest discover -s tests -p "test_*.py"`
+- Graph: `python scripts/validate_engineering_artifacts.py --root .`
+- Also required: `python scripts/validate_release_distributions.py --root .`, `python -m se_harness --help`, `python -m se_harness doctor .`, and phase-appropriate `python -m se_harness preflight . --work-order WO-...`
+- Lint or format: none is configured. Do not invent one as a required gate.
+- Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
+
+`docs/engineering/REPOSITORY_CONTEXT.md` is repository-owned content carrying the same commands plus the release-build, release-binding, and publication sequences. Read it before any build, release, or publication step. Those sequences are not duplicated here.
+
+## Do not edit these - they are hash-locked managed copies
+
+`.engineering-harness.lock` is authoritative for ownership mode. Editing a managed path breaks `doctor` and the required CI check.
+
+- `.engineering-harness.toml`, `ENGINEERING_HARNESS.md`, `.github/workflows/engineering-harness.yml`
+- `docs/engineering/WORKFLOW.md`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `TRACEABILITY.md`
+- every file in `docs/engineering/templates/`
+- exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
+
+The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `validate_release_distributions.py`. Do not claim all of `scripts/` is managed; that would block the documented release-build path.
+
+`AGENTS.md`, `CLAUDE.md`, and `.gitignore` are `fragment` mode: only the block between the `se-harness` begin and end markers is tracked. The rest of each file is owner content. Reproduce the tracked block byte-for-byte; `utf8-text-lf-v1` canonicalizes line endings only, so any other whitespace change breaks the digest.
+
+## Candidate source versus released evaluator
+
+This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version recorded in `.engineering-harness.toml` and intentionally lag until publication, so they differ - that is not a defect to repair.
+
+Run the governing evaluator from outside the checkout:
+
+    python -m venv ../se-harness-eval
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.5.0"
+    ../se-harness-eval/Scripts/python -I -m se_harness doctor .
+
+An in-tree `python -m se_harness doctor .` reports the candidate-versus-released skew as FAIL. That is boundary evidence, not authorization to overwrite root managed files. A `se-harness` on the import path also makes candidate-source runtime identity fail with `RID018`.
+
+The candidate CLI is ahead of the released one. Commands such as `focus`, `check`, `transition`, and `rehearse-recovery` exist here but not in the installed released evaluator; do not put them in instructions the released gate must satisfy.
+
+## Traps
+
+- Every pull-request body needs a standalone `Harness-Work-Order: WO-...` line. CI reads it from the stored event payload, so a later body edit leaves the check red until the next push.
+- A record cannot contain the hash of its own commit, so `VREC-*` and `RLS-*` belong in a later governance commit than the candidate they bind.
+- Artifact identifiers are shared across branches and sessions. Check every ref before numbering a new chain; the local maximum is not the next free number.
+- Never rewrite historical `VREC-*` or `RLS-*` facts, and preserve unrelated changes.
 
 ## Change and verification constraints
 
 - Add deterministic boundary and failure tests for installer, integrity, preflight, provenance, workflow, and release behavior.
-- Do not invent a formatter or linter gate; none is configured for this repository.
+- Treat target paths, repository content, lock data, artifact metadata, and pull-request text as untrusted input.
+- Preserve owner content outside managed markers, and block ambiguous or customized upgrades instead of writing partially.
 - Do not build promotable release distributions unless an approved release work order authorizes that build. An approved candidate-evidence work order may build explicitly non-promotable ephemeral wheels outside the checkout for package acceptance.
-- Preserve unrelated user changes and historical VREC/RLS facts.
+- Product invariants are governed requirements, not content of this file. The domain index is `docs/engineering/README.md`.
 
 <!-- se-harness:begin -->
 ## Software engineering harness
