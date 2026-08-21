@@ -87,24 +87,28 @@ class ArtifactCatalogTests(unittest.TestCase):
                 self.assertIn(link, content)
                 self.assertNotIn(CATALOG_BEGIN, content)
 
-    def test_managed_policy_and_template_copies_are_identical(self) -> None:
-        pairs = (
-            (
-                REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md",
-                REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md",
-            ),
-            (
-                REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md",
-                REPOSITORY_ROOT
-                / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
-            ),
-        )
-        for actual, template in pairs:
-            with self.subTest(actual=actual.name):
-                self.assertEqual(
-                    actual.read_text(encoding="utf-8"),
-                    template.read_text(encoding="utf-8"),
-                )
+    def test_released_policy_copies_match_while_candidate_router_remains_isolated(self) -> None:
+        released_work_order = (
+            REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md"
+        ).read_text(encoding="utf-8")
+        candidate_work_order = (
+            REPOSITORY_ROOT
+            / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotEqual(released_work_order, candidate_work_order)
+        self.assertNotIn("[execution_scope]", released_work_order)
+        self.assertIn("[execution_scope]", candidate_work_order)
+        self.assertIn("component-prefix", candidate_work_order)
+        released_traceability = (
+            REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
+        ).read_text(encoding="utf-8")
+        candidate_traceability = (
+            REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotEqual(released_traceability, candidate_traceability)
+        self.assertNotIn("`TRC-001`", released_traceability)
+        self.assertIn("`TRC-001`", candidate_traceability)
+        self.assertIn("BCP 14", candidate_traceability)
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         router_template = (
             REPOSITORY_ROOT / "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
@@ -112,12 +116,14 @@ class ArtifactCatalogTests(unittest.TestCase):
         evaluator_version = tomllib.loads(
             (REPOSITORY_ROOT / ".engineering-harness.toml").read_text(encoding="utf-8")
         )["harness"]["tool_version"]
-        self.assertEqual(
-            router,
-            router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
-                "{{HARNESS_VERSION}}", evaluator_version
-            ),
+        candidate_router = router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
+            "{{HARNESS_VERSION}}", evaluator_version
         )
+        self.assertNotEqual(router, candidate_router)
+        self.assertNotIn("harnessctl focus", router)
+        self.assertIn("harnessctl focus", candidate_router)
+        self.assertNotIn("harnessctl preflight", candidate_router)
+        self.assertIn("WORKFLOW.json", candidate_router)
 
     def test_work_order_template_expresses_conditional_architecture(self) -> None:
         template = (

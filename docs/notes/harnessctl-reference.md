@@ -2,7 +2,10 @@
 
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a non-authoritative reference to the current repository CLI. Managed workflow and decision-rights policy remain authoritative. A command's ability to write a draft or `ready` record never grants approval, verification, release, publication, or deployment authority.
+> This is a non-authoritative reference to command syntax, actors, and side
+> effects. The standard installation's `docs/engineering/WORKFLOW.md` and
+> `WORKFLOW.json` own lifecycle transitions, ordered next actions, gate IDs, and
+> decision-right IDs. This reference does not restate or override those rules.
 
 ## Invocation
 
@@ -25,6 +28,9 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
+| `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its canonical handoff |
+| `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit canonical schema-2 restitution |
+| `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `rehearse-recovery` | maintainer or CI rehearsal | writes only a fresh disposable directory outside the operational repository | prove bounded evaluator recovery and rollback without credentials, network, or external action |
@@ -51,7 +57,12 @@ harnessctl doctor [TARGET]
 
 Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
 
-Inspection reuses the existing validator and Harness Explorer snapshot. It reports formal validity, ready decisions, draft definitions, approved or in-progress work, implemented work explicitly awaiting commit-bound assurance preparation, and the existing validator and Explorer findings. Human output groups repeated rule instances for readability; `--json` retains every finding.
+Inspection reuses the existing validator and Harness Explorer snapshot. It
+reports `mode = repository_wide`, no selected artifact, formal validity, ready
+decisions, draft definitions, active work, assurance preparation, and existing
+repository findings. Human output groups repeated rule instances for
+readability; `--json` retains every finding. Inspection output MUST NOT be used
+as selected-iteration restitution.
 
 The `assurance_pending` queue contains only an `implemented` work order whose explicit `[assurance]` classification is `required` and which has no direct `ready`, `verified`, or `released` VREC coverage. It suggests non-automatic preparation after one clean candidate commit; it does not select aggregate scope, create a record, or make the assurance decision. Completed legacy work without a classification and work explicitly classified `not_required` are not inferred into this queue.
 
@@ -73,6 +84,73 @@ harnessctl select-work-order --event GITHUB_EVENT_PATH
 `start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
 
 `select-work-order` is the narrow automation-facing parser used by the managed consumer workflow. It accepts one bounded GitHub event file and emits one exact `WO-...` ID only when the pull-request body contains exactly one standalone `Harness-Work-Order:` field. It does not inspect branches, diffs, commits, or artifact eligibility and grants no work authority.
+
+## Selected-scope workflow execution
+
+The command shapes below are stable interfaces. The candidate standard
+[`WORKFLOW.md`](../../templates/repository/standard/docs/engineering/WORKFLOW.md)
+defines the procedure, and
+[`WORKFLOW.json`](../../templates/repository/standard/docs/engineering/WORKFLOW.json)
+is the machine-readable contract loaded by `harnessctl`. Use the workflow rule
+selected for the artifact's exact type, state, and direct related records. Do
+not derive a new transition or next action from this reference.
+
+```text
+harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
+  [--json] [--include-background] [--result-schema 1|2]
+harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
+  --checkpoint start|pre-action|handoff \
+  [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
+  [--change-manifest PATH] [--json]
+harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
+  [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
+  [--apply] [--json] [--result-schema 1|2]
+```
+
+`focus` projects only the selected artifact's governing chain and direct
+lifecycle dependencies. It uses the ordered recommendation registry in
+`WORKFLOW.json`. For example, `WFL-WO-READY-VREC` takes precedence over
+`WFL-WO-PREPARE-VREC`, so existing ready assurance coverage cannot produce a
+duplicate-capture recommendation. Unrelated repository findings remain a
+background count; `--include-background` expands categories without making
+them selected-scope work.
+
+`check` resolves the first matching rule, its typed `PROC-*` procedure, and its
+`QG-*` gates. `pre-action` requires `--procedure`, which must equal the selected
+procedure or one complete declared alternative. `--changed-path` may repeat;
+`--changes-complete` asserts that the supplied set is complete, including an
+empty set. The assertion is evidence, not proof from a trusted Git baseline.
+Without it, path-scope predicates are `not_assessable`.
+
+`--change-manifest` is mutually exclusive with both changed-path options. It
+must be an in-repository UTF-8 JSON object containing only `schema` with value
+`se-harness-change-set-v1`, Boolean `complete`, and ordered array `paths`.
+Paths use `/`, exact-file or component-boundary directory-prefix matching, and
+reject absolute, traversal, backslash, wildcard, drive, URI, control-character,
+reserved-device, duplicate, and case-ambiguous forms.
+
+`check` always emits `se-harness-workflow-result-v2`. Human output contains only
+`Outcome`, `Done`, `Not done`, conditional `Blocked by`, `Current lifecycle
+state`, `Decision required`, `Next`, `Command or response`, and conditional
+`Alternatives`. Existing workflow commands default to result schema 1 during
+the compatibility window; select `--result-schema 2` for canonical restitution.
+
+`transition` resolves IDs from formal metadata and plans by default. Each
+selected ID needs one actor assertion. Rejection needs a non-empty reason; VREC
+supersession uses the reason as the exact successor VREC ID. A packet is
+assessed as one proposed final graph. `--apply` rechecks every input byte,
+proves the locked released-evaluator authority before writing, stages
+same-filesystem replacements outside artifact discovery, and rolls back earlier
+replacements if a later write fails.
+
+The command records actor text as an assertion, not proof of authority. The
+effects and non-effects for each state are defined only by the matching
+`WORKFLOW.json` rule. Related artifacts require separate explicit selection,
+passing gates, and authority.
+
+Human and JSON output are rendered from the same semantic workflow result.
+Schema 2 always identifies exactly one typed next step and derives its command
+argument array or response from the selected procedure.
 
 ## Safe repository upgrade
 
@@ -153,10 +231,10 @@ harnessctl capture-verification [TARGET] \
   --work-order WO-... \
   --verification VER-... \
   --evidence PATH \
-  [--owner ROLE] [--domain DOMAIN] [--output PATH]
+  [--owner ROLE] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. The selected verification contracts must equal the union declared by the selected work orders, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC.
+Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Every selected work order must be exactly `implemented`, the selected verification contracts must equal their declared union, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC. The record contains `prepared_at` and `prepared_by`, never `verified_at` or `verified_by`.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
@@ -170,12 +248,12 @@ harnessctl prepare-release [TARGET] \
   --work-order WO-... \
   --version VERSION \
   --authorized-by ROLE \
-  [--tag TAG] [--domain DOMAIN] [--output PATH]
+  [--tag TAG] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--verification-record` and `--work-order` for aggregate releases. The selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, included records must be eligible, and every record must bind the same candidate commit.
+Repeat `--verification-record` and `--work-order` for aggregate releases. Every included VREC must be exactly `verified`, the selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, and every record must bind the same candidate commit.
 
-Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The managed `.gitattributes` fragment preserves LF evidence bytes across platforms so the bound SHA-256 survives checkout. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
+Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The record contains `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. The managed `.gitattributes` fragment preserves LF evidence bytes across platforms so the bound SHA-256 survives checkout. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 
 ## Authority summary
 

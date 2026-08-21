@@ -347,7 +347,7 @@ class AdrApplicabilityTests(unittest.TestCase):
                 "no one-ADR-per-requirement rule exists",
             ),
             "docs/engineering/DECISION_RIGHTS.md": (
-                "may not self-approve that assessment",
+                "MUST NOT approve its own architecture decision assessment",
             ),
             "docs/engineering/QUALITY_GATES.md": (
                 "each `adr_required` architecture has active deciding ADR coverage",

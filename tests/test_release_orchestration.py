@@ -132,7 +132,7 @@ class DistributionManifestTests(unittest.TestCase):
 
     def test_manifest_producer_hashes_exact_files_and_candidate_tree(self) -> None:
         commit = subprocess.run(
-            ["git", "-C", str(REPOSITORY_ROOT), "rev-parse", "HEAD"],
+            ["git", "-c", f"safe.directory={REPOSITORY_ROOT.as_posix()}", "-C", str(REPOSITORY_ROOT), "rev-parse", "HEAD"],
             check=True,
             capture_output=True,
             text=True,
@@ -143,7 +143,16 @@ class DistributionManifestTests(unittest.TestCase):
             sdist = root / "se_harness-1.2.3.tar.gz"
             wheel.write_bytes(b"wheel")
             sdist.write_bytes(b"sdist")
-            result = MANIFEST.create_manifest(REPOSITORY_ROOT, commit, "1.2.3", wheel, sdist)
+            with mock.patch.dict(
+                "os.environ",
+                {
+                    "GIT_CONFIG_COUNT": "1",
+                    "GIT_CONFIG_KEY_0": "safe.directory",
+                    "GIT_CONFIG_VALUE_0": REPOSITORY_ROOT.as_posix(),
+                },
+                clear=False,
+            ):
+                result = MANIFEST.create_manifest(REPOSITORY_ROOT, commit, "1.2.3", wheel, sdist)
         self.assertEqual(BUNDLE_SCHEMA, result["schema"])
         self.assertEqual(hashlib.sha256(b"wheel").hexdigest(), result["wheel_sha256"])
         self.assertRegex(result["source_manifest_sha256"], r"\A[0-9a-f]{64}\Z")

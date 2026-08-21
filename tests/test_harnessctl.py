@@ -546,7 +546,7 @@ class HarnessCtlTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(0, inspection.returncode, inspection.stderr)
-        self.assertIn("Harness inspection", inspection.stdout)
+        self.assertIn("Harness inspection (repository_wide)", inspection.stdout)
         self.assertIn("repository-local, derived observation", inspection.stdout)
         inspection_json = subprocess.run(
             [sys.executable, "-m", "se_harness", "inspect", str(target), "--json"],
@@ -556,7 +556,10 @@ class HarnessCtlTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(0, inspection_json.returncode, inspection_json.stderr)
-        self.assertEqual("se-harness-inspection-v2", json.loads(inspection_json.stdout)["schema"])
+        decoded_inspection = json.loads(inspection_json.stdout)
+        self.assertEqual("se-harness-inspection-v2", decoded_inspection["schema"])
+        self.assertEqual("repository_wide", decoded_inspection["mode"])
+        self.assertEqual({"primary": None, "artifacts": []}, decoded_inspection["selection"])
         self.assertEqual(before, sorted(path.relative_to(target).as_posix() for path in target.rglob("*")))
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
         dashboard = target / "target/harness-dashboard"

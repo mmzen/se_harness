@@ -333,14 +333,21 @@ def capture_verification(
     selected_work = _normalized_unique(work_order_ids, "work orders")
     selected_verification = _normalized_unique(verification_ids, "verification contracts")
     selected_evidence = _normalized_unique(evidence_paths, "evidence paths")
+    authority = mutation_guard.require_mutation_authority(
+        root,
+        operation="capture-verification",
+    )
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(root, selected_work)
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
     declared_verification: set[str] = set()
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.get("status") not in ACTIVE_STATUSES:
-            raise HarnessError(f"work order {work_order_id} must be active")
+        if work_order.get("status") != "implemented":
+            raise HarnessError(f"work order {work_order_id} must be implemented")
         declared_verification.update(_relation_targets(_load_metadata(root, work_order), "verification"))
     for verification_id in selected_verification:
         verification = _require_artifact(catalog, verification_id, "verification")
@@ -349,9 +356,9 @@ def capture_verification(
     supplied_verification = set(selected_verification)
     missing_verification = declared_verification - supplied_verification
     extra_verification = supplied_verification - declared_verification
-    if (len(selected_work) > 1 and missing_verification) or extra_verification:
+    if missing_verification or extra_verification:
         details: list[str] = []
-        if len(selected_work) > 1 and missing_verification:
+        if missing_verification:
             details.append(f"missing {', '.join(sorted(missing_verification))}")
         if extra_verification:
             details.append(f"not declared by selected work {', '.join(sorted(extra_verification))}")
@@ -376,10 +383,6 @@ def capture_verification(
         record_id,
         selected_domain,
     )
-    authority = mutation_guard.require_mutation_authority(
-        root,
-        operation="capture-verification",
-    )
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
     snapshot_hash = _generate_snapshot(root)
@@ -401,7 +404,8 @@ updated = "{now[:10]}"
 commit = "{commit}"
 git_object_format = "{object_format}"
 worktree_state = "clean"
-verified_at = "{now}"
+prepared_at = "{now}"
+prepared_by = "{owner}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
 evaluator_evidence_path = "{evaluator_evidence_path}"
@@ -449,6 +453,14 @@ def prepare_release(
         raise HarnessError("tag contains unsupported characters")
     selected_verification_records = _normalized_unique(verification_record_ids, "verification records")
     selected_work = _normalized_unique(work_order_ids, "work orders")
+    authority = mutation_guard.require_mutation_authority(
+        root,
+        operation="prepare-release",
+        require_archive=True,
+    )
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(root, [*selected_verification_records, *selected_work])
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
@@ -473,8 +485,8 @@ def prepare_release(
     identities: set[tuple[str, str]] = set()
     for verification_record_id in selected_verification_records:
         verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-        if verification_record.get("status") not in {"ready", "verified", "released"}:
-            raise HarnessError(f"verification record {verification_record_id} must be ready, verified, or released")
+        if verification_record.get("status") != "verified":
+            raise HarnessError(f"verification record {verification_record_id} must be verified")
         verification_metadata = _load_metadata(root, verification_record)
         verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
         identities.add(_supported_commit(verification_metadata, verification_record_id))
@@ -502,11 +514,6 @@ def prepare_release(
         record_id,
         selected_domain,
     )
-    authority = mutation_guard.require_mutation_authority(
-        root,
-        operation="prepare-release",
-        require_archive=True,
-    )
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
@@ -524,8 +531,8 @@ updated = "{now[:10]}"
 version = "{version}"
 commit = "{commit}"
 git_object_format = "{object_format}"
-released_at = "{now}"
-authorized_by = "{authorized_by}"
+prepared_at = "{now}"
+prepared_by = "{authorized_by}"
 evaluator_evidence_path = "{evaluator_evidence_path}"
 evaluator_evidence_sha256 = "{authority.evidence_sha256}"
 {tag_line}

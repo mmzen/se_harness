@@ -187,10 +187,10 @@ class ProgressiveDocumentationTests(unittest.TestCase):
 
         for required in (
             "## When verification is refused",
-            "A VREC has no `rejected` status",
+            "`ready -> rejected` VREC transition",
             "The work order honestly remains `implemented`",
-            "only a proposal and is not release-eligible",
-            "an RLS has no `rejected` or `superseded` state",
+            "`prepare-release` accepts only verified VRECs",
+            "A ready RLS may be explicitly released or rejected",
             "W-REV-004",
             "harness-uml-model.md#important-multiplicities-and-invariants",
             "harness-branching-model.md#when-assurance-refuses-a-candidate",

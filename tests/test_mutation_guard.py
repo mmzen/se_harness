@@ -28,6 +28,7 @@ from se_harness.mutation_guard import (
 from se_harness.provenance import capture_verification, prepare_release
 from se_harness.renumber import apply_renumber_plan
 from se_harness.runtime_identity import IdentityDiagnostic, RuntimeIdentity
+from se_harness.workflow import apply_transition
 
 
 class MutationGuardTests(unittest.TestCase):
@@ -436,6 +437,7 @@ authorized_by = "repository-owner"
                 lambda: apply_changes(root, [], {"tool_version": __version__}, allow_updates=False),
                 lambda: apply_changes(root, upgrade_changes, upgrade_lock, allow_updates=True),
                 lambda: apply_renumber_plan(SimpleNamespace(repository_root=root)),
+                lambda: apply_transition(SimpleNamespace(root=root)),
                 lambda: capture_verification(
                     root,
                     record_id="VREC-TST-002",
@@ -472,6 +474,7 @@ authorized_by = "repository-owner"
                 "installed-root-apply",
                 "upgrade-apply",
                 "renumber-artifacts-apply",
+                "transition-apply",
                 "capture-verification",
                 "prepare-release",
             },

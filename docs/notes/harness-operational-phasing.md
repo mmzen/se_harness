@@ -38,11 +38,11 @@ Automation assists between decision points. Blueprints, test results, a clean Gi
 
 ## When verification is refused
 
-An assurance owner refuses verification by withholding the `ready -> verified` transition. A VREC has no `rejected` status and no negative assurance claim is created. The work order honestly remains `implemented`: that status records completed work and retained evidence, not correctness.
+An assurance owner refuses verification by explicitly applying the `ready -> rejected` VREC transition with a non-empty rationale. The decision changes only the selected VREC and appends its event. The work order honestly remains `implemented`: that status records completed work and retained evidence, not correctness.
 
-Release is then blocked by formal checks. A work order cannot claim `verified` or `released` without coverage from a verified or released VREC. A released RLS may include only verified or released VRECs, and their commit identities must match the RLS. `prepare-release` can technically prepare a `ready` RLS from a ready VREC, but the result is only a proposal and is not release-eligible. Follow the managed workflow order and retain an RLS only after verification. In the current model, a committed ready RLS also prevents its VREC from being superseded, while an RLS has no `rejected` or `superseded` state; stop and escalate if that situation already exists rather than inventing a transition.
+Release is then blocked by formal checks. A work order cannot claim `verified` or `released` without eligible direct coverage. `prepare-release` accepts only verified VRECs, their commit identities must match the RLS, and released-work coverage must be exact. A ready RLS may be explicitly released or rejected; either decision changes only that RLS and appends its lifecycle event.
 
-If the generated ready VREC was never committed, no formal VREC enters repository history. An accountable refusal rationale may instead be retained under `docs/engineering/<domain>/evidence/` in an authorized commit; evidence is supporting material and has no artifact lifecycle status. If the ready VREC was committed, it must not be deleted, rewritten, or marked rejected. It remains ready until an accountable later decision may mark it `superseded`, and only after a distinct verified or released VREC covers all of its work. The [conceptual model](harness-uml-model.md#important-multiplicities-and-invariants) shows that successor relation. Explorer warning `W-REV-004` is emitted only when such covering verified or released records already exist; it is a derived prompt and never chooses or performs the transition.
+If the generated ready VREC was never committed, no formal VREC enters repository history. If it was committed, refusal is retained as `rejected_at`, `rejected_by`, `rejection_reason`, and the matching lifecycle event; it is never deleted or rewritten. A distinct ready record may instead become `superseded` only after one verified or released successor covers all of its work. The [conceptual model](harness-uml-model.md#important-multiplicities-and-invariants) shows that successor relation. Explorer warning `W-REV-004` is emitted only when such covering verified or released records already exist; it is a derived prompt and never chooses or performs the transition.
 
 A defective payload is corrected in a new clean candidate with its own bounded work and evidence; the old commit is not repaired retroactively. The [illustrative branching model](harness-branching-model.md#when-assurance-refuses-a-candidate) explains the Git consequence. If a requirement, specification, ADR, work order, or another definition artifact is itself wrong, an accountable owner may use `rejected` for that artifact rather than for the VREC. Rejected artifacts leave active coverage, so any still-active dependants must also be reconciled until the graph validates again.
 
@@ -74,8 +74,13 @@ The coding agent normally operates these commands; the accountable human makes t
 
 ## Formal gates versus Explorer readiness
 
-The authoritative gates in `docs/engineering/QUALITY_GATES.md` are G0 Intent, G1 Definition, G2 Architecture, G3 Work authorization, G4 Verification, and G5 Release and operation.
+Only the exact `QG-*` IDs in `docs/engineering/QUALITY_GATES.md` identify
+normative gates. The G0-G5 portions group related gates for reporting and do not
+replace those IDs.
 
-Currently, Harness Explorer reuses G0-G5 labels for a differently grouped, derived per-work-order readiness view. Use Explorer to navigate traceability and anomalies, but use the managed policy for gate meaning. This documentation reports the mismatch; correcting the generator requires separate authorized behavior work.
+Harness Explorer uses G0-G5 labels for a differently grouped, derived
+per-work-order readiness view. Use Explorer to navigate traceability and
+anomalies; use the exact managed `QG-*` predicate for a workflow decision. An
+Explorer label is not a gate result and cannot change selected scope.
 
 For one possible mapping onto Git branches and pull requests, continue to the [illustrative branching model](harness-branching-model.md).

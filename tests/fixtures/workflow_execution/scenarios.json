@@ -1,0 +1,56 @@
+{
+  "schema": 2,
+  "scenarios": [
+    {
+      "name": "implemented-work-order-focus",
+      "artifact": "WO-001",
+      "agent_hosts": ["ChatGPT", "Claude", "Codex"],
+      "expected": {
+        "selection": {
+          "primary": "WO-001",
+          "artifacts": ["WO-001"]
+        },
+        "scope": {
+          "governing": [
+            "ADR-001",
+            "ARCH-001",
+            "CAP-001",
+            "INT-001",
+            "REQ-001",
+            "SPEC-001",
+            "VER-001"
+          ],
+          "dependencies": []
+        },
+        "state": {
+          "before": [
+            {"id": "WO-001", "status": "implemented"}
+          ],
+          "after": [
+            {"id": "WO-001", "status": "implemented"}
+          ]
+        },
+        "handoff": {
+          "completed": [
+            "WO-001 is implemented; no assurance decision was inferred."
+          ],
+          "current_lifecycle_state": [
+            "WO-001 is implemented."
+          ],
+          "recommended_next_step": {
+            "action": "prepare verification record",
+            "detail": "Capture the exact candidate and retained evidence for assurance review."
+          },
+          "human_decision_or_approval_required": {
+            "required": "assurance owner only after a ready VREC exists"
+          },
+          "command_or_suggested_response": {
+            "kind": "guidance",
+            "value": "Run harnessctl capture-verification with the exact work, contracts, and evidence."
+          },
+          "alternative_next_steps": []
+        }
+      }
+    }
+  ]
+}

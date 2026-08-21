@@ -132,7 +132,10 @@ class PublicOnboardingTests(unittest.TestCase):
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
         subcommands = set(re.findall(r"(?m)^harnessctl\s+([a-z][a-z-]*)\b", fenced))
-        self.assertEqual({"init", "adopt", "doctor", "validate", "inspect", "dashboard"}, subcommands)
+        self.assertEqual(
+            {"init", "adopt", "doctor", "validate", "focus", "check", "transition", "inspect", "dashboard"},
+            subcommands,
+        )
         for forbidden in (
             "preflight",
             "upgrade",
@@ -241,8 +244,10 @@ class PublicOnboardingTests(unittest.TestCase):
 
     def test_known_limitations_remain_explicit_and_current(self) -> None:
         limitations = self.section("Known limitations")
-        self.assertIn("reuse G0-G5 for different groupings", limitations)
-        self.assertIn("documented product tension", limitations)
+        normalized = " ".join(limitations.split())
+        self.assertIn("exact `QG-*` IDs", normalized)
+        self.assertIn("derived readiness groupings", normalized)
+        self.assertIn("not gate results", normalized)
         self.assertIn("harness-operational-phasing.md", limitations)
         self.assertNotIn("non-empty work-order `architecture` relation", limitations)
         self.assertNotIn("validator still requires", limitations)

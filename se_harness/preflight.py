@@ -43,8 +43,10 @@ REQUIRED_PATHS = (
     "docs/engineering/REPOSITORY_CONTEXT.md",
     "docs/engineering/README.md",
     "docs/engineering/WORKFLOW.md",
+    "docs/engineering/WORKFLOW.json",
     "docs/engineering/DECISION_RIGHTS.md",
     "docs/engineering/QUALITY_GATES.md",
+    "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
     "scripts/validate_engineering_artifacts.py",
     "scripts/generate_harness_dashboard.py",
@@ -55,8 +57,10 @@ POLICY_PATHS = (
     "docs/engineering/REPOSITORY_CONTEXT.md",
     "docs/engineering/README.md",
     "docs/engineering/WORKFLOW.md",
+    "docs/engineering/WORKFLOW.json",
     "docs/engineering/DECISION_RIGHTS.md",
     "docs/engineering/QUALITY_GATES.md",
+    "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
 )
 CONTEXT_FIELDS = (

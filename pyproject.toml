@@ -23,6 +23,9 @@ harnessctl = "se_harness.cli:main"
 [tool.setuptools.packages.find]
 include = ["se_harness*"]
 
+[tool.setuptools.package-data]
+se_harness = ["workflow_contract.json", "quality_gates_contract.json"]
+
 [tool.setuptools.data-files]
 "share/se-harness/templates/repository/standard" = [
   "templates/repository/standard/.engineering-harness.toml.tpl",
@@ -34,11 +37,13 @@ include = ["se_harness*"]
 ]
 "share/se-harness/templates/repository/standard/docs/engineering" = [
 "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+"templates/repository/standard/docs/engineering/QUALITY_GATES.json",
 "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/README.md.seed",
 "templates/repository/standard/docs/engineering/REPOSITORY_CONTEXT.md.seed",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
+  "templates/repository/standard/docs/engineering/WORKFLOW.json",
 ]
 "share/se-harness/templates/repository/standard/docs/engineering/templates" = ["templates/repository/standard/docs/engineering/templates/*"]
 "share/se-harness/templates/repository/standard/scripts" = [

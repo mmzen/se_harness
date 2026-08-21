@@ -61,11 +61,14 @@ Then inspect the installed harness and its engineering information:
 ```powershell
 harnessctl doctor C:\path\to\repository
 harnessctl validate C:\path\to\repository
+harnessctl focus C:\path\to\repository --artifact WO-...
+harnessctl check C:\path\to\repository --artifact WO-... --checkpoint start
+harnessctl transition C:\path\to\repository --set VREC-...=verified --decision VREC-...=assurance-owner
 harnessctl inspect C:\path\to\repository
 harnessctl dashboard C:\path\to\repository
 ```
 
-`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `inspect` summarizes current lifecycle attention, existing consistency findings, and bounded non-authoritative next-step suggestions in the terminal without acting as a gate. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
+`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `focus` projects one selected WO, VREC, or RLS scope. `check` evaluates the selected scope, typed procedure, and executable gates and returns one concise canonical next step. `transition` plans explicit lifecycle changes by default; add `--apply` only after the accountable decision. `inspect` is explicitly repository-wide, summarizes current lifecycle attention, and never serves as selected restitution. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners curate `docs/engineering/REPOSITORY_CONTEXT.md` and approve the first formal engineering chain.
 
@@ -91,7 +94,12 @@ The agent drafts the requirements, design and verification approach, identifies 
 
 > Approved. Implement the work order.
 
-The agent checks the approved scope, implements only that scope, performs repository checks, retains evidence, and prepares material tied to the exact candidate commit. An assurance owner judges the evidence; a release owner makes a later, separate decision.
+The work order declares exact files and component-prefix paths. The agent passes
+declared changed paths to `harnessctl check`, implements only that scope,
+performs repository checks, retains evidence, binds it to the exact candidate commit,
+and returns the canonical restitution block without unrelated findings.
+An assurance owner judges the evidence; a release owner makes a later, separate
+decision.
 
 If a required check failed, the handoff would identify the diagnostic and safe retry, report `WO-RATE-001` as still `in_progress`, and say the formal state is unchanged. It would recommend remediation or escalation rather than imply completion.
 
@@ -142,6 +150,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
 - one managed instruction route for coding agents, with room for stricter repository-owned guidance;
+- one machine-readable workflow contract for lifecycle transitions and canonical next actions;
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;
 - safe adoption and hash-based upgrades that preserve repository customization;
@@ -161,9 +170,11 @@ Harness commands may prepare observations or `ready` proposals. They never commi
 
 ## Known limitations
 
-- Managed `QUALITY_GATES.md` and Harness Explorer currently reuse G0-G5 for different groupings. Managed policy owns gate meaning; Explorer remains a navigation and anomaly view.
-
-This is a documented product tension, not a correction made by documentation. The [operational phasing](docs/notes/harness-operational-phasing.md) provides context.
+Normative gates use the exact `QG-*` IDs defined by managed
+`QUALITY_GATES.md`. Harness Explorer's G0-G5 labels are derived readiness
+groupings for navigation; they are not gate results and do not change selected
+scope. The [operational phasing](docs/notes/harness-operational-phasing.md)
+explains the distinction.
 
 ## Learn more
 

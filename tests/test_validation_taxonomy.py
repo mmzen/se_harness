@@ -90,11 +90,13 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        self.assertEqual(quality, canonical_quality)
+        self.assertNotEqual(quality, canonical_quality)
+        self.assertIn("BCP 14", canonical_quality)
+        self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
         for plane in VALIDATION_PLANES:
-            self.assertIn(f"`{plane}`", quality)
+            self.assertIn(f"`{plane}`", canonical_quality)
             self.assertIn(f"`{plane}`", reference)
-        self.assertIn("does not change error versus warning severity", quality)
+        self.assertIn("MUST NOT change error-versus-warning severity", canonical_quality)
         self.assertIn("do not change severity", reference)
 
     def test_vocabulary_and_diagnostic_construction_are_closed(self) -> None:

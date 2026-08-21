@@ -30,6 +30,7 @@ PUBLIC_MUTATION_OPERATIONS = frozenset(
         "prepare-release",
         "renumber-artifacts-apply",
         "scaffold-domain",
+        "transition-apply",
         "upgrade-apply",
     }
 )
