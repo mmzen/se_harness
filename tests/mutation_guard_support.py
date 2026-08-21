@@ -16,8 +16,9 @@ def trusted_mutation_authority(
     operation: str,
     allow_upgrade_transition: bool = False,
     require_archive: bool = False,
+    upgrade_work_order: str | None = None,
 ) -> SimpleNamespace:
-    del operation, allow_upgrade_transition, require_archive
+    del operation, allow_upgrade_transition, require_archive, upgrade_work_order
     lock_path = Path(repository) / ".engineering-harness.lock"
     lock = json.loads(lock_path.read_text(encoding="utf-8")) if lock_path.is_file() else {}
     evaluator = lock.get("evaluator") if isinstance(lock.get("evaluator"), dict) else {
@@ -52,4 +53,8 @@ def trusted_mutation_authority(
         "diagnostics": [],
     }
     raw = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
-    return SimpleNamespace(evidence_bytes=raw, evidence_sha256=hashlib.sha256(raw).hexdigest())
+    return SimpleNamespace(
+        evidence_bytes=raw,
+        evidence_sha256=hashlib.sha256(raw).hexdigest(),
+        upgrade_authorization=None,
+    )

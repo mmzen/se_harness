@@ -2,7 +2,7 @@
 
 <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a repository-specific promotional workflow for `mmzen/se_harness`. It is not installed into consumer repositories and grants no verification, release, publication, deployment, or governor-promotion authority.
+> This is a repository-specific promotional workflow for `mmzen/se_harness`. It is not installed into consumer repositories and grants no verification, release, publication, deployment, or evaluator-adoption authority.
 
 The public [SE Harness Explorer demonstration](https://mmzen.github.io/se_harness/) shows how SE Harness governs its own development. It is generated from the same canonical artifact graph that maintainers inspect locally, then deployed as a static GitHub Pages artifact.
 
@@ -32,7 +32,7 @@ After a released RLS is integrated into `main`, the release owner runs **Publish
 2. proves that the Git tag resolves to the record's candidate commit;
 3. finds the first main first-parent commit that integrated the released record;
 4. checks out that governance commit in a clean detached worktree;
-5. validates it with the independently released governor selected by that snapshot;
+5. validates it with the independently released evaluator selected by that snapshot;
 6. generates the Explorer bundle using the snapshot's target-local generator;
 7. checks the exact public file allowlist, schema, provenance, and hashes;
 8. uploads one Pages artifact and deploys it through the `github-pages` environment.
