@@ -88,19 +88,17 @@ class ArtifactCatalogTests(unittest.TestCase):
                 self.assertNotIn(CATALOG_BEGIN, content)
 
     def test_released_policy_copies_match_while_candidate_router_remains_isolated(self) -> None:
-        pairs = (
-            (
-                REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md",
-                REPOSITORY_ROOT
-                / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
-            ),
-        )
-        for actual, template in pairs:
-            with self.subTest(actual=actual.name):
-                self.assertEqual(
-                    actual.read_text(encoding="utf-8"),
-                    template.read_text(encoding="utf-8"),
-                )
+        released_work_order = (
+            REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md"
+        ).read_text(encoding="utf-8")
+        candidate_work_order = (
+            REPOSITORY_ROOT
+            / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
+        ).read_text(encoding="utf-8")
+        self.assertNotEqual(released_work_order, candidate_work_order)
+        self.assertNotIn("[execution_scope]", released_work_order)
+        self.assertIn("[execution_scope]", candidate_work_order)
+        self.assertIn("component-prefix", candidate_work_order)
         released_traceability = (
             REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")

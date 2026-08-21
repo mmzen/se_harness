@@ -22,7 +22,7 @@ from se_harness.preflight import _load_validator_module, run_preflight
 
 
 SCHEMA = 1
-WORKFLOW_CONTRACT_SCHEMA = "se-harness-workflow-v1"
+WORKFLOW_CONTRACT_SCHEMA = "se-harness-workflow-v2"
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
 DEFINITION_TYPES = {
     "intent",
@@ -642,6 +642,7 @@ def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> lis
     assessment_errors, _ = validator.validate_decision_assessments(artifacts, root)
     errors.extend(assessment_errors)
     errors.extend(validator.validate_work_order_assurance(artifacts, root))
+    errors.extend(validator.validate_work_order_execution_scope(artifacts, root))
     errors.extend(validator.validate_revision_consistency(
         artifacts,
         root,
@@ -785,6 +786,9 @@ def plan_transition(
         first = report.errors[0]
         raise HarnessError(f"current artifact graph is invalid [{first.code}]: {first.message}")
     catalog = _catalog(report)
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(root, transitions, report=report, catalog=catalog)
     input_paths: set[Path] = set()
     for artifact in report.artifacts:
         input_paths.add(safe_destination(root, artifact.path.relative_to(root)))
@@ -893,6 +897,9 @@ def _replace(staged: Path, target: Path) -> None:
 
 
 def apply_transition(plan: TransitionPlan) -> None:
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(plan.root, plan.result["selection"]["artifacts"])
     selected = {write.path: write.artifact_id for write in plan.writes}
     for planned_input in plan.inputs:
         try:

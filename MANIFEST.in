@@ -1,1 +1,2 @@
 include scripts/normalize_sdist.py
+include se_harness/*.json

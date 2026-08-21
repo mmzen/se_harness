@@ -9,6 +9,7 @@ from pathlib import Path
 
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
+from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
 from se_harness.workflow import TRANSITIONS, WORKFLOW_CONTRACT
 
 
@@ -17,11 +18,14 @@ STANDARD_ROOT = REPOSITORY_ROOT / "templates" / "repository" / "standard"
 ENGINEERING_ROOT = STANDARD_ROOT / "docs" / "engineering"
 RUNTIME_CONTRACT = REPOSITORY_ROOT / "se_harness" / "workflow_contract.json"
 INSTALLED_CONTRACT = ENGINEERING_ROOT / "WORKFLOW.json"
+RUNTIME_GATES = REPOSITORY_ROOT / "se_harness" / "quality_gates_contract.json"
+INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_runtime_and_installed_contracts_are_byte_identical(self) -> None:
         self.assertEqual(RUNTIME_CONTRACT.read_bytes(), INSTALLED_CONTRACT.read_bytes())
+        self.assertEqual(RUNTIME_GATES.read_bytes(), INSTALLED_GATES.read_bytes())
         self.assertEqual(
             WORKFLOW_CONTRACT,
             json.loads(INSTALLED_CONTRACT.read_text(encoding="utf-8")),
@@ -29,7 +33,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
 
     def test_contract_is_closed_ordered_and_complete(self) -> None:
         contract = WORKFLOW_CONTRACT
-        self.assertEqual("se-harness-workflow-v1", contract["schema"])
+        self.assertEqual("se-harness-workflow-v2", contract["schema"])
         self.assertEqual("BCP 14", contract["normative_language"])
         self.assertEqual(
             [
@@ -42,6 +46,14 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
             ],
             contract["handoff_fields"],
         )
+        self.assertEqual(
+            [
+                "outcome", "done", "not_done", "blocked_by",
+                "current_lifecycle_state", "decision_required", "next",
+                "command_or_response", "alternatives",
+            ],
+            contract["restitution_fields"],
+        )
         recommendations = contract["recommendations"]
         identifiers = [rule["id"] for rule in recommendations]
         self.assertEqual(len(identifiers), len(set(identifiers)))
@@ -53,6 +65,8 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 self.assertIsInstance(rule["selector"]["artifact_types"], list)
                 self.assertIsInstance(rule["selector"]["statuses"], list)
                 self.assertIsInstance(rule["gate_ids"], list)
+                self.assertRegex(rule["procedure_id"], r"^PROC-[A-Z0-9-]+$")
+                self.assertIsInstance(rule["alternative_procedure_ids"], list)
                 self.assertRegex(rule["decision_right"], r"^DR-[A-Z0-9-]+$")
                 self.assertIsInstance(rule["effects"], list)
                 self.assertIsInstance(rule["non_effects"], list)
@@ -64,6 +78,13 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
         self.assertEqual("WFL-FAIL-REMEDIATE", failure["id"])
         self.assertEqual(set(contract["handoff_fields"]), set(failure["handoff"]))
         self.assertEqual(["failed"], failure["selector"]["outcomes"])
+        self.assertRegex(failure["procedure_id"], r"^PROC-[A-Z0-9-]+$")
+        workflow, quality, rules, procedures, gates = load_validated_contracts()
+        self.assertEqual(contract, workflow)
+        self.assertEqual(load_quality_gate_contract(), quality)
+        self.assertEqual(set(identifiers), set(rules))
+        self.assertGreaterEqual(len(procedures), len(rules))
+        self.assertGreaterEqual(len(gates), 10)
 
     def test_every_contract_reference_resolves_to_one_normative_owner(self) -> None:
         workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
@@ -73,11 +94,22 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
             with self.subTest(rule=rule["id"]):
                 self.assertEqual(1, workflow.count(f"`{rule['id']}`"))
                 self.assertEqual(1, rights.count(f"`{rule['decision_right']}`"))
+                self.assertGreaterEqual(workflow.count(f"`{rule['procedure_id']}`"), 1)
                 for gate_id in rule["gate_ids"]:
-                    self.assertEqual(1, gates.count(f"`{gate_id}`"))
+                    self.assertGreaterEqual(gates.count(f"`{gate_id}`"), 1)
         failure = WORKFLOW_CONTRACT["failure"]
         self.assertEqual(1, workflow.count(f"`{failure['id']}`"))
         self.assertEqual(1, rights.count(f"`{failure['decision_right']}`"))
+
+        _, _, _, procedures, quality_gates = load_validated_contracts()
+        for procedure_id, procedure in procedures.items():
+            self.assertGreaterEqual(workflow.count(f"`{procedure_id}`"), 1)
+            for step in procedure["steps"]:
+                self.assertGreaterEqual(workflow.count(f"`{step['id']}`"), 1)
+        for gate_id, gate in quality_gates.items():
+            self.assertGreaterEqual(gates.count(f"`{gate_id}`"), 1)
+            for predicate in gate["predicates"]:
+                self.assertGreaterEqual(gates.count(f"`{predicate['id']}`"), 1)
 
     def test_runtime_and_repository_validator_use_the_same_transitions(self) -> None:
         validator = _load_validator_module()
@@ -91,8 +123,13 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
             self.assertEqual(0, result)
             installed = target / "docs" / "engineering" / "WORKFLOW.json"
             self.assertEqual(INSTALLED_CONTRACT.read_bytes(), installed.read_bytes())
+            self.assertEqual(
+                INSTALLED_GATES.read_bytes(),
+                (target / "docs" / "engineering" / "QUALITY_GATES.json").read_bytes(),
+            )
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertEqual("managed", lock["files"]["docs/engineering/WORKFLOW.json"]["mode"])
+            self.assertEqual("managed", lock["files"]["docs/engineering/QUALITY_GATES.json"]["mode"])
 
     def test_core_documents_declare_bcp14_and_stable_rules(self) -> None:
         paths = (

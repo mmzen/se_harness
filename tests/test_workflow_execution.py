@@ -86,6 +86,9 @@ commit_bound_verification = "required"
 rationale = "The workflow change affects persistent governance state and requires exact-candidate assurance."
 decided_by = "repository-owner"
 
+[execution_scope]
+paths = ["src/"]
+
 [relations]''',
             1,
         )
@@ -102,6 +105,27 @@ decided_by = "repository-owner"
             result["scope"]["governing"],
         )
         self.assertEqual("prepare verification record", result["handoff"]["recommended_next_step"]["action"])
+
+    def test_focus_preserves_schema_one_default_and_offers_schema_two(self) -> None:
+        code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
+        self.assertEqual(0, code, error)
+        self.assertEqual(1, json.loads(output)["schema"])
+
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "2", "--json"
+        )
+        self.assertEqual(0, code, error)
+        result = json.loads(output)
+        self.assertEqual("se-harness-workflow-result-v2", result["schema"])
+        self.assertEqual("selected", result["scope"]["mode"])
+        self.assertEqual(1, len([result["restitution"]["next"]]))
+
+        code, human, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "2"
+        )
+        self.assertEqual(0, code, error)
+        self.assertTrue(human.startswith("Outcome\n"))
+        self.assertNotIn("Workflow focus", human)
 
     def test_focus_implemented_work_with_ready_vrec_recommends_assurance(self) -> None:
         self.ready_vrec()
@@ -332,6 +356,20 @@ decided_by = "repository-owner"
         self.assertIn("[[lifecycle_events]]", text)
         self.assertEqual(work_before, work_order.read_bytes())
         self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+
+    def test_transition_uses_the_same_checkpoint_before_plan_and_apply(self) -> None:
+        self.ready_vrec()
+        with mock.patch(
+            "se_harness.workflow_compliance.ensure_governed_checkpoint"
+        ) as checkpoint:
+            plan_transition(
+                self.root,
+                {"VREC-001": "verified"},
+                {"VREC-001": "assurance-owner"},
+                {},
+                apply=True,
+            )
+        self.assertEqual(2, checkpoint.call_count)
 
     def test_mutually_dependent_definition_packet_is_validated_and_applied_together(self) -> None:
         base = self.root / "docs/engineering/packet"

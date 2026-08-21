@@ -10,11 +10,13 @@
 
 ## Commands
 
+<!-- se-harness:action CTX-ACT-REPOSITORY-CHECKS begin -->
 - Setup: TODO[setup-command]
 - Build: TODO[build-command]
 - Test: TODO[test-command]
 - Lint or format: TODO[lint-command-or-none]
 - Additional required verification: TODO[additional-verification]
+<!-- se-harness:action CTX-ACT-REPOSITORY-CHECKS end -->
 
 ## Architecture
 

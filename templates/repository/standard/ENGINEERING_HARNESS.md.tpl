@@ -60,7 +60,7 @@ MUST NOT restate its rules.
 | --- | --- |
 | Lifecycle states, transitions, procedures, next actions, and handoff fields | `docs/engineering/WORKFLOW.md` and its machine-readable `WORKFLOW.json` |
 | Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |
-| Gate criteria, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` |
+| Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
 | Repository-specific facts and commands | `docs/engineering/REPOSITORY_CONTEXT.md` |
@@ -68,17 +68,20 @@ MUST NOT restate its rules.
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
 source.
 
-## Lifecycle handoffs
+## Lifecycle restitution
 
 After completing a lifecycle stage or reaching a stop condition, the actor MUST
-use the selected `harnessctl focus` or `transition` result and report these
-fields in order: `Completed`; `Current lifecycle state`; `Recommended next
-step`; `Human decision or approval required`; `Command or suggested response`;
-and `Alternative next steps` only when the result contains alternatives.
+return the canonical human block produced by selected `harnessctl check`,
+`harnessctl focus --result-schema 2`, or another workflow command using
+`--result-schema 2`. The headings are `Outcome`, `Done`,
+`Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
+required`, `Next`, `Command or response`, and conditional `Alternatives`.
 
-The actor MUST use actual artifact IDs, recommend exactly one next step, report
-only effects that occurred, and preserve every stated non-effect. The complete
-procedure is `WORKFLOW.md#lifecycle-handoff-procedure`.
+The actor MUST return that block verbatim, use actual artifact IDs, expose one
+typed next step, report only effects that occurred, and preserve every stated
+non-effect. It MUST NOT add a preface, conclusion, unrelated finding,
+open-ended question, or second next action. The complete procedure is
+`WORKFLOW.md#lifecycle-restitution-procedure`.
 
 ## Stop conditions
 

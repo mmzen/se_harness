@@ -33,6 +33,14 @@ from se_harness.renumber import (
     render_json_error as render_renumber_json_error,
 )
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
+from se_harness.workflow_compliance import check_workflow, focus_schema2
+from se_harness.workflow_contract import ContractError
+from se_harness.workflow_procedures import ProcedureError
+from se_harness.workflow_result import (
+    legacy_to_schema2,
+    render_human as render_workflow_human_v2,
+    render_json as render_workflow_json_v2,
+)
 from se_harness.workflow import (
     failed_result,
     focus,
@@ -160,6 +168,41 @@ def _run_distribution_script(
     return completed.returncode
 
 
+def _inspect_repository(args: argparse.Namespace) -> int:
+    target = ensure_target(Path(args.target), must_exist=True)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            str(_distribution_script("inspect_engineering_artifacts.py")),
+            "--root",
+            str(target),
+            *(["--json"] if args.json else []),
+        ],
+        cwd=target,
+        env=_distribution_environment(),
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    output = completed.stdout
+    if completed.returncode == 0 and args.json:
+        try:
+            report = json.loads(output)
+        except json.JSONDecodeError:
+            pass
+        else:
+            report["mode"] = "repository_wide"
+            report["selection"] = {"primary": None, "artifacts": []}
+            output = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    elif completed.returncode == 0:
+        output = output.replace("Harness inspection", "Harness inspection (repository_wide)", 1)
+    print(output, end="")
+    if completed.stderr:
+        print(completed.stderr, end="", file=sys.stderr)
+    return completed.returncode
+
+
 def _doctor(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
     checks = inspect_installation(target)
@@ -195,6 +238,36 @@ def _preflight(args: argparse.Namespace) -> int:
     return 0 if report.ready else 1
 
 
+def _render_selected_result(result: dict, args: argparse.Namespace) -> str:
+    if getattr(args, "result_schema", 1) == 2:
+        projected = legacy_to_schema2(result)
+        return render_workflow_json_v2(projected) if args.json else render_workflow_human_v2(projected)
+    return render_workflow_json(result) if args.json else render_workflow_human(result)
+
+
+def _check(args: argparse.Namespace) -> int:
+    if args.change_manifest and (args.changed_path or args.changes_complete):
+        raise HarnessError(
+            "WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete"
+        )
+    try:
+        result = check_workflow(
+            Path(args.target),
+            artifact_id=args.artifact,
+            checkpoint=args.checkpoint,
+            procedure_id=args.procedure,
+            changed_paths=args.changed_path,
+            changes_complete=args.changes_complete,
+            change_manifest=Path(args.change_manifest) if args.change_manifest else None,
+        )
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        result = legacy_to_schema2(
+            failed_result("check", args.artifact, str(exc), code="WEX210")
+        )
+    print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
 def _select_work_order(args: argparse.Namespace) -> int:
     try:
         print(select_from_event(Path(args.event)))
@@ -218,13 +291,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
     except HarnessError as exc:
         result = failed_result("capture-verification", args.record_id, str(exc), code="WEX301")
-        print(
-            render_workflow_json(result) if args.json else render_workflow_human(result),
-            end="",
-            file=sys.stdout if args.json else sys.stderr,
-        )
+        print(_render_selected_result(result, args), end="", file=sys.stdout if args.json else sys.stderr)
         return 2
-    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    print(_render_selected_result(result, args), end="")
     return 0
 
 
@@ -245,23 +314,26 @@ def _prepare_release(args: argparse.Namespace) -> int:
         result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
     except HarnessError as exc:
         result = failed_result("prepare-release", args.record_id, str(exc), code="WEX401")
-        print(
-            render_workflow_json(result) if args.json else render_workflow_human(result),
-            end="",
-            file=sys.stdout if args.json else sys.stderr,
-        )
+        print(_render_selected_result(result, args), end="", file=sys.stdout if args.json else sys.stderr)
         return 2
-    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    print(_render_selected_result(result, args), end="")
     return 0
 
 
 def _focus(args: argparse.Namespace) -> int:
     try:
-        result = focus(
-            Path(args.target),
-            args.artifact,
-            include_background=args.include_background,
-        )
+        if args.result_schema == 2:
+            result = focus_schema2(
+                Path(args.target),
+                artifact_id=args.artifact,
+                include_background=args.include_background,
+            )
+        else:
+            result = focus(
+                Path(args.target),
+                args.artifact,
+                include_background=args.include_background,
+            )
     except HarnessError as exc:
         message = str(exc)
         result = failed_result(
@@ -271,7 +343,10 @@ def _focus(args: argparse.Namespace) -> int:
             code="WEX101",
             repository_blocker=_repository_workflow_error(message),
         )
-    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    if args.result_schema == 2 and result.get("schema") == "se-harness-workflow-result-v2":
+        print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
+    else:
+        print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
@@ -328,7 +403,7 @@ def _transition(args: argparse.Namespace) -> int:
             code="WEX201",
             repository_blocker=_repository_workflow_error(message),
         )
-    print(render_workflow_json(result) if args.json else render_workflow_human(result), end="")
+    print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] in {"planned", "completed"} else 1
 
 
@@ -433,16 +508,10 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--json", action="store_true")
     validate.set_defaults(handler=lambda args: _run_distribution_script(Path(args.target), "validate_engineering_artifacts.py", ["--json"] if args.json else []))
 
-    inspect = commands.add_parser("inspect", help="inspect repository attention and lifecycle queues")
+    inspect = commands.add_parser("inspect", help="inspect repository-wide attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")
     inspect.add_argument("--json", action="store_true")
-    inspect.set_defaults(
-        handler=lambda args: _run_distribution_script(
-            Path(args.target),
-            "inspect_engineering_artifacts.py",
-            ["--json"] if args.json else [],
-        )
-    )
+    inspect.set_defaults(handler=_inspect_repository)
 
     dashboard = commands.add_parser("dashboard", help="generate the repository Harness Explorer")
     dashboard.add_argument("target", nargs="?", default=".")
@@ -465,7 +534,37 @@ def build_parser() -> argparse.ArgumentParser:
     selected_focus.add_argument("--artifact", required=True)
     selected_focus.add_argument("--json", action="store_true")
     selected_focus.add_argument("--include-background", action="store_true")
+    selected_focus.add_argument(
+        "--result-schema", type=int, choices=(1, 2), default=1,
+        help="select compatibility schema 1 or canonical restitution schema 2",
+    )
     selected_focus.set_defaults(handler=_focus)
+
+    check = commands.add_parser("check", help="evaluate one selected workflow checkpoint and emit canonical restitution")
+    check.add_argument("target", nargs="?", default=".")
+    check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
+    check.add_argument(
+        "--checkpoint", required=True, choices=("start", "pre-action", "handoff"),
+        help="fixed stateless evaluation checkpoint",
+    )
+    check.add_argument(
+        "--procedure",
+        help="selected PROC ID; required for pre-action and limited to declared alternatives",
+    )
+    check.add_argument(
+        "--changed-path", action="append", default=[],
+        help="normalized repository-relative changed path; repeat for the declared set",
+    )
+    check.add_argument(
+        "--changes-complete", action="store_true",
+        help="assert that repeated changed paths are complete; this is evidence, not trusted proof",
+    )
+    check.add_argument(
+        "--change-manifest",
+        help="in-repository se-harness-change-set-v1 JSON; exclusive with changed-path options",
+    )
+    check.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
+    check.set_defaults(handler=_check)
 
     transition = commands.add_parser("transition", help="plan or atomically apply explicit lifecycle transitions")
     transition.add_argument("target", nargs="?", default=".")
@@ -474,6 +573,10 @@ def build_parser() -> argparse.ArgumentParser:
     transition.add_argument("--reason", action="append", default=[], dest="reasons", help="ID=TEXT reason; required for rejection, or use successor VREC ID for supersession")
     transition.add_argument("--apply", action="store_true", help="apply the exact validated transaction; default is read-only planning")
     transition.add_argument("--json", action="store_true")
+    transition.add_argument(
+        "--result-schema", type=int, choices=(1, 2), default=1,
+        help="select compatibility schema 1 or canonical restitution schema 2",
+    )
     transition.set_defaults(handler=_transition)
 
     select_work = commands.add_parser(
@@ -558,6 +661,10 @@ def build_parser() -> argparse.ArgumentParser:
     capture.add_argument("--output")
     capture.add_argument("--domain", help="place the record in an explicit engineering domain")
     capture.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
+    capture.add_argument(
+        "--result-schema", type=int, choices=(1, 2), default=1,
+        help="select compatibility schema 1 or canonical restitution schema 2",
+    )
     capture.set_defaults(handler=_capture_verification)
 
     release = commands.add_parser("prepare-release", help="prepare a ready commit-bound release record")
@@ -576,6 +683,10 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--output")
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
     release.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
+    release.add_argument(
+        "--result-schema", type=int, choices=(1, 2), default=1,
+        help="select compatibility schema 1 or canonical restitution schema 2",
+    )
     release.set_defaults(handler=_prepare_release)
     return parser
 

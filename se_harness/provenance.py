@@ -276,6 +276,9 @@ def capture_verification(
     selected_work = _normalized_unique(work_order_ids, "work orders")
     selected_verification = _normalized_unique(verification_ids, "verification contracts")
     selected_evidence = _normalized_unique(evidence_paths, "evidence paths")
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(root, selected_work)
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
@@ -377,6 +380,9 @@ def prepare_release(
         raise HarnessError("tag contains unsupported characters")
     selected_verification_records = _normalized_unique(verification_record_ids, "verification records")
     selected_work = _normalized_unique(work_order_ids, "work orders")
+    from se_harness.workflow_compliance import ensure_governed_checkpoint
+
+    ensure_governed_checkpoint(root, [*selected_verification_records, *selected_work])
     catalog = _validation_catalog(root)
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")

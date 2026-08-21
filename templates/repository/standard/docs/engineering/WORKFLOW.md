@@ -7,9 +7,10 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 
 This document defines the procedure bound to the executable workflow contract.
 [`WORKFLOW.json`](WORKFLOW.json) defines the permitted transitions, ordered
-next-action rules, required handoff fields, gate IDs, and decision-right IDs.
-The installed `WORKFLOW.json` MUST be byte-identical to the contract loaded by
-`harnessctl`.
+next-action rules, typed procedures, effects, non-effects, gate IDs, and
+decision-right IDs. The installed `WORKFLOW.json` MUST be byte-identical to the
+contract loaded by `harnessctl`. Command steps in that contract use argument
+arrays. The array, not a displayed shell string, is authoritative.
 
 ## Workflow authority
 
@@ -96,27 +97,56 @@ Conformance tests MUST fail on such a difference.
 
 ## Bound procedures
 
-Each row is bound to the same ID in `WORKFLOW.json`. "Result" states the only
-permitted lifecycle effect; the contract's `non_effects` remain mandatory.
+Each row names its exact procedure in `WORKFLOW.json`. `harnessctl check`
+resolves the first matching workflow row and that procedure. An actor MUST NOT
+replace a procedure with an unbound instruction such as "run preflight" or
+"use exact inputs." "Result" states the only permitted lifecycle effect; the
+contract's `non_effects` remain mandatory.
 
-| Workflow ID | When | Gate / decision right | Required procedure and result |
-| --- | --- | --- | --- |
-| `WFL-WO-READY-VREC` | Focused WO is `implemented`; a related VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | Focus the ready VREC. The assurance owner decides only that VREC; the WO remains `implemented`. Do not capture a duplicate VREC. |
-| `WFL-WO-VERIFIED-VREC` | Focused WO is `implemented`; a related VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | Focus the VREC, then select repository integration or release preparation. Selection changes neither record. |
-| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | Run `capture-verification` with exact inputs. Create one ready VREC; do not change or verify the WO. |
-| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | Run start preflight. Begin only after the engineering owner explicitly instructs implementation; then transition only the WO to `in_progress`. |
-| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | Implement the bounded scope, retain evidence, and run review preflight. Completion changes only the WO to `implemented`. |
-| `WFL-WO-COMPLETED` | Focused WO is `verified` or `released`. | No gate / `DR-RELATED-RECORD-SELECT` | Inspect its independent VREC and RLS records. Inspection changes nothing. |
-| `WFL-VREC-DECIDE` | Focused VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | The assurance owner verifies, rejects with a reason, or supersedes with one eligible successor. Change only the VREC. |
-| `WFL-VREC-DELIVER` | Focused VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | Select repository action or authorized release preparation. Selection changes nothing. |
-| `WFL-RLS-DECIDE` | Focused RLS is `ready`. | `QG-G5-RELEASE-DECISION` / `DR-RLS-DECIDE` | The release owner releases or rejects with a reason. Change only the RLS. |
-| `WFL-RLS-EXTERNAL` | Focused RLS is `released`. | `QG-G5-EXTERNAL-ACTION` / `DR-EXTERNAL-ACTION` | State the exact tag, publication, deployment, or operating action and obtain separate authority. Release status performs no external action. |
-| `WFL-REJECTED` | Focused artifact is `rejected`. | No gate / `DR-REMEDIATION-SCOPE` | Preserve the rejected artifact. Create or revise a bounded artifact chain and obtain normal approvals. |
-| `WFL-VREC-SUPERSEDED` | Focused VREC is `superseded`. | No gate / `DR-RELATED-RECORD-SELECT` | Focus its declared successor. Preserve the old VREC as release-ineligible history. |
-| `WFL-DEFINITION-COMPLETE` | Focused definition is `approved`. | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` / `DR-DEFINITION-DECIDE` | Complete remaining definitions or create and approve one bounded work order. Do not approve related definitions implicitly. |
-| `WFL-DEFINITION-WORK` | Focused definition is `implemented`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-SELECT` | Select the exact related work order. An implemented definition authorizes no new work. |
-| `WFL-DEFAULT-REVIEW` | No earlier rule matches. | No gate / `DR-RELATED-RECORD-SELECT` | Report the current state and select one independently authorized transition. Change nothing. |
-| `WFL-FAIL-REMEDIATE` | A workflow command fails. | No gate / `DR-REMEDIATION-SCOPE` | Report the exact blocker and unchanged state. Resolve it and rerun the same command; obtain new authority if remediation changes governed scope. |
+| Workflow ID | When | Gate / decision right | Procedure ID | Result |
+| --- | --- | --- | --- | --- |
+| `WFL-WO-READY-VREC` | Focused WO is `implemented`; a related VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-FOCUS-RELATED` | Focus the ready VREC. The assurance owner decides only that VREC; the WO remains `implemented`. |
+| `WFL-WO-VERIFIED-VREC` | Focused WO is `implemented`; a related VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes neither record. Complete alternatives are `PROC-REPOSITORY-INTEGRATION` and `PROC-PREPARE-RELEASE`. |
+| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | `PROC-WO-PREPARE-VREC` | Create one ready VREC; do not change or verify the WO. |
+| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | `PROC-WO-START` | Execute the six ordered typed steps. Only the selected WO may become `in_progress`. |
+| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | `PROC-WO-IMPLEMENT` | Completion changes only the WO to `implemented`; it does not verify work. |
+| `WFL-WO-COMPLETED` | Focused WO is `verified` or `released`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Projection changes nothing. |
+| `WFL-VREC-DECIDE` | Focused VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-VREC-DECIDE` | Change only the VREC. Complete alternatives are `PROC-VREC-REJECT` and `PROC-VREC-SUPERSEDE`. |
+| `WFL-VREC-DELIVER` | Focused VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes nothing. `PROC-REPOSITORY-INTEGRATION` is a complete alternative. |
+| `WFL-RLS-DECIDE` | Focused RLS is `ready`. | `QG-G5-RELEASE-DECISION` / `DR-RLS-DECIDE` | `PROC-RLS-DECIDE` | Change only the RLS. `PROC-RLS-REJECT` is a complete alternative. |
+| `WFL-RLS-EXTERNAL` | Focused RLS is `released`. | `QG-G5-EXTERNAL-ACTION` / `DR-EXTERNAL-ACTION` | `PROC-EXTERNAL-ACTION` | Release status performs no external action. |
+| `WFL-REJECTED` | Focused artifact is `rejected`. | No gate / `DR-REMEDIATION-SCOPE` | `PROC-REMEDIATE` | Preserve rejected history; remediation does not expand selected scope. |
+| `WFL-VREC-SUPERSEDED` | Focused VREC is `superseded`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Preserve the old VREC as release-ineligible history. |
+| `WFL-DEFINITION-COMPLETE` | Focused definition is `approved`. | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` / `DR-DEFINITION-DECIDE` | `PROC-DEFINITION-COMPLETE` | Change only the explicitly selected definition. |
+| `WFL-DEFINITION-WORK` | Focused definition is `implemented`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-SELECT` | `PROC-DEFINITION-WORK` | Selecting work changes no lifecycle state. |
+| `WFL-DEFAULT-REVIEW` | No earlier rule matches. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Report current state; change nothing. |
+| `WFL-FAIL-REMEDIATE` | A workflow command fails. | No gate / `DR-REMEDIATION-SCOPE` | `PROC-REMEDIATE` | Report the exact blocker and unchanged state. |
+
+## Ordered procedure registry
+
+The arrays below are a human index. `WORKFLOW.json` remains authoritative for
+argument boundaries, gate IDs, effects, non-effects, decision roles, permitted
+outcomes, and response values.
+
+| Procedure ID | Ordered typed steps |
+| --- | --- |
+| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff`; `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
+| `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
+| `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl focus . --artifact {related_id}`. |
+| `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
+| `PROC-VREC-REJECT` | `STEP-VREC-REJECT` decision `DR-VREC-DECIDE`. |
+| `PROC-VREC-SUPERSEDE` | `STEP-VREC-SUPERSEDE` decision `DR-VREC-DECIDE`. |
+| `PROC-DELIVERY-SELECT` | `STEP-DELIVERY-SELECT` decision `DR-DELIVERY-SELECT`. |
+| `PROC-REPOSITORY-INTEGRATION` | `STEP-REPOSITORY-INTEGRATION` decision `DR-DELIVERY-SELECT`. |
+| `PROC-PREPARE-RELEASE` | `STEP-PREPARE-RELEASE` decision `DR-DELIVERY-SELECT`. |
+| `PROC-RLS-DECIDE` | `STEP-RLS-DECIDE` decision `DR-RLS-DECIDE`. |
+| `PROC-RLS-REJECT` | `STEP-RLS-REJECT` decision `DR-RLS-DECIDE`. |
+| `PROC-EXTERNAL-ACTION` | `STEP-EXTERNAL-ACTION` decision `DR-EXTERNAL-ACTION`. |
+| `PROC-REMEDIATE` | `STEP-REMEDIATE-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-DEFINITION-COMPLETE` | `STEP-DEFINITION-COMPLETE` decision `DR-DEFINITION-DECIDE`. |
+| `PROC-DEFINITION-WORK` | `STEP-DEFINITION-WORK` decision `DR-WO-SELECT`. |
 
 ## Transition procedure
 
@@ -139,24 +169,26 @@ For an accountable lifecycle decision:
 Use one transition packet when several definitions are mutually dependent and
 each transition is explicitly named. A packet MUST NOT infer an omitted target.
 
-## Lifecycle handoff procedure
+## Lifecycle restitution procedure
 
-After a completed stage or a stop condition, the agent MUST emit these fields in
-this order:
+After a completed stage or a stop condition, the agent MUST return the human
+block emitted by `harnessctl check` or another command using
+`--result-schema 2`. The headings MUST occur in this order:
 
-1. `Completed`
-2. `Current lifecycle state`
-3. `Recommended next step`
-4. `Human decision or approval required`
-5. `Command or suggested response`
-6. `Alternative next steps` only when the selected JSON rule contains one or
-   more alternatives
+1. `Outcome`
+2. `Done`
+3. `Not done`
+4. `Blocked by` only for a blocked outcome
+5. `Current lifecycle state`
+6. `Decision required`
+7. `Next`
+8. `Command or response`
+9. `Alternatives` only when the selected rule names complete alternative procedures
 
-The values MUST be rendered from the selected JSON rule using actual artifact
-IDs. The agent MUST recommend exactly one next step, MUST NOT replace it with an
-open-ended question, and MUST NOT report a lifecycle effect that did not occur.
-When several stages complete in one response, report only the final state and
-its next rule.
+The agent MUST return this block verbatim, without a preface, conclusion,
+repository-wide finding, open-ended question, or second next action. `Done`
+contains observed effects only and MUST use actual artifact IDs. `Not done`
+contains incomplete expected effects only. The `Next` value names exactly one current typed procedure step.
 
 ## Failure procedure
 

@@ -44,15 +44,18 @@ OLD_WORKFLOW_REVIEW_STEP = (
 WORKFLOW_REVIEW_STEP = (
     "6. The implementation actor MUST change only the authorized scope, retain"
 )
-ROUTER_HANDOFF_HEADING = "## Lifecycle handoffs"
-WORKFLOW_HANDOFF_HEADING = "## Lifecycle handoff procedure"
+ROUTER_HANDOFF_HEADING = "## Lifecycle restitution"
+WORKFLOW_HANDOFF_HEADING = "## Lifecycle restitution procedure"
 HANDOFF_FIELDS = (
-    "Completed",
+    "Outcome",
+    "Done",
+    "Not done",
+    "Blocked by",
     "Current lifecycle state",
-    "Recommended next step",
-    "Human decision or approval required",
-    "Command or suggested response",
-    "Alternative next steps",
+    "Decision required",
+    "Next",
+    "Command or response",
+    "Alternatives",
 )
 
 
@@ -95,6 +98,12 @@ class InstructionArchitectureTests(unittest.TestCase):
                 'rationale = "The fixture changes trusted engineering behavior."\n'
                 'decided_by = "test-owner"\n\n'
                 "[relations]\n",
+                1,
+            )
+        if "[execution_scope]" not in text:
+            text = text.replace(
+                "\n[relations]\n",
+                '\n[execution_scope]\npaths = ["src/"]\n\n[relations]\n',
                 1,
             )
         work_order.write_text(text, encoding="utf-8")
@@ -202,14 +211,17 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn(WORKFLOW_HANDOFF_HEADING, workflow)
         workflow_handoff = workflow.split(WORKFLOW_HANDOFF_HEADING, 1)[1]
         for phrase in (
-            "`Completed`",
+            "`Outcome`",
+            "`Done`",
+            "`Not done`",
+            "`Blocked by`",
             "`Current lifecycle state`",
-            "`Recommended next step`",
-            "`Human decision or approval required`",
-            "`Command or suggested response`",
-            "`Alternative next steps`",
-            "actual artifact",
-            "recommend exactly one next step",
+            "`Decision required`",
+            "`Next`",
+            "`Command or response`",
+            "`Alternatives`",
+            "actual artifact IDs",
+            "exactly one current typed procedure step",
             "open-ended question",
             "unchanged state",
         ):

@@ -29,6 +29,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its canonical handoff |
+| `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit canonical schema-2 restitution |
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
@@ -55,7 +56,12 @@ harnessctl doctor [TARGET]
 
 Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
 
-Inspection reuses the existing validator and Harness Explorer snapshot. It reports formal validity, ready decisions, draft definitions, approved or in-progress work, implemented work explicitly awaiting commit-bound assurance preparation, and the existing validator and Explorer findings. Human output groups repeated rule instances for readability; `--json` retains every finding.
+Inspection reuses the existing validator and Harness Explorer snapshot. It
+reports `mode = repository_wide`, no selected artifact, formal validity, ready
+decisions, draft definitions, active work, assurance preparation, and existing
+repository findings. Human output groups repeated rule instances for
+readability; `--json` retains every finding. Inspection output MUST NOT be used
+as selected-iteration restitution.
 
 The `assurance_pending` queue contains only an `implemented` work order whose explicit `[assurance]` classification is `required` and which has no direct `ready`, `verified`, or `released` VREC coverage. It suggests non-automatic preparation after one clean candidate commit; it does not select aggregate scope, create a record, or make the assurance decision. Completed legacy work without a classification and work explicitly classified `not_required` are not inferred into this queue.
 
@@ -89,9 +95,15 @@ selected for the artifact's exact type, state, and direct related records. Do
 not derive a new transition or next action from this reference.
 
 ```text
-harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... [--json] [--include-background]
+harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
+  [--json] [--include-background] [--result-schema 1|2]
+harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
+  --checkpoint start|pre-action|handoff \
+  [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
+  [--change-manifest PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
-  [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] [--apply] [--json]
+  [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
+  [--apply] [--json] [--result-schema 1|2]
 ```
 
 `focus` projects only the selected artifact's governing chain and direct
@@ -101,6 +113,26 @@ lifecycle dependencies. It uses the ordered recommendation registry in
 duplicate-capture recommendation. Unrelated repository findings remain a
 background count; `--include-background` expands categories without making
 them selected-scope work.
+
+`check` resolves the first matching rule, its typed `PROC-*` procedure, and its
+`QG-*` gates. `pre-action` requires `--procedure`, which must equal the selected
+procedure or one complete declared alternative. `--changed-path` may repeat;
+`--changes-complete` asserts that the supplied set is complete, including an
+empty set. The assertion is evidence, not proof from a trusted Git baseline.
+Without it, path-scope predicates are `not_assessable`.
+
+`--change-manifest` is mutually exclusive with both changed-path options. It
+must be an in-repository UTF-8 JSON object containing only `schema` with value
+`se-harness-change-set-v1`, Boolean `complete`, and ordered array `paths`.
+Paths use `/`, exact-file or component-boundary directory-prefix matching, and
+reject absolute, traversal, backslash, wildcard, drive, URI, control-character,
+reserved-device, duplicate, and case-ambiguous forms.
+
+`check` always emits `se-harness-workflow-result-v2`. Human output contains only
+`Outcome`, `Done`, `Not done`, conditional `Blocked by`, `Current lifecycle
+state`, `Decision required`, `Next`, `Command or response`, and conditional
+`Alternatives`. Existing workflow commands default to result schema 1 during
+the compatibility window; select `--result-schema 2` for canonical restitution.
 
 `transition` resolves IDs from formal metadata and plans by default. Each
 selected ID needs one actor assertion. Rejection needs a non-empty reason; VREC
@@ -114,7 +146,9 @@ effects and non-effects for each state are defined only by the matching
 `WORKFLOW.json` rule. Related artifacts require separate explicit selection,
 passing gates, and authority.
 
-Human and JSON output are rendered from the same versioned workflow result and always identify one recommended next step, required authority, and a command or suggested response.
+Human and JSON output are rendered from the same semantic workflow result.
+Schema 2 always identifies exactly one typed next step and derives its command
+argument array or response from the selected procedure.
 
 ## Safe repository upgrade
 

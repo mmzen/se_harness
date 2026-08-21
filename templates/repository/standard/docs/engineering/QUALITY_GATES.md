@@ -8,11 +8,62 @@ Uppercase **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** have t
 
 A quality gate is a named predicate. A gate reports `pass`, `fail`, or `not_assessable`. It does not approve an artifact or exercise a decision right.
 
+[`QUALITY_GATES.json`](QUALITY_GATES.json) owns gate IDs, checkpoint bindings,
+predicate IDs, evaluator keys, and required evidence descriptors. This document
+explains that executable contract and MUST NOT redefine it. The installed JSON
+MUST be byte-identical to the packaged contract loaded by `harnessctl`.
+
 **QG-001:** A workflow action that references a gate MUST proceed only when that gate reports `pass`.
 
 **QG-002:** Missing, unreadable, or externally held required evidence MUST produce `not_assessable`; it MUST NOT be treated as `pass`.
 
 **QG-003:** A failed or non-assessable required gate MUST leave lifecycle state unchanged.
+
+**QG-009:** Predicate and gate status MUST aggregate in this order:
+`fail` before `not_assessable` before `pass`. Every safely assessable predicate
+MUST be reported even after another predicate fails.
+
+**QG-010:** `harnessctl check` MUST evaluate gates at `start`, `pre-action`,
+and `handoff`. Transition planning and apply MUST recheck machine-contract and
+repository-integrity predicates before writing. Preparation commands MUST run
+the same governed checkpoint service before writing a VREC or RLS.
+
+## Executable predicate registry
+
+The evaluator key is closed. Policy files MUST NOT name an import, expression,
+shell command, or repository-provided executable.
+
+| Evaluator key | Exact assessment |
+| --- | --- |
+| `artifact_status` | Selected artifact status is one of the predicate's declared statuses. |
+| `formal_graph_valid` | No blocking diagnostic affects the selected governing scope. |
+| `repository_integrity` | No fixed repository-integrity blocker prevents reliable selected evaluation. |
+| `execution_scope_declared` | The selected WO has one valid normalized `[execution_scope].paths` array. |
+| `change_set_complete` | The caller explicitly asserted that the supplied changed-path set is complete. |
+| `changed_paths_within_scope` | Every path in a complete declared change set matches one exact path or component-boundary directory prefix. |
+| `start_preflight_ready` | Start preflight has no lifecycle-relevant blocker. |
+| `review_preflight_ready` | Review preflight has no lifecycle-relevant blocker. |
+| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |
+
+Missing completeness or required evidence is `not_assessable`, never `pass`.
+Caller-declared completeness is retained evidence; it is not proof from a
+trusted change baseline.
+
+## Machine binding index
+
+| Gate ID | Predicate IDs |
+| --- | --- |
+| `QG-G0-INTENT` | `QGP-G0-GRAPH`, `QGP-G0-INTEGRITY` |
+| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY` |
+| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY` |
+| `QG-G3-WORK-AUTHORIZATION` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` |
+| `QG-G4-IMPLEMENTATION-EVIDENCE` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` |
+| `QG-G4-CANDIDATE-READY` | `QGP-G4C-STATUS`, `QGP-G4C-GRAPH`, `QGP-G4C-INTEGRITY` |
+| `QG-G4-ASSURANCE-DECISION` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` |
+| `QG-G4-VERIFIED-COVERAGE` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` |
+| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY` |
+| `QG-G5-RELEASE-DECISION` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` |
+| `QG-G5-EXTERNAL-ACTION` | `QGP-G5E-STATUS`, `QGP-G5E-GRAPH`, `QGP-G5E-INTEGRITY` |
 
 ## Gate catalog
 

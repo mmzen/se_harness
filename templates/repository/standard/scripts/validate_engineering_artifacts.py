@@ -86,7 +86,10 @@ def _load_workflow_transitions() -> dict[str, dict[str, set[str]]]:
         contract = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"cannot load managed workflow contract: {path}") from exc
-    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v1":
+    if not isinstance(contract, dict) or contract.get("schema") not in {
+        "se-harness-workflow-v1",
+        "se-harness-workflow-v2",
+    }:
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("transitions")
     if not isinstance(source, dict):
@@ -1864,6 +1867,95 @@ def validate_work_order_assurance(
     return errors
 
 
+def _execution_scope_path_issue(value: object) -> str | None:
+    if not isinstance(value, str) or not value or len(value) > 4096:
+        return "path must be non-empty text of at most 4096 characters"
+    if re.search(r"[\x00-\x1f\x7f]", value):
+        return "path contains a control character"
+    if "\\" in value or ":" in value or any(token in value for token in ("*", "?", "[", "]")):
+        return "path contains an alternate separator, drive/URI marker, or wildcard"
+    directory = value.endswith("/")
+    candidate = value[:-1] if directory else value
+    if not candidate or candidate.startswith("/"):
+        return "path is empty or absolute"
+    parts = PurePosixPath(candidate).parts
+    if not parts or any(part in {"", ".", ".."} for part in parts):
+        return "path contains an empty or dot component"
+    reserved = {"CON", "PRN", "AUX", "NUL"} | {
+        f"{prefix}{index}" for prefix in ("COM", "LPT") for index in range(1, 10)
+    }
+    for part in parts:
+        if part.endswith((".", " ")) or part.rstrip(". ").split(".", 1)[0].upper() in reserved:
+            return "path contains a reserved device or trailing dot/space component"
+    normalized = PurePosixPath(*parts).as_posix() + ("/" if directory else "")
+    if normalized != value:
+        return "path is not normalized"
+    return None
+
+
+def validate_work_order_execution_scope(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> list[Diagnostic]:
+    errors: list[Diagnostic] = []
+    for artifact in artifacts:
+        if artifact.artifact_type != "work_order":
+            continue
+        table = artifact.metadata.get("execution_scope")
+        if table is None:
+            # Compatibility: the validator cannot infer whether an active work
+            # order predates this contract. Checkpoint evaluation treats an
+            # absent scope as not assessable; authoring templates require it for
+            # new or resumed implementation.
+            continue
+        if not isinstance(table, dict) or set(table) != {"paths"}:
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E020",
+                "execution_scope must contain only paths",
+                plane="governance",
+            )
+            continue
+        paths = table.get("paths")
+        if not isinstance(paths, list) or not paths:
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E020",
+                "execution_scope.paths must be a non-empty array",
+                plane="governance",
+            )
+            continue
+        folded: dict[str, str] = {}
+        for value in paths:
+            issue = _execution_scope_path_issue(value)
+            if issue is not None:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E020",
+                    f"invalid execution scope path {value!r}: {issue}",
+                    plane="governance",
+                )
+                continue
+            key = value.casefold()
+            if key in folded:
+                _add_error(
+                    errors,
+                    artifact,
+                    report_root,
+                    "E020",
+                    f"duplicate or case-ambiguous execution scope path: {value!r}",
+                    plane="governance",
+                )
+            folded[key] = value
+    return errors
+
+
 def validate_decision_assessments(
     artifacts: list[Artifact],
     report_root: Path,
@@ -2081,6 +2173,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         )
         errors.extend(assessment_errors)
         errors.extend(validate_work_order_assurance(artifacts, repository_root))
+        errors.extend(validate_work_order_execution_scope(artifacts, repository_root))
         errors.extend(
             validate_revision_consistency(
                 artifacts,
