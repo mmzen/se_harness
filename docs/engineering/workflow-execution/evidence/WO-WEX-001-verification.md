@@ -167,15 +167,21 @@ The authorized command then atomically changed only `WO-WEX-001` from `in_progre
 
 The public external `se-harness==0.5.0` evaluator then passed `doctor` and review preflight again. Review preflight reported `ready = true`, no diagnostics, the exact governing manifest, and work-order state `implemented`.
 
-### Verification-record preparation compatibility blocker
+### Verification-record preparation authority correction
 
-After exact candidate `72914f72874a9408a844b33f008b741a1eca1444` passed both hosted Engineering Harness runs, both candidate-source lanes, and both candidate-package lanes, `harnessctl capture-verification` prepared a structurally correct WEX-format ready `VREC-WEX-001` using `prepared_at` and `prepared_by` and omitting assurance decision fields.
+After exact candidate `72914f72874a9408a844b33f008b741a1eca1444` passed both hosted Engineering Harness runs, both candidate-source lanes, and both candidate-package lanes, an initial `capture-verification` attempt was incorrectly executed through the checkout candidate. It emitted the new WEX preparation schema, and the released 0.5.0 root correctly rejected that candidate-produced artifact. This was an operator/runtime-selection error, not a released-evaluator schema blocker.
 
-Candidate validation passed, but both hosted released-evaluator preflights failed with `A-E002` because public 0.5.0 requires `verified_at` on every ready VREC. Candidate-source regression also failed where real-repository fixtures deliberately use the released root validator. Candidate-package lanes correctly skipped after their source prerequisites failed.
+The attempted record was removed from the effective branch. Its record-only commit remains recoverable in Git history as negative evidence that candidate source cannot generate authoritative root lifecycle artifacts. No candidate-produced VREC is retained.
 
-No compliant dual-schema record exists: adding legacy `verified_at` would violate approved `SPEC-WEX-001`, which requires ready records to omit verification decision metadata, while using candidate validation as governance authority would violate the released-evaluator boundary. The attempted record was therefore removed from the effective branch rather than misrepresenting preparation as assurance. Its record-only commit remains recoverable in Git history for diagnosis.
+The independently installed public 0.5.0 governor was then invoked with isolated Python and explicit runtime identity constraints:
 
-A valid ready WEX-format verification record requires a staged compatibility release: first ship a released evaluator that accepts preparation provenance without requiring verification decision fields, upgrade this repository to that evaluator through its normal governed path, and only then prepare `VREC-WEX-001` against the still-qualified exact candidate or a newly requalified successor.
+```text
+..\work\se_harness-0.5.0-evaluator-venv\Scripts\python.exe -I -m se_harness identity --role released-evaluator --expected-version 0.5.0 --expected-root ..\work\se_harness-0.5.0-evaluator-venv --checkout-root . --entry-point ..\work\se_harness-0.5.0-evaluator-venv\Scripts\harnessctl.exe --require-isolated-python --require-entry-point
+```
+
+Result: PASS. Module, distribution, template, entry-point, and interpreter origins were all inside the external public-0.5.0 environment and outside the checkout; isolated Python was active, `PYTHONPATH` was absent, and user site was disabled.
+
+Public 0.5.0 intentionally prepares the currently governed legacy-ready VREC shape. The WEX candidate intentionally accepts unchanged legacy records without preparation fields or lifecycle events, as required by `SPEC-WEX-001`; only a future VREC created by a released WEX evaluator uses `prepared_at` and `prepared_by`. The correct next action is therefore to requalify this evidence correction, then use the isolated released 0.5.0 governor to prepare `VREC-WEX-001` against that exact clean candidate.
 
 ### Rejected-requirement negative proof and diff hygiene
 
@@ -204,7 +210,7 @@ Result: PASS. `ready = true`, no diagnostics, exact released evaluator boundary 
 
 ## Remaining verification before assurance decision
 
-- Resolve the released-evaluator schema bootstrap blocker described above through a separately governed compatibility release and repository evaluator upgrade; do not use legacy `verified_at` as preparation metadata.
+- Requalify and commit this authority correction, then prepare `VREC-WEX-001` through the independently installed public 0.5.0 governor against that exact clean candidate.
 - Exercise real symlink/junction escape and native read-only/locked-file behavior on supported hosts that expose those capabilities. The current host denied file-symlink creation; disk-full, denial, interruption, concurrent edit, case collision, rollback success, rollback failure, and cleanup are covered by deterministic injection.
 - Complete accountable product, technical, assurance, repository-owner, and supported-agent usability review of the retained corpus and representative records.
 - Run final candidate/package parity and review preflight after any corrections from those assessments.
