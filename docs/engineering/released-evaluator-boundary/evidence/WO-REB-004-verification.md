@@ -4,9 +4,9 @@
 
 The bounded local C2 implementation for `WO-REB-004` passes its pre-candidate qualification. It provides one contract-bound predecessor-evaluator bootstrap for the first 0.6.0 release record while preserving released 0.5.0 as the operational governor and leaving the normal schema-3 release rule unchanged everywhere else.
 
-The accountable owners approved `REQ-REB-008`, `SPEC-REB-003`, `ARCH-REB-002`, `ADR-REB-002`, `VER-REB-002`, `WO-REB-004`, and `REL-SEH-008`, authorized their `draft -> approved` transitions and the start of `WO-REB-004`, and on 2026-08-21 at `2026-08-21T16:31:42Z` authorized only the canonical-LF correction across those seven records while preserving their statuses and every other scope boundary. The six non-work-order records remain `approved`; `WO-REB-004` remains `in_progress`.
+The accountable owners approved `REQ-REB-008`, `SPEC-REB-003`, `ARCH-REB-002`, `ADR-REB-002`, `VER-REB-002`, `WO-REB-004`, and `REL-SEH-008`, authorized their `draft -> approved` transitions and the start of `WO-REB-004`, and on 2026-08-21 at `2026-08-21T16:31:42Z` authorized only the canonical-LF correction across those seven records while preserving their statuses and every other scope boundary. The six non-work-order records remain `approved`; after exact local and hosted qualification, `WO-REB-004` separately transitioned from `in_progress` to `implemented` at `2026-08-21T17:09:35Z`.
 
-No operational candidate commit, push, credential use, hosted dispatch, VREC or RLS preparation or transition, tag, publication, deployment, maintenance mutation, external-policy change, or root-evaluator upgrade occurred. The stopped untracked `RLS-SEH-008` proposal was excluded from this implementation and every clean-snapshot qualification input and remains unmodified.
+After separate authorization, one local operational replacement-candidate commit containing exactly the 20 reviewed paths was created as `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`. A later exact-ref authorization used the configured Git credential only to create and push `candidate/0.6.0-c2` at that commit and trigger the successful hosted lanes; historical `candidate/0.6.0` did not move. No other push or credential use, VREC or RLS preparation or transition, tag, publication, deployment, maintenance mutation, external-policy change, or root-evaluator upgrade occurred. The stopped untracked `RLS-SEH-008` proposal was excluded from the commit and every clean-snapshot qualification input and remains unmodified.
 
 ## Implemented boundary
 
@@ -79,7 +79,7 @@ The focused tests include closed-parser key/type/order coverage; single-contract
 
 Qualification used a fresh canonical-LF local snapshot that omitted the stopped RLS proposal. Its disposable Git identity is commit `31e92654c04fe150d5c84a057ff1c470da5a3eb3`, tree `be361f948fb7dfe52244ef00c106786e074c96ca`, with `SOURCE_DATE_EPOCH=1787330206`. Candidate-source identities passed on Python 3.14.6 and 3.11.9 with source, distribution, and template origins inside that exact projection, no `PYTHONPATH`, and disabled user site.
 
-This disposable commit is a test fixture only. It is not the operational candidate commit authorized by the release process and does not replace or amend candidate `827b2709292abaa3458bb3b4cac37b582378c585`.
+This disposable commit is a test fixture only and was never an operational candidate. The later authorized replacement candidate is `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`; candidate `827b2709292abaa3458bb3b4cac37b582378c585` remains unchanged as the prior candidate identity.
 
 ## Reproducible distribution evidence
 
@@ -95,7 +95,7 @@ An offline, no-isolation wheel build from the normalized sdist reproduced wheel 
 
 Fresh external candidate-package environments on Python 3.14.6 and 3.11.9 installed that wheel with `--no-deps --no-index`. Both passed isolated `candidate-package` identity with version 0.6.0, the disposable source identity, checkout separation, required launcher, no `PYTHONPATH`, disabled user site, and no diagnostics.
 
-These distribution identities are retained pre-candidate qualification results, not release artifact declarations. A later authorized operational candidate commit necessarily changes the commit-bound projection and requires the release contract's exact-candidate build and evidence replay.
+These distribution identities are retained pre-candidate qualification results, not release artifact declarations. They were not reused as exact-candidate evidence; the separately authorized candidate and its replay are recorded below.
 
 ## Released-evaluator acceptance
 
@@ -108,14 +108,67 @@ Released 0.5.0 accepted the exact disposable wheel on both supported test runtim
 - Python 3.14.6 acceptance manifest SHA-256: `1e2fc9025c9ff7a2a85176525e28437fa705d1ead496a6a983cf5afa736832b7`
 - Python 3.11.9 acceptance manifest SHA-256: `0c5f3b074ad55af1f4fc776fafc407ed34e9ee0e42ff2035509e3dae64616b8c`
 
+## Operational replacement-candidate exact replay
+
+The separately authorized local candidate commit is `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`, tree `0587bfbd364cb7c9423a12bab4c5b23bbd4a3df4`, with `SOURCE_DATE_EPOCH=1787331267`. Its clean LF checkout reported `.engineering-harness.lock` as `i/lf w/lf`, contained the retained pre-candidate evidence, omitted the stopped `RLS-SEH-008`, and had no working-tree changes before qualification.
+
+Exact-candidate qualification results:
+
+| Command or check | Result |
+| --- | --- |
+| Full suite, Python 3.14.6 | PASS: 389 tests in 201.106 seconds; 5 expected Windows privilege/symlink skips |
+| Full suite, Python 3.11.9 | PASS: 389 tests in 205.427 seconds; the same 5 skips |
+| Candidate and released-0.5 formal validation | PASS: 605 artifacts, 2,175 relations, 0 errors, 45 pre-existing maintenance warnings |
+| Released-0.5 review preflight for `WO-REB-004` | PASS: ready, no diagnostics |
+| Release distribution policy | PASS: 0 distribution-bearing records |
+| Candidate-source identity, Python 3.14.6 and 3.11.9 | PASS: exact commit and source/template origins, no `PYTHONPATH`, disabled user site, no diagnostics |
+| Candidate-package identity, Python 3.14.6 and 3.11.9 | PASS: fresh offline installs, exact commit, isolated Python, required launcher, no diagnostics |
+| Released-evaluator identity, Python 3.14.6 and 3.11.9 | PASS: external 0.5.0, exact public wheel, isolated Python, no diagnostics |
+| Released-evaluator doctor | PASS: required, distribution-parity, and managed-integrity checks; 16 pre-existing non-failing `W013` observations |
+| Candidate and released inspection | PASS: 605 artifacts, 2,175 relations, 0 error findings, 45 warnings |
+| Repeated dashboard generation | PASS: identical manifest SHA-256 `933b959f6430cab24914352d26a4e148ef357810a912e36cfa9180d5768a9948` |
+
+Two independent exact-commit exports and builds were byte-identical:
+
+- wheel `se_harness-0.6.0-py3-none-any.whl`: SHA-256 `770d9b43f61ff32e7a4eaa203115610d870491e50291d31f1ac8eb5893a3ccb9`
+- normalized sdist `se_harness-0.6.0.tar.gz`: SHA-256 `552e68871ccc23713253b16f5026a42b8245d3b0353ec5a4d69fdc5d037e8a53`
+- canonical `SHA256SUMS`: SHA-256 `b4665592ed7a288f43f5cc40457bc3b74f442d1fb27fff3f35861ebd08f24282`
+- exact source manifest: SHA-256 `c8f9a85d01da38f68203f4aefd94b728eff01a71ea108502639f316ec1a1b260`
+- bundle JSON: SHA-256 `e6debd62af98deadae8e2fc918392392ce31aee17cbe261df58b1537a9ee515b`
+
+An offline no-isolation build from the normalized exact-candidate sdist reproduced wheel SHA-256 `770d9b43f61ff32e7a4eaa203115610d870491e50291d31f1ac8eb5893a3ccb9` exactly. Repository-wheel and installed-CLI portable-surface scans passed.
+
+Released 0.5.0 accepted that exact wheel on Python 3.14.6 and 3.11.9. Both runs passed all 10 functional and refusal scenarios. The exact acceptance manifest SHA-256 values are:
+
+- Python 3.14.6: `dc61992779a6ce3811d5da70426f3897ece74a9455827cfc6a75baa12ee708e5`
+- Python 3.11.9: `d7a08bd4cc30c91fe9a32c3b06d2ed4032381523af85467414ad74f0a1ed324a`
+
+## Hosted C2 qualification
+
+The separately authorized branch `candidate/0.6.0-c2` was created and pushed at exact candidate `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`. Historical branch `candidate/0.6.0` remained at `827b2709292abaa3458bb3b4cac37b582378c585`. Only the exact new branch ref was pushed.
+
+All push-triggered hosted lanes completed successfully on attempt 1:
+
+| Workflow / job | Public identity | Result |
+| --- | --- | --- |
+| SE Harness Candidate Evidence | workflow `338167728`, run `32506378635`, number `102` | PASS |
+| Candidate source evidence | job `96847357364`, 2026-08-21T17:06:07Z to 17:07:11Z | PASS |
+| Candidate package evidence | job `96847664197`, 2026-08-21T17:07:14Z to 17:07:30Z | PASS |
+| Engineering Harness released-0.5 lane | workflow `331720860`, run `32506378834`, number `402` | PASS |
+| Engineering Harness `validate` | job `96847357765`, 2026-08-21T17:06:08Z to 17:06:23Z | PASS |
+
+Both workflow runs record event `push`, branch `candidate/0.6.0-c2`, and exact head `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`. Public run URLs are `https://github.com/mmzen/se_harness/actions/runs/32506378635` and `https://github.com/mmzen/se_harness/actions/runs/32506378834`.
+
+This exact-replay and hosted-evidence section is a post-candidate update. It remains uncommitted so that candidate identity `b033827cc9f8357a7afb1d82f336c6fe2fc16e26` is preserved pending a separate retention and work-order completion decision.
+
 ## Deviations and residual risks
 
 - The platform checkout smudges LF to CRLF. Initial worktree-based source qualification therefore observed platform-dependent raw bytes. The authorized correction made the intended content identity explicit, and the clean LF projection plus cross-line-ending tests now prove the canonical rule without altering the operational lock.
 - Five full-suite skips on each runtime require Windows privileges or symlink/platform facilities unavailable in this session. Supported non-symlink paths and explicit link/traversal refusal tests passed.
-- The local builds and acceptance manifests are bound to a disposable pre-candidate projection. They must not be reused as exact-candidate release evidence.
-- Hosted lanes were not run because hosted dispatch is outside the current authority. No external-service, OIDC, protected-environment, or publication behavior is claimed.
+- The disposable pre-candidate build and acceptance identities remain historical and were not reused. Exact-candidate identities are separately retained above.
+- Hosted candidate-source, candidate-package, and released-0.5 evaluator lanes passed. They do not exercise release publication, OIDC, protected release environments, Pages deployment, or post-publication behavior, so none of those outcomes is claimed.
 - The binder cannot be exercised against a real `RLS-SEH-009` until released 0.5.0 is separately authorized to prepare that record. Closed synthetic graph and external-evaluator tests cover plan/apply behavior without creating or transitioning an RLS here.
 
 ## Next accountable action
 
-Review this retained local C2 evidence. A separate authorization is required before creating an operational replacement candidate commit. After such a commit, repeat exact-candidate source, distribution, released-evaluator acceptance, and evidence replay before any hosted dispatch or aggregate assurance work. No VREC/RLS, push, tag, publication, deployment, maintenance, or root-evaluator action is implied.
+Separately authorize bounded preparation of aggregate `VREC-SEH-009` for exact candidate `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`, the exact nine-work-order set, the original six verification contracts, and `VER-REB-002`. Any further push, VREC transition, RLS preparation or transition, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator action requires separate authority.

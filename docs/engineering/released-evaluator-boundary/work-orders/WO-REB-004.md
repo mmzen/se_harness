@@ -2,7 +2,7 @@
 id = "WO-REB-004"
 type = "work_order"
 title = "Implement and requalify the predecessor-evaluator bootstrap"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-21T15:40:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-21T17:09:35Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement and requalify the predecessor-evaluator bootstrap
 
 ## Lifecycle
 
-The accountable owners approved this work order and started its bounded local implementation on 2026-08-21. The authorization covers the exact contract-bound predecessor-evaluator bootstrap and local C2 implementation/qualification scope below. It does not authorize a candidate commit, branch movement, VREC/RLS preparation or transition, tag, publication, deployment, maintenance mutation, credential use, hosted dispatch, external policy change, or root-evaluator upgrade.
+Bounded implementation is complete at candidate `b033827cc9f8357a7afb1d82f336c6fe2fc16e26`, with local and hosted qualification retained at `docs/engineering/released-evaluator-boundary/evidence/WO-REB-004-verification.md`. This implemented state does not prepare or transition a VREC or RLS and does not authorize another push, tag, publication, deployment, maintenance mutation, credential use, external policy change, or root-evaluator upgrade.
 
 ## Objective
 
@@ -124,4 +130,4 @@ Report the exact bootstrap tuple and trust direction, changed surfaces, zero-wri
 
 ## Canonical-LF correction
 
-The accountable owners authorized the bounded correction on 2026-08-21 at `2026-08-21T16:31:42Z`. Local implementation and qualification now bind canonical `utf8-text-lf-v1` lock SHA-256 `08441ec0b4825db4c017ce4169f23092162995ff06476004d267f0671c7443b3`. This work order remains `in_progress`; every other scope and authority boundary is preserved.
+The accountable owners authorized the bounded correction on 2026-08-21 at `2026-08-21T16:31:42Z`. Local implementation and qualification bind canonical `utf8-text-lf-v1` lock SHA-256 `08441ec0b4825db4c017ce4169f23092162995ff06476004d267f0671c7443b3`. The separately authorized local and hosted qualification completed successfully, and the work order transitioned from `in_progress` to `implemented` at `2026-08-21T17:09:35Z`; every other scope and authority boundary is preserved.
