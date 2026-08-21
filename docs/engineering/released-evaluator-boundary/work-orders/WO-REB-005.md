@@ -2,7 +2,7 @@
 id = "WO-REB-005"
 type = "work_order"
 title = "Enforce LF-stable evaluator evidence and qualify successor candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-21T17:48:51Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-21T21:41:30Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Enforce LF-stable evaluator evidence and qualify successor candidate
 
 ## Lifecycle
 
-Approved and started for bounded local implementation and qualification. This state does not permit a candidate commit, branch push, credentials, hosted dispatch, VREC/RLS preparation or transition, tag, publication, deployment, maintenance mutation, external-policy change, or root-evaluator upgrade.
+Bounded implementation is complete at exact candidate `2ab1c1fffd2c0a2f462e7affcb9ea6f426b202e5`, with local and hosted qualification retained at `docs/engineering/released-evaluator-boundary/evidence/WO-REB-005-verification.md`. This implemented state does not prepare or transition a VREC or RLS and does not authorize another push, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator upgrade.
 
 ## Objective
 
