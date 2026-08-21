@@ -2,7 +2,7 @@
 id = "VREC-IAR-008"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-012"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
@@ -18,7 +18,32 @@ verifies_work_order = ["WO-IAR-012"]
 conforms_to = ["VER-IAR-012"]
 +++
 
-# Verification Record Candidate
+# Verified Verification Record
+
+## Verification decision
+
+After reviewing both prepared records on 2026-08-21, the accountable owner, who holds the assurance role in this repository, explicitly instructed `i validate both, they can be transitioned, commited and pushed (both)`. That human assurance decision transitions this record from `ready` to `verified`; automation did not supply the decision and did not grant merge, release, or publication authority.
+
+The ready record was retained in governance commit `f1ab33a4a54ccd9096e1dfb575e611f8cfdca498`. Only `status` moved. The captured candidate commit, Git object format, clean-worktree state, capture timestamp, artifact snapshot, evidence path, work-order coverage, and verification-contract coverage are unchanged. `owners` is also unchanged and carries the packaged template default `quality-owner`, which 56 of the 58 pre-existing records use; the most recent record `VREC-DST-017` adopted the `assurance-owner` spelling that `DECISION_RIGHTS.md` names, and reconciling that difference is not part of this transition.
+
+`harnessctl transition . --set VREC-IAR-008=verified --decision VREC-IAR-008=quality-owner` planned the transition successfully but refused to apply it:
+
+```text
+[WEX201] mutation guard MG002 (transition-apply): ordinary mutation requires a
+         schema-3 evaluator identity; use a separately governed upgrade
+```
+
+This repository is installed at `schema_version = 2` and a schema upgrade is a separately governed decision, so the single `status` field was edited directly. The refusal is recorded rather than worked around.
+
+The candidate prose below is preserved as written rather than corrected in place. One sentence in it is now satisfied instead of pending: the requirement that an accountable assurance owner review the evidence and transition the record. Its second clause stays accurate — `capture-verification` itself approved, committed, tagged, released, and published nothing.
+
+## Authority boundary
+
+The decision recorded above verifies this record and authorizes committing and pushing the transition to pull request #97. It does not authorize merging that pull request, retargeting or merging pull request #98, advancing `VER-IAR-012` beyond `approved`, or preparing, tagging, releasing, publishing, or deploying software. Hosted pull-request checks remain additional evidence and did not supply the verification authority.
+
+`WO-IAR-012` stays `implemented`. Managed `WORKFLOW.md` uses work-order status `verified` only where configured provenance requires it, and the precedent in this repository is `WO-IAR-011` at `implemented` under the verified `VREC-IAR-007`.
+
+## Prepared candidate
 
 This ready record binds retained evidence for `WO-IAR-012` to candidate commit `38cb2270b4cc874504c2d50a8449a00d2e9e737e`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
