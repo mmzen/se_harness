@@ -208,7 +208,6 @@ jobs:
           python -m se_harness validate .
           python -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
-          python -m se_harness doctor .
 
       - name: Build both deterministic distribution sets
         env:

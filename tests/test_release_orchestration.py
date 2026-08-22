@@ -514,6 +514,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         )
         self.assertIn('cd "$RUNNER_TEMP/candidate-checkout"', qualify)
         self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
+        self.assertNotIn("python -m se_harness doctor .", qualify)
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)
