@@ -506,6 +506,8 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         pypi = self.workflow.split("  pypi:\n", 1)[1].split("  pages_build:\n", 1)[0]
         self.assertNotIn("contents: write", qualify)
         self.assertNotIn("id-token: write", qualify)
+        self.assertIn("python -m se_harness validate .", qualify)
+        self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)
