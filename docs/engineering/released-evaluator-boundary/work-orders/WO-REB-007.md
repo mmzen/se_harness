@@ -2,7 +2,7 @@
 id = "WO-REB-007"
 type = "work_order"
 title = "Implement hosted predecessor assessment and portable failure injection"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T07:15:03Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T16:24:55Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement hosted predecessor assessment and portable failure injection
 
 ## Lifecycle
 
-The accountable owners approved the seven-artifact corrective packet and started this work order for bounded local implementation and qualification. Candidate commit, branch/credentials, hosted dispatch, lifecycle disposition, VREC/RLS preparation or transition, tag, publication, deployment, maintenance mutation, external-policy change, and root-evaluator upgrade remain separate accountable actions.
+Bounded implementation is complete at exact candidate `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798`, with local and hosted qualification retained at `docs/engineering/released-evaluator-boundary/evidence/WO-REB-007-corrective-proposal.md`. This implemented state leaves `WO-REB-006` in progress and does not prepare or transition a VREC or RLS, change a release-contract status, or authorize another push, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator upgrade.
 
 ## Objective
 
