@@ -2,7 +2,7 @@
 id = "WO-REB-012"
 type = "work_order"
 title = "Pin the released distribution build backend"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T20:29:31Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T20:46:44Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Pin the released distribution build backend
 
 ## Lifecycle
 
-This bounded corrective work is in progress under the repository owner's explicit authority to finalize release 0.6.0. Commit-bound assurance remains required before publication resumes.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-012-build-toolchain.md`. Commit-bound assurance remains required before publication resumes.
 
 ## Objective
 

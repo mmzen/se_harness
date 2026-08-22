@@ -24,4 +24,17 @@ This proves the released bytes and record are internally consistent and isolates
 
 ## Corrective qualification
 
-Pending exact implementation-candidate qualification and commit-bound verification.
+Corrective candidate `e02474cea8f7b505093329528315924b950109ee` contains exactly four paths: the trusted publication workflow, its release-orchestration regression test, `WO-REB-012`, and this evidence path. The stopped untracked `RLS-SEH-008` is absent. A clean exact-commit clone produced these results:
+
+- exact retained-toolchain C6 wheel and normalized-sdist hashes matched `RLS-SEH-012` byte-for-byte;
+- focused release-workflow policy: 5 tests passed;
+- complete release-orchestration module: 22 tests passed;
+- complete isolated suite: 452 tests passed with seven declared platform skips in 207.936 seconds;
+- complete current-semantics graph: 661 artifacts, zero errors, 50 maintenance warnings;
+- exact released-distribution validation: passed with one distribution-bearing record;
+- portable release surface, diff whitespace, and clean-checkout checks: passed;
+- candidate selection, Git worktree checkout, two independent builds, normalized-sdist comparison, bundle binding, resolver predecessor view, and all downstream privilege dependencies: unchanged.
+
+Two preliminary full-suite invocations accurately rejected ambient process contamination: one detected an installed external `se-harness` distribution with `RID018`; another rejected sandbox-injected wildcard Git configuration. The final run used an isolated Python environment with no installed package and no inherited Git configuration. The relevant identity and predecessor modules passed under their intended fail-closed environment, and no product correction was required for those observations.
+
+At closeout C6 `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798`, `v0.6.0`, released `RLS-SEH-012`, distribution bytes, rejected history, the schema-2 root evaluator, and external policy remain unchanged. No publication credential, GitHub Release, PyPI file, Pages deployment, maintenance-line mutation, tag movement, root mutation, or distribution replacement occurred. A later commit-bound VREC must be accepted before this correction is pushed and publication resumes.
