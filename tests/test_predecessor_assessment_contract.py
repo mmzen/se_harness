@@ -21,6 +21,8 @@ class PredecessorAssessmentContractTests(unittest.TestCase):
         self.assertIn("actions/checkout@v4", content)
         self.assertIn("actions/setup-python@v5", content)
         self.assertIn("actions/upload-artifact@v4", content)
+        self.assertEqual(2, content.count("if: always()"))
+        self.assertIn('cat "$RUNNER_TEMP/predecessor-assessment-plan.json"', content)
         self.assertIn('SE_HARNESS_VERSION: "0.5.0"', content)
         self.assertIn(
             'SE_HARNESS_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"',

@@ -131,6 +131,101 @@ class PredecessorPreparationTests(unittest.TestCase):
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
+    @unittest.skipIf(os.name == "nt", "POSIX virtualenv interpreters use terminal links")
+    def test_external_interpreter_preserves_posix_virtualenv_link(self) -> None:
+        import venv
+
+        evaluator = Path(self.temporary.name) / "posix-evaluator"
+        venv.EnvBuilder(with_pip=False, symlinks=True).create(evaluator)
+        interpreter = evaluator / "bin" / "python"
+        self.assertTrue(interpreter.is_symlink())
+
+        selected = PREPARATION._ordinary_external_interpreter(
+            interpreter, "evaluator interpreter", self.root
+        )
+
+        self.assertEqual(interpreter.absolute(), selected)
+        self.assertEqual(evaluator.resolve(), selected.parent.parent.resolve())
+        self.assertNotEqual(interpreter.resolve(), selected)
+
+        entry_point = evaluator / "bin" / "harnessctl"
+        entry_point.write_bytes(b"entry point\n")
+        module = (
+            evaluator
+            / "lib"
+            / "python-test"
+            / "site-packages"
+            / "se_harness"
+            / "runtime_identity.py"
+        )
+        distribution = module.parents[1]
+        templates = (
+            evaluator
+            / "share"
+            / "se-harness"
+            / "templates"
+            / "repository"
+            / "standard"
+        )
+        module.parent.mkdir(parents=True)
+        module.write_bytes(b"runtime identity\n")
+        templates.mkdir(parents=True)
+        identity = {
+            "candidate_commit": None,
+            "checkout_root": str(self.root.resolve()),
+            "diagnostics": [],
+            "distribution_origin": str(distribution.resolve()),
+            "entry_point_origin": str(entry_point.resolve()),
+            "expected_root": str(evaluator.resolve()),
+            "harness_version": "0.5.0",
+            "isolated_python": True,
+            "module_origin": str(module.resolve()),
+            "passed": True,
+            "python_executable": str(interpreter.absolute()),
+            "pythonpath_present": False,
+            "role": "released-evaluator",
+            "schema": "se-harness-runtime-identity-v2",
+            "template_origin": str(templates.resolve()),
+            "user_site_enabled": False,
+        }
+        result = subprocess.CompletedProcess([], 0, b"", b"")
+        evidence = ASSESSMENT._identity_evidence(
+            identity,
+            ["--expected-root", str(evaluator.resolve()), "--entry-point", str(entry_point)],
+            result,
+            checkout_root=self.root.resolve(),
+            checkout_marker="<candidate-root>",
+            evaluator_root=evaluator.resolve(),
+        )
+        self.assertEqual(0, evidence["returncode"])
+
+    @unittest.skipIf(os.name == "nt", "POSIX link rejection coverage")
+    def test_external_interpreter_rejects_linked_environment_parent(self) -> None:
+        evaluator = Path(self.temporary.name) / "linked-evaluator"
+        real_bin = Path(self.temporary.name) / "real-bin"
+        real_bin.mkdir()
+        (real_bin / "python").write_bytes(b"python\n")
+        evaluator.mkdir()
+        (evaluator / "bin").symlink_to(real_bin, target_is_directory=True)
+
+        with self.assertRaisesRegex(
+            PREPARATION.PredecessorPreparationError,
+            "environment must not traverse a link",
+        ):
+            PREPARATION._ordinary_external_interpreter(
+                evaluator / "bin" / "python", "evaluator interpreter", self.root
+            )
+
+        linked_wheel = Path(self.temporary.name) / "linked-wheel.whl"
+        linked_wheel.symlink_to(self.wheel)
+        with self.assertRaisesRegex(
+            PREPARATION.PredecessorPreparationError,
+            "must be an ordinary external file",
+        ):
+            PREPARATION._ordinary_external(
+                linked_wheel, "evaluator wheel", self.root
+            )
+
     def git(self, *arguments: str) -> str:
         completed = subprocess.run(
             ["git", "-C", str(self.root), *arguments],

@@ -26,13 +26,13 @@ gates = ["WO-DST-019", "WO-DST-020", "WO-DST-021", "WO-IAR-012", "WO-WEX-001", "
 
 ## Lifecycle and prerequisites
 
-This draft grants no authority. C4 `b099a2728d945ee705c1f956ec012f9730df15ac`, governance commit `39fac46b009727529b6b65f5d8e63972155b0590`, branch `candidate/0.6.0-c4`, and hosted runs `32558379907`/`32558379908` remain accurate failed qualification history. `REL-SEH-010` remains approved until separately dispositioned; reserved but uncreated `VREC-SEH-011` and `RLS-SEH-011` are never synthesized or repointed.
+This draft grants no authority. C4 `b099a2728d945ee705c1f956ec012f9730df15ac`, governance commit `39fac46b009727529b6b65f5d8e63972155b0590`, branch `candidate/0.6.0-c4`, and hosted runs `32558379907`/`32558379908` remain accurate failed qualification history. C5 `5653cb52e729ad5d48683bc7e28ee3f0478e2e2c`, branch `candidate/0.6.0-c5`, successful candidate-evidence run `32562498151`, expected-red legacy run `32562498162`, and failed predecessor-assessment run `32562498180` are also immutable history. `REL-SEH-010` remains approved until separately dispositioned; reserved but uncreated `VREC-SEH-011` and `RLS-SEH-011` are never synthesized or repointed.
 
-A future C5 must implement and qualify the corrective packet before the release owner may reject `REL-SEH-010` and consider this contract for approval. No prior candidate, contract, aggregate, release record, evidence, branch, or external fact is rewritten.
+C5 implemented the initial `WO-REB-007` correction but the first real POSIX virtual-environment assessment exposed lexical interpreter-root handling that the Windows and mocked-path tests did not exercise. A future C6 must complete and qualify the same still-`in_progress` work order before the release owner may reject `REL-SEH-010` and consider this contract for approval. No prior candidate, contract, aggregate, release record, evidence, branch, or external fact is rewritten.
 
 ## Release unit
 
-One future successor candidate C5 for version `0.6.0`, containing C4 ancestry plus only approved `WO-REB-007` correction. The proposed release aggregate is fourteen work orders: the thirteen exact work orders from `REL-SEH-010` plus `WO-REB-007`.
+One future successor candidate C6 for version `0.6.0`, containing C5 ancestry plus only the bounded completion of approved `WO-REB-007`. The proposed release aggregate remains fourteen work orders: the thirteen exact work orders from `REL-SEH-010` plus `WO-REB-007`.
 
 The future aggregate is `VREC-SEH-012`, with fourteen work orders, fifteen keyed evidence paths, and thirteen verification contracts. `WO-REB-007` adds one keyed evidence path and `VER-REB-005`. The proposed release record is `RLS-SEH-012`.
 
@@ -42,10 +42,11 @@ Historical maintenance `WO-HUP-001`, documentation `WO-RCA-001`, and governance-
 
 - Complete `VER-REB-005` exact-diagnostic, assessment-view, Git/path/object, runtime, canonical-evidence, cleanup, and workflow evidence.
 - Immutable C4 failure evidence: Engineering Harness run `32558379907`, job `96996045728`; Candidate Evidence run `32558379908`, source job `96996045654`, skipped package job `96996119243`.
-- Exact C5 commit/tree/epoch/archive, reproducible wheel/sdist/bundle/source/checksum identities, dual-runtime candidate acceptance, and hosted run/job/artifact identities.
-- The prior thirteen-work-order/fourteen-path/twelve-contract evidence replayed against C5, plus the new `WO-REB-007` path and `VER-REB-005`.
+- Immutable C5 commit/tree/branch plus exact hosted run/job/log identities, including the green source/package jobs, exact expected legacy `E009`, and failed POSIX predecessor-assessment boundary.
+- Exact C6 commit/tree/epoch/archive, reproducible wheel/sdist/bundle/source/checksum identities, dual-runtime candidate acceptance, and hosted run/job/artifact identities.
+- The prior thirteen-work-order/fourteen-path/twelve-contract evidence replayed against C6, plus the same `WO-REB-007` path and `VER-REB-005`; no work-order, evidence-path, or verification-contract count is added for completing already-governed portability scope.
 - Exact released-0.5 interpreter, entry point, wheel/payload, schema-2 lock, full-checkout `E009`, assessment-view commands/output, omitted blob/raw hashes, and complete candidate graph.
-- Proof that C1-C4 candidates, VRECs, RLS records, contracts, rejected history/evidence, root managed files, maintenance state, and external policy remain unchanged.
+- Proof that C1-C5 candidates, VRECs, RLS records, contracts, rejected history/evidence, root managed files, maintenance state, and external policy remain unchanged.
 
 ## Compatibility and migration
 
@@ -59,7 +60,7 @@ Historical maintenance `WO-HUP-001`, documentation `WO-RCA-001`, and governance-
 ## Security and provenance
 
 - Treat Git, paths, sparse state, workflow context, logs, artifacts, evaluator bytes, commands, JSON, hashes, locks, and environments as untrusted.
-- Require exact agreement among C5, source governance, rejected history, evaluator, old lock, contract, work set, VREC, RLS, assessment/preparation/evaluator/distribution evidence, builds, and hosted observations.
+- Require exact agreement among C6, source governance, rejected history, evaluator, old lock, contract, work set, VREC, RLS, assessment/preparation/evaluator/distribution evidence, builds, and hosted observations.
 - Exact expected-red matching accepts no other diagnostic and grants no authority.
 - Stop before writes or credentials on ambiguity, contamination, drift, partial output, unsafe cleanup, or provenance disagreement.
 
@@ -67,7 +68,7 @@ Historical maintenance `WO-HUP-001`, documentation `WO-RCA-001`, and governance-
 
 1. Review and approve or revise `REQ-REB-013`, `REQ-REB-014`, `SPEC-REB-006`, `ARCH-REB-005`, `ADR-REB-005`, `VER-REB-005`, and `WO-REB-007`; keep this contract draft.
 2. Start and implement only `WO-REB-007`; retain complete local evidence while `WO-REB-006` remains in progress.
-3. Separately authorize one clean C5 candidate commit and complete exact local Windows/Python-3.11 qualification and reproducible builds.
+3. Separately authorize one clean C6 candidate commit and complete exact local Windows/Python-3.11 qualification and reproducible builds.
 4. Separately disposition `REL-SEH-010`, prove the complete graph valid, and only then consider this contract for approval.
 5. Separately authorize a dedicated candidate branch/credential use. Require green candidate-source/package and predecessor-assessment jobs plus the exact expected legacy `E009`; no other hosted failure is acceptable.
 6. Separately transition `WO-REB-006` and `WO-REB-007` only after complete local and hosted evidence.

@@ -177,10 +177,16 @@ def _released_identity(
     for field, expected in exact_paths.items():
         value = identity.get(field)
         try:
-            observed = Path(value).resolve(strict=True) if isinstance(value, str) else None
+            if field == "python_executable" and isinstance(value, str):
+                observed = Path(os.path.abspath(value))
+                expected_path = Path(os.path.abspath(expected))
+            else:
+                observed = Path(value).resolve(strict=True) if isinstance(value, str) else None
+                expected_path = expected.resolve(strict=True)
         except OSError:
             observed = None
-        if observed != expected.resolve(strict=True):
+            expected_path = None
+        if observed != expected_path:
             raise PredecessorAssessmentError(f"released-evaluator identity {field} differs")
     for field in ("module_origin", "distribution_origin", "template_origin"):
         value = identity.get(field)
@@ -195,6 +201,29 @@ def _released_identity(
     return identity, arguments, result
 
 
+def _normalize_interpreter_origin(path: Path, evaluator_root: Path) -> str:
+    """Normalize a verified interpreter without dereferencing its venv link."""
+
+    lexical = Path(os.path.abspath(path))
+    try:
+        root = evaluator_root.resolve(strict=True)
+        relative = lexical.relative_to(root)
+    except (OSError, ValueError) as exc:
+        raise PredecessorAssessmentError(
+            "released-evaluator interpreter origin is outside its declared root"
+        ) from exc
+    if (
+        not relative.parts
+        or not lexical.is_file()
+        or bootstrap._path_has_link(lexical.parent)
+        or (bootstrap._path_has_link(lexical) and not lexical.is_symlink())
+    ):
+        raise PredecessorAssessmentError(
+            "released-evaluator interpreter origin is not a safe environment entry point"
+        )
+    return f"<evaluator-root>/{relative.as_posix()}"
+
+
 def _identity_evidence(
     identity: dict[str, Any],
     arguments: list[str],
@@ -207,8 +236,10 @@ def _identity_evidence(
     normalized = dict(identity)
     normalized["checkout_root"] = checkout_marker
     normalized["expected_root"] = "<evaluator-root>"
+    normalized["python_executable"] = _normalize_interpreter_origin(
+        Path(identity["python_executable"]), evaluator_root
+    )
     for field in (
-        "python_executable",
         "module_origin",
         "distribution_origin",
         "template_origin",
@@ -436,7 +467,7 @@ def assess_predecessor_evaluator(
     history = preparation._derive_history(
         root, catalog, contract.version, source_commit, object_format
     )
-    python = preparation._ordinary_external(
+    python = preparation._ordinary_external_interpreter(
         evaluator_python, "evaluator interpreter", root
     )
     entry_point = preparation._ordinary_external(

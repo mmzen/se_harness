@@ -179,8 +179,11 @@ def _ordinary_root(repository: Path) -> Path:
 
 
 def _ordinary_external(path: Path, label: str, root: Path) -> Path:
+    lexical = Path(os.path.abspath(path))
+    if bootstrap._path_has_link(lexical):
+        raise PredecessorPreparationError(f"{label} must be an ordinary external file")
     try:
-        candidate = path.resolve(strict=True)
+        candidate = lexical.resolve(strict=True)
     except OSError as exc:
         raise PredecessorPreparationError(f"{label} does not exist") from exc
     if not candidate.is_file() or bootstrap._path_has_link(candidate):
@@ -190,6 +193,43 @@ def _ordinary_external(path: Path, label: str, root: Path) -> Path:
     except ValueError:
         return candidate
     raise PredecessorPreparationError(f"{label} must be outside the repository")
+
+
+def _ordinary_external_interpreter(path: Path, label: str, root: Path) -> Path:
+    """Validate an external interpreter while preserving its virtualenv path.
+
+    POSIX virtual environments normally expose ``bin/python`` as a terminal
+    symbolic link. Resolving that link before deriving the evaluator root
+    escapes the virtual environment and loses its installed package context.
+    Parent links remain forbidden, as do interpreter targets inside the source
+    checkout; only the final interpreter link is accepted.
+    """
+
+    lexical = Path(os.path.abspath(path))
+    if bootstrap._path_has_link(lexical.parent):
+        raise PredecessorPreparationError(
+            f"{label} environment must not traverse a link"
+        )
+    try:
+        target = lexical.resolve(strict=True)
+    except OSError as exc:
+        raise PredecessorPreparationError(f"{label} does not exist") from exc
+    if (
+        not lexical.is_file()
+        or not target.is_file()
+        or bootstrap._path_has_link(target)
+        or (bootstrap._path_has_link(lexical) and not lexical.is_symlink())
+    ):
+        raise PredecessorPreparationError(
+            f"{label} must be an ordinary file or terminal interpreter link"
+        )
+    for candidate in (lexical, target):
+        try:
+            candidate.relative_to(root)
+        except ValueError:
+            continue
+        raise PredecessorPreparationError(f"{label} must be outside the repository")
+    return lexical
 
 
 def _normalized_unique(values: Iterable[str], label: str) -> tuple[str, ...]:
@@ -631,7 +671,9 @@ def _prepare(
         tag=tag,
     )
     history = _derive_history(root, catalog, version, source_commit, object_format)
-    python = _ordinary_external(evaluator_python, "evaluator interpreter", root)
+    python = _ordinary_external_interpreter(
+        evaluator_python, "evaluator interpreter", root
+    )
     entry_point = _ordinary_external(evaluator_entry_point, "evaluator entry point", root)
     wheel = _ordinary_external(evaluator_wheel, "evaluator wheel", root)
     if wheel.name != contract.evaluator_archive_name or bootstrap._sha256_file(wheel) != contract.evaluator_archive_sha256:
@@ -944,7 +986,9 @@ def _existing_preparation(
     predecessor_digest = output.get("predecessor_record_sha256") if isinstance(output, dict) else None
     if predecessor_digest != _sha256(predecessor_raw):
         raise PredecessorPreparationError("existing predecessor output digest differs")
-    python = _ordinary_external(evaluator_python, "evaluator interpreter", root)
+    python = _ordinary_external_interpreter(
+        evaluator_python, "evaluator interpreter", root
+    )
     entry_point = _ordinary_external(evaluator_entry_point, "evaluator entry point", root)
     wheel = _ordinary_external(evaluator_wheel, "evaluator wheel", root)
     if wheel.name != contract.evaluator_archive_name or bootstrap._sha256_file(wheel) != contract.evaluator_archive_sha256:

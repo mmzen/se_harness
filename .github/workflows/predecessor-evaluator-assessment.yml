@@ -46,6 +46,7 @@ jobs:
       - name: Assess the complete candidate and exact predecessor view
         shell: bash
         run: |
+          set +e
           python -S scripts/assess_predecessor_evaluator.py \
             --repository . \
             --candidate-commit "$GITHUB_SHA" \
@@ -55,12 +56,18 @@ jobs:
             --evaluator-wheel "$RUNNER_TEMP/released-wheel/$SE_HARNESS_WHEEL" \
             --output "$RUNNER_TEMP/predecessor-assessment.json" \
             --apply --json > "$RUNNER_TEMP/predecessor-assessment-plan.json"
+          assessment_status=$?
+          set -e
+          cat "$RUNNER_TEMP/predecessor-assessment-plan.json"
+          exit "$assessment_status"
       - name: Prove assessment made no checkout change
+        if: always()
         shell: bash
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: predecessor-evaluator-assessment
           path: |
