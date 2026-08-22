@@ -39,6 +39,39 @@ The first exact local packaging replay proved the adapter and generator but the 
 - normalized sdist SHA-256: `9493aa40ffbaf021edd205d6c302d67d11975bc057f73ba09b91043a9a51bbe4`
 - released root evaluator: immutable 0.5 schema-2
 
-## Pending exact qualification
+## Exact corrective qualification
 
-Exact candidate commit identity, retained-view replay, dashboard package result, full suite, graph/distribution/portable checks, commit-bound assurance, trusted-main integration, hosted Pages recovery, public endpoint verification, and final reconciliation will be added after they occur. No result is inferred from this pre-candidate review.
+Corrective implementation commit `a744c5f2954ac5c3783a2cefdc8ab6a3e86c31ce` contains exactly the nine reviewed paths above. A fresh detached clone at that commit was clean, excluded the stopped `RLS-SEH-008`, and produced:
+
+- focused adapter and publication-policy regression: 50 tests passed;
+- complete isolated suite: 452 tests passed with seven declared platform skips in 216.379 seconds;
+- complete current graph: 669 artifacts, zero errors, 50 maintenance warnings;
+- released-distribution validation: passed with one distribution-bearing record;
+- portable repository release surface: passed;
+- commit whitespace and detached-checkout cleanliness: passed.
+
+The first non-isolated suite observation produced only `RID018` because a user-level editable distribution resolved outside the clone. Its focused test passed in a fresh no-system-packages environment, and the complete isolated suite then passed as recorded above. This is retained environmental evidence, not a waived product result.
+
+## Exact released-evaluator and Pages replay
+
+Trusted adapter code from `a744c5f2954ac5c3783a2cefdc8ab6a3e86c31ce` was run against immutable release-integration governance commit `c37ec5af43234ce66c518aa58355ec05c7b8aa21`, matching the hosted workflow boundary. Released evaluator wheel SHA-256 `974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f` and installed payload SHA-256 `d247cc48213b49be52345fcadbf2d93355e5ea7ef15b32014d9fc5010458a2bc` matched retained evidence.
+
+- complete current release graph: 647 artifacts, zero errors, 50 warnings;
+- exact predecessor view: 645 artifacts, zero errors, 49 warnings;
+- exact omissions: rejected `REL-SEH-008` and rejected `RLS-SEH-009`, with the retained Git blobs and raw hashes;
+- canonical sparse-spec SHA-256: `448159eec515975b9e7e946bed2653dbd6811dc4c06fd7b9e9d3a3facbd00332`;
+- canonical observation SHA-256: `5e9361f2ff5b5bcadd38336be6fc252cd89f3c8d53ad6a9c9fdf315c84458e63`;
+- source, tag, rejected history, and retained checkout status: unchanged and clean.
+
+Generating from the retained canonical `governance` checkout passed with 645 artifacts, 2,363 relations, zero errors, and 59 derived warnings. Exact package attestation passed with:
+
+- bundle manifest SHA-256: `e351728a72412aa148257e8a25af5d990f07ee4de13b6f80f600e9e7e8e50f25`;
+- generated dashboard SHA-256: `611b8aff0d530196cebdba027a6c6b54f21457c946ba22feaefeba5d1399d57d`;
+- generation summary SHA-256: `adc1cb24d3fa185cc7c36c1e83ef05c48efb62f0a67c59193005da2920cb0f4f`;
+- published dashboard SHA-256: `e11ea2a2203d0cdf123b7a719669b295841ffe7cb087945c24a9e63b148ce4cd`.
+
+The local Windows replay required a shorter external temporary path to avoid MAX_PATH while materializing a tracked feature file. The hosted Ubuntu runner uses its existing short runner-temp path and does not share that platform limitation.
+
+## Pending gates
+
+Commit-bound assurance, trusted-main integration, hosted standalone Pages recovery, public endpoint verification, and final reconciliation remain pending. No hosted result is inferred from local success.

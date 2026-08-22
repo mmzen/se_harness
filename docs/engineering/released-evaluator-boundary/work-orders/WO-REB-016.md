@@ -2,7 +2,7 @@
 id = "WO-REB-016"
 type = "work_order"
 title = "Retain the proven predecessor view for Pages generation"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T21:28:01Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T21:57:58Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Retain the proven predecessor view for Pages generation
 
 ## Lifecycle
 
-This bounded post-release correction is in progress under the repository owner's authorization to finalize release 0.6.0. Commit-bound assurance remains required before trusted-main integration and Pages recovery.
+This bounded post-release correction is implemented with exact qualification retained in `../evidence/WO-REB-016-pages-generation-view.md`. Commit-bound assurance remains required before trusted-main integration and Pages recovery.
 
 ## Objective
 
