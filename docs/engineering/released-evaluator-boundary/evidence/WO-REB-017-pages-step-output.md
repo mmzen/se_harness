@@ -23,6 +23,19 @@ The standalone workflow retains the same plan resolver and exact input compariso
 
 The stopped untracked `RLS-SEH-008` remains excluded and unchanged at SHA-256 `eea7a9953767e6b817754a517db72a2484561462fce1c9e440c5e5d1501a75fc`.
 
-## Pending exact qualification
+## Exact corrective qualification
 
-Exact corrective commit identity, complete qualification, commit-bound assurance, trusted-main integration, hosted recovery, and public endpoint reconciliation remain pending. No hosted result is inferred from focused local success.
+Corrective commit `82fede2563e058529d9bcd7ece58a5fc551d45a0` contains exactly the six reviewed paths above. A canonical-LF detached clone at that commit was clean and produced:
+
+- focused dashboard/release workflow policy: 44 tests passed;
+- complete isolated suite: 452 tests passed with seven declared platform skips in 209.582 seconds;
+- complete current graph: 671 artifacts, zero errors, 50 maintenance warnings;
+- released-distribution validation: passed with one distribution-bearing record;
+- portable repository release surface: passed;
+- commit whitespace and detached-checkout cleanliness: passed.
+
+Review confirmed the failed run's release plan resolved the exact `RLS-SEH-012` identities and only the same-step output consumption caused the stop. The new assertion is a distinct unprivileged step immediately after the producer. The release publication workflow has exactly one `pages-predecessor-view` parent creation, inside `pages_build`, and none in `resolve`.
+
+## Pending gates
+
+Commit-bound assurance, trusted-main integration, hosted standalone recovery, and public endpoint reconciliation remain pending. No hosted result is inferred from local success.
