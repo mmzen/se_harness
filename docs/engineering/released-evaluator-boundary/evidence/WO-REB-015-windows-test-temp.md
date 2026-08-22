@@ -8,4 +8,15 @@ The correction creates a dedicated directory beneath normalized `D:\a\_temp`, co
 
 ## Corrective qualification
 
-Pending exact implementation-candidate qualification and commit-bound verification.
+Corrective candidate `e51c0adb8eded412d78771a771980efc86194e6a` contains exactly four paths: the trusted workflow, its regression test, `WO-REB-015`, and this evidence. The stopped untracked `RLS-SEH-008` is absent. The complete C6 test command remains unchanged; the workflow adds only a dedicated long-path temporary directory and identical `TEMP`/`TMP` exports before tool installation and test execution.
+
+A clean exact-commit clone produced these results:
+
+- focused release-workflow policy: 5 tests passed;
+- complete release-orchestration module: 22 tests passed;
+- complete isolated suite: 452 tests passed with seven declared platform skips in 219.853 seconds;
+- complete current-semantics graph: 667 artifacts, zero errors, 50 maintenance warnings;
+- exact released-distribution validation: passed with one distribution-bearing record;
+- portable release surface, diff whitespace, and clean-checkout checks: passed.
+
+At closeout C6 `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798`, `v0.6.0`, released `RLS-SEH-012`, distribution bytes, rejected history, the schema-2 root evaluator, and external policy remain unchanged. No publication credential, GitHub Release, PyPI file, Pages deployment, maintenance-line mutation, tag movement, root mutation, or distribution replacement occurred. A later commit-bound VREC must be accepted before this correction is pushed and publication resumes.

@@ -2,7 +2,7 @@
 id = "WO-REB-015"
 type = "work_order"
 title = "Use one long Windows candidate-test temp path"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T21:13:26Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T21:18:31Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Use one long Windows candidate-test temp path
 
 ## Lifecycle
 
-This bounded corrective work is in progress under the repository owner's explicit authority to finalize release 0.6.0. Commit-bound assurance remains required before another publication retry.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-015-windows-test-temp.md`. Commit-bound assurance remains required before another publication retry.
 
 ## Objective
 
