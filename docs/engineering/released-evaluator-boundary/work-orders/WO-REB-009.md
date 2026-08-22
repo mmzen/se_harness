@@ -2,7 +2,7 @@
 id = "WO-REB-009"
 type = "work_order"
 title = "Use candidate semantics for immutable release-archive qualification"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T19:51:15Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T20:00:23Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Use candidate semantics for immutable release-archive qualification
 
 ## Lifecycle
 
-This bounded corrective work is approved and in progress under the owner's explicit authority to finalize release 0.6.0. Commit-bound assurance is required before a publication retry may reach privileged jobs.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-009-candidate-validator.md`. Commit-bound assurance remains required before a publication retry may reach privileged jobs; implementation status does not itself grant assurance or publication authority.
 
 ## Objective
 
