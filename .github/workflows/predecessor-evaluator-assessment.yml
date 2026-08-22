@@ -1,0 +1,68 @@
+name: Predecessor Evaluator Assessment
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+env:
+  SE_HARNESS_VERSION: "0.5.0"
+  SE_HARNESS_WHEEL: "se_harness-0.5.0-py3-none-any.whl"
+  SE_HARNESS_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"
+
+jobs:
+  predecessor-assessment:
+    name: Released 0.5 predecessor assessment
+    runs-on: ubuntu-latest
+    env:
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Acquire and install the exact released evaluator
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/released-wheel"
+          python -m pip download --disable-pip-version-check --no-deps \
+            --only-binary=:all: --dest "$RUNNER_TEMP/released-wheel" \
+            "se-harness==$SE_HARNESS_VERSION"
+          wheel="$RUNNER_TEMP/released-wheel/$SE_HARNESS_WHEEL"
+          test -f "$wheel"
+          python - "$wheel" "$SE_HARNESS_WHEEL_SHA256" <<'PY'
+          import hashlib, pathlib, sys
+          path = pathlib.Path(sys.argv[1])
+          assert hashlib.sha256(path.read_bytes()).hexdigest() == sys.argv[2]
+          PY
+          python -m venv "$RUNNER_TEMP/se-harness-env"
+          "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps "$wheel"
+      - name: Assess the complete candidate and exact predecessor view
+        shell: bash
+        run: |
+          python -S scripts/assess_predecessor_evaluator.py \
+            --repository . \
+            --candidate-commit "$GITHUB_SHA" \
+            --release-contract REL-SEH-010 \
+            --evaluator-python "$RUNNER_TEMP/se-harness-env/bin/python" \
+            --evaluator-entry-point "$RUNNER_TEMP/se-harness-env/bin/harnessctl" \
+            --evaluator-wheel "$RUNNER_TEMP/released-wheel/$SE_HARNESS_WHEEL" \
+            --output "$RUNNER_TEMP/predecessor-assessment.json" \
+            --apply --json > "$RUNNER_TEMP/predecessor-assessment-plan.json"
+      - name: Prove assessment made no checkout change
+        shell: bash
+        run: |
+          git diff --exit-code
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: predecessor-evaluator-assessment
+          path: |
+            ${{ runner.temp }}/predecessor-assessment.json
+            ${{ runner.temp }}/predecessor-assessment-plan.json

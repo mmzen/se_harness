@@ -220,7 +220,7 @@ def _artifact(
     return item
 
 
-def _candidate_validation(root: Path) -> None:
+def _candidate_validation(root: Path) -> dict[str, Any]:
     validator = root / "templates" / "repository" / "standard" / "scripts" / "validate_engineering_artifacts.py"
     if not validator.is_file() or bootstrap._path_has_link(validator, root):
         raise PredecessorPreparationError("candidate validator is unavailable")
@@ -229,12 +229,15 @@ def _candidate_validation(root: Path) -> None:
         report = json.loads(result.stdout.decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise PredecessorPreparationError("candidate validator returned an invalid contract") from exc
+    if not isinstance(report, dict):
+        raise PredecessorPreparationError("candidate validator returned an invalid report")
     if result.returncode != 0 or report.get("valid") is not True:
         errors = report.get("errors")
         first = errors[0].get("message") if isinstance(errors, list) and errors and isinstance(errors[0], dict) else None
         raise PredecessorPreparationError(
             f"complete candidate graph is invalid: {first or 'candidate validation failed'}"
         )
+    return report
 
 
 def _source_identity(root: Path) -> tuple[str, str, str]:
@@ -1068,6 +1071,11 @@ def _assert_apply_state(prepared: _Prepared, created: tuple[Path, ...]) -> None:
             )
 
 
+def _open_exclusive(path: Path) -> int:
+    """Open one adapter output without exposing process-global os.open to tests."""
+    return os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
+
+
 def apply_predecessor_release(
     repository: Path,
     **arguments: Any,
@@ -1084,7 +1092,7 @@ def apply_predecessor_release(
             (prepared.evidence_path, prepared.evidence_bytes),
             (prepared.record_path, prepared.record_bytes),
         ):
-            descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
+            descriptor = _open_exclusive(path)
             created.append(path)
             with os.fdopen(descriptor, "wb") as handle:
                 handle.write(payload)

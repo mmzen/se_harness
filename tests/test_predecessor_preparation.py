@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -10,6 +11,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from repository_tools import predecessor_assessment as ASSESSMENT
 from repository_tools import predecessor_preparation as PREPARATION
 
 
@@ -115,6 +117,15 @@ class PredecessorPreparationTests(unittest.TestCase):
         ):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(payload)
+        self.module_origin = evaluator / "Lib" / "site-packages" / "se_harness" / "__init__.py"
+        self.distribution_origin = evaluator / "Lib" / "site-packages" / "se_harness-0.5.0.dist-info"
+        self.template_origin = evaluator / "share" / "se-harness" / "templates" / "repository" / "standard"
+        self.module_origin.parent.mkdir(parents=True)
+        self.module_origin.write_bytes(b'__version__ = "0.5.0"\n')
+        self.distribution_origin.mkdir(parents=True)
+        (self.distribution_origin / "METADATA").write_bytes(b"Version: 0.5.0\n")
+        self.template_origin.mkdir(parents=True)
+        (self.template_origin / "README.md").write_bytes(b"fixture\n")
         self.real_run = PREPARATION._run
 
     def tearDown(self) -> None:
@@ -242,6 +253,127 @@ evidence_paths = ["docs/engineering/release/evidence/WO-TST-001-check.md"]'''
             "evaluator_entry_point": self.entry_point,
             "evaluator_wheel": self.wheel,
         }
+
+    def assessment_arguments(self, *, output: Path | None, apply: bool) -> dict[str, object]:
+        return {
+            "candidate_commit": self.source,
+            "release_contract_id": "REL-TST-002",
+            "evaluator_python": self.python,
+            "evaluator_entry_point": self.entry_point,
+            "evaluator_wheel": self.wheel,
+            "output": output,
+            "apply": apply,
+        }
+
+    @staticmethod
+    def candidate_report() -> dict[str, object]:
+        return {
+            "artifact_count": 7,
+            "error_count": 0,
+            "errors": [],
+            "valid": True,
+            "warning_count": 2,
+        }
+
+    def fake_assessment_run(
+        self,
+        command: list[str],
+        *,
+        cwd: Path,
+    ) -> subprocess.CompletedProcess[bytes]:
+        if "identity" in command:
+            evaluator_root = self.python.parent.parent.resolve()
+            report = {
+                "candidate_commit": None,
+                "checkout_root": str(cwd.resolve()),
+                "diagnostics": [],
+                "distribution_origin": str(self.distribution_origin.resolve()),
+                "entry_point_origin": str(self.entry_point.resolve()),
+                "expected_root": str(evaluator_root),
+                "harness_version": "0.5.0",
+                "isolated_python": True,
+                "module_origin": str(self.module_origin.resolve()),
+                "passed": True,
+                "python_executable": str(self.python.resolve()),
+                "pythonpath_present": False,
+                "role": "released-evaluator",
+                "schema": "se-harness-runtime-identity-v2",
+                "template_origin": str(self.template_origin.resolve()),
+                "user_site_enabled": False,
+            }
+            return subprocess.CompletedProcess(
+                command, 0, json.dumps(report).encode("utf-8"), b""
+            )
+        if "dashboard" in command:
+            output = Path(command[command.index("--output") + 1])
+            output.mkdir(parents=True)
+            (output / "dashboard-manifest.json").write_bytes(b'{"schema":"fixture"}\n')
+            (output / "generation-summary.json").write_bytes(
+                b'{"elapsed_ms":12,"generated_at":"2026-08-22T00:00:00Z",'
+                b'"outcome":"generated-valid","schema":"harness-dashboard-generation-v2"}\n'
+            )
+            (output / "index.html").write_bytes(b"fixture dashboard\n")
+            return subprocess.CompletedProcess(command, 0, str(cwd).encode(), b"")
+        if "validate" in command:
+            if cwd == self.root:
+                report = {
+                    "artifact_count": 9,
+                    "error_count": len(self.legacy_errors),
+                    "errors": self.legacy_errors,
+                    "plane_counts": {
+                        "governance": {"errors": len(self.legacy_errors)},
+                        "maintenance": {"errors": 0},
+                        "policy": {"errors": 0},
+                        "structure": {"errors": 0},
+                    },
+                    "valid": False,
+                    "warning_count": 3,
+                }
+                return subprocess.CompletedProcess(
+                    command, 1, json.dumps(report).encode("utf-8"), b""
+                )
+            report = {
+                "artifact_count": 7,
+                "error_count": 0,
+                "errors": [],
+                "valid": True,
+                "warning_count": 2,
+            }
+            return subprocess.CompletedProcess(
+                command, 0, json.dumps(report).encode("utf-8"), b""
+            )
+        if "doctor" in command:
+            return subprocess.CompletedProcess(
+                command,
+                0,
+                f"doctor {cwd}\n".encode("utf-8"),
+                b"",
+            )
+        raise AssertionError(f"unexpected assessment command: {command}")
+
+    def run_assessment(self, *, output: Path | None, apply: bool):
+        expected = {
+            "code": "E009",
+            "message": "release_record status must be ready or released",
+            "path": "docs/engineering/release/releases/RLS-TST-001.md",
+            "plane": "governance",
+        }
+        if not hasattr(self, "legacy_errors"):
+            self.legacy_errors = [expected]
+        with mock.patch.object(ASSESSMENT, "EXPECTED_LEGACY_ERROR", expected), mock.patch.object(
+            ASSESSMENT.preparation,
+            "_candidate_validation",
+            return_value=self.candidate_report(),
+        ), mock.patch.object(
+            ASSESSMENT.bootstrap, "_installed_payload", return_value="c" * 64
+        ), mock.patch.object(
+            ASSESSMENT.bootstrap, "_wheel_payload", return_value="c" * 64
+        ), mock.patch.object(
+            ASSESSMENT, "_run_command", side_effect=self.fake_assessment_run
+        ):
+            return ASSESSMENT.assess_predecessor_evaluator(
+                self.root, **self.assessment_arguments(output=output, apply=apply)
+            )
 
     def fake_run(
         self,
@@ -482,19 +614,19 @@ tag = "v1.2.3"''',
         )
 
     def test_apply_rolls_back_evidence_when_record_exclusive_create_fails(self) -> None:
-        real_open = PREPARATION.os.open
+        real_open = PREPARATION._open_exclusive
         calls = 0
 
-        def failing_open(path, flags, mode=0o777):
+        def failing_open(path):
             nonlocal calls
             calls += 1
             if calls == 2:
                 raise OSError("injected record creation failure")
-            return real_open(path, flags, mode)
+            return real_open(path)
 
         first, second, third, fourth, fifth = self.operation_patches()
         with first, second, third, fourth, fifth, mock.patch.object(
-            PREPARATION.os, "open", side_effect=failing_open
+            PREPARATION, "_open_exclusive", side_effect=failing_open
         ):
             with self.assertRaisesRegex(
                 PREPARATION.PredecessorPreparationError,
@@ -513,21 +645,21 @@ tag = "v1.2.3"''',
         self.assertEqual("", self.git("status", "--porcelain", "--untracked-files=all"))
 
     def test_apply_detects_source_change_between_writes_and_rolls_back(self) -> None:
-        real_open = PREPARATION.os.open
+        real_open = PREPARATION._open_exclusive
         calls = 0
         history_path = self.root / "docs/engineering/release/releases/RLS-TST-001.md"
 
-        def changing_open(path, flags, mode=0o777):
+        def changing_open(path):
             nonlocal calls
             calls += 1
-            descriptor = real_open(path, flags, mode)
+            descriptor = real_open(path)
             if calls == 1:
                 history_path.write_bytes(history_path.read_bytes() + b"changed\n")
             return descriptor
 
         first, second, third, fourth, fifth = self.operation_patches()
         with first, second, third, fourth, fifth, mock.patch.object(
-            PREPARATION.os, "open", side_effect=changing_open
+            PREPARATION, "_open_exclusive", side_effect=changing_open
         ):
             with self.assertRaisesRegex(
                 PREPARATION.PredecessorPreparationError,
@@ -543,6 +675,117 @@ tag = "v1.2.3"''',
                 / "docs/engineering/release/evidence/RLS-TST-002-preparation-view.json"
             ).exists()
         )
+
+    def test_assessment_retains_canonical_external_evidence_without_source_change(self) -> None:
+        plan = self.run_assessment(output=None, apply=False)
+        self.assertFalse(plan.applied)
+        self.assertEqual(self.source, plan.source_commit)
+        self.assertEqual(
+            [
+                "docs/engineering/release/release/REL-TST-001.md",
+                "docs/engineering/release/releases/RLS-TST-001.md",
+            ],
+            [item.path for item in plan.omitted_history],
+        )
+        self.assertEqual(
+            sha256(PREPARATION._sparse_spec(plan.omitted_history)),
+            plan.sparse_spec_sha256,
+        )
+
+        output = Path(self.temporary.name) / "assessment.json"
+        result = self.run_assessment(output=output, apply=True)
+        evidence_raw = output.read_bytes()
+        self.assertTrue(result.applied)
+        self.assertEqual(result.assessment_evidence_sha256, sha256(evidence_raw))
+        self.assertTrue(evidence_raw.endswith(b"\n"))
+        evidence = json.loads(evidence_raw)
+        self.assertEqual(ASSESSMENT.EVIDENCE_SCHEMA, evidence["schema"])
+        self.assertEqual(2, len(evidence["view"]["omitted_history"]))
+        self.assertEqual(7, evidence["candidate"]["artifact_count"])
+        self.assertEqual(7, evidence["view"]["validation_artifact_count"])
+        self.assertNotIn(str(Path(self.temporary.name)), evidence_raw.decode("utf-8"))
+        self.assertEqual("", self.git("status", "--porcelain", "--untracked-files=all"))
+
+        replay_output = Path(self.temporary.name) / "assessment-replay.json"
+        replay = self.run_assessment(output=replay_output, apply=True)
+        self.assertEqual(evidence_raw, replay_output.read_bytes())
+        self.assertEqual(result.assessment_evidence_sha256, replay.assessment_evidence_sha256)
+
+    def test_assessment_rejects_any_legacy_diagnostic_drift_without_output(self) -> None:
+        self.legacy_errors = [
+            {
+                "code": "E009",
+                "message": "release_record status must be ready or released",
+                "path": "docs/engineering/release/releases/RLS-TST-999.md",
+                "plane": "governance",
+            }
+        ]
+        output = Path(self.temporary.name) / "assessment.json"
+        with self.assertRaisesRegex(
+            ASSESSMENT.PredecessorAssessmentError,
+            "differs from exact E009",
+        ):
+            self.run_assessment(output=output, apply=True)
+        self.assertFalse(output.exists())
+        self.assertEqual("", self.git("status", "--porcelain", "--untracked-files=all"))
+
+    def test_assessment_rejects_checkout_output_before_candidate_execution(self) -> None:
+        with mock.patch.object(
+            ASSESSMENT.preparation, "_candidate_validation"
+        ) as candidate_validation:
+            with self.assertRaisesRegex(
+                ASSESSMENT.PredecessorAssessmentError,
+                "outside the source checkout",
+            ):
+                ASSESSMENT.assess_predecessor_evaluator(
+                    self.root,
+                    **self.assessment_arguments(
+                        output=self.root / "assessment.json", apply=True
+                    ),
+                )
+        candidate_validation.assert_not_called()
+
+        with mock.patch.object(
+            ASSESSMENT.preparation, "_candidate_validation"
+        ) as candidate_validation:
+            with self.assertRaisesRegex(
+                ASSESSMENT.PredecessorAssessmentError,
+                "name is invalid",
+            ):
+                ASSESSMENT.assess_predecessor_evaluator(
+                    self.root,
+                    **self.assessment_arguments(
+                        output=Path(self.temporary.name) / "CON.json", apply=True
+                    ),
+                )
+        candidate_validation.assert_not_called()
+
+    def test_assessment_rejects_credential_signals_before_candidate_execution(self) -> None:
+        with mock.patch.dict(os.environ, {"PYPI_API_TOKEN": "not-used"}, clear=True), mock.patch.object(
+            ASSESSMENT.preparation, "_candidate_validation"
+        ) as candidate_validation:
+            with self.assertRaisesRegex(
+                ASSESSMENT.PredecessorAssessmentError,
+                "credential signals are forbidden",
+            ):
+                ASSESSMENT.assess_predecessor_evaluator(
+                    self.root,
+                    **self.assessment_arguments(output=None, apply=False),
+                )
+        candidate_validation.assert_not_called()
+
+    def test_assessment_exclusive_create_failure_leaves_no_output(self) -> None:
+        output = Path(self.temporary.name) / "assessment.json"
+        with mock.patch.object(
+            ASSESSMENT, "_open_exclusive", side_effect=OSError("injected create failure")
+        ):
+            with self.assertRaisesRegex(
+                ASSESSMENT.PredecessorAssessmentError,
+                "injected create failure",
+            ):
+                self.run_assessment(output=output, apply=True)
+        self.assertFalse(output.exists())
+        self.assertEqual("", self.git("status", "--porcelain", "--untracked-files=all"))
 
 
 if __name__ == "__main__":

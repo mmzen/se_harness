@@ -257,6 +257,8 @@ Before writing, the command proves the locked released evaluator including its w
 
 Only `ready` and `released` release records claim a version. Valid rejected records remain immutable audit history and do not prevent one correctly bound active successor for an unpublished version; a second active record still fails. In the repository-specific schema-2 bootstrap case where released 0.5.0 cannot parse one exact rejected RLS/contract pair, `scripts/prepare_predecessor_release.py` runs predecessor `prepare-release` only inside a contract-derived exact-commit sparse view. Its canonical sidecar proves the two omissions and exact command; the adapter imports only the predecessor-generated proposal, and the existing bootstrap binder remains the separate evaluator-evidence step. This compatibility path does not alter generic `harnessctl prepare-release`, the root evaluator, or historical artifacts.
 
+For this repository's transitional hosted qualification, `scripts/assess_predecessor_evaluator.py` reuses that exact view derivation. It separately records the immutable 0.5.0 full-checkout `E009`, requires `doctor`, `validate`, and dashboard generation to pass in the view, validates the complete candidate graph before and after, and optionally creates one canonical evidence file outside the checkout. It accepts no omission or expected-error arguments and performs no `harnessctl` lifecycle action.
+
 ## Authority summary
 
 | Result | Meaning |

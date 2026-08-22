@@ -35,6 +35,7 @@ docs/engineering/                        self-governing formal artifact graph an
 .engineering-harness.toml                exact released root evaluator version and repository policy
 .github/workflows/engineering-harness.yml exact released standard evaluator workflow
 .github/workflows/candidate-evidence.yml  repository-owned source and package evidence
+.github/workflows/predecessor-evaluator-assessment.yml transitional released-0.5 view evidence
 .github/workflows/publish-pypi.yml        one-input release orchestrator
 .github/workflows/publish-dashboard-pages.yml release-bound Explorer recovery
 ```
@@ -112,6 +113,22 @@ Plan mode validates the complete graph with candidate source, derives the reject
 
 Adding `--apply` exclusively creates only the predecessor-generated RLS and its preparation-view sidecar, with source rechecks around each write and rollback on failure. It does not hide rejected history from candidate validation: the complete graph retains both rejected artifacts, and only `ready` or `released` RLS records claim a version. Multiple active records for one version still fail. This adapter is specific to the exact schema-2 predecessor-bootstrap boundary; it is not a general validation-error filter and it never approves, verifies, releases, commits, tags, publishes, deploys, changes the root, or uses credentials.
 
+The same derived view supports a separate hosted predecessor assessment without pretending that released 0.5.0 understands the complete graph. The unchanged managed workflow remains visibly failed at its exact full-checkout `E009`. The candidate-owned assessment first requires a clean exact commit and a valid complete-graph candidate report, proves the exact external wheel/runtime and old lock, accepts only that one legacy diagnostic, and then requires released 0.5.0 `doctor`, `validate`, and dashboard generation to pass in the two-omission view:
+
+```powershell
+python scripts/assess_predecessor_evaluator.py `
+  --repository . `
+  --candidate-commit <exact-full-HEAD> `
+  --release-contract REL-SEH-010 `
+  --evaluator-python <external-env>/Scripts/python.exe `
+  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
+  --evaluator-wheel <downloaded-public-wheel> `
+  --output <external-runner-directory>/predecessor-assessment.json `
+  --json
+```
+
+Plan mode performs the complete assessment but creates no evidence file. Adding `--apply` exclusively creates canonical `se-harness-predecessor-assessment-view-v1` JSON at the named external path. The JSON binds the complete candidate report, exact legacy refusal, both omitted Git/raw identities, sparse rules, isolated evaluator payload, fixed view commands, graph counts, and dashboard tree. The dashboard digest retains every generated file while normalizing only the released generator's factual run-time `generated_at` and `elapsed_ms` fields; all semantic bundle bytes remain hash-bound. The adapter rejects publication credential signals, arbitrary omissions or expected-error input, linked or in-checkout output, collision, diagnostic drift, candidate drift, and any source mutation. It has no lifecycle, commit, push, tag, publication, deployment, maintenance, policy, or root-upgrade effect.
+
 After a separately authorized predecessor `prepare-release` has created the exact contract-named ready RLS, the repository-only binder can first produce a read-only plan:
 
 ```powershell
@@ -129,7 +146,7 @@ Adding `--apply` is a separate explicit mutation. It exclusively creates one can
 
 The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserves the canonical sidecar bytes and bound raw SHA-256 under supported Windows and non-Windows checkout configurations. Validators do not normalize evidence before hashing; changed, noncanonical, or CRLF worktree bytes still fail.
 
-Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Candidate validation and ordinary future `prepare-release` count only `ready` and `released` records as active version claims. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it independently recomputes the preparation view and predecessor output from Git history, then reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
+Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Candidate validation and ordinary future `prepare-release` count only `ready` and `released` records as active version claims. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it independently recomputes the preparation view and predecessor output from Git history, then reacquires the contract-pinned predecessor wheel before any credential-bearing stage. The assessment workflow is qualification evidence only; it does not replace that publication replay. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
 
 ## Advancing the root evaluator
 
