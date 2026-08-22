@@ -2,7 +2,7 @@
 id = "VREC-REB-007"
 type = "verification_record"
 title = "Verification candidate for WO-REB-011"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -12,10 +12,17 @@ worktree_state = "clean"
 verified_at = "2026-08-22T20:21:03Z"
 artifact_snapshot_sha256 = "0247e7844a5fd1f39769e6f9bf47e1fd6411d310e760534cfdac400ad3180278"
 evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-011-candidate-doctor-boundary.md"]
+verified_by = "quality-owner"
 
 [relations]
 verifies_work_order = ["WO-REB-011"]
 conforms_to = ["VER-REB-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-22T20:21:31Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
@@ -23,6 +30,8 @@ conforms_to = ["VER-REB-006"]
 This ready record binds retained evidence for `WO-REB-011` to candidate commit `91cfb81f4d68c7933fdda34dd5d2be6f501f4ad9`. An accountable assurance owner must review the evidence and transition the record to `verified`; preparation did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+On 2026-08-22, the accountable assurance authority accepted this exact record under the owner's explicit authorization to finalize release 0.6.0. Review reconciled the bound commit and snapshot, hosted failure, candidate/root claim separation, unchanged predecessor gate, complete qualification, and zero privileged mutation. Automation did not infer acceptance from test success.
 
 Exact released `se-harness==0.5.0` prepared this record in the deterministic two-omission compatibility view, which passed with 657 artifacts, zero errors, and 49 maintenance warnings. Complete current validation passed separately at 659 artifacts and zero errors. The selected evidence retains the exact hosted doctor boundary, unchanged released-predecessor doctor/view gate, full 452-test qualification, release surfaces, and absence of privileged mutation.
 
