@@ -63,6 +63,11 @@ jobs:
             --release-record "$RELEASE_RECORD" \
             --output "$RUNNER_TEMP/release-plan.json" \
             --github-output "$GITHUB_OUTPUT"
+
+      - name: Confirm the immutable governance input
+        shell: bash
+        run: |
+          set -euo pipefail
           test "${{ steps.plan.outputs.governance_commit }}" = "$GOVERNANCE_COMMIT"
 
       - name: Verify the published GitHub Release

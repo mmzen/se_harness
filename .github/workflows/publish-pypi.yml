@@ -90,7 +90,6 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          mkdir "$RUNNER_TEMP/pages-predecessor-view"
           identity_args=(
             --role released-evaluator
             --expected-version "$EVALUATOR_VERSION"
@@ -529,6 +528,7 @@ jobs:
           "$RUNNER_TEMP/evaluator-env/bin/python" -m pip install --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
+          mkdir "$RUNNER_TEMP/pages-predecessor-view"
           identity_args=(
             --role released-evaluator
             --expected-version "$EVALUATOR_VERSION"

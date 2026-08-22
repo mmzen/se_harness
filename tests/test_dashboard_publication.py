@@ -503,6 +503,12 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("      release_tag:\n", self.workflow)
         self.assertIn("github.repository == 'mmzen/se_harness'", self.workflow)
         self.assertIn("github.ref == 'refs/heads/main'", self.workflow)
+        self.assertIn("- name: Confirm the immutable governance input", self.workflow)
+        self.assertIn('test "${{ steps.plan.outputs.governance_commit }}" = "$GOVERNANCE_COMMIT"', self.workflow)
+        plan_step = self.workflow.split("- name: Derive the release identity from the released record", 1)[1].split(
+            "- name: Confirm the immutable governance input", 1
+        )[0]
+        self.assertNotIn("steps.plan.outputs.governance_commit", plan_step)
 
     def test_actions_are_immutable_reviewed_pins(self) -> None:
         pins = {

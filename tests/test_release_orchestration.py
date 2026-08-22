@@ -504,6 +504,8 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         qualify = self.workflow.split("  qualify:\n", 1)[1].split("  github_release:\n", 1)[0]
         github = self.workflow.split("  github_release:\n", 1)[1].split("  pypi:\n", 1)[0]
         pypi = self.workflow.split("  pypi:\n", 1)[1].split("  pages_build:\n", 1)[0]
+        resolve = self.workflow.split("  resolve:\n", 1)[1].split("  qualify:\n", 1)[0]
+        pages_build = self.workflow.split("  pages_build:\n", 1)[1].split("  pages_deploy:\n", 1)[0]
         self.assertNotIn("contents: write", qualify)
         self.assertNotIn("id-token: write", qualify)
         self.assertIn("python -m se_harness validate .", qualify)
@@ -537,6 +539,8 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("python -m build", pypi)
         self.assertNotIn("skip-existing", pypi)
         self.assertEqual(1, pypi.count("id-token: write"))
+        self.assertNotIn('mkdir "$RUNNER_TEMP/pages-predecessor-view"', resolve)
+        self.assertEqual(1, pages_build.count('mkdir "$RUNNER_TEMP/pages-predecessor-view"'))
 
     def test_repository_policy_is_explicit_and_imported_only_from_trusted_main(self) -> None:
         self.assertIn("Check out trusted main history", self.workflow)
