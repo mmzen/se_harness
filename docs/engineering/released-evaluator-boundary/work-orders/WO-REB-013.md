@@ -2,7 +2,7 @@
 id = "WO-REB-013"
 type = "work_order"
 title = "Rebuild released bytes on their retained platform"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T20:52:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T20:57:14Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Rebuild released bytes on their retained platform
 
 ## Lifecycle
 
-This bounded corrective work is in progress under the repository owner's explicit authority to finalize release 0.6.0. Commit-bound assurance remains required before another publication retry.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-013-retained-build-platform.md`. Commit-bound assurance remains required before another publication retry.
 
 ## Objective
 
