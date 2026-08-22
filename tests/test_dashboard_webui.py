@@ -17,6 +17,16 @@ MANAGED_GENERATOR = ROOT / "scripts/generate_harness_dashboard.py"
 if str(CANDIDATE_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(CANDIDATE_SCRIPTS))
 
+VALIDATOR_SPEC = importlib.util.spec_from_file_location(
+    "dashboard_webui_validator",
+    CANDIDATE_SCRIPTS / "validate_engineering_artifacts.py",
+)
+if VALIDATOR_SPEC is None or VALIDATOR_SPEC.loader is None:
+    raise RuntimeError("candidate validator is unavailable")
+CANDIDATE_VALIDATOR = importlib.util.module_from_spec(VALIDATOR_SPEC)
+sys.modules[VALIDATOR_SPEC.name] = CANDIDATE_VALIDATOR
+VALIDATOR_SPEC.loader.exec_module(CANDIDATE_VALIDATOR)
+
 GENERATOR_SPEC = importlib.util.spec_from_file_location(
     "dashboard_webui_generator",
     CANDIDATE_SCRIPTS / "generate_harness_dashboard.py",
@@ -25,7 +35,15 @@ if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
     raise RuntimeError("dashboard generator is unavailable")
 GENERATOR = importlib.util.module_from_spec(GENERATOR_SPEC)
 sys.modules[GENERATOR_SPEC.name] = GENERATOR
-GENERATOR_SPEC.loader.exec_module(GENERATOR)
+_prior_validator = sys.modules.get("validate_engineering_artifacts")
+sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
+try:
+    GENERATOR_SPEC.loader.exec_module(GENERATOR)
+finally:
+    if _prior_validator is None:
+        sys.modules.pop("validate_engineering_artifacts", None)
+    else:
+        sys.modules["validate_engineering_artifacts"] = _prior_validator
 
 INSPECTOR_SPEC = importlib.util.spec_from_file_location(
     "dashboard_webui_inspector",
@@ -36,7 +54,9 @@ if INSPECTOR_SPEC is None or INSPECTOR_SPEC.loader is None:
 INSPECTOR = importlib.util.module_from_spec(INSPECTOR_SPEC)
 sys.modules[INSPECTOR_SPEC.name] = INSPECTOR
 _prior_generator = sys.modules.get("generate_harness_dashboard")
+_prior_validator = sys.modules.get("validate_engineering_artifacts")
 sys.modules["generate_harness_dashboard"] = GENERATOR
+sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
 try:
     INSPECTOR_SPEC.loader.exec_module(INSPECTOR)
 finally:
@@ -44,6 +64,10 @@ finally:
         sys.modules.pop("generate_harness_dashboard", None)
     else:
         sys.modules["generate_harness_dashboard"] = _prior_generator
+    if _prior_validator is None:
+        sys.modules.pop("validate_engineering_artifacts", None)
+    else:
+        sys.modules["validate_engineering_artifacts"] = _prior_validator
 
 
 def temporal_findings(

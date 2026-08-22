@@ -701,6 +701,32 @@ class CandidateBootstrapValidationTests(unittest.TestCase):
         lock_path.write_bytes(self.lock_bytes.replace(b"\n", b"\r\n"))
         self.assertEqual([], self.diagnostics())
 
+    def test_rejected_history_does_not_claim_an_active_release_version(self) -> None:
+        rejected = copy.deepcopy(self.release)
+        rejected.metadata.update(
+            {
+                "status": "rejected",
+                "rejected_at": "2026-08-21T12:30:00Z",
+                "rejected_by": "release-owner",
+                "rejection_reason": "retained failure",
+            }
+        )
+        successor = copy.deepcopy(self.release)
+        successor.path = self.root / "docs/engineering/release/releases/RLS-TST-010.md"
+        successor.metadata["id"] = "RLS-TST-010"
+        findings = CANDIDATE_VALIDATOR.validate_revision_consistency(
+            [rejected, successor], self.root
+        )
+        self.assertFalse(any("duplicate release record version" in item.message for item in findings))
+
+        second_active = copy.deepcopy(successor)
+        second_active.path = self.root / "docs/engineering/release/releases/RLS-TST-011.md"
+        second_active.metadata["id"] = "RLS-TST-011"
+        findings = CANDIDATE_VALIDATOR.validate_revision_consistency(
+            [rejected, successor, second_active], self.root
+        )
+        self.assertTrue(any("duplicate release record version" in item.message for item in findings))
+
 
 class PublicationBootstrapTests(unittest.TestCase):
     def setUp(self) -> None:

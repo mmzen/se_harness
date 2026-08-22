@@ -90,6 +90,28 @@ The tag selects C, not the later governance commit containing the released recor
 
 Version 0.6.0 is the first candidate that requires canonical evaluator evidence on a ready release record, while this repository is still governed by a schema-2 lock and released 0.5.0. The approved `se-harness-release-bootstrap-v1` contract bridges only that transition. Released 0.5.0 still prepares and validates the RLS; candidate code merely records and rechecks an observation of that external evaluator.
 
+If the complete graph contains one exact rejected predecessor-bootstrap RLS and its exact rejected declaring contract, released 0.5.0 cannot parse that newer terminal status. Under a separately approved successor contract, use the repository-owned adapter to rehearse an exact compatibility view:
+
+```powershell
+python scripts/prepare_predecessor_release.py `
+  --repository . `
+  --release-record RLS-... `
+  --release-contract REL-... `
+  --verification-record VREC-... `
+  --work-order WO-... `
+  --version 0.6.0 `
+  --authorized-by release-owner `
+  --tag v0.6.0 `
+  --evaluator-python <external-env>/Scripts/python.exe `
+  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
+  --evaluator-wheel <downloaded-public-wheel> `
+  --json
+```
+
+Plan mode validates the complete graph with candidate source, derives the rejected pair from its closed relations, creates a temporary clone detached at the exact clean governance commit, and gives released 0.5.0 a sparse view omitting only those two paths. It verifies the generated ready RLS but leaves the source repository unchanged. The canonical `se-harness-predecessor-preparation-view-v1` evidence binds the source commit/tree, omitted paths/blob/raw hashes, sparse rules, external evaluator, exact predecessor command, candidate/VREC/work scope, and generated-output digest.
+
+Adding `--apply` exclusively creates only the predecessor-generated RLS and its preparation-view sidecar, with source rechecks around each write and rollback on failure. It does not hide rejected history from candidate validation: the complete graph retains both rejected artifacts, and only `ready` or `released` RLS records claim a version. Multiple active records for one version still fail. This adapter is specific to the exact schema-2 predecessor-bootstrap boundary; it is not a general validation-error filter and it never approves, verifies, releases, commits, tags, publishes, deploys, changes the root, or uses credentials.
+
 After a separately authorized predecessor `prepare-release` has created the exact contract-named ready RLS, the repository-only binder can first produce a read-only plan:
 
 ```powershell
@@ -103,11 +125,11 @@ python scripts/bind_release_bootstrap.py `
   --json
 ```
 
-Adding `--apply` is a separate explicit mutation. It exclusively creates one canonical evidence sidecar and atomically adds only `preparation_schema`, `evaluator_evidence_path`, and `evaluator_evidence_sha256` to the ready RLS. The command rejects any contract, lock, wheel, runtime-origin, candidate, verification, work-set, path, or existing-byte mismatch. It never creates or transitions an RLS, changes the root, commits, pushes, tags, publishes, deploys, or uses credentials.
+Adding `--apply` is a separate explicit mutation. It exclusively creates one canonical evaluator-evidence sidecar and atomically adds only `preparation_schema`, `evaluator_evidence_path`, and `evaluator_evidence_sha256` to the ready RLS. The command rejects any contract, lock, wheel, runtime-origin, candidate, verification, work-set, path, or existing-byte mismatch. Candidate validation then replays the complete graph, including the retained rejected pair and both sidecars. It never creates or transitions an RLS, changes the root, commits, pushes, tags, publishes, deploys, or uses credentials.
 
 The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserves the canonical sidecar bytes and bound raw SHA-256 under supported Windows and non-Windows checkout configurations. Validators do not normalize evidence before hashing; changed, noncanonical, or CRLF worktree bytes still fail.
 
-Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
+Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Candidate validation and ordinary future `prepare-release` count only `ready` and `released` records as active version claims. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it independently recomputes the preparation view and predecessor output from Git history, then reacquires the contract-pinned predecessor wheel before any credential-bearing stage. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
 
 ## Advancing the root evaluator
 

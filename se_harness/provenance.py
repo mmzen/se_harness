@@ -476,6 +476,8 @@ def prepare_release(
         if artifact.get("type") != "release_record":
             continue
         existing_metadata = _load_metadata(root, artifact)
+        if existing_metadata.get("status") not in {"ready", "released"}:
+            continue
         if existing_metadata.get("version") == version:
             raise HarnessError(f"release version already exists: {version}")
     ungated = set(selected_work) - _relation_targets(contract_metadata, "gates")

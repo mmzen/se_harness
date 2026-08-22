@@ -122,9 +122,11 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 result = main(["init", str(target), "--project-name", "Contract Fixture"])
             self.assertEqual(0, result)
             installed = target / "docs" / "engineering" / "WORKFLOW.json"
-            self.assertEqual(INSTALLED_CONTRACT.read_bytes(), installed.read_bytes())
+            expected_workflow = INSTALLED_CONTRACT.read_text(encoding="utf-8").encode("utf-8")
+            expected_gates = INSTALLED_GATES.read_text(encoding="utf-8").encode("utf-8")
+            self.assertEqual(expected_workflow, installed.read_bytes())
             self.assertEqual(
-                INSTALLED_GATES.read_bytes(),
+                expected_gates,
                 (target / "docs" / "engineering" / "QUALITY_GATES.json").read_bytes(),
             )
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
