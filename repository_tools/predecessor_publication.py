@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import tempfile
 import tomllib
 from dataclasses import asdict, dataclass
@@ -62,6 +63,7 @@ FORBIDDEN_PROCESS_STATE = frozenset(
 )
 SENSITIVE_NAME = re.compile(r"(?:^|_)(?:CREDENTIALS?|PASSWORD|SECRET|TOKEN)(?:_|$)")
 OUTPUT_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,126}\.json")
+VIEW_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 WINDOWS_RESERVED_NAMES = frozenset(
     {"CON", "PRN", "AUX", "NUL"}
     | {f"COM{index}" for index in range(1, 10)}
@@ -95,6 +97,7 @@ class PublicationPlan:
     predecessor_warning_count: int
     observation_sha256: str
     observation_path: str | None
+    retained_view: bool
     source_unchanged: bool
     applied: bool
 
@@ -213,6 +216,32 @@ def _ordinary_output(path: Path, root: Path) -> Path:
     raise PredecessorPublicationError("observation output must be outside the repository")
 
 
+def _ordinary_view_output(path: Path, root: Path) -> Path:
+    if (
+        VIEW_NAME.fullmatch(path.name) is None
+        or path.name.split(".", 1)[0].upper() in WINDOWS_RESERVED_NAMES
+    ):
+        raise PredecessorPublicationError("publication view output name is invalid")
+    lexical = Path(os.path.abspath(path))
+    if bootstrap._path_has_link(lexical.parent):
+        raise PredecessorPublicationError("publication view output parent must be unlinked")
+    try:
+        parent = lexical.parent.resolve(strict=True)
+        repository = root.resolve(strict=True)
+    except OSError as exc:
+        raise PredecessorPublicationError("publication view output parent is unavailable") from exc
+    if not parent.is_dir():
+        raise PredecessorPublicationError("publication view output parent is not a directory")
+    candidate = parent / lexical.name
+    try:
+        candidate.relative_to(repository)
+    except ValueError:
+        if candidate.exists():
+            raise PredecessorPublicationError("publication view output already exists")
+        return candidate
+    raise PredecessorPublicationError("publication view output must be outside the repository")
+
+
 def _write_exclusive(path: Path, payload: bytes) -> None:
     descriptor: int | None = None
     created = False
@@ -233,6 +262,12 @@ def _write_exclusive(path: Path, payload: bytes) -> None:
             except OSError:
                 pass
         raise PredecessorPublicationError(f"cannot create observation output: {exc}") from exc
+
+
+def _discard_retained_view(path: Path) -> None:
+    shutil.rmtree(path, ignore_errors=True)
+    if path.exists():
+        raise PredecessorPublicationError("retained publication view cleanup could not be proven")
 
 
 def _safe_relative(value: Any, *, label: str, expected_name: str | None = None) -> str:
@@ -700,6 +735,7 @@ def validate_predecessor_publication(
     evaluator_entry_point: Path,
     evaluator_wheel: Path,
     output: Path | None = None,
+    view_output: Path | None = None,
 ) -> PublicationPlan:
     """Validate both publication planes and optionally retain canonical JSON."""
 
@@ -709,6 +745,7 @@ def validate_predecessor_publication(
     except preparation.PredecessorPreparationError as exc:
         raise PredecessorPublicationError(str(exc)) from exc
     output_path = _ordinary_output(output, root) if output is not None else None
+    retained_view_path = _ordinary_view_output(view_output, root) if view_output is not None else None
     if output_path is not None and output_path.exists():
         raise PredecessorPublicationError("observation output already exists")
 
@@ -754,8 +791,16 @@ def validate_predecessor_publication(
             raise PredecessorPublicationError("evaluator wheel differs from the released RLS contract")
 
         temporary_path: Path | None = None
+        retained_view = False
         try:
-            with tempfile.TemporaryDirectory(prefix="se-harness-predecessor-publication-") as temporary:
+            temporary_options = (
+                {"dir": retained_view_path.parent}
+                if retained_view_path is not None
+                else {}
+            )
+            with tempfile.TemporaryDirectory(
+                prefix="se-harness-predecessor-publication-", **temporary_options
+            ) as temporary:
                 temporary_path = Path(temporary)
                 view, sparse_spec = preparation._create_view(
                     root, source_commit, history, temporary_path
@@ -772,90 +817,115 @@ def validate_predecessor_publication(
                     raise PredecessorPublicationError("publication view changed during predecessor validation")
                 if preparation._git_text(view, "rev-parse", "HEAD").lower() != source_commit:
                     raise PredecessorPublicationError("publication view commit changed during validation")
+
+                try:
+                    current_after = preparation._candidate_validation(root)
+                    final_commit, final_tree, final_format = preparation._source_identity(root)
+                    final_catalog = bootstrap._artifact_catalog(root)
+                    final_history = preparation._derive_history(
+                        root, final_catalog, str(record["version"]), final_commit, final_format
+                    )
+                except preparation.PredecessorPreparationError as exc:
+                    raise PredecessorPublicationError(str(exc)) from exc
+                if (final_commit, final_tree, final_format) != (source_commit, source_tree, object_format):
+                    raise PredecessorPublicationError("source identity changed during publication validation")
+                if final_history != history:
+                    raise PredecessorPublicationError("rejected history changed during publication validation")
+                final_tag_object = _tag_identity(
+                    root,
+                    tag=str(record["tag"]),
+                    candidate_commit=str(record["commit"]),
+                    source_commit=final_commit,
+                    object_format=final_format,
+                )
+                if final_tag_object != tag_object:
+                    raise PredecessorPublicationError("released tag changed during publication validation")
+                if _canonical_json(current_after) != _canonical_json(current_before):
+                    raise PredecessorPublicationError("complete current validation changed during publication validation")
+
+                if retained_view_path is not None:
+                    view.replace(retained_view_path)
+                    retained_view = True
+                    if preparation._git_text(retained_view_path, "status", "--porcelain", "--untracked-files=all"):
+                        raise PredecessorPublicationError("retained publication view is not clean")
+                    if preparation._git_text(retained_view_path, "rev-parse", "HEAD").lower() != source_commit:
+                        raise PredecessorPublicationError("retained publication view commit changed")
         except preparation.PredecessorPreparationError as exc:
+            if retained_view and retained_view_path is not None:
+                _discard_retained_view(retained_view_path)
             raise PredecessorPublicationError(str(exc)) from exc
+        except Exception:
+            if retained_view and retained_view_path is not None:
+                _discard_retained_view(retained_view_path)
+            raise
         if temporary_path is None or temporary_path.exists():
+            if retained_view and retained_view_path is not None:
+                _discard_retained_view(retained_view_path)
             raise PredecessorPublicationError("publication view cleanup could not be proven")
+        if retained_view_path is not None and (
+            not retained_view or not retained_view_path.is_dir()
+        ):
+            raise PredecessorPublicationError("publication view retention could not be proven")
 
-        try:
-            current_after = preparation._candidate_validation(root)
-            final_commit, final_tree, final_format = preparation._source_identity(root)
-            final_catalog = bootstrap._artifact_catalog(root)
-            final_history = preparation._derive_history(
-                root, final_catalog, str(record["version"]), final_commit, final_format
-            )
-        except preparation.PredecessorPreparationError as exc:
-            raise PredecessorPublicationError(str(exc)) from exc
-        if (final_commit, final_tree, final_format) != (source_commit, source_tree, object_format):
-            raise PredecessorPublicationError("source identity changed during publication validation")
-        if final_history != history:
-            raise PredecessorPublicationError("rejected history changed during publication validation")
-        final_tag_object = _tag_identity(
-            root,
-            tag=str(record["tag"]),
-            candidate_commit=str(record["commit"]),
-            source_commit=final_commit,
-            object_format=final_format,
+    try:
+        current_artifacts, current_warnings = _report_counts(current_before, "complete current graph")
+        predecessor_artifacts, predecessor_warnings = _report_counts(
+            predecessor_report, "predecessor publication view"
         )
-        if final_tag_object != tag_object:
-            raise PredecessorPublicationError("released tag changed during publication validation")
-        if _canonical_json(current_after) != _canonical_json(current_before):
-            raise PredecessorPublicationError("complete current validation changed during publication validation")
-
-    current_artifacts, current_warnings = _report_counts(current_before, "complete current graph")
-    predecessor_artifacts, predecessor_warnings = _report_counts(
-        predecessor_report, "predecessor publication view"
-    )
-    observation = {
-        "commands": commands,
-        "current": {
-            "after_report_sha256": _sha256(_canonical_json(current_after)),
-            "artifact_count": current_artifacts,
-            "before_report_sha256": _sha256(_canonical_json(current_before)),
-            "warning_count": current_warnings,
-        },
-        "evaluator": {
-            "archive_name": contract.evaluator_archive_name,
-            "archive_sha256": contract.evaluator_archive_sha256,
-            "evidence_path": evaluator_evidence_path,
-            "evidence_sha256": evaluator_evidence_sha,
-            "payload_sha256": installed_payload,
-            "runtime_identity_schema": identity.get("schema"),
-            "version": contract.evaluator_version,
-        },
-        "release": {
-            "candidate_commit": record["commit"],
-            "contract": contract.release_contract,
-            "record": record["id"],
-            "status": record["status"],
-            "tag": record["tag"],
-            "tag_object": tag_object,
-            "version": record["version"],
-        },
-        "schema": EVIDENCE_SCHEMA,
-        "source": {
-            "commit": source_commit,
-            "git_object_format": object_format,
-            "tree": source_tree,
-            "unchanged": True,
-        },
-        "view": {
-            "artifact_count": predecessor_artifacts,
-            "omitted_history": [asdict(item) for item in history],
-            "preparation_evidence_path": preparation_evidence_path,
-            "preparation_evidence_sha256": preparation_evidence_sha,
-            "preparation_source_commit": preparation_evidence["source"]["commit"],
-            "report_sha256": _sha256(_canonical_json(predecessor_report)),
-            "sparse_spec_sha256": _sha256(sparse_spec),
-            "warning_count": predecessor_warnings,
-        },
-    }
-    observation_bytes = _canonical_json(observation)
-    if len(observation_bytes) > MAX_EVIDENCE_BYTES:
-        raise PredecessorPublicationError("publication observation exceeds the byte limit")
-    observation_sha = _sha256(observation_bytes)
-    if output_path is not None:
-        _write_exclusive(output_path, observation_bytes)
+        observation = {
+            "commands": commands,
+            "current": {
+                "after_report_sha256": _sha256(_canonical_json(current_after)),
+                "artifact_count": current_artifacts,
+                "before_report_sha256": _sha256(_canonical_json(current_before)),
+                "warning_count": current_warnings,
+            },
+            "evaluator": {
+                "archive_name": contract.evaluator_archive_name,
+                "archive_sha256": contract.evaluator_archive_sha256,
+                "evidence_path": evaluator_evidence_path,
+                "evidence_sha256": evaluator_evidence_sha,
+                "payload_sha256": installed_payload,
+                "runtime_identity_schema": identity.get("schema"),
+                "version": contract.evaluator_version,
+            },
+            "release": {
+                "candidate_commit": record["commit"],
+                "contract": contract.release_contract,
+                "record": record["id"],
+                "status": record["status"],
+                "tag": record["tag"],
+                "tag_object": tag_object,
+                "version": record["version"],
+            },
+            "schema": EVIDENCE_SCHEMA,
+            "source": {
+                "commit": source_commit,
+                "git_object_format": object_format,
+                "tree": source_tree,
+                "unchanged": True,
+            },
+            "view": {
+                "artifact_count": predecessor_artifacts,
+                "omitted_history": [asdict(item) for item in history],
+                "preparation_evidence_path": preparation_evidence_path,
+                "preparation_evidence_sha256": preparation_evidence_sha,
+                "preparation_source_commit": preparation_evidence["source"]["commit"],
+                "report_sha256": _sha256(_canonical_json(predecessor_report)),
+                "sparse_spec_sha256": _sha256(sparse_spec),
+                "warning_count": predecessor_warnings,
+            },
+        }
+        observation_bytes = _canonical_json(observation)
+        if len(observation_bytes) > MAX_EVIDENCE_BYTES:
+            raise PredecessorPublicationError("publication observation exceeds the byte limit")
+        observation_sha = _sha256(observation_bytes)
+        if output_path is not None:
+            _write_exclusive(output_path, observation_bytes)
+    except Exception:
+        if retained_view and retained_view_path is not None:
+            _discard_retained_view(retained_view_path)
+        raise
     return PublicationPlan(
         schema=EVIDENCE_SCHEMA,
         source_commit=source_commit,
@@ -879,6 +949,7 @@ def validate_predecessor_publication(
         observation_path=(
             f"<external-publication-output>/{output_path.name}" if output_path is not None else None
         ),
+        retained_view=retained_view,
         source_unchanged=True,
         applied=output_path is not None,
     )

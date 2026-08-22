@@ -28,6 +28,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--evaluator-entry-point", type=Path, required=True)
     parser.add_argument("--evaluator-wheel", type=Path, required=True)
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--view-output",
+        type=Path,
+        help="Retain the validated predecessor-compatible checkout at this external absent directory.",
+    )
     parser.add_argument("--json", action="store_true")
     return parser
 
@@ -42,6 +47,7 @@ def main() -> int:
             evaluator_entry_point=args.evaluator_entry_point,
             evaluator_wheel=args.evaluator_wheel,
             output=args.output,
+            view_output=args.view_output,
         )
     except (
         OSError,

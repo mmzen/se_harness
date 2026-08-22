@@ -134,6 +134,7 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
+          mkdir "$RUNNER_TEMP/predecessor-view"
           identity_args=(
             --role released-evaluator
             --expected-version "$EVALUATOR_VERSION"
@@ -161,14 +162,15 @@ jobs:
             --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
             --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
             --output "$RUNNER_TEMP/predecessor-publication-view.json" \
+            --view-output "$RUNNER_TEMP/predecessor-view/governance" \
             --json | tee "$RUNNER_TEMP/predecessor-publication-result.json"
 
       - name: Generate the target-local canonical Explorer
         shell: bash
         run: |
           set -euo pipefail
-          python "$RUNNER_TEMP/governance/scripts/generate_harness_dashboard.py" \
-            --root "$RUNNER_TEMP/governance" \
+          python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py" \
+            --root "$RUNNER_TEMP/predecessor-view/governance" \
             --output "$RUNNER_TEMP/generated-dashboard"
           test -z "$(git -C "$RUNNER_TEMP/governance" status --porcelain=v1 --untracked-files=all)"
 

@@ -85,6 +85,7 @@ class PredecessorPublicationTests(unittest.TestCase):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(b"fixture\n")
             output = parent / "publication-observation.json"
+            retained_view = parent / "retained-publication-view"
             commit = "a" * 40
             tree = "b" * 40
             candidate = "c" * 40
@@ -184,6 +185,7 @@ class PredecessorPublicationTests(unittest.TestCase):
                     evaluator_entry_point=entry_point,
                     evaluator_wheel=wheel,
                     output=output,
+                    view_output=retained_view,
                 )
 
             retained = output.read_bytes()
@@ -194,6 +196,8 @@ class PredecessorPublicationTests(unittest.TestCase):
             self.assertEqual(651, result.predecessor_artifact_count)
             self.assertTrue(result.source_unchanged)
             self.assertTrue(result.applied)
+            self.assertTrue(result.retained_view)
+            self.assertTrue(retained_view.is_dir())
             self.assertEqual(result.observation_sha256, PUBLICATION._sha256(retained))
 
     def test_changed_preparation_evidence_fails_before_predecessor_execution(self) -> None:
@@ -268,6 +272,13 @@ class PredecessorPublicationTests(unittest.TestCase):
                     )
             candidate.assert_not_called()
 
+            with self.assertRaisesRegex(PUBLICATION.PredecessorPublicationError, "outside the repository"):
+                PUBLICATION._ordinary_view_output(root / "publication-view", root)
+            retained_view = parent / "publication-view"
+            retained_view.mkdir()
+            with self.assertRaisesRegex(PUBLICATION.PredecessorPublicationError, "already exists"):
+                PUBLICATION._ordinary_view_output(retained_view, root)
+
     def test_cli_has_closed_inputs_and_json_failure(self) -> None:
         help_run = subprocess.run(
             [sys.executable, str(SCRIPT), "--help"],
@@ -279,6 +290,7 @@ class PredecessorPublicationTests(unittest.TestCase):
         )
         self.assertNotIn("--omit", help_run.stdout)
         self.assertNotIn("--expected-error", help_run.stdout)
+        self.assertIn("--view-output", help_run.stdout)
         failed = subprocess.run(
             [
                 sys.executable,

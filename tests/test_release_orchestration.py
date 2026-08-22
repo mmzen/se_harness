@@ -561,6 +561,23 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertEqual(5, combined.count("predecessor-publication-view.json"))
         self.assertEqual(5, combined.count("predecessor-publication-result.json"))
         self.assertEqual(3, combined.count("--json | tee"))
+        self.assertEqual(2, combined.count("--view-output"))
+        self.assertIn('mkdir "$RUNNER_TEMP/pages-predecessor-view"', self.workflow)
+        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', self.pages)
+        self.assertIn('--view-output "$RUNNER_TEMP/pages-predecessor-view/governance"', self.workflow)
+        self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.pages)
+        self.assertIn(
+            'python "$RUNNER_TEMP/pages-predecessor-view/governance/scripts/generate_harness_dashboard.py"',
+            self.workflow,
+        )
+        self.assertIn(
+            'python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py"',
+            self.pages,
+        )
+        self.assertNotIn(
+            'python "$RUNNER_TEMP/governance/scripts/generate_harness_dashboard.py"',
+            combined,
+        )
         self.assertNotIn('evaluator-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"', combined)
         self.assertNotIn('evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"', combined)
         for forbidden in ("--omit", "--expected-error"):

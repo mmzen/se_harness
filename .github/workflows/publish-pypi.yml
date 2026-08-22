@@ -90,6 +90,7 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
+          mkdir "$RUNNER_TEMP/pages-predecessor-view"
           identity_args=(
             --role released-evaluator
             --expected-version "$EVALUATOR_VERSION"
@@ -548,6 +549,7 @@ jobs:
             --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
             --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
             --output "$RUNNER_TEMP/pages-predecessor-publication-view.json" \
+            --view-output "$RUNNER_TEMP/pages-predecessor-view/governance" \
             --json | tee "$RUNNER_TEMP/pages-predecessor-publication-result.json"
 
       - name: Generate and package the exact Explorer payload
@@ -555,7 +557,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python "$RUNNER_TEMP/governance/scripts/generate_harness_dashboard.py" --root "$RUNNER_TEMP/governance" --output "$RUNNER_TEMP/generated-dashboard"
+          python "$RUNNER_TEMP/pages-predecessor-view/governance/scripts/generate_harness_dashboard.py" --root "$RUNNER_TEMP/pages-predecessor-view/governance" --output "$RUNNER_TEMP/generated-dashboard"
           python .github/scripts/publish_dashboard.py package --source "$RUNNER_TEMP/generated-dashboard" --destination "$RUNNER_TEMP/pages-site" \
             --provenance "$RUNNER_TEMP/pages-provenance.json" --output "$RUNNER_TEMP/pages-publication.json" --github-output "$GITHUB_OUTPUT"
 
