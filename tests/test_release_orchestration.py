@@ -508,6 +508,12 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("id-token: write", qualify)
         self.assertIn("python -m se_harness validate .", qualify)
         self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
+        self.assertIn(
+            'git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"',
+            qualify,
+        )
+        self.assertIn('cd "$RUNNER_TEMP/candidate-checkout"', qualify)
+        self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)

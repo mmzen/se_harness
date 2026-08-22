@@ -195,6 +195,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir "$RUNNER_TEMP/source-a" "$RUNNER_TEMP/source-b"
+          git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"
           git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-a"
           git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-b"
 
@@ -203,7 +204,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check build==1.3.0
-          cd "$RUNNER_TEMP/source-a"
+          cd "$RUNNER_TEMP/candidate-checkout"
           python -m se_harness validate .
           python -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
