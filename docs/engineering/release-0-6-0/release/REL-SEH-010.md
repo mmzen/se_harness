@@ -2,10 +2,13 @@
 id = "REL-SEH-010"
 type = "release_contract"
 title = "Release se-harness 0.6.0 through a predecessor-compatible successor"
-status = "approved"
+status = "rejected"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
+rejected_at = "2026-08-22T16:29:20Z"
+rejected_by = "release-owner"
+rejection_reason = "Its C4 release unit did not satisfy hosted qualification; successor C6 under REL-SEH-011 preserves it as immutable history."
 
 [bootstrap]
 schema = "se-harness-release-bootstrap-v1"
@@ -26,15 +29,22 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-22T06:50:49Z"
 decided_by = "release-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "rejected"
+decided_at = "2026-08-22T16:29:20Z"
+decided_by = "release-owner"
+reason = "Its C4 release unit did not satisfy hosted qualification; successor C6 under REL-SEH-011 preserves it as immutable history."
 +++
 
 # Release Contract: Release se-harness 0.6.0 through a predecessor-compatible successor
 
 ## Lifecycle and prerequisites
 
-On 2026-08-22, after successor candidate C4 `b099a2728d945ee705c1f956ec012f9730df15ac` completed exact local qualification and the separately authorized `REL-SEH-009` rejection produced a valid complete candidate graph, the accountable release owner explicitly directed this contract's `draft` to `approved` transition. `REL-SEH-009`, verified `VREC-SEH-010`, candidate C3, and reserved but uncreated `RLS-SEH-010` remain accurate immutable history; no historical artifact or candidate is repointed.
+On 2026-08-22, after successor candidate C4 `b099a2728d945ee705c1f956ec012f9730df15ac` completed exact local qualification and the separately authorized `REL-SEH-009` rejection produced a valid complete candidate graph, the accountable release owner approved this contract. C4 then failed hosted candidate qualification, and corrective C5 `5653cb52e729ad5d48683bc7e28ee3f0478e2e2c` failed its hosted POSIX predecessor assessment. Exact C6 `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798` preserves both failures and completes the successor correction under `REL-SEH-011`.
 
-Approval defines the C4 release unit and successor policy. It does not commit this governance update, push, use credentials, dispatch hosted lanes, transition `WO-REB-006`, prepare or transition a VREC/RLS, tag, publish, deploy, mutate maintenance state, change external policy, or upgrade the root evaluator.
+The release owner therefore transitioned this superseded contract from `approved` to `rejected`. `REL-SEH-009`, verified `VREC-SEH-010`, C3-C5, and reserved but uncreated `RLS-SEH-010`/`VREC-SEH-011`/`RLS-SEH-011` remain accurate immutable history; no historical artifact or candidate is repointed. Rejection grants no authority to prepare or transition a VREC/RLS, push, use credentials, tag, publish, deploy, mutate maintenance state, change external policy, or upgrade the root evaluator.
 
 ## Release unit
 

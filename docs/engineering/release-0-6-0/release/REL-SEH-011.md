@@ -2,7 +2,7 @@
 id = "REL-SEH-011"
 type = "release_contract"
 title = "Release se-harness 0.6.0 through hosted predecessor assessment"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -20,19 +20,25 @@ evaluator_archive_sha256 = "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc
 
 [relations]
 gates = ["WO-DST-019", "WO-DST-020", "WO-DST-021", "WO-IAR-012", "WO-WEX-001", "WO-WEX-002", "WO-REB-001", "WO-REB-002", "WO-REB-003", "WO-RLS-008", "WO-REB-004", "WO-REB-005", "WO-REB-006", "WO-REB-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-22T16:29:21Z"
+decided_by = "release-owner"
 +++
 
 # Release Contract: Release se-harness 0.6.0 through hosted predecessor assessment
 
 ## Lifecycle and prerequisites
 
-This draft grants no authority. C4 `b099a2728d945ee705c1f956ec012f9730df15ac`, governance commit `39fac46b009727529b6b65f5d8e63972155b0590`, branch `candidate/0.6.0-c4`, and hosted runs `32558379907`/`32558379908` remain accurate failed qualification history. C5 `5653cb52e729ad5d48683bc7e28ee3f0478e2e2c`, branch `candidate/0.6.0-c5`, successful candidate-evidence run `32562498151`, expected-red legacy run `32562498162`, and failed predecessor-assessment run `32562498180` are also immutable history. `REL-SEH-010` remains approved until separately dispositioned; reserved but uncreated `VREC-SEH-011` and `RLS-SEH-011` are never synthesized or repointed.
+On 2026-08-22, exact C6 `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798` completed local Windows/Linux, dual-runtime package, reproducible-build, exact predecessor-view, and hosted qualification. Candidate Evidence run `32584489706` and Predecessor Evaluator Assessment run `32584489683` passed; unchanged Engineering Harness run `32584489732` retained its documented released-0.5 full-graph boundary failure. The release owner separately rejected superseded `REL-SEH-010` and approved this successor contract.
 
-C5 implemented the initial `WO-REB-007` correction but the first real POSIX virtual-environment assessment exposed lexical interpreter-root handling that the Windows and mocked-path tests did not exercise. A future C6 must complete and qualify the same still-`in_progress` work order before the release owner may reject `REL-SEH-010` and consider this contract for approval. No prior candidate, contract, aggregate, release record, evidence, branch, or external fact is rewritten.
+C4 `b099a2728d945ee705c1f956ec012f9730df15ac`, governance commit `39fac46b009727529b6b65f5d8e63972155b0590`, branch `candidate/0.6.0-c4`, and hosted runs `32558379907`/`32558379908` remain accurate failed qualification history. C5 `5653cb52e729ad5d48683bc7e28ee3f0478e2e2c`, branch `candidate/0.6.0-c5`, successful candidate-evidence run `32562498151`, expected-red legacy run `32562498162`, and failed predecessor-assessment run `32562498180` are also immutable history. Reserved but uncreated `VREC-SEH-011`, `RLS-SEH-011`, and `RLS-SEH-010` are never synthesized or repointed. Approval defines the C6 release unit and successor policy but does not prepare or verify `VREC-SEH-012`, prepare or transition `RLS-SEH-012`, push, use credentials, tag, publish, deploy, mutate maintenance state, change external policy, or upgrade the root evaluator.
 
 ## Release unit
 
-One future successor candidate C6 for version `0.6.0`, containing C5 ancestry plus only the bounded completion of approved `WO-REB-007`. The proposed release aggregate remains fourteen work orders: the thirteen exact work orders from `REL-SEH-010` plus `WO-REB-007`.
+Exact successor candidate C6 `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798` for version `0.6.0`, containing C5 ancestry plus only the bounded completion of approved `WO-REB-007`. The proposed release aggregate remains fourteen work orders: the thirteen exact work orders from `REL-SEH-010` plus `WO-REB-007`.
 
 The future aggregate is `VREC-SEH-012`, with fourteen work orders, fifteen keyed evidence paths, and thirteen verification contracts. `WO-REB-007` adds one keyed evidence path and `VER-REB-005`. The proposed release record is `RLS-SEH-012`.
 
