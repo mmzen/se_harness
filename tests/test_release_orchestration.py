@@ -524,6 +524,23 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("from se_harness.release_distribution import", self.resolver)
         self.assertGreaterEqual(self.workflow.count("--release-record"), 4)
 
+    def test_all_publication_validation_points_use_one_predecessor_view_adapter(self) -> None:
+        combined = self.workflow + self.pages
+        self.assertEqual(3, combined.count("scripts/validate_predecessor_publication_view.py"))
+        self.assertEqual(
+            3,
+            combined.count('python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py"'),
+        )
+        self.assertEqual(3, combined.count("--evaluator-entry-point"))
+        self.assertEqual(3, combined.count('--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"'))
+        self.assertEqual(5, combined.count("predecessor-publication-view.json"))
+        self.assertEqual(5, combined.count("predecessor-publication-result.json"))
+        self.assertEqual(3, combined.count("--json | tee"))
+        self.assertNotIn('evaluator-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"', combined)
+        self.assertNotIn('evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"', combined)
+        for forbidden in ("--omit", "--expected-error"):
+            self.assertNotIn(forbidden, combined)
+
     def test_pages_recovery_is_main_only_and_has_no_release_event(self) -> None:
         self.assertNotIn("  release:\n", self.pages)
         self.assertNotIn("      release_tag:\n", self.pages)

@@ -85,7 +85,7 @@ clean candidate C -> exact bundle manifest -> ready VREC -> human verification
                                                               -> one-input authorized publication
 ```
 
-The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their governance snapshots with the exact standard released evaluator selected by those snapshots. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
+The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their complete governance snapshots with current semantics and validate an evidence-bound predecessor-compatible view with the exact standard released evaluator when retained rejected history requires it. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
 ### One-release predecessor bootstrap
 
@@ -128,6 +128,21 @@ python scripts/assess_predecessor_evaluator.py `
 ```
 
 Plan mode performs the complete assessment but creates no evidence file. Adding `--apply` exclusively creates canonical `se-harness-predecessor-assessment-view-v1` JSON at the named external path. The JSON binds the complete candidate report, exact legacy refusal, both omitted Git/raw identities, sparse rules, isolated evaluator payload, fixed view commands, graph counts, and dashboard tree. The dashboard digest retains every generated file while normalizing only the released generator's factual run-time `generated_at` and `elapsed_ms` fields; all semantic bundle bytes remain hash-bound. The adapter rejects publication credential signals, arbitrary omissions or expected-error input, linked or in-checkout output, collision, diagnostic drift, candidate drift, and any source mutation. It has no lifecycle, commit, push, tag, publication, deployment, maintenance, policy, or root-upgrade effect.
+
+The publication gate uses a separate read-only adapter after the RLS is released. Operators normally do not invoke it manually; the initial release resolver, release-bound Pages build, and standalone Pages recovery all call the same command. A local evidence replay uses:
+
+```powershell
+python scripts/validate_predecessor_publication_view.py `
+  --repository <clean-governance-checkout> `
+  --release-record RLS-SEH-012 `
+  --evaluator-python <external-env>/Scripts/python.exe `
+  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
+  --evaluator-wheel <downloaded-public-wheel> `
+  --output <external-runner-directory>/predecessor-publication-view.json `
+  --json
+```
+
+The adapter requires a clean committed checkout, a released RLS, canonical preparation/evaluator sidecars, unchanged rejected-history blobs, and the exact external wheel/runtime. It validates the complete graph before and after, derives the two omissions without caller input, requires released `doctor` and JSON `validate` to pass in a detached temporary view at governance `HEAD`, proves cleanup and zero source change, and emits canonical `se-harness-predecessor-publication-view-v1` JSON only at the named external path. Passing is a technical prerequisite, not publication authority; the adapter has no credentials, network, lifecycle, Git-ref, maintenance, publication, deployment, policy, or root-upgrade effect.
 
 On POSIX, supply the virtual environment's lexical `bin/python` path rather than its resolved system-interpreter target. The adapter permits only that terminal interpreter link, derives evaluator identity from the virtual-environment root, and continues to reject linked parent directories, entry points, wheels, and source-checkout paths. A standard Windows `Scripts/python.exe` remains an ordinary-file path under the same contract.
 

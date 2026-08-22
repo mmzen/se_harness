@@ -528,7 +528,9 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("fetch-depth: 0", self.workflow)
 
     def test_workflow_preserves_evaluator_generator_and_payload_boundaries(self) -> None:
-        self.assertIn("evaluator-env/bin/harnessctl\" validate", self.workflow)
+        self.assertIn("scripts/validate_predecessor_publication_view.py", self.workflow)
+        self.assertIn('--evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"', self.workflow)
+        self.assertNotIn('evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"', self.workflow)
         self.assertIn("publish_dashboard.py evaluator", self.workflow)
         self.assertIn('--release-record "$RELEASE_RECORD"', self.workflow)
         self.assertIn("--role released-evaluator", self.workflow)

@@ -103,7 +103,14 @@ jobs:
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-          "$RUNNER_TEMP/evaluator-env/bin/harnessctl" validate "$GITHUB_WORKSPACE"
+          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
+            --repository "$GITHUB_WORKSPACE" \
+            --release-record "${{ inputs.release_record }}" \
+            --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
+            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
+            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
+            --output "$RUNNER_TEMP/predecessor-publication-view.json" \
+            --json | tee "$RUNNER_TEMP/predecessor-publication-result.json"
 
       - name: Derive one canonical release plan
         id: plan
@@ -127,7 +134,10 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: release-plan-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/release-plan.json
+          path: |
+            ${{ runner.temp }}/release-plan.json
+            ${{ runner.temp }}/predecessor-publication-view.json
+            ${{ runner.temp }}/predecessor-publication-result.json
           if-no-files-found: error
           retention-days: 14
 
@@ -146,7 +156,10 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: release-refusal
-          path: ${{ runner.temp }}/release-refusal.json
+          path: |
+            ${{ runner.temp }}/release-refusal.json
+            ${{ runner.temp }}/predecessor-publication-view.json
+            ${{ runner.temp }}/predecessor-publication-result.json
           if-no-files-found: error
           retention-days: 90
 
@@ -520,7 +533,14 @@ jobs:
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-          "$RUNNER_TEMP/evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"
+          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
+            --repository "$RUNNER_TEMP/governance" \
+            --release-record "${{ inputs.release_record }}" \
+            --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
+            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
+            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
+            --output "$RUNNER_TEMP/pages-predecessor-publication-view.json" \
+            --json | tee "$RUNNER_TEMP/pages-predecessor-publication-result.json"
 
       - name: Generate and package the exact Explorer payload
         id: package

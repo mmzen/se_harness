@@ -149,12 +149,19 @@ jobs:
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
 
       - name: Validate with the released evaluator
+        env:
+          EVALUATOR_WHEEL: ${{ steps.evaluator.outputs.evaluator_wheel }}
         shell: bash
         run: |
           set -euo pipefail
-          cd "$RUNNER_TEMP"
-          export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"
+          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
+            --repository "$RUNNER_TEMP/governance" \
+            --release-record "$RELEASE_RECORD" \
+            --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
+            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
+            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
+            --output "$RUNNER_TEMP/predecessor-publication-view.json" \
+            --json | tee "$RUNNER_TEMP/predecessor-publication-result.json"
 
       - name: Generate the target-local canonical Explorer
         shell: bash

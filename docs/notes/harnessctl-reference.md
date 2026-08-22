@@ -259,6 +259,8 @@ Only `ready` and `released` release records claim a version. Valid rejected reco
 
 For this repository's transitional hosted qualification, `scripts/assess_predecessor_evaluator.py` reuses that exact view derivation. It separately records the immutable 0.5.0 full-checkout `E009`, requires `doctor`, `validate`, and dashboard generation to pass in the view, validates the complete candidate graph before and after, and optionally creates one canonical evidence file outside the checkout. It accepts no omission or expected-error arguments and performs no `harnessctl` lifecycle action.
 
+For the repository-specific publication gate, `scripts/validate_predecessor_publication_view.py` selects one exact released RLS, replays its preparation-view and evaluator sidecars against current Git history, validates the complete clean governance graph before and after, and requires the exact external predecessor `doctor` and JSON `validate` to pass in a detached view that omits only the bound rejected REL/RLS pair. The CLI accepts no omission or expected-error input, rejects credential and alternate Git/Python state, writes only an optional exclusive canonical observation outside the checkout, and is shared by initial publication resolution plus both Pages validation paths. It does not claim that the predecessor parsed omitted history and grants no publication or lifecycle authority.
+
 ## Authority summary
 
 | Result | Meaning |
