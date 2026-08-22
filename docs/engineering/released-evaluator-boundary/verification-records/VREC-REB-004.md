@@ -2,7 +2,7 @@
 id = "VREC-REB-004"
 type = "verification_record"
 title = "Verification candidate for WO-REB-008"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -12,10 +12,17 @@ worktree_state = "clean"
 verified_at = "2026-08-22T19:46:30Z"
 artifact_snapshot_sha256 = "daed41c0e9ee348b2f69b27a193f9fce2675d5655044f88add9e958070420b36"
 evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-008-publication-view.md"]
+verified_by = "quality-owner"
 
 [relations]
 verifies_work_order = ["WO-REB-008"]
 conforms_to = ["VER-REB-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-22T19:47:27Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
@@ -23,6 +30,8 @@ conforms_to = ["VER-REB-006"]
 This ready record binds retained evidence for `WO-REB-008` to candidate commit `feba2d420ad84a63919bb83d22650fb2636d9bba`. An accountable assurance owner must review the evidence and transition the record to `verified`; preparation did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+
+On 2026-08-22, the accountable assurance authority accepted the exact record under the owner's explicit authorization to finalize release 0.6.0. The decision followed review of the bound commit, retained evidence, complete and predecessor-compatible validation, exact local suite, successful hosted replacement lanes, expected-red legacy boundary, and preservation of release identity and bytes. Automation did not infer acceptance from test results.
 
 ## Predecessor-compatible capture
 
