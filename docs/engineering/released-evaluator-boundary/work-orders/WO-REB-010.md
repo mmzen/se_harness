@@ -2,7 +2,7 @@
 id = "WO-REB-010"
 type = "work_order"
 title = "Provide exact Git context to release-candidate tests"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T20:06:01Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T20:10:59Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Provide exact Git context to release-candidate tests
 
 ## Lifecycle
 
-This bounded corrective work is approved and in progress under the owner's release-finalization authority. Commit-bound assurance is required before another publication retry.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-010-git-aware-candidate.md`. Commit-bound assurance remains required before another publication retry; implementation status does not itself grant assurance or publication authority.
 
 ## Objective
 
