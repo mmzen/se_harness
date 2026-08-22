@@ -2,7 +2,7 @@
 id = "WO-REB-014"
 type = "work_order"
 title = "Normalize Windows Git-Bash release paths"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T21:01:22Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T21:06:40Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Normalize Windows Git-Bash release paths
 
 ## Lifecycle
 
-This bounded corrective work is in progress under the repository owner's explicit authority to finalize release 0.6.0. Commit-bound assurance remains required before another publication retry.
+This bounded corrective work is implemented with exact qualification retained in `../evidence/WO-REB-014-windows-bash-path.md`. Commit-bound assurance remains required before another publication retry.
 
 ## Objective
 
