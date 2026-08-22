@@ -515,6 +515,15 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn('cd "$RUNNER_TEMP/candidate-checkout"', qualify)
         self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
         self.assertNotIn("python -m se_harness doctor .", qualify)
+        self.assertIn(
+            "python -m pip install --disable-pip-version-check "
+            "build==1.3.0 setuptools==84.0.0 wheel==0.48.0",
+            qualify,
+        )
+        self.assertNotIn(
+            "python -m pip install --disable-pip-version-check build==1.3.0\n",
+            qualify,
+        )
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)
