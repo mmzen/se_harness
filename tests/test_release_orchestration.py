@@ -519,6 +519,9 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn('python-version: "3.11.9"', qualify)
         self.assertEqual(4, qualify.count('temp_root="$(cygpath -u "$RUNNER_TEMP")"'))
         self.assertNotIn('"$RUNNER_TEMP/', qualify)
+        self.assertIn('test_temp="$temp_root/candidate-test-temp"', qualify)
+        self.assertIn('export TEMP="$(cygpath -w "$test_temp")"', qualify)
+        self.assertIn('export TMP="$TEMP"', qualify)
         self.assertIn(
             "python -m pip install --disable-pip-version-check "
             "build==1.3.0 setuptools==84.0.0 wheel==0.48.0",
