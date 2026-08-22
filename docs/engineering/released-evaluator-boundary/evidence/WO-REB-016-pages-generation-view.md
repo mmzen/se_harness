@@ -72,6 +72,12 @@ Generating from the retained canonical `governance` checkout passed with 645 art
 
 The local Windows replay required a shorter external temporary path to avoid MAX_PATH while materializing a tracked feature file. The hosted Ubuntu runner uses its existing short runner-temp path and does not share that platform limitation.
 
-## Pending gates
+## Hosted recovery and public reconciliation
 
-Commit-bound assurance, trusted-main integration, hosted standalone Pages recovery, public endpoint verification, and final reconciliation remain pending. No hosted result is inferred from local success.
+`VREC-REB-012` independently verified the exact commit-bound evidence. The correction was integrated to trusted main, and the final successor recovery ran at verified head `015a3cbb4b5b9bbba2f22b6813fc177a36398b3e` after the separately assured `WO-REB-017` step-wiring correction.
+
+Standalone Pages run `32601701154` completed successfully. Build job `97100846602` passed release resolution, immutable-governance confirmation, GitHub Release verification, provenance resolution, `c37ec5af` checkout, released 0.5 evaluator identity, exact predecessor validation, 645-artifact Explorer generation, payload attestation, Pages configuration, and artifact upload. Deploy job `97100903920` successfully deployed and summarized the public demonstration.
+
+Public `https://mmzen.github.io/se_harness/` returned HTTP 200 and the `Harness Explorer` page. Its `publication-manifest.json` identifies `v0.6.0`, `RLS-SEH-012`, C6 candidate `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798`, and governance commit `c37ec5af43234ce66c518aa58355ec05c7b8aa21`. Hosted bundle manifest SHA-256 is `e351728a72412aa148257e8a25af5d990f07ee4de13b6f80f600e9e7e8e50f25`, generated dashboard SHA-256 is `611b8aff0d530196cebdba027a6c6b54f21457c946ba22feaefeba5d1399d57d`, generation summary SHA-256 is `395dea6bdbe9662604960deaad7bd00e9a333d123b632dbb8ffc0b9f6084591c`, and published dashboard SHA-256 is `e11ea2a2203d0cdf123b7a719669b295841ffe7cb087945c24a9e63b148ce4cd`.
+
+Final anonymous reconciliation confirmed the non-draft, non-prerelease GitHub Release, all three exact release assets, exact PyPI wheel and sdist hashes, maintenance ref `release/0.6` at C6, annotated tag object `03cae3d30ea1e3933a92c9e87683b0144f8ccc77` peeled to C6, and unchanged released record, rejected history, distributions, and root evaluator. This work order has no remaining release gate.

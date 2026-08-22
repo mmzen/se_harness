@@ -36,6 +36,10 @@ Corrective commit `82fede2563e058529d9bcd7ece58a5fc551d45a0` contains exactly th
 
 Review confirmed the failed run's release plan resolved the exact `RLS-SEH-012` identities and only the same-step output consumption caused the stop. The new assertion is a distinct unprivileged step immediately after the producer. The release publication workflow has exactly one `pages-predecessor-view` parent creation, inside `pages_build`, and none in `resolve`.
 
-## Pending gates
+## Hosted retry and reconciliation
 
-Commit-bound assurance, trusted-main integration, hosted standalone recovery, and public endpoint reconciliation remain pending. No hosted result is inferred from local success.
+`VREC-REB-013` independently verified the exact commit-bound evidence. Verified governance head `015a3cbb4b5b9bbba2f22b6813fc177a36398b3e` was pushed to trusted main and standalone recovery run `32601701154` was dispatched with exactly `RLS-SEH-012` and governance commit `c37ec5af43234ce66c518aa58355ec05c7b8aa21`.
+
+Build job `97100846602` passed all sixteen substantive and post-job steps, including the newly separated governance-input assertion and the corrected retained-view setup. Deploy job `97100903920` passed Pages deployment and summary. The public Explorer returned HTTP 200 with the exact release/candidate/governance provenance and attested payload hashes retained in `WO-REB-016-pages-generation-view.md`.
+
+Final reconciliation confirmed exact GitHub Release, PyPI, tag, maintenance, and Pages state. No candidate, RLS/VREC/REL lifecycle, tag, distribution, rejected-history, root-evaluator, credential policy, or external environment policy was changed by this work order. It has no remaining release gate.
