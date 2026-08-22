@@ -2,7 +2,7 @@
 id = "WO-REB-008"
 type = "work_order"
 title = "Correct publication validation for rejected bootstrap history"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-22T17:29:45Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-22T19:41:50Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Correct publication validation for rejected bootstrap history
 
 ## Lifecycle
 
-The approved work order is in progress for the bounded correction below. Commit-bound assurance is required before the corrected workflow may reach privileged jobs. This start does not authorize commit, push, credentials, hosted dispatch, publication retry, maintenance mutation, deployment, lifecycle changes outside this packet, external-policy change, or root upgrade.
+The bounded correction is implemented and exact local and hosted qualification is retained in `../evidence/WO-REB-008-publication-view.md`. Commit-bound assurance remains required before the corrected workflow may reach privileged publication jobs. This lifecycle state records completed work; it does not itself grant verification or release authority.
 
 ## Objective
 
