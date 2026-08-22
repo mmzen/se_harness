@@ -2,10 +2,13 @@
 id = "REL-SEH-009"
 type = "release_contract"
 title = "Release se-harness 0.6.0 from an LF-stable successor candidate"
-status = "approved"
+status = "rejected"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-22"
+rejected_at = "2026-08-22T06:50:15Z"
+rejected_by = "release-owner"
+rejection_reason = "Candidate C3 cannot satisfy its declared predecessor release-preparation step; successor C4 preserves it as immutable history."
 
 [bootstrap]
 schema = "se-harness-release-bootstrap-v1"
@@ -26,13 +29,22 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-21T21:50:56Z"
 decided_by = "release-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "rejected"
+decided_at = "2026-08-22T06:50:15Z"
+decided_by = "release-owner"
+reason = "Candidate C3 cannot satisfy its declared predecessor release-preparation step; successor C4 preserves it as immutable history."
 +++
 
 # Release Contract: Release se-harness 0.6.0 from an LF-stable successor candidate
 
 ## Lifecycle and prerequisites
 
-This draft grants no authority. Before it can become `approved`, the candidate must implement the approved terminal-history rule from `REQ-REB-010`, then the release owner must reject ready `RLS-SEH-009` with the retained CRLF qualification failure and reject `REL-SEH-008`, whose one declared record is no longer promotable. The exact rejected pair must validate before this contract becomes the sole approved predecessor-bootstrap contract.
+On 2026-08-22, after exact local qualification of successor candidate C4 `b099a2728d945ee705c1f956ec012f9730df15ac`, the accountable release owner explicitly directed the `approved` to `rejected` transition. Candidate C3 cannot satisfy this contract's declared predecessor release-preparation step against the retained rejected bootstrap history. Rejection preserves the contract, C3, verified `VREC-SEH-010`, and reserved but uncreated `RLS-SEH-010` as immutable history; none is repointed or overwritten.
+
+This lifecycle decision does not approve the successor contract, commit governance updates, push, use credentials, dispatch hosted lanes, prepare or transition a VREC/RLS, tag, publish, deploy, mutate maintenance state, change external policy, or upgrade the root evaluator.
 
 No historical candidate, VREC, RLS, evidence, or contract is repointed or overwritten.
 

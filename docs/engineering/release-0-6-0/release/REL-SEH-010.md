@@ -2,7 +2,7 @@
 id = "REL-SEH-010"
 type = "release_contract"
 title = "Release se-harness 0.6.0 through a predecessor-compatible successor"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
@@ -20,13 +20,21 @@ evaluator_archive_sha256 = "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc
 
 [relations]
 gates = ["WO-DST-019", "WO-DST-020", "WO-DST-021", "WO-IAR-012", "WO-WEX-001", "WO-WEX-002", "WO-REB-001", "WO-REB-002", "WO-REB-003", "WO-RLS-008", "WO-REB-004", "WO-REB-005", "WO-REB-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-22T06:50:49Z"
+decided_by = "release-owner"
 +++
 
 # Release Contract: Release se-harness 0.6.0 through a predecessor-compatible successor
 
 ## Lifecycle and prerequisites
 
-This draft grants no authority. `REL-SEH-009`, verified `VREC-SEH-010`, and candidate C3 remain accurate history, but the failed RLS preparation proves C3 cannot satisfy its declared release step. A later C4 must implement and verify the corrective packet before the release owner can disposition `REL-SEH-009` and consider this contract for approval. No historical artifact or candidate is repointed.
+On 2026-08-22, after successor candidate C4 `b099a2728d945ee705c1f956ec012f9730df15ac` completed exact local qualification and the separately authorized `REL-SEH-009` rejection produced a valid complete candidate graph, the accountable release owner explicitly directed this contract's `draft` to `approved` transition. `REL-SEH-009`, verified `VREC-SEH-010`, candidate C3, and reserved but uncreated `RLS-SEH-010` remain accurate immutable history; no historical artifact or candidate is repointed.
+
+Approval defines the C4 release unit and successor policy. It does not commit this governance update, push, use credentials, dispatch hosted lanes, transition `WO-REB-006`, prepare or transition a VREC/RLS, tag, publish, deploy, mutate maintenance state, change external policy, or upgrade the root evaluator.
 
 ## Release unit
 

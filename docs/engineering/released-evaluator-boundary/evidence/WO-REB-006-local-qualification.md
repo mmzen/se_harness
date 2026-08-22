@@ -89,3 +89,19 @@ Implementation, replay, tests, and operator documentation:
 ## Qualification-view disclosure
 
 The operational working tree intentionally contains the stopped untracked `RLS-SEH-008`, whose incomplete evaluator binding produces candidate diagnostic `E012` if indiscriminately scanned. The authoritative local full-suite and graph run therefore used a disposable bundle-backed clone overlaid with every reviewed change and omitted only that exact stopped path. Candidate graph validity was independently confirmed in that view. This omission is qualification hygiene for a user-owned stopped artifact, not the predecessor preparation view and not a validation bypass in product code.
+
+## Post-candidate exact replay (uncommitted retention update)
+
+The reviewed C4 implementation was committed locally as exact candidate `b099a2728d945ee705c1f956ec012f9730df15ac`, tree `3ee3cdc2b801ebf8b3166589e010f82ea8d40512`, with sole parent `5e8538c617809f843fd9d38b54c2210caa3a0e17`. The candidate commit contains exactly the 20 reviewed paths listed above. It does not contain the stopped untracked `docs/engineering/release-0-6-0/releases/RLS-SEH-008.md`, which remained untouched at SHA-256 `eea7a9953767e6b817754a517db72a2484561462fce1c9e440c5e5d1501a75fc`.
+
+An exact Git bundle of that immutable candidate, including committed history and tags but no working-tree overlay, was cloned to a disposable directory and checked out detached at the candidate identity. The clone was clean before and after replay.
+
+| Exact-candidate check | Result |
+| --- | --- |
+| `python -S -m unittest discover -s tests -p "test_*.py"` | PASS, 435 tests in 212.437 seconds, 5 platform skips |
+| candidate formal graph | PASS, 637 artifacts, 0 errors, 48 retained legacy maintenance warnings |
+| `python -S scripts/validate_release_distributions.py --root .` | PASS, 0 distribution-bearing records |
+| `python -S -m se_harness identity --role candidate-source --expected-version 0.6.0 --expected-root <exact-clone> --checkout-root <exact-clone> --candidate-commit b099a2728d945ee705c1f956ec012f9730df15ac` | PASS; schema `se-harness-runtime-identity-v3`, version `0.6.0`, candidate commit and source/template roots exact, no diagnostics |
+| `python -S -m se_harness --help` | PASS |
+
+This post-candidate section is a retention-only working-tree update and remains deliberately uncommitted pending separate governance authority. No push, credential use, hosted dispatch, lifecycle transition, VREC/RLS preparation, tag, publication, deployment, maintenance mutation, external-policy change, or root-evaluator upgrade occurred.
