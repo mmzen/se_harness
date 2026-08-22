@@ -16,4 +16,18 @@ Candidate complete-current qualification is `python -m se_harness validate .` pl
 
 Local C6 reproduction returned exit 1 with the same root/template drift and no mutation. The correction removes only that inapplicable final command; every complete-current, predecessor, test, build, byte-comparison, and privilege gate remains.
 
-Focused, complete exact-correction, commit identity, and lifecycle results are added after the corrective candidate exists.
+## Exact corrective qualification
+
+Corrective candidate `283758539aa9577b53eb00a6f571f37179accbe9` contains exactly the trusted workflow deletion, its regression assertion, `WO-REB-011`, and this evidence. A clean exact-commit clone excluded the stopped untracked release record.
+
+- focused release workflow policy: 5 tests passed;
+- complete release-orchestration module: 22 tests passed;
+- complete isolated suite: 452 tests passed with seven declared platform skips in 215.290 seconds;
+- complete current graph: 659 artifacts, zero errors, 50 maintenance warnings;
+- release-distribution validation: passed for exact `RLS-SEH-012` with one distribution-bearing record;
+- portable release surface, diff whitespace, and clean-checkout checks: passed;
+- exact C6 doctor: exit 1 with only documented 0.5-root/0.6-template drift; managed-root integrity unchanged;
+- resolver's exact released-0.5 doctor and predecessor-view invocation: unchanged and statically required;
+- candidate validation, full tests, CLI help, two archive builds, bundle checks, and every privilege dependency: unchanged.
+
+At closeout no publication credential, GitHub Release, PyPI file, Pages deployment, maintenance mutation, tag movement, root mutation, distribution rebuild, rejected-history mutation, or external-policy change occurred. Work-order completion, later commit-bound VREC acceptance, trusted-main push, and publication retry remain separate governance actions.
