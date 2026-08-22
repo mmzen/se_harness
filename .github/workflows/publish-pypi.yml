@@ -194,17 +194,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir "$RUNNER_TEMP/source-a" "$RUNNER_TEMP/source-b"
-          git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"
-          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-a"
-          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$RUNNER_TEMP/source-b"
+          temp_root="$(cygpath -u "$RUNNER_TEMP")"
+          mkdir "$temp_root/source-a" "$temp_root/source-b"
+          git worktree add --detach "$temp_root/candidate-checkout" "$CANDIDATE_COMMIT"
+          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$temp_root/source-a"
+          git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$temp_root/source-b"
 
       - name: Run candidate verification without publication credentials
         shell: bash
         run: |
           set -euo pipefail
+          temp_root="$(cygpath -u "$RUNNER_TEMP")"
           python -m pip install --disable-pip-version-check build==1.3.0 setuptools==84.0.0 wheel==0.48.0
-          cd "$RUNNER_TEMP/candidate-checkout"
+          cd "$temp_root/candidate-checkout"
           python -m se_harness validate .
           python -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
@@ -216,10 +218,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          temp_root="$(cygpath -u "$RUNNER_TEMP")"
           for suffix in a b; do
-            source="$RUNNER_TEMP/source-$suffix"
-            raw="$RUNNER_TEMP/raw-$suffix"
-            final="$RUNNER_TEMP/final-$suffix"
+            source="$temp_root/source-$suffix"
+            raw="$temp_root/raw-$suffix"
+            final="$temp_root/final-$suffix"
             mkdir "$raw" "$final"
             (cd "$source" && python -m build --wheel --sdist --no-isolation --outdir "$raw" .)
             test "$(find "$raw" -maxdepth 1 -type f -name '*.whl' | wc -l)" -eq 1
@@ -227,8 +230,8 @@ jobs:
             cp "$raw"/*.whl "$final/"
             python "$source/scripts/normalize_sdist.py" "$raw/$SDIST_NAME" "$final/$SDIST_NAME" --epoch "$SOURCE_DATE_EPOCH"
           done
-          cmp "$RUNNER_TEMP/final-a/${{ needs.resolve.outputs.wheel }}" "$RUNNER_TEMP/final-b/${{ needs.resolve.outputs.wheel }}"
-          cmp "$RUNNER_TEMP/final-a/${{ needs.resolve.outputs.sdist }}" "$RUNNER_TEMP/final-b/${{ needs.resolve.outputs.sdist }}"
+          cmp "$temp_root/final-a/${{ needs.resolve.outputs.wheel }}" "$temp_root/final-b/${{ needs.resolve.outputs.wheel }}"
+          cmp "$temp_root/final-a/${{ needs.resolve.outputs.sdist }}" "$temp_root/final-b/${{ needs.resolve.outputs.sdist }}"
 
       - name: Assemble and verify the exact release bundle
         env:
@@ -239,25 +242,26 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir "$RUNNER_TEMP/release-bundle"
-          cp "$RUNNER_TEMP/final-a/$WHEEL" "$RUNNER_TEMP/release-bundle/$WHEEL"
-          cp "$RUNNER_TEMP/final-a/$SDIST" "$RUNNER_TEMP/release-bundle/$SDIST"
-          printf '%s  %s\n%s  %s\n' "$WHEEL_SHA256" "$WHEEL" "$SDIST_SHA256" "$SDIST" > "$RUNNER_TEMP/release-bundle/SHA256SUMS"
+          temp_root="$(cygpath -u "$RUNNER_TEMP")"
+          mkdir "$temp_root/release-bundle"
+          cp "$temp_root/final-a/$WHEEL" "$temp_root/release-bundle/$WHEEL"
+          cp "$temp_root/final-a/$SDIST" "$temp_root/release-bundle/$SDIST"
+          printf '%s  %s\n%s  %s\n' "$WHEEL_SHA256" "$WHEEL" "$SDIST_SHA256" "$SDIST" > "$temp_root/release-bundle/SHA256SUMS"
           python scripts/create_release_bundle_manifest.py \
             --repository "$GITHUB_WORKSPACE" \
             --commit "${{ needs.resolve.outputs.candidate_commit }}" \
             --version "${{ needs.resolve.outputs.version }}" \
-            --wheel "$RUNNER_TEMP/release-bundle/$WHEEL" \
-            --sdist "$RUNNER_TEMP/release-bundle/$SDIST" \
-            --output "$RUNNER_TEMP/rebuilt-bundle.json"
+            --wheel "$temp_root/release-bundle/$WHEEL" \
+            --sdist "$temp_root/release-bundle/$SDIST" \
+            --output "$temp_root/rebuilt-bundle.json"
           python .github/scripts/publish_release.py verify-build-manifest \
-            --plan "$RUNNER_TEMP/plan/release-plan.json" \
-            --manifest "$RUNNER_TEMP/rebuilt-bundle.json" \
-            --output "$RUNNER_TEMP/rebuilt-manifest-result.json"
+            --plan "$temp_root/plan/release-plan.json" \
+            --manifest "$temp_root/rebuilt-bundle.json" \
+            --output "$temp_root/rebuilt-manifest-result.json"
           python .github/scripts/publish_release.py verify-bundle \
-            --plan "$RUNNER_TEMP/plan/release-plan.json" \
-            --directory "$RUNNER_TEMP/release-bundle" \
-            --output "$RUNNER_TEMP/qualification.json"
+            --plan "$temp_root/plan/release-plan.json" \
+            --directory "$temp_root/release-bundle" \
+            --output "$temp_root/qualification.json"
 
       - name: Transfer only verified inert release bytes
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

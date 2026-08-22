@@ -509,14 +509,16 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("python -m se_harness validate .", qualify)
         self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
         self.assertIn(
-            'git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"',
+            'git worktree add --detach "$temp_root/candidate-checkout" "$CANDIDATE_COMMIT"',
             qualify,
         )
-        self.assertIn('cd "$RUNNER_TEMP/candidate-checkout"', qualify)
+        self.assertIn('cd "$temp_root/candidate-checkout"', qualify)
         self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
         self.assertNotIn("python -m se_harness doctor .", qualify)
         self.assertIn("runs-on: windows-2022", qualify)
         self.assertIn('python-version: "3.11.9"', qualify)
+        self.assertEqual(4, qualify.count('temp_root="$(cygpath -u "$RUNNER_TEMP")"'))
+        self.assertNotIn('"$RUNNER_TEMP/', qualify)
         self.assertIn(
             "python -m pip install --disable-pip-version-check "
             "build==1.3.0 setuptools==84.0.0 wheel==0.48.0",
