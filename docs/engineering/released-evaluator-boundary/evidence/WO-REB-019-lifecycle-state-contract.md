@@ -14,9 +14,13 @@ and `superseded`. The amendment added no transition, version reservation, or
 predecessor adapter. All other packet and external-action boundaries remained
 unchanged.
 
-This is pre-candidate evidence. No candidate commit, VREC, RLS, push, hosted
-dispatch, tag, publication, deployment, root upgrade, maintenance mutation,
-credential use, or external-policy change was performed.
+The initial qualification was retained before candidate creation. The owner
+then authorized an operational implementation commit, commit-bound replay, a
+later verification-record proposal, branch push, and pull request. Candidate
+commit `e80021d7acf0d91d3f09e3f4d9ab368871e2d964` was created and replayed
+locally as recorded below. No VREC/RLS transition, hosted dispatch, tag,
+publication, deployment, root upgrade, maintenance mutation, or
+external-policy change was performed.
 
 ## Released-predecessor start gate
 
@@ -144,6 +148,32 @@ Candidate-source `doctor` against the operational 0.5-managed root failed on
 expected distribution/root drift. That result is boundary evidence and is not
 represented as root health or candidate-graph failure.
 
+## Operational candidate and exact replay
+
+The authorized operational implementation commit is:
+
+- commit: `e80021d7acf0d91d3f09e3f4d9ab368871e2d964`;
+- parent: `f8d854ecccc0b0e892a655dcaebe6e41d04f5989`;
+- tree: `42abfc7e975c7405dd04438409eaa58d3e9705ee`;
+- commit epoch: `1787500274`;
+- changed surface: exactly the 20 reviewed WO-REB-019 paths.
+
+The worktree was clean before and after replay. Candidate-source runtime
+identity resolved version 0.6.0 from the checkout, bound the full commit above,
+and reported no diagnostics. Exact-commit replay passed:
+
+- complete suite: 471 tests, 7 skipped, Python 3.14.6;
+- complete candidate graph: 687 artifacts, 0 errors, 50 pre-existing
+  maintenance warnings;
+- release-distribution validation: one distribution-bearing record;
+- portable repository release surface;
+- candidate CLI version 0.6.0;
+- whitespace and clean-worktree checks.
+
+The candidate commit contains the same canonical 38,052-byte workflow-v3
+contract and package/template parity qualified above. The ephemeral package
+artifacts remain non-promotable observations outside the checkout.
+
 ## Non-mutation evidence and remaining work
 
 Root managed evaluator files, `.engineering-harness.lock`, and
@@ -154,20 +184,60 @@ Root managed evaluator files, `.engineering-harness.lock`, and
 - lock: `c4c4191998cad431620324dba2ad205c190fcf2802847278cabec92e853989af`;
 - root configuration: `593d837d251a50156dd188bd180d9e4e9190ccdf0a7c72b5e7bcdce075053e57`.
 
-Exact released-0.5 review preflight is recorded below. Hosted Windows/Linux
-qualification, exact-candidate replay, candidate commit, and commit-bound
-verification remain pending separate authorization.
+Exact released-0.5 review and capture are recorded below. Hosted Windows/Linux
+qualification and accountable verification remain pending. Workflow v3
+defines `ready` as the first valid verification-record state; creating a
+`draft` verification record would make the formal graph invalid.
 
-## Exact released-0.5 review replay
+The owner subsequently authorized a ready `VREC-REB-015` bound to the
+operational candidate. An attempted candidate-0.6 preparation command stopped
+before any write with `WEX301` / mutation-guard `MG002`, as required because a
+candidate process cannot mutate the operational schema-2 root. That refusal
+did not test released-0.5 capture semantics. Exact 0.5 accepts an
+`in_progress` work order as active coverage and has already prepared
+`VREC-SEH-012` over that state in the governed predecessor-compatible view.
+The authorized preparation therefore uses the same exact released-governor
+path below; no WO-REB-019 transition or root-evaluator upgrade is required.
 
-The final replay used exact evaluator 0.5.0 in
-`../q-wo-reb-019-review-view`. The view excluded only the same immutable
-`REL-SEH-009` / `RLS-SEH-009` pair and retained their hashes above.
+## Exact released-0.5 review and VREC preparation
+
+The final preparation used exact evaluator 0.5.0 in a clean detached sparse
+worktree at candidate `e80021d7acf0d91d3f09e3f4d9ab368871e2d964` under
+`../q-wo-reb-019-vrec-view`. The view excluded only the same immutable
+`REL-SEH-009` / `RLS-SEH-009` pair. Their exact candidate identities are:
+
+| Omitted artifact | Git blob | Raw Git-blob SHA-256 |
+| --- | --- | --- |
+| `docs/engineering/release-0-6-0/release/REL-SEH-009.md` | `9dda66cc2ac1020863f3a1d6199b55bbe72f9f95` | `9be98c53d56af50e70c078eb193c3223e6f88c0d3dea82420200a4aa4c38a148` |
+| `docs/engineering/release-0-6-0/releases/RLS-SEH-009.md` | `0b9661f570e8a85afa4acb4dd995eda57bfc7f67` | `e0b8952953e8e180c6d572fe5d1236fded7104e623cc336bb9a93cd3b978f9e3` |
+
+The earlier `fdc4...` / `cf8c...` values are the unchanged CRLF-smudged
+Windows checkout observations; the table above is the exact commit-bound Git
+identity used for sparse preparation.
 
 - `python -I -m se_harness --version`: PASS, `0.5.0`;
 - exact predecessor `doctor`: PASS;
 - exact predecessor graph: PASS, 685 artifacts, 0 errors, 49 maintenance
   warnings;
 - exact predecessor WO-REB-019 review preflight: PASS;
-- work order remained `in_progress` and no lifecycle or external action was
-  performed.
+- exact predecessor `capture-verification`: PASS with WO-REB-019 remaining
+  `in_progress`;
+- prepared record: `VREC-REB-015`, `status=ready`, candidate
+  `e80021d7acf0d91d3f09e3f4d9ab368871e2d964`;
+- preparation timestamp: `2026-08-23T16:10:53Z`;
+- predecessor-compatible artifact snapshot SHA-256:
+  `5036d8fce1eff99323da211f21544c3694ee74483b041b9daaf848a75bc4a572`;
+- canonical LF VREC SHA-256:
+  `dc0ddfe6864477eb3edfa1d4148049f6cbf9b3aac31591bbb280ea5d6ee6128a`;
+- predecessor graph after capture: PASS, 686 artifacts, 0 errors, 49
+  maintenance warnings;
+- complete candidate graph after copying the proposal: PASS, 688 artifacts,
+  0 errors, 50 pre-existing maintenance warnings. Candidate workflow-v3
+  semantics accept the ready VREC's `in_progress` work-order coverage because
+  that state grants active authority; candidate 0.6's separate completion
+  predicate governs only candidate-side creation.
+
+The generated record was copied back without semantic or byte changes. It is
+an unverified proposal in a later governance commit; preparation did not
+transition WO-REB-019 or VREC-REB-015 and did not use candidate authority,
+upgrade the root evaluator, tag, publish, or deploy.
