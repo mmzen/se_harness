@@ -2,7 +2,7 @@
 id = "VREC-REB-015"
 type = "verification_record"
 title = "Verification candidate for WO-REB-019"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
@@ -12,10 +12,17 @@ worktree_state = "clean"
 verified_at = "2026-08-23T16:10:53Z"
 artifact_snapshot_sha256 = "5036d8fce1eff99323da211f21544c3694ee74483b041b9daaf848a75bc4a572"
 evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-019-lifecycle-state-contract.md"]
+verified_by = "quality-owner"
 
 [relations]
 verifies_work_order = ["WO-REB-019"]
 conforms_to = ["VER-REB-008"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-23T16:55:08Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
