@@ -2,7 +2,7 @@
 id = "VREC-REB-014"
 type = "verification_record"
 title = "Verification candidate for WO-REB-018"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
@@ -12,10 +12,17 @@ worktree_state = "clean"
 verified_at = "2026-08-23T09:33:42Z"
 artifact_snapshot_sha256 = "0dafd2feb54f1e8b2fd0b8812aab02533b81d160473dcbcd89dba3967dc915d1"
 evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-018-governance-migration.md"]
+verified_by = "quality-owner"
 
 [relations]
 verifies_work_order = ["WO-REB-018"]
 conforms_to = ["VER-REB-007"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-23T09:42:57Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
