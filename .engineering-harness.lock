@@ -1,8 +1,19 @@
 {
+  "evaluator": {
+    "archive_name": "se_harness-0.6.0-py3-none-any.whl",
+    "archive_sha256": "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42",
+    "version": "0.6.0"
+  },
   "files": {
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "122083cefba68aec9900606f9457744a10d96b8f48b91b4908e20e591dd5a83f"
+      "sha256": "9ca88dbe313144a8c95ab5406e8789a3b45e462b567206d1a6142b45dd144b52"
+    },
+    ".gitattributes": {
+      "mode": "fragment",
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
     },
     ".github/PULL_REQUEST_TEMPLATE.md": {
       "mode": "seed",
@@ -10,7 +21,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "a4fd7bef3b307ed6a007bf914f9ab7ab11d8591c163fb8b4cfc2736630341a43"
+      "sha256": "b42ae453af294c016495ba1ada3699108229f9228593086f74f73693d02c0801"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -18,39 +29,43 @@
     },
     "AGENTS.md": {
       "mode": "fragment",
-      "sha256": "bcf46d13ceee8c2606834a897eba153a654f0092c1d41c8737723739a1405f1c"
+      "sha256": "bed4eb168f7a2249eebbb8eb415bb2ce4b8791a1eada2736a900fc93c6ee0e93"
     },
     "CLAUDE.md": {
       "mode": "fragment",
-      "sha256": "a5d3b02b3200e5dc147578f81f2b80ca4a0f055a0a4a1c94a535352572ade2cd"
+      "sha256": "73de56ce4c04b1b7b79cc2f549372dd634df0d7abf3fc99b6b715a95dfcd276c"
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "00aa0afd3a7708aad861944169dd120daa4f3a4443169d747717ae4f3814fa42"
+      "sha256": "487debd2ed57000ae32c34d9cb0de239fa5e7c0282149481035587b127f24554"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
-      "sha256": "e873e18da307f2a8aeb12ea1fea9296761254c50f189b378bf11e8b86936bf2b"
+      "sha256": "f42ffe9b1411eb22581ba4f0347641c5e9662f55d80dd08213143285394ef074"
+    },
+    "docs/engineering/QUALITY_GATES.json": {
+      "mode": "managed",
+      "sha256": "95b95015988380c3446007bca2571566c6bde11b2cccd25cb048437711ca77a0"
     },
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
-      "sha256": "b68b28e8f999e6d8dd63d2901c43b16f1b73ad309ab545381b822eac018eb8ad"
+      "sha256": "bb41790683f02e6930c0e38df151fbb2d386105026f051996bf28a5980b3ec1c"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
       "state": "present"
     },
-    "docs/engineering/REPOSITORY_CONTEXT.md": {
-      "mode": "seed",
-      "state": "present"
-    },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "3ee0039ef5e342fd4b64b472587ebbb4d7985a9633dadc662120c4ae4c506c67"
+      "sha256": "485f692e62ecefee06589964671971a976229b710a1a848e483428c8d9854646"
+    },
+    "docs/engineering/WORKFLOW.json": {
+      "mode": "managed",
+      "sha256": "e92adf4d81cf7147a76b20dd4c86ea90ca756b345caae50d29e4a80aec37f7b4"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "b006759796d79666b0dac654d75a9022cc210727de464c581c856fef0caf3a8b"
+      "sha256": "c1ee321600c3ed42c7a3eeb07e63404e82167295bb79de69f217d9d83339f461"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -82,7 +97,7 @@
     },
     "docs/engineering/templates/RELEASE_RECORD.template.md": {
       "mode": "managed",
-      "sha256": "a9c08f70535215afe33f5d090109dfab09c0f0d8481c58cbb9e4f95f7e9ff380"
+      "sha256": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff"
     },
     "docs/engineering/templates/REQUIREMENT.template.md": {
       "mode": "managed",
@@ -98,11 +113,11 @@
     },
     "docs/engineering/templates/VERIFICATION_RECORD.template.md": {
       "mode": "managed",
-      "sha256": "9e3074bc439c5f58b18045b6a4a2fc64c380fceba47ef2b3b1fc8d613beb19d7"
+      "sha256": "4bc094613fbc67902f69cd90139c5daa71dd183430e78719516e383ceb350dd1"
     },
     "docs/engineering/templates/WORK_ORDER.template.md": {
       "mode": "managed",
-      "sha256": "465a5dce3c76886c8e6d853fcaee32845f178333eb8e71e6ee9436ee603a9c75"
+      "sha256": "fe4ab0539bb8d000f679077a59bf220392ad2a8949f7e45f8fd78d862e8985b5"
     },
     "scripts/artifact_layout_registry.py": {
       "mode": "managed",
@@ -118,15 +133,15 @@
     },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
-      "sha256": "97598cdf7643ff35b64635dd838a48a389aa30b1a93a01d4873b6f3efe88c464"
+      "sha256": "7df41908049a01b972eda9f5678248ab38b23e870d88defe523d7f479dc8843b"
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "f7aa922075fbc343f6ad8d61526323dc611f567ed8eb562c67b2e19194d2cc48"
+      "sha256": "5cc567fba62463b1eae2c1d8afa373eabba1f57b15c9f73776466e3763414d99"
     },
     "scripts/inspect_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "78ce4988c98ffa45fb927f54435d3a7525b13e0cb113950b1beeafe4f41e9831"
+      "sha256": "0a8d7cae178f695967823bcbe6ee1ff89b47a32526365d0a438dfeebaab99b8a"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",
@@ -134,11 +149,11 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "543017353bfe8757904e6fc402e36c2c22d2e04095a9bf296deacf10ff6e4807"
+      "sha256": "29ec3b18fc8ed25012ede2445f4d53f6cc0dbb060f8c87114b7143797331517f"
     }
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
-  "schema": 2,
-  "tool_version": "0.5.0"
+  "schema": 3,
+  "tool_version": "0.6.0"
 }

@@ -39,7 +39,6 @@ PACKAGED_FRAGMENT_BLOCK_DIGEST = "bed4eb168f7a2249eebbb8eb415bb2ce4b8791a1eada27
 # Files permitted to name the retired path, with the reason each is not a live obligation.
 PERMITTED_MENTIONS = {
     "AGENTS.md": "owner region of this repository, governed by REQ-IAR-020",
-    "ENGINEERING_HARNESS.md": "repository-root managed copy of the released version",
     "docs/engineering/README.md": "this repository's own owner-owned seed",
     "docs/engineering/harness-distribution/README.md": "packet index recording the retirement",
     "docs/engineering/harness-distribution/evidence/WO-DST-021-verification.md": "retained evidence for this retirement",
@@ -63,6 +62,7 @@ PERMITTED_MENTIONS = {
     "docs/engineering/instruction-architecture/work-orders/WO-IAR-012.md": "owner-region work order",
     "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-001-verification.md": "historical evidence",
     "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-001.md": "historical work order",
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-002.md": "approved root-upgrade scope names the owner context path",
     "docs/engineering/released-evaluator-boundary/evidence/WO-REB-005-verification.md": "retained released-0.5 preflight evidence",
     "docs/engineering/self-hosting-boundary/work-orders/WO-SHB-001.md": "historical work order",
     "docs/engineering/verification-supersession/engineering-README.md": "historical domain note",

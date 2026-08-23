@@ -4,9 +4,9 @@
 
 > This note applies to contributors developing `se_harness`. It grants no implementation, verification, release, publication, deployment, or repository-upgrade authority.
 
-The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. That released alpha evaluates the final 0.5.0 candidate through the ordinary standard repository lifecycle, with no self-hosting installation profile, evaluator descriptor, or special promotion command. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
+The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-The current source candidate version is 0.6.0. That candidate identity does not change the separately locked released root evaluator or grant verification, release, publication, deployment, or repository-upgrade authority.
+The checkout and the locked root both report version 0.6.0, but they are different identities. The schema-3 lock binds the immutable public wheel and installed-payload digests; checkout source includes later development changes and remains candidate evidence. A matching version string does not grant verification, release, publication, deployment, or repository-upgrade authority.
 
 ## Development environment
 
@@ -89,9 +89,9 @@ clean candidate C -> exact bundle manifest -> ready VREC -> human verification
 
 The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their complete governance snapshots with current semantics and validate an evidence-bound predecessor-compatible view with the exact standard released evaluator when retained rejected history requires it. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
-### One-release predecessor bootstrap
+### Historical one-release predecessor bootstrap
 
-Version 0.6.0 is the first candidate that requires canonical evaluator evidence on a ready release record, while this repository is still governed by a schema-2 lock and released 0.5.0. The approved `se-harness-release-bootstrap-v1` contract bridges only that transition. Released 0.5.0 still prepares and validates the RLS; candidate code merely records and rechecks an observation of that external evaluator.
+Version 0.6.0 was the first candidate that required canonical evaluator evidence on a ready release record while this repository was governed by a schema-2 lock and released 0.5.0. The approved `se-harness-release-bootstrap-v1` contract bridged only that transition. Released 0.5.0 prepared and validated the RLS; candidate code merely recorded and rechecked an observation of that external evaluator.
 
 If the complete graph contains one exact rejected predecessor-bootstrap RLS and its exact rejected declaring contract, released 0.5.0 cannot parse that newer terminal status. Under a separately approved successor contract, use the repository-owned adapter to rehearse an exact compatibility view:
 
@@ -115,7 +115,7 @@ Plan mode validates the complete graph with candidate source, derives the reject
 
 Adding `--apply` exclusively creates only the predecessor-generated RLS and its preparation-view sidecar, with source rechecks around each write and rollback on failure. It does not hide rejected history from candidate validation: the complete graph retains both rejected artifacts, and only `ready` or `released` RLS records claim a version. Multiple active records for one version still fail. This adapter is specific to the exact schema-2 predecessor-bootstrap boundary; it is not a general validation-error filter and it never approves, verifies, releases, commits, tags, publishes, deploys, changes the root, or uses credentials.
 
-The same derived view supports a separate hosted predecessor assessment without pretending that released 0.5.0 understands the complete graph. The unchanged managed workflow remains visibly failed at its exact full-checkout `E009`. The candidate-owned assessment first requires a clean exact commit and a valid complete-graph candidate report, proves the exact external wheel/runtime and old lock, accepts only that one legacy diagnostic, and then requires released 0.5.0 `doctor`, `validate`, and dashboard generation to pass in the two-omission view:
+The same derived view supported a separate hosted predecessor assessment without pretending that released 0.5.0 understood the complete graph. During the 0.6.0 release, the unchanged managed workflow remained visibly failed at its exact full-checkout `E009`. The candidate-owned assessment required a clean exact commit and a valid complete-graph candidate report, proved the exact external wheel/runtime and old lock, accepted only that one legacy diagnostic, and then required released 0.5.0 `doctor`, `validate`, and dashboard generation to pass in the two-omission view:
 
 ```powershell
 python scripts/assess_predecessor_evaluator.py `
@@ -165,10 +165,10 @@ Adding `--apply` is a separate explicit mutation. It exclusively creates one can
 
 The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserves the canonical sidecar bytes and bound raw SHA-256 under supported Windows and non-Windows checkout configurations. Validators do not normalize evidence before hashing; changed, noncanonical, or CRLF worktree bytes still fail.
 
-Ordinary ready RLS records still require the complete schema-3 evaluator identity in the current lock. A predecessor-bootstrap RLS requires its exact approved contract while ready or released. If a failed ready RLS and its exact contract are both explicitly rejected, candidate validation retains that immutable pair only as terminal history; the rejected contract cannot bind, prepare, release, publish, or authorize credentials. Candidate validation and ordinary future `prepare-release` count only `ready` and `released` records as active version claims. Publication accepts schema 2 only when its explicit `--release-record` selects the one released RLS declared by the approved bootstrap contract; it independently recomputes the preparation view and predecessor output from Git history, then reacquires the contract-pinned predecessor wheel before any credential-bearing stage. The assessment workflow is qualification evidence only; it does not replace that publication replay. After publication, adopting 0.6.0 as the root evaluator remains a separate governed transaction.
+Ordinary ready RLS records now use the complete schema-3 evaluator identity in the current lock. The predecessor-bootstrap rules above remain a historical description of the 0.6.0 release and retained terminal records; they are not needed for ordinary complete-graph evaluation by the 0.6.0 root. A rejected contract cannot bind, prepare, release, publish, or authorize credentials, and only `ready` or `released` records are active version claims. Adopting public 0.6.0 remained separate from publication and was later performed through `WO-HUP-002`.
 
 ## Advancing the root evaluator
 
-Candidate success never changes the root evaluator. After a later SE Harness version is immutably published, maintainers select it under a separate approved repository-upgrade work order, install that exact release outside the checkout, review ordinary `harnessctl upgrade`, and authorize `--apply` only when the plan is safe. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
+Candidate success never changes the root evaluator. The current root is exact public 0.6.0 under a schema-3 identity lock. After a later SE Harness version is immutably published, maintainers select it under a separate approved repository-upgrade work order, install that exact release outside the checkout, review ordinary `harnessctl upgrade`, and authorize `--apply` only when the plan is safe. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
 
 See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), the owner-controlled region of [`AGENTS.md`](../../AGENTS.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).

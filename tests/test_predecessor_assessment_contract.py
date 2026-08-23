@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 import unittest
 from pathlib import Path
+
+from se_harness.installer import tracked_content
+from se_harness.integrity import canonical_sha256
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -39,23 +43,14 @@ class PredecessorAssessmentContractTests(unittest.TestCase):
         for forbidden in ("--omit", "--expected-error", "git push", "harnessctl transition"):
             self.assertNotIn(forbidden, content)
 
-    def test_existing_managed_workflow_remains_byte_identical_to_head(self) -> None:
-        committed = subprocess.run(
-            [
-                "git",
-                "-c",
-                "safe.directory=*",
-                "-C",
-                str(REPOSITORY_ROOT),
-                "show",
-                "HEAD:.github/workflows/engineering-harness.yml",
-            ],
-            check=True,
-            capture_output=True,
-        ).stdout
+    def test_existing_managed_workflow_matches_the_selected_released_lock(self) -> None:
+        lock = json.loads(
+            (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
+        )
+        raw = MANAGED_WORKFLOW.read_bytes()
         self.assertEqual(
-            committed.decode("utf-8"),
-            MANAGED_WORKFLOW.read_text(encoding="utf-8").replace("\r\n", "\n"),
+            lock["files"][".github/workflows/engineering-harness.yml"]["sha256"],
+            canonical_sha256(tracked_content("managed", raw)),
         )
 
     def test_publication_view_cli_reports_boundary_failures_as_closed_json(self) -> None:

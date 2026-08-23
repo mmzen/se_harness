@@ -1,3 +1,7 @@
 <!-- se-harness:begin -->
 @AGENTS.md
+
+The imported managed instructions are the only workflow adapter. Return
+schema-2 canonical restitution verbatim; do not add Claude-specific governance
+rules or unrelated inspection findings.
 <!-- se-harness:end -->

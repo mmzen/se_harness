@@ -21,7 +21,7 @@ from se_harness.candidate_acceptance import (
     ScenarioResult,
     assess_candidate_wheel,
 )
-from se_harness.installer import HarnessError, apply_changes, plan_install
+from se_harness.installer import HarnessError, apply_changes, plan_install, tracked_content
 from se_harness.integrity import canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.preflight import inspect_installation
@@ -207,9 +207,27 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "# se-harness:begin\n" + expected_fragment + "# se-harness:end\n",
                 attributes,
             )
+            root_attributes_path = REPOSITORY_ROOT / ".gitattributes"
+            root_attributes = root_attributes_path.read_text(encoding="utf-8")
+            self.assertNotEqual(attributes, root_attributes)
+            root_managed = root_attributes.split("# se-harness:begin\n", 1)[1].split(
+                "# se-harness:end\n", 1
+            )[0]
+            self.assertIn("docs/engineering/**/evidence/*.json text eol=lf", root_managed)
+            self.assertNotIn("governance_migration", root_managed)
+            root_owner = root_attributes.split("# se-harness:end\n", 1)[1]
+            for rule in (
+                "se_harness/governance_migration*.py text eol=lf",
+                "se_harness/governance_migration_contract.json text eol=lf",
+                "tests/fixtures/governance_migration/*.json text eol=lf",
+            ):
+                self.assertIn(rule, root_owner)
+            root_lock = json.loads(
+                (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
+            )
             self.assertEqual(
-                attributes,
-                (REPOSITORY_ROOT / ".gitattributes").read_text(encoding="utf-8"),
+                root_lock["files"][".gitattributes"]["sha256"],
+                canonical_sha256(tracked_content("fragment", root_attributes_path.read_bytes())),
             )
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertEqual("fragment", lock["files"][".gitattributes"]["mode"])
@@ -350,6 +368,8 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         commit = "a" * 40
         with mock.patch.dict(os.environ, {"EXAMPLE_SECRET_TOKEN": "must-not-appear"}, clear=True), mock.patch(
             "se_harness.runtime_identity.site.ENABLE_USER_SITE", False
+        ), mock.patch(
+            "se_harness.runtime_identity._distribution_root", return_value=REPOSITORY_ROOT
         ):
             first = inspect_runtime_identity(
                 role="candidate-source",
