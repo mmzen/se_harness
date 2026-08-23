@@ -29,6 +29,7 @@ from se_harness.governance_migration_contract import (
     load_migration_scenario,
     sha256_bytes,
 )
+from se_harness.workflow_contract import load_lifecycle_registry
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -197,6 +198,18 @@ class GovernanceMigrationTests(unittest.TestCase):
         self.assertEqual("disposable-root-evaluator-selected", adoption["authority_effect"])
         self.assertTrue(adoption["report"]["rollback_exact"])
         self.assertTrue(adoption["report"]["noop_replay"])
+
+    def test_rejected_predecessor_observation_matches_registry_adapter_marker(self) -> None:
+        registry = load_lifecycle_registry()
+        scenario, _ = load_migration_scenario(HISTORICAL, load_migration_contract())
+        self.assertFalse(scenario["fixture"]["predecessor_accepts_rejected"])
+        self.assertEqual(
+            {"required"},
+            {
+                registry[family]["rejected"].predecessor_adapter
+                for family in ("verification_record", "release_record")
+            },
+        )
 
     def test_every_stage_fails_closed_and_later_stages_do_not_run(self) -> None:
         for index, stage_id in enumerate(STAGE_ORDER):

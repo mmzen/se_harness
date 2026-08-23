@@ -6,10 +6,12 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 (RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.
 
 This document defines the procedure bound to the executable workflow contract.
-[`WORKFLOW.json`](WORKFLOW.json) defines the permitted transitions, ordered
-next-action rules, typed procedures, effects, non-effects, gate IDs, and
-decision-right IDs. The installed `WORKFLOW.json` MUST be byte-identical to the
-contract loaded by `harnessctl`. Command steps in that contract use argument
+[`WORKFLOW.json`](WORKFLOW.json) defines each artifact family's admitted states,
+permitted transitions, authority effect, release-version reservation,
+transitionability, visibility, and predecessor-adapter need. It also defines
+ordered next-action rules, typed procedures, effects, non-effects, gate IDs,
+and decision-right IDs. The installed `WORKFLOW.json` MUST be byte-identical to
+the contract loaded by `harnessctl`. Command steps in that contract use argument
 arrays. The array, not a displayed shell string, is authoritative.
 
 ## Workflow authority
@@ -42,6 +44,13 @@ Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber 
 
 ## State model
 
+The `lifecycles` object in `WORKFLOW.json` is the single machine-readable state
+registry. Transition planning and graph validation MUST derive their state
+vocabularies and transition edges from it. Authority-sensitive checks MUST read
+`grants_authority`; release-version uniqueness MUST read `reserves_version`.
+Consumers MUST fail closed on an invalid registry and MUST NOT substitute a
+fallback status set.
+
 The permitted transitions are:
 
 | Artifact class | From | To |
@@ -55,6 +64,19 @@ The permitted transitions are:
 | Work order | `verified` | `released` |
 | Verification record | `ready` | `verified`, `rejected`, `superseded` |
 | Release record | `ready` | `released`, `rejected` |
+
+Rows without a listed outgoing transition are terminal. All lifecycle rows are
+historically visible. Rejected VREC and RLS rows grant no authority, reserve no
+version, and declare that an explicit predecessor adapter is required when an
+older evaluator cannot understand them. This marker reports a compatibility
+fact; it does not hide history, create a view, or upgrade the predecessor.
+
+Terminal compatibility vocabulary also includes definition `ready`,
+`in_progress`, `verified`, `released`, and `superseded`, and work-order `ready`
+and `superseded`. These rows preserve readable history and existing validation
+fixtures; they do not add a transition. Definition `in_progress`, `verified`,
+and `released` preserve their historical authority effect. The other four rows
+grant no authority. None reserves a release version.
 
 The JSON contract is authoritative if this summary and the contract differ.
 Conformance tests MUST fail on such a difference.

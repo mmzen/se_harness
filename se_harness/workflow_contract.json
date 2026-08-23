@@ -1,5 +1,5 @@
 {
-  "schema": "se-harness-workflow-v2",
+  "schema": "se-harness-workflow-v3",
   "normative_language": "BCP 14",
   "handoff_fields": [
     "completed",
@@ -20,23 +20,40 @@
     "command_or_response",
     "alternatives"
   ],
-  "transitions": {
+  "lifecycles": {
     "definition": {
-      "draft": ["approved", "rejected"],
-      "approved": ["implemented", "rejected"]
+      "draft": {"transitions_to": ["approved", "rejected"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "ready": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "approved": {"transitions_to": ["implemented", "rejected"], "grants_authority": true, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "in_progress": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "implemented": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "verified": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "released": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "superseded": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "rejected": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
     },
     "work_order": {
-      "draft": ["approved", "rejected"],
-      "approved": ["in_progress", "rejected"],
-      "in_progress": ["implemented", "rejected"],
-      "implemented": ["verified", "released"],
-      "verified": ["released"]
+      "draft": {"transitions_to": ["approved", "rejected"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "ready": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "approved": {"transitions_to": ["in_progress", "rejected"], "grants_authority": true, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "in_progress": {"transitions_to": ["implemented", "rejected"], "grants_authority": true, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "implemented": {"transitions_to": ["verified", "released"], "grants_authority": true, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "verified": {"transitions_to": ["released"], "grants_authority": true, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "released": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "superseded": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "rejected": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
     },
     "verification_record": {
-      "ready": ["verified", "rejected", "superseded"]
+      "ready": {"transitions_to": ["verified", "rejected", "superseded"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "verified": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "released": {"transitions_to": [], "grants_authority": true, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "superseded": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "rejected": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "required"}
     },
     "release_record": {
-      "ready": ["released", "rejected"]
+      "ready": {"transitions_to": ["released", "rejected"], "grants_authority": false, "reserves_version": true, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "released": {"transitions_to": [], "grants_authority": true, "reserves_version": true, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "rejected": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "required"}
     }
   },
   "failure": {

@@ -702,30 +702,34 @@ class CandidateBootstrapValidationTests(unittest.TestCase):
         self.assertEqual([], self.diagnostics())
 
     def test_rejected_history_does_not_claim_an_active_release_version(self) -> None:
-        rejected = copy.deepcopy(self.release)
-        rejected.metadata.update(
-            {
-                "status": "rejected",
-                "rejected_at": "2026-08-21T12:30:00Z",
-                "rejected_by": "release-owner",
-                "rejection_reason": "retained failure",
-            }
+        cases = (
+            ("rejected", "ready", False),
+            ("rejected", "released", False),
+            ("rejected", "rejected", False),
+            ("ready", "ready", True),
+            ("ready", "released", True),
+            ("released", "released", True),
         )
-        successor = copy.deepcopy(self.release)
-        successor.path = self.root / "docs/engineering/release/releases/RLS-TST-010.md"
-        successor.metadata["id"] = "RLS-TST-010"
-        findings = CANDIDATE_VALIDATOR.validate_revision_consistency(
-            [rejected, successor], self.root
-        )
-        self.assertFalse(any("duplicate release record version" in item.message for item in findings))
-
-        second_active = copy.deepcopy(successor)
-        second_active.path = self.root / "docs/engineering/release/releases/RLS-TST-011.md"
-        second_active.metadata["id"] = "RLS-TST-011"
-        findings = CANDIDATE_VALIDATOR.validate_revision_consistency(
-            [rejected, successor, second_active], self.root
-        )
-        self.assertTrue(any("duplicate release record version" in item.message for item in findings))
+        for first_status, second_status, expected_duplicate in cases:
+            with self.subTest(first=first_status, second=second_status):
+                records = []
+                for index, status in enumerate((first_status, second_status), start=10):
+                    record = copy.deepcopy(self.release)
+                    record.path = self.root / f"docs/engineering/release/releases/RLS-TST-{index:03}.md"
+                    record.metadata["id"] = f"RLS-TST-{index:03}"
+                    record.metadata["status"] = status
+                    if status == "rejected":
+                        record.metadata.update(
+                            {
+                                "rejected_at": "2026-08-21T12:30:00Z",
+                                "rejected_by": "release-owner",
+                                "rejection_reason": "retained failure",
+                            }
+                        )
+                    records.append(record)
+                findings = CANDIDATE_VALIDATOR.validate_revision_consistency(records, self.root)
+                duplicate = any("duplicate release record version" in item.message for item in findings)
+                self.assertEqual(expected_duplicate, duplicate)
 
 
 class PublicationBootstrapTests(unittest.TestCase):

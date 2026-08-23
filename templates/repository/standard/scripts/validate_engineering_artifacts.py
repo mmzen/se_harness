@@ -17,6 +17,7 @@ from collections import Counter
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path, PurePosixPath
+from types import MappingProxyType
 from typing import Any, Iterable
 
 try:
@@ -38,28 +39,8 @@ common_artifact_domain = _LAYOUT.common_artifact_domain
 repository_record_relative_path = _LAYOUT.repository_record_relative_path
 
 
-ALLOWED_STATUSES = {
-    "draft",
-    "ready",
-    "approved",
-    "in_progress",
-    "implemented",
-    "verified",
-    "released",
-    "superseded",
-    "rejected",
-}
-
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
 VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
-
-ACTIVE_COVERAGE_STATUSES = {
-    "approved",
-    "in_progress",
-    "implemented",
-    "verified",
-    "released",
-}
 
 TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
 
@@ -104,35 +85,152 @@ RELEASABLE_WORK_STATUSES = {
 }
 
 
-def _load_workflow_transitions() -> dict[str, dict[str, set[str]]]:
+@dataclass(frozen=True)
+class LifecycleStatePolicy:
+    transitions_to: tuple[str, ...]
+    grants_authority: bool
+    reserves_version: bool
+    transitionable: bool
+    must_remain_visible: bool
+    predecessor_adapter: str
+
+
+_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record"}
+_LIFECYCLE_FIELDS = {
+    "transitions_to",
+    "grants_authority",
+    "reserves_version",
+    "transitionable",
+    "must_remain_visible",
+    "predecessor_adapter",
+}
+_PREDECESSOR_ADAPTER_VALUES = {"none", "required"}
+_STATE_NAME_PATTERN = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
+
+
+def _workflow_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    value: dict[str, Any] = {}
+    for key, item in pairs:
+        if key in value:
+            raise RuntimeError(f"managed workflow contract contains duplicate JSON key: {key}")
+        value[key] = item
+    return value
+
+
+def _load_workflow_lifecycles() -> MappingProxyType:
     path = Path(__file__).resolve().parent.parent / "docs" / "engineering" / "WORKFLOW.json"
     try:
-        contract = json.loads(path.read_text(encoding="utf-8"))
+        raw = path.read_bytes()
+        if len(raw) > 2_000_000:
+            raise RuntimeError(f"managed workflow contract exceeds 2 MB: {path}")
+        contract = json.loads(raw.decode("utf-8"), object_pairs_hook=_workflow_object)
+    except RuntimeError:
+        raise
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"cannot load managed workflow contract: {path}") from exc
-    if not isinstance(contract, dict) or contract.get("schema") not in {
-        "se-harness-workflow-v1",
-        "se-harness-workflow-v2",
-    }:
+    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v3":
         raise RuntimeError("managed workflow contract has an unsupported schema")
-    source = contract.get("transitions")
-    if not isinstance(source, dict):
-        raise RuntimeError("managed workflow contract has no transition table")
-    transitions: dict[str, dict[str, set[str]]] = {}
-    for family, states in source.items():
-        if not isinstance(family, str) or not isinstance(states, dict):
-            raise RuntimeError("managed workflow contract contains an invalid artifact family")
-        transitions[family] = {}
-        for current, targets in states.items():
-            if not isinstance(current, str) or not isinstance(targets, list) or not all(
-                isinstance(target, str) for target in targets
+    source = contract.get("lifecycles")
+    if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
+        raise RuntimeError("managed workflow contract must declare exactly the four lifecycle families")
+    lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
+    for family in sorted(_LIFECYCLE_FAMILIES):
+        raw_states = source.get(family)
+        if not isinstance(raw_states, dict) or not raw_states:
+            raise RuntimeError(f"managed workflow lifecycle family {family} must contain states")
+        states: dict[str, LifecycleStatePolicy] = {}
+        for current, raw_row in raw_states.items():
+            if not isinstance(current, str) or _STATE_NAME_PATTERN.fullmatch(current) is None:
+                raise RuntimeError(f"managed workflow lifecycle family {family} has an invalid state")
+            if not isinstance(raw_row, dict) or set(raw_row) != _LIFECYCLE_FIELDS:
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid fields")
+            targets = raw_row.get("transitions_to")
+            if (
+                not isinstance(targets, list)
+                or not all(isinstance(target, str) and _STATE_NAME_PATTERN.fullmatch(target) for target in targets)
+                or len(targets) != len(set(targets))
             ):
-                raise RuntimeError("managed workflow contract contains an invalid transition")
-            transitions[family][current] = set(targets)
-    return transitions
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid transitions_to")
+            boolean_fields = (
+                "grants_authority",
+                "reserves_version",
+                "transitionable",
+                "must_remain_visible",
+            )
+            if any(type(raw_row.get(field)) is not bool for field in boolean_fields):
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has a non-boolean property")
+            adapter = raw_row.get("predecessor_adapter")
+            if adapter not in _PREDECESSOR_ADAPTER_VALUES:
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid predecessor_adapter")
+            if raw_row["transitionable"] != bool(targets):
+                raise RuntimeError(
+                    f"managed workflow lifecycle {family}:{current} transitionable disagrees with transitions_to"
+                )
+            if not raw_row["must_remain_visible"]:
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} must remain visible")
+            if family != "release_record" and raw_row["reserves_version"]:
+                raise RuntimeError(f"managed workflow lifecycle {family}:{current} cannot reserve a version")
+            states[current] = LifecycleStatePolicy(
+                transitions_to=tuple(targets),
+                grants_authority=raw_row["grants_authority"],
+                reserves_version=raw_row["reserves_version"],
+                transitionable=raw_row["transitionable"],
+                must_remain_visible=raw_row["must_remain_visible"],
+                predecessor_adapter=adapter,
+            )
+        for current, row in states.items():
+            unknown = set(row.transitions_to) - set(states)
+            if unknown:
+                raise RuntimeError(
+                    f"managed workflow lifecycle {family}:{current} targets unknown state {sorted(unknown)[0]}"
+                )
+        lifecycles[family] = MappingProxyType(states)
+    return MappingProxyType(lifecycles)
 
 
-WORKFLOW_TRANSITIONS = _load_workflow_transitions()
+WORKFLOW_LIFECYCLES = _load_workflow_lifecycles()
+WORKFLOW_TRANSITIONS = MappingProxyType({
+    family: MappingProxyType(
+        {state: frozenset(row.transitions_to) for state, row in states.items()}
+    )
+    for family, states in WORKFLOW_LIFECYCLES.items()
+})
+ALLOWED_STATUSES = frozenset({
+    state
+    for states in WORKFLOW_LIFECYCLES.values()
+    for state in states
+})
+ACTIVE_COVERAGE_STATUSES = frozenset({
+    state
+    for family in ("definition", "work_order")
+    for state, row in WORKFLOW_LIFECYCLES[family].items()
+    if row.grants_authority
+})
+
+
+def _lifecycle_family(artifact_type: str) -> str:
+    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record"} else "definition"
+
+
+def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
+    return WORKFLOW_LIFECYCLES[_lifecycle_family(artifact_type)].get(status)
+
+
+def _grants_authority(artifact_type: str, status: str) -> bool:
+    row = _lifecycle_policy(artifact_type, status)
+    return bool(row and row.grants_authority)
+
+
+def _reserves_version(status: str) -> bool:
+    row = WORKFLOW_LIFECYCLES["release_record"].get(status)
+    return bool(row and row.reserves_version)
+
+
+def _active_record_status(artifact_type: str, status: str) -> bool:
+    """Return whether a VREC/RLS is a live proposal or grants authority."""
+
+    row = _lifecycle_policy(artifact_type, status)
+    return bool(row and (row.transitionable or row.grants_authority))
 DECISION_ASSESSMENT_OUTCOMES = {"adr_required", "no_significant_decision"}
 DECISION_TRIGGERS = {
     "system-boundary",
@@ -1311,13 +1409,17 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     plane="structure",
                 )
 
-        if status is not None and status not in ALLOWED_STATUSES:
+        if (
+            status is not None
+            and artifact_type is not None
+            and status not in WORKFLOW_LIFECYCLES[_lifecycle_family(artifact_type)]
+        ):
             _add_error(
                 errors,
                 artifact,
                 report_root,
                 "E002",
-                f"unknown status '{status}'",
+                f"status '{status}' is not declared for {_lifecycle_family(artifact_type)} artifacts",
                 plane="structure",
             )
 
@@ -1354,11 +1456,6 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
     """
 
     errors: list[Diagnostic] = []
-    definitions = {
-        "intent", "capability", "requirement", "specification", "architecture",
-        "adr", "verification", "release_contract", "operating_contract",
-    }
-
     for artifact in artifacts:
         events = artifact.metadata.get("lifecycle_events")
         if events is None:
@@ -1373,7 +1470,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
         previous_to: str | None = None
         previous_at: str | None = None
         valid_events: list[dict[str, str]] = []
-        family = "definition" if artifact.artifact_type in definitions else artifact.artifact_type
+        family = _lifecycle_family(artifact.artifact_type)
         for index, event in enumerate(events):
             if not isinstance(event, dict):
                 _add_error(
@@ -1598,13 +1695,13 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 required=False,
                 match_current_lock=artifact.status == "ready",
             )
-            if artifact.status not in {"ready", "verified", "released", "superseded", "rejected"}:
+            if artifact.status not in WORKFLOW_LIFECYCLES["verification_record"]:
                 _add_error(
                     errors,
                     artifact,
                     report_root,
                     "E009",
-                    "verification_record status must be ready, verified, released, superseded, or rejected",
+                    "verification_record status is not declared by the workflow lifecycle registry",
                     plane="governance",
                 )
             if artifact.status == "ready" and prepared:
@@ -1679,7 +1776,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 errors,
                 report_root,
                 required=(
-                    artifact.status in {"ready", "released"}
+                    _active_record_status("release_record", artifact.status)
                     and bootstrap_contract is not None
                     and rejected_predecessor_history
                 ),
@@ -1758,13 +1855,13 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 _validate_timestamp(artifact, "rejected_at", errors, report_root)
                 _require_non_empty_string(artifact, "rejected_by", errors, report_root, plane="governance")
                 _require_non_empty_string(artifact, "rejection_reason", errors, report_root, plane="governance")
-            if artifact.status not in {"ready", "released", "rejected"}:
+            if artifact.status not in WORKFLOW_LIFECYCLES["release_record"]:
                 _add_error(
                     errors,
                     artifact,
                     report_root,
                     "E009",
-                    "release_record status must be ready, released, or rejected",
+                    "release_record status is not declared by the workflow lifecycle registry",
                     plane="governance",
                 )
             legacy_without_binding = (
@@ -1893,7 +1990,8 @@ def validate_revision_consistency(
         verified_work = {
             work_order_id
             for record in artifacts
-            if record.artifact_type == "verification_record" and record.status in {"verified", "released"}
+            if record.artifact_type == "verification_record"
+            and _grants_authority(record.artifact_type, record.status)
             for work_order_id in _relation_targets(record, "verifies_work_order")
         }
         for work_order in artifacts:
@@ -1943,7 +2041,10 @@ def validate_revision_consistency(
                 if work_order is None or work_order.artifact_type != "work_order":
                     continue
                 declared_verification.update(_relation_targets(work_order, "verification"))
-                if artifact.status in {"ready", "verified", "released"} and work_order.status not in ACTIVE_COVERAGE_STATUSES:
+                if (
+                    _active_record_status(artifact.artifact_type, artifact.status)
+                    and not _grants_authority(work_order.artifact_type, work_order.status)
+                ):
                     _add_error(
                         errors,
                         artifact,
@@ -1957,8 +2058,8 @@ def validate_revision_consistency(
                 if (
                     verification is not None
                     and verification.artifact_type == "verification"
-                    and artifact.status in {"ready", "verified", "released"}
-                    and verification.status not in ACTIVE_COVERAGE_STATUSES
+                    and _active_record_status(artifact.artifact_type, artifact.status)
+                    and not _grants_authority(verification.artifact_type, verification.status)
                 ):
                     _add_error(
                         errors,
@@ -2013,7 +2114,7 @@ def validate_revision_consistency(
                     successor_id = successor_ids[0]
                     successor = catalog.get(successor_id)
                     if successor is not None and successor.artifact_type == "verification_record":
-                        if successor.status not in {"verified", "released"}:
+                        if not _grants_authority(successor.artifact_type, successor.status):
                             _add_error(
                                 errors,
                                 artifact,
@@ -2056,7 +2157,7 @@ def validate_revision_consistency(
                     plane="governance",
                 )
         version = artifact.metadata.get("version")
-        if artifact.status in {"ready", "released"} and isinstance(version, str) and version.strip():
+        if _reserves_version(artifact.status) and isinstance(version, str) and version.strip():
             release_versions.setdefault(version.strip(), []).append(artifact)
         release_commit = artifact.metadata.get("commit")
         release_format = artifact.metadata.get("git_object_format")
@@ -2066,7 +2167,7 @@ def validate_revision_consistency(
             if (
                 work_order is not None
                 and work_order.artifact_type == "work_order"
-                and artifact.status in {"ready", "released"}
+                and _active_record_status(artifact.artifact_type, artifact.status)
                 and work_order.status not in RELEASABLE_WORK_STATUSES
             ):
                 _add_error(
@@ -2082,9 +2183,9 @@ def validate_revision_consistency(
             verification = catalog.get(verification_id)
             if verification is None or verification.artifact_type != "verification_record":
                 continue
-            if verification.status in {"ready", "verified", "released"}:
+            if _active_record_status(verification.artifact_type, verification.status):
                 verification_work.update(_relation_targets(verification, "verifies_work_order"))
-            if artifact.status in {"ready", "released"} and verification.status == "superseded":
+            if _active_record_status(artifact.artifact_type, artifact.status) and verification.status == "superseded":
                 _add_error(
                     errors,
                     artifact,
@@ -2102,7 +2203,10 @@ def validate_revision_consistency(
                     f"release commit does not match verification record '{verification_id}'",
                     plane="governance",
                 )
-            if artifact.status == "released" and verification.status not in {"verified", "released"}:
+            if (
+                _grants_authority(artifact.artifact_type, artifact.status)
+                and not _grants_authority(verification.artifact_type, verification.status)
+            ):
                 _add_error(
                     errors,
                     artifact,
@@ -2135,7 +2239,10 @@ def validate_revision_consistency(
             contract = catalog.get(contract_id)
             if contract is None or contract.artifact_type != "release_contract":
                 continue
-            if artifact.status in {"ready", "released"} and contract.status not in ACTIVE_COVERAGE_STATUSES:
+            if (
+                _active_record_status(artifact.artifact_type, artifact.status)
+                and not _grants_authority(contract.artifact_type, contract.status)
+            ):
                 _add_error(
                     errors,
                     artifact,
@@ -2261,14 +2368,14 @@ def validate_operating_contract_readiness(
         work_order_id
         for record in artifacts
         if record.artifact_type == "verification_record"
-        and record.status in {"verified", "released"}
+        and _grants_authority(record.artifact_type, record.status)
         for work_order_id in _relation_targets(record, "verifies_work_order")
     }
 
     for contract in artifacts:
         if (
             contract.artifact_type != "operating_contract"
-            or contract.status not in ACTIVE_COVERAGE_STATUSES
+            or not _grants_authority(contract.artifact_type, contract.status)
         ):
             continue
         for requirement_id in sorted(_relation_targets(contract, "assures")):
@@ -2276,7 +2383,7 @@ def validate_operating_contract_readiness(
             # Missing and wrong-type targets are owned by validate_relations.
             if requirement is None or requirement.artifact_type != "requirement":
                 continue
-            if requirement.status not in ACTIVE_COVERAGE_STATUSES:
+            if not _grants_authority(requirement.artifact_type, requirement.status):
                 _add_error(
                     errors,
                     contract,
@@ -2365,20 +2472,20 @@ def architecture_traceability_state(
             continue
         transitive_requirements.update(_relation_targets(specification, "specifies"))
         if (
-            artifact.status in ACTIVE_COVERAGE_STATUSES
-            and specification.status not in ACTIVE_COVERAGE_STATUSES
+            _grants_authority(artifact.artifact_type, artifact.status)
+            and not _grants_authority(specification.artifact_type, specification.status)
         ):
             issues.append(
                 f"active architecture conforms to inactive specification '{specification_id}'"
             )
 
-    if artifact.status in ACTIVE_COVERAGE_STATUSES:
+    if _grants_authority(artifact.artifact_type, artifact.status):
         for requirement_id in addresses:
             requirement = catalog.get(requirement_id)
             if (
                 requirement is not None
                 and requirement.artifact_type == "requirement"
-                and requirement.status not in ACTIVE_COVERAGE_STATUSES
+                and not _grants_authority(requirement.artifact_type, requirement.status)
             ):
                 issues.append(
                     f"active architecture addresses inactive requirement '{requirement_id}'"
@@ -2775,7 +2882,7 @@ def validate_decision_assessments(
     warnings: list[Diagnostic] = []
     active_decisions_by_architecture: dict[str, set[str]] = {}
     for decision in artifacts:
-        if decision.artifact_type != "adr" or decision.status not in ACTIVE_COVERAGE_STATUSES:
+        if decision.artifact_type != "adr" or not _grants_authority(decision.artifact_type, decision.status):
             continue
         for architecture_id in _relation_targets(decision, "decides"):
             active_decisions_by_architecture.setdefault(architecture_id, set()).add(decision.artifact_id)
@@ -2827,7 +2934,7 @@ def validate_decision_assessments(
                 )
             continue
         if (
-            artifact.status in ACTIVE_COVERAGE_STATUSES
+            _grants_authority(artifact.artifact_type, artifact.status)
             and assessment["outcome"] == "adr_required"
             and not deciding
         ):
@@ -2847,19 +2954,24 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
     active_specs = [
         artifact
         for artifact in artifacts
-        if artifact.artifact_type == "specification" and artifact.status in ACTIVE_COVERAGE_STATUSES
+        if artifact.artifact_type == "specification"
+        and _grants_authority(artifact.artifact_type, artifact.status)
     ]
     active_verifications = [
         artifact
         for artifact in artifacts
-        if artifact.artifact_type == "verification" and artifact.status in ACTIVE_COVERAGE_STATUSES
+        if artifact.artifact_type == "verification"
+        and _grants_authority(artifact.artifact_type, artifact.status)
     ]
 
     specified = set().union(*(_relation_targets(item, "specifies") for item in active_specs)) if active_specs else set()
     verified = set().union(*(_relation_targets(item, "verifies") for item in active_verifications)) if active_verifications else set()
 
     for artifact in artifacts:
-        if artifact.artifact_type != "requirement" or artifact.status not in ACTIVE_COVERAGE_STATUSES:
+        if (
+            artifact.artifact_type != "requirement"
+            or not _grants_authority(artifact.artifact_type, artifact.status)
+        ):
             continue
         if artifact.artifact_id not in specified:
             _add_error(
