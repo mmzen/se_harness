@@ -18,7 +18,7 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 `.engineering-harness.lock` is authoritative for ownership mode. Editing a managed path breaks `doctor` and the required CI check.
 
 - `.engineering-harness.toml`, `ENGINEERING_HARNESS.md`, `.github/workflows/engineering-harness.yml`
-- `docs/engineering/WORKFLOW.md`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `TRACEABILITY.md`
+- `docs/engineering/WORKFLOW.md`, `WORKFLOW.json`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `QUALITY_GATES.json`, `TRACEABILITY.md`
 - every file in `docs/engineering/templates/`
 - exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
 
@@ -28,17 +28,17 @@ The remaining files in `scripts/` are repository-owned and may change under an a
 
 ## Candidate source versus released evaluator
 
-This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version recorded in `.engineering-harness.toml` and intentionally lag until publication, so they differ - that is not a defect to repair.
+This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version recorded in `.engineering-harness.toml`; immediately after root adoption they may be byte-identical to the packaged templates. Later product work may move the candidate ahead again. Role separation is proved by paths, runtime origins, the lock, and mutation authority, not by requiring byte inequality.
 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.5.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.6.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
-An in-tree `python -m se_harness doctor .` reports the candidate-versus-released skew as FAIL. That is boundary evidence, not authorization to overwrite root managed files. A `se-harness` on the import path also makes candidate-source runtime identity fail with `RID018`.
+An in-tree `python -m se_harness doctor .` is a candidate-source observation, not the governing released-evaluator check. It may pass while candidate and released bytes match or report skew after later product work; neither result authorizes hand-copying managed files. Checkout source on the released evaluator's import path remains contamination, and incompatible distribution resolution still fails runtime identity with `RID018`.
 
-The candidate CLI is ahead of the released one. Commands such as `focus`, `check`, `transition`, and `rehearse-recovery` exist here but not in the installed released evaluator; do not put them in instructions the released gate must satisfy.
+Released 0.6.0 includes `focus`, `check`, `transition`, and `rehearse-recovery`. Use them only through the selected governed procedure and accountable decision boundary; their presence grants no mutation or lifecycle authority.
 
 ## Traps
 
@@ -59,4 +59,9 @@ The candidate CLI is ahead of the released one. Commands such as `focus`, `check
 ## Software engineering harness
 
 Read `ENGINEERING_HARNESS.md` before engineering work. It is the single managed harness contract and router. Repository-owned instructions outside this block may add constraints but cannot waive formal artifact authority, approved work-order scope, required evidence, or accountable verification and release decisions. Stop when this managed gate is missing, damaged, or materially conflicts with owner instructions.
+
+For a bounded iteration, select one WO, VREC, or RLS and use `harnessctl check`
+at the procedure's checkpoint. Return the command's canonical human restitution
+block verbatim. Do not append repository-wide inspection findings, analysis, a
+second next step, or provider-specific workflow rules.
 <!-- se-harness:end -->

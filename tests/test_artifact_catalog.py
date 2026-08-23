@@ -78,7 +78,7 @@ class ArtifactCatalogTests(unittest.TestCase):
 
     def test_router_and_human_notes_point_to_the_authoritative_catalog(self) -> None:
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        self.assertIn("Defining artifact purpose, applicability, reuse, or relations", router)
+        self.assertIn("Normative chain, artifact applicability, relation types, and coverage", router)
         self.assertIn("`docs/engineering/TRACEABILITY.md`", router)
         link = "../engineering/TRACEABILITY.md#artifact-applicability-catalog"
         for note in ("harness-overview.md", "harness-uml-model.md"):
@@ -95,9 +95,10 @@ class ArtifactCatalogTests(unittest.TestCase):
             REPOSITORY_ROOT
             / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
-        self.assertNotEqual(released_work_order, candidate_work_order)
-        self.assertNotIn("[execution_scope]", released_work_order)
+        self.assertEqual(released_work_order, candidate_work_order)
+        self.assertIn("[execution_scope]", released_work_order)
         self.assertIn("[execution_scope]", candidate_work_order)
+        self.assertIn("component-prefix", released_work_order)
         self.assertIn("component-prefix", candidate_work_order)
         released_traceability = (
             REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
@@ -105,8 +106,8 @@ class ArtifactCatalogTests(unittest.TestCase):
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
-        self.assertNotEqual(released_traceability, candidate_traceability)
-        self.assertNotIn("`TRC-001`", released_traceability)
+        self.assertEqual(released_traceability, candidate_traceability)
+        self.assertIn("`TRC-001`", released_traceability)
         self.assertIn("`TRC-001`", candidate_traceability)
         self.assertIn("BCP 14", candidate_traceability)
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
@@ -119,10 +120,12 @@ class ArtifactCatalogTests(unittest.TestCase):
         candidate_router = router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
             "{{HARNESS_VERSION}}", evaluator_version
         )
-        self.assertNotEqual(router, candidate_router)
-        self.assertNotIn("harnessctl focus", router)
+        self.assertEqual(router, candidate_router)
+        self.assertIn("harnessctl focus", router)
         self.assertIn("harnessctl focus", candidate_router)
+        self.assertNotIn("harnessctl preflight", router)
         self.assertNotIn("harnessctl preflight", candidate_router)
+        self.assertIn("WORKFLOW.json", router)
         self.assertIn("WORKFLOW.json", candidate_router)
 
     def test_work_order_template_expresses_conditional_architecture(self) -> None:

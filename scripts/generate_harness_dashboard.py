@@ -46,7 +46,7 @@ READINESS_RESOURCE_SCHEMA = "harness-dashboard-readiness-v2"
 ARTIFACT_RESOURCE_SCHEMA = "harness-dashboard-artifact-v2"
 GENERATION_SCHEMA = "harness-dashboard-generation-v2"
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-FINDING_RULES_VERSION = "harness-findings-v8"
+FINDING_RULES_VERSION = "harness-findings-v9"
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
@@ -56,7 +56,7 @@ MAX_CONTENT_DOCUMENT_BYTES = 262_144
 MAX_CONTENT_TOTAL_BYTES = 16_777_216
 MAX_INDEX_BYTES = 262_144
 MAX_SUMMARY_BYTES = 262_144
-TOPOLOGY_ACCEPTANCE_BYTES = 524_288
+TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
 ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
 ACTIVE_WORK_ORDER_STATUSES = ACTIVE_COVERAGE_STATUSES
 IMPLEMENTED_STATUSES = {"implemented", "verified", "released"}
@@ -340,11 +340,26 @@ def normalize_artifacts(
                     "rationale": _string(assurance.get("rationale")) or None,
                     "decided_by": _string(assurance.get("decided_by")) or None,
                 }
+        lifecycle_events = artifact.metadata.get("lifecycle_events")
+        item["lifecycle_events"] = [
+            {
+                key: _string(event.get(key)) or None
+                for key in ("from", "to", "decided_at", "decided_by", "reason")
+            }
+            for event in lifecycle_events
+            if isinstance(event, dict)
+        ] if isinstance(lifecycle_events, list) else []
+        item["rejected_at"] = _string(artifact.metadata.get("rejected_at")) or None
+        item["rejected_by"] = _string(artifact.metadata.get("rejected_by")) or None
+        item["rejection_reason"] = _string(artifact.metadata.get("rejection_reason")) or None
         if artifact.artifact_type == "verification_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
             item["worktree_state"] = _string(artifact.metadata.get("worktree_state")) or None
+            item["prepared_at"] = _string(artifact.metadata.get("prepared_at")) or None
+            item["prepared_by"] = _string(artifact.metadata.get("prepared_by")) or None
             item["verified_at"] = _string(artifact.metadata.get("verified_at")) or None
+            item["verified_by"] = _string(artifact.metadata.get("verified_by")) or None
             item["artifact_snapshot_sha256"] = _string(artifact.metadata.get("artifact_snapshot_sha256")) or None
             item["evidence_paths"] = _string_list(artifact.metadata.get("evidence_paths"))
             item["superseded_at"] = _string(artifact.metadata.get("superseded_at")) or None
@@ -354,6 +369,8 @@ def normalize_artifacts(
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
             item["version"] = _string(artifact.metadata.get("version")) or None
             item["tag"] = _string(artifact.metadata.get("tag")) or None
+            item["prepared_at"] = _string(artifact.metadata.get("prepared_at")) or None
+            item["prepared_by"] = _string(artifact.metadata.get("prepared_by")) or None
             item["released_at"] = _string(artifact.metadata.get("released_at")) or None
             item["authorized_by"] = _string(artifact.metadata.get("authorized_by")) or None
         normalized.append(item)
@@ -927,6 +944,107 @@ def build_findings(
                 )
             )
 
+    release_entries = [entry for entry in revision_provenance if entry["kind"] == "release"]
+    proposed_releases = [
+        entry for entry in release_entries if entry["status"] in {"draft", "ready"} and entry["version"]
+    ]
+    proposals_by_version: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for entry in proposed_releases:
+        proposals_by_version[str(entry["version"])].append(entry)
+    for version, proposals in sorted(proposals_by_version.items()):
+        if len(proposals) < 2:
+            continue
+        proposals = sorted(proposals, key=lambda item: item["id"])
+        findings.append(
+            _finding(
+                "W-REB-001",
+                "warning",
+                f"Multiple draft or ready release records declare version {version}; accountable release review is required without automatic selection.",
+                [entry["id"] for entry in proposals],
+                [artifacts[entry["id"]]["path"] for entry in proposals],
+                [
+                    f"version={version}",
+                    *(f"{entry['id']}:commit={entry['commit'] or 'unavailable'}" for entry in proposals),
+                ],
+            )
+        )
+
+    ready_verifications = sorted(
+        (entry for entry in verification_entries if entry["status"] == "ready"),
+        key=lambda item: item["id"],
+    )
+    for index, left in enumerate(ready_verifications):
+        for right in ready_verifications[index + 1 :]:
+            overlap = sorted(set(left["work_orders"]) & set(right["work_orders"]))
+            if not overlap or not left["commit"] or not right["commit"] or left["commit"] == right["commit"]:
+                continue
+            findings.append(
+                _finding(
+                    "W-REB-002",
+                    "warning",
+                    "Ready verification records at different commits overlap work-order coverage without a governed supersession disposition.",
+                    [left["id"], right["id"], *overlap],
+                    [artifacts[left["id"]]["path"], artifacts[right["id"]]["path"]],
+                    [
+                        f"{left['id']}:commit={left['commit']}",
+                        f"{right['id']}:commit={right['commit']}",
+                        f"overlap={','.join(overlap)}",
+                    ],
+                )
+            )
+
+    active_contract_ids = {
+        artifact["id"]
+        for artifact in normalized_artifacts
+        if artifact["type"] == "release_contract"
+        and artifact["status"] not in {"rejected", "superseded"}
+    }
+    gates_by_contract: dict[str, set[str]] = defaultdict(set)
+    for relation in relations:
+        if (
+            relation["target_exists"]
+            and relation["relation"] == "gates"
+            and relation["source"] in active_contract_ids
+            and artifacts.get(relation["target"], {}).get("type") == "work_order"
+        ):
+            gates_by_contract[relation["source"]].add(relation["target"])
+    for index, left in enumerate(proposed_releases):
+        for right in proposed_releases[index + 1 :]:
+            work_overlap = sorted(set(left["work_orders"]) & set(right["work_orders"]))
+            if not work_overlap or left["version"] != right["version"]:
+                continue
+            competing: list[str] = []
+            for left_contract in left["contracts"]:
+                for right_contract in right["contracts"]:
+                    gate_overlap = sorted(
+                        gates_by_contract[left_contract] & gates_by_contract[right_contract]
+                    )
+                    if left_contract != right_contract and gate_overlap:
+                        competing.append(
+                            f"{left_contract}/{right_contract}:gates={','.join(gate_overlap)}"
+                        )
+            if not competing:
+                continue
+            contract_ids = sorted(set(left["contracts"]) | set(right["contracts"]))
+            findings.append(
+                _finding(
+                    "W-REB-003",
+                    "warning",
+                    "Active release contracts and associated proposals compete for the same version and governed work.",
+                    [left["id"], right["id"], *contract_ids, *work_overlap],
+                    [
+                        artifacts[item]["path"]
+                        for item in [left["id"], right["id"], *contract_ids]
+                        if item in artifacts
+                    ],
+                    [
+                        f"version={left['version']}",
+                        f"work_overlap={','.join(work_overlap)}",
+                        *competing,
+                    ],
+                )
+            )
+
     for artifact in normalized_artifacts:
         if artifact["type"] != "work_order":
             continue
@@ -1270,6 +1388,10 @@ def build_revision_provenance(
                 "supersedes": supersedes,
                 "superseded_at": artifact.get("superseded_at"),
                 "supersession_authorized_by": artifact.get("supersession_authorized_by"),
+                "prepared_at": artifact.get("prepared_at"),
+                "prepared_by": artifact.get("prepared_by"),
+                "decided_at": artifact.get("verified_at") or artifact.get("released_at"),
+                "decided_by": artifact.get("verified_by") or artifact.get("authorized_by"),
                 "lifecycle_class": lifecycle_class,
                 "version": artifact.get("version"),
                 "tag": artifact.get("tag"),
@@ -1571,6 +1693,11 @@ def _public_descriptor(descriptor: dict[str, Any]) -> dict[str, Any]:
     return dict(descriptor)
 
 
+def topology_target_exceeded(topology_bytes: int) -> bool:
+    """Return whether a compact topology exceeds the repository target."""
+    return topology_bytes > TOPOLOGY_ACCEPTANCE_BYTES
+
+
 def build_dashboard_bundle(
     snapshot: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, str], dict[str, Any]]:
@@ -1819,7 +1946,7 @@ def build_dashboard_bundle(
         "resource_count": len(resource_descriptors),
         "resource_bytes": sum(int(item["bytes"]) for item in resource_descriptors),
         "largest_resource": _public_descriptor(largest) if largest is not None else None,
-        "topology_target_exceeded": entrypoints["topology"]["bytes"] > TOPOLOGY_ACCEPTANCE_BYTES,
+        "topology_target_exceeded": topology_target_exceeded(entrypoints["topology"]["bytes"]),
     }
     return bootstrap, manifest, resource_files, observations
 

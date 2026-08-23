@@ -133,8 +133,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         managed_text = MANAGED_GENERATOR.read_text(encoding="utf-8")
         self.assertEqual(2_097_152, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
         self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", candidate_text)
-        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 524_288", managed_text)
-        self.assertNotIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", managed_text)
+        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", managed_text)
+        self.assertNotIn("TOPOLOGY_ACCEPTANCE_BYTES = 524_288", managed_text)
+        self.assertEqual(candidate_text, managed_text)
 
     def test_topology_target_boundary_is_strict_and_bounded(self) -> None:
         target = GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES

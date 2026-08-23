@@ -49,6 +49,49 @@ EVIDENCE_KEY_CASES = (
     ("reports/WO-ABC-001.md", ("WO-ABC-001",)),
 )
 
+FIXTURE_EVALUATOR_EVIDENCE_PATH = (
+    "docs/engineering/product/evidence/RLS-fixture-evaluator.json"
+)
+FIXTURE_EVALUATOR = {
+    "version": "0.6.0",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "a" * 64,
+    "archive_name": "se_harness-0.6.0-py3-none-any.whl",
+    "archive_sha256": "b" * 64,
+}
+FIXTURE_EVALUATOR_EVIDENCE = {
+    "schema": "se-harness-evaluator-evidence-v1",
+    "role": "released-evaluator",
+    "evaluator": FIXTURE_EVALUATOR,
+    "origins": {
+        "python_executable": "<evaluator-root>/Scripts/python.exe",
+        "module": "<evaluator-root>/Lib/site-packages/se_harness/runtime_identity.py",
+        "distribution": "<evaluator-root>/Lib/site-packages",
+        "templates": "<evaluator-root>/share/se-harness/templates/repository/standard",
+        "entry_point": "<evaluator-root>/Scripts/harnessctl.exe",
+    },
+    "environment": {
+        "isolated_python": True,
+        "user_site_enabled": False,
+        "pythonpath_present": False,
+        "entry_point_resolved": True,
+        "checkout_excluded": True,
+    },
+    "diagnostics": [],
+}
+FIXTURE_EVALUATOR_EVIDENCE_TEXT = (
+    json.dumps(
+        FIXTURE_EVALUATOR_EVIDENCE,
+        ensure_ascii=True,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+    + "\n"
+)
+FIXTURE_EVALUATOR_EVIDENCE_SHA256 = hashlib.sha256(
+    FIXTURE_EVALUATOR_EVIDENCE_TEXT.encode("utf-8")
+).hexdigest()
+
 
 def write(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -61,6 +104,28 @@ def write_revision_policy(root: Path, *, required_for_verified_work: bool) -> No
         f'''[revision_provenance]
 required_for_verified_work = {str(required_for_verified_work).lower()}
 required_for_release = false''',
+    )
+
+
+def write_evaluator_fixture(root: Path) -> None:
+    evidence_path = root / FIXTURE_EVALUATOR_EVIDENCE_PATH
+    evidence_path.parent.mkdir(parents=True, exist_ok=True)
+    evidence_path.write_bytes(FIXTURE_EVALUATOR_EVIDENCE_TEXT.encode("utf-8"))
+    write(
+        root / ".engineering-harness.lock",
+        json.dumps(
+            {
+                "schema": 3,
+                "tool_version": FIXTURE_EVALUATOR["version"],
+                "hash_algorithm": "sha256",
+                "hash_mode": "utf8-text-lf-v1",
+                "evaluator": FIXTURE_EVALUATOR,
+                "files": {},
+            },
+            ensure_ascii=True,
+            indent=2,
+            sort_keys=True,
+        ),
     )
 
 
@@ -207,7 +272,9 @@ commit = "{commit}"
 git_object_format = "{object_format}"
 released_at = "2026-08-11T14:00:00Z"
 authorized_by = "release-owner"
-tag = "v{version}"''',
+tag = "v{version}"
+evaluator_evidence_path = "{FIXTURE_EVALUATOR_EVIDENCE_PATH}"
+evaluator_evidence_sha256 = "{FIXTURE_EVALUATOR_EVIDENCE_SHA256}"''',
     ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
 
 
@@ -241,7 +308,9 @@ commit = "{commit}"
 git_object_format = "sha1"
 released_at = "2026-08-11T14:00:00Z"
 authorized_by = "release-owner"
-tag = "v2.0.0"''',
+tag = "v2.0.0"
+evaluator_evidence_path = "{FIXTURE_EVALUATOR_EVIDENCE_PATH}"
+evaluator_evidence_sha256 = "{FIXTURE_EVALUATOR_EVIDENCE_SHA256}"''',
     ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
 
 
@@ -272,6 +341,7 @@ class RevisionValidatorTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
         create_base_chain(self.root, work_order_status="released")
+        write_evaluator_fixture(self.root)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

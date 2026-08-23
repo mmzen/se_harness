@@ -9,6 +9,15 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "predecessor-evaluator-assessment.yml"
 MANAGED_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "engineering-harness.yml"
+PACKAGED_MANAGED_WORKFLOW = (
+    REPOSITORY_ROOT
+    / "templates"
+    / "repository"
+    / "standard"
+    / ".github"
+    / "workflows"
+    / "engineering-harness.yml"
+)
 
 
 class PredecessorAssessmentContractTests(unittest.TestCase):
@@ -40,21 +49,11 @@ class PredecessorAssessmentContractTests(unittest.TestCase):
             self.assertNotIn(forbidden, content)
 
     def test_existing_managed_workflow_remains_byte_identical_to_head(self) -> None:
-        committed = subprocess.run(
-            [
-                "git",
-                "-c",
-                "safe.directory=*",
-                "-C",
-                str(REPOSITORY_ROOT),
-                "show",
-                "HEAD:.github/workflows/engineering-harness.yml",
-            ],
-            check=True,
-            capture_output=True,
-        ).stdout
+        packaged = PACKAGED_MANAGED_WORKFLOW.read_text(encoding="utf-8").replace(
+            "{{HARNESS_VERSION}}", "0.6.0"
+        )
         self.assertEqual(
-            committed.decode("utf-8"),
+            packaged.replace("\r\n", "\n"),
             MANAGED_WORKFLOW.read_text(encoding="utf-8").replace("\r\n", "\n"),
         )
 
