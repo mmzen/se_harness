@@ -24,6 +24,13 @@ FORBIDDEN_MEMBERS = frozenset(
     }
 )
 FORBIDDEN_MEMBER_PREFIXES = ("share/se-harness/self-hosting/",)
+REQUIRED_MIGRATION_MEMBERS = frozenset(
+    {
+        "se_harness/governance_migration.py",
+        "se_harness/governance_migration_contract.json",
+        "se_harness/governance_migration_contract.py",
+    }
+)
 FORBIDDEN_CLI = (b"reconcile-governor", b"--governor-wheel-sha256", b"--role governor")
 FORBIDDEN_ACTIVE_CONTENT = (
     b"publish_dashboard.py governor",
@@ -72,6 +79,10 @@ def inspect_wheel(path: Path) -> None:
         with zipfile.ZipFile(path) as archive:
             hits: list[str] = []
             members = archive.infolist()
+            member_names = {member.filename for member in members}
+            missing = sorted(REQUIRED_MIGRATION_MEMBERS - member_names)
+            if missing:
+                raise SurfaceError("wheel is missing governance migration member: " + missing[0])
             if len(members) > MAX_MEMBER_COUNT:
                 raise SurfaceError("wheel contains too many members")
             total_size = sum(member.file_size for member in members)
@@ -109,6 +120,7 @@ def inspect_harnessctl(path: Path) -> None:
             [str(path), "--help"],
             [str(path), "prepare-release", "--help"],
             [str(path), "identity", "--help"],
+            [str(path), "rehearse-migration", "--help"],
         )
         completed = [
             subprocess.run(command, check=False, capture_output=True, timeout=30)
@@ -123,6 +135,8 @@ def inspect_harnessctl(path: Path) -> None:
         raise SurfaceError("repository distribution option leaked into installed harnessctl")
     if any(term in output for term in FORBIDDEN_CLI):
         raise SurfaceError("retired specialized lifecycle leaked into installed harnessctl")
+    if b"rehearse-migration" not in output:
+        raise SurfaceError("governance migration command is absent from installed harnessctl")
 
 
 def inspect_repository(path: Path) -> None:

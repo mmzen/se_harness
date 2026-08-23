@@ -1,0 +1,43 @@
+{
+  "schema": "se-harness-governance-migration-v1",
+  "result_schema": "se-harness-governance-migration-result-v1",
+  "stage_order": ["prepare", "validate-complete", "reject", "replace", "assess", "release-plan", "publish-plan", "render", "adopt"],
+  "technical_roles": ["compatibility-adapter", "lifecycle-simulator", "predecessor", "predecessor-compatible-adapter", "publication-planner", "release-planner", "renderer", "successor", "upgrade-adapter"],
+  "accountable_roles": ["release-owner", "repository-owner"],
+  "stages": {
+    "prepare": {"accountable_decision": null, "permitted_mutations": ["disposable-graph", "disposable-root"], "technical_roles": ["predecessor", "predecessor-compatible-adapter"], "views": ["fixture", "predecessor-preparation-view-v1", "synthetic-preparation-view-v1"]},
+    "validate-complete": {"accountable_decision": null, "permitted_mutations": [], "technical_roles": ["successor"], "views": ["complete"]},
+    "reject": {"accountable_decision": "reject", "permitted_mutations": ["disposable-graph"], "technical_roles": ["lifecycle-simulator"], "views": ["fixture"]},
+    "replace": {"accountable_decision": null, "permitted_mutations": ["disposable-graph"], "technical_roles": ["predecessor-compatible-adapter"], "views": ["predecessor-preparation-view-v1", "synthetic-preparation-view-v1"]},
+    "assess": {"accountable_decision": null, "permitted_mutations": [], "technical_roles": ["compatibility-adapter"], "views": ["predecessor-assessment-view-v1", "synthetic-assessment-view-v1"]},
+    "release-plan": {"accountable_decision": null, "permitted_mutations": ["disposable-release-plan"], "technical_roles": ["release-planner"], "views": ["selected-release"]},
+    "publish-plan": {"accountable_decision": null, "permitted_mutations": ["disposable-publication-plan"], "technical_roles": ["publication-planner"], "views": ["predecessor-publication-view-v1", "synthetic-publication-view-v1"]},
+    "render": {"accountable_decision": null, "permitted_mutations": ["disposable-render"], "technical_roles": ["renderer"], "views": ["predecessor-publication-view-v1", "synthetic-publication-view-v1"]},
+    "adopt": {"accountable_decision": "adopt", "permitted_mutations": ["disposable-root", "simulated-publication"], "technical_roles": ["upgrade-adapter"], "views": ["standard-root"]}
+  },
+  "decision_types": {
+    "reject": {"accountable_role": "release-owner", "permitted_effect": "proposal-status-rejected"},
+    "adopt": {"accountable_role": "repository-owner", "permitted_effect": "disposable-root-evaluator-selected"}
+  },
+  "capabilities": {
+    "complete-graph-validation": ["validate-complete"],
+    "evaluator-evidence-v1": ["publish-plan", "release-plan", "validate-complete"],
+    "predecessor-compatible-assessment-view": ["assess"],
+    "predecessor-compatible-preparation-view": ["prepare", "replace"],
+    "predecessor-compatible-publication-view": ["publish-plan", "render"],
+    "rejected-record-terminal-state": ["assess", "reject", "replace"],
+    "schema-v2-release-preparation": ["prepare"],
+    "separate-root-adoption": ["adopt"]
+  },
+  "adapters": {
+    "historical-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["assess"], "view": "predecessor-assessment-view-v1"},
+    "historical-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["prepare", "replace"], "view": "predecessor-preparation-view-v1"},
+    "historical-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["publish-plan", "render"], "view": "predecessor-publication-view-v1"},
+    "synthetic-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["assess"], "view": "synthetic-assessment-view-v1"},
+    "synthetic-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["prepare", "replace"], "view": "synthetic-preparation-view-v1"},
+    "synthetic-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4", "stages": ["publish-plan", "render"], "view": "synthetic-publication-view-v1"}
+  },
+  "credential_signals": ["ACTIONS_ID_TOKEN_REQUEST_TOKEN", "AWS_SECRET_ACCESS_KEY", "AZURE_CLIENT_SECRET", "GH_TOKEN", "GITHUB_TOKEN", "GOOGLE_APPLICATION_CREDENTIALS", "PYPI_API_TOKEN", "TWINE_PASSWORD"],
+  "external_actions": ["credential-use", "deployment", "external-policy-change", "lifecycle-transition", "maintenance-mutation", "network", "publication", "release", "root-evaluator-upgrade", "tag"],
+  "limits": {"max_child_output_bytes": 65536, "max_scenario_bytes": 262144, "subprocess_timeout_seconds": 30}
+}

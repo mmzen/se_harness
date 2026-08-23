@@ -134,3 +134,141 @@ jobs:
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
+
+  governance-migration:
+    name: Governance migration (${{ matrix.platform }})
+    needs: candidate-package
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: Linux
+            runner: ubuntu-latest
+            python: bin/python
+          - platform: Windows
+            runner: windows-latest
+            python: Scripts/python.exe
+    runs-on: ${{ matrix.runner }}
+    env:
+      PREDECESSOR_VERSION: "0.5.0"
+      PREDECESSOR_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Acquire and verify the already-public predecessor
+        shell: pwsh
+        run: |
+          $predecessorDist = Join-Path '${{ runner.temp }}' 'predecessor-dist'
+          New-Item -ItemType Directory -Path $predecessorDist | Out-Null
+          python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `
+            --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"
+          $wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'
+          if ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()
+          if ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }
+      - name: Export and build the non-promotable exact successor
+        shell: pwsh
+        run: |
+          $candidateArchive = Join-Path '${{ runner.temp }}' 'candidate.zip'
+          $candidateExport = Join-Path '${{ runner.temp }}' 'candidate-export'
+          $candidateDist = Join-Path '${{ runner.temp }}' 'candidate-dist'
+          git archive --format=zip --output=$candidateArchive $env:GITHUB_SHA
+          Expand-Archive -LiteralPath $candidateArchive -DestinationPath $candidateExport
+          New-Item -ItemType Directory -Path $candidateDist | Out-Null
+          python -m pip wheel --disable-pip-version-check --no-deps `
+            --wheel-dir $candidateDist $candidateExport
+          $wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'
+          if ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }
+      - name: Install isolated local runtimes
+        shell: pwsh
+        run: |
+          $predecessorRoot = Join-Path '${{ runner.temp }}' 'predecessor-env'
+          $successorRoot = Join-Path '${{ runner.temp }}' 'successor-env'
+          python -m venv $predecessorRoot
+          python -m venv $successorRoot
+          $predecessorPython = Join-Path $predecessorRoot '${{ matrix.python }}'
+          $successorPython = Join-Path $successorRoot '${{ matrix.python }}'
+          $predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path '${{ runner.temp }}' 'predecessor-dist') -Filter '*.whl').FullName
+          $successorWheel = (Get-ChildItem -LiteralPath (Join-Path '${{ runner.temp }}' 'candidate-dist') -Filter '*.whl').FullName
+          & $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel
+          & $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel
+      - name: Rehearse the exact predecessor-to-successor handover twice
+        shell: pwsh
+        run: |
+          $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
+          $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
+          $scenario = Join-Path $env:GITHUB_WORKSPACE 'tests/fixtures/governance_migration/historical-0.5.0-to-0.6.0.json'
+          $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
+          $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
+          Push-Location '${{ runner.temp }}'
+          try {
+            & $successorPython -I -m se_harness rehearse-migration $env:GITHUB_WORKSPACE `
+              --scenario $scenario --predecessor-python $predecessorPython `
+              --successor-python $successorPython --output $first --json
+            if ($LASTEXITCODE -ne 0) { throw 'first migration rehearsal failed' }
+            & $successorPython -I -m se_harness rehearse-migration $env:GITHUB_WORKSPACE `
+              --scenario $scenario --predecessor-python $predecessorPython `
+              --successor-python $successorPython --output $second --json
+            if ($LASTEXITCODE -ne 0) { throw 'second migration rehearsal failed' }
+          } finally {
+            Pop-Location
+          }
+          $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'governance-migration-result.json') | ConvertFrom-Json
+          $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'governance-migration-result.json') | ConvertFrom-Json
+          if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'migration semantic replay digest differs' }
+      - name: Retain the bounded migration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-migration-${{ matrix.platform }}
+          path: ${{ runner.temp }}/migration-result-*/governance-migration-result.json
+          if-no-files-found: warn
+      - name: Prove migration evidence made no checkout change
+        shell: pwsh
+        run: |
+          git diff --exit-code
+          $status = git status --porcelain=v1 --untracked-files=all
+          if ($status) { throw 'migration rehearsal changed the checkout' }
+
+  governance-migration-reconcile:
+    name: Reconcile governance migration platforms
+    needs: governance-migration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: none
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: governance-migration-Linux
+          path: results/Linux
+      - uses: actions/download-artifact@v4
+        with:
+          name: governance-migration-Windows
+          path: results/Windows
+      - name: Require one cross-platform semantic result
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          results = {}
+          for platform in ("Linux", "Windows"):
+              files = list(Path("results", platform).rglob("governance-migration-result.json"))
+              if len(files) != 2:
+                  raise SystemExit(f"{platform}: expected two retained replay results, found {len(files)}")
+              values = [json.loads(path.read_bytes()) for path in files]
+              digests = {value["semantic_sha256"] for value in values}
+              if len(digests) != 1 or any(value["overall_result"] != "pass" for value in values):
+                  raise SystemExit(f"{platform}: replay result mismatch")
+              results[platform] = digests.pop()
+          if len(set(results.values())) != 1:
+              raise SystemExit(f"cross-platform semantic mismatch: {results}")
+          print(f"governance migration semantic result: {results['Linux']}")
+          PY

@@ -21,6 +21,8 @@ from se_harness.installer import (
     template_root,
 )
 from se_harness.github_ci import SelectionError, select_from_event
+from se_harness.governance_migration import GovernanceMigrationError, run_governance_migration
+from se_harness.governance_migration_contract import MigrationContractError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
 from se_harness.renumber import (
@@ -162,6 +164,27 @@ def _rehearse_recovery(args: argparse.Namespace) -> int:
     print(f"recovery rehearsal: {report['result'].upper()}")
     print(f"report: {(output.resolve() / 'rehearsal-report.json')}")
     return 0
+
+
+def _rehearse_migration(args: argparse.Namespace) -> int:
+    output = Path(args.output)
+    try:
+        report = run_governance_migration(
+            Path(args.operational_root),
+            scenario_path=Path(args.scenario),
+            predecessor_python=Path(args.predecessor_python),
+            successor_python=Path(args.successor_python),
+            output=output,
+        )
+    except (GovernanceMigrationError, MigrationContractError) as exc:
+        raise HarnessError(str(exc)) from exc
+    if args.json:
+        print(json.dumps(report, ensure_ascii=True, separators=(",", ":"), sort_keys=True))
+    else:
+        print(f"governance migration rehearsal: {report['overall_result'].upper()}")
+        print(f"scenario: {report['scenario']['id']}")
+        print(f"result: {(output.resolve() / 'governance-migration-result.json')}")
+    return 0 if report["overall_result"] == "pass" else 1
 
 
 def _distribution_script(script: str) -> Path:
@@ -629,6 +652,18 @@ def build_parser() -> argparse.ArgumentParser:
     rehearse.add_argument("--candidate-commit", required=True, help="full synthetic immutable candidate commit")
     rehearse.add_argument("--target-version", default="999.0.0", help="synthetic target evaluator version")
     rehearse.set_defaults(handler=_rehearse_recovery)
+
+    migrate = commands.add_parser(
+        "rehearse-migration",
+        help="rehearse one predecessor-to-successor governance handover without operational mutation",
+    )
+    migrate.add_argument("operational_root", help="operational repository that must remain unchanged")
+    migrate.add_argument("--scenario", required=True, help="canonical se-harness-governance-migration-v1 JSON")
+    migrate.add_argument("--predecessor-python", required=True, help="external isolated predecessor interpreter")
+    migrate.add_argument("--successor-python", required=True, help="external isolated successor interpreter")
+    migrate.add_argument("--output", required=True, help="external absent or empty disposable output directory")
+    migrate.add_argument("--json", action="store_true", help="emit the canonical factual result")
+    migrate.set_defaults(handler=_rehearse_migration)
 
     scaffold = commands.add_parser("scaffold-domain", help="safely create the canonical organization for one engineering domain")
     scaffold.add_argument("target", nargs="?", default=".")

@@ -72,6 +72,8 @@ The standard managed workflow owns the released-evaluator lane. `.github/workflo
 
 `harnessctl identity` supports `released-evaluator`, `candidate-source`, and `candidate-package` roles. `harnessctl accept-candidate` remains a generic verifier-owned black-box package contract; its manifest is evidence, not an assurance decision.
 
+Candidate CI also runs the contract-bound [evaluator migration rehearsal](evaluator-migration-rehearsal.md) on Windows and Linux. It acquires the already-public, digest-pinned predecessor before the run, builds a non-promotable successor from the exact candidate commit, installs both outside the checkout, and runs the nine-stage scenario twice. This gate tests the complete N-1-to-N handover; it does not make the candidate the root evaluator or grant release authority.
+
 ## Building and releasing
 
 A promotable distribution build is allowed only under an approved release-bearing work order. In this repository the owner-authored `docs/engineering/REPOSITORY_CONTEXT.md` defines the deterministic build, normalized sdist, bundle manifest, VREC, RLS binding, and publication sequence. That file is ordinary owner content: the harness neither seeds nor requires it, and another repository may keep the same sequences anywhere its owners choose.

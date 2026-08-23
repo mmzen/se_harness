@@ -105,10 +105,14 @@ class DistributionManifestTests(unittest.TestCase):
             clean = root / "clean.whl"
             with zipfile.ZipFile(clean, "w") as archive:
                 archive.writestr("se_harness/cli.py", "print('portable')\n")
+                for member in sorted(SURFACE.REQUIRED_MIGRATION_MEMBERS):
+                    archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
             SURFACE.inspect_wheel(clean)
 
             leaked = root / "leaked.whl"
             with zipfile.ZipFile(leaked, "w") as archive:
+                for member in sorted(SURFACE.REQUIRED_MIGRATION_MEMBERS):
+                    archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
                 archive.writestr("repository_tools/release_distribution.py", "repository policy\n")
             with self.assertRaisesRegex(SURFACE.SurfaceError, "leaked into wheel"):
                 SURFACE.inspect_wheel(leaked)
