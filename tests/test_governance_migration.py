@@ -160,6 +160,8 @@ class GovernanceMigrationTests(unittest.TestCase):
         for runtime in other["runtimes"].values():
             runtime["archive_sha256"] = "a" * 64
             runtime["executable_sha256"] = "b" * 64
+            runtime["package_tree_sha256"] = "d" * 64
+            runtime["payload_sha256"] = "e" * 64
             runtime["python_version"] = "99.0.0"
         for snapshot in other["operational_state"].values():
             if isinstance(snapshot, dict):

@@ -594,6 +594,8 @@ def _semantic_value(result: Mapping[str, Any]) -> dict[str, Any]:
             "archive_sha256",
             "duration_ms",
             "executable_sha256",
+            "package_tree_sha256",
+            "payload_sha256",
             "python_version",
             "source_sha256",
         }:
