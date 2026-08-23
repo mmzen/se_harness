@@ -4,9 +4,9 @@
 
 Issue #101 was implemented locally under approved `REQ-REB-016`, `REQ-REB-017`, `SPEC-REB-008`, `ARCH-REB-007`, `ADR-REB-007`, `VER-REB-007`, and `WO-REB-018`.
 
-`WO-REB-018` remains `in_progress`. This evidence is not a candidate commit, verification decision, release decision, publication authorization, or root-evaluator adoption. No commit, push, hosted dispatch, VREC/RLS preparation or transition, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or operational root-evaluator upgrade was performed.
+`WO-REB-018` is now `implemented` after exact local, package, and hosted qualification. This evidence is not a verification decision, release decision, publication authorization, or root-evaluator adoption. Candidate commits, the dedicated branch push, read-only hosted inspection, and bounded Git credential use occurred under the repository owner's authorization. No VREC/RLS transition, tag, publication, deployment, maintenance mutation, external-policy change, or operational root-evaluator upgrade was performed.
 
-The implementation worktree is based on Git commit `6582ebfd03c773324ea0b0dd86cb975fb19a15ab` on local branch `proposal/rca-060-01-governor-migration`. The implementation and this evidence are uncommitted, so there is not yet an exact candidate commit identity.
+The implementation began at `6582ebfd03c773324ea0b0dd86cb975fb19a15ab` on branch `proposal/rca-060-01-governor-migration`. Exact implementation commit `35f7afdbaff9dd9734a1b2e4b6f4147cc8d294a3` contains the reviewed feature plus the hosted-discovered semantic normalization correction. The later local governance commit containing this evidence update and the work-order transition does not alter the runner, contract, scenarios, tests, workflow, or package payload.
 
 ## Delivered contract and executable surface
 
@@ -27,9 +27,9 @@ The source identities used by local qualification are:
 
 | Item | SHA-256 |
 | --- | --- |
-| `se_harness/governance_migration_contract.json` | `7542dfb3dd495fb78ffd5de62c66e25886f067a00509ad933ad02184820710ff` |
+| `se_harness/governance_migration_contract.json` | `5819dbabeeea7d2dc538e67d2d53eb8290e5a192f499e6250ccbedc9d2a9b167` |
 | `se_harness/governance_migration_contract.py` | `bb87c3d7d713ce2da3fa5aea287714a37df5017f43057f1fa17c7d794716e826` |
-| `se_harness/governance_migration.py` | `74fc4e2b728a3f8ae69c0b10d008afd508570c5d6e9eddb140dd941fcb2091a4` |
+| `se_harness/governance_migration.py` | `bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231` |
 | historical scenario | `393f639eb06fdec17a31386c5fc94f526cceba2e0efc95cbde6e1077f99b8324` |
 | historical scenario fixture | `daf7ca33b6fe75246d9a14c5e1193f916c4da8ba4a0a100eae2f23a351c2517c` |
 | synthetic scenario | `af2101d95784babdd3afaaccad16946ba04abbce866643c7e6cb4413ecb33daf` |
@@ -42,24 +42,24 @@ All six declared compatibility adapters bind the exact runner hash above. Unknow
 
 The final disposable build and rehearsal root is outside the operational checkout:
 
-`../work/wo-reb-018-final-d97670e9898f464a912abd37f92c14b4`
+`../work/wo-reb-018-35f7afd-package`
 
 The package inputs and installed runtime identities were:
 
 | Role | Version and archive | Archive SHA-256 | Installed package-tree SHA-256 |
 | --- | --- | --- | --- |
 | released predecessor | `se_harness-0.5.0-py3-none-any.whl` | `974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f` | `6233a429759c6600d033d947eb72fce4403bd742b57d367ac9c7e2709934b4bc` |
-| non-promotable successor | `se_harness-0.6.0-py3-none-any.whl` | `60d555bcf54005859c3b03b1f536857824222c5117ce560272e25575e26b8269` | `b47ce208a81361550e575ffaa1bb4c3a843a9f183c8dff98d192970e94ba6341` |
+| non-promotable successor | `se_harness-0.6.0-py3-none-any.whl` | `b2848a48093f2c82806b8df66d11aecd7481926f877c447962922e454a505fa8` | `087e0899ee78980fb271b10c4a9c06ec0ad625ae1895220e474aa693d382baaa` |
 
 Both environments used isolated Python 3.14.6 virtual environments outside the checkout. The released predecessor archive was the retained exact public 0.5.0 wheel. The successor wheel was rebuilt from the final reviewed source and template tree. It is disposable qualification input, not a release distribution.
 
-The installed successor contract SHA-256 was exactly `7542dfb3dd495fb78ffd5de62c66e25886f067a00509ad933ad02184820710ff`, equal to the source contract. The successor runtime recorded payload SHA-256 `9e775944035774f6e62613e0a93e40b9a9c4ce255309d8cadf65b7f04e77e1c1`.
+The installed successor contract SHA-256 was exactly `5819dbabeeea7d2dc538e67d2d53eb8290e5a192f499e6250ccbedc9d2a9b167`, equal to the source contract. The successor runtime recorded payload SHA-256 `e23067781d48491d689d28789404888d0ea4a15a73b5b3944b68a7ff56a1f2d3`.
 
 The historical scenario ran twice from the installed packages. Both runs passed and produced the same normalized semantic SHA-256:
 
-`34f478dba98fe29873ffa8b3e64afecd9d6517abd48fef506657d487d4d5e9c0`
+`9d879f060f77852f36aa7d1ee653721a6bb203ca661309bd78c665e60a166bb8`
 
-The normalized digest excludes elapsed time and platform-specific interpreter facts, while the retained result still records those factual values. This proves deterministic local replay; Windows/Linux agreement still requires the hosted matrix described below.
+The normalized digest excludes elapsed time, host/interpreter facts, raw checkout bytes, and independently built successor distribution identities, while the retained result still records every exact factual value. It continues to bind the candidate Git identity, scenario, contract/runner, stage reports, decisions, and unchanged-state claim. This proves deterministic local replay; hosted Windows/Linux agreement is recorded below.
 
 ## Nine-stage result
 
@@ -87,7 +87,7 @@ Release and publication stages produced plans only. Render selected the correcte
 
 ## Mutation and security evidence
 
-Both exact-package rehearsals recorded operational source SHA-256 `00e5f5fee4cef46c7bc04dcb3f204a0f5a5313be16537dc52727fc31f0d0f29d` before and after. Git HEAD remained `6582ebfd03c773324ea0b0dd86cb975fb19a15ab`, and Git refs SHA-256 remained `5890d13817f8d1e6d3bf658e4c9bea25d15517c58dd28e9fc0012f6445b970d4`.
+Both final exact-package rehearsals recorded operational source SHA-256 `e84858ad7e52faa5bdfcc9de178be35ba076ac849929f4ee1bf251cea41041fb` before and after. Git HEAD remained `35f7afdbaff9dd9734a1b2e4b6f4147cc8d294a3`, and Git refs SHA-256 remained `5b723e0b204e3693c6e5f335ce92faacefe30eb9ef224a50baa890413e66b33c`.
 
 The retained result reports `false` for credential use, network, lifecycle transition, tag, release, publication, deployment, maintenance mutation, external-policy change, and operational root-evaluator upgrade. Runtime checks also proved separate environments, checkout exclusion, user-site isolation, and exact predecessor archive identity.
 
@@ -97,14 +97,12 @@ Focused adversarial tests inject a fault at each of the nine stages and prove th
 
 The following checks passed on Windows:
 
-- governance-migration focused tests: 9 passed;
-- release-orchestration focused tests: 22 passed;
-- release build, PyPI, recovery, and standard-lifecycle focused tests: 31 passed;
-- complete suite: 461 passed with 7 declared skips in 282.888 seconds;
+- governance-migration and adjacent policy tests: 51 passed;
+- complete clean-detached suite: 462 passed with 7 declared skips in 262.339 seconds;
 - candidate-template graph: 679 artifacts, 0 errors, 50 maintenance warnings;
 - exact released-0.5 predecessor view: 677 artifacts, 0 errors, 49 maintenance warnings;
 - exact released-0.5 `doctor`: exit 0 with existing maintenance-location warnings only;
-- exact released-0.5 `WO-REB-018` start preflight: ready, 0 diagnostics, status `in_progress`;
+- exact released-0.5 `WO-REB-018` start preflight: ready, 0 diagnostics before implementation;
 - released-distribution validation: pass with one distribution-bearing record;
 - portable wheel surface: pass;
 - installed/source contract parity: pass;
@@ -115,17 +113,25 @@ The separately locked managed-root 0.5 validator still reports the already known
 
 The candidate-source `doctor` and review preflight also correctly refuse to treat the unadopted 0.6.0 template as the operational root: they report the existing managed-root files and lock as different from the candidate distribution. The released-0.5 `doctor` is the authoritative operational check at this stage and passes on its exact predecessor view. Candidate complete-graph validation remains a separate claim and passes. This is the authority separation the rehearsal is intended to preserve, not a bypass or an inferred root upgrade.
 
-## Hosted and commit-bound evidence still pending
+## Hosted qualification and normalization correction
 
-The candidate workflow now defines an unprivileged Windows/Linux matrix that downloads and verifies the exact 0.5.0 public wheel, builds a non-promotable exact-successor wheel, runs the historical rehearsal twice, uploads results even on failure, and reconciles one cross-platform semantic digest. It has not been dispatched because push, credentials, and hosted execution are outside the current authorization.
+Hosted run `32630458376` at exact implementation commit `35f7afdbaff9dd9734a1b2e4b6f4147cc8d294a3` passed:
 
-Commit-bound verification is also pending because no candidate commit is authorized or present. Therefore:
+- candidate source job `97172344750`;
+- candidate package job `97172439538`;
+- Linux migration job `97172479304`;
+- Windows migration job `97172479387`; and
+- cross-platform reconciliation job `97172594101`.
 
-- Windows local source/package qualification is complete;
-- hosted Windows/Linux execution and cross-platform reconciliation are pending;
-- an exact candidate commit identity is pending;
-- `WO-REB-018` remains `in_progress`; and
-- no VREC/RLS work has been prepared or transitioned.
+Each platform ran the historical scenario twice and all four results passed with semantic SHA-256 `cb6e1a8d0e50b90535176cf6825566fd3f19d13cf89ab9f719995fa0633aee72`. Both retained the exact public predecessor archive SHA-256 `974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f`, exact commit `35f7afdbaff9dd9734a1b2e4b6f4147cc8d294a3`, equal refs SHA-256 `04c78e3c1e979782bf62eeb74a97b2c8f9916619da8ef6755c3ee309f8bd3769`, and `operational_state.unchanged = true`.
+
+The retained platform-specific facts remain visible rather than being discarded. Linux recorded source SHA-256 `dc2f9ced95d5057c990703baaa6f8abee962b23d9cd76caca352d928d0d588d2`, successor archive `d064f9cd54f81d7a784adad2ba467275b3416c8708ae15eaf72df2206df53f1c`, package tree `6da5346a2b92b8b5d889e83b6d6eff474f0f8566f832a06f17ea8102fd1322d8`, and payload `1bfe32ee26a8a9f2526a4d04c3c20f2d99e4ddfcfd258feca20d05396fc74dc5`. Windows recorded source `2c983103bbdb2c17fe23758ff39184e27aaba3205daf0408d7c42b5e7552bb30`, successor archive `0c263635f7274ac2f7713d2d13832eb712f8a2460d4e3f8b4d655a70e9fc6785`, package tree `087e0899ee78980fb271b10c4a9c06ec0ad625ae1895220e474aa693d382baaa`, and payload `e23067781d48491d689d28789404888d0ea4a15a73b5b3944b68a7ff56a1f2d3`.
+
+Runs `32629590304` and `32630115767` usefully failed only the reconciliation job after both platform rehearsals passed. The first digest still included raw source, executable, and independently built archive facts; the second still included installed successor package-tree and payload facts. The final correction keeps all those values in the evidence but removes them from the cross-platform semantic comparison. A regression test mutates every normalized platform field, proves raw results differ, and proves the semantic digest remains equal. Recomputing the final algorithm over the second run's retained Windows/Linux artifacts produced one digest before the final hosted retry.
+
+Predecessor evaluator assessment run `32630458445` passed. Legacy Engineering Harness run `32630458398` stopped at the released-0.5 full-graph `E009`/`E010` boundary tracked by #103; it did not fail the candidate source, package, migration, or reconciliation work and was not converted to an allowlist.
+
+Commit-bound VREC preparation remains pending until the clean governance commit containing this evidence and the `implemented` transition exists. No VREC has been verified or rejected.
 
 ## Changed paths under review
 
@@ -158,4 +164,4 @@ Commit-bound verification is also pending because no candidate commit is authori
 
 ## Next accountable decision
 
-Review the 26-path local implementation and retained evidence. If accepted, a separate authorization can create one exact candidate commit; only after that identity exists can commit-bound local replay, push, hosted Windows/Linux reconciliation, and the later `WO-REB-018` completion decision occur.
+Create the clean governance commit containing only this retained evidence update and the `WO-REB-018` `in_progress` to `implemented` transition, qualify that exact commit, and prepare ready `VREC-REB-014`. Assurance review and any `ready` to `verified` transition remain separate decisions.

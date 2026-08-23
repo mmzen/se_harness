@@ -2,7 +2,7 @@
 id = "WO-REB-018"
 type = "work_order"
 title = "Implement the predecessor-to-successor governance migration rehearsal"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
@@ -29,13 +29,19 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-23T07:56:22Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-23T09:18:22Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement the predecessor-to-successor governance migration rehearsal
 
 ## Lifecycle
 
-The bounded issue #101 implementation is in progress under the approved governing packet. This state authorizes only the implementation, local verification, and retained evidence defined here. It does not authorize a candidate commit, push, credential use, hosted dispatch, verification or release record preparation/transition, tag, publication, deployment, maintenance mutation, external policy change, or operational root-evaluator adoption.
+The bounded issue #101 implementation is complete with retained local, package, adversarial, and hosted Windows/Linux evidence. Commit-bound verification remains a separate ready-record preparation and assurance-owner decision; implementation does not verify, release, publish, deploy, or adopt an evaluator.
 
 ## Objective
 
