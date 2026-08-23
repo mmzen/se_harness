@@ -19,6 +19,7 @@ import tomllib
 from se_harness import mutation_guard
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import HarnessError, ensure_target, safe_destination, template_root
+from se_harness.workflow_contract import load_lifecycle_registry
 
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
@@ -28,8 +29,18 @@ EVIDENCE_WORK_ORDER_PATTERN = re.compile(
 VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$")
 OWNER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9@._ -]{0,127}$")
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/+-]{0,127}$")
-ACTIVE_STATUSES = {"approved", "in_progress", "implemented", "verified", "released"}
 RELEASABLE_WORK_STATUSES = {"implemented", "verified", "released"}
+LIFECYCLE_REGISTRY = load_lifecycle_registry()
+
+
+def _grants_authority(family: str, status: object) -> bool:
+    row = LIFECYCLE_REGISTRY.get(family, {}).get(status) if isinstance(status, str) else None
+    return bool(row and row.grants_authority)
+
+
+def _reserves_version(status: object) -> bool:
+    row = LIFECYCLE_REGISTRY["release_record"].get(status) if isinstance(status, str) else None
+    return bool(row and row.reserves_version)
 
 
 def _run(command: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -351,7 +362,7 @@ def capture_verification(
         declared_verification.update(_relation_targets(_load_metadata(root, work_order), "verification"))
     for verification_id in selected_verification:
         verification = _require_artifact(catalog, verification_id, "verification")
-        if verification.get("status") not in ACTIVE_STATUSES:
+        if not _grants_authority("definition", verification.get("status")):
             raise HarnessError(f"verification contract {verification_id} must be active")
     supplied_verification = set(selected_verification)
     missing_verification = declared_verification - supplied_verification
@@ -465,7 +476,7 @@ def prepare_release(
     if record_id in catalog:
         raise HarnessError(f"artifact ID already exists: {record_id}")
     contract = _require_artifact(catalog, release_contract_id, "release_contract")
-    if contract.get("status") not in ACTIVE_STATUSES:
+    if not _grants_authority("definition", contract.get("status")):
         raise HarnessError("release contract must be active")
     contract_metadata = _load_metadata(root, contract)
     for work_order_id in selected_work:
@@ -476,7 +487,7 @@ def prepare_release(
         if artifact.get("type") != "release_record":
             continue
         existing_metadata = _load_metadata(root, artifact)
-        if existing_metadata.get("status") not in {"ready", "released"}:
+        if not _reserves_version(existing_metadata.get("status")):
             continue
         if existing_metadata.get("version") == version:
             raise HarnessError(f"release version already exists: {version}")
@@ -487,8 +498,10 @@ def prepare_release(
     identities: set[tuple[str, str]] = set()
     for verification_record_id in selected_verification_records:
         verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-        if verification_record.get("status") != "verified":
-            raise HarnessError(f"verification record {verification_record_id} must be verified")
+        if not _grants_authority("verification_record", verification_record.get("status")):
+            raise HarnessError(
+                f"verification record {verification_record_id} must be verified or released authority"
+            )
         verification_metadata = _load_metadata(root, verification_record)
         verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
         identities.add(_supported_commit(verification_metadata, verification_record_id))

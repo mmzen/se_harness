@@ -10,7 +10,7 @@ from pathlib import Path
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
-from se_harness.workflow import TRANSITIONS, WORKFLOW_CONTRACT
+from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, WORKFLOW_CONTRACT
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -33,7 +33,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
 
     def test_contract_is_closed_ordered_and_complete(self) -> None:
         contract = WORKFLOW_CONTRACT
-        self.assertEqual("se-harness-workflow-v2", contract["schema"])
+        self.assertEqual("se-harness-workflow-v3", contract["schema"])
         self.assertEqual("BCP 14", contract["normative_language"])
         self.assertEqual(
             [
@@ -114,6 +114,16 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_runtime_and_repository_validator_use_the_same_transitions(self) -> None:
         validator = _load_validator_module()
         self.assertEqual(TRANSITIONS, validator.WORKFLOW_TRANSITIONS)
+        for family, states in LIFECYCLE_REGISTRY.items():
+            self.assertEqual(set(states), set(validator.WORKFLOW_LIFECYCLES[family]))
+            for state, row in states.items():
+                standalone = validator.WORKFLOW_LIFECYCLES[family][state]
+                self.assertEqual(row.transitions_to, standalone.transitions_to)
+                self.assertEqual(row.grants_authority, standalone.grants_authority)
+                self.assertEqual(row.reserves_version, standalone.reserves_version)
+                self.assertEqual(row.transitionable, standalone.transitionable)
+                self.assertEqual(row.must_remain_visible, standalone.must_remain_visible)
+                self.assertEqual(row.predecessor_adapter, standalone.predecessor_adapter)
 
     def test_fresh_install_contains_managed_machine_contract(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

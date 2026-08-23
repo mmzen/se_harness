@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import json
 import re
+from dataclasses import dataclass
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, Iterable, Mapping
 
 
-WORKFLOW_SCHEMA = "se-harness-workflow-v2"
+WORKFLOW_SCHEMA = "se-harness-workflow-v3"
 QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v1"
 STEP_KINDS = {"command", "decision", "reference"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
@@ -33,10 +35,107 @@ _ID_PATTERNS = {
     "gate": re.compile(r"^QG-[A-Z0-9-]+$"),
     "predicate": re.compile(r"^QGP-[A-Z0-9-]+$"),
 }
+LIFECYCLE_FAMILIES = frozenset(
+    {"definition", "work_order", "verification_record", "release_record"}
+)
+LIFECYCLE_FIELDS = frozenset(
+    {
+        "transitions_to",
+        "grants_authority",
+        "reserves_version",
+        "transitionable",
+        "must_remain_visible",
+        "predecessor_adapter",
+    }
+)
+PREDECESSOR_ADAPTER_VALUES = frozenset({"none", "required"})
+_STATE_NAME = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 
 
 class ContractError(RuntimeError):
     """Machine policy is malformed, ambiguous, or cannot resolve."""
+
+
+@dataclass(frozen=True)
+class LifecycleState:
+    """Validated semantics for one state in one artifact family."""
+
+    transitions_to: tuple[str, ...]
+    grants_authority: bool
+    reserves_version: bool
+    transitionable: bool
+    must_remain_visible: bool
+    predecessor_adapter: str
+
+
+LifecycleRegistry = Mapping[str, Mapping[str, LifecycleState]]
+
+
+def validate_lifecycle_registry(workflow: Mapping[str, Any]) -> LifecycleRegistry:
+    """Return the strict, immutable lifecycle index from workflow policy."""
+
+    raw = workflow.get("lifecycles")
+    if not isinstance(raw, Mapping) or set(raw) != LIFECYCLE_FAMILIES:
+        raise ContractError("workflow lifecycles must declare exactly the four artifact families")
+    families: dict[str, Mapping[str, LifecycleState]] = {}
+    for family in sorted(LIFECYCLE_FAMILIES):
+        raw_states = raw.get(family)
+        if not isinstance(raw_states, Mapping) or not raw_states:
+            raise ContractError(f"workflow lifecycle family {family} must contain states")
+        states: dict[str, LifecycleState] = {}
+        for state, raw_row in raw_states.items():
+            if not isinstance(state, str) or _STATE_NAME.fullmatch(state) is None:
+                raise ContractError(f"workflow lifecycle family {family} has invalid state {state!r}")
+            if not isinstance(raw_row, Mapping) or set(raw_row) != LIFECYCLE_FIELDS:
+                raise ContractError(f"workflow lifecycle {family}:{state} has invalid fields")
+            targets = raw_row.get("transitions_to")
+            if (
+                not isinstance(targets, list)
+                or not all(isinstance(target, str) and _STATE_NAME.fullmatch(target) for target in targets)
+                or len(targets) != len(set(targets))
+            ):
+                raise ContractError(f"workflow lifecycle {family}:{state} has invalid transitions_to")
+            boolean_fields = (
+                "grants_authority",
+                "reserves_version",
+                "transitionable",
+                "must_remain_visible",
+            )
+            if any(type(raw_row.get(field)) is not bool for field in boolean_fields):
+                raise ContractError(f"workflow lifecycle {family}:{state} has a non-boolean property")
+            adapter = raw_row.get("predecessor_adapter")
+            if adapter not in PREDECESSOR_ADAPTER_VALUES:
+                raise ContractError(f"workflow lifecycle {family}:{state} has invalid predecessor_adapter")
+            if raw_row["transitionable"] != bool(targets):
+                raise ContractError(
+                    f"workflow lifecycle {family}:{state} transitionable disagrees with transitions_to"
+                )
+            if not raw_row["must_remain_visible"]:
+                raise ContractError(f"workflow lifecycle {family}:{state} must remain visible")
+            if family != "release_record" and raw_row["reserves_version"]:
+                raise ContractError(f"workflow lifecycle {family}:{state} cannot reserve a release version")
+            states[state] = LifecycleState(
+                transitions_to=tuple(targets),
+                grants_authority=raw_row["grants_authority"],
+                reserves_version=raw_row["reserves_version"],
+                transitionable=raw_row["transitionable"],
+                must_remain_visible=raw_row["must_remain_visible"],
+                predecessor_adapter=adapter,
+            )
+        for state, row in states.items():
+            unknown = set(row.transitions_to) - set(states)
+            if unknown:
+                raise ContractError(
+                    f"workflow lifecycle {family}:{state} targets unknown state {sorted(unknown)[0]}"
+                )
+        families[family] = MappingProxyType(states)
+    return MappingProxyType(families)
+
+
+def load_lifecycle_registry(path: Path | None = None) -> LifecycleRegistry:
+    """Load and validate the canonical lifecycle registry."""
+
+    return validate_lifecycle_registry(load_workflow_contract(path))
 
 
 def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -213,7 +312,7 @@ def validate_contracts(
     quality_gates: Mapping[str, Any],
 ) -> tuple[dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]]]:
     allowed_workflow = {
-        "schema", "normative_language", "handoff_fields", "restitution_fields", "transitions", "failure", "recommendations", "procedures"
+        "schema", "normative_language", "handoff_fields", "restitution_fields", "lifecycles", "failure", "recommendations", "procedures"
     }
     if set(workflow) != allowed_workflow:
         raise ContractError("workflow contract contains unknown or missing top-level fields")
@@ -229,6 +328,7 @@ def validate_contracts(
         "alternatives",
     ]:
         raise ContractError("workflow restitution fields are not canonical")
+    validate_lifecycle_registry(workflow)
     if set(quality_gates) != {"schema", "aggregation", "gates"}:
         raise ContractError("quality-gate contract contains unknown or missing top-level fields")
     if quality_gates.get("aggregation") != ["fail", "not_assessable", "pass"]:

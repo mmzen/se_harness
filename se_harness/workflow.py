@@ -19,10 +19,10 @@ from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import _load_validator_module, run_preflight
+from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
 
 
 SCHEMA = 1
-WORKFLOW_CONTRACT_SCHEMA = "se-harness-workflow-v2"
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
 DEFINITION_TYPES = {
     "intent",
@@ -36,33 +36,16 @@ DEFINITION_TYPES = {
     "operating_contract",
 }
 
-
-def _load_workflow_contract() -> dict[str, Any]:
-    path = Path(__file__).with_name("workflow_contract.json")
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise RuntimeError(f"cannot load workflow contract: {path}") from exc
-    if not isinstance(value, dict) or value.get("schema") != WORKFLOW_CONTRACT_SCHEMA:
-        raise RuntimeError("workflow contract has an unsupported schema")
-    if (
-        not isinstance(value.get("transitions"), dict)
-        or not isinstance(value.get("failure"), dict)
-        or not isinstance(value.get("recommendations"), list)
-    ):
-        raise RuntimeError("workflow contract is missing transitions or recommendations")
-    return value
-
-
-WORKFLOW_CONTRACT = _load_workflow_contract()
+WORKFLOW_CONTRACT = load_workflow_contract()
+LIFECYCLE_REGISTRY = validate_lifecycle_registry(WORKFLOW_CONTRACT)
+# Compatibility projection for callers that only need transition edges.  The
+# lifecycle registry remains the sole policy source.
 TRANSITIONS: dict[str, dict[str, set[str]]] = {
     family: {
-        source: set(targets)
-        for source, targets in sources.items()
-        if isinstance(source, str) and isinstance(targets, list)
+        source: set(row.transitions_to)
+        for source, row in states.items()
     }
-    for family, sources in WORKFLOW_CONTRACT["transitions"].items()
-    if isinstance(family, str) and isinstance(sources, dict)
+    for family, states in LIFECYCLE_REGISTRY.items()
 }
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 
@@ -595,6 +578,11 @@ def _family(artifact_type: str) -> str:
     return "definition" if artifact_type in DEFINITION_TYPES else artifact_type
 
 
+def _grants_authority(family: str, status: str) -> bool:
+    row = LIFECYCLE_REGISTRY.get(family, {}).get(status)
+    return bool(row and row.grants_authority)
+
+
 def _revision_policy(root: Path) -> dict[str, bool]:
     path = root / ".engineering-harness.toml"
     if not path.is_file():
@@ -612,8 +600,8 @@ def _revision_policy(root: Path) -> dict[str, bool]:
 
 def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: str | None) -> None:
     family = _family(artifact.artifact_type)
-    allowed = TRANSITIONS.get(family, {}).get(artifact.status, set())
-    if target not in allowed:
+    row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
+    if row is None or target not in row.transitions_to:
         raise HarnessError(f"transition {artifact.artifact_id}: {artifact.status} -> {target} is not allowed")
     _assertion(actor, f"decision actor for {artifact.artifact_id}", limit=128)
     if target in {"rejected", "superseded"}:
@@ -730,7 +718,7 @@ def _validate_preconditions(
             covered = [
                 item for item in proposed_catalog.values()
                 if item.artifact_type == "verification_record"
-                and item.status in {"verified", "released"}
+                and _grants_authority("verification_record", item.status)
                 and artifact_id in _targets(item, "verifies_work_order")
             ]
             if not covered:
@@ -739,21 +727,24 @@ def _validate_preconditions(
             covered = [
                 item for item in proposed_catalog.values()
                 if item.artifact_type == "release_record"
-                and item.status == "released"
+                and _grants_authority("release_record", item.status)
                 and artifact_id in _targets(item, "releases_work")
             ]
             if not covered:
                 raise HarnessError(f"work order {artifact_id} has no direct released release record")
         if artifact.artifact_type == "release_record" and target == "released":
             for vrec_id in _targets(artifact, "includes_verification"):
-                if vrec_id not in proposed_catalog or proposed_catalog[vrec_id].status != "verified":
+                if (
+                    vrec_id not in proposed_catalog
+                    or not _grants_authority("verification_record", proposed_catalog[vrec_id].status)
+                ):
                     raise HarnessError(f"release record {artifact_id} requires verified VREC {vrec_id}")
         if artifact.artifact_type == "verification_record" and target == "superseded":
             successor_id = reasons[artifact_id]
             successor = proposed_catalog.get(successor_id)
             if successor is None or successor.artifact_type != "verification_record":
                 raise HarnessError(f"supersession successor is not a VREC: {successor_id}")
-            if successor.status not in {"verified", "released"}:
+            if not _grants_authority("verification_record", successor.status):
                 raise HarnessError(f"supersession successor {successor_id} must be verified or released")
             if not _targets(artifact, "verifies_work_order").issubset(_targets(successor, "verifies_work_order")):
                 raise HarnessError(f"supersession successor {successor_id} does not preserve work coverage")
