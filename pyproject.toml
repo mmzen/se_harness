@@ -24,7 +24,7 @@ harnessctl = "se_harness.cli:main"
 include = ["se_harness*"]
 
 [tool.setuptools.package-data]
-se_harness = ["workflow_contract.json", "quality_gates_contract.json"]
+se_harness = ["workflow_contract.json", "quality_gates_contract.json", "governance_migration_contract.json"]
 
 [tool.setuptools.data-files]
 "share/se-harness/templates/repository/standard" = [

@@ -21,3 +21,7 @@ This domain defines the preventive work authorized from [GitHub issue #81](https
 3. `WO-REB-003` adds conflicting-chain observations, a bounded recovery runbook, and disposable recovery rehearsal.
 
 The governing packet is `approved`; `WO-REB-001` and `WO-REB-002` are `implemented` with retained evidence, and their commit-bound assurance remains pending. `WO-REB-003` remains `draft`. No root-evaluator change, release, or external publication is authorized.
+
+## Issue #101 preventive migration packet
+
+The later approved `REQ-REB-016`, `REQ-REB-017`, `SPEC-REB-008`, `ARCH-REB-007`, `ADR-REB-007`, and `VER-REB-007` packet defines a complete predecessor-to-successor governance migration rehearsal. `WO-REB-018` is `in_progress` for its bounded implementation and local qualification. The packet adds evidence-only candidate behavior; it does not change the selected released root evaluator or absorb the lifecycle, production-view, or production-command work tracked separately by issues #103, #104, and #109.

@@ -34,6 +34,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `rehearse-recovery` | maintainer or CI rehearsal | writes only a fresh disposable directory outside the operational repository | prove bounded evaluator recovery and rollback without credentials, network, or external action |
+| `rehearse-migration` | maintainer or candidate CI | writes only a fresh disposable directory outside the operational repository | prove the complete predecessor-to-successor handover without changing root authority or performing a release |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
@@ -171,6 +172,14 @@ harnessctl rehearse-recovery OUTPUT --repository REPOSITORY --candidate-commit F
 ```
 
 The output must be absent or empty and outside the operational repository. The command refuses recognized production publication credential signals, uses no network client, creates only a synthetic local archive and simulated publication, rejects candidate contamination and stale identity, stops synthetic conflicting chains without selection, injects an interrupted root migration, proves exact rollback, restores the normal standard workflows and absence invariants, and writes canonical `rehearsal-report.json`. It grants no real recovery or external-action authority. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md).
+
+## Predecessor-to-successor migration rehearsal
+
+```text
+harnessctl rehearse-migration OPERATIONAL_ROOT --scenario CANONICAL_JSON --predecessor-python EXTERNAL_PYTHON --successor-python EXTERNAL_PYTHON --output EXTERNAL_DIRECTORY [--json]
+```
+
+The command validates the packaged `se-harness-governance-migration-v1` contract and runs its exact nine stages through two isolated external runtimes. The historical scenario pins the public predecessor wheel digest; every scenario binds its fixture, attributed rejection/adoption decisions, adapter/view selection, and closed stage order. The predecessor remains selected until the final simulated adoption stage. Release and publication are plans only, all writes remain disposable, later stages do not run after the first failure, and the canonical result proves source and Git identities unchanged. See [rehearsing an evaluator migration](evaluator-migration-rehearsal.md).
 
 ## Domain and artifact authoring
 

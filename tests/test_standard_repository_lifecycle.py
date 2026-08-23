@@ -135,10 +135,14 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         workflow = (REPOSITORY_ROOT / ".github/workflows/candidate-evidence.yml").read_text(encoding="utf-8")
         self.assertRegex(workflow, r"(?m)^  candidate-source:$")
         self.assertRegex(workflow, r"(?m)^  candidate-package:$")
-        self.assertEqual(2, workflow.count("actions/checkout@v4"))
-        self.assertEqual(2, workflow.count("fetch-depth: 0"))
-        self.assertEqual(2, workflow.count("persist-credentials: false"))
+        self.assertRegex(workflow, r"(?m)^  governance-migration:$")
+        self.assertRegex(workflow, r"(?m)^  governance-migration-reconcile:$")
+        self.assertEqual(3, workflow.count("actions/checkout@v4"))
+        self.assertEqual(3, workflow.count("fetch-depth: 0"))
+        self.assertEqual(3, workflow.count("persist-credentials: false"))
         self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
+        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: candidate-package")
+        self.assertRegex(workflow, r"(?s)governance-migration-reconcile:.*?needs: governance-migration")
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)
         self.assertIn("python -m unittest discover", workflow)
@@ -146,6 +150,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("--role candidate-package", workflow)
         self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
+        self.assertIn("rehearse-migration", workflow)
+        self.assertIn("windows-latest", workflow)
+        self.assertIn("ubuntu-latest", workflow)
+        self.assertIn("974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f", workflow)
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("Review preflight", workflow)
         self.assertNotIn("Validate candidate artifact graph", workflow)
@@ -184,6 +192,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             expected_fragment = (
                 "# Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.\n"
                 "docs/engineering/**/evidence/*.json text eol=lf\n"
+                "# Keep the packaged migration protocol, its hash-bound implementation, and canonical scenarios byte-stable.\n"
+                "se_harness/governance_migration*.py text eol=lf\n"
+                "se_harness/governance_migration_contract.json text eol=lf\n"
+                "tests/fixtures/governance_migration/*.json text eol=lf\n"
             )
             self.assertEqual(
                 expected_fragment,
