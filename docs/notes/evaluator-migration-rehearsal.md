@@ -58,7 +58,7 @@ The retained file is `governance-migration-result.json`. Important fields are:
 - `stages`: actor role, view, decision fixture, permitted and observed disposable changes, bounded report, and report digest for every stage.
 - `operational_state.unchanged`: proof that repository bytes, HEAD, and refs did not change.
 - `external_actions`: explicit `false` values for credentials, network, lifecycle transition, tag, release, publication, deployment, maintenance, policy, and real root upgrade.
-- `semantic_sha256`: a replay digest that omits timing and platform-specific interpreter facts so Windows and Linux results can be compared.
+- `semantic_sha256`: a replay digest that omits timing, host/interpreter facts, the raw checkout digest, and the independently rebuilt wheel archive digest so Windows and Linux results can be compared. The full result still retains those exact platform facts; the digest keeps the candidate Git identity, package-tree digest, scenario, contract, stage reports, and unchanged-state claim.
 
 A pass is qualification evidence. Accountable owners still decide whether to approve requirements, verify a VREC, release an RLS, publish, or later adopt the released evaluator.
 

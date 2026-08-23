@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import copy
 import io
 import json
 import os
@@ -16,6 +17,7 @@ from se_harness.cli import build_parser, main
 from se_harness.governance_migration import (
     REPORT_NAME,
     GovernanceMigrationError,
+    _semantic_value,
     run_governance_migration,
     verify_result_digest,
 )
@@ -150,6 +152,26 @@ class GovernanceMigrationTests(unittest.TestCase):
         self.assertEqual(first, json.loads(retained))
         self.assertEqual(retained, canonical_json(first))
         self.assertNotIn(str(self.base).encode(), retained)
+
+    def test_semantic_digest_normalizes_platform_build_facts_but_retains_them(self) -> None:
+        report = self._run("platform-base")
+        other = copy.deepcopy(report)
+        other["host"] = {"implementation": "OtherPython", "os": "OtherOS"}
+        for runtime in other["runtimes"].values():
+            runtime["archive_sha256"] = "a" * 64
+            runtime["executable_sha256"] = "b" * 64
+            runtime["python_version"] = "99.0.0"
+        for snapshot in other["operational_state"].values():
+            if isinstance(snapshot, dict):
+                snapshot["source_sha256"] = "c" * 64
+        for stage in other["stages"]:
+            stage["duration_ms"] += 1000
+
+        self.assertNotEqual(canonical_json(report), canonical_json(other))
+        self.assertEqual(
+            sha256_bytes(canonical_json(_semantic_value(report))),
+            sha256_bytes(canonical_json(_semantic_value(other))),
+        )
 
     def test_historical_scenario_preserves_distinct_complete_and_compatible_claims(self) -> None:
         report = self._run("historical", scenario=HISTORICAL)

@@ -590,7 +590,13 @@ def _not_run_stage(
 
 def _semantic_value(result: Mapping[str, Any]) -> dict[str, Any]:
     def clean(value: Any, key: str | None = None) -> Any:
-        if key in {"duration_ms", "executable_sha256", "python_version"}:
+        if key in {
+            "archive_sha256",
+            "duration_ms",
+            "executable_sha256",
+            "python_version",
+            "source_sha256",
+        }:
             return None
         if key == "host":
             return None
