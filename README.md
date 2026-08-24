@@ -4,7 +4,7 @@
 
 SE Harness turns a new or existing repository into a governed software-engineering workspace for humans and coding agents. It keeps intent, requirements, design, authorized work, evidence, exact Git provenance, verification, and release decisions connected and inspectable beside the code.
 
-The practical promise is simple: every material change can explain **why it exists, what was approved, what changed, how it was checked, which exact commit was assessed, and who made the verification and release decisions**. Automation assists; accountable humans retain authority.
+The practical objective is simple: a correctly governed material change can explain **why it exists, what was approved, what changed, how it was checked, which exact commit was assessed, and who made the verification and release decisions**. That assurance depends on complete artifacts, evidence, repository controls, and explicit decisions. Automation assists; accountable humans retain authority.
 
 SE Harness requires Python 3.11 or later, uses no runtime dependency outside the standard library, and installs repository-local validation and Harness Explorer tooling without requiring an external service.
 
@@ -106,12 +106,12 @@ The agent drafts the requirements, design and verification approach, identifies 
 
 > Approved. Implement the work order.
 
-The work order declares exact files and component-prefix paths. The agent passes
-declared changed paths to `harnessctl check`, implements only that scope,
-performs repository checks, retains evidence, binds it to the exact candidate commit,
-and returns the canonical restitution block without unrelated findings.
-An assurance owner judges the evidence; a release owner makes a later, separate
-decision.
+The work order declares exact files and component-prefix paths. The agent declares
+the complete changed-path set to `harnessctl check`, which evaluates that set
+against the authorized scope. Agent-runtime permissions and repository controls
+still determine which writes can occur. The agent performs repository checks and
+retains evidence; an assurance owner judges evidence bound to the exact candidate
+commit, and a release owner makes a later, separate decision.
 
 If a required check failed, the handoff would identify the diagnostic and safe retry, report `WO-RATE-001` as still `in_progress`, and say the formal state is unchanged. It would recommend remediation or escalation rather than imply completion.
 
@@ -162,7 +162,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
 - one managed instruction route for coding agents, with room for stricter repository-owned guidance;
-- one portable read-only orientation skill with a deterministic single-agent path and inline execution receipt;
+- one portable read-only orientation skill with a deterministic single-agent path, delegation disabled, and an inline execution receipt;
 - one machine-readable workflow contract for lifecycle transitions and canonical next actions;
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;
@@ -183,15 +183,13 @@ Harness commands may prepare observations or `ready` proposals. They never commi
 
 ## Known limitations
 
-Normative gates use the exact `QG-*` IDs defined by managed
-`QUALITY_GATES.md`. Harness Explorer's G0-G5 labels are derived readiness
-groupings for navigation; they are not gate results and do not change selected
-scope. The [operational phasing](docs/notes/harness-operational-phasing.md)
-explains the distinction.
+SE Harness is not an agent sandbox, permission system, security boundary, or compliance certification. Selected-scope assessment relies on the caller declaring the complete change set; agent-runtime permissions, review, CI, and hosting rules remain external controls.
+
+The shipped `harness-orient` skill is read-only and single-agent, with delegation disabled. Delegated mutation and multi-agent orchestration are roadmap work, and organizational-scale operation has not yet been demonstrated. Normative gates use the exact `QG-*` IDs defined by managed `QUALITY_GATES.md`; Harness Explorer's G0-G5 labels are derived readiness groupings, not gate results. The [operational phasing](docs/notes/harness-operational-phasing.md) explains the distinction.
 
 ## Learn more
 
-Start with the [overview](docs/notes/harness-overview.md), then use the [learning-notes index](docs/notes/README.md) for the conceptual model, operational timing, illustrative Git mapping, practical examples, safe upgrades, and complete command reference.
+Start with the [overview](docs/notes/harness-overview.md), use the [executive speech and demonstration brief](VALUE_PROPOSAL.md) for the value narrative, then use the [learning-notes index](docs/notes/README.md) for the conceptual model, operational timing, illustrative Git mapping, practical examples, safe upgrades, and complete command reference.
 
 The notes explain the system; they grant no authority. In an installed repository, `ENGINEERING_HARNESS.md` routes to the authoritative managed workflow, decision rights, quality gates, and traceability policy. Repository facts and product artifacts remain owner-controlled.
 

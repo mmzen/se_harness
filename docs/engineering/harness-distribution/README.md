@@ -96,6 +96,12 @@ Topology acceptance headroom amendment:
 
 The implemented packet raises only the candidate distribution's SE Harness topology acceptance target from 524,288 to 2,097,152 UTF-8 bytes. It preserves bundle-v2 data and integrity, every other content budget, the existing no-sharding architecture, and the independently installed public-0.5.0 managed root. Commit, VREC, release, root upgrade, and external actions remain separate decisions.
 
+Truth-bounded executive positioning extension:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-060` -> `SPEC-EVP-001`, `VER-EVP-001` -> `WO-EVP-001`.
+
+The approved packet governs a concise README correction and challenged executive speech/demo brief. It distinguishes shipped capability from roadmap and vision, explains the selected-change-evidence and external-enforcement boundary, presents the current skill as read-only and single-agent with delegation disabled, and uses the real implementation, candidate, VREC, assurance, and delivery sequence. `WO-EVP-001` is `implemented`; candidate commit, VREC, repository integration, release, publication, and every external action remain separate.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.

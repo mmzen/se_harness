@@ -1,742 +1,354 @@
-# SE Harness
+# SE Harness — Executive Speech and Demonstration
 
-## Governed Agentic Software Engineering
+**Target duration:** 10–15 minutes
+**Audience:** Executives, engineering leaders, product leaders, and quality or release leaders
+**Technical depth:** 4/10
+**Objective:** Explain the control problem created by coding agents, demonstrate the current product honestly, and show how humans can move from continuous supervision to accountable decision points.
 
-> **Autonomy for agents. Authority for humans.**
+This is a presentation brief, not an authoritative engineering contract. The repository's formal artifacts, managed workflow, released evaluator, retained evidence, and accountable decisions remain authoritative.
 
-## The Shift
+## Core message
 
-Software development is moving rapidly from engineers **writing code with AI assistance** to engineers **directing autonomous coding agents**.
+> Coding agents are becoming capable of doing more software-engineering work. The harder question is whether an organization can authorize that work, assess what changed, retain evidence, identify the exact source candidate that was checked, and keep accountable decisions with humans.
 
-Frontier models can increasingly:
+> SE Harness adds a repository-native governance and assurance layer for that problem.
 
-* explore large codebases;
-* understand existing implementations;
-* decompose engineering work;
-* modify multiple files;
-* implement features and bug fixes;
-* generate and execute tests;
-* review changes;
-* analyze failures;
-* gather engineering evidence;
-* and work autonomously for extended periods.
+A useful shorthand is:
 
-The bottleneck is therefore moving.
+> **Agents provide execution. SE Harness connects intent, bounded work, evidence, provenance, and decision authority.**
 
-```text
-Yesterday:
-Human engineering capacity → coding capacity
+“Control plane” can be a useful metaphor, but it is not a security claim. SE Harness does not sandbox an agent, grant or deny operating-system permissions, or replace repository and hosting controls.
 
-Tomorrow:
-Human engineering capacity → decision and supervision capacity
-```
+## Product reality: current, roadmap, and vision
 
-If every meaningful action performed by an agent must still be manually supervised, reviewed and reconstructed by a human, much of the potential of autonomous software engineering disappears.
+Keep these states separate throughout the presentation.
 
-The challenge is no longer simply:
+| State | What can be said |
+| --- | --- |
+| **Current — shipped** | Repository-native formal artifacts; explicit lifecycle transitions and decision rights; released-evaluator integrity; graph, preflight, and selected-scope checks; retained evidence; exact Git candidate provenance through VREC and RLS records; a read-only Explorer; and the read-only, single-agent `harness-orient` skill with delegation disabled. |
+| **Roadmap — approved or planned, not shipped** | Delegated mutation, stronger execution receipts, additional skills, runtime adapters, and multi-agent orchestration. |
+| **Vision — intended outcome, not demonstrated** | Organizational-scale governed delegation across many agents, repositories, and engineering systems. |
 
-> How can AI generate more code?
+The current product governs repository state and detects violations in the evidence it receives. Selected-scope checking depends on the caller declaring the complete change set. A process with write access can still modify files; agent-runtime permissions, code review, required CI, and hosting rules provide the surrounding enforcement.
 
-It becomes:
+SE Harness is not a coding agent, agent runtime, sandbox, permission system, standalone security boundary, compliance certification, or replacement for Git hosting and deployment controls.
 
-> **How can we give software-engineering agents meaningful autonomy without losing control, engineering rigor or human accountability?**
+## Suggested 12-minute flow
 
----
+| Time | Section | Purpose |
+| --- | --- | --- |
+| 0:00–1:30 | The problem | Establish the new control and evidence problem |
+| 1:30–3:00 | What SE Harness is | Position the current product and its boundary |
+| 3:00–9:00 | Demonstration | Show one governed change and its human decisions |
+| 9:00–11:00 | Value | Translate the demonstration into outcomes |
+| 11:00–12:00 | Closing | Leave one memorable message |
+| Optional 3–5 min | Q&A | Address likely executive objections |
 
-# The Problem
+## 1. Opening — the problem
 
-Increasing agent autonomy creates an uncomfortable trade-off.
+Software development is entering a phase where agents can inspect a repository, change several files, write tests, run tools, and prepare work for integration. This creates productivity potential and a control problem.
 
-```text
-MORE AGENT AUTONOMY
-        │
-        ├── faster engineering
-        ├── greater parallelism
-        ├── higher development capacity
-        │
-        └── but potentially:
-              unclear intent
-              uncontrolled changes
-              lost architectural rationale
-              weak traceability
-              unverifiable decisions
-              uncertain test coverage
-              ambiguous responsibility
-              unclear release authority
-```
+Ask:
 
-The natural organizational reaction is to keep humans constantly in the loop:
+> How do we know what the agent was authorized to do, whether the result satisfies the requirement, what evidence was collected, which exact source commit was assessed, and who made the accountable decision?
 
-```text
-Agent proposes
-      ↓
-Human reviews
-      ↓
-Agent implements
-      ↓
-Human reviews
-      ↓
-Agent tests
-      ↓
-Human reviews
-      ↓
-Human releases
-```
+Git records changes. CI records automated checks. A ticket records an intention. Each is useful, but none alone creates a complete engineering decision chain.
 
-This is safe, but it does not scale.
+Suggested talk track:
 
-As one engineer begins operating five, ten or twenty agents simultaneously, **human supervision itself becomes the constraint**.
+“Most AI-development discussions focus on model capability: which model writes better code or which agent is faster. Those capabilities will keep changing.
 
-A different operating model is required.
+The durable problem is governance. If an agent changes 40 files overnight, ‘the tests are green’ is not enough. I want to know why the work exists, who authorized it, what scope was assessed, which evidence was retained, which exact candidate was verified, and who has authority over the next decision.”
 
----
+## 2. What SE Harness is
 
-# The SE Harness Proposition
+> **SE Harness turns a new or existing Git repository into a governed software-engineering workspace for humans and coding agents.**
 
-**SE Harness is a repository-native governance layer for agentic software engineering.**
-
-It allows coding agents to operate autonomously within explicit engineering boundaries while humans retain authority over the decisions that carry accountability.
-
-SE Harness connects:
+It connects:
 
 ```text
-Intent
-  ↓
-Capabilities
-  ↓
-Requirements
-  ↓
-Specifications
-  ↓
-Architecture
-  ↓
-Verification expectations
-  ↓
-Authorized work
-  ↓
-Agent execution
-  ↓
-Implementation
-  ↓
-Evidence
-  ↓
-Exact Git commit
-  ↓
-Verification decision
-  ↓
-Release decision
-  ↓
-Operational assurance
+Intent → Requirement → Specification → Authorized work
+       → Evidence → Exact source candidate → Verification decision
+       → Separate delivery or release decision
 ```
 
-The objective is simple:
+It complements coding agents. The agent interprets and executes work; the repository carries the engineering contract and evidence; accountable owners exercise decision rights.
 
-> **Make every material software change explainable from human intent to engineering evidence and exact executable code.**
-
----
-
-# Core Value Proposition
-
-## Autonomy for agents. Authority for humans.
-
-SE Harness separates two concepts that traditional software-engineering processes often mix together:
-
-### Execution
-
-Execution can increasingly be delegated to agents.
-
-Agents can:
-
-* inspect the repository;
-* analyze requirements and specifications;
-* propose implementation approaches;
-* implement authorized changes;
-* write and execute tests;
-* analyze defects;
-* inspect architecture;
-* gather verification evidence;
-* prepare engineering records;
-* review other changes;
-* and perform substantial work autonomously.
-
-### Authority
-
-Authority remains explicitly assigned to accountable humans.
-
-Humans decide:
-
-* **why** something should exist;
-* **what** outcome is required;
-* which requirements become authoritative;
-* which architectural risks are acceptable;
-* what work agents are authorized to perform;
-* what evidence is sufficient;
-* whether exceptions are acceptable;
-* whether a candidate is releasable;
-* and whether operational risk can be accepted.
-
-SE Harness provides the control layer between these two worlds.
+Suggested visual:
 
 ```text
-                         HUMAN
-                  accountable authority
-                         │
-            What / Why / Risk / Release
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │      SE HARNESS     │
-              │                     │
-              │ intent              │
-              │ requirements        │
-              │ specifications      │
-              │ architecture        │
-              │ authorized work     │
-              │ constraints         │
-              │ verification        │
-              │ evidence            │
-              │ provenance          │
-              │ release gates       │
-              └──────────┬──────────┘
-                         │
-                  bounded autonomy
-                         │
-            ┌────────────┼────────────┐
-            ▼            ▼            ▼
-          Codex        Claude       Future
-          agents       agents       agents
-            │            │            │
-            └────────────┼────────────┘
-                         │
-                         ▼
-              implementation + evidence
+Coding agent or human implementation
+                 │
+                 ▼
+┌───────────────────────────────────────┐
+│ SE Harness repository layer           │
+│ intent • definitions • bounded work   │
+│ evidence • provenance • decisions     │
+└───────────────────────────────────────┘
+                 │
+                 ▼
+     Code • tests • Git • hosting
 ```
 
----
+Key sentence:
 
-# Human Authority Boundaries
+> **The model can change. The repository's engineering contract does not change with it.**
 
-The objective is **not** to keep a human involved in every agent operation.
+## 3. Demonstration — one small governed change
 
-"Human in the loop" is too simplistic for large-scale agentic engineering.
+Use a tiny prepared change, such as “add a configurable timeout to an existing service.” Use one coding agent only. The purpose is to demonstrate governance, not coding speed or multi-agent coordination.
 
-The scalable model is:
+### Step 1 — show approved work
 
-> **Humans sit at authority boundaries, not inside every execution loop.**
+Start with an approved requirement, specification, verification contract, and work order. Show:
 
-| Engineering stage | Agent / automation                               | Human authority                                  |
-| ----------------- | ------------------------------------------------ | ------------------------------------------------ |
-| Intent            | Explore, challenge, structure, draft             | Own desired outcome                              |
-| Requirements      | Derive, analyze, identify gaps                   | Approve authoritative obligations                |
-| Specification     | Draft, refine, detect inconsistencies            | Own material engineering contracts               |
-| Architecture      | Analyze alternatives, draft decisions            | Accept architectural decisions and risk          |
-| Work planning     | Decompose work and propose execution plans       | Authorize bounded work                           |
-| Implementation    | Execute autonomously within authorization        | Handle exceptions and escalations                |
-| Testing           | Generate, execute and analyze tests              | Define required assurance where judgment matters |
-| Verification      | Gather evidence and prepare verification records | Decide whether evidence is sufficient            |
-| Release           | Prepare release evidence and candidate records   | Authorize promotion                              |
-| Operations        | Observe, diagnose and recommend                  | Accept operational risk and accountability       |
+1. the intended outcome;
+2. the authorized paths or component scope;
+3. the required verification;
+4. the current `approved` lifecycle state.
 
-The human therefore changes role.
+Talk track:
+
+“This is not only a prompt. It is a bounded engineering work order connected to the definitions and verification contract that govern it.”
+
+Message:
+
+> **The work is defined and approved before implementation starts.**
+
+### Step 2 — show the start decision
+
+Use `focus` and start preflight to show the selected context and readiness. Then show the engineering owner's explicit start decision and the work order transition from `approved` to `in_progress`.
+
+Talk track:
+
+“Readiness checks prepare information. They do not authorize work. The accountable start decision is separate.”
+
+Message:
+
+> **Automation can prepare a decision; it does not exercise the decision right.**
+
+### Step 3 — let the agent implement
+
+Give the agent the bounded work. Let it inspect code, make the small change, update tests, run the repository checks, and retain evidence. Accelerate or pre-stage this part if timing is uncertain.
+
+Be precise about scope:
+
+“The agent declares the complete changed-path set, and SE Harness assesses that set against the approved scope. The harness detects a mismatch; external permissions and repository controls determine whether an unauthorized write can occur.”
+
+Message:
+
+> **A checked scope is an assurance input, not a sandbox.**
+
+### Step 4 — show a real blocked checkpoint
+
+Prepare one understandable missing condition, such as absent required evidence. Run the bound checkpoint and show the canonical restitution fields. Use actual output from the prepared repository; do not invent a `STATUS: BLOCKED` banner.
+
+An abbreviated, structurally accurate example is:
 
 ```text
-Traditional model
+Outcome
+Blocked.
 
-Human = engineer performing execution
-AI    = assistant
+Done
+- Evaluated the selected work order and its current evidence.
+
+Not done
+- The implementation-evidence gate has not passed.
+
+Blocked by
+- Required retained evidence is missing.
+
+Current lifecycle state
+- WO-DEMO-001 remains in_progress.
+
+Decision required
+None until the reported blocker is resolved.
+
+Next
+Resolve the missing evidence and rerun the same checkpoint.
+
+Command or response
+harnessctl check . --artifact WO-DEMO-001 --checkpoint handoff
 ```
 
-becomes:
+Talk track:
+
+“The agent may believe its coding task is finished. That is not the same as an accepted engineering result. A failed gate leaves the formal state unchanged.”
+
+### Step 5 — complete implementation, then bind assurance
+
+Resolve the missing evidence and rerun the checkpoint. The lifecycle then proceeds through separate steps:
 
 ```text
-Agentic model
-
-Human      = intent + judgment + authority
-AI agents  = engineering execution
-SE Harness = control + state + evidence + provenance
+in_progress work
+  → engineering-owner completion decision
+implemented work
+  → clean candidate commit
+  → capture evidence and exact candidate in a ready VREC
+ready VREC
+  → assurance-owner decision
+verified VREC
+  → separately selected repository-integration or release path
 ```
 
----
+Preparing a VREC leaves it `ready`; it does not verify itself. The assurance owner reviews the exact candidate and retained evidence, then changes only the VREC to `verified` or rejects it. The referenced work order is not changed by that decision.
 
-# Repository as the Engineering System of Record
+The Git identity proves which source candidate was assessed. Do not call it the “exact executable” unless a separate release record binds the built distribution identity.
 
-Long-running agents cannot depend primarily on conversational memory.
+Message:
 
-An agent may run for hours and disappear.
+> **Evidence and assurance are bound to one exact source candidate; later changes are a different candidate.**
 
-Another agent may continue the work tomorrow.
+### Step 6 — show the human decision boundary
 
-A third agent may verify it.
+Finish in the read-only Harness Explorer or with `focus`. Point to the next accountable decision and the actions that have not occurred.
 
-A fourth may challenge the implementation.
+Talk track:
 
-The durable engineering state must therefore live outside the agents themselves.
+“The aim is not a human approval after every agent action. The human owns the decisions for which the organization remains accountable: intent, risk, implementation completion, assurance, release, and external action as policy requires.”
 
-SE Harness makes the repository the engineering system of record.
+Message:
 
-```text
-intent/
-requirements/
-specifications/
-architecture/
-work/
-verification/
-evidence/
-decisions/
-release/
-```
+> **Human-in-the-loop becomes human-at-the-decision-point.**
 
-Agents are therefore **disposable execution capacity**.
+## 4. Value in four outcomes
 
-Engineering state is persistent.
+### 1. Increase delegated execution without hiding accountability
 
-This gives the system a critical property:
+More capable agents can produce more changes. SE Harness gives governed changes a bounded work definition, explicit state, retained evidence, and named decisions.
 
-> **Persistent engineering state. Replaceable agents.**
+> **Delegate execution while preserving accountable authority.**
 
-An agent does not need to remember what another agent discussed eight hours earlier.
+This is a product direction, not a claim that today's shipped skill autonomously mutates repositories or coordinates agents.
 
-It can reconstruct the relevant engineering context from authoritative artifacts, Git history, evidence and explicit work authorization.
-
----
-
-# Bounded Agent Autonomy
-
-SE Harness does not attempt to make autonomous agents safe by restricting them to trivial tasks.
-
-Instead, it defines **bounded autonomy**.
-
-An agent receives:
-
-```text
-Authorized Work
-      │
-      ├── applicable intent
-      ├── requirements
-      ├── specifications
-      ├── architecture
-      ├── constraints
-      ├── acceptance criteria
-      ├── verification expectations
-      └── permitted scope
-```
-
-Inside those boundaries, the agent can operate with substantial autonomy.
-
-```text
-                AUTHORIZED BOUNDARY
-        ┌──────────────────────────────┐
-        │                              │
-        │      Autonomous Agent        │
-        │                              │
-        │ explore                      │
-        │ reason                       │
-        │ implement                    │
-        │ refactor                     │
-        │ test                         │
-        │ inspect failures             │
-        │ gather evidence              │
-        │ prepare verification         │
-        │                              │
-        └──────────────────────────────┘
-                         │
-                         ▼
-                evidence + code
-```
+### 2. Make correctly governed material changes explainable
 
-When the agent encounters something outside the authorized boundary, it does not silently expand its own authority.
-
-It escalates.
-
-This is the difference between:
-
-> autonomous coding
-
-and:
-
-> **governed autonomous engineering.**
-
----
-
-# End-to-End Engineering Traceability
-
-A conventional coding agent often operates approximately like this:
-
-```text
-Prompt
-  ↓
-Repository
-  ↓
-Code
-  ↓
-Tests
-```
-
-SE Harness introduces an explicit engineering chain:
-
-```text
-Human Intent
-     ↓
-Capability
-     ↓
-Requirements
-     ↓
-Specification
-     ↓
-Architecture
-     ↓
-Verification Contract
-     ↓
-Authorized Work
-     ↓
-Agent Execution
-     ↓
-Implementation
-     ↓
-Evidence
-     ↓
-Exact Git Commit
-     ↓
-Verification Decision
-     ↓
-Release Decision
-```
-
-This makes it possible to answer fundamental engineering questions:
-
-* Why does this code exist?
-* Which requirement required the change?
-* Who authorized the work?
-* Which specification governed the implementation?
-* Which architectural decision applies?
-* Which agent or engineer performed the work?
-* What evidence demonstrates that the requirement is satisfied?
-* Which tests were executed?
-* What exact Git commit was verified?
-* What exact software candidate was authorized for release?
-* Who accepted the remaining risk?
-
-These questions become increasingly important as the amount of software directly written by humans decreases.
-
----
-
-# Evidence Instead of Trust
-
-Agent-generated output should not be trusted because the agent says the work is complete.
-
-The engineering system should require evidence.
-
-```text
-Agent statement:
-
-"I implemented the requirement and all tests pass."
-
-                    ≠
-
-Engineering evidence:
-
-Requirement REQ-042
-        ↓
-Work Order WO-017
-        ↓
-Commit 5c71f4...
-        ↓
-Tests executed
-        ↓
-Results retained
-        ↓
-Verification record
-        ↓
-Human assurance decision
-```
-
-The harness therefore distinguishes between:
-
-* execution;
-* claims;
-* evidence;
-* verification;
-* authorization.
-
-That separation becomes fundamental when autonomous agents execute increasingly large portions of the software lifecycle.
-
----
-
-# Multi-Agent Engineering
-
-SE Harness is designed for an environment where multiple specialized agents may collaborate on the same product.
-
-For example:
-
-```text
-                         ORCHESTRATOR
-                              │
-             ┌────────────────┼────────────────┐
-             │                │                │
-             ▼                ▼                ▼
-       REQUIREMENTS       IMPLEMENTER       VERIFIER
-       / ARCHITECT            │                │
-             │                │                │
-             └────────────┐   │   ┌────────────┘
-                          ▼   ▼   ▼
-                           REVIEWER
-                              │
-                              ▼
-                        RELEASE AGENT
-```
-
-The key design principle is that coordination should not depend primarily on agents talking indefinitely to each other.
-
-Instead, agents collaborate through durable engineering state:
-
-```text
-Agent A
-   │
-   └── specification / ADR
-               │
-               ▼
-           repository
-               │
-               ▼
-Agent B ── implementation + evidence
-               │
-               ▼
-           repository
-               │
-               ▼
-Agent C ── independent verification
-```
+When the required chain is complete, reviewers can answer:
 
-Agent conversations can help execution.
+- Why does this work exist?
+- What was approved?
+- What scope and evidence were assessed?
+- Which exact source candidate was verified?
+- Who made the accountable decisions?
 
-They should not become the authoritative engineering record.
+> **From intent to evidence to exact source.**
 
----
+### 3. Keep governance independent of the AI provider
 
-# Why This Matters
+Models and agent products will change rapidly. Repository-native contracts and evidence reduce dependence on one model or agent interface.
 
-The software-engineering industry is rapidly commoditizing code generation.
+> **Change the executor without silently changing the engineering rules.**
 
-The differentiating question will increasingly become:
+Runtime adapters still need implementation and verification for each supported environment.
 
-> **How much engineering autonomy can an organization safely give to AI?**
+### 4. Move humans to the right level
 
-Without governance, organizations face two bad choices.
+The objective is to automate routine execution and evidence preparation while reserving accountable decisions for humans.
 
-### Option 1 — Restrict autonomy
+> **Automate preparation and execution. Preserve decision authority.**
 
-```text
-AI
- ↓
-human approval
- ↓
-AI
- ↓
-human approval
- ↓
-AI
- ↓
-human approval
-```
+Role separation matters. One person may hold every role, but that provides accountability without independent assurance. Using different models or sessions does not by itself create independence.
 
-Safe, but human throughput remains the constraint.
+## 5. Challenge the proposition
 
-### Option 2 — Allow uncontrolled autonomy
+The story is credible only with these limits visible:
 
-```text
-AI agents
- ↓
-massive execution capacity
- ↓
-unclear decisions
-unclear provenance
-unclear assurance
-unclear accountability
-```
+- **Control is conditional.** SE Harness validates repository evidence and lifecycle rules; it does not physically restrain a process with write access.
+- **Completeness is an input.** Selected-scope assessment relies on a caller-declared complete change set. CI and hosting configuration determine whether that assertion is required and reviewed.
+- **Multi-agent maturity is roadmap, not current product.** The shipped skill is read-only, single-agent, and has delegation disabled.
+- **Scale is unproven.** Repository-native, machine-readable governance is compatible with scale, but usability, concurrency, integration, and operating evidence will determine whether scale is achieved.
+- **Artifact burden is the adoption risk.** If people manually maintain every artifact for routine work, the product has failed. Skills and automation must simplify interaction without taking decision rights.
+- **Compliance is not conferred.** The harness can supply traceability and evidence for a control system; an organization must define, operate, and audit that system.
+- **A malicious privileged maintainer is outside the standalone boundary.** Integrity checks can detect governed-content changes under the released evaluator; access controls and independent review must prevent or respond to unauthorized changes.
 
-Fast, but increasingly unsafe.
+## 6. Closing
 
-SE Harness proposes a third model.
+Suggested close:
 
-## Governed autonomy
+“The opportunity with coding agents is larger than faster code generation. Agents may execute a growing part of engineering, but increased autonomy without a durable control model can produce software faster than an organization can understand or govern it.
 
-```text
-                 GOVERNED AUTONOMY
+SE Harness makes the repository carry the intent, authorization, evidence, source provenance, and decision state around correctly governed work.
 
-Human defines                   Agents execute
-the boundaries                  inside boundaries
+The question is no longer only, ‘Can an agent build this?’
 
-          └──────── SE Harness ────────┘
-```
+The better question is, ‘Can we delegate more execution and still know why the software exists, what was assessed, and who is accountable for the next decision?’
 
-The objective is not to minimize human involvement.
+That is the problem SE Harness is designed to address.”
 
-It is to use human judgment **where human accountability actually matters**.
+A concise final value proposition:
 
----
+> **SE Harness helps teams use increasingly capable coding agents without losing the repository-level chain from intent and authorized work to evidence, exact source provenance, and accountable human decisions.**
 
-# Strategic Positioning
+## Demo preparation checklist
 
-SE Harness should not primarily be positioned as:
+- [ ] Use a tiny feature or defect.
+- [ ] Prepare the requirement, specification, verification contract, and approved work order.
+- [ ] Use a disposable repository and one coding agent.
+- [ ] Rehearse the explicit start decision and `in_progress` transition.
+- [ ] Prepare one real, easy-to-understand blocked gate.
+- [ ] Retain the required implementation evidence.
+- [ ] Rehearse engineering completion before candidate commit and VREC capture.
+- [ ] Show a `ready` VREC before the assurance decision.
+- [ ] Show the exact source commit without calling it an executable identity.
+- [ ] End at the next decision; do not push, merge, release, or deploy during the core demonstration.
+- [ ] Keep prepared output or a recording as fallback.
 
-> A better development process.
+Do not spend the executive session on installation, TOML syntax, directory structure, Python internals, every artifact type, hash implementation, or CLI help. Do not demonstrate multi-agent orchestration as a current capability.
 
-Nor simply as:
+## Q&A — likely executive pushback
 
-> A traceability system.
+### “Isn't this Jira plus Git plus CI/CD?”
 
-Nor as:
+Those systems hold parts of the story. Jira may record intended work, Git records changes, and CI records automated checks. SE Harness connects repository-native intent, definitions, bounded authorization, evidence, exact candidate identity, and accountable decisions. It complements those systems and still depends on their controls where they remain authoritative.
 
-> Another AI coding platform.
+### “Why not put the rules inside the agent?”
 
-Those markets either undersell the idea or are rapidly becoming commoditized.
+The executor should not be the sole authority deciding whether its own work is acceptable. Models and agents also change frequently. Keeping the engineering contract in the repository makes it inspectable and lets an external released evaluator assess candidate state.
 
-The stronger positioning is:
+### “Does SE Harness prevent an agent changing unauthorized files?”
 
-> **SE Harness is the infrastructure that allows organizations to safely increase the autonomy of software-engineering agents.**
+No. It can detect that a caller-declared complete change set exceeds approved scope and fail a gate. Preventing the write requires agent-runtime permissions, repository access control, review, CI, or hosting rules. A privileged malicious process is not contained by the harness alone.
 
-The underlying coding agent becomes replaceable.
+### “Will this become another process layer?”
 
-Today it may be Codex.
+That is the main product risk. Strong internal governance needs a simple interaction surface. Routine artifact preparation and evidence collection should be automated, while accountable decisions remain explicit. If every engineer must manually maintain the full model for every small change, adoption will fail.
 
-Tomorrow Claude Code.
+### “Why keep humans if agents do the work?”
 
-Later it may be another agent runtime entirely.
+Execution and accountability are different. Humans should not continuously supervise every tool call, but they remain responsible for decisions assigned by organizational policy. The harness aims to present the right evidence at those points.
 
-```text
-                   SE HARNESS
-                       │
-       ┌───────────────┼───────────────┐
-       │               │               │
-       ▼               ▼               ▼
-     Codex          Claude Code       Other
-       │               │               │
-       └───────────────┼───────────────┘
-                       │
-                       ▼
-               software repository
-```
+### “Is multi-agent engineering available now?”
 
-The durable value is above the model:
+Not as a shipped orchestration capability. The current portable skill is a read-only, single-agent orientation pilot with delegation disabled. Delegated mutation, worker coordination, and stronger execution receipts are roadmap work that require separate implementation and verification.
 
-* engineering intent;
-* authoritative requirements;
-* architecture;
-* constraints;
-* authorization;
-* provenance;
-* verification;
-* evidence;
-* decision rights;
-* and release authority.
+### “Can it scale to hundreds of repositories?”
 
-Models change.
+That is the vision, not a demonstrated result. The repository-native and machine-readable design avoids a mandatory central service, but real scale still needs evidence about usability, concurrent work, identifier coordination, integration, support, and operations.
 
-Agents change.
+### “Does this provide independent assurance?”
 
-The engineering governance system remains.
+Only when accountable roles are genuinely separated according to repository policy. One owner holding all roles still gains traceability and explicit decisions, but not independent assurance. Different agent sessions or models are not proof of independence.
 
----
+### “Is this a compliance product?”
 
-# Product Positioning
+No. It is an engineering governance and assurance layer. Its traceability and provenance may support a compliance program, but they do not define applicable regulation, certify the organization, or prove controls are operating effectively.
 
-## Category
+### “What prevents changes to the harness rules?”
 
-**Repository-native governance layer for agentic software engineering.**
+Managed-file integrity and an independently installed released evaluator can detect candidate changes or mismatches before governed mutations proceed. That is stronger than letting candidate code accept itself, but it is not physical prevention. Repository permissions, protected checks, and accountable review complete the boundary.
 
-A more ambitious category definition is:
+### “What would success look like?”
 
-**Agentic Software Engineering Control Plane.**
+An authorized work item is executed with minimal supervision. The implementation returns either sufficient evidence for the next accountable decision or a genuine blocker requiring judgment. The organization gains throughput and a clearer decision trail. Achieving that broadly remains the product direction, not a claim already proven at enterprise scale.
 
-The second positioning becomes increasingly appropriate as the harness expands into:
+## Narrative discipline
 
-* multi-agent coordination;
-* policy enforcement;
-* authorization;
-* independent verification;
-* concurrency control;
-* enterprise governance;
-* assurance;
-* and release management.
+Return to three contrasts:
 
----
+| Old question | Better question |
+| --- | --- |
+| Can AI generate code? | Can AI perform governed engineering work? |
+| Did the tests pass? | What exact candidate was assessed against which requirement? |
+| Is a human watching the agent? | Is a human controlling the accountable decisions? |
 
-# Core Message
-
-> **SE Harness turns autonomous coding agents into accountable software engineering.**
-
-It enables agents to execute substantial engineering work independently while preserving explicit human control over intent, engineering decisions, risk, verification and release.
-
----
-
-# Short Value Proposition
-
-> **SE Harness gives coding agents the autonomy to build software while keeping engineering authority with humans. It connects human-approved intent and requirements to agent execution, verification evidence and exact Git commits, making autonomous software engineering controlled, traceable and accountable.**
-
----
-
-# Executive Pitch
-
-Software development is moving from humans writing code with AI assistance to humans directing autonomous engineering agents.
-
-The opportunity is enormous, but so is the governance problem: when an agent can perform hours or days of engineering work autonomously, organizations need to know what authorized the work, which requirements governed it, what changed, how it was verified and exactly what software they are releasing.
-
-**SE Harness is a repository-native governance layer for agentic software engineering.**
-
-It lets agents autonomously explore, implement, test and gather evidence inside explicit engineering boundaries, while humans retain authority over intent, architecture, risk, verification and release.
-
-Every material change remains connected from intent and requirements through authorized work and evidence to an exact Git commit.
-
-**The result is not simply faster code generation. It is governed engineering at agent speed.**
-
----
-
-# 15-Second Pitch
-
-> **SE Harness lets autonomous coding agents build software without giving them engineering authority. It connects every change from human-approved intent and requirements through implementation and verification to exact code, allowing agents to operate autonomously while humans retain accountability for risk and release.**
-
----
-
-# One-Liners
-
-**Primary**
-
-> **SE Harness turns autonomous coding agents into accountable software engineering.**
-
-**Alternative**
-
-> **Autonomy for agents. Authority for humans.**
-
-**Alternative**
-
-> **Governed engineering at agent speed.**
-
-**Alternative**
-
-> **Delegate execution. Keep accountability.**
-
----
-
-# Vision
-
-As coding agents become capable of executing increasingly complex engineering work, the competitive advantage will no longer come simply from having access to the best model.
-
-It will come from an organization's ability to **delegate more engineering execution safely**.
-
-```text
-Frontier models
-      ↓
-More capable agents
-      ↓
-More autonomous execution
-      ↓
-Human supervision becomes the bottleneck
-      ↓
-Governed delegation becomes necessary
-      ↓
-SE Harness
-```
-
-The long-term proposition is therefore larger than development-process automation.
-
-> **SE Harness provides the engineering control system required for a world in which most software execution is performed by autonomous agents but engineering accountability remains human.**
+If the audience remembers those three shifts—and the boundary between current capability and roadmap—the presentation has worked.

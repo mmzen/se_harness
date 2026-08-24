@@ -154,19 +154,22 @@ class PublicOnboardingTests(unittest.TestCase):
 
     def test_practical_example_preserves_value_and_human_authority(self) -> None:
         practical = self.section("What this looks like in practice")
+        practical_normalized = " ".join(practical.lower().split())
         for phrase in (
             "per-customer API rate limiting",
             "`429`",
             "`Retry-After`",
             "waits for approval",
-            "implements only that scope",
+            "declares the complete changed-path set",
+            "evaluates that set",
+            "agent-runtime permissions and repository controls",
             "retains evidence",
             "exact candidate commit",
             "assurance owner",
             "release owner",
         ):
             with self.subTest(phrase=phrase):
-                self.assertIn(phrase.lower(), practical.lower())
+                self.assertIn(phrase.lower(), practical_normalized)
 
         mermaid_blocks = re.findall(r"```mermaid\n(.*?)\n```", practical, flags=re.DOTALL)
         self.assertEqual(1, len(mermaid_blocks))
@@ -250,6 +253,12 @@ class PublicOnboardingTests(unittest.TestCase):
     def test_known_limitations_remain_explicit_and_current(self) -> None:
         limitations = self.section("Known limitations")
         normalized = " ".join(limitations.split())
+        self.assertIn("not an agent sandbox, permission system, security boundary", normalized)
+        self.assertIn("caller declaring the complete change set", normalized)
+        self.assertIn("agent-runtime permissions, review, CI, and hosting rules", normalized)
+        self.assertIn("read-only and single-agent, with delegation disabled", normalized)
+        self.assertIn("multi-agent orchestration are roadmap work", normalized)
+        self.assertIn("organizational-scale operation has not yet been demonstrated", normalized)
         self.assertIn("exact `QG-*` IDs", normalized)
         self.assertIn("derived readiness groupings", normalized)
         self.assertIn("not gate results", normalized)
@@ -262,6 +271,7 @@ class PublicOnboardingTests(unittest.TestCase):
         development = self.section("Developing SE Harness")
         self.assertIn("harness-overview.md", learning)
         self.assertIn("[overview](docs/notes/harness-overview.md)", learning)
+        self.assertIn("[executive speech and demonstration brief](VALUE_PROPOSAL.md)", learning)
         self.assertNotIn("[4/10 overview]", learning)
         self.assertIn("docs/notes/README.md", learning)
         self.assertIn("ENGINEERING_HARNESS.md", learning)
@@ -277,6 +287,7 @@ class PublicOnboardingTests(unittest.TestCase):
             "docs/notes/harness-overview.md",
             "docs/notes/README.md",
             "docs/notes/developing-se-harness.md",
+            "VALUE_PROPOSAL.md",
         ):
             with self.subTest(target=target):
                 self.assertIn(f"]({target})", self.readme)
