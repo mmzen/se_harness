@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import copy
 import base64
 import gzip
 import hashlib
 import io
-from pathlib import Path
+import json
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -12,11 +14,16 @@ import tempfile
 import tomllib
 import unittest
 import zipfile
+from pathlib import Path
+from unittest import mock
 
+from repository_tools import release_build as BUILD
 from se_harness import __version__
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+RECIPE_PATH = REPOSITORY_ROOT / "release" / "build-recipe.json"
+LOCK_PATH = REPOSITORY_ROOT / "release" / "build-toolchain.lock"
 NORMALIZER = REPOSITORY_ROOT / "scripts/normalize_sdist.py"
 FIXED_EPOCH = 1_700_000_000
 
@@ -279,6 +286,273 @@ class DeterministicSdistTests(unittest.TestCase):
             for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
                 source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient" / relative
                 self.assertEqual(source.read_bytes(), (target / ".agents/skills/harness-orient" / relative).read_bytes())
+
+
+class BuildRecipeSchemaTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.recipe_bytes = RECIPE_PATH.read_bytes()
+        self.lock_bytes = LOCK_PATH.read_bytes()
+        self.recipe = json.loads(self.recipe_bytes)
+
+    def encoded(self, value: object) -> bytes:
+        return BUILD.canonical_json_bytes(value)
+
+    def test_canonical_recipe_binds_complete_identity(self) -> None:
+        recipe = BUILD.validate_recipe_bytes(
+            self.recipe_bytes,
+            path="release/build-recipe.json",
+            lock=self.lock_bytes,
+        )
+        self.assertEqual(BUILD.RECIPE_SCHEMA, recipe.value["schema"])
+        self.assertEqual(hashlib.sha256(self.recipe_bytes).hexdigest(), recipe.sha256)
+        self.assertEqual("linux", recipe.value["producer"]["os"])
+        self.assertEqual("amd64", recipe.value["producer"]["architecture"])
+        self.assertRegex(recipe.image, r"@sha256:[0-9a-f]{64}\Z")
+        self.assertEqual([], recipe.value["environment"]["inherit"])
+        self.assertEqual(7, len(recipe.inventory))
+
+    def test_noncanonical_duplicate_and_open_recipe_forms_fail(self) -> None:
+        with self.assertRaisesRegex(BUILD.BuildRecipeError, "canonical"):
+            BUILD.validate_recipe_bytes(
+                json.dumps(self.recipe).encode("utf-8"),
+                path="release/build-recipe.json",
+                lock=self.lock_bytes,
+            )
+        duplicate = self.recipe_bytes.replace(
+            b'{\n  "commands":', b'{\n  "schema": "duplicate",\n  "commands":', 1
+        )
+        with self.assertRaisesRegex(BUILD.BuildRecipeError, "duplicate key"):
+            BUILD.validate_recipe_bytes(
+                duplicate, path="release/build-recipe.json", lock=self.lock_bytes
+            )
+        for field, replacement, message in (
+            ("image", "python:3.11", "immutable"),
+            ("inherit", ["PATH"], "inheritance"),
+            ("commands", "python -m build", "argument-array"),
+        ):
+            changed = copy.deepcopy(self.recipe)
+            if field == "image":
+                changed["producer"][field] = replacement
+            elif field == "inherit":
+                changed["environment"][field] = replacement
+            else:
+                changed[field] = replacement
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(BUILD.BuildRecipeError, message):
+                    BUILD.validate_recipe_bytes(
+                        self.encoded(changed),
+                        path="release/build-recipe.json",
+                        lock=self.lock_bytes,
+                    )
+
+    def test_toolchain_lock_hash_and_inventory_are_closed(self) -> None:
+        changed_lock = self.lock_bytes.replace(b"build==1.3.0", b"build==1.3.1")
+        with self.assertRaisesRegex(BUILD.BuildRecipeError, "lock_sha256"):
+            BUILD.validate_recipe_bytes(
+                self.recipe_bytes,
+                path="release/build-recipe.json",
+                lock=changed_lock,
+            )
+        changed = copy.deepcopy(self.recipe)
+        changed["toolchain"]["inventory"].pop()
+        with self.assertRaisesRegex(BUILD.BuildRecipeError, "inventory"):
+            BUILD.validate_recipe_bytes(
+                self.encoded(changed),
+                path="release/build-recipe.json",
+                lock=self.lock_bytes,
+            )
+
+    def test_producer_executes_arrays_with_only_declared_and_internal_environment(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "source"
+            source.mkdir()
+            (source / "scripts").mkdir()
+            producer_recipe = copy.deepcopy(self.recipe)
+            producer_recipe["environment"]["fixed"]["HOME"] = (root / "home").as_posix()
+            (root / "recipe.json").write_bytes(self.encoded(producer_recipe))
+            shutil.copyfile(LOCK_PATH, root / "lock.txt")
+            (source / "scripts" / "normalize_sdist.py").write_text("# fixture\n", encoding="utf-8")
+            install_environment: dict[str, str] = {}
+            build_environments: list[dict[str, str]] = []
+
+            def execute(
+                arguments: list[str],
+                *,
+                timeout: int,
+                environment: dict[str, str],
+                cwd: Path,
+            ) -> object:
+                self.assertIn(timeout, {300, 600})
+                self.assertEqual(source, cwd)
+                if arguments[1:3] == ["-m", "pip"]:
+                    install_environment.update(environment)
+                elif arguments[1:3] == ["-m", "build"]:
+                    build_environments.append(dict(environment))
+                    raw = Path(arguments[arguments.index("--outdir") + 1])
+                    (raw / "se_harness-1.2.3-py3-none-any.whl").write_bytes(b"wheel")
+                    (raw / "se_harness-1.2.3.tar.gz").write_bytes(b"raw-sdist")
+                else:
+                    build_environments.append(dict(environment))
+                    Path(arguments[3]).write_bytes(b"normalized-sdist")
+                return subprocess.CompletedProcess(arguments, 0, "", "")
+
+            with (
+                mock.patch.object(BUILD, "_bounded_run", side_effect=execute),
+                mock.patch.object(BUILD, "_installed_inventory") as inventory,
+                mock.patch.object(BUILD.platform, "system", return_value="Linux"),
+                mock.patch.object(BUILD.platform, "machine", return_value="x86_64"),
+                mock.patch.object(BUILD.platform, "python_implementation", return_value="CPython"),
+                mock.patch.object(BUILD.platform, "python_version", return_value="3.11.9"),
+                mock.patch.object(BUILD.struct, "calcsize", return_value=8),
+            ):
+                inventory.return_value = BUILD.validate_recipe_bytes(
+                    self.recipe_bytes,
+                    path="release/build-recipe.json",
+                    lock=self.lock_bytes,
+                ).inventory
+                BUILD._producer(
+                    root / "recipe.json",
+                    root / "lock.txt",
+                    source,
+                    root / "final",
+                    "1.2.3",
+                    1710000000,
+                    root / "producer.json",
+                )
+            declared = set(self.recipe["environment"]["fixed"]) | {"SOURCE_DATE_EPOCH"}
+            self.assertEqual(declared, set(install_environment))
+            self.assertEqual(2, len(build_environments))
+            for environment in build_environments:
+                self.assertEqual(declared | {"PYTHONPATH"}, set(environment))
+            self.assertTrue((root / "producer.json").is_file())
+
+
+class ReplayBuildTests(unittest.TestCase):
+    def repository(self, root: Path) -> str:
+        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
+        subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
+        (root / "release").mkdir()
+        shutil.copyfile(RECIPE_PATH, root / "release" / "build-recipe.json")
+        shutil.copyfile(LOCK_PATH, root / "release" / "build-toolchain.lock")
+        (root / "source.txt").write_text("candidate\n", encoding="utf-8", newline="\n")
+        subprocess.run(["git", "-C", str(root), "add", "release", "source.txt"], check=True)
+        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
+        return subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+
+    @staticmethod
+    def fake_docker_build(
+        _control: Path,
+        workspace: Path,
+        recipe: BUILD.BuildRecipe,
+        version: str,
+        _epoch: int,
+    ) -> dict[str, object]:
+        final = workspace / "final"
+        final.mkdir()
+        wheel = recipe.value["outputs"]["wheel"].format(version=version)
+        sdist = recipe.value["outputs"]["sdist"].format(version=version)
+        (final / wheel).write_bytes(b"exact-wheel")
+        (final / sdist).write_bytes(b"exact-sdist")
+        return {"schema": "se-harness-release-build-producer/v1", "recipe_sha256": recipe.sha256}
+
+    def test_two_fresh_producers_equal_accepted_hashes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            container = Path(temporary)
+            root = container / "repository"
+            root.mkdir()
+            commit = self.repository(root)
+            output = container / "out" / "bundle"
+            with (
+                mock.patch.object(BUILD, "_docker_image_identity", side_effect=lambda image: image),
+                mock.patch.object(BUILD, "_docker_build", side_effect=self.fake_docker_build) as producer,
+            ):
+                result = BUILD.replay_build(
+                    root,
+                    commit,
+                    "1.2.3",
+                    output,
+                    expected_wheel_sha256=hashlib.sha256(b"exact-wheel").hexdigest(),
+                    expected_sdist_sha256=hashlib.sha256(b"exact-sdist").hexdigest(),
+                )
+            self.assertEqual(2, producer.call_count)
+            self.assertEqual("exact", result["state"])
+            self.assertEqual(BUILD.REPLAY_SCHEMA, result["schema"])
+            self.assertEqual("se-harness-release-bundle/v2", result["manifest"]["schema"])
+            self.assertEqual(
+                {"SHA256SUMS", "se_harness-1.2.3-py3-none-any.whl", "se_harness-1.2.3.tar.gz"},
+                {path.name for path in output.iterdir()},
+            )
+
+    def test_expected_hash_is_immutable_and_mismatch_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            container = Path(temporary)
+            root = container / "repository"
+            root.mkdir()
+            commit = self.repository(root)
+            with (
+                mock.patch.object(BUILD, "_docker_image_identity", side_effect=lambda image: image),
+                mock.patch.object(BUILD, "_docker_build", side_effect=self.fake_docker_build),
+            ):
+                with self.assertRaisesRegex(BUILD.BuildRecipeError, "accepted hash"):
+                    BUILD.replay_build(
+                        root,
+                        commit,
+                        "1.2.3",
+                        container / "bundle",
+                        expected_wheel_sha256="0" * 64,
+                        expected_sdist_sha256=hashlib.sha256(b"exact-sdist").hexdigest(),
+                    )
+            self.assertFalse((container / "bundle").exists())
+
+    def test_output_inside_candidate_repository_is_refused_before_docker(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            commit = self.repository(root)
+            with mock.patch.object(BUILD, "_docker_image_identity") as docker:
+                with self.assertRaisesRegex(BUILD.BuildRecipeError, "outside the repository"):
+                    BUILD.replay_build(root, commit, "1.2.3", root / "bundle")
+            docker.assert_not_called()
+
+
+class ReplayWorkflowTests(unittest.TestCase):
+    def test_ready_replay_has_one_input_read_permission_and_no_credentials(self) -> None:
+        workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "release-candidate-replay.yml"
+        ).read_text(encoding="utf-8")
+        self.assertEqual(1, workflow.count("        required: true\n"))
+        self.assertIn("      release_record:\n", workflow)
+        self.assertIn("      contents: read\n", workflow)
+        self.assertIn("persist-credentials: false", workflow)
+        self.assertIn("python scripts/replay_release_build.py", workflow)
+        self.assertIn("python scripts/validate_engineering_artifacts.py --root .", workflow)
+        self.assertIn("python scripts/validate_release_distributions.py", workflow)
+        self.assertIn("--require-status ready", workflow)
+        self.assertIn("release-build-replay.json", workflow)
+        for forbidden in (
+            "contents: write",
+            "id-token: write",
+            "environment:",
+            "secrets.",
+            "python -m build",
+            "pip install",
+            "normalize_sdist.py",
+            "git push",
+            "gh release",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, workflow)
+        action_lines = [line.strip() for line in workflow.splitlines() if "uses:" in line]
+        self.assertTrue(action_lines)
+        for line in action_lines:
+            with self.subTest(line=line):
+                self.assertRegex(line, r"@[0-9a-f]{40}(?:\s|$)")
 
 
 if __name__ == "__main__":

@@ -21,6 +21,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 import publish_dashboard as dashboard
+from repository_tools.release_build import load_build_recipe_at
 from repository_tools.release_distribution import ReleaseDistribution, validate_distribution_block
 
 
@@ -56,6 +57,10 @@ class ReleasePlan:
     checksums: str
     checksums_sha256: str
     source_manifest_sha256: str
+    distribution_schema: int = 1
+    build_recipe_schema: str | None = None
+    build_recipe: str | None = None
+    build_recipe_sha256: str | None = None
     evaluator_evidence_path: str | None = None
     evaluator_evidence_sha256: str | None = None
 
@@ -236,11 +241,23 @@ def resolve_plan(
     source_manifest = _source_manifest_sha256(repository, candidate)
     if source_manifest != distribution.source_manifest_sha256:
         raise ReleaseError("distribution source manifest differs from the candidate tree")
+    if distribution.schema == 2:
+        try:
+            recipe = load_build_recipe_at(
+                repository,
+                candidate,
+                path=distribution.build_recipe or "",
+                expected_sha256=distribution.build_recipe_sha256,
+            )
+        except (OSError, RuntimeError) as exc:
+            raise ReleaseError(f"distribution build recipe differs from the candidate tree: {exc}") from exc
+        if recipe.value["schema"] != distribution.build_recipe_schema:
+            raise ReleaseError("distribution build recipe schema differs from the candidate tree")
     released_at = metadata.get("released_at")
     if not isinstance(released_at, str) or not released_at:
         raise ReleaseError("released record has no released_at timestamp")
     return ReleasePlan(
-        schema="se-harness-release-plan/v1",
+        schema="se-harness-release-plan/v2",
         repository=dashboard.EXPECTED_REPOSITORY,
         release_record=release_record,
         release_record_path=record_path,
@@ -261,6 +278,10 @@ def resolve_plan(
         checksums=distribution.checksums,
         checksums_sha256=distribution.checksums_sha256,
         source_manifest_sha256=distribution.source_manifest_sha256,
+        distribution_schema=distribution.schema,
+        build_recipe_schema=distribution.build_recipe_schema,
+        build_recipe=distribution.build_recipe,
+        build_recipe_sha256=distribution.build_recipe_sha256,
         evaluator_evidence_path=evaluator_binding["path"],
         evaluator_evidence_sha256=evaluator_binding["sha256"],
     )
@@ -271,6 +292,8 @@ def read_plan(path: Path) -> ReleasePlan:
     fields = set(ReleasePlan.__dataclass_fields__)
     if set(value) != fields:
         raise ReleaseError("release plan field set is not canonical")
+    if value.get("schema") != "se-harness-release-plan/v2":
+        raise ReleaseError("release plan schema must be se-harness-release-plan/v2")
     for key in ("verification_records", "released_work"):
         if not isinstance(value.get(key), list):
             raise ReleaseError(f"release plan {key} must be an array")
@@ -312,7 +335,7 @@ def verify_bundle(plan: ReleasePlan, directory: Path) -> dict[str, Any]:
 
 def verify_build_manifest(plan: ReleasePlan, value: dict[str, Any]) -> dict[str, Any]:
     expected = {
-        "schema": "se-harness-release-bundle/v1",
+        "schema": f"se-harness-release-bundle/v{plan.distribution_schema}",
         "version": plan.version,
         "commit": plan.candidate_commit,
         "git_object_format": plan.git_object_format,
@@ -329,6 +352,14 @@ def verify_build_manifest(plan: ReleasePlan, value: dict[str, Any]) -> dict[str,
         ),
         "source_manifest_sha256": plan.source_manifest_sha256,
     }
+    if plan.distribution_schema == 2:
+        expected.update(
+            {
+                "build_recipe_schema": plan.build_recipe_schema,
+                "build_recipe": plan.build_recipe,
+                "build_recipe_sha256": plan.build_recipe_sha256,
+            }
+        )
     if value != expected:
         differing = sorted(key for key in set(value) | set(expected) if value.get(key) != expected.get(key))
         raise ReleaseError(f"rebuilt distribution manifest differs from the released record: {', '.join(differing)}")

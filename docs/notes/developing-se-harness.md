@@ -29,6 +29,7 @@ se_harness/                              CLI and safe installation control plane
 templates/repository/standard/           one canonical repository installation
 scripts/                                 portable validation, Explorer, CI selection, release support
 repository_tools/                        non-packaged distribution and publication policy
+release/                                 canonical repository build recipe and hash-locked toolchain
 tests/                                   installer, provenance, identity, package, and regression tests
 docs/notes/                              non-authoritative human explanations
 docs/engineering/                        self-governing formal artifact graph and evidence
@@ -37,6 +38,7 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/workflows/candidate-evidence.yml  repository-owned source and package evidence
 .github/workflows/predecessor-evaluator-assessment.yml transitional released-0.5 view evidence
 .github/workflows/publish-pypi.yml        one-input release orchestrator
+.github/workflows/release-candidate-replay.yml ready-RLS no-credential build replay
 .github/workflows/publish-dashboard-pages.yml release-bound Explorer recovery
 ```
 
@@ -78,18 +80,19 @@ Candidate CI also runs the contract-bound [evaluator migration rehearsal](evalua
 
 ## Building and releasing
 
-A promotable distribution build is allowed only under an approved release-bearing work order. In this repository the owner-authored `docs/engineering/REPOSITORY_CONTEXT.md` defines the deterministic build, normalized sdist, bundle manifest, VREC, RLS binding, and publication sequence. That file is ordinary owner content: the harness neither seeds nor requires it, and another repository may keep the same sequences anywhere its owners choose.
+A promotable distribution build is allowed only under an approved release-bearing work order. For future releases, `release/build-recipe.json` is the complete machine-readable build identity: immutable Linux/amd64 image, exact CPython patch, full hash-locked toolchain, closed environment, argument-array commands, normalization, and outputs. `repository_tools/release_build.py` is the strict repository-only interpreter used by both the ready-RLS hosted replay and schema-2 production qualification. Workflow YAML orchestrates those calls but does not restate the schema-2 build. The owner-authored `docs/engineering/REPOSITORY_CONTEXT.md` defines the sequence; the portable harness neither seeds nor requires this repository policy.
 
 Build success is evidence, not release authorization:
 
 ```text
-clean candidate C -> exact bundle manifest -> ready VREC -> human verification
-                                         -> generic ready RLS -> bind repository distribution
-                                                              -> human release decision
+clean candidate C -> exact recipe build A/B -> schema-2 bundle -> ready VREC -> human verification
+                                                              -> generic ready RLS -> bind recipe + hashes
+                                                                                   -> hosted exact replay
+                                                                                   -> human release decision
                                                               -> one-input authorized publication
 ```
 
-The tag selects C, not the later governance commit containing the released record. Publication and Pages workflows validate their complete governance snapshots with current semantics and validate an evidence-bound predecessor-compatible view with the exact standard released evaluator when retained rejected history requires it. No `harnessctl` command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
+The tag selects C, not the later governance commit containing the released record. Recipe replay uses the already-bound expected hashes and has no update-expected mode. Historical released schema-1 records keep their labeled legacy rebuild; new ready records require recipe-bearing schema 2. Publication and Pages workflows validate their complete governance snapshots with current semantics and use an evidence-bound predecessor-compatible view when retained rejected history requires it. No `harnessctl` or recipe command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
 ### Historical one-release predecessor bootstrap
 

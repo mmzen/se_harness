@@ -43,3 +43,16 @@ The repository release workflow currently materializes the exact tag, GitHub Rel
 - `WO-RLO-003`: completed bounded repository workflow implementation with commit-bound assurance recorded by verified `VREC-RLO-003`; no release, publication, or branch action is implied.
 
 Acceptance scenarios are retained in `acceptance/maintenance-line-reconciliation.feature`; implementation evidence is retained in `evidence/WO-RLO-003-verification.md`. The completed work creates no production branch and implies no VREC, release, publication, or deployment.
+
+## Complete build-recipe implementation
+
+GitHub issue [#110](https://github.com/mmzen/se_harness/issues/110) records RCA root cause `RC-060-10`: the accepted distribution hashes were bound, but the complete producer that created them was split between release metadata, workflow YAML, hosted-runner state, and unrecorded environment/tool details. The approved RLO-004 packet governs one candidate-tree declarative recipe, an immutable OCI producer, recipe-bearing distribution schema 2, and exact hosted replay before release approval.
+
+- `REQ-RLO-013`: bind the complete producer, runtime, toolchain, environment, command, normalization, and output recipe.
+- `REQ-RLO-014`: independently replay that bound recipe in a hosted no-credential lane before release approval.
+- `SPEC-RLO-004`: exact recipe, bundle/RLS schema, interpreter, replay, compatibility, and failure contract.
+- `ARCH-RLO-004` and `ADR-RLO-004`: one strict repository interpreter and digest-pinned producer, with isolated schema-1 history.
+- `VER-RLO-004`: independent schema, supply, environment, command, local/hosted replay, workflow, and compatibility evidence.
+- `WO-RLO-004`: approved bounded work currently in progress; completion, hosted dispatch, later lifecycle, commit, push, release, and external actions remain separate decisions.
+
+Acceptance scenarios are retained in `acceptance/release-build-recipe.feature`; implementation evidence is retained in `evidence/WO-RLO-004-verification.md`. The packet preserves `RLS-SEH-012`, v0.6.0 bytes, portable release governance, and consumer installations. Native Linux and Windows publication-path rehearsals remain the separate scope of issue [#111](https://github.com/mmzen/se_harness/issues/111).
