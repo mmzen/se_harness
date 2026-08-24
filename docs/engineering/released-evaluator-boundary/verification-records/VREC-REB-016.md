@@ -2,7 +2,7 @@
 id = "VREC-REB-016"
 type = "verification_record"
 title = "Verification candidate for WO-REB-020"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-
 evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-016-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-24T10:06:59Z"
+verified_by = "quality-owner"
 [relations]
 verifies_work_order = ["WO-REB-020"]
 conforms_to = ["VER-REB-009"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T10:06:59Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Record Candidate
