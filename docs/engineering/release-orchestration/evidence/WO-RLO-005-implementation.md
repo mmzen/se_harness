@@ -593,6 +593,101 @@ Both failures would fail the release orchestrator's Windows candidate qualificat
 
 The hosted Windows leg reports 10 skips where this workstation reports 22 over the same suite. That difference is noted and not investigated, because a skip count is not a pass condition anywhere in this packet; it does mean the platform-guarded coverage claim in this evidence is measured per platform and should not be read as identical on both.
 
+## The third merge with `main`, after `WO-HBI-004` landed
+
+`main` advanced from `52e3702` to `1d459cf` while this branch stayed open, carrying pull
+request #144 (`WO-WEX-003`, semantic lifecycle handoffs, with `VREC-WEX-006`) and pull
+request #145 (`WO-HBI-004`, the fix for the eighth byte-exact surface this packet's
+hosted run found, together with the reserved-name test-portability defect). Commit
+`7918a1b` merges it in, with parents `935a9d6` and `1d459cf`. Nothing was rebased, so no
+commit this branch has published is rewritten and no record that binds one is orphaned.
+
+The merge is taken under the owner's decision of 2026-08-24, selected over two
+alternatives: "Same pattern as #141: the fix merges first, then I merge main into the
+RLO-005 branch again and re-run the rehearsal, so #138 goes green before you decide on
+it. One extra merge-and-re-measure cycle on my side, no extra review of #138."
+
+### No conflict and no auto-merge, because the two sides are disjoint
+
+Git reported no conflict, and this time it had nothing to reconcile at all. The merge
+base is `52e3702`; `comm -12` over the two changed-path sets, `52e3702..935a9d6` and
+`52e3702..1d459cf`, is empty, so not one path was touched by both sides. Every incoming
+path is `main`'s content taken verbatim and no incoming file was edited to make anything
+pass. There is no conflict resolution to disclose for this merge, and the resolutions
+recorded for the first two merges stand unchanged.
+
+### The orchestrator did not move again, so the pinned digest is re-verified
+
+| Proof | Result |
+|---|---|
+| `.github/workflows/publish-pypi.yml` blob at `935a9d6`, at `1d459cf` and at `7918a1b` | `902bb1978181b74918ad57370f77317e15c7bde3` in all three |
+| Path absent from `git diff --name-only 935a9d6...origin/main` | confirmed; the incoming delta touches no `.github/` path |
+| SHA-256 of that blob's bytes | `2d3c3b775946d7667d9a175b0bb85446ff90db029d021e155a9b12105ff1f51e`, 38213 bytes, unchanged |
+| `ORCHESTRATOR_LF_SHA256` in `tests/test_publication_rehearsal.py` | untouched; re-verified, not re-derived |
+| `check-divergence --repository . --cross-check-yaml` | `EXACT`, exit 0 |
+
+### `WO-HBI-004` landed, and what that measures here
+
+`WO-HBI-004` replaces `WO-HBI-003`'s three per-extension rules under the closed phase-3
+skill templates with one tree rule,
+`templates/repository/standard/.agents/skills/** text eol=lf`, and changes
+`ByteExactSurfaceTests` to derive its inventory from the tracked set rather than from the
+declared patterns.
+
+The same limit this packet demonstrated at the previous merge applied again, for the same
+reason: Git re-materializes a path on checkout only when its blob changes, so this
+long-lived worktree kept the converted bytes of files whose blobs the merge did not move.
+Exactly three paths were in that state after the merge, and they are precisely the three
+the previous merge left uncovered:
+
+```
+i/lf w/crlf attr/text eol=lf   templates/repository/standard/.agents/skills/harness-draft-change/agents/openai.yaml
+i/lf w/crlf attr/text eol=lf   templates/repository/standard/.agents/skills/harness-execute-work-order/agents/openai.yaml
+i/lf w/crlf attr/text eol=lf   templates/repository/standard/.agents/skills/harness-prepare-assurance/agents/openai.yaml
+```
+
+They now resolve the rule, which is the difference from the previous merge, where the
+same command reported `attr/` and no attribute at all. They were re-materialized with
+`rm` followed by `git checkout --` on those three paths, which changes worktree bytes and
+no blob, index entry or recorded digest; `git status --porcelain` is empty afterwards. All
+fifteen tracked files under that tree then report `i/lf w/lf attr/text eol=lf`.
+
+The control worktree at plain `1d459cf`, created with `git worktree add` — the
+orchestrator's own construction, inheriting `core.autocrlf=true` — materializes all
+fifteen as `w/lf` on the first checkout with no intervention. That is the property the
+release orchestrator's candidate checkout depends on, measured rather than argued.
+
+### Re-measured after the third merge
+
+| Measurement | Result |
+|---|---|
+| Full suite at `7918a1b`, re-materialized worktree, `core.autocrlf=true` | **932 tests, OK, 22 skipped — no failure and no error** |
+| Control at plain `1d459cf`, freshly materialized by `git worktree add` | 811 tests, OK, 22 skipped |
+| Delta | this branch adds 121 tests, all passing, and no failing test remains in either checkout |
+| `tests/test_publication_rehearsal.py` | 121 tests, OK |
+| `check-divergence --repository . --cross-check-yaml` | `EXACT`, exit 0, `Rehearsed jobs: qualify, resolve on Linux, Windows`, `Rehearsal lane platforms: Linux, Windows`, five excluded jobs each with its attribute, no uncovered or stale mechanic |
+| Governing validator, released `0.6.0` evaluator run from outside the checkout | PASS, 830 artifacts, 0 errors, 50 warnings, all maintenance |
+| Candidate validator | PASS, the same 830 / 0 / 50 |
+| Governing review preflight, same evaluator | `Harness preflight: PASS`, phase `review`, `WO-RLO-005` (`implemented`), no diagnostic |
+| Governing `doctor`, same evaluator | exit 0, 87 checks, 0 `FAIL`, including `PASS managed:.gitattributes: unchanged` and `PASS distribution:.gitattributes: matches distribution` |
+| In-tree `doctor` | 81 `PASS`, 28 `FAIL`; `diff` against the control at `1d459cf` is empty, so the skew is inherited candidate-versus-released boundary state — nine `distribution:` and nineteen `lock-entry:` — and none of it is caused by this packet |
+| `validate_release_distributions.py --root .` | PASS, 1 distribution-bearing record |
+| `git diff --check` | clean |
+
+The three reds this packet inherited at the previous merge and the reserved-name red
+beside them are both gone, in the branch and in the control. This is the first
+measurement in this packet's history where a `core.autocrlf=true` checkout at the branch
+head has no failing test, and it is `WO-HBI-004` working rather than anything this packet
+changed: the packet's own 121 tests were already passing at every previous merge, and the
+figures that moved are `main`'s.
+
+What this does not measure is the hosted lane. The prediction is that the `windows-2022`
+leg now reports `REHEARSED`, and it is stated as a prediction until the run exists. The
+rehearsal's candidate suite runs inside its own derived checkout of the candidate commit
+and reported 928 tests where this workstation reports 932 over the branch tip, and the
+hosted legs report 10 skips against 22 here, so no count from this section should be
+carried across to the run recorded below.
+
 ## Actions explicitly not performed
 
 Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
@@ -600,5 +695,14 @@ Through the two commits this document measures, no external mutation of any kind
 After that, `main` was merged into the branch as `29c0db0` and the branch was pushed again to the same pull request. A merge into a feature branch and a push to a branch the owner already authorized pushing are within that authorization; nothing else was extended by it. That push is what produced the hosted first run recorded above. Amendments `A8` and `A9` were accepted on 2026-08-24 through the statement `Accept A8 and A9`, and the same turn routed the Windows finding into `WO-HBI-003` rather than into this packet; neither decision authorizes anything further.
 
 The same owner turn on 2026-08-24 took the decision this second merge executes: "After you merge #141, I merge main into feat/rlo-004-publication-rehearsal (never rebase), re-derive the pinned digest only if the orchestrator itself moved, disclose any conflict resolution in the evidence, push, and report the hosted rehearsal outcome on both runner types." Commit `6e16272` is that merge and the branch is pushed again to the same pull request; both acts are inside the merge-and-push authorization already recorded above and neither extends it. The eighth byte-exact surface the merge measured, the three `agents/openai.yaml` files, is recorded above and reported to the owner. No fix for it was attempted here: it needs a change to `WO-HBI-003`'s guard and to `.gitattributes`, both outside this work order's execution scope, and no work order authorizes it yet.
+
+The same class of act was taken a third time on 2026-08-24 under the owner's sequencing
+decision quoted above, after they merged pull request #145: `main` was merged in as
+`7918a1b` and the branch pushed again to the same pull request, which is what re-runs the
+hosted rehearsal. Both acts are inside the merge-and-push authorization already recorded
+here and neither extends it. The eighth byte-exact surface and the reserved-name defect
+this packet's hosted run found were fixed in `WO-HBI-004` under its own work order, on its
+own branch and in its own pull request; nothing in this packet was changed to accommodate
+them, and this packet's own `.gitattributes`, guard and tests are untouched by that work.
 
 Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-005` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.
