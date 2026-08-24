@@ -45,6 +45,32 @@ lifecycle history. Accountable content review does not itself authorize
 implementation, a lifecycle transition, a commit, a pull request, assurance,
 release, runtime materialization, or an external action.
 
+## Phase 2 runtime-neutral contract layer
+
+- `SPEC-AEX-003` is the approved definition of the core contract catalog,
+  repository-state binding, envelope semantics, bounds, compatibility rules,
+  decision-packet projection, receipt coverage, and logical profiles.
+- `ADR-AEX-003` is the approved decision to derive future authoritative
+  envelopes through the exact released evaluator, pass them in memory by
+  default, and persist only declared evidence and digests.
+- `WO-AEX-002` is in progress. Its bounded implementation adds the canonical
+  `se_harness/agent_contract.json` catalog and the pure
+  `se_harness.agent_contract` module for strict parsing, canonical encoding,
+  candidate construction, narrowing, admissibility assessment, packet
+  projection, receipt validation, and provider-neutral profile validation.
+- The non-authoritative
+  [`agentic-execution-phase-2-contract-closure.md`](../../notes/agentic-execution-phase-2-contract-closure.md)
+  records the gap assessment and accepted planning recommendations.
+- The contributor guide
+  [`agentic-execution-contracts.md`](../../notes/agentic-execution-contracts.md)
+  explains the executable API and its authority boundary.
+
+Phase 2 returns `constructed` and `admissible` only. It does not observe a live
+repository, derive an authoritative envelope, admit or perform a mutation,
+invoke a skill, coordinate a worker, materialize a runtime adapter, or grant an
+accountable decision right. Those effects require later approved work and a
+fresh exact-evaluator check.
+
 ## Planning context
 
 The non-authoritative

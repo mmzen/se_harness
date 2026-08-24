@@ -19,6 +19,7 @@ from unittest import mock
 
 from repository_tools import release_build as BUILD
 from se_harness import __version__
+from se_harness.agent_contract import parse_agent_contract_catalog_bytes
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -179,6 +180,9 @@ class DeterministicSdistTests(unittest.TestCase):
 
     def test_portable_skill_distribution_surface_is_explicit_and_unique(self) -> None:
         pyproject = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        self.assertIn("agent_contract.json", pyproject["tool"]["setuptools"]["package-data"]["se_harness"])
+        catalog = REPOSITORY_ROOT / "se_harness/agent_contract.json"
+        self.assertEqual(catalog.read_bytes(), parse_agent_contract_catalog_bytes(catalog.read_bytes()).canonical_bytes)
         data_files = pyproject["tool"]["setuptools"]["data-files"]
         prefix = "share/se-harness/templates/repository/standard/.agents/skills/harness-orient"
         distributed = [
@@ -197,6 +201,7 @@ class DeterministicSdistTests(unittest.TestCase):
         )
         self.assertEqual(len(distributed), len(set(distributed)))
         manifest = (REPOSITORY_ROOT / "MANIFEST.in").read_text(encoding="utf-8")
+        self.assertIn("include se_harness/*.json", manifest)
         self.assertIn(
             "recursive-include templates/repository/standard/.agents/skills/harness-orient *.json *.md *.py",
             manifest,
@@ -248,6 +253,12 @@ class DeterministicSdistTests(unittest.TestCase):
                     archive.writestr(name, raw)
 
             with zipfile.ZipFile(wheel) as archive:
+                self.assertIn("se_harness/agent_contract.json", archive.namelist())
+                packaged_catalog = archive.read("se_harness/agent_contract.json")
+                self.assertEqual(
+                    packaged_catalog,
+                    parse_agent_contract_catalog_bytes(packaged_catalog).canonical_bytes,
+                )
                 skill_members = [
                     name
                     for name in archive.namelist()

@@ -25,6 +25,7 @@ include = ["se_harness*"]
 
 [tool.setuptools.package-data]
 se_harness = [
+  "agent_contract.json",
   "workflow_contract.json",
   "quality_gates_contract.json",
   "governance_migration_contract.json",
