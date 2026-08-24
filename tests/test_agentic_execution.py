@@ -13,6 +13,7 @@ from pathlib import Path
 from pathlib import PurePosixPath
 
 from se_harness.skill_contract import (
+    _validate_component,
     CONTRACT_SCHEMA,
     CONTRACT_SCHEMA_V2,
     MANIFEST_SCHEMA,
@@ -401,14 +402,39 @@ class Phase3EffectGuardTests(unittest.TestCase):
                 build_skill_manifest(root)
             invalid.unlink()
 
+            # A reserved device basename is not creatable on every Windows image. On
+            # hosted windows-2022 the write succeeds against the device itself and leaves
+            # nothing to enumerate, so the manifest never sees the entry and this branch
+            # asserted a refusal that could not be reached. The enumeration path is
+            # exercised only where the entry is a real file; the refusal itself is
+            # asserted on every platform by
+            # test_reserved_path_components_are_refused_on_every_platform.
             reserved = root / "NUL.txt"
             try:
                 reserved.write_text("reserved\n", encoding="utf-8")
             except OSError:
-                pass
+                enumerated = False
             else:
+                enumerated = reserved.name in {entry.name for entry in root.iterdir()}
+            if enumerated:
                 with self.assertRaisesRegex(SkillContractError, "SKM003"):
                     build_skill_manifest(root)
+
+    def test_reserved_path_components_are_refused_on_every_platform(self) -> None:
+        """Filesystem-independent, mirroring `AgentContractTests.test_portable_paths_fail_closed`.
+
+        `VER-AEX-001` requires reserved-name paths to be exercised. Driving that through
+        the filesystem only exercises it where a reserved basename can exist as a file,
+        which excludes the hosted Windows image the release orchestrator qualifies on.
+        """
+
+        for component in ("NUL.txt", "nul", "CON", "PRN.md", "aux.json", "COM1.py", "lpt9.yaml"):
+            with self.subTest(component=component):
+                with self.assertRaisesRegex(SkillContractError, "SKM003"):
+                    _validate_component(component)
+        for component in ("openai.yaml", "SKILL.md", "skill-contract.json", "nullable.py"):
+            with self.subTest(component=component):
+                self.assertIsNone(_validate_component(component))
 
     @unittest.skipIf(os.name == "nt", "creating an unprivileged symlink is not portable on Windows")
     def test_manifest_rejects_symlinks(self) -> None:
