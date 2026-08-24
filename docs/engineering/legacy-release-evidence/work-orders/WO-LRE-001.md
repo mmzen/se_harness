@@ -2,7 +2,7 @@
 id = "WO-LRE-001"
 type = "work_order"
 title = "Implement declared legacy release-evidence exemptions and the pre-apply upgrade refusal"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -44,6 +44,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-24T10:45:00Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T11:39:07Z"
 decided_by = "engineering-owner"
 +++
 
