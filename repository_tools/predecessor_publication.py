@@ -664,6 +664,7 @@ def _report_counts(report: dict[str, Any], label: str) -> tuple[int, int]:
 def _run_predecessor(
     view: Path,
     python: Path,
+    evaluator_root: Path,
     entry_point: Path,
     wheel: Path,
     contract: bootstrap.BootstrapContract,
@@ -674,7 +675,7 @@ def _run_predecessor(
         identity, identity_arguments, identity_run = assessment._released_identity(
             view, python, entry_point, contract
         )
-        installed_payload = bootstrap._installed_payload(identity, python.parent.parent)
+        installed_payload = bootstrap._installed_payload(identity, evaluator_root)
         wheel_payload = bootstrap._wheel_payload(wheel, contract.evaluator_version)
     except (
         OSError,
@@ -702,7 +703,7 @@ def _run_predecessor(
         raise PredecessorPublicationError("released-evaluator validation failed in the exact publication view")
     _report_counts(report, "predecessor publication view")
 
-    replacements = {view: "<publication-view>", python.parent.parent: "<evaluator-root>"}
+    replacements = {view: "<publication-view>", evaluator_root: "<evaluator-root>"}
     command_evidence = {
         "doctor": {
             "arguments": ["<evaluator-entry-point>", *doctor_arguments],
@@ -716,7 +717,7 @@ def _run_predecessor(
             identity_run,
             checkout_root=view,
             checkout_marker="<publication-view>",
-            evaluator_root=python.parent.parent,
+            evaluator_root=evaluator_root,
         ),
         "validate": {
             "arguments": ["<evaluator-entry-point>", *validate_arguments],
@@ -775,9 +776,11 @@ def validate_predecessor_publication(
                 catalog,
                 contract,
             )
-            python = preparation._ordinary_external_interpreter(
+            interpreter = preparation._safe_interpreter(
                 evaluator_python, "evaluator interpreter", root
             )
+            python = interpreter.entry_point
+            evaluator_root = interpreter.environment_root
             entry_point = preparation._ordinary_external(
                 evaluator_entry_point, "evaluator entry point", root
             )
@@ -808,6 +811,7 @@ def validate_predecessor_publication(
                 identity, predecessor_report, commands, installed_payload = _run_predecessor(
                     view,
                     python,
+                    evaluator_root,
                     entry_point,
                     wheel,
                     contract,

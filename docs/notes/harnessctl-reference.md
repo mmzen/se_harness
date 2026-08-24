@@ -219,6 +219,8 @@ harnessctl identity --role released-evaluator|candidate-source|candidate-package
 
 Key role-specific options are `--checkout-root`, `--candidate-commit`, `--evaluator-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. The command verifies declared runtime origin; it does not select an evaluator or approve a candidate.
 
+Runtime identity also observes the running interpreter's own entry-point path through the declared interpreter-safety rule and records three additional facts: whether the entry point is a symbolic link, which position class its resolved target occupies relative to the expected and checkout roots, and the target's SHA-256. The schema identifier stays `se-harness-runtime-identity-v3`, because consumers require a subset of the identity rather than an exact field set. The observation is recorded for every role, but only the two environment-bounded roles — `released-evaluator` and `candidate-package` — turn a refusal into the `RID024` diagnostic; `candidate-source` has no environment boundary, because its expected root is the checkout itself. `RID004` and `RID006` keep their existing meanings unchanged.
+
 ## Role-specific release qualification
 
 ```text
@@ -230,6 +232,8 @@ harnessctl qualify public-install [ROOT] --release-record RLS-... --public-wheel
 ```
 
 The five subcommands are separate closed parsers. They bind evaluator identity, target identity, fixed checks, and one independence class before reporting a result. They do not accept a general evaluator, validator, script, omission, or diagnostic-allowlist option. `--output` must name a new external file; the command never overwrites it or writes qualification evidence inside the inspected repository.
+
+`--evaluator-python` is judged by the declared interpreter-safety rule before anything is spawned. Supply the environment's own lexical entry point — `bin/python` on POSIX, `Scripts/python.exe` on Windows — not the resolved system interpreter it points at. The environment root is derived from that lexical path, so an interpreter reached through a linked or junctioned parent directory is refused, as is one inside the inspected checkout or whose resolved target lands inside it. The terminal interpreter link itself is permitted, which is what makes an ordinary `python -m venv` environment usable on POSIX.
 
 All operations emit `se-harness-release-qualification-v1`. The result identifies the operation, completion, outcome, evaluator, target, ordered checks, independence boundary, and its evidence-only authority. `complete-candidate` is always `candidate-controlled`, even when it passes. See [release qualification roles](release-qualification-roles.md) for the workflow map and the bounded public-0.6.0 bootstrap exception.
 

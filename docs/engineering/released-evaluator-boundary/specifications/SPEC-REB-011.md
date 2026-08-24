@@ -57,7 +57,7 @@ The rule is stateless and performs no mutation. Evaluation is a pure function of
 1. **Normalization.** Expand a leading user prefix, then make the path absolute against the current working directory using lexical normalization only. No component is dereferenced. The result is the *lexical path*.
 2. **Environment root.** The *environment root* is the lexical path's second parent. A lexical path with fewer than two parent components has no environment root and is refused with `EPS010`.
 3. **Parent link refusal.** Walk every enclosing directory of the lexical path from its immediate parent to the filesystem root. If any of them is a symbolic link, refuse with `EPS001`. If any of them is a Windows directory junction, refuse with `EPS002`.
-4. **Junction detection.** Junction detection is a separate predicate from symbolic-link detection. Where the running Python exposes `pathlib.Path.is_junction`, it is used. Where it is absent, the rule refuses with `EPS011` rather than passing the check silently.
+4. **Junction detection.** Junction detection is a separate predicate from symbolic-link detection. Where the running Python exposes `pathlib.Path.is_junction`, it is used. Where it is absent, the rule uses the equivalent reparse-point route: the `stat` module's reparse-point file attribute together with its mount-point reparse tag, read from an `lstat` result. Only where neither route is available does the rule refuse with `EPS011` rather than passing the check silently. Neither route can accept a path the other would refuse; both classify a junction, and a positive classification always produces `EPS002`.
 5. **Existence and resolution.** Resolve the lexical path strictly. If resolution fails, refuse with `EPS003`. The result is the *resolved target*.
 6. **Ordinary-file refusal.** If the lexical path is not a file, or the resolved target is not a file, refuse with `EPS004`.
 7. **Final-component refusal.** If the lexical path traverses a link but is not itself a symbolic link, refuse with `EPS005`. This is the position that a junction or another reparse point occupies when it stands as the final component.
@@ -152,3 +152,26 @@ A refusal names the declared case identifier, the role, and the failing subject.
 Implementation may choose the loader module and function names, the internal result type, the exact refusal message wording beyond the required case identifier and subject, the digest streaming block size, the conformance-test module decomposition, and how the corpus expresses platform constructability.
 
 It may not add, remove, renumber, or reorder a declared case; change an acceptance into a refusal or the reverse; add a per-boundary waiver; change a recorded fact's name or value domain; alter the runtime-identity or evaluator-evidence schemas; make `repository_tools` import `se_harness`; or leave a boundary unregistered.
+
+## Amendment record
+
+**Rule 4, amended 2026-08-24 by the technical owner during the implementation of
+`WO-REB-021`.** As approved, rule 4 named `pathlib.Path.is_junction` as the only
+junction predicate and refused with `EPS011` wherever it was absent. That
+predicate exists only from Python 3.12, `pyproject.toml` declares
+`requires-python = ">=3.11"`, and every workflow lane pins
+`python-version: "3.11"`, so the rule as approved would have refused every
+interpreter at every boundary on every supported lane. The amendment names the
+reparse-point `stat` route as the predicate where `is_junction` is absent and
+narrows `EPS011` to the case where neither route exists.
+
+The amendment adds no acceptance. The `stat` route only classifies a path as a
+junction, so it can produce `EPS002` and nothing else, and rule 4's intent is
+preserved exactly: junction detection remains a predicate distinct from
+symbolic-link detection, and the total absence of a predicate still refuses
+rather than passes. No case is added, removed, renumbered, or reordered, no
+acceptance becomes a refusal or the reverse, and no waiver is introduced.
+
+`VER-REB-010` restated the same predicate in three places and was amended in the
+same act, so that its junction-predicate method, its refusal scenario 3, and its
+refusal scenario 4 describe the amended rule rather than the approved one.

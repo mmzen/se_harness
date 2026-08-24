@@ -108,6 +108,7 @@ class DistributionManifestTests(unittest.TestCase):
                 for member in sorted(
                     SURFACE.REQUIRED_MIGRATION_MEMBERS
                     | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                    | SURFACE.REQUIRED_INTERPRETER_SAFETY_MEMBERS
                 ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
             SURFACE.inspect_wheel(clean)
@@ -117,6 +118,7 @@ class DistributionManifestTests(unittest.TestCase):
                 for member in sorted(
                     SURFACE.REQUIRED_MIGRATION_MEMBERS
                     | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                    | SURFACE.REQUIRED_INTERPRETER_SAFETY_MEMBERS
                 ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
                 archive.writestr("repository_tools/release_distribution.py", "repository policy\n")

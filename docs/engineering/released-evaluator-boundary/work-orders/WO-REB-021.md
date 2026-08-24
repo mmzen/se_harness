@@ -37,10 +37,12 @@ paths = [
   "scripts/check_portable_release_surface.py",
   "se_harness/evaluator_evidence.py",
   "se_harness/governance_migration.py",
+  "se_harness/governance_migration_contract.json",
   "se_harness/interpreter_safety.json",
   "se_harness/interpreter_safety.py",
   "se_harness/release_qualification.py",
   "se_harness/runtime_identity.py",
+  "tests/test_context_routing_retirement.py",
   "tests/test_dashboard_publication.py",
   "tests/test_evaluator_identity.py",
   "tests/test_governance_migration.py",
@@ -54,6 +56,7 @@ paths = [
   "tests/test_predecessor_publication.py",
   "tests/test_release_bootstrap.py",
   "tests/test_release_build.py",
+  "tests/test_release_orchestration.py",
   "tests/test_release_qualification.py",
 ]
 
@@ -86,6 +89,84 @@ This draft packet proposes the bounded implementation for GitHub issue #106 / RC
 If the accountable owners approve the eight definition artifacts and this work order, a separate explicit start may authorize only the local implementation and qualification described here. Approval and start do not authorize a push, a pull request, a hosted dispatch, credential use, VREC or RLS preparation or transition, a release, a tag, a publication, a deployment, a maintenance mutation, an external-policy change, or a root-evaluator adoption.
 
 The issue's own boundary applies unchanged: recording remediation work from the RCA authorizes none of those actions.
+
+## Scope amendment, 2026-08-24
+
+Amended on 2026-08-24 by the engineering owner, during implementation and on an
+explicit request. `se_harness/governance_migration_contract.json` is added to
+`[execution_scope]` for one purpose only: re-measuring the six identical
+`implementation_sha256` values that pin the SHA-256 of
+`se_harness/governance_migration.py`.
+
+The reason is that this work order authorizes changing that module, and
+`_implementation_identity` compares the module's own bytes against the declared
+pin, so an authorized edit raises `MIG215` until the pin is re-measured. The
+coupling is not new: every earlier commit that changed the module — `35f7afd`,
+`f606c9a`, and `ca275ac` — changed the same six lines in the same file. The
+omission from the original allowlist was a scope oversight, and the constraint
+"re-measure every digest that could move … the governance-migration class"
+already required this measurement without listing the file that holds it.
+
+The amendment authorizes those six digest values and nothing else. The adapter
+identifiers, `implementation_path`, the stage lists, the views, the contract
+schema, and the migration stage policy are untouched, and the declared pin
+remains a pin rather than becoming a computed value.
+
+## Second scope amendment, 2026-08-24
+
+Amended on 2026-08-24 by the engineering owner, during implementation and on an
+explicit request, after the stop-and-escalate condition "Another file … is
+required" fired. Two test files outside the original allowlist are added:
+`tests/test_release_orchestration.py` and
+`tests/test_context_routing_retirement.py`. Both changes were measured before
+the decision, by applying and reverting them: four added lines in total and
+none removed.
+
+`tests/test_release_orchestration.py` builds a synthetic portable wheel from
+`REQUIRED_MIGRATION_MEMBERS | REQUIRED_QUALIFICATION_MEMBERS`. This work order
+authorizes listing the declaration in `scripts/check_portable_release_surface.py`,
+so the checker now requires `se_harness/interpreter_safety.json` and
+`se_harness/interpreter_safety.py`, and the fixture's own wheel no longer
+satisfies the check it exercises. One line joining
+`REQUIRED_INTERPRETER_SAFETY_MEMBERS` into each of the two fixtures corrects it.
+The consequence was implied by an in-scope item and only the file holding the
+fixture was omitted.
+
+`tests/test_context_routing_retirement.py` pins an exhaustive inventory of the
+files permitted to name this repository's owner-owned engineering context
+document, each with the reason it is not a live obligation. `ADR-REB-010` and
+`REQ-REB-023`, both approved under this packet, each name that document as an
+affected operator path in the `RC-060-06` narrative. Two inventory entries with
+reasons record them. The alternative — deleting the references from the two
+approved artifacts — was put to the owner and rejected, because the documented
+POSIX bootstrap sequence living in that document is precisely why the defect
+made the governing path unusable rather than merely inconvenient. This work
+order deliberately does not spell the retired path itself, so the inventory
+needs exactly the two authorized entries and no third.
+
+The amendment authorizes those four lines and nothing else. No assertion is
+weakened: both inventories remain exhaustive equality checks, so a further
+undeclared member or mention still fails by name.
+
+## Specification amendment, 2026-08-24
+
+Amended on 2026-08-24 by the engineering owner, during implementation and on an
+explicit request. `SPEC-REB-011` rule 4 is amended to name the reparse-tag
+`stat` route as the junction predicate where `pathlib.Path.is_junction` is
+absent, refusing with `EPS011` only where neither route exists.
+
+The reason is that `pathlib.Path.is_junction` exists only from Python 3.12,
+`pyproject.toml` declares `requires-python = ">=3.11"`, and every workflow lane
+pins `python-version: "3.11"`. Read literally, the approved rule would have
+refused every interpreter at every boundary on every supported lane. The
+amendment preserves rule 4's intent exactly — junction detection stays a
+predicate distinct from symbolic-link detection, and its absence still refuses
+rather than passes — and it adds no acceptance: the `stat` route only classifies
+a path as a junction, so it can only produce `EPS002`.
+
+The amendment changes rule 4's text and nothing else. No case is added,
+removed, renumbered, or reordered, no acceptance becomes a refusal or the
+reverse, and no waiver is introduced.
 
 ## Objective
 

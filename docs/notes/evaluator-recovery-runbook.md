@@ -24,6 +24,8 @@ Technical output is evidence, not retrospective authorization. Never describe an
 - Prepare an isolated build/acquisition directory, fresh external evaluator environment, rollback snapshot location, and evidence directory.
 - Require security and release-owner review before any real credential-bearing step.
 
+Create the external evaluator environment with an ordinary `python -m venv` outside the operational checkout, and refer to it afterwards by its own lexical entry point — `bin/python` on POSIX, `Scripts/python.exe` on Windows. The declared interpreter-safety rule derives the environment root from that lexical path, so a recovery directory reached through a symbolic link or a Windows directory junction is refused even though the interpreter behind it is correct. Under time pressure that reads as an unrelated tooling failure; place the environment on a real path instead of relaxing the check.
+
 Stop on ambiguous source, digest disagreement, candidate checkout imports, expanded product scope, unavailable protected publishing, or any request to weaken identity checks.
 
 ## 4. Immutable selection
@@ -47,6 +49,8 @@ The rehearsal refuses recognized publication credential signals. Never add an op
 ## 7. Public-install proof
 
 After separately authorized real publication, download public bytes into a fresh directory, independently reconcile the selected SHA-256, and install those exact bytes in a fresh external environment. Prove version, archive name and digest, installed payload digest, normalized origins, entry point, isolated interpreter, disabled user site, absent `PYTHONPATH`, and checkout exclusion.
+
+The interpreter facts in that proof are the ones runtime identity now records: whether the entry point is itself a symbolic link, the position class of its resolved target relative to the expected and checkout roots, and the target's SHA-256. Read them with the platform in mind. A POSIX recovery environment normally reports the entry point as a link and its target as `outside-declared-roots`, because `bin/python` points at the system interpreter; that is the accepted shape, not a finding. A Windows `Scripts\python.exe` normally reports no link and `within-expected-root`. What fails the proof on either platform is a target inside the operational checkout, because that would mean the recovery evaluator is backed by candidate bytes.
 
 An index version string, local wheel, editable install, source checkout, or same-version import is not public-install proof.
 

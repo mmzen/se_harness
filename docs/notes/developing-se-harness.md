@@ -175,6 +175,21 @@ The adapter requires a clean committed checkout, a released RLS, canonical prepa
 
 On POSIX, supply the virtual environment's lexical `bin/python` path rather than its resolved system-interpreter target. The adapter permits only that terminal interpreter link, derives evaluator identity from the virtual-environment root, and continues to reject linked parent directories, entry points, wheels, and source-checkout paths. A standard Windows `Scripts/python.exe` remains an ordinary-file path under the same contract.
 
+### The declared interpreter-safety rule
+
+Every `--evaluator-python` argument above reaches the same rule. It is declared once as data in `se_harness/interpreter_safety.json` under schema `se-harness-interpreter-safety-v1`, and read by one loader per runtime: `se_harness/interpreter_safety.py` for the package and `repository_tools/interpreter_safety.py` for the repository-owned adapters. Neither loader imports the other runtime, so the declaration is the only shared thing between them and a cross-runtime conformance test holds the two evaluations in agreement on every declared case.
+
+What that means when a command refuses an interpreter you believe is fine:
+
+- The path is judged **lexically**. The environment root is the entry point's own grandparent, never the resolved target's. Moving or aliasing a venv changes the answer; where the target happens to live does not.
+- The **only** link permitted is the interpreter itself, in the final position. Any link or Windows directory junction in an enclosing directory is refused. Junction detection is a predicate distinct from symbolic-link detection: it uses `pathlib.Path.is_junction` where the running Python has it, and the `stat` reparse-point attribute together with the mount-point reparse tag on Python 3.11, which predates that predicate. A runtime exposing neither route refuses rather than passing the check silently.
+- An interpreter inside the candidate checkout is refused, and so is one whose resolved target lands inside it. That is the self-hosting boundary, not a path-hygiene rule; it is why the evaluator venv must live outside the clone.
+- Refusal happens before any interpreter is spawned and before any target is validated. Refusal messages carry a case identifier and the subject, never the target's absolute path or environment content.
+
+The boundary keeps its own diagnostic code — `RID004` and `RID006` for runtime identity, `MIG205` for governance migration — so an operator-facing message does not change shape. Reading `EPS...` in a detail string tells you which declared case fired.
+
+One acceptance narrowed rather than widened: an interpreter sitting directly below a filesystem root has no derivable environment root and is now refused. No real virtual environment has that shape.
+
 After a separately authorized predecessor `prepare-release` has created the exact contract-named ready RLS, the repository-only binder can first produce a read-only plan:
 
 ```powershell
