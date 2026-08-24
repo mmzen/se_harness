@@ -119,9 +119,14 @@ class ArtifactCatalogTests(unittest.TestCase):
         candidate_router = router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
             "{{HARNESS_VERSION}}", evaluator_version
         )
-        self.assertEqual(router, candidate_router)
+        self.assertNotEqual(router, candidate_router)
+        self.assertIn("## Lifecycle restitution", router)
+        self.assertNotIn("## Lifecycle handoff", router)
+        self.assertIn("## Lifecycle handoff", candidate_router)
+        self.assertIn("The structured\nresult is authoritative", candidate_router)
+        self.assertIn("Model transcription MUST NOT", candidate_router)
         self.assertIn("harnessctl focus", router)
-        self.assertIn("harnessctl focus", candidate_router)
+        self.assertNotIn("harnessctl focus", candidate_router)
         self.assertNotIn("harnessctl preflight", router)
         self.assertNotIn("harnessctl preflight", candidate_router)
         self.assertIn("WORKFLOW.json", candidate_router)
