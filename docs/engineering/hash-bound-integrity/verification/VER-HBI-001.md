@@ -2,13 +2,19 @@
 id = "VER-HBI-001"
 type = "verification"
 title = "Hash-bound class declaration, checkout-byte and mode-consistency assurance"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 verifies = ["REQ-HBI-001", "REQ-HBI-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance

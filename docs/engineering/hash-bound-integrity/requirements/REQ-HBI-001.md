@@ -2,7 +2,7 @@
 id = "REQ-HBI-001"
 type = "requirement"
 title = "Declare and enforce a byte rule for every committed hash-bound text file"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-cross-platform-checkout-test"
 
 [relations]
 derives_from = ["CAP-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "repository-owner"
 +++
 
 # Requirement: Declare and enforce a byte rule for every committed hash-bound text file
@@ -106,6 +112,6 @@ attribute and the conflict.
 
 ## Open decisions
 
-Whether the same completeness assessment additionally becomes a validator plane
-rule is deferred to `INT-HBI-001`'s open decision and is not required here. This
-requirement is satisfied by a `doctor` assessment alone.
+None. `INT-HBI-001`'s open decision was answered on 2026-08-24 with `doctor
+alone`, so this requirement is satisfied by a `doctor` assessment and a validator
+plane rule is outside the packet.

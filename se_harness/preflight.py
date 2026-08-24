@@ -24,6 +24,7 @@ from se_harness.installer import (
     template_root,
     tracked_content,
 )
+from se_harness.hash_bound import assess as assess_hash_bound, is_git_worktree
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
 
 
@@ -105,6 +106,21 @@ def _relative(path: Path, root: Path) -> str:
         return path.as_posix()
 
 
+def _hash_bound_checks(target: Path) -> list[InstallationCheck]:
+    """Return the hash-bound checks in specified order, appended after the sorted set.
+
+    The three names are part of the observable contract in the order
+    declared, effective, consistent, which is not their alphabetical order, so
+    they are appended rather than merged into the sorted list. A target that is
+    not a Git working tree carries no tracked set to assess and emits none of
+    them; every assessable condition, including an unusable Git, fails closed.
+    """
+
+    if not is_git_worktree(target):
+        return []
+    return [InstallationCheck(*result) for result in assess_hash_bound(target)]
+
+
 def inspect_installation(target: Path) -> list[InstallationCheck]:
     """Return deterministic read-only installation and managed-integrity checks."""
 
@@ -136,7 +152,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
 
     lock_path = target / LOCK_NAME
     if not lock_path.is_file():
-        return sorted(checks)
+        return sorted(checks) + _hash_bound_checks(target)
 
     try:
         lock = load_lock(target)
@@ -208,7 +224,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
             checks.append(InstallationCheck(f"lock-extra:{relative}", False, "not in standard template"))
     except (OSError, UnicodeError, IntegrityError, HarnessError, AttributeError) as exc:
         checks.append(InstallationCheck("lock-schema", False, str(exc)))
-    return sorted(checks)
+    return sorted(checks) + _hash_bound_checks(target)
 
 
 def _load_validator_module() -> ModuleType:

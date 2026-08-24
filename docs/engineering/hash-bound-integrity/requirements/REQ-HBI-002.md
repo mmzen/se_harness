@@ -2,7 +2,7 @@
 id = "REQ-HBI-002"
 type = "requirement"
 title = "Determine hash mode from the declared class, not the call site"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "repository-owner"
 +++
 
 # Requirement: Determine hash mode from the declared class, not the call site

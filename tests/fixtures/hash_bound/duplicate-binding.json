@@ -1,0 +1,22 @@
+{
+  "classes": [
+    {
+      "bindings": ["shared_sha256"],
+      "id": "left",
+      "mode": "raw",
+      "patterns": ["docs/left.json"],
+      "region": "repository",
+      "required_attribute": "text eol=lf"
+    },
+    {
+      "bindings": ["shared_sha256"],
+      "id": "right",
+      "mode": "raw",
+      "patterns": ["docs/right.json"],
+      "region": "repository",
+      "required_attribute": "text eol=lf"
+    }
+  ],
+  "schema": "se-harness-hash-bound-classes-v1",
+  "unbound_digest_fields": []
+}

@@ -2,13 +2,19 @@
 id = "SPEC-HBI-001"
 type = "specification"
 title = "Declared hash-bound text classes and fail-closed completeness assessment"
-status = "draft"
-owners = ["engineering-owner", "quality-owner", "security-owner"]
+status = "approved"
+owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 specifies = ["REQ-HBI-001", "REQ-HBI-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Declared hash-bound text classes and fail-closed completeness assessment

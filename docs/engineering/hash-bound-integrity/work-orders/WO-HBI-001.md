@@ -2,7 +2,7 @@
 id = "WO-HBI-001"
 type = "work_order"
 title = "Declare hash-bound text classes and assess their completeness in doctor"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -31,27 +31,50 @@ implements = ["REQ-HBI-001"]
 specifications = ["SPEC-HBI-001"]
 architecture = ["ARCH-HBI-001", "ADR-HBI-001"]
 verification = ["VER-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-24T08:27:26Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T09:04:34Z"
+decided_by = "implementer"
 +++
 
 # Work Order: Declare hash-bound text classes and assess their completeness in doctor
 
 ## Lifecycle and authorization
 
-Not authorized. This work order is `draft` and no owner decision exists yet. It
-requires approval of `INT-HBI-001`, `CAP-HBI-001`, `REQ-HBI-001`, `REQ-HBI-002`,
-`SPEC-HBI-001`, `ARCH-HBI-001` including its `adr_required` decision assessment,
-`ADR-HBI-001`, `VER-HBI-001` and this work order, plus a separate explicit start
-before any implementation surface changes.
+On 2026-08-24 the accountable owner instructed: `doctor alone, I approve the
+chain and you can start the work order`. That decision resolves
+`INT-HBI-001`'s one open decision in favour of a `doctor` check only, approves
+`INT-HBI-001`, `CAP-HBI-001`, `REQ-HBI-001`, `REQ-HBI-002`, `SPEC-HBI-001`,
+`ARCH-HBI-001` including its `adr_required` decision assessment, `ADR-HBI-001`,
+`VER-HBI-001` and this work order, and authorizes the start of this work order
+only.
 
-Approval would authorize bounded local implementation and local qualification
-only. Commit, branch push, pull request, merge, VREC or RLS preparation or
-transition, tag, publication, deployment, credential use, maintenance mutation
-and operational governor adoption each remain separately unauthorized.
+`WO-HBI-002` remains `draft`. The instruction names one work order, and
+`WO-HBI-002` depends on this one being implemented first, so it is not approved
+by implication and its execution surface stays unauthorized.
 
-`INT-HBI-001` carries one open decision — whether the same completeness
-assessment additionally becomes a validator plane rule. This work order
-implements the `doctor` plane only and is satisfiable regardless of how that
-decision resolves. It must not be approved as an implicit answer to it.
+This approval authorizes bounded local implementation and local qualification
+inside `[execution_scope].paths` only. Commit, branch push, pull request, merge,
+VREC or RLS preparation or transition, tag, publication, deployment, credential
+use, maintenance mutation and operational governor adoption each remain
+separately unauthorized.
+
+No validator plane rule is in scope. The owner's answer makes it a non-goal of
+this packet; adding one later would require its own governing chain.
 
 ## Objective
 

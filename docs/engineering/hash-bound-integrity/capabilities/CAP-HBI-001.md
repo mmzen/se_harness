@@ -2,13 +2,19 @@
 id = "CAP-HBI-001"
 type = "capability"
 title = "Prove that committed hash-bound text keeps its bound bytes"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 derives_from = ["INT-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "repository-owner"
 +++
 
 # Capability: Prove that committed hash-bound text keeps its bound bytes

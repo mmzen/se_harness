@@ -2,12 +2,18 @@
 id = "INT-HBI-001"
 type = "intent"
 title = "Keep committed hash-bound bytes stable on every checkout"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "repository-owner"
 +++
 
 # Intent: Keep committed hash-bound bytes stable on every checkout
@@ -116,8 +122,12 @@ and are read, never rewritten.
 - Assumption: the evaluator-upgrade path is exercised rarely enough that the
   known lock defect has not yet caused a visible failure, which makes it a
   latent rather than an active incident.
-- Open decision for approval: whether the completeness check is a `doctor`
-  check only, or additionally a validator plane rule. The specification
-  recommends `doctor` alone, because checkout-byte effectiveness is a property
-  of an installed working tree rather than of the artifact graph, and because a
-  validator rule would not bind until a separately authorized governor upgrade.
+- Resolved decision: on 2026-08-24 the accountable owner answered the one open
+  decision this intent carried — whether the completeness check is a `doctor`
+  check only, or additionally a validator plane rule — with `doctor alone`. The
+  reasoning the specification offered stands: checkout-byte effectiveness is a
+  property of an installed working tree rather than of the artifact graph, and a
+  validator rule would not bind this repository's own required gate until a
+  separately authorized governor upgrade. No open decision remains in this
+  intent. A validator plane rule is now a non-goal of this packet and would
+  require its own governing chain.

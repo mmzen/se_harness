@@ -2,7 +2,7 @@
 id = "ARCH-HBI-001"
 type = "architecture"
 title = "One declaration boundary for committed hash-bound bytes"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,6 +16,12 @@ outcome = "adr_required"
 triggers = ["cross-cutting-policy", "security-privacy-or-trust-boundary", "difficult-to-reverse", "material-alternatives"]
 rationale = "The architecture decides where the obligation to declare a byte rule lives, which component may answer what governs a file's bytes, and how absence fails. It binds every hashing call site across installer, upgrade authorization, mutation guard, release bootstrap and candidate acceptance, it governs exact-byte trust, its declaration reaches consumer installations through the canonical template and is therefore costly to reverse, and materially different alternatives exist including hand-maintained attributes, a repository-local test, and normalizing all committed text."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: One declaration boundary for committed hash-bound bytes

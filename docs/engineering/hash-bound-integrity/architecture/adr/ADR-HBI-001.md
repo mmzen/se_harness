@@ -2,13 +2,19 @@
 id = "ADR-HBI-001"
 type = "adr"
 title = "Declared hash-bound class registry with fail-closed completeness assessment"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 decides = ["ARCH-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T08:27:00Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Declared hash-bound class registry with fail-closed completeness assessment
