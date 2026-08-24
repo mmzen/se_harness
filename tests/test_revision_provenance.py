@@ -575,6 +575,43 @@ class RevisionValidatorTests(unittest.TestCase):
         self.assertEqual(["VREC-002"], source["superseded_by"])
         self.assertEqual("quality-owner", source["supersession_authorized_by"])
 
+    def test_prepared_supersession_uses_preparation_not_verification_decision_fields(self) -> None:
+        create_additional_chain(self.root, work_order_status="released")
+        candidate_validator = _load_validator_module()
+        current_source = verification_record("a" * 40).replace(
+            'verified_at = "2026-08-11T12:00:00Z"',
+            'prepared_at = "2026-08-11T12:00:00Z"\nprepared_by = "quality-owner"',
+        )
+        valid_source = superseded_record(current_source, "VREC-002")
+        source_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        write(source_path, valid_source)
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-002.md",
+            aggregate_verification_record("b" * 40),
+        )
+        self.assertEqual([], candidate_validator.validate_repository(self.root).errors)
+
+        for decision_field in (
+            'verified_at = "2026-08-11T12:00:00Z"',
+            'verified_by = "quality-owner"',
+        ):
+            with self.subTest(decision_field=decision_field):
+                invalid = valid_source.replace(
+                    'artifact_snapshot_sha256 =',
+                    f'{decision_field}\nartifact_snapshot_sha256 =',
+                    1,
+                )
+                write(source_path, invalid)
+                messages = {
+                    item.message
+                    for item in candidate_validator.validate_repository(self.root).errors
+                }
+                field_name = decision_field.split(" =", 1)[0]
+                self.assertIn(
+                    f"prepared superseded verification_record must omit decision field '{field_name}'",
+                    messages,
+                )
+
     def test_supersession_requires_structured_fields_only_on_superseded_records(self) -> None:
         create_additional_chain(self.root, work_order_status="released")
         record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"

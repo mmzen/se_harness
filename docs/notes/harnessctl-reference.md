@@ -264,6 +264,8 @@ Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candi
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
+If a later verified or released VREC fully covers a prepared ready record, the assurance owner may instead apply the declared `ready -> superseded` transition and name that successor with `--reason`. The command preserves `prepared_at` and `prepared_by`, adds only the supersession decision fields, typed successor relation, lifecycle event, status, and update date, and does not add `verified_at` or `verified_by`. Supersession means the proposal was retired, not verified. Historical superseded VRECs without preparation fields may retain the older valid `verified_at` capture shape; validation does not rewrite them or fabricate `verified_by`.
+
 ## Commit-bound release preparation
 
 ```text
