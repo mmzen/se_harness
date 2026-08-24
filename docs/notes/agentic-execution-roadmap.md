@@ -340,6 +340,15 @@ skill steps or scripts, not separately discoverable top-level skills.
 - the user can complete a representative bounded workflow with fewer procedural
   prompts and no loss of evidence.
 
+### Repository host activation follow-through
+
+The four canonical cores remain under `.agents/skills`. Codex discovers them
+directly. Claude Code receives same-named repository-local adapters under
+`.claude/skills` that load the canonical core without copying its procedure.
+Writing skills remain user-explicit-only in both hosts; orientation remains
+read-only and matchable. `WO-AEX-004` implements this bounded availability
+layer before Phase 4 changes delegation or mutation admission.
+
 ## Phase 4 - Enable governed delegated execution
 
 ### Objective

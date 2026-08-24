@@ -785,7 +785,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             with self.subTest(skill=name):
                 root = target / ".agents/skills" / name
                 self.assertEqual(
-                    ["SKILL.md", helper, "skill-contract.json"],
+                    ["SKILL.md", "agents/openai.yaml", helper, "skill-contract.json"],
                     sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()),
                 )
                 writing_contract = json.loads((root / "skill-contract.json").read_text(encoding="utf-8"))
@@ -798,8 +798,26 @@ class InstructionArchitectureTests(unittest.TestCase):
                 instructions = (root / "SKILL.md").read_text(encoding="utf-8").lower()
                 for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
                     self.assertNotIn(provider, instructions)
-                for relative in ("SKILL.md", helper, "skill-contract.json"):
+                self.assertEqual(
+                    "policy:\n  allow_implicit_invocation: false\n",
+                    (root / "agents/openai.yaml").read_text(encoding="utf-8"),
+                )
+                for relative in ("SKILL.md", "agents/openai.yaml", helper, "skill-contract.json"):
                     self.assertEqual("managed", lock["files"][f".agents/skills/{name}/{relative}"]["mode"])
+
+        claude_root = target / ".claude/skills"
+        self.assertEqual(
+            {"harness-orient", *writing_skills},
+            {path.name for path in claude_root.iterdir() if path.is_dir()},
+        )
+        for name in {"harness-orient", *writing_skills}:
+            with self.subTest(claude_adapter=name):
+                adapter = claude_root / name / "SKILL.md"
+                self.assertEqual(["SKILL.md"], [path.name for path in adapter.parent.iterdir()])
+                raw = adapter.read_text(encoding="utf-8")
+                self.assertIn(f"canonical-path: .agents/skills/{name}", raw)
+                self.assertEqual(name != "harness-orient", "disable-model-invocation: true" in raw)
+                self.assertEqual("managed", lock["files"][f".claude/skills/{name}/SKILL.md"]["mode"])
 
 
 AGENTS = REPOSITORY_ROOT / "AGENTS.md"

@@ -1,7 +1,7 @@
 {
   "schema": "se-harness-skill-contract-v2",
   "name": "harness-prepare-assurance",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "outcome": "Prepare one exact-candidate ready verification record and assurance decision packet without verifying or delivering it.",
   "activation": {
     "explicit": true,

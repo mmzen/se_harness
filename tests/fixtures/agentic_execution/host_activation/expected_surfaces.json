@@ -1,0 +1,25 @@
+{
+  "schema": "se-harness-host-surface-vectors-v1",
+  "skills": {
+    "harness-draft-change": {
+      "canonical_path": ".agents/skills/harness-draft-change",
+      "claude_disable_model_invocation": true,
+      "codex_policy_path": "agents/openai.yaml"
+    },
+    "harness-execute-work-order": {
+      "canonical_path": ".agents/skills/harness-execute-work-order",
+      "claude_disable_model_invocation": true,
+      "codex_policy_path": "agents/openai.yaml"
+    },
+    "harness-orient": {
+      "canonical_path": ".agents/skills/harness-orient",
+      "claude_disable_model_invocation": null,
+      "codex_policy_path": null
+    },
+    "harness-prepare-assurance": {
+      "canonical_path": ".agents/skills/harness-prepare-assurance",
+      "claude_disable_model_invocation": true,
+      "codex_policy_path": "agents/openai.yaml"
+    }
+  }
+}

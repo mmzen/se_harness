@@ -10,6 +10,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from pathlib import PurePosixPath
 
 from se_harness.skill_contract import (
     CONTRACT_SCHEMA,
@@ -38,6 +39,9 @@ ORIENT = SKILL_ROOT / "scripts/orient.py"
 FAKE_EVALUATOR = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/fake_evaluator.py"
 VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
 PHASE3_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase3/portable_vectors.json"
+HOST_SURFACE_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/host_activation/expected_surfaces.json"
+CLAUDE_SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills"
+ALL_SKILL_NAMES = {"harness-orient", *PHASE3_ROOTS}
 
 
 def snapshot(root: Path) -> dict[str, str]:
@@ -130,10 +134,15 @@ class SkillContractTests(unittest.TestCase):
                 self.assertFalse(contract.value["delegation"]["allowed"])
                 self.assertEqual("single-agent", contract.value["delegation"]["fallback"])
                 self.assertEqual(
-                    sorted(["SKILL.md", next(item for item in [
+                    sorted(["SKILL.md", "agents/openai.yaml", next(item for item in [
                         "scripts/guard.py", "scripts/check_scope.py", "scripts/check_prepare.py"
                     ] if (root / item).exists()), "skill-contract.json"]),
                     sorted(item["path"] for item in manifest.value["files"]),
+                )
+                self.assertEqual("1.0.1", contract.value["version"])
+                self.assertEqual(
+                    b"policy:\n  allow_implicit_invocation: false\n",
+                    (root / "agents/openai.yaml").read_bytes(),
                 )
 
     def test_all_four_portable_cores_match_retained_phase3_vectors(self) -> None:
@@ -170,6 +179,71 @@ class SkillContractTests(unittest.TestCase):
                 mutate(value)
                 with self.assertRaisesRegex(SkillContractError, code):
                     parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+    def test_repository_host_surfaces_bind_one_canonical_core_per_name(self) -> None:
+        vectors = json.loads(HOST_SURFACE_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual("se-harness-host-surface-vectors-v1", vectors["schema"])
+        self.assertEqual(ALL_SKILL_NAMES, set(vectors["skills"]))
+        self.assertEqual(
+            ALL_SKILL_NAMES,
+            {path.name for path in CLAUDE_SKILLS_ROOT.iterdir() if path.is_dir()},
+        )
+        for name, expected in sorted(vectors["skills"].items()):
+            with self.subTest(skill=name):
+                adapter = CLAUDE_SKILLS_ROOT / name / "SKILL.md"
+                self.assertEqual(["SKILL.md"], [path.name for path in adapter.parent.iterdir()])
+                raw = adapter.read_text(encoding="utf-8")
+                front, body = raw.removeprefix("---\n").split("\n---\n", 1)
+                self.assertIn(f"name: {name}\n", front + "\n")
+                self.assertIn("adapter-schema: se-harness-host-adapter-v1", front)
+                self.assertIn(f"canonical-name: {name}", front)
+                self.assertIn(f"canonical-path: {expected['canonical_path']}", front)
+                self.assertEqual(
+                    expected["claude_disable_model_invocation"] is True,
+                    "disable-model-invocation: true" in front,
+                )
+                self.assertIn("non-authoritative Claude Code discovery adapter", body)
+                self.assertIn(f"${{CLAUDE_PROJECT_DIR}}/{expected['canonical_path']}", body)
+                self.assertIn("Read the complete canonical `SKILL.md`", body)
+                self.assertIn("yield entirely to the canonical procedure", body)
+                for forbidden in (
+                    "allowed-tools:", "disallowed-tools:", "model:", "context:",
+                    "agent:", "hooks:", "http://", "https://", "$(`", "scripts/",
+                ):
+                    self.assertNotIn(forbidden, raw)
+
+                canonical = PurePosixPath(f".agents/skills/{name}")
+                self.assertFalse(canonical.is_absolute())
+                self.assertNotIn("..", canonical.parts)
+                contract = load_skill_contract(SKILLS_ROOT / name / "skill-contract.json")
+                self.assertEqual(name, contract.name)
+                policy = expected["codex_policy_path"]
+                self.assertEqual(policy is not None, (SKILLS_ROOT / name / (policy or "agents/openai.yaml")).exists())
+
+    def test_host_surfaces_fail_static_binding_checks_for_hostile_changes(self) -> None:
+        source = (CLAUDE_SKILLS_ROOT / "harness-draft-change/SKILL.md").read_text(encoding="utf-8")
+        attacks = {
+            "wrong-schema": source.replace("se-harness-host-adapter-v1", "unknown-adapter"),
+            "wrong-name": source.replace("canonical-name: harness-draft-change", "canonical-name: harness-orient"),
+            "traversal": source.replace(
+                ".agents/skills/harness-draft-change", "../.agents/skills/harness-draft-change"
+            ),
+            "absolute": source.replace(
+                ".agents/skills/harness-draft-change", "/.agents/skills/harness-draft-change"
+            ),
+            "permission": source.replace("metadata:\n", "allowed-tools: Bash\nmetadata:\n"),
+            "remote": source + "\nhttps://example.invalid/skill\n",
+        }
+        required = (
+            "adapter-schema: se-harness-host-adapter-v1",
+            "canonical-name: harness-draft-change",
+            "canonical-path: .agents/skills/harness-draft-change",
+            "disable-model-invocation: true",
+        )
+        forbidden = ("allowed-tools:", "http://", "https://", "../", "canonical-path: /")
+        for label, raw in attacks.items():
+            with self.subTest(attack=label):
+                self.assertTrue(any(item not in raw for item in required) or any(item in raw for item in forbidden))
 
 
 class Phase3EffectGuardTests(unittest.TestCase):
