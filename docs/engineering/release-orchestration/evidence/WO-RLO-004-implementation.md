@@ -242,6 +242,22 @@ The in-tree `doctor` FAIL set is candidate-versus-released skew, not damage: six
 
 `+8` artifacts and unchanged warning counts on both validators mean the eight new `RLO-004` artifacts introduce no new warning of any class.
 
+## The hosted lane's first run did not happen on pull-request opening
+
+The owner authorized the push and the pull request on 2026-08-24, expecting them to produce the lane's first hosted execution on both runner types. They did not, and the reason lies outside this packet.
+
+| Fact | Value |
+|---|---|
+| Branch pushed | `61d8cae` at 14:47:06 UTC, tracking `origin/feat/rlo-004-publication-rehearsal` |
+| Pull request | [#138](https://github.com/mmzen/se_harness/pull/138), opened 14:47:41 UTC, `Harness-Work-Order: WO-RLO-004` present in the fetched-back body with no CR characters |
+| Push-triggered checks on that commit | all green — `validate`, candidate source and package evidence, governance migration on Linux and Windows, the platform reconcile, and the governor transition assessment |
+| `pull_request`-event workflow runs for #138 | **none created**, including after a close and reopen |
+| Publication Rehearsal runs | none; the workflow is not yet registered under `/actions/workflows` because it has never run |
+
+The lane triggers on `pull_request` and on `push` to `main`, so a feature-branch push is not supposed to run it. The missing part is the `pull_request` event itself, and it is not a property of this lane: pull request [#137](https://github.com/mmzen/se_harness/pull/137), which does not contain the lane, was opened three minutes earlier and likewise has no `pull_request`-event run for any of the three pre-existing workflows, while pull request #136 was opened at 13:42:14 UTC and had all three within three seconds. Repository-wide `pull_request` run creation therefore stopped between those two times, and both open pull requests are affected identically.
+
+The consequence for this work order is unchanged from the section above: the Linux half of `REQ-RLO-013` remains unproven on a hosted runner. The lane's first hosted execution now awaits either a later push to the open pull request once `pull_request` delivery recovers, or the merge to `main`, both of which are inside the approved trigger set. Nothing here justifies widening that set to every branch push, which would run two hosted rehearsals for every push in the repository; that is an owner decision and is not taken here.
+
 ## Repository/product boundary
 
 No changed path lies under `se_harness/`, `templates/`, the eight managed `scripts/` files, `.engineering-harness.toml`, `.engineering-harness.lock`, `.github/workflows/engineering-harness.yml`, the managed policy documents, or `docs/engineering/templates/`. `harnessctl` gains no rehearsal command or option. `check_portable_release_surface.py` passes, though it proves the absence of the *governor and self-hosting* surface and knows nothing of the rehearsal; the rehearsal's portable boundary is proven instead by `test_no_packaged_module_or_template_mentions_the_rehearsal` and `test_the_rehearsal_lives_only_in_repository_owned_locations`, which assert the rehearsal exists only in `.github/`, `tests/`, and `docs/`.
