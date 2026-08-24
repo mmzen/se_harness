@@ -1,0 +1,98 @@
+{
+  "schema": "se-harness-publication-rehearsal-mechanics/v1",
+  "authority": "fixture data for tests; declares no real mechanic and grants nothing",
+  "orchestrator": ".github/workflows/orchestrator.yml",
+  "rehearsal_lane": ".github/workflows/lane.yml",
+  "required_platforms": [
+    "Linux",
+    "Windows"
+  ],
+  "external_state_actions": [
+    "pypa/gh-action-pypi-publish"
+  ],
+  "infrastructure_actions": [
+    "actions/checkout"
+  ],
+  "realization_surfaces": [
+    "platform-toolchain",
+    "rehearsal-program",
+    "repository-program",
+    "shell-composition"
+  ],
+  "trivia_commands": [
+    "do",
+    "done",
+    "echo",
+    "for",
+    "set"
+  ],
+  "steps": [
+    {
+      "job": "resolve",
+      "step": "Resolve one canonical release plan",
+      "run_sha256": "d26447055899da2a130e3a5f0b56e4028f79afee65155646c36496f94fe86b16",
+      "mechanics": [
+        "plan-resolution"
+      ]
+    },
+    {
+      "job": "qualify",
+      "step": "Build both deterministic distribution sets",
+      "run_sha256": "a60cde437a8f0c779c624fee1873c03872210a5b91c88616130b33d0d8e9732d",
+      "mechanics": [
+        "deterministic-build",
+        "build-determinism-comparison"
+      ]
+    }
+  ],
+  "mechanics": [
+    {
+      "id": "plan-resolution",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": [
+        "Linux"
+      ],
+      "commands": [
+        "python .github/scripts/publish_release.py resolve"
+      ],
+      "realized_by": "repository-program",
+      "summary": "resolve one canonical plan through the orchestrator's own command"
+    },
+    {
+      "id": "deterministic-build",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": [
+        "Windows"
+      ],
+      "commands": [
+        "python -m build"
+      ],
+      "realized_by": "platform-toolchain",
+      "summary": "build both distribution sets with the pinned build tools"
+    },
+    {
+      "id": "build-determinism-comparison",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": [
+        "Windows"
+      ],
+      "commands": [
+        "cmp"
+      ],
+      "realized_by": "shell-composition",
+      "summary": "compare the two independently built sets byte for byte"
+    },
+    {
+      "id": "teardown",
+      "origin": "rehearsal-only",
+      "job": null,
+      "orchestrator_platforms": [],
+      "commands": [],
+      "realized_by": "rehearsal-program",
+      "summary": "remove every derived tree without following a link"
+    }
+  ]
+}

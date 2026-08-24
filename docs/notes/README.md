@@ -33,6 +33,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Testing a current commit with an integration package](integration-packages.md) | How do I safely download, verify, install, test, and remove an expiring non-release build? |
 | [Integration Package definition-review packet](integration-package-definition-review.md) | Which exact accountable approvals govern the proposed installable current-commit testing lane? |
 | [Publishing the SE Harness development dashboard](harness-dashboard-publication.md) | How is the repository's release-bound public Explorer demonstration deployed and replayed? |
+| [Rehearsing the credential-free publication path](release-publication-rehearsal.md) | How is the last mile exercised on both runner platforms before release approval, and how is drift from the orchestrator caught? |
 
 ## Know what is authoritative
 

@@ -43,3 +43,17 @@ The repository release workflow currently materializes the exact tag, GitHub Rel
 - `WO-RLO-003`: completed bounded repository workflow implementation with commit-bound assurance recorded by verified `VREC-RLO-003`; no release, publication, or branch action is implied.
 
 Acceptance scenarios are retained in `acceptance/maintenance-line-reconciliation.feature`; implementation evidence is retained in `evidence/WO-RLO-003-verification.md`. The completed work creates no production branch and implies no VREC, release, publication, or deployment.
+
+## Publication-rehearsal packet
+
+Issue [#111](https://github.com/mmzen/se_harness/issues/111) records `RC-060-11` from the immutable `0.6.0` release-recovery analysis: real hosted platform details were tested too late. The orchestrator's credential-free work is split so that `resolve` runs only on `ubuntu-latest` and `qualify` only on `windows-2022`, leaving each half unexercised on the other platform until a live release. RLO-004 rehearses the whole credential-free surface on both platforms before release approval and leaves the orchestrator unchanged.
+
+- `CAP-RLO-003`: rehearse the credential-free last mile before release approval.
+- `REQ-RLO-013`: run every credential-free mechanic on both runner platforms, creating no external state.
+- `REQ-RLO-014`: fail closed when the orchestrator's credential-free mechanics and the rehearsal's coverage diverge in either direction.
+- `SPEC-RLO-004`: exact mechanic inventory, platform-neutrality, determinism, teardown, and divergence contract.
+- `ARCH-RLO-004` and `ADR-RLO-004`: a parallel credential-free lane behind a checked equivalence seam, recording the deferred shared-implementation refactor and its revisiting condition.
+- `VER-RLO-004`: platform, determinism, teardown, classification, and divergence verification.
+- `WO-RLO-004`: bounded implementation authorized on 2026-08-24; no release, publication, deployment, or external action is implied.
+
+Acceptance scenarios are retained in `acceptance/publication-rehearsal.feature`; implementation evidence is retained in `evidence/WO-RLO-004-implementation.md`. A rehearsal result is derived operational evidence: it does not approve, prepare, verify, or release anything, and it does not substitute for the qualification that runs inside an authorized release.

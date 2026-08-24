@@ -1,0 +1,323 @@
+{
+  "schema": "se-harness-publication-rehearsal-mechanics/v1",
+  "authority": "repository policy data for SPEC-RLO-004; derived operational input, never formal artifact authority",
+  "orchestrator": ".github/workflows/publish-pypi.yml",
+  "rehearsal_lane": ".github/workflows/publication-rehearsal.yml",
+  "required_platforms": ["Linux", "Windows"],
+  "external_state_actions": [
+    "actions/configure-pages",
+    "actions/upload-pages-artifact",
+    "actions/deploy-pages",
+    "pypa/gh-action-pypi-publish"
+  ],
+  "infrastructure_actions": [
+    "actions/checkout",
+    "actions/setup-python",
+    "actions/upload-artifact",
+    "actions/download-artifact"
+  ],
+  "realization_surfaces": [
+    "candidate-cli",
+    "platform-toolchain",
+    "rehearsal-program",
+    "released-evaluator",
+    "repository-program",
+    "shell-composition"
+  ],
+  "trivia_commands": [
+    "[[",
+    "cd",
+    "cp",
+    "do",
+    "done",
+    "echo",
+    "exit",
+    "export",
+    "fi",
+    "find",
+    "for",
+    "grep",
+    "mkdir",
+    "printf",
+    "set",
+    "test",
+    "wc"
+  ],
+  "steps": [
+    {
+      "job": "resolve",
+      "step": "Validate the selected RLS input",
+      "run_sha256": "89cd8fd29be57f860ca28c90d62bc861143035265ec523ea1d48fe440a2be537",
+      "mechanics": ["release-record-format-validation"]
+    },
+    {
+      "job": "resolve",
+      "step": "Resolve the independently released evaluator",
+      "run_sha256": "250a62a1b2304851cf85e335ebb4488f3a3c2083d4cc9172ce1e6d1833a62b84",
+      "mechanics": ["evaluator-resolution"]
+    },
+    {
+      "job": "resolve",
+      "step": "Acquire and prove the released evaluator",
+      "run_sha256": "352ef19b88da30445a906b42faaa5fa5068a65a6aefb9ebc4f900cd40d3b68cd",
+      "mechanics": [
+        "evaluator-acquisition-and-hash-proof",
+        "evaluator-identity-proof",
+        "predecessor-view-qualification"
+      ]
+    },
+    {
+      "job": "resolve",
+      "step": "Derive one canonical release plan",
+      "run_sha256": "3e6641eb359be15f6764ba504a9a18656099cf6326c9040a34c93377da78b33e",
+      "mechanics": ["distribution-policy-validation", "plan-resolution"]
+    },
+    {
+      "job": "resolve",
+      "step": "Retain a bounded resolution refusal",
+      "run_sha256": "901d51c5f8369ea43d94e202fd74b4ddf36df6b02f9ae5bdfdd7199d7edef8af",
+      "mechanics": ["resolution-refusal-document"]
+    },
+    {
+      "job": "qualify",
+      "step": "Export the exact candidate twice",
+      "run_sha256": "88e15f4874e2ab2fce205edc93ec5c36a6913ae9e1e354a00567b5c9c0964c9a",
+      "mechanics": ["candidate-export", "temporary-path-identity"]
+    },
+    {
+      "job": "qualify",
+      "step": "Run candidate verification without publication credentials",
+      "run_sha256": "63e86f024a6ddc7ccac0a93a8fa1caa50a85498bc9f50ae1617783102cd6f7c4",
+      "mechanics": [
+        "temporary-path-identity",
+        "pinned-build-tool-installation",
+        "complete-candidate-qualification",
+        "candidate-unit-suite",
+        "cli-smoke-check"
+      ]
+    },
+    {
+      "job": "qualify",
+      "step": "Build both deterministic distribution sets",
+      "run_sha256": "3483a85ec4393abf0f29798cd964da966cfcc7b603175ceb8649f2f2a90bada5",
+      "mechanics": [
+        "temporary-path-identity",
+        "deterministic-build",
+        "sdist-normalization",
+        "build-determinism-comparison"
+      ]
+    },
+    {
+      "job": "qualify",
+      "step": "Assemble and verify the exact release bundle",
+      "run_sha256": "9ae63cd2e05d97297011ca134bb3ec801af16f89e5df8b9a46b590897e41affc",
+      "mechanics": [
+        "temporary-path-identity",
+        "bundle-assembly",
+        "bundle-manifest-creation",
+        "build-manifest-verification",
+        "bundle-verification"
+      ]
+    }
+  ],
+  "mechanics": [
+    {
+      "id": "release-record-format-validation",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": [],
+      "realized_by": "shell-composition",
+      "summary": "Refuse any release_record input that is not a canonical RLS identifier before anything else runs."
+    },
+    {
+      "id": "evaluator-resolution",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python .github/scripts/publish_dashboard.py evaluator"],
+      "realized_by": "repository-program",
+      "summary": "Resolve the independently released evaluator identity, wheel name, URL, and digests from the governance snapshot."
+    },
+    {
+      "id": "evaluator-acquisition-and-hash-proof",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python -m venv", "curl", "sha256sum", "python -m pip install"],
+      "realized_by": "platform-toolchain",
+      "summary": "Create the evaluator environment, fetch the public evaluator wheel, prove its digest before use, and install it without dependencies."
+    },
+    {
+      "id": "evaluator-identity-proof",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python -m se_harness identity"],
+      "realized_by": "released-evaluator",
+      "summary": "Prove the installed evaluator's released-evaluator role, version, isolated interpreter, and console entry point."
+    },
+    {
+      "id": "predecessor-view-qualification",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python -m se_harness qualify predecessor-view"],
+      "realized_by": "candidate-cli",
+      "summary": "Qualify the contract-bound release view against its exact external predecessor evaluator."
+    },
+    {
+      "id": "distribution-policy-validation",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python scripts/validate_release_distributions.py"],
+      "realized_by": "repository-program",
+      "summary": "Validate repository distribution policy and require the named release record to carry usable provenance."
+    },
+    {
+      "id": "plan-resolution",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python .github/scripts/publish_release.py resolve"],
+      "realized_by": "repository-program",
+      "summary": "Derive one canonical release plan from a released record at the default branch head."
+    },
+    {
+      "id": "resolution-refusal-document",
+      "origin": "orchestrator",
+      "job": "resolve",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["jq"],
+      "realized_by": "platform-toolchain",
+      "summary": "Emit the bounded canonical release-result document that records a refused resolution."
+    },
+    {
+      "id": "candidate-export",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["git worktree add", "git archive", "tar"],
+      "realized_by": "platform-toolchain",
+      "summary": "Export the exact candidate commit twice from the repository's own archive, plus a detached checkout for candidate verification."
+    },
+    {
+      "id": "temporary-path-identity",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["cygpath"],
+      "realized_by": "platform-toolchain",
+      "summary": "Establish one canonical temporary root that every child process observes under the platform's own path spelling."
+    },
+    {
+      "id": "pinned-build-tool-installation",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python -m pip install"],
+      "realized_by": "platform-toolchain",
+      "summary": "Install the exact pinned build, setuptools, and wheel versions the release build requires."
+    },
+    {
+      "id": "complete-candidate-qualification",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python -m se_harness qualify complete-candidate"],
+      "realized_by": "candidate-cli",
+      "summary": "Qualify the complete candidate graph as candidate-controlled evidence at the exact candidate commit."
+    },
+    {
+      "id": "candidate-unit-suite",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python -m unittest discover"],
+      "realized_by": "candidate-cli",
+      "summary": "Run the candidate's own unit suite inside the exported candidate tree."
+    },
+    {
+      "id": "cli-smoke-check",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python -m se_harness"],
+      "realized_by": "candidate-cli",
+      "summary": "Confirm the candidate command-line entry point loads and reports its own usage."
+    },
+    {
+      "id": "deterministic-build",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python -m build"],
+      "realized_by": "platform-toolchain",
+      "summary": "Build exactly one wheel and one sdist per exported tree without build isolation."
+    },
+    {
+      "id": "sdist-normalization",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python scripts/normalize_sdist.py"],
+      "realized_by": "repository-program",
+      "summary": "Normalize each raw sdist with the candidate's own normalizer at the candidate commit's own timestamp."
+    },
+    {
+      "id": "build-determinism-comparison",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["cmp"],
+      "realized_by": "platform-toolchain",
+      "summary": "Compare the wheel and the normalized sdist of the two independent distribution sets byte for byte."
+    },
+    {
+      "id": "bundle-assembly",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": [],
+      "realized_by": "shell-composition",
+      "summary": "Assemble the release bundle directory holding the wheel, the sdist, and canonical SHA256SUMS bytes."
+    },
+    {
+      "id": "bundle-manifest-creation",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python scripts/create_release_bundle_manifest.py"],
+      "realized_by": "repository-program",
+      "summary": "Create the deterministic release-bundle manifest for the assembled distribution set."
+    },
+    {
+      "id": "build-manifest-verification",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python .github/scripts/publish_release.py verify-build-manifest"],
+      "realized_by": "repository-program",
+      "summary": "Verify the rebuilt distribution manifest field by field against the resolved plan."
+    },
+    {
+      "id": "bundle-verification",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Windows"],
+      "commands": ["python .github/scripts/publish_release.py verify-bundle"],
+      "realized_by": "repository-program",
+      "summary": "Verify the assembled bundle's file set, digests, and canonical checksum bytes against the resolved plan."
+    },
+    {
+      "id": "teardown",
+      "origin": "rehearsal-only",
+      "job": null,
+      "orchestrator_platforms": [],
+      "commands": [],
+      "realized_by": "rehearsal-program",
+      "summary": "Remove every derived tree without following a link out of the rehearsal root, and leave the repository worktree free of residue. The orchestrator does not perform this mechanic because its runners are ephemeral."
+    }
+  ]
+}
