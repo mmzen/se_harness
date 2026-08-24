@@ -1,0 +1,25 @@
+{
+  "schema": "se-harness-phase3-portable-vectors-v1",
+  "skills": {
+    "harness-draft-change": {
+      "contract_sha256": "fec156c7c07d97e6a25eed06acdca54c622dd26aa1b14f72ce23e65e3f20f9f1",
+      "manifest_sha256": "e04c232791b817a4138d5659a37dff11136a3a2937d90e26ba9c8fbca18ead78",
+      "schema": "se-harness-skill-contract-v2"
+    },
+    "harness-execute-work-order": {
+      "contract_sha256": "0f93a7960174846125849052fa690e4d1c1899828e02b1febfc394c034e8c3b5",
+      "manifest_sha256": "a34c7fa136c8a533c6e7abb1729ca36ad599521b012df18d5c624b413d03a8e2",
+      "schema": "se-harness-skill-contract-v2"
+    },
+    "harness-orient": {
+      "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+      "manifest_sha256": "73d94b02dd1008f5cb8b6a828ba920c128d06b82fc6e4b9b97720b6d91ca7cea",
+      "schema": "se-harness-skill-contract-v1"
+    },
+    "harness-prepare-assurance": {
+      "contract_sha256": "e004d2cecf29668ee249c94d02f3b830630dc8819fcd3a420625f0252f3e0f03",
+      "manifest_sha256": "7075e1a42f264d7289e5a82bda04ec0e93bf9103389af22a07b235e87b7c4f24",
+      "schema": "se-harness-skill-contract-v2"
+    }
+  }
+}

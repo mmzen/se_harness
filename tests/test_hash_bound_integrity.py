@@ -320,6 +320,15 @@ class DeclarationShapeTests(unittest.TestCase):
         self.assertIn('"hash_bound_classes.json"', pyproject)
         self.assertIn("include se_harness/*.json", (ROOT / "MANIFEST.in").read_text(encoding="utf-8"))
 
+    def test_repository_build_recipe_digest_is_explicitly_inventoried(self) -> None:
+        self.assertIn(
+            (
+                "build_recipe_sha256",
+                "repository-owned release recipe digest; validated by repository policy",
+            ),
+            load_declaration().unbound_digest_fields,
+        )
+
 
 def _leaf_strings(value: object) -> list[str]:
     if isinstance(value, str):

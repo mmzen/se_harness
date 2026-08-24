@@ -25,6 +25,7 @@ include = ["se_harness*"]
 
 [tool.setuptools.package-data]
 se_harness = [
+  "agent_contract.json",
   "workflow_contract.json",
   "quality_gates_contract.json",
   "governance_migration_contract.json",
@@ -69,6 +70,27 @@ se_harness = [
 ]
 "share/se-harness/templates/repository/standard/.agents/skills/harness-orient/scripts" = [
   "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-draft-change" = [
+  "templates/repository/standard/.agents/skills/harness-draft-change/SKILL.md",
+  "templates/repository/standard/.agents/skills/harness-draft-change/skill-contract.json",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-draft-change/scripts" = [
+  "templates/repository/standard/.agents/skills/harness-draft-change/scripts/guard.py",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-execute-work-order" = [
+  "templates/repository/standard/.agents/skills/harness-execute-work-order/SKILL.md",
+  "templates/repository/standard/.agents/skills/harness-execute-work-order/skill-contract.json",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-execute-work-order/scripts" = [
+  "templates/repository/standard/.agents/skills/harness-execute-work-order/scripts/check_scope.py",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-prepare-assurance" = [
+  "templates/repository/standard/.agents/skills/harness-prepare-assurance/SKILL.md",
+  "templates/repository/standard/.agents/skills/harness-prepare-assurance/skill-contract.json",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-prepare-assurance/scripts" = [
+  "templates/repository/standard/.agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
 ]
 [tool.unittest]
 start-directory = "tests"

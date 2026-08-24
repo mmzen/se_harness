@@ -48,6 +48,10 @@
       "reason": "generated dashboard manifest; not committed text"
     },
     {
+      "field": "build_recipe_sha256",
+      "reason": "repository-owned release recipe digest; validated by repository policy"
+    },
+    {
       "field": "checksums_sha256",
       "reason": "uncommitted release-bundle checksum text"
     },

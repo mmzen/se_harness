@@ -772,6 +772,35 @@ class InstructionArchitectureTests(unittest.TestCase):
         for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
             self.assertEqual("managed", lock["files"][f".agents/skills/harness-orient/{relative}"]["mode"])
 
+        writing_skills = {
+            "harness-draft-change": "scripts/guard.py",
+            "harness-execute-work-order": "scripts/check_scope.py",
+            "harness-prepare-assurance": "scripts/check_prepare.py",
+        }
+        self.assertEqual(
+            {"harness-orient", *writing_skills},
+            {path.name for path in (target / ".agents/skills").iterdir() if path.is_dir()},
+        )
+        for name, helper in writing_skills.items():
+            with self.subTest(skill=name):
+                root = target / ".agents/skills" / name
+                self.assertEqual(
+                    ["SKILL.md", helper, "skill-contract.json"],
+                    sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()),
+                )
+                writing_contract = json.loads((root / "skill-contract.json").read_text(encoding="utf-8"))
+                self.assertEqual("se-harness-skill-contract-v2", writing_contract["schema"])
+                self.assertEqual({"explicit": True, "implicit": False}, {
+                    key: writing_contract["activation"][key] for key in ("explicit", "implicit")
+                })
+                self.assertEqual([], writing_contract["effects"]["lifecycle_transitions"])
+                self.assertEqual({"allowed": False, "fallback": "single-agent"}, writing_contract["delegation"])
+                instructions = (root / "SKILL.md").read_text(encoding="utf-8").lower()
+                for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
+                    self.assertNotIn(provider, instructions)
+                for relative in ("SKILL.md", helper, "skill-contract.json"):
+                    self.assertEqual("managed", lock["files"][f".agents/skills/{name}/{relative}"]["mode"])
+
 
 AGENTS = REPOSITORY_ROOT / "AGENTS.md"
 LOCK = REPOSITORY_ROOT / ".engineering-harness.lock"
@@ -781,6 +810,7 @@ OWNER_EDITABLE_SCRIPTS = (
     "check_portable_release_surface.py",
     "create_release_bundle_manifest.py",
     "normalize_sdist.py",
+    "replay_release_build.py",
     "validate_release_distributions.py",
 )
 REQUIRED_OWNER_CONTENT = (

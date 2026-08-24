@@ -45,6 +45,55 @@ lifecycle history. Accountable content review does not itself authorize
 implementation, a lifecycle transition, a commit, a pull request, assurance,
 release, runtime materialization, or an external action.
 
+## Phase 2 runtime-neutral contract layer
+
+- `SPEC-AEX-003` is the approved definition of the core contract catalog,
+  repository-state binding, envelope semantics, bounds, compatibility rules,
+  decision-packet projection, receipt coverage, and logical profiles.
+- `ADR-AEX-003` is the approved decision to derive future authoritative
+  envelopes through the exact released evaluator, pass them in memory by
+  default, and persist only declared evidence and digests.
+- `WO-AEX-002` is implemented and covered by verified `VREC-AEX-002`. Its
+  bounded implementation added the canonical
+  `se_harness/agent_contract.json` catalog and the pure
+  `se_harness.agent_contract` module for strict parsing, canonical encoding,
+  candidate construction, narrowing, admissibility assessment, packet
+  projection, receipt validation, and provider-neutral profile validation.
+- The non-authoritative
+  [`agentic-execution-phase-2-contract-closure.md`](../../notes/agentic-execution-phase-2-contract-closure.md)
+  records the gap assessment and accepted planning recommendations.
+- The contributor guide
+  [`agentic-execution-contracts.md`](../../notes/agentic-execution-contracts.md)
+  explains the executable API and its authority boundary.
+
+Phase 2 returns `constructed` and `admissible` only. It does not observe a live
+repository, derive an authoritative envelope, admit or perform a mutation,
+invoke a skill, coordinate a worker, materialize a runtime adapter, or grant an
+accountable decision right. Those effects require later approved work and a
+fresh exact-evaluator check.
+
+## Phase 3 single-agent workflow skills MVP
+
+- `REQ-AEX-008` requires command-equivalent, explicitly activated single-agent
+  procedures for draft preparation, already-started work execution, and
+  assurance preparation.
+- `SPEC-AEX-004` defines the closed `se-harness-skill-contract-v2` instances,
+  checkpoints, effect classes, path sources, results, and stops while retaining
+  the exact `harness-orient` v1 contract.
+- `ADR-AEX-004` accepts a deterministic three-skill MVP over the existing
+  released-evaluator control plane, without envelope-admitted effects,
+  subagents, or runtime adapters.
+- `VER-AEX-002` defines strict-contract, effect-sentinel, lifecycle, path,
+  command-equivalence, installation, packaging, and end-to-end evidence.
+- `WO-AEX-003` is implemented. Its bounded implementation adds
+  `harness-draft-change`, `harness-execute-work-order`, and
+  `harness-prepare-assurance`, preserving the exact orientation core and
+  stopping before accountable completion, assurance, delivery, release, Git,
+  credential, network, and external-action boundaries.
+
+The [single-agent workflow skills MVP](../../notes/agentic-execution-skills-mvp.md)
+is non-authoritative operator guidance for the installed surface.
+
 ## Planning context
 
 The non-authoritative

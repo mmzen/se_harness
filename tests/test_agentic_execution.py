@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import os
 import shutil
@@ -12,6 +13,7 @@ from pathlib import Path
 
 from se_harness.skill_contract import (
     CONTRACT_SCHEMA,
+    CONTRACT_SCHEMA_V2,
     MANIFEST_SCHEMA,
     SkillContractError,
     build_skill_manifest,
@@ -23,9 +25,19 @@ from se_harness.skill_contract import (
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
+SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills"
+PHASE3_ROOTS = {
+    name: SKILLS_ROOT / name
+    for name in (
+        "harness-draft-change",
+        "harness-execute-work-order",
+        "harness-prepare-assurance",
+    )
+}
 ORIENT = SKILL_ROOT / "scripts/orient.py"
 FAKE_EVALUATOR = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/fake_evaluator.py"
 VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
+PHASE3_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase3/portable_vectors.json"
 
 
 def snapshot(root: Path) -> dict[str, str]:
@@ -34,6 +46,20 @@ def snapshot(root: Path) -> dict[str, str]:
         for path in root.rglob("*")
         if path.is_file()
     }
+
+
+def load_script(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    if spec is None or spec.loader is None:
+        raise AssertionError(f"could not load {path}")
+    module = importlib.util.module_from_spec(spec)
+    prior = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.dont_write_bytecode = prior
+    return module
 
 
 class SkillContractTests(unittest.TestCase):
@@ -80,6 +106,185 @@ class SkillContractTests(unittest.TestCase):
                 mutate(value)
                 with self.assertRaisesRegex(SkillContractError, code):
                     parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+    def test_closed_phase3_contracts_and_manifests_validate(self) -> None:
+        expected = {
+            "harness-draft-change": ("draft-writing", ["draft-create", "draft-revise", "planning-note-write"]),
+            "harness-execute-work-order": (
+                "governed-mutation",
+                ["implementation-write", "test-execution", "evidence-write"],
+            ),
+            "harness-prepare-assurance": ("governed-mutation", ["verification-record-prepare"]),
+        }
+        for name, root in PHASE3_ROOTS.items():
+            with self.subTest(skill=name):
+                contract = load_skill_contract(root / "skill-contract.json")
+                manifest = build_skill_manifest(root)
+                self.assertEqual(CONTRACT_SCHEMA_V2, contract.value["schema"])
+                self.assertEqual(name, contract.name)
+                self.assertEqual(expected[name][0], contract.value["mutation_class"])
+                self.assertEqual(expected[name][1], contract.value["effects"]["permitted"])
+                self.assertEqual([], contract.value["effects"]["lifecycle_transitions"])
+                self.assertTrue(contract.value["activation"]["explicit"])
+                self.assertFalse(contract.value["activation"]["implicit"])
+                self.assertFalse(contract.value["delegation"]["allowed"])
+                self.assertEqual("single-agent", contract.value["delegation"]["fallback"])
+                self.assertEqual(
+                    sorted(["SKILL.md", next(item for item in [
+                        "scripts/guard.py", "scripts/check_scope.py", "scripts/check_prepare.py"
+                    ] if (root / item).exists()), "skill-contract.json"]),
+                    sorted(item["path"] for item in manifest.value["files"]),
+                )
+
+    def test_all_four_portable_cores_match_retained_phase3_vectors(self) -> None:
+        vectors = json.loads(PHASE3_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual("se-harness-phase3-portable-vectors-v1", vectors["schema"])
+        for name, expected in vectors["skills"].items():
+            with self.subTest(skill=name):
+                root = SKILLS_ROOT / name
+                contract = load_skill_contract(root / "skill-contract.json")
+                self.assertEqual(expected["schema"], contract.value["schema"])
+                self.assertEqual(expected["manifest_sha256"], build_skill_manifest(root).sha256)
+                self.assertEqual(
+                    expected["contract_sha256"],
+                    hashlib.sha256(canonical_json_bytes(contract.value)).hexdigest(),
+                )
+
+    def test_phase3_contracts_reject_implicit_activation_transitions_and_unknown_fields(self) -> None:
+        original = json.loads(
+            (PHASE3_ROOTS["harness-draft-change"] / "skill-contract.json").read_text(encoding="utf-8")
+        )
+        cases = (
+            ("implicit", lambda value: value["activation"].__setitem__("implicit", True), "SKC023"),
+            (
+                "transition",
+                lambda value: value["effects"]["lifecycle_transitions"].append("draft-to-approved"),
+                "SKC027",
+            ),
+            ("authority", lambda value: value.__setitem__("authority", "engineering-owner"), "SKC006"),
+            ("delegation", lambda value: value["delegation"].__setitem__("allowed", True), "SKC018"),
+        )
+        for label, mutate, code in cases:
+            with self.subTest(label=label):
+                value = json.loads(json.dumps(original))
+                mutate(value)
+                with self.assertRaisesRegex(SkillContractError, code):
+                    parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+
+class Phase3EffectGuardTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.draft = load_script(
+            "phase3_draft_guard", PHASE3_ROOTS["harness-draft-change"] / "scripts/guard.py"
+        )
+        cls.execute = load_script(
+            "phase3_execute_guard", PHASE3_ROOTS["harness-execute-work-order"] / "scripts/check_scope.py"
+        )
+        cls.assurance = load_script(
+            "phase3_assurance_guard", PHASE3_ROOTS["harness-prepare-assurance"] / "scripts/check_prepare.py"
+        )
+
+    def test_draft_guard_invokes_effect_once_only_after_fresh_closed_plan(self) -> None:
+        request = {
+            "explicit_skill": "harness-draft-change",
+            "effect_class": "draft-create",
+            "planned_paths": ["docs/engineering/example/requirements/REQ-EX-001.md"],
+            "allowed_paths": ["docs/engineering/example/requirements/REQ-EX-001.md"],
+            "revisions": {},
+        }
+        calls: list[tuple[str, ...]] = []
+        result = self.draft.admit_draft_effect(
+            request,
+            recheck=lambda: {"allowed_paths": request["allowed_paths"], "revisions": {}},
+            effect=lambda paths: calls.append(paths) or "done",
+        )
+        self.assertEqual("done", result)
+        self.assertEqual([tuple(request["planned_paths"])], calls)
+
+        for label, mutate in (
+            ("implicit", lambda value: value.__setitem__("explicit_skill", "")),
+            ("escape", lambda value: value.__setitem__("planned_paths", ["../outside.md"])),
+            ("scope", lambda value: value.__setitem__("planned_paths", ["README.md"])),
+            ("state", lambda value: value.__setitem__("revisions", {"REQ-EX-001": "approved"})),
+        ):
+            with self.subTest(label=label):
+                rejected = json.loads(json.dumps(request))
+                mutate(rejected)
+                calls.clear()
+                with self.assertRaises(self.draft.DraftGuardError):
+                    self.draft.admit_draft_effect(
+                        rejected,
+                        recheck=lambda: {"allowed_paths": rejected["allowed_paths"], "revisions": rejected["revisions"]},
+                        effect=lambda paths: calls.append(paths),
+                    )
+                self.assertEqual([], calls)
+
+    def test_work_order_state_matrix_and_path_attacks_fail_before_effect(self) -> None:
+        base = {
+            "explicit_skill": "harness-execute-work-order",
+            "work_order": "WO-AEX-003",
+            "state": "in_progress",
+            "effect_class": "implementation-write",
+            "planned_paths": ["se_harness/skill_contract.py"],
+            "execution_scope": ["se_harness/skill_contract.py", "tests/fixtures/agentic_execution/phase3/"],
+        }
+        scope = self.execute._paths(base["execution_scope"], allow_prefix=True)
+        fresh = {
+            "work_order": "WO-AEX-003",
+            "state": "in_progress",
+            "scope_sha256": self.execute.scope_digest(scope),
+        }
+        calls: list[tuple[str, ...]] = []
+        self.execute.admit_work_order_effect(base, recheck=lambda: fresh, effect=lambda paths: calls.append(paths))
+        self.assertEqual(1, len(calls))
+
+        for state in ("draft", "approved", "implemented", "verified", "rejected"):
+            rejected = {**base, "state": state}
+            calls.clear()
+            with self.subTest(state=state), self.assertRaises(self.execute.ScopeGuardError):
+                self.execute.admit_work_order_effect(rejected, recheck=lambda: fresh, effect=lambda paths: calls.append(paths))
+            self.assertEqual([], calls)
+        for hostile in ("../escape.py", "/absolute.py", "file://host/path", "tests/*.py", "Tests/case.py"):
+            rejected = {**base, "planned_paths": [hostile]}
+            calls.clear()
+            with self.subTest(path=hostile), self.assertRaises(self.execute.ScopeGuardError):
+                self.execute.admit_work_order_effect(rejected, recheck=lambda: fresh, effect=lambda paths: calls.append(paths))
+            self.assertEqual([], calls)
+
+    def test_assurance_guard_requires_exact_candidate_actor_and_unused_record(self) -> None:
+        request = {
+            "explicit_skill": "harness-prepare-assurance",
+            "record_id": "VREC-AEX-003",
+            "record_destination": "docs/engineering/agentic-execution/verification-records/VREC-AEX-003.md",
+            "candidate_commit": "a" * 40,
+            "candidate_ready": True,
+            "record_exists": False,
+            "preparation_actor": "engineering-owner",
+        }
+        fresh = {
+            key: request[key]
+            for key in ("candidate_commit", "candidate_ready", "record_exists", "record_id", "record_destination")
+        }
+        calls: list[str] = []
+        self.assurance.admit_assurance_preparation(
+            request, recheck=lambda: fresh, effect=lambda path: calls.append(path)
+        )
+        self.assertEqual([request["record_destination"]], calls)
+
+        for label, change in (
+            ("actor", {"preparation_actor": ""}),
+            ("dirty", {"candidate_ready": False}),
+            ("collision", {"record_exists": True}),
+            ("implicit", {"explicit_skill": ""}),
+        ):
+            rejected = {**request, **change}
+            calls.clear()
+            with self.subTest(label=label), self.assertRaises(self.assurance.AssuranceGuardError):
+                self.assurance.admit_assurance_preparation(
+                    rejected, recheck=lambda: fresh, effect=lambda path: calls.append(path)
+                )
+            self.assertEqual([], calls)
 
     def test_canonical_json_is_stable_and_rejects_floats(self) -> None:
         self.assertEqual(b'{"a":1,"z":[true,null]}\n', canonical_json_bytes({"z": [True, None], "a": 1}))

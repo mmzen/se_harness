@@ -3,13 +3,14 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
 import zipfile
 from unittest import mock
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from repository_tools import release_distribution as DISTRIBUTION
 from repository_tools.release_distribution import (
@@ -74,7 +75,7 @@ def distribution_values(version: str = "1.2.3") -> dict[str, object]:
 def plan() -> object:
     values = distribution_values()
     return RELEASE.ReleasePlan(
-        schema="se-harness-release-plan/v1",
+        schema="se-harness-release-plan/v2",
         repository="mmzen/se_harness",
         release_record="RLS-TST-001",
         release_record_path="docs/engineering/releases/RLS-TST-001.md",
@@ -226,7 +227,10 @@ class DistributionManifestTests(unittest.TestCase):
         subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
         subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
         (root / "source.txt").write_text("candidate\n", encoding="utf-8")
-        subprocess.run(["git", "-C", str(root), "add", "source.txt"], check=True)
+        (root / "release").mkdir()
+        shutil.copyfile(REPOSITORY_ROOT / "release" / "build-recipe.json", root / "release" / "build-recipe.json")
+        shutil.copyfile(REPOSITORY_ROOT / "release" / "build-toolchain.lock", root / "release" / "build-toolchain.lock")
+        subprocess.run(["git", "-C", str(root), "add", "source.txt", "release"], check=True)
         subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
         commit = subprocess.run(
             ["git", "-C", str(root), "rev-parse", "HEAD"],
@@ -238,7 +242,14 @@ class DistributionManifestTests(unittest.TestCase):
         sdist = root / "se_harness-1.2.3.tar.gz"
         wheel.write_bytes(b"wheel")
         sdist.write_bytes(b"sdist")
-        manifest = create_manifest(root, commit, "1.2.3", wheel, sdist)
+        manifest = create_manifest(
+            root,
+            commit,
+            "1.2.3",
+            wheel,
+            sdist,
+            build_recipe=PurePosixPath("release/build-recipe.json"),
+        )
         manifest_path = root / "bundle.json"
         manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
         record = root / "docs/engineering/product/releases/RLS-TST-001.md"
@@ -357,6 +368,7 @@ releases_work = ["WO-TST-001"]
                 ("source_date_epoch", int(manifest["source_date_epoch"]) + 1, "epoch"),
                 ("wheel", "../se_harness-1.2.3-py3-none-any.whl", "basename"),
                 ("checksums_content", "not canonical\n", "canonical"),
+                ("build_recipe_sha256", "0" * 64, "candidate tree"),
             )
             for field, value, message in cases:
                 with self.subTest(field=field):
@@ -374,6 +386,61 @@ releases_work = ["WO-TST-001"]
             with self.assertRaisesRegex(ReleaseDistributionError, "duplicate key"):
                 bind_distribution(root, record.relative_to(root), Path("bundle.json"))
             self.assertEqual(original, record.read_bytes())
+
+    def test_schema_1_is_historical_released_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
+            subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
+            (root / "source.txt").write_text("historical\n", encoding="utf-8", newline="\n")
+            subprocess.run(["git", "-C", str(root), "add", "source.txt"], check=True)
+            subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "historical"], check=True)
+            commit = subprocess.run(
+                ["git", "-C", str(root), "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+            ).stdout.strip()
+            wheel = root / "se_harness-1.2.3-py3-none-any.whl"
+            sdist = root / "se_harness-1.2.3.tar.gz"
+            wheel.write_bytes(b"wheel")
+            sdist.write_bytes(b"sdist")
+            manifest = create_manifest(root, commit, "1.2.3", wheel, sdist)
+            distribution = validate_distribution_block(
+                {
+                    "schema": 1,
+                    "kind": "python-wheel-sdist",
+                    **{
+                        key: manifest[key]
+                        for key in (
+                            "source_date_epoch", "wheel", "wheel_sha256", "sdist", "sdist_sha256",
+                            "checksums", "checksums_sha256", "source_manifest_sha256",
+                        )
+                    },
+                },
+                "1.2.3",
+            )
+            record = root / "docs/engineering/releases/RLS-TST-001.md"
+            record.parent.mkdir(parents=True)
+            record.write_text(
+                "+++\n"
+                'id = "RLS-TST-001"\n'
+                'type = "release_record"\n'
+                'status = "released"\n'
+                'version = "1.2.3"\n'
+                f'commit = "{commit}"\n'
+                'git_object_format = "sha1"\n\n'
+                f"{distribution.toml()}\n"
+                "+++\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            self.assertTrue(validate_record_distribution(root, record, required=True))
+            record.write_text(
+                record.read_text(encoding="utf-8").replace('status = "released"', 'status = "ready"'),
+                encoding="utf-8",
+                newline="\n",
+            )
+            with self.assertRaisesRegex(ReleaseDistributionError, "historical released"):
+                validate_record_distribution(root, record, required=True)
 
     def test_repository_binder_rejects_partial_existing_state_and_unsafe_paths(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -522,6 +589,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("id-token: write", qualify)
         self.assertIn("python -m se_harness qualify complete-candidate .", qualify)
         self.assertIn("--candidate-commit \"${{ needs.resolve.outputs.candidate_commit }}\"", qualify)
+        self.assertIn('--candidate-commit "$CANDIDATE_COMMIT"', qualify)
         self.assertIn("complete-candidate-qualification.json", qualify)
         self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
         self.assertIn(
@@ -531,10 +599,13 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn('cd "$temp_root/candidate-checkout"', qualify)
         self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
         self.assertNotIn("python -m se_harness doctor .", qualify)
-        self.assertIn("runs-on: windows-2022", qualify)
+        self.assertIn("mode: legacy-schema-1", qualify)
+        self.assertIn("os: windows-2022", qualify)
+        self.assertIn("mode: recipe-schema-2", qualify)
+        self.assertIn("os: ubuntu-latest", qualify)
+        self.assertIn("runs-on: ${{ matrix.os }}", qualify)
         self.assertIn('python-version: "3.11.9"', qualify)
         self.assertEqual(4, qualify.count('temp_root="$(cygpath -u "$RUNNER_TEMP")"'))
-        self.assertNotIn('"$RUNNER_TEMP/', qualify)
         self.assertIn('test_temp="$temp_root/candidate-test-temp"', qualify)
         self.assertIn('export TEMP="$(cygpath -w "$test_temp")"', qualify)
         self.assertIn('export TMP="$TEMP"', qualify)
@@ -547,6 +618,14 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
             "python -m pip install --disable-pip-version-check build==1.3.0\n",
             qualify,
         )
+        recipe_path = qualify.split("      - name: Replay the exact bound recipe twice\n", 1)[1].split(
+            "      - name: Retain the candidate-controlled qualification result\n", 1
+        )[0]
+        self.assertIn("python scripts/replay_release_build.py", recipe_path)
+        self.assertIn("--require-status released", recipe_path)
+        self.assertNotIn("python -m build", recipe_path)
+        self.assertNotIn("pip install", recipe_path)
+        self.assertNotIn("normalize_sdist.py", recipe_path)
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)

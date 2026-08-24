@@ -80,7 +80,7 @@ harnessctl dashboard C:\path\to\repository
 
 `doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `focus` projects one selected WO, VREC, or RLS scope. `check` evaluates the selected scope, typed procedure, and executable gates and returns one concise canonical next step. `transition` plans explicit lifecycle changes by default; add `--apply` only after the accountable decision. `inspect` is explicitly repository-wide, summarizes current lifecycle attention, and never serves as selected restitution. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
 
-A standard repository installation also includes the portable `harness-orient` skill at `.agents/skills/harness-orient/`. A supported agent can use it to verify the exact released evaluator, integrity, formal state, selected scope, and next accountable decision without changing the repository. See [read-only agent orientation](docs/notes/harness-orient.md) for invocation, outputs, capability fallback, and troubleshooting.
+A standard repository installation includes `harness-orient` at `.agents/skills/harness-orient/` for [read-only agent orientation](docs/notes/harness-orient.md) without changing the repository, plus the explicit-only `harness-draft-change`, `harness-execute-work-order`, and `harness-prepare-assurance` skills. They complement `harnessctl`: the exact released evaluator remains authoritative for integrity, state, scope, gates, and canonical operations, and each skill stops at the next accountable decision before Git, credential, network, delivery, release, or external action. See the [single-agent workflow skills MVP](docs/notes/agentic-execution-skills-mvp.md).
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners record their build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md` and approve the first formal engineering chain. The harness does not scaffold, track, or gate that region.
 
@@ -162,7 +162,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
 - one managed instruction route for coding agents, with room for stricter repository-owned guidance;
-- one portable read-only orientation skill with a deterministic single-agent path and inline execution receipt;
+- one portable read-only orientation skill and three explicit-only single-agent workflow skills that stop at accountable decision points;
 - one machine-readable workflow contract for lifecycle transitions and canonical next actions;
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;
