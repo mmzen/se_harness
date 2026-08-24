@@ -124,7 +124,18 @@ its absence elsewhere."
 Including them delivers more than `REQ-HBI-001` obliges. That is disclosed here
 rather than absorbed, and it is why this work order also amends the domain
 `README.md` scope boundary and `VER-HBI-001`'s coverage. Both amendments add
-obligation and relax nothing; both are recorded and await the owner's acceptance.
+obligation and relax nothing. The accountable repository owner accepted both on
+2026-08-24 through the statement `Accept both`; `VER-HBI-001`'s amendment section
+records that decision and the framing it was taken over. The acceptance authorizes
+no verification, merge, release, publication or deployment.
+
+The same turn took one further decision on a question this work order deliberately
+left open. Whether `build_recipe_sha256` should move out of `unbound_digest_fields`
+and become a declared hash-bound class, so that `doctor` rather than a unit test
+guards that recipe's bytes, stays open and unmeasured; the owner directed that it be
+filed as an issue so it is tracked rather than resting in one evidence paragraph.
+Filing an issue authorizes no implementation, and nothing in this work order changes
+as a result.
 
 ## In scope
 

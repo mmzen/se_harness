@@ -19,7 +19,7 @@ decided_by = "quality-owner"
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance
 
-## Amendment, 2026-08-24 — pending owner acceptance
+## Amendment, 2026-08-24 — accepted
 
 Amended under `WO-HBI-003`. `WO-RLO-005`'s publication-rehearsal lane executed on
 hosted runners for the first time and measured the release orchestrator failing
@@ -31,8 +31,20 @@ This contract's coverage of `REQ-HBI-001` was complete for declared classes and
 silent about committed surfaces the suite compares byte for byte without a recorded
 digest binding them. The row, scenario and property added below close that gap. The
 amendment adds obligation and relaxes no pass condition; no approved `statement`
-field changed. It awaits the owner's acceptance.
+field changed.
 
+The accountable repository owner accepted this amendment and the companion scope
+widening in this domain's `README.md` on 2026-08-24 through the statement
+`Accept both`, taken over the framing: "VER-HBI-001 gains one REQ-HBI-001 matrix row
+(byte-rule completeness beyond declared classes), acceptance scenario 8, and one
+property bullet. The hash-bound-integrity README scope boundary admits committed
+files whose exact bytes the suite compares without a recorded digest binding them,
+guarded by a test rather than a doctor check." Scenario 8 was measured before the
+decision, not after: removing one owner-region rule and re-materializing the path
+fails `ByteExactSurfaceTests` with two assertions, one naming
+`se_harness/agent_contract.json is crlf`. The acceptance authorizes no verification,
+merge, release, publication or deployment, and the manual acceptances this contract
+requires from the security, quality and repository owners remain separate.
 
 ## Independence
 

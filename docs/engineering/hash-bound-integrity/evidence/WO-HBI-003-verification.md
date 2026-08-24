@@ -12,9 +12,13 @@ Work order: `WO-HBI-003`, assurance classification `commit_bound_verification =
 the tree of implementation commit `a933d7260214f0fb642e45639336b3d910f7ab07`. This
 evidence file is committed on top of that commit, because a file cannot contain the
 hash of its own commit; the candidate commit the later `VREC` binds is therefore the
-branch tip, which differs from `a933d72` only by this file and by no executable or
-declarative content. That `VREC` is a separate, separately authorized act, is not
-prepared here, and must re-measure its own figures.
+branch tip. The tip differs from `a933d72` by this file and by governance prose only:
+a third commit records the owner's acceptance of the two amendments in
+`VER-HBI-001`, this domain's `README.md`, `WO-HBI-003` and this file. No executable
+content, no test, no `.gitattributes` rule and no recorded digest differs between
+`a933d72` and the tip, so every figure below still describes the tip's behaviour. That
+`VREC` is a separate, separately authorized act, is not prepared here, and must
+re-measure its own figures.
 
 ## Environment
 
@@ -128,9 +132,17 @@ All ten pass here, and the three tests this work order adds bring the total from
 `main` already carries.
 
 The hosted Windows rehearsal that found this reported eleven failing tests rather
-than ten. That lane tested the pull-request merge commit, which was ahead of the
-branch by one added and one renamed test; the difference is in the count, not in
-the mechanism, and every name above is reproduced locally.
+than ten. Ten of its eleven names are exactly the ten above. The eleventh,
+`test_manifest_rejects_missing_required_invalid_utf8_and_reserved_paths`, exists at
+`fc97103` and passes in the control worktree here, so the extra red is not explained
+by a difference in the test inventory and is not reproduced by this measurement. It
+is stated rather than explained. Two candidate causes were not separated: a
+`pull_request` run tests the merge commit `e77d3dd7d114`, whose
+`tests/test_agentic_execution.py` is an automatic merge of two divergent copies and
+need not equal `fc97103`'s; and the hosted interpreter is 3.11.9 against 3.14.6 here.
+Its subject is `templates/repository/standard/.agents/skills/harness-orient`, which
+these rules cover, so the fix reaches it either way — but this evidence claims only
+the ten it measured.
 
 ## The guard is falsifiable, measured three ways
 
@@ -201,11 +213,10 @@ distribution` alongside `PASS managed:.gitattributes: unchanged`. That divergenc
 the documented candidate-source boundary. It is not authorization to overwrite a
 root managed file.
 
-## Amendments recorded and pending
+## Amendments recorded and accepted
 
 Two artifacts were amended under this work order. Both add obligation, relax no
-pass condition, and change no approved `statement` field. Both are recorded as
-**pending the owner's acceptance** and are not accepted by this file:
+pass condition, and change no approved `statement` field:
 
 - `VER-HBI-001` — one requirement-matrix row for `REQ-HBI-001` covering byte-rule
   completeness beyond declared classes, acceptance scenario 8, and one property
@@ -214,6 +225,16 @@ pass condition, and change no approved `statement` field. Both are recorded as
   committed files whose exact bytes the suite compares without a recorded digest
   binding them, and says they are guarded by a test rather than by a `doctor` check,
   because no class binds them.
+
+The accountable repository owner accepted both on 2026-08-24 through the statement
+`Accept both`. `VER-HBI-001`'s amendment section carries that decision and the
+framing it was taken over; this file records that acceptance rather than granting it.
+Acceptance scenario 8 was measured before the decision was put, not after — the
+one-rule case in the falsifiability table above is that scenario.
+
+Nothing in the acceptance authorizes verification, a `VREC`, a merge, a release, a
+publication or a deployment, and the manual acceptances `VER-HBI-001` requires from
+the security, quality and repository owners remain separate and outstanding.
 
 ## Disclosures
 
@@ -233,7 +254,10 @@ pass condition, and change no approved `statement` field. Both are recorded as
   policy now has a mechanism where it previously had none. Whether the field should
   instead become a declared class, so a `doctor` check rather than a unit test
   guards it, is a real question this work order deliberately leaves open. It is
-  stated here rather than answered.
+  stated here rather than answered. On 2026-08-24 the owner directed that it be filed
+  as an issue rather than measured now, so it is tracked outside this paragraph;
+  filing an issue authorizes no implementation, and the two guards that exist today —
+  the byte rule and `ByteExactSurfaceTests` — are unchanged by that routing.
 - The guard is a unit test, not a `doctor` check. `doctor`'s three hash-bound checks
   read the declaration, and these sixteen paths are in no declared class, so no
   check assesses them. A consumer installation therefore inherits nothing from this
@@ -270,6 +294,7 @@ publication, no Pages deployment, no environment approval, no release record, no
 promotable or ephemeral distribution build, no credential use, no maintenance
 mutation, no operational governor adoption, no root managed file overwritten, no
 historical digest rewritten, no change to `WO-RLO-005` or its branch, and no edit
-outside the execution scope. The two amendments above await the owner's acceptance,
-and the manual acceptances `VER-HBI-001` requires from the security, quality and
-repository owners remain outstanding and are not recorded here.
+outside the execution scope. The owner's `Accept both` of 2026-08-24 accepted the two
+amendments above and nothing else; the manual acceptances `VER-HBI-001` requires from
+the security, quality and repository owners remain outstanding and are not recorded
+here.
