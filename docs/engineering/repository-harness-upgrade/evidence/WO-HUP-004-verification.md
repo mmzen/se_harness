@@ -12,9 +12,11 @@ agree. The LF/CRLF-sensitive inspection assertion now proves distinct evaluator
 paths, root-lock integrity, and candidate semantics instead of requiring raw
 root/template inequality.
 
-Local qualification passes. `WO-HUP-004` remains `in_progress` because hosted
-push and pull-request evidence, its completion transition, commit-bound
-verification, commit, and push are separately governed actions.
+Local qualification passes. The first hosted candidate proved every lane except
+the changed-version pull-request assessment and exposed one POSIX virtual-
+environment symlink defect. Its bounded correction is locally qualified and
+uncommitted. `WO-HUP-004` remains `in_progress` pending a corrected candidate,
+green hosted replay, and its separately governed completion decision.
 
 artifact: WO-HUP-004
 checkpoint: handoff
@@ -28,10 +30,13 @@ formal_snapshot_sha256: fa548ea1ff6359257fa0918e8ac5009405276526ba0ca11ba80bddf4
 - Local branch: `proposal/root-governor-0.6.0`.
 - Packet approval: `2026-08-23T20:22:49Z`.
 - Work-order start: `2026-08-23T20:23:09Z`.
-- This ledger records implementation and local qualification only. It does not
-  record an operational candidate, hosted dispatch, VREC decision, commit,
-  push, merge, release, publication, deployment, maintenance mutation,
-  credential use, external-policy change, or root-evaluator upgrade.
+- First operational candidate:
+  `98f5aba4315744919f4a3646b7ca4ffe55c9bee3`, committed and pushed to
+  `proposal/root-governor-0.6.0` under later explicit authority.
+- This ledger records that candidate's hosted observations and the uncommitted
+  POSIX correction. It records no VREC decision, merge, release, publication,
+  deployment, maintenance mutation, external-policy change, or root-evaluator
+  upgrade.
 
 ## Implemented behavior
 
@@ -77,8 +82,10 @@ formal_snapshot_sha256: fa548ea1ff6359257fa0918e8ac5009405276526ba0ca11ba80bddf4
 | missing or mismatched external target evaluator | fail closed |
 | LF and CRLF materializations of one base lock | same canonical binding |
 
-The focused resolver, workflow-contract, and inspection replay ran 26 tests in
-15.464 seconds with zero failures or errors.
+The original focused resolver, workflow-contract, and inspection replay ran 26
+tests with zero failures or errors. The post-POSIX-correction replay ran 29
+tests in 16.986 seconds with zero failures or errors and two POSIX-only cases
+skipped on Windows.
 
 ## Exact historical 0.5.0 to 0.6.0 replay
 
@@ -112,10 +119,45 @@ A separate clean same-version replay against
 `7394a0ca396a6a8b514375a045c5e67ed3872d80` returned
 `assessment: not_applicable` and invoked no evaluator command.
 
+## First hosted candidate and POSIX correction
+
+Candidate `98f5aba4315744919f4a3646b7ca4ffe55c9bee3` triggered both push and
+pull-request events.
+
+- Both managed Engineering Harness validation jobs passed.
+- Both candidate-source and candidate-package evidence chains passed.
+- Linux and Windows governance-migration jobs and both platform-reconciliation
+  jobs passed.
+- Push governor-transition run `32697128876` passed as same-version
+  `not_applicable`.
+- Pull-request governor-transition run `32697131783` selected the real
+  0.5.0-to-0.6.0 transaction, installed the exact target wheel, and then failed
+  before identity with `evaluator entry point is outside the evaluator
+  installation`.
+
+The failure was caused by resolving POSIX `bin/python` to its shared system
+interpreter before deriving the virtual-environment root. The resolver then
+mistook the system interpreter prefix for the installation and rejected the
+legitimate sibling `bin/harnessctl`.
+
+The bounded correction now derives the logical environment from the absolute
+launcher path before dereferencing it. It separately validates both the
+launcher and resolved Python target as ordinary external files, requires
+`python` and `harnessctl` to share the environment's `bin` or `Scripts`
+directory, rejects an entry-point symlink escaping the environment, and leaves
+the exact 0.6.0 identity command to verify `sys.prefix`, origins, isolation, and
+payload/wheel hashes. Added cases cover a legitimate POSIX Python symlink, a
+Python symlink resolving into the checkout, and an entry point outside the
+launcher directory. The two POSIX cases execute on Linux and are skipped on
+Windows. An Ubuntu 24.04 WSL replay executed all 16 governor-transition tests,
+including both POSIX symlink cases, with zero failures or skips.
+
 ## Complete tests and repository gates
 
-- Python 3.14.6: 484 tests passed in 287.894 seconds; 7 skipped.
-- Python 3.11.9: 484 tests passed in 274.192 seconds; 7 skipped.
+- Python 3.14.6 after the POSIX correction: 487 tests passed in 283.039
+  seconds; 9 skipped on Windows.
+- Python 3.11.9 after the POSIX correction: 487 tests passed in 301.120
+  seconds; 9 skipped on Windows.
 - Scale cases for 100, 500, and 1,000 artifacts passed on both runtimes.
 - Exact public 0.6.0 `doctor`: pass; distribution and managed integrity match.
 - Exact public 0.6.0 complete `validate`: pass, 707 artifacts, zero errors,
@@ -164,8 +206,10 @@ The complete local change set is exactly the 16 paths declared by
 ## Preserved boundaries and remaining evidence
 
 No managed/current-governor workflow, root configuration or lock, product or
-candidate template, package version, VREC/RLS/REL record, candidate, tag,
-publication or deployment workflow, maintenance state, Git ref, credential,
-external policy, or root evaluator changed. Hosted push and pull-request lanes
-cannot be retained until a separately authorized candidate commit and push
-exist; they remain the only unexecuted `VER-HUP-004` cases.
+candidate template, package version, VREC/RLS/REL record, tag, publication or
+deployment workflow, maintenance state, external policy, or root evaluator
+changed. The only Git-ref mutation was the authorized push of candidate
+`98f5aba4315744919f4a3646b7ca4ffe55c9bee3`; its credential was used only for
+that push and hosted-log inspection. The POSIX correction remains local and
+uncommitted, and its corrected hosted pull-request assessment remains the only
+unexecuted `VER-HUP-004` case.

@@ -492,19 +492,48 @@ def build_plan(
     }
 
 
-def _external_file(value: str, root: Path, label: str) -> Path:
+def _external_file(value: str, root: Path, label: str) -> tuple[Path, Path]:
+    path = Path(os.path.abspath(value))
     try:
-        path = Path(value).resolve(strict=True)
-        path.relative_to(root)
-    except ValueError:
-        pass
+        resolved = path.resolve(strict=True)
     except OSError as exc:
         raise GovernorTransitionError(f"{label} is unavailable") from exc
-    else:
+    for candidate in (path, resolved):
+        try:
+            candidate.relative_to(root)
+        except ValueError:
+            continue
         raise GovernorTransitionError(f"{label} must be outside the checkout")
-    if not path.is_file():
+    if not resolved.is_file():
         raise GovernorTransitionError(f"{label} must be an ordinary file")
-    return path
+    return path, resolved
+
+
+def _evaluator_installation(
+    python_value: str,
+    entry_point_value: str,
+    checkout_root: Path,
+) -> tuple[Path, Path, Path]:
+    python, _resolved_python = _external_file(
+        python_value, checkout_root, "evaluator Python"
+    )
+    entry_point, resolved_entry_point = _external_file(
+        entry_point_value, checkout_root, "evaluator entry point"
+    )
+    launcher_directory = python.parent
+    evaluator_root = launcher_directory.parent
+    if launcher_directory.name.casefold() not in {"bin", "scripts"}:
+        raise GovernorTransitionError("evaluator Python has no virtual-environment layout")
+    if entry_point.parent != launcher_directory:
+        raise GovernorTransitionError("evaluator entry point is outside the evaluator installation")
+    try:
+        resolved_root = evaluator_root.resolve(strict=True)
+        resolved_entry_point.relative_to(resolved_root)
+    except (OSError, ValueError) as exc:
+        raise GovernorTransitionError(
+            "evaluator entry point is outside the evaluator installation"
+        ) from exc
+    return python, entry_point, evaluator_root
 
 
 def _evaluator_environment() -> dict[str, str]:
@@ -551,17 +580,16 @@ def assess(
         return result
     if not evaluator_python or not evaluator_entry_point or not evaluator_wheel:
         raise GovernorTransitionError("changed-version assessment requires exact evaluator paths")
-    python = _external_file(evaluator_python, root, "evaluator Python")
-    entry_point = _external_file(evaluator_entry_point, root, "evaluator entry point")
-    wheel = _external_file(evaluator_wheel, root, "evaluator wheel")
+    python, entry_point, evaluator_root = _evaluator_installation(
+        evaluator_python, evaluator_entry_point, root
+    )
+    wheel, resolved_wheel = _external_file(evaluator_wheel, root, "evaluator wheel")
     expected = _evaluator(plan["target"].get("evaluator"), "planned target evaluator")
-    if wheel.name != expected["archive_name"] or _sha256(wheel.read_bytes()) != expected["archive_sha256"]:
+    if (
+        wheel.name != expected["archive_name"]
+        or _sha256(resolved_wheel.read_bytes()) != expected["archive_sha256"]
+    ):
         raise GovernorTransitionError("evaluator wheel differs from the approved target identity")
-    evaluator_root = python.parent.parent.resolve()
-    try:
-        entry_point.relative_to(evaluator_root)
-    except ValueError as exc:
-        raise GovernorTransitionError("evaluator entry point is outside the evaluator installation") from exc
     commands = {
         "identity": _evaluator_command(
             [

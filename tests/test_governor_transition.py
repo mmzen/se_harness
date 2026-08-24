@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -366,6 +367,82 @@ class GovernorTransitionTests(unittest.TestCase):
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "requires exact"):
                 TRANSITION.assess(
                     str(fixture.root), base, "refs/remotes/origin/main", None, None, None
+                )
+
+    @unittest.skipIf(os.name == "nt", "POSIX virtual environments use symlinked Python launchers")
+    def test_posix_python_symlink_preserves_the_virtual_environment_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkout = root / "checkout"
+            checkout.mkdir()
+            environment = root / "target-evaluator"
+            launchers = environment / "bin"
+            launchers.mkdir(parents=True)
+            system_python = root / "system" / "python"
+            system_python.parent.mkdir()
+            system_python.write_bytes(b"python")
+            python = launchers / "python"
+            python.symlink_to(system_python)
+            entry_point = launchers / "harnessctl"
+            entry_point.write_bytes(b"harnessctl")
+
+            actual_python, actual_entry_point, actual_root = (
+                TRANSITION._evaluator_installation(
+                    str(python), str(entry_point), checkout.resolve()
+                )
+            )
+            resolved_python = actual_python.resolve()
+
+            self.assertEqual(python, actual_python)
+            self.assertEqual(entry_point, actual_entry_point)
+            self.assertEqual(environment, actual_root)
+            self.assertEqual(system_python, resolved_python)
+
+    @unittest.skipIf(os.name == "nt", "POSIX virtual environments use symlinked Python launchers")
+    def test_python_symlink_resolving_into_the_checkout_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkout = root / "checkout"
+            checkout.mkdir()
+            checkout_python = checkout / "python"
+            checkout_python.write_bytes(b"python")
+            launchers = root / "target-evaluator" / "bin"
+            launchers.mkdir(parents=True)
+            python = launchers / "python"
+            python.symlink_to(checkout_python)
+            entry_point = launchers / "harnessctl"
+            entry_point.write_bytes(b"harnessctl")
+
+            with self.assertRaisesRegex(
+                TRANSITION.GovernorTransitionError, "outside the checkout"
+            ):
+                TRANSITION._evaluator_installation(
+                    str(python), str(entry_point), checkout.resolve()
+                )
+
+    def test_entry_point_outside_the_launcher_directory_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkout = root / "checkout"
+            checkout.mkdir()
+            launchers = root / "target-evaluator" / (
+                "Scripts" if os.name == "nt" else "bin"
+            )
+            launchers.mkdir(parents=True)
+            python = launchers / ("python.exe" if os.name == "nt" else "python")
+            python.write_bytes(b"python")
+            entry_point = root / "other" / (
+                "harnessctl.exe" if os.name == "nt" else "harnessctl"
+            )
+            entry_point.parent.mkdir()
+            entry_point.write_bytes(b"harnessctl")
+
+            with self.assertRaisesRegex(
+                TRANSITION.GovernorTransitionError,
+                "outside the evaluator installation",
+            ):
+                TRANSITION._evaluator_installation(
+                    str(python), str(entry_point), checkout.resolve()
                 )
 
 
