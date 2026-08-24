@@ -2,7 +2,7 @@
 id = "WO-REB-020"
 type = "work_order"
 title = "Implement role-specific release qualification commands"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -87,6 +87,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-24T08:17:36Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T10:02:04Z"
 decided_by = "engineering-owner"
 +++
 

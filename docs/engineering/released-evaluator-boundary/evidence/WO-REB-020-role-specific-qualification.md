@@ -11,7 +11,10 @@ Authority: non-authoritative retained implementation evidence. This file does no
 - The implementation base is `db704964139d6c2d88c9aabbf64848a9cf4eadc8`.
 - A status-preserving amendment authorized the exact-public-0.6.0 legacy candidate-verifier bootstrap described below. It did not expand any lifecycle or external-action authority.
 - A second status-preserving correction added only `tests/test_instruction_architecture.py` to the work-order execution scope so the existing managed-template contract could be updated with the reviewed assertions.
-- No operational candidate commit exists for this work. Exact-commit, built-package, and hosted Windows/Linux results therefore remain pending a separately authorized candidate stage.
+- Operational candidate commit: `73651505e0850e5c9348bbcf67708765ae61b755` (`Implement role-specific release qualification`).
+- The commit contains exactly the reviewed 32-path implementation. This post-candidate evidence update is intentionally uncommitted.
+- Exact local source/package qualification and hosted Linux/Windows agreement are recorded below.
+- Existing branch `proposal/rca-060-09-role-commands-01a02460` was pushed to origin at the exact candidate commit solely to run hosted qualification.
 
 ## Implemented command contracts
 
@@ -91,6 +94,60 @@ Focused tests cover the closed parser, deterministic/non-authoritative schema, e
 
 The complete suite was replayed after the evidence and authorized managed-template assertion correction were present. The changed-path audit reported 32 changed paths and zero paths outside `WO-REB-020.execution_scope`.
 
+## Exact-candidate replay
+
+### Complete candidate
+
+`qualify complete-candidate` passed from a fresh external Python environment against commit `73651505e0850e5c9348bbcf67708765ae61b755` and tree `2de29cfe9e7951d68c7e7799afb257c3c6cef6ae`:
+
+- candidate runtime bound to checkout: PASS;
+- clean `HEAD` and tracked tree bound to the candidate commit: PASS;
+- complete engineering graph: PASS, 717 artifacts, 0 errors, 50 existing maintenance warnings; and
+- repository no-change snapshot: PASS.
+
+The canonical result is `se-harness-release-qualification-v1`, operation `complete-candidate`, independence `candidate-controlled`, evaluator identity SHA-256 `a99dc63609145fe0de4df801e91b67643a08938f07ef32357a1024df4adbf005`, and target identity SHA-256 `0cef2cbc281a57154c5939031998aa9d4730838a381fb3f27eb1c3c5faee903c`.
+
+Retained clean-runtime result SHA-256: `8ab99f67050cb3d435885dd8c238a4bbff495dfe6036b5f17caded1466dba291`.
+
+An initial invocation from the workstation's ordinary Python failed closed with `RID009` and `RID018` because that runtime enabled user site-packages and exposed unrelated installed distribution metadata outside the checkout. The same exact candidate passed from the workflow-equivalent clean external environment. Both results are retained externally; the refusal result SHA-256 is `a59b22f33b9492878600f38cb496b969678bad3cfaf882d6408c6e7ffe6ff7aa`. The refusal demonstrates the intended runtime-contamination gate and was not bypassed or converted into a pass.
+
+### Reproducible candidate distributions
+
+Two fresh extractions of `git archive 73651505e0850e5c9348bbcf67708765ae61b755` were built with the workflow-pinned disposable toolchain (`build==1.3.0`, `setuptools==84.0.0`, `wheel==0.48.0`) and `SOURCE_DATE_EPOCH=1787564659`. The repository sdist normalizer used the same epoch. Both output sets were byte-identical:
+
+- `se_harness-0.6.0-py3-none-any.whl`: `70eb7b89b23bdda227273668f18e9837ea04846e4a4c799f4e646eef4a751f09`;
+- `se_harness-0.6.0.tar.gz`: `a901f36a4bf041b8c201fb9bc5abf984ed3db45e14adfc9e0f7c6850bdedcccb`.
+
+These are non-promotable local candidate distributions retained outside the checkout. Their hashes do not amend the released 0.6.0 record or public distribution bytes.
+
+### Independent exact-public-0.6.0 candidate-package bootstrap
+
+The immutable public-0.6.0 verifier accepted the exact candidate wheel using its historical command and retained `se-harness-functional-acceptance-v1` without a typed-independence field:
+
+- verifier wheel SHA-256: `2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7`;
+- verifier acceptance-contract SHA-256: `a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75`;
+- candidate commit: `73651505e0850e5c9348bbcf67708765ae61b755`;
+- candidate wheel SHA-256: `70eb7b89b23bdda227273668f18e9837ea04846e4a4c799f4e646eef4a751f09`; and
+- result: PASS, all 10 fixed scenarios.
+
+Retained legacy-bootstrap result SHA-256: `9f9a8849bc6969fd5762306972969f4f33a722ae93b91ccd1f43ae887e640829`.
+
+The separately installed candidate wheel then passed isolated `candidate-package` runtime identity with no diagnostics, the packaged portable-release surface, and a disposable repository `init`, `doctor`, `validate`, `dashboard`, and no-op `upgrade --apply` lifecycle. The disposable root reported 36 managed files unchanged after upgrade. Final candidate-checkout status and diff checks remained clean before this evidence update.
+
+### Hosted exact-candidate qualification
+
+All hosted workflows selected exact commit `73651505e0850e5c9348bbcf67708765ae61b755` on branch `proposal/rca-060-09-role-commands-01a02460`:
+
+- Engineering Harness run `32714254411`: PASS;
+- SE Harness Candidate Evidence run `32714254421`: PASS;
+- candidate source job `97392038359`: PASS, including typed complete-candidate qualification, portable surface, full regression, retained result, and checkout no-change;
+- candidate package job `97392233234`: PASS, including the exact-public-0.6.0 bootstrap verifier, installed identity/surface, disposable repository, retained legacy result, and checkout no-change;
+- Linux governance-migration job `97392364977`: PASS;
+- Windows governance-migration job `97392365039`: PASS; and
+- cross-platform reconciliation job `97392634696`: PASS with one semantic result.
+
+Governor Transition Assessment run `32714254403` also passed at the same commit. The only hosted annotations were informational Node.js-20 deprecation notices emitted by GitHub Actions; no qualification job reported a warning or failure.
+
 ## Root/template and no-action proof
 
 At base and after implementation:
@@ -102,13 +159,11 @@ At base and after implementation:
 
 The root managed workflow and lock are byte-identical to `HEAD`. Template drift is the reviewed future-upgrade change, not an installed root upgrade.
 
-No candidate commit, push, pull request, credential use, hosted dispatch, lifecycle transition beyond the already authorized packet approval/start, VREC/RLS preparation or transition, release, tag, publication, deployment, maintenance mutation, external-policy change, root-evaluator upgrade, or promotable distribution build occurred.
+No pull request, lifecycle transition beyond the already authorized packet approval/start, VREC/RLS preparation or transition, release, tag, publication, deployment, maintenance mutation, persistent external-policy change, root-evaluator upgrade, or promotable distribution build occurred. The configured Git credential was used only to push the existing branch at the exact candidate commit and read the resulting run status. Public network access was otherwise used only to install workflow-pinned build dependencies into a disposable external environment.
 
 ## Residual risks and next accountable decision
 
-- Exact-commit qualification cannot occur before a separately authorized candidate commit exists.
-- The exact candidate package and hosted Windows/Linux lanes remain pending; local mocks and workflow contract tests do not replace those results.
 - The immutable public-0.6.0 bootstrap is deliberately legacy-shaped and must not survive availability of a typed released verifier.
 - `predecessor-view` intentionally coordinates through the repository-owned production service while the historical evaluator executes externally; future packaging of that coordinator is a separate design decision, not a reason to duplicate view policy here.
 
-The next accountable decision is whether to authorize an operational candidate commit for exact-commit qualification. `WO-REB-020` remains `in_progress` until that evidence is available and reviewed.
+Local and hosted qualification now pass. The next accountable decision is whether to transition `WO-REB-020` from `in_progress` to `implemented`, followed by a governance commit, exact replay at that clean governance commit, and ready preparation of `VREC-REB-016` conforming to `VER-REB-009` with this keyed evidence path. `WO-REB-020` remains `in_progress` until that transition is explicitly authorized.
