@@ -427,6 +427,15 @@ def _upgrade_evidence_bytes(
             "authorize a release, publish, tag, deploy, or grant incident authority."
         ),
     }
+    declared = getattr(authorization, "legacy_releases_without_evaluator_evidence", ())
+    if declared:
+        # Provenance for SPEC-LRE-001 rule 5: record what the authorizing packet
+        # declared at the moment of the transition. Omitted when nothing is declared,
+        # so an evidence file's shape is unchanged for repositories without legacy
+        # releases.
+        from se_harness.legacy_release_evidence import DECLARATION_FIELD
+
+        value[DECLARATION_FIELD] = list(declared)
     return (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
 
 
@@ -466,6 +475,32 @@ def apply_changes(
             raise HarnessError(
                 "--evidence-output is allowed only for an authorized evaluator identity transition"
             )
+        if upgrade_authorization is not None:
+            # REQ-LRE-002: an identity transition writes a schema-3 lock, which
+            # enforces the evaluator-evidence binding on every released record. An
+            # undeclared unbound record would leave the repository unable to
+            # validate, so refuse before the first write rather than succeed into a
+            # frozen repository.
+            from se_harness.legacy_release_evidence import (
+                DECLARATION_FIELD,
+                LegacyReleaseEvidenceError,
+                undeclared_legacy_releases,
+            )
+
+            try:
+                undeclared = undeclared_legacy_releases(target)
+            except LegacyReleaseEvidenceError as exc:
+                raise HarnessError(
+                    f"cannot assess released records for evaluator evidence; no files were written: {exc}"
+                ) from exc
+            if undeclared:
+                raise HarnessError(
+                    "released records predate evaluator-evidence enforcement and are not declared; "
+                    "no files were written: "
+                    + ", ".join(undeclared)
+                    + f"; declare them in {upgrade_authorization.work_order} under "
+                    f"[evaluator_upgrade].{DECLARATION_FIELD}"
+                )
     elif old_lock.get("tool_version") is not None or (target / CONFIG_NAME).exists():
         # Init and first adoption have no installed authority to prove. A direct
         # API call against an already-installed root is an ordinary mutation,

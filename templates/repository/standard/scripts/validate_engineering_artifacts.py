@@ -70,9 +70,33 @@ RELEASE_BOOTSTRAP_KEYS = {
     "evaluator_archive_name",
     "evaluator_archive_sha256",
 }
+# Frozen self-hosting compatibility set. These are the harness repository's own
+# releases, cut before evaluator-evidence enforcement existed. SPEC-LRE-001 rule 11
+# closes the set: no identifier is ever added to it, and every other exemption is
+# declared under rule 5 in an upgrade work order's [evaluator_upgrade] packet.
 LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
     {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
 )
+SELF_HOSTING_DECLARER = "self-hosting-compatibility-set"
+UPGRADE_AUTHORIZATION_SCHEMA = "se-harness-evaluator-upgrade-v1"
+UPGRADE_AUTHORIZATION_SCOPE = "standard-root-only"
+LEGACY_EVIDENCE_DECLARATION_FIELD = "legacy_releases_without_evaluator_evidence"
+MAX_DECLARED_LEGACY_RELEASES = 512
+RELEASE_RECORD_ID_PATTERN = re.compile(r"^RLS-[A-Z][A-Z0-9-]*-\d{3}$")
+CANONICAL_TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+LEGACY_REASON_DECLARATION_SHAPE = "declaration must be an array of strings"
+LEGACY_REASON_DECLARATION_SIZE = f"declaration exceeds {MAX_DECLARED_LEGACY_RELEASES} entries"
+LEGACY_REASON_NO_APPROVAL = "declaring work order has no draft-to-approved lifecycle event"
+LEGACY_REASON_INVALID_ID = "invalid release record identifier"
+LEGACY_REASON_UNKNOWN_RECORD = "no release record has this identifier"
+LEGACY_REASON_AMBIGUOUS_RECORD = "more than one release record has this identifier"
+LEGACY_REASON_NOT_RELEASED = "release record status is not released"
+LEGACY_REASON_ALREADY_BOUND = "release record already carries evaluator evidence"
+LEGACY_REASON_NO_RELEASED_AT = "release record has no valid released_at timestamp"
+LEGACY_REASON_NOT_YET_RELEASED = (
+    "release record was released after the declaring work order was approved"
+)
+_LEGACY_UNDECLARED = object()
 GIT_COMMIT_PATTERNS = {
     "sha1": re.compile(r"^[0-9a-f]{40}$"),
     "sha256": re.compile(r"^[0-9a-f]{64}$"),
@@ -1593,8 +1617,244 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
     return errors
 
 
+def _legacy_declaration(work_order: dict[str, Any]) -> Any:
+    """Return an authoritative packet's declaration value, or the undeclared sentinel."""
+
+    packet = work_order.get("evaluator_upgrade")
+    if not isinstance(packet, dict):
+        return _LEGACY_UNDECLARED
+    if (
+        packet.get("schema") != UPGRADE_AUTHORIZATION_SCHEMA
+        or packet.get("scope") != UPGRADE_AUTHORIZATION_SCOPE
+    ):
+        return _LEGACY_UNDECLARED
+    if LEGACY_EVIDENCE_DECLARATION_FIELD not in packet:
+        return _LEGACY_UNDECLARED
+    return packet[LEGACY_EVIDENCE_DECLARATION_FIELD]
+
+
+def _legacy_released_unbound(record: dict[str, Any]) -> bool:
+    return (
+        record.get("status") == "released"
+        and not record.get("path_present")
+        and not record.get("digest_present")
+    )
+
+
+def _legacy_member_defect(
+    member: str,
+    approved_at: str,
+    by_id: dict[str, list[dict[str, Any]]],
+) -> str | None:
+    """Return why a declared member does not resolve, or None when it does."""
+
+    if RELEASE_RECORD_ID_PATTERN.fullmatch(member) is None:
+        return LEGACY_REASON_INVALID_ID
+    matches = by_id.get(member, [])
+    if not matches:
+        return LEGACY_REASON_UNKNOWN_RECORD
+    if len(matches) > 1:
+        return LEGACY_REASON_AMBIGUOUS_RECORD
+    record = matches[0]
+    if record.get("status") != "released":
+        return LEGACY_REASON_NOT_RELEASED
+    if record.get("path_present") or record.get("digest_present"):
+        return LEGACY_REASON_ALREADY_BOUND
+    released_at = record.get("released_at")
+    if (
+        not isinstance(released_at, str)
+        or CANONICAL_TIMESTAMP_PATTERN.fullmatch(released_at) is None
+    ):
+        return LEGACY_REASON_NO_RELEASED_AT
+    if not released_at < approved_at:
+        return LEGACY_REASON_NOT_YET_RELEASED
+    return None
+
+
+def resolve_legacy_release_evidence(
+    records: list[dict[str, Any]],
+    work_orders: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Resolve declared exemptions for pre-enforcement releases, per SPEC-LRE-001.
+
+    This mirrors `se_harness.legacy_release_evidence.resolve`. The two implementations
+    exist because this script must run standalone inside a consumer repository; their
+    agreement is asserted against a shared committed vector fixture.
+    """
+
+    authoritative = {
+        state
+        for state, row in WORKFLOW_LIFECYCLES["work_order"].items()
+        if row.grants_authority
+    }
+    by_id: dict[str, list[dict[str, Any]]] = {}
+    for record in records:
+        identifier = record.get("id")
+        if isinstance(identifier, str) and identifier:
+            by_id.setdefault(identifier, []).append(record)
+
+    exemptions: dict[str, str] = {}
+    defects: list[dict[str, Any]] = []
+    for work_order in sorted(work_orders, key=lambda item: str(item.get("id", ""))):
+        identifier = work_order.get("id")
+        if not isinstance(identifier, str) or not identifier:
+            continue
+        if work_order.get("status") not in authoritative:
+            continue
+        declaration = _legacy_declaration(work_order)
+        if declaration is _LEGACY_UNDECLARED:
+            continue
+        if not isinstance(declaration, list) or not all(
+            isinstance(member, str) for member in declaration
+        ):
+            defects.append(
+                {"work_order": identifier, "record": None, "reason": LEGACY_REASON_DECLARATION_SHAPE}
+            )
+            continue
+        if len(declaration) > MAX_DECLARED_LEGACY_RELEASES:
+            defects.append(
+                {"work_order": identifier, "record": None, "reason": LEGACY_REASON_DECLARATION_SIZE}
+            )
+            continue
+        if not declaration:
+            continue
+        approved_at = work_order.get("approved_at")
+        if (
+            not isinstance(approved_at, str)
+            or CANONICAL_TIMESTAMP_PATTERN.fullmatch(approved_at) is None
+        ):
+            defects.append(
+                {"work_order": identifier, "record": None, "reason": LEGACY_REASON_NO_APPROVAL}
+            )
+            continue
+        for member in sorted(set(declaration)):
+            reason = _legacy_member_defect(member, approved_at, by_id)
+            if reason is not None:
+                defects.append({"work_order": identifier, "record": member, "reason": reason})
+                continue
+            exemptions.setdefault(member, identifier)
+
+    for identifier in sorted(LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE):
+        matches = by_id.get(identifier, [])
+        if len(matches) == 1 and _legacy_released_unbound(matches[0]):
+            exemptions.setdefault(identifier, SELF_HOSTING_DECLARER)
+
+    undeclared = sorted(
+        identifier
+        for identifier, matches in by_id.items()
+        if identifier not in exemptions
+        and len(matches) == 1
+        and _legacy_released_unbound(matches[0])
+    )
+    return {
+        "exemptions": dict(sorted(exemptions.items())),
+        "defects": sorted(
+            defects, key=lambda item: (item["work_order"], item["record"] or "", item["reason"])
+        ),
+        "undeclared": undeclared,
+    }
+
+
+def _legacy_approved_at(artifact: Artifact) -> str | None:
+    """Return the last draft-to-approved decision instant, or None."""
+
+    events = artifact.metadata.get("lifecycle_events")
+    if not isinstance(events, list):
+        return None
+    latest: str | None = None
+    for event in events:
+        if (
+            not isinstance(event, dict)
+            or event.get("from") != "draft"
+            or event.get("to") != "approved"
+        ):
+            continue
+        decided_at = event.get("decided_at")
+        if isinstance(decided_at, str) and decided_at and (latest is None or decided_at > latest):
+            latest = decided_at
+    return latest
+
+
+def legacy_release_evidence_state(artifacts: list[Artifact]) -> dict[str, Any]:
+    """Resolve declared legacy release-evidence exemptions from the artifact graph."""
+
+    records = [
+        {
+            "id": artifact.artifact_id,
+            "status": artifact.status,
+            "released_at": artifact.metadata.get("released_at"),
+            "path_present": artifact.metadata.get("evaluator_evidence_path") is not None,
+            "digest_present": artifact.metadata.get("evaluator_evidence_sha256") is not None,
+        }
+        for artifact in artifacts
+        if artifact.artifact_type == "release_record"
+    ]
+    work_orders = [
+        {
+            "id": artifact.artifact_id,
+            "status": artifact.status,
+            "approved_at": _legacy_approved_at(artifact),
+            "evaluator_upgrade": artifact.metadata.get("evaluator_upgrade"),
+        }
+        for artifact in artifacts
+        if artifact.artifact_type == "work_order"
+    ]
+    return resolve_legacy_release_evidence(records, work_orders)
+
+
+def validate_legacy_release_evidence_warnings(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> list[Diagnostic]:
+    """Report one W024 per accepted pre-enforcement release exemption."""
+
+    state = legacy_release_evidence_state(artifacts)
+    exemptions = state["exemptions"]
+    by_id = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_type == "release_record"
+    }
+    warnings: list[Diagnostic] = []
+    for identifier, declarer in sorted(exemptions.items()):
+        artifact = by_id.get(identifier)
+        if artifact is None:
+            continue
+        warnings.append(
+            Diagnostic(
+                _display_path(artifact.path, report_root),
+                "W024",
+                f"released record '{identifier}' predates evaluator-evidence enforcement and is "
+                f"exempt through {declarer}; the binding remains outstanding",
+                "maintenance",
+            )
+        )
+    return warnings
+
+
 def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
+
+    legacy_evidence = legacy_release_evidence_state(artifacts)
+    legacy_exemptions = legacy_evidence["exemptions"]
+    work_orders_by_id = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_type == "work_order"
+    }
+    for defect in legacy_evidence["defects"]:
+        declarer = work_orders_by_id.get(defect["work_order"])
+        if declarer is None:
+            continue
+        subject = f" '{defect['record']}'" if defect["record"] else ""
+        _add_error(
+            errors,
+            declarer,
+            report_root,
+            "E012",
+            f"{LEGACY_EVIDENCE_DECLARATION_FIELD}{subject}: {defect['reason']}",
+            plane="governance",
+        )
 
     approved_bootstrap_contracts = [
         artifact
@@ -1864,9 +2124,13 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "release_record status is not declared by the workflow lifecycle registry",
                     plane="governance",
                 )
+            # SPEC-LRE-001 rules 5 and 11: a released record with both binding fields
+            # absent is exempt when an authority-granting upgrade work order declares
+            # it, or when it belongs to the frozen self-hosting compatibility set. A
+            # partially bound record is never exempt.
             legacy_without_binding = (
                 artifact.status == "released"
-                and artifact.artifact_id in LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE
+                and artifact.artifact_id in legacy_exemptions
                 and artifact.metadata.get("evaluator_evidence_path") is None
                 and artifact.metadata.get("evaluator_evidence_sha256") is None
             )
@@ -3113,9 +3377,17 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         )
         errors.extend(validate_requirement_coverage(artifacts, repository_root))
 
+    legacy_evidence_warnings: list[Diagnostic] = []
+    if selected_artifact_root.exists():
+        legacy_evidence_warnings = validate_legacy_release_evidence_warnings(
+            artifacts,
+            repository_root,
+        )
+
     warnings = [
         *assessment_warnings,
         *traceability_warnings,
+        *legacy_evidence_warnings,
         *validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors),
     ]
     return ValidationReport(
