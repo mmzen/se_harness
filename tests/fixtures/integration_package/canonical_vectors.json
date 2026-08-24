@@ -1,0 +1,25 @@
+{
+  "schema": "se-harness-integration-package-test-v1",
+  "vectors": [
+    {
+      "base_version": "0.6.0",
+      "channel": "main",
+      "commit": "1cdc75259da8156e93ad8c32110ee196296b8cea",
+      "event": "push",
+      "pull_request": null,
+      "ref": "refs/heads/main",
+      "retention_days": 14,
+      "version": "0.6.0+main.g1cdc75259da8"
+    },
+    {
+      "base_version": "0.6.0",
+      "channel": "pr128",
+      "commit": "1cdc75259da8156e93ad8c32110ee196296b8cea",
+      "event": "pull_request",
+      "pull_request": 128,
+      "ref": "refs/pull/128/merge",
+      "retention_days": 3,
+      "version": "0.6.0+pr128.g1cdc75259da8"
+    }
+  ]
+}

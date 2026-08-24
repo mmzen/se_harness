@@ -30,6 +30,8 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Bounded evaluator recovery](evaluator-recovery-runbook.md) | How do maintainers rehearse and, only after separate action-time authority, recover a governance deadlock? |
 | [`harnessctl` command reference](harnessctl-reference.md) | Which commands exist, who normally runs them, and what can they change? |
 | [Developing SE Harness](developing-se-harness.md) | How does the implementation repository use the standard lifecycle while keeping candidate evidence separate? |
+| [Testing a current commit with an integration package](integration-packages.md) | How do I safely download, verify, install, test, and remove an expiring non-release build? |
+| [Integration Package definition-review packet](integration-package-definition-review.md) | Which exact accountable approvals govern the proposed installable current-commit testing lane? |
 | [Publishing the SE Harness development dashboard](harness-dashboard-publication.md) | How is the repository's release-bound public Explorer demonstration deployed and replayed? |
 
 ## Know what is authoritative
