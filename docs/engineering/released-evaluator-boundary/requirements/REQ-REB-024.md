@@ -57,6 +57,7 @@ Each refusal shall use a stable identifier and subject, shall be raised before t
 ## Constraints
 
 - Detection shall not depend on the platform name. The junction check applies wherever the running Python exposes junction detection, and its absence shall not silently disable the check.
+- A runtime that observes no reparse information at all answers the junction question rather than disabling the check. Where the runtime's own stat result carries no reparse member, no path it can reach is a reparse point, so the junction predicate is decided and answers negative. That observation is a capability of the runtime, not the name of a platform, and it shall be read from the runtime's stat-result surface rather than from a platform identifier. The check is disabled only if a runtime that can encounter a reparse point is allowed to proceed without classifying it, and that case shall refuse.
 - Where the current code already refuses one of these forms, the correction shall preserve that refusal. No listed refusal may be lost while relaxing the terminal-link case.
 
 ## Acceptance examples
@@ -84,3 +85,27 @@ Each refusal shall use a stable identifier and subject, shall be raised before t
 **When** the boundary validates that path
 
 **Then** it refuses with the checkout-separation diagnostic, because a released evaluator may not execute candidate bytes.
+
+## Amendment record
+
+**Constraints, amended 2026-08-24 by the engineering owner under `WO-REB-022`.**
+A second constraint is added stating that a runtime observing no reparse
+information answers the junction question rather than disabling the check, and
+that this observation is a runtime capability rather than a platform name.
+
+The reason is that the first constraint — detection shall not depend on the
+platform name — was implemented under `WO-REB-021` as a capability rule with two
+routes, `pathlib.Path.is_junction` and the reparse-point `stat` constants, and
+neither exists on Python 3.11 off Windows: `IO_REPARSE_TAG_MOUNT_POINT` is
+published only where the platform defines it. Every supported lane below Python
+3.12 off Windows therefore refused every interpreter at every boundary, which
+the hosted `ubuntu` lane measured as 33 failures and 38 errors. The repair reads
+the runtime's own `os.stat_result` members instead, and this amendment states
+that reading as an obligation so the requirement cannot be read as prohibiting
+it.
+
+The amendment adds no permission to skip a check and removes none. The `WHEN`
+statement, the required response, every listed refusal form, the failure and
+boundary behavior, and every acceptance example are unchanged, and the first
+constraint stands verbatim. A runtime that can encounter a reparse point and
+cannot classify it still refuses.

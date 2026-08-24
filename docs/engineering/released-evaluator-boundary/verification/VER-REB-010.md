@@ -35,7 +35,7 @@ Every claim of non-change is measured against an independently captured baseline
 | `REQ-REB-023` | Windows integration | an ordinary `Scripts/python.exe` environment through the same boundaries | Accepted under the same rule with no platform branch in policy |
 | `REQ-REB-023` | end-to-end bootstrap | release bootstrap binding against a POSIX venv evaluator | The binding completes; the derived evaluator root is the venv, not the system prefix |
 | `REQ-REB-024` | adversarial corpus | symbolic-link parent, junction parent, terminal junction, dangling link, non-file target, chained target, lexical path in checkout, resolved target in checkout, short-name alias, case-variant alias, redirected temporary directory, relative and parent components, rootless path | Each returns its declared case identifier, before any interpreter is spawned and before any target validation |
-| `REQ-REB-024` | junction predicate test | `mklink /J` parent with `is_symlink()` false and an independently observed mount-point reparse tag; a stubbed runtime without `pathlib.Path.is_junction`; and a stubbed runtime without either route | Both available routes refuse the junction parent; a runtime with neither route refuses rather than passes |
+| `REQ-REB-024` | junction predicate test | `mklink /J` parent with `is_symlink()` false and an independently observed mount-point reparse tag; and a stubbed runtime for every combination of the three named routes, each route withdrawn or supplied by name so that either lane can construct any combination | Both classifying routes refuse the junction parent; a runtime that observes reparse information and has neither classifying route refuses rather than passes; a runtime that observes no reparse information decides the predicate and accepts |
 | `REQ-REB-024` | refusal-preservation test | every refusal each boundary produces at the base commit | No base-commit refusal is lost by the terminal-link relaxation |
 | `REQ-REB-025` | identity fact test | POSIX venv, Windows ordinary file, and an environment-internal resolved target | `python_executable`, `python_entry_is_link`, `python_binary_position`, and `python_binary_sha256` all match independently computed values |
 | `REQ-REB-025` | tamper test | interpreter link repointed, and binary bytes altered, between the boundary's observation and the identity observation | The boundary's own comparison fails and no passing proof is retained |
@@ -61,7 +61,7 @@ Every claim of non-change is measured against an independently captured baseline
 1. Each adversarial form in the matrix produces its declared case identifier from every boundary that receives an interpreter path.
 2. Instrumentation proves no interpreter subprocess was spawned and no target validation ran for any refused form.
 3. A junction parent is refused on Windows. The test asserts independently that `is_symlink()` is false for that parent and that its `lstat` result carries the reparse-point attribute with the mount-point reparse tag, so the case cannot pass through symbolic-link detection alone. Where the running Python also exposes `pathlib.Path.is_junction`, the test asserts it is true for the same parent and that both routes agree.
-4. A runtime exposing neither `pathlib.Path.is_junction` nor the reparse-point `stat` constants refuses with the unavailable-predicate case rather than skipping the check. A runtime exposing only one of the two routes does not refuse for that reason; the test asserts each route in isolation reaches the same junction refusal.
+4. A runtime that observes reparse information on its stat result yet exposes neither `pathlib.Path.is_junction` nor the reparse-point `stat` constants refuses with the unavailable-predicate case rather than skipping the check. A runtime exposing only one of the three routes does not refuse for that reason; the test asserts each route in isolation decides the predicate, and asserts the whole decision table over the three routes against a test-owned expectation. A runtime that observes no reparse information at all — the combination every supported lane below Python 3.12 reaches off Windows — accepts an ordinary environment and derives the same environment root, and the test asserts that against a real path rather than against the capability function alone. Each route is withdrawn or supplied by pointing its named constant at a name the runtime does or does not carry, so every combination is constructable on either lane and none of them requires a skip.
 5. A resolved target inside the candidate checkout is refused even when the lexical path is outside it.
 6. No refusal is downgraded to a warning, an allowlisted diagnostic, or a maintenance-plane observation.
 
@@ -169,3 +169,25 @@ requires them to be proven in agreement. This strengthens the verification
 obligation rather than relaxing it — it adds the two-route agreement check and
 the single-route isolation checks — and it changes no requirement, no pass
 condition for any other row, and no evidence obligation.
+
+**Junction-predicate restatements, amended again 2026-08-24 by the engineering
+owner under `WO-REB-022`, in the same act that amended `SPEC-REB-011` rule 4 a
+second time.** The first amendment left two of these statements describing a
+two-route predicate. The reparse-point `stat` route does not exist on the pinned
+lane, because `IO_REPARSE_TAG_MOUNT_POINT` is published only where the platform
+defines it, so the hosted `ubuntu` lane refused every interpreter at every
+boundary. The method row and refusal scenario 4 now describe the three-route
+predicate and the narrowed `EPS011` condition. Refusal scenario 3 is unchanged:
+it concerns a real junction on Windows, where both classifying routes exist.
+
+This amendment again strengthens the obligation rather than relaxing it. It
+replaces "a stubbed runtime without either route" with the whole decision table
+over the three routes, checked against a test-owned expectation; it adds a real
+path assertion for the pinned lane's own combination, so acceptance is proven
+against a constructed environment and not against the capability function alone;
+and it removes a skip rather than adding one, because every route is now
+withdrawn or supplied by name and no combination depends on the running lane's
+own capabilities. It changes no requirement, no pass condition for any other
+row, and no evidence obligation, and this contract's own coverage statement that
+neither platform alone verifies `REQ-REB-024` stands unchanged: the junction half
+still requires the Windows lane.

@@ -57,7 +57,7 @@ The rule is stateless and performs no mutation. Evaluation is a pure function of
 1. **Normalization.** Expand a leading user prefix, then make the path absolute against the current working directory using lexical normalization only. No component is dereferenced. The result is the *lexical path*.
 2. **Environment root.** The *environment root* is the lexical path's second parent. A lexical path with fewer than two parent components has no environment root and is refused with `EPS010`.
 3. **Parent link refusal.** Walk every enclosing directory of the lexical path from its immediate parent to the filesystem root. If any of them is a symbolic link, refuse with `EPS001`. If any of them is a Windows directory junction, refuse with `EPS002`.
-4. **Junction detection.** Junction detection is a separate predicate from symbolic-link detection. Where the running Python exposes `pathlib.Path.is_junction`, it is used. Where it is absent, the rule uses the equivalent reparse-point route: the `stat` module's reparse-point file attribute together with its mount-point reparse tag, read from an `lstat` result. Only where neither route is available does the rule refuse with `EPS011` rather than passing the check silently. Neither route can accept a path the other would refuse; both classify a junction, and a positive classification always produces `EPS002`.
+4. **Junction detection.** Junction detection is a separate predicate from symbolic-link detection, and the predicate has three routes. Where the running Python exposes `pathlib.Path.is_junction`, it is used. Where it is absent, the rule uses the equivalent reparse-point route: the `stat` module's reparse-point file attribute together with its mount-point reparse tag, read from an `lstat` result. Where neither route exists, the rule reads whether the runtime's `os.stat_result` carries reparse members at all; a stat result that carries none observes a filesystem on which no path is a reparse point, so the predicate is decided and answers negative for every path. Only where reparse information is observable and neither predicate route exists does the rule refuse with `EPS011` rather than passing the check silently. No route may accept a path another would refuse; the first two classify a junction and a positive classification always produces `EPS002`, and the third can only answer negative on a filesystem that has no junction to classify.
 5. **Existence and resolution.** Resolve the lexical path strictly. If resolution fails, refuse with `EPS003`. The result is the *resolved target*.
 6. **Ordinary-file refusal.** If the lexical path is not a file, or the resolved target is not a file, refuse with `EPS004`.
 7. **Final-component refusal.** If the lexical path traverses a link but is not itself a symbolic link, refuse with `EPS005`. This is the position that a junction or another reparse point occupies when it stands as the final component.
@@ -175,3 +175,38 @@ acceptance becomes a refusal or the reverse, and no waiver is introduced.
 `VER-REB-010` restated the same predicate in three places and was amended in the
 same act, so that its junction-predicate method, its refusal scenario 3, and its
 refusal scenario 4 describe the amended rule rather than the approved one.
+
+**Rule 4, amended again 2026-08-24 by the engineering owner under
+`WO-REB-022`.** The first amendment named the reparse-point `stat` route as the
+predicate on Python 3.11. That route does not exist on the pinned lane.
+`FILE_ATTRIBUTE_REPARSE_POINT` is defined in the cross-platform `Lib/stat.py`
+and is present everywhere, but `IO_REPARSE_TAG_MOUNT_POINT` is published only by
+the `_stat` extension and only where the platform defines it, so a Python 3.11
+runtime off Windows has neither route. The hosted `ubuntu` lane measured the
+consequence on the `WO-REB-021` candidate: every boundary refused every
+interpreter with `EPS011`, for 33 failures and 38 errors. The first amendment
+therefore corrected the version half of the problem and left the platform half
+in place; this amendment corrects the remainder.
+
+Rule 4 now gives the predicate a third route: whether the runtime's
+`os.stat_result` carries reparse members at all. A stat result carrying none
+observes a filesystem on which no path is a reparse point, so the predicate is
+decided and answers negative. `EPS011` is narrowed to the case it was written
+for — a runtime that can encounter a reparse point and cannot classify it — and
+remains a declared, reachable, tested refusal.
+
+The amendment adds no acceptance beyond the one the defect wrongly refused. The
+third route can only answer negative, and only where the platform supplies
+nothing for the other two to classify; on that same platform
+`pathlib.Path.is_junction` returns the same negative answer for every path from
+Python 3.12 onward, so the amendment makes a pre-3.12 runtime agree with a
+later one at equal detection power rather than granting either any new one. No
+case is added, removed, renumbered, or reordered, no acceptance becomes a
+refusal or the reverse, and no waiver is introduced.
+
+The third route is not a platform conditional. It is an observation of the
+runtime's own stat-result surface, `REQ-REB-024` was amended in the same act to
+state that explicitly, and a conformance test asserts mechanically that no
+platform name appears in either loader's capability functions. `VER-REB-010`'s
+junction-predicate method row and refusal scenario 4 were amended in the same
+act for the same reason as before: they restate this rule.
