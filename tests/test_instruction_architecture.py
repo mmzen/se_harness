@@ -46,18 +46,17 @@ OLD_WORKFLOW_REVIEW_STEP = (
 WORKFLOW_REVIEW_STEP = (
     "6. The implementation actor MUST change only the authorized scope, retain"
 )
-ROUTER_HANDOFF_HEADING = "## Lifecycle restitution"
-WORKFLOW_HANDOFF_HEADING = "## Lifecycle restitution procedure"
-HANDOFF_FIELDS = (
-    "Outcome",
-    "Done",
-    "Not done",
-    "Blocked by",
-    "Current lifecycle state",
-    "Decision required",
-    "Next",
-    "Command or response",
-    "Alternatives",
+ROUTER_HANDOFF_HEADING = "## Lifecycle handoff"
+WORKFLOW_HANDOFF_HEADING = "## Lifecycle handoff procedure"
+ROUTER_HANDOFF_SEMANTICS = (
+    "actual artifact IDs",
+    "lifecycle state",
+    "observed effects",
+    "material non-effects",
+    "blockers",
+    "accountable decision",
+    "recommended next action",
+    "command argument boundaries",
 )
 
 
@@ -201,6 +200,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         target = self.installed_target()
         agents = (target / "AGENTS.md").read_text(encoding="utf-8")
         managed = agents.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
+        claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
             encoding="utf-8"
@@ -209,35 +209,51 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn(ROUTER_HANDOFF_HEADING, router)
         router_handoff = router.split(ROUTER_HANDOFF_HEADING, 1)[1].split("\n## ", 1)[0]
         normalized_router_handoff = " ".join(router_handoff.split())
-        for field in HANDOFF_FIELDS:
-            with self.subTest(field=field):
-                self.assertIn(field, normalized_router_handoff)
-        self.assertIn("actual artifact IDs", normalized_router_handoff)
-        self.assertIn("preserve every stated non-effect", normalized_router_handoff)
+        for semantic in ROUTER_HANDOFF_SEMANTICS:
+            with self.subTest(semantic=semantic):
+                self.assertIn(semantic, normalized_router_handoff)
+        self.assertIn("structured result is authoritative", normalized_router_handoff)
+        self.assertIn("SHOULD summarize", normalized_router_handoff)
+        self.assertIn("MAY adapt wording and structure", normalized_router_handoff)
+        self.assertIn("omit empty fields", normalized_router_handoff)
+        self.assertIn("exactly one next action", normalized_router_handoff)
+        self.assertIn("deterministic human renderer directly", normalized_router_handoff)
+        self.assertIn("Model transcription MUST NOT", normalized_router_handoff)
         self.assertIn("WORKFLOW.md", router_handoff)
         self.assertNotIn("--phase review", router_handoff)
         self.assertNotIn("capture-verification", router_handoff)
         self.assertNotIn("Current lifecycle state", managed)
+        self.assertIn("schema-2 structured result as\nauthoritative", managed)
+        self.assertIn("Adapt wording and\nstructure", managed)
+        self.assertIn("Exact-format consumers must use the direct\nrenderer", managed)
+        self.assertIn("authoritative schema-2 result", claude)
+        self.assertIn("Exact human\nblocks come only from the direct renderer", claude)
 
         self.assertIn(WORKFLOW_HANDOFF_HEADING, workflow)
         workflow_handoff = workflow.split(WORKFLOW_HANDOFF_HEADING, 1)[1]
+        normalized_workflow_handoff = " ".join(workflow_handoff.split())
         for phrase in (
-            "`Outcome`",
-            "`Done`",
-            "`Not done`",
-            "`Blocked by`",
-            "`Current lifecycle state`",
-            "`Decision required`",
-            "`Next`",
-            "`Command or response`",
-            "`Alternatives`",
+            "structured result is authoritative",
+            "adapt wording, order, and headings",
+            "omit empty fields",
             "actual artifact IDs",
+            "observed effects from incomplete expected effects",
+            "every exact blocker and every material non-effect",
+            "final lifecycle state",
+            "accountable role and exact decision",
             "exactly one current typed procedure step",
+            "command argument values and boundaries",
+            "workflow-declared complete alternatives",
+            "deterministic schema-2 human renderer",
+            "Model transcription MUST NOT",
             "open-ended question",
-            "unchanged state",
+            "second next action",
         ):
             with self.subTest(phrase=phrase):
-                self.assertIn(phrase, workflow_handoff)
+                self.assertIn(phrase, normalized_workflow_handoff)
+        for text in (managed, claude, router_handoff, workflow_handoff):
+            self.assertNotIn("block verbatim", text)
+            self.assertNotIn("restitution verbatim", text)
 
     def test_stage_aware_handoff_upgrade_is_safe_and_idempotent(self) -> None:
         target = self.installed_target("prior-handoff")
