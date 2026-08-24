@@ -2,7 +2,7 @@
 id = "VREC-IPK-001"
 type = "verification_record"
 title = "Verification candidate for WO-IPK-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/integration-package/evidence/WO-IPK-001-veri
 evaluator_evidence_path = "docs/engineering/integration-package/evidence/VREC-IPK-001-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-24T12:04:59Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IPK-001"]
 conforms_to = ["VER-IPK-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T12:04:59Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Record Candidate
