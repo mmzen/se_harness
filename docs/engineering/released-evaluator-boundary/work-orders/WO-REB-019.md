@@ -2,10 +2,10 @@
 id = "WO-REB-019"
 type = "work_order"
 title = "Centralize lifecycle semantics and rejected-history handling"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner", "release-owner"]
 created = "2026-08-23"
-updated = "2026-08-23"
+updated = "2026-08-24"
 
 [assurance]
 commit_bound_verification = "required"
@@ -54,6 +54,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-23T10:05:17Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T07:39:46Z"
 decided_by = "engineering-owner"
 +++
 
