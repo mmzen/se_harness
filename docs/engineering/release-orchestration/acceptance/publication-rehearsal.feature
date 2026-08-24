@@ -121,11 +121,37 @@ Feature: Rehearse the credential-free publication path on both runner platforms
     Then it contains only data
     And a declaration containing executable logic fails the check
 
+  Scenario: A matrix job runs one half of its steps on each runner type
+    Given a credential-free orchestrator job declares a two-mode matrix with one mode on windows-2022 and one on ubuntu-latest
+    When the divergence check resolves platforms
+    Then the job claims both platforms as the union over its combinations
+    And a step gated to one mode claims only that mode's platform while an ungated step claims both
+    And each mechanic's platforms are the union over the declared steps of its own job that realize it
+
+  Scenario: A step that loses its mode gate fails closed
+    Given a declared step that ran on one matrix mode is no longer gated
+    When the divergence check runs
+    Then it fails in the stale direction naming the job, the step, and both platform sets
+    And a step gated out of every combination fails because the orchestrator performs it on no platform
+
+  Scenario: An unmodelled matrix or runner expression is refused rather than guessed
+    Given a rehearsed job declares an exclude list, both axes and an include list, or a runs-on expression the resolver does not model
+    When the divergence check reads it
+    Then it refuses the workflow before any comparison
+    And a step gate outside the comparison grammar is refused the same way
+
+  Scenario: A mechanic no platform can rehearse is excluded in both modes
+    Given the orchestrator replays a bound build recipe through an immutable linux container producer
+    When the rehearsal reaches that mechanic on either runner type
+    Then it reports the mechanic excluded with the first measured obstacle in a fixed precedence
+    And it never reports the mechanic executed and never omits it from the result
+    And the reason names the repository's dedicated credential-free replay lane
+
   Scenario: The release orchestrator is unchanged
     Given the rehearsal and its divergence check exist
-    When the release orchestrator is compared with its merge-base content
+    When the release orchestrator is compared with the content this branch inherited from main
     Then it is byte-identical
-    And its single release_record input, permissions, and job structure are unchanged
+    And its single release_record input, permissions, and job structure are unchanged by this packet
 
   Scenario: The rehearsal holds no publication authority
     Given any rehearsal outcome, successful or failed

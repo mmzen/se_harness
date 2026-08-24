@@ -6,7 +6,7 @@
 
 `.github/workflows/publish-pypi.yml` performs the last mile of a release as one credentialed transaction. Most of its work needs no credential at all: resolving a plan, proving the released evaluator's identity, exporting the candidate, building it twice, normalizing sdists, assembling a bundle, and verifying that bundle. Only after all of that does a credential appear.
 
-That credential-free work is split by platform. `resolve` runs only on `ubuntu-latest`, `qualify` only on `windows-2022`. So before this control existed, no run ever exercised the Linux half on Windows or the Windows half on Linux. `RC-060-11` in the `0.6.0` release recovery analysis records what that cost: incidents `I-15` and `I-16` were both platform details — Git Bash path conversion, and a Windows 8.3 short-name alias for the temporary directory — discovered *during* a live release.
+That credential-free work is split by platform. `resolve` runs only on `ubuntu-latest`. `qualify` runs a two-mode matrix: the legacy schema-1 mode on `windows-2022` and the recipe-era schema-2 mode on `ubuntu-latest`, with every step gated to one mode. So the build, normalization, and bundle half is still exercised on Windows only, and the recipe half on Linux only; before this control existed, no run exercised either half on the other platform. `RC-060-11` in the `0.6.0` release recovery analysis records what that cost: incidents `I-15` and `I-16` were both platform details — Git Bash path conversion, and a Windows 8.3 short-name alias for the temporary directory — discovered *during* a live release.
 
 The rehearsal closes that gap. It runs the whole credential-free set on **both** platforms, on ordinary candidate integration, with `contents: read` and nothing else.
 
@@ -42,13 +42,15 @@ python .github/scripts/rehearse_publication.py check-divergence --repository .
 python .github/scripts/rehearse_publication.py rehearse --repository . --root ../rehearsal-root
 ```
 
-Three things to know before the first local run.
+Four things to know before the first local run.
 
 **Start from a clean checkout.** One mechanic drives the released evaluator's predecessor-view qualification, and predecessor preparation refuses to run against a dirty worktree. The failure is real but it is about your checkout, not about publication — so the result reports the inherited checkout condition next to the outcomes. A fresh clone at the commit you want to rehearse removes it.
 
 **Line endings matter here.** The candidate checkout is created with `git worktree add`, exactly as publication creates it, so it inherits `core.autocrlf`. On a Windows checkout with `core.autocrlf=true`, a few tests that assert on exact bytes fail for that reason alone; the same commit is green in a `core.autocrlf=false` clone. The result reports the inherited setting, so check a suspected regression against a clean worktree at the same commit before believing it.
 
 **One mechanic is excluded in candidate mode, on purpose.** Publication resolves the evaluator from the schema-3 lock and then qualifies the candidate against the *release record's own* predecessor contract. Those name the same evaluator while a record is being prepared, and differ by one release afterwards: a released record names the evaluator that qualified it, while the lock names the evaluator that release advanced to. So on ordinary integration there is no record the mechanic can accept, and the result says so — reporting `excluded` with both measured identities — rather than reporting a failure of publication. A `release-record` rehearsal of a record under preparation exercises it for real, and there a mismatch is a defect in the record and fails. The repository owner ruled on 2026-08-24 that this is the right report, so treat a candidate that hides the mechanic or calls it `executed` as a defect rather than as a tidy-up; `SPEC-RLO-005` rule 37 governs.
+
+**A second mechanic is excluded in both modes.** The orchestrator's recipe-era mode replays the bound build recipe, and that replay pulls and runs an immutable `linux/amd64` container producer against a released distribution-schema-2 record. `windows-2022` cannot run a Linux container at all, and no released record in the repository binds a schema-2 recipe yet, so the mechanic is declared and always reported `excluded` with whichever obstacle is measured first: no eligible subject, then platform or missing container runtime, then the boundary. `.github/workflows/release-candidate-replay.yml` is the dedicated credential-free lane that does exercise it — and because that lane is not the declared orchestrator, the divergence check does not read it. `SPEC-RLO-005` rule 40 governs.
 
 A release owner can also rehearse a *prepared* record before approving it, which is the only mode that compares against an authorized release identity:
 
@@ -70,6 +72,9 @@ The divergence check works in layers, because each layer alone leaves a way for 
 | Command keys | a new command appears inside a declared step |
 | Step digests | a declared step's script changed at all — a new flag, a changed argument, a reordering |
 | Action surface | a step uses an action that is undeclared, or not pinned to a full 40-character commit |
+| Platform claims | a job's matrix or a step's mode gate changed, so a mechanic now runs on a platform its declaration does not claim — or no longer runs anywhere |
+
+Platform claims are held per *step*, not per job, because a matrix job runs one half of its steps on each runner type. A job's platforms are the union over its enumerated matrix combinations; a step's are those combinations minus the ones its own `if` gate excludes; and a mechanic's are the union over the declared steps that realize it. A gate the checker cannot decide — one reading `needs`, `github`, `inputs`, `env`, `runner`, `steps`, or a status function — is treated as able to hold, and a gate outside that grammar is refused rather than guessed. Claiming platforms per job instead would have said that the Windows-only build half of `qualify` runs on Linux too, which is exactly the kind of overstatement `RC-060-11` is about.
 
 Classification is *fail-closed* in three ways worth spelling out. A job that declares no `permissions` block is excluded, not assumed harmless. A job that cannot be classified fails the check rather than defaulting either way. And exclusion is **transitive**: the orchestrator's `observe` job holds only `contents: read`, but it `needs: github_release`, so it runs after a credential has been used and is excluded too. Five of the orchestrator's seven jobs are excluded; `resolve` and `qualify` are rehearsed.
 

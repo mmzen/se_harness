@@ -45,6 +45,8 @@ Formal artifacts: `CAP-RLO-003`, `REQ-RLO-015`, `REQ-RLO-016`, `SPEC-RLO-005`, `
 
 The third proof normalizes line endings because this checkout has `core.autocrlf=true`, so the worktree file and the blob differ in bytes as stored while being the same content. The repository test `test_the_release_orchestrator_is_byte_unchanged` asserts the same property in the suite.
 
+The figures in this section are the pre-merge measurement and are kept as measured. `main` later changed the orchestrator itself, so the merge-base form of the proof no longer holds and the claim narrows to byte-unchanged *by this packet*; the section “The orchestrator is still byte-unchanged by this packet” below records the re-derived digest and why.
+
 ## Mechanic inventory and per-platform outcomes
 
 Two complete local rehearsals were run, both on Windows, at the candidate commit. They differ only in the inherited `core.autocrlf` setting, which the candidate checkout inherits because the rehearsal creates it with `git worktree add` exactly as the orchestrator does.
@@ -86,7 +88,7 @@ The `core.autocrlf=false` run was measured in a throwaway clone at the same comm
 
 `test_contract_rejects_duplicate_and_unknown_fields` and `test_manifest_normalizes_line_endings_and_detects_content_changes` (`tests/test_agentic_execution.py`), `test_declaration_is_data_only` (`tests/test_hash_bound_integrity.py`), and `test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_one_skill_core` (`tests/test_release_build.py`). The rehearsal names all four in its own failure text: `candidate unit suite exited 1 with 4 failing tests: …`.
 
-None of the four is in `tests/test_publication_rehearsal.py`; all four assert on exact bytes and all four are green at the same commit in the `core.autocrlf=false` clone. They are a property of the inherited checkout, not of this work order and not of the publication path. That is why `REQ-RLO-015` was amended to report `line_ending_conversion` on the result and why the human summary states `Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings`.
+There were four at this commit. `main` later added six more byte-exact assertions, so the same condition now reports ten; the section “Re-measured after the merge” below names them and the control that proves they are inherited. None of the four is in `tests/test_publication_rehearsal.py`; all four assert on exact bytes and all four are green at the same commit in the `core.autocrlf=false` clone. They are a property of the inherited checkout, not of this work order and not of the publication path. That is why `REQ-RLO-015` was amended to report `line_ending_conversion` on the result and why the human summary states `Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings`.
 
 ## Measured versus injected platform coverage
 
@@ -295,8 +297,108 @@ The accountable repository owner accepted all seven on 2026-08-24 through the st
 - `acceptance/publication-rehearsal.feature`: three scenarios — a mechanic with no valid subject, teardown's audit accepting the root, and an inherited converting checkout.
 - `docs/notes/release-publication-rehearsal.md`: three things to know instead of two.
 
+Two further amendments, `A8` and `A9`, were forced later and by a different cause: `main` advanced under the open branch and changed the orchestrator, rather than a mismeasurement here. They are **not** covered by the `Accept all seven` acceptance and await a separate owner decision. Neither changes an approved `statement` field, relaxes a pass condition, or widens the authority boundary.
+
+- `SPEC-RLO-005` A8, rules 38 and 39: matrix combination enumeration, per-step gate resolution, step and mechanic platform claims, and declaration schema `v2` with four load-time refusals.
+- `SPEC-RLO-005` A9, rule 1 and rule 40: twenty-two mechanics instead of twenty-one, and the recipe-bound build replay always reported `excluded` with a measured reason in both modes.
+- `SPEC-RLO-005`: nine error and recovery rows, five examples, and the data-contract paragraph.
+- `REQ-RLO-015`: a third amendment recording that one credential-free mechanic cannot be executed on either runner type by this control.
+- `REQ-RLO-016`: the required response derives platforms from the matrix and holds the claim per step; two acceptance examples.
+- `VER-RLO-005`: the `REQ-RLO-016` row gains the matrix cases; five property tests; the static orchestrator check names the content inherited from `main`; residual uncertainty extended with the second excluded mechanic and the adjacent replay lane.
+- `WO-RLO-005`: a lifecycle paragraph for the renumbering, the merge, and the conflict resolution, and a constraint restated as byte-unchanged by this packet.
+- `acceptance/publication-rehearsal.feature`: four scenarios — a gated matrix job, a step that loses its gate, an unmodelled matrix or gate refused rather than guessed, and a mechanic no platform can rehearse; the orchestrator scenario now compares against the content inherited from `main`.
+- `docs/notes/release-publication-rehearsal.md`: four things to know instead of three, a platform-claims row in the drift-layer table, the per-step claim explained, and the split-by-platform paragraph corrected for the matrix.
+
+## The merge with `main`, and what it changed
+
+`main` advanced to `cda8a10` while this branch was open. Two independent things followed: an identifier collision, and a semantic break in the divergence seam.
+
+### The identifier collision and the renumbering
+
+Pull request #133 (issue #110, the complete build-recipe packet) merged first and bound `CAP-RLO-004` through `WO-RLO-004` to verified `VREC-RLO-004`. This packet had claimed the same identifiers. A verified record is immutable and cannot be re-pointed, so this packet is the side that moved: commit `c7f2e48` renumbered it to `RLO-005` throughout, and `docs/engineering/release-orchestration/README.md` discloses the renumbering in the packet's own section rather than presenting `RLO-005` as the original numbering.
+
+### `main` was merged in, not rebased onto
+
+Commit `29c0db0` is a merge of `cda8a10` into `c7f2e48`. A rebase would have rewritten commits this branch had already published, orphaning any record bound to them; the doctrine is to merge `main` in. One content conflict occurred, in `docs/engineering/release-orchestration/README.md`, where both sides added a packet section at the same place. It was resolved by keeping both sections. That resolution is content no test covered before the merge, which is why it is disclosed here rather than left to the diff. Every other incoming path is `main`'s content taken verbatim; no incoming file was edited to make anything pass.
+
+### The orchestrator changed, and the check refused it
+
+`main` gave the orchestrator's `qualify` job a two-mode matrix, with `mode: legacy-schema-1` on `windows-2022` and `mode: recipe-schema-2` on `ubuntu-latest` declared through `strategy.matrix.include`, and `runs-on` set to the `matrix.os` expression. The divergence check refused the merged file outright, exit 1:
+
+```
+publication rehearsal: runs-on label has no known platform family: ${{ matrix.os }}
+```
+
+That is `REQ-RLO-016` working as specified — the checker will not guess a platform — and it is not a repairable state, because the orchestrator is out of scope and the claim it refused was genuinely no longer expressible. Five consequences were measured and are recorded in `SPEC-RLO-005` amendments `A8` and `A9`:
+
+1. A job can now run on more than one runner type, so a job's platforms are the union over its enumerated matrix combinations.
+2. Every credential-free step of `qualify` now carries a mode gate, so the platform claim had to move from the job to the step. A per-job claim would have stated that the Windows-only build half of `qualify` runs on Linux too — the overstatement of platform coverage that `RC-060-11` is about.
+3. Six mechanics measurably run on both platforms now, four of them newly: candidate export, complete-candidate qualification, the unit suite, the CLI smoke check, build-manifest verification, and bundle verification. Six remain Windows-only: temporary-path identity, pinned build-tool installation, the deterministic build, sdist normalization, build-determinism comparison, and bundle assembly.
+4. Four `qualify` step titles changed and two steps are new, so four declared `run` digests were re-derived and two step entries added. The declaration schema advanced to `se-harness-publication-rehearsal-mechanics/v2` with a required per-step platform claim; the previously documentary `steps[].mechanics` link now carries a mechanic's platform claim, and a mechanic realized by no declared step of its own job is refused at load time.
+5. The step `Replay the exact bound recipe twice` added a twenty-second credential-free mechanic, reported `uncovered` against the approved inventory.
+
+### The twenty-second mechanic cannot be rehearsed here
+
+`repository_tools/release_build.replay_build` pulls and runs an immutable producer image with `docker pull --platform linux/amd64` and `docker run`. Three measurements, in the precedence rule 40 fixes:
+
+| Measurement | Result |
+|---|---|
+| Committed release records that are released distribution-schema-2 subjects with a bound recipe | none; the one distribution-bearing record, `RLS-SEH-012`, declares distribution schema 1 |
+| `docker` on the measuring host's `PATH` | absent |
+| `linux/amd64` container execution on `windows-2022` | impossible by runner type, not by configuration |
+
+So the mechanic is declared and always reported `excluded` with the first reason that holds, in both modes. This differs from rule 37's exclusion, which applies to `candidate` mode only, because the platform obstacle is not a property of the subject. The measured run reports the first precedence step: "no committed release record is a released distribution-schema-2 subject with a bound build recipe; the 1 committed records declare distribution schema 1, so this mechanic has no subject to replay".
+
+`main` also added `.github/workflows/release-candidate-replay.yml`, a `workflow_dispatch`-only lane with an empty top-level `permissions` map and one `ubuntu-latest` job under `contents: read`, which replays the exact candidate twice without credentials. That is the honest home of the replay, and the declaration names it in the exclusion reason. It is **not** the declared orchestrator, so this packet's divergence check does not read it and a change to it is invisible here. Widening the check to a second workflow would exceed `SPEC-RLO-005`, which names one orchestrator, so it is disclosed as an adjacent uncovered surface rather than silently absorbed.
+
+### The orchestrator is still byte-unchanged by this packet
+
+The merge-base proof above no longer applies, because `main` changed the file itself. What this packet can honestly claim is that it contributes no byte:
+
+| Proof | Result |
+|---|---|
+| `git diff --stat cda8a10 29c0db0 -- .github/workflows/publish-pypi.yml` | empty |
+| Pinned LF digest in `tests/test_publication_rehearsal.py` | re-derived from `d7313d16db7f…` to `2d3c3b775946d7667d9a175b0bb85446ff90db029d021e155a9b12105ff1f51e` |
+| Meaning of the assertion | restated in the test's own comment as byte-unchanged *by this packet*, with the incoming change named |
+
+A pinned digest that is re-derived is only as good as the disclosure of why, which is this row and the merge commit's own message. The digest is re-derived only for an incoming change from `main` and never to accommodate a change made here.
+
+### Re-measured after the merge
+
+| Measurement | Result |
+|---|---|
+| `check-divergence --repository .` | `EXACT`, exit 0, `Rehearsed jobs: qualify, resolve on Linux, Windows`, five excluded jobs each with its attribute, no uncovered or stale mechanic |
+| `tests/test_publication_rehearsal.py` | 121 tests, OK — the 101 that existed before the merge plus 20 new for the matrix layers and the replay exclusion |
+| Full suite at `29c0db0` | 825 tests, 5 failures and 5 errors, 12 skipped |
+| Control worktree at `cda8a10` | 704 tests, the same ten failure names, 12 skipped |
+| Delta | this branch adds 121 tests, all passing, and introduces no new failing test |
+| Root frozen validator | PASS, 795 artifacts, 0 errors, 50 warnings |
+| Candidate validator | PASS, 795 artifacts, 0 errors, 56 warnings |
+| `validate_release_distributions.py --root .` | PASS, 1 distribution-bearing record |
+| `git diff --check` | clean for every path this packet touches; three trailing-whitespace reports are in `VALUE_PROPOSAL_EXEC.md`, incoming from `main` as markdown hard line breaks |
+| Governing review preflight, released `0.6.0` evaluator run from outside the checkout | `Harness preflight: PASS`, phase `review`, `WO-RLO-005` (`implemented`), no diagnostic |
+| Governing `doctor`, same evaluator | PASS, 0 `FAIL` |
+| In-tree `doctor` | 9 `FAIL`, the same count as the control at `cda8a10`: six candidate-versus-released template deltas and three `harness-orient` skill lock entries absent from the released distribution. Candidate boundary skew inherited from `main`, not caused by this packet |
+
+The ten reds are the inherited `core.autocrlf=true` condition, now ten rather than the four recorded above, because `main` added byte-exact assertions in `tests/test_agent_contract.py`, `tests/test_hash_bound_integrity.py`, and `tests/test_release_build.py`. Their names are identical in the branch and in the control at `cda8a10`, so none is caused by this packet. None is in `tests/test_publication_rehearsal.py`.
+
+### The full rehearsal at the merge commit
+
+Run on Windows in `candidate` mode at `29c0db0` with a clean worktree: twenty mechanics `executed`, two `excluded` with measured reasons, one `failed`, `unreported_mechanics` empty, `source_date_epoch = 1787586665`, both distribution sets byte-identical — the normalized sdist is `39e9b9eb…` from both trees — `verify-build-manifest` and `verify-bundle` both `exact`, and teardown removing 6289 derived paths without following a link and leaving the worktree clean.
+
+The one failure is `candidate-unit-suite`, and it is the inherited checkout again: the rehearsal names all ten tests in its own failure text, and they are the same ten the control at `cda8a10` reports. The two exclusions are the predecessor-view qualification under rule 37 and the recipe-bound build replay under rule 40, each carrying both measured identities or the measured obstacle in its reason.
+
+The same rehearsal was then run at the same commit in a `core.autocrlf=false` clone, which settles the one failure: state `rehearsed`, exit 0, twenty-one mechanics `executed` including the unit suite at 825 tests passed, the same two exclusions with the same reasons, the same `source_date_epoch = 1787586665`, and the same 6289 derived paths torn down. The same clone reports `check-divergence` `EXACT` at exit 0 and 121 passing rehearsal tests. So every mechanic this control can execute is proven executed at `29c0db0` on the one platform the implementer can run, and the Windows run's single failure is the checkout and nothing else.
+
+| Run at `29c0db0` | State | Unit suite | Exclusions |
+|---|---|---|---|
+| Working checkout, `core.autocrlf=true` | `failed`, exit 1 | 10 byte-exact tests fail, all ten also failing in the control at `cda8a10` | predecessor-view qualification, recipe-bound build replay |
+| Throwaway clone, `core.autocrlf=false` | `rehearsed`, exit 0 | 825 tests passed | the same two, with the same reasons |
+
 ## Actions explicitly not performed
 
 Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
+
+After that, `main` was merged into the branch as `29c0db0` and the branch was pushed again to the same pull request. A merge into a feature branch and a push to a branch the owner already authorized pushing are within that authorization; nothing else was extended by it. Amendments `A8` and `A9` await an owner decision, and this document records them as pending rather than as accepted.
 
 Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-005` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.
