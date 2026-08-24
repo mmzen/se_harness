@@ -2,7 +2,7 @@
 id = "WO-REB-022"
 type = "work_order"
 title = "Repair the junction-predicate capability rule on the pinned Python 3.11 lane"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -46,6 +46,13 @@ to = "in_progress"
 decided_at = "2026-08-24T15:13:52Z"
 decided_by = "engineering-owner"
 reason = "Explicit start of the local implementation and qualification only, after a PASS start preflight. Authorizes no release, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator adoption."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T16:56:31Z"
+decided_by = "engineering-owner"
+reason = "Accountable engineering-owner decision under DR-WO-COMPLETE that the authorized implementation and its retained evidence are complete. Every required verification is measured: the pinned ubuntu lane is green at 133ab6a in run 32752855726, job 97513599220, with 770 tests and OK (skipped=3), having gone from 71 failures and errors on the WO-REB-021 candidate to none; the focused module, the full local suite against an independently captured base-commit baseline, graph, distribution, portable-surface, released-evaluator validation and the review preflight all pass, and the handoff check Completes over the eleven-path manifest. Includes the scope amendment of 2026-08-24 that added repository_tools/predecessor_preparation.py and authorized the two bounded repairs of defects this work order's own repair unmasked. Authorizes no release, tag, publication, deployment, maintenance mutation, credential use, external-policy change or root-evaluator adoption, and decides no verification record."
 +++
 
 # Work Order: Repair the junction-predicate capability rule on the pinned Python 3.11 lane
