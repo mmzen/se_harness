@@ -2,7 +2,7 @@
 id = "WO-HBI-002"
 type = "work_order"
 title = "Take every hash mode from the declared class and fix the lock's divergence"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -32,16 +32,23 @@ implements = ["REQ-HBI-002"]
 specifications = ["SPEC-HBI-001"]
 architecture = ["ARCH-HBI-001", "ADR-HBI-001"]
 verification = ["VER-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T10:43:27Z"
+decided_by = "engineering-owner"
+reason = "Owner approval recorded 2026-08-24. Authorizes bounded local implementation and local qualification only; implementation start remains a separate explicit decision."
 +++
 
 # Work Order: Take every hash mode from the declared class and fix the lock's divergence
 
 ## Lifecycle and authorization
 
-Not authorized. This work order is `draft` and no owner decision exists yet. It
-requires approval of the same governing packet as `WO-HBI-001` plus a separate
-explicit start, and it depends on `WO-HBI-001` being implemented first because the
-declaration and resolver it consumes do not exist until then.
+Approved on 2026-08-24 by the engineering owner. Approval and start are separate
+decisions and only the first has been taken, so implementation is not authorized
+yet. The dependency is satisfied: `WO-HBI-001` is implemented and merged, so the
+declaration and resolver this work order consumes now exist.
 
 Approval would authorize bounded local implementation and local qualification
 only. Commit, branch push, pull request, merge, VREC or RLS preparation or
