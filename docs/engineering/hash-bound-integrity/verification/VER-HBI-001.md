@@ -19,6 +19,33 @@ decided_by = "quality-owner"
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance
 
+## Amendment, 2026-08-24 — accepted
+
+Amended under `WO-HBI-003`. `WO-RLO-005`'s publication-rehearsal lane executed on
+hosted runners for the first time and measured the release orchestrator failing
+candidate qualification on `windows-2022`: the orchestrator creates the checkout it
+qualifies with `git worktree add`, which inherits `core.autocrlf=true`, and eleven
+byte-exact assertions read converted bytes there.
+
+This contract's coverage of `REQ-HBI-001` was complete for declared classes and
+silent about committed surfaces the suite compares byte for byte without a recorded
+digest binding them. The row, scenario and property added below close that gap. The
+amendment adds obligation and relaxes no pass condition; no approved `statement`
+field changed.
+
+The accountable repository owner accepted this amendment and the companion scope
+widening in this domain's `README.md` on 2026-08-24 through the statement
+`Accept both`, taken over the framing: "VER-HBI-001 gains one REQ-HBI-001 matrix row
+(byte-rule completeness beyond declared classes), acceptance scenario 8, and one
+property bullet. The hash-bound-integrity README scope boundary admits committed
+files whose exact bytes the suite compares without a recorded digest binding them,
+guarded by a test rather than a doctor check." Scenario 8 was measured before the
+decision, not after: removing one owner-region rule and re-materializing the path
+fails `ByteExactSurfaceTests` with two assertions, one naming
+`se_harness/agent_contract.json is crlf`. The acceptance authorizes no verification,
+merge, release, publication or deployment, and the manual acceptances this contract
+requires from the security, quality and repository owners remain separate.
+
 ## Independence
 
 Assurance selects its own checkout matrices, its own tamper cases and its own
@@ -42,6 +69,7 @@ implementation prints.
 | `REQ-HBI-001` | Region placement | `template` class present only in owner content, and `repository` class present only in the managed block | Each misplacement is reported ineffective |
 | `REQ-HBI-001` | Template parity | Candidate `templates/repository/standard/gitattributes.fragment` versus declared `template` classes | Byte-identical for every `template`-region class; a divergence fails a static check |
 | `REQ-HBI-001` | Fail-closed matrix | Unreadable `.gitattributes`, unavailable Git, attribute resolution failure, untracked declared path | Every case is a failing named check with the exact reason; none passes and none is advisory |
+| `REQ-HBI-001` | Byte-rule completeness beyond declared classes | Every tracked path selected by the byte-exact inventory in `tests/test_hash_bound_integrity.py`, resolved through `se_harness.hash_bound` and cross-read with `git ls-files --eol` | Every pattern selects at least one tracked file, every selected path resolves `text` set and `eol=lf`, and no selected path is converted in the working tree; a missing rule fails naming the path and the conversion observed |
 | `REQ-HBI-002` | Mode-divergence detection | One declared class hashed under both modes across callers | Test fails naming the class and both observed modes |
 | `REQ-HBI-002` | Lock mode convergence | `upgrade_authorization` and `release_bootstrap` compare a lock digest on LF and CRLF checkouts | Both compute the same canonical digest and reach the same verdict in both checkouts |
 | `REQ-HBI-002` | Legacy recognition | `WO-HUP-002`'s recorded `prior_lock_sha256` against canonical-mode comparison | Comparison succeeds through documented newline-variant recognition, reports the legacy match distinctly, and the recorded field is unchanged on disk |
@@ -66,6 +94,10 @@ implementation prints.
    an effective one.
 7. A consumer installation created from the canonical template inherits the
    `template` classes and none of this repository's `repository`-region rules.
+8. On a checkout with `core.autocrlf=true` the full suite passes. Removing any one
+   of the owner-region byte rules that `WO-HBI-003` declares makes
+   `ByteExactSurfaceTests` fail, naming that path and the `crlf` it observed, and
+   restoring it passes.
 
 ## Property and invariant tests
 
@@ -82,6 +114,10 @@ implementation prints.
   results.
 - No recorded digest field in any governed artifact changes across the whole
   suite.
+- Every committed path whose exact bytes the suite compares resolves an effective
+  versioned byte rule from repository content, and none is converted in the working
+  tree. A declared pattern that selects no tracked file fails rather than passing
+  vacuously.
 
 ## Static and architecture checks
 

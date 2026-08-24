@@ -7,3 +7,14 @@ docs/engineering/**/evidence/*.json text eol=lf
 se_harness/governance_migration*.py text eol=lf
 se_harness/governance_migration_contract.json text eol=lf
 tests/fixtures/governance_migration/*.json text eol=lf
+
+# Repository-owned byte rules for surfaces the candidate suite asserts byte for byte.
+# The release orchestrator qualifies the candidate in a `git worktree`, which inherits
+# the checkout's core.autocrlf, so a converted byte here fails qualification on Windows.
+se_harness/agent_contract.json text eol=lf
+se_harness/hash_bound_classes.json text eol=lf
+release/build-recipe.json text eol=lf
+release/build-toolchain.lock text eol=lf
+templates/repository/standard/.agents/skills/**/*.json text eol=lf
+templates/repository/standard/.agents/skills/**/*.md text eol=lf
+templates/repository/standard/.agents/skills/**/*.py text eol=lf

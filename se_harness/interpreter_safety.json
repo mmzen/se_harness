@@ -1,0 +1,317 @@
+{
+  "schema": "se-harness-interpreter-safety-v1",
+  "outcomes": [
+    "accepted",
+    "refused"
+  ],
+  "position_classes": [
+    "outside-declared-roots",
+    "within-checkout-root",
+    "within-expected-root"
+  ],
+  "cases": [
+    {
+      "id": "EPS010",
+      "subject": "environment_root",
+      "outcome": "refused",
+      "summary": "the lexical path has fewer than two parent components, so no environment root can be derived from it"
+    },
+    {
+      "id": "EPS011",
+      "subject": "link_predicate",
+      "outcome": "refused",
+      "summary": "the runtime observes reparse information on its filesystem yet exposes no route that classifies a directory junction, so link safety cannot be decided"
+    },
+    {
+      "id": "EPS001",
+      "subject": "parent",
+      "outcome": "refused",
+      "summary": "an enclosing directory of the lexical path is a symbolic link"
+    },
+    {
+      "id": "EPS002",
+      "subject": "parent",
+      "outcome": "refused",
+      "summary": "an enclosing directory of the lexical path is a directory junction"
+    },
+    {
+      "id": "EPS003",
+      "subject": "interpreter",
+      "outcome": "refused",
+      "summary": "the lexical path does not resolve strictly"
+    },
+    {
+      "id": "EPS004",
+      "subject": "interpreter",
+      "outcome": "refused",
+      "summary": "the lexical path or its resolved target is not an ordinary file"
+    },
+    {
+      "id": "EPS005",
+      "subject": "interpreter",
+      "outcome": "refused",
+      "summary": "the final component traverses a link without being a symbolic link"
+    },
+    {
+      "id": "EPS006",
+      "subject": "target",
+      "outcome": "refused",
+      "summary": "the resolved target's own path traverses a link"
+    },
+    {
+      "id": "EPS007",
+      "subject": "interpreter",
+      "outcome": "refused",
+      "summary": "the lexical path lies inside the supplied checkout root"
+    },
+    {
+      "id": "EPS008",
+      "subject": "target",
+      "outcome": "refused",
+      "summary": "the resolved target lies inside the supplied checkout root"
+    },
+    {
+      "id": "EPS009",
+      "subject": "interpreter",
+      "outcome": "refused",
+      "summary": "the lexical path does not lie lexically inside the supplied declared environment root with a non-empty remainder"
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "repository_tools.predecessor_assessment.external_interpreter",
+      "runtime": "repository_tools",
+      "module": "repository_tools/predecessor_assessment.py",
+      "purpose": "accept the released-evaluator interpreter before each hosted assessment command",
+      "kind": "rule"
+    },
+    {
+      "id": "repository_tools.predecessor_assessment.interpreter_origin",
+      "runtime": "repository_tools",
+      "module": "repository_tools/predecessor_assessment.py",
+      "purpose": "normalize a verified released-evaluator interpreter origin for retained evidence",
+      "kind": "rule"
+    },
+    {
+      "id": "repository_tools.predecessor_preparation.external_interpreter",
+      "runtime": "repository_tools",
+      "module": "repository_tools/predecessor_preparation.py",
+      "purpose": "validate an externally supplied predecessor interpreter",
+      "kind": "rule"
+    },
+    {
+      "id": "repository_tools.predecessor_publication.external_interpreter",
+      "runtime": "repository_tools",
+      "module": "repository_tools/predecessor_publication.py",
+      "purpose": "reach the rule for a published predecessor interpreter",
+      "kind": "delegating",
+      "delegates_to": "repository_tools.predecessor_preparation.external_interpreter"
+    },
+    {
+      "id": "repository_tools.release_bootstrap.released_evaluator",
+      "runtime": "repository_tools",
+      "module": "repository_tools/release_bootstrap.py",
+      "purpose": "bind a released evaluator to a release record",
+      "kind": "rule"
+    },
+    {
+      "id": "se_harness.governance_migration.runtime_probe",
+      "runtime": "se_harness",
+      "module": "se_harness/governance_migration.py",
+      "purpose": "probe a predecessor or successor migration runtime",
+      "kind": "rule"
+    },
+    {
+      "id": "se_harness.release_qualification.external_evaluator",
+      "runtime": "se_harness",
+      "module": "se_harness/release_qualification.py",
+      "purpose": "locate an external predecessor evaluator environment",
+      "kind": "rule"
+    },
+    {
+      "id": "se_harness.runtime_identity.installed_interpreter",
+      "runtime": "se_harness",
+      "module": "se_harness/runtime_identity.py",
+      "purpose": "observe the running interpreter for a declared runtime role",
+      "kind": "rule"
+    }
+  ],
+  "corpus": [
+    {
+      "id": "ISC001",
+      "form": "ordinary-file-entry",
+      "expected": "accepted",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "an ordinary interpreter file two levels below its environment root"
+    },
+    {
+      "id": "ISC002",
+      "form": "terminal-symlink-entry",
+      "expected": "accepted",
+      "constructable_on": [
+        "linux"
+      ],
+      "summary": "the normal POSIX virtual-environment form: bin/python is a terminal symbolic link to a system interpreter",
+      "unconstructable_reason": "creating a symbolic link on Windows requires a privilege the ordinary developer and CI accounts do not hold (WinError 1314)"
+    },
+    {
+      "id": "ISC003",
+      "form": "hardlink-entry",
+      "expected": "accepted",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "a hard link is not a path-level link and cannot relocate an environment, so it is an ordinary file for this rule"
+    },
+    {
+      "id": "ISC004",
+      "form": "symlink-parent",
+      "expected": "EPS001",
+      "constructable_on": [
+        "linux"
+      ],
+      "summary": "an enclosing directory is a symbolic link to a real environment",
+      "unconstructable_reason": "creating a symbolic link on Windows requires a privilege the ordinary developer and CI accounts do not hold (WinError 1314)"
+    },
+    {
+      "id": "ISC005",
+      "form": "junction-parent",
+      "expected": "EPS002",
+      "constructable_on": [
+        "windows"
+      ],
+      "summary": "an enclosing directory is a directory junction, for which symbolic-link detection is false and junction detection is true through whichever route the running runtime exposes",
+      "unconstructable_reason": "directory junctions are a Windows reparse-point construct with no POSIX equivalent"
+    },
+    {
+      "id": "ISC006",
+      "form": "dangling-terminal-symlink",
+      "expected": "EPS003",
+      "constructable_on": [
+        "linux"
+      ],
+      "summary": "the final component is a symbolic link whose target does not exist",
+      "unconstructable_reason": "creating a symbolic link on Windows requires a privilege the ordinary developer and CI accounts do not hold (WinError 1314)"
+    },
+    {
+      "id": "ISC007",
+      "form": "absent-entry",
+      "expected": "EPS003",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "the lexical path does not exist"
+    },
+    {
+      "id": "ISC008",
+      "form": "directory-entry",
+      "expected": "EPS004",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "the lexical path is a directory rather than an interpreter file"
+    },
+    {
+      "id": "ISC009",
+      "form": "terminal-junction-entry",
+      "expected": "EPS004",
+      "constructable_on": [
+        "windows"
+      ],
+      "summary": "a directory junction standing in the final position is refused as a non-file before the final-component rule is reached, because a junction is always a directory",
+      "unconstructable_reason": "directory junctions are a Windows reparse-point construct with no POSIX equivalent"
+    },
+    {
+      "id": "ISC010",
+      "form": "file-position-non-symbolic-link",
+      "expected": "EPS005",
+      "constructable_on": [],
+      "summary": "a final component that resolves, is a file, traverses a link, and is not a symbolic link",
+      "unconstructable_reason": "neither platform can construct one: a junction is always a directory and is refused by EPS004 first, and the only file-position reparse point available on Windows is an application execution alias, which fails strict resolution with WinError 1920 and is therefore refused by EPS003 first"
+    },
+    {
+      "id": "ISC011",
+      "form": "chained-resolved-target",
+      "expected": "EPS006",
+      "constructable_on": [],
+      "summary": "a resolved target whose own path still traverses a link",
+      "unconstructable_reason": "strict resolution is fully transitive on both platforms: a chain of junctions or symbolic links resolves to a path that traverses none, so this refusal is retained as a defence against a partially resolvable path rather than as a reachable form"
+    },
+    {
+      "id": "ISC012",
+      "form": "entry-inside-checkout",
+      "expected": "EPS007",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "the lexical path lies inside the supplied checkout root"
+    },
+    {
+      "id": "ISC013",
+      "form": "target-inside-checkout",
+      "expected": "EPS008",
+      "constructable_on": [
+        "linux"
+      ],
+      "summary": "the lexical path lies outside the checkout while its resolved target lies inside it",
+      "unconstructable_reason": "separating the lexical path from its target requires a symbolic link, which Windows cannot create without privilege; a hard link resolves to its own path and a junction parent is refused by EPS002 first"
+    },
+    {
+      "id": "ISC014",
+      "form": "outside-declared-root",
+      "expected": "EPS009",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "a valid interpreter in one environment offered against another environment as the declared root"
+    },
+    {
+      "id": "ISC015",
+      "form": "rootless-entry",
+      "expected": "EPS010",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "an interpreter path directly below a filesystem root, which cannot be a virtual environment"
+    },
+    {
+      "id": "ISC016",
+      "form": "no-link-classification-capability",
+      "expected": "EPS011",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "a runtime that observes reparse information yet exposes neither a junction predicate nor the reparse-point constants needed to classify one; constructed on either platform by withdrawing and supplying the three named routes rather than by building a path, so the reachable and the unreachable combinations are both covered where the lane's own runtime cannot produce them"
+    },
+    {
+      "id": "ISC017",
+      "form": "relative-entry",
+      "expected": "accepted",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "a relative interpreter path made absolute against the working directory by lexical normalization alone"
+    },
+    {
+      "id": "ISC018",
+      "form": "parent-component-entry",
+      "expected": "accepted",
+      "constructable_on": [
+        "linux",
+        "windows"
+      ],
+      "summary": "an interpreter path containing a parent component, removed by lexical normalization without dereferencing any component"
+    }
+  ]
+}

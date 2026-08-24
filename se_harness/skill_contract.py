@@ -13,6 +13,7 @@ from typing import Any, Iterable, Mapping
 
 
 CONTRACT_SCHEMA = "se-harness-skill-contract-v1"
+CONTRACT_SCHEMA_V2 = "se-harness-skill-contract-v2"
 MANIFEST_SCHEMA = "se-harness-skill-manifest-v1"
 CANONICAL_JSON_SCHEMA = "se-harness-canonical-json-v1"
 TEXT_MODE = "utf8-text-lf-v1"
@@ -166,6 +167,7 @@ def _typed_entries(
     fields: set[str],
     *,
     allowed_types: set[str] | None = None,
+    allowed_retentions: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     result: list[dict[str, Any]] = []
     names: set[str] = set()
@@ -193,14 +195,262 @@ def _typed_entries(
             _text(entry["schema"], f"{entry_path}.schema", pattern=_IDENTIFIER)
         if "retention" in fields:
             retention = _text(entry["retention"], f"{entry_path}.retention", pattern=_IDENTIFIER)
-            if retention not in {"inline", "none"}:
+            if retention not in (allowed_retentions or {"inline", "none"}):
                 raise SkillContractError("SKC010", f"unsupported output retention: {retention}")
         result.append(entry)
     return result
 
 
+_V2_INPUT_TYPES = {
+    "artifact-id",
+    "artifact-id-list",
+    "artifact-plan",
+    "bounded-text",
+    "command-array",
+    "directory-path",
+    "domain-name",
+    "evaluator-launcher",
+    "json-object",
+    "path-list",
+    "repository-path",
+    "skill-name",
+    "text-list",
+    "version",
+}
+_V2_PROHIBITED_EFFECTS = {
+    "accountable-approval",
+    "credential-use",
+    "delivery-selection",
+    "external-action",
+    "git-mutation",
+    "network-mutation",
+    "release-decision",
+    "work-completion",
+}
+_V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
+    "harness-draft-change": {
+        "mutation_class": "draft-writing",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("domain", "domain-name", True),
+            ("artifact-plan", "artifact-plan", True),
+            ("planning-note", "repository-path", False),
+            ("revisable-artifacts", "artifact-id-list", False),
+        ],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "create-artifact"],
+        "optional_operations": ["scaffold-domain", "inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("formal-state-before-effect", "before-effect", "validate-json", True),
+            ("formal-state-after-effect", "after-effect", "validate-json", True),
+            ("draft-review-handoff", "handoff", "inspect-json", False),
+        ],
+        "path_source": "declared-draft-destinations",
+        "permitted": ["draft-create", "draft-revise", "planning-note-write"],
+        "target_retention": False,
+        "retained_kinds": ["draft-artifacts", "planning-note"],
+        "outputs": [
+            ("skill-result", "se-harness-skill-result-v1", "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+        ],
+    },
+    "harness-execute-work-order": {
+        "mutation_class": "governed-mutation",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("work-order", "artifact-id", True),
+            ("focus-result", "json-object", True),
+            ("preflight-result", "json-object", True),
+            ("execution-scope", "path-list", True),
+            ("verification-contracts", "artifact-id-list", True),
+            ("evidence-obligations", "path-list", True),
+            ("repository-commands", "command-array", True),
+            ("implementation-constraints", "text-list", False),
+        ],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "check"],
+        "optional_operations": ["inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("work-state-before-effect", "before-effect", "focus-json", True),
+            ("scope-before-effect", "before-effect", "preflight", True),
+            ("review-after-effect", "after-effect", "check", True),
+            ("implementation-handoff", "handoff", "focus-json", True),
+        ],
+        "path_source": "work-order-execution-scope",
+        "permitted": ["implementation-write", "test-execution", "evidence-write"],
+        "target_retention": True,
+        "retained_kinds": ["work-order-evidence"],
+        "outputs": [
+            ("skill-result", "se-harness-skill-result-v1", "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+            ("work-order-evidence", "se-harness-evidence-set-v1", "retained"),
+        ],
+    },
+    "harness-prepare-assurance": {
+        "mutation_class": "governed-mutation",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("work-orders", "artifact-id-list", True),
+            ("verification-contracts", "artifact-id-list", True),
+            ("evidence-paths", "path-list", True),
+            ("candidate-commit", "bounded-text", True),
+            ("record-id", "artifact-id", True),
+            ("record-destination", "repository-path", True),
+            ("preparation-actor", "bounded-text", True),
+        ],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "capture-verification"],
+        "optional_operations": ["inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("candidate-before-effect", "before-effect", "preflight", True),
+            ("ready-record-after-effect", "after-effect", "focus-json", True),
+            ("assurance-handoff", "handoff", "focus-json", True),
+        ],
+        "path_source": "evaluator-derived-vrec-destination",
+        "permitted": ["verification-record-prepare"],
+        "target_retention": True,
+        "retained_kinds": ["verification-record", "evaluator-evidence"],
+        "outputs": [
+            ("skill-result", "se-harness-skill-result-v1", "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+            ("assurance-decision-packet", "se-harness-decision-packet-v1", "inline"),
+        ],
+    },
+}
+
+
+def _parse_v2_contract(value: Any) -> SkillContract:
+    top = _object(
+        value,
+        {
+            "schema", "name", "version", "outcome", "activation", "inputs",
+            "preconditions", "mutation_class", "evaluator", "checkpoints",
+            "effects", "delegation", "evidence", "stop_conditions", "outputs",
+        },
+        "$",
+    )
+    if top["schema"] != CONTRACT_SCHEMA_V2:
+        raise SkillContractError("SKC012", f"unsupported skill contract schema: {top['schema']!r}")
+    name = _text(top["name"], "$.name", pattern=_NAME)
+    profile = _V2_PROFILES.get(name)
+    if profile is None:
+        raise SkillContractError("SKC021", f"unsupported Phase 3 skill: {name}")
+    _text(top["version"], "$.version", pattern=_VERSION)
+    _text(top["outcome"], "$.outcome")
+    if top["mutation_class"] != profile["mutation_class"]:
+        raise SkillContractError("SKC022", f"invalid mutation class for {name}")
+
+    activation = _object(top["activation"], {"explicit", "implicit", "must_not_match"}, "$.activation")
+    if not _boolean(activation["explicit"], "$.activation.explicit") or _boolean(
+        activation["implicit"], "$.activation.implicit"
+    ):
+        raise SkillContractError("SKC023", "Phase 3 writing skills require explicit-only activation")
+    negative_matches = _list(activation["must_not_match"], "$.activation.must_not_match")
+    if not negative_matches:
+        raise SkillContractError("SKC014", "activation must declare at least one non-match example")
+    for index, item in enumerate(negative_matches):
+        _text(item, f"$.activation.must_not_match[{index}]")
+
+    inputs = _typed_entries(
+        top["inputs"], "$.inputs", {"name", "required", "type"}, allowed_types=_V2_INPUT_TYPES
+    )
+    actual_inputs = [(entry["name"], entry["type"], entry["required"]) for entry in inputs]
+    if actual_inputs != profile["inputs"]:
+        raise SkillContractError("SKC024", f"inputs differ from the closed {name} instance")
+    _typed_entries(top["preconditions"], "$.preconditions", {"id", "description"})
+
+    evaluator = _object(
+        top["evaluator"],
+        {"minimum_version", "required_operations", "optional_operations", "missing_required", "missing_optional"},
+        "$.evaluator",
+    )
+    minimum = _text(evaluator["minimum_version"], "$.evaluator.minimum_version", pattern=_VERSION)
+    if tuple(int(part) for part in minimum.split("-", 1)[0].split("+", 1)[0].split(".")[:3]) < (0, 6, 0):
+        raise SkillContractError("SKC025", "Phase 3 skills require evaluator version 0.6.0 or later")
+    required_operations = _unique_texts(evaluator["required_operations"], "$.evaluator.required_operations")
+    optional_operations = _unique_texts(evaluator["optional_operations"], "$.evaluator.optional_operations")
+    if required_operations != profile["required_operations"] or optional_operations != profile["optional_operations"]:
+        raise SkillContractError("SKC025", f"evaluator operations differ from the closed {name} instance")
+    if evaluator["missing_required"] != "blocked" or evaluator["missing_optional"] != "degraded":
+        raise SkillContractError("SKC025", "evaluator failure policy differs from the approved capability matrix")
+
+    checkpoints = _typed_entries(
+        top["checkpoints"], "$.checkpoints", {"id", "stage", "operation", "required"}
+    )
+    actual_checkpoints: list[tuple[str, str, str, bool]] = []
+    for index, entry in enumerate(checkpoints):
+        stage = _text(entry["stage"], f"$.checkpoints[{index}].stage", pattern=_IDENTIFIER)
+        operation = _text(entry["operation"], f"$.checkpoints[{index}].operation", pattern=_IDENTIFIER)
+        if stage not in {"before-effect", "after-effect", "handoff"}:
+            raise SkillContractError("SKC010", f"unsupported checkpoint stage: {stage}")
+        actual_checkpoints.append((entry["id"], stage, operation, entry["required"]))
+    if actual_checkpoints != profile["checkpoints"]:
+        raise SkillContractError("SKC026", f"checkpoints differ from the closed {name} instance")
+
+    effects = _object(
+        top["effects"], {"permitted", "prohibited", "path_source", "lifecycle_transitions"}, "$.effects"
+    )
+    permitted = _unique_texts(effects["permitted"], "$.effects.permitted")
+    prohibited = _unique_texts(effects["prohibited"], "$.effects.prohibited")
+    path_source = _text(effects["path_source"], "$.effects.path_source", pattern=_IDENTIFIER)
+    lifecycle = _unique_texts(effects["lifecycle_transitions"], "$.effects.lifecycle_transitions")
+    if permitted != profile["permitted"] or path_source != profile["path_source"] or lifecycle:
+        raise SkillContractError("SKC027", f"effects differ from the closed {name} instance")
+    if not _V2_PROHIBITED_EFFECTS.issubset(prohibited):
+        raise SkillContractError("SKC027", "Phase 3 effect prohibitions are incomplete")
+
+    delegation = _object(top["delegation"], {"allowed", "fallback"}, "$.delegation")
+    if _boolean(delegation["allowed"], "$.delegation.allowed") or delegation["fallback"] != "single-agent":
+        raise SkillContractError("SKC018", "Phase 3 skills disable delegation and retain single-agent fallback")
+    evidence = _object(
+        top["evidence"], {"receipt_schema", "target_retention", "required_retained_kinds"}, "$.evidence"
+    )
+    retained_kinds = _unique_texts(evidence["required_retained_kinds"], "$.evidence.required_retained_kinds")
+    if (
+        evidence["receipt_schema"] != RECEIPT_SCHEMA
+        or _boolean(evidence["target_retention"], "$.evidence.target_retention") is not profile["target_retention"]
+        or retained_kinds != profile["retained_kinds"]
+    ):
+        raise SkillContractError("SKC028", f"evidence differs from the closed {name} instance")
+    stops = _typed_entries(top["stop_conditions"], "$.stop_conditions", {"id", "outcome"})
+    if not stops:
+        raise SkillContractError("SKC029", "Phase 3 skills require explicit stop conditions")
+    outputs = _typed_entries(
+        top["outputs"],
+        "$.outputs",
+        {"name", "schema", "retention"},
+        allowed_retentions={"inline", "none", "retained"},
+    )
+    actual_outputs = [(entry["name"], entry["schema"], entry["retention"]) for entry in outputs]
+    if actual_outputs != profile["outputs"]:
+        raise SkillContractError("SKC030", f"outputs differ from the closed {name} instance")
+    _validate_canonical_value(top)
+    return SkillContract(top)
+
+
 def parse_skill_contract_bytes(raw: bytes) -> SkillContract:
-    """Parse and strictly validate a v1 portable-skill contract."""
+    """Parse and strictly validate a supported portable-skill contract."""
 
     if len(raw) > MAX_SKILL_FILE_BYTES:
         raise SkillContractError("SKC001", "skill contract exceeds the bounded size")
@@ -214,6 +464,9 @@ def parse_skill_contract_bytes(raw: bytes) -> SkillContract:
         raise
     except (json.JSONDecodeError, RecursionError) as exc:
         raise SkillContractError("SKC001", "skill contract is not valid bounded JSON") from exc
+
+    if isinstance(value, dict) and value.get("schema") == CONTRACT_SCHEMA_V2:
+        return _parse_v2_contract(value)
 
     top = _object(
         value,
@@ -454,6 +707,7 @@ def build_skill_manifest(root: Path) -> SkillManifest:
 __all__ = [
     "CANONICAL_JSON_SCHEMA",
     "CONTRACT_SCHEMA",
+    "CONTRACT_SCHEMA_V2",
     "MANIFEST_SCHEMA",
     "RECEIPT_SCHEMA",
     "TEXT_MODE",

@@ -27,6 +27,20 @@ RECIPE_PATH = REPOSITORY_ROOT / "release" / "build-recipe.json"
 LOCK_PATH = REPOSITORY_ROOT / "release" / "build-toolchain.lock"
 NORMALIZER = REPOSITORY_ROOT / "scripts/normalize_sdist.py"
 FIXED_EPOCH = 1_700_000_000
+SKILL_FILES = {
+    "harness-draft-change": ("SKILL.md", "agents/openai.yaml", "scripts/guard.py", "skill-contract.json"),
+    "harness-execute-work-order": (
+        "SKILL.md", "agents/openai.yaml", "scripts/check_scope.py", "skill-contract.json"
+    ),
+    "harness-orient": ("SKILL.md", "scripts/orient.py", "skill-contract.json"),
+    "harness-prepare-assurance": (
+        "SKILL.md", "agents/openai.yaml", "scripts/check_prepare.py", "skill-contract.json"
+    ),
+}
+CLAUDE_ADAPTER_FILES = {
+    name: ("SKILL.md",)
+    for name in SKILL_FILES
+}
 
 
 class DeterministicSdistTests(unittest.TestCase):
@@ -184,31 +198,51 @@ class DeterministicSdistTests(unittest.TestCase):
         catalog = REPOSITORY_ROOT / "se_harness/agent_contract.json"
         self.assertEqual(catalog.read_bytes(), parse_agent_contract_catalog_bytes(catalog.read_bytes()).canonical_bytes)
         data_files = pyproject["tool"]["setuptools"]["data-files"]
-        prefix = "share/se-harness/templates/repository/standard/.agents/skills/harness-orient"
+        prefix = "share/se-harness/templates/repository/standard/.agents/skills"
         distributed = [
             relative
             for destination, relatives in data_files.items()
-            if destination == prefix or destination.startswith(prefix + "/")
+            if destination.startswith(prefix + "/")
             for relative in relatives
         ]
-        self.assertEqual(
-            [
-                "templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
-                "templates/repository/standard/.agents/skills/harness-orient/skill-contract.json",
-                "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
-            ],
-            distributed,
-        )
+        expected = {
+            f"templates/repository/standard/.agents/skills/{name}/{relative}"
+            for name, relatives in SKILL_FILES.items()
+            for relative in relatives
+        }
+        self.assertEqual(expected, set(distributed))
         self.assertEqual(len(distributed), len(set(distributed)))
+        claude_prefix = "share/se-harness/templates/repository/standard/.claude/skills"
+        claude_distributed = [
+            relative
+            for destination, relatives in data_files.items()
+            if destination.startswith(claude_prefix + "/")
+            for relative in relatives
+        ]
+        claude_expected = {
+            f"templates/repository/standard/.claude/skills/{name}/{relative}"
+            for name, relatives in CLAUDE_ADAPTER_FILES.items()
+            for relative in relatives
+        }
+        self.assertEqual(claude_expected, set(claude_distributed))
+        self.assertEqual(len(claude_distributed), len(set(claude_distributed)))
         manifest = (REPOSITORY_ROOT / "MANIFEST.in").read_text(encoding="utf-8")
         self.assertIn("include se_harness/*.json", manifest)
         self.assertIn(
-            "recursive-include templates/repository/standard/.agents/skills/harness-orient *.json *.md *.py",
+            "recursive-include templates/repository/standard/.agents/skills *.json *.md *.py",
+            manifest,
+        )
+        self.assertIn(
+            "recursive-include templates/repository/standard/.agents/skills *.yaml",
+            manifest,
+        )
+        self.assertIn(
+            "recursive-include templates/repository/standard/.claude/skills *.md",
             manifest,
         )
         self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
 
-    def test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_one_skill_core(self) -> None:
+    def test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once(self) -> None:
         def record_digest(raw: bytes) -> str:
             encoded = base64.urlsafe_b64encode(hashlib.sha256(raw).digest()).rstrip(b"=")
             return "sha256=" + encoded.decode("ascii")
@@ -262,16 +296,31 @@ class DeterministicSdistTests(unittest.TestCase):
                 skill_members = [
                     name
                     for name in archive.namelist()
-                    if "/.agents/skills/harness-orient/" in name
+                    if "/.agents/skills/" in name
                 ]
                 self.assertEqual(
-                    [
-                        f"{data_prefix}/.agents/skills/harness-orient/SKILL.md",
-                        f"{data_prefix}/.agents/skills/harness-orient/scripts/orient.py",
-                        f"{data_prefix}/.agents/skills/harness-orient/skill-contract.json",
-                    ],
-                    skill_members,
+                    {
+                        f"{data_prefix}/.agents/skills/{name}/{relative}"
+                        for name, relatives in SKILL_FILES.items()
+                        for relative in relatives
+                    },
+                    set(skill_members),
                 )
+                self.assertEqual(len(skill_members), len(set(skill_members)))
+                adapter_members = [
+                    name
+                    for name in archive.namelist()
+                    if "/.claude/skills/" in name
+                ]
+                self.assertEqual(
+                    {
+                        f"{data_prefix}/.claude/skills/{name}/{relative}"
+                        for name, relatives in CLAUDE_ADAPTER_FILES.items()
+                        for relative in relatives
+                    },
+                    set(adapter_members),
+                )
+                self.assertEqual(len(adapter_members), len(set(adapter_members)))
                 self.assertFalse(any("/se_harness/skills/" in name for name in archive.namelist()))
 
             environment = root / "fresh-environment"
@@ -294,9 +343,20 @@ class DeterministicSdistTests(unittest.TestCase):
                 check=False,
             )
             self.assertEqual(0, initialized.returncode, initialized.stderr)
-            for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
-                source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient" / relative
-                self.assertEqual(source.read_bytes(), (target / ".agents/skills/harness-orient" / relative).read_bytes())
+            for name, relatives in SKILL_FILES.items():
+                for relative in relatives:
+                    source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name / relative
+                    self.assertEqual(
+                        source.read_text(encoding="utf-8").encode("utf-8"),
+                        (target / ".agents/skills" / name / relative).read_bytes(),
+                    )
+            for name, relatives in CLAUDE_ADAPTER_FILES.items():
+                for relative in relatives:
+                    source = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills" / name / relative
+                    self.assertEqual(
+                        source.read_text(encoding="utf-8").encode("utf-8"),
+                        (target / ".claude/skills" / name / relative).read_bytes(),
+                    )
 
 
 class BuildRecipeSchemaTests(unittest.TestCase):

@@ -16,6 +16,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from repository_tools import interpreter_safety
 from repository_tools import predecessor_preparation as preparation
 from repository_tools import release_bootstrap as bootstrap
 
@@ -103,6 +104,27 @@ def _run_command(command: list[str], *, cwd: Path) -> Any:
     return preparation._run(command, cwd=cwd)
 
 
+def _safe_interpreter(
+    path: Path,
+    label: str,
+    *,
+    checkout_root: Path | None = None,
+    declared_root: Path | None = None,
+) -> interpreter_safety.SafeEntryPoint:
+    """Accept an external interpreter through the declared safety rule."""
+
+    try:
+        return interpreter_safety.evaluate(
+            path, checkout_root=checkout_root, declared_root=declared_root
+        )
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        raise PredecessorAssessmentError(
+            f"{label} is refused by {refusal.case}: {refusal.detail}"
+        ) from refusal
+    except interpreter_safety.InterpreterSafetyError as exc:
+        raise PredecessorAssessmentError(f"{label} cannot be evaluated: {exc}") from exc
+
+
 def _released_identity(
     root: Path,
     evaluator_python: Path,
@@ -111,7 +133,10 @@ def _released_identity(
 ) -> tuple[dict[str, Any], list[str], Any]:
     """Prove released runtime identity without requiring a full-graph validation."""
 
-    evaluator_root = evaluator_python.parent.parent.resolve(strict=True)
+    safe = _safe_interpreter(
+        evaluator_python, "released-evaluator interpreter", checkout_root=root
+    )
+    evaluator_root = safe.environment_root
     if not bootstrap._within(evaluator_entry_point, evaluator_root):
         raise PredecessorAssessmentError(
             "released-evaluator entry point is outside the interpreter environment"
@@ -134,7 +159,7 @@ def _released_identity(
         "--require-isolated-python",
         "--require-entry-point",
     ]
-    result = _run_command([str(evaluator_python), *arguments], cwd=root)
+    result = _run_command([str(safe.entry_point), *arguments], cwd=root)
     identity = _json_report(result, "released-evaluator identity")
     required = {
         "schema",
@@ -169,7 +194,7 @@ def _released_identity(
     ):
         raise PredecessorAssessmentError("released-evaluator identity proof is not acceptable")
     exact_paths = {
-        "python_executable": evaluator_python,
+        "python_executable": safe.entry_point,
         "entry_point_origin": evaluator_entry_point,
         "expected_root": evaluator_root,
         "checkout_root": root,
@@ -188,6 +213,14 @@ def _released_identity(
             expected_path = None
         if observed != expected_path:
             raise PredecessorAssessmentError(f"released-evaluator identity {field} differs")
+    reported_facts = {
+        "python_entry_is_link": safe.entry_is_link,
+        "python_binary_position": safe.binary_position,
+        "python_binary_sha256": safe.binary_sha256,
+    }
+    for field, expected_fact in reported_facts.items():
+        if field in identity and identity[field] != expected_fact:
+            raise PredecessorAssessmentError(f"released-evaluator identity {field} differs")
     for field in ("module_origin", "distribution_origin", "template_origin"):
         value = identity.get(field)
         if not isinstance(value, str) or not bootstrap._within(Path(value), evaluator_root):
@@ -202,25 +235,17 @@ def _released_identity(
 
 
 def _normalize_interpreter_origin(path: Path, evaluator_root: Path) -> str:
-    """Normalize a verified interpreter without dereferencing its venv link."""
+    """Normalize a verified interpreter without dereferencing its venv link.
 
-    lexical = Path(os.path.abspath(path))
-    try:
-        root = evaluator_root.resolve(strict=True)
-        relative = lexical.relative_to(root)
-    except (OSError, ValueError) as exc:
-        raise PredecessorAssessmentError(
-            "released-evaluator interpreter origin is outside its declared root"
-        ) from exc
-    if (
-        not relative.parts
-        or not lexical.is_file()
-        or bootstrap._path_has_link(lexical.parent)
-        or (bootstrap._path_has_link(lexical) and not lexical.is_symlink())
-    ):
-        raise PredecessorAssessmentError(
-            "released-evaluator interpreter origin is not a safe environment entry point"
-        )
+    The declared rule owns the decision, so the origin recorded in evidence is
+    exactly the entry point the boundary accepted and never its resolved
+    system binary.
+    """
+
+    safe = _safe_interpreter(
+        path, "released-evaluator interpreter origin", declared_root=evaluator_root
+    )
+    relative = safe.entry_point.relative_to(Path(os.path.abspath(evaluator_root)))
     return f"<evaluator-root>/{relative.as_posix()}"
 
 
@@ -467,9 +492,11 @@ def assess_predecessor_evaluator(
     history = preparation._derive_history(
         root, catalog, contract.version, source_commit, object_format
     )
-    python = preparation._ordinary_external_interpreter(
+    interpreter = preparation._safe_interpreter(
         evaluator_python, "evaluator interpreter", root
     )
+    python = interpreter.entry_point
+    evaluator_root = interpreter.environment_root
     entry_point = preparation._ordinary_external(
         evaluator_entry_point, "evaluator entry point", root
     )
@@ -485,7 +512,7 @@ def assess_predecessor_evaluator(
         root_identity, root_identity_arguments, root_identity_run = _released_identity(
             root, python, entry_point, contract
         )
-        installed_payload = bootstrap._installed_payload(root_identity, python.parent.parent)
+        installed_payload = bootstrap._installed_payload(root_identity, evaluator_root)
         wheel_payload = bootstrap._wheel_payload(wheel, contract.evaluator_version)
     except (OSError, bootstrap.ReleaseBootstrapError) as exc:
         raise PredecessorAssessmentError(str(exc)) from exc
@@ -570,7 +597,7 @@ def assess_predecessor_evaluator(
             root: "<candidate-root>",
             view: "<assessment-view>",
             dashboard: "<assessment-output>/dashboard",
-            python.parent.parent: "<evaluator-root>",
+            evaluator_root: "<evaluator-root>",
         }
         command_evidence = {
             "identity": _identity_evidence(
@@ -579,7 +606,7 @@ def assess_predecessor_evaluator(
                 view_identity_run,
                 checkout_root=view,
                 checkout_marker="<assessment-view>",
-                evaluator_root=python.parent.parent,
+                evaluator_root=evaluator_root,
             ),
             "doctor": {
                 "arguments": doctor_arguments,
@@ -662,7 +689,7 @@ def assess_predecessor_evaluator(
                 root_identity_run,
                 checkout_root=root,
                 checkout_marker="<candidate-root>",
-                evaluator_root=python.parent.parent,
+                evaluator_root=evaluator_root,
             ),
             "report_sha256": _sha256(_canonical_json(legacy_report)),
             "validate_arguments": legacy_validate_arguments,
