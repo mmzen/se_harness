@@ -14,7 +14,7 @@ from unittest import mock
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
+SCRIPTS = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -48,6 +48,48 @@ EVIDENCE_KEY_CASES = (
     ),
     ("reports/WO-ABC-001.md", ("WO-ABC-001",)),
 )
+
+RELEASED_EVALUATOR_EVIDENCE_PATH = (
+    "docs/engineering/product/evidence/released-evaluator.json"
+)
+RELEASED_EVALUATOR_EVIDENCE = {
+    "schema": "se-harness-evaluator-evidence-v1",
+    "role": "released-evaluator",
+    "evaluator": {
+        "version": "0.6.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "a" * 64,
+        "archive_name": "se_harness-0.6.0-py3-none-any.whl",
+        "archive_sha256": "b" * 64,
+    },
+    "origins": {
+        "python_executable": "<evaluator-root>/bin/python",
+        "module": "<evaluator-root>/lib/se_harness/runtime_identity.py",
+        "distribution": "<evaluator-root>/lib/site-packages",
+        "templates": "<evaluator-root>/share/se-harness/templates/repository/standard",
+        "entry_point": "<evaluator-root>/bin/harnessctl",
+    },
+    "environment": {
+        "isolated_python": True,
+        "user_site_enabled": False,
+        "pythonpath_present": False,
+        "entry_point_resolved": True,
+        "checkout_excluded": True,
+    },
+    "diagnostics": [],
+}
+RELEASED_EVALUATOR_EVIDENCE_BYTES = (
+    json.dumps(
+        RELEASED_EVALUATOR_EVIDENCE,
+        ensure_ascii=True,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+    + "\n"
+).encode("utf-8")
+RELEASED_EVALUATOR_EVIDENCE_SHA256 = hashlib.sha256(
+    RELEASED_EVALUATOR_EVIDENCE_BYTES
+).hexdigest()
 
 
 def write(path: Path, content: str) -> None:
@@ -141,6 +183,9 @@ def create_base_chain(
         ),
     )
     write(base / "evidence/WO-001-verification.md", "# Evidence\n\nCandidate checks passed.")
+    evaluator_evidence_path = root / RELEASED_EVALUATOR_EVIDENCE_PATH
+    evaluator_evidence_path.parent.mkdir(parents=True, exist_ok=True)
+    evaluator_evidence_path.write_bytes(RELEASED_EVALUATOR_EVIDENCE_BYTES)
 
 
 def create_additional_chain(root: Path, *, work_order_status: str = "implemented") -> None:
@@ -207,7 +252,9 @@ commit = "{commit}"
 git_object_format = "{object_format}"
 released_at = "2026-08-11T14:00:00Z"
 authorized_by = "release-owner"
-tag = "v{version}"''',
+tag = "v{version}"
+evaluator_evidence_path = "{RELEASED_EVALUATOR_EVIDENCE_PATH}"
+evaluator_evidence_sha256 = "{RELEASED_EVALUATOR_EVIDENCE_SHA256}"''',
     ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
 
 
@@ -241,7 +288,9 @@ commit = "{commit}"
 git_object_format = "sha1"
 released_at = "2026-08-11T14:00:00Z"
 authorized_by = "release-owner"
-tag = "v2.0.0"''',
+tag = "v2.0.0"
+evaluator_evidence_path = "{RELEASED_EVALUATOR_EVIDENCE_PATH}"
+evaluator_evidence_sha256 = "{RELEASED_EVALUATOR_EVIDENCE_SHA256}"''',
     ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
 
 

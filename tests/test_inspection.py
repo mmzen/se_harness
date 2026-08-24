@@ -504,7 +504,7 @@ class InspectionReportTests(unittest.TestCase):
             lock["files"]["scripts/inspect_engineering_artifacts.py"]["sha256"],
             canonical_sha256(root_script.read_bytes()),
         )
-        self.assertNotEqual(root_script.read_bytes(), canonical.read_bytes())
+        self.assertNotEqual(root_script.resolve(), canonical.resolve())
         source = canonical.read_text(encoding="utf-8")
         self.assertIn("from generate_harness_dashboard import", source)
         self.assertIn("generate_snapshot", source)

@@ -1,0 +1,596 @@
+{
+  "schema": "se-harness-workflow-v2",
+  "normative_language": "BCP 14",
+  "handoff_fields": [
+    "completed",
+    "current_lifecycle_state",
+    "recommended_next_step",
+    "human_decision_or_approval_required",
+    "command_or_suggested_response",
+    "alternative_next_steps"
+  ],
+  "restitution_fields": [
+    "outcome",
+    "done",
+    "not_done",
+    "blocked_by",
+    "current_lifecycle_state",
+    "decision_required",
+    "next",
+    "command_or_response",
+    "alternatives"
+  ],
+  "transitions": {
+    "definition": {
+      "draft": ["approved", "rejected"],
+      "approved": ["implemented", "rejected"]
+    },
+    "work_order": {
+      "draft": ["approved", "rejected"],
+      "approved": ["in_progress", "rejected"],
+      "in_progress": ["implemented", "rejected"],
+      "implemented": ["verified", "released"],
+      "verified": ["released"]
+    },
+    "verification_record": {
+      "ready": ["verified", "rejected", "superseded"]
+    },
+    "release_record": {
+      "ready": ["released", "rejected"]
+    }
+  },
+  "failure": {
+    "id": "WFL-FAIL-REMEDIATE",
+    "procedure_id": "PROC-REMEDIATE",
+    "alternative_procedure_ids": [],
+    "selector": {"outcomes": ["failed"]},
+    "gate_ids": [],
+    "decision_right": "DR-REMEDIATION-SCOPE",
+    "effects": [],
+    "non_effects": ["No lifecycle state is changed by a failed operation."],
+    "handoff": {
+      "completed": [],
+      "current_lifecycle_state": ["No lifecycle state was changed."],
+      "recommended_next_step": {"action": "remediate", "detail": "{message}"},
+      "human_decision_or_approval_required": {
+        "required": "none until the reported blocker is resolved"
+      },
+      "command_or_suggested_response": {
+        "kind": "guidance",
+        "value": "Resolve the reported blocker, then rerun the same command."
+      },
+      "alternative_next_steps": []
+    }
+  },
+  "recommendations": [
+    {
+      "id": "WFL-WO-READY-VREC",
+      "procedure_id": "PROC-FOCUS-RELATED",
+      "alternative_procedure_ids": [],
+      "selector": {
+        "artifact_types": ["work_order"],
+        "statuses": ["implemented"],
+        "related_artifact_type": "verification_record",
+        "related_statuses": ["ready"]
+      },
+      "gate_ids": ["QG-G4-ASSURANCE-DECISION"],
+      "decision_right": "DR-VREC-DECIDE",
+      "effects": ["The accountable decision changes only {related_id}."],
+      "non_effects": ["The decision does not change {artifact_id}."],
+      "handoff": {
+        "completed": ["{artifact_id} is implemented and ready assurance coverage exists in {related_id}."],
+        "current_lifecycle_state": ["{artifact_id} is implemented; {related_id} is ready."],
+        "recommended_next_step": {
+          "action": "assurance decision",
+          "detail": "Review {related_id}, its retained evidence, and its candidate identity."
+        },
+        "human_decision_or_approval_required": {"required": "assurance owner"},
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl focus . --artifact {related_id}"
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-WO-VERIFIED-VREC",
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "alternative_procedure_ids": ["PROC-REPOSITORY-INTEGRATION", "PROC-PREPARE-RELEASE"],
+      "selector": {
+        "artifact_types": ["work_order"],
+        "statuses": ["implemented"],
+        "related_artifact_type": "verification_record",
+        "related_statuses": ["verified", "released"]
+      },
+      "gate_ids": ["QG-G4-VERIFIED-COVERAGE"],
+      "decision_right": "DR-DELIVERY-SELECT",
+      "effects": [],
+      "non_effects": ["Selecting a delivery path does not change {artifact_id} or {related_id}."],
+      "handoff": {
+        "completed": ["{artifact_id} is implemented and has verified assurance coverage in {related_id}."],
+        "current_lifecycle_state": ["{artifact_id} is implemented; {related_id} is {related_status}."],
+        "recommended_next_step": {
+          "action": "select the separately authorized delivery path",
+          "detail": "Choose repository integration or release preparation without synchronizing related lifecycle states."
+        },
+        "human_decision_or_approval_required": {
+          "required": "repository owner for integration, or release owner for release preparation"
+        },
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl focus . --artifact {related_id}"
+        },
+        "alternative_next_steps": [
+          {"action": "repository integration", "detail": "Request authority for the exact pull-request or merge action."},
+          {"action": "release preparation", "detail": "Proceed only when the exact release inputs are authorized."}
+        ]
+      }
+    },
+    {
+      "id": "WFL-WO-PREPARE-VREC",
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["work_order"], "statuses": ["implemented"]},
+      "gate_ids": ["QG-G4-CANDIDATE-READY"],
+      "decision_right": "DR-VREC-PREPARE",
+      "effects": ["Create exactly one ready verification record."],
+      "non_effects": ["Preparation does not change {artifact_id} or exercise assurance authority."],
+      "handoff": {
+        "completed": ["{artifact_id} is implemented; no assurance decision was inferred."],
+        "current_lifecycle_state": ["{artifact_id} is implemented."],
+        "recommended_next_step": {
+          "action": "prepare verification record",
+          "detail": "Capture the exact candidate and retained evidence for assurance review."
+        },
+        "human_decision_or_approval_required": {
+          "required": "assurance owner only after a ready VREC exists"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Run harnessctl capture-verification with the exact work, contracts, and evidence."
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-WO-START",
+      "procedure_id": "PROC-WO-START",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["work_order"], "statuses": ["approved"]},
+      "gate_ids": ["QG-G3-WORK-AUTHORIZATION"],
+      "decision_right": "DR-WO-START",
+      "effects": ["An explicit start decision permits the approved implementation scope to begin."],
+      "non_effects": ["Preflight does not change lifecycle state."],
+      "handoff": {
+        "completed": ["Projected the selected scope for {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is approved."],
+        "recommended_next_step": {
+          "action": "implementation-start decision",
+          "detail": "Run start preflight, then obtain an explicit instruction to begin implementation."
+        },
+        "human_decision_or_approval_required": {"required": "engineering owner"},
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl preflight . --work-order {artifact_id} --phase start"
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-WO-IMPLEMENT",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["work_order"], "statuses": ["in_progress"]},
+      "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"],
+      "decision_right": "DR-WO-COMPLETE",
+      "effects": ["An explicit completion decision changes only the selected work order."],
+      "non_effects": ["Implementation does not verify work or release software."],
+      "handoff": {
+        "completed": ["Projected the selected scope for {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is in_progress."],
+        "recommended_next_step": {
+          "action": "implement and verify",
+          "detail": "Complete only this work order and retain its verification evidence."
+        },
+        "human_decision_or_approval_required": {
+          "required": "none for work already authorized by this work order"
+        },
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl preflight . --work-order {artifact_id} --phase review"
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-WO-COMPLETED",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["work_order"], "statuses": ["verified", "released"]},
+      "gate_ids": [],
+      "decision_right": "DR-RELATED-RECORD-SELECT",
+      "effects": [],
+      "non_effects": ["Inspection does not synchronize related records."],
+      "handoff": {
+        "completed": ["Projected completed work state for {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is {status}; its VREC and RLS remain independent records."],
+        "recommended_next_step": {
+          "action": "review independent lifecycle records",
+          "detail": "Do not synchronize related artifacts implicitly."
+        },
+        "human_decision_or_approval_required": {"required": "the owner of any separately selected record"},
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl focus . --artifact {artifact_id}"
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-VREC-DECIDE",
+      "procedure_id": "PROC-VREC-DECIDE",
+      "alternative_procedure_ids": ["PROC-VREC-REJECT", "PROC-VREC-SUPERSEDE"],
+      "selector": {"artifact_types": ["verification_record"], "statuses": ["ready"]},
+      "gate_ids": ["QG-G4-ASSURANCE-DECISION"],
+      "decision_right": "DR-VREC-DECIDE",
+      "effects": ["The decision changes only {artifact_id}."],
+      "non_effects": ["The decision does not change referenced work orders or release records."],
+      "handoff": {
+        "completed": ["Projected assurance candidate {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is ready; referenced work orders were not changed."],
+        "recommended_next_step": {
+          "action": "assurance decision",
+          "detail": "Review the retained evidence and candidate identity."
+        },
+        "human_decision_or_approval_required": {"required": "assurance owner"},
+        "command_or_suggested_response": {
+          "kind": "suggested_response",
+          "value": "I verify {artifact_id} as assurance owner."
+        },
+        "alternative_next_steps": [
+          {"action": "reject", "detail": "Reject with a non-empty reason."},
+          {"action": "supersede", "detail": "Supersede with one eligible successor VREC."}
+        ]
+      }
+    },
+    {
+      "id": "WFL-VREC-DELIVER",
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "alternative_procedure_ids": ["PROC-REPOSITORY-INTEGRATION"],
+      "selector": {"artifact_types": ["verification_record"], "statuses": ["verified", "released"]},
+      "gate_ids": ["QG-G4-VERIFIED-COVERAGE"],
+      "decision_right": "DR-DELIVERY-SELECT",
+      "effects": [],
+      "non_effects": ["Selecting a path does not prepare a release or perform an external action."],
+      "handoff": {
+        "completed": ["Recorded the assurance decision for {artifact_id}; referenced work orders were not changed."],
+        "current_lifecycle_state": ["{artifact_id} is {status}."],
+        "recommended_next_step": {
+          "action": "select the separately authorized delivery path",
+          "detail": "Prepare a release only when release preparation is authorized."
+        },
+        "human_decision_or_approval_required": {
+          "required": "repository owner for external repository action, or release owner for release preparation"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Run harnessctl prepare-release only with the exact verified coverage and authorized release values."
+        },
+        "alternative_next_steps": [
+          {"action": "repository action", "detail": "Request authority for the exact pull-request or integration action."}
+        ]
+      }
+    },
+    {
+      "id": "WFL-RLS-DECIDE",
+      "procedure_id": "PROC-RLS-DECIDE",
+      "alternative_procedure_ids": ["PROC-RLS-REJECT"],
+      "selector": {"artifact_types": ["release_record"], "statuses": ["ready"]},
+      "gate_ids": ["QG-G5-RELEASE-DECISION"],
+      "decision_right": "DR-RLS-DECIDE",
+      "effects": ["The decision changes only {artifact_id}."],
+      "non_effects": ["The decision does not change included VRECs or work orders."],
+      "handoff": {
+        "completed": ["Projected release candidate {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is ready; included VRECs and work orders were not changed."],
+        "recommended_next_step": {
+          "action": "release decision",
+          "detail": "Review exact verified coverage and candidate identity."
+        },
+        "human_decision_or_approval_required": {"required": "release owner"},
+        "command_or_suggested_response": {
+          "kind": "suggested_response",
+          "value": "I authorize release record {artifact_id}."
+        },
+        "alternative_next_steps": [
+          {"action": "reject", "detail": "Reject with a non-empty reason."}
+        ]
+      }
+    },
+    {
+      "id": "WFL-RLS-EXTERNAL",
+      "procedure_id": "PROC-EXTERNAL-ACTION",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["release_record"], "statuses": ["released"]},
+      "gate_ids": ["QG-G5-EXTERNAL-ACTION"],
+      "decision_right": "DR-EXTERNAL-ACTION",
+      "effects": [],
+      "non_effects": ["Release status does not perform an external action."],
+      "handoff": {
+        "completed": ["Recorded the release decision for {artifact_id}; included VRECs and work orders were not changed."],
+        "current_lifecycle_state": ["{artifact_id} is released."],
+        "recommended_next_step": {
+          "action": "perform only a separately authorized external action",
+          "detail": "Release status does not create a tag, publish, deploy, or operate anything."
+        },
+        "human_decision_or_approval_required": {
+          "required": "the accountable owner of the exact external action"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "State the exact proposed external action and obtain its separate authority."
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-REJECTED",
+      "procedure_id": "PROC-REMEDIATE",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["*"], "statuses": ["rejected"]},
+      "gate_ids": [],
+      "decision_right": "DR-REMEDIATION-SCOPE",
+      "effects": [],
+      "non_effects": ["Rejected history is not reopened or silently replaced."],
+      "handoff": {
+        "completed": ["Recorded rejection of {artifact_id}; related artifacts were not changed."],
+        "current_lifecycle_state": ["{artifact_id} is rejected and terminal."],
+        "recommended_next_step": {
+          "action": "remediate through a new or revised authorized artifact",
+          "detail": "Do not reopen or silently replace the rejected history."
+        },
+        "human_decision_or_approval_required": {
+          "required": "the owner of any new definition or work scope"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Create or revise the bounded artifact chain, then obtain its normal approvals."
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-VREC-SUPERSEDED",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["verification_record"], "statuses": ["superseded"]},
+      "gate_ids": [],
+      "decision_right": "DR-RELATED-RECORD-SELECT",
+      "effects": [],
+      "non_effects": ["The superseded record remains immutable historical evidence."],
+      "handoff": {
+        "completed": ["Recorded supersession of {artifact_id}; its captured provenance remains unchanged."],
+        "current_lifecycle_state": ["{artifact_id} is superseded by {successor_id}."],
+        "recommended_next_step": {
+          "action": "use the eligible successor record",
+          "detail": "The superseded record remains historical and release-ineligible."
+        },
+        "human_decision_or_approval_required": {"required": "none to inspect the declared successor"},
+        "command_or_suggested_response": {
+          "kind": "command",
+          "value": "harnessctl focus . --artifact {successor_id}"
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-DEFINITION-COMPLETE",
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "alternative_procedure_ids": [],
+      "selector": {
+        "artifact_types": ["intent", "capability", "requirement", "specification", "architecture", "adr", "verification", "release_contract", "operating_contract"],
+        "statuses": ["approved"]
+      },
+      "gate_ids": ["QG-G1-DEFINITION", "QG-G2-ARCHITECTURE"],
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "effects": [],
+      "non_effects": ["Approval of one definition does not approve related definitions."],
+      "handoff": {
+        "completed": ["Recorded approval of {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is approved."],
+        "recommended_next_step": {
+          "action": "complete the bounded definition packet",
+          "detail": "Approve the remaining governing artifacts or create and approve one bounded work order."
+        },
+        "human_decision_or_approval_required": {
+          "required": "the accountable owner of each remaining artifact"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Use one explicit transition packet when definitions are mutually dependent."
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-DEFINITION-WORK",
+      "procedure_id": "PROC-DEFINITION-WORK",
+      "alternative_procedure_ids": [],
+      "selector": {
+        "artifact_types": ["intent", "capability", "requirement", "specification", "architecture", "adr", "verification", "release_contract", "operating_contract"],
+        "statuses": ["implemented"]
+      },
+      "gate_ids": ["QG-G3-WORK-AUTHORIZATION"],
+      "decision_right": "DR-WO-SELECT",
+      "effects": [],
+      "non_effects": ["An implemented definition does not authorize new work by itself."],
+      "handoff": {
+        "completed": ["Recorded implemented definition state for {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is implemented and terminal."],
+        "recommended_next_step": {
+          "action": "inspect the selected work order",
+          "detail": "Continue only through a separately selected authorized WO."
+        },
+        "human_decision_or_approval_required": {"required": "engineering owner for the work order"},
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Run harnessctl focus with the exact related WO ID."
+        },
+        "alternative_next_steps": []
+      }
+    },
+    {
+      "id": "WFL-DEFAULT-REVIEW",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["*"], "statuses": ["*"]},
+      "gate_ids": [],
+      "decision_right": "DR-RELATED-RECORD-SELECT",
+      "effects": [],
+      "non_effects": ["Inspection does not change lifecycle state."],
+      "handoff": {
+        "completed": ["Projected the selected scope for {artifact_id}."],
+        "current_lifecycle_state": ["{artifact_id} is {status}."],
+        "recommended_next_step": {
+          "action": "review current state",
+          "detail": "No automatic related-artifact transition is permitted."
+        },
+        "human_decision_or_approval_required": {
+          "required": "an accountable owner for any further formal decision"
+        },
+        "command_or_suggested_response": {
+          "kind": "guidance",
+          "value": "Select the next independently authorized artifact transition."
+        },
+        "alternative_next_steps": []
+      }
+    }
+  ],
+  "procedures": [
+    {
+      "id": "PROC-WO-START",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-WO-START-FOCUS", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Projected selected scope for {artifact_id}."], "non_effects": ["Focus does not change lifecycle state."]},
+        {"id": "STEP-WO-START-PREFLIGHT", "kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["Evaluated start readiness for {artifact_id}."], "non_effects": ["Preflight does not authorize or start implementation."]},
+        {"id": "STEP-WO-START-DECIDE", "kind": "decision", "decision_right": "DR-WO-START", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether implementation may start", "outcomes": ["start", "stop"], "response": "Start {artifact_id} implementation.", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["An explicit start decision authorizes bounded implementation."], "non_effects": ["The decision does not itself edit a file."]},
+        {"id": "STEP-WO-START-PREVIEW", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["Planned the explicit transition for {artifact_id}."], "non_effects": ["A preview does not change lifecycle state."]},
+        {"id": "STEP-WO-START-APPLY", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner", "--apply"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["Changed only {artifact_id} to in_progress."], "non_effects": ["Related artifacts remain unchanged."]},
+        {"id": "STEP-WO-START-FINAL-FOCUS", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Projected the resulting state for {artifact_id}."], "non_effects": ["Focus does not change lifecycle state."]}
+      ]
+    },
+    {
+      "id": "PROC-WO-IMPLEMENT",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-WO-IMPLEMENT-CHECK", "kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "handoff"], "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "effects": ["Evaluated implementation handoff for {artifact_id}."], "non_effects": ["A checkpoint does not complete or verify work."]},
+        {"id": "STEP-WO-IMPLEMENT-DECIDE", "kind": "decision", "decision_right": "DR-WO-COMPLETE", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether the authorized implementation and evidence are complete", "outcomes": ["implemented", "continue", "reject"], "response": "Mark {artifact_id} implemented.", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "effects": ["An explicit completion decision permits only {artifact_id} to become implemented."], "non_effects": ["Completion does not verify or release the work."]}
+      ]
+    },
+    {
+      "id": "PROC-WO-PREPARE-VREC",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-WO-PREPARE-VREC-DECIDE", "kind": "decision", "decision_right": "DR-VREC-PREPARE", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether to prepare one ready verification record with exact approved inputs", "outcomes": ["prepare", "stop"], "response": "Prepare one ready VREC for {artifact_id} with the exact approved verification contract and retained evidence.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits preparation of one ready VREC."], "non_effects": ["Preparation does not verify {artifact_id}."]}
+      ]
+    },
+    {
+      "id": "PROC-FOCUS-SELECTED",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-FOCUS-SELECTED", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Projected selected state for {artifact_id}."], "non_effects": ["Focus changes no lifecycle state."]}
+      ]
+    },
+    {
+      "id": "PROC-FOCUS-RELATED",
+      "parameters": [{"name": "related_id", "type": "artifact_id", "cardinality": "one", "source": "selection.related"}],
+      "steps": [
+        {"id": "STEP-FOCUS-RELATED", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{related_id}"], "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Projected selected state for {related_id}."], "non_effects": ["Focus changes no lifecycle state."]}
+      ]
+    },
+    {
+      "id": "PROC-VREC-DECIDE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-VREC-DECIDE", "kind": "decision", "decision_right": "DR-VREC-DECIDE", "role": "assurance-owner", "artifact": "{artifact_id}", "decision": "whether the retained evidence verifies the exact candidate", "outcomes": ["verified", "reject", "supersede"], "response": "I verify {artifact_id} as assurance owner.", "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Permits an explicit decision on {artifact_id} only."], "non_effects": ["Referenced work orders remain unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-VREC-REJECT",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-VREC-REJECT", "kind": "decision", "decision_right": "DR-VREC-DECIDE", "role": "assurance-owner", "artifact": "{artifact_id}", "decision": "whether to reject with a non-empty reason", "outcomes": ["reject", "stop"], "response": "Reject {artifact_id} with reason: <reason>.", "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Permits rejection of {artifact_id} only."], "non_effects": ["Referenced work orders remain unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-VREC-SUPERSEDE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-VREC-SUPERSEDE", "kind": "decision", "decision_right": "DR-VREC-DECIDE", "role": "assurance-owner", "artifact": "{artifact_id}", "decision": "whether an eligible named successor supersedes this record", "outcomes": ["supersede", "stop"], "response": "Supersede {artifact_id} with eligible successor <VREC-ID>.", "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "effects": ["Permits supersession of {artifact_id} only."], "non_effects": ["Captured provenance remains unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-DELIVERY-SELECT",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-DELIVERY-SELECT", "kind": "decision", "decision_right": "DR-DELIVERY-SELECT", "role": "repository-owner or release-owner", "artifact": "{artifact_id}", "decision": "which separately authorized delivery path to select", "outcomes": ["repository-integration", "release-preparation", "stop"], "response": "Select one separately authorized delivery path for {artifact_id}.", "gate_ids": ["QG-G4-VERIFIED-COVERAGE"], "effects": ["Selects one delivery path."], "non_effects": ["Selection performs no repository or release action."]}
+      ]
+    },
+    {
+      "id": "PROC-REPOSITORY-INTEGRATION",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-REPOSITORY-INTEGRATION", "kind": "decision", "decision_right": "DR-DELIVERY-SELECT", "role": "repository-owner", "artifact": "{artifact_id}", "decision": "the exact repository integration action", "outcomes": ["authorize", "stop"], "response": "Authorize the exact repository integration action for {artifact_id}: <action>.", "gate_ids": ["QG-G4-VERIFIED-COVERAGE"], "effects": ["Permits only the named repository action."], "non_effects": ["No action occurs from this decision request."]}
+      ]
+    },
+    {
+      "id": "PROC-PREPARE-RELEASE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-PREPARE-RELEASE", "kind": "decision", "decision_right": "DR-DELIVERY-SELECT", "role": "release-owner", "artifact": "{artifact_id}", "decision": "whether exact release preparation inputs may be used", "outcomes": ["prepare", "stop"], "response": "Authorize release preparation for {artifact_id} with exact REL, VREC, WO, version, and candidate inputs.", "gate_ids": ["QG-G4-VERIFIED-COVERAGE"], "effects": ["Permits release preparation with exact inputs."], "non_effects": ["This request does not create or release an RLS."]}
+      ]
+    },
+    {
+      "id": "PROC-RLS-DECIDE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-RLS-DECIDE", "kind": "decision", "decision_right": "DR-RLS-DECIDE", "role": "release-owner", "artifact": "{artifact_id}", "decision": "whether the exact candidate is authorized for release", "outcomes": ["released", "reject"], "response": "I authorize release record {artifact_id}.", "gate_ids": ["QG-G5-RELEASE-DECISION"], "effects": ["Permits an explicit decision on {artifact_id} only."], "non_effects": ["Release status performs no external action."]}
+      ]
+    },
+    {
+      "id": "PROC-RLS-REJECT",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-RLS-REJECT", "kind": "decision", "decision_right": "DR-RLS-DECIDE", "role": "release-owner", "artifact": "{artifact_id}", "decision": "whether to reject with a non-empty reason", "outcomes": ["reject", "stop"], "response": "Reject {artifact_id} with reason: <reason>.", "gate_ids": ["QG-G5-RELEASE-DECISION"], "effects": ["Permits rejection of {artifact_id} only."], "non_effects": ["Included VRECs and work orders remain unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-EXTERNAL-ACTION",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-EXTERNAL-ACTION", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "accountable external-action owner", "artifact": "{artifact_id}", "decision": "the exact tag, publication, deployment, or operating action", "outcomes": ["authorize", "stop"], "response": "Authorize this exact external action for {artifact_id}: <action and target>.", "gate_ids": ["QG-G5-EXTERNAL-ACTION"], "effects": ["Permits only the exact named external action."], "non_effects": ["Release status alone performs no external action."]}
+      ]
+    },
+    {
+      "id": "PROC-REMEDIATE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-REMEDIATE-FOCUS", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Re-evaluated selected state for {artifact_id}."], "non_effects": ["Remediation does not expand scope or change state."]}
+      ]
+    },
+    {
+      "id": "PROC-DEFINITION-COMPLETE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-DEFINITION-COMPLETE", "kind": "decision", "decision_right": "DR-DEFINITION-DECIDE", "role": "definition-owner", "artifact": "{artifact_id}", "decision": "whether the selected definition is complete", "outcomes": ["implemented", "reject", "stop"], "response": "Decide the selected definition {artifact_id} only.", "gate_ids": ["QG-G1-DEFINITION", "QG-G2-ARCHITECTURE"], "effects": ["Permits a decision on {artifact_id} only."], "non_effects": ["Related definitions remain unchanged unless separately selected."]}
+      ]
+    },
+    {
+      "id": "PROC-DEFINITION-WORK",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-DEFINITION-WORK", "kind": "decision", "decision_right": "DR-WO-SELECT", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "which exact approved work order to select", "outcomes": ["select", "stop"], "response": "Select the exact approved work order related to {artifact_id}.", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["Selects one bounded work order."], "non_effects": ["An implemented definition authorizes no work by itself."]}
+      ]
+    }
+  ]
+}

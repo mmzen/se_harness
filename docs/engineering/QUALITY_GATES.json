@@ -1,0 +1,106 @@
+{
+  "schema": "se-harness-quality-gates-v1",
+  "aggregation": ["fail", "not_assessable", "pass"],
+  "gates": [
+    {
+      "id": "QG-G0-INTENT",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G0-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G0-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G1-DEFINITION",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G1-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G1-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G2-ARCHITECTURE",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G2-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G2-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G3-WORK-AUTHORIZATION",
+      "checkpoints": ["start", "pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G3-STATUS", "evaluator": "artifact_status", "statuses": ["approved"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G3-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G3-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G3-SCOPE", "evaluator": "execution_scope_declared", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}:[execution_scope]"}]},
+        {"id": "QGP-G3-PREFLIGHT", "evaluator": "start_preflight_ready", "required_evidence": [{"kind": "result", "reference": "preflight:{artifact_id}:start"}]}
+      ]
+    },
+    {
+      "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+      "checkpoints": ["pre-action", "transition", "handoff"],
+      "predicates": [
+        {"id": "QGP-G4I-STATUS", "evaluator": "artifact_status", "statuses": ["in_progress"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G4I-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G4I-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G4I-SCOPE", "evaluator": "execution_scope_declared", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}:[execution_scope]"}]},
+        {"id": "QGP-G4I-COMPLETE", "evaluator": "change_set_complete", "required_evidence": [{"kind": "result", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-PATHS", "evaluator": "changed_paths_within_scope", "required_evidence": [{"kind": "path", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-PREFLIGHT", "evaluator": "review_preflight_ready", "required_evidence": [{"kind": "result", "reference": "preflight:{artifact_id}:review"}]},
+        {"id": "QGP-G4I-EVIDENCE", "evaluator": "review_evidence_available", "required_evidence": [{"kind": "path", "reference": "work-order-evidence:{artifact_id}"}]}
+      ]
+    },
+    {
+      "id": "QG-G4-CANDIDATE-READY",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G4C-STATUS", "evaluator": "artifact_status", "statuses": ["implemented"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G4C-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G4C-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G4-ASSURANCE-DECISION",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G4A-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G4A-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G4-VERIFIED-COVERAGE",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G4V-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G4V-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G5-RELEASE-PREPARATION",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G5P-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G5P-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G5-RELEASE-DECISION",
+      "checkpoints": ["pre-action", "transition"],
+      "predicates": [
+        {"id": "QGP-G5D-STATUS", "evaluator": "artifact_status", "statuses": ["ready"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G5D-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G5D-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    },
+    {
+      "id": "QG-G5-EXTERNAL-ACTION",
+      "checkpoints": ["pre-action"],
+      "predicates": [
+        {"id": "QGP-G5E-STATUS", "evaluator": "artifact_status", "statuses": ["released"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G5E-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G5E-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+      ]
+    }
+  ]
+}

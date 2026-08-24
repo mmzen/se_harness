@@ -90,7 +90,7 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        self.assertNotEqual(quality, canonical_quality)
+        self.assertEqual(quality, canonical_quality)
         self.assertIn("BCP 14", canonical_quality)
         self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
         for plane in VALIDATION_PLANES:

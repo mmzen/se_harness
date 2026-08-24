@@ -1,8 +1,9 @@
 # se-harness:begin
 # Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.
 docs/engineering/**/evidence/*.json text eol=lf
-# Keep the packaged migration protocol, its hash-bound implementation, and canonical scenarios byte-stable.
+# se-harness:end
+
+# Repository-owned post-0.6.0 migration protocol byte rules.
 se_harness/governance_migration*.py text eol=lf
 se_harness/governance_migration_contract.json text eol=lf
 tests/fixtures/governance_migration/*.json text eol=lf
-# se-harness:end

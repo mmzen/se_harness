@@ -1,4 +1,4 @@
-name: Predecessor Evaluator Assessment
+name: Governor Transition Assessment
 
 on:
   pull_request:
@@ -7,14 +7,9 @@ on:
 permissions:
   contents: read
 
-env:
-  SE_HARNESS_VERSION: "0.5.0"
-  SE_HARNESS_WHEEL: "se_harness-0.5.0-py3-none-any.whl"
-  SE_HARNESS_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"
-
 jobs:
-  predecessor-assessment:
-    name: Released 0.5 predecessor assessment
+  governor-transition:
+    name: Governor transition assessment
     runs-on: ubuntu-latest
     env:
       PYTHONNOUSERSITE: "1"
@@ -27,39 +22,101 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Acquire and install the exact released evaluator
+      - name: Make the default-branch base available without credentials
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         shell: bash
         run: |
-          mkdir -p "$RUNNER_TEMP/released-wheel"
-          python -m pip download --disable-pip-version-check --no-deps \
-            --only-binary=:all: --dest "$RUNNER_TEMP/released-wheel" \
-            "se-harness==$SE_HARNESS_VERSION"
-          wheel="$RUNNER_TEMP/released-wheel/$SE_HARNESS_WHEEL"
-          test -f "$wheel"
-          python - "$wheel" "$SE_HARNESS_WHEEL_SHA256" <<'PY'
-          import hashlib, pathlib, sys
-          path = pathlib.Path(sys.argv[1])
-          assert hashlib.sha256(path.read_bytes()).hexdigest() == sys.argv[2]
-          PY
-          python -m venv "$RUNNER_TEMP/se-harness-env"
-          "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps "$wheel"
-      - name: Validate the complete release and exact predecessor publication view
+          set -euo pipefail
+          git fetch --no-tags origin \
+            "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
+      - name: Plan the exact governor transition
+        id: plan
+        env:
+          BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         shell: bash
         run: |
-          set +e
-          python -S scripts/validate_predecessor_publication_view.py \
+          set -euo pipefail
+          python -S scripts/validate_governor_transition.py plan \
             --repository . \
-            --release-record RLS-SEH-012 \
-            --evaluator-python "$RUNNER_TEMP/se-harness-env/bin/python" \
-            --evaluator-entry-point "$RUNNER_TEMP/se-harness-env/bin/harnessctl" \
-            --evaluator-wheel "$RUNNER_TEMP/released-wheel/$SE_HARNESS_WHEEL" \
-            --output "$RUNNER_TEMP/predecessor-publication-view.json" \
-            --json > "$RUNNER_TEMP/predecessor-publication-result.json"
-          assessment_status=$?
-          set -e
-          cat "$RUNNER_TEMP/predecessor-publication-result.json"
-          exit "$assessment_status"
+            --base-revision "$BASE_REVISION" \
+            --default-branch-ref "refs/remotes/origin/$DEFAULT_BRANCH" \
+            --output "$RUNNER_TEMP/governor-transition-plan.json" \
+            --json | tee "$RUNNER_TEMP/governor-transition-plan-result.json"
+          python - "$RUNNER_TEMP/governor-transition-plan.json" "$GITHUB_OUTPUT" <<'PY'
+          import json
+          import pathlib
+          import sys
+
+          value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert value["schema"] == "se-harness-governor-transition-v1"
+          assert value["passed"] is True
+          transition = value["transition_required"]
+          lines = [f"transition_required={str(transition).lower()}"]
+          if transition:
+              evaluator = value["target"]["evaluator"]
+              lines.extend(
+                  [
+                      f"target_version={evaluator['version']}",
+                      f"target_wheel={evaluator['archive_name']}",
+                      f"target_archive_sha256={evaluator['archive_sha256']}",
+                  ]
+              )
+          with pathlib.Path(sys.argv[2]).open("a", encoding="utf-8", newline="\n") as stream:
+              stream.write("\n".join(lines) + "\n")
+          PY
+      - name: Acquire and install the exact approved target evaluator
+        if: steps.plan.outputs.transition_required == 'true'
+        env:
+          TARGET_VERSION: ${{ steps.plan.outputs.target_version }}
+          TARGET_WHEEL: ${{ steps.plan.outputs.target_wheel }}
+          TARGET_ARCHIVE_SHA256: ${{ steps.plan.outputs.target_archive_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/target-wheel"
+          python -m pip download --disable-pip-version-check --no-deps \
+            --only-binary=:all: --dest "$RUNNER_TEMP/target-wheel" \
+            "se-harness==$TARGET_VERSION"
+          wheel="$RUNNER_TEMP/target-wheel/$TARGET_WHEEL"
+          test -f "$wheel"
+          python - "$wheel" "$TARGET_ARCHIVE_SHA256" <<'PY'
+          import hashlib
+          import pathlib
+          import sys
+
+          wheel = pathlib.Path(sys.argv[1])
+          assert hashlib.sha256(wheel.read_bytes()).hexdigest() == sys.argv[2]
+          PY
+          python -m venv "$RUNNER_TEMP/target-evaluator"
+          "$RUNNER_TEMP/target-evaluator/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps "$wheel"
+      - name: Assess the current root with the exact target governor
+        env:
+          BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          TRANSITION_REQUIRED: ${{ steps.plan.outputs.transition_required }}
+          TARGET_WHEEL: ${{ steps.plan.outputs.target_wheel }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --repository .
+            --base-revision "$BASE_REVISION"
+            --default-branch-ref "refs/remotes/origin/$DEFAULT_BRANCH"
+            --output "$RUNNER_TEMP/governor-transition-assessment.json"
+            --json
+          )
+          if [[ "$TRANSITION_REQUIRED" == "true" ]]; then
+            args+=(
+              --evaluator-python "$RUNNER_TEMP/target-evaluator/bin/python"
+              --evaluator-entry-point "$RUNNER_TEMP/target-evaluator/bin/harnessctl"
+              --evaluator-wheel "$RUNNER_TEMP/target-wheel/$TARGET_WHEEL"
+            )
+          fi
+          python -S scripts/validate_governor_transition.py assess "${args[@]}" \
+            | tee "$RUNNER_TEMP/governor-transition-assessment-result.json"
       - name: Prove assessment made no checkout change
         if: always()
         shell: bash
@@ -69,7 +126,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: predecessor-evaluator-assessment
+          name: governor-transition-assessment
+          if-no-files-found: warn
           path: |
-            ${{ runner.temp }}/predecessor-publication-view.json
-            ${{ runner.temp }}/predecessor-publication-result.json
+            ${{ runner.temp }}/governor-transition-plan.json
+            ${{ runner.temp }}/governor-transition-plan-result.json
+            ${{ runner.temp }}/governor-transition-assessment.json
+            ${{ runner.temp }}/governor-transition-assessment-result.json
