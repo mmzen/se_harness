@@ -41,8 +41,11 @@ invisible on an LF checkout, so a green suite there would prove nothing, and
 `WO-HBI-003`'s constraints require qualification in a converting checkout. Every
 suite figure below was measured in one.
 
-Linux was not exercised. The Linux half is a hosted check that runs only after
-separately authorized pull-request creation.
+Linux was not exercised locally, and no measurement here is a Linux measurement. The
+Linux half is a hosted check. It cannot be recorded in this file, because those checks
+run over the commit that contains this file and therefore do not exist when it is
+written; the verification record that binds the candidate commit is where that result
+belongs.
 
 ## Changed paths
 
@@ -173,6 +176,47 @@ with `se_harness/no_such_surface.json selects no tracked file, so its byte rule 
 dead`, so an inventory that drifts away from the tree fails rather than passing
 vacuously.
 
+## Two fresh clones, and the one case where the rules do not reach
+
+Both clones were taken from `origin` on this workstation with `core.autocrlf=true`,
+independently of the working checkout, and neither is a `git worktree` of it.
+
+A clone taken directly at the candidate — `git clone --branch
+fix/hbi-003-byte-exact-checkout-rules --single-branch` — materializes every one of the
+sixteen paths as `i/lf w/lf attr/text eol=lf`, and `tests.test_hash_bound_integrity`
+reports `Ran 99 tests` `OK (skipped=1)`. The control in the same clone still converts:
+`README.md` is `i/lf w/crlf attr/`. This is the case the release orchestrator's Windows
+leg exercises, and it passes.
+
+The second clone was taken at the default branch and then checked out onto the
+candidate with `git checkout --detach`. There, all sixteen paths report `attr/text
+eol=lf` and yet remain `w/crlf`, and the module reports `FAILED (failures=17)`:
+sixteen are `test_no_surface_is_converted_in_this_working_tree` naming one path each,
+and the seventeenth is `DeclarationShapeTests.test_declaration_is_data_only`, one of
+the ten reds this work order removes, returning because its surface is converted
+again.
+
+That is not a defect in the rules and not a fourth falsifiability case. Git
+re-materializes a path on checkout only when its blob changes. These sixteen blobs are
+identical either side of `a933d72`, so a working tree that had already materialized
+them under CRLF before the rule existed keeps the converted bytes until the file
+changes or is re-materialized deliberately — `rm <path> && git checkout -- <path>`, or
+`git rm --cached -r . && git reset --hard`. A plain `git checkout --` on an unmodified
+path is a no-op and does not re-apply a changed `.gitattributes`.
+
+The limitation is therefore real and bounded, and it is stated rather than worked
+around:
+
+- It does not reach the release orchestrator. `git worktree add --detach` creates an
+  empty directory, so every path materializes there for the first time with the rules
+  already in effect. The same holds for `actions/checkout` and for the first clone
+  above.
+- It does reach an existing developer checkout that pulls this change. Those bytes stay
+  converted until re-materialized, and the guard fails there rather than passing
+  silently, which is the guard reporting the working tree it was asked about.
+- No committed byte is at risk in either case. The index holds LF throughout, as the
+  `i/lf` column shows in both clones.
+
 ## Nothing committed changed, and nothing recorded moved
 
 - `git diff --stat fc97103 a933d72` over the sixteen selected paths is empty. The
@@ -276,11 +320,18 @@ the security, quality and repository owners remain separate and outstanding.
   `se_harness.hash_bound.resolved_attributes`, the product's own prober, and
   `git ls-files --eol` independently. Neither reading is derived from the other, and
   the guard fails if they disagree with the declaration.
-- No fresh-clone measurement was taken. The control is a `git worktree` at
-  `fc97103`, which is the construction the release orchestrator itself uses at
+- Two fresh clones were measured, in the section above, after the first draft of this
+  file recorded that none had been. The before/after control remains a `git worktree`
+  at `fc97103`, which is the construction the release orchestrator itself uses at
   `.github/workflows/publish-pypi.yml:209` and therefore the faithful one for this
-  defect. A clone check belongs to the separately authorized verification of the
-  candidate commit.
+  defect. The clones add an independent reading and one limitation the worktree control
+  could not have surfaced.
+- The clone matrix is not complete. Only `core.autocrlf=true` was exercised, on one
+  Windows workstation, with one Git version; `input` and `false` were not, and Linux
+  was not clone-checked either. `VER-HBI-001`'s three-value fresh-checkout matrix
+  applies to declared hash-bound classes, and these sixteen paths are in no declared
+  class, so that matrix is not this work order's obligation — but the gap is stated
+  rather than implied to be covered.
 
 ## Actions not performed
 
