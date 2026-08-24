@@ -411,12 +411,145 @@ This work order edits neither `WO-REB-021` nor its retained evidence, and it cha
 
 ## 14. Hosted re-run
 
-Not yet observed at the time this file was first written. The branch is pushed and one pull request carrying `Harness-Work-Order: WO-REB-022` is opened after the implementation commit, and the hosted result is recorded in this section in a bounded follow-up commit before any verification record binds this work order. Until that measurement exists, this file claims nothing about the pinned lane beyond the simulated profile of section 4.
+Measured. The pinned lane is repaired for the defect this work order names, and the same run exposes two further failures that the defect had been hiding. The lane is not green, so the work order's stop-and-escalate condition is active and this section retains the exact failures rather than absorbing them.
+
+### 14.1 The run
+
+| Fact | Value |
+| --- | --- |
+| Workflow | `SE Harness Candidate Evidence` |
+| Run | `32745833437` — <https://github.com/mmzen/se_harness/actions/runs/32745833437> |
+| Job | `97490996661` `Candidate source evidence`, conclusion `failure` |
+| Step | `Run complete candidate-source regression` |
+| Event | `pull_request` (`PR #140`) |
+| Head commit | `def14847951f2837cfde363f9fcb0655230ec95d` |
+| Branch | `fix/reb-junction-predicate-pinned-lane` |
+| Started | `2026-08-24T15:35:54Z` |
+| Runtime observed in the traceback | `/opt/hostedtoolcache/Python/3.11.16/x64` |
+
+Six later jobs are `skipped`, as they are gated on this one.
+
+### 14.2 The measured movement
+
+| Commit | Lane result |
+| --- | --- |
+| `f9225f887d23303be01ba7d73219c53e0fec0f95` (`WO-REB-021` candidate) | `Ran 764 tests`, `FAILED (failures=33, errors=38, skipped=3)` |
+| `def14847951f2837cfde363f9fcb0655230ec95d` (this repair) | `Ran 769 tests in 47.229s`, `FAILED (failures=1, errors=1, skipped=3)` |
+
+Seventy-one failures and errors became two. Every `EPS011 link_predicate` occurrence is gone from the log: the capability is decided on the pinned lane by the third route, exactly as section 4's simulated profile predicted, and the test count is `+5` there as it is locally.
+
+### 14.3 The two remaining failures, verbatim
+
+Both are retained here in full rather than summarized, because the work order requires the exact failure and because neither is repairable inside this work order's execution scope.
+
+The first, an error:
+
+```
+ERROR: test_a_link_cycle_is_refused_rather_than_looping (test_interpreter_safety.RuleEvaluationTests.test_a_link_cycle_is_refused_rather_than_looping)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/pathlib.py", line 993, in resolve
+    s = os.path.realpath(self, strict=strict)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 413, in realpath
+  File "<frozen posixpath>", line 480, in _joinrealpath
+  File "<frozen posixpath>", line 480, in _joinrealpath
+  File "<frozen posixpath>", line 475, in _joinrealpath
+OSError: [Errno 40] Too many levels of symbolic links: '/tmp/tmpl8pc1f53/venv/bin/python'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/se_harness/se_harness/tests/test_interpreter_safety.py", line 541, in test_a_link_cycle_is_refused_rather_than_looping
+    self.assertEqual("EPS003", self._both(first))
+                               ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/se_harness/se_harness/tests/test_interpreter_safety.py", line 369, in _both
+    first = interpreter_safety.refusal_case(path, **kwargs)  # type: ignore[arg-type]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/se_harness/se_harness/se_harness/interpreter_safety.py", line 568, in refusal_case
+    evaluate(
+  File "/home/runner/work/se_harness/se_harness/se_harness/interpreter_safety.py", line 486, in evaluate
+    target = lexical.resolve(strict=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/pathlib.py", line 995, in resolve
+    check_eloop(e)
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/pathlib.py", line 990, in check_eloop
+    raise RuntimeError("Symlink loop from %r" % e.filename)
+RuntimeError: Symlink loop from '/tmp/tmpl8pc1f53/venv/bin/python'
+```
+
+The second, a failure:
+
+```
+FAIL: test_external_interpreter_rejects_linked_environment_parent (test_predecessor_preparation.PredecessorPreparationTests.test_external_interpreter_rejects_linked_environment_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/se_harness/se_harness/repository_tools/predecessor_preparation.py", line 214, in _safe_interpreter
+    return interpreter_safety.evaluate(path, checkout_root=root)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/se_harness/se_harness/repository_tools/interpreter_safety.py", line 476, in evaluate
+    raise InterpreterSafetyRefusal(
+repository_tools.interpreter_safety.InterpreterSafetyRefusal: EPS001 parent: an enclosing directory is a symbolic link
+
+The above exception was the direct cause of the following exception:
+
+repository_tools.predecessor_preparation.PredecessorPreparationError: evaluator interpreter is refused by EPS001: an enclosing directory is a symbolic link
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/runner/work/se_harness/se_harness/tests/test_predecessor_preparation.py", line 211, in test_external_interpreter_rejects_linked_environment_parent
+    with self.assertRaisesRegex(
+AssertionError: "environment must not traverse a link" does not match "evaluator interpreter is refused by EPS001: an enclosing directory is a symbolic link"
+```
+
+### 14.4 Neither failure is a regression of this repair
+
+Both test names appear in the pre-repair hosted failure list for `f9225f88`, where each carried `EPS011 link_predicate` instead. The blanket capability refusal fired before either rule could be reached, so both tests failed for the defect this work order repairs and neither could report its own cause. The measured list is the evidence: `test_a_link_cycle_is_refused_rather_than_looping` and `test_external_interpreter_rejects_linked_environment_parent` were both already failing before this branch existed.
+
+Each is therefore a second, unrelated defect in the implementation `WO-REB-021` accepted, unmasked by this repair rather than introduced by it. Neither is reachable on the Windows development lane: the first needs a symbolic-link privilege that lane lacks, and the second is skipped there by `unittest.skipIf(os.name == "nt", "POSIX link rejection coverage")`.
+
+### 14.5 The two causes, as measured on this host
+
+Both were reproduced here without a 3.11 POSIX interpreter, by supplying the report the pinned lane produces rather than the platform that produces it, and both candidate repairs were then measured against the same probe. The probe is `reb022_amend_probe.py`, run from the branch tip and from a throwaway worktree at `def1484` carrying the candidate repairs.
+
+**Cause one — a resolution failure the rule does not catch.** `evaluate` rule 5 calls `Path.resolve(strict=True)` inside `except OSError`. Below Python 3.13 `pathlib` catches the underlying `ELOOP` itself and re-raises `RuntimeError("Symlink loop from ...")`, which that clause does not catch, so the refusal escapes as a `RuntimeError` instead of `EPS003`. The same hole exists in `_resolved_within`, whose `except (OSError, ValueError)` guards a second `resolve(strict=True)`. Measured, branch tip against candidate:
+
+| Observation | Branch tip `def1484` | With the candidate repair |
+| --- | --- | --- |
+| `se_harness` loader, resolution reporting a cycle | `escaped as RuntimeError: Symlink loop from ...` | `EPS003 interpreter: the interpreter path does not resolve` |
+| `repository_tools` loader, same | `escaped as RuntimeError: Symlink loop from ...` | `EPS003 interpreter: the interpreter path does not resolve` |
+
+Both files are inside this work order's execution scope. A lane-independent conformance test is constructable in the in-scope focused module: added and measured, the module goes 88 to 89 tests, `OK (skipped=10)`, and with the loader repair reverted that single test fails with the `RuntimeError` above, so it bites.
+
+**Cause two — a changed observable message at a boundary whose behaviour is frozen.** `WO-REB-021` re-pointed `predecessor_preparation._safe_interpreter` at the declared rule and, in doing so, replaced the base commit's `f"{label} environment must not traverse a link"` with `f"{label} is refused by {refusal.case}: {refusal.detail}"`. `SPEC-REB-011` rule 22 states that this module's "current observable behavior is the reference for the rule and shall not change", and `WO-REB-021`'s own stop-and-escalate list names "Correcting a boundary would change the observable behavior of `predecessor_preparation`". The change went unobserved because the only test that reads the message is skipped on Windows and was masked by `EPS011` on the pinned lane. Measured, branch tip against a candidate that retains the frozen wording ahead of the case identifier for the two enclosing-link cases:
+
+| Refusal supplied to `_ordinary_external_interpreter` | Branch tip matches the frozen wording | Candidate matches |
+| --- | --- | --- |
+| `EPS001` enclosing directory is a symbolic link | no | yes |
+| `EPS002` enclosing directory is a directory junction | no | yes |
+| `EPS003` (control, not an enclosing-link case) | no | no |
+
+`repository_tools/predecessor_preparation.py` is **not** inside this work order's execution scope, and neither is `tests/test_predecessor_preparation.py`.
+
+### 14.6 Stop and escalate
+
+Two of this work order's stop-and-escalate conditions are met: "The hosted lane still fails after the repair, or fails for a second unrelated cause", and "Another file, lifecycle policy change, historical mutation, released-byte change, or external action is required". Its instruction is "Retain the exact failure and request a bounded amendment. Do not absorb another defect and do not create a bypass."
+
+Accordingly:
+
+- The exact failures are retained above, verbatim, with their causes measured rather than inferred.
+- No repair for either cause is committed under this work order's current scope. The candidates exist only in a throwaway worktree and are recorded here as measurements, not as changes.
+- No test was weakened, skipped, marked expected-failure, or bounded by a platform name to make the lane green. No bypass was created.
+- `WO-REB-022` stays `in_progress`. It is not transitioned to `implemented`, because its own required verification is "Confirm on the hosted lane that the previously failing job passes", and the job does not pass.
+- No verification record binds this work order or `WO-REB-021`, and `VREC-REB-017` is not superseded, until a bounded amendment is decided and the lane is measured green.
+
+The requested amendment and its alternatives are an owner decision recorded where that decision is taken, not here. This section records only what was measured.
 
 ## 15. Coverage gaps and residual risks
 
 - **The pinned lane is simulated here, not run here.** Section 4's profile withdraws the three routes by name on a Windows host. It reproduces the hosted failure by name for 25 of the 27 boundary-module failures and repairs all of them, but it is not a 3.11 POSIX interpreter. Only section 14's hosted re-run closes this, and it is the reason the work order requires it.
-- **The two POSIX-only preparation tests remain unmeasured on this host.** Both are explicitly skipped for lack of the Windows symbolic-link privilege. They ran and failed on the hosted lane before the repair, so the hosted re-run is also the only place their repair is observable.
+- **The two POSIX-only preparation tests are still skipped on this host.** Both are skipped for lack of the Windows symbolic-link privilege, so this lane cannot observe them directly. Section 14 measures both of their causes here anyway, by supplying the report the pinned lane produces instead of the platform that produces it; that closes the diagnosis, not the platform coverage, and the hosted lane remains the only place their repair is observable end to end.
 - **The junction half of the corpus is still Windows-only and the symbolic-link half still POSIX-only.** `VER-REB-010`'s coverage statement that neither platform alone verifies `REQ-REB-024` is unchanged by this repair.
 - **The third route is an inference about the filesystem from the runtime's stat-result surface.** A hypothetical runtime whose stat result omits both members while its filesystem does carry reparse points would be accepted where it should refuse. No supported runtime is in that position: the members and the reparse constants come from the same `_stat` extension under the same platform condition. The risk is recorded rather than dismissed, and the mechanical route table of section 6 is where a future runtime that breaks the assumption would have to be handled.
 - **This file records one platform at one commit.** Nothing here is a verification decision.
