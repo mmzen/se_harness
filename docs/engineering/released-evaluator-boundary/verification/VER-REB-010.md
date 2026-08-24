@@ -2,13 +2,19 @@
 id = "VER-REB-010"
 type = "verification"
 title = "Independent verification of environment entry-point safety"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner", "repository-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 verifies = ["REQ-REB-023", "REQ-REB-024", "REQ-REB-025", "REQ-REB-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "quality-owner"
 +++
 
 # Verification Contract: Independent verification of environment entry-point safety

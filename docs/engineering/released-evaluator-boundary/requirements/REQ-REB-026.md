@@ -2,7 +2,7 @@
 id = "REQ-REB-026"
 type = "requirement"
 title = "Use one declared interpreter-safety rule at every identity boundary"
-status = "draft"
+status = "approved"
 owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-architecture-conformance-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Use one declared interpreter-safety rule at every identity boundary

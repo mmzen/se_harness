@@ -2,7 +2,7 @@
 id = "REQ-REB-025"
 type = "requirement"
 title = "Record and verify both the entry path and the resolved interpreter"
-status = "draft"
+status = "approved"
 owners = ["requirements-steward", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Record and verify both the entry path and the resolved interpreter

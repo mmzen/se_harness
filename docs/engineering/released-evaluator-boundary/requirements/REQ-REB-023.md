@@ -2,7 +2,7 @@
 id = "REQ-REB-023"
 type = "requirement"
 title = "Accept a real POSIX virtual environment as an evaluator entry point"
-status = "draft"
+status = "approved"
 owners = ["requirements-steward", "repository-owner", "release-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Accept a real POSIX virtual environment as an evaluator entry point

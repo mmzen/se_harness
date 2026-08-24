@@ -2,7 +2,7 @@
 id = "ARCH-REB-010"
 type = "architecture"
 title = "One interpreter-safety rule serving two runtimes"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,6 +16,12 @@ outcome = "adr_required"
 triggers = ["responsibility-or-dependency-direction", "security-privacy-or-trust-boundary", "cross-cutting-policy", "difficult-to-reverse", "material-alternatives"]
 rationale = "The correction places a security rule that every evaluator-identity boundary depends on, and it must do so across a deliberate dependency barrier: repository_tools imports only the standard library and its own package. Choosing where the rule lives fixes the dependency direction between the package runtime and the repository-tools runtime, changes a trust boundary that six sites currently decide independently, and is difficult to reverse once boundaries and evidence formats depend on it. Importing the package, duplicating with a parity test, and a declared data contract with two loaders are materially different alternatives with different long-term drift and packaging costs."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: One interpreter-safety rule serving two runtimes

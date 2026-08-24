@@ -2,13 +2,19 @@
 id = "SPEC-REB-011"
 type = "specification"
 title = "Declared environment entry-point safety rule and interpreter identity facts"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 specifies = ["REQ-REB-023", "REQ-REB-024", "REQ-REB-025", "REQ-REB-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Declared environment entry-point safety rule and interpreter identity facts

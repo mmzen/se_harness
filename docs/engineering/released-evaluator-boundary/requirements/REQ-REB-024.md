@@ -2,7 +2,7 @@
 id = "REQ-REB-024"
 type = "requirement"
 title = "Refuse every unsafe external interpreter path form"
-status = "draft"
+status = "approved"
 owners = ["requirements-steward", "security-owner", "repository-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -11,6 +11,12 @@ verification_method = "automated-adversarial-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Refuse every unsafe external interpreter path form

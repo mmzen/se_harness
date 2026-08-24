@@ -2,7 +2,7 @@
 id = "WO-REB-021"
 type = "work_order"
 title = "Implement the declared environment entry-point safety rule"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -62,6 +62,19 @@ implements = ["REQ-REB-023", "REQ-REB-024", "REQ-REB-025", "REQ-REB-026"]
 specifications = ["SPEC-REB-011"]
 architecture = ["ARCH-REB-010", "ADR-REB-010"]
 verification = ["VER-REB-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-24T13:04:22Z"
+decided_by = "engineering-owner"
+reason = "Explicit start of the bounded implementation for issue #106 / RC-060-06. Authorizes only the local implementation and qualification described in the work order."
 +++
 
 # Work Order: Implement the declared environment entry-point safety rule

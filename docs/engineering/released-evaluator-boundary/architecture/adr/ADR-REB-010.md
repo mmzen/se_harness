@@ -2,13 +2,19 @@
 id = "ADR-REB-010"
 type = "adr"
 title = "Declared interpreter-safety rule with one loader per runtime"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
 decides = ["ARCH-REB-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T13:01:45Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Declared interpreter-safety rule with one loader per runtime
