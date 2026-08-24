@@ -11,12 +11,17 @@ import subprocess
 import tempfile
 import tomllib
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+from repository_tools.release_build import RECIPE_SCHEMA, load_build_recipe_at
 
-BUNDLE_SCHEMA = "se-harness-release-bundle/v1"
-DISTRIBUTION_SCHEMA = 1
+BUNDLE_SCHEMA_V1 = "se-harness-release-bundle/v1"
+BUNDLE_SCHEMA_V2 = "se-harness-release-bundle/v2"
+BUNDLE_SCHEMA = BUNDLE_SCHEMA_V1
+DISTRIBUTION_SCHEMA_V1 = 1
+DISTRIBUTION_SCHEMA_V2 = 2
+DISTRIBUTION_SCHEMA = DISTRIBUTION_SCHEMA_V1
 DISTRIBUTION_KIND = "python-wheel-sdist"
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]{0,63}")
@@ -25,18 +30,24 @@ COMMIT_PATTERNS = {
     "sha256": re.compile(r"[0-9a-f]{64}"),
 }
 SAFE_BASENAME_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._+-]{0,199}")
-BUNDLE_KEYS = frozenset(
+BUNDLE_KEYS_V1 = frozenset(
     {
         "schema", "version", "commit", "git_object_format", "source_date_epoch",
         "wheel", "wheel_sha256", "sdist", "sdist_sha256", "checksums",
         "checksums_sha256", "checksums_content", "source_manifest_sha256",
     }
 )
-DISTRIBUTION_KEYS = frozenset(
+DISTRIBUTION_KEYS_V1 = frozenset(
     {
         "schema", "kind", "source_date_epoch", "wheel", "wheel_sha256", "sdist",
         "sdist_sha256", "checksums", "checksums_sha256", "source_manifest_sha256",
     }
+)
+BUNDLE_KEYS_V2 = BUNDLE_KEYS_V1 | frozenset(
+    {"build_recipe_schema", "build_recipe", "build_recipe_sha256"}
+)
+DISTRIBUTION_KEYS_V2 = DISTRIBUTION_KEYS_V1 | frozenset(
+    {"build_recipe_schema", "build_recipe", "build_recipe_sha256"}
 )
 
 
@@ -54,10 +65,14 @@ class ReleaseDistribution:
     checksums: str
     checksums_sha256: str
     source_manifest_sha256: str
+    schema: int = DISTRIBUTION_SCHEMA_V1
+    build_recipe_schema: str | None = None
+    build_recipe: str | None = None
+    build_recipe_sha256: str | None = None
 
     def as_metadata(self) -> dict[str, Any]:
-        return {
-            "schema": DISTRIBUTION_SCHEMA,
+        values: dict[str, Any] = {
+            "schema": self.schema,
             "kind": DISTRIBUTION_KIND,
             "source_date_epoch": self.source_date_epoch,
             "wheel": self.wheel,
@@ -68,11 +83,19 @@ class ReleaseDistribution:
             "checksums_sha256": self.checksums_sha256,
             "source_manifest_sha256": self.source_manifest_sha256,
         }
+        if self.schema == DISTRIBUTION_SCHEMA_V2:
+            values.update(
+                {
+                    "build_recipe_schema": self.build_recipe_schema,
+                    "build_recipe": self.build_recipe,
+                    "build_recipe_sha256": self.build_recipe_sha256,
+                }
+            )
+        return values
 
     def toml(self, newline: str = "\n") -> str:
         values = self.as_metadata()
-        return newline.join(
-            [
+        lines = [
                 "[distribution]",
                 f'schema = {values["schema"]}',
                 f'kind = "{values["kind"]}"',
@@ -84,8 +107,16 @@ class ReleaseDistribution:
                 f'checksums = "{values["checksums"]}"',
                 f'checksums_sha256 = "{values["checksums_sha256"]}"',
                 f'source_manifest_sha256 = "{values["source_manifest_sha256"]}"',
-            ]
-        )
+        ]
+        if self.schema == DISTRIBUTION_SCHEMA_V2:
+            lines.extend(
+                [
+                    f'build_recipe_schema = "{values["build_recipe_schema"]}"',
+                    f'build_recipe = "{values["build_recipe"]}"',
+                    f'build_recipe_sha256 = "{values["build_recipe_sha256"]}"',
+                ]
+            )
+        return newline.join(lines)
 
 
 def checksum_manifest_bytes(version: str, wheel_sha256: str, sdist_sha256: str) -> bytes:
@@ -122,21 +153,35 @@ def _safe_basename(value: Any, label: str) -> str:
     return value
 
 
+def _safe_posix_path(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value or "\\" in value or "\x00" in value:
+        raise ReleaseDistributionError(f"{label} must be a safe repository-relative POSIX path")
+    path = PurePosixPath(value)
+    if path.is_absolute() or value != path.as_posix() or any(part in {"", ".", ".."} for part in path.parts):
+        raise ReleaseDistributionError(f"{label} must be a safe repository-relative POSIX path")
+    return value
+
+
 def validate_distribution_block(value: Any, version: str) -> ReleaseDistribution:
     if not isinstance(value, dict):
         raise ReleaseDistributionError("distribution must be a TOML table")
+    schema = value.get("schema")
+    expected_keys = {
+        DISTRIBUTION_SCHEMA_V1: DISTRIBUTION_KEYS_V1,
+        DISTRIBUTION_SCHEMA_V2: DISTRIBUTION_KEYS_V2,
+    }.get(schema)
+    if expected_keys is None:
+        raise ReleaseDistributionError("distribution schema must be 1 or 2")
     keys = set(value)
-    if keys != DISTRIBUTION_KEYS:
-        missing = sorted(DISTRIBUTION_KEYS - keys)
-        extra = sorted(keys - DISTRIBUTION_KEYS)
+    if keys != expected_keys:
+        missing = sorted(expected_keys - keys)
+        extra = sorted(keys - expected_keys)
         detail = []
         if missing:
             detail.append(f"missing {', '.join(missing)}")
         if extra:
             detail.append(f"unexpected {', '.join(extra)}")
         raise ReleaseDistributionError(f"distribution block must be complete ({'; '.join(detail)})")
-    if value.get("schema") != DISTRIBUTION_SCHEMA:
-        raise ReleaseDistributionError("distribution schema must be 1")
     if value.get("kind") != DISTRIBUTION_KIND:
         raise ReleaseDistributionError(f"distribution kind must be {DISTRIBUTION_KIND}")
     epoch = value.get("source_date_epoch")
@@ -160,6 +205,15 @@ def validate_distribution_block(value: Any, version: str) -> ReleaseDistribution
         raise ReleaseDistributionError(
             "distribution checksums_sha256 does not identify canonical SHA256SUMS bytes"
         )
+    recipe_schema: str | None = None
+    recipe_path: str | None = None
+    recipe_sha256: str | None = None
+    if schema == DISTRIBUTION_SCHEMA_V2:
+        recipe_schema = value.get("build_recipe_schema")
+        if recipe_schema != RECIPE_SCHEMA:
+            raise ReleaseDistributionError(f"distribution build_recipe_schema must be {RECIPE_SCHEMA}")
+        recipe_path = _safe_posix_path(value.get("build_recipe"), "distribution build_recipe")
+        recipe_sha256 = _sha256(value.get("build_recipe_sha256"), "distribution build_recipe_sha256")
     return ReleaseDistribution(
         source_date_epoch=epoch,
         wheel=wheel,
@@ -171,6 +225,10 @@ def validate_distribution_block(value: Any, version: str) -> ReleaseDistribution
         source_manifest_sha256=_sha256(
             value.get("source_manifest_sha256"), "distribution source_manifest_sha256"
         ),
+        schema=schema,
+        build_recipe_schema=recipe_schema,
+        build_recipe=recipe_path,
+        build_recipe_sha256=recipe_sha256,
     )
 
 
@@ -181,6 +239,7 @@ def read_bundle_manifest(
     commit: str,
     git_object_format: str,
     source_date_epoch: int,
+    repository: Path | None = None,
 ) -> ReleaseDistribution:
     try:
         payload = path.read_bytes()
@@ -194,10 +253,16 @@ def read_bundle_manifest(
         raise ReleaseDistributionError("distribution manifest must be valid UTF-8 JSON") from exc
     if not isinstance(value, dict):
         raise ReleaseDistributionError("distribution manifest must be a JSON object")
+    schema = value.get("schema")
+    expected_keys = {BUNDLE_SCHEMA_V1: BUNDLE_KEYS_V1, BUNDLE_SCHEMA_V2: BUNDLE_KEYS_V2}.get(schema)
+    if expected_keys is None:
+        raise ReleaseDistributionError(
+            f"distribution manifest schema must be {BUNDLE_SCHEMA_V1} or {BUNDLE_SCHEMA_V2}"
+        )
     keys = set(value)
-    if keys != BUNDLE_KEYS:
-        missing = sorted(BUNDLE_KEYS - keys)
-        extra = sorted(keys - BUNDLE_KEYS)
+    if keys != expected_keys:
+        missing = sorted(expected_keys - keys)
+        extra = sorted(keys - expected_keys)
         detail = []
         if missing:
             detail.append(f"missing {', '.join(missing)}")
@@ -206,8 +271,6 @@ def read_bundle_manifest(
         raise ReleaseDistributionError(
             f"distribution manifest fields are invalid ({'; '.join(detail)})"
         )
-    if value.get("schema") != BUNDLE_SCHEMA:
-        raise ReleaseDistributionError(f"distribution manifest schema must be {BUNDLE_SCHEMA}")
     if value.get("version") != version:
         raise ReleaseDistributionError("distribution manifest version does not match the release")
     if value.get("git_object_format") != git_object_format:
@@ -225,8 +288,9 @@ def read_bundle_manifest(
         raise ReleaseDistributionError("distribution manifest commit does not match the candidate")
     if value.get("source_date_epoch") != source_date_epoch:
         raise ReleaseDistributionError("distribution manifest epoch does not match the candidate commit")
+    distribution_schema = DISTRIBUTION_SCHEMA_V2 if schema == BUNDLE_SCHEMA_V2 else DISTRIBUTION_SCHEMA_V1
     metadata = {
-        "schema": DISTRIBUTION_SCHEMA,
+        "schema": distribution_schema,
         "kind": DISTRIBUTION_KIND,
         "source_date_epoch": value.get("source_date_epoch"),
         "wheel": value.get("wheel"),
@@ -237,12 +301,32 @@ def read_bundle_manifest(
         "checksums_sha256": value.get("checksums_sha256"),
         "source_manifest_sha256": value.get("source_manifest_sha256"),
     }
+    if distribution_schema == DISTRIBUTION_SCHEMA_V2:
+        metadata.update(
+            {
+                "build_recipe_schema": value.get("build_recipe_schema"),
+                "build_recipe": value.get("build_recipe"),
+                "build_recipe_sha256": value.get("build_recipe_sha256"),
+            }
+        )
     distribution = validate_distribution_block(metadata, version)
     expected_content = checksum_manifest_bytes(
         version, distribution.wheel_sha256, distribution.sdist_sha256
     ).decode("utf-8")
     if value.get("checksums_content") != expected_content:
         raise ReleaseDistributionError("distribution manifest checksums_content is not canonical")
+    if distribution.schema == DISTRIBUTION_SCHEMA_V2 and repository is not None:
+        try:
+            recipe = load_build_recipe_at(
+                repository,
+                commit,
+                path=distribution.build_recipe or "",
+                expected_sha256=distribution.build_recipe_sha256,
+            )
+        except (OSError, RuntimeError) as exc:
+            raise ReleaseDistributionError(f"distribution build recipe differs from candidate tree: {exc}") from exc
+        if recipe.value["schema"] != distribution.build_recipe_schema:
+            raise ReleaseDistributionError("distribution build recipe schema differs from candidate tree")
     return distribution
 
 
@@ -287,6 +371,8 @@ def create_manifest(
     version: str,
     wheel: Path,
     sdist: Path,
+    *,
+    build_recipe: PurePosixPath | None = None,
 ) -> dict[str, object]:
     repository = repository.resolve()
     expected_wheel, expected_sdist = expected_distribution_names(version)
@@ -307,8 +393,8 @@ def create_manifest(
     epoch = str(_run_git(repository, "show", "-s", "--format=%ct", candidate))
     if not epoch.isdigit() or int(epoch) < 1:
         raise ReleaseDistributionError("candidate commit timestamp is invalid")
-    return {
-        "schema": BUNDLE_SCHEMA,
+    result: dict[str, object] = {
+        "schema": BUNDLE_SCHEMA_V2 if build_recipe is not None else BUNDLE_SCHEMA_V1,
         "version": version,
         "commit": candidate,
         "git_object_format": object_format,
@@ -322,6 +408,20 @@ def create_manifest(
         "checksums_content": checksums_content,
         "source_manifest_sha256": source_manifest_sha256(repository, candidate),
     }
+    if build_recipe is not None:
+        recipe_path = _safe_posix_path(build_recipe.as_posix(), "build recipe")
+        try:
+            recipe = load_build_recipe_at(repository, candidate, path=recipe_path)
+        except (OSError, RuntimeError) as exc:
+            raise ReleaseDistributionError(f"cannot bind candidate build recipe: {exc}") from exc
+        result.update(
+            {
+                "build_recipe_schema": RECIPE_SCHEMA,
+                "build_recipe": recipe.path,
+                "build_recipe_sha256": recipe.sha256,
+            }
+        )
+    return result
 
 
 def _safe_repository_file(repository: Path, supplied: Path, label: str) -> Path:
@@ -416,7 +516,10 @@ def bind_distribution(
         commit=commit,
         git_object_format=object_format,
         source_date_epoch=int(epoch_text),
+        repository=root,
     )
+    if distribution.schema != DISTRIBUTION_SCHEMA_V2:
+        raise ReleaseDistributionError("new ready release records require recipe-bearing distribution schema 2")
     if source_manifest_sha256(root, commit) != distribution.source_manifest_sha256:
         raise ReleaseDistributionError(
             "distribution manifest source identity does not match the candidate tree"
@@ -458,11 +561,28 @@ def validate_record_distribution(repository: Path, path: Path, *, required: bool
     if not isinstance(commit, str) or pattern is None or pattern.fullmatch(commit) is None:
         raise ReleaseDistributionError(f"release record candidate identity is invalid: {path}")
     distribution = validate_distribution_block(value, version)
+    status = metadata.get("status")
+    if distribution.schema == DISTRIBUTION_SCHEMA_V1 and status != "released":
+        raise ReleaseDistributionError(
+            f"distribution schema 1 is allowed only for historical released records: {path}"
+        )
     epoch_text = str(_run_git(repository, "show", "-s", "--format=%ct", commit))
     if not epoch_text.isdigit() or int(epoch_text) != distribution.source_date_epoch:
         raise ReleaseDistributionError(f"distribution epoch differs from candidate commit: {path}")
     if source_manifest_sha256(repository, commit) != distribution.source_manifest_sha256:
         raise ReleaseDistributionError(f"distribution source manifest differs from candidate tree: {path}")
+    if distribution.schema == DISTRIBUTION_SCHEMA_V2:
+        try:
+            recipe = load_build_recipe_at(
+                repository,
+                commit,
+                path=distribution.build_recipe or "",
+                expected_sha256=distribution.build_recipe_sha256,
+            )
+        except (OSError, RuntimeError) as exc:
+            raise ReleaseDistributionError(f"distribution build recipe differs from candidate tree: {path}: {exc}") from exc
+        if recipe.value["schema"] != distribution.build_recipe_schema:
+            raise ReleaseDistributionError(f"distribution build recipe schema differs from candidate tree: {path}")
     return True
 
 

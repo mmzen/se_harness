@@ -37,6 +37,9 @@ jobs:
       checksums: ${{ steps.plan.outputs.checksums }}
       checksums_sha256: ${{ steps.plan.outputs.checksums_sha256 }}
       source_date_epoch: ${{ steps.plan.outputs.source_date_epoch }}
+      distribution_schema: ${{ steps.plan.outputs.distribution_schema }}
+      build_recipe: ${{ steps.plan.outputs.build_recipe }}
+      build_recipe_sha256: ${{ steps.plan.outputs.build_recipe_sha256 }}
     steps:
       - name: Check out trusted main history
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -162,7 +165,17 @@ jobs:
   qualify:
     name: Rebuild and qualify exact candidate
     needs: resolve
-    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - mode: legacy-schema-1
+            os: windows-2022
+            distribution_schema: 1
+          - mode: recipe-schema-2
+            os: ubuntu-latest
+            distribution_schema: 2
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
     steps:
@@ -173,7 +186,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Select retained Python 3.11.9
+      - name: Select trusted orchestration Python 3.11.9
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11.9"
@@ -185,6 +198,7 @@ jobs:
           path: ${{ runner.temp }}/plan
 
       - name: Export the exact candidate twice
+        if: matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1'
         env:
           CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
         shell: bash
@@ -196,7 +210,8 @@ jobs:
           git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$temp_root/source-a"
           git archive --format=tar "$CANDIDATE_COMMIT" | tar -xf - -C "$temp_root/source-b"
 
-      - name: Run candidate verification without publication credentials
+      - name: Run legacy candidate verification without publication credentials
+        if: matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -214,7 +229,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
 
-      - name: Build both deterministic distribution sets
+      - name: Build both legacy deterministic distribution sets
+        if: matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1'
         env:
           SOURCE_DATE_EPOCH: ${{ needs.resolve.outputs.source_date_epoch }}
           SDIST_NAME: ${{ needs.resolve.outputs.sdist }}
@@ -236,7 +252,8 @@ jobs:
           cmp "$temp_root/final-a/${{ needs.resolve.outputs.wheel }}" "$temp_root/final-b/${{ needs.resolve.outputs.wheel }}"
           cmp "$temp_root/final-a/${{ needs.resolve.outputs.sdist }}" "$temp_root/final-b/${{ needs.resolve.outputs.sdist }}"
 
-      - name: Assemble and verify the exact release bundle
+      - name: Assemble and verify the exact legacy release bundle
+        if: matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1'
         env:
           WHEEL: ${{ needs.resolve.outputs.wheel }}
           WHEEL_SHA256: ${{ needs.resolve.outputs.wheel_sha256 }}
@@ -266,15 +283,60 @@ jobs:
             --directory "$temp_root/release-bundle" \
             --output "$temp_root/qualification.json"
 
+      - name: Run recipe-era candidate verification without publication credentials
+        if: matrix.mode == 'recipe-schema-2' && needs.resolve.outputs.distribution_schema == '2'
+        env:
+          CANDIDATE_COMMIT: ${{ needs.resolve.outputs.candidate_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"
+          cd "$RUNNER_TEMP/candidate-checkout"
+          python -m se_harness qualify complete-candidate . \
+            --candidate-commit "$CANDIDATE_COMMIT" \
+            --output "$RUNNER_TEMP/complete-candidate-qualification.json" \
+            --json
+          python -m unittest discover -s tests -p 'test_*.py'
+          python -m se_harness --help >/dev/null
+
+      - name: Replay the exact bound recipe twice
+        if: matrix.mode == 'recipe-schema-2' && needs.resolve.outputs.distribution_schema == '2'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/replay_release_build.py \
+            --repository "$GITHUB_WORKSPACE" \
+            --release-record "${{ inputs.release_record }}" \
+            --require-status released \
+            --output-directory "$RUNNER_TEMP/release-bundle" \
+            --result "$RUNNER_TEMP/release-build-replay.json"
+          jq '.manifest' "$RUNNER_TEMP/release-build-replay.json" >"$RUNNER_TEMP/rebuilt-bundle.json"
+          python .github/scripts/publish_release.py verify-build-manifest \
+            --plan "$RUNNER_TEMP/plan/release-plan.json" \
+            --manifest "$RUNNER_TEMP/rebuilt-bundle.json" \
+            --output "$RUNNER_TEMP/rebuilt-manifest-result.json"
+          python .github/scripts/publish_release.py verify-bundle \
+            --plan "$RUNNER_TEMP/plan/release-plan.json" \
+            --directory "$RUNNER_TEMP/release-bundle" \
+            --output "$RUNNER_TEMP/qualification.json"
+
       - name: Retain the candidate-controlled qualification result
+        if: >-
+          (matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1') ||
+          (matrix.mode == 'recipe-schema-2' && needs.resolve.outputs.distribution_schema == '2')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: complete-candidate-qualification-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/complete-candidate-qualification.json
+          path: |
+            ${{ runner.temp }}/complete-candidate-qualification.json
+            ${{ runner.temp }}/release-build-replay.json
           if-no-files-found: error
           retention-days: 14
 
       - name: Transfer only verified inert release bytes
+        if: >-
+          (matrix.mode == 'legacy-schema-1' && needs.resolve.outputs.distribution_schema == '1') ||
+          (matrix.mode == 'recipe-schema-2' && needs.resolve.outputs.distribution_schema == '2')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: release-bundle-${{ inputs.release_record }}
