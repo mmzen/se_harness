@@ -23,6 +23,7 @@
 - `release-contract-disposition/`: explicit disposal of unused release proposals after authoritative aggregate release.
 - `work-order-assurance-classification/`: explicit work-order applicability for commit-bound verification and derived assurance follow-up.
 - `workflow-execution/`: deterministic bounded workflow scope, lifecycle mutation rules, and canonical agent-independent handoffs.
+- `hash-bound-integrity/`: declared hash-bound text classes, one mode per class, and fail-closed completeness assessment of their checkout bytes.
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
 - `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.

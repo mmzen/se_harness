@@ -1,0 +1,14 @@
+{
+  "classes": [
+    {
+      "bindings": ["only_sha256"],
+      "id": "only",
+      "mode": "utf8-text-lf-v1",
+      "patterns": ["docs/only.json"],
+      "region": "repository",
+      "required_attribute": "text eol=lf"
+    }
+  ],
+  "schema": "se-harness-hash-bound-classes-v1",
+  "unbound_digest_fields": []
+}
