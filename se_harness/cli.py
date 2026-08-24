@@ -127,11 +127,44 @@ def _install(args: argparse.Namespace, mode: str) -> int:
     return 0
 
 
+def _report_undeclared_legacy_releases(target: Path, work_order: str | None) -> None:
+    """Notice, without refusing, the released records an apply would refuse over."""
+
+    from se_harness.legacy_release_evidence import (
+        DECLARATION_FIELD,
+        LegacyReleaseEvidenceError,
+        undeclared_legacy_releases,
+    )
+
+    try:
+        undeclared = undeclared_legacy_releases(target)
+    except LegacyReleaseEvidenceError as exc:
+        print(f"cannot assess released records for evaluator evidence: {exc}", file=sys.stderr)
+        return
+    if not undeclared:
+        return
+    authority = work_order or "the authorizing evaluator-upgrade work order"
+    print(
+        "notice: these released records predate evaluator-evidence enforcement and are "
+        "not declared; applying an evaluator identity transition would be refused:",
+        file=sys.stderr,
+    )
+    for identifier in undeclared:
+        print(f"  {identifier}", file=sys.stderr)
+    print(
+        f"declare them in {authority} under [evaluator_upgrade].{DECLARATION_FIELD}",
+        file=sys.stderr,
+    )
+
+
 def _upgrade(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
     changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
     print(format_plan(changes))
     if not args.apply:
+        # REQ-LRE-002: report on the planning path what an apply would refuse, so the
+        # operator learns it before the transaction rather than from a frozen gate.
+        _report_undeclared_legacy_releases(target, args.work_order)
         return 0
     blocked = [item for item in changes if item.action == "customized"]
     if blocked:

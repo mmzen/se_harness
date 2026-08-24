@@ -159,6 +159,36 @@ Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout 
 
 Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations under the enforcing release. Their single transition path is the reviewed `upgrade --apply` above, from an already-published target evaluator. Once schema 3 is installed, ordinary mutation requires exact agreement with the lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
 
+### Release records cut before evaluator evidence existed
+
+Schema 3 requires an evaluator-evidence binding on every `ready` and `released` release record, and a released record can never be rewritten to add one. A repository that released under an earlier schema therefore holds records that can never satisfy the enforcing rule. Those records are declared, not rewritten.
+
+The declaration is one optional array in the authorizing work order's own `[evaluator_upgrade]` packet, listing the pre-enforcement records by identifier:
+
+```toml
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "..."
+target_version = "VERSION"
+target_payload_sha256 = "..."
+target_archive_name = "se_harness-VERSION-py3-none-any.whl"
+target_archive_sha256 = "..."
+publication = "immutable"
+authorized_by = "repository-owner"
+legacy_releases_without_evaluator_evidence = ["RLS-XYZ-001"]
+```
+
+A declaration is honoured only for a record that is `released`, carries neither binding field, and was released strictly before the declaring work order was approved. It can never reach a release cut after that approval, and a partially bound record is never exempt. An unresolvable member is an error on the declaring work order, so a typo fails closed rather than widening the exemption.
+
+A declaration is a permanent historical fact. Once an authority-granting work order declares a record, later upgrades need no fresh declaration: the same packet keeps answering for those records. Add the array only to the work order that first crosses into enforcement, and only for records that already existed.
+
+Each accepted exemption raises one `W024` maintenance warning naming the record and its declarer, so the outstanding binding stays visible. Validation passes; the warning is the debt.
+
+`upgrade --apply` refuses an evaluator identity transition before writing anything when the repository holds a released record with no binding and no declaration, and names the records and the packet field to declare them in. Read-only `harnessctl upgrade` prints the same list as a planning notice and still exits successfully, so the declaration can be prepared before the apply.
+
+This repository's own pre-enforcement releases predate the mechanism and stay in a frozen, closed compatibility set rather than a declaration.
+
 ## Ownership and safety
 
 - Prefer one explicit virtual environment owner rather than relying on an unknown global launcher.
