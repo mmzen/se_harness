@@ -5,6 +5,7 @@ import json
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 from unittest import mock
 
@@ -18,6 +19,30 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 class EvaluatorIdentityTests(unittest.TestCase):
+    def test_wheel_payload_matches_the_installed_logical_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            wheel = root / "se_harness-1.2.3-py3-none-any.whl"
+            package = b"package\n"
+            template = b"template\n"
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr("se_harness/example.py", package)
+                archive.writestr(
+                    "se_harness-1.2.3.data/data/share/se-harness/templates/repository/standard/AGENTS.md.fragment",
+                    template,
+                )
+            package_path = root / "example.py"
+            template_path = root / "AGENTS.md.fragment"
+            package_path.write_bytes(package)
+            template_path.write_bytes(template)
+            files = [
+                ("se_harness/example.py", package_path),
+                ("templates/repository/standard/AGENTS.md.fragment", template_path),
+            ]
+            with mock.patch.object(IDENTITY, "_payload_files", return_value=files):
+                installed = IDENTITY.installed_payload_sha256()
+            self.assertEqual(installed, IDENTITY.wheel_payload_sha256(wheel, "1.2.3"))
+
     def test_payload_manifest_is_ordered_and_content_bound(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

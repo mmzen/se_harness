@@ -105,13 +105,19 @@ class DistributionManifestTests(unittest.TestCase):
             clean = root / "clean.whl"
             with zipfile.ZipFile(clean, "w") as archive:
                 archive.writestr("se_harness/cli.py", "print('portable')\n")
-                for member in sorted(SURFACE.REQUIRED_MIGRATION_MEMBERS):
+                for member in sorted(
+                    SURFACE.REQUIRED_MIGRATION_MEMBERS
+                    | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
             SURFACE.inspect_wheel(clean)
 
             leaked = root / "leaked.whl"
             with zipfile.ZipFile(leaked, "w") as archive:
-                for member in sorted(SURFACE.REQUIRED_MIGRATION_MEMBERS):
+                for member in sorted(
+                    SURFACE.REQUIRED_MIGRATION_MEMBERS
+                    | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
                 archive.writestr("repository_tools/release_distribution.py", "repository policy\n")
             with self.assertRaisesRegex(SURFACE.SurfaceError, "leaked into wheel"):
@@ -512,7 +518,9 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         pages_build = self.workflow.split("  pages_build:\n", 1)[1].split("  pages_deploy:\n", 1)[0]
         self.assertNotIn("contents: write", qualify)
         self.assertNotIn("id-token: write", qualify)
-        self.assertIn("python -m se_harness validate .", qualify)
+        self.assertIn("python -m se_harness qualify complete-candidate .", qualify)
+        self.assertIn("--candidate-commit \"${{ needs.resolve.outputs.candidate_commit }}\"", qualify)
+        self.assertIn("complete-candidate-qualification.json", qualify)
         self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
         self.assertIn(
             'git worktree add --detach "$temp_root/candidate-checkout" "$CANDIDATE_COMMIT"',
@@ -559,16 +567,16 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
 
     def test_all_publication_validation_points_use_one_predecessor_view_adapter(self) -> None:
         combined = self.workflow + self.pages
-        self.assertEqual(3, combined.count("scripts/validate_predecessor_publication_view.py"))
+        self.assertEqual(0, combined.count("scripts/validate_predecessor_publication_view.py"))
         self.assertEqual(
             3,
-            combined.count('python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py"'),
+            combined.count("python -m se_harness qualify predecessor-view"),
         )
-        self.assertEqual(3, combined.count("--evaluator-entry-point"))
-        self.assertEqual(3, combined.count('--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"'))
-        self.assertEqual(5, combined.count("predecessor-publication-view.json"))
-        self.assertEqual(5, combined.count("predecessor-publication-result.json"))
-        self.assertEqual(3, combined.count("--json | tee"))
+        self.assertEqual(0, combined.count("--evaluator-entry-point"))
+        self.assertEqual(0, combined.count('--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"'))
+        self.assertEqual(5, combined.count("predecessor-view-qualification.json"))
+        self.assertEqual(0, combined.count("predecessor-publication-result.json"))
+        self.assertEqual(3, combined.count("--evaluator-python"))
         self.assertEqual(2, combined.count("--view-output"))
         self.assertIn('mkdir "$RUNNER_TEMP/pages-predecessor-view"', self.workflow)
         self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', self.pages)
@@ -578,6 +586,15 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
             'python "$RUNNER_TEMP/pages-predecessor-view/governance/scripts/generate_harness_dashboard.py"',
             self.workflow,
         )
+
+    def test_public_observation_uses_the_typed_public_install_role(self) -> None:
+        combined = self.workflow + self.pages
+        observe = self.workflow.split("  observe:\n", 1)[1]
+        self.assertIn("qualify public-install", observe)
+        self.assertIn("--public-wheel-sha256 \"$WHEEL_SHA256\"", observe)
+        self.assertIn("--payload-sha256 \"$payload_sha256\"", observe)
+        self.assertIn("public-install-qualification.json", observe)
+        self.assertNotIn('harnessctl" validate', observe)
         self.assertIn(
             'python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py"',
             self.pages,

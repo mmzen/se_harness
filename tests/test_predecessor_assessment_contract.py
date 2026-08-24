@@ -30,6 +30,8 @@ class GovernorTransitionAssessmentContractTests(unittest.TestCase):
         self.assertIn("name: Governor Transition Assessment", content)
         self.assertIn("scripts/validate_governor_transition.py plan", content)
         self.assertIn("scripts/validate_governor_transition.py assess", content)
+        self.assertIn("qualify released-root \"$GITHUB_WORKSPACE\"", content)
+        self.assertIn("target-released-root-qualification.json", content)
         self.assertIn("github.event.pull_request.base.sha || github.event.before", content)
         self.assertIn("refs/remotes/origin/$DEFAULT_BRANCH", content)
         self.assertIn('"se-harness==$TARGET_VERSION"', content)

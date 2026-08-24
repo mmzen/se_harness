@@ -31,6 +31,11 @@ REQUIRED_MIGRATION_MEMBERS = frozenset(
         "se_harness/governance_migration_contract.py",
     }
 )
+REQUIRED_QUALIFICATION_MEMBERS = frozenset(
+    {
+        "se_harness/release_qualification.py",
+    }
+)
 FORBIDDEN_CLI = (b"reconcile-governor", b"--governor-wheel-sha256", b"--role governor")
 FORBIDDEN_ACTIVE_CONTENT = (
     b"publish_dashboard.py governor",
@@ -80,9 +85,12 @@ def inspect_wheel(path: Path) -> None:
             hits: list[str] = []
             members = archive.infolist()
             member_names = {member.filename for member in members}
-            missing = sorted(REQUIRED_MIGRATION_MEMBERS - member_names)
+            missing = sorted(
+                (REQUIRED_MIGRATION_MEMBERS | REQUIRED_QUALIFICATION_MEMBERS)
+                - member_names
+            )
             if missing:
-                raise SurfaceError("wheel is missing governance migration member: " + missing[0])
+                raise SurfaceError("wheel is missing required package member: " + missing[0])
             if len(members) > MAX_MEMBER_COUNT:
                 raise SurfaceError("wheel contains too many members")
             total_size = sum(member.file_size for member in members)
@@ -121,6 +129,7 @@ def inspect_harnessctl(path: Path) -> None:
             [str(path), "prepare-release", "--help"],
             [str(path), "identity", "--help"],
             [str(path), "rehearse-migration", "--help"],
+            [str(path), "qualify", "--help"],
         )
         completed = [
             subprocess.run(command, check=False, capture_output=True, timeout=30)
@@ -137,6 +146,17 @@ def inspect_harnessctl(path: Path) -> None:
         raise SurfaceError("retired specialized lifecycle leaked into installed harnessctl")
     if b"rehearse-migration" not in output:
         raise SurfaceError("governance migration command is absent from installed harnessctl")
+    if b"qualify" not in output or any(
+        operation not in output
+        for operation in (
+            b"released-root",
+            b"predecessor-view",
+            b"complete-candidate",
+            b"candidate-package",
+            b"public-install",
+        )
+    ):
+        raise SurfaceError("role-specific qualification surface is incomplete")
 
 
 def inspect_repository(path: Path) -> None:

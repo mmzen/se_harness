@@ -534,8 +534,9 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("fetch-depth: 0", self.workflow)
 
     def test_workflow_preserves_evaluator_generator_and_payload_boundaries(self) -> None:
-        self.assertIn("scripts/validate_predecessor_publication_view.py", self.workflow)
-        self.assertIn('--evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"', self.workflow)
+        self.assertNotIn("scripts/validate_predecessor_publication_view.py", self.workflow)
+        self.assertIn("python -m se_harness qualify predecessor-view", self.workflow)
+        self.assertNotIn('--evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"', self.workflow)
         self.assertNotIn('evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"', self.workflow)
         self.assertIn("publish_dashboard.py evaluator", self.workflow)
         self.assertIn('--release-record "$RELEASE_RECORD"', self.workflow)
@@ -550,6 +551,7 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("--role governor", self.workflow)
         self.assertIn("predecessor-view/governance/scripts/generate_harness_dashboard.py", self.workflow)
         self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.workflow)
+        self.assertIn('predecessor-view-qualification.json', self.workflow)
         self.assertIn("publish_dashboard.py package", self.workflow)
         self.assertIn("--destination \"$RUNNER_TEMP/pages-site\"", self.workflow)
         self.assertNotIn("git push", self.workflow)

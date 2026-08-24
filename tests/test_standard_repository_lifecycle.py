@@ -146,8 +146,18 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)
         self.assertIn("python -m unittest discover", workflow)
-        self.assertIn("--role candidate-source", workflow)
+        self.assertIn("qualify complete-candidate", workflow)
+        self.assertIn("--candidate-commit \"$GITHUB_SHA\"", workflow)
+        self.assertIn("complete-candidate-qualification", workflow)
         self.assertIn("--role candidate-package", workflow)
+        self.assertIn("--role released-evaluator", workflow)
+        self.assertIn("accept-candidate", workflow)
+        self.assertIn("se-harness-functional-acceptance-v1", workflow)
+        self.assertIn("candidate-package-legacy-bootstrap-0.6.0", workflow)
+        self.assertIn("2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7", workflow)
+        self.assertIn("c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42", workflow)
+        self.assertIn("a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75", workflow)
+        self.assertIn('assert "independence" not in value', workflow)
         self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
         self.assertIn("rehearse-migration", workflow)
@@ -161,6 +171,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertNotIn("pull_request_target", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("id-token: write", workflow)
+        self.assertNotIn("qualify candidate-package", workflow)
 
     def test_specialized_product_surface_is_absent(self) -> None:
         for relative in (

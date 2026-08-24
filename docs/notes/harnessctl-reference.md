@@ -39,6 +39,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
+| `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of five fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
 | `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
@@ -218,6 +219,20 @@ harnessctl identity --role released-evaluator|candidate-source|candidate-package
 
 Key role-specific options are `--checkout-root`, `--candidate-commit`, `--evaluator-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. The command verifies declared runtime origin; it does not select an evaluator or approve a candidate.
 
+## Role-specific release qualification
+
+```text
+harnessctl qualify released-root [ROOT] [--output PATH] [--json]
+harnessctl qualify predecessor-view [ROOT] --release-record RLS-... --evaluator-python PATH [--view-output PATH] [--output PATH] [--json]
+harnessctl qualify complete-candidate [ROOT] --candidate-commit FULL_COMMIT [--output PATH] [--json]
+harnessctl qualify candidate-package --candidate-wheel PATH --candidate-commit FULL_COMMIT --candidate-wheel-sha256 SHA256 --verifier-wheel-sha256 SHA256 [--checkout-root PATH] [--output PATH] [--json]
+harnessctl qualify public-install [ROOT] --release-record RLS-... --public-wheel PATH --public-wheel-sha256 SHA256 --payload-sha256 SHA256 [--output PATH] [--json]
+```
+
+The five subcommands are separate closed parsers. They bind evaluator identity, target identity, fixed checks, and one independence class before reporting a result. They do not accept a general evaluator, validator, script, omission, or diagnostic-allowlist option. `--output` must name a new external file; the command never overwrites it or writes qualification evidence inside the inspected repository.
+
+All operations emit `se-harness-release-qualification-v1`. The result identifies the operation, completion, outcome, evaluator, target, ordered checks, independence boundary, and its evidence-only authority. `complete-candidate` is always `candidate-controlled`, even when it passes. See [release qualification roles](release-qualification-roles.md) for the workflow map and the bounded public-0.6.0 bootstrap exception.
+
 ## Candidate acceptance
 
 ```text
@@ -230,7 +245,9 @@ harnessctl accept-candidate \
   [--checkout-root PATH]
 ```
 
-`accept-candidate` verifies the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, rejects checkout import fallback and authority substitution, and emits deterministic JSON only when every required scenario passes. Its output is evidence for human assurance review, never a VREC transition.
+In a newly built version, `accept-candidate` is a one-cycle compatibility alias for `qualify candidate-package` and emits the typed qualification result. Exact public 0.6.0 predates the `qualify` namespace; its immutable command still emits `se-harness-functional-acceptance-v1` and is accepted only as explicitly labeled bootstrap evidence in the initial candidate workflow. That historical output is not converted into or described as canonical qualification evidence.
+
+The verifier checks the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, and rejects checkout import fallback and authority substitution. Its output is evidence for human assurance review, never a VREC transition.
 
 ## Commit-bound verification preparation
 
@@ -268,7 +285,7 @@ Only `ready` and `released` release records claim a version. Valid rejected reco
 
 For this repository's transitional hosted qualification, `scripts/assess_predecessor_evaluator.py` reuses that exact view derivation. It separately records the immutable 0.5.0 full-checkout `E009`, requires `doctor`, `validate`, and dashboard generation to pass in the view, validates the complete candidate graph before and after, and optionally creates one canonical evidence file outside the checkout. It accepts no omission or expected-error arguments and performs no `harnessctl` lifecycle action.
 
-For the repository-specific publication gate, `scripts/validate_predecessor_publication_view.py` selects one exact released RLS, replays its preparation-view and evaluator sidecars against current Git history, validates the complete clean governance graph before and after, and requires the exact external predecessor `doctor` and JSON `validate` to pass in a detached view that omits only the bound rejected REL/RLS pair. The CLI accepts no omission or expected-error input, rejects credential and alternate Git/Python state, writes only an optional exclusive canonical observation outside the checkout, and is shared by initial publication resolution plus both Pages validation paths. It does not claim that the predecessor parsed omitted history and grants no publication or lifecycle authority.
+For the repository-specific publication gate, `qualify predecessor-view` calls the fixed production predecessor-publication service. It selects one exact released RLS, replays its preparation-view and evaluator sidecars against current Git history, validates the complete clean governance graph before and after, and requires the exact external predecessor `doctor` and JSON `validate` to pass in a detached view that omits only the bound rejected REL/RLS pair. The public parser accepts no omission, expected-error, entry-point, wheel, or script input; it derives the fixed external files from the selected interpreter and governed release evidence. It does not claim that the predecessor parsed omitted history and grants no publication or lifecycle authority.
 
 ## Authority summary
 
