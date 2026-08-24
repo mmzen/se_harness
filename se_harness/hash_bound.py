@@ -1,4 +1,4 @@
-"""Declared hash-bound text classes and read-only completeness assessment."""
+"""Declared hash-bound text classes, mode determination and read-only assessment."""
 
 from __future__ import annotations
 
@@ -11,13 +11,24 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from se_harness.integrity import HASH_MODE
+from se_harness.integrity import (
+    HASH_MODE,
+    IntegrityError,
+    canonical_sha256,
+    matches_legacy_newline_variant,
+    raw_sha256,
+)
 
 
 HASH_BOUND_SCHEMA = "se-harness-hash-bound-classes-v1"
 RAW_MODE = "raw"
 CANONICAL_MODE = HASH_MODE
 MODES = frozenset({RAW_MODE, CANONICAL_MODE})
+MATCH_DECLARED = "declared"
+MATCH_LEGACY_NEWLINE = "legacy-newline-variant"
+MATCH_MISMATCH = "mismatch"
+MATCH_RESULTS = (MATCH_DECLARED, MATCH_LEGACY_NEWLINE, MATCH_MISMATCH)
+LOCK_RELATIVE = ".engineering-harness.lock"
 REGIONS = frozenset({"template", "repository"})
 REQUIRED_ATTRIBUTES = frozenset({"text eol=lf"})
 CLASS_FIELDS = frozenset({"bindings", "id", "mode", "patterns", "region", "required_attribute"})
@@ -235,6 +246,52 @@ def resolve_class(relative: str, declaration: Declaration | None = None) -> Hash
             f"{relative} is covered at equal specificity by {', '.join(winners)}"
         )
     return next(item for score, item in best if score == top)
+
+
+def resolve_mode(relative: str, declaration: Declaration | None = None) -> str:
+    """Return the hash mode declared for a repository-relative POSIX path.
+
+    Total or failing. A path no class covers raises rather than resolving to a
+    default, so no caller can hash a bound file under a mode nothing declared.
+    """
+
+    return resolve_class(relative, declaration).mode
+
+
+def _digest(relative: str, value: bytes, mode: str) -> str:
+    if mode == RAW_MODE:
+        return raw_sha256(value)
+    try:
+        return canonical_sha256(value)
+    except IntegrityError as exc:
+        raise HashBoundError(f"cannot hash {relative} as {mode}: {exc}") from exc
+
+
+def declared_digest(
+    relative: str, value: bytes, declaration: Declaration | None = None
+) -> str:
+    """Hash bytes under the mode their path's declared class fixes."""
+
+    return _digest(relative, value, resolve_mode(relative, declaration))
+
+
+def compare_declared_digest(
+    relative: str, value: bytes, expected: str, declaration: Declaration | None = None
+) -> str:
+    """Compare a recorded digest, reporting a legacy newline match distinctly.
+
+    Legacy recognition is offered only to a canonical class, whose recorded value
+    may predate the declaration and have been taken over whatever line endings a
+    checkout produced. A raw class keeps exact-byte trust, so a newline variant is
+    a mismatch there and never a match.
+    """
+
+    mode = resolve_mode(relative, declaration)
+    if _digest(relative, value, mode) == expected:
+        return MATCH_DECLARED
+    if mode == CANONICAL_MODE and matches_legacy_newline_variant(value, expected):
+        return MATCH_LEGACY_NEWLINE
+    return MATCH_MISMATCH
 
 
 def _git(root: Path, arguments: list[str], *, stdin: bytes | None = None) -> bytes:

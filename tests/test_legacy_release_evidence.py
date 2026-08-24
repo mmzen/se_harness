@@ -20,6 +20,7 @@ from unittest import mock
 
 from se_harness import legacy_release_evidence as PACKAGE
 from se_harness.evaluator_identity import PAYLOAD_MANIFEST, InstalledEvaluatorIdentity
+from se_harness.hash_bound import MATCH_DECLARED
 from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.upgrade_authorization import (
     UPGRADE_AUTHORIZATION_SCHEMA,
@@ -586,6 +587,10 @@ class InstallerRefusalTests(unittest.TestCase):
                 target_archive_name=observed.get("archive_name"),
                 target_archive_sha256=observed.get("archive_sha256"),
                 authorized_by="repository-owner",
+                # The digest above is the lock's raw bytes, which the harness
+                # writes as LF, so the declared canonical mode reaches the same
+                # value and "declared" is the verdict this fixture stands for.
+                prior_lock_match=MATCH_DECLARED,
                 legacy_releases_without_evaluator_evidence=declared,
             )
             return value

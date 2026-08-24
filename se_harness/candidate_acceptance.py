@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from se_harness import __version__
+from se_harness.hash_bound import LOCK_RELATIVE
 from se_harness.installer import HarnessError
 from se_harness.runtime_identity import COMMIT_PATTERN, SHA256_PATTERN
 
@@ -378,10 +379,14 @@ def assess_candidate_wheel(
         results.append(refusal)
         corrupted = temporary / "corrupted"
         shutil.copytree(initialized, corrupted)
-        lock_path = corrupted / ".engineering-harness.lock"
+        lock_path = corrupted / LOCK_RELATIVE
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = "0" * 64
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        # Explicit LF: the lock is hash-bound text, so the writing platform must
+        # not decide its bytes.
+        lock_path.write_text(
+            json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+        )
         results.append(
             _run(
                 "corrupted-integrity-refusal",
