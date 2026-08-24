@@ -13,9 +13,11 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
-The repository-managed surface includes the portable `harness-orient` core at
-`.agents/skills/harness-orient/`. Its `SKILL.md`, strict
-`skill-contract.json`, and standard-library runner are managed files. They are
+The repository-managed surface includes four portable skill cores under
+`.agents/skills/`: the read-only `harness-orient` skill plus the explicit-only
+`harness-draft-change`, `harness-execute-work-order`, and
+`harness-prepare-assurance` workflow skills. Each core's `SKILL.md`, strict
+`skill-contract.json`, and standard-library helper are managed files. They are
 installed and upgraded through the same ownership-aware transaction as other
 managed template content; installing only the Python package does not add them
 to an existing repository.
@@ -105,6 +107,13 @@ external released evaluator and returns its execution receipt inline; it does
 not install an evaluator or retain evidence in the target. See
 [read-only agent orientation](harness-orient.md) for the complete procedure.
 
+The three writing skills are explicitly activated, single-agent procedures
+over the same evaluator control plane. They draft definitions, execute one
+already-started work order, or prepare a `ready` assurance record, then stop at
+the next accountable decision. They do not apply transitions or perform Git,
+credential, network, delivery, release, or external actions. See the
+[single-agent workflow skills MVP](agentic-execution-skills-mvp.md).
+
 ## Upgrade an existing installation
 
 The package-only shorthand remains useful for obtaining read-only planning and inspection behavior:
@@ -146,10 +155,10 @@ Product implementation or release authorization does not authorize this later ro
 
 The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
 
-This rule also covers `.agents/skills/harness-orient/`. If a repository edits a
-managed skill file, the upgrade plan reports it as customized and preserves the
-bytes. Move repository-specific instructions outside the managed core or
-restore the exact locked content before reviewing a fresh upgrade plan.
+This rule also covers every managed `.agents/skills/` core. If a repository
+edits a managed skill file, the upgrade plan reports it as customized and
+preserves the bytes. Move repository-specific instructions outside the managed
+core or restore the exact locked content before reviewing a fresh upgrade plan.
 
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 
