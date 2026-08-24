@@ -549,6 +549,50 @@ The consequence for this packet is exact and is not softened: on `windows-2022` 
 
 The in-tree `doctor` count moved from 9 `FAIL` to 25 with `main`'s content, entirely in two families: six candidate-versus-released template deltas, and nineteen `.agents/skills/**` lock entries absent from the released `0.6.0` distribution. Both are the released-evaluator boundary and both are present in the control.
 
+## The hosted run after the second merge, on both runner types
+
+Run [32766680271](https://github.com/mmzen/se_harness/actions/runs/32766680271), `pull_request` event, branch head `3768cd4`, candidate commit `29b5e3fed14c`:
+
+| Job | Conclusion | Result |
+|---|---|---|
+| Refuse orchestrator and rehearsal divergence | success | `EXACT`, `Rehearsed jobs: qualify, resolve on Linux, Windows`, `Rehearsal lane platforms: Linux, Windows`, no uncovered or stale mechanic |
+| Rehearse the credential-free path on Linux | success | `REHEARSED`, 21 mechanics executed, 2 excluded, `candidate unit suite passed (928 tests)`, `source_date_epoch = 1787598655`, 7741 derived paths removed without following a link |
+| Rehearse the credential-free path on Windows | failure | `FAILED`, 20 executed, 2 excluded, one failed mechanic, the same `source_date_epoch = 1787598655`, 7298 derived paths removed |
+
+Both legs report the same two exclusions with identical reasons, `unreported_mechanics` empty, and both distribution sets byte-identical on their own platform. Every other check on the pull request passes, including `Governance migration` on both platforms and `Reconcile governance migration platforms` on both event runs, which did not exhibit the known digest flake this time.
+
+`REQ-RLO-015`'s Linux half remains proven by measurement rather than by argument: a hosted `ubuntu-latest` runner executed all twenty-one rehearsable mechanics with nothing injected, including a 928-test candidate suite, two builds compared byte for byte, and a real teardown.
+
+### The Windows leg, exactly
+
+```
+Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings
+- failed   candidate-unit-suite: Windows: RehearsalError - candidate unit suite exited 1
+  with 2 failing tests: test_closed_phase3_contracts_and_manifests_validate,
+  test_manifest_rejects_missing_required_invalid_utf8_and_reserved_paths
+```
+
+The retained result artifact records `Ran 928 tests` and `FAILED (failures=4, skipped=10)`. Four failures, which the rehearsal reports as two distinct test names.
+
+**Three are the eighth uncovered surface recorded above.** They are the `agents/openai.yaml` sub-cases of `test_closed_phase3_contracts_and_manifests_validate`, and the retained stderr tail carries the assertion verbatim:
+
+```
+AssertionError: b'policy:\n  allow_implicit_invocation: false\n'
+             != b'policy:\r\n  allow_implicit_invocation: false\r\n'
+```
+
+The section above predicted that the Windows leg would report "these three names". That was imprecise in one way and is corrected here rather than edited there: the rehearsal reports distinct test names, and the three skill sub-cases collapse into one name.
+
+**One is not a line-ending failure at all, and it is the red `WO-HBI-003`'s evidence recorded as unexplained.** `test_manifest_rejects_missing_required_invalid_utf8_and_reserved_paths` passes in every local control, at `52e3702` and at `6e16272`, and fails on `windows-2022`.
+
+What is measured: at `tests/test_agentic_execution.py:389` the test copies a skill tree, writes `NUL.txt`, and accepts either an `OSError` — in which case it takes a skip branch — or `SKM003` from `build_skill_manifest`. On the measuring workstation, Windows 11 build 26200 with CPython 3.14.6, `Path("NUL.txt").write_text(...)` succeeds *and* the file is enumerable, so `SKM003` is raised and the test passes. The test's other two branches, a missing `SKILL.md` and an invalid-UTF-8 file, are not platform-dependent. On `windows-2022` with CPython 3.11 a reserved device basename with an extension resolves to the device, so the write succeeds and no file exists to enumerate; nothing is raised and the assertion fails.
+
+What is not measured: the rehearsal retains a 600-character stderr tail, which the `openai.yaml` traceback fills, so this test's own assertion text is absent from retained evidence and only its name is recorded. The reserved-name branch is the only branch whose behaviour is image- and interpreter-dependent, so the cause above is stated as attribution supported by a local measurement, not as proof from the runner. Settling it needs a run that retains more output, which no work order authorizes here.
+
+Both failures would fail the release orchestrator's Windows candidate qualification, whose steps are gated on `distribution_schema == '1'` and whose subject `RLS-SEH-012` declares schema 1. Finding them at integration time rather than on publication day is what `RC-060-11` asks for and what this lane is for; it has now caught three distinct conditions. Neither is fixed here: both are outside `WO-RLO-005`'s execution scope and neither has an authorizing work order.
+
+The hosted Windows leg reports 10 skips where this workstation reports 22 over the same suite. That difference is noted and not investigated, because a skip count is not a pass condition anywhere in this packet; it does mean the platform-guarded coverage claim in this evidence is measured per platform and should not be read as identical on both.
+
 ## Actions explicitly not performed
 
 Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
