@@ -2,7 +2,7 @@
 id = "VREC-HBI-003"
 type = "verification_record"
 title = "Verification candidate for WO-HBI-003"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,17 +16,49 @@ evidence_paths = ["docs/engineering/hash-bound-integrity/evidence/WO-HBI-003-ver
 evaluator_evidence_path = "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-003-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-24T18:30:57Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HBI-003"]
 conforms_to = ["VER-HBI-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T18:30:57Z"
+decided_by = "assurance-owner"
+reason = "The accountable assurance owner accepted the retained evidence for WO-HBI-003 on 2026-08-24 through the statement 'i accept the verification record'. Every bound field was re-measured immediately before this transition, because a verified record can no longer be corrected: candidate commit c8fbadd is an ancestor of the branch tip with a clean worktree; artifact_snapshot_sha256 re-derives to f6b22eb0 in a full clone at that commit with a matching directory basename, over 794 artifacts with 0 errors and 50 maintenance warnings, where governing doctor exits 0 with 87 PASS and 0 FAIL; the bound evidence blob is 20641 bytes at 0b266797 both at the candidate and at the tip; and the evaluator packet matches its recorded raw digest over 873 CR-free bytes. Acceptance covers the evidence as recorded, including its disclosures: the guard is a unit test rather than a doctor check and no consumer inherits it, five of seven patterns exceed REQ-HBI-001's digest-bound trigger, an existing worktree does not re-materialize the sixteen paths, the clone matrix covers only autocrlf=true on one Windows workstation, the in-tree doctor skew is inherited from main, and one hosted red is unexplained. It authorizes no merge, release, publication or deployment."
 +++
 
-# Verification Record Candidate
+# Verification Record
 
-This ready record binds retained evidence for `WO-HBI-003` to candidate commit
-`c8fbaddb1297fe4f989f482e03a1092affd845ff`. An accountable assurance owner must review
-the evidence and transition the record to `verified`; this command did not approve,
-commit, tag, release, or publish anything.
+This verified record binds retained evidence for `WO-HBI-003` to candidate commit
+`c8fbaddb1297fe4f989f482e03a1092affd845ff`. The assurance owner accepted that evidence
+at `2026-08-24T18:30:57Z`. Verification did not change the work order or authorize a
+merge, release, publication, or deployment.
+
+## The decision, and what was re-measured to take it
+
+The accountable assurance owner accepted the retained evidence on 2026-08-24 through
+the statement `i accept the verification record`. The lifecycle event above carries that
+decision.
+
+Every bound field was re-measured immediately before the transition, because a verified
+record can no longer be corrected and this was the last commit in which any of its
+figures could have been fixed. The candidate commit is an ancestor of the branch tip and
+the worktree was clean; `artifact_snapshot_sha256` re-derives to
+`f6b22eb0ad234c90188a7ddf9c21abcb135307b49de9ffa9602f60429abce076` in a full clone at
+that commit with a matching directory basename, over 794 artifacts with 0 errors and 50
+maintenance warnings, where the governing `0.6.0` evaluator's `doctor` exits 0 with 87
+PASS and 0 FAIL; the bound evidence blob is 20641 bytes at
+`0b2667978e10cc2922a94045fca4279700f78354eedf2b3ac4a42d7df70e810b` both at the candidate
+and at the tip; and the evaluator packet matches its recorded raw digest over 873
+CR-free bytes. Every value was unchanged from preparation.
+
+Acceptance covers the evidence as recorded, including every disclosure in the section
+below. It authorizes no merge, release, publication or deployment, and the manual
+acceptances `VER-HBI-001` requires from the security, quality and repository owners
+remain separate and outstanding.
 
 ## What the candidate evidence covers
 
@@ -112,9 +144,9 @@ the two fresh-clone facts above, because amending evidence a record already bind
 not available and a `ready` record cannot be superseded. Nothing bound this repository
 at any point in that sequence.
 
-## Scope of the decision this record invites
+## Scope of the decision that was taken
 
-Verifying this record accepts the retained evidence as recorded, including every
+Verifying this record accepted the retained evidence as recorded, including every
 disclosure above. It does not approve a merge, a release, a publication, a deployment,
 a tag, a distribution build, or a governor adoption, and it does not discharge the
 manual acceptances `VER-HBI-001` requires from the security, quality and repository
