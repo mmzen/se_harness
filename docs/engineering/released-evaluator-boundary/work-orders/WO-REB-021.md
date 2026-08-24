@@ -110,7 +110,9 @@ Replace six independent, mutually inconsistent decisions about interpreter-path 
 
 `WO-HBI-002` is open on pull request #130 and is still `draft`, so it holds no authority. Its own execution scope includes `repository_tools/release_bootstrap.py` and `tests/test_release_bootstrap.py`, which this work order also lists. This packet was branched from `main` rather than stacked on that branch, so the two changes will conflict in those two files if both proceed independently.
 
-Sequencing is an owner decision at approval, not an implementation choice. The engineering owner shall state which work order lands first; the second shall rebase and re-measure rather than merging both into one diff.
+Sequencing is an owner decision at approval, not an implementation choice. The engineering owner decided at approval that `WO-HBI-002` lands first. This work order therefore rebases onto it once it merges and re-measures every affected figure — the base-commit test baseline, the changed-path manifest, and any digest its own change could move — rather than carrying figures derived from the pre-merge base. The two changes shall not be combined into one diff.
+
+Implementation may proceed on a branch based on `main` before `WO-HBI-002` merges. The rebase and the re-measurement are then required before this work order reaches `implemented`, and the evidence shall record both the pre-rebase and post-rebase base commits.
 
 ## Authorized decision envelope
 
