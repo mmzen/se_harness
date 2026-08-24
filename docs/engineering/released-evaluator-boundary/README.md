@@ -31,3 +31,9 @@ The later approved `REQ-REB-016`, `REQ-REB-017`, `SPEC-REB-008`, `ARCH-REB-007`,
 Approved `REQ-REB-020` through `REQ-REB-022`, `SPEC-REB-010`, `ARCH-REB-009`, `ADR-REB-009`, and `VER-REB-009` define five closed `harnessctl qualify` operations and one canonical evidence result. `WO-REB-020` is `in_progress` for their bounded implementation, workflow migration, documentation, testing, and retained evidence.
 
 The status-preserving bootstrap amendment allows only immutable public 0.6.0's existing `accept-candidate` contract in the first independent package lane. Its legacy schema remains explicit and cannot be relabeled as typed qualification. The exception expires when a released verifier exposes `qualify candidate-package`. The root managed workflow and evaluator remain unchanged pending separate adoption authority.
+
+## Issue #106 entry-point safety packet
+
+Draft `REQ-REB-023` through `REQ-REB-026`, `SPEC-REB-011`, `ARCH-REB-010`, `ADR-REB-010`, and `VER-REB-010` define one declared interpreter-safety rule for every evaluator-identity boundary. `WO-REB-021` proposes its bounded implementation. Nothing in this packet is approved, and it grants no authority while draft.
+
+The packet answers RCA `RC-060-06`: a real POSIX virtual environment must be accepted through its lexical `bin/python` entry point, while linked parents, Windows junctions, checkout targets, unsafe aliases, non-terminal links, and escape attempts stay refused. Six boundaries in two runtimes currently decide this independently and disagree, so the correction places the rule in one declared document with one loader per runtime rather than patching the one site that fails on POSIX. The canonical evaluator-evidence document, the runtime-identity schema identifier, existing bound digests, and root managed files are unchanged. The overlap with `WO-HBI-002` on `repository_tools/release_bootstrap.py` is disclosed in the work order for owner sequencing.
