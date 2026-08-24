@@ -13,10 +13,11 @@ the tree of implementation commit `a933d7260214f0fb642e45639336b3d910f7ab07`. Th
 evidence file is committed on top of that commit, because a file cannot contain the
 hash of its own commit; the candidate commit the later `VREC` binds is therefore the
 branch tip. The tip differs from `a933d72` by this file and by governance prose only:
-a third commit records the owner's acceptance of the two amendments in
-`VER-HBI-001`, this domain's `README.md`, `WO-HBI-003` and this file. No executable
-content, no test, no `.gitattributes` rule and no recorded digest differs between
-`a933d72` and the tip, so every figure below still describes the tip's behaviour. That
+later commits on this branch record the owner's acceptance of the two amendments in
+`VER-HBI-001`, this domain's `README.md`, `WO-HBI-003` and this file, and name the
+issue the same decision routed the open recipe question to. No executable content, no
+test, no `.gitattributes` rule and no recorded digest differs between `a933d72` and
+the tip, so every figure below still describes the tip's behaviour. That
 `VREC` is a separate, separately authorized act, is not prepared here, and must
 re-measure its own figures.
 
