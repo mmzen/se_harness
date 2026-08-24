@@ -82,15 +82,19 @@ SPECIFIED_CLASSES = {
 #: not assess them; the byte rule is still load-bearing, because the release
 #: orchestrator runs that suite inside a `git worktree` it creates on `windows-2022`,
 #: which inherits the checkout's `core.autocrlf`.
-BYTE_EXACT_PATTERNS = (
+BYTE_EXACT_FILES = (
     "se_harness/agent_contract.json",
     "se_harness/hash_bound_classes.json",
     "release/build-recipe.json",
     "release/build-toolchain.lock",
-    "templates/repository/standard/.agents/skills/**/*.json",
-    "templates/repository/standard/.agents/skills/**/*.md",
-    "templates/repository/standard/.agents/skills/**/*.py",
 )
+#: Trees whose every tracked file the candidate suite reads byte for byte. The inventory
+#: below is derived from the tracked set under each prefix rather than from an extension
+#: list, because an extension list cannot report a file it does not match:
+#: `WO-HBI-003` declared `*.json`, `*.md` and `*.py` here and a concurrent pull request
+#: added `agents/openai.yaml` with a byte-exact assertion, which stayed converted and
+#: failed the release orchestrator's `windows-2022` candidate qualification.
+BYTE_EXACT_TREES = ("templates/repository/standard/.agents/skills/",)
 
 UPGRADE_WORK_ORDER = (
     ROOT / "docs" / "engineering" / "repository-harness-upgrade" / "work-orders" / "WO-HUP-002.md"
@@ -171,6 +175,17 @@ def committed_attributes() -> bytes:
     """Return the repository's .gitattributes as committed, independent of checkout."""
 
     return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes")
+
+
+def working_tree_attributes() -> bytes:
+    """Return this checkout's `.gitattributes` with its newlines normalized.
+
+    `committed_attributes` reads `HEAD`, which lags an edited rule by one commit. A guard
+    over the rules themselves has to read what the working tree presents, or it reports
+    the previous commit's coverage and goes green only after the change is committed.
+    """
+
+    return ATTRIBUTES.read_bytes().replace(b"\r\n", b"\n")
 
 
 def revision_available(revision: str) -> bool:
@@ -553,6 +568,10 @@ class ByteExactSurfaceTests(unittest.TestCase):
     no check assesses them. The orchestrator qualifies the candidate in a `git worktree`
     that inherits the checkout's `core.autocrlf`, so a missing byte rule here fails
     qualification on one runner type and passes on the other.
+
+    The inventory is the tracked set, not a pattern list. A pattern list is blind to the
+    file it does not match, which is how `agents/openai.yaml` reached a hosted failure
+    while this class passed.
     """
 
     @classmethod
@@ -560,19 +579,37 @@ class ByteExactSurfaceTests(unittest.TestCase):
         if not (ROOT / ".git").exists():
             raise unittest.SkipTest("byte rules resolve from a Git working tree")
         cls.tracked = hash_bound.tracked_paths(ROOT)
-        cls.paths = tuple(
+        named = set(BYTE_EXACT_FILES).intersection(cls.tracked)
+        under_trees = {
             relative
             for relative in cls.tracked
-            if any(matches(pattern, relative) for pattern in BYTE_EXACT_PATTERNS)
-        )
+            if any(relative.startswith(tree) for tree in BYTE_EXACT_TREES)
+        }
+        cls.paths = tuple(sorted(named | under_trees))
 
-    def test_every_pattern_selects_a_tracked_file(self) -> None:
-        for pattern in BYTE_EXACT_PATTERNS:
-            with self.subTest(pattern=pattern):
-                self.assertTrue(
-                    any(matches(pattern, relative) for relative in self.tracked),
-                    f"{pattern} selects no tracked file, so its byte rule is dead",
+    def test_every_declared_file_is_tracked(self) -> None:
+        for relative in BYTE_EXACT_FILES:
+            with self.subTest(path=relative):
+                self.assertIn(
+                    relative,
+                    self.tracked,
+                    f"{relative} is not tracked, so its byte rule is dead",
                 )
+
+    def test_every_declared_tree_holds_a_tracked_file(self) -> None:
+        for tree in BYTE_EXACT_TREES:
+            with self.subTest(tree=tree):
+                self.assertTrue(
+                    any(relative.startswith(tree) for relative in self.tracked),
+                    f"{tree} holds no tracked file, so its byte rule is dead",
+                )
+
+    def test_the_inventory_holds_every_tracked_file_under_each_tree(self) -> None:
+        """No extension is filtered out, so a new one is covered without a new rule."""
+
+        for tree in BYTE_EXACT_TREES:
+            expected = sorted(item for item in self.tracked if item.startswith(tree))
+            self.assertEqual(expected, sorted(item for item in self.paths if item.startswith(tree)))
 
     def test_every_surface_resolves_the_required_attribute(self) -> None:
         resolved = hash_bound.resolved_attributes(ROOT, self.paths)
@@ -597,6 +634,39 @@ class ByteExactSurfaceTests(unittest.TestCase):
         for relative, worktree in sorted(reported.items()):
             with self.subTest(path=relative):
                 self.assertIn(worktree, ("lf", "none"), f"{relative} is {worktree}")
+
+    def test_a_novel_extension_in_a_byte_exact_tree_needs_no_new_rule(self) -> None:
+        """The committed rules cover a byte-exact tree, not a list of its extensions.
+
+        Measured against the bytes a fresh `core.autocrlf=true` clone produces, not only
+        against the attribute Git reports. `WO-HBI-003`'s three per-extension rules fail
+        this: `.yaml` and an unseen extension both check out converted under them.
+        """
+
+        tree = BYTE_EXACT_TREES[0]
+        novel = f"{tree}harness-probe/agents/openai.yaml"
+        unseen = f"{tree}harness-probe/nested/deeper/probe.novel-extension"
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "source"
+            source.mkdir()
+            build_source(
+                source,
+                working_tree_attributes(),
+                {
+                    novel: b"policy:\n  allow_implicit_invocation: false\n",
+                    unseen: b"first\nsecond\n",
+                    "README.md": b"synthetic\n",
+                },
+            )
+            checkout = clone(source, Path(directory) / "checkout", "true")
+            resolved = hash_bound.resolved_attributes(checkout, (novel, unseen))
+            for relative in (novel, unseen):
+                with self.subTest(path=relative):
+                    self.assertEqual("set", resolved[relative].get("text"), resolved[relative])
+                    self.assertEqual("lf", resolved[relative].get("eol"), resolved[relative])
+                    self.assertNotIn(b"\r\n", (checkout / relative).read_bytes())
+            outside = hash_bound.resolved_attributes(checkout, ("README.md",))["README.md"]
+            self.assertEqual("unspecified", outside.get("text"), outside)
 
 
 class InventoryReconciliationTests(unittest.TestCase):
