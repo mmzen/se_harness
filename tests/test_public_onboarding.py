@@ -128,6 +128,10 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertIn("summarizes current lifecycle attention", start)
         self.assertIn("generates the read-only Harness Explorer", start)
         self.assertIn("does not invent or approve product intent", start)
+        self.assertIn("harness-orient", start)
+        self.assertIn(".agents/skills/harness-orient/", start)
+        self.assertIn("docs/notes/harness-orient.md", start)
+        self.assertIn("without changing the repository", start)
 
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
@@ -226,6 +230,7 @@ class PublicOnboardingTests(unittest.TestCase):
             "exact candidate commit",
             "safe adoption",
             "Harness Explorer",
+            "portable read-only orientation skill",
             "never approves work",
         ):
             with self.subTest(phrase=phrase):
@@ -267,6 +272,7 @@ class PublicOnboardingTests(unittest.TestCase):
     def test_internal_documentation_links_are_repository_relative(self) -> None:
         for target in (
             "docs/notes/harness-installation-and-upgrades.md",
+            "docs/notes/harness-orient.md",
             "docs/notes/harness-operational-phasing.md",
             "docs/notes/harness-overview.md",
             "docs/notes/README.md",
