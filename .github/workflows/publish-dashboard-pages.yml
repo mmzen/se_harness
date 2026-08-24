@@ -160,15 +160,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
-            --repository "$RUNNER_TEMP/governance" \
+          cd "$GITHUB_WORKSPACE"
+          python -m se_harness qualify predecessor-view "$RUNNER_TEMP/governance" \
             --release-record "$RELEASE_RECORD" \
             --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
-            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
-            --output "$RUNNER_TEMP/predecessor-publication-view.json" \
             --view-output "$RUNNER_TEMP/predecessor-view/governance" \
-            --json | tee "$RUNNER_TEMP/predecessor-publication-result.json"
+            --output "$RUNNER_TEMP/predecessor-view-qualification.json" \
+            --json
 
       - name: Generate the target-local canonical Explorer
         shell: bash

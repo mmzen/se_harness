@@ -28,16 +28,14 @@ jobs:
         run: |
           version="$(python -c 'import se_harness; print(se_harness.__version__)')"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
-      - name: Prove candidate-source identity
-        env:
-          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
-        run: >-
-          python -m se_harness identity
-          --role candidate-source
-          --expected-version "$CANDIDATE_VERSION"
-          --expected-root "$GITHUB_WORKSPACE"
-          --checkout-root "$GITHUB_WORKSPACE"
-          --candidate-commit "$GITHUB_SHA"
+      - name: Qualify the complete candidate graph as candidate-controlled
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m se_harness qualify complete-candidate . \
+            --candidate-commit "$GITHUB_SHA" \
+            --output "$RUNNER_TEMP/complete-candidate.json" \
+            --json
       - name: Prove active evaluator surface
         run: python scripts/check_portable_release_surface.py --repository .
       - name: Run complete candidate-source regression
@@ -46,12 +44,24 @@ jobs:
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
+      - name: Retain the complete-candidate role result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: complete-candidate-qualification
+          path: ${{ runner.temp }}/complete-candidate.json
+          if-no-files-found: warn
 
   candidate-package:
     name: Candidate package evidence
     needs: candidate-source
     runs-on: ubuntu-latest
     env:
+      RELEASED_VERIFIER_VERSION: "0.6.0"
+      RELEASED_VERIFIER_WHEEL: "se_harness-0.6.0-py3-none-any.whl"
+      RELEASED_VERIFIER_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"
+      RELEASED_VERIFIER_PAYLOAD_SHA256: "c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42"
+      RELEASED_ACCEPTANCE_CONTRACT_SHA256: "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75"
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -95,6 +105,60 @@ jobs:
           )
           assert not any(any(marker in name for marker in forbidden) for name in names)
           PY
+      - name: Acquire and bind the exact public 0.6.0 bootstrap verifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/verifier-dist"
+          python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps \
+            --dest "$RUNNER_TEMP/verifier-dist" "se-harness==$RELEASED_VERIFIER_VERSION"
+          verifier_wheel="$RUNNER_TEMP/verifier-dist/$RELEASED_VERIFIER_WHEEL"
+          test -f "$verifier_wheel"
+          printf '%s  %s\n' "$RELEASED_VERIFIER_WHEEL_SHA256" "$verifier_wheel" | sha256sum --check -
+          python -m venv "$RUNNER_TEMP/verifier-env"
+          "$RUNNER_TEMP/verifier-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-index --no-deps "$verifier_wheel"
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness identity \
+            --role released-evaluator \
+            --expected-version "$RELEASED_VERIFIER_VERSION" \
+            --expected-root "$RUNNER_TEMP/verifier-env" \
+            --checkout-root "$GITHUB_WORKSPACE" \
+            --evaluator-payload-sha256 "$RELEASED_VERIFIER_PAYLOAD_SHA256" \
+            --evaluator-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
+            --entry-point "$RUNNER_TEMP/verifier-env/bin/harnessctl" \
+            --require-isolated-python --require-entry-point
+      - name: Retain exact-public-0.6.0 candidate-package bootstrap evidence
+        env:
+          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          candidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
+          candidate_sha256="$(sha256sum "$candidate_wheel" | awk '{print $1}')"
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate \
+            --wheel "$candidate_wheel" \
+            --candidate-commit "$GITHUB_SHA" \
+            --candidate-wheel-sha256 "$candidate_sha256" \
+            --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
+            --checkout-root "$GITHUB_WORKSPACE" \
+            --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
+          python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
+            "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
+            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" <<'PY'
+          import json, pathlib, sys
+          value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert value["schema"] == "se-harness-functional-acceptance-v1"
+          assert value["candidate"]["commit"] == sys.argv[2]
+          assert value["candidate"]["wheel_sha256"] == sys.argv[3]
+          assert value["verifier"]["version"] == "0.6.0"
+          assert value["verifier"]["wheel_sha256"] == sys.argv[4]
+          assert value["verifier"]["contract_sha256"] == sys.argv[5]
+          assert "independence" not in value
+          PY
       - name: Install candidate and prove package identity
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
@@ -134,6 +198,13 @@ jobs:
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
+      - name: Retain the legacy bootstrap result without canonical relabeling
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-package-legacy-bootstrap-0.6.0
+          path: ${{ runner.temp }}/candidate-package-bootstrap.json
+          if-no-files-found: warn
 
   governance-migration:
     name: Governance migration (${{ matrix.platform }})

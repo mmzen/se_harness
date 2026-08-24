@@ -32,7 +32,7 @@ After a released RLS is integrated into `main`, the release owner runs **Publish
 2. proves that the Git tag resolves to the record's candidate commit;
 3. finds the first main first-parent commit that integrated the released record;
 4. checks out that governance commit in a clean detached worktree;
-5. validates it with the independently released evaluator selected by that snapshot;
+5. runs `qualify predecessor-view` with the independently released evaluator selected by that snapshot, retaining the exact external-predecessor result;
 6. generates the Explorer bundle using the snapshot's target-local generator;
 7. checks the exact public file allowlist, schema, provenance, and hashes;
 8. uploads one Pages artifact and deploys it through the `github-pages` environment.
@@ -84,3 +84,5 @@ The optional 3D topology retains the exact unpkg dependency, CSP, timeout, and n
 The deployment uses immutable action pins, read-only source access, a dedicated non-cancelling concurrency group, and a separate deployment job with only `pages: write` and `id-token: write`. Generated files are never committed to `main`, `gh-pages`, release branches, or work branches.
 
 The site is a best-effort demonstration, not a production assurance service. See the formal [`OPS-DPG-001`](../engineering/dashboard-publication/operations/OPS-DPG-001.md) for failure handling, replay, security controls, and evidence retention. GitHub documents the underlying [custom Pages workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages); repository policy remains authoritative for this implementation.
+
+The workflow does not call the repository predecessor-validation script directly. The typed `predecessor-view` handler owns that fixed service and derives the external entry point and installed wheel provenance from the selected interpreter. It accepts no caller-selected script, omission, or expected diagnostic.

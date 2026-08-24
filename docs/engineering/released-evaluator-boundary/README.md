@@ -25,3 +25,9 @@ The governing packet is `approved`; `WO-REB-001` and `WO-REB-002` are `implement
 ## Issue #101 preventive migration packet
 
 The later approved `REQ-REB-016`, `REQ-REB-017`, `SPEC-REB-008`, `ARCH-REB-007`, `ADR-REB-007`, and `VER-REB-007` packet defines a complete predecessor-to-successor governance migration rehearsal. `WO-REB-018` is `in_progress` for its bounded implementation and local qualification. The packet adds evidence-only candidate behavior; it does not change the selected released root evaluator or absorb the lifecycle, production-view, or production-command work tracked separately by issues #103, #104, and #109.
+
+## Issue #109 role-specific qualification packet
+
+Approved `REQ-REB-020` through `REQ-REB-022`, `SPEC-REB-010`, `ARCH-REB-009`, `ADR-REB-009`, and `VER-REB-009` define five closed `harnessctl qualify` operations and one canonical evidence result. `WO-REB-020` is `in_progress` for their bounded implementation, workflow migration, documentation, testing, and retained evidence.
+
+The status-preserving bootstrap amendment allows only immutable public 0.6.0's existing `accept-candidate` contract in the first independent package lane. Its legacy schema remains explicit and cannot be relabeled as typed qualification. The exception expires when a released verifier exposes `qualify candidate-package`. The root managed workflow and evaluator remain unchanged pending separate adoption authority.

@@ -117,6 +117,17 @@ jobs:
           fi
           python -S scripts/validate_governor_transition.py assess "${args[@]}" \
             | tee "$RUNNER_TEMP/governor-transition-assessment-result.json"
+      - name: Qualify transitioned root ownership with the exact target evaluator
+        if: steps.plan.outputs.transition_required == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/target-evaluator/bin/python" -I -m se_harness \
+            qualify released-root "$GITHUB_WORKSPACE" \
+            --output "$RUNNER_TEMP/target-released-root-qualification.json" \
+            --json
       - name: Prove assessment made no checkout change
         if: always()
         shell: bash
@@ -133,3 +144,4 @@ jobs:
             ${{ runner.temp }}/governor-transition-plan-result.json
             ${{ runner.temp }}/governor-transition-assessment.json
             ${{ runner.temp }}/governor-transition-assessment-result.json
+            ${{ runner.temp }}/target-released-root-qualification.json

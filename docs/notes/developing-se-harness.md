@@ -70,7 +70,9 @@ CI separates three identities without creating a second repository lifecycle:
 
 The standard managed workflow owns the released-evaluator lane. `.github/workflows/candidate-evidence.yml` owns candidate source and package jobs. Each job identifies its origin and proves it did not mutate the checkout. Passing candidate jobs cannot approve work, verify a VREC, release an RLS, publish, or update the root installation.
 
-`harnessctl identity` supports `released-evaluator`, `candidate-source`, and `candidate-package` roles. `harnessctl accept-candidate` remains a generic verifier-owned black-box package contract; its manifest is evidence, not an assurance decision.
+`harnessctl identity` supports `released-evaluator`, `candidate-source`, and `candidate-package` runtime diagnostics. Release workflows use the higher-level `harnessctl qualify` operations so the evaluator, target, fixed checks, and independence meaning are recorded together. Candidate source runs `complete-candidate` and remains explicitly candidate-controlled.
+
+The independent package lane has one initial bootstrap exception. Exact public 0.6.0 predates the `qualify` namespace, so its fixed, digest-bound `accept-candidate` contract retains the original `se-harness-functional-acceptance-v1` result. It is not relabeled as a typed result. After a released verifier contains `qualify candidate-package`, the workflow moves to that operation and the 0.6.0-only path is removed through a later governed change. See [release qualification roles](release-qualification-roles.md).
 
 Candidate CI also runs the contract-bound [evaluator migration rehearsal](evaluator-migration-rehearsal.md) on Windows and Linux. It acquires the already-public, digest-pinned predecessor before the run, builds a non-promotable successor from the exact candidate commit, installs both outside the checkout, and runs the nine-stage scenario twice. This gate tests the complete N-1-to-N handover; it does not make the candidate the root evaluator or grant release authority.
 

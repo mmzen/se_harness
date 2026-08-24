@@ -25,13 +25,6 @@ jobs:
           "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
             --disable-pip-version-check --no-deps --only-binary=:all: \
             "se-harness==$SE_HARNESS_VERSION"
-      - name: Prove evaluator identity and isolation
-        shell: bash
-        run: |
-          cd "$RUNNER_TEMP"
-          export PYTHONNOUSERSITE=1
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -c \
-            "import os, pathlib, se_harness, sys; from se_harness.installer import template_root; boundary=pathlib.Path(sys.prefix).resolve(); checkout=pathlib.Path(os.environ['GITHUB_WORKSPACE']).resolve(); origins=(pathlib.Path(se_harness.__file__).resolve(), template_root().resolve()); assert se_harness.__version__ == '$SE_HARNESS_VERSION'; assert all(path.is_relative_to(boundary) and not path.is_relative_to(checkout) for path in origins); print({'role':'consumer-evaluator','version':se_harness.__version__,'module':str(origins[0]),'templates':str(origins[1])})"
       - name: Select the pull-request work order
         if: github.event_name == 'pull_request'
         id: work_order
@@ -47,10 +40,15 @@ jobs:
         run: >-
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight .
           --work-order "$HARNESS_WORK_ORDER" --phase review
-      - name: Check installed harness and graph
+      - name: Qualify the root with its exact released evaluator
+        shell: bash
         run: |
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness doctor .
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness validate .
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
+            qualify released-root "$GITHUB_WORKSPACE" \
+            --output "$RUNNER_TEMP/released-root-qualification.json" \
+            --json
       - name: Generate Harness Explorer
         run: |
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness dashboard .
@@ -58,4 +56,6 @@ jobs:
         if: always()
         with:
           name: harness-dashboard
-          path: target/harness-dashboard
+          path: |
+            target/harness-dashboard
+            ${{ runner.temp }}/released-root-qualification.json
