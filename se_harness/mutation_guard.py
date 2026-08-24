@@ -12,6 +12,7 @@ from pathlib import Path
 from se_harness import __version__
 from se_harness.evaluator_evidence import EvaluatorEvidence, build_evaluator_evidence
 from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
+from se_harness.hash_bound import LOCK_RELATIVE
 from se_harness.installer import CONFIG_NAME, HarnessError, ensure_target, load_lock, safe_destination
 from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identity
 from se_harness.upgrade_authorization import (
@@ -144,7 +145,9 @@ def require_mutation_authority(
                     "evaluator identity transition requires a separately approved --work-order packet",
                 )
             try:
-                lock_bytes = (root / ".engineering-harness.lock").read_bytes()
+                # Supplied as the declared path with its exact bytes. The mode is
+                # the declaration's to decide, so nothing is chosen here.
+                lock_bytes = (root / LOCK_RELATIVE).read_bytes()
                 upgrade_authorization = load_upgrade_authorization(
                     root,
                     work_order=upgrade_work_order,

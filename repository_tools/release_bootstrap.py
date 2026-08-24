@@ -15,6 +15,14 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+from se_harness.hash_bound import (
+    LOCK_RELATIVE,
+    MATCH_DECLARED,
+    MATCH_LEGACY_NEWLINE,
+    HashBoundError,
+    compare_declared_digest,
+)
+
 
 BOOTSTRAP_SCHEMA = "se-harness-release-bootstrap-v1"
 PREPARATION_SCHEMA = "se-harness-predecessor-bootstrap-v1"
@@ -392,7 +400,7 @@ def _validate_bootstrap_cardinality(
 
 def _validate_old_root(root: Path, contract: BootstrapContract) -> None:
     config_path = root / ".engineering-harness.toml"
-    lock_path = root / ".engineering-harness.lock"
+    lock_path = root / LOCK_RELATIVE
     if _path_has_link(config_path, root) or _path_has_link(lock_path, root):
         raise ReleaseBootstrapError("standard configuration and lock must not traverse links")
     try:
@@ -404,8 +412,24 @@ def _validate_old_root(root: Path, contract: BootstrapContract) -> None:
     harness = config.get("harness") if isinstance(config, dict) else None
     if not isinstance(harness, dict) or harness.get("tool_version") != contract.from_lock_tool_version:
         raise ReleaseBootstrapError("configured evaluator version differs from the bootstrap contract")
-    canonical_lock = _canonical_utf8_text_lf(lock_raw, "standard lock")
-    if hashlib.sha256(canonical_lock).hexdigest() != contract.from_lock_sha256:
+    # The mode comes from the lock's declared hash-bound class, not from a local
+    # canonicalization, so this caller and upgrade authorization cannot diverge
+    # again. The byte-order-mark refusal below is retained: it is a separate
+    # existing check that the declared mode does not perform.
+    if lock_raw.startswith(b"\xef\xbb\xbf"):
+        raise ReleaseBootstrapError("standard lock must use UTF-8 without a byte-order mark")
+    try:
+        lock_match = compare_declared_digest(LOCK_RELATIVE, lock_raw, contract.from_lock_sha256)
+    except HashBoundError as exc:
+        raise ReleaseBootstrapError(
+            f"cannot compare the standard lock under its declared hash-bound class: {exc}"
+        ) from exc
+    if lock_match == MATCH_LEGACY_NEWLINE:
+        raise ReleaseBootstrapError(
+            "standard lock matches the bootstrap contract only as a legacy newline variant; "
+            "this contract records a canonical digest"
+        )
+    if lock_match != MATCH_DECLARED:
         raise ReleaseBootstrapError("canonical standard lock digest differs from the bootstrap contract")
     if (
         not isinstance(lock, dict)

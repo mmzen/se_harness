@@ -2,7 +2,7 @@
 id = "WO-HBI-002"
 type = "work_order"
 title = "Take every hash mode from the declared class and fix the lock's divergence"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,6 +16,7 @@ decided_by = "engineering-owner"
 paths = [
   "docs/engineering/hash-bound-integrity/",
   "se_harness/hash_bound.py",
+  "se_harness/installer.py",
   "se_harness/upgrade_authorization.py",
   "se_harness/mutation_guard.py",
   "se_harness/candidate_acceptance.py",
@@ -39,21 +40,52 @@ to = "approved"
 decided_at = "2026-08-24T10:43:27Z"
 decided_by = "engineering-owner"
 reason = "Owner approval recorded 2026-08-24. Authorizes bounded local implementation and local qualification only; implementation start remains a separate explicit decision."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-24T10:47:56Z"
+decided_by = "engineering-owner"
+reason = "Owner instruction to begin implementation, recorded 2026-08-24 after start preflight passed. Bounded local implementation and local qualification only."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T11:28:37Z"
+decided_by = "engineering-owner"
+reason = "In-scope implementation complete and locally qualified on 2026-08-24, including the owner-granted bounded amendment adding se_harness/installer.py for the legacy-match report. Evidence retained under the domain. Verification, push, pull request and release remain separately unauthorized."
 +++
 
 # Work Order: Take every hash mode from the declared class and fix the lock's divergence
 
 ## Lifecycle and authorization
 
-Approved on 2026-08-24 by the engineering owner. Approval and start are separate
-decisions and only the first has been taken, so implementation is not authorized
-yet. The dependency is satisfied: `WO-HBI-001` is implemented and merged, so the
+Approved on 2026-08-24 by the engineering owner, and started on the same day on a
+separate owner instruction. Both decisions are recorded in the lifecycle events
+above. The dependency is satisfied: `WO-HBI-001` is implemented and merged, so the
 declaration and resolver this work order consumes now exist.
 
-Approval would authorize bounded local implementation and local qualification
-only. Commit, branch push, pull request, merge, VREC or RLS preparation or
-transition, tag, publication, deployment, credential use, maintenance mutation
-and operational governor adoption each remain separately unauthorized.
+Those two decisions authorize bounded local implementation and local
+qualification only. On 2026-08-24 the owner separately authorized one candidate
+commit on the implementation branch, and nothing beyond it. Branch push, pull
+request, merge, VREC or RLS preparation or transition, tag, publication,
+deployment, credential use, maintenance mutation and operational governor
+adoption each remain separately unauthorized.
+
+## Scope amendment, 2026-08-24
+
+Amended on 2026-08-24 by the engineering owner, during implementation and on an
+explicit request. `se_harness/installer.py` is added to `[execution_scope]` for
+one purpose only: adding `"lock_match": authorization.prior_lock_match` beside
+`"lock_sha256"` in the `"prior"` object that `_upgrade_evidence_bytes` builds.
+
+The reason is that `VER-HBI-001` acceptance scenario 5 requires the report to
+state that a legacy newline variant matched, and that evidence builder is the
+only reporting surface. `UpgradeAuthorization.prior_lock_match` already carries
+the value, so nothing else in that file changes. No other use of the added path
+is authorized, and the amendment widens no other constraint: the mode arbiter,
+the refusals, the recorded digests and the actions listed above as separately
+unauthorized are all untouched by it.
 
 This is deliberately a second work order rather than added scope on the first.
 `WO-HBI-001` adds read-only assessment; this one changes an authorization

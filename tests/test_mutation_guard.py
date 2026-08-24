@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-import hashlib
 import io
 import json
 import tempfile
@@ -20,7 +19,9 @@ from se_harness.evaluator_evidence import (
     parse_evaluator_evidence,
 )
 from se_harness.evaluator_identity import InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
+from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED, MATCH_LEGACY_NEWLINE
 from se_harness.installer import HarnessError, apply_changes, plan_install
+from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.mutation_guard import (
     PUBLIC_MUTATION_OPERATIONS,
     require_mutation_authority,
@@ -179,15 +180,20 @@ class MutationGuardTests(unittest.TestCase):
             f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
             "b" * 64,
         )
-        lock_path = root / ".engineering-harness.lock"
+        lock_path = root / LOCK_RELATIVE
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"] = {
             **target_identity.to_lock(),
             "payload_sha256": "c" * 64,
             "archive_sha256": "d" * 64,
         }
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        prior_lock_sha256 = hashlib.sha256(lock_path.read_bytes()).hexdigest()
+        # Explicit LF, and the recorded digest is the lock's declared mode rather
+        # than this platform's bytes, so the packet reads the same on either default.
+        lock_path.write_text(
+            json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+        )
+        self.assertNotIn(b"\r", lock_path.read_bytes())
+        prior_lock_sha256 = canonical_sha256(lock_path.read_bytes())
         work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-001.md"
         work_order.parent.mkdir(parents=True)
         work_order.write_text(
@@ -299,10 +305,163 @@ authorized_by = "repository-owner"
         self.assertEqual("se-harness-evaluator-upgrade-evidence-v1", evidence["schema"])
         self.assertEqual("WO-TST-001", evidence["work_order"])
         self.assertEqual(prior_lock_sha256, evidence["prior"]["lock_sha256"])
+        self.assertEqual(MATCH_DECLARED, evidence["prior"]["lock_match"])
         self.assertEqual(target_identity.to_lock(), evidence["target"])
         self.assertTrue(evidence["transaction"]["atomic"])
         self.assertTrue(evidence["postconditions"]["no_op_replay"])
         self.assertFalse(evidence["postconditions"]["product_release_performed"])
+
+    def test_prior_lock_authority_is_indifferent_to_the_checkout_newline(self) -> None:
+        root = self.base / "newline-materialization"
+        changes, old_lock = plan_install(root, project_name="Newline", mode="init")
+        apply_changes(root, changes, old_lock, allow_updates=False)
+        target_identity = InstalledEvaluatorIdentity(
+            __version__,
+            PAYLOAD_MANIFEST,
+            "a" * 64,
+            f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
+            "b" * 64,
+        )
+        lock_path = root / LOCK_RELATIVE
+        lock_lf = lock_path.read_bytes().replace(b"\r\n", b"\n")
+        prior_lock_sha256 = canonical_sha256(lock_lf)
+        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-002.md"
+        work_order.parent.mkdir(parents=True)
+        work_order.write_text(
+            f'''+++
+id = "WO-TST-002"
+type = "work_order"
+title = "Adopt exact released evaluator"
+status = "in_progress"
+owners = ["repository-owner"]
+created = "2026-08-24"
+updated = "2026-08-24"
+
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "{prior_lock_sha256}"
+target_version = "{target_identity.version}"
+target_payload_sha256 = "{target_identity.payload_sha256}"
+target_archive_name = "{target_identity.archive_name}"
+target_archive_sha256 = "{target_identity.archive_sha256}"
+publication = "immutable"
+authorized_by = "repository-owner"
+
+[relations]
++++
+
+# Work Order
+''',
+            encoding="utf-8",
+            newline="\n",
+        )
+        # The guard supplies the lock's exact bytes and the declaration decides the
+        # mode, so a CRLF checkout of the same blob must reach the same authority.
+        for materialization, payload in (("lf", lock_lf), ("crlf", lock_lf.replace(b"\n", b"\r\n"))):
+            with self.subTest(materialization=materialization):
+                lock_path.write_bytes(payload)
+                with mock.patch(
+                    "se_harness.mutation_guard.installed_evaluator_identity",
+                    return_value=target_identity,
+                ), mock.patch(
+                    "se_harness.mutation_guard._runtime_report",
+                    return_value=self._passing_identity(root),
+                ):
+                    authority = require_mutation_authority(
+                        root,
+                        operation="upgrade-apply",
+                        allow_upgrade_transition=True,
+                        upgrade_work_order="WO-TST-002",
+                    )
+                authorization = authority.upgrade_authorization
+                self.assertIsNotNone(authorization)
+                self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
+                self.assertEqual(prior_lock_sha256, authorization.prior_lock_sha256)
+
+    def test_a_legacy_recorded_prior_lock_still_applies_and_is_reported(self) -> None:
+        root = self.base / "legacy-recorded-prior"
+        changes, old_lock = plan_install(root, project_name="Legacy Prior", mode="init")
+        apply_changes(root, changes, old_lock, allow_updates=False)
+        target_identity = InstalledEvaluatorIdentity(
+            __version__,
+            PAYLOAD_MANIFEST,
+            "a" * 64,
+            f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
+            "b" * 64,
+        )
+        lock_path = root / LOCK_RELATIVE
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"] = {
+            **target_identity.to_lock(),
+            "payload_sha256": "c" * 64,
+            "archive_sha256": "d" * 64,
+        }
+        lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
+        lock_path.write_bytes(lock_bytes)
+        # Recorded the way a pre-declaration authorization recorded it: the raw
+        # digest of a CRLF checkout of these exact LF bytes.
+        prior_lock_sha256 = raw_sha256(lock_bytes.replace(b"\n", b"\r\n"))
+        self.assertNotEqual(prior_lock_sha256, canonical_sha256(lock_bytes))
+        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-003.md"
+        work_order.parent.mkdir(parents=True)
+        work_order.write_text(
+            f'''+++
+id = "WO-TST-003"
+type = "work_order"
+title = "Adopt exact released evaluator"
+status = "in_progress"
+owners = ["repository-owner"]
+created = "2026-08-24"
+updated = "2026-08-24"
+
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "{prior_lock_sha256}"
+target_version = "{target_identity.version}"
+target_payload_sha256 = "{target_identity.payload_sha256}"
+target_archive_name = "{target_identity.archive_name}"
+target_archive_sha256 = "{target_identity.archive_sha256}"
+publication = "immutable"
+authorized_by = "repository-owner"
+
+[relations]
++++
+
+# Work Order
+''',
+            encoding="utf-8",
+            newline="\n",
+        )
+        evidence_relative = Path(
+            "docs/engineering/upgrade/evidence/WO-TST-003-evaluator-upgrade.json"
+        )
+        changes, old_lock = plan_install(root, project_name=None, mode="upgrade")
+        with mock.patch(
+            "se_harness.mutation_guard.installed_evaluator_identity",
+            return_value=target_identity,
+        ), mock.patch(
+            "se_harness.installer.installed_evaluator_identity",
+            return_value=target_identity,
+        ), mock.patch(
+            "se_harness.mutation_guard._runtime_report",
+            return_value=self._passing_identity(root),
+        ):
+            result = apply_changes(
+                root,
+                changes,
+                old_lock,
+                allow_updates=True,
+                upgrade_work_order="WO-TST-003",
+                evidence_output=evidence_relative,
+            )
+        self.assertEqual(target_identity.to_lock(), result["evaluator"])
+        evidence = json.loads((root / evidence_relative).read_bytes())
+        # The authorization still succeeds, and the report names how it matched
+        # instead of letting a legacy digest pass as an ordinary one.
+        self.assertEqual(prior_lock_sha256, evidence["prior"]["lock_sha256"])
+        self.assertEqual(MATCH_LEGACY_NEWLINE, evidence["prior"]["lock_match"])
 
     def test_runtime_failures_preserve_bounded_identity_codes(self) -> None:
         root = self._write_identity_root()

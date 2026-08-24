@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import re
 import tomllib
 from dataclasses import dataclass
@@ -10,6 +9,12 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from se_harness.evaluator_identity import InstalledEvaluatorIdentity
+from se_harness.hash_bound import (
+    LOCK_RELATIVE,
+    MATCH_MISMATCH,
+    HashBoundError,
+    compare_declared_digest,
+)
 
 
 UPGRADE_AUTHORIZATION_SCHEMA = "se-harness-evaluator-upgrade-v1"
@@ -46,6 +51,7 @@ class UpgradeAuthorization:
     target_archive_name: str
     target_archive_sha256: str
     authorized_by: str
+    prior_lock_match: str
 
 
 def evaluator_transition_required(
@@ -146,8 +152,15 @@ def load_upgrade_authorization(
     prior_lock_sha256 = _required_text(raw, "prior_lock_sha256")
     if SHA256_PATTERN.fullmatch(prior_lock_sha256) is None:
         raise UpgradeAuthorizationError("evaluator_upgrade.prior_lock_sha256 is invalid")
-    observed_prior = hashlib.sha256(old_lock_bytes).hexdigest()
-    if prior_lock_sha256 != observed_prior:
+    try:
+        prior_lock_match = compare_declared_digest(
+            LOCK_RELATIVE, old_lock_bytes, prior_lock_sha256
+        )
+    except HashBoundError as exc:
+        raise UpgradeAuthorizationError(
+            f"cannot compare the prior lock under its declared hash-bound class: {exc}"
+        ) from exc
+    if prior_lock_match == MATCH_MISMATCH:
         raise UpgradeAuthorizationError("upgrade work order prior lock identity does not match the repository")
 
     target_version = _required_text(raw, "target_version")
@@ -180,6 +193,7 @@ def load_upgrade_authorization(
         target_archive_name=target_archive_name,
         target_archive_sha256=target_archive_sha256,
         authorized_by=authorized_by,
+        prior_lock_match=prior_lock_match,
     )
 
 
