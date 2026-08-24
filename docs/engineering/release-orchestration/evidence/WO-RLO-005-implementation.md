@@ -275,6 +275,12 @@ is the subject a `pull_request` run resolves.
 | Rehearse the credential-free path on Linux | success | 1m28s | `REHEARSED`, 21 executed, 2 excluded, `candidate unit suite passed (831 tests)`, 7611 derived paths removed |
 | Rehearse the credential-free path on Windows | failure | 2m42s | `FAILED`, 20 executed, 2 excluded, one failed mechanic, 7168 derived paths removed |
 
+Pushing this document's own commit produced a second hosted run,
+[32756344464](https://github.com/mmzen/se_harness/actions/runs/32756344464) over
+candidate `42649e954a94bd5aa64f893c8ed64d6d0f525f3c`, with the same three
+conclusions and the same eleven failing test names. The observation below is
+therefore reproducible across two merge commits rather than seen once.
+
 Three things this establishes, all of them the lane's purpose:
 
 First, `REQ-RLO-015`'s Linux half is no longer unproven. It ran on a hosted
