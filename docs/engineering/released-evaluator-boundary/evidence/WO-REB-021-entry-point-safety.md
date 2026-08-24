@@ -2,7 +2,11 @@
 
 Date: 2026-08-24
 
-Authority: non-authoritative retained implementation evidence. This file does not approve, verify, release, publish, tag, or deploy anything. It records what was measured on one platform at one commit. Commit-bound assurance for this work order remains a separate `VREC` decision, and this file is not that decision.
+Authority: non-authoritative retained implementation evidence. This file does not approve, verify, release, publish, tag, or deploy anything. It records what was measured on one platform at one commit. Commit-bound assurance for this work order remains a separate `VREC` decision, and this file is not that decision. After accountable review of this evidence the engineering owner accepted the implementation and transitioned `WO-REB-021` to `implemented` at `2026-08-24T14:43:03Z`. The two coverage gaps in section 7 remain explicit inputs to independent assurance review.
+
+artifact: WO-REB-021
+checkpoint: handoff
+formal_snapshot_sha256: 2fea33ef7bcefd766d2362187ba31c2909cfe3dc26ee88a340049f08be54690e
 
 ## 1. Governing packet and preflight
 

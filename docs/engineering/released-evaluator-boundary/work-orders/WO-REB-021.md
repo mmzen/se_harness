@@ -2,7 +2,7 @@
 id = "WO-REB-021"
 type = "work_order"
 title = "Implement the declared environment entry-point safety rule"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -78,6 +78,13 @@ to = "in_progress"
 decided_at = "2026-08-24T13:04:22Z"
 decided_by = "engineering-owner"
 reason = "Explicit start of the bounded implementation for issue #106 / RC-060-06. Authorizes only the local implementation and qualification described in the work order."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T14:43:03Z"
+decided_by = "engineering-owner"
+reason = "Accountable review of the retained entry-point safety evidence. The authorized implementation and its qualification are complete; the two disclosed coverage gaps are inputs to independent assurance review, not blockers to handoff."
 +++
 
 # Work Order: Implement the declared environment entry-point safety rule
