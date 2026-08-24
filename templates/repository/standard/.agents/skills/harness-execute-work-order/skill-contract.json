@@ -1,7 +1,7 @@
 {
   "schema": "se-harness-skill-contract-v2",
   "name": "harness-execute-work-order",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "outcome": "Execute one already-started bounded work order and retain its evidence without completing or delivering it.",
   "activation": {
     "explicit": true,

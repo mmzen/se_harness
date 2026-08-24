@@ -1,3 +1,5 @@
 include scripts/normalize_sdist.py
 include se_harness/*.json
 recursive-include templates/repository/standard/.agents/skills *.json *.md *.py
+recursive-include templates/repository/standard/.agents/skills *.yaml
+recursive-include templates/repository/standard/.claude/skills *.md

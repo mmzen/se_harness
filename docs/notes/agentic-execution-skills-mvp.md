@@ -52,11 +52,27 @@ enforced autonomy envelopes and multi-agent execution belong to later work.
 Canonical sources live only at
 `templates/repository/standard/.agents/skills/<skill-name>/`. A repository
 installation receives one managed copy at `.agents/skills/<skill-name>/`.
+Codex discovers that copy directly. The three writing cores include a small
+`agents/openai.yaml` policy that disables implicit invocation; the unchanged
+orientation core has no Codex policy file.
+
+Claude Code discovers one managed same-named adapter at
+`.claude/skills/<skill-name>/SKILL.md`. That adapter contains discovery and
+loading instructions only. It resolves the canonical `.agents` directory from
+the repository root, stops on a missing or invalid binding, and then yields to
+the canonical procedure. It does not copy the procedure, contract, or helper.
+Writing adapters disable model invocation, so the user must invoke those
+skills explicitly; orientation remains available for normal read-only matching.
+
 `init`, `adopt`, and the ownership-aware upgrade transaction handle all four
-cores. Customized installed skill bytes block an ambiguous upgrade instead of
-being overwritten.
+cores and adapters. Customized installed bytes block an ambiguous upgrade
+instead of being overwritten. Installing a newer Python package alone does not
+rewrite an existing repository; its owner must review and explicitly apply the
+repository upgrade.
 
 See [installation and safe upgrades](harness-installation-and-upgrades.md) for
 the package and repository update procedure, and
+[repository host adapters](agentic-execution-host-adapters.md) for the Codex
+and Claude discovery mapping, and
 [read-only agent orientation](harness-orient.md) for the unchanged orientation
 workflow.
