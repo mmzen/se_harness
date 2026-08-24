@@ -16,7 +16,7 @@ Issue [#111](https://github.com/mmzen/se_harness/issues/111) records `RC-060-11`
 | Branch | `feat/rlo-004-publication-rehearsal` |
 | Merge base | `1431df591a654202ab1a3a6647d9657905bbd26c` (merge of pull request #132) |
 | Diff against merge base | 20 files changed, 6227 insertions, 0 deletions |
-| Worktree state | clean at `cfca2f3`; the only later change is this document and the `WO-RLO-004` transition, committed together |
+| Worktree state | clean at `cfca2f3`; the later changes are this document with the `WO-RLO-004` transition, committed together, and then the owner's amendment and exclusion rulings recorded in the artifacts |
 | Local interpreter | CPython 3.14.6 on Windows 11 |
 | Orchestrator and lane interpreter | pinned 3.11 |
 
@@ -265,9 +265,11 @@ No changed path lies under `se_harness/`, `templates/`, the eight managed `scrip
 - The `core.autocrlf=true` reds are named and attributed, not fixed. Four pre-existing tests assert on exact bytes and fail in a converting checkout; that is a real property of this repository's test suite and is out of this work order's scope.
 - `docs/notes/release-publication-rehearsal.md` is repository-owned prose. If it and the formal artifacts disagree, the artifacts govern.
 
-## Amendments requiring an owner decision
+## Amendments, and the owner's decision on them
 
-Seven amendments to approved artifacts were made during implementation and are stated for acceptance or rejection. None relaxes a required response; each adds to one. No `statement` field changed.
+Seven amendments to approved artifacts were made during implementation. None relaxes a required response; each adds to one. No `statement` field changed.
+
+The accountable repository owner accepted all seven on 2026-08-24 through the statement `Accept all seven`, and the acceptance is recorded in each amended artifact's own amendments section rather than only here. In the same turn the owner ruled on the excluded mechanic: *"On ordinary integration there is no valid subject, so reporting `excluded` with both measured identities is honest. `release-record` mode still fails on a real mismatch, which is where the comparison is meaningful."* `SPEC-RLO-004` rule 37 now carries that ruling and `VER-RLO-004` makes reporting the mechanic `executed`, or omitting it, a failure of the contract. Neither decision authorizes a release, publication, deployment, or governor adoption.
 
 - `SPEC-RLO-004` A7 and rule 37: the resolution subject a mechanic needs, and what happens when none exists.
 - `SPEC-RLO-004`: the state model admits an `excluded` outcome with a reason; two error/recovery rows; one valid and one invalid example; the closing facts extended from two to three.
@@ -279,4 +281,6 @@ Seven amendments to approved artifacts were made during implementation and are s
 
 ## Actions explicitly not performed
 
-No push, pull request, tag, branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, hosting or branch-protection change, or any other external mutation was performed. `WO-RLO-004` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.
+Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-004 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
+
+Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-004` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.

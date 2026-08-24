@@ -117,6 +117,8 @@ Rule 37 was added for the same reason as rules 33 to 36: a measurement showed th
 
 37. Exercise the predecessor-view qualification only against a subject whose committed bootstrap contract names the evaluator the run actually resolved. In `candidate` mode, compare the resolved evaluator identity with the subject record's declared predecessor evaluator identity and, when they differ or the record declares none, report the mechanic `excluded` with both measured identities rather than `failed`. In `release-record` mode never exclude it: a record under preparation must bind the governing evaluator, so a mismatch there is a defect in that record and must fail.
 
+The accountable repository owner ruled on 2026-08-24 that `excluded` is the correct outcome here: on ordinary integration there is no valid subject, so reporting `excluded` with both measured identities is honest, and `release-record` mode still fails on a real mismatch, which is where the comparison is meaningful. Rule 37 must therefore not be satisfied by omitting the mechanic from the result, by reporting it `executed`, or by admitting an exclusion in `release-record` mode.
+
 ## Error and recovery behavior
 
 | Condition | Required behavior |
@@ -188,7 +190,9 @@ Approved by the accountable repository owner on 2026-08-24 through the statement
 
 ## Amendments during implementation
 
-Implementing `WO-RLO-004` measured the orchestrator rather than describing it, and six statements above were wrong or incomplete as a result. Each amendment below is recorded with the measurement that forced it. The amendments are stated for owner acceptance or rejection; they are not themselves an owner act, and no amendment weakens a rule, removes a failure mode, or widens the authority boundary.
+Implementing `WO-RLO-004` measured the orchestrator rather than describing it, and six statements above were wrong or incomplete as a result. Each amendment below is recorded with the measurement that forced it. No amendment weakens a rule, removes a failure mode, or widens the authority boundary, and no approved `statement` field changed.
+
+The accountable repository owner accepted all seven amendments, `A1` through `A7`, on 2026-08-24 through the statement `Accept all seven`. That acceptance covers the amendments recorded in this section and the consequent entries in the state model, the outputs, the error and recovery table, and the examples; it authorizes no release, publication, deployment, push, or other external action.
 
 | Amendment | What changed | Measurement that forced it |
 |---|---|---|

@@ -94,7 +94,7 @@ Approved by the accountable repository owner on 2026-08-24 through the statement
 
 ## Amendments during implementation
 
-Two amendments, stated for owner acceptance or rejection. Neither relaxes the required response; both add to it. The `statement` field is unchanged.
+Two amendments, both accepted by the accountable repository owner on 2026-08-24 through the statement `Accept all seven`, which covers the seven amendments recorded across `SPEC-RLO-004`, this requirement, and `VER-RLO-004`. Neither relaxes the required response; both add to it. The `statement` field is unchanged, and the acceptance authorizes no release, publication, deployment, or other external action.
 
 **The required response now reports the condition of the inherited checkout.** The constraint on line 43 keeps the rehearsal runnable locally, and a local run inherits whatever worktree the engineer is in. Two shakedown runs measured the consequence on the same mechanic, the predecessor-view qualification. It requires a clean worktree, so while the packet under construction was uncommitted it failed with `PV001`, "predecessor preparation requires a clean Git worktree". After the packet was committed it failed again under the same `PV001` identifier and an entirely different message, "evaluator wheel differs from the released RLS contract", which `SPEC-RLO-004` amendment A7 traces to the subject the rehearsal chose rather than to the checkout. One identifier covering two unrelated causes is why the two were initially conflated. Without the inherited condition on the result neither is distinguishable from a real defect in the publication path, which is the false signal this requirement's sibling `REQ-RLO-014` exists to prevent.
 
