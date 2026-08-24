@@ -1,2 +1,3 @@
 include scripts/normalize_sdist.py
 include se_harness/*.json
+recursive-include templates/repository/standard/.agents/skills/harness-orient *.json *.md *.py

@@ -13,6 +13,13 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
+The repository-managed surface includes the portable `harness-orient` core at
+`.agents/skills/harness-orient/`. Its `SKILL.md`, strict
+`skill-contract.json`, and standard-library runner are managed files. They are
+installed and upgraded through the same ownership-aware transaction as other
+managed template content; installing only the Python package does not add them
+to an existing repository.
+
 After initial installation, mutating commands use the repository's `.engineering-harness.lock` as the expected released-evaluator identity. Run them from a dedicated environment outside the target checkout. The guard rejects a source checkout, editable install, wrong payload or archive, unresolved or foreign launcher, enabled user site, inherited `PYTHONPATH`, and other ambiguous origins before it creates a directory, temporary file, or formal record. Read-only planning and inspection remain available when mutation authority is unavailable.
 
 ## Windows PowerShell
@@ -92,6 +99,12 @@ harnessctl dashboard C:\path\to\repository
 
 Explorer is a progressive static bundle. Serve `target/harness-dashboard/` over HTTP rather than opening `index.html` directly; for example, run `python -m http.server 8000 --directory target/harness-dashboard` from the repository and open `http://localhost:8000/`.
 
+Supported agents can load `.agents/skills/harness-orient/SKILL.md` for a
+read-only orientation. The skill requires a structured launcher for the exact
+external released evaluator and returns its execution receipt inline; it does
+not install an evaluator or retain evidence in the target. See
+[read-only agent orientation](harness-orient.md) for the complete procedure.
+
 ## Upgrade an existing installation
 
 The package-only shorthand remains useful for obtaining read-only planning and inspection behavior:
@@ -132,6 +145,11 @@ harnessctl upgrade C:\path\to\repository --apply --work-order WO-... --evidence-
 Product implementation or release authorization does not authorize this later root adoption. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md) for the maintainer-only deadlock procedure and disposable rehearsal.
 
 The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
+
+This rule also covers `.agents/skills/harness-orient/`. If a repository edits a
+managed skill file, the upgrade plan reports it as customized and preserves the
+bytes. Move repository-specific instructions outside the managed core or
+restore the exact locked content before reviewing a fresh upgrade plan.
 
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 

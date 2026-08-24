@@ -22,6 +22,7 @@ from se_harness.candidate_acceptance import (
     assess_candidate_wheel,
 )
 from se_harness.installer import HarnessError, apply_changes, plan_install, tracked_content
+from se_harness.skill_contract import build_skill_manifest
 from se_harness.integrity import canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.preflight import inspect_installation
@@ -52,6 +53,44 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 f"Metadata-Version: 2.1\nName: se-harness\nVersion: {version}\n",
             )
         return wheel, hashlib.sha256(wheel.read_bytes()).hexdigest()
+
+    def test_standard_install_manages_one_complete_harness_orient_core(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
+            skill_changes = [item for item in changes if item.path.startswith(".agents/skills/harness-orient/")]
+            self.assertEqual(
+                [
+                    ".agents/skills/harness-orient/SKILL.md",
+                    ".agents/skills/harness-orient/scripts/orient.py",
+                    ".agents/skills/harness-orient/skill-contract.json",
+                ],
+                [item.path for item in skill_changes],
+            )
+            self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in skill_changes))
+
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            installed = target / ".agents/skills/harness-orient"
+            source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
+            self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
+            lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+            self.assertTrue(
+                all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes)
+            )
+
+    def test_standard_upgrade_reports_customized_skill_without_overwriting_it(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            skill = target / ".agents/skills/harness-orient/SKILL.md"
+            customized = skill.read_bytes() + b"\nRepository-owned customization.\n"
+            skill.write_bytes(customized)
+
+            changes, _ = plan_install(target, project_name=None, mode="upgrade")
+            selected = next(item for item in changes if item.path == ".agents/skills/harness-orient/SKILL.md")
+            self.assertEqual("customized", selected.action)
+            self.assertEqual(customized, skill.read_bytes())
 
     def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -339,7 +378,11 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
 
             lock_path = target / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
-            managed = ("ENGINEERING_HARNESS.md", "docs/engineering/QUALITY_GATES.md")
+            managed = (
+                "ENGINEERING_HARNESS.md",
+                "docs/engineering/QUALITY_GATES.md",
+                ".agents/skills/harness-orient/SKILL.md",
+            )
             for relative in managed:
                 path = target / relative
                 path.write_bytes(path.read_bytes() + b"\nLegacy released content.\n")

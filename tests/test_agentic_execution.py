@@ -1,0 +1,363 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+from se_harness.skill_contract import (
+    CONTRACT_SCHEMA,
+    MANIFEST_SCHEMA,
+    SkillContractError,
+    build_skill_manifest,
+    canonical_json_bytes,
+    load_skill_contract,
+    parse_skill_contract_bytes,
+)
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+SKILL_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
+ORIENT = SKILL_ROOT / "scripts/orient.py"
+FAKE_EVALUATOR = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/fake_evaluator.py"
+VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
+
+
+def snapshot(root: Path) -> dict[str, str]:
+    return {
+        path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in root.rglob("*")
+        if path.is_file()
+    }
+
+
+class SkillContractTests(unittest.TestCase):
+    def test_canonical_harness_orient_contract_and_manifest_validate(self) -> None:
+        contract = load_skill_contract(SKILL_ROOT / "skill-contract.json")
+        manifest = build_skill_manifest(SKILL_ROOT)
+        vectors = json.loads(VECTORS.read_text(encoding="utf-8"))
+
+        self.assertEqual(CONTRACT_SCHEMA, contract.value["schema"])
+        self.assertEqual("harness-orient", contract.name)
+        self.assertEqual("read-only", contract.value["mutation_class"])
+        self.assertFalse(contract.value["delegation"]["allowed"])
+        self.assertFalse(contract.value["evidence"]["target_retention"])
+        self.assertEqual(MANIFEST_SCHEMA, manifest.value["schema"])
+        self.assertEqual(
+            ["SKILL.md", "scripts/orient.py", "skill-contract.json"],
+            [item["path"] for item in manifest.value["files"]],
+        )
+        self.assertRegex(manifest.sha256, r"^[0-9a-f]{64}$")
+        self.assertEqual(vectors["portable_core"]["files"], manifest.value["files"])
+        self.assertEqual(vectors["portable_core"]["manifest_sha256"], manifest.sha256)
+
+    def test_contract_rejects_duplicate_and_unknown_fields(self) -> None:
+        raw = (SKILL_ROOT / "skill-contract.json").read_bytes()
+        duplicate = raw.replace(b'{\n  "schema":', b'{\n  "schema": "se-harness-skill-contract-v1",\n  "schema":', 1)
+        with self.assertRaisesRegex(SkillContractError, "SKC002"):
+            parse_skill_contract_bytes(duplicate)
+
+        value = json.loads(raw)
+        value["authority"] = "invented"
+        with self.assertRaisesRegex(SkillContractError, "SKC006"):
+            parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+    def test_contract_rejects_authority_delegation_and_target_retention(self) -> None:
+        original = json.loads((SKILL_ROOT / "skill-contract.json").read_text(encoding="utf-8"))
+        cases = (
+            ("mutation", lambda value: value.__setitem__("mutation_class", "write"), "SKC013"),
+            ("delegation", lambda value: value["delegation"].__setitem__("allowed", True), "SKC018"),
+            ("retention", lambda value: value["evidence"].__setitem__("target_retention", True), "SKC019"),
+        )
+        for label, mutate, code in cases:
+            with self.subTest(label=label):
+                value = json.loads(json.dumps(original))
+                mutate(value)
+                with self.assertRaisesRegex(SkillContractError, code):
+                    parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+    def test_canonical_json_is_stable_and_rejects_floats(self) -> None:
+        self.assertEqual(b'{"a":1,"z":[true,null]}\n', canonical_json_bytes({"z": [True, None], "a": 1}))
+        with self.assertRaisesRegex(SkillContractError, "SKC003"):
+            canonical_json_bytes({"not_allowed": 1.25})
+
+    def test_independent_canonical_receipt_vector_matches_exact_bytes_and_digest(self) -> None:
+        vector = json.loads(VECTORS.read_text(encoding="utf-8"))["receipt"]
+        encoded = canonical_json_bytes(vector["value"])
+        self.assertEqual(vector["canonical"].encode("utf-8"), encoded)
+        self.assertEqual(vector["sha256"], hashlib.sha256(encoded).hexdigest())
+
+    def test_manifest_normalizes_line_endings_and_detects_content_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            first = Path(temporary) / "first"
+            second = Path(temporary) / "second"
+            shutil.copytree(SKILL_ROOT, first)
+            shutil.copytree(SKILL_ROOT, second)
+            for path in second.rglob("*"):
+                if path.is_file():
+                    path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+
+            baseline = build_skill_manifest(first)
+            self.assertEqual(baseline.sha256, build_skill_manifest(second).sha256)
+            (second / "SKILL.md").write_bytes((second / "SKILL.md").read_bytes() + b"changed\r\n")
+            self.assertNotEqual(baseline.sha256, build_skill_manifest(second).sha256)
+
+    def test_manifest_rejects_missing_required_invalid_utf8_and_reserved_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "skill"
+            shutil.copytree(SKILL_ROOT, root)
+            (root / "SKILL.md").unlink()
+            with self.assertRaisesRegex(SkillContractError, "SKM008"):
+                build_skill_manifest(root)
+
+            shutil.copy2(SKILL_ROOT / "SKILL.md", root / "SKILL.md")
+            invalid = root / "invalid.txt"
+            invalid.write_bytes(b"\xff")
+            with self.assertRaisesRegex(SkillContractError, "SKM007"):
+                build_skill_manifest(root)
+            invalid.unlink()
+
+            reserved = root / "NUL.txt"
+            try:
+                reserved.write_text("reserved\n", encoding="utf-8")
+            except OSError:
+                pass
+            else:
+                with self.assertRaisesRegex(SkillContractError, "SKM003"):
+                    build_skill_manifest(root)
+
+    @unittest.skipIf(os.name == "nt", "creating an unprivileged symlink is not portable on Windows")
+    def test_manifest_rejects_symlinks(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "skill"
+            shutil.copytree(SKILL_ROOT, root)
+            (root / "linked").symlink_to(root / "SKILL.md")
+            with self.assertRaisesRegex(SkillContractError, "SKM005"):
+                build_skill_manifest(root)
+
+    @unittest.skipIf(os.name == "nt", "Windows cannot create the hostile portable names")
+    def test_manifest_rejects_case_collisions_and_alternate_separators(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "skill"
+            shutil.copytree(SKILL_ROOT, root)
+            (root / "Case.txt").write_text("one\n", encoding="utf-8")
+            (root / "case.txt").write_text("two\n", encoding="utf-8")
+            with self.assertRaisesRegex(SkillContractError, "SKM004"):
+                build_skill_manifest(root)
+            (root / "Case.txt").unlink()
+            (root / "case.txt").unlink()
+            (root / "alternate\\separator.txt").write_text("unsafe\n", encoding="utf-8")
+            with self.assertRaisesRegex(SkillContractError, "SKM003"):
+                build_skill_manifest(root)
+
+
+class HarnessOrientBlackBoxTests(unittest.TestCase):
+    def invoke(
+        self,
+        target: Path,
+        *,
+        mode: str = "healthy",
+        version: str = "0.6.0",
+        artifact: str | None = None,
+        preflight_phase: str | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        launcher = json.dumps([sys.executable, "-B", str(FAKE_EVALUATOR)])
+        command = [
+            sys.executable,
+            "-B",
+            str(ORIENT),
+            str(target),
+            "--evaluator-launcher-json",
+            launcher,
+            "--expected-evaluator-version",
+            version,
+            "--expected-evaluator-root",
+            str(Path(sys.prefix)),
+        ]
+        if artifact is not None:
+            command.extend(["--artifact", artifact])
+        if preflight_phase is not None:
+            command.extend(["--preflight-phase", preflight_phase])
+        environment = os.environ.copy()
+        environment["AEX_FAKE_MODE"] = mode
+        environment["AEX_FAKE_VERSION"] = version
+        return subprocess.run(command, capture_output=True, text=True, check=False, env=environment)
+
+    def make_target(self, parent: Path) -> Path:
+        target = parent / "repository"
+        (target / ".git/refs/heads").mkdir(parents=True)
+        (target / ".git/HEAD").write_text("ref: refs/heads/main\n", encoding="utf-8")
+        (target / ".git/refs/heads/main").write_text("a" * 40 + "\n", encoding="utf-8")
+        (target / "README.md").write_text("fixture\n", encoding="utf-8")
+        return target
+
+    def test_healthy_selected_orientation_is_deterministic_and_read_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            before = snapshot(target)
+            first = self.invoke(target, artifact="WO-TST-001")
+            after = snapshot(target)
+
+            self.assertEqual(0, first.returncode, first.stderr)
+            self.assertEqual(before, after)
+            result = json.loads(first.stdout)
+            self.assertEqual("completed", result["outcome"])
+            self.assertEqual("in_progress", result["selected"]["lifecycle_state"])
+            self.assertEqual("fixture-repository", result["repository"]["name"])
+            receipt = result["execution_receipt"]
+            self.assertEqual([], receipt["effects"]["changed_paths"])
+            self.assertEqual(receipt["effects"]["state_before"], receipt["effects"]["state_after"])
+            self.assertEqual(["single-agent-orientation"], receipt["execution"]["profiles"])
+            self.assertEqual([], receipt["execution"]["worker_results"])
+            self.assertEqual(
+                hashlib.sha256(canonical_json_bytes(receipt)).hexdigest(),
+                result["execution_receipt_sha256"],
+            )
+
+    def test_candidate_source_content_and_repository_secret_are_not_governing_output(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            (target / "se_harness").mkdir()
+            (target / "se_harness/__init__.py").write_text('__version__ = "999.0.0"\n', encoding="utf-8")
+            (target / "private.txt").write_text("credential=do-not-expose\n", encoding="utf-8")
+            completed = self.invoke(target)
+
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertNotIn("999.0.0", completed.stdout)
+            self.assertNotIn("do-not-expose", completed.stdout)
+            result = json.loads(completed.stdout)
+            self.assertEqual({"governing": False, "status": "not_assessed"}, result["candidate_source"])
+            self.assertEqual("0.6.0", result["released_evaluator"]["version"])
+
+    def test_exact_0_5_without_focus_degrades_only_selected_scope(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            completed = self.invoke(target, mode="no-focus", version="0.5.0", artifact="WO-TST-001")
+
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            result = json.loads(completed.stdout)
+            self.assertEqual("degraded", result["outcome"])
+            self.assertEqual("not_assessable", result["selected"]["status"])
+            self.assertEqual("passed", result["integrity"]["outcome"])
+            self.assertTrue(result["validation"]["valid"])
+            operation_ids = [item["id"] for item in result["execution_receipt"]["execution"]["operations"]]
+            self.assertNotIn("focus-json", operation_ids)
+            self.assertIn(
+                {"code": "AEXORI030", "operation": "focus-json", "status": "not_assessable"},
+                result["execution_receipt"]["validation"]["deviations"],
+            )
+
+    def test_required_identity_failure_blocks_before_integrity_and_preserves_state(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            before = snapshot(target)
+            completed = self.invoke(target, mode="identity-fail")
+
+            self.assertEqual(2, completed.returncode)
+            self.assertEqual(before, snapshot(target))
+            result = json.loads(completed.stdout)
+            self.assertEqual("blocked", result["outcome"])
+            self.assertEqual(
+                ["version", "identity"],
+                [item["id"] for item in result["execution_receipt"]["execution"]["operations"]],
+            )
+
+    def test_invalid_graph_blocks_before_inspection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            completed = self.invoke(target, mode="invalid-graph")
+
+            self.assertEqual(2, completed.returncode)
+            result = json.loads(completed.stdout)
+            self.assertEqual("blocked", result["outcome"])
+            self.assertFalse(result["validation"]["valid"])
+            operation_ids = [item["id"] for item in result["execution_receipt"]["execution"]["operations"]]
+            self.assertIn("validate-json", operation_ids)
+            self.assertNotIn("inspect-json", operation_ids)
+
+    def test_malformed_required_json_fails_and_large_output_is_bounded(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            malformed = self.invoke(target, mode="malformed-validation")
+            self.assertEqual(2, malformed.returncode)
+            malformed_result = json.loads(malformed.stdout)
+            self.assertEqual("failed", malformed_result["outcome"])
+            self.assertIn("AEXORI021", malformed.stdout)
+
+            large = self.invoke(target, mode="large-output")
+            self.assertEqual(2, large.returncode)
+            large_result = json.loads(large.stdout)
+            self.assertEqual("blocked", large_result["outcome"])
+            self.assertLess(len(large.stdout), 50_000)
+
+    def test_managed_integrity_diagnostic_redacts_secret_and_host_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            completed = self.invoke(target, mode="doctor-fail")
+
+            self.assertEqual(2, completed.returncode)
+            result = json.loads(completed.stdout)
+            rendered = json.dumps(result, sort_keys=True)
+            self.assertNotIn("top-secret", rendered)
+            self.assertNotIn(str(target), rendered)
+            self.assertIn("secret=<redacted>", rendered)
+
+    def test_preflight_is_explicit_and_cannot_be_rendered_as_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            completed = self.invoke(
+                target,
+                mode="preflight-blocked",
+                artifact="WO-TST-001",
+                preflight_phase="review",
+            )
+
+            self.assertEqual(2, completed.returncode)
+            result = json.loads(completed.stdout)
+            self.assertEqual("blocked", result["outcome"])
+            self.assertFalse(result["preflight"]["ready"])
+            self.assertNotIn("approved", completed.stdout.lower())
+
+    def test_preflight_rejects_non_work_order_selection_without_running_evaluator(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            completed = self.invoke(target, artifact="REQ-TST-001", preflight_phase="start")
+
+            self.assertEqual(2, completed.returncode)
+            result = json.loads(completed.stdout)
+            self.assertEqual([], result["execution_receipt"]["execution"]["operations"])
+            self.assertEqual("blocked", result["outcome"])
+
+    def test_unsupported_old_evaluator_and_missing_launcher_block_without_target_writes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = self.make_target(Path(temporary))
+            before = snapshot(target)
+            old = self.invoke(target, version="0.4.9")
+            self.assertEqual(2, old.returncode)
+            self.assertEqual([], json.loads(old.stdout)["execution_receipt"]["execution"]["operations"])
+
+            command = [
+                sys.executable,
+                "-B",
+                str(ORIENT),
+                str(target),
+                "--evaluator-launcher-json",
+                json.dumps([str(Path(temporary) / "missing-evaluator")]),
+                "--expected-evaluator-version",
+                "0.6.0",
+                "--expected-evaluator-root",
+                str(Path(temporary) / "missing-root"),
+            ]
+            missing = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(2, missing.returncode)
+            self.assertEqual("blocked", json.loads(missing.stdout)["outcome"])
+            self.assertEqual(before, snapshot(target))
+
+
+if __name__ == "__main__":
+    unittest.main()

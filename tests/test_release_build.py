@@ -1,13 +1,19 @@
 from __future__ import annotations
 
+import base64
 import gzip
+import hashlib
 import io
 from pathlib import Path
 import subprocess
 import sys
 import tarfile
 import tempfile
+import tomllib
 import unittest
+import zipfile
+
+from se_harness import __version__
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -163,6 +169,116 @@ class DeterministicSdistTests(unittest.TestCase):
         self.assertEqual(2, result.returncode)
         self.assertIn("already exists", result.stderr)
         self.assertEqual(b"repository-owned", output.read_bytes())
+
+    def test_portable_skill_distribution_surface_is_explicit_and_unique(self) -> None:
+        pyproject = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        data_files = pyproject["tool"]["setuptools"]["data-files"]
+        prefix = "share/se-harness/templates/repository/standard/.agents/skills/harness-orient"
+        distributed = [
+            relative
+            for destination, relatives in data_files.items()
+            if destination == prefix or destination.startswith(prefix + "/")
+            for relative in relatives
+        ]
+        self.assertEqual(
+            [
+                "templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
+                "templates/repository/standard/.agents/skills/harness-orient/skill-contract.json",
+                "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+            ],
+            distributed,
+        )
+        self.assertEqual(len(distributed), len(set(distributed)))
+        manifest = (REPOSITORY_ROOT / "MANIFEST.in").read_text(encoding="utf-8")
+        self.assertIn(
+            "recursive-include templates/repository/standard/.agents/skills/harness-orient *.json *.md *.py",
+            manifest,
+        )
+        self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
+
+    def test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_one_skill_core(self) -> None:
+        def record_digest(raw: bytes) -> str:
+            encoded = base64.urlsafe_b64encode(hashlib.sha256(raw).digest()).rstrip(b"=")
+            return "sha256=" + encoded.decode("ascii")
+
+        with tempfile.TemporaryDirectory(prefix="se-harness-non-promotable-") as temporary:
+            root = Path(temporary)
+            wheel_dir = root / "non-promotable-ephemeral-wheel"
+            wheel_dir.mkdir()
+            wheel = wheel_dir / f"se_harness-{__version__}-py3-none-any.whl"
+            distribution = f"se_harness-{__version__}.dist-info"
+            data_prefix = f"se_harness-{__version__}.data/data/share/se-harness/templates/repository/standard"
+            members: dict[str, bytes] = {}
+            for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*")):
+                if path.is_file() and path.suffix in {".py", ".json"}:
+                    members[f"se_harness/{path.name}"] = path.read_bytes()
+            template_root = REPOSITORY_ROOT / "templates/repository/standard"
+            for path in sorted(template_root.rglob("*")):
+                if path.is_file() and "__pycache__" not in path.parts:
+                    members[f"{data_prefix}/{path.relative_to(template_root).as_posix()}"] = path.read_bytes()
+            members[f"{distribution}/METADATA"] = (
+                "Metadata-Version: 2.1\n"
+                "Name: se-harness\n"
+                f"Version: {__version__}\n"
+                "Requires-Python: >=3.11\n"
+            ).encode("utf-8")
+            members[f"{distribution}/WHEEL"] = (
+                "Wheel-Version: 1.0\n"
+                "Generator: verifier-owned-non-promotable-fixture\n"
+                "Root-Is-Purelib: true\n"
+                "Tag: py3-none-any\n"
+            ).encode("utf-8")
+            members[f"{distribution}/entry_points.txt"] = b"[console_scripts]\nharnessctl = se_harness.cli:main\n"
+            record_path = f"{distribution}/RECORD"
+            record_lines = [
+                f"{name},{record_digest(raw)},{len(raw)}"
+                for name, raw in sorted(members.items())
+            ]
+            record_lines.append(f"{record_path},,")
+            members[record_path] = ("\n".join(record_lines) + "\n").encode("utf-8")
+            with zipfile.ZipFile(wheel, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+                for name, raw in sorted(members.items()):
+                    archive.writestr(name, raw)
+
+            with zipfile.ZipFile(wheel) as archive:
+                skill_members = [
+                    name
+                    for name in archive.namelist()
+                    if "/.agents/skills/harness-orient/" in name
+                ]
+                self.assertEqual(
+                    [
+                        f"{data_prefix}/.agents/skills/harness-orient/SKILL.md",
+                        f"{data_prefix}/.agents/skills/harness-orient/scripts/orient.py",
+                        f"{data_prefix}/.agents/skills/harness-orient/skill-contract.json",
+                    ],
+                    skill_members,
+                )
+                self.assertFalse(any("/se_harness/skills/" in name for name in archive.namelist()))
+
+            environment = root / "fresh-environment"
+            subprocess.run([sys.executable, "-m", "venv", str(environment)], check=True, cwd=root)
+            python = environment / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
+            installed = subprocess.run(
+                [str(python), "-I", "-m", "pip", "install", "--no-index", "--no-deps", str(wheel)],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, installed.returncode, installed.stderr)
+            target = root / "fresh-repository"
+            initialized = subprocess.run(
+                [str(python), "-I", "-m", "se_harness", "init", str(target), "--project-name", "Wheel Fixture"],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(0, initialized.returncode, initialized.stderr)
+            for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
+                source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient" / relative
+                self.assertEqual(source.read_bytes(), (target / ".agents/skills/harness-orient" / relative).read_bytes())
 
 
 if __name__ == "__main__":
