@@ -81,14 +81,9 @@ The harness can enforce supported repository policy when configured, but it does
 ## What the tools can and cannot do
 
 `harnessctl check` combines one selected scope, executable quality gates, and a
-typed procedure into one authoritative structured result. Its direct human
-renderer is deterministic for terminals and exact-format consumers. A coding
-agent may explain the same result in clearer language, but it must preserve the
-artifact identities, observed effects, important non-effects, blockers,
-lifecycle state, accountable decision, and one recommended next action.
-`focus` projects the selected chain. `inspect` remains a separately labeled
-repository-wide maintenance view whose unrelated findings are not selected
-work; inspection summarizes current attention. `harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard` remain derived observations. None of these commands approves work.
+typed procedure into one canonical concise restitution. `focus` projects the
+selected chain. `inspect` remains a separately labeled repository-wide
+maintenance view whose unrelated findings are not selected work; inspection summarizes current attention. `harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard` remain derived observations. None of these commands approves work.
 
 Preparation commands may create `ready` records. `transition` records only
 explicit accountable decisions and plans by default; `--apply` changes exactly

@@ -163,36 +163,6 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 for phrase in forbidden:
                     self.assertNotIn(phrase, text.lower())
 
-    def test_handoff_policy_separates_structured_authority_from_presentation(self) -> None:
-        router = (STANDARD_ROOT / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
-        workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
-        agents = (STANDARD_ROOT / "AGENTS.md.fragment").read_text(encoding="utf-8")
-        claude = (STANDARD_ROOT / "CLAUDE.md.fragment").read_text(encoding="utf-8")
-
-        self.assertIn("The structured\nresult is authoritative", router)
-        self.assertIn("SHOULD summarize the result clearly", router)
-        self.assertIn("MAY adapt wording and structure", router)
-        self.assertIn("deterministic human renderer directly", router)
-        self.assertIn("Model transcription MUST NOT", router)
-
-        for phrase in (
-            "structured result is authoritative",
-            "observed effects from incomplete expected effects",
-            "every exact blocker and every material non-effect",
-            "exactly one current typed procedure step",
-            "command argument values and boundaries",
-            "workflow-declared complete alternatives",
-            "direct renderer's existing headings",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, workflow)
-
-        self.assertIn("schema-2 structured result as\nauthoritative", agents)
-        self.assertIn("authoritative schema-2 result", claude)
-        for text in (router, workflow, agents, claude):
-            self.assertNotIn("block verbatim", text)
-            self.assertNotIn("restitution verbatim", text)
-
 
 if __name__ == "__main__":
     unittest.main()

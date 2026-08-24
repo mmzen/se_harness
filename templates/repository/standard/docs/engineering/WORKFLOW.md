@@ -195,44 +195,26 @@ For an accountable lifecycle decision:
 Use one transition packet when several definitions are mutually dependent and
 each transition is explicitly named. A packet MUST NOT infer an omitted target.
 
-## Lifecycle handoff procedure
+## Lifecycle restitution procedure
 
-After a completed stage or a stop condition, the agent MUST obtain the selected
-workflow result from `harnessctl check` or another command using
-`--result-schema 2`. The structured result is authoritative for the outcome,
-selected scope, effects, non-effects, blockers, final lifecycle state,
-accountable decision, declared alternatives, and next procedure step. The
-agent MUST NOT recompute or replace those values.
+After a completed stage or a stop condition, the agent MUST return the human
+block emitted by `harnessctl check` or another command using
+`--result-schema 2`. The headings MUST occur in this order:
 
-For an adaptive human handoff, the agent SHOULD lead with the outcome or the
-decision the user needs to make. It MAY adapt wording, order, and headings; add
-relevant explanation; merge fields whose separate meanings remain clear; and
-omit empty fields. It MUST:
+1. `Outcome`
+2. `Done`
+3. `Not done`
+4. `Blocked by` only for a blocked outcome
+5. `Current lifecycle state`
+6. `Decision required`
+7. `Next`
+8. `Command or response`
+9. `Alternatives` only when the selected rule names complete alternative procedures
 
-1. use actual artifact IDs and state whether the selected operation completed
-   or blocked;
-2. distinguish observed effects from incomplete expected effects;
-3. preserve every exact blocker and every material non-effect whose omission
-   could imply approval, transition, verification, release, Git, publication,
-   deployment, operation, or another external effect;
-4. state the final lifecycle state and identify the accountable role and exact
-   decision when one is required;
-5. recommend exactly one current typed procedure step;
-6. preserve command argument values and boundaries or the operative meaning of
-   a suggested response; and
-7. present only workflow-declared complete alternatives, separately from the
-   primary recommendation.
-
-The agent MUST NOT invent an effect, authority, blocker, decision, alternative,
-or next action; add a repository-wide finding to the selected result; ask an
-open-ended question instead of presenting the selected recommendation; or turn
-an alternative into a second next action.
-
-When exact headings, field order, whitespace, or bytes are required, the
-application or automation MUST invoke the deterministic schema-2 human renderer
-directly and use its output unchanged. Model transcription MUST NOT be used for
-exact rendering. The direct renderer's existing headings and empty-value rules
-remain its contract; they do not constrain an adaptive agent handoff.
+The agent MUST return this block verbatim, without a preface, conclusion,
+repository-wide finding, open-ended question, or second next action. `Done`
+contains observed effects only and MUST use actual artifact IDs. `Not done`
+contains incomplete expected effects only. The `Next` value names exactly one current typed procedure step.
 
 ## Failure procedure
 

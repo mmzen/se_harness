@@ -35,7 +35,7 @@ BASELINE_STOP_CONDITIONS = (
     "remediation would exceed the selected work order",
     "the requested action lacks the decision right or explicit authority defined",
 )
-PACKAGED_FRAGMENT_BLOCK_DIGEST = "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
+PACKAGED_FRAGMENT_BLOCK_DIGEST = "bed4eb168f7a2249eebbb8eb415bb2ce4b8791a1eada2736a900fc93c6ee0e93"
 # Files permitted to name the retired path, with the reason each is not a live obligation.
 PERMITTED_MENTIONS = {
     "AGENTS.md": "owner region of this repository, governed by REQ-IAR-020",

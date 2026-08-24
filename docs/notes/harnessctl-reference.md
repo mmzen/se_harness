@@ -28,8 +28,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
-| `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its authoritative structured handoff |
-| `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit the authoritative schema-2 result |
+| `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its canonical handoff |
+| `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit canonical schema-2 restitution |
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
@@ -131,22 +131,11 @@ Paths use `/`, exact-file or component-boundary directory-prefix matching, and
 reject absolute, traversal, backslash, wildcard, drive, URI, control-character,
 reserved-device, duplicate, and case-ambiguous forms.
 
-`check` always emits `se-harness-workflow-result-v2`. That structured result is
-authoritative. The deterministic direct human renderer uses `Outcome`, `Done`,
-`Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
-required`, `Next`, `Command or response`, and conditional `Alternatives` in
-that order. Exact-format consumers must use this renderer directly rather than
-ask a model to transcribe it. Existing workflow commands default to result
-schema 1 during the compatibility window; select `--result-schema 2` for the
-authoritative lifecycle semantics.
-
-An agent-facing handoff may adapt wording, ordering, headings, and relevant
-explanation or omit empty fields. It remains conforming only when it preserves
-actual artifact IDs, outcome, observed effects, incomplete work, material
-non-effects, blockers, final lifecycle state, the accountable decision,
-command argument boundaries or suggested-response meaning, and exactly one
-recommended next action. Workflow-declared alternatives remain separate from
-that recommendation. Agent prose never becomes lifecycle authority.
+`check` always emits `se-harness-workflow-result-v2`. Human output contains only
+`Outcome`, `Done`, `Not done`, conditional `Blocked by`, `Current lifecycle
+state`, `Decision required`, `Next`, `Command or response`, and conditional
+`Alternatives`. Existing workflow commands default to result schema 1 during
+the compatibility window; select `--result-schema 2` for canonical restitution.
 
 `transition` resolves IDs from formal metadata and plans by default. Each
 selected ID needs one actor assertion. Rejection needs a non-empty reason; VREC
@@ -161,10 +150,9 @@ effects and non-effects for each state are defined only by the matching
 `WORKFLOW.json` rule. Related artifacts require separate explicit selection,
 passing gates, and authority.
 
-Direct human and JSON output are rendered from the same semantic workflow
-result. Schema 2 always identifies exactly one typed next step and derives its
-command argument array or response from the selected procedure. Adaptive agent
-presentation consumes that result; it does not replace or recompute it.
+Human and JSON output are rendered from the same semantic workflow result.
+Schema 2 always identifies exactly one typed next step and derives its command
+argument array or response from the selected procedure.
 
 ## Safe repository upgrade
 

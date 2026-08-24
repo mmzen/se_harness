@@ -69,27 +69,20 @@ MUST NOT restate its rules.
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
 source.
 
-## Lifecycle handoff
+## Lifecycle restitution
 
 After completing a lifecycle stage or reaching a stop condition, the actor MUST
-obtain the selected workflow result using result schema 2. The structured
-result is authoritative. The actor MUST preserve its actual artifact IDs,
-lifecycle state, observed effects, material non-effects, blockers, accountable
-decision, recommended next action, and command argument boundaries or suggested
-response meaning. It MUST NOT claim an effect, decision, or authority absent
-from that result.
+return the canonical human block produced by selected `harnessctl check`,
+`harnessctl focus --result-schema 2`, or another workflow command using
+`--result-schema 2`. The headings are `Outcome`, `Done`,
+`Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
+required`, `Next`, `Command or response`, and conditional `Alternatives`.
 
-For human interaction, the actor SHOULD summarize the result clearly and
-concisely. It MAY adapt wording and structure to the user and situation, add
-relevant explanation, and omit empty fields. It MUST distinguish completed
-work from remaining work, identify any required accountable decision, and
-recommend exactly one next action. Complete alternatives MAY be shown
-separately. It MUST NOT add an unrelated finding or another recommendation.
-
-When exact headings or bytes are required, the application or automation MUST
-invoke the deterministic human renderer directly. Model transcription MUST NOT
-be used as the enforcement mechanism. The complete procedure is
-`WORKFLOW.md#lifecycle-handoff-procedure`.
+The actor MUST return that block verbatim, use actual artifact IDs, expose one
+typed next step, report only effects that occurred, and preserve every stated
+non-effect. It MUST NOT add a preface, conclusion, unrelated finding,
+open-ended question, or second next action. The complete procedure is
+`WORKFLOW.md#lifecycle-restitution-procedure`.
 
 ## Stop conditions
 
