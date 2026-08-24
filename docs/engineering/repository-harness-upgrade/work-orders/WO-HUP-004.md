@@ -2,10 +2,10 @@
 id = "WO-HUP-004"
 type = "work_order"
 title = "Replace version-specific predecessor CI with portable governor succession"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-23"
-updated = "2026-08-23"
+updated = "2026-08-24"
 
 [assurance]
 commit_bound_verification = "required"
@@ -49,16 +49,22 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-23T20:23:09Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T06:53:23Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Replace version-specific predecessor CI with portable governor succession
 
 ## Lifecycle
 
-The corrective packet is approved and this work order is `in_progress`.
-Implementation and local qualification are authorized; completion,
-commit-bound verification, commit, push, and hosted execution remain separate
-governed actions.
+The corrective packet is approved and this work order became `implemented` at
+`2026-08-24T06:53:23Z` after its local and hosted qualification passed.
+Implementation completion does not itself verify the candidate, merge the pull
+request, or authorize any release or external action.
 
 ## Objective
 

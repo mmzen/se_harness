@@ -14,9 +14,11 @@ root/template inequality.
 
 Local qualification passes. The first hosted candidate proved every lane except
 the changed-version pull-request assessment and exposed one POSIX virtual-
-environment symlink defect. Its bounded correction is locally qualified and
-uncommitted. `WO-HUP-004` remains `in_progress` pending a corrected candidate,
-green hosted replay, and its separately governed completion decision.
+environment symlink defect. Corrected candidate
+`5300a93332056a4b37d61c3f98eeb6c23a474a3c` passes every push and pull-request
+lane. `WO-HUP-004` became `implemented` at `2026-08-24T06:53:23Z` under the
+engineering owner's explicit completion decision. Completion does not itself
+verify the candidate or authorize a merge, release, or external action.
 
 artifact: WO-HUP-004
 checkpoint: handoff
@@ -33,10 +35,12 @@ formal_snapshot_sha256: fa548ea1ff6359257fa0918e8ac5009405276526ba0ca11ba80bddf4
 - First operational candidate:
   `98f5aba4315744919f4a3646b7ca4ffe55c9bee3`, committed and pushed to
   `proposal/root-governor-0.6.0` under later explicit authority.
-- This ledger records that candidate's hosted observations and the uncommitted
-  POSIX correction. It records no VREC decision, merge, release, publication,
-  deployment, maintenance mutation, external-policy change, or root-evaluator
-  upgrade.
+- Corrected candidate:
+  `5300a93332056a4b37d61c3f98eeb6c23a474a3c`, committed and pushed to the same
+  branch under later explicit authority.
+- This ledger records both candidates' hosted observations. It records no VREC
+  decision, merge, release, publication, deployment, maintenance mutation,
+  external-policy change, or root-evaluator upgrade.
 
 ## Implemented behavior
 
@@ -152,6 +156,17 @@ launcher directory. The two POSIX cases execute on Linux and are skipped on
 Windows. An Ubuntu 24.04 WSL replay executed all 16 governor-transition tests,
 including both POSIX symlink cases, with zero failures or skips.
 
+Corrected candidate `5300a93332056a4b37d61c3f98eeb6c23a474a3c`
+then passed the complete hosted matrix:
+
+- Push governor-transition run `32698850052`: pass, same-version
+  `not_applicable`.
+- Pull-request governor-transition run `32698851872`: pass, real
+  0.5.0-to-0.6.0 target-governor assessment.
+- Both managed validation jobs, candidate-source jobs, candidate-package jobs,
+  Linux migrations, Windows migrations, and platform-reconciliation jobs:
+  pass.
+
 ## Complete tests and repository gates
 
 - Python 3.14.6 after the POSIX correction: 487 tests passed in 283.039
@@ -208,8 +223,10 @@ The complete local change set is exactly the 16 paths declared by
 No managed/current-governor workflow, root configuration or lock, product or
 candidate template, package version, VREC/RLS/REL record, tag, publication or
 deployment workflow, maintenance state, external policy, or root evaluator
-changed. The only Git-ref mutation was the authorized push of candidate
-`98f5aba4315744919f4a3646b7ca4ffe55c9bee3`; its credential was used only for
-that push and hosted-log inspection. The POSIX correction remains local and
-uncommitted, and its corrected hosted pull-request assessment remains the only
-unexecuted `VER-HUP-004` case.
+changed. The only Git-ref mutations were the authorized pushes of candidates
+`98f5aba4315744919f4a3646b7ca4ffe55c9bee3` and
+`5300a93332056a4b37d61c3f98eeb6c23a474a3c`; the credential was used only for
+those pushes and hosted-result inspection. All `VER-HUP-004` local and hosted
+cases now pass. This post-candidate evidence update and the exact
+`in_progress`-to-`implemented` transition are retained together in the
+authorized local governance commit; that commit is not pushed by this action.
