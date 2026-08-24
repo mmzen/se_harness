@@ -19,6 +19,47 @@ decided_by = "quality-owner"
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance
 
+## Second amendment, 2026-08-24 — accepted
+
+Amended under `WO-HBI-004`. The first amendment below closed a coverage gap and
+introduced a mechanism that carried one of its own: `ByteExactSurfaceTests` derived
+its inventory from the declared patterns, so it asserted that every declared pattern
+is alive and effective and had nothing to say about a committed file no pattern
+matched. Pull request #143 added
+`templates/repository/standard/.agents/skills/*/agents/openai.yaml` with a byte-exact
+assertion twenty-three minutes before `WO-HBI-003` merged; the guard passed and the
+release orchestrator's `windows-2022` candidate qualification failed on three tests.
+
+The amendment moves the inventory's source. It is now the tracked set — named files
+plus every tracked path under a declared tree — so coverage no longer depends on a
+file's extension. The `REQ-HBI-001` byte-rule-completeness row below is restated
+accordingly, one row and one scenario are added, and one property bullet is added.
+The amendment adds obligation and relaxes no pass condition: the liveness obligation
+on each declared pattern is preserved as a liveness obligation on each named file and
+each declared tree, and the effectiveness and non-conversion obligations are
+unchanged over a strictly larger inventory. No approved `statement` field changed.
+
+The accountable repository owner decided this amendment's substance on 2026-08-24 by
+selecting, over three measured options: "New small work order: add the *.yaml byte
+rule to the owner region, and change `ByteExactSurfaceTests` to derive its inventory
+from the suite's byte-exact assertions rather than from the declared patterns, so
+this class cannot recur on the next new extension. Own branch, own PR, own trailer.
+The rule is one line; the guard change is the real work and needs `VER-HBI-001`
+coverage for it." Implementation departed from that framing twice, deliberately and
+in the same direction — a tree rule rather than a `*.yaml` rule, and a tracked-set
+inventory rather than an assertion-derived one — and `WO-HBI-004` discloses both with
+the measurements they rest on. Scenario 9 was measured before this text was written,
+not after. The acceptance authorizes no verification, merge, release, publication or
+deployment.
+
+The reserved-name test-portability defect fixed under the same work order is not
+covered here. It is `VER-AEX-001`'s existing security check, "Exercise absolute,
+traversal, dot-component, alternate-separator, drive, device, URI, wildcard,
+symlink/junction escape, case-collision, reserved-name, control-character, and
+invalid-encoding paths", which that fix brings into conformance on every platform
+rather than only where a reserved basename can exist as a file. No `VER-AEX-001`
+amendment is needed and none is made.
+
 ## Amendment, 2026-08-24 — accepted
 
 Amended under `WO-HBI-003`. `WO-RLO-005`'s publication-rehearsal lane executed on
@@ -69,7 +110,8 @@ implementation prints.
 | `REQ-HBI-001` | Region placement | `template` class present only in owner content, and `repository` class present only in the managed block | Each misplacement is reported ineffective |
 | `REQ-HBI-001` | Template parity | Candidate `templates/repository/standard/gitattributes.fragment` versus declared `template` classes | Byte-identical for every `template`-region class; a divergence fails a static check |
 | `REQ-HBI-001` | Fail-closed matrix | Unreadable `.gitattributes`, unavailable Git, attribute resolution failure, untracked declared path | Every case is a failing named check with the exact reason; none passes and none is advisory |
-| `REQ-HBI-001` | Byte-rule completeness beyond declared classes | Every tracked path selected by the byte-exact inventory in `tests/test_hash_bound_integrity.py`, resolved through `se_harness.hash_bound` and cross-read with `git ls-files --eol` | Every pattern selects at least one tracked file, every selected path resolves `text` set and `eol=lf`, and no selected path is converted in the working tree; a missing rule fails naming the path and the conversion observed |
+| `REQ-HBI-001` | Byte-rule completeness beyond declared classes | The byte-exact inventory in `tests/test_hash_bound_integrity.py`, derived from the tracked set as named files plus every tracked path under a declared tree, resolved through `se_harness.hash_bound` and cross-read with `git ls-files --eol` | Every named file is tracked, every declared tree holds a tracked file, the inventory holds every tracked path under each declared tree, every inventory path resolves `text` set and `eol=lf`, and none is converted in the working tree; a missing rule fails naming the path and the conversion observed |
+| `REQ-HBI-001` | Extension independence of a byte-exact tree | A fresh `core.autocrlf=true` clone of a probe repository carrying this checkout's own `.gitattributes`, holding a file with an unseen extension inside a declared tree and a file outside it | The unseen extension resolves `text` set and `eol=lf` and its checked-out bytes contain no CR, the path outside the tree resolves unspecified, and a per-extension rule set fails this case |
 | `REQ-HBI-002` | Mode-divergence detection | One declared class hashed under both modes across callers | Test fails naming the class and both observed modes |
 | `REQ-HBI-002` | Lock mode convergence | `upgrade_authorization` and `release_bootstrap` compare a lock digest on LF and CRLF checkouts | Both compute the same canonical digest and reach the same verdict in both checkouts |
 | `REQ-HBI-002` | Legacy recognition | `WO-HUP-002`'s recorded `prior_lock_sha256` against canonical-mode comparison | Comparison succeeds through documented newline-variant recognition, reports the legacy match distinctly, and the recorded field is unchanged on disk |
@@ -98,6 +140,13 @@ implementation prints.
    of the owner-region byte rules that `WO-HBI-003` declares makes
    `ByteExactSurfaceTests` fail, naming that path and the `crlf` it observed, and
    restoring it passes.
+9. In a checkout created with `git worktree add` and `core.autocrlf=true`, replacing
+   the declared tree rule with `WO-HBI-003`'s three per-extension rules and
+   re-materializing the tree makes `ByteExactSurfaceTests` fail, naming each
+   `agents/openai.yaml` path and the `crlf` it observed and failing the
+   extension-independence case; restoring the tree rule passes. A file with an
+   extension no rule has ever named, added anywhere inside a declared tree, needs no
+   new rule.
 
 ## Property and invariant tests
 
@@ -116,8 +165,14 @@ implementation prints.
   suite.
 - Every committed path whose exact bytes the suite compares resolves an effective
   versioned byte rule from repository content, and none is converted in the working
-  tree. A declared pattern that selects no tracked file fails rather than passing
+  tree. A declared name or tree that selects no tracked file fails rather than passing
   vacuously.
+- The byte-exact inventory is closed under adding a file: a tracked file inside a
+  declared tree is in the inventory whatever its extension, so coverage cannot be
+  narrower than the tree. The inventory is read from the tracked set, never from the
+  rules under test, and the rules are read from the working tree rather than from
+  `HEAD`, so an edited rule is assessed in the commit that makes it and not in the
+  next one.
 
 ## Static and architecture checks
 
@@ -184,3 +239,15 @@ remain outside the assessed set. Binary and generated content, uncommitted
 release-bundle text, and validator-plane enforcement remain out of scope. Whether
 the validator plane should also carry this rule is `INT-HBI-001`'s open decision
 and is not settled by this contract.
+
+One residual is named exactly, because the second amendment narrowed the gap rather
+than closing it. A byte-exact assertion added on a path in no declared tree and in no
+named file is still uncovered by `ByteExactSurfaceTests`, which cannot see an
+assertion it has no inventory entry for. Deriving the inventory from the assertions
+themselves was measured and rejected in `WO-HBI-004`: the assertion that caused this
+amendment resolves its path from a loop variable, so no source scan can name it
+without guessing. The detector that does cover this residual is the full suite run in
+a `core.autocrlf=true` checkout created with `git worktree add`, which is the
+orchestrator's own construction and which scenarios 8 and 9 require. It reports the
+failure at integration time on the pull request rather than on publication day, and
+it is the only mechanism this contract relies on for a surface no rule names.
