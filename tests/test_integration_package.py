@@ -10,6 +10,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 
@@ -394,6 +395,14 @@ class IntegrationPackageContractTests(unittest.TestCase):
         with self.assertRaises(integration.IntegrationPackageError):
             integration._prepare_output(output, wheel, manifest)
         self.assertEqual("keep", marker.read_text(encoding="utf-8"))
+
+    def test_install_root_expands_windows_short_path_before_virtualenv(self) -> None:
+        alias = r"C:\Users\RUNNER~1\AppData\Local\Temp\integration"
+        expected = self.root.resolve()
+        with mock.patch.object(integration.os.path, "realpath", return_value=str(expected)) as realpath:
+            actual = integration._canonical_existing_directory(alias)
+        self.assertEqual(expected, actual)
+        realpath.assert_called_once_with(alias, strict=True)
 
     def test_workflow_has_qualified_three_stage_non_release_lane(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")

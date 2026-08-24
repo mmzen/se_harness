@@ -872,12 +872,20 @@ def _isolated_environment() -> dict[str, str]:
     return environment
 
 
+def _canonical_existing_directory(path: str | os.PathLike[str]) -> Path:
+    """Resolve aliases such as Windows 8.3 names before creating a venv."""
+    resolved = Path(os.path.realpath(os.fspath(path), strict=True))
+    if not resolved.is_dir():
+        raise IntegrationPackageError(f"temporary root is not a directory: {resolved}")
+    return resolved
+
+
 def install_test(payload: Path, checkout: Path, expected: dict[str, Any]) -> dict[str, Any]:
     manifest = verify_payload(payload, **expected)
     checkout = checkout.resolve(strict=True)
     before = repository_snapshot(checkout)
     with tempfile.TemporaryDirectory(prefix="se-harness-integration-install-") as temporary_name:
-        temporary = Path(temporary_name)
+        temporary = _canonical_existing_directory(temporary_name)
         environment_root = temporary / "environment"
         venv.EnvBuilder(with_pip=True, clear=False).create(environment_root)
         if os.name == "nt":
