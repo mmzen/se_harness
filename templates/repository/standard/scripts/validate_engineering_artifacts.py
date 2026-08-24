@@ -1667,10 +1667,21 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
             if prepared:
                 _validate_timestamp(artifact, "prepared_at", errors, report_root)
                 _require_non_empty_string(artifact, "prepared_by", errors, report_root, plane="governance")
-            if artifact.status in {"verified", "released", "superseded"}:
+            if artifact.status in {"verified", "released"}:
                 _validate_timestamp(artifact, "verified_at", errors, report_root)
                 if prepared:
                     _require_non_empty_string(artifact, "verified_by", errors, report_root, plane="governance")
+            elif artifact.status == "superseded":
+                if prepared:
+                    for field_name in ("verified_at", "verified_by"):
+                        if field_name in artifact.metadata:
+                            _add_error(
+                                errors, artifact, report_root, "E009",
+                                f"prepared superseded verification_record must omit decision field '{field_name}'",
+                                plane="governance",
+                            )
+                else:
+                    _validate_timestamp(artifact, "verified_at", errors, report_root)
             snapshot_hash = _require_non_empty_string(
                 artifact,
                 "artifact_snapshot_sha256",

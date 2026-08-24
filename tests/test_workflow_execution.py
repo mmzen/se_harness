@@ -382,6 +382,40 @@ paths = ["src/"]
         self.assertEqual(work_before, work_order.read_bytes())
         self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
+    def test_ready_prepared_vrec_can_be_superseded_without_verification_decision_fields(self) -> None:
+        source = self.ready_vrec()
+        successor = self.ready_vrec("VREC-002")
+        code, _, error = self.invoke(
+            "transition", str(self.root),
+            "--set", "VREC-002=verified",
+            "--decision", "VREC-002=quality-owner",
+            "--apply",
+        )
+        self.assertEqual(0, code, error)
+        self.assertIn('status = "verified"', successor.read_text(encoding="utf-8"))
+
+        before = source.read_text(encoding="utf-8")
+        code, output, error = self.invoke(
+            "transition", str(self.root),
+            "--set", "VREC-001=superseded",
+            "--decision", "VREC-001=quality-owner",
+            "--reason", "VREC-001=VREC-002",
+            "--apply", "--json",
+        )
+        self.assertEqual(0, code, error or output)
+        self.assertEqual("completed", json.loads(output)["operation"]["outcome"])
+        updated = source.read_text(encoding="utf-8")
+        self.assertIn('status = "superseded"', updated)
+        self.assertIn('prepared_at = "2026-08-20T10:00:00Z"', updated)
+        self.assertIn('prepared_by = "quality-owner"', updated)
+        self.assertNotIn("verified_at =", updated)
+        self.assertNotIn("verified_by =", updated)
+        self.assertIn('supersession_authorized_by = "quality-owner"', updated)
+        self.assertIn('superseded_by = ["VREC-002"]', updated)
+        self.assertIn('reason = "VREC-002"', updated)
+        self.assertNotEqual(before, updated)
+        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+
     def test_transition_uses_the_same_checkpoint_before_plan_and_apply(self) -> None:
         self.ready_vrec()
         with mock.patch(
