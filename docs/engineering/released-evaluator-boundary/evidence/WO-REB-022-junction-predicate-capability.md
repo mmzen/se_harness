@@ -546,15 +546,17 @@ Both files are inside this work order's execution scope. A lane-independent conf
 
 ### 14.6 Stop and escalate
 
-Two of this work order's stop-and-escalate conditions are met: "The hosted lane still fails after the repair, or fails for a second unrelated cause", and "Another file, lifecycle policy change, historical mutation, released-byte change, or external action is required". Its instruction is "Retain the exact failure and request a bounded amendment. Do not absorb another defect and do not create a bypass."
+This section records the position as it stood at run `32745833437`, before the amendment. It is retained as written rather than revised, because the stop is a fact about that measurement. Sections 14.7 and 14.8 record what followed.
 
-Accordingly:
+Two of this work order's stop-and-escalate conditions were met: "The hosted lane still fails after the repair, or fails for a second unrelated cause", and "Another file, lifecycle policy change, historical mutation, released-byte change, or external action is required". Its instruction is "Retain the exact failure and request a bounded amendment. Do not absorb another defect and do not create a bypass."
+
+Accordingly, at that point:
 
 - The exact failures are retained above, verbatim, with their causes measured rather than inferred.
-- No repair for either cause is committed under this work order's current scope. The candidates exist only in a throwaway worktree and are recorded here as measurements, not as changes.
+- No repair for either cause was committed under the scope as it then stood. The candidates existed only in a throwaway worktree and were recorded here as measurements, not as changes.
 - No test was weakened, skipped, marked expected-failure, or bounded by a platform name to make the lane green. No bypass was created.
-- `WO-REB-022` stays `in_progress`. It is not transitioned to `implemented`, because its own required verification is "Confirm on the hosted lane that the previously failing job passes", and the job does not pass.
-- No verification record binds this work order or `WO-REB-021`, and `VREC-REB-017` is not superseded, until a bounded amendment is decided and the lane is measured green.
+- `WO-REB-022` stayed `in_progress` and was not transitioned to `implemented`, because its own required verification is "Confirm on the hosted lane that the previously failing job passes", and at that commit the job did not pass.
+- No verification record was written for either work order and `VREC-REB-017` was not superseded, pending a decided amendment and a lane measured green. Section 14.8 supplies the green lane; the records themselves remain separate decisions and separate commits, and this file is none of them.
 
 ### 14.7 The amendment, and the repair it authorized
 
@@ -623,12 +625,38 @@ The artifact count stays 786 and the warning count stays 50: the amendment adds 
 
 ### 14.8 Second hosted run
 
-Not yet observed at the time this section was written. The amendment commit is pushed to the same branch and the same pull request, `PR #140`, whose stored event payload already carries `Harness-Work-Order: WO-REB-022`; the push produces a `synchronize` event and a new run. That run's identifier and result are recorded in this section in a bounded follow-up commit. Until that measurement exists this file claims nothing about the pinned lane beyond section 14.2's measured movement and the probe above, and `WO-REB-022` stays `in_progress` for the reason section 14.6 gives.
+Measured, and green. The previously failing job passes.
+
+| Fact | Value |
+| --- | --- |
+| Run | `32752855726` — <https://github.com/mmzen/se_harness/actions/runs/32752855726> |
+| Workflow | `SE Harness Candidate Evidence`, conclusion `success` |
+| Job | `97513599220` `Candidate source evidence`, conclusion `success` |
+| Regression step | `Ran 770 tests in 45.982s`, `OK (skipped=3)` |
+| Event | `pull_request` `synchronize` on `PR #140` |
+| Head commit | `133ab6a` |
+| Started | `2026-08-24T16:47:23Z` |
+
+Every job in the run passes, not only the one that was failing: `Candidate package evidence`, `Governance migration` on both Linux and Windows, `Reconcile governance migration platforms`, `Build deterministic integration package`, `Verify integration package` on both platforms, and the retention job. The two other workflows the same push triggered also pass — `Engineering Harness` (`32752855794`), which is the check that reads `Harness-Work-Order: WO-REB-022` from the stored event payload, and `Governor Transition Assessment` (`32752855684`).
+
+The measured sequence on the pinned lane, at all three commits:
+
+| Commit | Lane result |
+| --- | --- |
+| `f9225f88` (`WO-REB-021` candidate) | `Ran 764 tests`, `FAILED (failures=33, errors=38, skipped=3)` |
+| `def1484` (capability repair) | `Ran 769 tests in 47.229s`, `FAILED (failures=1, errors=1, skipped=3)` |
+| `133ab6a` (amendment repairs) | `Ran 770 tests in 45.982s`, `OK (skipped=3)` |
+
+Seventy-one, then two, then none. The pinned lane's 3 skips are the Windows-only corpus forms, the mirror of this host's 22.
+
+Both retained failures of section 14.3 are gone, and each for its own measured reason rather than by suppression: the link cycle now refuses with `EPS003` because the rule catches the report Python 3.11 actually produces, and `test_external_interpreter_rejects_linked_environment_parent` passes against its own unchanged expectation because the frozen wording is back. No test was skipped, weakened, or bounded by a platform name to reach this result, and the test count rose by one rather than falling.
+
+This closes the work order's last required verification, "Confirm on the hosted lane that the previously failing job passes, and record its identifier". It does not decide completeness: that is the engineering owner's decision under `DR-WO-COMPLETE`, taken against this file rather than recorded in it.
 
 ## 15. Coverage gaps and residual risks
 
-- **The pinned lane is simulated here, not run here.** Section 4's profile withdraws the three routes by name on a Windows host. It reproduces the hosted failure by name for 25 of the 27 boundary-module failures and repairs all of them, but it is not a 3.11 POSIX interpreter. Only section 14's hosted re-run closes this, and it is the reason the work order requires it.
-- **The two POSIX-only preparation tests are still skipped on this host.** Both are skipped for lack of the Windows symbolic-link privilege, so this lane cannot observe them directly. Section 14 measures both of their causes here anyway, by supplying the report the pinned lane produces instead of the platform that produces it; that closes the diagnosis, not the platform coverage, and the hosted lane remains the only place their repair is observable end to end.
+- **The simulated profile is not a 3.11 POSIX interpreter.** Section 4's profile withdraws the three routes by name on a Windows host and reproduces 25 of the 27 hosted boundary-module failures by name, but a withdrawn route is not an absent one. Section 14.8's hosted run is what closes this, and it is the reason the work order required it; the simulation's value is that it fails and passes locally, before a push.
+- **Neither POSIX-only preparation test can run on this host.** Both are skipped for lack of the Windows symbolic-link privilege. Sections 14.5 and 14.7 measure both of their causes and both of their repairs here anyway, by supplying the report the pinned lane produces rather than the platform that produces it, and that is a diagnosis rather than platform coverage. The hosted lane is where they actually run, and section 14.8 is where they pass.
 - **The junction half of the corpus is still Windows-only and the symbolic-link half still POSIX-only.** `VER-REB-010`'s coverage statement that neither platform alone verifies `REQ-REB-024` is unchanged by this repair.
 - **The third route is an inference about the filesystem from the runtime's stat-result surface.** A hypothetical runtime whose stat result omits both members while its filesystem does carry reparse points would be accepted where it should refuse. No supported runtime is in that position: the members and the reparse constants come from the same `_stat` extension under the same platform condition. The risk is recorded rather than dismissed, and the mechanical route table of section 6 is where a future runtime that breaks the assumption would have to be handled.
 - **This file records one platform at one commit.** Nothing here is a verification decision.
