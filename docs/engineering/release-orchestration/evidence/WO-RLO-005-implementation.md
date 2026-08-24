@@ -688,6 +688,44 @@ and reported 928 tests where this workstation reports 932 over the branch tip, a
 hosted legs report 10 skips against 22 here, so no count from this section should be
 carried across to the run recorded below.
 
+## The hosted run after the third merge: both runner types rehearsed
+
+Run [32775622117](https://github.com/mmzen/se_harness/actions/runs/32775622117),
+`pull_request` event, branch head `ec3fbf1`, candidate commit `8a8fce53176a` — the merge
+of `ec3fbf1` into `1d459cf` that GitHub builds for the pull request.
+
+| Job | Conclusion | Result |
+|---|---|---|
+| Refuse orchestrator and rehearsal divergence | success | `EXACT`, `Rehearsed jobs: qualify, resolve on Linux, Windows`, `Rehearsal lane platforms: Linux, Windows`, `No uncovered or stale mechanic.` |
+| Rehearse the credential-free path on Linux | success | `REHEARSED`, 21 mechanics executed, 2 excluded, `candidate unit suite passed (932 tests)`, `source_date_epoch = 1787604282`, both distribution sets byte-identical, 7745 derived paths removed without following a link |
+| Rehearse the credential-free path on Windows | success | `REHEARSED`, 21 mechanics executed, 2 excluded, `candidate unit suite passed (932 tests)`, the same `source_date_epoch = 1787604282`, both distribution sets byte-identical, 7302 derived paths removed without following a link |
+
+`REQ-RLO-015` is now proven by measurement on both halves rather than on one. A hosted
+`windows-2022` runner executed every rehearsable mechanic with nothing injected —
+temporary-path identity, evaluator acquisition with its hash proof through the `Scripts`
+layout, identity proof through `harnessctl.exe`, the complete candidate graph
+qualification at `8a8fce53176a`, a 932-test candidate suite, two builds compared byte for
+byte, sdist normalization at the same epoch as Linux, bundle assembly, both manifest
+verifications, and a teardown of 7302 derived paths — and reported `REHEARSED` at exit 0.
+
+Both legs report the same two exclusions with identical reasons, the predecessor-view
+qualification under rule 37 and the recipe-bound build replay under rule 40, each naming
+its measured identities or its measured obstacle. `unreported_mechanics` is empty on both.
+
+The prediction stated in the section above is therefore confirmed by the run rather than
+by argument, and one figure is worth recording exactly: the hosted candidate suite reports
+932 tests on both runner types, the same count this workstation measures at the branch tip
+in a `core.autocrlf=true` worktree. At the previous merge the same comparison was 928
+hosted against 926 local with four Windows failures; the counts coinciding is `main`'s new
+tests plus `WO-HBI-004`'s four, and the failures being gone is `WO-HBI-004`. The two
+teardown counts still differ by platform, 7745 against 7302, which is a property of the
+runner image and is not a pass condition anywhere in this packet.
+
+What this run does not establish: it does not verify this work order, and it binds nothing.
+`WO-RLO-005`'s `commit_bound_verification` is `required` and unmet, so relying on this
+rehearsal in any release decision still needs a later ready `VREC` and an accountable
+assurance decision.
+
 ## Actions explicitly not performed
 
 Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
