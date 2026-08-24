@@ -1,6 +1,6 @@
 # WO-RLO-004 implementation evidence
 
-> In-progress technical evidence. This file records implementation observations only. It is not a verification decision, release decision, hosted dispatch, publication authorization, or lifecycle transition.
+> Implementation handoff evidence. This file records implementation observations and the separately authorized work-order completion only. It is not a verification decision, release decision, publication authorization, or external-action authority.
 
 ## Bound build identity
 
@@ -13,6 +13,10 @@
 - Runtime: `CPython 3.11.9`, 64-bit
 - Bundle and distribution: `se-harness-release-bundle/v2` and repository distribution schema 2
 - Replay result: `se-harness-release-build-replay/v1`
+- Operational candidate commit: `4fec0d78c1c6a792104506d3fa3c7778bdcd3792`
+- Review branch: `proposal/issue-110-build-recipe-01a02460`
+- Pull request: `https://github.com/mmzen/se_harness/pull/133`
+- Hosted candidate-evidence run: `https://github.com/mmzen/se_harness/actions/runs/32729113623` (`success`, exact head `4fec0d78c1c6a792104506d3fa3c7778bdcd3792`)
 
 The exact locked inventory is:
 
@@ -67,7 +71,19 @@ Failure coverage currently includes non-canonical and duplicate JSON, mutable im
 
 The complete historical `tests.test_release_build` suite was restored and extended rather than replaced. Its ephemeral-wheel byte comparison fails in this Windows worktree because an existing managed template is checked out as CRLF while `harnessctl init` writes canonical LF (`git ls-files --eol` reports `i/lf w/crlf` for that pre-existing path). That path is outside `WO-RLO-004` scope and is unchanged. The same test is expected to run with LF in hosted Linux qualification; no assertion was weakened.
 
-The complete local discovery ran 598 tests in 336.956 seconds: 560 passed, 11 skipped, 8 failed, and 19 errored. Twenty-six failures/errors are explained by the sandbox-owned worktree's pre-existing CRLF checkout and Git dubious-ownership refusal; focused runs with the required Git safe-directory context pass the changed behavior. The remaining failure exposed a real scope-inventory effect: the approved `WO-RLO-004` front matter necessarily names the retired repository-context path, while `tests/test_context_routing_retirement.py` keeps an exact list of records allowed to name it. The subsequent bounded scope amendment authorized the exact inventory correction.
+Exact candidate `4fec0d78c1c6a792104506d3fa3c7778bdcd3792` ran 604 local tests in 372.684 seconds: 586 passed, 12 skipped, 5 failed, and 1 errored. Three failures are existing CRLF-sensitive comparisons in this Windows checkout. The other three results are caused by the sandbox-required `GIT_CONFIG_*` safe-directory environment being intentionally rejected by predecessor-publication isolation tests. The exact candidate's hosted clean-checkout candidate-source regression, package installation, disposable consumer, Linux and Windows governance migration, deterministic integration package, and cross-platform package verification all pass in run `32729113623`; no assertion was weakened.
+
+Hosted run `32729113623` completed successfully with candidate-source job `97437057352`, candidate-package job `97437337806`, Linux migration job `97437486001`, Windows migration job `97437485875`, deterministic-package job `97437803507`, Linux package-verification job `97437862068`, Windows package-verification job `97437861878`, and retained-package job `97438018174`. Each job is bound by the run metadata to exact head `4fec0d78c1c6a792104506d3fa3c7778bdcd3792`.
+
+## Formal handoff binding
+
+```text
+artifact: WO-RLO-004
+checkpoint: handoff
+formal_snapshot_sha256: 479ad9d768933fa9505597cf962bf985b03fec623573a2922f5bd959c72f49aa
+```
+
+The declared complete change set contains the 28 paths in operational candidate `4fec0d78c1c6a792104506d3fa3c7778bdcd3792`; the later evidence update changes only the already-declared evidence path. All 28 paths are within the authorized 31-path execution scope. Completeness is an explicit caller assertion rather than trusted proof of absent hidden changes.
 
 ## Required bounded scope correction discovered during implementation
 
@@ -83,16 +99,14 @@ The scope now contains thirty-one paths. The declaration inventories only the ex
 
 ## Pending exact and hosted evidence
 
-This host has neither Docker nor Podman, so the real digest-pinned Linux producer cannot be launched locally. The interpreter correctly has no native-host fallback. Consequently these required observations remain pending an exact candidate commit and separately authorized hosted dispatch:
+This host has neither Docker nor Podman, so the real digest-pinned Linux producer cannot be launched locally. The interpreter correctly has no native-host fallback. Standard exact-candidate hosted qualification passed, but the new pre-release replay requires a future schema-2 ready RLS and already accepted hashes by design. Consequently these release-stage observations remain pending a separately authorized future release dispatch:
 
 - two real clean producer builds and their wheel/sdist hashes;
-- exact-commit complete-candidate qualification;
 - hosted ready-RLS replay URL and result digest;
-- schema-2 production-path hosted observation; and
-- final exact-commit complete unit and package/consumer replay results.
+- schema-2 production-path hosted observation.
 
-`WO-RLO-004` therefore remains `in_progress`. No implementation-completion transition or verification claim is made.
+The engineering owner explicitly accepted the completed handoff, and the released evaluator atomically transitioned only `WO-RLO-004` from `in_progress` to `implemented`. The future release-stage observations above remain mandatory for the concrete schema-2 RLS they assess; they do not create a release or publication authority here. No verification claim is made by this work-order transition.
 
 ## Authority and unchanged state
 
-No candidate commit, push, pull request, hosted dispatch, VREC or RLS preparation/transition, release, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator upgrade was performed while creating this in-progress evidence. `RLS-SEH-012`, v0.6.0 distribution bytes, rejected history, and portable managed files remain unchanged.
+The authorized operational candidate commit, branch push, pull request, ordinary hosted PR qualification, and explicit `WO-RLO-004` completion transition were performed. No VREC or RLS preparation/transition, release, tag, publication, deployment, maintenance mutation, external-policy change, or root-evaluator upgrade was performed at this stage. `RLS-SEH-012`, v0.6.0 distribution bytes, rejected history, and portable managed files remain unchanged.

@@ -2,7 +2,7 @@
 id = "WO-RLO-004"
 type = "work_order"
 title = "Implement recipe-bound release build replay"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -63,6 +63,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-24T12:02:52Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-24T12:58:09Z"
 decided_by = "engineering-owner"
 +++
 
