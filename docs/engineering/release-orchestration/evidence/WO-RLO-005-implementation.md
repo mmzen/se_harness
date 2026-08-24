@@ -260,6 +260,71 @@ The lane triggers on `pull_request` and on `push` to `main`, so a feature-branch
 
 The consequence for this work order is unchanged from the section above: the Linux half of `REQ-RLO-015` remains unproven on a hosted runner. The lane's first hosted execution now awaits either a later push to the open pull request once `pull_request` delivery recovers, or the merge to `main`, both of which are inside the approved trigger set. Nothing here justifies widening that set to every branch push, which would run two hosted rehearsals for every push in the repository; that is an owner decision and is not taken here.
 
+## The hosted lane's first run, and what it found
+
+`pull_request` delivery recovered, and pushing the merge produced the lane's first
+hosted execution: run
+[32749064795](https://github.com/mmzen/se_harness/actions/runs/32749064795), event
+`pull_request`, created 2026-08-24T16:08:16Z over head `c4bc9cf`, candidate
+`e77d3dd7d11408a16aa095b2ec05e5a5e44bbdcc` — the pull request's merge commit, which
+is the subject a `pull_request` run resolves.
+
+| Job | Conclusion | Wall clock | Result |
+|---|---|---|---|
+| Refuse orchestrator and rehearsal divergence | success | 9s | `Publication rehearsal divergence: EXACT`, `Rehearsed jobs: qualify, resolve on Linux, Windows` |
+| Rehearse the credential-free path on Linux | success | 1m28s | `REHEARSED`, 21 executed, 2 excluded, `candidate unit suite passed (831 tests)`, 7611 derived paths removed |
+| Rehearse the credential-free path on Windows | failure | 2m42s | `FAILED`, 20 executed, 2 excluded, one failed mechanic, 7168 derived paths removed |
+
+Three things this establishes, all of them the lane's purpose:
+
+First, `REQ-RLO-015`'s Linux half is no longer unproven. It ran on a hosted
+`ubuntu-latest` runner against injected nothing: real Git, a real evaluator wheel
+resolved and hash-proved, two real builds compared byte for byte, and a real
+teardown. The section above recorded that as the packet's principal residual gap,
+and it is closed by measurement rather than by argument.
+
+Second, the two exclusions reported identically on both runner types, with the
+measured reasons the owner already ruled on. `predecessor-view-qualification` named
+both evaluator identities — resolved `0.6.0` against `RLS-SEH-012`'s predecessor
+`0.5.0` — and `recipe-bound-build-replay` named its subject obstacle, `the 1
+committed records declare distribution schema 1`. Neither is silent, and neither
+differs by platform.
+
+Third, the Windows leg failed one mechanic, and the failure is the orchestrator's
+rather than the rehearsal's:
+
+```text
+Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings
+- failed   candidate-unit-suite: Windows: RehearsalError - candidate unit suite exited 1
+  with 11 failing tests: test_canonical_recipe_binds_complete_identity, …
+```
+
+`.github/workflows/publish-pypi.yml:209` creates the checkout its qualification
+reads with `git worktree add --detach`, and a `git worktree` inherits the checkout's
+`core.autocrlf`, which is `true` on `windows-2022`. Rule 5 makes the rehearsal build
+that checkout the same way, so this is the orchestrator's own outcome observed
+early: the release orchestrator would fail candidate qualification on its Windows
+leg, whose steps are gated on `distribution_schema == '1'`, and `RLS-SEH-012`
+declares schema 1. That is precisely `RC-060-11` — a real hosted platform detail
+found before publication day rather than during it — and it is the first thing this
+lane has caught.
+
+Ten of the eleven names are exactly the ten a `core.autocrlf=true` workstation
+reproduces at `main`'s `fc97103`. The eleventh,
+`test_manifest_rejects_missing_required_invalid_utf8_and_reserved_paths`, exists at
+`fc97103` and passes there locally, so the extra red is not a difference in the test
+inventory and is not locally reproduced; a `pull_request` run tests the merge commit,
+whose `tests/test_agentic_execution.py` is an automatic merge of two divergent
+copies, and the hosted interpreter is 3.11.9 rather than 3.14.6. That is recorded as
+unexplained rather than attributed. The fix is outside this work
+order's subject: the owner routed it to a separate work order and a separate pull
+request, `WO-HBI-003`, so that this packet's diff stays exactly the rehearsal lane.
+Nothing in this packet changes as a result, and no rule is amended: the rehearsal is
+faithful to the orchestrator here, and the condition belongs to the checkout, which
+the section on the `core.autocrlf=true` failures already stated. This branch's
+Windows job stays red, correctly, until `WO-HBI-003` merges and `main` is merged in
+again.
+
 ## Repository/product boundary
 
 No changed path lies under `se_harness/`, `templates/`, the eight managed `scripts/` files, `.engineering-harness.toml`, `.engineering-harness.lock`, `.github/workflows/engineering-harness.yml`, the managed policy documents, or `docs/engineering/templates/`. `harnessctl` gains no rehearsal command or option. `check_portable_release_surface.py` passes, though it proves the absence of the *governor and self-hosting* surface and knows nothing of the rehearsal; the rehearsal's portable boundary is proven instead by `test_no_packaged_module_or_template_mentions_the_rehearsal` and `test_the_rehearsal_lives_only_in_repository_owned_locations`, which assert the rehearsal exists only in `.github/`, `tests/`, and `docs/`.
@@ -275,12 +340,12 @@ No changed path lies under `se_harness/`, `templates/`, the eight managed `scrip
 
 ## Residual uncertainty
 
-- The hosted lane has never run. Real `ubuntu-latest` and `windows-2022` runner-image behavior is unproven, which is the same class of gap `RC-060-11` describes — moved from release time to integration time rather than eliminated.
+- The hosted lane has now run once, on both runner types, and the section on that run records it. What remains unproven there is narrower: `release-record` mode has never run hosted, the lane has never run on a `push` to `main`, and one hosted run on each image is not a claim about runner-image stability over time.
 - Step digests catch a change inside a declared step. They do not prove the rehearsal drives its mechanics in the orchestrator's order, or that a mechanic sees the same surrounding state. A step moved between jobs passes every comparison. `ARCH-RLO-005` records this as the accepted weakness and `ADR-RLO-005` records what would reopen the refactor decision.
 - Two programs can diverge in ways a seam cannot see. The owner chose the seam over a shared implementation deliberately; `ADR-RLO-005` carries the trade.
 - `predecessor-view-qualification` is exercised for real only in `release-record` mode against a record under preparation. No such record exists to rehearse now, so that path is covered by unit tests and not by an end-to-end run.
 - Everything was measured on CPython 3.14.6, while the orchestrator and the lane pin 3.11. The candidate unit suite inside the rehearsal ran on the local interpreter, not on 3.11.
-- The `core.autocrlf=true` reds are named and attributed, not fixed. Four pre-existing tests assert on exact bytes and fail in a converting checkout; that is a real property of this repository's test suite and is out of this work order's scope.
+- The `core.autocrlf=true` reds are named and attributed, not fixed here. Four pre-existing tests asserted on exact bytes when this was first measured and eleven do at the hosted merge commit, because `main` added more such surfaces while the branch was open. That is a real property of this repository, it is out of this work order's scope, and the owner routed it to `WO-HBI-003`, which this branch does not contain.
 - `docs/notes/release-publication-rehearsal.md` is repository-owned prose. If it and the formal artifacts disagree, the artifacts govern.
 
 ## Amendments, and the owner's decision on them
@@ -297,7 +362,7 @@ The accountable repository owner accepted all seven on 2026-08-24 through the st
 - `acceptance/publication-rehearsal.feature`: three scenarios — a mechanic with no valid subject, teardown's audit accepting the root, and an inherited converting checkout.
 - `docs/notes/release-publication-rehearsal.md`: three things to know instead of two.
 
-Two further amendments, `A8` and `A9`, were forced later and by a different cause: `main` advanced under the open branch and changed the orchestrator, rather than a mismeasurement here. They are **not** covered by the `Accept all seven` acceptance and await a separate owner decision. Neither changes an approved `statement` field, relaxes a pass condition, or widens the authority boundary.
+Two further amendments, `A8` and `A9`, were forced later and by a different cause: `main` advanced under the open branch and changed the orchestrator, rather than a mismeasurement here. They are not covered by the `Accept all seven` acceptance, so they were put separately, and the accountable repository owner accepted both on 2026-08-24 through the statement `Accept A8 and A9`. `SPEC-RLO-005`'s amendment section records that decision and the framing it was taken over. Neither changes an approved `statement` field, relaxes a pass condition, or widens the authority boundary.
 
 - `SPEC-RLO-005` A8, rules 38 and 39: matrix combination enumeration, per-step gate resolution, step and mechanic platform claims, and declaration schema `v2` with four load-time refusals.
 - `SPEC-RLO-005` A9, rule 1 and rule 40: twenty-two mechanics instead of twenty-one, and the recipe-bound build replay always reported `excluded` with a measured reason in both modes.
@@ -399,6 +464,6 @@ The same rehearsal was then run at the same commit in a `core.autocrlf=false` cl
 
 Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
 
-After that, `main` was merged into the branch as `29c0db0` and the branch was pushed again to the same pull request. A merge into a feature branch and a push to a branch the owner already authorized pushing are within that authorization; nothing else was extended by it. Amendments `A8` and `A9` await an owner decision, and this document records them as pending rather than as accepted.
+After that, `main` was merged into the branch as `29c0db0` and the branch was pushed again to the same pull request. A merge into a feature branch and a push to a branch the owner already authorized pushing are within that authorization; nothing else was extended by it. That push is what produced the hosted first run recorded above. Amendments `A8` and `A9` were accepted on 2026-08-24 through the statement `Accept A8 and A9`, and the same turn routed the Windows finding into `WO-HBI-003` rather than into this packet; neither decision authorizes anything further.
 
 Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-005` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.
