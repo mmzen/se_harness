@@ -2,7 +2,7 @@
 id = "VREC-AEX-004"
 type = "verification_record"
 title = "Verification candidate for WO-AEX-004"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/agentic-execution/evidence/WO-AEX-004-verifi
 evaluator_evidence_path = "docs/engineering/agentic-execution/evidence/VREC-AEX-004-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-24T18:15:06Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-AEX-004"]
 conforms_to = ["VER-AEX-001", "VER-AEX-002", "VER-AEX-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T18:15:06Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Record Candidate
