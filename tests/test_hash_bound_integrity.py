@@ -77,6 +77,21 @@ SPECIFIED_CLASSES = {
     ),
     "standard-lock": ((".engineering-harness.lock",), CANONICAL_MODE, None, "template"),
 }
+#: Committed files whose exact bytes the candidate suite compares or hashes. No
+#: recorded SHA-256 binds them, so no hash-bound class covers them and `doctor` does
+#: not assess them; the byte rule is still load-bearing, because the release
+#: orchestrator runs that suite inside a `git worktree` it creates on `windows-2022`,
+#: which inherits the checkout's `core.autocrlf`.
+BYTE_EXACT_PATTERNS = (
+    "se_harness/agent_contract.json",
+    "se_harness/hash_bound_classes.json",
+    "release/build-recipe.json",
+    "release/build-toolchain.lock",
+    "templates/repository/standard/.agents/skills/**/*.json",
+    "templates/repository/standard/.agents/skills/**/*.md",
+    "templates/repository/standard/.agents/skills/**/*.py",
+)
+
 UPGRADE_WORK_ORDER = (
     ROOT / "docs" / "engineering" / "repository-harness-upgrade" / "work-orders" / "WO-HUP-002.md"
 )
@@ -527,6 +542,61 @@ class RepositoryAssessmentTests(unittest.TestCase):
         end = text.index(hash_bound.ATTRIBUTE_END_MARKER) + len(hash_bound.ATTRIBUTE_END_MARKER)
         block = (text[start:end] + "\n").encode("utf-8")
         self.assertEqual(recorded, canonical_sha256(block))
+
+
+@unittest.skipUnless(git_available(), "git is unavailable")
+class ByteExactSurfaceTests(unittest.TestCase):
+    """Byte-exact surfaces outside every hash-bound class still carry a byte rule.
+
+    A hash-bound class exists where a recorded digest binds a file. These files are
+    compared byte for byte by the candidate suite instead, so no class covers them and
+    no check assesses them. The orchestrator qualifies the candidate in a `git worktree`
+    that inherits the checkout's `core.autocrlf`, so a missing byte rule here fails
+    qualification on one runner type and passes on the other.
+    """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        if not (ROOT / ".git").exists():
+            raise unittest.SkipTest("byte rules resolve from a Git working tree")
+        cls.tracked = hash_bound.tracked_paths(ROOT)
+        cls.paths = tuple(
+            relative
+            for relative in cls.tracked
+            if any(matches(pattern, relative) for pattern in BYTE_EXACT_PATTERNS)
+        )
+
+    def test_every_pattern_selects_a_tracked_file(self) -> None:
+        for pattern in BYTE_EXACT_PATTERNS:
+            with self.subTest(pattern=pattern):
+                self.assertTrue(
+                    any(matches(pattern, relative) for relative in self.tracked),
+                    f"{pattern} selects no tracked file, so its byte rule is dead",
+                )
+
+    def test_every_surface_resolves_the_required_attribute(self) -> None:
+        resolved = hash_bound.resolved_attributes(ROOT, self.paths)
+        for relative in self.paths:
+            with self.subTest(path=relative):
+                attributes = resolved[relative]
+                self.assertEqual("set", attributes.get("text"), attributes)
+                self.assertEqual("lf", attributes.get("eol"), attributes)
+
+    def test_no_surface_is_converted_in_this_working_tree(self) -> None:
+        payload = git(ROOT, "ls-files", "--eol", "-z", "--", *self.paths)
+        reported = {}
+        for record in payload.decode("utf-8").split("\0"):
+            if not record.strip():
+                continue
+            fields = record.split("\t")
+            worktree = next(
+                item[2:] for item in fields[0].split() if item.startswith("w/")
+            )
+            reported[fields[-1]] = worktree
+        self.assertEqual(sorted(reported), sorted(self.paths))
+        for relative, worktree in sorted(reported.items()):
+            with self.subTest(path=relative):
+                self.assertIn(worktree, ("lf", "none"), f"{relative} is {worktree}")
 
 
 class InventoryReconciliationTests(unittest.TestCase):

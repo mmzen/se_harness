@@ -30,6 +30,15 @@ machine-checked.
 In scope: files tracked in Git whose bytes a governed artifact field or an
 authorization input binds by SHA-256.
 
+Also in scope, from `WO-HBI-003` on 2026-08-24 and accepted by the accountable
+repository owner the same day through the statement `Accept both`: committed files
+whose exact bytes the candidate suite compares without a recorded digest binding them.
+They reach the same failure by the same mechanism, because the release orchestrator
+qualifies the candidate inside a `git worktree` that inherits the checkout's
+`core.autocrlf`.
+Their byte rules are declared in the owner-controlled region and guarded by a test
+rather than by a `doctor` check, because no class binds them.
+
 Out of scope: uncommitted release-bundle text such as `SHA256SUMS` and the source
 manifest named by `RLS-SEH-012`; generated content under `target/`; binary
 archives; and the canonical digests of managed files, which are immune by
