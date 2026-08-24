@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 from typing import Any, Mapping
 
+from se_harness import interpreter_safety
 from se_harness.governance_migration_contract import (
     CONTRACT_SCHEMA,
     RESULT_SCHEMA,
@@ -123,6 +124,50 @@ def _assert_external(path: Path, repository: Path, label: str) -> None:
         raise GovernanceMigrationError(f"MIG202: {label} must be outside the operational checkout")
 
 
+#: Every declared interpreter-safety case, mapped onto the migration diagnostic
+#: that already reported the same class of refusal. The mapping is total: a
+#: conformance check compares its keys against the declaration, so a new
+#: declared case cannot reach this boundary without a chosen code.
+INTERPRETER_REFUSAL_CODES = {
+    "EPS001": "MIG205",
+    "EPS002": "MIG205",
+    "EPS003": "MIG204",
+    "EPS004": "MIG204",
+    "EPS005": "MIG205",
+    "EPS006": "MIG205",
+    "EPS007": "MIG202",
+    "EPS008": "MIG202",
+    "EPS009": "MIG202",
+    "EPS010": "MIG204",
+    "EPS011": "MIG205",
+}
+
+
+def _safe_interpreter(
+    python: Path, role: str, repository: Path
+) -> interpreter_safety.SafeEntryPoint:
+    """Accept a migration runtime through the declared interpreter-safety rule.
+
+    A POSIX virtual environment exposes ``bin/python`` as a terminal symbolic
+    link, so the lexical path is the environment boundary and the resolved
+    system binary is only the measured target. The rule also refuses a
+    directory junction, which the previous symbolic-link-only check accepted.
+    """
+
+    try:
+        entry = interpreter_safety.evaluate(python, checkout_root=repository)
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        code = INTERPRETER_REFUSAL_CODES.get(refusal.case, "MIG205")
+        raise GovernanceMigrationError(
+            f"{code}: {role} Python is refused by {refusal.case}: {refusal.detail}"
+        ) from refusal
+    except interpreter_safety.InterpreterSafetyError as exc:
+        raise GovernanceMigrationError(
+            f"MIG205: {role} Python safety rule is unavailable: {exc}"
+        ) from exc
+    return entry
+
+
 def _snapshot_tree(root: Path, *, exclude_git: bool = False) -> dict[str, Any]:
     entries: list[dict[str, Any]] = []
     if not root.exists():
@@ -213,14 +258,9 @@ def _runtime_identity(
     output: Path,
     contract: Mapping[str, Any],
 ) -> tuple[dict[str, Any], Path, tuple[Path, ...], Path]:
-    lexical = _absolute(python)
-    if not lexical.is_file():
-        raise GovernanceMigrationError(f"MIG204: {role} Python is not an existing file")
-    _assert_external(lexical, repository, f"{role} Python")
-    environment_root = lexical.parent.parent
-    if any(parent.is_symlink() for parent in (environment_root, lexical.parent)):
-        raise GovernanceMigrationError(f"MIG205: {role} environment parent must not be linked")
-    executable_raw = lexical.resolve().read_bytes()
+    entry = _safe_interpreter(python, role, repository)
+    lexical = entry.entry_point
+    environment_root = entry.environment_root
     try:
         completed = subprocess.run(
             [str(lexical), "-I", "-B", "-c", RUNTIME_PROBE],
@@ -288,7 +328,7 @@ def _runtime_identity(
             "checkout_excluded": True,
             "archive_name": payload["archive_name"],
             "archive_sha256": payload["archive_sha256"],
-            "executable_sha256": sha256_bytes(executable_raw),
+            "executable_sha256": entry.binary_sha256,
             "isolated": True,
             "package_tree_sha256": package_digest,
             "payload_sha256": payload["payload_sha256"],

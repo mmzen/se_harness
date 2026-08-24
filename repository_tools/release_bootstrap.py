@@ -15,6 +15,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+from repository_tools import interpreter_safety
 from se_harness.hash_bound import (
     LOCK_RELATIVE,
     MATCH_DECLARED,
@@ -226,6 +227,34 @@ def _ordinary_external_file(path: Path, label: str) -> Path:
     if not resolved.is_file():
         raise ReleaseBootstrapError(f"{label} must be an ordinary file")
     return resolved
+
+
+def _safe_interpreter(
+    path: Path,
+    label: str,
+    *,
+    checkout_root: Path | None = None,
+    declared_root: Path | None = None,
+) -> interpreter_safety.SafeEntryPoint:
+    """Accept an external interpreter through the declared safety rule.
+
+    An interpreter is not an ordinary external file: a POSIX virtual
+    environment normally exposes ``bin/python`` as a terminal symbolic link,
+    and the lexical path is the execution boundary rather than the resolved
+    system binary. Refusals are reported with their declared case identifier so
+    the diagnostic names the rule that rejected the path.
+    """
+
+    try:
+        return interpreter_safety.evaluate(
+            path, checkout_root=checkout_root, declared_root=declared_root
+        )
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        raise ReleaseBootstrapError(
+            f"{label} is refused by {refusal.case}: {refusal.detail}"
+        ) from refusal
+    except interpreter_safety.InterpreterSafetyError as exc:
+        raise ReleaseBootstrapError(f"{label} cannot be evaluated: {exc}") from exc
 
 
 def _require_sha(value: Any, label: str) -> str:
@@ -458,19 +487,40 @@ def _normalize_origin(path: Path, evaluator_root: Path) -> str:
     return "<evaluator-root>" + (f"/{relative}" if relative else "")
 
 
+def _lexical_origin(path: Path, evaluator_root: Path) -> str:
+    """Normalize an interpreter origin without resolving it.
+
+    The interpreter is the one origin that may legitimately be a terminal
+    symbolic link, so resolving it before normalization would leave the
+    declared root and refuse every POSIX virtual environment.
+    """
+
+    lexical = Path(os.path.abspath(path))
+    try:
+        relative = lexical.relative_to(Path(os.path.abspath(evaluator_root))).as_posix()
+    except ValueError as exc:
+        raise ReleaseBootstrapError(
+            "released-evaluator origin is outside its declared root"
+        ) from exc
+    return "<evaluator-root>" + (f"/{relative}" if relative else "")
+
+
 def _run_released_evaluator(
     root: Path,
     evaluator_python: Path,
     evaluator_entry_point: Path,
     contract: BootstrapContract,
 ) -> dict[str, Any]:
-    evaluator_root = evaluator_python.parent.parent.resolve(strict=True)
+    safe = _safe_interpreter(
+        evaluator_python, "released-evaluator interpreter", checkout_root=root
+    )
+    evaluator_root = safe.environment_root
     if not _within(evaluator_entry_point, evaluator_root):
         raise ReleaseBootstrapError("released-evaluator entry point is outside the interpreter environment")
     environment = dict(os.environ)
     environment.pop("PYTHONPATH", None)
     identity_command = [
-        str(evaluator_python),
+        str(safe.entry_point),
         "-I",
         "-m",
         "se_harness",
@@ -538,8 +588,13 @@ def _run_released_evaluator(
         or identity.get("diagnostics") != []
     ):
         raise ReleaseBootstrapError("released-evaluator identity proof is not acceptable")
+    reported_python = identity.get("python_executable")
+    if (
+        not isinstance(reported_python, str)
+        or Path(os.path.abspath(reported_python)) != safe.entry_point
+    ):
+        raise ReleaseBootstrapError("released-evaluator identity python_executable differs")
     exact_paths = {
-        "python_executable": evaluator_python,
         "entry_point_origin": evaluator_entry_point,
         "expected_root": evaluator_root,
         "checkout_root": root,
@@ -551,6 +606,14 @@ def _run_released_evaluator(
         except OSError:
             observed = None
         if observed != expected.resolve(strict=True):
+            raise ReleaseBootstrapError(f"released-evaluator identity {field} differs")
+    reported_facts = {
+        "python_entry_is_link": safe.entry_is_link,
+        "python_binary_position": safe.binary_position,
+        "python_binary_sha256": safe.binary_sha256,
+    }
+    for field, expected_fact in reported_facts.items():
+        if field in identity and identity[field] != expected_fact:
             raise ReleaseBootstrapError(f"released-evaluator identity {field} differs")
     for field in ("module_origin", "distribution_origin", "template_origin"):
         value = identity.get(field)
@@ -692,7 +755,7 @@ def _evidence_bytes(
             "archive_sha256": contract.evaluator_archive_sha256,
         },
         "origins": {
-            "python_executable": _normalize_origin(Path(identity["python_executable"]), evaluator_root),
+            "python_executable": _lexical_origin(Path(identity["python_executable"]), evaluator_root),
             "module": _normalize_origin(Path(identity["module_origin"]), evaluator_root),
             "distribution": _normalize_origin(Path(identity["distribution_origin"]), evaluator_root),
             "templates": _normalize_origin(Path(identity["template_origin"]), evaluator_root),
@@ -762,7 +825,9 @@ def _prepare(
         raise ReleaseBootstrapError("repository does not exist") from exc
     record_path = _repository_file(root, release_record, "release record")
     contract_path = _repository_file(root, release_contract, "release contract")
-    python_path = _ordinary_external_file(evaluator_python, "released-evaluator interpreter")
+    python_entry = _safe_interpreter(
+        evaluator_python, "released-evaluator interpreter", checkout_root=root
+    )
     entry_point_path = _ordinary_external_file(evaluator_entry_point, "released-evaluator entry point")
     wheel_path = _ordinary_external_file(evaluator_wheel, "released-evaluator wheel")
     contract_metadata, _contract_raw, _contract_lines, _contract_closing = _read_front_matter(
@@ -777,8 +842,8 @@ def _prepare(
     _validate_old_root(root, contract)
     record_metadata, record_raw, lines, closing = _read_front_matter(record_path, "release record")
     candidate_commit = _validate_release_graph(root, record_metadata, contract_metadata, contract)
-    identity = _run_released_evaluator(root, python_path, entry_point_path, contract)
-    evaluator_root = python_path.parent.parent.resolve(strict=True)
+    identity = _run_released_evaluator(root, python_entry.entry_point, entry_point_path, contract)
+    evaluator_root = python_entry.environment_root
     payload_sha256 = _installed_payload(identity, evaluator_root)
     wheel_payload_sha256 = _wheel_payload(wheel_path, contract.evaluator_version)
     if wheel_payload_sha256 != payload_sha256:

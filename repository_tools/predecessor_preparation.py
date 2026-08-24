@@ -21,6 +21,7 @@ from dataclasses import asdict, dataclass, replace
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+from repository_tools import interpreter_safety
 from repository_tools import release_bootstrap as bootstrap
 
 
@@ -195,41 +196,46 @@ def _ordinary_external(path: Path, label: str, root: Path) -> Path:
     raise PredecessorPreparationError(f"{label} must be outside the repository")
 
 
-def _ordinary_external_interpreter(path: Path, label: str, root: Path) -> Path:
-    """Validate an external interpreter while preserving its virtualenv path.
+#: The declared cases that report an enclosing directory standing on a link.
+#: This boundary's observable refusal wording for them predates the declared
+#: rule and is the reference for it, so the wording is retained ahead of the
+#: case identifier rather than replaced by it.
+LINK_TRAVERSAL_CASES = ("EPS001", "EPS002")
+
+
+def _safe_interpreter(
+    path: Path, label: str, root: Path
+) -> interpreter_safety.SafeEntryPoint:
+    """Accept an external interpreter through the declared safety rule.
 
     POSIX virtual environments normally expose ``bin/python`` as a terminal
     symbolic link. Resolving that link before deriving the evaluator root
     escapes the virtual environment and loses its installed package context.
-    Parent links remain forbidden, as do interpreter targets inside the source
-    checkout; only the final interpreter link is accepted.
+    The decision belongs to ``se_harness/interpreter_safety.json`` rather than
+    to this module, so this boundary and the other five decide identically:
+    parent links remain forbidden, as do interpreter targets inside the source
+    checkout, and only the final interpreter link is accepted.
     """
 
-    lexical = Path(os.path.abspath(path))
-    if bootstrap._path_has_link(lexical.parent):
-        raise PredecessorPreparationError(
-            f"{label} environment must not traverse a link"
-        )
     try:
-        target = lexical.resolve(strict=True)
-    except OSError as exc:
-        raise PredecessorPreparationError(f"{label} does not exist") from exc
-    if (
-        not lexical.is_file()
-        or not target.is_file()
-        or bootstrap._path_has_link(target)
-        or (bootstrap._path_has_link(lexical) and not lexical.is_symlink())
-    ):
+        return interpreter_safety.evaluate(path, checkout_root=root)
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        if refusal.case in LINK_TRAVERSAL_CASES:
+            raise PredecessorPreparationError(
+                f"{label} environment must not traverse a link"
+                f" ({refusal.case}: {refusal.detail})"
+            ) from refusal
         raise PredecessorPreparationError(
-            f"{label} must be an ordinary file or terminal interpreter link"
-        )
-    for candidate in (lexical, target):
-        try:
-            candidate.relative_to(root)
-        except ValueError:
-            continue
-        raise PredecessorPreparationError(f"{label} must be outside the repository")
-    return lexical
+            f"{label} is refused by {refusal.case}: {refusal.detail}"
+        ) from refusal
+    except interpreter_safety.InterpreterSafetyError as exc:
+        raise PredecessorPreparationError(f"{label} cannot be evaluated: {exc}") from exc
+
+
+def _ordinary_external_interpreter(path: Path, label: str, root: Path) -> Path:
+    """Return the accepted lexical interpreter path for an external evaluator."""
+
+    return _safe_interpreter(path, label, root).entry_point
 
 
 def _normalized_unique(values: Iterable[str], label: str) -> tuple[str, ...]:
@@ -671,9 +677,8 @@ def _prepare(
         tag=tag,
     )
     history = _derive_history(root, catalog, version, source_commit, object_format)
-    python = _ordinary_external_interpreter(
-        evaluator_python, "evaluator interpreter", root
-    )
+    interpreter = _safe_interpreter(evaluator_python, "evaluator interpreter", root)
+    python = interpreter.entry_point
     entry_point = _ordinary_external(evaluator_entry_point, "evaluator entry point", root)
     wheel = _ordinary_external(evaluator_wheel, "evaluator wheel", root)
     if wheel.name != contract.evaluator_archive_name or bootstrap._sha256_file(wheel) != contract.evaluator_archive_sha256:
@@ -703,7 +708,9 @@ def _prepare(
         except bootstrap.ReleaseBootstrapError as exc:
             raise PredecessorPreparationError(str(exc)) from exc
         try:
-            installed_payload = bootstrap._installed_payload(identity, python.parent.parent)
+            installed_payload = bootstrap._installed_payload(
+                identity, interpreter.environment_root
+            )
             wheel_payload = bootstrap._wheel_payload(wheel, contract.evaluator_version)
         except (OSError, bootstrap.ReleaseBootstrapError) as exc:
             raise PredecessorPreparationError(str(exc)) from exc
@@ -986,9 +993,8 @@ def _existing_preparation(
     predecessor_digest = output.get("predecessor_record_sha256") if isinstance(output, dict) else None
     if predecessor_digest != _sha256(predecessor_raw):
         raise PredecessorPreparationError("existing predecessor output digest differs")
-    python = _ordinary_external_interpreter(
-        evaluator_python, "evaluator interpreter", root
-    )
+    interpreter = _safe_interpreter(evaluator_python, "evaluator interpreter", root)
+    python = interpreter.entry_point
     entry_point = _ordinary_external(evaluator_entry_point, "evaluator entry point", root)
     wheel = _ordinary_external(evaluator_wheel, "evaluator wheel", root)
     if wheel.name != contract.evaluator_archive_name or bootstrap._sha256_file(wheel) != contract.evaluator_archive_sha256:
@@ -997,7 +1003,9 @@ def _existing_preparation(
         replay, sparse_spec = _create_view(root, source_commit, history, Path(temporary))
         try:
             identity = bootstrap._run_released_evaluator(replay, python, entry_point, contract)
-            installed_payload = bootstrap._installed_payload(identity, python.parent.parent)
+            installed_payload = bootstrap._installed_payload(
+                identity, interpreter.environment_root
+            )
             wheel_payload = bootstrap._wheel_payload(wheel, contract.evaluator_version)
         except (OSError, bootstrap.ReleaseBootstrapError) as exc:
             raise PredecessorPreparationError(str(exc)) from exc

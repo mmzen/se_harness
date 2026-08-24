@@ -36,6 +36,12 @@ REQUIRED_QUALIFICATION_MEMBERS = frozenset(
         "se_harness/release_qualification.py",
     }
 )
+REQUIRED_INTERPRETER_SAFETY_MEMBERS = frozenset(
+    {
+        "se_harness/interpreter_safety.json",
+        "se_harness/interpreter_safety.py",
+    }
+)
 FORBIDDEN_CLI = (b"reconcile-governor", b"--governor-wheel-sha256", b"--role governor")
 FORBIDDEN_ACTIVE_CONTENT = (
     b"publish_dashboard.py governor",
@@ -86,7 +92,11 @@ def inspect_wheel(path: Path) -> None:
             members = archive.infolist()
             member_names = {member.filename for member in members}
             missing = sorted(
-                (REQUIRED_MIGRATION_MEMBERS | REQUIRED_QUALIFICATION_MEMBERS)
+                (
+                    REQUIRED_MIGRATION_MEMBERS
+                    | REQUIRED_QUALIFICATION_MEMBERS
+                    | REQUIRED_INTERPRETER_SAFETY_MEMBERS
+                )
                 - member_names
             )
             if missing:

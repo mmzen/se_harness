@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import unquote, urlparse
 
-from se_harness import __version__
+from se_harness import __version__, interpreter_safety
 from se_harness.candidate_acceptance import assess_candidate_wheel
 from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
@@ -577,20 +577,15 @@ def qualify_candidate_package(
 
 
 def _external_evaluator_files(evaluator_python: Path, root: Path) -> tuple[Path, Path]:
-    lexical = Path(os.path.abspath(evaluator_python.expanduser()))
     try:
-        target = lexical.resolve(strict=True)
-    except OSError as exc:
-        raise HarnessError("external predecessor interpreter is unavailable") from exc
-    if not target.is_file():
-        raise HarnessError("external predecessor interpreter is invalid")
-    evaluator_root = lexical.parent.parent
-    try:
-        evaluator_root.resolve(strict=True).relative_to(root)
-    except ValueError:
-        pass
-    else:
-        raise HarnessError("external predecessor environment must be outside the repository")
+        entry = interpreter_safety.evaluate(evaluator_python, checkout_root=root)
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        raise HarnessError(
+            f"external predecessor interpreter is refused by {refusal.case}: {refusal.detail}"
+        ) from refusal
+    except interpreter_safety.InterpreterSafetyError as exc:
+        raise HarnessError(f"external predecessor interpreter cannot be evaluated: {exc}") from exc
+    evaluator_root = entry.environment_root
     entry_candidates = (
         evaluator_root / "Scripts" / "harnessctl.exe",
         evaluator_root / "Scripts" / "harnessctl",

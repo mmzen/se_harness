@@ -1,0 +1,36 @@
++++
+id = "VREC-REB-018"
+type = "verification_record"
+title = "Verification candidate for WO-REB-022"
+status = "verified"
+owners = ["engineering-owner"]
+created = "2026-08-24"
+updated = "2026-08-24"
+commit = "bfc08f0477475a1a128f9db68ba9b56685c5c10f"
+git_object_format = "sha1"
+worktree_state = "clean"
+prepared_at = "2026-08-24T17:04:04Z"
+prepared_by = "engineering-owner"
+artifact_snapshot_sha256 = "edd378e097b225834805d519c8c8f33a970635e93904ad5b379a4350264736c9"
+evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-022-junction-predicate-capability.md"]
+evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-018-evaluator.json"
+evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+
+verified_at = "2026-08-24T17:15:42Z"
+verified_by = "engineering-owner"
+[relations]
+verifies_work_order = ["WO-REB-022"]
+conforms_to = ["VER-REB-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T17:15:42Z"
+decided_by = "engineering-owner"
++++
+
+# Verification Record Candidate
+
+This ready record binds retained evidence for `WO-REB-022` to candidate commit `bfc08f0477475a1a128f9db68ba9b56685c5c10f`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+
+The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.

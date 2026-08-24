@@ -116,6 +116,9 @@ class MutationGuardTests(unittest.TestCase):
             isolated_python=True,
             user_site_enabled=False,
             pythonpath_present=False,
+            python_entry_is_link=False,
+            python_binary_position="within-expected-root",
+            python_binary_sha256="c" * 64,
             diagnostics=(),
         )
 

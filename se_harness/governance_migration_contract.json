@@ -30,12 +30,12 @@
     "separate-root-adoption": ["adopt"]
   },
   "adapters": {
-    "historical-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["assess"], "view": "predecessor-assessment-view-v1"},
-    "historical-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["prepare", "replace"], "view": "predecessor-preparation-view-v1"},
-    "historical-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["publish-plan", "render"], "view": "predecessor-publication-view-v1"},
-    "synthetic-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["assess"], "view": "synthetic-assessment-view-v1"},
-    "synthetic-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["prepare", "replace"], "view": "synthetic-preparation-view-v1"},
-    "synthetic-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "bcdaf2078e4161b4f18749f48560d9f3045a6cbab10363da9c8ca154179c6231", "stages": ["publish-plan", "render"], "view": "synthetic-publication-view-v1"}
+    "historical-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["assess"], "view": "predecessor-assessment-view-v1"},
+    "historical-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["prepare", "replace"], "view": "predecessor-preparation-view-v1"},
+    "historical-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["publish-plan", "render"], "view": "predecessor-publication-view-v1"},
+    "synthetic-predecessor-assessment-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["assess"], "view": "synthetic-assessment-view-v1"},
+    "synthetic-predecessor-preparation-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["prepare", "replace"], "view": "synthetic-preparation-view-v1"},
+    "synthetic-predecessor-publication-v1": {"implementation_path": "governance_migration.py", "implementation_sha256": "e8cdadd36e74494d793e98c9c70a718a87fd062a4929d51096da23238279fddc", "stages": ["publish-plan", "render"], "view": "synthetic-publication-view-v1"}
   },
   "credential_signals": ["ACTIONS_ID_TOKEN_REQUEST_TOKEN", "AWS_SECRET_ACCESS_KEY", "AZURE_CLIENT_SECRET", "GH_TOKEN", "GITHUB_TOKEN", "GOOGLE_APPLICATION_CREDENTIALS", "PYPI_API_TOKEN", "TWINE_PASSWORD"],
   "external_actions": ["credential-use", "deployment", "external-policy-change", "lifecycle-transition", "maintenance-mutation", "network", "publication", "release", "root-evaluator-upgrade", "tag"],

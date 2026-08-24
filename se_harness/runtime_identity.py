@@ -12,7 +12,7 @@ import site
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from se_harness import __version__
+from se_harness import __version__, interpreter_safety
 from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
     installed_evaluator_identity,
@@ -22,6 +22,11 @@ from se_harness.installer import HarnessError, template_root
 
 IDENTITY_SCHEMA = "se-harness-runtime-identity-v3"
 ROLES = {"released-evaluator", "candidate-source", "candidate-package"}
+#: Roles whose launcher must sit inside its own declared environment and
+#: outside the checkout. Only these roles turn an interpreter-safety refusal
+#: into a diagnostic; ``candidate-source`` deliberately has no environment
+#: boundary, because its expected root is the checkout itself.
+ENVIRONMENT_BOUNDED_ROLES = frozenset({"released-evaluator", "candidate-package"})
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 
@@ -56,6 +61,9 @@ class RuntimeIdentity:
     isolated_python: bool
     user_site_enabled: bool
     pythonpath_present: bool
+    python_entry_is_link: bool | None
+    python_binary_position: str | None
+    python_binary_sha256: str | None
     diagnostics: tuple[IdentityDiagnostic, ...]
 
     def to_dict(self) -> dict[str, object]:
@@ -149,6 +157,31 @@ def inspect_runtime_identity(
     installed_archive_name: str | None = None
     installed_archive_sha256: str | None = None
 
+    # Observe the launcher through the declared interpreter-safety rule. A POSIX
+    # virtual environment exposes bin/python as a terminal symbolic link, so the
+    # lexical launcher is the environment boundary and the resolved system binary
+    # is only the measured target. The observation is recorded for every role;
+    # only an environment-bounded role turns a refusal into a diagnostic.
+    bounded = role in ENVIRONMENT_BOUNDED_ROLES
+    entry_refusal: str | None = None
+    entry_is_link: bool | None = None
+    binary_position: str | None = None
+    binary_sha256: str | None = None
+    try:
+        entry = interpreter_safety.evaluate(
+            executable,
+            checkout_root=checkout if bounded else None,
+            declared_root=expected if bounded else None,
+        )
+    except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        entry_refusal = refusal.case
+    except interpreter_safety.InterpreterSafetyError:
+        entry_refusal = "EPS011"
+    else:
+        entry_is_link = entry.entry_is_link
+        binary_position = entry.binary_position
+        binary_sha256 = entry.binary_sha256
+
     if role not in ROLES:
         diagnostics.append(IdentityDiagnostic("RID001", "role", "unsupported runtime role"))
     if __version__ != expected_version:
@@ -173,7 +206,15 @@ def inspect_runtime_identity(
                 IdentityDiagnostic("RID003", label, "origin is outside the expected runtime root")
             )
 
-    if role in {"released-evaluator", "candidate-package"}:
+    if bounded:
+        if entry_refusal is not None:
+            diagnostics.append(
+                IdentityDiagnostic(
+                    "RID024",
+                    "python_executable",
+                    f"launcher refused by interpreter-safety case {entry_refusal}",
+                )
+            )
         if runtime_prefix != expected:
             diagnostics.append(
                 IdentityDiagnostic("RID004", "runtime_prefix", "runtime prefix differs from the expected environment")
@@ -315,6 +356,9 @@ def inspect_runtime_identity(
         isolated_python=isolated,
         user_site_enabled=user_site_enabled,
         pythonpath_present=pythonpath_present,
+        python_entry_is_link=entry_is_link,
+        python_binary_position=binary_position,
+        python_binary_sha256=binary_sha256,
         diagnostics=ordered,
     )
 
