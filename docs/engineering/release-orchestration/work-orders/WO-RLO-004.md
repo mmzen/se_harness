@@ -2,7 +2,7 @@
 id = "WO-RLO-004"
 type = "work_order"
 title = "Rehearse the credential-free last mile on both runner platforms"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -48,6 +48,8 @@ paths = [
 Issue [#111](https://github.com/mmzen/se_harness/issues/111) records `RC-060-11` from the immutable `0.6.0` release recovery analysis. Its authority boundary states that creating the issue authorizes no implementation, so the issue alone granted nothing.
 
 On 2026-08-24 the accountable repository owner stated `OK go for #111`, and in the same turn selected `Parallel lane + drift check` over a refactor of the release orchestrator, and `Fourth release-orchestration packet` as the governance home. That statement approves the complete `RLO-004` definition packet, authorizes this work order, and transitions it to `in_progress`. Completed work will transition only to `implemented`; release or operational reliance requires a later clean candidate, a ready VREC, an accountable assurance decision, and a governance commit. No production tag, branch, release, package publication, deployment, environment approval, push, or pull request is authorized by this transition.
+
+The implementation is complete at candidate commit `cfca2f350bd9aede69c336605d2b68fc50ffc29c`, and this work order moves to `implemented` in the following commit together with `evidence/WO-RLO-004-implementation.md`. That evidence records seven amendments to already-approved artifacts made during implementation; each is stated for the owner to accept or reject and none changes an approved `statement` field. `commit_bound_verification` remains `required` and unmet: no `VREC` exists, and this transition authorizes no push, pull request, workflow dispatch, release, publication, or deployment.
 
 ## Objective
 
