@@ -20,7 +20,7 @@
       "id": "EPS011",
       "subject": "link_predicate",
       "outcome": "refused",
-      "summary": "the runtime cannot classify a path as a symbolic link or a directory junction, so link safety cannot be decided"
+      "summary": "the runtime observes reparse information on its filesystem yet exposes no route that classifies a directory junction, so link safety cannot be decided"
     },
     {
       "id": "EPS001",
@@ -291,7 +291,7 @@
         "linux",
         "windows"
       ],
-      "summary": "a runtime that exposes neither a junction predicate nor the reparse-point constants needed to classify one; constructed by withdrawing the capability from the runtime rather than by building a path"
+      "summary": "a runtime that observes reparse information yet exposes neither a junction predicate nor the reparse-point constants needed to classify one; constructed on either platform by withdrawing and supplying the three named routes rather than by building a path, so the reachable and the unreachable combinations are both covered where the lane's own runtime cannot produce them"
     },
     {
       "id": "ISC017",

@@ -540,6 +540,23 @@ class RuleEvaluationTests(unittest.TestCase):
         second.symlink_to(first)
         self.assertEqual("EPS003", self._both(first))
 
+    def test_a_resolution_loop_reported_as_a_runtime_error_is_refused(self) -> None:
+        """Hold both loaders to `EPS003` when resolution reports a link cycle.
+
+        Constructing the cycle needs a link privilege one lane lacks, and below
+        Python 3.13 `Path.resolve` replaces the underlying `ELOOP` with a
+        `RuntimeError`. Supplying that report directly covers the rule's own
+        handling of it on either lane and at either version.
+        """
+
+        entry = self.fixture.environment("env")
+
+        def loop(target: Path, strict: bool = False) -> Path:
+            raise RuntimeError("Symlink loop from %r" % str(target))
+
+        with mock.patch.object(Path, "resolve", loop):
+            self.assertEqual("EPS003", self._both(entry))
+
     def test_a_deep_parent_chain_terminates_at_the_filesystem_root(self) -> None:
         deep = self.fixture.base
         for index in range(40):
@@ -772,15 +789,38 @@ ABSENT_REPARSE_CONSTANTS = (
     "FILE_ATTRIBUTE_REPARSE_POINT_WITHDRAWN",
     "IO_REPARSE_TAG_MOUNT_POINT_WITHDRAWN",
 )
+#: A stat-result member no runtime carries. Naming it withdraws the
+#: reparse-observability route on a platform whose stat result does carry
+#: reparse information.
+ABSENT_REPARSE_STAT_MEMBERS = ("st_file_attributes_withdrawn_for_conformance",)
+#: A stat-result member every runtime carries. Naming it supplies that route on a
+#: platform whose stat result reports no reparse information, so a lane can
+#: construct the combination its own runtime cannot produce.
+PRESENT_REPARSE_STAT_MEMBERS = ("st_mode",)
+#: A `pathlib.Path` attribute and two `stat` constants every runtime carries.
+#: The capability function probes only for their presence, so naming them
+#: supplies the corresponding route on a runtime that lacks the real one. They
+#: are used by the route-matrix test alone, which never classifies a real path.
+PRESENT_PATHLIB_PREDICATE = "is_dir"
+PRESENT_REPARSE_CONSTANTS = ("S_IFDIR", "S_IFREG")
 
 
 @contextlib.contextmanager
-def _without_routes(loader: object, *, pathlib_route: bool, stat_route: bool):
-    """Withdraw either junction-detection route from a loader for one block.
+def _without_routes(
+    loader: object,
+    *,
+    pathlib_route: bool,
+    stat_route: bool,
+    reparse_observable: bool | None = None,
+):
+    """Withdraw a junction-detection route from a loader for one block.
 
     Each route is named by a module constant, so withdrawing one is a matter of
     pointing that constant at a name the runtime does not carry. Nothing is
-    monkey-patched inside `stat` or `pathlib`, so the withdrawal cannot leak.
+    monkey-patched inside `stat`, `os` or `pathlib`, so the withdrawal cannot
+    leak. `reparse_observable` left as `None` keeps the running runtime's own
+    answer for the third route; setting it withdraws or supplies that route, so
+    either lane can construct the combination it cannot produce itself.
     """
 
     patches = []
@@ -788,19 +828,72 @@ def _without_routes(loader: object, *, pathlib_route: bool, stat_route: bool):
         patches.append(mock.patch.object(loader, "JUNCTION_PREDICATE", ABSENT_PREDICATE))
     if not stat_route:
         patches.append(mock.patch.object(loader, "REPARSE_CONSTANTS", ABSENT_REPARSE_CONSTANTS))
+    if reparse_observable is not None:
+        patches.append(
+            mock.patch.object(
+                loader,
+                "REPARSE_STAT_MEMBERS",
+                PRESENT_REPARSE_STAT_MEMBERS
+                if reparse_observable
+                else ABSENT_REPARSE_STAT_MEMBERS,
+            )
+        )
     with contextlib.ExitStack() as stack:
         for item in patches:
             stack.enter_context(item)
         yield
 
 
+@contextlib.contextmanager
+def _routes(loader: object, *, pathlib_route: bool, stat_route: bool, reparse_observable: bool):
+    """Pin all three named routes present or absent, whatever this runtime has.
+
+    `_without_routes` can only take a route away, so on any one lane it reaches
+    the combinations below that lane's own capabilities. This manager pins each
+    route to a name the runtime either does or does not carry, so every
+    combination in the decision table is constructable on every lane. It is used
+    only to exercise the capability decision, never to classify a real path: the
+    substituted names are probed for presence and are not read as reparse data.
+    """
+
+    with contextlib.ExitStack() as stack:
+        stack.enter_context(
+            mock.patch.object(
+                loader,
+                "JUNCTION_PREDICATE",
+                PRESENT_PATHLIB_PREDICATE if pathlib_route else ABSENT_PREDICATE,
+            )
+        )
+        stack.enter_context(
+            mock.patch.object(
+                loader,
+                "REPARSE_CONSTANTS",
+                PRESENT_REPARSE_CONSTANTS if stat_route else ABSENT_REPARSE_CONSTANTS,
+            )
+        )
+        stack.enter_context(
+            mock.patch.object(
+                loader,
+                "REPARSE_STAT_MEMBERS",
+                PRESENT_REPARSE_STAT_MEMBERS
+                if reparse_observable
+                else ABSENT_REPARSE_STAT_MEMBERS,
+            )
+        )
+        yield
+
+
 class JunctionPredicateTests(unittest.TestCase):
-    """`SPEC-REB-011` rule 4 as amended: two routes, either one sufficient.
+    """`SPEC-REB-011` rule 4 as amended: three routes, any one sufficient.
 
     ``pathlib.Path.is_junction`` exists only from Python 3.12 while every
     supported lane pins 3.11, so the reparse-point ``stat`` route must carry the
-    predicate there. These tests exercise each route in isolation and prove that
-    only the total absence of both refuses.
+    predicate there. That route rests on constants the platform publishes only
+    where it defines them, so a pre-3.12 runtime on a filesystem that reports no
+    reparse information has neither route and nothing for either to classify;
+    there the predicate answers ``False`` by construction. These tests exercise
+    each route in isolation and prove that only an unclassifiable reparse point
+    refuses.
     """
 
     def test_both_loaders_report_the_capability_on_this_runtime(self) -> None:
@@ -813,35 +906,143 @@ class JunctionPredicateTests(unittest.TestCase):
             hasattr(stat, name)
             for name in ("FILE_ATTRIBUTE_REPARSE_POINT", "IO_REPARSE_TAG_MOUNT_POINT")
         )
+        reparse_observable = all(
+            hasattr(os.stat_result, name) for name in ("st_file_attributes", "st_reparse_tag")
+        )
         self.assertTrue(
-            pathlib_route or stat_route,
-            f"neither route on {platform.python_version()} / {PLATFORM}",
+            pathlib_route or stat_route or not reparse_observable,
+            f"no route decides the predicate on {platform.python_version()} / {PLATFORM}",
         )
         if sys.version_info < (3, 12):
             self.assertFalse(pathlib_route, "3.11 must not expose the pathlib route")
-            self.assertTrue(stat_route, "3.11 must carry the predicate through stat")
+            if reparse_observable:
+                self.assertTrue(
+                    stat_route,
+                    "a pre-3.12 runtime that observes reparse information must carry "
+                    "the predicate through stat",
+                )
 
     def test_the_stat_route_alone_reports_the_capability(self) -> None:
         for loader in (interpreter_safety, tools_safety):
             with self.subTest(loader=loader.__name__):
-                with _without_routes(loader, pathlib_route=False, stat_route=True):
+                with _routes(
+                    loader, pathlib_route=False, stat_route=True, reparse_observable=True
+                ):
                     self.assertTrue(loader.link_classification_available())
 
     def test_the_pathlib_route_alone_reports_the_capability(self) -> None:
-        if not hasattr(Path, "is_junction"):
-            self.skipTest(
-                "this runtime predates pathlib.Path.is_junction, so the pathlib route "
-                "cannot be the surviving one here; the 3.12+ lane covers it"
-            )
         for loader in (interpreter_safety, tools_safety):
             with self.subTest(loader=loader.__name__):
-                with _without_routes(loader, pathlib_route=True, stat_route=False):
+                with _routes(
+                    loader, pathlib_route=True, stat_route=False, reparse_observable=True
+                ):
                     self.assertTrue(loader.link_classification_available())
+
+    def test_an_unobservable_reparse_surface_alone_reports_the_capability(self) -> None:
+        """The Python 3.11 POSIX combination: neither predicate route, no junction.
+
+        This is the combination every supported lane below 3.12 reaches off
+        Windows. Both predicate routes are absent there, so a capability rule
+        that consulted only those two would refuse every interpreter on the
+        pinned lane. The third route decides it instead.
+        """
+
+        for loader in (interpreter_safety, tools_safety):
+            with self.subTest(loader=loader.__name__):
+                with _routes(
+                    loader, pathlib_route=False, stat_route=False, reparse_observable=False
+                ):
+                    self.assertTrue(loader.link_classification_available())
+
+    def test_the_capability_decision_covers_every_route_combination(self) -> None:
+        """The whole decision table, constructed on whatever lane runs it.
+
+        Written as a test-owned expectation rather than by calling the loader
+        twice: the capability holds unless reparse information is observable
+        while neither predicate route can classify it.
+        """
+
+        owned = {
+            (True, True, True): True,
+            (True, True, False): True,
+            (True, False, True): True,
+            (True, False, False): True,
+            (False, True, True): True,
+            (False, True, False): True,
+            (False, False, True): False,
+            (False, False, False): True,
+        }
+        for (pathlib_route, stat_route, reparse_observable), expected in sorted(owned.items()):
+            for loader in (interpreter_safety, tools_safety):
+                with self.subTest(
+                    loader=loader.__name__,
+                    pathlib_route=pathlib_route,
+                    stat_route=stat_route,
+                    reparse_observable=reparse_observable,
+                ):
+                    with _routes(
+                        loader,
+                        pathlib_route=pathlib_route,
+                        stat_route=stat_route,
+                        reparse_observable=reparse_observable,
+                    ):
+                        self.assertEqual(expected, loader.link_classification_available())
+
+    def test_reparse_observability_is_reported_from_the_stat_result_members(self) -> None:
+        for loader in (interpreter_safety, tools_safety):
+            with self.subTest(loader=loader.__name__):
+                self.assertEqual(
+                    all(
+                        hasattr(os.stat_result, name)
+                        for name in ("st_file_attributes", "st_reparse_tag")
+                    ),
+                    loader.reparse_information_observable(),
+                )
+                with _without_routes(
+                    loader, pathlib_route=True, stat_route=True, reparse_observable=False
+                ):
+                    self.assertFalse(loader.reparse_information_observable())
+                with _without_routes(
+                    loader, pathlib_route=True, stat_route=True, reparse_observable=True
+                ):
+                    self.assertTrue(loader.reparse_information_observable())
+
+    def test_the_capability_rule_names_no_platform(self) -> None:
+        """`REQ-REB-024`: detection shall not depend on the platform name.
+
+        The third route is a capability observation on the runtime's own stat
+        result, not a platform test, and this asserts that mechanically over the
+        source of both loaders rather than trusting the docstring that says so.
+        """
+
+        markers = ("os.name", "sys.platform", "platform.system", "platform.platform", '"nt"')
+        for relative in sorted(LOADER_MODULES):
+            source = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
+            tree = ast.parse(source)
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.FunctionDef):
+                    continue
+                if node.name not in {
+                    "link_classification_available",
+                    "reparse_information_observable",
+                    "_is_junction",
+                    "_is_symlink",
+                }:
+                    continue
+                body = ast.get_source_segment(source, node) or ""
+                statements = "\n".join(
+                    line for line in body.splitlines() if not line.strip().startswith("#")
+                )
+                for marker in markers:
+                    with self.subTest(module=relative, function=node.name, marker=marker):
+                        self.assertNotIn(marker, statements)
 
     def test_withdrawing_both_routes_reports_no_capability(self) -> None:
         for loader in (interpreter_safety, tools_safety):
             with self.subTest(loader=loader.__name__):
-                with _without_routes(loader, pathlib_route=False, stat_route=False):
+                with _without_routes(
+                    loader, pathlib_route=False, stat_route=False, reparse_observable=True
+                ):
                     self.assertFalse(loader.link_classification_available())
 
     def test_withdrawing_both_routes_refuses_a_real_environment(self) -> None:
@@ -850,8 +1051,31 @@ class JunctionPredicateTests(unittest.TestCase):
             entry = fixture.environment("env")
             for loader in (interpreter_safety, tools_safety):
                 with self.subTest(loader=loader.__name__):
-                    with _without_routes(loader, pathlib_route=False, stat_route=False):
+                    with _without_routes(
+                        loader, pathlib_route=False, stat_route=False, reparse_observable=True
+                    ):
                         self.assertEqual("EPS011", loader.refusal_case(entry))
+
+    def test_a_runtime_with_no_reparse_surface_accepts_a_real_environment(self) -> None:
+        """The regression this amendment repairs, asserted against a real path.
+
+        Withdrawing both predicate routes on a runtime whose stat result reports
+        no reparse information must accept an ordinary environment rather than
+        refuse it with `EPS011`.
+        """
+
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = _Fixture(Path(temporary).resolve())
+            entry = fixture.environment("env")
+            for loader in (interpreter_safety, tools_safety):
+                with self.subTest(loader=loader.__name__):
+                    with _routes(
+                        loader, pathlib_route=False, stat_route=False, reparse_observable=False
+                    ):
+                        self.assertIsNone(loader.refusal_case(entry))
+                        self.assertEqual(
+                            entry.parent.parent, loader.evaluate(entry).environment_root
+                        )
 
     def test_withdrawing_both_routes_refuses_rather_than_passing(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

@@ -45,6 +45,11 @@ MAX_INTERPRETER_BYTES = 128 * 1024 * 1024
 JUNCTION_PREDICATE = "is_junction"
 #: The reparse-point constants that carry the same predicate on Python 3.11.
 REPARSE_CONSTANTS = ("FILE_ATTRIBUTE_REPARSE_POINT", "IO_REPARSE_TAG_MOUNT_POINT")
+#: The ``os.stat_result`` members through which a filesystem reports reparse
+#: information. A runtime whose stat result carries neither member observes no
+#: reparse point on any path, so the junction predicate answers ``False`` by
+#: construction there rather than being unavailable.
+REPARSE_STAT_MEMBERS = ("st_file_attributes", "st_reparse_tag")
 
 CASE_KEYS = frozenset({"id", "subject", "outcome", "summary"})
 BOUNDARY_KEYS = frozenset({"id", "runtime", "module", "purpose", "kind"})
@@ -288,23 +293,53 @@ def declared_corpus(path: Path | None = None) -> tuple[dict[str, Any], ...]:
     return tuple(load_declaration(path)["corpus"])
 
 
+def reparse_information_observable() -> bool:
+    """Report whether this runtime's stat result can carry reparse information.
+
+    The members are named by the constant above rather than written inline, so a
+    conformance test can withdraw or supply this route on either platform and
+    prove which condition decided the rule.
+    """
+
+    return all(hasattr(os.stat_result, name) for name in REPARSE_STAT_MEMBERS)
+
+
 def link_classification_available() -> bool:
     """Report whether this runtime can classify a path as a symbolic link or junction.
 
-    ``pathlib.Path.is_junction`` exists only from Python 3.12. This project
-    supports Python 3.11, where a directory junction is still classifiable from
-    the reparse information the platform puts on a ``stat`` result, so the
-    capability is present there too. Where neither route exists the rule refuses
-    with ``EPS011`` rather than passing the junction check silently.
+    Symbolic-link detection is present on every supported runtime. Junction
+    detection has three routes, any one of which decides the predicate:
 
-    Both routes are named by the constants above rather than written inline, so a
-    conformance test can withdraw either route on a runtime that has it and prove
-    the surviving route still decides the rule.
+    * ``pathlib.Path.is_junction``, which exists from Python 3.12;
+    * the reparse-point ``stat`` constants, which carry the same predicate on
+      Python 3.11 from the reparse information a ``stat`` result reports;
+    * a stat result that carries no reparse member at all, which observes a
+      filesystem on which no path is a reparse point, so the predicate answers
+      ``False`` by construction.
+
+    The third route is not a platform test. ``IO_REPARSE_TAG_MOUNT_POINT`` is
+    published only where the platform defines it, so a runtime below Python 3.12
+    on a filesystem without reparse information has neither of the first two
+    routes while having nothing for either to classify. On such a runtime
+    ``pathlib.Path.is_junction`` would itself return ``False`` for every path, so
+    treating the two conditions differently would refuse a runtime that a later
+    Python accepts without gaining any detection.
+
+    Only where reparse information is observable and neither predicate route
+    exists does the rule refuse with ``EPS011`` rather than passing the junction
+    check silently: there the platform can present a junction that this runtime
+    cannot classify.
+
+    Every route is named by a module constant rather than written inline, so a
+    conformance test can withdraw any of them on a runtime that has it and prove
+    which surviving route decided the rule.
     """
 
     if hasattr(Path, JUNCTION_PREDICATE):
         return True
-    return all(hasattr(stat, name) for name in REPARSE_CONSTANTS)
+    if all(hasattr(stat, name) for name in REPARSE_CONSTANTS):
+        return True
+    return not reparse_information_observable()
 
 
 def _is_symlink(path: Path) -> bool:
@@ -356,7 +391,7 @@ def _resolved_within(resolved: Path, boundary: Path) -> bool:
 
     try:
         resolved.relative_to(boundary.resolve(strict=True))
-    except (OSError, ValueError):
+    except (OSError, RuntimeError, ValueError):
         return False
     return True
 
@@ -445,10 +480,13 @@ def evaluate(
             "EPS002", "parent", "an enclosing directory is a directory junction"
         )
 
-    # Rule 5: strict resolution.
+    # Rule 5: strict resolution. A resolution failure is reported as an
+    # ``OSError`` on some runtimes and, for a symbolic-link cycle below Python
+    # 3.13, as a ``RuntimeError`` that replaces the underlying ``ELOOP``. Both
+    # mean the same thing to this rule: the path does not resolve.
     try:
         target = lexical.resolve(strict=True)
-    except OSError as exc:
+    except (OSError, RuntimeError) as exc:
         raise InterpreterSafetyRefusal(
             "EPS003", "interpreter", "the interpreter path does not resolve"
         ) from exc

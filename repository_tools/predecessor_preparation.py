@@ -196,6 +196,13 @@ def _ordinary_external(path: Path, label: str, root: Path) -> Path:
     raise PredecessorPreparationError(f"{label} must be outside the repository")
 
 
+#: The declared cases that report an enclosing directory standing on a link.
+#: This boundary's observable refusal wording for them predates the declared
+#: rule and is the reference for it, so the wording is retained ahead of the
+#: case identifier rather than replaced by it.
+LINK_TRAVERSAL_CASES = ("EPS001", "EPS002")
+
+
 def _safe_interpreter(
     path: Path, label: str, root: Path
 ) -> interpreter_safety.SafeEntryPoint:
@@ -213,6 +220,11 @@ def _safe_interpreter(
     try:
         return interpreter_safety.evaluate(path, checkout_root=root)
     except interpreter_safety.InterpreterSafetyRefusal as refusal:
+        if refusal.case in LINK_TRAVERSAL_CASES:
+            raise PredecessorPreparationError(
+                f"{label} environment must not traverse a link"
+                f" ({refusal.case}: {refusal.detail})"
+            ) from refusal
         raise PredecessorPreparationError(
             f"{label} is refused by {refusal.case}: {refusal.detail}"
         ) from refusal
