@@ -540,6 +540,23 @@ class RuleEvaluationTests(unittest.TestCase):
         second.symlink_to(first)
         self.assertEqual("EPS003", self._both(first))
 
+    def test_a_resolution_loop_reported_as_a_runtime_error_is_refused(self) -> None:
+        """Hold both loaders to `EPS003` when resolution reports a link cycle.
+
+        Constructing the cycle needs a link privilege one lane lacks, and below
+        Python 3.13 `Path.resolve` replaces the underlying `ELOOP` with a
+        `RuntimeError`. Supplying that report directly covers the rule's own
+        handling of it on either lane and at either version.
+        """
+
+        entry = self.fixture.environment("env")
+
+        def loop(target: Path, strict: bool = False) -> Path:
+            raise RuntimeError("Symlink loop from %r" % str(target))
+
+        with mock.patch.object(Path, "resolve", loop):
+            self.assertEqual("EPS003", self._both(entry))
+
     def test_a_deep_parent_chain_terminates_at_the_filesystem_root(self) -> None:
         deep = self.fixture.base
         for index in range(40):

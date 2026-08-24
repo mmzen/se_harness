@@ -6,7 +6,7 @@ Authority: non-authoritative retained implementation evidence. This file does no
 
 artifact: WO-REB-022
 checkpoint: handoff
-formal_snapshot_sha256: 10a3f61b7eb6ec4e8424d347f2fe92042a2775d7d7b87a7eacf7e971982bb3c1
+formal_snapshot_sha256: 6677917a6c00de493dc3dbe9eef41fc0124b5dfb158877a0583af4a43d044d44
 
 ## 1. Governing packet and preflight
 
@@ -189,7 +189,7 @@ Both scripts are run with the checkout as the working directory. An earlier run 
 
 ## 5. Changed-path manifest
 
-`WO-REB-022`'s execution scope lists ten paths as a maximum allowlist. Nine were changed. Added and removed lines, measured against the base commit:
+`WO-REB-022`'s execution scope lists eleven paths as a maximum allowlist, ten of them from the original packet and one added by the scope amendment of section 14.7. All eleven were changed. Added and removed lines, measured against the base commit with `git diff --numstat 2a6bae7`:
 
 | Path | Added | Removed |
 | --- | --- | --- |
@@ -197,15 +197,16 @@ Both scripts are run with the checkout as the working directory. An earlier run 
 | `docs/engineering/released-evaluator-boundary/requirements/REQ-REB-024.md` | 25 | 0 |
 | `docs/engineering/released-evaluator-boundary/specifications/SPEC-REB-011.md` | 36 | 1 |
 | `docs/engineering/released-evaluator-boundary/verification/VER-REB-010.md` | 24 | 2 |
-| `docs/engineering/released-evaluator-boundary/work-orders/WO-REB-022.md` | 149 | 0 |
-| `repository_tools/interpreter_safety.py` | 45 | 10 |
+| `docs/engineering/released-evaluator-boundary/work-orders/WO-REB-022.md` | 211 | 0 |
+| `repository_tools/interpreter_safety.py` | 51 | 13 |
+| `repository_tools/predecessor_preparation.py` | 12 | 0 |
 | `se_harness/interpreter_safety.json` | 2 | 2 |
-| `se_harness/interpreter_safety.py` | 45 | 10 |
-| `tests/test_interpreter_safety.py` | 225 | 18 |
+| `se_harness/interpreter_safety.py` | 51 | 13 |
+| `tests/test_interpreter_safety.py` | 242 | 18 |
 
-The tenth listed path is this evidence file. No unlisted path is touched; `git status --porcelain` names no other file.
+The eleventh listed path is this evidence file. Adding one path to the manifest moved the handoff snapshot: `formal_snapshot_sha256` was `10a3f61b7eb6ec4e8424d347f2fe92042a2775d7d7b87a7eacf7e971982bb3c1` for the ten-path manifest and is `6677917a6c00de493dc3dbe9eef41fc0124b5dfb158877a0583af4a43d044d44` for the eleven-path one. The digest binds the declared path set, not the bytes of this file: the section 14 commit changed 135 lines here and left it unmoved, and the added path moved it. No unlisted path is touched; `git status --porcelain` names no other file. Of the figures above, the amendment of section 14.7 accounts for `+6/-3` in each loader, all twelve lines in `repository_tools/predecessor_preparation.py`, seventeen lines in the focused test module, and sixty-two lines in the work order; the remainder is the original repair.
 
-The two loaders changed identically. Diffing their worktree diffs line by line leaves only two differing lines, both hunk headers (`@@ -44,6 +44,11 @@` against `@@ -45,6 +45,11 @@`, and `@@ -289,23 +294,53 @@` against `@@ -288,23 +293,53 @@`); every added and removed line of content is byte-identical between them.
+The two loaders changed identically. Their diffs are 105 lines each, and diffing them line by line leaves only eight differing lines: four file-header lines carrying the two paths and their blob identifiers, and four hunk headers whose line numbers differ by one because the two modules differ by one line above the first change (`@@ -44,6 +44,11 @@`, `@@ -289,23 +294,53 @@`, `@@ -357,7 +392,7 @@` and `@@ -446,10 +481,13 @@` against `@@ -45,6 +45,11 @@`, `@@ -288,23 +293,53 @@`, `@@ -356,7 +391,7 @@` and `@@ -445,10 +480,13 @@`). Every added and removed line of content is byte-identical between them.
 
 ## 6. The three routes and the capability decision table
 
@@ -332,15 +333,23 @@ base   worktree: python -m unittest tests.test_interpreter_safety -v
 repair worktree: python -m unittest tests.test_interpreter_safety -v
        Ran 88 tests in 0.806s
        OK (skipped=10)
+
+with the amendment of section 14.7 applied:
+       Ran 89 tests in 0.873s
+       OK (skipped=10)
 ```
 
-Test names were diffed: five added, none removed.
+Test names were diffed: six added, none removed. Five belong to the original repair:
 
 - `JunctionPredicateTests.test_an_unobservable_reparse_surface_alone_reports_the_capability`
 - `JunctionPredicateTests.test_the_capability_decision_covers_every_route_combination`
 - `JunctionPredicateTests.test_reparse_observability_is_reported_from_the_stat_result_members`
 - `JunctionPredicateTests.test_the_capability_rule_names_no_platform`
 - `JunctionPredicateTests.test_a_runtime_with_no_reparse_surface_accepts_a_real_environment`
+
+and the sixth to the amendment:
+
+- `RuleEvaluationTests.test_a_resolution_loop_reported_as_a_runtime_error_is_refused`
 
 The skip count is 10 in both runs. The four named skips are the pre-existing Windows symbolic-link privilege skips for `ISC002`, `ISC004`, `ISC006` and `ISC013`. The repair removes a skip rather than adding one: the base commit's `test_the_pathlib_route_alone_reports_the_capability` called `self.skipTest` when `pathlib.Path.is_junction` was absent, and the repaired version pins that route present instead. The removal is invisible in the count on this host, where the route exists and the skip never fired; it is visible on the pinned 3.11 lane, where it did.
 
@@ -349,6 +358,7 @@ Full suite:
 ```text
 base   worktree: Ran 764 tests in 278.425s   FAILED (failures=4, skipped=22)
 repair worktree: Ran 769 tests in 281.211s   FAILED (failures=4, skipped=22)
+amended  checkout: Ran 770 tests in 300.771s   FAILED (failures=4, skipped=22)
 ```
 
 The two failure-name sets are identical, and both contain exactly the four known Windows line-ending failures of this host:
@@ -358,7 +368,7 @@ The two failure-name sets are identical, and both contain exactly the four known
 - `test_hash_bound_integrity.test_declaration_is_data_only`
 - `test_release_build.test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_one_skill_core`
 
-Delta added: none. Delta removed: none. The test-count delta is exactly `769 - 764 = 5`, the five tests added here. The base commit's own 764 is the same total the hosted lane ran, where those four pass and the interpreter-safety failures do not exist.
+Delta added: none. Delta removed: none. All three runs carry the same four names and no others. The test-count delta is exactly `770 - 764 = 6`, the six tests added here. The base commit's own 764 is the same total the hosted lane ran, where those four pass and the interpreter-safety failures do not exist.
 
 Remaining required checks, all from the candidate checkout on Python 3.14.6:
 
@@ -386,6 +396,8 @@ Three artifacts restate the rule this repair changes, and all three were amended
 - **`REQ-REB-024`**, amended once, under the owner's explicit decision to amend the requirement rather than rely on the specification alone. A second constraint states that a runtime observing no reparse information answers the junction question rather than disabling the check, that the observation is a runtime capability read from the stat-result surface rather than a platform identifier, and that the check is disabled only if a runtime that can encounter a reparse point proceeds without classifying it. The `WHEN` statement, the required response, every listed refusal form, the failure and boundary behavior, every acceptance example, and the first constraint are unchanged.
 
 The domain index gained one paragraph recording the defect, the hosted measurement, the third route, the forward-only-lifecycle reason for a separate work order, and the supersession of `VREC-REB-017` rather than a re-pointing of it.
+
+A fourth amendment is recorded on this work order itself rather than on a definition artifact: the scope amendment of section 14.7, which adds one path and authorizes two bounded repairs of defects this work order's own repair unmasked. No specification, requirement or verification text was amended for either of them. Rule 5 of `SPEC-REB-011` already reads "If resolution fails, refuse with `EPS003`", and rule 22 already freezes `predecessor_preparation`'s observable behavior; both repairs implement text that was already approved, which is why the amendment is a scope decision and not a definition change.
 
 ## 12. Non-change proofs
 
@@ -544,7 +556,74 @@ Accordingly:
 - `WO-REB-022` stays `in_progress`. It is not transitioned to `implemented`, because its own required verification is "Confirm on the hosted lane that the previously failing job passes", and the job does not pass.
 - No verification record binds this work order or `WO-REB-021`, and `VREC-REB-017` is not superseded, until a bounded amendment is decided and the lane is measured green.
 
-The requested amendment and its alternatives are an owner decision recorded where that decision is taken, not here. This section records only what was measured.
+### 14.7 The amendment, and the repair it authorized
+
+The bounded amendment was requested with all three routings measured first, and the engineering owner decided on 2026-08-24 to extend this work order by one path — `repository_tools/predecessor_preparation.py` — and repair both causes under it, rather than open a third work order or ratify the changed message. The owner decided in the same act that the restored message retains the frozen wording and carries the declared case identifier after it in parentheses. The decision, the alternatives, and the reasons are recorded in the work order's own `## Scope amendment, 2026-08-24` section.
+
+Both repairs are now applied in the checkout, and the probe of section 14.5 was re-run against the checkout rather than against the throwaway worktree:
+
+```text
+resolve/se_harness   : EPS003 interpreter: the interpreter path does not resolve
+resolve/repo_tools   : EPS003 interpreter: the interpreter path does not resolve
+message/EPS001      : matches_base_wording=True :: evaluator interpreter environment must not traverse a link (EPS001: an enclosing directory is a symbolic link)
+message/EPS002      : matches_base_wording=True :: evaluator interpreter environment must not traverse a link (EPS002: an enclosing directory is a symbolic link)
+message/EPS003      : matches_base_wording=False :: evaluator interpreter is refused by EPS003: an enclosing directory is a symbolic link
+```
+
+The `EPS003` row is the control: it is not an enclosing-link case, so it keeps the case-identifier wording and shows that the restored message is bounded to the two cases the frozen wording described.
+
+What the two repairs are, exactly:
+
+- **Both loaders, rule 5 and `_resolved_within`.** `except OSError` becomes `except (OSError, RuntimeError)`, and `except (OSError, ValueError)` becomes `except (OSError, RuntimeError, ValueError)`, with a comment naming why: below Python 3.13 `pathlib` catches the underlying `ELOOP` itself and re-raises a `RuntimeError` in its place. The refused case, its subject and its detail are unchanged. No new case, no new acceptance: a path that resolved before still resolves, and a path that failed to resolve is now refused with `EPS003` on every supported runtime instead of only on those that report the failure as an `OSError`.
+- **`predecessor_preparation._safe_interpreter`.** For the two declared cases that report an enclosing directory standing on a link, named in a module-level `LINK_TRAVERSAL_CASES` constant, the raised `PredecessorPreparationError` message begins with the wording the base commit produced and appends the declared case and detail in parentheses. Every other case keeps the `is refused by <case>: <detail>` wording introduced by `WO-REB-021`. Nothing else in the module changes: the same paths are accepted, the same paths are refused, the same exception type is raised, and the entry point and environment root it returns are untouched.
+
+Both are corrections toward already-approved text, not new policy. Neither weakens a refusal: the first turns an escaping `RuntimeError` into the declared refusal, and the second changes only the words a refusal already carried.
+
+`tests/test_predecessor_preparation.py` is unchanged and remains outside the execution scope. Its `test_external_interpreter_rejects_linked_environment_parent` is the test that failed on the hosted lane, and it passes against the repair without being touched, which is the evidence that the frozen wording is genuinely restored rather than accommodated.
+
+Local qualification after the amendment, from the candidate checkout on Python 3.14.6:
+
+```text
+python -m unittest tests.test_interpreter_safety tests.test_predecessor_preparation
+        tests.test_predecessor_assessment_contract tests.test_predecessor_publication
+        tests.test_release_bootstrap
+Ran 137 tests in 27.345s
+OK (skipped=12)
+```
+
+Two of the twelve skips in that focused run are the POSIX-only preparation tests; the hosted lane is where they run. The full suite is in section 10: 770 tests, the same four known line-ending failures, `skipped=22`. Every remaining gate was re-run after the amendment rather than carried forward:
+
+```text
+python scripts/validate_engineering_artifacts.py --root .
+Engineering artifact validation: PASS
+Artifacts: 786 | Errors: 0 | Warnings: 50
+Planes: structure E0/W0 | governance E0/W0 | policy E0/W0 | maintenance E0/W50
+
+python scripts/validate_release_distributions.py --root .
+SE Harness release distribution validation: PASS (1 distribution-bearing record)
+
+python scripts/check_portable_release_surface.py --repository .
+portable release surface: PASS
+
+python -m se_harness --help
+exit code 0
+
+C:\Users\mathi\se_harness_eval_060\Scripts\python.exe -I -m se_harness validate .
+Engineering artifact validation: PASS
+Artifacts: 786 | Errors: 0 | Warnings: 50
+
+C:\Users\mathi\se_harness_eval_060\Scripts\python.exe -I -m se_harness preflight . --work-order WO-REB-022 --phase review
+Harness preflight: PASS
+
+C:\Users\mathi\se_harness_eval_060\Scripts\python.exe -I -m se_harness check . --artifact WO-REB-022 --checkpoint handoff --changes-complete --changed-path ... (eleven paths)
+Outcome: Completed.
+```
+
+The artifact count stays 786 and the warning count stays 50: the amendment adds no artifact and no maintenance warning. `--phase implement` does not exist on the released evaluator — it offers `start` and `review` only — so `review` is the phase-appropriate one here.
+
+### 14.8 Second hosted run
+
+Not yet observed at the time this section was written. The amendment commit is pushed to the same branch and the same pull request, `PR #140`, whose stored event payload already carries `Harness-Work-Order: WO-REB-022`; the push produces a `synchronize` event and a new run. That run's identifier and result are recorded in this section in a bounded follow-up commit. Until that measurement exists this file claims nothing about the pinned lane beyond section 14.2's measured movement and the probe above, and `WO-REB-022` stays `in_progress` for the reason section 14.6 gives.
 
 ## 15. Coverage gaps and residual risks
 

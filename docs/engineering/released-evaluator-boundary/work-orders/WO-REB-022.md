@@ -21,6 +21,7 @@ paths = [
   "docs/engineering/released-evaluator-boundary/verification/VER-REB-010.md",
   "docs/engineering/released-evaluator-boundary/work-orders/WO-REB-022.md",
   "repository_tools/interpreter_safety.py",
+  "repository_tools/predecessor_preparation.py",
   "se_harness/interpreter_safety.json",
   "se_harness/interpreter_safety.py",
   "tests/test_interpreter_safety.py",
@@ -58,6 +59,67 @@ This draft packet proposes a bounded repair of one defect in the rule implemente
 If the accountable owners approve this work order, a separate explicit start may authorize only the local implementation and qualification described here. Approval and start do not authorize a release, a tag, a publication, a deployment, a maintenance mutation, credential use, an external-policy change, or a root-evaluator adoption. GitHub issue #106's own boundary applies unchanged.
 
 Pushing this branch and opening one pull request that carries this work order alone are authorized by the engineering owner in the same act that approves this packet. The `WO-REB-021` pull request is not to be reused: two work orders shall not share one diff.
+
+## Scope amendment, 2026-08-24
+
+Amended on 2026-08-24 by the engineering owner, during implementation and on an
+explicit request, after two of this work order's stop-and-escalate conditions
+fired together: "The hosted lane still fails after the repair, or fails for a
+second unrelated cause" and "Another file … is required".
+`repository_tools/predecessor_preparation.py` is added to `[execution_scope]`,
+and two bounded repairs are authorized: one resolution clause in each loader,
+and the refusal wording of one function in that module.
+
+The reason is that this work order's repair unmasked two further defects in the
+implementation `WO-REB-021` accepted. Both were hidden behind the blanket
+`EPS011` refusal, and neither is reachable on the Windows development lane: one
+needs a symbolic-link privilege that lane lacks, the other is skipped there by
+`skipIf(os.name == "nt")`. Both test names appear in the pre-repair hosted
+failure list for `f9225f88` carrying `EPS011`, so neither is a regression of
+this repair. The hosted lane measured the pinned lane at 71 failures and errors
+before this branch and 2 after it, in run `32745833437`.
+
+The first defect is inside this work order's original scope and needs no
+artifact change. `SPEC-REB-011` rule 5 already reads "If resolution fails,
+refuse with `EPS003`", but `evaluate` guards `Path.resolve(strict=True)` with
+`except OSError`, and below Python 3.13 `pathlib` catches the underlying `ELOOP`
+itself and re-raises `RuntimeError("Symlink loop from …")`. The refusal escapes
+uncaught on every pinned lane. `_resolved_within` has the same hole. Widening
+both clauses implements the declared rule rather than changing it.
+
+The second defect needs the added file. `WO-REB-021` re-pointed
+`predecessor_preparation._safe_interpreter` at the declared rule and replaced
+that boundary's observable refusal message with `is refused by <case>: <detail>`.
+`SPEC-REB-011` rule 22 states that this module's "current observable behavior is
+the reference for the rule and shall not change", and `WO-REB-021`'s own
+stop-and-escalate list names "Correcting a boundary would change the observable
+behavior of `predecessor_preparation`". The frozen wording is therefore restored
+rather than ratified. The engineering owner decided in the same act that the
+message retains the frozen wording and carries the declared case identifier
+after it in parentheses, so the diagnostic keeps the case that the rule decided.
+Ratifying the changed message instead — by amending rule 22 and the test that
+reads it — was put to the owner and rejected: the change would be ratified in a
+work order that did not make it, at a boundary two approved artifacts froze.
+
+Both repairs were measured before the decision, by applying and reverting them
+in a throwaway worktree at `def1484`: 41 insertions and 6 deletions across four
+files, of which 17 insertions are one lane-independent conformance test in the
+already-in-scope focused module. That test supplies the report the pinned lane
+produces instead of the platform that produces it, so it covers the clause on
+either lane and at either version; with the loader repair reverted it fails with
+the hosted `RuntimeError`, so it bites. `tests/test_predecessor_preparation.py`
+needs no change and is deliberately not added to the scope: the existing test
+that reads the frozen wording passes unchanged, which is the point.
+
+The amendment authorizes those two repairs and nothing else. No declared case,
+corpus identifier, evaluation-order position, boundary registration, acceptance
+or refusal changes; no waiver is introduced; no platform name enters policy, the
+declaration, or any function; `EPS003` and `EPS001` keep their declared meaning;
+the two loaders stay mirrors; and `predecessor_preparation` returns to the
+observable behavior its specification froze rather than departing further from
+it. `tests/test_predecessor_preparation.py`,
+`repository_tools/predecessor_assessment.py`, `WO-REB-021`, its retained
+evidence, and `VREC-REB-017` are untouched.
 
 ## Defect
 

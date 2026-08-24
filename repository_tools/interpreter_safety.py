@@ -391,7 +391,7 @@ def _resolved_within(resolved: Path, boundary: Path) -> bool:
 
     try:
         resolved.relative_to(boundary.resolve(strict=True))
-    except (OSError, ValueError):
+    except (OSError, RuntimeError, ValueError):
         return False
     return True
 
@@ -480,10 +480,13 @@ def evaluate(
             "EPS002", "parent", "an enclosing directory is a directory junction"
         )
 
-    # Rule 5: strict resolution.
+    # Rule 5: strict resolution. A resolution failure is reported as an
+    # ``OSError`` on some runtimes and, for a symbolic-link cycle below Python
+    # 3.13, as a ``RuntimeError`` that replaces the underlying ``ELOOP``. Both
+    # mean the same thing to this rule: the path does not resolve.
     try:
         target = lexical.resolve(strict=True)
-    except OSError as exc:
+    except (OSError, RuntimeError) as exc:
         raise InterpreterSafetyRefusal(
             "EPS003", "interpreter", "the interpreter path does not resolve"
         ) from exc
