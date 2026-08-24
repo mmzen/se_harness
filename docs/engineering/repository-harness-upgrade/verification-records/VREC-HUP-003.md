@@ -2,10 +2,10 @@
 id = "VREC-HUP-003"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-002"
-status = "ready"
+status = "rejected"
 owners = ["quality-owner"]
 created = "2026-08-23"
-updated = "2026-08-23"
+updated = "2026-08-24"
 commit = "ea7b837438a0fb32b8f6b51c630e98b9706ea039"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,19 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-003-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+rejected_at = "2026-08-24T07:46:13Z"
+rejected_by = "assurance-owner"
+rejection_reason = "Candidate ea7b837438a0fb32b8f6b51c630e98b9706ea039 failed hosted qualification; corrected aggregate VREC-HUP-005 is verified."
 [relations]
 verifies_work_order = ["WO-HUP-002"]
 conforms_to = ["VER-HUP-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "rejected"
+decided_at = "2026-08-24T07:46:13Z"
+decided_by = "assurance-owner"
+reason = "Candidate ea7b837438a0fb32b8f6b51c630e98b9706ea039 failed hosted qualification; corrected aggregate VREC-HUP-005 is verified."
 +++
 
 # Verification Record Candidate
