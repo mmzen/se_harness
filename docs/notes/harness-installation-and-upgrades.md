@@ -13,6 +13,13 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
+The repository-managed surface includes the portable `harness-orient` core at
+`.agents/skills/harness-orient/`. Its `SKILL.md`, strict
+`skill-contract.json`, and standard-library runner are managed files. They are
+installed and upgraded through the same ownership-aware transaction as other
+managed template content; installing only the Python package does not add them
+to an existing repository.
+
 After initial installation, mutating commands use the repository's `.engineering-harness.lock` as the expected released-evaluator identity. Run them from a dedicated environment outside the target checkout. The guard rejects a source checkout, editable install, wrong payload or archive, unresolved or foreign launcher, enabled user site, inherited `PYTHONPATH`, and other ambiguous origins before it creates a directory, temporary file, or formal record. Read-only planning and inspection remain available when mutation authority is unavailable.
 
 ## Windows PowerShell
@@ -92,6 +99,12 @@ harnessctl dashboard C:\path\to\repository
 
 Explorer is a progressive static bundle. Serve `target/harness-dashboard/` over HTTP rather than opening `index.html` directly; for example, run `python -m http.server 8000 --directory target/harness-dashboard` from the repository and open `http://localhost:8000/`.
 
+Supported agents can load `.agents/skills/harness-orient/SKILL.md` for a
+read-only orientation. The skill requires a structured launcher for the exact
+external released evaluator and returns its execution receipt inline; it does
+not install an evaluator or retain evidence in the target. See
+[read-only agent orientation](harness-orient.md) for the complete procedure.
+
 ## Upgrade an existing installation
 
 The package-only shorthand remains useful for obtaining read-only planning and inspection behavior:
@@ -133,11 +146,48 @@ Product implementation or release authorization does not authorize this later ro
 
 The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
 
+This rule also covers `.agents/skills/harness-orient/`. If a repository edits a
+managed skill file, the upgrade plan reports it as customized and preserves the
+bytes. Move repository-specific instructions outside the managed core or
+restore the exact locked content before reviewing a fresh upgrade plan.
+
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
+
+After a future upgrade installs a release containing the role-specific qualification interface, the managed workflow runs `qualify released-root`. That command derives the expected evaluator version, archive digest, and installed-payload digest from the repository lock, proves the current environment owns those exact bytes, and then performs managed-file and complete-graph checks. The candidate template can contain this behavior before the current root adopts it; template availability does not itself change root authority.
 
 Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout representation does not create false customization. This portability rule does not excuse a real content mismatch.
 
 Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations under the enforcing release. Their single transition path is the reviewed `upgrade --apply` above, from an already-published target evaluator. Once schema 3 is installed, ordinary mutation requires exact agreement with the lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
+
+### Release records cut before evaluator evidence existed
+
+Schema 3 requires an evaluator-evidence binding on every `ready` and `released` release record, and a released record can never be rewritten to add one. A repository that released under an earlier schema therefore holds records that can never satisfy the enforcing rule. Those records are declared, not rewritten.
+
+The declaration is one optional array in the authorizing work order's own `[evaluator_upgrade]` packet, listing the pre-enforcement records by identifier:
+
+```toml
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "..."
+target_version = "VERSION"
+target_payload_sha256 = "..."
+target_archive_name = "se_harness-VERSION-py3-none-any.whl"
+target_archive_sha256 = "..."
+publication = "immutable"
+authorized_by = "repository-owner"
+legacy_releases_without_evaluator_evidence = ["RLS-XYZ-001"]
+```
+
+A declaration is honoured only for a record that is `released`, carries neither binding field, and was released strictly before the declaring work order was approved. It can never reach a release cut after that approval, and a partially bound record is never exempt. An unresolvable member is an error on the declaring work order, so a typo fails closed rather than widening the exemption.
+
+A declaration is a permanent historical fact. Once an authority-granting work order declares a record, later upgrades need no fresh declaration: the same packet keeps answering for those records. Add the array only to the work order that first crosses into enforcement, and only for records that already existed.
+
+Each accepted exemption raises one `W024` maintenance warning naming the record and its declarer, so the outstanding binding stays visible. Validation passes; the warning is the debt.
+
+`upgrade --apply` refuses an evaluator identity transition before writing anything when the repository holds a released record with no binding and no declaration, and names the records and the packet field to declare them in. Read-only `harnessctl upgrade` prints the same list as a planning notice and still exits successfully, so the declaration can be prepared before the apply.
+
+This repository's own pre-enforcement releases predate the mechanism and stay in a frozen, closed compatibility set rather than a declaration.
 
 ## Ownership and safety
 

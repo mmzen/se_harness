@@ -4,6 +4,7 @@
 
 ## Product and governance domains
 
+- `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
 - `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.
 - `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.
 - `revision-provenance/`: commit-bound verification and release record preparation.
@@ -24,6 +25,7 @@
 - `work-order-assurance-classification/`: explicit work-order applicability for commit-bound verification and derived assurance follow-up.
 - `workflow-execution/`: deterministic bounded workflow scope, lifecycle mutation rules, and canonical agent-independent handoffs.
 - `hash-bound-integrity/`: declared hash-bound text classes, one mode per class, and fail-closed completeness assessment of their checkout bytes.
+- `legacy-release-evidence/`: declared exemptions for released records that predate evaluator-evidence enforcement, and pre-apply refusal of an upgrade that would freeze a repository.
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
 - `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.

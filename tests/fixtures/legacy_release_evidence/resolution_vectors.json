@@ -1,0 +1,296 @@
+{
+  "schema": "se-harness-legacy-release-evidence-vectors-v1",
+  "specification": "SPEC-LRE-001",
+  "note": "One semantics, two implementations. Every vector is resolved by both se_harness.legacy_release_evidence.resolve and the candidate validator's resolve_legacy_release_evidence, and both must return this exact result. Inputs are normalized views, not artifact files.",
+  "cases": [
+    {
+      "name": "accepted-declaration",
+      "rule": "5",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {"RLS-CON-001": "WO-CON-001"}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "declarer-status-does-not-grant-authority",
+      "rule": "3",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "draft", "approved_at": null, "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "declaration-survives-later-work-order-states",
+      "rule": "6",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "implemented", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {"RLS-CON-001": "WO-CON-001"}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "chronology-equal-instants-are-not-strictly-before",
+      "rule": "5",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-08-24T10:44:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "release record was released after the declaring work order was approved"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "chronology-declaration-cannot-reach-a-later-release",
+      "rule": "5",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-09-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "release record was released after the declaring work order was approved"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "release-record-has-no-canonical-released-at",
+      "rule": "5",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "release record has no valid released_at timestamp"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "partial-binding-is-never-exempt",
+      "rule": "7",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": true, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "release record already carries evaluator evidence"}], "undeclared": []}
+    },
+    {
+      "name": "non-released-record-is-never-exempt",
+      "rule": "8",
+      "records": [
+        {"id": "RLS-CON-001", "status": "ready", "released_at": null, "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "release record status is not released"}], "undeclared": []}
+    },
+    {
+      "name": "declared-identifier-matches-no-record",
+      "rule": "9",
+      "records": [],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "no release record has this identifier"}], "undeclared": []}
+    },
+    {
+      "name": "declared-identifier-is-ambiguous",
+      "rule": "9",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false},
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-02T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-001", "reason": "more than one release record has this identifier"}], "undeclared": []}
+    },
+    {
+      "name": "declared-identifier-is-not-a-release-record-id",
+      "rule": "9",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["rls-con-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": "rls-con-001", "reason": "invalid release record identifier"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "declaration-is-not-an-array",
+      "rule": "1",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": "RLS-CON-001"}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": null, "reason": "declaration must be an array of strings"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "declaration-holds-a-non-string-member",
+      "rule": "1",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001", 7]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": null, "reason": "declaration must be an array of strings"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "declarer-has-no-approval-instant",
+      "rule": "4",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": null, "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": null, "reason": "declaring work order has no draft-to-approved lifecycle event"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "declarer-approval-instant-is-not-canonical",
+      "rule": "4",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24 10:44:00", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [{"work_order": "WO-CON-001", "record": null, "reason": "declaring work order has no draft-to-approved lifecycle event"}], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "empty-declaration-declares-nothing",
+      "rule": "1",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": []}}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "packet-without-the-declaration-field",
+      "rule": "2",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only"}}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "packet-schema-is-foreign",
+      "rule": "3",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "some-other-schema-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "packet-scope-is-foreign",
+      "rule": "3",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "whole-repository", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "packet-is-not-a-table",
+      "rule": "3",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": "se-harness-evaluator-upgrade-v1"}
+      ],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-CON-001"]}
+    },
+    {
+      "name": "lexicographically-smallest-declarer-is-named",
+      "rule": "10",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-002", "status": "in_progress", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}},
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:45:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {"RLS-CON-001": "WO-CON-001"}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "one-declaration-mixes-an-exemption-and-a-defect",
+      "rule": "9",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false},
+        {"id": "RLS-CON-002", "status": "released", "released_at": "2026-09-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-002", "RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {"RLS-CON-001": "WO-CON-001"}, "defects": [{"work_order": "WO-CON-001", "record": "RLS-CON-002", "reason": "release record was released after the declaring work order was approved"}], "undeclared": ["RLS-CON-002"]}
+    },
+    {
+      "name": "duplicate-members-resolve-once",
+      "rule": "1",
+      "records": [
+        {"id": "RLS-CON-001", "status": "released", "released_at": "2026-06-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [
+        {"id": "WO-CON-001", "status": "approved", "approved_at": "2026-08-24T10:44:00Z", "evaluator_upgrade": {"schema": "se-harness-evaluator-upgrade-v1", "scope": "standard-root-only", "legacy_releases_without_evaluator_evidence": ["RLS-CON-001", "RLS-CON-001"]}}
+      ],
+      "expected": {"exemptions": {"RLS-CON-001": "WO-CON-001"}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "frozen-self-hosting-set-needs-no-declaration",
+      "rule": "11",
+      "records": [
+        {"id": "RLS-SEH-001", "status": "released", "released_at": "2026-01-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [],
+      "expected": {"exemptions": {"RLS-SEH-001": "self-hosting-compatibility-set"}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "frozen-self-hosting-set-yields-to-an-existing-binding",
+      "rule": "11",
+      "records": [
+        {"id": "RLS-SEH-001", "status": "released", "released_at": "2026-01-01T00:00:00Z", "path_present": true, "digest_present": true}
+      ],
+      "work_orders": [],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": []}
+    },
+    {
+      "name": "frozen-self-hosting-set-is-closed-to-neighbours",
+      "rule": "11",
+      "records": [
+        {"id": "RLS-SEH-003", "status": "released", "released_at": "2026-01-01T00:00:00Z", "path_present": false, "digest_present": false},
+        {"id": "RLS-SEH-008", "status": "released", "released_at": "2026-01-01T00:00:00Z", "path_present": false, "digest_present": false}
+      ],
+      "work_orders": [],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": ["RLS-SEH-003", "RLS-SEH-008"]}
+    },
+    {
+      "name": "no-records-and-no-work-orders",
+      "rule": "9",
+      "records": [],
+      "work_orders": [],
+      "expected": {"exemptions": {}, "defects": [], "undeclared": []}
+    }
+  ]
+}

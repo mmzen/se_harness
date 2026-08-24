@@ -62,6 +62,10 @@ The retained file is `governance-migration-result.json`. Important fields are:
 
 A pass is qualification evidence. Accountable owners still decide whether to approve requirements, verify a VREC, release an RLS, publish, or later adopt the released evaluator.
 
+## Relationship to release qualification roles
+
+The migration rehearsal proves the whole simulated predecessor-to-successor sequence in disposable state. It does not replace the narrower operational claims made by `harnessctl qualify`. A real workflow records complete successor validation as `complete-candidate`, a release-bound predecessor compatibility check as `predecessor-view`, and later root ownership as `released-root`. The rehearsal result and those typed results remain separate evidence because they answer different questions.
+
 ## Failure behavior
 
 The runner fails before or at the affected stage when it sees an unknown field, noncanonical JSON, missing or reordered stage, role substitution, forged decision fixture, undeclared adapter or view, shared runtime, checkout import, credential-bearing environment, unexpected write, timeout, malformed child report, source/ref change, failed rollback, or result disagreement.

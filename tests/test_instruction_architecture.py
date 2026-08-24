@@ -712,13 +712,15 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn('"se-harness==$SE_HARNESS_VERSION"', workflow)
         self.assertIn("--only-binary=:all:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("-I -c", workflow)
-        self.assertIn("'role':'consumer-evaluator'", workflow)
+        self.assertNotIn("-I -c", workflow)
+        self.assertNotIn("'role':'consumer-evaluator'", workflow)
         self.assertIn("select-work-order --event", workflow)
         self.assertIn("--phase review", workflow)
         self.assertIn("-I -m se_harness preflight .", workflow)
-        self.assertIn("-I -m se_harness doctor .", workflow)
-        self.assertIn("-I -m se_harness validate .", workflow)
+        self.assertIn("qualify released-root \"$GITHUB_WORKSPACE\"", workflow)
+        self.assertIn("released-root-qualification.json", workflow)
+        self.assertNotIn("-I -m se_harness doctor .", workflow)
+        self.assertNotIn("-I -m se_harness validate .", workflow)
         self.assertIn("-I -m se_harness dashboard .", workflow)
         self.assertNotIn("/harnessctl", workflow)
         self.assertNotIn("select_harness_work_order.py", workflow)
@@ -740,6 +742,35 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(HASH_MODE, lock["hash_mode"])
         self.assertEqual(__version__, lock["evaluator"]["version"])
         self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
+
+    def test_portable_orientation_skill_is_managed_provider_neutral_and_non_authoritative(self) -> None:
+        target = self.installed_target("portable-skill")
+        skill = target / ".agents/skills/harness-orient"
+        self.assertEqual(
+            ["SKILL.md", "scripts/orient.py", "skill-contract.json"],
+            sorted(path.relative_to(skill).as_posix() for path in skill.rglob("*") if path.is_file()),
+        )
+        contract = json.loads((skill / "skill-contract.json").read_text(encoding="utf-8"))
+        self.assertEqual("read-only", contract["mutation_class"])
+        self.assertEqual({"allowed": False, "fallback": "single-agent"}, contract["delegation"])
+        self.assertFalse(contract["evidence"]["target_retention"])
+        instructions = (skill / "SKILL.md").read_text(encoding="utf-8").lower()
+        normalized_instructions = " ".join(instructions.split())
+        self.assertIn("harness remains the authority", instructions)
+        self.assertLess(
+            instructions.index("before executing any bundled helper"),
+            instructions.index("then run `scripts/orient.py`"),
+        )
+        self.assertIn("stop without running the helper", normalized_instructions)
+        self.assertIn("do not start work", instructions)
+        for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
+            with self.subTest(provider=provider):
+                self.assertNotIn(provider, instructions)
+        self.assertFalse((skill / "agents/openai.yaml").exists())
+        self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
+        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
+            self.assertEqual("managed", lock["files"][f".agents/skills/harness-orient/{relative}"]["mode"])
 
 
 AGENTS = REPOSITORY_ROOT / "AGENTS.md"

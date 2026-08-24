@@ -540,8 +540,16 @@ class CandidateBootstrapValidationTests(unittest.TestCase):
 
     def test_exact_bootstrap_accepts_schema_two_without_missing_evidence_bypass(self) -> None:
         self.assertEqual([], self.diagnostics())
+        # SPEC-LRE-001 rule 11: the compatibility set is frozen and closed to additions,
+        # and no work order declares this record, so nothing exempts it from the binding.
         self.assertNotIn(
             "RLS-TST-009", CANDIDATE_VALIDATOR.LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE
+        )
+        state = CANDIDATE_VALIDATOR.legacy_release_evidence_state([self.contract, self.release])
+        self.assertNotIn("RLS-TST-009", state["exemptions"])
+        self.assertEqual([], state["defects"])
+        self.assertNotIn(
+            "RLS-TST-009", PUBLICATION.LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE
         )
 
     def test_bootstrap_lifecycle_matrix_accepts_only_closed_matching_states(self) -> None:

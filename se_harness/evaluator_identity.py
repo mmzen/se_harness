@@ -6,9 +6,11 @@ import hashlib
 import importlib.metadata
 import json
 import re
+import stat
 import sysconfig
+import zipfile
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 from urllib.parse import unquote, urlparse
 
@@ -131,6 +133,86 @@ def canonical_payload_manifest() -> bytes:
 
 def installed_payload_sha256() -> str:
     return hashlib.sha256(canonical_payload_manifest()).hexdigest()
+
+
+def wheel_payload_sha256(wheel: Path, version: str) -> str:
+    """Hash the installed logical payload represented by one exact wheel."""
+
+    template_prefix = (
+        f"se_harness-{version}.data/data/share/se-harness/templates/repository/standard/"
+    )
+    entries: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    total = 0
+    try:
+        with zipfile.ZipFile(wheel) as archive:
+            members = archive.infolist()
+            if len(members) > MAX_FILE_COUNT * 4:
+                raise EvaluatorIdentityError("evaluator wheel has too many members")
+            for member in members:
+                name = member.filename
+                path = PurePosixPath(name)
+                if (
+                    not name
+                    or "\\" in name
+                    or path.is_absolute()
+                    or any(part in {"", ".", ".."} for part in path.parts)
+                    or name in seen
+                ):
+                    raise EvaluatorIdentityError("evaluator wheel contains an unsafe member")
+                seen.add(name)
+                if ((member.external_attr >> 16) & 0o170000) == stat.S_IFLNK:
+                    raise EvaluatorIdentityError("evaluator wheel contains a symbolic link")
+                if member.is_dir():
+                    continue
+                logical: str | None = None
+                if name.startswith("se_harness/"):
+                    logical = name
+                elif name.startswith(template_prefix):
+                    logical = "templates/repository/standard/" + name.removeprefix(
+                        template_prefix
+                    )
+                if logical is None:
+                    continue
+                if member.file_size > MAX_FILE_BYTES:
+                    raise EvaluatorIdentityError("evaluator wheel member is too large")
+                content = archive.read(member)
+                if len(content) != member.file_size:
+                    raise EvaluatorIdentityError("evaluator wheel member size differs")
+                total += len(content)
+                if total > MAX_PAYLOAD_BYTES:
+                    raise EvaluatorIdentityError("evaluator wheel payload exceeds the byte limit")
+                entries.append(
+                    {
+                        "bytes": len(content),
+                        "path": logical,
+                        "sha256": hashlib.sha256(content).hexdigest(),
+                    }
+                )
+    except (OSError, RuntimeError, zipfile.BadZipFile) as exc:
+        raise EvaluatorIdentityError("evaluator wheel is not a safe ZIP archive") from exc
+    entries.sort(key=lambda item: str(item["path"]))
+    logical_paths = [str(item["path"]) for item in entries]
+    if (
+        not entries
+        or len(entries) > MAX_FILE_COUNT
+        or len(set(logical_paths)) != len(logical_paths)
+        or not any(path.startswith("se_harness/") for path in logical_paths)
+        or not any(
+            path.startswith("templates/repository/standard/")
+            for path in logical_paths
+        )
+    ):
+        raise EvaluatorIdentityError("evaluator wheel payload is incomplete or ambiguous")
+    manifest = {
+        "files": entries,
+        "schema": PAYLOAD_MANIFEST,
+    }
+    raw = (
+        json.dumps(manifest, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
+        + "\n"
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def _direct_url_archive() -> tuple[str, str] | None:

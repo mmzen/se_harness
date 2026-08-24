@@ -62,5 +62,12 @@ se_harness = [
 "share/se-harness/templates/repository/standard/scripts/harness_explorer" = ["templates/repository/standard/scripts/harness_explorer/*"]
 "share/se-harness/templates/repository/standard/.github" = ["templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed"]
 "share/se-harness/templates/repository/standard/.github/workflows" = ["templates/repository/standard/.github/workflows/engineering-harness.yml"]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-orient" = [
+  "templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
+  "templates/repository/standard/.agents/skills/harness-orient/skill-contract.json",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-orient/scripts" = [
+  "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+]
 [tool.unittest]
 start-directory = "tests"

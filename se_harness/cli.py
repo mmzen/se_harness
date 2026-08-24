@@ -11,7 +11,6 @@ from pathlib import Path
 
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
-from se_harness.candidate_acceptance import assess_candidate_wheel, write_acceptance_manifest
 from se_harness.installer import (
     HarnessError,
     apply_changes,
@@ -35,6 +34,16 @@ from se_harness.renumber import (
     render_json_error as render_renumber_json_error,
 )
 from se_harness.recovery_rehearsal import RecoveryRehearsalError, run_recovery_rehearsal
+from se_harness.release_qualification import (
+    failed_qualification,
+    qualify_candidate_package,
+    qualify_complete_candidate,
+    qualify_predecessor_view,
+    qualify_public_install,
+    qualify_released_root,
+    render_qualification,
+    write_qualification_result,
+)
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 from se_harness.workflow_compliance import check_workflow, focus_schema2
 from se_harness.workflow_contract import ContractError
@@ -118,11 +127,44 @@ def _install(args: argparse.Namespace, mode: str) -> int:
     return 0
 
 
+def _report_undeclared_legacy_releases(target: Path, work_order: str | None) -> None:
+    """Notice, without refusing, the released records an apply would refuse over."""
+
+    from se_harness.legacy_release_evidence import (
+        DECLARATION_FIELD,
+        LegacyReleaseEvidenceError,
+        undeclared_legacy_releases,
+    )
+
+    try:
+        undeclared = undeclared_legacy_releases(target)
+    except LegacyReleaseEvidenceError as exc:
+        print(f"cannot assess released records for evaluator evidence: {exc}", file=sys.stderr)
+        return
+    if not undeclared:
+        return
+    authority = work_order or "the authorizing evaluator-upgrade work order"
+    print(
+        "notice: these released records predate evaluator-evidence enforcement and are "
+        "not declared; applying an evaluator identity transition would be refused:",
+        file=sys.stderr,
+    )
+    for identifier in undeclared:
+        print(f"  {identifier}", file=sys.stderr)
+    print(
+        f"declare them in {authority} under [evaluator_upgrade].{DECLARATION_FIELD}",
+        file=sys.stderr,
+    )
+
+
 def _upgrade(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
     changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
     print(format_plan(changes))
     if not args.apply:
+        # REQ-LRE-002: report on the planning path what an apply would refuse, so the
+        # operator learns it before the transaction rather than from a frozen gate.
+        _report_undeclared_legacy_releases(target, args.work_order)
         return 0
     blocked = [item for item in changes if item.action == "customized"]
     if blocked:
@@ -524,21 +566,88 @@ def _identity(args: argparse.Namespace) -> int:
     return 0 if report.passed else 1
 
 
+def _qualify(args: argparse.Namespace) -> int:
+    operation = args.qualification_operation
+    forbidden_roots: tuple[Path, ...] = ()
+    try:
+        if operation == "released-root":
+            root = Path(args.target)
+            result = qualify_released_root(root)
+            forbidden_roots = (root.expanduser().resolve(),)
+        elif operation == "predecessor-view":
+            root = Path(args.target)
+            result = qualify_predecessor_view(
+                root,
+                release_record_id=args.release_record,
+                evaluator_python=Path(args.evaluator_python),
+                view_output=Path(args.view_output) if args.view_output else None,
+            )
+            forbidden_roots = (root.expanduser().resolve(),)
+        elif operation == "complete-candidate":
+            root = Path(args.target)
+            result = qualify_complete_candidate(
+                root,
+                candidate_commit=args.candidate_commit,
+            )
+            forbidden_roots = (root.expanduser().resolve(),)
+        elif operation == "candidate-package":
+            checkout = Path(args.checkout_root) if args.checkout_root else None
+            result = qualify_candidate_package(
+                Path(args.candidate_wheel),
+                candidate_commit=args.candidate_commit,
+                candidate_wheel_sha256=args.candidate_wheel_sha256,
+                verifier_wheel_sha256=args.verifier_wheel_sha256,
+                checkout_root=checkout,
+            )
+            forbidden_roots = (checkout.expanduser().resolve(),) if checkout is not None else ()
+        elif operation == "public-install":
+            root = Path(args.target)
+            result = qualify_public_install(
+                root,
+                release_record_id=args.release_record,
+                public_wheel=Path(args.public_wheel),
+                public_wheel_sha256=args.public_wheel_sha256,
+                payload_sha256=args.payload_sha256,
+            )
+            forbidden_roots = (root.expanduser().resolve(),)
+        else:
+            raise HarnessError("qualification operation is unsupported")
+    except (HarnessError, OSError, ValueError) as exc:
+        result = failed_qualification(
+            operation,
+            code="RQ001",
+            subject="qualification-input",
+            message=str(exc),
+        )
+
+    if args.output:
+        try:
+            write_qualification_result(
+                Path(args.output),
+                result,
+                forbidden_roots=forbidden_roots,
+            )
+        except HarnessError as exc:
+            result = failed_qualification(
+                operation,
+                code="RQ002",
+                subject="qualification-output",
+                message=str(exc),
+            )
+    if args.json:
+        print(result.canonical_bytes().decode("utf-8"), end="")
+    else:
+        print(render_qualification(result), end="")
+    return 0 if result.passed else 1
+
+
 def _accept_candidate(args: argparse.Namespace) -> int:
-    manifest = assess_candidate_wheel(
-        Path(args.wheel),
-        candidate_commit=args.candidate_commit,
-        candidate_wheel_sha256=args.candidate_wheel_sha256,
-        verifier_wheel_sha256=args.verifier_wheel_sha256,
-        checkout_root=Path(args.checkout_root) if args.checkout_root else None,
-    )
-    output = Path(args.output)
-    write_acceptance_manifest(output, manifest)
-    print(
-        f"candidate acceptance passed: {len(manifest.scenarios)} scenarios; "
-        f"manifest {output.expanduser().resolve()}"
-    )
-    return 0
+    """Compatibility alias for the typed candidate-package operation."""
+
+    args.qualification_operation = "candidate-package"
+    args.candidate_wheel = args.wheel
+    args.json = False
+    return _qualify(args)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -714,9 +823,76 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--require-entry-point", action="store_true")
     identity.set_defaults(handler=_identity)
 
+    qualify = commands.add_parser(
+        "qualify",
+        help="run one typed, provenance-bound release qualification operation",
+    )
+    qualification = qualify.add_subparsers(
+        dest="qualification_operation",
+        required=True,
+    )
+
+    def qualification_output(command: argparse.ArgumentParser) -> None:
+        command.add_argument(
+            "--output",
+            help="external absent path for the canonical qualification result",
+        )
+        command.add_argument("--json", action="store_true")
+        command.set_defaults(handler=_qualify)
+
+    released_root = qualification.add_parser(
+        "released-root",
+        help="qualify a repository with the released evaluator that owns its root lock",
+    )
+    released_root.add_argument("target", nargs="?", default=".")
+    qualification_output(released_root)
+
+    predecessor_view = qualification.add_parser(
+        "predecessor-view",
+        help="qualify one contract-bound release view with its exact external predecessor",
+    )
+    predecessor_view.add_argument("target", nargs="?", default=".")
+    predecessor_view.add_argument("--release-record", required=True)
+    predecessor_view.add_argument("--evaluator-python", required=True)
+    predecessor_view.add_argument(
+        "--view-output",
+        help="external absent directory for a retained read-only predecessor view",
+    )
+    qualification_output(predecessor_view)
+
+    complete_candidate = qualification.add_parser(
+        "complete-candidate",
+        help="qualify the complete candidate graph as candidate-controlled evidence",
+    )
+    complete_candidate.add_argument("target", nargs="?", default=".")
+    complete_candidate.add_argument("--candidate-commit", required=True)
+    qualification_output(complete_candidate)
+
+    candidate_package = qualification.add_parser(
+        "candidate-package",
+        help="qualify an exact candidate wheel from an isolated released verifier",
+    )
+    candidate_package.add_argument("--candidate-wheel", required=True)
+    candidate_package.add_argument("--candidate-commit", required=True)
+    candidate_package.add_argument("--candidate-wheel-sha256", required=True)
+    candidate_package.add_argument("--verifier-wheel-sha256", required=True)
+    candidate_package.add_argument("--checkout-root")
+    qualification_output(candidate_package)
+
+    public_install = qualification.add_parser(
+        "public-install",
+        help="qualify an exact public wheel and the clean environment installed from it",
+    )
+    public_install.add_argument("target", nargs="?", default=".")
+    public_install.add_argument("--release-record", required=True)
+    public_install.add_argument("--public-wheel", required=True)
+    public_install.add_argument("--public-wheel-sha256", required=True)
+    public_install.add_argument("--payload-sha256", required=True)
+    qualification_output(public_install)
+
     accept = commands.add_parser(
         "accept-candidate",
-        help="run the released verifier-owned black-box contract against an exact candidate wheel",
+        help="compatibility alias for qualify candidate-package",
     )
     accept.add_argument("--wheel", required=True)
     accept.add_argument("--candidate-commit", required=True)

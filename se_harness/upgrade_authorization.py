@@ -15,6 +15,11 @@ from se_harness.hash_bound import (
     HashBoundError,
     compare_declared_digest,
 )
+from se_harness.legacy_release_evidence import (
+    DECLARATION_FIELD,
+    MAX_DECLARED_RECORDS,
+    RELEASE_RECORD_PATTERN,
+)
 
 
 UPGRADE_AUTHORIZATION_SCHEMA = "se-harness-evaluator-upgrade-v1"
@@ -33,6 +38,9 @@ AUTHORIZATION_FIELDS = {
     "publication",
     "authorized_by",
 }
+# SPEC-LRE-001 rule 2: the required field set is unchanged and this is the only
+# permitted optional key. Any further key remains rejected.
+OPTIONAL_AUTHORIZATION_FIELDS = {DECLARATION_FIELD}
 EXCLUDED_PARTS = {".git", "evidence", "node_modules", "target", "templates"}
 MAX_ARTIFACT_BYTES = 256 * 1024
 
@@ -51,7 +59,10 @@ class UpgradeAuthorization:
     target_archive_name: str
     target_archive_sha256: str
     authorized_by: str
+    # Ordered before the defaulted field below, which a dataclass requires of
+    # every field without a default.
     prior_lock_match: str
+    legacy_releases_without_evaluator_evidence: tuple[str, ...] = ()
 
 
 def evaluator_transition_required(
@@ -118,6 +129,26 @@ def _required_text(value: dict[str, Any], field: str) -> str:
     return selected.strip()
 
 
+def _legacy_release_declaration(value: dict[str, Any]) -> tuple[str, ...]:
+    """Return the packet's declared pre-enforcement release records, deduplicated."""
+
+    declared = value.get(DECLARATION_FIELD)
+    if declared is None:
+        return ()
+    if not isinstance(declared, list) or not all(isinstance(item, str) for item in declared):
+        raise UpgradeAuthorizationError(f"evaluator_upgrade.{DECLARATION_FIELD} must be a string array")
+    if len(declared) > MAX_DECLARED_RECORDS:
+        raise UpgradeAuthorizationError(
+            f"evaluator_upgrade.{DECLARATION_FIELD} exceeds {MAX_DECLARED_RECORDS} entries"
+        )
+    invalid = sorted({item for item in declared if RELEASE_RECORD_PATTERN.fullmatch(item) is None})
+    if invalid:
+        raise UpgradeAuthorizationError(
+            f"evaluator_upgrade.{DECLARATION_FIELD} has an invalid release record ID: {invalid[0]!r}"
+        )
+    return tuple(sorted(set(declared)))
+
+
 def load_upgrade_authorization(
     repository: Path,
     *,
@@ -133,7 +164,7 @@ def load_upgrade_authorization(
         raise UpgradeAuthorizationError(
             f"upgrade work order {work_order} has no [evaluator_upgrade] packet"
         )
-    unknown = sorted(set(raw) - AUTHORIZATION_FIELDS)
+    unknown = sorted(set(raw) - AUTHORIZATION_FIELDS - OPTIONAL_AUTHORIZATION_FIELDS)
     missing = sorted(AUTHORIZATION_FIELDS - set(raw))
     if unknown or missing:
         details = []
@@ -184,6 +215,7 @@ def load_upgrade_authorization(
         raise UpgradeAuthorizationError(
             "upgrade work order target identity does not match the installed released evaluator"
         )
+    declared = _legacy_release_declaration(raw)
     return UpgradeAuthorization(
         work_order=work_order,
         artifact_path=path.relative_to(repository).as_posix(),
@@ -194,6 +226,7 @@ def load_upgrade_authorization(
         target_archive_sha256=target_archive_sha256,
         authorized_by=authorized_by,
         prior_lock_match=prior_lock_match,
+        legacy_releases_without_evaluator_evidence=declared,
     )
 
 

@@ -1,0 +1,38 @@
+{
+  "schema": "se-harness-agentic-execution-vectors-v1",
+  "portable_core": {
+    "files": [
+      {"mode": "utf8-text-lf-v1", "path": "SKILL.md", "sha256": "487216696f211d6668f5131df354189bb39dea29dc5e738ae90fca77d912c386"},
+      {"mode": "utf8-text-lf-v1", "path": "scripts/orient.py", "sha256": "02adac90805941f2efc2e667faf3849e3bfc0b05e8ab4a80260595b8e253ee04"},
+      {"mode": "utf8-text-lf-v1", "path": "skill-contract.json", "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"}
+    ],
+    "manifest_sha256": "73d94b02dd1008f5cb8b6a828ba920c128d06b82fc6e4b9b97720b6d91ca7cea"
+  },
+  "receipt": {
+    "value": {
+      "schema": "se-harness-execution-receipt-v1",
+      "selection": {"repository": "fixture", "artifact": null, "autonomy_envelope_sha256": null},
+      "execution": {
+        "profiles": ["single-agent-orientation"],
+        "skills": [{"name": "harness-orient", "version": "1.0.0", "portable_core_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}],
+        "operations": [{"id": "version", "status": "passed", "exit_code": 0}],
+        "worker_results": []
+      },
+      "effects": {
+        "changed_paths": [],
+        "evidence": [],
+        "state_before": [{"kind": "repository-bytes", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}],
+        "state_after": [{"kind": "repository-bytes", "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}]
+      },
+      "validation": {
+        "evaluator": {"identity": "passed", "version": "0.5.0"},
+        "gates": [],
+        "outcome": "degraded",
+        "deviations": [{"code": "AEXORI030", "operation": "focus-json", "status": "not_assessable"}],
+        "residual_uncertainty": []
+      }
+    },
+    "canonical": "{\"effects\":{\"changed_paths\":[],\"evidence\":[],\"state_after\":[{\"kind\":\"repository-bytes\",\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"}],\"state_before\":[{\"kind\":\"repository-bytes\",\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"}]},\"execution\":{\"operations\":[{\"exit_code\":0,\"id\":\"version\",\"status\":\"passed\"}],\"profiles\":[\"single-agent-orientation\"],\"skills\":[{\"name\":\"harness-orient\",\"portable_core_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":\"1.0.0\"}],\"worker_results\":[]},\"schema\":\"se-harness-execution-receipt-v1\",\"selection\":{\"artifact\":null,\"autonomy_envelope_sha256\":null,\"repository\":\"fixture\"},\"validation\":{\"deviations\":[{\"code\":\"AEXORI030\",\"operation\":\"focus-json\",\"status\":\"not_assessable\"}],\"evaluator\":{\"identity\":\"passed\",\"version\":\"0.5.0\"},\"gates\":[],\"outcome\":\"degraded\",\"residual_uncertainty\":[]}}\n",
+    "sha256": "96701a0b7b7c0d7fa15decd2cec59f49a46ce730317644a07e2c6aff90c845b0"
+  }
+}

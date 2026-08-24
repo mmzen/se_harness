@@ -22,6 +22,7 @@ paths = [
   "se_harness/candidate_acceptance.py",
   "repository_tools/release_bootstrap.py",
   "tests/test_hash_bound_integrity.py",
+  "tests/test_legacy_release_evidence.py",
   "tests/test_mutation_guard.py",
   "tests/test_release_bootstrap.py",
   "tests/test_governor_transition.py",
@@ -86,6 +87,28 @@ the value, so nothing else in that file changes. No other use of the added path
 is authorized, and the amendment widens no other constraint: the mode arbiter,
 the refusals, the recorded digests and the actions listed above as separately
 unauthorized are all untouched by it.
+
+## Second scope amendment, 2026-08-24
+
+Amended again on 2026-08-24 by the engineering owner, on an explicit request
+during the merge reconciliation with `WO-LRE-001`.
+`tests/test_legacy_release_evidence.py` is added to `[execution_scope]` for one
+purpose only: passing `prior_lock_match=MATCH_DECLARED` in the single
+`UpgradeAuthorization` that fixture fabricates.
+
+`WO-LRE-001` reached `main` while this branch was open and added a defaulted
+field to the same dataclass. `prior_lock_match` deliberately has no default, so
+that fixture stops constructing. The alternative was to give the field a
+default, which would let a fabricated authorization carry a match verdict
+nothing computed; that is the fail-open behaviour `REQ-HBI-002` exists to
+remove, so the owner was asked instead of taking it. The fixture's recorded
+digest is the lock's raw bytes, which the harness writes as LF, so the declared
+canonical mode reaches the same value and `declared` is the truthful verdict.
+
+The amendment authorizes that one keyword and nothing else. `VREC-HBI-002` is
+verified and binds candidate commit `4e94f7c`, which this amendment does not
+touch and cannot change; the merge commit that carries the reconciliation is
+outside that record's coverage, and no verified figure is restated by it.
 
 This is deliberately a second work order rather than added scope on the first.
 `WO-HBI-001` adds read-only assessment; this one changes an authorization

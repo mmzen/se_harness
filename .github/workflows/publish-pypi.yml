@@ -103,14 +103,12 @@ jobs:
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
-            --repository "$GITHUB_WORKSPACE" \
+          cd "$GITHUB_WORKSPACE"
+          python -m se_harness qualify predecessor-view "$GITHUB_WORKSPACE" \
             --release-record "${{ inputs.release_record }}" \
             --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
-            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
-            --output "$RUNNER_TEMP/predecessor-publication-view.json" \
-            --json | tee "$RUNNER_TEMP/predecessor-publication-result.json"
+            --output "$RUNNER_TEMP/predecessor-view-qualification.json" \
+            --json
 
       - name: Derive one canonical release plan
         id: plan
@@ -136,8 +134,7 @@ jobs:
           name: release-plan-${{ inputs.release_record }}
           path: |
             ${{ runner.temp }}/release-plan.json
-            ${{ runner.temp }}/predecessor-publication-view.json
-            ${{ runner.temp }}/predecessor-publication-result.json
+            ${{ runner.temp }}/predecessor-view-qualification.json
           if-no-files-found: error
           retention-days: 14
 
@@ -158,8 +155,7 @@ jobs:
           name: release-refusal
           path: |
             ${{ runner.temp }}/release-refusal.json
-            ${{ runner.temp }}/predecessor-publication-view.json
-            ${{ runner.temp }}/predecessor-publication-result.json
+            ${{ runner.temp }}/predecessor-view-qualification.json
           if-no-files-found: error
           retention-days: 90
 
@@ -211,7 +207,10 @@ jobs:
           export TMP="$TEMP"
           python -m pip install --disable-pip-version-check build==1.3.0 setuptools==84.0.0 wheel==0.48.0
           cd "$temp_root/candidate-checkout"
-          python -m se_harness validate .
+          python -m se_harness qualify complete-candidate . \
+            --candidate-commit "${{ needs.resolve.outputs.candidate_commit }}" \
+            --output "$temp_root/complete-candidate-qualification.json" \
+            --json
           python -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
 
@@ -266,6 +265,14 @@ jobs:
             --plan "$temp_root/plan/release-plan.json" \
             --directory "$temp_root/release-bundle" \
             --output "$temp_root/qualification.json"
+
+      - name: Retain the candidate-controlled qualification result
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: complete-candidate-qualification-${{ inputs.release_record }}
+          path: ${{ runner.temp }}/complete-candidate-qualification.json
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Transfer only verified inert release bytes
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -542,15 +549,13 @@ jobs:
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-          python "$GITHUB_WORKSPACE/scripts/validate_predecessor_publication_view.py" \
-            --repository "$RUNNER_TEMP/governance" \
+          cd "$GITHUB_WORKSPACE"
+          python -m se_harness qualify predecessor-view "$RUNNER_TEMP/governance" \
             --release-record "${{ inputs.release_record }}" \
             --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-            --evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
-            --evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
-            --output "$RUNNER_TEMP/pages-predecessor-publication-view.json" \
             --view-output "$RUNNER_TEMP/pages-predecessor-view/governance" \
-            --json | tee "$RUNNER_TEMP/pages-predecessor-publication-result.json"
+            --output "$RUNNER_TEMP/pages-predecessor-view-qualification.json" \
+            --json
 
       - name: Generate and package the exact Explorer payload
         id: package
@@ -614,14 +619,36 @@ jobs:
         env:
           VERSION: ${{ needs.resolve.outputs.version }}
           WHEEL: ${{ needs.resolve.outputs.wheel }}
+          WHEEL_SHA256: ${{ needs.resolve.outputs.wheel_sha256 }}
           SDIST: ${{ needs.resolve.outputs.sdist }}
           PAGE_URL: ${{ needs.pages_deploy.outputs.url }}
         shell: bash
         run: |
           set -euo pipefail
+          mkdir "$RUNNER_TEMP/public-dist"
+          python -m pip download --disable-pip-version-check --no-cache-dir \
+            --only-binary=:all: --no-deps --index-url https://pypi.org/simple \
+            --dest "$RUNNER_TEMP/public-dist" "se-harness==$VERSION"
+          public_wheel="$RUNNER_TEMP/public-dist/$WHEEL"
+          test -f "$public_wheel"
+          printf '%s  %s\n' "$WHEEL_SHA256" "$public_wheel" | sha256sum --check -
           python -m venv "$RUNNER_TEMP/public-env"
-          "$RUNNER_TEMP/public-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --index-url https://pypi.org/simple "se-harness==$VERSION"
+          "$RUNNER_TEMP/public-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-index --no-deps "$public_wheel"
           test "$("$RUNNER_TEMP/public-env/bin/harnessctl" --version)" = "$VERSION"
+          payload_sha256="$(cd "$RUNNER_TEMP" && PYTHONPATH= PYTHONNOUSERSITE=1 \
+            "$RUNNER_TEMP/public-env/bin/python" -I -c \
+            'from se_harness.evaluator_identity import installed_payload_sha256; print(installed_payload_sha256())')"
+          cd "$RUNNER_TEMP"
+          export PYTHONNOUSERSITE=1 PYTHONPATH=
+          "$RUNNER_TEMP/public-env/bin/python" -I -m se_harness qualify public-install \
+            "$GITHUB_WORKSPACE" \
+            --release-record "${{ inputs.release_record }}" \
+            --public-wheel "$public_wheel" \
+            --public-wheel-sha256 "$WHEEL_SHA256" \
+            --payload-sha256 "$payload_sha256" \
+            --output "$RUNNER_TEMP/public-install-qualification.json" \
+            --json
           for filename in "$WHEEL" "$SDIST"; do
             curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
               -H 'Accept: application/vnd.pypi.integrity.v1+json' \
@@ -669,6 +696,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: release-result-${{ inputs.release_record }}
-          path: ${{ runner.temp }}/release-result.json
+          path: |
+            ${{ runner.temp }}/release-result.json
+            ${{ runner.temp }}/public-install-qualification.json
           if-no-files-found: error
           retention-days: 90
