@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rehearse the credential-free SE Harness publication path on any runner platform.
 
-Repository-owned implementation of SPEC-RLO-004 under WO-RLO-004. This program
+Repository-owned implementation of SPEC-RLO-005 under WO-RLO-005. This program
 exercises the mechanics that ``.github/workflows/publish-pypi.yml`` performs before
 any credential is used, on whichever platform it is invoked on, and checks that the
 orchestrator has not drifted away from the rehearsed set.
@@ -138,7 +138,7 @@ def runner_platform_family(runs_on: Any) -> str:
 def venv_scripts_directory(root: Path) -> Path:
     """Resolve a virtual environment's console-script directory from this platform.
 
-    SPEC-RLO-004 rule 6: the ``bin`` and ``Scripts`` layouts are never hardcoded.
+    SPEC-RLO-005 rule 6: the ``bin`` and ``Scripts`` layouts are never hardcoded.
     """
     scheme = "nt_venv" if os.name == "nt" else "posix_venv"
     if scheme not in sysconfig.get_scheme_names():  # pragma: no cover - old interpreters
@@ -184,7 +184,7 @@ def assert_venv_layout(root: Path) -> Path:
 def canonical_existing_directory(path: str | os.PathLike[str], *, label: str) -> Path:
     """Resolve aliases such as Windows 8.3 short names before anything is created.
 
-    SPEC-RLO-004 rule 8.
+    SPEC-RLO-005 rule 8.
     """
     try:
         resolved = Path(os.path.realpath(os.fspath(path), strict=True))
@@ -242,7 +242,7 @@ def derive_rehearsal_plan(
 ) -> dict[str, Any]:
     """Derive a candidate-mode plan from a measured bundle manifest.
 
-    SPEC-RLO-004 rule 12: candidate mode never reads release authority. The
+    SPEC-RLO-005 rule 12: candidate mode never reads release authority. The
     distribution identity comes from the manifest of the first built set, the
     authority fields are overwritten with markers that cannot be read as a
     release, and the field set stays exactly the orchestrator's own.
@@ -305,7 +305,7 @@ def _is_link(entry: os.DirEntry[str]) -> bool:
 def remove_tree_without_following_links(root: Path, deleted: list[str]) -> None:
     """Delete a tree by unlinking links instead of recursing through their targets.
 
-    SPEC-RLO-004 rules 19 and 21: a link planted inside a derived tree can never
+    SPEC-RLO-005 rules 19 and 21: a link planted inside a derived tree can never
     cause a deletion outside ``root``.
     """
     root_real = os.path.realpath(root)
@@ -393,7 +393,7 @@ def _assert_data_only(value: Any, path: str) -> None:
 
 
 def load_declaration(path: Path) -> dict[str, Any]:
-    """Read the mechanic declaration as data only (SPEC-RLO-004 rule 23)."""
+    """Read the mechanic declaration as data only (SPEC-RLO-005 rule 23)."""
     if path.suffix != ".json":
         raise RehearsalError(f"mechanic declaration must be JSON data: {path}")
     try:
@@ -1231,7 +1231,7 @@ class Rehearsal:
         bundle.mkdir()
         wheel = self.distribution["wheel"]
         sdist = self.distribution["sdist"]
-        # SPEC-RLO-004 rule 15: the bundle is assembled from the second built set and
+        # SPEC-RLO-005 rule 15: the bundle is assembled from the second built set and
         # verified against a manifest and plan derived from the first.
         shutil.copy2(self.root / "final-b" / wheel, bundle / wheel)
         shutil.copy2(self.root / "final-b" / sdist, bundle / sdist)
@@ -2176,7 +2176,7 @@ def _secret_attributes(value: Any, where: str, found: list[str]) -> None:
 def classify_jobs(
     workflow: dict[str, Any], external_state_actions: Sequence[str]
 ) -> dict[str, JobClassification]:
-    """Classify orchestrator jobs by their declared attributes (SPEC-RLO-004 rule 2)."""
+    """Classify orchestrator jobs by their declared attributes (SPEC-RLO-005 rule 2)."""
     classifications: dict[str, JobClassification] = {}
     for name, job in workflow["jobs"].items():
         if not isinstance(job, dict):
@@ -2218,7 +2218,7 @@ def classify_jobs(
             excluded=bool(attributes),
             attributes=attributes,
         )
-    # SPEC-RLO-004 rule 2: exclusion is transitive. A job that consumes state produced
+    # SPEC-RLO-005 rule 2: exclusion is transitive. A job that consumes state produced
     # by an excluded job runs after a credential has been used and cannot be rehearsed.
     changed = True
     while changed:

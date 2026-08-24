@@ -1,6 +1,6 @@
 {
   "schema": "se-harness-publication-rehearsal-mechanics/v1",
-  "authority": "repository policy data for SPEC-RLO-004; derived operational input, never formal artifact authority",
+  "authority": "repository policy data for SPEC-RLO-005; derived operational input, never formal artifact authority",
   "orchestrator": ".github/workflows/publish-pypi.yml",
   "rehearsal_lane": ".github/workflows/publication-rehearsal.yml",
   "required_platforms": ["Linux", "Windows"],

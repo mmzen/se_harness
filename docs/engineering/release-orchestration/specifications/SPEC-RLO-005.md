@@ -1,5 +1,5 @@
 +++
-id = "SPEC-RLO-004"
+id = "SPEC-RLO-005"
 type = "specification"
 title = "Cross-platform publication rehearsal and divergence contract"
 status = "approved"
@@ -8,7 +8,7 @@ created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
-specifies = ["REQ-RLO-013", "REQ-RLO-014"]
+specifies = ["REQ-RLO-015", "REQ-RLO-016"]
 +++
 
 # Specification: Cross-platform publication rehearsal and divergence contract
@@ -104,7 +104,7 @@ Add a repository-owned, credential-free rehearsal of the publication mechanics t
 
 ### Divergence layers added during implementation
 
-Rules 33 to 36 were added while implementing `WO-RLO-004`, each because a measurement showed that rules 22 to 27 alone leave a drift channel open. They extend the divergence check and weaken nothing above.
+Rules 33 to 36 were added while implementing `WO-RLO-005`, each because a measurement showed that rules 22 to 27 alone leave a drift channel open. They extend the divergence check and weaken nothing above.
 
 33. Fingerprint every credential-free orchestrator step by its declared name and by the SHA-256 of its `run` script normalized to LF. Fail on a step absent from the declaration, on a declared step whose digest no longer matches, and on a declared step the orchestrator no longer performs. Command-level coverage alone cannot see a changed argument, an added flag, or a reordered command inside a step that is already declared.
 34. Read the orchestrator and the rehearsal lane with a bounded reader restricted to the Actions subset both files use, refusing a tab, a duplicate key, an unsupported construct, or an unexpected structure. Support an optional independent second parse that must agree about the job mapping, and fail when that cross-check is requested and the second parser is unavailable. Do not make the second parser a repository dependency, because the check must run from a bare interpreter.
@@ -186,11 +186,11 @@ The implementation agent may choose the rehearsal program's module layout and su
 
 ## Approval
 
-Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` and `Fourth release-orchestration packet` designs. Implementation authority is limited to `WO-RLO-004` and grants no release, publication, deployment, or external action.
+Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` and `Fourth release-orchestration packet` designs. Implementation authority is limited to `WO-RLO-005` and grants no release, publication, deployment, or external action.
 
 ## Amendments during implementation
 
-Implementing `WO-RLO-004` measured the orchestrator rather than describing it, and six statements above were wrong or incomplete as a result. Each amendment below is recorded with the measurement that forced it. No amendment weakens a rule, removes a failure mode, or widens the authority boundary, and no approved `statement` field changed.
+Implementing `WO-RLO-005` measured the orchestrator rather than describing it, and six statements above were wrong or incomplete as a result. Each amendment below is recorded with the measurement that forced it. No amendment weakens a rule, removes a failure mode, or widens the authority boundary, and no approved `statement` field changed.
 
 The accountable repository owner accepted all seven amendments, `A1` through `A7`, on 2026-08-24 through the statement `Accept all seven`. That acceptance covers the amendments recorded in this section and the consequent entries in the state model, the outputs, the error and recovery table, and the examples; it authorizes no release, publication, deployment, push, or other external action.
 

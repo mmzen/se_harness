@@ -1,5 +1,5 @@
 +++
-id = "REQ-RLO-013"
+id = "REQ-RLO-015"
 type = "requirement"
 title = "Rehearse the credential-free publication path on every runner platform"
 status = "approved"
@@ -90,12 +90,12 @@ Whether the rehearsal should additionally reproduce an already-published release
 
 ## Approval
 
-Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` design. This approves the requirement definition and the bounded implementation in `WO-RLO-004`; it authorizes no release, publication, deployment, or external action.
+Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` design. This approves the requirement definition and the bounded implementation in `WO-RLO-005`; it authorizes no release, publication, deployment, or external action.
 
 ## Amendments during implementation
 
-Two amendments, both accepted by the accountable repository owner on 2026-08-24 through the statement `Accept all seven`, which covers the seven amendments recorded across `SPEC-RLO-004`, this requirement, and `VER-RLO-004`. Neither relaxes the required response; both add to it. The `statement` field is unchanged, and the acceptance authorizes no release, publication, deployment, or other external action.
+Two amendments, both accepted by the accountable repository owner on 2026-08-24 through the statement `Accept all seven`, which covers the seven amendments recorded across `SPEC-RLO-005`, this requirement, and `VER-RLO-005`. Neither relaxes the required response; both add to it. The `statement` field is unchanged, and the acceptance authorizes no release, publication, deployment, or other external action.
 
-**The required response now reports the condition of the inherited checkout.** The constraint on line 43 keeps the rehearsal runnable locally, and a local run inherits whatever worktree the engineer is in. Two shakedown runs measured the consequence on the same mechanic, the predecessor-view qualification. It requires a clean worktree, so while the packet under construction was uncommitted it failed with `PV001`, "predecessor preparation requires a clean Git worktree". After the packet was committed it failed again under the same `PV001` identifier and an entirely different message, "evaluator wheel differs from the released RLS contract", which `SPEC-RLO-004` amendment A7 traces to the subject the rehearsal chose rather than to the checkout. One identifier covering two unrelated causes is why the two were initially conflated. Without the inherited condition on the result neither is distinguishable from a real defect in the publication path, which is the false signal this requirement's sibling `REQ-RLO-014` exists to prevent.
+**The required response now reports the condition of the inherited checkout.** The constraint on line 43 keeps the rehearsal runnable locally, and a local run inherits whatever worktree the engineer is in. Two shakedown runs measured the consequence on the same mechanic, the predecessor-view qualification. It requires a clean worktree, so while the packet under construction was uncommitted it failed with `PV001`, "predecessor preparation requires a clean Git worktree". After the packet was committed it failed again under the same `PV001` identifier and an entirely different message, "evaluator wheel differs from the released RLS contract", which `SPEC-RLO-005` amendment A7 traces to the subject the rehearsal chose rather than to the checkout. One identifier covering two unrelated causes is why the two were initially conflated. Without the inherited condition on the result neither is distinguishable from a real defect in the publication path, which is the false signal this requirement's sibling `REQ-RLO-016` exists to prevent.
 
 **The reported condition includes line-ending conversion, not only worktree cleanliness.** The orchestrator runs the unit suite inside a `git worktree add` checkout and the rehearsal does the same, so that checkout inherits `core.autocrlf` from the repository it was created in. Measured on this implementer's Windows checkout with `core.autocrlf=true`, the candidate unit suite reports four failures whose assertions are on exact bytes; the same commit and the same mechanic are green in a `core.autocrlf=false` clone. That is a property of the checkout, not of the publication path, and it is reported for the same reason worktree cleanliness is.

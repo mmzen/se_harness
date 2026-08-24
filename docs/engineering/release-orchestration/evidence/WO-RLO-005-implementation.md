@@ -1,8 +1,8 @@
-# WO-RLO-004 implementation evidence
+# WO-RLO-005 implementation evidence
 
 ## Authority and scope
 
-On 2026-08-24 the accountable repository owner stated `OK go for #111` and, in the same turn, selected `Parallel lane + drift check` over refactoring the release orchestrator and `Fourth release-orchestration packet` as the governance home under the existing `INT-RLO-001`. That statement approved the complete `RLO-004` definition packet and authorized `WO-RLO-004`.
+On 2026-08-24 the accountable repository owner stated `OK go for #111` and, in the same turn, selected `Parallel lane + drift check` over refactoring the release orchestrator and `Fourth release-orchestration packet` as the governance home under the existing `INT-RLO-001`. That statement approved the complete `RLO-005` definition packet and authorized `WO-RLO-005`.
 
 This document assesses the implementation as committed on the branch. It is retained engineering evidence. It is not a commit-bound `VREC`, an assurance decision, a release decision, a branch operation, a publication, a deployment, or an external configuration change. Neither is a rehearsal result: every rehearsal output quoted here carries the field `authority = "derived operational evidence; no formal lifecycle transition"`.
 
@@ -16,7 +16,7 @@ Issue [#111](https://github.com/mmzen/se_harness/issues/111) records `RC-060-11`
 | Branch | `feat/rlo-004-publication-rehearsal` |
 | Merge base | `1431df591a654202ab1a3a6647d9657905bbd26c` (merge of pull request #132) |
 | Diff against merge base | 20 files changed, 6227 insertions, 0 deletions |
-| Worktree state | clean at `cfca2f3`; the later changes are this document with the `WO-RLO-004` transition, committed together, and then the owner's amendment and exclusion rulings recorded in the artifacts |
+| Worktree state | clean at `cfca2f3`; the later changes are this document with the `WO-RLO-005` transition, committed together, and then the owner's amendment and exclusion rulings recorded in the artifacts |
 | Local interpreter | CPython 3.14.6 on Windows 11 |
 | Orchestrator and lane interpreter | pinned 3.11 |
 
@@ -31,11 +31,11 @@ Executable, repository-owned:
 - `.github/workflows/publication-rehearsal.yml` — `contents: read` at workflow and job level, no environment, no secret, no token; triggers `pull_request`, `push` to `main`, and `workflow_dispatch` with one optional `release_record` input.
 - `tests/test_publication_rehearsal.py` — 101 tests, and four fixtures under `tests/fixtures/publication_rehearsal/`.
 
-Formal artifacts: `CAP-RLO-003`, `REQ-RLO-013`, `REQ-RLO-014`, `SPEC-RLO-004`, `ARCH-RLO-004`, `ADR-RLO-004`, `VER-RLO-004`, `WO-RLO-004`, the acceptance feature, and the release-orchestration domain index. Repository-owned prose: `docs/notes/release-publication-rehearsal.md` and one row in `docs/notes/README.md`.
+Formal artifacts: `CAP-RLO-003`, `REQ-RLO-015`, `REQ-RLO-016`, `SPEC-RLO-005`, `ARCH-RLO-005`, `ADR-RLO-005`, `VER-RLO-005`, `WO-RLO-005`, the acceptance feature, and the release-orchestration domain index. Repository-owned prose: `docs/notes/release-publication-rehearsal.md` and one row in `docs/notes/README.md`.
 
 ## The release orchestrator is byte-unchanged
 
-`REQ-RLO-013` and `WO-RLO-004` both require `.github/workflows/publish-pypi.yml` to be byte-identical to its merge-base content. Proven three independent ways:
+`REQ-RLO-015` and `WO-RLO-005` both require `.github/workflows/publish-pypi.yml` to be byte-identical to its merge-base content. Proven three independent ways:
 
 | Proof | Result |
 |---|---|
@@ -76,7 +76,7 @@ The `realized_by` column reproduces the declaration verbatim; it is a closed voc
 | 21 | `bundle-verification` | `repository-program` | executed | executed |
 | 22 | `teardown` | `rehearsal-program` | executed — 6209 paths | executed — 6209 paths |
 
-The complete per-mechanic result of both runs is reproduced in this table and in the reason text quoted below; the machine-readable `se-harness-publication-rehearsal-result/v1` documents, each with its 26-entry command transcript, are retained outside the repository, because `WO-RLO-004`'s execution scope declares no path for them and a rehearsal result carries no formal authority that would justify committing one.
+The complete per-mechanic result of both runs is reproduced in this table and in the reason text quoted below; the machine-readable `se-harness-publication-rehearsal-result/v1` documents, each with its 26-entry command transcript, are retained outside the repository, because `WO-RLO-005`'s execution scope declares no path for them and a rehearsal result carries no formal authority that would justify committing one.
 
 Overall state: `rehearsed`, exit 0 with `core.autocrlf=false`; `failed`, exit 1 with `core.autocrlf=true`. `unreported_mechanics` is empty in both, so no mechanic was silently skipped. Both runs report `verification_compares_against_authorized_release_identity = false` and `verification_plan_source = derivation-from-the-first-distribution-set`, because candidate mode derives its plan from its own first build rather than from an authorized release identity.
 
@@ -86,11 +86,11 @@ The `core.autocrlf=false` run was measured in a throwaway clone at the same comm
 
 `test_contract_rejects_duplicate_and_unknown_fields` and `test_manifest_normalizes_line_endings_and_detects_content_changes` (`tests/test_agentic_execution.py`), `test_declaration_is_data_only` (`tests/test_hash_bound_integrity.py`), and `test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_one_skill_core` (`tests/test_release_build.py`). The rehearsal names all four in its own failure text: `candidate unit suite exited 1 with 4 failing tests: …`.
 
-None of the four is in `tests/test_publication_rehearsal.py`; all four assert on exact bytes and all four are green at the same commit in the `core.autocrlf=false` clone. They are a property of the inherited checkout, not of this work order and not of the publication path. That is why `REQ-RLO-013` was amended to report `line_ending_conversion` on the result and why the human summary states `Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings`.
+None of the four is in `tests/test_publication_rehearsal.py`; all four assert on exact bytes and all four are green at the same commit in the `core.autocrlf=false` clone. They are a property of the inherited checkout, not of this work order and not of the publication path. That is why `REQ-RLO-015` was amended to report `line_ending_conversion` on the result and why the human summary states `Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings`.
 
 ## Measured versus injected platform coverage
 
-`WO-RLO-004` constrains the implementer to one directly executable platform and requires the other to be reported as injected rather than claimed as measured.
+`WO-RLO-005` constrains the implementer to one directly executable platform and requires the other to be reported as injected rather than claimed as measured.
 
 | Coverage | Status |
 |---|---|
@@ -101,7 +101,7 @@ None of the four is in `tests/test_publication_rehearsal.py`; all four assert on
 | Link teardown | **measured in the Windows link shape** — symlink creation is privileged on Windows, so `try_directory_symlink` falls back to a junction, which is the link shape a virtual environment or build tool actually leaves there; the POSIX symlink shape is exercised by the same tests only on Linux, so it is not measured here |
 | Real `ubuntu-latest` runner-image behavior | **not measured** — first proven by the hosted lane, which is not dispatched under this work order |
 
-The hosted lane has not run. No push or pull request is authorized, so the Linux half of `REQ-RLO-013` is satisfied by design, derivation, and injected state locally, and awaits its first hosted execution. `docs/notes/release-publication-rehearsal.md` states this limitation for human readers, and `VER-RLO-004` carries it as residual uncertainty.
+The hosted lane has not run. No push or pull request is authorized, so the Linux half of `REQ-RLO-015` is satisfied by design, derivation, and injected state locally, and awaits its first hosted execution. `docs/notes/release-publication-rehearsal.md` states this limitation for human readers, and `VER-RLO-005` carries it as residual uncertainty.
 
 ## The excluded mechanic, and why exclusion is not suppression
 
@@ -139,7 +139,7 @@ Both were found by running the rehearsal for real rather than by reading it, and
  "passed": false, "subject": "predecessor-view"}
 ```
 
-After the packet was committed the same `PV001` identifier returned with an entirely different message, `evaluator wheel differs from the released RLS contract`. One identifier covering both a dirty worktree and a subject mismatch is why the two were initially conflated. The result now reports the inherited checkout condition next to the outcomes so the first cause is attributable to the checkout, and rule 37 of `SPEC-RLO-004` governs the second.
+After the packet was committed the same `PV001` identifier returned with an entirely different message, `evaluator wheel differs from the released RLS contract`. One identifier covering both a dirty worktree and a subject mismatch is why the two were initially conflated. The result now reports the inherited checkout condition next to the outcomes so the first cause is attributable to the checkout, and rule 37 of `SPEC-RLO-005` governs the second.
 
 ## Divergence verdicts
 
@@ -232,15 +232,15 @@ Refusals — conditions the program refuses outright rather than reporting as a 
 | Full local rehearsal, `core.autocrlf=false` | `rehearsed`, exit 0, 21 executed and 1 declared exclusion |
 | Full local rehearsal, `core.autocrlf=true` | `failed`, exit 1, the single failure attributable to the inherited checkout |
 | Governing released `0.6.0` evaluator `doctor`, run from outside the checkout | PASS — 87 PASS, 21 WARN, 0 FAIL, exit 0 |
-| Governing released `0.6.0` evaluator `preflight … --work-order WO-RLO-004 --phase start` | PASS while the work order was `in_progress`; after the transition it correctly reports `[W005] status 'implemented' is not eligible for start` |
-| Governing released `0.6.0` evaluator `preflight … --work-order WO-RLO-004 --phase review` | PASS — `WO-RLO-004 (implemented)`, commit-bound verification `required`, exit 0 |
+| Governing released `0.6.0` evaluator `preflight … --work-order WO-RLO-005 --phase start` | PASS while the work order was `in_progress`; after the transition it correctly reports `[W005] status 'implemented' is not eligible for start` |
+| Governing released `0.6.0` evaluator `preflight … --work-order WO-RLO-005 --phase review` | PASS — `WO-RLO-005 (implemented)`, commit-bound verification `required`, exit 0 |
 | In-tree `python -m se_harness doctor .` | 84 PASS, 21 WARN, 9 FAIL — the identical 9 measured in a clean worktree at merge base `1431df5`, so pre-existing |
 | `git diff --check 1431df5 HEAD` | exit 0 |
 | Changed-path audit against `se_harness/`, `templates/`, `scripts/`, `.engineering-harness.*`, managed policy documents, `docs/engineering/templates/`, `.github/workflows/engineering-harness.yml`, `.github/workflows/publish-pypi.yml` | no match |
 
 The in-tree `doctor` FAIL set is candidate-versus-released skew, not damage: six `distribution:` items (`.gitattributes`, `.github/workflows/engineering-harness.yml`, `docs/engineering/WORKFLOW.json`, `docs/engineering/WORKFLOW.md`, `docs/engineering/templates/VERIFICATION_RECORD.template.md`, `scripts/validate_engineering_artifacts.py`) and three missing `.agents/skills/harness-orient/*` lock entries. The governing evaluator run from outside the checkout reports 0 FAIL, which is the verdict that governs.
 
-`+8` artifacts and unchanged warning counts on both validators mean the eight new `RLO-004` artifacts introduce no new warning of any class.
+`+8` artifacts and unchanged warning counts on both validators mean the eight new `RLO-005` artifacts introduce no new warning of any class.
 
 ## The hosted lane's first run did not happen on pull-request opening
 
@@ -249,14 +249,14 @@ The owner authorized the push and the pull request on 2026-08-24, expecting them
 | Fact | Value |
 |---|---|
 | Branch pushed | `61d8cae` at 14:47:06 UTC, tracking `origin/feat/rlo-004-publication-rehearsal` |
-| Pull request | [#138](https://github.com/mmzen/se_harness/pull/138), opened 14:47:41 UTC, `Harness-Work-Order: WO-RLO-004` present in the fetched-back body with no CR characters |
+| Pull request | [#138](https://github.com/mmzen/se_harness/pull/138), opened 14:47:41 UTC, `Harness-Work-Order: WO-RLO-005` present in the fetched-back body with no CR characters |
 | Push-triggered checks on that commit | all green — `validate`, candidate source and package evidence, governance migration on Linux and Windows, the platform reconcile, and the governor transition assessment |
 | `pull_request`-event workflow runs for #138 | **none created**, including after a close and reopen |
 | Publication Rehearsal runs | none; the workflow is not yet registered under `/actions/workflows` because it has never run |
 
 The lane triggers on `pull_request` and on `push` to `main`, so a feature-branch push is not supposed to run it. The missing part is the `pull_request` event itself, and it is not a property of this lane: pull request [#137](https://github.com/mmzen/se_harness/pull/137), which does not contain the lane, was opened three minutes earlier and likewise has no `pull_request`-event run for any of the three pre-existing workflows, while pull request #136 was opened at 13:42:14 UTC and had all three within three seconds. Repository-wide `pull_request` run creation therefore stopped between those two times, and both open pull requests are affected identically.
 
-The consequence for this work order is unchanged from the section above: the Linux half of `REQ-RLO-013` remains unproven on a hosted runner. The lane's first hosted execution now awaits either a later push to the open pull request once `pull_request` delivery recovers, or the merge to `main`, both of which are inside the approved trigger set. Nothing here justifies widening that set to every branch push, which would run two hosted rehearsals for every push in the repository; that is an owner decision and is not taken here.
+The consequence for this work order is unchanged from the section above: the Linux half of `REQ-RLO-015` remains unproven on a hosted runner. The lane's first hosted execution now awaits either a later push to the open pull request once `pull_request` delivery recovers, or the merge to `main`, both of which are inside the approved trigger set. Nothing here justifies widening that set to every branch push, which would run two hosted rehearsals for every push in the repository; that is an owner decision and is not taken here.
 
 ## Repository/product boundary
 
@@ -274,8 +274,8 @@ No changed path lies under `se_harness/`, `templates/`, the eight managed `scrip
 ## Residual uncertainty
 
 - The hosted lane has never run. Real `ubuntu-latest` and `windows-2022` runner-image behavior is unproven, which is the same class of gap `RC-060-11` describes — moved from release time to integration time rather than eliminated.
-- Step digests catch a change inside a declared step. They do not prove the rehearsal drives its mechanics in the orchestrator's order, or that a mechanic sees the same surrounding state. A step moved between jobs passes every comparison. `ARCH-RLO-004` records this as the accepted weakness and `ADR-RLO-004` records what would reopen the refactor decision.
-- Two programs can diverge in ways a seam cannot see. The owner chose the seam over a shared implementation deliberately; `ADR-RLO-004` carries the trade.
+- Step digests catch a change inside a declared step. They do not prove the rehearsal drives its mechanics in the orchestrator's order, or that a mechanic sees the same surrounding state. A step moved between jobs passes every comparison. `ARCH-RLO-005` records this as the accepted weakness and `ADR-RLO-005` records what would reopen the refactor decision.
+- Two programs can diverge in ways a seam cannot see. The owner chose the seam over a shared implementation deliberately; `ADR-RLO-005` carries the trade.
 - `predecessor-view-qualification` is exercised for real only in `release-record` mode against a record under preparation. No such record exists to rehearse now, so that path is covered by unit tests and not by an end-to-end run.
 - Everything was measured on CPython 3.14.6, while the orchestrator and the lane pin 3.11. The candidate unit suite inside the rehearsal ran on the local interpreter, not on 3.11.
 - The `core.autocrlf=true` reds are named and attributed, not fixed. Four pre-existing tests assert on exact bytes and fail in a converting checkout; that is a real property of this repository's test suite and is out of this work order's scope.
@@ -285,18 +285,18 @@ No changed path lies under `se_harness/`, `templates/`, the eight managed `scrip
 
 Seven amendments to approved artifacts were made during implementation. None relaxes a required response; each adds to one. No `statement` field changed.
 
-The accountable repository owner accepted all seven on 2026-08-24 through the statement `Accept all seven`, and the acceptance is recorded in each amended artifact's own amendments section rather than only here. In the same turn the owner ruled on the excluded mechanic: *"On ordinary integration there is no valid subject, so reporting `excluded` with both measured identities is honest. `release-record` mode still fails on a real mismatch, which is where the comparison is meaningful."* `SPEC-RLO-004` rule 37 now carries that ruling and `VER-RLO-004` makes reporting the mechanic `executed`, or omitting it, a failure of the contract. Neither decision authorizes a release, publication, deployment, or governor adoption.
+The accountable repository owner accepted all seven on 2026-08-24 through the statement `Accept all seven`, and the acceptance is recorded in each amended artifact's own amendments section rather than only here. In the same turn the owner ruled on the excluded mechanic: *"On ordinary integration there is no valid subject, so reporting `excluded` with both measured identities is honest. `release-record` mode still fails on a real mismatch, which is where the comparison is meaningful."* `SPEC-RLO-005` rule 37 now carries that ruling and `VER-RLO-005` makes reporting the mechanic `executed`, or omitting it, a failure of the contract. Neither decision authorizes a release, publication, deployment, or governor adoption.
 
-- `SPEC-RLO-004` A7 and rule 37: the resolution subject a mechanic needs, and what happens when none exists.
-- `SPEC-RLO-004`: the state model admits an `excluded` outcome with a reason; two error/recovery rows; one valid and one invalid example; the closing facts extended from two to three.
-- `REQ-RLO-013`: the required response reports the inherited checkout condition.
-- `REQ-RLO-013`: that condition includes line-ending conversion, not only worktree cleanliness.
-- `VER-RLO-004`: the `REQ-RLO-013` matrix row admits `excluded` with a reason; two new property tests; residual uncertainty extended.
+- `SPEC-RLO-005` A7 and rule 37: the resolution subject a mechanic needs, and what happens when none exists.
+- `SPEC-RLO-005`: the state model admits an `excluded` outcome with a reason; two error/recovery rows; one valid and one invalid example; the closing facts extended from two to three.
+- `REQ-RLO-015`: the required response reports the inherited checkout condition.
+- `REQ-RLO-015`: that condition includes line-ending conversion, not only worktree cleanliness.
+- `VER-RLO-005`: the `REQ-RLO-015` matrix row admits `excluded` with a reason; two new property tests; residual uncertainty extended.
 - `acceptance/publication-rehearsal.feature`: three scenarios — a mechanic with no valid subject, teardown's audit accepting the root, and an inherited converting checkout.
 - `docs/notes/release-publication-rehearsal.md`: three things to know instead of two.
 
 ## Actions explicitly not performed
 
-Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-004 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
+Through the two commits this document measures, no external mutation of any kind was performed. The owner then authorized exactly two on 2026-08-24, by the statement `Push the branch and open a pull request with a Harness-Work-Order: WO-RLO-005 trailer`: pushing `feat/rlo-004-publication-rehearsal` and opening its pull request. That is the first hosted execution of the rehearsal lane on both runner types, and the Linux half is unproven, so the lane may report red.
 
-Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-004` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.
+Everything else remains not performed and not authorized: no tag, branch other than this feature branch, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, workflow dispatch of the release orchestrator, release record, release-record preparation or transition, promotable distribution build, `VREC`, assurance decision, governor adoption, credential acquisition, or hosting or branch-protection change. `WO-RLO-005` transitions only to `implemented`; commit-bound verification remains `required` and unmet, and reliance on this rehearsal in any release decision requires a later ready `VREC` and an accountable assurance decision.

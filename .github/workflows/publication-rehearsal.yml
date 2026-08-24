@@ -1,6 +1,6 @@
 name: Publication Rehearsal
 
-# Repository-owned pre-release rehearsal for RC-060-11 (issue #111) under WO-RLO-004.
+# Repository-owned pre-release rehearsal for RC-060-11 (issue #111) under WO-RLO-005.
 # It exercises the credential-free publication mechanics on both hosted runner types and
 # refuses drift between the release orchestrator and the rehearsed set. It holds no
 # publication authority: no credential, no environment, no write permission, and no tag,

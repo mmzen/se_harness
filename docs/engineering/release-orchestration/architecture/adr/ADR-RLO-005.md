@@ -1,5 +1,5 @@
 +++
-id = "ADR-RLO-004"
+id = "ADR-RLO-005"
 type = "adr"
 title = "Rehearse in a parallel lane behind a checked equivalence seam"
 status = "approved"
@@ -8,7 +8,7 @@ created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
-decides = ["ARCH-RLO-004"]
+decides = ["ARCH-RLO-005"]
 +++
 
 # ADR: Rehearse in a parallel lane behind a checked equivalence seam
@@ -57,7 +57,7 @@ Option 2 is the stronger answer to the literal criterion and is not rejected on 
 - Positive: the lane cannot publish anything, since it holds no credential and no write permission.
 - Positive: a credential-free step added to the orchestrator without rehearsal coverage turns a required check red instead of reaching a release unexercised.
 - Positive: the rehearsal runs locally, so a platform defect is reproducible without a hosted release.
-- Negative: equivalence is checked rather than structural. Step digests bring argument-level and within-step ordering differences inside the checker's model, but sequence-and-environment equivalence between the two lanes stays outside it: the orchestrator can move a step between jobs, or change what an earlier step leaves behind, and every comparison still passes. `ARCH-RLO-004` records this as the accepted weakness.
+- Negative: equivalence is checked rather than structural. Step digests bring argument-level and within-step ordering differences inside the checker's model, but sequence-and-environment equivalence between the two lanes stays outside it: the orchestrator can move a step between jobs, or change what an earlier step leaves behind, and every comparison still passes. `ARCH-RLO-005` records this as the accepted weakness.
 - Negative: the credential-free mechanics now have two implementations of their orchestration glue, which is duplication that must be maintained in step. The divergence check is the mitigation, not a cure.
 - Negative: the rehearsal builds twice and runs the unit suite on both platforms, so candidate integration gets slower.
 - Operational: `pages_build` is credential-free by permission but uses actions that mutate external Pages state, so it is classified as excluded and reported as such rather than rehearsed. `observe` holds no credential of its own and is nonetheless excluded, because it depends on `github_release`; five of the orchestrator's seven jobs are excluded and two are rehearsed.

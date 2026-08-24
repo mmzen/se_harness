@@ -1,5 +1,5 @@
 +++
-id = "REQ-RLO-014"
+id = "REQ-RLO-016"
 type = "requirement"
 title = "Fail closed when publication mechanics diverge from the rehearsal"
 status = "approved"
@@ -102,15 +102,15 @@ An unparseable orchestrator, an unrecognized job permission shape, a job that ca
 
 ## Open decisions
 
-Whether the divergence check should eventually be satisfied by refactoring the orchestrator to share one implementation, which would make sameness structural instead of checked, remains open. The owner explicitly deferred that refactor to avoid changing the live release path in this work; `ADR-RLO-004` records the trade.
+Whether the divergence check should eventually be satisfied by refactoring the orchestrator to share one implementation, which would make sameness structural instead of checked, remains open. The owner explicitly deferred that refactor to avoid changing the live release path in this work; `ADR-RLO-005` records the trade.
 
 ## Approval
 
-Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` design, which makes this fail-closed check the condition of that choice. This approves the requirement definition and the bounded implementation in `WO-RLO-004`; it authorizes no release, publication, deployment, or external action.
+Approved by the accountable repository owner on 2026-08-24 through the statement `OK go for #111` together with the selected `Parallel lane + drift check` design, which makes this fail-closed check the condition of that choice. This approves the requirement definition and the bounded implementation in `WO-RLO-005`; it authorizes no release, publication, deployment, or external action.
 
 ## Amendments during implementation
 
-Three amendments were made while implementing `WO-RLO-004`, each stated for owner acceptance or rejection. All three narrow what passes the check.
+Three amendments were made while implementing `WO-RLO-005`, each stated for owner acceptance or rejection. All three narrow what passes the check.
 
 - **Transitive exclusion.** The required response and the constraints now state that exclusion propagates through `needs`, and a new acceptance example covers it. Classifying the real orchestrator found that `observe` declares only `contents: read` and would have been treated as a rehearsal obligation although it runs only after `github_release` has used a credential. A fixture that omitted `permissions` entirely showed the same gap from the other side, so an absent permission block is now named as excluding.
 - **Step-digest comparison.** The required response now compares a digest of each credential-free step's script. Command-level comparison alone is blind inside a declared step: a new flag or a reordered command leaves every command already declared, so the check would have reported coverage of an orchestrator it no longer matched.

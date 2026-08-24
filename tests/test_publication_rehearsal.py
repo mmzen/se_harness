@@ -1,4 +1,4 @@
-"""Verification for the repository publication rehearsal (VER-RLO-004).
+"""Verification for the repository publication rehearsal (VER-RLO-005).
 
 The rehearsal program itself runs a full release qualification, which no unit
 test may do. What is tested here is every decision the program makes without a
@@ -44,7 +44,7 @@ REHEARSAL = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = REHEARSAL
 SPEC.loader.exec_module(REHEARSAL)
 
-#: The release orchestrator must stay byte-unchanged under WO-RLO-004. The digest
+#: The release orchestrator must stay byte-unchanged under WO-RLO-005. The digest
 #: is taken over the file with LF endings so a checkout that materializes CRLF
 #: compares equal to the stored blob.
 ORCHESTRATOR_LF_SHA256 = "d7313d16db7f013e4f8b961840eb60af31c27633a1366f95362e5befab9d51a2"

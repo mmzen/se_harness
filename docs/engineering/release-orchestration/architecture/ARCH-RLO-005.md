@@ -1,5 +1,5 @@
 +++
-id = "ARCH-RLO-004"
+id = "ARCH-RLO-005"
 type = "architecture"
 title = "Credential-free rehearsal lane with a checked equivalence seam"
 status = "approved"
@@ -8,8 +8,8 @@ created = "2026-08-24"
 updated = "2026-08-24"
 
 [relations]
-addresses = ["REQ-RLO-013", "REQ-RLO-014"]
-conforms_to = ["SPEC-RLO-004"]
+addresses = ["REQ-RLO-015", "REQ-RLO-016"]
+conforms_to = ["SPEC-RLO-005"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -88,7 +88,7 @@ In parallel: `orchestrator YAML -> bounded parse (optionally cross-checked) -> j
 
 Equivalence is checked, not structural. Two lanes exist, so they can differ in a way the checker does not model. The checker compares the mechanic set, the declared platforms, each credential-free step's script digest, the command keys inside those steps, and the action surface of those jobs. Within a step, therefore, an argument change, an added flag, and a reordering are all caught, because the digest covers the script's exact bytes after line-ending normalization.
 
-What remains unproven is equivalence of *sequence and environment* between the two lanes. The rehearsal program decides its own order of mechanics and its own environment shape; the checker does not prove that order matches the orchestrator's step and job order, nor that a mechanic the rehearsal drives with the same command sees the same surrounding state the orchestrator gives it. A drift of that kind — the orchestrator moving a step between jobs, or changing what an earlier step leaves behind — passes every comparison the checker makes, because the checker's unit is a step's script rather than the pipeline that reaches it. `ADR-RLO-004` records why the owner accepted this weakness instead of refactoring the live release path, and what would change the decision.
+What remains unproven is equivalence of *sequence and environment* between the two lanes. The rehearsal program decides its own order of mechanics and its own environment shape; the checker does not prove that order matches the orchestrator's step and job order, nor that a mechanic the rehearsal drives with the same command sees the same surrounding state the orchestrator gives it. A drift of that kind — the orchestrator moving a step between jobs, or changing what an earlier step leaves behind — passes every comparison the checker makes, because the checker's unit is a step's script rather than the pipeline that reaches it. `ADR-RLO-005` records why the owner accepted this weakness instead of refactoring the live release path, and what would change the decision.
 
 ## Conformance checks
 
@@ -100,7 +100,7 @@ What remains unproven is equivalence of *sequence and environment* between the t
 
 ## Related ADRs
 
-`ADR-RLO-004` decides the parallel lane with a checked equivalence seam over refactoring the orchestrator into a shared implementation.
+`ADR-RLO-005` decides the parallel lane with a checked equivalence seam over refactoring the orchestrator into a shared implementation.
 
 ## Approval
 

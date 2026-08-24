@@ -37,12 +37,12 @@ A release owner needs to know that the mechanics of the last mile work on every 
 
 ## Candidate requirements
 
-`REQ-RLO-013` defines the cross-platform credential-free rehearsal. `REQ-RLO-014` defines fail-closed detection of divergence between the publication orchestrator and that rehearsal.
+`REQ-RLO-015` defines the cross-platform credential-free rehearsal. `REQ-RLO-016` defines fail-closed detection of divergence between the publication orchestrator and that rehearsal.
 
 ## Approval
 
-On 2026-08-24 the accountable repository owner stated `OK go for #111`, and selected `Parallel lane + drift check` and `Fourth release-orchestration packet` from the two presented design options. This approves this capability and its linked definition artifacts under the existing `INT-RLO-001` intent. It authorizes the packet and the bounded implementation in `WO-RLO-004`; it authorizes no release, publication, deployment, or external action.
+On 2026-08-24 the accountable repository owner stated `OK go for #111`, and selected `Parallel lane + drift check` and `Fourth release-orchestration packet` from the two presented design options. This approves this capability and its linked definition artifacts under the existing `INT-RLO-001` intent. It authorizes the packet and the bounded implementation in `WO-RLO-005`; it authorizes no release, publication, deployment, or external action.
 
 ## Amendments during implementation
 
-Stated for owner acceptance or rejection. One outcome now says "added to, changed in, or removed from" where it said only "added to". The implemented drift check compares a digest of each credential-free step, so a change inside an already-declared step and the disappearance of a declared step both fail the required check. The narrower wording would have understated the capability that was built; the change adds no scope beyond `WO-RLO-004`.
+Stated for owner acceptance or rejection. One outcome now says "added to, changed in, or removed from" where it said only "added to". The implemented drift check compares a digest of each credential-free step, so a change inside an already-declared step and the disappearance of a declared step both fail the required check. The narrower wording would have understated the capability that was built; the change adds no scope beyond `WO-RLO-005`.
