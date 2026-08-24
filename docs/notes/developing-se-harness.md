@@ -33,6 +33,7 @@ tests/                                   installer, provenance, identity, packag
 docs/notes/                              non-authoritative human explanations
 docs/engineering/                        self-governing formal artifact graph and evidence
 .engineering-harness.toml                exact released root evaluator version and repository policy
+.github/scripts/build_integration_package.py safe candidate export, build, provenance, and install checks
 .github/workflows/engineering-harness.yml exact released standard evaluator workflow
 .github/workflows/candidate-evidence.yml  repository-owned source and package evidence
 .github/workflows/predecessor-evaluator-assessment.yml transitional released-0.5 view evidence
@@ -75,6 +76,30 @@ The standard managed workflow owns the released-evaluator lane. `.github/workflo
 The independent package lane has one initial bootstrap exception. Exact public 0.6.0 predates the `qualify` namespace, so its fixed, digest-bound `accept-candidate` contract retains the original `se-harness-functional-acceptance-v1` result. It is not relabeled as a typed result. After a released verifier contains `qualify candidate-package`, the workflow moves to that operation and the 0.6.0-only path is removed through a later governed change. See [release qualification roles](release-qualification-roles.md).
 
 Candidate CI also runs the contract-bound [evaluator migration rehearsal](evaluator-migration-rehearsal.md) on Windows and Linux. It acquires the already-public, digest-pinned predecessor before the run, builds a non-promotable successor from the exact candidate commit, installs both outside the checkout, and runs the nine-stage scenario twice. This gate tests the complete N-1-to-N handover; it does not make the candidate the root evaluator or grant release authority.
+
+## Installable integration packages
+
+After the existing candidate and migration gates pass for a pull request or a
+push to `main`, candidate CI can retain the exact tested wheel as an expiring
+integration package. The lane is deliberately downstream of candidate evidence:
+
+```text
+candidate gates -> exact export and two identical builds -> one-day staging
+                -> Linux and Windows install the same bytes -> final retention
+```
+
+The build script applies a PEP 440 local-version overlay only inside two
+disposable Git exports. It never changes `pyproject.toml` or
+`se_harness/__init__.py` in the checkout. A canonical manifest binds the full
+commit, event, run, exact build tools, two overlay hashes, wheel digest, and
+retention. Final `main` artifacts last 14 days and pull-request artifacts last 3
+days.
+
+This is not a release pipeline. The workflow uses no publication credential,
+tag, GitHub Release, package-index upload, release environment, RLS/REL input,
+managed-root mutation, or evaluator adoption. The retained bytes cannot be
+promoted into a release bundle. See [testing a current commit with an integration
+package](integration-packages.md) for the supported operator procedure.
 
 ## Building and releasing
 

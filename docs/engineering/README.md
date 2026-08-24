@@ -7,6 +7,7 @@
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
 - `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.
 - `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.
+- `integration-package/`: expiring, commit-addressed candidate packages for isolated integration testing outside release and evaluator authority.
 - `revision-provenance/`: commit-bound verification and release record preparation.
 - `aggregate-release/`: exact multi-work-order release coverage.
 - `portable-managed-integrity/`: portable schema-2 managed-file integrity and migration.

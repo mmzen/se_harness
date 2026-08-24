@@ -47,6 +47,16 @@ python -m pip install "se-harness==0.6.0"
 
 Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. Installed-root mutations must run from an external released-evaluator environment matching the repository lock; candidate source and ambiguous or contaminated installs fail before writing. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, exact-wheel upgrades, and the complete procedure.
 
+### Test an unreleased commit
+
+Successful candidate CI retains short-lived integration packages for exact
+`main` and pull-request commits. These wheels have unique commit-addressed
+versions, verified checksums, and Linux/Windows installation evidence. They are
+non-promotable test inputs—not releases or governing evaluators. See
+[testing a current commit with an integration package](docs/notes/integration-packages.md)
+for safe download, verification, isolated installation, disposable testing,
+expiration, and cleanup.
+
 ## Start using it
 
 Choose `init` for an absent or empty repository, or `adopt` for an existing repository:
@@ -187,4 +197,4 @@ The notes explain the system; they grant no authority. In an installed repositor
 
 ## Developing SE Harness
 
-The PyPI path above is for released use. A source checkout is candidate development evidence, not the repository's released evaluator. Contributors should read [Developing SE Harness](docs/notes/developing-se-harness.md) for source setup, tests, repository structure, evaluator/candidate evidence separation, and release boundaries.
+The PyPI path above is for released use. A source checkout and integration package are candidate development evidence, not the repository's released evaluator. Contributors should read [Developing SE Harness](docs/notes/developing-se-harness.md) for source setup, tests, repository structure, evaluator/candidate evidence separation, and release boundaries.
