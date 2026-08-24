@@ -781,6 +781,7 @@ OWNER_EDITABLE_SCRIPTS = (
     "check_portable_release_surface.py",
     "create_release_bundle_manifest.py",
     "normalize_sdist.py",
+    "replay_release_build.py",
     "validate_release_distributions.py",
 )
 REQUIRED_OWNER_CONTENT = (

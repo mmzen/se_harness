@@ -31,11 +31,18 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable, Sequence
 
-DECLARATION_SCHEMA = "se-harness-publication-rehearsal-mechanics/v1"
+DECLARATION_SCHEMA = "se-harness-publication-rehearsal-mechanics/v2"
 RESULT_SCHEMA = "se-harness-publication-rehearsal-result/v1"
 DIVERGENCE_SCHEMA = "se-harness-publication-rehearsal-divergence/v1"
 REFUSAL_SCHEMA = "se-harness-release-result/v1"
 AUTHORITY = "derived operational evidence; no formal lifecycle transition"
+
+#: The distribution schema that carries a bound build recipe. Declared here rather than
+#: imported, because this program must run from a bare interpreter with no repository
+#: module on the import path.
+RECIPE_DISTRIBUTION_SCHEMA = 2
+#: The repository's own credential-free lane that rehearses the bound recipe replay.
+REPLAY_LANE = ".github/workflows/release-candidate-replay.yml"
 
 RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9-]+-[0-9]{3}")
 WHEEL_NAME_PATTERN = re.compile(r"^se_harness-(?P<version>[0-9][^-]*)-py3-none-any\.whl$")
@@ -121,6 +128,10 @@ def platform_family() -> str:
     return f"posix-{sys.platform}"
 
 
+#: The platform families a declaration and a runner label may name.
+_PLATFORM_FAMILIES = ("Linux", "Windows", "macOS")
+
+
 def runner_platform_family(runs_on: Any) -> str:
     """Map a workflow ``runs-on`` label onto a platform family."""
     if not isinstance(runs_on, str):
@@ -133,6 +144,200 @@ def runner_platform_family(runs_on: Any) -> str:
     if label.startswith("macos"):
         return "macOS"
     raise RehearsalError(f"runs-on label has no known platform family: {runs_on}")
+
+
+#: A job selects its runner from exactly one matrix key, spelled as a whole expression.
+_MATRIX_RUNNER = re.compile(r"^\$\{\{\s*matrix\.([A-Za-z_][A-Za-z0-9_-]*)\s*\}\}$")
+
+#: A step gate term this checker can decide statically.
+_MATRIX_COMPARISON = re.compile(
+    r"^matrix\.([A-Za-z_][A-Za-z0-9_-]*)\s*(==|!=)\s*'([^']*)'$"
+)
+
+#: Contexts whose value is only known at run time. A term reading one of them cannot be
+#: decided here, so it is treated as able to hold. Anything outside this closed set is
+#: refused rather than guessed.
+_RUNTIME_GATE_CONTEXTS = ("needs.", "github.", "inputs.", "env.", "runner.", "steps.")
+_RUNTIME_GATE_FUNCTIONS = ("success()", "failure()", "always()", "cancelled()")
+
+
+def job_matrix_combinations(name: str, job: dict[str, Any]) -> list[dict[str, Any]]:
+    """Enumerate the matrix combinations one job expands into (SPEC-RLO-005 rule 38).
+
+    A job with no matrix expands into exactly one combination with no variables. Only
+    the two shapes the two workflow files use are modelled — plain axes, and an
+    ``include`` list on its own. Every other shape is refused, because a combination
+    this checker cannot enumerate is a platform claim it cannot measure.
+    """
+    strategy = job.get("strategy")
+    if strategy is None:
+        return [{}]
+    if not isinstance(strategy, dict):
+        raise RehearsalError(f"job {name} declares a strategy that is not a mapping")
+    matrix = strategy.get("matrix")
+    if matrix is None:
+        return [{}]
+    if not isinstance(matrix, dict):
+        raise RehearsalError(f"job {name} declares a matrix that is not a mapping")
+    if "exclude" in matrix:
+        raise RehearsalError(
+            f"job {name} declares a matrix exclusion this checker does not model"
+        )
+    axes = {key: value for key, value in matrix.items() if key != "include"}
+    include = matrix.get("include")
+    if axes and include is not None:
+        raise RehearsalError(
+            f"job {name} combines matrix axes with an include list; this checker does "
+            "not model that expansion"
+        )
+    if include is not None:
+        if not isinstance(include, list) or not include:
+            raise RehearsalError(f"job {name} declares an empty or non-list matrix include")
+        combinations: list[dict[str, Any]] = []
+        for entry in include:
+            if not isinstance(entry, dict):
+                raise RehearsalError(f"job {name} declares a matrix include entry that is not a mapping")
+            combinations.append(dict(entry))
+        return combinations
+    if not axes:
+        raise RehearsalError(f"job {name} declares a matrix with no axis and no include list")
+    combinations = [{}]
+    for key, values in sorted(axes.items()):
+        if not isinstance(values, list) or not values:
+            raise RehearsalError(f"job {name} declares matrix axis {key} without a value list")
+        expanded: list[dict[str, Any]] = []
+        for combination in combinations:
+            for value in values:
+                if isinstance(value, (dict, list)):
+                    raise RehearsalError(
+                        f"job {name} declares a structured value on matrix axis {key}"
+                    )
+                expanded.append({**combination, key: value})
+        combinations = expanded
+    return combinations
+
+
+def _resolved_runner_label(name: str, job: dict[str, Any], combination: dict[str, Any]) -> str:
+    """Resolve one job's ``runs-on`` label inside one matrix combination."""
+    runs_on = job.get("runs-on")
+    if not isinstance(runs_on, str):
+        raise RehearsalError(f"runs-on must be a single label; found {runs_on!r}")
+    match = _MATRIX_RUNNER.match(runs_on.strip())
+    if match is None:
+        if "${{" in runs_on:
+            raise RehearsalError(
+                f"job {name} selects its runner with an expression this checker does not "
+                f"model: {runs_on}"
+            )
+        return runs_on
+    key = match.group(1)
+    if key not in combination:
+        raise RehearsalError(
+            f"job {name} selects its runner from matrix.{key}, which its matrix does not define"
+        )
+    value = combination[key]
+    if not isinstance(value, str):
+        raise RehearsalError(f"job {name} selects its runner from a non-string matrix.{key}")
+    return value
+
+
+def job_platform_families(name: str, job: dict[str, Any]) -> tuple[str, ...]:
+    """Name every platform family one job can run on (SPEC-RLO-005 rule 38)."""
+    return tuple(
+        sorted(
+            {
+                runner_platform_family(_resolved_runner_label(name, job, combination))
+                for combination in job_matrix_combinations(name, job)
+            }
+        )
+    )
+
+
+def _split_top_level(text: str, operator: str) -> list[str]:
+    """Split an expression on one operator, ignoring occurrences inside parentheses."""
+    parts: list[str] = []
+    depth = 0
+    start = 0
+    index = 0
+    while index < len(text):
+        character = text[index]
+        if character == "(":
+            depth += 1
+        elif character == ")":
+            depth -= 1
+            if depth < 0:
+                raise RehearsalError(f"step gate has unbalanced parentheses: {text}")
+        elif depth == 0 and text.startswith(operator, index):
+            parts.append(text[start:index])
+            index += len(operator)
+            start = index
+            continue
+        index += 1
+    if depth != 0:
+        raise RehearsalError(f"step gate has unbalanced parentheses: {text}")
+    parts.append(text[start:])
+    return [part.strip() for part in parts]
+
+
+def _gate_term_can_hold(term: str, combination: dict[str, Any]) -> bool:
+    """Decide one gate term, refusing a term outside the modelled vocabulary."""
+    text = term.strip()
+    while text.startswith("(") and text.endswith(")"):
+        inner = text[1:-1].strip()
+        if _split_top_level(inner, "||") == [inner] and _split_top_level(inner, "&&") == [inner]:
+            text = inner
+            continue
+        return _gate_can_hold(inner, combination)
+    match = _MATRIX_COMPARISON.match(text)
+    if match is None and ("||" in text or "&&" in text):
+        return _gate_can_hold(text, combination)
+    if match is not None:
+        key, operator, literal = match.groups()
+        if key not in combination:
+            raise RehearsalError(
+                f"a step gate compares matrix.{key}, which its job's matrix does not define"
+            )
+        observed = combination[key]
+        equal = str(observed) == literal
+        return equal if operator == "==" else not equal
+    if text in _RUNTIME_GATE_FUNCTIONS or text.startswith(_RUNTIME_GATE_CONTEXTS):
+        return True
+    raise RehearsalError(f"a step gate uses a term this checker does not model: {term}")
+
+
+def _gate_can_hold(expression: str, combination: dict[str, Any]) -> bool:
+    """Decide whether a step's ``if`` gate can hold in one matrix combination.
+
+    Matrix comparisons are decided; a term reading a run-time context is treated as
+    able to hold, because it cannot be decided from the file. A term of any other shape
+    is refused, so an unmodelled gate fails the check rather than silently widening or
+    narrowing a platform claim (SPEC-RLO-005 rule 39).
+    """
+    text = expression.strip()
+    if text.startswith("${{") and text.endswith("}}"):
+        text = text[3:-2].strip()
+    for disjunct in _split_top_level(text, "||"):
+        if all(
+            _gate_term_can_hold(term, combination)
+            for term in _split_top_level(disjunct, "&&")
+        ):
+            return True
+    return False
+
+
+def step_platform_families(
+    name: str, job: dict[str, Any], step: dict[str, Any]
+) -> tuple[str, ...]:
+    """Name every platform family one step can run on (SPEC-RLO-005 rule 39)."""
+    gate = step.get("if")
+    if gate is not None and not isinstance(gate, str):
+        raise RehearsalError(f"a step of job {name} declares a non-string if condition")
+    families: set[str] = set()
+    for combination in job_matrix_combinations(name, job):
+        if gate is not None and not _gate_can_hold(gate, combination):
+            continue
+        families.add(runner_platform_family(_resolved_runner_label(name, job, combination)))
+    return tuple(sorted(families))
 
 
 def venv_scripts_directory(root: Path) -> Path:
@@ -432,6 +637,47 @@ def load_declaration(path: Path) -> dict[str, Any]:
             raise RehearsalError(
                 f"mechanic {mechanic.get('id')!r} names an undeclared realization "
                 f"surface: {mechanic.get('realized_by')!r}"
+            )
+    # SPEC-RLO-005 rule 39: a mechanic's orchestrator platform claim is derived from the
+    # steps that realize it, so the step-to-mechanic link is declaration integrity rather
+    # than documentation. A mechanic linked to no step of its own job would silently lose
+    # its platform claim instead of failing.
+    realizing_steps: dict[str, set[str]] = {}
+    for step in value["steps"]:
+        if not isinstance(step, dict):
+            raise RehearsalError("mechanic declaration contains a step entry that is not a mapping")
+        for key in ("job", "step", "run_sha256", "orchestrator_platforms", "mechanics"):
+            if step.get(key) is None:
+                raise RehearsalError(
+                    f"declared step {step.get('step')!r} of job {step.get('job')!r} omits {key}"
+                )
+        if not isinstance(step["orchestrator_platforms"], list) or not step["orchestrator_platforms"]:
+            raise RehearsalError(
+                f"declared step {step['step']!r} must claim at least one orchestrator platform"
+            )
+        for platform in step["orchestrator_platforms"]:
+            if platform not in _PLATFORM_FAMILIES:
+                raise RehearsalError(
+                    f"declared step {step['step']!r} names an unknown platform family: {platform!r}"
+                )
+        if not isinstance(step["mechanics"], list) or not step["mechanics"]:
+            raise RehearsalError(
+                f"declared step {step['step']!r} must name at least one mechanic it realizes"
+            )
+        for identifier in step["mechanics"]:
+            realizing_steps.setdefault(identifier, set()).add(step["job"])
+    known = {item.get("id") for item in value["mechanics"]}
+    for identifier in sorted(realizing_steps):
+        if identifier not in known:
+            raise RehearsalError(f"a declared step names an unknown mechanic: {identifier!r}")
+    for mechanic in value["mechanics"]:
+        if mechanic.get("origin") != "orchestrator":
+            continue
+        jobs = realizing_steps.get(mechanic["id"], set())
+        if mechanic.get("job") not in jobs:
+            raise RehearsalError(
+                f"mechanic {mechanic['id']!r} is realized by no declared step of job "
+                f"{mechanic.get('job')!r}"
             )
     return value
 
@@ -1360,6 +1606,92 @@ class Rehearsal:
             },
         )
 
+    def _recipe_bound_subjects(self) -> list[dict[str, Any]]:
+        """List every committed release record that carries a bound build recipe.
+
+        Data only: the record's own frontmatter states its distribution schema and the
+        recipe it binds. Nothing here decides anything about a record.
+        """
+        import tomllib
+
+        subjects: list[dict[str, Any]] = []
+        for path in sorted((self.repository / "docs" / "engineering").rglob("RLS-*.md")):
+            text = path.read_text(encoding="utf-8")
+            match = re.match(r"\+\+\+\n(.*?)\n\+\+\+", text, re.S)
+            if match is None:
+                continue
+            metadata = tomllib.loads(match.group(1))
+            if metadata.get("type") != "release_record":
+                continue
+            distribution = metadata.get("distribution")
+            if not isinstance(distribution, dict):
+                continue
+            subjects.append(
+                {
+                    "release_record": metadata.get("id"),
+                    "status": metadata.get("status"),
+                    "distribution_schema": distribution.get("schema"),
+                    "build_recipe": distribution.get("build_recipe"),
+                }
+            )
+        return subjects
+
+    def _recipe_bound_build_replay_exclusion(self) -> tuple[str, str, dict[str, Any]]:
+        """State why the recipe replay is not driven here, from measured facts.
+
+        The orchestrator replays the bound recipe only in its recipe matrix mode, on
+        Linux, against a released distribution-schema-2 record, and only inside the
+        recipe's own immutable `linux/amd64` OCI producer. Each of those preconditions is
+        measured rather than assumed, and the first unmet one is the reported reason
+        (SPEC-RLO-005 rule 40). When all of them hold the mechanic is still not executed:
+        driving a container producer is outside this rehearsal's boundary, and the
+        repository rehearses it in its own credential-free replay lane instead. Either way
+        the mechanic is reported, never omitted and never reported as executed.
+        """
+        subjects = self._recipe_bound_subjects()
+        eligible = [
+            item
+            for item in subjects
+            if item["distribution_schema"] == RECIPE_DISTRIBUTION_SCHEMA
+            and item["status"] == "released"
+        ]
+        runtime = shutil.which("docker")
+        evidence: dict[str, Any] = {
+            "release_record": self.subject_record,
+            "mode": self.mode,
+            "platform": platform_family(),
+            "producer_platform": "linux/amd64",
+            "container_runtime": runtime,
+            "committed_release_records": len(subjects),
+            "recipe_bound_released_records": [item["release_record"] for item in eligible],
+            "orchestrator_replay_lane": REPLAY_LANE,
+        }
+        detail = "the bound-recipe replay has no rehearsable subject on this platform"
+        if not eligible:
+            schemas = sorted({str(item["distribution_schema"]) for item in subjects})
+            reason = (
+                "no committed release record is a released distribution-schema-2 subject "
+                f"with a bound build recipe; the {len(subjects)} committed records declare "
+                f"distribution schema {', '.join(schemas) or 'none'}, so this mechanic has "
+                "no subject to replay"
+            )
+            return detail, reason, evidence
+        if platform_family() != "Linux" or runtime is None:
+            reason = (
+                "the bound producer is an immutable linux/amd64 OCI image, and this "
+                f"platform is {platform_family()} with "
+                f"{'no container runtime on PATH' if runtime is None else 'a container runtime'}; "
+                "the orchestrator itself performs this mechanic only in its Linux matrix mode"
+            )
+            return detail, reason, evidence
+        detail = "the bound-recipe replay is rehearsed by a separate credential-free lane"
+        reason = (
+            "the rehearsal does not drive the recipe's container producer: pulling and "
+            f"running an OCI image is outside its boundary, and {REPLAY_LANE} rehearses "
+            "the bound replay itself before release approval"
+        )
+        return detail, reason, evidence
+
     def _teardown(self) -> tuple[str, dict[str, Any]]:
         if self.candidate_checkout.exists():
             self._run(
@@ -1463,6 +1795,18 @@ class Rehearsal:
                 "bundle-verification",
             ):
                 self._blocked(mechanic, "temporary-path-identity")
+            # The replay exclusion is measured from committed data and this platform, so
+            # it is reported even when no derived tree could be created.
+            detail, reason, evidence = self._recipe_bound_build_replay_exclusion()
+            self.outcomes.append(
+                MechanicOutcome(
+                    mechanic="recipe-bound-build-replay",
+                    outcome="excluded",
+                    detail=detail,
+                    reason=reason,
+                    evidence=evidence,
+                )
+            )
             self._record("teardown", self._teardown)
             return self.result()
 
@@ -1514,6 +1858,17 @@ class Rehearsal:
         else:
             for mechanic in ("build-manifest-verification", "bundle-verification"):
                 self._blocked(mechanic, "bundle-manifest-creation")
+
+        detail, reason, evidence = self._recipe_bound_build_replay_exclusion()
+        self.outcomes.append(
+            MechanicOutcome(
+                mechanic="recipe-bound-build-replay",
+                outcome="excluded",
+                detail=detail,
+                reason=reason,
+                evidence=evidence,
+            )
+        )
 
         if self.keep_root:
             self.outcomes.append(
@@ -2131,7 +2486,7 @@ def _command_key(tokens: Sequence[str]) -> str | None:
 @dataclass
 class JobClassification:
     name: str
-    platform: str
+    platforms: tuple[str, ...]
     excluded: bool
     attributes: list[str]
 
@@ -2214,7 +2569,7 @@ def classify_jobs(
             _secret_attributes(step.get("with"), f"step {step.get('name')!r} with", attributes)
         classifications[name] = JobClassification(
             name=name,
-            platform=runner_platform_family(job.get("runs-on")),
+            platforms=job_platform_families(name, job),
             excluded=bool(attributes),
             attributes=attributes,
         )
@@ -2317,6 +2672,10 @@ def check_divergence(
     mechanics = declaration_index(declaration)
     trivia = set(declaration["trivia_commands"])
     declared_steps = {(item["job"], item["step"]): item for item in declaration["steps"]}
+    realizing_steps: dict[str, set[tuple[str, str]]] = {}
+    for key, item in declared_steps.items():
+        for identifier in item["mechanics"]:
+            realizing_steps.setdefault(identifier, set()).add(key)
     findings: list[dict[str, Any]] = []
     covered_commands: dict[str, set[str]] = {}
     for identifier, mechanic in mechanics.items():
@@ -2328,6 +2687,7 @@ def check_divergence(
     infrastructure = set(declaration.get("infrastructure_actions", []))
     external = set(declaration.get("external_state_actions", []))
     observed_steps: set[tuple[str, str]] = set()
+    observed_step_platforms: dict[tuple[str, str], tuple[str, ...]] = {}
     observed_commands: dict[str, set[str]] = {}
     for name in sorted(required):
         job = workflow["jobs"][name]
@@ -2348,6 +2708,8 @@ def check_divergence(
                 )
                 continue
             observed_steps.add((name, title))
+            platforms = step_platform_families(name, job, step)
+            observed_step_platforms[(name, title)] = platforms
             declared = declared_steps.get((name, title))
             digest = hashlib.sha256(normalized_run(script)).hexdigest()
             if declared is None:
@@ -2358,27 +2720,57 @@ def check_divergence(
                         "job": name,
                         "step": title,
                         "run_sha256": digest,
+                        "platforms": list(platforms),
                         "detail": (
                             "a credential-free orchestrator step is absent from the "
                             "declaration; its mechanics are not rehearsed"
                         ),
                     }
                 )
-            elif declared.get("run_sha256") != digest:
-                findings.append(
-                    {
-                        "kind": "changed_step",
-                        "direction": "uncovered",
-                        "job": name,
-                        "step": title,
-                        "declared_sha256": declared.get("run_sha256"),
-                        "run_sha256": digest,
-                        "detail": (
-                            "a credential-free orchestrator step changed; its rehearsal "
-                            "coverage must be re-derived and the declaration updated"
-                        ),
-                    }
-                )
+            else:
+                if declared.get("run_sha256") != digest:
+                    findings.append(
+                        {
+                            "kind": "changed_step",
+                            "direction": "uncovered",
+                            "job": name,
+                            "step": title,
+                            "declared_sha256": declared.get("run_sha256"),
+                            "run_sha256": digest,
+                            "detail": (
+                                "a credential-free orchestrator step changed; its rehearsal "
+                                "coverage must be re-derived and the declaration updated"
+                            ),
+                        }
+                    )
+                if sorted(declared.get("orchestrator_platforms") or []) != sorted(platforms):
+                    findings.append(
+                        {
+                            "kind": "step_platform_claim",
+                            "direction": "stale",
+                            "job": name,
+                            "step": title,
+                            "declared": declared.get("orchestrator_platforms"),
+                            "observed": list(platforms),
+                            "detail": (
+                                "the declared orchestrator platforms of a step differ from "
+                                "the platforms its job and gate resolve to"
+                            ),
+                        }
+                    )
+                if not platforms:
+                    findings.append(
+                        {
+                            "kind": "ungated_step",
+                            "direction": "stale",
+                            "job": name,
+                            "step": title,
+                            "detail": (
+                                "a declared step can run in no matrix combination, so the "
+                                "orchestrator no longer performs it on any platform"
+                            ),
+                        }
+                    )
             for key in command_keys(script):
                 observed_commands.setdefault(name, set()).add(key)
                 if key in covered_commands.get(name, set()):
@@ -2459,8 +2851,15 @@ def check_divergence(
                             "detail": "the orchestrator no longer invokes this declared command",
                         }
                     )
-            expected = [classifications[job_name].platform] if job_name in classifications else []
-            if sorted(mechanic["orchestrator_platforms"]) != sorted(expected):
+            # A mechanic's platforms are the union over the observed steps that realize
+            # it, not its job's runner types: a matrix job can gate one mechanic to one
+            # matrix combination and another mechanic to a different one.
+            expected_platforms: set[str] = set()
+            for key in sorted(realizing_steps.get(identifier, set())):
+                if key in observed_steps:
+                    expected_platforms.update(observed_step_platforms.get(key, ()))
+            expected = sorted(expected_platforms)
+            if sorted(mechanic["orchestrator_platforms"]) != expected:
                 state = "stale"
                 findings.append(
                     {
@@ -2470,12 +2869,17 @@ def check_divergence(
                         "mechanic": identifier,
                         "declared": mechanic["orchestrator_platforms"],
                         "observed": expected,
-                        "detail": "the declared orchestrator platform differs from the job's runner type",
+                        "detail": (
+                            "the declared orchestrator platforms differ from those of the "
+                            "steps that realize the mechanic"
+                        ),
                     }
                 )
         mechanic_report.append({"mechanic": identifier, "coverage": state, "job": job_name})
 
-    orchestrator_platforms = sorted({classifications[name].platform for name in required})
+    orchestrator_platforms = sorted(
+        {platform for name in required for platform in classifications[name].platforms}
+    )
     lane = _lane_report(lane_path, declaration, findings, cross_check=cross_check)
     findings = _deduplicate(findings)
     verdict = "exact" if not findings else "divergent"
@@ -2573,22 +2977,7 @@ def _lane_report(
                 set(declaration.get("external_state_actions", [])),
                 findings,
             )
-        strategy = job.get("strategy") or {}
-        matrix = strategy.get("matrix") or {}
-        candidates: list[Any] = []
-        for value in matrix.values():
-            if isinstance(value, list):
-                candidates.extend(value)
-        for candidate in candidates:
-            label = candidate.get("runner") if isinstance(candidate, dict) else candidate
-            if isinstance(label, str):
-                try:
-                    platforms.add(runner_platform_family(label))
-                except RehearsalError:
-                    continue
-        runs_on = job.get("runs-on")
-        if isinstance(runs_on, str) and "${{" not in runs_on:
-            platforms.add(runner_platform_family(runs_on))
+        platforms.update(job_platform_families(name, job))
     missing = [item for item in required_platforms if item not in platforms]
     if missing:
         findings.append(

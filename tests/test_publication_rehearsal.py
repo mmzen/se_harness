@@ -44,10 +44,12 @@ REHEARSAL = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = REHEARSAL
 SPEC.loader.exec_module(REHEARSAL)
 
-#: The release orchestrator must stay byte-unchanged under WO-RLO-005. The digest
-#: is taken over the file with LF endings so a checkout that materializes CRLF
-#: compares equal to the stored blob.
-ORCHESTRATOR_LF_SHA256 = "d7313d16db7f013e4f8b961840eb60af31c27633a1366f95362e5befab9d51a2"
+#: The release orchestrator must stay byte-unchanged *by this packet* under WO-RLO-005.
+#: The digest is taken over the file with LF endings so a checkout that materializes CRLF
+#: compares equal to the stored blob. It was re-derived when `main` advanced and gave
+#: `qualify` a two-mode matrix; the packet still contributes no byte to the file, and this
+#: assertion is what proves it.
+ORCHESTRATOR_LF_SHA256 = "2d3c3b775946d7667d9a175b0bb85446ff90db029d021e155a9b12105ff1f51e"
 
 
 def lf_digest(path: Path) -> str:
@@ -973,8 +975,8 @@ class JobClassificationTests(unittest.TestCase):
         classifications = self.classify(self.workflow())
         required = sorted(name for name, item in classifications.items() if not item.excluded)
         self.assertEqual(["qualify", "resolve"], required)
-        self.assertEqual("Linux", classifications["resolve"].platform)
-        self.assertEqual("Windows", classifications["qualify"].platform)
+        self.assertEqual(("Linux",), classifications["resolve"].platforms)
+        self.assertEqual(("Windows",), classifications["qualify"].platforms)
         self.assertIn("id-token: write permission", classifications["pypi"].attributes)
         self.assertIn("declares a protected environment", classifications["pypi"].attributes)
         self.assertIn(
@@ -1041,6 +1043,145 @@ class JobClassificationTests(unittest.TestCase):
             with self.subTest(shape=label):
                 with self.assertRaises(REHEARSAL.RehearsalError):
                     self.classify(broken)
+
+
+class MatrixPlatformTests(unittest.TestCase):
+    """One job can run on more than one platform family, and one step on fewer.
+
+    `main` gave the orchestrator's `qualify` job a two-mode matrix whose modes are pinned
+    to different runner images, so a job no longer has one runner type and a gated step no
+    longer inherits its job's. Both are resolved from the file, and any shape the checker
+    does not model is refused rather than guessed.
+    """
+
+    INCLUDE_JOB = {
+        "runs-on": "${{ matrix.os }}",
+        "strategy": {
+            "fail-fast": False,
+            "matrix": {
+                "include": [
+                    {"mode": "legacy-schema-1", "os": "windows-2022"},
+                    {"mode": "recipe-schema-2", "os": "ubuntu-latest"},
+                ]
+            },
+        },
+        "steps": [],
+    }
+
+    def test_a_job_without_a_matrix_has_one_combination_and_one_platform(self) -> None:
+        job = {"runs-on": "ubuntu-latest", "steps": []}
+        self.assertEqual([{}], REHEARSAL.job_matrix_combinations("resolve", job))
+        self.assertEqual(("Linux",), REHEARSAL.job_platform_families("resolve", job))
+
+    def test_an_include_matrix_resolves_every_runner_it_names(self) -> None:
+        self.assertEqual(
+            ("Linux", "Windows"), REHEARSAL.job_platform_families("qualify", self.INCLUDE_JOB)
+        )
+
+    def test_a_plain_axis_matrix_expands_to_its_cross_product(self) -> None:
+        job = {
+            "runs-on": "${{ matrix.runner }}",
+            "strategy": {"matrix": {"runner": ["ubuntu-latest", "windows-2022"], "mode": ["a"]}},
+            "steps": [],
+        }
+        self.assertEqual(2, len(REHEARSAL.job_matrix_combinations("rehearse", job)))
+        self.assertEqual(("Linux", "Windows"), REHEARSAL.job_platform_families("rehearse", job))
+
+    def test_a_matrix_or_runner_shape_the_checker_cannot_model_is_refused(self) -> None:
+        cases: dict[str, dict[str, Any]] = {
+            "unmodelled runner expression": {
+                "runs-on": "${{ inputs.runner }}",
+                "steps": [],
+            },
+            "runner from an undefined matrix key": {
+                "runs-on": "${{ matrix.platform }}",
+                "strategy": {"matrix": {"include": [{"os": "ubuntu-latest"}]}},
+                "steps": [],
+            },
+            "matrix exclusion": {
+                "runs-on": "${{ matrix.os }}",
+                "strategy": {
+                    "matrix": {"os": ["ubuntu-latest"], "exclude": [{"os": "ubuntu-latest"}]}
+                },
+                "steps": [],
+            },
+            "axes combined with include": {
+                "runs-on": "${{ matrix.os }}",
+                "strategy": {
+                    "matrix": {"os": ["ubuntu-latest"], "include": [{"os": "windows-2022"}]}
+                },
+                "steps": [],
+            },
+            "matrix with no axis": {
+                "runs-on": "${{ matrix.os }}",
+                "strategy": {"matrix": {}},
+                "steps": [],
+            },
+            "unknown runner image": {
+                "runs-on": "${{ matrix.os }}",
+                "strategy": {"matrix": {"include": [{"os": "freebsd-14"}]}},
+                "steps": [],
+            },
+        }
+        for label, job in cases.items():
+            with self.subTest(shape=label):
+                with self.assertRaises(REHEARSAL.RehearsalError):
+                    REHEARSAL.job_platform_families("qualify", job)
+
+    def platforms(self, gate: str | None) -> tuple[str, ...]:
+        step: dict[str, Any] = {"name": "step", "run": "true"}
+        if gate is not None:
+            step["if"] = gate
+        return REHEARSAL.step_platform_families("qualify", self.INCLUDE_JOB, step)
+
+    def test_an_ungated_step_runs_in_every_combination(self) -> None:
+        self.assertEqual(("Linux", "Windows"), self.platforms(None))
+
+    def test_a_matrix_gate_narrows_a_step_to_its_own_combination(self) -> None:
+        self.assertEqual(("Windows",), self.platforms("matrix.mode == 'legacy-schema-1'"))
+        self.assertEqual(("Linux",), self.platforms("matrix.mode == 'recipe-schema-2'"))
+        self.assertEqual(("Linux",), self.platforms("matrix.mode != 'legacy-schema-1'"))
+
+    def test_a_run_time_term_cannot_narrow_a_platform_claim(self) -> None:
+        # The orchestrator gates each mode on both the matrix mode and a job output that
+        # only exists at run time. The run-time half cannot be decided from the file, so it
+        # is treated as able to hold and the matrix half does the narrowing.
+        self.assertEqual(
+            ("Windows",),
+            self.platforms(
+                "matrix.mode == 'legacy-schema-1' && "
+                "needs.resolve.outputs.distribution_schema == '1'"
+            ),
+        )
+        self.assertEqual(("Linux", "Windows"), self.platforms("success()"))
+
+    def test_a_disjunction_of_gated_modes_covers_both_platforms(self) -> None:
+        self.assertEqual(
+            ("Linux", "Windows"),
+            self.platforms(
+                "(matrix.mode == 'legacy-schema-1' && "
+                "needs.resolve.outputs.distribution_schema == '1') || "
+                "(matrix.mode == 'recipe-schema-2' && "
+                "needs.resolve.outputs.distribution_schema == '2')"
+            ),
+        )
+
+    def test_a_gate_that_can_never_hold_claims_no_platform(self) -> None:
+        self.assertEqual((), self.platforms("matrix.mode == 'no-such-mode'"))
+
+    def test_a_gate_term_outside_the_modelled_vocabulary_is_refused(self) -> None:
+        for gate in (
+            "hashFiles('pyproject.toml') != ''",
+            "matrix.mode == 'legacy-schema-1' && contains(matrix.os, 'windows')",
+            "matrix.missing == 'x'",
+            "(matrix.mode == 'legacy-schema-1'",
+        ):
+            with self.subTest(gate=gate):
+                with self.assertRaises(REHEARSAL.RehearsalError):
+                    self.platforms(gate)
+
+    def test_an_expression_wrapper_is_accepted(self) -> None:
+        self.assertEqual(("Windows",), self.platforms("${{ matrix.mode == 'legacy-schema-1' }}"))
 
 
 class FixtureDivergenceTests(unittest.TestCase):
@@ -1304,6 +1445,190 @@ class FixtureDivergenceTests(unittest.TestCase):
         self.assertIn("No uncovered or stale mechanic.", summary)
 
 
+class MatrixDivergenceTests(unittest.TestCase):
+    """A matrix job's platform assignment is checked per step, not per job.
+
+    A step that moves from one runner image to another, or that becomes reachable in a
+    combination it was not declared for, changes which platform the orchestrator proves it
+    on. That is the exact class of gap `RC-060-11` records, so it is a finding.
+    """
+
+    LEGACY_JOB = "  qualify:\n    name: Qualify the candidate\n    runs-on: windows-2022\n"
+    MATRIX_JOB = (
+        "  qualify:\n"
+        "    name: Qualify the candidate\n"
+        "    strategy:\n"
+        "      fail-fast: false\n"
+        "      matrix:\n"
+        "        include:\n"
+        "          - mode: legacy\n"
+        "            os: windows-2022\n"
+        "          - mode: recipe\n"
+        "            os: ubuntu-latest\n"
+        "    runs-on: ${{ matrix.os }}\n"
+    )
+
+    def setUp(self) -> None:
+        self.repository = make_temporary_directory(self)
+        workflows = self.repository / ".github" / "workflows"
+        workflows.mkdir(parents=True)
+        for name in ("orchestrator.yml", "lane.yml"):
+            shutil.copy(FIXTURES / name, workflows / name)
+        self.declaration = REHEARSAL.load_declaration(FIXTURES / "mechanics.json")
+        self.orchestrator = workflows / "orchestrator.yml"
+
+    def make_matrix(self, gate: str | None = None) -> None:
+        text = self.orchestrator.read_text(encoding="utf-8")
+        self.assertIn(self.LEGACY_JOB, text)
+        text = text.replace(self.LEGACY_JOB, self.MATRIX_JOB, 1)
+        if gate is not None:
+            text = text.replace(
+                "      - name: Build both deterministic distribution sets\n",
+                "      - name: Build both deterministic distribution sets\n"
+                f"        if: {gate}\n",
+                1,
+            )
+        self.orchestrator.write_text(text, encoding="utf-8", newline="\n")
+
+    def check(self) -> dict[str, Any]:
+        return REHEARSAL.check_divergence(self.repository, self.declaration)
+
+    def test_a_gated_matrix_step_keeps_its_declared_platform(self) -> None:
+        self.make_matrix(gate="matrix.mode == 'legacy'")
+        result = self.check()
+        self.assertEqual("exact", result["verdict"])
+        self.assertEqual([], result["findings"])
+        # The job spans both images even though the declared step is still Windows-only.
+        self.assertEqual(["Linux", "Windows"], result["orchestrator_platforms"])
+
+    def test_an_ungated_matrix_step_widens_its_platforms_and_is_reported(self) -> None:
+        self.make_matrix()
+        result = self.check()
+        self.assertEqual("divergent", result["verdict"])
+        step = next(
+            item for item in result["findings"] if item["kind"] == "step_platform_claim"
+        )
+        self.assertEqual("Build both deterministic distribution sets", step["step"])
+        self.assertEqual(["Windows"], step["declared"])
+        self.assertEqual(["Linux", "Windows"], step["observed"])
+        mechanic = next(item for item in result["findings"] if item["kind"] == "platform_claim")
+        self.assertEqual(["Linux", "Windows"], mechanic["observed"])
+
+    def test_a_step_reachable_in_no_combination_is_stale(self) -> None:
+        self.make_matrix(gate="matrix.mode == 'retired'")
+        result = self.check()
+        self.assertEqual("divergent", result["verdict"])
+        finding = next(item for item in result["findings"] if item["kind"] == "ungated_step")
+        self.assertEqual("stale", finding["direction"])
+        self.assertEqual("Build both deterministic distribution sets", finding["step"])
+
+    def test_an_unmodelled_gate_fails_the_check_rather_than_guessing(self) -> None:
+        self.make_matrix(gate="contains(matrix.os, 'windows')")
+        with self.assertRaises(REHEARSAL.RehearsalError):
+            self.check()
+
+
+class _ReplaySubjectStub:
+    """The state `Rehearsal._recipe_bound_build_replay_exclusion` reads."""
+
+    def __init__(self, repository: Path, mode: str, subject: str) -> None:
+        self.repository = repository
+        self.mode = mode
+        self.subject_record = subject
+
+    # The readers under test are the program's own, not a re-implementation of them.
+    _recipe_bound_subjects = REHEARSAL.Rehearsal._recipe_bound_subjects
+    _recipe_bound_build_replay_exclusion = (
+        REHEARSAL.Rehearsal._recipe_bound_build_replay_exclusion
+    )
+
+
+def _write_distribution_record(
+    repository: Path, identifier: str, *, status: str, schema: int
+) -> None:
+    directory = repository / "docs" / "engineering" / "release-x"
+    directory.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "+++",
+        f'id = "{identifier}"',
+        'type = "release_record"',
+        f'status = "{status}"',
+        "",
+        "[distribution]",
+        f"schema = {schema}",
+    ]
+    if schema == 2:
+        lines += [
+            'build_recipe_schema = "se-harness-release-build-recipe-v1"',
+            'build_recipe = "docs/engineering/release-x/build-recipe.json"',
+        ]
+    lines += ["+++", "", f"# {identifier}", ""]
+    (directory / f"{identifier}.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+class RecipeBoundReplayExclusionTests(unittest.TestCase):
+    """The bound-recipe replay reports a measured reason, never silence.
+
+    The orchestrator replays the recipe only in its Linux matrix mode, against a released
+    distribution-schema-2 record, inside the recipe's own immutable `linux/amd64` producer.
+    Each precondition is measured, and the mechanic is reported `excluded` with the first
+    unmet one — or, when all of them hold, with the boundary that keeps a container
+    producer out of this rehearsal.
+    """
+
+    def exclusion(self, repository: Path, *, mode: str = "candidate") -> tuple[str, str, Any]:
+        stub = _ReplaySubjectStub(repository, mode, "RLS-SEH-012")
+        return stub._recipe_bound_build_replay_exclusion()
+
+    def test_no_recipe_bound_record_is_reported_as_having_no_subject(self) -> None:
+        repository = make_temporary_directory(self)
+        _write_distribution_record(repository, "RLS-SEH-012", status="released", schema=1)
+        _detail, reason, evidence = self.exclusion(repository)
+        self.assertIn("no committed release record", reason)
+        self.assertEqual([], evidence["recipe_bound_released_records"])
+        self.assertEqual(1, evidence["committed_release_records"])
+        self.assertEqual("linux/amd64", evidence["producer_platform"])
+        self.assertEqual(REHEARSAL.REPLAY_LANE, evidence["orchestrator_replay_lane"])
+
+    def test_a_prepared_but_unreleased_recipe_record_is_not_a_subject(self) -> None:
+        repository = make_temporary_directory(self)
+        _write_distribution_record(repository, "RLS-SEH-013", status="ready", schema=2)
+        _detail, reason, evidence = self.exclusion(repository)
+        self.assertIn("no committed release record", reason)
+        self.assertEqual([], evidence["recipe_bound_released_records"])
+
+    def test_a_released_recipe_record_reports_the_platform_or_boundary_reason(self) -> None:
+        repository = make_temporary_directory(self)
+        _write_distribution_record(repository, "RLS-SEH-013", status="released", schema=2)
+        detail, reason, evidence = self.exclusion(repository)
+        self.assertEqual(["RLS-SEH-013"], evidence["recipe_bound_released_records"])
+        self.assertNotIn("no committed release record", reason)
+        if REHEARSAL.platform_family() == "Linux" and evidence["container_runtime"]:
+            self.assertIn(REHEARSAL.REPLAY_LANE, reason)
+            self.assertIn("separate credential-free lane", detail)
+        else:
+            self.assertIn("linux/amd64", reason)
+            self.assertIn(REHEARSAL.platform_family(), reason)
+
+    def test_release_record_mode_excludes_for_the_same_measured_reason(self) -> None:
+        repository = make_temporary_directory(self)
+        _write_distribution_record(repository, "RLS-SEH-012", status="released", schema=1)
+        _detail, reason, evidence = self.exclusion(repository, mode="release-record")
+        self.assertEqual("release-record", evidence["mode"])
+        self.assertIn("no committed release record", reason)
+
+    def test_the_repository_declares_the_mechanic_on_the_linux_matrix_mode_only(self) -> None:
+        declaration = REHEARSAL.load_declaration(DECLARATION_PATH)
+        mechanic = REHEARSAL.declaration_index(declaration)["recipe-bound-build-replay"]
+        self.assertEqual("qualify", mechanic["job"])
+        self.assertEqual(["Linux"], mechanic["orchestrator_platforms"])
+        self.assertEqual(
+            ["jq .manifest", "python scripts/replay_release_build.py"],
+            sorted(mechanic["commands"]),
+        )
+        self.assertTrue((REPOSITORY_ROOT / REHEARSAL.REPLAY_LANE).is_file())
+
+
 class RepositoryDivergenceTests(unittest.TestCase):
     """The real orchestrator, declaration, and lane, with no third-party parser."""
 
@@ -1337,7 +1662,7 @@ class RepositoryDivergenceTests(unittest.TestCase):
         self.assertEqual({"covered", "rehearsal-only"}, set(coverage.values()))
         self.assertEqual("rehearsal-only", coverage["teardown"])
         orchestrator = [name for name, state in coverage.items() if state == "covered"]
-        self.assertEqual(21, len(orchestrator))
+        self.assertEqual(22, len(orchestrator))
 
     def test_the_release_orchestrator_is_byte_unchanged(self) -> None:
         self.assertEqual(ORCHESTRATOR_LF_SHA256, lf_digest(ORCHESTRATOR_PATH))

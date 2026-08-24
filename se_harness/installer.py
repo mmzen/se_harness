@@ -403,6 +403,11 @@ def _upgrade_evidence_bytes(
         "authorized_by": authorization.authorized_by,
         "prior": {
             "lock_sha256": authorization.prior_lock_sha256,
+            # Names how the recorded digest matched. A digest taken before the
+            # lock's hash-bound class was declared matches as a legacy newline
+            # variant, and that is reported rather than passing as an ordinary
+            # match.
+            "lock_match": authorization.prior_lock_match,
             "tool_version": old_lock.get("tool_version"),
             "evaluator": old_lock.get("evaluator"),
         },

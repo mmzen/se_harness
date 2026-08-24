@@ -22,7 +22,7 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 - every file in `docs/engineering/templates/`
 - exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
 
-The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `validate_release_distributions.py`. Do not claim all of `scripts/` is managed; that would block the documented release-build path.
+The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`. Do not claim all of `scripts/` is managed; that would block the documented release-build path.
 
 `AGENTS.md`, `CLAUDE.md`, and `.gitignore` are `fragment` mode: only the block between the `se-harness` begin and end markers is tracked. The rest of each file is owner content. Reproduce the tracked block byte-for-byte; `utf8-text-lf-v1` canonicalizes line endings only, so any other whitespace change breaks the digest.
 

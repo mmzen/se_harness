@@ -18,7 +18,9 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from repository_tools import release_bootstrap as BOOTSTRAP
 from se_harness import hash_bound
+from se_harness.evaluator_identity import InstalledEvaluatorIdentity
 from se_harness.hash_bound import (
     CANONICAL_MODE,
     CHECK_ATTRIBUTE_EFFECTIVE,
@@ -26,15 +28,26 @@ from se_harness.hash_bound import (
     CHECK_MODE_CONSISTENT,
     CHECK_NAMES,
     HashBoundError,
+    LOCK_RELATIVE,
+    MATCH_DECLARED,
+    MATCH_LEGACY_NEWLINE,
+    MATCH_MISMATCH,
     RAW_MODE,
     assess,
+    compare_declared_digest,
+    declared_digest,
     load_declaration,
     matches,
     pattern_specificity,
     resolve_class,
+    resolve_mode,
 )
 from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.preflight import inspect_installation
+from se_harness.upgrade_authorization import (
+    UpgradeAuthorizationError,
+    load_upgrade_authorization,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,6 +77,16 @@ SPECIFIED_CLASSES = {
     ),
     "standard-lock": ((".engineering-harness.lock",), CANONICAL_MODE, None, "template"),
 }
+UPGRADE_WORK_ORDER = (
+    ROOT / "docs" / "engineering" / "repository-harness-upgrade" / "work-orders" / "WO-HUP-002.md"
+)
+# Recorded before the lock's class was declared, over the bytes a CRLF checkout
+# produced. Rule 11 forbids rewriting it, so the digest below is quoted from the
+# artifact and the commit is the tree it was taken over.
+RECORDED_PRIOR_LOCK_SHA256 = "c4c4191998cad431620324dba2ad205c190fcf2802847278cabec92e853989af"
+RECORDED_PRIOR_LOCK_COMMIT = "842ad90869ac153dc7aa407611992f066de78dd5"
+LOCK_PRODUCERS = ("se_harness", "repository_tools", "scripts")
+LOCK_WRITE = re.compile(r"([\w.\[\]\"'()]*[Ll]ock[\w.\[\]\"'()]*)\.write_text\(")
 SYNTHETIC_FILES = {
     "docs/engineering/x/evidence/a.json": b'{"a": 1}\n',
     "se_harness/governance_migration.py": b'"""m."""\n',
@@ -135,6 +158,105 @@ def committed_attributes() -> bytes:
     return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes")
 
 
+def revision_available(revision: str) -> bool:
+    """Return whether this checkout holds the object, which a shallow clone may not."""
+
+    if not git_available():
+        return False
+    completed = subprocess.run(
+        ["git", "-C", str(ROOT), "cat-file", "-e", f"{revision}^{{commit}}"],
+        check=False,
+        capture_output=True,
+    )
+    return completed.returncode == 0
+
+
+def historical_lock() -> bytes:
+    return git(ROOT, "cat-file", "blob", f"{RECORDED_PRIOR_LOCK_COMMIT}:{LOCK_RELATIVE}")
+
+
+def newline_forms(payload: bytes) -> dict[str, bytes]:
+    """Return the three materializations a checkout can produce from one blob."""
+
+    canonical = payload.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return {
+        "lf": canonical,
+        "crlf": canonical.replace(b"\n", b"\r\n"),
+        "cr": canonical.replace(b"\n", b"\r"),
+    }
+
+
+def raw_lock_declaration() -> hash_bound.Declaration:
+    """Return the real declaration with the lock's class flipped to raw mode.
+
+    Used to prove a caller follows the declaration rather than a mode of its own:
+    under this declaration the same bytes must reach a different verdict.
+    """
+
+    declared = load_declaration()
+    return hash_bound.Declaration(
+        classes=tuple(
+            hash_bound.HashBoundClass(
+                item.class_id,
+                item.patterns,
+                RAW_MODE if item.class_id == "standard-lock" else item.mode,
+                item.required_attribute,
+                item.region,
+                item.bindings,
+            )
+            for item in declared.classes
+        ),
+        unbound_digest_fields=declared.unbound_digest_fields,
+    )
+
+
+def upgrade_packet(root: Path, prior_lock_sha256: str, identity: InstalledEvaluatorIdentity) -> None:
+    """Write one approved evaluator-upgrade work order and nothing else."""
+
+    body = f"""+++
+id = "WO-TST-001"
+type = "work_order"
+status = "approved"
+title = "Synthetic evaluator upgrade"
+
+[evaluator_upgrade]
+schema = "se-harness-evaluator-upgrade-v1"
+scope = "standard-root-only"
+prior_lock_sha256 = "{prior_lock_sha256}"
+target_version = "{identity.version}"
+target_payload_sha256 = "{identity.payload_sha256}"
+target_archive_name = "{identity.archive_name}"
+target_archive_sha256 = "{identity.archive_sha256}"
+publication = "immutable"
+authorized_by = "engineering-owner"
++++
+
+Synthetic.
+"""
+    write(root, "docs/engineering/upgrade/work-orders/WO-TST-001.md", body.encode("utf-8"))
+
+
+def bootstrap_root(root: Path, lock_bytes: bytes, version: str = "0.5.0") -> None:
+    """Write the standard config and lock a bootstrap old-root validation reads."""
+
+    write(root, ".engineering-harness.toml", f'[harness]\ntool_version = "{version}"\n'.encode("utf-8"))
+    write(root, LOCK_RELATIVE, lock_bytes)
+
+
+def bootstrap_contract(from_lock_sha256: str, version: str = "0.5.0") -> BOOTSTRAP.BootstrapContract:
+    return BOOTSTRAP.BootstrapContract(
+        release_contract="REL-TST-001",
+        release_record="RLS-TST-001",
+        version="0.6.0",
+        from_lock_schema=2,
+        from_lock_tool_version=version,
+        from_lock_sha256=from_lock_sha256,
+        evaluator_version=version,
+        evaluator_archive_name=f"se_harness-{version}-py3-none-any.whl",
+        evaluator_archive_sha256="b" * 64,
+    )
+
+
 def results(root: Path, declaration=None) -> dict[str, tuple[bool, str]]:
     return {name: (passed, detail) for name, passed, detail in assess(root, declaration)}
 
@@ -197,6 +319,15 @@ class DeclarationShapeTests(unittest.TestCase):
         pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
         self.assertIn('"hash_bound_classes.json"', pyproject)
         self.assertIn("include se_harness/*.json", (ROOT / "MANIFEST.in").read_text(encoding="utf-8"))
+
+    def test_repository_build_recipe_digest_is_explicitly_inventoried(self) -> None:
+        self.assertIn(
+            (
+                "build_recipe_sha256",
+                "repository-owned release recipe digest; validated by repository policy",
+            ),
+            load_declaration().unbound_digest_fields,
+        )
 
 
 def _leaf_strings(value: object) -> list[str]:
@@ -870,6 +1001,375 @@ class ModeConsistencyTests(unittest.TestCase):
         passed, detail = hash_bound._mode_consistent(declaration)
         self.assertFalse(passed)
         self.assertIn("both declare", detail)
+
+
+class ModeArbitrationTests(unittest.TestCase):
+    """One query answers what mode a bound path is hashed under, or refuses."""
+
+    def test_every_declared_class_arbitrates_its_own_mode(self) -> None:
+        for relative, expected in (
+            (LOCK_RELATIVE, CANONICAL_MODE),
+            ("docs/engineering/x/evidence/a.json", RAW_MODE),
+            ("se_harness/governance_migration_contract.json", RAW_MODE),
+            ("tests/fixtures/governance_migration/s.json", RAW_MODE),
+        ):
+            with self.subTest(relative=relative):
+                self.assertEqual(expected, resolve_mode(relative))
+
+    def test_an_undeclared_path_fails_closed_rather_than_defaulting(self) -> None:
+        for relative in ("README.md", "docs/engineering/x/evidence/a.txt", "se_harness/cli.py"):
+            with self.subTest(relative=relative):
+                with self.assertRaises(HashBoundError) as raised:
+                    resolve_mode(relative)
+                self.assertIn(relative, str(raised.exception))
+
+    def test_the_declared_lock_path_is_the_installer_path(self) -> None:
+        from se_harness.installer import LOCK_NAME
+
+        self.assertEqual(LOCK_NAME, LOCK_RELATIVE)
+        self.assertIn(LOCK_RELATIVE, [item for entry in SPECIFIED_CLASSES.values() for item in entry[0]])
+
+    def test_a_canonical_class_reaches_one_digest_from_every_materialization(self) -> None:
+        forms = newline_forms(LOCK.read_bytes())
+        digests = {name: declared_digest(LOCK_RELATIVE, value) for name, value in forms.items()}
+        self.assertEqual({canonical_sha256(forms["lf"])}, set(digests.values()), digests)
+        for name, value in forms.items():
+            with self.subTest(materialization=name):
+                self.assertEqual(
+                    MATCH_DECLARED,
+                    compare_declared_digest(LOCK_RELATIVE, value, digests["lf"]),
+                )
+
+    def test_a_raw_class_keeps_every_materialization_distinct(self) -> None:
+        relative = "docs/engineering/x/evidence/a.json"
+        forms = newline_forms(b'{"a": 1}\n')
+        digests = {name: declared_digest(relative, value) for name, value in forms.items()}
+        self.assertEqual(raw_sha256(forms["lf"]), digests["lf"])
+        self.assertEqual(3, len(set(digests.values())), digests)
+
+    def test_a_single_byte_tamper_is_a_mismatch_in_every_class(self) -> None:
+        for relative in (
+            LOCK_RELATIVE,
+            "docs/engineering/x/evidence/a.json",
+            "se_harness/governance_migration.py",
+        ):
+            with self.subTest(relative=relative):
+                payload = b'{"a": 1}\n'
+                expected = declared_digest(relative, payload)
+                self.assertEqual(MATCH_DECLARED, compare_declared_digest(relative, payload, expected))
+                self.assertEqual(
+                    MATCH_MISMATCH, compare_declared_digest(relative, b'{"a": 2}\n', expected)
+                )
+
+    def test_invalid_utf8_fails_closed_in_a_canonical_class(self) -> None:
+        with self.assertRaises(HashBoundError) as raised:
+            declared_digest(LOCK_RELATIVE, b'{"a": \xff}\n')
+        detail = str(raised.exception)
+        self.assertIn(LOCK_RELATIVE, detail)
+        self.assertIn(CANONICAL_MODE, detail)
+        with self.assertRaises(HashBoundError):
+            compare_declared_digest(LOCK_RELATIVE, b'{"a": \xff}\n', "0" * 64)
+
+    def test_invalid_utf8_is_hashable_in_a_raw_class(self) -> None:
+        # Raw mode binds bytes and never decodes them, so undecodable content is
+        # a digest like any other rather than a refusal.
+        payload = b"\xff\xfe\x00"
+        relative = "docs/engineering/x/evidence/a.json"
+        self.assertEqual(raw_sha256(payload), declared_digest(relative, payload))
+
+    def test_an_undeclared_comparison_refuses_before_hashing(self) -> None:
+        with self.assertRaises(HashBoundError):
+            compare_declared_digest("README.md", b"synthetic\n", raw_sha256(b"synthetic\n"))
+
+
+class LegacyNewlineRecognitionTests(unittest.TestCase):
+    """A digest recorded before its class was declared stays readable and named."""
+
+    def test_the_recorded_prior_lock_digest_is_unchanged_on_disk(self) -> None:
+        text = UPGRADE_WORK_ORDER.read_text(encoding="utf-8")
+        self.assertIn(f'prior_lock_sha256 = "{RECORDED_PRIOR_LOCK_SHA256}"', text)
+
+    @unittest.skipUnless(
+        revision_available(RECORDED_PRIOR_LOCK_COMMIT), "the historical lock revision is unavailable"
+    )
+    def test_the_recorded_digest_is_a_newline_variant_of_the_historical_lock(self) -> None:
+        blob = historical_lock()
+        self.assertNotIn(b"\r", blob)
+        self.assertNotEqual(RECORDED_PRIOR_LOCK_SHA256, canonical_sha256(blob))
+        self.assertEqual(RECORDED_PRIOR_LOCK_SHA256, raw_sha256(blob.replace(b"\n", b"\r\n")))
+
+    @unittest.skipUnless(
+        revision_available(RECORDED_PRIOR_LOCK_COMMIT), "the historical lock revision is unavailable"
+    )
+    def test_the_recorded_digest_is_recognized_from_every_materialization(self) -> None:
+        for name, value in newline_forms(historical_lock()).items():
+            with self.subTest(materialization=name):
+                self.assertEqual(
+                    MATCH_LEGACY_NEWLINE,
+                    compare_declared_digest(LOCK_RELATIVE, value, RECORDED_PRIOR_LOCK_SHA256),
+                )
+
+    def test_a_legacy_match_is_reported_distinctly_and_never_silently(self) -> None:
+        self.assertEqual(3, len(set(hash_bound.MATCH_RESULTS)))
+        self.assertNotIn(MATCH_LEGACY_NEWLINE, {MATCH_DECLARED, MATCH_MISMATCH})
+        payload = b'{"schema": 3}\n'
+        self.assertEqual(
+            MATCH_LEGACY_NEWLINE,
+            compare_declared_digest(
+                LOCK_RELATIVE, payload, raw_sha256(payload.replace(b"\n", b"\r\n"))
+            ),
+        )
+
+    def test_a_raw_class_is_never_relaxed_to_a_newline_variant(self) -> None:
+        relative = "docs/engineering/x/evidence/a.json"
+        payload = b'{"a": 1}\n'
+        self.assertEqual(
+            MATCH_MISMATCH,
+            compare_declared_digest(
+                relative, payload, raw_sha256(payload.replace(b"\n", b"\r\n"))
+            ),
+        )
+
+
+class LockCallerAgreementTests(unittest.TestCase):
+    """Both lock callers take their mode from the declaration, so they converge."""
+
+    identity = InstalledEvaluatorIdentity(
+        "9.9.9", "manifest", "a" * 64, "se_harness-9.9.9-py3-none-any.whl", "b" * 64
+    )
+
+    def bootstrap_lock(self, version: str = "0.5.0") -> bytes:
+        payload = {
+            "schema": 2,
+            "tool_version": version,
+            "hash_algorithm": "sha256",
+            "hash_mode": CANONICAL_MODE,
+            "files": {},
+        }
+        return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+
+    def test_upgrade_authorization_reaches_one_verdict_from_every_materialization(self) -> None:
+        forms = newline_forms(b'{"schema": 3}\n')
+        recorded = canonical_sha256(forms["lf"])
+        # The divergence this replaces: the raw digest of a CRLF checkout differs.
+        self.assertNotEqual(recorded, raw_sha256(forms["crlf"]))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            upgrade_packet(root, recorded, self.identity)
+            for name, value in forms.items():
+                with self.subTest(materialization=name):
+                    authorization = load_upgrade_authorization(
+                        root,
+                        work_order="WO-TST-001",
+                        old_lock_bytes=value,
+                        target_identity=self.identity,
+                    )
+                    self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
+                    self.assertEqual(recorded, authorization.prior_lock_sha256)
+
+    def test_upgrade_authorization_reports_a_legacy_newline_match(self) -> None:
+        payload = b'{"schema": 3}\n'
+        recorded = raw_sha256(payload.replace(b"\n", b"\r\n"))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            upgrade_packet(root, recorded, self.identity)
+            authorization = load_upgrade_authorization(
+                root,
+                work_order="WO-TST-001",
+                old_lock_bytes=payload,
+                target_identity=self.identity,
+            )
+        self.assertEqual(MATCH_LEGACY_NEWLINE, authorization.prior_lock_match)
+        self.assertEqual(recorded, authorization.prior_lock_sha256)
+
+    def test_upgrade_authorization_still_refuses_a_tampered_lock(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            upgrade_packet(root, canonical_sha256(b'{"schema": 3}\n'), self.identity)
+            with self.assertRaisesRegex(
+                UpgradeAuthorizationError, "prior lock identity does not match the repository"
+            ):
+                load_upgrade_authorization(
+                    root,
+                    work_order="WO-TST-001",
+                    old_lock_bytes=b'{"schema": 2}\n',
+                    target_identity=self.identity,
+                )
+
+    def test_upgrade_authorization_refuses_an_undecodable_lock(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            upgrade_packet(root, canonical_sha256(b'{"schema": 3}\n'), self.identity)
+            with self.assertRaisesRegex(
+                UpgradeAuthorizationError, "declared hash-bound class"
+            ):
+                load_upgrade_authorization(
+                    root,
+                    work_order="WO-TST-001",
+                    old_lock_bytes=b"\xff\xfe",
+                    target_identity=self.identity,
+                )
+
+    def test_upgrade_authorization_follows_a_changed_declaration(self) -> None:
+        forms = newline_forms(b'{"schema": 3}\n')
+        recorded = canonical_sha256(forms["lf"])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            upgrade_packet(root, recorded, self.identity)
+            with mock.patch.object(
+                hash_bound, "load_declaration", return_value=raw_lock_declaration()
+            ):
+                # Raw mode is the declaration's to choose; the caller must follow it
+                # rather than keep a canonicalization of its own.
+                authorization = load_upgrade_authorization(
+                    root,
+                    work_order="WO-TST-001",
+                    old_lock_bytes=forms["lf"],
+                    target_identity=self.identity,
+                )
+                self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
+                with self.assertRaises(UpgradeAuthorizationError):
+                    load_upgrade_authorization(
+                        root,
+                        work_order="WO-TST-001",
+                        old_lock_bytes=forms["crlf"],
+                        target_identity=self.identity,
+                    )
+
+    def test_release_bootstrap_reaches_one_verdict_from_every_materialization(self) -> None:
+        forms = newline_forms(self.bootstrap_lock())
+        contract = bootstrap_contract(canonical_sha256(forms["lf"]))
+        self.assertNotEqual(contract.from_lock_sha256, raw_sha256(forms["crlf"]))
+        for name, value in forms.items():
+            if name == "cr":
+                # A lone-CR lock is not valid JSON under json.loads on every
+                # platform, so this caller is exercised on the two forms a
+                # checkout of a text file actually produces.
+                continue
+            with self.subTest(materialization=name):
+                with tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    bootstrap_root(root, value)
+                    BOOTSTRAP._validate_old_root(root, contract)
+
+    def test_release_bootstrap_refuses_a_legacy_newline_variant_distinctly(self) -> None:
+        lock_bytes = self.bootstrap_lock()
+        contract = bootstrap_contract(raw_sha256(lock_bytes.replace(b"\n", b"\r\n")))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bootstrap_root(root, lock_bytes)
+            with self.assertRaisesRegex(
+                BOOTSTRAP.ReleaseBootstrapError, "only as a legacy newline variant"
+            ):
+                BOOTSTRAP._validate_old_root(root, contract)
+
+    def test_release_bootstrap_keeps_its_existing_refusals(self) -> None:
+        lock_bytes = self.bootstrap_lock()
+        schema_three = lock_bytes.replace(b'"schema": 2', b'"schema": 3')
+        cases = (
+            # The decode of a byte-order-marked lock fails before the mark's own
+            # refusal is reached, exactly as it did before the mode changed; the
+            # refusal itself is retained and asserted from the source below.
+            (
+                b"\xef\xbb\xbf" + lock_bytes,
+                canonical_sha256(lock_bytes),
+                "standard configuration or lock is invalid",
+            ),
+            (
+                lock_bytes.replace(b'"files": {}', b'"files": {"a": 1}'),
+                canonical_sha256(lock_bytes),
+                "canonical standard lock digest differs from the bootstrap contract",
+            ),
+            (
+                schema_three,
+                canonical_sha256(schema_three),
+                "standard schema-2 lock differs from the bootstrap contract",
+            ),
+        )
+        for payload, recorded, message in cases:
+            with self.subTest(message=message):
+                with tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    bootstrap_root(root, payload)
+                    with self.assertRaisesRegex(BOOTSTRAP.ReleaseBootstrapError, message):
+                        BOOTSTRAP._validate_old_root(root, bootstrap_contract(recorded))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bootstrap_root(root, lock_bytes, version="0.5.0")
+            write(root, ".engineering-harness.toml", b'[harness]\ntool_version = "0.4.0"\n')
+            with self.assertRaisesRegex(
+                BOOTSTRAP.ReleaseBootstrapError, "configured evaluator version differs"
+            ):
+                BOOTSTRAP._validate_old_root(root, bootstrap_contract(canonical_sha256(lock_bytes)))
+        source = (ROOT / "repository_tools" / "release_bootstrap.py").read_text(encoding="utf-8")
+        self.assertIn("standard lock must use UTF-8 without a byte-order mark", source)
+
+    def test_release_bootstrap_follows_a_changed_declaration(self) -> None:
+        forms = newline_forms(self.bootstrap_lock())
+        contract = bootstrap_contract(canonical_sha256(forms["lf"]))
+        with mock.patch.object(
+            hash_bound, "load_declaration", return_value=raw_lock_declaration()
+        ):
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                bootstrap_root(root, forms["lf"])
+                BOOTSTRAP._validate_old_root(root, contract)
+            with tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                bootstrap_root(root, forms["crlf"])
+                with self.assertRaises(BOOTSTRAP.ReleaseBootstrapError):
+                    BOOTSTRAP._validate_old_root(root, contract)
+
+    def test_no_lock_caller_decides_the_mode_locally(self) -> None:
+        authorization = (ROOT / "se_harness" / "upgrade_authorization.py").read_text(encoding="utf-8")
+        self.assertNotIn("hashlib", authorization)
+        self.assertIn("compare_declared_digest", authorization)
+        bootstrap = (ROOT / "repository_tools" / "release_bootstrap.py").read_text(encoding="utf-8")
+        self.assertNotIn("_canonical_utf8_text_lf(lock_raw", bootstrap)
+        guard = (ROOT / "se_harness" / "mutation_guard.py").read_text(encoding="utf-8")
+        self.assertNotIn("hashlib", guard)
+        for source in (authorization, bootstrap, guard):
+            # The declared path is named once, from the declaration's own constant.
+            self.assertNotIn('".engineering-harness.lock"', source)
+
+
+class ProducerNewlineTests(unittest.TestCase):
+    """A producer of hash-bound text fixes its newlines instead of the platform."""
+
+    def test_every_lock_text_write_declares_its_newline(self) -> None:
+        observed = 0
+        for package in LOCK_PRODUCERS:
+            for path in sorted((ROOT / package).rglob("*.py")):
+                source = path.read_text(encoding="utf-8")
+                for match in LOCK_WRITE.finditer(source):
+                    observed += 1
+                    window = source[match.end() : match.end() + 320]
+                    with self.subTest(path=path.name, receiver=match.group(1)):
+                        self.assertIn('newline="\\n"', window)
+        self.assertGreater(observed, 0)
+
+    def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
+        source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
+        self.assertIn('lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\\n").encode("utf-8")', source)
+        self.assertIn("_atomic_write(lock_path, lock_bytes)", source)
+
+    @unittest.skipUnless(git_available(), "git is unavailable")
+    def test_an_initialized_lock_carries_no_carriage_return(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "initialized"
+            completed = subprocess.run(
+                [sys.executable, "-B", "-m", "se_harness", "init", str(target), "--project-name", "Assurance"],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            written = (target / LOCK_RELATIVE).read_bytes()
+        self.assertNotIn(b"\r", written)
+        # On a CRLF-default platform the two modes coincide only because the
+        # producer chose LF; that coincidence is the assertion.
+        self.assertEqual(raw_sha256(written), declared_digest(LOCK_RELATIVE, written))
 
 
 class SafetyTests(unittest.TestCase):

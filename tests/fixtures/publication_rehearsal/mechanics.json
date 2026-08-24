@@ -1,5 +1,5 @@
 {
-  "schema": "se-harness-publication-rehearsal-mechanics/v1",
+  "schema": "se-harness-publication-rehearsal-mechanics/v2",
   "authority": "fixture data for tests; declares no real mechanic and grants nothing",
   "orchestrator": ".github/workflows/orchestrator.yml",
   "rehearsal_lane": ".github/workflows/lane.yml",
@@ -31,6 +31,9 @@
       "job": "resolve",
       "step": "Resolve one canonical release plan",
       "run_sha256": "d26447055899da2a130e3a5f0b56e4028f79afee65155646c36496f94fe86b16",
+      "orchestrator_platforms": [
+        "Linux"
+      ],
       "mechanics": [
         "plan-resolution"
       ]
@@ -39,6 +42,9 @@
       "job": "qualify",
       "step": "Build both deterministic distribution sets",
       "run_sha256": "a60cde437a8f0c779c624fee1873c03872210a5b91c88616130b33d0d8e9732d",
+      "orchestrator_platforms": [
+        "Windows"
+      ],
       "mechanics": [
         "deterministic-build",
         "build-determinism-comparison"

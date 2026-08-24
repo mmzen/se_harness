@@ -27,7 +27,7 @@ The publication orchestrator and the rehearsal both exist in the repository. The
 
 ## Required response
 
-Parse the publication orchestrator strictly, identify its credential-free jobs, and extract the mechanics they invoke. A job is credential-free only if it is credential-free itself *and* depends on no excluded job, because a job that consumes state produced by a credential-bearing job runs after a credential has been used. Compare the resulting set against a data-only declaration of the mechanics the rehearsal covers. Report each mechanic as covered, uncovered, or stale. Fail when any mechanic is uncovered or stale, naming the mechanic, the orchestrator location, and the direction of the divergence. Compare each credential-free step by a digest of its script as well, so a change inside an already-declared step cannot pass. Classify the action surface of those jobs too, refusing an undeclared action and an action not pinned to a full commit. Confirm that the orchestrator's credential-free jobs still declare the platforms the rehearsal claims to complement, and that the rehearsal lane declares both platforms.
+Parse the publication orchestrator strictly, identify its credential-free jobs, and extract the mechanics they invoke. A job is credential-free only if it is credential-free itself *and* depends on no excluded job, because a job that consumes state produced by a credential-bearing job runs after a credential has been used. Compare the resulting set against a data-only declaration of the mechanics the rehearsal covers. Report each mechanic as covered, uncovered, or stale. Fail when any mechanic is uncovered or stale, naming the mechanic, the orchestrator location, and the direction of the divergence. Compare each credential-free step by a digest of its script as well, so a change inside an already-declared step cannot pass. Classify the action surface of those jobs too, refusing an undeclared action and an action not pinned to a full commit. Confirm that the orchestrator's credential-free jobs still declare the platforms the rehearsal claims to complement, and that the rehearsal lane declares both platforms. Derive those platforms from each job's matrix combinations rather than from a single runner label, and hold the platform claim per step rather than per job, resolving each step's own gate against every combination, because a matrix job can run one half of its steps on one runner type and the other half on another.
 
 ## Failure and boundary behavior
 
@@ -92,6 +92,22 @@ An unparseable orchestrator, an unrecognized job permission shape, a job that ca
 
 **Then** it confirms the rehearsal declares both platforms, and fails if either is missing.
 
+### Example: a matrix job runs one half of its steps on each runner type
+
+**Given** a credential-free job declares a two-mode matrix with one mode on `windows-2022` and one on `ubuntu-latest`, and gates each step to one mode
+
+**When** the check resolves platforms
+
+**Then** the job claims both platforms, each gated step claims only the platform of the mode it is gated to, an ungated step in that job claims both, and a mechanic's platform claim is the union over the declared steps that realize it.
+
+### Example: a step loses its gate
+
+**Given** a declared step that ran on one matrix mode is no longer gated, so the orchestrator now runs it on both runner types
+
+**When** the divergence check runs
+
+**Then** it fails in the stale direction, naming the job, the step, the declared platforms, and the platforms measured from the job and the gate.
+
 ### Example: the declaration cannot be executable
 
 **Given** the declaration of covered mechanics
@@ -116,4 +132,8 @@ Three amendments were made while implementing `WO-RLO-005`, each stated for owne
 - **Step-digest comparison.** The required response now compares a digest of each credential-free step's script. Command-level comparison alone is blind inside a declared step: a new flag or a reordered command leaves every command already declared, so the check would have reported coverage of an orchestrator it no longer matched.
 - **No new parsing dependency.** The constraints now state that the check runs from a bare interpreter with an optional independent cross-check, because `pyproject.toml` declares no dependencies and the check must not be the first to add one. The statement's word "strictly" is unchanged; a bounded reader restricted to the Actions subset satisfies it, and both parsers were confirmed to agree about the orchestrator.
 
-The `statement` field is unchanged. These amendments describe how the required response detects divergence, not what divergence means.
+A fourth amendment came later and from a different cause: `main` advanced while this branch was open and gave the orchestrator's `qualify` job a two-mode matrix.
+
+- **Matrix-aware, per-step platform claims.** The required response now derives a job's platforms from its enumerated matrix combinations and holds the platform claim per step, resolving each step's own gate; two acceptance examples cover a gated matrix job and a step that loses its gate. The check refused the merged orchestrator outright with `runs-on label has no known platform family: ${{ matrix.os }}`, which is the correct fail-closed behavior, and the honest repair is to model the matrix rather than to widen a claim. A per-job claim would have reported that the Windows-only build half of `qualify` runs on Linux too — the overstatement of platform coverage that `RC-060-11` is about. `SPEC-RLO-005` amendments `A8` and `A9` record the same measurement in full.
+
+The `statement` field is unchanged. These amendments describe how the required response detects divergence, not what divergence means. The first three were accepted by the accountable repository owner on 2026-08-24 through the statement `Accept all seven`; the fourth is **not** covered by that acceptance and awaits their decision.

@@ -53,6 +53,10 @@ The implementation is complete at candidate commit `cfca2f350bd9aede69c336605d2b
 
 On 2026-08-24 the accountable repository owner took three decisions on that evidence. They accepted all seven amendments, `A1` through `A7`, which is recorded in the amendments section of `SPEC-RLO-005`, `REQ-RLO-015`, and `VER-RLO-005`. They ruled that `excluded` is the correct report for the predecessor-view mechanic in `candidate` mode, because ordinary integration offers no valid subject while `release-record` mode still fails on a real mismatch; `SPEC-RLO-005` rule 37 and `VER-RLO-005` carry that ruling. And they authorized pushing this branch and opening a pull request carrying a `Harness-Work-Order: WO-RLO-005` trailer, which is the rehearsal lane's first hosted run on both runner types.
 
+After those decisions the branch was renumbered from `RLO-004` to `RLO-005`, because `main` advanced to `cda8a10` while this branch was open and pull request #133 bound the `RLO-004` identifiers to verified `VREC-RLO-004`. That chain is merged and immutable, so this packet is the side that moves. `main` was then merged into this branch rather than rebased onto it, so no commit this branch has published is rewritten. The merge's one content conflict was in `docs/engineering/release-orchestration/README.md`, which is inside this work order's execution scope; it was resolved by keeping both packet sections and disclosing the renumbering. Every other incoming path is `main`'s content taken verbatim.
+
+That merge also changed the release orchestrator, which forced two further amendments to already-approved artifacts, `A8` and `A9`, recorded in `SPEC-RLO-005` and reflected in `REQ-RLO-015`, `REQ-RLO-016`, and `VER-RLO-005`. They are **not** covered by the `Accept all seven` acceptance and await a separate owner decision. Neither changes an approved `statement` field, widens the authority boundary, or relaxes a pass condition.
+
 `commit_bound_verification` remains `required` and unmet: no `VREC` exists. Nothing above authorizes a workflow dispatch of the release orchestrator, a tag, a release, a publication, a deployment, or an environment approval.
 
 ## Objective
@@ -87,7 +91,7 @@ The agent may not modify the release orchestrator, add a credential, token, envi
 
 ## Constraints
 
-- `.github/workflows/publish-pypi.yml` must remain byte-identical to its merge-base content.
+- `.github/workflows/publish-pypi.yml` must remain byte-unchanged *by this packet*. The reference content was the merge base until `main` was merged in and changed the file itself; it is now the content this branch inherited from `main`, proven by a pinned LF digest that is re-derived only for an incoming change and always disclosed with the commit that caused it.
 - Candidate code must execute with no credential, preserving the property `INT-RLO-001` requires of publication.
 - Preserve the `RLO-001` through `RLO-003` guarantees and the portable boundary from `ADR-RLO-002`.
 - Treat orchestrator YAML, declaration data, downloaded bytes, subprocess output, filesystem state, and link targets as untrusted.

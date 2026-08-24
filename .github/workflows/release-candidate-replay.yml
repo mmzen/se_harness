@@ -1,0 +1,74 @@
+name: Replay ready release build recipe
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_record:
+        description: Ready recipe-bound RLS on the selected review ref
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: se-harness-release-replay-${{ github.ref }}-${{ inputs.release_record }}
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    name: Replay exact candidate twice without credentials
+    if: github.repository == 'mmzen/se_harness'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the selected review ref and full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Select trusted orchestration Python 3.11.9
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11.9"
+
+      - name: Validate the sole release-record input
+        env:
+          RELEASE_RECORD: ${{ inputs.release_record }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "$RELEASE_RECORD" =~ ^RLS-[A-Z0-9-]+-[0-9]{3}$ ]]; then
+            echo "release_record must be a canonical RLS identifier" >&2
+            exit 1
+          fi
+
+      - name: Validate the complete ready record and recipe binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_engineering_artifacts.py --root .
+          python scripts/validate_release_distributions.py \
+            --root . \
+            --require-record "${{ inputs.release_record }}"
+
+      - name: Replay the ready record's exact bound recipe twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/replay_release_build.py \
+            --repository "$GITHUB_WORKSPACE" \
+            --release-record "${{ inputs.release_record }}" \
+            --require-status ready \
+            --output-directory "$RUNNER_TEMP/release-bundle" \
+            --result "$RUNNER_TEMP/release-build-replay.json"
+
+      - name: Retain bounded replay evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-build-replay-${{ inputs.release_record }}
+          path: ${{ runner.temp }}/release-build-replay.json
+          if-no-files-found: error
+          retention-days: 90

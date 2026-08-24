@@ -27,6 +27,11 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Phase 1 Agentic Execution definition-review packet](agentic-execution-phase-1-definition-review.md) | Which decisions, revisions, accountable reviews, and read-only transition previews govern the Phase 1 proposal? |
 | [Phase 1 Agentic Execution accountable review checklist](agentic-execution-phase-1-accountable-review-checklist.md) | What must each accountable role review before the revised Phase 1 packet can leave draft? |
 | [Phase 1 Agentic Execution approval decision](agentic-execution-phase-1-approval-decision.md) | Is the reviewed 16-artifact packet ready for one atomic lifecycle approval? |
+| [Phase 2 Agentic Execution contract-closure proposal](agentic-execution-phase-2-contract-closure.md) | Which core-contract gaps and decisions must be closed before `WO-AEX-002` can be approved? |
+| [Phase 2 Agentic Execution accountable content review](agentic-execution-phase-2-accountable-review.md) | Which exact revisions are required before the Phase 2 contract drafts can be accepted? |
+| [Phase 2 Agentic Execution definition-approval decision packet](agentic-execution-phase-2-definition-approval-decision.md) | Is the accepted three-artifact Phase 2 packet ready for lifecycle compatibility assessment and a later approval decision? |
+| [Phase 2 Agentic Execution consistency-correction proposal](agentic-execution-phase-2-consistency-correction-proposal.md) | How can stale draft-time prose in the approved ADR and work order be corrected without changing semantics or lifecycle state? |
+| [Runtime-neutral Agentic Execution contracts](agentic-execution-contracts.md) | How do the Phase 2 catalog and pure Python API validate envelopes, packets, receipts, and profiles without granting authority or performing effects? |
 | [Bounded evaluator recovery](evaluator-recovery-runbook.md) | How do maintainers rehearse and, only after separate action-time authority, recover a governance deadlock? |
 | [`harnessctl` command reference](harnessctl-reference.md) | Which commands exist, who normally runs them, and what can they change? |
 | [Developing SE Harness](developing-se-harness.md) | How does the implementation repository use the standard lifecycle while keeping candidate evidence separate? |

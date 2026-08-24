@@ -1,5 +1,5 @@
 {
-  "schema": "se-harness-publication-rehearsal-mechanics/v1",
+  "schema": "se-harness-publication-rehearsal-mechanics/v2",
   "authority": "repository policy data for SPEC-RLO-005; derived operational input, never formal artifact authority",
   "orchestrator": ".github/workflows/publish-pypi.yml",
   "rehearsal_lane": ".github/workflows/publication-rehearsal.yml",
@@ -48,18 +48,21 @@
       "job": "resolve",
       "step": "Validate the selected RLS input",
       "run_sha256": "89cd8fd29be57f860ca28c90d62bc861143035265ec523ea1d48fe440a2be537",
+      "orchestrator_platforms": ["Linux"],
       "mechanics": ["release-record-format-validation"]
     },
     {
       "job": "resolve",
       "step": "Resolve the independently released evaluator",
       "run_sha256": "250a62a1b2304851cf85e335ebb4488f3a3c2083d4cc9172ce1e6d1833a62b84",
+      "orchestrator_platforms": ["Linux"],
       "mechanics": ["evaluator-resolution"]
     },
     {
       "job": "resolve",
       "step": "Acquire and prove the released evaluator",
       "run_sha256": "352ef19b88da30445a906b42faaa5fa5068a65a6aefb9ebc4f900cd40d3b68cd",
+      "orchestrator_platforms": ["Linux"],
       "mechanics": [
         "evaluator-acquisition-and-hash-proof",
         "evaluator-identity-proof",
@@ -70,24 +73,28 @@
       "job": "resolve",
       "step": "Derive one canonical release plan",
       "run_sha256": "3e6641eb359be15f6764ba504a9a18656099cf6326c9040a34c93377da78b33e",
+      "orchestrator_platforms": ["Linux"],
       "mechanics": ["distribution-policy-validation", "plan-resolution"]
     },
     {
       "job": "resolve",
       "step": "Retain a bounded resolution refusal",
       "run_sha256": "901d51c5f8369ea43d94e202fd74b4ddf36df6b02f9ae5bdfdd7199d7edef8af",
+      "orchestrator_platforms": ["Linux"],
       "mechanics": ["resolution-refusal-document"]
     },
     {
       "job": "qualify",
       "step": "Export the exact candidate twice",
       "run_sha256": "88e15f4874e2ab2fce205edc93ec5c36a6913ae9e1e354a00567b5c9c0964c9a",
+      "orchestrator_platforms": ["Windows"],
       "mechanics": ["candidate-export", "temporary-path-identity"]
     },
     {
       "job": "qualify",
-      "step": "Run candidate verification without publication credentials",
+      "step": "Run legacy candidate verification without publication credentials",
       "run_sha256": "63e86f024a6ddc7ccac0a93a8fa1caa50a85498bc9f50ae1617783102cd6f7c4",
+      "orchestrator_platforms": ["Windows"],
       "mechanics": [
         "temporary-path-identity",
         "pinned-build-tool-installation",
@@ -98,8 +105,9 @@
     },
     {
       "job": "qualify",
-      "step": "Build both deterministic distribution sets",
+      "step": "Build both legacy deterministic distribution sets",
       "run_sha256": "3483a85ec4393abf0f29798cd964da966cfcc7b603175ceb8649f2f2a90bada5",
+      "orchestrator_platforms": ["Windows"],
       "mechanics": [
         "temporary-path-identity",
         "deterministic-build",
@@ -109,12 +117,36 @@
     },
     {
       "job": "qualify",
-      "step": "Assemble and verify the exact release bundle",
+      "step": "Assemble and verify the exact legacy release bundle",
       "run_sha256": "9ae63cd2e05d97297011ca134bb3ec801af16f89e5df8b9a46b590897e41affc",
+      "orchestrator_platforms": ["Windows"],
       "mechanics": [
         "temporary-path-identity",
         "bundle-assembly",
         "bundle-manifest-creation",
+        "build-manifest-verification",
+        "bundle-verification"
+      ]
+    },
+    {
+      "job": "qualify",
+      "step": "Run recipe-era candidate verification without publication credentials",
+      "run_sha256": "46fb06477c120caa87e88912a0b4e2f92b9405fdc76ffb196fc2b28ed5cde4e9",
+      "orchestrator_platforms": ["Linux"],
+      "mechanics": [
+        "candidate-export",
+        "complete-candidate-qualification",
+        "candidate-unit-suite",
+        "cli-smoke-check"
+      ]
+    },
+    {
+      "job": "qualify",
+      "step": "Replay the exact bound recipe twice",
+      "run_sha256": "d048c22554d5d3c85ac3fe0a5fd73dd25cc68b71bbd00bf606e0cd2c94baf064",
+      "orchestrator_platforms": ["Linux"],
+      "mechanics": [
+        "recipe-bound-build-replay",
         "build-manifest-verification",
         "bundle-verification"
       ]
@@ -197,7 +229,7 @@
       "id": "candidate-export",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["git worktree add", "git archive", "tar"],
       "realized_by": "platform-toolchain",
       "summary": "Export the exact candidate commit twice from the repository's own archive, plus a detached checkout for candidate verification."
@@ -224,7 +256,7 @@
       "id": "complete-candidate-qualification",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["python -m se_harness qualify complete-candidate"],
       "realized_by": "candidate-cli",
       "summary": "Qualify the complete candidate graph as candidate-controlled evidence at the exact candidate commit."
@@ -233,7 +265,7 @@
       "id": "candidate-unit-suite",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["python -m unittest discover"],
       "realized_by": "candidate-cli",
       "summary": "Run the candidate's own unit suite inside the exported candidate tree."
@@ -242,7 +274,7 @@
       "id": "cli-smoke-check",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["python -m se_harness"],
       "realized_by": "candidate-cli",
       "summary": "Confirm the candidate command-line entry point loads and reports its own usage."
@@ -296,7 +328,7 @@
       "id": "build-manifest-verification",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["python .github/scripts/publish_release.py verify-build-manifest"],
       "realized_by": "repository-program",
       "summary": "Verify the rebuilt distribution manifest field by field against the resolved plan."
@@ -305,10 +337,19 @@
       "id": "bundle-verification",
       "origin": "orchestrator",
       "job": "qualify",
-      "orchestrator_platforms": ["Windows"],
+      "orchestrator_platforms": ["Linux", "Windows"],
       "commands": ["python .github/scripts/publish_release.py verify-bundle"],
       "realized_by": "repository-program",
       "summary": "Verify the assembled bundle's file set, digests, and canonical checksum bytes against the resolved plan."
+    },
+    {
+      "id": "recipe-bound-build-replay",
+      "origin": "orchestrator",
+      "job": "qualify",
+      "orchestrator_platforms": ["Linux"],
+      "commands": ["python scripts/replay_release_build.py", "jq .manifest"],
+      "realized_by": "repository-program",
+      "summary": "Replay the bound distribution-schema-2 build recipe twice inside the recipe's own immutable linux/amd64 OCI producer and compare the result against the resolved plan. The rehearsal reports this mechanic excluded with its measured reason: the orchestrator performs it only in the recipe matrix mode on Linux, it needs a released recipe-bound subject and a container runtime, and the repository rehearses the producer replay itself in .github/workflows/release-candidate-replay.yml."
     },
     {
       "id": "teardown",
