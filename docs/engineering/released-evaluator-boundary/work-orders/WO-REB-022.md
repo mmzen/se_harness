@@ -2,7 +2,7 @@
 id = "WO-REB-022"
 type = "work_order"
 title = "Repair the junction-predicate capability rule on the pinned Python 3.11 lane"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -31,6 +31,20 @@ implements = ["REQ-REB-024"]
 specifications = ["SPEC-REB-011"]
 architecture = ["ARCH-REB-010", "ADR-REB-010"]
 verification = ["VER-REB-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-24T15:11:20Z"
+decided_by = "engineering-owner"
+reason = "Accountable approval of the bounded repair of the pinned-lane junction-predicate defect measured by the hosted ubuntu lane on the WO-REB-021 candidate. The repair implements the already approved REQ-REB-024 correctly on every supported runtime and adds no requirement."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-24T15:13:52Z"
+decided_by = "engineering-owner"
+reason = "Explicit start of the local implementation and qualification only, after a PASS start preflight. Authorizes no release, tag, publication, deployment, maintenance mutation, credential use, external-policy change, or root-evaluator adoption."
 +++
 
 # Work Order: Repair the junction-predicate capability rule on the pinned Python 3.11 lane
