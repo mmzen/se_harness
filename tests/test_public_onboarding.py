@@ -132,6 +132,10 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertIn(".agents/skills/harness-orient/", start)
         self.assertIn("docs/notes/harness-orient.md", start)
         self.assertIn("without changing the repository", start)
+        for skill in ("harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"):
+            self.assertIn(skill, start)
+        self.assertIn("complement `harnessctl`", start)
+        self.assertIn("docs/notes/agentic-execution-skills-mvp.md", start)
 
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))
@@ -273,6 +277,7 @@ class PublicOnboardingTests(unittest.TestCase):
         for target in (
             "docs/notes/harness-installation-and-upgrades.md",
             "docs/notes/harness-orient.md",
+            "docs/notes/agentic-execution-skills-mvp.md",
             "docs/notes/harness-operational-phasing.md",
             "docs/notes/harness-overview.md",
             "docs/notes/README.md",

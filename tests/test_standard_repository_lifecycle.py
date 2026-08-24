@@ -54,43 +54,62 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             )
         return wheel, hashlib.sha256(wheel.read_bytes()).hexdigest()
 
-    def test_standard_install_manages_one_complete_harness_orient_core(self) -> None:
+    def test_standard_install_manages_one_complete_copy_of_all_four_skill_cores(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
-            skill_changes = [item for item in changes if item.path.startswith(".agents/skills/harness-orient/")]
+            skill_changes = [item for item in changes if item.path.startswith(".agents/skills/")]
             self.assertEqual(
                 [
+                    ".agents/skills/harness-draft-change/SKILL.md",
+                    ".agents/skills/harness-draft-change/scripts/guard.py",
+                    ".agents/skills/harness-draft-change/skill-contract.json",
+                    ".agents/skills/harness-execute-work-order/SKILL.md",
+                    ".agents/skills/harness-execute-work-order/scripts/check_scope.py",
+                    ".agents/skills/harness-execute-work-order/skill-contract.json",
                     ".agents/skills/harness-orient/SKILL.md",
                     ".agents/skills/harness-orient/scripts/orient.py",
                     ".agents/skills/harness-orient/skill-contract.json",
+                    ".agents/skills/harness-prepare-assurance/SKILL.md",
+                    ".agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
+                    ".agents/skills/harness-prepare-assurance/skill-contract.json",
                 ],
                 [item.path for item in skill_changes],
             )
             self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in skill_changes))
 
             apply_changes(target, changes, old_lock, allow_updates=False)
-            installed = target / ".agents/skills/harness-orient"
-            source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
-            self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
+            for name in (
+                "harness-draft-change",
+                "harness-execute-work-order",
+                "harness-orient",
+                "harness-prepare-assurance",
+            ):
+                installed = target / ".agents/skills" / name
+                source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name
+                self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
                 all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes)
             )
 
-    def test_standard_upgrade_reports_customized_skill_without_overwriting_it(self) -> None:
+    def test_standard_upgrade_reports_customized_skills_without_overwriting_them(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
-            skill = target / ".agents/skills/harness-orient/SKILL.md"
-            customized = skill.read_bytes() + b"\nRepository-owned customization.\n"
-            skill.write_bytes(customized)
+            customized_files = {}
+            for name in ("harness-orient", "harness-execute-work-order"):
+                skill = target / ".agents/skills" / name / "SKILL.md"
+                customized = skill.read_bytes() + b"\nRepository-owned customization.\n"
+                skill.write_bytes(customized)
+                customized_files[skill.relative_to(target).as_posix()] = customized
 
             changes, _ = plan_install(target, project_name=None, mode="upgrade")
-            selected = next(item for item in changes if item.path == ".agents/skills/harness-orient/SKILL.md")
-            self.assertEqual("customized", selected.action)
-            self.assertEqual(customized, skill.read_bytes())
+            actions = {item.path: item.action for item in changes}
+            for relative, customized in customized_files.items():
+                self.assertEqual("customized", actions[relative])
+                self.assertEqual(customized, (target / relative).read_bytes())
 
     def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
