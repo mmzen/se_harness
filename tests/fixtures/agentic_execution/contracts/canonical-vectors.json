@@ -1,0 +1,154 @@
+{
+  "schema": "se-harness-agent-contract-vectors-v1",
+  "worktree": {
+    "value": {
+      "schema": "se-harness-worktree-state-v1",
+      "git_object_format": "sha1",
+      "head": "1111111111111111111111111111111111111111",
+      "tree": "2222222222222222222222222222222222222222",
+      "entries": [
+        {
+          "path": "deleted.txt",
+          "index_mode": "100644",
+          "index_object_id": "3333333333333333333333333333333333333333",
+          "worktree_kind": "absent",
+          "worktree_mode": null,
+          "worktree_sha256": null,
+          "worktree_object_id": null
+        },
+        {
+          "path": "script.sh",
+          "index_mode": "100644",
+          "index_object_id": "4444444444444444444444444444444444444444",
+          "worktree_kind": "regular",
+          "worktree_mode": "100755",
+          "worktree_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "worktree_object_id": null
+        },
+        {
+          "path": "submodule",
+          "index_mode": "160000",
+          "index_object_id": "5555555555555555555555555555555555555555",
+          "worktree_kind": "gitlink",
+          "worktree_mode": "160000",
+          "worktree_sha256": null,
+          "worktree_object_id": "6666666666666666666666666666666666666666"
+        },
+        {
+          "path": "symlink",
+          "index_mode": "120000",
+          "index_object_id": "7777777777777777777777777777777777777777",
+          "worktree_kind": "symlink",
+          "worktree_mode": "120000",
+          "worktree_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "worktree_object_id": null
+        },
+        {
+          "path": "untracked.txt",
+          "index_mode": null,
+          "index_object_id": null,
+          "worktree_kind": "regular",
+          "worktree_mode": "100644",
+          "worktree_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "worktree_object_id": null
+        }
+      ]
+    },
+    "canonical": "{\"entries\":[{\"index_mode\":\"100644\",\"index_object_id\":\"3333333333333333333333333333333333333333\",\"path\":\"deleted.txt\",\"worktree_kind\":\"absent\",\"worktree_mode\":null,\"worktree_object_id\":null,\"worktree_sha256\":null},{\"index_mode\":\"100644\",\"index_object_id\":\"4444444444444444444444444444444444444444\",\"path\":\"script.sh\",\"worktree_kind\":\"regular\",\"worktree_mode\":\"100755\",\"worktree_object_id\":null,\"worktree_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},{\"index_mode\":\"160000\",\"index_object_id\":\"5555555555555555555555555555555555555555\",\"path\":\"submodule\",\"worktree_kind\":\"gitlink\",\"worktree_mode\":\"160000\",\"worktree_object_id\":\"6666666666666666666666666666666666666666\",\"worktree_sha256\":null},{\"index_mode\":\"120000\",\"index_object_id\":\"7777777777777777777777777777777777777777\",\"path\":\"symlink\",\"worktree_kind\":\"symlink\",\"worktree_mode\":\"120000\",\"worktree_object_id\":null,\"worktree_sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},{\"index_mode\":null,\"index_object_id\":null,\"path\":\"untracked.txt\",\"worktree_kind\":\"regular\",\"worktree_mode\":\"100644\",\"worktree_object_id\":null,\"worktree_sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\"}],\"git_object_format\":\"sha1\",\"head\":\"1111111111111111111111111111111111111111\",\"schema\":\"se-harness-worktree-state-v1\",\"tree\":\"2222222222222222222222222222222222222222\"}\n",
+    "sha256": "98ff4f3b430294dec297527ff138b9afc72e5575945988e3b62ea8fb881e3663"
+  },
+  "repository_state_binding": {
+    "value": {
+      "schema": "se-harness-repository-state-binding-v1",
+      "repository": {
+        "git_object_format": "sha1",
+        "head": "1111111111111111111111111111111111111111",
+        "tree": "2222222222222222222222222222222222222222",
+        "worktree_state_sha256": "98ff4f3b430294dec297527ff138b9afc72e5575945988e3b62ea8fb881e3663"
+      },
+      "governance": {
+        "formal_snapshot_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "managed_lock_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "work_order": "WO-TST-001",
+        "work_order_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    "canonical": "{\"governance\":{\"formal_snapshot_sha256\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"managed_lock_sha256\":\"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"work_order\":\"WO-TST-001\",\"work_order_sha256\":\"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\"},\"repository\":{\"git_object_format\":\"sha1\",\"head\":\"1111111111111111111111111111111111111111\",\"tree\":\"2222222222222222222222222222222222222222\",\"worktree_state_sha256\":\"98ff4f3b430294dec297527ff138b9afc72e5575945988e3b62ea8fb881e3663\"},\"schema\":\"se-harness-repository-state-binding-v1\"}\n",
+    "sha256": "e86f9218f23abbb356523041e05ff9b80e2094dba1c670e35ad36d9b84285855"
+  },
+  "autonomy_envelope": {
+    "value": {
+      "schema": "se-harness-autonomy-envelope-v1",
+      "selection": {
+        "work_order": "WO-TST-001",
+        "work_order_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "repository_state": "e86f9218f23abbb356523041e05ff9b80e2094dba1c670e35ad36d9b84285855",
+        "evaluator_payload_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
+      },
+      "delegation": {
+        "asserted_by": "engineering-owner",
+        "operations": [
+          "read-contract",
+          "write-evidence"
+        ],
+        "path_scope": [
+          "docs/",
+          "src/app.py"
+        ],
+        "execution_profiles": [
+          "implementer",
+          "reader"
+        ],
+        "max_parallel_writers": 1,
+        "retry_limits": {
+          "read-contract": 0,
+          "write-evidence": 1
+        },
+        "stop_before": [
+          "accountable-decision-required",
+          "action-time-authorization-required"
+        ]
+      },
+      "evidence": {
+        "required_receipt": true,
+        "required_paths": [
+          "docs/evidence.json"
+        ]
+      }
+    },
+    "canonical": "{\"delegation\":{\"asserted_by\":\"engineering-owner\",\"execution_profiles\":[\"implementer\",\"reader\"],\"max_parallel_writers\":1,\"operations\":[\"read-contract\",\"write-evidence\"],\"path_scope\":[\"docs/\",\"src/app.py\"],\"retry_limits\":{\"read-contract\":0,\"write-evidence\":1},\"stop_before\":[\"accountable-decision-required\",\"action-time-authorization-required\"]},\"evidence\":{\"required_paths\":[\"docs/evidence.json\"],\"required_receipt\":true},\"schema\":\"se-harness-autonomy-envelope-v1\",\"selection\":{\"evaluator_payload_sha256\":\"9999999999999999999999999999999999999999999999999999999999999999\",\"repository_state\":\"e86f9218f23abbb356523041e05ff9b80e2094dba1c670e35ad36d9b84285855\",\"work_order\":\"WO-TST-001\",\"work_order_sha256\":\"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\"}}\n",
+    "sha256": "f0adb71510d80c0692f11af7f05b600b5ee65722426340baf37405f27412087d"
+  },
+  "logical_profile": {
+    "value": {
+      "schema": "se-harness-logical-execution-profile-v1",
+      "name": "implementer",
+      "purpose": "Implement bounded contract work.",
+      "operation_classes": [
+        "contract-validation"
+      ],
+      "default_mutation_class": "draft-writing",
+      "prohibited_decisions": [
+        "accountable-decision-required",
+        "action-time-authorization-required"
+      ],
+      "prohibited_actions": [
+        "external-publication"
+      ],
+      "required_skill_capabilities": [],
+      "input_schemas": [
+        "se-harness-autonomy-envelope-v1"
+      ],
+      "result_schemas": [
+        "se-harness-execution-receipt-v1"
+      ],
+      "runtime_characteristics": [
+        "single-worktree",
+        "workspace-read"
+      ],
+      "single_agent_fallback": true
+    },
+    "canonical": "{\"default_mutation_class\":\"draft-writing\",\"input_schemas\":[\"se-harness-autonomy-envelope-v1\"],\"name\":\"implementer\",\"operation_classes\":[\"contract-validation\"],\"prohibited_actions\":[\"external-publication\"],\"prohibited_decisions\":[\"accountable-decision-required\",\"action-time-authorization-required\"],\"purpose\":\"Implement bounded contract work.\",\"required_skill_capabilities\":[],\"result_schemas\":[\"se-harness-execution-receipt-v1\"],\"runtime_characteristics\":[\"single-worktree\",\"workspace-read\"],\"schema\":\"se-harness-logical-execution-profile-v1\",\"single_agent_fallback\":true}\n",
+    "sha256": "0f96bfcf7693d3ec506f85561db7e826a504fe59d9d632a3928e0a8abefbeef6"
+  }
+}
