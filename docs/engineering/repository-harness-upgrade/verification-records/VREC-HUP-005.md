@@ -2,7 +2,7 @@
 id = "VREC-HUP-005"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-005-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-24T07:42:27Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-002", "WO-HUP-004"]
 conforms_to = ["VER-HUP-002", "VER-HUP-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-24T07:42:27Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Record Candidate
