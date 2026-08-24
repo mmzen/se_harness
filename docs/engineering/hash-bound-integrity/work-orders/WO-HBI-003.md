@@ -133,9 +133,11 @@ The same turn took one further decision on a question this work order deliberate
 left open. Whether `build_recipe_sha256` should move out of `unbound_digest_fields`
 and become a declared hash-bound class, so that `doctor` rather than a unit test
 guards that recipe's bytes, stays open and unmeasured; the owner directed that it be
-filed as an issue so it is tracked rather than resting in one evidence paragraph.
-Filing an issue authorizes no implementation, and nothing in this work order changes
-as a result.
+filed as an issue so it is tracked rather than resting in one evidence paragraph. It
+is repository issue 142, which records the question, the two guards that exist today
+and what a declared class would have to satisfy. Filing an issue authorizes no
+implementation, and nothing in this work order changes as a result: the field stays in
+`unbound_digest_fields` and no declared class moves.
 
 ## In scope
 

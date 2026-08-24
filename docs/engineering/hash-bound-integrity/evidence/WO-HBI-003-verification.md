@@ -255,9 +255,10 @@ the security, quality and repository owners remain separate and outstanding.
   instead become a declared class, so a `doctor` check rather than a unit test
   guards it, is a real question this work order deliberately leaves open. It is
   stated here rather than answered. On 2026-08-24 the owner directed that it be filed
-  as an issue rather than measured now, so it is tracked outside this paragraph;
-  filing an issue authorizes no implementation, and the two guards that exist today —
-  the byte rule and `ByteExactSurfaceTests` — are unchanged by that routing.
+  as an issue rather than measured now, so it is tracked outside this paragraph: it is
+  repository issue 142. Filing an issue authorizes no implementation, and the two
+  guards that exist today — the byte rule and `ByteExactSurfaceTests` — are unchanged
+  by that routing.
 - The guard is a unit test, not a `doctor` check. `doctor`'s three hash-bound checks
   read the declaration, and these sixteen paths are in no declared class, so no
   check assesses them. A consumer installation therefore inherits nothing from this
