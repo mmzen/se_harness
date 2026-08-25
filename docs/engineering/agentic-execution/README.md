@@ -118,8 +118,9 @@ Git, credential, network, release, or external-action authority.
 ## Phase 4 governed delegated execution definition packet
 
 The complete Phase 4 definition and implementation packet is `approved`.
-`WO-AEX-005` is separately `in_progress`; `WO-AEX-006` through `WO-AEX-008`
-remain approved but not started. Approval of the packet did not activate
+`WO-AEX-005` is implemented with verified `VREC-AEX-005`.
+`WO-AEX-006` is separately `in_progress`; `WO-AEX-007` and `WO-AEX-008`
+remain approved but not started. Approval or implementation does not activate
 delegated execution, and the candidate implementation cannot govern its own
 construction.
 
@@ -153,17 +154,15 @@ Implementation is split into four sequential work orders:
 3. `WO-AEX-007` — delegated workflow advancement and VREC preparation; and
 4. `WO-AEX-008` — writing-skill integration and candidate package qualification.
 
-The in-progress `WO-AEX-005` candidate now contains the three versioned
-contract roots, a read-only live observer, formal delegation resolver,
-short-lived envelope-v2 derivation, external session/nonce/revocation/recovery
-state, fresh-state admission preparation, and receipt continuity checking. It
-contains no target effect callback and activates no workflow or decision right.
-The governed compatibility-test amendment and green working-tree implementation
-evidence are recorded in
-[`WO-AEX-005-verification.md`](evidence/WO-AEX-005-verification.md).
-The exact handoff gate passed and the work order is `implemented`. A ready
-commit-bound verification record is the next governed artifact; no assurance
-decision is claimed.
+The active `WO-AEX-006` candidate adds canonical change-bundle v1 construction,
+external immutable content objects, released-evaluator mutation-guard
+registration, OS-backed single-writer runtime locks, checksum-bound journals,
+ordered regular-file create/replace/delete, complete-result checks, reverse
+rollback, restart recovery, and canonical effect-receipt v1. Its current
+working-tree evidence is recorded in
+[`WO-AEX-006-verification.md`](evidence/WO-AEX-006-verification.md). This is
+implementer evidence, not commit-bound assurance, release, installation, or
+activation.
 
 Phase 4 must be implemented and verified through the existing released
 evaluator. A separately governed successor release, external installation, and

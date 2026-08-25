@@ -26,6 +26,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same four canonical repository skills without duplicating workflow authority? |
 | [Phase 4 live authority implementation](agentic-execution-phase4-authority.md) | How do live observation, formal delegation, envelope v2, external nonce state, and receipt chaining fit together without performing a target effect? |
+| [Phase 4 change bundles and transactional effects](agentic-execution-phase4-effects.md) | How does the evaluator build byte-only bundles, apply them through one journaled writer, and recover after interruption? |
 | [Migration: the repository-context scaffold is withdrawn](harness-migration-repository-context-retirement.md) | What breaks when repository facts move to the owner-controlled region of `AGENTS.md`, and what must I do? |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Phase 1 Agentic Execution definition-review packet](agentic-execution-phase-1-definition-review.md) | Which decisions, revisions, accountable reviews, and read-only transition previews govern the Phase 1 proposal? |

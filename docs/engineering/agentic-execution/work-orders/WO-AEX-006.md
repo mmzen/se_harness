@@ -2,7 +2,7 @@
 id = "WO-AEX-006"
 type = "work_order"
 title = "Implement the transactional change-bundle effect broker"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -46,6 +46,18 @@ verification = ["VER-AEX-001", "VER-AEX-004"]
 from = "draft"
 to = "approved"
 decided_at = "2026-08-25T09:08:48Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T10:57:42Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T12:21:49Z"
 decided_by = "engineering-owner"
 +++
 
