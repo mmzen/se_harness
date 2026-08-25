@@ -55,6 +55,11 @@ REQUIRED_PATHS = (
     "scripts/generate_harness_dashboard.py",
     "scripts/harness_explorer/index.template.html",
 )
+READING_PATHS = (
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+)
 POLICY_PATHS = (
     "ENGINEERING_HARNESS.md",
     "docs/engineering/OPERATING_CARD.md",
@@ -593,7 +598,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
         + ([work_order] if work_order is not None else [])
     )
     manifest = _unique_paths(
-        list(POLICY_PATHS) + [_relative(item.path, root) for item in artifact_order]
+        list(READING_PATHS) + [_relative(item.path, root) for item in artifact_order]
     )
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
     return PreflightReport(

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import errno
+import re
 import io
 import json
 import os
@@ -1027,11 +1028,12 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
         rendered = render_operating_card()
         self.assertEqual(rendered, template.read_bytes().replace(b"\r\n", b"\n"))
         self.assertLessEqual(len(rendered), OPERATING_CARD_LIMIT)
-        for heading in ("## States", "## Restitution headings", "## Stop when", "## Traps"):
-            self.assertIn(heading.encode(), rendered)
+        self.assertEqual([b"## Stop when", b"## Traps"], re.findall(rb"^## .*$", rendered, flags=re.MULTILINE))
+        self.assertNotIn(b"| Class |", rendered)
         mutated = json.loads(json.dumps(load_workflow_contract()))
-        mutated["lifecycles"]["work_order"]["verified"]["transitions_to"].append("rejected")
-        self.assertNotEqual(rendered, render_operating_card(mutated, load_quality_gate_contract()))
+        mutated["restitution_fields"].append("extra")
+        with self.assertRaises(Exception):
+            render_operating_card(mutated, load_quality_gate_contract())
 
         installed = self.root / "docs/engineering/OPERATING_CARD.md"
         self.assertTrue(installed.is_file())
@@ -1041,8 +1043,8 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
             "preflight", str(self.root), "--work-order", "WO-001", "--phase", "review", "--json"
         )
         manifest = json.loads(output)["reading_manifest"]
-        self.assertEqual("ENGINEERING_HARNESS.md", manifest[0])
-        self.assertEqual("docs/engineering/OPERATING_CARD.md", manifest[1])
+        self.assertEqual(["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"], manifest[:3])
+        self.assertNotIn("docs/engineering/WORKFLOW.md", manifest)
 
     def test_carriage_return_trailer_is_named_with_its_offset(self) -> None:
         from se_harness.github_ci import (

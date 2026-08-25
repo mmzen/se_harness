@@ -62,9 +62,8 @@ a formal result.
 
 Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
 the selected work order, and every governing artifact listed by the phase
-reading manifest that work-readiness preflight emits. The routed policies
-below are reference for humans and for the evaluator; an agent is not required
-to read them to act.
+reading manifest. The routed policies below are reference for humans and for
+the evaluator; an agent is not required to read them to act.
 
 ## Routing
 
