@@ -2,7 +2,7 @@
 id = "WO-ADS-001"
 type = "work_order"
 title = "Implement enforced failure rendering, shared next-step resolution, the operating card, trap diagnostics, the restitution digest, and router scope"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -57,6 +57,12 @@ verification = ["VER-ADS-001"]
 from = "draft"
 to = "approved"
 decided_at = "2026-08-25T10:36:12Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T10:37:29Z"
 decided_by = "engineering-owner"
 +++
 
