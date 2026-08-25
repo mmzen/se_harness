@@ -2,7 +2,7 @@
 id = "WO-RSK-002"
 type = "work_order"
 title = "Close the accepted deviations of the risk artifact"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -41,6 +41,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T17:20:21Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T17:50:41Z"
 decided_by = "engineering-owner"
 +++
 
