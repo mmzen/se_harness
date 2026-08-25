@@ -8,9 +8,12 @@ from pathlib import Path
 
 from se_harness.agent_contract import (
     AUTONOMY_ENVELOPE_SCHEMA,
+    AUTONOMY_ENVELOPE_V2_SCHEMA,
+    DELEGATION_SCHEMA,
     PACKET_V1_SCHEMA,
     PROFILE_SCHEMA,
     RECEIPT_SCHEMA,
+    REPOSITORY_OBSERVATION_SCHEMA,
     AgentContractError,
     ReceiptExpectations,
     assess_admission,
@@ -32,6 +35,10 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CATALOG = REPOSITORY_ROOT / "se_harness/agent_contract.json"
 VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/contracts/canonical-vectors.json"
 PHASE1_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
+PHASE4_VECTORS = (
+    REPOSITORY_ROOT
+    / "tests/fixtures/agentic_execution/phase4/authority/canonical-vectors.json"
+)
 
 
 def load_vectors() -> dict[str, object]:
@@ -199,7 +206,7 @@ class CatalogAndParsingTests(unittest.TestCase):
 
         self.assertEqual(raw, catalog.canonical_bytes)
         self.assertRegex(catalog.sha256, r"^[0-9a-f]{64}$")
-        self.assertEqual(8, len(catalog.value["schemas"]))
+        self.assertEqual(11, len(catalog.value["schemas"]))
         self.assertEqual([f"AEXCON{index:03d}" for index in range(1, 19)], [item["code"] for item in catalog.value["diagnostics"]])
         definitions = catalog.value["definitions"]
         names = {item["name"] for item in definitions}
@@ -246,6 +253,33 @@ class CatalogAndParsingTests(unittest.TestCase):
         unknown["authority"] = "invented"
         with self.assertRaisesRegex(AgentContractError, "AEXCON005"):
             validate_contract(unknown)
+
+    def test_phase4_contract_vectors_are_canonical_and_v1_remains_distinct(self) -> None:
+        vectors = json.loads(PHASE4_VECTORS.read_text(encoding="utf-8"))
+        expected = {
+            "delegation": DELEGATION_SCHEMA,
+            "repository_observation": REPOSITORY_OBSERVATION_SCHEMA,
+            "autonomy_envelope_v2": AUTONOMY_ENVELOPE_V2_SCHEMA,
+        }
+        for name, schema in expected.items():
+            with self.subTest(name=name):
+                vector = vectors[name]
+                document = validate_contract(vector["value"], expected_schema=schema)
+                self.assertEqual(vector["canonical"].encode("utf-8"), document.canonical_bytes)
+                self.assertEqual(vector["sha256"], document.sha256)
+        with self.assertRaisesRegex(AgentContractError, "AEXCON004"):
+            validate_contract(
+                vectors["autonomy_envelope_v2"]["value"],
+                expected_schema=AUTONOMY_ENVELOPE_SCHEMA,
+            )
+        invalid_time = copy.deepcopy(vectors["delegation"]["value"])
+        invalid_time["valid_until"] = "2030-13-01T00:00:00Z"
+        with self.assertRaisesRegex(AgentContractError, "AEXCON007"):
+            validate_contract(invalid_time)
+        excessive = copy.deepcopy(vectors["autonomy_envelope_v2"]["value"])
+        excessive["authority"]["not_after"] = "2026-01-01T00:05:01Z"
+        with self.assertRaisesRegex(AgentContractError, "AEXCON007"):
+            validate_contract(excessive)
 
     def test_portable_paths_fail_closed(self) -> None:
         envelope = load_vectors()["autonomy_envelope"]["value"]

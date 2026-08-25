@@ -87,7 +87,7 @@ class ArtifactCatalogTests(unittest.TestCase):
                 self.assertIn(link, content)
                 self.assertNotIn(CATALOG_BEGIN, content)
 
-    def test_released_policy_copies_match_while_candidate_router_remains_isolated(self) -> None:
+    def test_released_policy_copies_match_with_declared_candidate_exceptions(self) -> None:
         released_work_order = (
             REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
@@ -95,7 +95,48 @@ class ArtifactCatalogTests(unittest.TestCase):
             REPOSITORY_ROOT
             / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
-        self.assertEqual(released_work_order, candidate_work_order)
+        delegation_block = '''# Optional. Delete this entire table when no agentic delegation is intended.
+[agentic_delegation]
+schema = "se-harness-agentic-delegation-v1"
+delegated_by = "<accountable-role>"
+delegate = "<logical-worker>"
+decision_rights = ["DR-WO-START"]
+operations = ["<closed-evaluator-operation>"]
+execution_profiles = ["<approved-logical-profile>"]
+paths = ["<path-within-execution-scope>"]
+required_evidence = [
+  { kind = "verification", path = "<retained-evidence-path>" },
+]
+valid_until = "YYYY-MM-DDTHH:MM:SSZ"
+max_retry = 0
+max_parallel_writers = 1
+child_delegation = false
+stop_before = [
+  "accountable-decision-required",
+  "action-time-authorization-required",
+]
+
+'''
+        delegation_guidance = '''The optional agentic_delegation table records a maximum delegation; it does not
+start work or grant standing authority. Delete the table when delegation is not
+intended. When retained, replace every placeholder, keep every delegated and
+evidence path within execution_scope.paths, use only managed decision rights,
+evaluator operations, logical profiles, and roles, and set a bounded UTC
+expiry. The exact released evaluator still derives a narrower, short-lived
+envelope from fresh live state for each request.
+
+'''
+        expected_candidate_work_order = released_work_order.replace(
+            "[relations]\n", delegation_block + "[relations]\n", 1
+        )
+        expected_candidate_work_order = expected_candidate_work_order.replace(
+            "Add `architecture = ",
+            delegation_guidance + "Add `architecture = ",
+            1,
+        )
+        self.assertNotEqual(released_work_order, candidate_work_order)
+        self.assertNotIn("[agentic_delegation]", released_work_order)
+        self.assertEqual(candidate_work_order, expected_candidate_work_order)
         self.assertIn("[execution_scope]", released_work_order)
         self.assertIn("[execution_scope]", candidate_work_order)
         self.assertIn("component-prefix", candidate_work_order)

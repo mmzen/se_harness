@@ -106,13 +106,69 @@ is non-authoritative operator guidance for the installed surface.
   filesystem links, or user-wide provider installation.
 - `VER-AEX-003` defines independent source, package, installation, binding,
   activation, hostile-input, and actual-host evidence.
-- `WO-AEX-004` is in progress. Its bounded implementation preserves the exact
-  `harness-orient` v1 core, rebinds only the three writing-core patch versions,
-  and adds managed Codex policy and Claude discovery surfaces.
+- `WO-AEX-004` is implemented and covered by verified `VREC-AEX-004`. Its
+  bounded implementation preserves the exact `harness-orient` v1 core, rebinds
+  only the three writing-core patch versions, and adds managed Codex policy and
+  Claude discovery surfaces.
 
 The [repository host adapter guide](../../notes/agentic-execution-host-adapters.md)
 explains the operator-facing mapping. Host discovery does not grant lifecycle,
 Git, credential, network, release, or external-action authority.
+
+## Phase 4 governed delegated execution definition packet
+
+The complete Phase 4 definition and implementation packet is `approved`.
+`WO-AEX-005` is separately `in_progress`; `WO-AEX-006` through `WO-AEX-008`
+remain approved but not started. Approval of the packet did not activate
+delegated execution, and the candidate implementation cannot govern its own
+construction.
+
+- `REQ-AEX-010` requires the exact released evaluator to derive short-lived,
+  least-authority envelopes from stable live repository state and recorded
+  advance delegation.
+- `REQ-AEX-011` requires evaluator-owned transactional change-bundle effects,
+  verified receipts, rollback, and explicit interruption recovery.
+- `REQ-AEX-012` permits only delegated work-order start/completion and VREC
+  preparation and preserves every accountable and external-action stop.
+- `SPEC-AEX-006` closes the live observation, delegation declaration, envelope
+  v2, nonce, expiry, and receipt-linked state-chain contracts.
+- `SPEC-AEX-007` defines change-bundle v1 as byte deltas plus three governance
+  foreign keys, the effect broker, journal, rollback, recovery, and receipt.
+- `SPEC-AEX-008` defines the closed single-agent workflow through the independent
+  assurance stop; release preparation remains disabled in this milestone.
+- `ARCH-AEX-002` places live observation, ephemeral authority, isolated
+  proposals, target effects, delegated workflow, and evidence under one exact
+  external released-evaluator boundary.
+- `ADR-AEX-006` proposes formal maximum delegation with one ephemeral
+  evaluator-derived envelope per effect.
+- `ADR-AEX-007` proposes isolated worker sessions and evaluator-built,
+  transactionally applied change bundles rather than direct target writes.
+- `VER-AEX-004` defines independent schema, race, replay, path, fault, recovery,
+  lifecycle, host-parity, and activation-ladder evidence.
+
+Implementation is split into four sequential work orders:
+
+1. `WO-AEX-005` — live observation and delegated authority derivation;
+2. `WO-AEX-006` — transactional change-bundle effect broker;
+3. `WO-AEX-007` — delegated workflow advancement and VREC preparation; and
+4. `WO-AEX-008` — writing-skill integration and candidate package qualification.
+
+The in-progress `WO-AEX-005` candidate now contains the three versioned
+contract roots, a read-only live observer, formal delegation resolver,
+short-lived envelope-v2 derivation, external session/nonce/revocation/recovery
+state, fresh-state admission preparation, and receipt continuity checking. It
+contains no target effect callback and activates no workflow or decision right.
+The governed compatibility-test amendment and green working-tree implementation
+evidence are recorded in
+[`WO-AEX-005-verification.md`](evidence/WO-AEX-005-verification.md).
+The exact handoff gate passed and the work order is `implemented`. A ready
+commit-bound verification record is the next governed artifact; no assurance
+decision is claimed.
+
+Phase 4 must be implemented and verified through the existing released
+evaluator. A separately governed successor release, external installation, and
+disposable pilot are required before the capability can govern a real target or
+be considered for low-risk self-hosting.
 
 ## Planning context
 
@@ -141,8 +197,8 @@ the exact accountable decision required to complete Phase 1.
 
 ## Scope boundary
 
-`WO-AEX-001` intentionally covers only the read-only orientation pilot. It does
-not implement autonomous mutation, VREC or RLS preparation, multi-agent writing,
-or runtime adapter materialization. Those capabilities require later bounded
-work orders after the relevant definitions and architecture decisions are
-approved.
+The current Phase 4 packet intentionally covers one logical worker, one target
+repository, one active work order, sequential regular-file effects, delegated
+start/completion, and VREC preparation. It excludes assurance decisions, release
+preparation and decisions, delivery, Git mutation, credentials, network and
+external actions, child delegation, multi-agent execution, and parallel writers.
