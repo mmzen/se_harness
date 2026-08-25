@@ -84,6 +84,28 @@ LEGACY_EVIDENCE_DECLARATION_FIELD = "legacy_releases_without_evaluator_evidence"
 MAX_DECLARED_LEGACY_RELEASES = 512
 RELEASE_RECORD_ID_PATTERN = re.compile(r"^RLS-[A-Z][A-Z0-9-]*-\d{3}$")
 CANONICAL_TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+AGENTIC_DELEGATION_SCHEMA = "se-harness-agentic-delegation-v1"
+AGENTIC_DELEGATION_FIELDS = {
+    "schema",
+    "delegated_by",
+    "delegate",
+    "decision_rights",
+    "operations",
+    "execution_profiles",
+    "paths",
+    "required_evidence",
+    "valid_until",
+    "max_retry",
+    "max_parallel_writers",
+    "child_delegation",
+    "stop_before",
+}
+MANDATORY_AGENTIC_STOPS = {
+    "accountable-decision-required",
+    "action-time-authorization-required",
+}
+AGENTIC_ID_PATTERN = re.compile(r"^[a-z0-9](?:[a-z0-9._-]{0,126}[a-z0-9])?$")
+DECISION_RIGHT_ID_PATTERN = re.compile(r"^DR-[A-Z0-9]+(?:-[A-Z0-9]+)*$")
 LEGACY_REASON_DECLARATION_SHAPE = "declaration must be an array of strings"
 LEGACY_REASON_DECLARATION_SIZE = f"declaration exceeds {MAX_DECLARED_LEGACY_RELEASES} entries"
 LEGACY_REASON_NO_APPROVAL = "declaring work order has no draft-to-approved lifecycle event"
@@ -3149,6 +3171,130 @@ def validate_work_order_execution_scope(
     return errors
 
 
+def _path_is_within(child: str, parent: str) -> bool:
+    return child.startswith(parent) if parent.endswith("/") else child == parent
+
+
+def validate_agentic_delegations(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> list[Diagnostic]:
+    """Validate the optional maximum-delegation declaration without activating it."""
+
+    errors: list[Diagnostic] = []
+    for artifact in artifacts:
+        if artifact.artifact_type != "work_order":
+            continue
+        table = artifact.metadata.get("agentic_delegation")
+        if table is None:
+            continue
+
+        def reject(message: str) -> None:
+            _add_error(
+                errors,
+                artifact,
+                report_root,
+                "E021",
+                message,
+                plane="governance",
+            )
+
+        if not isinstance(table, dict) or set(table) != AGENTIC_DELEGATION_FIELDS:
+            reject("agentic_delegation field set is not canonical")
+            continue
+        if table.get("schema") != AGENTIC_DELEGATION_SCHEMA:
+            reject("agentic_delegation schema is unsupported")
+        for field in ("delegated_by", "delegate"):
+            value = table.get(field)
+            if not isinstance(value, str) or AGENTIC_ID_PATTERN.fullmatch(value) is None:
+                reject(f"agentic_delegation.{field} must be a portable managed identifier")
+        valid_until = table.get("valid_until")
+        if not isinstance(valid_until, str) or CANONICAL_TIMESTAMP_PATTERN.fullmatch(valid_until) is None:
+            reject("agentic_delegation.valid_until must use YYYY-MM-DDTHH:MM:SSZ")
+        else:
+            try:
+                datetime.strptime(valid_until, "%Y-%m-%dT%H:%M:%SZ")
+            except ValueError:
+                reject("agentic_delegation.valid_until is not a valid UTC timestamp")
+        retry = table.get("max_retry")
+        if type(retry) is not int or not 0 <= retry <= 3:
+            reject("agentic_delegation.max_retry must be an integer from 0 through 3")
+        if type(table.get("max_parallel_writers")) is not int or table["max_parallel_writers"] != 1:
+            reject("agentic_delegation.max_parallel_writers must equal 1")
+        if table.get("child_delegation") is not False:
+            reject("agentic_delegation.child_delegation must be false")
+
+        normalized_sets: dict[str, list[str]] = {}
+        for field, minimum, identifier in (
+            ("decision_rights", 0, False),
+            ("operations", 1, True),
+            ("execution_profiles", 1, True),
+            ("paths", 1, False),
+            ("stop_before", 1, True),
+        ):
+            values = table.get(field)
+            if (
+                not isinstance(values, list)
+                or len(values) < minimum
+                or any(not isinstance(item, str) or not item for item in values)
+            ):
+                reject(f"agentic_delegation.{field} has an invalid collection shape")
+                continue
+            if len(values) != len(set(values)) or len(values) != len({item.casefold() for item in values}):
+                reject(f"agentic_delegation.{field} contains a duplicate or case ambiguity")
+            if identifier and any(AGENTIC_ID_PATTERN.fullmatch(item) is None for item in values):
+                reject(f"agentic_delegation.{field} contains an invalid managed identifier")
+            normalized_sets[field] = values
+        rights = normalized_sets.get("decision_rights", [])
+        if any(DECISION_RIGHT_ID_PATTERN.fullmatch(item) is None for item in rights):
+            reject("agentic_delegation.decision_rights contains an invalid decision-right ID")
+        stops = set(normalized_sets.get("stop_before", []))
+        if not MANDATORY_AGENTIC_STOPS.issubset(stops):
+            reject("agentic_delegation.stop_before omits a mandatory stop class")
+
+        scope_table = artifact.metadata.get("execution_scope")
+        scope = (
+            scope_table.get("paths", [])
+            if isinstance(scope_table, dict) and isinstance(scope_table.get("paths"), list)
+            else []
+        )
+        declared_paths = normalized_sets.get("paths", [])
+        for value in declared_paths:
+            issue = _execution_scope_path_issue(value)
+            if issue is not None:
+                reject(f"invalid agentic_delegation path {value!r}: {issue}")
+            elif not any(_path_is_within(value, maximum) for maximum in scope):
+                reject(f"agentic_delegation path is outside execution_scope: {value!r}")
+
+        evidence = table.get("required_evidence")
+        if not isinstance(evidence, list) or not evidence:
+            reject("agentic_delegation.required_evidence must be a non-empty array")
+            continue
+        evidence_paths: list[str] = []
+        for index, item in enumerate(evidence):
+            if not isinstance(item, dict) or set(item) != {"kind", "path"}:
+                reject(f"agentic_delegation.required_evidence[{index}] must contain kind and path")
+                continue
+            kind = item.get("kind")
+            path = item.get("path")
+            if not isinstance(kind, str) or AGENTIC_ID_PATTERN.fullmatch(kind) is None:
+                reject(f"agentic_delegation.required_evidence[{index}].kind is invalid")
+            issue = _execution_scope_path_issue(path)
+            if issue is not None or isinstance(path, str) and path.endswith("/"):
+                reject(f"agentic_delegation.required_evidence[{index}].path is invalid")
+                continue
+            assert isinstance(path, str)
+            evidence_paths.append(path)
+            if not any(_path_is_within(path, maximum) for maximum in declared_paths):
+                reject(f"agentic_delegation evidence path is outside delegated paths: {path!r}")
+        if (
+            len(evidence_paths) != len(set(evidence_paths))
+            or len(evidence_paths) != len({item.casefold() for item in evidence_paths})
+        ):
+            reject("agentic_delegation.required_evidence contains a duplicate or case ambiguity")
+    return errors
+
+
 def validate_decision_assessments(
     artifacts: list[Artifact],
     report_root: Path,
@@ -3372,6 +3518,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(assessment_errors)
         errors.extend(validate_work_order_assurance(artifacts, repository_root))
         errors.extend(validate_work_order_execution_scope(artifacts, repository_root))
+        errors.extend(validate_agentic_delegations(artifacts, repository_root))
         errors.extend(
             validate_revision_consistency(
                 artifacts,

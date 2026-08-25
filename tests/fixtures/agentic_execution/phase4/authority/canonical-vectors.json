@@ -1,0 +1,127 @@
+{
+  "autonomy_envelope_v2": {
+    "canonical": "{\"authority\":{\"decision_right\":null,\"delegate\":\"implementation-worker\",\"delegation_sha256\":\"4a09f8e635676d43ee7f101d0ecd16eaaa49164ec044dbf98d97a9a29c04f5cf\",\"execution_profile\":\"implementer\",\"expected_repository_state\":\"5a016d5bf682f220e2de39c84f57711859b5abe43c7d188187391b37422a1d30\",\"issued_at\":\"2026-01-01T00:00:00Z\",\"nonce\":\"abababababababababababababababab\",\"not_after\":\"2026-01-01T00:05:00Z\",\"previous_receipt_sha256\":null,\"retry_ordinal\":0,\"work_order_sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"delegation\":{\"asserted_by\":\"engineering-owner\",\"execution_profiles\":[\"implementer\"],\"max_parallel_writers\":1,\"operations\":[\"change-bundle-apply\"],\"path_scope\":[\"docs/\"],\"retry_limits\":{\"change-bundle-apply\":1},\"stop_before\":[\"accountable-decision-required\",\"action-time-authorization-required\"]},\"evidence\":{\"required_paths\":[\"docs/evidence.json\"],\"required_receipt\":true},\"schema\":\"se-harness-autonomy-envelope-v2\",\"selection\":{\"evaluator_payload_sha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"repository_state\":\"5a016d5bf682f220e2de39c84f57711859b5abe43c7d188187391b37422a1d30\",\"work_order\":\"WO-TST-002\",\"work_order_sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"}}\n",
+    "sha256": "710e4e399bcdb4afa75a9c9049ef73adf8b542347bbc6661b76a3199b9c366f8",
+    "value": {
+      "authority": {
+        "decision_right": null,
+        "delegate": "implementation-worker",
+        "delegation_sha256": "4a09f8e635676d43ee7f101d0ecd16eaaa49164ec044dbf98d97a9a29c04f5cf",
+        "execution_profile": "implementer",
+        "expected_repository_state": "5a016d5bf682f220e2de39c84f57711859b5abe43c7d188187391b37422a1d30",
+        "issued_at": "2026-01-01T00:00:00Z",
+        "nonce": "abababababababababababababababab",
+        "not_after": "2026-01-01T00:05:00Z",
+        "previous_receipt_sha256": null,
+        "retry_ordinal": 0,
+        "work_order_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "delegation": {
+        "asserted_by": "engineering-owner",
+        "execution_profiles": [
+          "implementer"
+        ],
+        "max_parallel_writers": 1,
+        "operations": [
+          "change-bundle-apply"
+        ],
+        "path_scope": [
+          "docs/"
+        ],
+        "retry_limits": {
+          "change-bundle-apply": 1
+        },
+        "stop_before": [
+          "accountable-decision-required",
+          "action-time-authorization-required"
+        ]
+      },
+      "evidence": {
+        "required_paths": [
+          "docs/evidence.json"
+        ],
+        "required_receipt": true
+      },
+      "schema": "se-harness-autonomy-envelope-v2",
+      "selection": {
+        "evaluator_payload_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "repository_state": "5a016d5bf682f220e2de39c84f57711859b5abe43c7d188187391b37422a1d30",
+        "work_order": "WO-TST-002",
+        "work_order_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  },
+  "delegation": {
+    "canonical": "{\"child_delegation\":false,\"decision_rights\":[],\"delegate\":\"implementation-worker\",\"delegated_by\":\"engineering-owner\",\"execution_profiles\":[\"implementer\"],\"max_parallel_writers\":1,\"max_retry\":1,\"operations\":[\"change-bundle-apply\"],\"paths\":[\"docs/\"],\"required_evidence\":[{\"kind\":\"verification\",\"path\":\"docs/evidence.json\"}],\"schema\":\"se-harness-agentic-delegation-v1\",\"stop_before\":[\"accountable-decision-required\",\"action-time-authorization-required\"],\"valid_until\":\"2030-01-01T00:00:00Z\"}\n",
+    "sha256": "4a09f8e635676d43ee7f101d0ecd16eaaa49164ec044dbf98d97a9a29c04f5cf",
+    "value": {
+      "child_delegation": false,
+      "decision_rights": [],
+      "delegate": "implementation-worker",
+      "delegated_by": "engineering-owner",
+      "execution_profiles": [
+        "implementer"
+      ],
+      "max_parallel_writers": 1,
+      "max_retry": 1,
+      "operations": [
+        "change-bundle-apply"
+      ],
+      "paths": [
+        "docs/"
+      ],
+      "required_evidence": [
+        {
+          "kind": "verification",
+          "path": "docs/evidence.json"
+        }
+      ],
+      "schema": "se-harness-agentic-delegation-v1",
+      "stop_before": [
+        "accountable-decision-required",
+        "action-time-authorization-required"
+      ],
+      "valid_until": "2030-01-01T00:00:00Z"
+    }
+  },
+  "repository_observation": {
+    "canonical": "{\"evaluator\":{\"launcher_sha256\":\"3333333333333333333333333333333333333333333333333333333333333333\",\"package\":\"se-harness\",\"payload_sha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"version\":\"0.7.0\"},\"filesystem\":{\"case_sensitive\":true,\"platform_family\":\"posix\",\"regular_file_manifest_sha256\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"unsupported_object_count\":0},\"git\":{\"conflicts\":false,\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"index_entries_sha256\":\"4444444444444444444444444444444444444444444444444444444444444444\",\"object_format\":\"sha1\",\"submodules\":false,\"symbolic_ref\":\"refs/heads/main\",\"tracked_worktree_sha256\":\"5555555555555555555555555555555555555555555555555555555555555555\",\"untracked_nonignored_sha256\":\"6666666666666666666666666666666666666666666666666666666666666666\"},\"governance\":{\"decision_rights_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"formal_snapshot_sha256\":\"8888888888888888888888888888888888888888888888888888888888888888\",\"managed_lock_sha256\":\"7777777777777777777777777777777777777777777777777777777777777777\",\"work_order\":\"WO-TST-002\",\"work_order_sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"work_order_status\":\"in_progress\",\"workflow_contract_sha256\":\"9999999999999999999999999999999999999999999999999999999999999999\"},\"previous_receipt_sha256\":null,\"repository\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"schema\":\"se-harness-repository-observation-v1\"}\n",
+    "sha256": "5a016d5bf682f220e2de39c84f57711859b5abe43c7d188187391b37422a1d30",
+    "value": {
+      "evaluator": {
+        "launcher_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "package": "se-harness",
+        "payload_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "version": "0.7.0"
+      },
+      "filesystem": {
+        "case_sensitive": true,
+        "platform_family": "posix",
+        "regular_file_manifest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "unsupported_object_count": 0
+      },
+      "git": {
+        "conflicts": false,
+        "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "index_entries_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "object_format": "sha1",
+        "submodules": false,
+        "symbolic_ref": "refs/heads/main",
+        "tracked_worktree_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "untracked_nonignored_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      "governance": {
+        "decision_rights_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "formal_snapshot_sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+        "managed_lock_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "work_order": "WO-TST-002",
+        "work_order_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "work_order_status": "in_progress",
+        "workflow_contract_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
+      },
+      "previous_receipt_sha256": null,
+      "repository": "1111111111111111111111111111111111111111111111111111111111111111",
+      "schema": "se-harness-repository-observation-v1"
+    }
+  }
+}

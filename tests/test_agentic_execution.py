@@ -62,12 +62,105 @@ def load_script(name: str, path: Path):
         raise AssertionError(f"could not load {path}")
     module = importlib.util.module_from_spec(spec)
     prior = sys.dont_write_bytecode
+    prior_module = sys.modules.get(name)
+    sys.modules[name] = module
     sys.dont_write_bytecode = True
     try:
         spec.loader.exec_module(module)
     finally:
         sys.dont_write_bytecode = prior
+        if prior_module is None:
+            sys.modules.pop(name, None)
+        else:
+            sys.modules[name] = prior_module
     return module
+
+
+class Phase4DelegationTemplateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.validator = load_script(
+            "_phase4_candidate_validator",
+            REPOSITORY_ROOT
+            / "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+        )
+
+    def artifact(self, table: dict[str, object]):
+        return self.validator.Artifact(
+            path=REPOSITORY_ROOT / "docs/engineering/work-orders/WO-TST-002.md",
+            metadata={
+                "id": "WO-TST-002",
+                "type": "work_order",
+                "status": "approved",
+                "execution_scope": {"paths": ["docs/", "se_harness/runtime.py"]},
+                "agentic_delegation": table,
+            },
+            body="# Fixture\n",
+        )
+
+    @staticmethod
+    def declaration() -> dict[str, object]:
+        return {
+            "schema": "se-harness-agentic-delegation-v1",
+            "delegated_by": "engineering-owner",
+            "delegate": "implementation-worker",
+            "decision_rights": ["DR-WO-START"],
+            "operations": ["change-bundle-apply"],
+            "execution_profiles": ["implementer"],
+            "paths": ["docs/"],
+            "required_evidence": [
+                {"kind": "verification", "path": "docs/evidence.json"}
+            ],
+            "valid_until": "2030-01-01T00:00:00Z",
+            "max_retry": 1,
+            "max_parallel_writers": 1,
+            "child_delegation": False,
+            "stop_before": [
+                "accountable-decision-required",
+                "action-time-authorization-required",
+            ],
+        }
+
+    def test_candidate_template_and_validator_accept_exact_optional_delegation(self) -> None:
+        template = (
+            REPOSITORY_ROOT
+            / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn('[agentic_delegation]', template)
+        self.assertIn('schema = "se-harness-agentic-delegation-v1"', template)
+        self.assertIn('child_delegation = false', template)
+        errors = self.validator.validate_agentic_delegations(
+            [self.artifact(self.declaration())], REPOSITORY_ROOT
+        )
+        self.assertEqual([], errors)
+
+    def test_candidate_validator_rejects_unknown_fields_widening_and_stop_removal(self) -> None:
+        cases = {}
+        value = self.declaration()
+        value["invented"] = True
+        cases["unknown"] = value
+        value = self.declaration()
+        value["paths"] = ["outside/"]
+        cases["path"] = value
+        value = self.declaration()
+        value["stop_before"] = ["accountable-decision-required"]
+        cases["stop"] = value
+        value = self.declaration()
+        value["required_evidence"] = [{"kind": "verification", "path": "outside.json"}]
+        cases["evidence"] = value
+        value = self.declaration()
+        value["max_parallel_writers"] = 2
+        cases["writers"] = value
+        value = self.declaration()
+        value["child_delegation"] = True
+        cases["child"] = value
+        for label, table in cases.items():
+            with self.subTest(label=label):
+                errors = self.validator.validate_agentic_delegations(
+                    [self.artifact(table)], REPOSITORY_ROOT
+                )
+                self.assertTrue(errors)
+                self.assertEqual({"E021"}, {item.code for item in errors})
 
 
 class SkillContractTests(unittest.TestCase):

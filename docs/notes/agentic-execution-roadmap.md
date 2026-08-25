@@ -351,6 +351,31 @@ layer before Phase 4 changes delegation or mutation admission.
 
 ## Phase 4 - Enable governed delegated execution
 
+### Current approved packet and implementation
+
+The formal Phase 4 definition and implementation packet is approved:
+`REQ-AEX-010` through `REQ-AEX-012`, `SPEC-AEX-006` through
+`SPEC-AEX-008`, `ARCH-AEX-002`, `ADR-AEX-006` through `ADR-AEX-007`,
+`VER-AEX-004`, and `WO-AEX-005` through `WO-AEX-008`.
+
+The packet selects one exact-evaluator-owned path: stable live observation,
+formal maximum delegation, one ephemeral envelope per effect, isolated worker
+proposals, canonical content-addressed change bundles, a journaled target effect
+broker, receipt-linked state, delegated work-order start/completion, and VREC
+preparation. It stops at independent assurance. `WO-AEX-005` has separately
+started and is `in_progress`; the other three work orders remain approved and
+must proceed sequentially. This note does not complete, verify, release, or
+activate any of them.
+
+The current `WO-AEX-005` candidate implements live observation and authority
+derivation without a target-effect callback. Its focused tests and all other
+repository tests pass. One legacy test still requires candidate and released
+work-order templates to be byte-identical, while the approved work order
+requires only the candidate template to add the optional delegation table and
+forbids editing the released root copy. Resolving that test-contract conflict
+requires a revised declared path or governing direction before the work order
+can reach its completion checkpoint.
+
 ### Objective
 
 Change the harness and managed policies so approved autonomous execution can
@@ -363,8 +388,8 @@ without repeated human confirmation.
 - separate `accountable_role` from `execution_profile` in relevant outputs;
 - emit canonical decision packets;
 - emit and validate execution receipts;
-- review decision rights for work start, work completion, VREC preparation, and
-  RLS preparation;
+- activate advance delegation for work start, work completion, and VREC
+  preparation; retain `DR-RLS-PREPARE` as a later separately governed step;
 - allow only `advance-delegation-required` steps to use an approved delegation
   boundary;
 - retain human decisions for definition approval, exceptions, assurance,
@@ -384,16 +409,10 @@ Agent prepares exact-commit assurance material and a ready VREC
                               |
                               v
 Human assurance owner verifies, rejects, or requests remediation
-                              |
-                              v
-Agent prepares release material and a ready RLS when authorized
-                              |
-                              v
-Human release owner releases or rejects
-                              |
-                              v
-Human owner separately authorizes each external action
 ```
+
+Release preparation, release decisions, delivery, Git mutation, and external
+actions remain outside the Phase 4 packet and require later formal work.
 
 ### Exit criteria
 
@@ -547,13 +566,18 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-Stop before implementation. When a separate implementation-start handoff is
-authorized, select `WO-AEX-001`, run the managed start checkpoint and preflight,
-read the complete returned manifest, and implement only its exact 16-path scope.
+The governed `WO-AEX-005` compatibility-test amendment is applied, the exact
+working-tree verification set and handoff gate are green, and the work order is
+`implemented`. The next step is to prepare one ready verification record
+against the clean exact candidate commit. An assurance owner must decide that
+record independently; preparation does not verify the work order.
 
-Do not allocate artifact identifiers from this note, implement adapters, create
-promotable distributions, or change managed workflow policy without the
-applicable formal authority.
+After `WO-AEX-005` is independently verified at an exact candidate commit, the
+engineering owner may separately decide whether to start `WO-AEX-006`. The work
+orders must proceed sequentially. Do not use candidate Phase 4 code to govern
+its own construction, create a promotable successor distribution, install it,
+or run a target pilot without the later separately governed release and pilot
+packet.
 
 ## Roadmap maintenance
 
