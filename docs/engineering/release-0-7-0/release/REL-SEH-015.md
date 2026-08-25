@@ -2,7 +2,7 @@
 id = "REL-SEH-015"
 type = "release_contract"
 title = "Release se-harness 0.7.0 as the first ordinary schema-3 release"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,40 +10,83 @@ updated = "2026-08-25"
 [relations]
 gates = ["WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-HUP-004", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-VSP-007", "WO-LRE-001", "WO-IPK-001", "WO-RLO-004", "WO-RLO-005", "WO-WEX-003", "WO-TCM-001", "WO-TCM-002", "WO-ADS-001", "WO-ADS-002", "WO-RLS-011"]
 
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T12:57:58Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-25, freezing the thirty-six-work-order allow-list in gates as the exact 0.7.0 release unit. This approval is taken earlier than the sequencing the owner chose earlier the same day, which was to hold this contract in draft until immediately before the candidate commit; the owner's acceptance supersedes that ordering, and the prose was finalised in the same commit, the last point at which an approved contract can be corrected. Re-measured immediately before this transition over committed branch state 8b4932f51a7be0b9d1d1d0478af46dd7755c59c4 carrying unmoved main 701e456: gates holds thirty-six unique entries, the thirty-five historical members all read implemented with verified coverage and zero uncovered, and on the whole-gates basis it aggregates twenty-one verification contracts, a forty-eight-requirement union and thirty-seven keyed evidence paths, thirty-six existing plus the one WO-RLS-011 retains; the historical-only basis gives twenty and forty-seven and is not the basis VREC-SEH-013 must match. Governing public 0.6.0 evaluator outside the checkout: validate PASS at 887 artifacts, 0 errors, 50 pre-existing maintenance warnings, every plane at E0; doctor 87 PASS, 0 FAIL; release-distribution validation PASS. One fact is disclosed here: WO-AEX-006 is excluded by name yet reads implemented on open pull request #155, so that exclusion is now a branch-point boundary rather than a statement that the work is unstarted, and taking its bytes into the candidate's history would put ungated bytes in the packaged surface and force rejection and re-issue. Three limitations are carried as accepted residual risk and must not be restated as clean: VER-TCM-001's two reviewer judgments, VER-ADS-001's Scenario 8 classifications, and WO-AEX-005's inert scaffolding. This approval gates the promotable build, the candidate commit and release preparation; it authorizes none of them, and nothing has been started under WO-RLS-011."
 +++
 
 # Release Contract: Release se-harness 0.7.0 as the first ordinary schema-3 release
 
 ## Lifecycle and authority
 
-This contract requires the release owner's approval before a promotable build,
+This contract's approval by the release owner is what permits a promotable build,
 the candidate commit, and release preparation. Its authoritative state, and the
 timestamp and reason of every decision taken on it, are the front matter and
 `[[lifecycle_events]]` above; read those rather than this prose. It is the fourth
 contract issued for this release and the successor to `REL-SEH-014`.
 
-**This contract is deliberately held in `draft`.** On 2026-08-25, after two
-approved contracts went stale within minutes of approval, the repository owner
-decided that this successor stays `draft` until immediately before the candidate
-commit, and is corrected in place as work lands, rather than being approved now
-and re-issued on the next landing. A `draft` contract is editable; approval is
-what freezes `gates`. The consequence, accepted deliberately, is that this
-contract's allow-list is a measured proposal rather than fixed authority until
-the release owner approves it, and every figure below must be re-measured
-immediately before that approval.
+**This contract is `approved`, and its `gates` array is therefore fixed
+authority.** The release owner approved it at 2026-08-25T12:57:58Z. From that
+moment the thirty-six-work-order allow-list below is the exact 0.7.0 release
+unit: it cannot be widened, narrowed, or repaired in place, and a work order that
+reaches `implemented` with bytes in the packaged surface after that timestamp is a
+stop condition whose only remedy is rejecting this contract and issuing
+`REL-SEH-016`.
 
-Nothing is lost by approving it last. `WO-RLS-011`'s start is not gated on an
-approved release contract: the governing exact public 0.6.0 workflow contract
-names `release_contract` only in artifact-type selectors, and `focus` on the
-release work order reports start preflight as the next step with the engineering
-owner as the required actor. What approval does gate is the promotable build, the
-candidate commit, aggregate verification, and release preparation, and each of
-those is a separate later decision anyway.
+That is a different sequencing from the one the owner chose earlier the same day.
+After three approved allow-lists went stale within minutes — `REL-SEH-012` after
+ninety seconds, `REL-SEH-013` through its rejected member, `REL-SEH-014` after
+forty-six seconds — the owner decided this successor would stay `draft` and be
+corrected in place until immediately before the candidate commit, so a further
+landing would cost one edit instead of a rejection pair. The owner then accepted
+this contract, which supersedes that ordering. The deferral is recorded here
+because it explains the shape of this file, not because it is still in force.
 
-Editing this contract while it is `draft` — including adding a work order to
-`gates`, updating the release-unit table, and re-measuring the derived figures —
-is inside `WO-RLS-011`'s execution scope and inside its authorized work.
-Approving it is not.
+Two consequences of approving now, both accepted:
+
+- Every figure below was re-measured immediately before the approving transition
+  rather than carried forward from drafting, and `main` was confirmed unmoved at
+  `701e456794636e83ff78eb9910df55dfc1eedd9c`. The entry criterion that required
+  that re-measurement is met, not waived.
+- The window between this approval and the candidate commit is now exposed to the
+  same staleness that retired three predecessors. `WO-AEX-006` is the live
+  instance: it is excluded from this unit by name and already reads `implemented`
+  on open pull request #155. That exclusion is stated below as a branch-point
+  boundary, so it survives the work being implemented — but taking those bytes
+  into the candidate's history would put ungated bytes in the packaged surface
+  and force rejection and re-issue.
+
+Approval does not extend `WO-RLS-011`'s authorized scope. `WO-RLS-011`'s start was
+never gated on an approved release contract in the first place: the governing exact
+public 0.6.0 workflow contract names `release_contract` only in artifact-type
+selectors, and `focus` on the release work order reports start preflight as the
+next step with the engineering owner as the required actor. What this approval
+gates is the promotable build, the candidate commit, aggregate verification, and
+release preparation, and each of those remains a separate later decision that this
+approval does not take.
+
+Because this contract is no longer `draft`, keeping `gates` current in place is no
+longer available to `WO-RLS-011` and is no longer part of its authorized work. Its
+obligation is now to report any work order that reaches `implemented` with bytes in
+the packaged surface, as a stop condition, to the release owner.
+
+One consequence is recorded here rather than left implicit. `WO-RLS-011` was
+approved at 2026-08-25T12:35:00Z, twenty-three minutes before this contract, and
+its approved prose therefore describes this contract as held in `draft` until
+immediately before the candidate commit and as edited in place as work lands. Those
+sentences were true when that approval was taken and are now stale. They are
+narrative about this contract's planned lifecycle, not `WO-RLS-011`'s scope: what
+its approval binds is the six declared execution-scope paths and a **deferred**
+census, and the deferral resolves to this contract's `gates` — which this approval
+has now settled. `WO-RLS-011` is therefore not falsified by this approval and is
+not re-issued; the harness has no re-approval transition with which to amend the
+stale narrative, and rejecting an otherwise-correct work order over it would cost a
+succession for prose. This paragraph is the disclosure. Read `gates` and this
+contract's `[[lifecycle_events]]` for the contract's real state, never
+`WO-RLS-011`'s prose.
 
 On 2026-08-25 the repository owner instructed `objective is to make the 0.7.0
 release, you can start the release process`, then `additional content landed on
@@ -97,7 +140,11 @@ immediately before the candidate commit, and issue `WO-RLS-011` with its
 aggregate census deferred to whatever this contract names at its approval. The
 release owner rejected `REL-SEH-014` and `WO-RLS-010` in one atomic transaction,
 recorded in those artifacts' own lifecycle events, so the graph never held an
-approved contract naming a rejected member.
+approved contract naming a rejected member. Later the same day the owner accepted
+this contract, taking the approval that ordering had deferred; the deferral
+therefore shaped this file without ever governing a candidate. `WO-RLS-011`'s
+deferred census still holds, because it defers to what this contract names in
+`gates` — which is now settled.
 
 `REL-SEH-012`, `REL-SEH-013`, `REL-SEH-014`, `WO-RLS-009`, and `WO-RLS-010` are
 all preserved as immutable rejected history. None of their recorded lifecycle
@@ -106,18 +153,19 @@ events was rewritten, and the owner's real approval of `REL-SEH-014` and
 was started under any of them: no start preflight was run, no version identity
 was moved, no distribution was built, and no candidate commit exists.
 
-Approving this contract will not authorize the candidate commit, `VREC-SEH-013`
+This contract's approval did not authorize the candidate commit, `VREC-SEH-013`
 or `RLS-SEH-013` preparation or transition, the governance commit carrying this
 packet, branch push, credential use, tag creation, GitHub or PyPI publication,
 Pages deployment, maintenance-line mutation, external policy change, or
 root-evaluator upgrade. `WO-RLS-011`'s approval is a separate decision and is
-not carried by approving this contract; it was taken separately and is recorded
-in `WO-RLS-011`'s own lifecycle events.
+not carried by this one; it was taken separately, at 2026-08-25T12:35:00Z, and is
+recorded in `WO-RLS-011`'s own lifecycle events.
 
 ## Why this contract supersedes `REL-SEH-014`, `REL-SEH-013`, and `REL-SEH-012`
 
-Three approved allow-lists went stale, all for the same reason, and the pattern
-is why this one is held in `draft`.
+Three approved allow-lists went stale, all for the same reason. The pattern is
+why this one was drafted to be approved last, and it is the risk this contract
+now carries again, deliberately, in the window before the candidate commit.
 
 `REL-SEH-012` was approved at 2026-08-25T10:28:10Z naming a thirty-three-gate
 allow-list. `WO-AEX-005` reached `implemented` ninety seconds later, at
@@ -149,10 +197,15 @@ thirty-six-work-order unit: `REL-SEH-014`'s thirty-three historical members plus
 derived figure was measured over that thirty-six-gate array against the merged
 branch state rather than inherited: twenty-one verification contracts, a
 forty-eight-requirement union, and thirty-seven keyed evidence paths. The
-baseline, the exclusions, and the two classification calls are unchanged. A third
-disclosure is added, for `WO-ADS-001` and `WO-ADS-002`. Because the contract stays
-`draft`, a fourth landing costs one in-place edit to this file instead of a fifth
-contract.
+baseline and the two classification calls are unchanged, and the exclusions are
+unchanged in substance with `WO-AEX-006`'s rationale restated as a branch-point
+boundary. A third disclosure is added, for `WO-ADS-001` and `WO-ADS-002`.
+
+The rule this contract restores is the strict one. While it was `draft`, a fourth
+landing would have cost one in-place edit to this file. Now that it is `approved`,
+a fourth landing costs a fifth contract, `REL-SEH-016`, with `WO-RLS-012` beside
+it if the work order's approved prose is falsified too — which is precisely why
+`WO-RLS-011` fixes no census and names no release contract.
 
 ## Release unit
 
@@ -211,11 +264,12 @@ reproducibility, exact-candidate evidence, and aggregate-VREC preparation
 needed to form the final thirty-six-work-order release unit.
 
 This contract is an explicit allow-list. It is not an inference from dates,
-branches, merge order, lifecycle status, or every commit after the baseline.
-While it is `draft` the list is a measured proposal that is corrected in place as
-work lands; the release owner's approval is what turns it into fixed authority.
-`WO-RLS-011` is obliged to report every work order that reached `implemented`
-after this file was written, before that approval is sought.
+branches, merge order, lifecycle status, or every commit after the baseline. The
+release owner's approval at 2026-08-25T12:57:58Z turned it into fixed authority:
+the list was re-measured against the graph immediately before that transition, and
+from then on it can only be replaced, not corrected. `WO-RLS-011` is obliged to
+report any work order that reaches `implemented` with bytes in the packaged
+surface after that timestamp, as a stop condition rather than as an edit.
 
 ## `WO-TCM-001`: covered, with an accepted limitation the release must carry
 
@@ -274,9 +328,15 @@ Four new runtime modules also ship in the wheel: `se_harness/agent_contract.py`,
 verified, tested, unreachable scaffolding, and the release notes must not
 describe delegated execution as available.
 
-Phase 4 is explicitly sequential. `WO-AEX-006`, `WO-AEX-007`, and `WO-AEX-008`
-are approved and not started. They are excluded from this unit and are not
-blocked by this release.
+Phase 4 is explicitly sequential and is excluded from this unit. `WO-AEX-007` and
+`WO-AEX-008` are approved and not started. `WO-AEX-006` is no longer unstarted:
+it reads `implemented` on open pull request #155, "implement transactional effect
+broker", measured at that branch's head `61c6880`. It is excluded all the same,
+by name, on the owner's 2026-08-25 decision to ship 0.7.0 without waiting for
+Phase 4 — but the exclusion now depends on the candidate's history, not on the
+work order's lifecycle status, and the release notes must not describe delegated
+execution as available on the strength of it. None of the three is blocked by
+this release.
 
 `WO-AEX-005` resolved a declared test-contract conflict rather than waiving it:
 a legacy test had required the candidate and released work-order templates to be
@@ -389,8 +449,24 @@ The following are explicitly excluded from `releases_work`:
   root evaluator. It changed this repository's own root, not the distributed
   harness, and is the same class as `WO-HUP-001`, which `REL-SEH-007` excluded
   by name;
-- `WO-AEX-006`, `WO-AEX-007`, and `WO-AEX-008`, which are approved, not started,
-  and must proceed sequentially after `WO-AEX-005`;
+- `WO-AEX-006`, `WO-AEX-007`, and `WO-AEX-008`, which must proceed sequentially
+  after `WO-AEX-005` and which the owner decided on 2026-08-25 to ship 0.7.0
+  without. This exclusion is a **branch-point boundary**, not a claim that the
+  work is unstarted: `WO-AEX-007` and `WO-AEX-008` are approved and not started,
+  but `WO-AEX-006` already reads `implemented` on open pull request #155. The
+  exclusion holds for as long as the candidate commit's history does not contain
+  those bytes. If pull request #155 is merged and the candidate is taken from a
+  state that includes it, the packaged surface would carry bytes no gate in this
+  contract names, and the remedy is rejection and re-issue as `REL-SEH-016` — not
+  a silent widening. The exposure is not only additive: measured on pull request
+  #155, `WO-AEX-006` adds `se_harness/effect_broker.py`,
+  `se_harness/change_bundle.py`, and `se_harness/effect_contract.json`, and it also
+  **modifies** `se_harness/agent_contract.py`, `se_harness/mutation_guard.py`,
+  `se_harness/runtime_state.py`, and `pyproject.toml`. Two of those modules are
+  `WO-AEX-005` bytes already inside this unit's packaged surface, so merging #155
+  into the candidate's history would change bytes this contract gates as well as
+  adding bytes it does not. `WO-RLS-011` must confirm at the candidate that the
+  tree contains none of them;
 - `docs/notes/agentic-execution-plugin-distribution.md`, a non-authoritative
   exploration note the owner decided on 2026-08-25 needs no artifact or work
   order. It carries no work-order trailer, changes no managed file, formal
@@ -410,8 +486,9 @@ release-bearing payload.
 
 - The selected historical work orders are active, `implemented`, retain
   work-order-keyed evidence, and hold verified assurance coverage. All
-  thirty-five named above are measured as satisfying this at the drafting
-  commit, with zero uncovered members.
+  thirty-five named above are measured as satisfying this at the drafting commit
+  and again immediately before this contract's approval, with zero uncovered
+  members both times.
 - `WO-TCM-001` holds verified assurance coverage. Met by `VREC-TCM-002`,
   verified 2026-08-25T10:51:11Z, subject to the accepted limitation stated
   above. The limitation is disclosed, not resolved.
@@ -430,33 +507,37 @@ release-bearing payload.
   the approval event recorded in `WO-RLS-011`'s own front matter, which is
   authoritative over this paragraph.
 - This contract is reviewed and approved by the release owner before a promotable
-  build, the candidate commit, and release preparation. That approval is
-  deliberately deferred until immediately before the candidate commit, so this is
-  an open entry criterion by design for as long as this contract reads `draft`.
-  It blocks the promotable build, not start preflight. The owner has approved an
-  earlier unit twice, as `REL-SEH-013` at 2026-08-25T11:38:12Z and as
-  `REL-SEH-014` at 2026-08-25T11:53:28Z; both contracts are rejected and neither
-  approval is reused as authority here.
+  build, the candidate commit, and release preparation. **Met**: approved at
+  2026-08-25T12:57:58Z. The owner had approved an earlier unit twice, as
+  `REL-SEH-013` at 2026-08-25T11:38:12Z and as `REL-SEH-014` at
+  2026-08-25T11:53:28Z; both contracts are rejected and neither approval is reused
+  as authority here. This one was taken on this contract's own terms.
 - The allow-list is re-measured against the graph immediately before this
   contract's approval, and every work order that reached `implemented` after this
   file was written is reported to the release owner and either added to `gates` or
-  excluded by name.
+  excluded by name. **Met**: the thirty-six-entry array, the thirty-five
+  historical members' status and coverage, and all three aggregate figures were
+  re-measured immediately before the approving transition; `main` was confirmed
+  unmoved at `701e456`. One work order reached `implemented` after this file was
+  written — `WO-AEX-006`, on unmerged pull request #155 — and it is reported and
+  excluded by name above rather than added.
 - Formal validation, released-evaluator `doctor`, managed-root integrity, and
   start preflight pass without structure, governance, or policy errors.
 
-### Measured readiness at the drafting commit
+### Measured readiness at approval
 
-Each figure is a measurement of the merged branch state at
-`5acccdebac50f1fe2bbeca9774c9ad110bac6c91`, carrying `main` at
-`701e456794636e83ff78eb9910df55dfc1eedd9c`. None is a claim about a later
-candidate, and every figure must be re-measured against the candidate and again
-immediately before this contract's approval.
+Each figure was measured over the governance branch state carrying `main` at
+`701e456794636e83ff78eb9910df55dfc1eedd9c`: first at the drafting commit
+`5acccdebac50f1fe2bbeca9774c9ad110bac6c91`, then re-measured over the committed
+state `8b4932f51a7be0b9d1d1d0478af46dd7755c59c4` immediately before the approving
+transition, where every figure was unchanged. None is a claim about a later
+candidate, and every figure must be re-measured against the candidate itself.
 
 - Exact public 0.6.0 evaluator outside the checkout, in isolated mode: `doctor`
   87 `PASS`, 0 `FAIL`, exit 0; `validate` `PASS`, 0 errors, 50 maintenance-plane
-  warnings, and every plane at E0. The artifact count is 887 with this draft
-  packet present in the working tree, which is the committed 885 plus the two
-  untracked artifacts this packet adds, `REL-SEH-015` and `WO-RLS-011`.
+  warnings, and every plane at E0. The artifact count is 887, which is the 885
+  committed before this packet plus the two artifacts it adds, `REL-SEH-015` and
+  `WO-RLS-011`.
 - `scripts/validate_release_distributions.py`: `PASS`, one distribution-bearing
   record.
 - Local Windows suite: 1002 tests, `OK`, 23 platform-guard skips, exit 0, run
@@ -473,10 +554,11 @@ immediately before this contract's approval.
   Evidence, Governor Transition Assessment, and Publication Rehearsal all
   `success`, all on the `push` event.
 - `inspect`: 887 artifacts, 3235 relations, formal validation `PASS`, 0 decisions
-  required, 0 assurance pending. Definitions pending is exactly one, this contract
-  in `draft`, which is the intended state and not a defect. Active work is four
-  items: `WO-RLS-011` and the three excluded, approved, not-started Phase 4 work
-  orders `WO-AEX-006` through `WO-AEX-008`.
+  required, 0 assurance pending, and 0 definitions pending. Definitions pending
+  read exactly one while this contract was `draft` and went to zero on its
+  approval. Active work is four items: `WO-RLS-011` and the three excluded Phase 4
+  work orders `WO-AEX-006` through `WO-AEX-008`, all of which still read `approved`
+  in this branch's graph because pull request #155 is unmerged.
 
 ### Exact aggregate verification
 
@@ -611,22 +693,23 @@ is why thirty-five historical members hold thirty-six existing paths.
    the release owner rejected `REL-SEH-014` and `WO-RLS-010` in one atomic
    transaction so this contract and `WO-RLS-011` could carry the thirty-six-gate
    unit.
-3. Done on 2026-08-25: the engineering owner approved `WO-RLS-011`. This contract
-   was deliberately left in `draft` by the owner's decision and is **not**
-   approved at this step.
-4. Commit this packet under an authorized governance commit. The packet is
-   uncommitted working-tree state until that commit is separately authorized.
-5. Run start preflight, then implement only `WO-RLS-011`: move candidate version
+3. Done on 2026-08-25T12:35:00Z: the engineering owner approved `WO-RLS-011`.
+4. Done on 2026-08-25: the packet was committed under an authorized governance
+   commit as `8b4932f51a7be0b9d1d1d0478af46dd7755c59c4` and pushed to pull request
+   #154, with this contract still `draft` at that commit.
+5. Done on 2026-08-25T12:57:58Z: the release owner approved this contract on the
+   re-measured thirty-six-work-order unit. This step was planned for immediately
+   before the candidate commit and was taken here instead, at the owner's
+   decision. The allow-list is now fixed: it can no longer be corrected, only
+   rejected and re-issued.
+6. Run start preflight, then implement only `WO-RLS-011`: move candidate version
    identity to 0.7.0, requalify locally, build the recipe-bound distributions
-   outside the checkout, and retain complete evidence. Keep this contract's
-   `gates` current in place as work lands.
-6. Immediately before the candidate commit, re-measure the allow-list and the
-   derived aggregates, report every work order that reached `implemented` since
-   this file was written, and have the release owner approve this contract on the
-   measured unit. That approval is what fixes the allow-list, and after it this
-   contract can no longer be corrected — only rejected and re-issued.
+   outside the checkout, and retain complete evidence. `gates` is frozen, so any
+   work order that reaches `implemented` with bytes in the packaged surface during
+   this step is a stop condition reported to the release owner, not an edit.
 7. Separately authorize one clean candidate commit and a dedicated candidate
-   branch push.
+   branch push. Before that commit, confirm the tree carries no `WO-AEX-006`
+   bytes, since pull request #155 may merge into `main` in the meantime.
 8. Require green hosted Engineering Harness, Candidate Evidence, Governor
    Transition Assessment, and Publication Rehearsal lanes. No expected-red lane
    is anticipated; any red is a stop condition, not an accepted boundary.
@@ -653,15 +736,18 @@ completion, `VREC-TCM-002`'s verification, `REL-SEH-012`'s rejection, the
 succession and ship-now decisions, `REL-SEH-013`'s approval, the rejection of
 `REL-SEH-013` and `WO-RLS-009`, the approval of `REL-SEH-014` and `WO-RLS-010`,
 the decision to hold this contract in `draft` until the candidate rather than
-approve and re-issue it, the rejection of `REL-SEH-014` and `WO-RLS-010`, and
-`WO-RLS-011`'s approval. Each is recorded in the affected artifact's own
-lifecycle events.
+approve and re-issue it, the rejection of `REL-SEH-014` and `WO-RLS-010`,
+`WO-RLS-011`'s approval, and this contract's approval. Each is recorded in the
+affected artifact's own lifecycle events.
 
-**This contract's approval is outstanding by design.** It is the release owner's
-act, is deferred until immediately before the candidate commit, and must be taken
-on a freshly re-measured allow-list.
+**This contract's approval has been taken.** The release owner approved it at
+2026-08-25T12:57:58Z on a freshly re-measured allow-list, earlier than the
+deferred-until-the-candidate ordering the owner had chosen the same day. In
+approving it the owner also accepted the three disclosed limitations below and the
+re-exposure of the window before the candidate commit to the staleness that
+retired three predecessor contracts.
 
-Outstanding beyond that: the governance commit carrying this packet, work start,
+Outstanding beyond that: work start,
 the candidate commit, branch and credential use, work-order completion,
 `VREC-SEH-013` preparation and verification, `RLS-SEH-013` preparation and
 release, tag creation, publication, deployment, maintenance-line mutation,
@@ -674,8 +760,9 @@ external policy change, and root adoption.
   governed work requiring a successor verification record.
 - `VER-ADS-001`'s Scenario 8 reviewer classifications are owed on the same terms
   and are accepted residual risk, as stated above. Two of the three human
-  assessment obligations in this release unit are therefore unmet and disclosed;
-  the release owner should confirm that disposition when approving this contract.
+  assessment obligations in this release unit are therefore unmet and disclosed.
+  The release owner accepted that disposition in approving this contract at
+  2026-08-25T12:57:58Z; the obligations remain owed as later governed work.
 - Both ADS records were verified with the hosted Linux figure pending. The
   candidate's own dual-platform run is the place that resolves it, and
   `WO-RLS-011` must record what it resolves and what remains.
@@ -697,11 +784,13 @@ external policy change, and root adoption.
 
 ## Rollback criteria and procedure
 
-While this contract is `draft`, a newly implemented work order whose bytes are in
-the packaged surface is an in-place correction to `gates`, reported to the release
-owner, not a stop condition. Once the release owner approves this contract, the
-same event becomes a stop condition and the only remedy is rejection and
-re-issue. That difference is the whole reason the approval is deferred.
+This contract is `approved`, so a newly implemented work order whose bytes are in
+the packaged surface is a **stop condition**, and the only remedy is rejecting this
+contract and issuing `REL-SEH-016` with the re-measured unit. There is no in-place
+correction to `gates`. That is the cost of approving before the candidate commit
+rather than immediately before it, and the release owner accepted it. `WO-AEX-006`
+on open pull request #155 is the known live instance; the exclusion above holds
+only while the candidate's history excludes its bytes.
 
 Before publication, stop on incomplete authority, a work order whose bytes are in
 the packaged surface and which is either unnamed by this contract or without
