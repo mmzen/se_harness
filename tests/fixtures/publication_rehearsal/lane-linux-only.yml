@@ -1,0 +1,22 @@
+name: Fixture Rehearsal Lane Missing A Platform
+
+# The same lane with the Windows runner removed, so the divergence check must
+# report the required platform the lane no longer covers.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  rehearse:
+    name: Rehearse on Linux only
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Rehearse
+        run: |
+          set -euo pipefail
+          python .github/scripts/rehearse_publication.py rehearse --repository .

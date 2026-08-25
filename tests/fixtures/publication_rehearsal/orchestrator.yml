@@ -1,0 +1,76 @@
+name: Fixture Publication Orchestrator
+
+# A miniature orchestrator with the same job shapes as the real one: a
+# credential-free Linux resolution job, a credential-free Windows qualification
+# job, a credential-bearing publication job, and an observation job whose only
+# disqualifying attribute is its dependency on the publication job.
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_record:
+        description: Released record to publish
+        required: true
+        type: string
+
+permissions: {}
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  resolve:
+    name: Resolve one canonical plan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the released candidate
+        uses: actions/checkout@1111111111111111111111111111111111111111 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Resolve one canonical release plan
+        run: |
+          set -euo pipefail
+          python .github/scripts/publish_release.py resolve \
+            --repository "$GITHUB_WORKSPACE" \
+            --release-record "${{ inputs.release_record }}"
+
+  qualify:
+    name: Qualify the candidate
+    runs-on: windows-2022
+    permissions:
+      contents: read
+    needs: resolve
+    steps:
+      - name: Build both deterministic distribution sets
+        run: |
+          set -euo pipefail
+          for suffix in a b; do
+            python -m build --outdir "dist-$suffix" "source-$suffix"
+          done
+          cmp --silent dist-a/wheel dist-b/wheel
+
+  pypi:
+    name: Promote to PyPI
+    runs-on: ubuntu-latest
+    needs: qualify
+    permissions:
+      id-token: write
+    environment: pypi
+    steps:
+      - name: Upload the exact files
+        uses: pypa/gh-action-pypi-publish@2222222222222222222222222222222222222222
+
+  observe:
+    name: Observe the published release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: pypi
+    steps:
+      - name: Read back the published files
+        run: |
+          set -euo pipefail
+          echo observed
