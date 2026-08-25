@@ -2,7 +2,7 @@
 id = "VREC-RSK-001"
 type = "verification_record"
 title = "Verification candidate for WO-RSK-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/risk-management/evidence/WO-RSK-001/WO-RSK-0
 evaluator_evidence_path = "docs/engineering/risk-management/evidence/VREC-RSK-001-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-25T14:25:53Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RSK-001"]
 conforms_to = ["VER-RSK-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-25T14:25:53Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-25 with 'i accept the verification record', after accepting interactively the seven recorded deviations from SPEC-RSK-001: the RISKS reading step only in the work-order procedures (1); residual fields at top level as quoted numerals (2); identified->raised not special-cased in transition (7); raise-risk under the create-artifact guard operation (3); the invalid [risk] section reported as validator E-RSK-007 rather than a doctor check (4); no dedicated Explorer register view and unchanged skill cores accepted as follow-up work (5, 6). Verification rests on the retained evidence with the Linux figure taken from the pull-request lane of PR #156 (candidate source evidence: pass)."
 +++
 
 # Verification Record Candidate
