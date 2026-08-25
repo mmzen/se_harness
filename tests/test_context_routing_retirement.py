@@ -60,9 +60,8 @@ BASELINE_STOP_CONDITIONS = (
 PACKAGED_FRAGMENT_BLOCK_DIGEST = "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
 # Files permitted to name the retired path, with the reason each is not a live obligation.
 PERMITTED_MENTIONS = {
-    "AGENTS.md": "owner region of this repository, governed by REQ-IAR-020",
-    "docs/engineering/README.md": "this repository's own owner-owned seed",
     "docs/engineering/agent-directive-surface/evidence/WO-ADS-001/WO-ADS-001-verification.md": "retained evidence naming the file it left untouched",
+    "docs/engineering/agent-directive-surface/evidence/WO-ADS-002/WO-ADS-002-verification.md": "retained evidence for this retirement",
     "docs/engineering/agent-directive-surface/work-orders/WO-ADS-001.md": "work order whose execution scope names the retained file",
     "docs/engineering/agent-directive-surface/requirements/REQ-ADS-007.md": "draft requirement that retires the file",
     "docs/engineering/agent-directive-surface/specifications/SPEC-ADS-002.md": "draft specification of the retirement",
@@ -99,7 +98,6 @@ PERMITTED_MENTIONS = {
     "docs/engineering/work-order-assurance-classification/evidence/WO-WAC-001-verification.md": "historical evidence",
     "docs/engineering/workflow-execution/evidence/WO-WEX-002-verification.md": "historical evidence",
     "docs/engineering/workflow-execution/work-orders/WO-WEX-002.md": "historical work order",
-    "docs/notes/developing-se-harness.md": "this repository's own owner content, named as owner content",
     "docs/notes/harness-migration-repository-context-retirement.md": "migration note describing the retirement",
 }
 HISTORICAL_RECORDS = tuple(

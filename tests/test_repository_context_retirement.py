@@ -168,7 +168,8 @@ class RepositoryContextRetirementTests(unittest.TestCase):
             with self.subTest(phase=phase):
                 report = run_preflight(target, work_order_id="WO-EX-001", phase=phase)
                 manifest = list(report.reading_manifest)
-                self.assertEqual(list(preflight_module.POLICY_PATHS), manifest[: len(preflight_module.POLICY_PATHS)])
+                self.assertEqual(list(preflight_module.READING_PATHS), manifest[: len(preflight_module.READING_PATHS)])
+                self.assertFalse(set(preflight_module.POLICY_PATHS) - set(preflight_module.READING_PATHS) & set(manifest))
                 self.assertNotIn(RETIRED_PATH, manifest)
 
     def test_payload_advances_the_schema_and_drops_only_the_command_object(self) -> None:

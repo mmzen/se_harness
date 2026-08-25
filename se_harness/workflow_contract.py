@@ -452,7 +452,7 @@ def load_validated_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str
     return workflow, quality, rules, procedures, gates
 
 
-OPERATING_CARD_LIMIT = 3072
+OPERATING_CARD_LIMIT = 1024
 OPERATING_CARD_PATH = "docs/engineering/OPERATING_CARD.md"
 _CARD_STOP_CONDITIONS = (
     "managed integrity fails",
@@ -484,27 +484,18 @@ def render_operating_card(
 
     workflow = load_workflow_contract() if workflow is None else workflow
     quality_gates = load_quality_gate_contract() if quality_gates is None else quality_gates
-    rules, procedures, gates = validate_contracts(workflow, quality_gates)
+    validate_contracts(workflow, quality_gates)
     lines = [
         "# Operating card",
         "",
         "Derived from `WORKFLOW.json` and `QUALITY_GATES.json`; `harnessctl` alone computes",
-        "legality and the next step. Read this, the phase manifest, and the selected chain.",
+        "legality and the next step.",
         "",
-        "## States",
+        "## Stop when",
         "",
-        "| Class | From | To |",
-        "| --- | --- | --- |",
     ]
-    for family, states in workflow["lifecycles"].items():
-        for name, state in states.items():
-            targets = state.get("transitions_to", [])
-            if targets:
-                lines.append(f"| {family} | `{name}` | " + ", ".join(f"`{item}`" for item in targets) + " |")
-    lines.extend(["", "## Restitution headings", "", ", ".join(f"`{item}`" for item in workflow["restitution_fields"]), ""])
-    lines.extend(["## Stop when", ""])
     lines.extend(f"- {item};" for item in _CARD_STOP_CONDITIONS)
-    lines.extend(["", "Then report the failing rule, the unchanged state, and the corrective step `check` renders.", "", "## Traps", ""])
+    lines.extend(["", "Then report the failing rule, the unchanged state, and the corrective step.", "", "## Traps", ""])
     lines.extend(f"- {item}" for item in _CARD_TRAPS)
     lines.append("")
     rendered = "\n".join(lines).encode("utf-8")

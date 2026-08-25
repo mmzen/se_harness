@@ -552,14 +552,17 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("required", report["assurance"]["commit_bound_verification"])
         self.assertEqual("test-owner", report["assurance"]["decided_by"])
         self.assertEqual([], report["diagnostics"])
+        self.assertEqual(
+            ["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"],
+            report["reading_manifest"][:3],
+        )
         for path in (
-            "ENGINEERING_HARNESS.md",
-            "docs/engineering/WORKFLOW.md",
-            "docs/engineering/TECHNICAL_COMMUNICATION.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
             self.assertIn(path, report["reading_manifest"])
+        for policy in ("docs/engineering/WORKFLOW.md", "docs/engineering/TECHNICAL_COMMUNICATION.md"):
+            self.assertNotIn(policy, report["reading_manifest"])
         self.assertNotIn("repository_commands", report)
         after = {
             path.relative_to(target).as_posix(): path.read_bytes()
@@ -896,7 +899,7 @@ REQUIRED_OWNER_CONTENT = (
     "python scripts/validate_release_distributions.py --root .",
     "se_harness/cli.py",
     "pyproject.toml",
-    "docs/engineering/REPOSITORY_CONTEXT.md",
+    "docs/notes/developing-se-harness.md#release-sequences",
     "templates/repository/standard/",
     "`.engineering-harness.lock` is authoritative",
     "Harness-Work-Order: WO-",
@@ -914,7 +917,7 @@ WITHDRAWN_RESTATEMENTS = (
 
 
 class OwnerInstructionRegionTests(unittest.TestCase):
-    """Evidence for REQ-IAR-020 and SPEC-IAR-012: this repository's own owner region."""
+    """Evidence for REQ-ADS-007 (successor of REQ-IAR-020) and SPEC-IAR-012: this repository's own owner region."""
 
     def setUp(self) -> None:
         self.raw = AGENTS.read_bytes()
@@ -1043,13 +1046,13 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
             "Reading,\nanalysis, and answering questions are unconstrained",
             "no finding is presented as\na formal result",
             "docs/engineering/OPERATING_CARD.md",
-            "reading manifest that work-readiness preflight emits",
-            "not required\nto read them to act",
+            "listed by the phase\nreading manifest",
+            "not required to read them to act",
         ):
             self.assertIn(phrase, section)
         card = target / "docs/engineering/OPERATING_CARD.md"
         self.assertTrue(card.is_file())
-        self.assertLessEqual(len(card.read_bytes()), 3072)
+        self.assertLessEqual(len(card.read_bytes()), 1024)
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual("managed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
 

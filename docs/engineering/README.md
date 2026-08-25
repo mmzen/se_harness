@@ -38,7 +38,6 @@
 
 ## Repository-specific engineering documentation
 
-- `REPOSITORY_CONTEXT.md`: confirmed commands, entry points, ownership, architecture, and repository constraints.
 - `templates/`: non-authoritative starting points for new formal artifacts.
 - `../notes/`: non-authoritative progressive explanations for human readers from conceptual overview through practical usage.
 

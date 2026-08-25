@@ -1,25 +1,7 @@
 # Operating card
 
 Derived from `WORKFLOW.json` and `QUALITY_GATES.json`; `harnessctl` alone computes
-legality and the next step. Read this, the phase manifest, and the selected chain.
-
-## States
-
-| Class | From | To |
-| --- | --- | --- |
-| definition | `draft` | `approved`, `rejected` |
-| definition | `approved` | `implemented`, `rejected` |
-| work_order | `draft` | `approved`, `rejected` |
-| work_order | `approved` | `in_progress`, `rejected` |
-| work_order | `in_progress` | `implemented`, `rejected` |
-| work_order | `implemented` | `verified`, `released` |
-| work_order | `verified` | `released` |
-| verification_record | `ready` | `verified`, `rejected`, `superseded` |
-| release_record | `ready` | `released`, `rejected` |
-
-## Restitution headings
-
-`outcome`, `done`, `not_done`, `blocked_by`, `current_lifecycle_state`, `decision_required`, `next`, `command_or_response`, `alternatives`
+legality and the next step.
 
 ## Stop when
 
@@ -32,7 +14,7 @@ legality and the next step. Read this, the phase manifest, and the selected chai
 - remediation would exceed the selected work order;
 - the action lacks its decision right or explicit authority;
 
-Then report the failing rule, the unchanged state, and the corrective step `check` renders.
+Then report the failing rule, the unchanged state, and the corrective step.
 
 ## Traps
 
