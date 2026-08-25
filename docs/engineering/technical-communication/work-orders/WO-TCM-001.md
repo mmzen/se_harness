@@ -2,7 +2,7 @@
 id = "WO-TCM-001"
 type = "work_order"
 title = "Implement managed technical communication and the operator-brief skill"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -48,6 +48,13 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T07:54:58Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T10:21:06Z"
+decided_by = "engineering-owner"
+reason = "The repository owner accepted WO-TCM-001 into the 0.7.0 release unit on 2026-08-25 and authorized this transition. Implementation and its keyed evidence are complete and merged on main; the combined evidence file at docs/engineering/technical-communication/evidence/WO-TCM-001/WO-TCM-002-verification.md records the implementation-phase results for both TCM work orders. This transition records completion only. It grants no verification, release, push, tag, publication, or deployment authority, and no verification record covers WO-TCM-001 yet."
 +++
 
 # Work Order: Implement managed technical communication and the operator-brief skill
