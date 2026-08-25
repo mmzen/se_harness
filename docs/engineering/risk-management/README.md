@@ -27,5 +27,12 @@ scale is 5x5.
 - `VER-RSK-001`: independent evidence for the risk artifact.
 - `WO-RSK-001`: implement the bounded first increment after approval and an explicit start decision.
 
-Every artifact remains `draft`. This packet authorizes no implementation,
-lifecycle transition, Git action, or external action.
+## Second increment (draft)
+
+- `REQ-RSK-007`: close the accepted deviations of `WO-RSK-001` (guard operation, doctor check, skill integration, amendments).
+- `SPEC-RSK-002`: rules for those, refining `SPEC-RSK-001`.
+- `VER-RSK-002`: evidence contract.
+- `WO-RSK-002`: implement the closure.
+
+Every draft artifact authorizes no implementation, lifecycle transition, Git
+action, or external action.

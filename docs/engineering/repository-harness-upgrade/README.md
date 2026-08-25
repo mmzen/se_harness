@@ -29,3 +29,9 @@ their bounded post-adoption qualification.
   work-order completion, commit, push, and disposition of `VREC-HUP-003` remain
   separate governed actions. No managed root, product, release, publication,
   deployment, maintenance, or external policy was changed.
+
+## Successor of 0.6.0 (draft)
+
+- `REQ-HUP-010`: prove the exact released successor carrying `WO-ADS-001`, `WO-ADS-002`, and `WO-RSK-001`.
+- `REQ-HUP-011`: adopt it through one bounded schema-3 root transaction and prove complete-graph operation, retiring the interim test exceptions.
+- `SPEC-HUP-005`, `VER-HUP-005`, `WO-HUP-005`: contract, evidence, and the transaction work order. `WO-HUP-005` cannot be approved until a released record covers the three work orders and its digests are copied into the work order.
