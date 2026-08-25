@@ -2,7 +2,7 @@
 id = "WO-AUT-002"
 type = "work_order"
 title = "Migrate the verification-method vocabulary and add the approval predicates"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -45,6 +45,13 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T19:12:26Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T19:44:38Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-25: mark WO-AUT-002 implemented, after accepting interactively the four recorded deviations (migration built, not applied; four unmatched values to the steward; unchanged in-scope paths; predicates not yet enforced by the released governor on this root)."
 +++
 
 # Work Order: Migrate the verification-method vocabulary and add the approval predicates
