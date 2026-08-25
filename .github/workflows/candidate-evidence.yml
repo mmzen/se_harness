@@ -221,8 +221,8 @@ jobs:
             python: Scripts/python.exe
     runs-on: ${{ matrix.runner }}
     env:
-      PREDECESSOR_VERSION: "0.5.0"
-      PREDECESSOR_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"
+      PREDECESSOR_VERSION: "0.6.0"
+      PREDECESSOR_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -275,7 +275,7 @@ jobs:
         run: |
           $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
           $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
-          $scenario = Join-Path $env:GITHUB_WORKSPACE 'tests/fixtures/governance_migration/historical-0.5.0-to-0.6.0.json'
+          $scenario = Join-Path $env:GITHUB_WORKSPACE 'tests/fixtures/governance_migration/candidate-0.6.0-to-0.7.0.json'
           $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
           $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
           Push-Location '${{ runner.temp }}'

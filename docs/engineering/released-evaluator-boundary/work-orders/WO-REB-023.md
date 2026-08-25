@@ -2,7 +2,7 @@
 id = "WO-REB-023"
 type = "work_order"
 title = "Give the migration rehearsal a scenario whose successor is the current candidate"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -34,6 +34,13 @@ to = "approved"
 decided_at = "2026-08-25T20:48:00Z"
 decided_by = "engineering-owner"
 reason = "Approved by the engineering owner on 2026-08-25 with the boundary measurement in front of them, in one act carrying four decisions. (1) The work order is approved as drafted and its required commit-bound verification classification stands; a VREC is owed and is not authorized by this approval. (2) Route A is the scenario's route: a version-truthful candidate-0.6.0-to-0.7.0 scenario classifying compatible, because the pair has no boundary the current contract can express. classify_migration is a set difference over eight closed capability names that 0.6.0 already holds in full, and the boundary MIG404 demands of a historical- scenario is hard-coded to the schema-3 and evaluator-evidence rule 0.6.0 itself introduced. A real gap exists, since released 0.6.0 exposes no qualify, but the vocabulary cannot name it. Route B, a new contract version naming that capability, is rejected for this work order rather than judged wrong; it would amend SPEC-REB-008 and the contract days before the release and needs its own scope decision. The execution scope is unchanged because it was already drawn for route A. (3) Evidence retains under this work order's own key, as a routine reading of VER-REB-007, which named WO-REB-018 before this work order existed. VER-REB-007 is not amended. (4) The historical 0.5.0-to-0.6.0 pair is dropped from the CI lane and stays byte-identical and exercised by the unit suite. No second matrix dimension is added, because running it against the public 0.6.0 wheel would make CI assert a fact about a released package rather than about the candidate. Route A gives up the MIG404 guard and the forced predecessor archive pin, so the work order pins the predecessor by digest anyway and asserts the compatible outcome in a test. Approval authorizes no start, no governing amendment, and no release act."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T21:09:57Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit instruction of 2026-08-25, taken after the approval of the same day and as a separate accountable act. Start preflight reads PASS with the released 0.6.0 evaluator from outside the checkout, at d91ed5d, main's merge of PR #162, which is also the branch point of fix/wo-reb-023-candidate-scenario. Authorized work is route A only, inside the six declared execution-scope paths: a candidate-0.6.0-to-0.7.0 scenario fixture declaring compatible, the governance-migration job's scenario path and its two predecessor env values, removal of the historical pair from that lane, new tests including a successor-version divergence test and a compatible-classification test, the domain-index bullet, and retained evidence under this work order's own key. The historical scenario stays byte-identical and exercised by the unit suite. Not authorized by this start: any edit to the migration runner, the contract module or the contract JSON; any new contract version, which is route B and was rejected at approval; any amendment to REQ-REB-016, REQ-REB-017, SPEC-REB-008, ARCH-REB-007, ADR-REB-007 or VER-REB-007; any change to docs/notes/, which is an ungoverned path and a separate pull request; any change to pyproject.toml or the candidate version; and every release act, meaning candidate commit, promotable build, verification record, release record, tag, publication, deployment, maintenance-line mutation, credential use and root-evaluator change. If the lane can only be made green by relaxing an identity comparison or waiving a diagnostic, the work stops and the finding is escalated rather than the gate being made to pass."
 +++
 
 # Work Order: Give the migration rehearsal a scenario whose successor is the current candidate
