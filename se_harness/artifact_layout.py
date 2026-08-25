@@ -396,7 +396,7 @@ def create_risk(
     change = AuthoringChange("create", destination_relative.as_posix())
     if dry_run:
         return change, status, score
-    mutation_guard.require_mutation_authority(root, operation="create-artifact")
+    mutation_guard.require_mutation_authority(root, operation="raise-risk")
     missing: list[Path] = []
     probe = root
     for part in parent_relative.parts:

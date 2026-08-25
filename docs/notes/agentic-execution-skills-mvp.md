@@ -13,7 +13,7 @@ Phase 3 MVP:
 | Skill | Use it for | Mandatory stop |
 | --- | --- | --- |
 | `harness-draft-change` | Create a declared planning note and complete formal drafts, or revise explicitly selected current drafts | Accountable content review, before approval or implementation |
-| `harness-execute-work-order` | Implement one selected work order that is already `in_progress`, run repository checks, and retain declared evidence | Engineering-owner completion decision, before a lifecycle transition or Git action |
+| `harness-execute-work-order` | Implement one selected work order that is already `in_progress`, run repository checks, raise any risk noticed, and retain declared evidence | Engineering-owner completion decision, before a lifecycle transition or Git action |
 | `harness-prepare-assurance` | Prepare one exact-candidate `ready` verification record through the existing evaluator operation | Assurance-owner decision, before verification or delivery |
 
 The skills complement `harnessctl`; they do not replace it. A skill supplies a

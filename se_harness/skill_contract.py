@@ -243,7 +243,7 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("planning-note", "repository-path", False),
             ("revisable-artifacts", "artifact-id-list", False),
         ],
-        "required_operations": ["version", "identity", "doctor", "validate-json", "create-artifact"],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "create-artifact", "raise-risk"],
         "optional_operations": ["scaffold-domain", "inspect-json"],
         "checkpoints": [
             ("identity-before-effect", "before-effect", "identity", True),
@@ -253,7 +253,7 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("draft-review-handoff", "handoff", "inspect-json", False),
         ],
         "path_source": "declared-draft-destinations",
-        "permitted": ["draft-create", "draft-revise", "planning-note-write"],
+        "permitted": ["draft-create", "draft-revise", "planning-note-write", "risk-raise"],
         "target_retention": False,
         "retained_kinds": ["draft-artifacts", "planning-note"],
         "outputs": [
@@ -280,7 +280,7 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("repository-commands", "command-array", True),
             ("implementation-constraints", "text-list", False),
         ],
-        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "check"],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "check", "raise-risk"],
         "optional_operations": ["inspect-json"],
         "checkpoints": [
             ("identity-before-effect", "before-effect", "identity", True),
@@ -291,7 +291,7 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("implementation-handoff", "handoff", "focus-json", True),
         ],
         "path_source": "work-order-execution-scope",
-        "permitted": ["implementation-write", "test-execution", "evidence-write"],
+        "permitted": ["implementation-write", "test-execution", "evidence-write", "risk-raise"],
         "target_retention": True,
         "retained_kinds": ["work-order-evidence"],
         "outputs": [
@@ -318,7 +318,7 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("record-destination", "repository-path", True),
             ("preparation-actor", "bounded-text", True),
         ],
-        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "capture-verification"],
+        "required_operations": ["version", "identity", "doctor", "validate-json", "focus-json", "preflight", "capture-verification", "risks"],
         "optional_operations": ["inspect-json"],
         "checkpoints": [
             ("identity-before-effect", "before-effect", "identity", True),

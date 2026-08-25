@@ -29,6 +29,7 @@ PUBLIC_MUTATION_OPERATIONS = frozenset(
         "create-artifact",
         "installed-root-apply",
         "prepare-release",
+        "raise-risk",
         "renumber-artifacts-apply",
         "scaffold-domain",
         "transition-apply",

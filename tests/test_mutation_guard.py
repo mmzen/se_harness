@@ -11,7 +11,7 @@ from types import SimpleNamespace
 from unittest import mock
 
 from se_harness import __version__
-from se_harness.artifact_layout import create_artifact, scaffold_domain
+from se_harness.artifact_layout import create_artifact, create_risk, scaffold_domain
 from se_harness.cli import main
 from se_harness.evaluator_evidence import (
     EvaluatorEvidenceError,
@@ -543,6 +543,14 @@ authorized_by = "repository-owner"
         retained = root / "docs" / "engineering" / "evidence" / "WO-TST-001-input.txt"
         retained.parent.mkdir(parents=True, exist_ok=True)
         retained.write_text("test evidence\n", encoding="utf-8")
+        # create_risk checks that a threatened artifact exists on disk before requesting authority
+        threatened = root / "docs" / "engineering" / "tst" / "work-orders" / "WO-TST-001.md"
+        threatened.parent.mkdir(parents=True, exist_ok=True)
+        threatened.write_text(
+            '+++\nid = "WO-TST-001"\ntype = "work_order"\ntitle = "t"\nstatus = "implemented"\n'
+            'owners = ["owner"]\ncreated = "2026-08-25"\nupdated = "2026-08-25"\n[relations]\n+++\n',
+            encoding="utf-8",
+        )
 
         catalog = {
             "WO-TST-001": {"id": "WO-TST-001", "type": "work_order", "status": "implemented"},
@@ -596,6 +604,23 @@ authorized_by = "repository-owner"
                     artifact_id="REQ-TST-002",
                     dry_run=False,
                 ),
+                lambda: create_risk(
+                    root,
+                    domain="boundary",
+                    artifact_id="RISK-TST-001",
+                    title="boundary risk",
+                    stage="implementation",
+                    category="process",
+                    likelihood=1,
+                    impact=1,
+                    threatens=["WO-TST-001"],
+                    cause="c",
+                    effect="e",
+                    raised_by="test",
+                    acceptance_level=1,
+                    now="2026-08-25T00:00:00Z",
+                    dry_run=False,
+                ),
                 lambda: apply_changes(root, [], {"tool_version": __version__}, allow_updates=False),
                 lambda: apply_changes(root, upgrade_changes, upgrade_lock, allow_updates=True),
                 lambda: apply_renumber_plan(SimpleNamespace(repository_root=root)),
@@ -633,6 +658,7 @@ authorized_by = "repository-owner"
             {
                 "scaffold-domain",
                 "create-artifact",
+                "raise-risk",
                 "installed-root-apply",
                 "upgrade-apply",
                 "renumber-artifacts-apply",

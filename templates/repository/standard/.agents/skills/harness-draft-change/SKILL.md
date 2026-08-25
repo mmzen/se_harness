@@ -38,7 +38,9 @@ canonical destination. Only explicitly selected artifacts that are currently
    before a controlled draft, revision, or note write; its callable boundary is
    testable and it grants no authority.
 6. Complete the declared draft bodies and relations without adding a lifecycle
-   event. Compare actual changed paths with the admitted plan.
+   event. A risk noticed while drafting is raised with the evaluator's
+   `raise-risk` operation under the `risk-raise` effect class; the skill never
+   disposes a risk. Compare actual changed paths with the admitted plan.
 7. Run formal validation again. Return the structured result and receipt facts,
    then stop at accountable content review.
 

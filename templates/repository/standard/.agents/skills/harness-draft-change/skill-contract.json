@@ -1,7 +1,7 @@
 {
   "schema": "se-harness-skill-contract-v2",
   "name": "harness-draft-change",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "outcome": "Prepare a declared planning note and complete reviewable draft formal artifacts without approval or transition.",
   "activation": {
     "explicit": true,
@@ -35,7 +35,7 @@
   "mutation_class": "draft-writing",
   "evaluator": {
     "minimum_version": "0.6.0",
-    "required_operations": ["version", "identity", "doctor", "validate-json", "create-artifact"],
+    "required_operations": ["version", "identity", "doctor", "validate-json", "create-artifact", "raise-risk"],
     "optional_operations": ["scaffold-domain", "inspect-json"],
     "missing_required": "blocked",
     "missing_optional": "degraded"
@@ -48,7 +48,7 @@
     {"id": "draft-review-handoff", "stage": "handoff", "operation": "inspect-json", "required": false}
   ],
   "effects": {
-    "permitted": ["draft-create", "draft-revise", "planning-note-write"],
+    "permitted": ["draft-create", "draft-revise", "planning-note-write", "risk-raise"],
     "prohibited": ["accountable-approval", "assurance-decision", "credential-use", "delivery-selection", "external-action", "git-mutation", "lifecycle-transition", "network-mutation", "release-decision", "verification-decision", "work-completion", "work-start"],
     "path_source": "declared-draft-destinations",
     "lifecycle_transitions": []

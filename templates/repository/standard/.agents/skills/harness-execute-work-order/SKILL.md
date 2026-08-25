@@ -35,7 +35,10 @@ this complete core, and every file in the current work-order manifest. Validate
    selected-state, checkpoint, and path checks. Preserve unrelated user work.
 5. Implement only admitted paths, run only structured repository-owned command
    arrays, and retain evidence only at declared destinations. Record failures;
-   do not erase unexpected paths to manufacture success.
+   do not erase unexpected paths to manufacture success. A risk noticed during
+   implementation is raised with the evaluator's `raise-risk` operation under
+   the `risk-raise` effect class and named in the receipt; the skill never
+   disposes a risk.
 6. Compare actual changed paths with planned and admitted paths. Run the review
    checkpoint and formal validation, retaining exact command results and
    digests.

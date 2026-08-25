@@ -12,7 +12,8 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 
 
 SKILL = "harness-execute-work-order"
-ALLOWED_EFFECTS = {"implementation-write", "test-execution", "evidence-write"}
+ALLOWED_EFFECTS = {"implementation-write", "test-execution", "evidence-write", "risk-raise"}
+RISK_PATH = re.compile(r"docs/engineering/[a-z0-9-]+/risks/RISK-[A-Z][A-Z0-9-]*-[0-9]{3}\.md")
 ARTIFACT_ID = re.compile(r"WO-[A-Z0-9]+-[0-9]+")
 CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 MAX_PATHS = 512
@@ -92,7 +93,11 @@ def admit_work_order_effect(
         raise ScopeGuardError("AEXEXE006", "path sets must be arrays")
     planned = _paths(request["planned_paths"])
     scope = _paths(request["execution_scope"], allow_prefix=True)
-    if any(not _admitted(path, scope) for path in planned):
+    if request["effect_class"] == "risk-raise":
+        # A new risk is always an admitted effect (RSK2-SKL-001); it must be a risk file and nothing else.
+        if any(RISK_PATH.fullmatch(path) is None for path in planned):
+            raise ScopeGuardError("AEXEXE011", "risk-raise admits only new risk artifact paths")
+    elif any(not _admitted(path, scope) for path in planned):
         raise ScopeGuardError("AEXEXE009", "planned path is outside the current execution scope")
     expected = {
         "work_order": request["work_order"],

@@ -11,7 +11,8 @@ from typing import Any, Callable, Iterable, Mapping, Sequence
 
 
 SKILL = "harness-draft-change"
-ALLOWED_EFFECTS = {"draft-create", "draft-revise", "planning-note-write"}
+ALLOWED_EFFECTS = {"draft-create", "draft-revise", "planning-note-write", "risk-raise"}
+RISK_PATH = re.compile(r"docs/engineering/[a-z0-9-]+/risks/RISK-[A-Z][A-Z0-9-]*-[0-9]{3}\.md")
 ARTIFACT_ID = re.compile(r"[A-Z][A-Z0-9]*-[A-Z0-9]+-[0-9]+")
 CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 MAX_PATHS = 128
@@ -71,6 +72,8 @@ def admit_draft_effect(
     allowed = _closed_paths(request["allowed_paths"])
     if not set(planned).issubset(allowed):
         raise DraftGuardError("AEXDRF009", "planned path is outside declared draft destinations")
+    if request["effect_class"] == "risk-raise" and any(RISK_PATH.fullmatch(path) is None for path in planned):
+        raise DraftGuardError("AEXDRF013", "risk-raise admits only new risk artifact paths")
     if request["effect_class"] == "planning-note-write" and (
         len(planned) != 1 or not planned[0].startswith("docs/notes/") or not planned[0].endswith(".md")
     ):

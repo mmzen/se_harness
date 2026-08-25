@@ -39,8 +39,10 @@ portable-core digest.
    VREC in `ready`, bound to the exact candidate, work, verification contracts,
    evidence, and preparer. Compare all actual paths with evaluator-derived
    destinations.
-6. Return the structured result, receipt identity, and assurance decision
-   packet. Stop before the assurance-owner decision.
+6. Run the evaluator's `risks` operation for every selected work order and
+   include the register in the assurance decision packet; the skill never
+   disposes a risk. Return the structured result, receipt identity, and
+   assurance decision packet. Stop before the assurance-owner decision.
 
 ## Boundaries
 
