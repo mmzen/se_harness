@@ -2,7 +2,7 @@
 id = "REQ-RSK-003"
 type = "requirement"
 title = "Dispose a raised risk by the owner of the stage it threatens"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a risk is raised, THE SYSTEM SHALL require an explicit transit
 verification_method = "automated-test-and-manual-review"
 [relations]
 derives_from = ["CAP-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Dispose a raised risk by the owner of the stage it threatens

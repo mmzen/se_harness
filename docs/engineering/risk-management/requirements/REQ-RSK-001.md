@@ -2,7 +2,7 @@
 id = "REQ-RSK-001"
 type = "requirement"
 title = "Provide the risk artifact and its score"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a formal artifact of type risk exists under docs/engineering/<
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Provide the risk artifact and its score

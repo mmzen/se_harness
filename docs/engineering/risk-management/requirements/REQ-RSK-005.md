@@ -2,7 +2,7 @@
 id = "REQ-RSK-005"
 type = "requirement"
 title = "Trace mitigation to governed work and list risks in a release"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a risk is disposed as mitigating, avoided, or mitigated, THE S
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Trace mitigation to governed work and list risks in a release

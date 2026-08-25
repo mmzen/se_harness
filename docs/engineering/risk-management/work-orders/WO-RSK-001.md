@@ -2,7 +2,7 @@
 id = "WO-RSK-001"
 type = "work_order"
 title = "Implement the risk artifact, its lifecycle, gates, commands, and configuration"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -52,6 +52,12 @@ implements = ["REQ-RSK-001", "REQ-RSK-002", "REQ-RSK-003", "REQ-RSK-004", "REQ-R
 specifications = ["SPEC-RSK-001"]
 architecture = ["ARCH-RSK-001", "ADR-RSK-001"]
 verification = ["VER-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement the risk artifact, its lifecycle, gates, commands, and configuration

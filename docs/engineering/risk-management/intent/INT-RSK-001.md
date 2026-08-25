@@ -2,12 +2,18 @@
 id = "INT-RSK-001"
 type = "intent"
 title = "Make risk a first-class governed fact with one accountable disposer"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "product-owner"
 +++
 
 # Intent: Make risk a first-class governed fact with one accountable disposer

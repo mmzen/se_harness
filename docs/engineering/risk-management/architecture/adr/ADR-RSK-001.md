@@ -2,13 +2,19 @@
 id = "ADR-RSK-001"
 type = "adr"
 title = "Model risk as its own lifecycle family, dispose by stage owner, gate through existing gates"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 decides = ["ARCH-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Model risk as its own lifecycle family, dispose by stage owner, gate through existing gates

@@ -2,13 +2,19 @@
 id = "CAP-RSK-001"
 type = "capability"
 title = "Identify anywhere, raise by policy, dispose by role, mitigate through governed work"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 derives_from = ["INT-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T13:25:29Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Identify anywhere, raise by policy, dispose by role, mitigate through governed work
