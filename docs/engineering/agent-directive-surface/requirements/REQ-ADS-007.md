@@ -2,7 +2,7 @@
 id = "REQ-ADS-007"
 type = "requirement"
 title = "Keep the agent reading surface bounded and free of retired files"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a phase-appropriate preflight runs or a coding agent reads the
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T11:40:02Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Keep the agent reading surface bounded and free of retired files

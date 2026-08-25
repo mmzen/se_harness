@@ -2,7 +2,7 @@
 id = "WO-ADS-002"
 type = "work_order"
 title = "Close the reading manifest, minimise the operating card, and retire the repository-context file"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -35,6 +35,12 @@ paths = [
 implements = ["REQ-ADS-007"]
 specifications = ["SPEC-ADS-002"]
 verification = ["VER-ADS-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T11:40:02Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Close the reading manifest, minimise the operating card, and retire the repository-context file

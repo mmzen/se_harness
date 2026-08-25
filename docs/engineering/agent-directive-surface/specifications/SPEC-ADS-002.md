@@ -2,13 +2,19 @@
 id = "SPEC-ADS-002"
 type = "specification"
 title = "Closed reading manifest, minimal operating card, and owner region without the retired context file"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 specifies = ["REQ-ADS-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T11:40:02Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Closed reading manifest, minimal operating card, and owner region without the retired context file
