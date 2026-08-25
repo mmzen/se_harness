@@ -13,18 +13,22 @@ import json
 import re
 import unicodedata
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from typing import Any, Iterable, Mapping, Sequence
 
 
 CATALOG_SCHEMA = "se-harness-agent-contract-catalog-v1"
 CANONICAL_JSON_SCHEMA = "se-harness-canonical-json-v1"
 AUTONOMY_ENVELOPE_SCHEMA = "se-harness-autonomy-envelope-v1"
+AUTONOMY_ENVELOPE_V2_SCHEMA = "se-harness-autonomy-envelope-v2"
+DELEGATION_SCHEMA = "se-harness-agentic-delegation-v1"
 PACKET_CONTEXT_SCHEMA = "se-harness-decision-packet-context-v1"
 PACKET_V1_SCHEMA = "se-harness-decision-packet-v1"
 PACKET_V2_SCHEMA = "se-harness-decision-packet-v2"
 RECEIPT_SCHEMA = "se-harness-execution-receipt-v1"
 PROFILE_SCHEMA = "se-harness-logical-execution-profile-v1"
 REPOSITORY_STATE_SCHEMA = "se-harness-repository-state-binding-v1"
+REPOSITORY_OBSERVATION_SCHEMA = "se-harness-repository-observation-v1"
 WORKTREE_STATE_SCHEMA = "se-harness-worktree-state-v1"
 WORKFLOW_RESULT_SCHEMA = "se-harness-workflow-result-v2"
 
@@ -45,12 +49,15 @@ MANDATORY_STOPS = frozenset(
 )
 SCHEMA_ROOTS = {
     AUTONOMY_ENVELOPE_SCHEMA: "autonomy-envelope",
+    AUTONOMY_ENVELOPE_V2_SCHEMA: "autonomy-envelope-v2",
+    DELEGATION_SCHEMA: "agentic-delegation",
     PACKET_CONTEXT_SCHEMA: "decision-packet-context",
     PACKET_V1_SCHEMA: "decision-packet",
     PACKET_V2_SCHEMA: "decision-packet-v2",
     RECEIPT_SCHEMA: "execution-receipt",
     PROFILE_SCHEMA: "logical-execution-profile",
     REPOSITORY_STATE_SCHEMA: "repository-state-binding",
+    REPOSITORY_OBSERVATION_SCHEMA: "repository-observation",
     WORKTREE_STATE_SCHEMA: "worktree-state",
 }
 DIAGNOSTICS = {
@@ -83,6 +90,8 @@ _SEMANTIC_VERSION = re.compile(
 )
 _DIAGNOSTIC_ID = re.compile(r"(?:[A-Z][A-Z0-9._-]{0,127}|[a-z0-9](?:[a-z0-9._-]{0,126}[a-z0-9])?)")
 _SHA256 = re.compile(r"[0-9a-f]{64}")
+_NONCE = re.compile(r"[0-9a-f]{32,128}")
+_UTC_TIMESTAMP = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z")
 _GIT_OBJECT_ID = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})")
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 _WINDOWS_RESERVED = {
@@ -401,6 +410,25 @@ def _sha256(value: Any, path: str) -> str:
     return _text(value, path, maximum=64, pattern=_SHA256, code="AEXCON007")
 
 
+def _nullable_sha256(value: Any, path: str) -> str | None:
+    return None if value is None else _sha256(value, path)
+
+
+def _utc_timestamp(value: Any, path: str) -> str:
+    result = _text(value, path, maximum=20, pattern=_UTC_TIMESTAMP, code="AEXCON007")
+    try:
+        parsed = datetime.strptime(result, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=UTC)
+    except ValueError:
+        _error("AEXCON007", path, "timestamp is not a valid UTC instant")
+    if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") != result:
+        _error("AEXCON009", path, "timestamp is not canonical UTC")
+    return result
+
+
+def _nonce(value: Any, path: str) -> str:
+    return _text(value, path, maximum=128, pattern=_NONCE, code="AEXCON007")
+
+
 def _git_object_id(value: Any, path: str, object_format: str | None = None) -> str:
     result = _text(value, path, maximum=64, pattern=_GIT_OBJECT_ID, code="AEXCON007")
     expected = 40 if object_format == "sha1" else 64 if object_format == "sha256" else None
@@ -647,6 +675,194 @@ def _validate_repository_state(value: Any, path: str = "$") -> dict[str, Any]:
     }
 
 
+def _validate_repository_observation(value: Any, path: str = "$") -> dict[str, Any]:
+    root = _object(
+        value,
+        {"schema", "repository", "evaluator", "git", "governance", "filesystem", "previous_receipt_sha256"},
+        path,
+    )
+    if root["schema"] != REPOSITORY_OBSERVATION_SCHEMA:
+        _error("AEXCON004", f"{path}.schema", "unsupported repository-observation schema")
+    evaluator = _object(
+        root["evaluator"],
+        {"package", "version", "payload_sha256", "launcher_sha256"},
+        f"{path}.evaluator",
+    )
+    git = _object(
+        root["git"],
+        {
+            "object_format",
+            "head",
+            "symbolic_ref",
+            "index_entries_sha256",
+            "tracked_worktree_sha256",
+            "untracked_nonignored_sha256",
+            "conflicts",
+            "submodules",
+        },
+        f"{path}.git",
+    )
+    object_format = _enum(git["object_format"], f"{path}.git.object_format", {"sha1", "sha256"})
+    head = git["head"]
+    if head is not None:
+        head = _git_object_id(head, f"{path}.git.head", object_format)
+    symbolic_ref = git["symbolic_ref"]
+    if symbolic_ref is not None:
+        symbolic_ref = _text(symbolic_ref, f"{path}.git.symbolic_ref", maximum=512)
+        if not symbolic_ref.startswith("refs/"):
+            _error("AEXCON007", f"{path}.git.symbolic_ref", "symbolic ref must start with refs/")
+    governance = _object(
+        root["governance"],
+        {
+            "managed_lock_sha256",
+            "formal_snapshot_sha256",
+            "workflow_contract_sha256",
+            "decision_rights_sha256",
+            "work_order",
+            "work_order_sha256",
+            "work_order_status",
+        },
+        f"{path}.governance",
+    )
+    filesystem = _object(
+        root["filesystem"],
+        {"platform_family", "case_sensitive", "regular_file_manifest_sha256", "unsupported_object_count"},
+        f"{path}.filesystem",
+    )
+    return {
+        "schema": REPOSITORY_OBSERVATION_SCHEMA,
+        "repository": _sha256(root["repository"], f"{path}.repository"),
+        "evaluator": {
+            "package": _portable_id(evaluator["package"], f"{path}.evaluator.package"),
+            "version": _semantic_version(evaluator["version"], f"{path}.evaluator.version"),
+            "payload_sha256": _sha256(evaluator["payload_sha256"], f"{path}.evaluator.payload_sha256"),
+            "launcher_sha256": _sha256(evaluator["launcher_sha256"], f"{path}.evaluator.launcher_sha256"),
+        },
+        "git": {
+            "object_format": object_format,
+            "head": head,
+            "symbolic_ref": symbolic_ref,
+            "index_entries_sha256": _sha256(git["index_entries_sha256"], f"{path}.git.index_entries_sha256"),
+            "tracked_worktree_sha256": _sha256(
+                git["tracked_worktree_sha256"], f"{path}.git.tracked_worktree_sha256"
+            ),
+            "untracked_nonignored_sha256": _sha256(
+                git["untracked_nonignored_sha256"], f"{path}.git.untracked_nonignored_sha256"
+            ),
+            "conflicts": _boolean(git["conflicts"], f"{path}.git.conflicts"),
+            "submodules": _boolean(git["submodules"], f"{path}.git.submodules"),
+        },
+        "governance": {
+            "managed_lock_sha256": _sha256(
+                governance["managed_lock_sha256"], f"{path}.governance.managed_lock_sha256"
+            ),
+            "formal_snapshot_sha256": _sha256(
+                governance["formal_snapshot_sha256"], f"{path}.governance.formal_snapshot_sha256"
+            ),
+            "workflow_contract_sha256": _sha256(
+                governance["workflow_contract_sha256"], f"{path}.governance.workflow_contract_sha256"
+            ),
+            "decision_rights_sha256": _sha256(
+                governance["decision_rights_sha256"], f"{path}.governance.decision_rights_sha256"
+            ),
+            "work_order": _work_order_id(governance["work_order"], f"{path}.governance.work_order"),
+            "work_order_sha256": _sha256(
+                governance["work_order_sha256"], f"{path}.governance.work_order_sha256"
+            ),
+            "work_order_status": _managed_id(
+                governance["work_order_status"], f"{path}.governance.work_order_status"
+            ),
+        },
+        "filesystem": {
+            "platform_family": _enum(
+                filesystem["platform_family"], f"{path}.filesystem.platform_family", {"posix", "windows"}
+            ),
+            "case_sensitive": _boolean(filesystem["case_sensitive"], f"{path}.filesystem.case_sensitive"),
+            "regular_file_manifest_sha256": _sha256(
+                filesystem["regular_file_manifest_sha256"],
+                f"{path}.filesystem.regular_file_manifest_sha256",
+            ),
+            "unsupported_object_count": _integer(
+                filesystem["unsupported_object_count"],
+                f"{path}.filesystem.unsupported_object_count",
+                minimum=0,
+                maximum=MAX_INTEGER,
+            ),
+        },
+        "previous_receipt_sha256": _nullable_sha256(
+            root["previous_receipt_sha256"], f"{path}.previous_receipt_sha256"
+        ),
+    }
+
+
+def _validate_agentic_delegation(value: Any, path: str = "$") -> dict[str, Any]:
+    root = _object(
+        value,
+        {
+            "schema",
+            "delegated_by",
+            "delegate",
+            "decision_rights",
+            "operations",
+            "execution_profiles",
+            "paths",
+            "required_evidence",
+            "valid_until",
+            "max_retry",
+            "max_parallel_writers",
+            "child_delegation",
+            "stop_before",
+        },
+        path,
+    )
+    if root["schema"] != DELEGATION_SCHEMA:
+        _error("AEXCON004", f"{path}.schema", "unsupported agentic-delegation schema")
+    paths = _path_scope(root["paths"], f"{path}.paths", minimum=1)
+    evidence = _identity_set(
+        root["required_evidence"],
+        f"{path}.required_evidence",
+        lambda item, item_path: {
+            "kind": _portable_id(
+                _object(item, {"kind", "path"}, item_path)["kind"],
+                f"{item_path}.kind",
+            ),
+            "path": _path(item["path"], f"{item_path}.path"),
+        },
+        "path",
+    )
+    if not evidence:
+        _error("AEXCON006", f"{path}.required_evidence", "collection requires at least 1 entry")
+    stops = _string_set(root["stop_before"], f"{path}.stop_before", _managed_id)
+    if not MANDATORY_STOPS.issubset(stops):
+        _error("AEXCON012", f"{path}.stop_before", "mandatory accountable stop boundaries are missing")
+    for item in evidence:
+        if not any(_path_within(item["path"], parent) for parent in paths):
+            _error("AEXCON010", f"{path}.required_evidence", "required evidence is outside delegated paths")
+    if _integer(root["max_parallel_writers"], f"{path}.max_parallel_writers", minimum=0, maximum=1) != 1:
+        _error("AEXCON012", f"{path}.max_parallel_writers", "delegation requires exactly one writer")
+    if _boolean(root["child_delegation"], f"{path}.child_delegation") is not False:
+        _error("AEXCON012", f"{path}.child_delegation", "child delegation is prohibited")
+    return {
+        "schema": DELEGATION_SCHEMA,
+        "delegated_by": _text(root["delegated_by"], f"{path}.delegated_by", maximum=512),
+        "delegate": _portable_id(root["delegate"], f"{path}.delegate"),
+        "decision_rights": _string_set(
+            root["decision_rights"], f"{path}.decision_rights", _managed_id
+        ),
+        "operations": _string_set(root["operations"], f"{path}.operations", _managed_id, minimum=1),
+        "execution_profiles": _string_set(
+            root["execution_profiles"], f"{path}.execution_profiles", _profile_name, minimum=1
+        ),
+        "paths": paths,
+        "required_evidence": evidence,
+        "valid_until": _utc_timestamp(root["valid_until"], f"{path}.valid_until"),
+        "max_retry": _integer(root["max_retry"], f"{path}.max_retry", minimum=0, maximum=3),
+        "max_parallel_writers": 1,
+        "child_delegation": False,
+        "stop_before": stops,
+    }
+
+
 def _validate_envelope(value: Any, path: str = "$") -> dict[str, Any]:
     root = _object(value, {"schema", "selection", "delegation", "evidence"}, path)
     if root["schema"] != AUTONOMY_ENVELOPE_SCHEMA:
@@ -722,6 +938,97 @@ def _validate_envelope(value: Any, path: str = "$") -> dict[str, Any]:
             "required_paths": evidence_paths,
         },
     }
+
+
+def _validate_envelope_v2(value: Any, path: str = "$") -> dict[str, Any]:
+    root = _object(value, {"schema", "selection", "delegation", "evidence", "authority"}, path)
+    if root["schema"] != AUTONOMY_ENVELOPE_V2_SCHEMA:
+        _error("AEXCON004", f"{path}.schema", "unsupported autonomy-envelope-v2 schema")
+    v1 = _validate_envelope(
+        {
+            "schema": AUTONOMY_ENVELOPE_SCHEMA,
+            "selection": root["selection"],
+            "delegation": root["delegation"],
+            "evidence": root["evidence"],
+        },
+        path,
+    )
+    if v1["delegation"]["max_parallel_writers"] != 1:
+        _error("AEXCON012", f"{path}.delegation.max_parallel_writers", "v2 envelope requires one writer")
+    authority = _object(
+        root["authority"],
+        {
+            "decision_right",
+            "delegate",
+            "execution_profile",
+            "delegation_sha256",
+            "work_order_sha256",
+            "expected_repository_state",
+            "previous_receipt_sha256",
+            "nonce",
+            "issued_at",
+            "not_after",
+            "retry_ordinal",
+        },
+        f"{path}.authority",
+    )
+    decision_right = authority["decision_right"]
+    if decision_right is not None:
+        decision_right = _managed_id(decision_right, f"{path}.authority.decision_right")
+    result = {
+        "schema": AUTONOMY_ENVELOPE_V2_SCHEMA,
+        "selection": v1["selection"],
+        "delegation": v1["delegation"],
+        "evidence": v1["evidence"],
+        "authority": {
+            "decision_right": decision_right,
+            "delegate": _portable_id(authority["delegate"], f"{path}.authority.delegate"),
+            "execution_profile": _profile_name(
+                authority["execution_profile"], f"{path}.authority.execution_profile"
+            ),
+            "delegation_sha256": _sha256(
+                authority["delegation_sha256"], f"{path}.authority.delegation_sha256"
+            ),
+            "work_order_sha256": _sha256(
+                authority["work_order_sha256"], f"{path}.authority.work_order_sha256"
+            ),
+            "expected_repository_state": _sha256(
+                authority["expected_repository_state"], f"{path}.authority.expected_repository_state"
+            ),
+            "previous_receipt_sha256": _nullable_sha256(
+                authority["previous_receipt_sha256"], f"{path}.authority.previous_receipt_sha256"
+            ),
+            "nonce": _nonce(authority["nonce"], f"{path}.authority.nonce"),
+            "issued_at": _utc_timestamp(authority["issued_at"], f"{path}.authority.issued_at"),
+            "not_after": _utc_timestamp(authority["not_after"], f"{path}.authority.not_after"),
+            "retry_ordinal": _integer(
+                authority["retry_ordinal"], f"{path}.authority.retry_ordinal", minimum=0, maximum=3
+            ),
+        },
+    }
+    if result["selection"]["repository_state"] != result["authority"]["expected_repository_state"]:
+        _error("AEXCON011", f"{path}.authority.expected_repository_state", "repository-state identities disagree")
+    if result["selection"]["work_order_sha256"] != result["authority"]["work_order_sha256"]:
+        _error("AEXCON011", f"{path}.authority.work_order_sha256", "work-order identities disagree")
+    if result["authority"]["execution_profile"] not in result["delegation"]["execution_profiles"]:
+        _error("AEXCON010", f"{path}.authority.execution_profile", "selected profile is outside delegation")
+    if result["authority"]["retry_ordinal"] > min(result["delegation"]["retry_limits"].values()):
+        _error("AEXCON010", f"{path}.authority.retry_ordinal", "retry ordinal exceeds delegated limit")
+    if result["authority"]["not_after"] <= result["authority"]["issued_at"]:
+        _error("AEXCON007", f"{path}.authority.not_after", "expiry must be later than issue time")
+    issued = datetime.strptime(
+        result["authority"]["issued_at"], "%Y-%m-%dT%H:%M:%SZ"
+    ).replace(tzinfo=UTC)
+    expiry = datetime.strptime(
+        result["authority"]["not_after"], "%Y-%m-%dT%H:%M:%SZ"
+    ).replace(tzinfo=UTC)
+    if (expiry - issued).total_seconds() > 300:
+        _error(
+            "AEXCON007",
+            f"{path}.authority.not_after",
+            "v2 envelope lifetime exceeds five minutes",
+        )
+    return result
 
 
 def _validate_evidence_binding(value: Any, path: str) -> dict[str, str]:
@@ -1332,12 +1639,15 @@ def _validate_profile(value: Any, path: str = "$") -> dict[str, Any]:
 
 _VALIDATORS = {
     AUTONOMY_ENVELOPE_SCHEMA: _validate_envelope,
+    AUTONOMY_ENVELOPE_V2_SCHEMA: _validate_envelope_v2,
+    DELEGATION_SCHEMA: _validate_agentic_delegation,
     PACKET_CONTEXT_SCHEMA: _validate_packet_context,
     PACKET_V1_SCHEMA: _validate_packet,
     PACKET_V2_SCHEMA: _validate_packet,
     RECEIPT_SCHEMA: _validate_receipt,
     PROFILE_SCHEMA: _validate_profile,
     REPOSITORY_STATE_SCHEMA: _validate_repository_state,
+    REPOSITORY_OBSERVATION_SCHEMA: _validate_repository_observation,
     WORKTREE_STATE_SCHEMA: _validate_worktree_state,
 }
 
@@ -2172,14 +2482,17 @@ def validate_logical_execution_profile(
 
 __all__ = [
     "AUTONOMY_ENVELOPE_SCHEMA",
+    "AUTONOMY_ENVELOPE_V2_SCHEMA",
     "CANONICAL_JSON_SCHEMA",
     "CATALOG_SCHEMA",
+    "DELEGATION_SCHEMA",
     "PACKET_CONTEXT_SCHEMA",
     "PACKET_V1_SCHEMA",
     "PACKET_V2_SCHEMA",
     "PROFILE_SCHEMA",
     "RECEIPT_SCHEMA",
     "REPOSITORY_STATE_SCHEMA",
+    "REPOSITORY_OBSERVATION_SCHEMA",
     "WORKTREE_STATE_SCHEMA",
     "AdmissionAssessment",
     "AgentContractError",
