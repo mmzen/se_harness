@@ -236,7 +236,7 @@ class SkillContractTests(unittest.TestCase):
                     ] if (root / item).exists()), "skill-contract.json"]),
                     sorted(item["path"] for item in manifest.value["files"]),
                 )
-                self.assertEqual("1.0.1", contract.value["version"])
+                self.assertEqual("1.0.2" if name == "harness-draft-change" else "1.0.1", contract.value["version"])
                 self.assertEqual(
                     b"policy:\n  allow_implicit_invocation: false\n",
                     (root / "agents/openai.yaml").read_bytes(),

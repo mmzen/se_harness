@@ -48,6 +48,7 @@ se_harness = [
 "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/README.md.seed",
   "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
+  "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
   "templates/repository/standard/docs/engineering/OPERATING_CARD.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",

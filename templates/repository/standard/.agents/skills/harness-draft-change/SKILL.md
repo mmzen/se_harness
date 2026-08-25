@@ -38,7 +38,10 @@ canonical destination. Only explicitly selected artifacts that are currently
    before a controlled draft, revision, or note write; its callable boundary is
    testable and it grants no authority.
 6. Complete the declared draft bodies and relations without adding a lifecycle
-   event. Compare actual changed paths with the admitted plan.
+   event. Apply the installed authoring policy
+   (`docs/engineering/ARTIFACT_AUTHORING.md`) for each selected type; its
+   checklist is the review standard. Compare actual changed paths with the
+   admitted plan.
 7. Run formal validation again. Return the structured result and receipt facts,
    then stop at accountable content review.
 

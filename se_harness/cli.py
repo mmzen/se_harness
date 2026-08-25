@@ -534,6 +534,14 @@ def _create_artifact(args: argparse.Namespace) -> int:
         print("dry run: no files were written")
     else:
         print("created an incomplete draft; complete accountable fields and run harnessctl validate before approval")
+        if not args.quiet:
+            from se_harness.artifact_layout import authoring_checklist
+
+            bullets = authoring_checklist(Path(args.target), args.artifact_type)
+            if bullets:
+                print(f"authoring checklist for {args.artifact_type} (docs/engineering/ARTIFACT_AUTHORING.md):")
+                for item in bullets:
+                    print(f"- {item}")
     return 0
 
 
@@ -802,6 +810,7 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--type", required=True, dest="artifact_type")
     create.add_argument("--id", required=True, dest="artifact_id")
     create.add_argument("--dry-run", action="store_true")
+    create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.set_defaults(handler=_create_artifact)
 
     renumber = commands.add_parser(

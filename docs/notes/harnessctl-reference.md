@@ -212,10 +212,10 @@ The command validates the packaged `se-harness-governance-migration-v1` contract
 
 ```text
 harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run]
-harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-run]
+harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-run] [--quiet]
 ```
 
-Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. Existing valid flat layouts remain discoverable and are not automatically migrated.
+Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. After creation it prints the created type's checklist from the installed `docs/engineering/ARTIFACT_AUTHORING.md`; `--quiet` suppresses it. Existing valid flat layouts remain discoverable and are not automatically migrated.
 
 Non-dry-run authoring uses the common pre-write mutation guard. The invoking environment must match the schema-3 released-evaluator identity locked by the target repository; candidate source and editable or contaminated installs fail without creating the requested path.
 
