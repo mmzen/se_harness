@@ -6,6 +6,7 @@ import importlib.util
 import json
 import platform
 import re
+import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -49,12 +50,19 @@ REQUIRED_PATHS = (
     "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
     "docs/engineering/TECHNICAL_COMMUNICATION.md",
+    "docs/engineering/OPERATING_CARD.md",
     "scripts/validate_engineering_artifacts.py",
     "scripts/generate_harness_dashboard.py",
     "scripts/harness_explorer/index.template.html",
 )
+READING_PATHS = (
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+)
 POLICY_PATHS = (
     "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
     "docs/engineering/README.md",
     "docs/engineering/WORKFLOW.md",
     "docs/engineering/WORKFLOW.json",
@@ -254,6 +262,48 @@ def _load_validator_module() -> ModuleType:
 def _targets(artifact: Any, relation: str) -> list[str]:
     value = artifact.relations.get(relation, [])
     return sorted(item for item in value if isinstance(item, str)) if isinstance(value, list) else []
+
+
+def _commit_is_ancestor(root: Path, commit: str, reference: str = "HEAD") -> bool | None:
+    """True/False for Git ancestry; None when the question cannot be answered here."""
+
+    if not is_git_worktree(root) or not re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", commit):
+        return None
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "merge-base", "--is-ancestor", commit, reference],
+            capture_output=True,
+            text=True,
+            timeout=60,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if completed.returncode == 0:
+        return True
+    if completed.returncode == 1:
+        return False
+    return None
+
+
+def orphaned_ready_records(root: Path, artifacts: Iterable[Any], work_order_id: str) -> list[str]:
+    """W-ADS-002: ready verification records for the work order whose candidate left HEAD."""
+
+    messages: list[str] = []
+    for artifact in sorted(artifacts, key=lambda item: item.artifact_id):
+        if artifact.artifact_type != "verification_record" or artifact.status != "ready":
+            continue
+        if work_order_id not in _targets(artifact, "verifies_work_order"):
+            continue
+        commit = artifact.metadata.get("commit")
+        if not isinstance(commit, str):
+            continue
+        if _commit_is_ancestor(root, commit) is False:
+            messages.append(
+                f"{artifact.artifact_id} is ready and binds candidate {commit}, which is not an ancestor of HEAD; "
+                "the only routes are verify, reject, or a successor record bound to a fresh commit"
+            )
+    return messages
 
 
 def _unique_paths(items: Iterable[str]) -> tuple[str, ...]:
@@ -533,6 +583,10 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
                         )
                     )
 
+    if phase == "review" and work_order is not None:
+        for message in orphaned_ready_records(root, artifacts, work_order.artifact_id):
+            diagnostics.append(PreflightDiagnostic("W-ADS-002", work_order.artifact_id, message))
+
     artifact_order = (
         sorted({item.artifact_id: item for item in intents}.values(), key=lambda item: item.artifact_id)
         + sorted({item.artifact_id: item for item in capabilities}.values(), key=lambda item: item.artifact_id)
@@ -544,7 +598,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
         + ([work_order] if work_order is not None else [])
     )
     manifest = _unique_paths(
-        list(POLICY_PATHS) + [_relative(item.path, root) for item in artifact_order]
+        list(READING_PATHS) + [_relative(item.path, root) for item in artifact_order]
     )
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
     return PreflightReport(

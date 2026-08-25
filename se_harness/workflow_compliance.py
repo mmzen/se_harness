@@ -10,7 +10,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
-from se_harness.preflight import run_preflight
+from se_harness.preflight import orphaned_ready_records, run_preflight
 from se_harness.workflow_contract import (
     ContractError,
     load_validated_contracts,
@@ -19,6 +19,7 @@ from se_harness.workflow_contract import (
 from se_harness.workflow_procedures import (
     ProcedureError,
     command_or_response,
+    corrective_response,
     decision_required,
     resolve_procedure,
     select_current_step,
@@ -385,6 +386,7 @@ def check_workflow(
     changed_paths: Iterable[str] = (),
     changes_complete: bool = False,
     change_manifest: Path | None = None,
+    pull_request_body: Path | None = None,
 ) -> dict[str, Any]:
     if checkpoint not in {"start", "pre-action", "handoff"}:
         raise HarnessError("WEX210: public check checkpoint must be start, pre-action, or handoff")
@@ -466,7 +468,18 @@ def check_workflow(
         f"{item['code']}: {item['message']}"
         for item in [*repository_errors, *scoped]
     ]
-    blockers = [*predicate_blockers, *finding_blockers]
+    trap_blockers: list[str] = []
+    if checkpoint == "handoff" and primary.artifact_type == "work_order":
+        trap_blockers.extend(
+            f"W-ADS-002: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
+        )
+        if pull_request_body is not None:
+            trap_blockers.extend(f"W-ADS-001: {message}" for message in _pull_request_body_findings(root, pull_request_body))
+    if trap_blockers:
+        passed = False
+        outcome = "blocked"
+        current_step = select_current_step(resolved, checkpoint=checkpoint, passed=False)
+    blockers = [*predicate_blockers, *finding_blockers, *trap_blockers]
     action = (
         str(current_step.get("decision", "Provide the required decision"))
         if current_step["kind"] == "decision"
@@ -474,6 +487,23 @@ def check_workflow(
         if current_step["kind"] == "command"
         else "Follow the bound reference"
     )
+    next_command = command_or_response(current_step)
+    if not passed:
+        first_failing = next(
+            (
+                predicate
+                for gate in gate_results
+                for predicate in gate["predicates"]
+                if predicate["status"] != "pass"
+            ),
+            None,
+        )
+        action, next_command = corrective_response(
+            current_step, first_failing, formal_snapshot_sha256=context.formal_snapshot_sha256
+        )
+        evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
+        if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:
+            raise HarnessError("WEX-ADS-001: the corrective command repeats the evaluated command")
     restitution = {
         "outcome": outcome,
         "done": [f"Evaluated {checkpoint} compliance for {artifact_id}."],
@@ -482,7 +512,7 @@ def check_workflow(
         "current_lifecycle_state": [f"{artifact_id} is {primary.status}."],
         "decision_required": decision_required(current_step) if passed else None,
         "next": {"procedure_id": selected_procedure, "step_id": current_step["id"], "action": action},
-        "command_or_response": command_or_response(current_step),
+        "command_or_response": next_command,
         "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
     }
     return build_result(
@@ -598,6 +628,31 @@ def focus_schema2(
         repository_blockers=legacy_findings["repository_blockers"],
         unrelated_count=unrelated_count,
     )
+
+
+def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
+    """Report W-ADS-001 for a pull-request body whose trailer carries a carriage return."""
+
+    from se_harness.github_ci import MAX_EVENT_BYTES, carriage_return_trailer_offsets
+
+    try:
+        with body_path.open("rb") as handle:
+            raw = handle.read(MAX_EVENT_BYTES + 1)
+    except OSError as exc:
+        raise HarnessError(f"WEX200: cannot read pull-request body: {exc}") from exc
+    if len(raw) > MAX_EVENT_BYTES:
+        raise HarnessError("WEX200: pull-request body exceeds the size limit")
+    try:
+        body = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise HarnessError("WEX200: pull-request body must be UTF-8") from exc
+    return [
+        (
+            f"the Harness-Work-Order line ends with a carriage return at byte offset {offset}; "
+            "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) before pushing"
+        )
+        for offset in carriage_return_trailer_offsets(body)
+    ]
 
 
 def ensure_governed_checkpoint(
