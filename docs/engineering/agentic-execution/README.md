@@ -161,8 +161,9 @@ contains no target effect callback and activates no workflow or decision right.
 The governed compatibility-test amendment and green working-tree implementation
 evidence are recorded in
 [`WO-AEX-005-verification.md`](evidence/WO-AEX-005-verification.md).
-The work order remains `in_progress`; no commit-bound verification or
-completion decision is claimed.
+The exact handoff gate passed and the work order is `implemented`. A ready
+commit-bound verification record is the next governed artifact; no assurance
+decision is claimed.
 
 Phase 4 must be implemented and verified through the existing released
 evaluator. A separately governed successor release, external installation, and

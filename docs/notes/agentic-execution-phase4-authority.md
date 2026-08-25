@@ -142,6 +142,6 @@ work-order templates. Its revised exhaustive assertion reconstructs the
 candidate from the unchanged released template plus the exact delegation table
 and guidance paragraph. The expanded focused suite passes 57 tests with 2
 platform skips, and the complete repository suite passes 943 tests with 22
-skips. The work order remains `in_progress` pending an authorized exact
-candidate commit, commit-bound independent assurance, and a separate completion
-decision.
+skips. The exact handoff gate passed and the work order is `implemented`. The
+next boundary is a ready verification record bound to a clean exact candidate
+commit, followed by a separate independent assurance decision.

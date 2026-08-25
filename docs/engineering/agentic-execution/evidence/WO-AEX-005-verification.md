@@ -1,12 +1,14 @@
 # WO-AEX-005 implementation evidence
 
-This file records an in-progress implementation checkpoint for `WO-AEX-005`.
+This file records the implementation handoff checkpoint for `WO-AEX-005`.
 It is not an assurance decision, verification record, lifecycle transition,
 commit authorization, release decision, or activation of Phase 4. The work
-order remains `in_progress` and requires later commit-bound verification.
+order is `in_progress` at this checkpoint and requires later commit-bound
+verification.
 
 artifact: WO-AEX-005
-checkpoint: implementation-handoff
+checkpoint: handoff
+formal_snapshot_sha256: bb1dc12f5a684cc548e92867b6436562bd21e1fde894a39ddc88d2d178267883
 pre_evidence_formal_snapshot_sha256: 9c54ad7eafbe6b0e03ac18eac5a9b53e2ade1593953929e26386bbc80dd5d93c
 post_amendment_formal_snapshot_sha256: bb1dc12f5a684cc548e92867b6436562bd21e1fde894a39ddc88d2d178267883
 candidate_base_commit: 005e7ca13491d7e20e37a57a39fbaaea6d575975

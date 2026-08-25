@@ -566,11 +566,11 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-The governed `WO-AEX-005` compatibility-test amendment is applied and the
-exact working-tree verification set is green. The next step is to create an
-exact candidate commit only after separate Git commit authorization, then run
-commit-bound independent assurance against that identity. Do not mark the work
-order implemented from implementer-generated working-tree evidence.
+The governed `WO-AEX-005` compatibility-test amendment is applied, the exact
+working-tree verification set and handoff gate are green, and the work order is
+`implemented`. The next step is to prepare one ready verification record
+against the clean exact candidate commit. An assurance owner must decide that
+record independently; preparation does not verify the work order.
 
 After `WO-AEX-005` is independently verified at an exact candidate commit, the
 engineering owner may separately decide whether to start `WO-AEX-006`. The work

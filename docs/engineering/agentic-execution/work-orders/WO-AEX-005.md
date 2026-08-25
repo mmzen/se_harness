@@ -2,7 +2,7 @@
 id = "WO-AEX-005"
 type = "work_order"
 title = "Implement live observation and delegated authority derivation"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -52,6 +52,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T09:09:21Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T10:29:40Z"
 decided_by = "engineering-owner"
 +++
 
