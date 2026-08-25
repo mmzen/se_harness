@@ -2,7 +2,7 @@
 id = "WO-REB-023"
 type = "work_order"
 title = "Give the migration rehearsal a scenario whose successor is the current candidate"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -27,25 +27,42 @@ implements = ["REQ-REB-016", "REQ-REB-017"]
 specifications = ["SPEC-REB-008"]
 architecture = ["ARCH-REB-007", "ADR-REB-007"]
 verification = ["VER-REB-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T20:48:00Z"
+decided_by = "engineering-owner"
+reason = "Approved by the engineering owner on 2026-08-25 with the boundary measurement in front of them, in one act carrying four decisions. (1) The work order is approved as drafted and its required commit-bound verification classification stands; a VREC is owed and is not authorized by this approval. (2) Route A is the scenario's route: a version-truthful candidate-0.6.0-to-0.7.0 scenario classifying compatible, because the pair has no boundary the current contract can express. classify_migration is a set difference over eight closed capability names that 0.6.0 already holds in full, and the boundary MIG404 demands of a historical- scenario is hard-coded to the schema-3 and evaluator-evidence rule 0.6.0 itself introduced. A real gap exists, since released 0.6.0 exposes no qualify, but the vocabulary cannot name it. Route B, a new contract version naming that capability, is rejected for this work order rather than judged wrong; it would amend SPEC-REB-008 and the contract days before the release and needs its own scope decision. The execution scope is unchanged because it was already drawn for route A. (3) Evidence retains under this work order's own key, as a routine reading of VER-REB-007, which named WO-REB-018 before this work order existed. VER-REB-007 is not amended. (4) The historical 0.5.0-to-0.6.0 pair is dropped from the CI lane and stays byte-identical and exercised by the unit suite. No second matrix dimension is added, because running it against the public 0.6.0 wheel would make CI assert a fact about a released package rather than about the candidate. Route A gives up the MIG404 guard and the forced predecessor archive pin, so the work order pins the predecessor by digest anyway and asserts the compatible outcome in a test. Approval authorizes no start, no governing amendment, and no release act."
 +++
 
 # Work Order: Give the migration rehearsal a scenario whose successor is the current candidate
 
 ## Lifecycle
 
-This work order is `draft`. Its authoritative state, and the timestamp and reason
-of every decision taken on it, are the front matter and `[[lifecycle_events]]`
-above; read those rather than this prose.
+This work order is `approved`. Its authoritative state, and the timestamp and
+reason of every decision taken on it, are the front matter and
+`[[lifecycle_events]]` above; read those rather than this prose.
 
-The `required` commit-bound verification classification and its rationale are
-written as a proposal for the accountable owner to ratify or change at approval.
-They are not an assurance decision, and nothing here is approved by implication.
+The owner routed this defect to its own work order, asked that it be fixed before
+0.7.0 ships, and then approved this text on 2026-08-25 after the measurement in
+*The pair has no expressible boundary* was put in front of them. Four decisions
+were taken in that one act, and each is recorded where it changes the work:
 
-The owner has routed this defect to its own work order and asked that it be fixed
-before 0.7.0 ships. That routing is not an approval of this text: approval, start,
-and completion remain three separate accountable acts, and the three questions in
-*Stop and escalate conditions* should be answered before or at approval, because
-two of them can change the shape of the work.
+- The `required` commit-bound verification classification and its rationale stand
+  as proposed. A `VREC` is owed and is not authorized by this approval.
+- **Route A** is the scenario's route: a version-truthful `compatible` scenario, no
+  governing amendment, and the `[execution_scope]` above unchanged. Escalation
+  question 2 is answered.
+- Evidence retains under this work order's own key, as a routine reading of a
+  verification contract written before this work order existed. `VER-REB-007` is
+  not amended. Escalation question 1 is answered.
+- The historical pair is dropped from the CI lane and stays byte-identical and
+  exercised by the unit suite. Escalation question 3 is answered.
+
+Approval, start, and completion remain three separate accountable acts. Approval
+authorizes no start, no release act, and no governing amendment; the answers above
+are decisions of record, not permission to exceed the scope they shape.
 
 ## Objective
 
@@ -181,43 +198,64 @@ named command:
 The consequence is that the fix is not simply "add a scenario". It is a choice
 between a truthful `compatible` scenario that keeps the gate on the candidate while
 asserting less than the historical one does, and a new contract version that names
-the real 0.7.0 capability. That choice is escalation question 2, and the
-`[execution_scope]` above is drawn for the first route: the second route adds
-`se_harness/governance_migration_contract.json`, `SPEC-REB-008`, and probably
-`REQ-REB-016` to the surface, so it needs its own scope decision and is not
-authorized by this text.
+the real 0.7.0 capability. **The owner chose the first at approval — route A.** The
+second route would have added `se_harness/governance_migration_contract.json`,
+`SPEC-REB-008`, and probably `REQ-REB-016` to the surface; it is not authorized
+here, and the `[execution_scope]` above is unchanged because it was already drawn
+for route A.
+
+Route A asserts strictly less in one respect, and this work order compensates
+rather than passing over it. Because the new `scenario_id` does not start with
+`historical-`, `MIG404` no longer demands a reproduced boundary and
+`governance_migration.py:345` no longer forces the predecessor to be a
+digest-pinned archive. So the predecessor is pinned by digest anyway, as a
+requirement of this work order rather than of the runner, and the `compatible`
+outcome is asserted explicitly in a test — a future version that does introduce a
+boundary must fail that assertion rather than pass quietly.
 
 ## In scope
 
-1. Author the new scenario under
-   `tests/fixtures/governance_migration/`, named for the route the owner takes, as
-   a canonical `se-harness-governance-migration-v1` scenario: UTF-8 with LF, the
+1. Author `tests/fixtures/governance_migration/candidate-0.6.0-to-0.7.0.json` as a
+   canonical `se-harness-governance-migration-v1` scenario: UTF-8 with LF, the
    closed nine-stage catalog in order (`prepare`, `validate-complete`, `reject`,
    `replace`, `assess`, `release-plan`, `publish-plan`, `render`, `adopt`), only
    capabilities, roles, views, adapters, decisions and stages the contract version
-   already allows, and its fixture and decision bytes bound with SHA-256.
-2. **Declare only what has been measured.** That measurement has now been taken,
-   while this work order was still `draft`, and it is recorded in *The pair has no
-   expressible boundary* below rather than left as work for the implementation
-   agent. It changes this item: the truthful classification outcome for the
-   0.6.0-to-0.7.0 pair is `compatible` with an empty missing-capability set, and
-   which of the two routes in escalation question 2 the scenario takes is the
-   owner's decision rather than the implementation agent's.
+   already allows, and its fixture and decision bytes bound with SHA-256. The
+   `candidate-` prefix is deliberate: it is not `historical-`, because the pair has
+   no historical boundary to preserve, and it is not `synthetic-`, because both
+   runtimes are real.
+2. **Declare only what has been measured.** The classification the scenario
+   declares is `compatible`, with the predecessor holding all eight capabilities
+   and an empty missing-capability set, because that is what *The pair has no
+   expressible boundary* measured. Assert that outcome in the scenario and in a
+   test rather than leaving it implied, and do not fabricate a capability gap to
+   make the shape look like the historical scenario's.
 3. Point the lane at the new scenario in `.github/workflows/candidate-evidence.yml`
    and move its pinned predecessor to `0.6.0`, replacing both
    `PREDECESSOR_VERSION` and `PREDECESSOR_WHEEL_SHA256`. The new digest must be
-   measured from the already-public wheel, not copied from anywhere.
-4. Extend `tests/test_governance_migration.py` so the new scenario is covered by
+   measured from the already-public wheel, not copied from anywhere. Keep the digest
+   pin even though a non-`historical-` scenario no longer forces one.
+4. Remove the historical pair from the lane, which is the owner's decision at
+   approval. It is not deleted, not edited, and not un-exercised: it stays
+   byte-identical and covered by the unit suite. No second matrix dimension is
+   added, because running it against the public 0.6.0 wheel would make CI assert a
+   fact about a released package rather than about the candidate.
+5. Extend `tests/test_governance_migration.py` so the new scenario is covered by
    the same deterministic assertions as the existing pair, including at least one
    test that fails if a scenario's declared successor version and the version the
    candidate builds ever diverge again. That test is the point of this work order:
    the next bump must break a unit test on the author's workstation instead of a
-   hosted gate.
-5. Keep `historical-0.5.0-to-0.6.0.json` byte-identical and still exercised by the
+   hosted gate. Add one more that fails if the pair's classification stops being
+   `compatible`, which is route A's compensation for the `MIG404` guard the
+   `candidate-` prefix gives up.
+6. Keep `historical-0.5.0-to-0.6.0.json` byte-identical and still exercised by the
    unit suite, which is what makes it permanent regression history rather than
-   dead weight.
-6. Record the measured before-and-after readings, and one bullet in
-   `docs/engineering/released-evaluator-boundary/README.md`.
+   dead weight. Evidence it by digest, before and after.
+7. Record the measured before-and-after readings, and one bullet in
+   `docs/engineering/released-evaluator-boundary/README.md`. Retain the evidence
+   under this work order's own key, which is the owner's reading of `VER-REB-007`
+   taken at approval; state that reading in the retained record so a reviewer sees
+   it was a decision and not an oversight.
 
 ## Out of scope
 
@@ -283,11 +321,12 @@ list names.
 
 ## Expected change surface
 
-One new scenario fixture; the `governance-migration` job's scenario path and its
-two predecessor `env` values in `.github/workflows/candidate-evidence.yml`; new
-tests in `tests/test_governance_migration.py`; one bullet in the domain index;
-one retained evidence file. No change to the migration runner, the contract, the
-existing scenarios, or any governing artifact.
+One new scenario fixture; in `.github/workflows/candidate-evidence.yml`, the
+`governance-migration` job's scenario path, its two predecessor `env` values, and
+the removal of the historical pair from the lane; new tests in
+`tests/test_governance_migration.py`; one bullet in the domain index; one retained
+evidence file. No change to the migration runner, the contract, the existing
+scenarios, or any governing artifact.
 
 `tests/test_hash_bound_integrity.py` is expected to need **no** edit, because its
 rule already covers `tests/fixtures/governance_migration/*.json` by glob rather
@@ -328,19 +367,34 @@ was measured; both `semantic_sha256` values from the local double run and both
 from each hosted platform; the before-and-after unit-suite figures labelled by
 interpreter and platform; the failing reading of the new divergence test against
 the unrepaired pair; the run and job identities of the hosted readings; the fact
-that `historical-0.5.0-to-0.6.0.json` is byte-identical, evidenced by digest; and
-every out-of-scope action not performed.
+that `historical-0.5.0-to-0.6.0.json` is byte-identical, evidenced by digest, and
+still exercised by the unit suite after being removed from the lane; the four owner
+decisions taken at approval and that they were taken with the boundary measurement
+in front of them; the `VER-REB-007` retention reading and that it is a reading
+rather than an amendment; and every out-of-scope action not performed.
 
 ## Stop and escalate conditions
 
-Three questions this work order cannot answer for itself. The first two are best
-answered at approval, because either can change the work's shape.
+**All three questions below were answered by the owner at approval on 2026-08-25**,
+which is why they were raised while this text was `draft`; the answers are
+summarized in *Lifecycle* and written into the scope they shape. They are kept here
+with the reasoning that produced them, because a decision is only reviewable
+alongside the alternatives it rejected. The recorded reason on the approval
+`[[lifecycle_events]]` entry is the authority; this prose is a reading of it.
 
 1. **`VER-REB-007` names `WO-REB-018` as the retention key** — "Retain under the
    `WO-REB-018` key". This work order would retain under its own key. Either that
    is a routine reading of a verification contract written before this work
    existed, or `VER-REB-007` needs an amendment. The owner decides which, and an
    amendment is outside this scope.
+
+   **Answered: the routine reading.** Evidence retains under `WO-REB-023`, and
+   `VER-REB-007` is not amended. Two alternatives were rejected: amending the
+   verification artifact to name both keys, which is durable but a governing
+   amendment outside this scope; and filing this repair's evidence under the
+   `WO-REB-018` key literally, which would leave a retained record that does not
+   identify the work order that produced it — a predicate `QG-G4` reads. The
+   retained record must state this reading explicitly.
 2. **Which of two routes the truthful scenario takes.** No longer a measurement —
    *The pair has no expressible boundary* above settles the facts, and they leave a
    decision the implementation agent must not take for itself.
@@ -372,16 +426,26 @@ answered at approval, because either can change the work's shape.
 
    Route B is the better artifact and the worse thing to start days before a
    release. Route A is honest about what it proves and can be read in full by one
-   reviewer. Neither is authorized yet.
+   reviewer.
+
+   **Answered: route A.** Route B is rejected for this work order, not judged wrong:
+   reading 3 shows the capability it would name is real, so if a later accountable
+   act wants the contract to express it, the finding above is the evidence and a
+   separate work order is the vehicle. Nothing here authorizes it.
 3. **Whether the lane should still run the historical pair as well.** It cannot be
    run against the candidate any more, so the choice is between dropping it from
    the lane while the unit suite keeps exercising it, and adding a second matrix
-   dimension that runs it against the public 0.6.0 wheel. The recommendation is
-   the former, because the latter reintroduces exactly the released-package
-   assertion rejected above; the owner decides. Under route A this question is
-   nearly settled by the measurement — the historical pair's successor can only
-   ever be 0.6.0 — but the second matrix dimension remains expressible, so it is
-   still a decision and not a deduction.
+   dimension that runs it against the public 0.6.0 wheel. Under route A this
+   question is nearly settled by the measurement — the historical pair's successor
+   can only ever be 0.6.0 — but the second matrix dimension remains expressible, so
+   it is a decision and not a deduction.
+
+   **Answered: dropped from the lane, kept in the unit suite.** The second matrix
+   dimension is rejected because it reintroduces exactly the released-package
+   assertion rejected in *Why the obvious fix is forbidden*. The scenario file is
+   not deleted and not edited, and scope item 6 requires its byte-identity to be
+   evidenced by digest, so "dropped from the lane" must not become "quietly stopped
+   being exercised".
 
 Stop also if: the lane can only be made green by relaxing an identity comparison
 or waiving a diagnostic; the new scenario cannot be expressed without editing the
