@@ -2,7 +2,7 @@
 id = "VREC-TCM-002"
 type = "verification_record"
 title = "Verification candidate for WO-TCM-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/technical-communication/evidence/WO-TCM-001/
 evaluator_evidence_path = "docs/engineering/technical-communication/evidence/VREC-TCM-002-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-25T10:51:11Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-TCM-001"]
 conforms_to = ["VER-TCM-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-25T10:51:11Z"
+decided_by = "assurance-owner"
+reason = "The accountable assurance owner accepted this record on 2026-08-25 with \"I accept VREC-TCM-002, you can transition it to verified, commit, push and PR I will merge\". The decision was taken with the record's disclosed limitation in front of it: VER-TCM-001's manual-assessment conditions are NOT evidenced, because the two independent reviewer judgments over rendered corpus output do not exist and no retained manual review form covers them. The owner chose to verify with that gap disclosed rather than record the reviews first or reject. The semantic and operator-comprehension acceptance conditions of VER-TCM-001 are therefore accepted residual risk on this record, not a claim of pass. Every bound field was re-measured immediately before this transition: candidate f7b69d0 is an ancestor of the branch tip and carries WO-TCM-001 as implemented; the bound evidence blob is 07603e0a at 13854 bytes, byte-identical at the candidate and on origin/main; artifact_snapshot_sha256 re-derives to bae0e84a in an independent full clone detached at the candidate with a matching directory basename; the evaluator packet is 873 CR-free bytes at fcfc1447; the graph at the candidate measures 845 artifacts, 0 errors, 50 pre-existing maintenance warnings, with governing doctor exit 0 at 87 PASS and 0 FAIL. This transition grants no release, tag, publication, or deployment authority. The record binds f7b69d0, so its provenance survives only a true merge; a squash or rebase would orphan the bound commit."
 +++
 
 # Verification Record Candidate
