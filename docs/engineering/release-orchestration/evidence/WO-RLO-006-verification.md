@@ -234,6 +234,46 @@ are a pass condition nowhere in this packet.
 | Independent probe, both interpreters | section 4 |
 | `git diff --exit-code`, `git status --porcelain=v1 --untracked-files=all` | clean, 0 entries, before and after every measurement |
 
+The credential-free rehearsal was also run locally on CPython 3.11.9, `--mode candidate`,
+from this checkout:
+
+```
+Publication rehearsal: REHEARSED
+Platform: Windows   Mode: candidate
+Candidate: 1a67776aa005a9984578243f294bbd9b96a21fc5
+Verification plan: derivation-from-the-first-distribution-set
+Inherited checkout: core.autocrlf=true, so the candidate checkout converts line endings
+- executed candidate-unit-suite: candidate unit suite passed (1016 tests)
+- executed build-determinism-comparison: both distribution sets compared byte-identical
+- executed teardown: 7556 derived paths removed without following a link
+exit 0
+```
+
+Twenty-two mechanics executed and the same two excluded, with the same reasons, as the
+hosted legs. The worktree was clean afterwards.
+
+`1a67776` is **this file's own commit's parent**, not the candidate: the rehearsal requires a
+clean worktree, so it could only run once this file was committed, and this section is what
+was added afterwards. The two commits differ in this file and in nothing else — no program,
+test, fixture, workflow or artifact byte moves between them — so the reading describes the
+candidate's executable content exactly. It is recorded with the commit it actually named
+rather than re-attributed.
+
+One earlier local invocation, made before this file was committed, is worth recording
+because it is the residue control working rather than a defect:
+
+```
+Publication rehearsal: FAILED
+- failed teardown: Windows: RehearsalError - teardown left 1 untracked or modified
+  entries: ['?? docs/engineering/release-orchestration/evidence/WO-RLO-006-verification.md']
+```
+
+The repaired teardown refused to report success while an untracked file it had not created
+was present in the repository worktree — the `SPEC-RLO-005` rule 19 obligation not to leave
+residue silently, and the property `VER-RLO-005` states as "always leaves the repository
+worktree clean". It is reported here so that a reader who finds that transcript does not
+read it as a failure of the repair.
+
 ## 7. Gate results at the candidate
 
 Every gate `AGENTS.md` names was run. The governing verdicts come from the released `0.6.0`
