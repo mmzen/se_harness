@@ -1,0 +1,1849 @@
+{
+  "applied": false,
+  "counts": {
+    "mapped": 248,
+    "skipped": 0,
+    "unmatched": 4
+  },
+  "files": {
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-006.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-007.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-007.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-010.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-011.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-012.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "inspection-and-automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-006.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-visual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-provenance-and-deployment-test",
+      "state": "mapped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-002.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "automated-content-boundary-and-manual-semantic-review",
+      "state": "mapped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-workflow-policy-test-and-deployment-review",
+      "state": "mapped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-002.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-004.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-architecture-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-007.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-009.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-010.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-011.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-012.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-release-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-013.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-014.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-015.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-016.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-017.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-018.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-019.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "automated-inspection-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-020.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-021.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "automated-inspection-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-022.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "manual-review-and-static-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-023.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "manual-walkthrough-and-command-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-024.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-reader-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-025.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-static-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-026.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-link-and-content-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-027.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-documentation-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-028.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-reader-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-029.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-contract-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-030.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-031.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-determinism-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-032.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-security-test-and-manual-accessibility-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-033.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-package-parity-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-034.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-035.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-036.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-037.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-038.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-039.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-040.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-041.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-042.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-043.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-044.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-accessibility-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-045.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-browser-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-046.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-047.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-accessibility-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-048.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-browser-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-049.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-050.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-browser-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-051.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-browser-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-052.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-browser-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-053.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-browser-test-and-failure-injection",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-054.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-publication-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-055.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-performance-budget-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-056.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-installation-and-workflow-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-057.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-workflow-and-runtime-identity-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-058.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-adversarial-integration-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-059.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-upgrade-and-migration-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-060.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "automated-consistency-checks-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-061.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-boundary-failure-and-transaction-tests",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-062.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-performance-budget-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-063.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-cross-platform-and-hosted-test",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-064.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-boundary-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-065.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-cross-platform-checkout-test",
+      "state": "mapped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-001.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-002.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-004.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-005.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-009.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-010.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-011.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-012.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-013.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-014.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-015.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "Automated taxonomy coverage, output-compatibility, managed-parity, and regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-016.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "Automated command, projection, determinism, no-write, distribution, and regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-017.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "Automated catalog, projection, determinism, no-write, boundary, compatibility, distribution, and regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-018.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "Automated predicate, lifecycle, relation-authority, compatibility, determinism, distribution, and regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-019.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "Automated installed-template, responsibility-boundary, README, upgrade, and regression tests plus accountable semantic review",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-020.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "Automated managed-integrity, lock-derived path-set, and content-presence tests plus accountable review of the drift and authority boundary",
+      "state": "mapped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-021.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "Automated managed-integrity, routing-content, and workflow-conformance tests plus accountable review of the authority boundary",
+      "state": "mapped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-package-provenance-test",
+      "state": "mapped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "hosted-cross-platform-installation-test",
+      "state": "mapped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-authority-boundary-and-documentation-test",
+      "state": "mapped"
+    },
+    "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-validator-and-cross-implementation-test",
+      "state": "mapped"
+    },
+    "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-installer-refusal-test",
+      "state": "mapped"
+    },
+    "docs/engineering/operating-contract-activation/requirements/REQ-OCA-001.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "artifact inspection and deterministic repository validation",
+      "state": "mapped"
+    },
+    "docs/engineering/operating-contract-activation/requirements/REQ-OCA-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated target-type, lifecycle, reachability, policy, migration, parity, and regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-005.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "architecture-review",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "inspection-and-automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-004.md": {
+      "mapped": [
+        "inspection",
+        "demonstration"
+      ],
+      "original": "inspection-and-end-to-end",
+      "state": "mapped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-005.md": {
+      "mapped": [
+        "analysis"
+      ],
+      "original": "manual-assessment",
+      "state": "mapped"
+    },
+    "docs/engineering/release-contract-disposition/requirements/REQ-RCD-001.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "artifact-graph validation and exact lineage inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-resolution-and-failure-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-schema-cli-and-compatibility-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-003.md": {
+      "mapped": [
+        "analysis"
+      ],
+      "original": "automated-exact-candidate-replay",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-github-state-and-fixture-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-005.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "automated-policy-preflight-and-authorized-deployment-review",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-006.md": {
+      "mapped": [
+        "test",
+        "analysis"
+      ],
+      "original": "automated-provenance-pages-policy-and-replay-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-007.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-state-machine-and-failure-injection-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-result-schema-and-public-smoke-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-009.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-package-template-and-cli-boundary-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-010.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-repository-binder-and-schema-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-011.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-workflow-policy-state-and-failure-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-012.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-workflow-policy-and-state-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-013.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-schema-binding-and-failure-test",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-014.md": {
+      "mapped": [
+        "analysis"
+      ],
+      "original": "hosted-exact-recipe-replay",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-015.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-016.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-boundary-and-failure-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-workflow-contract-and-integration-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-schema-provenance-and-boundary-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-004.md": {
+      "original": "automated-active-surface-invariant",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-005.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "policy-validation-and-human-review",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-006.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "deterministic-inspection-test-and-human-review",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-007.md": {
+      "mapped": [
+        "inspection",
+        "demonstration"
+      ],
+      "original": "disposable-repository-rehearsal-and-manual-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-schema-provenance-publication-and-negative-boundary-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-009.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-cross-platform-checkout-and-provenance-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-010.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-lifecycle-provenance-and-negative-authority-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-011.md": {
+      "original": "automated-release-version-lifecycle-matrix",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-012.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-projection-provenance-and-zero-write-negative-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-013.md": {
+      "mapped": [
+        "analysis"
+      ],
+      "original": "automated-hosted-predecessor-assessment-view-and-exact-refusal-replay",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-014.md": {
+      "original": "automated-python311-linux-windows-failure-injection-matrix",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-015.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-publication-view-provenance-and-zero-mutation-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-016.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-contract-and-boundary-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-017.md": {
+      "mapped": [
+        "demonstration"
+      ],
+      "original": "automated-cross-version-migration-rehearsal",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-018.md": {
+      "original": "automated-contract-consumer-conformance",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-019.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-rejected-history-and-succession-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-020.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-interface-and-adversarial-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-021.md": {
+      "mapped": [
+        "test",
+        "analysis"
+      ],
+      "original": "automated-schema-and-replay-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-022.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-workflow-contract-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-023.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-024.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-adversarial-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-025.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-026.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-architecture-conformance-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-009.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "document-review-and-automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-001.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "static-inspection-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-002.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "evidence-reconciliation-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-003.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "graph-validation-link-check-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-001.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-002.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-security-review",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-004.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-005.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-human-review",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-006.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-human-review",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-008.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-human-review",
+      "state": "mapped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-009.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-001.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-002.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-004.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-manual-review",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-001.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-004.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-006.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "snapshot-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-007.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-008.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-review",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "validator, preflight, template, and lifecycle tests",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "metadata, decision-rights, negative-path, and release-regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-003.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "deterministic inspection queue, suggestion, coverage-state, aggregate, and rendering tests",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "legacy repository, lifecycle, governance-only, and no-inference regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "managed parity, package, fresh-install, upgrade, CLI, documentation, and full regression tests",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-001.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-002.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-006.md": {
+      "mapped": [
+        "inspection"
+      ],
+      "original": "inspection",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-001.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-002.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-003.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-004.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-005.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-006.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-007.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-008.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-009.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-010.md": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-test",
+      "state": "mapped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-011.md": {
+      "mapped": [
+        "test",
+        "inspection"
+      ],
+      "original": "automated-test-and-human-review",
+      "state": "mapped"
+    }
+  },
+  "schema": "se-harness-verification-method-migration-v1"
+}

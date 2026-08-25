@@ -212,3 +212,131 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
+    """Evidence for REQ-AUT-003 (built, not applied here) and REQ-AUT-005 (WO-AUT-002)."""
+
+    def test_definition_gates_carry_the_authoring_predicate(self) -> None:
+        from se_harness.workflow_contract import load_validated_contracts
+
+        _, _, _, _, gates = load_validated_contracts()
+        self.assertIn("QGP-G1-AUTHORING", [p["id"] for p in gates["QG-G1-DEFINITION"]["predicates"]])
+        self.assertIn("QGP-G2-AUTHORING", [p["id"] for p in gates["QG-G2-ARCHITECTURE"]["predicates"]])
+
+    def test_approval_is_refused_while_a_placeholder_or_an_open_decision_remains(self) -> None:
+        code, _, error = self.invoke(
+            "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-002", "--quiet"
+        )
+        self.assertEqual(0, code, error)
+        path = self.root / "docs/engineering/product/requirements/REQ-002.md"
+        text = path.read_text(encoding="utf-8")
+        text = text.replace('derives_from = ["CAP-xxx"]', 'derives_from = ["CAP-001"]')
+        text = text.replace('source = "<stakeholder, standard clause, incident, or artifact ID>"', 'source = "CAP-001"')
+        text = text.replace('measure = "<value and unit, for a quality requirement>"', 'measure = "n/a"')
+        path.write_text(text, encoding="utf-8")
+        for relative, relation in (("specifications/SPEC-001.md", "specifies"), ("verification/VER-001.md", "verifies")):
+            covering = self.root / "docs/engineering/product" / relative
+            covering.write_text(
+                covering.read_text(encoding="utf-8").replace(f'{relation} = ["REQ-001"]', f'{relation} = ["REQ-001", "REQ-002"]'),
+                encoding="utf-8",
+            )
+
+        def approve() -> tuple[int, str]:
+            code, output, error = self.invoke(
+                "transition", str(self.root), "--set", "REQ-002=approved", "--decision", "REQ-002=requirements-steward", "--apply"
+            )
+            return code, output + error
+
+        code, message = approve()
+        self.assertEqual(1, code)
+        self.assertIn("QGP-G1-AUTHORING", message)
+        self.assertIn("<Observable obligation>", message)
+        self.assertIn('status = "draft"', path.read_text(encoding="utf-8"))
+
+        filled = path.read_text(encoding="utf-8")
+        for placeholder, value in (
+            ('title = "<Observable obligation>"', 'title = "List the manifest"'),
+            ('owners = ["<product/domain owner>"]', 'owners = ["product-owner"]'),
+            ('statement = "WHEN <event>, THE SYSTEM SHALL <observable response>."', 'statement = "WHEN a work order is selected, THE SYSTEM SHALL list its reading manifest."'),
+            ("# Requirement: <title>", "# Requirement: List the manifest"),
+            ("- Trigger: <the observable condition or event; \"always\" for an invariant>", "- Trigger: a work order is selected"),
+            ("- Response: <what the reader can check>", "- Response: the manifest is listed"),
+            ("- On failure: <what happens when the response cannot be given>", "- On failure: the command exits 1"),
+            ("<What this obligation relies on; not how it is built — that is a specification's job.>", "None."),
+        ):
+            self.assertIn(placeholder, filled, placeholder)
+            filled = filled.replace(placeholder, value)
+        # keep the acceptance/<REQ-ID>.feature sentence: it is inside inline code and must not count
+        path.write_text(filled.replace("## Open decisions\n\nNone.", "## Open decisions\n\nWhether the manifest is sorted."), encoding="utf-8")
+        code, message = approve()
+        self.assertEqual(1, code)
+        self.assertIn("open decision", message)
+        self.assertIn("sorted", message)
+
+        path.write_text(filled, encoding="utf-8")
+        code, message = approve()
+        self.assertEqual(0, code, message)
+        self.assertIn('status = "approved"', path.read_text(encoding="utf-8"))
+
+    def test_migration_maps_strings_keeps_originals_and_is_idempotent(self) -> None:
+        import importlib.util
+        import subprocess
+        import sys
+
+        script = REPOSITORY_ROOT / "scripts/migrate_verification_methods.py"
+        spec = importlib.util.spec_from_file_location("migrate_verification_methods", script)
+        module = importlib.util.module_from_spec(spec)
+        sys.dont_write_bytecode = True
+        try:
+            spec.loader.exec_module(module)
+        finally:
+            sys.dont_write_bytecode = False
+        self.assertEqual(["test"], module.map_value("automated-test"))
+        self.assertEqual(["test", "inspection"], module.map_value("automated-test-and-manual-review"))
+        self.assertEqual(["analysis"], module.map_value("hosted-exact-recipe-replay"))
+        self.assertEqual(["demonstration"], module.map_value("inspection-and-end-to-end")[1:])
+        self.assertEqual([], module.map_value("automated-active-surface-invariant"))
+
+        self.set_front_matter(verification_method='"automated-test-and-manual-review"')
+        before = self.requirement.read_text(encoding="utf-8")
+        completed = subprocess.run(
+            [sys.executable, str(script), "--root", str(self.root)], capture_output=True, text=True, check=True
+        )
+        self.assertEqual(before, self.requirement.read_text(encoding="utf-8"), "dry run must not write")
+        report = json.loads(completed.stdout)
+        entry = report["files"]["docs/engineering/product/requirements/REQ-001.md"]
+        self.assertEqual({"state": "mapped", "original": "automated-test-and-manual-review", "mapped": ["test", "inspection"]}, entry)
+
+        subprocess.run([sys.executable, str(script), "--root", str(self.root), "--apply"], capture_output=True, text=True, check=True)
+        after = self.requirement.read_text(encoding="utf-8")
+        self.assertIn('verification_method = ["test", "inspection"]', after)
+        self.assertIn('verification_notes = "automated-test-and-manual-review"', after)
+        errors, warnings = self.diagnostics()
+        self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
+        self.assertNotIn("W-AUT-004", {item.code for item in warnings})
+        subprocess.run([sys.executable, str(script), "--root", str(self.root), "--apply"], capture_output=True, text=True, check=True)
+        self.assertEqual(after, self.requirement.read_text(encoding="utf-8"), "second run must be a no-op")
+
+        self.requirement.write_text("+++\nid = \"REQ-001\"\nverification_method = \"x\"\n", encoding="utf-8")
+        completed = subprocess.run([sys.executable, str(script), "--root", str(self.root)], capture_output=True, text=True)
+        self.assertEqual(2, completed.returncode)
+        self.assertIn("refusing", completed.stderr)
+
+    def test_repository_dry_run_report_is_retained_and_matches_a_fresh_run(self) -> None:
+        import subprocess
+        import sys
+
+        retained = REPOSITORY_ROOT / "docs/engineering/artifact-authoring/evidence/WO-AUT-002/verification-method-mapping.json"
+        self.assertTrue(retained.is_file())
+        report = json.loads(retained.read_text(encoding="utf-8"))
+        self.assertFalse(report["applied"])
+        self.assertEqual(0, report["counts"]["skipped"])
+        completed = subprocess.run(
+            [sys.executable, str(REPOSITORY_ROOT / "scripts/migrate_verification_methods.py"), "--root", str(REPOSITORY_ROOT)],
+            capture_output=True, text=True, check=True,
+        )
+        fresh = json.loads(completed.stdout)
+        self.assertEqual(report["counts"], fresh["counts"])
+        # the repository itself is untouched: every requirement still carries the string form
+        self.assertEqual([], [f for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md") if re.search(r"^verification_method = \[", f.read_text(encoding="utf-8"), re.MULTILINE)])

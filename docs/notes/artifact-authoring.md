@@ -42,6 +42,21 @@ on failure), Assumptions and dependencies, Acceptance examples, Open
 decisions. Executable scenarios go to `acceptance/<REQ-ID>.feature` and are
 named by the verification contract.
 
+## Approval predicates and the migration
+
+Two predicates, `QGP-G1-AUTHORING` and `QGP-G2-AUTHORING`, fail a definition's
+approval when the file still carries a template placeholder (`<…>` outside
+code) or when its `Open decisions` section says anything but `None`. They
+are evaluated by `harnessctl transition` when a definition leaves `draft`.
+
+`scripts/migrate_verification_methods.py` maps free-text
+`verification_method` strings to the closed vocabulary and keeps the original
+in `verification_notes`. It is a dry run by default and prints a mapping
+report; `--apply` writes. It has not been run on this repository: the
+released 0.6.0 evaluator that governs it requires the string form. Running
+it, and promoting the string form from `W-AUT-004` to an error, belong to the
+transaction that adopts a released successor as this repository's evaluator.
+
 ## Why a policy and not a skill
 
 `ADR-AUT-001`: rules in a skill apply only while the skill runs; rules in a
