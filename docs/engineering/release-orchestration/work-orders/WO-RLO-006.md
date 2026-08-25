@@ -68,6 +68,46 @@ The measurement quoted in that start reason is a direct probe of the primitive o
 this workstation rather than an inference from release notes, and it is recorded
 in full in the retained evidence.
 
+### What the measurement corrected
+
+The implementation is committed as `ceab133e64893ae98ccb0bc5167f5086ff185d6e`.
+Measuring the unrepaired program directly showed that the two consequences this
+work order describes are not symmetrical, and one sentence written while it was
+`draft` is wrong. The sections below are left as the owner approved them and the
+recorded lifecycle reasons are immutable decision history, so the correction is
+stated here rather than by editing either.
+
+*The defect* and the start reason both say the recursion "deletes the target's
+contents" or "deletes a path outside the rehearsal root". That is true of a
+junctioned rehearsal **root** and false of a junction **inside** the derived tree.
+
+- A junctioned root is the data-loss case, and it has no second line of defence:
+  a junctioned root makes the target the reference the containment guard compares
+  against, so every path inside the target is "within the root". Measured on
+  CPython 3.11.9 on Windows against the unrepaired program, the target was
+  emptied — `keep.txt`, `precious/deeper.txt` and `precious` deleted, four paths
+  reported, then the junction removed.
+- A junction inside the derived tree is the residue case. The walk does recurse
+  into it, which is the `SPEC-RLO-005` rule 19 failure, but the containment guard
+  then refuses the first path reached inside the target because that path's parent
+  canonicalizes outside the root. Measured: the remover raised "teardown refused
+  a path outside the rehearsal root", the target and its content survived, and the
+  derived tree was left behind. The effect is an aborted teardown leaving residue,
+  not a deletion outside the root.
+
+Neither correction changes the repair, the scope, or the conclusion that the
+defect is real and pre-existing. It changes which sentence may be quoted as the
+harm, and the retained evidence carries a test that pins the guard's remaining
+behaviour so the distinction cannot be lost again.
+
+One required reading came back the opposite way from the local one, and the
+answer is recorded rather than guessed, as *In scope* required. The hosted
+`windows-2022` lane at the pinned 3.11 was **green** before this fix, not red:
+run `32853109486` on `main` at `826c72c` read `REHEARSED` with the candidate unit
+suite passing at 1002 tests on both runner platforms. The defect was latent
+there, not failing. The retained evidence states what that reading does and does
+not establish.
+
 This work order exists because of an owner routing decision taken on 2026-08-25
 while `WO-RLS-011` was qualifying the 0.7.0 candidate. That work order measured
 the defect below and could not repair it: `.github/` is outside its approved
