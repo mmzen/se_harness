@@ -83,6 +83,17 @@ paths left untouched: `se_harness/cli.py`, `docs/notes/harnessctl-reference.md`.
    cannot be smuggled under `implementation-write` and a `risk-raise` effect
    cannot touch anything but a risk file. The spec did not name the class.
 
+## Deviation acceptances
+
+Recorded on 2026-08-25 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-RSK-002` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 — check named `risk-policy` with `C-RSK-001` in its detail | Accept: the code is visible in every doctor and preflight line; the name follows the convention of every other check. |
+| 2 — explicit `risk-raise` effect class | Accept: stricter than the spec's wording and tested in both directions. |
+
 ## Note on the first full-suite run
 
 The first full run failed six tests for two causes, both in test code: the
