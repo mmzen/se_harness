@@ -25,6 +25,13 @@ a read-only review of the directive surface at commit `0276dd7` on 2026-08-25.
 - `VER-ADS-001`: verify self-loop absence, dialect equality, manifest completeness, diagnostics, digest recomputation, and scope wording.
 - `WO-ADS-001`: implement the bounded first increment after approval and an explicit start decision.
 
+## Second increment (draft)
+
+- `REQ-ADS-007`: keep the reading surface bounded and free of retired files; supersedes the pointer clause of `REQ-IAR-020`.
+- `SPEC-ADS-002`: closed manifest, minimal card, owner region without the retired context file.
+- `VER-ADS-002`: evidence for the bounded reading surface.
+- `WO-ADS-002`: close the manifest, minimise the card, retire the repository-context file.
+
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.
 
