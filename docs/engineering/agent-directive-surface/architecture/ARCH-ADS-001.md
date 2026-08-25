@@ -2,7 +2,7 @@
 id = "ARCH-ADS-001"
 type = "architecture"
 title = "Prose guarantees move into the workflow contract, result renderer, preflight, and CI verifier"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -15,6 +15,12 @@ assessed_by = "technical-owner"
 [relations]
 addresses = ["REQ-ADS-001", "REQ-ADS-002", "REQ-ADS-003", "REQ-ADS-004", "REQ-ADS-005", "REQ-ADS-006"]
 conforms_to = ["SPEC-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: Prose guarantees move into the workflow contract, result renderer, preflight, and CI verifier

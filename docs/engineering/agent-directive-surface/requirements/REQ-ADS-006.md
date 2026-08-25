@@ -2,7 +2,7 @@
 id = "REQ-ADS-006"
 type = "requirement"
 title = "The managed router states the scope of its own obligations"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN the managed router is rendered, THE SYSTEM SHALL state that `H
 verification_method = "manual-review"
 [relations]
 derives_from = ["CAP-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: The managed router states the scope of its own obligations

@@ -2,7 +2,7 @@
 id = "REQ-ADS-001"
 type = "requirement"
 title = "A blocked or failed checkpoint names a distinct corrective step"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN `harnessctl check` reports a blocked or failed outcome for a s
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: A blocked or failed checkpoint names a distinct corrective step

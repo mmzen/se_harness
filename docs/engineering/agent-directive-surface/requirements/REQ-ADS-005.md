@@ -2,7 +2,7 @@
 id = "REQ-ADS-005"
 type = "requirement"
 title = "A restitution block carries a recomputable digest"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN `harnessctl check --json` renders a restitution block, THE SYS
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: A restitution block carries a recomputable digest

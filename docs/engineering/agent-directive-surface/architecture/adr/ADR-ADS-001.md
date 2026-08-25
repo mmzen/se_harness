@@ -2,13 +2,19 @@
 id = "ADR-ADS-001"
 type = "adr"
 title = "Carry failure renderings and next-step resolution in the workflow contract"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 decides = ["ARCH-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Carry failure renderings and next-step resolution in the workflow contract

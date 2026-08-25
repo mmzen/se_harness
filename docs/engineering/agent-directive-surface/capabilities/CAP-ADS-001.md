@@ -2,13 +2,19 @@
 id = "CAP-ADS-001"
 type = "capability"
 title = "Give a coding agent one tool-computed next step and one bounded reading set"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 derives_from = ["INT-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Give a coding agent one tool-computed next step and one bounded reading set

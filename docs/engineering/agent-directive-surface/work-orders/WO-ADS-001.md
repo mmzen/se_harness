@@ -2,7 +2,7 @@
 id = "WO-ADS-001"
 type = "work_order"
 title = "Implement enforced failure rendering, shared next-step resolution, the operating card, trap diagnostics, the restitution digest, and router scope"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -52,6 +52,12 @@ implements = ["REQ-ADS-001", "REQ-ADS-002", "REQ-ADS-003", "REQ-ADS-004", "REQ-A
 specifications = ["SPEC-ADS-001"]
 architecture = ["ARCH-ADS-001", "ADR-ADS-001"]
 verification = ["VER-ADS-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Implement enforced failure rendering, shared next-step resolution, the operating card, trap diagnostics, the restitution digest, and router scope

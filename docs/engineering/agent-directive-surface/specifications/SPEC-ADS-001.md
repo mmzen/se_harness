@@ -2,13 +2,19 @@
 id = "SPEC-ADS-001"
 type = "specification"
 title = "Failure rendering, next-step resolution, reading manifest, trap diagnostics, restitution digest, and router scope"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 specifies = ["REQ-ADS-001", "REQ-ADS-002", "REQ-ADS-003", "REQ-ADS-004", "REQ-ADS-005", "REQ-ADS-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Failure rendering, next-step resolution, reading manifest, trap diagnostics, restitution digest, and router scope

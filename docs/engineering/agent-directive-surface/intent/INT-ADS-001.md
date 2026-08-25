@@ -2,12 +2,18 @@
 id = "INT-ADS-001"
 type = "intent"
 title = "Make agent directives enforced, bounded, and consistent"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "product-owner"
 +++
 
 # Intent: Make agent directives enforced, bounded, and consistent

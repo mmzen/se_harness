@@ -2,13 +2,19 @@
 id = "VER-ADS-001"
 type = "verification"
 title = "Independent evidence for an enforced, bounded, consistent directive surface"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 verifies = ["REQ-ADS-001", "REQ-ADS-002", "REQ-ADS-003", "REQ-ADS-004", "REQ-ADS-005", "REQ-ADS-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T10:36:12Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Independent evidence for an enforced, bounded, consistent directive surface
