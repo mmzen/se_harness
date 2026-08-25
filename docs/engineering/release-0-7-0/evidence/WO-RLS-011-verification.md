@@ -10,30 +10,52 @@ or adopt anything, and no figure in it carries formal authority.
 
 ## Evidence status and authority boundary
 
-This file records the **preliminary working-tree stage** of `WO-RLS-011` only. Every
-reading below was taken against the operational working tree on branch
-`chore/wo-rls-011-0-7-0-qualification`, whose committed parent is
-`826c72cfdaa3401cccf06c67943c5315221c3f72` and which carries eight uncommitted in-scope
-modifications. **No candidate commit exists.** The exact-candidate replay stage is
-deliberately kept separate and is not recorded here; the sections that require an exact
-commit are listed under *Deferred to the exact candidate* with the precise reason each is
-not yet measurable.
+This file records **two stages of `WO-RLS-011`, in that order, and nothing else.**
+
+**Stage 1 is the preliminary working-tree stage**: every section from *Baseline and current
+identity* down to *Planned aggregate VREC inputs*. Every reading there was taken against
+the operational working tree on branch `chore/wo-rls-011-0-7-0-qualification`, whose
+committed parent is `826c72cfdaa3401cccf06c67943c5315221c3f72` and which carried eight
+uncommitted in-scope modifications. **No candidate commit existed when those readings were
+taken.** The binding block at the top of this file is stage 1's binding: it names the
+`handoff` gate reading and the artifact snapshot that reading cleared against, both of which
+are historical facts and neither of which is re-pointed by stage 2.
+
+**Stage 2 is the exact-candidate stage**: every section from *Exact-candidate stage:
+identity and binding* onward, measured after the candidate commit existed.
 
 **This file is committed as part of the candidate it describes, so it structurally cannot
 name the candidate's own commit hash.** That is why the split exists rather than being a
 convenience: the exact-candidate figures are measured after the commit and retained in the
-later governance commit that carries the aggregate record, which is also what keeps this work
-order's constraint against mutating the candidate after exact-commit replay satisfiable. Any
-figure here that a later reading supersedes must be read as the preliminary one, not
-corrected in place.
+later governance commit that carries them, which is also what keeps this work order's
+constraint against mutating the candidate after exact-commit replay satisfiable.
 
-Nothing in this stage was authorized beyond the declared execution-scope paths, six as
-approved and seven as amended on 2026-08-25. No
-promotable distribution was built, no branch was pushed, no tag was created or moved, no
-GitHub or PyPI publication or Pages deployment was attempted, no credential was used, no
+**Stage 2 extends this file rather than opening a second one, and that is a contract
+constraint, not a stylistic choice.** `REL-SEH-015` clause 10 fixes the aggregate at
+thirty-seven work-order-keyed evidence paths, "the thirty-six existing paths measured at the
+drafting commit plus the one `WO-RLS-011` retains", singular. A second keyed file under this
+work order would make thirty-eight and falsify an approved contract that can no longer be
+widened in place.
+
+**Stage 1 is not corrected in place, and stage 2 supersedes it wherever the two speak to the
+same quantity.** Read every stage 1 figure as the preliminary one: where stage 2 measures
+the same thing, stage 2's figure stands; where stage 2 is silent, stage 1 stands
+unqualified. *Exact-candidate stage: deferred work discharged* states row by row which
+entries of *Deferred to the exact candidate* stage 2 closed and which remain open, with the
+reason each remaining one is still open.
+
+Nothing in either stage was authorized beyond the declared execution-scope paths, six as
+approved and seven as amended on 2026-08-25, plus exactly three later acts the accountable
+engineering owner decided explicitly on 2026-08-25 with the exact-candidate readings in
+front of them: the candidate commit, this work order's `in_progress` to `implemented`
+transition, and the push of the working branch. No promotable distribution was built, no tag
+was created or moved, no GitHub or PyPI publication or Pages deployment was attempted, no
 maintenance line was touched, and the root evaluator and root lock were not changed.
 `REL-SEH-015` was not touched. `VREC-SEH-013` and `RLS-SEH-013` were neither prepared nor
-transitioned.
+transitioned. *Unperformed transitions and external actions* is stage 1's list and remains
+accurate for stage 1; *Exact-candidate stage: unperformed transitions and external actions*
+is the corresponding list for stage 2 and is the one that describes the state this file is
+committed in.
 
 ## Baseline and current identity
 
@@ -770,3 +792,514 @@ For `VREC-SEH-013`, on the whole-`gates` basis `REL-SEH-015` states:
 
 Every one of those three counts must be re-measured against the candidate at capture. No
 figure in this file may be carried forward as scope.
+
+## Exact-candidate stage: identity and binding
+
+Everything from here to the end of this file is stage 2. It was measured after the candidate
+commit existed, and it supersedes any stage 1 figure that speaks to the same quantity.
+
+| Item | Identity |
+| --- | --- |
+| Candidate commit | `f76da5727e86fc53375bfa5cafcfcbf168c7456e` |
+| Candidate tree | `52fdae8c6e090f62341df8b87c52fc308d5132f7` |
+| Candidate parent | `826c72cfdaa3401cccf06c67943c5315221c3f72`, the true merge of pull request #154 |
+| Candidate branch | `chore/wo-rls-011-0-7-0-qualification` |
+| Candidate product version | `0.7.0` in `pyproject.toml`, `se_harness/__init__.py`, and the current `README.md` install example |
+| Governing evaluator, unchanged | exact public `se-harness` 0.6.0, as `.engineering-harness.toml` records |
+| Artifact snapshot at the candidate commit, CRLF checkout | `cffd7b4fa038f03a01a6e31bde09a347dc1bd6db5f36ed1406923802ed7c411a` |
+| Artifact snapshot after the `implemented` transition, CRLF checkout | `0a507c964fbf3fd0df72b8864967a96c0d00515408f432c4bfb6f6e0e4c2467e` |
+| Artifact snapshot in the governance commit, CRLF checkout | `ee4e1c7e02be4b48403d6c4552ad6887ed7ab168ed18584b34adec1f529cbe6b` |
+
+The candidate is exactly its parent plus **eight changed files**, `835` insertions and `11`
+deletions: `README.md`, `docs/engineering/README.md`, this evidence file,
+`docs/engineering/release-0-7-0/work-orders/WO-RLS-011.md`,
+`docs/notes/developing-se-harness.md`, `pyproject.toml`, `se_harness/__init__.py`, and
+`tests/test_release_qualification.py`. All eight fall inside the seven declared
+execution-scope paths; `docs/engineering/release-0-7-0/` is a directory and covers two of
+them. **No held bytes leaked in**: the diff contains nothing from any work order the
+approved `gates` does not name.
+
+**The binding block at the top of this file is not re-pointed, and that is deliberate.** It
+names the `handoff` gate reading that authorized the `implemented` transition, together with
+the snapshot that reading cleared against. Re-pointing it would destroy the record of what
+the owner actually decided on. The three snapshots above are stated as measurements instead,
+and the second and third are explained below.
+
+## Exact-candidate stage: the artifact snapshot is a per-checkout figure, not a per-commit one
+
+`formal_snapshot_digest` hashes each artifact's bytes **as they sit in the working tree**,
+via `read_bytes()`, in relative-posix order with each path and content length framed. This
+checkout has `core.autocrlf=true`, so every artifact is CRLF on disk while the committed blob
+is LF. Measured, not inferred, by checking the same commit out twice into throwaway worktrees:
+
+| Checkout of `f76da5727e86fc53375bfa5cafcfcbf168c7456e` | Snapshot digest |
+| --- | --- |
+| `core.autocrlf=true`, CRLF on disk | `cffd7b4fa038f03a01a6e31bde09a347dc1bd6db5f36ed1406923802ed7c411a` |
+| `core.autocrlf=false`, `core.eol=lf`, LF on disk | `16e1ef528a74ad3131aa7162686a63cd09644021e0b5514296223e76b6798a9b` |
+
+**Consequence for `VREC-SEH-013`, stated now rather than discovered at capture: a
+`formal_snapshot_sha256` is a statement about one checkout of one commit on one platform, not
+about the commit.** The hosted `ubuntu-latest` lane checking out this same candidate will
+compute `16e1ef52…`, not `cffd7b4f…`, and neither figure is wrong. Any record that binds a
+snapshot digest must therefore say which checkout produced it, and a reviewer comparing a
+Windows figure against a Linux figure is comparing two different measurements. Both worktrees
+used to take this reading were removed afterwards.
+
+The two later snapshots move for reasons that are fully accounted for:
+
+- `0a507c96…` differs from `cffd7b4f…` by exactly the `[[lifecycle_events]]` entry the
+  `implemented` transition appended to `WO-RLS-011.md`. Nothing else in the artifact set
+  changed.
+- `ee4e1c7e…` differs from `0a507c96…` by exactly the `## Lifecycle` prose correction the
+  governance commit makes to the same file.
+- **This file is not an artifact** — it carries no `+++` front matter and the released
+  evaluator's loader does not enumerate it, confirmed by measurement — so extending it moves
+  no snapshot. That is what makes stating `ee4e1c7e…` inside the file it describes
+  non-circular.
+
+Re-measured after the governance commit's edits and before it was written: `validate` still
+reads **887 artifacts, 0 errors, 50 warnings**.
+
+## Exact-candidate stage: governing readings from the released 0.6.0 evaluator
+
+Every reading in this section was taken with the exact independently installed public
+`se-harness` 0.6.0 evaluator, from outside the checkout, in isolated mode, against the clean
+candidate commit. The in-tree CLI is refused for root operations by mutation guard `MG005` on
+runtime identity, which is the boundary working as designed and not a defect.
+
+| Reading | Result |
+| --- | --- |
+| `validate` | **PASS** — 887 artifacts, 0 errors, 50 warnings, every plane at `E0` |
+| `inspect` | 887 artifacts, 3235 relations, **167 findings: 0 error, 64 warning, 103 info** |
+| `doctor` | **87 PASS, 0 FAIL** |
+| `preflight --phase review` | **PASS** |
+| Managed-root `upgrade` plan | **36 files, 36 unchanged** |
+| `validate_release_distributions.py` | **PASS**, one distribution-bearing record |
+| `check_portable_release_surface.py --wheel … --repository .` | **PASS** |
+| `validate_governor_transition.py plan` | **PASS**, `transition_required: false` |
+| `rehearse-recovery` | **PASS** — synthetic 0.7.0, 7 stages, 3 negative cases, every restoration invariant true, no external action |
+| `check --checkpoint handoff` | **Completed**, naming `DR-WO-COMPLETE` |
+
+The 64 `inspect` warnings decompose as 50 validator warnings — 21 `W013`, 14 `W014`, 15
+`W015` — plus 14 derived warnings: 4 `W-HEX-002`, 9 `W-HEX-003`, 1 `W-REV-003`. All 50 are
+the pre-existing maintenance population stage 1 dispositioned; none is new at the candidate.
+
+The governor-succession plan is the reading that matters most for the release boundary, so its
+identities are recorded in full. Base and target both resolve to the same governor: lock
+schema 3, lock digest
+`abcb1fe70b0eab96b106378bc1549b11e65cf5fe23d9c4cafccfdd28a3bf3f79`, evaluator
+`se_harness-0.6.0-py3-none-any.whl` at archive digest
+`2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7` with payload manifest
+`se-harness-installed-payload-v1` at
+`c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42`. The plan's
+`lock_materialization_sha256` block records the LF and Git materializations as equal at
+`abcb1fe7…` and the CRLF materialization as
+`978cebb7824b7928d95ed43897b0f848441cc4ab7403a0cdd08a55a77df2b79e`, which is the same
+line-ending sensitivity the snapshot section documents, handled explicitly by the lock format.
+`transition_required` is `false` with an empty `diagnostics` array and `applied: false`:
+**the released 0.6.0 evaluator governs the 0.7.0 candidate root with no version-specific
+exception and no succession.** `base_source` is `event`.
+
+## Exact-candidate stage: candidate-controlled readings
+
+These were taken from the candidate checkout itself and are candidate-controlled, therefore
+non-authoritative by construction. They are recorded because the work order requires the
+candidate's own `qualify` boundary behaviour, not because they carry authority.
+
+`qualify complete-candidate` — **passed**, `completion: completed`, schema
+`se-harness-release-qualification-v1`, `independence: candidate-controlled`, authority
+recorded in the payload as "evidence-only; no lifecycle or external action authorized":
+
+| Check | Subject | Result |
+| --- | --- | --- |
+| `CC001` | `candidate-runtime` | pass — candidate runtime is bound to the checkout |
+| `CC002` | `candidate-commit` | pass — HEAD and tracked tree match the candidate |
+| `CC003` | `engineering-graph` | pass — `artifacts=887; errors=0; warnings=56` |
+| `CC004` | `repository-state` | pass — target state is unchanged |
+
+Its evaluator block is the candidate-source identity reading that stage 1 deferred: role
+`candidate-source`, version `0.7.0`, distribution `se-harness`, identity digest
+`14f9dfe17e3ae551ce6be2ae652b24698540fc956db04209f78ac7a6d986e224`, `candidate_commit`
+`f76da5727e86fc53375bfa5cafcfcbf168c7456e`, empty `diagnostics`, `isolated_python: false`,
+`pythonpath_present: false`, `user_site_enabled: false`. Distribution metadata resolves
+inside the checkout, which is what the candidate-source role requires and what makes
+`RID018` absent. The target block records `kind: complete-candidate` with identity digest
+`423c5c5e2691006734db4a30c52dbc72d4e4cdfd39c5aba8cf7a9696ad036856`.
+
+**`CC003` reads 56 warnings where the governing evaluator reads 50.** That is the candidate
+validator carrying six additional derived warnings the released one does not emit, and it is
+expected candidate-versus-released skew rather than graph damage: the governing figure is 50
+and it is the one that counts. Recording both is the point.
+
+Two further candidate-controlled readings: `renumber-artifacts` refuses with **`REN043`**, a
+stated boundary refusal rather than the `blocked` outcome stage 1 could only observe from a
+dirty tree; and the byte-rule inventory covers **57 declared paths at zero carriage
+returns**, matching `.gitattributes`' nine declared patterns.
+
+## Exact-candidate stage: verifier-owned black-box package acceptance
+
+Ten of ten scenarios **passed**. This was run by the verifier against an ephemeral,
+explicitly non-promotable 0.7.0 wheel built outside the checkout, which the approved work
+order permits for package acceptance and which authorizes no promotable build.
+
+- Verifier: `se-harness` **0.6.0**, wheel digest
+  `2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7`, contract digest
+  `a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75`. The wheel was
+  independently re-downloaded from PyPI for this reading and its digest equals the one
+  `RLS-SEH-012` binds, so the verifier is provably the released artifact and not a local
+  rebuild.
+- Candidate under test: commit `f76da5727e86fc53375bfa5cafcfcbf168c7456e`, version `0.7.0`,
+  wheel digest `b2f115ea5bc061638bb7cbe03fab3093af396eb5d707b8fc44f816d0439bcdfe`.
+- Runtime: CPython **3.14.6**. Schema `se-harness-functional-acceptance-v1`.
+
+| Scenario | Outcome | Output digest |
+| --- | --- | --- |
+| `installed-identity` | passed | `23ed00195b101e2671e4737d571216254ba298654f1250b08b267d97e1d14a4e` |
+| `init` | passed | `99602ff1a4b39e95975b69aad9fa97d1f5100a7b01b32ae181f007352473c481` |
+| `adopt` | passed | `8b8bed020673d8ed4c0eb8b20873d39956b1145071e914952677989d01e787cb` |
+| `doctor` | passed | `b11dfbc1284a1ccf92c692370c7e9dd845ce1afc9189e9a0e6e71a65f49814d4` |
+| `validate` | passed | `8316ba2d7f4f97caeb4b0f7845e1a6e5681cba228ba9d56d8cefc58b8cb6cb8a` |
+| `dashboard` | passed | `69184a108b4f8014b68e8b2f3ff4d735ddbd8d3ddadbefb308b17e5a6f185c09` |
+| `safe-upgrade` | passed | `bbf7ab50b76f38bbcb0e3f8b5d258b0d0a6abbd35674ef027dd8cf77d2132bb2` |
+| `customized-content-refusal` | passed | `f7d505e8d22a49b00b4942dad35c9ed161eed2a8b9a3fd888aca1598c31e758d` |
+| `corrupted-integrity-refusal` | passed | `35ca80881f23cc14bd0a43d48400d1a33a527143901376bcf0289891fcddb3bd` |
+| `authority-denial` | passed | `f5c5912d2db40d37d2b92afdf207126058d8cde8111d9c0cf4da518750e72baf` |
+
+**One reading of the acceptance interface was corrected during this stage and is recorded so
+nobody repeats the mistake.** `--verifier-wheel-sha256` was initially read as the digest of a
+second, independent build of the candidate. It is not: the source passes it as
+`evaluator_wheel_sha256` with `role="released-evaluator"`,
+`expected_version=__version__` and `require_isolated_python=True`, so it is the **verifier's
+own evaluator wheel digest**. Reading it the other way would have produced a claim of
+cross-build byte identity that this stage never measured.
+
+The checkout was byte-for-byte unchanged by the acceptance run.
+
+## Exact-candidate stage: credential-free publication rehearsal
+
+Run on Windows at the exact candidate, in `candidate` mode, on both locally available
+runtimes. Twenty-three mechanics, no credential present, no external write attempted.
+
+| Runtime | Verdict | Unit suite | Teardown |
+| --- | --- | --- | --- |
+| CPython **3.14.6** | **REHEARSED** | passed, **1002 tests** | 6727 derived paths removed without following a link |
+| CPython **3.11.9** | **FAILED** | exited 1 with **2 failing tests** | 7552 derived paths removed without following a link |
+
+The 3.11.9 failure is exactly and only
+`test_a_link_out_of_the_root_is_unlinked_and_its_target_survives` and
+`test_a_linked_root_is_refused_rather_than_followed`. **This is blocker B, it is pre-existing
+at the candidate's parent, and the candidate does not cause it.** The defect is in
+`.github/scripts/rehearse_publication.py`, where `_path_is_junction` resolves
+`os.path.isjunction` and `_is_link` resolves `DirEntry.is_junction` through `getattr(...,
+None)` and returns `False` when the attribute is absent; both are 3.12-only, so on 3.11 the
+junction predicate silently degrades. `.github/` is outside this work order's execution
+scope, so it is **not repaired here**: the owner routed it to `WO-RLO-006`, which is
+separately approved and separately started.
+
+Everything else in both runs executed identically and is what the release path depends on:
+temporary-path identity confined to the rehearsal root; release-record format validation
+accepting `RLS-SEH-012` and refusing 6 non-canonical forms; evaluator resolution, acquisition
+with hash proof, and identity proof through the `harnessctl.exe` entry point; distribution
+policy validation; canonical plan resolution; a bounded refusal document written and re-read
+canonically; the candidate exported twice from the repository archive; pinned build tools
+installed into a rehearsal-root environment; complete-candidate qualification at
+`f76da5727e86`; the CLI smoke check; **two independent builds each producing
+`se_harness-0.7.0-py3-none-any.whl`**; both sdists normalized at epoch **1787681167**; the
+two distribution sets compared **byte-identical**; bundle assembly from the second set;
+manifest creation for the first set and the assembled bundle; the second set's manifest
+verified against the first set's plan; and the assembled bundle verified against the plan.
+
+Both runs report the inherited checkout's `core.autocrlf=true` as a stated condition. Neither
+reports an unclean inherited checkout, unlike the earlier reading taken at the parent commit.
+
+`check-divergence` reads **`verdict: exact`** against orchestrator
+`.github/workflows/publish-pypi.yml` and rehearsal lane
+`.github/workflows/publication-rehearsal.yml`, over platforms Linux and Windows with
+`permissions_read_only: true`. Of 23 mechanics, **22 are covered and 1 is rehearsal-only**.
+Five orchestrator jobs are excluded with their reasons recorded: `github_release` and
+`observe` for `contents: write` and four `GH_TOKEN`-naming steps; `pages_build` and
+`pages_deploy` for `pages: write`, `id-token: write`, a protected environment and the
+external-state Pages actions; and `pypi` for `id-token: write`, a protected environment, a
+`GH_TOKEN`-naming asset-verification step and `pypa/gh-action-pypi-publish`. **That is the
+credential seam holding exactly where it should.**
+
+**`recipe-bound-build-replay` excluded itself on both runtimes, and the reason is structural
+rather than environmental.** Its own words: "no committed release record is a released
+distribution-schema-2 subject with a bound build recipe; the 1 committed records declare
+distribution schema 1, so this mechanic has no subject to replay". `RLS-SEH-012` is the one
+distribution-bearing record and it is schema 1. **The mechanic is therefore unavailable, not
+untested, and the dependency runs record → replay.** Granting build authority now would not
+make it run; only a schema-2 `RLS-SEH-013` under preparation creates a subject. This is why
+build authority should be sequenced *with* `RLS-SEH-013` preparation and not ahead of it. It
+is a different constraint from the separate local one that no Docker host is installed here,
+which independently blocks the digest-pinned Linux/amd64 replay recipe on this workstation.
+
+## Exact-candidate stage: determinism, changed-path ledger, and protected controls
+
+Explorer generation ran twice at the candidate into two external output directories and was
+**deterministic**: 1037 files each time, with only `elapsed_ms` and `generated_at` differing.
+Both runs report `PASS | Artifacts: 887 | Relations: 3235 | Errors: 0 | Warnings: 64` and the
+**same manifest digest**
+`db9069cab01c0f931d09b762a8b7c0a862107af4934b0e043e4f401c3ac2e563`; the dashboard digest is
+`bfc5d0bcfd84ba8801406290793734b4aef9655d8f05fe81064934941d009ee9`.
+
+| Reading | Result |
+| --- | --- |
+| Changed-path ledger, `v0.6.0` to the candidate | **536 paths** |
+| Candidate against its parent | **8 files**, 835 insertions, 11 deletions |
+| Protected-control diff, parent to candidate | **empty** — no managed, hash-locked, or fragment-mode path moved |
+| `git diff --check`, parent to candidate | **clean** |
+| Secret and private-path scan over the candidate's added lines | **no credential material of any form** |
+
+The scan's only hits are two occurrences of an operator-home absolute path naming the
+external evaluator environments, in this file. They are disclosed rather than removed: the
+same path form already appears in **34 other tracked files** at the candidate's parent, so
+this is an established retained-evidence convention in this repository and not a new
+disclosure class introduced by the candidate. It is recorded here so a later decision to
+scrub the convention can be taken deliberately, across all of it, under its own work order.
+
+## Exact-candidate stage: aggregate census re-derived at the candidate
+
+Re-derived at the candidate from `REL-SEH-015`'s `gates` array in the contract file itself,
+never carried forward from prose and never inferred from commits or dates. `REL-SEH-015` is
+`approved`, so that array is fixed authority.
+
+| Figure, whole-`gates` basis | At the candidate | At approval | Moved? |
+| --- | --- | --- | --- |
+| `gates` entries, unique | 36 / 36 | 36 / 36 | no |
+| Duplicate entries | 0 | 0 | no |
+| Members absent from the graph | 0 | 0 | no |
+| Members not at the expected status | 0 | 0 | no |
+| Historical members with no verified coverage | **0** | 0 | no |
+| Verification contracts | **21** | 21 | no |
+| Requirement union | **48** | 48 | no |
+| Members with keyed evidence | 36 of 36 | 36 of 36 | no |
+| Distinct keyed evidence paths that exist | **37** | 37 | no |
+
+The 21 contracts, enumerated so `VREC-SEH-013` can be checked against a list rather than a
+count: `VER-ADS-001`, `VER-ADS-002`, `VER-AEX-001`, `VER-AEX-002`, `VER-AEX-003`,
+`VER-AEX-004`, `VER-DST-001`, `VER-HBI-001`, `VER-HUP-004`, `VER-IPK-001`, `VER-LRE-001`,
+`VER-REB-006`, `VER-REB-007`, `VER-REB-008`, `VER-REB-009`, `VER-REB-010`, `VER-RLO-004`,
+`VER-RLO-005`, `VER-TCM-001`, `VER-VSP-002`, `VER-WEX-003`. On the historical-only basis,
+excluding `WO-RLS-011` itself, the figures are 20 contracts and a 47-requirement union.
+
+**The census is unchanged from approval, and that is the measurement the work order exists to
+make, not an assumption it was allowed to carry.** Zero uncovered members means every
+historical member reads `implemented` with verified coverage at the candidate.
+
+Two containment checks were run against the `gates` array rather than trusted:
+
+- **Every one of the 36 gated work orders has a file touched since `v0.6.0`.** Of the 44
+  work-order files touched in that range, 8 are not in `gates`: `WO-AEX-006`, `WO-AEX-007`,
+  `WO-AEX-008`, `WO-HUP-002`, `WO-REB-006`, `WO-REB-007`, `WO-RLS-009`, `WO-RLS-010`.
+  `WO-RLS-009` and `WO-RLS-010` are the rejected predecessors of this work order and carry no
+  bytes. The other six are dispositioned below.
+- **102 work orders sit outside `gates` at `implemented` or `in_progress`.** That is the
+  expected shape: `gates` is a per-release allow-list, not a repository census, and the great
+  majority of those predate `v0.6.0` and are already covered by earlier release records.
+
+## Exact-candidate stage: the census gap, disclosed and not corrected
+
+**Thirty-seven work orders reached `implemented` after the `v0.6.0` tag. Three of them are
+absent from the approved `gates` array.** This is disclosed to the release owner as a
+measured fact about an approved contract, and it is deliberately **not** corrected: an
+approved contract is never widened in place, and the correct remedy — if the owner wants one
+— is rejection and re-issue, which is the owner's decision and not this work order's.
+
+| Absent member | Implemented at | Declared scope paths | Of which distributed | Verified coverage |
+| --- | --- | --- | --- | --- |
+| `WO-HUP-002` | 2026-08-23T19:14:40Z | 43 | **0** | `VREC-HUP-005` verified (`VREC-HUP-003` rejected) |
+| `WO-REB-006` | 2026-08-22T16:29:22Z | 0 | 0 | `VREC-SEH-012` verified |
+| `WO-REB-007` | 2026-08-22T16:24:55Z | 0 | 0 | `VREC-SEH-012` verified |
+
+**None of the three contributes a single byte to the packaged surface**, tested against the
+distributed surface as `pyproject.toml` and `MANIFEST.in` actually declare it: the
+`se_harness/` and `templates/repository/standard/` prefixes plus `pyproject.toml`,
+`MANIFEST.in` and `scripts/normalize_sdist.py`. `WO-REB-006` and `WO-REB-007` declare no
+`[execution_scope]` at all and were verified as part of the 0.6.0 aggregate. `WO-HUP-002`
+declares 43 paths and not one of them is distributed; the approved work order also names it
+explicitly as governance bookkeeping rather than release-bearing product work. **So the
+release unit still describes the release, and the stop condition on "a work order whose bytes
+are in the packaged surface and which the contract does not name" did not fire.** The gap is
+a completeness question about the contract's narrative, not a correctness question about the
+0.7.0 payload.
+
+`RLS-SEH-012`, the 0.6.0 record, carries an **empty** `gates` array, so no comparison against
+a predecessor allow-list is available and none was invented.
+
+## Exact-candidate stage: the held pull requests, re-confirmed rather than assumed
+
+The owner's standing decision is that the open pull requests merge after 0.7.0 is tagged.
+That hold was re-confirmed against the candidate rather than carried forward as an
+assumption, and the three work orders it covers are `approved` only — never `implemented` —
+so none is admissible to the unit regardless.
+
+| Held work order | Declared paths | Paths already changed since `v0.6.0` | Of which distributed |
+| --- | --- | --- | --- |
+| `WO-AEX-006` | 20 | 11 | 6 |
+| `WO-AEX-007` | 33 | 21 | 12 |
+| `WO-AEX-008` | 25 | 31 | 18 |
+
+**Those distributed overlaps are not leaks, and the distinction matters.** Every distributed
+path in the three lists — `pyproject.toml`, `MANIFEST.in`, `se_harness/agent_contract.py`
+and its JSON, `se_harness/mutation_guard.py`, `se_harness/runtime_state.py`,
+`se_harness/cli.py`, `se_harness/provenance.py`, `se_harness/workflow.py`,
+`se_harness/workflow_contract.py` and its JSON, `se_harness/skill_contract.py`, the
+`WORKFLOW.json` and `WORKFLOW.md` templates, and the twelve `.agents/skills` plus three
+`.claude/skills` template files — is **independently declared by a work order the approved
+`gates` does name**, and the bytes at the candidate are that gated work order's bytes. The
+proof is direct rather than inferential: the candidate is its parent plus eight files, none
+of which is in `se_harness/` other than `__init__.py`'s version line.
+
+**A fourth open pull request was found during this stage and is reported rather than
+absorbed.** It carries `WO-RSK-002`, is stacked on the pull request carrying `WO-RSK-001`,
+declares 12 distributed paths, and drafts a governor-upgrade work order whose own
+precondition needs a released record covering `WO-ADS-001`, `WO-ADS-002` and `WO-RSK-001` —
+which is to say it depends on 0.7.0 existing. It is treated as covered by the standing
+"merge after 0.7.0" hold on the same reasoning as the other three, and the owner is invited
+to correct that reading if the hold was meant to enumerate only the three then known.
+
+## Exact-candidate stage: no digest measured here is bindable
+
+**Stated plainly because it constrains the next stage: not one distribution digest measured
+on this workstation may be bound into `RLS-SEH-013`.**
+
+The normalized 0.7.0 wheel digest differs by interpreter. Measured:
+`2a739ea0e1c819ddee1ecf6a6b5d7711872699842d37fe39a5c50d965cf8dba1` from CPython 3.11 and
+`a0e405c3e075f6e2fb4440f5722ad7015cb3592245837b5e7fda7110f33fd5cd` from CPython 3.14. Two
+raw, unnormalized `python -m build` runs outside the release path produced a third result
+again — identical wheel size with a different digest, and sdists of 622640 and 622661 bytes —
+which is expected of unnormalized builds and is precisely why the release path uses
+`SOURCE_DATE_EPOCH` together with `scripts/normalize_sdist.py`.
+
+**Reproducibility therefore holds *given* the interpreter, and only given it.** Both
+rehearsal runtimes built 0.7.0 twice byte-identically within themselves, which is the property
+the release actually needs; what does not hold is byte identity *across* interpreters. The
+binding digest must come from the authorized build on the platform and runtime the release
+record names, and the figures above are recorded as boundary evidence rather than as
+candidates for binding.
+
+## Exact-candidate stage: deferred work discharged
+
+Row by row against stage 1's *Deferred to the exact candidate* table.
+
+| Deferred work | Disposition at the candidate |
+| --- | --- |
+| `qualify complete-candidate` PASS | **Closed** — passed on `CC001`–`CC004`. |
+| Candidate-source identity with metadata resolving inside the checkout | **Closed** — role `candidate-source`, identity `14f9dfe1…`, empty diagnostics. |
+| Formal governor-succession assessment | **Closed** — PASS, `transition_required: false`. |
+| `renumber-artifacts` plan beyond `blocked` | **Closed** — refuses with `REN043`, a stated boundary refusal. |
+| Changed-path ledger, protected-control diff, secret scan, `git diff --check` | **Closed** — 536 paths, empty protected diff, no credential material, clean. |
+| Candidate-package identity and verifier-owned black-box acceptance | **Closed** — 10 of 10 against an ephemeral non-promotable wheel. |
+| Two recipe-bound replays and byte-identity proof | **Open** — needs build authority *and* a schema-2 subject that only `RLS-SEH-013` creates. No Docker host here either. |
+| Release bundle manifest bound to the candidate's own `release/build-recipe.json` | **Open** — same build authority. The rehearsal's own bundle manifests were built inside a disposable rehearsal root and are not the release manifest. |
+| `qualify candidate-package` and `qualify public-install` from the candidate | **Open** — `public-install` needs a *published* 0.7.0 wheel, which does not exist. The verifier-side acceptance above covers the package role; the candidate-side operations are not claimed. |
+| Hosted lane results, run, job, and artifact identities | **Open** — the authorized branch push follows this commit; the readings are a later, separate act. |
+| Linux suite figures with zero skips | **Open** — needs the hosted lane. |
+| Hosted Windows publication-rehearsal reading at 3.11 | **Open** — needs the hosted lane. The local 3.11.9 reading identifies the defect precisely; the hosted reading is what formally settles blocker B, and `WO-RLO-006` is where it is fixed. |
+
+The stage 1 note that no Docker host is installed on this workstation stands unchanged.
+
+## Exact-candidate stage: residual risks, carried forward unsoftened
+
+Stage 1's six residual risks are all unchanged at the candidate and every one must reach
+`VREC-SEH-013` unsoftened. Nothing in stage 2 resolves any of them: `VER-TCM-001`'s two
+independent reviewer judgments still do not exist; `VER-ADS-001`'s Scenario 8
+independent-reviewer classification was still never run; `VREC-ADS-001` and `VREC-ADS-002`
+were verified with the Linux figure pending the pull-request lane and this stage took no
+hosted reading; `WO-AEX-005`'s four new runtime modules are unreachable from
+`se_harness/cli.py` and therefore ship inert in 0.7.0; eleven gated work orders declare no
+`[execution_scope]`, which bounds the containment check above to the members that do; and the
+byte-rule guard's inventory is the set of declared patterns, so a concurrent change adding a
+byte-exact assertion on an undeclared extension would reopen the Windows qualification
+failure without the guard seeing it.
+
+To those, stage 2 adds three:
+
+7. **A `formal_snapshot_sha256` is a per-checkout figure.** Any record binding one must name
+   the checkout that produced it, and Windows and Linux readings of the same commit are not
+   comparable.
+8. **Three work orders implemented after `v0.6.0` are absent from the approved `gates`.**
+   None contributes packaged bytes; the contract's narrative is nonetheless incomplete, and
+   only the release owner can decide whether that warrants rejection and re-issue.
+9. **`recipe-bound-build-replay` has no subject until a schema-2 release record exists.** The
+   mechanic is unavailable rather than passing, and no reading in this file should be taken as
+   evidence that it works.
+
+## Exact-candidate stage: the `implemented` transition
+
+Applied with the governing released 0.6.0 evaluator from outside the checkout, in isolated
+mode, on the accountable engineering owner's explicit `DR-WO-COMPLETE` decision, recorded at
+**2026-08-25T18:43:37Z** as `in_progress` → `implemented` with `decided_by =
+"engineering-owner"`. The command reported `Workflow transition: COMPLETED` and named the
+next step as verification-record preparation via `capture-verification`, which is **not**
+performed here and is not authorized by that transition.
+
+Two facts about it are recorded rather than smoothed over:
+
+1. **One noun in the recorded reason is wrong and is corrected in the work order's prose
+   rather than rewritten in the event.** The reason says the change set was asserted complete
+   over "the eight declared paths of the amended execution scope"; the amended scope declares
+   **seven** paths and the candidate changes **eight files**. The set of bytes is exactly the
+   intended one. A recorded lifecycle reason is immutable decision history, so the event is
+   left untouched.
+2. **The reason was rejected twice for length before it was accepted.** `--reason` is capped
+   at 2000 characters and `WEX201` fires in argument validation, so the two `FAILED` verdicts
+   at 2230 and 2076 characters said nothing whatever about the transition's legality. The
+   accepted reason is 1844 characters. This is recorded because a `FAILED` transition verdict
+   that originates in argument validation is easy to misread as a governance refusal.
+
+After the transition the applicable gate changes: `check --checkpoint handoff` now returns
+**`WEX210: gate QG-G4-CANDIDATE-READY does not apply at checkpoint handoff`**, because at
+`implemented` the applicable gate is `QG-G4-CANDIDATE-READY`, evaluated when VREC preparation
+is requested. `start` returns the same and `pre-action` returns `WEX220`, requiring
+`--procedure`. **That is the lifecycle advancing, not a regression**, and it is recorded so a
+later reader does not mistake the refusal for damage.
+
+## Exact-candidate stage: unperformed transitions and external actions
+
+This is the list that describes the state this file is committed in. It supersedes stage 1's
+*Unperformed transitions and external actions*, which remains accurate as a statement about
+stage 1.
+
+**Performed, each on its own explicit owner decision of 2026-08-25:** the candidate commit;
+this work order's `in_progress` → `implemented` transition; and the governance commit that
+carries this stage. **Authorized and following immediately after this commit:** the push of
+`chore/wo-rls-011-0-7-0-qualification` to `origin`, so the hosted `windows-2022` and
+`ubuntu-latest` lanes can read the candidate. That push is a Git operation only — it merges
+nothing, builds nothing, and creates or moves no tag. **Separately authorized:**
+`WO-RLO-006`'s start, which is governed by its own work order.
+
+**Not performed and not authorized by anything in this file:** a pull request; any merge;
+`VREC-SEH-013` capture, preparation, or transition; `RLS-SEH-013` preparation, distribution
+binding, or transition; any change to `REL-SEH-015`; any promotable build; the release bundle
+manifest; either recipe-bound replay; tag creation or movement; a GitHub Release; PyPI
+publication; Pages deployment; `release/0.7` maintenance-line creation or mutation; any
+change to the root evaluator, the root lock, or the managed root; the pinned
+`se-harness==0.6.0` evaluator instruction in the owner region of `AGENTS.md`; force push; and
+history rewrite.
+
+## Exact-candidate stage: planned aggregate VREC inputs, as measured
+
+`VREC-SEH-013` must match, on the whole-`gates` basis, the figures **measured at the
+candidate** and not the stage 1 figures:
+
+- **36** work orders, exactly `REL-SEH-015`'s `gates` array, all `implemented` with verified
+  coverage and zero uncovered.
+- **21** verification contracts, enumerated above.
+- **48** requirements in the union.
+- **37** work-order-keyed evidence paths, being the 36 that exist plus this file — and
+  exactly this file, because `REL-SEH-015` clause 10 says "the one `WO-RLS-011` retains",
+  singular.
+- One clean candidate commit, `f76da5727e86fc53375bfa5cafcfcbf168c7456e` at tree
+  `52fdae8c6e090f62341df8b87c52fc308d5132f7`.
+- One artifact snapshot, **named together with the checkout that produced it**.
+- Matching evaluator evidence for the exact public 0.6.0 evaluator.
+- `technical-communication/evidence/WO-TCM-001/WO-TCM-002-verification.md` keyed by the
+  directory-position rule to both `WO-TCM-001` and `WO-TCM-002` and counted once;
+  `WO-HBI-004` and `WO-RLO-005` each retaining two keyed files.
+
+**Every one of those figures must still be re-measured at capture, against the commit
+`VREC-SEH-013` actually binds.** The candidate is immutable from here, so they are expected
+to hold — but "expected to hold" is not a measurement, and this file confers no authority to
+skip taking one.

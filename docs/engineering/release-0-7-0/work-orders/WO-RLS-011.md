@@ -2,7 +2,7 @@
 id = "WO-RLS-011"
 type = "work_order"
 title = "Qualify the integrated se-harness 0.7.0 candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-25T13:29:18Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-25, taken after the governance packet reached main. Start preflight PASS at phase start over clean branch state 826c72cfdaa3401cccf06c67943c5315221c3f72, the true merge of pull request 154, run with the governing exact public 0.6.0 evaluator outside the checkout; commit-bound verification is required and decided by the repository owner. REL-SEH-015 is approved, so the thirty-six-work-order allow-list in its gates array is fixed authority and this work order's deferred aggregate census resolves to it: twenty-one verification contracts, a forty-eight-requirement union and thirty-seven keyed evidence paths on the whole-gates basis, which is the basis VREC-SEH-013 must match. Two consequences of that freeze bind this work: keeping the contract's gates current in place is no longer available, so a work order reaching implemented with bytes in the packaged surface during this work is a stop condition to report rather than an edit; and WO-AEX-006's exclusion is a branch-point boundary that this work order must confirm at the candidate, the owner having decided to hold open pull request 155 until 0.7.0 is tagged. Bounded to the six declared execution-scope paths. This start authorizes no candidate commit, no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-013 or RLS-SEH-013 preparation or transition, no tag, no publication, no Pages deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T18:43:37Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-25 under DR-WO-COMPLETE, on the handoff gate reading Completed for WO-RLS-011 over candidate commit f76da5727e86fc53375bfa5cafcfcbf168c7456e, tree 52fdae8c6e090f62341df8b87c52fc308d5132f7, change set asserted complete over the eight declared paths of the amended execution scope. Exact-candidate readings, governing exact public 0.6.0 evaluator outside the checkout in isolated mode: validate PASS at 887 artifacts, 0 errors, 50 pre-existing maintenance warnings, every plane E0; inspect 167 findings at 0 errors and 64 warnings; doctor 87 PASS 0 FAIL; review preflight PASS; managed-root upgrade plan 36 files 36 unchanged; release-distribution validation PASS; portable release surface PASS; governor-succession plan PASS with transition required false, so the released 0.6.0 evaluator governs the 0.7.0 candidate without succession; verifier-owned black-box acceptance of an ephemeral non-promotable 0.7.0 wheel passed all ten scenarios against verifier 0.6.0; recovery rehearsal PASS; Explorer generation deterministic over two runs at 1037 files; qualify complete-candidate PASS on four checks; byte-rule inventory 57 declared paths at zero carriage returns. Census re-derived from the approved gates array here is unchanged from approval: 36 unique entries, zero uncovered, 21 verification contracts, a 48-requirement union, 37 keyed evidence paths. Credential-free publication rehearsal on Windows: REHEARSED on CPython 3.14.6 with the suite green at 1002 tests, FAILED on CPython 3.11.9 solely on the two pre-existing teardown tests routed to WO-RLO-006; both runtimes built 0.7.0 twice byte-identically and the divergence seam read EXACT. No digest measured on this workstation is bindable: the normalized digest differs by interpreter. This authorizes no further act."
 +++
 
 # Work Order: Qualify the integrated se-harness 0.7.0 candidate
@@ -139,6 +146,41 @@ assurance owner, consumers, publication automation, the recipe interpreter, and
 future repository upgrades will rely on the exact integrated executable package,
 standard template, evaluator boundary, provenance, and distribution bytes. This
 classification is not inferred from a default.
+
+### Implementation and the implemented transition
+
+Start preflight passed and implementation ran under this work order from
+2026-08-25T13:29:18Z to the candidate commit
+`f76da5727e86fc53375bfa5cafcfcbf168c7456e`, whose tree is
+`52fdae8c6e090f62341df8b87c52fc308d5132f7` and whose parent is the true merge of
+pull request #154 at `826c72cfdaa3401cccf06c67943c5315221c3f72`. The candidate is
+exactly that parent plus eight changed files, all of which fall inside the seven
+declared execution-scope paths; `docs/engineering/release-0-7-0/` is a directory
+and covers two of the eight.
+
+The accountable engineering owner then marked this work order `implemented` under
+`DR-WO-COMPLETE` at 2026-08-25T18:43:37Z, on the `handoff` gate reading
+`Completed` over that candidate. The reason recorded on that lifecycle event is
+the decision record and the readings behind it are in the keyed evidence. **One
+noun in that reason is imprecise and is corrected here rather than rewritten
+there:** it says the change set was asserted complete over "the eight declared
+paths of the amended execution scope", where the amended scope declares seven
+paths and the candidate changes eight files. The set of bytes is exactly the one
+intended; only the count's label is wrong. A recorded lifecycle reason is
+immutable history, so the correction is stated and the event is left untouched.
+
+Two further owner decisions were taken on 2026-08-25 after the exact-candidate
+readings were put to the owner, and neither is carried by this work order's
+approval. First, the working branch is authorized to be pushed, so the hosted
+`windows-2022` and `ubuntu-latest` lanes can read the candidate; that push is an
+explicit later exception to the approval-time exclusion of branch push, and it
+merges nothing, creates or moves no tag, builds no distribution and publishes
+nothing. Second, `WO-RLO-006` is authorized to start, which is where the Windows
+plus CPython 3.11 junction defect in the publication rehearsal is repaired; that
+work is governed by its own work order and not by this one. `VREC-SEH-013`,
+`RLS-SEH-013`, build authority, the tag, GitHub or PyPI publication, Pages
+deployment, the `release/0.7` maintenance line, and any root-evaluator change all
+remain unauthorized.
 
 ## Objective
 
