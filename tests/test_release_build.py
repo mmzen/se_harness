@@ -33,6 +33,7 @@ SKILL_FILES = {
         "SKILL.md", "agents/openai.yaml", "scripts/check_scope.py", "skill-contract.json"
     ),
     "harness-orient": ("SKILL.md", "scripts/orient.py", "skill-contract.json"),
+    "harness-operator-brief": ("SKILL.md", "scripts/check_brief.py", "skill-contract.json"),
     "harness-prepare-assurance": (
         "SKILL.md", "agents/openai.yaml", "scripts/check_prepare.py", "skill-contract.json"
     ),
@@ -40,6 +41,7 @@ SKILL_FILES = {
 CLAUDE_ADAPTER_FILES = {
     name: ("SKILL.md",)
     for name in SKILL_FILES
+    if name != "harness-operator-brief"
 }
 
 
@@ -212,6 +214,11 @@ class DeterministicSdistTests(unittest.TestCase):
         }
         self.assertEqual(expected, set(distributed))
         self.assertEqual(len(distributed), len(set(distributed)))
+        policy = "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
+        self.assertEqual(
+            1,
+            sum(policy in relatives for relatives in data_files.values()),
+        )
         claude_prefix = "share/se-harness/templates/repository/standard/.claude/skills"
         claude_distributed = [
             relative

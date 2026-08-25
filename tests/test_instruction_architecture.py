@@ -134,7 +134,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(1, sum(line.strip() == "@AGENTS.md" for line in claude.splitlines()))
 
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        for name in ("WORKFLOW.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md", "TRACEABILITY.md"):
+        for name in ("WORKFLOW.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md", "TRACEABILITY.md", "TECHNICAL_COMMUNICATION.md"):
             self.assertIn(name, router)
         index = (target / "docs" / "engineering" / "README.md").read_text(encoding="utf-8")
         self.assertIn("Repository-owned after installation", index)
@@ -145,8 +145,37 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual("managed", lock["files"]["ENGINEERING_HARNESS.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
+        self.assertEqual(
+            "managed", lock["files"]["docs/engineering/TECHNICAL_COMMUNICATION.md"]["mode"]
+        )
+        self.assertTrue((target / "docs/engineering/TECHNICAL_COMMUNICATION.md").is_file())
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
         self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
+
+    def test_technical_communication_has_one_managed_owner_and_one_thin_route(self) -> None:
+        target = self.installed_target("technical-communication")
+        source = (
+            REPOSITORY_ROOT
+            / "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
+        )
+        installed = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
+        self.assertEqual(
+            canonical_sha256(source.read_bytes()), canonical_sha256(installed.read_bytes())
+        )
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        self.assertEqual(1, router.count("docs/engineering/TECHNICAL_COMMUNICATION.md"))
+        self.assertNotIn("operator-communication", router)
+        self.assertNotIn("technical-artifact-writing", router)
+
+        policy = source.read_text(encoding="utf-8")
+        self.assertIn("based on ASD-STE100", policy)
+        self.assertIn("not ASD-STE100 compliance", policy)
+        self.assertIn("MUST NOT download", policy)
+        self.assertIn("operator-communication", policy)
+        self.assertIn("technical-artifact-writing", policy)
+        for prohibited in ("requests.", "urllib.", "socket.", "http://", "https://"):
+            with self.subTest(prohibited=prohibited):
+                self.assertNotIn(prohibited, policy)
 
     def test_inspection_guidance_packet_preserves_the_authority_boundary(self) -> None:
         requirement = (PACKET_ROOT / "requirements" / "REQ-IAR-017.md").read_text(encoding="utf-8")
@@ -525,6 +554,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         for path in (
             "ENGINEERING_HARNESS.md",
             "docs/engineering/WORKFLOW.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
@@ -791,7 +821,13 @@ class InstructionArchitectureTests(unittest.TestCase):
         writing_skills = {
             "harness-draft-change": "scripts/guard.py",
             "harness-execute-work-order": "scripts/check_scope.py",
+            "harness-operator-brief": "scripts/check_brief.py",
             "harness-prepare-assurance": "scripts/check_prepare.py",
+        }
+        host_adapter_writing_skills = {
+            "harness-draft-change",
+            "harness-execute-work-order",
+            "harness-prepare-assurance",
         }
         self.assertEqual(
             {"harness-orient", *writing_skills},
@@ -800,8 +836,11 @@ class InstructionArchitectureTests(unittest.TestCase):
         for name, helper in writing_skills.items():
             with self.subTest(skill=name):
                 root = target / ".agents/skills" / name
+                expected_files = ["SKILL.md", helper, "skill-contract.json"]
+                if name in host_adapter_writing_skills:
+                    expected_files.insert(1, "agents/openai.yaml")
                 self.assertEqual(
-                    ["SKILL.md", "agents/openai.yaml", helper, "skill-contract.json"],
+                    expected_files,
                     sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()),
                 )
                 writing_contract = json.loads((root / "skill-contract.json").read_text(encoding="utf-8"))
@@ -814,19 +853,22 @@ class InstructionArchitectureTests(unittest.TestCase):
                 instructions = (root / "SKILL.md").read_text(encoding="utf-8").lower()
                 for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
                     self.assertNotIn(provider, instructions)
-                self.assertEqual(
-                    "policy:\n  allow_implicit_invocation: false\n",
-                    (root / "agents/openai.yaml").read_text(encoding="utf-8"),
-                )
-                for relative in ("SKILL.md", "agents/openai.yaml", helper, "skill-contract.json"):
+                if name in host_adapter_writing_skills:
+                    self.assertEqual(
+                        "policy:\n  allow_implicit_invocation: false\n",
+                        (root / "agents/openai.yaml").read_text(encoding="utf-8"),
+                    )
+                else:
+                    self.assertFalse((root / "agents/openai.yaml").exists())
+                for relative in expected_files:
                     self.assertEqual("managed", lock["files"][f".agents/skills/{name}/{relative}"]["mode"])
 
         claude_root = target / ".claude/skills"
         self.assertEqual(
-            {"harness-orient", *writing_skills},
+            {"harness-orient", *host_adapter_writing_skills},
             {path.name for path in claude_root.iterdir() if path.is_dir()},
         )
-        for name in {"harness-orient", *writing_skills}:
+        for name in {"harness-orient", *host_adapter_writing_skills}:
             with self.subTest(claude_adapter=name):
                 adapter = claude_root / name / "SKILL.md"
                 self.assertEqual(["SKILL.md"], [path.name for path in adapter.parent.iterdir()])

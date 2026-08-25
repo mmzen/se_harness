@@ -9,6 +9,7 @@ from se_harness import __version__
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+TECHNICAL_COMMUNICATION_NOTE = REPOSITORY_ROOT / "docs/notes/technical-communication.md"
 README_PATH = REPOSITORY_ROOT / "README.md"
 PYPROJECT_PATH = REPOSITORY_ROOT / "pyproject.toml"
 
@@ -41,9 +42,29 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertEqual([], self.project["dependencies"])
         self.assertEqual("se_harness.cli:main", self.project["scripts"]["harnessctl"])
 
+    def test_technical_communication_note_explains_use_and_claim_boundaries(self) -> None:
+        note = TECHNICAL_COMMUNICATION_NOTE.read_text(encoding="utf-8")
+        normalized = " ".join(note.split())
+        index = (REPOSITORY_ROOT / "docs/notes/README.md").read_text(encoding="utf-8")
+        self.assertIn("technical-communication.md", index)
+        for phrase in (
+            "Target expertise: 5/10",
+            "based on ASD-STE100",
+            "does not claim compliance",
+            "operator-communication",
+            "technical-artifact-writing",
+            "harness-operator-brief",
+            "harness-orient",
+            "changes no repository path",
+            "Human review remains necessary for meaning",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, normalized)
+
     def test_root_is_a_bounded_human_entry_point(self) -> None:
         self.assertLessEqual(len(self.readme.splitlines()), 200)
         headings = re.findall(r"(?m)^## (.+)$", self.readme)
+
         self.assertLessEqual(len(headings), 9)
         self.assertEqual(
             [

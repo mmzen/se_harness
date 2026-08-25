@@ -119,6 +119,20 @@ class ArtifactCatalogTests(unittest.TestCase):
         candidate_router = router_template.replace("{{PROJECT_NAME}}", "se_harness").replace(
             "{{HARNESS_VERSION}}", evaluator_version
         )
+        technical_communication_route = (
+            "| Eligible operator and technical-artifact English prose | "
+            "`docs/engineering/TECHNICAL_COMMUNICATION.md` |"
+        )
+        artifact_authoring_route = (
+            "| Artifact authoring locations and templates | "
+            "`docs/engineering/templates/README.md` |"
+        )
+        self.assertNotIn(technical_communication_route, router)
+        self.assertEqual(1, candidate_router.count(technical_communication_route))
+        self.assertIn(
+            f"{technical_communication_route}\n{artifact_authoring_route}",
+            candidate_router,
+        )
         self.assertNotEqual(router, candidate_router)
         self.assertIn("## Lifecycle restitution", router)
         self.assertNotIn("## Lifecycle handoff", router)

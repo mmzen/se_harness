@@ -63,6 +63,7 @@ MUST NOT restate its rules.
 | Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |
 | Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
+| Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
 | Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 

@@ -36,6 +36,9 @@ PHASE3_ROOTS = {
         "harness-prepare-assurance",
     )
 }
+OPERATOR_BRIEF_ROOT = SKILLS_ROOT / "harness-operator-brief"
+OPERATOR_BRIEF = OPERATOR_BRIEF_ROOT / "scripts/check_brief.py"
+TECHNICAL_COMMUNICATION_CORPUS = REPOSITORY_ROOT / "tests/fixtures/technical_communication/review_corpus.json"
 ORIENT = SKILL_ROOT / "scripts/orient.py"
 FAKE_EVALUATOR = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/fake_evaluator.py"
 VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
@@ -181,6 +184,57 @@ class SkillContractTests(unittest.TestCase):
                 with self.assertRaisesRegex(SkillContractError, code):
                     parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
 
+    def test_closed_operator_brief_contract_and_three_file_core_validate(self) -> None:
+        contract = load_skill_contract(OPERATOR_BRIEF_ROOT / "skill-contract.json")
+        manifest = build_skill_manifest(OPERATOR_BRIEF_ROOT)
+        self.assertEqual(CONTRACT_SCHEMA_V2, contract.value["schema"])
+        self.assertEqual("harness-operator-brief", contract.name)
+        self.assertEqual("1.0.0", contract.version)
+        self.assertEqual("read-only", contract.value["mutation_class"])
+        self.assertEqual(["inline-brief-render"], contract.value["effects"]["permitted"])
+        self.assertEqual("none", contract.value["effects"]["path_source"])
+        self.assertEqual([], contract.value["effects"]["lifecycle_transitions"])
+        self.assertEqual(["version", "identity", "doctor"], contract.value["evaluator"]["required_operations"])
+        self.assertEqual([], contract.value["evaluator"]["optional_operations"])
+        self.assertEqual({"allowed": False, "fallback": "single-agent"}, contract.value["delegation"])
+        self.assertFalse(contract.value["evidence"]["target_retention"])
+        self.assertEqual([], contract.value["evidence"]["required_retained_kinds"])
+        self.assertEqual(
+            ["SKILL.md", "scripts/check_brief.py", "skill-contract.json"],
+            sorted(item["path"] for item in manifest.value["files"]),
+        )
+
+    def test_operator_brief_contract_rejects_open_or_authoritative_variants(self) -> None:
+        original = json.loads((OPERATOR_BRIEF_ROOT / "skill-contract.json").read_text(encoding="utf-8"))
+        cases = (
+            ("implicit", lambda value: value["activation"].__setitem__("implicit", True), "SKC023"),
+            ("write", lambda value: value.__setitem__("mutation_class", "governed-mutation"), "SKC022"),
+            (
+                "transition",
+                lambda value: value["effects"]["lifecycle_transitions"].append("approved-to-in-progress"),
+                "SKC027",
+            ),
+            ("network", lambda value: value["effects"].__setitem__("prohibited", []), "SKC027"),
+            ("retention", lambda value: value["evidence"].__setitem__("target_retention", True), "SKC028"),
+            ("open-input", lambda value: value["inputs"].append(
+                {"name": "arbitrary-operation", "required": False, "type": "bounded-text"}
+            ), "SKC024"),
+        )
+        for label, mutate, code in cases:
+            with self.subTest(label=label):
+                value = json.loads(json.dumps(original))
+                mutate(value)
+                with self.assertRaisesRegex(SkillContractError, code):
+                    parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
+
+    def test_operator_brief_activation_declares_required_non_matches(self) -> None:
+        contract = load_skill_contract(OPERATOR_BRIEF_ROOT / "skill-contract.json").value
+        non_matches = " ".join(contract["activation"]["must_not_match"]).lower()
+        for term in ("orient", "artifact", "work order", "assurance", "lifecycle", "git", "release", "network"):
+            with self.subTest(term=term):
+                self.assertIn(term, non_matches)
+        self.assertTrue(contract["activation"]["explicit"])
+        self.assertFalse(contract["activation"]["implicit"])
     def test_repository_host_surfaces_bind_one_canonical_core_per_name(self) -> None:
         vectors = json.loads(HOST_SURFACE_VECTORS.read_text(encoding="utf-8"))
         self.assertEqual("se-harness-host-surface-vectors-v1", vectors["schema"])
@@ -258,6 +312,9 @@ class Phase3EffectGuardTests(unittest.TestCase):
         )
         cls.assurance = load_script(
             "phase3_assurance_guard", PHASE3_ROOTS["harness-prepare-assurance"] / "scripts/check_prepare.py"
+        )
+        cls.brief = load_script(
+            "technical_communication_brief_check", OPERATOR_BRIEF
         )
 
     def test_draft_guard_invokes_effect_once_only_after_fresh_closed_plan(self) -> None:
@@ -360,6 +417,142 @@ class Phase3EffectGuardTests(unittest.TestCase):
                     rejected, recheck=lambda: fresh, effect=lambda path: calls.append(path)
                 )
             self.assertEqual([], calls)
+
+    def brief_request(
+        self,
+        source: str,
+        protected: list[tuple[str, str]],
+        *,
+        rendered: str | None = None,
+    ) -> dict[str, object]:
+        output = source if rendered is None else rendered
+        source_spans = []
+        output_bindings = []
+        source_cursor = 0
+        output_cursor = 0
+        for index, (token, kind) in enumerate(protected):
+            source_character = source.index(token, source_cursor)
+            output_character = output.index(token, output_cursor)
+            source_start = len(source[:source_character].encode("utf-8"))
+            source_end = source_start + len(token.encode("utf-8"))
+            output_start = len(output[:output_character].encode("utf-8"))
+            output_end = output_start + len(token.encode("utf-8"))
+            digest = hashlib.sha256(token.encode("utf-8")).hexdigest()
+            span_id = f"span-{index + 1}"
+            source_spans.append({
+                "id": span_id,
+                "kind": kind,
+                "start": source_start,
+                "end": source_end,
+                "sha256": digest,
+            })
+            output_bindings.append({
+                "id": span_id,
+                "start": output_start,
+                "end": output_end,
+                "sha256": digest,
+            })
+            source_cursor = source_character + len(token)
+            output_cursor = output_character + len(token)
+        return {
+            "explicit_skill": "harness-operator-brief",
+            "profile": "operator-communication",
+            "source_kind": "bounded-technical-text",
+            "source_text": source,
+            "source_sha256": hashlib.sha256(source.encode("utf-8")).hexdigest(),
+            "protected_spans": source_spans,
+            "rendered_text": output,
+            "bindings": output_bindings,
+            "changed_paths": [],
+        }
+
+    def test_brief_checker_preserves_unicode_source_bytes_and_reports_zero_changes(self) -> None:
+        source = "Décision: WO-EX-001. Run harnessctl focus . --artifact WO-EX-001."
+        rendered = "Next action. " + source
+        request = self.brief_request(
+            source,
+            [
+                ("WO-EX-001", "identifier"),
+                ("harnessctl focus . --artifact WO-EX-001", "command"),
+            ],
+            rendered=rendered,
+        )
+        result = self.brief.validate_brief(request)
+        self.assertEqual("completed", result["outcome"])
+        self.assertEqual("operator-communication", result["profile"])
+        self.assertEqual(2, result["protected_binding_count"])
+        self.assertEqual([], result["changed_paths"])
+
+    def test_brief_checker_fails_closed_on_source_span_output_and_effect_changes(self) -> None:
+        request = self.brief_request(
+            "Use WO-EX-002 at version 0.6.0.",
+            [("WO-EX-002", "identifier"), ("0.6.0", "version")],
+            rendered="Outcome: Use WO-EX-002 at version 0.6.0.",
+        )
+        cases = (
+            ("source-digest", lambda value: value.__setitem__("source_sha256", "0" * 64), "TCM006"),
+            (
+                "overlap",
+                lambda value: value["protected_spans"][1].__setitem__(
+                    "start", value["protected_spans"][0]["end"] - 1
+                ),
+                "TCM007",
+            ),
+            (
+                "output-byte",
+                lambda value: value.__setitem__("rendered_text", value["rendered_text"].replace("0.6.0", "0.6.1")),
+                "TCM010",
+            ),
+            ("changed-path", lambda value: value.__setitem__("changed_paths", ["README.md"]), "TCM012"),
+            ("unknown-field", lambda value: value.__setitem__("authority", "assurance-owner"), "TCM002"),
+        )
+        for label, mutate, code in cases:
+            with self.subTest(label=label):
+                changed = json.loads(json.dumps(request))
+                mutate(changed)
+                with self.assertRaisesRegex(self.brief.BriefCheckError, code):
+                    self.brief.validate_brief(changed)
+
+    def test_canonical_restitution_block_is_returned_alone(self) -> None:
+        source = "Outcome\nCompleted.\n\nCurrent lifecycle state\n- WO-EX-003 is approved."
+        exact = self.brief_request(source, [(source, "canonical-restitution-block")])
+        self.assertEqual("completed", self.brief.validate_brief(exact)["outcome"])
+        surrounded = self.brief_request(
+            source,
+            [(source, "canonical-restitution-block")],
+            rendered="Summary:\n" + source,
+        )
+        with self.assertRaisesRegex(self.brief.BriefCheckError, "TCM013"):
+            self.brief.validate_brief(surrounded)
+
+    def test_protected_partition_property_rejects_each_changed_binding(self) -> None:
+        source = "alpha beta gamma delta"
+        tokens = [(token, "established-terminology") for token in source.split()]
+        request = self.brief_request(source, tokens, rendered="Outcome: " + source)
+        self.brief.validate_brief(request)
+        for index in range(len(tokens)):
+            changed = json.loads(json.dumps(request))
+            binding = changed["bindings"][index]
+            binding["sha256"] = "0" * 64
+            with self.subTest(index=index), self.assertRaisesRegex(self.brief.BriefCheckError, "TCM010"):
+                self.brief.validate_brief(changed)
+
+    def test_review_corpus_covers_operator_artifact_safety_and_terms(self) -> None:
+        corpus = json.loads(TECHNICAL_COMMUNICATION_CORPUS.read_text(encoding="utf-8"))
+        self.assertEqual("se-harness-technical-communication-review-corpus-v1", corpus["schema"])
+        self.assertEqual("5/10", corpus["target_expertise"])
+        self.assertGreaterEqual(len(corpus["cases"]), 11)
+        profiles = [item["profile"] for item in corpus["cases"]]
+        self.assertGreaterEqual(profiles.count("operator-communication"), 4)
+        self.assertGreaterEqual(profiles.count("technical-artifact-writing"), 5)
+        ids = {item["id"] for item in corpus["cases"]}
+        self.assertTrue({"operator-current-decision", "operator-blocked", "operator-exact-output",
+                         "operator-no-current-state", "safety-qualification", "project-term"}.issubset(ids))
+        expected_fields = {"actor", "action", "condition", "force", "qualification", "result"}
+        for item in corpus["cases"]:
+            self.assertEqual(expected_fields, set(item["expected"]))
+            for token in item["protected_tokens"]:
+                self.assertIn(token, item["source"])
 
     def test_canonical_json_is_stable_and_rejects_floats(self) -> None:
         self.assertEqual(b'{"a":1,"z":[true,null]}\n', canonical_json_bytes({"z": [True, None], "a": 1}))

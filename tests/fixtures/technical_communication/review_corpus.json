@@ -1,0 +1,123 @@
+{
+  "schema": "se-harness-technical-communication-review-corpus-v1",
+  "language": "en",
+  "target_expertise": "5/10",
+  "cases": [
+    {
+      "id": "operator-current-decision",
+      "profile": "operator-communication",
+      "source_kind": "structured-harness-result",
+      "source": "WO-EX-001 is implemented. Decision required: assurance-owner. Command: harnessctl focus . --artifact VREC-EX-001",
+      "protected_tokens": ["WO-EX-001", "assurance-owner", "harnessctl focus . --artifact VREC-EX-001"],
+      "expected": {
+        "actor": "assurance-owner",
+        "action": "decide the verification record",
+        "condition": "WO-EX-001 is implemented",
+        "force": "required",
+        "qualification": "no verification decision has occurred",
+        "result": "one next decision"
+      }
+    },
+    {
+      "id": "operator-blocked",
+      "profile": "operator-communication",
+      "source_kind": "structured-harness-result",
+      "source": "WO-EX-002 remains in_progress. Review preflight failed at QG-G4-IMPLEMENTATION-EVIDENCE.",
+      "protected_tokens": ["WO-EX-002", "in_progress", "QG-G4-IMPLEMENTATION-EVIDENCE"],
+      "expected": {
+        "actor": "engineering-owner",
+        "action": "resolve the failed evidence gate",
+        "condition": "review preflight failed",
+        "force": "must before completion",
+        "qualification": "work order state is unchanged",
+        "result": "completion is blocked"
+      }
+    },
+    {
+      "id": "operator-exact-output",
+      "profile": "operator-communication",
+      "source_kind": "structured-harness-result",
+      "source": "Outcome\nCompleted.\n\nCurrent lifecycle state\n- WO-EX-003 is approved.",
+      "protected_tokens": ["Outcome\nCompleted.\n\nCurrent lifecycle state\n- WO-EX-003 is approved."],
+      "expected": {
+        "actor": "none",
+        "action": "return the block alone",
+        "condition": "canonical restitution applies",
+        "force": "must",
+        "qualification": "no surrounding prose",
+        "result": "byte-identical output"
+      }
+    },
+    {
+      "id": "operator-no-current-state",
+      "profile": "operator-communication",
+      "source_kind": "bounded-technical-text",
+      "source": "Explain the current state of WO-EX-004.",
+      "protected_tokens": ["WO-EX-004"],
+      "expected": {
+        "actor": "operator",
+        "action": "supply a current structured result or use harness-orient",
+        "condition": "current state is requested without current evidence",
+        "force": "required",
+        "qualification": "do not infer state",
+        "result": "brief stops"
+      }
+    },
+    {
+      "id": "artifact-requirement",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "WHEN input is invalid, THE SYSTEM SHALL return ERR-17 and preserve the source.",
+      "protected_tokens": ["WHEN input is invalid, THE SYSTEM SHALL return ERR-17 and preserve the source."],
+      "expected": {"actor": "system", "action": "return ERR-17", "condition": "input is invalid", "force": "shall", "qualification": "preserve source", "result": "error response"}
+    },
+    {
+      "id": "artifact-specification",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "The parser accepts schema se-example-v1 and rejects unknown fields.",
+      "protected_tokens": ["se-example-v1"],
+      "expected": {"actor": "parser", "action": "accept or reject", "condition": "schema and fields", "force": "defined behavior", "qualification": "closed fields", "result": "bounded parse"}
+    },
+    {
+      "id": "artifact-architecture",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "The read-only adapter depends on the policy; the policy does not depend on the adapter.",
+      "protected_tokens": ["read-only"],
+      "expected": {"actor": "adapter", "action": "depend on policy", "condition": "runtime composition", "force": "architecture constraint", "qualification": "one-way dependency", "result": "policy stays authoritative"}
+    },
+    {
+      "id": "artifact-work-order",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "Edit only src/example.py and retain evidence under docs/evidence/WO-EX-005/.",
+      "protected_tokens": ["src/example.py", "docs/evidence/WO-EX-005/"],
+      "expected": {"actor": "implementation agent", "action": "edit and retain evidence", "condition": "authorized work", "force": "scope limit", "qualification": "only declared path", "result": "bounded candidate"}
+    },
+    {
+      "id": "artifact-verification",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "Pass requires latency <= 50 ms and zero changed protected bytes.",
+      "protected_tokens": ["latency <= 50 ms", "zero changed protected bytes"],
+      "expected": {"actor": "assurance reviewer", "action": "assess evidence", "condition": "candidate verification", "force": "pass requires", "qualification": "both thresholds", "result": "pass or fail"}
+    },
+    {
+      "id": "safety-qualification",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "The controller MUST stop before motion when the guard signal is unknown.",
+      "protected_tokens": ["The controller MUST stop before motion when the guard signal is unknown."],
+      "expected": {"actor": "controller", "action": "stop before motion", "condition": "guard signal unknown", "force": "must", "qualification": "before motion", "result": "safe stop"}
+    },
+    {
+      "id": "project-term",
+      "profile": "technical-artifact-writing",
+      "source_kind": "bounded-technical-text",
+      "source": "A candidate package is an expiring installable build for integration testing; it is not a release.",
+      "protected_tokens": ["candidate package", "not a release"],
+      "expected": {"actor": "repository", "action": "classify package", "condition": "integration testing", "force": "defined term", "qualification": "not a release", "result": "terminology preserved"}
+    }
+  ]
+}

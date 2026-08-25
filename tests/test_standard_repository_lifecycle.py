@@ -54,7 +54,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             )
         return wheel, hashlib.sha256(wheel.read_bytes()).hexdigest()
 
-    def test_standard_install_manages_canonical_cores_and_thin_host_surfaces(self) -> None:
+    def test_standard_install_manages_all_canonical_cores_and_thin_host_surfaces(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
@@ -69,6 +69,9 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                     ".agents/skills/harness-execute-work-order/agents/openai.yaml",
                     ".agents/skills/harness-execute-work-order/scripts/check_scope.py",
                     ".agents/skills/harness-execute-work-order/skill-contract.json",
+                    ".agents/skills/harness-operator-brief/SKILL.md",
+                    ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+                    ".agents/skills/harness-operator-brief/skill-contract.json",
                     ".agents/skills/harness-orient/SKILL.md",
                     ".agents/skills/harness-orient/scripts/orient.py",
                     ".agents/skills/harness-orient/skill-contract.json",
@@ -98,6 +101,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "harness-execute-work-order",
                 "harness-orient",
                 "harness-prepare-assurance",
+                "harness-operator-brief",
             ):
                 installed = target / ".agents/skills" / name
                 source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name
@@ -180,6 +184,25 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             for relative, customized in customized_files.items():
                 self.assertEqual("customized", actions[relative])
                 self.assertEqual(customized, (target / relative).read_bytes())
+
+    def test_standard_upgrade_detects_a_customized_technical_communication_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Policy Fixture", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            policy = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
+            customized = policy.read_bytes() + b"\nRepository-owned customization.\n"
+            policy.write_bytes(customized)
+
+            changes, _ = plan_install(target, project_name=None, mode="upgrade")
+            action = {
+                item.path: item.action
+                for item in changes
+            }["docs/engineering/TECHNICAL_COMMUNICATION.md"]
+            self.assertEqual("customized", action)
+            self.assertEqual(customized, policy.read_bytes())
+            checks = {item.name: item for item in inspect_installation(target)}
+            self.assertFalse(checks["managed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
 
     def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
