@@ -2,13 +2,19 @@
 id = "CAP-AUT-001"
 type = "capability"
 title = "Author any formal artifact under one managed policy with mechanical checks"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 derives_from = ["INT-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Author any formal artifact under one managed policy with mechanical checks

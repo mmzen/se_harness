@@ -2,12 +2,18 @@
 id = "INT-AUT-001"
 type = "intent"
 title = "Make artifact quality a policy the tool can check, not advice in a skill"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "product-owner"
 +++
 
 # Intent: Make artifact quality a policy the tool can check, not advice in a skill

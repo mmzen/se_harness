@@ -2,13 +2,19 @@
 id = "ADR-AUT-001"
 type = "adr"
 title = "Put authoring rules in a managed policy and the validator, not in per-type skills"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 decides = ["ARCH-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Put authoring rules in a managed policy and the validator, not in per-type skills

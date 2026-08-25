@@ -2,7 +2,7 @@
 id = "REQ-AUT-003"
 type = "requirement"
 title = "Close the verification-method vocabulary and migrate existing values"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a requirement is validated, THE SYSTEM SHALL require verificat
 verification_method = "automated-test-and-manual-review"
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Close the verification-method vocabulary and migrate existing values

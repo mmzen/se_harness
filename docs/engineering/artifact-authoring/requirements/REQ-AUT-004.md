@@ -2,7 +2,7 @@
 id = "REQ-AUT-004"
 type = "requirement"
 title = "Carry optional priority, source, and measure attributes on a requirement"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a requirement declares priority, source, or measure, THE SYSTE
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Carry optional priority, source, and measure attributes on a requirement

@@ -2,7 +2,7 @@
 id = "REQ-AUT-001"
 type = "requirement"
 title = "Distribute one managed authoring policy consumed by the drafting skill and by create-artifact"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN the standard harness installs or upgrades, THE SYSTEM SHALL pr
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Distribute one managed authoring policy consumed by the drafting skill and by create-artifact

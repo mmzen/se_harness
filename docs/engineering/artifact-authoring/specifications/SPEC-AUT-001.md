@@ -2,13 +2,19 @@
 id = "SPEC-AUT-001"
 type = "specification"
 title = "Authoring policy, requirement template, validator signals, attributes, vocabulary, and approval predicates"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 specifies = ["REQ-AUT-001", "REQ-AUT-002", "REQ-AUT-003", "REQ-AUT-004", "REQ-AUT-005", "REQ-AUT-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Authoring policy, requirement template, validator signals, attributes, vocabulary, and approval predicates

@@ -2,7 +2,7 @@
 id = "WO-AUT-002"
 type = "work_order"
 title = "Migrate the verification-method vocabulary and add the approval predicates"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -33,6 +33,12 @@ implements = ["REQ-AUT-003", "REQ-AUT-005"]
 specifications = ["SPEC-AUT-001"]
 architecture = ["ARCH-AUT-001", "ADR-AUT-001"]
 verification = ["VER-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Migrate the verification-method vocabulary and add the approval predicates

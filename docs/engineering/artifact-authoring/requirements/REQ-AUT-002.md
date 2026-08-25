@@ -2,7 +2,7 @@
 id = "REQ-AUT-002"
 type = "requirement"
 title = "Offer the five EARS statement shapes and signal non-singular statements"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a requirement is validated, THE SYSTEM SHALL accept a statemen
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Offer the five EARS statement shapes and signal non-singular statements

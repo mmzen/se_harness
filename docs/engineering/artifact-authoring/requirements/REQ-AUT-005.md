@@ -2,7 +2,7 @@
 id = "REQ-AUT-005"
 type = "requirement"
 title = "Refuse approval of an artifact with leftover placeholders or open decisions"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a definition artifact is evaluated for approval under QG-G1-DE
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T18:44:01Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Refuse approval of an artifact with leftover placeholders or open decisions
