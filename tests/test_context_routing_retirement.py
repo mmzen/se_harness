@@ -62,7 +62,7 @@ PACKAGED_FRAGMENT_BLOCK_DIGEST = "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103
 PERMITTED_MENTIONS = {
     "AGENTS.md": "owner region of this repository, governed by REQ-IAR-020",
     "docs/engineering/README.md": "this repository's own owner-owned seed",
-    "docs/engineering/agent-directive-surface/work-orders/WO-ADS-001.md": "draft work order whose execution scope names the file it removes",
+    "docs/engineering/agent-directive-surface/work-orders/WO-ADS-001.md": "work order whose execution scope names the retained file",
     "docs/engineering/harness-distribution/README.md": "packet index recording the retirement",
     "docs/engineering/harness-distribution/evidence/WO-DST-021-verification.md": "retained evidence for this retirement",
     "docs/engineering/harness-distribution/evidence/WO-DOC-007-verification.md": "historical evidence",

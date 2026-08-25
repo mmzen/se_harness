@@ -103,7 +103,7 @@ harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|handoff \
   [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
-  [--change-manifest PATH] [--json]
+  [--change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
   [--apply] [--json] [--result-schema 1|2]
@@ -136,9 +136,23 @@ authoritative. The deterministic direct human renderer uses `Outcome`, `Done`,
 `Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
 required`, `Next`, `Command or response`, and conditional `Alternatives` in
 that order. Exact-format consumers must use this renderer directly rather than
-ask a model to transcribe it. Existing workflow commands default to result
-schema 1 during the compatibility window; select `--result-schema 2` for the
-authoritative lifecycle semantics.
+ask a model to transcribe it. `focus` defaults to result schema 2; passing
+`--result-schema 1` prints `WEX-ADS-002` on standard error because that
+projection is not restitution. `transition`, `capture-verification`, and
+`prepare-release` still default to schema 1 during the compatibility window.
+
+When `check` is blocked, `Next` and `Command or response` carry the corrective
+form the contract declares for the first failing predicate: a command that
+differs from the evaluated one (for example the handoff check with
+`--changed-path` and `--changes-complete`), an escalation naming a decision
+right, or a response describing the evidence to retain. The evaluated command
+is never rendered as its own retry. Every schema-2 result carries
+`result_sha256`, the SHA-256 of the canonical human block (UTF-8, LF, no
+trailing whitespace); a pull-request body may declare it on one standalone
+`Harness-Restitution:` line for CI to recompute. At `handoff`, a work order
+whose `ready` verification record binds a commit no longer reachable from
+`HEAD` is blocked with `W-ADS-002`; `--pull-request-body` additionally reports
+`W-ADS-001` when the work-order trailer ends with a carriage return.
 
 An agent-facing handoff may adapt wording, ordering, headings, and relevant
 explanation or omit empty fields. It remains conforming only when it preserves

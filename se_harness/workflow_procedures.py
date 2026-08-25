@@ -101,6 +101,17 @@ def resolve_procedure(
         }
         if step["kind"] == "command":
             item["argv"] = _expand_argv(step["argv"], values)
+            if "corrective" in step:
+                item["corrective"] = {
+                    predicate_id: (
+                        {"kind": "command", "argv": _expand_argv(form["argv"], values)}
+                        if form["kind"] == "command"
+                        else {"kind": "response", "value": _expand_text(form["value"], values)}
+                        if form["kind"] == "response"
+                        else dict(form)
+                    )
+                    for predicate_id, form in step["corrective"].items()
+                }
         elif step["kind"] == "decision":
             item.update(
                 {
@@ -156,6 +167,44 @@ def command_or_response(step: Mapping[str, Any]) -> dict[str, Any]:
     if step.get("kind") == "decision":
         return {"kind": "response", "value": str(step.get("response", ""))}
     return {"kind": "response", "value": f"Continue with {step.get('procedure_id')}."}
+
+
+def corrective_response(
+    step: Mapping[str, Any],
+    predicate: Mapping[str, Any] | None,
+    *,
+    formal_snapshot_sha256: str,
+) -> tuple[str, dict[str, Any]]:
+    """Return the next action and command-or-response for a blocked step (ADS-RST-002).
+
+    The first failing predicate selects the corrective form declared by the
+    contract. A decision step without a form escalates to its own decision
+    right. The renderer substitutes only measured values, never guessed ones.
+    """
+
+    if predicate is None:
+        return "Escalate the reported blocker", {
+            "kind": "response",
+            "value": "Escalate to DR-REMEDIATION-SCOPE: resolve the reported blocker before rerunning this step.",
+        }
+    predicate_id = str(predicate.get("id", ""))
+    message = str(predicate.get("message", ""))
+    form = (step.get("corrective") or {}).get(predicate_id)
+    if form is None and step.get("kind") == "decision":
+        form = {"kind": "escalation", "decision_right": str(step.get("decision_right", "DR-REMEDIATION-SCOPE"))}
+    if form is None:
+        raise ProcedureError(f"WEX-ADS-001: step {step.get('id')} has no corrective form for {predicate_id}")
+    action = f"Supply the corrective input for {predicate_id}"
+    if form["kind"] == "command":
+        return action, {"kind": "command", "argv": list(form["argv"])}
+    if form["kind"] == "response":
+        value = str(form["value"]).replace("<formal-snapshot>", formal_snapshot_sha256)
+        return action, {"kind": "response", "value": value}
+    role = str(step.get("role") or "the accountable owner")
+    return f"Escalate {predicate_id} under {form['decision_right']}", {
+        "kind": "response",
+        "value": f"Escalate to {role} under {form['decision_right']}: {message}",
+    }
 
 
 def decision_required(step: Mapping[str, Any]) -> dict[str, Any] | None:
