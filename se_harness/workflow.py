@@ -19,11 +19,16 @@ from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import _load_validator_module, run_preflight
-from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
+from se_harness.workflow_contract import (
+    RISK_DEFAULT_ACCEPTANCE_LEVEL,
+    RISK_STAGE_ROLES,
+    load_workflow_contract,
+    validate_lifecycle_registry,
+)
 
 
 SCHEMA = 1
-PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
+PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "risk"}
 DEFINITION_TYPES = {
     "intent",
     "capability",
@@ -326,7 +331,14 @@ def project_scope(catalog: Mapping[str, Any], primary: Any) -> tuple[set[str], s
                 upstream, _ = _work_scope(catalog, catalog[work_id])
                 governing.update(upstream)
         return governing, set()
-    raise HarnessError("focus accepts only WO, VREC, or RLS artifacts")
+    if primary.artifact_type == "risk":
+        governing = set().union(
+            _targets(primary, "threatens"),
+            _targets(primary, "mitigated_by"),
+            _targets(primary, "avoided_by"),
+        )
+        return governing, set()
+    raise HarnessError("focus accepts only WO, VREC, RLS, or RISK artifacts")
 
 
 def _diagnostic(item: Any) -> dict[str, str]:
@@ -407,7 +419,7 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
-        raise HarnessError("focus accepts only WO, VREC, or RLS artifacts")
+        raise HarnessError("focus accepts only WO, VREC, RLS, or RISK artifacts")
     governing, dependencies = project_scope(catalog, primary)
     scope_paths = {
         catalog[item].path.resolve()
@@ -569,6 +581,19 @@ def _mutate(data: bytes, artifact: Any, target: str, actor: str, reason: str | N
         _set_scalar(front, "supersession_authorized_by", actor)
         _set_relation(front, "superseded_by", [reason])
         fields.update({"superseded_at", "supersession_authorized_by", "relations.superseded_by"})
+    if artifact.artifact_type == "risk" and reason is not None:
+        if target == "mitigating":
+            _set_relation(front, "mitigated_by", _risk_reason_ids(reason, "mitigated_by"))
+            fields.add("relations.mitigated_by")
+        elif target == "avoided":
+            _set_relation(front, "avoided_by", _risk_reason_ids(reason, "avoided_by"))
+            fields.add("relations.avoided_by")
+        elif target == "mitigated":
+            residual = _risk_residual(reason)
+            if residual is not None:
+                _set_scalar(front, "residual_likelihood", str(residual[0]))
+                _set_scalar(front, "residual_impact", str(residual[1]))
+                fields.update({"residual_likelihood", "residual_impact"})
     _append_event(front, artifact.status, target, actor, now, reason)
     output = opening + newline.join(front) + newline + "+++" + newline + body
     return output.encode("utf-8"), tuple(sorted(fields))
@@ -576,6 +601,76 @@ def _mutate(data: bytes, artifact: Any, target: str, actor: str, reason: str | N
 
 def _family(artifact_type: str) -> str:
     return "definition" if artifact_type in DEFINITION_TYPES else artifact_type
+
+
+_RISK_ID = r"[A-Z][A-Z0-9-]*-\d{3}"
+
+
+def _risk_reason_ids(reason: str, relation: str) -> list[str]:
+    match = re.search(rf"{relation}\s+((?:{_RISK_ID})(?:\s*,\s*{_RISK_ID})*)", reason)
+    if match is None:
+        return []
+    return list(dict.fromkeys(item.strip() for item in match.group(1).split(",")))
+
+
+def _risk_residual(reason: str) -> tuple[int, int] | None:
+    match = re.search(r"residual\s+([1-5])\s*[x\u00d7]\s*([1-5])", reason)
+    if match is None:
+        return None
+    return int(match.group(1)), int(match.group(2))
+
+
+def risk_policy(root: Path) -> int:
+    path = root / ".engineering-harness.toml"
+    if not path.is_file():
+        return RISK_DEFAULT_ACCEPTANCE_LEVEL
+    try:
+        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError) as exc:
+        raise HarnessError(f"cannot read risk policy: {exc}") from exc
+    table = data.get("risk")
+    if table is None:
+        return RISK_DEFAULT_ACCEPTANCE_LEVEL
+    level = table.get("acceptance_level", RISK_DEFAULT_ACCEPTANCE_LEVEL) if isinstance(table, dict) else None
+    if type(level) is not int or not 1 <= level <= 25:
+        raise HarnessError("[risk].acceptance_level must be an integer 1-25")
+    return level
+
+
+def _validate_risk_edge(artifact: Any, target: str, actor: str, reason: str | None, catalog: Mapping[str, Any] | None) -> None:
+    table = artifact.metadata.get("risk") if isinstance(artifact.metadata.get("risk"), dict) else {}
+    stage = table.get("stage")
+    allowed = RISK_STAGE_ROLES.get(stage, ())
+    if target != "raised" and actor not in allowed:
+        roles = " or ".join(allowed) if allowed else "the owner of a valid stage"
+        raise HarnessError(
+            f"transition {artifact.artifact_id}: a risk at stage {stage} is disposed by {roles} under DR-RISK-DISPOSE, not {actor}"
+        )
+    if target in {"accepted", "avoided", "mitigating", "mitigated", "withdrawn"} and reason is None:
+        raise HarnessError(f"transition {artifact.artifact_id} to {target} requires --reason with the disposition rationale")
+    if target == "avoided" and len(_risk_reason_ids(reason or "", "avoided_by")) != 1:
+        raise HarnessError(f"transition {artifact.artifact_id} to avoided requires --reason naming exactly one 'avoided_by ADR-...'")
+    if target == "mitigating" and not _risk_reason_ids(reason or "", "mitigated_by"):
+        raise HarnessError(f"transition {artifact.artifact_id} to mitigating requires --reason naming 'mitigated_by <WO-, REQ-, VER-, or OPS- IDs>'")
+    if target == "mitigated":
+        residual = _risk_residual(reason or "")
+        if residual is None:
+            raise HarnessError(f"transition {artifact.artifact_id} to mitigated requires --reason recording 'residual LxI' with L and I in 1-5")
+        level = table.get("acceptance_level")
+        if isinstance(level, int) and residual[0] * residual[1] >= level and "accepted" not in (reason or ""):
+            raise HarnessError(
+                f"transition {artifact.artifact_id} to mitigated: residual score {residual[0] * residual[1]} reaches acceptance level {level}; the reason must state that the residual is accepted"
+            )
+        if catalog is not None:
+            for work_id in _targets(artifact, "mitigated_by"):
+                work = catalog.get(work_id)
+                if work is None or work.artifact_type != "work_order":
+                    continue
+                if not _inverse(catalog, work_id, "verifies_work_order", "verification_record") or not any(
+                    catalog[record].status in {"verified", "released"}
+                    for record in _inverse(catalog, work_id, "verifies_work_order", "verification_record")
+                ):
+                    raise HarnessError(f"transition {artifact.artifact_id} to mitigated: mitigation work order {work_id} is not covered by a verified record")
 
 
 def _grants_authority(family: str, status: str) -> bool:
@@ -598,12 +693,17 @@ def _revision_policy(root: Path) -> dict[str, bool]:
     }
 
 
-def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: str | None) -> None:
+def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: str | None, catalog: Mapping[str, Any] | None = None) -> None:
     family = _family(artifact.artifact_type)
     row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
     if row is None or target not in row.transitions_to:
         raise HarnessError(f"transition {artifact.artifact_id}: {artifact.status} -> {target} is not allowed")
     _assertion(actor, f"decision actor for {artifact.artifact_id}", limit=128)
+    if artifact.artifact_type == "risk":
+        if reason is not None:
+            _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
+        _validate_risk_edge(artifact, target, actor, reason, catalog)
+        return
     if target in {"rejected", "superseded"}:
         if reason is None:
             detail = "successor VREC ID" if target == "superseded" else "rejection reason"
@@ -624,6 +724,8 @@ def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> lis
     errors.extend(validator.validate_common_metadata(artifacts, root))
     errors.extend(validator.validate_lifecycle_events(artifacts, root))
     errors.extend(validator.validate_type_specific_metadata(artifacts, root))
+    if hasattr(validator, "validate_risks"):
+        errors.extend(validator.validate_risks(artifacts, root, validator.load_risk_policy(root)))
     errors.extend(validator.validate_relations(artifacts, root))
     traceability_errors, _ = validator.validate_architecture_traceability(artifacts, root)
     errors.extend(traceability_errors)
@@ -804,7 +906,7 @@ def plan_transition(
         artifact = catalog.get(artifact_id)
         if artifact is None:
             raise HarnessError(f"unknown artifact ID: {artifact_id}")
-        _validate_edge(root, artifact, target, decisions[artifact_id], reasons.get(artifact_id))
+        _validate_edge(root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog)
         path = safe_destination(root, artifact.path.relative_to(root))
         original = path.read_bytes()
         # Plans intentionally expose no execution timestamp. A fixed valid value

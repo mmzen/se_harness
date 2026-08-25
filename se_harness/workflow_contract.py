@@ -27,7 +27,28 @@ EVALUATORS = {
     "review_evidence_available",
     "review_preflight_ready",
     "start_preflight_ready",
+    "undisposed_risks_threatening_scope",
 }
+RISK_STAGES = ("definition", "architecture", "implementation", "verification", "release", "operation")
+RISK_CATEGORIES = ("safety", "security", "compliance", "process", "schedule", "quality")
+RISK_STAGE_ROLES = {
+    "definition": ("product-owner", "domain-owner"),
+    "architecture": ("technical-owner",),
+    "implementation": ("engineering-owner",),
+    "verification": ("assurance-owner",),
+    "release": ("release-owner",),
+    "operation": ("service-owner",),
+}
+RISK_STAGE_TYPES = {
+    "definition": ("intent", "capability", "requirement"),
+    "architecture": ("specification", "architecture", "adr"),
+    "implementation": ("work_order",),
+    "verification": ("verification", "verification_record"),
+    "release": ("release_contract", "release_record"),
+    "operation": ("operating_contract",),
+}
+RISK_UNDISPOSED = ("raised", "mitigating")
+RISK_DEFAULT_ACCEPTANCE_LEVEL = 1
 _PLACEHOLDER = re.compile(r"\{([a-z][a-z0-9_]*)\}")
 _ID_PATTERNS = {
     "workflow": re.compile(r"^WFL-[A-Z0-9-]+$"),
@@ -37,7 +58,7 @@ _ID_PATTERNS = {
     "predicate": re.compile(r"^QGP-[A-Z0-9-]+$"),
 }
 LIFECYCLE_FAMILIES = frozenset(
-    {"definition", "work_order", "verification_record", "release_record"}
+    {"definition", "work_order", "verification_record", "release_record", "risk"}
 )
 LIFECYCLE_FIELDS = frozenset(
     {
@@ -77,7 +98,7 @@ def validate_lifecycle_registry(workflow: Mapping[str, Any]) -> LifecycleRegistr
 
     raw = workflow.get("lifecycles")
     if not isinstance(raw, Mapping) or set(raw) != LIFECYCLE_FAMILIES:
-        raise ContractError("workflow lifecycles must declare exactly the four artifact families")
+        raise ContractError("workflow lifecycles must declare exactly the five artifact families")
     families: dict[str, Mapping[str, LifecycleState]] = {}
     for family in sorted(LIFECYCLE_FAMILIES):
         raw_states = raw.get(family)

@@ -23,7 +23,9 @@ from se_harness.installer import HarnessError
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
+# The candidate registry and validator live in the standard template; the root copies
+# are the released evaluator's and may lag them (WO-RSK-001).
+SCRIPTS = REPOSITORY_ROOT / "templates/repository/standard/scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -59,9 +61,20 @@ class ArtifactAuthoringTests(unittest.TestCase):
         self.assertEqual(ARTIFACT_PREFIXES, portable_layout.ARTIFACT_PREFIXES)
         self.assertEqual(DOMAIN_PATTERN.pattern, portable_layout.DOMAIN_PATTERN.pattern)
         self.assertEqual(RESERVED_DOMAINS, portable_layout.RESERVED_DOMAINS)
+        released_registry = (REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").read_bytes().replace(b"\r\n", b"\n")
+        candidate_registry = (
+            REPOSITORY_ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py"
+        ).read_bytes()
+        # The released root registry predates the risk artifact; the candidate adds exactly
+        # the risk directory, prefix, and reserved slug (WO-RSK-001).
+        expected_candidate = (
+            released_registry.replace(b'    "operating_contract": ("operations",),\n}', b'    "operating_contract": ("operations",),\n    "risk": ("risks",),\n}', 1)
+            .replace(b'    "operating_contract": "OPS-",\n}', b'    "operating_contract": "OPS-",\n    "risk": "RISK-",\n}', 1)
+            .replace(b'"operations", "release", "releases", "requirements", "specifications",', b'"operations", "release", "releases", "requirements", "risks", "specifications",', 1)
+        )
+        self.assertNotEqual(released_registry, candidate_registry)
         self.assertEqual(
-            (REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").read_bytes(),
-            (REPOSITORY_ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py").read_bytes(),
+            expected_candidate.replace(b"\r\n", b"\n"), candidate_registry.replace(b"\r\n", b"\n")
         )
         self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
 

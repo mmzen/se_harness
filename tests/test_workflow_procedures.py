@@ -16,6 +16,7 @@ class WorkflowProcedureTests(unittest.TestCase):
             [
                 "STEP-WO-START-FOCUS",
                 "STEP-WO-START-PREFLIGHT",
+                "STEP-WO-START-RISKS",
                 "STEP-WO-START-DECIDE",
                 "STEP-WO-START-PREVIEW",
                 "STEP-WO-START-APPLY",
@@ -27,8 +28,8 @@ class WorkflowProcedureTests(unittest.TestCase):
             ["harnessctl", "preflight", ".", "--work-order", "WO-ABC-001", "--phase", "start"],
             resolved["steps"][1]["argv"],
         )
-        self.assertEqual("decision", resolved["steps"][2]["kind"])
-        self.assertEqual("DR-WO-START", resolved["steps"][2]["decision_right"])
+        self.assertEqual("decision", resolved["steps"][3]["kind"])
+        self.assertEqual("DR-WO-START", resolved["steps"][3]["decision_right"])
 
     def test_shell_metacharacters_remain_one_inert_text_argument(self) -> None:
         procedure = {

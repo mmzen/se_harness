@@ -518,6 +518,25 @@ def prepare_release(
     if len(identities) != 1:
         raise HarnessError("included verification records do not identify one candidate commit and object format")
     commit, object_format = next(iter(identities))
+    listed_risks: list[str] = []
+    for risk in catalog.values():
+        if risk.get("type") != "risk":
+            continue
+        targets = _relation_targets(_load_metadata(root, risk), "threatens")
+        if not set(selected_work).intersection(targets):
+            continue
+        risk_status = str(risk.get("status", ""))
+        if risk_status in {"raised", "mitigating"}:
+            raise HarnessError(
+                f"risk {risk['id']} is {risk_status} and threatens released work; dispose it before preparing a release"
+            )
+        if risk_status in {"accepted", "mitigated"}:
+            listed_risks.append(str(risk["id"]))
+    listed_risks.sort()
+    risk_array = "[" + ", ".join(json.dumps(item) for item in listed_risks) + "]"
+    risk_lines = (
+        "\n".join(f"- `{item}`" for item in listed_risks) if listed_risks else "- none"
+    )
     selected_domain = _record_domain(catalog, selected_work, domain)
     destination = _output_path(
         root,
@@ -555,6 +574,7 @@ evaluator_evidence_sha256 = "{authority.evidence_sha256}"
 satisfies = ["{release_contract_id}"]
 includes_verification = {verification_array}
 releases_work = {work_array}
+lists_risks = {risk_array}
 +++
 
 # Release Record Candidate
@@ -562,6 +582,12 @@ releases_work = {work_array}
 This ready record proposes release `{version}` for {readable_work} from candidate commit `{commit}`. An accountable release owner must review and transition it to `released`; this command did not approve, commit, tag, release, or publish anything.
 
 The release candidate commit may precede the governance commit retaining this record. Any release tag must be created and checked by the authorized release process.
+
+## Risks shipped with this release
+
+Accepted or mitigated risks threatening the released work, derived at preparation:
+
+{risk_lines}
 '''
     _write_record_and_evidence(
         destination,

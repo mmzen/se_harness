@@ -316,7 +316,11 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
     if name == "changed_paths_within_scope":
         if not context.change_set.complete:
             return "not_assessable", "Changed-path scope cannot pass without an explicit completeness assertion."
-        outside = [path for path in context.change_set.paths if not path_is_admitted(path, context.declared_scope)]
+        admitted_risks = undisposed_risk_paths(context.root, context.catalog)
+        outside = [
+            path for path in context.change_set.paths
+            if not path_is_admitted(path, context.declared_scope) and path not in admitted_risks
+        ]
         if outside:
             return "fail", f"WEX201: changed path is outside execution scope: {outside[0]}"
         return "pass", f"All {len(context.change_set.paths)} declared changed path(s) are within execution scope."
@@ -326,7 +330,69 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return _preflight_status(context, "review")
     if name == "review_evidence_available":
         return _review_evidence(context)
+    if name == "undisposed_risks_threatening_scope":
+        return _undisposed_risks(context, predicate)
     raise ContractError(f"unknown predicate evaluator {name}")
+
+
+_RISK_PATH = re.compile(r"^docs/engineering/[a-z0-9-]+/risks/RISK-[A-Z][A-Z0-9-]*-\d{3}\.md$")
+
+
+def undisposed_risk_paths(root: Path, catalog: Mapping[str, Any]) -> frozenset[str]:
+    """Repository-relative paths of identified or raised risks; always admitted as changed paths (RSK-CMD-004)."""
+
+    paths: set[str] = set()
+    for artifact in catalog.values():
+        if artifact.artifact_type != "risk" or artifact.status not in {"identified", "raised"}:
+            continue
+        try:
+            relative = artifact.path.resolve().relative_to(root.resolve()).as_posix()
+        except ValueError:
+            continue
+        if _RISK_PATH.fullmatch(relative):
+            paths.add(relative)
+    return frozenset(paths)
+
+
+def risks_threatening(catalog: Mapping[str, Any], primary: Any, *, statuses: Iterable[str]) -> list[Any]:
+    """Risks in the given statuses whose threatens relation meets the selected artifact or its chain."""
+
+    from se_harness.workflow import project_scope
+
+    try:
+        governing, dependencies = project_scope(catalog, primary)
+    except HarnessError:
+        governing, dependencies = set(), set()
+    selected = governing | dependencies | {primary.artifact_id}
+    wanted = set(statuses)
+    hits = []
+    for artifact in catalog.values():
+        if artifact.artifact_type != "risk" or artifact.status not in wanted:
+            continue
+        relations = artifact.metadata.get("relations", {})
+        targets = relations.get("threatens", []) if isinstance(relations, dict) else []
+        if isinstance(targets, list) and selected.intersection(str(item) for item in targets):
+            hits.append(artifact)
+    return sorted(hits, key=lambda item: item.artifact_id)
+
+
+def _undisposed_risks(context: CheckpointContext, predicate: Mapping[str, Any]) -> tuple[str, str]:
+    from se_harness.workflow_contract import RISK_STAGE_ROLES
+
+    statuses = ("raised", "mitigating") if str(predicate.get("id", "")).startswith("QGP-G5") else ("raised",)
+    hits = risks_threatening(context.catalog, context.artifact, statuses=statuses)
+    if not hits:
+        return "pass", "No undisposed risk threatens the selected scope."
+    first = hits[0]
+    table = first.metadata.get("risk") if isinstance(first.metadata.get("risk"), dict) else {}
+    stage = table.get("stage")
+    if stage not in RISK_STAGE_ROLES:
+        return "not_assessable", f"{first.artifact_id} has an invalid [risk].stage; it cannot be assessed."
+    role = " or ".join(RISK_STAGE_ROLES[stage])
+    return "fail", (
+        f"{first.artifact_id} ({first.status}, score {table.get('score')} at level {table.get('acceptance_level')}) "
+        f"threatens the selected scope; the {role} must dispose it under DR-RISK-DISPOSE."
+    )
 
 
 def _aggregate(statuses: Iterable[str]) -> str:

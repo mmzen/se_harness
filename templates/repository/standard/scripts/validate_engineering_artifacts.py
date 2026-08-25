@@ -42,7 +42,7 @@ repository_record_relative_path = _LAYOUT.repository_record_relative_path
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
 VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
 
-TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
+TYPE_PREFIX = dict(ARTIFACT_PREFIXES)
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 EVIDENCE_WORK_ORDER_PATTERN = re.compile(
@@ -141,7 +141,7 @@ class LifecycleStatePolicy:
     predecessor_adapter: str
 
 
-_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record"}
+_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "risk"}
 _LIFECYCLE_FIELDS = {
     "transitions_to",
     "grants_authority",
@@ -178,7 +178,7 @@ def _load_workflow_lifecycles() -> MappingProxyType:
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("lifecycles")
     if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
-        raise RuntimeError("managed workflow contract must declare exactly the four lifecycle families")
+        raise RuntimeError("managed workflow contract must declare exactly the five lifecycle families")
     lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
     for family in sorted(_LIFECYCLE_FAMILIES):
         raw_states = source.get(family)
@@ -255,7 +255,7 @@ ACTIVE_COVERAGE_STATUSES = frozenset({
 
 
 def _lifecycle_family(artifact_type: str) -> str:
-    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record"} else "definition"
+    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "risk"} else "definition"
 
 
 def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
@@ -316,7 +316,126 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("release_record", "satisfies"): {"release_contract"},
     ("release_record", "includes_verification"): {"verification_record"},
     ("release_record", "releases_work"): {"work_order"},
+    ("release_record", "lists_risks"): {"risk"},
+    ("risk", "threatens"): {
+        "intent", "capability", "requirement", "specification", "architecture", "adr",
+        "verification", "work_order", "verification_record", "release_contract",
+        "release_record", "operating_contract",
+    },
+    ("risk", "mitigated_by"): {"work_order", "requirement", "verification", "operating_contract"},
+    ("risk", "avoided_by"): {"adr"},
 }
+
+RISK_STAGES = ("definition", "architecture", "implementation", "verification", "release", "operation")
+RISK_CATEGORIES = ("safety", "security", "compliance", "process", "schedule", "quality")
+RISK_STAGE_TYPES = {
+    "definition": {"intent", "capability", "requirement"},
+    "architecture": {"specification", "architecture", "adr"},
+    "implementation": {"work_order"},
+    "verification": {"verification", "verification_record"},
+    "release": {"release_contract", "release_record"},
+    "operation": {"operating_contract"},
+}
+RISK_DEFAULT_ACCEPTANCE_LEVEL = 1
+RISK_TABLE_FIELDS = {"category", "stage", "raised_by", "likelihood", "impact", "score", "acceptance_level", "cause", "effect"}
+
+
+def load_risk_policy(repository_root: Path) -> int | None:
+    """Return the configured acceptance level, the default 1, or None when the section is invalid."""
+
+    path = repository_root / ".engineering-harness.toml"
+    if not path.is_file():
+        return RISK_DEFAULT_ACCEPTANCE_LEVEL
+    try:
+        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        return RISK_DEFAULT_ACCEPTANCE_LEVEL
+    table = data.get("risk")
+    if table is None:
+        return RISK_DEFAULT_ACCEPTANCE_LEVEL
+    if not isinstance(table, dict) or not set(table).issubset({"acceptance_level", "scale", "release_requires_disposition"}):
+        return None
+    level = table.get("acceptance_level", RISK_DEFAULT_ACCEPTANCE_LEVEL)
+    if type(level) is not int or not 1 <= level <= 25:
+        return None
+    if table.get("scale", "5x5") != "5x5" or table.get("release_requires_disposition", True) is not True:
+        return None
+    return level
+
+
+def _risk_int(value: Any, low: int, high: int) -> int | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, str) and value.isdigit():
+        value = int(value)
+    if type(value) is int and low <= value <= high:
+        return value
+    return None
+
+
+def validate_risks(artifacts: list[Artifact], report_root: Path, acceptance_level: int | None) -> list[Diagnostic]:
+    """Validate risk artifacts: table shape, computed score, stage/type match, disposition fields."""
+
+    errors: list[Diagnostic] = []
+    catalog = {artifact.artifact_id: artifact for artifact in artifacts if artifact.artifact_id != "<unknown>"}
+    for artifact in artifacts:
+        if artifact.artifact_type != "risk":
+            continue
+        table = artifact.metadata.get("risk")
+        if not isinstance(table, dict) or not RISK_TABLE_FIELDS.issubset(table):
+            missing = sorted(RISK_TABLE_FIELDS - set(table)) if isinstance(table, dict) else sorted(RISK_TABLE_FIELDS)
+            _add_error(errors, artifact, report_root, "E-RSK-001", f"[risk] table is missing {', '.join(missing)}", plane="structure")
+            continue
+        likelihood = _risk_int(table.get("likelihood"), 1, 5)
+        impact = _risk_int(table.get("impact"), 1, 5)
+        score = _risk_int(table.get("score"), 1, 25)
+        level = _risk_int(table.get("acceptance_level"), 1, 25)
+        if likelihood is None or impact is None or score is None or level is None:
+            _add_error(errors, artifact, report_root, "E-RSK-001", "likelihood and impact must be integers 1-5; score and acceptance_level integers 1-25", plane="structure")
+            continue
+        if score != likelihood * impact:
+            _add_error(errors, artifact, report_root, "E-RSK-001", f"score {score} differs from likelihood x impact = {likelihood * impact}", plane="structure")
+        if table.get("category") not in RISK_CATEGORIES:
+            _add_error(errors, artifact, report_root, "E-RSK-001", f"category must be one of {', '.join(RISK_CATEGORIES)}", plane="structure")
+        stage = table.get("stage")
+        if stage not in RISK_STAGES:
+            _add_error(errors, artifact, report_root, "E-RSK-001", f"stage must be one of {', '.join(RISK_STAGES)}", plane="structure")
+            continue
+        for field in ("raised_by", "cause", "effect"):
+            if not isinstance(table.get(field), str) or not table[field].strip():
+                _add_error(errors, artifact, report_root, "E-RSK-001", f"[risk].{field} must be a non-empty string", plane="structure")
+        relations = artifact.metadata.get("relations", {})
+        relations = relations if isinstance(relations, dict) else {}
+        for target in relations.get("threatens", []) if isinstance(relations.get("threatens"), list) else []:
+            threatened = catalog.get(target)
+            if threatened is not None and threatened.artifact_type not in RISK_STAGE_TYPES[stage]:
+                _add_error(errors, artifact, report_root, "E-RSK-002", f"stage {stage} cannot threaten {threatened.artifact_type} '{target}'", plane="governance")
+        status = artifact.status
+        if status == "identified" and score >= level:
+            _add_error(errors, artifact, report_root, "E-RSK-003", f"score {score} reaches acceptance level {level}; the risk must be raised", plane="governance")
+        if status in {"mitigating", "mitigated"} and not relations.get("mitigated_by"):
+            _add_error(errors, artifact, report_root, "E-RSK-004", f"a {status} risk must name at least one mitigated_by artifact", plane="governance")
+        if status == "avoided" and len(relations.get("avoided_by", []) or []) != 1:
+            _add_error(errors, artifact, report_root, "E-RSK-005", "an avoided risk must name exactly one avoided_by decision record", plane="governance")
+        if status == "mitigated":
+            residual_l = _risk_int(artifact.metadata.get("residual_likelihood"), 1, 5)
+            residual_i = _risk_int(artifact.metadata.get("residual_impact"), 1, 5)
+            if residual_l is None or residual_i is None:
+                _add_error(errors, artifact, report_root, "E-RSK-006", "a mitigated risk must record residual_likelihood and residual_impact (1-5)", plane="governance")
+            for work_id in relations.get("mitigated_by", []) or []:
+                work = catalog.get(work_id)
+                if work is not None and work.artifact_type == "work_order":
+                    covered = any(
+                        item.artifact_type == "verification_record"
+                        and item.status in {"verified", "released"}
+                        and work_id in (item.metadata.get("relations", {}) or {}).get("verifies_work_order", [])
+                        for item in artifacts
+                    )
+                    if not covered:
+                        _add_error(errors, artifact, report_root, "E-RSK-006", f"mitigation work order {work_id} is not covered by a verified record", plane="governance")
+    if acceptance_level is None:
+        errors.append(Diagnostic(".engineering-harness.toml", "E-RSK-007", "[risk] section is invalid: acceptance_level must be an integer 1-25, scale must be 5x5, release_requires_disposition must be true", "policy"))
+    return errors
 
 
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
@@ -1908,6 +2027,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "verification_record": ("verifies_work_order", "conforms_to"),
         "release_record": ("satisfies", "includes_verification", "releases_work"),
         "operating_contract": ("assures",),
+        "risk": ("threatens",),
     }
 
     for artifact in artifacts:
@@ -3505,6 +3625,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_lifecycle_events(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
+        errors.extend(validate_risks(artifacts, repository_root, load_risk_policy(repository_root)))
         errors.extend(validate_relations(artifacts, repository_root))
         traceability_errors, traceability_warnings = validate_architecture_traceability(
             artifacts,

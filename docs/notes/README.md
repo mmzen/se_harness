@@ -22,6 +22,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | --- | --- |
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
+| [Risk management](risk-management.md) | How is a risk identified, raised by policy, disposed by the stage owner, and listed by a release? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same four canonical repository skills without duplicating workflow authority? |

@@ -8,7 +8,9 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
+# The candidate registry lives in the standard template; the root copy is the released
+# evaluator's and may lag it (WO-RSK-001).
+SCRIPTS = REPOSITORY_ROOT / "templates/repository/standard/scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -29,7 +31,7 @@ CATALOG_COLUMNS = (
 class ArtifactCatalogTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.traceability_path = REPOSITORY_ROOT / "docs" / "engineering" / "TRACEABILITY.md"
+        cls.traceability_path = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "docs" / "engineering" / "TRACEABILITY.md"
         cls.traceability = cls.traceability_path.read_text(encoding="utf-8")
 
     def catalog_block(self) -> str:
@@ -146,7 +148,35 @@ envelope from fresh live state for each request.
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
-        self.assertEqual(released_traceability, candidate_traceability)
+        risk_type_row = (
+            "| `risk` | `RISK-` | Records one thing that could go wrong at a declared stage, its likelihood, impact, "
+            "computed score, the acceptance level in force, and its disposition. | It applies whenever an actor "
+            "identifies a risk; a score at or above the acceptance level raises it and blocks the threatened stage "
+            "until the stage owner disposes it. | Omit while no risk is identified; an empty register passes every "
+            "gate and never implies that no risk exists. | Owner of the threatened stage (`DR-RISK-DISPOSE`). | "
+            "`RISK.threatens -> *`; `RISK.mitigated_by -> WO, REQ, VER, OPS`; `RISK.avoided_by -> ADR`; "
+            "`RLS.lists_risks -> RISK` |\n"
+        )
+        risk_relation_rows = (
+            "| `TRC-REL-020` | `threatens` | `RISK -> INT, CAP, REQ, SPEC, ARCH, ADR, VER, WO, VREC, REL, RLS, OPS` | "
+            "A risk names at least one artifact of its declared stage; the stage and the target types match. |\n"
+            "| `TRC-REL-021` | `mitigated_by` | `RISK -> WO, REQ, VER, OPS` | A mitigating or mitigated risk names at "
+            "least one governed mitigation. |\n"
+            "| `TRC-REL-022` | `avoided_by` | `RISK -> ADR` | An avoided risk names exactly one decision record that "
+            "removes its cause. |\n"
+            "| `TRC-REL-023` | `lists_risks` | `RLS -> RISK` | A release record names every accepted or mitigated risk "
+            "threatening its released work; it is derived at preparation. |\n"
+        )
+        operating_row_end = released_traceability.index("| `OPS.assures -> REQ` |\n") + len("| `OPS.assures -> REQ` |\n")
+        expected_candidate_traceability = (
+            released_traceability[:operating_row_end] + risk_type_row + released_traceability[operating_row_end:]
+        )
+        relation_row_end = expected_candidate_traceability.index("continuing assurance. |\n") + len("continuing assurance. |\n")
+        expected_candidate_traceability = (
+            expected_candidate_traceability[:relation_row_end] + risk_relation_rows + expected_candidate_traceability[relation_row_end:]
+        )
+        self.assertNotIn("`TRC-REL-020`", released_traceability)
+        self.assertEqual(expected_candidate_traceability, candidate_traceability)
         self.assertIn("`TRC-001`", released_traceability)
         self.assertIn("`TRC-001`", candidate_traceability)
         self.assertIn("BCP 14", candidate_traceability)

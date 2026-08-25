@@ -57,6 +57,15 @@ EXPECTED = {
         "released": ((), True, True, False, True, "none"),
         "rejected": ((), False, False, False, True, "required"),
     },
+    "risk": {
+        "identified": (("raised", "accepted", "withdrawn"), False, False, True, True, "none"),
+        "raised": (("accepted", "avoided", "mitigating", "withdrawn"), False, False, True, True, "none"),
+        "mitigating": (("mitigated",), False, False, True, True, "none"),
+        "accepted": ((), False, False, False, True, "none"),
+        "avoided": ((), False, False, False, True, "none"),
+        "mitigated": ((), False, False, False, True, "none"),
+        "withdrawn": ((), False, False, False, True, "none"),
+    },
 }
 
 
@@ -116,6 +125,7 @@ class LifecycleStateContractTests(unittest.TestCase):
             "work_order": "work_order",
             "verification_record": "verification_record",
             "release_record": "release_record",
+            "risk": "risk",
         }
         for family, states in LIFECYCLE_REGISTRY.items():
             for status, row in states.items():
@@ -257,6 +267,13 @@ class LifecycleStateContractTests(unittest.TestCase):
                 "required_for_release = true\n",
                 encoding="utf-8",
             )
+            risk_reasons = {
+                "accepted": "accepted: residual tolerated",
+                "avoided": "avoided_by ADR-TST-001",
+                "mitigating": "mitigated_by WO-TST-001",
+                "mitigated": "residual 1x1 accepted",
+                "withdrawn": "duplicate of RISK-TST-002",
+            }
             for family, states in LIFECYCLE_REGISTRY.items():
                 artifact_type = "requirement" if family == "definition" else family
                 universe = set(states)
@@ -265,14 +282,20 @@ class LifecycleStateContractTests(unittest.TestCase):
                         artifact_id="TEST-001",
                         artifact_type=artifact_type,
                         status=source,
+                        metadata={"risk": {"stage": "implementation", "acceptance_level": 1}, "relations": {}},
+                        relations={},
                     )
+                    actor = "engineering-owner" if family == "risk" else "test-owner"
                     for target in universe:
-                        reason = "VREC-NEXT-001" if target == "superseded" else "review decision" if target == "rejected" else None
+                        if family == "risk":
+                            reason = risk_reasons.get(target)
+                        else:
+                            reason = "VREC-NEXT-001" if target == "superseded" else "review decision" if target == "rejected" else None
                         if target in row.transitions_to:
-                            _validate_edge(root, artifact, target, "test-owner", reason)
+                            _validate_edge(root, artifact, target, actor, reason)
                         else:
                             with self.assertRaisesRegex(Exception, "is not allowed"):
-                                _validate_edge(root, artifact, target, "test-owner", reason)
+                                _validate_edge(root, artifact, target, actor, reason)
 
     def test_validator_admits_exactly_the_registry_vocabulary_per_family(self) -> None:
         fixtures = {

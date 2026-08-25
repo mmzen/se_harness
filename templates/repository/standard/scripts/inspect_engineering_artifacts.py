@@ -38,6 +38,11 @@ QUEUE_SUGGESTION_CATALOG = {
         "release-owner",
         "Review the verified candidate and release controls and record or withhold the release decision.",
     ),
+    "dispose-risk": (
+        "dispose-raised-risk",
+        "stage-owner",
+        "Accept, avoid, or mitigate the raised risk as the owner of the stage it threatens under DR-RISK-DISPOSE.",
+    ),
     "accountable-review": (
         "review-accountable-decision",
         "artifact-owner",
@@ -390,6 +395,8 @@ def build_inspection(
         status = _text(artifact.get("status"), "artifact status")
         if status == "ready":
             decision_required.append(_queue_entry(artifact, _ready_action(artifact_type)))
+        if artifact_type == "risk" and status == "raised":
+            decision_required.append(_queue_entry(artifact, "dispose-risk"))
         if status == "draft":
             definition_pending.append(_queue_entry(artifact, "complete-definition"))
         if artifact_type == "work_order" and status in {"approved", "in_progress"}:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import json
 import re
 import stat
 import tempfile
@@ -27,6 +28,7 @@ ARTIFACT_DIRECTORIES: dict[str, tuple[str, ...]] = {
     "release_contract": ("release",),
     "release_record": ("releases",),
     "operating_contract": ("operations",),
+    "risk": ("risks",),
 }
 
 ARTIFACT_PREFIXES = {
@@ -42,6 +44,7 @@ ARTIFACT_PREFIXES = {
     "release_contract": "REL-",
     "release_record": "RLS-",
     "operating_contract": "OPS-",
+    "risk": "RISK-",
 }
 
 ARTIFACT_TEMPLATES = {
@@ -57,6 +60,7 @@ ARTIFACT_TEMPLATES = {
     "release_contract": "RELEASE_CONTRACT.template.md",
     "release_record": "RELEASE_RECORD.template.md",
     "operating_contract": "OPERATING_CONTRACT.template.md",
+    "risk": "RISK.template.md",
 }
 
 SUPPORTING_DIRECTORIES = ("evidence", "acceptance")
@@ -85,6 +89,7 @@ RESERVED_DOMAINS = frozenset(
         "release",
         "releases",
         "requirements",
+        "risks",
         "specifications",
         "target",
         "templates",
@@ -307,6 +312,109 @@ def _render_draft(template: str, artifact_type: str, artifact_id: str) -> bytes:
     if id_count != 1 or status_count != 1 or created_count != 1 or updated_count != 1:
         raise HarnessError("canonical template is missing required id, status, created, or updated metadata")
     return rendered.encode("utf-8")
+
+
+def create_risk(
+    repository: Path,
+    *,
+    domain: str,
+    artifact_id: str,
+    title: str,
+    stage: str,
+    category: str,
+    likelihood: int,
+    impact: int,
+    threatens: list[str],
+    cause: str,
+    effect: str,
+    raised_by: str,
+    acceptance_level: int,
+    now: str,
+    dry_run: bool,
+) -> tuple[AuthoringChange, str, int]:
+    """Write one identified or raised risk (REQ-RSK-006). Raising is computed, not decided."""
+
+    from se_harness.workflow_contract import RISK_CATEGORIES, RISK_STAGES
+
+    root = ensure_target(repository, must_exist=True)
+    _validate_installed_templates(root)
+    selected_id = validate_artifact_id(artifact_id, "risk")
+    if TITLE_PATTERN.fullmatch(title) is None:
+        raise HarnessError("risk title contains unsupported characters or length")
+    if stage not in RISK_STAGES:
+        raise HarnessError(f"stage must be one of {', '.join(RISK_STAGES)}")
+    if category not in RISK_CATEGORIES:
+        raise HarnessError(f"category must be one of {', '.join(RISK_CATEGORIES)}")
+    for name, value in (("likelihood", likelihood), ("impact", impact)):
+        if type(value) is not int or not 1 <= value <= 5:
+            raise HarnessError(f"{name} must be an integer 1-5")
+    if type(acceptance_level) is not int or not 1 <= acceptance_level <= 25:
+        raise HarnessError("acceptance level must be an integer 1-25")
+    targets = list(dict.fromkeys(item.strip() for item in threatens if item.strip()))
+    if not targets:
+        raise HarnessError("a risk must threaten at least one artifact")
+    for target in targets:
+        if ID_PATTERN.fullmatch(target) is None:
+            raise HarnessError(f"threatened artifact ID is invalid: {target}")
+        if _existing_artifact_path(root, target) is None:
+            raise HarnessError(f"threatened artifact does not exist: {target}")
+    for name, value in (("cause", cause), ("effect", effect), ("raised_by", raised_by)):
+        if not value.strip() or len(value) > 2000 or any(ch < " " for ch in value):
+            raise HarnessError(f"{name} must be 1-2000 printable characters")
+    score = likelihood * impact
+    status = "raised" if score >= acceptance_level else "identified"
+    destination_relative = canonical_artifact_relative_path(domain, "risk", selected_id)
+    destination = _validate_existing_chain(root, destination_relative, final_kind="file")
+    if destination.exists():
+        raise HarnessError(f"artifact destination already exists: {destination_relative.as_posix()}")
+    existing = _existing_artifact_path(root, selected_id)
+    if existing is not None:
+        raise HarnessError(f"artifact ID already exists: {selected_id} at {existing.relative_to(root).as_posix()}")
+    encode = json.dumps
+    event = (
+        f"\n[[lifecycle_events]]\nfrom = \"identified\"\nto = \"raised\"\ndecided_at = {encode(now)}\n"
+        f"decided_by = \"harnessctl\"\nreason = {encode(f'score {score} >= acceptance_level {acceptance_level}')}\n"
+        if status == "raised" else ""
+    )
+    content = (
+        "+++\n"
+        f"id = {encode(selected_id)}\ntype = \"risk\"\ntitle = {encode(title)}\nstatus = {encode(status)}\n"
+        f"owners = [{encode(raised_by)}]\ncreated = {encode(now[:10])}\nupdated = {encode(now[:10])}\n\n"
+        "[risk]\n"
+        f"category = {encode(category)}\nstage = {encode(stage)}\nraised_by = {encode(raised_by)}\n"
+        f"likelihood = {likelihood}\nimpact = {impact}\nscore = {score}\nacceptance_level = {acceptance_level}\n"
+        f"cause = {encode(cause)}\neffect = {encode(effect)}\n\n"
+        "[relations]\n"
+        f"threatens = [{', '.join(encode(item) for item in targets)}]\n"
+        "mitigated_by = []\navoided_by = []\n"
+        f"{event}+++\n\n"
+        f"# Risk: {title}\n\n## Scenario\n\n{cause}\n\n## Consequence if realised\n\n{effect}\n\n"
+        "## Options considered\n\n## Disposition rationale\n\n## Residual risk\n"
+    ).encode("utf-8")
+    parent_relative = destination_relative.parent
+    _validate_existing_chain(root, parent_relative, final_kind="directory")
+    change = AuthoringChange("create", destination_relative.as_posix())
+    if dry_run:
+        return change, status, score
+    mutation_guard.require_mutation_authority(root, operation="create-artifact")
+    missing: list[Path] = []
+    probe = root
+    for part in parent_relative.parts:
+        probe = probe / part
+        if not probe.exists():
+            missing.append(probe)
+    created_directories: list[Path] = []
+    try:
+        for directory in missing:
+            directory.mkdir()
+            created_directories.append(directory)
+        _atomic_create(destination, content)
+    except (OSError, HarnessError) as exc:
+        _rollback_directories(created_directories)
+        if isinstance(exc, HarnessError):
+            raise
+        raise HarnessError(f"cannot create risk safely: {exc}") from exc
+    return change, status, score
 
 
 def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:

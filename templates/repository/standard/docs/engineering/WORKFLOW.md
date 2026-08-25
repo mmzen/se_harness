@@ -34,6 +34,13 @@ invent, merge, or skip recommendations.
 information MUST NOT exercise a decision right. Only an explicit actor decision
 and an applied permitted transition change lifecycle state.
 
+`WFL-006` - A risk is identified by preparation (`harnessctl raise-risk`) and
+is `raised` by computation when its score reaches the repository's acceptance
+level. Only the owner of the stage it threatens disposes it under
+`DR-RISK-DISPOSE`; a disposition changes only the risk. `accepted`, `avoided`,
+`mitigated`, and `withdrawn` are terminal. A `raised` risk blocks the stage it
+threatens; a `mitigating` risk also blocks release.
+
 `WFL-005` - `rejected` is terminal. `superseded` is terminal and applies only
 to a ready VREC with one eligible successor. Historical lifecycle events MUST
 remain append-only.
@@ -64,6 +71,9 @@ The permitted transitions are:
 | Work order | `verified` | `released` |
 | Verification record | `ready` | `verified`, `rejected`, `superseded` |
 | Release record | `ready` | `released`, `rejected` |
+| Risk | `identified` | `raised`, `accepted`, `withdrawn` |
+| Risk | `raised` | `accepted`, `avoided`, `mitigating`, `withdrawn` |
+| Risk | `mitigating` | `mitigated` |
 
 Rows without a listed outgoing transition are terminal. All lifecycle rows are
 historically visible. Rejected VREC and RLS rows grant no authority, reserve no
@@ -145,6 +155,8 @@ contract's `non_effects` remain mandatory.
 | `WFL-VREC-SUPERSEDED` | Focused VREC is `superseded`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Preserve the old VREC as release-ineligible history. |
 | `WFL-DEFINITION-COMPLETE` | Focused definition is `approved`. | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` / `DR-DEFINITION-DECIDE` | `PROC-DEFINITION-COMPLETE` | Change only the explicitly selected definition. |
 | `WFL-DEFINITION-WORK` | Focused definition is `implemented`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-SELECT` | `PROC-DEFINITION-WORK` | Selecting work changes no lifecycle state. |
+| `WFL-RISK-RAISED` | Focused RISK is `raised`. | No gate / `DR-RISK-DISPOSE` | `PROC-RISK-DISPOSE` | The owner of the threatened stage accepts, avoids, mitigates, or withdraws only that risk. |
+| `WFL-RISK-MITIGATING` | Focused RISK is `mitigating`. | `QG-G4-VERIFIED-COVERAGE` / `DR-RISK-DISPOSE` | `PROC-RISK-MITIGATED` | Once every named mitigation work order is verified, the same owner records the residual and marks only that risk `mitigated`. |
 | `WFL-DEFAULT-REVIEW` | No earlier rule matches. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Report current state; change nothing. |
 | `WFL-FAIL-REMEDIATE` | A workflow command fails. | No gate / `DR-REMEDIATION-SCOPE` | `PROC-REMEDIATE` | Report the exact blocker and unchanged state. |
 
@@ -156,8 +168,10 @@ outcomes, and response values.
 
 | Procedure ID | Ordered typed steps |
 | --- | --- |
-| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
-| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff`; `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
+| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-RISKS` command `harnessctl risks . --artifact {artifact_id}`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff`; `STEP-WO-IMPLEMENT-RISKS` command `harnessctl risks . --artifact {artifact_id}`; `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
+| `PROC-RISK-DISPOSE` | `STEP-RISK-DISPOSE` decision `DR-RISK-DISPOSE` with outcomes `accepted`, `avoided`, `mitigating`, `withdrawn`. |
+| `PROC-RISK-MITIGATED` | `STEP-RISK-MITIGATED` decision `DR-RISK-DISPOSE` with outcome `mitigated`, gated by `QG-G4-VERIFIED-COVERAGE` over the named mitigation work. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl focus . --artifact {related_id}`. |
