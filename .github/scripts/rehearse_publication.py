@@ -478,12 +478,53 @@ def path_is_within(root_real: str, candidate: str | os.PathLike[str]) -> bool:
     return os.path.normcase(shared) == os.path.normcase(root_real)
 
 
-def _path_is_junction(path: Path) -> bool:
-    checker = getattr(os.path, "isjunction", None)
-    if checker is None:  # pragma: no cover - interpreters before 3.12
+# Junction detection has two routes, and both are named here rather than written
+# inline so a test can withdraw either one on a runtime that has it and prove which
+# surviving route decided the answer. os.path.isjunction and DirEntry.is_junction
+# arrived in 3.12; requires-python is >=3.11 and every rehearsal lane pins 3.11, so
+# the reparse route below is the one that runs in CI, not a floor for old
+# interpreters. The pattern mirrors se_harness.interpreter_safety and is duplicated
+# rather than imported: this program must run from a bare interpreter with no
+# repository module on the import path.
+OS_PATH_JUNCTION_PREDICATE = "isjunction"
+ENTRY_JUNCTION_PREDICATE = "is_junction"
+REPARSE_ATTRIBUTE_CONSTANT = "FILE_ATTRIBUTE_REPARSE_POINT"
+# Exactly the mount-point tag. A symbolic link is already classified by the
+# symlink predicates, and every other reparse tag - deduplication, cloud
+# placeholders, application execution aliases - marks an ordinary file or
+# directory that teardown must walk rather than unlink.
+JUNCTION_REPARSE_TAG_CONSTANT = "IO_REPARSE_TAG_MOUNT_POINT"
+
+
+def _reparse_state_reports_junction(attributes: os.stat_result | None) -> bool:
+    """Classify a stat result taken without following links as a junction.
+
+    Reads the Windows reparse-point attribute and tag, which are available well
+    below the 3.12 predicates. A platform or a stat result that carries neither
+    answers ``False`` by construction, which is correct on POSIX: there are no
+    junctions there and symbolic links are classified by the symlink predicates.
+    """
+    if attributes is None:
         return False
+    reparse_flag = getattr(stat, REPARSE_ATTRIBUTE_CONSTANT, None)
+    mount_tag = getattr(stat, JUNCTION_REPARSE_TAG_CONSTANT, None)
+    if reparse_flag is None or mount_tag is None:
+        return False
+    flags = getattr(attributes, "st_file_attributes", None)
+    if flags is None or not flags & reparse_flag:
+        return False
+    return getattr(attributes, "st_reparse_tag", None) == mount_tag
+
+
+def _path_is_junction(path: Path) -> bool:
+    checker = getattr(os.path, OS_PATH_JUNCTION_PREDICATE, None)
+    if checker is not None:
+        try:
+            return bool(checker(path))
+        except OSError:  # pragma: no cover - transient filesystem state
+            return False
     try:
-        return bool(checker(path))
+        return _reparse_state_reports_junction(os.lstat(path))
     except OSError:  # pragma: no cover - transient filesystem state
         return False
 
@@ -498,11 +539,14 @@ def _force_writable(path: Path) -> None:
 def _is_link(entry: os.DirEntry[str]) -> bool:
     if entry.is_symlink():
         return True
-    junction = getattr(entry, "is_junction", None)
-    if junction is None:  # pragma: no cover - interpreters before 3.12
-        return False
+    junction = getattr(entry, ENTRY_JUNCTION_PREDICATE, None)
+    if junction is not None:
+        try:
+            return bool(junction())
+        except OSError:  # pragma: no cover - transient filesystem state
+            return False
     try:
-        return bool(junction())
+        return _reparse_state_reports_junction(entry.stat(follow_symlinks=False))
     except OSError:  # pragma: no cover - transient filesystem state
         return False
 

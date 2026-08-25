@@ -19,6 +19,7 @@ import importlib.util
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import sysconfig
@@ -26,6 +27,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from typing import Any
+from unittest import mock
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -232,6 +234,356 @@ class TeardownTests(unittest.TestCase):
         with self.assertRaisesRegex(REHEARSAL.RehearsalError, "linked rehearsal root"):
             REHEARSAL.remove_tree_without_following_links(alias, [])
         self.assertTrue((target / "keep.txt").is_file())
+
+
+#: Names no runtime carries. Pointing the rehearsal module's route constants at
+#: them withdraws a detection route on an interpreter that has it, so any lane can
+#: construct the pinned-3.11 combination and prove which surviving route decided
+#: the answer. The mechanism mirrors `tests/test_interpreter_safety.py`: nothing
+#: inside `os`, `stat` or `pathlib` is patched, so a withdrawal cannot leak.
+WITHDRAWN_OS_PATH_PREDICATE = "isjunction_withdrawn_for_conformance"
+WITHDRAWN_ENTRY_PREDICATE = "is_junction_withdrawn_for_conformance"
+WITHDRAWN_REPARSE_ATTRIBUTE = "FILE_ATTRIBUTE_REPARSE_POINT_WITHDRAWN"
+WITHDRAWN_REPARSE_TAG = "IO_REPARSE_TAG_MOUNT_POINT_WITHDRAWN"
+#: Two `stat` constants every runtime carries, whatever the platform. Naming them
+#: supplies the reparse route off Windows, so the classification rule itself can be
+#: exercised on the Linux lane. They are read as an attribute mask and a tag value
+#: against a test-owned record and are never compared with real filesystem state.
+SUBSTITUTE_REPARSE_ATTRIBUTE = "S_IFDIR"
+SUBSTITUTE_REPARSE_TAG = "S_IFREG"
+
+
+@contextlib.contextmanager
+def as_the_pinned_runtime_sees_it(*, reparse_route: bool = True):
+    """Withdraw the 3.12 predicates for one block, on whatever interpreter runs.
+
+    `reparse_route` left true leaves the reparse route in place, which is the
+    combination CPython 3.11 on Windows actually presents. Setting it false
+    withdraws that route as well, which is the combination a platform reporting no
+    reparse information presents, and there the predicate must answer `False`
+    rather than raise.
+    """
+
+    with contextlib.ExitStack() as stack:
+        stack.enter_context(
+            mock.patch.object(
+                REHEARSAL, "OS_PATH_JUNCTION_PREDICATE", WITHDRAWN_OS_PATH_PREDICATE
+            )
+        )
+        stack.enter_context(
+            mock.patch.object(REHEARSAL, "ENTRY_JUNCTION_PREDICATE", WITHDRAWN_ENTRY_PREDICATE)
+        )
+        if not reparse_route:
+            stack.enter_context(
+                mock.patch.object(
+                    REHEARSAL, "REPARSE_ATTRIBUTE_CONSTANT", WITHDRAWN_REPARSE_ATTRIBUTE
+                )
+            )
+            stack.enter_context(
+                mock.patch.object(
+                    REHEARSAL, "JUNCTION_REPARSE_TAG_CONSTANT", WITHDRAWN_REPARSE_TAG
+                )
+            )
+        yield
+
+
+@contextlib.contextmanager
+def with_substituted_reparse_constants():
+    """Supply the reparse route with constants every platform publishes."""
+
+    with contextlib.ExitStack() as stack:
+        stack.enter_context(
+            mock.patch.object(
+                REHEARSAL, "REPARSE_ATTRIBUTE_CONSTANT", SUBSTITUTE_REPARSE_ATTRIBUTE
+            )
+        )
+        stack.enter_context(
+            mock.patch.object(
+                REHEARSAL, "JUNCTION_REPARSE_TAG_CONSTANT", SUBSTITUTE_REPARSE_TAG
+            )
+        )
+        yield
+
+
+class _StatRecord:
+    """A stat-like record carrying only the reparse members it is given.
+
+    A member left as `None` is not set at all, which is how the two members read
+    on a platform whose stat result does not carry them.
+    """
+
+    def __init__(self, *, attributes: int | None = None, tag: int | None = None) -> None:
+        if attributes is not None:
+            self.st_file_attributes = attributes
+        if tag is not None:
+            self.st_reparse_tag = tag
+
+
+def try_directory_junction(link: Path, target: Path) -> bool:
+    """Create a junction specifically, never a symbolic link.
+
+    `try_directory_symlink` prefers a symbolic link wherever the privilege exists,
+    and that is the shape `entry.is_symlink()` already classifies. The tests below
+    need the shape only the junction routes can classify, so they ask for a
+    junction directly and report when the platform has none.
+    """
+
+    if os.name != "nt":
+        return False
+    completed = subprocess.run(
+        ["cmd", "/c", "mklink", "/J", str(link), str(target)],
+        capture_output=True,
+        text=True,
+    )
+    return completed.returncode == 0 and link.exists()
+
+
+def make_junction_or_skip(case: unittest.TestCase, base: Path) -> tuple[Path, Path]:
+    """A junction at ``base/alias`` pointing at a populated ``base/outside``."""
+
+    target = base / "outside"
+    target.mkdir()
+    (target / "keep.txt").write_text("keep\n", encoding="utf-8")
+    link = base / "alias"
+    if not try_directory_junction(link, target):
+        case.skipTest("this platform creates no junction, so there is none to classify")
+    return link, target
+
+
+def entry_for(path: Path) -> os.DirEntry[str]:
+    with os.scandir(path.parent) as iterator:
+        for entry in iterator:
+            if entry.name == path.name:
+                return entry
+    raise AssertionError(f"no directory entry for {path}")
+
+
+class JunctionClassificationTests(unittest.TestCase):
+    """`SPEC-RLO-005` rules 19 and 21 must not depend on the interpreter version.
+
+    `os.path.isjunction` and `os.DirEntry.is_junction` arrived in Python 3.12.
+    `requires-python` is `>=3.11` and every lane in the rehearsal workflow pins
+    3.11, so a probe that answers `False` whenever those attributes are absent is
+    inert exactly where the rehearsal runs. Teardown then treats a junction as an
+    ordinary directory, recurses into it and deletes the target's contents, and a
+    junctioned rehearsal root is not refused, which makes every containment
+    assertion vacuous.
+
+    Every test here withdraws the 3.12 route by name, so it exercises the pinned
+    lane's combination on whatever interpreter runs it. None of them can pass
+    merely because the interpreter is new.
+    """
+
+    def test_a_junction_is_not_a_symbolic_link(self) -> None:
+        """Why a junction route is needed at all, asserted rather than assumed."""
+
+        link, _ = make_junction_or_skip(self, make_temporary_directory(self))
+        self.assertFalse(link.is_symlink())
+        self.assertFalse(os.path.islink(link))
+        self.assertFalse(entry_for(link).is_symlink())
+
+    def test_the_reparse_route_classifies_a_junction_with_the_3_12_predicates_withdrawn(
+        self,
+    ) -> None:
+        link, _ = make_junction_or_skip(self, make_temporary_directory(self))
+        with as_the_pinned_runtime_sees_it():
+            self.assertTrue(REHEARSAL._path_is_junction(link))
+            self.assertTrue(REHEARSAL._is_link(entry_for(link)))
+
+    def test_the_reparse_state_of_a_real_junction_is_the_mount_point_tag(self) -> None:
+        """The primitive the repaired route rests on, read off a real junction."""
+
+        link, _ = make_junction_or_skip(self, make_temporary_directory(self))
+        reparse_flag = getattr(stat, REHEARSAL.REPARSE_ATTRIBUTE_CONSTANT, None)
+        mount_tag = getattr(stat, REHEARSAL.JUNCTION_REPARSE_TAG_CONSTANT, None)
+        self.assertIsNotNone(reparse_flag, "a platform with junctions must publish the mask")
+        self.assertIsNotNone(mount_tag, "a platform with junctions must publish the tag")
+        for attributes in (os.lstat(link), entry_for(link).stat(follow_symlinks=False)):
+            with self.subTest(source=type(attributes).__name__):
+                self.assertTrue(attributes.st_file_attributes & reparse_flag)
+                self.assertEqual(mount_tag, attributes.st_reparse_tag)
+
+    def test_the_two_routes_agree_where_the_3_12_predicates_exist(self) -> None:
+        if not hasattr(os.path, REHEARSAL.OS_PATH_JUNCTION_PREDICATE):
+            self.skipTest("this interpreter has no 3.12 predicate to agree with")
+        link, _ = make_junction_or_skip(self, make_temporary_directory(self))
+        self.assertTrue(REHEARSAL._path_is_junction(link))
+        with as_the_pinned_runtime_sees_it():
+            self.assertTrue(REHEARSAL._path_is_junction(link))
+
+    def test_an_ordinary_directory_and_a_regular_file_are_not_junctions(self) -> None:
+        base = make_temporary_directory(self)
+        plain = base / "plain"
+        plain.mkdir()
+        regular = base / "file.txt"
+        regular.write_text("x\n", encoding="utf-8")
+        for candidate in (plain, regular):
+            with self.subTest(candidate=candidate.name):
+                self.assertFalse(REHEARSAL._path_is_junction(candidate))
+                self.assertFalse(REHEARSAL._is_link(entry_for(candidate)))
+                with as_the_pinned_runtime_sees_it():
+                    self.assertFalse(REHEARSAL._path_is_junction(candidate))
+                    self.assertFalse(REHEARSAL._is_link(entry_for(candidate)))
+
+    def test_withdrawing_every_route_classifies_nothing_rather_than_raising(self) -> None:
+        """The bounded failure mode: no route means `False`, never an exception.
+
+        A platform that reports no reparse information has no junctions either, so
+        answering `False` there is correct rather than merely safe.
+        """
+
+        link, _ = make_junction_or_skip(self, make_temporary_directory(self))
+        with as_the_pinned_runtime_sees_it(reparse_route=False):
+            self.assertFalse(REHEARSAL._path_is_junction(link))
+            self.assertFalse(REHEARSAL._is_link(entry_for(link)))
+
+    def test_an_absent_path_is_not_a_junction(self) -> None:
+        absent = make_temporary_directory(self) / "never-created"
+        with as_the_pinned_runtime_sees_it():
+            self.assertFalse(REHEARSAL._path_is_junction(absent))
+
+    def test_the_mask_and_the_tag_must_both_agree(self) -> None:
+        """The classification rule itself, exercised on every platform.
+
+        The two constants are substituted for constants every runtime publishes,
+        so the Linux lane exercises the same rule rather than skipping it. The
+        third row is the narrowness requirement: a reparse point carrying any
+        other tag is an ordinary file or directory that teardown must walk.
+        """
+
+        with with_substituted_reparse_constants():
+            mask = getattr(stat, SUBSTITUTE_REPARSE_ATTRIBUTE)
+            tag = getattr(stat, SUBSTITUTE_REPARSE_TAG)
+            cases = {
+                "mask set and tag matching": (_StatRecord(attributes=mask, tag=tag), True),
+                "mask clear and tag matching": (_StatRecord(attributes=0, tag=tag), False),
+                "mask set and another tag": (_StatRecord(attributes=mask, tag=tag + 1), False),
+                "mask set and no tag member": (_StatRecord(attributes=mask), False),
+                "tag matching and no mask member": (_StatRecord(tag=tag), False),
+                "neither member": (_StatRecord(), False),
+                "no stat result at all": (None, False),
+            }
+            for label, (record, expected) in sorted(cases.items()):
+                with self.subTest(case=label):
+                    self.assertEqual(
+                        expected, REHEARSAL._reparse_state_reports_junction(record)
+                    )
+
+    def test_absent_constants_classify_nothing_on_any_platform(self) -> None:
+        with as_the_pinned_runtime_sees_it(reparse_route=False):
+            record = _StatRecord(attributes=~0, tag=0)
+            self.assertFalse(REHEARSAL._reparse_state_reports_junction(record))
+
+    def test_the_accepted_reparse_tag_is_exactly_the_mount_point(self) -> None:
+        """No wider classification, asserted over the source rather than trusted.
+
+        A symbolic link is classified by the symlink predicates, and every other
+        reparse tag - deduplication, cloud placeholders, application execution
+        aliases - marks an ordinary file or directory. Accepting one of those would
+        unlink a path teardown is supposed to walk.
+        """
+
+        self.assertEqual("FILE_ATTRIBUTE_REPARSE_POINT", REHEARSAL.REPARSE_ATTRIBUTE_CONSTANT)
+        self.assertEqual("IO_REPARSE_TAG_MOUNT_POINT", REHEARSAL.JUNCTION_REPARSE_TAG_CONSTANT)
+        statements = [
+            line
+            for line in SCRIPT_PATH.read_text(encoding="utf-8").splitlines()
+            if "IO_REPARSE_TAG" in line and not line.strip().startswith("#")
+        ]
+        self.assertEqual(1, len(statements), statements)
+        self.assertIn("IO_REPARSE_TAG_MOUNT_POINT", statements[0])
+
+
+class JunctionTeardownTests(unittest.TestCase):
+    """The two teardown consequences, forced onto the pinned lane's combination.
+
+    These are the regression tests. Against the unrepaired implementation both
+    fail on any interpreter that can create a junction, because withdrawing the
+    3.12 predicates leaves that implementation with no route at all.
+    """
+
+    def test_a_junction_out_of_the_root_is_unlinked_and_its_target_survives(self) -> None:
+        base = make_temporary_directory(self)
+        outside = base / "outside"
+        outside.mkdir()
+        (outside / "keep.txt").write_text("keep\n", encoding="utf-8")
+        root = base / "derived"
+        (root / "venv").mkdir(parents=True)
+        escape = root / "venv" / "escape"
+        if not try_directory_junction(escape, outside):
+            self.skipTest("this platform creates no junction, so there is none to unlink")
+        deleted: list[str] = []
+        with as_the_pinned_runtime_sees_it():
+            REHEARSAL.remove_tree_without_following_links(root, deleted)
+        self.assertFalse(root.exists())
+        self.assertTrue(outside.is_dir(), "the junction target must survive")
+        self.assertTrue((outside / "keep.txt").is_file(), "the target's content must survive")
+        self.assertIn(escape.as_posix(), deleted)
+
+    def test_a_junctioned_rehearsal_root_is_refused_rather_than_followed(self) -> None:
+        base = make_temporary_directory(self)
+        target = base / "real"
+        target.mkdir()
+        (target / "keep.txt").write_text("keep\n", encoding="utf-8")
+        alias = base / "linked-root"
+        if not try_directory_junction(alias, target):
+            self.skipTest("this platform creates no junction, so there is no root to refuse")
+        deleted: list[str] = []
+        with as_the_pinned_runtime_sees_it():
+            with self.assertRaisesRegex(REHEARSAL.RehearsalError, "linked rehearsal root"):
+                REHEARSAL.remove_tree_without_following_links(alias, deleted)
+        self.assertEqual([], deleted)
+        self.assertTrue((target / "keep.txt").is_file())
+
+    def test_the_containment_guard_still_refuses_when_no_route_classifies_a_junction(
+        self,
+    ) -> None:
+        """Defence in depth, and the exact account of the unrepaired behaviour.
+
+        With every junction route withdrawn the walk recurses into the junction,
+        which is the `SPEC-RLO-005` rule 19 failure. The containment guard then
+        refuses the first path it reaches inside the target, because that path's
+        parent canonicalizes outside the root, so nothing outside the root is
+        deleted: the failure is a reported abort that leaves the derived tree
+        behind rather than silent deletion. The repaired predicate is what stops
+        the recursion; this pins what remains if it ever stops classifying.
+
+        The root refusal has no such second line of defence, since a junctioned
+        root makes the target the reference the guard compares against. That is
+        why the predicate rather than the guard has to be right.
+        """
+
+        base = make_temporary_directory(self)
+        outside = base / "outside"
+        outside.mkdir()
+        (outside / "keep.txt").write_text("keep\n", encoding="utf-8")
+        root = base / "derived"
+        (root / "venv").mkdir(parents=True)
+        escape = root / "venv" / "escape"
+        if not try_directory_junction(escape, outside):
+            self.skipTest("this platform creates no junction, so there is none to follow")
+        deleted: list[str] = []
+        with as_the_pinned_runtime_sees_it(reparse_route=False):
+            with self.assertRaisesRegex(
+                REHEARSAL.RehearsalError, "outside the rehearsal root"
+            ):
+                REHEARSAL.remove_tree_without_following_links(root, deleted)
+        self.assertTrue((outside / "keep.txt").is_file(), "nothing outside the root is deleted")
+        self.assertTrue(root.exists(), "the abort leaves residue rather than deleting outward")
+
+    def test_a_tree_with_no_links_is_still_removed_on_the_pinned_combination(self) -> None:
+        """The repair must not turn an ordinary directory into something unlinked."""
+
+        root = make_temporary_directory(self) / "derived"
+        (root / "a" / "b").mkdir(parents=True)
+        (root / "a" / "b" / "file.txt").write_text("x\n", encoding="utf-8")
+        (root / "top.txt").write_text("y\n", encoding="utf-8")
+        deleted: list[str] = []
+        with as_the_pinned_runtime_sees_it():
+            REHEARSAL.remove_tree_without_following_links(root, deleted)
+        self.assertFalse(root.exists())
+        self.assertEqual(5, len(deleted))
+        self.assertIn(root.as_posix(), deleted)
 
 
 class _TeardownAuditStub:
