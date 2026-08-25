@@ -365,18 +365,20 @@ broker, receipt-linked state, delegated work-order start/completion, and VREC
 preparation. It stops at independent assurance. `WO-AEX-005` and `WO-AEX-006`
 are implemented and covered by verified VRECs. Their commits remain the exact
 stacked dependency while the `WO-AEX-006` pull request awaits integration.
-`WO-AEX-007` is separately `in_progress`; `WO-AEX-008` remains approved and
-not started. This note does not complete, verify, release, or activate the
-current candidate.
+`WO-AEX-007` is implemented with verified `VREC-AEX-007`; `WO-AEX-008` is
+separately `in_progress` on that exact stacked candidate. This note does not
+complete, verify, release, or activate the current candidate.
 
-The current `WO-AEX-007` candidate composes the verified observer, delegation,
+The verified `WO-AEX-007` candidate composes the observer, delegation,
 nonce/session, bundle broker, lifecycle engine, provenance writer, execution
 receipts, and lossless packet projector. It registers only the closed four-
 operation catalog, proves complete lifecycle documents rather than a receipt
 alone, stops before Git when a commit is required, and prepares only an
 undecided ready VREC after a separately created clean candidate. Real-Git tests
 exercise success, proof gaps, failed gates, direct unreceipted writes, and
-recovery blocking. Commit-bound independent assurance remains required.
+recovery blocking. `WO-AEX-008` integrates v3 writing-skill evaluator clients,
+host parity, and complete package qualification; commit-bound independent
+assurance remains required.
 
 ### Objective
 
@@ -568,15 +570,15 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-`WO-AEX-005` and `WO-AEX-006` are independently verified, and `WO-AEX-007` is
-in progress on their exact stacked commits. The immediate next step is to
-finish candidate verification and the governed implementation handoff. An
-engineering owner must separately decide whether to mark `WO-AEX-007`
-implemented; later independent assurance must bind an exact candidate commit.
+`WO-AEX-005` through `WO-AEX-007` are independently verified, and
+`WO-AEX-008` is in progress on their exact stacked commits. The immediate next
+step is to finish the v3 skill, host, source, wheel, installation, and upgrade
+qualification, then prepare the governed implementation handoff. Later
+independent assurance must bind an exact candidate commit.
 
 Do not use candidate Phase 4 code to govern its own construction, start
-`WO-AEX-008`, create a promotable successor distribution, install it, or run a
-target pilot without the applicable later decisions and release/pilot packet.
+create a promotable successor distribution, install it, or run a target pilot
+without the applicable later decisions and release/pilot packet.
 
 ## Roadmap maintenance
 

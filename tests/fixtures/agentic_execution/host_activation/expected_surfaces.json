@@ -1,25 +1,37 @@
 {
-  "schema": "se-harness-host-surface-vectors-v1",
+  "schema": "se-harness-host-surface-vectors-v2",
   "skills": {
     "harness-draft-change": {
       "canonical_path": ".agents/skills/harness-draft-change",
       "claude_disable_model_invocation": true,
-      "codex_policy_path": "agents/openai.yaml"
+      "codex_policy_path": "agents/openai.yaml",
+      "contract_schema": "se-harness-skill-contract-v3",
+      "contract_version": "2.0.0",
+      "interface_operation": "delegated-workflow-execute"
     },
     "harness-execute-work-order": {
       "canonical_path": ".agents/skills/harness-execute-work-order",
       "claude_disable_model_invocation": true,
-      "codex_policy_path": "agents/openai.yaml"
+      "codex_policy_path": "agents/openai.yaml",
+      "contract_schema": "se-harness-skill-contract-v3",
+      "contract_version": "2.0.0",
+      "interface_operation": "delegated-workflow-execute"
     },
     "harness-orient": {
       "canonical_path": ".agents/skills/harness-orient",
       "claude_disable_model_invocation": null,
-      "codex_policy_path": null
+      "codex_policy_path": null,
+      "contract_schema": "se-harness-skill-contract-v1",
+      "contract_version": "1.0.0",
+      "interface_operation": null
     },
     "harness-prepare-assurance": {
       "canonical_path": ".agents/skills/harness-prepare-assurance",
       "claude_disable_model_invocation": true,
-      "codex_policy_path": "agents/openai.yaml"
+      "codex_policy_path": "agents/openai.yaml",
+      "contract_schema": "se-harness-skill-contract-v3",
+      "contract_version": "2.0.0",
+      "interface_operation": "delegated-workflow-prepare-vrec"
     }
   }
 }

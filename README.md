@@ -80,7 +80,7 @@ harnessctl dashboard C:\path\to\repository
 
 `doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `focus` projects one selected WO, VREC, or RLS scope. `check` evaluates the selected scope, typed procedure, and executable gates and returns one concise canonical next step. `transition` plans explicit lifecycle changes by default; add `--apply` only after the accountable decision. `inspect` is explicitly repository-wide, summarizes current lifecycle attention, and never serves as selected restitution. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
 
-A standard repository installation includes `harness-orient` at `.agents/skills/harness-orient/` for [read-only agent orientation](docs/notes/harness-orient.md) without changing the repository, plus the explicit-only `harness-draft-change`, `harness-execute-work-order`, and `harness-prepare-assurance` skills. Codex discovers those canonical cores directly. Claude Code discovers same-named thin adapters under `.claude/skills/`, then loads the canonical `.agents` core. The adapters do not copy the workflow or grant tools, permissions, or engineering authority. The skills complement `harnessctl`: the exact released evaluator remains authoritative for integrity, state, scope, gates, and canonical operations, and each skill stops at the next accountable decision before Git, credential, network, delivery, release, or external action. See the [single-agent workflow skills MVP](docs/notes/agentic-execution-skills-mvp.md) and [repository host adapters](docs/notes/agentic-execution-host-adapters.md).
+A standard repository installation includes `harness-orient` at `.agents/skills/harness-orient/` for [read-only agent orientation](docs/notes/harness-orient.md) without changing the repository, plus the explicit-only `harness-draft-change`, `harness-execute-work-order`, and `harness-prepare-assurance` skills. Codex discovers those canonical cores directly. Claude Code discovers same-named thin adapters under `.claude/skills/`, then loads the canonical `.agents` core. The adapters do not copy the workflow or grant tools, permissions, or engineering authority. The writing skills complement `harnessctl` as non-authoritative [Phase 4 evaluator clients](docs/notes/agentic-execution-phase4-skills.md): they require the exact workflow-v4 capability, prohibit direct governed-target writes, and stop before Git, assurance, credentials, network, delivery, release, or external action. A released evaluator without that capability causes a zero-effect stop. See also the retained [Phase 3 MVP contract](docs/notes/agentic-execution-skills-mvp.md) and [repository host adapters](docs/notes/agentic-execution-host-adapters.md).
 
 Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners record their build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md` and approve the first formal engineering chain. The harness does not scaffold, track, or gate that region.
 
@@ -106,10 +106,7 @@ The agent drafts the requirements, design and verification approach, identifies 
 
 > Approved. Implement the work order.
 
-The work order declares exact files and component-prefix paths. The agent passes
-declared changed paths to `harnessctl check`, implements only that scope,
-performs repository checks, retains evidence, binds it to the exact candidate commit,
-and returns the canonical restitution block without unrelated findings.
+The work order declares exact files and component-prefix paths. The agent implements only that scope in an isolated proposal workspace; the exact released evaluator builds and applies the admitted change bundle, performs the delegated lifecycle operations, retains evidence and receipts, and stops before Git. After a separately authorized exact candidate commit, assurance material binds that commit and returns the canonical restitution block without unrelated findings.
 An assurance owner judges the evidence; a release owner makes a later, separate
 decision.
 
@@ -162,7 +159,7 @@ These are derived, read-only views: they expose traceability, evidence, and anom
 
 - repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
 - one managed instruction route for coding agents, with room for stricter repository-owned guidance;
-- one portable read-only orientation skill and three explicit-only single-agent workflow skills that stop at accountable decision points;
+- one portable read-only orientation skill and three explicit-only, single-agent Phase 4 evaluator-client skills that prohibit direct target writes and stop at accountable decision points;
 - one machine-readable workflow contract for lifecycle transitions and canonical next actions;
 - deterministic integrity, preflight, graph-validation, CI, and provenance controls;
 - retained evidence and verification/release records bound to a clean exact candidate commit;

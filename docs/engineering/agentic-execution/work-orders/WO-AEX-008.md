@@ -2,7 +2,7 @@
 id = "WO-AEX-008"
 type = "work_order"
 title = "Integrate Phase 4 execution skills and package qualification"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "technical-owner", "quality-owner", "assurance-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -51,6 +51,18 @@ verification = ["VER-AEX-001", "VER-AEX-002", "VER-AEX-003", "VER-AEX-004"]
 from = "draft"
 to = "approved"
 decided_at = "2026-08-25T09:08:48Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T17:34:22Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T18:37:43Z"
 decided_by = "engineering-owner"
 +++
 
