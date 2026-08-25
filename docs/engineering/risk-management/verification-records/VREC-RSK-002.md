@@ -2,7 +2,7 @@
 id = "VREC-RSK-002"
 type = "verification_record"
 title = "Verification candidate for WO-RSK-002"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/risk-management/evidence/WO-RSK-002/WO-RSK-0
 evaluator_evidence_path = "docs/engineering/risk-management/evidence/VREC-RSK-002-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-25T17:59:11Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RSK-002"]
 conforms_to = ["VER-RSK-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-25T17:59:11Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-25 with 'I verify VREC-RSK-002 as assurance owner', after accepting interactively the two recorded deviations from SPEC-RSK-002: the doctor check named risk-policy with C-RSK-001 in its detail (1), and the explicit risk-raise effect class in the skill helpers, profiles, and contracts (2). Verification rests on the retained evidence with the Linux figure taken from the pull-request lane of PR #158 (candidate source evidence: pass)."
 +++
 
 # Verification Record Candidate
