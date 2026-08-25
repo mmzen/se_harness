@@ -2,7 +2,7 @@
 id = "WO-RSK-001"
 type = "work_order"
 title = "Implement the risk artifact, its lifecycle, gates, commands, and configuration"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -63,6 +63,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T13:26:09Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T14:18:54Z"
 decided_by = "engineering-owner"
 +++
 
