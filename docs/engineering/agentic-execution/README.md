@@ -94,6 +94,26 @@ fresh exact-evaluator check.
 The [single-agent workflow skills MVP](../../notes/agentic-execution-skills-mvp.md)
 is non-authoritative operator guidance for the installed surface.
 
+## Phase 3 repository host activation
+
+- `REQ-AEX-009` requires the four canonical repository skills to be available
+  by default in supported Codex and Claude Code sessions without adding a
+  second workflow authority.
+- `SPEC-AEX-005` defines direct Codex discovery, explicit-only writing policy,
+  thin same-name Claude adapters, package inventory, managed ownership, and
+  fail-closed canonical loading.
+- `ADR-AEX-005` selects repository-scoped adapters over duplicate cores,
+  filesystem links, or user-wide provider installation.
+- `VER-AEX-003` defines independent source, package, installation, binding,
+  activation, hostile-input, and actual-host evidence.
+- `WO-AEX-004` is in progress. Its bounded implementation preserves the exact
+  `harness-orient` v1 core, rebinds only the three writing-core patch versions,
+  and adds managed Codex policy and Claude discovery surfaces.
+
+The [repository host adapter guide](../../notes/agentic-execution-host-adapters.md)
+explains the operator-facing mapping. Host discovery does not grant lifecycle,
+Git, credential, network, release, or external-action authority.
+
 ## Planning context
 
 The non-authoritative

@@ -7,3 +7,17 @@ docs/engineering/**/evidence/*.json text eol=lf
 se_harness/governance_migration*.py text eol=lf
 se_harness/governance_migration_contract.json text eol=lf
 tests/fixtures/governance_migration/*.json text eol=lf
+
+# Repository-owned byte rules for surfaces the candidate suite asserts byte for byte.
+# The release orchestrator qualifies the candidate in a `git worktree`, which inherits
+# the checkout's core.autocrlf, so a converted byte here fails qualification on Windows.
+se_harness/agent_contract.json text eol=lf
+se_harness/hash_bound_classes.json text eol=lf
+release/build-recipe.json text eol=lf
+release/build-toolchain.lock text eol=lf
+# Declared by tree rather than by extension, from WO-HBI-004. The three per-extension
+# rules this replaces covered *.json, *.md and *.py, and left agents/openai.yaml converted
+# when a concurrent pull request added it inside the same tree. A byte-exact tree must not
+# need a new rule for each new extension. A binary added here needs an explicit -text rule,
+# which ByteExactSurfaceTests forces rather than allowing silently.
+templates/repository/standard/.agents/skills/** text eol=lf

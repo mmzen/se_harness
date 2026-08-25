@@ -54,7 +54,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             )
         return wheel, hashlib.sha256(wheel.read_bytes()).hexdigest()
 
-    def test_standard_install_manages_one_complete_copy_of_all_five_skill_cores(self) -> None:
+    def test_standard_install_manages_all_canonical_cores_and_thin_host_surfaces(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
@@ -62,9 +62,11 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             self.assertEqual(
                 [
                     ".agents/skills/harness-draft-change/SKILL.md",
+                    ".agents/skills/harness-draft-change/agents/openai.yaml",
                     ".agents/skills/harness-draft-change/scripts/guard.py",
                     ".agents/skills/harness-draft-change/skill-contract.json",
                     ".agents/skills/harness-execute-work-order/SKILL.md",
+                    ".agents/skills/harness-execute-work-order/agents/openai.yaml",
                     ".agents/skills/harness-execute-work-order/scripts/check_scope.py",
                     ".agents/skills/harness-execute-work-order/skill-contract.json",
                     ".agents/skills/harness-operator-brief/SKILL.md",
@@ -74,12 +76,24 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                     ".agents/skills/harness-orient/scripts/orient.py",
                     ".agents/skills/harness-orient/skill-contract.json",
                     ".agents/skills/harness-prepare-assurance/SKILL.md",
+                    ".agents/skills/harness-prepare-assurance/agents/openai.yaml",
                     ".agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
                     ".agents/skills/harness-prepare-assurance/skill-contract.json",
                 ],
                 [item.path for item in skill_changes],
             )
             self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in skill_changes))
+            adapter_changes = [item for item in changes if item.path.startswith(".claude/skills/")]
+            self.assertEqual(
+                [
+                    ".claude/skills/harness-draft-change/SKILL.md",
+                    ".claude/skills/harness-execute-work-order/SKILL.md",
+                    ".claude/skills/harness-orient/SKILL.md",
+                    ".claude/skills/harness-prepare-assurance/SKILL.md",
+                ],
+                [item.path for item in adapter_changes],
+            )
+            self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in adapter_changes))
 
             apply_changes(target, changes, old_lock, allow_updates=False)
             for name in (
@@ -94,8 +108,59 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
-                all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes)
+                all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes + adapter_changes)
             )
+            replay, _ = plan_install(target, project_name=None, mode="upgrade")
+            replay_actions = {item.path: item.action for item in replay}
+            for item in skill_changes + adapter_changes:
+                self.assertEqual("unchanged", replay_actions[item.path])
+
+    def test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Phase 3 Fixture", mode="init")
+            phase3_only = [
+                item
+                for item in changes
+                if not item.path.startswith(".claude/skills/")
+                and not item.path.endswith("/agents/openai.yaml")
+            ]
+            apply_changes(target, phase3_only, old_lock, allow_updates=False)
+            orientation = target / ".agents/skills/harness-orient"
+            orientation_before = {
+                path.relative_to(orientation).as_posix(): path.read_bytes()
+                for path in orientation.rglob("*")
+                if path.is_file()
+            }
+
+            upgrade, upgrade_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in upgrade}
+            expected_additions = {
+                *(f".agents/skills/{name}/agents/openai.yaml" for name in (
+                    "harness-draft-change",
+                    "harness-execute-work-order",
+                    "harness-prepare-assurance",
+                )),
+                *(f".claude/skills/{name}/SKILL.md" for name in (
+                    "harness-draft-change",
+                    "harness-execute-work-order",
+                    "harness-orient",
+                    "harness-prepare-assurance",
+                )),
+            }
+            self.assertEqual({relative: "add" for relative in expected_additions}, {
+                relative: actions[relative] for relative in expected_additions
+            })
+            apply_changes(target, upgrade, upgrade_lock, allow_updates=True)
+
+            orientation_after = {
+                path.relative_to(orientation).as_posix(): path.read_bytes()
+                for path in orientation.rglob("*")
+                if path.is_file()
+            }
+            self.assertEqual(orientation_before, orientation_after)
+            lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+            self.assertTrue(all(lock["files"][relative]["mode"] == "managed" for relative in expected_additions))
 
     def test_standard_upgrade_reports_customized_skills_without_overwriting_them(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -103,11 +168,16 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             changes, old_lock = plan_install(target, project_name="Agentic Fixture", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             customized_files = {}
-            for name in ("harness-orient", "harness-execute-work-order"):
-                skill = target / ".agents/skills" / name / "SKILL.md"
-                customized = skill.read_bytes() + b"\nRepository-owned customization.\n"
-                skill.write_bytes(customized)
-                customized_files[skill.relative_to(target).as_posix()] = customized
+            for relative in (
+                ".agents/skills/harness-orient/SKILL.md",
+                ".agents/skills/harness-execute-work-order/agents/openai.yaml",
+                ".claude/skills/harness-orient/SKILL.md",
+                ".claude/skills/harness-execute-work-order/SKILL.md",
+            ):
+                destination = target / relative
+                customized = destination.read_bytes() + b"\nRepository-owned customization.\n"
+                destination.write_bytes(customized)
+                customized_files[relative] = customized
 
             changes, _ = plan_install(target, project_name=None, mode="upgrade")
             actions = {item.path: item.action for item in changes}

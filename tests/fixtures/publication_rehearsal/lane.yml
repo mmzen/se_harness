@@ -1,0 +1,51 @@
+name: Fixture Rehearsal Lane
+
+# A miniature rehearsal lane: read-only permissions, no environment, no
+# credential, and both required runner platforms declared through a matrix.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  divergence:
+    name: Refuse divergence
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the candidate
+        uses: actions/checkout@1111111111111111111111111111111111111111 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check divergence
+        run: |
+          set -euo pipefail
+          python .github/scripts/rehearse_publication.py check-divergence --repository .
+
+  rehearse:
+    name: Rehearse on ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            platform: Linux
+          - runner: windows-2022
+            platform: Windows
+    steps:
+      - name: Check out the candidate
+        uses: actions/checkout@1111111111111111111111111111111111111111 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Rehearse
+        run: |
+          set -euo pipefail
+          python .github/scripts/rehearse_publication.py rehearse --repository .

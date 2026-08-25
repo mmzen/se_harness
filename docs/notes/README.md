@@ -24,6 +24,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
+| [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same four canonical repository skills without duplicating workflow authority? |
 | [Migration: the repository-context scaffold is withdrawn](harness-migration-repository-context-retirement.md) | What breaks when repository facts move to the owner-controlled region of `AGENTS.md`, and what must I do? |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Phase 1 Agentic Execution definition-review packet](agentic-execution-phase-1-definition-review.md) | Which decisions, revisions, accountable reviews, and read-only transition previews govern the Phase 1 proposal? |
@@ -40,6 +41,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Testing a current commit with an integration package](integration-packages.md) | How do I safely download, verify, install, test, and remove an expiring non-release build? |
 | [Integration Package definition-review packet](integration-package-definition-review.md) | Which exact accountable approvals govern the proposed installable current-commit testing lane? |
 | [Publishing the SE Harness development dashboard](harness-dashboard-publication.md) | How is the repository's release-bound public Explorer demonstration deployed and replayed? |
+| [Rehearsing the credential-free publication path](release-publication-rehearsal.md) | How is the last mile exercised on both runner platforms before release approval, and how is drift from the orchestrator caught? |
 
 ## Know what is authoritative
 

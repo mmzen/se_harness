@@ -129,15 +129,18 @@ class ArtifactCatalogTests(unittest.TestCase):
         )
         self.assertNotIn(technical_communication_route, router)
         self.assertEqual(1, candidate_router.count(technical_communication_route))
-        self.assertEqual(
-            router.replace(
-                artifact_authoring_route,
-                f"{technical_communication_route}\n{artifact_authoring_route}",
-            ),
+        self.assertIn(
+            f"{technical_communication_route}\n{artifact_authoring_route}",
             candidate_router,
         )
+        self.assertNotEqual(router, candidate_router)
+        self.assertIn("## Lifecycle restitution", router)
+        self.assertNotIn("## Lifecycle handoff", router)
+        self.assertIn("## Lifecycle handoff", candidate_router)
+        self.assertIn("The structured\nresult is authoritative", candidate_router)
+        self.assertIn("Model transcription MUST NOT", candidate_router)
         self.assertIn("harnessctl focus", router)
-        self.assertIn("harnessctl focus", candidate_router)
+        self.assertNotIn("harnessctl focus", candidate_router)
         self.assertNotIn("harnessctl preflight", router)
         self.assertNotIn("harnessctl preflight", candidate_router)
         self.assertIn("WORKFLOW.json", candidate_router)
