@@ -2,7 +2,7 @@
 id = "WO-RLO-006"
 type = "work_order"
 title = "Detect junctions without the 3.12 predicates so teardown never follows a link"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -40,13 +40,20 @@ to = "in_progress"
 decided_at = "2026-08-25T19:07:27Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-25, taken after the exact-candidate readings of WO-RLS-011 were put to them with the measured failure in front of them. Start preflight PASS at phase start over branch state 826c72cfdaa3401cccf06c67943c5315221c3f72, the true merge of pull request 154, run with the governing exact public 0.6.0 evaluator outside the checkout in isolated mode; commit-bound verification is required and decided by the repository owner. The defect is measured, not inferred. On CPython 3.11.9 on Windows, os.path.isjunction and DirEntry.is_junction are both absent, so both junction predicates in .github/scripts/rehearse_publication.py answer False for a real junction; the same path reports st_file_attributes 0x410 with the reparse-point bit set and st_reparse_tag 0xa0000003 equal to IO_REPARSE_TAG_MOUNT_POINT, through os.lstat and through DirEntry.stat(follow_symlinks=False) alike, and both stat constants and both stat members are present on that runtime. DirEntry.is_dir(follow_symlinks=False) answers True for the junction and os.scandir lists the target's contents, so teardown recurses through the link and deletes a path outside the rehearsal root, and a junction rehearsal root is not refused. That is a SPEC-RLO-005 rule 19 and rule 21 violation with real data loss, not a cosmetic red: the publication-rehearsal lane pins Python 3.11 on windows-2022 and the hosted run would reach the same code. Reproduced locally because this workstation withholds symbolic-link privilege with WinError 1314, so the suite's helper falls back to mklink /J. Bounded to the five declared execution-scope paths. This start authorizes no candidate commit, no push, no pull request, no verification record, no release work, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator change, and it changes nothing in the 0.7.0 candidate or in REL-SEH-015's frozen gates array."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T20:22:47Z"
+decided_by = "engineering-owner"
+reason = "Completed on the engineering owner's explicit decision of 2026-08-25, taken with the measured readings and the disclosed gap in front of them. QG-G4-IMPLEMENTATION-EVIDENCE: review preflight PASS with commit-bound verification required, decided by the repository owner; validate PASS at 888 artifacts, 0 errors, 50 pre-existing warnings; doctor 87 PASS, 0 FAIL; all three with the governing exact public 0.6.0 evaluator outside the checkout in isolated mode. Retained evidence is the release-orchestration record WO-RLO-006-implementation.md, naming artifact WO-RLO-006, checkpoint handoff, subject commit ceab133e64893ae98ccb0bc5167f5086ff185d6e, and formal snapshot 862e8e69a8b7bdd95cfd0302805d74447978834ed9c7c7b00674c6215c7ed4c6 with its checkout convention. Both junction predicates in the rehearsal program now fall back to the Windows reparse state, accepting exactly IO_REPARSE_TAG_MOUNT_POINT. Windows figures by runtime: unrepaired at 4a62ade, CPython 3.11.9 ran 1002 tests with 1 failure and 1 error; repaired at ceab133, 3.11.9 and 3.14.6 both run 1016 green, both pre-existing teardown tests passing unedited. Credential-free rehearsal at ceab133 on 3.11.9: REHEARSED, candidate unit suite passed at 1016 tests, teardown 7550 derived paths; divergence EXACT, so no mechanic moved. Measurement corrected the draft harm description: a junctioned root is the data-loss case and has no containment-guard fallback, while a junction inside the tree is refused by the guard and leaves residue. That is recorded as prose, not as a rewritten lifecycle reason. Disclosed and not softened: no hosted reading of the repaired program exists, because publication-rehearsal.yml runs only on pull_request, on push to main, or on dispatch; the hosted windows-2022 lane was green before this fix, so the defect was latent there rather than failing. This completion authorizes no verification record, no candidate commit, and no release, tag, publication, deployment, maintenance or credential act."
 +++
 
 # Work Order: Detect junctions without the 3.12 predicates so teardown never follows a link
 
 ## Lifecycle
 
-This work order is `in_progress`. Its authoritative state, and the timestamp and
+This work order is `implemented`. Its authoritative state, and the timestamp and
 reason of every decision taken on it, are the front matter and
 `[[lifecycle_events]]` above; read those rather than this prose.
 
@@ -67,6 +74,23 @@ listed are unchanged by starting, and nothing in the 0.7.0 candidate or in
 The measurement quoted in that start reason is a direct probe of the primitive on
 this workstation rather than an inference from release notes, and it is recorded
 in full in the retained evidence.
+
+The same owner then took an explicit completion decision on 2026-08-25, recorded
+in the third lifecycle event above, against a review preflight reading `PASS` and
+the retained record
+`docs/engineering/release-orchestration/evidence/WO-RLO-006-implementation.md`.
+That transition moves status only, so this paragraph is what records that the
+state described here has advanced: the declared work is done inside the five
+declared execution-scope paths, and what remains owed is the commit-bound
+verification the approval classified as `required`. No verification record exists
+yet, and none of the exclusions the approval and the start listed is relaxed by
+completion.
+
+Completion is recorded with one gap disclosed rather than closed: there is no
+hosted reading of the repaired program, because `publication-rehearsal.yml` runs
+only on `pull_request`, on `push` to `main`, or on dispatch. The reading that does
+exist is the pre-fix one, and it says the hosted lane was **green**, so the
+missing reading confirms a repair rather than clearing a red.
 
 ### What the measurement corrected
 
