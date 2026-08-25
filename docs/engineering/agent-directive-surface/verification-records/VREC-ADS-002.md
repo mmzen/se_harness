@@ -2,7 +2,7 @@
 id = "VREC-ADS-002"
 type = "verification_record"
 title = "Verification candidate for WO-ADS-002"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/agent-directive-surface/evidence/WO-ADS-002/
 evaluator_evidence_path = "docs/engineering/agent-directive-surface/evidence/VREC-ADS-002-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-25T11:56:41Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ADS-002"]
 conforms_to = ["VER-ADS-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-25T11:56:41Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-25 with 'I verify VREC-ADS-002 as assurance owner', after accepting interactively: the card header dropping one sentence to fit the 1024-byte bound (deviation 1); the supersession section inserted into REQ-IAR-020 in the REQ-DST-008 form with the original body byte-identical (deviation 2); the retirement fixture needing no change (deviation 3); and verification on retained evidence with the Linux figure pending the pull-request lane."
 +++
 
 # Verification Record Candidate
