@@ -2,7 +2,7 @@
 id = "WO-AUT-001"
 type = "work_order"
 title = "Implement the authoring policy, requirement template, statement signals, attributes, and checklist"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -47,6 +47,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T18:44:05Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T19:07:33Z"
 decided_by = "engineering-owner"
 +++
 
