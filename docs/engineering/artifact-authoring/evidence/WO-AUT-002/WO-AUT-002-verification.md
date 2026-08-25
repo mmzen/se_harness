@@ -133,6 +133,19 @@ tests/test_artifact_authoring_policy.py
 tests/test_validation_taxonomy.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-25 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-AUT-002` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - string form stays W-AUT-004; migration built, not applied | Accept, defer to WO-HUP-005: promotion to E-AUT-001 and the repository-wide application belong to the governor-upgrade transaction, whose scope amendment is a follow-up item. |
+| 2 - four unmatched values (REQ-REB-004, -011, -014, -018) | Steward decides at application time: the report keeps them `unmatched`; no new mapping rule under this work order. |
+| 3 - in-scope paths left unchanged | Accept: declared paths that turned out unnecessary. |
+| 4 - predicates not enforced by the released governor on this root | Accept: same boundary as every managed change in WO-AUT-001; enforcement arrives with the upgrade. |
+
 ## Not done
 
 - Applying the migration to this repository; promoting `W-AUT-004` to
