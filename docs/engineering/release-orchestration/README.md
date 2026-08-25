@@ -55,6 +55,7 @@ Issue [#111](https://github.com/mmzen/se_harness/issues/111) records `RC-060-11`
 - `ARCH-RLO-005` and `ADR-RLO-005`: a parallel credential-free lane behind a checked equivalence seam, recording the deferred shared-implementation refactor and its revisiting condition.
 - `VER-RLO-005`: platform, determinism, teardown, classification, and divergence verification.
 - `WO-RLO-005`: bounded implementation authorized on 2026-08-24; no release, publication, deployment, or external action is implied.
+- `WO-RLO-006`: repair the teardown link probe, which is inert before Python 3.12 and therefore inert on the pinned runtime, so a junction is unlinked rather than recursed through under `SPEC-RLO-005` rules 19 and 21. Drafted, approved, and started on 2026-08-25 on an owner routing decision taken during the 0.7.0 qualification; it amends no governing artifact and places no bytes in the distributed surface.
 
 Acceptance scenarios are retained in `acceptance/publication-rehearsal.feature`; implementation evidence is retained in `evidence/WO-RLO-005-implementation.md`. A rehearsal result is derived operational evidence: it does not approve, prepare, verify, or release anything, and it does not substitute for the qualification that runs inside an authorized release.
 
