@@ -2,13 +2,19 @@
 id = "SPEC-HUP-005"
 type = "specification"
 title = "Standard-root adoption contract for the released successor of 0.6.0"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 specifies = ["REQ-HUP-010", "REQ-HUP-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Standard-root adoption contract for the released successor of 0.6.0

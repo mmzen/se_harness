@@ -2,7 +2,7 @@
 id = "REQ-HUP-010"
 type = "requirement"
 title = "Prove the exact released successor carrying the directive-surface and risk capabilities"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN a public se-harness release exists whose released record cover
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Prove the exact released successor carrying the directive-surface and risk capabilities

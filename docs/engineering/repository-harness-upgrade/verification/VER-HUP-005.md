@@ -2,13 +2,19 @@
 id = "VER-HUP-005"
 type = "verification"
 title = "Verify standard-root adoption of the released successor of 0.6.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 verifies = ["REQ-HUP-010", "REQ-HUP-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Verify standard-root adoption of the released successor of 0.6.0

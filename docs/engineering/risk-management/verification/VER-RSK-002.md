@@ -2,13 +2,19 @@
 id = "VER-RSK-002"
 type = "verification"
 title = "Independent evidence for closing the risk artifact's accepted deviations"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 verifies = ["REQ-RSK-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Independent evidence for closing the risk artifact's accepted deviations

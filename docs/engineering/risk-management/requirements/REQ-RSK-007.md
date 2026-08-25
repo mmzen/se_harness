@@ -2,7 +2,7 @@
 id = "REQ-RSK-007"
 type = "requirement"
 title = "Close the accepted deviations of the risk artifact"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN the risk artifact is installed, THE SYSTEM SHALL run raise-ris
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-RSK-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Close the accepted deviations of the risk artifact

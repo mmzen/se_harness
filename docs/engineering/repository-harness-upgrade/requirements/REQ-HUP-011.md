@@ -2,7 +2,7 @@
 id = "REQ-HUP-011"
 type = "requirement"
 title = "Adopt the successor through one bounded schema-3 root transaction and prove complete-graph operation"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -10,6 +10,12 @@ statement = "WHEN the exact released successor is proven, THE SYSTEM SHALL apply
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Adopt the successor through one bounded schema-3 root transaction and prove complete-graph operation

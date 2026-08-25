@@ -2,13 +2,19 @@
 id = "SPEC-RSK-002"
 type = "specification"
 title = "Guard operation, doctor check, skill integration, and amendments for the risk artifact"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
 [relations]
 specifies = ["REQ-RSK-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-25T17:15:22Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Guard operation, doctor check, skill integration, and amendments for the risk artifact
