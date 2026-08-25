@@ -2,7 +2,7 @@
 id = "VREC-AUT-001"
 type = "verification_record"
 title = "Verification candidate for WO-AUT-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/artifact-authoring/evidence/WO-AUT-001/WO-AU
 evaluator_evidence_path = "docs/engineering/artifact-authoring/evidence/VREC-AUT-001-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-25T19:08:51Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-AUT-001"]
 conforms_to = ["VER-AUT-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-25T19:08:51Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-25 with 'I verify VREC-AUT-001 as assurance owner', after accepting interactively the three recorded deviations from SPEC-AUT-001: guidance subsections written for some artifact types only (1); the harness-draft-change contract version 1.0.2 also claimed by PR #158, to be resolved at merge by a bump to 1.0.3 with a regenerated vector (2); a synthetic statement in place of REQ-AEX-008's literal text in the test (3). Verification rests on the retained evidence with the Linux figure pending the pull-request lane."
 +++
 
 # Verification Record Candidate
