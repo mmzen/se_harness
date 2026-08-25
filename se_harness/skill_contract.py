@@ -337,6 +337,39 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
             ("assurance-decision-packet", "se-harness-decision-packet-v1", "inline"),
         ],
     },
+    "harness-operator-brief": {
+        "mutation_class": "read-only",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("source-kind", "bounded-text", True),
+            ("source-payload", "json-object", True),
+            ("protected-content", "json-object", True),
+            ("project-terms", "text-list", False),
+        ],
+        "required_operations": ["version", "identity", "doctor"],
+        "optional_operations": [],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("protected-source-before-effect", "before-effect", "protected-content-guard", True),
+            ("protected-output-after-effect", "after-effect", "protected-content-guard", True),
+            ("brief-handoff", "handoff", "protected-content-guard", True),
+        ],
+        "path_source": "none",
+        "permitted": ["inline-brief-render"],
+        "target_retention": False,
+        "retained_kinds": [],
+        "outputs": [
+            ("skill-result", "se-harness-skill-result-v1", "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+        ],
+    },
 }
 
 
@@ -355,7 +388,7 @@ def _parse_v2_contract(value: Any) -> SkillContract:
     name = _text(top["name"], "$.name", pattern=_NAME)
     profile = _V2_PROFILES.get(name)
     if profile is None:
-        raise SkillContractError("SKC021", f"unsupported Phase 3 skill: {name}")
+        raise SkillContractError("SKC021", f"unsupported closed v2 skill: {name}")
     _text(top["version"], "$.version", pattern=_VERSION)
     _text(top["outcome"], "$.outcome")
     if top["mutation_class"] != profile["mutation_class"]:
@@ -365,7 +398,7 @@ def _parse_v2_contract(value: Any) -> SkillContract:
     if not _boolean(activation["explicit"], "$.activation.explicit") or _boolean(
         activation["implicit"], "$.activation.implicit"
     ):
-        raise SkillContractError("SKC023", "Phase 3 writing skills require explicit-only activation")
+        raise SkillContractError("SKC023", "closed v2 skills require explicit-only activation")
     negative_matches = _list(activation["must_not_match"], "$.activation.must_not_match")
     if not negative_matches:
         raise SkillContractError("SKC014", "activation must declare at least one non-match example")
@@ -387,7 +420,7 @@ def _parse_v2_contract(value: Any) -> SkillContract:
     )
     minimum = _text(evaluator["minimum_version"], "$.evaluator.minimum_version", pattern=_VERSION)
     if tuple(int(part) for part in minimum.split("-", 1)[0].split("+", 1)[0].split(".")[:3]) < (0, 6, 0):
-        raise SkillContractError("SKC025", "Phase 3 skills require evaluator version 0.6.0 or later")
+        raise SkillContractError("SKC025", "closed v2 skills require evaluator version 0.6.0 or later")
     required_operations = _unique_texts(evaluator["required_operations"], "$.evaluator.required_operations")
     optional_operations = _unique_texts(evaluator["optional_operations"], "$.evaluator.optional_operations")
     if required_operations != profile["required_operations"] or optional_operations != profile["optional_operations"]:
@@ -418,11 +451,11 @@ def _parse_v2_contract(value: Any) -> SkillContract:
     if permitted != profile["permitted"] or path_source != profile["path_source"] or lifecycle:
         raise SkillContractError("SKC027", f"effects differ from the closed {name} instance")
     if not _V2_PROHIBITED_EFFECTS.issubset(prohibited):
-        raise SkillContractError("SKC027", "Phase 3 effect prohibitions are incomplete")
+        raise SkillContractError("SKC027", "closed v2 effect prohibitions are incomplete")
 
     delegation = _object(top["delegation"], {"allowed", "fallback"}, "$.delegation")
     if _boolean(delegation["allowed"], "$.delegation.allowed") or delegation["fallback"] != "single-agent":
-        raise SkillContractError("SKC018", "Phase 3 skills disable delegation and retain single-agent fallback")
+        raise SkillContractError("SKC018", "closed v2 skills disable delegation and retain single-agent fallback")
     evidence = _object(
         top["evidence"], {"receipt_schema", "target_retention", "required_retained_kinds"}, "$.evidence"
     )
@@ -435,7 +468,7 @@ def _parse_v2_contract(value: Any) -> SkillContract:
         raise SkillContractError("SKC028", f"evidence differs from the closed {name} instance")
     stops = _typed_entries(top["stop_conditions"], "$.stop_conditions", {"id", "outcome"})
     if not stops:
-        raise SkillContractError("SKC029", "Phase 3 skills require explicit stop conditions")
+        raise SkillContractError("SKC029", "closed v2 skills require explicit stop conditions")
     outputs = _typed_entries(
         top["outputs"],
         "$.outputs",

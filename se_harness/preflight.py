@@ -48,6 +48,7 @@ REQUIRED_PATHS = (
     "docs/engineering/QUALITY_GATES.md",
     "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
+    "docs/engineering/TECHNICAL_COMMUNICATION.md",
     "scripts/validate_engineering_artifacts.py",
     "scripts/generate_harness_dashboard.py",
     "scripts/harness_explorer/index.template.html",
@@ -61,6 +62,7 @@ POLICY_PATHS = (
     "docs/engineering/QUALITY_GATES.md",
     "docs/engineering/QUALITY_GATES.json",
     "docs/engineering/TRACEABILITY.md",
+    "docs/engineering/TECHNICAL_COMMUNICATION.md",
 )
 _VALIDATOR_MODULE: ModuleType | None = None
 @dataclass(frozen=True, order=True)

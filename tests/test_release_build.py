@@ -31,6 +31,7 @@ SKILL_FILES = {
     "harness-draft-change": ("SKILL.md", "scripts/guard.py", "skill-contract.json"),
     "harness-execute-work-order": ("SKILL.md", "scripts/check_scope.py", "skill-contract.json"),
     "harness-orient": ("SKILL.md", "scripts/orient.py", "skill-contract.json"),
+    "harness-operator-brief": ("SKILL.md", "scripts/check_brief.py", "skill-contract.json"),
     "harness-prepare-assurance": ("SKILL.md", "scripts/check_prepare.py", "skill-contract.json"),
 }
 
@@ -204,6 +205,11 @@ class DeterministicSdistTests(unittest.TestCase):
         }
         self.assertEqual(expected, set(distributed))
         self.assertEqual(len(distributed), len(set(distributed)))
+        policy = "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
+        self.assertEqual(
+            1,
+            sum(policy in relatives for relatives in data_files.values()),
+        )
         manifest = (REPOSITORY_ROOT / "MANIFEST.in").read_text(encoding="utf-8")
         self.assertIn("include se_harness/*.json", manifest)
         self.assertIn(

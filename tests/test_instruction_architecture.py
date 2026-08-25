@@ -135,7 +135,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(1, sum(line.strip() == "@AGENTS.md" for line in claude.splitlines()))
 
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        for name in ("WORKFLOW.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md", "TRACEABILITY.md"):
+        for name in ("WORKFLOW.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md", "TRACEABILITY.md", "TECHNICAL_COMMUNICATION.md"):
             self.assertIn(name, router)
         index = (target / "docs" / "engineering" / "README.md").read_text(encoding="utf-8")
         self.assertIn("Repository-owned after installation", index)
@@ -146,8 +146,37 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual("managed", lock["files"]["ENGINEERING_HARNESS.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
+        self.assertEqual(
+            "managed", lock["files"]["docs/engineering/TECHNICAL_COMMUNICATION.md"]["mode"]
+        )
+        self.assertTrue((target / "docs/engineering/TECHNICAL_COMMUNICATION.md").is_file())
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
         self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
+
+    def test_technical_communication_has_one_managed_owner_and_one_thin_route(self) -> None:
+        target = self.installed_target("technical-communication")
+        source = (
+            REPOSITORY_ROOT
+            / "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
+        )
+        installed = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
+        self.assertEqual(
+            canonical_sha256(source.read_bytes()), canonical_sha256(installed.read_bytes())
+        )
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        self.assertEqual(1, router.count("docs/engineering/TECHNICAL_COMMUNICATION.md"))
+        self.assertNotIn("operator-communication", router)
+        self.assertNotIn("technical-artifact-writing", router)
+
+        policy = source.read_text(encoding="utf-8")
+        self.assertIn("based on ASD-STE100", policy)
+        self.assertIn("not ASD-STE100 compliance", policy)
+        self.assertIn("MUST NOT download", policy)
+        self.assertIn("operator-communication", policy)
+        self.assertIn("technical-artifact-writing", policy)
+        for prohibited in ("requests.", "urllib.", "socket.", "http://", "https://"):
+            with self.subTest(prohibited=prohibited):
+                self.assertNotIn(prohibited, policy)
 
     def test_inspection_guidance_packet_preserves_the_authority_boundary(self) -> None:
         requirement = (PACKET_ROOT / "requirements" / "REQ-IAR-017.md").read_text(encoding="utf-8")
@@ -509,6 +538,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         for path in (
             "ENGINEERING_HARNESS.md",
             "docs/engineering/WORKFLOW.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
@@ -775,6 +805,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         writing_skills = {
             "harness-draft-change": "scripts/guard.py",
             "harness-execute-work-order": "scripts/check_scope.py",
+            "harness-operator-brief": "scripts/check_brief.py",
             "harness-prepare-assurance": "scripts/check_prepare.py",
         }
         self.assertEqual(

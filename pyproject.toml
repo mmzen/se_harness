@@ -47,6 +47,7 @@ se_harness = [
 "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
 "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/README.md.seed",
+  "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
@@ -91,6 +92,13 @@ se_harness = [
 ]
 "share/se-harness/templates/repository/standard/.agents/skills/harness-prepare-assurance/scripts" = [
   "templates/repository/standard/.agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief" = [
+  "templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md",
+  "templates/repository/standard/.agents/skills/harness-operator-brief/skill-contract.json",
+]
+"share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/scripts" = [
+  "templates/repository/standard/.agents/skills/harness-operator-brief/scripts/check_brief.py",
 ]
 [tool.unittest]
 start-directory = "tests"

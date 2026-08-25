@@ -17,13 +17,35 @@ PACKAGED_FRAGMENT = REPOSITORY_ROOT / "templates" / "repository" / "standard" / 
 RETIRED_PATH = "docs/engineering/REPOSITORY_CONTEXT.md"
 RETIRED_ACTION_PREFIX = "CTX-ACT-"
 BASELINE_RULE_IDS = ("HRN-001", "HRN-002", "HRN-003", "HRN-004", "HRN-005", "HRN-006", "HRN-007", "HRN-008")
-BASELINE_ROUTING_SUBJECTS = (
-    "Lifecycle states, transitions, procedures, next actions, and handoff fields",
-    "Roles, accountabilities, delegation, and reserved decisions",
-    "Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions",
-    "Normative chain, artifact applicability, relation types, and coverage",
-    "Artifact authoring locations and templates",
-    "Repository-specific facts and commands",
+BASELINE_ROUTING_ROWS = (
+    (
+        "Lifecycle states, transitions, procedures, next actions, and handoff fields",
+        "`docs/engineering/WORKFLOW.md` and its machine-readable `WORKFLOW.json`",
+    ),
+    (
+        "Roles, accountabilities, delegation, and reserved decisions",
+        "`docs/engineering/DECISION_RIGHTS.md`",
+    ),
+    (
+        "Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions",
+        "`docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json`",
+    ),
+    (
+        "Normative chain, artifact applicability, relation types, and coverage",
+        "`docs/engineering/TRACEABILITY.md`",
+    ),
+    (
+        "Eligible operator and technical-artifact English prose",
+        "`docs/engineering/TECHNICAL_COMMUNICATION.md`",
+    ),
+    (
+        "Artifact authoring locations and templates",
+        "`docs/engineering/templates/README.md`",
+    ),
+    (
+        "Repository-specific facts and commands",
+        "the owner-controlled region of `AGENTS.md`",
+    ),
 )
 BASELINE_STOP_CONDITIONS = (
     "managed integrity fails",
@@ -120,14 +142,15 @@ class ContextRoutingRetirementTests(unittest.TestCase):
             for line in self.router_text().split("| Subject | Normative owner |", 1)[1].splitlines()
             if line.startswith("|") and not line.startswith("| ---")
         ]
-        subjects: list[str] = []
+        parsed_rows: list[tuple[str, str]] = []
         for row in rows:
             cells = [cell.strip() for cell in row.strip().strip("|").split("|")]
             self.assertEqual(2, len(cells), row)
             subject, owner = cells
             self.assertTrue(owner, row)
-            subjects.append(subject)
-        self.assertEqual(list(BASELINE_ROUTING_SUBJECTS), subjects)
+            parsed_rows.append((subject, owner))
+        self.assertEqual(list(BASELINE_ROUTING_ROWS), parsed_rows)
+        self.assertEqual(len(parsed_rows), len({subject for subject, _ in parsed_rows}))
 
     def test_packaged_fragment_block_matches_the_recorded_baseline(self) -> None:
         block = _block(PACKAGED_FRAGMENT.read_bytes(), Path("AGENTS.md"))
