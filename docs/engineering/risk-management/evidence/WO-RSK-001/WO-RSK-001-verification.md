@@ -141,6 +141,28 @@ paths left untouched: `templates/repository/standard/scripts/generate_harness_da
    accepts that edge for any actor; the validator's `E-RSK-003` and the
    computed status at raise time are the enforcement. Not special-cased.
 
+## Deviation acceptances
+
+Recorded on 2026-08-25 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-RSK-001` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 — `RISKS` reading step only in the work-order procedures | Accept: the predicate message already surfaces the register at decision-only stages; unchanged restitution is worth more than a redundant step. |
+| 2 — residual fields top-level, quoted numerals | Accept: validation enforces the invariant; the field placement is a schema detail the spec can be amended to match. |
+| 7 — `identified -> raised` not special-cased in `transition` | Accept: `raise-risk` computes it and `E-RSK-003` refuses a stale status. |
+| 3 — `raise-risk` under the `create-artifact` guard operation | Accept: same protection through in-scope surfaces; a dedicated operation can follow under a later work order. |
+| 4 — invalid `[risk]` section is validator `E-RSK-007`, not a `doctor` check | Accept: every gate and CI run evaluates it; a doctor check can follow. |
+| 5 — no dedicated Explorer register view | Accept as follow-up work: the generator is pinned to the released root and renders risks generically. |
+| 6 — skill cores unchanged | Accept as follow-up work: `raise-risk` is reachable through the CLI and no skill may dispose. |
+
+Follow-up work recorded for a later work order: dedicated `raise-risk` guard
+operation, `doctor` check for `[risk]`, Explorer register view, skill-core
+update with regenerated digests, `RISKS` step in decision-only procedures if
+their restitution baseline is revised, and the `SPEC-RSK-001` amendments
+matching deviations 1, 2, and 7.
+
 ## Not done
 
 Linux figure pending the pull-request lane. Scenario 6 (blinded review of
