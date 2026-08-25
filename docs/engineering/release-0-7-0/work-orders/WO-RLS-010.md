@@ -2,11 +2,14 @@
 id = "WO-RLS-010"
 type = "work_order"
 title = "Qualify the integrated se-harness 0.7.0 candidate"
-status = "approved"
+status = "rejected"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 
+rejected_at = "2026-08-25T12:34:51Z"
+rejected_by = "engineering-owner"
+rejection_reason = "Rejected by the accountable engineering owner on 2026-08-25, atomically with REL-SEH-014, and superseded by WO-RLS-011. Nothing is wrong with this work order's authorized scope. Its exact aggregate scope section fixed a thirty-four-work-order census that WO-ADS-001 and WO-ADS-002 falsified when they reached main at 701e456, and the governing exact public 0.6.0 evaluator refuses an approved to approved transition (WEX201), so that census cannot be corrected in place. Rejecting it together with REL-SEH-014, which names it in gates, keeps the graph from ever holding an approved contract naming a rejected member. WO-RLS-011 carries the identical six declared execution-scope paths and the identical relations, deliberately naming no release contract, and defers its aggregate census to whatever REL-SEH-015 names in gates at its approval and to measurement at the candidate, so a further landing needs no further succession. No work was started under this work order: no start preflight was run, no version identity was moved, no distribution was built, and no candidate commit exists, so the successor inherits no partial state. This rejection is terminal and rewrites nothing: the approval recorded at 2026-08-25T11:53:28Z stands as history."
 [assurance]
 commit_bound_verification = "required"
 rationale = "Release, package installation, managed-policy upgrade, recipe-bound build replay, credential-free publication, governor succession, and future evaluator decisions will rely on the exact integrated candidate, retained evidence, and reproducible distributions."
@@ -27,6 +30,13 @@ to = "approved"
 decided_at = "2026-08-25T11:53:28Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable owners on 2026-08-25, in the same decision that approved REL-SEH-014. This work order is the successor to WO-RLS-009, which was rejected because its amended aggregate scope was never approved and the governing exact public 0.6.0 evaluator refuses an approved to approved transition (WEX201). This is therefore the first approval that scope has ever received: 34 work orders, 19 verification contracts, 41 requirements, and 35 work-order-keyed evidence paths, being the 34 existing paths measured now plus the one this work order will retain at docs/engineering/release-0-7-0/evidence/WO-RLS-010-verification.md. Every figure was re-derived from the graph immediately before this transition rather than inherited from WO-RLS-009. The execution scope is the same six declared paths approved on 2026-08-25, including docs/engineering/README.md which the owner added by name: README.md, pyproject.toml, se_harness/__init__.py, docs/notes/developing-se-harness.md, docs/engineering/README.md, and docs/engineering/release-0-7-0/. Commit-bound verification stays classified required by repository-owner decision, not by default. Approval authorizes start preflight followed by only the declared versioning, integration, qualification, recipe-bound reproducible-build, index-maintenance, and retained-evidence work inside those six paths. It authorizes no candidate commit, no branch push, no VREC-SEH-013 or RLS-SEH-013 preparation or transition, no tag creation or movement, no GitHub or PyPI publication, no Pages deployment, no maintenance-line mutation, no credential use, no external policy change, and no root-evaluator upgrade. Work must stop after an implemented candidate and retained evidence unless later authority permits more. The work order set is fixed by REL-SEH-014 and must be re-measured against the candidate rather than carried forward from this reason."
+
+[[lifecycle_events]]
+from = "approved"
+to = "rejected"
+decided_at = "2026-08-25T12:34:51Z"
+decided_by = "engineering-owner"
+reason = "Rejected by the accountable engineering owner on 2026-08-25, atomically with REL-SEH-014, and superseded by WO-RLS-011. Nothing is wrong with this work order's authorized scope. Its exact aggregate scope section fixed a thirty-four-work-order census that WO-ADS-001 and WO-ADS-002 falsified when they reached main at 701e456, and the governing exact public 0.6.0 evaluator refuses an approved to approved transition (WEX201), so that census cannot be corrected in place. Rejecting it together with REL-SEH-014, which names it in gates, keeps the graph from ever holding an approved contract naming a rejected member. WO-RLS-011 carries the identical six declared execution-scope paths and the identical relations, deliberately naming no release contract, and defers its aggregate census to whatever REL-SEH-015 names in gates at its approval and to measurement at the candidate, so a further landing needs no further succession. No work was started under this work order: no start preflight was run, no version identity was moved, no distribution was built, and no candidate commit exists, so the successor inherits no partial state. This rejection is terminal and rewrites nothing: the approval recorded at 2026-08-25T11:53:28Z stands as history."
 +++
 
 # Work Order: Qualify the integrated se-harness 0.7.0 candidate
