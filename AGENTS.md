@@ -11,7 +11,7 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 - Lint or format: none is configured. Do not invent one as a required gate.
 - Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
 
-`docs/engineering/REPOSITORY_CONTEXT.md` mirrors the commands above and is the only place the release-build, release-binding, and last-mile publication sequences are written. Read it before any build, release, or publication step. The released 0.6.0 governor still seeds and checks that file; the candidate harness has withdrawn it, so it moves into this region at the next governor upgrade.
+`docs/engineering/REPOSITORY_CONTEXT.md` mirrors the commands above and is the only place the release-build, release-binding, and last-mile publication sequences are written. Read it before any build, release, or publication step. The candidate harness has withdrawn that seed and nothing reads the file; it stays only because the owner region is bounded to 6000 bytes and its retirement is a separate work order.
 
 ## Ungoverned paths
 

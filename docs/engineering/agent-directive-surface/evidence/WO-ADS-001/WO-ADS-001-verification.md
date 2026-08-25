@@ -108,10 +108,14 @@ Each is a conscious exception recorded for the assurance owner; none is hidden.
    refers to "the bounded-scope invariant above", and names "work-readiness
    preflight" rather than the command.
 8. Owner-region retirement of `docs/engineering/REPOSITORY_CONTEXT.md` did not
-   happen: the released 0.6.0 lock still seeds and checks that path (its
-   candidate preflight failed `QGP-G4I-PREFLIGHT` on the missing file), and the
-   owner region is bounded to 6000 bytes. `AGENTS.md` now states accurately
-   what the file carries and when it retires.
+   happen. Neither the released 0.6.0 evaluator nor its lock references the
+   path; a preflight failure seen mid-implementation was `hash_bound.assess`
+   reading an index-tracked file deleted from disk before the deletion was
+   staged, not a governor rule. The binding constraint is `SPEC-IAR-012`: the
+   owner region must stay under 6000 bytes and name the path, and the release
+   sequences do not fit. The owner decided on 2026-08-25 to keep the file
+   untouched and retire it under a separate work order. `AGENTS.md` states the
+   accurate reason.
 
 ## Scenario 8 review
 
