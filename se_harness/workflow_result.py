@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import shlex
 from typing import Any, Iterable, Mapping
@@ -91,7 +92,7 @@ def build_result(
     if status not in STATUSES:
         raise ValueError(f"WEX230: invalid compliance status {status!r}")
     _validate_restitution(restitution, outcome)
-    return {
+    result = {
         "schema": SCHEMA,
         "operation": {"kind": operation, "outcome": outcome},
         "selection": {"primary": primary, "artifacts": sorted(set(artifacts))},
@@ -114,6 +115,21 @@ def build_result(
         "mutation": {"writes": list(writes)},
         "restitution": dict(restitution),
     }
+    result["result_sha256"] = restitution_digest(result)
+    return result
+
+
+def canonical_block_bytes(result: Mapping[str, Any]) -> bytes:
+    """Canonical restitution bytes: UTF-8, LF, no trailing whitespace, one final LF (ADS-DIG-001)."""
+
+    lines = [line.rstrip() for line in render_human(result).split("\n")]
+    while lines and not lines[-1]:
+        lines.pop()
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def restitution_digest(result: Mapping[str, Any]) -> str:
+    return hashlib.sha256(canonical_block_bytes(result)).hexdigest()
 
 
 def render_json(result: Mapping[str, Any]) -> str:

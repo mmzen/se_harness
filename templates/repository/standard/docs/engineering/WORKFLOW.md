@@ -174,6 +174,13 @@ outcomes, and response values.
 | `PROC-DEFINITION-COMPLETE` | `STEP-DEFINITION-COMPLETE` decision `DR-DEFINITION-DECIDE`. |
 | `PROC-DEFINITION-WORK` | `STEP-DEFINITION-WORK` decision `DR-WO-SELECT`. |
 
+A command step that names gates also declares one `corrective` form per
+predicate of those gates: a command argument array that differs from the
+evaluated command, an escalation naming a decision right, or a response. When
+`harnessctl check` is blocked, it renders the corrective form of the first
+failing predicate under `Next` and `Command or response`. A contract whose
+corrective form repeats the evaluated command fails to load with `WEX-ADS-001`.
+
 ## Transition procedure
 
 For an accountable lifecycle decision:
@@ -239,8 +246,10 @@ remain its contract; they do not constrain an adaptive agent handoff.
 On a failed command, failed gate, invalid graph, missing authority, or scope
 conflict, the agent MUST stop before the transition, report the exact failing
 criterion and unchanged state, and recommend one safe retry or one accountable
-escalation. Remediation that changes scope, accepts risk, or exercises a
-reserved decision right requires a new explicit decision.
+escalation. The retry is the corrective form `harnessctl check` renders for the
+first failing predicate; rerunning the evaluated command unchanged is never the
+retry. Remediation that changes scope, accepts risk, or exercises a reserved
+decision right requires a new explicit decision.
 
 A record cannot contain the hash of its own commit. A VREC or RLS therefore
 resides in a governance commit after the exact candidate commit it governs.

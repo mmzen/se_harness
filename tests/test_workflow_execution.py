@@ -121,7 +121,7 @@ paths = ["src/"]
         return path
 
     def test_focus_projects_only_selected_governing_chain(self) -> None:
-        code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
+        code, output, error = self.invoke("focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual("completed", result["operation"]["outcome"])
@@ -131,23 +131,24 @@ paths = ["src/"]
         )
         self.assertEqual("prepare verification record", result["handoff"]["recommended_next_step"]["action"])
 
-    def test_focus_preserves_schema_one_default_and_offers_schema_two(self) -> None:
+    def test_focus_defaults_to_schema_two_and_marks_schema_one_as_not_restitution(self) -> None:
         code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
-        self.assertEqual(0, code, error)
-        self.assertEqual(1, json.loads(output)["schema"])
-
-        code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "2", "--json"
-        )
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual("se-harness-workflow-result-v2", result["schema"])
         self.assertEqual("selected", result["scope"]["mode"])
         self.assertEqual(1, len([result["restitution"]["next"]]))
+        self.assertNotIn("WEX-ADS-002", error)
 
-        code, human, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "2"
+        code, output, error = self.invoke(
+            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "1", "--json"
         )
+        self.assertEqual(0, code, error)
+        self.assertEqual(1, json.loads(output)["schema"])
+        self.assertIn("WEX-ADS-002", error)
+        self.assertIn("not restitution", error)
+
+        code, human, error = self.invoke("focus", str(self.root), "--artifact", "WO-001")
         self.assertEqual(0, code, error)
         self.assertTrue(human.startswith("Outcome\n"))
         self.assertNotIn("Workflow focus", human)
@@ -155,7 +156,7 @@ paths = ["src/"]
     def test_focus_implemented_work_with_ready_vrec_recommends_assurance(self) -> None:
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -184,7 +185,7 @@ paths = ["src/"]
         )
         self.assertEqual(0, code, error)
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -199,14 +200,14 @@ paths = ["src/"]
 
     def test_human_handoff_emits_alternatives_only_when_declared(self) -> None:
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001"
         )
         self.assertEqual(0, code, error)
         self.assertNotIn("Alternative next steps", output)
 
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "VREC-001"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "VREC-001"
         )
         self.assertEqual(0, code, error)
         self.assertIn("Alternative next steps", output)
@@ -215,7 +216,7 @@ paths = ["src/"]
     def test_focus_projects_exact_vrec_scope_without_unrelated_work(self) -> None:
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "VREC-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "VREC-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -242,7 +243,7 @@ paths = ["src/"]
         vrec_before = vrec.read_bytes()
         release_before = release.read_bytes()
         code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "RLS-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "RLS-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -259,7 +260,7 @@ paths = ["src/"]
 
     def test_focus_rejects_a_non_primary_artifact_type(self) -> None:
         code, output, _ = self.invoke(
-            "focus", str(self.root), "--artifact", "INT-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "INT-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
@@ -314,7 +315,7 @@ paths = ["src/"]
             formal("INT-001", "intent", "approved", {}),
         )
         code, output, _ = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
@@ -327,7 +328,7 @@ paths = ["src/"]
             formal("wo-001", "work_order", "draft", {}),
         )
         code, output, _ = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
@@ -348,7 +349,7 @@ paths = ["src/"]
         ):
             with self.subTest(selected=selected):
                 code, output, _ = self.invoke(
-                    "focus", str(self.root), "--artifact", selected, "--json"
+                    "focus", "--result-schema", "1", str(self.root), "--artifact", selected, "--json"
                 )
                 self.assertEqual(1, code)
                 self.assertEqual("failed", json.loads(output)["operation"]["outcome"])
@@ -797,7 +798,7 @@ paths = ["src/"]
         for agent_host in scenario["agent_hosts"]:
             with mock.patch.dict(os.environ, {"SE_HARNESS_AGENT_HOST": agent_host}):
                 code, output, error = self.invoke(
-                    "focus", str(self.root),
+                    "focus", "--result-schema", "1", str(self.root),
                     "--artifact", scenario["artifact"],
                     "--json",
                 )
@@ -814,10 +815,10 @@ paths = ["src/"]
         fixture_path = Path(__file__).parent / "fixtures/workflow_execution/scenarios.json"
         scenario = json.loads(fixture_path.read_text(encoding="utf-8"))["scenarios"][0]
         json_code, json_output, json_error = self.invoke(
-            "focus", str(self.root), "--artifact", scenario["artifact"], "--json"
+            "focus", "--result-schema", "1", str(self.root), "--artifact", scenario["artifact"], "--json"
         )
         human_code, human_output, human_error = self.invoke(
-            "focus", str(self.root), "--artifact", scenario["artifact"]
+            "focus", "--result-schema", "1", str(self.root), "--artifact", scenario["artifact"]
         )
         self.assertEqual(0, json_code, json_error)
         self.assertEqual(0, human_code, human_error)
@@ -891,3 +892,261 @@ paths = ["src/"]
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
+    """Evidence for REQ-ADS-001, REQ-ADS-002, REQ-ADS-003, REQ-ADS-004, and REQ-ADS-005."""
+
+    EVALUATED = ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint"]
+
+    def test_every_gated_command_step_declares_one_distinct_corrective_per_predicate(self) -> None:
+        from se_harness.workflow_contract import load_validated_contracts
+
+        workflow, _, _, procedures, gates = load_validated_contracts()
+        gated = 0
+        for procedure_id, procedure in procedures.items():
+            for step in procedure["steps"]:
+                if step["kind"] != "command" or not step["gate_ids"]:
+                    self.assertNotIn("corrective", step)
+                    continue
+                gated += 1
+                expected = {p["id"] for gate_id in step["gate_ids"] for p in gates[gate_id]["predicates"]}
+                self.assertEqual(expected, set(step["corrective"]), (procedure_id, step["id"]))
+                for predicate_id, form in step["corrective"].items():
+                    with self.subTest(step=step["id"], predicate=predicate_id):
+                        self.assertIn(form["kind"], {"command", "escalation", "response"})
+                        if form["kind"] == "command":
+                            self.assertNotEqual(step["argv"], form["argv"])
+                            if form["argv"][1] == "check":
+                                self.assertGreater(len(form["argv"]), len(self.EVALUATED) + 1)
+                        elif form["kind"] == "escalation":
+                            self.assertRegex(form["decision_right"], r"^DR-")
+        self.assertGreaterEqual(gated, 5)
+
+    def test_contract_without_corrective_forms_fails_to_load_with_wex_ads_001(self) -> None:
+        from se_harness.workflow_contract import (
+            ContractError,
+            load_quality_gate_contract,
+            load_workflow_contract,
+            validate_contracts,
+        )
+
+        workflow = json.loads(json.dumps(load_workflow_contract()))
+        quality = load_quality_gate_contract()
+        for procedure in workflow["procedures"]:
+            for step in procedure["steps"]:
+                if step["id"] == "STEP-WO-IMPLEMENT-CHECK":
+                    del step["corrective"]
+        with self.assertRaises(ContractError) as missing:
+            validate_contracts(workflow, quality)
+        self.assertIn("WEX-ADS-001", str(missing.exception))
+
+        workflow = json.loads(json.dumps(load_workflow_contract()))
+        for procedure in workflow["procedures"]:
+            for step in procedure["steps"]:
+                if step["id"] == "STEP-WO-IMPLEMENT-CHECK":
+                    step["corrective"]["QGP-G4I-COMPLETE"] = {"kind": "command", "argv": list(step["argv"])}
+        with self.assertRaises(ContractError) as loop:
+            validate_contracts(workflow, quality)
+        self.assertIn("repeats the evaluated command", str(loop.exception))
+
+    def test_blocked_handoff_check_never_renders_its_own_command_as_the_retry(self) -> None:
+        self.in_progress_work_order()
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json"
+        )
+        self.assertEqual(1, code, error)
+        result = json.loads(output)
+        self.assertEqual("blocked", result["operation"]["outcome"])
+        command = result["restitution"]["command_or_response"]
+        evaluated = ["harnessctl", "check", ".", "--artifact", "WO-001", "--checkpoint", "handoff"]
+        self.assertNotEqual(evaluated, command.get("argv"))
+        self.assertEqual("command", command["kind"])
+        self.assertEqual(evaluated + ["--changed-path", "<changed-path>", "--changes-complete"], command["argv"])
+        self.assertIn("QGP-G4I-COMPLETE", result["restitution"]["next"]["action"])
+
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+            "--changed-path", "src/main.py", "--changes-complete", "--json",
+        )
+        self.assertEqual(1, code, error)
+        result = json.loads(output)
+        command = result["restitution"]["command_or_response"]
+        self.assertNotEqual(evaluated, command.get("argv"))
+        self.assertNotEqual(evaluated + ["--changed-path", "src/main.py", "--changes-complete"], command.get("argv"))
+        failing = [
+            predicate["id"]
+            for gate in result["compliance"]["gates"]
+            for predicate in gate["predicates"]
+            if predicate["status"] != "pass"
+        ]
+        self.assertIn(failing[0], result["restitution"]["next"]["action"])
+
+    def test_focus_and_check_resolve_the_same_next_step_for_one_state(self) -> None:
+        self.in_progress_work_order()
+        code, focus_output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
+        self.assertEqual(0, code, error)
+        code, check_output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json"
+        )
+        self.assertEqual(1, code, error)
+        focus_next = json.loads(focus_output)["restitution"]["next"]
+        check_next = json.loads(check_output)["restitution"]["next"]
+        self.assertEqual(focus_next["procedure_id"], check_next["procedure_id"])
+        self.assertEqual(focus_next["step_id"], check_next["step_id"])
+        human = self.invoke("focus", str(self.root), "--artifact", "WO-001")[1]
+        self.assertTrue(human.startswith("Outcome\n"))
+
+    def test_result_digest_binds_the_canonical_block_bytes(self) -> None:
+        import hashlib
+
+        from se_harness.workflow_result import canonical_block_bytes, render_human
+
+        code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
+        self.assertEqual(0, code, error)
+        result = json.loads(output)
+        digest = result["result_sha256"]
+        self.assertRegex(digest, r"^[0-9a-f]{64}$")
+        block = canonical_block_bytes(result)
+        self.assertEqual(hashlib.sha256(block).hexdigest(), digest)
+        self.assertNotIn(b"\r", block)
+        self.assertTrue(block.endswith(b"\n") and not block.endswith(b"\n\n"))
+        self.assertEqual(block.decode("utf-8").rstrip("\n") + "\n", render_human(result))
+        human = self.invoke("focus", str(self.root), "--artifact", "WO-001")[1]
+        self.assertEqual(digest, hashlib.sha256(human.replace("\r\n", "\n").encode("utf-8")).hexdigest())
+
+    def test_operating_card_template_equals_its_contract_rendering_and_stays_bounded(self) -> None:
+        from se_harness.workflow_contract import (
+            OPERATING_CARD_LIMIT,
+            load_quality_gate_contract,
+            load_workflow_contract,
+            render_operating_card,
+        )
+
+        template = Path(__file__).resolve().parents[1] / "templates/repository/standard/docs/engineering/OPERATING_CARD.md"
+        rendered = render_operating_card()
+        self.assertEqual(rendered, template.read_bytes().replace(b"\r\n", b"\n"))
+        self.assertLessEqual(len(rendered), OPERATING_CARD_LIMIT)
+        for heading in ("## States", "## Restitution headings", "## Stop when", "## Traps"):
+            self.assertIn(heading.encode(), rendered)
+        mutated = json.loads(json.dumps(load_workflow_contract()))
+        mutated["lifecycles"]["work_order"]["verified"]["transitions_to"].append("rejected")
+        self.assertNotEqual(rendered, render_operating_card(mutated, load_quality_gate_contract()))
+
+        installed = self.root / "docs/engineering/OPERATING_CARD.md"
+        self.assertTrue(installed.is_file())
+        lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual("managed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+        code, output, error = self.invoke(
+            "preflight", str(self.root), "--work-order", "WO-001", "--phase", "review", "--json"
+        )
+        manifest = json.loads(output)["reading_manifest"]
+        self.assertEqual("ENGINEERING_HARNESS.md", manifest[0])
+        self.assertEqual("docs/engineering/OPERATING_CARD.md", manifest[1])
+
+    def test_carriage_return_trailer_is_named_with_its_offset(self) -> None:
+        from se_harness.github_ci import (
+            SelectionError,
+            carriage_return_trailer_offsets,
+            select_restitution_digest,
+            select_work_order,
+        )
+
+        body = "Summary\r\n\r\nHarness-Work-Order: WO-EX-001\r\n"
+        self.assertEqual([len("Summary\r\n\r\nHarness-Work-Order: WO-EX-001")], carriage_return_trailer_offsets(body))
+        with self.assertRaises(SelectionError) as raised:
+            select_work_order(body)
+        self.assertIn("W-ADS-001", str(raised.exception))
+        self.assertIn("byte offset", str(raised.exception))
+        self.assertEqual("WO-EX-001", select_work_order(body.replace("\r\n", "\n")))
+        self.assertEqual("", select_restitution_digest("Harness-Work-Order: WO-EX-001\n"))
+        digest = "0" * 64
+        self.assertEqual(digest, select_restitution_digest(f"Harness-Restitution: {digest}\n"))
+        with self.assertRaises(SelectionError):
+            select_restitution_digest(f"Harness-Restitution: {digest}\nHarness-Restitution: {digest}\n")
+
+        event = self.root / "event.json"
+        event.write_text(
+            json.dumps({"pull_request": {"body": f"Harness-Work-Order: WO-EX-001\nHarness-Restitution: {digest}\n"}}),
+            encoding="utf-8",
+        )
+        code, output, error = self.invoke("select-work-order", "--event", str(event), "--field", "restitution-digest")
+        self.assertEqual(0, code, error)
+        self.assertEqual(digest, output.strip())
+        event.write_text(json.dumps({"pull_request": {"body": "Harness-Work-Order: WO-EX-001\n"}}), encoding="utf-8")
+        code, output, _ = self.invoke("select-work-order", "--event", str(event), "--field", "restitution-digest")
+        self.assertEqual(0, code)
+        self.assertEqual("", output.strip())
+
+    def test_handoff_check_reports_a_carriage_return_trailer_from_a_body_file(self) -> None:
+        self.in_progress_work_order()
+        body = self.root / "body.md"
+        body.write_bytes(b"Harness-Work-Order: WO-EX-001\r\n")
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+            "--pull-request-body", str(body), "--json",
+        )
+        self.assertEqual(1, code, error)
+        blockers = json.loads(output)["restitution"]["blocked_by"]
+        self.assertTrue(any(item.startswith("W-ADS-001:") for item in blockers), blockers)
+
+    def test_orphaned_ready_record_blocks_review_preflight_and_handoff(self) -> None:
+        import shutil
+        import subprocess
+
+        if shutil.which("git") is None:
+            self.skipTest("git is unavailable")
+        from se_harness.preflight import orphaned_ready_records
+
+        def git(*arguments: str) -> str:
+            completed = subprocess.run(
+                ["git", "-C", str(self.root), *arguments],
+                capture_output=True, text=True, check=True,
+                env={
+                    **os.environ,
+                    "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid",
+                    "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.invalid",
+                },
+            )
+            return completed.stdout.strip()
+
+        git("init", "-q", "-b", "main")
+        git("add", "-A")
+        git("commit", "-q", "-m", "base")
+        git("checkout", "-q", "-b", "feature")
+        (self.root / "feature.txt").write_text("x\n", encoding="utf-8")
+        git("add", "-A")
+        git("commit", "-q", "-m", "feature")
+        orphan = git("rev-parse", "HEAD")
+        git("checkout", "-q", "main")
+        reachable = git("rev-parse", "HEAD")
+
+        validator = _load_validator_module()
+
+        def artifacts() -> list:
+            return list(validator.validate_repository(self.root).artifacts)
+
+        path = self.ready_vrec()
+        path.write_text(path.read_text(encoding="utf-8").replace("a" * 40, orphan, 1), encoding="utf-8")
+        messages = orphaned_ready_records(self.root, artifacts(), "WO-001")
+        self.assertEqual(1, len(messages), messages)
+        self.assertIn("VREC-001", messages[0])
+        self.assertIn(orphan, messages[0])
+        self.assertIn("verify, reject, or a successor", messages[0])
+        self.assertEqual([], orphaned_ready_records(self.root, artifacts(), "WO-999"))
+
+        path.write_text(path.read_text(encoding="utf-8").replace(orphan, reachable, 1), encoding="utf-8")
+        self.assertEqual([], orphaned_ready_records(self.root, artifacts(), "WO-001"))
+
+        path.write_text(path.read_text(encoding="utf-8").replace(reachable, "f" * 40, 1), encoding="utf-8")
+        self.assertEqual([], orphaned_ready_records(self.root, artifacts(), "WO-001"), "unknown object is not assessable")
+
+        path.write_text(path.read_text(encoding="utf-8").replace("f" * 40, orphan, 1), encoding="utf-8")
+        self.in_progress_work_order()
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json"
+        )
+        self.assertEqual(1, code, error)
+        blockers = json.loads(output)["restitution"]["blocked_by"]
+        self.assertTrue(any(item.startswith("W-ADS-002:") for item in blockers), blockers)
+        self.assertTrue(any(orphan in item for item in blockers), blockers)

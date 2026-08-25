@@ -2,7 +2,9 @@
 
 Harness-Work-Order: WO-...
 
-Replace the placeholder with exactly one approved or completed work-order ID. Required CI validates the ID and its governing chain; reviewers remain accountable for confirming that the diff stays within its scope.
+Replace the placeholder with exactly one approved or completed work-order ID. Required CI validates the ID and its governing chain; reviewers remain accountable for confirming that the diff stays within its scope. Write the body with LF line endings; a carriage return on that line fails selection with `W-ADS-001`.
+
+Optionally add one standalone `Harness-Restitution: <sha256>` line carrying the `result_sha256` of the handoff check you returned. CI recomputes the block from the pull request's own changed paths and fails on mismatch. Leave the line out rather than guessing it.
 
 ## Summary
 

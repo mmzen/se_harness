@@ -11,7 +11,15 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 - Lint or format: none is configured. Do not invent one as a required gate.
 - Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
 
-`docs/engineering/REPOSITORY_CONTEXT.md` is repository-owned content carrying the same commands plus the release-build, release-binding, and publication sequences. Read it before any build, release, or publication step. Those sequences are not duplicated here.
+`docs/engineering/REPOSITORY_CONTEXT.md` mirrors the commands above and is the only place the release-build, release-binding, and last-mile publication sequences are written. Read it before any build, release, or publication step. The candidate harness has withdrawn that seed and nothing reads the file; it stays only because the owner region is bounded to 6000 bytes and its retirement is a separate work order.
+
+## Ungoverned paths
+
+Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap need a pull request and a reviewer, not a work order. Such a pull request carries no `Harness-Work-Order` line, states why in its body, and the repository owner accepts the resulting red managed check before merging. Everything else changes under an approved work order.
+
+## Scope of the managed obligations
+
+`HRN-003`, the handoff rules, and the stop conditions bind an actor executing or reporting a lifecycle stage. Reading, analysis, and answering questions are unconstrained, provided no lifecycle state changes, no decision right is exercised, and no finding is presented as a formal result. `harnessctl focus` output without `--result-schema 2` is a compatibility projection, not restitution.
 
 ## Do not edit these - they are hash-locked managed copies
 
