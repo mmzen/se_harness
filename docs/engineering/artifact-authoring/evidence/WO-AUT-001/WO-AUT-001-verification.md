@@ -106,6 +106,18 @@ on any error of `validate_repository`, which already includes `E-AUT-*`.
    by an equivalent synthetic statement in the test rather than the literal
    text, to keep the fixture independent of that artifact's future edits.
 
+## Deviation acceptances
+
+Recorded on 2026-08-25 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-AUT-001` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 — guidance subsections only for some types | Accept: the mechanical part is complete for every type; guidance for the remaining types is a policy-only follow-up. |
+| 2 — `harness-draft-change` 1.0.2 also claimed by PR #158 | Accept, resolve at merge: whichever merges second bumps to 1.0.3 and regenerates the vector under its own work order. |
+| 3 — synthetic statement instead of `REQ-AEX-008`'s literal text | Accept: the signal under test is the same; the fixture is independent of a live artifact. |
+
 ## Not done
 
 Linux figure pending the pull-request lane. `REQ-AUT-003` (migration,
