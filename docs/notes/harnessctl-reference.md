@@ -41,6 +41,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of five fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
 | `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
+| `delegated-workflow` | delegated implementation worker under an exact evaluator envelope | `catalog` is read-only; `execute` performs only declared repository effects and lifecycle transitions before returning a Git stop packet; `prepare-vrec` writes one undecided ready VREC | run the closed Phase 4 start, brokered-effect, completion, and assurance-preparation operations without inheriting approval, assurance, Git, or external-action authority |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
 
@@ -264,6 +265,65 @@ harnessctl accept-candidate \
 In a newly built version, `accept-candidate` is a one-cycle compatibility alias for `qualify candidate-package` and emits the typed qualification result. Exact public 0.6.0 predates the `qualify` namespace; its immutable command still emits `se-harness-functional-acceptance-v1` and is accepted only as explicitly labeled bootstrap evidence in the initial candidate workflow. That historical output is not converted into or described as canonical qualification evidence.
 
 The verifier checks the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, and rejects checkout import fallback and authority substitution. Its output is evidence for human assurance review, never a VREC transition.
+
+## Delegated Phase 4 workflow
+
+```text
+harnessctl delegated-workflow catalog [--json]
+
+harnessctl delegated-workflow execute [TARGET] \
+  --runtime-root PATH \
+  --evaluator-package PACKAGE \
+  --evaluator-version VERSION \
+  --evaluator-payload-sha256 SHA256 \
+  --evaluator-launcher-sha256 SHA256 \
+  --work-order WO-... \
+  --baseline-workspace PATH \
+  --proposed-workspace PATH \
+  --object-store PATH \
+  --changed-path PATH \
+  --start-gates JSON \
+  --effect-gates JSON \
+  --completion-gates JSON \
+  --prepare-gates JSON \
+  --tests JSON \
+  --evidence-bindings JSON \
+  --effect-deviations JSON \
+  [--delete-path PATH] [--delegate ID] [--execution-profile PROFILE] \
+  [--residual-uncertainty TEXT]
+
+harnessctl delegated-workflow prepare-vrec [TARGET] \
+  --runtime-root PATH \
+  --evaluator-package PACKAGE \
+  --evaluator-version VERSION \
+  --evaluator-payload-sha256 SHA256 \
+  --evaluator-launcher-sha256 SHA256 \
+  --work-order WO-... \
+  --id VREC-... \
+  --verification VER-... \
+  --evidence PATH \
+  --output PATH \
+  --domain DOMAIN \
+  --gates JSON \
+  --completion-proof JSON \
+  [--owner ROLE] [--delegate ID] [--execution-profile PROFILE] \
+  [--residual-uncertainty TEXT]
+```
+
+Repeat `--changed-path`, `--delete-path`, `--verification`, `--evidence`, and
+`--residual-uncertainty` where applicable. JSON options name retained input
+files, not trusted assertions: the coordinator re-observes live state, checks
+the exact released-evaluator identity and nonce-bound delegation envelope,
+requires successful gates and tests, and rejects receipt gaps or path drift.
+`execute` derives and applies one change bundle through the separately guarded
+effect broker, advances only the declared work order, and returns the canonical
+candidate-commit decision packet instead of running Git. Its start and
+completion outputs retain the receipt, envelope, and before/after observations
+as one lifecycle proof. `prepare-vrec` starts only from that complete proof and
+a clean exact candidate commit; it
+prepares an undecided `ready` record and returns an assurance decision packet.
+Neither command approves work, decides assurance, commits, pushes, opens a pull
+request, releases, publishes, deploys, or uses credentials.
 
 ## Commit-bound verification preparation
 

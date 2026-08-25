@@ -10,7 +10,7 @@ from types import MappingProxyType
 from typing import Any, Iterable, Mapping
 
 
-WORKFLOW_SCHEMA = "se-harness-workflow-v3"
+WORKFLOW_SCHEMA = "se-harness-workflow-v4"
 QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v1"
 STEP_KINDS = {"command", "decision", "reference"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
@@ -50,6 +50,23 @@ LIFECYCLE_FIELDS = frozenset(
 )
 PREDECESSOR_ADAPTER_VALUES = frozenset({"none", "required"})
 _STATE_NAME = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
+AGENTIC_OPERATION_FIELDS = frozenset(
+    {
+        "id",
+        "decision_right",
+        "current_status",
+        "result_status",
+        "gate_ids",
+        "procedure_id",
+        "mutation_operation",
+    }
+)
+PHASE4_AGENTIC_OPERATIONS = (
+    ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress", ("QG-G3-WORK-AUTHORIZATION",), "PROC-WO-START"),
+    ("change-bundle-apply", None, "in_progress", "in_progress", ("QG-G4-IMPLEMENTATION-EVIDENCE",), "PROC-WO-IMPLEMENT"),
+    ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented", ("QG-G4-IMPLEMENTATION-EVIDENCE",), "PROC-WO-IMPLEMENT"),
+    ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented", ("QG-G4-CANDIDATE-READY",), "PROC-WO-PREPARE-VREC"),
+)
 
 
 class ContractError(RuntimeError):
@@ -312,7 +329,7 @@ def validate_contracts(
     quality_gates: Mapping[str, Any],
 ) -> tuple[dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]]]:
     allowed_workflow = {
-        "schema", "normative_language", "handoff_fields", "restitution_fields", "lifecycles", "failure", "recommendations", "procedures"
+        "schema", "normative_language", "handoff_fields", "restitution_fields", "agentic_operations", "lifecycles", "failure", "recommendations", "procedures"
     }
     if set(workflow) != allowed_workflow:
         raise ContractError("workflow contract contains unknown or missing top-level fields")
@@ -363,6 +380,34 @@ def validate_contracts(
                 _strings(predicate["statuses"], f"predicate {predicate_id} statuses")
             predicates[predicate_id] = predicate
     procedures = _validate_procedures(workflow, set(gates))
+    raw_operations = workflow.get("agentic_operations")
+    if not isinstance(raw_operations, list) or len(raw_operations) != len(PHASE4_AGENTIC_OPERATIONS):
+        raise ContractError("workflow must declare the closed four-operation Phase 4 catalog")
+    expected_operations = [item[0] for item in PHASE4_AGENTIC_OPERATIONS]
+    if [item.get("id") for item in raw_operations if isinstance(item, Mapping)] != expected_operations:
+        raise ContractError("workflow Phase 4 operation order or identity is invalid")
+    for raw, expected in zip(raw_operations, PHASE4_AGENTIC_OPERATIONS, strict=True):
+        if not isinstance(raw, Mapping) or set(raw) != AGENTIC_OPERATION_FIELDS:
+            raise ContractError("workflow Phase 4 operation has invalid fields")
+        operation, right, current, result, gate_ids, procedure_id = expected
+        observed_gate_ids = tuple(
+            _strings(raw.get("gate_ids"), f"agentic operation {operation} gate_ids")
+        )
+        if (
+            raw.get("id") != operation
+            or raw.get("decision_right") != right
+            or raw.get("current_status") != current
+            or raw.get("result_status") != result
+            or observed_gate_ids != gate_ids
+            or raw.get("procedure_id") != procedure_id
+            or raw.get("mutation_operation") != operation
+        ):
+            raise ContractError(f"workflow Phase 4 operation mapping is invalid: {operation}")
+        if raw.get("procedure_id") not in procedures:
+            raise ContractError(f"workflow Phase 4 operation references unknown procedure: {operation}")
+        unknown_gates = set(observed_gate_ids) - set(gates)
+        if unknown_gates:
+            raise ContractError(f"workflow Phase 4 operation references unknown gate {sorted(unknown_gates)[0]}")
     rules_raw = workflow.get("recommendations")
     if not isinstance(rules_raw, list) or not rules_raw:
         raise ContractError("workflow recommendations must be a non-empty array")

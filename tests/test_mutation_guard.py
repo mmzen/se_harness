@@ -673,6 +673,9 @@ authorized_by = "repository-owner"
                     session=None,
                     gates_passed=True,
                 ),
+                lambda: guard(root, operation="delegated-work-order-start"),
+                lambda: guard(root, operation="delegated-work-order-complete"),
+                lambda: guard(root, operation="delegated-vrec-prepare"),
             )
             for operation in operations:
                 with self.subTest(operation=len(observed)), self.assertRaisesRegex(
@@ -693,6 +696,9 @@ authorized_by = "repository-owner"
                 "capture-verification",
                 "prepare-release",
                 "change-bundle-apply",
+                "delegated-work-order-start",
+                "delegated-work-order-complete",
+                "delegated-vrec-prepare",
             },
             set(observed),
         )

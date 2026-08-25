@@ -174,7 +174,7 @@ def _load_workflow_lifecycles() -> MappingProxyType:
         raise
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise RuntimeError(f"cannot load managed workflow contract: {path}") from exc
-    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v3":
+    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v4":
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("lifecycles")
     if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:

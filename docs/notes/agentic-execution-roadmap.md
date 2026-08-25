@@ -362,19 +362,21 @@ The packet selects one exact-evaluator-owned path: stable live observation,
 formal maximum delegation, one ephemeral envelope per effect, isolated worker
 proposals, canonical content-addressed change bundles, a journaled target effect
 broker, receipt-linked state, delegated work-order start/completion, and VREC
-preparation. It stops at independent assurance. `WO-AEX-005` is implemented
-and commit-bound verified. `WO-AEX-006` has separately started and is
-`in_progress`; the other two work orders remain approved and must proceed
-sequentially. This note does not complete, verify, release, or activate the
+preparation. It stops at independent assurance. `WO-AEX-005` and `WO-AEX-006`
+are implemented and covered by verified VRECs. Their commits remain the exact
+stacked dependency while the `WO-AEX-006` pull request awaits integration.
+`WO-AEX-007` is separately `in_progress`; `WO-AEX-008` remains approved and
+not started. This note does not complete, verify, release, or activate the
 current candidate.
 
-The current `WO-AEX-006` candidate consumes the verified live-observation and
-admission interfaces without creating another authority path. It constructs
-byte-only content-addressed bundles externally and applies admitted
-regular-file changes through one checksum-bound journal, exact rollback, or
-explicit recovery stop. Candidate tests include real child-process
-interruption and restart recovery. Commit-bound independent assurance remains
-required before the broker can support later workflow integration.
+The current `WO-AEX-007` candidate composes the verified observer, delegation,
+nonce/session, bundle broker, lifecycle engine, provenance writer, execution
+receipts, and lossless packet projector. It registers only the closed four-
+operation catalog, proves complete lifecycle documents rather than a receipt
+alone, stops before Git when a commit is required, and prepares only an
+undecided ready VREC after a separately created clean candidate. Real-Git tests
+exercise success, proof gaps, failed gates, direct unreceipted writes, and
+recovery blocking. Commit-bound independent assurance remains required.
 
 ### Objective
 
@@ -566,14 +568,14 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-`WO-AEX-005` is independently verified and `WO-AEX-006` is in progress. The
-immediate next step is to finish the exact broker verification matrix and run
-the governed implementation handoff. An engineering owner must separately
-decide whether to mark the work order implemented; later independent assurance
-must bind an exact candidate commit.
+`WO-AEX-005` and `WO-AEX-006` are independently verified, and `WO-AEX-007` is
+in progress on their exact stacked commits. The immediate next step is to
+finish candidate verification and the governed implementation handoff. An
+engineering owner must separately decide whether to mark `WO-AEX-007`
+implemented; later independent assurance must bind an exact candidate commit.
 
 Do not use candidate Phase 4 code to govern its own construction, start
-`WO-AEX-007`, create a promotable successor distribution, install it, or run a
+`WO-AEX-008`, create a promotable successor distribution, install it, or run a
 target pilot without the applicable later decisions and release/pilot packet.
 
 ## Roadmap maintenance
