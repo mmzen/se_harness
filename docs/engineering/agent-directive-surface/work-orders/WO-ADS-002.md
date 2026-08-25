@@ -2,7 +2,7 @@
 id = "WO-ADS-002"
 type = "work_order"
 title = "Close the reading manifest, minimise the operating card, and retire the repository-context file"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -46,6 +46,12 @@ decided_by = "engineering-owner"
 from = "approved"
 to = "in_progress"
 decided_at = "2026-08-25T11:42:35Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T11:54:14Z"
 decided_by = "engineering-owner"
 +++
 
