@@ -2,7 +2,7 @@
 id = "WO-TST-001"
 type = "work_order"
 title = "The parallel runner and the scale marker"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -35,6 +35,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T19:18:13Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T19:18:16Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: you can start WO-TST-001."
 +++
 
 # Work Order: The parallel runner and the scale marker
