@@ -2,7 +2,7 @@
 id = "WO-DLC-001"
 type = "work_order"
 title = "Replace the architecture-generation status proxy with a declared exemption"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -44,6 +44,13 @@ from = "approved"
 to = "in_progress"
 decided_at = "2026-08-26T09:40:33Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T14:52:19Z"
+decided_by = "engineering-owner"
+reason = "DR-WO-COMPLETE exercised by the engineering-owner. The handoff checkpoint passed through the released 0.6.0 evaluator with the complete twenty-path changed set asserted; result_sha256 d4b38b3e6e0b6bcf2bdf792d38c18c7374dc95ebb6fc13ff4396e5437aa3de33 over formal snapshot 0b2a5214010d0600cbe71aed1812fef1fb94f9f9f32866d1951d4f1f5f64e398. Implementation commit 5e25388. Retained evidence is in docs/engineering/definition-lifecycle/evidence/WO-DLC-001/. The owner accepts seven disclosed deviations as residuals rather than blocking this transition. Two are settled by separate decisions taken at the same time. The false claim in SPEC-DLC-001, VER-DLC-001 and WO-DLC-001 that W015 and E015 are already status-independent, and VER-DLC-001 scenario 16's draft-target contradiction with DLC-GEN-005, are recorded as residuals for correction under a later dedicated work order; neither artifact is in this work order's scope. The undelivered governance-migration scenario of line 86 is accepted as an authorized stop under this work order's own out-of-scope stop condition, because the migration contract byte-pins the module and its capability vocabulary is a closed set of eight names the predecessor already holds in full. Commit-bound verification remains required and has not been decided. This transition is not that decision."
 +++
 
 # Work Order: Replace the architecture-generation status proxy with a declared exemption
