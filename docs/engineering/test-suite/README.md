@@ -26,6 +26,7 @@ serial reference.
 - `VER-TST-001`: independent evidence.
 - `WO-TST-001`: runner, marker, test command in `AGENTS.md`, candidate-evidence suite step, notes (REQ-TST-001, 002).
 - `WO-TST-002`: the cached fixture install (REQ-TST-003).
+- `WO-TST-003`: follow-up to WO-TST-001's deviation 1 — the release qualification sets the scale marker (REQ-TST-002). Draft.
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.
