@@ -67,6 +67,16 @@ which derives the 0.6.0 history over the real catalog.
    pass. A dedicated fixture case can follow under a later work order after
    0.7.0 is published.
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answer, before the
+completion decision. This is the owner's statement; the assurance decision on
+the verification record remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - no new test; the existing real-catalog test is the regression proof | Accept: a fixture-based case follows under a later work order once 0.7.0 is published. |
+
 ## Complete changed-path set
 
 ```
