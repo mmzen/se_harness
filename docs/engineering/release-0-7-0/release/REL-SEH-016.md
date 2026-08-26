@@ -95,11 +95,27 @@ packaged surface with no gate in `REL-SEH-015` naming them. That membership was
 confirmed by building an explicitly non-promotable ephemeral source
 distribution from `git archive` of `main` outside the checkout and reading its
 member list: all three test modules are present, `tests/fixtures/**` contributes
-zero members, and the only `.github` members are the four distributed
-*template* files under `templates/repository/standard/.github/`, not this
-repository's own workflows. The same probe reproduced the 0.6.0 sdist digest
+zero members, and the only `.github` members are the two distributed *template*
+files under `templates/repository/standard/.github/` —
+`PULL_REQUEST_TEMPLATE.md.seed` and `workflows/engineering-harness.yml` — not
+this repository's own workflows. The same probe reproduced the 0.6.0 sdist digest
 recorded in `RLS-SEH-012`, which is why the measurement is trusted to describe
 the genuine released surface rather than an artefact of the local toolchain.
+
+That paragraph first said *four* template files. It was wrong, and the figure is
+corrected here rather than carried into `VREC-SEH-013`: four is the number of
+`.github` *tar members*, of which two are directory entries. The candidate tree
+holds exactly two such files, confirmed by
+`git ls-tree -r e98b788 templates/repository/standard/.github/`. Nothing the
+paragraph concludes depends on the count — the claim is that the only shipped
+`.github` bytes are distributed templates rather than this repository's own CI,
+and that holds.
+
+The promotable build later confirmed all of this against the real 0.7.0 source
+distribution rather than an ephemeral probe: 195 members, all three post-freeze
+test modules present, both `WO-HBI` test modules present,
+`tests/fixtures/**` contributing zero members, this repository's own `.github/`
+contributing zero members, and the two template files above.
 
 `REL-SEH-015` is therefore rejected and this contract re-issued, exactly as
 `REL-SEH-015` prescribed for itself. No approved allow-list was widened,
@@ -109,7 +125,9 @@ unrewritten as immutable rejected history, and it joins `REL-SEH-012`,
 `REL-SEH-013`, and `REL-SEH-014` in that history. No work was started under
 `REL-SEH-015` beyond `WO-RLS-011`, whose own authority is separate and is
 discussed below: no version identity was moved on any branch that reached
-`main`, no promotable distribution was built, and no candidate commit exists.
+`main`, and nothing was built or bound under `REL-SEH-015`'s authority. The
+candidate commit and the promotable build recorded further down happened after
+this contract was approved and under this contract's authority alone.
 
 `REL-SEH-015` named no release contract in `WO-RLS-011`'s relations and
 `WO-RLS-011` names none in return, so rejecting `REL-SEH-015` orphans nothing in
@@ -156,6 +174,11 @@ later decision: the promotable build, the candidate commit,
 carrying this packet, branch push, credential use, tag creation, GitHub or PyPI
 publication, Pages deployment, `release/0.7` maintenance-line mutation,
 external policy change, or root-evaluator upgrade.
+
+Two of those have since been put to the release owner on their own terms and
+decided, and are now done: the candidate ref and the recipe-bound build. The
+promotion policy below records what was decided and measured. Everything else in
+the list above remains outstanding and undecided.
 
 ## Release unit
 
@@ -819,23 +842,64 @@ forms occur in this unit and both were counted.
 4. Done on 2026-08-26: a working container runtime for the pinned `linux/amd64`
    producer was obtained on the build host — Docker client 29.7.2 with a running
    `linux/amd64` engine — so the recipe stands unchanged.
-5. Next, and corrected here as to order: separately authorize one clean
-   candidate commit and a dedicated candidate branch push, *then* build the
-   recipe-bound distributions outside the checkout under this contract's
-   authority. The build cannot precede the candidate commit: the strict
-   interpreter is invoked as `release_build replay --commit <full-candidate>`
-   and derives `SOURCE_DATE_EPOCH` from `candidate.committer_epoch`, so there is
-   nothing to build against until that commit exists. This contract's own
-   numbering listed the build first, which inverted that dependency; the
-   dependency governs. Before the candidate commit, confirm the tree carries no
-   `WO-AEX-006` bytes and no pull request #156 bytes, since either may merge into
-   `main` in the meantime. `gates` is frozen from approval, so any work order
-   reaching `implemented` with bytes in the packaged surface during these steps
-   is a stop condition reported to the release owner, not an edit.
-6. Require green hosted Engineering Harness, Candidate Evidence, Governor
-   Transition Assessment, and Publication Rehearsal lanes on the candidate's own
-   commit. No expected-red lane is anticipated; any red is a stop condition, not
-   an accepted boundary.
+5. Done on 2026-08-26, and corrected here as to order. The order in this
+   contract's original numbering put the build first, which inverted a real
+   dependency: the strict interpreter is invoked as
+   `release_build replay --commit <full-candidate>` and derives
+   `SOURCE_DATE_EPOCH` from `candidate.committer_epoch`, so there is nothing to
+   build against until the candidate commit exists. The dependency governs.
+
+   On the release owner's decision the candidate is `main`'s own tip,
+   `e98b7885b016529aa2c262ad577acdc270bc9376`, published on the dedicated ref
+   `candidate/0.7.0` with no new commit — the same shape as 0.6.0, whose
+   `candidate/0.6.0-c6` ref pointed at bound candidate `3b339e9`. The tree was
+   confirmed to carry no `WO-AEX-006` implementation bytes
+   (`se_harness/effect_broker.py` and `se_harness/change_bundle.py` both absent;
+   the work order is present but still `approved`, `implemented` only on open
+   pull request #155) and no pull request #156 bytes (zero `risk-management`
+   paths). `release/0.7` was not created and no tag was created or moved.
+
+   The recipe-bound build then ran outside the checkout from a clean worktree at
+   the candidate. Result `state = "exact"`: two independent instances of the
+   digest-pinned producer
+   `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050`,
+   both observing CPython 3.11.9 on linux/amd64 at 64 pointer bits with the
+   complete hash-locked toolchain, produced byte-identical outputs — wheel
+   `aa52125ddcc573a3ed143ad9cba59eb8b76d47c665dad982e74dc34f4ca34069` (431141
+   bytes) and normalized sdist
+   `848da4689dbd6261afe0748089e5c34d44ad050f84152c4e83b254a72aacc54a` (621507
+   bytes) at `SOURCE_DATE_EPOCH` 1787732223, recipe digest
+   `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc`. The
+   retained binding evidence is `se-harness-release-bundle/v2`, the schema this
+   release is obliged to use. Both files and that evidence are held outside the
+   repository until a governance commit is separately authorized to retain them.
+
+   `gates` is frozen from approval, so any work order reaching `implemented` with
+   bytes in the packaged surface during these steps is a stop condition reported
+   to the release owner, not an edit. None did.
+6. Green hosted Engineering Harness, Candidate Evidence, Governor Transition
+   Assessment, and Publication Rehearsal lanes are required on the candidate's
+   own commit. All four are green on `e98b7885b016529aa2c262ad577acdc270bc9376`
+   through `main`'s push event: runs 32946962510, 32946962546, 32946962515, and
+   32946962531.
+
+   The `candidate/0.7.0` ref itself can carry only two of the four, and the
+   release owner accepted the commit's own readings on 2026-08-26 rather than
+   treat the shortfall as the stop condition. The reasons are properties of the
+   ref, not of the candidate. Publication Rehearsal restricts its push trigger to
+   `main`, so it cannot fire on any candidate branch. Governor Transition
+   Assessment takes its base from
+   `github.event.pull_request.base.sha || github.event.before`, and on branch
+   creation `before` is the null SHA, so it refused with "base revision must
+   differ from target HEAD" — a refusal to assess, with empty `diagnostics`,
+   rather than a failed assessment. It has no `workflow_dispatch`, and a pull
+   request from this ref to `main` would set the base to `main`'s tip, which *is*
+   this candidate, failing identically. On a candidate that is `main`'s tip a
+   green reading on the ref is unobtainable. For this exact commit the
+   assessment did run, on `main`, from base `e1fd462`, and returned
+   `passed: true`, `transition_required: false`, `assessment: "not_applicable"`,
+   with the governor staying 0.6.0 at lock schema 3. `VREC-SEH-013` carries this
+   disclosure.
 7. Separately prepare, review, and verify `VREC-SEH-013` with exactly the
    work-order set, keyed evidence paths, and verification contracts this
    contract names at its approval, measured on the whole-`gates` basis, and
@@ -877,10 +941,17 @@ earlier approvals was reused as authority. Two inclusion classifications were
 re-put and confirmed with it, as recorded above: `WO-HUP-004`, and
 `WO-HBI-003`/`WO-HBI-004` on the corrected packaged-surface basis.
 
-Outstanding beyond that: the candidate commit, the promotable build, branch and
-credential use, `VREC-SEH-013` preparation and verification, `RLS-SEH-013`
-preparation and release, tag creation, publication, deployment, maintenance-line
-mutation, external policy change, and root adoption.
+Two of the acts this approval expressly did not authorize have since been put
+separately, decided by the release owner, and taken under this contract's
+authority — each recorded in the promotion policy above: the candidate ref
+`candidate/0.7.0` at `e98b788`, and the recipe-bound `state = "exact"` build. The
+build outputs are held outside the repository.
+
+Outstanding beyond that: retention of the build outputs, credential use,
+`VREC-SEH-013` preparation and verification, `RLS-SEH-013` preparation and
+release, the `release-candidate-replay` dispatch, tag creation, publication,
+deployment, maintenance-line mutation, external policy change, and root
+adoption.
 
 ## Known open questions that do not block this release
 
