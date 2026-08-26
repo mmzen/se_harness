@@ -2,7 +2,7 @@
 id = "WO-TST-003"
 type = "work_order"
 title = "Run the scale tests at full size in the release qualification"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -23,6 +23,20 @@ paths = [
   "docs/notes/ci-pipeline.md",
   "docs/engineering/test-suite/evidence/",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T20:10:10Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: you can start WO-TST-003 (approval and start)."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T20:10:13Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: start."
 +++
 
 # Work Order: Run the scale tests at full size in the release qualification
