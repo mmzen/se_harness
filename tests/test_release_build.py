@@ -550,6 +550,7 @@ class ReplayBuildTests(unittest.TestCase):
             with (
                 mock.patch.object(BUILD, "_docker_image_identity", side_effect=lambda image: image),
                 mock.patch.object(BUILD, "_docker_build", side_effect=self.fake_docker_build) as producer,
+                mock.patch.object(BUILD, "_hand_back_workspace"),  # WO-RLO-007: no real docker on any platform
             ):
                 result = BUILD.replay_build(
                     root,
@@ -577,6 +578,7 @@ class ReplayBuildTests(unittest.TestCase):
             with (
                 mock.patch.object(BUILD, "_docker_image_identity", side_effect=lambda image: image),
                 mock.patch.object(BUILD, "_docker_build", side_effect=self.fake_docker_build),
+                mock.patch.object(BUILD, "_hand_back_workspace"),  # WO-RLO-007: no real docker on any platform
             ):
                 with self.assertRaisesRegex(BUILD.BuildRecipeError, "accepted hash"):
                     BUILD.replay_build(
