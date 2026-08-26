@@ -68,7 +68,7 @@ does not complete, verify, or release the work order.
 | `git diff --check` | git | clean |
 | `harnessctl check . --artifact WO-CIP-004 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both reported formal snapshot `b0962ede…` on the stacked branch; after the stack merged the two unbound commits were re-based onto `main` (`98edd14`) and both evaluators report `4ae17c000b1fa7fb62adec2352e870cf4b3de1218a3a11ed5c9a0f6f5b38885d` there |
 | `python -m unittest` over `test_release_unit`, `test_harnessctl`, `test_progressive_documentation`, `test_artifact_catalog`, `test_instruction_architecture`, `test_validation_taxonomy` | candidate | OK, 1 skip |
-| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 916 tests in 376.668s` — `OK (skipped=23)`; the 23 skips are the Windows-only guards |
+| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | on the stacked branch `Ran 916 tests` — `OK (skipped=23)`; on the `main`-based branch before deviation 7 `Ran 958 tests` — 1 failure, the pre-existing one; after it `Ran 958 tests in 356.949s` — `OK (skipped=24)` |
 | `python -m se_harness release-unit . --from v0.6.0 --to e98b7885… --contract REL-SEH-015 --json` (`VER-CIP-001` scenario 4; retained as `release-unit-v0.6.0-e98b788.json`) | candidate | see below |
 
 ## Scenario 4: the 0.7.0 unit measured from commit trailers
@@ -121,6 +121,14 @@ unit the command freezes cleanly is the one after 0.7.0.
    history. The start and implementation commits carry no record and were
    cherry-picked onto `main` (`0c02aec`, `3906eb6`); the formal snapshot and
    the suite were re-measured there. This is not a rebase of a bound commit.
+7. **A pre-existing failure on `main` fixed here.** The clean suite on the
+   `main`-based branch reported one failure, present on `main` itself:
+   `tests/test_artifact_authoring_policy.py::test_repository_dry_run_report_is_retained_and_matches_a_fresh_run`
+   compared the retained WO-AUT-002 dry-run report (248 mapped) with a fresh
+   run over the 254 requirements `main` now has. Owner decision 2026-08-26:
+   fix it under this work order (`tests/` is in scope). The test now compares
+   the `skipped` count and the set of `unmatched` requirements, and requires
+   the fresh `mapped` total to be at least the retained one.
 
 ## Complete changed-path set
 
@@ -133,6 +141,7 @@ docs/notes/harnessctl-reference.md
 se_harness/cli.py
 se_harness/release_unit.py
 templates/repository/standard/docs/engineering/templates/RELEASE_CONTRACT.template.md
+tests/test_artifact_authoring_policy.py
 tests/test_release_unit.py
 ```
 
@@ -150,6 +159,7 @@ on `VREC-CIP-004` remains separate.
 | 4 - packaged-surface prefixes declared in the module | Accept. |
 | 5 - template validator unchanged | Accept. |
 | 6 - re-based onto `main` after the stack merged | Owner instruction 2026-08-26: "previous PR have been merged"; unbound commits only. |
+| 7 - pre-existing brittle test on `main` fixed here | Owner decision 2026-08-26: fix it under WO-CIP-004. |
 
 ## Not done
 
