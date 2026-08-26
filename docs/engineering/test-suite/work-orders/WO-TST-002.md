@@ -2,7 +2,7 @@
 id = "WO-TST-002"
 type = "work_order"
 title = "The cached fixture install"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -29,6 +29,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T19:18:13Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T19:49:49Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: you can start WO-TST-002; WO-TST-001 is implemented."
 +++
 
 # Work Order: The cached fixture install
