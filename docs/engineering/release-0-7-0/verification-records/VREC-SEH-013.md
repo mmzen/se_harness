@@ -2,7 +2,7 @@
 id = "VREC-SEH-013"
 type = "verification_record"
 title = "Verification candidate for 38 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,14 +16,42 @@ evidence_paths = ["docs/engineering/agent-directive-surface/evidence/WO-ADS-001/
 evaluator_evidence_path = "docs/engineering/release-0-7-0/evidence/VREC-SEH-013-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T15:50:09Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ADS-001", "WO-ADS-002", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-HUP-004", "WO-IPK-001", "WO-LRE-001", "WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-REB-023", "WO-RLO-004", "WO-RLO-005", "WO-RLO-006", "WO-RLS-011", "WO-TCM-001", "WO-TCM-002", "WO-VSP-007", "WO-WEX-003"]
 conforms_to = ["VER-ADS-001", "VER-ADS-002", "VER-AEX-001", "VER-AEX-002", "VER-AEX-003", "VER-AEX-004", "VER-DST-001", "VER-HBI-001", "VER-HUP-004", "VER-IPK-001", "VER-LRE-001", "VER-REB-006", "VER-REB-007", "VER-REB-008", "VER-REB-009", "VER-REB-010", "VER-RLO-004", "VER-RLO-005", "VER-TCM-001", "VER-VSP-002", "VER-WEX-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T15:50:09Z"
+decided_by = "assurance-owner"
+reason = "The assurance owner accepted the exact 38 / 21 / 48 / 41 aggregate on candidate e98b7885b016529aa2c262ad577acdc270bc9376 on 2026-08-26, having reviewed the forty-one keyed evidence paths, the provenance and per-checkout snapshot caveat, the state = \"exact\" recipe-bound build, the four green hosted lanes on the candidate commit, the superseded stage-1 census, and the seven disclosures the record carries unsoftened, including the two owed VER-TCM-001 reviewer judgments and VER-ADS-001 Scenario 8. This decision moves only this record status."
 +++
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for `WO-ADS-001`, `WO-ADS-002`, `WO-AEX-001`, `WO-AEX-002`, `WO-AEX-003`, `WO-AEX-004`, `WO-AEX-005`, `WO-HBI-001`, `WO-HBI-002`, `WO-HBI-003`, `WO-HBI-004`, `WO-HUP-004`, `WO-IPK-001`, `WO-LRE-001`, `WO-REB-008`, `WO-REB-009`, `WO-REB-010`, `WO-REB-011`, `WO-REB-012`, `WO-REB-013`, `WO-REB-014`, `WO-REB-015`, `WO-REB-016`, `WO-REB-017`, `WO-REB-018`, `WO-REB-019`, `WO-REB-020`, `WO-REB-021`, `WO-REB-022`, `WO-REB-023`, `WO-RLO-004`, `WO-RLO-005`, `WO-RLO-006`, `WO-RLS-011`, `WO-TCM-001`, `WO-TCM-002`, `WO-VSP-007`, `WO-WEX-003` to candidate commit `e98b7885b016529aa2c262ad577acdc270bc9376`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
+The accountable assurance owner accepted this exact thirty-eight-work-order aggregate on
+2026-08-26 after reviewing the forty-one keyed evidence paths, the twenty-one verification
+contracts, the candidate provenance with its per-checkout snapshot caveat, the `state =
+"exact"` recipe-bound build, the four green hosted lanes on the candidate's own commit, the
+superseded stage-1 census, and the seven disclosures below — including the two `VER-TCM-001`
+reviewer judgments that do not exist and `VER-ADS-001` Scenario 8, which were accepted as
+disclosed limits rather than treated as satisfied. This decision transitions only
+`VREC-SEH-013` from `ready` to `verified`; the thirty-eight referenced work orders remain
+`implemented`, and automation supplied no assurance authority.
+
+The decision was taken while hosted Actions was degraded on this branch: at the commit that
+prepared this record only two `SE Harness Candidate Evidence` runs existed, one
+`startup_failure` and one queued, and no Engineering Harness, Governor Transition Assessment or
+Publication Rehearsal run was created at all. The owner was shown that state and accepted it,
+on the reading that the candidate's own four lanes are green through `main`'s push event and
+that a job cancelled with zero steps is a runner-availability condition rather than a verdict
+on this branch's diff. That is recorded here as a disclosed condition of the decision, not as a
+passing lane.
+
+This verified record binds retained evidence for `WO-ADS-001`, `WO-ADS-002`, `WO-AEX-001`, `WO-AEX-002`, `WO-AEX-003`, `WO-AEX-004`, `WO-AEX-005`, `WO-HBI-001`, `WO-HBI-002`, `WO-HBI-003`, `WO-HBI-004`, `WO-HUP-004`, `WO-IPK-001`, `WO-LRE-001`, `WO-REB-008`, `WO-REB-009`, `WO-REB-010`, `WO-REB-011`, `WO-REB-012`, `WO-REB-013`, `WO-REB-014`, `WO-REB-015`, `WO-REB-016`, `WO-REB-017`, `WO-REB-018`, `WO-REB-019`, `WO-REB-020`, `WO-REB-021`, `WO-REB-022`, `WO-REB-023`, `WO-RLO-004`, `WO-RLO-005`, `WO-RLO-006`, `WO-RLS-011`, `WO-TCM-001`, `WO-TCM-002`, `WO-VSP-007`, `WO-WEX-003` to candidate commit `e98b7885b016529aa2c262ad577acdc270bc9376`. Acceptance does not commit, tag, release, publish, or deploy anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
 
@@ -251,16 +279,19 @@ at the candidate commit in a clean detached worktree:
 
 Read over the branch tree that carries this record and `REL-SEH-016`, the same governing
 evaluator reports **893 artifacts, 0 errors, 51 maintenance warnings**, and `inspect` reports
-893 artifacts, 3348 relations, 171 findings, 0 definitions pending, 0 assurance pending and
-exactly **one decision required — this record's own assurance review**. The 891 figure is the
-candidate's; the two additional artifacts are `REL-SEH-016` and this record, and the single
-additional warning is this record's own. The error count does not move. `WO-RLS-011` no longer
-reads as assurance pending, because this record is what covers it.
+893 artifacts, 3348 relations, 171 findings, 0 definitions pending and 0 assurance pending. The
+891 figure is the candidate's; the two additional artifacts are `REL-SEH-016` and this record,
+and the single additional warning is this record's own. The error count does not move.
+`WO-RLS-011` no longer reads as assurance pending, because this record is what covers it.
 
-`check --artifact VREC-SEH-013 --checkpoint pre-action --procedure PROC-VREC-DECIDE` reports
-`Completed`, states the lifecycle state as `ready`, and names the decision: the assurance owner
-must decide, under `DR-VREC-DECIDE`, whether the retained evidence verifies the exact
-candidate. Review-phase `preflight --work-order WO-RLS-011` passes with no diagnostic.
+The decision count moved with the decision, and both readings are recorded. While this record
+was `ready`, `inspect` reported exactly **one decision required** — this record's own assurance
+review — and `check --artifact VREC-SEH-013 --checkpoint pre-action --procedure
+PROC-VREC-DECIDE` reported `Completed`, stated the lifecycle state as `ready`, and named the
+`DR-VREC-DECIDE` decision. After the transition applied at `2026-08-26T15:50:09Z`, `inspect`
+reports **0 decisions required** and the artifact, relation, finding, error and warning counts
+are unchanged at 893 / 3348 / 171 / 0 / 51. Review-phase `preflight --work-order WO-RLS-011`
+passes with no diagnostic in both states.
 
 ## The superseded stage-1 reading
 
@@ -307,16 +338,26 @@ transition this record.
 
 ## Authority boundary
 
-This record is `ready`. It is a proposal, and it decides nothing.
+At this stop, `VREC-SEH-013` is `verified`. The accountable assurance owner independently
+reviewed the aggregate, the keyed evidence, the provenance, the build and the disclosures above,
+and accepted them.
 
-An accountable assurance owner must independently review the aggregate, the keyed evidence,
-the provenance, the build and the disclosures above, and then either transition this record to
-`verified` or reject it. The workflow offers a third outcome, supersession, but a `ready`
+While this record was `ready` it was a proposal that decided nothing, and the owner's routes
+were verification or rejection. The workflow offers a third outcome, supersession, but a `ready`
 record cannot in fact be superseded: `E002` requires `verified_at` on a superseded record and
 `E009` forbids it on a `ready` one, so the two rules contradict each other and the attempt
-fails validation. Verify or reject are the real routes. The transition, if taken, moves only
-this record's `status`: the 38 work orders remain `implemented`, and automation supplies no
-assurance authority.
+fails validation. Verify or reject were the real routes, and the owner verified. The transition
+moved only this record's `status`: the 38 work orders remain `implemented`, and automation
+supplied no assurance authority.
+
+Verification is also the last point at which any figure in this record could be corrected. Every
+figure above was re-measured in the same commit that carries the transition, and a verified
+record's bound commit can never afterwards be re-pointed.
+
+With this record `verified`, the workflow's next checkpoint is `PROC-DELIVERY-SELECT`, at which
+the repository owner or release owner must decide under `DR-DELIVERY-SELECT` which delivery path
+to take: repository integration, release preparation, or stop. `check` at that checkpoint reports
+`Completed` and names exactly that decision. Verification does not make it.
 
 No commit, `RLS-SEH-013` preparation or binding, distribution retention, tag creation or
 movement, publication, deployment, Pages generation, `release/0.7` mutation, credential use,
