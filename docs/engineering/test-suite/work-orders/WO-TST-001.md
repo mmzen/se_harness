@@ -2,7 +2,7 @@
 id = "WO-TST-001"
 type = "work_order"
 title = "The parallel runner and the scale marker"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-26T19:18:16Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: you can start WO-TST-001."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T19:46:34Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-TST-001 implemented, after accepting interactively the four recorded deviations (the release qualification does not set the scale marker yet; ProcessPoolExecutor rather than multiprocessing.Pool; the scope amendment; a failed import counted as one run test in both runs)."
 +++
 
 # Work Order: The parallel runner and the scale marker
