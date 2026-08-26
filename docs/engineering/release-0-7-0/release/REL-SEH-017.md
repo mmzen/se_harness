@@ -2,13 +2,20 @@
 id = "REL-SEH-017"
 type = "release_contract"
 title = "Release se-harness 0.7.0 from everything on main as the first ordinary schema-3 release"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 gates = ["WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-REB-023", "WO-HUP-004", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-AEX-006", "WO-AEX-007", "WO-AEX-008", "WO-VSP-007", "WO-LRE-001", "WO-IPK-001", "WO-RLO-004", "WO-RLO-005", "WO-RLO-006", "WO-RLO-007", "WO-WEX-003", "WO-TCM-001", "WO-TCM-002", "WO-ADS-001", "WO-ADS-002", "WO-AUT-001", "WO-AUT-002", "WO-CIP-001", "WO-CIP-002", "WO-CIP-003", "WO-CIP-004", "WO-CIP-005", "WO-TST-001", "WO-TST-002", "WO-TST-003", "WO-RLS-011", "WO-RLS-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T20:59:11Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-26 with the words 'I approve REL-SEH-017', freezing the fifty-three-work-order allow-list in gates as the exact 0.7.0 release unit. Re-measured immediately before this transition over branch state f310024 carrying unmoved main be2f0cf: the fifty-two existing members all read implemented, fifty-one with verified coverage and WO-RLS-011 covered by the planned aggregate record; WO-RLS-012 approved seconds earlier; on the whole-gates basis 24 verification contracts, a 65-requirement union and 58 keyed evidence paths, 57 existing plus the one WO-RLS-012 retains; forty-five implemented unreleased work orders excluded by name-class, none declaring a packaged-surface path; the commit census from v0.6.0 reported, not enforced, so QGP-G5P-RELEASE-UNIT passes unmeasured. Governing public 0.6.0 evaluator outside the checkout: validate PASS at 952 artifacts, 0 errors, 50 maintenance warnings, every plane at E0; doctor 0 FAIL. The disclosed limitations of VER-TCM-001 and VER-ADS-001 are accepted residual risk and the two classification calls carried from REL-SEH-015 are confirmed. From this moment gates cannot be widened, narrowed or repaired in place; a further landing with packaged-surface bytes is a stop condition remedied only by REL-SEH-018. This approval gates the promotable build, the candidate commit and release preparation; it authorizes none of them."
 +++
 
 # Release Contract: Release se-harness 0.7.0 from everything on main as the first ordinary schema-3 release
