@@ -53,7 +53,7 @@ which derives the 0.6.0 history over the real catalog.
 | `python scripts/run_tests.py --workers 8 --scale full` | candidate, Windows 11, CPython 3.14 | `Ran 995 tests in 81.975s (117 classes, 8 workers)` — `OK (skipped=24)` |
 | Regression proof on the release catalog: a detached worktree at `a3bf411` (pull request #183, catalog holding `RLS-SEH-009` bootstrap-rejected and `RLS-SEH-014` ordinary-rejected) | candidate | `tests.test_predecessor_publication` **FAILED (errors=1)** without the change; **OK** for both predecessor suites with this file's `predecessor_preparation.py` copied in |
 | `harnessctl check . --artifact WO-REB-024 --checkpoint handoff --changed-path … --changes-complete --json` | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; formal snapshot below |
-| Hosted | pull request #184, head  | all four  lanes success; Publication Rehearsal :  —  on Linux at full scale; Candidate Evidence  success |
+| Hosted | pull request #184, head `c1096bb` | all four `pull_request` lanes success; Publication Rehearsal `33017648762`: `Ran 995 tests in 61.287s` — `OK (skipped=4)` on Linux at full scale; Candidate Evidence `33017648393` success |
 
 ## Deviations from the specification, recorded for the completion decision
 

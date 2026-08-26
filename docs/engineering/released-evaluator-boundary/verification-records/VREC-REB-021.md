@@ -48,7 +48,7 @@ tests OK; full suite `Ran 995 tests … OK (skipped=24)` on Windows CPython
 fails in a worktree at `a3bf411` (pull request #183's catalog with two
 rejected release records) without the change and passes with it.
 
-Hosted, on pull request #184 head  (the evidence commit that precedes the bound commit by the completion transition only): all four  lanes **success** — Engineering Harness , Governor Transition Assessment , SE Harness Candidate Evidence , Publication Rehearsal  with the Linux suite at ** — **, full scale; the candidate-mode qualification that was red on #183 is green here.
+Hosted, on pull request #184 head `c1096bb` (the evidence commit that precedes the bound commit by the completion transition only): all four `pull_request` lanes **success** — Engineering Harness `33017648415`, Governor Transition Assessment `33017648399`, SE Harness Candidate Evidence `33017648393`, Publication Rehearsal `33017648762` with the Linux suite at **`Ran 995 tests in 61.287s` — `OK (skipped=4)`**, full scale; the candidate-mode qualification that was red on #183 is green here.
 
 ## Disclosed limitation
 
