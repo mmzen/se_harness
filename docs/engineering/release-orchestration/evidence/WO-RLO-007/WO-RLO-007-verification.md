@@ -71,8 +71,9 @@ would fail identically.
 | `git diff --check` | git | clean |
 | `harnessctl check . --artifact WO-RLO-007 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both report formal snapshot `db5b5a184a504b105d37faac26aaacf9421cffe54386774a5b8eee3a0eaf9f20` |
 | `python -m unittest tests.test_release_build tests.test_interpreter_safety tests.test_release_orchestration` | candidate | OK, 10 skips (Windows-only guards) |
-| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 911 tests in 332.131s` — `OK (skipped=23)`; the 23 skips are the Windows-only guards |
-| Hosted, after the change | `publication-rehearsal.yml`, `Qualify and replay (candidate)` on the pull request | HOSTED_MARKER |
+| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 911 tests in 333.776s` — `OK (skipped=23)`; the 23 skips are the Windows-only guards |
+| `tests/test_release_build.py` under a POSIX simulation (`_is_posix` forced true, `getuid`/`getgid` stubbed) | workstation | 17 tests, OK |
+| Hosted, after the change | `publication-rehearsal.yml` run `32995876112` on PR #174 at `7098239` (merge commit `a9091724`), job `Qualify and replay (candidate)` | **success**: the first hosted recipe replay in the repository's history to complete. Retained `release-build-replay.json`: `state` `exact`; builds `a` and `b` byte-identical, wheel `1a925ac4587c…`, sdist `44c1a7763c4a…`; producer `python@sha256:2856e6af…`; no checkout residue. Every check on the pull request green; the record-mode job skipped for want of a schema-2 record |
 
 ## Deviations, recorded for the completion decision
 
@@ -115,7 +116,21 @@ repository_tools/release_build.py
 tests/test_release_build.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-RLO-007` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - `chown` inside the pinned image | Accept: within the envelope; the producer's own run untouched. |
+| 2 - Windows not measured | Accept: the hand-back is a no-op off POSIX; the hosted Linux run is the measurement. |
+| 3 - `release-candidate-replay.yml` not re-run | Accept: no ready record exists; the rehearsal exercised the same replay. |
+| 4 - first hosted attempt failed on test coverage | Confirmed. |
+| 5 - second hosted attempt failed on the read; hand-back moved before the read | Confirmed. |
+
 ## Not done
 
-- The hosted reading after the change (needs the pull request); the
-  completion transition; `VREC-RLO-007`.
+- The completion transition; `VREC-RLO-007`; `release-candidate-replay.yml`
+  on a ready record when one exists (deviation 3).
