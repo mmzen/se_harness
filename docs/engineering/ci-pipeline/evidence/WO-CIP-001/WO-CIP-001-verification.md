@@ -119,6 +119,20 @@ tests/test_integration_package.py
 tests/test_standard_repository_lifecycle.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-CIP-001` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - the integration package keeps its own two builds | Accept: a different distribution governed by SPEC-IPK-001 rule 1. |
+| 2 - `integration-package-retain` stays as a job | Accept: SPEC-IPK-001 rule 5 requires retention after every matrix member passes. |
+| 3 - the rehearsal still runs twice per platform | Accept: REQ-REB-017's determinism example; only the reconciliation job was folded. |
+| 4 - the cross-platform comparison runs only where the integration lane runs | Accept: pull requests and main are where it matters; release and candidate pushes keep the per-platform proof. |
+| 5 - the managed workflow changed in the template only | Accept: the root copy follows at the root-evaluator upgrade. |
+
 ## Not done
 
 - Hosted observation of the runs (scenarios 1 and 2), which needs the pull
