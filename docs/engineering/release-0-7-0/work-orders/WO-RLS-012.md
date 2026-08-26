@@ -2,7 +2,7 @@
 id = "WO-RLS-012"
 type = "work_order"
 title = "Qualify and build the final se-harness 0.7.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-26T20:59:40Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-26, 'you can then start WO-RLS-012'. Start preflight PASS at phase start over branch state 6d5aeab carrying unmoved main be2f0cf, run with the governing exact public 0.6.0 evaluator outside the checkout. REL-SEH-017 is approved, so its fifty-three-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the three declared execution-scope paths. This start authorizes no candidate commit, no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-014 or RLS-SEH-014 preparation or transition, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T21:20:24Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-26 under DR-WO-COMPLETE, 'mark WO-RLS-012 implemented', on the handoff gate reading Completed over candidate commit 24cf7c767583e83b9056d03d7dd5de6622fef91c, tree 05b0e6dd2b39da89180e4712a5a2fdc6d2f861f4, formal snapshot 685a2400d0e04bdc4f6dbf6ce2d2c677352691e48b570bbda565f673f8d8b08b, change set asserted complete over the one changed path, the keyed evidence. Exact-candidate readings, governing exact public 0.6.0 evaluator outside the checkout in isolated mode: validate PASS at 952 artifacts, 0 errors, 50 pre-existing maintenance warnings, every plane E0; doctor 87 PASS 0 FAIL; review preflight PASS; upgrade plan 36 unchanged; release-distribution validation PASS; portable surface PASS; governor succession plan passed with transition required false; recovery rehearsal PASS; governance migration rehearsal 0.6.0 to 0.7.0 pass and compatible; Explorer deterministic. Build of record through the pinned linux/amd64 producer on this workstation via Docker Desktop: state exact, two byte-identical builds, wheel 4d0589fded5c3da4f247c3f54e4204334ad283ea6b90f6dcc67c559726f557ca, sdist d05541fd94a3d444da20bb539eb6ca211ae10e1ccb0ff04a0f1628ec7e111f6c. Released 0.6.0 verifier black-box acceptance ten of ten on that wheel. Suites: Windows CPython 3.14.6 and 3.11.9 both 995 tests OK with 24 platform-guard skips at full scale; hosted Linux 995 tests OK with 4 skips. All four pull-request lanes success on head 24cf7c7. Census re-derived from REL-SEH-017 at the candidate: 53 members, 24 verification contracts, 65 requirements, 58 keyed evidence paths. Three deviations accepted by the owner and recorded in the evidence; VREC-IPK-001's merge-preview bound commit carried as residual risk. This authorizes no further act."
 +++
 
 # Work Order: Qualify and build the final se-harness 0.7.0 candidate from main
