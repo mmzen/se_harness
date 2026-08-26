@@ -235,16 +235,25 @@ class GovernanceMigrationTests(unittest.TestCase):
         )
 
     def _lane_scenarios(self) -> list[Path]:
+        # WO-CIP-003: the lane no longer names a scenario file; candidate-source
+        # derives it from the declared root and the candidate version, and the
+        # migration job takes it from that job's outputs.
+        from repository_tools.predecessor_facts import derive
+
         workflow = WORKFLOW.read_text(encoding="utf-8")
-        return [path for path in SCENARIOS if f"governance_migration/{path.name}" in workflow]
+        self.assertIn("$scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO", workflow)
+        self.assertNotIn("governance_migration/", workflow)
+        return [ROOT / derive(ROOT).scenario]
 
     def _lane_predecessor_pin(self) -> tuple[str, str]:
+        from repository_tools.predecessor_facts import derive
+
         workflow = WORKFLOW.read_text(encoding="utf-8")
-        version = re.search(r'PREDECESSOR_VERSION:\s*"([^"]+)"', workflow)
-        digest = re.search(r'PREDECESSOR_WHEEL_SHA256:\s*"([0-9a-f]{64})"', workflow)
-        self.assertIsNotNone(version)
-        self.assertIsNotNone(digest)
-        return version.group(1), digest.group(1)
+        self.assertIn("PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
+        self.assertIn("PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}", workflow)
+        self.assertIsNone(re.search(r'PREDECESSOR_WHEEL_SHA256:\s*"', workflow))
+        facts = derive(ROOT)
+        return facts.version, facts.wheel_sha256
 
     def test_lane_scenario_declares_the_version_the_candidate_builds(self) -> None:
         # The gate exists to prove that evaluator N-1 governs *this* candidate, so
