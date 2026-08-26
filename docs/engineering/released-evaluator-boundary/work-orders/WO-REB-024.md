@@ -2,7 +2,7 @@
 id = "WO-REB-024"
 type = "work_order"
 title = "Select the closed predecessor history from bootstrap records only"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -39,6 +39,13 @@ to = "in_progress"
 decided_at = "2026-08-26T21:51:56Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-26; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout over the approval commit on branch fix/reb-024-rejected-record-scope off main be2f0cf."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T21:58:26Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-26 under DR-WO-COMPLETE, 'mark WO-REB-024 implemented', on the handoff gate reading Completed over c1096bb, formal snapshot b5426b638be48334a55f94df5d5a95752a22a26da9b3960bc53ea4954bdcd71b, change set asserted complete over four paths. Governing exact public 0.6.0 evaluator outside the checkout: validate PASS at 951 artifacts, 0 errors, 50 pre-existing warnings; doctor 0 FAIL; review preflight PASS. Candidate: predecessor suites 20 OK; full suite 995 OK with 24 platform-guard skips at full scale on Windows CPython 3.14; the existing real-catalog test fails in a worktree at a3bf411 without the change and passes with it. Hosted: Engineering Harness and Governor Transition Assessment success on the pull request; the rehearsal and candidate-evidence lanes were in progress at this decision and are recorded in the evidence when they conclude. One deviation, no new test, accepted by the owner. This authorizes no further act."
 +++
 
 # Work Order: Select the closed predecessor history from bootstrap records only
