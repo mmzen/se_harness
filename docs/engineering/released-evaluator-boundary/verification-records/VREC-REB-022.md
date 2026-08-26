@@ -2,7 +2,7 @@
 id = "VREC-REB-022"
 type = "verification_record"
 title = "Verification candidate for WO-REB-025"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-
 evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-022-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T22:33:13Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-REB-025"]
 conforms_to = ["VER-REB-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T22:33:13Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-27 under DR-VREC-DECIDE, 'i verify VREC-REB-022'. The record binds 01ba6b32aac9a858180e4017203db887e8aac4b3, at which WO-REB-025 reads implemented, to VER-REB-006 and the keyed evidence. Readings: released 0.6.0 validate PASS at 958 artifacts, 0 errors; doctor 0 FAIL; handoff Completed at snapshot c394d159; both workflows parse with pinned string counts unchanged; both extracted run blocks executed locally take the absent branch for RLS-SEH-015 and the declared branch for RLS-SEH-012; workflow suites OK; full suite 995 OK on Windows 3.14 at full scale. Verified with the hosted pull-request lanes not yet fired for pull request #186 and two accepted deviations disclosed; the decisive reading is the re-dispatched last mile after merge. This authorizes no merge, dispatch, tag or publication."
 +++
 
 # Verification Record Candidate
