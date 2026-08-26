@@ -6,7 +6,7 @@
 
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
 - `agent-directive-surface/`: draft proposal to make every behavioural obligation on a coding agent an evaluator-computed predicate or a bounded, explicitly scoped read.
-- `definition-lifecycle/`: approved definitions making a definition's lifecycle status answer only authority, moving generation to an explicit declaration and realization to derived work-order and verification coverage; the three work orders remain draft.
+- `definition-lifecycle/`: approved definitions making a definition's lifecycle status answer only authority, moving generation to an explicit declaration and realization to derived work-order and verification coverage; WO-DLC-001 is approved and the other two work orders remain draft.
 - `technical-communication/`: draft managed communication policy and read-only operator-brief skill using ASD-STE100-based clarity principles without a compliance claim.
 - `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.
 - `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.

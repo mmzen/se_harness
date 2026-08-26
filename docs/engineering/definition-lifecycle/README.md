@@ -20,7 +20,8 @@ them, and no decision is fabricated for any existing record.
 
 ## Packet contents
 
-The fourteen definitions are `approved`. The three work orders are `draft`.
+The fourteen definitions are `approved`. `WO-DLC-001` is `approved`;
+`WO-DLC-002` and `WO-DLC-003` are `draft`.
 
 - `INT-DLC-001`: make a definition's lifecycle status mean exactly one thing.
 - `CAP-DLC-001`: read authority, generation, and realization from three independent sources.
@@ -90,9 +91,29 @@ recorded in the artifact itself; this paragraph is an index entry, not the recor
 Acceptance of `ADR-DLC-001` and `ADR-DLC-002` satisfies the `adr_required`
 outcome in `ARCH-DLC-001`'s `decision_assessment`.
 
-This approval authorizes no implementation, no work-order start, no Git action,
-and no external action. `WO-DLC-001`, `WO-DLC-002`, and `WO-DLC-003` remain
-`draft`: approving a work order is `DR-WO-SELECT`, a different decision right held
-by the engineering owner, and nothing is approved by implication. Their
-`[assurance]` classifications record the engineering owner's decision of
-2026-08-26 on the classification only.
+Approving a definition is `DR-DEFINITION-DECIDE`. It authorizes no
+implementation, no work-order start, no Git action, and no external action, and it
+does not approve a work order: that is `DR-WO-SELECT`, a different decision right
+held by the engineering owner, and nothing is approved by implication.
+
+## Work-order authorization taken 2026-08-26
+
+The engineering owner approved `WO-DLC-001` on 2026-08-26, exercising
+`DR-WO-SELECT` on that work order alone. `WO-DLC-002` and `WO-DLC-003` remain
+`draft` by the same decision, so increment 1's scope is the only bounded work
+authorized in this domain.
+
+`WO-DLC-003` was deliberately not authorized alongside it. `SPEC-DLC-003` permits
+its authorization once `REQ-DLC-001` and `REQ-DLC-002` are approved, which they
+now are, but the reason that rule gives is that its frozen 449-identifier set must
+be measured after the first two increments settle. Authorizing scope built on a
+figure that cannot yet be measured would make the authorization weaker than it
+looks, so each remaining increment is authorized in its turn.
+
+The `[assurance]` classification on all three work orders records the engineering
+owner's decision of 2026-08-26 on the classification only, independently of
+whether the work order is approved.
+
+Starting `WO-DLC-001` is a further `DR-WO-START` decision behind
+`QG-G3-WORK-AUTHORIZATION`. It has not been taken, and no implementation has
+begun.

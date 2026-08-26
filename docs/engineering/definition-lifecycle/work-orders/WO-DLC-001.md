@@ -2,7 +2,7 @@
 id = "WO-DLC-001"
 type = "work_order"
 title = "Replace the architecture-generation status proxy with a declared exemption"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -32,6 +32,12 @@ implements = ["REQ-DLC-001", "REQ-DLC-005"]
 specifications = ["SPEC-DLC-001"]
 architecture = ["ARCH-DLC-001", "ADR-DLC-001", "ADR-DLC-002"]
 verification = ["VER-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:36:25Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Replace the architecture-generation status proxy with a declared exemption
