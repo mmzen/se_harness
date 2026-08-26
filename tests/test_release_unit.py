@@ -157,5 +157,93 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
             self.assertEqual('gates = ["WO-X-001"]\n', output.getvalue())
 
 
+class ApprovalPredicateTests(unittest.TestCase):
+    """WO-CIP-005: QGP-G5P-RELEASE-UNIT refuses a contract whose census differs from the derivation."""
+
+    def setUp(self) -> None:
+        from tests.fixture_support import standard_repository
+        from tests.mutation_guard_support import trusted_mutation_authority
+        from tests.test_revision_provenance import create_additional_chain, create_base_chain
+
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        standard_repository(self.root, "Release Unit Fixture")
+        guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
+        guard.start()
+        self.addCleanup(guard.stop)
+        create_base_chain(self.root, operating_contract_status="draft")
+        create_additional_chain(self.root)  # WO-002 exists in the catalog but no commit carries its trailer
+        (self.root / "docs/engineering/product/release/REL-001.md").unlink()
+        _git(self.root, "init", "-q", "-b", "main")
+        _git(self.root, "config", "user.email", "t@example.invalid")
+        _git(self.root, "config", "user.name", "t")
+        _git(self.root, "config", "commit.gpgsign", "false")
+        _git(self.root, "add", "-A")
+        _git(self.root, "commit", "-q", "-m", "base")
+        _git(self.root, "tag", "v1")
+        (self.root / "feature.txt").write_text("done", encoding="utf-8")
+        _git(self.root, "add", "-A")
+        _git(self.root, "commit", "-q", "-m", "feature\n\nHarness-Work-Order: WO-001\n")
+        self.candidate = _git(self.root, "rev-parse", "HEAD")
+
+    def contract(self, *, gates: list[str], candidate: bool = True, exemptions: list[str] | None = None) -> None:
+        front = [
+            '+++', 'id = "REL-001"', 'type = "release_contract"', 'title = "Release one"', 'status = "draft"',
+            'owners = ["release-owner"]', 'created = "2026-08-26"', 'updated = "2026-08-26"',
+        ]
+        if candidate:
+            front += [f'candidate_commit = "{self.candidate}"', 'previous_release_tag = "v1"']
+        if exemptions is not None:
+            front += ['[release_unit]', 'untraced_exemptions = [' + ', '.join(f'"{e}"' for e in exemptions) + ']']
+        front += ['[relations]', 'gates = [' + ', '.join(f'"{g}"' for g in gates) + ']', '+++', '', '# Release Contract: Release one', '']
+        (self.root / "docs/engineering/product/release/REL-001.md").write_text("\n".join(front), encoding="utf-8")
+
+    def approve(self) -> tuple[int, str]:
+        output, error = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            code = main(["transition", str(self.root), "--set", "REL-001=approved", "--decision", "REL-001=release-owner", "--apply"])
+        return code, output.getvalue() + error.getvalue()
+
+    def test_a_differing_census_is_refused_and_a_matching_one_is_approved(self) -> None:
+        self.contract(gates=["WO-001", "WO-002"])
+        code, message = self.approve()
+        self.assertEqual(1, code)
+        self.assertIn("QGP-G5P-RELEASE-UNIT", message)
+        self.assertIn("E-CIP-001", message)
+        self.assertIn("not in the derivation: WO-002", message)
+        self.assertIn('status = "draft"', (self.root / "docs/engineering/product/release/REL-001.md").read_text(encoding="utf-8"))
+        self.contract(gates=["WO-001"])
+        code, message = self.approve()
+        self.assertEqual(0, code, message)
+        self.assertIn('status = "approved"', (self.root / "docs/engineering/product/release/REL-001.md").read_text(encoding="utf-8"))
+
+    def test_the_allow_list_form_is_not_measured(self) -> None:
+        self.contract(gates=["WO-001", "WO-002"], candidate=False)
+        code, message = self.approve()
+        self.assertEqual(0, code, message)
+
+    def test_an_untraced_commit_needs_an_exemption(self) -> None:
+        (self.root / "note.txt").write_text("untraced", encoding="utf-8")
+        _git(self.root, "add", "-A")
+        _git(self.root, "commit", "-q", "-m", "no trailer")
+        self.candidate = _git(self.root, "rev-parse", "HEAD")
+        untraced = self.candidate
+        self.contract(gates=["WO-001"])
+        code, message = self.approve()
+        self.assertEqual(1, code)
+        self.assertIn("carry no Harness-Work-Order trailer", message)
+        self.contract(gates=["WO-001"], exemptions=[untraced])
+        code, message = self.approve()
+        self.assertEqual(0, code, message)
+
+    def test_evaluator_is_in_the_contract_inventory(self) -> None:
+        from se_harness.workflow_contract import EVALUATORS, load_validated_contracts
+
+        self.assertIn("release_unit_ready", EVALUATORS)
+        _, _, _, _, gates = load_validated_contracts()
+        self.assertIn("QGP-G5P-RELEASE-UNIT", [p["id"] for p in gates["QG-G5-RELEASE-PREPARATION"]["predicates"]])
+
+
 if __name__ == "__main__":
     unittest.main()

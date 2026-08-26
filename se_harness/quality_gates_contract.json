@@ -83,7 +83,8 @@
       "checkpoints": ["pre-action", "transition"],
       "predicates": [
         {"id": "QGP-G5P-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
-        {"id": "QGP-G5P-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+        {"id": "QGP-G5P-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G5P-RELEASE-UNIT", "evaluator": "release_unit_ready", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]}
       ]
     },
     {

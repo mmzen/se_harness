@@ -30,6 +30,7 @@ and it makes the documentation of the pipeline part of every increment.
 - `WO-CIP-002`: P3 and P5 (REQ-CIP-003, 005).
 - `WO-CIP-003`: P6 (REQ-CIP-006).
 - `WO-CIP-004`: P4 (REQ-CIP-004).
+- `WO-CIP-005`: follow-up to WO-CIP-004's deviation 1 — the approval-time predicate that refuses a release contract whose census differs from the derivation (REQ-CIP-004). Draft.
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.

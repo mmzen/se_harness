@@ -29,7 +29,7 @@ from se_harness.installer import HarnessError
 
 RELEASE_UNIT_SCHEMA = "se-harness-release-unit-v1"
 TRAILER = "Harness-Work-Order"
-WORK_ORDER_PATTERN = re.compile(r"WO-[A-Z0-9]+-[0-9]{3}")
+WORK_ORDER_PATTERN = re.compile(r"WO-(?:[A-Z0-9]+-)?[0-9]{3}")  # WO-CIP-001 and the two-segment WO-001 form
 COMMIT_PATTERN = re.compile(r"[0-9a-f]{40}(?:[0-9a-f]{24})?")
 #: Paths whose bytes reach the distributed surface (pyproject: packages, package-data, data-files).
 PACKAGED_SURFACE_PREFIXES = ("se_harness/", "templates/repository/standard/", "pyproject.toml")

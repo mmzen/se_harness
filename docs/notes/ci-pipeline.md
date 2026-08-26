@@ -142,6 +142,19 @@ The "Measured after" column is filled by each work order's evidence.
   drafted on): see the WO-CIP-004 evidence for the census and its comparison
   with `REL-SEH-015`'s thirty-six gates.
 
+### After `WO-CIP-005`
+
+- `release_unit_ready`, an evaluator in the closed set, bound as
+  `QGP-G5P-RELEASE-UNIT` on `QG-G5-RELEASE-PREPARATION` and applied when a
+  release contract leaves `draft`: a contract naming a `candidate_commit`
+  is re-measured with `se_harness.release_unit`, and every `E-CIP-001`
+  finding refuses the approval; a contract without a candidate commit (the
+  retained allow-list form) passes unmeasured; a history that cannot be
+  derived is `not_assessable`, never a pass. Exemptions for untraced commits
+  come from the contract's `[release_unit] untraced_exemptions`.
+- Follow-up to WO-CIP-004's deviation 1; the managed validator stays
+  git-free.
+
 ### After `WO-CIP-003`
 
 - `repository_tools/predecessor_facts.py`: `derive` reads the declared root
