@@ -113,10 +113,10 @@ documents that already describe it correctly.
   it is published in a managed document and in a machine contract that
   consumers pin. The resulting name-versus-behaviour residue is accepted and
   must be disclosed in the implementation notes.
-- Whether this is a within-`se-harness-workflow-v3` edge retirement or requires
-  `se-harness-workflow-v4` is a technical-owner decision recorded before
-  implementation starts. Either way, the two delivery copies stay
-  byte-identical and a governance-migration scenario covers the version pair.
+- This is a within-`se-harness-workflow-v3` edge retirement, decided 2026-08-26
+  by the repository owner. The contract's shape does not change, so no generation
+  bump is taken. The two delivery copies stay byte-identical and a
+  governance-migration scenario covers the version pair.
 
 ## Acceptance examples
 
@@ -151,9 +151,22 @@ status in `ALLOWED_STATUSES`
 recommendation rule, and the reachable transition graph matches the
 `WORKFLOW.md` state table exactly.
 
+## Recorded decisions
+
+Decided 2026-08-26 by the repository owner: the contract-schema question is
+settled as a within-`se-harness-workflow-v3` retirement, with no generation bump.
+
+Decided 2026-08-26 by the repository owner: `WFL-DEFINITION-COMPLETE` keeps its
+identifier while its procedure and decision right change. Renaming it, or
+retiring it in favour of a correctly named rule, was considered and declined
+because a consumer pinning the identifier would get an unresolved rule, which
+would make this increment a breaking contract change on top of the edge
+retirement. The resulting name-versus-behaviour mismatch in a managed contract is
+accepted and must be disclosed in the implementation notes.
+
 ## Open decisions
 
-Before approval, the technical owner must decide the contract-schema question —
-within-v3 retirement or a v4 bump — and the repository owner must accept that
-`WFL-DEFINITION-COMPLETE` keeps its identifier while its procedure and decision
-right change.
+The `implemented` row's `predecessor_adapter` value remains to be chosen against
+the migration contract's actual capability, which is evidence the implementation
+produces. `WO-DLC-002` requires that choice to be recorded with its rationale,
+and stops if no value can express the retired edge without re-admitting it.

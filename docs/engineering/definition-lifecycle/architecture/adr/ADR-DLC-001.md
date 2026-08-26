@@ -261,9 +261,12 @@ never the diagnostic.
   governance-migration scenario for its version pair.
 - A predecessor evaluator that still admits the retired edge is handled by the
   migration contract's adapter path. The edge is never re-admitted.
-- Whether increment 2 is a within-`se-harness-workflow-v3` retirement or requires
-  `se-harness-workflow-v4` is decided by the technical owner before
-  implementation starts. Either way the two delivery copies stay byte-identical.
+- Increment 2 is a within-`se-harness-workflow-v3` retirement, decided 2026-08-26
+  by the repository owner: the contract's shape does not change, so no generation
+  bump is taken and the boundary is carried by the release version, the migration
+  scenario, and the `implemented` row's `predecessor_adapter`. The accepted risk
+  is that a consumer pinning `v3` sees reachable behaviour narrow without a
+  generation signal. The two delivery copies stay byte-identical.
 
 ## Validation
 

@@ -38,8 +38,8 @@ and the whole architecture-generation question, which is `SPEC-DLC-001`.
   `RuntimeError` for an unmatched `(artifact_type, status)` pair.
 - The two byte-identical contract copies: `se_harness/workflow_contract.json`
   and the standard repository template's `docs/engineering/WORKFLOW.json`.
-- `harnessctl inspect` and `harnessctl dashboard`, the two readers of the derived
-  signal.
+- `harnessctl inspect`, the only reader of the derived signal in this increment.
+  The dashboard and explorer surfaces are deferred to separately approved work.
 - A predecessor evaluator in a consumer repository that still admits the retired
   edge.
 
@@ -160,9 +160,14 @@ no diagnostic about the earlier classification.
 it grants no authority, approves nothing, and transitions nothing. It does not
 describe a definition as implemented.
 
-**DLC-REA-009:** `I-DLC-001` and `W-DLC-001` join the existing shared `inspect`
-and dashboard finding family and follow its existing rendering, ordering, and
-suggestion rules. No new output plane is introduced.
+**DLC-REA-009:** `I-DLC-001` and `W-DLC-001` join the existing shared finding
+family and follow its existing rendering, ordering, and suggestion rules. No new
+output plane is introduced.
+
+**DLC-REA-011:** The derivation renders in `harnessctl inspect` only. The
+dashboard and explorer surfaces are out of scope for this increment. The
+derivation is surface-independent: it returns findings and holds no rendering
+logic, so the deferred work adds a renderer and changes no classification.
 
 **DLC-REA-010:** `HRN-006` holds. The derivation never synchronizes a
 definition's state to its work orders' states, in either direction.
@@ -185,10 +190,11 @@ caught by the conformance enumeration before release, not at runtime.
 
 ## Data and interface contracts
 
-The contract copies remain valid `se-harness-workflow-v3` documents unless the
-technical owner decides the retirement requires `se-harness-workflow-v4`; in
-either case both copies stay byte-identical and a governance-migration scenario
-covers the version pair. Finding codes are `I-DLC-001` and `W-DLC-001`,
+The contract copies remain valid `se-harness-workflow-v3` documents. The
+retirement is a within-`v3` change, decided 2026-08-26 by the repository owner:
+the contract's shape does not change, so no generation bump is taken. Both copies
+stay byte-identical and a governance-migration scenario covers the version pair.
+Finding codes are `I-DLC-001` and `W-DLC-001`,
 matching the existing `I-`/`W-` shared-family shape. No artifact field, relation
 type, artifact type, role, or gate is added.
 
@@ -202,7 +208,7 @@ and commit identifiers only.
 ## Performance and capacity
 
 The derivation is linear in the number of definitions plus the total number of
-work-order relations, and it runs once per `inspect` or `dashboard` invocation.
+work-order relations, and it runs once per `inspect` invocation.
 Over the current graph — 630 definitions and 244 requirement-naming work-order
 relations — it is not measurably distinguishable from the existing finding
 computations it joins.
@@ -219,8 +225,12 @@ migration, a state change, or a count of definitions that "became" anything.
   normalized, superseded, or re-decided in either direction.
 - Diagnostic counts are unchanged by this increment: 890 artifacts, 0 errors, 50
   warnings, with identical `W013`, `W014`, and `W015` identifier sets. `I-DLC-001`
-  and `W-DLC-001` are `inspect` and dashboard findings, not validation
-  diagnostics, and move no validation count.
+  and `W-DLC-001` are `inspect` findings, not validation diagnostics, and move no
+  validation count.
+- The finding family appears in `inspect` and not in the dashboard until the
+  deferred surface work lands. That divergence from `W-HEX-*`, `W-REB-*`, and
+  `W-REV-*` is a decided deferral, not an omission, and is disclosed rather than
+  resolved.
 - A consumer repository that has taken the `approved -> implemented` edge keeps
   every such definition valid and authority-granting. It simply cannot take the
   edge again.

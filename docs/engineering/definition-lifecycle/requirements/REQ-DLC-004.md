@@ -124,9 +124,22 @@ count
 **Then** the declaration resolves nothing, every named definition reports
 `E022`, and the diagnostic names the bound that was exceeded.
 
-## Open decisions
+## Recorded decisions
 
-Before approval, the product and technical owners must accept the reserved codes
-`E022` and `W025`, and must choose how the 449 pre-contract definitions are
-declared: by enumeration in a committed frozen vector, or by a frozen cutover
-date over the `created` field. `ADR-DLC-002` records the trade-off.
+Decided 2026-08-26 by the repository owner: the 449 pre-contract definitions are
+declared by enumeration in a committed frozen vector. A frozen cutover date over
+`created`, a Git-history boundary, and a per-artifact opt-out field were all
+considered and declined; `ADR-DLC-002` records why.
+
+Decided 2026-08-26 by the repository owner: `E022` and `W025` are reserved, with a
+next-free fallback. If a concurrent change takes either code before
+implementation, the implementation uses the next free code and reports that
+`SPEC-DLC-003` needs amending rather than blocking on a number.
+
+Decided 2026-08-26 by the repository owner: `W025` is emitted once per
+grandfathered definition, on every run. Aggregating the 449 into a single count
+line was considered and declined, because an individual artifact's missing
+decision would stop being visible and no one could see progress as chains are
+added. The accepted cost is that the verdict grows from 50 warnings to 499, and
+that reviewers must be told a large count here records honesty rather than new
+breakage.

@@ -136,8 +136,20 @@ appears in neither the frozen set nor any declaration
 **Then** the exemption does not resolve, the architecture reports `E014`, and
 the diagnostic names the unapproved declaring work order.
 
+## Recorded decisions
+
+Decided 2026-08-26 by the repository owner: the self-hosting set is closed at
+exactly those 14 identifiers, with no exceptions and no re-measurement window.
+If a fifteenth pre-assessment architecture is later found in this repository, the
+remedy is a declaration under an approved work order, not an addition to the
+constant. The accepted cost is that a measurement error of one is corrected
+through governed work rather than a one-line constant fix.
+
+Decided 2026-08-26 by the repository owner: the bounded entry count is 512 per
+declaration, matching `SPEC-LRE-001`.
+
 ## Open decisions
 
-Before approval, the technical and repository owners must accept the frozen set
-as closed at exactly those 14 identifiers, the declaration's location and field
-name inside a work-order packet, and the bounded entry count.
+Before approval, the technical owner must accept the declaration's location and
+field name inside the work-order packet, which `SPEC-DLC-001` leaves to the
+implementation.

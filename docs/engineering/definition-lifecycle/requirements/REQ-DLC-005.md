@@ -119,8 +119,18 @@ lifecycle status is what suppresses the error in the real run.
 **Then** 14 governance errors are reported, the increment fails its own
 acceptance, and no reviewer can read the result as a passing run.
 
-## Open decisions
+## Recorded decisions
 
-Before approval, the assurance owner must accept exact-equality assertions on
-diagnostic identifier sets as a required gate for all three increments, and must
-accept that a reduced warning count fails the contract.
+Decided 2026-08-26 by the repository owner: exact-equality assertions on
+diagnostic identifier sets are a required gate for all three increments, and a
+reduced warning count fails the contract. Permitting a documented reduction, and
+asserting count equality only, were both considered and declined — the first
+reintroduces judgement at the point the gate exists to remove it, and the second
+passes a candidate where the count matches while membership changed. The accepted
+cost is that a legitimate unrelated warning fix landing concurrently turns the
+gate red and forces a re-measured baseline.
+
+Decided 2026-08-26 by the repository owner: every work order in this domain
+carries `commit_bound_verification = "required"`. Each increment changes a managed
+contract or a managed validator that consumers pin, so each needs its own
+verification record bound to a commit where the evidence is tracked.

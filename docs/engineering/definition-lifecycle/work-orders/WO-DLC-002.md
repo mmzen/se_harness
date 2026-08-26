@@ -26,8 +26,6 @@ paths = [
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/scripts/inspect_engineering_artifacts.py",
-  "templates/repository/standard/scripts/generate_harness_dashboard.py",
-  "templates/repository/standard/scripts/harness_explorer/",
   "tests/",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/definition-lifecycle.md",
@@ -88,7 +86,8 @@ This increment must land after `WO-DLC-001` and before `WO-DLC-003`.
   `implements`, `specifications`, and `architecture`; the three-way covered,
   partially covered, and uncovered classification; verification-record and bound
   commit citation; `I-DLC-001` and `W-DLC-001` joining the existing shared
-  `inspect` and dashboard finding family.
+  finding family, rendered in `inspect` only, with the derivation held
+  surface-independent so the deferred dashboard work adds a renderer and no logic.
 - Independent write sentinel asserting byte-identical files after every
   derivation run.
 - Governance-migration scenario for the version pair this increment lands in,
@@ -108,6 +107,12 @@ This increment must land after `WO-DLC-001` and before `WO-DLC-003`.
   survives, and every other decision right, role, and quality gate.
 - Any new artifact field, relation type, or artifact type in which a coverage
   result could be stored.
+- The dashboard and explorer rendering of the coverage findings. Deferred to
+  separately approved work by an owner decision of 2026-08-26.
+  `generate_harness_dashboard.py` and `harness_explorer/` are outside this scope.
+  The consequence — a finding family present in `inspect` and absent from the
+  dashboard, unlike `W-HEX-*`, `W-REB-*`, and `W-REV-*` — is disclosed in the
+  completion report and recorded as a residual in `VER-DLC-001`.
 - The architecture-generation exemption, `E014`, `W014`, `E015`, and `W015`.
   Those belong to `WO-DLC-001` or are unchanged.
 - The `lifecycle_events` obligation, `E022`, and `W025`. Those belong to
@@ -129,9 +134,9 @@ It may not retain the `approved -> implemented` edge under any flag, delete the
 status in the derivation, change the three-way classification, introduce a new
 decision right, role, or gate, or change any path outside scope.
 
-The contract-schema question — a within-`se-harness-workflow-v3` edge retirement
-or an `se-harness-workflow-v4` bump — is the technical owner's decision and is
-recorded before implementation starts. It is not inside this envelope.
+The contract-schema question is already decided and is not inside this envelope:
+the retirement is a within-`se-harness-workflow-v3` change, decided 2026-08-26 by
+the repository owner. The agent does not take a generation bump.
 
 ## Constraints
 
@@ -146,9 +151,8 @@ recorded before implementation starts. It is not inside this envelope.
 ## Expected change surface
 
 Two byte-identical machine contracts, one managed narrative document, one managed
-traceability document, five package modules, one new package module, two managed
-reader scripts and the explorer template, tests and fixtures, one note, reference
-updates, evidence.
+traceability document, five package modules, one new package module, one managed
+reader script, tests and fixtures, one note, reference updates, evidence.
 
 ## Required verification
 
@@ -180,8 +184,10 @@ byte-identical; if the reachable graph and the `WORKFLOW.md` state table
 disagree; if the paired measurement moves any diagnostic identifier set; if the
 derivation cannot be made to leave every file byte-identical; if a
 `predecessor_adapter` value cannot express the retired edge without re-admitting
-it; if the technical owner's contract-schema decision has not been recorded; or
-if any path outside scope must change.
+it; if the retirement turns out to require an `se-harness-workflow-v4` bump after
+all, since the owner decided a within-`v3` change and reversing that is not inside
+the envelope; if the derivation cannot be kept surface-independent, since the
+deferred dashboard work depends on it; or if any path outside scope must change.
 
 ## Completion report format
 

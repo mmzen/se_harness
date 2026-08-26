@@ -307,7 +307,14 @@ environment dumps.
 
 ## Residual uncertainty
 
-Three limits are known and must be reported rather than resolved.
+Four limits are known and must be reported rather than resolved.
+
+The coverage findings render in `inspect` and not in the dashboard, by an owner
+decision of 2026-08-26 that defers the dashboard surface to separately approved
+work. Until that work lands, `I-DLC-001` and `W-DLC-001` behave unlike every other
+member of the family they join, and an operator reading the dashboard sees no
+coverage signal at all. Verification confirms the derivation is
+surface-independent; it cannot confirm that the deferred work will be scoped.
 
 The frozen sets are correct as of the commit at which they are measured. Nothing
 in the mechanism prevents them from having been measured at the wrong commit;

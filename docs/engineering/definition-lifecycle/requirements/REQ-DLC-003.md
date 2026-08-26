@@ -40,7 +40,7 @@ computed from the graph on every run and stored in no artifact.
 
 ## Preconditions and trigger
 
-- `harnessctl inspect` or `harnessctl dashboard` runs against a valid graph.
+- `harnessctl inspect` runs against a valid graph.
 - One or more work orders declare an `implements`, `specifications`, or
   `architecture` relation to the definition.
 
@@ -82,8 +82,15 @@ computed from the graph on every run and stored in no artifact.
 - No new artifact field, relation, artifact type, role, or gate.
 - `HRN-006` holds: derivation is a report, and it never synchronizes a
   definition's state to its work orders'.
-- The finding codes join the existing shared `inspect` and dashboard families
-  and follow their existing rendering, ordering, and suggestion rules.
+- The finding codes join the existing shared finding vocabulary and follow its
+  existing rendering, ordering, and suggestion rules.
+- The first increment renders the derivation in `inspect` only. The dashboard and
+  explorer surfaces are deliberately deferred to separately approved work,
+  decided 2026-08-26 by the repository owner. Until that work lands, this
+  finding family appears in one reader and not the other — a known divergence
+  from how `W-HEX-*`, `W-REB-*`, and `W-REV-*` behave, disclosed rather than
+  resolved. The derivation itself must be surface-independent so the deferred
+  work adds a renderer and no logic.
 - Coverage must not be reported as verification. The accountable statement about
   a commit remains the verification record, and the derived finding cites it
   rather than restating it.
@@ -120,9 +127,21 @@ the fourth work order as the outstanding one, and changes no artifact.
 **Then** the requirement is partially covered, the rejected record is not
 counted as coverage, and no commit is claimed.
 
-## Open decisions
+## Recorded decisions
 
-Before approval, the product owner and requirements steward must accept that
-realization is a derived report rather than a recorded decision, and must accept
-the three-way covered / partially covered / uncovered classification and its
-treatment of definitions that no work order names.
+Decided 2026-08-26 by the repository owner: realization is a derived report that
+grants no authority and is recorded in no artifact field. Making coverage an
+approvable, stored fact under a new decision right was considered and declined,
+because it would recreate the falsifiable stored claim that `REQ-DLC-002`
+removes. The accepted consequence is that no artifact will ever again state that
+a requirement is built — the answer exists only while a reader is running.
+
+Decided 2026-08-26 by the repository owner: the classification is three-way.
+`uncovered` is correct and permanent for every intent, capability, and
+verification contract, and is never an error. A two-way covered / not-covered
+split was declined because it collapses "no work order has ever named this" with
+"three of four naming work orders are verified", and the second is the state that
+needs attention.
+
+Decided 2026-08-26 by the repository owner: `inspect` only in the first
+increment; the dashboard surface is deferred.

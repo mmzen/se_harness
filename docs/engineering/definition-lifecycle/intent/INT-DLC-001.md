@@ -175,11 +175,17 @@ decision right grants.
 - **Assumption:** no consumer repository has automation keyed to a definition
   reaching `implemented`, because the transition has never been applied here
   and the state is not reachable through any documented step.
-- **Open decision:** whether removing an edge from a family's `transitions_to`
-  is a within-`se-harness-workflow-v3` retirement or requires
-  `se-harness-workflow-v4`. This is a technical-owner decision on
-  contract-versioning policy. It changes the release shape and the migration
-  scenario, not the substance of this intent.
-- **Open decision:** whether the pre-contract definition set is grandfathered
-  by enumeration or by a frozen cutover date. `ADR-DLC-002` records the
-  trade-off and proposes one.
+- **Decided 2026-08-26 by the repository owner:** removing an edge from a
+  family's `transitions_to` is a within-`se-harness-workflow-v3` retirement. The
+  contract's shape does not change, so the version boundary is carried by the
+  release version, the governance-migration scenario, and the `implemented` row's
+  `predecessor_adapter` rather than by a contract generation. The accepted risk
+  is that a consumer pinning `v3` sees reachable behaviour narrow without a
+  generation signal.
+- **Decided 2026-08-26 by the repository owner:** the pre-contract definition set
+  is grandfathered by enumeration in a committed frozen vector, not by a frozen
+  cutover date over `created`. `ADR-DLC-002` records the reasoning and the
+  rejected alternatives.
+- **Decided 2026-08-26 by the repository owner:** all three increments are
+  authorized as a path, in the order `WO-DLC-001`, `WO-DLC-002`, `WO-DLC-003`.
+  Partial adoption at P1, or at P1 and P2, was considered and declined.

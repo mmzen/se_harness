@@ -86,11 +86,13 @@ A new pure read-only function owns the answer to "has this definition been
 built". It reads work-order statuses and the verification records bound to them,
 classifies each requirement, specification, and architecture as covered,
 partially covered, or uncovered, and names the exact commit of each covering
-record. It joins the existing shared `inspect` and dashboard finding family as
-`I-DLC-001` and `W-DLC-001`.
+record. It joins the existing shared finding family as `I-DLC-001` and
+`W-DLC-001`, rendered in `inspect` only; the dashboard and explorer surfaces are
+a decided deferral to separately approved work.
 
 It stores nothing, proposes no transition, and never reads the definition's own
-status.
+status. It is surface-independent, so the deferred rendering work adds a renderer
+and no logic.
 
 ### Recorded-decision obligation
 
@@ -166,7 +168,7 @@ rather than by discipline.
    -> implemented` is refused through the ordinary legality path.
 6. Routing resolves a recommendation from the target status, which for every
    status present in any repository matches exactly one rule.
-7. On `inspect` or `dashboard`, the derivation walks work orders and records and
+7. On `inspect`, the derivation walks work orders and records and
    emits coverage findings, citing records and commits and claiming no authority.
 8. Any accountable decision is supplied by the existing harness procedure. None
    of the above adds a decision, a role, or a gate.

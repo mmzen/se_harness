@@ -216,6 +216,13 @@ table name. It may not weaken the obligation, fabricate a chain, reopen the
 frozen set, raise or remove the 512-entry bound, drop the approval precondition,
 suppress `W025`, or extend the scope beyond the nine definition families.
 
-Whether the 449 are declared by enumeration in a committed frozen vector or by a
-frozen cutover date over the `created` field is an owner decision recorded in
-`ADR-DLC-002`, not an implementation choice.
+The 449 are declared by enumeration in a committed frozen vector, decided
+2026-08-26 by the repository owner and recorded in `ADR-DLC-002`. A cutover date
+over `created`, a Git-history boundary, and a per-artifact opt-out field are
+rejected mechanisms, not implementation alternatives.
+
+`W025` is emitted once per grandfathered definition on every run, decided
+2026-08-26 by the repository owner. Aggregating the population into a single count
+line, and rendering per-artifact detail only under a verbose flag, are both
+forbidden: either would stop an individual missing decision from being visible in
+the verdict.
