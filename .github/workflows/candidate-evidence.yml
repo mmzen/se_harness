@@ -268,7 +268,7 @@ jobs:
 
   governance-migration:
     name: Governance migration (${{ matrix.platform }})
-    needs: candidate-package
+    needs: [candidate-source, candidate-package]
     strategy:
       fail-fast: false
       matrix:
