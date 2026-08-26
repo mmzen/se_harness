@@ -2,7 +2,7 @@
 id = "WO-RLS-012"
 type = "work_order"
 title = "Qualify and build the final se-harness 0.7.0 candidate from main"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-26T20:59:09Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-26 with the words 'I approve WO-RLS-012', as a decision distinct from the approval of REL-SEH-017. Approval authorizes start preflight and then only the declared qualification, recipe-bound reproducible-build, index-maintenance and retained-evidence work inside the three declared execution-scope paths. Re-measured immediately before this transition over branch state f310024 carrying unmoved main be2f0cf: ninety-seven implemented unreleased work orders, fifty-two of them members of REL-SEH-017's gates and forty-five excluded by name-class; no ready record beyond the two canonical templates; validate PASS at 952 artifacts, 0 errors, 50 pre-existing maintenance warnings; doctor 0 FAIL. Approval authorizes no contract approval, no candidate commit, no VREC-SEH-014 or RLS-SEH-014 work, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator upgrade. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T20:59:40Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-26, 'you can then start WO-RLS-012'. Start preflight PASS at phase start over branch state 6d5aeab carrying unmoved main be2f0cf, run with the governing exact public 0.6.0 evaluator outside the checkout. REL-SEH-017 is approved, so its fifty-three-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the three declared execution-scope paths. This start authorizes no candidate commit, no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-014 or RLS-SEH-014 preparation or transition, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
 +++
 
 # Work Order: Qualify and build the final se-harness 0.7.0 candidate from main
