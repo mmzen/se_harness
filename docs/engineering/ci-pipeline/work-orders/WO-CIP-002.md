@@ -24,6 +24,7 @@ paths = [
   "docs/notes/harnessctl-reference.md",
   "docs/engineering/release-orchestration/evidence/",
   "docs/notes/release-publication-rehearsal.md",
+  ".github/workflows/candidate-evidence.yml",
   "docs/notes/ci-pipeline.md",
   "docs/notes/developing-se-harness.md",
   "docs/notes/README.md",
@@ -84,6 +85,19 @@ copy of the qualification, the YAML reader and the digest declaration) and
 must describe the reusable definition instead; the handoff check refused the
 rewrite as out of scope. The amendment is a direct edit of `execution_scope`
 under `CIP-DOC`; it adds a documentation path and no code path.
+
+## Scope amendment, 2026-08-26 (second)
+
+Owner decision 2026-08-26, taken interactively: add
+`.github/workflows/candidate-evidence.yml` to the execution scope so that this
+work order corrects a defect the hosted run of pull request #172 found in
+`WO-CIP-003`'s implemented change: the `governance-migration` job did not
+list `candidate-source` in its `needs`, so the derived predecessor outputs it
+consumes resolved to empty strings and its guard refused to run. The fix is
+the `needs` list and a test that every `needs.<job>.outputs` reference names a
+job in the consumer's `needs`. `WO-CIP-003` stays implemented and
+`VREC-CIP-003` stays the record of its commit; both evidence files disclose
+the correction.
 
 ## Out of scope
 
