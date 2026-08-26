@@ -165,6 +165,40 @@ The "Measured after" column is filled by each work order's evidence.
   upgrade; `predecessor-evaluator-assessment.yml` already derived its facts
   through `scripts/validate_governor_transition.py` and carries no literal.
 
+## The test suite
+
+Measured 2026-08-26 on the workstation (twelve CPUs), `main` at `11f4eac`:
+
+| Run | Wall | Note |
+| --- | ---: | --- |
+| `python -m unittest discover` (serial) | 367 s | 958 tests; 365 s inside the tests |
+| one process per module, 4 workers | 125 s | all 52 modules pass in isolation |
+| one process per module, 8 workers | 122 s | `test_workflow_execution` (84 s serial) is the critical path |
+| class-level scheduling, computed floor | 91 / 61 / 47 s | at 4 / 6 / 8 workers, from the recorded class costs |
+| serial with `os.fsync` neutralised | 333 s | durable writes cost 34 s, not the lever |
+
+Where the serial time goes: `test_workflow_execution` 84 s (two 1,000-artifact
+scale tests, 29 s); `test_revision_provenance` 35 s; `test_artifact_renumbering`
+28 s; `test_instruction_architecture` 21 s; `test_harnessctl` 18 s; and a
+fixed cost of about 0.5 s in most fixtures, a `harnessctl init` (61 files,
+0.57 s) plus a validate. The `test-suite` domain packet proposes a
+repository-owned parallel runner (class-level, longest-first), a marker for
+the scale tests, and a cached fixture install.
+
+### After `WO-TST-001`
+
+Measured 2026-08-26 on the same workstation, 965 tests:
+
+| Run | Wall | Verdict |
+| --- | ---: | --- |
+| `python -m unittest discover` (canonical serial; the 1,000-artifact size skipped by default) | 335 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 1` | 332 s | OK, 24 skips — the same verdict |
+| `python scripts/run_tests.py --workers 4 --scale full` (the hosted lane's form) | 114 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 8` | 80 s | OK, 24 skips |
+
+The runner schedules test classes longest-first from `target/test-timings.json`;
+the fixture cache (`WO-TST-002`) is the next increment.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the

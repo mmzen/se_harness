@@ -52,10 +52,12 @@ Use the commands confirmed by the owner-controlled region of `AGENTS.md`:
 ```powershell
 python scripts/validate_engineering_artifacts.py --root .
 python scripts/validate_release_distributions.py --root .
-python -m unittest discover -s tests -p "test_*.py"
+python scripts/run_tests.py
 python -m se_harness --help
 python -m se_harness doctor .
 ```
+
+`scripts/run_tests.py` (`WO-TST-001`, `ADR-TST-001`) runs the same `unittest` suite across worker processes — one test class per task, longest first from the timings the previous run left in `target/test-timings.json` — and prints one report in `unittest`'s form with one exit code. `python -m unittest discover -s tests -p "test_*.py"` remains the canonical serial reference and is what the release qualification runs; `python scripts/run_tests.py --workers 1` equals it. The two 1,000-artifact scale tests run at full size only with `--scale full` (or `SE_HARNESS_TEST_SCALE=full`), which the hosted candidate lane sets; locally the 100 and 500 sizes run and the 1,000 size is reported skipped.
 
 Run phase-appropriate work-order preflight and focused checks required by the governing verification contract. No formatter or linter is currently declared as a repository gate.
 
