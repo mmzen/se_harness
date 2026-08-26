@@ -2,7 +2,7 @@
 id = "WO-CIP-005"
 type = "work_order"
 title = "Refuse the approval of a release contract whose census differs from the derivation"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -42,6 +42,13 @@ to = "in_progress"
 decided_at = "2026-08-26T20:22:55Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: start."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T20:32:26Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-CIP-005 implemented, after accepting interactively the three recorded deviations (bound to QG-G5-RELEASE-PREPARATION; exemptions in release_unit.untraced_exemptions; two-segment work-order ids admitted)."
 +++
 
 # Work Order: Refuse the approval of a release contract whose census differs from the derivation
