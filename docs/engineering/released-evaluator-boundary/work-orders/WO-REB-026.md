@@ -2,7 +2,7 @@
 id = "WO-REB-026"
 type = "work_order"
 title = "Materialize the complete governance snapshot as the Pages view when no predecessor view applies"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-26"
@@ -32,6 +32,13 @@ to = "approved"
 decided_at = "2026-08-26T22:46:56Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-27, 'Approve, start, run through'. Authorizes only the exclusion branch of pages-publication.yml materializing the complete governance snapshot at the view path as a detached worktree of the resolved governance commit, plus the packet index line and evidence; no tests/, se_harness/, repository_tools/ or templates/ byte. The owner also authorized, in the same decision, the pull request, its merge by command line with a merge commit after verification, and the dispatch of publish-dashboard-pages.yml for RLS-SEH-015."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T22:47:00Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch fix/reb-026-pages-view-for-ordinary-records off main 28487f0."
 +++
 
 # Work Order: Materialize the complete governance snapshot as the Pages view when no predecessor view applies
