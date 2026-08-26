@@ -125,6 +125,32 @@ class PredecessorDerivationTests(unittest.TestCase):
 
     REPOSITORY_OWNED = (WORKFLOWS / "candidate-evidence.yml", WORKFLOWS / "predecessor-evaluator-assessment.yml")
 
+    def test_every_consumed_job_output_is_declared_in_the_consumers_needs(self) -> None:
+        # Found by the hosted run of PR #172 (WO-CIP-003): needs.<job>.outputs.* resolve to
+        # empty strings unless <job> is in the consumer's needs, and the workflow's guards
+        # then refuse to run. Corrected under WO-CIP-002.
+        for path in sorted(WORKFLOWS.glob("*.yml")):
+            text = path.read_text(encoding="utf-8")
+            if "\njobs:\n" not in text:
+                continue
+            for job, block in _job_blocks(text).items():
+                declared: set[str] = set()
+                match = re.search(r"(?m)^    needs:[ \t]*(.*)$", block)
+                if match:
+                    inline = match.group(1).strip()
+                    if inline.startswith("["):
+                        declared = {item.strip() for item in inline.strip("[]").split(",") if item.strip()}
+                    elif inline:
+                        declared = {inline}
+                    else:
+                        for line in block[match.end():].split("\n")[1:]:
+                            if not line.startswith("      - "):
+                                break
+                            declared.add(line[8:].strip())
+                for consumed in set(re.findall(r"needs\.([a-z_-]+)\.(?:outputs|result)", block)):
+                    with self.subTest(workflow=path.name, job=job, consumed=consumed):
+                        self.assertIn(consumed, declared)
+
     def test_facts_come_from_the_lock_and_the_legacy_table(self) -> None:
         from repository_tools.predecessor_facts import LEGACY_ACCEPTANCE_CONTRACT_SHA256, derive
 

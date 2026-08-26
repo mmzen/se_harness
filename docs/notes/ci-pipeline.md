@@ -118,6 +118,14 @@ The "Measured after" column is filled by each work order's evidence.
   qualification once (candidate mode) plus, when a schema-2 record exists,
   once for that record.
 
+- Correction, 2026-08-26: the hosted run of pull request #172 showed that
+  `WO-CIP-003`'s `governance-migration` job did not list `candidate-source`
+  in its `needs`, so the derived outputs it consumes were empty. Fixed under
+  `WO-CIP-002` by the owner's decision, with a test that every
+  `needs.<job>.outputs` reference in every workflow names a job in the
+  consumer's `needs`. `VREC-CIP-003` remains the record of the commit that
+  carried the defect.
+
 ### After `WO-CIP-003`
 
 - `repository_tools/predecessor_facts.py`: `derive` reads the declared root

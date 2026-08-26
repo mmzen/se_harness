@@ -2,7 +2,7 @@
 
 artifact: WO-CIP-002
 checkpoint: handoff
-formal_snapshot_sha256: 05879d8091d6a11f8e84a9f0a8e156b96ea3d5a59fd22bea2d00d4c6dec3fe67
+formal_snapshot_sha256: 8e1314ffba4e45026cb546450174e7c782d01ee4c697556042d5d2c89b22ae70
 
 Retained by the implementation actor on 2026-08-26. This file is evidence. It
 does not complete, verify, or release the work order.
@@ -61,7 +61,7 @@ does not complete, verify, or release the work order.
   and by `publish-dashboard-pages.yml`, now a 42-line caller (was 259).
   `observe` reads the Pages result and URL from the `pages` job.
 - **Tests.** `tests/test_ci_pipeline.py::QualificationDefinitionTests` (six
-  tests); `test_release_orchestration`, `test_pypi_publishing` and
+  tests) and the `needs`-graph test (deviation 8); `test_release_orchestration`, `test_pypi_publishing` and
   `test_dashboard_publication` re-pointed at the callers and the definitions;
   the `classify_pypi` unit test removed with the function.
 - **Documentation (CIP-DOC).** `docs/notes/developing-se-harness.md`
@@ -83,9 +83,9 @@ does not complete, verify, or release the work order.
 | `python scripts/check_portable_release_surface.py --repository .` | candidate | PASS |
 | `git diff --check` | git | clean |
 | PyYAML parse of `publish-pypi.yml`, `publish-dashboard-pages.yml`, `publication-rehearsal.yml`, `release-qualification.yml`, `pages-publication.yml` | workstation | jobs `[resolve, qualify, github_release, pypi, pages, observe]`, `[pages]`, `[select, rehearse-candidate, rehearse-record]`, `[qualify]`, `[build, deploy]`; the two definitions trigger on `workflow_call` only |
-| `harnessctl check . --artifact WO-CIP-002 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | first probe refused `docs/notes/release-publication-rehearsal.md` as out of scope; after the owner's scope amendment (commit `3f676e2`) and before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both report formal snapshot `05879d8091d6a11f8e84a9f0a8e156b96ea3d5a59fd22bea2d00d4c6dec3fe67` |
+| `harnessctl check . --artifact WO-CIP-002 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | first probe refused `docs/notes/release-publication-rehearsal.md` as out of scope; after the owner's two scope amendments (commits `3f676e2` and `0704d31`) and before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both report formal snapshot `8e1314ffba4e45026cb546450174e7c782d01ee4c697556042d5d2c89b22ae70` |
 | `python -m unittest` over `test_ci_pipeline`, `test_release_orchestration`, `test_pypi_publishing`, `test_dashboard_publication`, `test_maintenance_branch`, `test_integration_package`, `test_release_build` | candidate | OK |
-| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 906 tests in 349.982s` — `OK (skipped=23)`; 1035 → 906 because `test_publication_rehearsal.py` (135 tests) went with its subject and six tests were added |
+| `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 907 tests in 343.187s` — `OK (skipped=23)`; 1035 → 907 because `test_publication_rehearsal.py` (135 tests) went with its subject and seven tests were added |
 | Hosted runs | `.github/workflows/publication-rehearsal.yml` | not observed locally; the pull request is `VER-CIP-001` scenario 3 (the rehearsal executes the definition; `candidate` mode replays this commit's own recipe) |
 
 ## Deviations from the specification, recorded for the completion decision
@@ -134,10 +134,26 @@ does not complete, verify, or release the work order.
    implementation (commit `3f676e2`); the formal snapshot above is the
    amended one.
 
+8. **Correction of `WO-CIP-003`'s implemented change, under this work
+   order.** The hosted run of pull request #172 (WO-CIP-003) failed both
+   `governance-migration` legs: the job listed `needs: candidate-package`
+   only, so the `needs.candidate-source.outputs.*` values it consumes
+   resolved to empty strings and the guard added under WO-CIP-003 refused to
+   run. Local tests read the YAML as text and did not check the `needs`
+   graph. Owner decision 2026-08-26: fix it here under a second scope
+   amendment (commit `0704d31`) rather than reopen an implemented work
+   order. The fix is `needs: [candidate-source, candidate-package]`; the
+   guarding test `test_every_consumed_job_output_is_declared_in_the_consumers_needs`
+   checks every `needs.<job>.outputs`/`.result` reference in every workflow
+   against the consumer's `needs`. `WO-CIP-003` stays implemented and
+   `VREC-CIP-003` stays the verified record of commit `7baca57`, which
+   carries the defect; its bound evidence cannot be edited, so this file and
+   `docs/notes/ci-pipeline.md` are the disclosure.
 ## Complete changed-path set
 
 ```
 .github/scripts/build_integration_package.py
+.github/workflows/candidate-evidence.yml
 .github/scripts/publication_rehearsal_mechanics.json (deleted)
 .github/scripts/publish_dashboard.py
 .github/scripts/publish_release.py
@@ -160,6 +176,7 @@ tests/test_dashboard_publication.py
 tests/test_publication_rehearsal.py (deleted)
 tests/test_pypi_publishing.py
 tests/test_release_orchestration.py
+tests/test_standard_repository_lifecycle.py
 ```
 
 ## Not done
