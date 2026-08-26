@@ -2,7 +2,7 @@
 id = "VREC-RLO-007"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-007"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-007/WO
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-007-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T17:58:17Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLO-007"]
 conforms_to = ["VER-RLO-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T17:58:17Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-26 with 'I verify VREC-RLO-007', after accepting interactively the five recorded deviations: chown inside the pinned image (1); Windows not measured, the hand-back being a no-op off POSIX (2); release-candidate-replay.yml not re-run for want of a ready record (3); two failed hosted attempts before the successful one, on test coverage and on reading root-owned outputs (4, 5). Hosted reading: run 32995876112 on pull request #174 completed the first recipe replay in the repository's history on a hosted runner, state exact, both builds byte-identical; every check green."
 +++
 
 # Verification Record Candidate
