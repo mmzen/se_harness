@@ -2,10 +2,10 @@
 id = "WO-REB-026"
 type = "work_order"
 title = "Materialize the complete governance snapshot as the Pages view when no predecessor view applies"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-26"
 
 [assurance]
 commit_bound_verification = "required"
@@ -25,6 +25,13 @@ implements = ["REQ-REB-015"]
 specifications = ["SPEC-REB-007"]
 architecture = ["ARCH-REB-006", "ADR-REB-006"]
 verification = ["VER-REB-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T22:46:56Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-27, 'Approve, start, run through'. Authorizes only the exclusion branch of pages-publication.yml materializing the complete governance snapshot at the view path as a detached worktree of the resolved governance commit, plus the packet index line and evidence; no tests/, se_harness/, repository_tools/ or templates/ byte. The owner also authorized, in the same decision, the pull request, its merge by command line with a merge commit after verification, and the dispatch of publish-dashboard-pages.yml for RLS-SEH-015."
 +++
 
 # Work Order: Materialize the complete governance snapshot as the Pages view when no predecessor view applies
