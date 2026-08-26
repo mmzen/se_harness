@@ -2,7 +2,7 @@
 id = "WO-CIP-003"
 type = "work_order"
 title = "Derive the predecessor evaluator facts from the declared governor"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -36,6 +36,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T15:17:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T15:54:05Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: continue with the next work order related to CI workflows; WO-CIP-001 is implemented."
 +++
 
 # Work Order: Derive the predecessor evaluator facts from the declared governor
