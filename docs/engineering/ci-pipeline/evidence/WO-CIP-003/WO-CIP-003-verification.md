@@ -132,6 +132,21 @@ tests/test_release_qualification.py
 tests/test_standard_repository_lifecycle.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-CIP-003` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - the legacy acceptance-contract digest declared once in the module | Accept: one declared table for a fact the lock cannot carry. |
+| 2 - the writer is a `repository_tools` command | Accept: documented in the developer note; the released evaluator must not need it. |
+| 3 - `predecessor-evaluator-assessment.yml` unchanged | Accept: it carries no evaluator literal. |
+| 4 - the writer re-points a template scenario | Accept: exactness proven by byte-identical regeneration of the committed pair. |
+| 5 - no fixture rewritten | Accept. |
+| 6 - the module is standard-library only | Accept: no widening of the interpreter-safety import crossing. |
+
 ## Not done
 
 - Hosted observation of the derivation step, which needs the pull request;
