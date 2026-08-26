@@ -287,6 +287,11 @@ class QualificationDefinitionTests(unittest.TestCase):
         for absent in ("rehearse_publication", "publication_rehearsal_mechanics", "check-divergence", "PyYAML", "windows-2022"):
             self.assertNotIn(absent, self.rehearsal)
 
+    def test_the_definition_runs_the_scale_tests_at_full_size(self) -> None:
+        # WO-TST-003 (REQ-TST-002, TST-SCL 2): the release qualification sets the marker.
+        self.assertIn("SE_HARNESS_TEST_SCALE: full", self.definition)
+        self.assertIn("python -m unittest discover -s tests -p 'test_*.py'", self.definition)
+
     def test_the_definition_holds_no_authority(self) -> None:
         head = self.definition.split("\njobs:\n", 1)[0]
         self.assertIn("\npermissions:\n  contents: read\n", head)

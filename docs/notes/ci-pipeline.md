@@ -215,6 +215,13 @@ Measured 2026-08-26, 968 tests:
 Before the packet: 367 s serial and about six to seven minutes on the hosted
 lane.
 
+### After `WO-TST-003`
+
+`release-qualification.yml` sets `SE_HARNESS_TEST_SCALE=full`, so a release
+qualification (and the rehearsal's candidate mode on every pull request)
+runs the 1,000-artifact scale size; its suite step stays the canonical
+serial command.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the

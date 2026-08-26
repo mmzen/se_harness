@@ -65,6 +65,7 @@ jobs:
       RELEASE_RECORD: ${{ inputs.release_record }}
       REQUIRE_STATUS: ${{ inputs.require_status }}
       DEFAULT_REF: ${{ inputs.default_ref }}
+      SE_HARNESS_TEST_SCALE: full  # WO-TST-003: a release qualification runs the 1,000-artifact scale size
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
