@@ -20,6 +20,7 @@ CHECKPOINTS = {"start", "pre-action", "transition", "handoff"}
 EVALUATORS = {
     "artifact_status",
     "authoring_ready",
+    "release_unit_ready",
     "change_set_complete",
     "changed_paths_within_scope",
     "execution_scope_declared",

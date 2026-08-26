@@ -45,6 +45,7 @@ shell command, or repository-provided executable.
 | `review_preflight_ready` | Review preflight has no lifecycle-relevant blocker. |
 | `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |
 | `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |
+| `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |
 
 Missing completeness or required evidence is `not_assessable`, never `pass`.
 Caller-declared completeness is retained evidence; it is not proof from a
@@ -62,7 +63,7 @@ trusted change baseline.
 | `QG-G4-CANDIDATE-READY` | `QGP-G4C-STATUS`, `QGP-G4C-GRAPH`, `QGP-G4C-INTEGRITY` |
 | `QG-G4-ASSURANCE-DECISION` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` |
 | `QG-G4-VERIFIED-COVERAGE` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` |
-| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY` |
+| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |
 | `QG-G5-RELEASE-DECISION` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` |
 | `QG-G5-EXTERNAL-ACTION` | `QGP-G5E-STATUS`, `QGP-G5E-GRAPH`, `QGP-G5E-INTEGRITY` |
 
