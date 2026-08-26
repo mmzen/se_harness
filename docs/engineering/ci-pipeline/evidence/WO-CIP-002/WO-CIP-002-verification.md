@@ -179,6 +179,23 @@ tests/test_release_orchestration.py
 tests/test_standard_repository_lifecycle.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-CIP-002` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - the definition runs on Linux only | Accept: rehearse where the release runs. |
+| 2 - the definition is the recipe path, not the build-twice path | Accept: rehearse what the release runs. |
+| 3 - release-record mode has no subject until a schema-2 record exists | Accept: candidate mode runs now; record mode when 0.7.0's record exists. |
+| 4 - `classify-pypi` deleted | Accept: the PyPI job executes no repository code by policy. |
+| 5 - shared helpers in `repository_tools/json_bytes.py` with script wrappers | Accept: one definition in the standard-library-only package. |
+| 6 - `release-candidate-replay.yml` unchanged | Accept: out of scope; a possible third caller later. |
+| 7 - first scope amendment (the rehearsal note) | Confirmed. |
+| 8 - correction of WO-CIP-003's migration job under the second amendment | Confirmed; VREC-CIP-003 stays the record of the commit that carried the defect. |
+
 ## Not done
 
 - Hosted observation of the rehearsal (scenario 3), which needs the pull
