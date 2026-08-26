@@ -2,7 +2,7 @@
 id = "VREC-REB-021"
 type = "verification_record"
 title = "Verification candidate for WO-REB-024"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-
 evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-021-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T22:02:34Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-REB-024"]
 conforms_to = ["VER-REB-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T22:02:34Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-27 under DR-VREC-DECIDE, 'I verify VREC-REB-021'. The record binds 48cf580e1c4c23b3665ad5bd4730408b627131ea, at which WO-REB-024 reads implemented, to VER-REB-004 and the keyed evidence. Readings: released 0.6.0 validate PASS at 951 artifacts, 0 errors; doctor 0 FAIL; handoff Completed at snapshot b5426b63; predecessor suites 20 OK; full suite 995 OK on Windows 3.14 at full scale; the real-catalog regression test fails at a3bf411 without the change and passes with it; all four pull-request lanes success on head c1096bb with the Linux suite 995 OK. Verified with one accepted deviation: no new fixture test, to follow after 0.7.0. This authorizes no merge, release, tag or publication."
 +++
 
 # Verification Record Candidate
