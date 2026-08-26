@@ -2,7 +2,7 @@
 id = "VREC-TST-003"
 type = "verification_record"
 title = "Verification candidate for WO-TST-003"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/test-suite/evidence/WO-TST-003/WO-TST-003-ve
 evaluator_evidence_path = "docs/engineering/test-suite/evidence/VREC-TST-003-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T20:16:22Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-TST-003"]
 conforms_to = ["VER-TST-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T20:16:22Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-26 with 'I verify VREC-TST-003'; no deviation was recorded. Hosted reading at the time of this decision: pull request #181's rehearsal job (the definition in candidate mode with SE_HARNESS_TEST_SCALE=full) was still in progress; the workstation run of the suite at full scale through the runner reported 969 tests, OK, 24 skips."
 +++
 
 # Verification Record Candidate
