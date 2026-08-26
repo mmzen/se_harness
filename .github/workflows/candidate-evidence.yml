@@ -3,7 +3,11 @@
 # predecessor, the N-1 to N migration rehearsal on both platforms, and the
 # expiring integration package. Trigger policy (WO-CIP-001, SPEC-CIP-001
 # CIP-TRG): pull requests, and pushes to main, release/** and candidate/**
-# only; a newer push to the same ref cancels the older run. Described in
+# only; a newer push to the same ref cancels the older run. The predecessor
+# evaluator's version, wheel, digests and migration scenario are derived once
+# from the declared root (.engineering-harness.toml and .lock) by
+# repository_tools.predecessor_facts in candidate-source and carried as job
+# outputs (WO-CIP-003, CIP-PRE); no literal is restated here. Described in
 # docs/notes/developing-se-harness.md, "Evaluator and candidate evidence".
 name: SE Harness Candidate Evidence
 
@@ -26,6 +30,15 @@ jobs:
   candidate-source:
     name: Candidate source evidence
     runs-on: ubuntu-latest
+    outputs:
+      candidate_version: ${{ steps.candidate.outputs.version }}
+      predecessor_version: ${{ steps.predecessor.outputs.version }}
+      predecessor_wheel: ${{ steps.predecessor.outputs.wheel }}
+      predecessor_wheel_sha256: ${{ steps.predecessor.outputs.wheel_sha256 }}
+      predecessor_payload_sha256: ${{ steps.predecessor.outputs.payload_sha256 }}
+      predecessor_acceptance_contract_sha256: ${{ steps.predecessor.outputs.acceptance_contract_sha256 }}
+      migration_scenario: ${{ steps.predecessor.outputs.scenario }}
+      migration_scenario_sha256: ${{ steps.predecessor.outputs.scenario_sha256 }}
     env:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
@@ -43,6 +56,12 @@ jobs:
         run: |
           version="$(python -c 'import se_harness; print(se_harness.__version__)')"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Derive the predecessor evaluator facts from the declared root
+        id: predecessor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m repository_tools.predecessor_facts derive --repository . --github-output "$GITHUB_OUTPUT" --json
       - name: Qualify the complete candidate graph as candidate-controlled
         shell: bash
         run: |
@@ -92,11 +111,11 @@ jobs:
     needs: candidate-source
     runs-on: ubuntu-latest
     env:
-      RELEASED_VERIFIER_VERSION: "0.6.0"
-      RELEASED_VERIFIER_WHEEL: "se_harness-0.6.0-py3-none-any.whl"
-      RELEASED_VERIFIER_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"
-      RELEASED_VERIFIER_PAYLOAD_SHA256: "c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42"
-      RELEASED_ACCEPTANCE_CONTRACT_SHA256: "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75"
+      RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
+      RELEASED_VERIFIER_WHEEL: ${{ needs.candidate-source.outputs.predecessor_wheel }}
+      RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
+      RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}
+      RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -144,10 +163,12 @@ jobs:
           )
           assert not any(any(marker in name for marker in forbidden) for name in names)
           PY
-      - name: Acquire and bind the exact public 0.6.0 bootstrap verifier
+      - name: Acquire and bind the exact public predecessor as the bootstrap verifier
         shell: bash
         run: |
           set -euo pipefail
+          test -n "$RELEASED_VERIFIER_VERSION" -a -n "$RELEASED_VERIFIER_WHEEL_SHA256" -a -n "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" \
+            || { echo "predecessor facts were not derived; the legacy bootstrap acceptance needs a declared contract digest" >&2; exit 1; }
           mkdir -p "$RUNNER_TEMP/verifier-dist"
           python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps \
             --dest "$RUNNER_TEMP/verifier-dist" "se-harness==$RELEASED_VERIFIER_VERSION"
@@ -168,7 +189,7 @@ jobs:
             --evaluator-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
             --entry-point "$RUNNER_TEMP/verifier-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
-      - name: Retain exact-public-0.6.0 candidate-package bootstrap evidence
+      - name: Retain exact-public-predecessor candidate-package bootstrap evidence
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
         shell: bash
@@ -187,13 +208,13 @@ jobs:
             --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
           python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
             "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
-            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" <<'PY'
+            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" "$RELEASED_VERIFIER_VERSION" <<'PY'
           import json, pathlib, sys
           value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
           assert value["schema"] == "se-harness-functional-acceptance-v1"
           assert value["candidate"]["commit"] == sys.argv[2]
           assert value["candidate"]["wheel_sha256"] == sys.argv[3]
-          assert value["verifier"]["version"] == "0.6.0"
+          assert value["verifier"]["version"] == sys.argv[6]
           assert value["verifier"]["wheel_sha256"] == sys.argv[4]
           assert value["verifier"]["contract_sha256"] == sys.argv[5]
           assert "independence" not in value
@@ -241,7 +262,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-package-legacy-bootstrap-0.6.0
+          name: candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}
           path: ${{ runner.temp }}/candidate-package-bootstrap.json
           if-no-files-found: warn
 
@@ -263,8 +284,10 @@ jobs:
       Linux: ${{ steps.digest.outputs.Linux }}
       Windows: ${{ steps.digest.outputs.Windows }}
     env:
-      PREDECESSOR_VERSION: "0.6.0"
-      PREDECESSOR_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"
+      PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
+      PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
+      MIGRATION_SCENARIO: ${{ needs.candidate-source.outputs.migration_scenario }}
+      MIGRATION_SCENARIO_SHA256: ${{ needs.candidate-source.outputs.migration_scenario_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -275,6 +298,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Require the derived predecessor facts and the scenario they name
+        shell: pwsh
+        run: |
+          if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256 -or -not $env:MIGRATION_SCENARIO) {
+            throw 'predecessor facts were not derived by candidate-source'
+          }
+          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
+          if (-not (Test-Path -LiteralPath $scenario -PathType Leaf)) { throw "migration scenario is missing: $env:MIGRATION_SCENARIO" }
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $scenario).Hash.ToLowerInvariant()
+          if ($actual -ne $env:MIGRATION_SCENARIO_SHA256) { throw 'migration scenario bytes differ from the derived digest' }
       - name: Acquire and verify the already-public predecessor
         shell: pwsh
         run: |
@@ -320,7 +353,7 @@ jobs:
         run: |
           $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
           $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
-          $scenario = Join-Path $env:GITHUB_WORKSPACE 'tests/fixtures/governance_migration/candidate-0.6.0-to-0.7.0.json'
+          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
           $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
           $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
           Push-Location '${{ runner.temp }}'

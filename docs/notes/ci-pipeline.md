@@ -54,7 +54,7 @@ contract is 68 KB and `WO-RLS-011` is 39 KB. Since `v0.6.0`: 265 commits,
 | --- | --- | --- | --- |
 | `WO-CIP-001` | P1, P2 | the second run per push; two of three workflow-level wheel builds; the reconcile-only job | implemented 2026-08-26, see below |
 | `WO-CIP-002` | P3, P5 | the Python copy of the qualification, the YAML parser and the digest file; the idle schema leg; the duplicated Pages jobs | pending |
-| `WO-CIP-003` | P6 | three hand-edited constants and the silent skip on a version bump | pending |
+| `WO-CIP-003` | P6 | three hand-edited constants and the silent skip on a version bump | implemented 2026-08-26, see below |
 | `WO-CIP-004` | P4 | the reject-and-re-issue loop on the release contract | pending |
 
 The "Measured after" column is filled by each work order's evidence.
@@ -82,6 +82,29 @@ The "Measured after" column is filled by each work order's evidence.
   (was about 14: 1 candidate + 2 integration in `candidate-evidence`, 2 in
   the rehearsal, which `WO-CIP-002` addresses); predecessor installs about 5
   (was about 10); migration rehearsals 4 (was 8).
+
+### After `WO-CIP-003`
+
+- `repository_tools/predecessor_facts.py`: `derive` reads the declared root
+  and the candidate version and exports the predecessor's version, wheel,
+  wheel digest, payload digest, legacy acceptance-contract digest, and the
+  migration scenario path and digest; `write-scenario` is the canonical
+  scenario writer. Both fail closed with a `PRE0nn` code that names what is
+  missing.
+- `candidate-evidence.yml`: one derivation step in `candidate-source`, before
+  any network access; `candidate-package` and both migration legs take the
+  values from job outputs. Literals restating the evaluator in the
+  repository-owned workflows: 8 → 0 (the pinned build-tool versions are not
+  evaluator facts and stay). A version bump without its scenario fails the
+  first job with the expected path instead of skipping four jobs.
+- Tests that restated the same literals (`test_release_qualification`,
+  `test_governance_migration`, `test_standard_repository_lifecycle`) now
+  derive them through the module; the legacy contract digest lives in one
+  table in the module.
+- Not changed: the managed `engineering-harness.yml` keeps its version
+  literal (`{{HARNESS_VERSION}}` in the template) until the root-evaluator
+  upgrade; `predecessor-evaluator-assessment.yml` already derived its facts
+  through `scripts/validate_governor_transition.py` and carries no literal.
 
 ## What stays
 
