@@ -23,6 +23,7 @@ paths = [
   "se_harness/workflow_contract.py",
   "docs/notes/harnessctl-reference.md",
   "docs/engineering/release-orchestration/evidence/",
+  "docs/notes/release-publication-rehearsal.md",
   "docs/notes/ci-pipeline.md",
   "docs/notes/developing-se-harness.md",
   "docs/notes/README.md",
@@ -73,6 +74,16 @@ deleted.
 schema-1 note), `harnessctl-reference.md` only if a command changes; a
 note in `release-orchestration/evidence/` recording how `CAP-RLO-003` is
 now evidenced.
+
+## Scope amendment, 2026-08-26
+
+Owner decision 2026-08-26, taken interactively during implementation: add
+`docs/notes/release-publication-rehearsal.md` to the execution scope. The
+note describes the rehearsal mechanism this work order removes (the Python
+copy of the qualification, the YAML reader and the digest declaration) and
+must describe the reusable definition instead; the handoff check refused the
+rewrite as out of scope. The amendment is a direct edit of `execution_scope`
+under `CIP-DOC`; it adds a documentation path and no code path.
 
 ## Out of scope
 
