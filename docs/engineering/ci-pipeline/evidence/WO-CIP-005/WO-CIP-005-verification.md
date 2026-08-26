@@ -96,6 +96,18 @@ tests/test_release_unit.py
 tests/test_validation_taxonomy.py
 ```
 
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-CIP-005` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - bound to `QG-G5-RELEASE-PREPARATION` | Accept. |
+| 2 - exemptions in `[release_unit] untraced_exemptions` | Accept. |
+| 3 - two-segment work-order ids admitted | Accept: the catalog already allows them. |
+
 ## Not done
 
 - The completion transition; `VREC-CIP-005`. No hosted reading is needed:
