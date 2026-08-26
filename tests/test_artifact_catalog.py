@@ -126,12 +126,32 @@ expiry. The exact released evaluator still derives a narrower, short-lived
 envelope from fresh live state for each request.
 
 '''
+        generation_block = '''# Optional. Delete this entire table unless this work order declares that a named
+# architecture authored before the decision-assessment contract stays exempt from it.
+[definition_generation]
+schema = "se-harness-definition-generation-v1"
+scope = "architecture-decision-assessment"
+legacy_architectures_without_decision_assessment = ["ARCH-xxx"]
+
+'''
+        generation_guidance = '''The optional definition_generation table declares an exemption; it does not grant
+one by lifecycle status. Delete the table unless this work order is the accountable
+record for architectures authored before `decision_assessment` existed. When
+retained, this work order must itself be approved, and every named identifier must
+be an architecture in the graph that carries no `decision_assessment`. A named
+architecture that has since gained one, or that no artifact declares, is reported
+against this work order rather than silently ignored. An exempt architecture still
+raises a standing maintenance warning: the assessment remains outstanding, and
+nothing here removes it. A new architecture is never declared here; it carries a
+real assessment.
+
+'''
         expected_candidate_work_order = released_work_order.replace(
-            "[relations]\n", delegation_block + "[relations]\n", 1
+            "[relations]\n", delegation_block + generation_block + "[relations]\n", 1
         )
         expected_candidate_work_order = expected_candidate_work_order.replace(
             "Add `architecture = ",
-            delegation_guidance + "Add `architecture = ",
+            delegation_guidance + generation_guidance + "Add `architecture = ",
             1,
         )
         self.assertNotEqual(released_work_order, candidate_work_order)
@@ -146,7 +166,24 @@ envelope from fresh live state for each request.
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
-        self.assertEqual(released_traceability, candidate_traceability)
+        # SPEC-DLC-001 amends `TRC-007` in the candidate template only. The root copy
+        # belongs to the released version recorded in `.engineering-harness.toml` and
+        # is not edited, so the exception is declared as an exact insertion.
+        generation_clause = ''' No lifecycle status waives this rule. An architecture
+authored before the assessment contract MAY be exempt only while an approved work
+order names it in a `[definition_generation]` declaration; a validator MUST report
+each such exemption as outstanding maintenance, and MUST report a declared
+identifier that resolves to no unassessed architecture against the declaring work
+order.'''
+        self.assertEqual(
+            candidate_traceability,
+            released_traceability.replace(
+                "active decision trigger.",
+                "active decision trigger." + generation_clause,
+                1,
+            ),
+        )
+        self.assertNotIn("[definition_generation]", released_traceability)
         self.assertIn("`TRC-001`", released_traceability)
         self.assertIn("`TRC-001`", candidate_traceability)
         self.assertIn("BCP 14", candidate_traceability)

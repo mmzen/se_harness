@@ -106,6 +106,18 @@ required_for_release = false''',
     )
 
 
+# SPEC-DLC-001 removed the lifecycle-status proxy that used to exempt a completed
+# architecture from the required decision assessment. These fixtures author fresh
+# architectures in a newly initialized repository, so they carry a real assessment
+# rather than claiming a pre-contract exemption they are not entitled to.
+ARCHITECTURE_ASSESSMENT = '''
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["cross-cutting-policy"]
+rationale = "The fixture architecture constrains a governed requirement chain."
+assessed_by = "owner"'''
+
+
 def formal(
     artifact_id: str,
     artifact_type: str,
@@ -155,7 +167,16 @@ def create_base_chain(
         ),
     )
     write(base / "specifications/SPEC-001.md", formal("SPEC-001", "specification", "implemented", {"specifies": ["REQ-001"]}))
-    write(base / "architecture/ARCH-001.md", formal("ARCH-001", "architecture", "implemented", {"constrains": ["REQ-001"]}))
+    write(
+        base / "architecture/ARCH-001.md",
+        formal(
+            "ARCH-001",
+            "architecture",
+            "implemented",
+            {"constrains": ["REQ-001"]},
+            ARCHITECTURE_ASSESSMENT,
+        ),
+    )
     write(base / "architecture/adr/ADR-001.md", formal("ADR-001", "adr", "approved", {"decides": ["ARCH-001"]}))
     write(base / "verification/VER-001.md", formal("VER-001", "verification", "approved", {"verifies": ["REQ-001"]}))
     write(
@@ -201,7 +222,16 @@ def create_additional_chain(root: Path, *, work_order_status: str = "implemented
         ),
     )
     write(base / "specifications/SPEC-002.md", formal("SPEC-002", "specification", "implemented", {"specifies": ["REQ-002"]}))
-    write(base / "architecture/ARCH-002.md", formal("ARCH-002", "architecture", "implemented", {"constrains": ["REQ-002"]}))
+    write(
+        base / "architecture/ARCH-002.md",
+        formal(
+            "ARCH-002",
+            "architecture",
+            "implemented",
+            {"constrains": ["REQ-002"]},
+            ARCHITECTURE_ASSESSMENT,
+        ),
+    )
     write(base / "architecture/adr/ADR-002.md", formal("ADR-002", "adr", "approved", {"decides": ["ARCH-002"]}))
     write(base / "verification/VER-002.md", formal("VER-002", "verification", "approved", {"verifies": ["REQ-002"]}))
     write(

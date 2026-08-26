@@ -1,0 +1,72 @@
+{
+  "schema": "se-harness-definition-generation-consumer-matrix-v1",
+  "specification": "SPEC-DLC-001",
+  "verification": "VER-DLC-001",
+  "scenario": "19",
+  "platform": "windows-11-local",
+  "predecessor": "se-harness 0.6.0, released root validator held by the consumer",
+  "successor": "candidate template validator at this branch",
+  "variants": {
+    "A": "unassessed implemented architecture, no declaration",
+    "B": "the same architecture, declared by an approved work order",
+    "C": "the same architecture carrying a real decision assessment"
+  },
+  "observations": {
+    "A": {
+      "released_0_6_0": {
+        "errors": [],
+        "warnings": [
+          [
+            "W014",
+            "ARCH-CON-001"
+          ]
+        ]
+      },
+      "candidate_0_7_0": {
+        "errors": [
+          [
+            "E014",
+            "ARCH-CON-001"
+          ]
+        ],
+        "warnings": []
+      }
+    },
+    "B": {
+      "released_0_6_0": {
+        "errors": [],
+        "warnings": [
+          [
+            "W014",
+            "ARCH-CON-001"
+          ]
+        ]
+      },
+      "candidate_0_7_0": {
+        "errors": [],
+        "warnings": [
+          [
+            "W014",
+            "ARCH-CON-001"
+          ]
+        ]
+      }
+    },
+    "C": {
+      "released_0_6_0": {
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_0_7_0": {
+        "errors": [],
+        "warnings": []
+      }
+    }
+  },
+  "readings": {
+    "A_breaks_on_upgrade": true,
+    "B_is_clean_at_both_ends": true,
+    "C_is_clean_at_both_ends": true
+  },
+  "remedy": "Declare before upgrading. The [definition_generation] table is additive, so the predecessor ignores it and the repository keeps validating; after the upgrade the declaration already resolves."
+}

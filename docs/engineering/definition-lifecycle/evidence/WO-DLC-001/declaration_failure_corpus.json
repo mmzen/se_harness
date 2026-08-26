@@ -1,0 +1,608 @@
+{
+  "schema": "se-harness-definition-generation-corpus-v1",
+  "specification": "SPEC-DLC-001",
+  "verification": "VER-DLC-001",
+  "scenario": "16",
+  "fixture": "tests/fixtures/definition_generation/resolution_vectors.json",
+  "stable_reasons": {
+    "REASON_ALREADY_ASSESSED": "architecture already carries a decision_assessment",
+    "REASON_AMBIGUOUS_ARCHITECTURE": "more than one artifact has this identifier",
+    "REASON_DECLARATION_SHAPE": "declaration must be an array of strings",
+    "REASON_DECLARATION_SIZE": "declaration exceeds 512 entries",
+    "REASON_INVALID_ID": "invalid architecture identifier",
+    "REASON_NOT_ARCHITECTURE": "declared artifact is not an architecture",
+    "REASON_NO_APPROVAL": "declaring work order has no draft-to-approved lifecycle event",
+    "REASON_UNKNOWN_ARCHITECTURE": "no artifact has this identifier"
+  },
+  "reason_coverage": {
+    "architecture already carries a decision_assessment": [
+      "already_assessed_reason",
+      "stale_member_is_reported_beside_a_resolving_member"
+    ],
+    "declaration exceeds 512 entries": [
+      "declaration_beyond_the_bound_resolves_nothing"
+    ],
+    "declaration must be an array of strings": [
+      "a_defective_declaration_does_not_stop_another_work_order_resolving",
+      "declaration_members_must_all_be_strings",
+      "declaration_must_be_an_array"
+    ],
+    "declared artifact is not an architecture": [
+      "target_is_not_an_architecture_reason"
+    ],
+    "declaring work order has no draft-to-approved lifecycle event": [
+      "declaration_in_an_unapproved_work_order_resolves_nothing"
+    ],
+    "invalid architecture identifier": [
+      "invalid_identifier_reason"
+    ],
+    "more than one artifact has this identifier": [
+      "ambiguous_architecture_reason"
+    ],
+    "no artifact has this identifier": [
+      "declaration_at_the_bound_is_accepted",
+      "unknown_architecture_reason",
+      "unresolved_declaration_leaves_the_architecture_enforced"
+    ]
+  },
+  "unexercised_reasons": [],
+  "every_case_agrees": true,
+  "cases": [
+    {
+      "name": "frozen_member_without_assessment_is_exempt",
+      "rule": "1",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-REV-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "frozen_member_with_assessment_is_not_exempt",
+      "rule": "1",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "non_member_without_declaration_is_enforced",
+      "rule": "1",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "frozen_member_absent_from_the_graph_resolves_nothing",
+      "rule": "1",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "approved_declaration_exempts_named_architecture",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "declaration_must_be_an_array",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declaration must be an array of strings"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": null,
+          "reason": "declaration must be an array of strings"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "declaration_members_must_all_be_strings",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declaration must be an array of strings"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": null,
+          "reason": "declaration must be an array of strings"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "declaration_beyond_the_bound_resolves_nothing",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declaration exceeds 512 entries"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": null,
+          "reason": "declaration exceeds 512 entries"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-BIG-000"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "declaration_at_the_bound_is_accepted",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-BIG-000"
+      ],
+      "defect_count": 511,
+      "defect_reasons": [
+        "no artifact has this identifier"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-BIG-001",
+          "reason": "no artifact has this identifier"
+        },
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-BIG-002",
+          "reason": "no artifact has this identifier"
+        },
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-BIG-003",
+          "reason": "no artifact has this identifier"
+        }
+      ],
+      "defects_truncated": true,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "duplicate_members_resolve_once",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "empty_declaration_resolves_nothing_and_is_not_a_defect",
+      "rule": "2",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "declaration_in_an_unapproved_work_order_resolves_nothing",
+      "rule": "3",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declaring work order has no draft-to-approved lifecycle event"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": null,
+          "reason": "declaring work order has no draft-to-approved lifecycle event"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "unapproved_empty_declaration_is_not_a_defect",
+      "rule": "3",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "invalid_identifier_reason",
+      "rule": "4",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "invalid architecture identifier"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "arch-new-001",
+          "reason": "invalid architecture identifier"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "unknown_architecture_reason",
+      "rule": "4",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "no artifact has this identifier"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-GHOST-001",
+          "reason": "no artifact has this identifier"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "ambiguous_architecture_reason",
+      "rule": "4",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "more than one artifact has this identifier"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-TWIN-001",
+          "reason": "more than one artifact has this identifier"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "target_is_not_an_architecture_reason",
+      "rule": "4",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declared artifact is not an architecture"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-FAKE-001",
+          "reason": "declared artifact is not an architecture"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "already_assessed_reason",
+      "rule": "4",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "architecture already carries a decision_assessment"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-NEW-001",
+          "reason": "architecture already carries a decision_assessment"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "completed_status_alone_does_not_exempt",
+      "rule": "5",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "draft_status_does_not_block_a_declared_exemption",
+      "rule": "5",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "every_completed_status_resolves_identically",
+      "rule": "5",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-AAA-001",
+        "ARCH-BBB-001",
+        "ARCH-CCC-001"
+      ],
+      "enforced_count": 3
+    },
+    {
+      "name": "stale_member_is_reported_beside_a_resolving_member",
+      "rule": "7",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-001"
+      ],
+      "defect_count": 1,
+      "defect_reasons": [
+        "architecture already carries a decision_assessment"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-OLD-001",
+          "reason": "architecture already carries a decision_assessment"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "unresolved_declaration_leaves_the_architecture_enforced",
+      "rule": "7",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 1,
+      "defect_reasons": [
+        "no artifact has this identifier"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": "ARCH-GHOST-001",
+          "reason": "no artifact has this identifier"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "unauthoritative_packet_schema_is_undeclared",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "unauthoritative_packet_scope_is_undeclared",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "packet_without_the_declaration_field_is_undeclared",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "absent_packet_is_undeclared",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 0,
+      "exemptions": [],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "a_defective_declaration_does_not_stop_another_work_order_resolving",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-002"
+      ],
+      "defect_count": 1,
+      "defect_reasons": [
+        "declaration must be an array of strings"
+      ],
+      "defects": [
+        {
+          "work_order": "WO-CON-001",
+          "architecture": null,
+          "reason": "declaration must be an array of strings"
+        }
+      ],
+      "defects_truncated": false,
+      "enforced": [
+        "ARCH-NEW-001"
+      ],
+      "enforced_count": 1
+    },
+    {
+      "name": "first_declaring_work_order_wins_by_identifier_order",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-NEW-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    },
+    {
+      "name": "the_frozen_set_never_overrides_a_declaring_work_order",
+      "rule": "8",
+      "implementations_agree_with_committed_expectation": true,
+      "exemption_count": 1,
+      "exemptions": [
+        "ARCH-REV-001"
+      ],
+      "defect_count": 0,
+      "defect_reasons": [],
+      "defects": [],
+      "defects_truncated": false,
+      "enforced": [],
+      "enforced_count": 0
+    }
+  ]
+}

@@ -108,7 +108,12 @@ one conforming specification MUST specify that requirement.
 `adr_required` or `no_significant_decision`. An `adr_required` architecture
 MUST be decided by a selected active ADR. `ADR.decides -> ARCH` establishes coverage.
 `no_significant_decision` MUST include an accepted rationale and MUST have no
-active decision trigger.
+active decision trigger. No lifecycle status waives this rule. An architecture
+authored before the assessment contract MAY be exempt only while an approved work
+order names it in a `[definition_generation]` declaration; a validator MUST report
+each such exemption as outstanding maintenance, and MUST report a declared
+identifier that resolves to no unassessed architecture against the declaring work
+order.
 
 `TRC-008` - `ARCH.constrains` is compatibility-only. A validator MAY classify
 an unambiguous completed historical relation and MUST report the migration. It

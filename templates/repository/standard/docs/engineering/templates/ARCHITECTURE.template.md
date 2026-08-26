@@ -43,6 +43,8 @@ Significant-decision triggers:
 
 Initial software design normally activates one or more triggers, but applicability is evidence-based rather than automatic.
 
+No lifecycle status exempts this table. Reaching `implemented`, `verified`, or `released` does not stand in for an assessment, and neither does staying in `draft`. An architecture authored before this contract existed is exempt only while an approved work order names it in a `[definition_generation]` declaration, and that exemption is reported as outstanding maintenance for as long as it lasts. The remedy is to record the assessment, not to extend the declaration.
+
 ## Components and responsibilities
 
 ## Dependency direction

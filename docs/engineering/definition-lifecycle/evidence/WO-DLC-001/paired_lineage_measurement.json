@@ -1,0 +1,324 @@
+{
+  "readings": {
+    "released_base": {
+      "artifact_count": 907,
+      "error_count": 0,
+      "warning_count": 50,
+      "error_codes": [],
+      "warning_codes": [
+        "W013",
+        "W014",
+        "W015"
+      ],
+      "errors": [],
+      "tracked": {
+        "W013": [
+          "RLS-SEH-001",
+          "RLS-SEH-002",
+          "RLS-SEH-004",
+          "RLS-SEH-005",
+          "RLS-SEH-006",
+          "RLS-SEH-007",
+          "RLS-SEH-009",
+          "RLS-SEH-012",
+          "VREC-DOC-003",
+          "VREC-DOC-005",
+          "VREC-PMI-001",
+          "VREC-SEH-001",
+          "VREC-SEH-002",
+          "VREC-SEH-004",
+          "VREC-SEH-005",
+          "VREC-SEH-006",
+          "VREC-SEH-007",
+          "VREC-SEH-008",
+          "VREC-SEH-009",
+          "VREC-SEH-010",
+          "VREC-SEH-012"
+        ],
+        "W014": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ],
+        "W015": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-IAR-004",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ]
+      },
+      "other_warnings": []
+    },
+    "released_candidate": {
+      "artifact_count": 907,
+      "error_count": 0,
+      "warning_count": 50,
+      "error_codes": [],
+      "warning_codes": [
+        "W013",
+        "W014",
+        "W015"
+      ],
+      "errors": [],
+      "tracked": {
+        "W013": [
+          "RLS-SEH-001",
+          "RLS-SEH-002",
+          "RLS-SEH-004",
+          "RLS-SEH-005",
+          "RLS-SEH-006",
+          "RLS-SEH-007",
+          "RLS-SEH-009",
+          "RLS-SEH-012",
+          "VREC-DOC-003",
+          "VREC-DOC-005",
+          "VREC-PMI-001",
+          "VREC-SEH-001",
+          "VREC-SEH-002",
+          "VREC-SEH-004",
+          "VREC-SEH-005",
+          "VREC-SEH-006",
+          "VREC-SEH-007",
+          "VREC-SEH-008",
+          "VREC-SEH-009",
+          "VREC-SEH-010",
+          "VREC-SEH-012"
+        ],
+        "W014": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ],
+        "W015": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-IAR-004",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ]
+      },
+      "other_warnings": []
+    },
+    "template_base": {
+      "artifact_count": 907,
+      "error_count": 0,
+      "warning_count": 56,
+      "error_codes": [],
+      "warning_codes": [
+        "W013",
+        "W014",
+        "W015",
+        "W024"
+      ],
+      "errors": [],
+      "tracked": {
+        "W013": [
+          "RLS-SEH-001",
+          "RLS-SEH-002",
+          "RLS-SEH-004",
+          "RLS-SEH-005",
+          "RLS-SEH-006",
+          "RLS-SEH-007",
+          "RLS-SEH-009",
+          "RLS-SEH-012",
+          "VREC-DOC-003",
+          "VREC-DOC-005",
+          "VREC-PMI-001",
+          "VREC-SEH-001",
+          "VREC-SEH-002",
+          "VREC-SEH-004",
+          "VREC-SEH-005",
+          "VREC-SEH-006",
+          "VREC-SEH-007",
+          "VREC-SEH-008",
+          "VREC-SEH-009",
+          "VREC-SEH-010",
+          "VREC-SEH-012"
+        ],
+        "W014": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ],
+        "W015": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-IAR-004",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ]
+      },
+      "other_warnings": [
+        "W024:RLS-SEH-001",
+        "W024:RLS-SEH-002",
+        "W024:RLS-SEH-004",
+        "W024:RLS-SEH-005",
+        "W024:RLS-SEH-006",
+        "W024:RLS-SEH-007"
+      ]
+    },
+    "template_candidate": {
+      "artifact_count": 907,
+      "error_count": 0,
+      "warning_count": 56,
+      "error_codes": [],
+      "warning_codes": [
+        "W013",
+        "W014",
+        "W015",
+        "W024"
+      ],
+      "errors": [],
+      "tracked": {
+        "W013": [
+          "RLS-SEH-001",
+          "RLS-SEH-002",
+          "RLS-SEH-004",
+          "RLS-SEH-005",
+          "RLS-SEH-006",
+          "RLS-SEH-007",
+          "RLS-SEH-009",
+          "RLS-SEH-012",
+          "VREC-DOC-003",
+          "VREC-DOC-005",
+          "VREC-PMI-001",
+          "VREC-SEH-001",
+          "VREC-SEH-002",
+          "VREC-SEH-004",
+          "VREC-SEH-005",
+          "VREC-SEH-006",
+          "VREC-SEH-007",
+          "VREC-SEH-008",
+          "VREC-SEH-009",
+          "VREC-SEH-010",
+          "VREC-SEH-012"
+        ],
+        "W014": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ],
+        "W015": [
+          "ARCH-AGR-001",
+          "ARCH-DST-001",
+          "ARCH-DST-002",
+          "ARCH-DST-003",
+          "ARCH-DST-004",
+          "ARCH-DST-005",
+          "ARCH-IAR-001",
+          "ARCH-IAR-002",
+          "ARCH-IAR-003",
+          "ARCH-IAR-004",
+          "ARCH-PMI-001",
+          "ARCH-PYP-001",
+          "ARCH-REV-001",
+          "ARCH-VSP-001",
+          "ARCH-WLC-001"
+        ]
+      },
+      "other_warnings": [
+        "W024:RLS-SEH-001",
+        "W024:RLS-SEH-002",
+        "W024:RLS-SEH-004",
+        "W024:RLS-SEH-005",
+        "W024:RLS-SEH-006",
+        "W024:RLS-SEH-007"
+      ]
+    }
+  },
+  "comparisons": {
+    "released_lineage": {
+      "zero_errors_at_both_ends": true,
+      "tracked_sets_equal": {
+        "W013": true,
+        "W014": true,
+        "W015": true
+      },
+      "other_warnings_equal": true
+    },
+    "candidate_template": {
+      "zero_errors_at_both_ends": true,
+      "tracked_sets_equal": {
+        "W013": true,
+        "W014": true,
+        "W015": true
+      },
+      "other_warnings_equal": true
+    }
+  }
+}

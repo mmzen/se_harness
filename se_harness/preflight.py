@@ -550,8 +550,22 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
             active_decisions = [
                 item for item in decisions if item.status in ACTIVE_CHAIN_STATUSES
             ]
+            # SPEC-DLC-001: an architecture's exemption from the required decision
+            # assessment is resolved from the whole graph, never from its status. The
+            # released evaluator predates the resolver, so fall back to the frozen set
+            # the validator applies on its own rather than inventing an exemption here.
+            resolve_generation = getattr(validator, "definition_generation_state", None)
+            if resolve_generation is None:
+                def _assessment(architecture: Any) -> dict[str, Any]:
+                    return validator.decision_assessment_state(architecture)
+            else:
+                declared_exemptions = resolve_generation(artifacts)["exemptions"]
+
+                def _assessment(architecture: Any) -> dict[str, Any]:
+                    return validator.decision_assessment_state(architecture, declared_exemptions)
+
             for architecture in architectures:
-                assessment = validator.decision_assessment_state(architecture)
+                assessment = _assessment(architecture)
                 selected_deciding = [
                     decision
                     for decision in active_decisions
@@ -571,7 +585,8 @@ def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> 
                         PreflightDiagnostic(
                             "W019",
                             _relative(architecture.path, root),
-                            f"legacy architecture {architecture.artifact_id} has no selected active deciding ADR",
+                            f"generation-exempt architecture {architecture.artifact_id} has no "
+                            f"selected active deciding ADR",
                         )
                     )
                 elif assessment["outcome"] == "adr_required" and not selected_deciding:

@@ -1,0 +1,4537 @@
+{
+  "schema": "se-harness-definition-generation-vectors-v1",
+  "specification": "SPEC-DLC-001",
+  "note": "Shared contract for the two equivalent implementations required by DLC-GEN-009: se_harness/definition_generation.py and the self-contained resolver inside templates/repository/standard/scripts/validate_engineering_artifacts.py. No case carries an architecture lifecycle status as a resolution input; the rule-5 cases carry one purely to assert that it is ignored.",
+  "cases": [
+    {
+      "name": "frozen_member_without_assessment_is_exempt",
+      "rule": "1",
+      "artifacts": [
+        {
+          "id": "ARCH-REV-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {
+          "ARCH-REV-001": "self-hosting-compatibility-set"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "frozen_member_with_assessment_is_not_exempt",
+      "rule": "1",
+      "artifacts": [
+        {
+          "id": "ARCH-REV-001",
+          "type": "architecture",
+          "assessed": true
+        }
+      ],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "non_member_without_declaration_is_enforced",
+      "rule": "1",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "frozen_member_absent_from_the_graph_resolves_nothing",
+      "rule": "1",
+      "artifacts": [],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "approved_declaration_exempts_named_architecture",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-001": "WO-CON-001"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "declaration_must_be_an_array",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": "ARCH-NEW-001"
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": null,
+            "reason": "declaration must be an array of strings"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "declaration_members_must_all_be_strings",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001",
+              7
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": null,
+            "reason": "declaration must be an array of strings"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "declaration_beyond_the_bound_resolves_nothing",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-BIG-000",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-BIG-000",
+              "ARCH-BIG-001",
+              "ARCH-BIG-002",
+              "ARCH-BIG-003",
+              "ARCH-BIG-004",
+              "ARCH-BIG-005",
+              "ARCH-BIG-006",
+              "ARCH-BIG-007",
+              "ARCH-BIG-008",
+              "ARCH-BIG-009",
+              "ARCH-BIG-010",
+              "ARCH-BIG-011",
+              "ARCH-BIG-012",
+              "ARCH-BIG-013",
+              "ARCH-BIG-014",
+              "ARCH-BIG-015",
+              "ARCH-BIG-016",
+              "ARCH-BIG-017",
+              "ARCH-BIG-018",
+              "ARCH-BIG-019",
+              "ARCH-BIG-020",
+              "ARCH-BIG-021",
+              "ARCH-BIG-022",
+              "ARCH-BIG-023",
+              "ARCH-BIG-024",
+              "ARCH-BIG-025",
+              "ARCH-BIG-026",
+              "ARCH-BIG-027",
+              "ARCH-BIG-028",
+              "ARCH-BIG-029",
+              "ARCH-BIG-030",
+              "ARCH-BIG-031",
+              "ARCH-BIG-032",
+              "ARCH-BIG-033",
+              "ARCH-BIG-034",
+              "ARCH-BIG-035",
+              "ARCH-BIG-036",
+              "ARCH-BIG-037",
+              "ARCH-BIG-038",
+              "ARCH-BIG-039",
+              "ARCH-BIG-040",
+              "ARCH-BIG-041",
+              "ARCH-BIG-042",
+              "ARCH-BIG-043",
+              "ARCH-BIG-044",
+              "ARCH-BIG-045",
+              "ARCH-BIG-046",
+              "ARCH-BIG-047",
+              "ARCH-BIG-048",
+              "ARCH-BIG-049",
+              "ARCH-BIG-050",
+              "ARCH-BIG-051",
+              "ARCH-BIG-052",
+              "ARCH-BIG-053",
+              "ARCH-BIG-054",
+              "ARCH-BIG-055",
+              "ARCH-BIG-056",
+              "ARCH-BIG-057",
+              "ARCH-BIG-058",
+              "ARCH-BIG-059",
+              "ARCH-BIG-060",
+              "ARCH-BIG-061",
+              "ARCH-BIG-062",
+              "ARCH-BIG-063",
+              "ARCH-BIG-064",
+              "ARCH-BIG-065",
+              "ARCH-BIG-066",
+              "ARCH-BIG-067",
+              "ARCH-BIG-068",
+              "ARCH-BIG-069",
+              "ARCH-BIG-070",
+              "ARCH-BIG-071",
+              "ARCH-BIG-072",
+              "ARCH-BIG-073",
+              "ARCH-BIG-074",
+              "ARCH-BIG-075",
+              "ARCH-BIG-076",
+              "ARCH-BIG-077",
+              "ARCH-BIG-078",
+              "ARCH-BIG-079",
+              "ARCH-BIG-080",
+              "ARCH-BIG-081",
+              "ARCH-BIG-082",
+              "ARCH-BIG-083",
+              "ARCH-BIG-084",
+              "ARCH-BIG-085",
+              "ARCH-BIG-086",
+              "ARCH-BIG-087",
+              "ARCH-BIG-088",
+              "ARCH-BIG-089",
+              "ARCH-BIG-090",
+              "ARCH-BIG-091",
+              "ARCH-BIG-092",
+              "ARCH-BIG-093",
+              "ARCH-BIG-094",
+              "ARCH-BIG-095",
+              "ARCH-BIG-096",
+              "ARCH-BIG-097",
+              "ARCH-BIG-098",
+              "ARCH-BIG-099",
+              "ARCH-BIG-100",
+              "ARCH-BIG-101",
+              "ARCH-BIG-102",
+              "ARCH-BIG-103",
+              "ARCH-BIG-104",
+              "ARCH-BIG-105",
+              "ARCH-BIG-106",
+              "ARCH-BIG-107",
+              "ARCH-BIG-108",
+              "ARCH-BIG-109",
+              "ARCH-BIG-110",
+              "ARCH-BIG-111",
+              "ARCH-BIG-112",
+              "ARCH-BIG-113",
+              "ARCH-BIG-114",
+              "ARCH-BIG-115",
+              "ARCH-BIG-116",
+              "ARCH-BIG-117",
+              "ARCH-BIG-118",
+              "ARCH-BIG-119",
+              "ARCH-BIG-120",
+              "ARCH-BIG-121",
+              "ARCH-BIG-122",
+              "ARCH-BIG-123",
+              "ARCH-BIG-124",
+              "ARCH-BIG-125",
+              "ARCH-BIG-126",
+              "ARCH-BIG-127",
+              "ARCH-BIG-128",
+              "ARCH-BIG-129",
+              "ARCH-BIG-130",
+              "ARCH-BIG-131",
+              "ARCH-BIG-132",
+              "ARCH-BIG-133",
+              "ARCH-BIG-134",
+              "ARCH-BIG-135",
+              "ARCH-BIG-136",
+              "ARCH-BIG-137",
+              "ARCH-BIG-138",
+              "ARCH-BIG-139",
+              "ARCH-BIG-140",
+              "ARCH-BIG-141",
+              "ARCH-BIG-142",
+              "ARCH-BIG-143",
+              "ARCH-BIG-144",
+              "ARCH-BIG-145",
+              "ARCH-BIG-146",
+              "ARCH-BIG-147",
+              "ARCH-BIG-148",
+              "ARCH-BIG-149",
+              "ARCH-BIG-150",
+              "ARCH-BIG-151",
+              "ARCH-BIG-152",
+              "ARCH-BIG-153",
+              "ARCH-BIG-154",
+              "ARCH-BIG-155",
+              "ARCH-BIG-156",
+              "ARCH-BIG-157",
+              "ARCH-BIG-158",
+              "ARCH-BIG-159",
+              "ARCH-BIG-160",
+              "ARCH-BIG-161",
+              "ARCH-BIG-162",
+              "ARCH-BIG-163",
+              "ARCH-BIG-164",
+              "ARCH-BIG-165",
+              "ARCH-BIG-166",
+              "ARCH-BIG-167",
+              "ARCH-BIG-168",
+              "ARCH-BIG-169",
+              "ARCH-BIG-170",
+              "ARCH-BIG-171",
+              "ARCH-BIG-172",
+              "ARCH-BIG-173",
+              "ARCH-BIG-174",
+              "ARCH-BIG-175",
+              "ARCH-BIG-176",
+              "ARCH-BIG-177",
+              "ARCH-BIG-178",
+              "ARCH-BIG-179",
+              "ARCH-BIG-180",
+              "ARCH-BIG-181",
+              "ARCH-BIG-182",
+              "ARCH-BIG-183",
+              "ARCH-BIG-184",
+              "ARCH-BIG-185",
+              "ARCH-BIG-186",
+              "ARCH-BIG-187",
+              "ARCH-BIG-188",
+              "ARCH-BIG-189",
+              "ARCH-BIG-190",
+              "ARCH-BIG-191",
+              "ARCH-BIG-192",
+              "ARCH-BIG-193",
+              "ARCH-BIG-194",
+              "ARCH-BIG-195",
+              "ARCH-BIG-196",
+              "ARCH-BIG-197",
+              "ARCH-BIG-198",
+              "ARCH-BIG-199",
+              "ARCH-BIG-200",
+              "ARCH-BIG-201",
+              "ARCH-BIG-202",
+              "ARCH-BIG-203",
+              "ARCH-BIG-204",
+              "ARCH-BIG-205",
+              "ARCH-BIG-206",
+              "ARCH-BIG-207",
+              "ARCH-BIG-208",
+              "ARCH-BIG-209",
+              "ARCH-BIG-210",
+              "ARCH-BIG-211",
+              "ARCH-BIG-212",
+              "ARCH-BIG-213",
+              "ARCH-BIG-214",
+              "ARCH-BIG-215",
+              "ARCH-BIG-216",
+              "ARCH-BIG-217",
+              "ARCH-BIG-218",
+              "ARCH-BIG-219",
+              "ARCH-BIG-220",
+              "ARCH-BIG-221",
+              "ARCH-BIG-222",
+              "ARCH-BIG-223",
+              "ARCH-BIG-224",
+              "ARCH-BIG-225",
+              "ARCH-BIG-226",
+              "ARCH-BIG-227",
+              "ARCH-BIG-228",
+              "ARCH-BIG-229",
+              "ARCH-BIG-230",
+              "ARCH-BIG-231",
+              "ARCH-BIG-232",
+              "ARCH-BIG-233",
+              "ARCH-BIG-234",
+              "ARCH-BIG-235",
+              "ARCH-BIG-236",
+              "ARCH-BIG-237",
+              "ARCH-BIG-238",
+              "ARCH-BIG-239",
+              "ARCH-BIG-240",
+              "ARCH-BIG-241",
+              "ARCH-BIG-242",
+              "ARCH-BIG-243",
+              "ARCH-BIG-244",
+              "ARCH-BIG-245",
+              "ARCH-BIG-246",
+              "ARCH-BIG-247",
+              "ARCH-BIG-248",
+              "ARCH-BIG-249",
+              "ARCH-BIG-250",
+              "ARCH-BIG-251",
+              "ARCH-BIG-252",
+              "ARCH-BIG-253",
+              "ARCH-BIG-254",
+              "ARCH-BIG-255",
+              "ARCH-BIG-256",
+              "ARCH-BIG-257",
+              "ARCH-BIG-258",
+              "ARCH-BIG-259",
+              "ARCH-BIG-260",
+              "ARCH-BIG-261",
+              "ARCH-BIG-262",
+              "ARCH-BIG-263",
+              "ARCH-BIG-264",
+              "ARCH-BIG-265",
+              "ARCH-BIG-266",
+              "ARCH-BIG-267",
+              "ARCH-BIG-268",
+              "ARCH-BIG-269",
+              "ARCH-BIG-270",
+              "ARCH-BIG-271",
+              "ARCH-BIG-272",
+              "ARCH-BIG-273",
+              "ARCH-BIG-274",
+              "ARCH-BIG-275",
+              "ARCH-BIG-276",
+              "ARCH-BIG-277",
+              "ARCH-BIG-278",
+              "ARCH-BIG-279",
+              "ARCH-BIG-280",
+              "ARCH-BIG-281",
+              "ARCH-BIG-282",
+              "ARCH-BIG-283",
+              "ARCH-BIG-284",
+              "ARCH-BIG-285",
+              "ARCH-BIG-286",
+              "ARCH-BIG-287",
+              "ARCH-BIG-288",
+              "ARCH-BIG-289",
+              "ARCH-BIG-290",
+              "ARCH-BIG-291",
+              "ARCH-BIG-292",
+              "ARCH-BIG-293",
+              "ARCH-BIG-294",
+              "ARCH-BIG-295",
+              "ARCH-BIG-296",
+              "ARCH-BIG-297",
+              "ARCH-BIG-298",
+              "ARCH-BIG-299",
+              "ARCH-BIG-300",
+              "ARCH-BIG-301",
+              "ARCH-BIG-302",
+              "ARCH-BIG-303",
+              "ARCH-BIG-304",
+              "ARCH-BIG-305",
+              "ARCH-BIG-306",
+              "ARCH-BIG-307",
+              "ARCH-BIG-308",
+              "ARCH-BIG-309",
+              "ARCH-BIG-310",
+              "ARCH-BIG-311",
+              "ARCH-BIG-312",
+              "ARCH-BIG-313",
+              "ARCH-BIG-314",
+              "ARCH-BIG-315",
+              "ARCH-BIG-316",
+              "ARCH-BIG-317",
+              "ARCH-BIG-318",
+              "ARCH-BIG-319",
+              "ARCH-BIG-320",
+              "ARCH-BIG-321",
+              "ARCH-BIG-322",
+              "ARCH-BIG-323",
+              "ARCH-BIG-324",
+              "ARCH-BIG-325",
+              "ARCH-BIG-326",
+              "ARCH-BIG-327",
+              "ARCH-BIG-328",
+              "ARCH-BIG-329",
+              "ARCH-BIG-330",
+              "ARCH-BIG-331",
+              "ARCH-BIG-332",
+              "ARCH-BIG-333",
+              "ARCH-BIG-334",
+              "ARCH-BIG-335",
+              "ARCH-BIG-336",
+              "ARCH-BIG-337",
+              "ARCH-BIG-338",
+              "ARCH-BIG-339",
+              "ARCH-BIG-340",
+              "ARCH-BIG-341",
+              "ARCH-BIG-342",
+              "ARCH-BIG-343",
+              "ARCH-BIG-344",
+              "ARCH-BIG-345",
+              "ARCH-BIG-346",
+              "ARCH-BIG-347",
+              "ARCH-BIG-348",
+              "ARCH-BIG-349",
+              "ARCH-BIG-350",
+              "ARCH-BIG-351",
+              "ARCH-BIG-352",
+              "ARCH-BIG-353",
+              "ARCH-BIG-354",
+              "ARCH-BIG-355",
+              "ARCH-BIG-356",
+              "ARCH-BIG-357",
+              "ARCH-BIG-358",
+              "ARCH-BIG-359",
+              "ARCH-BIG-360",
+              "ARCH-BIG-361",
+              "ARCH-BIG-362",
+              "ARCH-BIG-363",
+              "ARCH-BIG-364",
+              "ARCH-BIG-365",
+              "ARCH-BIG-366",
+              "ARCH-BIG-367",
+              "ARCH-BIG-368",
+              "ARCH-BIG-369",
+              "ARCH-BIG-370",
+              "ARCH-BIG-371",
+              "ARCH-BIG-372",
+              "ARCH-BIG-373",
+              "ARCH-BIG-374",
+              "ARCH-BIG-375",
+              "ARCH-BIG-376",
+              "ARCH-BIG-377",
+              "ARCH-BIG-378",
+              "ARCH-BIG-379",
+              "ARCH-BIG-380",
+              "ARCH-BIG-381",
+              "ARCH-BIG-382",
+              "ARCH-BIG-383",
+              "ARCH-BIG-384",
+              "ARCH-BIG-385",
+              "ARCH-BIG-386",
+              "ARCH-BIG-387",
+              "ARCH-BIG-388",
+              "ARCH-BIG-389",
+              "ARCH-BIG-390",
+              "ARCH-BIG-391",
+              "ARCH-BIG-392",
+              "ARCH-BIG-393",
+              "ARCH-BIG-394",
+              "ARCH-BIG-395",
+              "ARCH-BIG-396",
+              "ARCH-BIG-397",
+              "ARCH-BIG-398",
+              "ARCH-BIG-399",
+              "ARCH-BIG-400",
+              "ARCH-BIG-401",
+              "ARCH-BIG-402",
+              "ARCH-BIG-403",
+              "ARCH-BIG-404",
+              "ARCH-BIG-405",
+              "ARCH-BIG-406",
+              "ARCH-BIG-407",
+              "ARCH-BIG-408",
+              "ARCH-BIG-409",
+              "ARCH-BIG-410",
+              "ARCH-BIG-411",
+              "ARCH-BIG-412",
+              "ARCH-BIG-413",
+              "ARCH-BIG-414",
+              "ARCH-BIG-415",
+              "ARCH-BIG-416",
+              "ARCH-BIG-417",
+              "ARCH-BIG-418",
+              "ARCH-BIG-419",
+              "ARCH-BIG-420",
+              "ARCH-BIG-421",
+              "ARCH-BIG-422",
+              "ARCH-BIG-423",
+              "ARCH-BIG-424",
+              "ARCH-BIG-425",
+              "ARCH-BIG-426",
+              "ARCH-BIG-427",
+              "ARCH-BIG-428",
+              "ARCH-BIG-429",
+              "ARCH-BIG-430",
+              "ARCH-BIG-431",
+              "ARCH-BIG-432",
+              "ARCH-BIG-433",
+              "ARCH-BIG-434",
+              "ARCH-BIG-435",
+              "ARCH-BIG-436",
+              "ARCH-BIG-437",
+              "ARCH-BIG-438",
+              "ARCH-BIG-439",
+              "ARCH-BIG-440",
+              "ARCH-BIG-441",
+              "ARCH-BIG-442",
+              "ARCH-BIG-443",
+              "ARCH-BIG-444",
+              "ARCH-BIG-445",
+              "ARCH-BIG-446",
+              "ARCH-BIG-447",
+              "ARCH-BIG-448",
+              "ARCH-BIG-449",
+              "ARCH-BIG-450",
+              "ARCH-BIG-451",
+              "ARCH-BIG-452",
+              "ARCH-BIG-453",
+              "ARCH-BIG-454",
+              "ARCH-BIG-455",
+              "ARCH-BIG-456",
+              "ARCH-BIG-457",
+              "ARCH-BIG-458",
+              "ARCH-BIG-459",
+              "ARCH-BIG-460",
+              "ARCH-BIG-461",
+              "ARCH-BIG-462",
+              "ARCH-BIG-463",
+              "ARCH-BIG-464",
+              "ARCH-BIG-465",
+              "ARCH-BIG-466",
+              "ARCH-BIG-467",
+              "ARCH-BIG-468",
+              "ARCH-BIG-469",
+              "ARCH-BIG-470",
+              "ARCH-BIG-471",
+              "ARCH-BIG-472",
+              "ARCH-BIG-473",
+              "ARCH-BIG-474",
+              "ARCH-BIG-475",
+              "ARCH-BIG-476",
+              "ARCH-BIG-477",
+              "ARCH-BIG-478",
+              "ARCH-BIG-479",
+              "ARCH-BIG-480",
+              "ARCH-BIG-481",
+              "ARCH-BIG-482",
+              "ARCH-BIG-483",
+              "ARCH-BIG-484",
+              "ARCH-BIG-485",
+              "ARCH-BIG-486",
+              "ARCH-BIG-487",
+              "ARCH-BIG-488",
+              "ARCH-BIG-489",
+              "ARCH-BIG-490",
+              "ARCH-BIG-491",
+              "ARCH-BIG-492",
+              "ARCH-BIG-493",
+              "ARCH-BIG-494",
+              "ARCH-BIG-495",
+              "ARCH-BIG-496",
+              "ARCH-BIG-497",
+              "ARCH-BIG-498",
+              "ARCH-BIG-499",
+              "ARCH-BIG-500",
+              "ARCH-BIG-501",
+              "ARCH-BIG-502",
+              "ARCH-BIG-503",
+              "ARCH-BIG-504",
+              "ARCH-BIG-505",
+              "ARCH-BIG-506",
+              "ARCH-BIG-507",
+              "ARCH-BIG-508",
+              "ARCH-BIG-509",
+              "ARCH-BIG-510",
+              "ARCH-BIG-511",
+              "ARCH-BIG-512"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": null,
+            "reason": "declaration exceeds 512 entries"
+          }
+        ],
+        "enforced": [
+          "ARCH-BIG-000"
+        ]
+      }
+    },
+    {
+      "name": "declaration_at_the_bound_is_accepted",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-BIG-000",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-BIG-000",
+              "ARCH-BIG-001",
+              "ARCH-BIG-002",
+              "ARCH-BIG-003",
+              "ARCH-BIG-004",
+              "ARCH-BIG-005",
+              "ARCH-BIG-006",
+              "ARCH-BIG-007",
+              "ARCH-BIG-008",
+              "ARCH-BIG-009",
+              "ARCH-BIG-010",
+              "ARCH-BIG-011",
+              "ARCH-BIG-012",
+              "ARCH-BIG-013",
+              "ARCH-BIG-014",
+              "ARCH-BIG-015",
+              "ARCH-BIG-016",
+              "ARCH-BIG-017",
+              "ARCH-BIG-018",
+              "ARCH-BIG-019",
+              "ARCH-BIG-020",
+              "ARCH-BIG-021",
+              "ARCH-BIG-022",
+              "ARCH-BIG-023",
+              "ARCH-BIG-024",
+              "ARCH-BIG-025",
+              "ARCH-BIG-026",
+              "ARCH-BIG-027",
+              "ARCH-BIG-028",
+              "ARCH-BIG-029",
+              "ARCH-BIG-030",
+              "ARCH-BIG-031",
+              "ARCH-BIG-032",
+              "ARCH-BIG-033",
+              "ARCH-BIG-034",
+              "ARCH-BIG-035",
+              "ARCH-BIG-036",
+              "ARCH-BIG-037",
+              "ARCH-BIG-038",
+              "ARCH-BIG-039",
+              "ARCH-BIG-040",
+              "ARCH-BIG-041",
+              "ARCH-BIG-042",
+              "ARCH-BIG-043",
+              "ARCH-BIG-044",
+              "ARCH-BIG-045",
+              "ARCH-BIG-046",
+              "ARCH-BIG-047",
+              "ARCH-BIG-048",
+              "ARCH-BIG-049",
+              "ARCH-BIG-050",
+              "ARCH-BIG-051",
+              "ARCH-BIG-052",
+              "ARCH-BIG-053",
+              "ARCH-BIG-054",
+              "ARCH-BIG-055",
+              "ARCH-BIG-056",
+              "ARCH-BIG-057",
+              "ARCH-BIG-058",
+              "ARCH-BIG-059",
+              "ARCH-BIG-060",
+              "ARCH-BIG-061",
+              "ARCH-BIG-062",
+              "ARCH-BIG-063",
+              "ARCH-BIG-064",
+              "ARCH-BIG-065",
+              "ARCH-BIG-066",
+              "ARCH-BIG-067",
+              "ARCH-BIG-068",
+              "ARCH-BIG-069",
+              "ARCH-BIG-070",
+              "ARCH-BIG-071",
+              "ARCH-BIG-072",
+              "ARCH-BIG-073",
+              "ARCH-BIG-074",
+              "ARCH-BIG-075",
+              "ARCH-BIG-076",
+              "ARCH-BIG-077",
+              "ARCH-BIG-078",
+              "ARCH-BIG-079",
+              "ARCH-BIG-080",
+              "ARCH-BIG-081",
+              "ARCH-BIG-082",
+              "ARCH-BIG-083",
+              "ARCH-BIG-084",
+              "ARCH-BIG-085",
+              "ARCH-BIG-086",
+              "ARCH-BIG-087",
+              "ARCH-BIG-088",
+              "ARCH-BIG-089",
+              "ARCH-BIG-090",
+              "ARCH-BIG-091",
+              "ARCH-BIG-092",
+              "ARCH-BIG-093",
+              "ARCH-BIG-094",
+              "ARCH-BIG-095",
+              "ARCH-BIG-096",
+              "ARCH-BIG-097",
+              "ARCH-BIG-098",
+              "ARCH-BIG-099",
+              "ARCH-BIG-100",
+              "ARCH-BIG-101",
+              "ARCH-BIG-102",
+              "ARCH-BIG-103",
+              "ARCH-BIG-104",
+              "ARCH-BIG-105",
+              "ARCH-BIG-106",
+              "ARCH-BIG-107",
+              "ARCH-BIG-108",
+              "ARCH-BIG-109",
+              "ARCH-BIG-110",
+              "ARCH-BIG-111",
+              "ARCH-BIG-112",
+              "ARCH-BIG-113",
+              "ARCH-BIG-114",
+              "ARCH-BIG-115",
+              "ARCH-BIG-116",
+              "ARCH-BIG-117",
+              "ARCH-BIG-118",
+              "ARCH-BIG-119",
+              "ARCH-BIG-120",
+              "ARCH-BIG-121",
+              "ARCH-BIG-122",
+              "ARCH-BIG-123",
+              "ARCH-BIG-124",
+              "ARCH-BIG-125",
+              "ARCH-BIG-126",
+              "ARCH-BIG-127",
+              "ARCH-BIG-128",
+              "ARCH-BIG-129",
+              "ARCH-BIG-130",
+              "ARCH-BIG-131",
+              "ARCH-BIG-132",
+              "ARCH-BIG-133",
+              "ARCH-BIG-134",
+              "ARCH-BIG-135",
+              "ARCH-BIG-136",
+              "ARCH-BIG-137",
+              "ARCH-BIG-138",
+              "ARCH-BIG-139",
+              "ARCH-BIG-140",
+              "ARCH-BIG-141",
+              "ARCH-BIG-142",
+              "ARCH-BIG-143",
+              "ARCH-BIG-144",
+              "ARCH-BIG-145",
+              "ARCH-BIG-146",
+              "ARCH-BIG-147",
+              "ARCH-BIG-148",
+              "ARCH-BIG-149",
+              "ARCH-BIG-150",
+              "ARCH-BIG-151",
+              "ARCH-BIG-152",
+              "ARCH-BIG-153",
+              "ARCH-BIG-154",
+              "ARCH-BIG-155",
+              "ARCH-BIG-156",
+              "ARCH-BIG-157",
+              "ARCH-BIG-158",
+              "ARCH-BIG-159",
+              "ARCH-BIG-160",
+              "ARCH-BIG-161",
+              "ARCH-BIG-162",
+              "ARCH-BIG-163",
+              "ARCH-BIG-164",
+              "ARCH-BIG-165",
+              "ARCH-BIG-166",
+              "ARCH-BIG-167",
+              "ARCH-BIG-168",
+              "ARCH-BIG-169",
+              "ARCH-BIG-170",
+              "ARCH-BIG-171",
+              "ARCH-BIG-172",
+              "ARCH-BIG-173",
+              "ARCH-BIG-174",
+              "ARCH-BIG-175",
+              "ARCH-BIG-176",
+              "ARCH-BIG-177",
+              "ARCH-BIG-178",
+              "ARCH-BIG-179",
+              "ARCH-BIG-180",
+              "ARCH-BIG-181",
+              "ARCH-BIG-182",
+              "ARCH-BIG-183",
+              "ARCH-BIG-184",
+              "ARCH-BIG-185",
+              "ARCH-BIG-186",
+              "ARCH-BIG-187",
+              "ARCH-BIG-188",
+              "ARCH-BIG-189",
+              "ARCH-BIG-190",
+              "ARCH-BIG-191",
+              "ARCH-BIG-192",
+              "ARCH-BIG-193",
+              "ARCH-BIG-194",
+              "ARCH-BIG-195",
+              "ARCH-BIG-196",
+              "ARCH-BIG-197",
+              "ARCH-BIG-198",
+              "ARCH-BIG-199",
+              "ARCH-BIG-200",
+              "ARCH-BIG-201",
+              "ARCH-BIG-202",
+              "ARCH-BIG-203",
+              "ARCH-BIG-204",
+              "ARCH-BIG-205",
+              "ARCH-BIG-206",
+              "ARCH-BIG-207",
+              "ARCH-BIG-208",
+              "ARCH-BIG-209",
+              "ARCH-BIG-210",
+              "ARCH-BIG-211",
+              "ARCH-BIG-212",
+              "ARCH-BIG-213",
+              "ARCH-BIG-214",
+              "ARCH-BIG-215",
+              "ARCH-BIG-216",
+              "ARCH-BIG-217",
+              "ARCH-BIG-218",
+              "ARCH-BIG-219",
+              "ARCH-BIG-220",
+              "ARCH-BIG-221",
+              "ARCH-BIG-222",
+              "ARCH-BIG-223",
+              "ARCH-BIG-224",
+              "ARCH-BIG-225",
+              "ARCH-BIG-226",
+              "ARCH-BIG-227",
+              "ARCH-BIG-228",
+              "ARCH-BIG-229",
+              "ARCH-BIG-230",
+              "ARCH-BIG-231",
+              "ARCH-BIG-232",
+              "ARCH-BIG-233",
+              "ARCH-BIG-234",
+              "ARCH-BIG-235",
+              "ARCH-BIG-236",
+              "ARCH-BIG-237",
+              "ARCH-BIG-238",
+              "ARCH-BIG-239",
+              "ARCH-BIG-240",
+              "ARCH-BIG-241",
+              "ARCH-BIG-242",
+              "ARCH-BIG-243",
+              "ARCH-BIG-244",
+              "ARCH-BIG-245",
+              "ARCH-BIG-246",
+              "ARCH-BIG-247",
+              "ARCH-BIG-248",
+              "ARCH-BIG-249",
+              "ARCH-BIG-250",
+              "ARCH-BIG-251",
+              "ARCH-BIG-252",
+              "ARCH-BIG-253",
+              "ARCH-BIG-254",
+              "ARCH-BIG-255",
+              "ARCH-BIG-256",
+              "ARCH-BIG-257",
+              "ARCH-BIG-258",
+              "ARCH-BIG-259",
+              "ARCH-BIG-260",
+              "ARCH-BIG-261",
+              "ARCH-BIG-262",
+              "ARCH-BIG-263",
+              "ARCH-BIG-264",
+              "ARCH-BIG-265",
+              "ARCH-BIG-266",
+              "ARCH-BIG-267",
+              "ARCH-BIG-268",
+              "ARCH-BIG-269",
+              "ARCH-BIG-270",
+              "ARCH-BIG-271",
+              "ARCH-BIG-272",
+              "ARCH-BIG-273",
+              "ARCH-BIG-274",
+              "ARCH-BIG-275",
+              "ARCH-BIG-276",
+              "ARCH-BIG-277",
+              "ARCH-BIG-278",
+              "ARCH-BIG-279",
+              "ARCH-BIG-280",
+              "ARCH-BIG-281",
+              "ARCH-BIG-282",
+              "ARCH-BIG-283",
+              "ARCH-BIG-284",
+              "ARCH-BIG-285",
+              "ARCH-BIG-286",
+              "ARCH-BIG-287",
+              "ARCH-BIG-288",
+              "ARCH-BIG-289",
+              "ARCH-BIG-290",
+              "ARCH-BIG-291",
+              "ARCH-BIG-292",
+              "ARCH-BIG-293",
+              "ARCH-BIG-294",
+              "ARCH-BIG-295",
+              "ARCH-BIG-296",
+              "ARCH-BIG-297",
+              "ARCH-BIG-298",
+              "ARCH-BIG-299",
+              "ARCH-BIG-300",
+              "ARCH-BIG-301",
+              "ARCH-BIG-302",
+              "ARCH-BIG-303",
+              "ARCH-BIG-304",
+              "ARCH-BIG-305",
+              "ARCH-BIG-306",
+              "ARCH-BIG-307",
+              "ARCH-BIG-308",
+              "ARCH-BIG-309",
+              "ARCH-BIG-310",
+              "ARCH-BIG-311",
+              "ARCH-BIG-312",
+              "ARCH-BIG-313",
+              "ARCH-BIG-314",
+              "ARCH-BIG-315",
+              "ARCH-BIG-316",
+              "ARCH-BIG-317",
+              "ARCH-BIG-318",
+              "ARCH-BIG-319",
+              "ARCH-BIG-320",
+              "ARCH-BIG-321",
+              "ARCH-BIG-322",
+              "ARCH-BIG-323",
+              "ARCH-BIG-324",
+              "ARCH-BIG-325",
+              "ARCH-BIG-326",
+              "ARCH-BIG-327",
+              "ARCH-BIG-328",
+              "ARCH-BIG-329",
+              "ARCH-BIG-330",
+              "ARCH-BIG-331",
+              "ARCH-BIG-332",
+              "ARCH-BIG-333",
+              "ARCH-BIG-334",
+              "ARCH-BIG-335",
+              "ARCH-BIG-336",
+              "ARCH-BIG-337",
+              "ARCH-BIG-338",
+              "ARCH-BIG-339",
+              "ARCH-BIG-340",
+              "ARCH-BIG-341",
+              "ARCH-BIG-342",
+              "ARCH-BIG-343",
+              "ARCH-BIG-344",
+              "ARCH-BIG-345",
+              "ARCH-BIG-346",
+              "ARCH-BIG-347",
+              "ARCH-BIG-348",
+              "ARCH-BIG-349",
+              "ARCH-BIG-350",
+              "ARCH-BIG-351",
+              "ARCH-BIG-352",
+              "ARCH-BIG-353",
+              "ARCH-BIG-354",
+              "ARCH-BIG-355",
+              "ARCH-BIG-356",
+              "ARCH-BIG-357",
+              "ARCH-BIG-358",
+              "ARCH-BIG-359",
+              "ARCH-BIG-360",
+              "ARCH-BIG-361",
+              "ARCH-BIG-362",
+              "ARCH-BIG-363",
+              "ARCH-BIG-364",
+              "ARCH-BIG-365",
+              "ARCH-BIG-366",
+              "ARCH-BIG-367",
+              "ARCH-BIG-368",
+              "ARCH-BIG-369",
+              "ARCH-BIG-370",
+              "ARCH-BIG-371",
+              "ARCH-BIG-372",
+              "ARCH-BIG-373",
+              "ARCH-BIG-374",
+              "ARCH-BIG-375",
+              "ARCH-BIG-376",
+              "ARCH-BIG-377",
+              "ARCH-BIG-378",
+              "ARCH-BIG-379",
+              "ARCH-BIG-380",
+              "ARCH-BIG-381",
+              "ARCH-BIG-382",
+              "ARCH-BIG-383",
+              "ARCH-BIG-384",
+              "ARCH-BIG-385",
+              "ARCH-BIG-386",
+              "ARCH-BIG-387",
+              "ARCH-BIG-388",
+              "ARCH-BIG-389",
+              "ARCH-BIG-390",
+              "ARCH-BIG-391",
+              "ARCH-BIG-392",
+              "ARCH-BIG-393",
+              "ARCH-BIG-394",
+              "ARCH-BIG-395",
+              "ARCH-BIG-396",
+              "ARCH-BIG-397",
+              "ARCH-BIG-398",
+              "ARCH-BIG-399",
+              "ARCH-BIG-400",
+              "ARCH-BIG-401",
+              "ARCH-BIG-402",
+              "ARCH-BIG-403",
+              "ARCH-BIG-404",
+              "ARCH-BIG-405",
+              "ARCH-BIG-406",
+              "ARCH-BIG-407",
+              "ARCH-BIG-408",
+              "ARCH-BIG-409",
+              "ARCH-BIG-410",
+              "ARCH-BIG-411",
+              "ARCH-BIG-412",
+              "ARCH-BIG-413",
+              "ARCH-BIG-414",
+              "ARCH-BIG-415",
+              "ARCH-BIG-416",
+              "ARCH-BIG-417",
+              "ARCH-BIG-418",
+              "ARCH-BIG-419",
+              "ARCH-BIG-420",
+              "ARCH-BIG-421",
+              "ARCH-BIG-422",
+              "ARCH-BIG-423",
+              "ARCH-BIG-424",
+              "ARCH-BIG-425",
+              "ARCH-BIG-426",
+              "ARCH-BIG-427",
+              "ARCH-BIG-428",
+              "ARCH-BIG-429",
+              "ARCH-BIG-430",
+              "ARCH-BIG-431",
+              "ARCH-BIG-432",
+              "ARCH-BIG-433",
+              "ARCH-BIG-434",
+              "ARCH-BIG-435",
+              "ARCH-BIG-436",
+              "ARCH-BIG-437",
+              "ARCH-BIG-438",
+              "ARCH-BIG-439",
+              "ARCH-BIG-440",
+              "ARCH-BIG-441",
+              "ARCH-BIG-442",
+              "ARCH-BIG-443",
+              "ARCH-BIG-444",
+              "ARCH-BIG-445",
+              "ARCH-BIG-446",
+              "ARCH-BIG-447",
+              "ARCH-BIG-448",
+              "ARCH-BIG-449",
+              "ARCH-BIG-450",
+              "ARCH-BIG-451",
+              "ARCH-BIG-452",
+              "ARCH-BIG-453",
+              "ARCH-BIG-454",
+              "ARCH-BIG-455",
+              "ARCH-BIG-456",
+              "ARCH-BIG-457",
+              "ARCH-BIG-458",
+              "ARCH-BIG-459",
+              "ARCH-BIG-460",
+              "ARCH-BIG-461",
+              "ARCH-BIG-462",
+              "ARCH-BIG-463",
+              "ARCH-BIG-464",
+              "ARCH-BIG-465",
+              "ARCH-BIG-466",
+              "ARCH-BIG-467",
+              "ARCH-BIG-468",
+              "ARCH-BIG-469",
+              "ARCH-BIG-470",
+              "ARCH-BIG-471",
+              "ARCH-BIG-472",
+              "ARCH-BIG-473",
+              "ARCH-BIG-474",
+              "ARCH-BIG-475",
+              "ARCH-BIG-476",
+              "ARCH-BIG-477",
+              "ARCH-BIG-478",
+              "ARCH-BIG-479",
+              "ARCH-BIG-480",
+              "ARCH-BIG-481",
+              "ARCH-BIG-482",
+              "ARCH-BIG-483",
+              "ARCH-BIG-484",
+              "ARCH-BIG-485",
+              "ARCH-BIG-486",
+              "ARCH-BIG-487",
+              "ARCH-BIG-488",
+              "ARCH-BIG-489",
+              "ARCH-BIG-490",
+              "ARCH-BIG-491",
+              "ARCH-BIG-492",
+              "ARCH-BIG-493",
+              "ARCH-BIG-494",
+              "ARCH-BIG-495",
+              "ARCH-BIG-496",
+              "ARCH-BIG-497",
+              "ARCH-BIG-498",
+              "ARCH-BIG-499",
+              "ARCH-BIG-500",
+              "ARCH-BIG-501",
+              "ARCH-BIG-502",
+              "ARCH-BIG-503",
+              "ARCH-BIG-504",
+              "ARCH-BIG-505",
+              "ARCH-BIG-506",
+              "ARCH-BIG-507",
+              "ARCH-BIG-508",
+              "ARCH-BIG-509",
+              "ARCH-BIG-510",
+              "ARCH-BIG-511"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-BIG-000": "WO-CON-001"
+        },
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-001",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-002",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-003",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-004",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-005",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-006",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-007",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-008",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-009",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-010",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-011",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-012",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-013",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-014",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-015",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-016",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-017",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-018",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-019",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-020",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-021",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-022",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-023",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-024",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-025",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-026",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-027",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-028",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-029",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-030",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-031",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-032",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-033",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-034",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-035",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-036",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-037",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-038",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-039",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-040",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-041",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-042",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-043",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-044",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-045",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-046",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-047",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-048",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-049",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-050",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-051",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-052",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-053",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-054",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-055",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-056",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-057",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-058",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-059",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-060",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-061",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-062",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-063",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-064",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-065",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-066",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-067",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-068",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-069",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-070",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-071",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-072",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-073",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-074",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-075",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-076",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-077",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-078",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-079",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-080",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-081",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-082",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-083",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-084",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-085",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-086",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-087",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-088",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-089",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-090",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-091",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-092",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-093",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-094",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-095",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-096",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-097",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-098",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-099",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-100",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-101",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-102",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-103",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-104",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-105",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-106",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-107",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-108",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-109",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-110",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-111",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-112",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-113",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-114",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-115",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-116",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-117",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-118",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-119",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-120",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-121",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-122",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-123",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-124",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-125",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-126",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-127",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-128",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-129",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-130",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-131",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-132",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-133",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-134",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-135",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-136",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-137",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-138",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-139",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-140",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-141",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-142",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-143",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-144",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-145",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-146",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-147",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-148",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-149",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-150",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-151",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-152",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-153",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-154",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-155",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-156",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-157",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-158",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-159",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-160",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-161",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-162",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-163",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-164",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-165",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-166",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-167",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-168",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-169",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-170",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-171",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-172",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-173",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-174",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-175",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-176",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-177",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-178",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-179",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-180",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-181",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-182",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-183",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-184",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-185",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-186",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-187",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-188",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-189",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-190",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-191",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-192",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-193",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-194",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-195",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-196",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-197",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-198",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-199",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-200",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-201",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-202",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-203",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-204",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-205",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-206",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-207",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-208",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-209",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-210",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-211",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-212",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-213",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-214",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-215",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-216",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-217",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-218",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-219",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-220",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-221",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-222",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-223",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-224",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-225",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-226",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-227",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-228",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-229",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-230",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-231",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-232",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-233",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-234",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-235",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-236",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-237",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-238",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-239",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-240",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-241",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-242",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-243",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-244",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-245",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-246",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-247",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-248",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-249",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-250",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-251",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-252",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-253",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-254",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-255",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-256",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-257",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-258",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-259",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-260",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-261",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-262",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-263",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-264",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-265",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-266",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-267",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-268",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-269",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-270",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-271",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-272",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-273",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-274",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-275",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-276",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-277",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-278",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-279",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-280",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-281",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-282",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-283",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-284",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-285",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-286",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-287",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-288",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-289",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-290",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-291",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-292",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-293",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-294",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-295",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-296",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-297",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-298",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-299",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-300",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-301",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-302",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-303",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-304",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-305",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-306",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-307",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-308",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-309",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-310",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-311",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-312",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-313",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-314",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-315",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-316",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-317",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-318",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-319",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-320",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-321",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-322",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-323",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-324",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-325",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-326",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-327",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-328",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-329",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-330",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-331",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-332",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-333",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-334",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-335",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-336",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-337",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-338",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-339",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-340",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-341",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-342",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-343",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-344",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-345",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-346",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-347",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-348",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-349",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-350",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-351",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-352",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-353",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-354",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-355",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-356",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-357",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-358",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-359",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-360",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-361",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-362",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-363",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-364",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-365",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-366",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-367",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-368",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-369",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-370",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-371",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-372",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-373",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-374",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-375",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-376",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-377",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-378",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-379",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-380",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-381",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-382",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-383",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-384",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-385",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-386",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-387",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-388",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-389",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-390",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-391",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-392",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-393",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-394",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-395",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-396",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-397",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-398",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-399",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-400",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-401",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-402",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-403",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-404",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-405",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-406",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-407",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-408",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-409",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-410",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-411",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-412",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-413",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-414",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-415",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-416",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-417",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-418",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-419",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-420",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-421",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-422",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-423",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-424",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-425",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-426",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-427",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-428",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-429",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-430",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-431",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-432",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-433",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-434",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-435",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-436",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-437",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-438",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-439",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-440",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-441",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-442",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-443",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-444",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-445",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-446",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-447",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-448",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-449",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-450",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-451",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-452",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-453",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-454",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-455",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-456",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-457",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-458",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-459",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-460",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-461",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-462",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-463",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-464",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-465",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-466",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-467",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-468",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-469",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-470",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-471",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-472",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-473",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-474",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-475",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-476",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-477",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-478",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-479",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-480",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-481",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-482",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-483",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-484",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-485",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-486",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-487",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-488",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-489",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-490",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-491",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-492",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-493",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-494",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-495",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-496",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-497",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-498",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-499",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-500",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-501",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-502",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-503",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-504",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-505",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-506",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-507",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-508",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-509",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-510",
+            "reason": "no artifact has this identifier"
+          },
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-BIG-511",
+            "reason": "no artifact has this identifier"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "duplicate_members_resolve_once",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001",
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-001": "WO-CON-001"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "empty_declaration_resolves_nothing_and_is_not_a_defect",
+      "rule": "2",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": []
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "declaration_in_an_unapproved_work_order_resolves_nothing",
+      "rule": "3",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": false,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": null,
+            "reason": "declaring work order has no draft-to-approved lifecycle event"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "unapproved_empty_declaration_is_not_a_defect",
+      "rule": "3",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": false,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": []
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "invalid_identifier_reason",
+      "rule": "4",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "arch-new-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "arch-new-001",
+            "reason": "invalid architecture identifier"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "unknown_architecture_reason",
+      "rule": "4",
+      "artifacts": [],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-GHOST-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-GHOST-001",
+            "reason": "no artifact has this identifier"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "ambiguous_architecture_reason",
+      "rule": "4",
+      "artifacts": [
+        {
+          "id": "ARCH-TWIN-001",
+          "type": "architecture",
+          "assessed": false
+        },
+        {
+          "id": "ARCH-TWIN-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-TWIN-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-TWIN-001",
+            "reason": "more than one artifact has this identifier"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "target_is_not_an_architecture_reason",
+      "rule": "4",
+      "artifacts": [
+        {
+          "id": "ARCH-FAKE-001",
+          "type": "requirement",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-FAKE-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-FAKE-001",
+            "reason": "declared artifact is not an architecture"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "already_assessed_reason",
+      "rule": "4",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": true
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-NEW-001",
+            "reason": "architecture already carries a decision_assessment"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "completed_status_alone_does_not_exempt",
+      "rule": "5",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false,
+          "status": "implemented"
+        }
+      ],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "draft_status_does_not_block_a_declared_exemption",
+      "rule": "5",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false,
+          "status": "draft"
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-001": "WO-CON-001"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "every_completed_status_resolves_identically",
+      "rule": "5",
+      "artifacts": [
+        {
+          "id": "ARCH-AAA-001",
+          "type": "architecture",
+          "assessed": false,
+          "status": "implemented"
+        },
+        {
+          "id": "ARCH-BBB-001",
+          "type": "architecture",
+          "assessed": false,
+          "status": "verified"
+        },
+        {
+          "id": "ARCH-CCC-001",
+          "type": "architecture",
+          "assessed": false,
+          "status": "released"
+        }
+      ],
+      "work_orders": [],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-AAA-001",
+          "ARCH-BBB-001",
+          "ARCH-CCC-001"
+        ]
+      }
+    },
+    {
+      "name": "stale_member_is_reported_beside_a_resolving_member",
+      "rule": "7",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        },
+        {
+          "id": "ARCH-OLD-001",
+          "type": "architecture",
+          "assessed": true
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001",
+              "ARCH-OLD-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-001": "WO-CON-001"
+        },
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-OLD-001",
+            "reason": "architecture already carries a decision_assessment"
+          }
+        ],
+        "enforced": []
+      }
+    },
+    {
+      "name": "unresolved_declaration_leaves_the_architecture_enforced",
+      "rule": "7",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-GHOST-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": "ARCH-GHOST-001",
+            "reason": "no artifact has this identifier"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "unauthoritative_packet_schema_is_undeclared",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-something-else-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "unauthoritative_packet_scope_is_undeclared",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "some-other-scope",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "packet_without_the_declaration_field_is_undeclared",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "some_other_field": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "absent_packet_is_undeclared",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": null
+        }
+      ],
+      "expected": {
+        "exemptions": {},
+        "defects": [],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "a_defective_declaration_does_not_stop_another_work_order_resolving",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        },
+        {
+          "id": "ARCH-NEW-002",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": "not-an-array"
+          }
+        },
+        {
+          "id": "WO-CON-002",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-002"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-002": "WO-CON-002"
+        },
+        "defects": [
+          {
+            "work_order": "WO-CON-001",
+            "architecture": null,
+            "reason": "declaration must be an array of strings"
+          }
+        ],
+        "enforced": [
+          "ARCH-NEW-001"
+        ]
+      }
+    },
+    {
+      "name": "first_declaring_work_order_wins_by_identifier_order",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-NEW-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-002",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        },
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-NEW-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-NEW-001": "WO-CON-001"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    },
+    {
+      "name": "the_frozen_set_never_overrides_a_declaring_work_order",
+      "rule": "8",
+      "artifacts": [
+        {
+          "id": "ARCH-REV-001",
+          "type": "architecture",
+          "assessed": false
+        }
+      ],
+      "work_orders": [
+        {
+          "id": "WO-CON-001",
+          "approved": true,
+          "definition_generation": {
+            "schema": "se-harness-definition-generation-v1",
+            "scope": "architecture-decision-assessment",
+            "legacy_architectures_without_decision_assessment": [
+              "ARCH-REV-001"
+            ]
+          }
+        }
+      ],
+      "expected": {
+        "exemptions": {
+          "ARCH-REV-001": "WO-CON-001"
+        },
+        "defects": [],
+        "enforced": []
+      }
+    }
+  ]
+}

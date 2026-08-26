@@ -18,7 +18,7 @@ from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
-from typing import Any, Iterable
+from typing import Any, Iterable, Mapping
 
 try:
     import tomllib
@@ -84,6 +84,45 @@ LEGACY_EVIDENCE_DECLARATION_FIELD = "legacy_releases_without_evaluator_evidence"
 MAX_DECLARED_LEGACY_RELEASES = 512
 RELEASE_RECORD_ID_PATTERN = re.compile(r"^RLS-[A-Z][A-Z0-9-]*-\d{3}$")
 CANONICAL_TIMESTAMP_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+# Architecture-generation exemption, per SPEC-DLC-001. This frozen set holds the
+# self-hosting repository's own architectures, authored before decision_assessment
+# existed. Rule DLC-GEN-001 closes it: no identifier is ever added, and every other
+# exemption is declared under rule DLC-GEN-002 in an approved work order's
+# [definition_generation] packet. No rule here reads an architecture's status.
+ARCHITECTURES_WITHOUT_DECISION_ASSESSMENT = frozenset(
+    {
+        "ARCH-AGR-001",
+        "ARCH-DST-001",
+        "ARCH-DST-002",
+        "ARCH-DST-003",
+        "ARCH-DST-004",
+        "ARCH-DST-005",
+        "ARCH-IAR-001",
+        "ARCH-IAR-002",
+        "ARCH-IAR-003",
+        "ARCH-PMI-001",
+        "ARCH-PYP-001",
+        "ARCH-REV-001",
+        "ARCH-VSP-001",
+        "ARCH-WLC-001",
+    }
+)
+DEFINITION_GENERATION_SCHEMA = "se-harness-definition-generation-v1"
+DEFINITION_GENERATION_SCOPE = "architecture-decision-assessment"
+DEFINITION_GENERATION_PACKET = "definition_generation"
+GENERATION_EXEMPTION_DECLARATION_FIELD = "legacy_architectures_without_decision_assessment"
+MAX_DECLARED_GENERATION_EXEMPTIONS = 512
+ARCHITECTURE_ID_PATTERN = re.compile(r"^ARCH-[A-Z][A-Z0-9-]*-\d{3}$")
+GENERATION_REASON_DECLARATION_SHAPE = "declaration must be an array of strings"
+GENERATION_REASON_DECLARATION_SIZE = (
+    f"declaration exceeds {MAX_DECLARED_GENERATION_EXEMPTIONS} entries"
+)
+GENERATION_REASON_NO_APPROVAL = "declaring work order has no draft-to-approved lifecycle event"
+GENERATION_REASON_INVALID_ID = "invalid architecture identifier"
+GENERATION_REASON_UNKNOWN_ARCHITECTURE = "no artifact has this identifier"
+GENERATION_REASON_AMBIGUOUS_ARCHITECTURE = "more than one artifact has this identifier"
+GENERATION_REASON_NOT_ARCHITECTURE = "declared artifact is not an architecture"
+GENERATION_REASON_ALREADY_ASSESSED = "architecture already carries a decision_assessment"
 AGENTIC_DELEGATION_SCHEMA = "se-harness-agentic-delegation-v1"
 AGENTIC_DELEGATION_FIELDS = {
     "schema",
@@ -292,7 +331,11 @@ DECISION_TRIGGERS = {
     "difficult-to-reverse",
     "material-alternatives",
 }
-LEGACY_ARCHITECTURE_STATUSES = {"implemented", "verified", "released"}
+# The deprecated `constrains` traceability rule keeps the completed-status gate it
+# has always had. SPEC-DLC-001 rule DLC-GEN-005 removes the status input from the
+# decision assessment only; the `W015` deprecation finding is a separate rule with
+# unchanged behaviour, so the set survives under a name scoped to its one reader.
+_CONSTRAINS_COMPLETED_STATUSES = {"implemented", "verified", "released"}
 MAX_ASSESSMENT_RATIONALE_LENGTH = 2000
 MAX_ASSESSOR_LENGTH = 128
 WORK_ORDER_ASSURANCE_VALUES = {"required", "not_required"}
@@ -1777,6 +1820,176 @@ def resolve_legacy_release_evidence(
     }
 
 
+def _generation_declaration(work_order: dict[str, Any]) -> Any:
+    """Return an authoritative packet's declaration value, or the undeclared sentinel."""
+
+    packet = work_order.get(DEFINITION_GENERATION_PACKET)
+    if not isinstance(packet, dict):
+        return _LEGACY_UNDECLARED
+    if (
+        packet.get("schema") != DEFINITION_GENERATION_SCHEMA
+        or packet.get("scope") != DEFINITION_GENERATION_SCOPE
+    ):
+        return _LEGACY_UNDECLARED
+    if GENERATION_EXEMPTION_DECLARATION_FIELD not in packet:
+        return _LEGACY_UNDECLARED
+    return packet[GENERATION_EXEMPTION_DECLARATION_FIELD]
+
+
+def _generation_unassessed(artifact: dict[str, Any]) -> bool:
+    return artifact.get("type") == "architecture" and not artifact.get("assessed")
+
+
+def _generation_member_defect(
+    member: str,
+    by_id: dict[str, list[dict[str, Any]]],
+) -> str | None:
+    """Return why a declared member does not resolve, or None when it does."""
+
+    if ARCHITECTURE_ID_PATTERN.fullmatch(member) is None:
+        return GENERATION_REASON_INVALID_ID
+    matches = by_id.get(member, [])
+    if not matches:
+        return GENERATION_REASON_UNKNOWN_ARCHITECTURE
+    if len(matches) > 1:
+        return GENERATION_REASON_AMBIGUOUS_ARCHITECTURE
+    artifact = matches[0]
+    if artifact.get("type") != "architecture":
+        return GENERATION_REASON_NOT_ARCHITECTURE
+    if artifact.get("assessed"):
+        return GENERATION_REASON_ALREADY_ASSESSED
+    return None
+
+
+def resolve_definition_generation(
+    artifacts: list[dict[str, Any]],
+    work_orders: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Resolve declared architecture-generation exemptions, per SPEC-DLC-001.
+
+    This mirrors `se_harness.definition_generation.resolve`. The two implementations
+    exist because this script must run standalone inside a consumer repository; their
+    agreement is asserted against a shared committed vector fixture.
+
+    No architecture's lifecycle status is an input. Rule DLC-GEN-005 removed that
+    inference, and an unresolvable declaration fails closed into a reported defect
+    rather than into a silent exemption.
+    """
+
+    by_id: dict[str, list[dict[str, Any]]] = {}
+    for artifact in artifacts:
+        identifier = artifact.get("id")
+        if isinstance(identifier, str) and identifier:
+            by_id.setdefault(identifier, []).append(artifact)
+
+    exemptions: dict[str, str] = {}
+    defects: list[dict[str, Any]] = []
+    for work_order in sorted(work_orders, key=lambda item: str(item.get("id", ""))):
+        identifier = work_order.get("id")
+        if not isinstance(identifier, str) or not identifier:
+            continue
+        declaration = _generation_declaration(work_order)
+        if declaration is _LEGACY_UNDECLARED:
+            continue
+        if not isinstance(declaration, list) or not all(
+            isinstance(member, str) for member in declaration
+        ):
+            defects.append(
+                {
+                    "work_order": identifier,
+                    "architecture": None,
+                    "reason": GENERATION_REASON_DECLARATION_SHAPE,
+                }
+            )
+            continue
+        if len(declaration) > MAX_DECLARED_GENERATION_EXEMPTIONS:
+            defects.append(
+                {
+                    "work_order": identifier,
+                    "architecture": None,
+                    "reason": GENERATION_REASON_DECLARATION_SIZE,
+                }
+            )
+            continue
+        if not declaration:
+            continue
+        if not work_order.get("approved"):
+            defects.append(
+                {
+                    "work_order": identifier,
+                    "architecture": None,
+                    "reason": GENERATION_REASON_NO_APPROVAL,
+                }
+            )
+            continue
+        for member in sorted(set(declaration)):
+            reason = _generation_member_defect(member, by_id)
+            if reason is not None:
+                defects.append(
+                    {"work_order": identifier, "architecture": member, "reason": reason}
+                )
+                continue
+            exemptions.setdefault(member, identifier)
+
+    for identifier in sorted(ARCHITECTURES_WITHOUT_DECISION_ASSESSMENT):
+        matches = by_id.get(identifier, [])
+        if len(matches) == 1 and _generation_unassessed(matches[0]):
+            exemptions.setdefault(identifier, SELF_HOSTING_DECLARER)
+
+    enforced = sorted(
+        identifier
+        for identifier, matches in by_id.items()
+        if identifier not in exemptions
+        and len(matches) == 1
+        and _generation_unassessed(matches[0])
+    )
+    return {
+        "exemptions": dict(sorted(exemptions.items())),
+        "defects": sorted(
+            defects,
+            key=lambda item: (item["work_order"], item["architecture"] or "", item["reason"]),
+        ),
+        "enforced": enforced,
+    }
+
+
+def _generation_approved(artifact: Artifact) -> bool:
+    """Return whether a recorded draft-to-approved lifecycle event is present."""
+
+    events = artifact.metadata.get("lifecycle_events")
+    if not isinstance(events, list):
+        return False
+    return any(
+        isinstance(event, dict)
+        and event.get("from") == "draft"
+        and event.get("to") == "approved"
+        for event in events
+    )
+
+
+def definition_generation_state(artifacts: list[Artifact]) -> dict[str, Any]:
+    """Resolve declared architecture-generation exemptions from the artifact graph."""
+
+    views = [
+        {
+            "id": artifact.artifact_id,
+            "type": artifact.artifact_type,
+            "assessed": artifact.metadata.get("decision_assessment") is not None,
+        }
+        for artifact in artifacts
+    ]
+    work_orders = [
+        {
+            "id": artifact.artifact_id,
+            "approved": _generation_approved(artifact),
+            DEFINITION_GENERATION_PACKET: artifact.metadata.get(DEFINITION_GENERATION_PACKET),
+        }
+        for artifact in artifacts
+        if artifact.artifact_type == "work_order"
+    ]
+    return resolve_definition_generation(views, work_orders)
+
+
 def _legacy_approved_at(artifact: Artifact) -> str | None:
     """Return the last draft-to-approved decision instant, or None."""
 
@@ -2815,7 +3028,7 @@ def architecture_traceability_state(
                         f"legacy target '{target_id}' has unsupported type '{target.artifact_type}'"
                     )
             state = "dual_declared"
-    elif legacy_present and artifact.status in LEGACY_ARCHITECTURE_STATUSES:
+    elif legacy_present and artifact.status in _CONSTRAINS_COMPLETED_STATUSES:
         target_types = {
             catalog[target_id].artifact_type
             for target_id in legacy_targets
@@ -2889,8 +3102,22 @@ def validate_architecture_traceability(
     return errors, warnings
 
 
-def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
-    """Return a deterministic, non-authoritative architecture assessment state."""
+def decision_assessment_state(
+    artifact: Artifact,
+    declared_exemptions: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Return a deterministic, non-authoritative architecture assessment state.
+
+    An architecture with no `decision_assessment` is exempt only through the frozen
+    self-hosting set or through `declared_exemptions`, the resolved mapping from
+    `definition_generation_state`. Its lifecycle status is not an input: SPEC-DLC-001
+    rule DLC-GEN-005 removed that inference.
+
+    `declared_exemptions` is optional so that a caller holding no resolved graph still
+    gets the frozen set, which is a closed constant and needs no graph. Omitting it
+    therefore never invents an exemption; it only withholds declaration-sourced ones,
+    which fails closed.
+    """
 
     raw = artifact.metadata.get("decision_assessment")
     if artifact.artifact_type != "architecture":
@@ -2900,17 +3127,26 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
             "triggers": [],
             "rationale": None,
             "assessed_by": None,
+            "exempt_source": None,
             "issues": ["decision_assessment is allowed only on architecture artifacts"] if raw is not None else [],
         }
     if raw is None:
-        legacy = artifact.status in LEGACY_ARCHITECTURE_STATUSES
+        exempt_source = None
+        if declared_exemptions is not None:
+            exempt_source = declared_exemptions.get(artifact.artifact_id)
+        if exempt_source is None and artifact.artifact_id in ARCHITECTURES_WITHOUT_DECISION_ASSESSMENT:
+            exempt_source = SELF_HOSTING_DECLARER
         return {
-            "state": "legacy_missing" if legacy else "missing",
+            # The state name predates the declaration and is retained so that every
+            # non-authoritative projection of it keeps reading. `exempt_source` is the
+            # field that names why the architecture is exempt.
+            "state": "legacy_missing" if exempt_source else "missing",
             "outcome": None,
             "triggers": [],
             "rationale": None,
             "assessed_by": None,
-            "issues": [] if legacy else ["architecture decision assessment is required"],
+            "exempt_source": exempt_source,
+            "issues": [] if exempt_source else ["architecture decision assessment is required"],
         }
     if not isinstance(raw, dict):
         return {
@@ -2919,6 +3155,7 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
             "triggers": [],
             "rationale": None,
             "assessed_by": None,
+            "exempt_source": None,
             "issues": ["decision_assessment must be a TOML table"],
         }
 
@@ -2974,6 +3211,7 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
         "triggers": sorted(set(triggers)),
         "rationale": rationale,
         "assessed_by": assessed_by,
+        "exempt_source": None,
         "issues": issues,
     }
 
@@ -3308,8 +3546,29 @@ def validate_decision_assessments(
         for architecture_id in _relation_targets(decision, "decides"):
             active_decisions_by_architecture.setdefault(architecture_id, set()).add(decision.artifact_id)
 
+    generation = definition_generation_state(artifacts)
+    declared_exemptions = generation["exemptions"]
+    work_orders_by_id = {
+        artifact.artifact_id: artifact
+        for artifact in artifacts
+        if artifact.artifact_type == "work_order"
+    }
+    for defect in generation["defects"]:
+        declarer = work_orders_by_id.get(defect["work_order"])
+        if declarer is None:
+            continue
+        subject = f" '{defect['architecture']}'" if defect["architecture"] else ""
+        _add_error(
+            errors,
+            declarer,
+            report_root,
+            "E012",
+            f"{GENERATION_EXEMPTION_DECLARATION_FIELD}{subject}: {defect['reason']}",
+            plane="governance",
+        )
+
     for artifact in artifacts:
-        assessment = decision_assessment_state(artifact)
+        assessment = decision_assessment_state(artifact, declared_exemptions)
         if artifact.artifact_type != "architecture":
             for issue in assessment["issues"]:
                 _add_error(
@@ -3340,7 +3599,8 @@ def validate_decision_assessments(
                 Diagnostic(
                     _display_path(artifact.path, report_root),
                     "W014",
-                    "completed legacy architecture has no decision_assessment; migrate during the compatibility window",
+                    f"architecture has no decision_assessment and is exempt through "
+                    f"{assessment['exempt_source']}; the assessment remains outstanding",
                     "maintenance",
                 )
             )

@@ -39,6 +39,13 @@ stop_before = [
   "action-time-authorization-required",
 ]
 
+# Optional. Delete this entire table unless this work order declares that a named
+# architecture authored before the decision-assessment contract stays exempt from it.
+[definition_generation]
+schema = "se-harness-definition-generation-v1"
+scope = "architecture-decision-assessment"
+legacy_architectures_without_decision_assessment = ["ARCH-xxx"]
+
 [relations]
 implements = ["REQ-xxx"]
 specifications = ["SPEC-xxx"]
@@ -66,6 +73,17 @@ evidence path within execution_scope.paths, use only managed decision rights,
 evaluator operations, logical profiles, and roles, and set a bounded UTC
 expiry. The exact released evaluator still derives a narrower, short-lived
 envelope from fresh live state for each request.
+
+The optional definition_generation table declares an exemption; it does not grant
+one by lifecycle status. Delete the table unless this work order is the accountable
+record for architectures authored before `decision_assessment` existed. When
+retained, this work order must itself be approved, and every named identifier must
+be an architecture in the graph that carries no `decision_assessment`. A named
+architecture that has since gained one, or that no artifact declares, is reported
+against this work order rather than silently ignored. An exempt architecture still
+raises a standing maintenance warning: the assessment remains outstanding, and
+nothing here removes it. A new architecture is never declared here; it carries a
+real assessment.
 
 Add `architecture = ["ARCH-xxx", "ADR-xxx"]` under `[relations]` when architecture applies. The relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
 

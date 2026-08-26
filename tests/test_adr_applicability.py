@@ -20,6 +20,20 @@ from generate_harness_dashboard import generate_snapshot  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
 
 
+def candidate_validator():
+    """The distributed template validator, which leads the released root copy.
+
+    `validate_repository` above is imported from this repository's root managed
+    `scripts/`, which belongs to the released version and still carries the
+    lifecycle-status proxy. Assertions about candidate behaviour must use the
+    template the package distributes.
+    """
+
+    from se_harness.preflight import _load_validator_module
+
+    return _load_validator_module()
+
+
 SIGNIFICANT_ASSESSMENT = {
     "outcome": "adr_required",
     "triggers": ["system-boundary", "data-ownership-or-persistence"],
@@ -46,6 +60,7 @@ def formal(
     *,
     assessment: dict[str, object] | None = None,
     assessment_raw: str | None = None,
+    trailer: str = "",
 ) -> str:
     lines = [
         "+++",
@@ -89,6 +104,8 @@ def formal(
         )
     elif assessment_raw is not None:
         lines.extend(["", "[decision_assessment]", assessment_raw])
+    if trailer:
+        lines.extend(["", trailer.strip("\n")])
     lines.extend(["+++", "", f"# {artifact_type}: {artifact_id}", ""])
     return "\n".join(lines)
 
@@ -123,6 +140,7 @@ class AdrApplicabilityTests(unittest.TestCase):
         selected_adrs: list[str] | None = None,
         second_architecture: bool = False,
         shared_adr: bool = False,
+        declare_generation: list[str] | None = None,
     ) -> None:
         base = "docs/engineering/product"
         self.write(f"{base}/intent/INT-ADR-001.md", formal("INT-ADR-001", "intent", "approved", {}))
@@ -177,6 +195,24 @@ class AdrApplicabilityTests(unittest.TestCase):
                 formal("ADR-ADR-002", "adr", "approved", {"decides": ["ARCH-ADR-002"]}),
             )
         selected = selected_adrs if selected_adrs is not None else ["ADR-ADR-001"]
+        trailer = ""
+        if declare_generation is not None:
+            # SPEC-DLC-001: an architecture-generation exemption is declared in an
+            # approved work order, never inferred from the architecture's status.
+            trailer = "\n".join(
+                [
+                    "[definition_generation]",
+                    'schema = "se-harness-definition-generation-v1"',
+                    'scope = "architecture-decision-assessment"',
+                    f"legacy_architectures_without_decision_assessment = {_array(declare_generation)}",
+                    "",
+                    "[[lifecycle_events]]",
+                    'from = "draft"',
+                    'to = "approved"',
+                    'decided_at = "2026-08-12T00:00:00Z"',
+                    'decided_by = "engineering-owner"',
+                ]
+            )
         self.write(
             f"{base}/work-orders/WO-ADR-001.md",
             formal(
@@ -189,6 +225,7 @@ class AdrApplicabilityTests(unittest.TestCase):
                     "architecture": [*architecture_ids, *selected],
                     "verification": ["VER-ADR-001"],
                 },
+                trailer=trailer,
             ),
         )
 
@@ -298,11 +335,18 @@ class AdrApplicabilityTests(unittest.TestCase):
         self.assertIn("[W018]", output)
         self.assertIn("ARCH-ADR-001", output)
 
-    def test_completed_legacy_architecture_requires_existing_selected_adr(self) -> None:
-        self.build_chain(assessment=None, architecture_status="implemented")
-        report = validate_repository(self.root)
-        self.assertTrue(report.valid)
-        self.assertIn("W014", {item.code for item in report.warnings})
+    def test_declared_generation_exemption_requires_existing_selected_adr(self) -> None:
+        """SPEC-DLC-001: the exemption comes from the declaration, and still needs an ADR."""
+
+        self.build_chain(
+            assessment=None,
+            architecture_status="implemented",
+            declare_generation=["ARCH-ADR-001"],
+        )
+        report = candidate_validator().validate_repository(self.root)
+        self.assertTrue(report.valid, [item.message for item in report.errors])
+        warnings = {item.code for item in report.warnings}
+        self.assertIn("W014", warnings)
         self.assertEqual(0, self.preflight()[0])
 
         work_order = self.root / "docs/engineering/product/work-orders/WO-ADR-001.md"
@@ -316,6 +360,14 @@ class AdrApplicabilityTests(unittest.TestCase):
         code, output, _ = self.preflight()
         self.assertEqual(1, code)
         self.assertIn("[W019]", output)
+
+    def test_completed_status_alone_no_longer_exempts_an_architecture(self) -> None:
+        """The removed proxy: `implemented` is no longer an exemption of its own."""
+
+        self.build_chain(assessment=None, architecture_status="implemented")
+        report = candidate_validator().validate_repository(self.root)
+        self.assertIn("E014", {item.code for item in report.errors})
+        self.assertNotIn("W014", {item.code for item in report.warnings})
 
     def test_ongoing_architecture_cannot_use_legacy_exception(self) -> None:
         for status in ("draft", "approved", "in_progress"):

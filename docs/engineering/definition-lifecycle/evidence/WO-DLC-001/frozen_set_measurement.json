@@ -1,0 +1,25 @@
+{
+  "schema": "se-harness-definition-generation-measurement-v1",
+  "specification": "SPEC-DLC-001",
+  "rule": "DLC-GEN-001",
+  "criterion": "an architecture with no decision_assessment table, whose status was one of implemented, verified, released; that is, exactly what the removed lifecycle-status proxy exempted",
+  "architectures": 65,
+  "architectures_with_decision_assessment": 51,
+  "architectures_without_decision_assessment": [
+    "ARCH-AGR-001",
+    "ARCH-DST-001",
+    "ARCH-DST-002",
+    "ARCH-DST-003",
+    "ARCH-DST-004",
+    "ARCH-DST-005",
+    "ARCH-IAR-001",
+    "ARCH-IAR-002",
+    "ARCH-IAR-003",
+    "ARCH-PMI-001",
+    "ARCH-PYP-001",
+    "ARCH-REV-001",
+    "ARCH-VSP-001",
+    "ARCH-WLC-001"
+  ],
+  "unassessed_with_an_ongoing_status": []
+}
