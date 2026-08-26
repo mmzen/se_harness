@@ -60,6 +60,16 @@ exclusion branch does not create it.
    The proof is the local execution of the extracted branch through the
    unchanged generation step.
 
+## Deviation acceptances
+
+Recorded on 2026-08-27 from the owner's interactive answer, before the
+completion decision. This is the owner's statement; the assurance decision on
+the verification record remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - no new test; the extracted branch executed through the generation step is the proof | Accept: a fixture case follows under a later work order. |
+
 ## Complete changed-path set
 
 ```
