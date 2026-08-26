@@ -1,0 +1,11 @@
+{
+  "schema": "se-harness-effect-verifier-vectors-v1",
+  "bundle": {
+    "sha256": "1f248a687d30bf62d191ca8e82dfaebe9dcab2b2a6697b59a3c7177f3d254c74",
+    "canonical": "{\"changes\":[{\"after\":{\"object\":\"objects/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"size\":1},\"before\":null,\"operation\":\"create\",\"path\":\"docs/new.txt\"}],\"identity\":{\"envelope_sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"repository_state_before\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"work_order\":\"WO-AEX-006\"},\"schema\":\"se-harness-change-bundle-v1\"}\n"
+  },
+  "receipt": {
+    "sha256": "c50898b05446fcd5f7d427bbb1d48d446dded7b4e848da18cf7b4f67bb7ccf3f",
+    "canonical": "{\"entries\":[{\"after_sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"before_sha256\":null,\"operation\":\"create\",\"path\":\"docs/new.txt\",\"result\":\"applied\"}],\"identity\":{\"bundle_sha256\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"envelope_sha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"evaluator\":{\"launcher_sha256\":\"5555555555555555555555555555555555555555555555555555555555555555\",\"package\":\"se-harness\",\"payload_sha256\":\"4444444444444444444444444444444444444444444444444444444444444444\",\"version\":\"0.7.0\"},\"nonce_sha256\":\"3333333333333333333333333333333333333333333333333333333333333333\",\"work_order\":\"WO-AEX-006\"},\"journal\":{\"state\":\"committed\"},\"operation\":\"change-bundle-apply\",\"schema\":\"se-harness-effect-receipt-v1\",\"state\":{\"previous_receipt_sha256\":null,\"state_after\":\"7777777777777777777777777777777777777777777777777777777777777777\",\"state_before\":\"6666666666666666666666666666666666666666666666666666666666666666\",\"transaction_id\":\"88888888888888888888888888888888\"},\"timing\":{\"completed_at\":\"2026-08-25T10:00:01Z\",\"started_at\":\"2026-08-25T10:00:00Z\"},\"validation\":{\"deviations\":[],\"evidence\":[],\"gates\":[{\"id\":\"live-admission\",\"status\":\"pass\"}]}}\n"
+  }
+}

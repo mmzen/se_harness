@@ -362,19 +362,19 @@ The packet selects one exact-evaluator-owned path: stable live observation,
 formal maximum delegation, one ephemeral envelope per effect, isolated worker
 proposals, canonical content-addressed change bundles, a journaled target effect
 broker, receipt-linked state, delegated work-order start/completion, and VREC
-preparation. It stops at independent assurance. `WO-AEX-005` has separately
-started and is `in_progress`; the other three work orders remain approved and
-must proceed sequentially. This note does not complete, verify, release, or
-activate any of them.
+preparation. It stops at independent assurance. `WO-AEX-005` is implemented
+and commit-bound verified. `WO-AEX-006` has separately started and is
+`in_progress`; the other two work orders remain approved and must proceed
+sequentially. This note does not complete, verify, release, or activate the
+current candidate.
 
-The current `WO-AEX-005` candidate implements live observation and authority
-derivation without a target-effect callback. Its focused tests and all other
-repository tests pass. One legacy test still requires candidate and released
-work-order templates to be byte-identical, while the approved work order
-requires only the candidate template to add the optional delegation table and
-forbids editing the released root copy. Resolving that test-contract conflict
-requires a revised declared path or governing direction before the work order
-can reach its completion checkpoint.
+The current `WO-AEX-006` candidate consumes the verified live-observation and
+admission interfaces without creating another authority path. It constructs
+byte-only content-addressed bundles externally and applies admitted
+regular-file changes through one checksum-bound journal, exact rollback, or
+explicit recovery stop. Candidate tests include real child-process
+interruption and restart recovery. Commit-bound independent assurance remains
+required before the broker can support later workflow integration.
 
 ### Objective
 
@@ -566,18 +566,15 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-The governed `WO-AEX-005` compatibility-test amendment is applied, the exact
-working-tree verification set and handoff gate are green, and the work order is
-`implemented`. The next step is to prepare one ready verification record
-against the clean exact candidate commit. An assurance owner must decide that
-record independently; preparation does not verify the work order.
+`WO-AEX-005` is independently verified and `WO-AEX-006` is in progress. The
+immediate next step is to finish the exact broker verification matrix and run
+the governed implementation handoff. An engineering owner must separately
+decide whether to mark the work order implemented; later independent assurance
+must bind an exact candidate commit.
 
-After `WO-AEX-005` is independently verified at an exact candidate commit, the
-engineering owner may separately decide whether to start `WO-AEX-006`. The work
-orders must proceed sequentially. Do not use candidate Phase 4 code to govern
-its own construction, create a promotable successor distribution, install it,
-or run a target pilot without the later separately governed release and pilot
-packet.
+Do not use candidate Phase 4 code to govern its own construction, start
+`WO-AEX-007`, create a promotable successor distribution, install it, or run a
+target pilot without the applicable later decisions and release/pilot packet.
 
 ## Roadmap maintenance
 
