@@ -564,6 +564,49 @@ def _renumber_artifacts(args: argparse.Namespace) -> int:
         return 1
 
 
+def _release_unit(args: argparse.Namespace) -> int:
+    from se_harness.release_unit import (
+        PACKAGED_SURFACE_PREFIXES,
+        compare_with_contract,
+        derive_release_unit,
+        render_gates_toml,
+        render_release_unit,
+    )
+    from se_harness.workflow import _catalog, _validation
+
+    root = Path(args.target)
+    _, report = _validation(root)
+    catalog = _catalog(report)
+
+    def lookup(work_order: str) -> tuple[str | None, bool | None]:
+        artifact = catalog.get(work_order)
+        if artifact is None:
+            return None, None
+        status = artifact.metadata.get("status")
+        scope = artifact.metadata.get("execution_scope", {})
+        paths = scope.get("paths", []) if isinstance(scope, dict) else []
+        packaged = any(isinstance(item, str) and item.startswith(PACKAGED_SURFACE_PREFIXES) for item in paths)
+        return (status if isinstance(status, str) else None), packaged
+
+    unit = derive_release_unit(root, from_ref=args.from_ref, to_ref=args.to_ref, exempt=args.exempt or (), lookup=lookup)
+    findings: list[str] = []
+    if args.contract:
+        contract = catalog.get(args.contract)
+        if contract is None or contract.metadata.get("type") != "release_contract":
+            raise HarnessError(f"{args.contract} is not a release contract in this repository")
+        findings = compare_with_contract(unit, contract.metadata)
+    if args.toml:
+        print(render_gates_toml(unit), end="")
+    elif args.json:
+        value = unit.to_dict()
+        if args.contract:
+            value["contract"] = {"id": args.contract, "findings": findings}
+        print(json.dumps(value, indent=2, sort_keys=True))
+    else:
+        print(render_release_unit(unit, findings if args.contract else None))
+    return 0 if unit.complete and not findings else 1
+
+
 def _identity(args: argparse.Namespace) -> int:
     report = inspect_runtime_identity(
         role=args.role,
@@ -833,6 +876,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="apply the validated structured changes and path moves",
     )
     renumber.set_defaults(handler=_renumber_artifacts)
+
+    release_unit = commands.add_parser(
+        "release-unit", help="derive a release unit's work-order census from the commits between the previous release tag and a candidate commit"
+    )
+    release_unit.add_argument("target", nargs="?", default=".")
+    release_unit.add_argument("--from", dest="from_ref", required=True, help="the previous release tag")
+    release_unit.add_argument("--to", dest="to_ref", required=True, help="the candidate commit or ref")
+    release_unit.add_argument("--exempt", action="append", help="full commit id on the first-parent path that carries no trailer by owner decision; repeatable")
+    release_unit.add_argument("--contract", help="a release contract to compare with; E-CIP-001 findings fail the command")
+    release_unit.add_argument("--json", action="store_true", help="emit the canonical JSON census")
+    release_unit.add_argument("--toml", action="store_true", help="emit only the gates array ready to paste into a contract")
+    release_unit.set_defaults(handler=_release_unit)
 
     identity = commands.add_parser("identity", help="emit and verify one evaluator or candidate runtime identity")
     identity.add_argument("--role", required=True, choices=("released-evaluator", "candidate-source", "candidate-package"))
