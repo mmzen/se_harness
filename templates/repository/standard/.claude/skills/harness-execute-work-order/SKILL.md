@@ -1,6 +1,6 @@
 ---
 name: harness-execute-work-order
-description: Expose the canonical SE Harness work-order execution skill only for an explicit user invocation; never infer permission to implement.
+description: Expose the canonical Phase 4 work-order evaluator-client skill only for an explicit user invocation; never infer implementation or direct-write authority.
 disable-model-invocation: true
 metadata:
   adapter-schema: se-harness-host-adapter-v1

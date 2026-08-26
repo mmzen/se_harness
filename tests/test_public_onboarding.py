@@ -159,8 +159,33 @@ class PublicOnboardingTests(unittest.TestCase):
         for skill in ("harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"):
             self.assertIn(skill, start)
         self.assertIn("complement `harnessctl`", start)
+        self.assertIn("Phase 4 evaluator clients", start)
+        self.assertIn("prohibit direct governed-target writes", start)
+        self.assertIn("zero-effect stop", start)
+        self.assertIn("docs/notes/agentic-execution-phase4-skills.md", start)
         self.assertIn("docs/notes/agentic-execution-skills-mvp.md", start)
         self.assertIn("docs/notes/agentic-execution-host-adapters.md", start)
+
+    def test_phase4_skill_note_explains_capability_and_activation_boundaries(self) -> None:
+        note = (
+            REPOSITORY_ROOT / "docs/notes/agentic-execution-phase4-skills.md"
+        ).read_text(encoding="utf-8")
+        normalized = " ".join(note.split())
+        index = (REPOSITORY_ROOT / "docs/notes/README.md").read_text(encoding="utf-8")
+        for phrase in (
+            "se-harness-skill-contract-v3",
+            "direct_target_writes: false",
+            "delegated-workflow execute",
+            "delegated-workflow prepare-vrec",
+            "No helper accepts a target-write callback",
+            "Exact public 0.6.0 has no `delegated-workflow` command",
+            "stop before any effect",
+            "does not select a successor version",
+            "independent assurance decision",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, normalized)
+        self.assertIn("agentic-execution-phase4-skills.md", index)
 
     def test_fenced_harness_subcommands_use_the_exact_allowlist(self) -> None:
         fenced = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, flags=re.DOTALL))

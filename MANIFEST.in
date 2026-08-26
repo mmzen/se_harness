@@ -3,3 +3,11 @@ include se_harness/*.json
 recursive-include templates/repository/standard/.agents/skills *.json *.md *.py
 recursive-include templates/repository/standard/.agents/skills *.yaml
 recursive-include templates/repository/standard/.claude/skills *.md
+include tests/test_agentic_execution.py
+include tests/test_instruction_architecture.py
+include tests/test_public_onboarding.py
+include tests/test_release_build.py
+include tests/test_standard_repository_lifecycle.py
+include tests/fixtures/agentic_execution/phase3/portable_vectors.json
+recursive-include tests/fixtures/agentic_execution/phase4/skills *.json
+recursive-include tests/fixtures/agentic_execution/host_activation *.json

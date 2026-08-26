@@ -106,6 +106,13 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 installed = target / ".agents/skills" / name
                 source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name
                 self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
+                contract = json.loads((installed / "skill-contract.json").read_text(encoding="utf-8"))
+                if name in {
+                    "harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"
+                }:
+                    self.assertEqual("se-harness-skill-contract-v3", contract["schema"])
+                    self.assertEqual("2.0.0", contract["version"])
+                    self.assertFalse(contract["client"]["direct_target_writes"])
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
                 all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes + adapter_changes)
@@ -494,6 +501,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "ENGINEERING_HARNESS.md",
                 "docs/engineering/QUALITY_GATES.md",
                 ".agents/skills/harness-orient/SKILL.md",
+                ".agents/skills/harness-execute-work-order/skill-contract.json",
             )
             for relative in managed:
                 path = target / relative

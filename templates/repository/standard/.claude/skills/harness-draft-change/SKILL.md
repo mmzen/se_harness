@@ -1,6 +1,6 @@
 ---
 name: harness-draft-change
-description: Expose the canonical SE Harness draft-change skill only for an explicit user invocation; never infer it from a general writing request.
+description: Expose the canonical Phase 4 draft evaluator-client skill only for an explicit user invocation; never infer it or grant target-write authority.
 disable-model-invocation: true
 metadata:
   adapter-schema: se-harness-host-adapter-v1
