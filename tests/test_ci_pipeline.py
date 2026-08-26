@@ -237,5 +237,98 @@ class PredecessorDerivationTests(unittest.TestCase):
             self.assertEqual("tests/fixtures/governance_migration/candidate-0.6.0-to-0.8.0.json", derive(root).scenario)
 
 
+class QualificationDefinitionTests(unittest.TestCase):
+    """REQ-CIP-003 and REQ-CIP-005 / SPEC-CIP-001 CIP-QLF and CIP-LEG (WO-CIP-002)."""
+
+    def setUp(self) -> None:
+        self.definition = (WORKFLOWS / "release-qualification.yml").read_text(encoding="utf-8")
+        self.rehearsal = (WORKFLOWS / "publication-rehearsal.yml").read_text(encoding="utf-8")
+        self.release = (WORKFLOWS / "publish-pypi.yml").read_text(encoding="utf-8")
+        self.pages = (WORKFLOWS / "pages-publication.yml").read_text(encoding="utf-8")
+        self.dashboard = (WORKFLOWS / "publish-dashboard-pages.yml").read_text(encoding="utf-8")
+
+    def test_one_definition_is_invoked_by_the_rehearsal_and_the_release(self) -> None:
+        self.assertIn("\non:\n  workflow_call:\n", self.definition)
+        self.assertEqual(2, self.rehearsal.count("uses: ./.github/workflows/release-qualification.yml"))
+        self.assertEqual(1, self.release.count("uses: ./.github/workflows/release-qualification.yml"))
+        self.assertIn("mode: candidate", self.rehearsal)
+        self.assertIn("mode: release-record", self.rehearsal)
+        self.assertIn("mode: release-record", self.release)
+        self.assertIn("require_status: ${{ needs.select.outputs.status }}", self.rehearsal)
+        self.assertIn("default_ref: refs/remotes/origin/main", self.rehearsal)
+        self.assertIn("publish_release.py select-rehearsal-record", self.rehearsal)
+        self.assertNotIn("matrix", self.rehearsal)
+        for absent in ("rehearse_publication", "publication_rehearsal_mechanics", "check-divergence", "PyYAML", "windows-2022"):
+            self.assertNotIn(absent, self.rehearsal)
+
+    def test_the_definition_holds_no_authority(self) -> None:
+        head = self.definition.split("\njobs:\n", 1)[0]
+        self.assertIn("\npermissions:\n  contents: read\n", head)
+        self.assertNotIn("secrets", self.definition)
+        for absent in ("environment:", "id-token: write", "contents: write", "gh release", "git push", "pypa/"):
+            self.assertNotIn(absent, self.definition)
+        self.assertIn("Prove the qualification left no checkout change", self.definition)
+
+    def test_the_digest_declaration_and_its_script_are_gone(self) -> None:
+        scripts = REPOSITORY_ROOT / ".github/scripts"
+        self.assertFalse((scripts / "rehearse_publication.py").exists())
+        self.assertFalse((scripts / "publication_rehearsal_mechanics.json").exists())
+        self.assertFalse((REPOSITORY_ROOT / "tests/test_publication_rehearsal.py").exists())
+
+    def test_release_runs_one_schema_leg_and_one_pages_definition(self) -> None:
+        for absent in ("legacy-schema-1", "recipe-schema-2", "matrix.mode", "runs-on: ${{ matrix.os }}", "pages_build", "pages_deploy"):
+            self.assertNotIn(absent, self.release)
+        self.assertEqual(1, self.release.count("uses: ./.github/workflows/pages-publication.yml"))
+        self.assertEqual(1, self.dashboard.count("uses: ./.github/workflows/pages-publication.yml"))
+        self.assertIn("\non:\n  workflow_call:\n", self.pages)
+        self.assertNotIn("steps:", self.dashboard)
+
+    def test_each_shared_helper_is_defined_once(self) -> None:
+        scripts = sorted((REPOSITORY_ROOT / ".github/scripts").glob("*.py"))
+        definitions: dict[str, list[str]] = {}
+        for script in scripts + [REPOSITORY_ROOT / "repository_tools/json_bytes.py"]:
+            for name in re.findall(r"(?m)^def (\w+)\(", script.read_text(encoding="utf-8")):
+                definitions.setdefault(name, []).append(script.name)
+        # wrappers in the scripts delegate to repository_tools.json_bytes; the logic lives there
+        for helper in ("_duplicate_rejecting_object", "_reject_duplicate_keys", "_loads_json", "sha256_bytes"):
+            self.assertNotIn(helper, [n for n in definitions if any(s != "json_bytes.py" for s in definitions[n]) and n == helper])
+        for script in scripts:
+            text = script.read_text(encoding="utf-8")
+            self.assertNotIn("object_pairs_hook", text, script.name)
+            self.assertNotIn("def sha256_file(path: Path) -> str:\n    digest", text, script.name)
+        reconcile = (REPOSITORY_ROOT / ".github/scripts/reconcile_maintenance_branch.py").read_text(encoding="utf-8")
+        self.assertNotIn("urlopen", reconcile)
+        self.assertIn('["gh", "api", "--include"', reconcile)
+        release = (REPOSITORY_ROOT / ".github/scripts/publish_release.py").read_text(encoding="utf-8")
+        self.assertNotIn("classify-pypi", release)
+        self.assertIn("select-rehearsal-record", release)
+
+    def test_rehearsal_record_selection(self) -> None:
+        from tests.test_release_orchestration import RELEASE as module
+
+        with tempfile.TemporaryDirectory() as scratch:
+            root = Path(scratch)
+            releases = root / "docs/engineering/release-x/releases"
+            releases.mkdir(parents=True)
+
+            def record(identifier: str, version: str, status: str, schema: int) -> None:
+                (releases / f"{identifier}.md").write_text(
+                    f'+++\nid = "{identifier}"\ntype = "release_record"\nstatus = "{status}"\nversion = "{version}"\n[distribution]\nschema = {schema}\n+++\n# {identifier}\n',
+                    encoding="utf-8",
+                )
+
+            self.assertEqual("", module.select_rehearsal_record(root, None)["release_record"])
+            record("RLS-X-001", "0.6.0", "released", 1)
+            self.assertEqual("", module.select_rehearsal_record(root, None)["release_record"])
+            record("RLS-X-002", "0.7.0", "ready", 2)
+            record("RLS-X-003", "0.7.1", "released", 2)
+            record("RLS-X-004", "0.8.0", "rejected", 2)
+            selection = module.select_rehearsal_record(root, None)
+            self.assertEqual(("RLS-X-003", "released"), (selection["release_record"], selection["status"]))
+            self.assertEqual("ready", module.select_rehearsal_record(root, "RLS-X-002")["status"])
+            with self.assertRaises(module.ReleaseError):
+                module.select_rehearsal_record(root, "RLS-X-001")
+
+
 if __name__ == "__main__":
     unittest.main()
