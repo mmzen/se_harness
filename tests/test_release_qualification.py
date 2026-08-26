@@ -10,6 +10,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
+from se_harness import __version__
 from se_harness.cli import build_parser, main
 from se_harness.installer import HarnessError
 from se_harness.release_qualification import (
@@ -128,20 +129,26 @@ class ReleaseQualificationTests(unittest.TestCase):
             / "workflows"
             / "candidate-evidence.yml"
         ).read_text(encoding="utf-8")
+        # WO-CIP-003: the verifier facts are derived from the declared root by
+        # repository_tools.predecessor_facts and carried as job outputs; the
+        # workflow restates none of them. The derivation itself is asserted in
+        # tests/test_ci_pipeline.py against the lock and the legacy contract table.
         required = (
-            'RELEASED_VERIFIER_VERSION: "0.6.0"',
-            'RELEASED_VERIFIER_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"',
-            'RELEASED_VERIFIER_PAYLOAD_SHA256: "c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42"',
-            'RELEASED_ACCEPTANCE_CONTRACT_SHA256: "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75"',
+            "RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}",
+            "RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}",
+            "RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}",
+            "RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}",
+            "python -m repository_tools.predecessor_facts derive --repository . --github-output",
             '"$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate',
             'value["schema"] == "se-harness-functional-acceptance-v1"',
             'assert "independence" not in value',
-            'candidate-package-legacy-bootstrap-0.6.0',
+            "candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}",
         )
         self.assertTrue(all(value in workflow for value in required))
         self.assertNotIn("qualify candidate-package", workflow)
+        self.assertNotIn('RELEASED_VERIFIER_VERSION: "', workflow)
         for original, replacement in (
-            ('RELEASED_VERIFIER_VERSION: "0.6.0"', 'RELEASED_VERIFIER_VERSION: "0.6.1"'),
+            ("RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", 'RELEASED_VERIFIER_VERSION: "0.6.1"'),
             ("se-harness-functional-acceptance-v1", QUALIFICATION_SCHEMA),
             ("accept-candidate", "validate"),
         ):
@@ -293,7 +300,11 @@ class ReleaseQualificationTests(unittest.TestCase):
     ) -> None:
         repository = self.root / "repository"
         repository.mkdir()
-        wheel = self.root / "se_harness-0.6.0-py3-none-any.whl"
+        # qualify_public_install requires the released record, the wheel name, the
+        # distribution metadata and the installed distribution to agree with
+        # se_harness.__version__, so every version in this fixture is derived from
+        # it rather than pinned to one release.
+        wheel = self.root / f"se_harness-{__version__}-py3-none-any.whl"
         wheel.write_bytes(b"wheel")
         launcher = self.root / "harnessctl"
         launcher.write_bytes(b"launcher")
@@ -304,14 +315,14 @@ class ReleaseQualificationTests(unittest.TestCase):
             repository / "RLS-X-001.md",
             {
                 "status": "released",
-                "version": "0.6.0",
+                "version": __version__,
                 "commit": "d" * 40,
                 "distribution": {"wheel": wheel.name, "wheel_sha256": digest},
             },
         )
-        metadata.return_value = ("0.6.0", digest)
+        metadata.return_value = (__version__, digest)
         installed.return_value = SimpleNamespace(
-            version="0.6.0",
+            version=__version__,
             archive_name=wheel.name,
             archive_sha256=digest,
             payload_manifest="se-harness-installed-payload-v1",
@@ -320,7 +331,7 @@ class ReleaseQualificationTests(unittest.TestCase):
         wheel_payload.return_value = payload
         entry_point.return_value = launcher
         run.side_effect = (
-            SimpleNamespace(returncode=0, stdout=b"0.6.0\n", stderr=b""),
+            SimpleNamespace(returncode=0, stdout=f"{__version__}\n".encode("ascii"), stderr=b""),
             SimpleNamespace(
                 returncode=0,
                 stdout=(" ".join(OPERATIONS) + "\n").encode("ascii"),

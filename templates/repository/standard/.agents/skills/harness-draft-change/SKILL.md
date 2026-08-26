@@ -35,17 +35,22 @@ canonical destination. Only explicitly selected artifacts that are currently
    catalog; an evaluator without this capability is a stop before any effect.
 3. Build a closed plan containing only canonical draft destinations, explicitly
    selected current drafts, and at most one declared path under `docs/notes/`.
-4. Create candidate bytes only in the isolated proposed workspace. Never open,
-   replace, or delete the corresponding governed-target paths with provider or
-   workspace-write tools.
-5. Pass the closed argument vector through `scripts/guard.py`. The helper
+4. Immediately repeat identity, integrity, and formal-state checks. Reconfirm
+   identifier uniqueness and destination absence before creating candidate
+   bytes.
+5. Apply the installed authoring policy
+   (`docs/engineering/ARTIFACT_AUTHORING.md`) for each selected type; its
+   checklist is the review standard. Create candidate bytes only in the
+   isolated proposed workspace. Never open, replace, or delete the corresponding
+   governed-target paths with provider or workspace-write tools.
+6. Pass the closed argument vector through `scripts/guard.py`. The helper
    requires the exact catalog, prohibits direct-target mode, and invokes only
    evaluator `delegated-workflow execute`; it has no target-write callback.
-6. Accept only evaluator-issued lifecycle and effect receipts, completion
+7. Accept only evaluator-issued lifecycle and effect receipts, completion
    proof, and a decision packet at the Git stop. On stale state, invalid
    delegation, session conflict, path drift, or failed restitution, retain the
    returned evidence and stop.
-7. Report the evaluator result and stop at the requested accountable content
+8. Report the evaluator result and stop at the requested accountable content
    review. Do not execute the packet's Git suggestion.
 
 ## Boundaries

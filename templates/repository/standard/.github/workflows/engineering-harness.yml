@@ -1,8 +1,21 @@
+# Managed by SE Harness. Runs the exact released evaluator outside the checkout:
+# work-order selection and review preflight on pull requests, then doctor,
+# validate and the dashboard. Trigger policy: pull requests, and pushes to
+# main, release/** and candidate/** only; a newer push to the same ref cancels
+# the older run.
 name: Engineering Harness
 
 on:
   pull_request:
   push:
+    branches:
+      - main
+      - "release/**"
+      - "candidate/**"
+
+concurrency:
+  group: engineering-harness-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -40,6 +53,40 @@ jobs:
         run: >-
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight .
           --work-order "$HARNESS_WORK_ORDER" --phase review
+      - name: Verify a declared restitution digest
+        if: github.event_name == 'pull_request'
+        env:
+          HARNESS_WORK_ORDER: ${{ steps.work_order.outputs.work_order }}
+          HARNESS_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          declared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
+            select-work-order --event "$GITHUB_EVENT_PATH" --field restitution-digest)"
+          if [ -z "$declared" ]; then
+            echo "No Harness-Restitution line is declared; nothing to verify."
+            exit 0
+          fi
+          git fetch --depth=1 origin "$HARNESS_BASE_SHA"
+          args=()
+          while IFS= read -r path; do
+            [ -n "$path" ] && args+=(--changed-path "$path")
+          done < <(git diff --name-only "$HARNESS_BASE_SHA" HEAD)
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
+            --artifact "$HARNESS_WORK_ORDER" --checkpoint handoff \
+            "${args[@]}" --changes-complete --json \
+            > "$RUNNER_TEMP/restitution.json" || true
+          recomputed="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" <<'PY'
+          import json, sys
+          result = json.load(open(sys.argv[1], encoding="utf-8"))
+          print(result.get("result_sha256", ""))
+          print(result.get("compliance", {}).get("formal_snapshot_sha256", ""), file=sys.stderr)
+          PY
+          )"
+          if [ "$declared" != "$recomputed" ]; then
+            echo "Declared Harness-Restitution $declared does not match the recomputed result_sha256 $recomputed at this formal snapshot." >&2
+            exit 1
+          fi
+          echo "Declared restitution digest matches the recomputed block."
       - name: Qualify the root with its exact released evaluator
         shell: bash
         run: |

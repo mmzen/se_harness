@@ -319,6 +319,65 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
 }
 
 
+AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
+AUTHORING_NAMED_SUBJECT = re.compile(r"^THE [A-Z][A-Za-z0-9 _-]{0,60} SHALL\b")
+AUTHORING_STATEMENT_LIMIT = 300
+VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
+REQUIREMENT_PRIORITIES = ("must", "should", "could")
+
+
+def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """Requirement-writing rules: statement shape signals, vocabulary, and optional attributes (SPEC-AUT-001)."""
+
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    catalog = {artifact.artifact_id for artifact in artifacts if artifact.artifact_id != "<unknown>"}
+    for artifact in artifacts:
+        if artifact.artifact_type != "requirement":
+            continue
+        statement = artifact.metadata.get("statement")
+        if isinstance(statement, str) and statement.strip():
+            text = statement.strip()
+            opener_ok = text.startswith(AUTHORING_OPENERS) or AUTHORING_NAMED_SUBJECT.match(text) is not None
+            if text.startswith("IF ") and " THEN " not in text:
+                opener_ok = False
+            if not opener_ok:
+                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",
+                    "statement does not open with one of the five shapes (THE SYSTEM SHALL, WHEN, WHILE, IF ... THEN, WHERE)", "maintenance"))
+            shall_count = len(re.findall(r"\bSHALL\b", text))
+            if shall_count > 1:
+                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
+                    f"statement carries {shall_count} SHALL obligations; one requirement states one obligation", "maintenance"))
+            if len(text) > AUTHORING_STATEMENT_LIMIT:
+                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
+                    f"statement is {len(text)} characters; the review threshold is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
+        method = artifact.metadata.get("verification_method")
+        if isinstance(method, str):
+            if method.strip():
+                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-004",
+                    "verification_method is a free-text string; the closed vocabulary is an array of test, analysis, inspection, demonstration", "maintenance"))
+        elif isinstance(method, list):
+            if not method or len(method) > len(VERIFICATION_METHODS) or len(set(method)) != len(method) or any(item not in VERIFICATION_METHODS for item in method):
+                _add_error(errors, artifact, report_root, "E-AUT-001",
+                    f"verification_method must list 1-4 distinct values from {', '.join(VERIFICATION_METHODS)}", plane="structure")
+        notes = artifact.metadata.get("verification_notes")
+        if notes is not None and (not isinstance(notes, str) or not notes.strip()):
+            _add_error(errors, artifact, report_root, "E-AUT-002", "verification_notes must be a non-empty string when present", plane="structure")
+        priority = artifact.metadata.get("priority")
+        if priority is not None and priority not in REQUIREMENT_PRIORITIES:
+            _add_error(errors, artifact, report_root, "E-AUT-002", f"priority must be one of {', '.join(REQUIREMENT_PRIORITIES)}", plane="structure")
+        source = artifact.metadata.get("source")
+        if source is not None:
+            if not isinstance(source, str) or not source.strip():
+                _add_error(errors, artifact, report_root, "E-AUT-002", "source must be a non-empty string when present", plane="structure")
+            elif ID_PATTERN.fullmatch(source.strip()) is not None and source.strip() not in catalog:
+                _add_error(errors, artifact, report_root, "E-AUT-002", f"source names an unknown artifact '{source.strip()}'", plane="structure")
+        measure = artifact.metadata.get("measure")
+        if measure is not None and (not isinstance(measure, str) or not measure.strip()):
+            _add_error(errors, artifact, report_root, "E-AUT-002", "measure must be a non-empty string when present", plane="structure")
+    return errors, warnings
+
+
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
     """Extract exact work-order keys from a normalized repository path."""
     parts = PurePosixPath(evidence_path).parts
@@ -1917,7 +1976,8 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
 
         if artifact_type == "requirement":
             statement = _require_non_empty_string(artifact, "statement", errors, report_root)
-            _require_non_empty_string(artifact, "verification_method", errors, report_root)
+            if not isinstance(artifact.metadata.get("verification_method"), list):
+                _require_non_empty_string(artifact, "verification_method", errors, report_root)
             if statement is not None and re.search(r"\bSHALL\b", statement) is None:
                 _add_error(
                     errors,
@@ -3492,6 +3552,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
 
     assessment_warnings: list[Diagnostic] = []
     traceability_warnings: list[Diagnostic] = []
+    authoring_warnings: list[Diagnostic] = []
     if not selected_artifact_root.exists():
         errors.append(
             Diagnostic(
@@ -3505,6 +3566,8 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_lifecycle_events(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
+        authoring_errors, authoring_warnings = validate_authoring(artifacts, repository_root)
+        errors.extend(authoring_errors)
         errors.extend(validate_relations(artifacts, repository_root))
         traceability_errors, traceability_warnings = validate_architecture_traceability(
             artifacts,
@@ -3545,6 +3608,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     warnings = [
         *assessment_warnings,
         *traceability_warnings,
+        *authoring_warnings,
         *legacy_evidence_warnings,
         *validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors),
     ]

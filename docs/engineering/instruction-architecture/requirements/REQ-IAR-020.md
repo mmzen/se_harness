@@ -2,10 +2,10 @@
 id = "REQ-IAR-020"
 type = "requirement"
 title = "Carry local operational facts in the owner instruction region"
-status = "implemented"
+status = "superseded"
 owners = ["repository-owner", "requirements-steward", "quality-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-25"
 statement = "WHEN a coding agent loads the always-available instruction surface of this repository, the se_harness repository SHALL state, in the owner-controlled region of AGENTS.md, the operational entry point for commands, the authoritative managed-path boundary together with its candidate-source counterpart, and the known pull-request and evaluator failure conditions, and SHALL NOT restate an obligation that a governed requirement already owns."
 verification_method = "Automated managed-integrity, lock-derived path-set, and content-presence tests plus accountable review of the drift and authority boundary"
 
@@ -14,6 +14,18 @@ derives_from = ["CAP-IAR-001"]
 +++
 
 # Requirement: Carry local operational facts in the owner instruction region
+
+## Supersession
+
+Superseded on 2026-08-25 by `REQ-ADS-007` under `WO-ADS-002`, authorized by the
+requirements steward with the approval of `REQ-ADS-007`. The successor keeps
+every obligation of this requirement except the pointer clause of rules 3-4:
+the owner region no longer names the retired repository-context document,
+which the harness withdrew under `WO-DST-021`, and instead names the
+repository-owned note section that carries the release sequences. The
+rationale, required response, and boundary behavior below record what the
+region carried while this requirement was active and are retained unchanged
+as history. They are no longer obligations.
 
 ## Lifecycle
 

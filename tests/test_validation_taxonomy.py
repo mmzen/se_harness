@@ -90,7 +90,24 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        self.assertEqual(quality, canonical_quality)
+        # The released root policy predates the authoring predicate; the candidate adds exactly
+        # one evaluator row and one predicate on each of the two definition gates (WO-AUT-002).
+        expected_candidate_quality = quality.replace(
+            "| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |\n",
+            "| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |\n"
+            "| `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |\n",
+            1,
+        ).replace(
+            "| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY` |\n",
+            "| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |\n",
+            1,
+        ).replace(
+            "| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY` |\n",
+            "| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |\n",
+            1,
+        )
+        self.assertNotIn("authoring_ready", quality)
+        self.assertEqual(expected_candidate_quality, canonical_quality)
         self.assertIn("BCP 14", canonical_quality)
         self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
         for plane in VALIDATION_PLANES:

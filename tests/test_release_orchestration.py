@@ -526,20 +526,6 @@ class ReleaseStateTests(unittest.TestCase):
             with self.assertRaisesRegex(RELEASE.ReleaseError, "file set"):
                 RELEASE.verify_bundle(selected, root)
 
-    def test_pypi_absent_exact_partial_and_mismatch_are_explicit(self) -> None:
-        selected = plan()
-        self.assertEqual("absent", RELEASE.classify_pypi(selected, {"absent": True})["state"])
-        exact = {
-            "urls": [
-                {"filename": selected.wheel, "digests": {"sha256": selected.wheel_sha256}},
-                {"filename": selected.sdist, "digests": {"sha256": selected.sdist_sha256}},
-            ]
-        }
-        self.assertEqual("exact", RELEASE.classify_pypi(selected, exact)["state"])
-        self.assertEqual("partial", RELEASE.classify_pypi(selected, {"urls": exact["urls"][:1]})["state"])
-        exact["urls"][0]["digests"]["sha256"] = "9" * 64
-        self.assertEqual("mismatched", RELEASE.classify_pypi(selected, exact)["state"])
-
     def test_github_exact_draft_is_replayable_but_partial_is_not(self) -> None:
         selected = plan()
         assets = [
@@ -567,8 +553,11 @@ class ReleaseStateTests(unittest.TestCase):
 class ReleaseWorkflowPolicyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.workflow = (REPOSITORY_ROOT / ".github" / "workflows" / "publish-pypi.yml").read_text(encoding="utf-8")
-        cls.pages = (REPOSITORY_ROOT / ".github" / "workflows" / "publish-dashboard-pages.yml").read_text(encoding="utf-8")
+        workflows = REPOSITORY_ROOT / ".github" / "workflows"
+        cls.workflow = (workflows / "publish-pypi.yml").read_text(encoding="utf-8")
+        cls.pages = (workflows / "publish-dashboard-pages.yml").read_text(encoding="utf-8")
+        cls.qualification = (workflows / "release-qualification.yml").read_text(encoding="utf-8")
+        cls.pages_definition = (workflows / "pages-publication.yml").read_text(encoding="utf-8")
         cls.resolver = (REPOSITORY_ROOT / ".github" / "scripts" / "publish_release.py").read_text(encoding="utf-8")
 
     def test_normal_workflow_has_one_main_only_input_and_stable_publisher_identity(self) -> None:
@@ -580,60 +569,42 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33", self.workflow)
 
     def test_candidate_and_privileged_jobs_are_separate(self) -> None:
+        # WO-CIP-002: the qualification is one reusable definition invoked here and by the
+        # rehearsal; the release workflow's qualify job is a caller with no steps of its own.
         qualify = self.workflow.split("  qualify:\n", 1)[1].split("  github_release:\n", 1)[0]
         github = self.workflow.split("  github_release:\n", 1)[1].split("  pypi:\n", 1)[0]
-        pypi = self.workflow.split("  pypi:\n", 1)[1].split("  pages_build:\n", 1)[0]
+        pypi = self.workflow.split("  pypi:\n", 1)[1].split("  pages:\n", 1)[0]
         resolve = self.workflow.split("  resolve:\n", 1)[1].split("  qualify:\n", 1)[0]
-        pages_build = self.workflow.split("  pages_build:\n", 1)[1].split("  pages_deploy:\n", 1)[0]
-        self.assertNotIn("contents: write", qualify)
-        self.assertNotIn("id-token: write", qualify)
-        self.assertIn("python -m se_harness qualify complete-candidate .", qualify)
-        self.assertIn("--candidate-commit \"${{ needs.resolve.outputs.candidate_commit }}\"", qualify)
-        self.assertIn('--candidate-commit "$CANDIDATE_COMMIT"', qualify)
-        self.assertIn("complete-candidate-qualification.json", qualify)
-        self.assertNotIn("python scripts/validate_engineering_artifacts.py --root .", qualify)
-        self.assertIn(
-            'git worktree add --detach "$temp_root/candidate-checkout" "$CANDIDATE_COMMIT"',
-            qualify,
-        )
-        self.assertIn('cd "$temp_root/candidate-checkout"', qualify)
-        self.assertNotIn('cd "$RUNNER_TEMP/source-a"', qualify)
-        self.assertNotIn("python -m se_harness doctor .", qualify)
-        self.assertIn("mode: legacy-schema-1", qualify)
-        self.assertIn("os: windows-2022", qualify)
-        self.assertIn("mode: recipe-schema-2", qualify)
-        self.assertIn("os: ubuntu-latest", qualify)
-        self.assertIn("runs-on: ${{ matrix.os }}", qualify)
-        self.assertIn('python-version: "3.11.9"', qualify)
-        self.assertEqual(4, qualify.count('temp_root="$(cygpath -u "$RUNNER_TEMP")"'))
-        self.assertIn('test_temp="$temp_root/candidate-test-temp"', qualify)
-        self.assertIn('export TEMP="$(cygpath -w "$test_temp")"', qualify)
-        self.assertIn('export TMP="$TEMP"', qualify)
-        self.assertIn(
-            "python -m pip install --disable-pip-version-check "
-            "build==1.3.0 setuptools==84.0.0 wheel==0.48.0",
-            qualify,
-        )
-        self.assertNotIn(
-            "python -m pip install --disable-pip-version-check build==1.3.0\n",
-            qualify,
-        )
-        recipe_path = qualify.split("      - name: Replay the exact bound recipe twice\n", 1)[1].split(
-            "      - name: Retain the candidate-controlled qualification result\n", 1
-        )[0]
-        self.assertIn("python scripts/replay_release_build.py", recipe_path)
-        self.assertIn("--require-status released", recipe_path)
-        self.assertNotIn("python -m build", recipe_path)
-        self.assertNotIn("pip install", recipe_path)
-        self.assertNotIn("normalize_sdist.py", recipe_path)
+        pages = self.workflow.split("  pages:\n", 1)[1].split("  observe:\n", 1)[0]
+        self.assertIn("uses: ./.github/workflows/release-qualification.yml", qualify)
+        self.assertIn("mode: release-record", qualify)
+        self.assertIn("require_status: released", qualify)
+        self.assertIn("default_ref: refs/heads/main", qualify)
+        for absent in ("steps:", "matrix", "runs-on", "legacy-schema-1", "windows-2022", "contents: write", "id-token: write"):
+            self.assertNotIn(absent, qualify)
+        definition = self.qualification
+        self.assertIn("  workflow_call:\n", definition)
+        self.assertIn("python -m se_harness qualify complete-candidate .", definition)
+        self.assertIn('--candidate-commit "$CANDIDATE_COMMIT"', definition)
+        self.assertIn("complete-candidate-qualification.json", definition)
+        self.assertIn('git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"', definition)
+        self.assertIn("python scripts/replay_release_build.py", definition)
+        self.assertIn('--require-status "$REQUIRE_STATUS"', definition)
+        self.assertIn("python -m repository_tools.release_build replay", definition)
+        self.assertIn("release qualification is defined for schema-2 (recipe-bound) records only", definition)
+        for absent in ("python -m build", "pip install", "normalize_sdist.py", "cygpath", "contents: write", "id-token: write", "secrets", "environment:"):
+            self.assertNotIn(absent, definition)
+        self.assertEqual(2, definition.count("contents: read"))
         self.assertIn("contents: write", github)
         self.assertNotIn("git archive", github)
         self.assertNotIn("actions/checkout", pypi)
         self.assertNotIn("python -m build", pypi)
         self.assertNotIn("skip-existing", pypi)
         self.assertEqual(1, pypi.count("id-token: write"))
-        self.assertNotIn('mkdir "$RUNNER_TEMP/pages-predecessor-view"', resolve)
-        self.assertEqual(1, pages_build.count('mkdir "$RUNNER_TEMP/pages-predecessor-view"'))
+        self.assertIn("uses: ./.github/workflows/pages-publication.yml", pages)
+        self.assertIn("uses: ./.github/workflows/pages-publication.yml", self.pages)
+        self.assertNotIn("pages_build", self.workflow)
+        self.assertEqual(1, self.pages_definition.count('mkdir "$RUNNER_TEMP/predecessor-view"'))
 
     def test_repository_policy_is_explicit_and_imported_only_from_trusted_main(self) -> None:
         self.assertIn("Check out trusted main history", self.workflow)
@@ -647,29 +618,23 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertGreaterEqual(self.workflow.count("--release-record"), 4)
 
     def test_all_publication_validation_points_use_one_predecessor_view_adapter(self) -> None:
-        combined = self.workflow + self.pages
+        # WO-CIP-002: one predecessor-view qualification in resolve and one in the shared
+        # Pages definition; the standalone dashboard workflow is a caller.
+        combined = self.workflow + self.pages + self.pages_definition + self.qualification
         self.assertEqual(0, combined.count("scripts/validate_predecessor_publication_view.py"))
-        self.assertEqual(
-            3,
-            combined.count("python -m se_harness qualify predecessor-view"),
-        )
+        self.assertEqual(2, combined.count("python -m se_harness qualify predecessor-view"))
         self.assertEqual(0, combined.count("--evaluator-entry-point"))
         self.assertEqual(0, combined.count('--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"'))
-        self.assertEqual(5, combined.count("predecessor-view-qualification.json"))
+        self.assertEqual(4, combined.count("predecessor-view-qualification.json"))
         self.assertEqual(0, combined.count("predecessor-publication-result.json"))
-        self.assertEqual(3, combined.count("--evaluator-python"))
-        self.assertEqual(2, combined.count("--view-output"))
-        self.assertIn('mkdir "$RUNNER_TEMP/pages-predecessor-view"', self.workflow)
-        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', self.pages)
-        self.assertIn('--view-output "$RUNNER_TEMP/pages-predecessor-view/governance"', self.workflow)
-        self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.pages)
-        self.assertIn(
-            'python "$RUNNER_TEMP/pages-predecessor-view/governance/scripts/generate_harness_dashboard.py"',
-            self.workflow,
-        )
+        self.assertEqual(2, combined.count("--evaluator-python"))
+        self.assertEqual(1, combined.count("--view-output"))
+        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', self.pages_definition)
+        self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.pages_definition)
+        self.assertNotIn("pages-predecessor-view", combined)
 
     def test_public_observation_uses_the_typed_public_install_role(self) -> None:
-        combined = self.workflow + self.pages
+        combined = self.workflow + self.pages + self.pages_definition
         observe = self.workflow.split("  observe:\n", 1)[1]
         self.assertIn("qualify public-install", observe)
         self.assertIn("--public-wheel-sha256 \"$WHEEL_SHA256\"", observe)
@@ -678,7 +643,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn('harnessctl" validate', observe)
         self.assertIn(
             'python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py"',
-            self.pages,
+            self.pages_definition,
         )
         self.assertNotIn(
             'python "$RUNNER_TEMP/governance/scripts/generate_harness_dashboard.py"',

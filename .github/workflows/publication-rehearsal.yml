@@ -1,10 +1,16 @@
+# Repository-owned pre-release rehearsal (WO-RLO-005, CAP-RLO-003; mechanism
+# replaced under WO-CIP-002, ADR-CIP-001). It invokes the one release
+# qualification definition, .github/workflows/release-qualification.yml, in
+# candidate mode on every pull request and push to main, and in release-record
+# mode against the newest schema-2 ready or released record when one exists or
+# when dispatched with one. What is rehearsed is what the publication workflow
+# executes, by construction; there is no copy to keep aligned and no digest to
+# refresh. It holds no publication authority: no credential, no environment,
+# no write permission, and no tag, release, index object, deployment, or
+# formal lifecycle transition. Trigger policy (SPEC-CIP-001 CIP-TRG): pull
+# requests and pushes to main; a newer push cancels the older run. Described
+# in docs/notes/release-publication-rehearsal.md.
 name: Publication Rehearsal
-
-# Repository-owned pre-release rehearsal for RC-060-11 (issue #111) under WO-RLO-005.
-# It exercises the credential-free publication mechanics on both hosted runner types and
-# refuses drift between the release orchestrator and the rehearsed set. It holds no
-# publication authority: no credential, no environment, no write permission, and no tag,
-# release, index object, deployment, or formal lifecycle transition.
 
 on:
   pull_request:
@@ -14,7 +20,7 @@ on:
   workflow_dispatch:
     inputs:
       release_record:
-        description: Formal release record to rehearse against, or empty to rehearse the current candidate (for example RLS-SEH-012)
+        description: Formal schema-2 release record to rehearse against (for example RLS-SEH-013), or empty to select the newest ready or released one
         required: false
         type: string
 
@@ -22,22 +28,18 @@ permissions:
   contents: read
 
 concurrency:
-  group: publication-rehearsal-${{ github.workflow }}-${{ github.ref }}
+  group: publication-rehearsal-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  PYTHON_VERSION: "3.11"
-
-defaults:
-  run:
-    shell: bash
-
 jobs:
-  divergence:
-    name: Refuse orchestrator and rehearsal divergence
+  select:
+    name: Select the release record to rehearse
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      release_record: ${{ steps.select.outputs.release_record }}
+      status: ${{ steps.select.outputs.status }}
     steps:
       - name: Check out the candidate
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -47,97 +49,40 @@ jobs:
       - name: Select Python 3.11
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: "3.11"
 
-      - name: Install the pinned independent parser used only for cross-checking
-        run: |
-          set -euo pipefail
-          python -m pip install --disable-pip-version-check "PyYAML==6.0.3"
-
-      - name: Refuse an uncovered or stale credential-free mechanic
-        run: |
-          set -euo pipefail
-          python .github/scripts/rehearse_publication.py check-divergence \
-            --repository "$GITHUB_WORKSPACE" \
-            --output "$RUNNER_TEMP/publication-rehearsal-divergence.json" \
-            --summary "$GITHUB_STEP_SUMMARY" \
-            --cross-check-yaml
-
-      - name: Retain the divergence verdict
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: publication-rehearsal-divergence
-          path: ${{ runner.temp }}/publication-rehearsal-divergence.json
-          if-no-files-found: warn
-          retention-days: 7
-
-  rehearse:
-    name: Rehearse the credential-free path on ${{ matrix.platform }}
-    runs-on: ${{ matrix.runner }}
-    permissions:
-      contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - runner: ubuntu-latest
-            platform: Linux
-          - runner: windows-2022
-            platform: Windows
-    steps:
-      - name: Check out the candidate with full history
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Select Python 3.11
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      # One shell and one command shape on both platforms. The runner temporary and
-      # workspace paths are passed to the program exactly as the platform spells them,
-      # including a Windows short-name alias, because canonicalizing them is one of the
-      # mechanics under rehearsal.
-      - name: Rehearse the credential-free publication mechanics
+      - name: Select the newest schema-2 ready or released record, or the dispatched one
+        id: select
         env:
           RELEASE_RECORD: ${{ inputs.release_record }}
-          PLATFORM: ${{ matrix.platform }}
+        shell: bash
         run: |
           set -euo pipefail
-          arguments=(
-            rehearse
-            --repository "$GITHUB_WORKSPACE"
-            --root "$RUNNER_TEMP/publication-rehearsal"
-            --default-ref refs/remotes/origin/main
-            --output "$RUNNER_TEMP/publication-rehearsal-$PLATFORM.json"
+          python .github/scripts/publish_release.py select-rehearsal-record \
+            --repository "$GITHUB_WORKSPACE" \
+            --release-record "$RELEASE_RECORD" \
+            --github-output "$GITHUB_OUTPUT" \
             --summary "$GITHUB_STEP_SUMMARY"
-          )
-          if [[ -n "$RELEASE_RECORD" ]]; then
-            arguments+=( --mode release-record --release-record "$RELEASE_RECORD" )
-          else
-            arguments+=( --mode candidate )
-          fi
-          python .github/scripts/rehearse_publication.py "${arguments[@]}"
 
-      - name: Prove the rehearsal left no checkout change
-        if: always()
-        run: |
-          set -euo pipefail
-          git -C "$GITHUB_WORKSPACE" status --porcelain >"$RUNNER_TEMP/status.txt"
-          if [[ -s "$RUNNER_TEMP/status.txt" ]]; then
-            echo "the rehearsal left residue in the checkout" >&2
-            cat "$RUNNER_TEMP/status.txt" >&2
-            exit 1
-          fi
+  rehearse-candidate:
+    name: Rehearse the qualification of this candidate
+    uses: ./.github/workflows/release-qualification.yml
+    permissions:
+      contents: read
+    with:
+      mode: candidate
+      ref: ${{ github.sha }}
 
-      - name: Retain the per-platform rehearsal result
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: publication-rehearsal-${{ matrix.platform }}
-          path: ${{ runner.temp }}/publication-rehearsal-${{ matrix.platform }}.json
-          if-no-files-found: warn
-          retention-days: 7
+  rehearse-record:
+    name: Rehearse the qualification of the release record
+    needs: select
+    if: needs.select.outputs.release_record != ''
+    uses: ./.github/workflows/release-qualification.yml
+    permissions:
+      contents: read
+    with:
+      mode: release-record
+      release_record: ${{ needs.select.outputs.release_record }}
+      require_status: ${{ needs.select.outputs.status }}
+      default_ref: refs/remotes/origin/main
+      ref: ${{ github.sha }}

@@ -22,6 +22,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | --- | --- |
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
+| [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |
 | [Phase 4 writing-skill integration](agentic-execution-phase4-skills.md) | How do v3 writing cores become fail-closed evaluator clients without direct target writes or new authority? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
@@ -42,10 +43,11 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Bounded evaluator recovery](evaluator-recovery-runbook.md) | How do maintainers rehearse and, only after separate action-time authority, recover a governance deadlock? |
 | [`harnessctl` command reference](harnessctl-reference.md) | Which commands exist, who normally runs them, and what can they change? |
 | [Developing SE Harness](developing-se-harness.md) | How does the implementation repository use the standard lifecycle while keeping candidate evidence separate? |
+| [The CI pipeline and the release path](ci-pipeline.md) | Why does the pipeline feel slow when every run finishes in minutes, and what does each simplification increment change? |
 | [Testing a current commit with an integration package](integration-packages.md) | How do I safely download, verify, install, test, and remove an expiring non-release build? |
 | [Integration Package definition-review packet](integration-package-definition-review.md) | Which exact accountable approvals govern the proposed installable current-commit testing lane? |
 | [Publishing the SE Harness development dashboard](harness-dashboard-publication.md) | How is the repository's release-bound public Explorer demonstration deployed and replayed? |
-| [Rehearsing the credential-free publication path](release-publication-rehearsal.md) | How is the last mile exercised on both runner platforms before release approval, and how is drift from the orchestrator caught? |
+| [Rehearsing the credential-free publication path](release-publication-rehearsal.md) | How does the rehearsal invoke the one release-qualification definition the release itself runs, and what does a rehearsal prove? |
 
 ## Know what is authoritative
 

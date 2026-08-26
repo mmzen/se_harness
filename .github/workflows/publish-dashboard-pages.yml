@@ -1,14 +1,21 @@
-name: Publish SE Harness Explorer demonstration
+# Standalone, manually dispatched publication of the release-bound Harness
+# Explorer demonstration: the recovery path for the deployment the release
+# workflow performs. It is a thin caller of the one Pages definition,
+# .github/workflows/pages-publication.yml (WO-CIP-002, SPEC-CIP-001 CIP-LEG 2).
+# Repository- and main-only; it takes the released record and the governance
+# commit the operator expects and refuses any other. Described in
+# docs/notes/harness-dashboard-publication.md.
+name: Publish Dashboard Pages
 
 on:
   workflow_dispatch:
     inputs:
       release_record:
-        description: Released formal record (for example RLS-SEH-006)
+        description: Released RLS identifier whose governance commit is demonstrated (for example RLS-SEH-012)
         required: true
         type: string
       governance_commit:
-        description: Full main-history commit that integrated the released record
+        description: Full governance commit the released record names; asserted against the record
         required: true
         type: string
 
@@ -20,240 +27,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build release-bound demonstration
+  pages:
+    name: Publish the release-bound demonstration
     if: >-
       github.repository == 'mmzen/se_harness' &&
       github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    env:
-      RELEASE_RECORD: ${{ inputs.release_record }}
-      GOVERNANCE_COMMIT: ${{ inputs.governance_commit }}
-    outputs:
-      release_tag: ${{ steps.resolve.outputs.tag }}
-      release_record: ${{ steps.resolve.outputs.release_record }}
-      candidate_commit: ${{ steps.resolve.outputs.candidate_commit }}
-      governance_commit: ${{ steps.resolve.outputs.governance_commit }}
-      snapshot_sha256: ${{ steps.package.outputs.snapshot_sha256 }}
-      dashboard_sha256: ${{ steps.package.outputs.published_dashboard_sha256 }}
-
-    steps:
-      - name: Check out trusted main history
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: main
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Select Python 3.11
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version: "3.11"
-
-      - name: Derive the release identity from the released record
-        id: plan
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_release.py resolve \
-            --repository "$GITHUB_WORKSPACE" \
-            --default-ref refs/heads/main \
-            --release-record "$RELEASE_RECORD" \
-            --output "$RUNNER_TEMP/release-plan.json" \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Confirm the immutable governance input
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "${{ steps.plan.outputs.governance_commit }}" = "$GOVERNANCE_COMMIT"
-
-      - name: Verify the published GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ steps.plan.outputs.tag }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          gh release view "$RELEASE_TAG" \
-            --repo "$GITHUB_REPOSITORY" \
-            --json tagName,isDraft,isPrerelease \
-            > "$RUNNER_TEMP/github-release.json"
-          python .github/scripts/publish_dashboard.py verify-github-release \
-            --metadata "$RUNNER_TEMP/github-release.json" \
-            --tag "$RELEASE_TAG"
-
-      - name: Resolve immutable release and governance provenance
-        id: resolve
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py resolve \
-            --repository "$GITHUB_WORKSPACE" \
-            --default-ref refs/heads/main \
-            --tag "${{ steps.plan.outputs.tag }}" \
-            --release-record "$RELEASE_RECORD" \
-            --governance-commit "$GOVERNANCE_COMMIT" \
-            --output "$RUNNER_TEMP/release-provenance.json" \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Check out the immutable governance snapshot
-        env:
-          RESOLVED_GOVERNANCE_COMMIT: ${{ steps.resolve.outputs.governance_commit }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          git worktree add --detach "$RUNNER_TEMP/governance" "$RESOLVED_GOVERNANCE_COMMIT"
-          test "$(git -C "$RUNNER_TEMP/governance" rev-parse HEAD)" = "$RESOLVED_GOVERNANCE_COMMIT"
-          test -z "$(git -C "$RUNNER_TEMP/governance" status --porcelain=v1 --untracked-files=all)"
-
-      - name: Resolve the released independent evaluator
-        id: evaluator
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py evaluator \
-            --repository "$RUNNER_TEMP/governance" \
-            --release-record "$RELEASE_RECORD" \
-            --output "$RUNNER_TEMP/evaluator.json" \
-            --github-output "$GITHUB_OUTPUT"
-
-      - name: Acquire and prove the released evaluator
-        env:
-          EVALUATOR_VERSION: ${{ steps.evaluator.outputs.evaluator_version }}
-          EVALUATOR_WHEEL: ${{ steps.evaluator.outputs.evaluator_wheel }}
-          EVALUATOR_URL: ${{ steps.evaluator.outputs.evaluator_url }}
-          EVALUATOR_PAYLOAD_SHA256: ${{ steps.evaluator.outputs.evaluator_payload_sha256 }}
-          EVALUATOR_WHEEL_SHA256: ${{ steps.evaluator.outputs.evaluator_sha256 }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m venv "$RUNNER_TEMP/evaluator-env"
-          curl --proto '=https' --tlsv1.2 --fail --location --silent --show-error \
-            --output "$RUNNER_TEMP/$EVALUATOR_WHEEL" "$EVALUATOR_URL"
-          printf '%s  %s\n' "$EVALUATOR_WHEEL_SHA256" "$RUNNER_TEMP/$EVALUATOR_WHEEL" \
-            | sha256sum --check -
-          "$RUNNER_TEMP/evaluator-env/bin/python" -m pip install \
-            --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
-          cd "$RUNNER_TEMP"
-          export PYTHONNOUSERSITE=1 PYTHONPATH=
-          mkdir "$RUNNER_TEMP/predecessor-view"
-          identity_args=(
-            --role released-evaluator
-            --expected-version "$EVALUATOR_VERSION"
-            --expected-root "$RUNNER_TEMP/evaluator-env"
-            --checkout-root "$RUNNER_TEMP/governance"
-            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256"
-            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"
-            --require-isolated-python --require-entry-point
-          )
-          if "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'; then
-            identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
-          fi
-          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-
-      - name: Validate with the released evaluator
-        env:
-          EVALUATOR_WHEEL: ${{ steps.evaluator.outputs.evaluator_wheel }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          cd "$GITHUB_WORKSPACE"
-          python -m se_harness qualify predecessor-view "$RUNNER_TEMP/governance" \
-            --release-record "$RELEASE_RECORD" \
-            --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-            --view-output "$RUNNER_TEMP/predecessor-view/governance" \
-            --output "$RUNNER_TEMP/predecessor-view-qualification.json" \
-            --json
-
-      - name: Generate the target-local canonical Explorer
-        shell: bash
-        run: |
-          set -euo pipefail
-          python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py" \
-            --root "$RUNNER_TEMP/predecessor-view/governance" \
-            --output "$RUNNER_TEMP/generated-dashboard"
-          test -z "$(git -C "$RUNNER_TEMP/governance" status --porcelain=v1 --untracked-files=all)"
-
-      - name: Prepare and attest the exact public payload
-        id: package
-        shell: bash
-        run: |
-          set -euo pipefail
-          python .github/scripts/publish_dashboard.py package \
-            --source "$RUNNER_TEMP/generated-dashboard" \
-            --destination "$RUNNER_TEMP/pages-site" \
-            --provenance "$RUNNER_TEMP/release-provenance.json" \
-            --output "$RUNNER_TEMP/publication-manifest.json" \
-            --github-output "$GITHUB_OUTPUT"
-          test "$(find "$RUNNER_TEMP/pages-site" -maxdepth 1 -type f | wc -l)" -eq 4
-          test "$(find "$RUNNER_TEMP/pages-site" -mindepth 1 -maxdepth 1 -type l | wc -l)" -eq 0
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-
-      - name: Upload the exact Pages artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: ${{ runner.temp }}/pages-site
-          retention-days: 1
-
-      - name: Summarize the prepared demonstration
-        env:
-          RELEASE_TAG: ${{ steps.resolve.outputs.tag }}
-          RESOLVED_RELEASE_RECORD: ${{ steps.resolve.outputs.release_record }}
-          RESOLVED_CANDIDATE_COMMIT: ${{ steps.resolve.outputs.candidate_commit }}
-          RESOLVED_GOVERNANCE_COMMIT: ${{ steps.resolve.outputs.governance_commit }}
-          SNAPSHOT_SHA256: ${{ steps.package.outputs.snapshot_sha256 }}
-          DASHBOARD_SHA256: ${{ steps.package.outputs.published_dashboard_sha256 }}
-        shell: bash
-        run: |
-          {
-            printf '### SE Harness Explorer demonstration\n\n'
-            printf -- '- Release: `%s` (`%s`)\n' "$RELEASE_TAG" "$RESOLVED_RELEASE_RECORD"
-            printf -- '- Candidate commit: `%s`\n' "$RESOLVED_CANDIDATE_COMMIT"
-            printf -- '- Governance commit: `%s`\n' "$RESOLVED_GOVERNANCE_COMMIT"
-            printf -- '- Snapshot SHA-256: `%s`\n' "$SNAPSHOT_SHA256"
-            printf -- '- Published dashboard SHA-256: `%s`\n' "$DASHBOARD_SHA256"
-            printf -- '- Authority: derived, read-only demonstration; no formal transition.\n'
-          } >> "$GITHUB_STEP_SUMMARY"
-
-  deploy:
-    name: Deploy the public demonstration
-    needs: build
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/pages-publication.yml
     permissions:
       contents: read
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy the Pages artifact
-        id: deployment
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
-
-      - name: Summarize the deployment
-        env:
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
-          RELEASE_TAG: ${{ needs.build.outputs.release_tag }}
-          RELEASE_RECORD: ${{ needs.build.outputs.release_record }}
-          CANDIDATE_COMMIT: ${{ needs.build.outputs.candidate_commit }}
-          GOVERNANCE_COMMIT: ${{ needs.build.outputs.governance_commit }}
-          SNAPSHOT_SHA256: ${{ needs.build.outputs.snapshot_sha256 }}
-          DASHBOARD_SHA256: ${{ needs.build.outputs.dashboard_sha256 }}
-        shell: bash
-        run: |
-          {
-            printf '### Deployed SE Harness demonstration\n\n'
-            printf -- '- URL: %s\n' "$PAGE_URL"
-            printf -- '- Release: `%s` (`%s`)\n' "$RELEASE_TAG" "$RELEASE_RECORD"
-            printf -- '- Candidate commit: `%s`\n' "$CANDIDATE_COMMIT"
-            printf -- '- Governance commit: `%s`\n' "$GOVERNANCE_COMMIT"
-            printf -- '- Snapshot SHA-256: `%s`\n' "$SNAPSHOT_SHA256"
-            printf -- '- Published dashboard SHA-256: `%s`\n' "$DASHBOARD_SHA256"
-          } >> "$GITHUB_STEP_SUMMARY"
+    with:
+      release_record: ${{ inputs.release_record }}
+      governance_commit: ${{ inputs.governance_commit }}

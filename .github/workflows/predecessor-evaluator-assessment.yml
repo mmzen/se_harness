@@ -1,8 +1,22 @@
+# Plans and assesses the transition of this repository's root evaluator to the
+# release the candidate would become, credential-free. Trigger policy
+# (WO-CIP-001, SPEC-CIP-001 CIP-TRG): pull requests, and pushes to main,
+# release/** and candidate/** only; a newer push cancels the older run.
+# Described in docs/notes/developing-se-harness.md, "Advancing the root
+# evaluator".
 name: Governor Transition Assessment
 
 on:
   pull_request:
   push:
+    branches:
+      - main
+      - "release/**"
+      - "candidate/**"
+
+concurrency:
+  group: governor-transition-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

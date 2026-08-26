@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -551,14 +552,17 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("required", report["assurance"]["commit_bound_verification"])
         self.assertEqual("test-owner", report["assurance"]["decided_by"])
         self.assertEqual([], report["diagnostics"])
+        self.assertEqual(
+            ["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"],
+            report["reading_manifest"][:3],
+        )
         for path in (
-            "ENGINEERING_HARNESS.md",
-            "docs/engineering/WORKFLOW.md",
-            "docs/engineering/TECHNICAL_COMMUNICATION.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
             self.assertIn(path, report["reading_manifest"])
+        for policy in ("docs/engineering/WORKFLOW.md", "docs/engineering/TECHNICAL_COMMUNICATION.md"):
+            self.assertNotIn(policy, report["reading_manifest"])
         self.assertNotIn("repository_commands", report)
         after = {
             path.relative_to(target).as_posix(): path.read_bytes()
@@ -905,7 +909,7 @@ REQUIRED_OWNER_CONTENT = (
     "python scripts/validate_release_distributions.py --root .",
     "se_harness/cli.py",
     "pyproject.toml",
-    "docs/engineering/REPOSITORY_CONTEXT.md",
+    "docs/notes/developing-se-harness.md#release-sequences",
     "templates/repository/standard/",
     "`.engineering-harness.lock` is authoritative",
     "Harness-Work-Order: WO-",
@@ -923,7 +927,7 @@ WITHDRAWN_RESTATEMENTS = (
 
 
 class OwnerInstructionRegionTests(unittest.TestCase):
-    """Evidence for REQ-IAR-020 and SPEC-IAR-012: this repository's own owner region."""
+    """Evidence for REQ-ADS-007 (successor of REQ-IAR-020) and SPEC-IAR-012: this repository's own owner region."""
 
     def setUp(self) -> None:
         self.raw = AGENTS.read_bytes()
@@ -1027,3 +1031,112 @@ class OwnerInstructionRegionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
+    """Evidence for REQ-ADS-003 and REQ-ADS-006: the rendered router and installed card."""
+
+    def setUp(self) -> None:
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+
+    def test_router_states_the_scope_of_its_obligations_after_the_invariants(self) -> None:
+        target = self.root / "target"
+        code = main(["init", str(target), "--project-name", "Example"])
+        self.assertEqual(0, code)
+        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
+        heading = "## Scope of these obligations"
+        self.assertEqual(1, router.count(heading))
+        self.assertLess(router.index("## Global invariants"), router.index(heading))
+        self.assertLess(router.index(heading), router.index("## Routing"))
+        section = router.split(heading, 1)[1].split("## Routing", 1)[0]
+        for phrase in (
+            "bind an actor executing or reporting a lifecycle stage",
+            "Reading,\nanalysis, and answering questions are unconstrained",
+            "no finding is presented as\na formal result",
+            "docs/engineering/OPERATING_CARD.md",
+            "listed by the phase\nreading manifest",
+            "not required to read them to act",
+        ):
+            self.assertIn(phrase, section)
+        card = target / "docs/engineering/OPERATING_CARD.md"
+        self.assertTrue(card.is_file())
+        self.assertLessEqual(len(card.read_bytes()), 1024)
+        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertEqual("managed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+
+    def test_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order(self) -> None:
+        import shutil
+        import subprocess
+
+        if shutil.which("git") is None:
+            self.skipTest("git is unavailable")
+        from se_harness.preflight import run_preflight
+
+        target = self.root / "orphan"
+        self.assertEqual(0, main(["init", str(target), "--project-name", "Example"]))
+        shutil.copytree(PACKET_ROOT, target / "docs" / "engineering" / "instruction-architecture")
+        operating_contract = target / "docs/engineering/instruction-architecture/operations/OPS-IAR-001.md"
+        operating_contract.write_text(
+            re.sub(r'^status = "[^"]+"$', 'status = "draft"', operating_contract.read_text(encoding="utf-8"), count=1, flags=re.MULTILINE),
+            encoding="utf-8",
+        )
+        for requirement in (target / "docs/engineering/instruction-architecture/requirements").glob("*.md"):
+            text = requirement.read_text(encoding="utf-8")
+            if 'status = "superseded"' in text:
+                requirement.write_text(text.replace('status = "superseded"', 'status = "implemented"', 1), encoding="utf-8")
+
+        def git(*arguments: str) -> str:
+            completed = subprocess.run(
+                ["git", "-C", str(target), *arguments],
+                capture_output=True, text=True, check=True,
+                env={
+                    **os.environ,
+                    "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid",
+                    "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.invalid",
+                },
+            )
+            return completed.stdout.strip()
+
+        git("init", "-q", "-b", "main")
+        git("add", "-A")
+        git("commit", "-q", "-m", "base")
+        git("checkout", "-q", "-b", "feature")
+        (target / "feature.txt").write_text("x\n", encoding="utf-8")
+        git("add", "-A")
+        git("commit", "-q", "-m", "feature")
+        orphan = git("rev-parse", "HEAD")
+        git("checkout", "-q", "main")
+
+        record = target / "docs/engineering/instruction-architecture/verification-records/VREC-IAR-900.md"
+        record.parent.mkdir(parents=True, exist_ok=True)
+        record.write_text(
+            "+++\n"
+            'id = "VREC-IAR-900"\n'
+            'type = "verification_record"\n'
+            'title = "Orphaned candidate"\n'
+            'status = "ready"\n'
+            'owners = ["quality-owner"]\n'
+            'created = "2026-08-25"\n'
+            'updated = "2026-08-25"\n'
+            f'commit = "{orphan}"\n'
+            'git_object_format = "sha1"\n'
+            'worktree_state = "clean"\n'
+            'prepared_at = "2026-08-25T00:00:00Z"\n'
+            'prepared_by = "quality-owner"\n'
+            f'artifact_snapshot_sha256 = "{"b" * 64}"\n'
+            'evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-001-verification.md"]\n'
+            "\n[relations]\n"
+            'verifies_work_order = ["WO-IAR-001"]\n'
+            'conforms_to = ["VER-IAR-001"]\n'
+            "+++\n\n# Orphaned candidate\n",
+            encoding="utf-8",
+        )
+        report = run_preflight(target, work_order_id="WO-IAR-001", phase="review")
+        messages = [item.message for item in report.diagnostics if item.code == "W-ADS-002"]
+        self.assertEqual(1, len(messages), [item for item in report.diagnostics if item.code.startswith("W")])
+        self.assertIn("VREC-IAR-900", messages[0])
+        self.assertIn(orphan, messages[0])
+        start = run_preflight(target, work_order_id="WO-IAR-001", phase="start")
+        self.assertNotIn("W-ADS-002", {item.code for item in start.diagnostics})

@@ -9,13 +9,13 @@
   "skills": {
     "harness-draft-change": {
       "previous": {
-        "contract_sha256": "6a14303b9349a55b34b11ab106451e541235e143c342a1a5e2a8261b3afd37d6",
-        "manifest_sha256": "9622fdd52ba7bd8c74ed5eba973629c6070a760f1ea1363ba3099d6736d82525",
+        "contract_sha256": "c386bc9d9a7db6e26b046853782740f5bfb751bdc15eefa9bf7c5ee59c5a7dbf",
+        "manifest_sha256": "2aabf3ab5026cc6afcf3bec8b90e2ebacc20775f49642d0df7a162dc92b4bc32",
         "schema": "se-harness-skill-contract-v2"
       },
       "current": {
         "contract_sha256": "318ddf054dc14407ef586df79dea52d03510bd2423f2f91cb90d87a45c04d3a6",
-        "manifest_sha256": "c37e706a356f6ad506f5b0ca30f13727ead596a7a651b6c3be3e8994cf314343",
+        "manifest_sha256": "86a8598ef98571622ab2869eed9b1771b353ac7fc9be32310707a77ea6f1aa5c",
         "schema": "se-harness-skill-contract-v3",
         "version": "2.0.0",
         "interface_operation": "delegated-workflow-execute",

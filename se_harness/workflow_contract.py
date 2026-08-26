@@ -13,11 +13,13 @@ from typing import Any, Iterable, Mapping
 WORKFLOW_SCHEMA = "se-harness-workflow-v4"
 QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v1"
 STEP_KINDS = {"command", "decision", "reference"}
+CORRECTIVE_KINDS = {"command", "escalation", "response"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
 PARAMETER_TYPES = {"artifact_id", "actor", "path", "path_list", "status", "text"}
 CHECKPOINTS = {"start", "pre-action", "transition", "handoff"}
 EVALUATORS = {
     "artifact_status",
+    "authoring_ready",
     "change_set_complete",
     "changed_paths_within_scope",
     "execution_scope_declared",
@@ -245,7 +247,60 @@ def _validate_placeholders(value: object, parameters: set[str], label: str) -> N
             _validate_placeholders(item, parameters, label)
 
 
-def _validate_procedures(workflow: Mapping[str, Any], gate_ids: set[str]) -> dict[str, Mapping[str, Any]]:
+def _validate_corrective(
+    step: Mapping[str, Any],
+    gate_predicates: Mapping[str, list[str]],
+    parameters: set[str],
+    label: str,
+) -> None:
+    """Require one distinct corrective form per predicate of a gated command step (ADS-RST-001)."""
+
+    expected = [
+        predicate_id
+        for gate_id in step.get("gate_ids", [])
+        for predicate_id in gate_predicates.get(gate_id, [])
+    ]
+    corrective = step.get("corrective")
+    if not expected:
+        if corrective is not None:
+            raise ContractError(f"WEX-ADS-001: {label} declares corrective forms without gates")
+        return
+    if not isinstance(corrective, Mapping):
+        raise ContractError(f"WEX-ADS-001: {label} has no corrective forms for its gate predicates")
+    if set(corrective) != set(expected):
+        missing = sorted(set(expected) - set(corrective))
+        extra = sorted(set(corrective) - set(expected))
+        raise ContractError(
+            f"WEX-ADS-001: {label} corrective forms do not cover its predicates "
+            f"(missing {missing}, extra {extra})"
+        )
+    for predicate_id, form in corrective.items():
+        if not isinstance(form, Mapping) or form.get("kind") not in CORRECTIVE_KINDS:
+            raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} has an unknown kind")
+        kind = form["kind"]
+        if kind == "command":
+            argv = form.get("argv")
+            if set(form) != {"kind", "argv"} or not isinstance(argv, list) or not argv or not all(isinstance(item, str) for item in argv):
+                raise ContractError(f"WEX-ADS-001: {label} corrective command for {predicate_id} requires argv")
+            _validate_placeholders(argv, parameters, f"{label} corrective {predicate_id}")
+            if argv == step.get("argv"):
+                raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} repeats the evaluated command")
+        elif kind == "escalation":
+            right = form.get("decision_right")
+            if set(form) != {"kind", "decision_right"} or not isinstance(right, str) or not right.startswith("DR-"):
+                raise ContractError(f"WEX-ADS-001: {label} corrective escalation for {predicate_id} needs a decision right")
+        else:
+            value = form.get("value")
+            if set(form) != {"kind", "value"} or not isinstance(value, str) or not value.strip():
+                raise ContractError(f"WEX-ADS-001: {label} corrective response for {predicate_id} needs text")
+            _validate_placeholders(value, parameters, f"{label} corrective {predicate_id}")
+
+
+def _validate_procedures(
+    workflow: Mapping[str, Any],
+    gate_ids: set[str],
+    gate_predicates: Mapping[str, list[str]] | None = None,
+) -> dict[str, Mapping[str, Any]]:
     raw = workflow.get("procedures")
     if not isinstance(raw, list):
         raise ContractError("workflow procedures must be an array")
@@ -269,11 +324,14 @@ def _validate_procedures(workflow: Mapping[str, Any], gate_ids: set[str]) -> dic
                 raise ContractError(f"procedure {procedure_id} step {step_id} has unknown kind")
             common = {"id", "kind", "gate_ids", "effects", "non_effects"}
             if kind == "command":
-                allowed = common | {"argv"}
+                allowed = common | {"argv", "corrective"}
                 argv = step.get("argv")
                 if not isinstance(argv, list) or not argv or not all(isinstance(item, str) for item in argv):
                     raise ContractError(f"procedure {procedure_id} command {step_id} requires argv")
                 _validate_placeholders(argv, parameters, f"procedure {procedure_id} command {step_id}")
+                _validate_corrective(
+                    step, gate_predicates or {}, parameters, f"procedure {procedure_id} command {step_id}"
+                )
             elif kind == "decision":
                 allowed = common | {"decision_right", "role", "artifact", "outcomes", "response", "decision"}
                 if not isinstance(step.get("decision_right"), str) or not str(step["decision_right"]).startswith("DR-"):
@@ -296,7 +354,7 @@ def _validate_procedures(workflow: Mapping[str, Any], gate_ids: set[str]) -> dic
                     raise ContractError(f"procedure {procedure_id} reference {step_id} must declare a procedure ID")
                 allowed = common | {"procedure_id"}
                 references[procedure_id].append(target)
-            if set(step) != allowed:
+            if not set(step).issubset(allowed) or not common.issubset(step) or (kind == "command" and "argv" not in step):
                 raise ContractError(f"procedure {procedure_id} step {step_id} has invalid fields")
             for field in ("gate_ids", "effects", "non_effects"):
                 values = _strings(step.get(field), f"procedure {procedure_id} step {step_id} {field}")
@@ -379,7 +437,10 @@ def validate_contracts(
             if "statuses" in predicate:
                 _strings(predicate["statuses"], f"predicate {predicate_id} statuses")
             predicates[predicate_id] = predicate
-    procedures = _validate_procedures(workflow, set(gates))
+    gate_predicates = {
+        gate_id: [str(item["id"]) for item in gate["predicates"]] for gate_id, gate in gates.items()
+    }
+    procedures = _validate_procedures(workflow, set(gates), gate_predicates)
     raw_operations = workflow.get("agentic_operations")
     if not isinstance(raw_operations, list) or len(raw_operations) != len(PHASE4_AGENTIC_OPERATIONS):
         raise ContractError("workflow must declare the closed four-operation Phase 4 catalog")
@@ -435,6 +496,58 @@ def load_validated_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str
     quality = load_quality_gate_contract()
     rules, procedures, gates = validate_contracts(workflow, quality)
     return workflow, quality, rules, procedures, gates
+
+
+OPERATING_CARD_LIMIT = 1024
+OPERATING_CARD_PATH = "docs/engineering/OPERATING_CARD.md"
+_CARD_STOP_CONDITIONS = (
+    "managed integrity fails",
+    "the formal graph is invalid",
+    "no phase-eligible selected work order exists",
+    "a required governing artifact or gate is missing",
+    "a required check fails",
+    "owner instructions conflict with the managed contract",
+    "remediation would exceed the selected work order",
+    "the action lacks its decision right or explicit authority",
+)
+_CARD_TRAPS = (
+    "A PR body needs one standalone `Harness-Work-Order: WO-...` line with LF endings; CI reads the stored event.",
+    "A VREC or RLS binds an earlier commit; it lives in a later governance commit and is never rewritten.",
+    "Artifact IDs are shared across branches and sessions; check every ref before numbering.",
+    "A `ready` VREC whose candidate leaves `HEAD` (rebase, merge below it) is orphaned; verify, reject, or succeed it.",
+)
+
+
+def render_operating_card(
+    workflow: Mapping[str, Any] | None = None,
+    quality_gates: Mapping[str, Any] | None = None,
+) -> bytes:
+    """Render the managed operating card from the machine contracts (ADS-RDM-002).
+
+    The card is derived content: every line restates a contract value or a
+    router rule. It is bounded to OPERATING_CARD_LIMIT bytes.
+    """
+
+    workflow = load_workflow_contract() if workflow is None else workflow
+    quality_gates = load_quality_gate_contract() if quality_gates is None else quality_gates
+    validate_contracts(workflow, quality_gates)
+    lines = [
+        "# Operating card",
+        "",
+        "Derived from `WORKFLOW.json` and `QUALITY_GATES.json`; `harnessctl` alone computes",
+        "legality and the next step.",
+        "",
+        "## Stop when",
+        "",
+    ]
+    lines.extend(f"- {item};" for item in _CARD_STOP_CONDITIONS)
+    lines.extend(["", "Then report the failing rule, the unchanged state, and the corrective step.", "", "## Traps", ""])
+    lines.extend(f"- {item}" for item in _CARD_TRAPS)
+    lines.append("")
+    rendered = "\n".join(lines).encode("utf-8")
+    if len(rendered) > OPERATING_CARD_LIMIT:
+        raise ContractError(f"WEX-ADS-003: operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")
+    return rendered
 
 
 def contract_match(value: str, accepted: object) -> bool:

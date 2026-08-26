@@ -369,6 +369,7 @@ def _check(args: argparse.Namespace) -> int:
             changed_paths=args.changed_path,
             changes_complete=args.changes_complete,
             change_manifest=Path(args.change_manifest) if args.change_manifest else None,
+            pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         result = legacy_to_schema2(
@@ -380,7 +381,7 @@ def _check(args: argparse.Namespace) -> int:
 
 def _select_work_order(args: argparse.Namespace) -> int:
     try:
-        print(select_from_event(Path(args.event)))
+        print(select_from_event(Path(args.event), field=args.field))
         return 0
     except SelectionError as exc:
         raise HarnessError(f"work-order selection: {exc}") from exc
@@ -431,6 +432,12 @@ def _prepare_release(args: argparse.Namespace) -> int:
 
 
 def _focus(args: argparse.Namespace) -> int:
+    if args.result_schema == 1:
+        print(
+            "WEX-ADS-002: result schema 1 is a compatibility projection, not restitution; "
+            "use --result-schema 2 for the canonical block",
+            file=sys.stderr,
+        )
     try:
         if args.result_schema == 2:
             result = focus_schema2(
@@ -546,6 +553,14 @@ def _create_artifact(args: argparse.Namespace) -> int:
         print("dry run: no files were written")
     else:
         print("created an incomplete draft; complete accountable fields and run harnessctl validate before approval")
+        if not args.quiet:
+            from se_harness.artifact_layout import authoring_checklist
+
+            bullets = authoring_checklist(Path(args.target), args.artifact_type)
+            if bullets:
+                print(f"authoring checklist for {args.artifact_type} (docs/engineering/ARTIFACT_AUTHORING.md):")
+                for item in bullets:
+                    print(f"- {item}")
     return 0
 
 
@@ -937,8 +952,8 @@ def build_parser() -> argparse.ArgumentParser:
     selected_focus.add_argument("--json", action="store_true")
     selected_focus.add_argument("--include-background", action="store_true")
     selected_focus.add_argument(
-        "--result-schema", type=int, choices=(1, 2), default=1,
-        help="select compatibility schema 1 or canonical restitution schema 2",
+        "--result-schema", type=int, choices=(1, 2), default=2,
+        help="canonical restitution schema 2 (default) or compatibility schema 1, which is not restitution",
     )
     selected_focus.set_defaults(handler=_focus)
 
@@ -965,6 +980,10 @@ def build_parser() -> argparse.ArgumentParser:
         "--change-manifest",
         help="in-repository se-harness-change-set-v1 JSON; exclusive with changed-path options",
     )
+    check.add_argument(
+        "--pull-request-body",
+        help="UTF-8 pull-request body file; reports W-ADS-001 when its work-order trailer carries a carriage return",
+    )
     check.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     check.set_defaults(handler=_check)
 
@@ -986,6 +1005,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="select one structured work-order field from a GitHub pull-request event",
     )
     select_work.add_argument("--event", required=True)
+    select_work.add_argument(
+        "--field", choices=("work-order", "restitution-digest"), default="work-order",
+        help="declared field to select; restitution-digest prints empty text when absent",
+    )
     select_work.set_defaults(handler=_select_work_order)
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
@@ -1030,6 +1053,7 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--type", required=True, dest="artifact_type")
     create.add_argument("--id", required=True, dest="artifact_id")
     create.add_argument("--dry-run", action="store_true")
+    create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.set_defaults(handler=_create_artifact)
 
     renumber = commands.add_parser(

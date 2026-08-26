@@ -486,6 +486,36 @@ def _docker_build(control: Path, workspace: Path, recipe: BuildRecipe, version: 
         raise BuildRecipeError("producer did not emit valid bounded evidence") from exc
 
 
+def _is_posix() -> bool:
+    return os.name == "posix"
+
+
+def _hand_back_workspace(work_root: Path, image: str) -> None:
+    """Return the producer's root-owned trees to the calling user.
+
+    WO-RLO-007. The producer runs as root inside the bind-mounted workspace; on a
+    hosted Linux runner the outputs are then unreadable by the runner user
+    (`Permission denied` on `final/<sdist>`) and the `tempfile.TemporaryDirectory`
+    teardown fails with `Operation not permitted`. One further run of the same
+    pinned image changes the ownership back; it runs right after each producer
+    build, before the outputs are read, and once more over the whole work root on
+    the failure path. Nothing about the recipe, the lock, the producer's arguments
+    or the compared outputs is involved; on a non-POSIX host there is nothing to do.
+    """
+
+    if not _is_posix():
+        return
+    owner = f"{os.getuid()}:{os.getgid()}"
+    _bounded_run(
+        [
+            "docker", "run", "--rm", "--pull", "never", "--platform", "linux/amd64",
+            "--mount", f"type=bind,source={work_root},target=/workspace",
+            image, "chown", "-R", owner, "/workspace",
+        ],
+        timeout=300,
+    )
+
+
 def replay_build(
     repository: Path,
     commit: str,
@@ -497,13 +527,6 @@ def replay_build(
     expected_wheel_sha256: str | None = None,
     expected_sdist_sha256: str | None = None,
 ) -> dict[str, Any]:
-    from repository_tools.release_distribution import (
-        checksum_manifest_bytes,
-        create_manifest,
-        expected_distribution_names,
-        source_manifest_sha256,
-    )
-
     root = repository.resolve(strict=True)
     recipe = load_build_recipe_at(root, commit, path=recipe_path, expected_sha256=recipe_sha256)
     epoch_text = str(_run_git(root, "show", "-s", "--format=%ct", commit))
@@ -521,48 +544,86 @@ def replay_build(
         raise BuildRecipeError("replay output directory must be outside the repository")
     image = _docker_image_identity(recipe.image)
     destination.parent.mkdir(parents=True, exist_ok=True)
+    # ignore_cleanup_errors: the hand-back below is what makes teardown possible on a
+    # hosted runner; if it fails, the failure is reported on its own and never masked
+    # by, or masking, the build result (WO-RLO-007).
     with tempfile.TemporaryDirectory(
-        prefix=".se-harness-release-build-", dir=destination.parent
+        prefix=".se-harness-release-build-", dir=destination.parent, ignore_cleanup_errors=True
     ) as temporary:
         work_root = Path(temporary)
-        observations: list[dict[str, Any]] = []
-        final_paths: list[Path] = []
-        for suffix in ("a", "b"):
-            workspace = work_root / suffix
-            workspace.mkdir()
-            _safe_extract_candidate(root, commit, workspace / "source")
-            observations.append(_docker_build(root, workspace, recipe, version, epoch))
-            final_paths.append(workspace / "final")
-        wheel_name, sdist_name = expected_distribution_names(version)
-        hashes: list[dict[str, str]] = []
-        for final in final_paths:
-            if sorted(item.name for item in final.iterdir()) != sorted((wheel_name, sdist_name)):
-                raise BuildRecipeError("producer final output file set differs")
-            hashes.append({
-                "wheel_sha256": _sha256_bytes((final / wheel_name).read_bytes()),
-                "sdist_sha256": _sha256_bytes((final / sdist_name).read_bytes()),
-            })
-        if hashes[0] != hashes[1] or (final_paths[0] / wheel_name).read_bytes() != (final_paths[1] / wheel_name).read_bytes() or (final_paths[0] / sdist_name).read_bytes() != (final_paths[1] / sdist_name).read_bytes():
-            raise BuildRecipeError(f"independent builds differ: {hashes}")
-        if expected_wheel_sha256 is not None and hashes[0]["wheel_sha256"] != expected_wheel_sha256:
-            raise BuildRecipeError(f"rebuilt wheel differs from accepted hash: {hashes[0]['wheel_sha256']}")
-        if expected_sdist_sha256 is not None and hashes[0]["sdist_sha256"] != expected_sdist_sha256:
-            raise BuildRecipeError(f"rebuilt sdist differs from accepted hash: {hashes[0]['sdist_sha256']}")
-        staged_bundle = work_root / "bundle"
-        staged_bundle.mkdir()
-        shutil.copyfile(final_paths[0] / wheel_name, staged_bundle / wheel_name)
-        shutil.copyfile(final_paths[0] / sdist_name, staged_bundle / sdist_name)
-        checksums = checksum_manifest_bytes(version, hashes[0]["wheel_sha256"], hashes[0]["sdist_sha256"])
-        (staged_bundle / "SHA256SUMS").write_bytes(checksums)
-        manifest = create_manifest(
-            root,
-            commit,
-            version,
-            staged_bundle / wheel_name,
-            staged_bundle / sdist_name,
-            build_recipe=PurePosixPath(recipe.path),
-        )
-        os.replace(staged_bundle, destination)
+        try:
+            result = _replay_in_workspace(
+                root, commit, version, recipe, epoch, image, work_root, destination,
+                expected_wheel_sha256=expected_wheel_sha256, expected_sdist_sha256=expected_sdist_sha256,
+            )
+        except BaseException:
+            try:
+                _hand_back_workspace(work_root, image)
+            except BuildRecipeError:
+                pass  # the build failure is the result; a hand-back failure only leaves the temporary tree behind
+            raise
+    return result
+
+
+def _replay_in_workspace(
+    root: Path,
+    commit: str,
+    version: str,
+    recipe: BuildRecipe,
+    epoch: int,
+    image: str,
+    work_root: Path,
+    destination: Path,
+    *,
+    expected_wheel_sha256: str | None,
+    expected_sdist_sha256: str | None,
+) -> dict[str, Any]:
+    from repository_tools.release_distribution import (
+        checksum_manifest_bytes,
+        create_manifest,
+        expected_distribution_names,
+        source_manifest_sha256,
+    )
+
+    observations: list[dict[str, Any]] = []
+    final_paths: list[Path] = []
+    for suffix in ("a", "b"):
+        workspace = work_root / suffix
+        workspace.mkdir()
+        _safe_extract_candidate(root, commit, workspace / "source")
+        observations.append(_docker_build(root, workspace, recipe, version, epoch))
+        _hand_back_workspace(workspace, image)  # before the outputs are read (WO-RLO-007)
+        final_paths.append(workspace / "final")
+    wheel_name, sdist_name = expected_distribution_names(version)
+    hashes: list[dict[str, str]] = []
+    for final in final_paths:
+        if sorted(item.name for item in final.iterdir()) != sorted((wheel_name, sdist_name)):
+            raise BuildRecipeError("producer final output file set differs")
+        hashes.append({
+            "wheel_sha256": _sha256_bytes((final / wheel_name).read_bytes()),
+            "sdist_sha256": _sha256_bytes((final / sdist_name).read_bytes()),
+        })
+    if hashes[0] != hashes[1] or (final_paths[0] / wheel_name).read_bytes() != (final_paths[1] / wheel_name).read_bytes() or (final_paths[0] / sdist_name).read_bytes() != (final_paths[1] / sdist_name).read_bytes():
+        raise BuildRecipeError(f"independent builds differ: {hashes}")
+    if expected_wheel_sha256 is not None and hashes[0]["wheel_sha256"] != expected_wheel_sha256:
+        raise BuildRecipeError(f"rebuilt wheel differs from accepted hash: {hashes[0]['wheel_sha256']}")
+    if expected_sdist_sha256 is not None and hashes[0]["sdist_sha256"] != expected_sdist_sha256:
+        raise BuildRecipeError(f"rebuilt sdist differs from accepted hash: {hashes[0]['sdist_sha256']}")
+    staged_bundle = work_root / "bundle"
+    staged_bundle.mkdir()
+    shutil.copyfile(final_paths[0] / wheel_name, staged_bundle / wheel_name)
+    shutil.copyfile(final_paths[0] / sdist_name, staged_bundle / sdist_name)
+    checksums = checksum_manifest_bytes(version, hashes[0]["wheel_sha256"], hashes[0]["sdist_sha256"])
+    (staged_bundle / "SHA256SUMS").write_bytes(checksums)
+    manifest = create_manifest(
+        root,
+        commit,
+        version,
+        staged_bundle / wheel_name,
+        staged_bundle / sdist_name,
+        build_recipe=PurePosixPath(recipe.path),
+    )
+    os.replace(staged_bundle, destination)
     return {
         "schema": REPLAY_SCHEMA,
         "authority": "technical replay evidence only; no lifecycle or external-action authority",

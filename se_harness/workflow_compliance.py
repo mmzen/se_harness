@@ -10,7 +10,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
-from se_harness.preflight import run_preflight
+from se_harness.preflight import orphaned_ready_records, run_preflight
 from se_harness.workflow_contract import (
     ContractError,
     load_validated_contracts,
@@ -19,6 +19,7 @@ from se_harness.workflow_contract import (
 from se_harness.workflow_procedures import (
     ProcedureError,
     command_or_response,
+    corrective_response,
     decision_required,
     resolve_procedure,
     select_current_step,
@@ -325,6 +326,8 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return _preflight_status(context, "review")
     if name == "review_evidence_available":
         return _review_evidence(context)
+    if name == "authoring_ready":
+        return authoring_ready(context.artifact)
     raise ContractError(f"unknown predicate evaluator {name}")
 
 
@@ -385,6 +388,7 @@ def check_workflow(
     changed_paths: Iterable[str] = (),
     changes_complete: bool = False,
     change_manifest: Path | None = None,
+    pull_request_body: Path | None = None,
 ) -> dict[str, Any]:
     if checkpoint not in {"start", "pre-action", "handoff"}:
         raise HarnessError("WEX210: public check checkpoint must be start, pre-action, or handoff")
@@ -466,7 +470,18 @@ def check_workflow(
         f"{item['code']}: {item['message']}"
         for item in [*repository_errors, *scoped]
     ]
-    blockers = [*predicate_blockers, *finding_blockers]
+    trap_blockers: list[str] = []
+    if checkpoint == "handoff" and primary.artifact_type == "work_order":
+        trap_blockers.extend(
+            f"W-ADS-002: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
+        )
+        if pull_request_body is not None:
+            trap_blockers.extend(f"W-ADS-001: {message}" for message in _pull_request_body_findings(root, pull_request_body))
+    if trap_blockers:
+        passed = False
+        outcome = "blocked"
+        current_step = select_current_step(resolved, checkpoint=checkpoint, passed=False)
+    blockers = [*predicate_blockers, *finding_blockers, *trap_blockers]
     action = (
         str(current_step.get("decision", "Provide the required decision"))
         if current_step["kind"] == "decision"
@@ -474,6 +489,23 @@ def check_workflow(
         if current_step["kind"] == "command"
         else "Follow the bound reference"
     )
+    next_command = command_or_response(current_step)
+    if not passed:
+        first_failing = next(
+            (
+                predicate
+                for gate in gate_results
+                for predicate in gate["predicates"]
+                if predicate["status"] != "pass"
+            ),
+            None,
+        )
+        action, next_command = corrective_response(
+            current_step, first_failing, formal_snapshot_sha256=context.formal_snapshot_sha256
+        )
+        evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
+        if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:
+            raise HarnessError("WEX-ADS-001: the corrective command repeats the evaluated command")
     restitution = {
         "outcome": outcome,
         "done": [f"Evaluated {checkpoint} compliance for {artifact_id}."],
@@ -482,7 +514,7 @@ def check_workflow(
         "current_lifecycle_state": [f"{artifact_id} is {primary.status}."],
         "decision_required": decision_required(current_step) if passed else None,
         "next": {"procedure_id": selected_procedure, "step_id": current_step["id"], "action": action},
-        "command_or_response": command_or_response(current_step),
+        "command_or_response": next_command,
         "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
     }
     return build_result(
@@ -600,6 +632,66 @@ def focus_schema2(
     )
 
 
+def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
+    """Report W-ADS-001 for a pull-request body whose trailer carries a carriage return."""
+
+    from se_harness.github_ci import MAX_EVENT_BYTES, carriage_return_trailer_offsets
+
+    try:
+        with body_path.open("rb") as handle:
+            raw = handle.read(MAX_EVENT_BYTES + 1)
+    except OSError as exc:
+        raise HarnessError(f"WEX200: cannot read pull-request body: {exc}") from exc
+    if len(raw) > MAX_EVENT_BYTES:
+        raise HarnessError("WEX200: pull-request body exceeds the size limit")
+    try:
+        body = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise HarnessError("WEX200: pull-request body must be UTF-8") from exc
+    return [
+        (
+            f"the Harness-Work-Order line ends with a carriage return at byte offset {offset}; "
+            "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) before pushing"
+        )
+        for offset in carriage_return_trailer_offsets(body)
+    ]
+
+
+_PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
+_FENCE = re.compile(r"```.*?```", re.DOTALL)
+_INLINE_CODE = re.compile(r"`[^`\n]*`")
+_DEFINITION_TYPES = {
+    "intent", "capability", "requirement", "specification", "architecture", "adr",
+    "verification", "release_contract", "operating_contract",
+}
+
+
+def authoring_ready(artifact: Any) -> tuple[str, str]:
+    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
+
+    try:
+        text = artifact.path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeError) as exc:
+        return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
+    prose = _INLINE_CODE.sub("", _FENCE.sub("", text.replace("\r\n", "\n")))
+    # the template's five shape comments live in the front matter; markdown headings stay
+    head, separator, body = prose.partition("\n+++\n") if prose.startswith("+++\n") else ("", "", prose)
+    if separator:
+        head = "\n".join(line for line in head.split("\n") if not line.lstrip().startswith("#"))
+    prose = head + separator + body
+    match = _PLACEHOLDER.search(prose)
+    if match is not None:
+        return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
+    lines = prose.split("\n")
+    for index, line in enumerate(lines):
+        if line.strip() == "## Open decisions":
+            body = next((item.strip() for item in lines[index + 1:] if item.strip() and not item.startswith("## ")), "")
+            if body not in {"None", "None."}:
+                return "fail", f"{artifact.artifact_id} has an open decision: {body[:120]}"
+            break
+    return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
+
+
 def ensure_governed_checkpoint(
     repository: Path,
     artifact_ids: Iterable[str],
@@ -626,3 +718,12 @@ def ensure_governed_checkpoint(
     repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
     if repository_errors:
         raise HarnessError(f"WEX210: repository integrity prevents governed action: {repository_errors[0].message}")
+    # QG-G1/G2 authoring predicates apply when a definition leaves draft (AUT-GTE-001).
+    if isinstance(artifact_ids, Mapping):
+        for artifact_id, target in artifact_ids.items():
+            artifact = catalog[artifact_id]
+            if artifact.artifact_type in _DEFINITION_TYPES and artifact.status == "draft" and target == "approved":
+                status, message = authoring_ready(artifact)
+                if status != "pass":
+                    predicate = "QGP-G2-AUTHORING" if artifact.artifact_type in {"specification", "architecture", "adr"} else "QGP-G1-AUTHORING"
+                    raise HarnessError(f"{predicate}: {message} Complete the artifact before approval.")

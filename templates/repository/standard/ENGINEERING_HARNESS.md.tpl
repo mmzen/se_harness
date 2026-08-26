@@ -52,6 +52,19 @@ They MUST NOT waive, weaken, or contradict this managed contract.
 gates MUST fail closed. A warning MUST NOT be treated as approval or accepted
 risk.
 
+## Scope of these obligations
+
+The bounded-scope invariant above, the lifecycle handoff rules, and the stop
+conditions bind an actor executing or reporting a lifecycle stage. Reading,
+analysis, and answering questions are unconstrained, provided no lifecycle
+state changes, no decision right is exercised, and no finding is presented as
+a formal result.
+
+Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
+the selected work order, and every governing artifact listed by the phase
+reading manifest. The routed policies below are reference for humans and for
+the evaluator; an agent is not required to read them to act.
+
 ## Routing
 
 Each subject has one policy owner. Other documents MUST reference the owner and
@@ -65,6 +78,7 @@ MUST NOT restate its rules.
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
 | Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
+| Authoring rules for formal artifacts | `docs/engineering/ARTIFACT_AUTHORING.md` |
 | Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
