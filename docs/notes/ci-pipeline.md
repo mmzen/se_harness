@@ -19,7 +19,7 @@ under one minute and five minutes. The cost is multiplication, not duration.
 | --- | --- | ---: | ---: | --- |
 | `engineering-harness.yml` (managed) | push + PR, unfiltered | 1 | 9 | governing evaluator: preflight, doctor, validate, dashboard |
 | `candidate-evidence.yml` | push + PR, unfiltered | 7 | 44 | suite, wheel, predecessor acceptance, migration x2 platforms x2 runs, integration package |
-| `predecessor-evaluator-assessment.yml` | push + PR, unfiltered | 1 | 9 | governor-transition plan and assessment |
+| `predecessor-evaluator-assessment.yml` | push + PR, unfiltered | 1 | 9 | evaluator-transition plan and assessment |
 | `publication-rehearsal.yml` | PR + push to `main`, cancelling | 2 | 10 | re-executes the release qualification on two platforms; digest-checks `publish-pypi.yml` |
 | `release-candidate-replay.yml` | dispatch | 1 | 6 | hosted replay of the bound recipe |
 | `publish-pypi.yml` | dispatch, `main` | 7 | 44 | resolve, qualify, tag and release, PyPI, Pages, observe |
@@ -52,12 +52,36 @@ contract is 68 KB and `WO-RLS-011` is 39 KB. Since `v0.6.0`: 265 commits,
 
 | Work order | Proposal | Removes | Measured after |
 | --- | --- | --- | --- |
-| `WO-CIP-001` | P1, P2 | the second run per push; four of five wheel builds; two reconcile-only jobs | pending |
+| `WO-CIP-001` | P1, P2 | the second run per push; two of three workflow-level wheel builds; the reconcile-only job | implemented 2026-08-26, see below |
 | `WO-CIP-002` | P3, P5 | the Python copy of the qualification, the YAML parser and the digest file; the idle schema leg; the duplicated Pages jobs | pending |
 | `WO-CIP-003` | P6 | three hand-edited constants and the silent skip on a version bump | pending |
 | `WO-CIP-004` | P4 | the reject-and-re-issue loop on the release contract | pending |
 
 The "Measured after" column is filled by each work order's evidence.
+
+### After `WO-CIP-001`
+
+- `candidate-evidence.yml`, `predecessor-evaluator-assessment.yml` and the
+  standard template of `engineering-harness.yml`: `push` restricted to
+  `main`, `release/**`, `candidate/**`; a cancelling concurrency group per
+  workflow and ref. One run per commit on a pull request instead of two.
+  The hash-locked root `engineering-harness.yml` follows at the root-evaluator
+  upgrade.
+- `candidate-evidence.yml`: six jobs instead of seven. The wheel is built
+  once in `candidate-source` and handed down as
+  `candidate-wheel-non-promotable-<sha>` with `SHA256SUMS`; `candidate-package`
+  and both migration legs verify and never rebuild. Workflow-level wheel
+  builds of the commit: 3 to 1. The cross-platform migration comparison is a
+  step on job outputs, not a job.
+- Kept, and why: the two migration runs per platform (`REQ-REB-017`'s
+  determinism example); the integration package's own two builds and its
+  retention job (`SPEC-IPK-001` rules 1 and 5: a different distribution with a
+  local-version overlay, byte-equal across two builds, retained only after
+  every matrix member passes).
+- Per pull-request push, one commit: full suite 2 (was 4); wheel builds 5
+  (was about 14: 1 candidate + 2 integration in `candidate-evidence`, 2 in
+  the rehearsal, which `WO-CIP-002` addresses); predecessor installs about 5
+  (was about 10); migration rehearsals 4 (was 8).
 
 ## What stays
 
