@@ -2,7 +2,7 @@
 id = "WO-TST-002"
 type = "work_order"
 title = "The cached fixture install"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -36,6 +36,13 @@ to = "in_progress"
 decided_at = "2026-08-26T19:49:49Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: you can start WO-TST-002; WO-TST-001 is implemented."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T20:08:33Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-TST-002 implemented, after accepting interactively the three recorded deviations (eleven fixtures converted rather than about twenty-five; a cache-naming collision fixed before commit; the serial saving is 5 s rather than about 100 s, the benefit being in the parallel runs)."
 +++
 
 # Work Order: The cached fixture install
