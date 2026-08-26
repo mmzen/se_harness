@@ -185,6 +185,20 @@ fixed cost of about 0.5 s in most fixtures, a `harnessctl init` (61 files,
 repository-owned parallel runner (class-level, longest-first), a marker for
 the scale tests, and a cached fixture install.
 
+### After `WO-TST-001`
+
+Measured 2026-08-26 on the same workstation, 965 tests:
+
+| Run | Wall | Verdict |
+| --- | ---: | --- |
+| `python -m unittest discover` (canonical serial; the 1,000-artifact size skipped by default) | 335 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 1` | 332 s | OK, 24 skips — the same verdict |
+| `python scripts/run_tests.py --workers 4 --scale full` (the hosted lane's form) | 114 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 8` | 80 s | OK, 24 skips |
+
+The runner schedules test classes longest-first from `target/test-timings.json`;
+the fixture cache (`WO-TST-002`) is the next increment.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the
