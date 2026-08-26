@@ -2,7 +2,7 @@
 id = "VREC-SEH-014"
 type = "verification_record"
 title = "Verification candidate for 53 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/agent-directive-surface/evidence/WO-ADS-001/
 evaluator_evidence_path = "docs/engineering/release-0-7-0/evidence/VREC-SEH-014-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T21:27:33Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ADS-001", "WO-ADS-002", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-AEX-006", "WO-AEX-007", "WO-AEX-008", "WO-AUT-001", "WO-AUT-002", "WO-CIP-001", "WO-CIP-002", "WO-CIP-003", "WO-CIP-004", "WO-CIP-005", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-HUP-004", "WO-IPK-001", "WO-LRE-001", "WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-REB-023", "WO-RLO-004", "WO-RLO-005", "WO-RLO-006", "WO-RLO-007", "WO-RLS-011", "WO-RLS-012", "WO-TCM-001", "WO-TCM-002", "WO-TST-001", "WO-TST-002", "WO-TST-003", "WO-VSP-007", "WO-WEX-003"]
 conforms_to = ["VER-ADS-001", "VER-ADS-002", "VER-AEX-001", "VER-AEX-002", "VER-AEX-003", "VER-AEX-004", "VER-AUT-001", "VER-CIP-001", "VER-DST-001", "VER-HBI-001", "VER-HUP-004", "VER-IPK-001", "VER-LRE-001", "VER-REB-006", "VER-REB-007", "VER-REB-008", "VER-REB-009", "VER-REB-010", "VER-RLO-004", "VER-RLO-005", "VER-TCM-001", "VER-TST-001", "VER-VSP-002", "VER-WEX-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T21:27:33Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-26 under DR-VREC-DECIDE, 'I verify VREC-SEH-014'. The record binds candidate 374554d01f9a2e4601dc5b58279a01de2c7b6523, the commit at which WO-RLS-012 reads implemented, to exactly the fifty-three work orders REL-SEH-017 names in gates, twenty-four verification contracts and fifty-eight keyed evidence paths over a sixty-five-requirement union, every figure derived from the approved contract at the bound commit and matching it. Every member reads implemented there; fifty-one hold an individually verified record and WO-RLS-011 and WO-RLS-012 are covered by this record. Bound-commit readings by the governing exact public 0.6.0 evaluator outside the checkout: validate PASS at 953 artifacts, 0 errors; doctor 87 PASS, 0 FAIL; recipe-bound build at the bound commit state exact with two byte-identical builds, wheel 622d008908dad043b78aa10dbeae459e4ee4203255453832fe71a85481c32389 and sdist 304cce5f89fa867300c68dff7d2469cb9dcbc7abc86d68c966c561a707072f38; released 0.6.0 verifier acceptance ten of ten; all four pull-request lanes success on head 374554d. Verified with four limitations disclosed and accepted as residual risk rather than resolved: VER-TCM-001's two reviewer judgments do not exist, VER-ADS-001's Scenario 8 classifications were not run, VREC-IPK-001 binds a pull-request merge-preview commit on no branch, and WO-RLS-011 holds no individual record. This verification authorizes no release preparation, binding, tag, publication or deployment."
 +++
 
 # Verification Record Candidate
