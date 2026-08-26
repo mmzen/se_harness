@@ -2,7 +2,7 @@
 id = "RLS-SEH-014"
 type = "release_record"
 title = "Release candidate 0.7.0"
-status = "ready"
+status = "rejected"
 owners = ["release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -15,6 +15,9 @@ evaluator_evidence_path = "docs/engineering/release-0-7-0/evidence/RLS-SEH-014-e
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 tag = "v0.7.0"
 
+rejected_at = "2026-08-26T21:41:11Z"
+rejected_by = "release-owner"
+rejection_reason = "Rejected by the accountable release owner on 2026-08-26 because its bound distribution table does not describe the candidate's recipe-bound build. The table was bound from a bundle built on this Windows workstation through Docker Desktop, and two host defects made that build wrong: git archive on a core.autocrlf=true clone exported 83 of 111 wheel members with CRLF, and the bind-mounted Windows workspace presented every file at mode 0777 so 69 wheel members recorded that mode. The read-only hosted replay dispatched on this record (run 33015517991) rebuilt candidate 374554d and read wheel e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3 against the bound 622d008908dad043b78aa10dbeae459e4ee4203255453832fe71a85481c32389, and a Linux build from WSL Ubuntu through the same pinned producer reproduces the hosted digest exactly. The binder refuses to replace a bound table by design, so the record is rejected and succeeded by RLS-SEH-015 bound to the Linux build of the same candidate. VREC-SEH-014, the contract and every work order are unchanged."
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +37,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-017"]
 includes_verification = ["VREC-SEH-014"]
 releases_work = ["WO-ADS-001", "WO-ADS-002", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-AEX-006", "WO-AEX-007", "WO-AEX-008", "WO-AUT-001", "WO-AUT-002", "WO-CIP-001", "WO-CIP-002", "WO-CIP-003", "WO-CIP-004", "WO-CIP-005", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-HUP-004", "WO-IPK-001", "WO-LRE-001", "WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-REB-023", "WO-RLO-004", "WO-RLO-005", "WO-RLO-006", "WO-RLO-007", "WO-RLS-011", "WO-RLS-012", "WO-TCM-001", "WO-TCM-002", "WO-TST-001", "WO-TST-002", "WO-TST-003", "WO-VSP-007", "WO-WEX-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "rejected"
+decided_at = "2026-08-26T21:41:11Z"
+decided_by = "release-owner"
+reason = "Rejected by the accountable release owner on 2026-08-26 because its bound distribution table does not describe the candidate's recipe-bound build. The table was bound from a bundle built on this Windows workstation through Docker Desktop, and two host defects made that build wrong: git archive on a core.autocrlf=true clone exported 83 of 111 wheel members with CRLF, and the bind-mounted Windows workspace presented every file at mode 0777 so 69 wheel members recorded that mode. The read-only hosted replay dispatched on this record (run 33015517991) rebuilt candidate 374554d and read wheel e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3 against the bound 622d008908dad043b78aa10dbeae459e4ee4203255453832fe71a85481c32389, and a Linux build from WSL Ubuntu through the same pinned producer reproduces the hosted digest exactly. The binder refuses to replace a bound table by design, so the record is rejected and succeeded by RLS-SEH-015 bound to the Linux build of the same candidate. VREC-SEH-014, the contract and every work order are unchanged."
 +++
 
 # Release Record Candidate
