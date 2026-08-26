@@ -491,13 +491,16 @@ def _is_posix() -> bool:
 
 
 def _hand_back_workspace(work_root: Path, image: str) -> None:
-    """Return the producer's root-owned trees to the calling user so teardown can remove them.
+    """Return the producer's root-owned trees to the calling user.
 
     WO-RLO-007. The producer runs as root inside the bind-mounted workspace; on a
-    hosted Linux runner the `tempfile.TemporaryDirectory` teardown then fails with
-    `Operation not permitted`. One further run of the same pinned image changes the
-    ownership back. Nothing about the recipe, the lock, the producer's arguments or
-    the compared outputs is involved; on a non-POSIX host there is nothing to do.
+    hosted Linux runner the outputs are then unreadable by the runner user
+    (`Permission denied` on `final/<sdist>`) and the `tempfile.TemporaryDirectory`
+    teardown fails with `Operation not permitted`. One further run of the same
+    pinned image changes the ownership back; it runs right after each producer
+    build, before the outputs are read, and once more over the whole work root on
+    the failure path. Nothing about the recipe, the lock, the producer's arguments
+    or the compared outputs is involved; on a non-POSIX host there is nothing to do.
     """
 
     if not _is_posix():
@@ -559,10 +562,6 @@ def replay_build(
             except BuildRecipeError:
                 pass  # the build failure is the result; a hand-back failure only leaves the temporary tree behind
             raise
-        try:
-            _hand_back_workspace(work_root, image)
-        except BuildRecipeError as exc:
-            raise BuildRecipeError(f"replay built exactly but the workspace hand-back failed: {exc}") from exc
     return result
 
 
@@ -593,6 +592,7 @@ def _replay_in_workspace(
         workspace.mkdir()
         _safe_extract_candidate(root, commit, workspace / "source")
         observations.append(_docker_build(root, workspace, recipe, version, epoch))
+        _hand_back_workspace(workspace, image)  # before the outputs are read (WO-RLO-007)
         final_paths.append(workspace / "final")
     wheel_name, sdist_name = expected_distribution_names(version)
     hashes: list[dict[str, str]] = []
