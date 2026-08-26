@@ -94,9 +94,9 @@ does not complete, verify, or release the work order.
    spawn children, and the runner's own tests run the runner.
 3. **Scope amendment.** `tests/test_standard_repository_lifecycle.py` added
    by the owner's decision during implementation (`ce24b68`).
-4. **The count differs from the serial run by design where a module fails
-   to import.** `unittest` counts a failed import as one run test; the
-   runner reports it the same way, as the equality test asserts.
+4. **A module that fails to import counts as one run test.** `unittest`
+   counts a failed import that way; the runner matches it deliberately, as
+   the equality test asserts, so the two reports agree.
 
 ## Complete changed-path set
 
@@ -111,6 +111,19 @@ tests/test_run_tests.py
 tests/test_standard_repository_lifecycle.py
 tests/test_workflow_execution.py
 ```
+
+## Deviation acceptances
+
+Recorded on 2026-08-26 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on `VREC-TST-001` remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - the release qualification does not set the marker yet | Accept: full size on every pull request through the candidate lane; the release qualification gets the marker under a later work order. |
+| 2 - `ProcessPoolExecutor` rather than `multiprocessing.Pool` | Accept. |
+| 3 - scope amendment for the pinned assertion | Accept. |
+| 4 - a failed import counts as one run test, matched | Accept. |
 
 ## Not done
 
