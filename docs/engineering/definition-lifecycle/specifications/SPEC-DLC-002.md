@@ -2,13 +2,19 @@
 id = "SPEC-DLC-002"
 type = "specification"
 title = "Definition lifecycle termination and derived realization"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 specifies = ["REQ-DLC-002", "REQ-DLC-003", "REQ-DLC-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Definition lifecycle termination and derived realization

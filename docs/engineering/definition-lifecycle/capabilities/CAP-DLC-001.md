@@ -2,13 +2,19 @@
 id = "CAP-DLC-001"
 type = "capability"
 title = "Read authority, generation, and realization from the source that owns each"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 derives_from = ["INT-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Read authority, generation, and realization from the source that owns each

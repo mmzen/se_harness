@@ -2,12 +2,18 @@
 id = "INT-DLC-001"
 type = "intent"
 title = "Make a definition's lifecycle status mean exactly one thing"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "domain-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "product-owner"
 +++
 
 # Intent: Make a definition's lifecycle status mean exactly one thing

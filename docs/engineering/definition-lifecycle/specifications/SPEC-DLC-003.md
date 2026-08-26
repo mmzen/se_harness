@@ -2,13 +2,19 @@
 id = "SPEC-DLC-003"
 type = "specification"
 title = "Mandatory recorded decision chain for definition statuses"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 specifies = ["REQ-DLC-004", "REQ-DLC-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Mandatory recorded decision chain for definition statuses

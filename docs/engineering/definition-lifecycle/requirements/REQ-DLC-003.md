@@ -2,7 +2,7 @@
 id = "REQ-DLC-003"
 type = "requirement"
 title = "Derive definition realization from work-order and verification coverage"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -11,6 +11,12 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Derive definition realization from work-order and verification coverage

@@ -2,13 +2,19 @@
 id = "VER-DLC-001"
 type = "verification"
 title = "Independent evidence for definition lifecycle disentanglement"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 verifies = ["REQ-DLC-001", "REQ-DLC-002", "REQ-DLC-003", "REQ-DLC-004", "REQ-DLC-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Independent evidence for definition lifecycle disentanglement

@@ -2,13 +2,19 @@
 id = "SPEC-DLC-001"
 type = "specification"
 title = "Declared architecture-generation exemption"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 specifies = ["REQ-DLC-001", "REQ-DLC-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: Declared architecture-generation exemption

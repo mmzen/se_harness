@@ -2,20 +2,29 @@
 id = "ADR-DLC-001"
 type = "adr"
 title = "Replace lifecycle-status inference with explicit declaration in three ordered increments"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 decides = ["ARCH-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "technical-owner"
 +++
 
 # ADR: Replace lifecycle-status inference with explicit declaration in three ordered increments
 
 ## Status
 
-Proposed.
+Accepted on 2026-08-26 through the repository owner's instruction `i approve the
+artifact pack`. Acceptance decides `ARCH-DLC-001` together with `ADR-DLC-002`. It
+does not authorize implementation, a work-order start, a Git action, or any
+external action; those remain separately governed.
 
 ## Context
 

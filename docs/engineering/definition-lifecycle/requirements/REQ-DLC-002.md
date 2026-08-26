@@ -2,7 +2,7 @@
 id = "REQ-DLC-002"
 type = "requirement"
 title = "Terminate the definition lifecycle at approved"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -11,6 +11,12 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Terminate the definition lifecycle at approved

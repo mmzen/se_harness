@@ -2,7 +2,7 @@
 id = "REQ-DLC-005"
 type = "requirement"
 title = "Preserve every existing governing record and diagnostic outcome"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -11,6 +11,12 @@ verification_method = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DLC-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Preserve every existing governing record and diagnostic outcome

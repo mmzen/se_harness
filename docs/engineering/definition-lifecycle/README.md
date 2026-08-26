@@ -4,7 +4,7 @@
 > typed relations, lifecycle state, and accountable decisions—not this directory
 > or index.
 
-This domain proposes that a definition's lifecycle status answer exactly one
+This domain requires that a definition's lifecycle status answer exactly one
 question. Today it answers three at once: does this artifact govern, which schema
 generation is it, and has it been built. Measured against the graph at `c189b58`,
 the generation reading is right for 14 of 28 `implemented` architectures and wrong
@@ -18,7 +18,9 @@ realization from work-order and verification coverage, then require a recorded
 decision chain for every status past `draft`. No artifact byte changes in any of
 them, and no decision is fabricated for any existing record.
 
-## Draft definition packet
+## Packet contents
+
+The fourteen definitions are `approved`. The three work orders are `draft`.
 
 - `INT-DLC-001`: make a definition's lifecycle status mean exactly one thing.
 - `CAP-DLC-001`: read authority, generation, and realization from three independent sources.
@@ -74,9 +76,23 @@ decided here: the declaration packet's field name (`REQ-DLC-001`) and the
 `implemented` row's `predecessor_adapter` value (`REQ-DLC-002`). Both sit inside
 an implementation agent's authorized envelope.
 
-Every artifact remains `draft`. This packet authorizes no implementation,
-lifecycle transition, Git action, or external action. The decisions above are the
-repository owner's answers on the packet's content; they are not an approval of
-any artifact in it, and no status has moved. The `[assurance]` classifications in
-the three work orders now record the engineering owner's decision of 2026-08-26;
-the approval of the work orders themselves remains outstanding.
+## Definition approval taken 2026-08-26
+
+The repository owner approved the definition packet on 2026-08-26 through the
+instruction `i approve the artifact pack`. The fourteen definitions moved
+`draft -> approved` in one atomic transition packet, each recording the role that
+exercised `DR-DEFINITION-DECIDE` for its artifact type: `product-owner` for the
+intent and capability, `requirements-steward` for the five requirements,
+`technical-owner` for the three specifications, the two ADRs, and the
+architecture, and `assurance-owner` for the verification contract. Every chain is
+recorded in the artifact itself; this paragraph is an index entry, not the record.
+
+Acceptance of `ADR-DLC-001` and `ADR-DLC-002` satisfies the `adr_required`
+outcome in `ARCH-DLC-001`'s `decision_assessment`.
+
+This approval authorizes no implementation, no work-order start, no Git action,
+and no external action. `WO-DLC-001`, `WO-DLC-002`, and `WO-DLC-003` remain
+`draft`: approving a work order is `DR-WO-SELECT`, a different decision right held
+by the engineering owner, and nothing is approved by implication. Their
+`[assurance]` classifications record the engineering owner's decision of
+2026-08-26 on the classification only.

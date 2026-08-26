@@ -2,7 +2,7 @@
 id = "ARCH-DLC-001"
 type = "architecture"
 title = "One question per mechanism: declared generation, terminal approval, derived realization"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,6 +16,12 @@ outcome = "adr_required"
 triggers = ["responsibility-or-dependency-direction", "public-interface-or-protocol", "cross-cutting-policy", "material-alternatives"]
 rationale = "The proposal retires a reachable state from the managed lifecycle contract that every consumer repository pins, removes a status input from a managed validator script, and adds two mandatory governance obligations with declared grandfathering. It changes the dependency direction between lifecycle status, validator behavior, and coverage reporting, and it defines a public declaration surface inside work orders. Material alternatives exist for each of the three increments and for the grandfathering mechanism. Two ADRs are required before this architecture can be approved."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T09:33:19Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: One question per mechanism: declared generation, terminal approval, derived realization
@@ -285,5 +291,6 @@ rather than by discipline.
 `ADR-DLC-001` proposes replacing status inference with declaration for all three
 questions, in three ordered increments, with no data migration. `ADR-DLC-002`
 proposes the grandfathering mechanism — enumerated frozen vectors versus a frozen
-cutover date over `created`. Both remain draft and must be accepted or revised by
-the technical owner before this architecture can be approved.
+cutover date over `created`. Both were accepted on 2026-08-26 through the
+repository owner's instruction `i approve the artifact pack`, which satisfies the
+`adr_required` outcome recorded in this architecture's `decision_assessment`.
