@@ -2,7 +2,7 @@
 id = "WO-REB-025"
 type = "work_order"
 title = "Exercise the publication predecessor view only when its condition holds"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-26"
@@ -33,6 +33,13 @@ to = "approved"
 decided_at = "2026-08-26T22:22:26Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-27, 'Approve and start'. Authorizes only conditioning the predecessor-view step of publish-pypi.yml and pages-publication.yml on the record's contract declaring a bootstrap tuple, with an excluded observation retained otherwise, plus the packet index line and evidence; no tests/, se_harness/, repository_tools/ or templates/ byte."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T22:22:30Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch fix/reb-025-publication-view-condition off main 088b08b."
 +++
 
 # Work Order: Exercise the publication predecessor view only when its condition holds
