@@ -1468,3 +1468,61 @@ commit is settled before capture and not during it.
 Nothing in this append transitions an artifact, confers authority, retains a distribution,
 creates or moves a tag, publishes, deploys, or touches `release/0.7`. No credential was used.
 `REL-SEH-016`'s `gates` array is untouched and byte-identical.
+
+## Post-candidate stage: the ordering fact above is wrong, and this is the measurement
+
+The section immediately above states, under "One ordering fact for the next stage", that
+because these are retained evidence bytes the commit `VREC-SEH-013` binds "must be one whose
+tree already carries them" and is "necessarily later than `e76cc35`". **That is incorrect.**
+It is recorded here as a superseding measurement rather than edited out, so the reasoning that
+was put to the release owner stays readable.
+
+The claim was wrong in both halves.
+
+**A verification record binds paths, not bytes.** `VREC-SEH-013` carries an `evidence_paths`
+list and a single `artifact_snapshot_sha256`. It records no per-file digest for any keyed
+evidence file, and the formal snapshot does not hash retained evidence bytes. All forty-one
+paths — this file among them — exist at the candidate. Whether this file is 84895, 95045 or
+more bytes at the bound commit changes nothing the record asserts.
+
+**The binding is in fact forced the other way: to the candidate, and to nothing later.**
+`prepare-release` collects the commit of every included verification record into a set of
+identities, refuses to continue unless the set holds exactly one — "included verification
+records do not identify one candidate commit and object format", `se_harness/provenance.py`
+line 519 — and then takes the release record's own commit from it. Distribution binding then
+requires the bundle manifest to agree with that commit: `repository_tools/release_distribution.py`
+raises "distribution manifest commit does not match the candidate" at line 288 and
+"distribution manifest epoch does not match the candidate commit" at line 290, and checks
+`source_manifest_sha256` equality besides. **The release record's commit is the verification
+record's commit.** Binding a later commit would make the completed build unbindable.
+
+Measured, not predicted:
+
+| Commit | `source_manifest_sha256` | Committer epoch | Agrees with the built bundle |
+| --- | --- | --- | --- |
+| `e98b788` (the candidate) | `62caeee9bd9b9fe44fd3ae3336a44b0b8a7763637051017228ca9fba87d0005d` | 1787732223 | **yes, on both** |
+| `339a10e` (this branch, after the append) | `dfd986e75500b83719409cdbc9771732161ee961b5354205204652f610450777` | 1787756482 | no, on either |
+
+The bundle manifest produced by the authorized build carries
+`62caeee9...87d0005d` and 1787732223. `VREC-SEH-013` accordingly binds
+`e98b7885b016529aa2c262ad577acdc270bc9376`, the candidate itself, on the release owner's
+decision of 2026-08-26 taken after this measurement was put to them. Its
+`artifact_snapshot_sha256` is `527007df5e497de8bb00924d8dbdd508e3be10654bcd005cfbca92dca20a8065`
+and its status is `ready`.
+
+**What that means for the sections above.** Everything under a "Post-candidate stage" heading
+in this file, including the append that carried the incorrect ordering claim, sits in this
+branch's history and not in the bound candidate tree. Those readings are evidence *about* the
+candidate rather than bytes inside it, and `VREC-SEH-013` restates each of them in its own
+prose: the candidate ref and its confirmed exclusions, the `state = "exact"` build with every
+derived digest, the 195-member packaged surface, the four green hosted lanes with the ref's
+structural two-of-four limitation, the retention decision, and the superseded stage-1 census.
+
+One part of the wrong paragraph does hold, on its own separate grounds: a verified record's
+bound commit cannot afterwards be re-pointed, so the binding commit had to be settled before
+capture. It was, and the reason it is the candidate is the coupling measured above rather than
+the ordering of these bytes.
+
+Nothing in this append transitions an artifact, confers authority, retains a distribution,
+creates or moves a tag, publishes, deploys, or touches `release/0.7`. No credential was used.
+`REL-SEH-016`'s `gates` array is untouched and byte-identical.
