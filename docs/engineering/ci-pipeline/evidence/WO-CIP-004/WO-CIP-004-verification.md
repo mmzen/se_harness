@@ -2,7 +2,7 @@
 
 artifact: WO-CIP-004
 checkpoint: handoff
-formal_snapshot_sha256: b0962ede2ec004d6ec91ba7309371af36b018d3cb40b43dcc94692e751cb2260
+formal_snapshot_sha256: 4ae17c000b1fa7fb62adec2352e870cf4b3de1218a3a11ed5c9a0f6f5b38885d
 
 Retained by the implementation actor on 2026-08-26. This file is evidence. It
 does not complete, verify, or release the work order.
@@ -61,12 +61,12 @@ does not complete, verify, or release the work order.
 | Command | Evaluator | Result |
 | --- | --- | --- |
 | `harnessctl preflight . --work-order WO-CIP-004 --phase review` | released 0.6.0 | `PASS` |
-| `harnessctl validate .` | released 0.6.0 | PASS, 913 artifacts, 0 errors, 50 warnings |
+| `harnessctl validate .` | released 0.6.0 | PASS, 913 artifacts, 0 errors, 50 warnings on the stacked branch; 930 artifacts, 0 errors, 50 warnings on `main` after the re-base |
 | `harnessctl doctor .` | released 0.6.0 | 0 FAIL |
 | `python scripts/validate_release_distributions.py --root .` | candidate | PASS (1 distribution-bearing record) |
 | `python scripts/check_portable_release_surface.py --repository .` | candidate | PASS |
 | `git diff --check` | git | clean |
-| `harnessctl check . --artifact WO-CIP-004 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both report formal snapshot `b0962ede2ec004d6ec91ba7309371af36b018d3cb40b43dcc94692e751cb2260` |
+| `harnessctl check . --artifact WO-CIP-004 --checkpoint handoff --changed-path … --changes-complete --json` (complete set below) | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; both reported formal snapshot `b0962ede…` on the stacked branch; after the stack merged the two unbound commits were re-based onto `main` (`98edd14`) and both evaluators report `4ae17c000b1fa7fb62adec2352e870cf4b3de1218a3a11ed5c9a0f6f5b38885d` there |
 | `python -m unittest` over `test_release_unit`, `test_harnessctl`, `test_progressive_documentation`, `test_artifact_catalog`, `test_instruction_architecture`, `test_validation_taxonomy` | candidate | OK, 1 skip |
 | `python -m unittest discover -s tests -p "test_*.py"` | candidate, Windows 11, CPython 3.14 | `Ran 916 tests in 376.668s` — `OK (skipped=23)`; the 23 skips are the Windows-only guards |
 | `python -m se_harness release-unit . --from v0.6.0 --to e98b7885… --contract REL-SEH-015 --json` (`VER-CIP-001` scenario 4; retained as `release-unit-v0.6.0-e98b788.json`) | candidate | see below |
@@ -115,6 +115,12 @@ unit the command freezes cleanly is the one after 0.7.0.
    change must update them. A derivation from `pyproject.toml` at run time
    was judged not worth the coupling for a flag that informs, not decides.
 5. **The template validator is in scope and unchanged** (deviation 1).
+6. **The two implementation commits were re-based onto `main` after the
+   stack merged.** PRs #171–#174 were merged from rebased copies of their
+   branches, so this work order's branch base was no longer in `main`'s
+   history. The start and implementation commits carry no record and were
+   cherry-picked onto `main` (`0c02aec`, `3906eb6`); the formal snapshot and
+   the suite were re-measured there. This is not a rebase of a bound commit.
 
 ## Complete changed-path set
 
@@ -143,6 +149,7 @@ on `VREC-CIP-004` remains separate.
 | 3 - template changes in the standard template only | Accept. |
 | 4 - packaged-surface prefixes declared in the module | Accept. |
 | 5 - template validator unchanged | Accept. |
+| 6 - re-based onto `main` after the stack merged | Owner instruction 2026-08-26: "previous PR have been merged"; unbound commits only. |
 
 ## Not done
 
