@@ -2,7 +2,7 @@
 id = "WO-RLS-011"
 type = "work_order"
 title = "Qualify the integrated se-harness 0.7.0 candidate"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -13,7 +13,7 @@ rationale = "Release, package installation, managed-policy upgrade, recipe-bound
 decided_by = "repository-owner"
 
 [execution_scope]
-paths = ["README.md", "pyproject.toml", "se_harness/__init__.py", "docs/notes/developing-se-harness.md", "docs/engineering/README.md", "docs/engineering/release-0-7-0/"]
+paths = ["README.md", "pyproject.toml", "se_harness/__init__.py", "docs/notes/developing-se-harness.md", "docs/engineering/README.md", "docs/engineering/release-0-7-0/", "tests/test_release_qualification.py"]
 
 [relations]
 implements = ["REQ-DST-006"]
@@ -27,6 +27,20 @@ to = "approved"
 decided_at = "2026-08-25T12:35:00Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-25, as a decision distinct from the rejection of WO-RLS-010 and separate from any decision on REL-SEH-015, which the owner has deliberately left in draft until immediately before the candidate commit. Approval authorizes start preflight and then only the declared versioning, integration, qualification, recipe-bound reproducible-build, index-maintenance and retained-evidence work inside the six declared execution-scope paths: README.md, pyproject.toml, se_harness/__init__.py, docs/notes/developing-se-harness.md, docs/engineering/README.md and docs/engineering/release-0-7-0/. It fixes no census: the release unit is exactly what REL-SEH-015 names in gates at its approval, and every derived aggregate is re-measured at the candidate, which is why this work order can survive a further landing without being re-issued. Measured immediately before this transition over merged branch state 5acccdebac50f1fe2bbeca9774c9ad110bac6c91 carrying main 701e456: thirty-five historical members implemented with verified coverage and zero uncovered; twenty-one verification contracts, a forty-eight-requirement union and thirty-seven keyed evidence paths on the whole-gates basis; validate PASS at 887 artifacts with 0 errors and 50 maintenance warnings; doctor 87 PASS, 0 FAIL. Two human assessment gaps are carried as disclosed accepted residual risk, VER-TCM-001's two reviewer judgments and VER-ADS-001's Scenario 8 classifications, and this work order must report both rather than imply clean coverage. Approval authorizes no contract approval, no candidate commit, no VREC-SEH-013 or RLS-SEH-013 work, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator upgrade. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T13:29:18Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-25, taken after the governance packet reached main. Start preflight PASS at phase start over clean branch state 826c72cfdaa3401cccf06c67943c5315221c3f72, the true merge of pull request 154, run with the governing exact public 0.6.0 evaluator outside the checkout; commit-bound verification is required and decided by the repository owner. REL-SEH-015 is approved, so the thirty-six-work-order allow-list in its gates array is fixed authority and this work order's deferred aggregate census resolves to it: twenty-one verification contracts, a forty-eight-requirement union and thirty-seven keyed evidence paths on the whole-gates basis, which is the basis VREC-SEH-013 must match. Two consequences of that freeze bind this work: keeping the contract's gates current in place is no longer available, so a work order reaching implemented with bytes in the packaged surface during this work is a stop condition to report rather than an edit; and WO-AEX-006's exclusion is a branch-point boundary that this work order must confirm at the candidate, the owner having decided to hold open pull request 155 until 0.7.0 is tagged. Bounded to the six declared execution-scope paths. This start authorizes no candidate commit, no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-013 or RLS-SEH-013 preparation or transition, no tag, no publication, no Pages deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T18:43:37Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-25 under DR-WO-COMPLETE, on the handoff gate reading Completed for WO-RLS-011 over candidate commit f76da5727e86fc53375bfa5cafcfcbf168c7456e, tree 52fdae8c6e090f62341df8b87c52fc308d5132f7, change set asserted complete over the eight declared paths of the amended execution scope. Exact-candidate readings, governing exact public 0.6.0 evaluator outside the checkout in isolated mode: validate PASS at 887 artifacts, 0 errors, 50 pre-existing maintenance warnings, every plane E0; inspect 167 findings at 0 errors and 64 warnings; doctor 87 PASS 0 FAIL; review preflight PASS; managed-root upgrade plan 36 files 36 unchanged; release-distribution validation PASS; portable release surface PASS; governor-succession plan PASS with transition required false, so the released 0.6.0 evaluator governs the 0.7.0 candidate without succession; verifier-owned black-box acceptance of an ephemeral non-promotable 0.7.0 wheel passed all ten scenarios against verifier 0.6.0; recovery rehearsal PASS; Explorer generation deterministic over two runs at 1037 files; qualify complete-candidate PASS on four checks; byte-rule inventory 57 declared paths at zero carriage returns. Census re-derived from the approved gates array here is unchanged from approval: 36 unique entries, zero uncovered, 21 verification contracts, a 48-requirement union, 37 keyed evidence paths. Credential-free publication rehearsal on Windows: REHEARSED on CPython 3.14.6 with the suite green at 1002 tests, FAILED on CPython 3.11.9 solely on the two pre-existing teardown tests routed to WO-RLO-006; both runtimes built 0.7.0 twice byte-identically and the divergence seam read EXACT. No digest measured on this workstation is bindable: the normalized digest differs by interpreter. This authorizes no further act."
 +++
 
 # Work Order: Qualify the integrated se-harness 0.7.0 candidate
@@ -132,6 +146,41 @@ assurance owner, consumers, publication automation, the recipe interpreter, and
 future repository upgrades will rely on the exact integrated executable package,
 standard template, evaluator boundary, provenance, and distribution bytes. This
 classification is not inferred from a default.
+
+### Implementation and the implemented transition
+
+Start preflight passed and implementation ran under this work order from
+2026-08-25T13:29:18Z to the candidate commit
+`f76da5727e86fc53375bfa5cafcfcbf168c7456e`, whose tree is
+`52fdae8c6e090f62341df8b87c52fc308d5132f7` and whose parent is the true merge of
+pull request #154 at `826c72cfdaa3401cccf06c67943c5315221c3f72`. The candidate is
+exactly that parent plus eight changed files, all of which fall inside the seven
+declared execution-scope paths; `docs/engineering/release-0-7-0/` is a directory
+and covers two of the eight.
+
+The accountable engineering owner then marked this work order `implemented` under
+`DR-WO-COMPLETE` at 2026-08-25T18:43:37Z, on the `handoff` gate reading
+`Completed` over that candidate. The reason recorded on that lifecycle event is
+the decision record and the readings behind it are in the keyed evidence. **One
+noun in that reason is imprecise and is corrected here rather than rewritten
+there:** it says the change set was asserted complete over "the eight declared
+paths of the amended execution scope", where the amended scope declares seven
+paths and the candidate changes eight files. The set of bytes is exactly the one
+intended; only the count's label is wrong. A recorded lifecycle reason is
+immutable history, so the correction is stated and the event is left untouched.
+
+Two further owner decisions were taken on 2026-08-25 after the exact-candidate
+readings were put to the owner, and neither is carried by this work order's
+approval. First, the working branch is authorized to be pushed, so the hosted
+`windows-2022` and `ubuntu-latest` lanes can read the candidate; that push is an
+explicit later exception to the approval-time exclusion of branch push, and it
+merges nothing, creates or moves no tag, builds no distribution and publishes
+nothing. Second, `WO-RLO-006` is authorized to start, which is where the Windows
+plus CPython 3.11 junction defect in the publication rehearsal is repaired; that
+work is governed by its own work order and not by this one. `VREC-SEH-013`,
+`RLS-SEH-013`, build authority, the tag, GitHub or PyPI publication, Pages
+deployment, the `release/0.7` maintenance line, and any root-evaluator change all
+remain unauthorized.
 
 ## Objective
 
@@ -375,6 +424,43 @@ than resolving into a local default.
 - Preserve unrelated user changes and stop if the reviewed packet or candidate
   changes underneath execution.
 
+## Scope amendment, 2026-08-25
+
+Amended on 2026-08-25 by the engineering owner, during implementation and on an
+explicit request put with the measurement in front of it.
+`tests/test_release_qualification.py` is added to `[execution_scope]` as the
+seventh declared path, for one purpose only: retargeting the version-coupled
+fixture in
+`ReleaseQualificationTests.test_public_install_binds_released_record_wheel_and_payload`
+from `0.6.0` to `0.7.0`.
+
+The reason is that `qualify public_install` requires
+`wheel_version == version == installed.version == __version__`, so the test's
+mocked released record, wheel name, metadata, installed version, and subprocess
+output must all carry the candidate version for the assertion to hold. The bump
+this work order exists to make therefore breaks that fixture by construction: it
+passes in a control worktree at `826c72cfdaa3401cccf06c67943c5315221c3f72` and
+fails against the bumped tree, so the red is caused by the declared change and
+not by a defect the release should carry.
+
+The owner was asked rather than told because the alternative reading is real: the
+mechanic that binds the published wheel is exactly the one going red, so
+retargeting the fixture without an accountable decision would look like adjusting
+the evidence to fit the result. The amendment authorizes the version values in
+that one test method and nothing else. No production behaviour changes, no other
+test file is opened, and it widens no other constraint: the out-of-scope list, the
+stop conditions, the required verification, and the actions listed as separately
+unauthorized are all untouched by it.
+
+Two other blockers were put to the owner in the same exchange and neither is
+amended into this work order. The Windows-plus-Python-3.11 junction defect in
+`.github/scripts/rehearse_publication.py` is routed to its own work order, to be
+fixed before 0.7.0 ships; `.github/` stays outside this scope. The open pull
+request carrying `WO-RSK-001` is held until 0.7.0 is tagged, on the same reasoning
+as the standing hold on the pull request carrying `WO-AEX-006`, so `REL-SEH-015`'s
+`gates` is not reopened. Both decisions are recorded in this work order's retained
+evidence with the readings they were taken on.
+
 ## Expected change surface
 
 - `pyproject.toml`, `se_harness/__init__.py`, and the current install-version
@@ -387,6 +473,8 @@ than resolving into a local default.
   index, the retained evidence, and later separately prepared records. Editing
   the `draft` `REL-SEH-015` to keep its `gates` current is inside this path and
   inside this work order; approving it is not.
+- The version values in the one amended fixture method of
+  `tests/test_release_qualification.py`, under the scope amendment above.
 - Derived build, test, acceptance, replay, and dashboard output only in bounded
   disposable locations outside formal artifact discovery.
 - No root evaluator, root lock, managed root policy, publication credential, or

@@ -10,6 +10,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
+from se_harness import __version__
 from se_harness.cli import build_parser, main
 from se_harness.installer import HarnessError
 from se_harness.release_qualification import (
@@ -293,7 +294,11 @@ class ReleaseQualificationTests(unittest.TestCase):
     ) -> None:
         repository = self.root / "repository"
         repository.mkdir()
-        wheel = self.root / "se_harness-0.6.0-py3-none-any.whl"
+        # qualify_public_install requires the released record, the wheel name, the
+        # distribution metadata and the installed distribution to agree with
+        # se_harness.__version__, so every version in this fixture is derived from
+        # it rather than pinned to one release.
+        wheel = self.root / f"se_harness-{__version__}-py3-none-any.whl"
         wheel.write_bytes(b"wheel")
         launcher = self.root / "harnessctl"
         launcher.write_bytes(b"launcher")
@@ -304,14 +309,14 @@ class ReleaseQualificationTests(unittest.TestCase):
             repository / "RLS-X-001.md",
             {
                 "status": "released",
-                "version": "0.6.0",
+                "version": __version__,
                 "commit": "d" * 40,
                 "distribution": {"wheel": wheel.name, "wheel_sha256": digest},
             },
         )
-        metadata.return_value = ("0.6.0", digest)
+        metadata.return_value = (__version__, digest)
         installed.return_value = SimpleNamespace(
-            version="0.6.0",
+            version=__version__,
             archive_name=wheel.name,
             archive_sha256=digest,
             payload_manifest="se-harness-installed-payload-v1",
@@ -320,7 +325,7 @@ class ReleaseQualificationTests(unittest.TestCase):
         wheel_payload.return_value = payload
         entry_point.return_value = launcher
         run.side_effect = (
-            SimpleNamespace(returncode=0, stdout=b"0.6.0\n", stderr=b""),
+            SimpleNamespace(returncode=0, stdout=f"{__version__}\n".encode("ascii"), stderr=b""),
             SimpleNamespace(
                 returncode=0,
                 stdout=(" ".join(OPERATIONS) + "\n").encode("ascii"),
