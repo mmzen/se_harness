@@ -2,7 +2,7 @@
 id = "WO-REB-025"
 type = "work_order"
 title = "Exercise the publication predecessor view only when its condition holds"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-26"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-08-26T22:22:30Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch fix/reb-025-publication-view-condition off main 088b08b."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T22:28:17Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-27 under DR-WO-COMPLETE, 'mark WO-REB-025 implemented', on the handoff gate reading Completed over cc76a2f, formal snapshot c394d159831f4e646c8cbded6934ed3ea7637ab689618d171c0815d41a1e5ac2, change set asserted complete over five paths. Governing exact public 0.6.0 evaluator outside the checkout: validate PASS at 958 artifacts, 0 errors; doctor 0 FAIL; review preflight PASS. Candidate: both workflows parse, pinned string counts unchanged, both extracted run blocks executed locally take the absent branch for RLS-SEH-015 and the declared branch for RLS-SEH-012, workflow suites OK, full suite 995 OK with 24 platform-guard skips at full scale on Windows CPython 3.14. Hosted: the pull request's lanes are recorded in the evidence when they conclude. Two deviations accepted by the owner: no new test, and SPEC-RLO-005 rule 37 left to a later amendment. This authorizes no further act."
 +++
 
 # Work Order: Exercise the publication predecessor view only when its condition holds
