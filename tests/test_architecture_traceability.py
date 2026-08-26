@@ -20,6 +20,7 @@ if str(SCRIPTS) not in sys.path:
 
 from generate_harness_dashboard import generate_snapshot  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
+from tests.fixture_support import standard_repository
 
 
 ASSESSMENT = {
@@ -96,7 +97,7 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
         self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Trace Sample")[0])
+        standard_repository(self.root, "Trace Sample")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

@@ -20,6 +20,7 @@ from se_harness.preflight import _load_validator_module
 from se_harness.workflow import apply_transition, focus, plan_transition
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.fixture_support import standard_repository
 
 
 def scale_sizes() -> tuple[int, ...]:
@@ -34,8 +35,7 @@ class WorkflowExecutionTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Workflow Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root, "Workflow Fixture")
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = (
