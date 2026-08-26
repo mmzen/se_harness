@@ -408,3 +408,60 @@ No `implemented` transition, no `VREC-SEH-014` or `RLS-SEH-014` preparation
 or transition, no distribution binding, no tag, no GitHub or PyPI publication,
 no Pages deployment, no `release/0.7` mutation, no credential use, no
 root-evaluator change. The candidate was not mutated after the build of record.
+
+## Bound-candidate stage: the commit the aggregate record binds
+
+The commit `VREC-SEH-014` binds is **not** `24cf7c7`. `capture-verification`
+binds the clean worktree's `HEAD`, and it refuses a candidate at which the work
+order does not read `implemented` (`WEX301`); `WO-RLS-012` reads
+`in_progress` at `24cf7c7` and `implemented` only from `374554d`, the commit
+that carries the completion transition. The bound candidate is therefore
+`374554d01f9a2e4601dc5b58279a01de2c7b6523`, tree
+`6cb45e05dd05c80c17c0f3e4b87694b18aa9c82b`: `24cf7c7` plus two commits
+confined to `docs/engineering/release-0-7-0/` (the exact-candidate evidence and
+the `implemented` transition). No product byte differs between the two, and
+none differs from `main` at `be2f0cf`. This is the same shape `WO-RLS-011`
+recorded: the file committed inside the candidate cannot name it, and the
+record binds the later commit at which the work order is complete.
+
+Because the bundle bound into `RLS-SEH-014` must be the one built from the
+record's commit, the recipe-bound build was **re-run at `374554d`** and every
+identity below supersedes the `24cf7c7` build of record above for the purpose
+of binding. The `24cf7c7` build stands as evidence that the recipe path is
+deterministic across two commits with the same product bytes and different
+epochs.
+
+### Build at the bound candidate
+
+`python -m repository_tools.release_build replay --repository . --commit
+374554d01f9a2e4601dc5b58279a01de2c7b6523 --version 0.7.0 …` on this
+workstation through Docker Desktop: exit 0, **`state: exact`**, two fresh
+producer instances **byte-identical**.
+
+| Identity | Value |
+| --- | --- |
+| `SOURCE_DATE_EPOCH` | 1787779226 (the commit's own timestamp) |
+| Source manifest | `1c0b1dcf49492e9d55570d99bc6fd7a63ca32a2512ab65880869dc6a16e1d075` |
+| Wheel `se_harness-0.7.0-py3-none-any.whl` | `622d008908dad043b78aa10dbeae459e4ee4203255453832fe71a85481c32389` |
+| Sdist `se_harness-0.7.0.tar.gz` | `304cce5f89fa867300c68dff7d2469cb9dcbc7abc86d68c966c561a707072f38` |
+| `SHA256SUMS` | `eb0be0f491d70e0ba92ebb84b34b79742e07ea5c72e247313b926e20be283244` |
+| Bundle manifest | `se-harness-release-bundle/v2`, file sha256 `66d4181e40d0457cd007530dab6bd4d48081bdb424a2232cdfa8a256e988bc4e`, held outside the checkout for `RLS-SEH-014` |
+| Producer and recipe | unchanged: `python@sha256:2856e6af…`, recipe `0c3f368c…` |
+
+Released 0.6.0 verifier `accept-candidate` on wheel `622d0089…` at
+`374554d…`, `--checkout-root` this checkout: **ten of ten scenarios passed**,
+CPython 3.14.6.
+
+### Hosted lanes on head `374554d`
+
+All four `pull_request` lanes concluded **success** on head `374554d` (Engineering Harness also on `push`): Governor Transition Assessment `33014930996`, Engineering Harness `33014931031`, SE Harness Candidate Evidence `33014930998`, Publication Rehearsal `33014931174` with `Qualify and replay (candidate)` success and the Linux suite at **`Ran 995 tests in 58.259s` — `OK (skipped=4)`**, full scale. As at `24cf7c7`, the hosted candidate-mode replay ran on the pull request's merge-preview commit and its digests are not the candidate's.
+
+### Record
+
+`VREC-SEH-014` was captured at 2026-08-26T21:21:27Z by the released 0.6.0
+evaluator over the clean worktree at `374554d`: 53 work orders, 24
+verification contracts, 58 evidence paths, artifact snapshot
+`be73387939fc9e19dcd1cbaf63a2c1e520df2ad7f2b2c096192a84b0412ff583`, evaluator
+evidence `fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962`
+(identical to every earlier record captured by this evaluator venv, as
+expected). It is `ready`; the assurance decision is the owner's.
