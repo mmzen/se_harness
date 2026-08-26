@@ -285,3 +285,126 @@ No candidate commit, push, pull request, `implemented` transition,
 `VREC-SEH-014` or `RLS-SEH-014` preparation or transition, tag, GitHub or PyPI
 publication, Pages deployment, `release/0.7` mutation, credential use, or
 root-evaluator change was performed.
+
+## Exact-candidate stage: identity and binding
+
+| Identity | Value |
+| --- | --- |
+| Candidate commit | `24cf7c767583e83b9056d03d7dd5de6622fef91c` |
+| Candidate tree | `05b0e6dd2b39da89180e4712a5a2fdc6d2f861f4` |
+| Parent | `503d15c135cae86e538d4ebdbc184f52b5e9314a` (first-parent path to `main` at `be2f0cf`) |
+| `SOURCE_DATE_EPOCH` | 1787778641 (the commit's own timestamp) |
+| Candidate against its parent | 1 file, 287 insertions: this file's stage 1 |
+| Worktree at every stage-2 reading | clean, 0 dirty paths |
+| Pull request | #183, body carries `Harness-Work-Order: WO-RLS-012` with zero CR bytes |
+
+The candidate is `main` plus four commits confined to
+`docs/engineering/release-0-7-0/`; no product byte differs from `main`.
+
+## Exact-candidate stage: governing readings, released 0.6.0 evaluator
+
+| Command | Reading |
+| --- | --- |
+| `validate .` | **PASS** — 952 artifacts, 0 errors, 50 warnings, every plane at E0 |
+| `doctor .` | **87 PASS, 0 FAIL** |
+| `preflight --phase review` | **PASS** |
+| `validate_release_distributions.py` | **PASS**, one distribution-bearing record |
+| `check --checkpoint handoff` | **Completed** on both evaluators at formal snapshot `685a2400d0e04bdc4f6dbf6ce2d2c677352691e48b570bbda565f673f8d8b08b` (the snapshot excludes retained evidence, so it is unchanged by this file's stages) |
+| `dashboard` twice | deterministic, manifest `6621d36da93079318887723d1708be3f081ce46f8f28524b63591f9eb21c4059`, 1122 files, 9,394,471 bytes |
+| `release-unit . --from v0.6.0 --to 24cf7c7` | 9 work orders traced, 97 untraced first-parent commits, `complete: false` — reported, not enforced |
+
+## Exact-candidate stage: the build of record
+
+`python -m repository_tools.release_build replay --repository . --commit
+24cf7c767583e83b9056d03d7dd5de6622fef91c --version 0.7.0 --output-directory
+<external> --result <replay.json>` on this workstation through Docker Desktop
+(daemon 29.7.2, `linux/amd64`): exit 0, **`state: exact`**, two fresh producer
+instances **byte-identical**.
+
+| Identity | Value |
+| --- | --- |
+| Producer | `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050`, linux/amd64 |
+| Recipe | `release/build-recipe.json`, sha256 `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc` |
+| Source manifest | `21f6955719e91b0bd589516cd9f45b9f869fc4108585a2f0926cff3cc16cfcde` |
+| Wheel `se_harness-0.7.0-py3-none-any.whl` | `4d0589fded5c3da4f247c3f54e4204334ad283ea6b90f6dcc67c559726f557ca` |
+| Sdist `se_harness-0.7.0.tar.gz` | `d05541fd94a3d444da20bb539eb6ca211ae10e1ccb0ff04a0f1628ec7e111f6c` |
+| `SHA256SUMS` | `a77c49c97bd1bea13bcf140fb952546e862105e2f3b1016de108678e29cb1b58` |
+| Bundle manifest (`create_release_bundle_manifest.py`) | schema `se-harness-release-bundle/v2`, file sha256 `52b5848c9f5dc4b72d94d13b0bd2b0b3598cbc037fa77835552dc20b8ed89e46`, held outside the checkout for `RLS-SEH-014`'s binding |
+
+Sdist: 176 files (`se_harness/` 44, `templates/` 61, `tests/` 59, `scripts/`
+1, metadata), no `docs/` tree, no unsafe archive member. Wheel: 111 files.
+The `WO-RLO-007` hand-back did not run (POSIX-only); teardown on Windows
+succeeded without it.
+
+## Exact-candidate stage: verifier-owned black-box package acceptance
+
+Released 0.6.0 verifier (`accept-candidate`, `--checkout-root` this
+checkout) against the exact wheel `4d0589fd…` at `24cf7c7…`: **ten of ten
+scenarios passed**, CPython 3.14.6, schema
+`se-harness-functional-acceptance-v1`, verifier wheel `2a952eb6…`, contract
+`a443e93d…`. The checkout was unchanged by the run.
+
+`qualify candidate-package` on the same inputs: the released 0.6.0 evaluator
+predates the `qualify` namespace and refuses the command; run from the candidate
+checkout it refuses at `CP001` released verifier identity failed, because the
+verifier it requires is a released evaluator that carries `qualify`. This is the
+documented `accept-candidate` bootstrap exception `REL-SEH-017` retains for this
+release; `accept-candidate` above is the reading of record.
+
+## Exact-candidate stage: hosted lanes on pull request #183
+
+All four lanes ran on the `pull_request` event for head `24cf7c7` and
+concluded **success**: Engineering Harness (also `success` on the `push`
+event), Governor Transition Assessment, SE Harness Candidate Evidence (candidate
+source, candidate package, governance migration on Linux and Windows,
+deterministic integration package built, verified on both platforms and
+retained), and Publication Rehearsal run `33014118865` (`Qualify and replay
+(candidate)` success; the release-record job skipped, no schema-2 record
+existing yet).
+
+The hosted rehearsal's suite step on Linux: **`Ran 995 tests in 49.017s` —
+`OK (skipped=4)`** at full scale, the same 995 as both Windows runtimes with the
+platform guards not skipping. Its artifact
+`qualification-candidate-82d4f24b…` holds `complete-candidate-qualification.json`
+(`passed: true`, `completion: completed`) and `release-build-replay.json`
+(`state: exact`, two identical builds). **Its digests differ from the build of
+record and must not be quoted for it**: the `pull_request` event checks out the
+merge-preview commit `82d4f24bde4ded86beab0088aa153d0ba0dbb2c9` (parents
+`be2f0cf` and `24cf7c7`), whose tree is the candidate's tree
+`05b0e6dd…` exactly but whose epoch is 1787778646, so its wheel reads
+`88cd5154…`. The hosted replay therefore proves the recipe path and the tree,
+and the read-only `release-candidate-replay` dispatch on the bound record is
+the hosted reading of the candidate's own hashes.
+
+## Exact-candidate stage: disclosed limitations, dispositioned
+
+- `VER-ADS-001`/`VER-ADS-002` pull-request-lane gap: the candidate's own
+  `pull_request` runs on both platforms are green at head `24cf7c7`, which
+  contains both bound ADS candidates; the missing reviewer classifications
+  remain owed.
+- `VER-TCM-001` reviewer judgments: unchanged, owed.
+- `VREC-IPK-001` merge-preview commit: unchanged, carried.
+
+## Exact-candidate stage: aggregate census re-derived at the candidate
+
+Unchanged from stage 1 and re-measured, not carried: 53 members, 52
+`implemented` and this work order `in_progress`; 51 verified records plus
+`WO-RLS-011` covered by the planned aggregate record; **24** verification
+contracts; **65** requirements; **58** keyed evidence paths (57 plus this file,
+now existing). No work order reached `implemented` during execution; `main`
+is unmoved at `be2f0cf`.
+
+## Exact-candidate stage: planned aggregate VREC inputs, as measured
+
+`VREC-SEH-014` binds candidate `24cf7c767583e83b9056d03d7dd5de6622fef91c` to
+the 53 work orders `REL-SEH-017` names, the 24 verification contracts and the
+58 keyed evidence paths above, with the released 0.6.0 evaluator's identity
+evidence and the distribution identities of the build of record. Neither the
+record nor `RLS-SEH-014` is prepared by this stage.
+
+## Exact-candidate stage: unperformed transitions and external actions
+
+No `implemented` transition, no `VREC-SEH-014` or `RLS-SEH-014` preparation
+or transition, no distribution binding, no tag, no GitHub or PyPI publication,
+no Pages deployment, no `release/0.7` mutation, no credential use, no
+root-evaluator change. The candidate was not mutated after the build of record.
