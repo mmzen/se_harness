@@ -594,6 +594,18 @@ class ReplayBuildTests(unittest.TestCase):
     def _hand_back_calls(self, calls: list) -> list[list[str]]:
         return [list(call.args[0]) for call in calls if "chown" in call.args[0]]
 
+    @staticmethod
+    def _refuse_after(successes: int):
+        count = {"n": 0}
+
+        def run(arguments, **_kwargs):
+            count["n"] += 1
+            if count["n"] > successes:
+                raise BUILD.BuildRecipeError("hand-back refused")
+            return None
+
+        return run
+
     def test_workspace_is_handed_back_to_the_calling_user_before_teardown(self) -> None:
         # WO-RLO-007: the producer writes as root; on POSIX one further run of the
         # pinned image returns the trees to the runner user so teardown can remove them.
@@ -613,14 +625,16 @@ class ReplayBuildTests(unittest.TestCase):
                 result = BUILD.replay_build(root, commit, "1.2.3", container / "out" / "bundle")
             self.assertEqual("exact", result["state"])
             calls = self._hand_back_calls(run.call_args_list)
-            self.assertEqual(1, len(calls))
-            command = calls[0]
-            self.assertEqual(["docker", "run", "--rm", "--pull", "never", "--platform", "linux/amd64"], command[:7])
-            self.assertIn("pinned@sha256:abc", command)
-            self.assertEqual(["chown", "-R", "1001:127", "/workspace"], command[-4:])
-            mount = command[command.index("--mount") + 1]
-            self.assertTrue(mount.startswith("type=bind,source=") and mount.endswith(",target=/workspace"))
-            self.assertIn(".se-harness-release-build-", mount)
+            # one hand-back per producer build, before its outputs are read
+            self.assertEqual(2, len(calls))
+            for command, suffix in zip(calls, ("a", "b")):
+                self.assertEqual(["docker", "run", "--rm", "--pull", "never", "--platform", "linux/amd64"], command[:7])
+                self.assertIn("pinned@sha256:abc", command)
+                self.assertEqual(["chown", "-R", "1001:127", "/workspace"], command[-4:])
+                mount = command[command.index("--mount") + 1]
+                self.assertTrue(mount.startswith("type=bind,source=") and mount.endswith(",target=/workspace"))
+                self.assertIn(".se-harness-release-build-", mount)
+                self.assertTrue(mount.split(",target=")[0].replace("\\", "/").endswith("/" + suffix), mount)
 
     def test_workspace_is_handed_back_on_the_failure_path_without_masking_the_build_error(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -631,16 +645,18 @@ class ReplayBuildTests(unittest.TestCase):
             with (
                 mock.patch.object(BUILD, "_docker_image_identity", side_effect=lambda image: image),
                 mock.patch.object(BUILD, "_docker_build", side_effect=self.fake_docker_build),
-                mock.patch.object(BUILD, "_bounded_run", side_effect=BUILD.BuildRecipeError("hand-back refused")) as run,
+                mock.patch.object(BUILD, "_bounded_run", side_effect=self._refuse_after(2)) as run,
                 mock.patch.object(BUILD, "_is_posix", return_value=True),
                 mock.patch.object(BUILD.os, "getuid", create=True, return_value=1),
                 mock.patch.object(BUILD.os, "getgid", create=True, return_value=1),
             ):
                 with self.assertRaisesRegex(BUILD.BuildRecipeError, "accepted hash"):
                     BUILD.replay_build(root, commit, "1.2.3", container / "bundle", expected_wheel_sha256="0" * 64)
-            self.assertEqual(1, len(self._hand_back_calls(run.call_args_list)))
+            # the two per-build hand-backs succeed, the comparison fails on the accepted hash,
+            # and the work-root hand-back on the failure path is refused without masking it
+            self.assertEqual(3, len(self._hand_back_calls(run.call_args_list)))
 
-    def test_hand_back_failure_after_an_exact_build_is_its_own_error(self) -> None:
+    def test_hand_back_failure_after_a_build_is_reported_and_the_work_root_is_still_handed_back(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             container = Path(temporary)
             root = container / "repository"
@@ -654,7 +670,7 @@ class ReplayBuildTests(unittest.TestCase):
                 mock.patch.object(BUILD.os, "getuid", create=True, return_value=1),
                 mock.patch.object(BUILD.os, "getgid", create=True, return_value=1),
             ):
-                with self.assertRaisesRegex(BUILD.BuildRecipeError, "built exactly but the workspace hand-back failed"):
+                with self.assertRaisesRegex(BUILD.BuildRecipeError, "hand-back refused"):
                     BUILD.replay_build(root, commit, "1.2.3", container / "bundle")
 
     def test_hand_back_is_skipped_on_a_non_posix_host(self) -> None:

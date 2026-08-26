@@ -36,19 +36,21 @@ would fail identically.
 
 ## What was built
 
-- `repository_tools/release_build.py`: `_hand_back_workspace(work_root,
-  image)` runs the same pinned producer image once more —
-  `docker run --rm --pull never --platform linux/amd64 --mount type=bind,source=<work root>,target=/workspace <image> chown -R <uid>:<gid> /workspace`
+- `repository_tools/release_build.py`: `_hand_back_workspace(path, image)`
+  runs the same pinned producer image once more —
+  `docker run --rm --pull never --platform linux/amd64 --mount type=bind,source=<path>,target=/workspace <image> chown -R <uid>:<gid> /workspace`
   — on POSIX hosts (`_is_posix()`), with the digest-resolved image from
-  `_docker_image_identity`. `replay_build` calls it on both exit paths of the
-  workspace: on the failure path its own failure is swallowed so the build
-  error stays the reported result; on the success path its failure is raised
-  as its own error (`replay built exactly but the workspace hand-back
-  failed`). The workspace body moved unchanged into `_replay_in_workspace`;
-  `TemporaryDirectory` is created with `ignore_cleanup_errors=True` so a
-  leftover tree never masks either result. The recipe, the lock, the
-  producer's arguments, the compared outputs and the result document are
-  unchanged.
+  `_docker_image_identity`. `_replay_in_workspace` calls it on each
+  workspace right after its producer build and before the outputs are read
+  (the outputs are root-owned and unreadable by the runner user, see the
+  second hosted attempt below); `replay_build` calls it once more over the
+  whole work root on the failure path, swallowing its own failure so the
+  build error stays the reported result. A per-build hand-back failure is
+  reported as the replay's error. The workspace body moved unchanged into
+  `_replay_in_workspace`; `TemporaryDirectory` is created with
+  `ignore_cleanup_errors=True` so a leftover tree never masks a result. The
+  recipe, the lock, the producer's arguments, the compared outputs and the
+  result document are unchanged.
 - Tests (`tests/test_release_build.py`): the hand-back command, its image,
   mount and `chown -R <uid>:<gid> /workspace` on POSIX; issued on the failure
   path without masking the build error; a hand-back failure after an exact
@@ -95,6 +97,13 @@ would fail identically.
    now stub `_hand_back_workspace`; the new tests were re-run under a POSIX
    simulation on the workstation. The replay itself had not run in that
    attempt; the reading recorded above is from the next run.
+5. **A second hosted run failed on the read, not the teardown.** Run
+   `32995205284` (PR #174 at `3e2f1bd`), with the suite green: the replay
+   died at `[Errno 13] Permission denied: …/a/final/se_harness-0.7.0.tar.gz`
+   while reading the first workspace's outputs — they are root-owned and not
+   world-readable, so an end-of-run hand-back is too late. The hand-back now
+   runs after each producer build, before the outputs are read; the reading
+   recorded above is from the run that followed.
 ## Complete changed-path set
 
 ```
