@@ -158,9 +158,10 @@ Governing verdicts from the released exact public `0.6.0` evaluator, run from ou
 | Governing `doctor` | 87 PASS, 0 FAIL |
 | Governing `preflight --work-order WO-REB-023 --phase review` | PASS |
 | Full suite, CPython 3.11.9 | `Ran 1021 tests`, `OK (skipped=24)` |
+| Full suite, CPython 3.14.6 | `Ran 1021 tests`, `OK (skipped=23)` |
 | `tests.test_governance_migration` | `Ran 16 tests`, `OK` |
 
-Before the amendment the same suite reported 1021 tests with exactly one failure, `test_candidate_evidence_is_repository_owned_and_non_authoritative`, and no other. The five new tests are the difference between 1016 and 1021.
+Before the amendment the same suite reported 1021 tests with exactly one failure, `test_candidate_evidence_is_repository_owned_and_non_authoritative`, and no other. The five new tests are the difference between 1016 and 1021. The single extra skip on 3.11.9 is a pre-existing Windows-and-runtime guard unrelated to this work order, and skip counts are a pass condition nowhere in this packet.
 
 ## 10. The formal snapshot, and its checkout convention
 
