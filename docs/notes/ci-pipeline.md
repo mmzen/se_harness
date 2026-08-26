@@ -55,7 +55,7 @@ contract is 68 KB and `WO-RLS-011` is 39 KB. Since `v0.6.0`: 265 commits,
 | `WO-CIP-001` | P1, P2 | the second run per push; two of three workflow-level wheel builds; the reconcile-only job | implemented 2026-08-26, see below |
 | `WO-CIP-002` | P3, P5 | the Python copy of the qualification, the YAML parser and the digest file; the idle schema leg; the duplicated Pages jobs | implemented 2026-08-26, see below |
 | `WO-CIP-003` | P6 | three hand-edited constants and the silent skip on a version bump | implemented 2026-08-26, see below |
-| `WO-CIP-004` | P4 | the reject-and-re-issue loop on the release contract | pending |
+| `WO-CIP-004` | P4 | the reject-and-re-issue loop on the release contract | implemented 2026-08-26, see below |
 
 The "Measured after" column is filled by each work order's evidence.
 
@@ -125,6 +125,22 @@ The "Measured after" column is filled by each work order's evidence.
   `needs.<job>.outputs` reference in every workflow names a job in the
   consumer's `needs`. `VREC-CIP-003` remains the record of the commit that
   carried the defect.
+
+### After `WO-CIP-004`
+
+- `RELEASE_CONTRACT.template.md` (standard template) carries
+  `candidate_commit` and `previous_release_tag`, a "Release unit" section
+  stating that `gates` is measured, and a stop condition that names a
+  differing census or a non-ancestor candidate — not a later merge to `main`.
+  The 0.6.0 root validator accepts the two fields as unknown keys (measured:
+  913 artifacts, 0 errors with them added to an approved contract).
+- `harnessctl release-unit` (`se_harness/release_unit.py`): the census from
+  the trailers on the first-parent history, merges contributing their merged
+  commits' trailers; statuses and packaged-surface flags from the catalog;
+  `--contract` compares and reports `E-CIP-001`; `--toml` prints the array.
+- Measured over `v0.6.0..e98b788` (the `main` the 0.7.0 contracts were
+  drafted on): see the WO-CIP-004 evidence for the census and its comparison
+  with `REL-SEH-015`'s thirty-six gates.
 
 ### After `WO-CIP-003`
 

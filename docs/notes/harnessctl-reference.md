@@ -38,6 +38,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
+| `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of five fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
 | `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
@@ -236,6 +237,14 @@ Free-form artifact bodies, documentation, source, and tests are not rewritten au
 - `unsupported_references`, for binary or non-UTF-8 paths requiring manual inspection.
 
 When manual or unsupported references remain, output sets `manual_action_required = true` and `repository_repair_complete = false` even after the structured transaction succeeds. Any selected identifier referenced by a verification or release record blocks the operation. Eligible selected artifacts are limited to `draft`, `approved`, `in_progress`, or `implemented`; later lifecycle and commit-bound history require accountable disposition rather than renumbering.
+
+## Release unit derivation
+
+```text
+harnessctl release-unit [TARGET] --from TAG --to COMMIT [--exempt SHA ...] [--contract REL-ID] [--json | --toml]
+```
+
+Measures a release unit (`WO-CIP-004`, `ADR-CIP-002`): walks the first-parent history from the previous release tag to the candidate commit, reads the `Harness-Work-Order` trailers — a merge contributes the trailers of the commits it merged — and reports one row per work order with its lifecycle status and whether its execution scope touches the packaged surface (`se_harness/`, `templates/repository/standard/`, `pyproject.toml`). A commit with no trailer is `untraced`. The command exits 1 when a commit is untraced and not `--exempt`ed, when a listed work order is not `implemented`, or, with `--contract`, when the contract's `candidate_commit`, `previous_release_tag` or `gates` differ from the measurement (`E-CIP-001`). `--toml` prints only the `gates` array to paste into the contract. It mutates nothing, needs no network, and freezes nothing: the release owner's approval of the contract does that.
 
 ## Runtime identity
 

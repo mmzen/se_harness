@@ -342,6 +342,8 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             capture_output=True, text=True, check=True,
         )
         fresh = json.loads(completed.stdout)
+        # WO-CIP-004: the retained report is a dry run at one commit; later requirements may
+        # extend the fresh report, but every retained observation must remain stable.
         retained_paths = set(report["files"])
         fresh_paths = set(fresh["files"])
         self.assertLessEqual(retained_paths, fresh_paths)
