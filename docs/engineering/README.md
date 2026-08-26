@@ -4,6 +4,7 @@
 
 ## Product and governance domains
 
+- `ci-pipeline/`: draft proposal to run each CI check once per commit, define the release qualification once for the rehearsal and the release, and freeze a release unit by candidate commit rather than by work-order allow-list.
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
 - `agent-directive-surface/`: draft proposal to make every behavioural obligation on a coding agent an evaluator-computed predicate or a bounded, explicitly scoped read.
 - `technical-communication/`: draft managed communication policy and read-only operator-brief skill using ASD-STE100-based clarity principles without a compliance claim.
