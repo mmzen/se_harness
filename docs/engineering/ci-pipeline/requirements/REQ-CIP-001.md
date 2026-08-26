@@ -2,7 +2,7 @@
 id = "REQ-CIP-001"
 type = "requirement"
 title = "Run each candidate-evidence workflow once per commit"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN a commit is pushed to a branch that has an open pull request, 
 verification_method = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Run each candidate-evidence workflow once per commit

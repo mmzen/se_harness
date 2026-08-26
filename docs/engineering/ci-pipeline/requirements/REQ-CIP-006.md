@@ -2,7 +2,7 @@
 id = "REQ-CIP-006"
 type = "requirement"
 title = "Derive the predecessor evaluator facts from the declared governor"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN a candidate-evidence job needs the predecessor evaluator, THE 
 verification_method = "automated-workflow-inspection-and-derivation-test"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Derive the predecessor evaluator facts from the declared governor

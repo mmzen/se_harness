@@ -2,7 +2,7 @@
 id = "REQ-CIP-004"
 type = "requirement"
 title = "Identify a release unit by a candidate commit and derive its work-order census"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN a release contract is drafted, THE SYSTEM SHALL identify the r
 verification_method = "automated-derivation-test-and-template-inspection"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Identify a release unit by a candidate commit and derive its work-order census

@@ -2,13 +2,19 @@
 id = "CAP-CIP-001"
 type = "capability"
 title = "Produce candidate evidence and a release from one execution of each check"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 derives_from = ["INT-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Produce candidate evidence and a release from one execution of each check

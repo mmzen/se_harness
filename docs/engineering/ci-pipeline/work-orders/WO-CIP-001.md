@@ -2,7 +2,7 @@
 id = "WO-CIP-001"
 type = "work_order"
 title = "Run once per commit and build once per workflow"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -29,6 +29,12 @@ implements = ["REQ-CIP-001", "REQ-CIP-002"]
 specifications = ["SPEC-CIP-001"]
 architecture = ["ARCH-CIP-001", "ADR-CIP-001", "ADR-CIP-002"]
 verification = ["VER-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Run once per commit and build once per workflow

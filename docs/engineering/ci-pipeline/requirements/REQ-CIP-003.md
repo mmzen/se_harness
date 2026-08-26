@@ -2,7 +2,7 @@
 id = "REQ-CIP-003"
 type = "requirement"
 title = "Define the release qualification once and invoke it from both the rehearsal and the release"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "THE SYSTEM SHALL execute the release qualification from one reusabl
 verification_method = "automated-workflow-inspection-and-rehearsal-run"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Define the release qualification once and invoke it from both the rehearsal and the release

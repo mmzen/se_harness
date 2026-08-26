@@ -2,7 +2,7 @@
 id = "REQ-CIP-002"
 type = "requirement"
 title = "Build the candidate wheel once per workflow and hand it to every consumer"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN the candidate-evidence workflow runs, THE SYSTEM SHALL build t
 verification_method = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Build the candidate wheel once per workflow and hand it to every consumer

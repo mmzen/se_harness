@@ -2,7 +2,7 @@
 id = "ARCH-CIP-001"
 type = "architecture"
 title = "One execution per check, one definition per lane, one commit per release unit"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -15,6 +15,12 @@ assessed_by = "technical-owner"
 [relations]
 addresses = ["REQ-CIP-001", "REQ-CIP-002", "REQ-CIP-003", "REQ-CIP-004", "REQ-CIP-005", "REQ-CIP-006"]
 conforms_to = ["SPEC-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: One execution per check, one definition per lane, one commit per release unit

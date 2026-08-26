@@ -2,13 +2,19 @@
 id = "VER-CIP-001"
 type = "verification"
 title = "Independent evidence for the pipeline simplification"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 verifies = ["REQ-CIP-001", "REQ-CIP-002", "REQ-CIP-003", "REQ-CIP-004", "REQ-CIP-005", "REQ-CIP-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Independent evidence for the pipeline simplification

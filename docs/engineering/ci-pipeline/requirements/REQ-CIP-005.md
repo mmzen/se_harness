@@ -2,7 +2,7 @@
 id = "REQ-CIP-005"
 type = "requirement"
 title = "Run only the qualification leg a record's schema needs and one Pages job"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN the publication workflow has resolved a release record, THE SY
 verification_method = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Run only the qualification leg a record's schema needs and one Pages job

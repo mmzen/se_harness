@@ -2,13 +2,20 @@
 id = "ADR-CIP-001"
 type = "adr"
 title = "Rehearse the release by invoking its definition, not by digesting a copy of it"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 decides = ["ARCH-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "technical-owner"
+reason = "Owner decision 2026-08-26, as technical owner: rehearse the release by invoking its definition, not by digesting a copy of it."
 +++
 
 # ADR: Rehearse the release by invoking its definition, not by digesting a copy of it

@@ -2,12 +2,19 @@
 id = "INT-CIP-001"
 type = "intent"
 title = "Run each check once, and freeze something that stays frozen"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "product-owner"
+reason = "Owner decision 2026-08-26: i approve the artifact packet."
 +++
 
 # Intent: Run each check once, and freeze something that stays frozen

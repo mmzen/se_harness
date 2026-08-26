@@ -2,13 +2,20 @@
 id = "ADR-CIP-002"
 type = "adr"
 title = "Freeze a release unit by candidate commit and measure its census"
-status = "draft"
+status = "approved"
 owners = ["release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 decides = ["ARCH-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T15:17:28Z"
+decided_by = "release-owner"
+reason = "Owner decision 2026-08-26, as release owner: freeze a release unit by candidate commit and measure its census."
 +++
 
 # ADR: Freeze a release unit by candidate commit and measure its census
