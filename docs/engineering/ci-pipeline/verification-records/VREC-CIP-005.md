@@ -2,7 +2,7 @@
 id = "VREC-CIP-005"
 type = "verification_record"
 title = "Verification candidate for WO-CIP-005"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/ci-pipeline/evidence/WO-CIP-005/WO-CIP-005-v
 evaluator_evidence_path = "docs/engineering/ci-pipeline/evidence/VREC-CIP-005-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T20:34:15Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-CIP-005"]
 conforms_to = ["VER-CIP-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T20:34:15Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-08-26 with 'I verify VREC-CIP-005', after accepting interactively the three recorded deviations: the predicate bound to QG-G5-RELEASE-PREPARATION (1); exemptions in release_unit.untraced_exemptions (2); two-segment work-order ids admitted (3). The predicate runs in the evaluator; no hosted reading is needed."
 +++
 
 # Verification Record Candidate
