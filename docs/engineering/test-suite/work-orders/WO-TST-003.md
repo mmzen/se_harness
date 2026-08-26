@@ -2,7 +2,7 @@
 id = "WO-TST-003"
 type = "work_order"
 title = "Run the scale tests at full size in the release qualification"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -37,6 +37,13 @@ to = "in_progress"
 decided_at = "2026-08-26T20:10:13Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: start."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T20:14:27Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-TST-003 implemented; no deviation recorded."
 +++
 
 # Work Order: Run the scale tests at full size in the release qualification
