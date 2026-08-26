@@ -193,19 +193,54 @@ The owner decided the order on 2026-08-26: open the bump's pull request first an
 
 The consequence for a reviewer: if the bump's pull request is closed or rebased instead of merged first, this branch's base disappears and the lane goes red again on the same `MIG211`. The two land together, in that order, or neither does.
 
-## 13. Coverage gaps and residual risks
+## 13. The hosted reading of the repaired lane
 
-1. **No hosted reading of the repaired lane exists yet.** Every figure here is local, on one Windows 11 workstation, on CPython 3.11.9 and 3.14.6. The hosted `governance-migration` job runs on `windows-latest` and `ubuntu-latest`, and neither has executed the new scenario. The first hosted reading will be this pull request's own run, and it is not in evidence.
+The gap this file listed first — no hosted reading existed — is now closed by measurement, on the pull request opened for this branch. `SE Harness Candidate Evidence` run `32938385111`, event `pull_request`, head `7194b01565c2838396b5053bb6e1d00831eb41a1`, **success**, with every one of the nine jobs successful:
+
+| Job | Id | Conclusion | Was, at run `32886901131` |
+|---|---|---|---|
+| Candidate source evidence | `98084096475` | success | success |
+| Candidate package evidence | `98084368694` | success | success |
+| Governance migration (Linux) | `98084480088` | **success** | **failure** |
+| Governance migration (Windows) | `98084480143` | **success** | **failure** |
+| Reconcile governance migration platforms | `98084647267` | **success** | skipped |
+| Build deterministic integration package | `98084676486` | **success** | skipped |
+| Verify integration package (Windows) | `98084719760` | **success** | skipped |
+| Verify integration package (Linux) | `98084719809` | **success** | skipped |
+| Retain verified integration package | `98084846645` | **success** | skipped |
+
+Both migration jobs ran `candidate-0.6.0-to-0.7.0.json` with `PREDECESSOR_VERSION: 0.6.0`, archive `se_harness-0.6.0`, successor archive `se_harness-0.7.0`, and reported `overall_result` `pass`, `classification.outcome` `compatible`, `missing_capabilities` `[]`, and `validate-complete` `valid`. Each platform's two replays produced one digest, and the two platforms produced the *same* digest:
+
+```text
+governance migration semantic result: c396912ba8f8646eac8a7c270d2538c88615a3abaae97ec594c47ae9a6582f38
+```
+
+Two cross-checks are worth naming, because each could have hidden a defect:
+
+- **The scenario bytes the lane read are the bytes committed here.** The hosted `fixture_sha256` is `e5c79724f5616db220389fa91b8670e4273701addfb4914b4dda95144ed62f93`, identical to the local reading in section 4, on both platforms and on a Linux checkout — so no line-ending or transport conversion touched the fixture.
+- **The hosted digest differs from the local one, for the reason section 6 gives.** The jobs report `git_head` `f7bd2b3ed2af6d67bfb9e6a07d40e4f086f3d016`, the pull request's ephemeral merge commit, not the head `7194b01` and not the qualification commit `4052143`. That is why `c396912b…` is not `5b36c2dc…`. The `semantic_sha256` being commit-dependent is therefore now measured twice, by two independent mechanisms, rather than argued once.
+
+The integration package the four revived jobs produced is `se_harness-0.7.0+pr165.gf7bd2b3ed2af-py3-none-any.whl`, staged as `integration-package-staging-f7bd2b3ed2af…` under manifest schema `integration-package-v1`, digest `4396bd6387059a6f6b97ef223449ea04781fc6ca137d1b02f600680e310ac827`, built on Linux and verified independently on both platforms. **It is a local-version pull-request artifact, not a promotable distribution**, and no release record binds it.
+
+The `push`-event run at the same head, `32938372807`, is also green but is *not* the reading that matters: it skipped `Build deterministic integration package`, `Verify integration package` and `Retain verified integration package` by design. Those three only ever execute on the `pull_request` run, so a green push run alone would not have proven the downstream jobs recovered.
+
+`Engineering Harness` (`32938385100`), `Governor Transition Assessment` (`32938385147`) and `Publication Rehearsal` (`32938385104`, including both credential-free rehearsals and the orchestrator-divergence refusal) all succeeded on the same event.
+
+One limit on this section: it was written *after* the run it describes, so the commit carrying it is a later one than `7194b01`, and the tip's own run is a second reading of the same lane at a different merge commit. The figures above name the commit they were measured at and must not be reattributed.
+
+## 14. Coverage gaps and residual risks
+
+1. **The hosted figures are for a merge commit that no longer exists once this branch moves.** Section 13's reading is real and green, but `f7bd2b3e…` is an ephemeral merge of `7194b01` into `201dd3c`. Any later push to either branch produces a new merge commit and a new `semantic_sha256`; the *pass* generalizes, the digest does not.
 2. **The successor wheel measured here is not the wheel CI builds.** It is an ephemeral non-promotable wheel built from `git archive HEAD` on this workstation. Its digest `39b13156…` is recorded for traceability, not as an expectation; the deterministic-build comparison that would make a wheel digest meaningful is a different lane.
 3. **The real capability gap is unnamed.** Released `0.6.0` exposes no `qualify`, and the closed contract vocabulary cannot say so. The scenario is truthful about what it declares and silent about that gap. Naming it needs a new contract version, which `SPEC-REB-008` reserves for accountable review.
 4. **`compatible` with an empty affected-operation set is a weaker gate than `migration-required`.** The historical pair's `migration-required` classification exercised more of the runner. That coverage now lives only in the unit suite, which is precisely what decision 4 traded away, and `test_historical_pair_left_the_lane_and_is_still_exercised_here` is what keeps it honest.
-5. **No Linux figure is local**, and no local run used the hosted runner images.
+5. **No Linux figure is local**, and no local run used the hosted runner images. Section 13 supplies a hosted Linux reading, so the two sets corroborate rather than duplicate each other; but every *local* figure in sections 6 to 10, including both formal snapshot digests and both suite runs, remains single-platform.
 6. **The `semantic_sha256` moves with the commit** (section 6). Any future evidence quoting it must name the commit it was measured at.
 7. **The missing release-sequence step is not fixed here.** `docs/notes/developing-se-harness.md#release-sequences` still does not list "add a migration scenario for the new version" as a bump step, which is why this gap reached CI. That file is ungoverned under `AGENTS.md` and belongs to a separate pull request with no work-order trailer; this work order must not smuggle it in.
 
-## 14. Actions not performed
+## 15. Actions not performed
 
-No promotable distribution was built. No verification record, release record, tag, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, maintenance-line change, credential use, or root-evaluator change. The root evaluator stays pinned at the released `0.6.0`.
+No promotable distribution was built. The ephemeral wheels in section 6 and the pull-request integration package in section 13 both carry non-release local versions, neither was produced by an approved release work order, and no record binds either. No verification record, release record, tag, GitHub Release, PyPI publication, Pages deployment, protected-environment approval, maintenance-line change, credential use, or root-evaluator change. The root evaluator stays pinned at the released `0.6.0`.
 
 No governing artifact was amended: `REQ-REB-016`, `REQ-REB-017`, `SPEC-REB-008`, `ARCH-REB-007`, `ADR-REB-007` and `VER-REB-007` are untouched. No contract version was added. No existing scenario, no migration runner module, and no managed file was edited. No assertion was relaxed to turn a red reading green, and no `historical-` fixture byte moved.
 
