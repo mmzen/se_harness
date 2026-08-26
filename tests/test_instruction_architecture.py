@@ -848,12 +848,22 @@ class InstructionArchitectureTests(unittest.TestCase):
                     sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()),
                 )
                 writing_contract = json.loads((root / "skill-contract.json").read_text(encoding="utf-8"))
-                self.assertEqual("se-harness-skill-contract-v2", writing_contract["schema"])
+                expected_schema = (
+                    "se-harness-skill-contract-v3"
+                    if name in host_adapter_writing_skills
+                    else "se-harness-skill-contract-v2"
+                )
+                self.assertEqual(expected_schema, writing_contract["schema"])
                 self.assertEqual({"explicit": True, "implicit": False}, {
                     key: writing_contract["activation"][key] for key in ("explicit", "implicit")
                 })
                 self.assertEqual([], writing_contract["effects"]["lifecycle_transitions"])
                 self.assertEqual({"allowed": False, "fallback": "single-agent"}, writing_contract["delegation"])
+                if name in host_adapter_writing_skills:
+                    self.assertEqual("2.0.0", writing_contract["version"])
+                    self.assertFalse(writing_contract["client"]["direct_target_writes"])
+                    self.assertEqual("evaluator", writing_contract["client"]["target_writer"])
+                    self.assertEqual("se-harness-workflow-v4", writing_contract["client"]["workflow_schema"])
                 instructions = (root / "SKILL.md").read_text(encoding="utf-8").lower()
                 for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
                     self.assertNotIn(provider, instructions)

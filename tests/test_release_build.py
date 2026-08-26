@@ -196,7 +196,11 @@ class DeterministicSdistTests(unittest.TestCase):
 
     def test_portable_skill_distribution_surface_is_explicit_and_unique(self) -> None:
         pyproject = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        self.assertTrue(pyproject["tool"]["setuptools"]["include-package-data"])
         self.assertIn("agent_contract.json", pyproject["tool"]["setuptools"]["package-data"]["se_harness"])
+        self.assertTrue({
+            "effect_contract.json", "workflow_contract.json", "quality_gates_contract.json"
+        }.issubset(pyproject["tool"]["setuptools"]["package-data"]["se_harness"]))
         catalog = REPOSITORY_ROOT / "se_harness/agent_contract.json"
         self.assertEqual(catalog.read_bytes(), parse_agent_contract_catalog_bytes(catalog.read_bytes()).canonical_bytes)
         data_files = pyproject["tool"]["setuptools"]["data-files"]
@@ -247,6 +251,17 @@ class DeterministicSdistTests(unittest.TestCase):
             "recursive-include templates/repository/standard/.claude/skills *.md",
             manifest,
         )
+        for required in (
+            "include tests/test_agentic_execution.py",
+            "include tests/test_instruction_architecture.py",
+            "include tests/test_public_onboarding.py",
+            "include tests/test_release_build.py",
+            "include tests/test_standard_repository_lifecycle.py",
+            "include tests/fixtures/agentic_execution/phase3/portable_vectors.json",
+            "recursive-include tests/fixtures/agentic_execution/phase4/skills *.json",
+            "recursive-include tests/fixtures/agentic_execution/host_activation *.json",
+        ):
+            self.assertIn(required, manifest)
         self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
 
     def test_non_promotable_ephemeral_wheel_carries_and_fresh_installs_all_skill_cores_once(self) -> None:
@@ -295,6 +310,13 @@ class DeterministicSdistTests(unittest.TestCase):
 
             with zipfile.ZipFile(wheel) as archive:
                 self.assertIn("se_harness/agent_contract.json", archive.namelist())
+                for module in (
+                    "change_bundle.py", "delegated_authority.py", "delegated_workflow.py",
+                    "effect_broker.py", "repository_state.py", "runtime_state.py", "skill_contract.py",
+                ):
+                    self.assertIn(f"se_harness/{module}", archive.namelist())
+                for contract in ("agent_contract.json", "effect_contract.json", "workflow_contract.json"):
+                    self.assertIn(f"se_harness/{contract}", archive.namelist())
                 packaged_catalog = archive.read("se_harness/agent_contract.json")
                 self.assertEqual(
                     packaged_catalog,

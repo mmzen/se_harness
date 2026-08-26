@@ -110,12 +110,14 @@ returns its execution receipt inline; it does not install an evaluator or
 retain evidence in the target. See
 [read-only agent orientation](harness-orient.md) for the complete procedure.
 
-The three writing skills are explicitly activated, single-agent procedures
-over the same evaluator control plane. They draft definitions, execute one
-already-started work order, or prepare a `ready` assurance record, then stop at
-the next accountable decision. They do not apply transitions or perform Git,
-credential, network, delivery, release, or external actions. See the
-[single-agent workflow skills MVP](agentic-execution-skills-mvp.md).
+The three writing skills are explicit-only, single-agent evaluator clients.
+Their v3 contracts require the exact workflow-v4 operation catalog and prohibit
+direct governed-target writes. Draft and execution requests use evaluator-owned
+delegated start, bundle, and completion; assurance requests use delegated VREC
+preparation and stop for either a separately authorized commit or independent
+assurance. An older released evaluator without that capability causes a
+zero-effect stop. See [Phase 4 writing-skill integration](agentic-execution-phase4-skills.md)
+and the retained [Phase 3 MVP contract](agentic-execution-skills-mvp.md).
 The [repository host adapter guide](agentic-execution-host-adapters.md)
 explains why the Claude files are discovery-only and how both hosts preserve
 the same explicit-only writing boundary.
@@ -166,6 +168,12 @@ and `.claude/skills/` adapter. If a repository edits a managed skill surface,
 the upgrade plan reports it as customized and preserves the bytes. Move
 repository-specific instructions outside the managed surface or restore the
 exact locked content before reviewing a fresh upgrade plan.
+
+Installing candidate package bytes alone does not activate the Phase 4 skill
+contracts in an existing repository. Activation requires a separately governed
+successor release, an exact external evaluator installation, and an explicit
+transactional repository upgrade. Until then, the current installed contract
+and lock remain authoritative; do not copy candidate skill files into place.
 
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 

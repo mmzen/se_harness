@@ -14,10 +14,16 @@ from typing import Any, Iterable, Mapping
 
 CONTRACT_SCHEMA = "se-harness-skill-contract-v1"
 CONTRACT_SCHEMA_V2 = "se-harness-skill-contract-v2"
+CONTRACT_SCHEMA_V3 = "se-harness-skill-contract-v3"
 MANIFEST_SCHEMA = "se-harness-skill-manifest-v1"
 CANONICAL_JSON_SCHEMA = "se-harness-canonical-json-v1"
 TEXT_MODE = "utf8-text-lf-v1"
 RECEIPT_SCHEMA = "se-harness-execution-receipt-v1"
+EFFECT_RECEIPT_SCHEMA = "se-harness-effect-receipt-v1"
+DECISION_PACKET_SCHEMA_V2 = "se-harness-decision-packet-v2"
+WORKFLOW_SCHEMA_V4 = "se-harness-workflow-v4"
+EVALUATOR_CLIENT_REQUEST_SCHEMA = "se-harness-evaluator-client-request-v1"
+EVALUATOR_CLIENT_RESULT_SCHEMA = "se-harness-evaluator-client-result-v1"
 MAX_CANONICAL_INTEGER = (1 << 63) - 1
 MAX_SKILL_FILES = 512
 MAX_SKILL_FILE_BYTES = 1 << 20
@@ -373,6 +379,330 @@ _V2_PROFILES: Mapping[str, Mapping[str, Any]] = {
 }
 
 
+_V3_PROHIBITED_EFFECTS = _V2_PROHIBITED_EFFECTS | {
+    "assurance-decision",
+    "child-delegation",
+    "direct-target-write",
+    "lifecycle-authority",
+    "parallel-writer",
+    "verification-decision",
+}
+_V3_PROFILES: Mapping[str, Mapping[str, Any]] = {
+    "harness-draft-change": {
+        "version": "2.0.0",
+        "mutation_class": "draft-writing",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("domain", "domain-name", True),
+            ("artifact-plan", "artifact-plan", True),
+            ("planning-note", "repository-path", False),
+            ("revisable-artifacts", "artifact-id-list", False),
+            ("work-order", "artifact-id", True),
+            ("delegation-evidence", "json-object", True),
+            ("evaluator-request", "json-object", True),
+        ],
+        "required_operations": [
+            "version", "identity", "doctor", "delegated-workflow-catalog",
+            "delegated-workflow-execute",
+        ],
+        "optional_operations": ["validate-json", "inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("capability-before-effect", "before-effect", "delegated-workflow-catalog", True),
+            ("delegated-execution-after-effect", "after-effect", "delegated-workflow-execute", True),
+            ("git-stop-handoff", "handoff", "decision-packet", True),
+        ],
+        "path_source": "declared-draft-destinations",
+        "permitted": ["draft-create", "draft-revise", "planning-note-write"],
+        "interface_operation": "delegated-workflow-execute",
+        "operation_catalog": [
+            "delegated-work-order-start", "change-bundle-apply", "delegated-work-order-complete",
+        ],
+        "receipt_schemas": [RECEIPT_SCHEMA, EFFECT_RECEIPT_SCHEMA],
+        "target_retention": False,
+        "retained_kinds": ["draft-artifacts", "planning-note", "effect-receipt"],
+        "stops": [
+            ("implicit-or-ambiguous-activation", "blocked"),
+            ("phase4-capability-unavailable", "blocked"),
+            ("invalid-or-missing-delegation", "blocked"),
+            ("direct-target-write-requested", "blocked"),
+            ("canonical-restitution-failed", "failed"),
+            ("accountable-review-required", "stopped"),
+        ],
+        "outputs": [
+            ("skill-result", EVALUATOR_CLIENT_RESULT_SCHEMA, "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+            ("effect-receipt", EFFECT_RECEIPT_SCHEMA, "retained"),
+            ("decision-packet", DECISION_PACKET_SCHEMA_V2, "inline"),
+        ],
+    },
+}
+_V3_PROFILES = {
+    **_V3_PROFILES,
+    "harness-execute-work-order": {
+        "version": "2.0.0",
+        "mutation_class": "governed-mutation",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("work-order", "artifact-id", True),
+            ("execution-scope", "path-list", True),
+            ("verification-contracts", "artifact-id-list", True),
+            ("evidence-obligations", "path-list", True),
+            ("repository-commands", "command-array", True),
+            ("implementation-constraints", "text-list", False),
+            ("delegation-evidence", "json-object", True),
+            ("evaluator-request", "json-object", True),
+        ],
+        "required_operations": [
+            "version", "identity", "doctor", "delegated-workflow-catalog",
+            "delegated-workflow-execute",
+        ],
+        "optional_operations": ["validate-json", "inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("capability-before-effect", "before-effect", "delegated-workflow-catalog", True),
+            ("delegated-execution-after-effect", "after-effect", "delegated-workflow-execute", True),
+            ("git-stop-handoff", "handoff", "decision-packet", True),
+        ],
+        "path_source": "work-order-execution-scope",
+        "permitted": ["implementation-write", "test-execution", "evidence-write"],
+        "interface_operation": "delegated-workflow-execute",
+        "operation_catalog": [
+            "delegated-work-order-start", "change-bundle-apply", "delegated-work-order-complete",
+        ],
+        "receipt_schemas": [RECEIPT_SCHEMA, EFFECT_RECEIPT_SCHEMA],
+        "target_retention": True,
+        "retained_kinds": ["work-order-evidence", "effect-receipt", "completion-proof"],
+        "stops": [
+            ("implicit-or-ambiguous-activation", "blocked"),
+            ("phase4-capability-unavailable", "blocked"),
+            ("invalid-or-missing-delegation", "blocked"),
+            ("session-conflict", "blocked"),
+            ("direct-target-write-requested", "blocked"),
+            ("incomplete-completion-proof", "failed"),
+            ("canonical-restitution-failed", "failed"),
+            ("git-authorization-required", "stopped"),
+        ],
+        "outputs": [
+            ("skill-result", EVALUATOR_CLIENT_RESULT_SCHEMA, "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+            ("effect-receipt", EFFECT_RECEIPT_SCHEMA, "retained"),
+            ("work-order-evidence", "se-harness-evidence-set-v1", "retained"),
+            ("decision-packet", DECISION_PACKET_SCHEMA_V2, "inline"),
+        ],
+    },
+}
+_V3_PROFILES = {
+    **_V3_PROFILES,
+    "harness-prepare-assurance": {
+        "version": "2.0.0",
+        "mutation_class": "governed-mutation",
+        "inputs": [
+            ("target", "repository-path", True),
+            ("evaluator-launcher", "evaluator-launcher", True),
+            ("expected-evaluator-version", "version", True),
+            ("expected-evaluator-root", "directory-path", True),
+            ("explicit-skill", "skill-name", True),
+            ("requested-outcome", "bounded-text", True),
+            ("declared-non-effects", "text-list", True),
+            ("work-orders", "artifact-id-list", True),
+            ("verification-contracts", "artifact-id-list", True),
+            ("evidence-paths", "path-list", True),
+            ("candidate-commit", "bounded-text", False),
+            ("record-id", "artifact-id", True),
+            ("record-destination", "repository-path", True),
+            ("preparation-actor", "bounded-text", True),
+            ("delegation-evidence", "json-object", True),
+            ("completion-proof", "json-object", True),
+            ("evaluator-request", "json-object", True),
+        ],
+        "required_operations": [
+            "version", "identity", "doctor", "delegated-workflow-catalog",
+            "delegated-workflow-prepare-vrec",
+        ],
+        "optional_operations": ["validate-json", "inspect-json"],
+        "checkpoints": [
+            ("identity-before-effect", "before-effect", "identity", True),
+            ("integrity-before-effect", "before-effect", "doctor", True),
+            ("capability-before-effect", "before-effect", "delegated-workflow-catalog", True),
+            ("delegated-preparation-after-effect", "after-effect", "delegated-workflow-prepare-vrec", True),
+            ("assurance-stop-handoff", "handoff", "decision-packet", True),
+        ],
+        "path_source": "evaluator-derived-vrec-destination",
+        "permitted": ["verification-record-prepare"],
+        "interface_operation": "delegated-workflow-prepare-vrec",
+        "operation_catalog": ["delegated-vrec-prepare"],
+        "receipt_schemas": [RECEIPT_SCHEMA],
+        "target_retention": True,
+        "retained_kinds": ["verification-record", "evaluator-evidence", "completion-proof"],
+        "stops": [
+            ("implicit-or-ambiguous-activation", "blocked"),
+            ("phase4-capability-unavailable", "blocked"),
+            ("invalid-or-missing-delegation", "blocked"),
+            ("session-conflict", "blocked"),
+            ("direct-target-write-requested", "blocked"),
+            ("canonical-restitution-failed", "failed"),
+            ("git-authorization-required", "stopped"),
+            ("assurance-decision-required", "stopped"),
+        ],
+        "outputs": [
+            ("skill-result", EVALUATOR_CLIENT_RESULT_SCHEMA, "inline"),
+            ("execution-receipt", RECEIPT_SCHEMA, "inline"),
+            ("verification-record", "se-harness-verification-record-v1", "retained"),
+            ("evaluator-evidence", "se-harness-evidence-set-v1", "retained"),
+            ("assurance-decision-packet", DECISION_PACKET_SCHEMA_V2, "inline"),
+        ],
+    },
+}
+
+
+def _parse_v3_contract(value: Any) -> SkillContract:
+    top = _object(
+        value,
+        {
+            "schema", "name", "version", "outcome", "activation", "inputs",
+            "preconditions", "mutation_class", "evaluator", "client", "checkpoints",
+            "effects", "delegation", "evidence", "stop_conditions", "outputs",
+        },
+        "$",
+    )
+    if top["schema"] != CONTRACT_SCHEMA_V3:
+        raise SkillContractError("SKC012", f"unsupported skill contract schema: {top['schema']!r}")
+    name = _text(top["name"], "$.name", pattern=_NAME)
+    profile = _V3_PROFILES.get(name)
+    if profile is None:
+        raise SkillContractError("SKC031", f"unsupported closed v3 skill: {name}")
+    version = _text(top["version"], "$.version", pattern=_VERSION)
+    if version != profile["version"]:
+        raise SkillContractError("SKC032", f"{name} must use its approved major contract version")
+    _text(top["outcome"], "$.outcome")
+    if top["mutation_class"] != profile["mutation_class"]:
+        raise SkillContractError("SKC032", f"invalid mutation class for {name}")
+
+    activation = _object(top["activation"], {"explicit", "implicit", "must_not_match"}, "$.activation")
+    if not _boolean(activation["explicit"], "$.activation.explicit") or _boolean(
+        activation["implicit"], "$.activation.implicit"
+    ):
+        raise SkillContractError("SKC033", "closed v3 skills require explicit-only activation")
+    negative_matches = _list(activation["must_not_match"], "$.activation.must_not_match")
+    if not negative_matches:
+        raise SkillContractError("SKC033", "activation must declare a non-match example")
+    for index, item in enumerate(negative_matches):
+        _text(item, f"$.activation.must_not_match[{index}]")
+
+    inputs = _typed_entries(
+        top["inputs"], "$.inputs", {"name", "required", "type"}, allowed_types=_V2_INPUT_TYPES
+    )
+    if [(item["name"], item["type"], item["required"]) for item in inputs] != profile["inputs"]:
+        raise SkillContractError("SKC034", f"inputs differ from the closed {name} instance")
+    _typed_entries(top["preconditions"], "$.preconditions", {"id", "description"})
+
+    evaluator = _object(
+        top["evaluator"],
+        {"minimum_version", "required_operations", "optional_operations", "missing_required", "missing_optional"},
+        "$.evaluator",
+    )
+    minimum = _text(evaluator["minimum_version"], "$.evaluator.minimum_version", pattern=_VERSION)
+    if tuple(int(part) for part in minimum.split("-", 1)[0].split("+", 1)[0].split(".")[:3]) < (0, 6, 0):
+        raise SkillContractError("SKC035", "closed v3 skills retain the 0.6.0 compatibility floor")
+    required = _unique_texts(evaluator["required_operations"], "$.evaluator.required_operations")
+    optional = _unique_texts(evaluator["optional_operations"], "$.evaluator.optional_operations")
+    if required != profile["required_operations"] or optional != profile["optional_operations"]:
+        raise SkillContractError("SKC035", f"evaluator operations differ from the closed {name} instance")
+    if evaluator["missing_required"] != "blocked" or evaluator["missing_optional"] != "degraded":
+        raise SkillContractError("SKC035", "evaluator failure policy differs from the Phase 4 matrix")
+
+    client = _object(
+        top["client"],
+        {
+            "request_schema", "result_schema", "workflow_schema", "interface_operation",
+            "operation_catalog", "bundle_owner", "target_writer", "direct_target_writes",
+            "canonical_restitution",
+        },
+        "$.client",
+    )
+    operation_catalog = _unique_texts(client["operation_catalog"], "$.client.operation_catalog")
+    if (
+        client["request_schema"] != EVALUATOR_CLIENT_REQUEST_SCHEMA
+        or client["result_schema"] != EVALUATOR_CLIENT_RESULT_SCHEMA
+        or client["workflow_schema"] != WORKFLOW_SCHEMA_V4
+        or client["interface_operation"] != profile["interface_operation"]
+        or operation_catalog != profile["operation_catalog"]
+        or client["bundle_owner"] != "evaluator"
+        or client["target_writer"] != "evaluator"
+        or _boolean(client["direct_target_writes"], "$.client.direct_target_writes")
+        or client["canonical_restitution"] != "required"
+    ):
+        raise SkillContractError("SKC036", f"evaluator-client boundary differs from the closed {name} instance")
+
+    checkpoints = _typed_entries(
+        top["checkpoints"], "$.checkpoints", {"id", "stage", "operation", "required"}
+    )
+    actual_checkpoints: list[tuple[str, str, str, bool]] = []
+    for index, entry in enumerate(checkpoints):
+        stage = _text(entry["stage"], f"$.checkpoints[{index}].stage", pattern=_IDENTIFIER)
+        operation = _text(entry["operation"], f"$.checkpoints[{index}].operation", pattern=_IDENTIFIER)
+        if stage not in {"before-effect", "after-effect", "handoff"}:
+            raise SkillContractError("SKC010", f"unsupported checkpoint stage: {stage}")
+        actual_checkpoints.append((entry["id"], stage, operation, entry["required"]))
+    if actual_checkpoints != profile["checkpoints"]:
+        raise SkillContractError("SKC037", f"checkpoints differ from the closed {name} instance")
+
+    effects = _object(
+        top["effects"], {"permitted", "prohibited", "path_source", "lifecycle_transitions"}, "$.effects"
+    )
+    permitted = _unique_texts(effects["permitted"], "$.effects.permitted")
+    prohibited = _unique_texts(effects["prohibited"], "$.effects.prohibited")
+    path_source = _text(effects["path_source"], "$.effects.path_source", pattern=_IDENTIFIER)
+    lifecycle = _unique_texts(effects["lifecycle_transitions"], "$.effects.lifecycle_transitions")
+    if permitted != profile["permitted"] or path_source != profile["path_source"] or lifecycle:
+        raise SkillContractError("SKC038", f"effects differ from the closed {name} instance")
+    if not _V3_PROHIBITED_EFFECTS.issubset(prohibited):
+        raise SkillContractError("SKC038", "closed v3 effect prohibitions are incomplete")
+
+    delegation = _object(top["delegation"], {"allowed", "fallback"}, "$.delegation")
+    if _boolean(delegation["allowed"], "$.delegation.allowed") or delegation["fallback"] != "single-agent":
+        raise SkillContractError("SKC018", "closed v3 skills prohibit child delegation and parallel fallback")
+    evidence = _object(
+        top["evidence"],
+        {"receipt_schemas", "target_retention", "required_retained_kinds"},
+        "$.evidence",
+    )
+    receipts = _unique_texts(evidence["receipt_schemas"], "$.evidence.receipt_schemas")
+    retained = _unique_texts(evidence["required_retained_kinds"], "$.evidence.required_retained_kinds")
+    if (
+        receipts != profile["receipt_schemas"]
+        or _boolean(evidence["target_retention"], "$.evidence.target_retention") is not profile["target_retention"]
+        or retained != profile["retained_kinds"]
+    ):
+        raise SkillContractError("SKC039", f"evidence differs from the closed {name} instance")
+    stops = _typed_entries(top["stop_conditions"], "$.stop_conditions", {"id", "outcome"})
+    if [(item["id"], item["outcome"]) for item in stops] != profile["stops"]:
+        raise SkillContractError("SKC040", f"stop conditions differ from the closed {name} instance")
+    outputs = _typed_entries(
+        top["outputs"], "$.outputs", {"name", "schema", "retention"},
+        allowed_retentions={"inline", "none", "retained"},
+    )
+    if [(item["name"], item["schema"], item["retention"]) for item in outputs] != profile["outputs"]:
+        raise SkillContractError("SKC041", f"outputs differ from the closed {name} instance")
+    _validate_canonical_value(top)
+    return SkillContract(top)
+
+
 def _parse_v2_contract(value: Any) -> SkillContract:
     top = _object(
         value,
@@ -498,6 +828,8 @@ def parse_skill_contract_bytes(raw: bytes) -> SkillContract:
     except (json.JSONDecodeError, RecursionError) as exc:
         raise SkillContractError("SKC001", "skill contract is not valid bounded JSON") from exc
 
+    if isinstance(value, dict) and value.get("schema") == CONTRACT_SCHEMA_V3:
+        return _parse_v3_contract(value)
     if isinstance(value, dict) and value.get("schema") == CONTRACT_SCHEMA_V2:
         return _parse_v2_contract(value)
 

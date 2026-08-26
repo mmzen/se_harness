@@ -2254,11 +2254,28 @@ def project_decision_packet(
 
     source = _object(
         workflow_result,
-        {"schema", "operation", "selection", "scope", "compliance", "procedure", "state", "findings", "mutation", "restitution"},
+        {
+            "schema",
+            "operation",
+            "selection",
+            "scope",
+            "compliance",
+            "procedure",
+            "state",
+            "findings",
+            "mutation",
+            "restitution",
+            "result_sha256",
+        },
         "$.workflow_result",
     )
     if source["schema"] != WORKFLOW_RESULT_SCHEMA:
         _error("AEXCON004", "$.workflow_result.schema", "decision source must be workflow-result v2")
+    result_sha256 = _sha256(source["result_sha256"], "$.workflow_result.result_sha256")
+    from se_harness.workflow_result import restitution_digest
+
+    if restitution_digest(source) != result_sha256:
+        _error("AEXCON014", "$.workflow_result.result_sha256", "decision source digest does not match restitution")
     context = validate_contract(packet_context, expected_schema=PACKET_CONTEXT_SCHEMA).value
     selection = _object(source["selection"], {"primary", "artifacts"}, "$.workflow_result.selection")
     primary = _artifact_id(selection["primary"], "$.workflow_result.selection.primary")

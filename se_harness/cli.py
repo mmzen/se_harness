@@ -10,7 +10,23 @@ import sys
 from pathlib import Path
 
 from se_harness import __version__
+from se_harness.agent_contract import AgentContractError
 from se_harness.artifact_layout import create_artifact, scaffold_domain
+from se_harness.change_bundle import ChangeBundleError
+from se_harness.delegated_authority import DelegatedAuthorityError
+from se_harness.delegated_workflow import (
+    CompletionProof,
+    DelegatedStop,
+    DelegatedWorkflowError,
+    EffectProof,
+    LifecycleProof,
+    candidate_commit_stop,
+    delegated_change_bundle_apply,
+    delegated_vrec_prepare,
+    delegated_work_order_complete,
+    delegated_work_order_start,
+    phase4_operation_catalog,
+)
 from se_harness.installer import (
     HarnessError,
     apply_changes,
@@ -19,6 +35,7 @@ from se_harness.installer import (
     plan_install,
     template_root,
 )
+from se_harness.effect_broker import EffectBrokerError
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.governance_migration import GovernanceMigrationError, run_governance_migration
 from se_harness.governance_migration_contract import MigrationContractError
@@ -45,6 +62,8 @@ from se_harness.release_qualification import (
     write_qualification_result,
 )
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
+from se_harness.repository_state import EvaluatorIdentity, RepositoryObservationError
+from se_harness.runtime_state import RuntimeStateError, RuntimeStateStore
 from se_harness.workflow_compliance import check_workflow, focus_schema2
 from se_harness.workflow_contract import ContractError
 from se_harness.workflow_procedures import ProcedureError
@@ -708,6 +727,230 @@ def _accept_candidate(args: argparse.Namespace) -> int:
     return _qualify(args)
 
 
+def _unique_json_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    value: dict[str, object] = {}
+    for key, item in pairs:
+        if key in value:
+            raise ValueError(f"duplicate JSON field: {key}")
+        value[key] = item
+    return value
+
+
+def _bounded_json(path: str, label: str) -> object:
+    source = Path(path)
+    try:
+        raw = source.read_bytes()
+        if len(raw) > 2_000_000:
+            raise ValueError("input exceeds 2 MB")
+        return json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_json_object)
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        raise HarnessError(f"delegated workflow {label}: {exc}") from exc
+
+
+def _json_array(path: str, label: str) -> list[dict[str, object]]:
+    value = _bounded_json(path, label)
+    if not isinstance(value, list) or not all(isinstance(item, dict) for item in value):
+        raise HarnessError(f"delegated workflow {label} must be a JSON array of objects")
+    return value
+
+
+def _lifecycle_proof(path: str, label: str) -> LifecycleProof:
+    value = _bounded_json(path, label)
+    expected = {"receipt", "envelope", "before_observation", "after_observation"}
+    if (
+        not isinstance(value, dict)
+        or set(value) != expected
+        or any(not isinstance(value[item], dict) for item in expected)
+    ):
+        raise HarnessError(
+            f"delegated workflow {label} must contain exactly receipt, envelope, "
+            "before_observation, and after_observation objects"
+        )
+    return LifecycleProof(
+        receipt=value["receipt"],
+        envelope=value["envelope"],
+        before_observation=value["before_observation"],
+        after_observation=value["after_observation"],
+    )
+
+
+def _lifecycle_proof_value(result: object) -> dict[str, object]:
+    return {
+        "receipt": result.receipt.value,
+        "envelope": result.envelope.value,
+        "before_observation": result.before_observation.value,
+        "after_observation": result.after_observation.value,
+    }
+
+
+def _delegated_evaluator(args: argparse.Namespace) -> EvaluatorIdentity:
+    return EvaluatorIdentity(
+        package=args.evaluator_package,
+        version=args.evaluator_version,
+        payload_sha256=args.evaluator_payload_sha256,
+        launcher_sha256=args.evaluator_launcher_sha256,
+    )
+
+
+def _delegated_catalog(args: argparse.Namespace) -> int:
+    value = [dict(item) for item in phase4_operation_catalog()]
+    if args.json:
+        print(json.dumps(value, indent=2, ensure_ascii=True) + "\n", end="")
+    else:
+        for item in value:
+            print(
+                f"{item['id']}: {item['current_status']} -> {item['result_status']} "
+                f"({item['decision_right'] or 'started-work execution'})"
+            )
+    return 0
+
+
+def _delegated_execute(args: argparse.Namespace) -> int:
+    evaluator = _delegated_evaluator(args)
+    root = Path(args.target)
+    store = RuntimeStateStore(Path(args.runtime_root), root)
+    start_gates = _json_array(args.start_gates, "start gates")
+    effect_gates = _json_array(args.effect_gates, "effect gates")
+    completion_gates = _json_array(args.completion_gates, "completion gates")
+    prepare_gates = _json_array(args.prepare_gates, "preparation gates")
+    tests = _json_array(args.tests, "tests")
+    evidence = _json_array(args.evidence_bindings, "evidence bindings")
+    effect_deviations = _json_array(args.effect_deviations, "effect deviations")
+    completion_deviations = tuple(
+        {
+            "code": item.get("code"),
+            "operation": "change-bundle-apply",
+            "status": "completed",
+            "message": item.get("message"),
+            "evidence_path": None,
+            "details_sha256": None,
+        }
+        for item in effect_deviations
+    )
+    start = delegated_work_order_start(
+        root,
+        work_order_id=args.work_order,
+        delegate=args.delegate,
+        execution_profile=args.execution_profile,
+        gates=start_gates,
+        evaluator=evaluator,
+        runtime_store=store,
+    )
+    assert start.session is not None
+    effect = delegated_change_bundle_apply(
+        root,
+        work_order_id=args.work_order,
+        delegate=args.delegate,
+        execution_profile=args.execution_profile,
+        requested_paths=args.changed_path,
+        baseline_workspace=Path(args.baseline_workspace),
+        proposed_workspace=Path(args.proposed_workspace),
+        object_store=Path(args.object_store),
+        intended_deletions=args.delete_path,
+        previous_receipt_sha256=start.receipt.sha256,
+        gates=effect_gates,
+        evidence=evidence,
+        deviations=effect_deviations,
+        evaluator=evaluator,
+        runtime_store=store,
+        session=start.session,
+    )
+    completion = delegated_work_order_complete(
+        root,
+        work_order_id=args.work_order,
+        delegate=args.delegate,
+        execution_profile=args.execution_profile,
+        proof=CompletionProof(
+            start=LifecycleProof(
+                start.receipt,
+                start.envelope,
+                start.before_observation,
+                start.after_observation,
+            ),
+            effects=(
+                EffectProof(
+                    effect.result.receipt,
+                    effect.before_observation,
+                    effect.after_observation,
+                ),
+            ),
+            changed_paths=tuple(args.changed_path),
+            tests=tuple(tests),
+            gates=tuple(completion_gates),
+            evidence=tuple(evidence),
+            deviations=completion_deviations,
+            residual_uncertainty=tuple(args.residual_uncertainty),
+        ),
+        evaluator=evaluator,
+        runtime_store=store,
+        session=start.session,
+    )
+    stop = candidate_commit_stop(
+        work_order_id=args.work_order,
+        repository=completion.receipt.value["selection"]["repository"],
+        evaluator=evaluator,
+        declared_paths=completion.workflow_result["scope"]["declared_paths"],
+        changed_paths=completion.workflow_result["scope"]["changed_paths"],
+        gates=prepare_gates,
+        evidence=completion.receipt.value["effects"]["evidence"],
+        residual_uncertainty=args.residual_uncertainty,
+    )
+    output = {
+        "outcome": "completed-at-git-stop",
+        "work_order": args.work_order,
+        "start": {"result": start.workflow_result, "lifecycle_proof": _lifecycle_proof_value(start)},
+        "effects": [{
+            "receipt": effect.result.receipt.value,
+            "envelope": effect.envelope.value,
+            "before_observation": effect.before_observation.value,
+            "after_observation": effect.after_observation.value,
+            "bundle_sha256": effect.bundle.bundle.sha256,
+        }],
+        "completion": {
+            "result": completion.workflow_result,
+            "lifecycle_proof": _lifecycle_proof_value(completion),
+        },
+        "next": {"result": stop.workflow_result, "decision_packet": stop.decision_packet.value},
+    }
+    print(json.dumps(output, indent=2, ensure_ascii=True) + "\n", end="")
+    return 0
+
+
+def _delegated_prepare_vrec(args: argparse.Namespace) -> int:
+    evaluator = _delegated_evaluator(args)
+    root = Path(args.target)
+    store = RuntimeStateStore(Path(args.runtime_root), root)
+    result = delegated_vrec_prepare(
+        root,
+        work_order_id=args.work_order,
+        record_id=args.record_id,
+        verification_ids=args.verification,
+        evidence_paths=args.evidence,
+        owner=args.owner,
+        output=args.output,
+        domain=args.domain,
+        delegate=args.delegate,
+        execution_profile=args.execution_profile,
+        gates=_json_array(args.gates, "preparation gates"),
+        completion_proof=_lifecycle_proof(args.completion_proof, "completion proof"),
+        evaluator=evaluator,
+        runtime_store=store,
+        residual_uncertainty=args.residual_uncertainty,
+    )
+    if isinstance(result, DelegatedStop):
+        value = {"outcome": "stopped", "result": result.workflow_result, "decision_packet": result.decision_packet.value}
+    else:
+        value = {
+            "outcome": "prepared",
+            "record": result.record_path.relative_to(root.resolve()).as_posix(),
+            "receipt": result.receipt.value,
+            "result": result.workflow_result,
+            "decision_packet": result.decision_packet.value,
+        }
+    print(json.dumps(value, indent=2, ensure_ascii=True) + "\n", end="")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -997,6 +1240,66 @@ def build_parser() -> argparse.ArgumentParser:
     )
     capture.set_defaults(handler=_capture_verification)
 
+    delegated = commands.add_parser(
+        "delegated-workflow",
+        help="run the closed Phase 4 delegated workflow through the exact evaluator",
+    )
+    delegated_commands = delegated.add_subparsers(dest="delegated_operation", required=True)
+
+    delegated_catalog = delegated_commands.add_parser(
+        "catalog",
+        help="inspect the closed managed Phase 4 operation catalog",
+    )
+    delegated_catalog.add_argument("--json", action="store_true")
+    delegated_catalog.set_defaults(handler=_delegated_catalog)
+
+    def delegated_identity(command: argparse.ArgumentParser) -> None:
+        command.add_argument("--runtime-root", required=True, help="external non-overlapping runtime-state directory")
+        command.add_argument("--evaluator-package", required=True)
+        command.add_argument("--evaluator-version", required=True)
+        command.add_argument("--evaluator-payload-sha256", required=True)
+        command.add_argument("--evaluator-launcher-sha256", required=True)
+        command.add_argument("--work-order", required=True)
+        command.add_argument("--delegate", default="implementation-worker")
+        command.add_argument("--execution-profile", default="implementer")
+        command.add_argument("--residual-uncertainty", action="append", default=[])
+
+    delegated_execute = delegated_commands.add_parser(
+        "execute",
+        help="start, apply one brokered bundle, complete, and stop before Git",
+    )
+    delegated_execute.add_argument("target", nargs="?", default=".")
+    delegated_identity(delegated_execute)
+    delegated_execute.add_argument("--baseline-workspace", required=True)
+    delegated_execute.add_argument("--proposed-workspace", required=True)
+    delegated_execute.add_argument("--object-store", required=True)
+    delegated_execute.add_argument("--changed-path", action="append", required=True)
+    delegated_execute.add_argument("--delete-path", action="append", default=[])
+    delegated_execute.add_argument("--start-gates", required=True)
+    delegated_execute.add_argument("--effect-gates", required=True)
+    delegated_execute.add_argument("--completion-gates", required=True)
+    delegated_execute.add_argument("--prepare-gates", required=True)
+    delegated_execute.add_argument("--tests", required=True)
+    delegated_execute.add_argument("--evidence-bindings", required=True)
+    delegated_execute.add_argument("--effect-deviations", required=True)
+    delegated_execute.set_defaults(handler=_delegated_execute)
+
+    delegated_prepare = delegated_commands.add_parser(
+        "prepare-vrec",
+        help="prepare one undecided ready VREC from an existing clean candidate",
+    )
+    delegated_prepare.add_argument("target", nargs="?", default=".")
+    delegated_identity(delegated_prepare)
+    delegated_prepare.add_argument("--id", required=True, dest="record_id")
+    delegated_prepare.add_argument("--verification", action="append", required=True)
+    delegated_prepare.add_argument("--evidence", action="append", required=True)
+    delegated_prepare.add_argument("--owner", default="quality-owner")
+    delegated_prepare.add_argument("--output", required=True)
+    delegated_prepare.add_argument("--domain", required=True)
+    delegated_prepare.add_argument("--gates", required=True)
+    delegated_prepare.add_argument("--completion-proof", required=True)
+    delegated_prepare.set_defaults(handler=_delegated_prepare_vrec)
+
     release = commands.add_parser("prepare-release", help="prepare a ready commit-bound release record")
     release.add_argument("target", nargs="?", default=".")
     release.add_argument("--id", required=True, dest="record_id")
@@ -1025,7 +1328,17 @@ def main(argv: list[str] | None = None) -> int:
     try:
         args = build_parser().parse_args(argv)
         return int(args.handler(args))
-    except HarnessError as exc:
+    except (
+        AgentContractError,
+        ChangeBundleError,
+        ContractError,
+        DelegatedAuthorityError,
+        DelegatedWorkflowError,
+        EffectBrokerError,
+        HarnessError,
+        RepositoryObservationError,
+        RuntimeStateError,
+    ) as exc:
         print(f"harnessctl: {exc}", file=sys.stderr)
         return 2
 

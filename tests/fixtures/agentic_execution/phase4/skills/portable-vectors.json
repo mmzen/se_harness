@@ -1,0 +1,56 @@
+{
+  "schema": "se-harness-phase4-skill-vectors-v1",
+  "workflow_schema": "se-harness-workflow-v4",
+  "orientation": {
+    "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+    "manifest_sha256": "73d94b02dd1008f5cb8b6a828ba920c128d06b82fc6e4b9b97720b6d91ca7cea",
+    "schema": "se-harness-skill-contract-v1"
+  },
+  "skills": {
+    "harness-draft-change": {
+      "previous": {
+        "contract_sha256": "c386bc9d9a7db6e26b046853782740f5bfb751bdc15eefa9bf7c5ee59c5a7dbf",
+        "manifest_sha256": "2aabf3ab5026cc6afcf3bec8b90e2ebacc20775f49642d0df7a162dc92b4bc32",
+        "schema": "se-harness-skill-contract-v2"
+      },
+      "current": {
+        "contract_sha256": "318ddf054dc14407ef586df79dea52d03510bd2423f2f91cb90d87a45c04d3a6",
+        "manifest_sha256": "86a8598ef98571622ab2869eed9b1771b353ac7fc9be32310707a77ea6f1aa5c",
+        "schema": "se-harness-skill-contract-v3",
+        "version": "2.0.0",
+        "interface_operation": "delegated-workflow-execute",
+        "operation_catalog": ["delegated-work-order-start", "change-bundle-apply", "delegated-work-order-complete"]
+      }
+    },
+    "harness-execute-work-order": {
+      "previous": {
+        "contract_sha256": "766ecfe61c995a5581c30635eb6f21bb111caf972687f00c6908cdbeb5915949",
+        "manifest_sha256": "112b3dfdc36b319d33f75a0f495346f6c3e3a932ffdf2228a70eba0f2ff49ea0",
+        "schema": "se-harness-skill-contract-v2"
+      },
+      "current": {
+        "contract_sha256": "dd7eebb0be2f0af680f27c5e9bb645d9662bffd6003f2a380832f9924eb92f38",
+        "manifest_sha256": "1fc827f6985b08fb0320aed188ff5506e8979e563bc11012c640edddd92eff2d",
+        "schema": "se-harness-skill-contract-v3",
+        "version": "2.0.0",
+        "interface_operation": "delegated-workflow-execute",
+        "operation_catalog": ["delegated-work-order-start", "change-bundle-apply", "delegated-work-order-complete"]
+      }
+    },
+    "harness-prepare-assurance": {
+      "previous": {
+        "contract_sha256": "53038af2c77dfbd31db59a67cae23953e5f0246acd950f4e195e94939f207609",
+        "manifest_sha256": "9f732ebebf63765fc43e44504704c687c152c422d1c4631d59847efa676aaadc",
+        "schema": "se-harness-skill-contract-v2"
+      },
+      "current": {
+        "contract_sha256": "f957b423db8355e0a9c9d95ea55a9859c2dc39659f9df44c7fbd41564b2634b7",
+        "manifest_sha256": "29b3da990f5747b069e2d89b9de81c419986406ff9503a3797040a8dd7763402",
+        "schema": "se-harness-skill-contract-v3",
+        "version": "2.0.0",
+        "interface_operation": "delegated-workflow-prepare-vrec",
+        "operation_catalog": ["delegated-vrec-prepare"]
+      }
+    }
+  }
+}

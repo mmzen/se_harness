@@ -2,7 +2,7 @@
 id = "WO-AEX-007"
 type = "work_order"
 title = "Integrate delegated workflow advancement and assurance preparation"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "technical-owner", "quality-owner", "assurance-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
@@ -30,18 +30,21 @@ paths = [
   "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
+  "templates/repository/standard/scripts/validate_engineering_artifacts.py",
   "tests/fixtures/agentic_execution/phase4/workflow/",
   "tests/fixtures/workflow_execution/scenarios.json",
   "tests/mutation_guard_support.py",
   "tests/test_agent_contract.py",
   "tests/test_agentic_execution.py",
   "tests/test_delegated_workflow.py",
+  "tests/test_lifecycle_state_contract.py",
   "tests/test_mutation_guard.py",
   "tests/test_workflow_compliance.py",
   "tests/test_workflow_documentation_contract.py",
   "tests/test_workflow_execution.py",
   "tests/test_workflow_procedures.py",
   "tests/test_workflow_restitution.py",
+  "docs/notes/harnessctl-reference.md",
   "docs/engineering/agentic-execution/README.md",
   "docs/engineering/agentic-execution/evidence/WO-AEX-007-verification.md",
   "docs/notes/agentic-execution-phase4-workflow.md",
@@ -60,21 +63,33 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-25T09:08:48Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-25T12:53:25Z"
+decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-25T14:33:27Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: Integrate delegated workflow advancement and assurance preparation
 
 ## Lifecycle and readiness
 
-This work order is `draft` and authorizes no change. `WO-AEX-005` and
-`WO-AEX-006` must first be implemented and independently verified at their exact
-commits. All Phase 4 governing artifacts and this work order require separate
-approval, followed by a separate start decision through the current released
-evaluator.
+This work order is `in_progress` after its separate approval and start
+decisions. `WO-AEX-005` and `WO-AEX-006` were implemented and independently
+verified at their exact commits before this work order started. The governing
+Phase 4 artifact pack and both implementation-scope amendments were separately
+approved.
 
-Candidate Phase 4 code must not authorize or perform its own lifecycle
-transition. The existing released evaluator and accountable human decisions
-govern this work order from draft through verification.
+Candidate Phase 4 code must not authorize or perform this work order's own
+lifecycle transition. The existing released evaluator and accountable human
+decisions continue to govern it through implementation and verification.
 
 ## Objective
 
@@ -169,6 +184,37 @@ If implementation needs a root managed file, artifact-template schema change,
 skill path, provider path, installer, release module, another lifecycle state or
 transition, another operation/right, or undeclared test/documentation path,
 stop and revise scope.
+
+## Scope amendment, 2026-08-25
+
+Accepted on 2026-08-25 through the explicit governed amendment requested
+during implementation. The following paths are added to `[execution_scope]`
+for workflow-v4 compatibility only:
+
+- `templates/repository/standard/scripts/validate_engineering_artifacts.py` may
+  recognize the exact `se-harness-workflow-v4` managed contract while
+  preserving its strict lifecycle-registry validation and v3 rejection tests;
+  and
+- `tests/test_lifecycle_state_contract.py` may update its exact schema fixtures
+  and prove the standalone validator accepts v4 while rejecting older,
+  duplicate-key, and malformed contracts.
+
+The amendment authorizes no lifecycle, right, gate, validator-semantic, root
+installed-file, wildcard, compatibility fallback, or error-suppression change.
+
+## Scope amendment, 2026-08-25: CLI reference parity
+
+Accepted on 2026-08-25 through the explicit governed amendment requested after
+candidate-source documentation verification. The following path is added to
+`[execution_scope]` for exact CLI/reference parity only:
+
+- `docs/notes/harnessctl-reference.md` may document the new top-level
+  `delegated-workflow` command and its closed `catalog`, `execute`, and
+  `prepare-vrec` subcommands.
+
+The amendment authorizes no additional command, subcommand, operation, right,
+lifecycle transition, Git action, assurance decision, external effect, or
+unrelated documentation change.
 
 ## Required verification
 

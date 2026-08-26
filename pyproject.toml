@@ -20,6 +20,9 @@ Releases = "https://github.com/mmzen/se_harness/releases"
 [project.scripts]
 harnessctl = "se_harness.cli:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 include = ["se_harness*"]
 

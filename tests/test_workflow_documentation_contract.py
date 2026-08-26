@@ -33,7 +33,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
 
     def test_contract_is_closed_ordered_and_complete(self) -> None:
         contract = WORKFLOW_CONTRACT
-        self.assertEqual("se-harness-workflow-v3", contract["schema"])
+        self.assertEqual("se-harness-workflow-v4", contract["schema"])
         self.assertEqual("BCP 14", contract["normative_language"])
         self.assertEqual(
             [
@@ -53,6 +53,18 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 "command_or_response", "alternatives",
             ],
             contract["restitution_fields"],
+        )
+        self.assertEqual(
+            [
+                ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress"),
+                ("change-bundle-apply", None, "in_progress", "in_progress"),
+                ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented"),
+                ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented"),
+            ],
+            [
+                (item["id"], item["decision_right"], item["current_status"], item["result_status"])
+                for item in contract["agentic_operations"]
+            ],
         )
         recommendations = contract["recommendations"]
         identifiers = [rule["id"] for rule in recommendations]

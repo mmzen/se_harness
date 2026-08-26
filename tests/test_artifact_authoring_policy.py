@@ -110,11 +110,16 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.assertIn("ARTIFACT_AUTHORING.md", text)
         self.assertIn("checklist is the review standard", text)
         contract = load_skill_contract(core / "skill-contract.json")
-        self.assertEqual("1.0.2", contract.value["version"])
-        vectors = json.loads((REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase3/portable_vectors.json").read_text(encoding="utf-8"))
-        self.assertEqual(vectors["skills"]["harness-draft-change"]["manifest_sha256"], build_skill_manifest(core).sha256)
+        self.assertEqual("2.0.0", contract.value["version"])
+        vectors = json.loads(
+            (REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/portable-vectors.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        current = vectors["skills"]["harness-draft-change"]["current"]
+        self.assertEqual(current["manifest_sha256"], build_skill_manifest(core).sha256)
         self.assertEqual(
-            vectors["skills"]["harness-draft-change"]["contract_sha256"],
+            current["contract_sha256"],
             hashlib.sha256(canonical_json_bytes(contract.value)).hexdigest(),
         )
         policy = POLICY.read_text(encoding="utf-8")
@@ -337,11 +342,21 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             capture_output=True, text=True, check=True,
         )
         fresh = json.loads(completed.stdout)
-        # WO-CIP-004: the retained report is a dry run at one commit; later requirements raise the
-        # fresh "mapped" total, so only the steward-facing figures are compared.
-        self.assertEqual(report["counts"]["skipped"], fresh["counts"]["skipped"])
-        unmatched = lambda value: sorted(k for k, v in value["files"].items() if v["state"] == "unmatched")
-        self.assertEqual(unmatched(report), unmatched(fresh))
-        self.assertLessEqual(report["counts"]["mapped"], fresh["counts"]["mapped"])
+        # WO-CIP-004: the retained report is a dry run at one commit; later requirements may
+        # extend the fresh report, but every retained observation must remain stable.
+        retained_paths = set(report["files"])
+        fresh_paths = set(fresh["files"])
+        self.assertLessEqual(retained_paths, fresh_paths)
+        self.assertEqual(
+            report["files"],
+            {path: fresh["files"][path] for path in retained_paths},
+            "retained historical observations must remain stable",
+        )
+        added = fresh_paths - retained_paths
+        expected_counts = dict(report["counts"])
+        for path in added:
+            state = fresh["files"][path]["state"]
+            expected_counts[state] += 1
+        self.assertEqual(expected_counts, fresh["counts"])
         # the repository itself is untouched: every requirement still carries the string form
         self.assertEqual([], [f for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md") if re.search(r"^verification_method = \[", f.read_text(encoding="utf-8"), re.MULTILINE)])

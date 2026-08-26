@@ -1,0 +1,59 @@
+{
+  "schema": "se-harness-phase4-skill-client-cases-v1",
+  "workflow_schema": "se-harness-workflow-v4",
+  "single_agent": true,
+  "direct_target_writes": false,
+  "cases": [
+    {
+      "id": "implicit-writing-nonactivation",
+      "interface": null,
+      "expected": "blocked-before-client"
+    },
+    {
+      "id": "unavailable-public-0-6-evaluator",
+      "interface": "delegated-workflow catalog",
+      "expected": "blocked-before-effect"
+    },
+    {
+      "id": "invalid-delegation",
+      "interface": "delegated-workflow execute",
+      "expected": "blocked-before-effect"
+    },
+    {
+      "id": "active-session-conflict",
+      "interface": "delegated-workflow execute",
+      "expected": "blocked-before-effect"
+    },
+    {
+      "id": "direct-target-write-attempt",
+      "interface": null,
+      "expected": "blocked-before-client"
+    },
+    {
+      "id": "valid-sequential-bundle-and-completion",
+      "interface": "delegated-workflow execute",
+      "expected": "completed-at-git-stop"
+    },
+    {
+      "id": "commit-bound-vrec-missing-commit",
+      "interface": "delegated-workflow prepare-vrec",
+      "expected": "stopped-for-git-authorization"
+    },
+    {
+      "id": "prepared-vrec-assurance-stop",
+      "interface": "delegated-workflow prepare-vrec",
+      "expected": "prepared-for-independent-assurance"
+    }
+  ],
+  "prohibited": [
+    "assurance-decision",
+    "child-delegation",
+    "credential-use",
+    "direct-target-write",
+    "external-action",
+    "git-mutation",
+    "network-mutation",
+    "parallel-writer",
+    "release-decision"
+  ]
+}

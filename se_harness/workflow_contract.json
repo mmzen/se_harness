@@ -1,5 +1,5 @@
 {
-  "schema": "se-harness-workflow-v3",
+  "schema": "se-harness-workflow-v4",
   "normative_language": "BCP 14",
   "handoff_fields": [
     "completed",
@@ -19,6 +19,12 @@
     "next",
     "command_or_response",
     "alternatives"
+  ],
+  "agentic_operations": [
+    {"id": "delegated-work-order-start", "decision_right": "DR-WO-START", "current_status": "approved", "result_status": "in_progress", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "procedure_id": "PROC-WO-START", "mutation_operation": "delegated-work-order-start"},
+    {"id": "change-bundle-apply", "decision_right": null, "current_status": "in_progress", "result_status": "in_progress", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "procedure_id": "PROC-WO-IMPLEMENT", "mutation_operation": "change-bundle-apply"},
+    {"id": "delegated-work-order-complete", "decision_right": "DR-WO-COMPLETE", "current_status": "in_progress", "result_status": "implemented", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "procedure_id": "PROC-WO-IMPLEMENT", "mutation_operation": "delegated-work-order-complete"},
+    {"id": "delegated-vrec-prepare", "decision_right": "DR-VREC-PREPARE", "current_status": "implemented", "result_status": "implemented", "gate_ids": ["QG-G4-CANDIDATE-READY"], "procedure_id": "PROC-WO-PREPARE-VREC", "mutation_operation": "delegated-vrec-prepare"}
   ],
   "lifecycles": {
     "definition": {
@@ -509,6 +515,13 @@
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
         {"id": "STEP-WO-PREPARE-VREC-DECIDE", "kind": "decision", "decision_right": "DR-VREC-PREPARE", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether to prepare one ready verification record with exact approved inputs", "outcomes": ["prepare", "stop"], "response": "Prepare one ready VREC for {artifact_id} with the exact approved verification contract and retained evidence.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits preparation of one ready VREC."], "non_effects": ["Preparation does not verify {artifact_id}."]}
+      ]
+    },
+    {
+      "id": "PROC-CANDIDATE-COMMIT",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-CANDIDATE-COMMIT-AUTHORIZE", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "repository-owner", "artifact": "{artifact_id}", "decision": "whether the exact candidate commit may be created", "outcomes": ["authorize", "stop"], "response": "Authorize creating the exact candidate commit for {artifact_id}.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits only creation of the exact candidate commit."], "non_effects": ["This decision request does not stage, commit, branch, push, merge, or verify anything."]}
       ]
     },
     {

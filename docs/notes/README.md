@@ -24,10 +24,12 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |
+| [Phase 4 writing-skill integration](agentic-execution-phase4-skills.md) | How do v3 writing cores become fail-closed evaluator clients without direct target writes or new authority? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same four canonical repository skills without duplicating workflow authority? |
 | [Phase 4 live authority implementation](agentic-execution-phase4-authority.md) | How do live observation, formal delegation, envelope v2, external nonce state, and receipt chaining fit together without performing a target effect? |
 | [Phase 4 change bundles and transactional effects](agentic-execution-phase4-effects.md) | How does the evaluator build byte-only bundles, apply them through one journaled writer, and recover after interruption? |
+| [Phase 4 delegated workflow coordination](agentic-execution-phase4-workflow.md) | How are start, brokered effects, completion proof, the Git stop, and undecided VREC preparation composed without adding authority? |
 | [Migration: the repository-context scaffold is withdrawn](harness-migration-repository-context-retirement.md) | What breaks when repository facts move to the owner-controlled region of `AGENTS.md`, and what must I do? |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Phase 1 Agentic Execution definition-review packet](agentic-execution-phase-1-definition-review.md) | Which decisions, revisions, accountable reviews, and read-only transition previews govern the Phase 1 proposal? |
