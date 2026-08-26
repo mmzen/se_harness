@@ -2,32 +2,48 @@
 id = "REL-SEH-016"
 type = "release_contract"
 title = "Release se-harness 0.7.0 as the first ordinary schema-3 release"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 gates = ["WO-REB-008", "WO-REB-009", "WO-REB-010", "WO-REB-011", "WO-REB-012", "WO-REB-013", "WO-REB-014", "WO-REB-015", "WO-REB-016", "WO-REB-017", "WO-REB-018", "WO-REB-019", "WO-REB-020", "WO-REB-021", "WO-REB-022", "WO-REB-023", "WO-HUP-004", "WO-HBI-001", "WO-HBI-002", "WO-HBI-003", "WO-HBI-004", "WO-AEX-001", "WO-AEX-002", "WO-AEX-003", "WO-AEX-004", "WO-AEX-005", "WO-VSP-007", "WO-LRE-001", "WO-IPK-001", "WO-RLO-004", "WO-RLO-005", "WO-RLO-006", "WO-WEX-003", "WO-TCM-001", "WO-TCM-002", "WO-ADS-001", "WO-ADS-002", "WO-RLS-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T10:26:19Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-26 as the thirty-eight-work-order release unit for 0.7.0, superseding rejected REL-SEH-015. This is the release owner's own decision and was not carried by that rejection. The entry re-measurement was taken immediately before this transition, as this contract requires. origin/main is unmoved at e98b7885b016529aa2c262ad577acdc270bc9376; gates holds 38 distinct identifiers, each has an artifact on disk and each is implemented; and exactly three work orders reached implemented after REL-SEH-015's 2026-08-25T12:57:58Z freeze basis - WO-RLS-011, WO-RLO-006 and WO-REB-023 - all three gated, so no post-freeze work order carries ungated bytes into the packaged surface. WO-AEX-006 stays excluded and unmerged on pull request #155, and pull request #156 stays excluded and unmerged. Two classifications were re-put rather than treated as settled by REL-SEH-015's approval, and both were confirmed on 2026-08-26: WO-HUP-004 is included, and WO-HBI-003 and WO-HBI-004 are included on the corrected basis that their changes to tests/test_hash_bound_integrity.py and tests/test_agentic_execution.py are distributed bytes under the ordinary rule, not the secondary Windows-qualification argument REL-SEH-015 gave. The container runtime named by release/build-recipe.json is confirmed available on the build host, so the recipe-bound linux/amd64 build follows this approval directly rather than leaving a frozen unit waiting. This approval authorizes no publication, creates and moves no tag, releases nothing, and leaves the release/0.7 maintenance line untouched. The stop condition is unchanged and binds from this timestamp: a work order reaching implemented with packaged-surface bytes after it forces rejection and re-issue as REL-SEH-017, never an in-place correction to gates."
 +++
 
 # Release Contract: Release se-harness 0.7.0 as the first ordinary schema-3 release
 
 ## Lifecycle and authority
 
-This contract, once approved by the release owner, is what permits a promotable
+This contract, approved by the release owner, is what permits a promotable
 build, the candidate commit, and release preparation. Its authoritative state,
 and the timestamp and reason of every decision taken on it, are the front matter
 and `[[lifecycle_events]]` above; read those rather than this prose. It is the
 fifth contract issued for this release and the successor to `REL-SEH-015`.
 
-**This contract is `draft`.** Nothing below is authority yet. It carries a
-thirty-eight-work-order allow-list measured over `main` at
-`e98b7885b016529aa2c262ad577acdc270bc9376`. On approval that list becomes the
-exact 0.7.0 release unit and can no longer be widened, narrowed, or repaired in
-place; a work order that reaches `implemented` with bytes in the packaged
-surface after that timestamp would be a stop condition whose only remedy is
-rejecting this contract and issuing `REL-SEH-017`.
+**This contract is `approved`.** The release owner approved it at
+2026-08-26T10:26:19Z, on their own decision and not on anything carried by
+`REL-SEH-015`'s rejection. The thirty-eight-work-order allow-list below is now
+the exact 0.7.0 release unit, measured over `main` at
+`e98b7885b016529aa2c262ad577acdc270bc9376`, and it can no longer be widened,
+narrowed, or repaired in place. A work order that reaches `implemented` with
+bytes in the packaged surface after 2026-08-26T10:26:19Z is a stop condition
+whose only remedy is rejecting this contract and issuing `REL-SEH-017`.
+
+The entry measurement was taken immediately before that transition rather than
+inherited from the drafting a few hours earlier: `origin/main` unmoved at
+`e98b7885b016529aa2c262ad577acdc270bc9376`; `gates` at thirty-eight distinct
+identifiers, each with an artifact on disk and each `implemented`; and exactly
+three work orders reaching `implemented` after `REL-SEH-015`'s freeze basis —
+`WO-RLS-011`, `WO-RLO-006`, and `WO-REB-023` — all three gated, so no
+post-freeze work order carries ungated bytes into the packaged surface.
 
 ## Why this contract supersedes `REL-SEH-015`
 
@@ -124,8 +140,18 @@ than through a successor work order. That decision and its consequences are
 recorded below under **`WO-RLS-011`: approved, with a superseded qualification
 reading**.
 
-Approval of this contract will authorize none of the following, each of which
-remains a separate later decision: the promotable build, the candidate commit,
+Two inclusion classifications were re-put to the release owner before approval
+rather than treated as settled by `REL-SEH-015`'s approval, since neither had
+been confirmed in its own right. Both were confirmed on 2026-08-26: `WO-HUP-004`
+is included, and `WO-HBI-003` and `WO-HBI-004` are included on the corrected
+basis set out below under **A correction to how `REL-SEH-015` described the
+suite** — that is, under the ordinary packaged-surface rule rather than the
+secondary Windows-qualification argument `REL-SEH-015` gave. Neither
+confirmation changed `gates`; both are recorded because a reader should be able
+to tell a re-confirmed classification from an inherited one.
+
+This approval authorizes none of the following, each of which remains a separate
+later decision: the promotable build, the candidate commit,
 `VREC-SEH-013` or `RLS-SEH-013` preparation or transition, the governance commit
 carrying this packet, branch push, credential use, tag creation, GitHub or PyPI
 publication, Pages deployment, `release/0.7` maintenance-line mutation,
@@ -607,9 +633,18 @@ approval.
   maintenance-plane warnings, every plane at E0; `doctor` 87 `PASS`, 0 `FAIL`;
   release-distribution validation `PASS`; `inspect` 892 artifacts, 3289
   relations, 0 decisions required, 1 assurance pending, and **1 definition
-  pending**. That one pending definition is this contract while it is `draft`;
-  it resolves to zero on approval, exactly as it did for `REL-SEH-015`. It is
-  recorded so that a reader does not mistake it for an unrelated gap.
+  pending**. That one pending definition was this contract while it was `draft`.
+  It is recorded so that a reader does not mistake it for an unrelated gap.
+- Re-measured again immediately after the approval, over this packet's own
+  state: `validate` `PASS` at 892 artifacts, 0 errors, 50 maintenance-plane
+  warnings, every plane at E0; `doctor` 87 `PASS`, 0 `FAIL`;
+  release-distribution validation `PASS`; and `inspect` 892 artifacts, 3289
+  relations, 0 decisions required, **0 definitions pending**, and 1 assurance
+  pending. The definition-pending count resolved to zero on approval, as it did
+  for `REL-SEH-015`, and the one remaining assurance is still `WO-RLS-011`.
+  `inspect` also lists `WO-AEX-007` as `approved` and start-authorized; that is
+  the Phase 4 work excluded from this unit above, and being `approved` rather
+  than `implemented` it is not the stop condition.
 - Hosted lanes at `e98b788` on `main`: Engineering Harness (run 32946962510),
   SE Harness Candidate Evidence (32946962546), Governor Transition Assessment
   (32946962515), and Publication Rehearsal (32946962531) all `success`, all on
@@ -777,18 +812,26 @@ forms occur in this unit and both were counted.
    `VREC-REB-020`, and reached `main` through the true merges of pull requests
    #167 and #168. Their distributed bytes triggered `REL-SEH-015`'s declared stop
    condition.
-3. Next: the release owner rejects `REL-SEH-015` and approves this contract on
-   the re-measured thirty-eight-work-order unit. Neither act is taken by the
-   other, and this contract's approval must be its own recorded decision.
-4. Next: obtain a working container runtime for the pinned `linux/amd64`
-   producer, then build the recipe-bound distributions outside the checkout
-   under this contract's authority. `gates` is frozen from approval, so any work
-   order that reaches `implemented` with bytes in the packaged surface during
-   this step is a stop condition reported to the release owner, not an edit.
-5. Separately authorize one clean candidate commit and a dedicated candidate
-   branch push. Before that commit, confirm the tree carries no `WO-AEX-006`
-   bytes and no pull request #156 bytes, since either may merge into `main` in
-   the meantime.
+3. Done on 2026-08-26: the release owner rejected `REL-SEH-015` at
+   2026-08-26T09:49:24Z and approved this contract at 2026-08-26T10:26:19Z on
+   the re-measured thirty-eight-work-order unit. Neither act was taken by the
+   other, and each is its own recorded decision in its own artifact.
+4. Done on 2026-08-26: a working container runtime for the pinned `linux/amd64`
+   producer was obtained on the build host — Docker client 29.7.2 with a running
+   `linux/amd64` engine — so the recipe stands unchanged.
+5. Next, and corrected here as to order: separately authorize one clean
+   candidate commit and a dedicated candidate branch push, *then* build the
+   recipe-bound distributions outside the checkout under this contract's
+   authority. The build cannot precede the candidate commit: the strict
+   interpreter is invoked as `release_build replay --commit <full-candidate>`
+   and derives `SOURCE_DATE_EPOCH` from `candidate.committer_epoch`, so there is
+   nothing to build against until that commit exists. This contract's own
+   numbering listed the build first, which inverted that dependency; the
+   dependency governs. Before the candidate commit, confirm the tree carries no
+   `WO-AEX-006` bytes and no pull request #156 bytes, since either may merge into
+   `main` in the meantime. `gates` is frozen from approval, so any work order
+   reaching `implemented` with bytes in the packaged surface during these steps
+   is a stop condition reported to the release owner, not an edit.
 6. Require green hosted Engineering Harness, Candidate Evidence, Governor
    Transition Assessment, and Publication Rehearsal lanes on the candidate's own
    commit. No expected-red lane is anticipated; any red is a stop condition, not
@@ -827,16 +870,17 @@ candidate; the decision to fold `WO-RLS-011`'s re-qualification into
 obtain a container runtime for the pinned producer rather than relax the recipe,
 release under schema 1, or add a hosted producer lane.
 
-**This contract's approval has not been taken.** It requires the release owner's
-own decision on this contract's own terms. `REL-SEH-015`'s rejection is a
-separate decision and does not carry it, and none of the three earlier approvals
-is reused as authority.
+**This contract's approval has been taken**, at 2026-08-26T10:26:19Z, on the
+release owner's own decision on this contract's own terms. `REL-SEH-015`'s
+rejection was a separate decision and did not carry it, and none of the three
+earlier approvals was reused as authority. Two inclusion classifications were
+re-put and confirmed with it, as recorded above: `WO-HUP-004`, and
+`WO-HBI-003`/`WO-HBI-004` on the corrected packaged-surface basis.
 
-Outstanding beyond that: `REL-SEH-015`'s rejection, work start, the promotable
-build, the candidate commit, branch and credential use, `VREC-SEH-013`
-preparation and verification, `RLS-SEH-013` preparation and release, tag
-creation, publication, deployment, maintenance-line mutation, external policy
-change, and root adoption.
+Outstanding beyond that: the candidate commit, the promotable build, branch and
+credential use, `VREC-SEH-013` preparation and verification, `RLS-SEH-013`
+preparation and release, tag creation, publication, deployment, maintenance-line
+mutation, external policy change, and root adoption.
 
 ## Known open questions that do not block this release
 
