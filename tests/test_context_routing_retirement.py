@@ -43,6 +43,10 @@ BASELINE_ROUTING_ROWS = (
         "`docs/engineering/templates/README.md`",
     ),
     (
+        "Authoring rules for formal artifacts",
+        "`docs/engineering/ARTIFACT_AUTHORING.md`",
+    ),
+    (
         "Repository-specific facts and commands",
         "the owner-controlled region of `AGENTS.md`",
     ),

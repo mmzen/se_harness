@@ -2,8 +2,8 @@
   "schema": "se-harness-phase3-portable-vectors-v1",
   "skills": {
     "harness-draft-change": {
-      "contract_sha256": "6a14303b9349a55b34b11ab106451e541235e143c342a1a5e2a8261b3afd37d6",
-      "manifest_sha256": "9622fdd52ba7bd8c74ed5eba973629c6070a760f1ea1363ba3099d6736d82525",
+      "contract_sha256": "c386bc9d9a7db6e26b046853782740f5bfb751bdc15eefa9bf7c5ee59c5a7dbf",
+      "manifest_sha256": "2aabf3ab5026cc6afcf3bec8b90e2ebacc20775f49642d0df7a162dc92b4bc32",
       "schema": "se-harness-skill-contract-v2"
     },
     "harness-execute-work-order": {

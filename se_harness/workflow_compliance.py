@@ -326,6 +326,8 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return _preflight_status(context, "review")
     if name == "review_evidence_available":
         return _review_evidence(context)
+    if name == "authoring_ready":
+        return authoring_ready(context.artifact)
     raise ContractError(f"unknown predicate evaluator {name}")
 
 
@@ -655,6 +657,41 @@ def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
     ]
 
 
+_PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
+_FENCE = re.compile(r"```.*?```", re.DOTALL)
+_INLINE_CODE = re.compile(r"`[^`\n]*`")
+_DEFINITION_TYPES = {
+    "intent", "capability", "requirement", "specification", "architecture", "adr",
+    "verification", "release_contract", "operating_contract",
+}
+
+
+def authoring_ready(artifact: Any) -> tuple[str, str]:
+    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
+
+    try:
+        text = artifact.path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeError) as exc:
+        return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
+    prose = _INLINE_CODE.sub("", _FENCE.sub("", text.replace("\r\n", "\n")))
+    # the template's five shape comments live in the front matter; markdown headings stay
+    head, separator, body = prose.partition("\n+++\n") if prose.startswith("+++\n") else ("", "", prose)
+    if separator:
+        head = "\n".join(line for line in head.split("\n") if not line.lstrip().startswith("#"))
+    prose = head + separator + body
+    match = _PLACEHOLDER.search(prose)
+    if match is not None:
+        return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
+    lines = prose.split("\n")
+    for index, line in enumerate(lines):
+        if line.strip() == "## Open decisions":
+            body = next((item.strip() for item in lines[index + 1:] if item.strip() and not item.startswith("## ")), "")
+            if body not in {"None", "None."}:
+                return "fail", f"{artifact.artifact_id} has an open decision: {body[:120]}"
+            break
+    return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
+
+
 def ensure_governed_checkpoint(
     repository: Path,
     artifact_ids: Iterable[str],
@@ -681,3 +718,12 @@ def ensure_governed_checkpoint(
     repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
     if repository_errors:
         raise HarnessError(f"WEX210: repository integrity prevents governed action: {repository_errors[0].message}")
+    # QG-G1/G2 authoring predicates apply when a definition leaves draft (AUT-GTE-001).
+    if isinstance(artifact_ids, Mapping):
+        for artifact_id, target in artifact_ids.items():
+            artifact = catalog[artifact_id]
+            if artifact.artifact_type in _DEFINITION_TYPES and artifact.status == "draft" and target == "approved":
+                status, message = authoring_ready(artifact)
+                if status != "pass":
+                    predicate = "QGP-G2-AUTHORING" if artifact.artifact_type in {"specification", "architecture", "adr"} else "QGP-G1-AUTHORING"
+                    raise HarnessError(f"{predicate}: {message} Complete the artifact before approval.")

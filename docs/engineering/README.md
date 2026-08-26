@@ -6,6 +6,7 @@
 
 - `ci-pipeline/`: draft proposal to run each CI check once per commit, define the release qualification once for the rehearsal and the release, and freeze a release unit by candidate commit rather than by work-order allow-list.
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
+- `artifact-authoring/`: draft proposal for one managed authoring policy and mechanical requirement-writing rules (EARS shapes, singularity signals, closed verification vocabulary, attributes, approval predicates, slimmer template).
 - `agent-directive-surface/`: draft proposal to make every behavioural obligation on a coding agent an evaluator-computed predicate or a bounded, explicitly scoped read.
 - `technical-communication/`: draft managed communication policy and read-only operator-brief skill using ASD-STE100-based clarity principles without a compliance claim.
 - `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.

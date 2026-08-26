@@ -15,7 +15,8 @@
       "checkpoints": ["pre-action", "transition"],
       "predicates": [
         {"id": "QGP-G1-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
-        {"id": "QGP-G1-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+        {"id": "QGP-G1-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G1-AUTHORING", "evaluator": "authoring_ready", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]}
       ]
     },
     {
@@ -23,7 +24,8 @@
       "checkpoints": ["pre-action", "transition"],
       "predicates": [
         {"id": "QGP-G2-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
-        {"id": "QGP-G2-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
+        {"id": "QGP-G2-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G2-AUTHORING", "evaluator": "authoring_ready", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]}
       ]
     },
     {

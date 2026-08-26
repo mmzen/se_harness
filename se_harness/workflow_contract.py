@@ -19,6 +19,7 @@ PARAMETER_TYPES = {"artifact_id", "actor", "path", "path_list", "status", "text"
 CHECKPOINTS = {"start", "pre-action", "transition", "handoff"}
 EVALUATORS = {
     "artifact_status",
+    "authoring_ready",
     "change_set_complete",
     "changed_paths_within_scope",
     "execution_scope_declared",

@@ -1,7 +1,7 @@
 {
   "schema": "se-harness-skill-contract-v2",
   "name": "harness-draft-change",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "outcome": "Prepare a declared planning note and complete reviewable draft formal artifacts without approval or transition.",
   "activation": {
     "explicit": true,
