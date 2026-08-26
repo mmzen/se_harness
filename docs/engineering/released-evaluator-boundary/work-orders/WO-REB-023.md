@@ -2,7 +2,7 @@
 id = "WO-REB-023"
 type = "work_order"
 title = "Give the migration rehearsal a scenario whose successor is the current candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-25"
 updated = "2026-08-26"
@@ -42,6 +42,13 @@ to = "in_progress"
 decided_at = "2026-08-25T21:09:57Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit instruction of 2026-08-25, taken after the approval of the same day and as a separate accountable act. Start preflight reads PASS with the released 0.6.0 evaluator from outside the checkout, at d91ed5d, main's merge of PR #162, which is also the branch point of fix/wo-reb-023-candidate-scenario. Authorized work is route A only, inside the six declared execution-scope paths: a candidate-0.6.0-to-0.7.0 scenario fixture declaring compatible, the governance-migration job's scenario path and its two predecessor env values, removal of the historical pair from that lane, new tests including a successor-version divergence test and a compatible-classification test, the domain-index bullet, and retained evidence under this work order's own key. The historical scenario stays byte-identical and exercised by the unit suite. Not authorized by this start: any edit to the migration runner, the contract module or the contract JSON; any new contract version, which is route B and was rejected at approval; any amendment to REQ-REB-016, REQ-REB-017, SPEC-REB-008, ARCH-REB-007, ADR-REB-007 or VER-REB-007; any change to docs/notes/, which is an ungoverned path and a separate pull request; any change to pyproject.toml or the candidate version; and every release act, meaning candidate commit, promotable build, verification record, release record, tag, publication, deployment, maintenance-line mutation, credential use and root-evaluator change. If the lane can only be made green by relaxing an identity comparison or waiving a diagnostic, the work stops and the finding is escalated rather than the gate being made to pass."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T06:47:01Z"
+decided_by = "engineering-owner"
+reason = "Engineering owner decision of 2026-08-26 under DR-WO-COMPLETE: the authorized implementation and evidence for WO-REB-023 are complete. The route-A scenario candidate-0.6.0-to-0.7.0.json replaces the historical pair in the candidate lane; the bounded execution-scope amendment of 2026-08-26 authorized the one stale assertion in tests/test_standard_repository_lifecycle.py. Local qualification at 4052143: 889 artifacts, 0 errors, doctor 87 PASS 0 FAIL, preflight PASS, 1021 tests OK on CPython 3.11.9 and 3.14.6, two replays with one semantic_sha256, and the coupling assertions demonstrated red against the historical pair. Hosted qualification: pull_request runs 32938385111 and 32938978650, nine of nine jobs successful in each, reviving the four jobs MIG211 had kept skipped, with the two platforms agreeing on one digest per run. Disclosed and not softened: the qualify capability gap the closed vocabulary cannot name; compatible being a weaker gate than migration-required, whose coverage now lives only in the unit suite; every local figure being single-platform Windows; and the semantic digest moving with the commit. Commit-bound assurance remains required and is a separate VREC decision, to be prepared off main after this branch and the 0.7.0 bump are merged."
 +++
 
 # Work Order: Give the migration rehearsal a scenario whose successor is the current candidate
