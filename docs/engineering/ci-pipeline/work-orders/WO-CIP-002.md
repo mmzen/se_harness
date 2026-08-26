@@ -2,7 +2,7 @@
 id = "WO-CIP-002"
 type = "work_order"
 title = "One qualification definition for the rehearsal and the release; one Pages job; one schema leg"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -50,6 +50,13 @@ to = "in_progress"
 decided_at = "2026-08-26T16:38:04Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: you can start WO-CIP-002; ADR-CIP-001 is approved."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T17:13:28Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-CIP-002 implemented, after accepting interactively the eight recorded deviations (Linux-only recipe-path definition; no schema-2 record for release-record mode yet; classify-pypi deleted; shared helpers in repository_tools; release-candidate-replay.yml unchanged; two scope amendments, the second correcting WO-CIP-003's migration job)."
 +++
 
 # Work Order: One qualification definition for the rehearsal and the release; one Pages job; one schema leg
