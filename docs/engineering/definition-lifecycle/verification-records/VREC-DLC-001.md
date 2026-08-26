@@ -2,7 +2,7 @@
 id = "VREC-DLC-001"
 type = "verification_record"
 title = "Verification candidate for WO-DLC-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -16,12 +16,35 @@ evidence_paths = ["docs/engineering/definition-lifecycle/evidence/WO-DLC-001/WO-
 evaluator_evidence_path = "docs/engineering/definition-lifecycle/evidence/VREC-DLC-001-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-26T15:07:15Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DLC-001"]
 conforms_to = ["VER-DLC-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-26T15:07:15Z"
+decided_by = "assurance-owner"
+reason = "The accountable assurance owner verified this record on 2026-08-26 with the disclosed gaps in front of them. VER-DLC-001's applicable manual assessment is NOT evidenced: the independent reviewer judgment that the W014 text asserts only that a fact is declared, and never that a decision was taken, by whom or when, does not exist and no retained manual review form covers it. Two performance-and-resilience conditions are only partly evidenced: resolution linearity was reasoned and pinned by a maximal two-declaration case rather than timed, and the interrupted-validation condition was not exercised. Every figure is a Windows reading; no Linux measurement was obtainable and the hosted lanes have not run this branch. The owner chose to verify with those gaps disclosed rather than record the review first or reject. This record covers increment 1 only; the remaining VER-DLC-001 scenarios belong to the two unapproved work orders. Seven deviations stand as residuals, two of them under separate owner decisions of the same date. Every bound field was re-measured immediately before this transition: f5dd99f is an ancestor of the branch tip and carries WO-DLC-001 as implemented; all six bound evidence blobs are byte-identical at the candidate and at the tip; the evaluator packet is 873 CR-free bytes at fcfc1447; artifact_snapshot_sha256 re-derives to 9c29c0bb in an independent full clone detached at the candidate with a matching directory basename; the graph at the candidate measures 907 artifacts, 0 errors and 50 pre-existing maintenance warnings with W013 21, W014 14 and W015 15 identical to merge base c189b58; governing doctor at the candidate reports 87 PASS and 0 FAIL at exit 0; the Windows suite at the candidate runs 1064 tests OK with 23 platform-guard skips. This transition grants no release, tag, publication or deployment authority. The record binds f5dd99f, so its provenance survives only a true merge; a squash or rebase would orphan it."
 +++
 
 # Verification Record Candidate
+
+## Assurance decision of 2026-08-26
+
+The accountable assurance owner verified this record at `2026-08-26T15:07:15Z`. The decision was taken with three disclosed gaps in front of it, none of which the owner chose to close first.
+
+`VER-DLC-001`'s applicable manual assessment is **not** evidenced. The independent reviewer judgment that the `W014` text asserts only that a fact is declared, and never that a decision was taken, by whom or when, does not exist, and no retained manual review form covers it. Two performance-and-resilience conditions are only partly evidenced: resolution linearity was reasoned from the code shape and pinned by a maximal two-declaration case rather than timed, and the interrupted-validation condition was not exercised at all. Every figure bound here is a Windows reading; no Linux measurement was obtainable and the hosted lanes have never run this branch.
+
+The owner verified with those gaps disclosed rather than recording the review first or rejecting. They are accepted residual risk on this record, not a claim of pass. This record covers **increment 1 only** and makes no claim about `VER-DLC-001` as a whole.
+
+Every bound field was re-measured immediately before the transition, because that is the last point at which one can be corrected. All six evidence blobs are byte-identical at the candidate and at the branch tip, `f5dd99f` is an ancestor of the tip and carries `WO-DLC-001` as `implemented`, and every figure in the table below was reproduced rather than carried forward.
+
+The sections that follow are the candidate's own prose, unchanged by this transition. It grants no release, tag, publication, or deployment authority.
+
+## Candidate as prepared
 
 This ready record binds retained evidence for `WO-DLC-001` to candidate commit `f5dd99f27b6a3fe9647bc366baf12ce52c95604d`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
