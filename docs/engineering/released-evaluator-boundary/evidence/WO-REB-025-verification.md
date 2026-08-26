@@ -105,6 +105,17 @@ Excluded observation written for `RLS-SEH-015` in the local execution:
    `REQ-REB-015`'s condition holds and leaves the rule's text to a later
    specification change. Recorded rather than silently reconciled.
 
+## Deviation acceptances
+
+Recorded on 2026-08-27 from the owner's interactive answers, before the
+completion decision. These are the owner's statements; the assurance decision
+on the verification record remains separate.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - no new test; the extracted run blocks executed against the real catalog are the proof | Accept: a fixture-based case for the exclusion branch follows under a later work order after 0.7.0. |
+| 2 - SPEC-RLO-005 rule 37 not amended | Accept: the rule's wording is amended under its own governed change later. |
+
 ## Complete changed-path set
 
 ```
