@@ -71,6 +71,15 @@ does not complete, verify, or release the work order.
 2. **A first version of the helper named cache directories by cache size**
    and collided after a re-initialisation; fixed to a monotonic counter
    before commit, caught by the helper's own tests.
+3. **The serial saving is 5 s, not the ~100 s `REQ-TST-003`'s rationale
+   predicted.** Canonical serial: 335 s before the cache, 330 s after;
+   parallel: 80 → 56 s at eight workers, 114 → 86 s at four. The estimate
+   came from a profile in which `init`'s durable writes dominated; that
+   profile inflated `fsync` (the fsync-neutralised suite had already shown
+   only 34 s at stake), and most of a fixture's fixed cost is elsewhere
+   (validation and the graph work each test does). The cache is
+   byte-identical and cheap, and it removes disk contention between
+   workers, which is where its measured benefit lies.
 
 ## Complete changed-path set
 
@@ -102,6 +111,7 @@ on `VREC-TST-002` remains separate.
 | --- | --- |
 | 1 - eleven fixtures converted, not about twenty-five | Accept: the estimate counted call sites; the excluded sites test `init` itself. |
 | 2 - cache-directory naming collision fixed before commit | Accept: caught by the helper's own tests. |
+| 3 - the serial saving is 5 s, not about 100 s | Accept: keep the cache for its parallel benefit; the rationale's estimate was wrong and the evidence says so. |
 
 ## Not done
 
