@@ -2,7 +2,7 @@
 id = "WO-CIP-001"
 type = "work_order"
 title = "Run once per commit and build once per workflow"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -35,6 +35,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T15:17:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T15:18:36Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: you can start WO-CIP-001."
 +++
 
 # Work Order: Run once per commit and build once per workflow
