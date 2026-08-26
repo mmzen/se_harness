@@ -2,7 +2,7 @@
 id = "WO-REB-024"
 type = "work_order"
 title = "Select the closed predecessor history from bootstrap records only"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -25,6 +25,13 @@ implements = ["REQ-REB-011", "REQ-REB-012"]
 specifications = ["SPEC-REB-005"]
 architecture = ["ARCH-REB-004", "ADR-REB-004"]
 verification = ["VER-REB-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T21:51:52Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-26, 'Approve and start'. Authorizes only the three-line filter in repository_tools/predecessor_preparation.py that selects the closed predecessor history from bootstrap records as SPEC-REB-005 rule 3 states, the packet index line and the evidence; no tests/, se_harness/ or templates/ byte, so REL-SEH-017's frozen allow-list is not reopened. Measured before approval as a reverted scratch patch: predecessor suites 20 tests OK, full suite 995 OK."
 +++
 
 # Work Order: Select the closed predecessor history from bootstrap records only
