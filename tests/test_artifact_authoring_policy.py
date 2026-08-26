@@ -337,6 +337,11 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             capture_output=True, text=True, check=True,
         )
         fresh = json.loads(completed.stdout)
-        self.assertEqual(report["counts"], fresh["counts"])
+        # WO-CIP-004: the retained report is a dry run at one commit; later requirements raise the
+        # fresh "mapped" total, so only the steward-facing figures are compared.
+        self.assertEqual(report["counts"]["skipped"], fresh["counts"]["skipped"])
+        unmatched = lambda value: sorted(k for k, v in value["files"].items() if v["state"] == "unmatched")
+        self.assertEqual(unmatched(report), unmatched(fresh))
+        self.assertLessEqual(report["counts"]["mapped"], fresh["counts"]["mapped"])
         # the repository itself is untouched: every requirement still carries the string form
         self.assertEqual([], [f for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md") if re.search(r"^verification_method = \[", f.read_text(encoding="utf-8"), re.MULTILINE)])
