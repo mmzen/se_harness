@@ -2,7 +2,7 @@
 id = "WO-RLO-007"
 type = "work_order"
 title = "Tear down the producer workspace on a hosted runner after a recipe replay"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -24,6 +24,20 @@ paths = [
   "docs/engineering/release-orchestration/work-orders/WO-RLO-007.md",
   "docs/engineering/release-orchestration/evidence/",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T17:21:50Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: i approve WO-RLO-007 and start it. Approval ratifies commit_bound_verification required: the recipe replay is the build every release depends on and has never completed on a hosted runner."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T17:21:53Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: start WO-RLO-007."
 +++
 
 # Work Order: Tear down the producer workspace on a hosted runner after a recipe replay
