@@ -871,8 +871,20 @@ forms occur in this unit and both were counted.
    bytes) at `SOURCE_DATE_EPOCH` 1787732223, recipe digest
    `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc`. The
    retained binding evidence is `se-harness-release-bundle/v2`, the schema this
-   release is obliged to use. Both files and that evidence are held outside the
-   repository until a governance commit is separately authorized to retain them.
+   release is obliged to use.
+
+   On the release owner's further decision of 2026-08-26 those outputs are **not**
+   retained in this repository: the wheel, the sdist, `SHA256SUMS`, the replay
+   result and the bundle manifest all stay outside it, and `RLS-SEH-013` will
+   carry the distribution as digests rather than bytes. That follows 0.6.0, where
+   `RLS-SEH-012` retained only what `prepare-release` produced —
+   `RLS-SEH-012-evaluator.json` at 873 bytes and
+   `RLS-SEH-012-preparation-view.json` at 2359 bytes. It is mechanically available
+   because a schema-2 distribution block names `build_recipe` as a path in the
+   candidate tree, and `release/build-recipe.json` is already tracked there at the
+   digest above, while the bundle manifest is only read at binding time. The build
+   therefore adds **no keyed evidence path**, and the forty-one paths this
+   contract names at its approval are unchanged by it.
 
    `gates` is frozen from approval, so any work order reaching `implemented` with
    bytes in the packaged surface during these steps is a stop condition reported
@@ -945,13 +957,14 @@ Two of the acts this approval expressly did not authorize have since been put
 separately, decided by the release owner, and taken under this contract's
 authority — each recorded in the promotion policy above: the candidate ref
 `candidate/0.7.0` at `e98b788`, and the recipe-bound `state = "exact"` build. The
-build outputs are held outside the repository.
+build outputs stay outside the repository, on a third decision of the same day,
+and `WO-RLS-011`'s keyed evidence records all three on the release owner's
+instruction.
 
-Outstanding beyond that: retention of the build outputs, credential use,
-`VREC-SEH-013` preparation and verification, `RLS-SEH-013` preparation and
-release, the `release-candidate-replay` dispatch, tag creation, publication,
-deployment, maintenance-line mutation, external policy change, and root
-adoption.
+Outstanding beyond that: credential use, `VREC-SEH-013` preparation and
+verification, `RLS-SEH-013` preparation and release, the
+`release-candidate-replay` dispatch, tag creation, publication, deployment,
+maintenance-line mutation, external policy change, and root adoption.
 
 ## Known open questions that do not block this release
 

@@ -1303,3 +1303,168 @@ candidate** and not the stage 1 figures:
 `VREC-SEH-013` actually binds.** The candidate is immutable from here, so they are expected
 to hold — but "expected to hold" is not a measurement, and this file confers no authority to
 skip taking one.
+
+## Post-candidate stage: the candidate ref, on the release owner's decision
+
+Everything below this heading was measured after `WO-RLS-011` reached `implemented`, under
+`REL-SEH-016`'s authority, on decisions the release owner took separately from that
+contract's approval. `REL-SEH-016`'s approval expressly authorized neither the candidate nor
+the build; each was put on its own terms and decided on 2026-08-26.
+
+**The candidate is `main`'s own tip, `e98b7885b016529aa2c262ad577acdc270bc9376`**, published
+on the dedicated ref `candidate/0.7.0` with no new commit. That is the same shape 0.6.0 took:
+`RLS-SEH-012` binds `3b339e9fc70cc634e6dc6bda07ea6a9b1a465798`, the ref `candidate/0.6.0-c6`
+pointed at it, and at that commit `REL-SEH-011` was still `draft` with no `VREC` or `RLS` in
+the tree — so a candidate need not carry its own approved contract, which is what makes
+`main`'s tip a legitimate candidate here.
+
+The exclusions this file promised to confirm *at* the candidate were confirmed there, not
+assumed:
+
+- No `WO-AEX-006` implementation bytes. `se_harness/effect_broker.py` and
+  `se_harness/change_bundle.py` are both absent from the candidate tree. The work order
+  artifact is present and still `approved`; it is `implemented` only on open pull request
+  #155.
+- No pull request #156 bytes. Zero `risk-management` paths in the candidate tree.
+
+`release/0.7` was not created. No tag was created or moved.
+
+## Post-candidate stage: the recipe-bound build, and the digest that *is* bindable
+
+The section above titled "no digest measured here is bindable" is discharged on its own
+stated terms rather than overturned. It required that "the binding digest must come from the
+authorized build on the platform and runtime the release record names". That build has now
+run, and this section records it.
+
+Command form, from a clean worktree detached at the candidate, outside the checkout:
+`python -m repository_tools.release_build replay --repository . --commit e98b7885b016529aa2c262ad577acdc270bc9376 --version 0.7.0`.
+
+**Result: `state = "exact"`**, schema `se-harness-release-build-replay/v1`.
+
+| Reading | Value |
+| --- | --- |
+| Producer | `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050` |
+| Platform | `linux/amd64`, CPython 3.11.9, 64 pointer bits |
+| Toolchain | the complete seven-package hash-locked set from `release/build-toolchain.lock` |
+| `SOURCE_DATE_EPOCH` | 1787732223, derived from `candidate.committer_epoch` |
+| Wheel | `aa52125ddcc573a3ed143ad9cba59eb8b76d47c665dad982e74dc34f4ca34069`, 431141 bytes |
+| Normalized sdist | `848da4689dbd6261afe0748089e5c34d44ad050f84152c4e83b254a72aacc54a`, 621507 bytes |
+| `source_manifest_sha256` | `62caeee9bd9b9fe44fd3ae3336a44b0b8a7763637051017228ca9fba87d0005d` |
+| `checksums_sha256` | `665834e57e9fcb13e0bf3e52ad0e3e54355c50688ecb6de5dc3a1c33d42117e7` |
+| Recipe digest | `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc` |
+| Manifest schema | `se-harness-release-bundle/v2` |
+| `git_object_format` | `sha1` |
+
+Two independent instances of that pinned producer ran, and both reported the same wheel and
+sdist digests. `expected.*` was null on this run, so `state = "exact"` is the agreement of the
+two runs with each other, not agreement with a previously recorded figure.
+
+**Why this does not contradict the earlier reading.** The earlier figures —
+`2a739ea0...cf8dba1` from CPython 3.11 and `a0e405c3...33fd5cd` from CPython 3.14 — were host
+builds under two different interpreters, and their divergence is exactly the reason the recipe
+pins the interpreter *inside* a digest-named image. The constraint was never that no digest
+could ever be bound; it was that no digest measured *outside the authorized build* could be.
+The digests in the table above are the authorized build's, and they are bindable into
+`RLS-SEH-013`.
+
+## Post-candidate stage: the packaged surface, read from the real distribution
+
+Stage 1 read the packaged surface from an explicitly non-promotable ephemeral `git archive`
+sdist. The promotable sdist now supersedes that probe as the source of this reading. It holds
+**195 members**, and confirms every claim the release unit rests on:
+
+- all three post-freeze distributed test modules present —
+  `tests/test_publication_rehearsal.py`, `tests/test_governance_migration.py`,
+  `tests/test_standard_repository_lifecycle.py`;
+- both `WO-HBI` test modules present — `tests/test_hash_bound_integrity.py` and
+  `tests/test_agentic_execution.py`, which is the ordinary-rule basis on which the release
+  owner re-confirmed `WO-HBI-003` and `WO-HBI-004`;
+- `tests/fixtures/**` contributing **zero** members;
+- this repository's own `.github/` contributing **zero** members;
+- exactly **two** `.github` files, both distributed templates under
+  `templates/repository/standard/.github/`: `PULL_REQUEST_TEMPLATE.md.seed` and
+  `workflows/engineering-harness.yml`.
+
+**A figure corrected.** `REL-SEH-016` first said *four* template files. Four is the count of
+`.github` *tar members*, two of which are directory entries;
+`git ls-tree -r e98b788 templates/repository/standard/.github/` returns two files. The
+correction was made in the contract, in commit `e76cc35`, rather than carried into
+`VREC-SEH-013`. Nothing the reading concludes depends on the count.
+
+## Post-candidate stage: the four hosted lanes, and what the candidate ref cannot show
+
+All four required lanes are green **on the candidate commit itself**, through `main`'s push
+event for that same `head_sha`:
+
+| Lane | Run |
+| --- | --- |
+| Engineering Harness | 32946962510 |
+| SE Harness Candidate Evidence | 32946962546 |
+| Governor Transition Assessment | 32946962515 |
+| Publication Rehearsal | 32946962531 |
+
+The Governor Transition Assessment ran from base `e1fd462cc61f456b6d74ffb066ac489e6ff5716d`
+with `base_source: "event"` and returned `passed: true`, `transition_required: false`,
+`assessment: "not_applicable"`, governor 0.6.0 at `lock_schema` 3, with the canonical lock
+digest `abcb1fe70b0eab96b106378bc1549b11e65cf5fe23d9c4cafccfdd28a3bf3f79` identical on base
+and target. The released 0.6.0 evaluator therefore governs the 0.7.0 candidate without
+succession, which is the same conclusion stage 1 reached from the plan command.
+
+**The `candidate/0.7.0` ref itself can carry only two of the four, and the shortfall is a
+property of the ref rather than of the candidate.** The release owner was shown this and
+accepted the commit's own readings on 2026-08-26 rather than treat it as `REL-SEH-016`'s stop
+condition.
+
+- **Publication Rehearsal** restricts its push trigger to `main`, so it cannot fire on any
+  candidate branch. Its `workflow_dispatch` is the only route, and the dispatch attempt was
+  refused by this agent's own tool-permission layer; that was reported rather than worked
+  around.
+- **Governor Transition Assessment** takes its base from
+  `github.event.pull_request.base.sha || github.event.before`. On branch creation `before` is
+  the null SHA, so run 32961209602 reported
+  `BASE_REVISION: 0000000000000000000000000000000000000000` and exited with
+  `"base revision must differ from target HEAD"`, `diagnostics: []`, `phase: "plan"` — a
+  refusal to assess, not a failed assessment. That lane has no `workflow_dispatch`, and a pull
+  request from this ref to `main` would set the base to `main`'s tip, which **is** this
+  candidate, failing identically. On a candidate that is `main`'s tip, a green reading on the
+  ref is unobtainable.
+- The ref's other two lanes are green: Engineering Harness 32961209568 and Candidate Evidence
+  32961209528.
+
+`VREC-SEH-013` must carry this as a disclosure rather than as a satisfied requirement.
+
+## Post-candidate stage: the build outputs are not retained in the repository
+
+On the release owner's decision of 2026-08-26 the wheel, the sdist, `SHA256SUMS`, the replay
+result and the bundle manifest all stay **outside** the repository. This follows 0.6.0, where
+`RLS-SEH-012` retained only what `prepare-release` produced —
+`RLS-SEH-012-evaluator.json` at 873 bytes and `RLS-SEH-012-preparation-view.json` at 2359
+bytes — and carried the distribution as digests rather than bytes.
+
+That decision is mechanically available because a schema-2 distribution block names
+`build_recipe` as a repository-relative path *in the candidate tree*, and
+`release/build-recipe.json` is already tracked there at the digest recorded above. The bundle
+manifest is read at binding time and need not be tracked.
+
+**Consequence for the census: the build adds no keyed evidence path.** The forty-one paths
+`REL-SEH-016` names at its approval are unchanged by anything in this section.
+
+## Post-candidate stage: what this append supersedes, and what it binds
+
+This file's stage 1 and exact-candidate figures are **superseded, not corrected**. They
+describe candidate `f76da5727e86fc53375bfa5cafcfcbf168c7456e` at tree
+`52fdae8c6e090f62341df8b87c52fc308d5132f7`, 887 artifacts, on the 36 / 21 / 48 / 37 census
+against `REL-SEH-015`'s `gates`. That contract is rejected and that commit is not the
+candidate. `VREC-SEH-013` must match `REL-SEH-016`'s basis — **38 / 21 / 48 / 41** on the
+whole-`gates` basis — every figure re-measured at the commit it actually binds, and must
+disclose the superseded reading rather than quietly replace it.
+
+**One ordering fact for the next stage.** These bytes are retained evidence, so the commit
+`VREC-SEH-013` binds must be one whose tree already carries them. That commit is necessarily
+later than `e76cc35`, which recorded the candidate and the build in `REL-SEH-016` but predates
+this append. A verified record's bound commit cannot afterwards be re-pointed, so the binding
+commit is settled before capture and not during it.
+
+Nothing in this append transitions an artifact, confers authority, retains a distribution,
+creates or moves a tag, publishes, deploys, or touches `release/0.7`. No credential was used.
+`REL-SEH-016`'s `gates` array is untouched and byte-identical.
