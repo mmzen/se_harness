@@ -465,3 +465,76 @@ verification contracts, 58 evidence paths, artifact snapshot
 evidence `fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962`
 (identical to every earlier record captured by this evaluator venv, as
 expected). It is `ready`; the assurance decision is the owner's.
+
+## Bound-candidate stage, corrected: the workstation build was wrong
+
+The hosted read-only replay dispatched on `RLS-SEH-014` (run `33015517991`,
+head `ce742ac`) rebuilt `374554d` twice and read wheel
+`e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3` against
+the bound `622d0089…`: **`FAIL: rebuilt wheel differs from accepted hash`**.
+The bound table was wrong, and the cause is this workstation, measured:
+
+1. **`git archive` on a `core.autocrlf=true` clone converts line endings.**
+   83 of 111 members of the workstation wheel carried CRLF; the same export
+   with `core.autocrlf=false` carries none and is byte-identical, member by
+   member and mode by mode, to a `git archive` run under WSL Ubuntu 24.04.
+2. **Docker Desktop mounts a Windows workspace at mode `0777`.** Even with an
+   LF export the wheel still differed (`57542dd8…`): 69 of 111 members
+   recorded mode `0777`, because the producer saw every bind-mounted file as
+   executable. A wheel records modes; a Windows host therefore cannot produce
+   the build of record even when the bytes are right.
+
+Neither defect is in the recipe, the interpreter, or the candidate; the
+recipe declares a `linux/amd64` producer and the hosted lanes are Linux. The
+`24cf7c7` and `374554d` "builds of record" recorded above were both produced
+on the Windows host and both carry these defects; every digest they quote
+(`4d0589fd…`, `d05541fd…`, `622d0089…`, `304cce5f…`) is **superseded** and
+must not be bound or published. `VREC-SEH-014` quotes `622d0089…` and
+`304cce5f…` as "distribution identities of the recipe-bound build"; that
+record is verified and cannot be corrected, and the statement is wrong on the
+digests only — the commit, the tree, the work-order set, the contracts and
+the evidence paths it binds are unaffected, and the ten-of-ten verifier
+acceptance it cites was re-run on the correct wheel below with the same
+outcome.
+
+### The build of record, from a Linux host
+
+On the owner's 2026-08-26 decision the replay was run from **WSL Ubuntu
+24.04** (git 2.43.0, Python 3.12.3, Docker Desktop 29.7.2 through WSL
+integration, ext4 workspace), same command, same pinned producer, same
+recipe, against the same commit `374554d`: exit 0, **`state: exact`**, two
+byte-identical builds.
+
+| Identity | Value |
+| --- | --- |
+| `SOURCE_DATE_EPOCH` | 1787779226 |
+| Source manifest | `1c0b1dcf49492e9d55570d99bc6fd7a63ca32a2512ab65880869dc6a16e1d075` (unchanged: it hashes the tree, not the export) |
+| Wheel `se_harness-0.7.0-py3-none-any.whl` | `e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3` — **equal to the hosted rebuild** |
+| Sdist `se_harness-0.7.0.tar.gz` | `7bebfc0ac51162fda9f6ca69d7f893d0ba4c2ae928bc5a699c48189e62abf617` |
+| `SHA256SUMS` | `3021ee7660a7065210e38b629333ca3f438d9afba0236f85c785cf7bf5efbf00` |
+| Bundle manifest | `se-harness-release-bundle/v2`, sha256 `15889d560e445e3155d303c36d44476947f46a46bc47c0ee3916e6d6e733d6fa`, retained as `RLS-SEH-015-bundle.json` |
+| Wheel members | 111, modes `0644`/`0664` only, zero CRLF |
+
+Released 0.6.0 verifier `accept-candidate` on wheel `e8f4fdc9…` at
+`374554d…`: **ten of ten scenarios passed**.
+
+### Record disposition
+
+`bind_release_distribution.py` refuses to replace a bound table (`release
+record contains conflicting distribution provenance`), so `RLS-SEH-014` was
+rejected by the release owner with the reason above and **`RLS-SEH-015`** was
+prepared by the released evaluator against `374554d`, satisfying
+`REL-SEH-017` and including `VREC-SEH-014`, and bound from the Linux bundle
+manifest. `RLS-SEH-014` and its manifest remain in history unrewritten. The
+read-only hosted replay is re-dispatched on `RLS-SEH-015`.
+
+### Deviation, recorded for the release decision
+
+4. **The build host.** `WO-RLS-012`'s envelope named this workstation's
+   Docker Desktop as the build host with the hosted rehearsal as fallback;
+   neither can produce the candidate's bytes (the workstation for the two
+   reasons above, the pull-request rehearsal because it builds the
+   merge-preview commit). The owner chose WSL Ubuntu with Docker integration,
+   a Linux host inside the workstation. Recorded here; the constraint that a
+   release build needs a Linux host is a fact for the developer note under a
+   later note change, not for this work order's scope.
