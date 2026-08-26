@@ -83,6 +83,15 @@ The "Measured after" column is filled by each work order's evidence.
   the rehearsal, which `WO-CIP-002` addresses); predecessor installs about 5
   (was about 10); migration rehearsals 4 (was 8).
 
+- Hosted reading, pull request #171 at `ff44da2` (2026-08-26): 13 checks
+  pass; the repository-owned workflows ran on `pull_request` only and the
+  superseded commit's runs were cancelled by the concurrency group; the root
+  0.6.0 managed workflow still ran on `push` as well. The `candidate-evidence`
+  log shows one `pip wheel` (in `candidate-source`), `candidate-package`
+  verifying `SHA256SUMS: OK`, and the integration build comparing the two
+  platforms' migration digests (`1bcca199…`). These are `VER-CIP-001`
+  scenarios 1 and 2.
+
 ### After `WO-CIP-003`
 
 - `repository_tools/predecessor_facts.py`: `derive` reads the declared root
