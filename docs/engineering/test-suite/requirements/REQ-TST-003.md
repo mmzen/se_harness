@@ -2,7 +2,7 @@
 id = "REQ-TST-003"
 type = "requirement"
 title = "Take a standard repository from a per-session cache instead of running init in every fixture"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHEN a test fixture needs a fresh standard repository, THE SYSTEM S
 verification_method = "automated-test-and-timed-comparison"
 [relations]
 derives_from = ["CAP-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Take a standard repository from a per-session cache instead of running init in every fixture

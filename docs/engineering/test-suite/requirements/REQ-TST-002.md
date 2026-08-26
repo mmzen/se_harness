@@ -2,7 +2,7 @@
 id = "REQ-TST-002"
 type = "requirement"
 title = "Run the scale tests at full size only under an explicit marker"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -10,6 +10,12 @@ statement = "WHILE the SE_HARNESS_TEST_SCALE environment marker is absent, THE S
 verification_method = "automated-test"
 [relations]
 derives_from = ["CAP-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "requirements-steward"
 +++
 
 # Requirement: Run the scale tests at full size only under an explicit marker

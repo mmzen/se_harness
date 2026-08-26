@@ -2,13 +2,19 @@
 id = "SPEC-TST-001"
 type = "specification"
 title = "The parallel runner, the scale marker, and the fixture cache"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 specifies = ["REQ-TST-001", "REQ-TST-002", "REQ-TST-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "technical-owner"
 +++
 
 # Specification: The parallel runner, the scale marker, and the fixture cache

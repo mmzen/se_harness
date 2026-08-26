@@ -2,12 +2,19 @@
 id = "INT-TST-001"
 type = "intent"
 title = "A full suite in about a minute, with the same verdict"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "product-owner"
+reason = "Owner decision 2026-08-26: i approve the artifact packet."
 +++
 
 # Intent: A full suite in about a minute, with the same verdict

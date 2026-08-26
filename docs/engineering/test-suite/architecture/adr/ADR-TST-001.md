@@ -2,13 +2,20 @@
 id = "ADR-TST-001"
 type = "adr"
 title = "Schedule unittest classes with a repository-owned runner rather than adopting pytest-xdist"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 decides = ["ARCH-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "technical-owner"
+reason = "Owner decision 2026-08-26, as technical owner: a standard-library scheduler over unittest, not pytest-xdist."
 +++
 
 # ADR: Schedule unittest classes with a repository-owned runner rather than adopting pytest-xdist

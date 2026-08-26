@@ -2,13 +2,19 @@
 id = "CAP-TST-001"
 type = "capability"
 title = "Run the candidate suite in parallel with one aggregated verdict"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 derives_from = ["INT-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "product-owner"
 +++
 
 # Capability: Run the candidate suite in parallel with one aggregated verdict

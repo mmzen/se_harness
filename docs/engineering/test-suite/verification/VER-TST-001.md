@@ -2,13 +2,19 @@
 id = "VER-TST-001"
 type = "verification"
 title = "Independent evidence for the parallel suite"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
 
 [relations]
 verifies = ["REQ-TST-001", "REQ-TST-002", "REQ-TST-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Contract: Independent evidence for the parallel suite

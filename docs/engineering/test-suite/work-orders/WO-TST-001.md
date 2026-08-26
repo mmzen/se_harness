@@ -2,7 +2,7 @@
 id = "WO-TST-001"
 type = "work_order"
 title = "The parallel runner and the scale marker"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -29,6 +29,12 @@ implements = ["REQ-TST-001", "REQ-TST-002"]
 specifications = ["SPEC-TST-001"]
 architecture = ["ARCH-TST-001", "ADR-TST-001"]
 verification = ["VER-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "engineering-owner"
 +++
 
 # Work Order: The parallel runner and the scale marker

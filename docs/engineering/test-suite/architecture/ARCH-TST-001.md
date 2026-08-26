@@ -2,7 +2,7 @@
 id = "ARCH-TST-001"
 type = "architecture"
 title = "A standard-library scheduler over unittest, with the serial run as the reference"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -15,6 +15,12 @@ assessed_by = "technical-owner"
 [relations]
 addresses = ["REQ-TST-001", "REQ-TST-002", "REQ-TST-003"]
 conforms_to = ["SPEC-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T19:18:13Z"
+decided_by = "technical-owner"
 +++
 
 # Architecture: A standard-library scheduler over unittest, with the serial run as the reference
