@@ -2,7 +2,7 @@
 id = "WO-CIP-003"
 type = "work_order"
 title = "Derive the predecessor evaluator facts from the declared governor"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-26T15:54:05Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: continue with the next work order related to CI workflows; WO-CIP-001 is implemented."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T16:32:34Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-CIP-003 implemented, after accepting interactively the six recorded deviations (legacy acceptance-contract digest declared once in the module; the writer is a repository_tools command that re-points a template; the assessment workflow and the fixtures unchanged; the module is standard-library only because the repository_tools import crossing is a pinned inventory)."
 +++
 
 # Work Order: Derive the predecessor evaluator facts from the declared governor
