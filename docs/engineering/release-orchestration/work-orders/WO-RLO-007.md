@@ -2,7 +2,7 @@
 id = "WO-RLO-007"
 type = "work_order"
 title = "Tear down the producer workspace on a hosted runner after a recipe replay"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -38,6 +38,13 @@ to = "in_progress"
 decided_at = "2026-08-26T17:21:53Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: start WO-RLO-007."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T17:56:42Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: completion follows the hosted reading; run 32995876112 completed the first hosted recipe replay (state exact) after two recorded failed attempts; five deviations accepted interactively."
 +++
 
 # Work Order: Tear down the producer workspace on a hosted runner after a recipe replay
