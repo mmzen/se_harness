@@ -16,6 +16,7 @@ paths = [
   "scripts/run_tests.py",
   "tests/test_workflow_execution.py",
   "tests/test_run_tests.py",
+  "tests/test_standard_repository_lifecycle.py",
   "AGENTS.md",
   ".gitignore",
   ".github/workflows/candidate-evidence.yml",
@@ -62,6 +63,15 @@ the runner with the marker set; notes with the before/after measurements.
 `TST-RUN` 1–6, `TST-SCL` 1–2, `TST-DOC` 1–3. Tests for the runner in
 `tests/test_run_tests.py` (verdict equality on a small scratch suite, an
 injected failure, an import error, timings written).
+
+## Scope amendment, 2026-08-26
+
+Owner decision 2026-08-26, taken interactively during implementation: add
+`tests/test_standard_repository_lifecycle.py` to the execution scope. That
+test pins the suite step of `candidate-evidence.yml` to the serial
+`unittest discover` command, which this work order replaces with the
+runner; the assertion moves to the new command. One assertion, no other
+change to the file.
 
 ## Out of scope
 
