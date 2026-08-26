@@ -14,7 +14,7 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
-        cls.pypi_job = cls.workflow.split("  pypi:\n", 1)[1].split("  pages_build:\n", 1)[0]
+        cls.pypi_job = cls.workflow.split("  pypi:\n", 1)[1].split("  pages:\n", 1)[0]
 
     def test_one_released_record_input_and_serial_production_environment_are_explicit(self) -> None:
         workflow = self.workflow
@@ -40,18 +40,20 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
         self.assertIn('test "$actual" = "$expected"', self.pypi_job)
 
     def test_governance_validation_uses_only_the_standard_released_evaluator(self) -> None:
-        self.assertEqual(2, self.workflow.count("publish_dashboard.py evaluator"))
-        self.assertEqual(2, self.workflow.count("--role released-evaluator"))
+        # WO-CIP-002: the Pages build moved to the shared pages-publication.yml, so the
+        # release workflow itself acquires the released evaluator once, in resolve.
+        self.assertEqual(1, self.workflow.count("publish_dashboard.py evaluator"))
+        self.assertEqual(1, self.workflow.count("--role released-evaluator"))
         self.assertEqual(
-            2, self.workflow.count("identity_args+=(--evaluator-payload-sha256")
+            1, self.workflow.count("identity_args+=(--evaluator-payload-sha256")
         )
         self.assertEqual(
-            2,
+            1,
             self.workflow.count(
                 "identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'"
             ),
         )
-        self.assertEqual(2, self.workflow.count("--evaluator-wheel-sha256"))
+        self.assertEqual(1, self.workflow.count("--evaluator-wheel-sha256"))
         for retired in (
             "publish_dashboard.py governor",
             "--role governor",

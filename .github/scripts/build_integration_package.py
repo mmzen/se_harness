@@ -25,6 +25,12 @@ from email import policy
 from email.parser import BytesParser
 from typing import Any, Sequence
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
+from repository_tools import json_bytes  # noqa: E402
+from repository_tools.json_bytes import sha256_bytes  # noqa: E402,F401
 
 SCHEMA = "se-harness-integration-package-v1"
 DISTRIBUTION_KIND = "integration-package"
@@ -82,57 +88,15 @@ class IntegrationPackageError(RuntimeError):
 
 
 def canonical_json_bytes(value: Any) -> bytes:
-    try:
-        rendered = json.dumps(
-            value,
-            ensure_ascii=False,
-            allow_nan=False,
-            separators=(",", ":"),
-            sort_keys=True,
-        )
-    except (TypeError, ValueError) as exc:
-        raise IntegrationPackageError("manifest cannot be encoded as canonical JSON") from exc
-    return (rendered + "\n").encode("utf-8")
-
-
-def sha256_bytes(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
+    return json_bytes.canonical_json_bytes(value, error=IntegrationPackageError)
 
 
 def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    try:
-        with path.open("rb") as handle:
-            for block in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(block)
-    except OSError as exc:
-        raise IntegrationPackageError(f"cannot hash file: {path.name}") from exc
-    return digest.hexdigest()
-
-
-def _duplicate_rejecting_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise IntegrationPackageError(f"manifest contains duplicate key: {key}")
-        result[key] = value
-    return result
+    return json_bytes.sha256_file(path, error=IntegrationPackageError, label=path.name)
 
 
 def parse_json_object(raw: bytes) -> dict[str, Any]:
-    if len(raw) > MAX_MANIFEST:
-        raise IntegrationPackageError("manifest exceeds the size limit")
-    if raw.startswith(b"\xef\xbb\xbf"):
-        raise IntegrationPackageError("manifest must not contain a UTF-8 BOM")
-    try:
-        value = json.loads(raw.decode("utf-8"), object_pairs_hook=_duplicate_rejecting_object)
-    except IntegrationPackageError:
-        raise
-    except (UnicodeError, json.JSONDecodeError) as exc:
-        raise IntegrationPackageError("manifest is not valid UTF-8 JSON") from exc
-    if not isinstance(value, dict):
-        raise IntegrationPackageError("manifest root must be an object")
-    return value
+    return json_bytes.parse_json_object(raw, error=IntegrationPackageError, label="manifest", max_bytes=MAX_MANIFEST)
 
 
 def _require_exact_fields(value: dict[str, Any], expected: set[str], label: str) -> None:

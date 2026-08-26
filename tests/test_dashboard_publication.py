@@ -491,7 +491,18 @@ class PayloadPackagingTests(unittest.TestCase):
 class PagesWorkflowPolicyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
+        # WO-CIP-002: the standalone workflow is a thin caller of the one Pages definition;
+        # the policy is read across both files.
+        cls.caller = WORKFLOW_PATH.read_text(encoding="utf-8")
+        cls.definition = (WORKFLOW_PATH.parent / "pages-publication.yml").read_text(encoding="utf-8")
+        cls.workflow = cls.caller + cls.definition
+
+    def test_standalone_workflow_is_a_caller_of_the_one_pages_definition(self) -> None:
+        self.assertIn("uses: ./.github/workflows/pages-publication.yml", self.caller)
+        self.assertNotIn("steps:", self.caller)
+        self.assertIn("  workflow_call:\n", self.definition)
+        release = (WORKFLOW_PATH.parent / "publish-pypi.yml").read_text(encoding="utf-8")
+        self.assertIn("uses: ./.github/workflows/pages-publication.yml", release)
 
     def test_workflow_has_only_main_controlled_replay_trigger(self) -> None:
         self.assertNotIn("  release:\n", self.workflow)
@@ -524,8 +535,11 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
 
     def test_permissions_environment_and_concurrency_are_bounded(self) -> None:
         self.assertNotIn("contents: write", self.workflow)
-        self.assertEqual(1, self.workflow.count("pages: write"))
-        self.assertEqual(1, self.workflow.count("id-token: write"))
+        # the caller grants pages: write and id-token: write; the definition's deploy job declares them
+        self.assertEqual(1, self.caller.count("pages: write"))
+        self.assertEqual(1, self.definition.count("pages: write"))
+        self.assertEqual(1, self.caller.count("id-token: write"))
+        self.assertEqual(1, self.definition.count("id-token: write"))
         self.assertIn("  group: se-harness-pages-demonstration\n", self.workflow)
         self.assertIn("  cancel-in-progress: false\n", self.workflow)
         self.assertIn("      name: github-pages\n", self.workflow)
