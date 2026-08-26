@@ -2,7 +2,7 @@
 id = "WO-CIP-004"
 type = "work_order"
 title = "Freeze the release unit by candidate commit and derive its census"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -36,6 +36,13 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T15:17:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T18:12:23Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: start WO-CIP-004; ADR-CIP-002 is approved."
 +++
 
 # Work Order: Freeze the release unit by candidate commit and derive its census
