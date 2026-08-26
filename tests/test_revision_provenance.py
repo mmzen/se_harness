@@ -26,6 +26,7 @@ from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E40
 from se_harness.cli import main  # noqa: E402
 from se_harness.preflight import _load_validator_module  # noqa: E402
 from se_harness.provenance import _evidence_work_order_keys  # noqa: E402
+from tests.fixture_support import standard_repository
 
 
 EVIDENCE_KEY_CASES = (
@@ -756,7 +757,7 @@ class RevisionCliTests(unittest.TestCase):
         return completed.stdout.strip()
 
     def initialize_candidate(self, *, aggregate: bool = False) -> str:
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Revision Sample")[0])
+        standard_repository(self.root, "Revision Sample")
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         evaluator = lock["evaluator"]
@@ -1317,7 +1318,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual("repository owned\n", output.read_text(encoding="utf-8"))
 
     def test_capture_fails_when_repository_has_no_head(self) -> None:
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "No Head")[0])
+        standard_repository(self.root, "No Head")
         create_base_chain(self.root, operating_contract_status="draft")
         self.git("init", "-b", "main")
         info_exclude = self.root / ".git/info/exclude"

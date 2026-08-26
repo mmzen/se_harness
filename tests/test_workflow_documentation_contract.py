@@ -11,6 +11,7 @@ from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, WORKFLOW_CONTRACT
+from tests.fixture_support import standard_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -140,9 +141,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_fresh_install_contains_managed_machine_contract(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary)
-            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-                result = main(["init", str(target), "--project-name", "Contract Fixture"])
-            self.assertEqual(0, result)
+            standard_repository(target, "Contract Fixture")
             installed = target / "docs" / "engineering" / "WORKFLOW.json"
             expected_workflow = INSTALLED_CONTRACT.read_text(encoding="utf-8").encode("utf-8")
             expected_gates = INSTALLED_GATES.read_text(encoding="utf-8").encode("utf-8")

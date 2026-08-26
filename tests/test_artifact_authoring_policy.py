@@ -15,6 +15,7 @@ from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain
+from tests.fixture_support import standard_repository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md"
@@ -26,8 +27,7 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Authoring Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root, "Authoring Fixture")
         guard = mock.patch(
             "se_harness.mutation_guard.require_mutation_authority",
             side_effect=trusted_mutation_authority,

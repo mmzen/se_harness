@@ -30,6 +30,7 @@ if str(SCRIPTS) not in sys.path:
 import artifact_layout_registry as portable_layout  # noqa: E402
 from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
+from tests.fixture_support import standard_repository
 
 
 class ArtifactAuthoringTests(unittest.TestCase):
@@ -42,7 +43,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Authoring Sample")[0])
+        standard_repository(self.root, "Authoring Sample")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

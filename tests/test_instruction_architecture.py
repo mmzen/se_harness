@@ -18,6 +18,7 @@ from se_harness.cli import main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
+from tests.fixture_support import standard_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -84,8 +85,7 @@ class InstructionArchitectureTests(unittest.TestCase):
 
     def installed_target(self, name: str = "target") -> Path:
         target = self.root / name
-        code, _, error = self.invoke("init", str(target), "--project-name", "Example")
-        self.assertEqual(0, code, error)
+        standard_repository(target, "Example")
         return target
 
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
@@ -1043,8 +1043,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
 
     def test_router_states_the_scope_of_its_obligations_after_the_invariants(self) -> None:
         target = self.root / "target"
-        code = main(["init", str(target), "--project-name", "Example"])
-        self.assertEqual(0, code)
+        standard_repository(target, "Example")
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         heading = "## Scope of these obligations"
         self.assertEqual(1, router.count(heading))
@@ -1075,7 +1074,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         from se_harness.preflight import run_preflight
 
         target = self.root / "orphan"
-        self.assertEqual(0, main(["init", str(target), "--project-name", "Example"]))
+        standard_repository(target, "Example")
         shutil.copytree(PACKET_ROOT, target / "docs" / "engineering" / "instruction-architecture")
         operating_contract = target / "docs/engineering/instruction-architecture/operations/OPS-IAR-001.md"
         operating_contract.write_text(

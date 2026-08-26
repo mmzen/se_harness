@@ -196,8 +196,24 @@ Measured 2026-08-26 on the same workstation, 965 tests:
 | `python scripts/run_tests.py --workers 4 --scale full` (the hosted lane's form) | 114 s | OK, 24 skips |
 | `python scripts/run_tests.py --workers 8` | 80 s | OK, 24 skips |
 
-The runner schedules test classes longest-first from `target/test-timings.json`;
-the fixture cache (`WO-TST-002`) is the next increment.
+The runner schedules test classes longest-first from `target/test-timings.json`.
+
+### After `WO-TST-002`
+
+`tests/fixture_support.py` initialises one standard repository per project
+name per test process and copies it into each fixture (`shutil.copytree`,
+byte-identical to a direct `init`, asserted); eleven fixtures converted.
+Measured 2026-08-26, 968 tests:
+
+| Run | Wall | Verdict |
+| --- | ---: | --- |
+| `python -m unittest discover` (canonical serial) | 329 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 4 --scale full` (the hosted lane's form) | 86 s | OK, 24 skips |
+| `python scripts/run_tests.py --workers 8` | 56 s | OK, 24 skips |
+| hosted `candidate-source` suite step (PR #178, before the cache) | 29 s | success |
+
+Before the packet: 367 s serial and about six to seven minutes on the hosted
+lane.
 
 ## What stays
 
