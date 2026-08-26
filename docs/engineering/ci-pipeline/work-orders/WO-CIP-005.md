@@ -2,7 +2,7 @@
 id = "WO-CIP-005"
 type = "work_order"
 title = "Refuse the approval of a release contract whose census differs from the derivation"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner", "release-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -28,6 +28,20 @@ paths = [
   "docs/notes/developing-se-harness.md",
   "docs/engineering/ci-pipeline/evidence/",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-26T20:22:53Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: i approve WO-CIP-005, you can start it."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T20:22:55Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: start."
 +++
 
 # Work Order: Refuse the approval of a release contract whose census differs from the derivation
