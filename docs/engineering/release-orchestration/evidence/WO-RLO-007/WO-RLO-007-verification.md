@@ -86,6 +86,15 @@ would fail identically.
    none exists. The rehearsal's `candidate` mode exercises the same
    `replay_build` on the same runner type.
 
+4. **A first hosted run failed on test coverage, not on the fix.** Run
+   `32994832843` (PR #174): the Linux unit suite errored in the two
+   pre-existing replay tests, which mock the producer but not the hand-back,
+   so the hand-back really invoked `docker run … chown` against an image the
+   mocked build never pulled (`No such image`). The Windows workstation suite
+   could not see it because the hand-back is a no-op off POSIX. Both tests
+   now stub `_hand_back_workspace`; the new tests were re-run under a POSIX
+   simulation on the workstation. The replay itself had not run in that
+   attempt; the reading recorded above is from the next run.
 ## Complete changed-path set
 
 ```
