@@ -2,7 +2,7 @@
 id = "WO-CIP-004"
 type = "work_order"
 title = "Freeze the release unit by candidate commit and derive its census"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-26T18:12:23Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-26: start WO-CIP-004; ADR-CIP-002 is approved."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T18:52:40Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-CIP-004 implemented, after accepting interactively the seven recorded deviations (E-CIP-001 in the command, not the validator; the 0.7.0 unit not reproducible from commit trailers; template changes in the standard template only; declared packaged-surface prefixes; validator unchanged; re-based onto main after the stack merged; a pre-existing brittle test fixed here)."
 +++
 
 # Work Order: Freeze the release unit by candidate commit and derive its census
