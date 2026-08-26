@@ -293,7 +293,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertEqual(3, workflow.count("fetch-depth: 0"))
         self.assertEqual(3, workflow.count("persist-credentials: false"))
         self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
-        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: candidate-package")
+        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: \[candidate-source, candidate-package\]")
         self.assertIn("needs.governance-migration.outputs.Linux", workflow)
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)

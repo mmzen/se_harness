@@ -21,6 +21,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 import publish_dashboard as dashboard
+from repository_tools.json_bytes import pretty_json_bytes, read_json_object, sha256_file
 from repository_tools.release_build import load_build_recipe_at
 from repository_tools.release_distribution import ReleaseDistribution, validate_distribution_block
 
@@ -66,17 +67,11 @@ class ReleasePlan:
 
 
 def _json_bytes(value: Any) -> bytes:
-    return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    return pretty_json_bytes(value)
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise ReleaseError(f"invalid JSON document: {path}") from exc
-    if not isinstance(value, dict):
-        raise ReleaseError(f"JSON document must be an object: {path}")
-    return value
+    return read_json_object(path, error=ReleaseError)
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -85,14 +80,7 @@ def _write_json(path: Path, value: Any) -> None:
 
 
 def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    try:
-        with path.open("rb") as handle:
-            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(chunk)
-    except OSError as exc:
-        raise ReleaseError(f"cannot hash release file: {path}") from exc
-    return digest.hexdigest()
+    return sha256_file(path, error=ReleaseError, label=f"release file {path}")
 
 
 def _run_git(repository: Path, *arguments: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
@@ -366,31 +354,53 @@ def verify_build_manifest(plan: ReleasePlan, value: dict[str, Any]) -> dict[str,
     return {"state": "exact", "source_manifest_sha256": plan.source_manifest_sha256}
 
 
-def classify_pypi(plan: ReleasePlan, metadata: dict[str, Any]) -> dict[str, Any]:
-    if metadata.get("absent") is True:
-        return {"state": "absent", "files": []}
-    urls = metadata.get("urls")
-    if not isinstance(urls, list):
-        raise ReleaseError("PyPI metadata must contain a urls array or absent=true")
-    expected = {plan.wheel: plan.wheel_sha256, plan.sdist: plan.sdist_sha256}
-    observed: dict[str, str] = {}
-    malformed = False
-    for item in urls:
-        if not isinstance(item, dict) or not isinstance(item.get("filename"), str):
-            malformed = True
+REHEARSAL_STATUSES = frozenset({"ready", "released"})
+
+
+def _version_key(value: str) -> tuple[int, ...]:
+    return tuple(int(part) for part in value.split("."))
+
+
+def select_rehearsal_record(repository: Path, requested: str | None) -> dict[str, Any]:
+    """Choose the record the publication rehearsal qualifies in release-record mode.
+
+    Candidates are ready or released records whose distribution is schema 2 (recipe-bound):
+    the one release-qualification definition replays a bound recipe, so a schema-1 record
+    has no rehearsal subject. An explicitly requested record must be one of them; otherwise
+    the newest by version is chosen, and an empty selection is a legitimate outcome that the
+    caller reports rather than a failure.
+    """
+
+    import tomllib
+
+    candidates: list[tuple[tuple[int, ...], str, str]] = []
+    for path in sorted((repository / "docs/engineering").glob("*/releases/RLS-*.md")):
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("+++\n") or "\n+++\n" not in text[4:]:
             continue
-        digest = item.get("digests", {}).get("sha256") if isinstance(item.get("digests"), dict) else None
-        if not isinstance(digest, str):
-            malformed = True
+        try:
+            front = tomllib.loads(text[4:].split("\n+++\n", 1)[0])
+        except tomllib.TOMLDecodeError as exc:
+            raise ReleaseError(f"invalid release record front matter: {path}") from exc
+        status = front.get("status")
+        distribution = front.get("distribution")
+        version = front.get("version")
+        if status not in REHEARSAL_STATUSES or not isinstance(distribution, dict) or distribution.get("schema") != 2:
             continue
-        observed[item["filename"]] = digest
-    if malformed or any(name not in expected for name in observed) or any(observed.get(name) not in {None, digest} for name, digest in expected.items()):
-        return {"state": "mismatched", "files": sorted(observed)}
-    if not observed:
-        return {"state": "absent", "files": []}
-    if observed == expected:
-        return {"state": "exact", "files": sorted(observed)}
-    return {"state": "partial", "files": sorted(observed)}
+        if not isinstance(version, str) or not re.fullmatch(r"\d+\.\d+\.\d+", version):
+            continue
+        candidates.append((_version_key(version), str(front.get("id")), str(status)))
+    by_id = {identifier: status for _, identifier, status in candidates}
+    if requested:
+        if requested not in by_id:
+            raise ReleaseError(
+                f"{requested} is not a ready or released schema-2 record; rehearsable records: {sorted(by_id) or 'none'}"
+            )
+        return {"release_record": requested, "status": by_id[requested], "reason": "requested"}
+    if not candidates:
+        return {"release_record": "", "status": "", "reason": "no ready or released schema-2 record exists; only the candidate is rehearsed"}
+    _, identifier, status = max(candidates)
+    return {"release_record": identifier, "status": status, "reason": "newest ready or released schema-2 record"}
 
 
 def classify_github(plan: ReleasePlan, metadata: dict[str, Any]) -> dict[str, Any]:
@@ -491,11 +501,11 @@ def build_parser() -> argparse.ArgumentParser:
     build_manifest.add_argument("--plan", type=Path, required=True)
     build_manifest.add_argument("--manifest", type=Path, required=True)
     build_manifest.add_argument("--output", type=Path)
-    pypi = commands.add_parser("classify-pypi")
-    pypi.add_argument("--plan", type=Path, required=True)
-    pypi.add_argument("--metadata", type=Path, required=True)
-    pypi.add_argument("--output", type=Path)
-    pypi.add_argument("--github-output", type=Path)
+    select = commands.add_parser("select-rehearsal-record")
+    select.add_argument("--repository", type=Path, required=True)
+    select.add_argument("--release-record", default="")
+    select.add_argument("--github-output", type=Path)
+    select.add_argument("--summary", type=Path)
     github = commands.add_parser("classify-github")
     github.add_argument("--plan", type=Path, required=True)
     github.add_argument("--metadata", type=Path, required=True)
@@ -520,8 +530,15 @@ def main(argv: Iterable[str] | None = None) -> int:
             _emit(verify_bundle(read_plan(args.plan), args.directory), args.output, None)
         elif args.command == "verify-build-manifest":
             _emit(verify_build_manifest(read_plan(args.plan), _read_json(args.manifest)), args.output, None)
-        elif args.command == "classify-pypi":
-            _emit(classify_pypi(read_plan(args.plan), _read_json(args.metadata)), args.output, args.github_output)
+        elif args.command == "select-rehearsal-record":
+            selection = select_rehearsal_record(args.repository, args.release_record or None)
+            if args.github_output is not None:
+                with args.github_output.open("a", encoding="utf-8", newline="\n") as stream:
+                    stream.write(f"release_record={selection['release_record']}\nstatus={selection['status']}\n")
+            if args.summary is not None:
+                with args.summary.open("a", encoding="utf-8", newline="\n") as stream:
+                    stream.write(f"- Release-record rehearsal subject: `{selection['release_record'] or 'none'}` ({selection['reason']})\n")
+            sys.stdout.write(_json_bytes(selection).decode("utf-8"))
         elif args.command == "classify-github":
             _emit(classify_github(read_plan(args.plan), _read_json(args.metadata)), args.output, args.github_output)
         elif args.command == "notes":

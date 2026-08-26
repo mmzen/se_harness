@@ -53,7 +53,7 @@ contract is 68 KB and `WO-RLS-011` is 39 KB. Since `v0.6.0`: 265 commits,
 | Work order | Proposal | Removes | Measured after |
 | --- | --- | --- | --- |
 | `WO-CIP-001` | P1, P2 | the second run per push; two of three workflow-level wheel builds; the reconcile-only job | implemented 2026-08-26, see below |
-| `WO-CIP-002` | P3, P5 | the Python copy of the qualification, the YAML parser and the digest file; the idle schema leg; the duplicated Pages jobs | pending |
+| `WO-CIP-002` | P3, P5 | the Python copy of the qualification, the YAML parser and the digest file; the idle schema leg; the duplicated Pages jobs | implemented 2026-08-26, see below |
 | `WO-CIP-003` | P6 | three hand-edited constants and the silent skip on a version bump | implemented 2026-08-26, see below |
 | `WO-CIP-004` | P4 | the reject-and-re-issue loop on the release contract | pending |
 
@@ -91,6 +91,40 @@ The "Measured after" column is filled by each work order's evidence.
   verifying `SHA256SUMS: OK`, and the integration build comparing the two
   platforms' migration digests (`1bcca199…`). These are `VER-CIP-001`
   scenarios 1 and 2.
+
+### After `WO-CIP-002`
+
+- One release-qualification definition, `.github/workflows/release-qualification.yml`
+  (`workflow_call`, `contents: read`, no secret input, Linux): resolve the
+  record, qualify the candidate, replay the bound recipe twice, verify the
+  bundle. `publish-pypi.yml`'s `qualify` job and both jobs of
+  `publication-rehearsal.yml` are callers. `rehearse_publication.py`
+  (3,187 lines), `publication_rehearsal_mechanics.json` (364 lines), the
+  `divergence` job, the PyYAML install, and `tests/test_publication_rehearsal.py`
+  (2,299 lines) are gone.
+- One Pages definition, `.github/workflows/pages-publication.yml`; `publish-pypi.yml`
+  and `publish-dashboard-pages.yml` are callers (the standalone workflow is
+  42 lines, was 259). The idle schema-1 qualification leg is gone; a schema-1
+  record is refused by the definition.
+- `.github/scripts/`: 6,490 lines to 3,277, plus `repository_tools/json_bytes.py`
+  (90 lines) holding the one definition of canonical JSON, duplicate-key
+  refusing parsing and file hashing; `reconcile_maintenance_branch.py` uses
+  `gh api`; `classify-pypi` is deleted (the PyPI job executes no repository
+  code by policy, so it classifies inline).
+- Workflow YAML: 1,963 lines to 1,984. The definitions moved into two files;
+  the YAML did not shrink, the copies did.
+- Per pull-request push: the rehearsal no longer runs the unit suite twice on
+  two platforms with two `python -m build` pairs each; it runs the
+  qualification once (candidate mode) plus, when a schema-2 record exists,
+  once for that record.
+
+- Correction, 2026-08-26: the hosted run of pull request #172 showed that
+  `WO-CIP-003`'s `governance-migration` job did not list `candidate-source`
+  in its `needs`, so the derived outputs it consumes were empty. Fixed under
+  `WO-CIP-002` by the owner's decision, with a test that every
+  `needs.<job>.outputs` reference in every workflow names a job in the
+  consumer's `needs`. `VREC-CIP-003` remains the record of the commit that
+  carried the defect.
 
 ### After `WO-CIP-003`
 

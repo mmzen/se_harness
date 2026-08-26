@@ -2,7 +2,7 @@
 id = "WO-CIP-002"
 type = "work_order"
 title = "One qualification definition for the rehearsal and the release; one Pages job; one schema leg"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-26"
 updated = "2026-08-26"
@@ -23,6 +23,8 @@ paths = [
   "se_harness/workflow_contract.py",
   "docs/notes/harnessctl-reference.md",
   "docs/engineering/release-orchestration/evidence/",
+  "docs/notes/release-publication-rehearsal.md",
+  ".github/workflows/candidate-evidence.yml",
   "docs/notes/ci-pipeline.md",
   "docs/notes/developing-se-harness.md",
   "docs/notes/README.md",
@@ -41,6 +43,20 @@ from = "draft"
 to = "approved"
 decided_at = "2026-08-26T15:17:28Z"
 decided_by = "engineering-owner"
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-26T16:38:04Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: you can start WO-CIP-002; ADR-CIP-001 is approved."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-26T17:13:28Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-26: mark WO-CIP-002 implemented, after accepting interactively the eight recorded deviations (Linux-only recipe-path definition; no schema-2 record for release-record mode yet; classify-pypi deleted; shared helpers in repository_tools; release-candidate-replay.yml unchanged; two scope amendments, the second correcting WO-CIP-003's migration job)."
 +++
 
 # Work Order: One qualification definition for the rehearsal and the release; one Pages job; one schema leg
@@ -66,6 +82,29 @@ deleted.
 schema-1 note), `harnessctl-reference.md` only if a command changes; a
 note in `release-orchestration/evidence/` recording how `CAP-RLO-003` is
 now evidenced.
+
+## Scope amendment, 2026-08-26
+
+Owner decision 2026-08-26, taken interactively during implementation: add
+`docs/notes/release-publication-rehearsal.md` to the execution scope. The
+note describes the rehearsal mechanism this work order removes (the Python
+copy of the qualification, the YAML reader and the digest declaration) and
+must describe the reusable definition instead; the handoff check refused the
+rewrite as out of scope. The amendment is a direct edit of `execution_scope`
+under `CIP-DOC`; it adds a documentation path and no code path.
+
+## Scope amendment, 2026-08-26 (second)
+
+Owner decision 2026-08-26, taken interactively: add
+`.github/workflows/candidate-evidence.yml` to the execution scope so that this
+work order corrects a defect the hosted run of pull request #172 found in
+`WO-CIP-003`'s implemented change: the `governance-migration` job did not
+list `candidate-source` in its `needs`, so the derived predecessor outputs it
+consumes resolved to empty strings and its guard refused to run. The fix is
+the `needs` list and a test that every `needs.<job>.outputs` reference names a
+job in the consumer's `needs`. `WO-CIP-003` stays implemented and
+`VREC-CIP-003` stays the record of its commit; both evidence files disclose
+the correction.
 
 ## Out of scope
 
