@@ -2,10 +2,10 @@
 id = "WO-REB-026"
 type = "work_order"
 title = "Materialize the complete governance snapshot as the Pages view when no predecessor view applies"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-26"
+updated = "2026-08-27"
 
 [assurance]
 commit_bound_verification = "required"
@@ -39,6 +39,13 @@ to = "in_progress"
 decided_at = "2026-08-26T22:47:00Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch fix/reb-026-pages-view-for-ordinary-records off main 28487f0."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T04:58:03Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-27 under DR-WO-COMPLETE, within the owner's 'Approve, start, run through' decision, on the handoff gate reading Completed over 72f4ad9, formal snapshot 1d5a033c9d80e8cc6a37f7feeb984ad7db80c98b26634827606cc0d504e58d4e, change set asserted complete over four paths. Governing exact public 0.6.0 evaluator outside the checkout: validate PASS at 960 artifacts, 0 errors; doctor 0 FAIL; review preflight PASS. Candidate: the workflow parses with pinned counts unchanged; the extracted exclusion branch executed against a worktree of governance commit 088b08b materializes the view and the unchanged generation step reads PASS at 957 artifacts; workflow suites OK; full suite 995 OK with 24 platform-guard skips at full scale on Windows CPython 3.14. Hosted: all four pull-request lanes success on head 72f4ad9 (runs 33021290351, 33021290410, 33021290449, 33021290345). One deviation, no new test, accepted by the owner. This authorizes no further act."
 +++
 
 # Work Order: Materialize the complete governance snapshot as the Pages view when no predecessor view applies
