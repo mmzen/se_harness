@@ -40,6 +40,7 @@
 - `release-0.4.0/`: aggregate qualification, provenance, and the released record for version 0.4.0.
 - `release-0.4.1/`: aggregate qualification, provenance, and the released record for version 0.4.1.
 - `release-0-7-0/`: aggregate qualification, provenance, and release records for version 0.7.0.
+- `release-0-7-1/`: aggregate qualification, provenance, and release records for version 0.7.1.
 
 ## Repository-specific engineering documentation
 

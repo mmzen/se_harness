@@ -11,16 +11,13 @@ from pathlib import Path
 
 from se_harness import __version__
 from se_harness.evaluator_evidence import EvaluatorEvidence, build_evaluator_evidence
-from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
-from se_harness.hash_bound import LOCK_RELATIVE
+from se_harness.evaluator_identity import (
+    EvaluatorIdentityError,
+    InstalledEvaluatorIdentity,
+    installed_evaluator_identity,
+)
 from se_harness.installer import CONFIG_NAME, HarnessError, ensure_target, load_lock, safe_destination
 from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identity
-from se_harness.upgrade_authorization import (
-    UpgradeAuthorization,
-    UpgradeAuthorizationError,
-    evaluator_transition_required,
-    load_upgrade_authorization,
-)
 
 
 PUBLIC_MUTATION_OPERATIONS = frozenset(
@@ -42,12 +39,30 @@ PUBLIC_MUTATION_OPERATIONS = frozenset(
 )
 
 
+def evaluator_transition_required(
+    old_lock: dict,
+    target_identity: InstalledEvaluatorIdentity,
+) -> bool:
+    """Return whether applying the installed distribution changes evaluator identity."""
+
+    return not (
+        old_lock.get("schema") == 3
+        and old_lock.get("tool_version") == target_identity.version
+        and old_lock.get("evaluator") == target_identity.to_lock()
+    )
+
+
 @dataclass(frozen=True)
 class MutationAuthority:
     operation: str
     identity: RuntimeIdentity
     evidence: EvaluatorEvidence
-    upgrade_authorization: UpgradeAuthorization | None = None
+    # Set on an upgrade: the installed evaluator that will own the root after the
+    # write, and whether writing it changes the recorded evaluator identity
+    # (SPEC-REB-012 rule 2). No packet, no work order: the installed released
+    # evaluator's version and payload digest are its identity.
+    target_identity: InstalledEvaluatorIdentity | None = None
+    transition: bool = False
 
     @property
     def evidence_bytes(self) -> bytes:
@@ -108,7 +123,6 @@ def require_mutation_authority(
     operation: str,
     allow_upgrade_transition: bool = False,
     require_archive: bool = False,
-    upgrade_work_order: str | None = None,
 ) -> MutationAuthority:
     """Prove released-evaluator identity before an installed-root write."""
 
@@ -124,45 +138,25 @@ def require_mutation_authority(
     if not isinstance(locked_version, str) or configured_version != locked_version:
         raise _failure("MG003", operation, "standard config and lock tool versions differ")
 
+    target_identity: InstalledEvaluatorIdentity | None = None
+    transition = False
     if allow_upgrade_transition:
+        # The installed released evaluator is the target identity: its version and
+        # installed-payload digest, with the archive digest as corroboration only
+        # when the installation recorded one (REQ-REB-027, REQ-REB-028). Index
+        # installs record none, and that is not a failure.
         try:
             target_identity = installed_evaluator_identity()
         except EvaluatorIdentityError as exc:
             raise _failure("MG004", operation, f"cannot identify the target evaluator: {exc}") from exc
-        if target_identity.archive_name is None or target_identity.archive_sha256 is None:
-            raise _failure(
-                "MG004",
-                operation,
-                "upgrade apply requires an externally installed evaluator with PEP 610 archive identity",
-            )
         report = _runtime_report(
             root,
             version=__version__,
             payload_sha256=target_identity.payload_sha256,
             archive_sha256=target_identity.archive_sha256,
         )
-        upgrade_authorization = None
-        if evaluator_transition_required(lock, target_identity) or upgrade_work_order is not None:
-            if upgrade_work_order is None:
-                raise _failure(
-                    "MG007",
-                    operation,
-                    "evaluator identity transition requires a separately approved --work-order packet",
-                )
-            try:
-                # Supplied as the declared path with its exact bytes. The mode is
-                # the declaration's to decide, so nothing is chosen here.
-                lock_bytes = (root / LOCK_RELATIVE).read_bytes()
-                upgrade_authorization = load_upgrade_authorization(
-                    root,
-                    work_order=upgrade_work_order,
-                    old_lock_bytes=lock_bytes,
-                    target_identity=target_identity,
-                )
-            except (OSError, UpgradeAuthorizationError) as exc:
-                raise _failure("MG007", operation, str(exc)) from exc
+        transition = evaluator_transition_required(lock, target_identity)
     else:
-        upgrade_authorization = None
         if lock.get("schema") != 3:
             raise _failure(
                 "MG002",
@@ -200,4 +194,4 @@ def require_mutation_authority(
         evidence = build_evaluator_evidence(report)
     except ValueError as exc:
         raise _failure("MG006", operation, f"cannot canonicalize evaluator evidence: {exc}") from exc
-    return MutationAuthority(operation, report, evidence, upgrade_authorization)
+    return MutationAuthority(operation, report, evidence, target_identity, transition)

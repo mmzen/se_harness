@@ -22,12 +22,6 @@ from se_harness import legacy_release_evidence as PACKAGE
 from se_harness.evaluator_identity import PAYLOAD_MANIFEST, InstalledEvaluatorIdentity
 from se_harness.hash_bound import MATCH_DECLARED
 from se_harness.installer import HarnessError, apply_changes, plan_install
-from se_harness.upgrade_authorization import (
-    UPGRADE_AUTHORIZATION_SCHEMA,
-    UpgradeAuthorization,
-    UpgradeAuthorizationError,
-    load_upgrade_authorization,
-)
 from se_harness.workflow_contract import load_lifecycle_registry
 from tests.mutation_guard_support import trusted_mutation_authority
 
@@ -253,7 +247,6 @@ class ReasonTextTests(unittest.TestCase):
             PACKAGE.UPGRADE_AUTHORIZATION_SCOPE,
             CANDIDATE_VALIDATOR.UPGRADE_AUTHORIZATION_SCOPE,
         )
-        self.assertEqual(UPGRADE_AUTHORIZATION_SCHEMA, PACKAGE.UPGRADE_AUTHORIZATION_SCHEMA)
 
 
 class SelfHostingCompatibilitySetTests(unittest.TestCase):
@@ -470,98 +463,6 @@ class RepositoryResolutionTests(unittest.TestCase):
         self.assertEqual((), resolution.undeclared)
 
 
-class UpgradePacketTests(unittest.TestCase):
-    """SPEC-LRE-001 rule 2: one optional key, and nothing else new."""
-
-    identity = InstalledEvaluatorIdentity(
-        version="7.5.0",
-        payload_manifest=PAYLOAD_MANIFEST,
-        payload_sha256="a" * 64,
-        archive_name="se_harness-7.5.0-py3-none-any.whl",
-        archive_sha256="b" * 64,
-    )
-    old_lock_bytes = b'{"schema": 2, "tool_version": "7.4.0"}\n'
-
-    def setUp(self) -> None:
-        self.temporary = tempfile.TemporaryDirectory()
-        self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
-
-    def write_packet(self, extra: str) -> None:
-        prior = hashlib.sha256(self.old_lock_bytes).hexdigest()
-        path = self.root / "docs/engineering/sample/work-orders/WO-CON-001.md"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            "+++\n"
-            'id = "WO-CON-001"\n'
-            'type = "work_order"\n'
-            'status = "approved"\n'
-            "\n[evaluator_upgrade]\n"
-            f'schema = "{UPGRADE_AUTHORIZATION_SCHEMA}"\n'
-            'scope = "standard-root-only"\n'
-            f'prior_lock_sha256 = "{prior}"\n'
-            'target_version = "7.5.0"\n'
-            f'target_payload_sha256 = "{"a" * 64}"\n'
-            'target_archive_name = "se_harness-7.5.0-py3-none-any.whl"\n'
-            f'target_archive_sha256 = "{"b" * 64}"\n'
-            'publication = "immutable"\n'
-            'authorized_by = "repository-owner"\n'
-            f"{extra}"
-            "+++\n\n"
-            "# WO-CON-001\n",
-            encoding="utf-8",
-            newline="\n",
-        )
-
-    def load(self) -> UpgradeAuthorization:
-        return load_upgrade_authorization(
-            self.root,
-            work_order="WO-CON-001",
-            old_lock_bytes=self.old_lock_bytes,
-            target_identity=self.identity,
-        )
-
-    def test_a_packet_without_the_declaration_is_unchanged(self) -> None:
-        self.write_packet("")
-        self.assertEqual((), self.load().legacy_releases_without_evaluator_evidence)
-
-    def test_the_declaration_is_accepted_sorted_and_deduplicated(self) -> None:
-        self.write_packet(
-            f'{PACKAGE.DECLARATION_FIELD} = ["RLS-CON-002", "RLS-CON-001", "RLS-CON-002"]\n'
-        )
-        self.assertEqual(
-            ("RLS-CON-001", "RLS-CON-002"),
-            self.load().legacy_releases_without_evaluator_evidence,
-        )
-
-    def test_an_empty_declaration_is_accepted(self) -> None:
-        self.write_packet(f"{PACKAGE.DECLARATION_FIELD} = []\n")
-        self.assertEqual((), self.load().legacy_releases_without_evaluator_evidence)
-
-    def test_any_other_added_key_is_still_rejected(self) -> None:
-        self.write_packet('legacy_releases = ["RLS-CON-001"]\n')
-        with self.assertRaisesRegex(UpgradeAuthorizationError, "field set is not canonical"):
-            self.load()
-
-    def test_a_declaration_that_is_not_a_string_array_is_rejected(self) -> None:
-        for rendered in ('"RLS-CON-001"', "[1]", "{ a = 1 }", "true"):
-            with self.subTest(value=rendered):
-                self.write_packet(f"{PACKAGE.DECLARATION_FIELD} = {rendered}\n")
-                with self.assertRaisesRegex(UpgradeAuthorizationError, "must be a string array"):
-                    self.load()
-
-    def test_an_invalid_release_record_identifier_is_rejected(self) -> None:
-        self.write_packet(f'{PACKAGE.DECLARATION_FIELD} = ["rls-con-001"]\n')
-        with self.assertRaisesRegex(UpgradeAuthorizationError, "invalid release record ID"):
-            self.load()
-
-    def test_the_declaration_bound_is_enforced_at_load_time(self) -> None:
-        members = ", ".join(f'"RLS-CON-{index:03d}"' for index in range(1, 514))
-        self.write_packet(f"{PACKAGE.DECLARATION_FIELD} = [{members}]\n")
-        with self.assertRaisesRegex(UpgradeAuthorizationError, "exceeds 512 entries"):
-            self.load()
-
-
 class InstallerRefusalTests(unittest.TestCase):
     """REQ-LRE-002: refuse before the first write, never into a frozen repository."""
 
@@ -578,20 +479,16 @@ class InstallerRefusalTests(unittest.TestCase):
             lock_path = Path(repository) / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
             observed = lock["evaluator"]
-            value.upgrade_authorization = UpgradeAuthorization(
-                work_order="WO-CON-001",
-                artifact_path="docs/engineering/sample/work-orders/WO-CON-001.md",
-                prior_lock_sha256=hashlib.sha256(lock_path.read_bytes()).hexdigest(),
-                target_version=observed["version"],
-                target_payload_sha256=observed["payload_sha256"],
-                target_archive_name=observed.get("archive_name"),
-                target_archive_sha256=observed.get("archive_sha256"),
-                authorized_by="repository-owner",
-                # The digest above is the lock's raw bytes, which the harness
-                # writes as LF, so the declared canonical mode reaches the same
-                # value and "declared" is the verdict this fixture stands for.
-                prior_lock_match=MATCH_DECLARED,
-                legacy_releases_without_evaluator_evidence=declared,
+            # SPEC-REB-012: no packet. The transition's target is the observed
+            # identity itself; the legacy-release declaration is read from the
+            # fixture's work order by the installer, not carried by the authority.
+            value.transition = True
+            value.target_identity = InstalledEvaluatorIdentity(
+                version=observed["version"],
+                payload_manifest=observed["payload_manifest"],
+                payload_sha256=observed["payload_sha256"],
+                archive_name=observed.get("archive_name"),
+                archive_sha256=observed.get("archive_sha256"),
             )
             return value
 
@@ -671,14 +568,13 @@ class InstallerRefusalTests(unittest.TestCase):
                         changes,
                         old_lock,
                         allow_updates=True,
-                        upgrade_work_order="WO-CON-001",
                         evidence_output=evidence,
                     )
             message = str(raised.exception)
             self.assertIn("RLS-CON-001", message)
             self.assertIn("no files were written", message)
             self.assertIn(PACKAGE.DECLARATION_FIELD, message)
-            self.assertIn("WO-CON-001", message)
+            self.assertIn("an approved work order under [evaluator_upgrade]", message)
             self.assertEqual(before, self.snapshot(target))
             self.assertFalse((target / evidence).exists())
             self.assertTrue(record.is_file())
@@ -699,7 +595,6 @@ class InstallerRefusalTests(unittest.TestCase):
                     changes,
                     old_lock,
                     allow_updates=True,
-                    upgrade_work_order="WO-CON-001",
                     evidence_output=evidence,
                 )
             written = json.loads((target / evidence).read_text(encoding="utf-8"))
@@ -724,7 +619,6 @@ class InstallerRefusalTests(unittest.TestCase):
                         changes,
                         old_lock,
                         allow_updates=True,
-                        upgrade_work_order="WO-CON-001",
                         evidence_output=evidence,
                     )
             self.assertEqual(before, self.snapshot(target))
@@ -743,7 +637,6 @@ class InstallerRefusalTests(unittest.TestCase):
                     changes,
                     old_lock,
                     allow_updates=True,
-                    upgrade_work_order="WO-CON-001",
                     evidence_output=evidence,
                 )
             written = json.loads((target / evidence).read_text(encoding="utf-8"))
