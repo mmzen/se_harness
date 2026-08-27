@@ -2,7 +2,7 @@
 id = "WO-HUP-007"
 type = "work_order"
 title = "Adopt exact public 0.7.1 as the standard root, the simple way"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -20,6 +20,13 @@ implements = ["REQ-HUP-014", "REQ-HUP-015"]
 specifications = ["SPEC-HUP-007"]
 architecture = ["ARCH-HUP-005"]
 verification = ["VER-HUP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T17:43:27Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-27 with the words 'Approve and start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared simple upgrade from an isolated 0.7.1 index install outside the checkout, the owner statements, the candidate move to 0.8.0 with its scenario and legacy-contract entry, the root-assumption test changes and the retained evidence, inside the declared execution scope. It authorizes no verification record, no release, no publication and no change to the guard. Start preflight has not been run."
 +++
 
 # Work Order: Adopt exact public 0.7.1 as the standard root, the simple way

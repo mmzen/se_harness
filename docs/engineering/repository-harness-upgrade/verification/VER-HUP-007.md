@@ -2,12 +2,19 @@
 id = "VER-HUP-007"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.7.1"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 [relations]
 verifies = ["REQ-HUP-014", "REQ-HUP-015"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T17:43:24Z"
+decided_by = "quality-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', for the adoption of exact public 0.7.1 as the standard root the simple way (REQ-REB-027, REQ-REB-028 shipped by RLS-SEH-016): one command from an isolated index install outside the checkout, no packet, candidate moved to 0.8.0 with its scenario in the same change. Successor to the rejected WO-HUP-006. Measured before this transition over branch state 12e9e36 carrying unmoved main 23d5781: validate PASS at 986 artifacts, 0 errors under both the governing 0.6.0 root and public 0.7.1; doctor 0 FAIL; upgrade plan 61 files, 43 add or update, 18 unchanged."
 +++
 
 # Verification: Verify standard-root adoption of exact public 0.7.1

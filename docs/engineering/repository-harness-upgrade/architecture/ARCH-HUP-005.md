@@ -2,7 +2,7 @@
 id = "ARCH-HUP-005"
 type = "architecture"
 title = "Adopt 0.7.1 through the existing standard-root boundary, without a packet"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -14,6 +14,13 @@ outcome = "no_significant_decision"
 triggers = []
 rationale = "The boundary is unchanged from ARCH-HUP-004: one released evaluator outside the checkout writes the managed root through the installer's transaction. What changed, the removal of the packet and the archive-digest requirement, was decided in ADR-REB-011 under WO-REB-027; this adoption exercises that decision and takes none of its own."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T17:43:24Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', for the adoption of exact public 0.7.1 as the standard root the simple way (REQ-REB-027, REQ-REB-028 shipped by RLS-SEH-016): one command from an isolated index install outside the checkout, no packet, candidate moved to 0.8.0 with its scenario in the same change. Successor to the rejected WO-HUP-006. Measured before this transition over branch state 12e9e36 carrying unmoved main 23d5781: validate PASS at 986 artifacts, 0 errors under both the governing 0.6.0 root and public 0.7.1; doctor 0 FAIL; upgrade plan 61 files, 43 add or update, 18 unchanged."
 +++
 
 # Architecture: Adopt 0.7.1 through the existing standard-root boundary, without a packet
