@@ -216,6 +216,11 @@ jobs:
               handle.write("\n")
           PY
             echo "predecessor-view qualification excluded: $RELEASE_RECORD satisfies a contract without a bootstrap tuple"
+            governance_commit="$(git -C "$RUNNER_TEMP/governance" rev-parse HEAD)"
+            git -C "$GITHUB_WORKSPACE" worktree add --detach "$RUNNER_TEMP/predecessor-view/governance" "$governance_commit"
+            test "$(git -C "$RUNNER_TEMP/predecessor-view/governance" rev-parse HEAD)" = "$governance_commit"
+            test -z "$(git -C "$RUNNER_TEMP/predecessor-view/governance" status --porcelain=v1 --untracked-files=all)"
+            echo "view materialized as the complete governance snapshot at $governance_commit: nothing is omitted for an ordinary record"
           fi
 
       - name: Generate the target-local canonical Explorer
