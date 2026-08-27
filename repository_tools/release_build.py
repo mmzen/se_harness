@@ -38,6 +38,8 @@ LOCK_LINE_PATTERN = re.compile(
 RECIPE_KEYS = frozenset(
     {"schema", "producer", "python", "toolchain", "environment", "commands", "normalization", "outputs"}
 )
+DECLARED_SOURCE_DIRECTORY_MODE = 0o775
+DECLARED_SOURCE_FILE_MODE = 0o664
 
 
 class BuildRecipeError(RuntimeError):
@@ -306,7 +308,10 @@ def load_build_recipe_at(
 
 def _safe_extract_candidate(repository: Path, commit: str, destination: Path) -> None:
     archive = destination.parent / f"{destination.name}.tar"
-    _run_git(repository, "archive", "--format=tar", f"--output={archive}", commit)
+    _run_git(
+        repository, "-c", "core.autocrlf=false", "-c", "core.eol=lf",
+        "archive", "--format=tar", f"--output={archive}", commit,
+    )
     destination.mkdir()
     try:
         with tarfile.open(archive, "r:") as source:
@@ -381,6 +386,31 @@ def _installed_inventory(path: Path) -> tuple[tuple[str, str], ...]:
     return tuple(sorted(values))
 
 
+def _establish_declared_source_modes(source: Path) -> None:
+    """Bring the source tree this producer builds from to the declared mode set.
+
+    REQ-RLO-017. The exported candidate reaches this process through a bind mount,
+    which presents the calling host filesystem's mode semantics. A Windows host has
+    no POSIX mode to present, so every entry arrives as `0777`, and both
+    `python -m build` and `scripts/normalize_sdist.py` record member modes verbatim:
+    the 0.7.0 build of record was accepted with 69 wheel entries marked executable
+    that way and had to be rejected after an independent hosted replay disagreed.
+    The modes are set here, inside the producer, because a `chmod` on a Windows
+    filesystem is not retained; a POSIX export already produces exactly this set,
+    so the call changes nothing there.
+    """
+
+    try:
+        os.chmod(source, DECLARED_SOURCE_DIRECTORY_MODE)
+        for current, directories, files in os.walk(source):
+            for name in directories:
+                os.chmod(Path(current) / name, DECLARED_SOURCE_DIRECTORY_MODE)
+            for name in files:
+                os.chmod(Path(current) / name, DECLARED_SOURCE_FILE_MODE)
+    except OSError as exc:
+        raise BuildRecipeError("producer cannot establish the declared source mode set") from exc
+
+
 def _producer(recipe_path: Path, lock_path: Path, source: Path, output: Path, version: str, epoch: int, evidence: Path) -> None:
     recipe = validate_recipe_bytes(recipe_path.read_bytes(), path=DEFAULT_RECIPE_PATH, lock=lock_path.read_bytes())
     observed_arch = {"x86_64": "amd64", "amd64": "amd64"}.get(platform.machine().lower(), platform.machine().lower())
@@ -403,6 +433,7 @@ def _producer(recipe_path: Path, lock_path: Path, source: Path, output: Path, ve
     for item in (source, recipe_path, lock_path):
         if not item.exists():
             raise BuildRecipeError("producer input is missing")
+    _establish_declared_source_modes(source)
     if output.exists():
         raise BuildRecipeError("producer output directory must be fresh")
     output.mkdir()
