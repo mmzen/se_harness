@@ -2,11 +2,11 @@
 
 Date: 2026-08-27
 
-Authority: non-authoritative retained implementation evidence. This file does not approve, verify, release, publish, tag, or deploy anything. It records what was measured on one platform at one commit. `WO-REB-028` carries `commit_bound_verification = "required"`, so commit-bound assurance is a separate `VREC` decision by an accountable verifier and this file is not that decision. The work order is `in_progress`; no completion transition has been taken. Section 12 lists seven coverage gaps and disclosures that are explicit inputs to that review, including two the work order's own text does not anticipate.
+Authority: non-authoritative retained implementation evidence. This file does not approve, verify, release, publish, tag, or deploy anything. It records what was measured on one platform at one commit. `WO-REB-028` carries `commit_bound_verification = "required"`, so commit-bound assurance is a separate `VREC` decision by an accountable verifier and this file is not that decision. The work order was `in_progress` throughout every measurement below; the completion transition the repository owner directed afterwards is recorded in the work order's own lifecycle events, in a later commit on this branch. Section 12 lists seven coverage gaps and disclosures that are explicit inputs to that review, including two the work order's own text does not anticipate.
 
 artifact: WO-REB-028
 checkpoint: handoff
-formal_snapshot_sha256: 77b5543356ee540325a9de44a35e3d4ebd9b35140e32c4ffca120475faaeeb35
+formal_snapshot_sha256: 299a568e8f98a62225842a5eff8c1ffcb70f6d4533cd2d541c89e5ee3b3f3d75
 
 ## 1. Governing packet and preflight
 
@@ -37,7 +37,7 @@ Branch: `governance/reb-028-retire-predecessor-bootstrap`.
 | `62f13c2` | `2026-08-27T18:57:08+02:00` | `governance(reb): approve and start WO-REB-028 to retire the predecessor-bootstrap path` |
 | `b848b7a` | `2026-08-27T19:52:28+02:00` | `refactor(reb): retire the predecessor-bootstrap release path` |
 
-A third commit on the same branch carries this evidence document and the packet index correction of section 11. It cannot record its own hash, so it is named here rather than listed above; it changes no code, no workflow and no governed artifact, and section 13 shows the handoff result is identical before and after it.
+`origin/main` advanced to `f0ecd9b` while this work order was in progress, and that commit was merged into the branch as `cb56673`. Section 14 re-derives every figure the merge moved and records the resolution. A later commit on the same branch carries this evidence document and the packet index correction of section 11. It cannot record its own hash, so it is named here rather than listed above; it changes no code, no workflow and no governed artifact, and section 13 shows the handoff result is identical before and after it.
 
 `git merge-base --is-ancestor f605e58 HEAD` holds. Nothing was pushed: the branch exists only in this checkout. All measurements below were taken at `b848b7a` unless stated otherwise.
 
@@ -284,7 +284,7 @@ The validator reads 0 errors with the amendments in place. Whether the status is
 
 ## 13. Handoff checkpoint result
 
-The complete changed-path set is the 40 paths of `git diff --name-only f605e58 HEAD`, passed as 40 repeated `--changed-path` arguments with `--changes-complete`. `QG-G4-IMPLEMENTATION-EVIDENCE` reads `pass`, with no scoped and no repository blocker; the 53 unrelated findings are the same maintenance-plane warnings section 4 records. The exact public 0.6.0 evaluator outside the checkout returns:
+The complete changed-path set is the 40 paths of `git diff --name-only origin/main HEAD` at `cb56673`, passed as 40 repeated `--changed-path` arguments with `--changes-complete`. `QG-G4-IMPLEMENTATION-EVIDENCE` reads `pass`, with no scoped and no repository blocker; the 55 unrelated findings are the same maintenance-plane warnings sections 4 and 14 record. The exact public 0.6.0 evaluator outside the checkout returns:
 
 ```text
 Outcome
@@ -309,6 +309,46 @@ Command or response
 Mark WO-REB-028 implemented.
 ```
 
-`result_sha256` is `b18c0b374de2d942d928349519c68f5c6660442fd5464f895d4c4ba416fb7676`. Released 0.6.0 does not emit that field, so it was taken from the candidate CLI's own schema-2 result and checked back against the released block: the canonical digest of the released governor's result object equals it exactly, and both report the same `formal_snapshot_sha256`. The digest covers declared paths, lifecycle state and the formal snapshot, none of which this file's own bytes enter, so recording it here does not move it.
+`result_sha256` is `b18c0b374de2d942d928349519c68f5c6660442fd5464f895d4c4ba416fb7676`. Released 0.6.0 does not emit that field, so it was taken from the candidate CLI's own schema-2 result and checked back against the released block: the canonical digest of the released governor's result object equals it exactly, and both report the same `formal_snapshot_sha256`. The digest covers the `ADS-DIG-001` canonical bytes of the rendered restitution block alone — outcome, done, not done, lifecycle state, decision required, next step and command — and nothing else in the result object. This file's own bytes therefore do not enter it, so recording it here does not move it, and it is also unchanged across the merge that section 14 records: that merge moved the formal snapshot and the change set, both of which the block does not render, and not one rendered line. The reading above was taken again at `cb56673` after the merge and is byte-identical.
 
-The decision this result asks for is the engineering owner's under `DR-WO-COMPLETE`. It has not been taken, and no transition, push or pull request was made.
+The decision this result asks for is the engineering owner's under `DR-WO-COMPLETE`. The repository owner took it on 2026-08-27 and directed the completion transition, the verification record and the pull request. This file is not that decision and is not the commit-bound assurance either: `VREC-REB-025` under `VER-REB-012` is, and section 12's seven gaps and disclosures, together with the merge disclosure of section 14, are explicit inputs to it.
+
+## 14. Re-derivation after merging `origin/main`
+
+`origin/main` advanced from `f605e58` to `f0ecd9b` (pull request #202, "fix/rlo-017-host-independent-candidate-export") while this work order was in progress. That commit was merged into the branch, never rebased onto it, as `cb56673`. Sections 3 to 13 above were measured at `b848b7a`, before the merge. Every figure the merge moved is re-derived here at `cb56673`, against the new base `f0ecd9b`.
+
+The merge produced no conflict. Exactly one path is in both change sets, `docs/notes/developing-se-harness.md`, and Git merged it without a conflict hunk: `origin/main` rewrote the release-sequence section for the 0.7.1 release, and this work order removed the retired-path sentences elsewhere in the file. Both changes are present in the result, the file is 180 lines with CRLF throughout, and it contains no occurrence of the bare retired operator term the portable-surface checker forbids. No other resolution was needed, so no conflict resolution is uncovered code.
+
+`origin/main` also raised the version from `0.7.0` to `0.7.1` in `pyproject.toml` and `se_harness/__init__.py`, added the `release-0-7-1` packet with `RLS-SEH-016`, added `REQ-RLO-017` with `WO-RLO-008` and `VREC-RLO-008`, and changed `repository_tools/predecessor_facts.py` and `repository_tools/release_build.py`. `predecessor_facts.py` is the retained module this work order must not disturb; it is untouched by this branch, and `tests/test_predecessor_bootstrap_retirement.py::test_the_live_predecessor_facts_and_transition_tools_are_untouched` still passes against `origin/main`'s newer version of it.
+
+| Reading | at `f0ecd9b` (new base) | at `cb56673` (candidate) |
+| --- | --- | --- |
+| Released 0.6.0 `validate`: artifacts / errors / warnings | 983 / 0 / 55 | 989 / 0 / 55 |
+| `python scripts/run_tests.py` | 989 tests, OK, skipped=26 | 949 tests, OK, skipped=24 |
+
+The artifact difference is again exactly six, this packet's own additions, with errors and warnings unmoved. The suite difference is again exactly -40 tests and -2 skips, reconciling per module the same way section 9 records: 989 - 48 - 7 + 15 = 949, and the two lost skips are the two Windows-only guards in the deleted `tests/test_predecessor_preparation.py`. Both control runs were taken on this same host in a throwaway detached worktree at `f0ecd9b`, which was removed afterwards.
+
+| Gate at `cb56673` | Result |
+| --- | --- |
+| `python scripts/validate_engineering_artifacts.py --root .` | PASS, 989 artifacts, 0 errors, 55 warnings |
+| `../se-harness-eval/Scripts/python -I -m se_harness doctor .` | 113 checks, 87 PASS, 26 WARN, 0 FAIL, exit code 0 |
+| `python scripts/validate_release_distributions.py --root .` | PASS, 4 distribution-bearing records |
+| `python scripts/check_portable_release_surface.py --repository .` | PASS |
+| `python -m se_harness --help` | exit code 0 |
+| `../se-harness-eval/Scripts/python -I -m se_harness preflight . --work-order WO-REB-028 --phase review` | PASS |
+
+The four distribution-bearing records were three before the merge; `RLS-SEH-016` is the fourth and belongs to `origin/main`, not to this work order.
+
+The three retained hash-bound digests were recomputed at `cb56673` and all three still verify, unchanged from section 5. `REL-SEH-011` still declares `from_lock_sha256 = "08441ec0…"` with `from_lock_tool_version = "0.5.0"`. The three hash-bound checks still pass; the declaration now covers 66 tracked paths rather than 62, because `origin/main` added four evidence sidecars of its own. `git diff --name-only origin/main HEAD -- docs/engineering/release-0-6-0/` is empty, so the six closed 0.6.0 artifacts remain byte-identical to the new base, and the same command over the managed hash-locked paths and `se_harness/hash_bound_classes.json` is also empty.
+
+The ephemeral non-promotable candidate wheel of section 6 was rebuilt at `cb56673` by the same recipe, because the merge changed packaged bytes:
+
+```text
+se_harness-0.7.1-py3-none-any.whl
+sha256 53223241cdb8f984bffa05396173027d6ad5cd575e6ef0ed8ee7720260de9a33
+482,740 bytes, 110 members
+```
+
+Both surface readings pass against it, `qualify --help` from the installed console script offers the same four operations with zero occurrences of `predecessor-view`, `rehearse-migration` is present, and the member list contains no `predecessor`, `bootstrap` or `repository_tools` member. That wheel and its virtual environment were deleted after the readings, as the 0.7.0 one was. Neither is promotable, and 0.7.1 is already published from a build of record that this host cannot produce.
+
+The formal snapshot moved with the merge, from `77b5543356ee540325a9de44a35e3d4ebd9b35140e32c4ffca120475faaeeb35` at `b848b7a` to `299a568e8f98a62225842a5eff8c1ffcb70f6d4533cd2d541c89e5ee3b3f3d75` at `cb56673`. The binding block at the top of this file declares the second value, which is the one the handoff gate reads. Re-running the handoff check before this section was written returned `QGP-G4I-EVIDENCE: No readable evidence for WO-REB-028, checkpoint handoff, and formal snapshot 299a568e… is available` — the gate passing once does not mean it still passes, and re-binding the evidence is what makes it pass again. Section 13 records the re-derived result.
