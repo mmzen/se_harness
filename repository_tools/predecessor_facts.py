@@ -47,7 +47,72 @@ SCENARIOS = Path("tests/fixtures/governance_migration")
 # declared here once and asserted by tests, never restated in a workflow.
 LEGACY_ACCEPTANCE_CONTRACT_SHA256 = {
     "0.6.0": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
+    # 0.7.1 ships the same accept-candidate contract bytes; CONTRACT_SHA256 read
+    # from the installed evaluator under WO-HUP-007.
+    "0.7.1": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
 }
+
+RELEASE_RECORDS = Path("docs/engineering")
+
+
+def _front_matter(path: Path) -> dict[str, Any] | None:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError):
+        return None
+    if not text.startswith("+++"):
+        return None
+    end = text.find("\n+++", 3)
+    if end < 0:
+        return None
+    try:
+        return tomllib.loads(text[3:end])
+    except tomllib.TOMLDecodeError:
+        return None
+
+
+def released_evaluator_archive(repository: Path, version: str) -> tuple[str, str]:
+    """Return (wheel, wheel_sha256) from the one released record whose version is `version`."""
+
+    matches: list[tuple[Path, dict[str, Any]]] = []
+    for path in sorted((repository / RELEASE_RECORDS).rglob("RLS-*.md")):
+        value = _front_matter(path)
+        if not value or value.get("type") != "release_record":
+            continue
+        if value.get("status") == "released" and value.get("version") == version:
+            matches.append((path, value))
+    if len(matches) != 1:
+        names = ", ".join(str(item[1].get("id")) for item in matches) or "none"
+        raise PredecessorFactsError(
+            f"PRE014: {LOCK_NAME} records no evaluator archive identity and exactly one released "
+            f"release record for {version} is required to supply it; found {names}"
+        )
+    path, record = matches[0]
+    distribution = record.get("distribution")
+    if not isinstance(distribution, dict):
+        raise PredecessorFactsError(f"PRE015: {record.get('id')} binds no distribution table")
+    return (
+        _require_string(distribution.get("wheel"), f"{record.get('id')} distribution.wheel"),
+        _require_sha256(distribution.get("wheel_sha256"), f"{record.get('id')} distribution.wheel_sha256"),
+    )
+
+
+def _evaluator_archive(repository: Path, evaluator: dict[str, Any], version: str) -> tuple[str, str]:
+    """Return the root evaluator's (archive_name, archive_sha256) from the lock, or from the released record.
+
+    A root adopted by the simple upgrade from an index install records no archive
+    identity (REQ-REB-028); the wheel that release published is bound in this
+    repository's own released record (owner decision of 2026-08-27, WO-HUP-007).
+    """
+
+    name = evaluator.get("archive_name")
+    digest = evaluator.get("archive_sha256")
+    if name is None and digest is None:
+        return released_evaluator_archive(repository, version)
+    return (
+        _require_string(name, f"{LOCK_NAME} evaluator.archive_name"),
+        _require_sha256(digest, f"{LOCK_NAME} evaluator.archive_sha256"),
+    )
 
 
 class PredecessorFactsError(RuntimeError):
@@ -169,8 +234,7 @@ def derive(repository: Path) -> PredecessorFacts:
             f"PRE007: declared root versions disagree: {TOML_NAME} says {tool_version}, "
             f"{LOCK_NAME} says tool_version={lock.get('tool_version')} evaluator.version={version}"
         )
-    wheel = _require_string(evaluator.get("archive_name"), f"{LOCK_NAME} evaluator.archive_name")
-    wheel_sha256 = _require_sha256(evaluator.get("archive_sha256"), f"{LOCK_NAME} evaluator.archive_sha256")
+    wheel, wheel_sha256 = _evaluator_archive(repository, evaluator, version)
     payload_sha256 = _require_sha256(evaluator.get("payload_sha256"), f"{LOCK_NAME} evaluator.payload_sha256")
     candidate_version = _candidate_version(repository)
     if candidate_version == version:
@@ -242,10 +306,11 @@ def write_scenario(repository: Path, *, template: Path, predecessor: str | None,
     evaluator = lock.get("evaluator") or {}
     predecessor_version = predecessor or _require_string(evaluator.get("version"), f"{LOCK_NAME} evaluator.version")
     if predecessor_version == evaluator.get("version"):
+        archive_name, archive_sha256 = _evaluator_archive(repository, evaluator, predecessor_version)
         pinned = {
             "version": predecessor_version,
-            "archive_name": _require_string(evaluator.get("archive_name"), f"{LOCK_NAME} evaluator.archive_name"),
-            "archive_sha256": _require_sha256(evaluator.get("archive_sha256"), f"{LOCK_NAME} evaluator.archive_sha256"),
+            "archive_name": archive_name,
+            "archive_sha256": archive_sha256,
         }
     else:
         raise PredecessorFactsError(
