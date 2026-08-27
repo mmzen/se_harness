@@ -2,13 +2,20 @@
 id = "ADR-REB-011"
 type = "adr"
 title = "Upgrade the root from the installed evaluator's payload identity, without a packet"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 
 [relations]
 decides = ["ARCH-REB-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T15:20:02Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', on the owner's direction that the evaluator upgrade must be simple: the MG007 work-order packet and the MG004 and RID022 archive-digest requirements are retired, the installed evaluator's version and payload digest are its identity, index installs pass the managed lane, and the candidate-evidence lane selects the acceptance operation by the verifier's capability. REQ-REB-005 is superseded under WO-REB-027."
 +++
 
 # ADR: Upgrade the root from the installed evaluator's payload identity, without a packet

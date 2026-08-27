@@ -2,7 +2,7 @@
 id = "ARCH-REB-011"
 type = "architecture"
 title = "Evaluator identity from the installed payload; the upgrade as an ordinary transaction"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -16,6 +16,13 @@ outcome = "adr_required"
 triggers = ["security-privacy-or-trust-boundary", "cross-cutting-policy", "difficult-to-reverse"]
 rationale = "Removing the work-order packet and the archive-digest requirement changes what the trust boundary accepts as the target evaluator's identity and retires a cross-cutting gate that every upgrade and the managed workflow depended on."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T15:20:02Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', on the owner's direction that the evaluator upgrade must be simple: the MG007 work-order packet and the MG004 and RID022 archive-digest requirements are retired, the installed evaluator's version and payload digest are its identity, index installs pass the managed lane, and the candidate-evidence lane selects the acceptance operation by the verifier's capability. REQ-REB-005 is superseded under WO-REB-027."
 +++
 
 # Architecture: Evaluator identity from the installed payload; the upgrade as an ordinary transaction

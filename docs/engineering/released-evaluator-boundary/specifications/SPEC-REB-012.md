@@ -2,13 +2,20 @@
 id = "SPEC-REB-012"
 type = "specification"
 title = "Simple evaluator upgrade contract"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-027", "REQ-REB-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T15:20:02Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', on the owner's direction that the evaluator upgrade must be simple: the MG007 work-order packet and the MG004 and RID022 archive-digest requirements are retired, the installed evaluator's version and payload digest are its identity, index installs pass the managed lane, and the candidate-evidence lane selects the acceptance operation by the verifier's capability. REQ-REB-005 is superseded under WO-REB-027."
 +++
 
 # Specification: Simple evaluator upgrade contract
