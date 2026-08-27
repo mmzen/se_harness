@@ -126,17 +126,11 @@ expiry. The exact released evaluator still derives a narrower, short-lived
 envelope from fresh live state for each request.
 
 '''
-        expected_candidate_work_order = released_work_order.replace(
-            "[relations]\n", delegation_block + "[relations]\n", 1
-        )
-        expected_candidate_work_order = expected_candidate_work_order.replace(
-            "Add `architecture = ",
-            delegation_guidance + "Add `architecture = ",
-            1,
-        )
-        self.assertNotEqual(released_work_order, candidate_work_order)
-        self.assertNotIn("[agentic_delegation]", released_work_order)
-        self.assertEqual(candidate_work_order, expected_candidate_work_order)
+        # The released root is exact public 0.7.0 (WO-HUP-006), which carries the
+        # delegation table WO-AEX-005 added; the root copy equals the candidate.
+        self.assertEqual(released_work_order, candidate_work_order)
+        self.assertIn(delegation_block, released_work_order)
+        self.assertIn(delegation_guidance, released_work_order)
         self.assertIn("[execution_scope]", released_work_order)
         self.assertIn("[execution_scope]", candidate_work_order)
         self.assertIn("component-prefix", candidate_work_order)
@@ -168,23 +162,21 @@ envelope from fresh live state for each request.
             "| Artifact authoring locations and templates | "
             "`docs/engineering/templates/README.md` |"
         )
-        self.assertNotIn(technical_communication_route, router)
-        self.assertEqual(1, candidate_router.count(technical_communication_route))
+        # The released root router is exact public 0.7.0 (WO-HUP-006): it equals
+        # the candidate template rendered for this repository and its evaluator.
+        self.assertEqual(router, candidate_router)
+        self.assertEqual(1, router.count(technical_communication_route))
         self.assertIn(
             f"{technical_communication_route}\n{artifact_authoring_route}",
-            candidate_router,
+            router,
         )
-        self.assertNotEqual(router, candidate_router)
-        self.assertIn("## Lifecycle restitution", router)
-        self.assertNotIn("## Lifecycle handoff", router)
-        self.assertIn("## Lifecycle handoff", candidate_router)
-        self.assertIn("The structured\nresult is authoritative", candidate_router)
-        self.assertIn("Model transcription MUST NOT", candidate_router)
-        self.assertIn("harnessctl focus", router)
-        self.assertNotIn("harnessctl focus", candidate_router)
+        self.assertIn("## Lifecycle handoff", router)
+        self.assertNotIn("## Lifecycle restitution", router)
+        self.assertIn("The structured\nresult is authoritative", router)
+        self.assertIn("Model transcription MUST NOT", router)
+        self.assertNotIn("harnessctl focus", router)
         self.assertNotIn("harnessctl preflight", router)
-        self.assertNotIn("harnessctl preflight", candidate_router)
-        self.assertIn("WORKFLOW.json", candidate_router)
+        self.assertIn("WORKFLOW.json", router)
 
     def test_work_order_template_expresses_conditional_architecture(self) -> None:
         template = (

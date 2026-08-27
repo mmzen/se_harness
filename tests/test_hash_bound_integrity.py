@@ -808,8 +808,15 @@ class TemplateParityTests(unittest.TestCase):
             ],
             promoted,
         )
+        # Since WO-HUP-006 the root managed block is the released 0.7.0 fragment, so
+        # the promoted patterns appear in the template region as well as in the
+        # repository region that SPEC-HBI-001 rule 2 declares for the class. The
+        # declared region still governs: doctor fails if the owner rules go.
         managed = [line.split()[0] for line in hash_bound.attribute_regions(ROOT)["template"]]
-        self.assertEqual(["docs/engineering/**/evidence/*.json"], managed)
+        self.assertEqual(["docs/engineering/**/evidence/*.json", *promoted], managed)
+        repository = [line.split()[0] for line in hash_bound.attribute_regions(ROOT)["repository"]]
+        for pattern in promoted:
+            self.assertIn(pattern, repository)
 
 
 @unittest.skipUnless(git_available(), "git is unavailable")
