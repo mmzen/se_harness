@@ -195,8 +195,8 @@ class LifecycleStateContractTests(unittest.TestCase):
             duplicate = root / "duplicate.json"
             duplicate.write_text(
                 RUNTIME_CONTRACT.read_text(encoding="utf-8").replace(
-                    '"schema": "se-harness-workflow-v3",',
-                    '"schema": "se-harness-workflow-v3",\n  "schema": "se-harness-workflow-v3",',
+                    '"schema": "se-harness-workflow-v4",',
+                    '"schema": "se-harness-workflow-v4",\n  "schema": "se-harness-workflow-v4",',
                     1,
                 ),
                 encoding="utf-8",
@@ -217,10 +217,10 @@ class LifecycleStateContractTests(unittest.TestCase):
     def test_standalone_validator_rejects_invalid_managed_registry_before_import(self) -> None:
         original = MANAGED_CONTRACT.read_text(encoding="utf-8")
         cases = {
-            "v2": original.replace("se-harness-workflow-v3", "se-harness-workflow-v2", 1),
+            "v3": original.replace("se-harness-workflow-v4", "se-harness-workflow-v3", 1),
             "duplicate": original.replace(
-                '"schema": "se-harness-workflow-v3",',
-                '"schema": "se-harness-workflow-v3",\n  "schema": "se-harness-workflow-v3",',
+                '"schema": "se-harness-workflow-v4",',
+                '"schema": "se-harness-workflow-v4",\n  "schema": "se-harness-workflow-v4",',
                 1,
             ),
             "unknown-target": original.replace(

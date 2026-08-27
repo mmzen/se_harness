@@ -1,8 +1,27 @@
+# Candidate evidence for one commit: source regression, one non-promotable
+# wheel built once and handed to every consumer, acceptance by the exact public
+# predecessor, the N-1 to N migration rehearsal on both platforms, and the
+# expiring integration package. Trigger policy (WO-CIP-001, SPEC-CIP-001
+# CIP-TRG): pull requests, and pushes to main, release/** and candidate/**
+# only; a newer push to the same ref cancels the older run. The predecessor
+# evaluator's version, wheel, digests and migration scenario are derived once
+# from the declared root (.engineering-harness.toml and .lock) by
+# repository_tools.predecessor_facts in candidate-source and carried as job
+# outputs (WO-CIP-003, CIP-PRE); no literal is restated here. Described in
+# docs/notes/developing-se-harness.md, "Evaluator and candidate evidence".
 name: SE Harness Candidate Evidence
 
 on:
   pull_request:
   push:
+    branches:
+      - main
+      - "release/**"
+      - "candidate/**"
+
+concurrency:
+  group: candidate-evidence-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -11,6 +30,15 @@ jobs:
   candidate-source:
     name: Candidate source evidence
     runs-on: ubuntu-latest
+    outputs:
+      candidate_version: ${{ steps.candidate.outputs.version }}
+      predecessor_version: ${{ steps.predecessor.outputs.version }}
+      predecessor_wheel: ${{ steps.predecessor.outputs.wheel }}
+      predecessor_wheel_sha256: ${{ steps.predecessor.outputs.wheel_sha256 }}
+      predecessor_payload_sha256: ${{ steps.predecessor.outputs.payload_sha256 }}
+      predecessor_acceptance_contract_sha256: ${{ steps.predecessor.outputs.acceptance_contract_sha256 }}
+      migration_scenario: ${{ steps.predecessor.outputs.scenario }}
+      migration_scenario_sha256: ${{ steps.predecessor.outputs.scenario_sha256 }}
     env:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
@@ -28,6 +56,12 @@ jobs:
         run: |
           version="$(python -c 'import se_harness; print(se_harness.__version__)')"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
+      - name: Derive the predecessor evaluator facts from the declared root
+        id: predecessor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m repository_tools.predecessor_facts derive --repository . --github-output "$GITHUB_OUTPUT" --json
       - name: Qualify the complete candidate graph as candidate-controlled
         shell: bash
         run: |
@@ -39,11 +73,31 @@ jobs:
       - name: Prove active evaluator surface
         run: python scripts/check_portable_release_surface.py --repository .
       - name: Run complete candidate-source regression
-        run: python -m unittest discover -s tests -p "test_*.py"
+        run: python scripts/run_tests.py --workers 4 --scale full --timings ""
+      - name: Export and build the one non-promotable candidate wheel
+        env:
+          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/candidate-export" "$RUNNER_TEMP/candidate-dist"
+          git archive "$GITHUB_SHA" | tar -x -C "$RUNNER_TEMP/candidate-export"
+          python -m pip wheel --disable-pip-version-check --no-deps \
+            --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"
+          test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
+          test -f "$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
+          (cd "$RUNNER_TEMP/candidate-dist" && sha256sum -- *.whl > SHA256SUMS)
       - name: Prove candidate source made no checkout change
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
+      - name: Hand the candidate wheel to the consuming jobs
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-wheel-non-promotable-${{ github.sha }}
+          path: ${{ runner.temp }}/candidate-dist/
+          if-no-files-found: error
+          retention-days: 1
       - name: Retain the complete-candidate role result
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,11 +111,11 @@ jobs:
     needs: candidate-source
     runs-on: ubuntu-latest
     env:
-      RELEASED_VERIFIER_VERSION: "0.6.0"
-      RELEASED_VERIFIER_WHEEL: "se_harness-0.6.0-py3-none-any.whl"
-      RELEASED_VERIFIER_WHEEL_SHA256: "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7"
-      RELEASED_VERIFIER_PAYLOAD_SHA256: "c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42"
-      RELEASED_ACCEPTANCE_CONTRACT_SHA256: "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75"
+      RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
+      RELEASED_VERIFIER_WHEEL: ${{ needs.candidate-source.outputs.predecessor_wheel }}
+      RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
+      RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}
+      RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -78,14 +132,18 @@ jobs:
         run: |
           version="$(python -c 'import se_harness; print(se_harness.__version__)')"
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
-      - name: Export and build one non-promotable candidate wheel
+      - name: Take the candidate wheel built by candidate-source
+        uses: actions/download-artifact@v4
+        with:
+          name: candidate-wheel-non-promotable-${{ github.sha }}
+          path: ${{ runner.temp }}/candidate-dist
+      - name: Verify the handed-over wheel bytes
         shell: bash
         run: |
-          mkdir -p "$RUNNER_TEMP/candidate-export" "$RUNNER_TEMP/candidate-dist"
-          git archive "$GITHUB_SHA" | tar -x -C "$RUNNER_TEMP/candidate-export"
-          python -m pip wheel --disable-pip-version-check --no-deps \
-            --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"
-          test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
+          set -euo pipefail
+          cd "$RUNNER_TEMP/candidate-dist"
+          test "$(find . -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
+          sha256sum --check --strict SHA256SUMS
       - name: Prove candidate wheel has the portable standard surface
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
@@ -105,10 +163,12 @@ jobs:
           )
           assert not any(any(marker in name for marker in forbidden) for name in names)
           PY
-      - name: Acquire and bind the exact public 0.6.0 bootstrap verifier
+      - name: Acquire and bind the exact public predecessor as the bootstrap verifier
         shell: bash
         run: |
           set -euo pipefail
+          test -n "$RELEASED_VERIFIER_VERSION" -a -n "$RELEASED_VERIFIER_WHEEL_SHA256" -a -n "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" \
+            || { echo "predecessor facts were not derived; the legacy bootstrap acceptance needs a declared contract digest" >&2; exit 1; }
           mkdir -p "$RUNNER_TEMP/verifier-dist"
           python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps \
             --dest "$RUNNER_TEMP/verifier-dist" "se-harness==$RELEASED_VERIFIER_VERSION"
@@ -129,7 +189,7 @@ jobs:
             --evaluator-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
             --entry-point "$RUNNER_TEMP/verifier-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
-      - name: Retain exact-public-0.6.0 candidate-package bootstrap evidence
+      - name: Retain exact-public-predecessor candidate-package bootstrap evidence
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
         shell: bash
@@ -148,13 +208,13 @@ jobs:
             --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
           python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
             "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
-            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" <<'PY'
+            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" "$RELEASED_VERIFIER_VERSION" <<'PY'
           import json, pathlib, sys
           value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
           assert value["schema"] == "se-harness-functional-acceptance-v1"
           assert value["candidate"]["commit"] == sys.argv[2]
           assert value["candidate"]["wheel_sha256"] == sys.argv[3]
-          assert value["verifier"]["version"] == "0.6.0"
+          assert value["verifier"]["version"] == sys.argv[6]
           assert value["verifier"]["wheel_sha256"] == sys.argv[4]
           assert value["verifier"]["contract_sha256"] == sys.argv[5]
           assert "independence" not in value
@@ -202,13 +262,13 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-package-legacy-bootstrap-0.6.0
+          name: candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}
           path: ${{ runner.temp }}/candidate-package-bootstrap.json
           if-no-files-found: warn
 
   governance-migration:
     name: Governance migration (${{ matrix.platform }})
-    needs: candidate-package
+    needs: [candidate-source, candidate-package]
     strategy:
       fail-fast: false
       matrix:
@@ -220,9 +280,14 @@ jobs:
             runner: windows-latest
             python: Scripts/python.exe
     runs-on: ${{ matrix.runner }}
+    outputs:
+      Linux: ${{ steps.digest.outputs.Linux }}
+      Windows: ${{ steps.digest.outputs.Windows }}
     env:
-      PREDECESSOR_VERSION: "0.5.0"
-      PREDECESSOR_WHEEL_SHA256: "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f"
+      PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
+      PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
+      MIGRATION_SCENARIO: ${{ needs.candidate-source.outputs.migration_scenario }}
+      MIGRATION_SCENARIO_SHA256: ${{ needs.candidate-source.outputs.migration_scenario_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -233,6 +298,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Require the derived predecessor facts and the scenario they name
+        shell: pwsh
+        run: |
+          if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256 -or -not $env:MIGRATION_SCENARIO) {
+            throw 'predecessor facts were not derived by candidate-source'
+          }
+          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
+          if (-not (Test-Path -LiteralPath $scenario -PathType Leaf)) { throw "migration scenario is missing: $env:MIGRATION_SCENARIO" }
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $scenario).Hash.ToLowerInvariant()
+          if ($actual -ne $env:MIGRATION_SCENARIO_SHA256) { throw 'migration scenario bytes differ from the derived digest' }
       - name: Acquire and verify the already-public predecessor
         shell: pwsh
         run: |
@@ -244,19 +319,22 @@ jobs:
           if ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }
           $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()
           if ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }
-      - name: Export and build the non-promotable exact successor
+      - name: Take the exact successor wheel built by candidate-source
+        uses: actions/download-artifact@v4
+        with:
+          name: candidate-wheel-non-promotable-${{ github.sha }}
+          path: ${{ runner.temp }}/candidate-dist
+      - name: Verify the handed-over successor bytes
         shell: pwsh
         run: |
-          $candidateArchive = Join-Path '${{ runner.temp }}' 'candidate.zip'
-          $candidateExport = Join-Path '${{ runner.temp }}' 'candidate-export'
           $candidateDist = Join-Path '${{ runner.temp }}' 'candidate-dist'
-          git archive --format=zip --output=$candidateArchive $env:GITHUB_SHA
-          Expand-Archive -LiteralPath $candidateArchive -DestinationPath $candidateExport
-          New-Item -ItemType Directory -Path $candidateDist | Out-Null
-          python -m pip wheel --disable-pip-version-check --no-deps `
-            --wheel-dir $candidateDist $candidateExport
           $wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'
           if ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }
+          $expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })
+          if (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }
+          $expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()
+          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()
+          if ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }
       - name: Install isolated local runtimes
         shell: pwsh
         run: |
@@ -275,7 +353,7 @@ jobs:
         run: |
           $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
           $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
-          $scenario = Join-Path $env:GITHUB_WORKSPACE 'tests/fixtures/governance_migration/historical-0.5.0-to-0.6.0.json'
+          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
           $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
           $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
           Push-Location '${{ runner.temp }}'
@@ -294,6 +372,13 @@ jobs:
           $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'governance-migration-result.json') | ConvertFrom-Json
           $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'governance-migration-result.json') | ConvertFrom-Json
           if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'migration semantic replay digest differs' }
+          if ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'migration rehearsal did not pass' }
+      - name: Publish this platform's semantic digest as a job output
+        id: digest
+        shell: pwsh
+        run: |
+          $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'migration-result-1') 'governance-migration-result.json') | ConvertFrom-Json
+          "${{ matrix.platform }}=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
       - name: Retain the bounded migration evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -308,42 +393,6 @@ jobs:
           $status = git status --porcelain=v1 --untracked-files=all
           if ($status) { throw 'migration rehearsal changed the checkout' }
 
-  governance-migration-reconcile:
-    name: Reconcile governance migration platforms
-    needs: governance-migration
-    runs-on: ubuntu-latest
-    permissions:
-      contents: none
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: governance-migration-Linux
-          path: results/Linux
-      - uses: actions/download-artifact@v4
-        with:
-          name: governance-migration-Windows
-          path: results/Windows
-      - name: Require one cross-platform semantic result
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          results = {}
-          for platform in ("Linux", "Windows"):
-              files = list(Path("results", platform).rglob("governance-migration-result.json"))
-              if len(files) != 2:
-                  raise SystemExit(f"{platform}: expected two retained replay results, found {len(files)}")
-              values = [json.loads(path.read_bytes()) for path in files]
-              digests = {value["semantic_sha256"] for value in values}
-              if len(digests) != 1 or any(value["overall_result"] != "pass" for value in values):
-                  raise SystemExit(f"{platform}: replay result mismatch")
-              results[platform] = digests.pop()
-          if len(set(results.values())) != 1:
-            raise SystemExit(f"cross-platform semantic mismatch: {results}")
-          print(f"governance migration semantic result: {results['Linux']}")
-          PY
-
   integration-package-build:
     name: Build deterministic integration package
     if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
@@ -351,7 +400,6 @@ jobs:
       - candidate-source
       - candidate-package
       - governance-migration
-      - governance-migration-reconcile
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -359,9 +407,22 @@ jobs:
       INTEGRATION_REF: ${{ github.ref }}
       INTEGRATION_PR: ${{ github.event.pull_request.number || '' }}
       INTEGRATION_RETENTION_DAYS: ${{ github.event_name == 'pull_request' && '3' || '14' }}
+      MIGRATION_DIGEST_LINUX: ${{ needs.governance-migration.outputs.Linux }}
+      MIGRATION_DIGEST_WINDOWS: ${{ needs.governance-migration.outputs.Windows }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
+      - name: Require one cross-platform migration semantic result
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$MIGRATION_DIGEST_LINUX" || { echo "Linux migration digest is missing" >&2; exit 1; }
+          test -n "$MIGRATION_DIGEST_WINDOWS" || { echo "Windows migration digest is missing" >&2; exit 1; }
+          if [[ "$MIGRATION_DIGEST_LINUX" != "$MIGRATION_DIGEST_WINDOWS" ]]; then
+            echo "cross-platform semantic mismatch: Linux=$MIGRATION_DIGEST_LINUX Windows=$MIGRATION_DIGEST_WINDOWS" >&2
+            exit 1
+          fi
+          echo "governance migration semantic result: $MIGRATION_DIGEST_LINUX"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           "fetch-depth": 0

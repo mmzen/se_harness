@@ -314,6 +314,33 @@ def _render_draft(template: str, artifact_type: str, artifact_id: str) -> bytes:
     return rendered.encode("utf-8")
 
 
+def authoring_checklist(repository: Path, artifact_type: str) -> list[str]:
+    """Return the installed authoring policy's checklist bullets for one artifact type (AUT-POL-003)."""
+
+    root = ensure_target(repository, must_exist=True)
+    policy = _validate_existing_chain(root, Path("docs") / "engineering" / "ARTIFACT_AUTHORING.md", final_kind="file")
+    if not policy.is_file():
+        return []
+    try:
+        lines = policy.read_text(encoding="utf-8-sig").replace("\r\n", "\n").split("\n")
+    except (OSError, UnicodeError):
+        return []
+    bullets: list[str] = []
+    in_type = False
+    in_checklist = False
+    for line in lines:
+        if line.startswith("## "):
+            in_type = line[3:].strip() == artifact_type
+            in_checklist = False
+            continue
+        if line.startswith("### "):
+            in_checklist = in_type and line[4:].strip() == "Checklist"
+            continue
+        if in_checklist and line.startswith("- "):
+            bullets.append(line[2:].strip())
+    return bullets
+
+
 def create_risk(
     repository: Path,
     *,

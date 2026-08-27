@@ -330,6 +330,10 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return _preflight_status(context, "review")
     if name == "review_evidence_available":
         return _review_evidence(context)
+    if name == "authoring_ready":
+        return authoring_ready(context.artifact)
+    if name == "release_unit_ready":
+        return release_unit_ready(context.artifact, context.root, context.catalog)
     if name == "undisposed_risks_threatening_scope":
         return _undisposed_risks(context, predicate)
     raise ContractError(f"unknown predicate evaluator {name}")
@@ -721,6 +725,84 @@ def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
     ]
 
 
+_PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
+_FENCE = re.compile(r"```.*?```", re.DOTALL)
+_INLINE_CODE = re.compile(r"`[^`\n]*`")
+_DEFINITION_TYPES = {
+    "intent", "capability", "requirement", "specification", "architecture", "adr",
+    "verification", "release_contract", "operating_contract",
+}
+
+
+def authoring_ready(artifact: Any) -> tuple[str, str]:
+    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
+
+    try:
+        text = artifact.path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeError) as exc:
+        return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
+    prose = _INLINE_CODE.sub("", _FENCE.sub("", text.replace("\r\n", "\n")))
+    # the template's five shape comments live in the front matter; markdown headings stay
+    head, separator, body = prose.partition("\n+++\n") if prose.startswith("+++\n") else ("", "", prose)
+    if separator:
+        head = "\n".join(line for line in head.split("\n") if not line.lstrip().startswith("#"))
+    prose = head + separator + body
+    match = _PLACEHOLDER.search(prose)
+    if match is not None:
+        return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
+    lines = prose.split("\n")
+    for index, line in enumerate(lines):
+        if line.strip() == "## Open decisions":
+            body = next((item.strip() for item in lines[index + 1:] if item.strip() and not item.startswith("## ")), "")
+            if body not in {"None", "None."}:
+                return "fail", f"{artifact.artifact_id} has an open decision: {body[:120]}"
+            break
+    return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
+
+
+def release_unit_ready(artifact: Any, root: Path, catalog: Mapping[str, Any]) -> tuple[str, str]:
+    """CIP-RLU: a release contract that names a candidate commit declares the census the history yields.
+
+    A contract without `candidate_commit` is the retained allow-list form and passes. A contract
+    with one is re-measured with `se_harness.release_unit`; every `E-CIP-001` finding fails it.
+    An unavailable history (no git, no tag) is `not_assessable`, never a pass.
+    """
+
+    metadata = artifact.metadata
+    if artifact.artifact_type != "release_contract":
+        return "not_assessable", f"{artifact.artifact_id} is not a release contract."
+    candidate = metadata.get("candidate_commit")
+    if not isinstance(candidate, str) or not candidate:
+        return "pass", f"{artifact.artifact_id} declares no candidate_commit; the allow-list form is not re-measured."
+    previous_tag = metadata.get("previous_release_tag")
+    if not isinstance(previous_tag, str) or not previous_tag:
+        return "fail", f"E-CIP-001: {artifact.artifact_id} names candidate_commit but no previous_release_tag."
+    section = metadata.get("release_unit", {})
+    exemptions = section.get("untraced_exemptions", []) if isinstance(section, dict) else []
+    if not isinstance(exemptions, list) or not all(isinstance(item, str) for item in exemptions):
+        return "fail", f"E-CIP-001: {artifact.artifact_id} release_unit.untraced_exemptions must be an array of full commit ids."
+    from se_harness.release_unit import PACKAGED_SURFACE_PREFIXES, compare_with_contract, derive_release_unit
+
+    def lookup(work_order: str) -> tuple[str | None, bool | None]:
+        entry = catalog.get(work_order)
+        if entry is None:
+            return None, None
+        status = entry.metadata.get("status")
+        scope = entry.metadata.get("execution_scope", {})
+        paths = scope.get("paths", []) if isinstance(scope, dict) else []
+        packaged = any(isinstance(item, str) and item.startswith(PACKAGED_SURFACE_PREFIXES) for item in paths)
+        return (status if isinstance(status, str) else None), packaged
+
+    try:
+        unit = derive_release_unit(root, from_ref=previous_tag, to_ref=candidate, exempt=exemptions, lookup=lookup)
+    except HarnessError as exc:
+        return "not_assessable", f"{artifact.artifact_id}: the release unit cannot be derived here: {exc}"
+    findings = compare_with_contract(unit, metadata)
+    if findings:
+        return "fail", f"{artifact.artifact_id}: " + " ".join(findings)
+    return "pass", f"{artifact.artifact_id} gates equal the census derived over {previous_tag}..{unit.to_commit[:12]} ({len(unit.gates)} work orders)."
+
+
 def ensure_governed_checkpoint(
     repository: Path,
     artifact_ids: Iterable[str],
@@ -747,3 +829,17 @@ def ensure_governed_checkpoint(
     repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
     if repository_errors:
         raise HarnessError(f"WEX210: repository integrity prevents governed action: {repository_errors[0].message}")
+    # QG-G1/G2 authoring predicates apply when a definition leaves draft (AUT-GTE-001).
+    if isinstance(artifact_ids, Mapping):
+        for artifact_id, target in artifact_ids.items():
+            artifact = catalog[artifact_id]
+            if artifact.artifact_type in _DEFINITION_TYPES and artifact.status == "draft" and target == "approved":
+                status, message = authoring_ready(artifact)
+                if status != "pass":
+                    predicate = "QGP-G2-AUTHORING" if artifact.artifact_type in {"specification", "architecture", "adr"} else "QGP-G1-AUTHORING"
+                    raise HarnessError(f"{predicate}: {message} Complete the artifact before approval.")
+            # QG-G5 release-unit predicate applies when a release contract leaves draft (CIP-RLU, WO-CIP-005).
+            if artifact.artifact_type == "release_contract" and artifact.status == "draft" and target == "approved":
+                status, message = release_unit_ready(artifact, root, catalog)
+                if status != "pass":
+                    raise HarnessError(f"QGP-G5P-RELEASE-UNIT: {message} Re-measure the unit with harnessctl release-unit before approval.")

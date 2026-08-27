@@ -106,6 +106,13 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 installed = target / ".agents/skills" / name
                 source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name
                 self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
+                contract = json.loads((installed / "skill-contract.json").read_text(encoding="utf-8"))
+                if name in {
+                    "harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"
+                }:
+                    self.assertEqual("se-harness-skill-contract-v3", contract["schema"])
+                    self.assertEqual("2.0.0", contract["version"])
+                    self.assertFalse(contract["client"]["direct_target_writes"])
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
                 all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes + adapter_changes)
@@ -287,16 +294,17 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertRegex(workflow, r"(?m)^  candidate-source:$")
         self.assertRegex(workflow, r"(?m)^  candidate-package:$")
         self.assertRegex(workflow, r"(?m)^  governance-migration:$")
-        self.assertRegex(workflow, r"(?m)^  governance-migration-reconcile:$")
+        # WO-CIP-001 folded the reconcile-only job into a step on job outputs
+        self.assertNotIn("governance-migration-reconcile", workflow)
         self.assertEqual(3, workflow.count("actions/checkout@v4"))
         self.assertEqual(3, workflow.count("fetch-depth: 0"))
         self.assertEqual(3, workflow.count("persist-credentials: false"))
         self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
-        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: candidate-package")
-        self.assertRegex(workflow, r"(?s)governance-migration-reconcile:.*?needs: governance-migration")
+        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: \[candidate-source, candidate-package\]")
+        self.assertIn("needs.governance-migration.outputs.Linux", workflow)
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)
-        self.assertIn("python -m unittest discover", workflow)
+        self.assertIn("python scripts/run_tests.py --workers 4 --scale full", workflow)  # WO-TST-001
         self.assertIn("qualify complete-candidate", workflow)
         self.assertIn("--candidate-commit \"$GITHUB_SHA\"", workflow)
         self.assertIn("complete-candidate-qualification", workflow)
@@ -304,17 +312,22 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("--role released-evaluator", workflow)
         self.assertIn("accept-candidate", workflow)
         self.assertIn("se-harness-functional-acceptance-v1", workflow)
-        self.assertIn("candidate-package-legacy-bootstrap-0.6.0", workflow)
-        self.assertIn("2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7", workflow)
-        self.assertIn("c233678548fe742b7a7a5a8bd65de10156ff233edc65b68e2ed0333fbe4dea42", workflow)
-        self.assertIn("a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75", workflow)
+        # WO-CIP-003: the predecessor facts are derived, not restated; the values
+        # the lock and the legacy contract table yield are asserted in
+        # tests/test_ci_pipeline.py.
+        self.assertIn("candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
+        self.assertIn("repository_tools.predecessor_facts derive", workflow)
+        self.assertNotIn("2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7", workflow)
         self.assertIn('assert "independence" not in value', workflow)
         self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
         self.assertIn("rehearse-migration", workflow)
         self.assertIn("windows-latest", workflow)
         self.assertIn("ubuntu-latest", workflow)
-        self.assertIn("974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f", workflow)
+        self.assertIn("PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
+        self.assertIn("$scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO", workflow)
+        self.assertNotIn("974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f", workflow)
+        self.assertNotIn("historical-0.5.0-to-0.6.0.json", workflow)
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("Review preflight", workflow)
         self.assertNotIn("Validate candidate artifact graph", workflow)
@@ -494,6 +507,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "ENGINEERING_HARNESS.md",
                 "docs/engineering/QUALITY_GATES.md",
                 ".agents/skills/harness-orient/SKILL.md",
+                ".agents/skills/harness-execute-work-order/skill-contract.json",
             )
             for relative in managed:
                 path = target / relative

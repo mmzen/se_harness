@@ -76,4 +76,14 @@ The disposing role for a risk follows its declared `[risk].stage`: `definition` 
 
 **DR-014:** Releasing an RLS MUST change only that RLS. It MUST NOT change an included VREC or WO.
 
+## Governed delegated execution
+
+**DR-015:** Phase 4 advance delegation MAY activate only the cataloged
+work-order start, work-order completion, and VREC-preparation rights for the
+exact recorded logical delegate, operation, work order, state, scope, evidence,
+profile, expiry, and stop boundary. It MUST NOT activate verification, release,
+delivery, Git, credential, network, child-delegation, parallel-writer, or
+external authority. Each delegated operation MUST resolve and admit current
+authority independently.
+
 Workflow order is defined by [WORKFLOW.md](WORKFLOW.md). Gate predicates are defined by [QUALITY_GATES.md](QUALITY_GATES.md). Artifact relations are defined by [TRACEABILITY.md](TRACEABILITY.md).

@@ -18,6 +18,7 @@ from se_harness.workflow_compliance import (
     path_is_admitted,
 )
 from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.fixture_support import standard_repository
 
 
 class WorkflowComplianceTests(unittest.TestCase):
@@ -25,8 +26,7 @@ class WorkflowComplianceTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Compliance Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root, "Compliance Fixture")
         create_base_chain(self.root, work_order_status="in_progress", operating_contract_status="draft")
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         text = work_order.read_text(encoding="utf-8")

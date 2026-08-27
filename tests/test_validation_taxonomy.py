@@ -90,12 +90,27 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        # The released root policy predates the risk predicate; the candidate adds exactly
-        # one evaluator row, one predicate per gated stage, and rule QG-011 (WO-RSK-001).
+        # The released root policy predates the authoring, release-unit and risk
+        # predicates; the candidate adds exactly three evaluator rows, one predicate on
+        # each gated stage, and rule QG-011 (WO-AUT-002, WO-CIP-005, WO-RSK-001).
         expected_candidate_quality = quality.replace(
             "| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |\n",
             "| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |\n"
+            "| `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |\n"
+            "| `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |\n"
             "| `undisposed_risks_threatening_scope` | No `raised` risk threatens the selected artifact or its governing chain; at `QG-G5-RELEASE-PREPARATION` and `QG-G5-RELEASE-DECISION` no `mitigating` risk does either. An empty register passes. |\n",
+            1,
+        ).replace(
+            "| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY` |\n",
+            "| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |\n",
+            1,
+        ).replace(
+            "| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY` |\n",
+            "| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |\n",
+            1,
+        ).replace(
+            "| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY` |\n",
+            "| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |\n",
             1,
         )
         for gate_id, predicate in (
@@ -120,6 +135,8 @@ class ValidationTaxonomyTests(unittest.TestCase):
             "**QG-011:** Every `*-RISK` predicate evaluates `undisposed_risks_threatening_scope`. A `raised` risk that threatens the selected scope fails its gate at every checkpoint; a `mitigating` risk fails only the release gates. The corrective form is an escalation to `DR-RISK-DISPOSE`.\n",
             1,
         )
+        self.assertNotIn("authoring_ready", quality)
+        self.assertNotIn("release_unit_ready", quality)
         self.assertNotIn("undisposed_risks_threatening_scope", quality)
         self.assertEqual(expected_candidate_quality, canonical_quality)
         self.assertIn("BCP 14", canonical_quality)

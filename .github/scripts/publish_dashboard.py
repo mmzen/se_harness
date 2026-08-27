@@ -17,6 +17,11 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
+from repository_tools.json_bytes import parse_json_object, pretty_json_bytes, read_json_object  # noqa: E402
 
 EXPECTED_REPOSITORY = "mmzen/se_harness"
 BUNDLE_SCHEMA = "harness-dashboard-bundle-v2"
@@ -117,29 +122,11 @@ def _canonical_utf8_text_lf(raw: bytes, *, label: str) -> bytes:
 
 
 def _json_bytes(value: Any) -> bytes:
-    return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
-
-
-def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise PublicationError(f"JSON object contains duplicate key: {key}")
-        value[key] = item
-    return value
+    return pretty_json_bytes(value)
 
 
 def _loads_json_bytes(payload: bytes, *, label: str) -> dict[str, Any]:
-    try:
-        value = json.loads(
-            payload.decode("utf-8"),
-            object_pairs_hook=_reject_duplicate_keys,
-        )
-    except (UnicodeError, json.JSONDecodeError) as exc:
-        raise PublicationError(f"invalid UTF-8/JSON document: {label}") from exc
-    if not isinstance(value, dict):
-        raise PublicationError(f"JSON document must be an object: {label}")
-    return value
+    return parse_json_object(payload, error=PublicationError, label=label, max_bytes=None)
 
 
 def _valid_evaluator_origin(value: Any) -> bool:
@@ -150,10 +137,7 @@ def _valid_evaluator_origin(value: Any) -> bool:
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    try:
-        return _loads_json_bytes(path.read_bytes(), label=str(path))
-    except OSError as exc:
-        raise PublicationError(f"invalid JSON file: {path}") from exc
+    return read_json_object(path, error=PublicationError, max_bytes=None)
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -1237,11 +1221,10 @@ def _validated_bootstrap(generated_html: str, manifest_bytes: bytes, revision: s
     if len(matches) != 1:
         raise PublicationError("generated dashboard has no unique bootstrap descriptor")
     try:
-        bootstrap = json.loads(
-            matches[0].group("payload"),
-            object_pairs_hook=_reject_duplicate_keys,
+        bootstrap = parse_json_object(
+            matches[0].group("payload").encode("utf-8"), error=PublicationError, label="generated dashboard bootstrap", max_bytes=None
         )
-    except json.JSONDecodeError as exc:
+    except PublicationError as exc:
         raise PublicationError("generated dashboard bootstrap is invalid JSON") from exc
     expected = {
         "path": "dashboard-manifest.json",

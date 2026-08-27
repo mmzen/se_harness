@@ -13,6 +13,7 @@ from se_harness.cli import main
 from se_harness.installer import plan_install, template_files, template_root
 from se_harness.preflight import render_preflight, run_preflight
 from tests.mutation_guard_support import trusted_mutation_authority
+from tests.fixture_support import standard_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -56,8 +57,7 @@ class RepositoryContextRetirementTests(unittest.TestCase):
 
     def installed_target(self, name: str) -> Path:
         target = self.root / name
-        code, _, error = self.invoke("init", str(target), "--project-name", "Example")
-        self.assertEqual(0, code, error)
+        standard_repository(target, "Example")
         return target
 
     def lock_bytes(self, target: Path) -> bytes:

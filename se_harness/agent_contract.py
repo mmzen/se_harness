@@ -286,11 +286,30 @@ def parse_json_bytes(raw: bytes) -> Any:
     return _parse_json_bytes(raw, document_limit=MAX_DOCUMENT_BYTES, array_limit=MAX_ARRAY_ENTRIES)
 
 
-def canonical_json_bytes(value: Any) -> bytes:
-    """Return ``se-harness-canonical-json-v1`` bytes for a JSON value."""
+def canonical_json_bytes(
+    value: Any, *, maximum_bytes: int | None = None
+) -> bytes:
+    """Return ``se-harness-canonical-json-v1`` bytes for a JSON value.
+
+    Ordinary documents retain the one-MiB default.  Evaluator-owned formats
+    with a separately governed bound may request a larger explicit limit up
+    to the existing manifest ceiling.
+    """
 
     is_worktree = isinstance(value, dict) and value.get("schema") == WORKTREE_STATE_SCHEMA
     _bounded_walk(value, array_limit=WORKTREE_MAX_ENTRIES if is_worktree else MAX_ARRAY_ENTRIES)
+    default_limit = MANIFEST_MAX_BYTES if is_worktree else MAX_DOCUMENT_BYTES
+    if maximum_bytes is None:
+        limit = default_limit
+    elif (
+        isinstance(maximum_bytes, bool)
+        or not isinstance(maximum_bytes, int)
+        or maximum_bytes < 1
+        or maximum_bytes > MANIFEST_MAX_BYTES
+    ):
+        _error("AEXCON006", "$", "canonical document byte limit is invalid")
+    else:
+        limit = maximum_bytes
     try:
         encoded = (
             json.dumps(
@@ -302,18 +321,23 @@ def canonical_json_bytes(value: Any) -> bytes:
             ).encode("utf-8")
             + b"\n"
         )
-        limit = MANIFEST_MAX_BYTES if is_worktree else MAX_DOCUMENT_BYTES
         if len(encoded) > limit:
             _error("AEXCON002", "$", f"canonical document exceeds {limit} bytes")
         return encoded
+    except AgentContractError:
+        raise
     except (UnicodeEncodeError, TypeError, ValueError):
         _error("AEXCON006", "$", "value cannot be canonically encoded as UTF-8 JSON")
 
 
-def canonical_sha256(value: Any) -> str:
+def canonical_sha256(
+    value: Any, *, maximum_bytes: int | None = None
+) -> str:
     """Return the lowercase SHA-256 identity of canonical JSON bytes."""
 
-    return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+    return hashlib.sha256(
+        canonical_json_bytes(value, maximum_bytes=maximum_bytes)
+    ).hexdigest()
 
 
 def _document(value: Mapping[str, Any]) -> ContractDocument:
@@ -531,6 +555,27 @@ def _path_within(child: str, parent: str) -> bool:
     if parent.endswith("/"):
         return child.startswith(parent)
     return child == parent
+
+
+def validate_portable_path(value: object, *, prefix_allowed: bool = False) -> str:
+    """Validate one public portable path without exposing parser internals."""
+
+    return _path(value, "$", prefix_allowed=prefix_allowed)
+
+
+def portable_path_within(child: str, parent: str) -> bool:
+    """Return whether an already validated path is inside an exact scope."""
+
+    return _path_within(
+        validate_portable_path(child),
+        validate_portable_path(parent, prefix_allowed=True),
+    )
+
+
+def validate_sha256(value: object) -> str:
+    """Validate and return one lowercase SHA-256 identity."""
+
+    return _sha256(value, "$")
 
 
 def _path_scope(value: Any, path: str, *, minimum: int = 0) -> list[str]:
@@ -2209,11 +2254,28 @@ def project_decision_packet(
 
     source = _object(
         workflow_result,
-        {"schema", "operation", "selection", "scope", "compliance", "procedure", "state", "findings", "mutation", "restitution"},
+        {
+            "schema",
+            "operation",
+            "selection",
+            "scope",
+            "compliance",
+            "procedure",
+            "state",
+            "findings",
+            "mutation",
+            "restitution",
+            "result_sha256",
+        },
         "$.workflow_result",
     )
     if source["schema"] != WORKFLOW_RESULT_SCHEMA:
         _error("AEXCON004", "$.workflow_result.schema", "decision source must be workflow-result v2")
+    result_sha256 = _sha256(source["result_sha256"], "$.workflow_result.result_sha256")
+    from se_harness.workflow_result import restitution_digest
+
+    if restitution_digest(source) != result_sha256:
+        _error("AEXCON014", "$.workflow_result.result_sha256", "decision source digest does not match restitution")
     context = validate_contract(packet_context, expected_schema=PACKET_CONTEXT_SCHEMA).value
     selection = _object(source["selection"], {"primary", "artifacts"}, "$.workflow_result.selection")
     primary = _artifact_id(selection["primary"], "$.workflow_result.selection.primary")
@@ -2510,6 +2572,9 @@ __all__ = [
     "parse_json_bytes",
     "project_decision_packet",
     "render_decision_packet",
+    "portable_path_within",
+    "validate_portable_path",
+    "validate_sha256",
     "validate_contract",
     "validate_execution_receipt",
     "validate_logical_execution_profile",

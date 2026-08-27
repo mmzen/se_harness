@@ -78,6 +78,7 @@ MUST NOT restate its rules.
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
 | Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
+| Authoring rules for formal artifacts | `docs/engineering/ARTIFACT_AUTHORING.md` |
 | Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy

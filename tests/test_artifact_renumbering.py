@@ -15,6 +15,7 @@ import se_harness.renumber as renumber
 from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.cli import main
 from se_harness.renumber import RenumberError, normalize_mappings
+from tests.fixture_support import standard_repository
 
 
 class ArtifactRenumberingTests(unittest.TestCase):
@@ -29,7 +30,7 @@ class ArtifactRenumberingTests(unittest.TestCase):
         self.addCleanup(self.guard.stop)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "Renumber Sample")[0])
+        standard_repository(self.root, "Renumber Sample")
         self._write_fixture()
         self._git("init")
         self._git("config", "user.email", "renumber@example.invalid")

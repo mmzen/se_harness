@@ -418,9 +418,13 @@ class IntegrationPackageContractTests(unittest.TestCase):
             "candidate-source",
             "candidate-package",
             "governance-migration",
-            "governance-migration-reconcile",
         ):
             self.assertIn(f"      - {prerequisite}\n", lane)
+        # WO-CIP-001: the cross-platform migration reconciliation is the lane's
+        # first step, not a job of its own.
+        self.assertNotIn("governance-migration-reconcile", workflow)
+        self.assertIn("needs.governance-migration.outputs.Linux", lane)
+        self.assertIn("needs.governance-migration.outputs.Windows", lane)
         actions = {
             "actions/checkout": "11bd71901bbe5b1630ceea73d27597364c9af683",
             "actions/setup-python": "a26af69be951a213d495a4c3e4e4022e16d87065",

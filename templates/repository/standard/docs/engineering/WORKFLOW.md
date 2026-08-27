@@ -49,6 +49,32 @@ Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1
 
 Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber apply, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
+## Delegated Phase 4 operations
+
+`WORKFLOW.json` schema v4 defines the complete delegated operation catalog.
+Absence from this table denies an operation; a prior receipt creates no
+standing authority. Every row requires current formal delegation, the exact
+released evaluator, a fresh stable observation, a unique admitted nonce, the
+named passing gates, one logical `implementation-worker`, the `implementer`
+profile, and no recovery-required state.
+
+| Operation | Decision right | Current WO state | Result |
+| --- | --- | --- | --- |
+| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` plus a start receipt |
+| `change-bundle-apply` | Started-work execution; no additional right | `in_progress` | Brokered target effect plus an effect receipt |
+| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented` plus a completion receipt |
+| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC plus an assurance decision packet |
+
+Delegated completion MUST prove an uninterrupted start/effect state chain,
+exact admitted and final changed paths, successful required tests and gates,
+retained evidence digests, explicit deviations, explicit residual uncertainty,
+and no active effect journal. Missing or not-assessable proof MUST NOT be
+treated as pass. Verification preparation MUST stop before Git when a required
+candidate commit is absent. `PROC-CANDIDATE-COMMIT` binds that stop to
+`STEP-CANDIDATE-COMMIT-AUTHORIZE`; its response requests the exact repository-
+owner action and performs no staging, commit, branch, push, merge, assurance,
+release, credential, network, or external effect.
+
 ## State model
 
 The `lifecycles` object in `WORKFLOW.json` is the single machine-readable state
@@ -173,6 +199,7 @@ outcomes, and response values.
 | `PROC-RISK-DISPOSE` | `STEP-RISK-DISPOSE` decision `DR-RISK-DISPOSE` with outcomes `accepted`, `avoided`, `mitigating`, `withdrawn`. |
 | `PROC-RISK-MITIGATED` | `STEP-RISK-MITIGATED` decision `DR-RISK-DISPOSE` with outcome `mitigated`, gated by `QG-G4-VERIFIED-COVERAGE` over the named mitigation work. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
+| `PROC-CANDIDATE-COMMIT` | `STEP-CANDIDATE-COMMIT-AUTHORIZE` decision `DR-EXTERNAL-ACTION`; request exact candidate-commit authority and perform no Git action. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl focus . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
