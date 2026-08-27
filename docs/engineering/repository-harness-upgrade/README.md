@@ -34,6 +34,8 @@ their bounded post-adoption qualification.
 
 `WO-HUP-006` is `rejected` (2026-08-27). The transaction ran on the branch of pull request #196 and was abandoned there: 0.7.0's managed workflow installs its evaluator from the index and then requires a PEP 610 archive digest (`RID022`), so the managed lane cannot pass, and the owner directed that the wheel-digest (`MG004`) and work-order-packet (`MG007`) requirements on `harnessctl upgrade --apply` be removed rather than worked around. The root stays at exact public 0.6.0 until a release carries the simplified upgrade.
 
+- `REQ-HUP-014`, `REQ-HUP-015`, `SPEC-HUP-007`, `ARCH-HUP-005` (no significant decision) and `VER-HUP-007` are drafted for the adoption of exact public 0.7.1 the simple way, deriving from `CAP-HUP-002`; `WO-HUP-007` is the successor to the rejected `WO-HUP-006` and is drafted (2026-08-27).
+
 ## Successor of 0.6.0 (draft)
 
 - `REQ-HUP-010`: prove the exact released successor carrying `WO-ADS-001`, `WO-ADS-002`, and `WO-RSK-001`.

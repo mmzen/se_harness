@@ -5,10 +5,10 @@ title = "Recipe-bound release build and replay contract"
 status = "approved"
 owners = ["engineering-owner", "release-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
-updated = "2026-08-24"
+updated = "2026-08-27"
 
 [relations]
-specifies = ["REQ-RLO-013", "REQ-RLO-014"]
+specifies = ["REQ-RLO-013", "REQ-RLO-014", "REQ-RLO-017"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -86,6 +86,7 @@ Historical schema-1 released records stay in a separate legacy replay state. A n
 18. A replay passes only when build A equals build B byte-for-byte and both SHA-256 pairs equal the already bound RLS hashes. The interpreter never offers an update-expected mode during replay.
 19. Workflow YAML may orchestrate checkout, artifact transport, and result upload, but must not restate producer, toolchain, environment, build, or normalization commands for schema-2 records.
 20. Every error identifies the failed identity class and retains observed hashes when safe. Error handling must not leak environment contents, credentials, absolute host paths, or unbounded subprocess output.
+21. Candidate export is host-independent. The interpreter exports the exact candidate with Git line-ending conversion disabled for that invocation, so the exported bytes equal the committed blob bytes in any clone. The source tree each producer instance builds from carries one declared mode set — `0o775` for directories and `0o664` for files — established from inside the producer boundary, because a non-POSIX host cannot retain a POSIX mode. No host platform, Git configuration, or filesystem fact reaches an accepted output.
 
 ## Error and recovery behavior
 
@@ -101,6 +102,7 @@ Historical schema-1 released records stay in a separate legacy replay state. A n
 | Ready schema-1 record | fail forward-policy validation and require recipe-bound rebinding |
 | Historical released schema-1 record | select labeled legacy publication replay without rewriting history |
 | Exact schema-2 replay | retain pass evidence and make no formal or external change |
+| Declared source mode set cannot be established inside the producer | fail before the first recipe command; no accepted output and no RLS write |
 
 ## Data and interface contracts
 
@@ -152,3 +154,13 @@ Valid legacy replay: the already released schema-1 `RLS-SEH-012` uses the isolat
 The implementation agent may choose internal Python class and function names, temporary directory names, stable diagnostic codes, and test-fixture factoring. The initial exact OCI digest, CPython 3.11 patch, and locked package versions must preserve the currently qualified build contract and be explicit in the reviewed recipe; they are data under this specification, not a new architecture decision.
 
 The agent may not change the recipe location, schemas, producer type, platform, complete-toolchain rule, environment closure, argument-array rule, two-build rule, new-record cutover, one-RLS hosted input, credential boundary, historical compatibility, or #111 scope boundary.
+
+## Amendment record
+
+**`REQ-RLO-017` coverage, rule 21, and one error row, accepted 2026-08-27 under `WO-RLO-008`.** As approved, this specification bound the producer platform, runtime, toolchain, environment, commands, normalization, and outputs, and said nothing about the bytes and modes of the source those commands build from. Rule 11 requires two independent exports and forbids shared state between them; it does not require either export to be independent of the host performing it.
+
+`RC-070-01` (GitHub issue [#189](https://github.com/mmzen/se_harness/issues/189)) measured the consequence during the 0.7.0 release. The build of record was produced on a Windows workstation: `git archive` under `core.autocrlf=true` converted the exported text files, and the bind mount presented every entry to the producer as mode `0777`. Both builds were exported from the same host, so they agreed with each other and rule 18's internal comparison passed. 83 of 111 wheel entries carried CRLF and 69 were recorded executable. `RLS-SEH-014` was bound to those bytes and had to be rejected after hosted replay `33015517991` disagreed with them.
+
+The amendment adds obligation and relaxes no pass condition. No rule is removed, renumbered, or reordered; no acceptance becomes a refusal or the reverse; no waiver is introduced; and the recipe field set, schemas, producer, toolchain, environment, command, and normalization contracts are untouched. The declared mode set is the set a POSIX export already produces, so no accepted byte of an existing record changes and the recipe digest every bound record names does not move.
+
+This amendment was accepted at approval rather than during implementation, because `QG-G1-DEFINITION` requires the coverage to exist before `WO-RLO-008` is eligible. The accountable repository owner accepted it together with the companion `ARCH-RLO-004` and `VER-RLO-004` amendments, approved `REQ-RLO-017` and `WO-RLO-008`, and resolved that requirement's open decision by declining to retain a non-POSIX refusal, on 2026-08-27 over the framing recorded in `WO-RLO-008`.

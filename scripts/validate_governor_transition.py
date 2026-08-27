@@ -242,7 +242,14 @@ def _root_identity(root: Path, revision: str, label: str) -> dict[str, Any]:
     }
 
 
-def _evaluator(value: Any, label: str) -> dict[str, str]:
+def _evaluator(value: Any, label: str) -> dict[str, str | None]:
+    """Validate an evaluator identity; the archive pair is either both strings or both null.
+
+    A root adopted by the simple upgrade from an index install records no archive
+    identity (REQ-REB-028, SPEC-REB-012 rule 1); version and installed-payload
+    digest are the identity.
+    """
+
     if not isinstance(value, dict) or set(value) != {
         "archive_name",
         "archive_sha256",
@@ -252,34 +259,25 @@ def _evaluator(value: Any, label: str) -> dict[str, str]:
     }:
         raise GovernorTransitionError(f"{label} field set is invalid")
     result = {key: value.get(key) for key in value}
+    archive_recorded = result["archive_name"] is not None or result["archive_sha256"] is not None
     if (
         not isinstance(result["version"], str)
         or VERSION.fullmatch(result["version"]) is None
-        or not isinstance(result["archive_name"], str)
-        or WHEEL_NAME.fullmatch(result["archive_name"]) is None
-        or not isinstance(result["archive_sha256"], str)
-        or SHA256.fullmatch(result["archive_sha256"]) is None
+        or (
+            archive_recorded
+            and (
+                not isinstance(result["archive_name"], str)
+                or WHEEL_NAME.fullmatch(result["archive_name"]) is None
+                or not isinstance(result["archive_sha256"], str)
+                or SHA256.fullmatch(result["archive_sha256"]) is None
+            )
+        )
         or result["payload_manifest"] != PAYLOAD_MANIFEST
         or not isinstance(result["payload_sha256"], str)
         or SHA256.fullmatch(result["payload_sha256"]) is None
     ):
         raise GovernorTransitionError(f"{label} values are invalid")
-    return {key: str(item) for key, item in result.items()}
-
-
-def _candidate_work_orders(root: Path, head: str) -> list[tuple[str, dict[str, Any]]]:
-    paths = _git(root, "ls-tree", "-r", "--name-only", head, "--", "docs/engineering").decode(
-        "utf-8"
-    )
-    result: list[tuple[str, dict[str, Any]]] = []
-    for relative in sorted(paths.splitlines()):
-        path = PurePosixPath(relative)
-        if path.suffix != ".md" or path.parent.name != "work-orders" or not path.name.startswith("WO-"):
-            continue
-        metadata = _metadata(_blob(root, head, relative, relative), relative)
-        if "evaluator_upgrade" in metadata:
-            result.append((relative, metadata))
-    return result
+    return {key: (None if item is None else str(item)) for key, item in result.items()}
 
 
 def _released_distribution(
@@ -320,7 +318,7 @@ def _released_distribution(
             or not isinstance(record_id, str)
             or RELEASE_ID.fullmatch(record_id) is None
             or not isinstance(distribution, dict)
-            or distribution.get("schema") != 1
+            or distribution.get("schema") not in {1, 2}
             or distribution.get("kind") != "python-wheel-sdist"
             or not isinstance(distribution.get("wheel"), str)
             or WHEEL_NAME.fullmatch(distribution["wheel"]) is None
@@ -345,97 +343,100 @@ def _released_distribution(
     return matches[0]
 
 
-def _select_upgrade(
+def _evidence_documents(root: Path, head: str) -> list[tuple[str, bytes]]:
+    paths = _git(root, "ls-tree", "-r", "--name-only", head, "--", "docs/engineering").decode(
+        "utf-8"
+    )
+    result: list[tuple[str, bytes]] = []
+    for relative in sorted(paths.splitlines()):
+        path = PurePosixPath(relative)
+        if path.suffix != ".json" or path.parent.name != "evidence":
+            continue
+        raw = _blob(root, head, relative, relative)
+        try:
+            value = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, ValueError):
+            continue
+        if isinstance(value, dict) and value.get("schema") == EVIDENCE_SCHEMA:
+            result.append((relative, raw))
+    return result
+
+
+def _select_transition(
     root: Path,
     head: str,
     base: Mapping[str, Any],
     target: Mapping[str, Any],
     trusted_release: Mapping[str, str],
-) -> tuple[str, dict[str, Any], dict[str, str]]:
+) -> tuple[dict[str, Any], dict[str, str]]:
+    """Select the one retained upgrade transaction that took the base root to the target root.
+
+    The simple upgrade (SPEC-REB-012) binds no work order: the installed released
+    evaluator's version and payload digest are its identity, and the transaction
+    document it retains is the evidence. The target's archive pair must equal
+    the trusted release's when recorded; an index install records none, and the
+    trusted release then supplies the wheel the assessment installs.
+    """
+
     target_evaluator = _evaluator(target.get("evaluator"), "target lock evaluator")
-    if (
-        target_evaluator["version"] != trusted_release.get("version")
-        or target_evaluator["archive_name"] != trusted_release.get("archive_name")
-        or target_evaluator["archive_sha256"] != trusted_release.get("archive_sha256")
-    ):
-        raise GovernorTransitionError(
-            "target evaluator archive differs from the trusted base release record"
-        )
-    matches: list[tuple[str, dict[str, Any], dict[str, str]]] = []
-    for path, metadata in _candidate_work_orders(root, head):
-        declaration = metadata.get("evaluator_upgrade")
-        if not isinstance(declaration, dict):
-            continue
-        expected = {
-            "archive_name": declaration.get("target_archive_name"),
-            "archive_sha256": declaration.get("target_archive_sha256"),
-            "payload_manifest": PAYLOAD_MANIFEST,
-            "payload_sha256": declaration.get("target_payload_sha256"),
-            "version": declaration.get("target_version"),
-        }
+    if target_evaluator["version"] != trusted_release.get("version"):
+        raise GovernorTransitionError("target evaluator version differs from the trusted base release record")
+    if target_evaluator["archive_name"] is None:
+        archive_source = "trusted-release"
+        effective = dict(target_evaluator)
+        effective["archive_name"] = trusted_release["archive_name"]
+        effective["archive_sha256"] = trusted_release["archive_sha256"]
+    else:
+        archive_source = "lock"
+        effective = dict(target_evaluator)
         if (
-            metadata.get("status") == "implemented"
-            and declaration.get("prior_lock_sha256")
-            in set(base.get("lock_materialization_sha256", {}).values())
-            and declaration.get("scope") == "standard-root-only"
-            and declaration.get("publication") == "immutable"
-            and declaration.get("authorized_by") == "repository-owner"
-            and expected == target_evaluator
+            target_evaluator["archive_name"] != trusted_release.get("archive_name")
+            or target_evaluator["archive_sha256"] != trusted_release.get("archive_sha256")
         ):
-            matches.append((path, metadata, target_evaluator))
+            raise GovernorTransitionError(
+                "target evaluator archive differs from the trusted base release record"
+            )
+    base_locks = set(base.get("lock_materialization_sha256", {}).values())
+    matches: list[tuple[str, bytes, dict[str, Any]]] = []
+    for relative, raw in _evidence_documents(root, head):
+        value = _json(raw, "upgrade transaction evidence")
+        if raw != _canonical_json(value):
+            raise GovernorTransitionError("upgrade transaction evidence is not canonical JSON")
+        prior = value.get("prior")
+        transaction = value.get("transaction")
+        postconditions = value.get("postconditions")
+        work_order = value.get("work_order")
+        if (
+            value.get("scope") != "standard-root-only"
+            or not isinstance(prior, dict)
+            or prior.get("lock_sha256") not in base_locks
+            or prior.get("tool_version") != base.get("version")
+            or value.get("target") != target_evaluator
+            or not isinstance(transaction, dict)
+            or transaction.get("outcome") != "applied"
+            or transaction.get("atomic") is not True
+            or not isinstance(postconditions, dict)
+            or postconditions.get("lock_matches_target") is not True
+            or postconditions.get("no_op_replay") is not True
+            or postconditions.get("external_action_performed") is not False
+            or postconditions.get("product_release_performed") is not False
+            or (work_order is not None and (not isinstance(work_order, str) or ARTIFACT_ID.fullmatch(work_order) is None))
+        ):
+            continue
+        matches.append((relative, raw, value))
     if len(matches) != 1:
         raise GovernorTransitionError(
-            "target must contain exactly one implemented upgrade work order matching base and target identities"
+            "target must contain exactly one retained evaluator-upgrade evidence document matching base and target identities"
         )
-    return matches[0]
-
-
-def _validate_evidence(
-    root: Path,
-    head: str,
-    work_order_path: str,
-    metadata: Mapping[str, Any],
-    base: Mapping[str, Any],
-    target_evaluator: Mapping[str, str],
-) -> tuple[str, str]:
-    work_order = metadata.get("id")
-    if not isinstance(work_order, str) or ARTIFACT_ID.fullmatch(work_order) is None:
-        raise GovernorTransitionError("upgrade work-order ID is invalid")
-    work_path = PurePosixPath(work_order_path)
-    relative = str(work_path.parent.parent / "evidence" / f"{work_order}-evaluator-upgrade.json")
-    raw = _blob(root, head, relative, "upgrade transaction evidence")
-    value = _json(raw, "upgrade transaction evidence")
-    if raw != _canonical_json(value):
-        raise GovernorTransitionError("upgrade transaction evidence is not canonical JSON")
-    prior = value.get("prior")
-    declaration = metadata.get("evaluator_upgrade")
-    target = value.get("target")
-    transaction = value.get("transaction")
-    postconditions = value.get("postconditions")
-    if (
-        value.get("schema") != EVIDENCE_SCHEMA
-        or value.get("work_order") != work_order
-        or value.get("authorization_path") != work_order_path
-        or value.get("authorized_by") != "repository-owner"
-        or value.get("scope") != "standard-root-only"
-        or not isinstance(declaration, dict)
-        or not isinstance(prior, dict)
-        or prior.get("lock_sha256") != declaration.get("prior_lock_sha256")
-        or prior.get("lock_sha256")
-        not in set(base.get("lock_materialization_sha256", {}).values())
-        or prior.get("tool_version") != base.get("version")
-        or target != target_evaluator
-        or not isinstance(transaction, dict)
-        or transaction.get("outcome") != "applied"
-        or transaction.get("atomic") is not True
-        or not isinstance(postconditions, dict)
-        or postconditions.get("lock_matches_target") is not True
-        or postconditions.get("no_op_replay") is not True
-        or postconditions.get("external_action_performed") is not False
-        or postconditions.get("product_release_performed") is not False
-    ):
-        raise GovernorTransitionError("upgrade transaction evidence differs from the approved transition")
-    return relative, _sha256(raw)
+    relative, raw, value = matches[0]
+    transition = {
+        "evidence_path": relative,
+        "evidence_sha256": _sha256(raw),
+        "work_order": value.get("work_order"),
+        "archive_source": archive_source,
+        "trusted_release": dict(trusted_release),
+    }
+    return transition, {key: str(item) for key, item in effective.items()}
 
 
 def build_plan(
@@ -460,22 +461,10 @@ def build_plan(
             or base["canonical_lock_sha256"] != target["canonical_lock_sha256"]
         ):
             raise GovernorTransitionError("same-version candidate changed the standard governor lock")
-        work_order: dict[str, Any] | None = None
+        upgrade: dict[str, Any] | None = None
     else:
         trusted_release = _released_distribution(root, base_commit, str(target["version"]))
-        work_path, metadata, target_evaluator = _select_upgrade(
-            root, head, base, target, trusted_release
-        )
-        evidence_path, evidence_sha256 = _validate_evidence(
-            root, head, work_path, metadata, base, target_evaluator
-        )
-        work_order = {
-            "id": metadata["id"],
-            "path": work_path,
-            "evidence_path": evidence_path,
-            "evidence_sha256": evidence_sha256,
-            "trusted_release": trusted_release,
-        }
+        upgrade, target_evaluator = _select_transition(root, head, base, target, trusted_release)
         target["evaluator"] = target_evaluator
     return {
         "schema": SCHEMA,
@@ -487,7 +476,7 @@ def build_plan(
         "base_source": base_source,
         "base": base,
         "target": target,
-        "work_order": work_order,
+        "transition": upgrade,
         "diagnostics": [],
     }
 
