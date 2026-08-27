@@ -1,0 +1,49 @@
++++
+id = "REQ-REB-027"
+type = "requirement"
+title = "Apply an evaluator upgrade from any installed released evaluator without a separate packet"
+status = "draft"
+owners = ["repository-owner", "engineering-owner", "security-owner"]
+created = "2026-08-27"
+updated = "2026-08-27"
+statement = "WHEN a released evaluator installed outside the checkout runs harnessctl upgrade --apply on a standard root that names an older version, THE SYSTEM SHALL apply the reviewed managed plan and record the installed evaluator's version and payload digest as the root identity without requiring a work-order packet."
+verification_method = "automated-test"
+priority = "must"
+source = "Owner direction of 2026-08-27 on WO-HUP-006; supersedes REQ-REB-005"
+measure = "one command, one atomic transaction, zero required declarations beyond the installed evaluator"
+
+[relations]
+derives_from = ["CAP-REB-001"]
++++
+
+# Requirement: Apply an evaluator upgrade from any installed released evaluator without a separate packet
+
+## Rationale
+
+The 0.7.0 adoption showed the cost of the packet model `REQ-REB-005`
+introduced: an evaluator-upgrade work order carrying prior-lock and
+target-digest declarations, a wheel-file install so that a PEP 610 archive
+digest exists, and mutation-guard refusals (`MG004`, `MG007`) whenever either
+is missing. The repository owner directed on 2026-08-27 that the install
+process be simple: install the released evaluator, run the upgrade, review
+the plan, apply. Which repository change is authorized remains a matter of
+repository policy (a work order for the changed files), not a gate the tool
+enforces on the transaction.
+
+## Required response
+
+- Accept the installed evaluator as the target identity: its version and its
+  installed-payload digest, plus the archive digest when the installation
+  recorded one.
+- Plan as today; on `--apply`, write the reviewed managed files and the
+  schema-3 lock atomically, whether or not the version changes.
+- Retain canonical evaluator-transition evidence when `--evidence-output`
+  is given; otherwise retain none and say so.
+- Keep the customization and conflict refusals of the ordinary upgrade.
+
+## Failure behavior
+
+A customized or conflicting managed file, an unreadable lock, an evaluator
+that cannot prove its own identity, or a partial write stops the transaction
+and leaves the pre-write state. The absence of a work-order packet or of an
+archive digest is not a failure.
