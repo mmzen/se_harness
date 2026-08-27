@@ -2,7 +2,7 @@
 id = "VREC-HUP-006"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-007"
-status = "ready"
+status = "verified"
 owners = ["Mathieu Meadele"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-006-evaluator.json"
 evaluator_evidence_sha256 = "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
 
+verified_at = "2026-08-27T18:31:03Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-007"]
 conforms_to = ["VER-HUP-007"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-27T18:31:03Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Record Candidate
