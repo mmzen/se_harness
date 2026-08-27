@@ -2,7 +2,7 @@
 id = "VREC-REB-023"
 type = "verification_record"
 title = "Verification candidate for WO-REB-026"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-
 evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-023-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-27T04:59:22Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-REB-026"]
 conforms_to = ["VER-REB-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-27T04:59:22Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-27 under DR-VREC-DECIDE, 'I verify VREC-REB-023'. The record binds 92bf81f83791f4069785b6411137b11c5c37b7bb, at which WO-REB-026 reads implemented, to VER-REB-006 and the keyed evidence. Readings: released 0.6.0 validate PASS at 960 artifacts, 0 errors; doctor 0 FAIL; handoff Completed at snapshot 1d5a033c; the extracted exclusion branch executed against a worktree of governance commit 088b08b materializes the view and the unchanged generation step reads PASS; workflow suites OK; full suite 995 OK; all four pull-request lanes success on head 72f4ad9. Verified with one accepted deviation, no new fixture test. This authorizes no merge, dispatch or deployment; those follow the owner's run-through decision separately."
 +++
 
 # Verification Record Candidate
