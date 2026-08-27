@@ -39,7 +39,7 @@ from se_harness.workflow_contract import load_lifecycle_registry
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests/fixtures/governance_migration"
 HISTORICAL = FIXTURES / "historical-0.5.0-to-0.6.0.json"
-CANDIDATE = FIXTURES / "candidate-0.6.0-to-0.7.0.json"
+CANDIDATE = FIXTURES / "candidate-0.6.0-to-0.7.1.json"
 SYNTHETIC = FIXTURES / "synthetic-n-minus-1-to-n.json"
 SCENARIOS = (HISTORICAL, CANDIDATE, SYNTHETIC)
 WORKFLOW = ROOT / ".github/workflows/candidate-evidence.yml"

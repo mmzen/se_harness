@@ -174,7 +174,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                 self.assertIsNone(re.search(r"[0-9a-f]{64}", text.replace("actions/", "")), "a digest literal remains")
                 # version literals: the pinned build tools are not evaluator facts
                 versions = {m.group(0) for m in re.finditer(r"\b\d+\.\d+\.\d+(?:\.post\d+)?\b", text)}
-                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0"}}, versions)
+                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1"}}, versions)
 
     def test_workflow_derives_once_and_consumers_take_the_outputs(self) -> None:
         text = (WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8")
@@ -201,7 +201,7 @@ class PredecessorDerivationTests(unittest.TestCase):
             root = Path(scratch)
             self._copy_repository_declarations(root)
             pyproject = root / "pyproject.toml"
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.0"', 'version = "0.8.0"', 1), encoding="utf-8")
+            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.1"', 'version = "0.8.0"', 1), encoding="utf-8")
             with self.assertRaises(PredecessorFactsError) as caught:
                 derive(root)
             self.assertIn("PRE009", str(caught.exception))
@@ -242,7 +242,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                 contract.load_migration_scenario(scenario, contract.load_migration_contract())
 
     def test_writer_reproduces_the_committed_scenario_and_writes_the_next_pair(self) -> None:
-        from repository_tools.predecessor_facts import derive, write_scenario
+        from repository_tools.predecessor_facts import canonical_json, derive, sha256_bytes, write_scenario
         from se_harness.governance_migration_contract import load_migration_contract, load_migration_scenario
 
         facts = derive(REPOSITORY_ROOT)
@@ -257,9 +257,18 @@ class PredecessorDerivationTests(unittest.TestCase):
             scenario, _ = load_migration_scenario(destination, load_migration_contract())
             self.assertEqual({"predecessor": "0.6.0", "successor": "0.8.0"}, scenario["versions"])
             self.assertEqual("0.8.0", scenario["fixture"]["replacement_proposal"]["version"])
+            # WO-RLS-013: the writer recomputes the simulated publication identity
+            # the adopt stage checks (MIG413), never copying the template's digest.
+            expected_publication = sha256_bytes(canonical_json({
+                "artifact_id": scenario["fixture"]["replacement_proposal"]["artifact_id"],
+                "immutable": True,
+                "version": "0.8.0",
+            }))
+            self.assertEqual(expected_publication, scenario["fixture"]["simulated_publication_sha256"])
+            self.assertNotEqual(json.loads(committed.read_bytes())["fixture"]["simulated_publication_sha256"], expected_publication)
             self.assertEqual(facts.wheel_sha256, scenario["runtime_expectations"]["predecessor"]["archive_sha256"])
             pyproject = root / "pyproject.toml"
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.0"', 'version = "0.8.0"', 1), encoding="utf-8")
+            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.1"', 'version = "0.8.0"', 1), encoding="utf-8")
             self.assertEqual("tests/fixtures/governance_migration/candidate-0.6.0-to-0.8.0.json", derive(root).scenario)
 
 
