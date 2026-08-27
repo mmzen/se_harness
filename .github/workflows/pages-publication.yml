@@ -164,27 +164,27 @@ jobs:
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
 
       # SPEC-REB-013 rule 5: the generation snapshot is the complete governance
-      # snapshot, unconditionally. The path is retained so the generator invocation
-      # below is unchanged; nothing is omitted from it for any release record.
+      # snapshot, unconditionally. Nothing is omitted from it for any release
+      # record, and the path is named for what it holds.
       - name: Materialize the complete governance snapshot for generation
         shell: bash
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
-          mkdir "$RUNNER_TEMP/predecessor-view"
+          mkdir "$RUNNER_TEMP/generation-snapshot"
           governance_commit="$(git -C "$RUNNER_TEMP/governance" rev-parse HEAD)"
           git -C "$GITHUB_WORKSPACE" worktree add --detach \
-            "$RUNNER_TEMP/predecessor-view/governance" "$governance_commit"
-          test "$(git -C "$RUNNER_TEMP/predecessor-view/governance" rev-parse HEAD)" = "$governance_commit"
-          test -z "$(git -C "$RUNNER_TEMP/predecessor-view/governance" status --porcelain=v1 --untracked-files=all)"
+            "$RUNNER_TEMP/generation-snapshot/governance" "$governance_commit"
+          test "$(git -C "$RUNNER_TEMP/generation-snapshot/governance" rev-parse HEAD)" = "$governance_commit"
+          test -z "$(git -C "$RUNNER_TEMP/generation-snapshot/governance" status --porcelain=v1 --untracked-files=all)"
           echo "generation snapshot is the complete governance snapshot at $governance_commit"
 
       - name: Generate the target-local canonical Explorer
         shell: bash
         run: |
           set -euo pipefail
-          python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py" \
-            --root "$RUNNER_TEMP/predecessor-view/governance" \
+          python "$RUNNER_TEMP/generation-snapshot/governance/scripts/generate_harness_dashboard.py" \
+            --root "$RUNNER_TEMP/generation-snapshot/governance" \
             --output "$RUNNER_TEMP/generated-dashboard"
           test -z "$(git -C "$RUNNER_TEMP/governance" status --porcelain=v1 --untracked-files=all)"
 

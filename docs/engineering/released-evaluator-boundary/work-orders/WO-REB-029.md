@@ -2,7 +2,7 @@
 id = "WO-REB-029"
 type = "work_order"
 title = "Retire the predecessor-bootstrap rules from the consumer-installed validator"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -33,6 +33,13 @@ to = "approved"
 decided_at = "2026-08-27T20:11:19Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-08-27 by the accountable owner, 'i approve the 3 draft artifacts', on the owner review of pull request #206. Authorizes only the scope stated: deleting the predecessor-bootstrap and predecessor-view rules from the candidate copy of the managed validator under templates/repository/standard/scripts/, amending ARCH-REB-009 and ADR-REB-009 to four typed operations, retiring REQ-REB-008 and REQ-REB-010 by dated amendment, renaming the retired temporary directory in the Pages lane, extending tests/test_predecessor_bootstrap_retirement.py, and the notes, packet index and evidence document. No byte of scripts/validate_engineering_artifacts.py, the root copy, and no byte of se_harness/hash_bound_classes.json. No change to REQ-REB-011, to the six closed 0.6.0 artifacts, or to any retained evidence under docs/engineering/release-0-6-0/. No superseded status on any retired definition, no promotable distribution, and no hash-bound digest changed. SPEC-REB-013 and SPEC-REB-014 both govern: SPEC-REB-013 keeps its force and is not amended, reopened or re-scoped, and SPEC-REB-014 adds only the managed-validator rules it excludes. Approval is not a start decision, not a verification decision and not a release decision; each is a separate accountable act."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-27T20:16:24Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-27 by the accountable owner, 'after approval is made, you can start the work', immediately after the approval of WO-REB-029, SPEC-REB-014 and VER-REB-013 on the owner review of pull request #206. Execution is confined to the approved scope and to the execution_scope paths. The approval envelope stands unchanged: no byte of scripts/validate_engineering_artifacts.py, no byte of se_harness/hash_bound_classes.json, no change to REQ-REB-011 or to the six closed 0.6.0 artifacts, no superseded status, no promotable distribution, no hash-bound digest changed. Completion, commit-bound verification and any release decision remain separate accountable acts."
 +++
 
 # Work Order: Retire the predecessor-bootstrap rules from the consumer-installed validator

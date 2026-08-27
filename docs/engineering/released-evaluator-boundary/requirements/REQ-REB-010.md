@@ -5,7 +5,7 @@ title = "Retain rejected predecessor-bootstrap history without active authority"
 status = "approved"
 owners = ["requirements-steward", "repository-owner", "security-owner", "release-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 statement = "WHEN a predecessor-bootstrap release record and its exact release contract are explicitly rejected, THE SYSTEM SHALL continue validating their immutable historical tuple and evidence without treating the rejected contract as active bootstrap authority or permitting its reuse."
 verification_method = "automated-lifecycle-provenance-and-negative-authority-test"
 
@@ -20,6 +20,14 @@ decided_by = "requirements-steward"
 +++
 
 # Requirement: Retain rejected predecessor-bootstrap history without active authority
+
+## Retirement amendment of 2026-08-27
+
+Retired on 2026-08-27 by `REQ-REB-029` under `WO-REB-029`, on the repository owner's direction, which decided this requirement is superseded. The rejected predecessor-bootstrap tuple is no longer validated. The consumer-installed validator no longer resolves a bootstrap contract for a rejected release record, no longer requires exactly one exact rejected contract behind it, and no longer compares the retained tuple against the current root; the rejected `REL-SEH-008` and `RLS-SEH-009` pair therefore stays on disk as inert data instead of as a checked historical tuple. What this requirement protected against is unaffected: no rejected contract can grant bootstrap authority, because no contract grants bootstrap authority at all, and nothing can reuse a tuple that no rule reads. Everything below is retained unchanged as history and is no longer an obligation.
+
+`REQ-REB-011` is not retired and is not narrowed. Its rule stands in full: a rejected record remains valid but inert and does not claim a version against a second ready or released successor. Only the condition that narrowed one of its checks to records marked `se-harness-predecessor-bootstrap-v1` is removed, because that schema name no longer has a reader, and `VER-REB-013` requires a negative case proving the general rule still holds. The retained evidence bindings of `RLS-SEH-009` and `RLS-SEH-012` still verify from the files they bind.
+
+The declared `superseded` status is not applied. `docs/engineering/WORKFLOW.json` admits no `approved` to `superseded` transition for a definition, and this artifact carries its own `draft` to `approved` event, which `WFL-005` requires to stay append-only. Setting the status therefore either contradicts that event (`E014`, measured on 2026-08-27) or deletes it. The retirement is recorded here instead, the instrument `WO-REB-028` already used for `REQ-REB-012`, `REQ-REB-015`, `SPEC-REB-003`, `SPEC-REB-005` and `SPEC-REB-007`. Whether the status is applied through a new transition or the definition family gains one is a separate owner decision; the retirement itself does not wait on it.
 
 ## Rationale
 

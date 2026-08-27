@@ -604,7 +604,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("uses: ./.github/workflows/pages-publication.yml", pages)
         self.assertIn("uses: ./.github/workflows/pages-publication.yml", self.pages)
         self.assertNotIn("pages_build", self.workflow)
-        self.assertEqual(1, self.pages_definition.count('mkdir "$RUNNER_TEMP/predecessor-view"'))
+        self.assertEqual(1, self.pages_definition.count('mkdir "$RUNNER_TEMP/generation-snapshot"'))
 
     def test_repository_policy_is_explicit_and_imported_only_from_trusted_main(self) -> None:
         self.assertIn("Check out trusted main history", self.workflow)
@@ -631,16 +631,19 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
             "--evaluator-python",
             '--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"',
             "pages-predecessor-view",
+            # WO-REB-029: the generation snapshot no longer borrows the retired name for
+            # its temporary directory, so no lane mentions the retired name at all.
+            "predecessor-view",
         ):
             with self.subTest(absent=absent):
                 self.assertEqual(0, combined.count(absent))
         # SPEC-REB-013 rule 5: the generation snapshot is the complete governance snapshot,
-        # materialized unconditionally at the path the generator invocation already names.
+        # materialized unconditionally at the path the generator invocation names.
         step = self.pages_definition.split(
             "      - name: Materialize the complete governance snapshot for generation", 1
         )[1].split("      - name: ", 1)[0]
         self.assertIn('git -C "$GITHUB_WORKSPACE" worktree add --detach', step)
-        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', step)
+        self.assertIn('mkdir "$RUNNER_TEMP/generation-snapshot"', step)
         for absent in ("RELEASE_RECORD", "if [", "sparse", "--omit"):
             with self.subTest(absent=absent):
                 self.assertNotIn(absent, step)
@@ -654,7 +657,7 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("public-install-qualification.json", observe)
         self.assertNotIn('harnessctl" validate', observe)
         self.assertIn(
-            'python "$RUNNER_TEMP/predecessor-view/governance/scripts/generate_harness_dashboard.py"',
+            'python "$RUNNER_TEMP/generation-snapshot/governance/scripts/generate_harness_dashboard.py"',
             self.pages_definition,
         )
         self.assertNotIn(
