@@ -134,7 +134,7 @@ patch; the version literals were replaced by lock-derived values.
 | `python scripts/run_tests.py --workers 8 --scale full` | candidate, Windows 11, CPython 3.14 | OK, 987 tests, 24 skipped (Windows-only guards), 0 failures (re-run after the assessor rework; 984 before it) |
 | `py -3.11 scripts/run_tests.py --workers 4 --scale full` | candidate, Windows 11, CPython 3.11 | OK, 987 tests, 24 skipped (Windows-only guards), 0 failures (re-run after the assessor rework; 984 before it) |
 | `harnessctl check . --artifact WO-HUP-007 --checkpoint handoff --changed-path … --changes-complete --json` | released 0.7.1 and candidate | Completed on both over the 68 paths (the 0.7.1 root governs the check now; the candidate run with python -s); before this file existed the only non-pass predicate was QGP-G4I-EVIDENCE; formal snapshot above |
-| Hosted | the pull request's lanes | HOSTED-ROW |
+| Hosted | pull request #203 at e8e01c2 | all thirteen lanes pass: Publication Rehearsal 33102721734 success; Engineering Harness 33102720565 success; Governor Transition Assessment 33102720702 success; SE Harness Candidate Evidence 33102720903 success; at 9ef784d (before scope amendment 2) the governor transition assessment failed at plan on the retired packet model, the other twelve passed |
 
 ## Deviations from the work order, recorded for the completion decision
 

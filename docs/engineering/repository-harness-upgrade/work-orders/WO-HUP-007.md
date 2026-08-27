@@ -2,7 +2,7 @@
 id = "WO-HUP-007"
 type = "work_order"
 title = "Adopt exact public 0.7.1 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-27T17:43:33Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-27, 'Approve and start'. Start preflight PASS at phase start over the approval commit carrying unmoved main 23d5781, run with the governing exact public 0.6.0 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.7.1 in C:\\Users\\mathi\\se-harness-eval-071, installed from the index. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T18:25:52Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-27 under DR-WO-COMPLETE, 'Mark WO-HUP-007 implemented', on the handoff gate reading Completed over candidate commit e8e01c2, formal snapshot 73c03e91357b0c9290ffdc25c1b1e75da2d2bf1fa45a668d318214af604fe49a, change set asserted complete over 68 paths after two scope amendments (the scenario writer's released-record lookup for a null archive pair; the governor transition assessment reworked to the simple model). The root moved from exact public 0.6.0 to exact public 0.7.1 by one upgrade --apply from an index install outside the checkout, no packet; replay 61 files unchanged. Readings under the 0.7.1 root, isolated mode: validate PASS at 986 artifacts, 0 errors, 466 maintenance warnings; doctor 0 FAIL; released-root passed with a null archive pair; review preflight PASS; dashboard deterministic. Candidate: complete-graph suites Windows CPython 3.14 and 3.11 both 987 tests OK with 24 platform-guard skips; migration rehearsal 0.7.1 to 0.8.0 pass. All thirteen pull-request lanes success on head e8e01c2 including the governor transition assessment (run 33102720702). Three deviations accepted by the owner and recorded in the evidence. This authorizes no further act."
 +++
 
 # Work Order: Adopt exact public 0.7.1 as the standard root, the simple way
