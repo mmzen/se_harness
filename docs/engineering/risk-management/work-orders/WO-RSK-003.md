@@ -2,7 +2,7 @@
 id = "WO-RSK-003"
 type = "work_order"
 title = "Amend the risk-artifact skill definitions to the delegated execution model"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-08-27T16:57:13Z"
 decided_by = "engineering-owner"
 reason = "Explicit start of the authorized amendment of REQ-RSK-007, SPEC-RSK-002 and VER-RSK-002 only, on the engineering owner's instruction \"Start\", after a PASS start preflight from the released 0.6.0 evaluator. Authorizes editing the six paths in the execution scope and nothing else. Authorizes no release, tag, publication, deployment, maintenance mutation, credential use, external-policy change, root-evaluator adoption, or verification-record decision, and it does not authorize superseding or re-pointing VREC-RSK-002, which is verified and has no outgoing lifecycle edge."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T17:10:05Z"
+decided_by = "engineering-owner"
+reason = "The engineering owner decided completion under DR-WO-COMPLETE with the instruction \"Mark WO-RSK-003 implemented\" on 2026-08-27, after the handoff check returned Completed over the complete six-path changed set with formal snapshot dcfb6df5abddd46f0e09f983000899d0b8541b3627e9de08a0b9d76b27e025e2 and no scoped or repository blockers. The authorized amendments to REQ-RSK-007, SPEC-RSK-002 and VER-RSK-002 are committed as 2f749fc, each edited in place with an appended Amendment record section and no frontmatter change, and the retained evidence is docs/engineering/risk-management/evidence/WO-RSK-003-delegated-skill-amendments.md. Measured on this Windows host at that commit: suite 1009 tests OK with 24 skipped, matching the e7fd885 baseline; released 0.6.0 validate PASS at 986 artifacts, 0 errors, 53 warnings; released 0.6.0 doctor 0 FAIL; template validator 484 warnings, the baseline figure; release-distribution validation PASS. No hosted lane has run on this branch, so every figure is this host's. This decision closes the implementation only. It authorizes no push, release, tag, publication or deployment, and it decides no verification record: VREC-RSK-002 stays verified and untouched, and the commit-bound verification this work order requires is a later, separate governance act."
 +++
 
 # Work Order: Amend the risk-artifact skill definitions to the delegated execution model
