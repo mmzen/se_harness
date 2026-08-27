@@ -6,7 +6,9 @@ import gzip
 import hashlib
 import io
 import json
+import os
 import shutil
+import stat
 import subprocess
 import sys
 import tarfile
@@ -718,6 +720,213 @@ class ReplayBuildTests(unittest.TestCase):
                 with self.assertRaisesRegex(BUILD.BuildRecipeError, "outside the repository"):
                     BUILD.replay_build(root, commit, "1.2.3", root / "bundle")
             docker.assert_not_called()
+
+
+class HostIndependentCandidateSourceTests(unittest.TestCase):
+    """REQ-RLO-017: committed bytes and one declared mode set reach every producer."""
+
+    TEXT = "first\nsecond\nthird\n"
+    BINARY = b"\x00\x01\r\n\x02\xff"
+
+    def candidate(self, root: Path, attributes: str | None = None) -> str:
+        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        for key, value in (
+            ("user.name", "Harness Test"),
+            ("user.email", "harness@example.invalid"),
+            ("core.autocrlf", "false"),
+            ("core.eol", "lf"),
+        ):
+            subprocess.run(["git", "-C", str(root), "config", key, value], check=True)
+        (root / "package").mkdir()
+        for name in ("module.py", "notes.md", "package/inner.py"):
+            (root / name).write_bytes(self.TEXT.encode("utf-8"))
+        (root / "payload.bin").write_bytes(self.BINARY)
+        if attributes is not None:
+            (root / ".gitattributes").write_bytes(attributes.encode("utf-8"))
+        subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
+        return subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+
+    def committed(self, root: Path, commit: str) -> dict[str, bytes]:
+        """Read the committed blobs independently of the export being judged.
+
+        `git cat-file blob` applies no checkout conversion, so this answer is the same
+        in every clone configuration and comes from the tree rather than from the code
+        under test.
+        """
+
+        listed = subprocess.run(
+            ["git", "-C", str(root), "ls-tree", "-r", "-z", "--name-only", commit],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        return {
+            name: subprocess.run(
+                ["git", "-C", str(root), "cat-file", "blob", f"{commit}:{name}"],
+                check=True,
+                capture_output=True,
+            ).stdout
+            for name in listed.split("\0")
+            if name
+        }
+
+    def exported(self, root: Path, commit: str, destination: Path) -> dict[str, bytes]:
+        BUILD._safe_extract_candidate(root, commit, destination)
+        return {
+            item.relative_to(destination).as_posix(): item.read_bytes()
+            for item in sorted(destination.rglob("*"))
+            if item.is_file()
+        }
+
+    def producer(self, root: Path, events: list[str]) -> None:
+        """Run `_producer` against fake commands, recording the order of its actions."""
+
+        source = root / "source"
+        (source / "scripts").mkdir(parents=True)
+        (source / "scripts" / "normalize_sdist.py").write_bytes(b"# fixture\n")
+        (source / "module.py").write_bytes(b"# fixture\n")
+        recipe = json.loads(RECIPE_PATH.read_bytes())
+        recipe["environment"]["fixed"]["HOME"] = (root / "home").as_posix()
+        (root / "recipe.json").write_bytes(BUILD.canonical_json_bytes(recipe))
+        shutil.copyfile(LOCK_PATH, root / "lock.txt")
+        established = BUILD._establish_declared_source_modes
+
+        def execute(
+            arguments: list[str],
+            *,
+            timeout: int,
+            environment: dict[str, str],
+            cwd: Path,
+        ) -> object:
+            events.append("command")
+            if arguments[1:3] == ["-m", "build"]:
+                raw = Path(arguments[arguments.index("--outdir") + 1])
+                (raw / "se_harness-1.2.3-py3-none-any.whl").write_bytes(b"wheel")
+                (raw / "se_harness-1.2.3.tar.gz").write_bytes(b"raw-sdist")
+            elif arguments[1:3] != ["-m", "pip"]:
+                Path(arguments[3]).write_bytes(b"normalized-sdist")
+            return subprocess.CompletedProcess(arguments, 0, "", "")
+
+        def modes(target: Path) -> None:
+            events.append("modes")
+            established(target)
+
+        with (
+            mock.patch.object(BUILD, "_bounded_run", side_effect=execute),
+            mock.patch.object(BUILD, "_establish_declared_source_modes", side_effect=modes),
+            mock.patch.object(BUILD, "_installed_inventory") as inventory,
+            mock.patch.object(BUILD.platform, "system", return_value="Linux"),
+            mock.patch.object(BUILD.platform, "machine", return_value="x86_64"),
+            mock.patch.object(BUILD.platform, "python_implementation", return_value="CPython"),
+            mock.patch.object(BUILD.platform, "python_version", return_value="3.11.9"),
+            mock.patch.object(BUILD.struct, "calcsize", return_value=8),
+        ):
+            inventory.return_value = BUILD.validate_recipe_bytes(
+                RECIPE_PATH.read_bytes(),
+                path="release/build-recipe.json",
+                lock=LOCK_PATH.read_bytes(),
+            ).inventory
+            BUILD._producer(
+                root / "recipe.json",
+                root / "lock.txt",
+                source,
+                root / "final",
+                "1.2.3",
+                FIXED_EPOCH,
+                root / "producer.json",
+            )
+
+    def test_exported_bytes_equal_committed_blobs_in_every_clone_configuration(self) -> None:
+        for configuration in ("false", "true", "input"):
+            with self.subTest(autocrlf=configuration), tempfile.TemporaryDirectory() as temporary:
+                container = Path(temporary)
+                root = container / "repository"
+                root.mkdir()
+                commit = self.candidate(root)
+                committed = self.committed(root, commit)
+                subprocess.run(
+                    ["git", "-C", str(root), "config", "core.autocrlf", configuration], check=True
+                )
+                exported = self.exported(root, commit, container / "source")
+                self.assertEqual(committed, exported)
+                self.assertEqual(self.TEXT.encode("utf-8"), exported["module.py"])
+                self.assertEqual(self.BINARY, exported["payload.bin"])
+
+    def test_export_ignores_core_eol_and_leaves_a_pinned_text_attribute_untouched(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            container = Path(temporary)
+            root = container / "repository"
+            root.mkdir()
+            commit = self.candidate(root, attributes="* text=auto\nnotes.md text eol=lf\n")
+            committed = self.committed(root, commit)
+            subprocess.run(["git", "-C", str(root), "config", "core.eol", "crlf"], check=True)
+            exported = self.exported(root, commit, container / "source")
+            self.assertEqual(committed, exported)
+            for name in ("module.py", "notes.md"):
+                self.assertNotIn(b"\r\n", exported[name])
+            self.assertEqual(self.BINARY, exported["payload.bin"])
+
+    @unittest.skipIf(os.name == "nt", "a Windows filesystem retains no POSIX mode to read back")
+    def test_declared_mode_set_replaces_wrong_incoming_modes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "source"
+            (source / "package").mkdir(parents=True)
+            (source / "module.py").write_bytes(b"# fixture\n")
+            (source / "package" / "inner.py").write_bytes(b"# fixture\n")
+            for target, mode in (
+                (source, 0o777),
+                (source / "package", 0o700),
+                (source / "module.py", 0o777),
+                (source / "package" / "inner.py", 0o600),
+            ):
+                os.chmod(target, mode)
+            BUILD._establish_declared_source_modes(source)
+            for target in (source, source / "package"):
+                self.assertEqual(0o775, stat.S_IMODE(target.stat().st_mode))
+            for target in (source / "module.py", source / "package" / "inner.py"):
+                self.assertEqual(0o664, stat.S_IMODE(target.stat().st_mode))
+
+    @unittest.skipIf(os.name == "nt", "a Windows filesystem retains no POSIX mode to read back")
+    def test_declared_mode_set_is_what_a_posix_export_already_carries(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            container = Path(temporary)
+            root = container / "repository"
+            root.mkdir()
+            commit = self.candidate(root)
+            source = container / "source"
+            BUILD._safe_extract_candidate(root, commit, source)
+            before = {
+                item: stat.S_IMODE(item.stat().st_mode) for item in sorted(source.rglob("*"))
+            }
+            self.assertEqual(
+                {0o775 if item.is_dir() else 0o664 for item in before}, set(before.values())
+            )
+            BUILD._establish_declared_source_modes(source)
+            self.assertEqual(
+                before, {item: stat.S_IMODE(item.stat().st_mode) for item in sorted(source.rglob("*"))}
+            )
+
+    def test_producer_establishes_the_declared_mode_set_before_the_first_recipe_command(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            events: list[str] = []
+            self.producer(Path(temporary), events)
+            self.assertEqual(1, events.count("modes"))
+            self.assertEqual("modes", events[0])
+            self.assertIn("command", events)
+
+    def test_producer_fails_before_the_first_recipe_command_when_the_mode_set_cannot_be_set(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            events: list[str] = []
+            with mock.patch.object(BUILD.os, "chmod", side_effect=OSError("read-only file system")):
+                with self.assertRaisesRegex(BUILD.BuildRecipeError, "declared source mode set"):
+                    self.producer(Path(temporary), events)
+            self.assertEqual(["modes"], events)
 
 
 class ReplayWorkflowTests(unittest.TestCase):
