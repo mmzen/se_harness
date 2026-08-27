@@ -428,8 +428,10 @@ def qualify_released_root(root: Path) -> QualificationResult:
     version = evaluator_lock.get("version")
     payload = evaluator_lock.get("payload_sha256")
     archive = evaluator_lock.get("archive_sha256")
-    if not isinstance(version, str) or not isinstance(payload, str) or not isinstance(archive, str):
+    if not isinstance(version, str) or not isinstance(payload, str):
         raise HarnessError("target root evaluator identity is incomplete")
+    if archive is not None and not isinstance(archive, str):
+        raise HarnessError("target root evaluator archive identity is invalid")
     entry_point = _installed_entry_point()
     identity = inspect_runtime_identity(
         role="released-evaluator",

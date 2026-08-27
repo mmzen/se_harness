@@ -2,10 +2,10 @@
 id = "REQ-REB-005"
 type = "requirement"
 title = "Separate evaluator upgrades from product releases"
-status = "approved"
+status = "superseded"
 owners = ["requirements-steward", "repository-owner", "release-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 statement = "WHEN a repository selects a newer released evaluator, THE SYSTEM SHALL require a separately governed standard-root upgrade after immutable publication and SHALL NOT infer that upgrade authority from product implementation or release authorization."
 verification_method = "policy-validation-and-human-review"
 
@@ -14,6 +14,22 @@ derives_from = ["CAP-REB-001"]
 +++
 
 # Requirement: Separate evaluator upgrades from product releases
+
+## Supersession
+
+Superseded on 2026-08-27 by `REQ-REB-027` and `REQ-REB-028` under
+`WO-REB-027`, on the repository owner's direction. The separately governed
+evaluator-upgrade work-order packet (`[evaluator_upgrade]`, `MG007`) and the
+wheel-file requirement on the target evaluator (`MG004` on a missing PEP 610
+archive digest) are withdrawn: an installed released evaluator upgrades a
+standard root with `harnessctl upgrade . --apply`, proving itself by version
+and installed-payload digest, and which repository change is authorized is
+repository policy rather than a tool gate. The rationale, required response
+and boundary behavior below record what the shipped product did while this
+requirement was active and are retained unchanged as history; they are no
+longer obligations. The separation this requirement was written for still
+holds in fact: a root adopts a version only after that version is publicly
+released, because only a released evaluator can run the transaction.
 
 ## Rationale
 
