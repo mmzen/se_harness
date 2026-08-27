@@ -6,10 +6,12 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 (RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.
 
 This document defines the procedure bound to the executable workflow contract.
-[`WORKFLOW.json`](WORKFLOW.json) defines the permitted transitions, ordered
-next-action rules, typed procedures, effects, non-effects, gate IDs, and
-decision-right IDs. The installed `WORKFLOW.json` MUST be byte-identical to the
-contract loaded by `harnessctl`. Command steps in that contract use argument
+[`WORKFLOW.json`](WORKFLOW.json) defines each artifact family's admitted states,
+permitted transitions, authority effect, release-version reservation,
+transitionability, visibility, and predecessor-adapter need. It also defines
+ordered next-action rules, typed procedures, effects, non-effects, gate IDs,
+and decision-right IDs. The installed `WORKFLOW.json` MUST be byte-identical to
+the contract loaded by `harnessctl`. Command steps in that contract use argument
 arrays. The array, not a displayed shell string, is authoritative.
 
 ## Workflow authority
@@ -40,7 +42,40 @@ Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1
 
 Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber apply, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
+## Delegated Phase 4 operations
+
+`WORKFLOW.json` schema v4 defines the complete delegated operation catalog.
+Absence from this table denies an operation; a prior receipt creates no
+standing authority. Every row requires current formal delegation, the exact
+released evaluator, a fresh stable observation, a unique admitted nonce, the
+named passing gates, one logical `implementation-worker`, the `implementer`
+profile, and no recovery-required state.
+
+| Operation | Decision right | Current WO state | Result |
+| --- | --- | --- | --- |
+| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` plus a start receipt |
+| `change-bundle-apply` | Started-work execution; no additional right | `in_progress` | Brokered target effect plus an effect receipt |
+| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented` plus a completion receipt |
+| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC plus an assurance decision packet |
+
+Delegated completion MUST prove an uninterrupted start/effect state chain,
+exact admitted and final changed paths, successful required tests and gates,
+retained evidence digests, explicit deviations, explicit residual uncertainty,
+and no active effect journal. Missing or not-assessable proof MUST NOT be
+treated as pass. Verification preparation MUST stop before Git when a required
+candidate commit is absent. `PROC-CANDIDATE-COMMIT` binds that stop to
+`STEP-CANDIDATE-COMMIT-AUTHORIZE`; its response requests the exact repository-
+owner action and performs no staging, commit, branch, push, merge, assurance,
+release, credential, network, or external effect.
+
 ## State model
+
+The `lifecycles` object in `WORKFLOW.json` is the single machine-readable state
+registry. Transition planning and graph validation MUST derive their state
+vocabularies and transition edges from it. Authority-sensitive checks MUST read
+`grants_authority`; release-version uniqueness MUST read `reserves_version`.
+Consumers MUST fail closed on an invalid registry and MUST NOT substitute a
+fallback status set.
 
 The permitted transitions are:
 
@@ -55,6 +90,19 @@ The permitted transitions are:
 | Work order | `verified` | `released` |
 | Verification record | `ready` | `verified`, `rejected`, `superseded` |
 | Release record | `ready` | `released`, `rejected` |
+
+Rows without a listed outgoing transition are terminal. All lifecycle rows are
+historically visible. Rejected VREC and RLS rows grant no authority, reserve no
+version, and declare that an explicit predecessor adapter is required when an
+older evaluator cannot understand them. This marker reports a compatibility
+fact; it does not hide history, create a view, or upgrade the predecessor.
+
+Terminal compatibility vocabulary also includes definition `ready`,
+`in_progress`, `verified`, `released`, and `superseded`, and work-order `ready`
+and `superseded`. These rows preserve readable history and existing validation
+fixtures; they do not add a transition. Definition `in_progress`, `verified`,
+and `released` preserve their historical authority effect. The other four rows
+grant no authority. None reserves a release version.
 
 The JSON contract is authoritative if this summary and the contract differ.
 Conformance tests MUST fail on such a difference.
@@ -137,6 +185,7 @@ outcomes, and response values.
 | `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
 | `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff`; `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
+| `PROC-CANDIDATE-COMMIT` | `STEP-CANDIDATE-COMMIT-AUTHORIZE` decision `DR-EXTERNAL-ACTION`; request exact candidate-commit authority and perform no Git action. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl focus . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
@@ -151,6 +200,13 @@ outcomes, and response values.
 | `PROC-REMEDIATE` | `STEP-REMEDIATE-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
 | `PROC-DEFINITION-COMPLETE` | `STEP-DEFINITION-COMPLETE` decision `DR-DEFINITION-DECIDE`. |
 | `PROC-DEFINITION-WORK` | `STEP-DEFINITION-WORK` decision `DR-WO-SELECT`. |
+
+A command step that names gates also declares one `corrective` form per
+predicate of those gates: a command argument array that differs from the
+evaluated command, an escalation naming a decision right, or a response. When
+`harnessctl check` is blocked, it renders the corrective form of the first
+failing predicate under `Next` and `Command or response`. A contract whose
+corrective form repeats the evaluated command fails to load with `WEX-ADS-001`.
 
 ## Transition procedure
 
@@ -173,34 +229,54 @@ For an accountable lifecycle decision:
 Use one transition packet when several definitions are mutually dependent and
 each transition is explicitly named. A packet MUST NOT infer an omitted target.
 
-## Lifecycle restitution procedure
+## Lifecycle handoff procedure
 
-After a completed stage or a stop condition, the agent MUST return the human
-block emitted by `harnessctl check` or another command using
-`--result-schema 2`. The headings MUST occur in this order:
+After a completed stage or a stop condition, the agent MUST obtain the selected
+workflow result from `harnessctl check` or another command using
+`--result-schema 2`. The structured result is authoritative for the outcome,
+selected scope, effects, non-effects, blockers, final lifecycle state,
+accountable decision, declared alternatives, and next procedure step. The
+agent MUST NOT recompute or replace those values.
 
-1. `Outcome`
-2. `Done`
-3. `Not done`
-4. `Blocked by` only for a blocked outcome
-5. `Current lifecycle state`
-6. `Decision required`
-7. `Next`
-8. `Command or response`
-9. `Alternatives` only when the selected rule names complete alternative procedures
+For an adaptive human handoff, the agent SHOULD lead with the outcome or the
+decision the user needs to make. It MAY adapt wording, order, and headings; add
+relevant explanation; merge fields whose separate meanings remain clear; and
+omit empty fields. It MUST:
 
-The agent MUST return this block verbatim, without a preface, conclusion,
-repository-wide finding, open-ended question, or second next action. `Done`
-contains observed effects only and MUST use actual artifact IDs. `Not done`
-contains incomplete expected effects only. The `Next` value names exactly one current typed procedure step.
+1. use actual artifact IDs and state whether the selected operation completed
+   or blocked;
+2. distinguish observed effects from incomplete expected effects;
+3. preserve every exact blocker and every material non-effect whose omission
+   could imply approval, transition, verification, release, Git, publication,
+   deployment, operation, or another external effect;
+4. state the final lifecycle state and identify the accountable role and exact
+   decision when one is required;
+5. recommend exactly one current typed procedure step;
+6. preserve command argument values and boundaries or the operative meaning of
+   a suggested response; and
+7. present only workflow-declared complete alternatives, separately from the
+   primary recommendation.
+
+The agent MUST NOT invent an effect, authority, blocker, decision, alternative,
+or next action; add a repository-wide finding to the selected result; ask an
+open-ended question instead of presenting the selected recommendation; or turn
+an alternative into a second next action.
+
+When exact headings, field order, whitespace, or bytes are required, the
+application or automation MUST invoke the deterministic schema-2 human renderer
+directly and use its output unchanged. Model transcription MUST NOT be used for
+exact rendering. The direct renderer's existing headings and empty-value rules
+remain its contract; they do not constrain an adaptive agent handoff.
 
 ## Failure procedure
 
 On a failed command, failed gate, invalid graph, missing authority, or scope
 conflict, the agent MUST stop before the transition, report the exact failing
 criterion and unchanged state, and recommend one safe retry or one accountable
-escalation. Remediation that changes scope, accepts risk, or exercises a
-reserved decision right requires a new explicit decision.
+escalation. The retry is the corrective form `harnessctl check` renders for the
+first failing predicate; rerunning the evaluated command unchanged is never the
+retry. Remediation that changes scope, accepts risk, or exercises a reserved
+decision right requires a new explicit decision.
 
 A record cannot contain the hash of its own commit. A VREC or RLS therefore
 resides in a governance commit after the exact candidate commit it governs.
