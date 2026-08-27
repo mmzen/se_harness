@@ -37,9 +37,9 @@ managed files.
 
 ## Non-goals
 
-Changing the candidate product; re-releasing; retiring the `accept-candidate`
-bootstrap exception; acting on the RC-070 issues; adopting a version other
-than exact public 0.7.0.
+Changing the candidate product beyond its development version identity;
+re-releasing; retiring the `accept-candidate` bootstrap exception; acting on
+the RC-070 issues; adopting a version other than exact public 0.7.0.
 
 ## Immutable identity
 

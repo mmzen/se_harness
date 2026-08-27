@@ -45,8 +45,10 @@ paths = [
   "docs/engineering/templates/",
   "docs/engineering/repository-harness-upgrade/",
   "docs/notes/developing-se-harness.md",
+  "pyproject.toml",
   "scripts/select_harness_work_order.py",
   "scripts/validate_engineering_artifacts.py",
+  "se_harness/__init__.py",
   "tests/",
 ]
 
@@ -86,7 +88,21 @@ publication, deployment, maintenance or external state.
 - Replace pinned 0.6.0 root assumptions in `tests/` with released-root
   identity-aware assertions, each file named in the evidence with the
   assumption it carried. Measured before approval in a throwaway worktree:
-  see the packet index for the count.
+  eleven tests in six modules.
+- Move the candidate to the next development version, `0.8.0`, in
+  `pyproject.toml` and `se_harness/__init__.py`, and write the migration
+  scenario `tests/fixtures/governance_migration/candidate-0.7.0-to-0.8.0.json`
+  with the canonical writer (`repository_tools.predecessor_facts
+  write-scenario`). Reason, measured in the rehearsal: with the root and the
+  candidate both at 0.7.0, `predecessor_facts derive` raises `PRE008` (no
+  predecessor pair), which is the second step of the candidate-evidence
+  lane's first job, so every pull request's lane would be red after
+  adoption. The candidate version and the scenario move together (release
+  sequences note). `README.md`'s public install example stays `0.7.0`: it
+  names the published version, not the candidate.
+- Remove the repository-owned `.gitattributes` rules that 0.7.0's managed
+  block now carries (the three `governance_migration` LF rules), keeping the
+  other owner rules; the rules stay effective through the managed block.
 - Run the complete qualification `VER-HUP-006` names and retain the
   changed-surface ledger.
 - Transition only this work order to `implemented` after every local gate
@@ -94,10 +110,11 @@ publication, deployment, maintenance or external state.
 
 ## Out of scope
 
-Product source and templates; version metadata; `RLS`, `VREC`, `REL`
-records; tags; publication, replay and Pages workflows; the `release/0.7`
-line; branch policy; credentials; external policy; the RC-070 issues;
-retiring the `accept-candidate` bootstrap exception.
+Product source and templates other than the version identity; `RLS`, `VREC`,
+`REL` records; tags; publication, replay and Pages workflows; the
+`release/0.7` line; branch policy; credentials; external policy; the RC-070
+issues; retiring the `accept-candidate` bootstrap exception; the published
+0.7.0 itself, which does not move.
 
 ## Authorized decision envelope
 
@@ -119,7 +136,11 @@ are both still asserted.
 
 - The 43 reviewed add or update paths and the installer-owned lock.
 - `AGENTS.md`'s owner region and `docs/notes/developing-se-harness.md`, for
-  the governor statements only.
+  the governor statements only; the owner region's managed-path list grows
+  from 30 to 55 entries.
+- `.gitattributes` owner content, for the three duplicated rules only.
+- `pyproject.toml`, `se_harness/__init__.py` and the new scenario file, for
+  the 0.8.0 development version.
 - The test files named in the evidence, for root assumptions only.
 - This packet, the HUP index, the canonical transaction JSON and the
   human-readable evidence.

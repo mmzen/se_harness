@@ -62,9 +62,13 @@ implemented` → separate VREC, pull request, merge.
    root-evaluator statements in `docs/notes/developing-se-harness.md`.
    Test files may change only to replace a pinned 0.6.0 root assumption with
    the released-root identity, one file at a time and named in the evidence.
-9. Do not edit candidate product or templates, version metadata, release
-   records, verification records, contracts, tags, publication or Pages
-   workflows, maintenance refs, or external policy.
+9. Move the candidate to the next development version, `0.8.0`, together
+   with its migration scenario written by the canonical writer, so that the
+   predecessor derivation has a pair to rehearse (`PRE008` otherwise). Do not
+   edit any other candidate product or template byte, the published
+   version's install example, release records, verification records,
+   contracts, tags, publication or Pages workflows, maintenance refs, or
+   external policy.
 10. Stop before commit, push, pull request, merge, verification, release or
     deployment unless separately authorized.
 
