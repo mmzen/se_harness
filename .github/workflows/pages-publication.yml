@@ -127,7 +127,6 @@ jobs:
           set -euo pipefail
           python .github/scripts/publish_dashboard.py evaluator \
             --repository "$RUNNER_TEMP/governance" \
-            --release-record "$RELEASE_RECORD" \
             --output "$RUNNER_TEMP/evaluator.json" \
             --github-output "$GITHUB_OUTPUT"
 
@@ -150,7 +149,6 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          mkdir "$RUNNER_TEMP/predecessor-view"
           identity_args=(
             --role released-evaluator
             --expected-version "$EVALUATOR_VERSION"
@@ -165,63 +163,21 @@ jobs:
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
 
-      - name: Validate with the released evaluator
-        env:
-          EVALUATOR_VERSION: ${{ steps.evaluator.outputs.evaluator_version }}
-          EVALUATOR_WHEEL_SHA256: ${{ steps.evaluator.outputs.evaluator_sha256 }}
+      # SPEC-REB-013 rule 5: the generation snapshot is the complete governance
+      # snapshot, unconditionally. The path is retained so the generator invocation
+      # below is unchanged; nothing is omitted from it for any release record.
+      - name: Materialize the complete governance snapshot for generation
         shell: bash
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
-          view_output="$RUNNER_TEMP/predecessor-view-qualification.json"
-          bootstrap_tuple="$(python - "$RUNNER_TEMP/governance" "$RELEASE_RECORD" <<'PY'
-          import pathlib, sys, tomllib
-          root, record_id = pathlib.Path(sys.argv[1]), sys.argv[2]
-          def front_matter(path):
-              return tomllib.loads(path.read_text(encoding="utf-8").split("+++")[1])
-          records = [p for p in root.glob("docs/engineering/**/releases/*.md") if p.stem == record_id]
-          if len(records) != 1:
-              sys.exit(f"expected exactly one {record_id} under docs/engineering; found {len(records)}")
-          contracts = front_matter(records[0]).get("relations", {}).get("satisfies", [])
-          if len(contracts) != 1:
-              sys.exit(f"{record_id} must satisfy exactly one release contract; found {len(contracts)}")
-          matches = [p for p in root.glob("docs/engineering/**/*.md") if p.stem == contracts[0] and p.parent.name == "release"]
-          if len(matches) != 1:
-              sys.exit(f"expected exactly one {contracts[0]}; found {len(matches)}")
-          print("declared" if isinstance(front_matter(matches[0]).get("bootstrap"), dict) else "absent")
-          PY
-          )"
-          if [[ "$bootstrap_tuple" == "declared" ]]; then
-            python -m se_harness qualify predecessor-view "$RUNNER_TEMP/governance" \
-              --release-record "$RELEASE_RECORD" \
-              --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-              --view-output "$RUNNER_TEMP/predecessor-view/governance" \
-              --output "$view_output" \
-              --json
-          else
-            python - "$view_output" "$RELEASE_RECORD" "$EVALUATOR_VERSION" "$EVALUATOR_WHEEL_SHA256" <<'PY'
-          import json, sys
-          output, record_id, version, archive_sha256 = sys.argv[1:5]
-          observation = {
-              "schema": "se-harness-predecessor-view-exclusion/v1",
-              "operation": "predecessor-view",
-              "outcome": "excluded",
-              "release_record": record_id,
-              "evaluator": {"version": version, "archive_sha256": archive_sha256},
-              "reason": "the record's contract declares no bootstrap tuple; REQ-REB-015's condition does not hold",
-              "authority": "derived operational evidence; no formal lifecycle transition",
-          }
-          with open(output, "w", encoding="utf-8", newline="\n") as handle:
-              json.dump(observation, handle, indent=2, sort_keys=True)
-              handle.write("\n")
-          PY
-            echo "predecessor-view qualification excluded: $RELEASE_RECORD satisfies a contract without a bootstrap tuple"
-            governance_commit="$(git -C "$RUNNER_TEMP/governance" rev-parse HEAD)"
-            git -C "$GITHUB_WORKSPACE" worktree add --detach "$RUNNER_TEMP/predecessor-view/governance" "$governance_commit"
-            test "$(git -C "$RUNNER_TEMP/predecessor-view/governance" rev-parse HEAD)" = "$governance_commit"
-            test -z "$(git -C "$RUNNER_TEMP/predecessor-view/governance" status --porcelain=v1 --untracked-files=all)"
-            echo "view materialized as the complete governance snapshot at $governance_commit: nothing is omitted for an ordinary record"
-          fi
+          mkdir "$RUNNER_TEMP/predecessor-view"
+          governance_commit="$(git -C "$RUNNER_TEMP/governance" rev-parse HEAD)"
+          git -C "$GITHUB_WORKSPACE" worktree add --detach \
+            "$RUNNER_TEMP/predecessor-view/governance" "$governance_commit"
+          test "$(git -C "$RUNNER_TEMP/predecessor-view/governance" rev-parse HEAD)" = "$governance_commit"
+          test -z "$(git -C "$RUNNER_TEMP/predecessor-view/governance" status --porcelain=v1 --untracked-files=all)"
+          echo "generation snapshot is the complete governance snapshot at $governance_commit"
 
       - name: Generate the target-local canonical Explorer
         shell: bash

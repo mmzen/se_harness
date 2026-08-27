@@ -549,7 +549,9 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
 
     def test_workflow_preserves_evaluator_generator_and_payload_boundaries(self) -> None:
         self.assertNotIn("scripts/validate_predecessor_publication_view.py", self.workflow)
-        self.assertIn("python -m se_harness qualify predecessor-view", self.workflow)
+        # WO-REB-028: the retired qualification operation and its evidence artifact are gone;
+        # the temp path stays so the generator invocation below is unchanged.
+        self.assertNotIn("python -m se_harness qualify predecessor-view", self.workflow)
         self.assertNotIn('--evaluator-entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"', self.workflow)
         self.assertNotIn('evaluator-env/bin/harnessctl" validate "$RUNNER_TEMP/governance"', self.workflow)
         self.assertIn("publish_dashboard.py evaluator", self.workflow)
@@ -564,8 +566,8 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertNotIn("GOVERNOR_", self.workflow)
         self.assertNotIn("--role governor", self.workflow)
         self.assertIn("predecessor-view/governance/scripts/generate_harness_dashboard.py", self.workflow)
-        self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.workflow)
-        self.assertIn('predecessor-view-qualification.json', self.workflow)
+        self.assertNotIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.workflow)
+        self.assertNotIn('predecessor-view-qualification.json', self.workflow)
         self.assertIn("publish_dashboard.py package", self.workflow)
         self.assertIn("--destination \"$RUNNER_TEMP/pages-site\"", self.workflow)
         self.assertNotIn("git push", self.workflow)

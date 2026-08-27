@@ -24,7 +24,6 @@ from pathlib import Path
 from unittest import mock
 
 from repository_tools import interpreter_safety as tools_safety
-from repository_tools import release_bootstrap
 from se_harness import governance_migration, interpreter_safety, runtime_identity
 
 
@@ -34,43 +33,28 @@ PLATFORM = "windows" if WINDOWS else "linux"
 
 #: Every module that reaches the declared rule directly, mapped to the boundary
 #: identifiers the registry must carry for it. Produced by reading the two
-#: packages rather than by reading the declaration.
+#: packages rather than by reading the declaration. `WO-REB-028` retired the six
+#: sites of the predecessor-bootstrap release path, so the two survivors are the
+#: migration runtime probe and the runtime-identity entry-point observation, and
+#: no module delegates.
 EXPECTED_RULE_BOUNDARIES = {
-    "repository_tools/predecessor_assessment.py": 2,
-    "repository_tools/predecessor_preparation.py": 1,
-    "repository_tools/release_bootstrap.py": 1,
     "se_harness/governance_migration.py": 1,
-    "se_harness/release_qualification.py": 1,
     "se_harness/runtime_identity.py": 1,
 }
-EXPECTED_DELEGATING_BOUNDARIES = {"repository_tools/predecessor_publication.py": 1}
+EXPECTED_DELEGATING_BOUNDARIES: dict[str, int] = {}
 
 #: The complete set of ``se_harness`` names ``repository_tools`` may import, as a
-#: pinned exhaustive inventory rather than a prefix rule. This crossing is
-#: pre-existing: it arrived with ``WO-HBI-002`` and predates this work order.
-#: Any new crossing fails this check by name.
-PERMITTED_PACKAGE_IMPORTS = frozenset(
-    {
-        "se_harness.hash_bound.HashBoundError",
-        "se_harness.hash_bound.LOCK_RELATIVE",
-        "se_harness.hash_bound.MATCH_DECLARED",
-        "se_harness.hash_bound.MATCH_LEGACY_NEWLINE",
-        "se_harness.hash_bound.compare_declared_digest",
-    }
-)
+#: pinned exhaustive inventory rather than a prefix rule. `WO-REB-028` deleted the
+#: last holder of the pre-existing ``se_harness.hash_bound`` crossing that arrived
+#: with ``WO-HBI-002``, so the inventory is now empty. Any new crossing fails this
+#: check by name.
+PERMITTED_PACKAGE_IMPORTS: frozenset[str] = frozenset()
 
 #: The complete set of ``repository_tools`` names ``se_harness`` may import, as a
-#: pinned exhaustive inventory. This crossing is pre-existing and deliberate:
-#: `qualify_predecessor_view` reaches the predecessor-view service through a
-#: function-local import and refuses when it is absent, so the package still
-#: installs and runs without `repository_tools`. It is not an interpreter-safety
-#: crossing, and this work order neither created nor widened it.
-PERMITTED_TOOLS_IMPORTS = frozenset(
-    {
-        "repository_tools.predecessor_publication.PredecessorPublicationError",
-        "repository_tools.predecessor_publication.validate_predecessor_publication",
-    }
-)
+#: pinned exhaustive inventory. `WO-REB-028` retired `qualify_predecessor_view`,
+#: the one function that reached a `repository_tools` service through a guarded
+#: function-local import, so the package no longer names that package at all.
+PERMITTED_TOOLS_IMPORTS: frozenset[str] = frozenset()
 
 #: Patterns `ARCH-REB-010` prohibits, each with the module set allowed to carry
 #: it. `interpreter_safety` itself is the one place link classification lives.
@@ -79,26 +63,17 @@ LOADER_MODULES = frozenset(
 )
 
 #: Boundary-module functions that still test for a junction inline, mapped to the
-#: reason that use is not a restatement of the declared interpreter rule. The
-#: declaration governs interpreter entry points only, so a walker over ordinary
-#: repository paths is outside it. Pinned as an exhaustive inventory: a new
-#: inline junction test anywhere in a boundary module fails the check by name.
-RETAINED_INLINE_JUNCTION_FUNCTIONS = {
-    "repository_tools/release_bootstrap.py": {
-        "_path_has_link": (
-            "walks repository files, installed-payload members and record "
-            "directories, none of which is an interpreter entry point"
-        ),
-    },
-}
+#: reason that use is not a restatement of the declared interpreter rule. Pinned as
+#: an exhaustive inventory: a new inline junction test anywhere in a boundary module
+#: fails the check by name. `WO-REB-028` deleted the one retained walker with the
+#: module that held it.
+RETAINED_INLINE_JUNCTION_FUNCTIONS: dict[str, dict[str, str]] = {}
 
 #: Boundary-module expressions that legitimately derive a directory two levels
 #: above a path, mapped to the subject each one names. None of these subjects is
 #: an interpreter, so none of them derives an environment root from a resolved
 #: interpreter target, which is what `ARCH-REB-010` prohibits.
 RETAINED_GRANDPARENT_DERIVATIONS = {
-    "repository_tools/predecessor_preparation.py": ("contract_path.parent.parent",),
-    "repository_tools/release_bootstrap.py": ("record_path.parent.parent",),
     "se_harness/runtime_identity.py": ("Path(__file__).parent.parent",),
 }
 
@@ -685,15 +660,6 @@ class RecordedFactsTests(unittest.TestCase):
         self.assertNotIn(":", origin)
         self.assertNotIn(Path.home().name, origin)
 
-    def test_release_bootstrap_lexical_origin_agrees_with_the_loader(self) -> None:
-        entry = self.fixture.environment("env")
-        observed = tools_safety.evaluate(entry)
-        self.assertEqual(
-            tools_safety.normalized_origin(observed),
-            release_bootstrap._lexical_origin(observed.entry_point, observed.environment_root),
-        )
-
-
 class PurityAndCostTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -1194,7 +1160,6 @@ class BoundaryRegistryTests(unittest.TestCase):
         for runtime in interpreter_safety.RUNTIMES:
             with self.subTest(runtime=runtime):
                 identifiers = interpreter_safety.boundary_identifiers(runtime)
-                self.assertTrue(identifiers)
                 for identifier in identifiers:
                     self.assertTrue(identifier.startswith(f"{runtime}."))
         self.assertEqual(
@@ -1203,6 +1168,29 @@ class BoundaryRegistryTests(unittest.TestCase):
                 len(interpreter_safety.boundary_identifiers(runtime))
                 for runtime in interpreter_safety.RUNTIMES
             ),
+        )
+        # WO-REB-028: every declared site is a package one now. The second loader
+        # stays held to the same declaration by the conformance cases above, so an
+        # empty runtime is a real state of the registry rather than a gap in it.
+        self.assertEqual((), interpreter_safety.boundary_identifiers("repository_tools"))
+        self.assertTrue(interpreter_safety.boundary_identifiers("se_harness"))
+
+    def test_the_declaration_names_no_retired_predecessor_module(self) -> None:
+        # WO-REB-028: no declared site may name a file the work order deleted.
+        boundaries = interpreter_safety.declared_boundaries()
+        modules = {entry["module"] for entry in boundaries}
+        for relative in (
+            "repository_tools/release_bootstrap.py",
+            "repository_tools/predecessor_preparation.py",
+            "repository_tools/predecessor_publication.py",
+            "repository_tools/predecessor_assessment.py",
+        ):
+            with self.subTest(module=relative):
+                self.assertNotIn(relative, modules)
+                self.assertFalse((REPOSITORY_ROOT / relative).exists())
+        self.assertNotIn(
+            "se_harness.release_qualification.external_evaluator",
+            {entry["id"] for entry in boundaries},
         )
 
 
@@ -1240,57 +1228,33 @@ class ImportBarrierTests(unittest.TestCase):
             "the repository_tools -> se_harness crossing inventory changed",
         )
 
-    def test_the_permitted_crossing_is_the_pre_existing_hash_bound_one_only(self) -> None:
-        for name in PERMITTED_PACKAGE_IMPORTS:
-            with self.subTest(imported=name):
-                self.assertTrue(name.startswith("se_harness.hash_bound."))
-        self.assertNotIn(
-            "se_harness.interpreter_safety",
-            {name.rsplit(".", 1)[0] for name in PERMITTED_PACKAGE_IMPORTS},
-        )
+    def test_no_crossing_from_repository_tools_into_the_package_remains(self) -> None:
+        # WO-REB-028: the deleted modules held the only se_harness.hash_bound import.
+        self.assertEqual(frozenset(), PERMITTED_PACKAGE_IMPORTS)
+        for relative, names in self._imported("repository_tools").items():
+            with self.subTest(module=relative):
+                self.assertEqual(
+                    set(), {name for name in names if name.split(".")[0] == "se_harness"}
+                )
 
-    def test_the_package_runtime_crossing_is_the_pre_existing_predecessor_view_one_only(
-        self,
-    ) -> None:
+    def test_no_crossing_from_the_package_into_repository_tools_remains(self) -> None:
+        # WO-REB-028: qualify_predecessor_view held the one guarded function-local
+        # import. The package neither names nor needs repository_tools now, at any
+        # import level, so an installed evaluator has nothing left to refuse.
+        self.assertEqual(frozenset(), PERMITTED_TOOLS_IMPORTS)
         crossings: set[str] = set()
         for relative, names in self._imported("se_harness").items():
             for name in sorted(names):
                 if name.split(".")[0] == "repository_tools":
-                    crossings.add(name)
-        self.assertEqual(
-            sorted(PERMITTED_TOOLS_IMPORTS),
-            sorted(crossings),
-            "the se_harness -> repository_tools crossing inventory changed",
-        )
-
-    def test_the_pre_existing_package_crossing_is_function_local_and_guarded(self) -> None:
-        source = (REPOSITORY_ROOT / "se_harness/release_qualification.py").read_text(
+                    crossings.add(f"{relative}: {name}")
+        self.assertEqual(set(), crossings)
+        # The one former holder keeps no residue of the guarded import either.
+        text = (REPOSITORY_ROOT / "se_harness/release_qualification.py").read_text(
             encoding="utf-8"
         )
-        tree = ast.parse(source)
-        module_level = {
-            alias.name
-            for node in tree.body
-            if isinstance(node, ast.ImportFrom) and not node.level
-            for alias in node.names
-            if (node.module or "").split(".")[0] == "repository_tools"
-        }
-        self.assertEqual(set(), module_level, "the crossing must not be a module-level import")
-        guarded = [
-            node
-            for node in ast.walk(tree)
-            if isinstance(node, ast.Try)
-            and any(
-                isinstance(inner, ast.ImportFrom)
-                and (inner.module or "").split(".")[0] == "repository_tools"
-                for inner in node.body
-            )
-            and any(
-                isinstance(handler.type, ast.Name) and handler.type.id == "ImportError"
-                for handler in node.handlers
-            )
-        ]
-        self.assertEqual(1, len(guarded), "the crossing must refuse rather than fail to import")
+        for absent in ("repository_tools", "ImportError", "lazily imported"):
+            with self.subTest(absent=absent):
+                self.assertNotIn(absent, text)
 
     def test_neither_package_crossing_carries_an_interpreter_safety_name(self) -> None:
         for name in sorted(PERMITTED_PACKAGE_IMPORTS | PERMITTED_TOOLS_IMPORTS):
@@ -1361,15 +1325,6 @@ class StaticArchitectureTests(unittest.TestCase):
             with self.subTest(module=relative):
                 text = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
                 self.assertIn("interpreter_safety", text)
-
-    def test_release_bootstrap_no_longer_resolves_both_sides_of_the_interpreter_comparison(
-        self,
-    ) -> None:
-        text = (REPOSITORY_ROOT / "repository_tools/release_bootstrap.py").read_text(
-            encoding="utf-8"
-        )
-        self.assertIn("reported_python", text)
-        self.assertIn("Path(os.path.abspath(reported_python)) != safe.entry_point", text)
 
     def test_the_migration_refusal_map_covers_exactly_the_declared_cases(self) -> None:
         declared = {entry["id"] for entry in interpreter_safety.declared_cases()}

@@ -5,7 +5,7 @@ title = "Validate publication through an exact predecessor-compatible governance
 status = "approved"
 owners = ["requirements-steward", "repository-owner", "security-owner", "release-owner"]
 created = "2026-08-22"
-updated = "2026-08-22"
+updated = "2026-08-27"
 statement = "WHEN an authorized publication transaction uses a predecessor evaluator that cannot parse retained rejected-bootstrap history, THE SYSTEM SHALL validate the complete governance graph with current semantics and validate an exact read-only compatibility view with that predecessor before any privileged publication stage."
 verification_method = "automated-publication-view-provenance-and-zero-mutation-test"
 
@@ -20,6 +20,12 @@ decided_by = "requirements-steward"
 +++
 
 # Requirement: Validate publication through an exact predecessor-compatible governance view
+
+## Retirement amendment of 2026-08-27
+
+Retired on 2026-08-27 by `REQ-REB-029` under `WO-REB-028`, on the repository owner's direction, which decided this requirement is superseded. Publication no longer validates a predecessor-compatible view. The last mile and the release-bound Pages build read the complete governance snapshot with current semantics, unconditionally and for every release record; `repository_tools/predecessor_publication.py`, its `scripts/validate_predecessor_publication_view.py` entry point, the `predecessor-view` qualification operation, and the workflow steps that selected a record for a view are deleted. The requirement's own trigger no longer occurs: under `REQ-REB-011` a rejected record is valid but inert, so the 0.6.0 root evaluator parses the complete graph including the retained `RLS-SEH-009`, and `WO-REB-025` measured that the exclusion branch is what every ordinary record takes. The complete-graph validation this requirement also demanded is kept, in `REQ-REB-029`. Everything below records what the publication path did while this requirement was active and is retained unchanged as history; it is no longer an obligation.
+
+The declared `superseded` status is not applied. `docs/engineering/WORKFLOW.json` admits no `approved` to `superseded` transition for a definition, and this artifact carries its own `draft` to `approved` event, which `WFL-005` requires to stay append-only. Setting the status therefore either contradicts that event (`E014`, measured on 2026-08-27) or deletes it. The retirement is recorded here instead, the instrument `WO-REB-028` already uses for `SPEC-REB-003` and `SPEC-REB-005`. Whether the status is applied through a new transition or the definition family gains one is a separate owner decision; the retirement itself does not wait on it.
 
 ## Rationale
 

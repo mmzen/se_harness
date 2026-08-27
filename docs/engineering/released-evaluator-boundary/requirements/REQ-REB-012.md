@@ -5,7 +5,7 @@ title = "Prepare a successor through an exact predecessor-compatible view"
 status = "approved"
 owners = ["requirements-steward", "repository-owner", "security-owner", "release-owner"]
 created = "2026-08-22"
-updated = "2026-08-22"
+updated = "2026-08-27"
 statement = "WHEN the locked predecessor evaluator cannot parse an exact closed rejected-bootstrap pair, THE SYSTEM SHALL let that evaluator prepare the successor record through a deterministic contract-bound view that omits only that pair and proves the complete repository unchanged before and after preparation."
 verification_method = "automated-projection-provenance-and-zero-write-negative-test"
 
@@ -20,6 +20,12 @@ decided_by = "requirements-steward"
 +++
 
 # Requirement: Prepare a successor through an exact predecessor-compatible view
+
+## Retirement amendment of 2026-08-27
+
+Retired on 2026-08-27 by `REQ-REB-029` under `WO-REB-028`, on the repository owner's direction, which decided this requirement is superseded. The predecessor-compatible preparation view is withdrawn: no release path constructs a projection of this repository for any evaluator, and `repository_tools/predecessor_preparation.py` with its `scripts/prepare_predecessor_release.py` entry point is deleted. The requirement was authored for one event, retaining the rejected `REL-SEH-008` / `RLS-SEH-009` pair while released 0.5.0, which emits `E009` on `status = "rejected"`, still had to judge the 0.6.0 release. `REQ-REB-011` removed that cause in 0.6.0 by making rejected history valid but inert, and 0.7.0 confirmed the consequence: `RLS-SEH-014` was rejected and `RLS-SEH-015` released under the 0.6.0 root evaluator with no view at all. The rationale, preconditions, required response, and boundary behavior below record what the repository did while this requirement was active and are retained unchanged as history; they are no longer obligations. `RLS-SEH-012` keeps its `preparation_view_evidence_sha256` binding and that digest still verifies, so the preparation this requirement governed remains a verifiable fact and is deliberately no longer re-derivable. The one retained predecessor-to-successor mechanism is the no-network rehearsal in `se_harness/governance_migration.py`.
+
+The declared `superseded` status is not applied. `docs/engineering/WORKFLOW.json` admits no `approved` to `superseded` transition for a definition, and this artifact carries its own `draft` to `approved` event, which `WFL-005` requires to stay append-only. Setting the status therefore either contradicts that event (`E014`, measured on 2026-08-27) or deletes it. The retirement is recorded here instead, the instrument `WO-REB-028` already uses for `SPEC-REB-003` and `SPEC-REB-005`. Whether the status is applied through a new transition or the definition family gains one is a separate owner decision; the retirement itself does not wait on it.
 
 ## Rationale
 

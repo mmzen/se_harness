@@ -49,21 +49,6 @@ EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 EVALUATOR_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
 EVALUATOR_VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
 EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
-RELEASE_BOOTSTRAP_SCHEMA = "se-harness-release-bootstrap-v1"
-PREDECESSOR_PREPARATION_SCHEMA = "se-harness-predecessor-bootstrap-v1"
-PREDECESSOR_VIEW_EVIDENCE_SCHEMA = "se-harness-predecessor-preparation-view-v1"
-PREDECESSOR_VIEW_EVIDENCE_MAX_BYTES = 128 * 1024
-RELEASE_BOOTSTRAP_KEYS = {
-    "schema",
-    "release_record",
-    "version",
-    "from_lock_schema",
-    "from_lock_tool_version",
-    "from_lock_sha256",
-    "evaluator_version",
-    "evaluator_archive_name",
-    "evaluator_archive_sha256",
-}
 # SPEC-LRE-001 rule 11: the frozen self-hosting compatibility set. These are this
 # repository's own releases, cut before evaluator-evidence enforcement existed. The set
 # is closed: no identifier is ever added to it. A consumer repository instead declares
@@ -111,14 +96,6 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _canonical_utf8_text_lf(raw: bytes, *, label: str) -> bytes:
-    if raw.startswith(b"\xef\xbb\xbf"):
-        raise PublicationError(f"UTF-8 byte-order mark is unsupported: {label}")
-    try:
-        text = raw.decode("utf-8")
-    except UnicodeError as exc:
-        raise PublicationError(f"invalid UTF-8 document: {label}") from exc
-    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -208,15 +185,6 @@ def _text_at(repository: Path, commit: str, path: str) -> str | None:
     return completed.stdout
 
 
-def _bytes_at(repository: Path, commit: str, path: str) -> bytes | None:
-    completed = subprocess.run(
-        ["git", "-C", str(repository), "show", f"{commit}:{path}"],
-        check=False,
-        capture_output=True,
-    )
-    if completed.returncode != 0:
-        return None
-    return completed.stdout
 
 
 def _metadata_at(repository: Path, commit: str, path: str) -> dict[str, Any] | None:
@@ -319,112 +287,6 @@ def _validated_release_record(metadata: dict[str, Any], path: str, tag: str) -> 
     }
 
 
-def _validated_bootstrap_contract(
-    repository: Path,
-    commit: str,
-    metadata: dict[str, Any],
-    *,
-    lock_commit: str | None = None,
-) -> dict[str, Any] | None:
-    marker = metadata.get("preparation_schema")
-    if marker is None:
-        return None
-    record_id = metadata.get("id")
-    if marker != PREDECESSOR_PREPARATION_SCHEMA:
-        raise PublicationError(f"release record {record_id} has an unsupported preparation schema")
-    relations = metadata.get("relations")
-    satisfies = relations.get("satisfies") if isinstance(relations, dict) else None
-    released_work = relations.get("releases_work") if isinstance(relations, dict) else None
-    if (
-        not isinstance(satisfies, list)
-        or len(satisfies) != 1
-        or not isinstance(satisfies[0], str)
-        or not isinstance(released_work, list)
-        or not released_work
-        or not all(isinstance(item, str) for item in released_work)
-        or len(set(released_work)) != len(released_work)
-    ):
-        raise PublicationError(f"release record {record_id} bootstrap relations are invalid")
-    contract_id = satisfies[0]
-    contracts: list[dict[str, Any]] = []
-    approved_bootstraps: list[str] = []
-    for path in _tree_markdown_paths(repository, commit):
-        candidate = _metadata_at(repository, commit, path)
-        if not isinstance(candidate, dict) or candidate.get("type") != "release_contract":
-            continue
-        bootstrap = candidate.get("bootstrap")
-        if candidate.get("status") == "approved" and isinstance(bootstrap, dict):
-            approved_bootstraps.append(str(candidate.get("id")))
-        if candidate.get("id") == contract_id:
-            contracts.append(candidate)
-    if len(contracts) != 1 or contracts[0].get("status") != "approved":
-        raise PublicationError(f"release record {record_id} has no exact approved bootstrap contract")
-    if approved_bootstraps != [contract_id]:
-        raise PublicationError(f"release record {record_id} bootstrap declaration is ambiguous")
-    contract = contracts[0]
-    value = contract.get("bootstrap")
-    if not isinstance(value, dict) or set(value) != RELEASE_BOOTSTRAP_KEYS:
-        raise PublicationError(f"release contract {contract_id} bootstrap field set is invalid")
-    version = value.get("version")
-    evaluator_version = value.get("evaluator_version")
-    archive_name = value.get("evaluator_archive_name")
-    valid = (
-        value.get("schema") == RELEASE_BOOTSTRAP_SCHEMA
-        and value.get("release_record") == record_id
-        and version == metadata.get("version")
-        and isinstance(version, str)
-        and TAG_PATTERN.fullmatch(f"v{version}") is not None
-        and type(value.get("from_lock_schema")) is int
-        and value.get("from_lock_schema") == 2
-        and isinstance(value.get("from_lock_tool_version"), str)
-        and EVALUATOR_VERSION_PATTERN.fullmatch(value["from_lock_tool_version"]) is not None
-        and isinstance(value.get("from_lock_sha256"), str)
-        and re.fullmatch(r"[0-9a-f]{64}", value["from_lock_sha256"]) is not None
-        and isinstance(evaluator_version, str)
-        and EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is not None
-        and evaluator_version == value.get("from_lock_tool_version")
-        and archive_name == f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
-        and isinstance(value.get("evaluator_archive_sha256"), str)
-        and re.fullmatch(r"[0-9a-f]{64}", value["evaluator_archive_sha256"]) is not None
-    )
-    if not valid:
-        raise PublicationError(f"release contract {contract_id} bootstrap tuple is invalid")
-    contract_relations = contract.get("relations")
-    gates = contract_relations.get("gates") if isinstance(contract_relations, dict) else None
-    if (
-        not isinstance(gates, list)
-        or not all(isinstance(item, str) for item in gates)
-        or len(gates) != len(released_work)
-        or set(gates) != set(released_work)
-    ):
-        raise PublicationError(f"release record {record_id} work set differs from its bootstrap contract")
-    selected_lock_commit = lock_commit or commit
-    lock_raw = _bytes_at(repository, selected_lock_commit, ".engineering-harness.lock")
-    config_text = _text_at(repository, selected_lock_commit, ".engineering-harness.toml")
-    if lock_raw is None or config_text is None:
-        raise PublicationError("predecessor bootstrap root is unavailable at the governance commit")
-    lock = _loads_json_bytes(lock_raw, label=f"{selected_lock_commit}:.engineering-harness.lock")
-    try:
-        config = tomllib.loads(config_text)
-    except tomllib.TOMLDecodeError as exc:
-        raise PublicationError("predecessor bootstrap configuration is invalid") from exc
-    harness = config.get("harness") if isinstance(config, dict) else None
-    if (
-        _sha256(
-            _canonical_utf8_text_lf(
-                lock_raw, label=f"{selected_lock_commit}:.engineering-harness.lock"
-            )
-        )
-        != value.get("from_lock_sha256")
-        or lock.get("schema") != value.get("from_lock_schema")
-        or lock.get("tool_version") != value.get("from_lock_tool_version")
-        or lock.get("hash_algorithm") != "sha256"
-        or lock.get("hash_mode") != "utf8-text-lf-v1"
-        or not isinstance(harness, dict)
-        or harness.get("tool_version") != value.get("from_lock_tool_version")
-    ):
-        raise PublicationError("predecessor bootstrap root differs from the approved contract")
-    return value
 
 
 def _validated_evaluator_binding(
@@ -525,22 +387,6 @@ def _validated_evaluator_binding(
     ):
         raise PublicationError(f"release record {record_id} evaluator environment proof is invalid")
     selected_lock_commit = lock_commit or evidence_commit
-    bootstrap = _validated_bootstrap_contract(
-        repository,
-        selected_lock_commit,
-        metadata,
-        lock_commit=selected_lock_commit,
-    )
-    if bootstrap is not None:
-        if (
-            evaluator.get("version") != bootstrap.get("evaluator_version")
-            or evaluator.get("archive_name") != bootstrap.get("evaluator_archive_name")
-            or evaluator.get("archive_sha256") != bootstrap.get("evaluator_archive_sha256")
-        ):
-            raise PublicationError(
-                f"release record {record_id} evaluator evidence differs from the bootstrap contract"
-            )
-        return {"path": path, "sha256": digest}
     lock_text = _text_at(repository, selected_lock_commit, ".engineering-harness.lock")
     if lock_text is None:
         raise PublicationError("standard evaluator lock is unavailable at the governance commit")
@@ -565,275 +411,6 @@ def _validated_evaluator_binding(
     return {"path": path, "sha256": digest}
 
 
-def _without_preparation_bindings(
-    raw: bytes,
-    metadata: dict[str, Any],
-    view_path: str,
-    view_digest: str,
-) -> bytes:
-    newline = b"\r\n" if raw.startswith(b"+++\r\n") else b"\n"
-    view_block = (
-        f'preparation_view_evidence_path = "{view_path}"'.encode("utf-8") + newline
-        + f'preparation_view_evidence_sha256 = "{view_digest}"'.encode("utf-8") + newline * 2
-    )
-    if raw.count(view_block) != 1:
-        raise PublicationError("preparation-view release binding is not canonical")
-    result = raw.replace(view_block, b"", 1)
-    evaluator_fields = (
-        metadata.get("preparation_schema"),
-        metadata.get("evaluator_evidence_path"),
-        metadata.get("evaluator_evidence_sha256"),
-    )
-    if any(item is not None for item in evaluator_fields):
-        preparation_schema, evaluator_path, evaluator_digest = evaluator_fields
-        if (
-            preparation_schema != PREDECESSOR_PREPARATION_SCHEMA
-            or not isinstance(evaluator_path, str)
-            or not isinstance(evaluator_digest, str)
-            or re.fullmatch(r"[0-9a-f]{64}", evaluator_digest) is None
-        ):
-            raise PublicationError("preparation-view evaluator binding is incomplete")
-        evaluator_block = (
-            f'preparation_schema = "{preparation_schema}"'.encode("utf-8") + newline
-            + f'evaluator_evidence_path = "{evaluator_path}"'.encode("utf-8") + newline
-            + f'evaluator_evidence_sha256 = "{evaluator_digest}"'.encode("utf-8") + newline * 2
-        )
-        if result.count(evaluator_block) != 1:
-            raise PublicationError("preparation-view evaluator binding is not canonical")
-        result = result.replace(evaluator_block, b"", 1)
-    return result
-
-
-def _validated_preparation_view(
-    repository: Path,
-    evidence_commit: str,
-    record_path: str,
-    metadata: dict[str, Any],
-    bootstrap: dict[str, Any] | None,
-) -> None:
-    record_id = metadata.get("id")
-    version = metadata.get("version")
-    catalog: dict[str, tuple[str, dict[str, Any]]] = {}
-    for path in _tree_markdown_paths(repository, evidence_commit):
-        item = _metadata_at(repository, evidence_commit, path)
-        artifact_id = item.get("id") if isinstance(item, dict) else None
-        if not isinstance(artifact_id, str):
-            continue
-        if artifact_id in catalog:
-            raise PublicationError(f"preparation-view artifact ID is ambiguous: {artifact_id}")
-        catalog[artifact_id] = (path, item)
-    rejected_history = [
-        item
-        for _path, item in catalog.values()
-        if item.get("type") == "release_record"
-        and item.get("status") == "rejected"
-        and item.get("version") == version
-        and item.get("preparation_schema") == PREDECESSOR_PREPARATION_SCHEMA
-    ]
-    path = metadata.get("preparation_view_evidence_path")
-    digest = metadata.get("preparation_view_evidence_sha256")
-    if path is None and digest is None and not rejected_history:
-        return
-    if (
-        not isinstance(path, str)
-        or not isinstance(digest, str)
-        or re.fullmatch(r"[0-9a-f]{64}", digest) is None
-    ):
-        raise PublicationError(f"release record {record_id} has no canonical preparation-view binding")
-    relative = PurePosixPath(path)
-    if (
-        relative.is_absolute()
-        or "\\" in path
-        or any(part in {"", ".", ".."} for part in relative.parts)
-        or relative.name != f"{record_id}-preparation-view.json"
-        or relative.parts[:2] != ("docs", "engineering")
-        or "evidence" not in relative.parts
-    ):
-        raise PublicationError(f"release record {record_id} has an unsafe preparation-view path")
-    raw = _bytes_at(repository, evidence_commit, path)
-    if raw is None or not raw or len(raw) > PREDECESSOR_VIEW_EVIDENCE_MAX_BYTES:
-        raise PublicationError(f"release record {record_id} preparation-view evidence is unavailable")
-    if _sha256(raw) != digest:
-        raise PublicationError(f"release record {record_id} preparation-view evidence digest differs")
-    value = _loads_json_bytes(raw, label=f"{evidence_commit}:{path}")
-    canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
-    if raw != canonical or set(value) != {
-        "schema", "source", "candidate", "release", "evaluator", "command", "view", "output"
-    }:
-        raise PublicationError(f"release record {record_id} preparation-view evidence is not canonical")
-    if value.get("schema") != PREDECESSOR_VIEW_EVIDENCE_SCHEMA:
-        raise PublicationError(f"release record {record_id} preparation-view schema differs")
-    source = value.get("source")
-    candidate = value.get("candidate")
-    release = value.get("release")
-    evaluator = value.get("evaluator")
-    command = value.get("command")
-    view = value.get("view")
-    output = value.get("output")
-    if not isinstance(source, dict) or set(source) != {"commit", "git_object_format", "tree"}:
-        raise PublicationError("preparation-view source identity is invalid")
-    object_format = _git_object_format(repository)
-    source_commit = source.get("commit")
-    source_tree = source.get("tree")
-    if (
-        source.get("git_object_format") != object_format
-        or not isinstance(source_commit, str)
-        or not isinstance(source_tree, str)
-        or len(source_commit) != _object_length(object_format)
-        or len(source_tree) != _object_length(object_format)
-        or HEX_PATTERN.fullmatch(source_commit) is None
-        or HEX_PATTERN.fullmatch(source_tree) is None
-        or _resolve_commit(repository, source_commit) != source_commit
-        or _run_git(repository, "rev-parse", f"{source_commit}^{{tree}}").stdout.strip().lower() != source_tree
-        or _run_git(
-            repository, "merge-base", "--is-ancestor", source_commit, evidence_commit, check=False
-        ).returncode != 0
-    ):
-        raise PublicationError("preparation-view source Git identity differs")
-    if (
-        not isinstance(candidate, dict)
-        or set(candidate) != {"commit", "git_object_format"}
-        or candidate.get("commit") != metadata.get("commit")
-        or candidate.get("git_object_format") != metadata.get("git_object_format")
-    ):
-        raise PublicationError("preparation-view candidate identity differs")
-    relations = metadata.get("relations")
-    satisfies = relations.get("satisfies") if isinstance(relations, dict) else None
-    verification_records = relations.get("includes_verification") if isinstance(relations, dict) else None
-    work_orders = relations.get("releases_work") if isinstance(relations, dict) else None
-    if (
-        not isinstance(release, dict)
-        or set(release) != {"contract", "record", "verification_records", "version", "work_orders"}
-        or release.get("record") != record_id
-        or release.get("version") != version
-        or satisfies != [release.get("contract")]
-        or not isinstance(verification_records, list)
-        or not isinstance(work_orders, list)
-        or release.get("verification_records") != sorted(verification_records)
-        or release.get("work_orders") != sorted(work_orders)
-    ):
-        raise PublicationError("preparation-view release scope differs")
-    if (
-        not isinstance(evaluator, dict)
-        or set(evaluator) != {"archive_name", "archive_sha256", "runtime_identity_schema", "version"}
-        or bootstrap is None
-        or evaluator.get("version") != bootstrap.get("evaluator_version")
-        or evaluator.get("archive_name") != bootstrap.get("evaluator_archive_name")
-        or evaluator.get("archive_sha256") != bootstrap.get("evaluator_archive_sha256")
-        or evaluator.get("runtime_identity_schema") not in {
-            "se-harness-runtime-identity-v2", "se-harness-runtime-identity-v3"
-        }
-    ):
-        raise PublicationError("preparation-view evaluator identity differs")
-    arguments = command.get("arguments") if isinstance(command, dict) and set(command) == {"arguments"} else None
-    expected_arguments = [
-        "-I", "-m", "se_harness", "prepare-release", ".",
-        "--id", str(record_id), "--release-contract", str(release.get("contract")),
-    ]
-    for item in sorted(verification_records):
-        expected_arguments.extend(("--verification-record", item))
-    for item in sorted(work_orders):
-        expected_arguments.extend(("--work-order", item))
-    expected_arguments.extend(
-        ("--version", str(version), "--authorized-by", str(metadata.get("authorized_by")))
-    )
-    if metadata.get("tag") is not None:
-        expected_arguments.extend(("--tag", str(metadata.get("tag"))))
-    record_parts = PurePosixPath(record_path).parts
-    if len(record_parts) < 3 or record_parts[:2] != ("docs", "engineering"):
-        raise PublicationError("preparation-view release-record path is invalid")
-    expected_arguments.extend(("--output", record_path, "--domain", record_parts[2]))
-    if arguments != expected_arguments:
-        raise PublicationError("preparation-view command differs from the exact release scope")
-    if (
-        not isinstance(output, dict)
-        or set(output) != {"predecessor_record_sha256"}
-        or not isinstance(output.get("predecessor_record_sha256"), str)
-        or re.fullmatch(r"[0-9a-f]{64}", output["predecessor_record_sha256"]) is None
-        or not isinstance(view, dict)
-        or set(view) != {"omitted_history", "sparse_spec_sha256"}
-        or not isinstance(view.get("sparse_spec_sha256"), str)
-        or re.fullmatch(r"[0-9a-f]{64}", view["sparse_spec_sha256"]) is None
-        or not isinstance(view.get("omitted_history"), list)
-        or len(view["omitted_history"]) != 2
-    ):
-        raise PublicationError("preparation-view output or omission identity is invalid")
-    omitted_paths: list[str] = []
-    omitted_items: list[dict[str, Any]] = []
-    for descriptor in view["omitted_history"]:
-        fields = {"artifact_id", "artifact_type", "status", "path", "git_blob", "bytes", "sha256"}
-        artifact_id = descriptor.get("artifact_id") if isinstance(descriptor, dict) else None
-        catalog_item = catalog.get(artifact_id) if isinstance(artifact_id, str) else None
-        if not isinstance(descriptor, dict) or set(descriptor) != fields or catalog_item is None:
-            raise PublicationError("preparation-view rejected-history descriptor is invalid")
-        artifact_path, artifact = catalog_item
-        source_raw = _bytes_at(repository, source_commit, artifact_path)
-        current_raw = _bytes_at(repository, evidence_commit, artifact_path)
-        blob = _run_git(repository, "rev-parse", f"{source_commit}:{artifact_path}").stdout.strip().lower()
-        if (
-            artifact.get("type") != descriptor.get("artifact_type")
-            or artifact.get("status") != "rejected"
-            or descriptor.get("status") != "rejected"
-            or descriptor.get("path") != artifact_path
-            or source_raw is None
-            or current_raw != source_raw
-            or descriptor.get("git_blob") != blob
-            or type(descriptor.get("bytes")) is not int
-            or descriptor.get("bytes") != len(source_raw)
-            or descriptor.get("sha256") != _sha256(source_raw)
-        ):
-            raise PublicationError("preparation-view rejected-history identity differs")
-        omitted_paths.append(artifact_path)
-        omitted_items.append(artifact)
-    if {item.get("type") for item in omitted_items} != {"release_contract", "release_record"}:
-        raise PublicationError("preparation view does not omit one exact RLS/REL pair")
-    rejected_record = next(item for item in omitted_items if item.get("type") == "release_record")
-    rejected_contract = next(item for item in omitted_items if item.get("type") == "release_contract")
-    rejected_relations = rejected_record.get("relations")
-    rejected_bootstrap = rejected_contract.get("bootstrap")
-    if (
-        rejected_record.get("version") != version
-        or not isinstance(rejected_relations, dict)
-        or rejected_relations.get("satisfies") != [rejected_contract.get("id")]
-        or not isinstance(rejected_bootstrap, dict)
-        or rejected_bootstrap.get("release_record") != rejected_record.get("id")
-        or rejected_bootstrap.get("version") != version
-    ):
-        raise PublicationError("preparation-view rejected history is not one closed pair")
-    sparse = ("/*\n" + "".join(f"!/{item}\n" for item in sorted(omitted_paths))).encode("utf-8")
-    if _sha256(sparse) != view["sparse_spec_sha256"]:
-        raise PublicationError("preparation-view sparse specification differs")
-    additions = [
-        line.strip().lower()
-        for line in _run_git(
-            repository,
-            "log",
-            "--reverse",
-            "--diff-filter=A",
-            "--format=%H",
-            f"{source_commit}..{evidence_commit}",
-            "--",
-            record_path,
-        ).stdout.splitlines()
-        if line.strip()
-    ]
-    if len(additions) != 1:
-        raise PublicationError("preparation-view release record has no unique introduction commit")
-    introduction = additions[0]
-    introduced_raw = _bytes_at(repository, introduction, record_path)
-    introduced_metadata = _metadata_at(repository, introduction, record_path)
-    introduced_evidence = _bytes_at(repository, introduction, path)
-    if (
-        introduced_raw is None
-        or introduced_metadata is None
-        or introduced_metadata.get("status") != "ready"
-        or introduced_evidence != raw
-        or _sha256(
-            _without_preparation_bindings(introduced_raw, introduced_metadata, path, digest)
-        )
-        != output["predecessor_record_sha256"]
-    ):
-        raise PublicationError("preparation-view predecessor output differs from its Git history")
 
 
 def _same_release_binding(metadata: dict[str, Any] | None, expected: dict[str, str]) -> bool:
@@ -923,19 +500,6 @@ def resolve_release(
     assert selected_path is not None
 
     selected = _validate_full_commit(selected, object_format, "governance commit")
-    bootstrap = _validated_bootstrap_contract(
-        repository,
-        default_head,
-        metadata,
-        lock_commit=selected,
-    )
-    _validated_preparation_view(
-        repository,
-        default_head,
-        record_path,
-        metadata,
-        bootstrap,
-    )
     evaluator_binding = _validated_evaluator_binding(
         repository,
         default_head,
@@ -964,7 +528,7 @@ def resolve_release(
     )
 
 
-def read_evaluator(repository: Path, release_record: str | None = None) -> EvaluatorDescriptor:
+def read_evaluator(repository: Path) -> EvaluatorDescriptor:
     root = repository.resolve()
     if (root / ".self-hosting" / "governor.toml").exists():
         raise PublicationError("governance snapshot contains a retired active evaluator descriptor")
@@ -988,47 +552,8 @@ def read_evaluator(repository: Path, release_record: str | None = None) -> Evalu
         evaluator = lock.get("evaluator")
         if not isinstance(evaluator, dict):
             raise PublicationError("standard evaluator lock has no evaluator identity")
-    elif lock.get("schema") == 2:
-        if release_record is None or RELEASE_RECORD_PATTERN.fullmatch(release_record) is None:
-            raise PublicationError(
-                "publication requires a schema-3 lock unless schema-2 resolution names one canonical release record"
-            )
-        head = _resolve_commit(root, "HEAD")
-        matches = [
-            (path, metadata)
-            for path, metadata in _release_records_at(root, head)
-            if metadata.get("id") == release_record and metadata.get("status") == "released"
-        ]
-        if len(matches) != 1:
-            raise PublicationError(
-                f"expected exactly one released bootstrap record {release_record}; found {len(matches)}"
-            )
-        release_record_path, release_metadata = matches[0]
-        bootstrap = _validated_bootstrap_contract(root, head, release_metadata, lock_commit=head)
-        if bootstrap is None:
-            raise PublicationError(f"release record {release_record} is not a predecessor bootstrap")
-        _validated_preparation_view(
-            root,
-            head,
-            release_record_path,
-            release_metadata,
-            bootstrap,
-        )
-        binding = _validated_evaluator_binding(root, head, release_metadata, lock_commit=head)
-        evidence_path = binding.get("path")
-        if not isinstance(evidence_path, str):
-            raise PublicationError(f"release record {release_record} has no evaluator evidence")
-        evidence_text = _text_at(root, head, evidence_path)
-        if evidence_text is None:
-            raise PublicationError(f"release record {release_record} evaluator evidence is unavailable")
-        evidence = _loads_json_bytes(
-            evidence_text.encode("utf-8"), label=f"{head}:{evidence_path}"
-        )
-        evaluator = evidence.get("evaluator")
-        if not isinstance(evaluator, dict):
-            raise PublicationError(f"release record {release_record} evaluator evidence is invalid")
     else:
-        raise PublicationError("publication requires a schema-3 lock or an exact schema-2 bootstrap release")
+        raise PublicationError("publication requires a schema-3 evaluator lock")
     allowed = {
         "version",
         "payload_manifest",
@@ -1394,7 +919,6 @@ def build_parser() -> argparse.ArgumentParser:
 
     evaluator = subparsers.add_parser("evaluator", help="Resolve a governance snapshot's standard evaluator identity.")
     evaluator.add_argument("--repository", type=Path, required=True)
-    evaluator.add_argument("--release-record")
     evaluator.add_argument("--output", type=Path)
     evaluator.add_argument("--github-output", type=Path)
 
@@ -1428,7 +952,7 @@ def main(argv: Iterable[str] | None = None) -> int:
             )
             _write_result(result, args.output, args.github_output)
         elif args.command == "evaluator":
-            result = read_evaluator(args.repository, release_record=args.release_record)
+            result = read_evaluator(args.repository)
             _write_result(result, args.output, args.github_output, prefix="evaluator_")
         elif args.command == "verify-github-release":
             verify_github_release(args.metadata, args.tag)

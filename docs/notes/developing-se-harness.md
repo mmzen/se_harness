@@ -126,70 +126,23 @@ clean candidate C -> exact recipe build A/B -> schema-2 bundle -> ready VREC -> 
                                                               -> one-input authorized publication
 ```
 
-The tag selects C, not the later governance commit containing the released record. Recipe replay uses the already-bound expected hashes and has no update-expected mode. Historical released schema-1 records keep their labeled legacy rebuild; new ready records require recipe-bearing schema 2. Publication and Pages workflows validate their complete governance snapshots with current semantics and use an evidence-bound predecessor-compatible view when retained rejected history requires it. No `harnessctl` or recipe command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
+The tag selects C, not the later governance commit containing the released record. Recipe replay uses the already-bound expected hashes and has no update-expected mode. Historical released schema-1 records keep their labeled legacy rebuild; new ready records require recipe-bearing schema 2. Publication and Pages workflows validate their complete governance snapshots with current semantics, unconditionally and for every release record. No `harnessctl` or recipe command commits, pushes, tags, creates a GitHub Release, publishes, deploys, or exercises accountable authority.
 
-### Historical one-release predecessor bootstrap
+### The retired one-release predecessor bootstrap
 
-Version 0.6.0 was the first candidate that required canonical evaluator evidence on a ready release record while this repository was governed by a schema-2 lock and released 0.5.0. The approved `se-harness-release-bootstrap-v1` contract bridged only that transition. Released 0.5.0 prepared and validated the RLS; candidate code merely recorded and rechecked an observation of that external evaluator.
+Version 0.6.0 was the first candidate that required canonical evaluator evidence on a ready release record while this repository was governed by a schema-2 lock and released 0.5.0. Released 0.5.0 emits `E009` on `status = "rejected"` at all, so retaining the rejected `REL-SEH-008` / `RLS-SEH-009` pair made the repository unparseable by the very evaluator that had to judge it. The approved `se-harness-release-bootstrap-v1` contract bridged that one transition: a nine-key `[bootstrap]` table named and hash-pinned the predecessor evaluator, and a compatibility view — a temporary clone detached at the clean governance commit with a sparse specification omitting exactly the rejected pair — was where released 0.5.0 both produced its verdict and authored the successor record `RLS-SEH-012`.
 
-If the complete graph contains one exact rejected predecessor-bootstrap RLS and its exact rejected declaring contract, released 0.5.0 cannot parse that newer terminal status. Under a separately approved successor contract, use the repository-owned adapter to rehearse an exact compatibility view:
+`REQ-REB-011` removed the cause in 0.6.0: a rejected record became valid but inert history. 0.7.0 was the first ordinary release under that rule and needed none of the machinery — `RLS-SEH-014` rejected, `RLS-SEH-015` released under the 0.6.0 root evaluator, `REL-SEH-017` declaring no `[bootstrap]` table.
 
-```powershell
-python scripts/prepare_predecessor_release.py `
-  --repository . `
-  --release-record RLS-... `
-  --release-contract REL-... `
-  --verification-record VREC-... `
-  --work-order WO-... `
-  --version 0.6.0 `
-  --authorized-by release-owner `
-  --tag v0.6.0 `
-  --evaluator-python <external-env>/Scripts/python.exe `
-  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
-  --evaluator-wheel <downloaded-public-wheel> `
-  --json
-```
+`WO-REB-028` retired the machinery on 2026-08-27, under `REQ-REB-029`, `SPEC-REB-013` and `ADR-REB-012`. `repository_tools/release_bootstrap.py`, `predecessor_preparation.py`, `predecessor_publication.py` and `predecessor_assessment.py` are gone with their four entry-point scripts and four test modules; the `predecessor-view` qualification operation is retired and its `PV001` and `PV002` codes stay reserved so no later check reuses them; the publication and Pages lanes read the complete governance snapshot unconditionally. The schema names `se-harness-release-bootstrap-v1`, `se-harness-predecessor-bootstrap-v1` and `se-harness-predecessor-view-exclusion/v1` are retired and never reused. A release contract declares no predecessor evaluator, and no release path can require one.
 
-Plan mode validates the complete graph with candidate source, derives the rejected pair from its closed relations, creates a temporary clone detached at the exact clean governance commit, and gives released 0.5.0 a sparse view omitting only those two paths. It verifies the generated ready RLS but leaves the source repository unchanged. The canonical `se-harness-predecessor-preparation-view-v1` evidence binds the source commit/tree, omitted paths/blob/raw hashes, sparse rules, external evaluator, exact predecessor command, candidate/VREC/work scope, and generated-output digest.
+What remains is fact, not machinery. `REL-SEH-008`, `REL-SEH-009`, `REL-SEH-010`, `REL-SEH-011`, `RLS-SEH-009` and `RLS-SEH-012` keep their bytes, their `[bootstrap]` tables, their `preparation_schema` markers and their evidence files, and `se_harness/hash_bound_classes.json` still binds `evaluator_evidence_sha256`, `preparation_view_evidence_sha256` and `from_lock_sha256`. That history is verifiable by digest and is deliberately no longer re-derivable: nothing in the tree reconstructs a predecessor view or re-runs 0.6.0's preparation. Anyone needing assurance that a predecessor evaluator and its successor agree uses the one remaining mechanism, the no-network `harnessctl rehearse-migration` rehearsal in `se_harness/governance_migration.py`.
 
-Adding `--apply` exclusively creates only the predecessor-generated RLS and its preparation-view sidecar, with source rechecks around each write and rollback on failure. It does not hide rejected history from candidate validation: the complete graph retains both rejected artifacts, and only `ready` or `released` RLS records claim a version. Multiple active records for one version still fail. This adapter is specific to the exact schema-2 predecessor-bootstrap boundary; it is not a general validation-error filter and it never approves, verifies, releases, commits, tags, publishes, deploys, changes the root, or uses credentials.
-
-The same derived view supported a separate hosted predecessor assessment without pretending that released 0.5.0 understood the complete graph. During the 0.6.0 release, the unchanged managed workflow remained visibly failed at its exact full-checkout `E009`. The candidate-owned assessment required a clean exact commit and a valid complete-graph candidate report, proved the exact external wheel/runtime and old lock, accepted only that one legacy diagnostic, and then required released 0.5.0 `doctor`, `validate`, and dashboard generation to pass in the two-omission view:
-
-```powershell
-python scripts/assess_predecessor_evaluator.py `
-  --repository . `
-  --candidate-commit <exact-full-HEAD> `
-  --release-contract REL-SEH-010 `
-  --evaluator-python <external-env>/Scripts/python.exe `
-  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
-  --evaluator-wheel <downloaded-public-wheel> `
-  --output <external-runner-directory>/predecessor-assessment.json `
-  --json
-```
-
-Plan mode performs the complete assessment but creates no evidence file. Adding `--apply` exclusively creates canonical `se-harness-predecessor-assessment-view-v1` JSON at the named external path. The JSON binds the complete candidate report, exact legacy refusal, both omitted Git/raw identities, sparse rules, isolated evaluator payload, fixed view commands, graph counts, and dashboard tree. The dashboard digest retains every generated file while normalizing only the released generator's factual run-time `generated_at` and `elapsed_ms` fields; all semantic bundle bytes remain hash-bound. The adapter rejects publication credential signals, arbitrary omissions or expected-error input, linked or in-checkout output, collision, diagnostic drift, candidate drift, and any source mutation. It has no lifecycle, commit, push, tag, publication, deployment, maintenance, policy, or root-upgrade effect.
-
-The publication gate uses a separate read-only adapter after the RLS is released. Operators normally do not invoke it manually; the initial release resolver, release-bound Pages build, and standalone Pages recovery all call the same command. A local evidence replay uses:
-
-```powershell
-python scripts/validate_predecessor_publication_view.py `
-  --repository <clean-governance-checkout> `
-  --release-record RLS-SEH-012 `
-  --evaluator-python <external-env>/Scripts/python.exe `
-  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
-  --evaluator-wheel <downloaded-public-wheel> `
-  --output <external-runner-directory>/predecessor-publication-view.json `
-  --json
-```
-
-The adapter requires a clean committed checkout, a released RLS, canonical preparation/evaluator sidecars, unchanged rejected-history blobs, and the exact external wheel/runtime. It validates the complete graph before and after, derives the two omissions without caller input, requires released `doctor` and JSON `validate` to pass in a detached temporary view at governance `HEAD`, proves cleanup and zero source change, and emits canonical `se-harness-predecessor-publication-view-v1` JSON only at the named external path. Passing is a technical prerequisite, not publication authority; the adapter has no credentials, network, lifecycle, Git-ref, maintenance, publication, deployment, policy, or root-upgrade effect.
-
-On POSIX, supply the virtual environment's lexical `bin/python` path rather than its resolved system-interpreter target. The adapter permits only that terminal interpreter link, derives evaluator identity from the virtual-environment root, and continues to reject linked parent directories, entry points, wheels, and source-checkout paths. A standard Windows `Scripts/python.exe` remains an ordinary-file path under the same contract.
+The managed root validator still carries the two conditional bootstrap rules it shipped with. Both are inert for any artifact without a `[bootstrap]` table or a `preparation_schema` marker, and the root copy is a hash-locked copy of released 0.6.0 that candidate source cannot edit. `REQ-REB-010` retires with those rules, in a later work order whose change reaches the root only when that root evaluator next advances.
 
 ### The declared interpreter-safety rule
 
-Every `--evaluator-python` argument above reaches the same rule. It is declared once as data in `se_harness/interpreter_safety.json` under schema `se-harness-interpreter-safety-v1`, and read by one loader per runtime: `se_harness/interpreter_safety.py` for the package and `repository_tools/interpreter_safety.py` for the repository-owned adapters. Neither loader imports the other runtime, so the declaration is the only shared thing between them and a cross-runtime conformance test holds the two evaluations in agreement on every declared case.
+Every `--evaluator-python` argument reaches the same rule, `harnessctl rehearse-migration` included. Supply the environment's own lexical entry point — `bin/python` on POSIX, `Scripts/python.exe` on Windows — not the resolved system interpreter it points at. The rule is declared once as data in `se_harness/interpreter_safety.json` under schema `se-harness-interpreter-safety-v1`, and read by one loader per runtime: `se_harness/interpreter_safety.py` for the package and `repository_tools/interpreter_safety.py` for repository-owned tooling. Neither loader imports the other runtime, so the declaration is the only shared thing between them and a cross-runtime conformance test holds the two evaluations in agreement on every declared case. `WO-REB-028` removed the six sites the retired predecessor path declared, so the declaration now names the governance-migration runtime probe and the runtime-identity entry-point observation only.
 
 What that means when a command refuses an interpreter you believe is fine:
 
@@ -202,24 +155,9 @@ The boundary keeps its own diagnostic code — `RID004` and `RID006` for runtime
 
 One acceptance narrowed rather than widened: an interpreter sitting directly below a filesystem root has no derivable environment root and is now refused. No real virtual environment has that shape.
 
-After a separately authorized predecessor `prepare-release` has created the exact contract-named ready RLS, the repository-only binder can first produce a read-only plan:
-
-```powershell
-python scripts/bind_release_bootstrap.py `
-  --repository . `
-  --release-record docs/engineering/<domain>/releases/RLS-...md `
-  --release-contract docs/engineering/<domain>/release/REL-...md `
-  --evaluator-python <external-env>/Scripts/python.exe `
-  --evaluator-entry-point <external-env>/Scripts/harnessctl.exe `
-  --evaluator-wheel <downloaded-public-wheel> `
-  --json
-```
-
-Adding `--apply` is a separate explicit mutation. It exclusively creates one canonical evaluator-evidence sidecar and atomically adds only `preparation_schema`, `evaluator_evidence_path`, and `evaluator_evidence_sha256` to the ready RLS. The command rejects any contract, lock, wheel, runtime-origin, candidate, verification, work-set, path, or existing-byte mismatch. Candidate validation then replays the complete graph, including the retained rejected pair and both sidecars. It never creates or transitions an RLS, changes the root, commits, pushes, tags, publishes, deploys, or uses credentials.
-
 The versioned Git rule `docs/engineering/**/evidence/*.json text eol=lf` preserves the canonical sidecar bytes and bound raw SHA-256 under supported Windows and non-Windows checkout configurations. Validators do not normalize evidence before hashing; changed, noncanonical, or CRLF worktree bytes still fail.
 
-Ordinary ready RLS records now use the complete schema-3 evaluator identity in the current lock. The predecessor-bootstrap rules above remain a historical description of the 0.6.0 release and retained terminal records; they are not needed for ordinary complete-graph evaluation by the 0.6.0 root. A rejected contract cannot bind, prepare, release, publish, or authorize credentials, and only `ready` or `released` records are active version claims. Adopting public 0.6.0 remained separate from publication and was later performed through `WO-HUP-002`.
+Ordinary ready RLS records use the complete schema-3 evaluator identity in the current lock. A rejected contract cannot bind, prepare, release, publish, or authorize credentials, and only `ready` or `released` records are active version claims. Adopting public 0.6.0 remained separate from publication and was later performed through `WO-HUP-002`.
 
 ## Release sequences
 
@@ -229,7 +167,7 @@ Owner content moved here from the retired repository-context document under `WO-
 - Release contract: the unit is one candidate commit (`WO-CIP-004`, `ADR-CIP-002`). Cut it from `main` (or from `candidate/<version>` when a fix to the release itself is needed), write `candidate_commit` and `previous_release_tag` into the contract, and paste the `gates` array `harnessctl release-unit . --from <tag> --to <commit> --toml` prints; `--contract REL-...` re-measures it and reports `E-CIP-001` on any difference, and the approval itself re-measures it: a release contract that names a `candidate_commit` cannot leave `draft` while its `gates` differ from the derivation (`QGP-G5P-RELEASE-UNIT`, `WO-CIP-005`); an untraced commit on the path needs `[release_unit] untraced_exemptions = ["<sha>"]` in the contract. A merge to `main` after the cut does not invalidate the contract; a commit on the first-parent path without a `Harness-Work-Order` trailer must be exempted explicitly (`--exempt <sha>`, and named in the contract with the reason) or the derivation fails.
 - Build: under an approved release work order and after the exact candidate commit exists, run `python -m repository_tools.release_build replay --repository . --commit <full-candidate> --version <version> --output-directory <bundle-dir> --result <replay.json>`. The strict interpreter reads `release/build-recipe.json` and `release/build-toolchain.lock` from that candidate, launches two fresh instances of the digest-pinned Linux/amd64 producer, proves the exact CPython and complete hash-locked tool inventory, applies only the closed environment and argument arrays, normalizes the sdist, and requires byte-for-byte equality. Create retained binding evidence with `python scripts/create_release_bundle_manifest.py --repository . --commit <full-candidate> --version <version> --wheel <bundle-dir>/<wheel> --sdist <bundle-dir>/<sdist> --build-recipe release/build-recipe.json --output <bundle.json>`. Do not substitute native host commands for this recipe-era path. After the two producer runs the replay hands the workspace back to the calling user with one further run of the same pinned image (`chown -R <uid>:<gid> /workspace`, POSIX hosts only, `WO-RLO-007`): the producer writes as root inside the bind mount, and without the hand-back a hosted runner cannot tear the workspace down.
 - Release preparation: first run generic `harnessctl prepare-release ...` to create the ready RLS, then bind the retained schema-2 bundle with `python scripts/bind_release_distribution.py --repository . --release-record <RLS-path> --manifest <bundle.json>`. The binder changes only the repository-owned distribution table and fails atomically. Before the release decision, dispatch `.github/workflows/release-candidate-replay.yml` on the review ref with only `release_record=RLS-...`; it rebuilds twice from the already-bound recipe and hashes with read-only repository permission and retains technical evidence. Historical released schema-1 records remain valid as records, but they are never re-published: the release qualification is one definition, `.github/workflows/release-qualification.yml`, and it replays a bound schema-2 recipe only (`WO-CIP-002`, `SPEC-CIP-001` CIP-LEG 1). A new ready record cannot use schema 1. The publication rehearsal, `.github/workflows/publication-rehearsal.yml`, invokes that same definition on every pull request and push to `main`: in `candidate` mode it qualifies the commit and replays the commit's own recipe twice, and in `release-record` mode, when a ready or released schema-2 record exists (`publish_release.py select-rehearsal-record` chooses the newest, or a dispatch names one), it does what the release will do for that record. See [rehearsing the publication path](release-publication-rehearsal.md).
-- Authorized last mile: after the RLS is `released` in `main`, dispatch `.github/workflows/publish-pypi.yml` from `main` with only `release_record=RLS-...`. Before privileged jobs, the workflow validates the complete committed governance graph with current semantics and, for a bound predecessor-bootstrap RLS, uses the standard predecessor-view qualification. It derives the candidate, governance commit, version, tag, recipe, files, hashes, and canonical `release/MAJOR.MINOR` maintenance line. The `qualify` job is a caller of `.github/workflows/release-qualification.yml` in `release-record` mode, so the release executes exactly the definition the rehearsal executed; there is no legacy leg. Only verified inert bytes cross into jobs that reconcile the exact GitHub tag and Release, maintenance line, PyPI state, Pages deployment, and public observation. The Pages deployment is a caller of `.github/workflows/pages-publication.yml`, the same definition the standalone `publish-dashboard-pages.yml` recovery workflow calls. The protected `pypi` environment remains a separate human decision.
+- Authorized last mile: after the RLS is `released` in `main`, dispatch `.github/workflows/publish-pypi.yml` from `main` with only `release_record=RLS-...`. Before privileged jobs, the workflow validates the complete committed governance graph with current semantics. It derives the candidate, governance commit, version, tag, recipe, files, hashes, and canonical `release/MAJOR.MINOR` maintenance line. The `qualify` job is a caller of `.github/workflows/release-qualification.yml` in `release-record` mode, so the release executes exactly the definition the rehearsal executed; there is no legacy leg. Only verified inert bytes cross into jobs that reconcile the exact GitHub tag and Release, maintenance line, PyPI state, Pages deployment, and public observation. The Pages deployment is a caller of `.github/workflows/pages-publication.yml`, the same definition the standalone `publish-dashboard-pages.yml` recovery workflow calls. The protected `pypi` environment remains a separate human decision.
 
 This repository integrates reviewed work through branches and pull requests without one mandatory development-branch prefix. Every pull request subject to the installed workflow declares exactly one standalone `Harness-Work-Order: WO-...` field; branch naming does not substitute for that declaration or for approved scope. Repository release automation establishes `release/MAJOR.MINOR` from each authorized released candidate as the canonical maintenance line. Existing compatible lines may advance through separately governed maintenance work; automation never moves a conflicting ref. This local rule is not part of portable SE Harness or its consumer workflow.
 
