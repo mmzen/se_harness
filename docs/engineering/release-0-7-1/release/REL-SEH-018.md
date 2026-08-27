@@ -2,7 +2,7 @@
 id = "REL-SEH-018"
 type = "release_contract"
 title = "Release se-harness 0.7.1: the simple released-evaluator upgrade"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -13,6 +13,13 @@ gates = ["WO-REB-024", "WO-REB-025", "WO-REB-026", "WO-REB-027", "WO-RLS-013"]
 [release_unit]
 previous_release_tag = "v0.7.0"
 untraced_exemptions = ["20fa9f0b77241c0158020fe94ddd5d2f29afb061", "76100cf75c4349fefe310c25e379a59f17e9cffe", "088b08befbce5874289fd5877510000048f24226", "28487f0112b2f67c5f5471f1028840ec30cca6e5", "7284743d167ee33ccd8236f7c96409c32e1d2faa", "f605e580e6366a739dc020559cac35a89e1ffc39"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T16:06:41Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-27 with the words 'I approve REL-SEH-018', freezing the five-work-order allow-list in gates as the exact 0.7.1 release unit. Re-measured immediately before this transition over branch state f022e5c carrying unmoved main f605e58: the four existing members read implemented with verified coverage; WO-RLS-013 approved seconds earlier; on the whole-gates basis four verification contracts, a six-requirement union and five keyed evidence paths, four existing plus the one WO-RLS-013 retains; no other work order reached implemented since v0.7.0; the commit census from v0.7.0 traces WO-REB-027 and exempts six named merge commits, so the derivation is complete, and no candidate_commit is named because the candidate does not exist yet, so QGP-G5P-RELEASE-UNIT passes unmeasured. Governing public 0.6.0 evaluator outside the checkout: validate PASS at 978 artifacts, 0 errors, 53 maintenance warnings; doctor 0 FAIL. From this moment gates cannot be widened, narrowed or repaired in place; a further landing with packaged-surface bytes is a stop condition remedied only by a successor contract. This approval gates the candidate commit, the promotable build and release preparation; it authorizes none of them."
 +++
 
 # Release Contract: Release se-harness 0.7.1: the simple released-evaluator upgrade
