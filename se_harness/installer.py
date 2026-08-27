@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -9,7 +10,7 @@ import sysconfig
 import tempfile
 from dataclasses import dataclass
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 from se_harness import __version__
@@ -385,29 +386,45 @@ def _restore_snapshot(snapshot: dict[Path, bytes | None]) -> list[str]:
     return failures
 
 
+UPGRADE_EVIDENCE_SCHEMA = "se-harness-evaluator-upgrade-evidence-v1"
+
+
+def validate_upgrade_evidence_path(path: Path) -> PurePosixPath:
+    """Require repository-relative JSON evidence below docs/engineering/.../evidence/."""
+
+    if path.is_absolute() or ".." in path.parts:
+        raise HarnessError("upgrade evidence path must be repository-relative")
+    normalized = PurePosixPath(path.as_posix())
+    if (
+        len(normalized.parts) < 4
+        or normalized.parts[:2] != ("docs", "engineering")
+        or "evidence" not in normalized.parts[2:-1]
+        or normalized.suffix != ".json"
+    ):
+        raise HarnessError("upgrade evidence must be a JSON path below docs/engineering/.../evidence/")
+    return normalized
+
+
 def _upgrade_evidence_bytes(
     *,
-    authorization: Any,
+    prior_lock_sha256: str,
     old_lock: dict,
     lock: dict,
     changes: list[Change],
+    declared: tuple[str, ...] = (),
 ) -> bytes:
-    from se_harness.upgrade_authorization import UPGRADE_EVIDENCE_SCHEMA
-
+    # SPEC-REB-012 rule 4: the same canonical document as before, minus the
+    # retired work-order packet fields, which are carried as null.
     changed = [item for item in changes if item.action in {"add", "integrate", "update"}]
     value = {
         "schema": UPGRADE_EVIDENCE_SCHEMA,
-        "work_order": authorization.work_order,
-        "authorization_path": authorization.artifact_path,
+        "work_order": None,
+        "authorization_path": None,
         "scope": "standard-root-only",
-        "authorized_by": authorization.authorized_by,
+        "authorized_by": None,
         "prior": {
-            "lock_sha256": authorization.prior_lock_sha256,
-            # Names how the recorded digest matched. A digest taken before the
-            # lock's hash-bound class was declared matches as a legacy newline
-            # variant, and that is reported rather than passing as an ordinary
-            # match.
-            "lock_match": authorization.prior_lock_match,
+            "lock_sha256": prior_lock_sha256,
+            "lock_match": None,
             "tool_version": old_lock.get("tool_version"),
             "evaluator": old_lock.get("evaluator"),
         },
@@ -432,7 +449,6 @@ def _upgrade_evidence_bytes(
             "authorize a release, publish, tag, deploy, or grant incident authority."
         ),
     }
-    declared = getattr(authorization, "legacy_releases_without_evaluator_evidence", ())
     if declared:
         # Provenance for SPEC-LRE-001 rule 5: record what the authorizing packet
         # declared at the moment of the transition. Omitted when nothing is declared,
@@ -450,11 +466,13 @@ def apply_changes(
     old_lock: dict,
     *,
     allow_updates: bool,
-    upgrade_work_order: str | None = None,
     evidence_output: Path | None = None,
 ) -> dict:
     changes = list(changes)
-    upgrade_authorization = None
+    transition = False
+    target_identity = None
+    prior_lock_sha256: str | None = None
+    declared_legacy: tuple[str, ...] = ()
     if allow_updates:
         refreshed_changes, refreshed_lock = plan_install(
             target,
@@ -469,18 +487,13 @@ def apply_changes(
             target,
             operation="upgrade-apply",
             allow_upgrade_transition=True,
-            upgrade_work_order=upgrade_work_order,
         )
-        upgrade_authorization = getattr(authority, "upgrade_authorization", None)
-        if upgrade_authorization is not None and evidence_output is None:
-            raise HarnessError(
-                "evaluator identity transition requires --evidence-output; no files were written"
-            )
-        if upgrade_authorization is None and evidence_output is not None:
-            raise HarnessError(
-                "--evidence-output is allowed only for an authorized evaluator identity transition"
-            )
-        if upgrade_authorization is not None:
+        transition = bool(getattr(authority, "transition", False))
+        target_identity = getattr(authority, "target_identity", None)
+        lock_file = target / LOCK_NAME
+        if lock_file.is_file():
+            prior_lock_sha256 = hashlib.sha256(lock_file.read_bytes()).hexdigest()
+        if transition:
             # REQ-LRE-002: an identity transition writes a schema-3 lock, which
             # enforces the evaluator-evidence binding on every released record. An
             # undeclared unbound record would leave the repository unable to
@@ -494,6 +507,9 @@ def apply_changes(
 
             try:
                 undeclared = undeclared_legacy_releases(target)
+                from se_harness.legacy_release_evidence import resolve_repository
+
+                declared_legacy = tuple(sorted(resolve_repository(target).exemptions))
             except LegacyReleaseEvidenceError as exc:
                 raise HarnessError(
                     f"cannot assess released records for evaluator evidence; no files were written: {exc}"
@@ -503,8 +519,7 @@ def apply_changes(
                     "released records predate evaluator-evidence enforcement and are not declared; "
                     "no files were written: "
                     + ", ".join(undeclared)
-                    + f"; declare them in {upgrade_authorization.work_order} under "
-                    f"[evaluator_upgrade].{DECLARATION_FIELD}"
+                    + f"; declare them in an approved work order under [evaluator_upgrade].{DECLARATION_FIELD}"
                 )
     elif old_lock.get("tool_version") is not None or (target / CONFIG_NAME).exists():
         # Init and first adoption have no installed authority to prove. A direct
@@ -531,18 +546,7 @@ def apply_changes(
     }
     evidence_destination: Path | None = None
     if allow_updates and evidence_output is not None:
-        from se_harness.upgrade_authorization import (
-            UpgradeAuthorizationError,
-            validate_upgrade_evidence_path,
-        )
-
-        try:
-            evidence_relative = validate_upgrade_evidence_path(
-                evidence_output,
-                upgrade_authorization.work_order,
-            )
-        except UpgradeAuthorizationError as exc:
-            raise HarnessError(str(exc)) from exc
+        evidence_relative = validate_upgrade_evidence_path(evidence_output)
         evidence_destination = safe_destination(target, Path(evidence_relative.as_posix()))
         if evidence_destination in destinations.values():
             raise HarnessError("upgrade evidence path overlaps a managed destination")
@@ -600,35 +604,26 @@ def apply_changes(
                 lock["evaluator"] = installed_evaluator_identity().to_lock()
             except EvaluatorIdentityError as exc:
                 raise HarnessError(f"cannot identify the installed evaluator payload: {exc}") from exc
-        if upgrade_authorization is not None:
-            observed_target = lock.get("evaluator")
-            if not isinstance(observed_target, dict) or (
-                observed_target.get("version") != upgrade_authorization.target_version
-                or observed_target.get("payload_sha256")
-                != upgrade_authorization.target_payload_sha256
-                or observed_target.get("archive_name")
-                != upgrade_authorization.target_archive_name
-                or observed_target.get("archive_sha256")
-                != upgrade_authorization.target_archive_sha256
-            ):
+        if target_identity is not None and output_schema == LOCK_SCHEMA:
+            if lock.get("evaluator") != target_identity.to_lock():
                 raise HarnessError(
-                    "installed evaluator identity changed after authorization; no files were retained"
+                    "installed evaluator identity changed after the authority check; no files were retained"
                 )
         lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
         _atomic_write(lock_path, lock_bytes)
-        if upgrade_authorization is not None:
+        if transition:
             replay, replay_lock = plan_install(target, project_name=None, mode="upgrade")
             if replay_lock != lock or any(item.action != "unchanged" for item in replay):
                 raise HarnessError("upgrade postcondition failed: replay is not a no-op")
-            if evidence_destination is None:
-                raise HarnessError("upgrade transaction evidence destination is unavailable")
+        if evidence_destination is not None:
             _atomic_write(
                 evidence_destination,
                 _upgrade_evidence_bytes(
-                    authorization=upgrade_authorization,
+                    prior_lock_sha256=prior_lock_sha256 or "",
                     old_lock=old_lock,
                     lock=lock,
                     changes=changes,
+                    declared=declared_legacy,
                 ),
             )
         return lock

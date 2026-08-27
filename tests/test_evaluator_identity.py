@@ -135,6 +135,45 @@ class EvaluatorIdentityTests(unittest.TestCase):
         self.assertIn("RID021", codes)
         self.assertIn("RID022", codes)
 
+    def test_an_index_install_without_an_archive_digest_is_identified_by_its_payload(self) -> None:
+        # REQ-REB-028: no PEP 610 record, no RID022; the payload still decides.
+        installed = InstalledEvaluatorIdentity(
+            version=__version__,
+            payload_manifest=IDENTITY.PAYLOAD_MANIFEST,
+            payload_sha256="a" * 64,
+        )
+        self.assertEqual(
+            {
+                "version": __version__,
+                "payload_manifest": IDENTITY.PAYLOAD_MANIFEST,
+                "payload_sha256": "a" * 64,
+                "archive_name": None,
+                "archive_sha256": None,
+            },
+            installed.to_lock(),
+        )
+        with mock.patch("se_harness.runtime_identity.installed_evaluator_identity", return_value=installed):
+            report = inspect_runtime_identity(
+                role="released-evaluator",
+                expected_version=__version__,
+                expected_root=Path(sys.prefix),
+                checkout_root=REPOSITORY_ROOT,
+                evaluator_payload_sha256="a" * 64,
+                evaluator_wheel_sha256="d" * 64,
+            )
+        codes = {item.code for item in report.diagnostics}
+        self.assertNotIn("RID022", codes)
+        self.assertNotIn("RID021", codes)
+        with mock.patch("se_harness.runtime_identity.installed_evaluator_identity", return_value=installed):
+            report = inspect_runtime_identity(
+                role="released-evaluator",
+                expected_version=__version__,
+                expected_root=Path(sys.prefix),
+                checkout_root=REPOSITORY_ROOT,
+                evaluator_payload_sha256="c" * 64,
+            )
+        self.assertIn("RID021", {item.code for item in report.diagnostics})
+
 
 if __name__ == "__main__":
     unittest.main()

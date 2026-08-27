@@ -19,7 +19,7 @@ from se_harness.evaluator_evidence import (
     build_evaluator_evidence,
     parse_evaluator_evidence,
 )
-from se_harness.evaluator_identity import InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
+from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
 from se_harness.effect_broker import apply_change_bundle
 from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED, MATCH_LEGACY_NEWLINE
 from se_harness.installer import HarnessError, apply_changes, plan_install
@@ -151,10 +151,27 @@ class MutationGuardTests(unittest.TestCase):
             require_mutation_authority(mismatched, operation="create-artifact")
 
         target = self._write_identity_root()
+        # REQ-REB-028: an index install records no PEP 610 archive; that is an
+        # identity fact, not a failure. MG004 fires only when the evaluator cannot
+        # identify itself at all.
         unpackaged = InstalledEvaluatorIdentity(__version__, PAYLOAD_MANIFEST, "a" * 64)
         with mock.patch(
             "se_harness.mutation_guard.installed_evaluator_identity",
             return_value=unpackaged,
+        ), mock.patch(
+            "se_harness.mutation_guard._runtime_report",
+            return_value=self._passing_identity(target),
+        ):
+            authority = require_mutation_authority(
+                target,
+                operation="upgrade-apply",
+                allow_upgrade_transition=True,
+            )
+        self.assertEqual(unpackaged, authority.target_identity)
+        self.assertTrue(authority.transition)
+        with mock.patch(
+            "se_harness.mutation_guard.installed_evaluator_identity",
+            side_effect=EvaluatorIdentityError("no payload"),
         ), self.assertRaisesRegex(HarnessError, r"MG004 \(upgrade-apply\)"):
             require_mutation_authority(
                 target,
@@ -174,9 +191,11 @@ class MutationGuardTests(unittest.TestCase):
                 require_archive=True,
             )
 
-    def test_evaluator_transition_requires_exact_packet_and_retains_atomic_evidence(self) -> None:
-        root = self.base / "governed-transition"
-        changes, old_lock = plan_install(root, project_name="Governed Transition", mode="init")
+    def test_evaluator_transition_applies_without_a_packet_and_retains_optional_evidence(self) -> None:
+        # SPEC-REB-012 rules 2-4: the installed released evaluator is the target
+        # identity; no work-order packet; evidence only when requested.
+        root = self.base / "simple-transition"
+        changes, old_lock = plan_install(root, project_name="Simple Transition", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
         target_identity = InstalledEvaluatorIdentity(
             __version__,
@@ -192,46 +211,13 @@ class MutationGuardTests(unittest.TestCase):
             "payload_sha256": "c" * 64,
             "archive_sha256": "d" * 64,
         }
-        # Explicit LF, and the recorded digest is the lock's declared mode rather
-        # than this platform's bytes, so the packet reads the same on either default.
         lock_path.write_text(
             json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
         )
-        self.assertNotIn(b"\r", lock_path.read_bytes())
-        prior_lock_sha256 = canonical_sha256(lock_path.read_bytes())
-        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-001.md"
-        work_order.parent.mkdir(parents=True)
-        work_order.write_text(
-            f'''+++
-id = "WO-TST-001"
-type = "work_order"
-title = "Adopt exact released evaluator"
-status = "in_progress"
-owners = ["repository-owner"]
-created = "2026-08-21"
-updated = "2026-08-21"
-
-[evaluator_upgrade]
-schema = "se-harness-evaluator-upgrade-v1"
-scope = "standard-root-only"
-prior_lock_sha256 = "{prior_lock_sha256}"
-target_version = "{target_identity.version}"
-target_payload_sha256 = "{target_identity.payload_sha256}"
-target_archive_name = "{target_identity.archive_name}"
-target_archive_sha256 = "{target_identity.archive_sha256}"
-publication = "immutable"
-authorized_by = "repository-owner"
-
-[relations]
-+++
-
-# Work Order
-''',
-            encoding="utf-8",
-        )
+        prior_lock_sha256 = raw_sha256(lock_path.read_bytes())
         changes, old_lock = plan_install(root, project_name=None, mode="upgrade")
-        before = self._snapshot(root)
         passing = self._passing_identity(root)
+        evidence_relative = Path("docs/engineering/upgrade/evidence/evaluator-upgrade.json")
         with mock.patch(
             "se_harness.mutation_guard.installed_evaluator_identity",
             return_value=target_identity,
@@ -242,39 +228,13 @@ authorized_by = "repository-owner"
             "se_harness.mutation_guard._runtime_report",
             return_value=passing,
         ):
-            with self.assertRaisesRegex(HarnessError, r"MG007.*separately approved --work-order"):
-                apply_changes(root, changes, old_lock, allow_updates=True)
-            self.assertEqual(before, self._snapshot(root))
-
-            with self.assertRaisesRegex(HarnessError, "requires --evidence-output"):
+            with self.assertRaisesRegex(HarnessError, "must be repository-relative"):
                 apply_changes(
-                    root,
-                    changes,
-                    old_lock,
-                    allow_updates=True,
-                    upgrade_work_order="WO-TST-001",
+                    root, changes, old_lock, allow_updates=True, evidence_output=Path("C:/evidence.json")
+                    if Path("C:/").exists() else Path("/evidence.json"),
                 )
-            self.assertEqual(before, self._snapshot(root))
-
-            evidence_relative = Path(
-                "docs/engineering/upgrade/evidence/WO-TST-001-evaluator-upgrade.json"
-            )
-            evidence_path = root / evidence_relative
-            evidence_path.parent.mkdir(parents=True)
-            evidence_path.write_text("existing evidence\n", encoding="utf-8")
-            collision_before = self._snapshot(root)
-            with self.assertRaisesRegex(HarnessError, "evidence output already exists"):
-                apply_changes(
-                    root,
-                    changes,
-                    old_lock,
-                    allow_updates=True,
-                    upgrade_work_order="WO-TST-001",
-                    evidence_output=evidence_relative,
-                )
-            self.assertEqual(collision_before, self._snapshot(root))
-            evidence_path.unlink()
-
+            with self.assertRaisesRegex(HarnessError, "below docs/engineering"):
+                apply_changes(root, changes, old_lock, allow_updates=True, evidence_output=Path("notes/evidence.json"))
             changed_identity = InstalledEvaluatorIdentity(
                 __version__,
                 PAYLOAD_MANIFEST,
@@ -286,163 +246,39 @@ authorized_by = "repository-owner"
             with mock.patch(
                 "se_harness.installer.installed_evaluator_identity",
                 return_value=changed_identity,
-            ), self.assertRaisesRegex(HarnessError, "changed after authorization"):
-                apply_changes(
-                    root,
-                    changes,
-                    old_lock,
-                    allow_updates=True,
-                    upgrade_work_order="WO-TST-001",
-                    evidence_output=evidence_relative,
-                )
+            ), self.assertRaisesRegex(HarnessError, "changed after the authority check"):
+                apply_changes(root, changes, old_lock, allow_updates=True, evidence_output=evidence_relative)
             self.assertEqual(transition_before, self._snapshot(root))
 
             result = apply_changes(
-                root,
-                changes,
-                old_lock,
-                allow_updates=True,
-                upgrade_work_order="WO-TST-001",
-                evidence_output=evidence_relative,
+                root, changes, old_lock, allow_updates=True, evidence_output=evidence_relative
             )
         self.assertEqual(target_identity.to_lock(), result["evaluator"])
         evidence = json.loads((root / evidence_relative).read_bytes())
         self.assertEqual("se-harness-evaluator-upgrade-evidence-v1", evidence["schema"])
-        self.assertEqual("WO-TST-001", evidence["work_order"])
+        self.assertIsNone(evidence["work_order"])
+        self.assertIsNone(evidence["authorization_path"])
+        self.assertIsNone(evidence["authorized_by"])
         self.assertEqual(prior_lock_sha256, evidence["prior"]["lock_sha256"])
-        self.assertEqual(MATCH_DECLARED, evidence["prior"]["lock_match"])
+        self.assertIsNone(evidence["prior"]["lock_match"])
         self.assertEqual(target_identity.to_lock(), evidence["target"])
         self.assertTrue(evidence["transaction"]["atomic"])
         self.assertTrue(evidence["postconditions"]["no_op_replay"])
         self.assertFalse(evidence["postconditions"]["product_release_performed"])
 
-    def test_prior_lock_authority_is_indifferent_to_the_checkout_newline(self) -> None:
-        root = self.base / "newline-materialization"
-        changes, old_lock = plan_install(root, project_name="Newline", mode="init")
+    def test_an_index_installed_evaluator_upgrades_without_an_archive_digest(self) -> None:
+        # REQ-REB-028: no PEP 610 archive digest, no packet, one apply; the lock
+        # carries the archive pair as null and the replay is a no-op.
+        root = self.base / "index-install-transition"
+        changes, old_lock = plan_install(root, project_name="Index Install", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
-        target_identity = InstalledEvaluatorIdentity(
-            __version__,
-            PAYLOAD_MANIFEST,
-            "a" * 64,
-            f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
-            "b" * 64,
-        )
-        lock_path = root / LOCK_RELATIVE
-        lock_lf = lock_path.read_bytes().replace(b"\r\n", b"\n")
-        prior_lock_sha256 = canonical_sha256(lock_lf)
-        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-002.md"
-        work_order.parent.mkdir(parents=True)
-        work_order.write_text(
-            f'''+++
-id = "WO-TST-002"
-type = "work_order"
-title = "Adopt exact released evaluator"
-status = "in_progress"
-owners = ["repository-owner"]
-created = "2026-08-24"
-updated = "2026-08-24"
-
-[evaluator_upgrade]
-schema = "se-harness-evaluator-upgrade-v1"
-scope = "standard-root-only"
-prior_lock_sha256 = "{prior_lock_sha256}"
-target_version = "{target_identity.version}"
-target_payload_sha256 = "{target_identity.payload_sha256}"
-target_archive_name = "{target_identity.archive_name}"
-target_archive_sha256 = "{target_identity.archive_sha256}"
-publication = "immutable"
-authorized_by = "repository-owner"
-
-[relations]
-+++
-
-# Work Order
-''',
-            encoding="utf-8",
-            newline="\n",
-        )
-        # The guard supplies the lock's exact bytes and the declaration decides the
-        # mode, so a CRLF checkout of the same blob must reach the same authority.
-        for materialization, payload in (("lf", lock_lf), ("crlf", lock_lf.replace(b"\n", b"\r\n"))):
-            with self.subTest(materialization=materialization):
-                lock_path.write_bytes(payload)
-                with mock.patch(
-                    "se_harness.mutation_guard.installed_evaluator_identity",
-                    return_value=target_identity,
-                ), mock.patch(
-                    "se_harness.mutation_guard._runtime_report",
-                    return_value=self._passing_identity(root),
-                ):
-                    authority = require_mutation_authority(
-                        root,
-                        operation="upgrade-apply",
-                        allow_upgrade_transition=True,
-                        upgrade_work_order="WO-TST-002",
-                    )
-                authorization = authority.upgrade_authorization
-                self.assertIsNotNone(authorization)
-                self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
-                self.assertEqual(prior_lock_sha256, authorization.prior_lock_sha256)
-
-    def test_a_legacy_recorded_prior_lock_still_applies_and_is_reported(self) -> None:
-        root = self.base / "legacy-recorded-prior"
-        changes, old_lock = plan_install(root, project_name="Legacy Prior", mode="init")
-        apply_changes(root, changes, old_lock, allow_updates=False)
-        target_identity = InstalledEvaluatorIdentity(
-            __version__,
-            PAYLOAD_MANIFEST,
-            "a" * 64,
-            f"se_harness-{__version__.replace('-', '_')}-py3-none-any.whl",
-            "b" * 64,
-        )
+        target_identity = InstalledEvaluatorIdentity(__version__, PAYLOAD_MANIFEST, "a" * 64)
         lock_path = root / LOCK_RELATIVE
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["evaluator"] = {
-            **target_identity.to_lock(),
-            "payload_sha256": "c" * 64,
-            "archive_sha256": "d" * 64,
-        }
-        lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
-        lock_path.write_bytes(lock_bytes)
-        # Recorded the way a pre-declaration authorization recorded it: the raw
-        # digest of a CRLF checkout of these exact LF bytes.
-        prior_lock_sha256 = raw_sha256(lock_bytes.replace(b"\n", b"\r\n"))
-        self.assertNotEqual(prior_lock_sha256, canonical_sha256(lock_bytes))
-        work_order = root / "docs/engineering/upgrade/work-orders/WO-TST-003.md"
-        work_order.parent.mkdir(parents=True)
-        work_order.write_text(
-            f'''+++
-id = "WO-TST-003"
-type = "work_order"
-title = "Adopt exact released evaluator"
-status = "in_progress"
-owners = ["repository-owner"]
-created = "2026-08-24"
-updated = "2026-08-24"
-
-[evaluator_upgrade]
-schema = "se-harness-evaluator-upgrade-v1"
-scope = "standard-root-only"
-prior_lock_sha256 = "{prior_lock_sha256}"
-target_version = "{target_identity.version}"
-target_payload_sha256 = "{target_identity.payload_sha256}"
-target_archive_name = "{target_identity.archive_name}"
-target_archive_sha256 = "{target_identity.archive_sha256}"
-publication = "immutable"
-authorized_by = "repository-owner"
-
-[relations]
-+++
-
-# Work Order
-''',
-            encoding="utf-8",
-            newline="\n",
-        )
-        evidence_relative = Path(
-            "docs/engineering/upgrade/evidence/WO-TST-003-evaluator-upgrade.json"
-        )
+        lock["evaluator"] = {**target_identity.to_lock(), "payload_sha256": "c" * 64}
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         changes, old_lock = plan_install(root, project_name=None, mode="upgrade")
+        passing = self._passing_identity(root)
         with mock.patch(
             "se_harness.mutation_guard.installed_evaluator_identity",
             return_value=target_identity,
@@ -451,22 +287,23 @@ authorized_by = "repository-owner"
             return_value=target_identity,
         ), mock.patch(
             "se_harness.mutation_guard._runtime_report",
-            return_value=self._passing_identity(root),
+            return_value=passing,
         ):
-            result = apply_changes(
-                root,
-                changes,
-                old_lock,
-                allow_updates=True,
-                upgrade_work_order="WO-TST-003",
-                evidence_output=evidence_relative,
-            )
-        self.assertEqual(target_identity.to_lock(), result["evaluator"])
-        evidence = json.loads((root / evidence_relative).read_bytes())
-        # The authorization still succeeds, and the report names how it matched
-        # instead of letting a legacy digest pass as an ordinary one.
-        self.assertEqual(prior_lock_sha256, evidence["prior"]["lock_sha256"])
-        self.assertEqual(MATCH_LEGACY_NEWLINE, evidence["prior"]["lock_match"])
+            result = apply_changes(root, changes, old_lock, allow_updates=True)
+        self.assertEqual(
+            {
+                "version": __version__,
+                "payload_manifest": PAYLOAD_MANIFEST,
+                "payload_sha256": "a" * 64,
+                "archive_name": None,
+                "archive_sha256": None,
+            },
+            result["evaluator"],
+        )
+        self.assertEqual([], [path for path in root.rglob("*.json") if "evidence" in path.parts])
+        replay, replay_lock = plan_install(root, project_name=None, mode="upgrade")
+        self.assertEqual(result, replay_lock)
+        self.assertTrue(all(item.action == "unchanged" for item in replay))
 
     def test_runtime_failures_preserve_bounded_identity_codes(self) -> None:
         root = self._write_identity_root()

@@ -30,6 +30,10 @@ their bounded post-adoption qualification.
   separate governed actions. No managed root, product, release, publication,
   deployment, maintenance, or external policy was changed.
 
+- `INT-HUP-004`, `REQ-HUP-012`, `REQ-HUP-013`, `SPEC-HUP-006`, `ARCH-HUP-004` (no significant decision) and `VER-HUP-006` are drafted, deriving from the existing `CAP-HUP-002`. `WO-HUP-006` is drafted to adopt exact public `0.7.0` (`RLS-SEH-015`, wheel `e8f4fdc9…`, payload `26c11ec5…`) as the standard root, from the 0.6.0 lock `978cebb7…`. Measured on 2026-08-27 over `main` at `7284743`: the 0.7.0 plan reads 61 files, 18 unchanged, 43 add or update, no customization. Approval, start, the transaction, completion, verification and merge are separate acts. A rehearsal of the transaction in a throwaway worktree (apply, no-op replay, 0.7.0 doctor and validate clean) showed eleven root-assumption test pins in six modules and one coupling: with the root and the candidate both at `0.7.0`, `predecessor_facts derive` raises `PRE008`, so the work order also moves the candidate to development version `0.8.0` with its scenario, on the owner's 2026-08-27 decision.
+
+`WO-HUP-006` is `rejected` (2026-08-27). The transaction ran on the branch of pull request #196 and was abandoned there: 0.7.0's managed workflow installs its evaluator from the index and then requires a PEP 610 archive digest (`RID022`), so the managed lane cannot pass, and the owner directed that the wheel-digest (`MG004`) and work-order-packet (`MG007`) requirements on `harnessctl upgrade --apply` be removed rather than worked around. The root stays at exact public 0.6.0 until a release carries the simplified upgrade.
+
 ## Successor of 0.6.0 (draft)
 
 - `REQ-HUP-010`: prove the exact released successor carrying `WO-ADS-001`, `WO-ADS-002`, and `WO-RSK-001`.
