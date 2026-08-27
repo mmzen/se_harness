@@ -519,3 +519,72 @@ Preparing `VREC-REB-026` added an artifact, so it moved the formal snapshot once
 | `5ab8585bae55cf112ef8eb91026987b7e7951dec1ee6614e372a4c03e50368b2` | `c20b673` | after preparing `VREC-REB-026`, which is itself an artifact |
 
 Section 15.2 says the binding block at the top of this file "always names the current snapshot". That is one commit too loose, and the accurate statement is this: the block names `7f36d032`, the snapshot at `67a52b9`, which is exactly the candidate commit `VREC-REB-026` binds. A verification record's own preparation necessarily moves the snapshot after the commit it binds, so a bound reading can never name the snapshot of the commit that carries the record. No gate reads the block in the current state in any case, because the handoff checkpoint no longer applies, as section 15.3 records; the review preflight the hosted lane runs passes at every commit since the retraction.
+
+## 17. The owner review of 2026-08-27 on pull request #206
+
+The repository owner reviewed this change at `2026-08-27T19:04:30Z` against issue #208, which is P0-2 of the 2026-08 complexity audit and the finding this work order answers. The review states its readings were reproduced independently rather than taken from the pull-request body, approves the content, and raises four gaps. This section is appended for the same reason section 16 was: the review does not exist until the branch is pushed, and a verification record cannot bind evidence describing events its own push causes. The append changes no artifact, so the formal snapshot and `VREC-REB-026`'s `artifact_snapshot_sha256` do not move.
+
+One reading in the review cross-checks this document arithmetically. The review reports the pinned 0.6.0 validator at `e6231d5` as 990 artifacts, 0 errors, 55 warnings. Section 14 reports 989 / 0 / 55 at `01084d8` with the same validator, and `e6231d5` is exactly the commit that added `VREC-REB-025`, one artifact. The two independent readings agree.
+
+### 17.1 The four gaps, measured again here
+
+Each gap was re-measured at `03e4f0d` rather than accepted from the review text.
+
+| # | The review's gap | Measured here | True? |
+| --- | --- | --- | --- |
+| 1 | The consumer-installed validator still ships the predecessor rules | `_validate_predecessor_view_evidence` at lines 1135 to 1457, 323 lines; `_bootstrap_for_release_record` at 854 to 921, 68 lines; `_validated_release_bootstrap` at 791 to 844, 54 lines; the three retired schema constants at 58 to 60; call sites at 1940 to 1954, 1991 to 1992 and 2115 to 2126 | yes |
+| 2 | `repository_tools/interpreter_safety.py` is dead code | the only importer left in the repository is `tests/test_interpreter_safety.py`, which pins it byte-equal to `se_harness/interpreter_safety.py`; no product module, script or workflow imports it | yes |
+| 3 | `ADR-REB-009` still decides five operations | line 69 names `predecessor-view` among "exactly five typed subcommands"; `ADR-REB-012` does not mention `ADR-REB-009` at any point, and `ADR-REB-009` carries no amendment | yes |
+| 4 | The `$RUNNER_TEMP/predecessor-view` directory name is kept | six lines in `.github/workflows/pages-publication.yml`, 174 to 187 | yes |
+
+Issue #208's four acceptance criteria read as follows at `03e4f0d`, using the issue's own commands:
+
+| Criterion | Reading |
+| --- | --- |
+| No `predecessor_view` or `predecessor-view` outside `docs/engineering/` | not met: nine occurrences remain, six of them the temp-directory name of gap 4, two the validator constants of gap 1 in each of the two copies, and one the `FORBIDDEN_ACTIVE_CONTENT` entry in `check_portable_release_surface.py` that exists in order to forbid the string |
+| `se_harness/` contains no import of `repository_tools` | met; the two textual matches in `se_harness/interpreter_safety.py` are a docstring and the `RUNTIMES` name tuple, not imports |
+| `validate_engineering_artifacts.py --root .` reports 0 errors | met, and it is the same figure from both the in-tree copy of the released validator and the evaluator installed outside the checkout: 997 artifacts, 0 errors, 471 warnings. Section 15.2 reads 996 at `67a52b9`; the extra artifact is `VREC-REB-026` itself |
+| No bootstrap-tuple branch in the release-qualification and publish-pypi workflows | met: zero occurrences of `bootstrap` in `publish-pypi.yml`, `release-qualification.yml` and `pages-publication.yml` |
+
+### 17.2 Gap 1 is forbidden by this work order's own approval, and is a release-time change
+
+Two facts decide it. First, the approval that authorized this work says, verbatim, "No byte of scripts/validate_engineering_artifacts.py, its templates copy, or se_harness/hash_bound_classes.json", and `templates/` is absent from `[execution_scope] paths`, so `QGP-G4I-PATHS` would refuse the changed path with `WEX201`.
+
+Second, the change would not alter how this repository is judged. The two copies are byte-identical:
+
+| Copy | Bytes | Lines | sha256 |
+| --- | --- | --- | --- |
+| `scripts/validate_engineering_artifacts.py` | 159,767 | 3,679 | `312375bc455cfbf716300e235c976c8bfe9ac90bb5d74748bef31836a944d724` |
+| `templates/repository/standard/scripts/validate_engineering_artifacts.py` | 159,767 | 3,679 | `312375bc455cfbf716300e235c976c8bfe9ac90bb5d74748bef31836a944d724` |
+
+The template copy is therefore not lagging candidate source here; it is the exact released 0.7.1 file. The governing evaluator that validates this repository is installed outside the checkout and would keep enforcing those rules whatever the template says, so deleting them changes only what a future release ships to consumers, and it takes effect at that release. Several tests also pin the template byte-equal to the root copy, so the edit needs a declared candidate exception in each of them. That is a self-contained piece of work with its own release consequence and its own verification, not a late addition to this one.
+
+### 17.3 No further work can be done under WO-REB-028
+
+`docs/engineering/WORKFLOW.json` gives the work-order lifecycle as `implemented -> ["verified", "released"]`. There is no edge back to `in_progress`, and none from `implemented` to itself. `WO-REB-028` is `implemented`, so it can take no further implementation work, and widening its execution scope would not change that. The completion decision already recorded on it enumerates exactly what was done and cannot be corrected.
+
+`VREC-REB-026` compounds it: the record is `ready` and binds candidate `67a52b9` with `artifact_snapshot_sha256 = f1bdbf96...`. Any artifact change now moves the formal snapshot and the artifact snapshot, which would force the record to be retracted and prepared a third time, as section 15.1 describes for the first one.
+
+So gaps 1, 3 and 4 are all deferred, not by preference but because the only route to them is a new work order:
+
+| Gap | Where it goes |
+| --- | --- |
+| 1, the consumer-installed validator | step 4 of issue #208, in a new work order; #208 stays open for it |
+| 2, `repository_tools/interpreter_safety.py` | issue #220, P1-8, which is open and proposes deleting the copy. Disclosure 3 of the completion decision argues the opposite case, that the copy earns its place as the second independent loader the cross-runtime conformance test holds in agreement with the packaged one. #220 is where that is settled; this work order reports only the measured fact that the module has no production caller left |
+| 3, `ADR-REB-009` | step 6 of issue #208, in the same new work order; the route is a dated amendment on `ADR-REB-009`, because the definition lifecycle admits no `superseded` transition, which is the same finding as the first disclosure of the completion decision |
+| 4, the temp-directory name | the same new work order, or left; it is a directory name inside one job, it is deliberate, and the comment at lines 166 to 168 of `pages-publication.yml` records that the path is retained so the generator invocation below it is unchanged |
+
+Gap 3 is a real inconsistency and is stated as one: after this change `harnessctl qualify` offers four operations while an approved architecture decision says five. Nothing mechanical detects it, `validate` reports 0 errors, and no gate refuses it. It is a governance defect of record until the amendment lands.
+
+### 17.4 One step of the route the review proposes is closed
+
+The review's remedy for the red lanes is: merge `origin/main` in, never rebase, keep `bc872f4` reachable, reject `VREC-REB-025`, capture a fresh record under the 0.7.1 evaluator, re-derive the readings and expect the W-AUT advisories. Every step of that was followed except one, and the exception is mechanical:
+
+```text
+$ harnessctl transition . --set VREC-REB-025=rejected --apply
+[WEX201] current artifact graph is invalid [E012]: evaluator evidence differs from the standard lock
+```
+
+`transition` refuses to run while the artifact graph is invalid, and the only artifact making the graph invalid is the record being rejected. Rejection is unreachable for a `ready` record that a governor upgrade has invalidated. Section 15.1 records the retraction taken instead, which deletes the record and its sidecar in an append-only commit and leaves the full text at `e6231d5`.
+
+The rest of the route holds as stated: `fda0fa1` was merged, never rebased, `bc872f4` is reachable from `HEAD`, `VREC-REB-026` was captured with the exact public 0.7.1 evaluator outside the checkout, every figure was re-derived in section 15.2, and the W-AUT advisories appeared exactly as predicted, two of them, both on `REQ-REB-029`, and both warnings rather than errors. The four lanes are green at `c20b673` in section 16.1 and at `03e4f0d`.
