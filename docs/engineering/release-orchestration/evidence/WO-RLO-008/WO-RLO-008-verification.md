@@ -3,6 +3,7 @@
 artifact: WO-RLO-008
 checkpoint: handoff
 formal_snapshot_sha256: a4cdb4972a9bc621185116afa552a6bdef5c908db704c784f58901849ba2bf7e
+formal_snapshot_after_completion: e0940802b2a13dd511d2ed884751315a327bb467ce0228d612b3fc3e5cb61a6f, same convention. The bound figure above is the **handoff** snapshot, taken while the work order read `in_progress` and before the completion transition wrote a third `[[lifecycle_events]]` entry into it. `WO-RLO-008.md` is one of the artifacts the digest hashes, so recording completion necessarily moved it. The handoff predicate that bound the figure above is not re-evaluated against the later one: `check --checkpoint handoff` is now refused outright with `WEX210 gate QG-G4-CANDIDATE-READY does not apply at checkpoint handoff`, measured on the governing evaluator after the transition. Both figures are given so that a reader recomputing the digest against the tree that carries this file finds the mismatch explained rather than ambiguous. Both are readings of this checkout: the digest hashes worktree bytes, `core.autocrlf` is `true` here, and no `.gitattributes` rule pins these documentation paths, so a checkout that materializes them differently reads a different digest.
 
 Retained by the implementation actor on 2026-08-27. This file is evidence. It
 does not complete, verify, or release the work order.
@@ -262,13 +263,28 @@ repository_tools/release_build.py
 tests/test_release_build.py
 ```
 
+## Completion, recorded after retention
+
+The engineering owner took the `DR-WO-COMPLETE` decision on 2026-08-27 with the
+readings above and deviation 3 in front of them, and `WO-RLO-008` moved
+`in_progress` to `implemented`. It was applied with the governing released
+`0.6.0` evaluator from outside the checkout in isolated mode, planned read-only
+first and then with `--apply`; it moved `status` and appended a third
+`[[lifecycle_events]]` entry, and the approved prose is untouched. The graph
+reads 963 artifacts, 0 errors and 53 warnings afterwards, and `doctor` 0 FAIL.
+
+This section, the header's second snapshot figure and the domain-index bullet
+are what record that the described state advanced. The measurements above are
+not restated and none was re-taken: they are readings of the implementation
+commit, and the completion transition changed no code, test, or governing
+statement.
+
 ## Not done
 
-- The completion transition. `WO-RLO-008` reads `in_progress`.
-- `VREC-RLO-008`. Commit-bound verification is `required` and owed.
+- `VREC-RLO-008`. Commit-bound verification is `required` and owed. It is the
+  decision that owes the POSIX and hosted readings of deviation 3.
 - Any push, pull request, tag, release, publication or deployment. Nothing
   left this workstation.
-- The POSIX and hosted readings of deviation 3.
 - The RCA document for `RC-070-01`, which issue #189 names and which does not
   exist. It is an ungoverned path and a separate act.
 - Any comment on issue #189 recording that its stated remedy — refuse or warn

@@ -2,7 +2,7 @@
 id = "WO-RLO-008"
 type = "work_order"
 title = "Make the recipe-bound candidate export independent of the calling host"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-08-27T16:15:49Z"
 decided_by = "engineering-owner"
 reason = "Owner decision 2026-08-27: start WO-RLO-008."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T16:57:38Z"
+decided_by = "engineering-owner"
+reason = "Owner decision 2026-08-27: mark WO-RLO-008 implemented under DR-WO-COMPLETE. The authorized scope is complete at commit 1c29aef53b44cfc19eed25c669187269d6b7735b: the conversion-free candidate export, the declared source mode set established inside the producer boundary, six new tests, the three governing amendments accepted at approval, the two note passages, one README bullet, and retained evidence. The handoff check under the released 0.6.0 evaluator completed with QG-G4-IMPLEMENTATION-EVIDENCE pass over the complete ten-path change set; schema-2 result_sha256 494d52fc2e3e47944ba553e94b2412cbd3a7b156ee8c362e80f4c5d935ba9c11. A Windows replay of released RLS-SEH-015 at that commit reproduces its bound wheel and sdist exactly, and each negative control reproduces neither, restating the 69 executable and 83 CRLF wheel entries of RC-070-01. The decision is taken with deviation 3 of the retained evidence in view: no POSIX host reading and no hosted candidate job exists, and the two mode-reading tests are skipped on Windows, so the POSIX half of the VER-RLO-004 host-independence row is owed to commit-bound verification, which stays required. Completion authorizes no push, pull request, verification record, release, or publication."
 +++
 
 # Work Order: Make the recipe-bound candidate export independent of the calling host
