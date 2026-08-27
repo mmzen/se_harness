@@ -2,7 +2,7 @@
 id = "RLS-SEH-016"
 type = "release_record"
 title = "Release candidate 0.7.1"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-7-1/evidence/RLS-SEH-016-e
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 tag = "v0.7.1"
 
+released_at = "2026-08-27T16:55:50Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,12 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-018"]
 includes_verification = ["VREC-SEH-015"]
 releases_work = ["WO-REB-024", "WO-REB-025", "WO-REB-026", "WO-REB-027", "WO-RLS-013"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-08-27T16:55:50Z"
+decided_by = "release-owner"
 +++
 
 # Release Record Candidate
