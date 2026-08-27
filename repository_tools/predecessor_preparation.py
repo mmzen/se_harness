@@ -357,7 +357,9 @@ def _derive_history(
     rejected_records = [
         (path, metadata)
         for path, metadata in catalog.values()
-        if metadata.get("type") == "release_record" and metadata.get("status") == "rejected"
+        if metadata.get("type") == "release_record"
+        and metadata.get("status") == "rejected"
+        and metadata.get("preparation_schema") == bootstrap.PREPARATION_SCHEMA
     ]
     matching = [item for item in rejected_records if item[1].get("version") == version]
     if len(rejected_records) != 1 or len(matching) != 1:

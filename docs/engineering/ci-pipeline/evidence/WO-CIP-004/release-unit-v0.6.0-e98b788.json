@@ -1,0 +1,181 @@
+{
+  "complete": false,
+  "contract": {
+    "findings": [
+      "E-CIP-001: contract candidate_commit None is not the derived candidate e98b7885b016529aa2c262ad577acdc270bc9376",
+      "E-CIP-001: contract previous_release_tag None is not the derivation's 'v0.6.0'",
+      "E-CIP-001: contract gates differ from the derived census; missing from gates: WO-REB-023, WO-RLO-006; not in the derivation: WO-AEX-001, WO-AEX-002, WO-AEX-003, WO-AEX-004, WO-AEX-005, WO-HBI-001, WO-HBI-002, WO-HBI-004, WO-HUP-004, WO-IPK-001, WO-LRE-001, WO-REB-008, WO-REB-009, WO-REB-010, WO-REB-011, WO-REB-012, WO-REB-013, WO-REB-014, WO-REB-015, WO-REB-016, WO-REB-017, WO-REB-020, WO-REB-021, WO-REB-022, WO-RLO-004, WO-RLO-005, WO-RLS-011, WO-TCM-001, WO-TCM-002, WO-WEX-003",
+      "E-CIP-001: the derivation is incomplete: 80 commit(s) on the first-parent path carry no Harness-Work-Order trailer and are not exempted"
+    ],
+    "id": "REL-SEH-015"
+  },
+  "exempted": [],
+  "from_commit": "3b339e9fc70cc634e6dc6bda07ea6a9b1a465798",
+  "from_ref": "v0.6.0",
+  "gates": [
+    "WO-ADS-001",
+    "WO-ADS-002",
+    "WO-HBI-003",
+    "WO-REB-018",
+    "WO-REB-019",
+    "WO-REB-023",
+    "WO-RLO-006",
+    "WO-VSP-007"
+  ],
+  "reasons": [
+    "80 commit(s) on the first-parent path carry no Harness-Work-Order trailer and are not exempted"
+  ],
+  "schema": "se-harness-release-unit-v1",
+  "to_commit": "e98b7885b016529aa2c262ad577acdc270bc9376",
+  "to_ref": "e98b7885b016529aa2c262ad577acdc270bc9376",
+  "untraced": [
+    "b482f29ce3c32bbee28e8284e8496a3805fb40d2",
+    "010b763faaa81d3a9633fb28adacae8c4fc7e5fd",
+    "619d6aea8054e802e5c4ac8c8e586a253bb3661b",
+    "7a94b6bbf492e405d05b444f305d70e9e5269d81",
+    "c37ec5af43234ce66c518aa58355ec05c7b8aa21",
+    "6eb13f60cc84755190bc69b5ceb09a5e2a37fd7a",
+    "397a7e5ac09109f8836de979157f15b0cf451e28",
+    "feba2d420ad84a63919bb83d22650fb2636d9bba",
+    "4255592d4921ee5623d28cb5650a1acdc079bfc2",
+    "bd4b49550cd2aa7eb57b482155fe23923d719997",
+    "dbb5be73e40e885cbadd2ff75e098ed2252492ee",
+    "9deb24f21e346c33204c715dad2dfef0c797c068",
+    "8fdca413db4105ed95bbd6141fc3c91a9ac5c19e",
+    "27759848ae49038532780b0fcdb8d5c030565f14",
+    "3a47e782d151ccc1708e34dd1a44afaa4bb8065e",
+    "f2dd04d0032858e99a7d6d3f21c65a9bc7149e32",
+    "c23b8a8ccc03405386dcdc258ae75c1ba8a4c5cb",
+    "b8a5783cc749be7344425cad600ae48ebde8a5d4",
+    "283758539aa9577b53eb00a6f571f37179accbe9",
+    "91cfb81f4d68c7933fdda34dd5d2be6f501f4ad9",
+    "01f82f20407638363901790465e0ad6931050bc1",
+    "09377bf2ef59ed81189651441083b7b099e64659",
+    "e02474cea8f7b505093329528315924b950109ee",
+    "3a836db0887e60af1903a7873407cf260ab16c43",
+    "25a54040b063701075ace8fbc844aa5b00e908d1",
+    "75e00663d6d08c2b91ba0f4a895a1a31035a7c93",
+    "d4aa21471c4740ca8a1737176c42b7eb89d940f0",
+    "38149c36e04d19d8356c8ed52dbd962a928fd34c",
+    "a7b67a022e9361539e9265713b54b9e3eed3876b",
+    "3ee868dcf57df4f556b17532ef73fd5582b42b4e",
+    "b24daf0ff6f59c0e0224f29c7ed48b9fe47419d8",
+    "827ddc197f8cb801d9b817bf03fd51e301279de1",
+    "4bd94848d99f4f01ccf99d1ad60d6efd384a9bb9",
+    "3d3ed2d37aaf68b91e5f67da74826ab495a55cdd",
+    "e51c0adb8eded412d78771a771980efc86194e6a",
+    "641d216d073f260077bc5542ea97ffe9247cdff6",
+    "1700061a8b4dba5c8801806ee8a817f867ef0f6f",
+    "744f81938f0d0055b64e21763cfe7ea0e8121f7a",
+    "a744c5f2954ac5c3783a2cefdc8ab6a3e86c31ce",
+    "7079828cc9094d922b55cba9223cbc5be08cea6c",
+    "da80dd8360f5c31a60e7c4e5c7c5dede11c16812",
+    "a95df781745f577075943b56c08479cf63547868",
+    "82fede2563e058529d9bcd7ece58a5fc551d45a0",
+    "2e728a73df0cdea789a46b7c5f9c44d2436b3f80",
+    "dee6e8efd8838d21ba032595748df0273c08ac44",
+    "015a3cbb4b5b9bbba2f22b6813fc177a36398b3e",
+    "cccbaa70a6c5a33e19decec0d78f26afd87d5f9e",
+    "6582ebfd03c773324ea0b0dd86cb975fb19a15ab",
+    "469dd9ccdc7a4ba6fd234f012aff5c10d580cd46",
+    "db704964139d6c2d88c9aabbf64848a9cf4eadc8",
+    "d07523fe07a273c269d8f6da36cc18b6f99e8734",
+    "2b78f4257a55ebcb8777144b7dcca623e5b2b05c",
+    "1cdc75259da8156e93ad8c32110ee196296b8cea",
+    "e03622868e0f3a5ae4884d57122697a25992c5fc",
+    "1431df591a654202ab1a3a6647d9657905bbd26c",
+    "7248822bfe45874badf7b0694b1c965960556171",
+    "11d3f2b2e356adf67226c885d1a899bffbb31868",
+    "27e61d4c1738b815712b300681009ff613b71710",
+    "cda8a10f5e2534e6a24eff415ccedcbaf954d47c",
+    "fc97103bfeb3cb321f433beac2318984473b38ed",
+    "45dea98574eefd9118fa930dc3631f149d0219e5",
+    "5fb6a0ccacfc24512d77394842af6b4fd1da7ea1",
+    "caeebb032d7a3e7e25f474d47326a021eb9e5095",
+    "2b239fe9f49bcd1b3949a3cd234b44f999b7bf46",
+    "8793e4e8da90a9bafc36b171f5419ecf8ede263f",
+    "52e3702ed9ef2a8d9073c262300e146e55a9ab65",
+    "ee8aea1d32584d9cf9c9cbda1aeef3dc3207bc3f",
+    "1d459cf724c203006d2263903478c9f46b701d7c",
+    "26541eebe73b54d5f5c5fd48e61668e5d725a3b0",
+    "f499ca708e367011d7e900d9db6215ac9f94862d",
+    "005e7ca13491d7e20e37a57a39fbaaea6d575975",
+    "fceb43fa25a59ace445c109f30b500c3b5bba68b",
+    "0276dd750393fa09d9d20dcd270492258982bd48",
+    "74df7b531eb0379b5b00cdcb1cc615f62b61abd7",
+    "73b7b5437637bc2ac2d9af2c8c9295b4d4475d68",
+    "826c72cfdaa3401cccf06c67943c5315221c3f72",
+    "6b0c70410a52b52eb49efabae1a93e65340045d8",
+    "d91ed5d362138adcece76dc1923443c5e9efbac4",
+    "616bd0ccfffda0d8d44848ca60b533f0cdea9756",
+    "c189b58ca6b574c7067032a640e3c2c8a22cf089"
+  ],
+  "work_orders": [
+    {
+      "commits": [
+        "79f735b9a3f4dbfd032c33c1f3c6da25562039ef"
+      ],
+      "id": "WO-ADS-001",
+      "packaged_surface": true,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "701e456794636e83ff78eb9910df55dfc1eedd9c"
+      ],
+      "id": "WO-ADS-002",
+      "packaged_surface": true,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "888d2b647c052eac741970bc316a35ff2a2f66a3"
+      ],
+      "id": "WO-HBI-003",
+      "packaged_surface": false,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "f8d854ecccc0b0e892a655dcaebe6e41d04f5989"
+      ],
+      "id": "WO-REB-018",
+      "packaged_surface": false,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "7b5a705fbfcd91c79d660d305789dfa1772a0e12"
+      ],
+      "id": "WO-REB-019",
+      "packaged_surface": true,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "942e0332e3f647f805e37348ff658fbb88bf1536",
+        "e1fd462cc61f456b6d74ffb066ac489e6ff5716d"
+      ],
+      "id": "WO-REB-023",
+      "packaged_surface": false,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "a371d9e2a3374d7f1c012629fca6de3e633e6a3b",
+        "e98b7885b016529aa2c262ad577acdc270bc9376"
+      ],
+      "id": "WO-RLO-006",
+      "packaged_surface": false,
+      "status": "implemented"
+    },
+    {
+      "commits": [
+        "a57e73e200cf98c67d03c3ef8d50454d56e47740"
+      ],
+      "id": "WO-VSP-007",
+      "packaged_surface": true,
+      "status": "implemented"
+    }
+  ]
+}

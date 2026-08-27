@@ -18,6 +18,7 @@ if str(SCRIPTS) not in sys.path:
 
 from generate_harness_dashboard import generate_snapshot  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
+from tests.fixture_support import standard_repository
 
 
 SIGNIFICANT_ASSESSMENT = {
@@ -97,7 +98,7 @@ class AdrApplicabilityTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        self.assertEqual(0, self.invoke("init", str(self.root), "--project-name", "ADR Sample")[0])
+        standard_repository(self.root, "ADR Sample")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

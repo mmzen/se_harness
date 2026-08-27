@@ -18,6 +18,7 @@ from se_harness.cli import main
 from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
+from tests.fixture_support import standard_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -84,8 +85,7 @@ class InstructionArchitectureTests(unittest.TestCase):
 
     def installed_target(self, name: str = "target") -> Path:
         target = self.root / name
-        code, _, error = self.invoke("init", str(target), "--project-name", "Example")
-        self.assertEqual(0, code, error)
+        standard_repository(target, "Example")
         return target
 
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
@@ -848,12 +848,25 @@ class InstructionArchitectureTests(unittest.TestCase):
                     sorted(path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()),
                 )
                 writing_contract = json.loads((root / "skill-contract.json").read_text(encoding="utf-8"))
-                self.assertEqual("se-harness-skill-contract-v2", writing_contract["schema"])
+                expected_schema = (
+                    "se-harness-skill-contract-v3"
+                    if name in host_adapter_writing_skills
+                    else "se-harness-skill-contract-v2"
+                )
+                self.assertEqual(expected_schema, writing_contract["schema"])
                 self.assertEqual({"explicit": True, "implicit": False}, {
                     key: writing_contract["activation"][key] for key in ("explicit", "implicit")
                 })
                 self.assertEqual([], writing_contract["effects"]["lifecycle_transitions"])
                 self.assertEqual({"allowed": False, "fallback": "single-agent"}, writing_contract["delegation"])
+                if name in host_adapter_writing_skills:
+                    self.assertEqual(
+                        "2.1.0" if name == "harness-prepare-assurance" else "2.0.0",
+                        writing_contract["version"],
+                    )
+                    self.assertFalse(writing_contract["client"]["direct_target_writes"])
+                    self.assertEqual("evaluator", writing_contract["client"]["target_writer"])
+                    self.assertEqual("se-harness-workflow-v4", writing_contract["client"]["workflow_schema"])
                 instructions = (root / "SKILL.md").read_text(encoding="utf-8").lower()
                 for provider in ("codex", "openai", "claude", "anthropic", "chatgpt"):
                     self.assertNotIn(provider, instructions)
@@ -1033,8 +1046,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
 
     def test_router_states_the_scope_of_its_obligations_after_the_invariants(self) -> None:
         target = self.root / "target"
-        code = main(["init", str(target), "--project-name", "Example"])
-        self.assertEqual(0, code)
+        standard_repository(target, "Example")
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         heading = "## Scope of these obligations"
         self.assertEqual(1, router.count(heading))
@@ -1065,7 +1077,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         from se_harness.preflight import run_preflight
 
         target = self.root / "orphan"
-        self.assertEqual(0, main(["init", str(target), "--project-name", "Example"]))
+        standard_repository(target, "Example")
         shutil.copytree(PACKET_ROOT, target / "docs" / "engineering" / "instruction-architecture")
         operating_contract = target / "docs/engineering/instruction-architecture/operations/OPS-IAR-001.md"
         operating_contract.write_text(

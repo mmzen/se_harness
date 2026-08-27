@@ -117,9 +117,10 @@ Git, credential, network, release, or external-action authority.
 
 ## Phase 4 governed delegated execution definition packet
 
-The complete Phase 4 definition and implementation packet is `approved`.
-`WO-AEX-005` is separately `in_progress`; `WO-AEX-006` through `WO-AEX-008`
-remain approved but not started. Approval of the packet did not activate
+The complete Phase 4 definition packet is `approved`. `WO-AEX-005` through
+`WO-AEX-007` are implemented with verified `VREC-AEX-005` through
+`VREC-AEX-007`; `WO-AEX-008` is `in_progress` on that exact stacked candidate.
+Approval or implementation does not activate
 delegated execution, and the candidate implementation cannot govern its own
 construction.
 
@@ -153,17 +154,15 @@ Implementation is split into four sequential work orders:
 3. `WO-AEX-007` — delegated workflow advancement and VREC preparation; and
 4. `WO-AEX-008` — writing-skill integration and candidate package qualification.
 
-The in-progress `WO-AEX-005` candidate now contains the three versioned
-contract roots, a read-only live observer, formal delegation resolver,
-short-lived envelope-v2 derivation, external session/nonce/revocation/recovery
-state, fresh-state admission preparation, and receipt continuity checking. It
-contains no target effect callback and activates no workflow or decision right.
-The governed compatibility-test amendment and green working-tree implementation
-evidence are recorded in
-[`WO-AEX-005-verification.md`](evidence/WO-AEX-005-verification.md).
-The exact handoff gate passed and the work order is `implemented`. A ready
-commit-bound verification record is the next governed artifact; no assurance
-decision is claimed.
+The verified `WO-AEX-007` dependency composes authority and effect components
+into the closed delegated start, bundle effect, completion, and VREC-
+preparation workflow. `WO-AEX-008` versions the three writing cores as
+non-authoritative clients of that interface, preserves host parity, and
+qualifies the complete source/wheel/install surface. The
+[workflow note](../../notes/agentic-execution-phase4-workflow.md) explains the
+coordinator, and the [skill integration note](../../notes/agentic-execution-phase4-skills.md)
+explains capability gating and direct-write denial. These are candidate
+materials, not release, installation, pilot, or activation.
 
 Phase 4 must be implemented and verified through the existing released
 evaluator. A separately governed successor release, external installation, and

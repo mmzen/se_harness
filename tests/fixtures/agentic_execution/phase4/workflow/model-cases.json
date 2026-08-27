@@ -1,0 +1,50 @@
+{
+  "schema": "se-harness-phase4-workflow-fixtures-v1",
+  "advancing_operations": [
+    {
+      "current_status": "approved",
+      "decision_right": "DR-WO-START",
+      "id": "delegated-work-order-start",
+      "result_status": "in_progress"
+    },
+    {
+      "current_status": "in_progress",
+      "decision_right": null,
+      "id": "change-bundle-apply",
+      "result_status": "in_progress"
+    },
+    {
+      "current_status": "in_progress",
+      "decision_right": "DR-WO-COMPLETE",
+      "id": "delegated-work-order-complete",
+      "result_status": "implemented"
+    },
+    {
+      "current_status": "implemented",
+      "decision_right": "DR-VREC-PREPARE",
+      "id": "delegated-vrec-prepare",
+      "result_status": "implemented"
+    }
+  ],
+  "completion_rejections": [
+    "altered-receipt-link",
+    "direct-unreceipted-write",
+    "failed-gate",
+    "missing-effect-receipt"
+  ],
+  "prohibited_actions": [
+    "approval",
+    "assurance-decision",
+    "child-agent",
+    "child-delegation",
+    "credential",
+    "deploy",
+    "external-action",
+    "git",
+    "merge",
+    "network",
+    "parallel-writer",
+    "publish",
+    "release"
+  ]
+}

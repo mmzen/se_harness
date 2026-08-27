@@ -351,28 +351,35 @@ class RiskDeviationClosureTests(unittest.TestCase):
             policy.write_text(original.split("[risk]")[0], encoding="utf-8")
             self.assertTrue(risk_policy_check(root).passed)
 
-    def test_skill_contracts_require_the_risk_operations_and_permit_risk_raise(self) -> None:
+    def test_skill_contracts_broker_the_risk_write_and_require_the_register(self) -> None:
         from se_harness.skill_contract import load_skill_contract
 
         skills = Path(__file__).resolve().parents[1] / "templates/repository/standard/.agents/skills"
         draft = load_skill_contract(skills / "harness-draft-change/skill-contract.json").value
         execute = load_skill_contract(skills / "harness-execute-work-order/skill-contract.json").value
         prepare = load_skill_contract(skills / "harness-prepare-assurance/skill-contract.json").value
-        self.assertIn("raise-risk", draft["evaluator"]["required_operations"])
-        self.assertIn("raise-risk", execute["evaluator"]["required_operations"])
         self.assertIn("risks", prepare["evaluator"]["required_operations"])
-        self.assertIn("risk-raise", draft["effects"]["permitted"])
-        self.assertIn("risk-raise", execute["effects"]["permitted"])
+        self.assertEqual("2.1.0", prepare["version"])
+        # The evaluator owns every governed-target write, so raising a risk is not a direct skill
+        # effect and needs no operation of its own: the risk file is one more admitted path in the
+        # brokered change bundle. `risks` is a read, so only the assurance packet gains an operation.
+        for value in (draft, execute):
+            self.assertEqual("2.0.0", value["version"])
+            self.assertNotIn("raise-risk", value["evaluator"]["required_operations"])
+            self.assertNotIn("raise-risk", value["evaluator"]["optional_operations"])
+            self.assertNotIn("risk-raise", value["effects"]["permitted"])
         self.assertNotIn("risk-raise", prepare["effects"]["permitted"])
         for value in (draft, execute, prepare):
-            self.assertEqual("1.0.2", value["version"])
             self.assertEqual([], value["effects"]["lifecycle_transitions"])
+            self.assertIn("direct-target-write", value["effects"]["prohibited"])
+            self.assertFalse(value["client"]["direct_target_writes"])
+            self.assertEqual("evaluator", value["client"]["target_writer"])
         for name in ("harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"):
             text = (skills / name / "SKILL.md").read_text(encoding="utf-8")
             self.assertIn("never", text)
             self.assertIn("disposes a risk", text)
 
-    def test_helpers_admit_risk_raise_only_for_new_risk_paths(self) -> None:
+    def test_helpers_broker_a_risk_path_and_refuse_a_risk_raise_effect(self) -> None:
         import types
 
         skills = Path(__file__).resolve().parents[1] / "templates/repository/standard/.agents/skills"
@@ -388,39 +395,78 @@ class RiskDeviationClosureTests(unittest.TestCase):
         scope = load("rsk_check_scope", skills / "harness-execute-work-order/scripts/check_scope.py")
         guard = load("rsk_guard", skills / "harness-draft-change/scripts/guard.py")
         risk_path = "docs/engineering/product/risks/RISK-PRD-001.md"
-        base = {
-            "explicit_skill": "harness-execute-work-order", "work_order": "WO-PRD-001", "state": "in_progress",
-            "execution_scope": ["src/"],
+        self.assertNotIn("risk-raise", scope.ALLOWED_EFFECTS)
+        self.assertNotIn("risk-raise", guard.ALLOWED_EFFECTS)
+        def catalog_of(module) -> list[dict[str, str]]:
+            return [{"id": item} for item in module.PHASE4_CATALOG]
+        evaluator_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "arguments": ["delegated-workflow", "execute", ".", "--work-order", "WO-PRD-001"],
+            "delegation_sha256": "a" * 64,
         }
-        expected = {"work_order": "WO-PRD-001", "state": "in_progress", "scope_sha256": scope.scope_digest(("src/",))}
-        admitted = scope.admit_work_order_effect(
-            {**base, "effect_class": "risk-raise", "planned_paths": [risk_path]},
-            recheck=lambda: expected, effect=lambda planned: planned,
+        result = {
+            "outcome": "completed-at-git-stop",
+            "work_order": "WO-PRD-001",
+            "start": {"lifecycle_proof": {}},
+            "effects": [{"receipt": {}}],
+            "completion": {"lifecycle_proof": {}},
+            "next": {"decision_packet": {}},
+        }
+        execute_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "explicit_skill": "harness-execute-work-order",
+            "workflow_schema": "se-harness-workflow-v4",
+            "interface_operation": "delegated-workflow-execute",
+            "direct_target_write": False,
+            "work_order": "WO-PRD-001",
+            "state": "approved",
+            "effect_class": "implementation-write",
+            "planned_paths": [risk_path, "src/main.py"],
+            "execution_scope": ["src/", "docs/engineering/product/risks/"],
+            "evaluator_request": evaluator_request,
+        }
+        calls: list[tuple[str, ...]] = []
+        admitted = scope.invoke_work_order_client(
+            execute_request, catalog=lambda: catalog_of(scope), client=lambda arguments: calls.append(arguments) or result
         )
-        self.assertEqual((risk_path,), admitted)
-        with self.assertRaisesRegex(Exception, "AEXEXE011"):
-            scope.admit_work_order_effect(
-                {**base, "effect_class": "risk-raise", "planned_paths": [risk_path, "src/main.py"]},
-                recheck=lambda: expected, effect=lambda planned: planned,
+        self.assertEqual([risk_path, "src/main.py"], admitted["planned_paths"])
+        self.assertEqual(1, len(calls))
+        calls.clear()
+        with self.assertRaisesRegex(scope.ScopeGuardError, "AEXEXE005"):
+            scope.invoke_work_order_client(
+                {**execute_request, "effect_class": "risk-raise"},
+                catalog=lambda: catalog_of(scope),
+                client=lambda arguments: calls.append(arguments),
             )
-        with self.assertRaisesRegex(Exception, "AEXEXE009"):
-            scope.admit_work_order_effect(
-                {**base, "effect_class": "implementation-write", "planned_paths": [risk_path]},
-                recheck=lambda: expected, effect=lambda planned: planned,
-            )
-        draft_base = {"explicit_skill": "harness-draft-change", "allowed_paths": [risk_path], "revisions": {}}
-        admitted = guard.admit_draft_effect(
-            {**draft_base, "effect_class": "risk-raise", "planned_paths": [risk_path]},
-            recheck=lambda: {"allowed_paths": [risk_path], "revisions": {}}, effect=lambda planned: planned,
+        self.assertEqual([], calls)
+
+        draft_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "explicit_skill": "harness-draft-change",
+            "workflow_schema": "se-harness-workflow-v4",
+            "interface_operation": "delegated-workflow-execute",
+            "direct_target_write": False,
+            "work_order": "WO-PRD-001",
+            "state": "approved",
+            "effect_class": "draft-create",
+            "planned_paths": [risk_path],
+            "allowed_paths": [risk_path],
+            "revisions": {},
+            "evaluator_request": evaluator_request,
+        }
+        admitted = guard.invoke_draft_client(
+            draft_request, catalog=lambda: catalog_of(guard), client=lambda arguments: calls.append(arguments) or result
         )
-        self.assertEqual((risk_path,), admitted)
-        with self.assertRaisesRegex(Exception, "AEXDRF013"):
-            guard.admit_draft_effect(
-                {"explicit_skill": "harness-draft-change", "effect_class": "risk-raise",
-                 "planned_paths": ["docs/notes/x.md"], "allowed_paths": ["docs/notes/x.md"], "revisions": {}},
-                recheck=lambda: {"allowed_paths": ["docs/notes/x.md"], "revisions": {}},
-                effect=lambda planned: planned,
+        self.assertEqual([risk_path], admitted["planned_paths"])
+        self.assertEqual(1, len(calls))
+        calls.clear()
+        with self.assertRaisesRegex(guard.DraftGuardError, "AEXDRF003"):
+            guard.invoke_draft_client(
+                {**draft_request, "effect_class": "risk-raise"},
+                catalog=lambda: catalog_of(guard),
+                client=lambda arguments: calls.append(arguments),
             )
+        self.assertEqual([], calls)
 
     def test_amendments_are_the_shipped_behaviour(self) -> None:
         from se_harness.workflow_contract import load_validated_contracts

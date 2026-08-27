@@ -11,6 +11,7 @@ from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, WORKFLOW_CONTRACT
+from tests.fixture_support import standard_repository
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -33,7 +34,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
 
     def test_contract_is_closed_ordered_and_complete(self) -> None:
         contract = WORKFLOW_CONTRACT
-        self.assertEqual("se-harness-workflow-v3", contract["schema"])
+        self.assertEqual("se-harness-workflow-v4", contract["schema"])
         self.assertEqual("BCP 14", contract["normative_language"])
         self.assertEqual(
             [
@@ -53,6 +54,18 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 "command_or_response", "alternatives",
             ],
             contract["restitution_fields"],
+        )
+        self.assertEqual(
+            [
+                ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress"),
+                ("change-bundle-apply", None, "in_progress", "in_progress"),
+                ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented"),
+                ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented"),
+            ],
+            [
+                (item["id"], item["decision_right"], item["current_status"], item["result_status"])
+                for item in contract["agentic_operations"]
+            ],
         )
         recommendations = contract["recommendations"]
         identifiers = [rule["id"] for rule in recommendations]
@@ -128,9 +141,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_fresh_install_contains_managed_machine_contract(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary)
-            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-                result = main(["init", str(target), "--project-name", "Contract Fixture"])
-            self.assertEqual(0, result)
+            standard_repository(target, "Contract Fixture")
             installed = target / "docs" / "engineering" / "WORKFLOW.json"
             expected_workflow = INSTALLED_CONTRACT.read_text(encoding="utf-8").encode("utf-8")
             expected_gates = INSTALLED_GATES.read_text(encoding="utf-8").encode("utf-8")

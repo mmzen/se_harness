@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "se-harness"
-version = "0.6.0"
+version = "0.7.0"
 description = "A repository-native, specification-driven software-engineering harness"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -20,12 +20,16 @@ Releases = "https://github.com/mmzen/se_harness/releases"
 [project.scripts]
 harnessctl = "se_harness.cli:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 include = ["se_harness*"]
 
 [tool.setuptools.package-data]
 se_harness = [
   "agent_contract.json",
+  "effect_contract.json",
   "workflow_contract.json",
   "quality_gates_contract.json",
   "governance_migration_contract.json",
@@ -48,6 +52,7 @@ se_harness = [
 "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/README.md.seed",
   "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
+  "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
   "templates/repository/standard/docs/engineering/OPERATING_CARD.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",

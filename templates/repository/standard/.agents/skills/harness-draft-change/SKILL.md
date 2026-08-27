@@ -1,22 +1,25 @@
 ---
 name: harness-draft-change
-description: Prepare explicitly requested SE Harness planning notes and complete draft formal artifacts. Use only when the operator names this skill and requests draft creation or revision; stop before approval, transition, implementation, Git, credentials, network, or external action.
+description: Prepare explicitly requested SE Harness draft artifacts through the Phase 4 evaluator client. Use only when the operator names this skill and supplies valid delegated work; never write the governed target directly, and stop before Git or accountable review.
 ---
 
 # Harness Draft Change
 
 Prepare one reviewable definition packet while leaving every formal artifact in
-`draft`. The released evaluator and installed harness remain authoritative for
-identity, canonical destinations, formal validity, lifecycle, and next action.
+`draft`. This skill is a non-authoritative client. The exact released evaluator
+alone admits delegation, constructs and applies a change bundle, advances the
+authoring work order, validates restitution, and projects the next action.
 
 ## Required inputs
 
 Require the exact skill name, one target repository, a structured launcher and
 expected identity for its external released evaluator, the requested outcome
 and non-effects, one domain, a finite artifact plan, an optional single planning
-note, and any existing drafts selected for revision. Read repository
-instructions and this complete core first. Validate `skill-contract.json` and
-the portable-core digest.
+note, any existing drafts selected for revision, one approved authoring work
+order with exact Phase 4 delegation, and a closed evaluator-client request for
+an isolated baseline/proposed workspace. Read repository instructions and this
+complete core first. Validate `skill-contract.json` and the portable-core
+digest.
 
 Before assigning an identifier, inspect every locally available Git ref. Do not
 fetch. The plan must declare each type, unused ID, title, owner, relation, and
@@ -27,32 +30,43 @@ canonical destination. Only explicitly selected artifacts that are currently
 
 1. Reject implicit, inferred, or ambiguous activation. Confirm the explicit
    skill value is exactly `harness-draft-change`.
-2. Run the supplied evaluator's `version`, released `identity`, `doctor`, and
-   `validate --json` operations directly. Stop on a required failure.
+2. Run the supplied evaluator's `version`, released `identity`, and `doctor`,
+   then request `delegated-workflow catalog`. Require the exact workflow-v4
+   catalog; an evaluator without this capability is a stop before any effect.
 3. Build a closed plan containing only canonical draft destinations, explicitly
    selected current drafts, and at most one declared path under `docs/notes/`.
+   A risk noticed while drafting is one more canonical draft destination in the
+   same plan; the evaluator writes it through the change bundle, and this skill
+   never disposes a risk.
 4. Immediately repeat identity, integrity, and formal-state checks. Reconfirm
-   identifier uniqueness and destination absence before each creation.
-5. Use only the evaluator's existing `scaffold-domain` and `create-artifact`
-   preparation operations for new formal destinations. Use `scripts/guard.py`
-   before a controlled draft, revision, or note write; its callable boundary is
-   testable and it grants no authority.
-6. Complete the declared draft bodies and relations without adding a lifecycle
-   event. A risk noticed while drafting is raised with the evaluator's
-   `raise-risk` operation under the `risk-raise` effect class; the skill never
-   disposes a risk. Compare actual changed paths with the admitted plan.
-7. Run formal validation again. Return the structured result and receipt facts,
-   then stop at accountable content review.
+   identifier uniqueness and destination absence before creating candidate
+   bytes.
+5. Apply the installed authoring policy
+   (`docs/engineering/ARTIFACT_AUTHORING.md`) for each selected type; its
+   checklist is the review standard. Create candidate bytes only in the
+   isolated proposed workspace. Never open, replace, or delete the corresponding
+   governed-target paths with provider or workspace-write tools.
+6. Pass the closed argument vector through `scripts/guard.py`. The helper
+   requires the exact catalog, prohibits direct-target mode, and invokes only
+   evaluator `delegated-workflow execute`; it has no target-write callback.
+7. Accept only evaluator-issued lifecycle and effect receipts, completion
+   proof, and a decision packet at the Git stop. On stale state, invalid
+   delegation, session conflict, path drift, or failed restitution, retain the
+   returned evidence and stop.
+8. Report the evaluator result and stop at the requested accountable content
+   review. Do not execute the packet's Git suggestion.
 
 ## Boundaries
 
-- Do not approve, transition, start, implement, complete, verify, deliver,
-  release, mutate Git, use credentials, access the network, or perform an
-  external action.
+- Do not claim authority to approve, transition, start, complete, or attest.
+  The evaluator may perform only the formally delegated Phase 4 operations.
+- Do not mutate Git, verify, deliver, release, use credentials, access the
+  network, or perform an external action.
 - Do not write an undeclared note, revise an unselected artifact, or modify a
   non-draft artifact.
 - Treat an unexpected path, stale result, collision, invalid graph, customized
-  managed file, or missing required capability as a stop before further effect.
+  managed file, invalid delegation, failed restitution, or missing Phase 4
+  capability as a stop before further effect.
 - Use the complete single-agent procedure. Do not spawn or coordinate workers.
 
 The drafts and optional planning note are retained repository content. The

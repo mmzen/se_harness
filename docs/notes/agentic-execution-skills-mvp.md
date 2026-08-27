@@ -6,6 +6,13 @@
 > released evaluator, formal artifact state, repository instructions, and
 > accountable decisions remain authoritative.
 
+This note retains the Phase 3 `1.0.x` writing-skill contract for compatibility
+and historical digest review. The candidate repository templates now carry
+major version `2.0.0` and contract schema `se-harness-skill-contract-v3`; see
+[Phase 4 writing-skill integration](agentic-execution-phase4-skills.md). A
+repository continues using its installed managed bytes until a separately
+released evaluator and explicitly authorized repository upgrade replace them.
+
 SE Harness installs four portable agent skills. `harness-orient` is the
 unchanged read-only entry point. Three explicit-only writing skills provide the
 Phase 3 MVP:
@@ -36,7 +43,7 @@ immediately before a controlled effect. Paths must be repository-relative,
 portable, and admitted by the selected draft plan, work-order execution scope,
 or evaluator-derived VREC destination.
 
-## What the MVP does not do
+## What the Phase 3 MVP does not do
 
 No Phase 3 skill approves an artifact, starts or completes work, verifies a
 record, selects delivery, releases software, mutates Git, uses credentials,
@@ -44,8 +51,10 @@ accesses the network, or performs an external action. All three use one agent;
 they do not spawn workers. Their receipts and packets are evidence, not
 accountable decisions.
 
-The skill procedures cannot force a hostile runtime to obey them. Runtime-
-enforced autonomy envelopes and multi-agent execution belong to later work.
+The Phase 3 procedures cannot force a hostile runtime to obey them. Phase 4
+replaces their direct callback boundary with exact evaluator-client requests,
+transactional bundles, and receipt-linked state while retaining one agent.
+Multi-agent execution remains later work.
 
 ## Installed files and upgrades
 

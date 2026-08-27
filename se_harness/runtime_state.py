@@ -11,13 +11,15 @@ import json
 import os
 import re
 import secrets
+import stat
 import threading
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, BinaryIO, Iterator, Mapping
 
-from se_harness.agent_contract import canonical_json_bytes
+from se_harness.agent_contract import AgentContractError, canonical_json_bytes
 
 
 RUNTIME_STATE_SCHEMA = "se-harness-agentic-runtime-state-v1"
@@ -25,11 +27,15 @@ SESSION_SCHEMA = "se-harness-agentic-session-v1"
 NONCE_LEDGER_SCHEMA = "se-harness-agentic-nonce-ledger-v1"
 RECOVERY_SCHEMA = "se-harness-agentic-recovery-v1"
 REVOCATION_SCHEMA = "se-harness-agentic-revocations-v1"
+EFFECT_JOURNAL_SCHEMA = "se-harness-effect-journal-v1"
 MAX_NONCES = 1_024
+MAX_RUNTIME_STATE_BYTES = 1_048_576
+MAX_EFFECT_JOURNAL_BYTES = 4_194_304
 _SHA256 = re.compile(r"[0-9a-f]{64}")
 _NONCE = re.compile(r"[0-9a-f]{32,128}")
 _REPOSITORY_ID = re.compile(r"[0-9a-f]{64}")
 _TIMESTAMP = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z")
+_TRANSACTION_ID = re.compile(r"[0-9a-f]{32}")
 
 
 class RuntimeStateError(RuntimeError):
@@ -59,18 +65,26 @@ def _require(pattern: re.Pattern[str], value: str, label: str) -> str:
     return value
 
 
-def _read_json(path: Path) -> dict[str, Any]:
+def _read_json(
+    path: Path, *, maximum_bytes: int = MAX_RUNTIME_STATE_BYTES
+) -> dict[str, Any]:
     try:
         raw = path.read_bytes()
     except OSError as exc:
         raise RuntimeStateError("AEXRT002", f"cannot read runtime state: {exc}") from exc
-    if len(raw) > 1_048_576:
+    if len(raw) > maximum_bytes:
         raise RuntimeStateError("AEXRT002", "runtime state exceeds its byte bound")
     try:
         value = json.loads(raw.decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise RuntimeStateError("AEXRT002", "runtime state is not valid UTF-8 JSON") from exc
-    if not isinstance(value, dict) or canonical_json_bytes(value) != raw:
+    try:
+        canonical = canonical_json_bytes(value, maximum_bytes=maximum_bytes)
+    except AgentContractError as exc:
+        raise RuntimeStateError(
+            "AEXRT002", "runtime state violates canonical JSON bounds"
+        ) from exc
+    if not isinstance(value, dict) or canonical != raw:
         raise RuntimeStateError("AEXRT002", "runtime state is not canonical JSON")
     return value
 
@@ -86,8 +100,21 @@ def _secure_directory(path: Path) -> None:
         raise RuntimeStateError("AEXRT004", f"cannot create secure runtime directory: {exc}") from exc
 
 
-def _atomic_write(path: Path, value: Mapping[str, Any], *, exclusive: bool = False) -> None:
-    raw = canonical_json_bytes(dict(value))
+def _atomic_write(
+    path: Path,
+    value: Mapping[str, Any],
+    *,
+    exclusive: bool = False,
+    maximum_bytes: int = MAX_RUNTIME_STATE_BYTES,
+) -> None:
+    try:
+        raw = canonical_json_bytes(dict(value), maximum_bytes=maximum_bytes)
+    except AgentContractError as exc:
+        raise RuntimeStateError(
+            "AEXRT002", "runtime state violates canonical JSON bounds"
+        ) from exc
+    if len(raw) > maximum_bytes:
+        raise RuntimeStateError("AEXRT002", "runtime state exceeds its byte bound")
     flags = os.O_WRONLY | os.O_CREAT | (os.O_EXCL if exclusive else os.O_TRUNC)
     if exclusive:
         target = path
@@ -120,12 +147,66 @@ def _atomic_write(path: Path, value: Mapping[str, Any], *, exclusive: bool = Fal
                 pass
 
 
+def _acquire_os_lock(path: Path, code: str, message: str) -> BinaryIO:
+    """Acquire a nonblocking OS lock that is released automatically on process exit."""
+
+    try:
+        stream = path.open("a+b")
+        stream.seek(0, os.SEEK_END)
+        if stream.tell() == 0:
+            stream.write(b"\0")
+            stream.flush()
+            os.fsync(stream.fileno())
+        stream.seek(0)
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return stream
+    except (OSError, ImportError) as exc:
+        if "stream" in locals():
+            stream.close()
+        raise RuntimeStateError(code, message) from exc
+
+
+def _release_os_lock(stream: BinaryIO) -> None:
+    try:
+        stream.seek(0)
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+    finally:
+        stream.close()
+
+
 class RuntimeStateStore:
     """One external state store with one active writer per repository."""
 
     def __init__(self, runtime_root: Path, target_repository: Path) -> None:
-        target = target_repository.resolve(strict=True)
-        candidate = runtime_root.resolve(strict=False)
+        supplied_target = target_repository.absolute()
+        try:
+            target_metadata = supplied_target.lstat()
+        except OSError as exc:
+            raise RuntimeStateError("AEXRT005", f"target repository is unavailable: {exc}") from exc
+        target_attributes = getattr(target_metadata, "st_file_attributes", 0)
+        target_reparse = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+        if (
+            stat.S_ISLNK(target_metadata.st_mode)
+            or (target_reparse and target_attributes & target_reparse)
+            or not stat.S_ISDIR(target_metadata.st_mode)
+        ):
+            raise RuntimeStateError("AEXRT005", "target repository root is aliased")
+        target = supplied_target.resolve(strict=True)
+        candidate = runtime_root.absolute()
         try:
             candidate.relative_to(target)
             overlaps = True
@@ -146,6 +227,7 @@ class RuntimeStateStore:
         self.root = resolved
         self.target = target
         self._mutex = threading.RLock()
+        self._session_locks: dict[str, BinaryIO] = {}
 
     def _repository_directory(self, repository_id: str) -> Path:
         identifier = _require(_REPOSITORY_ID, repository_id, "repository ID")
@@ -158,6 +240,10 @@ class RuntimeStateStore:
         return path / "session.json"
 
     @staticmethod
+    def _session_lock_path(path: Path) -> Path:
+        return path / "session.lock"
+
+    @staticmethod
     def _recovery_path(path: Path) -> Path:
         return path / "recovery.json"
 
@@ -168,6 +254,14 @@ class RuntimeStateStore:
     @staticmethod
     def _revocation_path(path: Path) -> Path:
         return path / "revocations.json"
+
+    @staticmethod
+    def _effect_journal_path(path: Path) -> Path:
+        return path / "effect-journal.json"
+
+    @staticmethod
+    def _effect_lock_path(path: Path) -> Path:
+        return path / "effect.lock"
 
     def start_session(
         self, repository_id: str, owner: str, *, started_at: str | None = None
@@ -185,17 +279,27 @@ class RuntimeStateStore:
         timestamp = _require(_TIMESTAMP, started_at or _now(), "session timestamp")
         owner_sha256 = hashlib.sha256(owner.encode("utf-8")).hexdigest()
         session = RuntimeSession(repository_id, secrets.token_hex(16), owner_sha256)
-        _atomic_write(
-            self._session_path(directory),
-            {
-                "schema": SESSION_SCHEMA,
-                "repository_id": repository_id,
-                "session_id": session.session_id,
-                "owner_sha256": owner_sha256,
-                "started_at": timestamp,
-            },
-            exclusive=True,
+        lock = _acquire_os_lock(
+            self._session_lock_path(directory),
+            "AEXRT003",
+            "a repository session is already active",
         )
+        try:
+            _atomic_write(
+                self._session_path(directory),
+                {
+                    "schema": SESSION_SCHEMA,
+                    "repository_id": repository_id,
+                    "session_id": session.session_id,
+                    "owner_sha256": owner_sha256,
+                    "started_at": timestamp,
+                },
+                exclusive=True,
+            )
+        except Exception:
+            _release_os_lock(lock)
+            raise
+        self._session_locks[session.session_id] = lock
         ledger = self._ledger_path(directory)
         if not ledger.exists():
             _atomic_write(
@@ -206,6 +310,35 @@ class RuntimeStateStore:
                     "admissions": [],
                 },
             )
+        return session
+
+    def resume_session(self, repository_id: str, owner: str) -> RuntimeSession:
+        """Reacquire an interrupted session only when an active journal proves recovery."""
+
+        directory = self._repository_directory(repository_id)
+        if not isinstance(owner, str) or not owner or len(owner) > 512:
+            raise RuntimeStateError("AEXRT001", "session owner must be bounded non-empty text")
+        value = _read_json(self._session_path(directory))
+        journal = self.read_effect_journal(repository_id)
+        if journal is None:
+            raise RuntimeStateError(
+                "AEXRT015", "no active journal authorizes interrupted-session recovery"
+            )
+        owner_sha256 = hashlib.sha256(owner.encode("utf-8")).hexdigest()
+        if (
+            value.get("schema") != SESSION_SCHEMA
+            or value.get("repository_id") != repository_id
+            or value.get("owner_sha256") != owner_sha256
+            or not isinstance(value.get("session_id"), str)
+        ):
+            raise RuntimeStateError("AEXRT007", "interrupted session identity does not match")
+        session = RuntimeSession(repository_id, value["session_id"], owner_sha256)
+        lock = _acquire_os_lock(
+            self._session_lock_path(directory),
+            "AEXRT003",
+            "the interrupted repository session is still active",
+        )
+        self._session_locks[session.session_id] = lock
         return session
 
     def _require_session(
@@ -221,6 +354,8 @@ class RuntimeStateStore:
         }
         if any(value.get(key) != item for key, item in expected.items()):
             raise RuntimeStateError("AEXRT007", "runtime session identity does not match")
+        if session.session_id not in self._session_locks:
+            raise RuntimeStateError("AEXRT007", "runtime session OS lock is not held")
         recovery_path = self._recovery_path(directory)
         if (
             not allow_recovery
@@ -306,11 +441,13 @@ class RuntimeStateStore:
         outcome: str,
         receipt_sha256: str | None = None,
         recorded_at: str | None = None,
+        allow_recovery: bool = False,
     ) -> Mapping[str, Any]:
         """Record the terminal disposition of one previously consumed nonce."""
 
         directory = self._require_session(
-            session, allow_recovery=outcome == "recovery-required"
+            session,
+            allow_recovery=allow_recovery or outcome == "recovery-required",
         )
         nonce = _require(_NONCE, nonce, "nonce")
         if outcome not in {"completed", "failed-consumed", "recovery-required"}:
@@ -344,6 +481,46 @@ class RuntimeStateStore:
         record["terminal"] = terminal
         _atomic_write(ledger_path, ledger)
         return terminal
+
+    def record_terminal_by_nonce_sha256(
+        self,
+        session: RuntimeSession,
+        *,
+        nonce_sha256: str,
+        outcome: str,
+        receipt_sha256: str | None = None,
+        recorded_at: str | None = None,
+    ) -> Mapping[str, Any]:
+        """Finalize a consumed nonce during journal-driven restart recovery."""
+
+        digest = _require(_SHA256, nonce_sha256, "nonce digest")
+        directory = self._require_session(session, allow_recovery=True)
+        ledger = _read_json(self._ledger_path(directory))
+        admissions = ledger.get("admissions")
+        if not isinstance(admissions, list):
+            raise RuntimeStateError("AEXRT002", "nonce ledger is inconsistent")
+        matches = [
+            item
+            for item in admissions
+            if isinstance(item, dict)
+            and item.get("session_id") == session.session_id
+            and isinstance(item.get("nonce"), str)
+            and hashlib.sha256(item["nonce"].encode("ascii")).hexdigest() == digest
+        ]
+        if len(matches) != 1:
+            raise RuntimeStateError("AEXRT010", "nonce digest is not admitted in this session")
+        record = matches[0]
+        if "terminal" in record:
+            return record["terminal"]
+        nonce = record["nonce"]
+        return self.record_terminal(
+            session,
+            nonce=nonce,
+            outcome=outcome,
+            receipt_sha256=receipt_sha256,
+            recorded_at=recorded_at,
+            allow_recovery=True,
+        )
 
     def revoke_delegation(
         self,
@@ -432,6 +609,130 @@ class RuntimeStateStore:
             },
         )
 
+    @contextmanager
+    def effect_lock(self, session: RuntimeSession) -> Iterator[None]:
+        """Acquire the cross-process, single-effect lock for one live session."""
+
+        directory = self._require_session(session, allow_recovery=True)
+        lock_path = self._effect_lock_path(directory)
+        lock: BinaryIO | None = None
+        try:
+            lock = _acquire_os_lock(
+                lock_path, "AEXRT011", "another target effect is active"
+            )
+            yield
+        finally:
+            if lock is not None:
+                _release_os_lock(lock)
+
+    def effect_material_directory(
+        self, session: RuntimeSession, transaction_id: str
+    ) -> Path:
+        """Return one external, transaction-scoped recovery-material directory."""
+
+        directory = self._require_session(session, allow_recovery=True)
+        transaction = _require(_TRANSACTION_ID, transaction_id, "transaction ID")
+        material = directory / "transactions" / transaction
+        _secure_directory(material)
+        return material
+
+    def read_effect_journal(
+        self, repository_id: str
+    ) -> Mapping[str, Any] | None:
+        """Read the active journal, if any, without inferring recovery."""
+
+        directory = self._repository_directory(repository_id)
+        path = self._effect_journal_path(directory)
+        if not path.exists():
+            return None
+        value = _read_json(path, maximum_bytes=MAX_EFFECT_JOURNAL_BYTES)
+        if (
+            value.get("schema") != EFFECT_JOURNAL_SCHEMA
+            or value.get("repository_id") != repository_id
+        ):
+            raise RuntimeStateError("AEXRT012", "effect journal is inconsistent")
+        return value
+
+    def begin_effect_transaction(
+        self, session: RuntimeSession, journal: Mapping[str, Any]
+    ) -> None:
+        """Persist one exclusive durable journal before target-path mutation."""
+
+        directory = self._require_session(session)
+        value = dict(journal)
+        if (
+            value.get("schema") != EFFECT_JOURNAL_SCHEMA
+            or value.get("repository_id") != session.repository_id
+            or value.get("session_id") != session.session_id
+            or _TRANSACTION_ID.fullmatch(str(value.get("transaction_id"))) is None
+        ):
+            raise RuntimeStateError("AEXRT012", "new effect journal identity is inconsistent")
+        path = self._effect_journal_path(directory)
+        if path.exists():
+            raise RuntimeStateError("AEXRT013", "an effect journal already exists")
+        _atomic_write(
+            path,
+            value,
+            exclusive=True,
+            maximum_bytes=MAX_EFFECT_JOURNAL_BYTES,
+        )
+
+    def update_effect_transaction(
+        self,
+        session: RuntimeSession,
+        transaction_id: str,
+        journal: Mapping[str, Any],
+    ) -> None:
+        """Atomically advance the exact active journal."""
+
+        directory = self._require_session(session, allow_recovery=True)
+        transaction = _require(_TRANSACTION_ID, transaction_id, "transaction ID")
+        path = self._effect_journal_path(directory)
+        current = _read_json(path, maximum_bytes=MAX_EFFECT_JOURNAL_BYTES)
+        value = dict(journal)
+        identity = {
+            "schema": EFFECT_JOURNAL_SCHEMA,
+            "repository_id": session.repository_id,
+            "session_id": session.session_id,
+            "transaction_id": transaction,
+        }
+        if any(current.get(key) != expected for key, expected in identity.items()):
+            raise RuntimeStateError("AEXRT012", "active effect journal identity differs")
+        if any(value.get(key) != expected for key, expected in identity.items()):
+            raise RuntimeStateError("AEXRT012", "updated effect journal identity differs")
+        _atomic_write(path, value, maximum_bytes=MAX_EFFECT_JOURNAL_BYTES)
+
+    def archive_effect_transaction(
+        self, session: RuntimeSession, transaction_id: str
+    ) -> Path:
+        """Move one terminal active journal into its immutable transaction record."""
+
+        directory = self._require_session(session, allow_recovery=True)
+        transaction = _require(_TRANSACTION_ID, transaction_id, "transaction ID")
+        active = self._effect_journal_path(directory)
+        journal = _read_json(active, maximum_bytes=MAX_EFFECT_JOURNAL_BYTES)
+        if (
+            journal.get("transaction_id") != transaction
+            or journal.get("state")
+            not in {
+                "committed",
+                "rolled-back",
+                "recovered-prior",
+                "recovered-result",
+                "human-recovery-stop",
+            }
+        ):
+            raise RuntimeStateError("AEXRT014", "only a terminal effect journal can be archived")
+        material = self.effect_material_directory(session, transaction)
+        destination = material / "journal.json"
+        if destination.exists():
+            raise RuntimeStateError("AEXRT014", "terminal journal archive already exists")
+        try:
+            os.replace(active, destination)
+        except OSError as exc:
+            raise RuntimeStateError("AEXRT004", f"cannot archive effect journal: {exc}") from exc
+        return destination
+
     def acknowledge_recovery(
         self, repository_id: str, *, acknowledged_at: str | None = None
     ) -> None:
@@ -457,10 +758,13 @@ class RuntimeStateStore:
             self._session_path(directory).unlink()
         except OSError as exc:
             raise RuntimeStateError("AEXRT004", f"cannot close runtime session: {exc}") from exc
+        lock = self._session_locks.pop(session.session_id)
+        _release_os_lock(lock)
 
 
 __all__ = [
     "RuntimeSession",
     "RuntimeStateError",
     "RuntimeStateStore",
+    "EFFECT_JOURNAL_SCHEMA",
 ]

@@ -5,14 +5,17 @@ import copy
 import io
 import json
 import os
+import re
 import subprocess
 import tempfile
+import tomllib
 import unittest
 import venv
 from importlib import resources
 from pathlib import Path
 from unittest import mock
 
+import se_harness
 from se_harness.cli import build_parser, main
 from se_harness.governance_migration import (
     REPORT_NAME,
@@ -25,6 +28,7 @@ from se_harness.governance_migration_contract import (
     STAGE_ORDER,
     MigrationContractError,
     canonical_json,
+    classify_migration,
     load_migration_contract,
     load_migration_scenario,
     sha256_bytes,
@@ -35,7 +39,25 @@ from se_harness.workflow_contract import load_lifecycle_registry
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests/fixtures/governance_migration"
 HISTORICAL = FIXTURES / "historical-0.5.0-to-0.6.0.json"
+CANDIDATE = FIXTURES / "candidate-0.6.0-to-0.7.0.json"
 SYNTHETIC = FIXTURES / "synthetic-n-minus-1-to-n.json"
+SCENARIOS = (HISTORICAL, CANDIDATE, SYNTHETIC)
+WORKFLOW = ROOT / ".github/workflows/candidate-evidence.yml"
+
+# Already-public predecessor wheels, measured from the index with
+# `pip download --only-binary=:all: --no-deps` and hashed as files. A scenario
+# that pins a predecessor archive is fabricated against these, so a wrong digest
+# in either place fails rather than agreeing with itself.
+PUBLIC_PREDECESSOR_ARCHIVES = {
+    "0.5.0": (
+        "se_harness-0.5.0-py3-none-any.whl",
+        "974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f",
+    ),
+    "0.6.0": (
+        "se_harness-0.6.0-py3-none-any.whl",
+        "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7",
+    ),
+}
 
 
 class GovernanceMigrationTests(unittest.TestCase):
@@ -79,11 +101,13 @@ class GovernanceMigrationTests(unittest.TestCase):
             f'__version__ = "{successor}"\n', encoding="utf-8", newline="\n"
         )
         evaluator_identity = self.predecessor[1] / "evaluator_identity.py"
-        if predecessor == "0.5.0":
+        archive = PUBLIC_PREDECESSOR_ARCHIVES.get(predecessor)
+        if archive is not None:
+            name, digest = archive
             evaluator_identity.write_text(
                 "class Identity:\n"
-                "    archive_name = 'se_harness-0.5.0-py3-none-any.whl'\n"
-                "    archive_sha256 = '974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f'\n"
+                f"    archive_name = '{name}'\n"
+                f"    archive_sha256 = '{digest}'\n"
                 "    payload_sha256 = '1111111111111111111111111111111111111111111111111111111111111111'\n"
                 "def installed_evaluator_identity():\n"
                 "    return Identity()\n",
@@ -101,10 +125,8 @@ class GovernanceMigrationTests(unittest.TestCase):
         fault: str | None = None,
         environment: dict[str, str] | None = None,
     ) -> dict:
-        if scenario == HISTORICAL:
-            self._versions("0.5.0", "0.6.0")
-        else:
-            self._versions("41.2.0", "42.0.0")
+        declared = json.loads(scenario.read_bytes())["versions"]
+        self._versions(declared["predecessor"], declared["successor"])
         return run_governance_migration(
             self.repository,
             scenario_path=scenario,
@@ -115,7 +137,7 @@ class GovernanceMigrationTests(unittest.TestCase):
             _fault_stage=fault,
         )
 
-    def test_contract_and_both_scenarios_are_strict_complete_and_packaged(self) -> None:
+    def test_contract_and_every_scenario_are_strict_complete_and_packaged(self) -> None:
         contract = load_migration_contract()
         self.assertEqual(list(STAGE_ORDER), contract["stage_order"])
         self.assertEqual(set(STAGE_ORDER), set(contract["stages"]))
@@ -124,7 +146,8 @@ class GovernanceMigrationTests(unittest.TestCase):
             {module_digest},
             {item["implementation_sha256"] for item in contract["adapters"].values()},
         )
-        for path in (HISTORICAL, SYNTHETIC):
+        self.assertEqual(sorted(path.name for path in SCENARIOS), sorted(path.name for path in FIXTURES.glob("*.json")))
+        for path in SCENARIOS:
             scenario, raw = load_migration_scenario(path, contract)
             self.assertEqual(raw, canonical_json(scenario))
             self.assertEqual(list(STAGE_ORDER), [stage["id"] for stage in scenario["stages"]])
@@ -210,6 +233,112 @@ class GovernanceMigrationTests(unittest.TestCase):
                 for family in ("verification_record", "release_record")
             },
         )
+
+    def _lane_scenarios(self) -> list[Path]:
+        # WO-CIP-003: the lane no longer names a scenario file; candidate-source
+        # derives it from the declared root and the candidate version, and the
+        # migration job takes it from that job's outputs.
+        from repository_tools.predecessor_facts import derive
+
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("$scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO", workflow)
+        self.assertNotIn("governance_migration/", workflow)
+        return [ROOT / derive(ROOT).scenario]
+
+    def _lane_predecessor_pin(self) -> tuple[str, str]:
+        from repository_tools.predecessor_facts import derive
+
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        self.assertIn("PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
+        self.assertIn("PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}", workflow)
+        self.assertIsNone(re.search(r'PREDECESSOR_WHEEL_SHA256:\s*"', workflow))
+        facts = derive(ROOT)
+        return facts.version, facts.wheel_sha256
+
+    def test_lane_scenario_declares_the_version_the_candidate_builds(self) -> None:
+        # The gate exists to prove that evaluator N-1 governs *this* candidate, so
+        # the scenario the lane runs has to name the version the candidate builds.
+        # When they diverge the rehearsal refuses with MIG211 on a hosted runner;
+        # this test moves that refusal onto the author's workstation.
+        declared = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+        self.assertEqual(se_harness.__version__, declared)
+        selected = self._lane_scenarios()
+        self.assertEqual([CANDIDATE], selected)
+        scenario, _ = load_migration_scenario(selected[0], load_migration_contract())
+        self.assertEqual(declared, scenario["versions"]["successor"])
+        self.assertEqual(declared, scenario["runtime_expectations"]["successor"]["version"])
+
+        # A non-historical scenario is not forced to pin its predecessor archive,
+        # so WO-REB-023 requires the pin and this asserts the workflow, the
+        # scenario, and the measured public wheel all name the same one.
+        predecessor = scenario["runtime_expectations"]["predecessor"]
+        self.assertEqual(self._lane_predecessor_pin(), (predecessor["version"], predecessor["archive_sha256"]))
+        self.assertEqual(
+            PUBLIC_PREDECESSOR_ARCHIVES[predecessor["version"]],
+            (predecessor["archive_name"], predecessor["archive_sha256"]),
+        )
+
+    def test_candidate_pair_classifies_compatible_over_the_whole_vocabulary(self) -> None:
+        # Route A of WO-REB-023 asserts less than the historical pair does, so the
+        # outcome it does assert is pinned here: a later version that introduces a
+        # boundary the contract can name must fail this instead of passing quietly.
+        contract = load_migration_contract()
+        scenario, _ = load_migration_scenario(CANDIDATE, contract)
+        self.assertEqual(sorted(contract["capabilities"]), sorted(scenario["capabilities"]["predecessor"]))
+        self.assertEqual(
+            scenario["capabilities"]["predecessor"],
+            scenario["capabilities"]["successor_required"],
+        )
+        self.assertEqual(
+            {"affected_operations": [], "missing_capabilities": [], "outcome": "compatible"},
+            classify_migration(scenario, contract),
+        )
+
+    def test_candidate_rehearsal_is_complete_compatible_and_deterministic(self) -> None:
+        first = self._run("candidate-first", scenario=CANDIDATE)
+        second = self._run("candidate-second", scenario=CANDIDATE)
+        self.assertEqual("pass", first["overall_result"])
+        self.assertIsNone(first["first_failed_stage"])
+        self.assertTrue(all(stage["result"] == "pass" for stage in first["stages"]))
+        self.assertTrue(
+            all(stage["observed_mutations"] == [] or set(stage["observed_mutations"]) <= set(stage["permitted_mutations"]) for stage in first["stages"])
+        )
+        self.assertEqual("compatible", first["classification"]["outcome"])
+        self.assertTrue(first["operational_state"]["unchanged"])
+        self.assertTrue(all(value is False for value in first["external_actions"].values()))
+        self.assertEqual(first["semantic_sha256"], second["semantic_sha256"])
+
+        # 0.6.0 already supports schema 3, evaluator evidence, and the rejected
+        # terminal state, so the bootstrap it rejects is complete and the
+        # predecessor can read the rejected history. Both differ from the
+        # 0.5.0-to-0.6.0 pair and are the substance of "compatible".
+        validation = next(stage for stage in first["stages"] if stage["id"] == "validate-complete")
+        self.assertEqual({"codes": [], "outcome": "valid"}, validation["report"]["validation"])
+        assessment = next(stage for stage in first["stages"] if stage["id"] == "assess")
+        self.assertEqual("pass", assessment["report"]["predecessor_complete_graph"])
+
+    def test_candidate_prefix_is_what_withdraws_the_boundary_guard(self) -> None:
+        # MIG404 only guards a `historical-` scenario. Renaming the candidate pair
+        # into that family is refused, which is why the prefix is deliberate and
+        # why the compatible outcome above needs its own assertion.
+        value = json.loads(CANDIDATE.read_bytes())
+        value["scenario_id"] = "historical-0.6.0-to-0.7.0"
+        renamed = self.case / "renamed-historical.json"
+        renamed.write_bytes(canonical_json(value))
+        report = self._run("renamed-historical", scenario=renamed)
+        self.assertEqual("fail", report["overall_result"])
+        self.assertEqual("validate-complete", report["first_failed_stage"])
+        self.assertIn("MIG404", report["stages"][1]["diagnostic"])
+        self.assertTrue(report["operational_state"]["unchanged"])
+
+    def test_historical_pair_left_the_lane_and_is_still_exercised_here(self) -> None:
+        # WO-REB-023 removed the historical pair from the hosted lane because its
+        # successor can only ever be 0.6.0. Dropped from the lane must not become
+        # quietly unexercised, so both halves are asserted together.
+        self.assertNotIn(HISTORICAL.name, WORKFLOW.read_text(encoding="utf-8"))
+        report = self._run("historical-still-exercised", scenario=HISTORICAL)
+        self.assertEqual("pass", report["overall_result"])
+        self.assertEqual("migration-required", report["classification"]["outcome"])
 
     def test_every_stage_fails_closed_and_later_stages_do_not_run(self) -> None:
         for index, stage_id in enumerate(STAGE_ORDER):

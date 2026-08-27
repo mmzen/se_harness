@@ -1,6 +1,6 @@
 ---
 name: harness-prepare-assurance
-description: Expose the canonical SE Harness assurance-preparation skill only for an explicit user invocation; never infer approval or verification.
+description: Expose the canonical Phase 4 VREC evaluator-client skill only for an explicit user invocation; never infer Git, approval, or verification authority.
 disable-model-invocation: true
 metadata:
   adapter-schema: se-harness-host-adapter-v1

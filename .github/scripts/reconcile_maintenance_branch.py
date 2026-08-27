@@ -7,14 +7,13 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import tempfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable
-from urllib.error import HTTPError, URLError
 from urllib.parse import quote
-from urllib.request import Request, urlopen
 
 
 EXPECTED_REPOSITORY = "mmzen/se_harness"
@@ -167,32 +166,43 @@ def _decode_response(raw: bytes, status: int) -> Any:
         raise MaintenanceBranchError(f"GitHub returned invalid JSON with HTTP {status}") from exc
 
 
+STATUS_LINE = re.compile(rb"^HTTP/[0-9.]+ (?P<status>[0-9]{3})")
+
+
+def _split_gh_response(raw: bytes) -> tuple[int, bytes]:
+    """`gh api --include` prints the status line and headers, a blank line, then the body."""
+
+    match = STATUS_LINE.match(raw)
+    if match is None:
+        raise MaintenanceBranchError("gh api returned no HTTP status line")
+    for separator in (b"\r\n\r\n", b"\n\n"):
+        if separator in raw:
+            return int(match.group("status")), raw.split(separator, 1)[1]
+    return int(match.group("status")), b""
+
+
 def github_request(token: str) -> RequestFunction:
+    """GitHub REST through the `gh` CLI the job already uses; the token reaches it as GH_TOKEN."""
+
     if not token:
         raise MaintenanceBranchError("GH_TOKEN is required for maintenance-line reconciliation")
 
     def request(method: str, path: str, payload: dict[str, Any] | None) -> ApiResponse:
+        arguments = ["gh", "api", "--include", "--method", method, "-H", f"X-GitHub-Api-Version: {API_VERSION}", path]
         data = None
         if payload is not None:
+            arguments += ["--input", "-"]
             data = json.dumps(payload, ensure_ascii=True, separators=(",", ":")).encode("utf-8")
-        headers = {
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"Bearer {token}",
-            "User-Agent": "se-harness-release-automation",
-            "X-GitHub-Api-Version": API_VERSION,
-        }
-        if data is not None:
-            headers["Content-Type"] = "application/json"
-        request_value = Request(f"{API_ROOT}{path}", data=data, headers=headers, method=method)
         try:
-            with urlopen(request_value, timeout=30) as response:  # noqa: S310 - fixed HTTPS origin
-                raw = response.read(MAX_RESPONSE_BYTES + 1)
-                return ApiResponse(response.status, _decode_response(raw, response.status))
-        except HTTPError as exc:
-            raw = exc.read(MAX_RESPONSE_BYTES + 1)
-            return ApiResponse(exc.code, _decode_response(raw, exc.code))
-        except (OSError, URLError) as exc:
+            completed = subprocess.run(
+                arguments, input=data, capture_output=True, timeout=60, env={**os.environ, "GH_TOKEN": token}, check=False
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
             raise MaintenanceBranchError("GitHub API request failed") from exc
+        if not completed.stdout:
+            raise MaintenanceBranchError(f"GitHub API request failed: {completed.stderr.decode('utf-8', 'replace').strip()}")
+        status, body = _split_gh_response(completed.stdout[: MAX_RESPONSE_BYTES + 4096])
+        return ApiResponse(status, _decode_response(body, status))
 
     return request
 

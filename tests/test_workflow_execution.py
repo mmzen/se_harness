@@ -20,6 +20,14 @@ from se_harness.preflight import _load_validator_module
 from se_harness.workflow import apply_transition, focus, plan_transition
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.fixture_support import standard_repository
+
+
+def scale_sizes() -> tuple[int, ...]:
+    """REQ-TST-002: the 1,000-artifact size runs only under SE_HARNESS_TEST_SCALE=full."""
+
+    return (100, 500, 1000) if os.environ.get("SE_HARNESS_TEST_SCALE") == "full" else (100, 500)
+
 
 
 class WorkflowExecutionTests(unittest.TestCase):
@@ -27,8 +35,7 @@ class WorkflowExecutionTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Workflow Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root, "Workflow Fixture")
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = (
@@ -848,7 +855,11 @@ paths = ["src/"]
             return statistics.median(durations), value
 
         next_id = 1
-        for target_count in (100, 500, 1000):
+        for target_count in scale_sizes():
+            if target_count == 1000 and os.environ.get("SE_HARNESS_TEST_SCALE") != "full":
+                with self.subTest(target_count=target_count):
+                    self.skipTest("the 1,000-artifact size runs with SE_HARNESS_TEST_SCALE=full")
+                continue
             report = validator.validate_repository(self.root)
             additions = target_count - len(report.artifacts)
             self.assertGreaterEqual(additions, 0)

@@ -1,0 +1,209 @@
+# The one definition of release qualification (WO-CIP-002, SPEC-CIP-001
+# CIP-QLF, ADR-CIP-001). Both the publication rehearsal and the publication
+# workflow invoke this workflow; what is rehearsed is, by construction, what
+# the release executes. It holds no publication authority: read permission
+# only, no secret input, no environment, and no tag, release, index object,
+# deployment, or lifecycle transition. Described in
+# docs/notes/developing-se-harness.md, "Release sequences", and
+# docs/notes/release-publication-rehearsal.md.
+#
+# mode: candidate      qualify the calling commit and replay its own recipe
+#                      build twice (repository_tools.release_build replay).
+# mode: release-record resolve a bound schema-2 release record, qualify its
+#                      candidate commit, replay the bound recipe twice, and
+#                      verify the rebuilt bundle against the record.
+name: Release Qualification
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        description: candidate or release-record
+        required: true
+        type: string
+      release_record:
+        description: RLS identifier; required in release-record mode
+        required: false
+        type: string
+        default: ""
+      require_status:
+        description: record status the replay requires in release-record mode (ready or released)
+        required: false
+        type: string
+        default: released
+      ref:
+        description: ref to check out; the candidate commit in candidate mode, the trusted default branch in release-record mode
+        required: true
+        type: string
+      default_ref:
+        description: the ref at which the release record is read in release-record mode
+        required: false
+        type: string
+        default: refs/heads/main
+    outputs:
+      candidate_commit:
+        description: the qualified candidate commit
+        value: ${{ jobs.qualify.outputs.candidate_commit }}
+      version:
+        description: the qualified version
+        value: ${{ jobs.qualify.outputs.version }}
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: Qualify and replay (${{ inputs.mode }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      candidate_commit: ${{ steps.subject.outputs.candidate_commit }}
+      version: ${{ steps.subject.outputs.version }}
+    env:
+      MODE: ${{ inputs.mode }}
+      RELEASE_RECORD: ${{ inputs.release_record }}
+      REQUIRE_STATUS: ${{ inputs.require_status }}
+      DEFAULT_REF: ${{ inputs.default_ref }}
+      SE_HARNESS_TEST_SCALE: full  # WO-TST-003: a release qualification runs the 1,000-artifact scale size
+      PYTHONNOUSERSITE: "1"
+      PYTHONPATH: ""
+    steps:
+      - name: Check out the subject with full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Select trusted orchestration Python 3.11.9
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.11.9"
+
+      - name: Validate the inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$MODE" in
+            candidate)
+              test -z "$RELEASE_RECORD" || { echo "candidate mode takes no release record" >&2; exit 1; } ;;
+            release-record)
+              if [[ ! "$RELEASE_RECORD" =~ ^RLS-[A-Z0-9-]+-[0-9]{3}$ ]]; then
+                echo "release_record must be a canonical RLS identifier in release-record mode" >&2
+                exit 1
+              fi
+              case "$REQUIRE_STATUS" in ready|released) ;; *) echo "require_status must be ready or released" >&2; exit 1 ;; esac ;;
+            *)
+              echo "mode must be candidate or release-record" >&2; exit 1 ;;
+          esac
+
+      - name: Resolve the subject
+        id: subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$MODE" == "release-record" ]]; then
+            python scripts/validate_engineering_artifacts.py --root .
+            python scripts/validate_release_distributions.py --root . --require-record "$RELEASE_RECORD"
+            python .github/scripts/publish_release.py resolve \
+              --repository "$GITHUB_WORKSPACE" \
+              --default-ref "$DEFAULT_REF" \
+              --release-record "$RELEASE_RECORD" \
+              --output "$RUNNER_TEMP/release-plan.json" \
+              --github-output "$GITHUB_OUTPUT"
+            schema="$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["distribution_schema"])' "$RUNNER_TEMP/release-plan.json")"
+            if [[ "$schema" != "2" ]]; then
+              echo "release qualification is defined for schema-2 (recipe-bound) records only; $RELEASE_RECORD is schema $schema" >&2
+              exit 1
+            fi
+          else
+            version="$(python -c 'import se_harness; print(se_harness.__version__)')"
+            printf 'candidate_commit=%s\nversion=%s\n' "$GITHUB_SHA" "$version" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Qualify the exact candidate without publication credentials
+        env:
+          CANDIDATE_COMMIT: ${{ steps.subject.outputs.candidate_commit }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach "$RUNNER_TEMP/candidate-checkout" "$CANDIDATE_COMMIT"
+          cd "$RUNNER_TEMP/candidate-checkout"
+          python -m se_harness qualify complete-candidate . \
+            --candidate-commit "$CANDIDATE_COMMIT" \
+            --output "$RUNNER_TEMP/complete-candidate-qualification.json" \
+            --json
+          python -m unittest discover -s tests -p 'test_*.py'
+          python -m se_harness --help >/dev/null
+
+      - name: Replay the exact recipe twice
+        env:
+          CANDIDATE_COMMIT: ${{ steps.subject.outputs.candidate_commit }}
+          VERSION: ${{ steps.subject.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$MODE" == "release-record" ]]; then
+            python scripts/replay_release_build.py \
+              --repository "$GITHUB_WORKSPACE" \
+              --release-record "$RELEASE_RECORD" \
+              --require-status "$REQUIRE_STATUS" \
+              --output-directory "$RUNNER_TEMP/release-bundle" \
+              --result "$RUNNER_TEMP/release-build-replay.json"
+          else
+            python -m repository_tools.release_build replay \
+              --repository "$GITHUB_WORKSPACE" \
+              --commit "$CANDIDATE_COMMIT" \
+              --version "$VERSION" \
+              --output-directory "$RUNNER_TEMP/release-bundle" \
+              --result "$RUNNER_TEMP/release-build-replay.json"
+          fi
+
+      - name: Verify the rebuilt bundle against the record
+        if: inputs.mode == 'release-record'
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq '.manifest' "$RUNNER_TEMP/release-build-replay.json" >"$RUNNER_TEMP/rebuilt-bundle.json"
+          python .github/scripts/publish_release.py verify-build-manifest \
+            --plan "$RUNNER_TEMP/release-plan.json" \
+            --manifest "$RUNNER_TEMP/rebuilt-bundle.json" \
+            --output "$RUNNER_TEMP/rebuilt-manifest-result.json"
+          python .github/scripts/publish_release.py verify-bundle \
+            --plan "$RUNNER_TEMP/release-plan.json" \
+            --directory "$RUNNER_TEMP/release-bundle" \
+            --output "$RUNNER_TEMP/qualification.json"
+
+      - name: Prove the qualification left no checkout change
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C "$GITHUB_WORKSPACE" status --porcelain=v1 >"$RUNNER_TEMP/status.txt"
+          if [[ -s "$RUNNER_TEMP/status.txt" ]]; then
+            echo "the qualification left residue in the checkout" >&2
+            cat "$RUNNER_TEMP/status.txt" >&2
+            exit 1
+          fi
+
+      - name: Retain the candidate-controlled qualification result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: qualification-${{ inputs.mode }}-${{ inputs.release_record || github.sha }}
+          path: |
+            ${{ runner.temp }}/complete-candidate-qualification.json
+            ${{ runner.temp }}/release-build-replay.json
+            ${{ runner.temp }}/qualification.json
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Transfer only verified inert release bytes
+        if: inputs.mode == 'release-record'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-bundle-${{ inputs.release_record }}
+          path: ${{ runner.temp }}/release-bundle/
+          if-no-files-found: error
+          retention-days: 2

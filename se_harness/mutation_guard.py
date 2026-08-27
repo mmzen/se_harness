@@ -26,7 +26,11 @@ from se_harness.upgrade_authorization import (
 PUBLIC_MUTATION_OPERATIONS = frozenset(
     {
         "capture-verification",
+        "change-bundle-apply",
         "create-artifact",
+        "delegated-vrec-prepare",
+        "delegated-work-order-complete",
+        "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
         "raise-risk",

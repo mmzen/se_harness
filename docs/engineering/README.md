@@ -4,7 +4,10 @@
 
 ## Product and governance domains
 
+- `test-suite/`: draft proposal for a repository-owned parallel test runner over unittest, a marker for the scale tests, and a cached fixture install, keeping the serial run canonical.
+- `ci-pipeline/`: draft proposal to run each CI check once per commit, define the release qualification once for the rehearsal and the release, and freeze a release unit by candidate commit rather than by work-order allow-list.
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
+- `artifact-authoring/`: draft proposal for one managed authoring policy and mechanical requirement-writing rules (EARS shapes, singularity signals, closed verification vocabulary, attributes, approval predicates, slimmer template).
 - `risk-management/`: draft proposal for a governed risk artifact, raised by policy above an acceptance level, disposed by the owner of the threatened stage, and mitigated through governed work.
 - `agent-directive-surface/`: draft proposal to make every behavioural obligation on a coding agent an evaluator-computed predicate or a bounded, explicitly scoped read.
 - `technical-communication/`: draft managed communication policy and read-only operator-brief skill using ASD-STE100-based clarity principles without a compliance claim.
@@ -36,6 +39,7 @@
 - `release-0.3.0/`: aggregate qualification, provenance, and the released record for version 0.3.0.
 - `release-0.4.0/`: aggregate qualification, provenance, and the released record for version 0.4.0.
 - `release-0.4.1/`: aggregate qualification, provenance, and the released record for version 0.4.1.
+- `release-0-7-0/`: aggregate qualification, provenance, and release records for version 0.7.0.
 
 ## Repository-specific engineering documentation
 

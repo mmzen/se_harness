@@ -46,6 +46,8 @@ def load_vectors() -> dict[str, object]:
 
 
 def decision_source() -> tuple[dict[str, object], dict[str, object]]:
+    from se_harness.workflow_result import restitution_digest
+
     source = {
         "schema": "se-harness-workflow-result-v2",
         "operation": {"kind": "focus", "outcome": "completed"},
@@ -125,6 +127,7 @@ def decision_source() -> tuple[dict[str, object], dict[str, object]]:
             "alternatives": [],
         },
     }
+    source["result_sha256"] = restitution_digest(source)
     context = {
         "schema": "se-harness-decision-packet-context-v1",
         "repository": "fixture-repository",
@@ -560,6 +563,11 @@ class PacketReceiptAndProfileTests(unittest.TestCase):
         self.assertEqual(PACKET_V1_SCHEMA, validate_contract(v1).value["schema"])
 
     def test_projection_rejects_missing_decision_state_drift_and_incomplete_context(self) -> None:
+        source, context = decision_source()
+        source["result_sha256"] = "0" * 64
+        with self.assertRaisesRegex(AgentContractError, "AEXCON014"):
+            project_decision_packet(source, context)
+
         source, context = decision_source()
         source["restitution"]["decision_required"] = None
         with self.assertRaisesRegex(AgentContractError, "AEXCON014"):

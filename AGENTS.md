@@ -5,7 +5,7 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 ## Commands
 
 - Setup: `python -m pip install -e .`
-- Test: `python -m unittest discover -s tests -p "test_*.py"`
+- Test: `python scripts/run_tests.py` (parallel, same verdict); canonical serial reference `python -m unittest discover -s tests -p "test_*.py"`; `--scale full` or `SE_HARNESS_TEST_SCALE=full` for the 1,000-artifact scale tests
 - Graph: `python scripts/validate_engineering_artifacts.py --root .`
 - Also required: `python scripts/validate_release_distributions.py --root .`, `python -m se_harness --help`, `python -m se_harness doctor .`, and phase-appropriate `python -m se_harness preflight . --work-order WO-...`
 - Lint or format: none is configured. Do not invent one as a required gate.

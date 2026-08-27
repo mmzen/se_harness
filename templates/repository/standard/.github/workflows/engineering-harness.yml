@@ -1,8 +1,21 @@
+# Managed by SE Harness. Runs the exact released evaluator outside the checkout:
+# work-order selection and review preflight on pull requests, then doctor,
+# validate and the dashboard. Trigger policy: pull requests, and pushes to
+# main, release/** and candidate/** only; a newer push to the same ref cancels
+# the older run.
 name: Engineering Harness
 
 on:
   pull_request:
   push:
+    branches:
+      - main
+      - "release/**"
+      - "candidate/**"
+
+concurrency:
+  group: engineering-harness-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read

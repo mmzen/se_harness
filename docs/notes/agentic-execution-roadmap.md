@@ -362,19 +362,23 @@ The packet selects one exact-evaluator-owned path: stable live observation,
 formal maximum delegation, one ephemeral envelope per effect, isolated worker
 proposals, canonical content-addressed change bundles, a journaled target effect
 broker, receipt-linked state, delegated work-order start/completion, and VREC
-preparation. It stops at independent assurance. `WO-AEX-005` has separately
-started and is `in_progress`; the other three work orders remain approved and
-must proceed sequentially. This note does not complete, verify, release, or
-activate any of them.
+preparation. It stops at independent assurance. `WO-AEX-005` and `WO-AEX-006`
+are implemented and covered by verified VRECs. Their commits remain the exact
+stacked dependency while the `WO-AEX-006` pull request awaits integration.
+`WO-AEX-007` is implemented with verified `VREC-AEX-007`; `WO-AEX-008` is
+separately `in_progress` on that exact stacked candidate. This note does not
+complete, verify, release, or activate the current candidate.
 
-The current `WO-AEX-005` candidate implements live observation and authority
-derivation without a target-effect callback. Its focused tests and all other
-repository tests pass. One legacy test still requires candidate and released
-work-order templates to be byte-identical, while the approved work order
-requires only the candidate template to add the optional delegation table and
-forbids editing the released root copy. Resolving that test-contract conflict
-requires a revised declared path or governing direction before the work order
-can reach its completion checkpoint.
+The verified `WO-AEX-007` candidate composes the observer, delegation,
+nonce/session, bundle broker, lifecycle engine, provenance writer, execution
+receipts, and lossless packet projector. It registers only the closed four-
+operation catalog, proves complete lifecycle documents rather than a receipt
+alone, stops before Git when a commit is required, and prepares only an
+undecided ready VREC after a separately created clean candidate. Real-Git tests
+exercise success, proof gaps, failed gates, direct unreceipted writes, and
+recovery blocking. `WO-AEX-008` integrates v3 writing-skill evaluator clients,
+host parity, and complete package qualification; commit-bound independent
+assurance remains required.
 
 ### Objective
 
@@ -566,18 +570,15 @@ The target is a planning hypothesis until approved through formal artifacts.
 
 ## Immediate next step
 
-The governed `WO-AEX-005` compatibility-test amendment is applied, the exact
-working-tree verification set and handoff gate are green, and the work order is
-`implemented`. The next step is to prepare one ready verification record
-against the clean exact candidate commit. An assurance owner must decide that
-record independently; preparation does not verify the work order.
+`WO-AEX-005` through `WO-AEX-007` are independently verified, and
+`WO-AEX-008` is in progress on their exact stacked commits. The immediate next
+step is to finish the v3 skill, host, source, wheel, installation, and upgrade
+qualification, then prepare the governed implementation handoff. Later
+independent assurance must bind an exact candidate commit.
 
-After `WO-AEX-005` is independently verified at an exact candidate commit, the
-engineering owner may separately decide whether to start `WO-AEX-006`. The work
-orders must proceed sequentially. Do not use candidate Phase 4 code to govern
-its own construction, create a promotable successor distribution, install it,
-or run a target pilot without the later separately governed release and pilot
-packet.
+Do not use candidate Phase 4 code to govern its own construction, start
+create a promotable successor distribution, install it, or run a target pilot
+without the applicable later decisions and release/pilot packet.
 
 ## Roadmap maintenance
 
