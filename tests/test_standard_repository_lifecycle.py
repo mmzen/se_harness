@@ -393,8 +393,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             root_managed = root_attributes.split("# se-harness:begin\n", 1)[1].split(
                 "# se-harness:end\n", 1
             )[0]
-            self.assertIn("docs/engineering/**/evidence/*.json text eol=lf", root_managed)
-            self.assertNotIn("governance_migration", root_managed)
+            # The root managed block is the released 0.7.0 fragment (WO-HUP-006), so it
+            # now carries the migration rules too; the owner region keeps its own copies
+            # because SPEC-HBI-001 declares that class repository-region.
+            self.assertEqual(expected_fragment, root_managed)
             root_owner = root_attributes.split("# se-harness:end\n", 1)[1]
             for rule in (
                 "se_harness/governance_migration*.py text eol=lf",
