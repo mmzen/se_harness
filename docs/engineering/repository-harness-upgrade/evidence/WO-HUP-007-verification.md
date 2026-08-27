@@ -2,7 +2,7 @@
 
 artifact: WO-HUP-007
 checkpoint: handoff
-formal_snapshot_sha256: 2b9a06a2d57a21441c40ab47677235751e542ecf31eafaf8dd38a17773533fd3
+formal_snapshot_sha256: 73c03e91357b0c9290ffdc25c1b1e75da2d2bf1fa45a668d318214af604fe49a
 
 Retained by the implementation actor on 2026-08-27. This file is evidence. It
 does not complete, verify, or release the work order.
@@ -78,6 +78,26 @@ closed with `PRE014` on zero or several records and `PRE015` on a record
 without a distribution table. `repository_tools/predecessor_facts.py` is in
 the declared scope; a test covers the fallback and both fail-closed cases.
 
+## Scope amendment 2, 2026-08-27: the hosted governor transition assessment
+
+The pull request's `Governor transition assessment` lane failed at plan:
+`trusted base must contain exactly one released distribution for the target
+version`. `scripts/validate_governor_transition.py` still encoded the retired
+packet model: a schema-1 distribution table (`RLS-SEH-016` is schema 2), a
+`[evaluator_upgrade]` declaration on an implemented work order, evidence
+bound to that work order by name, and an exact archive match (null for an
+index install). On the owner's answer 'Amend the scope and rework the
+assessor', the script was added to the scope and reworked to `SPEC-REB-012`:
+a released record of schema 1 or 2 for the target version at the trusted
+base; exactly one retained `se-harness-evaluator-upgrade-evidence-v1`
+document under `docs/engineering/**/evidence/` whose prior lock digest is one
+of the base's materializations and whose `target` equals the head lock's
+evaluator (`work_order` may be null); the target's archive pair equal to the
+trusted release's when recorded, and taken from the trusted release when
+null (`archive_source` in the plan), so the lane installs the exact wheel
+`RLS-SEH-016` binds. The plan's `work_order` block became `transition`. The
+assess and apply phases are unchanged.
+
 ## Tests changed, for root assumptions only
 
 | File | Assumption replaced |
@@ -89,6 +109,7 @@ the declared scope; a test covers the fallback and both fail-closed cases.
 | `tests/test_instruction_architecture.py` | 55 managed paths; the governor version read from the lock, not literal |
 | `tests/test_standard_repository_lifecycle.py` | the root managed block equals the released fragment |
 | `tests/test_validation_taxonomy.py` | root `QUALITY_GATES.md` equals the candidate |
+| `tests/test_governor_transition.py` | the fixture carried a `[evaluator_upgrade]` packet, a work-order-bound evidence file and a schema-1 record; now the simple model: evidence document alone, `work_order` nullable, null archive pair, schema 1 or 2, plus three new cases |
 
 The first five ports are the changes `WO-HUP-006` measured, re-applied by
 patch; the version literals were replaced by lock-derived values.
@@ -110,9 +131,9 @@ patch; the version literals were replaced by lock-derived values.
 | `python scripts/check_portable_release_surface.py --repository .` | candidate | PASS |
 | `git diff --check` | git | clean |
 | `python -m unittest` over the seven root-assumption modules plus `test_progressive_documentation`, `test_public_onboarding` | candidate | OK, 233 tests, 1 skip (the migration rehearsal 0.7.1 to 0.8.0 reads pass, compatible, deterministic) |
-| `python scripts/run_tests.py --workers 8 --scale full` | candidate, Windows 11, CPython 3.14 | OK, 984 tests, 24 skipped (Windows-only guards), 0 failures |
-| `py -3.11 scripts/run_tests.py --workers 4 --scale full` | candidate, Windows 11, CPython 3.11 | OK, 984 tests, 24 skipped (Windows-only guards), 0 failures |
-| `harnessctl check . --artifact WO-HUP-007 --checkpoint handoff --changed-path … --changes-complete --json` | released 0.7.1 and candidate | Completed on both over the 59 paths (the 0.7.1 root governs the check now; the candidate run with python -s); before this file existed the only non-pass predicate was QGP-G4I-EVIDENCE; formal snapshot above |
+| `python scripts/run_tests.py --workers 8 --scale full` | candidate, Windows 11, CPython 3.14 | OK, 987 tests, 24 skipped (Windows-only guards), 0 failures (re-run after the assessor rework; 984 before it) |
+| `py -3.11 scripts/run_tests.py --workers 4 --scale full` | candidate, Windows 11, CPython 3.11 | OK, 987 tests, 24 skipped (Windows-only guards), 0 failures (re-run after the assessor rework; 984 before it) |
+| `harnessctl check . --artifact WO-HUP-007 --checkpoint handoff --changed-path … --changes-complete --json` | released 0.7.1 and candidate | Completed on both over the 68 paths (the 0.7.1 root governs the check now; the candidate run with python -s); before this file existed the only non-pass predicate was QGP-G4I-EVIDENCE; formal snapshot above |
 | Hosted | the pull request's lanes | HOSTED-ROW |
 
 ## Deviations from the work order, recorded for the completion decision
@@ -130,7 +151,21 @@ patch; the version literals were replaced by lock-derived values.
    requires the `governance-migration-protocol` class in the repository
    region.
 
+## Deviation acceptances
+
+Recorded on 2026-08-27 from the owner's interactive answer 'Accept all three',
+before the completion decision.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - derive reads the released record | Accept. |
+| 2 - 466 maintenance warnings under the 0.7.1 root | Accept; the W-AUT backlog is owed. |
+| 3 - .gitattributes owner copies stay | Accept. |
+
 ## Complete changed-path set
+
+Every path this work order changed since `main` at `23d5781`, packet
+included (the snapshot above is the one taken after scope amendment 2).
 
 ```
 .agents/skills/harness-draft-change/SKILL.md
@@ -171,8 +206,15 @@ docs/engineering/QUALITY_GATES.md
 docs/engineering/TECHNICAL_COMMUNICATION.md
 docs/engineering/WORKFLOW.json
 docs/engineering/WORKFLOW.md
+docs/engineering/repository-harness-upgrade/README.md
+docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-005.md
 docs/engineering/repository-harness-upgrade/evidence/WO-HUP-007-evaluator-upgrade.json
 docs/engineering/repository-harness-upgrade/evidence/WO-HUP-007-verification.md
+docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-014.md
+docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-015.md
+docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-007.md
+docs/engineering/repository-harness-upgrade/verification/VER-HUP-007.md
+docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-007.md
 docs/engineering/templates/README.md
 docs/engineering/templates/RELEASE_CONTRACT.template.md
 docs/engineering/templates/REQUIREMENT.template.md
@@ -183,11 +225,13 @@ pyproject.toml
 repository_tools/predecessor_facts.py
 scripts/select_harness_work_order.py
 scripts/validate_engineering_artifacts.py
+scripts/validate_governor_transition.py
 se_harness/__init__.py
 tests/fixtures/governance_migration/candidate-0.7.1-to-0.8.0.json
 tests/test_artifact_catalog.py
 tests/test_ci_pipeline.py
 tests/test_governance_migration.py
+tests/test_governor_transition.py
 tests/test_hash_bound_integrity.py
 tests/test_instruction_architecture.py
 tests/test_standard_repository_lifecycle.py

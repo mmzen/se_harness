@@ -96,7 +96,7 @@ class RepositoryFixture:
         run_git(self.root, "commit", "-m", message)
         return run_git(self.root, "rev-parse", "HEAD")
 
-    def base(self, version: str = "7.4.0") -> str:
+    def base(self, version: str = "7.4.0", *, distribution_schema: int = 2) -> str:
         write(self.root, ".engineering-harness.toml", config(version))
         write(self.root, ".engineering-harness.lock", lock(version, schema=3, identity=evaluator(version)))
         released = evaluator("7.5.0")
@@ -116,7 +116,7 @@ authorized_by = "release-owner"
 tag = "v7.5.0"
 
 [distribution]
-schema = 1
+schema = {distribution_schema}
 kind = "python-wheel-sdist"
 wheel = "{released['archive_name']}"
 wheel_sha256 = "{released['archive_sha256']}"
@@ -137,43 +137,33 @@ decided_by = "release-owner"
         write(self.root, "docs/engineering/sample/releases/RLS-TST-001.md", release)
         return self.commit("base")
 
-    def target(self, base: str, version: str = "7.5.0", *, work_order: str = "WO-TST-001") -> str:
-        identity = evaluator(version)
+    def target(
+        self,
+        base: str,
+        version: str = "7.5.0",
+        *,
+        work_order: str | None = None,
+        archive: str = "lock",
+        evidence_name: str = "evaluator-upgrade.json",
+    ) -> str:
+        """Write the target root and the retained transaction document of the simple upgrade.
+
+        `archive="null"` records no archive pair in the lock (an index install,
+        REQ-REB-028); `work_order` is the optional id the transaction may name.
+        """
+
+        identity: dict[str, object] = dict(evaluator(version))
+        if archive == "null":
+            identity["archive_name"] = None
+            identity["archive_sha256"] = None
         write(self.root, ".engineering-harness.toml", config(version))
         write(self.root, ".engineering-harness.lock", lock(version, schema=3, identity=identity))
         base_lock = git_bytes(self.root, "show", f"{base}:.engineering-harness.lock")
         prior_sha = hashlib.sha256(TRANSITION._canonical_lf(base_lock, "base lock")).hexdigest()
-        work_path = f"docs/engineering/sample/work-orders/{work_order}.md"
-        work = f'''+++
-id = "{work_order}"
-type = "work_order"
-title = "Fixture upgrade"
-status = "implemented"
-owners = ["repository-owner", "engineering-owner"]
-created = "2026-08-23"
-updated = "2026-08-23"
-
-[evaluator_upgrade]
-schema = "se-harness-evaluator-upgrade-v1"
-scope = "standard-root-only"
-prior_lock_sha256 = "{prior_sha}"
-target_version = "{version}"
-target_payload_sha256 = "{identity['payload_sha256']}"
-target_archive_name = "{identity['archive_name']}"
-target_archive_sha256 = "{identity['archive_sha256']}"
-publication = "immutable"
-authorized_by = "repository-owner"
-
-[relations]
-+++
-
-# Fixture work order
-'''.encode("utf-8")
-        write(self.root, work_path, work)
         evidence = {
             "authority": "read-only fixture",
-            "authorization_path": work_path,
-            "authorized_by": "repository-owner",
+            "authorization_path": None,
+            "authorized_by": None,
             "plan": [],
             "postconditions": {
                 "external_action_performed": False,
@@ -183,6 +173,7 @@ authorized_by = "repository-owner"
             },
             "prior": {
                 "evaluator": evaluator("7.4.0"),
+                "lock_match": None,
                 "lock_sha256": prior_sha,
                 "tool_version": "7.4.0",
             },
@@ -198,7 +189,7 @@ authorized_by = "repository-owner"
         }
         write(
             self.root,
-            f"docs/engineering/sample/evidence/{work_order}-evaluator-upgrade.json",
+            f"docs/engineering/sample/evidence/{evidence_name}",
             canonical_json(evidence),
         )
         return self.commit("target")
@@ -219,7 +210,50 @@ class GovernorTransitionTests(unittest.TestCase):
         self.assertEqual(base, plan["base"]["commit"])
         self.assertEqual(head, plan["target"]["commit"])
         self.assertEqual("7.5.0", plan["target"]["version"])
-        self.assertEqual("WO-TST-001", plan["work_order"]["id"])
+        self.assertEqual("docs/engineering/sample/evidence/evaluator-upgrade.json", plan["transition"]["evidence_path"])
+        self.assertIsNone(plan["transition"]["work_order"])
+        self.assertEqual("lock", plan["transition"]["archive_source"])
+        self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
+
+    def test_index_installed_target_takes_its_wheel_from_the_trusted_release(self) -> None:
+        """SPEC-REB-012: a null archive pair is an index install; the released record
+        binding the version supplies the wheel the assessment installs."""
+        temporary, fixture = self.fixture()
+        with temporary:
+            base = fixture.base()
+            fixture.target(base, archive="null")
+            plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+        self.assertTrue(plan["transition_required"])
+        self.assertEqual("trusted-release", plan["transition"]["archive_source"])
+        released = evaluator("7.5.0")
+        self.assertEqual(released["archive_name"], plan["target"]["evaluator"]["archive_name"])
+        self.assertEqual(released["archive_sha256"], plan["target"]["evaluator"]["archive_sha256"])
+        self.assertEqual(released["payload_sha256"], plan["target"]["evaluator"]["payload_sha256"])
+
+    def test_schema_one_release_record_is_still_a_trusted_release(self) -> None:
+        temporary, fixture = self.fixture()
+        with temporary:
+            base = fixture.base(distribution_schema=1)
+            fixture.target(base)
+            plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+        self.assertTrue(plan["transition_required"])
+
+    def test_recorded_archive_must_equal_the_trusted_release(self) -> None:
+        temporary, fixture = self.fixture()
+        with temporary:
+            base = fixture.base()
+            fixture.target(base)
+            lock_path = fixture.root / ".engineering-harness.lock"
+            value = json.loads(lock_path.read_text(encoding="utf-8"))
+            value["evaluator"]["archive_sha256"] = "d" * 64
+            write(fixture.root, ".engineering-harness.lock", canonical_json(value))
+            evidence = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
+            document = json.loads(evidence.read_text(encoding="utf-8"))
+            document["target"]["archive_sha256"] = "d" * 64
+            evidence.write_bytes(canonical_json(document))
+            fixture.commit("foreign archive")
+            with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "differs from the trusted base"):
+                TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
 
     def test_same_version_and_lock_are_not_a_transition(self) -> None:
         temporary, fixture = self.fixture()
@@ -251,8 +285,10 @@ class GovernorTransitionTests(unittest.TestCase):
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            path = fixture.root / "docs/engineering/sample/work-orders/WO-TST-001.md"
-            path.write_bytes(path.read_bytes().replace(b'prior_lock_sha256 = "', b'prior_lock_sha256 = "0'))
+            path = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
+            value = json.loads(path.read_text(encoding="utf-8"))
+            value["prior"]["lock_sha256"] = "0" + value["prior"]["lock_sha256"][1:]
+            path.write_bytes(canonical_json(value))
             fixture.commit("wrong prior")
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one"):
                 TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
@@ -281,9 +317,8 @@ class GovernorTransitionTests(unittest.TestCase):
             crlf = canonical.decode("utf-8").replace("\n", "\r\n").encode("utf-8")
             crlf_sha = hashlib.sha256(crlf).hexdigest()
             lf_sha = hashlib.sha256(canonical).hexdigest()
-            work = fixture.root / "docs/engineering/sample/work-orders/WO-TST-001.md"
-            work.write_bytes(work.read_bytes().replace(lf_sha.encode(), crlf_sha.encode()))
-            evidence = fixture.root / "docs/engineering/sample/evidence/WO-TST-001-evaluator-upgrade.json"
+            self.assertNotEqual(lf_sha, crlf_sha)
+            evidence = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
             value = json.loads(evidence.read_text(encoding="utf-8"))
             value["prior"]["lock_sha256"] = crlf_sha
             evidence.write_bytes(canonical_json(value))
@@ -292,19 +327,18 @@ class GovernorTransitionTests(unittest.TestCase):
                 str(fixture.root), base, "refs/remotes/origin/main"
             )
         self.assertTrue(plan["transition_required"])
-        self.assertEqual("WO-TST-001", plan["work_order"]["id"])
+        self.assertEqual("docs/engineering/sample/evidence/evaluator-upgrade.json", plan["transition"]["evidence_path"])
 
-    def test_multiple_matching_work_orders_fail_closed(self) -> None:
+    def test_multiple_matching_evidence_documents_fail_closed(self) -> None:
         temporary, fixture = self.fixture()
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            source = fixture.root / "docs/engineering/sample/work-orders/WO-TST-001.md"
-            duplicate = source.read_bytes().replace(b"WO-TST-001", b"WO-TST-002")
+            source = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
             write(
                 fixture.root,
-                "docs/engineering/sample/work-orders/WO-TST-002.md",
-                duplicate,
+                "docs/engineering/other/evidence/second-upgrade.json",
+                source.read_bytes(),
             )
             fixture.commit("duplicate")
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "exactly one"):
@@ -315,7 +349,7 @@ class GovernorTransitionTests(unittest.TestCase):
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            path = fixture.root / "docs/engineering/sample/evidence/WO-TST-001-evaluator-upgrade.json"
+            path = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
             value = json.loads(path.read_text(encoding="utf-8"))
             path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8", newline="\n")
             fixture.commit("noncanonical evidence")

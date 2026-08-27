@@ -13,7 +13,7 @@ rationale = "Every later gate, decision and release runs under the evaluator thi
 decided_by = "repository-owner"
 
 [execution_scope]
-paths = [".agents/skills/", ".claude/skills/", ".engineering-harness.lock", ".engineering-harness.toml", ".gitattributes", ".github/workflows/engineering-harness.yml", "AGENTS.md", "CLAUDE.md", "ENGINEERING_HARNESS.md", "README.md", "docs/engineering/ARTIFACT_AUTHORING.md", "docs/engineering/DECISION_RIGHTS.md", "docs/engineering/OPERATING_CARD.md", "docs/engineering/QUALITY_GATES.json", "docs/engineering/QUALITY_GATES.md", "docs/engineering/TECHNICAL_COMMUNICATION.md", "docs/engineering/WORKFLOW.json", "docs/engineering/WORKFLOW.md", "docs/engineering/templates/", "docs/engineering/repository-harness-upgrade/", "docs/notes/developing-se-harness.md", "pyproject.toml", "repository_tools/predecessor_facts.py", "scripts/select_harness_work_order.py", "scripts/validate_engineering_artifacts.py", "se_harness/__init__.py", "tests/"]
+paths = [".agents/skills/", ".claude/skills/", ".engineering-harness.lock", ".engineering-harness.toml", ".gitattributes", ".github/workflows/engineering-harness.yml", "AGENTS.md", "CLAUDE.md", "ENGINEERING_HARNESS.md", "README.md", "docs/engineering/ARTIFACT_AUTHORING.md", "docs/engineering/DECISION_RIGHTS.md", "docs/engineering/OPERATING_CARD.md", "docs/engineering/QUALITY_GATES.json", "docs/engineering/QUALITY_GATES.md", "docs/engineering/TECHNICAL_COMMUNICATION.md", "docs/engineering/WORKFLOW.json", "docs/engineering/WORKFLOW.md", "docs/engineering/templates/", "docs/engineering/repository-harness-upgrade/", "docs/notes/developing-se-harness.md", "pyproject.toml", "repository_tools/predecessor_facts.py", "scripts/select_harness_work_order.py", "scripts/validate_engineering_artifacts.py", "scripts/validate_governor_transition.py", "se_harness/__init__.py", "tests/"]
 
 [relations]
 implements = ["REQ-HUP-014", "REQ-HUP-015"]
@@ -49,6 +49,21 @@ rejection and `REL-SEH-018` are why it exists.
 
 Commit-bound verification is `required`: the root this work order writes is
 what every later gate runs under.
+
+## Scope amendment, 2026-08-27
+
+Put to the engineering owner during execution and answered 'Amend the scope
+and rework the assessor': `scripts/validate_governor_transition.py` is added
+to `[execution_scope].paths` (`tests/` already admits its test). The hosted
+governor transition assessment still encoded the retired packet model: a
+schema-1 distribution table, a `[evaluator_upgrade]` declaration on the
+work order, evidence bound to that work order, and an exact archive match.
+It is reworked to the simple model of `SPEC-REB-012`: a released record of
+schema 1 or 2 for the target version at the trusted base; exactly one
+retained evaluator-upgrade evidence document in the head tree whose prior
+lock is the base's and whose target is the head lock; a target archive pair
+equal to the trusted release's or `null`, the trusted release supplying the
+wheel the lane installs. The assess and apply phases are unchanged.
 
 ## Objective
 
