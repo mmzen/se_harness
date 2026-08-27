@@ -44,10 +44,6 @@ from se_harness.hash_bound import (
 )
 from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.preflight import inspect_installation
-from se_harness.upgrade_authorization import (
-    UpgradeAuthorizationError,
-    load_upgrade_authorization,
-)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1288,94 +1284,6 @@ class LockCallerAgreementTests(unittest.TestCase):
         }
         return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
-    def test_upgrade_authorization_reaches_one_verdict_from_every_materialization(self) -> None:
-        forms = newline_forms(b'{"schema": 3}\n')
-        recorded = canonical_sha256(forms["lf"])
-        # The divergence this replaces: the raw digest of a CRLF checkout differs.
-        self.assertNotEqual(recorded, raw_sha256(forms["crlf"]))
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            upgrade_packet(root, recorded, self.identity)
-            for name, value in forms.items():
-                with self.subTest(materialization=name):
-                    authorization = load_upgrade_authorization(
-                        root,
-                        work_order="WO-TST-001",
-                        old_lock_bytes=value,
-                        target_identity=self.identity,
-                    )
-                    self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
-                    self.assertEqual(recorded, authorization.prior_lock_sha256)
-
-    def test_upgrade_authorization_reports_a_legacy_newline_match(self) -> None:
-        payload = b'{"schema": 3}\n'
-        recorded = raw_sha256(payload.replace(b"\n", b"\r\n"))
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            upgrade_packet(root, recorded, self.identity)
-            authorization = load_upgrade_authorization(
-                root,
-                work_order="WO-TST-001",
-                old_lock_bytes=payload,
-                target_identity=self.identity,
-            )
-        self.assertEqual(MATCH_LEGACY_NEWLINE, authorization.prior_lock_match)
-        self.assertEqual(recorded, authorization.prior_lock_sha256)
-
-    def test_upgrade_authorization_still_refuses_a_tampered_lock(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            upgrade_packet(root, canonical_sha256(b'{"schema": 3}\n'), self.identity)
-            with self.assertRaisesRegex(
-                UpgradeAuthorizationError, "prior lock identity does not match the repository"
-            ):
-                load_upgrade_authorization(
-                    root,
-                    work_order="WO-TST-001",
-                    old_lock_bytes=b'{"schema": 2}\n',
-                    target_identity=self.identity,
-                )
-
-    def test_upgrade_authorization_refuses_an_undecodable_lock(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            upgrade_packet(root, canonical_sha256(b'{"schema": 3}\n'), self.identity)
-            with self.assertRaisesRegex(
-                UpgradeAuthorizationError, "declared hash-bound class"
-            ):
-                load_upgrade_authorization(
-                    root,
-                    work_order="WO-TST-001",
-                    old_lock_bytes=b"\xff\xfe",
-                    target_identity=self.identity,
-                )
-
-    def test_upgrade_authorization_follows_a_changed_declaration(self) -> None:
-        forms = newline_forms(b'{"schema": 3}\n')
-        recorded = canonical_sha256(forms["lf"])
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            upgrade_packet(root, recorded, self.identity)
-            with mock.patch.object(
-                hash_bound, "load_declaration", return_value=raw_lock_declaration()
-            ):
-                # Raw mode is the declaration's to choose; the caller must follow it
-                # rather than keep a canonicalization of its own.
-                authorization = load_upgrade_authorization(
-                    root,
-                    work_order="WO-TST-001",
-                    old_lock_bytes=forms["lf"],
-                    target_identity=self.identity,
-                )
-                self.assertEqual(MATCH_DECLARED, authorization.prior_lock_match)
-                with self.assertRaises(UpgradeAuthorizationError):
-                    load_upgrade_authorization(
-                        root,
-                        work_order="WO-TST-001",
-                        old_lock_bytes=forms["crlf"],
-                        target_identity=self.identity,
-                    )
-
     def test_release_bootstrap_reaches_one_verdict_from_every_materialization(self) -> None:
         forms = newline_forms(self.bootstrap_lock())
         contract = bootstrap_contract(canonical_sha256(forms["lf"]))
@@ -1461,14 +1369,13 @@ class LockCallerAgreementTests(unittest.TestCase):
                     BOOTSTRAP._validate_old_root(root, contract)
 
     def test_no_lock_caller_decides_the_mode_locally(self) -> None:
-        authorization = (ROOT / "se_harness" / "upgrade_authorization.py").read_text(encoding="utf-8")
-        self.assertNotIn("hashlib", authorization)
-        self.assertIn("compare_declared_digest", authorization)
+        # The upgrade-authorization packet loader was retired by WO-REB-027; the
+        # remaining lock callers still take their mode from the declaration.
         bootstrap = (ROOT / "repository_tools" / "release_bootstrap.py").read_text(encoding="utf-8")
         self.assertNotIn("_canonical_utf8_text_lf(lock_raw", bootstrap)
         guard = (ROOT / "se_harness" / "mutation_guard.py").read_text(encoding="utf-8")
         self.assertNotIn("hashlib", guard)
-        for source in (authorization, bootstrap, guard):
+        for source in (bootstrap, guard):
             # The declared path is named once, from the declaration's own constant.
             self.assertNotIn('".engineering-harness.lock"', source)
 

@@ -5,7 +5,7 @@ title = "Evaluator upgrade separation and bounded recovery"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-005", "REQ-REB-006", "REQ-REB-007"]
@@ -68,6 +68,17 @@ Recovery follows `not-invoked -> declared -> bounded bypass -> standard-root res
 12. **Restoration.** Recovery is incomplete until the root uses the standard config and lock, normal released-evaluator and candidate-evidence workflows pass, the normal publisher is restored, temporary publication paths are absent, and active-surface invariants pass.
 13. **Incident retention.** A factual non-authoritative RCA and separately governed preventive work follow recovery; emergency actions are not retroactively normalized.
 14. **Disposable rehearsal.** Automated rehearsal uses local immutable archives, simulated trusted publication, disposable roots, and no production credentials, network mutation, tags, releases, or deployment.
+
+## Amendment, 2026-08-27
+
+Under `WO-REB-027`, on the repository owner's direction, rule 1 no longer
+governs upgrades: the evaluator-upgrade work-order packet is retired and
+`SPEC-REB-012` states the simple upgrade contract (identity by version and
+installed-payload digest, no packet, index installs accepted). Rules 2 to 14
+— sequencing, upgrade evidence, the conflict rules, the runbook, the
+credential boundary, public proof, restoration, incident retention and the
+disposable rehearsal — stand unchanged. Rule 1's text is retained above as
+history of what the product enforced from 2026-08-21 to this amendment.
 
 ## Error and recovery behavior
 

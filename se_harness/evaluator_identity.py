@@ -46,16 +46,18 @@ class InstalledEvaluatorIdentity:
     archive_name: str | None = None
     archive_sha256: str | None = None
 
-    def to_lock(self) -> dict[str, str]:
-        value = {
+    def to_lock(self) -> dict[str, str | None]:
+        # The lock's evaluator field set is canonical; an installation that
+        # recorded no PEP 610 archive (an index install) carries the pair as
+        # null rather than omitting it (SPEC-REB-012 rule 3).
+        archive_known = self.archive_name is not None and self.archive_sha256 is not None
+        return {
             "version": self.version,
             "payload_manifest": self.payload_manifest,
             "payload_sha256": self.payload_sha256,
+            "archive_name": self.archive_name if archive_known else None,
+            "archive_sha256": self.archive_sha256 if archive_known else None,
         }
-        if self.archive_name is not None and self.archive_sha256 is not None:
-            value["archive_name"] = self.archive_name
-            value["archive_sha256"] = self.archive_sha256
-        return value
 
 
 def expected_wheel_name(version: str) -> str:

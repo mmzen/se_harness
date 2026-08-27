@@ -167,8 +167,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$RELEASED_VERIFIER_VERSION" -a -n "$RELEASED_VERIFIER_WHEEL_SHA256" -a -n "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" \
-            || { echo "predecessor facts were not derived; the legacy bootstrap acceptance needs a declared contract digest" >&2; exit 1; }
+          test -n "$RELEASED_VERIFIER_VERSION" -a -n "$RELEASED_VERIFIER_WHEEL_SHA256" \
+            || { echo "predecessor facts were not derived; the verifier identity is unknown" >&2; exit 1; }
           mkdir -p "$RUNNER_TEMP/verifier-dist"
           python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps \
             --dest "$RUNNER_TEMP/verifier-dist" "se-harness==$RELEASED_VERIFIER_VERSION"
@@ -199,16 +199,40 @@ jobs:
           candidate_sha256="$(sha256sum "$candidate_wheel" | awk '{print $1}')"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate \
-            --wheel "$candidate_wheel" \
-            --candidate-commit "$GITHUB_SHA" \
-            --candidate-wheel-sha256 "$candidate_sha256" \
-            --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
-            --checkout-root "$GITHUB_WORKSPACE" \
-            --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
-          python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
-            "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
-            "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" "$RELEASED_VERIFIER_VERSION" <<'PY'
+          # SPEC-REB-012 rule 6: a released verifier that carries the qualify
+          # namespace runs the typed candidate-package qualification; an older one
+          # runs its fixed, digest-bound accept-candidate bootstrap. The assertions
+          # match the operation that ran.
+          if "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify --help >/dev/null 2>&1; then
+            "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify candidate-package \
+              --candidate-wheel "$candidate_wheel" \
+              --candidate-commit "$GITHUB_SHA" \
+              --candidate-wheel-sha256 "$candidate_sha256" \
+              --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
+              --checkout-root "$GITHUB_WORKSPACE" \
+              --output "$RUNNER_TEMP/candidate-package-bootstrap.json" \
+              --json
+            python - "$RUNNER_TEMP/candidate-package-bootstrap.json" <<'PY'
+          import json, pathlib, sys
+          value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          assert value["schema"] == "se-harness-release-qualification-v1"
+          assert value["operation"] == "candidate-package"
+          assert value["independence"] == "released-verifier"
+          assert value["passed"] is True
+          PY
+          else
+            test -n "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" \
+              || { echo "the legacy bootstrap acceptance needs a declared contract digest" >&2; exit 1; }
+            "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate \
+              --wheel "$candidate_wheel" \
+              --candidate-commit "$GITHUB_SHA" \
+              --candidate-wheel-sha256 "$candidate_sha256" \
+              --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
+              --checkout-root "$GITHUB_WORKSPACE" \
+              --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
+            python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
+              "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
+              "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" "$RELEASED_VERIFIER_VERSION" <<'PY'
           import json, pathlib, sys
           value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
           assert value["schema"] == "se-harness-functional-acceptance-v1"
@@ -219,6 +243,7 @@ jobs:
           assert value["verifier"]["contract_sha256"] == sys.argv[5]
           assert "independence" not in value
           PY
+          fi
       - name: Install candidate and prove package identity
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}

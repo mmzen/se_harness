@@ -145,12 +145,19 @@ class ReleaseQualificationTests(unittest.TestCase):
             "candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}",
         )
         self.assertTrue(all(value in workflow for value in required))
-        self.assertNotIn("qualify candidate-package", workflow)
+        # WO-REB-027 (SPEC-REB-012 rule 6): the legacy bootstrap is the branch a
+        # verifier without the qualify namespace takes; a verifier that carries
+        # it runs the typed candidate-package qualification instead.
+        self.assertIn('-m se_harness qualify --help >/dev/null 2>&1; then', workflow)
+        self.assertIn("qualify candidate-package", workflow)
+        self.assertIn('value["schema"] == "se-harness-release-qualification-v1"', workflow)
+        self.assertIn('value["operation"] == "candidate-package"', workflow)
+        self.assertLess(workflow.index("qualify candidate-package"), workflow.index("-m se_harness accept-candidate"))
         self.assertNotIn('RELEASED_VERIFIER_VERSION: "', workflow)
         for original, replacement in (
             ("RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", 'RELEASED_VERIFIER_VERSION: "0.6.1"'),
             ("se-harness-functional-acceptance-v1", QUALIFICATION_SCHEMA),
-            ("accept-candidate", "validate"),
+            ("-m se_harness accept-candidate", "-m se_harness validate"),
         ):
             mutated = workflow.replace(original, replacement, 1)
             with self.subTest(original=original):
