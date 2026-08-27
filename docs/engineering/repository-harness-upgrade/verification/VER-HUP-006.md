@@ -2,13 +2,20 @@
 id = "VER-HUP-006"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.7.0"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 
 [relations]
 verifies = ["REQ-HUP-012", "REQ-HUP-013"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T14:37:56Z"
+decided_by = "quality-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'i approve the packet, you can start WO-HUP-006', after the rehearsal of the transaction in a throwaway worktree and the owner's decision to move the candidate to development version 0.8.0 inside the work order. Adopts exact public 0.7.0 (wheel e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3, payload 26c11ec5e2363c3c0a9a416e69a3faa8bdf2d7a046710075bdeb661dd1003ee9) from the 0.6.0 lock 978cebb7824b7928d95ed43897b0f848441cc4ab7403a0cdd08a55a77df2b79e through one reviewed standard-root transaction of 43 add or update paths, no customization."
 +++
 
 # Verification Contract: Verify standard-root adoption of exact public 0.7.0
