@@ -970,7 +970,7 @@ class OwnerInstructionRegionTests(unittest.TestCase):
     def test_owner_region_identifies_every_managed_path_from_the_lock(self) -> None:
         region = self.owner_region()
         managed = sorted(path for path, entry in self.lock["files"].items() if entry.get("mode") == "managed")
-        self.assertEqual(30, len(managed))
+        self.assertEqual(55, len(managed))
         self.assertIn("docs/engineering/", region)
         self.assertIn("in `scripts/`", region)
         for path in managed:
@@ -1024,7 +1024,10 @@ class OwnerInstructionRegionTests(unittest.TestCase):
     def test_owner_region_directs_the_evaluator_outside_the_checkout(self) -> None:
         region = self.owner_region()
         self.assertIn("outside the checkout", region)
-        self.assertIn("se-harness==0.6.0", region)
+        # WO-HUP-007: the owner region names the released governor the lock records.
+        lock_version = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
+        self.assertIn(f"se-harness=={lock_version}", region)
+        self.assertNotIn("se-harness==0.6.0", region)
         self.assertNotIn("se-harness==0.5.0", region)
         self.assertIn("Confirm commands against the isolated released evaluator", region)
 
