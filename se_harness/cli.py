@@ -147,7 +147,7 @@ def _install(args: argparse.Namespace, mode: str) -> int:
     return 0
 
 
-def _report_undeclared_legacy_releases(target: Path, work_order: str | None) -> None:
+def _report_undeclared_legacy_releases(target: Path) -> None:
     """Notice, without refusing, the released records an apply would refuse over."""
 
     from se_harness.legacy_release_evidence import (
@@ -163,7 +163,7 @@ def _report_undeclared_legacy_releases(target: Path, work_order: str | None) -> 
         return
     if not undeclared:
         return
-    authority = work_order or "the authorizing evaluator-upgrade work order"
+    authority = "an approved work order"
     print(
         "notice: these released records predate evaluator-evidence enforcement and are "
         "not declared; applying an evaluator identity transition would be refused:",
@@ -184,7 +184,7 @@ def _upgrade(args: argparse.Namespace) -> int:
     if not args.apply:
         # REQ-LRE-002: report on the planning path what an apply would refuse, so the
         # operator learns it before the transaction rather than from a frozen gate.
-        _report_undeclared_legacy_releases(target, args.work_order)
+        _report_undeclared_legacy_releases(target)
         return 0
     blocked = [item for item in changes if item.action == "customized"]
     if blocked:
@@ -203,12 +203,13 @@ def _upgrade(args: argparse.Namespace) -> int:
         changes,
         old_lock,
         allow_updates=True,
-        upgrade_work_order=args.work_order,
         evidence_output=Path(args.evidence_output) if args.evidence_output else None,
     )
     print(f"upgraded managed files to se-harness {__version__}")
     if args.evidence_output:
         print(f"retained evaluator-upgrade evidence at {args.evidence_output}")
+    else:
+        print("no transaction evidence retained; pass --evidence-output to keep it")
     return 0
 
 
@@ -1192,8 +1193,10 @@ def build_parser() -> argparse.ArgumentParser:
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
     upgrade.add_argument("target", nargs="?", default=".")
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
-    upgrade.add_argument("--work-order", help="separately approved evaluator-upgrade work order for an identity transition")
-    upgrade.add_argument("--evidence-output", help="WO-keyed repository JSON path for evaluator-transition evidence")
+    upgrade.add_argument(
+        "--evidence-output",
+        help="optional repository JSON path below docs/engineering/.../evidence/ for the transaction evidence",
+    )
     upgrade.set_defaults(handler=_upgrade)
 
     rehearse = commands.add_parser(

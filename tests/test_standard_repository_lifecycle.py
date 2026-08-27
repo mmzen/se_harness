@@ -335,7 +335,12 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertNotIn("pull_request_target", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("id-token: write", workflow)
-        self.assertNotIn("qualify candidate-package", workflow)
+        # WO-REB-027 (SPEC-REB-012 rule 6): the candidate-package operation is
+        # selected by the released verifier's capability, never by a restated
+        # version; both branches assert the shape of what ran.
+        self.assertIn("qualify --help", workflow)
+        self.assertIn("qualify candidate-package", workflow)
+        self.assertIn('value["independence"] == "released-verifier"', workflow)
 
     def test_specialized_product_surface_is_absent(self) -> None:
         for relative in (

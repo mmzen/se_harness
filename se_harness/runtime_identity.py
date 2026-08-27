@@ -302,7 +302,14 @@ def inspect_runtime_identity(
             diagnostics.append(
                 IdentityDiagnostic("RID013", "evaluator_wheel_sha256", "the optional digest must be a lowercase SHA-256")
             )
-        elif evaluator_wheel_sha256 is not None and installed_archive_sha256 != evaluator_wheel_sha256:
+        elif (
+            evaluator_wheel_sha256 is not None
+            and installed_archive_sha256 is not None
+            and installed_archive_sha256 != evaluator_wheel_sha256
+        ):
+            # An installation that recorded no PEP 610 archive digest (an index
+            # install) is identified by its version and payload; only a recorded
+            # digest that differs is a mismatch (REQ-REB-028).
             diagnostics.append(
                 IdentityDiagnostic(
                     "RID022",

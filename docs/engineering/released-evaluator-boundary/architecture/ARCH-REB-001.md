@@ -5,10 +5,10 @@ title = "Standard lock-bound released-evaluator boundary"
 status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 
 [relations]
-addresses = ["REQ-REB-001", "REQ-REB-002", "REQ-REB-003", "REQ-REB-004", "REQ-REB-005"]
+addresses = ["REQ-REB-001", "REQ-REB-002", "REQ-REB-003", "REQ-REB-004"]
 conforms_to = ["SPEC-REB-001", "SPEC-REB-002"]
 
 [decision_assessment]
@@ -111,3 +111,7 @@ The evaluator never derives its expected identity from candidate source, a candi
 ## Related ADRs
 
 `ADR-REB-001` records the accepted decision to own evaluator identity in the standard lock and consume it through shared runtime, publication, and provenance boundaries instead of restoring a special descriptor or relying on workflow-only procedure.
+
+## Amendment, 2026-08-27
+
+Under `WO-REB-027`, `REQ-REB-005` left this architecture's `addresses` set when it was superseded by `REQ-REB-027` and `REQ-REB-028`, which `ARCH-REB-011` addresses. The boundary this architecture describes is unchanged.
