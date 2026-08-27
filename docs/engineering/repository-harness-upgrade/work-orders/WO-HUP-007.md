@@ -2,7 +2,7 @@
 id = "WO-HUP-007"
 type = "work_order"
 title = "Adopt exact public 0.7.1 as the standard root, the simple way"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-27T17:43:27Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-27 with the words 'Approve and start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared simple upgrade from an isolated 0.7.1 index install outside the checkout, the owner statements, the candidate move to 0.8.0 with its scenario and legacy-contract entry, the root-assumption test changes and the retained evidence, inside the declared execution scope. It authorizes no verification record, no release, no publication and no change to the guard. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-27T17:43:33Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-27, 'Approve and start'. Start preflight PASS at phase start over the approval commit carrying unmoved main 23d5781, run with the governing exact public 0.6.0 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.7.1 in C:\\Users\\mathi\\se-harness-eval-071, installed from the index. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.7.1 as the standard root, the simple way
