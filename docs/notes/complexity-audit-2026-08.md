@@ -13,6 +13,13 @@ touches an approved artifact is an amendment under this repository's own rules.
 Measured sizes: package 22,571 lines; repository tooling about 8,300; installed
 scripts about 7,000; tests 27,896; 1,156 formal artifacts.
 
+## Issues
+
+Every P0 and P1 finding is a GitHub issue labelled `complexity-audit` with its
+priority label: P0-1 to P0-6 are #207 to #212 and P1-1 to P1-15 are #213 to
+#227. Issue #228 sequences them in waves with their dependencies and the
+governance acts each one implies.
+
 ## Question this note answers
 
 Where has SE Harness accumulated code, abstractions, or workflows whose
