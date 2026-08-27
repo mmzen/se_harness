@@ -2,13 +2,20 @@
 id = "SPEC-REB-014"
 type = "specification"
 title = "Consumer-installed validator without predecessor-bootstrap rules"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner", "release-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-029"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T20:11:19Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'i approve the 3 draft artifacts', on the owner review of pull request #206. Specifies the part of REQ-REB-029 that SPEC-REB-013 excluded in terms: the candidate copy of the hash-locked managed validator. SPEC-REB-013 keeps its full force alongside this specification and is not amended, narrowed or replaced; PV001 and PV002 stay reserved by it. Rule 3's finding that no tolerance shim is required is accepted as measured on the current file. Rule 4 moves the retained-digest guarantee to the repository's own suite. Rule 5 preserves REQ-REB-011 exactly. Rule 6 accepts a template-versus-root divergence as the expected state until the root evaluator next advances. The root copy is not edited under this specification either."
 +++
 
 # Specification: Consumer-installed validator without predecessor-bootstrap rules

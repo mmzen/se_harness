@@ -2,13 +2,20 @@
 id = "VER-REB-013"
 type = "verification"
 title = "Consumer-installed validator retirement assurance"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner", "release-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
 
 [relations]
 verifies = ["REQ-REB-029"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-27T20:11:19Z"
+decided_by = "quality-owner"
+reason = "Approved on 2026-08-27 by the accountable owner, 'i approve the 3 draft artifacts', on the owner review of pull request #206. Accepts the eight required cases as the assurance for REQ-REB-029, including the inert-data cases on the six closed 0.6.0 artifacts and the packaged-copy reading from an ephemeral non-promotable wheel installed outside the checkout. Accepts deliberately that this contract requires no workflow_dispatch rehearsal and that static review of the Pages lane rename is sufficient evidence for a temporary directory name. VER-REB-012's open dispatch rehearsal is neither discharged nor re-scoped by this approval and remains outstanding."
 +++
 
 # Verification Contract: Consumer-installed validator retirement assurance
