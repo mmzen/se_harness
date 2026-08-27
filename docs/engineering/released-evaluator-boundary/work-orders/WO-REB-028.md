@@ -2,7 +2,7 @@
 id = "WO-REB-028"
 type = "work_order"
 title = "Retire the predecessor-bootstrap release path and keep its history as inert facts"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-08-27T16:56:39Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-27, 'you can start'; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch governance/reb-028-retire-predecessor-bootstrap off main f605e58."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T18:36:43Z"
+decided_by = "engineering-owner"
+reason = "The authorized implementation and the required evidence are complete. The twelve retired-path files are deleted, the eight in-scope files are edited, the retirement is recorded by dated amendment in the six governing artifacts, and tests/test_predecessor_bootstrap_retirement.py holds the deletion, name-reservation, retained-history and Explorer-payload cases. Evidence is docs/engineering/released-evaluator-boundary/evidence/WO-REB-028-verification.md, whose handoff reading passes against the released 0.6.0 evaluator outside the checkout at formal snapshot 299a568e. Seven coverage gaps and disclosures in section 12 and the merge of origin/main f0ecd9b in section 14 are explicit inputs to the separate and outstanding verification decision under VER-REB-012: the superseded status could not be applied to REQ-REB-012, REQ-REB-015 or SPEC-REB-007 because the definition families admit no such transition, six interpreter-safety boundaries were removed where the work order names two, repository_tools/interpreter_safety.py is retained with no production caller, three out-of-scope notes still carry stale references, and the dispatch-mode rehearsal of publish-pypi.yml and pages-publication.yml that VER-REB-012 requires is absent."
 +++
 
 # Work Order: Retire the predecessor-bootstrap release path and keep its history as inert facts
