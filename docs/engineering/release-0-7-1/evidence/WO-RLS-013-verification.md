@@ -60,9 +60,9 @@ does not complete, verify, or release the work order.
 | `py -3.11 scripts/run_tests.py --workers 4 --scale full` | candidate, Windows 11, CPython 3.11 | OK, 983 tests, 24 skipped (Windows-only guards), 0 failures |
 | `harnessctl release-unit . --from v0.7.0 --to HEAD --exempt <the six contract commits> --contract REL-SEH-018 --json` | candidate | traces `WO-REB-027` and `WO-RLS-013`; incomplete only because `WO-RLS-013` is `in_progress` at this reading; no `E-CIP-001` finding; the contract's other three members are reached only through exempted merge commits (deviation 2) |
 | `harnessctl check . --artifact WO-RLS-013 --checkpoint handoff --changed-path ... --changes-complete --json` | released 0.6.0 and candidate | Completed on both over the fourteen paths; before this file existed the only non-pass predicate was QGP-G4I-EVIDENCE; formal snapshot above |
-| `qualify complete-candidate --candidate-commit <candidate>` | candidate | QUALIFY-ROW |
-| Build of record, WSL Ubuntu, `python -m repository_tools.release_build replay --commit <candidate> --version 0.7.1` | pinned linux/amd64 producer | BUILD-ROW |
-| Hosted | the pull request's lanes | HOSTED-ROW |
+| `qualify complete-candidate --candidate-commit <candidate>` | candidate | at candidate 11b5a8c30b12e192aaa54542424d9574bc1e7a0b, run with python -s (a first run with user site-packages enabled failed CC001 on RID009, not on the candidate): passed, CC001 bound to the checkout, CC002 HEAD and tracked tree match, CC003 978 artifacts 0 errors, CC004 target unchanged; independence candidate-controlled |
+| Build of record, WSL Ubuntu, `python -m repository_tools.release_build replay --commit <candidate> --version 0.7.1` | pinned linux/amd64 producer | at candidate 11b5a8c, WSL Ubuntu 24.04 with Docker Desktop integration, output under /tmp: state exact, two byte-identical producer runs; wheel se_harness-0.7.1-py3-none-any.whl 25a65a3934c681ea2bf56be020cad834e79bfc9729eb385ab97be0e1fa7bbc8b, sdist se_harness-0.7.1.tar.gz b834549869628aa29526c65d9272f3aef1b0bb3a94c99d61cbc197d547fb3590; to be compared with the hosted candidate-mode replay at the pull-request head |
+| Hosted | pull request #199 at 11b5a8c | all fourteen lanes pass (Engineering Harness, Candidate Evidence, Publication Rehearsal, Governor Transition Assessment; Publication Rehearsal run 33093001090); the candidate-mode replay ran on the merge-preview commit 385d357, so its digests are not the candidate's; the comparison of record is the release-candidate-replay dispatch at the bound commit |
 
 ## Deviations from the work order, recorded for the completion decision
 
@@ -80,6 +80,16 @@ does not complete, verify, or release the work order.
    The `[release_unit].untraced_exemptions` table in the contract is read by
    nobody today; the six exemptions are passed as `--exempt` flags, and the
    developer note's claim that the contract carries them is a gap owed.
+
+## Deviation acceptances
+
+Recorded on 2026-08-27 from the owner's interactive answer 'Accept both',
+before the completion decision.
+
+| Deviation | Owner answer |
+| --- | --- |
+| 1 - scope amendment for the scenario writer | Accept (answered during execution). |
+| 2 - derivation traces two of five members; exemptions passed as flags | Accept; the unread `untraced_exemptions` table is a gap owed. |
 
 ## Complete changed-path set
 

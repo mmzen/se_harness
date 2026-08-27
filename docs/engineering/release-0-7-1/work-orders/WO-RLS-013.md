@@ -2,7 +2,7 @@
 id = "WO-RLS-013"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.7.1 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-27T16:06:45Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-27, 'Approve and start'. Start preflight PASS at phase start over the approval commit carrying unmoved main f605e58, run with the governing exact public 0.6.0 evaluator outside the checkout. REL-SEH-018 is approved, so its five-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the nine declared execution-scope paths. This start authorizes no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-015 or RLS-SEH-016 preparation or transition, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T16:34:50Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-27 under DR-WO-COMPLETE, 'Mark WO-RLS-013 implemented', on the handoff gate reading Completed over candidate commit 11b5a8c30b12e192aaa54542424d9574bc1e7a0b, formal snapshot 0865550524c75e5bbd2a61d86fa0b19951dea16bb5bb5ec727f21631ecd70fe5, change set asserted complete over the fourteen changed paths including the scope-amended scenario writer. Exact-candidate readings, governing exact public 0.6.0 evaluator outside the checkout in isolated mode: validate PASS at 978 artifacts, 0 errors, 53 pre-existing maintenance warnings; doctor 0 FAIL; review preflight PASS; release-distribution validation PASS; portable surface PASS; public 0.7.0 validate 0 errors. Candidate: complete-candidate passed; migration rehearsal 0.6.0 to 0.7.1 pass and compatible; suites Windows CPython 3.14 and 3.11 both 983 tests OK with 24 platform-guard skips at full scale. Build of record through the pinned linux/amd64 producer from WSL Ubuntu: state exact, two byte-identical builds, wheel 25a65a3934c681ea2bf56be020cad834e79bfc9729eb385ab97be0e1fa7bbc8b, sdist b834549869628aa29526c65d9272f3aef1b0bb3a94c99d61cbc197d547fb3590. All fourteen pull-request lanes success on head 11b5a8c. Two deviations accepted by the owner and recorded in the evidence. This authorizes no further act."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.7.1 candidate from main
