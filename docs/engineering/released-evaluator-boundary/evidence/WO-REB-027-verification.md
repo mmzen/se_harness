@@ -86,7 +86,7 @@ does not complete, verify, or release the work order.
 | `python scripts/run_tests.py --workers 8 --scale full` | candidate, Windows 11, CPython 3.14 | OK, 983 tests, 24 skipped (Windows-only guards), 0 failures |
 | `py -3.11 scripts/run_tests.py --workers 4 --scale full` | candidate, Windows 11, CPython 3.11 | OK, 983 tests, 24 skipped (Windows-only guards), 0 failures |
 | `harnessctl check . --artifact WO-REB-027 --checkpoint handoff --changed-path … --changes-complete --json` | released 0.6.0 and candidate | before this file existed: blocked only by `QGP-G4I-EVIDENCE`; formal snapshot above |
-| Hosted | the pull request's lanes | pending the pull request; the candidate-package job takes the legacy branch under the 0.6.0 verifier and the typed branch once a verifier with `qualify` is the root |
+| Hosted | pull request #198 at `8dcd561` | all ten lanes pass (runs 33089362243, 33089362246, 33089362342, 33089362619); the candidate-package job took the legacy `accept-candidate` branch under the 0.6.0 verifier, as rule 6 requires until a verifier with `qualify` is the root |
 
 ## Deviations from the specification, recorded for the completion decision
 

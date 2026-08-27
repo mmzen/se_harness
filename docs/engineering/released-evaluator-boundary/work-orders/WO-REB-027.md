@@ -2,7 +2,7 @@
 id = "WO-REB-027"
 type = "work_order"
 title = "Make the evaluator upgrade simple: payload identity, no packet, index installs"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -48,6 +48,12 @@ to = "in_progress"
 decided_at = "2026-08-27T15:20:06Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch governance/reb-027-simple-upgrade off main 7284743."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-27T15:46:46Z"
+decided_by = "implementation-actor"
 +++
 
 # Work Order: Make the evaluator upgrade simple: payload identity, no packet, index installs
