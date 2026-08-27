@@ -29,3 +29,5 @@ their bounded post-adoption qualification.
   work-order completion, commit, push, and disposition of `VREC-HUP-003` remain
   separate governed actions. No managed root, product, release, publication,
   deployment, maintenance, or external policy was changed.
+
+- `INT-HUP-004`, `REQ-HUP-012`, `REQ-HUP-013`, `SPEC-HUP-006`, `ARCH-HUP-004` (no significant decision) and `VER-HUP-006` are drafted, deriving from the existing `CAP-HUP-002`. `WO-HUP-006` is drafted to adopt exact public `0.7.0` (`RLS-SEH-015`, wheel `e8f4fdc9…`, payload `26c11ec5…`) as the standard root, from the 0.6.0 lock `978cebb7…`. Measured on 2026-08-27 over `main` at `7284743`: the 0.7.0 plan reads 61 files, 18 unchanged, 43 add or update, no customization. Approval, start, the transaction, completion, verification and merge are separate acts.
