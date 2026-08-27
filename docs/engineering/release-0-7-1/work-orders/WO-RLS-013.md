@@ -2,7 +2,7 @@
 id = "WO-RLS-013"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.7.1 candidate from main"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-27T16:06:39Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-27 with the words 'Approve and start', as a decision distinct from the approval of REL-SEH-018. Re-measured immediately before this transition over branch state f022e5c carrying unmoved main f605e58: the four existing members WO-REB-024 through WO-REB-027 all implemented with verified coverage VREC-REB-021 through VREC-REB-024; no work order reached implemented since the packet was drafted; no ready record beyond the two canonical templates; validate PASS at 978 artifacts, 0 errors, 53 pre-existing maintenance warnings; doctor 0 FAIL, governing exact public 0.6.0 evaluator outside the checkout. Approval authorizes start preflight and then only the declared version move, scenario, qualification, recipe-bound Linux build, index-maintenance and retained-evidence work inside the nine declared execution-scope paths. It authorizes no contract approval, no VREC-SEH-015 or RLS-SEH-016 work, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator upgrade. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-27T16:06:45Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-27, 'Approve and start'. Start preflight PASS at phase start over the approval commit carrying unmoved main f605e58, run with the governing exact public 0.6.0 evaluator outside the checkout. REL-SEH-018 is approved, so its five-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the nine declared execution-scope paths. This start authorizes no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-015 or RLS-SEH-016 preparation or transition, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator change."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.7.1 candidate from main
