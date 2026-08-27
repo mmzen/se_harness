@@ -2,7 +2,7 @@
 id = "WO-REB-027"
 type = "work_order"
 title = "Make the evaluator upgrade simple: payload identity, no packet, index installs"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -41,6 +41,13 @@ to = "approved"
 decided_at = "2026-08-27T15:20:02Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-08-27 by the accountable owner, 'Approve and start', on the owner's direction that the evaluator upgrade must be simple: the MG007 work-order packet and the MG004 and RID022 archive-digest requirements are retired, the installed evaluator's version and payload digest are its identity, index installs pass the managed lane, and the candidate-evidence lane selects the acceptance operation by the verifier's capability. REQ-REB-005 is superseded under WO-REB-027. Approval authorizes start preflight and then only the declared work inside the execution scope; completion, verification, release and adoption are separate acts."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-27T15:20:06Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's decision of 2026-08-27; start preflight PASS with the exact public 0.6.0 evaluator outside the checkout on branch governance/reb-027-simple-upgrade off main 7284743."
 +++
 
 # Work Order: Make the evaluator upgrade simple: payload identity, no packet, index installs
