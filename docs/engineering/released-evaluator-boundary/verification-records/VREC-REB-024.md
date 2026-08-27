@@ -2,7 +2,7 @@
 id = "VREC-REB-024"
 type = "verification_record"
 title = "Verification candidate for WO-REB-027"
-status = "ready"
+status = "verified"
 owners = ["Mathieu Meadele"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -16,9 +16,17 @@ evidence_paths = ["docs/engineering/released-evaluator-boundary/evidence/WO-REB-
 evaluator_evidence_path = "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-024-evaluator.json"
 evaluator_evidence_sha256 = "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
 
+verified_at = "2026-08-27T15:49:13Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-REB-027"]
 conforms_to = ["VER-REB-011"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-27T15:49:13Z"
+decided_by = "assurance-owner"
 +++
 
 # Verification Record Candidate
