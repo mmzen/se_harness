@@ -6,7 +6,7 @@ Authority: non-authoritative retained implementation evidence. This file does no
 
 artifact: WO-REB-028
 checkpoint: handoff
-formal_snapshot_sha256: 299a568e8f98a62225842a5eff8c1ffcb70f6d4533cd2d541c89e5ee3b3f3d75
+formal_snapshot_sha256: 7f36d03248d40fc5a525c77e71f53853256527d1099ac1ae37881cf32a16aa2f
 
 ## 1. Governing packet and preflight
 
@@ -352,3 +352,117 @@ sha256 53223241cdb8f984bffa05396173027d6ad5cd575e6ef0ed8ee7720260de9a33
 Both surface readings pass against it, `qualify --help` from the installed console script offers the same four operations with zero occurrences of `predecessor-view`, `rehearse-migration` is present, and the member list contains no `predecessor`, `bootstrap` or `repository_tools` member. That wheel and its virtual environment were deleted after the readings, as the 0.7.0 one was. Neither is promotable, and 0.7.1 is already published from a build of record that this host cannot produce.
 
 The formal snapshot moved with the merge, from `77b5543356ee540325a9de44a35e3d4ebd9b35140e32c4ffca120475faaeeb35` at `b848b7a` to `299a568e8f98a62225842a5eff8c1ffcb70f6d4533cd2d541c89e5ee3b3f3d75` at `cb56673`. The binding block at the top of this file declares the second value, which is the one the handoff gate reads. Re-running the handoff check before this section was written returned `QGP-G4I-EVIDENCE: No readable evidence for WO-REB-028, checkpoint handoff, and formal snapshot 299a568e… is available` — the gate passing once does not mean it still passes, and re-binding the evidence is what makes it pass again. Section 13 records the re-derived result.
+
+## 15. Governor upgrade to 0.7.1, and the retraction of VREC-REB-025
+
+`origin/main` advanced again, from `f0ecd9b` to `fda0fa1`, while this work order was being closed. Those nine commits adopt the exact public **0.7.1** evaluator as the standard root (pull request #203, `WO-HUP-007`), so the governing evaluator of this repository is no longer the 0.6.0 one every reading in sections 1 to 14 used. `fda0fa1` was merged into the branch, never rebased onto it, as `f089e83`, with no conflict. `AGENTS.md` and `CLAUDE.md` at the merge are byte-identical to `origin/main`; this branch changes neither.
+
+`.engineering-harness.toml` now pins `tool_version = "0.7.1"` and the lock records the 0.7.1 evaluator payload `995ee973b2959af3bcbf7f7cc4388f079ad033e7c68509e71feb142b0691451f` with a null archive pair. Every reading in this section was taken with the exact public 0.7.1 evaluator installed in `../se-harness-eval-071` outside the checkout and run with `-I`, which reports `se_harness.__version__ == "0.7.1"`. The candidate version in the checkout moved from `0.7.1` to `0.8.0` with the same merge.
+
+### 15.1 Why VREC-REB-025 was retracted rather than rejected or repaired
+
+`VREC-REB-025` was prepared with the then-governing 0.6.0 evaluator, so its evaluator evidence names that evaluator. Under 0.7.1 the record earns:
+
+```text
+- [E012] [governance] docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-025.md: evaluator evidence differs from the standard lock
+```
+
+This is by design: `_validate_evaluator_evidence_binding` is called with `match_current_lock=artifact.status == "ready"`, so a **ready** record must bind the evaluator identity of the current standard lock, while an already `verified` record keeps the identity it was verified under. That is why the nine earlier `VREC-REB-*` records, which carry the same 0.6.0 evaluator sidecar bytes, stay valid and only this one does not.
+
+Three routes were considered and two are closed:
+
+| Route | Outcome |
+| --- | --- |
+| Verify it | Not available here. Verification is the accountable decision of `VER-REB-012`'s owners, and the record is invalid under the current governor. |
+| Reject it | Mechanically refused. `transition --set VREC-REB-025=rejected` returns `[WEX201] current artifact graph is invalid [E012]: evaluator evidence differs from the standard lock`. The only artifact making the graph invalid is the record being rejected, so the transition can never run. |
+| Repair it in place | Refused as a matter of instruction. Editing a prepared record's evaluator binding, candidate commit or artifact snapshot by hand would rewrite record facts. |
+
+The record is therefore **retracted**: `VREC-REB-025.md` and `VREC-REB-025-evaluator.json` are deleted from the tree in the same commit as this section. Nothing is rewritten. The record was never verified, never merged to `main`, and its full text stays in this branch's history at commit `e6231d5`, together with the commit message that prepared it. Its successor, `VREC-REB-026`, is captured with the 0.7.1 evaluator, binds a post-merge candidate commit, and names the same work order, the same contract and the same retained evidence.
+
+Retraction leaves the graph valid and the review checkpoint passing, which the deletion is required for:
+
+```text
+Harness preflight: PASS
+Phase: review
+Work order: WO-REB-028 (implemented)
+```
+
+Before the deletion was staged the same command returned `FAIL` with `[A-E012]` on the record. Staging matters: with the files removed from the worktree but the deletion unstaged, preflight instead reports `[I001] hash-bound-class-declared: cannot read ...VREC-REB-025.md`, which is a reading artefact of the index, not a governor finding.
+
+### 15.2 Every figure re-derived under the 0.7.1 governor
+
+The control is a throwaway detached worktree at `origin/main` `fda0fa1`, measured on this same host and removed afterwards.
+
+| Reading | at `fda0fa1` (new base) | at the candidate |
+| --- | --- | --- |
+| 0.7.1 `validate`: artifacts / errors / warnings | 990 / 0 / 469 | 996 / 0 / 471 |
+| `python scripts/run_tests.py` | 993 tests, 1 failure, skipped=26 | 953 tests, 1 failure, skipped=24 |
+
+The artifact difference is again exactly six, this packet's own additions. The suite difference is again exactly -40 tests and -2 skips, and reconciles the same way: 993 - 48 deleted - 7 removed cases + 15 new = 953.
+
+Two things in that table are not this work order's:
+
+- **The two extra warnings** are both new 0.7.1 authoring advisories against `REQ-REB-029`: `[W-AUT-003] statement is 322 characters; the review threshold is 300` and `[W-AUT-004] verification_method is a free-text string; the closed vocabulary is an array of test, analysis, inspection, demonstration`. The requirement was authored and approved under 0.6.0, which has no such check. Clearing them means amending an approved requirement's statement and metadata, which is a separate decision, so they are disclosed and left. The remaining 469 are the base's own advisories, unmoved.
+- **The one failure is pre-existing on `main`**: `tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound`, `AssertionError: 6036 not less than 6000 : owner region is 6036 bytes`. The control at `fda0fa1` fails identically, `AGENTS.md` at the candidate is byte-identical to `origin/main`, and the file is not in this work order's execution scope. It is `main`'s to fix, not this branch's, and this branch neither causes nor hides it.
+
+| Gate at the candidate | Result |
+| --- | --- |
+| `harnessctl validate .` (0.7.1, outside the checkout) | PASS, 996 artifacts, 0 errors, 471 warnings |
+| `harnessctl doctor .` | 169 checks, 143 PASS, 26 WARN, 0 FAIL |
+| `harnessctl preflight . --work-order WO-REB-028 --phase review` | PASS |
+| `python scripts/validate_engineering_artifacts.py --root .` | PASS, 996 / 0 / 471 |
+| `python scripts/validate_release_distributions.py --root .` | PASS, 4 distribution-bearing records |
+| `python scripts/check_portable_release_surface.py --repository .` | PASS |
+| `python -m se_harness --help` | exit code 0 |
+| `hash_bound.assess` | 3 PASS: 3 classes cover 69 tracked paths with 9 digest fields out of scope; 2 raw classes effective for 68 |
+| `tests/test_predecessor_bootstrap_retirement.py` | 15 tests, OK |
+
+The retirement module passing is what re-verifies the retained history: its `RETAINED_EVIDENCE_BINDINGS` cases recompute `RLS-SEH-012`'s two digests and `REL-SEH-011`'s `from_lock_sha256` from the files themselves, so section 5's three digests still verify under the new base. `git diff --name-only origin/main HEAD -- docs/engineering/release-0-6-0/` is empty, and so is the same command over every managed hash-locked path, now including `docs/engineering/ARTIFACT_AUTHORING.md`, `OPERATING_CARD.md`, `TECHNICAL_COMMUNICATION.md`, `.agents/skills/` and `.claude/skills/`, which the 0.7.1 adoption added to the managed set.
+
+The ephemeral non-promotable candidate wheel was rebuilt once more, because the merge changed packaged bytes again:
+
+```text
+se_harness-0.8.0-py3-none-any.whl
+sha256 d3e6f3409c0bd1d200db58ea23b3b65563aab6a80c1b2a4465e1b6e3f20f909f
+482,742 bytes, 110 members
+```
+
+It was built from the merge commit `f089e83` by the same `git archive` and `pip wheel` recipe, installed into a throwaway virtual environment outside the checkout, and both surface readings pass against it: `--wheel` PASS, `--harnessctl` PASS, `qualify --help` offers exactly the four operations with zero occurrences of `predecessor-view`, `rehearse-migration` is present, and no member matches `predecessor`, `bootstrap` or `repository_tools`. The wheel and its environment were deleted after the readings. The candidate commit differs from `f089e83` only under `docs/engineering`, which the wheel does not package. Neither this wheel nor the 0.7.1 and 0.7.0 ones before it is promotable, and 0.7.1 is already published from a build of record this host cannot produce.
+
+The formal snapshot moved again, to `7f36d03248d40fc5a525c77e71f53853256527d1099ac1ae37881cf32a16aa2f`, and the binding block at the top of this file now declares that value. The block always names the current snapshot, because that is what `QGP-G4I-EVIDENCE` matches against; sections 13 and 14 name the snapshot each of their readings was taken at. The changed-path set against `fda0fa1` is 41 paths.
+
+### 15.3 The handoff checkpoint no longer applies
+
+Section 13's reading was the last one taken at the handoff checkpoint, with the then-governing 0.6.0 evaluator, while the work order was still `in_progress`. Re-running it now is refused, correctly:
+
+```text
+Blocked by
+- WEX210: WEX210: gate QG-G4-CANDIDATE-READY does not apply at checkpoint handoff
+```
+
+The governing reading for the current state is the projection of the work order's own scope, which the 0.7.1 evaluator returns as:
+
+```text
+Outcome
+Completed.
+
+Done
+- WO-REB-028 is implemented; no assurance decision was inferred.
+
+Not done
+None.
+
+Current lifecycle state
+- WO-REB-028 is implemented.
+
+Decision required
+engineering-owner must decide whether to prepare one ready verification record with exact approved inputs for WO-REB-028 under DR-VREC-PREPARE; permitted outcomes: prepare, stop.
+
+Next
+whether to prepare one ready verification record with exact approved inputs (PROC-WO-PREPARE-VREC/STEP-WO-PREPARE-VREC-DECIDE).
+
+Command or response
+Prepare one ready VREC for WO-REB-028 with the exact approved verification contract and retained evidence.
+```
+
+That is the act `VREC-REB-026` performs, in the commit after this one. The assurance decision under `VER-REB-012` remains outstanding, and section 12's seven gaps, section 14's merge, and this section's three disclosures - the retraction, the two new authoring advisories, and `main`'s own pre-existing suite failure - are all inputs to it.
