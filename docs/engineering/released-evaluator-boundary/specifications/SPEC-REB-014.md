@@ -21,6 +21,11 @@ artifacts under a validator that no longer knows those schemas. Completes
 `REQ-REB-029`, whose measure `SPEC-REB-013` left unmet by excluding the managed
 validator from `WO-REB-028`.
 
+`SPEC-REB-013` continues to bind alongside this specification, and both are
+selected by `WO-REB-029`. This specification adds the managed-validator rules
+`SPEC-REB-013` excludes; it does not amend, narrow or replace anything
+`SPEC-REB-013` states.
+
 ## Actors and external systems
 
 The candidate copy at `templates/repository/standard/scripts/`, which is what a

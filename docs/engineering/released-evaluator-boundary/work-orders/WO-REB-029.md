@@ -23,7 +23,7 @@ paths = [
 
 [relations]
 implements = ["REQ-REB-029"]
-specifications = ["SPEC-REB-014"]
+specifications = ["SPEC-REB-013", "SPEC-REB-014"]
 architecture = ["ARCH-REB-012", "ADR-REB-012"]
 verification = ["VER-REB-013"]
 +++
@@ -52,6 +52,21 @@ contract `[bootstrap]` tuple or construct a predecessor view" is not yet met.
 `ARCH-REB-009` and `ADR-REB-009` still decide a `qualify` namespace of exactly
 five typed operations, one of which no longer exists. And one temporary
 directory in the Pages lane still carries the retired name.
+
+## Governing artifacts
+
+Both specifications are selected because both specify `REQ-REB-029`.
+`SPEC-REB-013` keeps its force over this work order: its reserved error codes,
+its retained-history rules and its preservation of `REQ-REB-011` all still
+bind. What it does not do is authorize the managed-validator edit, which it
+excludes in terms; `SPEC-REB-014` authorizes that and nothing else.
+`SPEC-REB-013` is not amended, reopened or re-scoped here.
+
+The selection is also the only shape the graph admits. `ARCH-REB-012`
+addresses `REQ-REB-029`, so leaving it unselected is `W022`; it conforms to
+`SPEC-REB-013`, so selecting it without `SPEC-REB-013` is `W021`. Measured
+against the released 0.7.1 evaluator, this is the shape whose review preflight
+reads PASS once the three draft artifacts are approved.
 
 ## In scope
 
