@@ -23,6 +23,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
+| [Risk management](risk-management.md) | How is a risk identified, raised by policy, disposed by the stage owner, and listed by a release? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |
 | [Phase 4 writing-skill integration](agentic-execution-phase4-skills.md) | How do v3 writing cores become fail-closed evaluator clients without direct target writes or new authority? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |

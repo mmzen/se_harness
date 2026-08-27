@@ -273,7 +273,7 @@ paths = ["src/"]
         self.assertEqual(1, code)
         result = json.loads(output)
         self.assertEqual("failed", result["operation"]["outcome"])
-        self.assertIn("only WO, VREC, or RLS", result["findings"]["scoped_blockers"][0]["message"])
+        self.assertIn("only WO, VREC, RLS, or RISK", result["findings"]["scoped_blockers"][0]["message"])
 
     def test_work_order_completion_ignores_only_candidate_distribution_drift(self) -> None:
         path = self.in_progress_work_order()

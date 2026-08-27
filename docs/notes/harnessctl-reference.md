@@ -37,6 +37,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `rehearse-migration` | maintainer or candidate CI | writes only a fresh disposable directory outside the operational repository | prove the complete predecessor-to-successor handover without changing root authority or performing a release |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
+| `raise-risk` | coding agent or engineer | writes one `identified` or `raised` risk; dry-run is read-only | identify one risk with its computed score; raising is decided by the repository's acceptance level, not by the caller |
+| `risks` | coding agent or reviewer | read-only | list the risks threatening one artifact and its governing chain with status, score, and disposing role |
 | `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
 | `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
@@ -109,7 +111,21 @@ harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
   [--apply] [--json] [--result-schema 1|2]
+harnessctl raise-risk [TARGET] --domain D --id RISK-... --title T \
+  --stage S --category C --likelihood 1-5 --impact 1-5 \
+  --threatens ID [--threatens ID ...] [--cause TEXT] [--effect TEXT] \
+  [--raised-by TEXT] [--dry-run] [--json]
+harnessctl risks [TARGET] --artifact ID [--json]
 ```
+
+`raise-risk` is preparation: it writes one `risk` artifact with the computed
+5x5 score and the acceptance level in force, and sets `raised` when the score
+reaches the level (default level 1). `risks` lists the register threatening an
+artifact and its chain, read-only. `focus`, `check`, and `transition` accept
+`RISK-` artifacts; a risk's transitions are disposed by the owner of its
+`[risk].stage` under `DR-RISK-DISPOSE`, and the `--reason` carries
+`mitigated_by <IDs>`, `avoided_by ADR-...`, or `residual LxI` as the target
+requires. See [risk management](risk-management.md).
 
 `focus` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in

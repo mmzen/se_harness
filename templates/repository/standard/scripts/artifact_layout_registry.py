@@ -19,6 +19,7 @@ ARTIFACT_DIRECTORIES: dict[str, tuple[str, ...]] = {
     "release_contract": ("release",),
     "release_record": ("releases",),
     "operating_contract": ("operations",),
+    "risk": ("risks",),
 }
 
 ARTIFACT_PREFIXES = {
@@ -34,6 +35,7 @@ ARTIFACT_PREFIXES = {
     "release_contract": "REL-",
     "release_record": "RLS-",
     "operating_contract": "OPS-",
+    "risk": "RISK-",
 }
 
 DOMAIN_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -41,7 +43,7 @@ RESERVED_DOMAINS = frozenset(
     {
         ".agents", ".codex", ".git", ".idea", "acceptance", "architecture",
         "capabilities", "evidence", "experiments", "intent", "node_modules",
-        "operations", "release", "releases", "requirements", "specifications",
+        "operations", "release", "releases", "requirements", "risks", "specifications",
         "target", "templates", "verification", "verification-records", "work-orders",
     }
 )

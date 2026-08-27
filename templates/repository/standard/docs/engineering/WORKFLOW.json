@@ -60,6 +60,15 @@
       "ready": {"transitions_to": ["released", "rejected"], "grants_authority": false, "reserves_version": true, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
       "released": {"transitions_to": [], "grants_authority": true, "reserves_version": true, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
       "rejected": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "required"}
+    },
+    "risk": {
+      "identified": {"transitions_to": ["raised", "accepted", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "raised": {"transitions_to": ["accepted", "avoided", "mitigating", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigating": {"transitions_to": ["mitigated"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "accepted": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "avoided": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigated": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "withdrawn": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
     }
   },
   "failure": {
@@ -463,6 +472,28 @@
       }
     },
     {
+      "id": "WFL-RISK-RAISED",
+      "procedure_id": "PROC-RISK-DISPOSE",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["risk"], "statuses": ["raised"]},
+      "gate_ids": [],
+      "decision_right": "DR-RISK-DISPOSE",
+      "effects": ["The disposition changes only {artifact_id}."],
+      "non_effects": ["Disposing a risk does not change the artifacts it threatens."],
+      "handoff": {"completed": ["Projected raised risk {artifact_id}."], "current_lifecycle_state": ["{artifact_id} is raised; threatened artifacts were not changed."], "recommended_next_step": {"action": "dispose risk", "detail": "Accept, avoid, or mitigate the raised risk as the owner of the stage it threatens."}, "human_decision_or_approval_required": {"required": "owner of the threatened stage"}, "command_or_suggested_response": {"kind": "suggested_response", "value": "I dispose {artifact_id} as the owner of its stage."}, "alternative_next_steps": []}
+    },
+    {
+      "id": "WFL-RISK-MITIGATING",
+      "procedure_id": "PROC-RISK-MITIGATED",
+      "alternative_procedure_ids": [],
+      "selector": {"artifact_types": ["risk"], "statuses": ["mitigating"]},
+      "gate_ids": ["QG-G4-VERIFIED-COVERAGE"],
+      "decision_right": "DR-RISK-DISPOSE",
+      "effects": ["The decision changes only {artifact_id}."],
+      "non_effects": ["Marking a risk mitigated does not change its mitigation work or the artifacts it threatens."],
+      "handoff": {"completed": ["Projected mitigating risk {artifact_id}."], "current_lifecycle_state": ["{artifact_id} is mitigating; its named mitigation work is governed separately."], "recommended_next_step": {"action": "confirm mitigation", "detail": "When every named mitigation work order is covered by a verified record, record the residual risk and mark it mitigated."}, "human_decision_or_approval_required": {"required": "owner of the threatened stage"}, "command_or_suggested_response": {"kind": "suggested_response", "value": "I mark {artifact_id} mitigated as the owner of its stage."}, "alternative_next_steps": []}
+    },
+    {
       "id": "WFL-DEFAULT-REVIEW",
       "procedure_id": "PROC-FOCUS-SELECTED",
       "alternative_procedure_ids": [],
@@ -495,10 +526,11 @@
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
         {"id": "STEP-WO-START-FOCUS", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Projected selected scope for {artifact_id}."], "non_effects": ["Focus does not change lifecycle state."]},
-        {"id": "STEP-WO-START-PREFLIGHT", "kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}}, "effects": ["Evaluated start readiness for {artifact_id}."], "non_effects": ["Preflight does not authorize or start implementation."]},
+        {"id": "STEP-WO-START-PREFLIGHT", "kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-RISK": {"kind": "escalation", "decision_right": "DR-RISK-DISPOSE"}, "QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}}, "effects": ["Evaluated start readiness for {artifact_id}."], "non_effects": ["Preflight does not authorize or start implementation."]},
+        {"id": "STEP-WO-START-RISKS", "kind": "command", "argv": ["harnessctl", "risks", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Listed the risks threatening {artifact_id} and its chain."], "non_effects": ["Listing risks changes nothing."]},
         {"id": "STEP-WO-START-DECIDE", "kind": "decision", "decision_right": "DR-WO-START", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether implementation may start", "outcomes": ["start", "stop"], "response": "Start {artifact_id} implementation.", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["An explicit start decision authorizes bounded implementation."], "non_effects": ["The decision does not itself edit a file."]},
-        {"id": "STEP-WO-START-PREVIEW", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"]}}, "effects": ["Planned the explicit transition for {artifact_id}."], "non_effects": ["A preview does not change lifecycle state."]},
-        {"id": "STEP-WO-START-APPLY", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner", "--apply"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"]}}, "effects": ["Changed only {artifact_id} to in_progress."], "non_effects": ["Related artifacts remain unchanged."]},
+        {"id": "STEP-WO-START-PREVIEW", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-RISK": {"kind": "escalation", "decision_right": "DR-RISK-DISPOSE"}, "QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"]}}, "effects": ["Planned the explicit transition for {artifact_id}."], "non_effects": ["A preview does not change lifecycle state."]},
+        {"id": "STEP-WO-START-APPLY", "kind": "command", "argv": ["harnessctl", "transition", ".", "--set", "{artifact_id}=in_progress", "--decision", "{artifact_id}=engineering-owner", "--apply"], "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "corrective": {"QGP-G3-RISK": {"kind": "escalation", "decision_right": "DR-RISK-DISPOSE"}, "QGP-G3-STATUS": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G3-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G3-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "start"]}}, "effects": ["Changed only {artifact_id} to in_progress."], "non_effects": ["Related artifacts remain unchanged."]},
         {"id": "STEP-WO-START-FINAL-FOCUS", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Projected the resulting state for {artifact_id}."], "non_effects": ["Focus does not change lifecycle state."]}
       ]
     },
@@ -506,7 +538,8 @@
       "id": "PROC-WO-IMPLEMENT",
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
-        {"id": "STEP-WO-IMPLEMENT-CHECK", "kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "handoff"], "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "corrective": {"QGP-G4I-STATUS": {"kind": "escalation", "decision_right": "DR-WO-START"}, "QGP-G4I-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G4I-COMPLETE": {"kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "handoff", "--changed-path", "<changed-path>", "--changes-complete"]}, "QGP-G4I-PATHS": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "review"]}, "QGP-G4I-EVIDENCE": {"kind": "response", "value": "Retain evidence for {artifact_id} under an evidence directory keyed by {artifact_id}, containing the lines 'artifact: {artifact_id}', 'checkpoint: handoff', and 'formal_snapshot_sha256: <formal-snapshot>'; then rerun the handoff check with the complete changed-path set."}}, "effects": ["Evaluated implementation handoff for {artifact_id}."], "non_effects": ["A checkpoint does not complete or verify work."]},
+        {"id": "STEP-WO-IMPLEMENT-CHECK", "kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "handoff"], "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "corrective": {"QGP-G4I-RISK": {"kind": "escalation", "decision_right": "DR-RISK-DISPOSE"}, "QGP-G4I-STATUS": {"kind": "escalation", "decision_right": "DR-WO-START"}, "QGP-G4I-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"}, "QGP-G4I-COMPLETE": {"kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "handoff", "--changed-path", "<changed-path>", "--changes-complete"]}, "QGP-G4I-PATHS": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4I-PREFLIGHT": {"kind": "command", "argv": ["harnessctl", "preflight", ".", "--work-order", "{artifact_id}", "--phase", "review"]}, "QGP-G4I-EVIDENCE": {"kind": "response", "value": "Retain evidence for {artifact_id} under an evidence directory keyed by {artifact_id}, containing the lines 'artifact: {artifact_id}', 'checkpoint: handoff', and 'formal_snapshot_sha256: <formal-snapshot>'; then rerun the handoff check with the complete changed-path set."}}, "effects": ["Evaluated implementation handoff for {artifact_id}."], "non_effects": ["A checkpoint does not complete or verify work."]},
+        {"id": "STEP-WO-IMPLEMENT-RISKS", "kind": "command", "argv": ["harnessctl", "risks", ".", "--artifact", "{artifact_id}"], "gate_ids": [], "effects": ["Listed the risks threatening {artifact_id} and its chain."], "non_effects": ["Listing risks changes nothing."]},
         {"id": "STEP-WO-IMPLEMENT-DECIDE", "kind": "decision", "decision_right": "DR-WO-COMPLETE", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether the authorized implementation and evidence are complete", "outcomes": ["implemented", "continue", "reject"], "response": "Mark {artifact_id} implemented.", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "effects": ["An explicit completion decision permits only {artifact_id} to become implemented."], "non_effects": ["Completion does not verify or release the work."]}
       ]
     },
@@ -535,7 +568,7 @@
       "id": "PROC-FOCUS-RELATED",
       "parameters": [{"name": "related_id", "type": "artifact_id", "cardinality": "one", "source": "selection.related"}],
       "steps": [
-        {"id": "STEP-FOCUS-RELATED", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{related_id}"], "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "corrective": {"QGP-G4A-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4A-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}}, "effects": ["Projected selected state for {related_id}."], "non_effects": ["Focus changes no lifecycle state."]}
+        {"id": "STEP-FOCUS-RELATED", "kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "{related_id}"], "gate_ids": ["QG-G4-ASSURANCE-DECISION"], "corrective": {"QGP-G4A-RISK": {"kind": "escalation", "decision_right": "DR-RISK-DISPOSE"}, "QGP-G4A-GRAPH": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}, "QGP-G4A-INTEGRITY": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"}}, "effects": ["Projected selected state for {related_id}."], "non_effects": ["Focus changes no lifecycle state."]}
       ]
     },
     {
@@ -620,6 +653,20 @@
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
         {"id": "STEP-DEFINITION-WORK", "kind": "decision", "decision_right": "DR-WO-SELECT", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "which exact approved work order to select", "outcomes": ["select", "stop"], "response": "Select the exact approved work order related to {artifact_id}.", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "effects": ["Selects one bounded work order."], "non_effects": ["An implemented definition authorizes no work by itself."]}
+      ]
+    },
+    {
+      "id": "PROC-RISK-DISPOSE",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-RISK-DISPOSE", "kind": "decision", "decision_right": "DR-RISK-DISPOSE", "role": "owner of the threatened stage", "artifact": "{artifact_id}", "decision": "whether to accept, avoid, or mitigate the raised risk", "outcomes": ["accepted", "avoided", "mitigating", "withdrawn"], "response": "I dispose {artifact_id} as the owner of its stage.", "gate_ids": [], "effects": ["Permits an explicit disposition of {artifact_id} only."], "non_effects": ["Threatened artifacts remain unchanged."]}
+      ]
+    },
+    {
+      "id": "PROC-RISK-MITIGATED",
+      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
+      "steps": [
+        {"id": "STEP-RISK-MITIGATED", "kind": "decision", "decision_right": "DR-RISK-DISPOSE", "role": "owner of the threatened stage", "artifact": "{artifact_id}", "decision": "whether the named mitigation is verified and the residual risk is recorded", "outcomes": ["mitigated"], "response": "I mark {artifact_id} mitigated as the owner of its stage.", "gate_ids": ["QG-G4-VERIFIED-COVERAGE"], "effects": ["Permits {artifact_id} to become mitigated only."], "non_effects": ["Mitigation work and threatened artifacts remain unchanged."]}
       ]
     }
   ]

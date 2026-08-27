@@ -56,6 +56,10 @@ listed below. A validator MUST reject an undeclared pair.
 | `TRC-REL-017` | `includes_verification` | `RLS -> VREC` | A release record names one or more eligible VRECs at its candidate commit. |
 | `TRC-REL-018` | `releases_work` | `RLS -> WO` | The released-work set equals the union of work covered by the included VRECs. |
 | `TRC-REL-019` | `assures` | `OPS -> REQ` | An operating contract names every requirement for which it claims continuing assurance. |
+| `TRC-REL-020` | `threatens` | `RISK -> INT, CAP, REQ, SPEC, ARCH, ADR, VER, WO, VREC, REL, RLS, OPS` | A risk names at least one artifact of its declared stage; the stage and the target types match. |
+| `TRC-REL-021` | `mitigated_by` | `RISK -> WO, REQ, VER, OPS` | A mitigating or mitigated risk names at least one governed mitigation. |
+| `TRC-REL-022` | `avoided_by` | `RISK -> ADR` | An avoided risk names exactly one decision record that removes its cause. |
+| `TRC-REL-023` | `lists_risks` | `RLS -> RISK` | A release record names every accepted or mitigated risk threatening its released work; it is derived at preparation. |
 
 `TRC-003` - A selected work order MUST have complete `INT -> CAP -> REQ`
 upstream coverage and complete selected `SPEC` and `VER` coverage for every
@@ -93,6 +97,7 @@ false.
 | `release_contract` | `REL-` | Defines the work scope, gates, rollback conditions, and authority boundary for a release. | Every release record needs an applicable active contract that gates its complete released-work set. | Omit while no release is proposed; a contract may gate several work orders when its policy genuinely covers them. | Release owner. | `REL.gates -> WO`; `RLS.satisfies -> REL` |
 | `release_record` | `RLS-` | Records the accountable release decision for eligible verified work at one exact candidate commit. | Create only when a release is proposed; `released` requires eligible VRECs and matching commit identity. | Omit for unreleased continuous delivery; one aggregate record may release several work orders through included verification. | Release owner. | `RLS.satisfies -> REL`; `RLS.includes_verification -> VREC`; `RLS.releases_work -> WO` |
 | `operating_contract` | `OPS-` | Defines continuing service, support, observability, or operational assurance obligations. | It applies when repository or service policy declares ongoing operational commitments at G5. | Omit when no operational assurance is claimed; absence never implies that an operational obligation is satisfied. | Service owner. | `OPS.assures -> REQ` |
+| `risk` | `RISK-` | Records one thing that could go wrong at a declared stage, its likelihood, impact, computed score, the acceptance level in force, and its disposition. | It applies whenever an actor identifies a risk; a score at or above the acceptance level raises it and blocks the threatened stage until the stage owner disposes it. | Omit while no risk is identified; an empty register passes every gate and never implies that no risk exists. | Owner of the threatened stage (`DR-RISK-DISPOSE`). | `RISK.threatens -> *`; `RISK.mitigated_by -> WO, REQ, VER, OPS`; `RISK.avoided_by -> ADR`; `RLS.lists_risks -> RISK` |
 
 Evidence, acceptance scenarios, source files, candidate commits, dashboards, tickets, and conversations are not formal artifact types. They may be retained or referenced as observations, but they do not establish product authority, work authorization, verification, or release by themselves.
 <!-- artifact-catalog:end -->

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import UTC, datetime
 import json
 import os
 import subprocess
@@ -565,6 +566,140 @@ def _create_artifact(args: argparse.Namespace) -> int:
     return 0
 
 
+def _raise_risk(args: argparse.Namespace) -> int:
+    from se_harness.artifact_layout import create_risk
+    from se_harness.workflow import risk_policy
+    from se_harness.workflow_result import build_result
+
+    root = Path(args.target)
+    now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        level = risk_policy(root)
+        change, status, score = create_risk(
+            root,
+            domain=args.domain,
+            artifact_id=args.artifact_id,
+            title=args.title,
+            stage=args.stage,
+            category=args.category,
+            likelihood=args.likelihood,
+            impact=args.impact,
+            threatens=args.threatens,
+            cause=args.cause,
+            effect=args.effect,
+            raised_by=args.raised_by,
+            acceptance_level=level,
+            now=now,
+            dry_run=args.dry_run,
+        )
+    except HarnessError as exc:
+        result = legacy_to_schema2(failed_result("raise-risk", args.artifact_id, str(exc), code="WEX-RSK-001"))
+        print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
+        return 2
+    raised = status == "raised"
+    verb = "Raised" if raised else "Identified"
+    if args.dry_run:
+        verb = "Planned"
+    restitution = {
+        "outcome": "completed",
+        "done": [
+            f"{verb} {args.artifact_id} (score {score}, acceptance level {level}) threatening {', '.join(args.threatens)}."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [f"{args.artifact_id} is {status}." if not args.dry_run else "No file was written."],
+        "decision_required": (
+            {
+                "decision_right": "DR-RISK-DISPOSE",
+                "role": "owner of the threatened stage",
+                "artifact": args.artifact_id,
+                "decision": "whether to accept, avoid, or mitigate the raised risk",
+                "outcomes": ["accepted", "avoided", "mitigating", "withdrawn"],
+            }
+            if raised and not args.dry_run
+            else None
+        ),
+        "next": (
+            {"procedure_id": "PROC-RISK-DISPOSE", "step_id": "STEP-RISK-DISPOSE", "action": "whether to accept, avoid, or mitigate the raised risk"}
+            if raised and not args.dry_run
+            else {"procedure_id": "PROC-FOCUS-SELECTED", "step_id": "STEP-FOCUS-SELECTED", "action": "Run the bound command"}
+        ),
+        "command_or_response": (
+            {"kind": "response", "value": f"I dispose {args.artifact_id} as the owner of its stage."}
+            if raised and not args.dry_run
+            else {"kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", args.artifact_id]}
+        ),
+        "alternatives": [],
+    }
+    result = build_result(
+        operation="raise-risk",
+        outcome="completed",
+        primary=args.artifact_id,
+        artifacts=[args.artifact_id],
+        governing=args.threatens,
+        dependencies=[],
+        declared_paths=[],
+        changed_paths=[] if args.dry_run else [change.path],
+        change_set_complete=not args.dry_run,
+        compliance={
+            "checkpoint": "pre-action",
+            "workflow_rule_id": "WFL-RISK-RAISED" if raised else "WFL-DEFAULT-REVIEW",
+            "procedure_id": restitution["next"]["procedure_id"],
+            "status": "not_assessable",
+            "gates": [],
+        },
+        procedure={"id": restitution["next"]["procedure_id"], "current_step": restitution["next"]["step_id"], "steps": []},
+        restitution=restitution,
+        before=[],
+        after=[] if args.dry_run else [{"id": args.artifact_id, "status": status}],
+        writes=[] if args.dry_run else [{"path": change.path, "action": "create"}],
+    )
+    print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
+    return 0
+
+
+def _risks(args: argparse.Namespace) -> int:
+    from se_harness.workflow import _catalog, _validation
+    from se_harness.workflow_compliance import risks_threatening
+    from se_harness.workflow_contract import RISK_STAGE_ROLES
+
+    root = Path(args.target)
+    try:
+        _, report = _validation(root)
+        catalog = _catalog(report)
+    except HarnessError as exc:
+        print(f"harnessctl risks: {exc}", file=sys.stderr)
+        return 2
+    primary = catalog.get(args.artifact)
+    if primary is None:
+        print(f"harnessctl risks: unknown artifact ID: {args.artifact}", file=sys.stderr)
+        return 2
+    hits = risks_threatening(
+        catalog, primary,
+        statuses=("identified", "raised", "accepted", "avoided", "mitigating", "mitigated", "withdrawn"),
+    )
+    rows = []
+    for risk in hits:
+        table = risk.metadata.get("risk") if isinstance(risk.metadata.get("risk"), dict) else {}
+        stage = str(table.get("stage", ""))
+        rows.append({
+            "id": risk.artifact_id,
+            "status": risk.status,
+            "stage": stage,
+            "score": table.get("score"),
+            "acceptance_level": table.get("acceptance_level"),
+            "disposing_role": " or ".join(RISK_STAGE_ROLES.get(stage, ())),
+            "threatens": sorted(str(item) for item in (risk.metadata.get("relations", {}) or {}).get("threatens", [])),
+        })
+    if args.json:
+        print(json.dumps({"schema": "se-harness-risk-register-v1", "artifact": args.artifact, "risks": rows}, indent=2))
+        return 0
+    print(f"Risk register for {args.artifact}: {len(rows)} risk(s)")
+    for row in rows:
+        print(f"- {row['id']} [{row['status']}] stage {row['stage']} score {row['score']}/{row['acceptance_level']}; dispose: {row['disposing_role'] or 'n/a'}; threatens {', '.join(row['threatens'])}")
+    return 0
+
+
 def _renumber_artifacts(args: argparse.Namespace) -> int:
     try:
         plan = build_renumber_plan(Path(args.target), args.mappings)
@@ -1101,6 +1236,29 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--dry-run", action="store_true")
     create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.set_defaults(handler=_create_artifact)
+
+    raise_risk = commands.add_parser("raise-risk", help="identify one risk; it is raised by policy when its score reaches the acceptance level")
+    raise_risk.add_argument("target", nargs="?", default=".")
+    raise_risk.add_argument("--domain", required=True)
+    raise_risk.add_argument("--id", dest="artifact_id", required=True)
+    raise_risk.add_argument("--title", required=True)
+    raise_risk.add_argument("--stage", required=True, choices=("definition", "architecture", "implementation", "verification", "release", "operation"))
+    raise_risk.add_argument("--category", required=True, choices=("safety", "security", "compliance", "process", "schedule", "quality"))
+    raise_risk.add_argument("--likelihood", type=int, required=True)
+    raise_risk.add_argument("--impact", type=int, required=True)
+    raise_risk.add_argument("--threatens", action="append", required=True, help="threatened artifact ID; repeat")
+    raise_risk.add_argument("--cause", default="Not yet described.")
+    raise_risk.add_argument("--effect", default="Not yet described.")
+    raise_risk.add_argument("--raised-by", default="coding-agent")
+    raise_risk.add_argument("--dry-run", action="store_true")
+    raise_risk.add_argument("--json", action="store_true")
+    raise_risk.set_defaults(handler=_raise_risk)
+
+    risks = commands.add_parser("risks", help="list the risks threatening one artifact and its governing chain")
+    risks.add_argument("target", nargs="?", default=".")
+    risks.add_argument("--artifact", required=True)
+    risks.add_argument("--json", action="store_true")
+    risks.set_defaults(handler=_risks)
 
     renumber = commands.add_parser(
         "renumber-artifacts",

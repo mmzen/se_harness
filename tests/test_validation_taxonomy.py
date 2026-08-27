@@ -90,14 +90,45 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        # The released root policy is exact public 0.7.0 (WO-HUP-006), which carries
-        # the authoring and release-unit predicates; the root copy equals the candidate.
-        self.assertEqual(canonical_quality, quality)
+        # The released root policy is exact public 0.7.1 (WO-HUP-007), which already
+        # carries the authoring and release-unit predicates; the candidate adds exactly
+        # one evaluator row, one predicate on every gated stage, and rule QG-011
+        # (WO-RSK-001).
         self.assertIn("| `authoring_ready` |", quality)
         self.assertIn("| `release_unit_ready` |", quality)
         self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |\n", quality)
         self.assertIn("| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |\n", quality)
         self.assertIn("| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |\n", quality)
+        expected_candidate_quality = quality.replace(
+            "| `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |\n",
+            "| `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |\n"
+            "| `undisposed_risks_threatening_scope` | No `raised` risk threatens the selected artifact or its governing chain; at `QG-G5-RELEASE-PREPARATION` and `QG-G5-RELEASE-DECISION` no `mitigating` risk does either. An empty register passes. |\n",
+            1,
+        )
+        for gate_id, predicate in (
+            ("QG-G1-DEFINITION", "QGP-G1-RISK"),
+            ("QG-G2-ARCHITECTURE", "QGP-G2-RISK"),
+            ("QG-G3-WORK-AUTHORIZATION", "QGP-G3-RISK"),
+            ("QG-G4-IMPLEMENTATION-EVIDENCE", "QGP-G4I-RISK"),
+            ("QG-G4-ASSURANCE-DECISION", "QGP-G4A-RISK"),
+            ("QG-G5-RELEASE-PREPARATION", "QGP-G5P-RISK"),
+            ("QG-G5-RELEASE-DECISION", "QGP-G5D-RISK"),
+        ):
+            start = expected_candidate_quality.index(f"| `{gate_id}` | `QGP-")
+            end = expected_candidate_quality.index("\n", start)
+            line = expected_candidate_quality[start:end]
+            self.assertTrue(line.endswith("` |"), line)
+            expected_candidate_quality = (
+                expected_candidate_quality[:start] + line[:-2] + f", `{predicate}` |" + expected_candidate_quality[end:]
+            )
+        expected_candidate_quality = expected_candidate_quality.replace(
+            "The G0-G5 labels group related gates for reporting. They MUST NOT replace the exact gate IDs above.\n",
+            "The G0-G5 labels group related gates for reporting. They MUST NOT replace the exact gate IDs above.\n\n"
+            "**QG-011:** Every `*-RISK` predicate evaluates `undisposed_risks_threatening_scope`. A `raised` risk that threatens the selected scope fails its gate at every checkpoint; a `mitigating` risk fails only the release gates. The corrective form is an escalation to `DR-RISK-DISPOSE`.\n",
+            1,
+        )
+        self.assertNotIn("undisposed_risks_threatening_scope", quality)
+        self.assertEqual(expected_candidate_quality, canonical_quality)
         self.assertIn("BCP 14", canonical_quality)
         self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
         for plane in VALIDATION_PLANES:

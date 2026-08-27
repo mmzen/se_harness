@@ -13,3 +13,8 @@ required_for_verified_work = true
 required_for_release = true
 verification_record_status = "ready"
 release_record_status = "ready"
+
+[risk]
+acceptance_level = 1
+scale = "5x5"
+release_requires_disposition = true

@@ -38,6 +38,9 @@ Holding one role does not grant another role. One person MAY hold several roles 
 | `DR-EXTERNAL-ACTION` | Tag, publish, deploy, operate, merge, or perform another external action | Owner accountable for that exact action | Exact target and applicable gate evidence | Explicit authorization limited to the stated action |
 | `DR-RELATED-RECORD-SELECT` | Select a related VREC, RLS, or WO for inspection | No decision authority required | Exact artifact ID | Read-only selection |
 | `DR-REMEDIATION-SCOPE` | Authorize new or revised remediation scope | Owner of the affected definition or work | Failed criterion and proposed bounded remediation | New or revised governed scope |
+| `DR-RISK-DISPOSE` | Accept, avoid, mitigate, mark mitigated, or withdraw one raised risk | Owner of the stage the risk threatens (see the stage table below) | The raised risk, its threatened artifacts, a non-empty rationale, and for mitigation the named governed work | Disposition of the selected risk only |
+
+The disposing role for a risk follows its declared `[risk].stage`: `definition` -> product or domain owner; `architecture` -> technical owner; `implementation` -> engineering owner; `verification` -> assurance owner; `release` -> release owner; `operation` -> service owner. A risk threatening artifacts of two stages is disposed by the later stage's owner and the reason names both. Identification and scoring are preparation and exercise no right; raising is computed from the repository's acceptance level.
 
 ## Explicit decisions
 
