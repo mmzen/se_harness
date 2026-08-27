@@ -2,7 +2,7 @@
 id = "WO-RSK-003"
 type = "work_order"
 title = "Amend the risk-artifact skill definitions to the delegated execution model"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-27"
@@ -33,6 +33,13 @@ to = "approved"
 decided_at = "2026-08-27T16:55:16Z"
 decided_by = "engineering-owner"
 reason = "Accountable engineering-owner approval of a bounded, documentation-only amendment of three approved definitions of the risk artifact's skill integration. REQ-RSK-007, SPEC-RSK-002 and VER-RSK-002 were approved on 2026-08-25 against the schema-v2 skill surface, which main's delegated execution model replaced; under _parse_v3_contract the design they specify is unrepresentable, since SKC036 requires client.target_writer 'evaluator' and SKC038 requires effects.permitted to equal the closed profile and 'direct-target-write' to be prohibited. The amendment changes the mechanism named in the definitions and no obligation: both skills still cause a risk to be raised without a scope decision, no skill disposes, and the register still reaches the assurance packet. Scope is three definitions, the domain README, the work order and one evidence file; no executable behaviour, managed policy, contract, fixture, test, note or verification record is in scope. Authorizes no start, no release, no tag, no publication, no deployment, no maintenance mutation, no credential use, no external-policy change, no root-evaluator adoption, and decides no verification record."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-27T16:57:13Z"
+decided_by = "engineering-owner"
+reason = "Explicit start of the authorized amendment of REQ-RSK-007, SPEC-RSK-002 and VER-RSK-002 only, on the engineering owner's instruction \"Start\", after a PASS start preflight from the released 0.6.0 evaluator. Authorizes editing the six paths in the execution scope and nothing else. Authorizes no release, tag, publication, deployment, maintenance mutation, credential use, external-policy change, root-evaluator adoption, or verification-record decision, and it does not authorize superseding or re-pointing VREC-RSK-002, which is verified and has no outgoing lifecycle edge."
 +++
 
 # Work Order: Amend the risk-artifact skill definitions to the delegated execution model
