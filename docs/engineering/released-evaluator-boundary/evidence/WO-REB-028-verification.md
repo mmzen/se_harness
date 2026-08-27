@@ -466,3 +466,56 @@ Prepare one ready VREC for WO-REB-028 with the exact approved verification contr
 ```
 
 That is the act `VREC-REB-026` performs, in the commit after this one. The assurance decision under `VER-REB-012` remains outstanding, and section 12's seven gaps, section 14's merge, and this section's three disclosures - the retraction, the two new authoring advisories, and `main`'s own pre-existing suite failure - are all inputs to it.
+
+## 16. Hosted lanes, and what the one local failure actually is
+
+This section is appended after the commit `VREC-REB-026` binds, `67a52b9`, because hosted readings cannot exist until the commit carrying the record is pushed, and a record cannot bind evidence describing the runs its own push triggers. The append changes no artifact, so it moves neither the formal snapshot nor the record's `artifact_snapshot_sha256`, and the bound evidence path is unchanged. Everything below was read from GitHub Actions at head `c20b673`, the commit that carries `VREC-REB-026`.
+
+### 16.1 The four hosted lanes are green
+
+| Lane, `pull_request` event at `c20b673` | Run | Result |
+| --- | --- | --- |
+| Engineering Harness (`validate`) | 33106416126 | success |
+| Governor Transition Assessment | 33106416125 | success |
+| SE Harness Candidate Evidence | 33106416177 | success |
+| Publication Rehearsal | 33106417138 | success |
+
+Thirteen required checks pass, including candidate-source evidence, candidate-package evidence, governance migration on Linux and Windows, integration-package verification on Linux and Windows, and both qualification replays of the Publication Rehearsal lane. The pull request reads `MERGEABLE`.
+
+The first push of this branch, at head `e6231d5`, was **red in three of those four lanes**, and every one of the three failed for the same single reason: `[E012]` on the then-present `VREC-REB-025`. The candidate-evidence lane failed check `CC003` with `artifacts=997; errors=1; warnings=471`, the publication rehearsal failed both replays on the same count, and the Engineering Harness lane failed its review preflight with `[A-E012]`. Section 15.1 records why the record was retracted rather than rejected. Nothing else was wrong, and nothing else changed between the two pushes except the retraction and the successor record.
+
+### 16.2 The owner-region failure is a Windows checkout artifact, not a defect
+
+Section 15.2 reports one local suite failure, `test_owner_region_stays_within_the_size_bound`, and states it is pre-existing on `main`. The hosted lanes settle what it is:
+
+```text
+Candidate source evidence / Run complete candidate-source regression
+Ran 953 tests in 28.219s (115 classes, 4 workers)
+OK (skipped=4)
+```
+
+The same 953 tests pass on the Linux runner with no failure. The test measures `AGENTS.md` minus its managed block **as checked out**:
+
+| Owner region of `AGENTS.md` | Bytes | Against the 6,000-byte bound |
+| --- | --- | --- |
+| as checked out on this Windows host, CRLF | 6,036 | fails |
+| with LF, which is the tracked blob and the runner's checkout | 5,969 | passes |
+
+So the bound is not exceeded by the tracked content; it is exceeded by the 80 carriage returns a Windows checkout adds, 67 of which fall inside the owner region. `SPEC-IAR-012` rule 12 is satisfied for the repository's own bytes. The correct reading of section 15.2 is therefore narrower than it states: this is a **Windows-only local reading**, it reproduces identically in a control worktree at `origin/main` `fda0fa1`, `AGENTS.md` here is byte-identical to `origin/main`, and there is nothing for this branch or for `main` to fix in the file. It is noted rather than fixed, and it is the only difference between the local Windows suite verdict and the hosted Linux one, along with 20 Windows-only skips: 24 skips locally against 4 on the runner.
+
+### 16.3 The rehearsal gap VER-REB-012 names is still open
+
+The Publication Rehearsal lane that passed above is `.github/workflows/release-qualification.yml` on the `pull_request` event. It is **not** the evidence `VER-REB-012` asks for. That contract requires a `workflow_dispatch` rehearsal of the two workflows this work order edits, `.github/workflows/publish-pypi.yml` and `.github/workflows/pages-publication.yml`, and says in terms that static review of those two files is not sufficient evidence on its own. No dispatch run of either exists. Both files are exercised only by the static review of section 7 and by the ordinary lanes above, which never invoke them. This remains the largest single gap in front of the assurance decision, and only an owner with dispatch rights can close it.
+
+### 16.4 The formal snapshot sequence, and one correction to section 15
+
+Preparing `VREC-REB-026` added an artifact, so it moved the formal snapshot once more. The complete sequence is:
+
+| Formal snapshot | Commit | State |
+| --- | --- | --- |
+| `77b5543356ee540325a9de44a35e3d4ebd9b35140e32c4ffca120475faaeeb35` | `b848b7a` | first measurement, 0.6.0 governor, sections 3 to 13 |
+| `299a568e8f98a62225842a5eff8c1ffcb70f6d4533cd2d541c89e5ee3b3f3d75` | `cb56673` | after merging `f0ecd9b`, section 14 |
+| `7f36d03248d40fc5a525c77e71f53853256527d1099ac1ae37881cf32a16aa2f` | `67a52b9` | after merging `fda0fa1` and retracting `VREC-REB-025`, section 15 |
+| `5ab8585bae55cf112ef8eb91026987b7e7951dec1ee6614e372a4c03e50368b2` | `c20b673` | after preparing `VREC-REB-026`, which is itself an artifact |
+
+Section 15.2 says the binding block at the top of this file "always names the current snapshot". That is one commit too loose, and the accurate statement is this: the block names `7f36d032`, the snapshot at `67a52b9`, which is exactly the candidate commit `VREC-REB-026` binds. A verification record's own preparation necessarily moves the snapshot after the commit it binds, so a bound reading can never name the snapshot of the commit that carries the record. No gate reads the block in the current state in any case, because the handoff checkpoint no longer applies, as section 15.3 records; the review preflight the hosted lane runs passes at every commit since the retraction.
