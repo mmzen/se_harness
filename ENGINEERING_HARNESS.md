@@ -1,6 +1,6 @@
 # Engineering Harness for se_harness
 
-This repository uses SE Harness 0.6.0.
+This repository uses SE Harness 0.7.0.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and
@@ -52,6 +52,19 @@ They MUST NOT waive, weaken, or contradict this managed contract.
 gates MUST fail closed. A warning MUST NOT be treated as approval or accepted
 risk.
 
+## Scope of these obligations
+
+The bounded-scope invariant above, the lifecycle handoff rules, and the stop
+conditions bind an actor executing or reporting a lifecycle stage. Reading,
+analysis, and answering questions are unconstrained, provided no lifecycle
+state changes, no decision right is exercised, and no finding is presented as
+a formal result.
+
+Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
+the selected work order, and every governing artifact listed by the phase
+reading manifest. The routed policies below are reference for humans and for
+the evaluator; an agent is not required to read them to act.
+
 ## Routing
 
 Each subject has one policy owner. Other documents MUST reference the owner and
@@ -63,26 +76,35 @@ MUST NOT restate its rules.
 | Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |
 | Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
+| Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
+| Authoring rules for formal artifacts | `docs/engineering/ARTIFACT_AUTHORING.md` |
 | Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
 source.
 
-## Lifecycle restitution
+## Lifecycle handoff
 
 After completing a lifecycle stage or reaching a stop condition, the actor MUST
-return the canonical human block produced by selected `harnessctl check`,
-`harnessctl focus --result-schema 2`, or another workflow command using
-`--result-schema 2`. The headings are `Outcome`, `Done`,
-`Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
-required`, `Next`, `Command or response`, and conditional `Alternatives`.
+obtain the selected workflow result using result schema 2. The structured
+result is authoritative. The actor MUST preserve its actual artifact IDs,
+lifecycle state, observed effects, material non-effects, blockers, accountable
+decision, recommended next action, and command argument boundaries or suggested
+response meaning. It MUST NOT claim an effect, decision, or authority absent
+from that result.
 
-The actor MUST return that block verbatim, use actual artifact IDs, expose one
-typed next step, report only effects that occurred, and preserve every stated
-non-effect. It MUST NOT add a preface, conclusion, unrelated finding,
-open-ended question, or second next action. The complete procedure is
-`WORKFLOW.md#lifecycle-restitution-procedure`.
+For human interaction, the actor SHOULD summarize the result clearly and
+concisely. It MAY adapt wording and structure to the user and situation, add
+relevant explanation, and omit empty fields. It MUST distinguish completed
+work from remaining work, identify any required accountable decision, and
+recommend exactly one next action. Complete alternatives MAY be shown
+separately. It MUST NOT add an unrelated finding or another recommendation.
+
+When exact headings or bytes are required, the application or automation MUST
+invoke the deterministic human renderer directly. Model transcription MUST NOT
+be used as the enforcement mechanism. The complete procedure is
+`WORKFLOW.md#lifecycle-handoff-procedure`.
 
 ## Stop conditions
 

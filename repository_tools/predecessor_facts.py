@@ -47,6 +47,8 @@ SCENARIOS = Path("tests/fixtures/governance_migration")
 # declared here once and asserted by tests, never restated in a workflow.
 LEGACY_ACCEPTANCE_CONTRACT_SHA256 = {
     "0.6.0": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
+    # 0.7.0 ships the same accept-candidate contract bytes (WO-HUP-006).
+    "0.7.0": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
 }
 
 
@@ -217,6 +219,15 @@ def _retarget(template: dict[str, Any], *, predecessor: dict[str, str], successo
     fixture = scenario["fixture"]
     for key in ("initial_proposal", "replacement_proposal"):
         fixture[key]["version"] = successor
+    # The adopt stage recomputes the simulated immutable publication identity from
+    # the adopted proposal and the successor version (MIG413), so a re-pointed
+    # scenario must carry the digest of the new pair, not the template's.
+    publication = {
+        "artifact_id": fixture["replacement_proposal"]["artifact_id"],
+        "immutable": True,
+        "version": successor,
+    }
+    fixture["simulated_publication_sha256"] = sha256_bytes(canonical_json(publication))
     scenario["fixture_sha256"] = sha256_bytes(canonical_json(fixture))
     for decision in scenario["decisions"]:
         decision["sha256"] = sha256_bytes(canonical_json({key: item for key, item in decision.items() if key != "sha256"}))

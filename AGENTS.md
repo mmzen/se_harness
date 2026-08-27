@@ -15,7 +15,7 @@ The release-build, release-binding, and last-mile publication sequences are writ
 
 ## Ungoverned paths
 
-Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap need a pull request and a reviewer, not a work order. Such a pull request carries no `Harness-Work-Order` line, states why in its body, and the repository owner accepts the resulting red managed check before merging. Everything else changes under an approved work order.
+Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap need a pull request and a reviewer, not a work order: no `Harness-Work-Order` line, the reason in the body, and the owner accepts the red managed check. Everything else changes under an approved work order.
 
 ## Scope of the managed obligations
 
@@ -23,28 +23,29 @@ Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap 
 
 ## Do not edit these - they are hash-locked managed copies
 
-`.engineering-harness.lock` is authoritative for ownership mode. Editing a managed path breaks `doctor` and the required CI check.
+`.engineering-harness.lock` is authoritative for ownership mode; editing a managed path breaks `doctor` and the required CI check.
 
 - `.engineering-harness.toml`, `ENGINEERING_HARNESS.md`, `.github/workflows/engineering-harness.yml`
-- `docs/engineering/WORKFLOW.md`, `WORKFLOW.json`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `QUALITY_GATES.json`, `TRACEABILITY.md`
+- `docs/engineering/WORKFLOW.md`, `WORKFLOW.json`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `QUALITY_GATES.json`, `TRACEABILITY.md`, `ARTIFACT_AUTHORING.md`, `OPERATING_CARD.md`, `TECHNICAL_COMMUNICATION.md`
 - every file in `docs/engineering/templates/`
+- every file under `.agents/skills/` (`SKILL.md`, `skill-contract.json`, `openai.yaml`, `guard.py`, `check_scope.py`, `check_brief.py`, `orient.py`, `check_prepare.py`) and `.claude/skills/*/SKILL.md`
 - exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
 
-The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`. Do not claim all of `scripts/` is managed; that would block the documented release-build path.
+The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`. Not all of `scripts/` is managed.
 
-`AGENTS.md`, `CLAUDE.md`, and `.gitignore` are `fragment` mode: only the block between the `se-harness` begin and end markers is tracked. The rest of each file is owner content. Reproduce the tracked block byte-for-byte; `utf8-text-lf-v1` canonicalizes line endings only, so any other whitespace change breaks the digest.
+`AGENTS.md`, `CLAUDE.md`, and `.gitignore` are `fragment` mode: only the block between the `se-harness` markers is tracked; the rest is owner content. Reproduce the tracked block byte-for-byte; `utf8-text-lf-v1` canonicalizes line endings only, so any other whitespace change breaks the digest.
 
 ## Candidate source versus released evaluator
 
-This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version recorded in `.engineering-harness.toml`. They may match unchanged candidate templates and may lag later development; compare evaluator identities and bytes rather than assuming equality or difference.
+This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version in `.engineering-harness.toml`; they may match unchanged candidate templates or lag later development, so compare identities and bytes rather than assuming.
 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.6.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.7.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
-An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development. That is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path also makes candidate-source runtime identity fail with `RID018`.
+An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development; that is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path makes candidate-source runtime identity fail with `RID018`.
 
 The candidate CLI may lead the released one. Confirm commands against the isolated released evaluator before putting them in instructions its gate must satisfy.
 
@@ -69,7 +70,11 @@ The candidate CLI may lead the released one. Confirm commands against the isolat
 Read `ENGINEERING_HARNESS.md` before engineering work. It is the single managed harness contract and router. Repository-owned instructions outside this block may add constraints but cannot waive formal artifact authority, approved work-order scope, required evidence, or accountable verification and release decisions. Stop when this managed gate is missing, damaged, or materially conflicts with owner instructions.
 
 For a bounded iteration, select one WO, VREC, or RLS and use `harnessctl check`
-at the procedure's checkpoint. Return the command's canonical human restitution
-block verbatim. Do not append repository-wide inspection findings, analysis, a
-second next step, or provider-specific workflow rules.
+at the procedure's checkpoint. Treat its schema-2 structured result as
+authoritative. Present a clear human handoff that preserves actual artifact
+IDs, observed effects, material non-effects, blockers, final lifecycle state,
+the accountable decision, and exactly one typed next step. Adapt wording and
+structure to the interaction, but preserve command argument boundaries or the
+suggested response's meaning. Exact-format consumers must use the direct
+renderer. Do not add unrelated findings or provider-specific workflow rules.
 <!-- se-harness:end -->

@@ -39,9 +39,11 @@ from se_harness.workflow_contract import load_lifecycle_registry
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests/fixtures/governance_migration"
 HISTORICAL = FIXTURES / "historical-0.5.0-to-0.6.0.json"
-CANDIDATE = FIXTURES / "candidate-0.6.0-to-0.7.0.json"
+CANDIDATE = FIXTURES / "candidate-0.7.0-to-0.8.0.json"
+# The retained pair of the previous candidate (WO-REB-023); the root moved to 0.7.0 under WO-HUP-006.
+PREVIOUS_CANDIDATE = FIXTURES / "candidate-0.6.0-to-0.7.0.json"
 SYNTHETIC = FIXTURES / "synthetic-n-minus-1-to-n.json"
-SCENARIOS = (HISTORICAL, CANDIDATE, SYNTHETIC)
+SCENARIOS = (HISTORICAL, PREVIOUS_CANDIDATE, CANDIDATE, SYNTHETIC)
 WORKFLOW = ROOT / ".github/workflows/candidate-evidence.yml"
 
 # Already-public predecessor wheels, measured from the index with
@@ -56,6 +58,10 @@ PUBLIC_PREDECESSOR_ARCHIVES = {
     "0.6.0": (
         "se_harness-0.6.0-py3-none-any.whl",
         "2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7",
+    ),
+    "0.7.0": (
+        "se_harness-0.7.0-py3-none-any.whl",
+        "e8f4fdc9ad60879a3fa4627c063fa7bb9513e2bd109c47258cf7f7aa6ecf27f3",
     ),
 }
 

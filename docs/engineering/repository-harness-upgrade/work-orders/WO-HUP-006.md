@@ -45,7 +45,9 @@ paths = [
   "docs/engineering/templates/",
   "docs/engineering/repository-harness-upgrade/",
   "docs/notes/developing-se-harness.md",
+  "README.md",
   "pyproject.toml",
+  "repository_tools/predecessor_facts.py",
   "scripts/select_harness_work_order.py",
   "scripts/validate_engineering_artifacts.py",
   "se_harness/__init__.py",
@@ -112,8 +114,8 @@ publication, deployment, maintenance or external state.
   predecessor pair), which is the second step of the candidate-evidence
   lane's first job, so every pull request's lane would be red after
   adoption. The candidate version and the scenario move together (release
-  sequences note). `README.md`'s public install example stays `0.7.0`: it
-  names the published version, not the candidate.
+  sequences note). `README.md`'s install example follows the candidate
+  version, as the repository's tests require (second amendment below).
 - Remove the repository-owned `.gitattributes` rules that 0.7.0's managed
   block now carries (the three `governance_migration` LF rules), keeping the
   other owner rules; the rules stay effective through the managed block.
@@ -146,6 +148,39 @@ are both still asserted.
 - Candidate template bytes must remain unchanged; the repository-owned
   `.gitattributes` rules outside the managed block must stay effective.
 
+## Scope amendment, 2026-08-27
+
+Amended by the repository owner during implementation, on a request put
+with the measurements in front of it: `repository_tools/predecessor_facts.py`
+is added to `[execution_scope]` for two changes and nothing else.
+
+1. `LEGACY_ACCEPTANCE_CONTRACT_SHA256` maps only `0.6.0`. With the root at
+   0.7.0, `derive` yields no acceptance-contract digest and the
+   candidate-package job of the candidate-evidence lane refuses to run
+   (*the legacy bootstrap acceptance needs a declared contract digest*).
+   The 0.7.0 verifier's contract digest is byte-identical to 0.6.0's
+   (`a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75`,
+   read from both installed evaluators), so the map gains that one entry.
+2. `write-scenario` does not recompute `fixture.simulated_publication_sha256`
+   when it re-points a scenario, so the written `candidate-0.7.0-to-0.8.0.json`
+   failed its own rehearsal at the `adopt` stage with `MIG413`. Recomputing
+   `sha256(canonical_json({artifact_id, immutable: true, version}))` from
+   the replacement proposal and the successor reproduces the stored digest
+   of both retained scenarios; the writer now does that, and the scenario is
+   rewritten with it.
+
+Both files are outside the source distribution. The amendment widens no
+other constraint; the published 0.7.0 and every release artifact stay
+untouched. The handoff snapshot moves with this edit and the evidence binds
+the amended snapshot.
+
+Second amendment, same day and same owner: `README.md` is added for its one
+install-example line. The draft assumed the example names the published
+version; `tests/test_progressive_documentation.py` and
+`tests/test_public_onboarding.py` require it to equal `pyproject.toml`'s
+version, which is the convention `WO-RLS-011` followed. The line reads
+`se-harness==0.8.0`; nothing else in `README.md` changes.
+
 ## Expected change surface
 
 - The 43 reviewed add or update paths and the installer-owned lock.
@@ -153,8 +188,8 @@ are both still asserted.
   the governor statements only; the owner region's managed-path list grows
   from 30 to 55 entries.
 - `.gitattributes` owner content, for the three duplicated rules only.
-- `pyproject.toml`, `se_harness/__init__.py` and the new scenario file, for
-  the 0.8.0 development version.
+- `pyproject.toml`, `se_harness/__init__.py`, `README.md`'s install example
+  and the new scenario file, for the 0.8.0 development version.
 - The test files named in the evidence, for root assumptions only.
 - This packet, the HUP index, the canonical transaction JSON and the
   human-readable evidence.

@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -59,12 +60,15 @@ class TriggerPolicyTests(unittest.TestCase):
                 self.assertIn("cancel-in-progress: false", text)
 
     def test_root_managed_copy_is_untouched(self) -> None:
-        # The root engineering-harness.yml is a hash-locked 0.6.0 copy; WO-CIP-001
-        # changes the standard template only. The root keeps the unfiltered
-        # triggers until the governor upgrade replaces it.
+        # The root engineering-harness.yml is a hash-locked copy of the released
+        # governor (0.7.0 since WO-HUP-006), which carries WO-CIP-001's trigger
+        # policy; WO-CIP-001 itself changes the standard template only.
         root = (WORKFLOWS / "engineering-harness.yml").read_text(encoding="utf-8")
-        self.assertIn("\non:\n  pull_request:\n  push:\n\n", root)
-        self.assertNotIn("concurrency:", root)
+        template = (REPOSITORY_ROOT / "templates/repository/standard/.github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
+        evaluator_version = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
+        self.assertEqual(template.replace("{{HARNESS_VERSION}}", evaluator_version), root)
+        self.assertIn("\non:\n  pull_request:\n  push:\n    branches:\n", root)
+        self.assertIn("cancel-in-progress: true", root)
 
 
 class OneBuildPerWorkflowTests(unittest.TestCase):
@@ -201,11 +205,13 @@ class PredecessorDerivationTests(unittest.TestCase):
             root = Path(scratch)
             self._copy_repository_declarations(root)
             pyproject = root / "pyproject.toml"
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.0"', 'version = "0.8.0"', 1), encoding="utf-8")
+            declared = tomllib.loads(pyproject.read_text(encoding="utf-8"))["project"]["version"]
+            lock_version = json.loads((root / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
+            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{declared}"', 'version = "0.9.0"', 1), encoding="utf-8")
             with self.assertRaises(PredecessorFactsError) as caught:
                 derive(root)
             self.assertIn("PRE009", str(caught.exception))
-            self.assertIn("tests/fixtures/governance_migration/candidate-0.6.0-to-0.8.0.json", str(caught.exception))
+            self.assertIn(f"tests/fixtures/governance_migration/candidate-{lock_version}-to-0.9.0.json", str(caught.exception))
             completed = subprocess.run(
                 [sys.executable, "-m", "repository_tools.predecessor_facts", "derive", "--repository", str(root)],
                 capture_output=True, text=True, cwd=REPOSITORY_ROOT,
@@ -220,7 +226,8 @@ class PredecessorDerivationTests(unittest.TestCase):
             root = Path(scratch)
             self._copy_repository_declarations(root)
             toml = root / ".engineering-harness.toml"
-            toml.write_text(toml.read_text(encoding="utf-8").replace('tool_version = "0.6.0"', 'tool_version = "0.5.0"'), encoding="utf-8")
+            lock_version = json.loads((root / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
+            toml.write_text(toml.read_text(encoding="utf-8").replace(f'tool_version = "{lock_version}"', 'tool_version = "0.5.0"'), encoding="utf-8")
             with self.assertRaises(PredecessorFactsError) as caught:
                 derive(root)
             self.assertIn("PRE007", str(caught.exception))
@@ -252,15 +259,15 @@ class PredecessorDerivationTests(unittest.TestCase):
             self._copy_repository_declarations(root)
             destination, raw = write_scenario(root, template=committed, predecessor=None, successor=None, output=root / "same.json")
             self.assertEqual(committed.read_bytes(), raw, "the writer must reproduce the committed pair byte for byte")
-            destination, raw = write_scenario(root, template=committed, predecessor=None, successor="0.8.0", output=None)
-            self.assertEqual(root / "tests/fixtures/governance_migration/candidate-0.6.0-to-0.8.0.json", destination)
+            destination, raw = write_scenario(root, template=committed, predecessor=None, successor="0.9.0", output=None)
+            self.assertEqual(root / f"tests/fixtures/governance_migration/candidate-{facts.version}-to-0.9.0.json", destination)
             scenario, _ = load_migration_scenario(destination, load_migration_contract())
-            self.assertEqual({"predecessor": "0.6.0", "successor": "0.8.0"}, scenario["versions"])
-            self.assertEqual("0.8.0", scenario["fixture"]["replacement_proposal"]["version"])
+            self.assertEqual({"predecessor": facts.version, "successor": "0.9.0"}, scenario["versions"])
+            self.assertEqual("0.9.0", scenario["fixture"]["replacement_proposal"]["version"])
             self.assertEqual(facts.wheel_sha256, scenario["runtime_expectations"]["predecessor"]["archive_sha256"])
             pyproject = root / "pyproject.toml"
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace('version = "0.7.0"', 'version = "0.8.0"', 1), encoding="utf-8")
-            self.assertEqual("tests/fixtures/governance_migration/candidate-0.6.0-to-0.8.0.json", derive(root).scenario)
+            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{facts.candidate_version}"', 'version = "0.9.0"', 1), encoding="utf-8")
+            self.assertEqual(f"tests/fixtures/governance_migration/candidate-{facts.version}-to-0.9.0.json", derive(root).scenario)
 
 
 class QualificationDefinitionTests(unittest.TestCase):
