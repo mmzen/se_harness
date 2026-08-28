@@ -2,12 +2,19 @@
 id = "VER-HUP-008"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.8.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
 [relations]
 verifies = ["REQ-HUP-016", "REQ-HUP-017"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T17:04:46Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'Approve and start', for the adoption of exact public 0.8.0 (RLS-SEH-017, released and published 2026-08-28) as the standard root the simple way: one command from an isolated wheel-file install outside the checkout whose digest equals the record's bound wheel, no packet, candidate moved to 0.9.0 in the same change. Measured before this transition over branch state 5a2475f carrying unmoved main 2628627: validate PASS at 0 errors under both the governing 0.7.1 root and public 0.8.0; rehearsal on a throwaway export: plan 61 files, 9 update, 52 unchanged, no customization or conflict; 0.8.0 doctor 0 FAIL after apply; nine test modules pinned."
 +++
 
 # Verification: Verify standard-root adoption of exact public 0.8.0
