@@ -83,4 +83,16 @@ Rerun: completed pass d0f1ffe617b94ecd6013ec5626e636a51c6a81a99451d5ae92bb7a24fa
 
 ## 6. Hosted lanes
 
-Recorded in a later commit once the pull request has run them at the candidate head.
+At the candidate head `aa0c9bc` of #242, twelve of thirteen checks pass:
+`candidate-evidence.yml` run `33183812371` — candidate source (full suite at
+full scale), candidate package, the real upgrade rehearsal 0.7.1 -> 0.8.0 on
+Linux and on Windows with agreeing lock digests, the deterministic integration
+package built, verified on both platforms and retained;
+`publication-rehearsal.yml` run `33183812663` (record selection, the
+candidate-mode replay of this candidate's own recipe, the release-record
+replay); governor transition assessment run `33183812385`. The managed
+`validate` lane (run `33183812351`) failed at "Select the pull-request work
+order" with `found 0`: it reads the stored pull-request event, which predates
+the body edit that added the `Harness-Work-Order: WO-RLS-014` line. This
+commit refreshes the payload; the lane's result at this head is recorded in
+the completion decision.
