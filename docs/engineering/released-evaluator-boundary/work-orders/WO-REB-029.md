@@ -2,10 +2,10 @@
 id = "WO-REB-029"
 type = "work_order"
 title = "Retire the predecessor-bootstrap rules from the consumer-installed validator"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "release-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-08-27T20:16:24Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-27 by the accountable owner, 'after approval is made, you can start the work', immediately after the approval of WO-REB-029, SPEC-REB-014 and VER-REB-013 on the owner review of pull request #206. Execution is confined to the approved scope and to the execution_scope paths. The approval envelope stands unchanged: no byte of scripts/validate_engineering_artifacts.py, no byte of se_harness/hash_bound_classes.json, no change to REQ-REB-011 or to the six closed 0.6.0 artifacts, no superseded status, no promotable distribution, no hash-bound digest changed. Completion, commit-bound verification and any release decision remain separate accountable acts."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T05:20:15Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 by the accountable owner, 'you can switch WO-REB-029 to implemented, push and create PR, and then create the verification record'. The handoff checkpoint reads Completed at 2e39519 under the released 0.7.1 evaluator outside the checkout, with all eight QG-G4-IMPLEMENTATION-EVIDENCE predicates passing, thirteen declared changed paths inside execution scope, and completeness asserted. Every authorized item is delivered: 585 lines deleted from templates/repository/standard/scripts/validate_engineering_artifacts.py in ten declared blocks; REQ-REB-008 and REQ-REB-010 retired by dated amendment; ARCH-REB-009 and ADR-REB-009 amended to four typed qualify operations; the Pages lane's retired temporary directory renamed; tests/test_predecessor_bootstrap_retirement.py extended to 20 tests including the declared divergence between the two validator copies; the note and packet index updated; and evidence retained at docs/engineering/released-evaluator-boundary/evidence/WO-REB-029-verification.md. The approval envelope held: no byte of scripts/validate_engineering_artifacts.py, no byte of se_harness/hash_bound_classes.json, no change to REQ-REB-011 or the six closed 0.6.0 artifacts, no superseded status applied, no promotable distribution, no hash-bound digest changed. The full graph validates with zero errors under both validator copies and their diagnostic sets are identical to a control at b5f0542. Completion is not verification: WO-REB-029 carries commit_bound_verification required, so a separate VREC decision by an accountable verifier follows, and the hosted lanes VER-REB-013 requires are recorded on this branch after the push. Nineteen disclosures in section 17 of the evidence are explicit inputs to that decision."
 +++
 
 # Work Order: Retire the predecessor-bootstrap rules from the consumer-installed validator
