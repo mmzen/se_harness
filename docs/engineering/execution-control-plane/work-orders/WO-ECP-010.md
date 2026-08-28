@@ -2,7 +2,7 @@
 id = "WO-ECP-010"
 type = "work_order"
 title = "Replace the governance-migration rehearsal with a real upgrade rehearsal"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -43,6 +43,13 @@ implements = ["REQ-ECP-012"]
 specifications = ["SPEC-ECP-007"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-005"]
 verification = ["VER-ECP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T13:28:15Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve WO-ECP-010, go', for repository issue #210. Authorizes only the listed execution scope: the repository-owned upgrade rehearsal and its CI lane, the evaluator_facts rename without the scenario coupling, deletion of the governance-migration stage machine, its contract, tests, fixtures, the rehearse-migration subcommand, the MIG family and the package interpreter-safety module, the .gitattributes owner lines, the dated amendments to REQ-REB-016, REQ-REB-017, SPEC-REB-008, REQ-REB-029 and SPEC-REB-013, the narrowing of WO-ECP-007, the notes, tests and evidence. Start, completion, commit-bound verification and release are separate decisions."
 +++
 
 # Work Order: Replace the governance-migration rehearsal with a real upgrade rehearsal
