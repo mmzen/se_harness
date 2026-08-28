@@ -2,7 +2,7 @@
 id = "WO-AUT-003"
 type = "work_order"
 title = "Retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -37,6 +37,13 @@ to = "in_progress"
 decided_at = "2026-08-28T10:38:36Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'Approve and start'. Execution is confined to the approved scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T10:42:53Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's direction, 'Complete it', once the hosted lanes were green. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout with four changed paths declared and completeness asserted. Delivered: the final assertion of test_repository_dry_run_report_is_retained_and_matches_a_fresh_run retargeted to the retained report, the packet index line, and the evidence at docs/engineering/artifact-authoring/evidence/WO-AUT-003-verification.md. All thirteen hosted checks pass at 8d67924, Windows legs included. No requirement, retained report, script, policy, template or workflow changed. Completion is not verification: commit-bound verification follows as a separate decision."
 +++
 
 # Work Order: Retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite

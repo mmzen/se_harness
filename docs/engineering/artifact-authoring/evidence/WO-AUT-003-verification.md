@@ -68,4 +68,11 @@ Rerun: outcome, compliance, result_sha256: completed pass 72abf25a05fbb6f3853794
 
 ## 6. Hosted lanes
 
-Recorded in a later commit once the pull request has run them.
+At head `8d67924` of #237, all thirteen checks pass: `candidate-evidence.yml`
+run `33164143539` (candidate source, candidate package, deterministic
+integration package, governance migration on Linux and Windows, integration
+package verified on Linux and Windows, retained), `publication-rehearsal.yml`
+run `33164143844` (record selection, candidate replay, release-record replay),
+`validate` run `33164143599`, governor transition assessment run
+`33164143522`. These are the first green candidate lanes on any ref since
+`4a43d4e`; the Windows legs ran for the first time since then.
