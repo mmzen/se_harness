@@ -80,7 +80,6 @@ jobs:
           set -euo pipefail
           python .github/scripts/publish_dashboard.py evaluator \
             --repository "$GITHUB_WORKSPACE" \
-            --release-record "${{ inputs.release_record }}" \
             --output "$RUNNER_TEMP/evaluator.json" \
             --github-output "$GITHUB_OUTPUT"
 
@@ -115,50 +114,6 @@ jobs:
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
           "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
-          cd "$GITHUB_WORKSPACE"
-          view_output="$RUNNER_TEMP/predecessor-view-qualification.json"
-          bootstrap_tuple="$(python - "$GITHUB_WORKSPACE" "${{ inputs.release_record }}" <<'PY'
-          import pathlib, sys, tomllib
-          root, record_id = pathlib.Path(sys.argv[1]), sys.argv[2]
-          def front_matter(path):
-              return tomllib.loads(path.read_text(encoding="utf-8").split("+++")[1])
-          records = [p for p in root.glob("docs/engineering/**/releases/*.md") if p.stem == record_id]
-          if len(records) != 1:
-              sys.exit(f"expected exactly one {record_id} under docs/engineering; found {len(records)}")
-          contracts = front_matter(records[0]).get("relations", {}).get("satisfies", [])
-          if len(contracts) != 1:
-              sys.exit(f"{record_id} must satisfy exactly one release contract; found {len(contracts)}")
-          matches = [p for p in root.glob("docs/engineering/**/*.md") if p.stem == contracts[0] and p.parent.name == "release"]
-          if len(matches) != 1:
-              sys.exit(f"expected exactly one {contracts[0]}; found {len(matches)}")
-          print("declared" if isinstance(front_matter(matches[0]).get("bootstrap"), dict) else "absent")
-          PY
-          )"
-          if [[ "$bootstrap_tuple" == "declared" ]]; then
-            python -m se_harness qualify predecessor-view "$GITHUB_WORKSPACE" \
-              --release-record "${{ inputs.release_record }}" \
-              --evaluator-python "$RUNNER_TEMP/evaluator-env/bin/python" \
-              --output "$view_output" \
-              --json
-          else
-            python - "$view_output" "${{ inputs.release_record }}" "$EVALUATOR_VERSION" "$EVALUATOR_WHEEL_SHA256" <<'PY'
-          import json, sys
-          output, record_id, version, archive_sha256 = sys.argv[1:5]
-          observation = {
-              "schema": "se-harness-predecessor-view-exclusion/v1",
-              "operation": "predecessor-view",
-              "outcome": "excluded",
-              "release_record": record_id,
-              "evaluator": {"version": version, "archive_sha256": archive_sha256},
-              "reason": "the record's contract declares no bootstrap tuple; REQ-REB-015's condition does not hold",
-              "authority": "derived operational evidence; no formal lifecycle transition",
-          }
-          with open(output, "w", encoding="utf-8", newline="\n") as handle:
-              json.dump(observation, handle, indent=2, sort_keys=True)
-              handle.write("\n")
-          PY
-            echo "predecessor-view qualification excluded: ${{ inputs.release_record }} satisfies a contract without a bootstrap tuple"
-          fi
 
       - name: Derive one canonical release plan
         id: plan
@@ -184,7 +139,6 @@ jobs:
           name: release-plan-${{ inputs.release_record }}
           path: |
             ${{ runner.temp }}/release-plan.json
-            ${{ runner.temp }}/predecessor-view-qualification.json
           if-no-files-found: error
           retention-days: 14
 
@@ -205,7 +159,6 @@ jobs:
           name: release-refusal
           path: |
             ${{ runner.temp }}/release-refusal.json
-            ${{ runner.temp }}/predecessor-view-qualification.json
           if-no-files-found: error
           retention-days: 90
 

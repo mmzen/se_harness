@@ -5,7 +5,7 @@ title = "Contract-bound predecessor evaluator bootstrap"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-008"]
@@ -154,3 +154,11 @@ Human and JSON output name the bootstrap schema, contract, RLS, old-lock digest,
 ## Canonical-LF correction
 
 On 2026-08-21 at `2026-08-21T16:31:42Z`, the accountable owners authorized replacing the platform-smudged CRLF observation with canonical `utf8-text-lf-v1` SHA-256 `08441ec0b4825db4c017ce4169f23092162995ff06476004d267f0671c7443b3`. This correction preserves approved status, the closed tuple, trust direction, mutation boundary, and all other scope constraints.
+
+## Retirement amendment of 2026-08-27
+
+On 2026-08-27, under `WO-REB-028` and `SPEC-REB-013`, the accountable owners retired the mechanism this contract specifies. The binder `scripts/bind_release_bootstrap.py` and its `repository_tools/release_bootstrap.py` module are deleted, and no release contract may declare a `[bootstrap]` table. Rules 1 to 16 above therefore have no subject: no active contract declares `se-harness-release-bootstrap-v1`, no binder exists to bind one, and publication resolves no predecessor evaluator. They are retained unchanged as the record of what the repository did for the single event they were written for, the 0.6.0 release, and are no longer binding on any new work.
+
+Three things this contract established do survive the retirement, and are now facts rather than behavior. `REL-SEH-008`, `REL-SEH-009`, `REL-SEH-010` and `REL-SEH-011` keep their bytes and their declared tuples. `RLS-SEH-009` and `RLS-SEH-012` keep their `preparation_schema` markers and their canonical evaluator evidence, whose digests `se_harness/hash_bound_classes.json` still binds and which still verify. And the trust direction rule 13 states is unchanged: candidate source never supplies an evaluator identity from its own runtime claims.
+
+`REQ-REB-008`, which this specification specifies, keeps its status. Its two conditional rules live in the hash-locked managed `scripts/validate_engineering_artifacts.py`, a copy of released 0.6.0 that candidate source cannot edit. Both are inert for any artifact without a `[bootstrap]` table or a `preparation_schema` marker, so leaving them in place changes no verdict. Removing them from `templates/repository/standard/`, and retiring `REQ-REB-008` and `REQ-REB-010` with them, belongs to a later work order whose change reaches the root only when that root evaluator next advances.

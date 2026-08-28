@@ -23,7 +23,6 @@ from se_harness.release_qualification import (
     failed_qualification,
     qualify_candidate_package,
     qualify_complete_candidate,
-    qualify_predecessor_view,
     qualify_public_install,
     qualify_released_root,
     write_qualification_result,
@@ -245,48 +244,6 @@ class ReleaseQualificationTests(unittest.TestCase):
         self.assertFalse(result.passed)
         acceptance.assert_not_called()
         self.assertEqual("released-verifier", result.independence)
-
-    @mock.patch("repository_tools.predecessor_publication.validate_predecessor_publication")
-    @mock.patch("se_harness.release_qualification._external_evaluator_files")
-    @mock.patch("se_harness.release_qualification._repository_snapshot")
-    def test_predecessor_view_wraps_the_fixed_service_and_preserves_claim_boundary(
-        self,
-        snapshot: mock.Mock,
-        external: mock.Mock,
-        validate: mock.Mock,
-    ) -> None:
-        repository = self.root / "repository"
-        repository.mkdir()
-        snapshot.return_value = {"kind": "directory", "state_sha256": "a" * 64}
-        external.return_value = (self.root / "harnessctl", self.root / "predecessor.whl")
-        validate.return_value = SimpleNamespace(
-            schema="se-harness-predecessor-publication-view-v1",
-            current_artifact_count=10,
-            predecessor_artifact_count=8,
-            source_unchanged=True,
-            release_contract="REL-X-001",
-            version="0.6.0",
-            evaluator_version="0.5.0",
-            evaluator_archive_name="se_harness-0.5.0-py3-none-any.whl",
-            evaluator_archive_sha256="a" * 64,
-            evaluator_payload_sha256="b" * 64,
-            release_record="RLS-X-001",
-            source_commit="c" * 40,
-            source_tree="f" * 40,
-            git_object_format="sha1",
-            candidate_commit="d" * 40,
-            sparse_spec_sha256="1" * 64,
-            omitted_history=(),
-            observation_sha256="e" * 64,
-        )
-        result = qualify_predecessor_view(
-            repository,
-            release_record_id="RLS-X-001",
-            evaluator_python=self.root / "python",
-        )
-        self.assertTrue(result.passed)
-        self.assertEqual("external-predecessor", result.independence)
-        validate.assert_called_once()
 
     @mock.patch("se_harness.release_qualification._repository_snapshot")
     @mock.patch("se_harness.release_qualification._release_record")

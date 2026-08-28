@@ -55,7 +55,6 @@ from se_harness.release_qualification import (
     failed_qualification,
     qualify_candidate_package,
     qualify_complete_candidate,
-    qualify_predecessor_view,
     qualify_public_install,
     qualify_released_root,
     render_qualification,
@@ -652,15 +651,6 @@ def _qualify(args: argparse.Namespace) -> int:
             root = Path(args.target)
             result = qualify_released_root(root)
             forbidden_roots = (root.expanduser().resolve(),)
-        elif operation == "predecessor-view":
-            root = Path(args.target)
-            result = qualify_predecessor_view(
-                root,
-                release_record_id=args.release_record,
-                evaluator_python=Path(args.evaluator_python),
-                view_output=Path(args.view_output) if args.view_output else None,
-            )
-            forbidden_roots = (root.expanduser().resolve(),)
         elif operation == "complete-candidate":
             root = Path(args.target)
             result = qualify_complete_candidate(
@@ -1171,19 +1161,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
     released_root.add_argument("target", nargs="?", default=".")
     qualification_output(released_root)
-
-    predecessor_view = qualification.add_parser(
-        "predecessor-view",
-        help="qualify one contract-bound release view with its exact external predecessor",
-    )
-    predecessor_view.add_argument("target", nargs="?", default=".")
-    predecessor_view.add_argument("--release-record", required=True)
-    predecessor_view.add_argument("--evaluator-python", required=True)
-    predecessor_view.add_argument(
-        "--view-output",
-        help="external absent directory for a retained read-only predecessor view",
-    )
-    qualification_output(predecessor_view)
 
     complete_candidate = qualification.add_parser(
         "complete-candidate",

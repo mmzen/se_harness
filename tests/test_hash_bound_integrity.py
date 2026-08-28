@@ -18,7 +18,6 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from repository_tools import release_bootstrap as BOOTSTRAP
 from se_harness import hash_bound
 from se_harness.evaluator_identity import InstalledEvaluatorIdentity
 from se_harness.hash_bound import (
@@ -260,27 +259,6 @@ authorized_by = "engineering-owner"
 Synthetic.
 """
     write(root, "docs/engineering/upgrade/work-orders/WO-TST-001.md", body.encode("utf-8"))
-
-
-def bootstrap_root(root: Path, lock_bytes: bytes, version: str = "0.5.0") -> None:
-    """Write the standard config and lock a bootstrap old-root validation reads."""
-
-    write(root, ".engineering-harness.toml", f'[harness]\ntool_version = "{version}"\n'.encode("utf-8"))
-    write(root, LOCK_RELATIVE, lock_bytes)
-
-
-def bootstrap_contract(from_lock_sha256: str, version: str = "0.5.0") -> BOOTSTRAP.BootstrapContract:
-    return BOOTSTRAP.BootstrapContract(
-        release_contract="REL-TST-001",
-        release_record="RLS-TST-001",
-        version="0.6.0",
-        from_lock_schema=2,
-        from_lock_tool_version=version,
-        from_lock_sha256=from_lock_sha256,
-        evaluator_version=version,
-        evaluator_archive_name=f"se_harness-{version}-py3-none-any.whl",
-        evaluator_archive_sha256="b" * 64,
-    )
 
 
 def results(root: Path, declaration=None) -> dict[str, tuple[bool, str]]:
@@ -1275,116 +1253,25 @@ class LegacyNewlineRecognitionTests(unittest.TestCase):
 
 
 class LockCallerAgreementTests(unittest.TestCase):
-    """Both lock callers take their mode from the declaration, so they converge."""
-
-    identity = InstalledEvaluatorIdentity(
-        "9.9.9", "manifest", "a" * 64, "se_harness-9.9.9-py3-none-any.whl", "b" * 64
-    )
-
-    def bootstrap_lock(self, version: str = "0.5.0") -> bytes:
-        payload = {
-            "schema": 2,
-            "tool_version": version,
-            "hash_algorithm": "sha256",
-            "hash_mode": CANONICAL_MODE,
-            "files": {},
-        }
-        return (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-
-    def test_release_bootstrap_reaches_one_verdict_from_every_materialization(self) -> None:
-        forms = newline_forms(self.bootstrap_lock())
-        contract = bootstrap_contract(canonical_sha256(forms["lf"]))
-        self.assertNotEqual(contract.from_lock_sha256, raw_sha256(forms["crlf"]))
-        for name, value in forms.items():
-            if name == "cr":
-                # A lone-CR lock is not valid JSON under json.loads on every
-                # platform, so this caller is exercised on the two forms a
-                # checkout of a text file actually produces.
-                continue
-            with self.subTest(materialization=name):
-                with tempfile.TemporaryDirectory() as directory:
-                    root = Path(directory)
-                    bootstrap_root(root, value)
-                    BOOTSTRAP._validate_old_root(root, contract)
-
-    def test_release_bootstrap_refuses_a_legacy_newline_variant_distinctly(self) -> None:
-        lock_bytes = self.bootstrap_lock()
-        contract = bootstrap_contract(raw_sha256(lock_bytes.replace(b"\n", b"\r\n")))
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            bootstrap_root(root, lock_bytes)
-            with self.assertRaisesRegex(
-                BOOTSTRAP.ReleaseBootstrapError, "only as a legacy newline variant"
-            ):
-                BOOTSTRAP._validate_old_root(root, contract)
-
-    def test_release_bootstrap_keeps_its_existing_refusals(self) -> None:
-        lock_bytes = self.bootstrap_lock()
-        schema_three = lock_bytes.replace(b'"schema": 2', b'"schema": 3')
-        cases = (
-            # The decode of a byte-order-marked lock fails before the mark's own
-            # refusal is reached, exactly as it did before the mode changed; the
-            # refusal itself is retained and asserted from the source below.
-            (
-                b"\xef\xbb\xbf" + lock_bytes,
-                canonical_sha256(lock_bytes),
-                "standard configuration or lock is invalid",
-            ),
-            (
-                lock_bytes.replace(b'"files": {}', b'"files": {"a": 1}'),
-                canonical_sha256(lock_bytes),
-                "canonical standard lock digest differs from the bootstrap contract",
-            ),
-            (
-                schema_three,
-                canonical_sha256(schema_three),
-                "standard schema-2 lock differs from the bootstrap contract",
-            ),
-        )
-        for payload, recorded, message in cases:
-            with self.subTest(message=message):
-                with tempfile.TemporaryDirectory() as directory:
-                    root = Path(directory)
-                    bootstrap_root(root, payload)
-                    with self.assertRaisesRegex(BOOTSTRAP.ReleaseBootstrapError, message):
-                        BOOTSTRAP._validate_old_root(root, bootstrap_contract(recorded))
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
-            bootstrap_root(root, lock_bytes, version="0.5.0")
-            write(root, ".engineering-harness.toml", b'[harness]\ntool_version = "0.4.0"\n')
-            with self.assertRaisesRegex(
-                BOOTSTRAP.ReleaseBootstrapError, "configured evaluator version differs"
-            ):
-                BOOTSTRAP._validate_old_root(root, bootstrap_contract(canonical_sha256(lock_bytes)))
-        source = (ROOT / "repository_tools" / "release_bootstrap.py").read_text(encoding="utf-8")
-        self.assertIn("standard lock must use UTF-8 without a byte-order mark", source)
-
-    def test_release_bootstrap_follows_a_changed_declaration(self) -> None:
-        forms = newline_forms(self.bootstrap_lock())
-        contract = bootstrap_contract(canonical_sha256(forms["lf"]))
-        with mock.patch.object(
-            hash_bound, "load_declaration", return_value=raw_lock_declaration()
-        ):
-            with tempfile.TemporaryDirectory() as directory:
-                root = Path(directory)
-                bootstrap_root(root, forms["lf"])
-                BOOTSTRAP._validate_old_root(root, contract)
-            with tempfile.TemporaryDirectory() as directory:
-                root = Path(directory)
-                bootstrap_root(root, forms["crlf"])
-                with self.assertRaises(BOOTSTRAP.ReleaseBootstrapError):
-                    BOOTSTRAP._validate_old_root(root, contract)
+    """The remaining lock callers take their mode from the declaration."""
 
     def test_no_lock_caller_decides_the_mode_locally(self) -> None:
-        # The upgrade-authorization packet loader was retired by WO-REB-027; the
-        # remaining lock callers still take their mode from the declaration.
-        bootstrap = (ROOT / "repository_tools" / "release_bootstrap.py").read_text(encoding="utf-8")
-        self.assertNotIn("_canonical_utf8_text_lf(lock_raw", bootstrap)
+        # The upgrade-authorization packet loader was retired by WO-REB-027 and the
+        # release-bootstrap old-root validation by WO-REB-028, which deleted the
+        # module that carried the last repository-owned lock comparison. The
+        # mutation guard is the remaining caller and still holds no digest of its
+        # own, and still names the declared path from the declaration's constant.
         guard = (ROOT / "se_harness" / "mutation_guard.py").read_text(encoding="utf-8")
         self.assertNotIn("hashlib", guard)
-        for source in (bootstrap, guard):
-            # The declared path is named once, from the declaration's own constant.
-            self.assertNotIn('".engineering-harness.lock"', source)
+        self.assertNotIn('".engineering-harness.lock"', guard)
+        for relative in (
+            "repository_tools/release_bootstrap.py",
+            "repository_tools/predecessor_preparation.py",
+            "repository_tools/predecessor_publication.py",
+            "repository_tools/predecessor_assessment.py",
+        ):
+            with self.subTest(module=relative):
+                self.assertFalse((ROOT / relative).exists())
 
 
 class ProducerNewlineTests(unittest.TestCase):

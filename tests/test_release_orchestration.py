@@ -615,23 +615,35 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
             self.resolver,
         )
         self.assertNotIn("from se_harness.release_distribution import", self.resolver)
-        self.assertGreaterEqual(self.workflow.count("--release-record"), 4)
+        self.assertGreaterEqual(self.workflow.count("--release-record"), 2)
 
-    def test_all_publication_validation_points_use_one_predecessor_view_adapter(self) -> None:
-        # WO-CIP-002: one predecessor-view qualification in resolve and one in the shared
-        # Pages definition; the standalone dashboard workflow is a caller.
+    def test_the_publication_path_has_no_predecessor_view_adapter(self) -> None:
+        # WO-REB-028: the predecessor-bootstrap release path is retired. No lane names a
+        # deleted script, the retired qualification operation, or its evidence artifact.
         combined = self.workflow + self.pages + self.pages_definition + self.qualification
-        self.assertEqual(0, combined.count("scripts/validate_predecessor_publication_view.py"))
-        self.assertEqual(2, combined.count("python -m se_harness qualify predecessor-view"))
-        self.assertEqual(0, combined.count("--evaluator-entry-point"))
-        self.assertEqual(0, combined.count('--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"'))
-        self.assertEqual(4, combined.count("predecessor-view-qualification.json"))
-        self.assertEqual(0, combined.count("predecessor-publication-result.json"))
-        self.assertEqual(2, combined.count("--evaluator-python"))
-        self.assertEqual(1, combined.count("--view-output"))
-        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', self.pages_definition)
-        self.assertIn('--view-output "$RUNNER_TEMP/predecessor-view/governance"', self.pages_definition)
-        self.assertNotIn("pages-predecessor-view", combined)
+        for absent in (
+            "scripts/validate_predecessor_publication_view.py",
+            "qualify predecessor-view",
+            "predecessor-view-qualification.json",
+            "predecessor-publication-result.json",
+            "--view-output",
+            "--evaluator-entry-point",
+            "--evaluator-python",
+            '--evaluator-wheel "$RUNNER_TEMP/$EVALUATOR_WHEEL"',
+            "pages-predecessor-view",
+        ):
+            with self.subTest(absent=absent):
+                self.assertEqual(0, combined.count(absent))
+        # SPEC-REB-013 rule 5: the generation snapshot is the complete governance snapshot,
+        # materialized unconditionally at the path the generator invocation already names.
+        step = self.pages_definition.split(
+            "      - name: Materialize the complete governance snapshot for generation", 1
+        )[1].split("      - name: ", 1)[0]
+        self.assertIn('git -C "$GITHUB_WORKSPACE" worktree add --detach', step)
+        self.assertIn('mkdir "$RUNNER_TEMP/predecessor-view"', step)
+        for absent in ("RELEASE_RECORD", "if [", "sparse", "--omit"):
+            with self.subTest(absent=absent):
+                self.assertNotIn(absent, step)
 
     def test_public_observation_uses_the_typed_public_install_role(self) -> None:
         combined = self.workflow + self.pages + self.pages_definition

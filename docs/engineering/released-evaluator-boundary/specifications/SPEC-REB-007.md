@@ -5,7 +5,7 @@ title = "Publication predecessor-view validation contract"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
-updated = "2026-08-22"
+updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-015"]
@@ -18,6 +18,12 @@ decided_by = "technical-owner"
 +++
 
 # Specification: Publication predecessor-view validation contract
+
+## Retirement amendment of 2026-08-27
+
+Retired on 2026-08-27 by `SPEC-REB-013` under `WO-REB-028`, on the repository owner's direction, which decided this specification is superseded together with the requirement it specifies, `REQ-REB-015`. The read-only publication adapter this contract defines no longer exists: `scripts/validate_predecessor_publication_view.py` and `repository_tools/predecessor_publication.py` are deleted, the three validation points it applied to now validate the complete governance snapshot with current semantics only, and the `se-harness-predecessor-view-exclusion/v1` observation `WO-REB-025` proposed is withdrawn with it. `SPEC-REB-013` states the replacement rules, including that the generation snapshot is the complete governance snapshot materialized unconditionally. The scope, actors, inputs, outputs, state model, and rules below record the contract the repository held while this specification was active and are retained unchanged as history; they are no longer binding. The evidence the adapter produced for `RLS-SEH-012` keeps its bytes and its hash-bound digest.
+
+The declared `superseded` status is not applied. `docs/engineering/WORKFLOW.json` admits no `approved` to `superseded` transition for a definition, and this artifact carries its own `draft` to `approved` event, which `WFL-005` requires to stay append-only. Setting the status therefore either contradicts that event (`E014`, measured on 2026-08-27) or deletes it. The retirement is recorded here instead, the instrument `WO-REB-028` already uses for `SPEC-REB-003` and `SPEC-REB-005`. Whether the status is applied through a new transition or the definition family gains one is a separate owner decision; the retirement itself does not wait on it.
 
 ## Scope
 

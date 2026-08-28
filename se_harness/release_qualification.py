@@ -16,9 +16,8 @@ import zipfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable
-from urllib.parse import unquote, urlparse
 
-from se_harness import __version__, interpreter_safety
+from se_harness import __version__
 from se_harness.candidate_acceptance import assess_candidate_wheel
 from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
@@ -39,18 +38,22 @@ QUALIFICATION_SCHEMA = "se-harness-release-qualification-v1"
 AUTHORITY = "evidence-only; no lifecycle or external action authorized"
 OPERATIONS = (
     "released-root",
-    "predecessor-view",
     "complete-candidate",
     "candidate-package",
     "public-install",
 )
 INDEPENDENCE = {
     "released-root": "released-evaluator",
-    "predecessor-view": "external-predecessor",
     "complete-candidate": "candidate-controlled",
     "candidate-package": "released-verifier",
     "public-install": "public-install-observation",
 }
+
+#: Retired with the predecessor-bootstrap release path under WO-REB-028. The
+#: values stay reserved so no later check reuses them for another meaning; no
+#: code path emits them.
+RETIRED_CHECK_CODES = ("PV001", "PV002")
+
 MAX_COMMAND_OUTPUT_BYTES = 4 * 1024 * 1024
 MAX_WHEEL_BYTES = 100 * 1024 * 1024
 VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:[A-Za-z0-9.+-]*)?")
@@ -578,119 +581,6 @@ def qualify_candidate_package(
     )
 
 
-def _external_evaluator_files(evaluator_python: Path, root: Path) -> tuple[Path, Path]:
-    try:
-        entry = interpreter_safety.evaluate(evaluator_python, checkout_root=root)
-    except interpreter_safety.InterpreterSafetyRefusal as refusal:
-        raise HarnessError(
-            f"external predecessor interpreter is refused by {refusal.case}: {refusal.detail}"
-        ) from refusal
-    except interpreter_safety.InterpreterSafetyError as exc:
-        raise HarnessError(f"external predecessor interpreter cannot be evaluated: {exc}") from exc
-    evaluator_root = entry.environment_root
-    entry_candidates = (
-        evaluator_root / "Scripts" / "harnessctl.exe",
-        evaluator_root / "Scripts" / "harnessctl",
-        evaluator_root / "bin" / "harnessctl",
-    )
-    entry_points = [item for item in entry_candidates if item.is_file()]
-    if len(entry_points) != 1:
-        raise HarnessError("external predecessor entry point is unavailable or ambiguous")
-    direct_urls = list(evaluator_root.glob("Lib/site-packages/se_harness-*.dist-info/direct_url.json"))
-    direct_urls.extend(evaluator_root.glob("lib/python*/site-packages/se_harness-*.dist-info/direct_url.json"))
-    if len(direct_urls) != 1:
-        raise HarnessError("external predecessor wheel provenance is unavailable or ambiguous")
-    try:
-        value = json.loads(direct_urls[0].read_text(encoding="utf-8"))
-        url = value["url"]
-    except (OSError, UnicodeError, KeyError, TypeError, json.JSONDecodeError) as exc:
-        raise HarnessError("external predecessor wheel provenance is invalid") from exc
-    parsed = urlparse(url)
-    if parsed.scheme != "file":
-        raise HarnessError("external predecessor was not installed from a local exact wheel")
-    wheel = Path(unquote(parsed.path))
-    if os.name == "nt" and wheel.as_posix().startswith("/") and re.match(r"/[A-Za-z]:", wheel.as_posix()):
-        wheel = Path(wheel.as_posix()[1:])
-    try:
-        wheel = wheel.resolve(strict=True)
-    except OSError as exc:
-        raise HarnessError("external predecessor source wheel is unavailable") from exc
-    if not wheel.is_file():
-        raise HarnessError("external predecessor source wheel is invalid")
-    return entry_points[0].resolve(strict=True), wheel
-
-
-def qualify_predecessor_view(
-    root: Path,
-    *,
-    release_record_id: str,
-    evaluator_python: Path,
-    view_output: Path | None = None,
-) -> QualificationResult:
-    selected = _ordinary_root(root)
-    before = _repository_snapshot(selected)
-    entry_point, evaluator_wheel = _external_evaluator_files(evaluator_python, selected)
-    try:
-        from repository_tools.predecessor_publication import (
-            PredecessorPublicationError,
-            validate_predecessor_publication,
-        )
-    except ImportError as exc:
-        raise HarnessError("the fixed predecessor-view service is unavailable") from exc
-    try:
-        plan = validate_predecessor_publication(
-            selected,
-            release_record_id=release_record_id,
-            evaluator_python=evaluator_python,
-            evaluator_entry_point=entry_point,
-            evaluator_wheel=evaluator_wheel,
-            output=None,
-            view_output=view_output,
-        )
-    except PredecessorPublicationError as exc:
-        checks = [_check("PV001", False, "predecessor-view", _bounded_message(str(exc)))]
-        after = _repository_snapshot(selected)
-        checks.append(_check("PV002", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
-        return _result(
-            "predecessor-view",
-            evaluator={"role": "external-predecessor", "status": "rejected"},
-            target={"kind": "predecessor-view", "release_record": release_record_id},
-            checks=checks,
-        )
-    after = _repository_snapshot(selected)
-    checks = [
-        _check("PV001", True, "predecessor-view", f"current={plan.current_artifact_count}; predecessor={plan.predecessor_artifact_count}"),
-        _check("PV002", before == after and plan.source_unchanged, "repository-state", "source and view inputs are unchanged" if before == after and plan.source_unchanged else "source state changed"),
-    ]
-    return _result(
-        "predecessor-view",
-        evaluator={
-            "role": "external-predecessor",
-            "version": plan.evaluator_version,
-            "archive_name": plan.evaluator_archive_name,
-            "archive_sha256": plan.evaluator_archive_sha256,
-            "payload_sha256": plan.evaluator_payload_sha256,
-        },
-        target={
-            "kind": "predecessor-view",
-            "view_manifest_schema": plan.schema,
-            "release_record": plan.release_record,
-            "release_contract": plan.release_contract,
-            "version": plan.version,
-            "source_commit": plan.source_commit,
-            "source_tree": plan.source_tree,
-            "git_object_format": plan.git_object_format,
-            "candidate_commit": plan.candidate_commit,
-            "excluded_paths_sha256": plan.sparse_spec_sha256,
-            "omitted_history_sha256": _sha256(
-                _canonical_compact([asdict(item) for item in plan.omitted_history])
-            ),
-            "observation_sha256": plan.observation_sha256,
-        },
-        checks=checks,
-    )
-
-
 def _front_matter(path: Path) -> dict[str, Any] | None:
     try:
         text = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
@@ -832,7 +722,6 @@ def qualify_public_install(
 
 QUALIFIERS: dict[str, Callable[..., QualificationResult]] = {
     "released-root": qualify_released_root,
-    "predecessor-view": qualify_predecessor_view,
     "complete-candidate": qualify_complete_candidate,
     "candidate-package": qualify_candidate_package,
     "public-install": qualify_public_install,

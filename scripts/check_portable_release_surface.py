@@ -42,7 +42,13 @@ REQUIRED_INTERPRETER_SAFETY_MEMBERS = frozenset(
         "se_harness/interpreter_safety.py",
     }
 )
-FORBIDDEN_CLI = (b"reconcile-governor", b"--governor-wheel-sha256", b"--role governor")
+FORBIDDEN_CLI = (
+    b"reconcile-governor",
+    b"--governor-wheel-sha256",
+    b"--role governor",
+    # Retired with the predecessor-bootstrap release path under WO-REB-028.
+    b"predecessor-view",
+)
 FORBIDDEN_ACTIVE_CONTENT = (
     b"publish_dashboard.py governor",
     b"--role governor",
@@ -160,7 +166,6 @@ def inspect_harnessctl(path: Path) -> None:
         operation not in output
         for operation in (
             b"released-root",
-            b"predecessor-view",
             b"complete-candidate",
             b"candidate-package",
             b"public-install",

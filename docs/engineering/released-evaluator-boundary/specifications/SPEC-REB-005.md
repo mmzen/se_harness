@@ -5,7 +5,7 @@ title = "Rejected-version succession and predecessor-view preparation contract"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-22"
-updated = "2026-08-22"
+updated = "2026-08-27"
 
 [relations]
 specifies = ["REQ-REB-011", "REQ-REB-012"]
@@ -122,3 +122,11 @@ Plan/apply results identify every validated phase, exact hashes, mutation count,
 ## Explicitly unspecified decisions
 
 Temporary directory names, internal dataclass names, and diagnostic presentation are delegated. Schema fields, selection rules, exact isolation, atomicity, lifecycle cardinality, and trust direction are fixed.
+
+## Retirement amendment of 2026-08-27
+
+On 2026-08-27, under `WO-REB-028` and `SPEC-REB-013`, the accountable owners retired the predecessor-view half of this contract. Rules 3 to 11 are withdrawn: `repository_tools/predecessor_preparation.py` and `scripts/prepare_predecessor_release.py` are deleted, no sparse preparation worktree is constructed for any evaluator, and no adapter imports predecessor-generated release bytes. Those rules are retained unchanged as the record of the one preparation they governed, `RLS-SEH-012`, and are no longer binding. The view evidence that preparation produced keeps its bytes and its bound `preparation_view_evidence_sha256`, which still verifies; the preparation itself is deliberately no longer re-derivable.
+
+Rules 1, 2, 12 and 13 are unaffected and keep their full force. `REQ-REB-011`, which this specification also specifies, still requires them: only `ready` and `released` records claim a version, cardinality is at most one, a valid `rejected` record remains visible but inert history, and a released record admits no ready successor. Rule 12 now reads without its exception, because no predecessor view is available under any precondition. Rule 13's boundary is unchanged: nothing in the retained path created authority, and nothing that replaces it does either.
+
+`REQ-REB-012`, the other requirement this specification specifies, is superseded by `REQ-REB-029` on the same date. Predecessor-to-successor assurance now comes from one mechanism only, the no-network `harnessctl rehearse-migration` rehearsal in `se_harness/governance_migration.py`.
