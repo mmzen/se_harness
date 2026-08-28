@@ -20,6 +20,17 @@ decided_by = "requirements-steward"
 
 # Requirement: One selected state yields one canonical next step in one restitution dialect
 
+## Retirement amendment of 2026-08-28
+
+Amended on 2026-08-28 by `REQ-ECP-010` under `WO-ECP-005`. The compatibility
+release this requirement allowed for schema 1 has ended: `--result-schema` is
+removed from every command and passing it is an argument error, so the failure
+example below (`--result-schema 1` renders with a warning) is retained as
+history and is no longer an obligation. The required response — both commands
+resolve the ordered rule and its bound step from one contract function, and
+`Next` and `Command or response` are byte-identical for the same state and
+snapshot — keeps its force and is now the only behaviour.
+
 ## Rationale
 
 The router mandates the schema-2 headings and the owner fragment says "return

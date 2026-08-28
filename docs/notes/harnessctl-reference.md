@@ -101,14 +101,14 @@ not derive a new transition or next action from this reference.
 
 ```text
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  [--json] [--include-background] [--result-schema 1|2]
+  [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|handoff \
   [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
   [--change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
-  [--apply] [--json] [--result-schema 1|2]
+  [--apply] [--json]
 ```
 
 `focus` projects only the selected artifact's governing chain and direct
@@ -138,10 +138,12 @@ authoritative. The deterministic direct human renderer uses `Outcome`, `Done`,
 `Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
 required`, `Next`, `Command or response`, and conditional `Alternatives` in
 that order. Exact-format consumers must use this renderer directly rather than
-ask a model to transcribe it. `focus` defaults to result schema 2; passing
-`--result-schema 1` prints `WEX-ADS-002` on standard error because that
-projection is not restitution. `transition`, `capture-verification`, and
-`prepare-release` still default to schema 1 during the compatibility window.
+ask a model to transcribe it. `focus`, `transition`, `capture-verification`,
+and `prepare-release` emit the same `se-harness-workflow-result-v2` result
+through one selector (`WO-ECP-005`); the former `--result-schema` option is
+gone and passing it is an argument error. Each rule in `WORKFLOW.json` carries
+only the `done` and `current_lifecycle_state` prose of its restitution; the
+next step and the command come from the bound procedure.
 
 When `check` is blocked, `Next` and `Command or response` carry the corrective
 form the contract declares for the first failing predicate: a command that

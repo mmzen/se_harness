@@ -17,6 +17,10 @@ CORRECTIVE_KINDS = {"command", "escalation", "response"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
 PARAMETER_TYPES = {"artifact_id", "actor", "path", "path_list", "status", "text"}
 CHECKPOINTS = {"start", "pre-action", "transition", "handoff"}
+#: The prose a rule contributes to a schema-2 result (WO-ECP-005): what the
+#: operation did and the lifecycle state it leaves. Every other restitution
+#: field is derived from the bound procedure step.
+RULE_RESTITUTION_FIELDS = frozenset({"done", "current_lifecycle_state"})
 EVALUATORS = {
     "artifact_status",
     "authoring_ready",
@@ -388,7 +392,7 @@ def validate_contracts(
     quality_gates: Mapping[str, Any],
 ) -> tuple[dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]]]:
     allowed_workflow = {
-        "schema", "normative_language", "handoff_fields", "restitution_fields", "agentic_operations", "lifecycles", "failure", "recommendations", "procedures"
+        "schema", "normative_language", "restitution_fields", "agentic_operations", "lifecycles", "failure", "recommendations", "procedures"
     }
     if set(workflow) != allowed_workflow:
         raise ContractError("workflow contract contains unknown or missing top-level fields")
@@ -489,6 +493,11 @@ def validate_contracts(
         unknown_procedures = set(_strings(alternatives, f"workflow rule {rule_id} alternatives")) - set(procedures)
         if unknown_procedures:
             raise ContractError(f"workflow rule {rule_id} references unknown alternative {sorted(unknown_procedures)[0]}")
+        restitution = rule.get("restitution")
+        if not isinstance(restitution, Mapping) or set(restitution) != RULE_RESTITUTION_FIELDS:
+            raise ContractError(f"workflow rule {rule_id} must declare restitution done and current_lifecycle_state")
+        for field in RULE_RESTITUTION_FIELDS:
+            _strings(restitution.get(field), f"workflow rule {rule_id} restitution {field}")
     return rules, procedures, gates
 
 

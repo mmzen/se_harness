@@ -73,6 +73,14 @@ workflow rule and bound step. Neither command holds a private mapping.
 `--result-schema 1` renders the legacy block preceded by `WEX-ADS-002: schema 1
 is not restitution`.
 
+*Retirement amendment of 2026-08-28.* Retired by `REQ-ECP-010` under
+`WO-ECP-005` (`SPEC-ECP-005` `ECP-KRN-002`): the `--result-schema` option is
+removed from every command and passing it, with either value, is an argument
+error; `legacy_to_schema2` and the schema-1 builder are deleted; `WEX-ADS-002`
+is never emitted. The rule text above is retained as history. `ADS-NXT-001`
+and `ADS-NXT-003` keep their force: one selector serves `focus`, `check`,
+`transition` and the preparation commands.
+
 **ADS-NXT-003:** For the same selected artifact and snapshot, and with no
 checkpoint-specific argument to `check`, the `Next` and `Command or response`
 values of `focus` and `check` are byte-identical.
