@@ -2,7 +2,7 @@
 id = "WO-AUT-003"
 type = "work_order"
 title = "Retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -23,6 +23,20 @@ implements = ["REQ-AUT-003"]
 specifications = ["SPEC-AUT-001"]
 architecture = ["ARCH-AUT-001", "ADR-AUT-001"]
 verification = ["VER-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T10:38:34Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'Approve and start', after choosing to retarget the dry-run pin rather than convert requirements. Authorizes only the stated scope: the final assertion of test_repository_dry_run_report_is_retained_and_matches_a_fresh_run in tests/test_artifact_authoring_policy.py, the packet index line, and work-order-keyed evidence. No requirement, retained report, script, policy, template or workflow. Completion, commit-bound verification and merge are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T10:38:36Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'Approve and start'. Execution is confined to the approved scope."
 +++
 
 # Work Order: Retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite
