@@ -20,6 +20,22 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 
 # Verification Contract: Independent evidence for the mandatory scope-aware pull-request gate and the widened restitution digest
 
+## Amendment of 2026-08-28 (`WO-ECP-003`, before start)
+
+The `REQ-ECP-006` demonstration is executed locally rather than as hosted
+pull requests: the managed template step's shell is run against two
+throwaway branches of this repository — one whose diff touches one
+out-of-scope path, one entirely in scope, neither declaring a
+`Harness-Restitution:` line — with the candidate evaluator installed outside
+the checkout and the pull-request event payload synthesised from the
+branch. The pass condition is unchanged (the scope step has no guard on a
+declared digest and no early exit on its absence; the out-of-scope branch
+fails with `QGP-G4I-PATHS` and the offending path in the log; the in-scope
+branch passes). The hosted form of the same demonstration is a verification
+condition of the first release that carries `WO-ECP-001` to `WO-ECP-003`:
+this repository's own pull requests run the root managed workflow, released
+0.8.0's, which cannot execute the step until the root advances.
+
 ## Independence
 
 Expected behaviour derives from `REQ-ECP-006`, `REQ-ECP-007`, and the
