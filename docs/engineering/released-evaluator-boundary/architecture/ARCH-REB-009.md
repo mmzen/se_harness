@@ -26,6 +26,14 @@ decided_by = "technical-owner"
 
 # Architecture: Typed release qualification boundary
 
+## Amendment of 2026-08-27
+
+Amended on 2026-08-27 under `WO-REB-029`, on the repository owner's direction. The `harnessctl qualify` namespace has four typed operations, not five: `released-root`, `complete-candidate`, `candidate-package` and `public-install`. `WO-REB-028` withdrew `predecessor-view` together with the predecessor-compatible view it qualified, and `ADR-REB-009` carries the same amendment.
+
+Three parts of this architecture lose their subject and are retained unchanged below as the record of what the boundary was while they held. The `Predecessor-view coordinator` component and its handler no longer exist. The shared predecessor-view service in the dependency diagram and in `Dependency direction` is not built by any production path, and no view constructor replaces it: `ARCH-REB-012` decided that nothing reconstructs a projection of this repository for any evaluator. The conformance check that enumerates options `for all five subcommands` reads four, and the prohibited pattern against copying the omission policy into the qualification layer is satisfied by the absence of the policy itself.
+
+`PV001` and `PV002` stay reserved by `SPEC-REB-013` so that no later check reuses them. Nothing else changes: the CLI router, the runtime and target identity guard, the released-root, complete-candidate, candidate-package and public-install handlers, the canonical result builder, the workflow conformance checks, the trust boundaries and the quality attributes are all unaffected, and this architecture keeps its own relations and its `adr_required` assessment. No frontmatter field is edited, because the amendment states the change and the frontmatter records the decision that was taken on 2026-08-24.
+
 ## Context and scope
 
 Today, release workflows reach directly for `doctor`, `validate`, repository scripts, package entry points, and interpreter paths. Those pieces can be correct individually while the combination is wrong. The caller effectively decides whether an evaluator is a root governor, predecessor, candidate self-checker, released verifier, or public install. That dependency direction caused the evaluator/target confusion recorded in issue #109.

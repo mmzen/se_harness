@@ -5,7 +5,7 @@ title = "Bridge one predecessor-evaluator release-readiness boundary"
 status = "approved"
 owners = ["requirements-steward", "repository-owner", "security-owner", "release-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-08-27"
 statement = "WHEN an approved product release first activates evaluator-evidence rules that the currently selected predecessor evaluator cannot emit, THE SYSTEM SHALL permit exactly one contract-bound bootstrap release record to retain canonical proof of that predecessor evaluator and SHALL validate and publish it without granting candidate code root-evaluator authority or weakening the ordinary schema-3 rule."
 verification_method = "automated-schema-provenance-publication-and-negative-boundary-test"
 
@@ -20,6 +20,12 @@ decided_by = "requirements-steward"
 +++
 
 # Requirement: Bridge one predecessor-evaluator release-readiness boundary
+
+## Retirement amendment of 2026-08-27
+
+Retired on 2026-08-27 by `REQ-REB-029` under `WO-REB-029`, on the repository owner's direction, which decided this requirement is superseded. The contract-bound bootstrap release record is withdrawn. No release contract carries bootstrap authority, no release record resolves one, and the consumer-installed validator no longer reads a `[bootstrap]` tuple, resolves a bootstrap contract for a release record, or enforces at most one approved bootstrap contract in a repository. The requirement was authored for one event, the 0.6.0 activation of evaluator-evidence rules that the then-selected 0.5.0 evaluator could not emit. That event is closed: `REL-SEH-011` and `RLS-SEH-012` record it, `REQ-REB-011` removed its cause in 0.6.0, and 0.7.0 and 0.7.1 were released with no bootstrap record at all. Everything below records what the release path did while this requirement was active and is retained unchanged as history; it is no longer an obligation. The four closed release contracts keep their `[bootstrap]` tables and the two closed release records keep their `preparation_schema` markers and their hash-bound digests, which still verify; the tuple is deliberately inert data that no rule reads, and its digests are recomputed by `tests/test_predecessor_bootstrap_retirement.py` rather than by a validator rule.
+
+The declared `superseded` status is not applied. `docs/engineering/WORKFLOW.json` admits no `approved` to `superseded` transition for a definition, and this artifact carries its own `draft` to `approved` event, which `WFL-005` requires to stay append-only. Setting the status therefore either contradicts that event (`E014`, measured on 2026-08-27) or deletes it. The retirement is recorded here instead, the instrument `WO-REB-028` already used for `REQ-REB-012`, `REQ-REB-015`, `SPEC-REB-003`, `SPEC-REB-005` and `SPEC-REB-007`. Whether the status is applied through a new transition or the definition family gains one is a separate owner decision; the retirement itself does not wait on it.
 
 ## Rationale
 

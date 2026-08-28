@@ -19,6 +19,14 @@ decided_by = "technical-owner"
 
 # ADR: One qualification namespace with five typed operations
 
+## Amendment of 2026-08-27
+
+Amended on 2026-08-27 under `WO-REB-029`, on the repository owner's direction. The namespace this ADR created now has four typed subcommands: `released-root`, `complete-candidate`, `candidate-package` and `public-install`. `predecessor-view` was withdrawn by `WO-REB-028` together with the predecessor-compatible view it qualified, whose requirements `REQ-REB-012` and `REQ-REB-015` are themselves retired by amendment.
+
+The decision recorded below is not rewritten and neither is the title. A decision record states what was decided on 2026-08-24 and why, including the options that were rejected; editing it would replace the record with its own consequence. The consequence is stated here instead: the choice of one namespace with typed operations and a shared result protocol stands, is unaffected by the count, and continues to be preferred over documentation-only guidance, a free-form role flag, unrelated top-level commands or workflow-only wrappers. The withdrawal removed an operation from the namespace; it did not reopen the decision.
+
+`ARCH-REB-009` carries the matching amendment. `SPEC-REB-014`, under `WO-REB-029`, completes the retirement in the copy of the managed validator that consumer repositories install; the root copy is untouched and adopts it only when the root evaluator next advances.
+
 ## Status
 
 Proposed.

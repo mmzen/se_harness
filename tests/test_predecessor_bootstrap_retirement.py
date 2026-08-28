@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import ast
+import difflib
 import hashlib
+import importlib.util
 import re
+import sys
 import unittest
 from pathlib import Path
 
@@ -87,14 +90,71 @@ RETAINED_EVIDENCE_BINDINGS = (
     ),
 )
 
-#: The two managed validator copies. `WO-REB-028` edits neither: the root copy
-#: belongs to released 0.6.0 and the template copy is candidate source for a
-#: later release. Their inert conditional bootstrap rules are the one place a
-#: retired schema name legitimately appears in executable code.
+#: The two managed validator copies. `WO-REB-028` edited neither. `WO-REB-029`
+#: edits the template copy, the one consumer repositories install, and no byte
+#: of the root copy: the root copy is the exact released evaluator's file and is
+#: hash-locked, so the retirement reaches this repository's own verdicts only
+#: when the root evaluator next advances. The root copy is therefore the one
+#: place a retired schema name still appears in executable code.
 MANAGED_VALIDATORS = (
     "scripts/validate_engineering_artifacts.py",
     "templates/repository/standard/scripts/validate_engineering_artifacts.py",
 )
+
+#: The root copy alone. `WO-REB-029` edits the template copy, so the root copy
+#: is the only place a retired schema name still appears in executable code.
+ROOT_VALIDATOR = "scripts/validate_engineering_artifacts.py"
+CANDIDATE_VALIDATOR_PATH = "templates/repository/standard/scripts/validate_engineering_artifacts.py"
+
+#: Every name `WO-REB-029` deleted from the candidate copy, named individually
+#: as `VER-REB-013` case 1 requires: one regular expression over the whole file
+#: would also pass while a renamed survivor stayed behind. Each name must be
+#: absent from the candidate copy and present in the root copy, which pins the
+#: divergence from both sides at once.
+DELETED_VALIDATOR_NAMES = (
+    "RELEASE_BOOTSTRAP_SCHEMA",
+    "PREDECESSOR_PREPARATION_SCHEMA",
+    "PREDECESSOR_VIEW_EVIDENCE_SCHEMA",
+    "PREDECESSOR_VIEW_EVIDENCE_MAX_BYTES",
+    "RELEASE_BOOTSTRAP_KEYS",
+    "_validated_release_bootstrap",
+    "_bootstrap_for_release_record",
+    "_validate_predecessor_view_evidence",
+    "_canonical_utf8_text_lf",
+    "bootstrap_contract",
+    "approved_bootstrap_contracts",
+    "rejected_predecessor_history",
+    "preparation_schema",
+    "preparation_view_evidence",
+    "se-harness-release-bootstrap-v1",
+    "se-harness-predecessor-bootstrap-v1",
+)
+
+#: The declared candidate exception, as `VER-REB-013` case 8 requires: the exact
+#: difference between the two copies, block by block, as the first line of the
+#: block in the root copy, that line's 1-based number in the root copy, and the
+#: number of root lines the block spans. Nothing is added or changed, so the
+#: candidate copy is the root copy with exactly these ten blocks removed.
+CANDIDATE_VALIDATOR_DELETIONS = (
+    (58, 15, 'RELEASE_BOOTSTRAP_SCHEMA = "se-harness-release-bootstrap-v1"'),
+    (791, 133, "def _validated_release_bootstrap("),
+    (932, 1, "    bootstrap_contract: dict[str, Any] | None = None,"),
+    (1062, 39, "    if bootstrap_contract is not None:"),
+    (1133, 325, "def _validate_predecessor_view_evidence("),
+    (1940, 18, "    approved_bootstrap_contracts = ["),
+    (1990, 3, "            _validated_release_bootstrap(artifact, errors, report_root)"),
+    (2115, 23, "            bootstrap_contract = _bootstrap_for_release_record("),
+    (2180, 27, '            if artifact.status == "ready" and bootstrap_contract is not None:'),
+    (2237, 1, "                bootstrap_contract=bootstrap_contract,"),
+)
+
+#: 585 deleted lines, the figure `WO-REB-029` records as its measured deletion.
+CANDIDATE_VALIDATOR_DELETED_LINES = 585
+
+#: The bootstrap-era markers under the closed 0.6.0 domain, pinned as counts.
+#: The retirement removes their readers, not the data: a count that moved would
+#: mean retained history had been rewritten.
+RETAINED_MARKER_COUNTS = {"[bootstrap]": 4, "preparation_schema": 2}
 
 FIELD = "([A-Za-z0-9_]+) = \"([^\"]*)\""
 
@@ -122,6 +182,25 @@ def _imported_names(source: Path) -> set[str]:
             names.add(base)
             names.update(f"{base}.{alias.name}".strip(".") for alias in node.names)
     return names
+
+
+def _load_candidate_validator():
+    """Load the copy of the managed validator consumer repositories install.
+
+    Loaded by path, never by import name: `WO-REB-029` edits this copy only, so
+    a test that silently picked up the root copy would report the retirement as
+    incomplete or as complete for the wrong file.
+    """
+    path = REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH
+    specification = importlib.util.spec_from_file_location(
+        "_reb029_candidate_validator", path
+    )
+    if specification is None or specification.loader is None:
+        raise RuntimeError(f"cannot load the candidate validator: {path}")
+    module = importlib.util.module_from_spec(specification)
+    sys.modules[specification.name] = module
+    specification.loader.exec_module(module)
+    return module
 
 
 class DeletedSurfaceTests(unittest.TestCase):
@@ -210,7 +289,9 @@ class RetiredNameReservationTests(unittest.TestCase):
         return holders
 
     def test_a_retired_schema_name_appears_only_in_retained_history(self) -> None:
-        permitted = set(MANAGED_VALIDATORS)
+        # `WO-REB-029` removed the template copy from this list: it is now the
+        # root copy alone, and the list shrinks again when that copy advances.
+        permitted = {ROOT_VALIDATOR}
         for schema in RETIRED_SCHEMAS:
             with self.subTest(schema=schema):
                 self.assertEqual(set(), self._holders(schema) - permitted)
@@ -275,11 +356,12 @@ class RetainedHistoryTests(unittest.TestCase):
         # `ARCH-REB-012`: no projection, view, sparse checkout or omitting clone
         # of this repository is constructed for any evaluator. The migration
         # rehearsal is the one retained handover mechanism and builds none.
+        # `WO-REB-029`: the managed validator copies were skipped here while one
+        # of them still described a predecessor view. Neither does now, so the
+        # scan covers every source in these trees with no exception.
         for tree in ("se_harness", "repository_tools", "scripts", ".github/scripts"):
             for source in _python_sources(tree):
                 relative = source.relative_to(REPOSITORY_ROOT).as_posix()
-                if relative in MANAGED_VALIDATORS:
-                    continue
                 text = source.read_text(encoding="utf-8")
                 for absent in ("sparse-checkout", "--sparse", "predecessor view"):
                     with self.subTest(source=relative, absent=absent):
@@ -309,6 +391,142 @@ class ExplorerPayloadTests(unittest.TestCase):
                     "harness-dashboard-bootstrap-v2",
                     (REPOSITORY_ROOT / relative).read_text(encoding="utf-8"),
                 )
+
+
+class ConsumerValidatorRetirementTests(unittest.TestCase):
+    """`WO-REB-029`: the validator consumer repositories install carries none of
+    the retired rules, and the root copy still carries all of them."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.root_text = (REPOSITORY_ROOT / ROOT_VALIDATOR).read_text(encoding="utf-8")
+        cls.candidate_text = (REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH).read_text(encoding="utf-8")
+        cls.candidate = _load_candidate_validator()
+
+    def test_every_deleted_name_is_absent_from_the_candidate_copy(self) -> None:
+        self.assertEqual(16, len(DELETED_VALIDATOR_NAMES))
+        for name in DELETED_VALIDATOR_NAMES:
+            with self.subTest(name=name):
+                self.assertNotIn(name, self.candidate_text)
+                # Present in the root copy: a name that was never there would
+                # make the absence case pass without proving anything.
+                self.assertIn(name, self.root_text)
+
+    def test_the_candidate_module_no_longer_defines_the_deleted_attributes(self) -> None:
+        # Absence in the text is not absence in the loaded module: a survivor
+        # reintroduced through an import would not show up in a static read.
+        for name in DELETED_VALIDATOR_NAMES:
+            if not name.isidentifier():
+                continue
+            with self.subTest(attribute=name):
+                self.assertFalse(hasattr(self.candidate, name))
+        for retained in ("validate_repository", "validate_revision_consistency", "WORKFLOW_LIFECYCLES"):
+            with self.subTest(retained=retained):
+                self.assertTrue(hasattr(self.candidate, retained))
+
+    def test_the_candidate_copy_differs_from_the_root_copy_only_by_the_declared_deletions(self) -> None:
+        root_lines = self.root_text.splitlines()
+        candidate_lines = self.candidate_text.splitlines()
+        self.assertEqual(
+            CANDIDATE_VALIDATOR_DELETED_LINES, len(root_lines) - len(candidate_lines)
+        )
+        matcher = difflib.SequenceMatcher(a=root_lines, b=candidate_lines, autojunk=False)
+        observed = []
+        for tag, start, stop, _candidate_start, _candidate_stop in matcher.get_opcodes():
+            if tag == "equal":
+                continue
+            # Nothing is added and nothing is rewritten: the candidate copy is a
+            # deletion of the root copy, which is what makes the divergence
+            # reviewable line for line.
+            self.assertEqual("delete", tag, f"unexpected {tag} at root line {start + 1}")
+            observed.append((start + 1, stop - start, root_lines[start:stop]))
+        self.assertEqual(len(CANDIDATE_VALIDATOR_DELETIONS), len(observed))
+        for (line, count, marker), (observed_line, observed_count, block) in zip(
+            CANDIDATE_VALIDATOR_DELETIONS, observed
+        ):
+            with self.subTest(root_line=line, marker=marker[:48]):
+                self.assertEqual((line, count), (observed_line, observed_count))
+                self.assertIn(marker, block)
+        self.assertEqual(
+            CANDIDATE_VALIDATOR_DELETED_LINES, sum(count for _, count, _ in CANDIDATE_VALIDATOR_DELETIONS)
+        )
+
+    def test_the_closed_release_artifacts_are_inert_data(self) -> None:
+        # `VER-REB-013` case 4: the markers stay, and no rule in the validator
+        # that consumer repositories install reads any of them.
+        domain = REPOSITORY_ROOT / "docs/engineering/release-0-6-0"
+        for marker, expected in RETAINED_MARKER_COUNTS.items():
+            observed = sum(
+                source.read_text(encoding="utf-8").count(marker)
+                for source in sorted(domain.rglob("*.md"))
+            )
+            with self.subTest(marker=marker):
+                self.assertEqual(expected, observed)
+                self.assertNotIn(marker.strip("[]"), self.candidate_text)
+        for relative in RETAINED_HISTORY:
+            with self.subTest(artifact=relative):
+                self.assertTrue(str(relative).startswith("docs/engineering/release-0-6-0/"))
+
+    def test_a_rejected_record_still_cannot_claim_a_version_against_a_successor(self) -> None:
+        # `VER-REB-013` case 6, and `REQ-REB-011` preserved. The rule now stands
+        # on the lifecycle matrix alone: `rejected` reserves no version, so a
+        # rejected record is inert whether or not it carries the retired
+        # `preparation_schema` marker, and two active records still collide.
+        lifecycles = self.candidate.WORKFLOW_LIFECYCLES["release_record"]
+        self.assertFalse(lifecycles["rejected"].reserves_version)
+        for active in ("ready", "released"):
+            with self.subTest(status=active):
+                self.assertTrue(lifecycles[active].reserves_version)
+
+        def record(identifier: str, status: str, **extra: object):
+            metadata = {
+                "id": identifier,
+                "type": "release_record",
+                "status": status,
+                "version": "9.9.9",
+            }
+            metadata.update(extra)
+            return self.candidate.Artifact(
+                path=REPOSITORY_ROOT / f"docs/engineering/releases/{identifier}.md",
+                metadata=metadata,
+                body="",
+            )
+
+        def collisions(*artifacts) -> list[str]:
+            return [
+                diagnostic.message
+                for diagnostic in self.candidate.validate_revision_consistency(
+                    list(artifacts), REPOSITORY_ROOT
+                )
+                if "duplicate release record version" in diagnostic.message
+            ]
+
+        rejected = record("RLS-TST-101", "rejected", rejected_at="2026-08-27T00:00:00Z", rejected_by="release-owner")
+        marked = record(
+            "RLS-TST-102",
+            "rejected",
+            rejected_at="2026-08-27T00:00:00Z",
+            rejected_by="release-owner",
+            preparation_schema="se-harness-predecessor-bootstrap-v1",
+        )
+        ready = record("RLS-TST-103", "ready")
+        released = record("RLS-TST-104", "released")
+
+        self.assertEqual([], collisions(rejected, ready))
+        self.assertEqual([], collisions(rejected, released))
+        # The retired marker changes nothing: the condition that read it is gone,
+        # and no diagnostic mentions it.
+        self.assertEqual([], collisions(marked, released))
+        for diagnostic in self.candidate.validate_revision_consistency([marked, released], REPOSITORY_ROOT):
+            with self.subTest(code=diagnostic.code):
+                self.assertNotIn("bootstrap", diagnostic.message)
+                self.assertNotIn("predecessor", diagnostic.message)
+        # Two records that do reserve the version still collide, so the removal
+        # narrowed nothing beyond the named rules.
+        both = collisions(ready, released)
+        self.assertEqual(2, len(both))
+        for message in both:
+            self.assertIn("RLS-TST-103, RLS-TST-104", message)
 
 
 if __name__ == "__main__":
