@@ -358,5 +358,18 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             state = fresh["files"][path]["state"]
             expected_counts[state] += 1
         self.assertEqual(expected_counts, fresh["counts"])
-        # the repository itself is untouched: every requirement still carries the string form
-        self.assertEqual([], [f for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md") if re.search(r"^verification_method = \[", f.read_text(encoding="utf-8"), re.MULTILINE)])
+        # WO-AUT-003: the migration was built and not applied, so every requirement the
+        # retained dry run observed still carries its original string form. Requirements
+        # drafted after the report follow REQ-AUT-003 and carry the array form; they are
+        # exactly the ones the retained report does not list.
+        array_form = re.compile(r"^verification_method = \[", re.MULTILINE)
+        for path in sorted(retained_paths):
+            with self.subTest(path=path):
+                self.assertIsNone(array_form.search((REPOSITORY_ROOT / path).read_text(encoding="utf-8")))
+        array_requirements = sorted(
+            f.relative_to(REPOSITORY_ROOT).as_posix()
+            for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md")
+            if array_form.search(f.read_text(encoding="utf-8"))
+        )
+        self.assertEqual([], [path for path in array_requirements if path in retained_paths])
+        self.assertEqual(set(array_requirements), {path for path in added if fresh["files"][path]["state"] == "skipped"})
