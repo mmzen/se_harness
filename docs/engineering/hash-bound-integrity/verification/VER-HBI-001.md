@@ -5,10 +5,10 @@ title = "Hash-bound class declaration, checkout-byte and mode-consistency assura
 status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-08-24"
-updated = "2026-08-24"
+updated = "2026-08-28"
 
 [relations]
-verifies = ["REQ-HBI-001", "REQ-HBI-002"]
+verifies = ["REQ-HBI-001", "REQ-HBI-002", "REQ-HBI-003", "REQ-HBI-004"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -18,6 +18,30 @@ decided_by = "quality-owner"
 +++
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance
+
+## Third amendment, 2026-08-28 — proposed
+
+Proposed under `WO-HBI-005` for repository issue #207. Not yet accepted by the
+accountable quality owner; the contract below reads as approved until then.
+
+Acceptance scenario 7 states that a consumer installation "inherits the
+`template` classes and none of this repository's `repository`-region rules".
+No case in the matrix derives that expectation from the shipped surface, and
+the one test that looked at the fragment
+(`test_candidate_fragment_promotion_of_repository_patterns_is_pinned`) pinned
+the divergence as known rather than refusing it. Separately, no scenario runs
+`doctor` in the state every adopter meets first — installed, committed once,
+no `VREC` — so the "untracked declared path" row's fail-closed obligation was
+never measured against `evaluator-evidence` in a repository that cannot yet
+satisfy it.
+
+The amendment adds four matrix rows and three scenarios, and restates one
+row. The `REQ-HBI-001` fail-closed row keeps "untracked declared path" for a
+`repository`-region class and gains its complement for a `template`-region
+class. Every other pass condition is unchanged; the amendment adds obligation
+on the shipped surface and relaxes only the one condition `REQ-HBI-003`
+withdraws, and it does so by naming the substitute obligation
+(`hash-bound-attribute-effective` on rule presence) in the same row.
 
 ## Second amendment, 2026-08-24 — accepted
 
@@ -109,7 +133,11 @@ implementation prints.
 | `REQ-HBI-001` | Unversioned-source negative | Requirement satisfied only via `.git/info/attributes`, global attributes or local `core.autocrlf=false` | Class is still reported ineffective; configuration never satisfies the requirement |
 | `REQ-HBI-001` | Region placement | `template` class present only in owner content, and `repository` class present only in the managed block | Each misplacement is reported ineffective |
 | `REQ-HBI-001` | Template parity | Candidate `templates/repository/standard/gitattributes.fragment` versus declared `template` classes | Byte-identical for every `template`-region class; a divergence fails a static check |
-| `REQ-HBI-001` | Fail-closed matrix | Unreadable `.gitattributes`, unavailable Git, attribute resolution failure, untracked declared path | Every case is a failing named check with the exact reason; none passes and none is advisory |
+| `REQ-HBI-001` | Fail-closed matrix | Unreadable `.gitattributes`, unavailable Git, attribute resolution failure, untracked declared path of a `repository`-region class | Every case is a failing named check with the exact reason; none passes and none is advisory |
+| `REQ-HBI-003` | Vacuous template class | Git working tree in which a `template`-region class covers no tracked path, with its rule present in the managed region | `hash-bound-class-declared` passes with a detail naming the class and `0 tracked paths`; `doctor` exit status is 0 |
+| `REQ-HBI-003` | Vacuous class, rule absent | The same tree with the class's rule removed from the managed region | `hash-bound-attribute-effective` fails naming the class and the missing region; coverage of zero paths does not hide the absence |
+| `REQ-HBI-004` | Shipped-surface portability | Every pattern in `se_harness/hash_bound_classes.json` and every rule in `templates/repository/standard/gitattributes.fragment`, enumerated statically | No pattern or rule begins with `se_harness/`, `tests/` or `repository_tools/`; no `repository`-region pattern appears in the fragment; a violation fails naming the pattern and the declaring file |
+| `REQ-HBI-004` | Fresh consumer | `harnessctl init` into a temporary directory, `git init`, `add -A`, `commit`, then `doctor`, on an LF checkout and a `core.autocrlf=true` checkout | Exit status 0; all three `hash-bound-*` checks present and passing; on Linux and Windows |
 | `REQ-HBI-001` | Byte-rule completeness beyond declared classes | The byte-exact inventory in `tests/test_hash_bound_integrity.py`, derived from the tracked set as named files plus every tracked path under a declared tree, resolved through `se_harness.hash_bound` and cross-read with `git ls-files --eol` | Every named file is tracked, every declared tree holds a tracked file, the inventory holds every tracked path under each declared tree, every inventory path resolves `text` set and `eol=lf`, and none is converted in the working tree; a missing rule fails naming the path and the conversion observed |
 | `REQ-HBI-001` | Extension independence of a byte-exact tree | A fresh `core.autocrlf=true` clone of a probe repository carrying this checkout's own `.gitattributes`, holding a file with an unseen extension inside a declared tree and a file outside it | The unseen extension resolves `text` set and `eol=lf` and its checked-out bytes contain no CR, the path outside the tree resolves unspecified, and a per-extension rule set fails this case |
 | `REQ-HBI-002` | Mode-divergence detection | One declared class hashed under both modes across callers | Test fails naming the class and both observed modes |
@@ -147,6 +175,18 @@ implementation prints.
    extension-independence case; restoring the tree rule passes. A file with an
    extension no rule has ever named, added anywhere inside a declared tree, needs no
    new rule.
+
+10. A repository created by `harnessctl init` and committed once, holding no
+   `VREC`, passes `doctor` with exit status 0 on Linux and on Windows, and the
+   `hash-bound-class-declared` detail names `evaluator-evidence` with
+   `0 tracked paths`.
+11. The same repository with the `docs/engineering/**/evidence/*.json` rule
+   removed from its managed block fails `hash-bound-attribute-effective`;
+   restoring the rule passes.
+12. A `repository`-region class whose pattern matches no tracked path still
+   fails `hash-bound-class-declared` naming the pattern, and a
+   `repository`-region class declared only in the template region still fails
+   `hash-bound-attribute-effective` when its pattern does match tracked paths.
 
 ## Property and invariant tests
 

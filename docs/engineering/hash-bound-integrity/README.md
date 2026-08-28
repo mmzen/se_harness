@@ -39,6 +39,13 @@ qualifies the candidate inside a `git worktree` that inherits the checkout's
 Their byte rules are declared in the owner-controlled region and guarded by a test
 rather than by a `doctor` check, because no class binds them.
 
+From `WO-HBI-005` (proposed, repository issue #207): the shipped class table and
+the canonical fragment carry only classes an installed consumer can satisfy from
+its own tracked content, and a `template`-region class that covers no tracked
+path yet is vacuously declared rather than failed. Repository-only byte rules —
+this repository's migration-protocol pin — live in the owner-controlled region
+alone.
+
 Out of scope: uncommitted release-bundle text such as `SHA256SUMS` and the source
 manifest named by `RLS-SEH-012`; generated content under `target/`; binary
 archives; and the canonical digests of managed files, which are immune by

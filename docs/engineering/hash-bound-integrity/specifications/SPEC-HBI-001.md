@@ -5,10 +5,10 @@ title = "Declared hash-bound text classes and fail-closed completeness assessmen
 status = "approved"
 owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
-updated = "2026-08-24"
+updated = "2026-08-28"
 
 [relations]
-specifies = ["REQ-HBI-001", "REQ-HBI-002"]
+specifies = ["REQ-HBI-001", "REQ-HBI-002", "REQ-HBI-003", "REQ-HBI-004"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -18,6 +18,50 @@ decided_by = "technical-owner"
 +++
 
 # Specification: Declared hash-bound text classes and fail-closed completeness assessment
+
+## First amendment, 2026-08-28 — proposed
+
+Proposed under `WO-HBI-005` for repository issue #207. Not yet accepted; the
+rules below read as approved until the accountable technical owner accepts
+this section, and `WO-HBI-005` must not be approved before that acceptance.
+
+Rule 2 declared `governance-migration-protocol`, a `repository`-region class
+whose three patterns name paths that exist only in this repository, and the
+canonical fragment carried the same three rules into every consumer's managed
+region. Rule 9 made "untracked declared path" fail closed for every class,
+including `evaluator-evidence`, which a repository cannot satisfy before its
+first verification record. Together they make `doctor` fail in every fresh
+consumer repository after its first commit, contradicting `VER-HBI-001`
+acceptance scenario 7.
+
+The amendment changes three rules and adds none:
+
+- **Rule 2** declares exactly two classes: `evaluator-evidence` and
+  `standard-lock`, as before. `governance-migration-protocol` is withdrawn from
+  the shipped table. The `implementation_sha256` binding it carried moves to
+  `unbound_digest_fields` with the reason that it is bound in harness data and
+  pinned by this repository's owner-controlled `.gitattributes` content, so an
+  unclaimed digest field is still refused. No recorded digest changes.
+- **Rule 9** keeps every listed fail-closed condition, and qualifies one:
+  "untracked declared path" fails closed for a `repository`-region class, whose
+  owner declared it for paths known to exist. A `template`-region class whose
+  patterns cover no tracked path is *vacuously declared*:
+  `hash-bound-class-declared` passes for it with a detail naming the class and
+  `0 tracked paths`.
+  Nothing becomes advisory; the condition an owner can break — the rule's
+  absence from the managed region — still fails `hash-bound-attribute-effective`
+  under rule 10, which is assessed independently of coverage.
+- **Rule 10** adds one sentence: the canonical template fragment carries only
+  `template`-region classes. A `repository`-region pattern present in the
+  fragment is a declaration defect, detectable by static test, because it would
+  install into every consumer a rule the shipped table says belongs to owner
+  content.
+
+The amendment is backward-compatible for every existing passing repository:
+a class that covered paths before still covers them, every attribute and mode
+obligation is unchanged, and this repository's own migration-protocol byte pin
+survives in its owner region. The only observable change is that a fresh
+consumer repository passes.
 
 ## Scope
 
