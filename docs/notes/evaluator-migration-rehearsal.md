@@ -64,7 +64,7 @@ A pass is qualification evidence. Accountable owners still decide whether to app
 
 ## Relationship to release qualification roles
 
-The migration rehearsal proves the whole simulated predecessor-to-successor sequence in disposable state. It does not replace the narrower operational claims made by `harnessctl qualify`. A real workflow records complete successor validation as `complete-candidate`, a release-bound predecessor compatibility check as `predecessor-view`, and later root ownership as `released-root`. The rehearsal result and those typed results remain separate evidence because they answer different questions.
+The migration rehearsal proves the whole simulated predecessor-to-successor sequence in disposable state. It does not replace the narrower operational claims made by `harnessctl qualify`. A real workflow records complete successor validation as `complete-candidate` and later root ownership as `released-root`; the former `predecessor-view` operation was retired under `WO-REB-028`, and this rehearsal is now the one mechanism that exercises a predecessor evaluator against a successor. The rehearsal result and those typed results remain separate evidence because they answer different questions.
 
 ## Failure behavior
 

@@ -17,17 +17,18 @@ A validator can be correct and still be used in the wrong place. During release 
 - whether the result is independent; and
 - which result schema is retained.
 
-## The five operations
+## The four operations
 
 | Operation | Evaluator | Target | Meaning of a pass | Independence |
 | --- | --- | --- | --- | --- |
 | `released-root` | exact released evaluator named by the root lock | installed repository root | managed files and complete graph agree with their owning evaluator | `released-evaluator` |
-| `predecessor-view` | exact external predecessor selected by governed release evidence | deterministic predecessor-compatible view | the immutable predecessor accepts only the view it is able and authorized to parse | `external-predecessor` |
 | `complete-candidate` | candidate code | complete candidate checkout at one commit | the candidate accepts its own full current graph | `candidate-controlled` |
 | `candidate-package` | exact released verifier | exact candidate wheel bound to a commit | the released verifier's fixed black-box contract accepts the installed candidate | `released-verifier` |
 | `public-install` | exact package installed from the public wheel | released record, acquired wheel, installed payload, and CLI | the public bytes and installed behavior agree with the released distribution | `public-install-observation` |
 
-These claims are deliberately separate. A successful `complete-candidate` result cannot be renamed into independent package evidence. A successful public installation cannot prove predecessor compatibility or root ownership.
+These claims are deliberately separate. A successful `complete-candidate` result cannot be renamed into independent package evidence. A successful public installation cannot prove root ownership.
+
+A fifth operation, `predecessor-view`, once qualified a deterministic predecessor-compatible view against an exact external predecessor evaluator. It existed only for the 0.5.0→0.6.0 handover and was retired under `WO-REB-028` (`ADR-REB-012`, amending `ADR-REB-009`); the retained 0.6.0 results remain valid history. Predecessor-to-successor agreement is now shown by `harnessctl rehearse-migration`, not by a `qualify` operation.
 
 ## Typical workflow order
 
@@ -37,7 +38,6 @@ candidate checkout
   -> build candidate wheel
   -> candidate-package
   -> accountable verification and release decisions
-  -> predecessor-view during release/publication preparation where required
   -> publish exact released bytes
   -> public-install
   -> later, separately governed released-root adoption
