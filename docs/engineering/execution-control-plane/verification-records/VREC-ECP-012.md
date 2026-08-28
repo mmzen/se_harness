@@ -2,7 +2,7 @@
 id = "VREC-ECP-012"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-001"
-status = "ready"
+status = "verified"
 owners = ["Mathieu Meadele"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-001/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-012-evaluator.json"
 evaluator_evidence_sha256 = "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
 
+verified_at = "2026-08-28T20:56:53Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-001"]
 conforms_to = ["VER-ECP-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-28T20:56:53Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-28, 'I verify VREC-ECP-012'. Re-measured immediately before this transition: bound commit b0cb0f9 is an ancestor of the branch tip with a clean worktree; WO-ECP-001 is implemented; the evaluator packet matches its recorded digest. The retained evidence shows harnessctl next and check --from-git shipped as SPEC-ECP-001 specifies with ECP-CHG-007 by dated amendment, the failed-operation retry naming next, the corrective naming --from-git, tests for every VER-ECP-001 scenario of REQ-ECP-001 and REQ-ECP-002 on both platforms, 0.8.0 validate 0 errors and doctor 0 FAIL, suite 1050 with only the known workstation file-mode failure, and all thirteen hosted lanes passing at the implementation commit. VER-ECP-001's conditions for REQ-ECP-001 and REQ-ECP-002 are met. This verifies WO-ECP-001 only; it releases and publishes nothing."
 +++
 
 # Verification Record Candidate
