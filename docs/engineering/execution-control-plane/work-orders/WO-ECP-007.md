@@ -17,9 +17,6 @@ paths = [
   "se_harness/hash_bound_classes.json",
   "se_harness/hash_bound.py",
   "templates/repository/standard/gitattributes.fragment",
-  "se_harness/governance_migration.py",
-  "se_harness/governance_migration_contract.py",
-  "se_harness/governance_migration_contract.json",
   "se_harness/recovery_rehearsal.py",
   "se_harness/candidate_acceptance.py",
   "se_harness/release_qualification.py",
@@ -84,9 +81,10 @@ execution review, section 5, weakness 5).
   tracked path as a warning or as `repository`-region only, per
   `ECP-PRD-*`; this repository's own LF pins moved into its `.gitattributes`
   outside the managed block.
-- Removal of the migration stage machine, its contract and JSON, the
-  recovery rehearsal, `validate_governor_transition.py`, the predecessor
-  scripts, the `accept-candidate` alias, and lock schema-1 write paths;
+- Removal of the recovery rehearsal, `validate_governor_transition.py`, the
+  `accept-candidate` alias, and lock schema-1 write paths (the migration
+  stage machine, its contract and JSON, and the predecessor scripts are
+  `WO-ECP-010`'s and `WO-REB-028`'s respectively, narrowed on 2026-08-28);
   `qualify` reduced to the consumer-usable operations with the two
   self-checks moved under `repository_tools/`; `.github/workflows/` and
   `scripts/check_portable_release_surface.py` updated for the removed

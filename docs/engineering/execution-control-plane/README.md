@@ -65,6 +65,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-007`: evict the bootstrap bridge and this repository's identifiers from the product.
 - `WO-ECP-008`: retire stubbed skills, trim the manifest, scope the handoff snapshot.
 - `WO-ECP-009`: one precondition engine: transition evaluates the contract's gates (split from `WO-ECP-005` on 2026-08-28).
+- `WO-ECP-010`: replace the governance-migration rehearsal with a real upgrade rehearsal (split from `WO-ECP-007` on 2026-08-28 for issue #210).
 
 ## Work-order ordering
 
@@ -77,6 +78,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-009` after `WO-ECP-005`, and before `WO-ECP-006`.
 - `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-009`.
 - `WO-ECP-007` independent.
+- `WO-ECP-010` independent; `WO-HBI-005` (merged) precedes it.
 - `WO-ECP-008` after `WO-ECP-001`.
 
 Every artifact in this domain is `draft`. This packet authorizes no
