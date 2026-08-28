@@ -2,7 +2,7 @@
 id = "REL-SEH-020"
 type = "release_contract"
 title = "Release se-harness 0.9.0: the agent's first call, Git-derived scope, harness-authored evidence and the mandatory gate"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -13,6 +13,13 @@ gates = ["WO-ECP-001", "WO-ECP-002", "WO-ECP-003", "WO-ECP-011", "WO-HUP-008", "
 [release_unit]
 previous_release_tag = "v0.8.0"
 untraced_exemptions = ["26286271eda1228ebabb69621259fd9c6c5908e2", "6573bd892d1887a0e0ba62e2e53d5e80d8bf82d5", "f62256f2117f628c7ed310e8250db826503c53c5", "b46008539a859825d7401a49ca00906a5a90030b", "eae9332301855171b721ef50f696ecd8d0c199f0", "233bc9256044156fda7646556aaf163ff033a7a6", "0961176362e2d5d628ab505f2cc426356e21de2b", "e75fac87fd224d4e389352d03852cce09b46c039", "effbcbc2a0cc9d5b47a6bea6edd214a7c004d000"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T22:09:05Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-28, 'Approve REL-SEH-020 and WO-RLS-015, start', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this transition over main effbcbc plus this packet: the six existing members WO-HUP-008, WO-ECP-011, WO-REB-030, WO-ECP-001, WO-ECP-002 and WO-ECP-003 are implemented and verified, no other work order reached implemented since the contract was drafted, and none is named by a released record. Readings under the governing exact public 0.8.0 root: validate PASS at 0 errors, doctor 0 FAIL, every hosted lane green at effbcbc. The commit census reports nine untraced merges, exempted by name for the recorded reason. This approval authorizes WO-RLS-015 to be approved and started as separate acts and nothing else."
 +++
 
 # Release contract: se-harness 0.9.0
