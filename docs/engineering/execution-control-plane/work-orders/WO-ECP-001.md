@@ -2,7 +2,7 @@
 id = "WO-ECP-001"
 type = "work_order"
 title = "Ship `harnessctl next` and Git-derived change sets"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
@@ -49,6 +49,13 @@ to = "in_progress"
 decided_at = "2026-08-28T20:35:05Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit d0de313 carrying unmoved main 233bc92, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T20:53:01Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-ECP-001 implemented', on the handoff check reading Completed over the implementation commit, formal snapshot 9124cd6b08c950e1f4249ec896898e879244d4d89e3f76690e2e9d8304705db6, change set asserted complete over 12 paths plus the work order's own file, after two owner-decided scope amendments (SPEC-ECP-001 for ECP-CHG-007; se_harness/workflow_result.py for the Context renderer). harnessctl next and check --from-git are shipped as specified; the failed-operation retry names next. Readings under the governing exact public 0.8.0 root: validate 0 errors, doctor 0 FAIL. Candidate: the two workflow modules 204 tests OK, full suite 1050 with the single known workstation file-mode failure that passes hosted, and the candidate's own check --from-git main reading completed over 13 Git-derived paths. All 13 pull-request lanes pass on #249 at 115a842 including both platform legs. Deviations recorded in the evidence: readings under 0.8.0 rather than the 0.7.1 the packet text names; the root managed WORKFLOW.json stays 0.8.0's while the template moves. This authorizes no further act."
 +++
 
 # Work Order: Ship `harnessctl next` and Git-derived change sets
