@@ -170,7 +170,9 @@ class PredecessorDerivationTests(unittest.TestCase):
         self.assertEqual(expected_wheel, facts.wheel)
         self.assertEqual(expected_wheel_sha256, facts.wheel_sha256)
         self.assertEqual(lock["payload_sha256"], facts.payload_sha256)
-        self.assertEqual(LEGACY_ACCEPTANCE_CONTRACT_SHA256[facts.version], facts.acceptance_contract_sha256)
+        # WO-HUP-008: a root that carries the qualify namespace (0.8.0 and later) has no
+        # legacy accept-candidate contract; the fact is then None and the typed branch runs.
+        self.assertEqual(LEGACY_ACCEPTANCE_CONTRACT_SHA256.get(facts.version), facts.acceptance_contract_sha256)
         lines = facts.github_output_lines().splitlines()
         self.assertIn(f"wheel_sha256={facts.wheel_sha256}", lines)
         # WO-ECP-010: no scenario fact exists any more; a version bump needs none.
@@ -219,7 +221,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                 self.assertIsNone(re.search(r"[0-9a-f]{64}", text.replace("actions/", "")), "a digest literal remains")
                 # version literals: the pinned build tools are not evaluator facts
                 versions = {m.group(0) for m in re.finditer(r"\b\d+\.\d+\.\d+(?:\.post\d+)?\b", text)}
-                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1"}}, versions)
+                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1", "0.8.0"}}, versions)
 
     def test_workflow_derives_once_and_consumers_take_the_outputs(self) -> None:
         text = (WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8")

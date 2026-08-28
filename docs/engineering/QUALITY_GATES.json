@@ -1,5 +1,5 @@
 {
-  "schema": "se-harness-quality-gates-v1",
+  "schema": "se-harness-quality-gates-v2",
   "aggregation": ["fail", "not_assessable", "pass"],
   "gates": [
     {
@@ -47,8 +47,8 @@
         {"id": "QGP-G4I-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
         {"id": "QGP-G4I-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
         {"id": "QGP-G4I-SCOPE", "evaluator": "execution_scope_declared", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}:[execution_scope]"}]},
-        {"id": "QGP-G4I-COMPLETE", "evaluator": "change_set_complete", "required_evidence": [{"kind": "result", "reference": "declared-change-set:{artifact_id}"}]},
-        {"id": "QGP-G4I-PATHS", "evaluator": "changed_paths_within_scope", "required_evidence": [{"kind": "path", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-COMPLETE", "checkpoints": ["pre-action", "handoff"], "evaluator": "change_set_complete", "required_evidence": [{"kind": "result", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-PATHS", "checkpoints": ["pre-action", "handoff"], "evaluator": "changed_paths_within_scope", "required_evidence": [{"kind": "path", "reference": "declared-change-set:{artifact_id}"}]},
         {"id": "QGP-G4I-PREFLIGHT", "evaluator": "review_preflight_ready", "required_evidence": [{"kind": "result", "reference": "preflight:{artifact_id}:review"}]},
         {"id": "QGP-G4I-EVIDENCE", "evaluator": "review_evidence_available", "required_evidence": [{"kind": "path", "reference": "work-order-evidence:{artifact_id}"}]}
       ]
@@ -105,5 +105,23 @@
         {"id": "QGP-G5E-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
       ]
     }
+  ],
+  "transition_bindings": [
+    {"family": "definition", "target": "approved", "artifact_types": ["intent", "capability", "requirement", "verification", "operating_contract"], "predicates": ["QGP-G1-GRAPH", "QGP-G1-INTEGRITY", "QGP-G1-AUTHORING"], "structural": ["QGS-EDGE"]},
+    {"family": "definition", "target": "approved", "artifact_types": ["specification", "architecture", "adr"], "predicates": ["QGP-G2-GRAPH", "QGP-G2-INTEGRITY", "QGP-G2-AUTHORING"], "structural": ["QGS-EDGE"]},
+    {"family": "definition", "target": "approved", "artifact_types": ["release_contract"], "predicates": ["QGP-G5P-GRAPH", "QGP-G5P-INTEGRITY", "QGP-G5P-RELEASE-UNIT"], "structural": ["QGS-EDGE"]},
+    {"family": "definition", "target": "implemented", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "definition", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "work_order", "target": "approved", "predicates": ["QGP-G3-GRAPH", "QGP-G3-INTEGRITY"], "structural": ["QGS-EDGE", "QGS-ASSURANCE"]},
+    {"family": "work_order", "target": "in_progress", "predicates": ["QGP-G3-STATUS", "QGP-G3-GRAPH", "QGP-G3-INTEGRITY", "QGP-G3-SCOPE", "QGP-G3-PREFLIGHT"], "structural": ["QGS-EDGE"]},
+    {"family": "work_order", "target": "implemented", "predicates": ["QGP-G4I-STATUS", "QGP-G4I-GRAPH", "QGP-G4I-INTEGRITY", "QGP-G4I-SCOPE", "QGP-G4I-PREFLIGHT", "QGP-G4I-EVIDENCE"], "structural": ["QGS-EDGE"]},
+    {"family": "work_order", "target": "verified", "predicates": ["QGP-G4V-GRAPH", "QGP-G4V-INTEGRITY"], "structural": ["QGS-EDGE", "QGS-VREC-COVERAGE"]},
+    {"family": "work_order", "target": "released", "predicates": ["QGP-G5D-GRAPH", "QGP-G5D-INTEGRITY"], "structural": ["QGS-EDGE", "QGS-RLS-COVERAGE"]},
+    {"family": "work_order", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "verification_record", "target": "verified", "predicates": ["QGP-G4A-GRAPH", "QGP-G4A-INTEGRITY"], "structural": ["QGS-EDGE"]},
+    {"family": "verification_record", "target": "superseded", "predicates": ["QGP-G4A-GRAPH", "QGP-G4A-INTEGRITY"], "structural": ["QGS-EDGE", "QGS-SUCCESSOR"]},
+    {"family": "verification_record", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "release_record", "target": "released", "predicates": ["QGP-G5D-STATUS", "QGP-G5D-GRAPH", "QGP-G5D-INTEGRITY"], "structural": ["QGS-EDGE", "QGS-VERIFIED-INCLUSION"]},
+    {"family": "release_record", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]}
   ]
 }

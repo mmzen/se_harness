@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.7.1-py3-none-any.whl",
-    "archive_sha256": "ddd403cde17fc3770460809cbe8f9edb68f47c3aaa0422fe021334279994225d",
+    "archive_name": "se_harness-0.8.0-py3-none-any.whl",
+    "archive_sha256": "e08aab8a96c156f9e5edf99b9a28aad96c7cffe5b18c262a2598a6b6873fadeb",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "995ee973b2959af3bcbf7f7cc4388f079ad033e7c68509e71feb142b0691451f",
-    "version": "0.7.1"
+    "payload_sha256": "ea75cc53a518cfe0f027336f1a9aabfa301175a00410091f6c2f4b50ccd92eb5",
+    "version": "0.8.0"
   },
   "files": {
     ".agents/skills/harness-draft-change/SKILL.md": {
@@ -97,11 +97,11 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "e6886ff7ac1f6408a93de3585cfa0df52f09b3a41f8d739e3903d0c035726f39"
+      "sha256": "4ca842432d783e3a4119a10824228efe5342dc5c0e047e99b0bd8ca2f70332a5"
     },
     ".gitattributes": {
       "mode": "fragment",
-      "sha256": "5c87fbfdf72cb12de97ca6d58cca97f88960cf79fe63aadb454626e950db79a1"
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
     },
     ".github/PULL_REQUEST_TEMPLATE.md": {
       "mode": "seed",
@@ -109,7 +109,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "5400ba96eab3f1e9328627eb27e954d4aee2c4addceba4690c8b764689c9580e"
+      "sha256": "db18e32ed5a8b74ece4e4b317b5f0950da91e365a365048d12eb9f3a4fc330d9"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -125,7 +125,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "65b71ab402aa8637f0529de727f2e3c10164d99f4391487087e8f690608ad586"
+      "sha256": "2b4a0e41e995de5c8956e524db748c5f3f9a5cb99acfc02ea561a2d9e88ea0e2"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
@@ -141,11 +141,11 @@
     },
     "docs/engineering/QUALITY_GATES.json": {
       "mode": "managed",
-      "sha256": "aaaba75986898f2855f42c0a261dfe225c503c93f36007ee36d142618f57c3c3"
+      "sha256": "db457523957a0cda6d61cd27470959901ca3b45a453d119baffc27789ac93c27"
     },
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
-      "sha256": "371369ca48c2157ad7b869a49b55df4beae8998965cd8bbe2181ee39fe99d6f9"
+      "sha256": "a103d48e2120ebf7d47eeb3ffa196ceac2c9ac45813859794d7ea88928d12e03"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
@@ -161,11 +161,11 @@
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
-      "sha256": "e22e9898d836f84b9c52db6b5e43d8e3785842c2cae9cb4f2a73d840c049a13e"
+      "sha256": "e00970bdc395a6d9994950835295e6600cae77018bef25563b7b675bd9d407a1"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "ecdadbbd4aedb94b7014c96b9c67e0398594be25044beed7d43fccceed6218a9"
+      "sha256": "a83e06f4be9a37eaf6ca75b5550187b4afdaee6f8a39aa83880198439cde7da1"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -249,11 +249,11 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "cf9bf4827f2b07827b056181b3235b9e4a2dce161959849a5970412323777a2a"
+      "sha256": "50f417ef53922c9e936db39df2a5e45adba5afb886ad6268930f9b6a516f3ffa"
     }
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.7.1"
+  "tool_version": "0.8.0"
 }

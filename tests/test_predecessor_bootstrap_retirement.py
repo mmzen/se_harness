@@ -4,6 +4,7 @@ import ast
 import difflib
 import hashlib
 import importlib.util
+import json
 import re
 import sys
 import unittest
@@ -398,22 +399,34 @@ class ExplorerPayloadTests(unittest.TestCase):
 
 class ConsumerValidatorRetirementTests(unittest.TestCase):
     """`WO-REB-029`: the validator consumer repositories install carries none of
-    the retired rules, and the root copy still carries all of them."""
+    the retired rules. The root copy is the released evaluator's hash-locked
+    policy: under the 0.7.1 root it still carried all of them, and the
+    divergence was declared line for line; since `WO-HUP-008` adopted 0.8.0 the
+    root copy is the candidate copy byte for byte. The assertions read the root
+    identity from the lock rather than assume either state."""
 
     @classmethod
     def setUpClass(cls) -> None:
         cls.root_text = (REPOSITORY_ROOT / ROOT_VALIDATOR).read_text(encoding="utf-8")
         cls.candidate_text = (REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH).read_text(encoding="utf-8")
         cls.candidate = _load_candidate_validator()
+        lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        cls.root_version = lock["evaluator"]["version"]
+        # The released 0.7.1 root is the last one whose validator carried the retired rules.
+        cls.root_carries_retired_rules = cls.root_version == "0.7.1"
 
     def test_every_deleted_name_is_absent_from_the_candidate_copy(self) -> None:
         self.assertEqual(16, len(DELETED_VALIDATOR_NAMES))
         for name in DELETED_VALIDATOR_NAMES:
             with self.subTest(name=name):
                 self.assertNotIn(name, self.candidate_text)
-                # Present in the root copy: a name that was never there would
-                # make the absence case pass without proving anything.
-                self.assertIn(name, self.root_text)
+                if self.root_carries_retired_rules:
+                    # Present in the root copy: a name that was never there would
+                    # make the absence case pass without proving anything.
+                    self.assertIn(name, self.root_text)
+                else:
+                    # WO-HUP-008: the root is the released candidate; the name is gone from both.
+                    self.assertNotIn(name, self.root_text)
 
     def test_the_candidate_module_no_longer_defines_the_deleted_attributes(self) -> None:
         # Absence in the text is not absence in the loaded module: a survivor
@@ -428,6 +441,12 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
                 self.assertTrue(hasattr(self.candidate, retained))
 
     def test_the_candidate_copy_differs_from_the_root_copy_only_by_the_declared_deletions(self) -> None:
+        if not self.root_carries_retired_rules:
+            # WO-HUP-008: the root copy is the released 0.8.0 validator, which is the
+            # candidate template byte for byte; the deletion ledger below describes the
+            # 0.7.1 root and is retained for that state only.
+            self.assertEqual(self.candidate_text, self.root_text)
+            return
         root_lines = self.root_text.splitlines()
         candidate_lines = self.candidate_text.splitlines()
         self.assertEqual(
