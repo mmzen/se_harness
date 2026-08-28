@@ -44,6 +44,45 @@ Orange boxes are human decisions. Blue boxes are what the agent does. The grey
 diamond is the one place authority is enforced: the pull-request gate, run by
 CI on the actual diff, not by anything the agent asserts about itself.
 
+Step by step:
+
+1. **Human approves a work order.** A person writes down what is to be done,
+   which files may change (the *scope*), how strictly it must be verified
+   afterwards, and whether an agent may carry it (the *delegation*). Nothing
+   below can start until this is recorded on the work order.
+2. **Agent asks the harness what to do next.** One command,
+   `harnessctl next`, answers: which work order is selected and in what
+   state, which artifacts govern it, what the scope is, what to read, and the
+   exact next command. The agent does not have to remember any of this or
+   work it out from the repository.
+3. **Agent works on a branch.** Ordinary engineering: edit, test, iterate,
+   with whatever editor, model or tools the host provides. The branch is the
+   agent's sandbox; nothing it does there touches `main`.
+4. **Agent asks for the handoff check.** When it believes the work is done,
+   the agent asks the harness to evaluate it. The harness reads the list of
+   changed files *from Git* (the difference between the branch and its base)
+   and checks that every one of them is inside the declared scope, and that
+   the evidence for the work is present and bound to the exact state of the
+   governing artifacts. The agent triggers the check; it does not describe
+   its own change set.
+5. **Pull-request gate.** The agent opens a pull request and CI recomputes
+   the same check on the real diff — scope, evidence digest, and that the
+   released evaluator (not the candidate) did the checking. Red means the
+   agent goes back to step 3; green means the work is inside its lines.
+   Today this recomputation runs only when the pull request declares a
+   restitution digest; `WO-ECP-003` makes it run on every pull request.
+6. **Agent may advance the work order.** Only now, and only if the work
+   order carries a delegation, may the agent record the *started*,
+   *implemented* and *record prepared* transitions itself. Each is written as
+   a decision record naming the gate result it relied on. Without a
+   delegation, a person records them.
+7. **Human verifies the record.** A person reads the retained evidence and
+   decides whether the verification record is *verified*. This is never
+   delegated; the agent prepared the record, it cannot accept it.
+8. **Human releases and publishes.** Release contracts, the release
+   decision, tags and package publication stay with people, exactly as they
+   are today.
+
 Three rules make this safe, and they are the whole of what Phase 4 must
 guarantee:
 
