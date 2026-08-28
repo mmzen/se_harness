@@ -2,7 +2,7 @@
 id = "WO-REB-030"
 type = "work_order"
 title = "Keep interpreter_safety.evaluate, delete its declaration apparatus and the repository_tools copy"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-28T19:36:47Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit fcebed9 carrying unmoved main f62256f, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T19:49:17Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark implemented', on the handoff check reading Completed over refactor commit 49b1100, formal snapshot afa2f579fba34c34a8460cafb1d53b5cb19860cfde563bfa65963b2a4943d9e6, change set asserted complete over 20 paths, no scope amendment. The interpreter-safety rule is unchanged in behaviour and stays in code at its one boundary; the JSON declaration, the loader and ISD validators, the boundary registry, the ISC corpus accessors and the repository_tools mirror are deleted, the tests own the corpus, REQ-REB-026 is retired and five definitions amended by date. Readings under the governing exact public 0.8.0 root, isolated mode: validate PASS at 0 errors; doctor 0 FAIL; portable-surface repository and wheel checks PASS on a clean-built 106-member wheel with no interpreter_safety.json. Candidate: tests.test_interpreter_safety 65 OK; full suite 989 tests with the single known workstation file-mode failure that passes hosted. All thirteen pull-request lanes pass on #246 at 49b1100, the Windows leg constructing the junction forms. This authorizes no further act."
 +++
 
 # Work Order: Keep `interpreter_safety.evaluate`, delete its declaration apparatus and the `repository_tools` copy
