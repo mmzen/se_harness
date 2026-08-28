@@ -399,13 +399,17 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             root_managed = root_attributes.split("# se-harness:begin\n", 1)[1].split(
                 "# se-harness:end\n", 1
             )[0]
-            # The root managed block is the released 0.7.1 fragment (WO-HUP-007) and is
-            # hash-locked, so it still carries the migration rules until the root
-            # evaluator next advances. The owner region keeps its copies for the same
-            # reason: released 0.7.1 declares the repository-region class and its doctor
-            # requires the rules there and a tracked file per pattern, so the retired
-            # stage machine stays, dead, until then (WO-ECP-010, issue #210).
-            self.assertEqual(released_fragment, root_managed)
+            # The root managed block is the released evaluator's fragment and is
+            # hash-locked. Under the 0.7.1 root (WO-HUP-007) it still carried the
+            # migration rules; since WO-HUP-008 adopted 0.8.0 it is the candidate
+            # fragment. The owner region keeps its copies until issue #210's follow-up
+            # deletes the retired stage machine under its own work order.
+            root_version = json.loads(
+                (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
+            )["evaluator"]["version"]
+            self.assertEqual(
+                released_fragment if root_version == "0.7.1" else expected_fragment, root_managed
+            )
             root_owner = root_attributes.split("# se-harness:end\n", 1)[1]
             for rule in (
                 "se_harness/governance_migration*.py text eol=lf",

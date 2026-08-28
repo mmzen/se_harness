@@ -90,20 +90,29 @@ class ValidationTaxonomyTests(unittest.TestCase):
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
             encoding="utf-8"
         )
-        # The root copy is the hash-locked policy of the released 0.7.1 evaluator; the
-        # candidate template adds WO-ECP-009's transition binding index, the
-        # graph-structural checks and the amended QG-010 / new QG-011. That divergence
-        # is declared here rather than hidden: every other line of the released copy
-        # survives in the candidate, and the additions are absent from the root.
-        for marker in ("## Transition binding index", "### Graph-structural checks", "**QG-011:**", "`QGS-EDGE`", "`QG-STRUCTURAL`"):
+        # The root copy is the hash-locked policy of the released evaluator named in
+        # the lock. Under the 0.7.1 root the candidate template added WO-ECP-009's
+        # transition binding index, the graph-structural checks and the amended
+        # QG-010 / new QG-011, and that divergence was declared here rather than
+        # hidden. Since WO-HUP-008 adopted 0.8.0 the root copy is the candidate
+        # template byte for byte; the assertion reads the root identity, not a guess.
+        root_version = json.loads(
+            (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
+        )["evaluator"]["version"]
+        markers = ("## Transition binding index", "### Graph-structural checks", "**QG-011:**", "`QGS-EDGE`", "`QG-STRUCTURAL`")
+        for marker in markers:
             self.assertIn(marker, canonical_quality, marker)
-            self.assertNotIn(marker, quality, marker)
-        released_lines = quality.splitlines()
-        start = next(i for i, line in enumerate(released_lines) if line.startswith("**QG-010:**"))
-        end = next(i for i in range(start + 1, len(released_lines)) if not released_lines[i].strip())
-        retained = [line for i, line in enumerate(released_lines) if not (start <= i < end)]
-        candidate_lines = set(canonical_quality.splitlines())
-        self.assertEqual([], [line for line in retained if line not in candidate_lines])
+        if root_version == "0.7.1":
+            for marker in markers:
+                self.assertNotIn(marker, quality, marker)
+            released_lines = quality.splitlines()
+            start = next(i for i, line in enumerate(released_lines) if line.startswith("**QG-010:**"))
+            end = next(i for i in range(start + 1, len(released_lines)) if not released_lines[i].strip())
+            retained = [line for i, line in enumerate(released_lines) if not (start <= i < end)]
+            candidate_lines = set(canonical_quality.splitlines())
+            self.assertEqual([], [line for line in retained if line not in candidate_lines])
+        else:
+            self.assertEqual(canonical_quality, quality)
         self.assertIn("| `authoring_ready` |", quality)
         self.assertIn("| `release_unit_ready` |", quality)
         self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |\n", quality)
