@@ -28,6 +28,7 @@ of `REQUIREMENT.template.md` measured on this repository's 255 requirements.
 - `VER-AUT-001`: independent evidence.
 - `WO-AUT-001`: first increment — policy, template, validator signals, attributes, checklist (REQ-AUT-001, 002, 004, 006).
 - `WO-AUT-002`: second increment — vocabulary migration and approval predicates (REQ-AUT-003, 005).
+- `WO-AUT-003`: retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite (REQ-AUT-003).
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.
