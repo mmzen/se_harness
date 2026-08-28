@@ -2,7 +2,7 @@
 id = "WO-ECP-010"
 type = "work_order"
 title = "Replace the governance-migration rehearsal with a real upgrade rehearsal"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-08-28T13:30:29Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'go'. The architecture relation was removed before the start on the start preflight's W021 (ARCH-ECP-001 addresses none of the implemented requirements), as WO-ECP-007 already declares none. Execution is confined to the approved scope; the candidate rehearsal is exercised only against throwaway copies."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T14:00:30Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's direction, once the hosted lanes were green at eb53ff5 on both platforms. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout over the complete change set. Delivered: repository_tools/upgrade_rehearsal.py rehearsing the successor's real upgrade --apply against a throwaway export holding the released predecessor's lock, judged by both evaluators' doctor and by the resulting schema-3 lock; the candidate-evidence lane running it twice per platform with a cross-platform lock-digest comparison; evaluator_facts without the per-release scenario; rehearse-migration and the MIG family gone from the CLI and forbidden on the portable surface; REQ-REB-016, REQ-REB-017 and SPEC-REB-008 retired and REQ-REB-029 and SPEC-REB-013 amended by dated amendment; the notes; tests and evidence. Per the owner's amendment during execution the four stage-machine files stay tracked and dead until the root advances past 0.7.1, whose hash-bound class refuses their absence; se_harness/interpreter_safety.py stays under ARCH-REB-010 (#220). Completion is not verification."
 +++
 
 # Work Order: Replace the governance-migration rehearsal with a real upgrade rehearsal

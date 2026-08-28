@@ -153,4 +153,18 @@ Rerun: completed pass d1544bd18226e2a3569b1052bb6b9a1312ce8c138be44e8f86a828aaee
 
 ## 8. Hosted lanes
 
-Recorded in a later commit once the pull request has run them.
+At head `eb53ff5` of #241, all thirteen checks pass: `candidate-evidence.yml`
+run `33177603396` — candidate source, candidate package (portable surface
+included), **governance migration on Linux and on Windows**, each running the
+real upgrade rehearsal twice with agreeing `semantic_sha256`, the two
+platforms agreeing on the resulting lock's canonical digest, then the
+deterministic integration package built, verified on both platforms and
+retained; `publication-rehearsal.yml` run `33177603602`; `validate` run
+`33177603365`; governor transition assessment run `33177603429`. The
+Windows leg is the Windows criterion of `VER-ECP-007` for `ECP-PRD-008`.
+
+Earlier heads: `4da6a9f` failed `candidate-package` on the surface script's
+`rehearse-migration --help` inspection (disclosure 9) and the managed
+`validate` lane on a stale event payload after a body edit; `79da933` still
+failed the surface script's presence check for the retired command. Both
+leftovers were removed in `eb53ff5`.
