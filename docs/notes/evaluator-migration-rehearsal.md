@@ -1,81 +1,40 @@
-# Rehearsing an evaluator migration
+# Rehearsing the root-evaluator handover
 
-> This is an operator guide. A rehearsal produces evidence only. It does not approve a candidate, change a lifecycle record, release or publish anything, or replace the repository's current released evaluator.
+<!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-## Why this exists
+> This is a non-authoritative explanation. Formal authority comes from `ENGINEERING_HARNESS.md`, its managed policies, and approved artifacts under `docs/engineering/`.
 
-When SE Harness version N introduces governance rules that version N-1 does not understand, neither version can simply take over the whole release process:
+## What it is
 
-- N-1 is still the released evaluator and must remain selected for the repository.
-- N must prove that the future repository is valid under its new rules.
-- N cannot make itself authoritative merely because its tests pass.
+Every candidate of SE Harness will one day become this repository's root evaluator through `harnessctl upgrade --apply`. The candidate-evidence lane rehearses exactly that, on Linux and on Windows, before any release: `repository_tools/upgrade_rehearsal.py` exports the committed tree to a throwaway directory whose lock is the released predecessor's, and runs the real handover there (`WO-ECP-010`, `REQ-ECP-012`, `SPEC-ECP-007` `ECP-PRD-008`; repository issue #210).
 
-The 0.6.0 release found the missing handover steps one at a time. `harnessctl rehearse-migration` now runs the complete handover in a disposable directory before a release. It uses two separately installed Python environments: one for the released predecessor and one for the successor candidate.
+It replaced the governance-migration rehearsal of 0.6.0 and 0.7.x — nine stages over a JSON toy graph under a contract that embedded the digest of its own reader, with a scenario to author for every version pair. The property that ritual documented, that the released predecessor governs the root until a separately authorized adoption, is enforced by `mutation_guard` and the lock; the rehearsal now proves it by doing the upgrade.
 
-## What the rehearsal does
+## What one run proves
 
-The command always runs the same nine stages, in this order:
+1. The released predecessor's `doctor` passes on the export: it owns the root.
+2. The successor's `upgrade` plans, then applies with `--evidence-output`, so the installer's own transaction, postconditions, and evidence are exercised, not simulated.
+3. The successor's `doctor` passes and its `validate` reports no error other than `E012` on a `ready` record: a ready verification or release record binds the evaluator identity it was prepared under, and a root change legitimately invalidates it until it is re-prepared. Every other error fails the rehearsal.
+4. The predecessor's `doctor` now fails: it no longer owns the root.
+5. The resulting `.engineering-harness.lock` is schema 3 naming the successor's version and its installed-payload digest, as recorded in the transaction evidence.
 
-| Stage | Purpose |
-| --- | --- |
-| `prepare` | Let the predecessor role prepare the first proposal, directly or through its exact declared compatibility adapter. |
-| `validate-complete` | Let the successor inspect the complete graph without changing it. An expected incompatibility is recorded as structured data, not ignored text. |
-| `reject` | Replay an already attributed rejection fixture. The runner does not make the rejection decision. |
-| `replace` | Create a distinct corrected proposal while preserving the rejected proposal as immutable history. |
-| `assess` | Record the successor's complete-graph result separately from the predecessor-compatible view result. |
-| `release-plan` | Resolve the corrected release inputs without changing lifecycle state or Git. |
-| `publish-plan` | Resolve publication inputs without a credential, tag, upload, or external call. |
-| `render` | Render a disposable governance snapshot that points to the corrected proposal. |
-| `adopt` | After a simulated immutable publication and a separate attributed fixture, exercise root adoption only in the disposable root, including rollback and no-op replay. |
+The result file `upgrade-rehearsal-result.json` records each step's exit code and output digests, the tolerated diagnostics, the resulting lock's identity, and `semantic_sha256`, the canonical `utf8-text-lf-v1` digest of that lock. The lane runs the rehearsal twice per platform and requires the digest to agree between the runs and between Linux and Windows.
 
-The predecessor remains selected through the first eight stages. Only `adopt` may select the successor, and it does so only inside the disposable test root.
+## Running it yourself
 
-## Running it
-
-Prepare two non-editable environments outside the operational checkout. The predecessor must be the exact released version. The successor must be the exact candidate package or other exact candidate runtime being qualified.
+Install the released predecessor and the successor candidate into two environments outside the checkout, then:
 
 ```powershell
-harnessctl rehearse-migration <operational-root> `
-  --scenario tests/fixtures/governance_migration/historical-0.5.0-to-0.6.0.json `
-  --predecessor-python <external-0.5.0-env>/Scripts/python.exe `
-  --successor-python <external-candidate-env>/Scripts/python.exe `
-  --output <external-absent-directory> `
-  --json
+python -m repository_tools.upgrade_rehearsal --repository . `
+  --predecessor-python <predecessor-env>/Scripts/python.exe `
+  --successor-python <successor-env>/Scripts/python.exe `
+  --output <empty-directory-outside-the-checkout>
 ```
 
-On Linux, use each environment's lexical `bin/python` path. Do not resolve that final virtual-environment link to the shared system interpreter.
+The operational checkout is never written; the export is the committed tree, not the working tree. Both evaluators run with `-I` from their own environments with credential-bearing variables stripped, and the rehearsal opens no network connection. A pass is qualification evidence; accountable owners still decide whether to release, publish, or adopt.
 
-The scenario may live in the checkout because it is read only. The output must be outside the checkout, must not contain the checkout, and must be absent or empty. The two interpreters and their installed packages must also be outside the checkout and isolated from one another.
+## Boundaries
 
-## Reading the result
-
-The retained file is `governance-migration-result.json`. Important fields are:
-
-- `overall_result`: `pass` only when all nine stages passed.
-- `first_failed_stage`: the first failed stage; every later stage is `not-run`.
-- `classification`: whether the successor needs a migration and which operations are affected.
-- `runtimes`: exact version, interpreter, and installed-package digests for both roles, without host paths.
-- `stages`: actor role, view, decision fixture, permitted and observed disposable changes, bounded report, and report digest for every stage.
-- `operational_state.unchanged`: proof that repository bytes, HEAD, and refs did not change.
-- `external_actions`: explicit `false` values for credentials, network, lifecycle transition, tag, release, publication, deployment, maintenance, policy, and real root upgrade.
-- `semantic_sha256`: a replay digest that omits timing, host/interpreter facts, the raw checkout digest, and the independently built successor distribution identities so Windows and Linux results can be compared. The full result still retains those exact platform facts; the digest keeps the candidate Git identity, scenario, contract/runner identity, stage reports, decisions, and unchanged-state claim.
-
-A pass is qualification evidence. Accountable owners still decide whether to approve requirements, verify a VREC, release an RLS, publish, or later adopt the released evaluator.
-
-## Relationship to release qualification roles
-
-The migration rehearsal proves the whole simulated predecessor-to-successor sequence in disposable state. It does not replace the narrower operational claims made by `harnessctl qualify`. A real workflow records complete successor validation as `complete-candidate` and later root ownership as `released-root`; the former `predecessor-view` operation was retired under `WO-REB-028`, and this rehearsal is now the one mechanism that exercises a predecessor evaluator against a successor. The rehearsal result and those typed results remain separate evidence because they answer different questions.
-
-## Failure behavior
-
-The runner fails before or at the affected stage when it sees an unknown field, noncanonical JSON, missing or reordered stage, role substitution, forged decision fixture, undeclared adapter or view, shared runtime, checkout import, credential-bearing environment, unexpected write, timeout, malformed child report, source/ref change, failed rollback, or result disagreement.
-
-It does not try another evaluator, remove extra repository files, accept an error string, continue after failure, or repair the operational checkout. It removes only its own disposable workspace and retains the bounded result.
-
-## Adding a future scenario
-
-Use `synthetic-n-minus-1-to-n.json` as the version-neutral example. A new scenario may select only capabilities, roles, views, adapters, decisions, and stages already allowed by `se-harness-governance-migration-v1`. It must remain canonical UTF-8/LF JSON and must bind its fixture and decision bytes with SHA-256.
-
-If a future migration needs a new stage, decision meaning, authority effect, or view type, create a new contract version and obtain accountable review. Do not silently modify a completed historical scenario.
-
-The exact 0.5.0-to-0.6.0 scenario is permanent regression history. The candidate workflow runs it twice on Windows and Linux with the digest-pinned public 0.5.0 wheel and a non-promotable wheel exported from the exact candidate commit. Public-wheel acquisition and candidate building happen before the core runner; the runner itself has no network or credential path.
+- The rehearsal needs a predecessor and a successor of different versions and an exported lock naming the predecessor; otherwise it stops with a named reason.
+- It tolerates `E012` on `ready` records only, and reports each tolerated line.
+- It does not adopt anything: the operational root advances only through the separately governed procedure in [developing SE Harness](developing-se-harness.md#advancing-the-root-evaluator).

@@ -21,6 +21,13 @@ decided_by = "requirements-steward"
 
 # Requirement: Declare a complete predecessor-to-successor governance migration contract
 
+## Retirement amendment of 2026-08-28
+
+Retired on 2026-08-28 by `REQ-ECP-012` under `WO-ECP-010`, on the repository owner's approval for issue #210. No machine-readable migration contract is required before a successor qualifies for release: the handover a successor must survive is rehearsed by running its own `harnessctl upgrade --apply` against a throwaway export of this repository holding the released predecessor's lock (`repository_tools/upgrade_rehearsal.py`, `SPEC-ECP-007` `ECP-PRD-008`), and what the contract once declared — roles, views, authority effects, boundaries, adoption exits — is enforced by `mutation_guard`, the installer's transaction, and the lock, not by a declaration that embedded the digest of the module reading it. The rationale, preconditions, required response, and boundary behavior below record what the repository did while this requirement was active and are retained unchanged as history; they are no longer obligations.
+
+The declared `superseded` status is not applied, for the reason `WO-REB-028` recorded for `REQ-REB-012`: the definition lifecycle admits no `approved` to `superseded` edge. The retirement is recorded here instead.
+
+
 ## Rationale
 
 Issue #101 and the 0.6.0 RCA show that individually correct release steps are not enough. Version 0.5.0 could govern the repository, while candidate 0.6.0 introduced schemas and lifecycle meanings that 0.5.0 could not fully create or parse. Because the handover was not defined as one contract before release work began, bootstrap preparation, rejected-history handling, successor preparation, hosted assessment, publication, rendering, and later root adoption were discovered and corrected separately.

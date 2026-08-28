@@ -19,6 +19,11 @@ decided_by = "technical-owner"
 
 # Specification: Governance migration contract and rehearsal protocol
 
+## Retirement amendment of 2026-08-28
+
+Retired on 2026-08-28 under `WO-ECP-010` (`REQ-ECP-012`, `SPEC-ECP-007` `ECP-PRD-008`), together with `REQ-REB-016` and `REQ-REB-017` which it specified, on the repository owner's approval for issue #210. The contract schema `se-harness-governance-migration-v1`, the closed stage and role catalogs, the scenario format and its digests, `harnessctl rehearse-migration`, and the `MIG` diagnostic family are withdrawn from the product; the names are reserved and never reused. The rules below are retained as history of what 0.6.0 and 0.7.x rehearsed; the one retained property, that the released predecessor governs the root until a separately authorized adoption, is enforced by `mutation_guard` and the lock and is now exercised by the real upgrade rehearsal.
+
+
 ## Scope
 
 This specification defines a versioned machine-readable contract and a read-only/disposable runner for proving how released evaluator N-1 governs a successor N that introduces incompatible governance behavior. It covers classification, preparation, complete successor validation, rejected-proposal retention, corrected succession, hosted assessment, release/publication planning, rendering, and later standard-root adoption.

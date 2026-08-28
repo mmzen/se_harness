@@ -157,6 +157,19 @@ and no self-hashing contract.
   deleted surface and of any module digest in a `se_harness/` JSON file; the
   CI workflow shape. Work-order-keyed evidence.
 
+Amended on 2026-08-28 by the accountable owner during execution, on the
+implementer's escalation ("Land the rehearsal now, delete after the root
+advances"): released 0.7.1, which governs this root, declares the
+repository-region hash-bound class `governance-migration-protocol` and refuses
+any tree where one of its patterns matches no tracked file, so the deletion of
+`se_harness/governance_migration.py`, `governance_migration_contract.py`,
+`governance_migration_contract.json` and the last fixture is deferred to a
+follow-up once the root evaluator is on a release carrying `WO-HBI-005`. Those
+four files stay tracked, dead and unreferenced (no subcommand, no importer, no
+test), the owner-region `.gitattributes` rules stay with them, and the
+portable-surface check neither requires nor forbids the members until then.
+Everything else in scope lands now. No other scope change.
+
 ## Out of scope
 
 - `recovery_rehearsal.py`, the `accept-candidate` alias, lock schema-1 write

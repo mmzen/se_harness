@@ -20,6 +20,11 @@ reason = "Approved on 2026-08-27 by the accountable owner, 'I approve the artifa
 
 # Specification: Retired predecessor-bootstrap surface and retained-history contract
 
+## Amendment of 2026-08-28
+
+Amended under `WO-ECP-010` for issue #210: where this specification names the governance-migration rehearsal (`se_harness/governance_migration.py`, `rehearse-migration`) as the retained predecessor-to-successor mechanism, read the real upgrade rehearsal of `repository_tools/upgrade_rehearsal.py` instead; `rehearse-migration` is retired and its name reserved, and `qualify` keeps its four typed operations.
+
+
 ## Scope
 
 The removal of the contract-bound predecessor evaluator bootstrap and the

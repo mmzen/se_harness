@@ -25,6 +25,11 @@ reason = "Approved on 2026-08-27 by the accountable owner, 'I approve the artifa
 
 # Requirement: One predecessor-successor handover mechanism, and no compatibility view
 
+## Amendment of 2026-08-28
+
+Amended under `WO-ECP-010` (`REQ-ECP-012`) for issue #210. The one mechanism this requirement names as the source of assurance that a predecessor evaluator and its successor agree is no longer the no-network governance-migration rehearsal, which is retired with `REQ-REB-016`, `REQ-REB-017` and `SPEC-REB-008`, but the real upgrade rehearsal of `repository_tools/upgrade_rehearsal.py`: the successor's own `upgrade --apply` against a throwaway export holding the released predecessor's lock, judged by both evaluators' `doctor` and by the resulting lock. The rest of the requirement keeps its force: no contract-declared predecessor evaluator, no compatibility view of the repository, and no release path able to require either.
+
+
 ## Rationale
 
 The predecessor-bootstrap path was authored for one event. Released 0.5.0

@@ -107,8 +107,7 @@ class DistributionManifestTests(unittest.TestCase):
             with zipfile.ZipFile(clean, "w") as archive:
                 archive.writestr("se_harness/cli.py", "print('portable')\n")
                 for member in sorted(
-                    SURFACE.REQUIRED_MIGRATION_MEMBERS
-                    | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                    SURFACE.REQUIRED_QUALIFICATION_MEMBERS
                     | SURFACE.REQUIRED_INTERPRETER_SAFETY_MEMBERS
                 ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")
@@ -117,8 +116,7 @@ class DistributionManifestTests(unittest.TestCase):
             leaked = root / "leaked.whl"
             with zipfile.ZipFile(leaked, "w") as archive:
                 for member in sorted(
-                    SURFACE.REQUIRED_MIGRATION_MEMBERS
-                    | SURFACE.REQUIRED_QUALIFICATION_MEMBERS
+                    SURFACE.REQUIRED_QUALIFICATION_MEMBERS
                     | SURFACE.REQUIRED_INTERPRETER_SAFETY_MEMBERS
                 ):
                     archive.writestr(member, "{}\n" if member.endswith(".json") else "# portable\n")

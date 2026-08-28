@@ -157,20 +157,24 @@ The "Measured after" column is filled by each work order's evidence.
 
 ### After `WO-CIP-003`
 
-- `repository_tools/predecessor_facts.py`: `derive` reads the declared root
-  and the candidate version and exports the predecessor's version, wheel,
-  wheel digest, payload digest, legacy acceptance-contract digest, and the
-  migration scenario path and digest; `write-scenario` is the canonical
-  scenario writer. Both fail closed with a `PRE0nn` code that names what is
-  missing.
+- `repository_tools/evaluator_facts.py` (named `predecessor_facts.py` until
+  `WO-ECP-010`): `derive` reads the declared root and the candidate version
+  and exports the predecessor's version, wheel, wheel digest, payload digest
+  and legacy acceptance-contract digest, failing closed with a `PRE0nn` code
+  that names what is missing. The migration scenario and its writer are gone:
+  the `governance-migration` legs run `repository_tools/upgrade_rehearsal.py`,
+  the successor's real `upgrade --apply` against a throwaway export holding
+  the predecessor's lock, twice per platform with a cross-platform digest
+  comparison of the resulting lock.
 - `candidate-evidence.yml`: one derivation step in `candidate-source`, before
   any network access; `candidate-package` and both migration legs take the
   values from job outputs. Literals restating the evaluator in the
   repository-owned workflows: 8 → 0 (the pinned build-tool versions are not
-  evaluator facts and stay). A version bump without its scenario fails the
-  first job with the expected path instead of skipping four jobs.
+  evaluator facts and stay). A version bump needs no scenario since
+  `WO-ECP-010`.
 - Tests that restated the same literals (`test_release_qualification`,
-  `test_governance_migration`, `test_standard_repository_lifecycle`) now
+  `test_standard_repository_lifecycle`; `test_governance_migration` until its
+  deletion under `WO-ECP-010`) now
   derive them through the module; the legacy contract digest lives in one
   table in the module.
 - Not changed: the managed `engineering-harness.yml` keeps its version

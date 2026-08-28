@@ -24,7 +24,13 @@ FORBIDDEN_MEMBERS = frozenset(
     }
 )
 FORBIDDEN_MEMBER_PREFIXES = ("share/se-harness/self-hosting/",)
-REQUIRED_MIGRATION_MEMBERS = frozenset(
+# Retired with the governance-migration stage machine under WO-ECP-010; the
+# handover is rehearsed by repository_tools/upgrade_rehearsal.py, never shipped.
+# The three members are retained, dead and unreferenced, until this
+# repository's root evaluator advances past 0.7.1, whose hash-bound class
+# requires them to exist (WO-ECP-010 evidence, section 6); they are neither
+# required nor forbidden until that follow-up deletes them.
+RETIRED_MIGRATION_MEMBERS = frozenset(
     {
         "se_harness/governance_migration.py",
         "se_harness/governance_migration_contract.json",
@@ -48,6 +54,8 @@ FORBIDDEN_CLI = (
     b"--role governor",
     # Retired with the predecessor-bootstrap release path under WO-REB-028.
     b"predecessor-view",
+    # Retired with the governance-migration stage machine under WO-ECP-010.
+    b"rehearse-migration",
 )
 FORBIDDEN_ACTIVE_CONTENT = (
     b"publish_dashboard.py governor",
@@ -98,11 +106,7 @@ def inspect_wheel(path: Path) -> None:
             members = archive.infolist()
             member_names = {member.filename for member in members}
             missing = sorted(
-                (
-                    REQUIRED_MIGRATION_MEMBERS
-                    | REQUIRED_QUALIFICATION_MEMBERS
-                    | REQUIRED_INTERPRETER_SAFETY_MEMBERS
-                )
+                (REQUIRED_QUALIFICATION_MEMBERS | REQUIRED_INTERPRETER_SAFETY_MEMBERS)
                 - member_names
             )
             if missing:

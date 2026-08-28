@@ -28,7 +28,7 @@ A validator can be correct and still be used in the wrong place. During release 
 
 These claims are deliberately separate. A successful `complete-candidate` result cannot be renamed into independent package evidence. A successful public installation cannot prove root ownership.
 
-A fifth operation, `predecessor-view`, once qualified a deterministic predecessor-compatible view against an exact external predecessor evaluator. It existed only for the 0.5.0→0.6.0 handover and was retired under `WO-REB-028` (`ADR-REB-012`, amending `ADR-REB-009`); the retained 0.6.0 results remain valid history. Predecessor-to-successor agreement is now shown by `harnessctl rehearse-migration`, not by a `qualify` operation.
+A fifth operation, `predecessor-view`, once qualified a deterministic predecessor-compatible view against an exact external predecessor evaluator. It existed only for the 0.5.0→0.6.0 handover and was retired under `WO-REB-028` (`ADR-REB-012`, amending `ADR-REB-009`); the retained 0.6.0 results remain valid history. Predecessor-to-successor agreement is now shown by the real upgrade rehearsal (`repository_tools/upgrade_rehearsal.py`, `WO-ECP-010`), not by a `qualify` operation.
 
 ## Typical workflow order
 
