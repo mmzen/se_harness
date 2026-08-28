@@ -94,3 +94,7 @@ formal_snapshot_sha256: 3fa898f0c027fdfac8f6c54df562d290018a52f7d95ac0a66c70957f
 ## 7. Hosted lanes
 
 Pull request #252 at `2950b7c`: all 13 lanes pass, both platform legs of the suite and the 0.8.0-to-0.9.0 upgrade rehearsal included; the publication rehearsal qualified this commit's own recipe in candidate mode.
+
+## 8. Build re-verified at the bound candidate
+
+The replay was re-run at `8adfe1b` (the commit `VREC-SEH-018` binds; the delta from `8573608` is evidence-only, no packaged byte): `state = exact`, two byte-identical producer runs, wheel `e851bccf…` and sdist `6fd34bd7…` equal to section 4, `source_date_epoch` 1787955573. The bundle manifest at this commit is retained as `RLS-SEH-018-bundle.json` when the record is prepared.
