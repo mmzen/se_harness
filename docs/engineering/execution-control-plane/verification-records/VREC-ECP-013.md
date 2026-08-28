@@ -2,7 +2,7 @@
 id = "VREC-ECP-013"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-002"
-status = "ready"
+status = "verified"
 owners = ["Mathieu Meadele"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-002/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-013-evaluator.json"
 evaluator_evidence_sha256 = "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
 
+verified_at = "2026-08-28T21:29:08Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-002"]
 conforms_to = ["VER-ECP-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-28T21:29:08Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-28, 'I verify VREC-ECP-013'. Re-measured immediately before this transition: bound commit 5eea42b is an ancestor of the branch tip with a clean worktree; WO-ECP-002 is implemented; the evaluator packet matches its recorded digest. The retained packet, itself written and rebound by harnessctl evidence with the machine header the candidate reads and the legacy lines the 0.8.0 governor reads, shows the evidence packet writer, the parser-read predicate with its one-release grace, identifier allocation across local refs, pr-body and the harness-retained handoff.json shipped as SPEC-ECP-002 amended specifies; VER-ECP-002's scenarios for REQ-ECP-003, REQ-ECP-004 and REQ-ECP-005 are covered by tests on both platforms; 0.8.0 validate 0 errors and doctor 0 FAIL; suite 1077 with only the known workstation file-mode failure; all thirteen hosted lanes pass at the implementation commit; five deviations are recorded, the fifth explaining the restitution line omitted from the pull request until the root carries WO-ECP-001. This verifies WO-ECP-002 only; it releases and publishes nothing."
 +++
 
 # Verification Record Candidate
