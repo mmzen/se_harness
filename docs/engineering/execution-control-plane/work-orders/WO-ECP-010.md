@@ -2,7 +2,7 @@
 id = "WO-ECP-010"
 type = "work_order"
 title = "Replace the governance-migration rehearsal with a real upgrade rehearsal"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -41,7 +41,6 @@ paths = [
 [relations]
 implements = ["REQ-ECP-012"]
 specifications = ["SPEC-ECP-007"]
-architecture = ["ARCH-ECP-001", "ADR-ECP-005"]
 verification = ["VER-ECP-007"]
 
 [[lifecycle_events]]
@@ -50,6 +49,13 @@ to = "approved"
 decided_at = "2026-08-28T13:28:15Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-08-28 by the accountable owner, 'I approve WO-ECP-010, go', for repository issue #210. Authorizes only the listed execution scope: the repository-owned upgrade rehearsal and its CI lane, the evaluator_facts rename without the scenario coupling, deletion of the governance-migration stage machine, its contract, tests, fixtures, the rehearse-migration subcommand, the MIG family and the package interpreter-safety module, the .gitattributes owner lines, the dated amendments to REQ-REB-016, REQ-REB-017, SPEC-REB-008, REQ-REB-029 and SPEC-REB-013, the narrowing of WO-ECP-007, the notes, tests and evidence. Start, completion, commit-bound verification and release are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T13:30:29Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'go'. The architecture relation was removed before the start on the start preflight's W021 (ARCH-ECP-001 addresses none of the implemented requirements), as WO-ECP-007 already declares none. Execution is confined to the approved scope; the candidate rehearsal is exercised only against throwaway copies."
 +++
 
 # Work Order: Replace the governance-migration rehearsal with a real upgrade rehearsal
@@ -60,7 +66,7 @@ Draft. Approval authorizes only the scope below. Start, completion,
 commit-bound verification, the assurance-owner decision, integration, and
 release are separate decisions by the roles that own them. `REQ-ECP-012`,
 `SPEC-ECP-007`, `ARCH-ECP-001`, `ADR-ECP-005`, and `VER-ECP-007` are
-approved; this work order carries the part of `ECP-PRD-008` that concerns the
+approved (`ARCH-ECP-001` addresses none of the requirements this work order implements, so, like `WO-ECP-007`, it declares no architecture relation); this work order carries the part of `ECP-PRD-008` that concerns the
 migration rehearsal, split out of `WO-ECP-007` on 2026-08-28 for repository
 issue #210 so that it is not held by the other evictions that work order
 bundles. It depends on nothing; `WO-HBI-005` (merged) already stopped
