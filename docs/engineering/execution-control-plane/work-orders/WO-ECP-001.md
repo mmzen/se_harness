@@ -26,6 +26,8 @@ paths = [
   "tests/test_workflow_execution.py",
   "tests/test_workflow_compliance.py",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md",
+  "se_harness/workflow_result.py",
 ]
 
 [relations]
@@ -60,6 +62,32 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-001`,
 `VER-ECP-001` are separate acts by their owners and precede approval of
 this work order. This is the first work order of the packet and depends on
 no other; `WO-ECP-002`, `WO-ECP-003`, and `WO-ECP-008` depend on it.
+
+## Scope amendment, 2026-08-28
+
+Put to the engineering owner during execution and answered "Admit the
+selected WO's own file by rule": `check --from-git` on this branch reported
+`WEX201` for `WO-ECP-001.md` itself, because a work order's own file is
+written by its approval and start transitions, is therefore in every Git
+diff, and is never in its own `[execution_scope]`; with typed paths the
+implementer simply omitted it, with a Git-derived set nothing can. The
+specification path `docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md`
+is added to `[execution_scope].paths` for one dated amendment, `ECP-CHG-007`:
+the selected work order's own artifact path is admitted to its scope by
+construction. Every other path stays scope-checked; `declared_paths` in the
+result still lists only the declared scope.
+
+## Scope amendment 2, 2026-08-28
+
+Put to the engineering owner during execution and answered "Amend scope: add
+workflow_result.py": `ECP-NXT-007` requires the `next` context rendered as an
+ordered `Context` section of the canonical block so that `result_sha256`
+binds it, and the canonical block is rendered by
+`se_harness/workflow_result.py`, which the packet's "projection helpers"
+wording did not name. `se_harness/workflow_result.py` is added to
+`[execution_scope].paths`; the change there is `_render_context` and its one
+call after `Command or response`, with every other section's bytes
+unchanged (the `focus` golden digest test still passes).
 
 ## Objective
 

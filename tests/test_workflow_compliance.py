@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import subprocess
 import tempfile
 import time
 import unittest
@@ -284,3 +285,104 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GitDerivedChangeSetTests(WorkflowComplianceTests):
+    """REQ-ECP-002 / ECP-CHG-001 to -007: the change set read from Git, not typed."""
+
+    def git(self, *arguments: str) -> str:
+        completed = subprocess.run(
+            ["git", "-C", str(self.root), *arguments], capture_output=True, text=True, check=True,
+        )
+        return completed.stdout
+
+    def commit_base(self) -> str:
+        self.git("init", "-q")
+        self.git("config", "user.email", "fixture@example.invalid")
+        self.git("config", "user.name", "Fixture")
+        self.git("config", "core.autocrlf", "false")
+        (self.root / ".gitignore").write_text("*.log\n", encoding="utf-8")
+        (self.root / "src/component/renamed_from.py").write_text("old = True\n", encoding="utf-8")
+        (self.root / "src/component/deleted.py").write_text("gone = True\n", encoding="utf-8")
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", "base")
+        return self.git("rev-parse", "HEAD").strip()
+
+    def check_from_git(self, base: str) -> tuple[int, dict, str]:
+        return self.check("--from-git", base, "--json")
+
+    def test_from_git_derives_modified_deleted_renamed_and_untracked_paths_and_ignores_ignored(self) -> None:
+        base = self.commit_base()
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        (self.root / "src/component/deleted.py").unlink()
+        (self.root / "src/component/renamed_from.py").rename(self.root / "src/component/renamed_to.py")
+        (self.root / "src/component/new.py").write_text("new = True\n", encoding="utf-8")
+        (self.root / "src/component/noise.log").write_text("ignored\n", encoding="utf-8")
+        code, result, error = self.check_from_git(base)
+        self.assertEqual(0, code, error)
+        self.assertEqual(
+            [
+                "src/component/deleted.py",
+                "src/component/new.py",
+                "src/component/renamed_from.py",
+                "src/component/renamed_to.py",
+                "src/exact.py",
+            ],
+            result["scope"]["changed_paths"],
+        )
+        self.assertTrue(result["scope"]["change_set_complete"])
+        self.assertEqual("git", result["compliance"]["change_set_source"])
+        self.assertEqual("completed", result["operation"]["outcome"])
+
+    def test_from_git_change_set_is_scope_checked_and_binds_the_digest(self) -> None:
+        base = self.commit_base()
+        (self.root / "README-outside.md").write_text("outside\n", encoding="utf-8")
+        code, result, error = self.check_from_git(base)
+        self.assertEqual(1, code, error)
+        self.assertIn("README-outside.md", result["scope"]["changed_paths"])
+        self.assertTrue(any("WEX201" in item and "README-outside.md" in item for item in result["restitution"]["blocked_by"]))
+        from se_harness.workflow_result import restitution_digest
+
+        self.assertEqual(restitution_digest(result), result["result_sha256"])
+
+    def test_the_selected_work_orders_own_file_is_admitted_by_construction(self) -> None:
+        # ECP-CHG-007: lifecycle transitions write the work order; a Git diff always carries it.
+        base = self.commit_base()
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.write_text(work_order.read_text(encoding="utf-8") + "\n<!-- transitioned -->\n", encoding="utf-8")
+        code, result, error = self.check_from_git(base)
+        self.assertEqual(0, code, error)
+        self.assertIn("docs/engineering/product/work-orders/WO-001.md", result["scope"]["changed_paths"])
+        self.assertNotIn("docs/engineering/product/work-orders/WO-001.md", result["scope"]["declared_paths"])
+        (self.root / "docs/engineering/product/work-orders/WO-002.md").write_text("+++\nid = \"WO-002\"\n+++\n", encoding="utf-8")
+        code, result, error = self.check_from_git(base)
+        self.assertEqual(1, code, error)
+        self.assertTrue(any("WO-002.md" in item for item in result["restitution"]["blocked_by"]))
+
+    def test_from_git_is_exclusive_with_typed_paths_and_fails_closed_on_a_bad_base(self) -> None:
+        base = self.commit_base()
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+            "--from-git", base, "--changed-path", "src/exact.py", "--changes-complete",
+        )
+        self.assertEqual(2, code)
+        self.assertIn("WEX-ECP-002", error)
+        code, result, error = self.check_from_git("no-such-ref")
+        self.assertEqual(1, code, error)
+        self.assertEqual("blocked", result["operation"]["outcome"])
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-003"))
+        self.assertIn("no-such-ref", result["restitution"]["blocked_by"][0])
+        self.assertEqual(
+            ["harnessctl", "next", ".", "--artifact", "WO-001"],
+            result["restitution"]["command_or_response"]["argv"],
+        )
+        for gate in result["compliance"]["gates"]:
+            for predicate in gate["predicates"]:
+                self.assertNotEqual("pass", predicate["status"])
+
+    def test_from_git_outside_a_checkout_blocks_with_wex_ecp_003(self) -> None:
+        code, result, error = self.check_from_git("HEAD")
+        self.assertEqual(1, code, error)
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-003"))
+        self.assertIn("not a Git checkout", result["restitution"]["blocked_by"][0])
+

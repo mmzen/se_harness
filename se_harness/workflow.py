@@ -277,6 +277,94 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
     )
 
 
+def _next_phase(status: str) -> str:
+    return "start" if status in {"approved", "in_progress"} else "review"
+
+
+def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any) -> tuple[str, ...]:
+    """The preflight reading manifest for the phase the selected state implies (ECP-NXT-005).
+
+    A work order reads its own preflight. A verification or release record has
+    no preflight of its own; it reads the review manifest of the first work
+    order it verifies or releases, which is the chain a reviewer needs.
+    """
+
+    from se_harness.preflight import run_preflight
+
+    if primary.artifact_type == "work_order":
+        work_order_id, phase = primary.artifact_id, _next_phase(primary.status)
+    else:
+        relation = "verifies_work_order" if primary.artifact_type == "verification_record" else "releases_work"
+        targets = sorted(_targets(primary, relation))
+        if not targets:
+            return ()
+        work_order_id, phase = targets[0], "review"
+    try:
+        return tuple(run_preflight(root, work_order_id=work_order_id, phase=phase).reading_manifest)
+    except HarnessError:
+        return ()
+
+
+def next_step(repository: Path, artifact_id: str | None = None) -> dict[str, Any]:
+    """One call returning the selected artifact's complete execution context (ECP-NXT-001 to -007).
+
+    The result is the `focus` projection of the selected artifact with the
+    operation kind `next` and an additive `context` object; the next argv, the
+    procedure and the step are the ones `focus` and `check` already select, so
+    `next` holds no private mapping. It writes nothing.
+    """
+
+    from se_harness.workflow_compliance import execution_scope
+    from se_harness.workflow_result import restitution_digest
+
+    root = ensure_target(repository, must_exist=True)
+    _, report = _validation(root)
+    catalog = _catalog(report)
+    if artifact_id is None:
+        candidates = sorted(
+            item.artifact_id
+            for item in catalog.values()
+            if item.artifact_type == "work_order" and item.status == "in_progress"
+        )
+        if len(candidates) != 1:
+            raise HarnessError(
+                f"WEX-ECP-001: {len(candidates)} work orders are in_progress; name one with --artifact"
+                + (f" ({', '.join(candidates)})" if candidates else "")
+            )
+        artifact_id = candidates[0]
+    primary = catalog.get(artifact_id)
+    if primary is None:
+        raise HarnessError(f"unknown artifact ID: {artifact_id}")
+    if primary.artifact_type not in PRIMARY_TYPES:
+        raise HarnessError("next accepts only WO, VREC, or RLS artifacts")
+    projected = focus(root, artifact_id)
+    declared: tuple[str, ...] = ()
+    if primary.artifact_type == "work_order":
+        try:
+            declared = execution_scope(primary)
+        except HarnessError:
+            declared = ()
+    command = projected["restitution"]["command_or_response"]
+    step = projected["restitution"]["next"]
+    context = {
+        "reading_manifest": list(_reading_manifest(root, catalog, primary)),
+        "governing": list(projected["scope"]["governing"]),
+        "declared_paths": list(declared),
+        "state": {"status": primary.status, "family": _family(primary.artifact_type)},
+        "next": {
+            "argv": list(command.get("argv", [])) if command.get("kind") == "command" else [],
+            "procedure_id": step["procedure_id"],
+            "step_id": step["step_id"],
+        },
+        "decision_required": projected["restitution"]["decision_required"],
+    }
+    result = dict(projected)
+    result["operation"] = {**projected["operation"], "kind": "next"}
+    result["context"] = context
+    result["result_sha256"] = restitution_digest(result)
+    return result
+
+
 def _assertion(value: str, label: str, *, limit: int) -> str:
     if not isinstance(value, str) or not value.strip() or len(value) > limit or _CONTROL.search(value):
         raise HarnessError(f"{label} must be non-empty, single-line text of at most {limit} characters")

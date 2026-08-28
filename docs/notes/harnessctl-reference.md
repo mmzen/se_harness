@@ -28,6 +28,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
+| `next` | coding agent, first call on a work order | read-only | return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result |
 | `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its authoritative structured handoff |
 | `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit the authoritative schema-2 result |
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
@@ -99,16 +100,29 @@ selected for the artifact's exact type, state, and direct related records. Do
 not derive a new transition or next action from this reference.
 
 ```text
+harnessctl next [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json]
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
   [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|transition|handoff [--target STATE] \
-  [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
-  [--change-manifest PATH] [--pull-request-body PATH] [--json]
+  [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
+  [--changes-complete] | --change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--set ID=STATUS ...] [--decision ID=ACTOR ...] [--reason ID=TEXT ...] \
   [--apply] [--json]
 ```
+
+`next` is the one call an agent makes first (`WO-ECP-001`). It returns the
+`focus` projection of the selected artifact — the single `in_progress` work
+order when `--artifact` is absent, otherwise `WEX-ECP-001` names the candidate
+count — with the operation kind `next` and an additive `context` object:
+`reading_manifest` (the preflight manifest for the phase the state implies,
+`start` for `approved` and `in_progress`, `review` afterwards), `governing`,
+`declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the
+same step `focus` and `check` select) and `decision_required`. It writes
+nothing and needs no prior command. The human block renders the context as a
+`Context` section after `Command or response`, so its `result_sha256` differs
+from `focus`'s for the same artifact.
 
 `focus` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in
@@ -131,6 +145,17 @@ procedure or one complete declared alternative. `--changed-path` may repeat;
 `--changes-complete` asserts that the supplied set is complete, including an
 empty set. The assertion is evidence, not proof from a trusted Git baseline.
 Without it, path-scope predicates are `not_assessable`.
+
+`--from-git BASE` derives the change set from Git instead of from typed
+paths: the union of `git diff --name-only BASE` against the working tree
+(renames contribute both names) and the untracked files Git does not ignore,
+each normalized as above; the set is complete by construction and the result
+records `change_set_source = "git"`. It is mutually exclusive with the
+changed-path options and the manifest (`WEX-ECP-002`); outside a Git
+checkout, with a base Git cannot resolve, or on any Git failure it blocks
+with `WEX-ECP-003` and evaluates no predicate as `pass`. The selected work
+order's own artifact file, written by its lifecycle transitions and so always
+in the diff, is admitted to its scope by construction (`ECP-CHG-007`).
 
 `--change-manifest` is mutually exclusive with both changed-path options. It
 must be an in-repository UTF-8 JSON object containing only `schema` with value

@@ -1014,7 +1014,8 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
         evaluated = ["harnessctl", "check", ".", "--artifact", "WO-001", "--checkpoint", "handoff"]
         self.assertNotEqual(evaluated, command.get("argv"))
         self.assertEqual("command", command["kind"])
-        self.assertEqual(evaluated + ["--changed-path", "<changed-path>", "--changes-complete"], command["argv"])
+        # WO-ECP-001: the completeness corrective names the Git-derived form.
+        self.assertEqual(evaluated + ["--from-git", "<base>"], command["argv"])
         self.assertIn("QGP-G4I-COMPLETE", result["restitution"]["next"]["action"])
 
         code, output, error = self.invoke(
@@ -1256,6 +1257,110 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
             json.loads(plan_output)["restitution"]["current_lifecycle_state"],
             json.loads(focus_output)["restitution"]["current_lifecycle_state"],
         )
+
+
+
+class NextCommandTests(WorkflowExecutionTests):
+    """REQ-ECP-001 / ECP-NXT-001 to -008: one call returns the complete context."""
+
+    def next_result(self, *arguments: str) -> tuple[int, dict, str]:
+        code, output, error = self.invoke("next", str(self.root), *arguments, "--json")
+        return code, json.loads(output), error
+
+    def test_next_selects_the_single_in_progress_work_order_and_matches_focus_and_check(self) -> None:
+        self.in_progress_work_order()
+        code, result, error = self.next_result()
+        self.assertEqual(0, code, error)
+        self.assertEqual({"kind": "next", "outcome": "completed"}, result["operation"])
+        self.assertEqual("WO-001", result["selection"]["primary"])
+        context = result["context"]
+        self.assertEqual(
+            ["reading_manifest", "governing", "declared_paths", "state", "next", "decision_required"],
+            list(context),
+        )
+        self.assertEqual({"status": "in_progress", "family": "work_order"}, context["state"])
+        self.assertEqual(["src/"], context["declared_paths"])
+        self.assertEqual(result["scope"]["governing"], context["governing"])
+        focus = json.loads(self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")[1])
+        check = json.loads(self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")[1])
+        self.assertEqual(focus["restitution"]["next"], result["restitution"]["next"])
+        self.assertEqual(focus["restitution"]["command_or_response"], result["restitution"]["command_or_response"])
+        self.assertEqual(focus["restitution"]["command_or_response"]["argv"], context["next"]["argv"])
+        self.assertEqual(
+            (check["restitution"]["next"]["procedure_id"], check["restitution"]["next"]["step_id"]),
+            (context["next"]["procedure_id"], context["next"]["step_id"]),
+        )
+        self.assertNotEqual(focus["result_sha256"], result["result_sha256"])
+        from se_harness.workflow_result import restitution_digest
+
+        self.assertEqual(restitution_digest(result), result["result_sha256"])
+        human = self.invoke("next", str(self.root))[1]
+        self.assertIn("\nContext\n", human)
+        self.assertLess(human.index("Command or response"), human.index("\nContext\n"))
+
+    def test_next_reading_manifest_equals_preflight_for_the_implied_phase(self) -> None:
+        from se_harness.preflight import run_preflight
+
+        self.in_progress_work_order()
+        _, result, _ = self.next_result("--artifact", "WO-001")
+        expected = list(run_preflight(self.root, work_order_id="WO-001", phase="start").reading_manifest)
+        self.assertEqual(expected, result["context"]["reading_manifest"])
+        self.assertTrue(expected)
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.write_text(work_order.read_text(encoding="utf-8").replace('status = "in_progress"', 'status = "implemented"', 1), encoding="utf-8")
+        _, result, _ = self.next_result("--artifact", "WO-001")
+        expected = list(run_preflight(self.root, work_order_id="WO-001", phase="review").reading_manifest)
+        self.assertEqual(expected, result["context"]["reading_manifest"])
+        self.assertEqual("implemented", result["context"]["state"]["status"])
+
+    def test_next_without_an_artifact_blocks_unless_exactly_one_work_order_is_in_progress(self) -> None:
+        code, result, error = self.next_result()
+        self.assertEqual(1, code, error)
+        self.assertEqual("blocked", result["operation"]["outcome"])
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-001: 0 work orders"))
+        self.in_progress_work_order()
+        second = self.root / "docs/engineering/product/work-orders/WO-002.md"
+        second.write_text(
+            (self.root / "docs/engineering/product/work-orders/WO-001.md").read_text(encoding="utf-8").replace("WO-001", "WO-002"),
+            encoding="utf-8",
+        )
+        code, result, error = self.next_result()
+        self.assertEqual(1, code, error)
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-001: 2 work orders"))
+        self.assertIn("WO-001, WO-002", result["restitution"]["blocked_by"][0])
+
+    def test_next_projects_a_verification_record_and_a_release_record(self) -> None:
+        self.ready_vrec()
+        code, result, error = self.next_result("--artifact", "VREC-001")
+        self.assertEqual(0, code, error)
+        self.assertEqual({"status": "ready", "family": "verification_record"}, result["context"]["state"])
+        self.assertEqual([], result["context"]["declared_paths"])
+        self.assertIsNotNone(result["context"]["decision_required"])
+        self.assertEqual([], result["context"]["next"]["argv"])
+        self.assertTrue(result["context"]["reading_manifest"])
+        code, result, error = self.next_result("--artifact", "REQ-001")
+        self.assertEqual(1, code, error)
+        self.assertIn("next accepts only WO, VREC, or RLS", result["restitution"]["blocked_by"][0])
+
+    def test_next_writes_nothing(self) -> None:
+        self.in_progress_work_order()
+        before = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        code, result, error = self.next_result()
+        self.assertEqual(0, code, error)
+        self.assertEqual([], result["mutation"]["writes"])
+        after = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
+        self.assertEqual(before, after)
+
+    def test_a_failed_check_names_next_as_the_retry_never_the_evaluated_command(self) -> None:
+        # ECP-NXT-008: the WEX210 corrective is `harnessctl next`, not "rerun the same command".
+        code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-404", "--checkpoint", "start", "--json")
+        self.assertEqual(1, code, error)
+        result = json.loads(output)
+        self.assertEqual(
+            {"kind": "command", "argv": ["harnessctl", "next", ".", "--artifact", "WO-404"]},
+            result["restitution"]["command_or_response"],
+        )
+        self.assertNotIn("rerun the same command", json.dumps(result))
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
