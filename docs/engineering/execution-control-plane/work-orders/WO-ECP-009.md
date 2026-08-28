@@ -2,7 +2,7 @@
 id = "WO-ECP-009"
 type = "work_order"
 title = "One precondition engine: transition evaluates the contract's gates"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -31,6 +31,20 @@ implements = ["REQ-ECP-009"]
 specifications = ["SPEC-ECP-005"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-004"]
 verification = ["VER-ECP-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:40:49Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'go WO-ECP-009', after #239 merged WO-ECP-005 and VREC-ECP-005. Authorizes only the listed execution scope: plan_transition evaluating the contract's transition bindings through the gate evaluator with one context builder, _validate_preconditions reduced to the graph-structural list reported as QGS- predicates, ensure_governed_checkpoint reduced to its contract-load and integrity refusals, predicate-level checkpoints and the transition bindings in the quality-gates contract and its managed renderings, check --checkpoint transition --target as a public preview, one preflight-diagnostic filter, refusals labelled by predicate, tests and evidence. Start, completion, commit-bound verification and release are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T12:40:51Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'go WO-ECP-009'. Execution is confined to the approved scope."
 +++
 
 # Work Order: One precondition engine: transition evaluates the contract's gates
