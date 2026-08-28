@@ -386,3 +386,94 @@ These are explicit inputs to the commit-bound verification decision, which this 
 17. **The ephemeral wheel of section 10 was deleted.** It was built outside the checkout, never bound to a record, never published or tagged, and its build tree and both virtual environments were removed after the reading. Its `0.8.0` version string is the candidate version in `pyproject.toml`, not a release.
 18. **Every figure in this document was measured on Windows 11 with Python 3.11.9 and a CRLF worktree**, under the public 0.7.1 evaluator at `C:\Users\mathi\se-harness-eval-071` for the authoritative readings. Byte counts, digests of worktree files and the owner-region reading of section 15 are platform-dependent by construction; blob identifiers, artifact counts, diagnostic sets and the deleted-line counts are not.
 19. **The bound formal snapshot digest hashes worktree bytes, so it is a fixed point of this working tree and not of the committed content.** `formal_snapshot_digest` reads each of the 1000 artifacts with `read_bytes()`. In this worktree 990 artifacts are CRLF, as `core.autocrlf` wrote them on checkout, and 10 are LF, being artifacts authored here and not yet round-tripped through a checkout; three of those are this work order's own packet. The same 1000 artifacts hash to `8c1e2d2a26b5a565bd4ff8e019e90c7b7eab7d0bad62c2519716729ee9bd2b16` as the worktree stands, to `b598e46e159411431ecdf8770a79365e8e1e26949551133ee0024a6546bf5c2c` if every artifact is read as LF, which is how git stores them and how a Linux checkout reads them, and to `bcda3c551425ed4003cd81bef331744f579fdb95bed57cce5d9eb7cb4195e9fd` if every artifact is read as CRLF, which is what a fresh Windows checkout of this commit produces. All three were measured with the released 0.7.1 evaluator. Re-deriving the bound digest therefore requires reproducing these line endings, and no choice of line endings makes one digest reproducible on both platforms. `WO-REB-028`'s evidence binds its digest the same way. Anyone re-measuring should read section 16's `QGP-G4I-EVIDENCE` pass as the binding for this tree and re-derive the digest rather than compare it across platforms.
+
+## 18. Hosted lanes, and the commit chain this record binds
+
+This section is appended after `781b909`, the commit that carries `VREC-REB-027`. Hosted readings cannot exist until the commit is pushed, and a record cannot bind evidence describing the runs its own push triggers. The append adds no artifact, so it moves neither the formal snapshot nor the record's `artifact_snapshot_sha256`, and the bound evidence path is unchanged. Everything below was read from GitHub Actions on 2026-08-28.
+
+### 18.1 The commit chain
+
+| Commit | What it carries |
+| --- | --- |
+| `29a05c3` | base: the tip of `governance/reb-028-retire-predecessor-bootstrap`, this branch's base and pull request #230's base |
+| `200f270`, `70c3e16`, `b5f0542` | the packet: draft, the co-selection of `SPEC-REB-013`, and the three approvals |
+| `2e39519` | the implementation, 13 files, 680 insertions and 613 deletions |
+| `0ee0f7b` | the approved-to-implemented transition of `WO-REB-029`. **This is the candidate `VREC-REB-027` binds.** |
+| `781b909` | `VREC-REB-027` and its evaluator evidence |
+
+`2e39519` has no hosted runs of its own: it was pushed together with `0ee0f7b`, in one push from `b5f0542`, so the lanes at `0ee0f7b` are the first hosted reading of the implementation.
+
+Three digests describe three different trees, and they are not interchangeable:
+
+| Digest | Tree | What it is |
+| --- | --- | --- |
+| `8c1e2d2a26b5a565bd4ff8e019e90c7b7eab7d0bad62c2519716729ee9bd2b16` | the working tree at `2e39519` | the formal snapshot named in this document's own header block, and the one `QGP-G4I-EVIDENCE` accepted at the handoff checkpoint of section 16 |
+| `39e0879b99fb67af42f824a861ad72c6fa3eab267b5b9c342db9d42da82110e1` | `0ee0f7b` | `VREC-REB-027`'s `artifact_snapshot_sha256`. **This is the authoritative binding for the candidate**, and the figure a verifier should re-derive |
+| `f75353b9b54c73923130f16be5fbb12695a9326f399bea4a1f1119f437540efd` | the working tree at `781b909`, 1001 artifacts, 11 of them LF | the formal snapshot after the record itself was added |
+
+Both commits after `2e39519` touch a formal artifact — `0ee0f7b` modifies `WO-REB-029.md` and `781b909` adds `VREC-REB-027.md` — so the snapshot necessarily moved twice after the header block was written. A verification record's own preparation always moves the snapshot after the commit it binds, so a bound reading can never name the snapshot of the commit that carries the record. Disclosure 19 applies to all three figures: each hashes worktree bytes.
+
+### 18.2 The four lanes are green at the candidate and at the record commit
+
+| Lane, `pull_request` event | Run at `0ee0f7b` | Run at `781b909` | Result |
+| --- | --- | --- | --- |
+| Engineering Harness (`validate`) | 33144651848 | 33144941033 | success |
+| Governor Transition Assessment | 33144651801 | 33144941052 | success |
+| SE Harness Candidate Evidence | 33144651765 | 33144941036 | success |
+| Publication Rehearsal | 33144652056 | 33144941159 | success |
+
+No lane was red at either commit, and no lane was skipped, cancelled or missing. Every run above is a `pull_request`-event run of pull request #230; there is no `push`-event run, because this branch is not `main`.
+
+### 18.3 The jobs this contract requires by name
+
+`VER-REB-013` requires `validate`, both governance-migration platforms and both integration package platforms to be named. All thirteen required checks pass at `781b909`, and the same thirteen passed at `0ee0f7b`:
+
+| Required check | Lane | Result |
+| --- | --- | --- |
+| `validate` | Engineering Harness | success |
+| Governor transition assessment | Governor Transition Assessment | success |
+| Candidate source evidence | SE Harness Candidate Evidence | success |
+| Candidate package evidence | SE Harness Candidate Evidence | success |
+| **Governance migration (Linux)** | SE Harness Candidate Evidence | success |
+| **Governance migration (Windows)** | SE Harness Candidate Evidence | success |
+| Build deterministic integration package | SE Harness Candidate Evidence | success |
+| **Verify integration package (Linux)** | SE Harness Candidate Evidence | success |
+| **Verify integration package (Windows)** | SE Harness Candidate Evidence | success |
+| Retain verified integration package | SE Harness Candidate Evidence | success |
+| Select the release record to rehearse | Publication Rehearsal | success |
+| Qualify and replay (candidate) | Publication Rehearsal | success |
+| Qualify and replay (release-record) | Publication Rehearsal | success |
+
+Pull request #230 reads `mergeable: MERGEABLE` and `mergeStateStatus: CLEAN` at `781b909`. That is a mergeability fact, not a verification or a merge authorization.
+
+### 18.4 The hosted reading agrees with the local one, and settles the one local failure
+
+The candidate-source lane at `781b909` read the graph itself:
+
+```text
+"message": "artifacts=1001; errors=0; warnings=471"
+```
+
+That is the same verdict as the local released-evaluator reading of section 5 — 0 errors, 471 warnings — with one more artifact, `VREC-REB-027`, which did not exist when section 5 was measured. The warning count did not move at all, on either platform.
+
+The same lane ran the suite on Linux:
+
+```text
+Ran 958 tests in 21.702s (116 classes, 4 workers)
+OK (skipped=4)
+```
+
+| Reading | Tests | Failures | Skips |
+| --- | --- | --- | --- |
+| hosted Linux at `781b909` | 958 | 0 | 4 |
+| local Windows at `2e39519`, section 15 | 958 | 1 | 24 |
+| local Windows control at `b5f0542`, section 15 | 953 | 1 | 24 |
+
+The test count agrees exactly, so the five tests this work order adds are counted on both platforms. The single local failure is `test_owner_region_stays_within_the_size_bound`, and the hosted lane settles what it is: a Windows checkout artefact. The owner region of `AGENTS.md` is 6,036 bytes as checked out here with CRLF and 5,969 bytes as the tracked blob, which is what the runner reads, against a 6,000-byte bound. `AGENTS.md` is byte-identical to `origin/main` here and is untouched by this work order. The 20 extra local skips are the Windows-only guards. Nothing in this branch or on `main` needs fixing in that file.
+
+### 18.5 What these lanes still do not evidence
+
+- **No `workflow_dispatch` rehearsal exists.** `VER-REB-013` requires none, and records that it neither discharges nor re-scopes `VER-REB-012`'s open dispatch rehearsal, which stays outstanding against `WO-REB-028`.
+- **The Publication Rehearsal lane above is not a Pages run.** It is `.github/workflows/release-qualification.yml` on the `pull_request` event. It never invokes `.github/workflows/pages-publication.yml`, the file this work order edits. The rename of the temporary directory is evidenced by the static review of sections 13 and 14 alone, which `VER-REB-013` accepts in terms as sufficient for a temporary directory name.
+- **These readings stop at `781b909`.** Any later commit on this branch, including a merge of `main` or of the base branch, is outside every figure in this document, and section 17's disclosures would need re-deriving against it.
+- **A green lane is not an assurance decision.** `VREC-REB-027` is `ready`. The `DR-VREC-DECIDE` decision belongs to an accountable assurance owner, and the nineteen disclosures of section 17 are explicit inputs to it.
