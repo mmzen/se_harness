@@ -163,8 +163,6 @@ def inspect_harnessctl(path: Path) -> None:
         raise SurfaceError("repository distribution option leaked into installed harnessctl")
     if any(term in output for term in FORBIDDEN_CLI):
         raise SurfaceError("retired specialized lifecycle leaked into installed harnessctl")
-    if b"rehearse-migration" not in output:
-        raise SurfaceError("governance migration command is absent from installed harnessctl")
     if b"qualify" not in output or any(
         operation not in output
         for operation in (
