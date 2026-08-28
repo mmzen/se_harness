@@ -125,4 +125,13 @@ Rerun: completed pass 4967ff179565d2117235e930be13c3d14de1b37d9edc93d57057b0bc81
 
 ## 8. Hosted lanes
 
-Recorded in a later commit once the pull request has run them.
+At head `33eda62` of #240 (the corrected declaration), all thirteen checks
+pass: `candidate-evidence.yml` run `33173707371` (candidate source, candidate
+package, deterministic integration package, governance migration on Linux
+and Windows, integration package verified on Linux and Windows, retained),
+`publication-rehearsal.yml` run `33173707714` (record selection, candidate
+replay, release-record replay), `validate` run `33173707392`, governor
+transition assessment run `33173707451`. The first push `7557801` was green
+on all thirteen as well. The Windows legs are the Windows criterion of
+`VER-ECP-005`'s `REQ-ECP-009` rows: the hosted suite runs
+`OnePreconditionEngineTests` and the delegated fixture on both platforms.

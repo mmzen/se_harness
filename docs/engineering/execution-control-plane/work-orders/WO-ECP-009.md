@@ -2,7 +2,7 @@
 id = "WO-ECP-009"
 type = "work_order"
 title = "One precondition engine: transition evaluates the contract's gates"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-08-28T12:40:51Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'go WO-ECP-009'. Execution is confined to the approved scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T13:07:55Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's direction for this sequence, once the hosted lanes were green at 33eda62. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout over the complete thirteen-path change set after the owner's scope amendment. Delivered: quality-gates contract v2 with predicate-level checkpoints and the transition binding index; plan_transition evaluating every transitioned artifact through the gate evaluator check uses with one context builder and the graph-structural QGS- predicates, rendering blocked results that name each refusing check and failing closed on apply; check --checkpoint transition --target as the public preview; one preflight-diagnostic filter; ensure_governed_checkpoint reduced to contract and integrity refusals; refusals coded by predicate and repository blockers by exception type; QUALITY_GATES.md, the reference note and the SPEC-WEX-002 amendment; tests and evidence. WO-ECP-005's golden focus digest is unchanged. Disclosed: the Phase 4 delegated completion needs handoff-bound evidence it does not retain (WO-ECP-006), and the corrected handoff declaration of commit 7557801. Completion is not verification."
 +++
 
 # Work Order: One precondition engine: transition evaluates the contract's gates
