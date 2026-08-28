@@ -5,7 +5,7 @@ title = "One result schema, one rule selector, one precondition engine"
 status = "draft"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 decides = ["ARCH-ECP-001"]
@@ -83,13 +83,22 @@ private precondition set.
   at the upgrade; the review found none.
 - Operational: `QUALITY_GATES.json` gains the `transition` checkpoint and
   its version increments; `QUALITY_GATES.md`, `WORKFLOW.json`, `WORKFLOW.md`,
-  and `OPERATING_CARD.md` regenerate on upgrade; `--result-schema 2` is a
-  warned no-op for one release.
+  and `OPERATING_CARD.md` regenerate on upgrade; `--result-schema` is removed
+  outright (amended 2026-08-28, see Migration).
 - Security: a transition can no longer apply on a weaker precondition set
   than `check` evaluates.
-- Migration: `WO-ECP-005` ships it before `WO-ECP-006`, which depends on the
-  `transition` checkpoint for the delegated route; no approved artifact
-  needs an amendment record for this decision.
+- Migration: two work orders. `WO-ECP-005` removes schema 1 and the second
+  selector (REQ-ECP-010) and retires by dated amendment the three approved
+  artifacts that govern schema 1 — `SPEC-ADS-001` `ADS-NXT-002`,
+  `REQ-ADS-002`, `SPEC-WEX-002` — so the earlier statement that no approved
+  artifact needs an amendment is withdrawn on 2026-08-28. `WO-ECP-009` routes
+  `transition` through the gate evaluator (REQ-ECP-009) and is what
+  `WO-ECP-006` depends on. Splitting them keeps a mechanical deletion apart
+  from a contract-semantics change under commit-bound verification.
+- Amended on 2026-08-28: no `--result-schema 2` no-op and no `W-ECP-004`;
+  the option is removed outright. Checkpoint membership becomes declarable
+  per predicate so `transition` never evaluates a predicate whose input it
+  does not receive.
 
 ## Validation
 

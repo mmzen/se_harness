@@ -5,7 +5,7 @@ title = "Independent evidence for one kernel: schema 2, one selector, one precon
 status = "draft"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-009", "REQ-ECP-010"]
@@ -28,7 +28,8 @@ template CI already consumes, not against candidate output.
 | Requirement | Method | Case/evidence | Pass condition |
 |---|---|---|---|
 | `REQ-ECP-009` transitions evaluate the contract gates | test: `transition` plan on a work order that `check` blocks; on one `check` passes; with one `transition`-checkpoint predicate added to a copy of the contract | fixture repository where `check` demands content-bound evidence while `transition` today needs only a keyed file (the 2026-08 agentic execution review, section 5, weakness 4) | `transition` and `check` agree on every predicate status for the same artifact and snapshot; a predicate added to the contract's `transition` checkpoint is evaluated without any code change; no command-private precondition set remains reachable |
-| `REQ-ECP-010` one schema, one selector | test: `--json` on `focus`, `check`, `transition`, `capture-verification`, `prepare-release` | every state in the state table | each result validates as schema 2 with `result_sha256`; `--result-schema 1` is refused with a coded diagnostic; `next` fields from `_recommend` equal `select_rule` for every state |
+| `REQ-ECP-010` one schema, one selector | test: `--json` on `focus`, `check`, `transition`, `capture-verification`, `prepare-release` | every state in the state table | each result validates as schema 2 with `result_sha256`; `--result-schema` with either value is an argument error; `next` fields from the plan path equal `select_rule` for every state; `select-work-order --field restitution-digest` recomputes the same `result_sha256` as before the change on an unchanged fixture repository (issue #212, criterion 3) |
+| `REQ-ECP-009` transition-only predicates | test: `check --checkpoint handoff` and `transition -> implemented` on one fixture | a work order with a declared change set | `handoff` evaluates `QGP-G4I-COMPLETE` and `QGP-G4I-PATHS`; `transition` does not, and its `compliance.gates` are a subset of `handoff`'s with identical statuses on the shared predicates |
 
 ## Acceptance scenarios
 
@@ -45,10 +46,10 @@ that fails on the fixture. Assert `transition` blocks naming it.
 
 ### Scenario 3: failure path, schema 1 requested
 
-Run each of the five commands with `--result-schema 1`. Assert refusal, one
-diagnostic, no side effect (today `transition`, `capture-verification`, and
-`prepare-release` default to schema 1; complexity audit P0-6,
-`docs/notes/complexity-audit-2026-08.md:224-233`).
+Run each of the five commands with `--result-schema 1` and with
+`--result-schema 2`. Assert an argument error, one diagnostic, no side effect
+(today `transition`, `capture-verification`, and `prepare-release` default to
+schema 1; complexity audit P0-6, `docs/notes/complexity-audit-2026-08.md:224-233`).
 
 ### Scenario 4: one selector
 
@@ -65,7 +66,10 @@ refusal with the predicate identifier, not a generic `WEX201`
 
 ## Property and invariant tests
 
-- For random valid contexts, `_recommend(ctx)` equals `select_rule(ctx)`.
+- For every fixture state, the plan path's `next` equals `select_rule` over
+  the same context (`_recommend` no longer exists to compare against).
+- For every edge in the lifecycle registry, either a `transition` binding or
+  a graph-structural check exists; the loader refuses the contract otherwise.
 - Every result from the five commands round-trips through the canonical
   renderer to the same `result_sha256`.
 
@@ -95,7 +99,9 @@ None.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`
+(`WO-ECP-005` for the REQ-ECP-010 rows, `WO-ECP-009` for the REQ-ECP-009
+rows): the
 paired `check` and `transition` results per fixture, the mutated contract
 copy and its outcome, the refusal diagnostics, and per-platform test
 figures.

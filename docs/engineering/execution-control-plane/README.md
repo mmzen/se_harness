@@ -60,10 +60,11 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-002`: harness-authored evidence, identifier allocation, and pull-request bodies.
 - `WO-ECP-003`: make the pull-request gate mandatory and scope-aware, and widen the digest.
 - `WO-ECP-004`: authenticated decision records.
-- `WO-ECP-005`: one kernel: schema 2 only, one selector, one precondition engine.
+- `WO-ECP-005`: one result schema and one rule selector.
 - `WO-ECP-006`: reduce Phase 4 to its guarantee and introduce the delegation class.
 - `WO-ECP-007`: evict the bootstrap bridge and this repository's identifiers from the product.
 - `WO-ECP-008`: retire stubbed skills, trim the manifest, scope the handoff snapshot.
+- `WO-ECP-009`: one precondition engine: transition evaluates the contract's gates (split from `WO-ECP-005` on 2026-08-28).
 
 ## Work-order ordering
 
@@ -72,8 +73,9 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-003` after `WO-ECP-001` and `WO-ECP-002`; it needs `--from-git`
   and the widened digest.
 - `WO-ECP-004` independent.
-- `WO-ECP-005` independent, and before `WO-ECP-006`.
-- `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-005`.
+- `WO-ECP-005` independent, and before `WO-ECP-009`.
+- `WO-ECP-009` after `WO-ECP-005`, and before `WO-ECP-006`.
+- `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-009`.
 - `WO-ECP-007` independent.
 - `WO-ECP-008` after `WO-ECP-001`.
 

@@ -1,15 +1,15 @@
 +++
 id = "WO-ECP-005"
 type = "work_order"
-title = "One kernel: schema 2 only, one selector, one precondition engine"
+title = "One result schema and one rule selector"
 status = "draft"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
-rationale = "The work removes a result schema, merges two rule selectors, and routes `transition` through the contract's gate evaluator. Every later handoff, transition, verification-record, and release-record result is produced by this kernel, so commit-bound assurance is required."
+rationale = "The work removes a result schema and merges two rule selectors. Every later handoff, transition, verification-record, and release-record result is produced by this path, so commit-bound assurance is required."
 decided_by = "engineering-owner"
 
 [execution_scope]
@@ -18,34 +18,43 @@ paths = [
   "se_harness/workflow_result.py",
   "se_harness/workflow_compliance.py",
   "se_harness/workflow_contract.py",
+  "se_harness/workflow_contract.json",
   "se_harness/cli.py",
   "se_harness/provenance.py",
-  "se_harness/quality_gates_contract.json",
-  "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
-  "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+  "templates/repository/standard/docs/engineering/WORKFLOW.json",
+  "templates/repository/standard/docs/engineering/WORKFLOW.md",
+  "templates/repository/standard/docs/engineering/OPERATING_CARD.md",
+  "docs/notes/harnessctl-reference.md",
+  "docs/engineering/agent-directive-surface/specifications/SPEC-ADS-001.md",
+  "docs/engineering/agent-directive-surface/requirements/REQ-ADS-002.md",
+  "docs/engineering/workflow-execution/specifications/SPEC-WEX-002.md",
+  "docs/engineering/ci-pipeline/specifications/SPEC-CIP-001.md",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
 ]
 
 [relations]
-implements = ["REQ-ECP-009", "REQ-ECP-010"]
+implements = ["REQ-ECP-010"]
 specifications = ["SPEC-ECP-005"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-004"]
 verification = ["VER-ECP-005"]
 +++
 
-# Work Order: One kernel: schema 2 only, one selector, one precondition engine
+# Work Order: One result schema and one rule selector
+
+Amended on 2026-08-28, before approval, on the review of issue #212: the
+precondition engine (`REQ-ECP-009`, `ECP-KRN-004` to `ECP-KRN-009`) moves to
+`WO-ECP-009`, so that a mechanical deletion and a contract-semantics change
+are verified separately. This work order keeps `REQ-ECP-010`.
 
 ## Lifecycle
 
 Approval authorizes only the scope below. Start, completion, commit-bound
 verification, the assurance-owner decision, integration, and release are
-separate decisions by the roles that own them. Approval of `REQ-ECP-009`,
-`REQ-ECP-010`, `SPEC-ECP-005`, `ARCH-ECP-001`, `ADR-ECP-004`, and
-`VER-ECP-005` are separate acts by their owners and precede approval of
-this work order. This work order is independent of the others but precedes
-`WO-ECP-006`, which unlocks transitions through the gate evaluator this
-work order installs.
+separate decisions by the roles that own them. Approval of `REQ-ECP-010`,
+`SPEC-ECP-005`, `ARCH-ECP-001`, `ADR-ECP-004`, and `VER-ECP-005` are
+separate acts by their owners and precede approval of this work order. This
+work order is independent of the others; `WO-ECP-009` follows it.
 
 ## Objective
 
@@ -63,34 +72,47 @@ predicates (the 2026-08 agentic execution review, section 3).
 ## In scope
 
 - Schema 2 as the only result of `focus`, `check`, `transition`,
-  `capture-verification`, and `prepare-release`; `--result-schema 1`
-  refused; `legacy_to_schema2` and the schema-1 `handoff` renderer removed,
-  per `ECP-KRN-*`.
-- `_recommend` delegating to `select_rule`; one context builder.
-- `plan_transition` evaluating the contract's `transition` checkpoint gates
-  through `_gate_results`; `_validate_preconditions` reduced to
-  graph-structural checks; transition failures labelled by predicate rather
-  than a blanket `WEX201` (`se_harness/cli.py:521`).
+  `capture-verification`, and `prepare-release`; `--result-schema` removed
+  with either value an argument error; `legacy_to_schema2`, the schema-1
+  `_result`/`_handoff` builders and `workflow.render_*` deleted
+  (`ECP-KRN-001`, `-002`, `-010`).
+- `_recommend` and `_contract_match`/`_format_contract_value` deleted;
+  `plan_transition`, `preparation_result` and `failed_result` build through
+  `build_result` with `select_rule` over one context builder (`ECP-KRN-003`).
+- The `handoff` block of every rule, `failure.handoff` and `handoff_fields`
+  removed from `se_harness/workflow_contract.json` and the managed
+  `WORKFLOW.json`; `WORKFLOW.md` and `OPERATING_CARD.md` no longer describe
+  `--result-schema`; `tests/test_workflow_documentation_contract.py`
+  retargeted.
+- `focus_schema2` passing its validation report into `focus` so the
+  validator runs once (issue #212, change 4).
+- Transition failures labelled by the refusing check rather than a blanket
+  `WEX201` (`ECP-KRN-008`), as far as the checks that exist before
+  `WO-ECP-009` allow.
 - `se_harness/provenance.py` rendering its results in schema 2 only.
-- The `transition` checkpoint made explicit in
-  `se_harness/quality_gates_contract.json` and its template renderings
-  `QUALITY_GATES.json` and `QUALITY_GATES.md`.
+- Dated retirement amendments to `SPEC-ADS-001` `ADS-NXT-002`, `REQ-ADS-002`
+  and `SPEC-WEX-002`; the `[--result-schema 2]` correction in
+  `SPEC-CIP-001`; `docs/notes/harnessctl-reference.md`.
+- A golden `result_sha256` test: `select-work-order --field
+  restitution-digest` on an unchanged fixture repository reads the same
+  digest before and after (issue #212, criterion 3).
 - Tests; work-order-keyed evidence.
 
 ## Out of scope
 
-- Authenticating decisions (`WO-ECP-004`); the delegation class
-  (`WO-ECP-006`); the root managed `QUALITY_GATES.*` copies; any change to
-  a gate predicate's identifier or meaning, to lifecycle states, or to
-  decision rights; any lifecycle transition of any artifact.
+- The precondition engine, the `transition` checkpoint bindings and
+  `QUALITY_GATES.*` (`WO-ECP-009`); authenticating decisions (`WO-ECP-004`);
+  the delegation class (`WO-ECP-006`); the root managed `WORKFLOW.*` and
+  `OPERATING_CARD.md` copies; any change to a gate predicate's identifier or
+  meaning, to lifecycle states, or to decision rights; any lifecycle
+  transition of any artifact; folding `focus` into `check` (#225).
 
 ## Authorized decision envelope
 
 The implementation agent may decide how the shared context is built, the
-refusal diagnostic for schema 1, and test names. It may not change
-`result_sha256`'s definition over the schema-2 block, add a predicate
-outside the existing `QG-`/`QGP-` identifiers, or write outside the listed
-paths.
+argument-error wording, and test names. It may not change `result_sha256`'s
+definition over the schema-2 block, touch `QUALITY_GATES.*` or
+`_validate_preconditions`, or write outside the listed paths.
 
 ## Constraints
 
@@ -103,15 +125,16 @@ paths.
 
 ## Expected change surface
 
-The workflow kernel, the result renderer, the compliance module's
-checkpoint entry, the contract loader and selector, the CLI defaults, the
-provenance module's result path, one gate contract and its two template
-renderings, tests, evidence.
+The workflow kernel's result path, the result renderer, the contract loader
+and selector, the workflow contract and its managed rendering, the CLI
+options, the provenance module's result path, three approved artifacts by
+dated amendment, tests, evidence.
 
 ## Required verification
 
-Execute `VER-ECP-005` completely plus the repository-required checks; run
-the complete suite on Linux and Windows with figures labelled per platform.
+Execute the `VER-ECP-005` rows that name `REQ-ECP-010` plus the
+repository-required checks; run the complete suite on Linux and Windows with
+figures labelled per platform.
 
 ## Evidence to record
 
@@ -122,10 +145,10 @@ complete changed-path set.
 
 ## Stop and escalate conditions
 
-Stop if any consumer of schema 1 is found outside tests, if the
-`transition` checkpoint cannot be evaluated without a new predicate
-identifier, if the released evaluator refuses the edited gate contract, or
-if any path outside scope must change.
+Stop if any consumer of schema 1 is found outside tests and the
+`harness-orient` `--help` guard, if `result_sha256` changes for an unchanged
+repository, if the released evaluator refuses the edited workflow contract,
+or if any path outside scope must change.
 
 ## Completion report format
 

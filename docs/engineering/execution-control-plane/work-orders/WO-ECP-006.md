@@ -54,7 +54,7 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-011`,
 `REQ-ECP-017`, `REQ-ECP-018`, `SPEC-ECP-006`, `ARCH-ECP-001`, `ADR-ECP-002`,
 and `VER-ECP-006` are separate acts by their owners and precede approval of
 this work order. This work order follows `WO-ECP-003` (the gate it unlocks
-behind) and `WO-ECP-005` (the gate evaluator `transition` uses). The
+behind) and `WO-ECP-009` (the gate evaluator `transition` uses). The
 supersessions it records are separate acts by the requirements steward and
 the technical owner.
 
@@ -118,7 +118,7 @@ with its fault matrix (`se_harness/effect_broker.py:1029-1160`;
 ## Out of scope
 
 - Approving any ECP artifact; the gate itself (`WO-ECP-003`); the gate
-  evaluator (`WO-ECP-005`); authenticated records (`WO-ECP-004`); retiring
+  evaluator (`WO-ECP-009`); authenticated records (`WO-ECP-004`); retiring
   the shipped skills (`WO-ECP-008`); root managed copies; editing any
   front matter of an amended artifact; any change to lifecycle states,
   gate predicates, or decision rights beyond the delegation class's use of
