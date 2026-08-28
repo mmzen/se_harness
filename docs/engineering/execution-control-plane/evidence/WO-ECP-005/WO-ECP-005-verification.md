@@ -122,4 +122,12 @@ Rerun: completed pass 839eb402a1f2215898a0a66cc4e867b69deaff7afae7c6a70101c2245f
 
 ## 8. Hosted lanes
 
-Recorded in a later commit once the pull request has run them.
+At head `f054a66` of #239, all thirteen checks pass: `candidate-evidence.yml`
+run `33171169241` (candidate source, candidate package, deterministic
+integration package, governance migration on Linux and Windows, integration
+package verified on Linux and Windows, retained), `publication-rehearsal.yml`
+run `33171169575` (record selection, candidate replay, release-record replay),
+`validate` run `33171169324`, governor transition assessment run
+`33171169339`. The Windows legs are the Windows criterion of `VER-ECP-005`'s
+`REQ-ECP-010` rows: the hosted suite runs the retargeted workflow tests and
+the golden-digest test on both platforms.

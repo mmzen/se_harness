@@ -2,7 +2,7 @@
 id = "WO-ECP-005"
 type = "work_order"
 title = "One result schema and one rule selector"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
@@ -52,6 +52,13 @@ to = "in_progress"
 decided_at = "2026-08-28T12:14:43Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 by the accountable owner, 'start WO-ECP-005', after #238 merged the amended packet and the approvals. Execution is confined to the approved scope: schema 2 as the only result, one rule selector, the contract handoff blocks removed, the three dated retirement amendments, the focus_schema2 double validation, the golden result_sha256 test, notes and tests. The precondition engine is WO-ECP-009 and is not started."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T12:32:00Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's standing direction for this sequence, once the hosted lanes were green. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout with seventeen changed paths declared and completeness asserted. Delivered: schema 2 as the only result of focus, transition, capture-verification and prepare-release; the --result-schema option removed with either value an argument error; legacy_to_schema2, the schema-1 builder and renderers and _recommend deleted; one selector and one context builder in workflow_compliance.selected_result; the handoff blocks and handoff_fields removed from the workflow contract and its managed rendering with each rule keeping only done and current_lifecycle_state; focus validating once; the golden result_sha256 of the released 0.7.1 evaluator reproduced and pinned; dated retirement amendments to SPEC-ADS-001, REQ-ADS-002 and SPEC-WEX-002 and the SPEC-CIP-001 correction; tests and evidence. All thirteen hosted checks pass at f054a66, Windows legs included. ECP-KRN-008's per-predicate refusal labels are deferred to WO-ECP-009, disclosed. Completion is not verification."
 +++
 
 # Work Order: One result schema and one rule selector
