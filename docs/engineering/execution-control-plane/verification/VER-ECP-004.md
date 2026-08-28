@@ -2,13 +2,20 @@
 id = "VER-ECP-004"
 type = "verification"
 title = "Independent evidence for authenticated decision records"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for authenticated decision records
@@ -35,7 +42,7 @@ specification.
 
 Sign a record `{artifact, decision_right, outcome, reason, signer}` with the
 fixture key of a signer mapped to `engineering-owner`. Run
-`transition --apply --decision-record <path>`. Assert the lifecycle event
+`transition --apply --decision-record PATH`. Assert the lifecycle event
 is appended and names the verified signer identity.
 
 ### Scenario 2: failure path, wrong role
@@ -99,7 +106,7 @@ scenario and confirms that each names a cause a human can act on.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: the
 fixture identity source, public fingerprints, each record and its verdict,
 the refused-transition diagnostics, and per-platform test figures.
 

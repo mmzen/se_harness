@@ -2,10 +2,10 @@
 id = "REQ-ECP-004"
 type = "requirement"
 title = "Identifiers are allocated across every local ref"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN `harnessctl create-artifact` is invoked without an explicit identifier, THE SYSTEM SHALL allocate the lowest identifier for the requested domain and type that no artifact reachable from any local Git ref already uses."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "AGENTS.md traps; OPERATING_CARD.md"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: Identifiers are allocated across every local ref
@@ -30,9 +37,9 @@ reminder.
 
 ## Behavior
 
-- Trigger: `harnessctl create-artifact <repo> --type <type> --domain <prefix>`
+- Trigger: `harnessctl create-artifact REPO --type TYPE --domain PREFIX`
   runs without `--id`.
-- Response: the allocated identifier is `<TYPE>-<PREFIX>-NNN` with the lowest
+- Response: the allocated identifier is `TYPE-PREFIX-NNN` with the lowest
   `NNN` such that no artifact carrying that `id` is reachable from any local
   branch, tag, or `HEAD` of the repository; the result reports the identifier
   and the refs consulted.
@@ -44,7 +51,7 @@ reminder.
 
 - Local refs are the authority; remote-only refs are not consulted, which the
   result states.
-- Artifact identifiers keep the `<TYPE>-<PREFIX>-NNN` shape validated today.
+- Artifact identifiers keep the `TYPE-PREFIX-NNN` shape validated today.
 - `--id` remains available for an explicit identifier and is rejected when it
   is already used on any local ref.
 

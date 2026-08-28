@@ -2,13 +2,20 @@
 id = "ADR-ECP-003"
 type = "adr"
 title = "Accountable decisions are authenticated records consumed by `transition`"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 decides = ["ARCH-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # ADR: Accountable decisions are authenticated records consumed by `transition`
@@ -20,7 +27,7 @@ Proposed.
 ## Context
 
 `DECISION_RIGHTS.md` declares seven roles and twelve decision rights, and
-every transition requires `--decision <ID>=<actor>`. The actor is validated
+every transition requires `--decision ID=ACTOR`. The actor is validated
 for length and control characters only (`se_harness/workflow.py:606`); no
 Git-author, `GITHUB_ACTOR`, `CODEOWNERS`, or signature check exists in
 `se_harness/` or `scripts/` (`docs/notes/agentic-execution-review-2026-08.md`,

@@ -2,10 +2,10 @@
 id = "REQ-ECP-015"
 type = "requirement"
 title = "The reading manifest carries a generated command block, not the owner narrative"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN `preflight` emits the phase reading manifest, THE SYSTEM SHALL list the owner-controlled region of `AGENTS.md` only through a generated command block bounded to 2048 bytes, excluding the remaining owner narrative."
 verification_method = ["test"]
 priority = "should"
@@ -14,6 +14,13 @@ measure = "2048 bytes"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The reading manifest carries a generated command block, not the owner narrative
@@ -31,7 +38,7 @@ on demand.
 
 ## Behavior
 
-- Trigger: `harnessctl preflight <repo> --phase <phase>` emits the reading
+- Trigger: `harnessctl preflight REPO --phase PHASE` emits the reading
   manifest.
 - Response: the manifest entry for `AGENTS.md` refers to a generated block,
   rendered from the owner region's command lines and managed-path lists only,

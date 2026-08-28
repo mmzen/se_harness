@@ -2,10 +2,10 @@
 id = "REQ-ECP-005"
 type = "requirement"
 title = "The pull-request body is generated"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN an actor runs `harnessctl pr-body` for a work order, THE SYSTEM SHALL emit an LF-terminated pull-request body carrying the standalone `Harness-Work-Order:` line and, when a handoff result exists, the `Harness-Restitution:` line."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "REQ-ADS-004; W-ADS-001"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The pull-request body is generated
@@ -30,12 +37,12 @@ Generating the body removes the defect instead of diagnosing it.
 
 ## Behavior
 
-- Trigger: `harnessctl pr-body <repo> --artifact <WO>` runs, optionally with
-  `--handoff-result <file>`.
+- Trigger: `harnessctl pr-body REPO --artifact WO` runs, optionally with
+  `--handoff-result FILE`.
 - Response: standard output, or the `--output` file, is a body whose every line
-  ends in `\n` alone, containing a standalone line `Harness-Work-Order: <WO>`
+  ends in `\n` alone, containing a standalone line `Harness-Work-Order: WO`
   and, when a handoff result is supplied or found for the work order, a
-  standalone line `Harness-Restitution: <result_sha256>` equal to the digest in
+  standalone line `Harness-Restitution: RESULT_SHA256` equal to the digest in
   that result.
 - On failure: when the work order does not exist, or the supplied handoff result
   is not a schema-2 result for that work order, nothing is emitted and the

@@ -2,10 +2,10 @@
 id = "REQ-ECP-017"
 type = "requirement"
 title = "Harness-owned multi-file writes are journaled"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "THE SYSTEM SHALL perform every harness-owned multi-file write through one journaled apply with rollback and a human-recovery stop."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "se_harness/effect_broker.py:1029-1160; tests/test_effect_broker.py:308
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: Harness-owned multi-file writes are journaled

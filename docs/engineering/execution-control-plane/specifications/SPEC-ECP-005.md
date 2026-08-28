@@ -2,13 +2,20 @@
 id = "SPEC-ECP-005"
 type = "specification"
 title = "One kernel: schema 2, one selector, one precondition engine"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-009", "REQ-ECP-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: One kernel: schema 2, one selector, one precondition engine
@@ -118,7 +125,7 @@ repository-integrity refusals; its re-implementation of `QGP-G1/G2-AUTHORING`
 and `QGP-G5P-RELEASE-UNIT` is deleted because the table above evaluates them.
 
 **ECP-KRN-006:** `check_workflow` accepts `--checkpoint transition
---target <state>` as a public read-only checkpoint that renders the same
+--target STATE` as a public read-only checkpoint that renders the same
 gate results `plan_transition` evaluates, so an agent can preview a
 transition's gate outcome without a decision record.
 
@@ -126,7 +133,7 @@ transition's gate outcome without a decision record.
 and `workflow_compliance.py:844-853` are one function, the one
 `workflow_compliance.py` uses today (it is what the managed CI already
 enforces); a conformance test asserts that `check --checkpoint transition
---target <state>` and `transition` (planning mode) return identical
+--target STATE` and `transition` (planning mode) return identical
 `compliance.gates` for every fixture state, and that `check --checkpoint
 handoff` returns a superset for `-> implemented`.
 
@@ -157,7 +164,7 @@ a pull-request body and recomputed.
 ## Inputs and outputs
 
 Inputs: the existing command arguments minus `--result-schema`, plus
-`check --checkpoint transition --target <state>`. Outputs: schema-2 results
+`check --checkpoint transition --target STATE`. Outputs: schema-2 results
 only; `QUALITY_GATES.json` gains the `transition` bindings and
 `QUALITY_GATES.md` indexes them; `WORKFLOW.json` loses its `handoff` blocks.
 

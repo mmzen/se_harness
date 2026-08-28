@@ -2,10 +2,10 @@
 id = "REQ-ECP-008"
 type = "requirement"
 title = "Decisions are authenticated records"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN `harnessctl transition --apply` is invoked, THE SYSTEM SHALL refuse the transition unless each decision is a decision record whose signer identity is verified against the configured identity source and whose role holds the decision right."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 5, weakness 1; se_harness/workflow.py:606"
 
 [relations]
 derives_from = ["CAP-ECP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: Decisions are authenticated records
@@ -31,8 +38,8 @@ review-2026-08.md:205-208). Until decisions are bound to an identity,
 
 ## Behavior
 
-- Trigger: `harnessctl transition <repo> --artifact <id> --to <state> --apply`
-  runs with one or more `--decision-record <file>`.
+- Trigger: `harnessctl transition REPO --artifact ID --to STATE --apply`
+  runs with one or more `--decision-record FILE`.
 - Response: each record is parsed as a structured decision (decision right,
   artifact, outcome, reason, signer); the signer is verified against the
   identity source configured in `.engineering-harness.toml` (a commit or file

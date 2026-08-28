@@ -2,13 +2,20 @@
 id = "VER-ECP-005"
 type = "verification"
 title = "Independent evidence for one kernel: schema 2, one selector, one precondition engine"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-009", "REQ-ECP-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for one kernel: schema 2, one selector, one precondition engine
@@ -99,7 +106,7 @@ None.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`
 (`WO-ECP-005` for the REQ-ECP-010 rows, `WO-ECP-009` for the REQ-ECP-009
 rows): the
 paired `check` and `transition` results per fixture, the mutated contract

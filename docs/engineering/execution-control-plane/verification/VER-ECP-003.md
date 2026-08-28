@@ -2,13 +2,20 @@
 id = "VER-ECP-003"
 type = "verification"
 title = "Independent evidence for the mandatory scope-aware pull-request gate and the widened restitution digest"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-006", "REQ-ECP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for the mandatory scope-aware pull-request gate and the widened restitution digest
@@ -96,7 +103,7 @@ the corrective names `DR-REMEDIATION-SCOPE`, not a rerun.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: the
 throwaway pull-request URLs and run identifiers, the check logs, the two
 canonical blocks and digests of Scenario 3, and per-platform test figures.
 

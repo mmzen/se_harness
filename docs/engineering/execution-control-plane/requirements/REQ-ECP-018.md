@@ -2,10 +2,10 @@
 id = "REQ-ECP-018"
 type = "requirement"
 title = "No envelope apparatus in the product surface"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "THE SYSTEM SHALL expose no autonomy-envelope, nonce-ledger, lifetime, or revocation interface in the product CLI or the public Python API."
 verification_method = ["analysis", "test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "complexity audit P1-3; review section 5, weakness 3"
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: No envelope apparatus in the product surface
@@ -69,7 +76,7 @@ the public API inventory is generated.
 
 ### Example: failure behavior
 
-**Given** a pull request adds `--envelope <file>` to `transition`.
+**Given** a pull request adds `--envelope FILE` to `transition`.
 
 **When** the surface check runs.
 

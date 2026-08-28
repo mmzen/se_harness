@@ -2,10 +2,10 @@
 id = "REQ-ECP-003"
 type = "requirement"
 title = "The harness writes and rebinds evidence packets"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN an actor runs `harnessctl evidence` for a work order and checkpoint, THE SYSTEM SHALL write or rebind an evidence packet whose machine header carries the artifact, checkpoint, and current formal snapshot digest without altering retained body content."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 6; WO-HUP-007 re-binding"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The harness writes and rebinds evidence packets
@@ -32,9 +39,9 @@ get wrong".
 
 ## Behavior
 
-- Trigger: `harnessctl evidence <repo> --artifact <WO> --checkpoint <name>`
+- Trigger: `harnessctl evidence REPO --artifact WO --checkpoint NAME`
   runs.
-- Response: the packet under `<domain>/evidence/<WO>/` exists afterwards with a
+- Response: the packet under `DOMAIN/evidence/WO/` exists afterwards with a
   machine header naming the artifact, the checkpoint, and the formal snapshot
   digest computed at that moment; a pre-existing packet keeps every retained
   body byte below the header and only the header changes; the result reports the
