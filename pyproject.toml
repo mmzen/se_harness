@@ -32,7 +32,6 @@ se_harness = [
   "effect_contract.json",
   "workflow_contract.json",
   "quality_gates_contract.json",
-  "governance_migration_contract.json",
   "hash_bound_classes.json",
   "interpreter_safety.json",
 ]

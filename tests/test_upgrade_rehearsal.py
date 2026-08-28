@@ -219,11 +219,9 @@ class UpgradeRehearsalTests(unittest.TestCase):
 class RetiredSurfaceTests(unittest.TestCase):
     """Issue #210 acceptance criteria 2 and 3, and the reserved names."""
 
-    #: The stage machine's files, retained dead until the root evaluator advances
-    #: past 0.7.1, whose hash-bound class requires a tracked file per pattern
-    #: (WO-ECP-010 evidence, section 6). The follow-up that deletes them removes
-    #: this set and the exemption below.
-    RETAINED_UNTIL_ROOT_ADVANCES = (
+    #: The stage machine's files, deleted by WO-ECP-011 once the 0.8.0 root
+    #: (WO-HUP-008) no longer required a tracked file per pattern.
+    DELETED_WITH_THE_ROOT_ADVANCE = (
         "se_harness/governance_migration.py",
         "se_harness/governance_migration_contract.py",
         "se_harness/governance_migration_contract.json",
@@ -232,10 +230,7 @@ class RetiredSurfaceTests(unittest.TestCase):
 
     def test_no_json_under_se_harness_embeds_a_digest_of_a_python_module(self) -> None:
         digests = {hashlib.sha256(path.read_bytes()).hexdigest() for path in (REPOSITORY_ROOT / "se_harness").rglob("*.py")}
-        exempt = {Path(item).name for item in self.RETAINED_UNTIL_ROOT_ADVANCES if item.endswith(".json")}
         for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.json")):
-            if path.name in exempt:
-                continue
             with self.subTest(contract=path.name):
                 values = re.findall(r"[0-9a-f]{64}", path.read_text(encoding="utf-8"))
                 self.assertEqual([], [value for value in values if value in digests])
@@ -244,12 +239,10 @@ class RetiredSurfaceTests(unittest.TestCase):
         for relative in ("tests/test_governance_migration.py", "repository_tools/predecessor_facts.py",
                          "tests/fixtures/governance_migration/candidate-0.7.1-to-0.8.0.json"):
             self.assertFalse((REPOSITORY_ROOT / relative).exists(), relative)
-        for relative in self.RETAINED_UNTIL_ROOT_ADVANCES:
-            self.assertTrue((REPOSITORY_ROOT / relative).exists(), relative)
-        retained = {Path(item).name for item in self.RETAINED_UNTIL_ROOT_ADVANCES}
+        for relative in self.DELETED_WITH_THE_ROOT_ADVANCE:
+            self.assertFalse((REPOSITORY_ROOT / relative).exists(), relative)
+        self.assertFalse((REPOSITORY_ROOT / "tests/fixtures/governance_migration").exists())
         for relative in sorted((REPOSITORY_ROOT / "se_harness").rglob("*.py")):
-            if relative.name in retained:
-                continue
             text = relative.read_text(encoding="utf-8")
             self.assertNotIn("rehearse-migration", text, relative.name)
             self.assertNotIn("governance_migration", text, relative.name)
@@ -260,11 +253,12 @@ class RetiredSurfaceTests(unittest.TestCase):
         workflows = " ".join(path.read_text(encoding="utf-8") for path in (REPOSITORY_ROOT / ".github/workflows").glob("*.yml"))
         self.assertNotIn("rehearse-migration", workflows)
 
-    def test_the_retained_owner_rules_say_why_they_stay(self) -> None:
+    def test_the_owner_rules_and_the_retired_members_are_gone_or_forbidden(self) -> None:
         attributes = (REPOSITORY_ROOT / ".gitattributes").read_text(encoding="utf-8")
-        owner = attributes.split("# se-harness:end\n", 1)[1]
-        self.assertIn("se_harness/governance_migration*.py text eol=lf", owner)
-        self.assertIn("WO-ECP-010", owner)
+        self.assertNotIn("governance_migration", attributes)
+        surface = (REPOSITORY_ROOT / "scripts/check_portable_release_surface.py").read_text(encoding="utf-8")
+        self.assertIn("FORBIDDEN_MEMBERS = FORBIDDEN_MEMBERS | RETIRED_MIGRATION_MEMBERS", surface)
+        self.assertIn("FORBIDDEN_ACTIVE_PATHS = FORBIDDEN_ACTIVE_PATHS | RETIRED_MIGRATION_MEMBERS", surface)
 
     def test_the_lane_runs_the_rehearsal_twice_per_platform_and_compares_across(self) -> None:
         workflow = (REPOSITORY_ROOT / ".github/workflows/candidate-evidence.yml").read_text(encoding="utf-8")

@@ -54,7 +54,7 @@ Six registered call sites consume a loader instead of restating the rule:
 
 - `se_harness/runtime_identity.py` observing `sys.executable` for the released-evaluator and candidate-package roles;
 - `se_harness/release_qualification.py` locating an external predecessor evaluator;
-- `se_harness/governance_migration.py` probing a predecessor or successor runtime;
+- `se_harness/governance_migration.py` probing a predecessor or successor runtime (deleted; see the amendment of 2026-08-28);
 - `repository_tools/release_bootstrap.py` binding a released evaluator to a release record;
 - `repository_tools/predecessor_preparation.py` validating an external interpreter;
 - `repository_tools/predecessor_assessment.py` normalizing a verified interpreter origin.
@@ -156,3 +156,17 @@ The declaration depends on nothing. It is not generated, not derived from the im
 ## Related ADRs
 
 `ADR-REB-010` selects the declared data document with one conforming loader per runtime over importing `se_harness` from `repository_tools`, duplicating the rule behind a parity test, inverting the dependency so the package imports repository tooling, or extracting a shared third package.
+
+## Amendment, 2026-08-28 (`WO-ECP-011`)
+
+`WO-ECP-010` retired the governance-migration stage machine and `WO-ECP-011`
+deleted `se_harness/governance_migration.py` once the root advanced to 0.8.0
+(`WO-HUP-008`). The identity boundary this architecture registered for it,
+`se_harness.governance_migration.runtime_probe`, no longer exists and is
+removed from the declaration's boundary registry; `WO-REB-028` had already
+retired the four `repository_tools` sites of the predecessor-bootstrap path
+and `release_qualification.py`'s. The registry check therefore enumerates one
+rule boundary, `se_harness/runtime_identity.py`, and no delegating boundary.
+The decision — one declared data document, one conforming loader per runtime,
+mechanically checked registration and cross-runtime agreement — is unchanged;
+only the inventory it governs shrank.

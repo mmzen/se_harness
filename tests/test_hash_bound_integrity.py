@@ -695,12 +695,6 @@ class InventoryReconciliationTests(unittest.TestCase):
         declaration = load_declaration()
         self.assertIn("implementation_sha256", declaration.unbound_names())
         self.assertNotIn("implementation_sha256", declaration.binding_owner())
-        contract = json.loads(
-            (ROOT / "se_harness" / "governance_migration_contract.json").read_bytes()
-        )
-        self.assertTrue(
-            any("implementation_sha256" in adapter for adapter in contract["adapters"].values())
-        )
 
     def test_an_undeclared_hash_bound_field_fails_the_declared_check(self) -> None:
         declaration = load_declaration()
