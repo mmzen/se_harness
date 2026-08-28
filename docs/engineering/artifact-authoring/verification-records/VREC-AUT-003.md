@@ -2,7 +2,7 @@
 id = "VREC-AUT-003"
 type = "verification_record"
 title = "Verification candidate for WO-AUT-003"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/artifact-authoring/evidence/WO-AUT-003-verif
 evaluator_evidence_path = "docs/engineering/artifact-authoring/evidence/VREC-AUT-003-evaluator.json"
 evaluator_evidence_sha256 = "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
 
+verified_at = "2026-08-28T10:47:55Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-AUT-003"]
 conforms_to = ["VER-AUT-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-28T10:47:55Z"
+decided_by = "assurance-owner"
+reason = "Verified on 2026-08-28 by the accountable assurance owner, 'I verify VREC-AUT-003'. Re-measured immediately before this transition: candidate commit 7a2a3649da276d0f31d11997a361232b8c16fa29 is an ancestor of the branch tip with a clean worktree; the evidence blob at the candidate is byte-identical to the tip; the evaluator packet matches its recorded raw digest; all thirteen hosted checks pass at 8d67924 including the Windows legs; the graph reads 1053 artifacts and 0 errors under the released 0.7.1 evaluator. Acceptance covers the evidence as recorded with its two disclosures. It authorizes no merge, release, publication or deployment."
 +++
 
 # Verification Record Candidate
