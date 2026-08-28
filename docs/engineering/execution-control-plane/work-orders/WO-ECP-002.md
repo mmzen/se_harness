@@ -2,7 +2,7 @@
 id = "WO-ECP-002"
 type = "work_order"
 title = "Harness-authored evidence, identifier allocation, and pull-request bodies"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-08-28T21:09:09Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start with the amendments'. Start preflight Completed with nothing not done over the approval commit 645b5ca carrying unmoved main 0961176, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T21:27:11Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-ECP-002 implemented', on the handoff check reading Completed over the implementation commit, formal snapshot 9c6e9645393374ce2acf007697f7535116a7f4776411aa7fc5c07e2edbb16c22, change set asserted complete over 14 paths plus the work order's own file, under the four pre-start amendments recorded on 2026-08-28. harnessctl evidence, the parser-read evidence predicate with its one-release grace, identifier allocation across local refs, harnessctl pr-body and the harness-retained handoff.json are shipped as SPEC-ECP-002 amended specifies. Readings under the governing exact public 0.8.0 root: validate 0 errors, doctor 0 FAIL. Candidate: 239 tests in the three touched modules, full suite 1077 with the single known workstation file-mode failure that passes hosted; the candidate's own check --from-git main completed over 15 paths and retained handoff.json; the pull-request body is pr-body's output with zero carriage returns. All 13 pull-request lanes pass on #250 at 2b1655d including both platform legs. Five deviations are recorded in the packet, the fifth being the restitution line omitted from the pull request because the 0.8.0 lane predates ECP-CHG-007. This authorizes no further act."
 +++
 
 # Work Order: Harness-authored evidence, identifier allocation, and pull-request bodies
