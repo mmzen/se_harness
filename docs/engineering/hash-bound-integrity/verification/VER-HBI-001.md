@@ -19,10 +19,11 @@ decided_by = "quality-owner"
 
 # Verification Contract: Hash-bound class declaration, checkout-byte and mode-consistency assurance
 
-## Third amendment, 2026-08-28 — proposed
+## Third amendment, 2026-08-28 — accepted
 
-Proposed under `WO-HBI-005` for repository issue #207. Not yet accepted by the
-accountable quality owner; the contract below reads as approved until then.
+Proposed under `WO-HBI-005` for repository issue #207 and accepted on
+2026-08-28 by the accountable owner ("I accept SPEC-HBI-001/VER-HBI-001 and I
+approve WO-HBI-005"). The contract below reads with this amendment applied.
 
 Acceptance scenario 7 states that a consumer installation "inherits the
 `template` classes and none of this repository's `repository`-region rules".

@@ -2,7 +2,7 @@
 id = "REQ-HBI-003"
 type = "requirement"
 title = "Assess an empty template-region class as vacuously declared, not as a failure"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -13,6 +13,13 @@ source = "Repository issue #207; complexity audit finding P0-1 in docs/notes/com
 
 [relations]
 derives_from = ["CAP-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T10:18:43Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I accept SPEC-HBI-001/VER-HBI-001 and I approve WO-HBI-005', for repository issue #207. The template-region empty-pattern case is assessed as vacuously declared while the attribute rule stays required."
 +++
 
 # Requirement: Assess an empty template-region class as vacuously declared, not as a failure

@@ -2,7 +2,7 @@
 id = "REQ-HBI-004"
 type = "requirement"
 title = "Ship no hash-bound class or managed byte rule that only the harness's own repository can satisfy"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -13,6 +13,13 @@ source = "Repository issue #207; complexity audit finding P0-1 in docs/notes/com
 
 [relations]
 derives_from = ["CAP-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T10:18:43Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I accept SPEC-HBI-001/VER-HBI-001 and I approve WO-HBI-005', for repository issue #207. The shipped class table and canonical fragment carry only patterns a consumer can satisfy."
 +++
 
 # Requirement: Ship no hash-bound class or managed byte rule that only the harness's own repository can satisfy

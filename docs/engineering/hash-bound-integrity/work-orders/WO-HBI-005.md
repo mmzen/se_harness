@@ -2,7 +2,7 @@
 id = "WO-HBI-005"
 type = "work_order"
 title = "Make doctor pass in a fresh consumer repository: drop the self-hosting class from the shipped surface and assess empty template classes vacuously"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -28,6 +28,20 @@ implements = ["REQ-HBI-001", "REQ-HBI-003", "REQ-HBI-004"]
 specifications = ["SPEC-HBI-001"]
 architecture = ["ARCH-HBI-001", "ADR-HBI-001"]
 verification = ["VER-HBI-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T10:18:43Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I accept SPEC-HBI-001/VER-HBI-001 and I approve WO-HBI-005', after acceptance of the first amendment to SPEC-HBI-001 and the third amendment to VER-HBI-001. Authorizes only the stated scope: remove governance-migration-protocol from se_harness/hash_bound_classes.json and its four lines from templates/repository/standard/gitattributes.fragment, gate the untracked-pattern failure in _class_declared on repository-region classes, add the fresh-consumer onboarding test on LF and core.autocrlf=true checkouts, retarget the hash-bound tests, apply the accepted amendments, note the fragment update in the installation guide, and retain evidence. No root managed file, no governance_migration source or fixture, no recorded digest. Start, completion, commit-bound verification, release and publication are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T10:18:46Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner immediately after approval, on the standing instruction to implement the work order the moment it is approved. Execution is confined to the approved scope and the execution_scope paths; completion, commit-bound verification and release remain separate decisions."
 +++
 
 # Work Order: Make doctor pass in a fresh consumer repository

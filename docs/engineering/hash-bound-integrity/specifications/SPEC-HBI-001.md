@@ -19,11 +19,11 @@ decided_by = "technical-owner"
 
 # Specification: Declared hash-bound text classes and fail-closed completeness assessment
 
-## First amendment, 2026-08-28 — proposed
+## First amendment, 2026-08-28 — accepted
 
-Proposed under `WO-HBI-005` for repository issue #207. Not yet accepted; the
-rules below read as approved until the accountable technical owner accepts
-this section, and `WO-HBI-005` must not be approved before that acceptance.
+Proposed under `WO-HBI-005` for repository issue #207 and accepted on
+2026-08-28 by the accountable owner ("I accept SPEC-HBI-001/VER-HBI-001 and I
+approve WO-HBI-005"). The rules below read with this amendment applied.
 
 Rule 2 declared `governance-migration-protocol`, a `repository`-region class
 whose three patterns name paths that exist only in this repository, and the
