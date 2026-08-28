@@ -159,4 +159,32 @@ Rerun: outcome `completed`, compliance `pass`, all eight
 
 ## 9. Hosted lanes
 
-Recorded in a later commit on this branch, once the pull request has run them.
+First push (`03a3e22` base, implementation commit): the `candidate-source` job
+and the candidate qualification replay failed on
+`test_repository_dry_run_report_is_retained_and_matches_a_fresh_run`, the
+string-form pin that had kept `main` red since #231 and that this work
+order's `REQ-HBI-003`/`REQ-HBI-004` also tripped; the Windows legs were
+skipped. The owner chose to fix `main` first: `WO-AUT-003` (#237, verified as
+`VREC-AUT-003`) retargeted the pin, and `origin/main` was merged into this
+branch as `7e317e5`.
+
+At `7e317e5`, all thirteen checks pass: `candidate-evidence.yml` run
+`33165010486` (candidate source, candidate package, deterministic integration
+package, governance migration on Linux and Windows, integration package
+verified on Linux and Windows, retained), `publication-rehearsal.yml` run
+`33165010647` (record selection, candidate replay, release-record replay),
+`validate` run `33165010478`, governor transition assessment run
+`33165010485`. The Windows integration-package and governance-migration legs
+are the Windows criterion of `VER-HBI-001`'s fresh-consumer row: the hosted
+suite includes `FreshConsumerDoctorTests` on both `core.autocrlf` settings.
+### 8.1 Re-binding after merging `main`
+
+`origin/main` (with #237, `WO-AUT-003`) was merged into this branch as
+`7e317e5` before completion, so the formal snapshot changed. Re-bound:
+
+artifact: WO-HBI-005
+checkpoint: handoff
+formal_snapshot_sha256: 70f30a7230d10c52df4aace063d683757751f26d748a7829384921f26a6685a3
+
+Rerun after merge: rerun completed pass adeb6b46107626ec885938944c3f9c61f57aea1bdd9ba2a1a421ac4b49c64924
+

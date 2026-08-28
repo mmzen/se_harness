@@ -2,7 +2,7 @@
 id = "WO-HBI-005"
 type = "work_order"
 title = "Make doctor pass in a fresh consumer repository: drop the self-hosting class from the shipped surface and assess empty template classes vacuously"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-28T10:18:46Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 by the accountable owner immediately after approval, on the standing instruction to implement the work order the moment it is approved. Execution is confined to the approved scope and the execution_scope paths; completion, commit-bound verification and release remain separate decisions."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T10:56:41Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's direction, 'Transition + prepare VREC', once the hosted lanes were green. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout, re-bound after merging main at 7e317e5, with nine changed paths declared and completeness asserted. Delivered: governance-migration-protocol removed from the shipped declaration and the canonical fragment; the untracked-pattern failure gated on repository-region classes with an empty template-region class reported as vacuously declared; the fresh-consumer onboarding scenario on LF and core.autocrlf=true checkouts; the hash-bound and lifecycle tests retargeted; the installation note; evidence at docs/engineering/hash-bound-integrity/evidence/WO-HBI-005-verification.md. A fresh consumer's doctor exits 0 with 143 PASS and 0 FAIL on both checkouts. All thirteen hosted checks pass at 7e317e5, Windows legs included. No root managed file, no governance_migration source or fixture, no recorded digest changed. Completion is not verification."
 +++
 
 # Work Order: Make doctor pass in a fresh consumer repository
