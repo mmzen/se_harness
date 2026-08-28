@@ -2,10 +2,10 @@
 id = "WO-ECP-003"
 type = "work_order"
 title = "Make the pull-request gate mandatory and scope-aware, and widen the digest"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -20,6 +20,8 @@ paths = [
   "templates/repository/standard/scripts/select_harness_work_order.py",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
+  "templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed",
+  "docs/engineering/execution-control-plane/verification/VER-ECP-003.md",
 ]
 
 [relations]
@@ -27,6 +29,27 @@ implements = ["REQ-ECP-006", "REQ-ECP-007"]
 specifications = ["SPEC-ECP-003"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-002"]
 verification = ["VER-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T21:40:17Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start with the amendments', as the third work order of the execution-control-plane plan, after WO-ECP-001 and WO-ECP-002 merged (main e75fac8). Its definitions REQ-ECP-006, REQ-ECP-007, SPEC-ECP-003, ARCH-ECP-001, ADR-ECP-002 and VER-ECP-003 were approved separately on 2026-08-28; three pre-start amendments are recorded on the work order and VER-ECP-003: the demonstration runs locally with the hosted form deferred to the first release carrying WO-ECP-001 to -003, the pull-request template seed joins the scope, and the released-0.7.1 golden digest is re-pinned to the widened block with a dated note. Authorizes start preflight and then only the declared scope. Measured before this transition: validate PASS at 0 errors under the governing 0.8.0 root. It authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T21:40:21Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start with the amendments'. Start preflight Completed with nothing not done over the approval commit 0f31f1d carrying unmoved main e75fac8, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T21:54:33Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-ECP-003 implemented', on the handoff check reading Completed over the implementation commit, formal snapshot 93cc27b586da6bca838f247372b1423e333cc330010812fbbe58379ab04ca1f4, change set asserted complete over 16 paths plus the work order's own file, under the three pre-start amendments of 2026-08-28. The managed template workflow enforces the work order's scope on every pull request over the Git diff with the released evaluator from the lock, the canonical block carries the change set and every predicate status, the seed states the gate, and the released-0.7.1 golden is re-pinned with its dated note. The demonstration ran locally as amended: the out-of-scope branch failed naming README-outside.md, the in-scope branch failed closed without a packet and passed once one was bound, a mismatching declared digest failed and the matching one passed; logs and the canonical block are retained and the throwaway branches deleted. Readings under the governing exact public 0.8.0 root: validate 0 errors, doctor 0 FAIL. Candidate: 343 tests in the touched modules, full suite 1117 with the single known workstation file-mode failure that passes hosted; the candidate's own check --from-git main completed over 17 paths. All 13 pull-request lanes pass on #251 at c80c1bf including both platform legs. Three deviations are recorded in the packet. This authorizes no further act."
 +++
 
 # Work Order: Make the pull-request gate mandatory and scope-aware, and widen the digest
@@ -41,6 +64,38 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-006`,
 this work order. This work order follows `WO-ECP-001` (it needs
 `check --from-git`) and `WO-ECP-002` (it needs the generated body), and
 precedes `WO-ECP-006`.
+
+## Pre-start amendments, 2026-08-28
+
+Put to the engineering owner before approval, on a reading of the packet
+against `main` at `e75fac8`, and answered "Approve and start with the
+amendments":
+
+1. **Demonstration.** The two throwaway pull requests of `VER-ECP-003`
+   cannot run here: this repository's pull requests run the root managed
+   workflow, released 0.8.0's, which installs `se-harness==0.8.0` in CI and
+   has no `--from-git`; the template edited here reaches consumers, and this
+   repository, through the next release and root adoption. `VER-ECP-003` is
+   amended by date: the demonstration runs the template step's shell
+   locally against two throwaway branches with the candidate evaluator
+   installed outside the checkout, and the hosted demonstration becomes a
+   verification condition of the first release that carries `WO-ECP-001` to
+   `WO-ECP-003`, to be recorded on that release's contract.
+2. **Seed.** `ECP-GTE-007` edits
+   `templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed`;
+   it is added to the scope, with `VER-ECP-003` for its amendment.
+3. **Golden digest.** `ECP-DIG-001` widens the canonical block, so every
+   `result_sha256` changes, including the released-0.7.1 `focus` digest that
+   `test_focus_digest_equals_the_released_evaluator_golden` pins for issue
+   #212 criterion 3. The pin is moved to the widened block with a dated
+   note: the criterion holds within one block definition and this work
+   order changes the definition knowingly, as `SPEC-ECP-003`'s
+   compatibility section states.
+
+Two deviations are accepted in advance: readings under the governing exact
+public 0.8.0 root, not the 0.7.1 named on 2026-08-27; the root managed
+workflow and selector stay unedited, so this repository's own gate remains
+the 0.8.0 one until its next root adoption.
 
 ## Objective
 

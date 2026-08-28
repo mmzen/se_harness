@@ -1,0 +1,1 @@
+The pull request's diff is inside the declared scope and the declared restitution digest matches.

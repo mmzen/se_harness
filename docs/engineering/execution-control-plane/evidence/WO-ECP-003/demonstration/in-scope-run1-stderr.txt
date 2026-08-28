@@ -1,0 +1,4 @@
+From https://github.com/mmzen/se_harness
+ * branch            e75fac87fd224d4e389352d03852cce09b46c039 -> FETCH_HEAD
+blocked: QGP-G4I-EVIDENCE: No readable evidence for WO-ECP-003, checkpoint handoff, and formal snapshot 93cc27b586da6bca838f247372b1423e333cc330010812fbbe58379ab04ca1f4 is available.
+The handoff check did not complete (outcome blocked).

@@ -1,0 +1,4 @@
+From https://github.com/mmzen/se_harness
+ * branch            e75fac87fd224d4e389352d03852cce09b46c039 -> FETCH_HEAD
+scope: WEX201: changed path is outside execution scope: README-outside.md
+The pull request's diff leaves the work order's declared scope.
