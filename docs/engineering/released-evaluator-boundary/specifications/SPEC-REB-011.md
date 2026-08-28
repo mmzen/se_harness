@@ -19,6 +19,10 @@ decided_by = "technical-owner"
 
 # Specification: Declared environment entry-point safety rule and interpreter identity facts
 
+## Amendment of 2026-08-28 (`WO-REB-030`)
+
+Rules 12 and 13 (the declaration) and rules 21–26 (per-boundary behaviour of sites that `WO-REB-028` and `WO-ECP-011` deleted) are retired; `SPEC-REB-015` replaces them: the rule is code in `se_harness/interpreter_safety.py`, `EVALUATION_ORDER` is the ordered case list, no JSON declaration and no `repository_tools` loader exist, and the tests own the corpus. Rules 1–11 remain the definition of the rule and its `EPS` cases; rules 14–20 (recorded identity facts) and 27 (lexical comparison) remain in force. The `ISD` and `ISC` diagnostic families are withdrawn and their names reserved.
+
 ## Scope
 
 This specification defines one declared rule for validating an interpreter path as an environment entry point, the two conforming loaders that expose it to the package runtime and the repository-tools runtime, the identity facts recorded about an accepted interpreter, and the per-boundary migration required by issue #106 / RCA `RC-060-06`.

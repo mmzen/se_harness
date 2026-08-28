@@ -1,10 +1,11 @@
-"""Declared environment entry-point safety rule for the package runtime.
+"""Environment entry-point safety rule for the package runtime.
 
-The rule itself lives in ``se_harness/interpreter_safety.json``. This module is
-one of two conforming loaders; the other is ``repository_tools``' loader, which
-reads the same declaration without importing this package. Neither loader may
-import the other runtime, so the two evaluate the declared cases independently
-and a conformance check holds them in agreement.
+The rule is the ordered case list ``EVALUATION_ORDER`` and the ``evaluate``
+function below; the first matching refusal wins, so a path form yields a
+stable ``EPS`` case identifier. ``WO-REB-021`` introduced the rule as a JSON
+declaration with one conforming loader per runtime; once every boundary
+outside ``se_harness/runtime_identity.py`` had been retired, ``WO-REB-030``
+removed the declaration and the second loader and kept the rule in code.
 
 The safe execution boundary is the *lexical* interpreter path. A POSIX virtual
 environment normally exposes ``bin/python`` as a terminal symbolic link, so
@@ -17,26 +18,19 @@ link lets the whole environment be relocated after a check has passed.
 from __future__ import annotations
 
 import hashlib
-import json
 import os
-import re
 import stat
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any
 
 
-DECLARATION_SCHEMA = "se-harness-interpreter-safety-v1"
 WITHIN_EXPECTED_ROOT = "within-expected-root"
 WITHIN_CHECKOUT_ROOT = "within-checkout-root"
 OUTSIDE_DECLARED_ROOTS = "outside-declared-roots"
 POSITION_CLASSES = (OUTSIDE_DECLARED_ROOTS, WITHIN_CHECKOUT_ROOT, WITHIN_EXPECTED_ROOT)
 OUTCOMES = ("accepted", "refused")
-RUNTIMES = ("repository_tools", "se_harness")
-BOUNDARY_KINDS = ("delegating", "rule")
 PLATFORMS = ("linux", "windows")
-CASE_PATTERN = re.compile(r"EPS[0-9]{3}")
-CORPUS_PATTERN = re.compile(r"ISC[0-9]{3}")
 DIGEST_BLOCK_BYTES = 1024 * 1024
 MAX_INTERPRETER_BYTES = 128 * 1024 * 1024
 
@@ -50,19 +44,10 @@ REPARSE_CONSTANTS = ("FILE_ATTRIBUTE_REPARSE_POINT", "IO_REPARSE_TAG_MOUNT_POINT
 #: construction there rather than being unavailable.
 REPARSE_STAT_MEMBERS = ("st_file_attributes", "st_reparse_tag")
 
-CASE_KEYS = frozenset({"id", "subject", "outcome", "summary"})
-BOUNDARY_KEYS = frozenset({"id", "runtime", "module", "purpose", "kind"})
-BOUNDARY_DELEGATING_KEYS = BOUNDARY_KEYS | {"delegates_to"}
-CORPUS_KEYS = frozenset({"id", "form", "expected", "constructable_on", "summary"})
-CORPUS_OPTIONAL_KEYS = CORPUS_KEYS | {"unconstructable_reason"}
-DECLARATION_KEYS = frozenset(
-    {"schema", "outcomes", "position_classes", "cases", "boundaries", "corpus"}
-)
 
-#: The declared cases in declared evaluation order. The first refusal wins, so a
-#: path form yields a stable case identifier regardless of which boundary
-#: evaluates it. This tuple is compared against the declaration in both
-#: directions, so neither side can define its own passing condition.
+#: The cases in evaluation order. The first refusal wins, so a path form yields
+#: a stable case identifier. The tests own an independent corpus of filesystem
+#: forms and assert the case each one yields.
 EVALUATION_ORDER = (
     "EPS010",
     "EPS011",
@@ -102,196 +87,6 @@ class SafeEntryPoint:
     entry_is_link: bool
     binary_position: str
     binary_sha256: str
-
-
-def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise InterpreterSafetyError(f"ISD101: duplicate JSON key: {key}")
-        result[key] = value
-    return result
-
-
-def _exact_keys(value: Mapping[str, Any], expected: frozenset[str], label: str) -> None:
-    missing = expected - set(value)
-    unknown = set(value) - expected
-    if missing:
-        raise InterpreterSafetyError(f"ISD102: {label} is missing field: {sorted(missing)[0]}")
-    if unknown:
-        raise InterpreterSafetyError(f"ISD103: {label} has unknown field: {sorted(unknown)[0]}")
-
-
-def _text(value: Any, label: str) -> str:
-    if not isinstance(value, str) or not value.strip():
-        raise InterpreterSafetyError(f"ISD104: {label} must be a non-empty string")
-    return value
-
-
-def _declaration_path() -> Path:
-    return Path(__file__).with_name("interpreter_safety.json")
-
-
-def declaration_bytes(path: Path | None = None) -> bytes:
-    selected = path or _declaration_path()
-    try:
-        return selected.read_bytes()
-    except OSError as exc:
-        raise InterpreterSafetyError(f"ISD105: cannot read the declaration: {exc}") from exc
-
-
-def load_declaration(path: Path | None = None) -> dict[str, Any]:
-    """Read and strictly validate the declared interpreter-safety rule."""
-
-    raw = declaration_bytes(path)
-    try:
-        text = raw.decode("utf-8")
-    except UnicodeDecodeError as exc:
-        raise InterpreterSafetyError("ISD106: the declaration must be UTF-8") from exc
-    try:
-        declaration = json.loads(text, object_pairs_hook=_unique_object)
-    except json.JSONDecodeError as exc:
-        raise InterpreterSafetyError(f"ISD107: invalid declaration JSON: {exc.msg}") from exc
-    if not isinstance(declaration, dict):
-        raise InterpreterSafetyError("ISD108: the declaration root must be an object")
-    _exact_keys(declaration, DECLARATION_KEYS, "declaration")
-    if declaration["schema"] != DECLARATION_SCHEMA:
-        raise InterpreterSafetyError(
-            f"ISD109: the declaration schema must be {DECLARATION_SCHEMA!r}"
-        )
-    if tuple(declaration["outcomes"]) != OUTCOMES:
-        raise InterpreterSafetyError("ISD110: the declared outcome domain differs from the loader")
-    if tuple(declaration["position_classes"]) != POSITION_CLASSES:
-        raise InterpreterSafetyError("ISD111: the declared position classes differ from the loader")
-    _validate_cases(declaration["cases"])
-    _validate_boundaries(declaration["boundaries"])
-    _validate_corpus(declaration["corpus"], declaration["cases"])
-    return declaration
-
-
-def _validate_cases(cases: Any) -> None:
-    if not isinstance(cases, list) or not cases:
-        raise InterpreterSafetyError("ISD112: cases must be a non-empty array")
-    order: list[str] = []
-    for entry in cases:
-        if not isinstance(entry, dict):
-            raise InterpreterSafetyError("ISD113: each case must be an object")
-        _exact_keys(entry, CASE_KEYS, "case")
-        identifier = _text(entry["id"], "case id")
-        if CASE_PATTERN.fullmatch(identifier) is None:
-            raise InterpreterSafetyError(f"ISD114: invalid case identifier: {identifier}")
-        _text(entry["subject"], f"case {identifier} subject")
-        _text(entry["summary"], f"case {identifier} summary")
-        if entry["outcome"] not in OUTCOMES:
-            raise InterpreterSafetyError(f"ISD115: case {identifier} has an unknown outcome")
-        order.append(identifier)
-    if len(set(order)) != len(order):
-        raise InterpreterSafetyError("ISD116: the case list contains a duplicate identifier")
-    if tuple(order) != EVALUATION_ORDER:
-        raise InterpreterSafetyError(
-            "ISD117: the declared case order differs from the implemented evaluation order"
-        )
-
-
-def _validate_boundaries(boundaries: Any) -> None:
-    if not isinstance(boundaries, list) or not boundaries:
-        raise InterpreterSafetyError("ISD118: boundaries must be a non-empty array")
-    identifiers: list[str] = []
-    rules: set[str] = set()
-    delegations: list[tuple[str, str]] = []
-    for entry in boundaries:
-        if not isinstance(entry, dict):
-            raise InterpreterSafetyError("ISD119: each boundary must be an object")
-        kind = entry.get("kind")
-        if kind == "delegating":
-            _exact_keys(entry, BOUNDARY_DELEGATING_KEYS, "delegating boundary")
-        else:
-            _exact_keys(entry, BOUNDARY_KEYS, "boundary")
-        identifier = _text(entry["id"], "boundary id")
-        _text(entry["module"], f"boundary {identifier} module")
-        _text(entry["purpose"], f"boundary {identifier} purpose")
-        if entry["runtime"] not in RUNTIMES:
-            raise InterpreterSafetyError(f"ISD120: boundary {identifier} has an unknown runtime")
-        if kind not in BOUNDARY_KINDS:
-            raise InterpreterSafetyError(f"ISD121: boundary {identifier} has an unknown kind")
-        if not identifier.startswith(f"{entry['runtime']}."):
-            raise InterpreterSafetyError(
-                f"ISD122: boundary {identifier} does not name its own runtime"
-            )
-        identifiers.append(identifier)
-        if kind == "rule":
-            rules.add(identifier)
-        else:
-            delegations.append((identifier, _text(entry["delegates_to"], "delegates_to")))
-    if len(set(identifiers)) != len(identifiers):
-        raise InterpreterSafetyError("ISD123: the boundary registry contains a duplicate")
-    if identifiers != sorted(identifiers):
-        raise InterpreterSafetyError("ISD124: the boundary registry must be sorted by identifier")
-    for identifier, target in delegations:
-        if target not in rules:
-            raise InterpreterSafetyError(
-                f"ISD125: boundary {identifier} delegates to an unregistered rule boundary"
-            )
-
-
-def _validate_corpus(corpus: Any, cases: Any) -> None:
-    if not isinstance(corpus, list) or not corpus:
-        raise InterpreterSafetyError("ISD126: the corpus must be a non-empty array")
-    declared = {entry["id"] for entry in cases}
-    identifiers: list[str] = []
-    for entry in corpus:
-        if not isinstance(entry, dict):
-            raise InterpreterSafetyError("ISD127: each corpus entry must be an object")
-        platforms = entry.get("constructable_on")
-        if platforms == [] or "unconstructable_reason" in entry:
-            _exact_keys(entry, CORPUS_OPTIONAL_KEYS, "corpus entry")
-        else:
-            _exact_keys(entry, CORPUS_KEYS, "corpus entry")
-        identifier = _text(entry["id"], "corpus id")
-        if CORPUS_PATTERN.fullmatch(identifier) is None:
-            raise InterpreterSafetyError(f"ISD128: invalid corpus identifier: {identifier}")
-        _text(entry["form"], f"corpus {identifier} form")
-        _text(entry["summary"], f"corpus {identifier} summary")
-        expected = entry["expected"]
-        if expected != "accepted" and expected not in declared:
-            raise InterpreterSafetyError(
-                f"ISD129: corpus {identifier} expects an undeclared case: {expected}"
-            )
-        if not isinstance(platforms, list) or any(item not in PLATFORMS for item in platforms):
-            raise InterpreterSafetyError(f"ISD130: corpus {identifier} names an unknown platform")
-        if sorted(set(platforms)) != platforms:
-            raise InterpreterSafetyError(
-                f"ISD131: corpus {identifier} platforms must be sorted and unique"
-            )
-        if len(platforms) != len(PLATFORMS) and "unconstructable_reason" not in entry:
-            raise InterpreterSafetyError(
-                f"ISD132: corpus {identifier} omits a platform without recording a reason"
-            )
-        if "unconstructable_reason" in entry:
-            _text(entry["unconstructable_reason"], f"corpus {identifier} reason")
-        identifiers.append(identifier)
-    if len(set(identifiers)) != len(identifiers):
-        raise InterpreterSafetyError("ISD133: the corpus contains a duplicate identifier")
-    if identifiers != sorted(identifiers):
-        raise InterpreterSafetyError("ISD134: the corpus must be sorted by identifier")
-    reached = {entry["expected"] for entry in corpus} - {"accepted"}
-    unreached = declared - reached
-    if unreached:
-        raise InterpreterSafetyError(
-            f"ISD135: declared case has no corpus entry: {sorted(unreached)[0]}"
-        )
-
-
-def declared_cases(path: Path | None = None) -> tuple[dict[str, Any], ...]:
-    return tuple(load_declaration(path)["cases"])
-
-
-def declared_boundaries(path: Path | None = None) -> tuple[dict[str, Any], ...]:
-    return tuple(load_declaration(path)["boundaries"])
-
-
-def declared_corpus(path: Path | None = None) -> tuple[dict[str, Any], ...]:
-    return tuple(load_declaration(path)["corpus"])
 
 
 def reparse_information_observable() -> bool:
@@ -584,10 +379,3 @@ def normalized_origin(entry: SafeEntryPoint, marker: str = "<evaluator-root>") -
 
     relative = entry.entry_point.relative_to(entry.environment_root).as_posix()
     return f"{marker}/{relative}" if relative else marker
-
-
-def boundary_identifiers(runtime: str | None = None) -> tuple[str, ...]:
-    values: Iterable[dict[str, Any]] = declared_boundaries()
-    if runtime is not None:
-        values = [entry for entry in values if entry["runtime"] == runtime]
-    return tuple(entry["id"] for entry in values)

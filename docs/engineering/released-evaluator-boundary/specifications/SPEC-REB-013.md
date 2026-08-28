@@ -20,6 +20,10 @@ reason = "Approved on 2026-08-27 by the accountable owner, 'I approve the artifa
 
 # Specification: Retired predecessor-bootstrap surface and retained-history contract
 
+## Amendment of 2026-08-28 (`WO-REB-030`)
+
+Rule 7 is moot: `se_harness/interpreter_safety.json` no longer exists (`SPEC-REB-015`); the property it protected — no declared site names a deleted file — is now that no code path outside `se_harness/runtime_identity.py` validates an interpreter, which `StaticArchitectureTests` pin.
+
 ## Amendment of 2026-08-28
 
 Amended under `WO-ECP-010` for issue #210: where this specification names the governance-migration rehearsal (`se_harness/governance_migration.py`, `rehearse-migration`) as the retained predecessor-to-successor mechanism, read the real upgrade rehearsal of `repository_tools/upgrade_rehearsal.py` instead; `rehearse-migration` is retired and its name reserved, and `qualify` keeps its four typed operations.

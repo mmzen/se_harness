@@ -26,6 +26,10 @@ decided_by = "technical-owner"
 
 # Architecture: One interpreter-safety rule serving two runtimes
 
+## Amendment of 2026-08-28 (`WO-REB-030`)
+
+Superseded for its two-runtime components by `ARCH-REB-013` (`ADR-REB-013`): the declaration, the repository-tools loader, the boundary registry and the cross-runtime corpus are removed, one boundary remaining in one runtime. The trust boundaries, the lexical-path rule, the junction predicate, the recorded identity facts, the import barrier and the prohibited patterns that do not name two runtimes stand and are now stated by `ARCH-REB-013` and `SPEC-REB-015`. The text below is retained as the record of the correction `WO-REB-021` made.
+
 ## Context and scope
 
 Six boundaries in two runtimes decide independently whether an interpreter path is a safe environment entry point. `REQ-REB-026` records their current disagreement: two are correct, one refuses junction parents only by accident of using a helper that checks them, one refuses nothing, and one is fatal on POSIX. A repair applied at the fatal site would leave the disagreement intact.

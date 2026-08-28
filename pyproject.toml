@@ -33,7 +33,6 @@ se_harness = [
   "workflow_contract.json",
   "quality_gates_contract.json",
   "hash_bound_classes.json",
-  "interpreter_safety.json",
 ]
 
 [tool.setuptools.data-files]

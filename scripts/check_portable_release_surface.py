@@ -43,7 +43,6 @@ REQUIRED_QUALIFICATION_MEMBERS = frozenset(
 )
 REQUIRED_INTERPRETER_SAFETY_MEMBERS = frozenset(
     {
-        "se_harness/interpreter_safety.json",
         "se_harness/interpreter_safety.py",
     }
 )
