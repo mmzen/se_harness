@@ -63,22 +63,14 @@ from se_harness.release_qualification import (
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 from se_harness.repository_state import EvaluatorIdentity, RepositoryObservationError
 from se_harness.runtime_state import RuntimeStateError, RuntimeStateStore
-from se_harness.workflow_compliance import check_workflow, focus_schema2
+from se_harness.workflow_compliance import check_workflow
 from se_harness.workflow_contract import ContractError
 from se_harness.workflow_procedures import ProcedureError
 from se_harness.workflow_result import (
-    legacy_to_schema2,
     render_human as render_workflow_human_v2,
     render_json as render_workflow_json_v2,
 )
-from se_harness.workflow import (
-    failed_result,
-    focus,
-    plan_transition,
-    preparation_result,
-    render_human as render_workflow_human,
-    render_json as render_workflow_json,
-)
+from se_harness.workflow import failed_result, focus, plan_transition, preparation_result
 
 
 def _scan_repository(target: Path) -> bytes:
@@ -349,10 +341,7 @@ def _preflight(args: argparse.Namespace) -> int:
 
 
 def _render_selected_result(result: dict, args: argparse.Namespace) -> str:
-    if getattr(args, "result_schema", 1) == 2:
-        projected = legacy_to_schema2(result)
-        return render_workflow_json_v2(projected) if args.json else render_workflow_human_v2(projected)
-    return render_workflow_json(result) if args.json else render_workflow_human(result)
+    return render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result)
 
 
 def _check(args: argparse.Namespace) -> int:
@@ -372,9 +361,7 @@ def _check(args: argparse.Namespace) -> int:
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
-        result = legacy_to_schema2(
-            failed_result("check", args.artifact, str(exc), code="WEX210")
-        )
+        result = failed_result("check", args.artifact, str(exc), code="WEX210")
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
@@ -432,25 +419,12 @@ def _prepare_release(args: argparse.Namespace) -> int:
 
 
 def _focus(args: argparse.Namespace) -> int:
-    if args.result_schema == 1:
-        print(
-            "WEX-ADS-002: result schema 1 is a compatibility projection, not restitution; "
-            "use --result-schema 2 for the canonical block",
-            file=sys.stderr,
-        )
     try:
-        if args.result_schema == 2:
-            result = focus_schema2(
-                Path(args.target),
-                artifact_id=args.artifact,
-                include_background=args.include_background,
-            )
-        else:
-            result = focus(
-                Path(args.target),
-                args.artifact,
-                include_background=args.include_background,
-            )
+        result = focus(
+            Path(args.target),
+            args.artifact,
+            include_background=args.include_background,
+        )
     except HarnessError as exc:
         message = str(exc)
         result = failed_result(
@@ -460,10 +434,7 @@ def _focus(args: argparse.Namespace) -> int:
             code="WEX101",
             repository_blocker=_repository_workflow_error(message),
         )
-    if args.result_schema == 2 and result.get("schema") == "se-harness-workflow-result-v2":
-        print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
-    else:
-        print(_render_selected_result(result, args), end="")
+    print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
@@ -521,7 +492,7 @@ def _transition(args: argparse.Namespace) -> int:
             repository_blocker=_repository_workflow_error(message),
         )
     print(_render_selected_result(result, args), end="")
-    return 0 if result["operation"]["outcome"] in {"planned", "completed"} else 1
+    return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
 def _scaffold_domain(args: argparse.Namespace) -> int:
@@ -985,10 +956,6 @@ def build_parser() -> argparse.ArgumentParser:
     selected_focus.add_argument("--artifact", required=True)
     selected_focus.add_argument("--json", action="store_true")
     selected_focus.add_argument("--include-background", action="store_true")
-    selected_focus.add_argument(
-        "--result-schema", type=int, choices=(1, 2), default=2,
-        help="canonical restitution schema 2 (default) or compatibility schema 1, which is not restitution",
-    )
     selected_focus.set_defaults(handler=_focus)
 
     check = commands.add_parser("check", help="evaluate one selected workflow checkpoint and emit canonical restitution")
@@ -1028,10 +995,6 @@ def build_parser() -> argparse.ArgumentParser:
     transition.add_argument("--reason", action="append", default=[], dest="reasons", help="ID=TEXT reason; required for rejection, or use successor VREC ID for supersession")
     transition.add_argument("--apply", action="store_true", help="apply the exact validated transaction; default is read-only planning")
     transition.add_argument("--json", action="store_true")
-    transition.add_argument(
-        "--result-schema", type=int, choices=(1, 2), default=1,
-        help="select compatibility schema 1 or canonical restitution schema 2",
-    )
     transition.set_defaults(handler=_transition)
 
     select_work = commands.add_parser(
@@ -1214,10 +1177,6 @@ def build_parser() -> argparse.ArgumentParser:
     capture.add_argument("--output")
     capture.add_argument("--domain", help="place the record in an explicit engineering domain")
     capture.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
-    capture.add_argument(
-        "--result-schema", type=int, choices=(1, 2), default=1,
-        help="select compatibility schema 1 or canonical restitution schema 2",
-    )
     capture.set_defaults(handler=_capture_verification)
 
     delegated = commands.add_parser(
@@ -1296,10 +1255,6 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--output")
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
     release.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
-    release.add_argument(
-        "--result-schema", type=int, choices=(1, 2), default=1,
-        help="select compatibility schema 1 or canonical restitution schema 2",
-    )
     release.set_defaults(handler=_prepare_release)
     return parser
 

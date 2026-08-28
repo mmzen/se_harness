@@ -548,40 +548,54 @@ def check_workflow(
     )
 
 
-def focus_schema2(
-    repository: Path,
+def _rule_prose(rule: Mapping[str, Any], context: Mapping[str, str]) -> tuple[list[str], list[str]]:
+    block = rule.get("restitution", {})
+    done = [str(item).format_map(context) for item in block.get("done", [])]
+    current = [str(item).format_map(context) for item in block.get("current_lifecycle_state", [])]
+    return done, current
+
+
+def selected_result(
+    root: Path,
     *,
-    artifact_id: str,
-    include_background: bool = False,
+    operation: str,
+    primary: Any,
+    related: Iterable[Any] = (),
+    artifacts: Iterable[str] | None = None,
+    governing: Iterable[str] = (),
+    dependencies: Iterable[str] = (),
+    done: Iterable[str] | None = None,
+    blocked_by: Iterable[str] = (),
+    before: Iterable[Mapping[str, str]] = (),
+    after: Iterable[Mapping[str, str]] = (),
+    scoped_blockers: Iterable[Mapping[str, Any]] = (),
+    repository_blockers: Iterable[Mapping[str, Any]] = (),
+    unrelated_count: int = 0,
+    writes: Iterable[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
-    """Project selected focus through the v2 rule and procedure registries."""
+    """Build the one schema-2 result for a selected artifact (ECP-KRN-001, -003).
 
-    root = ensure_target(repository, must_exist=True)
+    `focus`, `transition`, `capture-verification` and `prepare-release` all
+    render through here: `select_rule` over the primary and its related
+    artifacts picks the workflow rule, the rule's procedure supplies the typed
+    next step, and the rule's `restitution` prose supplies what was done and
+    the lifecycle state. A blocked result keeps the rule's next step but says
+    nothing was done.
+    """
+
     _, _, rules, procedures, _ = load_validated_contracts()
-    from se_harness.workflow import _catalog, _validation, focus, project_scope
-
-    legacy = focus(root, artifact_id, include_background=include_background)
-    _, report = _validation(root)
-    catalog = _catalog(report)
-    primary = catalog[artifact_id]
-    governing, dependencies = project_scope(catalog, primary)
-    related = [catalog[item] for item in dependencies if item in catalog]
-    rule, rule_context = select_rule(rules, primary, related=related)
+    related_items = list(related)
+    rule, rule_context = select_rule(rules, primary, related=related_items)
     resolved = resolve_procedure(
         procedures,
         str(rule["procedure_id"]),
-        {"artifact_id": artifact_id, "status": primary.status, **rule_context},
+        {"artifact_id": primary.artifact_id, "status": primary.status, **rule_context},
     )
     step = resolved["steps"][0]
-    legacy_findings = legacy["findings"]
-    blockers = [
-        *legacy_findings["repository_blockers"],
-        *legacy_findings["scoped_blockers"],
-    ]
-    blocked = legacy["operation"]["outcome"] != "completed"
-    handoff = legacy["handoff"]
-    alternatives = list(rule.get("alternative_procedure_ids", []))
-    scope = ()
+    blockers = [str(item) for item in blocked_by]
+    blocked = bool(blockers)
+    rule_done, current = _rule_prose(rule, rule_context)
+    scope: tuple[str, ...] = ()
     if primary.artifact_type == "work_order":
         try:
             scope = execution_scope(primary)
@@ -589,10 +603,10 @@ def focus_schema2(
             scope = ()
     restitution = {
         "outcome": "blocked" if blocked else "completed",
-        "done": [str(item) for item in handoff.get("completed", [])],
-        "not_done": ["The selected focus operation remains incomplete."] if blocked else [],
-        "blocked_by": [f"{item.get('code', 'WEX')}: {item.get('message', '')}" for item in blockers],
-        "current_lifecycle_state": [str(item) for item in handoff.get("current_lifecycle_state", [])],
+        "done": [] if blocked else [str(item) for item in (rule_done if done is None else done)],
+        "not_done": [f"The selected {operation} operation remains incomplete."] if blocked else [],
+        "blocked_by": blockers,
+        "current_lifecycle_state": ["No lifecycle state was changed."] if blocked else current,
         "decision_required": decision_required(step) if not blocked else None,
         "next": {
             "procedure_id": rule["procedure_id"],
@@ -600,18 +614,16 @@ def focus_schema2(
             "action": str(step.get("decision", "Run the bound command" if step["kind"] == "command" else "Follow the bound reference")),
         },
         "command_or_response": command_or_response(step),
-        "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
+        "alternatives": [
+            f"Use complete alternative procedure {identifier}."
+            for identifier in rule.get("alternative_procedure_ids", [])
+        ],
     }
-    unrelated_count = sum(
-        int(item.get("count", 0))
-        for item in legacy_findings.get("background_summary", [])
-        if isinstance(item, Mapping)
-    )
     return build_result(
-        operation="focus",
+        operation=operation,
         outcome="blocked" if blocked else "completed",
-        primary=artifact_id,
-        artifacts=[artifact_id],
+        primary=primary.artifact_id,
+        artifacts=[primary.artifact_id] if artifacts is None else list(artifacts),
         governing=governing,
         dependencies=dependencies,
         declared_paths=scope,
@@ -626,12 +638,82 @@ def focus_schema2(
         },
         procedure={"id": rule["procedure_id"], "current_step": step["id"], "steps": resolved["steps"]},
         restitution=restitution,
-        before=legacy["state"]["before"],
-        after=legacy["state"]["after"],
-        scoped_blockers=legacy_findings["scoped_blockers"],
-        repository_blockers=legacy_findings["repository_blockers"],
+        before=list(before),
+        after=list(after),
+        scoped_blockers=list(scoped_blockers),
+        repository_blockers=list(repository_blockers),
         unrelated_count=unrelated_count,
+        writes=list(writes),
     )
+
+
+def remediation_result(
+    operation: str,
+    primary: str | None,
+    finding: Mapping[str, Any],
+    *,
+    repository_blocker: bool = False,
+) -> dict[str, Any]:
+    """Build the schema-2 result of an operation that could not select or act."""
+
+    workflow, _, _, procedures, _ = load_validated_contracts()
+    failure = workflow["failure"]
+    procedure_id = str(failure["procedure_id"])
+    steps: list[dict[str, Any]] = []
+    if primary:
+        try:
+            steps = resolve_procedure(procedures, procedure_id, {"artifact_id": primary})["steps"]
+        except ProcedureError:
+            steps = []
+    step_id = steps[0]["id"] if steps else f"STEP-{procedure_id.removeprefix('PROC-')}-FOCUS"
+    message = str(finding.get("message", ""))
+    _, current = _rule_prose(failure, {"message": message})
+    restitution = {
+        "outcome": "blocked",
+        "done": [],
+        "not_done": ["The requested workflow operation remains incomplete."],
+        "blocked_by": [f"{finding.get('code', 'WEX')}: {message}"],
+        "current_lifecycle_state": current,
+        "decision_required": None,
+        "next": {"procedure_id": procedure_id, "step_id": step_id, "action": "remediate"},
+        "command_or_response": {"kind": "response", "value": "Resolve the reported blocker, then rerun the same command."},
+        "alternatives": [],
+    }
+    return build_result(
+        operation=operation,
+        outcome="blocked",
+        primary=primary or "",
+        artifacts=[primary] if primary else [],
+        governing=[],
+        dependencies=[],
+        declared_paths=[],
+        changed_paths=[],
+        change_set_complete=False,
+        compliance={
+            "checkpoint": "pre-action",
+            "workflow_rule_id": str(failure["id"]),
+            "procedure_id": procedure_id,
+            "status": "fail",
+            "gates": [],
+        },
+        procedure={"id": procedure_id, "current_step": step_id, "steps": steps},
+        restitution=restitution,
+        scoped_blockers=[] if repository_blocker else [dict(finding)],
+        repository_blockers=[dict(finding)] if repository_blocker else [],
+    )
+
+
+def focus_schema2(
+    repository: Path,
+    *,
+    artifact_id: str,
+    include_background: bool = False,
+) -> dict[str, Any]:
+    """Selected focus; the name is kept for callers, the result is `workflow.focus` (WO-ECP-005)."""
+
+    from se_harness.workflow import focus
+
+    return focus(repository, artifact_id, include_background=include_background)
 
 
 def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:

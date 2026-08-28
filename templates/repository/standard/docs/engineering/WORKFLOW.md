@@ -232,8 +232,8 @@ each transition is explicitly named. A packet MUST NOT infer an omitted target.
 ## Lifecycle handoff procedure
 
 After a completed stage or a stop condition, the agent MUST obtain the selected
-workflow result from `harnessctl check` or another command using
-`--result-schema 2`. The structured result is authoritative for the outcome,
+workflow result from `harnessctl check` or another workflow command; every
+workflow command emits the one schema-2 result. The structured result is authoritative for the outcome,
 selected scope, effects, non-effects, blockers, final lifecycle state,
 accountable decision, declared alternatives, and next procedure step. The
 agent MUST NOT recompute or replace those values.

@@ -129,7 +129,7 @@ paths = ["src/"]
         return path
 
     def test_focus_projects_only_selected_governing_chain(self) -> None:
-        code, output, error = self.invoke("focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json")
+        code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual("completed", result["operation"]["outcome"])
@@ -137,24 +137,26 @@ paths = ["src/"]
             ["ADR-001", "ARCH-001", "CAP-001", "INT-001", "REQ-001", "SPEC-001", "VER-001"],
             result["scope"]["governing"],
         )
-        self.assertEqual("prepare verification record", result["handoff"]["recommended_next_step"]["action"])
+        self.assertEqual("PROC-WO-PREPARE-VREC", result["restitution"]["next"]["procedure_id"])
 
-    def test_focus_defaults_to_schema_two_and_marks_schema_one_as_not_restitution(self) -> None:
+    def test_focus_emits_schema_two_only_and_refuses_the_retired_option(self) -> None:
+        # WO-ECP-005 (REQ-ECP-010, ECP-KRN-001/-002): one result schema; the former
+        # --result-schema option is an argument error with either value.
         code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual("se-harness-workflow-result-v2", result["schema"])
         self.assertEqual("selected", result["scope"]["mode"])
-        self.assertEqual(1, len([result["restitution"]["next"]]))
+        self.assertRegex(result["result_sha256"], r"^[0-9a-f]{64}$")
         self.assertNotIn("WEX-ADS-002", error)
 
-        code, output, error = self.invoke(
-            "focus", str(self.root), "--artifact", "WO-001", "--result-schema", "1", "--json"
-        )
-        self.assertEqual(0, code, error)
-        self.assertEqual(1, json.loads(output)["schema"])
-        self.assertIn("WEX-ADS-002", error)
-        self.assertIn("not restitution", error)
+        for value in ("1", "2"):
+            with self.subTest(value=value):
+                error = io.StringIO()
+                with contextlib.redirect_stderr(error), self.assertRaises(SystemExit) as raised:
+                    main(["focus", str(self.root), "--artifact", "WO-001", "--result-schema", value, "--json"])
+                self.assertEqual(2, raised.exception.code)
+                self.assertIn("unrecognized arguments: --result-schema", error.getvalue())
 
         code, human, error = self.invoke("focus", str(self.root), "--artifact", "WO-001")
         self.assertEqual(0, code, error)
@@ -164,24 +166,21 @@ paths = ["src/"]
     def test_focus_implemented_work_with_ready_vrec_recommends_assurance(self) -> None:
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual(["VREC-001"], result["scope"]["dependencies"])
+        self.assertEqual("PROC-FOCUS-RELATED", result["restitution"]["next"]["procedure_id"])
         self.assertEqual(
-            "assurance decision",
-            result["handoff"]["recommended_next_step"]["action"],
-        )
-        self.assertEqual(
-            "harnessctl focus . --artifact VREC-001",
-            result["handoff"]["command_or_suggested_response"]["value"],
+            {"kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "VREC-001"]},
+            result["restitution"]["command_or_response"],
         )
         self.assertIn(
             "WO-001 is implemented; VREC-001 is ready.",
-            result["handoff"]["current_lifecycle_state"],
+            result["restitution"]["current_lifecycle_state"],
         )
-        self.assertNotIn("prepare verification record", json.dumps(result["handoff"]))
+        self.assertNotIn("PROC-WO-PREPARE-VREC", json.dumps(result["restitution"]))
 
     def test_focus_implemented_work_with_verified_vrec_recommends_delivery(self) -> None:
         self.ready_vrec()
@@ -193,38 +192,35 @@ paths = ["src/"]
         )
         self.assertEqual(0, code, error)
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
-        self.assertEqual(
-            "select the separately authorized delivery path",
-            result["handoff"]["recommended_next_step"]["action"],
-        )
+        self.assertEqual("PROC-DELIVERY-SELECT", result["restitution"]["next"]["procedure_id"])
         self.assertIn(
             "WO-001 is implemented; VREC-001 is verified.",
-            result["handoff"]["current_lifecycle_state"],
+            result["restitution"]["current_lifecycle_state"],
         )
 
     def test_human_handoff_emits_alternatives_only_when_declared(self) -> None:
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001"
+            "focus", str(self.root), "--artifact", "WO-001"
         )
         self.assertEqual(0, code, error)
-        self.assertNotIn("Alternative next steps", output)
+        self.assertNotIn("Alternatives", output)
 
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "VREC-001"
+            "focus", str(self.root), "--artifact", "VREC-001"
         )
         self.assertEqual(0, code, error)
-        self.assertIn("Alternative next steps", output)
-        self.assertIn("action: reject", output)
+        self.assertIn("Alternatives", output)
+        self.assertIn("PROC-VREC-REJECT", output)
 
     def test_focus_projects_exact_vrec_scope_without_unrelated_work(self) -> None:
         self.ready_vrec()
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "VREC-001", "--json"
+            "focus", str(self.root), "--artifact", "VREC-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -236,7 +232,7 @@ paths = ["src/"]
             result["scope"]["governing"],
         )
         self.assertEqual([], result["scope"]["dependencies"])
-        self.assertEqual("assurance decision", result["handoff"]["recommended_next_step"]["action"])
+        self.assertEqual("PROC-VREC-DECIDE", result["restitution"]["next"]["procedure_id"])
 
     def test_focus_projects_exact_rls_scope_without_synchronizing_records(self) -> None:
         vrec = self.ready_vrec()
@@ -251,7 +247,7 @@ paths = ["src/"]
         vrec_before = vrec.read_bytes()
         release_before = release.read_bytes()
         code, output, error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "RLS-001", "--json"
+            "focus", str(self.root), "--artifact", "RLS-001", "--json"
         )
         self.assertEqual(0, code, error)
         result = json.loads(output)
@@ -268,12 +264,13 @@ paths = ["src/"]
 
     def test_focus_rejects_a_non_primary_artifact_type(self) -> None:
         code, output, _ = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "INT-001", "--json"
+            "focus", str(self.root), "--artifact", "INT-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
-        self.assertEqual("failed", result["operation"]["outcome"])
+        self.assertEqual("blocked", result["operation"]["outcome"])
         self.assertIn("only WO, VREC, or RLS", result["findings"]["scoped_blockers"][0]["message"])
+        self.assertEqual("PROC-REMEDIATE", result["restitution"]["next"]["procedure_id"])
 
     def test_work_order_completion_ignores_only_candidate_distribution_drift(self) -> None:
         path = self.in_progress_work_order()
@@ -292,7 +289,8 @@ paths = ["src/"]
                 {"WO-001": "engineering-owner"},
                 {},
             )
-        self.assertEqual("planned", plan.result["operation"]["outcome"])
+        self.assertEqual("completed", plan.result["operation"]["outcome"])
+        self.assertIn("no files were written", plan.result["restitution"]["done"][0])
         self.assertEqual('status = "in_progress"', next(
             line for line in path.read_text(encoding="utf-8").splitlines()
             if line.startswith("status =")
@@ -323,7 +321,7 @@ paths = ["src/"]
             formal("INT-001", "intent", "approved", {}),
         )
         code, output, _ = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
@@ -336,7 +334,7 @@ paths = ["src/"]
             formal("wo-001", "work_order", "draft", {}),
         )
         code, output, _ = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", "WO-001", "--json"
+            "focus", str(self.root), "--artifact", "WO-001", "--json"
         )
         self.assertEqual(1, code)
         result = json.loads(output)
@@ -357,10 +355,10 @@ paths = ["src/"]
         ):
             with self.subTest(selected=selected):
                 code, output, _ = self.invoke(
-                    "focus", "--result-schema", "1", str(self.root), "--artifact", selected, "--json"
+                    "focus", str(self.root), "--artifact", selected, "--json"
                 )
                 self.assertEqual(1, code)
-                self.assertEqual("failed", json.loads(output)["operation"]["outcome"])
+                self.assertEqual("blocked", json.loads(output)["operation"]["outcome"])
                 self.assertEqual(before, path.read_bytes())
 
     def test_transition_plan_is_read_only_and_apply_changes_only_selected_vrec(self) -> None:
@@ -377,7 +375,11 @@ paths = ["src/"]
         )
         code, output, error = self.invoke(*arguments)
         self.assertEqual(0, code, error)
-        self.assertEqual("planned", json.loads(output)["operation"]["outcome"])
+        planned = json.loads(output)
+        self.assertEqual("se-harness-workflow-result-v2", planned["schema"])
+        self.assertEqual("completed", planned["operation"]["outcome"])
+        self.assertEqual(["Planned 1 explicit lifecycle transition(s); no files were written."], planned["restitution"]["done"])
+        self.assertEqual("PROC-DELIVERY-SELECT", planned["restitution"]["next"]["procedure_id"])
         self.assertEqual(before, path.read_bytes())
 
         code, output, error = self.invoke(*arguments, "--apply")
@@ -472,8 +474,9 @@ paths = ["src/"]
         )
         self.assertEqual(1, code)
         result = json.loads(output)
-        self.assertEqual("failed", result["operation"]["outcome"])
+        self.assertEqual("blocked", result["operation"]["outcome"])
         self.assertIn("requires --reason", result["findings"]["scoped_blockers"][0]["message"])
+        self.assertIn("requires --reason", result["restitution"]["blocked_by"][0])
 
     def test_atomic_packet_rolls_back_when_second_replace_fails(self) -> None:
         first = self.root / "docs/engineering/product/intent/INT-001.md"
@@ -682,7 +685,9 @@ paths = ["src/"]
             "--json",
         )
         self.assertEqual(0, code, error)
-        self.assertEqual("planned", json.loads(output)["operation"]["outcome"])
+        planned = json.loads(output)
+        self.assertEqual("completed", planned["operation"]["outcome"])
+        self.assertEqual(["Planned 1 explicit lifecycle transition(s); no files were written."], planned["restitution"]["done"])
         self.assertEqual(approved, target.read_bytes())
         self.assertEqual(implemented, path.read_bytes())
 
@@ -806,7 +811,7 @@ paths = ["src/"]
         for agent_host in scenario["agent_hosts"]:
             with mock.patch.dict(os.environ, {"SE_HARNESS_AGENT_HOST": agent_host}):
                 code, output, error = self.invoke(
-                    "focus", "--result-schema", "1", str(self.root),
+                    "focus", str(self.root),
                     "--artifact", scenario["artifact"],
                     "--json",
                 )
@@ -815,7 +820,8 @@ paths = ["src/"]
             self.assertEqual(scenario["expected"]["selection"], result["selection"])
             self.assertEqual(scenario["expected"]["scope"], result["scope"])
             self.assertEqual(scenario["expected"]["state"], result["state"])
-            self.assertEqual(scenario["expected"]["handoff"], result["handoff"])
+            for key, expected in scenario["expected"]["restitution"].items():
+                self.assertEqual(expected, result["restitution"][key], key)
             observed.append(output)
         self.assertEqual(1, len(set(observed)))
 
@@ -823,23 +829,19 @@ paths = ["src/"]
         fixture_path = Path(__file__).parent / "fixtures/workflow_execution/scenarios.json"
         scenario = json.loads(fixture_path.read_text(encoding="utf-8"))["scenarios"][0]
         json_code, json_output, json_error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", scenario["artifact"], "--json"
+            "focus", str(self.root), "--artifact", scenario["artifact"], "--json"
         )
         human_code, human_output, human_error = self.invoke(
-            "focus", "--result-schema", "1", str(self.root), "--artifact", scenario["artifact"]
+            "focus", str(self.root), "--artifact", scenario["artifact"]
         )
         self.assertEqual(0, json_code, json_error)
         self.assertEqual(0, human_code, human_error)
-        handoff = json.loads(json_output)["handoff"]
-        for value in handoff["completed"] + handoff["current_lifecycle_state"]:
+        restitution = json.loads(json_output)["restitution"]
+        for value in restitution["done"] + restitution["current_lifecycle_state"]:
             self.assertIn(value, human_output)
-        for section in (
-            "recommended_next_step",
-            "human_decision_or_approval_required",
-            "command_or_suggested_response",
-        ):
-            for value in handoff[section].values():
-                self.assertIn(value, human_output)
+        self.assertIn(restitution["next"]["action"], human_output)
+        self.assertIn(restitution["next"]["procedure_id"], human_output)
+        self.assertIn(restitution["command_or_response"]["value"], human_output)
 
     def test_focus_and_planning_scale_to_one_thousand_artifacts(self) -> None:
         validator = _load_validator_module()
@@ -1163,3 +1165,56 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
         blockers = json.loads(output)["restitution"]["blocked_by"]
         self.assertTrue(any(item.startswith("W-ADS-002:") for item in blockers), blockers)
         self.assertTrue(any(orphan in item for item in blockers), blockers)
+
+    def test_focus_digest_equals_the_released_evaluator_golden(self) -> None:
+        """Issue #212 criterion 3: an unchanged repository keeps its result_sha256.
+
+        The constant was read from the exact public se-harness 0.7.1 evaluator's
+        `focus --json` on this fixture before WO-ECP-005 removed schema 1; the
+        candidate's one result path must reproduce it byte for byte.
+        """
+
+        code, output, error = self.invoke("focus", str(self.root), "--artifact", "WO-001", "--json")
+        self.assertEqual(0, code, error)
+        self.assertEqual(
+            "d22f5e481f7b59ff444b2d6812dbacc566a2a8092e1fb522dad61f053aaa0b1f",
+            json.loads(output)["result_sha256"],
+        )
+
+    def test_every_workflow_command_refuses_the_retired_result_schema_option(self) -> None:
+        for command in (
+            ["focus", str(self.root), "--artifact", "WO-001"],
+            ["transition", str(self.root), "--set", "WO-001=verified", "--decision", "WO-001=x"],
+            ["capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001", "--verification", "VER-001", "--evidence", "x"],
+            ["prepare-release", str(self.root), "--id", "RLS-009", "--release-contract", "REL-001", "--verification-record", "VREC-001", "--work-order", "WO-001", "--version", "1.0.0", "--authorized-by", "release-owner"],
+        ):
+            with self.subTest(command=command[0]):
+                error = io.StringIO()
+                with contextlib.redirect_stderr(error), self.assertRaises(SystemExit) as raised:
+                    main([*command, "--result-schema", "2"])
+                self.assertEqual(2, raised.exception.code)
+                self.assertIn("unrecognized arguments: --result-schema", error.getvalue())
+
+    def test_transition_and_focus_agree_on_the_next_step_for_the_resulting_state(self) -> None:
+        # ECP-KRN-003: one selector. The plan's next step for the target state equals
+        # focus's next step once that state exists.
+        self.ready_vrec()
+        code, plan_output, error = self.invoke(
+            "transition", str(self.root), "--set", "VREC-001=verified",
+            "--decision", "VREC-001=assurance-owner", "--json",
+        )
+        self.assertEqual(0, code, error)
+        code, _, error = self.invoke(
+            "transition", str(self.root), "--set", "VREC-001=verified",
+            "--decision", "VREC-001=assurance-owner", "--apply",
+        )
+        self.assertEqual(0, code, error)
+        code, focus_output, error = self.invoke("focus", str(self.root), "--artifact", "VREC-001", "--json")
+        self.assertEqual(0, code, error)
+        plan_next = json.loads(plan_output)["restitution"]["next"]
+        focus_next = json.loads(focus_output)["restitution"]["next"]
+        self.assertEqual(focus_next, plan_next)
+        self.assertEqual(
+            json.loads(plan_output)["restitution"]["current_lifecycle_state"],
+            json.loads(focus_output)["restitution"]["current_lifecycle_state"],
+        )

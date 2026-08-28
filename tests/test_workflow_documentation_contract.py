@@ -36,17 +36,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
         contract = WORKFLOW_CONTRACT
         self.assertEqual("se-harness-workflow-v4", contract["schema"])
         self.assertEqual("BCP 14", contract["normative_language"])
-        self.assertEqual(
-            [
-                "completed",
-                "current_lifecycle_state",
-                "recommended_next_step",
-                "human_decision_or_approval_required",
-                "command_or_suggested_response",
-                "alternative_next_steps",
-            ],
-            contract["handoff_fields"],
-        )
+        self.assertNotIn("handoff_fields", contract)
         self.assertEqual(
             [
                 "outcome", "done", "not_done", "blocked_by",
@@ -74,7 +64,8 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
         for rule in recommendations:
             with self.subTest(rule=rule["id"]):
                 self.assertRegex(rule["id"], r"^WFL-[A-Z0-9-]+$")
-                self.assertEqual(set(contract["handoff_fields"]), set(rule["handoff"]))
+                self.assertNotIn("handoff", rule)
+                self.assertEqual({"done", "current_lifecycle_state"}, set(rule["restitution"]))
                 self.assertIsInstance(rule["selector"]["artifact_types"], list)
                 self.assertIsInstance(rule["selector"]["statuses"], list)
                 self.assertIsInstance(rule["gate_ids"], list)
@@ -83,13 +74,11 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 self.assertRegex(rule["decision_right"], r"^DR-[A-Z0-9-]+$")
                 self.assertIsInstance(rule["effects"], list)
                 self.assertIsInstance(rule["non_effects"], list)
-                self.assertEqual(
-                    {"action", "detail"},
-                    set(rule["handoff"]["recommended_next_step"]),
-                )
+                for field in ("done", "current_lifecycle_state"):
+                    self.assertIsInstance(rule["restitution"][field], list)
         failure = contract["failure"]
         self.assertEqual("WFL-FAIL-REMEDIATE", failure["id"])
-        self.assertEqual(set(contract["handoff_fields"]), set(failure["handoff"]))
+        self.assertEqual({"done", "current_lifecycle_state"}, set(failure["restitution"]))
         self.assertEqual(["failed"], failure["selector"]["outcomes"])
         self.assertRegex(failure["procedure_id"], r"^PROC-[A-Z0-9-]+$")
         workflow, quality, rules, procedures, gates = load_validated_contracts()

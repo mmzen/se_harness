@@ -92,8 +92,9 @@ are referenced by the verification contract and the evidence.
 1. `RELEASE_CONTRACT.template.md` adds `candidate_commit = "<40 or 64 hex>"`
    and `previous_release_tag = "v<version>"` in the front matter, and a
    "Release unit" section that states the census is derived.
-2. `harnessctl release-unit <root> --from <tag> --to <commit> [--json]
-   [--result-schema 2]`: walks `--first-parent <tag>..<commit>`, reads the
+2. `harnessctl release-unit <root> --from <tag> --to <commit> [--json]`
+   (the `[--result-schema 2]` once written here named an option
+   `release-unit` never had; corrected 2026-08-28 under `WO-ECP-005`): walks `--first-parent <tag>..<commit>`, reads the
    `Harness-Work-Order:` trailer of each commit, resolves each work order
    in the catalog, reports `{id, status, packaged_surface: bool,
    commits: [..]}` per work order and `untraced: [sha..]`; exit 1 when

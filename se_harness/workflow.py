@@ -22,7 +22,6 @@ from se_harness.preflight import _load_validator_module, run_preflight
 from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
 
 
-SCHEMA = 1
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
 DEFINITION_TYPES = {
     "intent",
@@ -77,71 +76,6 @@ def _state(items: Iterable[tuple[str, str]]) -> list[dict[str, str]]:
     return [{"id": artifact_id, "status": status} for artifact_id, status in sorted(items)]
 
 
-def _handoff(
-    *,
-    completed: Iterable[str],
-    current: Iterable[str],
-    next_step: Mapping[str, str],
-    authority: Mapping[str, str],
-    command: Mapping[str, str],
-    alternatives: Iterable[Mapping[str, str]] = (),
-) -> dict[str, Any]:
-    return {
-        "completed": list(completed),
-        "current_lifecycle_state": list(current),
-        "recommended_next_step": dict(next_step),
-        "human_decision_or_approval_required": dict(authority),
-        "command_or_suggested_response": dict(command),
-        "alternative_next_steps": [dict(item) for item in alternatives],
-    }
-
-
-def _result(
-    *,
-    kind: str,
-    outcome: str,
-    primary: str | None,
-    artifacts: Iterable[str],
-    governing: Iterable[str] = (),
-    dependencies: Iterable[str] = (),
-    before: Iterable[tuple[str, str]] = (),
-    after: Iterable[tuple[str, str]] = (),
-    scoped_blockers: Iterable[Mapping[str, Any]] = (),
-    repository_blockers: Iterable[Mapping[str, Any]] = (),
-    background: Iterable[Mapping[str, Any]] = (),
-    writes: Iterable[Mapping[str, Any]] = (),
-    handoff: Mapping[str, Any] | None = None,
-) -> dict[str, Any]:
-    return {
-        "schema": SCHEMA,
-        "operation": {"kind": kind, "outcome": outcome},
-        "selection": {"primary": primary, "artifacts": sorted(set(artifacts))},
-        "scope": {
-            "governing": sorted(set(governing)),
-            "dependencies": sorted(set(dependencies)),
-        },
-        "state": {"before": _state(before), "after": _state(after)},
-        "findings": {
-            "scoped_blockers": sorted((dict(item) for item in scoped_blockers), key=_finding_key),
-            "repository_blockers": sorted((dict(item) for item in repository_blockers), key=_finding_key),
-            "background_summary": sorted((dict(item) for item in background), key=_finding_key),
-        },
-        "mutation": {
-            "writes": sorted(
-                (dict(item) for item in writes),
-                key=lambda item: (str(item.get("id", "")), str(item.get("path", ""))),
-            )
-        },
-        "handoff": dict(handoff or _handoff(
-            completed=(),
-            current=(),
-            next_step={},
-            authority={},
-            command={},
-        )),
-    }
-
-
 def _finding_key(item: Mapping[str, Any]) -> tuple[str, str, str]:
     return (str(item.get("code", "")), str(item.get("path", "")), str(item.get("message", "")))
 
@@ -154,87 +88,15 @@ def failed_result(
     code: str = "WEX001",
     repository_blocker: bool = False,
 ) -> dict[str, Any]:
+    from se_harness.workflow_compliance import remediation_result
+
     finding = {"code": code, "message": _terminal_text(message)}
-    handoff = _format_contract_value(
-        WORKFLOW_CONTRACT["failure"].get("handoff"),
-        {"message": finding["message"]},
-    )
-    if not isinstance(handoff, dict):
-        raise RuntimeError("workflow contract failure rule is missing a handoff")
-    return _result(
-        kind=kind,
-        outcome="failed",
-        primary=primary,
-        artifacts=([primary] if primary else []),
-        scoped_blockers=[] if repository_blocker else [finding],
-        repository_blockers=[finding] if repository_blocker else [],
-        handoff=handoff,
-    )
+    return remediation_result(kind, primary, finding, repository_blocker=repository_blocker)
 
 
 def _terminal_text(value: object) -> str:
     text = str(value)
     return "".join(character if character >= " " and character != "\x7f" else "?" for character in text)
-
-
-def render_json(result: Mapping[str, Any]) -> str:
-    return json.dumps(result, indent=2, ensure_ascii=True) + "\n"
-
-
-def _render_value(value: Any) -> str:
-    if isinstance(value, dict):
-        return "; ".join(f"{key}: {_terminal_text(item)}" for key, item in value.items()) or "none"
-    if isinstance(value, list):
-        return " | ".join(_render_value(item) for item in value) or "none"
-    return _terminal_text(value) or "none"
-
-
-def render_human(result: Mapping[str, Any]) -> str:
-    operation = result["operation"]
-    selection = result["selection"]
-    handoff = result["handoff"]
-    lines = [
-        f"Workflow {operation['kind']}: {str(operation['outcome']).upper()}",
-        f"Selected: {selection['primary'] or 'none'}",
-        "",
-        "Completed",
-        _render_value(handoff["completed"]),
-        "",
-        "Current lifecycle state",
-        _render_value(handoff["current_lifecycle_state"]),
-        "",
-        "Recommended next step",
-        _render_value(handoff["recommended_next_step"]),
-        "",
-        "Human decision or approval required",
-        _render_value(handoff["human_decision_or_approval_required"]),
-        "",
-        "Command or suggested response",
-        _render_value(handoff["command_or_suggested_response"]),
-        "",
-    ]
-    if handoff["alternative_next_steps"]:
-        lines.extend([
-            "",
-            "Alternative next steps",
-            _render_value(handoff["alternative_next_steps"]),
-        ])
-    findings = result["findings"]
-    blockers = [*findings["repository_blockers"], *findings["scoped_blockers"]]
-    if blockers:
-        lines.extend(["", "Blockers"])
-        lines.extend(
-            f"- [{item.get('code', 'WEX')}] {_terminal_text(item.get('message', ''))}"
-            for item in blockers
-        )
-    background = findings["background_summary"]
-    if background:
-        lines.extend(["", "Background"])
-        lines.extend(
-            f"- [{item.get('code', 'WEX')}] {_terminal_text(item.get('message', ''))}"
-            for item in background
-        )
-    return "\n".join(lines) + "\n"
 
 
 def _validation(root: Path) -> tuple[Any, Any]:
@@ -338,67 +200,6 @@ def _diagnostic(item: Any) -> dict[str, str]:
     }
 
 
-def _contract_match(value: str, accepted: object) -> bool:
-    return isinstance(accepted, list) and ("*" in accepted or value in accepted)
-
-
-def _format_contract_value(value: Any, context: Mapping[str, str]) -> Any:
-    if isinstance(value, str):
-        return value.format_map(context)
-    if isinstance(value, list):
-        return [_format_contract_value(item, context) for item in value]
-    if isinstance(value, dict):
-        return {key: _format_contract_value(item, context) for key, item in value.items()}
-    return value
-
-
-def _recommend(
-    primary: Any,
-    *,
-    target: str | None = None,
-    related: Iterable[Any] = (),
-) -> dict[str, Any]:
-    status = target or primary.status
-    artifact_id = primary.artifact_id
-    related_items = sorted(related, key=lambda item: item.artifact_id)
-    context = {
-        "artifact_id": artifact_id,
-        "status": status,
-        "successor_id": next(iter(sorted(_targets(primary, "superseded_by"))), "the declared successor"),
-    }
-    for rule in WORKFLOW_CONTRACT["recommendations"]:
-        if not isinstance(rule, dict) or not isinstance(rule.get("selector"), dict):
-            raise RuntimeError("workflow contract contains an invalid recommendation")
-        selector = rule["selector"]
-        if not _contract_match(primary.artifact_type, selector.get("artifact_types")):
-            continue
-        if not _contract_match(status, selector.get("statuses")):
-            continue
-        selected_related: Any | None = None
-        related_type = selector.get("related_artifact_type")
-        if related_type is not None:
-            candidates = [
-                item
-                for item in related_items
-                if item.artifact_type == related_type
-                and _contract_match(item.status, selector.get("related_statuses"))
-            ]
-            if not candidates:
-                continue
-            selected_related = candidates[0]
-        rule_context = dict(context)
-        if selected_related is not None:
-            rule_context.update({
-                "related_id": selected_related.artifact_id,
-                "related_status": selected_related.status,
-            })
-        handoff = _format_contract_value(rule.get("handoff"), rule_context)
-        if not isinstance(handoff, dict):
-            raise RuntimeError("workflow contract recommendation is missing a handoff")
-        return handoff
-    raise RuntimeError(f"workflow contract has no recommendation for {primary.artifact_type}:{status}")
-
-
 def focus(repository: Path, artifact_id: str, *, include_background: bool = False) -> dict[str, Any]:
     root = ensure_target(repository, must_exist=True)
     _, report = _validation(root)
@@ -442,29 +243,22 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
             "count": total,
             "message": f"{total} unrelated finding(s); use --include-background for categories",
         })
-    outcome = "failed" if scoped or repository else "completed"
-    return _result(
-        kind="focus",
-        outcome=outcome,
-        primary=artifact_id,
-        artifacts=[artifact_id],
+    from se_harness.workflow_compliance import selected_result
+
+    blockers = [*repository, *scoped]
+    return selected_result(
+        root,
+        operation="focus",
+        primary=primary,
+        related=[catalog[item] for item in dependencies if item in catalog],
         governing=governing,
         dependencies=dependencies,
-        before=[(artifact_id, primary.status)],
-        after=[(artifact_id, primary.status)],
+        blocked_by=[f"{item.get('code', 'WEX')}: {item.get('message', '')}" for item in blockers],
+        before=[{"id": artifact_id, "status": primary.status}],
+        after=[{"id": artifact_id, "status": primary.status}],
         scoped_blockers=scoped,
         repository_blockers=repository,
-        background=background,
-        handoff=(
-            _recommend(
-                primary,
-                related=(catalog[item] for item in dependencies if item in catalog),
-            )
-            if outcome == "completed"
-            else failed_result(
-                "focus", artifact_id, "Resolve selected-scope blockers before continuing."
-            )["handoff"]
-        ),
+        unrelated_count=sum(int(item.get("count", 0)) for item in background),
     )
 
 
@@ -831,7 +625,6 @@ def plan_transition(
         raise HarnessError(f"proposed final graph is invalid [{first.code}]: {first.message}")
     primary_id = sorted(transitions)[0]
     primary = proposed_catalog[primary_id]
-    outcome = "completed" if apply else "planned"
     completed = (
         [f"Applied {len(writes)} explicit lifecycle transition(s) atomically."]
         if apply
@@ -840,19 +633,18 @@ def plan_transition(
     dependencies: set[str] = set()
     if primary.artifact_type in PRIMARY_TYPES:
         _, dependencies = project_scope(proposed_catalog, primary)
-    handoff = _recommend(
-        primary,
-        target=transitions[primary_id],
-        related=(proposed_catalog[item] for item in dependencies if item in proposed_catalog),
-    )
-    handoff["completed"] = completed
-    result = _result(
-        kind="transition",
-        outcome=outcome,
-        primary=primary_id,
-        artifacts=transitions,
-        before=before,
-        after=after,
+    from se_harness.workflow_compliance import selected_result
+
+    result = selected_result(
+        root,
+        operation="transition",
+        primary=primary,
+        related=[proposed_catalog[item] for item in dependencies if item in proposed_catalog],
+        artifacts=sorted(transitions),
+        dependencies=dependencies,
+        done=completed,
+        before=_state(before),
+        after=_state(after),
         writes=[
             {
                 "id": item.artifact_id,
@@ -861,7 +653,6 @@ def plan_transition(
             }
             for item in writes
         ],
-        handoff=handoff,
     )
     plan = TransitionPlan(root=root, inputs=inputs, writes=tuple(writes), result=result)
     if apply:
@@ -946,24 +737,21 @@ def preparation_result(repository: Path, artifact_id: str, kind: str, path: Path
     if artifact is None:
         raise HarnessError(f"prepared artifact is not discoverable: {artifact_id}")
     governing, dependencies = project_scope(catalog, artifact)
-    handoff = _recommend(artifact)
     label = "verification record" if kind == "capture-verification" else "release record"
-    handoff["completed"] = [
-        f"Prepared ready {label} {artifact_id} at {path.relative_to(root).as_posix()}."
-    ]
-    return _result(
-        kind=kind,
-        outcome="completed",
-        primary=artifact_id,
-        artifacts=[artifact_id],
+    from se_harness.workflow_compliance import selected_result
+
+    return selected_result(
+        root,
+        operation=kind,
+        primary=artifact,
+        related=[catalog[item] for item in dependencies if item in catalog],
         governing=governing,
         dependencies=dependencies,
-        before=[],
-        after=[(artifact_id, artifact.status)],
+        done=[f"Prepared ready {label} {artifact_id} at {path.relative_to(root).as_posix()}."],
+        after=[{"id": artifact_id, "status": artifact.status}],
         writes=[{
             "id": artifact_id,
             "path": path.relative_to(root).as_posix(),
             "fields": sorted(artifact.metadata),
         }],
-        handoff=handoff,
     )

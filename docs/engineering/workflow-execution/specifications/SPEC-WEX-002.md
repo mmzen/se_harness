@@ -96,7 +96,9 @@ harnessctl check [TARGET] --artifact ID --checkpoint start|pre-action|handoff
 - `check` always emits the schema-2 semantic result. Existing `focus`,
   `transition`, and preparation commands gain `--result-schema 1|2` during the
   compatibility window; schema 1 cannot express the new `not_done`,
-  `blocked_by`, gate, or procedure fields.
+  `blocked_by`, gate, or procedure fields. *Amended 2026-08-28 under
+  `WO-ECP-005` (`REQ-ECP-010`): the window has closed; every one of those
+  commands emits schema 2 only and `--result-schema` is an argument error.*
 
 ### Machine-readable policy
 
@@ -407,7 +409,12 @@ reports completed effects honestly, marks incomplete expected effects under
   by `SPEC-WEX-001`. Those commands support explicit schema 2 during one
   published compatibility window, and schema 2 becomes their default only in
   the release that advertises that interface change. The new `check` command has
-  no schema-1 form.
+  no schema-1 form. *Retirement amendment of 2026-08-28 under `WO-ECP-005`
+  (`REQ-ECP-010`, `SPEC-ECP-005` `ECP-KRN-001` to `-003`): the compatibility
+  window is closed without a no-op flag; schema 1, its builder, its
+  projection and the `handoff` blocks of `WORKFLOW.json` are removed, and each
+  rule carries only the `done` and `current_lifecycle_state` restitution
+  prose. The sentences above are retained as history.*
 - Schema 1 is rendered from the same internal result but omits new fields; it
   cannot be used as proof of REQ-WEX-007 through REQ-WEX-010 compliance.
 - `inspect` remains repository-wide and read-only. It gains an explicit mode
