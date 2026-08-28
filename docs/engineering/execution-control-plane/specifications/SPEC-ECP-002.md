@@ -20,6 +20,29 @@ reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP de
 
 # Specification: Evidence packets, identifier allocation, and pull-request body generation
 
+## Amendment of 2026-08-28 (`WO-ECP-002`, before start)
+
+On the engineering owner's decision, four rules are restated for the state of
+`main` at `0961176`:
+
+- **ECP-EVD-002** — `formal_snapshot_sha256` carries the whole-tree formal
+  snapshot digest that `QGP-G4I-EVIDENCE` compares today; the chain-scoped
+  digest of `ECP-SNP-001` replaces it on both sides under `WO-ECP-008`.
+- **ECP-EVD-006** — the packet is written with UTF-8 and LF bytes regardless
+  of host; `evidence` refuses with `WEX-ECP-011` only when a `.gitattributes`
+  rule covering the path would convert line endings (a `text` attribute
+  without `eol=lf`). No attribute is required to be present.
+- **ECP-PRB-002** — `DOMAIN/evidence/WO-ID/handoff.json` is written by the
+  harness: a `check --checkpoint handoff --from-git BASE` whose outcome is
+  `completed` retains its schema-2 result there (`mutation.writes` names
+  it); `pr-body` reads it and emits the `Harness-Restitution` line from its
+  `result_sha256`.
+- **Compatibility** — the `QGP-G4I-EVIDENCE` corrective of
+  `STEP-WO-IMPLEMENT-CHECK` becomes the command
+  `harnessctl evidence . --artifact {artifact_id} --checkpoint handoff`;
+  `se_harness/workflow_contract.json` and the template `WORKFLOW.json` are in
+  this work order's scope for that change.
+
 ## Scope
 
 Three pieces of state that the agent carries today move into the harness:

@@ -22,6 +22,9 @@ paths = [
   "docs/notes/harnessctl-reference.md",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-002.md",
+  "se_harness/workflow_contract.json",
+  "templates/repository/standard/docs/engineering/WORKFLOW.json",
 ]
 
 [relations]
@@ -41,6 +44,34 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-003`,
 separate acts by their owners and precede approval of this work order. This
 work order follows `WO-ECP-001` (its `evidence` command binds the packet
 that `check --from-git` evaluates) and precedes `WO-ECP-003`.
+
+## Pre-start amendments, 2026-08-28
+
+Put to the engineering owner before approval, on a reading of `SPEC-ECP-002`
+against `main` at `0961176`, and answered "Approve and start with the
+amendments". Each is recorded as a dated amendment of `SPEC-ECP-002` under
+this work order, whose scope gains that specification and the two contract
+copies:
+
+1. `ECP-EVD-002` named the chain-scoped digest of `ECP-SNP-001`, which is
+   `WO-ECP-008`'s and is not implemented; the header carries
+   `formal_snapshot_sha256` as `QGP-G4I-EVIDENCE` compares it today, and
+   `WO-ECP-008` moves both sides to the chain digest together.
+2. `ECP-EVD-006` required an `evaluator-evidence` attribute covering the
+   packet path; that class covers `*.json` only, so every Markdown packet
+   would have been refused. `evidence` writes UTF-8/LF bytes itself and
+   refuses (`WEX-ECP-011`) only when an attribute covering the path would
+   convert line endings.
+3. The compatibility section changes the `QGP-G4I-EVIDENCE` corrective to
+   the `evidence` command; `se_harness/workflow_contract.json` and the
+   template `WORKFLOW.json` are added to the scope for that one change.
+4. `ECP-PRB-002` reads `DOMAIN/evidence/WO-ID/handoff.json`, which nothing
+   wrote; a completed `check --checkpoint handoff --from-git BASE` retains
+   its schema-2 result there, written by the harness.
+
+Two deviations from the packet text are accepted in advance: readings are
+taken with the governing exact public 0.8.0 root, not the 0.7.1 named on
+2026-08-27; the root managed copies stay unedited while the templates move.
 
 ## Objective
 
