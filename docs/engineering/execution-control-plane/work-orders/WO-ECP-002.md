@@ -2,7 +2,7 @@
 id = "WO-ECP-002"
 type = "work_order"
 title = "Harness-authored evidence, identifier allocation, and pull-request bodies"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
@@ -38,6 +38,13 @@ to = "approved"
 decided_at = "2026-08-28T21:09:05Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start with the amendments', as the second work order of the execution-control-plane plan, after WO-ECP-001 merged as 0961176. Its definitions REQ-ECP-003, REQ-ECP-004, REQ-ECP-005, SPEC-ECP-002 and VER-ECP-002 were approved separately on 2026-08-28; four rules of SPEC-ECP-002 are restated by dated amendment before start (the header digest, the attribute rule, the harness-written handoff.json, the contract corrective) and the scope gains the specification and the two contract copies. Authorizes start preflight and then only the declared scope: harnessctl evidence, the TOML-header evidence predicate with a one-release substring grace, identifier allocation across local refs, harnessctl pr-body, the contract corrective, the seed, the note, tests and evidence. Measured before this transition: validate PASS at 0 errors under the governing 0.8.0 root. It authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T21:09:09Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start with the amendments'. Start preflight Completed with nothing not done over the approval commit 645b5ca carrying unmoved main 0961176, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Harness-authored evidence, identifier allocation, and pull-request bodies
