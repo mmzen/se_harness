@@ -2,7 +2,7 @@
 id = "WO-RLS-014"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.8.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-28T15:05:51Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-08-28 on the engineering owner's approval and the implementer's announced sequence ('I'll record both and start the candidate'). Start preflight run with the governing exact public 0.7.1 evaluator outside the checkout. REL-SEH-019 is approved, so its ten-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the three declared execution-scope paths; authorizes no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-016 or RLS-SEH-017 preparation, no tag, no publication, no credential use and no root-evaluator change."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T15:58:44Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, on the owner's 'ok go' and 'docker has been installed', over candidate commit aa0c9bccea5433e1dc93cbf00b0e1a38099e9214. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout with the five declared paths and completeness asserted. Exact-candidate readings: validate 1064 artifacts 0 errors 471 warnings; doctor 0 FAIL; review preflight PASS; complete-candidate passed candidate-controlled (CC001-CC004); release distributions PASS; portable surface PASS in repository, wheel and harnessctl modes on a non-promotable ephemeral wheel; the real upgrade rehearsal 0.7.1 to 0.8.0 passed twice with identical semantic digest; census against REL-SEH-019 with the fifteen exemptions complete, deviations 1 and 2 recorded. Build of record on this Linux host through the pinned linux/amd64 producer: state exact, two byte-identical runs, wheel a95497f3535a07202af92e5d280d671fd4a65cb43fa46eae83e797617582911c, sdist 8c8fcddf8ea3ac53afc9b4ae57d063c84cfe67f63d2fdb747409f52bda642e00. Hosted lanes: twelve of thirteen green at aa0c9bc with the managed validate red only on a stale event payload, all thirteen green at 04a6778. Five deviations recorded in the evidence. This authorizes no further act."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.8.0 candidate from main
