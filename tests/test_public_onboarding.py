@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+import os
 import re
+import shutil
+import subprocess
+import sys
+import tempfile
 import tomllib
 import unittest
 from pathlib import Path
@@ -363,3 +368,65 @@ class PublicOnboardingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+HASH_BOUND_CHECKS = (
+    "hash-bound-class-declared",
+    "hash-bound-attribute-effective",
+    "hash-bound-mode-consistent",
+)
+
+
+@unittest.skipUnless(shutil.which("git"), "git is unavailable")
+class FreshConsumerDoctorTests(unittest.TestCase):
+    """The state every adopter meets first: installed, committed once, `doctor`.
+
+    `WO-HBI-005` for issue #207. Until then `doctor` exited 1 here on two
+    hash-bound checks, and no scenario observed it because the acceptance lane
+    never commits its initialized target.
+    """
+
+    def harnessctl(self, *arguments: str, cwd: Path) -> subprocess.CompletedProcess[str]:
+        environment = {**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT), "PYTHONNOUSERSITE": "1"}
+        return subprocess.run(
+            [sys.executable, "-m", "se_harness", *arguments],
+            cwd=cwd,
+            env=environment,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            check=False,
+        )
+
+    def fresh_consumer_doctor(self, autocrlf: str) -> subprocess.CompletedProcess[str]:
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            consumer = base / "consumer"
+            init = self.harnessctl("init", str(consumer), "--project-name", "Consumer", cwd=base)
+            self.assertEqual(0, init.returncode, init.stdout + init.stderr)
+            git = ["git", "-c", f"core.autocrlf={autocrlf}", "-C", str(consumer)]
+            subprocess.run([*git, "init", "-q", "-b", "main"], check=True, capture_output=True)
+            subprocess.run([*git, "config", "user.email", "adopter@example.invalid"], check=True)
+            subprocess.run([*git, "config", "user.name", "adopter"], check=True)
+            subprocess.run([*git, "config", "commit.gpgsign", "false"], check=True)
+            subprocess.run([*git, "add", "-A"], check=True, capture_output=True)
+            subprocess.run([*git, "commit", "-q", "-m", "init"], check=True, capture_output=True)
+            return self.harnessctl("doctor", str(consumer), cwd=base)
+
+    def assert_doctor_passes(self, autocrlf: str) -> None:
+        doctor = self.fresh_consumer_doctor(autocrlf)
+        self.assertEqual(0, doctor.returncode, doctor.stdout + doctor.stderr)
+        self.assertNotIn("FAIL ", doctor.stdout)
+        for check in HASH_BOUND_CHECKS:
+            with self.subTest(autocrlf=autocrlf, check=check):
+                lines = [line for line in doctor.stdout.splitlines() if f" {check}:" in line]
+                self.assertEqual(1, len(lines), doctor.stdout)
+                self.assertTrue(lines[0].startswith("PASS "), lines[0])
+
+    def test_init_commit_doctor_exits_zero_on_an_lf_checkout(self) -> None:
+        self.assert_doctor_passes("false")
+
+    def test_init_commit_doctor_exits_zero_on_a_crlf_checkout(self) -> None:
+        # Mirrors a Windows checkout: `core.autocrlf=true` converts every text file
+        # the managed `.gitattributes` block does not pin.
+        self.assert_doctor_passes("true")

@@ -15,20 +15,6 @@
     },
     {
       "bindings": [
-        "implementation_sha256"
-      ],
-      "id": "governance-migration-protocol",
-      "mode": "raw",
-      "patterns": [
-        "se_harness/governance_migration*.py",
-        "se_harness/governance_migration_contract.json",
-        "tests/fixtures/governance_migration/*.json"
-      ],
-      "region": "repository",
-      "required_attribute": "text eol=lf"
-    },
-    {
-      "bindings": [
         "from_lock_sha256",
         "prior_lock_sha256"
       ],
@@ -58,6 +44,10 @@
     {
       "field": "evaluator_archive_sha256",
       "reason": "binary wheel archive"
+    },
+    {
+      "field": "implementation_sha256",
+      "reason": "bound in harness data; pinned by owner-controlled gitattributes content"
     },
     {
       "field": "sdist_sha256",

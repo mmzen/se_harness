@@ -369,9 +369,14 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Attributes", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
+            # WO-HBI-005: the candidate fragment carries only the template-region
+            # evaluator-evidence rule; the migration-protocol rules that only this
+            # repository can satisfy are no longer shipped to consumers.
             expected_fragment = (
                 "# Preserve canonical evaluator-evidence bytes and their bound SHA-256 on every platform.\n"
                 "docs/engineering/**/evidence/*.json text eol=lf\n"
+            )
+            released_fragment = expected_fragment + (
                 "# Keep the packaged migration protocol, its hash-bound implementation, and canonical scenarios byte-stable.\n"
                 "se_harness/governance_migration*.py text eol=lf\n"
                 "se_harness/governance_migration_contract.json text eol=lf\n"
@@ -393,10 +398,11 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             root_managed = root_attributes.split("# se-harness:begin\n", 1)[1].split(
                 "# se-harness:end\n", 1
             )[0]
-            # The root managed block is the released 0.7.0 fragment (WO-HUP-006), so it
-            # now carries the migration rules too; the owner region keeps its own copies
-            # because SPEC-HBI-001 declares that class repository-region.
-            self.assertEqual(expected_fragment, root_managed)
+            # The root managed block is the released 0.7.1 fragment (WO-HUP-007) and is
+            # hash-locked, so it still carries the migration rules until the root
+            # evaluator next advances; the owner region keeps its own copies, which are
+            # what pins those bytes now that no shipped class covers them (WO-HBI-005).
+            self.assertEqual(released_fragment, root_managed)
             root_owner = root_attributes.split("# se-harness:end\n", 1)[1]
             for rule in (
                 "se_harness/governance_migration*.py text eol=lf",

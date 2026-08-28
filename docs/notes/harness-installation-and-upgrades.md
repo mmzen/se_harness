@@ -183,6 +183,10 @@ Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout 
 
 Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations under the enforcing release. Their single transition path is the reviewed `upgrade --apply` above, from an already-published target evaluator. Once schema 3 is installed, ordinary mutation requires exact agreement with the lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
 
+### The managed `.gitattributes` block changes at the first release after 0.7.1
+
+`WO-HBI-005` (repository issue #207) removed from the canonical `.gitattributes` fragment the three `se_harness/governance_migration*` rules that only the SE Harness repository itself could satisfy, and stopped shipping the matching `governance-migration-protocol` hash-bound class. In a repository initialized or adopted with 0.7.1 or earlier, `harnessctl doctor` fails `hash-bound-class-declared` and `hash-bound-attribute-effective` after the first commit for that reason alone; there is no owner-side workaround, because the block between the `se-harness` markers is hash-locked. The `upgrade` plan for the first release that carries the change classifies `.gitattributes` as `update` in `fragment` mode: `--apply` rewrites only the managed block, and every rule the owner keeps outside the markers is preserved. A `template`-region class whose pattern matches no tracked path yet — evidence before the first verification record — is then reported as vacuously declared with `0 tracked paths` rather than failed.
+
 ### Release records cut before evaluator evidence existed
 
 Schema 3 requires an evaluator-evidence binding on every `ready` and `released` release record, and a released record can never be rewritten to add one. A repository that released under an earlier schema therefore holds records that can never satisfy the enforcing rule. Those records are declared, not rewritten.

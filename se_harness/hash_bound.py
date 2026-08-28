@@ -451,10 +451,21 @@ def _class_declared(
         if field in owner or field in known:
             continue
         failures.append(f"{paths[0]}: digest field {field} resolves to no declared class")
+    vacuous: list[str] = []
     for item in declaration.classes:
+        # A `repository`-region class was declared by the owner for paths known
+        # to exist, so an empty match is a stale declaration and fails closed. A
+        # `template`-region class is the evaluator's promise about files the
+        # repository will hold later (evidence before its first record), so it is
+        # vacuously declared: reported, never failed (SPEC-HBI-001 rule 9).
+        matched = False
         for pattern in item.patterns:
-            if not any(matches(pattern, relative) for relative in tracked):
+            if any(matches(pattern, relative) for relative in tracked):
+                matched = True
+            elif item.region == "repository":
                 failures.append(f"{item.class_id}: pattern {pattern} matches no tracked path")
+        if not matched and item.region == "template":
+            vacuous.append(f"{item.class_id}: 0 tracked paths")
     if failures:
         return False, _detail(failures)
     covered = sum(
@@ -466,10 +477,13 @@ def _class_declared(
             for pattern in item.patterns
         )
     )
-    return True, (
+    detail = (
         f"{len(declaration.classes)} classes cover {covered} tracked paths; "
         f"{len(declaration.unbound_digest_fields)} digest fields declared out of scope"
     )
+    if vacuous:
+        detail += "; vacuously declared " + _detail(vacuous)
+    return True, detail
 
 
 def _attribute_effective(
