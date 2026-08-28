@@ -140,3 +140,7 @@ tests/test_interpreter_safety.py
 tests/test_standard_repository_lifecycle.py
 tests/test_upgrade_rehearsal.py
 ```
+
+## Hosted lanes
+
+Pull request #245 at `d2d7a49`: all 13 lanes pass, including the candidate-evidence lane that builds the wheel and runs `check_portable_release_surface.py` hosted, the governance-migration (upgrade-rehearsal) legs on Linux and Windows, and the governor transition assessment (no root change).
