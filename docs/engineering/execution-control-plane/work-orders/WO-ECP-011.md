@@ -10,6 +10,7 @@ updated = "2026-08-28"
 [assurance]
 commit_bound_verification = "required"
 rationale = "The work deletes product files that the wheel still ships, removes a registered interpreter-safety boundary from the declaration every evaluator loads, and moves the retired members to the forbidden set of the portable-surface check that gates every release; each is trusted engineering state that later release decisions depend on, so verification must bind the exact candidate commit."
+decided_by = "engineering-owner"
 
 [execution_scope]
 paths = [
