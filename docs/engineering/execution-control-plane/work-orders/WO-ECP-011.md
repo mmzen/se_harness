@@ -2,7 +2,7 @@
 id = "WO-ECP-011"
 type = "work_order"
 title = "Delete the retired governance-migration stage machine now that the root is 0.8.0"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -36,6 +36,13 @@ paths = [
 implements = ["REQ-ECP-012"]
 specifications = ["SPEC-ECP-007"]
 verification = ["VER-ECP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T19:00:46Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start'. Authorizes start preflight and then only the declared deletion of the four retained stage-machine files, the owner-region .gitattributes rules, the interpreter-safety boundary of the deleted module with the dated ARCH-REB-010 amendment, the move of the retired members to the forbidden set, the named test and note updates and the retained evidence, inside the declared execution scope. Measured before this transition over branch state 375b56a carrying unmoved main 6573bd8 under the governing exact public 0.8.0 root: validate PASS at 0 errors; rehearsal on a throwaway export: 0.8.0 doctor 0 FAIL after the deletion, portable-surface repository check PASS, suite 1009 tests with only the known workstation file-mode failure. It authorizes no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Delete the retired governance-migration stage machine now that the root is 0.8.0
