@@ -33,7 +33,26 @@ changes on this branch.
 
 ## 3. Build of record
 
-**Pending.** The recipe-bound replay needs a Linux host with the pinned
+Run on 2026-08-28 on this Linux host (the owner installed Docker for it;
+`docker` reached the daemon through `sudo` for this invocation only, no
+durable system change), at the exact candidate:
+
+| Reading | Value |
+| --- | --- |
+| command | `python -m repository_tools.release_build replay --repository . --commit aa0c9bc… --version 0.8.0` |
+| state | `exact`; two producer runs `a` and `b` byte-identical |
+| producer | `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050`, linux/amd64, digest-pinned by `release/build-toolchain.lock` |
+| recipe | `release/build-recipe.json`, `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc` |
+| wheel | `se_harness-0.8.0-py3-none-any.whl`, `a95497f3535a07202af92e5d280d671fd4a65cb43fa46eae83e797617582911c` |
+| sdist | `se_harness-0.8.0.tar.gz`, `8c8fcddf8ea3ac53afc9b4ae57d063c84cfe67f63d2fdb747409f52bda642e00` |
+| checksums | `SHA256SUMS`, `dbf6099f1a4042638c39cc65b895f4cf897eee36c4f7135b0b74a904e585ebc5` |
+| source manifest | `8c51e34b938105963ac0b250be2462348a8b3e1fe4a7b7a57317dbef84a9b684`, `source_date_epoch` 1787929800 |
+| bundle manifest | `scripts/create_release_bundle_manifest.py` → `se-harness-release-bundle/v2`; to be retained as `docs/engineering/release-0-8-0/evidence/RLS-SEH-017-bundle.json` when the record is prepared |
+
+The hosted `release-candidate-replay.yml` dispatch on the review ref, before
+the release decision, must reproduce the same wheel and sdist digests.
+
+The original pending text follows for the record. **Pending.** The recipe-bound replay needs a Linux host with the pinned
 `linux/amd64` producer image; this workstation has no container runtime. To be
 run by the release owner at the candidate commit and appended here:
 
