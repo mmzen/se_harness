@@ -119,3 +119,16 @@ Rerun: completed pass 4967ff179565d2117235e930be13c3d14de1b37d9edc93d57057b0bc81
 ## 8. Hosted lanes
 
 Recorded in a later commit once the pull request has run them.
+## 7. Handoff checkpoint binding
+
+Re-bound after the scope amendment, fourteen changed paths declared.
+
+artifact: WO-ECP-009
+checkpoint: handoff
+formal_snapshot_sha256: 356d39fa37f426dcaad8271adff82724887827f1ce8776bdbf71753530d0d7cc
+
+Rerun: blocked fail 248e50656dfb34242854d02d13e7938d828c38a20f3230828d32ba83a7d0aaca
+
+## 8. Hosted lanes
+
+Recorded in a later commit once the pull request has run them.

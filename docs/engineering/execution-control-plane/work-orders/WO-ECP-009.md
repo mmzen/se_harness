@@ -24,6 +24,8 @@ paths = [
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/notes/harnessctl-reference.md",
+  "docs/engineering/workflow-execution/specifications/SPEC-WEX-002.md",
 ]
 
 [relations]
@@ -101,6 +103,15 @@ not happen.
   (`ECP-KRN-008`).
 - `QG-010` in `QUALITY_GATES.md` restated as what the code does.
 - Tests; work-order-keyed evidence.
+
+Amended on 2026-08-28 by the accountable owner during execution, on the
+implementer's escalation ("Amend scope, include both"):
+`docs/notes/harnessctl-reference.md` and
+`docs/engineering/workflow-execution/specifications/SPEC-WEX-002.md` are added
+to the execution scope, so the reference describes the
+`check --checkpoint transition --target` preview and the specification's
+line naming `se-harness-quality-gates-v1` carries a dated amendment to the v2
+contract this work order ships. No other scope change.
 
 ## Out of scope
 
