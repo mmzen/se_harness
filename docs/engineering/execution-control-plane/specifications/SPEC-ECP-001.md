@@ -139,6 +139,15 @@ resolution fails with the existing `WEX200`
 **ECP-CHG-006:** The schema-2 `scope.changed_paths` list carries the
 Git-derived set unchanged, so `result_sha256` binds it (`ECP-DIG-001`).
 
+**ECP-CHG-007** (amendment of 2026-08-28 under `WO-ECP-001`, on the
+engineering owner's decision): the selected work order's own artifact path is
+admitted to its execution scope by construction when `QGP-G4I-PATHS` is
+evaluated, whatever the change-set source. Only `transition` writes that
+file, and it is in every Git diff after the work order's own approval and
+start, so a rule that scope-checked it would refuse every real work order
+under `--from-git`. `scope.declared_paths` in the result continues to carry
+only the declared `[execution_scope].paths`.
+
 ### Chain-scoped snapshot
 
 **ECP-SNP-001:** `review_evidence_available` binds evidence to

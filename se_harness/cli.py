@@ -72,6 +72,7 @@ from se_harness.workflow import (
     RepositoryWorkflowError,
     failed_result,
     focus,
+    next_step,
     plan_transition,
     preparation_result,
 )
@@ -327,10 +328,33 @@ def _render_selected_result(result: dict, args: argparse.Namespace) -> str:
     return render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result)
 
 
+def _next(args: argparse.Namespace) -> int:
+    try:
+        result = next_step(Path(args.target), args.artifact)
+    except HarnessError as exc:
+        message = str(exc)
+        code = "WEX101"
+        if message.startswith("WEX-ECP-001: "):
+            code, message = message.split(": ", 1)
+        result = failed_result(
+            "next",
+            args.artifact,
+            message,
+            code=code,
+            repository_blocker=isinstance(exc, RepositoryWorkflowError),
+        )
+    print(_render_selected_result(result, args), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
 def _check(args: argparse.Namespace) -> int:
     if args.change_manifest and (args.changed_path or args.changes_complete):
         raise HarnessError(
             "WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete"
+        )
+    if args.from_git is not None and (args.changed_path or args.changes_complete or args.change_manifest):
+        raise HarnessError(
+            "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
     try:
         result = check_workflow(
@@ -343,9 +367,14 @@ def _check(args: argparse.Namespace) -> int:
             change_manifest=Path(args.change_manifest) if args.change_manifest else None,
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
             target=args.target_state,
+            from_git=args.from_git,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
-        result = failed_result("check", args.artifact, str(exc), code="WEX210")
+        message = str(exc)
+        code = "WEX210"
+        if message.startswith("WEX-ECP-00"):
+            code, message = message.split(": ", 1)
+        result = failed_result("check", args.artifact, message, code=code)
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
@@ -933,6 +962,14 @@ def build_parser() -> argparse.ArgumentParser:
     selected_focus.add_argument("--include-background", action="store_true")
     selected_focus.set_defaults(handler=_focus)
 
+    selected_next = commands.add_parser(
+        "next", help="return the selected artifact's complete execution context: state, scope, reading set, next command"
+    )
+    selected_next.add_argument("target", nargs="?", default=".")
+    selected_next.add_argument("--artifact", help="one WO, VREC, or RLS ID; defaults to the single in_progress work order")
+    selected_next.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
+    selected_next.set_defaults(handler=_next)
+
     check = commands.add_parser("check", help="evaluate one selected workflow checkpoint and emit canonical restitution")
     check.add_argument("target", nargs="?", default=".")
     check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
@@ -959,6 +996,10 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument(
         "--change-manifest",
         help="in-repository se-harness-change-set-v1 JSON; exclusive with changed-path options",
+    )
+    check.add_argument(
+        "--from-git", metavar="BASE",
+        help="derive the complete change set from Git against BASE; exclusive with the changed-path options",
     )
     check.add_argument(
         "--pull-request-body",

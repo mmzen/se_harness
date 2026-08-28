@@ -56,6 +56,7 @@ class CheckpointContext:
     repository_errors: list[dict[str, Any]]
     unrelated_count: int
     declared_scope: tuple[str, ...]
+    admitted_scope: tuple[str, ...]
     change_set: ChangeSet
     checkpoint: str
     formal_snapshot_sha256: str
@@ -154,6 +155,52 @@ def declared_change_set(paths: Iterable[str], *, complete: bool) -> ChangeSet:
         complete=bool(complete),
         source="arguments",
     )
+
+
+def _git_lines(root: Path, arguments: list[str], *, base: str) -> list[str]:
+    import subprocess
+
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), *arguments],
+            capture_output=True, check=False, timeout=120,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise HarnessError(f"WEX-ECP-003: git is unavailable for base {base!r}: {exc}") from exc
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", "replace").strip().splitlines()
+        raise HarnessError(
+            f"WEX-ECP-003: git {arguments[0]} failed for base {base!r} with exit status {completed.returncode}"
+            + (f": {detail[0]}" if detail else "")
+        )
+    return [item.decode("utf-8") for item in completed.stdout.split(b"\0") if item]
+
+
+def git_change_set(root: Path, base: str) -> ChangeSet:
+    """Derive the change set from Git (ECP-CHG-002 to -004).
+
+    The set is the union of `git diff --name-only BASE` against the working
+    tree, renames contributing both names, and the untracked files Git does not
+    ignore; every member passes `normalize_path`, and any Git failure blocks
+    with `WEX-ECP-003` so no predicate is evaluated as `pass`.
+    """
+
+    if not isinstance(base, str) or not base.strip() or base.startswith("-"):
+        raise HarnessError(f"WEX-ECP-003: the Git base must be a revision, not {base!r}")
+    if not (root / ".git").exists():
+        raise HarnessError(f"WEX-ECP-003: {root} is not a Git checkout; --from-git needs one")
+    _git_lines(root, ["rev-parse", "--verify", "--quiet", f"{base}^{{commit}}"], base=base)
+    changed = _git_lines(root, ["diff", "-z", "--name-only", "--no-renames", base, "--"], base=base)
+    untracked = _git_lines(root, ["ls-files", "-z", "--others", "--exclude-standard"], base=base)
+    ordered: list[str] = []
+    for item in [*changed, *untracked]:
+        if item not in ordered:
+            ordered.append(item)
+    try:
+        paths = _unique_paths(ordered, directory_allowed=False)
+    except HarnessError as exc:
+        raise HarnessError(f"WEX-ECP-003: the Git change set is not a normalized path set: {exc}") from exc
+    return ChangeSet(paths=paths, complete=True, source="git")
 
 
 def _validate_changed_targets(root: Path, change_set: ChangeSet) -> None:
@@ -336,7 +383,7 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
     if name == "changed_paths_within_scope":
         if not context.change_set.complete:
             return "not_assessable", "Changed-path scope cannot pass without an explicit completeness assertion."
-        outside = [path for path in context.change_set.paths if not path_is_admitted(path, context.declared_scope)]
+        outside = [path for path in context.change_set.paths if not path_is_admitted(path, context.admitted_scope)]
         if outside:
             return "fail", f"WEX201: changed path is outside execution scope: {outside[0]}"
         return "pass", f"All {len(context.change_set.paths)} declared changed path(s) are within execution scope."
@@ -433,6 +480,10 @@ def build_context(
         repository_errors=repository_errors,
         unrelated_count=unrelated,
         declared_scope=scope,
+        # ECP-CHG-007: the selected work order's own artifact path is admitted by
+        # construction; only `transition` writes it and it is in every Git diff
+        # after the work order's own approval and start.
+        admitted_scope=(*scope, primary.path.relative_to(root).as_posix()),
         change_set=change_set,
         checkpoint=checkpoint,
         formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts),
@@ -490,7 +541,12 @@ def check_workflow(
     change_manifest: Path | None = None,
     pull_request_body: Path | None = None,
     target: str | None = None,
+    from_git: str | None = None,
 ) -> dict[str, Any]:
+    if from_git is not None and (list(changed_paths) or changes_complete or change_manifest is not None):
+        raise HarnessError(
+            "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
+        )
     if checkpoint not in {"start", "pre-action", "transition", "handoff"}:
         raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, or handoff")
     if checkpoint == "transition" and not target:
@@ -522,11 +578,12 @@ def check_workflow(
         if procedure_id not in {selected_procedure, *alternatives}:
             raise HarnessError(f"WEX220: procedure {procedure_id} is not selected by workflow rule {rule['id']}")
         selected_procedure = procedure_id
-    change_set = (
-        parse_change_manifest(root, change_manifest)
-        if change_manifest is not None
-        else declared_change_set(changed_paths, complete=changes_complete)
-    )
+    if from_git is not None:
+        change_set = git_change_set(root, from_git)
+    elif change_manifest is not None:
+        change_set = parse_change_manifest(root, change_manifest)
+    else:
+        change_set = declared_change_set(changed_paths, complete=changes_complete)
     _validate_changed_targets(root, change_set)
     context = build_context(
         root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
@@ -779,7 +836,11 @@ def remediation_result(
         "current_lifecycle_state": current,
         "decision_required": None,
         "next": {"procedure_id": procedure_id, "step_id": step_id, "action": "remediate"},
-        "command_or_response": {"kind": "response", "value": "Resolve the reported blocker, then rerun the same command."},
+        "command_or_response": (
+            {"kind": "command", "argv": ["harnessctl", "next", ".", "--artifact", primary]}
+            if primary
+            else {"kind": "response", "value": "Resolve the reported blocker, then run harnessctl next . to obtain the selected context."}
+        ),
         "alternatives": [],
     }
     return build_result(

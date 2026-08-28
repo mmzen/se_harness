@@ -2,10 +2,10 @@
 id = "WO-ECP-001"
 type = "work_order"
 title = "Ship `harnessctl next` and Git-derived change sets"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -26,6 +26,8 @@ paths = [
   "tests/test_workflow_execution.py",
   "tests/test_workflow_compliance.py",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md",
+  "se_harness/workflow_result.py",
 ]
 
 [relations]
@@ -33,6 +35,27 @@ implements = ["REQ-ECP-001", "REQ-ECP-002"]
 specifications = ["SPEC-ECP-001"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-001"]
 verification = ["VER-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T20:35:00Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start', as the first work order of the execution-control-plane plan recorded in ADR-AEX-008 and the agentic-execution README. Its definitions REQ-ECP-001, REQ-ECP-002, SPEC-ECP-001, ARCH-ECP-001, ADR-ECP-001 and VER-ECP-001 were approved separately on 2026-08-28. Authorizes start preflight and then only the declared scope: harnessctl next as a projection of focus, preflight and select_current_step; check --from-git deriving the change set from Git; the WEX210 corrective; the contract JSON, template WORKFLOW renderings, reference note, the two test modules and evidence. Two deviations from the packet text are accepted in advance and to be recorded in the evidence: readings are taken with the governing exact public 0.8.0 root, not 0.7.1 as written on 2026-08-27; and the root managed WORKFLOW copies, now byte-identical to the templates, stay unedited while the templates move. Measured before this transition over main 233bc92: validate PASS at 0 errors under 0.8.0. It authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T20:35:05Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit d0de313 carrying unmoved main 233bc92, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T20:53:01Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-ECP-001 implemented', on the handoff check reading Completed over the implementation commit, formal snapshot 9124cd6b08c950e1f4249ec896898e879244d4d89e3f76690e2e9d8304705db6, change set asserted complete over 12 paths plus the work order's own file, after two owner-decided scope amendments (SPEC-ECP-001 for ECP-CHG-007; se_harness/workflow_result.py for the Context renderer). harnessctl next and check --from-git are shipped as specified; the failed-operation retry names next. Readings under the governing exact public 0.8.0 root: validate 0 errors, doctor 0 FAIL. Candidate: the two workflow modules 204 tests OK, full suite 1050 with the single known workstation file-mode failure that passes hosted, and the candidate's own check --from-git main reading completed over 13 Git-derived paths. All 13 pull-request lanes pass on #249 at 115a842 including both platform legs. Deviations recorded in the evidence: readings under 0.8.0 rather than the 0.7.1 the packet text names; the root managed WORKFLOW.json stays 0.8.0's while the template moves. This authorizes no further act."
 +++
 
 # Work Order: Ship `harnessctl next` and Git-derived change sets
@@ -46,6 +69,32 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-001`,
 `VER-ECP-001` are separate acts by their owners and precede approval of
 this work order. This is the first work order of the packet and depends on
 no other; `WO-ECP-002`, `WO-ECP-003`, and `WO-ECP-008` depend on it.
+
+## Scope amendment, 2026-08-28
+
+Put to the engineering owner during execution and answered "Admit the
+selected WO's own file by rule": `check --from-git` on this branch reported
+`WEX201` for `WO-ECP-001.md` itself, because a work order's own file is
+written by its approval and start transitions, is therefore in every Git
+diff, and is never in its own `[execution_scope]`; with typed paths the
+implementer simply omitted it, with a Git-derived set nothing can. The
+specification path `docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md`
+is added to `[execution_scope].paths` for one dated amendment, `ECP-CHG-007`:
+the selected work order's own artifact path is admitted to its scope by
+construction. Every other path stays scope-checked; `declared_paths` in the
+result still lists only the declared scope.
+
+## Scope amendment 2, 2026-08-28
+
+Put to the engineering owner during execution and answered "Amend scope: add
+workflow_result.py": `ECP-NXT-007` requires the `next` context rendered as an
+ordered `Context` section of the canonical block so that `result_sha256`
+binds it, and the canonical block is rendered by
+`se_harness/workflow_result.py`, which the packet's "projection helpers"
+wording did not name. `se_harness/workflow_result.py` is added to
+`[execution_scope].paths`; the change there is `_render_context` and its one
+call after `Command or response`, with every other section's bytes
+unchanged (the `focus` golden digest test still passes).
 
 ## Objective
 

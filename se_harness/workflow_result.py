@@ -202,6 +202,29 @@ def render_human(result: Mapping[str, Any]) -> str:
             *_render_command(restitution["command_or_response"]),
         ]
     )
+    context = result.get("context")
+    if context is not None:
+        lines.extend(["", "Context", *_render_context(context)])
     if restitution["alternatives"]:
         lines.extend(["", "Alternatives", *_render_list(restitution["alternatives"])])
     return "\n".join(lines) + "\n"
+
+
+def _render_context(value: object) -> list[str]:
+    """Render the `next` context as ordered, labelled lines (ECP-NXT-007)."""
+
+    if not isinstance(value, Mapping):
+        raise ValueError("WEX230: context must be an object")
+    state = value.get("state", {})
+    step = value.get("next", {})
+    argv = [_text(item) for item in step.get("argv", [])]
+    lines = [
+        f"State: {_text(state.get('status', ''))} ({_text(state.get('family', ''))})",
+        "Governing: " + (", ".join(_text(item) for item in value.get("governing", [])) or "none"),
+        "Declared paths: " + (", ".join(_text(item) for item in value.get("declared_paths", [])) or "none"),
+        "Reading manifest:",
+        *([f"- {_text(item)}" for item in value.get("reading_manifest", [])] or ["- none"]),
+        f"Next argv: {shlex.join(argv) if argv else 'none'} ({_text(step.get('procedure_id', ''))}/{_text(step.get('step_id', ''))})",
+        "Decision required: " + " ".join(_render_decision(value.get("decision_required"))),
+    ]
+    return lines
