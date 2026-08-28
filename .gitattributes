@@ -7,7 +7,12 @@ se_harness/governance_migration_contract.json text eol=lf
 tests/fixtures/governance_migration/*.json text eol=lf
 # se-harness:end
 
-# Repository-owned post-0.6.0 migration protocol byte rules.
+# Retained until the root evaluator advances past 0.7.1 (WO-ECP-010, issue #210):
+# the governance-migration stage machine is retired and unreferenced, but
+# released 0.7.1 still declares the repository-region class
+# `governance-migration-protocol`, whose doctor requires these rules in the
+# owner region and at least one tracked file per pattern. The next root
+# adoption deletes the files and these rules together.
 se_harness/governance_migration*.py text eol=lf
 se_harness/governance_migration_contract.json text eol=lf
 tests/fixtures/governance_migration/*.json text eol=lf

@@ -121,7 +121,7 @@ class OneBuildPerWorkflowTests(unittest.TestCase):
     def test_the_double_rehearsal_per_platform_is_kept(self) -> None:
         # REQ-REB-017's acceptance example runs the rehearsal twice per platform.
         migration = self.jobs["governance-migration"]
-        self.assertEqual(2, migration.count("-m se_harness rehearse-migration"))
+        self.assertEqual(2, migration.count("-m repository_tools.upgrade_rehearsal"))
 
 
 class PredecessorDerivationTests(unittest.TestCase):
@@ -156,7 +156,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                         self.assertIn(consumed, declared)
 
     def test_facts_come_from_the_lock_and_the_legacy_table(self) -> None:
-        from repository_tools.predecessor_facts import LEGACY_ACCEPTANCE_CONTRACT_SHA256, derive, released_evaluator_archive
+        from repository_tools.evaluator_facts import LEGACY_ACCEPTANCE_CONTRACT_SHA256, derive, released_evaluator_archive
 
         lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())["evaluator"]
         facts = derive(REPOSITORY_ROOT)
@@ -171,16 +171,15 @@ class PredecessorDerivationTests(unittest.TestCase):
         self.assertEqual(expected_wheel_sha256, facts.wheel_sha256)
         self.assertEqual(lock["payload_sha256"], facts.payload_sha256)
         self.assertEqual(LEGACY_ACCEPTANCE_CONTRACT_SHA256[facts.version], facts.acceptance_contract_sha256)
-        self.assertEqual(f"tests/fixtures/governance_migration/candidate-{facts.version}-to-{facts.candidate_version}.json", facts.scenario)
-        self.assertTrue((REPOSITORY_ROOT / facts.scenario).is_file())
         lines = facts.github_output_lines().splitlines()
         self.assertIn(f"wheel_sha256={facts.wheel_sha256}", lines)
-        self.assertIn(f"scenario={facts.scenario}", lines)
+        # WO-ECP-010: no scenario fact exists any more; a version bump needs none.
+        self.assertFalse(any(line.startswith("scenario") for line in lines), lines)
 
     def test_null_archive_pair_is_supplied_by_exactly_one_released_record(self) -> None:
         """WO-HUP-007: an index-installed root has no archive pair; the released record binding
         the evaluator version supplies it, and zero or several such records fail closed."""
-        from repository_tools.predecessor_facts import PredecessorFactsError, derive, released_evaluator_archive
+        from repository_tools.evaluator_facts import PredecessorFactsError, derive, released_evaluator_archive
 
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch)
@@ -225,20 +224,18 @@ class PredecessorDerivationTests(unittest.TestCase):
     def test_workflow_derives_once_and_consumers_take_the_outputs(self) -> None:
         text = (WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8")
         jobs = _job_blocks(text)
-        self.assertEqual(1, text.count("repository_tools.predecessor_facts derive"))
-        self.assertIn("repository_tools.predecessor_facts derive", jobs["candidate-source"])
-        for output in ("predecessor_version", "predecessor_wheel_sha256", "migration_scenario"):
+        self.assertEqual(1, text.count("repository_tools.evaluator_facts derive"))
+        self.assertIn("repository_tools.evaluator_facts derive", jobs["candidate-source"])
+        for output in ("predecessor_version", "predecessor_wheel_sha256"):
             self.assertIn(f"{output}: ${{{{ steps.predecessor.outputs.", jobs["candidate-source"])
+        self.assertNotIn("migration_scenario", text)
         self.assertIn("needs.candidate-source.outputs.predecessor_acceptance_contract_sha256", jobs["candidate-package"])
-        self.assertIn("needs.candidate-source.outputs.migration_scenario_sha256", jobs["governance-migration"])
+        self.assertIn("needs.candidate-source.outputs.predecessor_wheel_sha256", jobs["governance-migration"])
         self.assertIn("throw 'predecessor facts were not derived by candidate-source'", jobs["governance-migration"])
 
     def _copy_repository_declarations(self, root: Path) -> None:
         for relative in (".engineering-harness.toml", ".engineering-harness.lock", "pyproject.toml"):
             shutil.copy(REPOSITORY_ROOT / relative, root / relative)
-        (root / "tests/fixtures/governance_migration").mkdir(parents=True)
-        for scenario in (REPOSITORY_ROOT / "tests/fixtures/governance_migration").glob("*.json"):
-            shutil.copy(scenario, root / "tests/fixtures/governance_migration" / scenario.name)
         # WO-HUP-007: a root adopted from an index install records no archive pair;
         # derive then reads the released record that binds the evaluator version.
         for record in (REPOSITORY_ROOT / "docs/engineering").rglob("RLS-*.md"):
@@ -246,29 +243,27 @@ class PredecessorDerivationTests(unittest.TestCase):
             (root / relative).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(record, root / relative)
 
-    def test_version_bump_without_a_scenario_fails_closed_naming_the_path(self) -> None:
-        from repository_tools.predecessor_facts import PredecessorFactsError, derive
+    def test_a_version_bump_needs_no_scenario(self) -> None:
+        # WO-ECP-010: derive no longer requires a hand-authored migration scenario for
+        # the predecessor-to-candidate pair (issue #210, acceptance criterion 3).
+        from repository_tools.evaluator_facts import derive
 
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch)
             self._copy_repository_declarations(root)
             pyproject = root / "pyproject.toml"
             declared = tomllib.loads(pyproject.read_text(encoding="utf-8"))["project"]["version"]
-            lock_version = json.loads((root / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
             pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{declared}"', 'version = "0.9.0"', 1), encoding="utf-8")
-            with self.assertRaises(PredecessorFactsError) as caught:
-                derive(root)
-            self.assertIn("PRE009", str(caught.exception))
-            self.assertIn(f"tests/fixtures/governance_migration/candidate-{lock_version}-to-0.9.0.json", str(caught.exception))
+            self.assertEqual("0.9.0", derive(root).candidate_version)
             completed = subprocess.run(
-                [sys.executable, "-m", "repository_tools.predecessor_facts", "derive", "--repository", str(root)],
+                [sys.executable, "-m", "repository_tools.evaluator_facts", "derive", "--repository", str(root)],
                 capture_output=True, text=True, cwd=REPOSITORY_ROOT,
             )
-            self.assertEqual(2, completed.returncode)
-            self.assertIn("PRE009", completed.stderr)
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertIn('"candidate_version":"0.9.0"', completed.stdout)
 
     def test_disagreeing_root_declarations_fail_closed(self) -> None:
-        from repository_tools.predecessor_facts import PredecessorFactsError, derive
+        from repository_tools.evaluator_facts import PredecessorFactsError, derive
 
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch)
@@ -280,51 +275,14 @@ class PredecessorDerivationTests(unittest.TestCase):
                 derive(root)
             self.assertIn("PRE007", str(caught.exception))
 
-    def test_module_is_standard_library_only_and_its_writer_equals_the_contract_module(self) -> None:
+    def test_repository_tools_stay_standard_library_only(self) -> None:
         # repository_tools may not widen its pinned import crossing into se_harness
-        # (tests/test_interpreter_safety.py); the writer is restated and proven equal.
-        from repository_tools import predecessor_facts
-        from se_harness import governance_migration_contract as contract
-
-        source = (REPOSITORY_ROOT / "repository_tools/predecessor_facts.py").read_text(encoding="utf-8")
-        self.assertNotIn("se_harness", [line.split()[1] for line in source.splitlines() if line.startswith(("import ", "from "))])
-        for scenario in (REPOSITORY_ROOT / "tests/fixtures/governance_migration").glob("*.json"):
-            with self.subTest(scenario=scenario.name):
-                loaded, raw = predecessor_facts.load_scenario(scenario)
-                self.assertEqual(contract.canonical_json(loaded), predecessor_facts.canonical_json(loaded))
-                self.assertEqual(raw, predecessor_facts.canonical_json(loaded))
-                self.assertEqual(contract.sha256_bytes(raw), predecessor_facts.sha256_bytes(raw))
-                contract.load_migration_scenario(scenario, contract.load_migration_contract())
-
-    def test_writer_reproduces_the_committed_scenario_and_writes_the_next_pair(self) -> None:
-        from repository_tools.predecessor_facts import canonical_json, derive, sha256_bytes, write_scenario
-        from se_harness.governance_migration_contract import load_migration_contract, load_migration_scenario
-
-        facts = derive(REPOSITORY_ROOT)
-        committed = REPOSITORY_ROOT / facts.scenario
-        with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
-            self._copy_repository_declarations(root)
-            destination, raw = write_scenario(root, template=committed, predecessor=None, successor=None, output=root / "same.json")
-            self.assertEqual(committed.read_bytes(), raw, "the writer must reproduce the committed pair byte for byte")
-            destination, raw = write_scenario(root, template=committed, predecessor=None, successor="0.9.0", output=None)
-            self.assertEqual(root / f"tests/fixtures/governance_migration/candidate-{facts.version}-to-0.9.0.json", destination)
-            scenario, _ = load_migration_scenario(destination, load_migration_contract())
-            self.assertEqual({"predecessor": facts.version, "successor": "0.9.0"}, scenario["versions"])
-            self.assertEqual("0.9.0", scenario["fixture"]["replacement_proposal"]["version"])
-            # WO-RLS-013: the writer recomputes the simulated publication identity
-            # the adopt stage checks (MIG413), never copying the template's digest.
-            expected_publication = sha256_bytes(canonical_json({
-                "artifact_id": scenario["fixture"]["replacement_proposal"]["artifact_id"],
-                "immutable": True,
-                "version": "0.9.0",
-            }))
-            self.assertEqual(expected_publication, scenario["fixture"]["simulated_publication_sha256"])
-            self.assertNotEqual(json.loads(committed.read_bytes())["fixture"]["simulated_publication_sha256"], expected_publication)
-            self.assertEqual(facts.wheel_sha256, scenario["runtime_expectations"]["predecessor"]["archive_sha256"])
-            pyproject = root / "pyproject.toml"
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{facts.candidate_version}"', 'version = "0.9.0"', 1), encoding="utf-8")
-            self.assertEqual(f"tests/fixtures/governance_migration/candidate-{facts.version}-to-0.9.0.json", derive(root).scenario)
+        # (tests/test_interpreter_safety.py); the rehearsal and the facts both hold to it.
+        for relative in ("repository_tools/evaluator_facts.py", "repository_tools/upgrade_rehearsal.py"):
+            source = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
+            imported = [line.split()[1] for line in source.splitlines() if line.startswith(("import ", "from "))]
+            self.assertNotIn("se_harness", imported, relative)
+            self.assertFalse(any(name.startswith("se_harness.") for name in imported), relative)
 
 
 class QualificationDefinitionTests(unittest.TestCase):

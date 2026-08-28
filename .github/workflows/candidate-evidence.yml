@@ -4,10 +4,11 @@
 # expiring integration package. Trigger policy (WO-CIP-001, SPEC-CIP-001
 # CIP-TRG): pull requests, and pushes to main, release/** and candidate/**
 # only; a newer push to the same ref cancels the older run. The predecessor
-# evaluator's version, wheel, digests and migration scenario are derived once
-# from the declared root (.engineering-harness.toml and .lock) by
-# repository_tools.predecessor_facts in candidate-source and carried as job
-# outputs (WO-CIP-003, CIP-PRE); no literal is restated here. Described in
+# evaluator's version, wheel and digests are derived once from the declared
+# root (.engineering-harness.toml and .lock) by
+# repository_tools.evaluator_facts in candidate-source and carried as job
+# outputs (WO-CIP-003, CIP-PRE); no literal is restated here. The handover is
+# rehearsed by repository_tools.upgrade_rehearsal (WO-ECP-010). Described in
 # docs/notes/developing-se-harness.md, "Evaluator and candidate evidence".
 name: SE Harness Candidate Evidence
 
@@ -37,8 +38,6 @@ jobs:
       predecessor_wheel_sha256: ${{ steps.predecessor.outputs.wheel_sha256 }}
       predecessor_payload_sha256: ${{ steps.predecessor.outputs.payload_sha256 }}
       predecessor_acceptance_contract_sha256: ${{ steps.predecessor.outputs.acceptance_contract_sha256 }}
-      migration_scenario: ${{ steps.predecessor.outputs.scenario }}
-      migration_scenario_sha256: ${{ steps.predecessor.outputs.scenario_sha256 }}
     env:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
@@ -61,7 +60,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m repository_tools.predecessor_facts derive --repository . --github-output "$GITHUB_OUTPUT" --json
+          python -m repository_tools.evaluator_facts derive --repository . --github-output "$GITHUB_OUTPUT" --json
       - name: Qualify the complete candidate graph as candidate-controlled
         shell: bash
         run: |
@@ -311,8 +310,6 @@ jobs:
     env:
       PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
       PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
-      MIGRATION_SCENARIO: ${{ needs.candidate-source.outputs.migration_scenario }}
-      MIGRATION_SCENARIO_SHA256: ${{ needs.candidate-source.outputs.migration_scenario_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -323,16 +320,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Require the derived predecessor facts and the scenario they name
+      - name: Require the derived predecessor facts
         shell: pwsh
         run: |
-          if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256 -or -not $env:MIGRATION_SCENARIO) {
+          if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
             throw 'predecessor facts were not derived by candidate-source'
           }
-          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
-          if (-not (Test-Path -LiteralPath $scenario -PathType Leaf)) { throw "migration scenario is missing: $env:MIGRATION_SCENARIO" }
-          $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $scenario).Hash.ToLowerInvariant()
-          if ($actual -ne $env:MIGRATION_SCENARIO_SHA256) { throw 'migration scenario bytes differ from the derived digest' }
       - name: Acquire and verify the already-public predecessor
         shell: pwsh
         run: |
@@ -373,50 +366,46 @@ jobs:
           $successorWheel = (Get-ChildItem -LiteralPath (Join-Path '${{ runner.temp }}' 'candidate-dist') -Filter '*.whl').FullName
           & $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel
           & $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel
-      - name: Rehearse the exact predecessor-to-successor handover twice
+      - name: Rehearse the real predecessor-to-successor upgrade twice
         shell: pwsh
         run: |
+          # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+          # against a throwaway export whose lock is the released predecessor's, judged
+          # by both evaluators' doctor and by the resulting lock. No per-release
+          # fixture, no network inside the rehearsal, no write to this checkout.
           $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
           $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
-          $scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO
           $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
           $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
-          Push-Location '${{ runner.temp }}'
-          try {
-            & $successorPython -I -m se_harness rehearse-migration $env:GITHUB_WORKSPACE `
-              --scenario $scenario --predecessor-python $predecessorPython `
-              --successor-python $successorPython --output $first --json
-            if ($LASTEXITCODE -ne 0) { throw 'first migration rehearsal failed' }
-            & $successorPython -I -m se_harness rehearse-migration $env:GITHUB_WORKSPACE `
-              --scenario $scenario --predecessor-python $predecessorPython `
-              --successor-python $successorPython --output $second --json
-            if ($LASTEXITCODE -ne 0) { throw 'second migration rehearsal failed' }
-          } finally {
-            Pop-Location
-          }
-          $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'governance-migration-result.json') | ConvertFrom-Json
-          $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'governance-migration-result.json') | ConvertFrom-Json
-          if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'migration semantic replay digest differs' }
-          if ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'migration rehearsal did not pass' }
+          python -m repository_tools.upgrade_rehearsal --repository . `
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $first
+          if ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }
+          python -m repository_tools.upgrade_rehearsal --repository . `
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $second
+          if ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }
+          $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json
+          $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json
+          if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }
+          if ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }
       - name: Publish this platform's semantic digest as a job output
         id: digest
         shell: pwsh
         run: |
-          $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'migration-result-1') 'governance-migration-result.json') | ConvertFrom-Json
+          $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'migration-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
           "${{ matrix.platform }}=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
       - name: Retain the bounded migration evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: governance-migration-${{ matrix.platform }}
-          path: ${{ runner.temp }}/migration-result-*/governance-migration-result.json
+          path: ${{ runner.temp }}/migration-result-*/upgrade-rehearsal-result.json
           if-no-files-found: warn
       - name: Prove migration evidence made no checkout change
         shell: pwsh
         run: |
           git diff --exit-code
           $status = git status --porcelain=v1 --untracked-files=all
-          if ($status) { throw 'migration rehearsal changed the checkout' }
+          if ($status) { throw 'upgrade rehearsal changed the checkout' }
 
   integration-package-build:
     name: Build deterministic integration package
@@ -447,7 +436,7 @@ jobs:
             echo "cross-platform semantic mismatch: Linux=$MIGRATION_DIGEST_LINUX Windows=$MIGRATION_DIGEST_WINDOWS" >&2
             exit 1
           fi
-          echo "governance migration semantic result: $MIGRATION_DIGEST_LINUX"
+          echo "upgrade rehearsal semantic result (resulting lock, canonical): $MIGRATION_DIGEST_LINUX"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           "fetch-depth": 0

@@ -129,7 +129,7 @@ class ReleaseQualificationTests(unittest.TestCase):
             / "candidate-evidence.yml"
         ).read_text(encoding="utf-8")
         # WO-CIP-003: the verifier facts are derived from the declared root by
-        # repository_tools.predecessor_facts and carried as job outputs; the
+        # repository_tools.evaluator_facts and carried as job outputs; the
         # workflow restates none of them. The derivation itself is asserted in
         # tests/test_ci_pipeline.py against the lock and the legacy contract table.
         required = (
@@ -137,7 +137,7 @@ class ReleaseQualificationTests(unittest.TestCase):
             "RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}",
             "RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}",
             "RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}",
-            "python -m repository_tools.predecessor_facts derive --repository . --github-output",
+            "python -m repository_tools.evaluator_facts derive --repository . --github-output",
             '"$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate',
             'value["schema"] == "se-harness-functional-acceptance-v1"',
             'assert "independence" not in value',

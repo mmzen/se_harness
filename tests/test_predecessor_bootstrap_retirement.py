@@ -238,7 +238,7 @@ class DeletedSurfaceTests(unittest.TestCase):
         # Deleting `predecessor_assessment.py` must not reach the governor-transition
         # lane or the candidate-evidence lane, which name neither module.
         for relative in (
-            "repository_tools/predecessor_facts.py",
+            "repository_tools/evaluator_facts.py",
             "scripts/validate_governor_transition.py",
         ):
             source = REPOSITORY_ROOT / relative
@@ -367,11 +367,14 @@ class RetainedHistoryTests(unittest.TestCase):
                     with self.subTest(source=relative, absent=absent):
                         self.assertNotIn(absent, text)
 
-    def test_the_migration_rehearsal_is_the_remaining_handover_mechanism(self) -> None:
-        module = REPOSITORY_ROOT / "se_harness" / "governance_migration.py"
-        self.assertTrue(module.exists())
+    def test_the_upgrade_rehearsal_is_the_remaining_handover_mechanism(self) -> None:
+        # WO-ECP-010 replaced the governance-migration stage machine with the real
+        # upgrade rehearsal; the module stays, dead, until the root advances (its
+        # deletion is refused by released 0.7.1's hash-bound class) and nothing
+        # invokes it.
+        self.assertTrue((REPOSITORY_ROOT / "repository_tools" / "upgrade_rehearsal.py").exists())
         cli = (REPOSITORY_ROOT / "se_harness" / "cli.py").read_text(encoding="utf-8")
-        self.assertIn("rehearse-migration", cli)
+        self.assertNotIn("rehearse-migration", cli)
 
 
 class ExplorerPayloadTests(unittest.TestCase):

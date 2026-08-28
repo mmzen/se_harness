@@ -21,6 +21,13 @@ decided_by = "requirements-steward"
 
 # Requirement: Rehearse the complete governance migration before release
 
+## Retirement amendment of 2026-08-28
+
+Retired on 2026-08-28 by `REQ-ECP-012` under `WO-ECP-010`, on the repository owner's approval for issue #210. The nine-stage rehearsal over a toy graph is replaced by the real thing: the candidate-evidence lane exports the tracked tree, proves the released predecessor's `doctor` passes there, runs the successor's `upgrade --apply` with retained transaction evidence, proves the successor's `doctor` and `validate` pass (tolerating only `E012` on a `ready` record, the one consequence a root change has on records prepared under the previous evaluator), proves the predecessor's `doctor` now fails, and binds the resulting schema-3 lock naming the successor; two runs per platform and the two platforms must agree on the canonical digest of that lock. No scenario is authored per release. The text below is retained as history; it is no longer an obligation.
+
+The declared `superseded` status is not applied, for the reason `WO-REB-028` recorded; the retirement is recorded here.
+
+
 ## Rationale
 
 The 0.6.0 release exercised each missing transition only after the previous attempt failed. A pre-release rehearsal must execute the complete handover as one sequence, including the failure and successor path that ordinary happy-path CI did not cover.

@@ -316,16 +316,17 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         # the lock and the legacy contract table yield are asserted in
         # tests/test_ci_pipeline.py.
         self.assertIn("candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
-        self.assertIn("repository_tools.predecessor_facts derive", workflow)
+        self.assertIn("repository_tools.evaluator_facts derive", workflow)
         self.assertNotIn("2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7", workflow)
         self.assertIn('assert "independence" not in value', workflow)
         self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
-        self.assertIn("rehearse-migration", workflow)
+        self.assertIn("repository_tools.upgrade_rehearsal", workflow)  # WO-ECP-010
+        self.assertNotIn("rehearse-migration", workflow)
         self.assertIn("windows-latest", workflow)
         self.assertIn("ubuntu-latest", workflow)
         self.assertIn("PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
-        self.assertIn("$scenario = Join-Path $env:GITHUB_WORKSPACE $env:MIGRATION_SCENARIO", workflow)
+        self.assertNotIn("MIGRATION_SCENARIO", workflow)
         self.assertNotIn("974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f", workflow)
         self.assertNotIn("historical-0.5.0-to-0.6.0.json", workflow)
         self.assertIn("git diff --exit-code", workflow)
@@ -400,8 +401,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             )[0]
             # The root managed block is the released 0.7.1 fragment (WO-HUP-007) and is
             # hash-locked, so it still carries the migration rules until the root
-            # evaluator next advances; the owner region keeps its own copies, which are
-            # what pins those bytes now that no shipped class covers them (WO-HBI-005).
+            # evaluator next advances. The owner region keeps its copies for the same
+            # reason: released 0.7.1 declares the repository-region class and its doctor
+            # requires the rules there and a tracked file per pattern, so the retired
+            # stage machine stays, dead, until then (WO-ECP-010, issue #210).
             self.assertEqual(released_fragment, root_managed)
             root_owner = root_attributes.split("# se-harness:end\n", 1)[1]
             for rule in (
