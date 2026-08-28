@@ -21,7 +21,7 @@ The authoritative state of every artifact is its own front matter and `[[lifecyc
 
 ## Entry condition
 
-`VREC-REB-026` and `VREC-REB-027` (covering `WO-REB-028` and `WO-REB-029`) were `ready` at drafting and were verified by the assurance owner on 2026-08-28 on this packet's branch; every member now holds verified coverage.
+`VREC-REB-026` and `VREC-REB-027` (covering `WO-REB-028` and `WO-REB-029`) were `ready` at drafting and were verified by the assurance owner on 2026-08-28 on this packet's branch; every member now holds verified coverage. Their decision reasons over-state one re-measurement (the evidence documents were appended after their candidates, prefix preserved); `REL-SEH-019`'s entry criteria carry the correction.
 
 ## Release unit shape
 

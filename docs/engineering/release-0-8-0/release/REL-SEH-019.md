@@ -124,7 +124,16 @@ it.
   evidence, and hold verified assurance coverage. Measured at `ff0e337`: seven
   of nine at drafting; `VREC-REB-026` and `VREC-REB-027` were verified by the
   assurance owner on 2026-08-28 as this packet's entry condition, so nine of
-  nine on the packet branch.
+  nine on the packet branch. Correction to those two decision reasons: they
+  state the bound evidence blob is byte-identical at the candidate and the
+  tip; it is not. Each document was appended after its candidate with the
+  hosted-lane and review sections (`WO-REB-028-verification.md` §16–17 at
+  `03e4f0d`/`29a05c3`; `WO-REB-029-verification.md` §18 at `a9f3118`), the
+  candidate's bytes preserved as a prefix, which is this repository's usual
+  sequence. The record binds the commit and the artifact snapshot, not the
+  evidence digest, so the decisions stand; the sentence was written before
+  the measurement ran and is corrected here because lifecycle events are
+  append-only.
 - No existing member is named by a released release record.
 - No stale `ready` verification or release record exists in the graph beyond
   the two canonical templates.
