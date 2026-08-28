@@ -14,7 +14,7 @@ The first release after the 2026-08 complexity audit. It carries the P0 repairs 
 
 - `REL-SEH-019` (`draft`): the exact 0.8.0 release unit as a ten-work-order allow-list, the complete commit census from `v0.7.1` with fifteen named exemptions, aggregate-assurance requirements, promotion gates, human approval triggers, and rollback policy.
 - `WO-RLS-014` (`draft`): qualify the candidate, run the recipe-bound reproducible build, retain the bundle manifest and evidence, maintain the indexes. No version move: the candidate already reads 0.8.0.
-- Proposed aggregate verification record after an approved and committed candidate: `VREC-SEH-016`.
+- Proposed aggregate verification record after an approved and committed candidate: `VREC-SEH-017` (`VREC-SEH-016` was retracted before any verification, per the contract's amendment of 2026-08-28).
 - Proposed release record after verified aggregate assurance and separately authorized preparation: `RLS-SEH-017`.
 
 The authoritative state of every artifact is its own front matter and `[[lifecycle_events]]`, not this index.

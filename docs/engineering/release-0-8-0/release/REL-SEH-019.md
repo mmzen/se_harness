@@ -24,6 +24,25 @@ reason = "Approved by the accountable release owner on 2026-08-28 with the words
 
 # Release Contract: Release se-harness 0.8.0: one workflow kernel, a passing fresh consumer, and the real upgrade rehearsal
 
+## Amendment of 2026-08-28: the aggregate record is `VREC-SEH-017`
+
+On the release owner's decision of 2026-08-28 ("Retract VREC; refresh lock on
+main"): `prepare-release` requires a locked evaluator archive identity
+(`MG004`), which this root's lock, adopted from an index install
+(`WO-HUP-007`, `REQ-REB-028`), does not carry. The remedy is one same-version
+`upgrade --apply` by a wheel-file-installed 0.7.1 evaluator, run directly on
+`main` with retained transaction evidence, which writes the archive pair the
+released record `RLS-SEH-016` binds (`ddd403cd…`) into the lock. Because a
+ready record binds the lock's evaluator evidence, `VREC-SEH-016`, prepared
+before that refresh, was retracted — ready, never verified, its id never
+reused, the `VREC-REB-025` instrument — and the aggregate record of this
+contract is `VREC-SEH-017`, captured after the refresh and binding the
+refresh commit as the release candidate. The governor-transition lane refuses
+a same-version lock change by rule, so the refresh cannot ride a pull
+request; the one red run on the direct push is accepted by this decision and
+recorded in the release evidence. Every reference to `VREC-SEH-016` below
+reads `VREC-SEH-017`.
+
 ## Lifecycle and authority
 
 This contract's approval by the release owner is what permits a promotable
