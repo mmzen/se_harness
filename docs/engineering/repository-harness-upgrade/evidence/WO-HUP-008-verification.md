@@ -165,3 +165,7 @@ tests/test_predecessor_bootstrap_retirement.py
 tests/test_standard_repository_lifecycle.py
 tests/test_validation_taxonomy.py
 ```
+
+## Hosted lanes
+
+Pull request #244 at `21d730b`: every lane passes (13 pass). The Governor Transition Assessment (https://github.com/mmzen/se_harness/actions/runs/33193472598/job/98924587715) assessed the real transition: base `main` 2628627 carrying the 0.7.1 lock `6739fef0…` and exactly one released record for 0.8.0 (`RLS-SEH-017`), head carrying the 0.8.0 lock and exactly one transaction document. At `5a2475f` (packet in draft) the validate lane alone was red on W005 "status draft is not eligible for review", which the approval commit resolved.
