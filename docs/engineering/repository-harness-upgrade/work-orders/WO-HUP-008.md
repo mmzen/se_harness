@@ -2,7 +2,7 @@
 id = "WO-HUP-008"
 type = "work_order"
 title = "Adopt exact public 0.8.0 as the standard root, the simple way"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-28T17:04:49Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared simple upgrade from an isolated 0.8.0 wheel-file install outside the checkout, the owner statements, the candidate move to 0.9.0, the identity-aware test changes and the retained evidence, inside the declared execution scope. It authorizes no verification record, no release, no publication, no deletion of the retained stage machine and no change to the guard. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T17:05:36Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit 0cf2846 carrying unmoved main 2628627, run with the governing exact public 0.7.1 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.8.0 installed from the digest-verified PyPI wheel file into an isolated environment outside the checkout. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.8.0 as the standard root, the simple way
