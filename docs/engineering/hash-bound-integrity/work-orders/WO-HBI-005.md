@@ -19,6 +19,7 @@ paths = [
   "templates/repository/standard/gitattributes.fragment",
   "tests/test_hash_bound_integrity.py",
   "tests/test_public_onboarding.py",
+  "tests/test_standard_repository_lifecycle.py",
   "docs/engineering/hash-bound-integrity/",
   "docs/notes/harness-installation-and-upgrades.md",
 ]
@@ -167,6 +168,16 @@ can actually break.
   a fresh consumer on Linux and on Windows CI.
 - Commit on one branch and open one pull request declaring
   `Harness-Work-Order: WO-HBI-005`.
+
+Amended on 2026-08-28 by the accountable owner during execution, on the
+implementer's escalation: `tests/test_standard_repository_lifecycle.py` is
+added to the execution scope. Its
+`test_evaluator_evidence_bytes_are_portable_across_git_checkouts` hard-codes the
+six-line fragment and asserts it equal to both the shipped fragment and the
+root managed block, so it fails on the two-line fragment; it is retargeted to
+assert the shipped and freshly installed fragment are the two-line form while
+the root managed block keeps the released 0.7.1 six-line block and the owner
+region keeps its three rules. No other scope change.
 
 ## Out of scope
 

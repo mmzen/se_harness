@@ -60,16 +60,6 @@ SPECIFIED_CLASSES = {
         "text eol=lf",
         "template",
     ),
-    "governance-migration-protocol": (
-        (
-            "se_harness/governance_migration*.py",
-            "se_harness/governance_migration_contract.json",
-            "tests/fixtures/governance_migration/*.json",
-        ),
-        RAW_MODE,
-        "text eol=lf",
-        "repository",
-    ),
     "standard-lock": ((".engineering-harness.lock",), CANONICAL_MODE, None, "template"),
 }
 #: Committed files whose exact bytes the candidate suite compares or hashes. No
@@ -103,9 +93,6 @@ LOCK_PRODUCERS = ("se_harness", "repository_tools", "scripts")
 LOCK_WRITE = re.compile(r"([\w.\[\]\"'()]*[Ll]ock[\w.\[\]\"'()]*)\.write_text\(")
 SYNTHETIC_FILES = {
     "docs/engineering/x/evidence/a.json": b'{"a": 1}\n',
-    "se_harness/governance_migration.py": b'"""m."""\n',
-    "se_harness/governance_migration_contract.json": b'{"m": 1}\n',
-    "tests/fixtures/governance_migration/s.json": b'{"s": 1}\n',
     ".engineering-harness.lock": b'{"schema": 3}\n',
     "README.md": b"synthetic\n",
 }
@@ -261,6 +248,36 @@ Synthetic.
     write(root, "docs/engineering/upgrade/work-orders/WO-TST-001.md", body.encode("utf-8"))
 
 
+#: Paths that exist only in candidate source. REQ-HBI-004: nothing the wheel ships
+#: to a consumer may name one of them.
+CANDIDATE_ONLY_PREFIXES = ("se_harness/", "tests/", "repository_tools/")
+SYNTHETIC_REPOSITORY_CLASS = "owner-notes"
+SYNTHETIC_REPOSITORY_PATTERN = "notes/*.txt"
+
+
+def repository_declaration() -> hash_bound.Declaration:
+    """Return the real declaration plus one synthetic `repository`-region raw class.
+
+    The shipped table carries no `repository`-region class since `WO-HBI-005`, so
+    the owner-declared behaviours (fail closed on an empty match, require the rule
+    in owner content) are exercised on a class an owner would declare.
+    """
+
+    declared = load_declaration()
+    extra = hash_bound.HashBoundClass(
+        SYNTHETIC_REPOSITORY_CLASS,
+        (SYNTHETIC_REPOSITORY_PATTERN,),
+        RAW_MODE,
+        "text eol=lf",
+        "repository",
+        ("notes_sha256",),
+    )
+    return hash_bound.Declaration(
+        classes=(*declared.classes, extra),
+        unbound_digest_fields=declared.unbound_digest_fields,
+    )
+
+
 def results(root: Path, declaration=None) -> dict[str, tuple[bool, str]]:
     return {name: (passed, detail) for name, passed, detail in assess(root, declaration)}
 
@@ -412,10 +429,6 @@ class ResolutionTests(unittest.TestCase):
         expected = {
             "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-003-evaluator.json": "evaluator-evidence",
             "docs/engineering/x/evidence/a.json": "evaluator-evidence",
-            "se_harness/governance_migration.py": "governance-migration-protocol",
-            "se_harness/governance_migration_contract.py": "governance-migration-protocol",
-            "se_harness/governance_migration_contract.json": "governance-migration-protocol",
-            "tests/fixtures/governance_migration/synthetic-n-minus-1-to-n.json": "governance-migration-protocol",
             ".engineering-harness.lock": "standard-lock",
         }
         for relative, class_id in expected.items():
@@ -453,7 +466,7 @@ class ResolutionTests(unittest.TestCase):
             classes=tuple(reversed(declaration.classes)),
             unbound_digest_fields=tuple(reversed(declaration.unbound_digest_fields)),
         )
-        for relative in (".engineering-harness.lock", "se_harness/governance_migration.py"):
+        for relative in (".engineering-harness.lock", "docs/engineering/x/evidence/a.json"):
             self.assertEqual(
                 resolve_class(relative, declaration).class_id,
                 resolve_class(relative, reversed_declaration).class_id,
@@ -673,19 +686,21 @@ class InventoryReconciliationTests(unittest.TestCase):
         declaration = load_declaration()
         for item in declaration.classes:
             for binding in item.bindings:
-                if binding == "implementation_sha256":
-                    # Bound in harness data rather than a governed artifact.
-                    contract = json.loads(
-                        (ROOT / "se_harness" / "governance_migration_contract.json").read_bytes()
-                    )
-                    self.assertTrue(
-                        any(
-                            "implementation_sha256" in adapter
-                            for adapter in contract["adapters"].values()
-                        )
-                    )
-                    continue
                 self.assertIn(binding, observed, binding)
+
+    def test_the_harness_data_digest_is_declared_out_of_scope_not_bound(self) -> None:
+        # `implementation_sha256` is recorded in harness data, not in a governed
+        # artifact, and its bytes are pinned by owner-controlled `.gitattributes`
+        # content rather than by a shipped class (WO-HBI-005, REQ-HBI-004).
+        declaration = load_declaration()
+        self.assertIn("implementation_sha256", declaration.unbound_names())
+        self.assertNotIn("implementation_sha256", declaration.binding_owner())
+        contract = json.loads(
+            (ROOT / "se_harness" / "governance_migration_contract.json").read_bytes()
+        )
+        self.assertTrue(
+            any("implementation_sha256" in adapter for adapter in contract["adapters"].values())
+        )
 
     def test_an_undeclared_hash_bound_field_fails_the_declared_check(self) -> None:
         declaration = load_declaration()
@@ -778,45 +793,40 @@ class TemplateParityTests(unittest.TestCase):
             for pattern in item.patterns:
                 self.assertIn(pattern, owner, pattern)
 
-    def test_candidate_fragment_promotion_of_repository_patterns_is_pinned(self) -> None:
-        """Pin the known forward divergence so a fragment change forces re-assessment.
+    def test_shipped_surface_names_no_candidate_only_path(self) -> None:
+        """REQ-HBI-004: a consumer can satisfy every shipped pattern and fragment rule.
 
-        The candidate fragment already carries the `governance-migration-protocol`
-        patterns, while `SPEC-HBI-001` rule 2 declares that class
-        `repository`-region and this repository's root `.gitattributes` keeps it in
-        owner content. Nothing in scope has to change, because the root managed
-        block belongs to released 0.6.0 and rule 10 requires only presence in the
-        declared region. A separately authorized governor upgrade that rewrites the
-        managed block from this fragment must re-assess the class's region, so the
-        divergence is asserted rather than skipped.
+        The class table and the fragment travel in the wheel and are installed into
+        every consumer. A pattern under `se_harness/`, `tests/` or
+        `repository_tools/` exists in exactly one repository, this one, and fails
+        both `hash-bound-class-declared` and `hash-bound-attribute-effective`
+        everywhere else (issue #207).
         """
 
+        offending: list[str] = []
+        for item in load_declaration().classes:
+            for pattern in item.patterns:
+                if pattern.startswith(CANDIDATE_ONLY_PREFIXES):
+                    offending.append(f"{item.class_id}: {pattern}")
         fragment = TEMPLATE_FRAGMENT.read_bytes().decode("utf-8").replace("\r\n", "\n")
-        declared = [line.split()[0] for line in fragment.split("\n") if line.strip() and not line.startswith("#")]
-        promoted = sorted(
+        for line in fragment.split("\n"):
+            if line.strip() and not line.startswith("#") and line.split()[0].startswith(CANDIDATE_ONLY_PREFIXES):
+                offending.append(f"fragment: {line.split()[0]}")
+        self.assertEqual([], offending)
+
+    def test_the_canonical_fragment_carries_only_template_region_rules(self) -> None:
+        # SPEC-HBI-001 rule 10, first amendment: a `repository`-region pattern in the
+        # fragment would install into every consumer a rule the shipped table says
+        # belongs to owner content.
+        fragment = TEMPLATE_FRAGMENT.read_bytes().decode("utf-8").replace("\r\n", "\n")
+        rules = [line.split()[0] for line in fragment.split("\n") if line.strip() and not line.startswith("#")]
+        template_patterns = {
             pattern
             for item in load_declaration().classes
-            if item.region == "repository"
+            if item.region == "template" and item.required_attribute is not None
             for pattern in item.patterns
-            if pattern in declared
-        )
-        self.assertEqual(
-            [
-                "se_harness/governance_migration*.py",
-                "se_harness/governance_migration_contract.json",
-                "tests/fixtures/governance_migration/*.json",
-            ],
-            promoted,
-        )
-        # Since WO-HUP-006 the root managed block is the released 0.7.0 fragment, so
-        # the promoted patterns appear in the template region as well as in the
-        # repository region that SPEC-HBI-001 rule 2 declares for the class. The
-        # declared region still governs: doctor fails if the owner rules go.
-        managed = [line.split()[0] for line in hash_bound.attribute_regions(ROOT)["template"]]
-        self.assertEqual(["docs/engineering/**/evidence/*.json", *promoted], managed)
-        repository = [line.split()[0] for line in hash_bound.attribute_regions(ROOT)["repository"]]
-        for pattern in promoted:
-            self.assertIn(pattern, repository)
+        }
+        self.assertEqual(sorted(template_patterns), sorted(rules))
 
 
 @unittest.skipUnless(git_available(), "git is unavailable")
@@ -939,9 +949,6 @@ class AttributeEffectivenessTests(unittest.TestCase):
         attributes = (
             b"# se-harness:begin\n# se-harness:end\n"
             b"docs/engineering/**/evidence/*.json text eol=lf\n"
-            b"se_harness/governance_migration*.py text eol=lf\n"
-            b"se_harness/governance_migration_contract.json text eol=lf\n"
-            b"tests/fixtures/governance_migration/*.json text eol=lf\n"
         )
         passed, detail = self.assess_with_attributes(attributes)[CHECK_ATTRIBUTE_EFFECTIVE]
         self.assertFalse(passed)
@@ -949,19 +956,41 @@ class AttributeEffectivenessTests(unittest.TestCase):
         self.assertIn("repository", detail)
         self.assertIn("requires the template region", detail)
 
+    def assess_repository_class(self, attributes: bytes) -> dict[str, tuple[bool, str]]:
+        files = {**SYNTHETIC_FILES, "notes/a.txt": b"owner note\n"}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            root.mkdir()
+            build_source(root, attributes, files)
+            return results(root, repository_declaration())
+
     def test_repository_class_present_only_in_the_managed_block_is_ineffective(self) -> None:
+        # VER-HBI-001 misplaced-class row: the pattern does match tracked paths, so
+        # `hash-bound-class-declared` passes, and the misplacement still fails
+        # `hash-bound-attribute-effective` (issue #207 acceptance criterion 3).
         attributes = (
             b"# se-harness:begin\n"
             b"docs/engineering/**/evidence/*.json text eol=lf\n"
-            b"se_harness/governance_migration*.py text eol=lf\n"
-            b"se_harness/governance_migration_contract.json text eol=lf\n"
-            b"tests/fixtures/governance_migration/*.json text eol=lf\n"
+            b"notes/*.txt text eol=lf\n"
             b"# se-harness:end\n"
         )
-        passed, detail = self.assess_with_attributes(attributes)[CHECK_ATTRIBUTE_EFFECTIVE]
+        observed = self.assess_repository_class(attributes)
+        self.assertTrue(observed[CHECK_CLASS_DECLARED][0], observed[CHECK_CLASS_DECLARED][1])
+        passed, detail = observed[CHECK_ATTRIBUTE_EFFECTIVE]
         self.assertFalse(passed)
-        self.assertIn("governance-migration-protocol", detail)
+        self.assertIn(SYNTHETIC_REPOSITORY_CLASS, detail)
         self.assertIn("requires the repository region", detail)
+
+    def test_repository_class_in_owner_content_is_effective(self) -> None:
+        attributes = (
+            b"# se-harness:begin\n"
+            b"docs/engineering/**/evidence/*.json text eol=lf\n"
+            b"# se-harness:end\n"
+            b"notes/*.txt text eol=lf\n"
+        )
+        observed = self.assess_repository_class(attributes)
+        self.assertTrue(observed[CHECK_CLASS_DECLARED][0], observed[CHECK_CLASS_DECLARED][1])
+        self.assertTrue(observed[CHECK_ATTRIBUTE_EFFECTIVE][0], observed[CHECK_ATTRIBUTE_EFFECTIVE][1])
 
     def test_duplicate_identical_rule_in_both_regions_stays_effective(self) -> None:
         attributes = committed_attributes() + b"docs/engineering/**/evidence/*.json text eol=lf\n"
@@ -1035,16 +1064,50 @@ class FailClosedTests(unittest.TestCase):
         self.assertIn("duplicated", detail)
 
     def test_untracked_declared_path_fails_closed(self) -> None:
+        # A `repository`-region class whose pattern covers nothing is a stale
+        # owner declaration and fails closed (SPEC-HBI-001 rule 9, unchanged).
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "repo"
             root.mkdir()
-            files = dict(SYNTHETIC_FILES)
-            files.pop("tests/fixtures/governance_migration/s.json")
-            build_source(root, committed_attributes(), files)
-            passed, detail = results(root)[CHECK_CLASS_DECLARED]
+            build_source(root, committed_attributes() + b"notes/*.txt text eol=lf\n")
+            passed, detail = results(root, repository_declaration())[CHECK_CLASS_DECLARED]
         self.assertFalse(passed)
-        self.assertIn("tests/fixtures/governance_migration/*.json", detail)
+        self.assertIn(SYNTHETIC_REPOSITORY_PATTERN, detail)
         self.assertIn("matches no tracked path", detail)
+
+    def test_empty_template_class_is_vacuously_declared(self) -> None:
+        # REQ-HBI-003: before its first verification record a repository holds no
+        # evidence file. `hash-bound-class-declared` passes naming the class and
+        # `0 tracked paths`; the attribute rule is still required (rule 10).
+        files = dict(SYNTHETIC_FILES)
+        files.pop("docs/engineering/x/evidence/a.json")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            root.mkdir()
+            build_source(root, committed_attributes(), files)
+            observed = results(root)
+        passed, detail = observed[CHECK_CLASS_DECLARED]
+        self.assertTrue(passed, detail)
+        self.assertIn("evaluator-evidence: 0 tracked paths", detail)
+        self.assertTrue(observed[CHECK_ATTRIBUTE_EFFECTIVE][0], observed[CHECK_ATTRIBUTE_EFFECTIVE][1])
+        self.assertTrue(observed[CHECK_MODE_CONSISTENT][0], observed[CHECK_MODE_CONSISTENT][1])
+
+    def test_empty_template_class_still_requires_its_attribute_rule(self) -> None:
+        files = dict(SYNTHETIC_FILES)
+        files.pop("docs/engineering/x/evidence/a.json")
+        attributes = committed_attributes().replace(
+            b"docs/engineering/**/evidence/*.json text eol=lf\n", b""
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "repo"
+            root.mkdir()
+            build_source(root, attributes, files)
+            observed = results(root)
+        self.assertTrue(observed[CHECK_CLASS_DECLARED][0], observed[CHECK_CLASS_DECLARED][1])
+        passed, detail = observed[CHECK_ATTRIBUTE_EFFECTIVE]
+        self.assertFalse(passed)
+        self.assertIn("evaluator-evidence", detail)
+        self.assertIn("requires the template region", detail)
 
     def test_unavailable_git_fails_closed(self) -> None:
         with mock.patch.object(hash_bound.shutil, "which", return_value=None):
@@ -1131,8 +1194,6 @@ class ModeArbitrationTests(unittest.TestCase):
         for relative, expected in (
             (LOCK_RELATIVE, CANONICAL_MODE),
             ("docs/engineering/x/evidence/a.json", RAW_MODE),
-            ("se_harness/governance_migration_contract.json", RAW_MODE),
-            ("tests/fixtures/governance_migration/s.json", RAW_MODE),
         ):
             with self.subTest(relative=relative):
                 self.assertEqual(expected, resolve_mode(relative))
@@ -1172,7 +1233,6 @@ class ModeArbitrationTests(unittest.TestCase):
         for relative in (
             LOCK_RELATIVE,
             "docs/engineering/x/evidence/a.json",
-            "se_harness/governance_migration.py",
         ):
             with self.subTest(relative=relative):
                 payload = b'{"a": 1}\n'
