@@ -36,7 +36,9 @@ On the engineering owner's decision, four rules are restated for the state of
   harness: a `check --checkpoint handoff --from-git BASE` whose outcome is
   `completed` retains its schema-2 result there (`mutation.writes` names
   it); `pr-body` reads it and emits the `Harness-Restitution` line from its
-  `result_sha256`.
+  `result_sha256`. The packet directory `DOMAIN/evidence/WO-ID/` is admitted to
+  the work order's scope by construction, as its own file is under
+  `ECP-CHG-007`: the harness writes there, the agent does not.
 - **Compatibility** — the `QGP-G4I-EVIDENCE` corrective of
   `STEP-WO-IMPLEMENT-CHECK` becomes the command
   `harnessctl evidence . --artifact {artifact_id} --checkpoint handoff`;

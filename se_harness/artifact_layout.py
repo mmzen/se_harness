@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import re
 import stat
+import subprocess
 import tempfile
 from dataclasses import dataclass
 from datetime import date
@@ -99,6 +100,8 @@ RESERVED_DOMAINS = frozenset(
 class AuthoringChange:
     action: str
     path: str
+    allocated_id: str | None = None
+    allocation_refs: tuple[str, ...] = ()
 
 
 def validate_domain(value: str) -> str:
@@ -359,17 +362,106 @@ def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
     return None
 
 
+REF_ARTIFACT_PATTERN = re.compile(r"^(INT|CAP|REQ|SPEC|ARCH|ADR|VER|VREC|WO|RLS|REL)-([A-Z][A-Z0-9]*)-(\d{3})\.md$")
+_REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS"}
+
+
+def _git_output(root: Path, arguments: list[str]) -> bytes:
+    try:
+        completed = subprocess.run(["git", "-C", str(root), *arguments], capture_output=True, check=False, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise HarnessError(f"WEX-ECP-013: git is unavailable: {exc}") from exc
+    if completed.returncode != 0:
+        raise HarnessError(f"WEX-ECP-013: git {arguments[0]} failed with exit status {completed.returncode}")
+    return completed.stdout
+
+
+def reachable_artifact_ids(root: Path) -> dict[str, set[str]]:
+    """Every artifact identifier reachable from any local ref or the working tree (ECP-IDA-002, -003).
+
+    Maps `TYPE-DOMAIN-NNN` to the refs it was found on; the working tree,
+    untracked files included, is the member named `worktree`.
+    """
+
+    if not (root / ".git").exists():
+        raise HarnessError(f"WEX-ECP-013: {root} is not a Git checkout; identifiers are allocated across local refs")
+    found: dict[str, set[str]] = {}
+    refs = _git_output(root, ["for-each-ref", "--format=%(refname)%00%(objectname)"])
+    for line in refs.decode("utf-8", "replace").splitlines():
+        if "\0" not in line:
+            continue
+        refname, objectname = line.split("\0", 1)
+        if refname.startswith("refs/remotes/"):
+            # ECP-IDA-002 and the decision envelope: local refs only, never remote-tracking ones.
+            continue
+        try:
+            listing = _git_output(root, ["ls-tree", "-r", "-z", "--name-only", objectname, "docs/engineering"])
+        except HarnessError:
+            continue
+        for entry in listing.split(b"\0"):
+            match = REF_ARTIFACT_PATTERN.match(Path(entry.decode("utf-8", "replace")).name)
+            if match:
+                found.setdefault(match.group(0)[:-3], set()).add(refname)
+    engineering = root / "docs" / "engineering"
+    if engineering.is_dir():
+        for path in engineering.rglob("*.md"):
+            match = REF_ARTIFACT_PATTERN.match(path.name)
+            if match:
+                found.setdefault(match.group(0)[:-3], set()).add("worktree")
+    return found
+
+
+def _domain_token(root: Path, domain: str, artifact_type: str) -> str:
+    """The `DOMAIN` token of `TYPE-DOMAIN-NNN`, read from the domain's existing artifacts."""
+
+    tokens: dict[str, int] = {}
+    directory = root / "docs" / "engineering" / validate_domain(domain)
+    if directory.is_dir():
+        for path in directory.rglob("*.md"):
+            match = REF_ARTIFACT_PATTERN.match(path.name)
+            if match:
+                tokens[match.group(2)] = tokens.get(match.group(2), 0) + 1
+    if not tokens:
+        raise HarnessError(
+            f"WEX-ECP-013: domain {domain} has no artifact to read its identifier token from; pass --id explicitly"
+        )
+    return sorted(tokens.items(), key=lambda item: (-item[1], item[0]))[0][0]
+
+
+def allocate_artifact_id(root: Path, *, domain: str, artifact_type: str) -> tuple[str, tuple[str, ...]]:
+    """Allocate the lowest free `TYPE-DOMAIN-NNN` across every local ref (ECP-IDA-001, -005)."""
+
+    selected_type = validate_artifact_type(artifact_type)
+    if selected_type not in _REF_PREFIX:
+        raise HarnessError(f"WEX-ECP-013: identifiers of type {selected_type} are not allocated automatically; pass --id")
+    prefix = f"{_REF_PREFIX[selected_type]}-{_domain_token(root, domain, selected_type)}-"
+    reachable = reachable_artifact_ids(root)
+    used = {int(identifier[len(prefix):]): refs for identifier, refs in reachable.items() if identifier.startswith(prefix)}
+    number = 1
+    while number in used:
+        number += 1
+    if number > 999:
+        raise HarnessError(f"WEX-ECP-013: no free three-digit identifier remains for {prefix}NNN")
+    below = used.get(number - 1, set())
+    return f"{prefix}{number:03d}", tuple(sorted(below))
+
+
 def create_artifact(
     repository: Path,
     *,
     domain: str,
     artifact_type: str,
-    artifact_id: str,
+    artifact_id: str | None,
     dry_run: bool,
 ) -> AuthoringChange:
     root = ensure_target(repository, must_exist=True)
     _validate_installed_templates(root)
     selected_type = validate_artifact_type(artifact_type)
+    allocated: str | None = None
+    allocation_refs: tuple[str, ...] = ()
+    if artifact_id is None:
+        allocated, allocation_refs = allocate_artifact_id(root, domain=domain, artifact_type=selected_type)
+        artifact_id = allocated
     selected_id = validate_artifact_id(artifact_id, selected_type)
     destination_relative = canonical_artifact_relative_path(domain, selected_type, selected_id)
     destination = _validate_existing_chain(root, destination_relative, final_kind="file")
@@ -378,6 +470,14 @@ def create_artifact(
     existing = _existing_artifact_path(root, selected_id)
     if existing is not None:
         raise HarnessError(f"artifact ID already exists: {selected_id} at {existing.relative_to(root).as_posix()}")
+    if allocated is None and (root / ".git").exists():
+        # ECP-IDA-006: an explicit identifier is refused when any local ref already carries it.
+        try:
+            on_refs = sorted(reachable_artifact_ids(root).get(selected_id, set()) - {"worktree"})
+        except HarnessError:
+            on_refs = []
+        if on_refs:
+            raise HarnessError(f"artifact ID already exists: {selected_id} on local ref {on_refs[0]}")
 
     template_relative = Path("docs") / "engineering" / "templates" / ARTIFACT_TEMPLATES[selected_type]
     template_path = _validate_existing_chain(root, template_relative, final_kind="file")
@@ -390,7 +490,7 @@ def create_artifact(
 
     parent_relative = destination_relative.parent
     _validate_existing_chain(root, parent_relative, final_kind="directory")
-    change = AuthoringChange("create", destination_relative.as_posix())
+    change = AuthoringChange("create", destination_relative.as_posix(), allocated, allocation_refs)
     if dry_run:
         return change
 

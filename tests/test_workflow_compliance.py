@@ -386,3 +386,141 @@ class GitDerivedChangeSetTests(WorkflowComplianceTests):
         self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-003"))
         self.assertIn("not a Git checkout", result["restitution"]["blocked_by"][0])
 
+
+class EvidencePacketTests(GitDerivedChangeSetTests):
+    """REQ-ECP-003 / ECP-EVD-001 to -007 and the retained handoff result (ECP-PRB-002 amended)."""
+
+    PACKET = "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
+
+    def check_real(self, *extra: str) -> tuple[int, dict, str]:
+        # The evidence predicate is the subject here: only review preflight is stubbed.
+        with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
+            code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", *extra)
+        return code, json.loads(output), error
+
+    def evidence(self, *extra: str) -> tuple[int, dict, str]:
+        code, output, error = self.invoke(
+            "evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json", *extra
+        )
+        return code, json.loads(output), error
+
+    def test_evidence_writes_a_packet_with_a_machine_header_and_rebinds_only_the_header(self) -> None:
+        from se_harness.workflow_compliance import parse_evidence_header
+
+        code, result, error = self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
+        self.assertEqual(0, code, error)
+        self.assertEqual("evidence", result["operation"]["kind"])
+        self.assertEqual([{"id": "WO-001", "path": self.PACKET, "fields": ["artifact", "checkpoint", "formal_snapshot_sha256", "rebound_at"]}], result["mutation"]["writes"])
+        packet = self.root / self.PACKET
+        data = packet.read_bytes()
+        self.assertTrue(data.startswith(b"```toml\nartifact = \"WO-001\"\ncheckpoint = \"handoff\"\n"))
+        self.assertNotIn(b"\r", data)
+        header, body = parse_evidence_header(data)
+        self.assertEqual("2026-08-28T20:00:00Z", header["rebound_at"])
+        self.assertIn(b"Retained by `harnessctl evidence`; body content is owner-authored.", body)
+        owner_body = body + "\nOwner paragraph with \u00e9 and a trailing space \n".encode("utf-8")
+        packet.write_bytes(data[: len(data) - len(body)] + owner_body)
+        # move the formal snapshot, then rebind: the header changes, the body does not
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.write_text(work_order.read_text(encoding="utf-8") + "\n<!-- moved -->\n", encoding="utf-8")
+        code, result, error = self.evidence("--rebound-at", "2026-08-28T20:05:00Z")
+        self.assertEqual(0, code, error)
+        header_after, body_after = parse_evidence_header(packet.read_bytes())
+        self.assertEqual(owner_body, body_after)
+        self.assertNotEqual(header["formal_snapshot_sha256"], header_after["formal_snapshot_sha256"])
+        self.assertEqual("2026-08-28T20:05:00Z", header_after["rebound_at"])
+        self.assertIn("Rebound", result["restitution"]["done"][0])
+
+    def test_evidence_refuses_a_tampered_or_foreign_packet_and_writes_nothing(self) -> None:
+        self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
+        packet = self.root / self.PACKET
+        original = packet.read_bytes()
+        for tampered, needle in (
+            (b"# no header\n" + original, "no evidence packet header"),
+            (original.replace(b'artifact = "WO-001"', b'artifact = "WO-009"', 1), "is the packet of WO-009"),
+            (b"```toml\nartifact = \n```\n", "not valid TOML"),
+            (b"```toml\nartifact = \"WO-001\"\ncheckpoint = \"handoff\"\nextra = 1\n```\n", "must carry exactly"),
+        ):
+            with self.subTest(needle=needle):
+                packet.write_bytes(tampered)
+                code, result, error = self.evidence()
+                self.assertEqual(1, code, error)
+                self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-010"), result["restitution"]["blocked_by"])
+                self.assertIn(needle, result["restitution"]["blocked_by"][0])
+                self.assertEqual(tampered, packet.read_bytes())
+                self.assertEqual([], result["mutation"]["writes"])
+
+    def test_evidence_refuses_a_converting_attribute_and_a_different_selected_work_order(self) -> None:
+        self.commit_base()
+        (self.root / ".gitattributes").write_text("*.md text eol=crlf\n", encoding="utf-8")
+        code, result, error = self.evidence()
+        self.assertEqual(1, code, error)
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-011"))
+        self.assertFalse((self.root / self.PACKET).exists())
+        (self.root / ".gitattributes").write_text("*.md text eol=lf\n", encoding="utf-8")
+        self.assertEqual(0, self.evidence()[0])
+        second = self.root / "docs/engineering/product/work-orders/WO-002.md"
+        second.write_text(
+            (self.root / "docs/engineering/product/work-orders/WO-001.md").read_text(encoding="utf-8").replace("WO-001", "WO-002").replace('status = "in_progress"', 'status = "approved"'),
+            encoding="utf-8",
+        )
+        (self.root / "docs/engineering/product/work-orders/WO-001.md").write_text(
+            (self.root / "docs/engineering/product/work-orders/WO-001.md").read_text(encoding="utf-8").replace('status = "in_progress"', 'status = "approved"', 1),
+            encoding="utf-8",
+        )
+        second.write_text(second.read_text(encoding="utf-8").replace('status = "approved"', 'status = "in_progress"', 1), encoding="utf-8")
+        code, output, error = self.invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")
+        self.assertEqual(1, code, error)
+        self.assertIn("WEX-ECP-012: the working tree selects WO-002", json.loads(output)["restitution"]["blocked_by"][0])
+
+    def test_the_predicate_reads_the_header_never_substrings_and_keeps_the_grace_for_legacy_packets(self) -> None:
+        from se_harness.workflow_compliance import formal_snapshot_digest
+
+        self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
+        code, result, error = self.check_real("--changes-complete", "--json")
+        self.assertEqual(0, code, error)
+        self.assertNotIn("W-ECP-002", json.dumps(result))
+        packet = self.root / self.PACKET
+        data = packet.read_bytes()
+        # a substring copy of the binding inside the body proves nothing once a header exists
+        report = _load_validator_module().validate_repository(self.root)
+        digest = formal_snapshot_digest(self.root, report.artifacts)
+        packet.write_bytes(data.replace(digest.encode("utf-8"), b"0" * 64, 1) + f"\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n".encode("utf-8"))
+        code, result, error = self.check_real("--changes-complete", "--json")
+        self.assertEqual(1, code, error)
+        statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
+        # a legacy packet with no header still passes for one release, named by W-ECP-002
+        packet.write_text(f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n", encoding="utf-8")
+        code, result, error = self.check_real("--changes-complete", "--json")
+        self.assertEqual(0, code, error)
+        messages = [p["message"] for g in result["compliance"]["gates"] for p in g["predicates"] if p["id"] == "QGP-G4I-EVIDENCE"]
+        self.assertIn("W-ECP-002", messages[0])
+        self.assertIn("harnessctl evidence . --artifact WO-001 --checkpoint handoff", messages[0])
+
+    def check_from_git_real(self, base: str) -> tuple[int, dict, str]:
+        return self.check_real("--from-git", base, "--json")
+
+    def test_a_completed_git_derived_handoff_retains_its_result_in_the_packet_directory(self) -> None:
+        base = self.commit_base()
+        self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        code, result, error = self.check_from_git_real(base)
+        self.assertEqual(0, code, error)
+        retained = self.root / "docs/engineering/product/evidence/WO-001/handoff.json"
+        self.assertEqual([{"id": "WO-001", "path": "docs/engineering/product/evidence/WO-001/handoff.json", "fields": ["result_sha256"]}], result["mutation"]["writes"])
+        stored = json.loads(retained.read_text(encoding="utf-8"))
+        self.assertEqual(result["result_sha256"], stored["result_sha256"])
+        self.assertNotIn(b"\r", retained.read_bytes())
+        # the retained file is harness-written: the next Git-derived check admits it by construction
+        code, result, error = self.check_from_git_real(base)
+        self.assertEqual(0, code, error)
+        self.assertIn("docs/engineering/product/evidence/WO-001/handoff.json", result["scope"]["changed_paths"])
+        # a blocked handoff retains nothing
+        (self.root / "outside.md").write_text("x\n", encoding="utf-8")
+        before = retained.read_bytes()
+        code, result, error = self.check_from_git_real(base)
+        self.assertEqual(1, code, error)
+        self.assertEqual([], result["mutation"]["writes"])
+        self.assertEqual(before, retained.read_bytes())
+

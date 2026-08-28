@@ -81,7 +81,8 @@ copies:
    template `WORKFLOW.json` are added to the scope for that one change.
 4. `ECP-PRB-002` reads `DOMAIN/evidence/WO-ID/handoff.json`, which nothing
    wrote; a completed `check --checkpoint handoff --from-git BASE` retains
-   its schema-2 result there, written by the harness.
+   its schema-2 result there, written by the harness; the packet directory is
+   admitted to the work order's scope by construction, as its own file is.
 
 Two deviations from the packet text are accepted in advance: readings are
 taken with the governing exact public 0.8.0 root, not the 0.7.1 named on

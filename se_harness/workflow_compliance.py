@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import tomllib
 import json
 import re
 from dataclasses import dataclass
@@ -326,6 +327,183 @@ def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]
     return "pass", f"Released-installation {phase} preflight inputs are ready."
 
 
+EVIDENCE_HEADER_KEYS = ("artifact", "checkpoint", "formal_snapshot_sha256", "rebound_at")
+_HEADER_OPEN = b"```toml\n"
+_HEADER_CLOSE = b"\n```\n"
+_RFC3339 = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+
+
+def parse_evidence_header(data: bytes) -> tuple[dict[str, str] | None, bytes]:
+    """Split a packet into its machine header and retained body (ECP-EVD-002, -004).
+
+    Returns `(None, data)` when no fenced TOML block starts at byte offset 0.
+    A block that starts there but is not valid TOML with exactly the four
+    header keys raises `WEX-ECP-010`.
+    """
+
+    if not data.startswith(_HEADER_OPEN):
+        return None, data
+    end = data.find(_HEADER_CLOSE, len(_HEADER_OPEN))
+    if end < 0:
+        raise HarnessError("WEX-ECP-010: the evidence packet header fence is not closed")
+    raw = data[len(_HEADER_OPEN):end]
+    try:
+        parsed = tomllib.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, tomllib.TOMLDecodeError) as exc:
+        raise HarnessError(f"WEX-ECP-010: the evidence packet header is not valid TOML: {exc}") from exc
+    if set(parsed) != set(EVIDENCE_HEADER_KEYS) or not all(isinstance(parsed[key], str) for key in EVIDENCE_HEADER_KEYS):
+        raise HarnessError(
+            "WEX-ECP-010: the evidence packet header must carry exactly "
+            + ", ".join(EVIDENCE_HEADER_KEYS)
+        )
+    return {key: parsed[key] for key in EVIDENCE_HEADER_KEYS}, data[end + len(_HEADER_CLOSE):]
+
+
+def render_evidence_header(fields: Mapping[str, str]) -> bytes:
+    lines = [f'{key} = "{fields[key]}"' for key in EVIDENCE_HEADER_KEYS]
+    return _HEADER_OPEN + "\n".join(lines).encode("utf-8") + _HEADER_CLOSE
+
+
+def evidence_packet_path(root: Path, artifact: Any, checkpoint: str) -> Path:
+    """`DOMAIN/evidence/WO-ID/WO-ID-CHECKPOINT.md` (ECP-EVD-001)."""
+
+    from se_harness.artifact_layout import artifact_domain_from_relative_path
+
+    domain = artifact_domain_from_relative_path(artifact.path.relative_to(root))
+    if domain is None:
+        raise HarnessError(f"WEX-ECP-010: {artifact.artifact_id} is not under a domain directory")
+    return root / "docs" / "engineering" / domain / "evidence" / artifact.artifact_id / f"{artifact.artifact_id}-{checkpoint}.md"
+
+
+def _line_ending_conversion(root: Path, relative: str) -> str | None:
+    """The attribute rule that would convert this path's line endings, if any (ECP-EVD-006)."""
+
+    import subprocess
+
+    if not (root / ".git").exists():
+        return None
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "check-attr", "-z", "text", "eol", "--", relative],
+            capture_output=True, check=False, timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if completed.returncode != 0:
+        return None
+    fields = completed.stdout.split(b"\0")
+    values: dict[str, str] = {}
+    for index in range(0, len(fields) - 2, 3):
+        values[fields[index + 1].decode("utf-8", "replace")] = fields[index + 2].decode("utf-8", "replace")
+    text, eol = values.get("text", "unspecified"), values.get("eol", "unspecified")
+    if text in {"set", "auto"} and eol != "lf":
+        return f"text={text} eol={eol}"
+    return None
+
+
+def write_evidence_packet(
+    repository: Path,
+    *,
+    artifact_id: str,
+    checkpoint: str,
+    now: str,
+) -> dict[str, Any]:
+    """Write or rebind one evidence packet and return the schema-2 result (ECP-EVD-001 to -007)."""
+
+    from se_harness.workflow import _catalog, _validation, project_scope
+
+    if checkpoint not in {"start", "pre-action", "transition", "handoff"}:
+        raise HarnessError("WEX-ECP-010: the checkpoint must be start, pre-action, transition, or handoff")
+    if not _RFC3339.fullmatch(now):
+        raise HarnessError("WEX-ECP-010: rebound_at must be RFC 3339 UTC at second precision")
+    root = ensure_target(repository, must_exist=True)
+    _, report = _validation(root)
+    catalog = _catalog(report)
+    primary = catalog.get(artifact_id)
+    if primary is None:
+        raise HarnessError(f"WEX-ECP-010: unknown artifact ID: {artifact_id}")
+    if primary.artifact_type != "work_order":
+        raise HarnessError("WEX-ECP-010: evidence packets are keyed by a work order")
+    in_progress = sorted(
+        item.artifact_id for item in catalog.values()
+        if item.artifact_type == "work_order" and item.status == "in_progress"
+    )
+    if len(in_progress) == 1 and in_progress[0] != artifact_id:
+        raise HarnessError(
+            f"WEX-ECP-012: the working tree selects {in_progress[0]} (the one in_progress work order), not {artifact_id}"
+        )
+    path = evidence_packet_path(root, primary, checkpoint)
+    relative = path.relative_to(root).as_posix()
+    conversion = _line_ending_conversion(root, relative)
+    if conversion is not None:
+        raise HarnessError(f"WEX-ECP-011: a .gitattributes rule would convert line endings of {relative} ({conversion})")
+    snapshot = formal_snapshot_digest(root, report.artifacts)
+    header = {
+        "artifact": artifact_id,
+        "checkpoint": checkpoint,
+        "formal_snapshot_sha256": snapshot,
+        "rebound_at": now,
+    }
+    action = "create"
+    if path.exists():
+        if path.is_symlink() or not path.is_file():
+            raise HarnessError(f"WEX-ECP-010: {relative} is not an ordinary file")
+        existing, body = parse_evidence_header(path.read_bytes())
+        if existing is None:
+            raise HarnessError(f"WEX-ECP-010: {relative} carries no evidence packet header at byte offset 0")
+        if existing["artifact"] != artifact_id or existing["checkpoint"] != checkpoint:
+            raise HarnessError(
+                f"WEX-ECP-010: {relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
+                f"not {artifact_id} at {checkpoint}"
+            )
+        action = "rebind"
+    else:
+        body = (
+            f"\n# {artifact_id} {checkpoint} evidence\n\n"
+            "Retained by `harnessctl evidence`; body content is owner-authored.\n"
+        ).encode("utf-8")
+    content = render_evidence_header(header) + body
+    path.parent.mkdir(parents=True, exist_ok=True)
+    staged = path.with_name(path.name + ".tmp")
+    try:
+        staged.write_bytes(content)
+        staged.replace(path)
+    except OSError as exc:
+        staged.unlink(missing_ok=True)
+        raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
+    governing, dependencies = project_scope(catalog, primary)
+    return selected_result(
+        root,
+        operation="evidence",
+        primary=primary,
+        related=[catalog[item] for item in dependencies if item in catalog],
+        governing=governing,
+        dependencies=dependencies,
+        done=[
+            f"{'Rebound' if action == 'rebind' else 'Wrote'} the {checkpoint} evidence packet of {artifact_id} "
+            f"at {relative} to formal snapshot {snapshot}."
+        ],
+        after=[{"id": artifact_id, "status": primary.status}],
+        writes=[{"id": artifact_id, "path": relative, "fields": list(EVIDENCE_HEADER_KEYS)}],
+    )
+
+
+def retain_handoff_result(root: Path, artifact: Any, result: Mapping[str, Any]) -> str:
+    """Retain a completed Git-derived handoff result beside the packet (ECP-PRB-002, amended)."""
+
+    path = evidence_packet_path(root, artifact, "handoff").with_name("handoff.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = (json.dumps(result, indent=2, ensure_ascii=True, sort_keys=True) + "\n").encode("utf-8")
+    staged = path.with_name(path.name + ".tmp")
+    try:
+        staged.write_bytes(data)
+        staged.replace(path)
+    except OSError as exc:
+        staged.unlink(missing_ok=True)
+        raise HarnessError(f"WEX-ECP-010: cannot retain the handoff result: {exc}") from exc
+    return path.relative_to(root).as_posix()
+
+
 def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
     if context.artifact.artifact_type != "work_order":
         return "pass", "Work-order implementation evidence does not apply to this artifact type."
@@ -341,17 +519,43 @@ def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
     # implemented accepts the handoff-bound document for the same snapshot, so
     # the transition can never pass on weaker evidence than check evaluated.
     checkpoint = "handoff" if context.checkpoint == "transition" else context.checkpoint
+    legacy: str | None = None
     for path in sorted(candidates):
         try:
-            text = path.read_text(encoding="utf-8")
-        except (OSError, UnicodeError):
+            data = path.read_bytes()
+        except OSError:
+            continue
+        relative = path.relative_to(context.root).as_posix()
+        # ECP-EVD-005: the machine header is read through the TOML parser, never by substring.
+        try:
+            header, _ = parse_evidence_header(data)
+        except HarnessError:
+            header = None
+        if header is not None:
+            if (
+                header["artifact"] == context.artifact.artifact_id
+                and header["checkpoint"] == checkpoint
+                and header["formal_snapshot_sha256"] == context.formal_snapshot_sha256
+            ):
+                return "pass", f"Fresh retained evidence is bound at {relative}."
+            continue
+        try:
+            text = data.decode("utf-8")
+        except UnicodeError:
             continue
         if (
-            f"artifact: {context.artifact.artifact_id}" in text
+            legacy is None
+            and f"artifact: {context.artifact.artifact_id}" in text
             and f"checkpoint: {checkpoint}" in text
             and binding in text
         ):
-            return "pass", f"Fresh retained evidence is bound at {path.relative_to(context.root).as_posix()}."
+            legacy = relative
+    if legacy is not None:
+        # Compatibility for one release: substring-bound packets still pass, named by W-ECP-002.
+        return "pass", (
+            f"Fresh retained evidence is bound at {legacy}. W-ECP-002: the packet carries no machine header; "
+            f"migrate it with harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
+        )
     return "not_assessable", (
         f"No readable evidence for {context.artifact.artifact_id}, checkpoint {checkpoint}, "
         f"and formal snapshot {context.formal_snapshot_sha256} is available."
@@ -483,7 +687,17 @@ def build_context(
         # ECP-CHG-007: the selected work order's own artifact path is admitted by
         # construction; only `transition` writes it and it is in every Git diff
         # after the work order's own approval and start.
-        admitted_scope=(*scope, primary.path.relative_to(root).as_posix()),
+        admitted_scope=(
+            *scope,
+            primary.path.relative_to(root).as_posix(),
+            # ECP-PRB-002 (amended): the harness retains the packet and the handoff
+            # result under the work order's packet directory; harness-written
+            # evidence at its own path is admitted with the work order's file.
+            *(
+                (evidence_packet_path(root, primary, "handoff").parent.relative_to(root).as_posix() + "/",)
+                if primary.artifact_type == "work_order" else ()
+            ),
+        ),
         change_set=change_set,
         checkpoint=checkpoint,
         formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts),
