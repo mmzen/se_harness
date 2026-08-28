@@ -26,6 +26,10 @@ decided_by = "technical-owner"
 
 # Architecture: Evaluator-owned single-agent effect broker
 
+## Amendment of 2026-08-28 (`ADR-AEX-008`)
+
+Superseded by `ARCH-ECP-001` on the owner's disposition of Phase 4 recorded in `ADR-AEX-008`: the effect broker, the bundle pipeline and the autonomy envelope leave the product under `WO-ECP-006`; delegation becomes a work-order attribute enforced at the pull-request gate, and the journaled apply with rollback and `human-recovery-stop` is retained as the one harness-owned write path. The text below is retained as the record of what Phase 4 built.
+
 ## Context and scope
 
 `ARCH-AEX-001` establishes harness-owned authority and replaceable procedure,
