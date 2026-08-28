@@ -2,7 +2,7 @@
 id = "WO-REB-030"
 type = "work_order"
 title = "Keep interpreter_safety.evaluate, delete its declaration apparatus and the repository_tools copy"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -36,6 +36,13 @@ to = "approved"
 decided_at = "2026-08-28T19:36:43Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared deletion of the interpreter-safety declaration apparatus and the repository_tools mirror, the test pruning with the corpus inventory moved into the tests, the dated amendments named in the packet, the note correction and the retained evidence, inside the declared execution scope. No EPS case, message or order may change. It authorizes no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T19:36:47Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit fcebed9 carrying unmoved main f62256f, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Keep `interpreter_safety.evaluate`, delete its declaration apparatus and the `repository_tools` copy
