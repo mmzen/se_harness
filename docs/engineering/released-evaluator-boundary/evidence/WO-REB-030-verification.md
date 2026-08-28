@@ -105,3 +105,7 @@ se_harness/interpreter_safety.json
 se_harness/interpreter_safety.py
 tests/test_interpreter_safety.py
 ```
+
+## Hosted lanes
+
+Pull request #246 at `49b1100`: all 13 lanes pass — both platform legs of the suite (the Windows leg constructs the junction forms ISC005 and ISC009 this workstation cannot), the candidate-evidence lane that builds the wheel from a clean export and runs the surface check, the upgrade-rehearsal legs, and the governor transition assessment (no root change).
