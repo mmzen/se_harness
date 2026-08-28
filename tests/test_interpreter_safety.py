@@ -1,10 +1,11 @@
-"""Independent verification of the declared environment entry-point safety rule.
+"""Independent verification of the environment entry-point safety rule.
 
-The corpus below is owned by these tests as data and is compared against
-``se_harness/interpreter_safety.json`` in both directions, so neither the
-declaration nor either loader can define its own passing condition. Every
-filesystem form is built for real; digests are recomputed here from the bytes
+The corpus of filesystem forms is owned by these tests: each form is built for
+real and the case the rule yields is asserted here, so the implementation
+cannot define its own passing condition. Digests are recomputed from the bytes
 these tests wrote rather than read back from the observation under test.
+`WO-REB-030` removed the JSON declaration and the second loader; the corpus
+inventory below is what the declaration used to carry.
 """
 
 from __future__ import annotations
@@ -23,11 +24,37 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from repository_tools import interpreter_safety as tools_safety
 from se_harness import interpreter_safety, runtime_identity
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+
+#: The corpus of forms and the platforms each can be constructed on.
+CORPUS_CONSTRUCTABLE_ON: dict[str, tuple[str, ...]] = {
+    "ISC001": ('linux', 'windows'),
+    "ISC002": ('linux',),
+    "ISC003": ('linux', 'windows'),
+    "ISC004": ('linux',),
+    "ISC005": ('windows',),
+    "ISC006": ('linux',),
+    "ISC007": ('linux', 'windows'),
+    "ISC008": ('linux', 'windows'),
+    "ISC009": ('windows',),
+    "ISC010": (),
+    "ISC011": (),
+    "ISC012": ('linux', 'windows'),
+    "ISC013": ('linux',),
+    "ISC014": ('linux', 'windows'),
+    "ISC015": ('linux', 'windows'),
+    "ISC016": ('linux', 'windows'),
+    "ISC017": ('linux', 'windows'),
+    "ISC018": ('linux', 'windows'),
+}
+#: Forms no lane can construct, with the recorded reason.
+CORPUS_UNCONSTRUCTABLE_REASON = {
+    "ISC010": 'neither platform can construct one: a junction is always a directory and is refused by EPS004 first, and the only file-position reparse point available on Windows is an application execution alias, which fails strict resolution with WinError 1920 and is therefore refused by EPS003 first',
+    "ISC011": 'strict resolution is fully transitive on both platforms: a chain of junctions or symbolic links resolves to a path that traverses none, so this refusal is retained as a defence against a partially resolvable path rather than as a reachable form',
+}
 WINDOWS = os.name == "nt"
 PLATFORM = "windows" if WINDOWS else "linux"
 
@@ -57,9 +84,7 @@ PERMITTED_TOOLS_IMPORTS: frozenset[str] = frozenset()
 
 #: Patterns `ARCH-REB-010` prohibits, each with the module set allowed to carry
 #: it. `interpreter_safety` itself is the one place link classification lives.
-LOADER_MODULES = frozenset(
-    {"se_harness/interpreter_safety.py", "repository_tools/interpreter_safety.py"}
-)
+LOADER_MODULES = frozenset({"se_harness/interpreter_safety.py"})
 
 #: Boundary-module functions that still test for a junction inline, mapped to the
 #: reason that use is not a restatement of the declared interpreter rule. Pinned as
@@ -185,171 +210,20 @@ class _Fixture:
         return entry
 
 
-class DeclarationShapeTests(unittest.TestCase):
-    def test_declaration_parses_under_its_schema_from_both_loaders(self) -> None:
-        for loader in (interpreter_safety, tools_safety):
-            with self.subTest(loader=loader.__name__):
-                declaration = loader.load_declaration()
-                self.assertEqual(loader.DECLARATION_SCHEMA, declaration["schema"])
-
-    def test_both_loaders_read_identical_declaration_bytes(self) -> None:
-        self.assertEqual(interpreter_safety.declaration_bytes(), tools_safety.declaration_bytes())
-
-    def test_both_loaders_agree_on_every_declared_structure(self) -> None:
-        self.assertEqual(interpreter_safety.load_declaration(), tools_safety.load_declaration())
-        self.assertEqual(interpreter_safety.EVALUATION_ORDER, tools_safety.EVALUATION_ORDER)
-        self.assertEqual(interpreter_safety.POSITION_CLASSES, tools_safety.POSITION_CLASSES)
-
-    def test_declaration_is_data_only_and_carries_no_waiver(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        prohibited = {"waiver", "waivers", "allowlist", "allow_list", "exception", "exceptions",
-                      "bypass", "override", "code", "eval", "expression", "platform_conditional"}
-
-        def walk(value: object, trail: str) -> None:
-            if isinstance(value, dict):
-                for key, item in value.items():
-                    self.assertNotIn(
-                        key.lower(), prohibited, f"{trail}: prohibited declaration key {key!r}"
-                    )
-                    walk(item, f"{trail}.{key}")
-            elif isinstance(value, list):
-                for index, item in enumerate(value):
-                    walk(item, f"{trail}[{index}]")
-            else:
-                self.assertIsInstance(value, (str, int, float, bool, type(None)), trail)
-
-        walk(declaration, "declaration")
-
-    def test_declaration_rejects_a_duplicate_key(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            path = Path(temporary) / "declaration.json"
-            path.write_text('{"schema": "a", "schema": "b"}', encoding="utf-8")
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD101"):
-                interpreter_safety.load_declaration(path)
-
-    def test_declaration_rejects_an_unknown_case_identifier(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        declaration["cases"][0]["id"] = "XYZ001"
-        with self._written(declaration) as path:
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD114"):
-                interpreter_safety.load_declaration(path)
-
-    def test_declaration_rejects_a_malformed_corpus_entry(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        declaration["corpus"][0]["expected"] = "EPS999"
-        with self._written(declaration) as path:
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD129"):
-                interpreter_safety.load_declaration(path)
-
-    def test_declaration_rejects_a_reordered_case_list(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        declaration["cases"].reverse()
-        with self._written(declaration) as path:
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD117"):
-                interpreter_safety.load_declaration(path)
-
-    def test_declaration_rejects_a_declared_case_with_no_corpus_entry(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        declaration["corpus"] = [
-            entry for entry in declaration["corpus"] if entry["expected"] != "EPS009"
-        ]
-        with self._written(declaration) as path:
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD135"):
-                interpreter_safety.load_declaration(path)
-
-    def test_declaration_rejects_an_unsorted_boundary_registry(self) -> None:
-        declaration = interpreter_safety.load_declaration()
-        # One boundary remains since WO-ECP-011; an entry sorting after it is
-        # inserted first so the registry is out of order.
-        declaration["boundaries"].insert(0, dict(declaration["boundaries"][0], id="se_harness.zz.synthetic"))
-        with self._written(declaration) as path:
-            with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD124"):
-                interpreter_safety.load_declaration(path)
-
-    @contextlib.contextmanager
-    def _written(self, declaration: dict[str, object]):
-        with tempfile.TemporaryDirectory() as temporary:
-            path = Path(temporary) / "declaration.json"
-            path.write_text(json.dumps(declaration, indent=2), encoding="utf-8")
-            yield path
-
-
-class BidirectionalCorpusTests(unittest.TestCase):
-    """Neither side may define its own passing condition."""
-
-    #: Test-owned expectation, written independently of the declaration.
-    OWNED = {
-        "ISC001": "accepted",
-        "ISC002": "accepted",
-        "ISC003": "accepted",
-        "ISC004": "EPS001",
-        "ISC005": "EPS002",
-        "ISC006": "EPS003",
-        "ISC007": "EPS003",
-        "ISC008": "EPS004",
-        "ISC009": "EPS004",
-        "ISC010": "EPS005",
-        "ISC011": "EPS006",
-        "ISC012": "EPS007",
-        "ISC013": "EPS008",
-        "ISC014": "EPS009",
-        "ISC015": "EPS010",
-        "ISC016": "EPS011",
-        "ISC017": "accepted",
-        "ISC018": "accepted",
-    }
-
-    def test_every_declared_corpus_entry_is_owned_by_these_tests(self) -> None:
-        declared = {entry["id"]: entry["expected"] for entry in interpreter_safety.declared_corpus()}
-        self.assertEqual(sorted(self.OWNED), sorted(declared), "corpus identifiers diverge")
-        for identifier, expected in sorted(self.OWNED.items()):
-            with self.subTest(corpus=identifier):
-                self.assertEqual(expected, declared[identifier])
-
-    def test_every_declared_case_is_reachable_from_the_owned_corpus(self) -> None:
-        declared = {entry["id"] for entry in interpreter_safety.declared_cases()}
-        reached = set(self.OWNED.values()) - {"accepted"}
-        self.assertEqual(sorted(declared), sorted(reached))
-
-    def test_the_owned_case_set_equals_the_implemented_evaluation_order(self) -> None:
-        self.assertEqual(
-            sorted(interpreter_safety.EVALUATION_ORDER),
-            sorted(set(self.OWNED.values()) - {"accepted"}),
-        )
-
-    def test_every_unconstructable_entry_records_a_reason(self) -> None:
-        for entry in interpreter_safety.declared_corpus():
-            with self.subTest(corpus=entry["id"]):
-                if sorted(entry["constructable_on"]) != sorted(interpreter_safety.PLATFORMS):
-                    self.assertIn("unconstructable_reason", entry)
-                    self.assertTrue(entry["unconstructable_reason"].strip())
-
-
 class RuleEvaluationTests(unittest.TestCase):
-    """Build each corpus form for real and assert the outcome both loaders give."""
+    """Build each corpus form for real and assert the case the rule yields."""
 
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.fixture = _Fixture(Path(self.temporary.name).resolve())
-        self.declared = {
-            entry["id"]: entry for entry in interpreter_safety.declared_corpus()
-        }
 
     def _require(self, corpus_id: str) -> None:
-        entry = self.declared[corpus_id]
-        if PLATFORM not in entry["constructable_on"]:
-            self.skipTest(f"{corpus_id} on {PLATFORM}: {entry.get('unconstructable_reason', '')}")
+        if PLATFORM not in CORPUS_CONSTRUCTABLE_ON[corpus_id]:
+            self.skipTest(f"{corpus_id} on {PLATFORM}: {CORPUS_UNCONSTRUCTABLE_REASON.get(corpus_id, '')}")
 
     def _both(self, path: Path | str, **kwargs: object) -> str | None:
-        first = interpreter_safety.refusal_case(path, **kwargs)  # type: ignore[arg-type]
-        second = tools_safety.refusal_case(path, **kwargs)  # type: ignore[arg-type]
-        self.assertEqual(
-            first,
-            second,
-            f"the two loaders disagree for {path!r}: se_harness={first} repository_tools={second}",
-        )
-        return first
+        return interpreter_safety.refusal_case(path, **kwargs)  # type: ignore[arg-type]
 
     def test_isc001_ordinary_file_entry_is_accepted(self) -> None:
         self._require("ISC001")
@@ -481,7 +355,7 @@ class RuleEvaluationTests(unittest.TestCase):
     def test_isc016_a_runtime_without_either_predicate_route_refuses(self) -> None:
         self._require("ISC016")
         entry = self.fixture.environment("env")
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 with mock.patch.object(loader, "link_classification_available", return_value=False):
                     self.assertEqual("EPS011", loader.refusal_case(entry))
@@ -863,9 +737,8 @@ class JunctionPredicateTests(unittest.TestCase):
     refuses.
     """
 
-    def test_both_loaders_report_the_capability_on_this_runtime(self) -> None:
+    def test_the_loader_reports_the_capability_on_this_runtime(self) -> None:
         self.assertTrue(interpreter_safety.link_classification_available())
-        self.assertTrue(tools_safety.link_classification_available())
 
     def test_at_least_one_route_is_present_on_every_supported_runtime(self) -> None:
         pathlib_route = hasattr(Path, "is_junction")
@@ -890,7 +763,7 @@ class JunctionPredicateTests(unittest.TestCase):
                 )
 
     def test_the_stat_route_alone_reports_the_capability(self) -> None:
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 with _routes(
                     loader, pathlib_route=False, stat_route=True, reparse_observable=True
@@ -898,7 +771,7 @@ class JunctionPredicateTests(unittest.TestCase):
                     self.assertTrue(loader.link_classification_available())
 
     def test_the_pathlib_route_alone_reports_the_capability(self) -> None:
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 with _routes(
                     loader, pathlib_route=True, stat_route=False, reparse_observable=True
@@ -914,7 +787,7 @@ class JunctionPredicateTests(unittest.TestCase):
         pinned lane. The third route decides it instead.
         """
 
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 with _routes(
                     loader, pathlib_route=False, stat_route=False, reparse_observable=False
@@ -940,7 +813,7 @@ class JunctionPredicateTests(unittest.TestCase):
             (False, False, False): True,
         }
         for (pathlib_route, stat_route, reparse_observable), expected in sorted(owned.items()):
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(
                     loader=loader.__name__,
                     pathlib_route=pathlib_route,
@@ -956,7 +829,7 @@ class JunctionPredicateTests(unittest.TestCase):
                         self.assertEqual(expected, loader.link_classification_available())
 
     def test_reparse_observability_is_reported_from_the_stat_result_members(self) -> None:
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 self.assertEqual(
                     all(
@@ -1005,7 +878,7 @@ class JunctionPredicateTests(unittest.TestCase):
                         self.assertNotIn(marker, statements)
 
     def test_withdrawing_both_routes_reports_no_capability(self) -> None:
-        for loader in (interpreter_safety, tools_safety):
+        for loader in (interpreter_safety,):
             with self.subTest(loader=loader.__name__):
                 with _without_routes(
                     loader, pathlib_route=False, stat_route=False, reparse_observable=True
@@ -1016,7 +889,7 @@ class JunctionPredicateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = _Fixture(Path(temporary).resolve())
             entry = fixture.environment("env")
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     with _without_routes(
                         loader, pathlib_route=False, stat_route=False, reparse_observable=True
@@ -1034,7 +907,7 @@ class JunctionPredicateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = _Fixture(Path(temporary).resolve())
             entry = fixture.environment("env")
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     with _routes(
                         loader, pathlib_route=False, stat_route=False, reparse_observable=False
@@ -1048,7 +921,7 @@ class JunctionPredicateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = _Fixture(Path(temporary).resolve())
             entry = fixture.environment("env")
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     with mock.patch.object(
                         loader, "link_classification_available", return_value=False
@@ -1072,7 +945,7 @@ class JunctionPredicateTests(unittest.TestCase):
             predicate = getattr(Path, "is_junction", None)
             if predicate is not None:
                 self.assertTrue(predicate(alias), "the two routes must agree")
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     self.assertTrue(loader._is_junction(alias))
                     with _without_routes(loader, pathlib_route=False, stat_route=True):
@@ -1084,7 +957,7 @@ class JunctionPredicateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             ordinary = Path(temporary).resolve() / "plain"
             ordinary.mkdir()
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     self.assertFalse(loader._is_junction(ordinary))
                     with _without_routes(loader, pathlib_route=False, stat_route=True):
@@ -1098,101 +971,12 @@ class JunctionPredicateTests(unittest.TestCase):
             (base / "real").mkdir()
             alias = base / "alias"
             alias.symlink_to(base / "real", target_is_directory=True)
-            for loader in (interpreter_safety, tools_safety):
+            for loader in (interpreter_safety,):
                 with self.subTest(loader=loader.__name__):
                     self.assertTrue(loader._is_symlink(alias))
                     self.assertFalse(
                         loader._is_junction(alias), "the two predicates must stay distinct"
                     )
-
-
-class BoundaryRegistryTests(unittest.TestCase):
-    def test_the_registry_matches_an_independent_inventory(self) -> None:
-        rule_modules: dict[str, int] = {}
-        delegating_modules: dict[str, int] = {}
-        for entry in interpreter_safety.declared_boundaries():
-            bucket = rule_modules if entry["kind"] == "rule" else delegating_modules
-            bucket[entry["module"]] = bucket.get(entry["module"], 0) + 1
-        self.assertEqual(EXPECTED_RULE_BOUNDARIES, rule_modules)
-        self.assertEqual(EXPECTED_DELEGATING_BOUNDARIES, delegating_modules)
-
-    def test_the_independent_inventory_matches_what_the_packages_actually_do(self) -> None:
-        reaches: set[str] = set()
-        delegates: set[str] = set()
-        for package in ("se_harness", "repository_tools"):
-            for source in sorted((REPOSITORY_ROOT / package).glob("*.py")):
-                relative = source.relative_to(REPOSITORY_ROOT).as_posix()
-                if relative in LOADER_MODULES:
-                    continue
-                text = source.read_text(encoding="utf-8")
-                if "interpreter_safety" in text:
-                    reaches.add(relative)
-                elif "_safe_interpreter" in text:
-                    delegates.add(relative)
-        self.assertEqual(sorted(EXPECTED_RULE_BOUNDARIES), sorted(reaches))
-        self.assertEqual(sorted(EXPECTED_DELEGATING_BOUNDARIES), sorted(delegates))
-
-    def test_every_registered_module_exists_and_names_its_own_runtime(self) -> None:
-        for entry in interpreter_safety.declared_boundaries():
-            with self.subTest(boundary=entry["id"]):
-                self.assertTrue((REPOSITORY_ROOT / entry["module"]).is_file())
-                self.assertTrue(entry["module"].startswith(f"{entry['runtime']}/"))
-                self.assertTrue(entry["id"].startswith(f"{entry['runtime']}."))
-
-    def test_an_unregistered_validation_fails_the_registry_check(self) -> None:
-        rule_modules = {
-            entry["module"]
-            for entry in interpreter_safety.declared_boundaries()
-            if entry["kind"] == "rule"
-        }
-        self.assertNotIn("se_harness/installer.py", rule_modules)
-        inflated = dict(EXPECTED_RULE_BOUNDARIES)
-        inflated["se_harness/installer.py"] = 1
-        self.assertNotEqual(
-            inflated,
-            {
-                entry["module"]: 1
-                for entry in interpreter_safety.declared_boundaries()
-                if entry["kind"] == "rule"
-            },
-        )
-
-    def test_boundary_identifiers_can_be_filtered_by_runtime(self) -> None:
-        for runtime in interpreter_safety.RUNTIMES:
-            with self.subTest(runtime=runtime):
-                identifiers = interpreter_safety.boundary_identifiers(runtime)
-                for identifier in identifiers:
-                    self.assertTrue(identifier.startswith(f"{runtime}."))
-        self.assertEqual(
-            len(interpreter_safety.declared_boundaries()),
-            sum(
-                len(interpreter_safety.boundary_identifiers(runtime))
-                for runtime in interpreter_safety.RUNTIMES
-            ),
-        )
-        # WO-REB-028: every declared site is a package one now. The second loader
-        # stays held to the same declaration by the conformance cases above, so an
-        # empty runtime is a real state of the registry rather than a gap in it.
-        self.assertEqual((), interpreter_safety.boundary_identifiers("repository_tools"))
-        self.assertTrue(interpreter_safety.boundary_identifiers("se_harness"))
-
-    def test_the_declaration_names_no_retired_predecessor_module(self) -> None:
-        # WO-REB-028: no declared site may name a file the work order deleted.
-        boundaries = interpreter_safety.declared_boundaries()
-        modules = {entry["module"] for entry in boundaries}
-        for relative in (
-            "repository_tools/release_bootstrap.py",
-            "repository_tools/predecessor_preparation.py",
-            "repository_tools/predecessor_publication.py",
-            "repository_tools/predecessor_assessment.py",
-        ):
-            with self.subTest(module=relative):
-                self.assertNotIn(relative, modules)
-                self.assertFalse((REPOSITORY_ROOT / relative).exists())
-        self.assertNotIn(
-            "se_harness.release_qualification.external_evaluator",
-            {entry["id"] for entry in boundaries},
-        )
 
 
 class ImportBarrierTests(unittest.TestCase):
@@ -1327,15 +1111,20 @@ class StaticArchitectureTests(unittest.TestCase):
                 text = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
                 self.assertIn("interpreter_safety", text)
 
-    def test_the_declaration_ships_as_package_data(self) -> None:
+    def test_no_declaration_ships_and_no_second_loader_exists(self) -> None:
+        # WO-REB-030: the rule is code; nothing reads it as data.
         text = (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")
-        self.assertIn('"interpreter_safety.json",', text)
+        self.assertNotIn("interpreter_safety.json", text)
+        self.assertFalse((REPOSITORY_ROOT / "se_harness/interpreter_safety.json").exists())
+        self.assertFalse((REPOSITORY_ROOT / "repository_tools/interpreter_safety.py").exists())
+        for name in ("load_declaration", "declared_boundaries", "declared_corpus", "ISD1"):
+            self.assertNotIn(name, (REPOSITORY_ROOT / "se_harness/interpreter_safety.py").read_text(encoding="utf-8"))
 
-    def test_the_declaration_appears_in_the_portable_release_surface_list(self) -> None:
+    def test_the_rule_module_appears_in_the_portable_release_surface_list(self) -> None:
         text = (REPOSITORY_ROOT / "scripts/check_portable_release_surface.py").read_text(
             encoding="utf-8"
         )
-        self.assertIn('"se_harness/interpreter_safety.json"', text)
+        self.assertNotIn('"se_harness/interpreter_safety.json"', text)
         self.assertIn('"se_harness/interpreter_safety.py"', text)
         self.assertIn("REQUIRED_INTERPRETER_SAFETY_MEMBERS", text)
 
@@ -1376,10 +1165,11 @@ class PlatformCoverageTests(unittest.TestCase):
     def test_every_corpus_entry_is_constructable_on_at_least_one_platform_or_records_why_not(
         self,
     ) -> None:
-        for entry in interpreter_safety.declared_corpus():
-            with self.subTest(corpus=entry["id"]):
-                if not entry["constructable_on"]:
-                    self.assertIn("unconstructable_reason", entry)
+        for corpus_id, platforms in CORPUS_CONSTRUCTABLE_ON.items():
+            with self.subTest(corpus=corpus_id):
+                if not platforms:
+                    self.assertIn(corpus_id, CORPUS_UNCONSTRUCTABLE_REASON)
+                self.assertLessEqual(set(platforms), set(interpreter_safety.PLATFORMS))
 
 
 if __name__ == "__main__":

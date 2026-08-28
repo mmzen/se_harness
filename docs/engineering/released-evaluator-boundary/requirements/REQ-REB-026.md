@@ -21,6 +21,12 @@ decided_by = "requirements-steward"
 
 # Requirement: Use one declared interpreter-safety rule at every identity boundary
 
+## Retirement amendment of 2026-08-28
+
+Retired on 2026-08-28 by `REQ-REB-030` under `WO-REB-030`, on the owner's approval for issue #220. The obligation was one rule *shared by the package runtime and the repository-tools runtime*; `WO-REB-028` deleted the four `repository_tools` boundaries and `release_qualification.py`'s, and `WO-ECP-011` deleted the migration probe, so one boundary remains (`se_harness/runtime_identity.py`) in one runtime and there is no second runtime to share with. The rule itself, its `EPS` refusals (`REQ-REB-024`) and the terminal-link acceptance (`REQ-REB-023`) are unchanged and now stated in code under `REQ-REB-030`. The rationale, required response and boundary behaviour below record what the repository did while this requirement was active and are retained unchanged as history; they are no longer obligations.
+
+The declared `superseded` status is not applied, for the reason `WO-REB-028` recorded for `REQ-REB-012`: the definition lifecycle admits no `approved` to `superseded` edge. The retirement is recorded here instead.
+
 ## Rationale
 
 The 0.6.0 defect is not one wrong line. Six boundaries independently decide what a safe interpreter path is, and they disagree in ways that a passing test suite does not expose:

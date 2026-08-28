@@ -20,6 +20,10 @@ reason = "Approved on 2026-08-27 by the accountable owner, 'I approve the artifa
 
 # Verification Contract: Retired predecessor-bootstrap surface and retained-history assurance
 
+## Amendment of 2026-08-28 (`WO-REB-030`)
+
+The two conditions naming `se_harness/interpreter_safety.json` are retired with the declaration (`SPEC-REB-015`); the remaining conditions are unchanged.
+
 ## Independence
 
 The retained-history cases run the exact public 0.6.0 evaluator from a virtual

@@ -19,6 +19,10 @@ decided_by = "quality-owner"
 
 # Verification Contract: Independent verification of environment entry-point safety
 
+## Amendment of 2026-08-28 (`WO-REB-030`)
+
+The four `REQ-REB-026` rows (boundary registry, cross-runtime corpus, bidirectional declaration check, import barrier) are retired with that requirement; the import-barrier check continues under `VER-REB-014`. The `REQ-REB-023`, `REQ-REB-024` and `REQ-REB-025` rows remain the verification of the rule's behaviour and are exercised by the behavioural classes `WO-REB-030` kept.
+
 ## Independence
 
 Verification shall not infer correctness from the declaration's own text, from a loader's return value, from a shared constant, or from a docstring claiming a property. Tests construct real filesystem objects — ordinary directories, symbolic links, Windows junctions, dangling links, short-name aliases, case variants, and files inside and outside a checkout — and assert the outcome each boundary produces for each of them.
