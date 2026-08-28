@@ -90,3 +90,7 @@ Legacy binding for the 0.8.0 governor:
 artifact: WO-RLS-015
 checkpoint: handoff
 formal_snapshot_sha256: 3fa898f0c027fdfac8f6c54df562d290018a52f7d95ac0a66c70957f48644ae8
+
+## 7. Hosted lanes
+
+Pull request #252 at `2950b7c`: all 13 lanes pass, both platform legs of the suite and the 0.8.0-to-0.9.0 upgrade rehearsal included; the publication rehearsal qualified this commit's own recipe in candidate mode.
