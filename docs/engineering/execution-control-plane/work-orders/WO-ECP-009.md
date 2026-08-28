@@ -2,7 +2,7 @@
 id = "WO-ECP-009"
 type = "work_order"
 title = "One precondition engine: transition evaluates the contract's gates"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -24,6 +24,8 @@ paths = [
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/notes/harnessctl-reference.md",
+  "docs/engineering/workflow-execution/specifications/SPEC-WEX-002.md",
 ]
 
 [relations]
@@ -31,6 +33,27 @@ implements = ["REQ-ECP-009"]
 specifications = ["SPEC-ECP-005"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-004"]
 verification = ["VER-ECP-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:40:49Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'go WO-ECP-009', after #239 merged WO-ECP-005 and VREC-ECP-005. Authorizes only the listed execution scope: plan_transition evaluating the contract's transition bindings through the gate evaluator with one context builder, _validate_preconditions reduced to the graph-structural list reported as QGS- predicates, ensure_governed_checkpoint reduced to its contract-load and integrity refusals, predicate-level checkpoints and the transition bindings in the quality-gates contract and its managed renderings, check --checkpoint transition --target as a public preview, one preflight-diagnostic filter, refusals labelled by predicate, tests and evidence. Start, completion, commit-bound verification and release are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T12:40:51Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner in the same decision as the approval, 'go WO-ECP-009'. Execution is confined to the approved scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T13:07:55Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-08-28 on the owner's direction for this sequence, once the hosted lanes were green at 33eda62. The handoff checkpoint reads Completed under the released 0.7.1 evaluator outside the checkout over the complete thirteen-path change set after the owner's scope amendment. Delivered: quality-gates contract v2 with predicate-level checkpoints and the transition binding index; plan_transition evaluating every transitioned artifact through the gate evaluator check uses with one context builder and the graph-structural QGS- predicates, rendering blocked results that name each refusing check and failing closed on apply; check --checkpoint transition --target as the public preview; one preflight-diagnostic filter; ensure_governed_checkpoint reduced to contract and integrity refusals; refusals coded by predicate and repository blockers by exception type; QUALITY_GATES.md, the reference note and the SPEC-WEX-002 amendment; tests and evidence. WO-ECP-005's golden focus digest is unchanged. Disclosed: the Phase 4 delegated completion needs handoff-bound evidence it does not retain (WO-ECP-006), and the corrected handoff declaration of commit 7557801. Completion is not verification."
 +++
 
 # Work Order: One precondition engine: transition evaluates the contract's gates
@@ -87,6 +110,15 @@ not happen.
   (`ECP-KRN-008`).
 - `QG-010` in `QUALITY_GATES.md` restated as what the code does.
 - Tests; work-order-keyed evidence.
+
+Amended on 2026-08-28 by the accountable owner during execution, on the
+implementer's escalation ("Amend scope, include both"):
+`docs/notes/harnessctl-reference.md` and
+`docs/engineering/workflow-execution/specifications/SPEC-WEX-002.md` are added
+to the execution scope, so the reference describes the
+`check --checkpoint transition --target` preview and the specification's
+line naming `se-harness-quality-gates-v1` carries a dated amendment to the v2
+contract this work order ships. No other scope change.
 
 ## Out of scope
 

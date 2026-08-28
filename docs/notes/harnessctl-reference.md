@@ -103,7 +103,7 @@ not derive a new transition or next action from this reference.
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
   [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  --checkpoint start|pre-action|handoff \
+  --checkpoint start|pre-action|transition|handoff [--target STATE] \
   [--procedure PROC-...] [--changed-path PATH ...] [--changes-complete] \
   [--change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
@@ -120,7 +120,14 @@ background count; `--include-background` expands categories without making
 them selected-scope work.
 
 `check` resolves the first matching rule, its typed `PROC-*` procedure, and its
-`QG-*` gates. `pre-action` requires `--procedure`, which must equal the selected
+`QG-*` gates. `--checkpoint transition --target STATE` previews, read-only, the
+exact predicates and graph-structural checks `transition --set ID=STATE` will
+evaluate (`WO-ECP-009`): the transition binding index of `QUALITY_GATES.json`
+keyed by artifact family and target state, evaluated by the same gate evaluator
+with the same context, plus the `QGS-*` checks under the synthetic
+`QG-STRUCTURAL` gate. A transition whose evaluation is not all `pass` renders
+`Blocked by` with each refusing predicate's own identifier and writes nothing;
+an applied transition that would be blocked fails closed with that identifier. `pre-action` requires `--procedure`, which must equal the selected
 procedure or one complete declared alternative. `--changed-path` may repeat;
 `--changes-complete` asserts that the supplied set is complete, including an
 empty set. The assertion is evidence, not proof from a trusted Git baseline.

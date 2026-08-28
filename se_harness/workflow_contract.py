@@ -11,7 +11,19 @@ from typing import Any, Iterable, Mapping
 
 
 WORKFLOW_SCHEMA = "se-harness-workflow-v4"
-QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v1"
+QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v2"
+RETIRED_QUALITY_GATES_SCHEMAS = frozenset({"se-harness-quality-gates-v1"})
+#: Graph-structural transition checks (SPEC-ECP-005 Terms): properties of the
+#: artifact graph shape alone, kept in Python and reported as predicates.
+STRUCTURAL_CHECKS = frozenset({
+    "QGS-EDGE",
+    "QGS-ASSURANCE",
+    "QGS-VREC-COVERAGE",
+    "QGS-RLS-COVERAGE",
+    "QGS-VERIFIED-INCLUSION",
+    "QGS-SUCCESSOR",
+})
+BINDING_FIELDS = frozenset({"family", "target", "artifact_types", "predicates", "structural"})
 STEP_KINDS = {"command", "decision", "reference"}
 CORRECTIVE_KINDS = {"command", "escalation", "response"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
@@ -42,6 +54,17 @@ _ID_PATTERNS = {
     "gate": re.compile(r"^QG-[A-Z0-9-]+$"),
     "predicate": re.compile(r"^QGP-[A-Z0-9-]+$"),
 }
+DEFINITION_TYPES = frozenset({
+    "intent",
+    "capability",
+    "requirement",
+    "specification",
+    "architecture",
+    "adr",
+    "verification",
+    "release_contract",
+    "operating_contract",
+})
 LIFECYCLE_FAMILIES = frozenset(
     {"definition", "work_order", "verification_record", "release_record"}
 )
@@ -191,7 +214,44 @@ def load_workflow_contract(path: Path | None = None) -> dict[str, Any]:
 
 
 def load_quality_gate_contract(path: Path | None = None) -> dict[str, Any]:
-    return _load(path or Path(__file__).with_name("quality_gates_contract.json"), QUALITY_GATES_SCHEMA)
+    target = path or Path(__file__).with_name("quality_gates_contract.json")
+    try:
+        return _load(target, QUALITY_GATES_SCHEMA)
+    except ContractError as exc:
+        try:
+            observed = json.loads(target.read_bytes().decode("utf-8")).get("schema")
+        except Exception:  # noqa: BLE001 - the original error is the one to report
+            raise exc from None
+        if observed in RETIRED_QUALITY_GATES_SCHEMAS:
+            raise ContractError(
+                f"WEX-ECP-030: {target} uses retired schema {observed}; the transition bindings of "
+                f"{QUALITY_GATES_SCHEMA} are required, upgrade the installed contract"
+            ) from exc
+        raise
+
+
+def effective_checkpoints(gate: Mapping[str, Any], predicate: Mapping[str, Any]) -> frozenset[str]:
+    """A predicate's own `checkpoints` when declared, else its gate's (ECP-KRN-009)."""
+
+    declared = predicate.get("checkpoints")
+    if declared is None:
+        return frozenset(str(item) for item in gate.get("checkpoints", ()))
+    return frozenset(str(item) for item in declared)
+
+
+def transition_binding(
+    quality_gates: Mapping[str, Any], family: str, artifact_type: str, target: str
+) -> tuple[list[str], list[str]]:
+    """Return (predicate ids, structural check ids) bound to one lifecycle edge."""
+
+    for binding in quality_gates.get("transition_bindings", []):
+        if binding.get("family") != family or binding.get("target") != target:
+            continue
+        types = binding.get("artifact_types")
+        if types is not None and artifact_type not in types:
+            continue
+        return [str(item) for item in binding.get("predicates", [])], [str(item) for item in binding.get("structural", [])]
+    raise ContractError(f"WEX-ECP-030: no transition binding for {family}:{artifact_type} -> {target}")
 
 
 def _identifier(kind: str, value: object) -> str:
@@ -387,6 +447,66 @@ def _validate_procedures(
     return procedures
 
 
+def _validate_transition_bindings(
+    workflow: Mapping[str, Any],
+    quality_gates: Mapping[str, Any],
+    gates: Mapping[str, Mapping[str, Any]],
+    predicates: Mapping[str, Mapping[str, Any]],
+) -> None:
+    """Every lifecycle edge is bound to transition predicates or structural checks (ECP-KRN-009)."""
+
+    raw = quality_gates.get("transition_bindings")
+    if not isinstance(raw, list) or not raw:
+        raise ContractError("WEX-ECP-030: quality-gate contract declares no transition bindings")
+    owner: dict[str, str] = {}
+    for gate_id, gate in gates.items():
+        for predicate in gate["predicates"]:
+            owner[str(predicate["id"])] = gate_id
+    seen: set[tuple[str, str, str | None]] = set()
+    bound: dict[tuple[str, str], set[str] | None] = {}
+    for binding in raw:
+        if not isinstance(binding, Mapping) or not {"family", "target", "predicates", "structural"}.issubset(binding) or not set(binding).issubset(BINDING_FIELDS):
+            raise ContractError("WEX-ECP-030: transition binding has invalid fields")
+        family = binding["family"]
+        target = binding["target"]
+        if family not in LIFECYCLE_FAMILIES or not isinstance(target, str) or _STATE_NAME.fullmatch(target) is None:
+            raise ContractError(f"WEX-ECP-030: transition binding names unknown family or state {family}:{target}")
+        types = binding.get("artifact_types")
+        if types is not None:
+            types = _strings(types, f"transition binding {family}:{target} artifact_types")
+            if family != "definition" or not set(types).issubset(DEFINITION_TYPES):
+                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} restricts artifact types it cannot")
+        for predicate_id in _strings(binding["predicates"], f"transition binding {family}:{target} predicates"):
+            gate_id = owner.get(predicate_id)
+            if gate_id is None:
+                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown predicate {predicate_id}")
+            if "transition" not in effective_checkpoints(gates[gate_id], predicates[predicate_id]):
+                raise ContractError(f"WEX-ECP-030: predicate {predicate_id} is bound to transition but does not declare that checkpoint")
+        for structural in _strings(binding["structural"], f"transition binding {family}:{target} structural"):
+            if structural not in STRUCTURAL_CHECKS:
+                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown structural check {structural}")
+        key = (family, target, None if types is None else ",".join(sorted(types)))
+        if key in seen:
+            raise ContractError(f"WEX-ECP-030: duplicate transition binding {family}:{target}")
+        seen.add(key)
+        covered = bound.setdefault((family, target), set())
+        if types is None:
+            bound[(family, target)] = None
+        elif covered is not None:
+            covered.update(types)
+    registry = validate_lifecycle_registry(workflow)
+    for family, states in registry.items():
+        for source, row in states.items():
+            for target in row.transitions_to:
+                covered = bound.get((family, target), set())
+                if covered is None:
+                    continue
+                if family != "definition" or not covered or not DEFINITION_TYPES.issubset(covered):
+                    raise ContractError(
+                        f"WEX-ECP-030: lifecycle edge {family}:{source} -> {target} has no transition binding"
+                    )
+
+
 def validate_contracts(
     workflow: Mapping[str, Any],
     quality_gates: Mapping[str, Any],
@@ -409,7 +529,7 @@ def validate_contracts(
     ]:
         raise ContractError("workflow restitution fields are not canonical")
     validate_lifecycle_registry(workflow)
-    if set(quality_gates) != {"schema", "aggregation", "gates"}:
+    if set(quality_gates) != {"schema", "aggregation", "gates", "transition_bindings"}:
         raise ContractError("quality-gate contract contains unknown or missing top-level fields")
     if quality_gates.get("aggregation") != ["fail", "not_assessable", "pass"]:
         raise ContractError("quality-gate aggregation must be fail > not_assessable > pass")
@@ -431,9 +551,13 @@ def validate_contracts(
         for predicate_id, predicate in local.items():
             if predicate_id in predicates:
                 raise ContractError(f"duplicate predicate ID: {predicate_id}")
-            allowed = {"id", "evaluator", "required_evidence", "statuses"}
+            allowed = {"id", "evaluator", "required_evidence", "statuses", "checkpoints"}
             if not set(predicate).issubset(allowed) or not {"id", "evaluator", "required_evidence"}.issubset(predicate):
                 raise ContractError(f"predicate {predicate_id} has invalid fields")
+            if "checkpoints" in predicate:
+                own = set(_strings(predicate["checkpoints"], f"predicate {predicate_id} checkpoints"))
+                if not own or not own.issubset(checkpoints):
+                    raise ContractError(f"predicate {predicate_id} declares checkpoints outside its gate")
             if predicate.get("evaluator") not in EVALUATORS:
                 raise ContractError(f"predicate {predicate_id} has unknown evaluator")
             evidence = predicate.get("required_evidence")
@@ -445,6 +569,7 @@ def validate_contracts(
     gate_predicates = {
         gate_id: [str(item["id"]) for item in gate["predicates"]] for gate_id, gate in gates.items()
     }
+    _validate_transition_bindings(workflow, quality_gates, gates, predicates)
     procedures = _validate_procedures(workflow, set(gates), gate_predicates)
     raw_operations = workflow.get("agentic_operations")
     if not isinstance(raw_operations, list) or len(raw_operations) != len(PHASE4_AGENTIC_OPERATIONS):

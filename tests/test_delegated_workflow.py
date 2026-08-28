@@ -330,7 +330,7 @@ stop_before = ["accountable-decision-required", "action-time-authorization-requi
         authority.start()
         self.addCleanup(authority.stop)
         preflight = mock.patch(
-            "se_harness.workflow.run_preflight",
+            "se_harness.workflow_compliance.run_preflight",
             return_value=SimpleNamespace(ready=True, diagnostics=[]),
         )
         preflight.start()
@@ -449,17 +449,39 @@ stop_before = ["accountable-decision-required", "action-time-authorization-requi
             "phase-4\n", encoding="utf-8", newline="\n"
         )
         evidence_path = "docs/engineering/product/evidence/WO-001-verification.md"
+        # WO-ECP-009: the transition to implemented evaluates QGP-G4I-EVIDENCE, which
+        # needs work-order evidence bound to the handoff checkpoint and the formal
+        # snapshot the transition sees. The delegated route retains no such binding
+        # itself yet (WO-ECP-006), and Phase 4's live-state continuity forbids an
+        # unreceipted write after start, so the fixture delivers the bound evidence
+        # through the receipted change bundle: the snapshot is taken once the work
+        # order is started, and the effect writes the document.
+        from se_harness.workflow import _validation
+        from se_harness.workflow_compliance import formal_snapshot_digest
+
+        _, report = _validation(self.root)
+        snapshot = formal_snapshot_digest(self.root, report.artifacts)
+        bound_evidence = (
+            (self.root / evidence_path).read_text(encoding="utf-8")
+            + f"\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {snapshot}\n"
+        )
+        baseline_evidence = baseline / evidence_path
+        baseline_evidence.parent.mkdir(parents=True, exist_ok=True)
+        baseline_evidence.write_bytes((self.root / evidence_path).read_bytes())
+        proposed_evidence = proposed / evidence_path
+        proposed_evidence.parent.mkdir(parents=True, exist_ok=True)
+        proposed_evidence.write_text(bound_evidence, encoding="utf-8", newline="\n")
         evidence = {
             "kind": "verification",
             "path": evidence_path,
-            "sha256": hashlib.sha256((self.root / evidence_path).read_bytes()).hexdigest(),
+            "sha256": hashlib.sha256(proposed_evidence.read_bytes()).hexdigest(),
         }
         effect = delegated_change_bundle_apply(
             self.root,
             work_order_id="WO-001",
             delegate="implementation-worker",
             execution_profile="implementer",
-            requested_paths=("src/value.txt",),
+            requested_paths=(evidence_path, "src/value.txt"),
             baseline_workspace=baseline,
             proposed_workspace=proposed,
             object_store=self.base / "objects",
@@ -496,7 +518,7 @@ stop_before = ["accountable-decision-required", "action-time-authorization-requi
                     effect.after_observation,
                 ),
             ),
-            changed_paths=("src/value.txt",),
+            changed_paths=(evidence_path, "src/value.txt"),
             tests=(test_result,),
             gates=(_gate("QG-G4-IMPLEMENTATION-EVIDENCE"),),
             evidence=(evidence,),
@@ -569,7 +591,11 @@ stop_before = ["accountable-decision-required", "action-time-authorization-requi
             "implemented", completion.after_observation.value["governance"]["work_order_status"]
         )
         self.assertEqual(
-            ["docs/engineering/product/work-orders/WO-001.md", "src/value.txt"],
+            [
+                "docs/engineering/product/evidence/WO-001-verification.md",
+                "docs/engineering/product/work-orders/WO-001.md",
+                "src/value.txt",
+            ],
             completion.receipt.value["effects"]["changed_paths"],
         )
         stop = delegated_vrec_prepare(

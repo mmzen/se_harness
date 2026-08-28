@@ -17,7 +17,8 @@ from unittest import mock
 
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
-from se_harness.workflow import apply_transition, focus, plan_transition
+from se_harness.workflow import PreconditionError, apply_transition, focus, plan_transition
+from se_harness.workflow_compliance import check_workflow
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
 from tests.fixture_support import standard_repository
@@ -126,6 +127,23 @@ paths = ["src/"]
             1,
         )
         path.write_text(text, encoding="utf-8")
+        return path
+
+    def bind_handoff_evidence(self, work_order_id: str = "WO-001") -> Path:
+        """Retain evidence bound to the handoff checkpoint at the current formal snapshot."""
+
+        from se_harness.workflow import _validation
+        from se_harness.workflow_compliance import formal_snapshot_digest
+
+        _, report = _validation(self.root)
+        snapshot = formal_snapshot_digest(self.root, report.artifacts)
+        path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        existing = path.read_text(encoding="utf-8") if path.exists() else f"# {work_order_id} evidence\n"
+        path.write_text(
+            existing + f"\nartifact: {work_order_id}\ncheckpoint: handoff\nformal_snapshot_sha256: {snapshot}\n",
+            encoding="utf-8",
+        )
         return path
 
     def test_focus_projects_only_selected_governing_chain(self) -> None:
@@ -282,15 +300,18 @@ paths = ["src/"]
                 message="differs from distribution template",
             )],
         )
-        with mock.patch("se_harness.workflow.run_preflight", return_value=distribution_only):
+        self.bind_handoff_evidence()
+        with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=distribution_only):
             plan = plan_transition(
                 self.root,
                 {"WO-001": "implemented"},
                 {"WO-001": "engineering-owner"},
                 {},
             )
-        self.assertEqual("completed", plan.result["operation"]["outcome"])
+        self.assertEqual("completed", plan.result["operation"]["outcome"], plan.result["restitution"]["blocked_by"])
         self.assertIn("no files were written", plan.result["restitution"]["done"][0])
+        self.assertEqual("transition", plan.result["compliance"]["checkpoint"])
+        self.assertEqual("pass", plan.result["compliance"]["status"])
         self.assertEqual('status = "in_progress"', next(
             line for line in path.read_text(encoding="utf-8").splitlines()
             if line.startswith("status =")
@@ -306,14 +327,31 @@ paths = ["src/"]
                 message="managed file changed",
             )],
         )
-        with mock.patch("se_harness.workflow.run_preflight", return_value=managed_failure):
-            with self.assertRaisesRegex(Exception, "managed file changed"):
+        self.bind_handoff_evidence()
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        before = work_order.read_bytes()
+        with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=managed_failure):
+            plan = plan_transition(
+                self.root,
+                {"WO-001": "implemented"},
+                {"WO-001": "engineering-owner"},
+                {},
+            )
+            with self.assertRaises(PreconditionError) as raised:
                 plan_transition(
                     self.root,
                     {"WO-001": "implemented"},
                     {"WO-001": "engineering-owner"},
                     {},
+                    apply=True,
                 )
+        # ECP-KRN-004/-008: the plan is blocked, rendered under Blocked by with the
+        # refusing predicate's own identifier; an apply fails closed the same way.
+        self.assertEqual("blocked", plan.result["operation"]["outcome"])
+        self.assertEqual((), plan.writes)
+        self.assertEqual(["QGP-G4I-PREFLIGHT: managed file changed"], plan.result["restitution"]["blocked_by"])
+        self.assertEqual("QGP-G4I-PREFLIGHT", raised.exception.predicate_id)
+        self.assertEqual(before, work_order.read_bytes())
 
     def test_duplicate_identity_is_a_repository_blocker(self) -> None:
         write(
@@ -1218,3 +1256,135 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
             json.loads(plan_output)["restitution"]["current_lifecycle_state"],
             json.loads(focus_output)["restitution"]["current_lifecycle_state"],
         )
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+
+
+class OnePreconditionEngineTests(WorkflowExecutionTests):
+    """WO-ECP-009: `transition` evaluates the contract's gates through the evaluator `check` uses."""
+
+    READY_PREFLIGHT = SimpleNamespace(ready=True, diagnostics=[])
+
+    def gates_of(self, result: dict) -> list[tuple[str, str, str]]:
+        return [
+            (gate["id"], predicate["id"], predicate["status"])
+            for gate in result["compliance"]["gates"]
+            for predicate in gate["predicates"]
+        ]
+
+    def test_transition_plan_and_transition_check_agree_for_every_primary_state(self) -> None:
+        # ECP-KRN-007 conformance: identical compliance.gates for the same artifact,
+        # target and snapshot, from the planning path and the public preview.
+        self.ready_vrec()
+        cases = [("VREC-001", "verified", "assurance-owner")]
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        text = work_order.read_text(encoding="utf-8")
+        work_order.write_text(text.replace('status = "implemented"', 'status = "approved"', 1).replace(
+            "[relations]",
+            '[assurance]\ncommit_bound_verification = "required"\nrationale = "fixture"\ndecided_by = "repository-owner"\n\n[execution_scope]\npaths = ["src/"]\n\n[relations]',
+            1,
+        ), encoding="utf-8")
+        cases.append(("WO-001", "in_progress", "engineering-owner"))
+        with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=self.READY_PREFLIGHT):
+            for artifact_id, target, actor in cases:
+                with self.subTest(artifact=artifact_id, target=target):
+                    plan = plan_transition(self.root, {artifact_id: target}, {artifact_id: actor}, {})
+                    preview = check_workflow(self.root, artifact_id=artifact_id, checkpoint="transition", target=target)
+                    self.assertEqual(self.gates_of(preview), self.gates_of(plan.result))
+                    self.assertEqual("transition", plan.result["compliance"]["checkpoint"])
+                    self.assertEqual("transition", preview["compliance"]["checkpoint"])
+                    self.assertEqual(plan.result["restitution"]["outcome"], preview["restitution"]["outcome"])
+                    self.assertTrue(any(gate == "QG-STRUCTURAL" for gate, _, _ in self.gates_of(plan.result)))
+
+    def test_handoff_check_evaluates_a_superset_of_the_transition_to_implemented(self) -> None:
+        # Predicate-level checkpoints: the change-set predicates stay at handoff, every
+        # predicate transition evaluates is evaluated identically by handoff.
+        self.in_progress_work_order()
+        self.bind_handoff_evidence()
+        with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=self.READY_PREFLIGHT):
+            plan = plan_transition(self.root, {"WO-001": "implemented"}, {"WO-001": "engineering-owner"}, {})
+            handoff = check_workflow(self.root, artifact_id="WO-001", checkpoint="handoff", changed_paths=["src/a.py"], changes_complete=True)
+        transition_predicates = {(p, s) for g, p, s in self.gates_of(plan.result) if g != "QG-STRUCTURAL"}
+        handoff_predicates = {(p, s) for _, p, s in self.gates_of(handoff)}
+        self.assertTrue(transition_predicates.issubset(handoff_predicates), transition_predicates - handoff_predicates)
+        transition_ids = {p for p, _ in transition_predicates}
+        self.assertNotIn("QGP-G4I-COMPLETE", transition_ids)
+        self.assertNotIn("QGP-G4I-PATHS", transition_ids)
+        self.assertIn("QGP-G4I-COMPLETE", {p for p, _ in handoff_predicates})
+        self.assertEqual("completed", plan.result["operation"]["outcome"], plan.result["restitution"]["blocked_by"])
+
+    def test_a_predicate_added_to_the_contract_moves_transition_without_code_change(self) -> None:
+        # VER-ECP-005 scenario 2: bind one more predicate to the edge in a copy of the
+        # contract; the transition blocks naming it.
+        from se_harness import workflow_contract
+
+        self.in_progress_work_order()
+        self.bind_handoff_evidence()
+        contract = json.loads((REPOSITORY_ROOT / "se_harness/quality_gates_contract.json").read_text(encoding="utf-8"))
+        for binding in contract["transition_bindings"]:
+            if binding["family"] == "work_order" and binding["target"] == "implemented":
+                binding["predicates"].append("QGP-G4I-COMPLETE")
+        for gate in contract["gates"]:
+            for predicate in gate["predicates"]:
+                if predicate["id"] == "QGP-G4I-COMPLETE":
+                    predicate["checkpoints"] = ["pre-action", "transition", "handoff"]
+        mutated = self.root / "mutated-gates.json"
+        mutated.write_text(json.dumps(contract), encoding="utf-8")
+        original = workflow_contract.load_quality_gate_contract
+        with mock.patch.object(workflow_contract, "load_quality_gate_contract", lambda path=None: original(mutated)), \
+                mock.patch("se_harness.workflow_compliance.run_preflight", return_value=self.READY_PREFLIGHT):
+            plan = plan_transition(self.root, {"WO-001": "implemented"}, {"WO-001": "engineering-owner"}, {})
+        self.assertEqual("blocked", plan.result["operation"]["outcome"])
+        self.assertTrue(any(item.startswith("QGP-G4I-COMPLETE:") for item in plan.result["restitution"]["blocked_by"]), plan.result["restitution"]["blocked_by"])
+
+    def test_a_retired_gate_contract_is_refused_with_wex_ecp_030(self) -> None:
+        from se_harness.workflow_contract import ContractError, load_quality_gate_contract
+
+        contract = json.loads((REPOSITORY_ROOT / "se_harness/quality_gates_contract.json").read_text(encoding="utf-8"))
+        contract["schema"] = "se-harness-quality-gates-v1"
+        contract.pop("transition_bindings")
+        older = self.root / "older-gates.json"
+        older.write_text(json.dumps(contract), encoding="utf-8")
+        with self.assertRaisesRegex(ContractError, "WEX-ECP-030"):
+            load_quality_gate_contract(older)
+
+    def test_an_unbound_lifecycle_edge_fails_contract_loading(self) -> None:
+        from se_harness.workflow_contract import ContractError, load_quality_gate_contract, load_workflow_contract, validate_contracts
+
+        contract = json.loads((REPOSITORY_ROOT / "se_harness/quality_gates_contract.json").read_text(encoding="utf-8"))
+        contract["transition_bindings"] = [
+            item for item in contract["transition_bindings"]
+            if not (item["family"] == "verification_record" and item["target"] == "superseded")
+        ]
+        with self.assertRaisesRegex(ContractError, "WEX-ECP-030.*verification_record:ready -> superseded"):
+            validate_contracts(load_workflow_contract(), contract)
+
+    def test_refusals_carry_the_refusing_check_not_a_blanket_code(self) -> None:
+        # ECP-KRN-008: an illegal edge is QGS-EDGE, and the CLI labels it so.
+        code, output, error = self.invoke(
+            "transition", str(self.root), "--set", "WO-001=approved", "--decision", "WO-001=x", "--json"
+        )
+        self.assertEqual(1, code, error)
+        result = json.loads(output)
+        self.assertEqual("blocked", result["operation"]["outcome"])
+        self.assertEqual("QGS-EDGE", result["findings"]["scoped_blockers"][0]["code"])
+        self.assertIn("implemented -> approved is not allowed", result["restitution"]["blocked_by"][0])
+
+    def test_the_transition_preview_requires_and_limits_target(self) -> None:
+        code, output, _ = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "transition", "--json")
+        self.assertEqual(1, code)
+        self.assertIn("--target is required", json.loads(output)["restitution"]["blocked_by"][0])
+        code, output, _ = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--target", "verified", "--json"
+        )
+        self.assertEqual(1, code)
+        self.assertIn("applies only to the transition checkpoint", json.loads(output)["restitution"]["blocked_by"][0])
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "transition", "--target", "verified", "--json"
+        )
+        self.assertEqual(1, code, error)
+        result = json.loads(output)
+        self.assertIn("QGS-VREC-COVERAGE: work order WO-001 has no direct eligible verification record", result["restitution"]["blocked_by"])
+        self.assertEqual([], [w for w in result["mutation"]["writes"]])
+

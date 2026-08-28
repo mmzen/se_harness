@@ -105,6 +105,7 @@ harnessctl check [TARGET] --artifact ID --checkpoint start|pre-action|handoff
 - `WORKFLOW.json` schema `se-harness-workflow-v2` owns transitions, ordered
   rules, procedure bindings, effects, non-effects, and restitution selection.
 - `QUALITY_GATES.json` schema `se-harness-quality-gates-v1` owns executable gate
+  *Amended 2026-08-28 under `WO-ECP-009` (`REQ-ECP-009`, `SPEC-ECP-005` `ECP-KRN-009`): the contract version is `se-harness-quality-gates-v2`, which adds predicate-level `checkpoints` and the `transition_bindings` table; loading a v1 copy is `WEX-ECP-030`.*
   and predicate IDs, evaluation triggers, evidence requirements, and evaluator
   keys. `QUALITY_GATES.md` owns explanatory policy and is the bound human
   rendering of those executable fields; it must not redefine them.
