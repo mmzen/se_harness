@@ -32,10 +32,11 @@ After a released RLS is integrated into `main`, the release owner runs **Publish
 2. proves that the Git tag resolves to the record's candidate commit;
 3. finds the first main first-parent commit that integrated the released record;
 4. checks out that governance commit in a clean detached worktree;
-5. runs `qualify predecessor-view` with the independently released evaluator selected by that snapshot, retaining the exact external-predecessor result;
-6. generates the Explorer bundle using the snapshot's target-local generator;
-7. checks the exact public file allowlist, schema, provenance, and hashes;
-8. uploads one Pages artifact and deploys it through the `github-pages` environment.
+5. generates the Explorer bundle using the snapshot's target-local generator;
+6. checks the exact public file allowlist, schema, provenance, and hashes;
+7. uploads one Pages artifact and deploys it through the `github-pages` environment.
+
+Until `WO-REB-028` the stage also ran `qualify predecessor-view` with an independently released predecessor evaluator. That operation and the predecessor-compatible view it qualified were retired with the 0.5.0→0.6.0 bootstrap bridge (`ADR-REB-012`); the release-bound predecessor results retained under `docs/engineering/release-0-6-0/` are history, not a step the workflow still performs.
 
 A failure stops the replacement. It does not rewrite Git history, alter the GitHub Release, transition an artifact, or intentionally delete the previous successful site.
 
@@ -85,4 +86,4 @@ The deployment uses immutable action pins, read-only source access, a dedicated 
 
 The site is a best-effort demonstration, not a production assurance service. See the formal [`OPS-DPG-001`](../engineering/dashboard-publication/operations/OPS-DPG-001.md) for failure handling, replay, security controls, and evidence retention. GitHub documents the underlying [custom Pages workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages); repository policy remains authoritative for this implementation.
 
-The workflow does not call the repository predecessor-validation script directly. The typed `predecessor-view` handler owns that fixed service and derives the external entry point and installed wheel provenance from the selected interpreter. It accepts no caller-selected script, omission, or expected diagnostic.
+The workflow runs no predecessor evaluator and accepts no caller-selected script, omission, or expected diagnostic. The only remaining mechanism for showing that a predecessor evaluator and its successor agree is the no-network `harnessctl rehearse-migration` rehearsal described in [evaluator migration rehearsal](evaluator-migration-rehearsal.md).
