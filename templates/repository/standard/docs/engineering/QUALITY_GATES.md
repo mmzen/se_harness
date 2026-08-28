@@ -24,9 +24,19 @@ MUST be byte-identical to the packaged contract loaded by `harnessctl`.
 MUST be reported even after another predicate fails.
 
 **QG-010:** `harnessctl check` MUST evaluate gates at `start`, `pre-action`,
-and `handoff`. Transition planning and apply MUST recheck machine-contract and
-repository-integrity predicates before writing. Preparation commands MUST run
-the same governed checkpoint service before writing a VREC or RLS.
+`transition`, and `handoff`. Transition planning and apply MUST evaluate, for
+every transitioned artifact, the predicates the transition binding index binds
+to that lifecycle edge through the same gate evaluator `check` uses, plus the
+graph-structural checks it names, and MUST NOT write when any of them is not
+`pass`. `harnessctl check --checkpoint transition --target STATE` renders the
+same evaluation read-only. Preparation commands MUST run the same governed
+checkpoint service before writing a VREC or RLS.
+
+**QG-011:** A predicate MAY declare its own `checkpoints`; when it does not, it
+inherits its gate's. A predicate whose inputs a transition does not receive
+(the declared change set) is bound to `pre-action` and `handoff` only, so the
+`handoff` checkpoint evaluates a superset of what the transition to
+`implemented` evaluates, never a different set.
 
 ## Executable predicate registry
 
@@ -66,6 +76,49 @@ trusted change baseline.
 | `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |
 | `QG-G5-RELEASE-DECISION` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` |
 | `QG-G5-EXTERNAL-ACTION` | `QGP-G5E-STATUS`, `QGP-G5E-GRAPH`, `QGP-G5E-INTEGRITY` |
+
+## Transition binding index
+
+Each lifecycle edge is bound to the predicates a transition evaluates and to the
+graph-structural checks that stay in the evaluator. Contract loading fails with
+`WEX-ECP-030` when an edge of the lifecycle registry has no binding.
+
+| Family | Target | Predicate IDs | Structural checks |
+| --- | --- | --- | --- |
+| definition (intent, capability, requirement, verification, operating contract) | `approved` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` | `QGS-EDGE` |
+| definition (specification, architecture, ADR) | `approved` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` | `QGS-EDGE` |
+| definition (release contract) | `approved` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` | `QGS-EDGE` |
+| definition | `implemented`, `rejected` | none | `QGS-EDGE` |
+| work order | `approved` | `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY` | `QGS-EDGE`, `QGS-ASSURANCE` |
+| work order | `in_progress` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` | `QGS-EDGE` |
+| work order | `implemented` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` | `QGS-EDGE` |
+| work order | `verified` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` | `QGS-EDGE`, `QGS-VREC-COVERAGE` |
+| work order | `released` | `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` | `QGS-EDGE`, `QGS-RLS-COVERAGE` |
+| work order | `rejected` | none | `QGS-EDGE` |
+| verification record | `verified` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` | `QGS-EDGE` |
+| verification record | `superseded` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` | `QGS-EDGE`, `QGS-SUCCESSOR` |
+| verification record | `rejected` | none | `QGS-EDGE` |
+| release record | `released` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` | `QGS-EDGE`, `QGS-VERIFIED-INCLUSION` |
+| release record | `rejected` | none | `QGS-EDGE` |
+
+At the `transition` checkpoint `review_evidence_available` accepts the
+work-order evidence bound to the `handoff` checkpoint at the same formal
+snapshot, so a transition never passes on weaker evidence than `check` saw.
+
+### Graph-structural checks
+
+Properties of the artifact graph shape alone, evaluated by the evaluator and
+reported under the synthetic gate `QG-STRUCTURAL` so every refusal names its
+check.
+
+| Check | Exact assessment |
+| --- | --- |
+| `QGS-EDGE` | The source-to-target edge is declared in the lifecycle registry and permitted by the revision provenance policy. |
+| `QGS-ASSURANCE` | A work order leaving `draft` classifies `commit_bound_verification` as `required` or `not_required`. |
+| `QGS-VREC-COVERAGE` | A work order becoming `verified` is covered by a verified or released verification record. |
+| `QGS-RLS-COVERAGE` | A work order becoming `released` is released by a released release record. |
+| `QGS-VERIFIED-INCLUSION` | Every verification record a release record includes is verified before the record is released. |
+| `QGS-SUCCESSOR` | A superseded verification record names a verified or released successor that preserves its work coverage. |
 
 ## Gate catalog
 

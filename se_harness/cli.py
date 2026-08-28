@@ -70,7 +70,13 @@ from se_harness.workflow_result import (
     render_human as render_workflow_human_v2,
     render_json as render_workflow_json_v2,
 )
-from se_harness.workflow import failed_result, focus, plan_transition, preparation_result
+from se_harness.workflow import (
+    RepositoryWorkflowError,
+    failed_result,
+    focus,
+    plan_transition,
+    preparation_result,
+)
 
 
 def _scan_repository(target: Path) -> bytes:
@@ -359,6 +365,7 @@ def _check(args: argparse.Namespace) -> int:
             changes_complete=args.changes_complete,
             change_manifest=Path(args.change_manifest) if args.change_manifest else None,
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
+            target=args.target_state,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         result = failed_result("check", args.artifact, str(exc), code="WEX210")
@@ -426,13 +433,12 @@ def _focus(args: argparse.Namespace) -> int:
             include_background=args.include_background,
         )
     except HarnessError as exc:
-        message = str(exc)
         result = failed_result(
             "focus",
             args.artifact,
-            message,
+            str(exc),
             code="WEX101",
-            repository_blocker=_repository_workflow_error(message),
+            repository_blocker=isinstance(exc, RepositoryWorkflowError),
         )
     print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -454,17 +460,10 @@ def _assignments(values: list[str], label: str) -> dict[str, str]:
     return result
 
 
-def _repository_workflow_error(message: str) -> bool:
-    return any(
-        marker in message
-        for marker in (
-            "[E001]",
-            "[E003]",
-            "formal artifact IDs are not unique",
-            "validator did not return",
-            "validator unavailable",
-        )
-    )
+def _refusal_code(exc: Exception) -> str:
+    """The identifier of the check that refused, else the operation's generic code (ECP-KRN-008)."""
+
+    return str(getattr(exc, "predicate_id", "") or "WEX201")
 
 
 def _transition(args: argparse.Namespace) -> int:
@@ -483,13 +482,12 @@ def _transition(args: argparse.Namespace) -> int:
         )
         result = plan.result
     except HarnessError as exc:
-        message = str(exc)
         result = failed_result(
             "transition",
             primary,
-            message,
-            code="WEX201",
-            repository_blocker=_repository_workflow_error(message),
+            str(exc),
+            code=_refusal_code(exc),
+            repository_blocker=isinstance(exc, RepositoryWorkflowError),
         )
     print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -962,8 +960,12 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("target", nargs="?", default=".")
     check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
     check.add_argument(
-        "--checkpoint", required=True, choices=("start", "pre-action", "handoff"),
+        "--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff"),
         help="fixed stateless evaluation checkpoint",
+    )
+    check.add_argument(
+        "--target", dest="target_state",
+        help="target lifecycle state; required for and limited to the transition checkpoint",
     )
     check.add_argument(
         "--procedure",

@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
-from se_harness.preflight import _load_validator_module, run_preflight
+from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
 
 
@@ -47,6 +47,18 @@ TRANSITIONS: dict[str, dict[str, set[str]]] = {
     for family, states in LIFECYCLE_REGISTRY.items()
 }
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
+
+
+class RepositoryWorkflowError(HarnessError):
+    """The repository cannot be evaluated at all: the validator or its identities failed."""
+
+
+class PreconditionError(HarnessError):
+    """A refused transition, labelled by the check that refused it (ECP-KRN-008)."""
+
+    def __init__(self, predicate_id: str, message: str) -> None:
+        super().__init__(message)
+        self.predicate_id = predicate_id
 
 
 @dataclass(frozen=True)
@@ -100,8 +112,11 @@ def _terminal_text(value: object) -> str:
 
 
 def _validation(root: Path) -> tuple[Any, Any]:
-    validator = _load_validator_module()
-    return validator, validator.validate_repository(root)
+    try:
+        validator = _load_validator_module()
+        return validator, validator.validate_repository(root)
+    except HarnessError as exc:
+        raise RepositoryWorkflowError(str(exc)) from exc
 
 
 def _catalog(report: Any) -> dict[str, Any]:
@@ -119,9 +134,9 @@ def _catalog(report: Any) -> dict[str, Any]:
         folded[key] = artifact.artifact_id
         catalog[artifact.artifact_id] = artifact
     if duplicates:
-        raise HarnessError(f"formal artifact IDs are not unique: {', '.join(sorted(duplicates))}")
+        raise RepositoryWorkflowError(f"formal artifact IDs are not unique: {', '.join(sorted(duplicates))}")
     if case_collisions:
-        raise HarnessError(
+        raise RepositoryWorkflowError(
             "formal artifact IDs are not unique under case-insensitive comparison: "
             + ", ".join(sorted(case_collisions, key=lambda item: (item.casefold(), item)))
         )
@@ -396,7 +411,7 @@ def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: s
     family = _family(artifact.artifact_type)
     row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
     if row is None or target not in row.transitions_to:
-        raise HarnessError(f"transition {artifact.artifact_id}: {artifact.status} -> {target} is not allowed")
+        raise PreconditionError("QGS-EDGE", f"transition {artifact.artifact_id}: {artifact.status} -> {target} is not allowed")
     _assertion(actor, f"decision actor for {artifact.artifact_id}", limit=128)
     if target in {"rejected", "superseded"}:
         if reason is None:
@@ -409,7 +424,7 @@ def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: s
     if family == "work_order" and artifact.status in {"implemented", "verified"}:
         setting = "required_for_verified_work" if target == "verified" else "required_for_release"
         if not policy[setting]:
-            raise HarnessError(f"work order transition to {target} is not enabled by revision provenance policy")
+            raise PreconditionError("QGS-EDGE", f"work order transition to {target} is not enabled by revision provenance policy")
 
 
 def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> list[Any]:
@@ -459,89 +474,104 @@ def _status(catalog: Mapping[str, Any], replacements_catalog: Mapping[str, Any],
     return replacements_catalog.get(artifact_id, catalog[artifact_id]).status
 
 
-def _workflow_preflight_blocker(report: Any) -> str | None:
-    """Return the first lifecycle-relevant preflight diagnostic.
-
-    A transition command can run from candidate source whose bundled
-    distribution templates intentionally differ from the installed released
-    harness.  Those candidate-distribution comparisons are not installation
-    integrity facts.  Managed/lock failures and every other preflight
-    diagnostic remain blocking.
-    """
-
-    for diagnostic in report.diagnostics:
-        if diagnostic.code == "I001" and str(diagnostic.path).startswith("distribution:"):
-            continue
-        return diagnostic.message
-    return None
+def _structural(predicate_id: str, status: str, message: str, artifact_id: str) -> dict[str, Any]:
+    return {
+        "id": predicate_id,
+        "status": status,
+        "evidence": [{"kind": "artifact", "reference": artifact_id}],
+        "message": message,
+    }
 
 
-def _validate_preconditions(
+def structural_precondition_results(
     root: Path,
     catalog: Mapping[str, Any],
     proposed_catalog: Mapping[str, Any],
-    transitions: Mapping[str, str],
-    reasons: Mapping[str, str],
-) -> None:
-    for artifact_id, target in transitions.items():
-        artifact = catalog[artifact_id]
-        if artifact.artifact_type == "work_order" and target == "approved":
+    artifact: Any,
+    target: str,
+    reason: str | None,
+) -> list[dict[str, Any]]:
+    """Evaluate the graph-structural checks bound to one edge (ECP-KRN-005).
+
+    These are properties of the artifact graph shape alone; every other
+    precondition is a gate predicate in `QUALITY_GATES.json`. Each check is
+    reported as a `QGS-` predicate so a refusal names it.
+    """
+
+    from se_harness.workflow_contract import load_validated_contracts, transition_binding
+
+    _, quality, _, _, _ = load_validated_contracts()
+    _, structural_ids = transition_binding(quality, _family(artifact.artifact_type), artifact.artifact_type, target)
+    artifact_id = artifact.artifact_id
+    results: list[dict[str, Any]] = []
+    for check in structural_ids:
+        if check == "QGS-EDGE":
+            family = _family(artifact.artifact_type)
+            row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
+            if row is None or target not in row.transitions_to:
+                results.append(_structural(check, "fail", f"transition {artifact_id}: {artifact.status} -> {target} is not allowed", artifact_id))
+                continue
+            policy = _revision_policy(root)
+            if family == "work_order" and artifact.status in {"implemented", "verified"}:
+                setting = "required_for_verified_work" if target == "verified" else "required_for_release"
+                if not policy[setting]:
+                    results.append(_structural(check, "fail", f"work order transition to {target} is not enabled by revision provenance policy", artifact_id))
+                    continue
+            results.append(_structural(check, "pass", f"{artifact.status} -> {target} is a declared lifecycle edge for {artifact_id}.", artifact_id))
+        elif check == "QGS-ASSURANCE":
             assurance = artifact.metadata.get("assurance")
             if not isinstance(assurance, dict) or assurance.get("commit_bound_verification") not in {"required", "not_required"}:
-                raise HarnessError(f"work order {artifact_id} requires a complete assurance classification before approval")
-        if artifact.artifact_type == "work_order" and target == "in_progress":
-            preflight = run_preflight(root, work_order_id=artifact_id, phase="start")
-            blocker = _workflow_preflight_blocker(preflight)
-            if blocker is not None:
-                raise HarnessError(f"work order {artifact_id} is not start-ready: {blocker}")
-        if artifact.artifact_type == "work_order" and target == "implemented":
-            preflight = run_preflight(root, work_order_id=artifact_id, phase="review")
-            blocker = _workflow_preflight_blocker(preflight)
-            if blocker is not None:
-                raise HarnessError(f"work order {artifact_id} is not review-ready: {blocker}")
-            evidence = root / "docs" / "engineering"
-            keyed = any(
-                path.is_file()
-                and "evidence" in path.parts
-                and any(part.startswith(artifact_id) for part in path.parts[path.parts.index("evidence") + 1 :])
-                for path in evidence.rglob("*")
-            )
-            if not keyed:
-                raise HarnessError(f"work order {artifact_id} has no retained work-order-keyed evidence")
-        if artifact.artifact_type == "work_order" and target == "verified":
+                results.append(_structural(check, "fail", f"work order {artifact_id} requires a complete assurance classification before approval", artifact_id))
+            else:
+                results.append(_structural(check, "pass", f"{artifact_id} classifies commit-bound verification as {assurance['commit_bound_verification']}.", artifact_id))
+        elif check == "QGS-VREC-COVERAGE":
             covered = [
                 item for item in proposed_catalog.values()
                 if item.artifact_type == "verification_record"
                 and _grants_authority("verification_record", item.status)
                 and artifact_id in _targets(item, "verifies_work_order")
             ]
-            if not covered:
-                raise HarnessError(f"work order {artifact_id} has no direct eligible verification record")
-        if artifact.artifact_type == "work_order" and target == "released":
+            if covered:
+                results.append(_structural(check, "pass", f"{artifact_id} is covered by eligible verification record {sorted(item.artifact_id for item in covered)[0]}.", artifact_id))
+            else:
+                results.append(_structural(check, "fail", f"work order {artifact_id} has no direct eligible verification record", artifact_id))
+        elif check == "QGS-RLS-COVERAGE":
             covered = [
                 item for item in proposed_catalog.values()
                 if item.artifact_type == "release_record"
                 and _grants_authority("release_record", item.status)
                 and artifact_id in _targets(item, "releases_work")
             ]
-            if not covered:
-                raise HarnessError(f"work order {artifact_id} has no direct released release record")
-        if artifact.artifact_type == "release_record" and target == "released":
-            for vrec_id in _targets(artifact, "includes_verification"):
-                if (
-                    vrec_id not in proposed_catalog
-                    or not _grants_authority("verification_record", proposed_catalog[vrec_id].status)
-                ):
-                    raise HarnessError(f"release record {artifact_id} requires verified VREC {vrec_id}")
-        if artifact.artifact_type == "verification_record" and target == "superseded":
-            successor_id = reasons[artifact_id]
-            successor = proposed_catalog.get(successor_id)
-            if successor is None or successor.artifact_type != "verification_record":
-                raise HarnessError(f"supersession successor is not a VREC: {successor_id}")
-            if not _grants_authority("verification_record", successor.status):
-                raise HarnessError(f"supersession successor {successor_id} must be verified or released")
-            if not _targets(artifact, "verifies_work_order").issubset(_targets(successor, "verifies_work_order")):
-                raise HarnessError(f"supersession successor {successor_id} does not preserve work coverage")
+            if covered:
+                results.append(_structural(check, "pass", f"{artifact_id} is released by {sorted(item.artifact_id for item in covered)[0]}.", artifact_id))
+            else:
+                results.append(_structural(check, "fail", f"work order {artifact_id} has no direct released release record", artifact_id))
+        elif check == "QGS-VERIFIED-INCLUSION":
+            missing = [
+                vrec_id for vrec_id in sorted(_targets(artifact, "includes_verification"))
+                if vrec_id not in proposed_catalog
+                or not _grants_authority("verification_record", proposed_catalog[vrec_id].status)
+            ]
+            if missing:
+                results.append(_structural(check, "fail", f"release record {artifact_id} requires verified VREC {missing[0]}", artifact_id))
+            else:
+                results.append(_structural(check, "pass", f"Every verification record {artifact_id} includes is verified.", artifact_id))
+        elif check == "QGS-SUCCESSOR":
+            successor_id = reason
+            successor = proposed_catalog.get(successor_id) if successor_id else None
+            if successor_id is None:
+                results.append(_structural(check, "not_assessable", f"supersession of {artifact_id} names no successor VREC", artifact_id))
+            elif successor is None or successor.artifact_type != "verification_record":
+                results.append(_structural(check, "fail", f"supersession successor is not a VREC: {successor_id}", artifact_id))
+            elif not _grants_authority("verification_record", successor.status):
+                results.append(_structural(check, "fail", f"supersession successor {successor_id} must be verified or released", artifact_id))
+            elif not _targets(artifact, "verifies_work_order").issubset(_targets(successor, "verifies_work_order")):
+                results.append(_structural(check, "fail", f"supersession successor {successor_id} does not preserve work coverage", artifact_id))
+            else:
+                results.append(_structural(check, "pass", f"{successor_id} is an eligible successor preserving the coverage of {artifact_id}.", artifact_id))
+        else:  # pragma: no cover - the loader rejects unknown structural ids
+            raise HarnessError(f"WEX-ECP-030: unknown structural check {check}")
+    return results
 
 
 def plan_transition(
@@ -569,7 +599,10 @@ def plan_transition(
     validator, report = _validation(root)
     if report.errors:
         first = report.errors[0]
-        raise HarnessError(f"current artifact graph is invalid [{first.code}]: {first.message}")
+        message = f"current artifact graph is invalid [{first.code}]: {first.message}"
+        if first.code in {"E001", "E003"}:
+            raise RepositoryWorkflowError(message)
+        raise HarnessError(message)
     catalog = _catalog(report)
     from se_harness.workflow_compliance import ensure_governed_checkpoint
 
@@ -618,12 +651,59 @@ def plan_transition(
         after.append((artifact_id, target))
     proposed = _proposed_artifacts(validator, report, replacements, root)
     proposed_catalog = {item.artifact_id: item for item in proposed}
-    _validate_preconditions(root, catalog, proposed_catalog, transitions, reasons)
+    primary_id = sorted(transitions)[0]
+    # ECP-KRN-004: every transitioned artifact is evaluated against the
+    # contract's transition bindings through the gate evaluator check uses, with
+    # the same context builder; the graph-structural checks are appended.
+    from se_harness.workflow_compliance import (
+        build_context,
+        declared_change_set,
+        selected_result,
+        transition_gate_results,
+    )
+    from se_harness.workflow_contract import load_validated_contracts
+
+    _, quality, _, _, gates = load_validated_contracts()
+    gate_results: list[dict[str, Any]] = []
+    blocked_by: list[str] = []
+    for artifact_id, target in sorted(transitions.items()):
+        artifact = catalog[artifact_id]
+        context = build_context(
+            root, report, catalog, artifact,
+            checkpoint="transition", change_set=declared_change_set((), complete=False), target=target,
+        )
+        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, reasons.get(artifact_id))
+        for gate in transition_gate_results(quality, gates, context, structural=structural):
+            gate_results.append(gate)
+            for predicate in gate["predicates"]:
+                if predicate["status"] != "pass":
+                    blocked_by.append(f"{predicate['id']}: {predicate['message']}")
+    if blocked_by and apply:
+        # A programmatic apply fails closed, labelled by the first refusing check
+        # (ECP-KRN-008); a plan renders the blocked result instead.
+        predicate_id, _, message = blocked_by[0].partition(": ")
+        raise PreconditionError(predicate_id, "; ".join([message, *blocked_by[1:]]))
+    if blocked_by:
+        current = catalog[primary_id]
+        _, current_dependencies = project_scope(catalog, current) if current.artifact_type in PRIMARY_TYPES else (set(), set())
+        result = selected_result(
+            root,
+            operation="transition",
+            primary=current,
+            related=[catalog[item] for item in current_dependencies if item in catalog],
+            artifacts=sorted(transitions),
+            dependencies=current_dependencies,
+            blocked_by=blocked_by,
+            before=_state(before),
+            after=_state(before),
+            checkpoint="transition",
+            gates=gate_results,
+        )
+        return TransitionPlan(root=root, inputs=inputs, writes=(), result=result)
     errors = _validate_artifacts(validator, proposed, root)
     if errors:
         first = errors[0]
         raise HarnessError(f"proposed final graph is invalid [{first.code}]: {first.message}")
-    primary_id = sorted(transitions)[0]
     primary = proposed_catalog[primary_id]
     completed = (
         [f"Applied {len(writes)} explicit lifecycle transition(s) atomically."]
@@ -633,8 +713,6 @@ def plan_transition(
     dependencies: set[str] = set()
     if primary.artifact_type in PRIMARY_TYPES:
         _, dependencies = project_scope(proposed_catalog, primary)
-    from se_harness.workflow_compliance import selected_result
-
     result = selected_result(
         root,
         operation="transition",
@@ -653,6 +731,8 @@ def plan_transition(
             }
             for item in writes
         ],
+        checkpoint="transition",
+        gates=gate_results,
     )
     plan = TransitionPlan(root=root, inputs=inputs, writes=tuple(writes), result=result)
     if apply:

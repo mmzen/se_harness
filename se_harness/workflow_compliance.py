@@ -13,8 +13,10 @@ from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import orphaned_ready_records, run_preflight
 from se_harness.workflow_contract import (
     ContractError,
+    effective_checkpoints,
     load_validated_contracts,
     select_rule,
+    transition_binding,
 )
 from se_harness.workflow_procedures import (
     ProcedureError,
@@ -57,6 +59,7 @@ class CheckpointContext:
     change_set: ChangeSet
     checkpoint: str
     formal_snapshot_sha256: str
+    target: str | None = None
 
 
 def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -199,9 +202,13 @@ def _diagnostic(item: Any) -> dict[str, Any]:
 
 
 def _classify(report: Any, catalog: Mapping[str, Any], primary: Any, root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
-    from se_harness.workflow import project_scope
+    from se_harness.workflow import PRIMARY_TYPES, project_scope
 
-    governing, dependencies = project_scope(catalog, primary)
+    if primary.artifact_type in PRIMARY_TYPES:
+        governing, dependencies = project_scope(catalog, primary)
+    else:
+        # A definition's selected scope is itself (transition checkpoint, ECP-KRN-004).
+        governing, dependencies = set(), set()
     scope_paths = {
         catalog[identifier].path.resolve()
         for identifier in governing | dependencies | {primary.artifact_id}
@@ -234,30 +241,39 @@ def _classify(report: Any, catalog: Mapping[str, Any], primary: Any, root: Path)
     return scoped, repository, unrelated
 
 
-def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]:
-    if context.artifact.artifact_type != "work_order":
-        return "pass", f"{phase} preflight does not apply to {context.artifact.artifact_type}."
-    report = run_preflight(context.root, work_order_id=context.artifact.artifact_id, phase=phase)
+def lifecycle_relevant_diagnostics(root: Path, report: Any) -> list[Any]:
+    """The one preflight-diagnostic filter (ECP-KRN-007).
+
+    Candidate-distribution comparisons and lock entries the released root never
+    recorded are candidate-versus-released skew, not installation facts; every
+    other diagnostic blocks a lifecycle stage.
+    """
+
     lock_files: set[str] = set()
     try:
-        lock = json.loads((context.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        lock = json.loads((root / ".engineering-harness.lock").read_text(encoding="utf-8"))
         if isinstance(lock, dict) and isinstance(lock.get("files"), dict):
             lock_files = {str(path) for path in lock["files"]}
     except (OSError, UnicodeError, json.JSONDecodeError):
         pass
 
-    def lifecycle_relevant(item: Any) -> bool:
+    def relevant(item: Any) -> bool:
         path = str(item.path)
         if item.code == "I001" and path.startswith("distribution:"):
             return False
         candidate = path.removeprefix("lock-entry:")
         if item.code == "I001" and item.message in {"missing", "required"} and candidate not in lock_files:
-            # Candidate templates may add managed paths while the released root
-            # installation intentionally remains on its lock-recorded version.
             return False
         return True
 
-    relevant = [item for item in report.diagnostics if lifecycle_relevant(item)]
+    return [item for item in report.diagnostics if relevant(item)]
+
+
+def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]:
+    if context.artifact.artifact_type != "work_order":
+        return "pass", f"{phase} preflight does not apply to {context.artifact.artifact_type}."
+    report = run_preflight(context.root, work_order_id=context.artifact.artifact_id, phase=phase)
+    relevant = lifecycle_relevant_diagnostics(context.root, report)
     if relevant:
         return "fail", relevant[0].message
     return "pass", f"Released-installation {phase} preflight inputs are ready."
@@ -274,6 +290,10 @@ def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
         and any(part.startswith(context.artifact.artifact_id) for part in path.parts[path.parts.index("evidence") + 1 :])
     ]
     binding = f"formal_snapshot_sha256: {context.formal_snapshot_sha256}"
+    # The handoff checkpoint is the one that retains evidence; a transition to
+    # implemented accepts the handoff-bound document for the same snapshot, so
+    # the transition can never pass on weaker evidence than check evaluated.
+    checkpoint = "handoff" if context.checkpoint == "transition" else context.checkpoint
     for path in sorted(candidates):
         try:
             text = path.read_text(encoding="utf-8")
@@ -281,12 +301,12 @@ def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
             continue
         if (
             f"artifact: {context.artifact.artifact_id}" in text
-            and f"checkpoint: {context.checkpoint}" in text
+            and f"checkpoint: {checkpoint}" in text
             and binding in text
         ):
             return "pass", f"Fresh retained evidence is bound at {path.relative_to(context.root).as_posix()}."
     return "not_assessable", (
-        f"No readable evidence for {context.artifact.artifact_id}, checkpoint {context.checkpoint}, "
+        f"No readable evidence for {context.artifact.artifact_id}, checkpoint {checkpoint}, "
         f"and formal snapshot {context.formal_snapshot_sha256} is available."
     )
 
@@ -358,7 +378,9 @@ def _gate_results(
     gate_ids: Iterable[str],
     gates: Mapping[str, Mapping[str, Any]],
     context: CheckpointContext,
+    predicate_ids: Iterable[str] | None = None,
 ) -> list[dict[str, Any]]:
+    selected = None if predicate_ids is None else set(predicate_ids)
     result: list[dict[str, Any]] = []
     for gate_id in gate_ids:
         gate = gates[gate_id]
@@ -368,6 +390,10 @@ def _gate_results(
             )
         predicates: list[dict[str, Any]] = []
         for predicate in gate["predicates"]:
+            if selected is not None and predicate["id"] not in selected:
+                continue
+            if context.checkpoint not in effective_checkpoints(gate, predicate):
+                continue
             status, message = _evaluate(predicate["evaluator"], predicate, context)
             predicates.append(
                 {
@@ -381,6 +407,78 @@ def _gate_results(
     return result
 
 
+def build_context(
+    root: Path,
+    report: Any,
+    catalog: Mapping[str, Any],
+    primary: Any,
+    *,
+    checkpoint: str,
+    change_set: ChangeSet,
+    target: str | None = None,
+) -> CheckpointContext:
+    """The one context builder `check` and `transition` share (ECP-KRN-004)."""
+
+    scoped, repository_errors, unrelated = _classify(report, catalog, primary, root)
+    try:
+        scope = execution_scope(primary) if primary.artifact_type == "work_order" else ()
+    except HarnessError:
+        scope = ()
+    return CheckpointContext(
+        root=root,
+        artifact=primary,
+        report=report,
+        catalog=catalog,
+        scoped_errors=scoped,
+        repository_errors=repository_errors,
+        unrelated_count=unrelated,
+        declared_scope=scope,
+        change_set=change_set,
+        checkpoint=checkpoint,
+        formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts),
+        target=target,
+    )
+
+
+STRUCTURAL_GATE = "QG-STRUCTURAL"
+
+
+def transition_gate_results(
+    quality_gates: Mapping[str, Any],
+    gates: Mapping[str, Mapping[str, Any]],
+    context: CheckpointContext,
+    *,
+    structural: Iterable[Mapping[str, Any]] = (),
+) -> list[dict[str, Any]]:
+    """Evaluate the contract's transition bindings for one edge (ECP-KRN-004, -005).
+
+    Gate predicates come from `QUALITY_GATES.json`; the graph-structural checks
+    the caller evaluated are appended as the synthetic `QG-STRUCTURAL` gate so a
+    refusal always names its check.
+    """
+
+    from se_harness.workflow import _family
+
+    if context.target is None:
+        raise HarnessError("WEX210: the transition checkpoint requires a target state")
+    predicate_ids, _ = transition_binding(
+        quality_gates, _family(context.artifact.artifact_type), context.artifact.artifact_type, context.target
+    )
+    gate_order: list[str] = []
+    for gate_id, gate in gates.items():
+        if any(str(item["id"]) in predicate_ids for item in gate["predicates"]) and gate_id not in gate_order:
+            gate_order.append(gate_id)
+    results = _gate_results(gate_order, gates, context, predicate_ids=predicate_ids)
+    structural_items = [dict(item) for item in structural]
+    if structural_items:
+        results.append({
+            "id": STRUCTURAL_GATE,
+            "status": _aggregate(item["status"] for item in structural_items),
+            "predicates": structural_items,
+        })
+    return results
+
+
 def check_workflow(
     repository: Path,
     *,
@@ -391,11 +489,16 @@ def check_workflow(
     changes_complete: bool = False,
     change_manifest: Path | None = None,
     pull_request_body: Path | None = None,
+    target: str | None = None,
 ) -> dict[str, Any]:
-    if checkpoint not in {"start", "pre-action", "handoff"}:
-        raise HarnessError("WEX210: public check checkpoint must be start, pre-action, or handoff")
+    if checkpoint not in {"start", "pre-action", "transition", "handoff"}:
+        raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, or handoff")
+    if checkpoint == "transition" and not target:
+        raise HarnessError("WEX210: --target is required for the transition checkpoint")
+    if checkpoint != "transition" and target:
+        raise HarnessError("WEX210: --target applies only to the transition checkpoint")
     root = ensure_target(repository, must_exist=True)
-    workflow_contract, _, rules, procedures, gates = load_validated_contracts()
+    workflow_contract, quality_gates, rules, procedures, gates = load_validated_contracts()
     from se_harness.workflow import _catalog, _validation, project_scope
 
     _, report = _validation(root)
@@ -425,24 +528,11 @@ def check_workflow(
         else declared_change_set(changed_paths, complete=changes_complete)
     )
     _validate_changed_targets(root, change_set)
-    scoped, repository_errors, unrelated = _classify(report, catalog, primary, root)
-    try:
-        scope = execution_scope(primary) if primary.artifact_type == "work_order" else ()
-    except HarnessError:
-        scope = ()
-    context = CheckpointContext(
-        root=root,
-        artifact=primary,
-        report=report,
-        catalog=catalog,
-        scoped_errors=scoped,
-        repository_errors=repository_errors,
-        unrelated_count=unrelated,
-        declared_scope=scope,
-        change_set=change_set,
-        checkpoint=checkpoint,
-        formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts),
+    context = build_context(
+        root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
     )
+    scoped, repository_errors, unrelated = context.scoped_errors, context.repository_errors, context.unrelated_count
+    scope = context.declared_scope
     gate_ids = list(rule["gate_ids"])
     resolved = resolve_procedure(
         procedures,
@@ -457,7 +547,13 @@ def check_workflow(
     if checkpoint == "pre-action":
         first = resolved["steps"][0]
         gate_ids = list(dict.fromkeys([*gate_ids, *first.get("gate_ids", [])]))
-    gate_results = _gate_results(gate_ids, gates, context)
+    if checkpoint == "transition":
+        from se_harness.workflow import structural_precondition_results
+
+        structural = structural_precondition_results(root, catalog, catalog, primary, str(target), None)
+        gate_results = transition_gate_results(quality_gates, gates, context, structural=structural)
+    else:
+        gate_results = _gate_results(gate_ids, gates, context)
     compliance_status = _aggregate([item["status"] for item in gate_results] or ["pass"])
     passed = compliance_status == "pass" and not scoped and not repository_errors
     outcome = "completed" if passed else "blocked"
@@ -572,6 +668,8 @@ def selected_result(
     repository_blockers: Iterable[Mapping[str, Any]] = (),
     unrelated_count: int = 0,
     writes: Iterable[Mapping[str, Any]] = (),
+    checkpoint: str = "pre-action",
+    gates: Iterable[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     """Build the one schema-2 result for a selected artifact (ECP-KRN-001, -003).
 
@@ -594,6 +692,7 @@ def selected_result(
     step = resolved["steps"][0]
     blockers = [str(item) for item in blocked_by]
     blocked = bool(blockers)
+    gate_results = [dict(item) for item in gates]
     rule_done, current = _rule_prose(rule, rule_context)
     scope: tuple[str, ...] = ()
     if primary.artifact_type == "work_order":
@@ -630,11 +729,15 @@ def selected_result(
         changed_paths=[],
         change_set_complete=False,
         compliance={
-            "checkpoint": "pre-action",
+            "checkpoint": checkpoint,
             "workflow_rule_id": rule["id"],
             "procedure_id": rule["procedure_id"],
-            "status": "fail" if blocked else "not_assessable",
-            "gates": [],
+            "status": (
+                _aggregate(item["status"] for item in gate_results)
+                if gate_results and not blocked
+                else "fail" if blocked else "not_assessable"
+            ),
+            "gates": gate_results,
         },
         procedure={"id": rule["procedure_id"], "current_step": step["id"], "steps": resolved["steps"]},
         restitution=restitution,
@@ -845,17 +948,6 @@ def ensure_governed_checkpoint(
     repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
     if repository_errors:
         raise HarnessError(f"WEX210: repository integrity prevents governed action: {repository_errors[0].message}")
-    # QG-G1/G2 authoring predicates apply when a definition leaves draft (AUT-GTE-001).
-    if isinstance(artifact_ids, Mapping):
-        for artifact_id, target in artifact_ids.items():
-            artifact = catalog[artifact_id]
-            if artifact.artifact_type in _DEFINITION_TYPES and artifact.status == "draft" and target == "approved":
-                status, message = authoring_ready(artifact)
-                if status != "pass":
-                    predicate = "QGP-G2-AUTHORING" if artifact.artifact_type in {"specification", "architecture", "adr"} else "QGP-G1-AUTHORING"
-                    raise HarnessError(f"{predicate}: {message} Complete the artifact before approval.")
-            # QG-G5 release-unit predicate applies when a release contract leaves draft (CIP-RLU, WO-CIP-005).
-            if artifact.artifact_type == "release_contract" and artifact.status == "draft" and target == "approved":
-                status, message = release_unit_ready(artifact, root, catalog)
-                if status != "pass":
-                    raise HarnessError(f"QGP-G5P-RELEASE-UNIT: {message} Re-measure the unit with harnessctl release-unit before approval.")
+    # The authoring and release-unit predicates a definition needs before it
+    # leaves draft are evaluated by the contract's transition bindings
+    # (QGP-G1/G2-AUTHORING, QGP-G5P-RELEASE-UNIT), not re-implemented here (WO-ECP-009).
