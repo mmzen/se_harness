@@ -125,3 +125,7 @@ For the governing 0.8.0 evaluator, which reads evidence by substring:
 artifact: WO-ECP-003
 checkpoint: handoff
 formal_snapshot_sha256: 93cc27b586da6bca838f247372b1423e333cc330010812fbbe58379ab04ca1f4
+
+## Hosted lanes
+
+Pull request #251 at `c80c1bf`: all 13 lanes pass, both platform legs of the suite included (the digest-coverage and YAML tests on Windows and Linux). These lanes are the root 0.8.0 workflow; the template's mandatory gate is exercised by the local demonstration above and, hosted, by the release condition recorded in the amendment.
