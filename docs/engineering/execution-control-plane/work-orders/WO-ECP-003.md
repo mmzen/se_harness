@@ -2,10 +2,10 @@
 id = "WO-ECP-003"
 type = "work_order"
 title = "Make the pull-request gate mandatory and scope-aware, and widen the digest"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -29,6 +29,13 @@ implements = ["REQ-ECP-006", "REQ-ECP-007"]
 specifications = ["SPEC-ECP-003"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-002"]
 verification = ["VER-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T21:40:17Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start with the amendments', as the third work order of the execution-control-plane plan, after WO-ECP-001 and WO-ECP-002 merged (main e75fac8). Its definitions REQ-ECP-006, REQ-ECP-007, SPEC-ECP-003, ARCH-ECP-001, ADR-ECP-002 and VER-ECP-003 were approved separately on 2026-08-28; three pre-start amendments are recorded on the work order and VER-ECP-003: the demonstration runs locally with the hosted form deferred to the first release carrying WO-ECP-001 to -003, the pull-request template seed joins the scope, and the released-0.7.1 golden digest is re-pinned to the widened block with a dated note. Authorizes start preflight and then only the declared scope. Measured before this transition: validate PASS at 0 errors under the governing 0.8.0 root. It authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Make the pull-request gate mandatory and scope-aware, and widen the digest
