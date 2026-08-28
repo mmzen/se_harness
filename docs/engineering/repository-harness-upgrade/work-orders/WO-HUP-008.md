@@ -2,7 +2,7 @@
 id = "WO-HUP-008"
 type = "work_order"
 title = "Adopt exact public 0.8.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-28T17:05:36Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit 0cf2846 carrying unmoved main 2628627, run with the governing exact public 0.7.1 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.8.0 installed from the digest-verified PyPI wheel file into an isolated environment outside the checkout. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T17:46:33Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark implemented', on the handoff check reading Completed over transaction commit 21d730b, formal snapshot 41c0215e7cebd746fbd1612f81e4ca3aa7242c87d9ed7707060dddf52a5b7757, change set asserted complete over 28 paths, no scope amendment. The root moved from exact public 0.7.1 to exact public 0.8.0 by one upgrade --apply from a wheel-file install outside the checkout whose digest e08aab8a\u2026 equals the wheel RLS-SEH-017 binds; lock records that archive pair and payload ea75cc53\u2026; replay 61 files unchanged. Readings under the 0.8.0 root, isolated mode: validate PASS at 1072 artifacts, 0 errors, 473 maintenance warnings; doctor 0 FAIL; released-root 143/143; dashboard content deterministic; derive 0.8.0 to 0.9.0. Candidate: full suite 1011 tests with the single known workstation file-mode failure that passes hosted. All thirteen pull-request lanes pass on #244 at 21d730b including the governor transition assessment of the real transition (run 33193472598). The retained stage machine of issue #210 is untouched by design and left to its follow-up work order. This authorizes no further act."
 +++
 
 # Work Order: Adopt exact public 0.8.0 as the standard root, the simple way
