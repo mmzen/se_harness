@@ -148,7 +148,6 @@ def inspect_harnessctl(path: Path) -> None:
             [str(path), "--help"],
             [str(path), "prepare-release", "--help"],
             [str(path), "identity", "--help"],
-            [str(path), "rehearse-migration", "--help"],
             [str(path), "qualify", "--help"],
         )
         completed = [

@@ -136,6 +136,12 @@ clean tree passes the portable-surface check and carries no
    carry stale files; a clean rebuild passes the portable-surface check. The
    hosted lane builds from a Git export and is not exposed to it.
 8. Windows readings are the hosted lanes'.
+9. The first hosted run failed `candidate-package` on the portable-surface
+   script's help inspection, which still invoked `harnessctl rehearse-migration
+   --help`; the local check had only been run in `--wheel` mode. The
+   invocation was removed (commit after `4da6a9f`), the `--harnessctl` mode
+   now passes locally against the successor environment, and the formal
+   snapshot the handoff binds is unchanged by a script edit.
 
 ## 7. Handoff checkpoint binding
 
