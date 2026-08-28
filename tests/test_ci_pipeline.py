@@ -60,15 +60,54 @@ class TriggerPolicyTests(unittest.TestCase):
                 self.assertIn("cancel-in-progress: false", text)
 
     def test_root_managed_copy_is_untouched(self) -> None:
-        # The root engineering-harness.yml is a hash-locked copy of the released
-        # governor (0.7.0 since WO-HUP-006), which carries WO-CIP-001's trigger
-        # policy; WO-CIP-001 itself changes the standard template only.
-        root = (WORKFLOWS / "engineering-harness.yml").read_text(encoding="utf-8")
+        # The root engineering-harness.yml is the hash-locked copy of the released
+        # governor, which carries WO-CIP-001's trigger policy; a work order changes
+        # the standard template only, and the root follows on the next upgrade.
+        # Since WO-ECP-003 the template carries the unconditional scope gate that
+        # the released root does not, so the two are byte-identical only while
+        # the root is the release that shipped the current template.
+        from se_harness import __version__
+        from se_harness.installer import tracked_content
+        from se_harness.integrity import canonical_sha256
+
+        root_path = WORKFLOWS / "engineering-harness.yml"
+        root = root_path.read_text(encoding="utf-8")
         template = (REPOSITORY_ROOT / "templates/repository/standard/.github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
-        evaluator_version = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())["evaluator"]["version"]
-        self.assertEqual(template.replace("{{HARNESS_VERSION}}", evaluator_version), root)
+        lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())
+        evaluator_version = lock["evaluator"]["version"]
+        entry = lock["files"][".github/workflows/engineering-harness.yml"]
+        self.assertEqual(entry["sha256"], canonical_sha256(tracked_content(entry["mode"], root_path.read_bytes())))
+        if evaluator_version == __version__:
+            self.assertEqual(template.replace("{{HARNESS_VERSION}}", evaluator_version), root)
+        else:
+            self.assertIn("Enforce the work-order scope on the pull request's diff", template)
         self.assertIn("\non:\n  pull_request:\n  push:\n    branches:\n", root)
         self.assertIn("cancel-in-progress: true", root)
+
+    def test_the_managed_workflow_enforces_scope_on_every_pull_request(self) -> None:
+        # REQ-ECP-006 / ECP-GTE-001 to -005 and -007: the scope step has no guard
+        # on a declared digest, no early exit on its absence, reads the change set
+        # from Git and never from the body, and runs the released evaluator.
+        template = (REPOSITORY_ROOT / "templates/repository/standard/.github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
+        step = template.split("      - name: Enforce the work-order scope on the pull request's diff\n", 1)[1]
+        step = step.split("      - name: ", 1)[0]
+        self.assertIn("if: github.event_name == 'pull_request'", step)
+        self.assertEqual(1, step.count("if: "))
+        self.assertNotIn("exit 0", step)
+        self.assertNotIn("--changed-path", step)
+        self.assertNotIn("Verify a declared restitution digest", template)
+        self.assertIn('--from-git "$HARNESS_BASE_SHA"', step)
+        self.assertIn('git fetch --depth=1 origin "$HARNESS_BASE_SHA"', step)
+        self.assertIn('"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check .', step)
+        self.assertIn("QGP-G4I-PATHS", step)
+        self.assertIn("select-work-order --event", step)
+        self.assertNotIn("github.head_ref", step)
+        self.assertNotIn("secrets.", step)
+        self.assertLess(step.index("--from-git"), step.index("restitution-digest"))
+        self.assertIn("does not match the recomputed result_sha256", step)
+        seed = (REPOSITORY_ROOT / "templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed").read_text(encoding="utf-8")
+        self.assertIn("fails on any path of the diff outside the work order's declared scope", seed)
+        self.assertNotIn("reviewers remain accountable for confirming that the diff stays within its scope", seed)
 
 
 class OneBuildPerWorkflowTests(unittest.TestCase):

@@ -53,40 +53,48 @@ jobs:
         run: >-
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight .
           --work-order "$HARNESS_WORK_ORDER" --phase review
-      - name: Verify a declared restitution digest
+      - name: Enforce the work-order scope on the pull request's diff
         if: github.event_name == 'pull_request'
         env:
           HARNESS_WORK_ORDER: ${{ steps.work_order.outputs.work_order }}
           HARNESS_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         shell: bash
         run: |
-          declared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
-            select-work-order --event "$GITHUB_EVENT_PATH" --field restitution-digest)"
-          if [ -z "$declared" ]; then
-            echo "No Harness-Restitution line is declared; nothing to verify."
-            exit 0
-          fi
+          # ECP-GTE-001 to -005: the handoff check runs on every pull request
+          # over the diff Git reports, with the released evaluator from the lock;
+          # a declared Harness-Restitution line is compared when present and
+          # never relaxes the scope verdict.
           git fetch --depth=1 origin "$HARNESS_BASE_SHA"
-          args=()
-          while IFS= read -r path; do
-            [ -n "$path" ] && args+=(--changed-path "$path")
-          done < <(git diff --name-only "$HARNESS_BASE_SHA" HEAD)
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
             --artifact "$HARNESS_WORK_ORDER" --checkpoint handoff \
-            "${args[@]}" --changes-complete --json \
+            --from-git "$HARNESS_BASE_SHA" --json \
             > "$RUNNER_TEMP/restitution.json" || true
-          recomputed="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" <<'PY'
+          declared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
+            select-work-order --event "$GITHUB_EVENT_PATH" --field restitution-digest)"
+          "$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" "$declared" <<'PY'
           import json, sys
           result = json.load(open(sys.argv[1], encoding="utf-8"))
-          print(result.get("result_sha256", ""))
-          print(result.get("compliance", {}).get("formal_snapshot_sha256", ""), file=sys.stderr)
+          declared = sys.argv[2]
+          outcome = result.get("operation", {}).get("outcome")
+          failures = [
+              predicate for gate in result.get("compliance", {}).get("gates", [])
+              for predicate in gate.get("predicates", [])
+              if predicate.get("id") == "QGP-G4I-PATHS" and predicate.get("status") != "pass"
+          ]
+          for predicate in failures:
+              print(f"scope: {predicate.get('message', '')}", file=sys.stderr)
+          if failures:
+              sys.exit("The pull request's diff leaves the work order's declared scope.")
+          if outcome != "completed":
+              for blocker in result.get("restitution", {}).get("blocked_by", []):
+                  print(f"blocked: {blocker}", file=sys.stderr)
+              sys.exit(f"The handoff check did not complete (outcome {outcome}).")
+          recomputed = result.get("result_sha256", "")
+          if declared and declared != recomputed:
+              sys.exit(f"Declared Harness-Restitution {declared} does not match the recomputed result_sha256 {recomputed}.")
+          print("The pull request's diff is inside the declared scope"
+                + (" and the declared restitution digest matches." if declared else "; no restitution digest was declared."))
           PY
-          )"
-          if [ "$declared" != "$recomputed" ]; then
-            echo "Declared Harness-Restitution $declared does not match the recomputed result_sha256 $recomputed at this formal snapshot." >&2
-            exit 1
-          fi
-          echo "Declared restitution digest matches the recomputed block."
       - name: Qualify the root with its exact released evaluator
         shell: bash
         run: |

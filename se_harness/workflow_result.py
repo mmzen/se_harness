@@ -202,6 +202,17 @@ def render_human(result: Mapping[str, Any]) -> str:
             *_render_command(restitution["command_or_response"]),
         ]
     )
+    # ECP-DIG-001: the change set and every predicate status are part of the
+    # canonical block, so result_sha256 binds them (WO-ECP-003).
+    scope = result.get("scope", {})
+    changed = [_text(item) for item in scope.get("changed_paths", [])]
+    lines.extend(["", "Change set", *([f"- {item}" for item in changed] or ["None."]), f"complete: {'true' if scope.get('change_set_complete') else 'false'}"])
+    gate_lines = [
+        f"{_text(predicate.get('id', ''))}: {_text(predicate.get('status', ''))}"
+        for gate in result.get("compliance", {}).get("gates", [])
+        for predicate in gate.get("predicates", [])
+    ]
+    lines.extend(["", "Gates", *(gate_lines or ["None."])])
     context = result.get("context")
     if context is not None:
         lines.extend(["", "Context", *_render_context(context)])
