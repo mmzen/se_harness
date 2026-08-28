@@ -59,8 +59,8 @@ absent from the `v0.7.1` tree, and unnamed by any released release record.
 | --- | --- | --- |
 | `WO-HUP-007` | Adopt exact public 0.7.1 as the standard root, the simple way | `VREC-HUP-006` verified |
 | `WO-RLO-008` | Make the recipe-bound candidate export independent of the calling host | `VREC-RLO-008` verified |
-| `WO-REB-028` | Retire the predecessor-bootstrap release path and keep its history as inert facts | `VREC-REB-026` **ready**, not yet verified |
-| `WO-REB-029` | Retire the predecessor-bootstrap rules from the consumer-installed validator | `VREC-REB-027` **ready**, not yet verified |
+| `WO-REB-028` | Retire the predecessor-bootstrap release path and keep its history as inert facts | `VREC-REB-026` verified (2026-08-28, as this packet's entry condition) |
+| `WO-REB-029` | Retire the predecessor-bootstrap rules from the consumer-installed validator | `VREC-REB-027` verified (2026-08-28, as this packet's entry condition) |
 | `WO-AUT-003` | Retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite | `VREC-AUT-003` verified |
 | `WO-HBI-005` | Make `doctor` pass in a fresh consumer repository | `VREC-HBI-005` verified |
 | `WO-ECP-005` | One result schema and one rule selector | `VREC-ECP-005` verified |
@@ -121,15 +121,13 @@ it.
 ### Entry criteria
 
 - The nine existing members are active, `implemented`, retain work-order-keyed
-  evidence, and hold **verified** assurance coverage. Measured at `ff0e337`:
-  seven of nine. `VREC-REB-026` and `VREC-REB-027` are `ready`; the
-  assurance owner verifies them, or the release owner excludes `WO-REB-028`
-  and `WO-REB-029` by name with the reason, before this contract is approved.
-  Exclusion does not remove their bytes from the candidate, so verification is
-  the expected path.
+  evidence, and hold verified assurance coverage. Measured at `ff0e337`: seven
+  of nine at drafting; `VREC-REB-026` and `VREC-REB-027` were verified by the
+  assurance owner on 2026-08-28 as this packet's entry condition, so nine of
+  nine on the packet branch.
 - No existing member is named by a released release record.
 - No stale `ready` verification or release record exists in the graph beyond
-  the two canonical templates once the two above are decided.
+  the two canonical templates.
 - `WO-RLS-014` is separately reviewed and approved before start preflight or
   any edit.
 - This contract is approved by the release owner before the candidate commit and
@@ -239,9 +237,6 @@ digest is unchanged and remains what every mutation guard proves.
 
 ## Human approval triggers
 
-- Verification of `VREC-REB-026` and `VREC-REB-027` (assurance owner), or
-  exclusion of their work orders (release owner), before this contract's
-  approval.
 - Approval of this contract (release owner) and of `WO-RLS-014` (engineering
   owner), as two distinct decisions.
 - Start of `WO-RLS-014`, its completion, the verification of `VREC-SEH-016`,

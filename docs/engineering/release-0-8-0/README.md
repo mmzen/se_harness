@@ -19,9 +19,9 @@ The first release after the 2026-08 complexity audit. It carries the P0 repairs 
 
 The authoritative state of every artifact is its own front matter and `[[lifecycle_events]]`, not this index.
 
-## Entry condition to settle before approval
+## Entry condition
 
-`VREC-REB-026` and `VREC-REB-027` (covering `WO-REB-028` and `WO-REB-029`) are `ready`, not verified. Their work orders' bytes are in the candidate regardless, so the assurance owner's verification is the expected path; exclusion by name is the alternative the contract allows.
+`VREC-REB-026` and `VREC-REB-027` (covering `WO-REB-028` and `WO-REB-029`) were `ready` at drafting and were verified by the assurance owner on 2026-08-28 on this packet's branch; every member now holds verified coverage.
 
 ## Release unit shape
 
