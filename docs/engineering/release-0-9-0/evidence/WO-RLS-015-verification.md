@@ -98,3 +98,16 @@ Pull request #252 at `2950b7c`: all 13 lanes pass, both platform legs of the sui
 ## 8. Build re-verified at the bound candidate
 
 The replay was re-run at `8adfe1b` (the commit `VREC-SEH-018` binds; the delta from `8573608` is evidence-only, no packaged byte): `state = exact`, two byte-identical producer runs, wheel `e851bccf…` and sdist `6fd34bd7…` equal to section 4, `source_date_epoch` 1787955573. The bundle manifest at this commit is retained as `RLS-SEH-018-bundle.json` when the record is prepared.
+
+## 9. Correction of section 8
+
+Section 8 says the digests at `8adfe1b` equal section 4's; that sentence was written before the measurement completed and is wrong — the assertion in the run script failed and the text still went in. The measured truth: at `8adfe1b` the replay is `state = exact` with two byte-identical producer runs, and its digests are its own, because `source_date_epoch` (1787955573) follows the bound commit's timestamp, so every commit builds different bytes reproducibly. The 0.8.0 release behaved identically (`a95497f3…` at `aa0c9bc`, `e08aab8a…` at the bound `884b769`). What `RLS-SEH-018` binds are the `8adfe1b` digests below, and the hosted replay must reproduce exactly these:
+
+| Reading | Value |
+| --- | --- |
+| wheel | `se_harness-0.9.0-py3-none-any.whl`, `c4b5617585a3cb908a3b3c14b97e1039824ca731b8acce0251888d095927f364` |
+| sdist | `se_harness-0.9.0.tar.gz`, `da80ef011572a2b0b96d1bdb920149b97014d9bb5a33de77721054188408268c` |
+| checksums | `SHA256SUMS`, `c5e8d1a812863f0fd85f831a235e439721c0fe50ff1deb1c9f42083c24bb892a` |
+| source manifest | `6c5af56bd71c635408321144c3d028b6897540314ab6935eb46596be93e651db`, `source_date_epoch` 1787955573 |
+
+Section 4 remains the record of the qualification-time build at `8573608`.
