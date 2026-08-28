@@ -2,7 +2,7 @@
 id = "WO-RLS-015"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.9.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-28T22:09:11Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28. Start preflight Completed with nothing not done over the approval commit a2ae1f4 carrying unmoved main effbcbc, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release record and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T22:19:31Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-RLS-015 implemented', on the handoff check reading Completed over candidate 8573608, formal snapshot 3fa898f0c027fdfac8f6c54df562d290018a52f7d95ac0a66c70957f48644ae8, change set asserted complete over 6 paths plus the work order's own file, no scope amendment. Every reading was taken before this reason was written: under the governing exact public 0.8.0 root validate 1,088 artifacts 0 errors and doctor 0 FAIL; review preflight ready; distributions PASS; portable surface PASS in all three modes on the ephemeral wheel; complete-candidate CC001 to CC004 pass; the upgrade rehearsal 0.8.0 to 0.9.0 pass twice with equal semantic digest; suite 1,117 with the single known workstation file-mode failure that passes hosted; the census at the candidate traces WO-RLS-015 with zero untraced and the nine recorded exemptions; the build of record is exact with two byte-identical producer runs, wheel e851bccf\u2026 and sdist 6fd34bd7\u2026; all hosted lanes pass at the evidence commit. Three deviations are recorded in the evidence. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.9.0 candidate from main
