@@ -2,13 +2,20 @@
 id = "VER-ECP-001"
 type = "verification"
 title = "Independent evidence for the next command, Git-derived change sets, the trimmed manifest, and the chain-scoped snapshot"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-015", "REQ-ECP-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for the next command, Git-derived change sets, the trimmed manifest, and the chain-scoped snapshot
@@ -33,7 +40,7 @@ commands, the in-tree module.
 | Requirement | Method | Case/evidence | Pass condition |
 |---|---|---|---|
 | `REQ-ECP-001` one call returns the complete context | test: `next --json` over every work-order, VREC, and RLS state in the state table; equality against `focus --json`, `preflight --json`, and `select_current_step` | temporary repository per state; explicit `--artifact` and default selection; no selectable artifact | one schema-2 result carries `selected` (id and status), `governing_chain`, `execution_scope.paths`, `reading_manifest`, `next.command_or_response` with a concrete argv, and `decision_required`; each field equals the corresponding output of the composed commands at the same snapshot; the no-selection case is a blocked result with an escalation, never an exception |
-| `REQ-ECP-002` change set derived from Git | test: `check --from-git <base>` against a hand-built working tree | modified tracked file; deleted tracked file; renamed file; untracked file; ignored file; path outside scope; `<base>` not a commit | derived set equals `diff(base, worktree) + untracked - ignored` with the deletion and both rename sides present; `QGP-G4I-PATHS` fails on the outside path; an unresolvable base is a fail-closed `not_assessable` naming the base; `--from-git` combined with `--changed-path` is refused |
+| `REQ-ECP-002` change set derived from Git | test: `check --from-git BASE` against a hand-built working tree | modified tracked file; deleted tracked file; renamed file; untracked file; ignored file; path outside scope; `BASE` not a commit | derived set equals `diff(base, worktree) + untracked - ignored` with the deletion and both rename sides present; `QGP-G4I-PATHS` fails on the outside path; an unresolvable base is a fail-closed `not_assessable` naming the base; `--from-git` combined with `--changed-path` is refused |
 | `REQ-ECP-015` generated command block, not the narrative | test: `preflight --phase start --json` manifest; byte measurement of the emitted block | owner region carrying 6,000 bytes of narrative plus the managed command block; block grown past 2048 bytes | the manifest names the generated command block and no other part of `AGENTS.md`; the block is at most 2048 bytes; the oversize block fails preflight with a coded diagnostic and a byte count |
 | `REQ-ECP-016` chain-scoped snapshot | test: `review_evidence_available` digest; edit outside the chain; edit inside the chain | evidence bound at snapshot S; an unrelated domain's requirement edited; a governing requirement edited | the digest after the unrelated edit equals S and the predicate stays `pass`; the digest after the chain edit differs from S and the predicate fails naming both digests; the digest covers the selected artifact, its governing chain, and its declared dependencies only, as enumerated by the test from the graph |
 
@@ -58,7 +65,7 @@ review, `docs/notes/agentic-execution-review-2026-08.md:143-148`). Assert
 
 Modify, delete, rename, add untracked, and add ignored files in a temporary
 repository whose work order scopes only some of them. Run
-`check --artifact WO --checkpoint handoff --from-git <base>`. Assert the
+`check --artifact WO --checkpoint handoff --from-git BASE`. Assert the
 derived set and assert `QGP-G4I-PATHS` fails on the out-of-scope path with
 `WEX201` naming it.
 
@@ -125,7 +132,7 @@ None beyond the reviewer reading of Scenario 2's rendered corrective.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: the
 commands, per-scenario JSON results, the fixture trees as listings, the
 measured byte counts, both digests of Scenario 8, and per-platform test
 figures.

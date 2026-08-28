@@ -2,13 +2,20 @@
 id = "SPEC-ECP-002"
 type = "specification"
 title = "Evidence packets, identifier allocation, and pull-request body generation"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-003", "REQ-ECP-004", "REQ-ECP-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: Evidence packets, identifier allocation, and pull-request body generation
@@ -38,7 +45,7 @@ No lifecycle state, decision right, or gate predicate changes.
 ## Terms
 
 - **Evidence packet:** one Markdown file under
-  `<domain>/evidence/<WO-ID>/` whose first bytes are a fenced TOML header.
+  `DOMAIN/evidence/WO-ID/` whose first bytes are a fenced TOML header.
 - **Packet header:** the fenced block ` ```toml ` ... ` ``` ` at byte offset 0
   carrying `artifact`, `checkpoint`, `formal_snapshot_sha256`, and
   `rebound_at`.
@@ -53,9 +60,9 @@ No lifecycle state, decision right, or gate predicate changes.
 
 ### Evidence packets
 
-**ECP-EVD-001:** `harnessctl evidence <repository> --artifact <WO-ID>
---checkpoint <name>` writes
-`<domain>/evidence/<WO-ID>/<WO-ID>-<checkpoint>.md` when it does not exist,
+**ECP-EVD-001:** `harnessctl evidence REPOSITORY --artifact WO-ID
+--checkpoint NAME` writes
+`DOMAIN/evidence/WO-ID/WO-ID-CHECKPOINT.md` when it does not exist,
 with a packet header and a body containing one heading and the sentence
 "Retained by `harnessctl evidence`; body content is owner-authored."
 
@@ -87,12 +94,12 @@ artifact in `WEX-ECP-012`.
 ### Identifier allocation
 
 **ECP-IDA-001:** `create-artifact` without `--id` allocates
-`<TYPE>-<DOMAIN>-<NNN>` where `NNN` is the lowest three-digit number not used
+`TYPE-DOMAIN-NNN` where `NNN` is the lowest three-digit number not used
 by any artifact of that type and domain reachable from any local ref.
 
 **ECP-IDA-002:** Reachability is computed by `git for-each-ref
 --format=%(refname)%00%(objectname)`, then `git ls-tree -r --name-only
-<object> docs/engineering` per ref, matching basenames against
+OBJECT docs/engineering` per ref, matching basenames against
 `^(INT|CAP|REQ|SPEC|ARCH|ADR|VER|VREC|WO|RLS|REL)-[A-Z][A-Z0-9]*-(\d{3})\.md$`.
 
 **ECP-IDA-003:** The working tree, including untracked files under
@@ -111,14 +118,14 @@ by the ref name.
 
 ### Pull-request body generation
 
-**ECP-PRB-001:** `harnessctl pr-body <repository> --artifact <WO-ID>` writes
+**ECP-PRB-001:** `harnessctl pr-body REPOSITORY --artifact WO-ID` writes
 to standard output a body whose first non-empty line is
-`Harness-Work-Order: <WO-ID>` as a standalone line, with LF line endings and
+`Harness-Work-Order: WO-ID` as a standalone line, with LF line endings and
 no `\r` byte anywhere.
 
-**ECP-PRB-002:** When `<domain>/evidence/<WO-ID>/handoff.json` exists and
+**ECP-PRB-002:** When `DOMAIN/evidence/WO-ID/handoff.json` exists and
 parses as schema 2, the body carries one standalone line
-`Harness-Restitution: <result_sha256>`; when it does not exist, no such line
+`Harness-Restitution: RESULT_SHA256`; when it does not exist, no such line
 is emitted.
 
 **ECP-PRB-003:** The body carries the `## Summary` and `## Verification`
@@ -142,9 +149,9 @@ status is `draft`, is `WEX-ECP-014`.
 
 ## Inputs and outputs
 
-Inputs: `evidence <repository> --artifact <id> --checkpoint <name>`;
-`create-artifact` as today, `--id` becoming optional; `pr-body <repository>
---artifact <id>`. Outputs: the packet file, a schema-2 result for `evidence`
+Inputs: `evidence REPOSITORY --artifact ID --checkpoint NAME`;
+`create-artifact` as today, `--id` becoming optional; `pr-body REPOSITORY
+--artifact ID`. Outputs: the packet file, a schema-2 result for `evidence`
 and `create-artifact` listing `mutation.writes`, and the body bytes. Example
 header:
 
@@ -180,4 +187,4 @@ upgrade. The seeded pull-request template gains one line pointing at
 - Whether `evidence` also records `git rev-parse HEAD`; it is not compared
   by any predicate.
 - The wording of the ref list in `ECP-IDA-005`.
-- Whether `pr-body` accepts `--output <file>` in addition to standard output.
+- Whether `pr-body` accepts `--output FILE` in addition to standard output.

@@ -2,10 +2,10 @@
 id = "REQ-ECP-007"
 type = "requirement"
 title = "The restitution digest covers the change set and gates"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "THE SYSTEM SHALL compute `result_sha256` over canonical block bytes that include the sorted changed-path set, the change-set completeness assertion, and every gate predicate status."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "se_harness/workflow_result.py:174-207"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The restitution digest covers the change set and gates

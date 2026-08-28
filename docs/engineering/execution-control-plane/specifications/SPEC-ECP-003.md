@@ -2,13 +2,20 @@
 id = "SPEC-ECP-003"
 type = "specification"
 title = "The mandatory scope-aware pull-request gate and digest coverage"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-006", "REQ-ECP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: The mandatory scope-aware pull-request gate and digest coverage
@@ -39,7 +46,7 @@ section 5, weakness 2). No lifecycle state or decision right changes.
 - **Managed workflow:** `.github/workflows/engineering-harness.yml` as
   installed from the standard template.
 - **Pull-request difference:** the union of `git diff --name-only
-  <base.sha> HEAD` and nothing else; a CI checkout has no untracked files.
+  BASE-SHA HEAD` and nothing else; a CI checkout has no untracked files.
 - **Canonical block bytes:** as `SPEC-ADS-001` defines, extended by
   `ECP-DIG-001`.
 - **Gate predicate status:** the `status` of each entry in
@@ -50,8 +57,8 @@ section 5, weakness 2). No lifecycle state or decision right changes.
 ### The pull-request gate
 
 **ECP-GTE-001:** On every `pull_request` event, the managed workflow runs
-`check . --artifact <WO> --checkpoint handoff --from-git <base.sha> --json`
-after fetching `<base.sha>`, unconditionally of any `Harness-Restitution:`
+`check . --artifact WO --checkpoint handoff --from-git BASE-SHA --json`
+after fetching `BASE-SHA`, unconditionally of any `Harness-Restitution:`
 line.
 
 **ECP-GTE-002:** The step fails when the result's `operation.outcome` is not
@@ -86,7 +93,7 @@ scope".
 before `Alternatives`, the sections `Change set` (each `scope.changed_paths`
 member on its own line, in the schema's sort order, then the line
 `complete: true|false` from `scope.change_set_complete`) and `Gates` (one
-line `<predicate-id>: <status>` per predicate in `QG-009` order).
+line `PREDICATE-ID: STATUS` per predicate in `QG-009` order).
 
 **ECP-DIG-002:** `result_sha256` remains the lowercase SHA-256 of the
 canonical block bytes (`ADS-DIG-001`); the schema identifier is unchanged.
@@ -132,7 +139,7 @@ replaced by `--from-git`, which `WO-ECP-001` must ship first.
 ## Explicitly unspecified decisions
 
 - Whether the step uses `fetch-depth: 0` or a targeted fetch, provided
-  `<base.sha>` resolves.
+  `BASE-SHA` resolves.
 - The exact log wording beyond the required identifiers.
 - Whether the digest sections render predicate messages; statuses are
   required, messages are not.

@@ -2,10 +2,10 @@
 id = "REQ-ECP-009"
 type = "requirement"
 title = "Transitions evaluate the contract's gates"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN `harnessctl transition` plans a lifecycle edge, THE SYSTEM SHALL evaluate the `transition` checkpoint gates declared in `QUALITY_GATES.json` through the same gate evaluator that `check` uses, in place of any command-private precondition set."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "se_harness/workflow_compliance.py:395; QUALITY_GATES.md QG-010"
 
 [relations]
 derives_from = ["CAP-ECP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: Transitions evaluate the contract's gates

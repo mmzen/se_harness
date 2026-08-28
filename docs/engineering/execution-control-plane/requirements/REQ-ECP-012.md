@@ -2,10 +2,10 @@
 id = "REQ-ECP-012"
 type = "requirement"
 title = "A fresh consumer repository passes doctor"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN a consumer runs `harnessctl init`, commits the result, and runs `harnessctl doctor`, THE SYSTEM SHALL exit 0 with no failed check."
 verification_method = ["test", "demonstration"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "complexity audit P0-1"
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: A fresh consumer repository passes doctor

@@ -2,10 +2,10 @@
 id = "REQ-ECP-011"
 type = "requirement"
 title = "A delegation class unlocks transitions behind the gate"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHERE a work order declares a delegation class, THE SYSTEM SHALL permit the delegated actor to apply `DR-WO-START`, `DR-WO-COMPLETE`, and `DR-VREC-PREPARE` transitions only while the required pull-request gate for the candidate is passing."
 verification_method = ["test", "demonstration"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 10, principle 5; ADR-AEX-006"
 
 [relations]
 derives_from = ["CAP-ECP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: A delegation class unlocks transitions behind the gate

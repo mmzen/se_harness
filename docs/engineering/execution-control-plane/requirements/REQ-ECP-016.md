@@ -2,10 +2,10 @@
 id = "REQ-ECP-016"
 type = "requirement"
 title = "Handoff evidence binds a chain-scoped snapshot"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN `check` evaluates `review_evidence_available` for a work order, THE SYSTEM SHALL bind the evidence to a snapshot digest computed over the selected artifact's governing chain and dependencies only."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 5, weakness 16; workflow_contract.json:509"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: Handoff evidence binds a chain-scoped snapshot

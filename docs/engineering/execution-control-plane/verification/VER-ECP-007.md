@@ -2,13 +2,20 @@
 id = "VER-ECP-007"
 type = "verification"
 title = "Independent evidence for the consumer product boundary"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-012", "REQ-ECP-013", "REQ-ECP-014"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for the consumer product boundary
@@ -103,7 +110,7 @@ about invocation is matched by a traced subprocess in the evidence.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: the
 consumer transcript per platform, the `doctor` output, the grep inventories
 before and after, the wheel `RECORD`, the subprocess traces, and
 per-platform test figures.

@@ -2,13 +2,20 @@
 id = "SPEC-ECP-006"
 type = "specification"
 title = "Delegation at the Git boundary and the retained journaled apply"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-011", "REQ-ECP-017", "REQ-ECP-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: Delegation at the Git boundary and the retained journaled apply
@@ -123,7 +130,7 @@ leaves the journal in state `human-recovery-stop` and the command exits with
 
 **ECP-JNL-003:** A command that finds a journal in `human-recovery-stop`
 refuses every write with `WEX-ECP-042` until the journal is resolved by
-`harnessctl recover --journal <path> --resolve`, which verifies each path's
+`harnessctl recover --journal PATH --resolve`, which verifies each path's
 current bytes against the journal's post-image or pre-image and archives the
 journal.
 

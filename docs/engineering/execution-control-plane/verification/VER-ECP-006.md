@@ -2,13 +2,20 @@
 id = "VER-ECP-006"
 type = "verification"
 title = "Independent evidence for delegation at the Git boundary, the retained journaled apply, and the absent envelope apparatus"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-011", "REQ-ECP-017", "REQ-ECP-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for delegation at the Git boundary, the retained journaled apply, and the absent envelope apparatus
@@ -120,7 +127,7 @@ superseded and what is retained, without altering front matter.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: the
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: the
 fault matrix with per-stage outcomes on each platform, the journal files
 from stopped retries, the symbol inventory of the wheel and the `--help`
 walk, the demonstration pull request and check-run identifiers, and

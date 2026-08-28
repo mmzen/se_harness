@@ -2,10 +2,10 @@
 id = "REQ-ECP-014"
 type = "requirement"
 title = "A shipped skill invokes the evaluator it describes"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "IF a shipped skill script cannot invoke the released evaluator for the operation its `SKILL.md` describes, THEN THE SYSTEM SHALL exclude that skill from the distributed template."
 verification_method = ["inspection", "test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 3; check_scope.py:190-199"
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: A shipped skill invokes the evaluator it describes

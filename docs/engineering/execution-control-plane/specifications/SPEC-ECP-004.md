@@ -2,20 +2,27 @@
 id = "SPEC-ECP-004"
 type = "specification"
 title = "Authenticated decision records"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: Authenticated decision records
 
 ## Scope
 
-This specification replaces the free-text `--decision <ID>=<actor>` channel
+This specification replaces the free-text `--decision ID=ACTOR` channel
 of `transition` with structured decision records whose signer is verified
 against a configured identity source and whose role is checked against the
 decision right. Today the actor is validated for length and control
@@ -51,8 +58,8 @@ unchanged.
 ### Decision records
 
 **ECP-DEC-001:** `transition --apply` accepts decisions only through
-`--decision-record <file>`, one per transitioned artifact; `--decision
-<ID>=<actor>` is refused on `--apply` with `WEX-ECP-020` after the
+`--decision-record FILE`, one per transitioned artifact; `--decision
+ID=ACTOR` is refused on `--apply` with `WEX-ECP-020` after the
 one-release window of the compatibility section.
 
 **ECP-DEC-002:** A decision record is valid only when `schema` equals
@@ -88,9 +95,9 @@ every `transition --apply` with `WEX-ECP-025` naming the table; there is no
 default source and no honour-based fallback.
 
 **ECP-DEC-008:** The applied `[[lifecycle_events]]` row carries
-`decided_by = <role>`, and a new member `decision_record_sha256` equal to the
+`decided_by = ROLE`, and a new member `decision_record_sha256` equal to the
 SHA-256 of the record's canonical JSON bytes; the record is copied into
-`<domain>/evidence/<artifact>/decisions/<sha256-prefix-12>.json` in the same
+`DOMAIN/evidence/ARTIFACT/decisions/SHA256-PREFIX-12.json` in the same
 journaled apply.
 
 **ECP-DEC-009:** `transition` without `--apply` evaluates every record and
@@ -110,7 +117,7 @@ it is verified by the same rules and is accepted only for the rights
 
 ## Inputs and outputs
 
-Inputs: `--decision-record <file>` (repeatable), the configured identity
+Inputs: `--decision-record FILE` (repeatable), the configured identity
 source, Git signature state, `GITHUB_ACTOR`. Outputs: the schema-2
 transition result with `mutation.writes` listing the artifact and the
 retained record; refusals as `blocked`. Example record:
@@ -148,7 +155,7 @@ all-or-nothing (`se_harness/workflow.py:69`).
 
 ## Compatibility and migration
 
-For one release `--decision <ID>=<actor>` on `--apply` is accepted with
+For one release `--decision ID=ACTOR` on `--apply` is accepted with
 warning `W-ECP-003` only when no `[decision_identity]` table exists; with the
 table present, `ECP-DEC-001` applies immediately. The template
 `.engineering-harness.toml.tpl` gains the table with `source =

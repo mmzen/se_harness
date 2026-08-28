@@ -2,17 +2,24 @@
 id = "REQ-ECP-002"
 type = "requirement"
 title = "The change set is derived from Git"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
-statement = "WHEN `harnessctl check` is run with `--from-git <base>`, THE SYSTEM SHALL derive the changed-path set from the Git difference between `<base>` and the working tree, including untracked files, before evaluating execution-scope predicates."
+updated = "2026-08-28"
+statement = "WHEN `harnessctl check` is run with `--from-git BASE`, THE SYSTEM SHALL derive the changed-path set from the Git difference between `BASE` and the working tree, including untracked files, before evaluating execution-scope predicates."
 verification_method = ["test"]
 priority = "must"
 source = "review section 5, weakness 2"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The change set is derived from Git
@@ -31,14 +38,14 @@ knows the change set; the harness must read it rather than ask.
 
 ## Behavior
 
-- Trigger: `harnessctl check` is invoked with `--from-git <base>`, where
-  `<base>` is any resolvable Git revision.
+- Trigger: `harnessctl check` is invoked with `--from-git BASE`, where
+  `BASE` is any resolvable Git revision.
 - Response: the changed-path set is the union of tracked paths differing between
-  `<base>` and the working tree and of untracked, non-ignored paths; it is
+  `BASE` and the working tree and of untracked, non-ignored paths; it is
   sorted, reported in the result block, and used as the input of `QGP-G4I-PATHS`
   and every other execution-scope predicate, with completeness asserted by the
   harness.
-- On failure: when `<base>` does not resolve, the working tree is not a Git
+- On failure: when `BASE` does not resolve, the working tree is not a Git
   checkout, or `--from-git` is combined with `--changed-path`, the command fails
   closed with a coded predicate and evaluates no scope predicate.
 

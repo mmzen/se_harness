@@ -2,13 +2,20 @@
 id = "SPEC-ECP-001"
 type = "specification"
 title = "The next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 specifies = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-015", "REQ-ECP-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Specification: The next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest
@@ -17,7 +24,7 @@ specifies = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-015", "REQ-ECP-016"]
 
 This specification defines four contracts over the existing workflow kernel:
 a `next` command that projects the complete execution context in one schema-2
-result; a `--from-git <base>` change-set source for `check`; a snapshot digest
+result; a `--from-git BASE` change-set source for `check`; a snapshot digest
 scoped to the selected artifact's governing chain; and a reading manifest that
 carries a generated command block in place of the `AGENTS.md` owner narrative.
 It changes no lifecycle state, decision right, or artifact schema. Today the
@@ -57,7 +64,7 @@ Changed paths are agent-typed and never compared to `git diff`
 
 ### The next command
 
-**ECP-NXT-001:** `harnessctl next <repository> [--artifact <id>]` returns one
+**ECP-NXT-001:** `harnessctl next REPOSITORY [--artifact ID]` returns one
 `se-harness-workflow-result-v2` result with `operation.kind = "next"`; when
 `--artifact` is absent and exactly one work order is `in_progress`, that work
 order is selected, otherwise the result is `blocked` with
@@ -66,8 +73,8 @@ order is selected, otherwise the result is `blocked` with
 **ECP-NXT-002:** The result carries an additive top-level `context` object
 with exactly these members: `reading_manifest` (ordered list of repository
 relative paths), `governing` (the governing chain ids), `declared_paths` (the
-normalised `[execution_scope].paths`), `state` (`{"status": <status>,
-"family": <family>}` of the selected artifact), `next` (`{"argv": [...],
+normalised `[execution_scope].paths`), `state` (`{"status": STATUS,
+"family": FAMILY}` of the selected artifact), `next` (`{"argv": [...],
 "procedure_id": ..., "step_id": ...}`), and `decision_required` (`null` or
 the schema-2 decision object).
 
@@ -104,12 +111,12 @@ retry").
 
 ### Git-derived change sets
 
-**ECP-CHG-001:** `check` accepts `--from-git <base>`; it is mutually exclusive
+**ECP-CHG-001:** `check` accepts `--from-git BASE`; it is mutually exclusive
 with `--changed-path`, `--changes-complete`, and `--change-manifest`, and
 supplying both is `WEX-ECP-002`.
 
-**ECP-CHG-002:** With `--from-git <base>`, the change set is the union of
-`git diff --name-only <base>` against the working tree (renamed paths
+**ECP-CHG-002:** With `--from-git BASE`, the change set is the union of
+`git diff --name-only BASE` against the working tree (renamed paths
 contribute both names) and `git ls-files --others --exclude-standard`, each
 member passed through `normalize_path`
 (`se_harness/workflow_compliance.py:71`) and deduplicated by `_unique_paths`
@@ -179,8 +186,8 @@ reading obligation (`ADS-RDM-003`).
 
 ## Inputs and outputs
 
-Inputs: `next <repository> [--artifact <id>] [--json]`; `check ...
---from-git <base>`; the existing `preflight` arguments. Outputs: schema-2
+Inputs: `next REPOSITORY [--artifact ID] [--json]`; `check ...
+--from-git BASE`; the existing `preflight` arguments. Outputs: schema-2
 results with the additive `context` object, `scope.change_set.source`, and
 `compliance.chain_snapshot_sha256`; the managed file
 `docs/engineering/AGENTS_COMMANDS.md`. Example `context` value:

@@ -2,10 +2,10 @@
 id = "ARCH-ECP-001"
 type = "architecture"
 title = "The execution control plane: state in the harness, enforcement at Git boundaries"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 addresses = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-006", "REQ-ECP-007", "REQ-ECP-008", "REQ-ECP-009", "REQ-ECP-010", "REQ-ECP-011", "REQ-ECP-016", "REQ-ECP-017", "REQ-ECP-018"]
@@ -16,6 +16,13 @@ outcome = "adr_required"
 triggers = ["system-boundary", "public-interface-or-protocol", "security-privacy-or-trust-boundary", "concurrency-consistency-reliability-or-failure-strategy", "cross-cutting-policy", "difficult-to-reverse", "material-alternatives"]
 rationale = "The architecture moves the write boundary from a proposed-workspace broker to Git, adds a public command and result members, replaces free-text decision actors with verified identities, removes an execution model that approved artifacts still describe, and chooses one kernel over three engines. Each is a boundary or protocol change with a considered alternative and a cost to reverse once consumers upgrade."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Architecture: The execution control plane: state in the harness, enforcement at Git boundaries
@@ -57,7 +64,7 @@ into one read-only result carrying `context` (`ECP-NXT-001` to
 
 ### Git change-set reader (`workflow_compliance.py`, shared Git wrapper)
 
-Derives the change set from `git diff --name-only <base>` plus untracked
+Derives the change set from `git diff --name-only BASE` plus untracked
 files, normalises with `normalize_path`
 (`se_harness/workflow_compliance.py:71`), and feeds `CheckpointContext`
 (`ECP-CHG-001` to `ECP-CHG-006`). Addresses `REQ-ECP-002`.
@@ -149,7 +156,7 @@ files.
    one schema-2 result with `context`.
 3. The agent works on a branch. No harness state is carried in the agent's
    context beyond the work-order id.
-4. The agent runs `check --checkpoint handoff --from-git <base>`; the Git
+4. The agent runs `check --checkpoint handoff --from-git BASE`; the Git
    reader derives the change set; the kernel evaluates the handoff gates
    against the chain-scoped snapshot; `evidence` writes or rebinds the
    packet; the result carries `result_sha256` over change set and gates.

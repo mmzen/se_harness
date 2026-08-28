@@ -2,10 +2,10 @@
 id = "REQ-ECP-006"
 type = "requirement"
 title = "The pull-request gate enforces scope unconditionally"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN the managed CI workflow runs on a pull-request event, THE SYSTEM SHALL evaluate `QGP-G4I-PATHS` over the pull request's Git difference against its base and fail the required check on any path outside the selected work order's execution scope."
 verification_method = ["test", "demonstration"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "review section 5, weakness 2"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: The pull-request gate enforces scope unconditionally
@@ -45,7 +52,7 @@ architecture puts scope enforcement on the diff.
 ## Assumptions and dependencies
 
 - The change set on the runner comes from REQ-ECP-002's `--from-git` reading,
-  with the merge base as `<base>`.
+  with the merge base as `BASE`.
 - The check is configured as required on `main`; making it required is a
   repository setting the consumer applies, which the template documents.
 - A path outside scope that the owner intends is fixed by a scope amendment,

@@ -2,10 +2,10 @@
 id = "REQ-ECP-013"
 type = "requirement"
 title = "No product code names this repository's records"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "THE SYSTEM SHALL ship no product code, template, or installed script that names an artifact identifier of the SE Harness repository's own releases."
 verification_method = ["analysis", "test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "complexity audit P1-2"
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: No product code names this repository's records

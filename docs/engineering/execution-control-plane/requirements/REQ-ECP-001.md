@@ -2,10 +2,10 @@
 id = "REQ-ECP-001"
 type = "requirement"
 title = "One call returns the complete execution context"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 statement = "WHEN an actor runs `harnessctl next` for a repository, THE SYSTEM SHALL return in one schema-2 result the selected artifact and its state, the governing chain, the declared execution scope, the phase reading manifest, the exact next command, and any decision required."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "the 2026-08 agentic execution review, section 6"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Requirement: One call returns the complete execution context
@@ -36,7 +43,7 @@ next command.
 
 ## Behavior
 
-- Trigger: `harnessctl next <repo>` runs, with or without `--artifact <id>`.
+- Trigger: `harnessctl next REPO` runs, with or without `--artifact ID`.
 - Response: one schema-2 result whose block carries the selected artifact and
   its `status`, the governing chain, the `[execution_scope].paths` declared on
   the selected work order, the reading manifest for the current phase, the exact
@@ -69,7 +76,7 @@ repository validates.
 
 **Then** one schema-2 result names `WO-X-004`, `in_progress`, its chain up to
 the intent, the three paths, the `execute` phase manifest, and the argv
-`harnessctl check . --artifact WO-X-004 --checkpoint handoff --from-git <base>`;
+`harnessctl check . --artifact WO-X-004 --checkpoint handoff --from-git BASE`;
 `decision_required` is empty.
 
 ### Example: failure behavior

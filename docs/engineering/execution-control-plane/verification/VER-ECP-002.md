@@ -2,13 +2,20 @@
 id = "VER-ECP-002"
 type = "verification"
 title = "Independent evidence for harness-authored evidence packets, cross-ref identifier allocation, and generated pull-request bodies"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [relations]
 verifies = ["REQ-ECP-003", "REQ-ECP-004", "REQ-ECP-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T12:03:40Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', as part of the execution-control-plane definition packet of #231 with the issue #212 amendments of #238 applied. Approval of a definition authorizes no work; each work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for harness-authored evidence packets, cross-ref identifier allocation, and generated pull-request bodies
@@ -28,7 +35,7 @@ exact released evaluator, se-harness 0.7.1, installed outside the checkout.
 |---|---|---|---|
 | `REQ-ECP-003` packet written or rebound | test: `evidence` on a fresh packet; on an existing packet after a snapshot move; on a packet with an edited body | temporary repository with one approved work order and retained body text | the machine header carries `artifact`, `checkpoint`, and the current `formal_snapshot_sha256`; a rebind changes only the header bytes and leaves every body byte equal; `review_evidence_available` passes after the rebind and fails before it |
 | `REQ-ECP-004` allocation across every local ref | test: `create-artifact` without `--id` | a higher identifier present only on an unmerged local branch; a gap below the working-tree maximum; an identifier present only on a detached ref | the allocated identifier is the lowest unused across every local ref, so the branch-only identifier is skipped and the gap is not filled when any ref uses it; the result names the refs consulted |
-| `REQ-ECP-005` generated body | test: `pr-body` bytes | work order with and without a handoff result; body compared to expected bytes | body ends in LF only, contains no `0x0D`, carries a standalone `Harness-Work-Order: WO-...` line, and carries `Harness-Restitution: <result_sha256>` exactly when a handoff result exists; `select-work-order` parses the generated body back to the same identifier and digest |
+| `REQ-ECP-005` generated body | test: `pr-body` bytes | work order with and without a handoff result; body compared to expected bytes | body ends in LF only, contains no `0x0D`, carries a standalone `Harness-Work-Order: WO-...` line, and carries `Harness-Restitution: RESULT_SHA256` exactly when a handoff result exists; `select-work-order` parses the generated body back to the same identifier and digest |
 
 ## Acceptance scenarios
 
@@ -103,7 +110,7 @@ None.
 
 ## Evidence retention
 
-Under `docs/engineering/execution-control-plane/evidence/<WO-ID>/`: packet
+Under `docs/engineering/execution-control-plane/evidence/WO-ID/`: packet
 bytes before and after rebind with a byte diff, the ref listing and allocated
 identifiers, the generated body bytes with a hex dump of the line ends, and
 per-platform test figures.
