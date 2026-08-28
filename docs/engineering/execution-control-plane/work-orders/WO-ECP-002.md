@@ -2,10 +2,10 @@
 id = "WO-ECP-002"
 type = "work_order"
 title = "Harness-authored evidence, identifier allocation, and pull-request bodies"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -22,12 +22,36 @@ paths = [
   "docs/notes/harnessctl-reference.md",
   "tests/",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-002.md",
+  "se_harness/workflow_contract.json",
+  "templates/repository/standard/docs/engineering/WORKFLOW.json",
 ]
 
 [relations]
 implements = ["REQ-ECP-003", "REQ-ECP-004", "REQ-ECP-005"]
 specifications = ["SPEC-ECP-002"]
 verification = ["VER-ECP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T21:09:05Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start with the amendments', as the second work order of the execution-control-plane plan, after WO-ECP-001 merged as 0961176. Its definitions REQ-ECP-003, REQ-ECP-004, REQ-ECP-005, SPEC-ECP-002 and VER-ECP-002 were approved separately on 2026-08-28; four rules of SPEC-ECP-002 are restated by dated amendment before start (the header digest, the attribute rule, the harness-written handoff.json, the contract corrective) and the scope gains the specification and the two contract copies. Authorizes start preflight and then only the declared scope: harnessctl evidence, the TOML-header evidence predicate with a one-release substring grace, identifier allocation across local refs, harnessctl pr-body, the contract corrective, the seed, the note, tests and evidence. Measured before this transition: validate PASS at 0 errors under the governing 0.8.0 root. It authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T21:09:09Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start with the amendments'. Start preflight Completed with nothing not done over the approval commit 645b5ca carrying unmoved main 0961176, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T21:27:11Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark WO-ECP-002 implemented', on the handoff check reading Completed over the implementation commit, formal snapshot 9c6e9645393374ce2acf007697f7535116a7f4776411aa7fc5c07e2edbb16c22, change set asserted complete over 14 paths plus the work order's own file, under the four pre-start amendments recorded on 2026-08-28. harnessctl evidence, the parser-read evidence predicate with its one-release grace, identifier allocation across local refs, harnessctl pr-body and the harness-retained handoff.json are shipped as SPEC-ECP-002 amended specifies. Readings under the governing exact public 0.8.0 root: validate 0 errors, doctor 0 FAIL. Candidate: 239 tests in the three touched modules, full suite 1077 with the single known workstation file-mode failure that passes hosted; the candidate's own check --from-git main completed over 15 paths and retained handoff.json; the pull-request body is pr-body's output with zero carriage returns. All 13 pull-request lanes pass on #250 at 2b1655d including both platform legs. Five deviations are recorded in the packet, the fifth being the restitution line omitted from the pull request because the 0.8.0 lane predates ECP-CHG-007. This authorizes no further act."
 +++
 
 # Work Order: Harness-authored evidence, identifier allocation, and pull-request bodies
@@ -41,6 +65,35 @@ separate decisions by the roles that own them. Approval of `REQ-ECP-003`,
 separate acts by their owners and precede approval of this work order. This
 work order follows `WO-ECP-001` (its `evidence` command binds the packet
 that `check --from-git` evaluates) and precedes `WO-ECP-003`.
+
+## Pre-start amendments, 2026-08-28
+
+Put to the engineering owner before approval, on a reading of `SPEC-ECP-002`
+against `main` at `0961176`, and answered "Approve and start with the
+amendments". Each is recorded as a dated amendment of `SPEC-ECP-002` under
+this work order, whose scope gains that specification and the two contract
+copies:
+
+1. `ECP-EVD-002` named the chain-scoped digest of `ECP-SNP-001`, which is
+   `WO-ECP-008`'s and is not implemented; the header carries
+   `formal_snapshot_sha256` as `QGP-G4I-EVIDENCE` compares it today, and
+   `WO-ECP-008` moves both sides to the chain digest together.
+2. `ECP-EVD-006` required an `evaluator-evidence` attribute covering the
+   packet path; that class covers `*.json` only, so every Markdown packet
+   would have been refused. `evidence` writes UTF-8/LF bytes itself and
+   refuses (`WEX-ECP-011`) only when an attribute covering the path would
+   convert line endings.
+3. The compatibility section changes the `QGP-G4I-EVIDENCE` corrective to
+   the `evidence` command; `se_harness/workflow_contract.json` and the
+   template `WORKFLOW.json` are added to the scope for that one change.
+4. `ECP-PRB-002` reads `DOMAIN/evidence/WO-ID/handoff.json`, which nothing
+   wrote; a completed `check --checkpoint handoff --from-git BASE` retains
+   its schema-2 result there, written by the harness; the packet directory is
+   admitted to the work order's scope by construction, as its own file is.
+
+Two deviations from the packet text are accepted in advance: readings are
+taken with the governing exact public 0.8.0 root, not the 0.7.1 named on
+2026-08-27; the root managed copies stay unedited while the templates move.
 
 ## Objective
 

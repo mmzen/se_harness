@@ -5,6 +5,7 @@ import errno
 import re
 import io
 import json
+import sys
 import os
 import statistics
 import tempfile
@@ -1361,6 +1362,98 @@ class NextCommandTests(WorkflowExecutionTests):
             result["restitution"]["command_or_response"],
         )
         self.assertNotIn("rerun the same command", json.dumps(result))
+
+
+
+class PullRequestBodyTests(unittest.TestCase):
+    """REQ-ECP-005 / ECP-PRB-001 to -005 (its own fixture: the parent's tests are not re-run here)."""
+
+    def invoke(self, *arguments: str) -> tuple[int, str, str]:
+        output = io.StringIO()
+        error = io.StringIO()
+        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            code = main(list(arguments))
+        return code, output.getvalue(), error.getvalue()
+
+    def setUp(self) -> None:
+        # The CI selector accepts only TYPE-DOMAIN-NNN identifiers; the fixture chain
+        # is renamed WO-001 -> WO-PRD-001 so the generated body can round-trip.
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        standard_repository(self.root, "Body Fixture")
+        create_base_chain(self.root, operating_contract_status="draft")
+        for path in (self.root / "docs/engineering/product").rglob("*.md"):
+            text = path.read_text(encoding="utf-8")
+            if "WO-001" in text:
+                path.write_text(text.replace("WO-001", "WO-PRD-001"), encoding="utf-8")
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.rename(work_order.with_name("WO-PRD-001.md"))
+
+    def in_progress_work_order(self) -> Path:
+        path = self.root / "docs/engineering/product/work-orders/WO-PRD-001.md"
+        text = path.read_text(encoding="utf-8").replace('status = "implemented"', 'status = "in_progress"', 1)
+        text = text.replace(
+            "[relations]",
+            '[assurance]\ncommit_bound_verification = "required"\nrationale = "fixture"\ndecided_by = "repository-owner"\n\n[execution_scope]\npaths = ["src/"]\n\n[relations]',
+            1,
+        )
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def body(self, artifact_id: str = "WO-PRD-001") -> tuple[int, bytes, str]:
+        from types import SimpleNamespace
+
+        buffer = io.BytesIO()
+        error = io.StringIO()
+        stdout = SimpleNamespace(buffer=buffer, flush=lambda: None, write=lambda text: buffer.write(text.encode("utf-8")))
+        with mock.patch("sys.stdout", new=stdout), contextlib.redirect_stderr(error):
+            code = main(["pr-body", str(self.root), "--artifact", artifact_id])
+        return code, buffer.getvalue(), error.getvalue()
+
+    def test_body_round_trips_through_the_selector_with_lf_only_and_the_retained_digest(self) -> None:
+        from se_harness.github_ci import carriage_return_trailer_offsets, select_restitution_digest, select_work_order
+
+        self.in_progress_work_order()
+        code, raw, error = self.body()
+        self.assertEqual(0, code, error)
+        self.assertNotIn(b"\r", raw)
+        self.assertTrue(raw.endswith(b"\n") and not raw.endswith(b"\n\n"))
+        text = raw.decode("utf-8")
+        self.assertEqual("Harness-Work-Order: WO-PRD-001", text.splitlines()[0])
+        self.assertEqual("WO-PRD-001", select_work_order(text))
+        self.assertEqual("", select_restitution_digest(text))
+        self.assertEqual([], carriage_return_trailer_offsets(text))
+        self.assertIn("## Summary\n", text)
+        self.assertIn("## Verification\n", text)
+        self.assertIn("- No retained evidence under the packet directory yet.", text)
+        packet_dir = self.root / "docs/engineering/product/evidence/WO-PRD-001"
+        packet_dir.mkdir(parents=True)
+        (packet_dir / "WO-PRD-001-handoff.md").write_text("```toml\n```\n", encoding="utf-8")
+        (packet_dir / "handoff.json").write_text(json.dumps({"schema": "se-harness-workflow-result-v2", "result_sha256": "a" * 64}), encoding="utf-8")
+        code, raw, error = self.body()
+        self.assertEqual(0, code, error)
+        text = raw.decode("utf-8")
+        self.assertEqual("a" * 64, select_restitution_digest(text))
+        self.assertEqual(["Harness-Work-Order: WO-PRD-001", "Harness-Restitution: " + "a" * 64], text.splitlines()[:2])
+        self.assertIn("- docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", text)
+        self.assertIn("- docs/engineering/product/evidence/WO-PRD-001/handoff.json", text)
+        self.assertTrue(text.startswith("Harness-Work-Order: WO-PRD-001\nHarness-Restitution: " + "a" * 64 + "\n\n## Summary\n\n- WO-PRD-001: "))
+        (packet_dir / "handoff.json").write_text(json.dumps({"schema": "other", "result_sha256": "b" * 64}), encoding="utf-8")
+        self.assertEqual("", select_restitution_digest(self.body()[1].decode("utf-8")))
+
+    def test_pr_body_refuses_a_draft_work_order_and_a_non_work_order(self) -> None:
+        code, raw, error = self.body("WO-PRD-001")
+        self.assertEqual(0, code, error)  # the fixture work order is implemented
+        work_order = self.root / "docs/engineering/product/work-orders/WO-PRD-001.md"
+        work_order.write_text(work_order.read_text(encoding="utf-8").replace('status = "implemented"', 'status = "draft"', 1), encoding="utf-8")
+        code, raw, error = self.body("WO-PRD-001")
+        self.assertEqual(2, code)
+        self.assertIn("WEX-ECP-014", error)
+        self.assertEqual(b"", raw)
+        code, raw, error = self.body("REQ-001")
+        self.assertEqual(2, code)
+        self.assertIn("WEX-ECP-014", error)
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]

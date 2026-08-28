@@ -230,3 +230,84 @@ updated = "2026-08-11"
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class IdentifierAllocationTests(unittest.TestCase):
+    """REQ-ECP-004 / ECP-IDA-001 to -006: the lowest free identifier across every local ref."""
+
+    def setUp(self) -> None:
+        import subprocess
+
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        standard_repository(self.root, "Allocation Fixture")
+        (self.root / "docs/engineering/product/requirements").mkdir(parents=True, exist_ok=True)
+        self.write("docs/engineering/product/requirements/REQ-PRD-001.md", 'id = "REQ-PRD-001"')
+        self.write("docs/engineering/product/requirements/REQ-PRD-002.md", 'id = "REQ-PRD-002"')
+
+        def git(*arguments: str) -> str:
+            return subprocess.run(["git", "-C", str(self.root), *arguments], capture_output=True, text=True, check=True).stdout
+
+        self.git = git
+        git("init", "-q", "-b", "main")
+        git("config", "user.email", "fixture@example.invalid")
+        git("config", "user.name", "Fixture")
+        git("add", "-A")
+        git("commit", "-q", "-m", "base")
+
+    def write(self, relative: str, identifier_line: str) -> None:
+        path = self.root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("+++\n" + identifier_line + "\n+++\n", encoding="utf-8")
+
+    def allocate(self, artifact_type: str = "requirement"):
+        from se_harness.artifact_layout import allocate_artifact_id
+
+        return allocate_artifact_id(self.root, domain="product", artifact_type=artifact_type)
+
+    def test_allocation_sees_unmerged_branches_gaps_detached_refs_and_the_working_tree(self) -> None:
+        self.assertEqual(("REQ-PRD-003", ("refs/heads/main", "worktree")), self.allocate())
+        # a higher identifier present only on an unmerged local branch
+        self.git("checkout", "-q", "-b", "feature")
+        self.write("docs/engineering/product/requirements/REQ-PRD-004.md", 'id = "REQ-PRD-004"')
+        self.git("add", "-A"); self.git("commit", "-q", "-m", "feature")
+        self.git("checkout", "-q", "main")
+        self.assertEqual("REQ-PRD-003", self.allocate()[0])
+        # the gap below the branch maximum is filled first, then the working tree counts
+        self.write("docs/engineering/product/requirements/REQ-PRD-003.md", 'id = "REQ-PRD-003"')
+        identifier, refs = self.allocate()
+        self.assertEqual("REQ-PRD-005", identifier)
+        self.assertIn("refs/heads/feature", refs)  # REQ-PRD-004 was found there
+        # a tag (detached ref) carrying a further identifier
+        self.git("checkout", "-q", "feature")
+        self.write("docs/engineering/product/requirements/REQ-PRD-005.md", 'id = "REQ-PRD-005"')
+        self.git("add", "-A"); self.git("commit", "-q", "-m", "more"); self.git("tag", "v-detached")
+        self.git("checkout", "-q", "main")
+        self.assertFalse((self.root / "docs/engineering/product/requirements/REQ-PRD-005.md").exists())
+        self.assertEqual("REQ-PRD-006", self.allocate()[0])
+        # remote-tracking refs are not consulted: with the branch and tag gone, only
+        # main and the working tree (which no longer holds REQ-PRD-003, committed on
+        # the deleted branch) remain, so the lowest free number is 003 again
+        self.git("update-ref", "refs/remotes/origin/other", self.git("rev-parse", "feature").strip())
+        self.git("branch", "-D", "feature"); self.git("tag", "-d", "v-detached")
+        self.assertFalse((self.root / "docs/engineering/product/requirements/REQ-PRD-003.md").exists())
+        self.assertEqual("REQ-PRD-003", self.allocate()[0])
+
+    def test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref(self) -> None:
+        import shutil
+
+        from se_harness.artifact_layout import create_artifact
+        from se_harness.installer import HarnessError
+
+        self.git("checkout", "-q", "-b", "feature")
+        self.write("docs/engineering/product/requirements/REQ-PRD-007.md", 'id = "REQ-PRD-007"')
+        self.git("add", "-A"); self.git("commit", "-q", "-m", "feature"); self.git("checkout", "-q", "main")
+        with self.assertRaisesRegex(HarnessError, "already exists: REQ-PRD-007 on local ref refs/heads/feature"):
+            create_artifact(self.root, domain="product", artifact_type="requirement", artifact_id="REQ-PRD-007", dry_run=True)
+        change = create_artifact(self.root, domain="product", artifact_type="requirement", artifact_id=None, dry_run=True)
+        self.assertEqual("REQ-PRD-003", change.allocated_id)
+        shutil.rmtree(self.root / ".git")
+        with self.assertRaisesRegex(HarnessError, "WEX-ECP-013"):
+            self.allocate()
+

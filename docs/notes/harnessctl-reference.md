@@ -29,6 +29,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `next` | coding agent, first call on a work order | read-only | return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result |
+| `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
+| `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
 | `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its authoritative structured handoff |
 | `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit the authoritative schema-2 result |
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
@@ -101,6 +103,9 @@ not derive a new transition or next action from this reference.
 
 ```text
 harnessctl next [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json]
+harnessctl evidence [TARGET] --artifact WO-... --checkpoint start|pre-action|transition|handoff \
+  [--rebound-at RFC3339] [--json]
+harnessctl pr-body [TARGET] --artifact WO-...
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
   [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
@@ -156,6 +161,30 @@ checkout, with a base Git cannot resolve, or on any Git failure it blocks
 with `WEX-ECP-003` and evaluates no predicate as `pass`. The selected work
 order's own artifact file, written by its lifecycle transitions and so always
 in the diff, is admitted to its scope by construction (`ECP-CHG-007`).
+
+`evidence` writes `DOMAIN/evidence/WO-ID/WO-ID-CHECKPOINT.md` (`WO-ECP-002`):
+a fenced TOML header at byte offset 0 with exactly `artifact`, `checkpoint`,
+`formal_snapshot_sha256` and `rebound_at`, followed by an owner-authored
+body. On an existing packet only the header bytes change; the body is
+retained byte for byte, and a file without a header at offset 0, with a
+header naming another artifact or checkpoint, or with invalid TOML is refused
+(`WEX-ECP-010`). It refuses when a `.gitattributes` rule would convert the
+packet's line endings (`WEX-ECP-011`) and when the single `in_progress` work
+order is not the one named (`WEX-ECP-012`). `QGP-G4I-EVIDENCE` reads that
+header through a TOML parser; a packet bound by the older substring lines
+still passes for one release with `W-ECP-002` naming the file and the
+`evidence` command that migrates it. A completed `check --checkpoint handoff
+--from-git BASE` retains its schema-2 result as `handoff.json` in the same
+directory, written by the harness; that directory is admitted to the work
+order's scope by construction.
+
+`pr-body` emits the pull-request body for an approved or later work order
+(`WEX-ECP-014` otherwise): the standalone `Harness-Work-Order` line first, one
+standalone `Harness-Restitution` line carrying the retained `handoff.json`'s
+`result_sha256` when it exists, then the seeded `## Summary` and
+`## Verification` headings with every evidence path under the packet
+directory. LF line endings only; the body round-trips through
+`select-work-order` unchanged, so paste its output rather than typing it.
 
 `--change-manifest` is mutually exclusive with both changed-path options. It
 must be an in-repository UTF-8 JSON object containing only `schema` with value
@@ -244,10 +273,21 @@ The former `rehearse-migration` command is retired (`WO-ECP-010`, issue #210); t
 
 ```text
 harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run]
-harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE --id ID [--dry-run] [--quiet]
+harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE [--id ID] [--dry-run] [--quiet]
 ```
 
 Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. After creation it prints the created type's checklist from the installed `docs/engineering/ARTIFACT_AUTHORING.md`; `--quiet` suppresses it. Existing valid flat layouts remain discoverable and are not automatically migrated.
+
+Without `--id`, `create-artifact` allocates the lowest free
+`TYPE-DOMAIN-NNN` across every local branch and tag and the working tree,
+untracked files included (`WO-ECP-002`): the refs are enumerated with
+`git for-each-ref` and each ref's `docs/engineering` tree is listed, so two
+agents on two branches cannot take the same number; remote-tracking refs are
+not consulted. The domain token is read from the domain's existing
+artifacts. The result names the refs on which the next-lower identifier was
+found, so a gap is explained. Outside a Git checkout allocation is refused
+(`WEX-ECP-013`) rather than guessed from the working tree. An explicit `--id`
+is refused when any local ref already carries it.
 
 Non-dry-run authoring uses the common pre-write mutation guard. The invoking environment must match the schema-3 released-evaluator identity locked by the target repository; candidate source and editable or contaminated installs fail without creating the requested path.
 

@@ -98,3 +98,41 @@ def select_from_event(path: Path, field: str = "work-order") -> str:
     if field == "restitution-digest":
         return select_restitution_digest(pull_request.get("body"))
     return select_work_order(pull_request.get("body"))
+
+
+def render_pull_request_body(root: Path, artifact: Any, *, packet_directory: Path) -> str:
+    """The pull-request body for one work order (ECP-PRB-001 to -005).
+
+    LF line endings only; the first non-empty line is the standalone
+    `Harness-Work-Order` field; a retained `handoff.json` of schema 2 adds one
+    standalone `Harness-Restitution` line; the `Verification` section lists
+    every evidence path under the packet directory.
+    """
+
+    if artifact.artifact_type != "work_order":
+        raise SelectionError(f"WEX-ECP-014: {artifact.artifact_id} is not a work order")
+    if artifact.status == "draft":
+        raise SelectionError(f"WEX-ECP-014: {artifact.artifact_id} is draft; a pull request needs an approved or later work order")
+    lines = [f"Harness-Work-Order: {artifact.artifact_id}"]
+    handoff = packet_directory / "handoff.json"
+    if handoff.is_file():
+        try:
+            value = json.loads(handoff.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise SelectionError(f"WEX-ECP-014: {handoff.relative_to(root).as_posix()} is not readable JSON: {exc}") from exc
+        digest = value.get("result_sha256") if isinstance(value, dict) else None
+        if value.get("schema") == "se-harness-workflow-result-v2" and isinstance(digest, str) and RESTITUTION_LINE.fullmatch(f"Harness-Restitution: {digest}"):
+            lines.append(f"Harness-Restitution: {digest}")
+    title = str(artifact.metadata.get("title", artifact.artifact_id))
+    lines.extend(["", "## Summary", "", f"- {artifact.artifact_id}: {title}", "", "## Verification", ""])
+    evidence = sorted(
+        path.relative_to(root).as_posix()
+        for path in packet_directory.rglob("*")
+        if path.is_file()
+    ) if packet_directory.is_dir() else []
+    lines.extend([f"- {path}" for path in evidence] or ["- No retained evidence under the packet directory yet."])
+    body = "\n".join(lines).replace("\r", "") + "\n"
+    if select_work_order(body) != artifact.artifact_id or carriage_return_trailer_offsets(body):
+        raise SelectionError("WEX-ECP-014: the generated body does not round-trip through the selector")
+    return body
+

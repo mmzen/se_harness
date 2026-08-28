@@ -61,7 +61,7 @@ from se_harness.release_qualification import (
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
 from se_harness.repository_state import EvaluatorIdentity, RepositoryObservationError
 from se_harness.runtime_state import RuntimeStateError, RuntimeStateStore
-from se_harness.workflow_compliance import check_workflow
+from se_harness.workflow_compliance import check_workflow, evidence_packet_path, retain_handoff_result, write_evidence_packet
 from se_harness.workflow_contract import ContractError
 from se_harness.workflow_procedures import ProcedureError
 from se_harness.workflow_result import (
@@ -375,8 +375,60 @@ def _check(args: argparse.Namespace) -> int:
         if message.startswith("WEX-ECP-00"):
             code, message = message.split(": ", 1)
         result = failed_result("check", args.artifact, message, code=code)
+    if (
+        args.from_git is not None
+        and args.checkpoint == "handoff"
+        and result["operation"]["outcome"] == "completed"
+    ):
+        # ECP-PRB-002 (amended): a completed Git-derived handoff result is retained
+        # beside the packet by the harness, never authored by the agent.
+        from se_harness.workflow import _catalog, _validation
+
+        root = Path(args.target)
+        _, report = _validation(root)
+        primary = _catalog(report)[args.artifact]
+        retained = retain_handoff_result(root.resolve(), primary, result)
+        result["mutation"]["writes"] = [{"id": args.artifact, "path": retained, "fields": ["result_sha256"]}]
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
+def _evidence(args: argparse.Namespace) -> int:
+    from datetime import datetime, timezone
+
+    now = args.rebound_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    try:
+        result = write_evidence_packet(
+            Path(args.target), artifact_id=args.artifact, checkpoint=args.checkpoint, now=now,
+        )
+    except HarnessError as exc:
+        message = str(exc)
+        code = "WEX-ECP-010"
+        if message.startswith("WEX-ECP-01"):
+            code, message = message.split(": ", 1)
+        result = failed_result("evidence", args.artifact, message, code=code)
+    print(_render_selected_result(result, args), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
+def _pr_body(args: argparse.Namespace) -> int:
+    from se_harness.github_ci import render_pull_request_body
+    from se_harness.workflow import _catalog, _validation
+
+    root = Path(args.target).resolve()
+    _, report = _validation(root)
+    primary = _catalog(report).get(args.artifact)
+    if primary is None:
+        raise HarnessError(f"WEX-ECP-014: unknown artifact ID: {args.artifact}")
+    try:
+        body = render_pull_request_body(
+            root, primary, packet_directory=evidence_packet_path(root, primary, "handoff").parent,
+        )
+    except SelectionError as exc:
+        raise HarnessError(str(exc)) from exc
+    sys.stdout.buffer.write(body.encode("utf-8"))
+    sys.stdout.flush()
+    return 0
 
 
 def _select_work_order(args: argparse.Namespace) -> int:
@@ -524,6 +576,9 @@ def _create_artifact(args: argparse.Namespace) -> int:
         dry_run=args.dry_run,
     )
     print(f"{change.action:8} {change.path}")
+    if change.allocated_id is not None:
+        refs = ", ".join(change.allocation_refs) if change.allocation_refs else "no local ref"
+        print(f"allocated {change.allocated_id}: the next-lower identifier was found on {refs}")
     if args.dry_run:
         print("dry run: no files were written")
     else:
@@ -1008,6 +1063,19 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     check.set_defaults(handler=_check)
 
+    evidence = commands.add_parser("evidence", help="write or rebind one work order's evidence packet to the current formal snapshot")
+    evidence.add_argument("target", nargs="?", default=".")
+    evidence.add_argument("--artifact", required=True, help="the work order the packet is keyed by")
+    evidence.add_argument("--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff"))
+    evidence.add_argument("--rebound-at", help="RFC 3339 UTC timestamp to record; defaults to now")
+    evidence.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
+    evidence.set_defaults(handler=_evidence)
+
+    pr_body = commands.add_parser("pr-body", help="emit the LF-terminated pull-request body for one work order")
+    pr_body.add_argument("target", nargs="?", default=".")
+    pr_body.add_argument("--artifact", required=True, help="an approved or later work order")
+    pr_body.set_defaults(handler=_pr_body)
+
     transition = commands.add_parser("transition", help="plan or atomically apply explicit lifecycle transitions")
     transition.add_argument("target", nargs="?", default=".")
     transition.add_argument("--set", required=True, action="append", dest="transitions", help="explicit ID=STATUS transition; repeat for packets")
@@ -1059,7 +1127,7 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("target", nargs="?", default=".")
     create.add_argument("--domain", required=True)
     create.add_argument("--type", required=True, dest="artifact_type")
-    create.add_argument("--id", required=True, dest="artifact_id")
+    create.add_argument("--id", dest="artifact_id", help="explicit identifier; omitted, the lowest free TYPE-DOMAIN-NNN across every local ref is allocated")
     create.add_argument("--dry-run", action="store_true")
     create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.set_defaults(handler=_create_artifact)
