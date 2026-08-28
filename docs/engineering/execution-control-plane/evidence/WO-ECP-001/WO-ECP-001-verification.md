@@ -112,3 +112,7 @@ tests/test_workflow_execution.py
 ## Suite
 
 `python scripts/run_tests.py --scale full` with candidate source (CPython 3.12, Linux): Ran 1050 tests in 47.845s (118 classes, 4 workers); failures: FAIL: test_release_build.HostIndependentCandidateSourceTests.test_declared_mode_set_is_what_a_posix_export_already_carries; — the workstation file-mode condition that passes hosted, unchanged. The Windows figure is the hosted lane's.
+
+## Hosted lanes
+
+Pull request #249 at `115a842`: all 13 lanes pass, both platform legs of the suite included (the Git-derived change-set tests run against real `git init` fixtures on Windows and Linux).
