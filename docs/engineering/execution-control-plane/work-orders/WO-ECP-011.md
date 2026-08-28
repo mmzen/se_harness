@@ -2,7 +2,7 @@
 id = "WO-ECP-011"
 type = "work_order"
 title = "Delete the retired governance-migration stage machine now that the root is 0.8.0"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -50,6 +50,13 @@ to = "in_progress"
 decided_at = "2026-08-28T19:00:50Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-28, 'Approve and start'. Start preflight Completed with nothing not done at phase start over the approval commit 32d6c2f carrying unmoved main 6573bd8, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-28T19:09:46Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-28 under DR-WO-COMPLETE, 'Mark implemented', on the handoff check reading Completed over deletion commit d2d7a49, formal snapshot f4f0748a085c357235190d0575093508842eba8ffcafaffa7a356eee6ee88fb6, change set asserted complete over 15 paths, no scope amendment. The four retained stage-machine files, the owner-region .gitattributes rules, the interpreter-safety boundary of the deleted module (ARCH-REB-010 amended by date), the package-data entry and the test exemptions are deleted; RETIRED_MIGRATION_MEMBERS is forbidden in the wheel and the active repository surface. Readings under the governing exact public 0.8.0 root, isolated mode: validate PASS at 0 errors; doctor 0 FAIL; portable-surface repository and wheel checks PASS on a candidate wheel of 107 members naming nothing of the stage machine. Candidate: full suite 1009 tests with the single known workstation file-mode failure that passes hosted. All thirteen pull-request lanes pass on #245 at d2d7a49. One correction to the prior record is disclosed in the evidence: tests/test_interpreter_safety.py did import the module WO-ECP-010 recorded as having no test. This authorizes no further act."
 +++
 
 # Work Order: Delete the retired governance-migration stage machine now that the root is 0.8.0
