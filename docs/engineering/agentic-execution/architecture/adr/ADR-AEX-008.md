@@ -2,13 +2,20 @@
 id = "ADR-AEX-008"
 type = "adr"
 title = "Phase 4 is product, reduced to its guarantee: delegation at the Git boundary, journaled apply, no broker or envelope"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner", "repository-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
 
 [relations]
 decides = ["ARCH-AEX-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T20:03:17Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'Approve', recording the product owner's disposition of issue #211 given the same day: Phase 4 agentic execution is product, reduced to its guarantee \u2014 delegation as a work-order attribute unlocking start, completion and record preparation behind the mandatory pull-request gate, the journaled apply with rollback and human-recovery-stop kept, the broker, the envelope, delegated-workflow, the Phase 2 machinery, the unread contracts and the three writing skills removed under WO-ECP-006 and WO-ECP-007. Consistent with REQ-ECP-011, REQ-ECP-017, REQ-ECP-018 and SPEC-ECP-006 approved on 2026-08-28. Measured before this transition over branch state a58bbdf carrying unmoved main b460085 under the governing exact public 0.8.0 root: validate PASS at 0 errors; Phase 4 at 8,766 of 20,937 package lines with no activation in any target. This decision authorizes no work order, code change, release or publication; issues #215 to #219 close as superseded by it."
 +++
 
 # ADR: Phase 4 is product, reduced to its guarantee
