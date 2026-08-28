@@ -1,7 +1,7 @@
 {
   "evaluator": {
-    "archive_name": null,
-    "archive_sha256": null,
+    "archive_name": "se_harness-0.7.1-py3-none-any.whl",
+    "archive_sha256": "ddd403cde17fc3770460809cbe8f9edb68f47c3aaa0422fe021334279994225d",
     "payload_manifest": "se-harness-installed-payload-v1",
     "payload_sha256": "995ee973b2959af3bcbf7f7cc4388f079ad033e7c68509e71feb142b0691451f",
     "version": "0.7.1"
