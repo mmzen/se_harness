@@ -126,3 +126,7 @@ For the governing 0.8.0 evaluator, which reads evidence by substring (the header
 artifact: WO-ECP-002
 checkpoint: handoff
 formal_snapshot_sha256: 9c6e9645393374ce2acf007697f7535116a7f4776411aa7fc5c07e2edbb16c22
+
+## Deviation 5, recorded after the bind
+
+The generated body carries `Harness-Restitution: 259453bb…`, the digest of the candidate's Git-derived handoff result. The managed CI lane recomputes the handoff with the governing 0.8.0 evaluator over `git diff --name-only base HEAD`, which includes this work order's own file; 0.8.0 predates `ECP-CHG-007` and reads that path as out of scope, so its block is `Blocked` and its digest differs. The pull request therefore omits the restitution line until the root carries `WO-ECP-001`; the line is exercised by the tests and by the body retained in this packet directory.
