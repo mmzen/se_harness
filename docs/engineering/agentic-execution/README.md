@@ -201,3 +201,7 @@ repository, one active work order, sequential regular-file effects, delegated
 start/completion, and VREC preparation. It excludes assurance decisions, release
 preparation and decisions, delivery, Git mutation, credentials, network and
 external actions, child delegation, multi-agent execution, and parallel writers.
+
+## Disposition, 2026-08-28
+
+`ADR-AEX-008` records the owner's decision on issue #211: Phase 4 is product, reduced to its guarantee. Delegation becomes a work-order attribute unlocking start, completion and record preparation behind the mandatory pull-request gate, and the journaled apply with rollback and `human-recovery-stop` is kept; the broker, the envelope, `delegated-workflow`, the Phase 2 machinery, the unread contracts and the three writing skills leave the product under `WO-ECP-006` and `WO-ECP-007`. `ARCH-AEX-002` is superseded by `ARCH-ECP-001` and amended by date. The [AEX] audit sub-items #215–#219 close as superseded. The Phase 1–4 packets below are retained as history.
