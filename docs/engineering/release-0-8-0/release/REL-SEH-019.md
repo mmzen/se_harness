@@ -2,7 +2,7 @@
 id = "REL-SEH-019"
 type = "release_contract"
 title = "Release se-harness 0.8.0: one workflow kernel, a passing fresh consumer, and the real upgrade rehearsal"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -13,6 +13,13 @@ gates = ["WO-AUT-003", "WO-ECP-005", "WO-ECP-009", "WO-ECP-010", "WO-HBI-005", "
 [release_unit]
 previous_release_tag = "v0.7.1"
 untraced_exemptions = ["992fd735c307e6e6d3ebe509ff83a6dadbc91869", "eaaaaf41d1c5b50caa360a7b6cf3cfa11a976892", "4a43d4e446d317d806c2f052565007fa5587323d", "290f2fbda5b20a8a618fcb254d8b9b16347b970b", "872ced93be2a02aff3d8cb3b29dd810014a83570", "19eade6e06b69fcac2ac0661636221c87941ea5c", "5478146daa58de056fc72a353e9bbd3ab0d84dc1", "11040eefdd7b03517e04dc8ea152768d5636c5f7", "09293fde2a795d5edf49ebd9a157ff6fc819ea27", "e098f15d423ace4cfe289e615ac16374d085752b", "fe9443be49734c5a1ee64719591ae18a4205cafb", "60a60903dd657590073af75bf5ae04459f940c7a", "62997a37ac7d6222834b9a78a80937d4685c3898", "4b1eee9055af5da98f8714ac845a2afdfdcb56e2", "ff0e3376e0eb9d7622828a5a843f244988860ec8"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T15:05:47Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-28 with the words 'approve REL-SEH-019 and WO-RLS-014', freezing the ten-work-order allow-list in gates as the exact 0.8.0 release unit. Re-measured immediately before this transition over the packet branch carrying main ff0e337: the nine existing members read implemented with verified coverage, VREC-REB-026 and VREC-REB-027 verified today as the entry condition; no other work order absent from the v0.7.1 tree reached implemented; on the whole-gates basis nine verification contracts, a twelve-requirement union and eleven keyed evidence paths; the commit census from v0.7.1 traces three work orders and exempts fifteen named merge commits, so the derivation is complete, and no candidate_commit is named because the candidate does not exist yet, so QGP-G5P-RELEASE-UNIT passes unmeasured. Governing public 0.7.1 evaluator outside the checkout: validate 0 errors, 471 maintenance warnings; doctor 0 FAIL. From this moment gates cannot be widened, narrowed or repaired in place; a further landing with packaged-surface bytes is a stop condition remedied only by a successor contract. This approval gates the candidate commit and the promotable build and authorizes neither by itself."
 +++
 
 # Release Contract: Release se-harness 0.8.0: one workflow kernel, a passing fresh consumer, and the real upgrade rehearsal

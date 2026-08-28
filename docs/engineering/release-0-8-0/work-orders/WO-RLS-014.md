@@ -2,7 +2,7 @@
 id = "WO-RLS-014"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.8.0 candidate from main"
-status = "draft"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -20,6 +20,20 @@ implements = ["REQ-DST-006"]
 specifications = ["SPEC-DST-001"]
 architecture = ["ARCH-DST-001", "ADR-DST-001"]
 verification = ["VER-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T15:05:49Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'approve REL-SEH-019 and WO-RLS-014', as a decision distinct from the approval of REL-SEH-019 taken seconds earlier. Re-measured over the same branch state: every existing member implemented with verified coverage; validate 0 errors; doctor 0 FAIL, governing exact public 0.7.1 evaluator outside the checkout. Approval authorizes start preflight and then only the qualification, recipe-bound Linux build, evidence and index work inside the three declared execution-scope paths. It authorizes no VREC-SEH-016 or RLS-SEH-017 work, no tag, no publication, no deployment, no maintenance-line mutation, no credential use and no root-evaluator upgrade."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T15:05:51Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 on the engineering owner's approval and the implementer's announced sequence ('I'll record both and start the candidate'). Start preflight run with the governing exact public 0.7.1 evaluator outside the checkout. REL-SEH-019 is approved, so its ten-work-order gates array is fixed authority and this work order's deferred census resolves to it. Bounded to the three declared execution-scope paths; authorizes no promotable build beyond the declared recipe-bound reproducibility work, no VREC-SEH-016 or RLS-SEH-017 preparation, no tag, no publication, no credential use and no root-evaluator change."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.8.0 candidate from main
