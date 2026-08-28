@@ -2,7 +2,7 @@
 id = "WO-REB-030"
 type = "work_order"
 title = "Keep interpreter_safety.evaluate, delete its declaration apparatus and the repository_tools copy"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -29,6 +29,13 @@ implements = ["REQ-REB-030"]
 specifications = ["SPEC-REB-015"]
 architecture = ["ARCH-REB-013", "ADR-REB-013"]
 verification = ["VER-REB-014"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T19:36:43Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared deletion of the interpreter-safety declaration apparatus and the repository_tools mirror, the test pruning with the corpus inventory moved into the tests, the dated amendments named in the packet, the note correction and the retained evidence, inside the declared execution scope. No EPS case, message or order may change. It authorizes no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Keep `interpreter_safety.evaluate`, delete its declaration apparatus and the `repository_tools` copy

@@ -2,7 +2,7 @@
 id = "REQ-REB-030"
 type = "requirement"
 title = "Keep the interpreter-safety rule as one implementation at its one boundary"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-28"
 updated = "2026-08-28"
@@ -13,6 +13,13 @@ source = "issue #220 (complexity audit P1-8); WO-REB-028 and WO-ECP-011, which r
 measure = "one interpreter_safety.py, under se_harness/; no interpreter_safety.json and no repository_tools copy; the behavioural corpus of REQ-REB-024 green on Linux and Windows; every EPS identifier and runtime_identity's EPS011 diagnostic unchanged"
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T19:36:39Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-28 by the accountable owner, 'Approve and start', for issue #220: with one identity boundary left in one runtime after WO-REB-028 and WO-ECP-011, the interpreter-safety rule stays in code and its declaration apparatus and the repository_tools mirror are deleted, the tests owning the corpus. Measured before this transition over branch state cdc48a6 carrying unmoved main f62256f under the governing exact public 0.8.0 root: validate PASS at 0 errors; rehearsal on a throwaway export: tests.test_interpreter_safety 65 OK, full suite 989 tests with only the known workstation file-mode failure, 0.8.0 doctor 0 FAIL, portable-surface repository and wheel checks PASS."
 +++
 
 # Requirement: Keep the interpreter-safety rule as one implementation at its one boundary
