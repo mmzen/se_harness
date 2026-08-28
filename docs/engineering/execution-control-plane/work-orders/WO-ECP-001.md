@@ -2,10 +2,10 @@
 id = "WO-ECP-001"
 type = "work_order"
 title = "Ship `harnessctl next` and Git-derived change sets"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-27"
-updated = "2026-08-27"
+updated = "2026-08-28"
 
 [assurance]
 commit_bound_verification = "required"
@@ -33,6 +33,13 @@ implements = ["REQ-ECP-001", "REQ-ECP-002"]
 specifications = ["SPEC-ECP-001"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-001"]
 verification = ["VER-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-28T20:35:00Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-28 with the words 'Approve and start', as the first work order of the execution-control-plane plan recorded in ADR-AEX-008 and the agentic-execution README. Its definitions REQ-ECP-001, REQ-ECP-002, SPEC-ECP-001, ARCH-ECP-001, ADR-ECP-001 and VER-ECP-001 were approved separately on 2026-08-28. Authorizes start preflight and then only the declared scope: harnessctl next as a projection of focus, preflight and select_current_step; check --from-git deriving the change set from Git; the WEX210 corrective; the contract JSON, template WORKFLOW renderings, reference note, the two test modules and evidence. Two deviations from the packet text are accepted in advance and to be recorded in the evidence: readings are taken with the governing exact public 0.8.0 root, not 0.7.1 as written on 2026-08-27; and the root managed WORKFLOW copies, now byte-identical to the templates, stay unedited while the templates move. Measured before this transition over main 233bc92: validate PASS at 0 errors under 0.8.0. It authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Ship `harnessctl next` and Git-derived change sets
