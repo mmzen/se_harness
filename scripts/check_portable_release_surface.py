@@ -24,12 +24,6 @@ FORBIDDEN_MEMBERS = frozenset(
     }
 )
 FORBIDDEN_MEMBER_PREFIXES = ("share/se-harness/self-hosting/",)
-# Retired with the governance-migration stage machine under WO-ECP-010; the
-# handover is rehearsed by repository_tools/upgrade_rehearsal.py, never shipped.
-# The three members are retained, dead and unreferenced, until this
-# repository's root evaluator advances past 0.7.1, whose hash-bound class
-# requires them to exist (WO-ECP-010 evidence, section 6); they are neither
-# required nor forbidden until that follow-up deletes them.
 RETIRED_MIGRATION_MEMBERS = frozenset(
     {
         "se_harness/governance_migration.py",
@@ -37,6 +31,11 @@ RETIRED_MIGRATION_MEMBERS = frozenset(
         "se_harness/governance_migration_contract.py",
     }
 )
+FORBIDDEN_MEMBERS = FORBIDDEN_MEMBERS | RETIRED_MIGRATION_MEMBERS
+# Retired with the governance-migration stage machine under WO-ECP-010 and
+# deleted under WO-ECP-011 once the root advanced to 0.8.0 (WO-HUP-008); the
+# handover is rehearsed by repository_tools/upgrade_rehearsal.py, never shipped.
+# The members are forbidden in the wheel and in the active repository surface.
 REQUIRED_QUALIFICATION_MEMBERS = frozenset(
     {
         "se_harness/release_qualification.py",
@@ -78,6 +77,7 @@ FORBIDDEN_ACTIVE_PATHS = frozenset(
         "se_harness/self_hosting_policy.py",
     }
 )
+FORBIDDEN_ACTIVE_PATHS = FORBIDDEN_ACTIVE_PATHS | RETIRED_MIGRATION_MEMBERS
 ACTIVE_ROOTS = (
     ".github/workflows",
     ".github/scripts",

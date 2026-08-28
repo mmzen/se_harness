@@ -9,9 +9,6 @@ docs/engineering/**/evidence/*.json text eol=lf
 # the owner region and at least one tracked file per pattern, so the files
 # stayed, dead, until the root advanced. WO-HUP-008 adopted 0.8.0; the files and
 # these rules are deleted together by issue #210's follow-up work order.
-se_harness/governance_migration*.py text eol=lf
-se_harness/governance_migration_contract.json text eol=lf
-tests/fixtures/governance_migration/*.json text eol=lf
 
 # Repository-owned byte rules for surfaces the candidate suite asserts byte for byte.
 # The release orchestrator qualifies the candidate in a `git worktree`, which inherits

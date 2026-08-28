@@ -24,7 +24,7 @@ from pathlib import Path
 from unittest import mock
 
 from repository_tools import interpreter_safety as tools_safety
-from se_harness import governance_migration, interpreter_safety, runtime_identity
+from se_harness import interpreter_safety, runtime_identity
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -34,11 +34,10 @@ PLATFORM = "windows" if WINDOWS else "linux"
 #: Every module that reaches the declared rule directly, mapped to the boundary
 #: identifiers the registry must carry for it. Produced by reading the two
 #: packages rather than by reading the declaration. `WO-REB-028` retired the six
-#: sites of the predecessor-bootstrap release path, so the two survivors are the
-#: migration runtime probe and the runtime-identity entry-point observation, and
-#: no module delegates.
+#: sites of the predecessor-bootstrap release path and `WO-ECP-011` deleted the
+#: retired migration runtime probe with its stage machine, so the one survivor
+#: is the runtime-identity entry-point observation, and no module delegates.
 EXPECTED_RULE_BOUNDARIES = {
-    "se_harness/governance_migration.py": 1,
     "se_harness/runtime_identity.py": 1,
 }
 EXPECTED_DELEGATING_BOUNDARIES: dict[str, int] = {}
@@ -260,7 +259,9 @@ class DeclarationShapeTests(unittest.TestCase):
 
     def test_declaration_rejects_an_unsorted_boundary_registry(self) -> None:
         declaration = interpreter_safety.load_declaration()
-        declaration["boundaries"].reverse()
+        # One boundary remains since WO-ECP-011; an entry sorting after it is
+        # inserted first so the registry is out of order.
+        declaration["boundaries"].insert(0, dict(declaration["boundaries"][0], id="se_harness.zz.synthetic"))
         with self._written(declaration) as path:
             with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyError, "ISD124"):
                 interpreter_safety.load_declaration(path)
@@ -1325,21 +1326,6 @@ class StaticArchitectureTests(unittest.TestCase):
             with self.subTest(module=relative):
                 text = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
                 self.assertIn("interpreter_safety", text)
-
-    def test_the_migration_refusal_map_covers_exactly_the_declared_cases(self) -> None:
-        declared = {entry["id"] for entry in interpreter_safety.declared_cases()}
-        self.assertEqual(sorted(declared), sorted(governance_migration.INTERPRETER_REFUSAL_CODES))
-        for case, code in sorted(governance_migration.INTERPRETER_REFUSAL_CODES.items()):
-            with self.subTest(case=case):
-                self.assertRegex(code, r"^MIG2[0-9]{2}$")
-
-    def test_migration_retains_mig205_for_the_link_and_junction_refusals(self) -> None:
-        for case in ("EPS001", "EPS002", "EPS005", "EPS006", "EPS011"):
-            with self.subTest(case=case):
-                self.assertEqual("MIG205", governance_migration.INTERPRETER_REFUSAL_CODES[case])
-        for case in ("EPS007", "EPS008", "EPS009"):
-            with self.subTest(case=case):
-                self.assertEqual("MIG202", governance_migration.INTERPRETER_REFUSAL_CODES[case])
 
     def test_the_declaration_ships_as_package_data(self) -> None:
         text = (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")

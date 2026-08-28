@@ -79,13 +79,6 @@
   ],
   "boundaries": [
     {
-      "id": "se_harness.governance_migration.runtime_probe",
-      "runtime": "se_harness",
-      "module": "se_harness/governance_migration.py",
-      "purpose": "probe a predecessor or successor migration runtime",
-      "kind": "rule"
-    },
-    {
       "id": "se_harness.runtime_identity.installed_interpreter",
       "runtime": "se_harness",
       "module": "se_harness/runtime_identity.py",

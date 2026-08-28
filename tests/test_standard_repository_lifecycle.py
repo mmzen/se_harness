@@ -416,7 +416,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "se_harness/governance_migration_contract.json text eol=lf",
                 "tests/fixtures/governance_migration/*.json text eol=lf",
             ):
-                self.assertIn(rule, root_owner)
+                # Under the 0.7.1 root the owner region had to carry the migration
+                # rules; WO-ECP-011 deleted them with the stage machine once the root
+                # advanced (WO-HUP-008).
+                (self.assertIn if root_version == "0.7.1" else self.assertNotIn)(rule, root_owner)
             root_lock = json.loads(
                 (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
             )
