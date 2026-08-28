@@ -2,7 +2,7 @@
 id = "WO-ECP-005"
 type = "work_order"
 title = "One result schema and one rule selector"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-28"
@@ -45,6 +45,13 @@ to = "approved"
 decided_at = "2026-08-28T12:03:40Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-08-28 by the accountable owner, 'I approve the ECP definitions and WO-ECP-005', in its amended form: REQ-ECP-010 only (schema 2 as the sole result, one rule selector, the contract handoff blocks removed, the three dated retirement amendments to SPEC-ADS-001, REQ-ADS-002 and SPEC-WEX-002, the focus_schema2 double validation, the golden result_sha256 test). The precondition engine is WO-ECP-009 and is not approved. Authorizes only the listed execution scope; start, completion, commit-bound verification and release are separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-28T12:14:43Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-08-28 by the accountable owner, 'start WO-ECP-005', after #238 merged the amended packet and the approvals. Execution is confined to the approved scope: schema 2 as the only result, one rule selector, the contract handoff blocks removed, the three dated retirement amendments, the focus_schema2 double validation, the golden result_sha256 test, notes and tests. The precondition engine is WO-ECP-009 and is not started."
 +++
 
 # Work Order: One result schema and one rule selector
