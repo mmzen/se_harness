@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-ECP-019"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "25cf6b2d8f1b36d6cf860b4c9998a8a3ca127dea90dc9850ed88d701ffc6b802"
-rebound_at = "2026-08-29T18:53:09Z"
+formal_snapshot_sha256 = "6d2c40e11af302c907b53148f06a4a38eaefc619dd2352cf86cf4b5748e933df"
+rebound_at = "2026-08-29T19:10:46Z"
 ```
 
 # WO-ECP-019 handoff evidence
