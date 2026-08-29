@@ -2,7 +2,7 @@
 id = "WO-HUP-010"
 type = "work_order"
 title = "Adopt exact public 0.10.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-29T10:40:58Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-HUP-010'. Start preflight PASS with no diagnostics over the approval commit 294b4ad carrying unmoved main 47f67de, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.10.0 installed from the digest-verified PyPI wheel file into an isolated environment outside the checkout. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T10:53:11Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-HUP-010 implemented', on the handoff check reading Completed over transaction commit 937fb97 and the evidence commits through b87c47b, formal snapshot f21c7493b0257c6bd85279a37c882c0c54ef70e79dc8203ec7d558b3b5ed84c8, Git-derived change set of 23 paths at its fixed point fa6c3b94, no scope amendment. The root moved from exact public 0.9.0 to exact public 0.10.0 by one upgrade --apply from a digest-verified wheel-file install outside the checkout whose digest e2f80772 equals the wheel RLS-SEH-019 binds; lock records that archive pair and payload 723c98ec; plan 6 update, replay 61 unchanged. Readings under the 0.10.0 root, isolated mode: validate PASS at 1123 artifacts, 0 errors, 477 maintenance warnings; doctor 0 FAIL; released-root 143/143; dashboard content deterministic; review preflight PASS; derive 0.10.0 to 0.11.0. Candidate: the full suite fails nothing on the moved root that the same-commit control does not, on Windows, and is OK on Linux. All thirteen pull-request lanes pass on #262 at e869c90 under the 0.10.0 root's own state-independent gate, including the governor transition assessment of the real transition. Every reading of this work order, the evidence packet and the handoff check included, was produced by the released evaluator on this Windows checkout. This authorizes no further act."
 +++
 
 # Work Order: Adopt exact public 0.10.0 as the standard root, the simple way
