@@ -1,0 +1,30 @@
+Outcome
+Blocked.
+
+Done
+None.
+
+Not done
+- The selected focus operation remains incomplete.
+
+Blocked by
+- E019: approved or in-progress work order requires an explicit assurance classification
+
+Current lifecycle state
+- No lifecycle state was changed.
+
+Decision required
+None.
+
+Next
+Run the bound command (PROC-WO-IMPLEMENT/STEP-WO-IMPLEMENT-CHECK).
+
+Command or response
+harnessctl check . --artifact WO-001 --checkpoint handoff
+
+Change set
+None.
+complete: false
+
+Gates
+None.

@@ -8,8 +8,8 @@ created = "2026-08-27"
 updated = "2026-08-28"
 
 [relations]
-addresses = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-006", "REQ-ECP-007", "REQ-ECP-008", "REQ-ECP-009", "REQ-ECP-010", "REQ-ECP-011", "REQ-ECP-016", "REQ-ECP-017", "REQ-ECP-018", "REQ-ECP-020"]
-conforms_to = ["SPEC-ECP-001", "SPEC-ECP-003", "SPEC-ECP-004", "SPEC-ECP-005", "SPEC-ECP-006", "SPEC-ECP-009"]
+addresses = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-006", "REQ-ECP-007", "REQ-ECP-008", "REQ-ECP-009", "REQ-ECP-010", "REQ-ECP-011", "REQ-ECP-016", "REQ-ECP-017", "REQ-ECP-018", "REQ-ECP-020", "REQ-ECP-022"]
+conforms_to = ["SPEC-ECP-001", "SPEC-ECP-003", "SPEC-ECP-004", "SPEC-ECP-005", "SPEC-ECP-006", "SPEC-ECP-009", "SPEC-ECP-011"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -267,3 +267,9 @@ machinery from the shipped product). Each carries `decides =
 **`REQ-ECP-020` addressed and `SPEC-ECP-009` conformed to, accepted 2026-08-29 under `WO-ECP-013` (issue #255).** The pull-request gate this architecture places at the Git boundary was implemented at the `handoff` checkpoint, which the evaluator binds to an `in_progress` work order; the boundary therefore enforced scope as a function of lifecycle state, red after completion and absent for a draft packet. The amendment names the state-independent `scope` checkpoint of `SPEC-ECP-009` as the binding the boundary uses, and records `ADR-ECP-006`, which decides it among the alternatives. It removes a way the implementation departed from this architecture's principle that enforcement sits on the diff; it introduces no new boundary, and `decision_assessment` stands as assessed with `ADR-ECP-006` added to the deciding records.
 
 Accepted after the approval of `REQ-ECP-020`, because `E016` refuses an active architecture that addresses an inactive requirement, and before the approval of `WO-ECP-013`, because `W021` refuses a selected architecture unrelated to the selected requirement; the same ordering `ARCH-RLO-004` recorded.
+
+## Amendment record
+
+**`REQ-ECP-022` addressed and `SPEC-ECP-011` conformed to, accepted 2026-08-29 under `WO-ECP-015`.** This architecture's control plane exposes its rule selection through three read-only commands (`focus`, `check`, `next`) for one selection, and its contract names `focus` as the selector while the Git-boundary gate and the transition engine run `check`. The amendment names checkpoint-less `check` as the one projection of the selection and records `ADR-ECP-007`, which decides it among the alternatives; `next` keeps its distinct purpose. It removes a way two commands could drift from one another; it introduces no new boundary, and `decision_assessment` stands as assessed with `ADR-ECP-007` added to the deciding records.
+
+Accepted after the approval of `REQ-ECP-022` and before the approval of `WO-ECP-015`, the ordering `ARCH-RLO-004` and the `REQ-ECP-020` amendment recorded.

@@ -261,3 +261,15 @@ managed-file lock already uses; on an LF tree the digest is unchanged, so no
 stored packet header or verification record moves. The chain-scoped digest
 this rule defines inherits the byte rule when it is implemented. Nothing
 else in this specification changes.
+
+## Amendment record
+
+**`ECP-NXT-004` names checkpoint-less `check` as the reference, proposed
+2026-08-29 under `WO-ECP-015` (`SPEC-ECP-011`, `ADR-ECP-007`).** The rule
+requires `next`'s next-step fields to be byte-identical to those of `focus`
+and of `check` without a checkpoint-specific argument. `SPEC-ECP-011`
+makes `check` without a checkpoint the projection itself and retires
+`focus` to a one-release alias, so the identity is stated against `check`;
+`focus`'s bytes are unchanged inside the alias window, so the identity
+holds against both for that release. Nothing else in this specification
+changes.

@@ -192,7 +192,7 @@ paths = ["src/"]
         self.assertEqual(["VREC-001"], result["scope"]["dependencies"])
         self.assertEqual("PROC-FOCUS-RELATED", result["restitution"]["next"]["procedure_id"])
         self.assertEqual(
-            {"kind": "command", "argv": ["harnessctl", "focus", ".", "--artifact", "VREC-001"]},
+            {"kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "VREC-001"]},
             result["restitution"]["command_or_response"],
         )
         self.assertIn(
@@ -1647,3 +1647,113 @@ class OnePreconditionEngineTests(WorkflowExecutionTests):
         self.assertIn("QGS-VREC-COVERAGE: work order WO-001 has no direct eligible verification record", result["restitution"]["blocked_by"])
         self.assertEqual([], [w for w in result["mutation"]["writes"]])
 
+
+
+class CheckProjectionTests(unittest.TestCase):
+    """REQ-ECP-022 / SPEC-ECP-011 ECP-ONE-001 to -005: check without a checkpoint is the projection; focus is its alias."""
+
+    STATES = ("approved", "in_progress", "implemented", "verified")
+
+    def setUp(self) -> None:
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        standard_repository(self.root, "Projection Fixture")
+        create_base_chain(self.root, work_order_status="in_progress", operating_contract_status="draft")
+
+    def run_cli(self, *argv: str) -> tuple[int, str, str]:
+        out, err = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            try:
+                code = main(list(argv))
+            except SystemExit as exc:
+                code = int(exc.code or 0)
+        return code, out.getvalue(), err.getvalue()
+
+    def set_state(self, status: str) -> None:
+        import re
+
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        text = work_order.read_text(encoding="utf-8")
+        work_order.write_text(re.sub(r'(?m)^status = "[a-z_]+"$', f'status = "{status}"', text, count=1), encoding="utf-8")
+
+    def test_every_state_projects_identically_to_focus_with_no_gate_and_no_write(self) -> None:
+        for status in self.STATES:
+            with self.subTest(status=status):
+                self.set_state(status)
+                _, check_json, _ = self.run_cli("check", str(self.root), "--artifact", "WO-001", "--json")
+                _, focus_json, _ = self.run_cli("focus", str(self.root), "--artifact", "WO-001", "--json")
+                check, focus = json.loads(check_json), json.loads(focus_json)
+                self.assertEqual("check", check["operation"]["kind"])
+                self.assertEqual("focus", focus["operation"]["kind"])
+                self.assertEqual(check["operation"]["outcome"], focus["operation"]["outcome"])
+                self.assertEqual([], check["compliance"].get("gates", []))
+                self.assertEqual([], check["mutation"]["writes"])
+                for section in ("selection", "scope", "state", "findings", "procedure", "compliance", "mutation"):
+                    self.assertEqual(focus[section], check[section], section)
+                # The one restitution line that names the operation differs by the name only.
+                normalize = lambda r: {k: ([s.replace("focus", "check") for s in v] if k == "not_done" else v) for k, v in r.items()}
+                self.assertEqual(normalize(focus["restitution"]), normalize(check["restitution"]))
+
+    def test_the_projection_accepts_records_and_the_background_switch(self) -> None:
+        self.set_state("implemented")
+        write(
+            self.root / "docs/engineering/product/verification-records/VREC-001.md",
+            "\n".join([
+                "+++", 'id = "VREC-001"', 'type = "verification_record"', 'title = "t"', 'status = "ready"',
+                'owners = ["assurance-owner"]', 'created = "2026-08-29"', 'updated = "2026-08-29"',
+                'commit = "0000000000000000000000000000000000000000"', 'git_object_format = "sha1"',
+                'worktree_state = "clean"', 'prepared_at = "2026-08-29T00:00:00Z"', 'prepared_by = "x"',
+                'artifact_snapshot_sha256 = "' + "0" * 64 + '"', 'evidence_paths = ["docs/engineering/product/evidence/e.md"]',
+                "[relations]", 'verifies_work_order = ["WO-001"]', 'conforms_to = ["VER-001"]', "+++", "", "# r", "",
+            ]),
+        )
+        write(self.root / "docs/engineering/product/evidence/e.md", "# e\n")
+        _, out, _ = self.run_cli("check", str(self.root), "--artifact", "VREC-001", "--json")
+        self.assertEqual("PROC-VREC-DECIDE", json.loads(out)["restitution"]["next"]["procedure_id"])
+        _, plain, _ = self.run_cli("check", str(self.root), "--artifact", "WO-001", "--json")
+        _, expanded, _ = self.run_cli("check", str(self.root), "--artifact", "WO-001", "--json", "--include-background")
+        self.assertEqual(json.loads(plain)["findings"]["unrelated_count"], json.loads(expanded)["findings"]["unrelated_count"])
+
+    def test_the_projection_refuses_what_check_refuses(self) -> None:
+        code, out, _ = self.run_cli("check", str(self.root), "--artifact", "INT-001", "--json")
+        self.assertEqual(1, code)
+        self.assertIn("WEX210: check accepts only WO, VREC, or RLS artifacts", json.loads(out)["restitution"]["blocked_by"][0])
+        for option in (("--from-git", "HEAD"), ("--target", "implemented"), ("--procedure", "PROC-WO-IMPLEMENT"), ("--changes-complete",)):
+            with self.subTest(option=option[0]):
+                code, out, err = self.run_cli("check", str(self.root), "--artifact", "WO-001", *option)
+                self.assertNotEqual(0, code)
+                self.assertIn(f"WEX210: {option[0]} requires --checkpoint", out + err)
+
+    def test_the_focus_alias_keeps_its_bytes_and_says_so_on_stderr(self) -> None:
+        fixture = REPOSITORY_ROOT / "tests/fixtures/focus_alias"
+        _, human, err = self.run_cli("focus", str(self.root), "--artifact", "WO-001")
+        self.assertEqual((fixture / "human.txt").read_bytes().replace(b"\r\n", b"\n"), human.encode("utf-8"))
+        self.assertIn("harnessctl focus is deprecated", err)
+        self.assertIn("harnessctl check --artifact ID", err)
+        _, result, _ = self.run_cli("focus", str(self.root), "--artifact", "WO-001", "--json")
+        self.assertEqual(json.loads((fixture / "result.json").read_text(encoding="utf-8")), json.loads(result))
+
+    def test_no_contract_step_names_focus_and_the_reference_names_it_once(self) -> None:
+        contract = json.loads((REPOSITORY_ROOT / "se_harness/workflow_contract.json").read_text(encoding="utf-8"))
+        offenders = [
+            (procedure["id"], step["id"])
+            for procedure in contract["procedures"]
+            for step in procedure.get("steps", [])
+            if "focus" in step.get("argv", [])
+        ]
+        self.assertEqual([], offenders)
+        renamed = {"STEP-WO-START-FOCUS", "STEP-WO-START-FINAL-FOCUS", "STEP-FOCUS-SELECTED", "STEP-FOCUS-RELATED", "STEP-REMEDIATE-FOCUS"}
+        present = {step["id"] for procedure in contract["procedures"] for step in procedure.get("steps", [])}
+        self.assertTrue(renamed <= present, renamed - present)
+        workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")
+        self.assertIn("`WFL-003` - `harnessctl check` and `harnessctl transition` MUST select the first", workflow_md)
+        self.assertNotIn("harnessctl focus", workflow_md)
+        reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
+        self.assertEqual(1, reference.count("| `focus` |"))
+        self.assertIn("deprecated alias of `check`", reference)
+        # The harness-orient core is a frozen, vector-pinned surface (its manifest digest is
+        # retained history), so it keeps invoking the alias during the alias window and moves
+        # with the alias-removal work order; the alias's bytes are unchanged, so it still works.
+        orient = (REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py").read_text(encoding="utf-8")
+        self.assertIn('["focus", str(target), "--artifact", artifact, "--json"]', orient)

@@ -31,8 +31,8 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `next` | coding agent, first call on a work order | read-only | return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
-| `focus` | human or agent | read-only | project one selected WO, VREC, or RLS scope and return its authoritative structured handoff |
-| `check` | human or agent | read-only | evaluate one selected start, pre-action, or handoff checkpoint and emit the authoritative schema-2 result |
+| `focus` | human or agent | read-only | deprecated alias of `check` without `--checkpoint`: `harnessctl focus . --artifact ID` emits the same bytes for one release and a notice on standard error; removed after the next release |
+| `check` | human or agent | read-only | without a checkpoint, project one selected WO, VREC, or RLS scope and its next step; with one, evaluate that checkpoint's gates; emit the authoritative schema-2 result |
 | `transition` | authorized operator | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
@@ -106,10 +106,9 @@ harnessctl next [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json]
 harnessctl evidence [TARGET] --artifact WO-... --checkpoint start|pre-action|transition|handoff \
   [--rebound-at RFC3339] [--json]
 harnessctl pr-body [TARGET] --artifact WO-...
-harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  [--json] [--include-background]
+harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \
+  --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \  # with a checkpoint:
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
   [--changes-complete] | --change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
@@ -118,18 +117,18 @@ harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
 ```
 
 `next` is the one call an agent makes first (`WO-ECP-001`). It returns the
-`focus` projection of the selected artifact — the single `in_progress` work
+checkpoint-less `check` projection of the selected artifact — the single `in_progress` work
 order when `--artifact` is absent, otherwise `WEX-ECP-001` names the candidate
 count — with the operation kind `next` and an additive `context` object:
 `reading_manifest` (the preflight manifest for the phase the state implies,
 `start` for `approved` and `in_progress`, `review` afterwards), `governing`,
 `declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the
-same step `focus` and `check` select) and `decision_required`. It writes
+same step `check` selects) and `decision_required`. It writes
 nothing and needs no prior command. The human block renders the context as a
 `Context` section after `Command or response`, so its `result_sha256` differs
-from `focus`'s for the same artifact.
+from the projection's for the same artifact.
 
-`focus` projects only the selected artifact's governing chain and direct
+`check` without `--checkpoint` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in
 `WORKFLOW.json`. For example, `WFL-WO-READY-VREC` takes precedence over
 `WFL-WO-PREPARE-VREC`, so existing ready assurance coverage cannot produce a
@@ -137,7 +136,7 @@ duplicate-capture recommendation. Unrelated repository findings remain a
 background count; `--include-background` expands categories without making
 them selected-scope work.
 
-`check` resolves the first matching rule, its typed `PROC-*` procedure, and its
+With a checkpoint, `check` resolves the first matching rule, its typed `PROC-*` procedure, and its
 `QG-*` gates; `--checkpoint scope` evaluates only the scope predicates of
 `QG-G4-IMPLEMENTATION-EVIDENCE` for a work order in any lifecycle state and
 writes nothing, which is what the managed pull-request gate runs (`WO-ECP-013`); [`harnessctl check` explained](harnessctl-check.md) walks
@@ -201,7 +200,7 @@ authoritative. The deterministic direct human renderer uses `Outcome`, `Done`,
 `Not done`, conditional `Blocked by`, `Current lifecycle state`, `Decision
 required`, `Next`, `Command or response`, and conditional `Alternatives` in
 that order. Exact-format consumers must use this renderer directly rather than
-ask a model to transcribe it. `focus`, `transition`, `capture-verification`,
+ask a model to transcribe it. `check`, `transition`, `capture-verification`,
 and `prepare-release` emit the same `se-harness-workflow-result-v2` result
 through one selector (`WO-ECP-005`); the former `--result-schema` option is
 gone and passing it is an argument error. Each rule in `WORKFLOW.json` carries
