@@ -121,3 +121,21 @@ are not quoted in any record.
    repaired in this candidate); those readings come from the same released
    wheel on a Linux environment over an LF clone, as every work order since
    `WO-HUP-009` recorded.
+
+## 6. Handoff checkpoint binding
+
+`harnessctl check . --artifact WO-RLS-016 --checkpoint handoff --from-git 3139f24`
+with released 0.9.0 outside the checkout on the Linux environment over an LF
+clone, run to its fixed point on the committed packet (the retained
+`handoff.json` is in the change set it digests): outcome completed; every predicate
+of `QG-G4-IMPLEMENTATION-EVIDENCE` passes. Formal snapshot as bound in the
+header above. Complete changed-path set, as Git derived it (6 paths):
+
+```
+docs/engineering/README.md
+docs/engineering/release-0-10-0/evidence/WO-RLS-016/handoff.json
+docs/engineering/release-0-10-0/evidence/WO-RLS-016/WO-RLS-016-handoff.md
+docs/engineering/release-0-10-0/README.md
+docs/engineering/release-0-10-0/release/REL-SEH-021.md
+docs/engineering/release-0-10-0/work-orders/WO-RLS-016.md
+```
