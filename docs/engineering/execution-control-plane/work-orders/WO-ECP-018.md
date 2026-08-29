@@ -2,7 +2,7 @@
 id = "WO-ECP-018"
 type = "work_order"
 title = "Introduce the delegation class: three transitions unlocked by the green pull-request gate"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -60,6 +60,13 @@ to = "in_progress"
 decided_at = "2026-08-29T17:42:22Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-018'. Start preflight PASS with no diagnostics over the approval commit 3bae69d carrying unmoved main d3b5a3f, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T18:19:18Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29, 'Mark WO-ECP-018 implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at abb642f on wo/ecp-018-delegation-class off main d3b5a3f; the handoff check completed at its fixed point 7b667580ce2286a43391ec9456d56ff299a8b8ecf87f1e636c095393ae296355 under the released 0.11.0 evaluator on this Windows checkout, every predicate of QG-G4-IMPLEMENTATION-EVIDENCE passing; all thirteen lanes of pull request #275 pass at this head, the candidate qualification lane carrying the Linux suite with tests/test_delegation_class.py. ECP-DLG-001 to ECP-DLG-007, ECP-DLG-009 and ECP-DLG-010 are implemented; the Windows suite reads 1143 tests at its baseline; the fixture demonstration shows check handing the actor the delegated command at success and a wait-or-repair response otherwise, and the delegated start refused at failure and applied at success with the check-run id and head sha in the event. The four deviations the packet records are accepted with this completion: the contract JSON key kept, the gate configuration in the owner file beside the hash-locked toml, resolve_delegation not restored as a function because the handoff gate's own predicate is the narrowing, and no SPEC-ECP-004 amendment needed. The hosted demonstration with the real required check waits for the release carrying the class. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Introduce the delegation class: three transitions unlocked by the green pull-request gate
