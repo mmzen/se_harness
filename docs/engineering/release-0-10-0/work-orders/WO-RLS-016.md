@@ -2,7 +2,7 @@
 id = "WO-RLS-016"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.10.0 candidate from main"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-29T09:38:48Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29, 'Approve REL-SEH-021 and WO-RLS-016, start', after the release owner approved REL-SEH-021 seconds earlier as a distinct decision. Authorizes start preflight and then only the declared scope: the candidate's qualification under the governing 0.9.0 root, the recipe-bound build of record, the retained evidence and the index maintenance. It authorizes no verification record, no release record, no tag, no publication and no credential use."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T09:38:56Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve REL-SEH-021 and WO-RLS-016, start'. Start preflight PASS with no diagnostics over the approval commit 373959d carrying unmoved main 3139f24, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release record and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.10.0 candidate from main
