@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 env:
-  SE_HARNESS_VERSION: "0.10.0"
+  SE_HARNESS_VERSION: "0.11.0"
 
 jobs:
   validate:

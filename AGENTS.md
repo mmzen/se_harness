@@ -28,7 +28,7 @@ Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap 
 - `.engineering-harness.toml`, `ENGINEERING_HARNESS.md`, `.github/workflows/engineering-harness.yml`
 - `docs/engineering/WORKFLOW.md`, `WORKFLOW.json`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `QUALITY_GATES.json`, `TRACEABILITY.md`, `ARTIFACT_AUTHORING.md`, `OPERATING_CARD.md`, `TECHNICAL_COMMUNICATION.md`
 - every file in `docs/engineering/templates/`
-- every file under `.agents/skills/` (`SKILL.md`, `skill-contract.json`, `openai.yaml`, `guard.py`, `check_scope.py`, `check_brief.py`, `orient.py`, `check_prepare.py`) and `.claude/skills/*/SKILL.md`
+- every file under `.agents/skills/` (`SKILL.md`, `skill-contract.json`, `orient.py`, `check_brief.py`) and `.claude/skills/*/SKILL.md`
 - exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
 
 The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`. Not all of `scripts/` is managed.
@@ -42,7 +42,7 @@ This checkout is candidate source. Changes to the eight managed scripts and the 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.10.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.11.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
 An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development; that is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path makes candidate-source runtime identity fail with `RID018`.

@@ -26,7 +26,7 @@ actor. A VREC decision MUST NOT change a referenced work order. An RLS decision
 MUST NOT change an included VREC or work order. A work-order decision MUST NOT
 change its definitions, VRECs, or RLS records.
 
-`WFL-003` - `harnessctl focus` and `harnessctl transition` MUST select the first
+`WFL-003` - `harnessctl check` and `harnessctl transition` MUST select the first
 matching recommendation in the ordered `recommendations` array. They MUST NOT
 invent, merge, or skip recommendations.
 
@@ -125,7 +125,7 @@ Conformance tests MUST fail on such a difference.
    owner MAY then approve one bounded work order after
    `QG-G3-WORK-AUTHORIZATION` passes.
 5. Before implementation, the implementation actor MUST run
-   `harnessctl next . --artifact WO-...` (or `harnessctl focus` and
+   `harnessctl next . --artifact WO-...` (or `harnessctl check` and
    `harnessctl preflight . --work-order WO-... --phase start`, which it
    composes), read every file in the reading manifest, and receive an
    explicit start decision.
@@ -183,12 +183,12 @@ outcomes, and response values.
 
 | Procedure ID | Ordered typed steps |
 | --- | --- |
-| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl check . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff` (the `scope` checkpoint evaluates the scope predicates alone, in any state, for the pull-request gate); `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
 | `PROC-CANDIDATE-COMMIT` | `STEP-CANDIDATE-COMMIT-AUTHORIZE` decision `DR-EXTERNAL-ACTION`; request exact candidate-commit authority and perform no Git action. |
-| `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |
-| `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl focus . --artifact {related_id}`. |
+| `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl check . --artifact {artifact_id}`. |
+| `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl check . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
 | `PROC-VREC-REJECT` | `STEP-VREC-REJECT` decision `DR-VREC-DECIDE`. |
 | `PROC-VREC-SUPERSEDE` | `STEP-VREC-SUPERSEDE` decision `DR-VREC-DECIDE`. |
@@ -198,7 +198,7 @@ outcomes, and response values.
 | `PROC-RLS-DECIDE` | `STEP-RLS-DECIDE` decision `DR-RLS-DECIDE`. |
 | `PROC-RLS-REJECT` | `STEP-RLS-REJECT` decision `DR-RLS-DECIDE`. |
 | `PROC-EXTERNAL-ACTION` | `STEP-EXTERNAL-ACTION` decision `DR-EXTERNAL-ACTION`. |
-| `PROC-REMEDIATE` | `STEP-REMEDIATE-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
+| `PROC-REMEDIATE` | `STEP-REMEDIATE-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-DEFINITION-COMPLETE` | `STEP-DEFINITION-COMPLETE` decision `DR-DEFINITION-DECIDE`. |
 | `PROC-DEFINITION-WORK` | `STEP-DEFINITION-WORK` decision `DR-WO-SELECT`. |
 
@@ -217,7 +217,7 @@ evaluated command.
 
 For an accountable lifecycle decision:
 
-1. Run `harnessctl focus . --artifact <ID>` and read the current state,
+1. Run `harnessctl check . --artifact <ID>` (no checkpoint: the projection) and read the current state,
    recommendation, required authority, command or response, and alternatives.
 2. Identify the matching ordered workflow rule in `WORKFLOW.json`. Verify its
    named gates pass and the actor holds its named decision right.
@@ -227,7 +227,7 @@ For an accountable lifecycle decision:
    `harnessctl transition . --set <ID>=<state> --decision <ID>=<actor>`.
 5. Compare the preview to the explicit decision. Apply the same command with
    `--apply` only when they match.
-6. Run `harnessctl focus . --artifact <ID>` again and report the resulting
+6. Run `harnessctl check . --artifact <ID>` again and report the resulting
    handoff. Do not transition a related artifact unless the actor separately
    selected and authorized it.
 
