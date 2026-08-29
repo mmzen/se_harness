@@ -130,7 +130,7 @@ below, plus the identifier-allocation test, and they pass hosted.
 
 `harnessctl check . --artifact WO-HUP-009 --checkpoint handoff --from-git 7291602`
 with released 0.9.0 outside the checkout on the Linux runtime: Completed;
-change set of 21 paths, `complete: true`; every predicate of
+change set of 21 paths, `complete: true` (22 once the check's own retained result `handoff.json` exists beside this file); every predicate of
 `QG-G4-IMPLEMENTATION-EVIDENCE` passes (STATUS, GRAPH, INTEGRITY, SCOPE,
 COMPLETE, PATHS, PREFLIGHT, EVIDENCE). The packet header's formal snapshot
 was measured equal on the CRLF worktree and on an LF export of the same
@@ -149,6 +149,7 @@ AGENTS.md
 docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-007.md
 docs/engineering/repository-harness-upgrade/evidence/WO-HUP-009-evaluator-upgrade.json
 docs/engineering/repository-harness-upgrade/evidence/WO-HUP-009/WO-HUP-009-handoff.md
+docs/engineering/repository-harness-upgrade/evidence/WO-HUP-009/handoff.json
 docs/engineering/repository-harness-upgrade/README.md
 docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-018.md
 docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-019.md
