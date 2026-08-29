@@ -2,7 +2,7 @@
 id = "WO-ECP-020"
 type = "work_order"
 title = "Remove the next alias"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-29T20:47:24Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-020'. Start preflight PASS with no diagnostics over d936295, stacked on WO-ECP-019's completion commit ee1e6af, after the unrelated architecture relations were removed (W021, W017), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T21:46:39Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 with the words 'Mark WO-ECP-020 implemented'. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-020/ records: the next subcommand removed behind a guard naming check (ECP-CTX-004 as amended), the reference row and the notes, the amendment records on REQ-ECP-025, SPEC-ECP-014 and VER-ECP-016; the refusal test and census; the affected suites 475 OK and the full Windows suite at its baseline; validate 1166 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check completed at its fixed point a0477dc2 over main 70508cd (WO-ECP-019 merged), the packet rebound at f9531f9 after the forward merges, and the thirteen pull-request lanes green there. No deviations. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Remove the next alias
