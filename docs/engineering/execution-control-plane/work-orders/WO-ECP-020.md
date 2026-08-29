@@ -28,7 +28,6 @@ paths = [
 [relations]
 implements = ["REQ-ECP-025"]
 specifications = ["SPEC-ECP-014"]
-architecture = ["ARCH-ECP-001", "ADR-ECP-007"]
 verification = ["VER-ECP-016"]
 
 [[lifecycle_events]]
