@@ -2,7 +2,7 @@
 id = "WO-DST-022"
 type = "work_order"
 title = "Retire managed files that leave the managed set on upgrade"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -39,6 +39,13 @@ to = "approved"
 decided_at = "2026-08-29T18:07:11Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'I approve WO-DST-022 and you can start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the one product module, the one test module, the installation note, this domain's index, the SPEC-DST-001 and SPEC-ECP-007 amendment records and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run over this approval."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T18:07:40Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'I approve WO-DST-022 and you can start'. Start preflight PASS with no diagnostics over the approval commit 739a0fc carrying unmoved main d3b5a3f, run with the governing exact public 0.11.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Retire managed files that leave the managed set on upgrade
