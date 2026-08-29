@@ -43,3 +43,81 @@ decided by the evaluator, not the author, as `WO-ECP-012`'s packet recorded.
 | `python scripts/run_tests.py --scale full` | candidate, Linux (WSL Ubuntu 24.04, CPython 3.12.3), LF clone at `0579672` | OK, 4 skipped |
 | `python scripts/run_tests.py --scale full` | candidate, Windows 11 (CPython 3.12), CRLF checkout at `0579672` | 1,117 tests, 2 failing names, both present on `main` and outside this work order: `test_artifact_authoring…test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`, `test_instruction_architecture…test_owner_region_stays_within_the_size_bound` (the CRLF-only owner-region reading) |
 | `harnessctl check --checkpoint handoff --from-git` | released 0.9.0, LF clone | section 6 |
+
+## 3. Census re-run at the candidate
+
+`harnessctl release-unit . --from v0.9.0 --to 8344244 --exempt <the four contract commits> --contract REL-SEH-021`,
+released 0.9.0: untraced 0, exempted 4; traces `WO-RLS-016` through its
+five branch commits and `WO-RLS-015` through `7291602`, the merge of the
+0.9.0 release record, as the contract states by construction. The
+comparison reports the three `E-CIP-001` findings the contract predicts at
+this stage: no `candidate_commit` and no top-level `previous_release_tag`
+are declared (the derivation reads them at the top level; the contract
+carries the tag in `[release_unit]`, as `REL-SEH-020` did), and the gates
+differ by exactly `WO-RLS-015` (traced, released, excluded) and the four
+members whose merges are exempted. Its remaining blocker,
+`WO-RLS-016 is in_progress, not implemented`, is the state this reading is
+taken in.
+
+`qualify complete-candidate . --candidate-commit 8344244` with candidate
+source, `python3 -s`, on the Linux environment: PASS — CC001 candidate
+runtime bound to the checkout, CC002 HEAD and tracked tree match the
+candidate, CC003 artifacts=1115 errors=0 warnings=475, CC004 target state
+unchanged. On this Windows interpreter the same command reads CC001 FAIL
+with `RID018`: a machine-wide `se-harness 0.8.0` distribution sits on its
+system site-packages, which is the candidate-source runtime boundary
+`AGENTS.md` documents and not a property of the candidate; recorded as
+deviation 1.
+
+## 4. Build of record
+
+Run on 2026-08-29 on this Windows workstation through Docker Desktop
+(daemon 29.7.2, linux/amd64) and the pinned producer image, at the exact
+candidate `8344244`; the Windows build-of-record faults of earlier releases
+are repaired on `main` and the replaying tree is the candidate's own:
+
+| Reading | Value |
+| --- | --- |
+| command | `python -m repository_tools.release_build replay --repository . --commit 834424464a0284cea3cb929d3f5b55a34e6d8ace --version 0.10.0` |
+| state | `exact`; two producer runs `a` and `b` byte-identical |
+| producer | `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050`, linux/amd64, digest-pinned by `release/build-toolchain.lock` |
+| recipe | `release/build-recipe.json`, `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc` |
+| wheel | `se_harness-0.10.0-py3-none-any.whl`, `5e4e014dc0921afffc3fb3c3d86c5a3ee3295b13cbb8c25dd3d83aab5aa1281c` |
+| sdist | `se_harness-0.10.0.tar.gz`, `4b2d2103694ddea45d3aec058148e8c7124fe4673b9abbeab3fe89e15129d10f` |
+| checksums | `SHA256SUMS`, `cab0af3258748063b95476549bf8b7b730e4237fd0a0ad5f8563c86ea5870f28` |
+| source manifest | `d7b0213c4be141caf74da5f7c063905902ab753e397288692f0d5ae492c4324a`, `source_date_epoch` 1787997099 |
+| bundle manifest | `scripts/create_release_bundle_manifest.py`; to be retained as `docs/engineering/release-0-10-0/evidence/RLS-SEH-019-bundle.json` when the record is prepared, re-created at the commit the record binds |
+
+These are local replay readings. The hosted `release-candidate-replay.yml`
+dispatch on the review ref, before the release decision, must reproduce the
+wheel and sdist digests of the commit the record binds; until it does they
+are not quoted in any record.
+
+## 5. Deviations, recorded for the completion decision
+
+1. `qualify complete-candidate` on the Windows workstation reads CC001
+   `RID018` because a machine-wide `se-harness 0.8.0` distribution is on the
+   interpreter's system site-packages; the reading of record is the Linux
+   interpreter's PASS (section 3). The candidate's bytes are the same on
+   both.
+2. This packet is the keyed handoff packet the 0.9.0 root writes, not the
+   `WO-RLS-016-verification.md` file `REL-SEH-021` and `WO-RLS-016` name;
+   the packet path is the evaluator's (section 1).
+3. The five branch commits were first written with the
+   `Harness-Work-Order:` line in a paragraph above the `Co-Authored-By`
+   paragraph, which Git does not parse as a trailer, so the census read them
+   as untraced — the defect `REL-SEH-020` recorded as an open question. With
+   the owner's explicit permission the five commits were recreated with the
+   same trees, order and author dates and the work-order line folded into
+   the final trailer paragraph (`d5eff38`, `e2143b0`, `373959d`, `0579672`,
+   `c0c917e` became `6a317ec`, `188571d`, `025e14b`, `ad121fc`, `8344244`;
+   `git diff` between the old and new heads is empty). The lifecycle reasons
+   on `REL-SEH-021` and `WO-RLS-016` therefore cite the pre-rewrite
+   identifiers (`373959d` as the approval commit); the content they describe
+   is byte-identical at `025e14b`. Nothing had been pushed and no record
+   bound the old identifiers.
+4. The governing 0.9.0 root cannot run `evidence`, `check` or
+   `transition --apply` on this Windows checkout (issues #254, #256,
+   repaired in this candidate); those readings come from the same released
+   wheel on a Linux environment over an LF clone, as every work order since
+   `WO-HUP-009` recorded.
