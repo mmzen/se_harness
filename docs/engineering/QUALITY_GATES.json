@@ -41,16 +41,16 @@
     },
     {
       "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
-      "checkpoints": ["pre-action", "transition", "handoff"],
+      "checkpoints": ["pre-action", "transition", "handoff", "scope"],
       "predicates": [
-        {"id": "QGP-G4I-STATUS", "evaluator": "artifact_status", "statuses": ["in_progress"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
-        {"id": "QGP-G4I-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
-        {"id": "QGP-G4I-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
-        {"id": "QGP-G4I-SCOPE", "evaluator": "execution_scope_declared", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}:[execution_scope]"}]},
-        {"id": "QGP-G4I-COMPLETE", "checkpoints": ["pre-action", "handoff"], "evaluator": "change_set_complete", "required_evidence": [{"kind": "result", "reference": "declared-change-set:{artifact_id}"}]},
-        {"id": "QGP-G4I-PATHS", "checkpoints": ["pre-action", "handoff"], "evaluator": "changed_paths_within_scope", "required_evidence": [{"kind": "path", "reference": "declared-change-set:{artifact_id}"}]},
-        {"id": "QGP-G4I-PREFLIGHT", "evaluator": "review_preflight_ready", "required_evidence": [{"kind": "result", "reference": "preflight:{artifact_id}:review"}]},
-        {"id": "QGP-G4I-EVIDENCE", "evaluator": "review_evidence_available", "required_evidence": [{"kind": "path", "reference": "work-order-evidence:{artifact_id}"}]}
+        {"id": "QGP-G4I-STATUS", "checkpoints": ["pre-action", "transition", "handoff"], "evaluator": "artifact_status", "statuses": ["in_progress"], "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
+        {"id": "QGP-G4I-GRAPH", "checkpoints": ["pre-action", "transition", "handoff"], "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
+        {"id": "QGP-G4I-INTEGRITY", "checkpoints": ["pre-action", "transition", "handoff"], "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
+        {"id": "QGP-G4I-SCOPE", "checkpoints": ["pre-action", "transition", "handoff", "scope"], "evaluator": "execution_scope_declared", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}:[execution_scope]"}]},
+        {"id": "QGP-G4I-COMPLETE", "checkpoints": ["pre-action", "handoff", "scope"], "evaluator": "change_set_complete", "required_evidence": [{"kind": "result", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-PATHS", "checkpoints": ["pre-action", "handoff", "scope"], "evaluator": "changed_paths_within_scope", "required_evidence": [{"kind": "path", "reference": "declared-change-set:{artifact_id}"}]},
+        {"id": "QGP-G4I-PREFLIGHT", "checkpoints": ["pre-action", "transition", "handoff"], "evaluator": "review_preflight_ready", "required_evidence": [{"kind": "result", "reference": "preflight:{artifact_id}:review"}]},
+        {"id": "QGP-G4I-EVIDENCE", "checkpoints": ["pre-action", "transition", "handoff"], "evaluator": "review_evidence_available", "required_evidence": [{"kind": "path", "reference": "work-order-evidence:{artifact_id}"}]}
       ]
     },
     {

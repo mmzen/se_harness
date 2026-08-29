@@ -184,7 +184,7 @@ outcomes, and response values.
 | Procedure ID | Ordered typed steps |
 | --- | --- |
 | `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl focus . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl focus . --artifact {artifact_id}`. |
-| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff`; `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
+| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff` (the `scope` checkpoint evaluates the scope predicates alone, in any state, for the pull-request gate); `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
 | `PROC-CANDIDATE-COMMIT` | `STEP-CANDIDATE-COMMIT-AUTHORIZE` decision `DR-EXTERNAL-ACTION`; request exact candidate-commit authority and perform no Git action. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl focus . --artifact {artifact_id}`. |

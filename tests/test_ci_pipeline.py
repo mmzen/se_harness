@@ -269,7 +269,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                 self.assertIsNone(re.search(r"[0-9a-f]{64}", text.replace("actions/", "")), "a digest literal remains")
                 # version literals: the pinned build tools are not evaluator facts
                 versions = {m.group(0) for m in re.finditer(r"\b\d+\.\d+\.\d+(?:\.post\d+)?\b", text)}
-                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1", "0.8.0", "0.9.0"}}, versions)
+                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1", "0.8.0", "0.9.0", "0.10.0"}}, versions)
 
     def test_workflow_derives_once_and_consumers_take_the_outputs(self) -> None:
         text = (WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8")
