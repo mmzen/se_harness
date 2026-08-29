@@ -2,7 +2,7 @@
 id = "REQ-HUP-020"
 type = "requirement"
 title = "Adopt exact public 0.10.0 as the standard root by the simple upgrade"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "RLS-SEH-019 released and published on 2026-08-29; REL-SEH-021 observat
 measure = "one command from the isolated environment; lock schema 3, tool_version 0.10.0, evaluator.version 0.10.0, archive_sha256 equal to the wheel bound in RLS-SEH-019, payload digest of the installation; replay reads every file unchanged"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T10:40:48Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-HUP-010', for the adoption of exact public 0.10.0 (RLS-SEH-019, released and published 2026-08-29) as the standard root the simple way: one command from an isolated wheel-file install outside the checkout whose digest equals the record's bound wheel, no packet, candidate moved to 0.11.0 in the same change. Measured before this transition over branch state d2e210c carrying unmoved main 47f67de: validate PASS at 0 errors under the governing 0.9.0 root and under public 0.10.0; rehearsal on a throwaway clone: plan 61 files, 6 update, 55 unchanged, no customization or conflict; 0.10.0 doctor 0 FAIL and released-root 143/143 after apply; the full suite on the moved root differs from the same-commit control by three tests, all resolved by owner content, the candidate version and one test literal."
 +++
 
 # Requirement: Adopt exact public 0.10.0 as the standard root by the simple upgrade

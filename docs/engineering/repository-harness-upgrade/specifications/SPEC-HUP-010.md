@@ -2,12 +2,19 @@
 id = "SPEC-HUP-010"
 type = "specification"
 title = "Standard-root adoption contract for released 0.10.0, the simple way"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 [relations]
 specifies = ["REQ-HUP-020", "REQ-HUP-021"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T10:40:48Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-HUP-010', for the adoption of exact public 0.10.0 (RLS-SEH-019, released and published 2026-08-29) as the standard root the simple way: one command from an isolated wheel-file install outside the checkout whose digest equals the record's bound wheel, no packet, candidate moved to 0.11.0 in the same change. Measured before this transition over branch state d2e210c carrying unmoved main 47f67de: validate PASS at 0 errors under the governing 0.9.0 root and under public 0.10.0; rehearsal on a throwaway clone: plan 61 files, 6 update, 55 unchanged, no customization or conflict; 0.10.0 doctor 0 FAIL and released-root 143/143 after apply; the full suite on the moved root differs from the same-commit control by three tests, all resolved by owner content, the candidate version and one test literal."
 +++
 
 # Specification: Standard-root adoption contract for released 0.10.0, the simple way
