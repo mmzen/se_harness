@@ -174,3 +174,14 @@ tests/test_workflow_execution.py
 
 Linux reading at `7ec98b6` (WSL Ubuntu 24.04, CPython 3.12.3, LF clone):
 `python3 scripts/run_tests.py --scale full` OK, 4 skips.
+
+## Hosted lanes
+
+Pull request #263 at `407e6f4`: every lane passes (13 pass). The managed
+Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33249877691/job/99093609632) ran the 0.10.0 root's
+state-independent step: the scope check over the pull request's diff
+completed inside the declared scope and, the work order being
+`in_progress`, the handoff check completed with the declared
+`Harness-Restitution` `408c92eb…` equal to the recomputed `result_sha256`.
+The governor-transition, candidate-evidence, migration, qualification and
+integration-package lanes pass.
