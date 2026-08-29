@@ -67,7 +67,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-003`: make the pull-request gate mandatory and scope-aware, and widen the digest.
 - `WO-ECP-004`: authenticated decision records.
 - `WO-ECP-005`: one result schema and one rule selector.
-- `WO-ECP-006`: reduce Phase 4 to its guarantee and introduce the delegation class.
+- `WO-ECP-006`: remove the Phase 4 envelope, bundle and broker, keep the journaled apply as retained code, retire the stubbed skills (revised 2026-08-29 from the 08-27 draft; `REQ-ECP-018`, `REQ-ECP-014`, new `VER-ECP-014`; the shared write path `REQ-ECP-017` and the delegation class `REQ-ECP-011` follow under later work orders).
 - `WO-ECP-007`: evict the bootstrap bridge and this repository's identifiers from the product.
 - `WO-ECP-008`: retire stubbed skills, trim the manifest, scope the handoff snapshot.
 - `WO-ECP-009`: one precondition engine: transition evaluates the contract's gates (split from `WO-ECP-005` on 2026-08-28).
@@ -83,7 +83,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-004` independent.
 - `WO-ECP-005` independent, and before `WO-ECP-009`.
 - `WO-ECP-009` after `WO-ECP-005`, and before `WO-ECP-006`.
-- `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-009`.
+- `WO-ECP-006` after `WO-ECP-003` and `WO-ECP-009` (both merged); before the work orders that wire the journal (`REQ-ECP-017`) and add the delegation class (`REQ-ECP-011`).
 - `WO-ECP-007` independent.
 - `WO-ECP-010` independent; `WO-HBI-005` (merged) precedes it.
 - `WO-ECP-011` after `WO-ECP-010` (merged) and `WO-HUP-008` (merged).
@@ -93,11 +93,11 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-015` independent; the checkpoint-less `check` projection and the retirement of `focus` under `REQ-ECP-022` / `SPEC-ECP-011` / `ADR-ECP-007` / `VER-ECP-011`, drafted 2026-08-29 on the owner's challenge.
 - `WO-ECP-016` after `WO-ECP-013` (merged); admission of the selected work order's own records under `REQ-ECP-023` / `SPEC-ECP-012` / `VER-ECP-012`, drafted 2026-08-29 from issue #264.
 - `WO-ECP-017` after `WO-ECP-015` (merged); removal of the `focus` alias and the deferred `ECP-ONE-007` under `REQ-ECP-024` / `SPEC-ECP-013` / `VER-ECP-013`, drafted 2026-08-29 from the command audit's P1.
-- `WO-ECP-008` after `WO-ECP-001`.
+- `WO-ECP-008` after `WO-ECP-001`; its skill-retirement item moved to `WO-ECP-006` on 2026-08-29.
 
-Every artifact in this domain is `draft`. This packet authorizes no
-implementation, lifecycle transition, Git action, release, or external
-action; the amendments it names on `agentic-execution`,
-`released-evaluator-boundary`, and `legacy-release-evidence` artifacts are
-carried by `WO-ECP-006` and `WO-ECP-007` only after those work orders are
-approved and started by their accountable owners.
+This index authorizes no implementation, lifecycle transition, Git action,
+release, or external action; the amendments it names on
+`agentic-execution`, `released-evaluator-boundary`, and
+`legacy-release-evidence` artifacts are carried by `WO-ECP-006` and
+`WO-ECP-007` only after those work orders are approved and started by
+their accountable owners. Each artifact's own front matter is its state.
