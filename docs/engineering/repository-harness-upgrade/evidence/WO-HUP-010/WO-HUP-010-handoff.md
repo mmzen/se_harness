@@ -176,3 +176,21 @@ tests/test_ci_pipeline.py
 Linux reading at the transaction commit (WSL Ubuntu 24.04, CPython
 3.12.3, LF clone): `python3 scripts/run_tests.py --scale full` OK, 4
 skips.
+
+## Hosted lanes
+
+Pull request #262 at `e869c90`: every lane passes (13 pass). The managed
+Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33248624228/job/99090312965) ran, for the first time on this repository,
+the 0.10.0 root's state-independent step: the scope check over the pull
+request's diff completed inside the declared scope and, the work order
+being `in_progress`, the handoff check completed with the declared
+`Harness-Restitution` `fa6c3b94…` equal to the recomputed `result_sha256`.
+The Governor Transition Assessment (https://github.com/mmzen/se_harness/actions/runs/33248624153/job/99090312365) assessed the real transition: base
+`main` `47f67de` carrying the 0.9.0 lock `fb61f1fe…` and exactly one
+released record for 0.10.0 (`RLS-SEH-019`), head carrying the 0.10.0 lock
+and exactly one transaction document. Both migration legs (the real
+upgrade rehearsal 0.9.0 to 0.10.0 on Linux and Windows), both
+qualification rehearsals, candidate source and package evidence, and the
+integration-package build, verify and retain lanes pass. `VER-ECP-009`
+scenario 6 is read at the completion transition: the managed lane must
+stay green there.
