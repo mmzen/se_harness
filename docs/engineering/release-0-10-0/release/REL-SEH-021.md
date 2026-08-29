@@ -2,7 +2,7 @@
 id = "REL-SEH-021"
 type = "release_contract"
 title = "Release se-harness 0.10.0: the 0.9.0 root adopted, and the three defects it exposed repaired"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ gates = ["WO-ECP-012", "WO-ECP-013", "WO-ECP-014", "WO-HUP-009", "WO-RLS-016"]
 [release_unit]
 previous_release_tag = "v0.9.0"
 untraced_exemptions = ["aa997739a35bf44fa9af63aade591bf84b6310dc", "1d19d17c0d98458dffd480536071d27bddd9f976", "741a7743c35e68469a1e20835b20dcfd01e3b471", "3139f245fecb247ffadf944a9a3fc5f7270e6ce6"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T09:38:46Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-29, 'Approve REL-SEH-021 and WO-RLS-016, start', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this transition over main 3139f24 plus this packet: the four existing members WO-HUP-009, WO-ECP-012, WO-ECP-013 and WO-ECP-014 are implemented and verified, no other work order reached implemented since the contract was drafted, and none is named by a released record. Readings under the governing exact public 0.9.0 root: validate PASS at 0 errors, doctor 0 FAIL, every push-event workflow green at 3139f24. The commit census reports four untraced merges, exempted by name, and the traced 0.9.0 record merge that names the released WO-RLS-015 by construction. This approval authorizes WO-RLS-016 to be approved and started as separate acts and nothing else."
 +++
 
 # Release contract: se-harness 0.10.0
