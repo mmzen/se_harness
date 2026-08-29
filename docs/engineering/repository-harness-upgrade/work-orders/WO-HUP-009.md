@@ -2,7 +2,7 @@
 id = "WO-HUP-009"
 type = "work_order"
 title = "Adopt exact public 0.9.0 as the standard root, the simple way"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -20,6 +20,13 @@ implements = ["REQ-HUP-018", "REQ-HUP-019"]
 specifications = ["SPEC-HUP-009"]
 architecture = ["ARCH-HUP-007"]
 verification = ["VER-HUP-009"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T06:37:22Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'i approve the artifact packet and you can start WO-HUP-009', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared simple upgrade from an isolated 0.9.0 wheel-file install outside the checkout, the owner statements, the candidate move to 0.10.0, the identity-aware test changes and the retained evidence, inside the declared execution scope. It authorizes no verification record, no release, no publication and no change to the guard. Start preflight has not been run."
 +++
 
 # Work Order: Adopt exact public 0.9.0 as the standard root, the simple way

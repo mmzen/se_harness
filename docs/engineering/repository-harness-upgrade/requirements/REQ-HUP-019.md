@@ -2,7 +2,7 @@
 id = "REQ-HUP-019"
 type = "requirement"
 title = "Prove complete-graph operation under the 0.9.0 root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "WO-HUP-008 evidence of what a root move touches; rehearsal of 2026-08-
 measure = "0.9.0 validate 0 errors; doctor 0 FAIL; qualify released-root passed; suite failure set equal to the same-commit control on the 0.8.0 root; evaluator_facts derive yields the 0.9.0 to 0.10.0 pair with no legacy acceptance digest"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T06:37:01Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'i approve the artifact packet', for the adoption of exact public 0.9.0 (RLS-SEH-018, released and published 2026-08-28) as the standard root the simple way: one command from an isolated wheel-file install outside the checkout whose digest equals the record's bound wheel, no packet, candidate moved to 0.10.0 in the same change. Measured before this transition over branch state 7b6f3e1 carrying unmoved main 7291602: validate PASS at 0 errors under the governing 0.8.0 root and under public 0.9.0; rehearsal on a throwaway clone: plan 61 files, 5 update, 56 unchanged, no customization or conflict; 0.9.0 doctor 0 FAIL and released-root 143/143 after apply; the full suite on the moved root differs from the same-commit control by four tests, all resolved by owner content, the candidate version and two test edits."
 +++
 
 # Requirement: Prove complete-graph operation under the 0.9.0 root
