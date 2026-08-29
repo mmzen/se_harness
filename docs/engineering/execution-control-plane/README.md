@@ -36,6 +36,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `REQ-ECP-016`: handoff evidence binds a chain-scoped snapshot.
 - `REQ-ECP-017`: harness-owned multi-file writes are journaled.
 - `REQ-ECP-018`: no envelope apparatus in the product surface.
+- `REQ-ECP-019`: evaluator-derived artifact paths resolve on every host (issue #254; drafted 2026-08-29 with `SPEC-ECP-008`, `VER-ECP-008` and `WO-ECP-012`).
 - `SPEC-ECP-001`: the next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest.
 - `SPEC-ECP-002`: evidence packets, identifier allocation, and pull-request body generation.
 - `SPEC-ECP-003`: the mandatory scope-aware pull-request gate and digest coverage.
@@ -81,6 +82,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-007` independent.
 - `WO-ECP-010` independent; `WO-HBI-005` (merged) precedes it.
 - `WO-ECP-011` after `WO-ECP-010` (merged) and `WO-HUP-008` (merged).
+- `WO-ECP-012` independent; repair of issue #254 under the new `REQ-ECP-019` / `SPEC-ECP-008` / `VER-ECP-008`, drafted 2026-08-29 after `WO-HUP-009` moved the root to 0.9.0.
 - `WO-ECP-008` after `WO-ECP-001`.
 
 Every artifact in this domain is `draft`. This packet authorizes no
