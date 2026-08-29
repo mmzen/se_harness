@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 40 declared changed path(s) are within execution scope.",
+            "message": "All 41 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -258,7 +258,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "cd798ab8cd580a78b50a444455494c9ebacb4b5f3f3cb7eea80ac44418b79781",
+  "result_sha256": "2cdb6cf08c09c8fab53e33005b01d60921895b6441dfe4010762e9ad6538133e",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -286,6 +286,7 @@
       "AGENTS.md",
       "docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-009.md",
       "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-011-evaluator-upgrade.json",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-011/handoff.json",
       "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-011/WO-HUP-011-handoff.md",
       "docs/engineering/repository-harness-upgrade/README.md",
       "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-022.md",
