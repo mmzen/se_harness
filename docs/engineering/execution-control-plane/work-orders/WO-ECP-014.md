@@ -23,13 +23,11 @@ paths = [
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-010.md",
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md",
   "docs/engineering/execution-control-plane/verification/VER-ECP-010.md",
-  "docs/engineering/execution-control-plane/architecture/ARCH-ECP-001.md",
 ]
 
 [relations]
 implements = ["REQ-ECP-021"]
 specifications = ["SPEC-ECP-010"]
-architecture = ["ARCH-ECP-001"]
 verification = ["VER-ECP-010"]
 +++
 
@@ -67,9 +65,10 @@ request under the 0.9.0 gate.
 - `tests/test_workflow_compliance.py`: the LF-unchanged digest fixed before
   the change, the CRLF-equals-LF case, the one-character change.
 - `docs/notes/harnessctl-check.md`: one sentence on the canonical snapshot.
-- The `## Amendment record` on `SPEC-ECP-001` (`ECP-SNP-001`); the
-  `ARCH-ECP-001` amendment addressing `REQ-ECP-021`; the domain index; the
-  evidence packet with the Windows-versus-Linux reading.
+- The `## Amendment record` on `SPEC-ECP-001` (`ECP-SNP-001`); the domain
+  index; the evidence packet with the Windows-versus-Linux reading. No
+  architecture is selected: the change is a byte rule inside one function
+  and touches no boundary `ARCH-ECP-001` draws.
 
 ## Out of scope
 
@@ -90,8 +89,8 @@ sentence and of the amendment records.
 
 ## Expected change surface
 
-One product module, one test module, one note, the two amendment records,
-the packet, the domain index and the evidence.
+One product module, one test module, one note, the amendment record, the
+packet, the domain index and the evidence.
 
 ## Required verification
 
