@@ -209,3 +209,22 @@ upgrade.
   defines one.
 - The retry cadence an orchestrating host uses while waiting for the gate;
   the harness never waits.
+
+## Amendment record
+
+**`ECP-DLG-010`: the restitution names a delegated decision, proposed
+2026-08-29 under `WO-ECP-018`.** `ECP-DLG-002` to `ECP-DLG-007` say when a
+delegated transition is accepted; nothing said how the actor learns that
+the decision due is its own rather than a human's, and an actor that
+cannot tell escalates every time, which defeats the class. Rule: for a
+work order that carries `[delegation] class = "execution"` at the base of
+the pull request, `check` and `next` set `decision_required` to
+`delegated-executor` and emit the delegated command in
+`command_or_response` when the decision due is one of `DR-WO-START`,
+`DR-WO-COMPLETE` or `DR-VREC-PREPARE` and the configured gate reads
+`success` for the current head; when the gate reads anything else they
+emit a suggested-response naming the check, the head and the conclusion
+observed; for every other decision right, and for a class present only on
+the branch, the restitution is unchanged and names the human role.
+Delegation is stated by the evaluator from the class and the gate, never
+inferred by the actor. Nothing else in this specification changes.

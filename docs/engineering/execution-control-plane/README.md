@@ -93,6 +93,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-015` independent; the checkpoint-less `check` projection and the retirement of `focus` under `REQ-ECP-022` / `SPEC-ECP-011` / `ADR-ECP-007` / `VER-ECP-011`, drafted 2026-08-29 on the owner's challenge.
 - `WO-ECP-016` after `WO-ECP-013` (merged); admission of the selected work order's own records under `REQ-ECP-023` / `SPEC-ECP-012` / `VER-ECP-012`, drafted 2026-08-29 from issue #264.
 - `WO-ECP-017` after `WO-ECP-015` (merged); removal of the `focus` alias and the deferred `ECP-ONE-007` under `REQ-ECP-024` / `SPEC-ECP-013` / `VER-ECP-013`, drafted 2026-08-29 from the command audit's P1.
+- `WO-ECP-018` after `WO-ECP-006` (merged); the delegation class under `REQ-ECP-011` / `SPEC-ECP-006` (`ECP-DLG-001` to `-007`, `-009`) / new `VER-ECP-015` (the class subset of `VER-ECP-006`), drafted 2026-08-29; the shared journaled write path (`REQ-ECP-017`) follows.
 - `WO-ECP-008` after `WO-ECP-001`; its skill-retirement item moved to `WO-ECP-006` on 2026-08-29.
 
 This index authorizes no implementation, lifecycle transition, Git action,
