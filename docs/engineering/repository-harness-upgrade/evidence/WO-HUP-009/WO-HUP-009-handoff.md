@@ -205,5 +205,25 @@ Measured here on 2026-08-29; no issue filed yet.
 
 ## Hosted lanes
 
-Not yet run: the branch has not been pushed. This section is to be
-appended with the pull request's lane readings before completion.
+Pull request #253 at `5957139`: every lane passes (13 pass). The managed
+Engineering Harness lane
+(https://github.com/mmzen/se_harness/actions/runs/33240261694/job/99068276528)
+ran 0.9.0's unconditional scope gate for the first time on this repository:
+`check --from-git` over the pull request's diff completed inside the
+declared scope, the packet bound the snapshot the runner computed, and the
+declared `Harness-Restitution` digest `d91dd8c0…` equalled the recomputed
+`result_sha256`. The Governor Transition Assessment
+(https://github.com/mmzen/se_harness/actions/runs/33240261692/job/99068276426)
+assessed the real transition: base `main` `7291602` carrying the 0.8.0
+lock `174db6dc…` and exactly one released record for 0.9.0
+(`RLS-SEH-018`), head carrying the 0.9.0 lock and exactly one transaction
+document. Both governance-migration legs, both qualification rehearsals,
+candidate source and package evidence, and the integration-package build,
+verify (Linux, Windows) and retain lanes pass.
+
+At `61840f3`, the first push, the managed lane alone was red: the handoff
+check blocked on `QGP-G4I-EVIDENCE` because the packet header carried the
+CRLF worktree's snapshot `a1bd35eb…` where the runner computed
+`eb25d023…`; every other lane passed there too. `c88531a` rebound the
+header from an LF clone and `5957139` retained that clone's handoff
+result, as the "Handoff check" section records.
