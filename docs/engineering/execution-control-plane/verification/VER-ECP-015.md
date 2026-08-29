@@ -2,13 +2,20 @@
 id = "VER-ECP-015"
 type = "verification"
 title = "Independent evidence for the delegation class at the Git boundary"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T17:42:15Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-29 with the words 'Approve and start WO-ECP-018': the delegation-class subset of VER-ECP-006 - scenarios 1 to 4, the security checks, the validator and source rows, the narrowing row and the ECP-DLG-010 restitution row; the hosted demonstration deferred to the release carrying the class."
 +++
 
 # Verification Contract: Independent evidence for the delegation class at the Git boundary

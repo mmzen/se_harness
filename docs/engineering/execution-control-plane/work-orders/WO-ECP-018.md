@@ -2,7 +2,7 @@
 id = "WO-ECP-018"
 type = "work_order"
 title = "Introduce the delegation class: three transitions unlocked by the green pull-request gate"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -46,6 +46,13 @@ implements = ["REQ-ECP-011"]
 specifications = ["SPEC-ECP-006"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-002"]
 verification = ["VER-ECP-015"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T17:42:15Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-018', as a decision distinct from the approval of VER-ECP-015 in the same transaction, after the owner's question on how an actor learns it holds a delegated right was answered by the ECP-DLG-010 amendment record on SPEC-ECP-006. Authorizes start preflight and then only the declared scope: the gate-source reader, the delegated routes of transition and capture-verification, the restitution that names a delegated decision, the mutation guard's three delegated operations, the contract's three delegated bindings replacing the Phase 4 catalog, the toml, work-order and decision-rights templates, the template validator, tests, notes and indexes, and the evidence packet. It authorizes no hash-locked root file, no branch-protection rule, no use of the class by this repository before a release carrying it governs the root, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Introduce the delegation class: three transitions unlocked by the green pull-request gate
