@@ -176,3 +176,17 @@ reproduce these before the release decision. The managed lane at `69ee77a`
 reads red with `gate QG-G4-CANDIDATE-READY does not apply at checkpoint
 handoff`, issue #255 on the 0.9.0 root, as section 7 predicted; every other
 lane passes.
+
+## 9. Hosted lanes at the record commits
+
+At `3777019` (the ready `VREC-SEH-019`): the managed lane red with `gate
+QG-G4-ASSURANCE-DECISION does not apply at checkpoint handoff` (issue #255
+on the 0.9.0 root, as sections 7 and 8 record); the Publication Rehearsal's
+release-record leg errored once in the serial suite it runs —
+`test_dashboard_publication.GitReleaseFixture.test_duplicate_released_records_for_one_tag_fail_closed`,
+`OSError: [Errno 39] Directory not empty: '.git'` in the fixture's
+`TemporaryDirectory` cleanup, a background Git process on the runner — and
+passed on re-run of the failed jobs (run 33247062004, `completed success`
+for both rehearsal legs). Nothing on this branch touches that test or the
+dashboard; the fixture's unguarded cleanup is an observation outside this work
+order. Every other lane passes at `3777019`.
