@@ -138,3 +138,39 @@ REQ-ECP-022` is refused with `WEX210`.
 3. `WORKFLOW.md`'s lifecycle-decision step 1 says "no checkpoint: the
    projection" in parentheses, one clause beyond the rule's wording, so a
    reader of the managed document knows which form of `check` it means.
+
+## Complete changed-path set
+
+Every path this work order changed since `main` at `5e5e9d6`, packet
+included, as Git derived it (23 paths); the handoff check completed at its
+fixed point with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE` passing,
+run by the released 0.10.0 evaluator on this Windows checkout:
+
+```
+docs/engineering/execution-control-plane/architecture/adr/ADR-ECP-007.md
+docs/engineering/execution-control-plane/architecture/ARCH-ECP-001.md
+docs/engineering/execution-control-plane/evidence/WO-ECP-015/handoff.json
+docs/engineering/execution-control-plane/evidence/WO-ECP-015/WO-ECP-015-handoff.md
+docs/engineering/execution-control-plane/README.md
+docs/engineering/execution-control-plane/requirements/REQ-ECP-022.md
+docs/engineering/execution-control-plane/specifications/SPEC-ECP-001.md
+docs/engineering/execution-control-plane/specifications/SPEC-ECP-011.md
+docs/engineering/execution-control-plane/verification/VER-ECP-011.md
+docs/engineering/execution-control-plane/work-orders/WO-ECP-015.md
+docs/notes/harness-overview.md
+docs/notes/harnessctl-check.md
+docs/notes/harnessctl-reference.md
+README.md
+se_harness/cli.py
+se_harness/workflow.py
+se_harness/workflow_contract.json
+templates/repository/standard/docs/engineering/WORKFLOW.json
+templates/repository/standard/docs/engineering/WORKFLOW.md
+tests/fixtures/focus_alias/human.txt
+tests/fixtures/focus_alias/result.json
+tests/test_public_onboarding.py
+tests/test_workflow_execution.py
+```
+
+Linux reading at `7ec98b6` (WSL Ubuntu 24.04, CPython 3.12.3, LF clone):
+`python3 scripts/run_tests.py --scale full` OK, 4 skips.
