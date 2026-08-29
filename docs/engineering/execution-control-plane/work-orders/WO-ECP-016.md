@@ -2,7 +2,7 @@
 id = "WO-ECP-016"
 type = "work_order"
 title = "Admit the selected work order's own verification and release records to the change set"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-08-29T11:41:09Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-016'. Start preflight PASS with no diagnostics over the approval commit e4131b9 carrying unmoved main 5bde10a, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T11:58:50Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29, 'Mark WO-ECP-016 implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at 0c8146f on wo/ecp-016-admit-own-records off main 5bde10a; the handoff check completed at its fixed point b8546bcb1631b959d9093bfe5cd263f2f12be74b9b9521e2dd00be188b1c0c43 under the released 0.10.0 evaluator on this Windows checkout, every predicate of QG-G4-IMPLEMENTATION-EVIDENCE passing; all thirteen lanes of pull request #265 pass at this head, one after a re-run of a transient TemporaryDirectory cleanup error in test_hash_bound_integrity.SafetyTests unrelated to the change. ECP-ADM-001 to ECP-ADM-005 are implemented with no deviation; the packet under evidence/WO-ECP-016 retains the demonstration that the exact diff of pull request #263 reads blocked under 0.10.0 and completed under this candidate. This completion authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Admit the selected work order's own verification and release records to the change set
