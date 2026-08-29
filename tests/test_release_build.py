@@ -21,7 +21,6 @@ from unittest import mock
 
 from repository_tools import release_build as BUILD
 from se_harness import __version__
-from se_harness.agent_contract import parse_agent_contract_catalog_bytes
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -30,15 +29,8 @@ LOCK_PATH = REPOSITORY_ROOT / "release" / "build-toolchain.lock"
 NORMALIZER = REPOSITORY_ROOT / "scripts/normalize_sdist.py"
 FIXED_EPOCH = 1_700_000_000
 SKILL_FILES = {
-    "harness-draft-change": ("SKILL.md", "agents/openai.yaml", "scripts/guard.py", "skill-contract.json"),
-    "harness-execute-work-order": (
-        "SKILL.md", "agents/openai.yaml", "scripts/check_scope.py", "skill-contract.json"
-    ),
     "harness-orient": ("SKILL.md", "scripts/orient.py", "skill-contract.json"),
     "harness-operator-brief": ("SKILL.md", "scripts/check_brief.py", "skill-contract.json"),
-    "harness-prepare-assurance": (
-        "SKILL.md", "agents/openai.yaml", "scripts/check_prepare.py", "skill-contract.json"
-    ),
 }
 CLAUDE_ADAPTER_FILES = {
     name: ("SKILL.md",)
@@ -199,12 +191,12 @@ class DeterministicSdistTests(unittest.TestCase):
     def test_portable_skill_distribution_surface_is_explicit_and_unique(self) -> None:
         pyproject = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
         self.assertTrue(pyproject["tool"]["setuptools"]["include-package-data"])
-        self.assertIn("agent_contract.json", pyproject["tool"]["setuptools"]["package-data"]["se_harness"])
+        # WO-ECP-006 (ECP-DLG-008): the two Phase 4 contract catalogs left the package data.
+        for removed in ("agent_contract.json", "effect_contract.json"):
+            self.assertNotIn(removed, pyproject["tool"]["setuptools"]["package-data"]["se_harness"])
         self.assertTrue({
-            "effect_contract.json", "workflow_contract.json", "quality_gates_contract.json"
+            "workflow_contract.json", "quality_gates_contract.json"
         }.issubset(pyproject["tool"]["setuptools"]["package-data"]["se_harness"]))
-        catalog = REPOSITORY_ROOT / "se_harness/agent_contract.json"
-        self.assertEqual(catalog.read_bytes(), parse_agent_contract_catalog_bytes(catalog.read_bytes()).canonical_bytes)
         data_files = pyproject["tool"]["setuptools"]["data-files"]
         prefix = "share/se-harness/templates/repository/standard/.agents/skills"
         distributed = [
@@ -311,19 +303,16 @@ class DeterministicSdistTests(unittest.TestCase):
                     archive.writestr(name, raw)
 
             with zipfile.ZipFile(wheel) as archive:
-                self.assertIn("se_harness/agent_contract.json", archive.namelist())
-                for module in (
-                    "change_bundle.py", "delegated_authority.py", "delegated_workflow.py",
+                # WO-ECP-006 (ECP-DLG-008, VER-ECP-014 scenario 1): the wheel carries no envelope.
+                for removed in (
+                    "agent_contract.py", "change_bundle.py", "delegated_authority.py", "delegated_workflow.py",
                     "effect_broker.py", "repository_state.py", "runtime_state.py", "skill_contract.py",
+                    "agent_contract.json", "effect_contract.json",
                 ):
-                    self.assertIn(f"se_harness/{module}", archive.namelist())
-                for contract in ("agent_contract.json", "effect_contract.json", "workflow_contract.json"):
+                    self.assertNotIn(f"se_harness/{removed}", archive.namelist())
+                self.assertIn("se_harness/journaled_apply.py", archive.namelist())
+                for contract in ("workflow_contract.json", "quality_gates_contract.json", "hash_bound_classes.json"):
                     self.assertIn(f"se_harness/{contract}", archive.namelist())
-                packaged_catalog = archive.read("se_harness/agent_contract.json")
-                self.assertEqual(
-                    packaged_catalog,
-                    parse_agent_contract_catalog_bytes(packaged_catalog).canonical_bytes,
-                )
                 skill_members = [
                     name
                     for name in archive.namelist()

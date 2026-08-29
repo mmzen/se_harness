@@ -275,3 +275,19 @@ ADR review.
 - credentials, network, connectors, publication, deployment, or delivery;
 - automatic release-record preparation and decisions; and
 - remote or distributed transaction coordination.
+
+## Amendment record
+
+**The single-agent effect broker is withdrawn as an architecture, recorded
+2026-08-29 under `WO-ECP-006` on the decision of `ADR-ECP-002` and
+`ADR-AEX-008`.** Its observer, delegation resolver, nonce ledger, bundle
+broker, receipt validator and the `delegated-workflow` command left the
+product with `WO-ECP-006`. The journaled apply and its `human-recovery-stop`
+conformance checks — the property with a recorded reason to exist — are
+retained as `se_harness/journaled_apply.py` and `tests/test_journaled_apply.py`
+and re-homed under `ARCH-ECP-001`; wiring them into every harness-owned write
+is `REQ-ECP-017`'s work order. The three writing skills this architecture's
+clients backed (`harness-draft-change`, `harness-execute-work-order`,
+`harness-prepare-assurance`) are retired from the template under
+`REQ-ECP-014`; `harness-orient` and `harness-operator-brief` remain. The
+front matter of this record is unchanged; it is history.

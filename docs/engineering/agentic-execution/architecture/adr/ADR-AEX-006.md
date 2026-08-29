@@ -153,3 +153,17 @@ serialized envelope-shaped input create no authority.
 `VER-AEX-004` verifies schema closure, stable observation, evaluator ownership,
 least-authority intersection, expiry, revocation, nonce reuse, stale state,
 receipt chaining, unexplained dirty state, mandatory stops, and compatibility.
+
+## Amendment record
+
+**The evaluator-derived ephemeral envelope is superseded by the delegation
+class of `ADR-ECP-002`, recorded 2026-08-29 under `WO-ECP-006`.** The nonce
+ledger, the five-minute lifetime, revocation, the retry ordinal and the
+two-observation stability guard defended a token that never left the process
+that minted it; `WO-ECP-006` removes them from the product with
+`delegated_authority.py`, `runtime_state.py` and `agent_contract.py`
+(`SPEC-ECP-006`, `ECP-DLG-008`). What this decision retained as its formal
+maximum delegation on the work order continues as the `[delegation]` class
+of `REQ-ECP-011`, which unlocks three transitions only while the candidate's
+required check is green; that class is implemented under a later work order.
+The front matter of this record is unchanged; it is history.

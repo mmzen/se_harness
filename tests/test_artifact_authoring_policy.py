@@ -100,34 +100,6 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         self.assertIn("ONE OBLIGATION EDITED", output)
 
-    def test_draft_change_skill_applies_the_policy_and_its_vector_is_current(self) -> None:
-        import hashlib
-
-        from se_harness.skill_contract import build_skill_manifest, canonical_json_bytes, load_skill_contract
-
-        core = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-draft-change"
-        text = (core / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("ARTIFACT_AUTHORING.md", text)
-        self.assertIn("checklist is the review standard", text)
-        contract = load_skill_contract(core / "skill-contract.json")
-        self.assertEqual("2.0.0", contract.value["version"])
-        vectors = json.loads(
-            (REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/portable-vectors.json").read_text(
-                encoding="utf-8"
-            )
-        )
-        current = vectors["skills"]["harness-draft-change"]["current"]
-        self.assertEqual(current["manifest_sha256"], build_skill_manifest(core).sha256)
-        self.assertEqual(
-            current["contract_sha256"],
-            hashlib.sha256(canonical_json_bytes(contract.value)).hexdigest(),
-        )
-        policy = POLICY.read_text(encoding="utf-8")
-        for heading in ("## requirement", "## specification", "## adr", "## verification", "## work_order", "## risk"):
-            self.assertIn(heading, policy)
-        self.assertNotIn("W-AUT-002", text)  # the skill does not restate the policy
-
-    # ---------------------------------------------------------------- REQ-AUT-002
 
     def test_five_shapes_validate_clean_and_defects_are_signalled(self) -> None:
         clean = (

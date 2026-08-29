@@ -152,6 +152,16 @@ CANDIDATE_VALIDATOR_DELETIONS = (
 #: 585 deleted lines, the figure `WO-REB-029` records as its measured deletion.
 CANDIDATE_VALIDATOR_DELETED_LINES = 585
 
+#: `WO-ECP-006` (2026-08-29): the candidate copy is the 0.10.0 root copy with the
+#: `[agentic_delegation]` validator removed, three blocks, 147 lines, declared in the
+#: same form: first line in the root copy, its 1-based number, lines spanned.
+ECP006_CANDIDATE_VALIDATOR_DELETIONS = (
+    (72, 22, 'AGENTIC_DELEGATION_SCHEMA = "se-harness-agentic-delegation-v1"'),
+    (2649, 124, "def _path_is_within(child: str, parent: str) -> bool:"),
+    (2999, 1, "        errors.extend(validate_agentic_delegations(artifacts, repository_root))"),
+)
+ECP006_CANDIDATE_VALIDATOR_DELETED_LINES = 147
+
 #: The bootstrap-era markers under the closed 0.6.0 domain, pinned as counts.
 #: The retirement removes their readers, not the data: a count that moved would
 #: mean retained history had been rewritten.
@@ -445,13 +455,21 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # WO-HUP-008: the root copy is the released 0.8.0 validator, which is the
             # candidate template byte for byte; the deletion ledger below describes the
             # 0.7.1 root and is retained for that state only.
-            self.assertEqual(self.candidate_text, self.root_text)
+            if "validate_agentic_delegations" not in self.root_text:
+                self.assertEqual(self.candidate_text, self.root_text)
+                return
+            # WO-ECP-006 (SPEC-ECP-006 ECP-DLG-008): the candidate copy is the root copy
+            # with the `[agentic_delegation]` validator removed, declared block by block
+            # in the same form as the 0.7.1 ledger; a root released with this removal
+            # takes the equality branch above.
+            self._assert_root_minus_declared_blocks(ECP006_CANDIDATE_VALIDATOR_DELETIONS, ECP006_CANDIDATE_VALIDATOR_DELETED_LINES)
             return
+        self._assert_root_minus_declared_blocks(CANDIDATE_VALIDATOR_DELETIONS, CANDIDATE_VALIDATOR_DELETED_LINES)
+
+    def _assert_root_minus_declared_blocks(self, declared, deleted_lines) -> None:
         root_lines = self.root_text.splitlines()
         candidate_lines = self.candidate_text.splitlines()
-        self.assertEqual(
-            CANDIDATE_VALIDATOR_DELETED_LINES, len(root_lines) - len(candidate_lines)
-        )
+        self.assertEqual(deleted_lines, len(root_lines) - len(candidate_lines))
         matcher = difflib.SequenceMatcher(a=root_lines, b=candidate_lines, autojunk=False)
         observed = []
         for tag, start, stop, _candidate_start, _candidate_stop in matcher.get_opcodes():
@@ -462,10 +480,8 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # reviewable line for line.
             self.assertEqual("delete", tag, f"unexpected {tag} at root line {start + 1}")
             observed.append((start + 1, stop - start, root_lines[start:stop]))
-        self.assertEqual(len(CANDIDATE_VALIDATOR_DELETIONS), len(observed))
-        for (line, count, marker), (observed_line, observed_count, block) in zip(
-            CANDIDATE_VALIDATOR_DELETIONS, observed
-        ):
+        self.assertEqual(len(declared), len(observed))
+        for (line, count, marker), (observed_line, observed_count, block) in zip(declared, observed):
             with self.subTest(root_line=line, marker=marker[:48]):
                 self.assertEqual((line, count), (observed_line, observed_count))
                 self.assertIn(marker, block)

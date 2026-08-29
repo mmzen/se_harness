@@ -1,0 +1,399 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "ef269cd3a31c54d26524a816fde87c0b009ea6f6eaa44900b63ff908c07f14fd",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-006"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-ECP-006 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-ECP-006"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-006:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-ECP-006 declares 33 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-ECP-006"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-ECP-006"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 62 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-ECP-006:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-ECP-006"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/execution-control-plane/evidence/WO-ECP-006/WO-ECP-006-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 479
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ECP-006",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-ECP-006",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-ECP-006",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-ECP-006",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-ECP-006."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-ECP-006",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-ECP-006 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-ECP-006 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-ECP-006 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-ECP-006 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-ECP-006",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-ECP-006."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "73c7c23cf30f63a6b8c7ec460067ae7ad13a6f3d149a3a2dd7bc3429baba0e5e",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/agentic-execution/architecture/adr/ADR-AEX-006.md",
+      "docs/engineering/agentic-execution/architecture/adr/ADR-AEX-007.md",
+      "docs/engineering/agentic-execution/architecture/ARCH-AEX-002.md",
+      "docs/engineering/agentic-execution/README.md",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-006/handoff.json",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-006/WO-ECP-006-handoff.md",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-014.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-006.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-008.md",
+      "docs/notes/agentic-execution-host-adapters.md",
+      "docs/notes/agentic-execution-skills-mvp.md",
+      "docs/notes/harnessctl-reference.md",
+      "pyproject.toml",
+      "se_harness/agent_contract.json",
+      "se_harness/agent_contract.py",
+      "se_harness/change_bundle.py",
+      "se_harness/cli.py",
+      "se_harness/delegated_authority.py",
+      "se_harness/delegated_workflow.py",
+      "se_harness/effect_broker.py",
+      "se_harness/effect_contract.json",
+      "se_harness/journaled_apply.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/repository_state.py",
+      "se_harness/runtime_state.py",
+      "se_harness/skill_contract.py",
+      "templates/repository/standard/.agents/skills/harness-draft-change/agents/openai.yaml",
+      "templates/repository/standard/.agents/skills/harness-draft-change/scripts/guard.py",
+      "templates/repository/standard/.agents/skills/harness-draft-change/skill-contract.json",
+      "templates/repository/standard/.agents/skills/harness-draft-change/SKILL.md",
+      "templates/repository/standard/.agents/skills/harness-execute-work-order/agents/openai.yaml",
+      "templates/repository/standard/.agents/skills/harness-execute-work-order/scripts/check_scope.py",
+      "templates/repository/standard/.agents/skills/harness-execute-work-order/skill-contract.json",
+      "templates/repository/standard/.agents/skills/harness-execute-work-order/SKILL.md",
+      "templates/repository/standard/.agents/skills/harness-prepare-assurance/agents/openai.yaml",
+      "templates/repository/standard/.agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
+      "templates/repository/standard/.agents/skills/harness-prepare-assurance/skill-contract.json",
+      "templates/repository/standard/.agents/skills/harness-prepare-assurance/SKILL.md",
+      "templates/repository/standard/.claude/skills/harness-draft-change/SKILL.md",
+      "templates/repository/standard/.claude/skills/harness-execute-work-order/SKILL.md",
+      "templates/repository/standard/.claude/skills/harness-prepare-assurance/SKILL.md",
+      "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+      "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+      "tests/skill_contract_support.py",
+      "tests/test_agent_contract.py",
+      "tests/test_agentic_execution.py",
+      "tests/test_artifact_authoring_policy.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_change_bundle.py",
+      "tests/test_delegated_authority.py",
+      "tests/test_delegated_workflow.py",
+      "tests/test_effect_broker.py",
+      "tests/test_fixture_support.py",
+      "tests/test_hash_bound_integrity.py",
+      "tests/test_instruction_architecture.py",
+      "tests/test_journaled_apply.py",
+      "tests/test_mutation_guard.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_release_build.py",
+      "tests/test_repository_state.py",
+      "tests/test_standard_repository_lifecycle.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/agentic-execution/",
+      "docs/engineering/execution-control-plane/evidence/",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/verification-records/",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-014.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-008.md",
+      "docs/notes/agentic-execution-host-adapters.md",
+      "docs/notes/agentic-execution-skills-mvp.md",
+      "docs/notes/harnessctl-reference.md",
+      "MANIFEST.in",
+      "pyproject.toml",
+      "se_harness/agent_contract.json",
+      "se_harness/agent_contract.py",
+      "se_harness/change_bundle.py",
+      "se_harness/cli.py",
+      "se_harness/delegated_authority.py",
+      "se_harness/delegated_workflow.py",
+      "se_harness/effect_broker.py",
+      "se_harness/effect_contract.json",
+      "se_harness/journaled_apply.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/repository_state.py",
+      "se_harness/runtime_state.py",
+      "se_harness/skill_contract.py",
+      "templates/repository/standard/.agents/skills/harness-draft-change/",
+      "templates/repository/standard/.agents/skills/harness-execute-work-order/",
+      "templates/repository/standard/.agents/skills/harness-prepare-assurance/",
+      "templates/repository/standard/.claude/skills/harness-draft-change/",
+      "templates/repository/standard/.claude/skills/harness-execute-work-order/",
+      "templates/repository/standard/.claude/skills/harness-prepare-assurance/",
+      "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+      "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-ECP-002",
+      "ARCH-ECP-001",
+      "CAP-ECP-003",
+      "INT-ECP-001",
+      "REQ-ECP-014",
+      "REQ-ECP-018",
+      "SPEC-ECP-006",
+      "SPEC-ECP-007",
+      "VER-ECP-007",
+      "VER-ECP-014"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-ECP-006"
+    ],
+    "primary": "WO-ECP-006"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-ECP-006",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-ECP-006",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

@@ -151,3 +151,19 @@ object attacks, stale prior state, all supported operations, complete preflight,
 ordinary rollback, interruption recovery, journal corruption, receipt linkage,
 single-writer behavior, direct-write detection, cross-platform behavior, and
 the absence of duplicated governance facts.
+
+## Amendment record
+
+**The isolated-proposal write boundary is superseded by the Git boundary of
+`ADR-ECP-002`, recorded 2026-08-29 under `WO-ECP-006`.** The change bundle,
+the object store, the proposed-workspace broker path and the effect receipt
+are removed from the product with `change_bundle.py`, `effect_broker.py`,
+`repository_state.py` and `delegated_workflow.py` (`SPEC-ECP-006`,
+`ECP-DLG-008`); scope is enforced over the pull request's diff by the
+`scope` and `handoff` checkpoints and the managed lane (`WO-ECP-003`,
+`WO-ECP-013`, `WO-ECP-016`). The transactional bundle apply this decision
+introduced is retained as the journaled apply of
+`se_harness/journaled_apply.py` — journal before the first replace, rollback
+to pre-images, `human-recovery-stop` — with its fault matrix, to become the
+one write path of every harness-owned multi-file write under `REQ-ECP-017`.
+The front matter of this record is unchanged; it is history.

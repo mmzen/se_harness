@@ -822,17 +822,12 @@ class InstructionArchitectureTests(unittest.TestCase):
         for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
             self.assertEqual("managed", lock["files"][f".agents/skills/harness-orient/{relative}"]["mode"])
 
+        # WO-ECP-006 (REQ-ECP-014): the three writing skills that stubbed the evaluator
+        # are retired; the operator brief is the one remaining scripted skill beside orient.
         writing_skills = {
-            "harness-draft-change": "scripts/guard.py",
-            "harness-execute-work-order": "scripts/check_scope.py",
             "harness-operator-brief": "scripts/check_brief.py",
-            "harness-prepare-assurance": "scripts/check_prepare.py",
         }
-        host_adapter_writing_skills = {
-            "harness-draft-change",
-            "harness-execute-work-order",
-            "harness-prepare-assurance",
-        }
+        host_adapter_writing_skills: set[str] = set()
         self.assertEqual(
             {"harness-orient", *writing_skills},
             {path.name for path in (target / ".agents/skills").iterdir() if path.is_dir()},

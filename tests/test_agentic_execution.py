@@ -12,7 +12,7 @@ import unittest
 from pathlib import Path
 from pathlib import PurePosixPath
 
-from se_harness.skill_contract import (
+from tests.skill_contract_support import (
     _validate_component,
     CONTRACT_SCHEMA,
     CONTRACT_SCHEMA_V2,
@@ -29,14 +29,9 @@ from se_harness.skill_contract import (
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
 SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills"
-PHASE3_ROOTS = {
-    name: SKILLS_ROOT / name
-    for name in (
-        "harness-draft-change",
-        "harness-execute-work-order",
-        "harness-prepare-assurance",
-    )
-}
+# The three writing skills WO-ECP-006 retired (REQ-ECP-014); their phase-3 and
+# phase-4 identities are retained history in the vector fixtures.
+RETIRED_SKILL_NAMES = ("harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance")
 OPERATOR_BRIEF_ROOT = SKILLS_ROOT / "harness-operator-brief"
 OPERATOR_BRIEF = OPERATOR_BRIEF_ROOT / "scripts/check_brief.py"
 TECHNICAL_COMMUNICATION_CORPUS = REPOSITORY_ROOT / "tests/fixtures/technical_communication/review_corpus.json"
@@ -49,7 +44,7 @@ PHASE5_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase
 PHASE4_SKILL_CASES = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/client-cases.json"
 HOST_SURFACE_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/host_activation/expected_surfaces.json"
 CLAUDE_SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills"
-ALL_SKILL_NAMES = {"harness-orient", *PHASE3_ROOTS}
+ALL_SKILL_NAMES = {"harness-orient"}
 
 
 def snapshot(root: Path) -> dict[str, str]:
@@ -79,92 +74,6 @@ def load_script(name: str, path: Path):
             sys.modules[name] = prior_module
     return module
 
-
-class Phase4DelegationTemplateTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.validator = load_script(
-            "_phase4_candidate_validator",
-            REPOSITORY_ROOT
-            / "templates/repository/standard/scripts/validate_engineering_artifacts.py",
-        )
-
-    def artifact(self, table: dict[str, object]):
-        return self.validator.Artifact(
-            path=REPOSITORY_ROOT / "docs/engineering/work-orders/WO-TST-002.md",
-            metadata={
-                "id": "WO-TST-002",
-                "type": "work_order",
-                "status": "approved",
-                "execution_scope": {"paths": ["docs/", "se_harness/runtime.py"]},
-                "agentic_delegation": table,
-            },
-            body="# Fixture\n",
-        )
-
-    @staticmethod
-    def declaration() -> dict[str, object]:
-        return {
-            "schema": "se-harness-agentic-delegation-v1",
-            "delegated_by": "engineering-owner",
-            "delegate": "implementation-worker",
-            "decision_rights": ["DR-WO-START"],
-            "operations": ["change-bundle-apply"],
-            "execution_profiles": ["implementer"],
-            "paths": ["docs/"],
-            "required_evidence": [
-                {"kind": "verification", "path": "docs/evidence.json"}
-            ],
-            "valid_until": "2030-01-01T00:00:00Z",
-            "max_retry": 1,
-            "max_parallel_writers": 1,
-            "child_delegation": False,
-            "stop_before": [
-                "accountable-decision-required",
-                "action-time-authorization-required",
-            ],
-        }
-
-    def test_candidate_template_and_validator_accept_exact_optional_delegation(self) -> None:
-        template = (
-            REPOSITORY_ROOT
-            / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
-        ).read_text(encoding="utf-8")
-        self.assertIn('[agentic_delegation]', template)
-        self.assertIn('schema = "se-harness-agentic-delegation-v1"', template)
-        self.assertIn('child_delegation = false', template)
-        errors = self.validator.validate_agentic_delegations(
-            [self.artifact(self.declaration())], REPOSITORY_ROOT
-        )
-        self.assertEqual([], errors)
-
-    def test_candidate_validator_rejects_unknown_fields_widening_and_stop_removal(self) -> None:
-        cases = {}
-        value = self.declaration()
-        value["invented"] = True
-        cases["unknown"] = value
-        value = self.declaration()
-        value["paths"] = ["outside/"]
-        cases["path"] = value
-        value = self.declaration()
-        value["stop_before"] = ["accountable-decision-required"]
-        cases["stop"] = value
-        value = self.declaration()
-        value["required_evidence"] = [{"kind": "verification", "path": "outside.json"}]
-        cases["evidence"] = value
-        value = self.declaration()
-        value["max_parallel_writers"] = 2
-        cases["writers"] = value
-        value = self.declaration()
-        value["child_delegation"] = True
-        cases["child"] = value
-        for label, table in cases.items():
-            with self.subTest(label=label):
-                errors = self.validator.validate_agentic_delegations(
-                    [self.artifact(table)], REPOSITORY_ROOT
-                )
-                self.assertTrue(errors)
-                self.assertEqual({"E021"}, {item.code for item in errors})
 
 
 class SkillContractTests(unittest.TestCase):
@@ -217,53 +126,17 @@ class SkillContractTests(unittest.TestCase):
                 with self.assertRaisesRegex(SkillContractError, code):
                     parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
 
-    def test_closed_phase4_contracts_and_manifests_validate(self) -> None:
-        expected = {
-            "harness-draft-change": ("draft-writing", ["draft-create", "draft-revise", "planning-note-write"]),
-            "harness-execute-work-order": (
-                "governed-mutation",
-                ["implementation-write", "test-execution", "evidence-write"],
-            ),
-            "harness-prepare-assurance": ("governed-mutation", ["verification-record-prepare"]),
-        }
-        for name, root in PHASE3_ROOTS.items():
-            with self.subTest(skill=name):
-                contract = load_skill_contract(root / "skill-contract.json")
-                manifest = build_skill_manifest(root)
-                self.assertEqual(CONTRACT_SCHEMA_V3, contract.value["schema"])
-                self.assertEqual(name, contract.name)
-                self.assertEqual(expected[name][0], contract.value["mutation_class"])
-                self.assertEqual(expected[name][1], contract.value["effects"]["permitted"])
-                self.assertEqual([], contract.value["effects"]["lifecycle_transitions"])
-                self.assertFalse(contract.value["client"]["direct_target_writes"])
-                self.assertEqual("evaluator", contract.value["client"]["bundle_owner"])
-                self.assertEqual("evaluator", contract.value["client"]["target_writer"])
-                self.assertEqual("required", contract.value["client"]["canonical_restitution"])
-                self.assertEqual("se-harness-workflow-v4", contract.value["client"]["workflow_schema"])
-                self.assertTrue(contract.value["activation"]["explicit"])
-                self.assertFalse(contract.value["activation"]["implicit"])
-                self.assertFalse(contract.value["delegation"]["allowed"])
-                self.assertEqual("single-agent", contract.value["delegation"]["fallback"])
-                self.assertEqual(
-                    sorted(["SKILL.md", "agents/openai.yaml", next(item for item in [
-                        "scripts/guard.py", "scripts/check_scope.py", "scripts/check_prepare.py"
-                    ] if (root / item).exists()), "skill-contract.json"]),
-                    sorted(item["path"] for item in manifest.value["files"]),
-                )
-                self.assertEqual("2.0.0", contract.value["version"])
-                self.assertEqual(
-                    b"policy:\n  allow_implicit_invocation: false\n",
-                    (root / "agents/openai.yaml").read_bytes(),
-                )
-
     def test_retained_phase3_vectors_are_preserved_and_orientation_is_byte_exact(self) -> None:
         phase3 = json.loads(PHASE3_VECTORS.read_text(encoding="utf-8"))
         phase4 = json.loads(PHASE4_SKILL_VECTORS.read_text(encoding="utf-8"))
         self.assertEqual("se-harness-phase3-portable-vectors-v1", phase3["schema"])
         self.assertEqual("se-harness-phase4-skill-vectors-v1", phase4["schema"])
-        for name in PHASE3_ROOTS:
+        for name in RETIRED_SKILL_NAMES:
             with self.subTest(skill=name):
+                # Retained history: the skills are gone (WO-ECP-006), their rows stay.
                 self.assertEqual(phase3["skills"][name], phase4["skills"][name]["previous"])
+                self.assertFalse((SKILLS_ROOT / name).exists())
+                self.assertFalse((CLAUDE_SKILLS_ROOT / name).exists())
         # ECP-RMV-005: the phase-4 orientation identity is retained as the phase-5
         # row's `previous`; the live harness-orient core equals its `current`.
         phase5 = json.loads(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8"))
@@ -276,46 +149,6 @@ class SkillContractTests(unittest.TestCase):
             expected["contract_sha256"],
             hashlib.sha256(canonical_json_bytes(contract.value)).hexdigest(),
         )
-
-    def test_current_writing_cores_match_phase4_vectors(self) -> None:
-        vectors = json.loads(PHASE4_SKILL_VECTORS.read_text(encoding="utf-8"))
-        for name, identities in vectors["skills"].items():
-            with self.subTest(skill=name):
-                expected = identities["current"]
-                root = SKILLS_ROOT / name
-                contract = load_skill_contract(root / "skill-contract.json")
-                self.assertEqual(expected["schema"], contract.value["schema"])
-                self.assertEqual(expected["version"], contract.version)
-                self.assertEqual(expected["manifest_sha256"], build_skill_manifest(root).sha256)
-                self.assertEqual(
-                    expected["contract_sha256"],
-                    hashlib.sha256(canonical_json_bytes(contract.value)).hexdigest(),
-                )
-                self.assertEqual(expected["interface_operation"], contract.value["client"]["interface_operation"])
-                self.assertEqual(expected["operation_catalog"], contract.value["client"]["operation_catalog"])
-
-    def test_phase4_contracts_reject_implicit_activation_direct_write_and_authority(self) -> None:
-        original = json.loads(
-            (PHASE3_ROOTS["harness-draft-change"] / "skill-contract.json").read_text(encoding="utf-8")
-        )
-        cases = (
-            ("implicit", lambda value: value["activation"].__setitem__("implicit", True), "SKC033"),
-            (
-                "transition",
-                lambda value: value["effects"]["lifecycle_transitions"].append("draft-to-approved"),
-                "SKC038",
-            ),
-            ("direct-write", lambda value: value["client"].__setitem__("direct_target_writes", True), "SKC036"),
-            ("writer", lambda value: value["client"].__setitem__("target_writer", "provider"), "SKC036"),
-            ("authority", lambda value: value.__setitem__("authority", "engineering-owner"), "SKC006"),
-            ("delegation", lambda value: value["delegation"].__setitem__("allowed", True), "SKC018"),
-        )
-        for label, mutate, code in cases:
-            with self.subTest(label=label):
-                value = json.loads(json.dumps(original))
-                mutate(value)
-                with self.assertRaisesRegex(SkillContractError, code):
-                    parse_skill_contract_bytes(json.dumps(value).encode("utf-8"))
 
     def test_closed_operator_brief_contract_and_three_file_core_validate(self) -> None:
         contract = load_skill_contract(OPERATOR_BRIEF_ROOT / "skill-contract.json")
@@ -371,12 +204,16 @@ class SkillContractTests(unittest.TestCase):
     def test_repository_host_surfaces_bind_one_canonical_core_per_name(self) -> None:
         vectors = json.loads(HOST_SURFACE_VECTORS.read_text(encoding="utf-8"))
         self.assertEqual("se-harness-host-surface-vectors-v2", vectors["schema"])
-        self.assertEqual(ALL_SKILL_NAMES, set(vectors["skills"]))
+        # The vector file keeps the four historical names; the shipped surface is the
+        # retained one (WO-ECP-006 retired the three writing skills).
+        self.assertEqual(ALL_SKILL_NAMES | set(RETIRED_SKILL_NAMES), set(vectors["skills"]))
         self.assertEqual(
             ALL_SKILL_NAMES,
             {path.name for path in CLAUDE_SKILLS_ROOT.iterdir() if path.is_dir()},
         )
         for name, expected in sorted(vectors["skills"].items()):
+            if name not in ALL_SKILL_NAMES:
+                continue
             with self.subTest(skill=name):
                 adapter = CLAUDE_SKILLS_ROOT / name / "SKILL.md"
                 self.assertEqual(["SKILL.md"], [path.name for path in adapter.parent.iterdir()])
@@ -415,23 +252,23 @@ class SkillContractTests(unittest.TestCase):
                 self.assertEqual(policy is not None, (SKILLS_ROOT / name / (policy or "agents/openai.yaml")).exists())
 
     def test_host_surfaces_fail_static_binding_checks_for_hostile_changes(self) -> None:
-        source = (CLAUDE_SKILLS_ROOT / "harness-draft-change/SKILL.md").read_text(encoding="utf-8")
+        source = (CLAUDE_SKILLS_ROOT / "harness-orient/SKILL.md").read_text(encoding="utf-8")
         attacks = {
             "wrong-schema": source.replace("se-harness-host-adapter-v1", "unknown-adapter"),
-            "wrong-name": source.replace("canonical-name: harness-draft-change", "canonical-name: harness-orient"),
+            "wrong-name": source.replace("canonical-name: harness-orient", "canonical-name: harness-draft-change"),
             "traversal": source.replace(
-                ".agents/skills/harness-draft-change", "../.agents/skills/harness-draft-change"
+                ".agents/skills/harness-orient", "../.agents/skills/harness-orient"
             ),
             "absolute": source.replace(
-                ".agents/skills/harness-draft-change", "/.agents/skills/harness-draft-change"
+                ".agents/skills/harness-orient", "/.agents/skills/harness-orient"
             ),
             "permission": source.replace("metadata:\n", "allowed-tools: Bash\nmetadata:\n"),
             "remote": source + "\nhttps://example.invalid/skill\n",
         }
         required = (
             "adapter-schema: se-harness-host-adapter-v1",
-            "canonical-name: harness-draft-change",
-            "canonical-path: .agents/skills/harness-draft-change",
+            "canonical-name: harness-orient",
+            "canonical-path: .agents/skills/harness-orient",
             "disable-model-invocation: true",
         )
         forbidden = ("allowed-tools:", "http://", "https://", "../", "canonical-path: /")
@@ -440,261 +277,14 @@ class SkillContractTests(unittest.TestCase):
                 self.assertTrue(any(item not in raw for item in required) or any(item in raw for item in forbidden))
 
 
-class Phase4EvaluatorClientTests(unittest.TestCase):
+class OperatorBriefAndSupportTests(unittest.TestCase):
+    """The operator-brief checker and the test-only skill support (the Phase 4 client tests left with WO-ECP-006)."""
+
     @classmethod
     def setUpClass(cls) -> None:
-        cls.draft = load_script(
-            "phase4_draft_guard", PHASE3_ROOTS["harness-draft-change"] / "scripts/guard.py"
-        )
-        cls.execute = load_script(
-            "phase4_execute_guard", PHASE3_ROOTS["harness-execute-work-order"] / "scripts/check_scope.py"
-        )
-        cls.assurance = load_script(
-            "phase4_assurance_guard", PHASE3_ROOTS["harness-prepare-assurance"] / "scripts/check_prepare.py"
-        )
         cls.brief = load_script(
             "technical_communication_brief_check", OPERATOR_BRIEF
         )
-
-    @staticmethod
-    def catalog() -> list[dict[str, str]]:
-        return [
-            {"id": item}
-            for item in (
-                "delegated-work-order-start",
-                "change-bundle-apply",
-                "delegated-work-order-complete",
-                "delegated-vrec-prepare",
-            )
-        ]
-
-    @staticmethod
-    def evaluator_request(operation: str) -> dict[str, object]:
-        return {
-            "schema": "se-harness-evaluator-client-request-v1",
-            "arguments": ["delegated-workflow", operation, ".", "--work-order", "WO-AEX-008"],
-            "delegation_sha256": "a" * 64,
-        }
-
-    @staticmethod
-    def execution_result(work_order: str, *, with_effect: bool = True) -> dict[str, object]:
-        return {
-            "outcome": "completed-at-git-stop",
-            "work_order": work_order,
-            "start": {"lifecycle_proof": {}},
-            "effects": [{"receipt": {}}] if with_effect else [],
-            "completion": {"lifecycle_proof": {}},
-            "next": {"decision_packet": {}},
-        }
-
-    def test_client_case_vector_covers_all_phase4_skill_stops_and_successes(self) -> None:
-        value = json.loads(PHASE4_SKILL_CASES.read_text(encoding="utf-8"))
-        self.assertEqual("se-harness-phase4-skill-client-cases-v1", value["schema"])
-        self.assertEqual("se-harness-workflow-v4", value["workflow_schema"])
-        self.assertTrue(value["single_agent"])
-        self.assertFalse(value["direct_target_writes"])
-        self.assertEqual(
-            {
-                "implicit-writing-nonactivation",
-                "unavailable-public-0-6-evaluator",
-                "invalid-delegation",
-                "active-session-conflict",
-                "direct-target-write-attempt",
-                "valid-sequential-bundle-and-completion",
-                "commit-bound-vrec-missing-commit",
-                "prepared-vrec-assurance-stop",
-            },
-            {item["id"] for item in value["cases"]},
-        )
-        self.assertTrue({"direct-target-write", "git-mutation", "assurance-decision"}.issubset(value["prohibited"]))
-
-    def test_draft_client_invokes_only_evaluator_after_closed_checks(self) -> None:
-        request = {
-            "schema": "se-harness-evaluator-client-request-v1",
-            "explicit_skill": "harness-draft-change",
-            "workflow_schema": "se-harness-workflow-v4",
-            "interface_operation": "delegated-workflow-execute",
-            "direct_target_write": False,
-            "work_order": "WO-AEX-008",
-            "state": "approved",
-            "effect_class": "draft-create",
-            "planned_paths": ["docs/engineering/example/requirements/REQ-EX-001.md"],
-            "allowed_paths": ["docs/engineering/example/requirements/REQ-EX-001.md"],
-            "revisions": {},
-            "evaluator_request": self.evaluator_request("execute"),
-        }
-        calls: list[tuple[str, ...]] = []
-        result = self.draft.invoke_draft_client(
-            request,
-            catalog=self.catalog,
-            client=lambda arguments: calls.append(arguments) or self.execution_result("WO-AEX-008", with_effect=False),
-        )
-        self.assertEqual("se-harness-evaluator-client-result-v1", result["schema"])
-        self.assertEqual("completed-at-git-stop", result["outcome"])
-        self.assertEqual([tuple(request["evaluator_request"]["arguments"])], calls)
-
-        for label, mutate in (
-            ("implicit", lambda value: value.__setitem__("explicit_skill", "")),
-            ("direct", lambda value: value.__setitem__("direct_target_write", True)),
-            ("escape", lambda value: value.__setitem__("planned_paths", ["../outside.md"])),
-            ("scope", lambda value: value.__setitem__("planned_paths", ["README.md"])),
-            ("state", lambda value: value.__setitem__("revisions", {"REQ-EX-001": "approved"})),
-            ("delegation", lambda value: value["evaluator_request"].__setitem__("delegation_sha256", "invalid")),
-        ):
-            with self.subTest(label=label):
-                rejected = json.loads(json.dumps(request))
-                mutate(rejected)
-                calls.clear()
-                with self.assertRaises(self.draft.DraftGuardError):
-                    self.draft.invoke_draft_client(
-                        rejected,
-                        catalog=self.catalog,
-                        client=lambda arguments: calls.append(arguments),
-                    )
-                self.assertEqual([], calls)
-        with self.assertRaisesRegex(self.draft.DraftGuardError, "AEXDRF014"):
-            self.draft.invoke_draft_client(
-                request,
-                catalog=lambda: [],
-                client=lambda arguments: calls.append(arguments),
-            )
-        self.assertEqual([], calls)
-
-    def test_work_order_client_requires_approved_scope_and_exact_phase4_catalog(self) -> None:
-        base = {
-            "schema": "se-harness-evaluator-client-request-v1",
-            "explicit_skill": "harness-execute-work-order",
-            "workflow_schema": "se-harness-workflow-v4",
-            "interface_operation": "delegated-workflow-execute",
-            "direct_target_write": False,
-            "work_order": "WO-AEX-008",
-            "state": "approved",
-            "effect_class": "implementation-write",
-            "planned_paths": ["se_harness/skill_contract.py"],
-            "execution_scope": ["se_harness/skill_contract.py", "tests/fixtures/agentic_execution/phase4/"],
-            "evaluator_request": self.evaluator_request("execute"),
-        }
-        calls: list[tuple[str, ...]] = []
-        result = self.execute.invoke_work_order_client(
-            base,
-            catalog=self.catalog,
-            client=lambda arguments: calls.append(arguments) or self.execution_result("WO-AEX-008"),
-        )
-        self.assertEqual("se-harness-evaluator-client-result-v1", result["schema"])
-        self.assertEqual(1, len(calls))
-
-        for state in ("draft", "in_progress", "implemented", "verified", "rejected"):
-            rejected = {**base, "state": state}
-            calls.clear()
-            with self.subTest(state=state), self.assertRaises(self.execute.ScopeGuardError):
-                self.execute.invoke_work_order_client(
-                    rejected, catalog=self.catalog, client=lambda arguments: calls.append(arguments)
-                )
-            self.assertEqual([], calls)
-        for hostile in ("../escape.py", "/absolute.py", "file://host/path", "tests/*.py", "README.md"):
-            rejected = {**base, "planned_paths": [hostile]}
-            calls.clear()
-            with self.subTest(path=hostile), self.assertRaises(self.execute.ScopeGuardError):
-                self.execute.invoke_work_order_client(
-                    rejected, catalog=self.catalog, client=lambda arguments: calls.append(arguments)
-                )
-            self.assertEqual([], calls)
-        for label, rejected in (
-            ("direct", {**base, "direct_target_write": True}),
-            ("catalog", base),
-        ):
-            calls.clear()
-            selected_catalog = (lambda: []) if label == "catalog" else self.catalog
-            with self.subTest(label=label), self.assertRaises(self.execute.ScopeGuardError):
-                self.execute.invoke_work_order_client(
-                    rejected, catalog=selected_catalog, client=lambda arguments: calls.append(arguments)
-                )
-            self.assertEqual([], calls)
-
-    def test_public_0_6_interface_without_delegated_workflow_stops_before_client(self) -> None:
-        environment = {**os.environ, "AEX_FAKE_VERSION": "0.6.0", "AEX_FAKE_MODE": "healthy"}
-        help_result = subprocess.run(
-            [sys.executable, "-B", str(FAKE_EVALUATOR), "--help"],
-            capture_output=True,
-            text=True,
-            check=True,
-            env=environment,
-        )
-        self.assertNotIn("delegated-workflow", help_result.stdout)
-        request = {
-            "schema": "se-harness-evaluator-client-request-v1",
-            "explicit_skill": "harness-execute-work-order",
-            "workflow_schema": "se-harness-workflow-v4",
-            "interface_operation": "delegated-workflow-execute",
-            "direct_target_write": False,
-            "work_order": "WO-AEX-008",
-            "state": "approved",
-            "effect_class": "implementation-write",
-            "planned_paths": ["se_harness/skill_contract.py"],
-            "execution_scope": ["se_harness/skill_contract.py"],
-            "evaluator_request": self.evaluator_request("execute"),
-        }
-        calls: list[tuple[str, ...]] = []
-        with self.assertRaisesRegex(self.execute.ScopeGuardError, "AEXEXE012"):
-            self.execute.invoke_work_order_client(
-                request,
-                catalog=lambda: [],
-                client=lambda arguments: calls.append(arguments),
-            )
-        self.assertEqual([], calls)
-    def test_assurance_client_stops_for_git_or_returns_prepared_record(self) -> None:
-        request = {
-            "schema": "se-harness-evaluator-client-request-v1",
-            "explicit_skill": "harness-prepare-assurance",
-            "workflow_schema": "se-harness-workflow-v4",
-            "interface_operation": "delegated-workflow-prepare-vrec",
-            "direct_target_write": False,
-            "work_order": "WO-AEX-008",
-            "state": "implemented",
-            "record_id": "VREC-AEX-008",
-            "record_destination": "docs/engineering/agentic-execution/verification-records/VREC-AEX-008.md",
-            "candidate_commit": None,
-            "record_exists": False,
-            "preparation_actor": "engineering-owner",
-            "completion_proof": {"operation": "delegated-work-order-complete"},
-            "evaluator_request": self.evaluator_request("prepare-vrec"),
-        }
-        calls: list[tuple[str, ...]] = []
-        stopped = self.assurance.invoke_assurance_client(
-            request,
-            catalog=self.catalog,
-            client=lambda arguments: calls.append(arguments) or {
-                "outcome": "stopped", "result": {}, "decision_packet": {"next": "authorize-git"}
-            },
-        )
-        self.assertEqual("stopped", stopped["outcome"])
-        prepared = self.assurance.invoke_assurance_client(
-            {**request, "candidate_commit": "b" * 40},
-            catalog=self.catalog,
-            client=lambda arguments: {
-                "outcome": "prepared",
-                "record": request["record_destination"],
-                "receipt": {},
-                "result": {},
-                "decision_packet": {"next": "independent-assurance"},
-            },
-        )
-        self.assertEqual("prepared", prepared["outcome"])
-
-        for label, change in (
-            ("actor", {"preparation_actor": ""}),
-            ("collision", {"record_exists": True}),
-            ("implicit", {"explicit_skill": ""}),
-            ("direct", {"direct_target_write": True}),
-            ("proof", {"completion_proof": {}}),
-        ):
-            rejected = {**request, **change}
-            calls.clear()
-            with self.subTest(label=label), self.assertRaises(self.assurance.AssuranceGuardError):
-                self.assurance.invoke_assurance_client(
-                    rejected, catalog=self.catalog, client=lambda arguments: calls.append(arguments)
-                )
-            self.assertEqual([], calls)
 
     def brief_request(
         self,
@@ -1137,3 +727,20 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RetiredSkillCensusTests(unittest.TestCase):
+    """REQ-ECP-014 / SPEC-ECP-007 ECP-SKL-001 to -003: no shipped skill stubs the evaluator."""
+
+    def test_no_shipped_skill_script_stubs_the_evaluator(self) -> None:
+        shipped = sorted(path.name for path in SKILLS_ROOT.iterdir() if path.is_dir())
+        self.assertEqual(["harness-operator-brief", "harness-orient"], shipped)
+        for script in SKILLS_ROOT.rglob("*.py"):
+            text = script.read_text(encoding="utf-8")
+            self.assertNotIn('"evaluator_invoked": False', text, script)
+            self.assertNotIn("client=lambda", text, script)
+            self.assertNotIn("delegated-workflow", text, script)
+        for contract in SKILLS_ROOT.rglob("skill-contract.json"):
+            self.assertNotIn("delegated-workflow", contract.read_text(encoding="utf-8"), contract)
+        self.assertEqual(["harness-orient"], sorted(path.name for path in CLAUDE_SKILLS_ROOT.iterdir() if path.is_dir()))
+

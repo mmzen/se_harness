@@ -126,11 +126,20 @@ expiry. The exact released evaluator still derives a narrower, short-lived
 envelope from fresh live state for each request.
 
 '''
-        # The released root is exact public 0.7.0 (WO-HUP-006), which carries the
-        # delegation table WO-AEX-005 added; the root copy equals the candidate.
-        self.assertEqual(released_work_order, candidate_work_order)
-        self.assertIn(delegation_block, released_work_order)
-        self.assertIn(delegation_guidance, released_work_order)
+        # The released root (0.10.0) carries the delegation table WO-AEX-005 added;
+        # WO-ECP-006 (SPEC-ECP-006 ECP-DLG-008) removed the table and its guidance
+        # from the candidate template. The declared candidate exception is exactly
+        # those two blocks; a root released with the removal takes the equality branch.
+        self.assertIn("[execution_scope]", released_work_order)
+        if delegation_block in released_work_order:
+            self.assertIn(delegation_guidance, released_work_order)
+            self.assertEqual(
+                released_work_order.replace(delegation_block, "").replace(delegation_guidance, ""),
+                candidate_work_order,
+            )
+        else:
+            self.assertEqual(released_work_order, candidate_work_order)
+        self.assertNotIn("agentic_delegation", candidate_work_order)
         self.assertIn("[execution_scope]", released_work_order)
         self.assertIn("[execution_scope]", candidate_work_order)
         self.assertIn("component-prefix", candidate_work_order)

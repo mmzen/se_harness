@@ -1,4 +1,8 @@
-"""Strict portable-skill contracts and deterministic portable-core identity."""
+"""Test-only support: the skill-contract and skill-manifest validator that
+WO-ECP-006 moved out of the package (SPEC-ECP-006 ECP-DLG-008). The orientation
+and operator-brief tests validate the two shipped skills with it.
+
+Strict portable-skill contracts and deterministic portable-core identity."""
 
 from __future__ import annotations
 

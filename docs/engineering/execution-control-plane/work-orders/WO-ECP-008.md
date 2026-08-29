@@ -14,12 +14,9 @@ decided_by = "engineering-owner"
 
 [execution_scope]
 paths = [
-  "templates/repository/standard/.agents/",
-  "templates/repository/standard/.claude/",
   "templates/repository/standard/AGENTS.md.fragment",
   "se_harness/preflight.py",
   "se_harness/workflow_compliance.py",
-  "se_harness/installer.py",
   "docs/notes/agentic-execution-skills-mvp.md",
   "docs/notes/agentic-execution-host-adapters.md",
   "tests/",
@@ -27,10 +24,10 @@ paths = [
 ]
 
 [relations]
-implements = ["REQ-ECP-014", "REQ-ECP-015", "REQ-ECP-016"]
-specifications = ["SPEC-ECP-001", "SPEC-ECP-007"]
+implements = ["REQ-ECP-015", "REQ-ECP-016"]
+specifications = ["SPEC-ECP-001"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-001"]
-verification = ["VER-ECP-001", "VER-ECP-007"]
+verification = ["VER-ECP-001"]
 +++
 
 # Work Order: Retire stubbed skills, trim the manifest, scope the handoff snapshot
@@ -62,11 +59,11 @@ invalidates every branch's handoff evidence (review section 5, weaknesses
 
 ## In scope
 
-- Retirement of the three stubbed writing skills from
-  `templates/repository/standard/.agents/skills/` and their
-  `templates/repository/standard/.claude/skills/` adapters; `harness-orient`
-  kept as a real wrapper; a packaging check in `se_harness/installer.py`
-  refusing a skill whose script stubs the evaluator, per `ECP-SKL-*`.
+Revised 2026-08-29, before any lifecycle event: the retirement of the three
+stubbed writing skills (`REQ-ECP-014`, `ECP-SKL-*`) moved to `WO-ECP-006`,
+which removes the command those skills name; this work order keeps the
+manifest and snapshot items.
+
 - `READING_PATHS` replacing the whole-file `AGENTS.md` entry with the
   generated command block bounded to 2048 bytes; the
   `AGENTS.md.fragment` rendering that block; preflight failing on an

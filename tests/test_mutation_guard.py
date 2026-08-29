@@ -11,7 +11,6 @@ from types import SimpleNamespace
 from unittest import mock
 
 from se_harness import __version__
-from se_harness.agent_contract import validate_contract
 from se_harness.artifact_layout import create_artifact, scaffold_domain
 from se_harness.cli import main
 from se_harness.evaluator_evidence import (
@@ -20,7 +19,6 @@ from se_harness.evaluator_evidence import (
     parse_evaluator_evidence,
 )
 from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
-from se_harness.effect_broker import apply_change_bundle
 from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED, MATCH_LEGACY_NEWLINE
 from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256, raw_sha256
@@ -408,53 +406,12 @@ class MutationGuardTests(unittest.TestCase):
         before = self._snapshot(root)
         observed: list[str] = []
         upgrade_changes, upgrade_lock = plan_install(root, project_name=None, mode="upgrade")
-        effect_envelope = validate_contract(
-            {
-                "schema": "se-harness-autonomy-envelope-v2",
-                "selection": {
-                    "work_order": "WO-TST-001",
-                    "work_order_sha256": "1" * 64,
-                    "repository_state": "2" * 64,
-                    "evaluator_payload_sha256": "3" * 64,
-                },
-                "delegation": {
-                    "asserted_by": "engineering-owner",
-                    "operations": ["change-bundle-apply"],
-                    "path_scope": ["docs/"],
-                    "execution_profiles": ["implementer"],
-                    "max_parallel_writers": 1,
-                    "retry_limits": {"change-bundle-apply": 0},
-                    "stop_before": [
-                        "accountable-decision-required",
-                        "action-time-authorization-required",
-                    ],
-                },
-                "evidence": {"required_receipt": True, "required_paths": []},
-                "authority": {
-                    "decision_right": None,
-                    "delegate": "worker",
-                    "execution_profile": "implementer",
-                    "delegation_sha256": "4" * 64,
-                    "work_order_sha256": "1" * 64,
-                    "expected_repository_state": "2" * 64,
-                    "previous_receipt_sha256": None,
-                    "nonce": "5" * 32,
-                    "issued_at": "2026-08-25T10:00:00Z",
-                    "not_after": "2026-08-25T10:05:00Z",
-                    "retry_ordinal": 0,
-                },
-            }
-        )
-
         def guard(_repository: Path, *, operation: str, **_kwargs: object) -> None:
             observed.append(operation)
             raise rejected
 
         with mock.patch(
             "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=guard,
-        ), mock.patch(
-            "se_harness.effect_broker.require_mutation_authority",
             side_effect=guard,
         ), mock.patch(
             "se_harness.provenance._validation_catalog",
@@ -499,20 +456,6 @@ class MutationGuardTests(unittest.TestCase):
                     tag=None,
                     output=None,
                 ),
-                lambda: apply_change_bundle(
-                    root,
-                    bundle_bytes=b"",
-                    object_store=self.base / "objects",
-                    envelope=effect_envelope,
-                    current_delegation_sha256="4" * 64,
-                    evaluator=SimpleNamespace(payload_sha256="3" * 64),
-                    runtime_store=None,
-                    session=None,
-                    gates_passed=True,
-                ),
-                lambda: guard(root, operation="delegated-work-order-start"),
-                lambda: guard(root, operation="delegated-work-order-complete"),
-                lambda: guard(root, operation="delegated-vrec-prepare"),
             )
             for operation in operations:
                 with self.subTest(operation=len(observed)), self.assertRaisesRegex(
@@ -532,10 +475,6 @@ class MutationGuardTests(unittest.TestCase):
                 "transition-apply",
                 "capture-verification",
                 "prepare-release",
-                "change-bundle-apply",
-                "delegated-work-order-start",
-                "delegated-work-order-complete",
-                "delegated-vrec-prepare",
             },
             set(observed),
         )

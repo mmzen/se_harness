@@ -14,8 +14,10 @@ files make that core discoverable; they do not define another workflow.
 | Codex | `.agents/skills/<name>/` | The canonical skill directly |
 | Claude Code | `.claude/skills/<name>/SKILL.md` | A thin adapter loads `.agents/skills/<name>/`, then yields to the canonical skill |
 
-The four names are `harness-orient`, `harness-draft-change`,
-`harness-execute-work-order`, and `harness-prepare-assurance`.
+The shipped name is `harness-orient`; `harness-draft-change`,
+`harness-execute-work-order` and `harness-prepare-assurance` were retired
+from the template on 2026-08-29 under `WO-ECP-006` (`REQ-ECP-014`), and their
+adapters with them.
 
 ## Why Claude uses an adapter
 
