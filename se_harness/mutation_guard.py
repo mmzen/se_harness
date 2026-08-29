@@ -23,11 +23,7 @@ from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identit
 PUBLIC_MUTATION_OPERATIONS = frozenset(
     {
         "capture-verification",
-        "change-bundle-apply",
         "create-artifact",
-        "delegated-vrec-prepare",
-        "delegated-work-order-complete",
-        "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
         "renumber-artifacts-apply",

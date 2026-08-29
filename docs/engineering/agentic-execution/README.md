@@ -149,6 +149,17 @@ mandatorily by the pull-request gate on every diff. Both are on the plan
 below, and until they land, "the agent cannot go further than allowed" is a
 process claim, not an enforced one.
 
+**Removed (2026-08-29, `WO-ECP-006`).** The "built but inert" rows above
+left the product: the eight Phase 4 modules and two contract catalogs, the
+`delegated-workflow` command, the `[agentic_delegation]` table and its
+validator, and the three writing skills. The journaled apply survives as
+`se_harness/journaled_apply.py` with its fault matrix; `resolve_delegation`
+narrowing is in Git history and returns with the `[delegation]` class
+(`REQ-ECP-011`). Amendment records sit on `ADR-AEX-006`, `ADR-AEX-007` and
+`ARCH-AEX-002`; the formal supersession of the `AEX` artifacts with an `ECP`
+successor is the requirements steward's and technical owner's act, taken by
+name when the successor rules are implemented.
+
 ## 3. The plan
 
 The work is scheduled in the `execution-control-plane` domain

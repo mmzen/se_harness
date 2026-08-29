@@ -68,7 +68,6 @@ SPECIFIED_CLASSES = {
 #: orchestrator runs that suite inside a `git worktree` it creates on `windows-2022`,
 #: which inherits the checkout's `core.autocrlf`.
 BYTE_EXACT_FILES = (
-    "se_harness/agent_contract.json",
     "se_harness/hash_bound_classes.json",
     "release/build-recipe.json",
     "release/build-toolchain.lock",

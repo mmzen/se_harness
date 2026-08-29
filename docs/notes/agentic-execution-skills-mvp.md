@@ -1,5 +1,11 @@
 # Single-agent workflow skills MVP
 
+> **Status (2026-08-29, `WO-ECP-006`):** the three writing skills this note
+> describes (`harness-draft-change`, `harness-execute-work-order`,
+> `harness-prepare-assurance`) were retired from the template under
+> `REQ-ECP-014`; they wrapped the removed `delegated-workflow` command and
+> stubbed the evaluator. `harness-orient` remains. The text below is history.
+
 <!-- Target expertise: 5/10. This score describes the knowledge expected from the reader, not the document's complexity or quality. -->
 
 > This is non-authoritative operator guidance. The installed harness, exact

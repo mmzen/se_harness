@@ -22,7 +22,7 @@ from se_harness.candidate_acceptance import (
     assess_candidate_wheel,
 )
 from se_harness.installer import HarnessError, apply_changes, plan_install, tracked_content
-from se_harness.skill_contract import build_skill_manifest
+from tests.skill_contract_support import build_skill_manifest
 from se_harness.integrity import canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
 from se_harness.preflight import inspect_installation
@@ -61,24 +61,12 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             skill_changes = [item for item in changes if item.path.startswith(".agents/skills/")]
             self.assertEqual(
                 [
-                    ".agents/skills/harness-draft-change/SKILL.md",
-                    ".agents/skills/harness-draft-change/agents/openai.yaml",
-                    ".agents/skills/harness-draft-change/scripts/guard.py",
-                    ".agents/skills/harness-draft-change/skill-contract.json",
-                    ".agents/skills/harness-execute-work-order/SKILL.md",
-                    ".agents/skills/harness-execute-work-order/agents/openai.yaml",
-                    ".agents/skills/harness-execute-work-order/scripts/check_scope.py",
-                    ".agents/skills/harness-execute-work-order/skill-contract.json",
                     ".agents/skills/harness-operator-brief/SKILL.md",
                     ".agents/skills/harness-operator-brief/scripts/check_brief.py",
                     ".agents/skills/harness-operator-brief/skill-contract.json",
                     ".agents/skills/harness-orient/SKILL.md",
                     ".agents/skills/harness-orient/scripts/orient.py",
                     ".agents/skills/harness-orient/skill-contract.json",
-                    ".agents/skills/harness-prepare-assurance/SKILL.md",
-                    ".agents/skills/harness-prepare-assurance/agents/openai.yaml",
-                    ".agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
-                    ".agents/skills/harness-prepare-assurance/skill-contract.json",
                 ],
                 [item.path for item in skill_changes],
             )
@@ -86,33 +74,19 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             adapter_changes = [item for item in changes if item.path.startswith(".claude/skills/")]
             self.assertEqual(
                 [
-                    ".claude/skills/harness-draft-change/SKILL.md",
-                    ".claude/skills/harness-execute-work-order/SKILL.md",
                     ".claude/skills/harness-orient/SKILL.md",
-                    ".claude/skills/harness-prepare-assurance/SKILL.md",
                 ],
                 [item.path for item in adapter_changes],
             )
             self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in adapter_changes))
 
             apply_changes(target, changes, old_lock, allow_updates=False)
-            for name in (
-                "harness-draft-change",
-                "harness-execute-work-order",
-                "harness-orient",
-                "harness-prepare-assurance",
-                "harness-operator-brief",
-            ):
+            for name in ("harness-orient", "harness-operator-brief"):
                 installed = target / ".agents/skills" / name
                 source = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills" / name
                 self.assertEqual(build_skill_manifest(source).sha256, build_skill_manifest(installed).sha256)
                 contract = json.loads((installed / "skill-contract.json").read_text(encoding="utf-8"))
-                if name in {
-                    "harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"
-                }:
-                    self.assertEqual("se-harness-skill-contract-v3", contract["schema"])
-                    self.assertEqual("2.0.0", contract["version"])
-                    self.assertFalse(contract["client"]["direct_target_writes"])
+                self.assertEqual(name, contract["name"])
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
                 all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes + adapter_changes)
@@ -142,19 +116,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
 
             upgrade, upgrade_lock = plan_install(target, project_name=None, mode="upgrade")
             actions = {item.path: item.action for item in upgrade}
-            expected_additions = {
-                *(f".agents/skills/{name}/agents/openai.yaml" for name in (
-                    "harness-draft-change",
-                    "harness-execute-work-order",
-                    "harness-prepare-assurance",
-                )),
-                *(f".claude/skills/{name}/SKILL.md" for name in (
-                    "harness-draft-change",
-                    "harness-execute-work-order",
-                    "harness-orient",
-                    "harness-prepare-assurance",
-                )),
-            }
+            expected_additions = {".claude/skills/harness-orient/SKILL.md"}
             self.assertEqual({relative: "add" for relative in expected_additions}, {
                 relative: actions[relative] for relative in expected_additions
             })
@@ -177,9 +139,8 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             customized_files = {}
             for relative in (
                 ".agents/skills/harness-orient/SKILL.md",
-                ".agents/skills/harness-execute-work-order/agents/openai.yaml",
+                ".agents/skills/harness-operator-brief/scripts/check_brief.py",
                 ".claude/skills/harness-orient/SKILL.md",
-                ".claude/skills/harness-execute-work-order/SKILL.md",
             ):
                 destination = target / relative
                 customized = destination.read_bytes() + b"\nRepository-owned customization.\n"
@@ -530,7 +491,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 "ENGINEERING_HARNESS.md",
                 "docs/engineering/QUALITY_GATES.md",
                 ".agents/skills/harness-orient/SKILL.md",
-                ".agents/skills/harness-execute-work-order/skill-contract.json",
+                ".agents/skills/harness-operator-brief/skill-contract.json",
             )
             for relative in managed:
                 path = target / relative
