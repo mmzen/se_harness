@@ -226,19 +226,34 @@ def _diagnostic(item: Any) -> dict[str, str]:
 
 def project_selected(
     repository: Path,
-    artifact_id: str,
+    artifact_id: str | None = None,
     *,
     include_background: bool = False,
 ) -> dict[str, Any]:
-    """Project the selected artifact's rule, procedure and next step; evaluate no gate.
+    """Project the selected artifact's rule, procedure, next step and execution context; evaluate no gate.
 
     This is `check` without a checkpoint (SPEC-ECP-011, ECP-ONE-001/-002); the
-    `focus` alias that shared it was removed after 0.10.0 (SPEC-ECP-013).
+    `focus` alias that shared it was removed after 0.10.0 (SPEC-ECP-013). Since
+    WO-ECP-019 it carries the `context` object `next` introduced (SPEC-ECP-014,
+    ECP-CTX-001 to -003) and selects the single in_progress work order when no
+    artifact is named; `next` is its alias for one release.
     """
 
     root = ensure_target(repository, must_exist=True)
     _, report = _validation(root)
     catalog = _catalog(report)
+    if artifact_id is None:
+        candidates = sorted(
+            item.artifact_id
+            for item in catalog.values()
+            if item.artifact_type == "work_order" and item.status == "in_progress"
+        )
+        if len(candidates) != 1:
+            raise HarnessError(
+                f"WEX-ECP-001: {len(candidates)} work orders are in_progress; name one with --artifact"
+                + (f" ({', '.join(candidates)})" if candidates else "")
+            )
+        artifact_id = candidates[0]
     primary = catalog.get(artifact_id)
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
@@ -278,10 +293,11 @@ def project_selected(
             "count": total,
             "message": f"{total} unrelated finding(s); use --include-background for categories",
         })
-    from se_harness.workflow_compliance import selected_result
+    from se_harness.workflow_compliance import execution_scope, selected_result
+    from se_harness.workflow_result import restitution_digest
 
     blockers = [*repository, *scoped]
-    return selected_result(
+    projected = selected_result(
         root,
         operation="check",
         primary=primary,
@@ -295,6 +311,29 @@ def project_selected(
         repository_blockers=repository,
         unrelated_count=sum(int(item.get("count", 0)) for item in background),
     )
+    declared: tuple[str, ...] = ()
+    if primary.artifact_type == "work_order":
+        try:
+            declared = execution_scope(primary)
+        except HarnessError:
+            declared = ()
+    command = projected["restitution"]["command_or_response"]
+    step = projected["restitution"]["next"]
+    result = dict(projected)
+    result["context"] = {
+        "reading_manifest": list(_reading_manifest(root, catalog, primary)),
+        "governing": list(projected["scope"]["governing"]),
+        "declared_paths": list(declared),
+        "state": {"status": primary.status, "family": _family(primary.artifact_type)},
+        "next": {
+            "argv": list(command.get("argv", [])) if command.get("kind") == "command" else [],
+            "procedure_id": step["procedure_id"],
+            "step_id": step["step_id"],
+        },
+        "decision_required": projected["restitution"]["decision_required"],
+    }
+    result["result_sha256"] = restitution_digest(result)
+    return result
 
 
 def _next_phase(status: str) -> str:
@@ -323,66 +362,6 @@ def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any) -> t
         return tuple(run_preflight(root, work_order_id=work_order_id, phase=phase).reading_manifest)
     except HarnessError:
         return ()
-
-
-def next_step(repository: Path, artifact_id: str | None = None) -> dict[str, Any]:
-    """One call returning the selected artifact's complete execution context (ECP-NXT-001 to -007).
-
-    The result is the `check` projection of the selected artifact with the
-    operation kind `next` and an additive `context` object; the next argv, the
-    procedure and the step are the ones `check` already selects, so
-    `next` holds no private mapping. It writes nothing.
-    """
-
-    from se_harness.workflow_compliance import execution_scope
-    from se_harness.workflow_result import restitution_digest
-
-    root = ensure_target(repository, must_exist=True)
-    _, report = _validation(root)
-    catalog = _catalog(report)
-    if artifact_id is None:
-        candidates = sorted(
-            item.artifact_id
-            for item in catalog.values()
-            if item.artifact_type == "work_order" and item.status == "in_progress"
-        )
-        if len(candidates) != 1:
-            raise HarnessError(
-                f"WEX-ECP-001: {len(candidates)} work orders are in_progress; name one with --artifact"
-                + (f" ({', '.join(candidates)})" if candidates else "")
-            )
-        artifact_id = candidates[0]
-    primary = catalog.get(artifact_id)
-    if primary is None:
-        raise HarnessError(f"unknown artifact ID: {artifact_id}")
-    if primary.artifact_type not in PRIMARY_TYPES:
-        raise HarnessError("next accepts only WO, VREC, or RLS artifacts")
-    projected = project_selected(root, artifact_id)
-    declared: tuple[str, ...] = ()
-    if primary.artifact_type == "work_order":
-        try:
-            declared = execution_scope(primary)
-        except HarnessError:
-            declared = ()
-    command = projected["restitution"]["command_or_response"]
-    step = projected["restitution"]["next"]
-    context = {
-        "reading_manifest": list(_reading_manifest(root, catalog, primary)),
-        "governing": list(projected["scope"]["governing"]),
-        "declared_paths": list(declared),
-        "state": {"status": primary.status, "family": _family(primary.artifact_type)},
-        "next": {
-            "argv": list(command.get("argv", [])) if command.get("kind") == "command" else [],
-            "procedure_id": step["procedure_id"],
-            "step_id": step["step_id"],
-        },
-        "decision_required": projected["restitution"]["decision_required"],
-    }
-    result = dict(projected)
-    result["operation"] = {**projected["operation"], "kind": "next"}
-    result["context"] = context
-    result["result_sha256"] = restitution_digest(result)
-    return result
 
 
 def _assertion(value: str, label: str, *, limit: int) -> str:

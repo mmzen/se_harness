@@ -314,30 +314,23 @@ class ReleaseQualificationTests(unittest.TestCase):
         self.assertEqual("public-install-observation", result.independence)
 
     @mock.patch("se_harness.cli.qualify_candidate_package")
-    def test_accept_candidate_is_one_result_compatible_alias(self, qualify: mock.Mock) -> None:
-        qualify.return_value = self.result("candidate-package")
-        output = self.root / "result.json"
+    def test_accept_candidate_is_no_subcommand_and_names_the_typed_operation(self, qualify: mock.Mock) -> None:
+        # ECP-CTX-006: the one-cycle alias REQ-REB-022 allowed is gone; the guard names
+        # qualify candidate-package and nothing runs.
         stdout = io.StringIO()
         stderr = io.StringIO()
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            code = main(
-                [
-                    "accept-candidate",
-                    "--wheel",
-                    "candidate.whl",
-                    "--candidate-commit",
-                    "c" * 40,
-                    "--candidate-wheel-sha256",
-                    "d" * 64,
-                    "--verifier-wheel-sha256",
-                    "e" * 64,
-                    "--output",
-                    str(output),
-                ]
-            )
-        self.assertEqual(0, code, stderr.getvalue())
-        self.assertEqual(QUALIFICATION_SCHEMA, json.loads(output.read_text(encoding="utf-8"))["schema"])
-        qualify.assert_called_once()
+            code = main(["accept-candidate", "--wheel", "candidate.whl", "--output", str(self.root / "result.json")])
+        self.assertEqual(2, code)
+        self.assertEqual("", stdout.getvalue())
+        self.assertIn("harnessctl qualify candidate-package", stderr.getvalue())
+        self.assertEqual(1, stderr.getvalue().count("\n"))
+        qualify.assert_not_called()
+        self.assertFalse((self.root / "result.json").exists())
+        help_output = io.StringIO()
+        with contextlib.redirect_stdout(help_output), self.assertRaises(SystemExit):
+            main(["--help"])
+        self.assertNotIn("accept-candidate", help_output.getvalue())
 
 
 if __name__ == "__main__":

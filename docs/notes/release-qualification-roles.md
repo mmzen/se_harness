@@ -73,7 +73,7 @@ For the first deployment only, candidate-package CI therefore:
 
 That output is not relabeled as `se-harness-release-qualification-v1`. Another verifier version, digest, command, contract, schema, or artifact label fails the workflow. Once a released verifier exposes `qualify candidate-package`, the workflow must move to the typed operation and a later governed change removes the bootstrap path.
 
-Newly built versions keep `accept-candidate` only as a one-cycle alias to the typed handler. That alias is different from immutable public 0.6.0's historical command.
+Newly built versions kept `accept-candidate` only as a one-cycle alias to the typed handler; that alias was removed after 0.11.0 (`WO-ECP-019`) and the command now exits with status 2 naming `qualify candidate-package`. It was always different from immutable public 0.6.0's historical command, which the legacy branch above still runs when, and only when, the released verifier has no `qualify` namespace.
 
 ## Diagnostic commands
 

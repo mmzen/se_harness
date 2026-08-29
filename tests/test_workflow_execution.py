@@ -1215,13 +1215,16 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
         WO-ECP-003 widened the canonical block with the change set and every
         predicate status (ECP-DIG-001): every result_sha256 changes at that
         upgrade by specification, and the pin moves to the widened block. The
-        criterion holds within one block definition.
+        criterion holds within one block definition. On 2026-08-29 WO-ECP-019
+        folded the execution context into the projection (ECP-CTX-003): the
+        block gains the Context section and the pin moves again, from
+        b8ccd288… to the value below.
         """
 
         code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual(
-            "b8ccd288ef12641ed09f0e5dcf158b6e77c737258a213e8904c5ca37b66562e5",
+            "c307910acec83b544f8c43748355db3a3e70276195f9c02c46b0c8017435bd69",
             json.loads(output)["result_sha256"],
         )
 
@@ -1265,18 +1268,19 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
 
 
 
-class NextCommandTests(WorkflowExecutionTests):
+class ExecutionContextTests(WorkflowExecutionTests):
     """REQ-ECP-001 / ECP-NXT-001 to -008: one call returns the complete context."""
 
-    def next_result(self, *arguments: str) -> tuple[int, dict, str]:
-        code, output, error = self.invoke("next", str(self.root), *arguments, "--json")
+    def context_result(self, *arguments: str) -> tuple[int, dict, str]:
+        code, output, error = self.invoke("check", str(self.root), *arguments, "--json")
         return code, json.loads(output), error
 
-    def test_next_selects_the_single_in_progress_work_order_and_matches_check(self) -> None:
+    def test_check_selects_the_single_in_progress_work_order_and_carries_the_context(self) -> None:
+        # ECP-CTX-001 / ECP-CTX-002: the projection is the execution context.
         self.in_progress_work_order()
-        code, result, error = self.next_result()
+        code, result, error = self.context_result()
         self.assertEqual(0, code, error)
-        self.assertEqual({"kind": "next", "outcome": "completed"}, result["operation"])
+        self.assertEqual({"kind": "check", "outcome": "completed"}, result["operation"])
         self.assertEqual("WO-001", result["selection"]["primary"])
         context = result["context"]
         self.assertEqual(
@@ -1286,42 +1290,64 @@ class NextCommandTests(WorkflowExecutionTests):
         self.assertEqual({"status": "in_progress", "family": "work_order"}, context["state"])
         self.assertEqual(["src/"], context["declared_paths"])
         self.assertEqual(result["scope"]["governing"], context["governing"])
-        focus = json.loads(self.invoke("check", str(self.root), "--artifact", "WO-001", "--json")[1])
+        explicit = json.loads(self.invoke("check", str(self.root), "--artifact", "WO-001", "--json")[1])
+        self.assertEqual(explicit, result)
         check = json.loads(self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")[1])
-        self.assertEqual(focus["restitution"]["next"], result["restitution"]["next"])
-        self.assertEqual(focus["restitution"]["command_or_response"], result["restitution"]["command_or_response"])
-        self.assertEqual(focus["restitution"]["command_or_response"]["argv"], context["next"]["argv"])
+        self.assertEqual(result["restitution"]["command_or_response"]["argv"], context["next"]["argv"])
         self.assertEqual(
             (check["restitution"]["next"]["procedure_id"], check["restitution"]["next"]["step_id"]),
             (context["next"]["procedure_id"], context["next"]["step_id"]),
         )
-        self.assertNotEqual(focus["result_sha256"], result["result_sha256"])
+        self.assertNotIn("context", check)
         from se_harness.workflow_result import restitution_digest
 
         self.assertEqual(restitution_digest(result), result["result_sha256"])
-        human = self.invoke("next", str(self.root))[1]
+        human = self.invoke("check", str(self.root))[1]
         self.assertIn("\nContext\n", human)
         self.assertLess(human.index("Command or response"), human.index("\nContext\n"))
 
-    def test_next_reading_manifest_equals_preflight_for_the_implied_phase(self) -> None:
+    def test_next_is_a_byte_identical_alias_that_announces_its_removal(self) -> None:
+        # ECP-CTX-004: same bytes, same digest, one notice on standard error.
+        self.in_progress_work_order()
+        for arguments in ((), ("--artifact", "WO-001")):
+            with self.subTest(arguments=arguments):
+                check_code, check_output, check_error = self.invoke("check", str(self.root), *arguments, "--json")
+                next_code, next_output, next_error = self.invoke("next", str(self.root), *arguments, "--json")
+                self.assertEqual((0, 0), (check_code, next_code), check_error + next_error)
+                self.assertEqual(check_output, next_output)
+                self.assertEqual("check", json.loads(next_output)["operation"]["kind"])
+                self.assertEqual("", check_error)
+                self.assertEqual(1, next_error.count("\n"))
+                self.assertIn("harnessctl check", next_error)
+        self.assertEqual(self.invoke("check", str(self.root))[1], self.invoke("next", str(self.root))[1])
+
+    def test_check_with_a_checkpoint_still_requires_an_artifact(self) -> None:
+        self.in_progress_work_order()
+        code, output, error = self.invoke("check", str(self.root), "--checkpoint", "start", "--json")
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertIn("WEX210: --artifact is required with --checkpoint", error)
+
+    def test_check_reading_manifest_equals_preflight_for_the_implied_phase(self) -> None:
         from se_harness.preflight import run_preflight
 
         self.in_progress_work_order()
-        _, result, _ = self.next_result("--artifact", "WO-001")
+        _, result, _ = self.context_result("--artifact", "WO-001")
         expected = list(run_preflight(self.root, work_order_id="WO-001", phase="start").reading_manifest)
         self.assertEqual(expected, result["context"]["reading_manifest"])
         self.assertTrue(expected)
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         work_order.write_text(work_order.read_text(encoding="utf-8").replace('status = "in_progress"', 'status = "implemented"', 1), encoding="utf-8")
-        _, result, _ = self.next_result("--artifact", "WO-001")
+        _, result, _ = self.context_result("--artifact", "WO-001")
         expected = list(run_preflight(self.root, work_order_id="WO-001", phase="review").reading_manifest)
         self.assertEqual(expected, result["context"]["reading_manifest"])
         self.assertEqual("implemented", result["context"]["state"]["status"])
 
-    def test_next_without_an_artifact_blocks_unless_exactly_one_work_order_is_in_progress(self) -> None:
-        code, result, error = self.next_result()
+    def test_check_without_an_artifact_blocks_unless_exactly_one_work_order_is_in_progress(self) -> None:
+        code, result, error = self.context_result()
         self.assertEqual(1, code, error)
         self.assertEqual("blocked", result["operation"]["outcome"])
+        self.assertEqual("check", result["operation"]["kind"])
         self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-001: 0 work orders"))
         self.in_progress_work_order()
         second = self.root / "docs/engineering/product/work-orders/WO-002.md"
@@ -1329,44 +1355,66 @@ class NextCommandTests(WorkflowExecutionTests):
             (self.root / "docs/engineering/product/work-orders/WO-001.md").read_text(encoding="utf-8").replace("WO-001", "WO-002"),
             encoding="utf-8",
         )
-        code, result, error = self.next_result()
+        code, result, error = self.context_result()
         self.assertEqual(1, code, error)
         self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-001: 2 work orders"))
         self.assertIn("WO-001, WO-002", result["restitution"]["blocked_by"][0])
 
-    def test_next_projects_a_verification_record_and_a_release_record(self) -> None:
+    def test_check_projects_a_verification_record_and_a_release_record_with_their_context(self) -> None:
         self.ready_vrec()
-        code, result, error = self.next_result("--artifact", "VREC-001")
+        code, result, error = self.context_result("--artifact", "VREC-001")
         self.assertEqual(0, code, error)
         self.assertEqual({"status": "ready", "family": "verification_record"}, result["context"]["state"])
         self.assertEqual([], result["context"]["declared_paths"])
         self.assertIsNotNone(result["context"]["decision_required"])
         self.assertEqual([], result["context"]["next"]["argv"])
         self.assertTrue(result["context"]["reading_manifest"])
-        code, result, error = self.next_result("--artifact", "REQ-001")
+        code, result, error = self.context_result("--artifact", "REQ-001")
         self.assertEqual(1, code, error)
-        self.assertIn("next accepts only WO, VREC, or RLS", result["restitution"]["blocked_by"][0])
+        self.assertIn("check accepts only WO, VREC, or RLS", result["restitution"]["blocked_by"][0])
 
-    def test_next_writes_nothing(self) -> None:
+    def test_the_projection_writes_nothing(self) -> None:
         self.in_progress_work_order()
         before = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
-        code, result, error = self.next_result()
+        code, result, error = self.context_result()
         self.assertEqual(0, code, error)
         self.assertEqual([], result["mutation"]["writes"])
         after = {path: path.read_bytes() for path in self.root.rglob("*") if path.is_file()}
         self.assertEqual(before, after)
 
-    def test_a_failed_check_names_next_as_the_retry_never_the_evaluated_command(self) -> None:
-        # ECP-NXT-008: the WEX210 corrective is `harnessctl next`, not "rerun the same command".
+    def test_a_failed_check_names_the_projection_as_the_retry_never_the_evaluated_command(self) -> None:
+        # ECP-NXT-008 as ECP-CTX-005 restates it: the WEX210 corrective is the projection
+        # under `check`, not "rerun the same command".
         code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-404", "--checkpoint", "start", "--json")
         self.assertEqual(1, code, error)
         result = json.loads(output)
         self.assertEqual(
-            {"kind": "command", "argv": ["harnessctl", "next", ".", "--artifact", "WO-404"]},
+            {"kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", "WO-404"]},
             result["restitution"]["command_or_response"],
         )
         self.assertNotIn("rerun the same command", json.dumps(result))
+        self.assertNotIn('"next", "."', json.dumps(result))
 
+    def test_nothing_names_next_as_the_command_but_the_alias_row_and_the_notes(self) -> None:
+        # ECP-CTX-007: the template and the reference name check; the reference keeps one
+        # row for the alias while it exists, and no accept-candidate row or synopsis.
+        workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")
+        self.assertNotIn("harnessctl next", workflow_md)
+        self.assertIn("`harnessctl check . --artifact WO-...`", workflow_md)
+        reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
+        self.assertEqual(1, reference.count("| `next` |"))
+        self.assertIn("alias", reference[reference.index("| `next` |"):reference.index("| `next` |") + 200])
+        self.assertNotIn("harnessctl next [", reference)
+        self.assertEqual(0, reference.count("| `accept-candidate` |"))
+        self.assertNotIn("harnessctl accept-candidate", reference)
+        note = (REPOSITORY_ROOT / "docs/notes/harnessctl-check.md").read_text(encoding="utf-8")
+        self.assertNotIn("harnessctl next", note)
+        roles = (REPOSITORY_ROOT / "docs/notes/release-qualification-roles.md").read_text(encoding="utf-8")
+        self.assertIn("removed after 0.11.0", roles)
+        help_output = io.StringIO()
+        with contextlib.redirect_stdout(help_output), self.assertRaises(SystemExit):
+            main(["--help"])
+        self.assertNotIn("accept-candidate", help_output.getvalue())
 
 
 class PullRequestBodyTests(unittest.TestCase):

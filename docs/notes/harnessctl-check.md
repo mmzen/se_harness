@@ -31,8 +31,10 @@ What it does **not** do:
 - it changes no lifecycle state; `harnessctl transition --apply` does that,
   after the accountable person decides;
 - it approves, verifies, releases, commits, pushes, or publishes nothing;
-- it does not pick the artifact for you; `harnessctl next` does that, and
-  `check` needs `--artifact`;
+- without a checkpoint it picks the single `in_progress` work order when you
+  name none, and carries the execution context (reading manifest, governing
+  chain, declared scope, state, next command) as a `Context` section — what
+  `next` used to add; `next` is its alias for one release, then goes;
 - without `--checkpoint` it evaluates nothing: it *projects* the selected
   rule, procedure and next step (the former `focus` command, kept as an alias
   through 0.10.0 and removed after it; a script still calling it is refused
@@ -100,7 +102,7 @@ verification record selects `WFL-WO-READY-VREC`, never `WFL-WO-PREPARE-VREC`.
 "Definition" means an intent, capability, requirement, specification,
 architecture, ADR, verification, release contract, or operating contract.
 `check` itself accepts only a work order, a verification record, or a release
-record (`WEX210` otherwise); `next` projects the other types.
+record (`WEX210` otherwise), with or without a checkpoint.
 
 The procedure is a typed list of steps, each either a `command` (an argument
 array the harness can run) or a `decision` (a decision right and its permitted
@@ -221,7 +223,7 @@ same checkout did not raise it.
 
 ## One work order, from approved to implemented
 
-1. The work order is `approved`. `harnessctl next . --artifact WO-X` selects
+1. The work order is `approved`. `harnessctl check . --artifact WO-X` selects
    it and names `PROC-WO-START`.
 2. `harnessctl check . --artifact WO-X --checkpoint start` evaluates
    `QG-G3-WORK-AUTHORIZATION`. Completed: the decision `DR-WO-START` is due.

@@ -53,7 +53,6 @@ from se_harness.workflow import (
     RepositoryWorkflowError,
     failed_result,
     project_selected,
-    next_step,
     plan_transition,
     preparation_result,
 )
@@ -309,23 +308,32 @@ def _render_selected_result(result: dict, args: argparse.Namespace) -> str:
     return render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result)
 
 
-def _next(args: argparse.Namespace) -> int:
+def _project(target: str, artifact: str | None, *, include_background: bool, json_output: bool) -> int:
+    """The checkpoint-less projection with its execution context (ECP-ONE-001 to -003, ECP-CTX-001 to -003)."""
+
     try:
-        result = next_step(Path(args.target), args.artifact)
+        result = project_selected(Path(target), artifact, include_background=include_background)
     except HarnessError as exc:
         message = str(exc)
-        code = "WEX101"
+        code = "WEX210"
         if message.startswith("WEX-ECP-001: "):
             code, message = message.split(": ", 1)
-        result = failed_result(
-            "next",
-            args.artifact,
-            message,
-            code=code,
-            repository_blocker=isinstance(exc, RepositoryWorkflowError),
-        )
-    print(_render_selected_result(result, args), end="")
+        elif not message.startswith("WEX"):
+            message = f"WEX210: {message}"
+        result = failed_result("check", artifact, message, code=code, repository_blocker=isinstance(exc, RepositoryWorkflowError))
+    print(render_workflow_json_v2(result) if json_output else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
+def _next(args: argparse.Namespace) -> int:
+    """ECP-CTX-004: `next` is the projection under its former name for one release."""
+
+    print(
+        "harnessctl: next is an alias of check and is removed after the release carrying this notice;"
+        " run harnessctl check [--artifact ID] (add --json for the structured result)",
+        file=sys.stderr,
+    )
+    return _project(args.target, args.artifact, include_background=False, json_output=args.json)
 
 
 def _check_projection(args: argparse.Namespace) -> int:
@@ -342,24 +350,15 @@ def _check_projection(args: argparse.Namespace) -> int:
     ):
         if value:
             raise HarnessError(f"WEX210: {option} requires --checkpoint")
-    try:
-        result = project_selected(
-            Path(args.target),
-            args.artifact,
-            include_background=args.include_background,
-        )
-    except HarnessError as exc:
-        message = str(exc)
-        if not message.startswith("WEX"):
-            message = f"WEX210: {message}"
-        result = failed_result("check", args.artifact, message, code="WEX210", repository_blocker=isinstance(exc, RepositoryWorkflowError))
-    print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
-    return 0 if result["operation"]["outcome"] == "completed" else 1
+    return _project(args.target, args.artifact, include_background=args.include_background, json_output=args.json)
 
 
 def _check(args: argparse.Namespace) -> int:
     if args.checkpoint is None:
         return _check_projection(args)
+    if args.artifact is None:
+        # ECP-CTX-002: the default artifact belongs to the projection only.
+        raise HarnessError("WEX210: --artifact is required with --checkpoint")
     if args.change_manifest and (args.changed_path or args.changes_complete):
         raise HarnessError(
             "WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete"
@@ -732,15 +731,6 @@ def _qualify(args: argparse.Namespace) -> int:
     return 0 if result.passed else 1
 
 
-def _accept_candidate(args: argparse.Namespace) -> int:
-    """Compatibility alias for the typed candidate-package operation."""
-
-    args.qualification_operation = "candidate-package"
-    args.candidate_wheel = args.wheel
-    args.json = False
-    return _qualify(args)
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
@@ -781,7 +771,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
     selected_next = commands.add_parser(
-        "next", help="return the selected artifact's complete execution context: state, scope, reading set, next command"
+        "next", help="deprecated alias of check without a checkpoint; removed after the release carrying the notice"
     )
     selected_next.add_argument("target", nargs="?", default=".")
     selected_next.add_argument("--artifact", help="one WO, VREC, or RLS ID; defaults to the single in_progress work order")
@@ -793,7 +783,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="project one selected WO, VREC, or RLS scope, or evaluate one of its checkpoints, and emit canonical restitution",
     )
     check.add_argument("target", nargs="?", default=".")
-    check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
+    check.add_argument(
+        "--artifact",
+        help="one selected WO, VREC, or RLS ID; without a checkpoint it defaults to the single in_progress work order",
+    )
     check.add_argument(
         "--checkpoint", choices=("start", "pre-action", "transition", "handoff", "scope"),
         help="fixed stateless evaluation checkpoint; omitted, check projects the selected scope and evaluates no gate",
@@ -1002,18 +995,6 @@ def build_parser() -> argparse.ArgumentParser:
     public_install.add_argument("--payload-sha256", required=True)
     qualification_output(public_install)
 
-    accept = commands.add_parser(
-        "accept-candidate",
-        help="compatibility alias for qualify candidate-package",
-    )
-    accept.add_argument("--wheel", required=True)
-    accept.add_argument("--candidate-commit", required=True)
-    accept.add_argument("--candidate-wheel-sha256", required=True)
-    accept.add_argument("--verifier-wheel-sha256", required=True)
-    accept.add_argument("--checkout-root")
-    accept.add_argument("--output", required=True)
-    accept.set_defaults(handler=_accept_candidate)
-
     capture = commands.add_parser("capture-verification", help="prepare a ready commit-bound verification record")
     capture.add_argument("target", nargs="?", default=".")
     capture.add_argument("--id", required=True, dest="record_id")
@@ -1055,6 +1036,16 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"harnessctl: focus was removed after 0.10.0; run harnessctl check --artifact {selected}"
             " (add --json for the structured result)",
+            file=sys.stderr,
+        )
+        return 2
+    if arguments[:1] == ["accept-candidate"]:
+        # ECP-CTX-006: the one-cycle alias REQ-REB-022 allowed is gone after 0.11.0;
+        # a script still on it fails loudly, naming the typed operation.
+        print(
+            "harnessctl: accept-candidate was removed after 0.11.0; run harnessctl qualify candidate-package"
+            " --candidate-wheel PATH --candidate-commit SHA --candidate-wheel-sha256 SHA256"
+            " --verifier-wheel-sha256 SHA256 --output PATH",
             file=sys.stderr,
         )
         return 2
