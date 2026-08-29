@@ -2,7 +2,7 @@
 id = "REQ-ECP-025"
 type = "requirement"
 title = "The execution context is the projection, and no closed alias stays on the command list"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "harnessctl command audit of 2026-08-29 (P2 and P3); REQ-REB-022's one-
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:39:39Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-29 with the words 'Approve and start WO-ECP-019': the execution context is the checkpoint-less check projection with the single in_progress work order as the default artifact, next is a one-release alias announcing its removal, and accept-candidate leaves the command list; audit items P2 and P3 of 2026-08-29."
 +++
 
 # Requirement: The execution context is the projection, and no closed alias stays on the command list

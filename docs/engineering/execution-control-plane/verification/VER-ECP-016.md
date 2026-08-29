@@ -2,13 +2,20 @@
 id = "VER-ECP-016"
 type = "verification"
 title = "Independent evidence for the context fold and the alias retirement"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-025"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:39:39Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-29 with the words 'Approve and start WO-ECP-019': context, default-artifact, alias byte-identity, corrective, retired-alias, writes-nothing and word-census rows; the root WORKFLOW.md stays the 0.11.0 copy until the next root adoption and the alias keeps its instruction valid."
 +++
 
 # Verification Contract: Independent evidence for the context fold and the alias retirement

@@ -2,13 +2,20 @@
 id = "SPEC-ECP-014"
 type = "specification"
 title = "The projection carries the execution context; next is an alias; accept-candidate is retired"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 specifies = ["REQ-ECP-025"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:39:39Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-29 with the words 'Approve and start WO-ECP-019': ECP-CTX-001 to ECP-CTX-008; the candidate-evidence workflow's legacy branch stays as SPEC-REB-012 rule 6 states it, and the next alias is removed by a later work order after one release ships the notice."
 +++
 
 # Specification: The projection carries the execution context; next is an alias; accept-candidate is retired
