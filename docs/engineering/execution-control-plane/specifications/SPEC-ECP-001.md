@@ -246,3 +246,18 @@ are accepted for one release (`ECP-SNP-004`).
   it is deterministic and covered by the digest.
 - The Git executable resolution strategy, provided it is the one shared Git
   wrapper the kernel already uses.
+
+## Amendment record
+
+**`ECP-SNP-001`'s digest hashes line-ending-canonical bytes, proposed
+2026-08-29 under `WO-ECP-014` (issue #256; `SPEC-ECP-010`).** The rule names
+`formal_snapshot_digest` as the function that binds evidence to a snapshot;
+that function hashed each artifact's raw bytes, so a Windows checkout under
+`core.autocrlf=true` computed a different snapshot from the LF checkout of
+the managed workflow, and a packet bound there could never pass
+`QGP-G4I-EVIDENCE` hosted (pull request #253 at `61840f3`). The amendment
+makes the function hash `utf8-text-lf-v1` canonical bytes, the rule the
+managed-file lock already uses; on an LF tree the digest is unchanged, so no
+stored packet header or verification record moves. The chain-scoped digest
+this rule defines inherits the byte rule when it is implemented. Nothing
+else in this specification changes.
