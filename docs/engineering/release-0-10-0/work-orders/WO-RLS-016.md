@@ -2,7 +2,7 @@
 id = "WO-RLS-016"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.10.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-29T09:38:56Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve REL-SEH-021 and WO-RLS-016, start'. Start preflight PASS with no diagnostics over the approval commit 373959d carrying unmoved main 3139f24, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release record and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T10:01:54Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-RLS-016 implemented', on the handoff check reading Completed over candidate 8344244 and the evidence commits through 844dea3, formal snapshot 30f6ff8ce7a3efbf5bcdbd1ced708f895694d80c9a45c2c8fa7a72e0ee20d7c0, Git-derived change set of 6 paths at its fixed point 0d2ef59a, no scope amendment. Every reading was taken before this reason was written: under the governing exact public 0.9.0 root validate 1,115 artifacts 0 errors and doctor 0 FAIL; review preflight PASS; distributions PASS; portable surface PASS in all three modes on the ephemeral wheel; complete-candidate CC001 to CC004 pass on the Linux interpreter; the upgrade rehearsal 0.9.0 to 0.10.0 pass twice with equal semantic digest daae780d; suite OK on Linux and at its two baseline failures on Windows; the census at the candidate COMPLETE with the four recorded exemptions, WO-RLS-016 traced and WO-RLS-015 named by construction; the build of record exact with two byte-identical producer runs, wheel 5e4e014d and sdist 4b2d2103 as local readings pending the hosted replay; all thirteen pull-request lanes pass on #260 at 4d16419. Four deviations are recorded in the evidence. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.10.0 candidate from main
