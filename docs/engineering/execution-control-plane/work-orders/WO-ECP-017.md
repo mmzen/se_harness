@@ -19,6 +19,7 @@ paths = [
   "se_harness/workflow_compliance.py",
   "tests/test_workflow_execution.py",
   "tests/test_agentic_execution.py",
+  "tests/test_agent_contract.py",
   "tests/fixtures/focus_alias/",
   "tests/fixtures/agentic_execution/fake_evaluator.py",
   "tests/fixtures/agentic_execution/phase5/",
@@ -141,6 +142,20 @@ request's lanes; the handoff check over the Git-derived change set.
 Any test that can only pass by editing a retained vector row; any need to
 touch a skill contract, a profile in `skill_contract.py` or the
 `focus-json` identifier; any hash-locked file in the change set.
+
+## Scope amendment
+
+2026-08-29, after start, on the engineering owner's decision 'Amend
+WO-ECP-017 scope with tests/test_agent_contract.py': that test module is
+added to the execution scope. Its
+`test_phase1_receipt_bytes_and_portable_core_identity_remain_compatible`
+pins the phase-1 `portable_core` digest to the live `harness-orient`
+manifest — the third "current" pin of the core, beside the two this work
+order already moves to the phase-5 row (`ECP-RMV-005`) — and it went red on
+the Windows suite at `bfc6cb3`. The amendment moves that one assertion to
+the phase-5 row (phase-1 equals its `previous`, the live core equals its
+`current`), adds no other work and no product path; the evidence packet is
+bound after this edit.
 
 ## Completion report format
 
