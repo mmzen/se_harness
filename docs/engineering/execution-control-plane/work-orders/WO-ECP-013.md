@@ -2,7 +2,7 @@
 id = "WO-ECP-013"
 type = "work_order"
 title = "A scope checkpoint so the pull-request gate is green in every lifecycle state"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -58,6 +58,13 @@ to = "in_progress"
 decided_at = "2026-08-29T08:28:01Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'you can start WO-ECP-013'. Start preflight PASS with no diagnostics over the approval commit e2f11b5 carrying unmoved main 1d19d17, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T08:56:34Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-ECP-013 implemented', on the handoff check reading Completed over the Git-derived change set of 26 paths at its fixed point, result b27e6177, no scope amendment. The evaluator gains the scope checkpoint at which QG-G4-IMPLEMENTATION-EVIDENCE evaluates only its three scope predicates for a work order in any lifecycle state, by per-predicate checkpoint declarations and with no identifier or evaluator moved; the managed workflow runs it on every pull request and the handoff check with the digest comparison only while in progress; the five checkpoints are documented; SPEC-ECP-003 and ARCH-ECP-001 carry their amendment records. Linux suite OK; Windows workstation 2 unrelated baseline failures; demonstrated on this repository with the candidate CLI. All thirteen pull-request lanes pass on #258 at 94113de under the 0.9.0 root's old step, which is expected red from this transition on, by the rule this work order removes. This authorizes no further act."
 +++
 
 # Work Order: A scope checkpoint so the pull-request gate is green in every lifecycle state
