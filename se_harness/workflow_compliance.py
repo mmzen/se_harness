@@ -369,7 +369,9 @@ def evidence_packet_path(root: Path, artifact: Any, checkpoint: str) -> Path:
 
     from se_harness.artifact_layout import artifact_domain_from_relative_path
 
-    domain = artifact_domain_from_relative_path(artifact.path.relative_to(root))
+    # ECP-HST-001 (issue #254): the resolver's text guard rejects a backslash, and
+    # a WindowsPath renders with them; hand it the POSIX form of the evaluator's own path.
+    domain = artifact_domain_from_relative_path(artifact.path.relative_to(root).as_posix())
     if domain is None:
         raise HarnessError(f"WEX-ECP-010: {artifact.artifact_id} is not under a domain directory")
     return root / "docs" / "engineering" / domain / "evidence" / artifact.artifact_id / f"{artifact.artifact_id}-{checkpoint}.md"
