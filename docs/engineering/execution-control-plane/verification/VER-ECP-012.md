@@ -2,13 +2,20 @@
 id = "VER-ECP-012"
 type = "verification"
 title = "Independent evidence for the admission of the selected work order's own records"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-023"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T11:40:51Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-29 with the words 'Approve and start WO-ECP-016': four deterministic scenarios in tests/test_workflow_compliance.py; the hosted demonstration is deferred to the first pull request governed by the release carrying the rule."
 +++
 
 # Verification Contract: Independent evidence for the admission of the selected work order's own records

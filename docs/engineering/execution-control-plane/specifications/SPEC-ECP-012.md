@@ -2,13 +2,20 @@
 id = "SPEC-ECP-012"
 type = "specification"
 title = "Admission of the selected work order's own records to the change set"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 specifies = ["REQ-ECP-023"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T11:40:51Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-29 with the words 'Approve and start WO-ECP-016': ECP-ADM-001 to ECP-ADM-005, exact-path admission by relation, extending ECP-CHG-007 by the amendment record on SPEC-ECP-001."
 +++
 
 # Specification: Admission of the selected work order's own records to the change set

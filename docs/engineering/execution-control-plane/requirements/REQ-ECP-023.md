@@ -2,7 +2,7 @@
 id = "REQ-ECP-023"
 type = "requirement"
 title = "The change set admits the selected work order's own records by construction"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "issue #264; pull requests #262 and #263, 2026-08-29"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T11:40:51Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-29 with the words 'Approve and start WO-ECP-016': the change set admits the selected work order's own verification and release records by construction (issue #264)."
 +++
 
 # Requirement: The change set admits the selected work order's own records by construction

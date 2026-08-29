@@ -2,7 +2,7 @@
 id = "WO-ECP-016"
 type = "work_order"
 title = "Admit the selected work order's own verification and release records to the change set"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -30,6 +30,13 @@ paths = [
 implements = ["REQ-ECP-023"]
 specifications = ["SPEC-ECP-012"]
 verification = ["VER-ECP-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T11:40:51Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-016', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: workflow_compliance.py's admitted-scope construction, the compliance tests, the check note, the SPEC-ECP-001 amendment record, this domain's index, its verification-records directory and the evidence packet. It authorizes no change to a hash-locked root file, no contract file, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Admit the selected work order's own verification and release records to the change set
