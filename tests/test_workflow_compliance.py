@@ -524,3 +524,37 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
         self.assertEqual([], result["mutation"]["writes"])
         self.assertEqual(before, retained.read_bytes())
 
+
+
+class EvaluatorDerivedPacketPathTests(unittest.TestCase):
+    """SPEC-ECP-008 ECP-HST-001 (issue #254): the packet path is the same on a Windows root."""
+
+    def test_the_packet_path_resolves_on_a_windows_root(self) -> None:
+        from pathlib import PurePosixPath, PureWindowsPath
+        from types import SimpleNamespace
+
+        from se_harness.workflow_compliance import evidence_packet_path
+
+        for root in (PureWindowsPath("C:/repo"), PurePosixPath("/repo")):
+            with self.subTest(root=type(root).__name__):
+                artifact = SimpleNamespace(
+                    artifact_id="WO-D-001",
+                    path=root / "docs" / "engineering" / "d" / "work-orders" / "WO-D-001.md",
+                )
+                self.assertEqual(
+                    root / "docs" / "engineering" / "d" / "evidence" / "WO-D-001" / "WO-D-001-handoff.md",
+                    evidence_packet_path(root, artifact, "handoff"),
+                )
+
+    def test_an_artifact_outside_a_domain_is_still_refused_by_name(self) -> None:
+        from pathlib import PureWindowsPath
+        from types import SimpleNamespace
+
+        from se_harness.installer import HarnessError
+        from se_harness.workflow_compliance import evidence_packet_path
+
+        root = PureWindowsPath("C:/repo")
+        artifact = SimpleNamespace(artifact_id="WO-D-001", path=root / "docs" / "engineering" / "WO-D-001.md")
+        with self.assertRaises(HarnessError) as caught:
+            evidence_packet_path(root, artifact, "handoff")
+        self.assertIn("WEX-ECP-010: WO-D-001 is not under a domain directory", str(caught.exception))

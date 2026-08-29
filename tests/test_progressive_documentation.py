@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import tomllib
 import unittest
@@ -22,6 +23,7 @@ DOCUMENTS = {
     NOTES_ROOT / "harness-lineage-example.md": "7/10",
     NOTES_ROOT / "harness-installation-and-upgrades.md": "5/10",
     NOTES_ROOT / "harnessctl-reference.md": "7/10",
+    NOTES_ROOT / "harnessctl-check.md": "6/10",
     NOTES_ROOT / "developing-se-harness.md": "8/10",
 }
 
@@ -223,6 +225,43 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         for command in documented_commands:
             with self.subTest(command=command):
                 self.assertIn(f"harnessctl {command}", example)
+
+    def test_check_note_is_indexed_linked_and_names_only_contract_identifiers(self) -> None:
+        # SPEC-ECP-008 ECP-HST-005 (WO-ECP-012): the check reference derives its tables from
+        # the installed contracts, so every identifier it names must exist there.
+        note = self.contents[NOTES_ROOT / "harnessctl-check.md"]
+        self.assertIn("harnessctl-check.md", self.contents[NOTES_ROOT / "README.md"])
+        self.assertIn("harnessctl-check.md", self.contents[NOTES_ROOT / "harnessctl-reference.md"])
+        for heading in (
+            "## What the command does",
+            "## The four checkpoints",
+            "## How the artifact's state selects the rule",
+            "## Gates and predicates by checkpoint",
+            "## Supplying the change set",
+            "## Outcomes and what `Blocked by` names",
+            "## Refusal codes",
+            "## One work order, from approved to implemented",
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, note)
+        standard = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "docs" / "engineering"
+        workflow = json.loads((standard / "WORKFLOW.json").read_text(encoding="utf-8"))
+        gates = json.loads((standard / "QUALITY_GATES.json").read_text(encoding="utf-8"))
+        known = {rule["id"] for rule in workflow["recommendations"]}
+        known |= {procedure["id"] for procedure in workflow["procedures"]}
+        known |= {gate["id"] for gate in gates["gates"]}
+        known |= {predicate["id"] for gate in gates["gates"] for predicate in gate["predicates"]}
+        known |= {check for binding in gates["transition_bindings"] for check in binding.get("structural", [])}
+        known |= {"QG-STRUCTURAL"}
+        named = set(re.findall(r"`((?:WFL|PROC|QG|QGP|QGS)-[A-Z0-9-]+)`", note))
+        self.assertTrue(named, "the note names no contract identifier")
+        self.assertEqual(set(), named - known, sorted(named - known))
+        for rule in workflow["recommendations"]:
+            with self.subTest(rule=rule["id"]):
+                self.assertIn(f"`{rule['id']}`", note)
+        for gate in gates["gates"]:
+            with self.subTest(gate=gate["id"]):
+                self.assertIn(f"`{gate['id']}`", note)
 
     def test_command_reference_exactly_covers_current_cli(self) -> None:
         parser = build_parser()

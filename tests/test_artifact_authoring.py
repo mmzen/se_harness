@@ -311,3 +311,27 @@ class IdentifierAllocationTests(unittest.TestCase):
         with self.assertRaisesRegex(HarnessError, "WEX-ECP-013"):
             self.allocate()
 
+
+
+class EvaluatorDerivedPathTests(unittest.TestCase):
+    """SPEC-ECP-008 ECP-HST-002 (issue #254): the resolver takes the evaluator's own path on every host."""
+
+    def test_a_pure_windows_path_resolves_to_its_domain(self) -> None:
+        from pathlib import PurePosixPath, PureWindowsPath
+
+        from se_harness.artifact_layout import artifact_domain_from_relative_path
+
+        relative = "docs/engineering/execution-control-plane/work-orders/WO-ECP-012.md"
+        self.assertEqual("execution-control-plane", artifact_domain_from_relative_path(PureWindowsPath(relative)))
+        self.assertEqual("execution-control-plane", artifact_domain_from_relative_path(PurePosixPath(relative)))
+        self.assertEqual("execution-control-plane", artifact_domain_from_relative_path(relative))
+
+    def test_a_backslash_in_untrusted_text_is_still_refused(self) -> None:
+        from pathlib import PureWindowsPath
+
+        from se_harness.artifact_layout import artifact_domain_from_relative_path
+
+        text = "docs\engineering\execution-control-plane\work-orders\WO-ECP-012.md"
+        self.assertIsNone(artifact_domain_from_relative_path(text))
+        self.assertIsNone(artifact_domain_from_relative_path(PureWindowsPath("C:/repo/docs/engineering/d/work-orders/WO-D-001.md")))
+        self.assertIsNone(artifact_domain_from_relative_path(PureWindowsPath("docs/engineering/WO-D-001.md")))

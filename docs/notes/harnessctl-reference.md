@@ -138,7 +138,8 @@ background count; `--include-background` expands categories without making
 them selected-scope work.
 
 `check` resolves the first matching rule, its typed `PROC-*` procedure, and its
-`QG-*` gates. `--checkpoint transition --target STATE` previews, read-only, the
+`QG-*` gates; [`harnessctl check` explained](harnessctl-check.md) walks
+through the checkpoints, the rule table, the gates, and the refusal codes. `--checkpoint transition --target STATE` previews, read-only, the
 exact predicates and graph-structural checks `transition --set ID=STATE` will
 evaluate (`WO-ECP-009`): the transition binding index of `QUALITY_GATES.json`
 keyed by artifact family and target state, evaluated by the same gate evaluator

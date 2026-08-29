@@ -9,7 +9,7 @@ import subprocess
 import tempfile
 from dataclasses import dataclass
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from se_harness import mutation_guard
 from se_harness.installer import HarnessError, ensure_target, safe_destination
@@ -144,9 +144,13 @@ def repository_record_relative_path(artifact_type: str, artifact_id: str, domain
     return Path("docs") / "engineering" / Path(*ARTIFACT_DIRECTORIES[selected_type]) / f"{selected_id}.md"
 
 
-def artifact_domain_from_relative_path(value: str | Path) -> str | None:
-    raw = Path(value)
-    if raw.is_absolute() or "\\" in str(value):
+def artifact_domain_from_relative_path(value: str | PurePath) -> str | None:
+    # ECP-HST-002 (issue #254): a PurePath is the evaluator's own value, so it is
+    # rendered POSIX before the text guard; a str is untrusted text and keeps the
+    # guard, so a backslash in it still resolves to no domain.
+    text = value.as_posix() if isinstance(value, PurePath) else value
+    raw = Path(text)
+    if raw.is_absolute() or "\\" in str(text):
         return None
     parts = raw.parts
     if len(parts) < 4 or parts[:2] != ("docs", "engineering"):
