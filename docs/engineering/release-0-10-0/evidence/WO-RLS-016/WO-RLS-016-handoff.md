@@ -151,3 +151,28 @@ upgrade rehearsal 0.9.0 to 0.10.0 on Linux and Windows), both qualification
 rehearsals and the integration-package build, verify (Linux, Windows) and
 retain lanes pass. From the completion transition on, the managed lane is
 expected red by issue #255 on the 0.9.0 root.
+
+## 8. Build re-verified at the bound candidate
+
+The commit that marked this work order implemented, `69ee77a`, is the
+release candidate `VREC-SEH-019` and `RLS-SEH-019` bind, so the recipe-bound
+replay was run again at it on 2026-08-29, same host, same producer image:
+`state` `exact`, two byte-identical producer runs. Its digests differ from
+section 4 by construction — the archives embed the commit's
+`source_date_epoch` and the sdist carries the docs tree — and they, not
+section 4's, are the build of record:
+
+| Reading | Value |
+| --- | --- |
+| command | `python -m repository_tools.release_build replay --repository . --commit 69ee77a673a25a28535a03ebfaa5c29b454e1f5f --version 0.10.0` |
+| wheel | `se_harness-0.10.0-py3-none-any.whl`, `e2f8077264ee2c8ad39d6ac33f726030627f0f70de5579e80bcc159d971f93c3` |
+| sdist | `se_harness-0.10.0.tar.gz`, `e3b8eaf691db34ec39434726020c347cfa0d19a58f559e8c0da86fe53e97c7ba` |
+| checksums | `SHA256SUMS`, `b11a7b03ecd3549acb1dfe43a1598265853b2307154281352197008705191da6` |
+| source manifest | `50856d4dc5c0d2e01b77666943133710d9d62167e899a49c02f9c0cc72d7ac8d`, `source_date_epoch` 1787997718 |
+| recipe, producer | unchanged from section 4 |
+
+The hosted `release-candidate-replay.yml` dispatch on the review ref must
+reproduce these before the release decision. The managed lane at `69ee77a`
+reads red with `gate QG-G4-CANDIDATE-READY does not apply at checkpoint
+handoff`, issue #255 on the 0.9.0 root, as section 7 predicted; every other
+lane passes.
