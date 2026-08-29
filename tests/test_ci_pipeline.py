@@ -85,9 +85,11 @@ class TriggerPolicyTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: true", root)
 
     def test_the_managed_workflow_enforces_scope_on_every_pull_request(self) -> None:
-        # REQ-ECP-006 / ECP-GTE-001 to -005 and -007: the scope step has no guard
-        # on a declared digest, no early exit on its absence, reads the change set
-        # from Git and never from the body, and runs the released evaluator.
+        # REQ-ECP-006 / ECP-GTE-003, -005, -007 and REQ-ECP-020 / ECP-SCP-006 to -009:
+        # the scope check has no guard on a declared digest or on lifecycle state, no
+        # early exit, reads the change set from Git and never from the body, and runs
+        # the released evaluator; the handoff check and the digest comparison sit
+        # behind the in_progress reading of the scope result.
         template = (REPOSITORY_ROOT / "templates/repository/standard/.github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
         step = template.split("      - name: Enforce the work-order scope on the pull request's diff\n", 1)[1]
         step = step.split("      - name: ", 1)[0]
@@ -100,13 +102,20 @@ class TriggerPolicyTests(unittest.TestCase):
         self.assertIn('git fetch --depth=1 origin "$HARNESS_BASE_SHA"', step)
         self.assertIn('"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check .', step)
         self.assertIn("QGP-G4I-PATHS", step)
+        self.assertIn("--checkpoint scope", step)
+        self.assertLess(step.index("--checkpoint scope"), step.index("--checkpoint handoff"))
+        self.assertLess(step.index("--checkpoint scope"), step.index("in_progress"))
+        self.assertLess(step.index('if [ "$in_progress" != "yes" ]'), step.index("--checkpoint handoff"))
+        self.assertLess(step.index("--checkpoint handoff"), step.index("does not match the recomputed result_sha256"))
+        self.assertIn("was bound at handoff and is not recomputed after completion", step)
+        self.assertIn("The scope check did not complete", step)
         self.assertIn("select-work-order --event", step)
         self.assertNotIn("github.head_ref", step)
         self.assertNotIn("secrets.", step)
         self.assertLess(step.index("--from-git"), step.index("restitution-digest"))
         self.assertIn("does not match the recomputed result_sha256", step)
         seed = (REPOSITORY_ROOT / "templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed").read_text(encoding="utf-8")
-        self.assertIn("fails on any path of the diff outside the work order's declared scope", seed)
+        self.assertIn("fails on any path of the diff outside the work order's declared scope, whatever the work order's lifecycle state", seed)
         self.assertNotIn("reviewers remain accountable for confirming that the diff stays within its scope", seed)
 
 

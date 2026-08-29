@@ -109,7 +109,7 @@ harnessctl pr-body [TARGET] --artifact WO-...
 harnessctl focus [TARGET] --artifact WO-...|VREC-...|RLS-... \
   [--json] [--include-background]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  --checkpoint start|pre-action|transition|handoff [--target STATE] \
+  --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
   [--changes-complete] | --change-manifest PATH] [--pull-request-body PATH] [--json]
 harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
@@ -138,7 +138,9 @@ background count; `--include-background` expands categories without making
 them selected-scope work.
 
 `check` resolves the first matching rule, its typed `PROC-*` procedure, and its
-`QG-*` gates; [`harnessctl check` explained](harnessctl-check.md) walks
+`QG-*` gates; `--checkpoint scope` evaluates only the scope predicates of
+`QG-G4-IMPLEMENTATION-EVIDENCE` for a work order in any lifecycle state and
+writes nothing, which is what the managed pull-request gate runs (`WO-ECP-013`); [`harnessctl check` explained](harnessctl-check.md) walks
 through the checkpoints, the rule table, the gates, and the refusal codes. `--checkpoint transition --target STATE` previews, read-only, the
 exact predicates and graph-structural checks `transition --set ID=STATE` will
 evaluate (`WO-ECP-009`): the transition binding index of `QUALITY_GATES.json`

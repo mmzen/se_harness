@@ -28,7 +28,7 @@ STEP_KINDS = {"command", "decision", "reference"}
 CORRECTIVE_KINDS = {"command", "escalation", "response"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
 PARAMETER_TYPES = {"artifact_id", "actor", "path", "path_list", "status", "text"}
-CHECKPOINTS = {"start", "pre-action", "transition", "handoff"}
+CHECKPOINTS = {"start", "pre-action", "transition", "handoff", "scope"}
 #: The prose a rule contributes to a schema-2 result (WO-ECP-005): what the
 #: operation did and the lifecycle state it leaves. Every other restitution
 #: field is derived from the bound procedure step.

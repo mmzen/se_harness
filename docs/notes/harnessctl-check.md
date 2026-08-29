@@ -20,7 +20,7 @@ own result as `handoff.json` in the work order's evidence directory.
 
 ```text
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
-  --checkpoint start|pre-action|transition|handoff [--target STATE] \
+  --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
   [--changes-complete] | --change-manifest PATH] [--pull-request-body PATH] [--json]
 ```
@@ -34,7 +34,7 @@ What it does **not** do:
   `check` needs `--artifact`;
 - it does not decide; it names the decision that is due and who owns it.
 
-## The four checkpoints
+## The five checkpoints
 
 A checkpoint is the moment in a procedure at which the command is run. Each
 one needs different inputs and evaluates different gates.
@@ -45,13 +45,20 @@ one needs different inputs and evaluates different gates.
 | `pre-action` | before any decision step of any procedure | `--procedure PROC-...` (the selected procedure or one declared alternative) | the rule's gates plus the gates of the procedure's first step |
 | `transition` | to preview exactly what `transition --set ID=STATE` will evaluate | `--target STATE` | the predicates bound to that artifact family and target state in `QUALITY_GATES.json`, plus the structural `QGS-*` checks |
 | `handoff` | when an `in_progress` work order's implementation is offered for completion | a change set (see below) | `QG-G4-IMPLEMENTATION-EVIDENCE`: status, graph, integrity, scope, change-set completeness, path scope, review preflight, evidence packet |
+| `scope` | on every pull request, whatever the work order's state; also by hand, to ask "is this diff inside scope?" | a change set (see below) | the three scope predicates of `QG-G4-IMPLEMENTATION-EVIDENCE` only: `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`; nothing is written |
 
 Each gate declares the checkpoints at which it applies. A rule whose gate is
 not declared for the requested checkpoint is refused with `WEX210: gate
 QG-... does not apply at checkpoint ...`. This is why a handoff check is only
 defined while the work order is `in_progress`: once it is `implemented`, the
 rule selects a different gate, and the handoff checkpoint no longer applies to
-it.
+it. The `scope` checkpoint is the one exception to "the state selects the
+gate": it always evaluates `QG-G4-IMPLEMENTATION-EVIDENCE`, whose scope
+predicates declare `scope` and whose other predicates do not, so a work order
+in any state — `draft` included — is checked against its declared scope and
+against nothing else. It exists for the managed pull-request gate, which
+before se-harness 0.10.0 ran the handoff check unconditionally and was
+therefore red from a work order's completion to its merge (issue #255).
 
 ## How the artifact's state selects the rule
 
@@ -103,7 +110,7 @@ gate passes and no repository-level error is present.
 | `QG-G1-DEFINITION` | `pre-action`, `transition` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |
 | `QG-G2-ARCHITECTURE` | `pre-action`, `transition` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |
 | `QG-G3-WORK-AUTHORIZATION` | `start`, `pre-action`, `transition` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` |
-| `QG-G4-IMPLEMENTATION-EVIDENCE` | `pre-action`, `transition`, `handoff` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` |
+| `QG-G4-IMPLEMENTATION-EVIDENCE` | `pre-action`, `transition`, `handoff`; `scope` for `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS` only | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` |
 | `QG-G4-CANDIDATE-READY` | `pre-action`, `transition` | `QGP-G4C-STATUS`, `QGP-G4C-GRAPH`, `QGP-G4C-INTEGRITY` |
 | `QG-G4-ASSURANCE-DECISION` | `pre-action`, `transition` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` |
 | `QG-G4-VERIFIED-COVERAGE` | `pre-action`, `transition` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` |
@@ -134,8 +141,8 @@ refuses if any is not `pass`.
 
 ## Supplying the change set
 
-The handoff checkpoint judges an implementation by the paths it changed.
-Three forms are accepted, and they are mutually exclusive:
+The handoff and scope checkpoints judge an implementation by the paths it
+changed. Three forms are accepted, and they are mutually exclusive:
 
 | Form | Meaning | Completeness |
 | --- | --- | --- |
@@ -183,7 +190,7 @@ evaluation. Each names its cause.
 
 | Code | Cause |
 | --- | --- |
-| `WEX210` | the checkpoint is not one of the four; `--target` given without `transition`, or `transition` without `--target`; the artifact is not a WO, VREC, or RLS, or is unknown; the rule's gate does not apply at this checkpoint; repository integrity fails; the installed machine policy is invalid |
+| `WEX210` | the checkpoint is not one of the five; `--target` given without `transition`, or `transition` without `--target`; the artifact is not a WO, VREC, or RLS, or is unknown; `scope` on a VREC or RLS; the rule's gate does not apply at this checkpoint; repository integrity fails; the installed machine policy is invalid |
 | `WEX220` | `pre-action` without `--procedure`; a `--procedure` that the selected rule neither selects nor declares as an alternative; a procedure with no steps |
 | `WEX200` | a changed path, manifest, or pull-request body that is not safe text: absolute, empty, non-normalized, escaping the repository, reserved or dot components, duplicates, an oversized or malformed manifest or body; a work order whose execution scope is empty or invalid |
 | `WEX-ECP-002` | `--from-git` combined with `--changed-path`, `--changes-complete`, or `--change-manifest` |
@@ -218,7 +225,10 @@ same checkout did not raise it.
    --apply`. From here the rule for the work order changes
    (`WFL-WO-PREPARE-VREC`), and the handoff checkpoint no longer applies to
    it: the next checks are `pre-action` checks of the verification
-   procedures, on the verification record.
+   procedures, on the verification record. The pull request's managed gate
+   keeps running `check --checkpoint scope --from-git` on every push, so
+   the completion commit, the verification record and its verification are
+   still held to the declared scope; only the digest comparison stops.
 
 If any step is Blocked, the block names the predicate or code, states that
 no lifecycle state changed, and gives the one retry; the fix is made in the

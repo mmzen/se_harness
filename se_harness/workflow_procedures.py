@@ -148,7 +148,8 @@ def select_current_step(
             ),
             steps[0],
         )
-    if checkpoint == "handoff":
+    if checkpoint in {"handoff", "scope"}:
+        # ECP-SCP-005: a scope check reports the same step a handoff check would.
         if passed:
             return next((step for step in steps if step.get("kind") == "decision"), steps[-1])
         return next(
