@@ -349,6 +349,9 @@ def plan_install(
                 action = "update" if match != "mismatch" else "customized"
         changes.append(Change(relative, action, item.mode, desired, current))
 
+    if mode == "upgrade":
+        changes.extend(_plan_leaving_set(target, old_lock, old_files))
+
     if adoption_report is not None:
         relative = "docs/engineering/ADOPTION_REPORT.md"
         destination = safe_destination(target, Path(relative))
@@ -357,6 +360,56 @@ def plan_install(
         changes.append(Change(relative, action, "generated", adoption_report, current))
 
     return sorted(changes, key=lambda item: item.path), old_lock
+
+
+def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Change]:
+    """Classify prior-lock managed paths that left the managed set.
+
+    A byte-identical copy plans as ``remove``; a differing copy plans as
+    ``customized`` and blocks the apply like an in-set customization. Seed
+    entries are owner-owned from installation, and a path with no file on
+    disk retires silently: both simply leave the written lock. An empty
+    ``desired`` on a ``remove`` means the file is deleted; a fragment whose
+    owner content remains carries that remainder as ``desired``.
+    """
+
+    managed_targets = {item.target.as_posix() for item in _templates()}
+    changes: list[Change] = []
+    for relative in sorted(set(old_files) - managed_targets):
+        old_entry = old_files.get(relative)
+        if not isinstance(old_entry, dict):
+            continue
+        old_mode = old_entry.get("mode")
+        if old_mode not in {"managed", "fragment"}:
+            continue
+        destination = safe_destination(target, Path(relative))
+        if not destination.is_file():
+            continue
+        current = destination.read_bytes()
+        tracked = tracked_content(str(old_mode), current)
+        if tracked is None:
+            continue
+        try:
+            match = compare_lock_entry(old_lock, old_entry, tracked)
+            if (
+                match == "mismatch"
+                and old_lock.get("schema") == 1
+                and matches_legacy_newline_variant(tracked, old_entry.get("sha256"))
+            ):
+                match = "legacy-canonical"
+        except IntegrityError as exc:
+            raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
+        if match == "mismatch":
+            changes.append(Change(relative, "customized", str(old_mode), current, current))
+            continue
+        if old_mode == "fragment":
+            start = current.find(tracked)
+            remainder = current[:start] + current[start + len(tracked) :]
+            desired = b"" if not remainder.strip() else remainder
+        else:
+            desired = b""
+        changes.append(Change(relative, "remove", str(old_mode), desired, current))
+    return changes
 
 
 def _atomic_write(destination: Path, content: bytes) -> None:
@@ -371,6 +424,21 @@ def _atomic_write(destination: Path, content: bytes) -> None:
     finally:
         if os.path.exists(temporary_name):
             os.unlink(temporary_name)
+
+
+def _prune_empty_directories(directory: Path, root: Path) -> None:
+    """Remove directories a deletion left empty, ascending no further than root."""
+
+    root = root.resolve()
+    directory = directory.resolve()
+    while directory != root and root in directory.parents:
+        try:
+            if any(directory.iterdir()):
+                return
+            directory.rmdir()
+        except OSError:
+            return
+        directory = directory.parent
 
 
 def _restore_snapshot(snapshot: dict[Path, bytes | None]) -> list[str]:
@@ -415,7 +483,7 @@ def _upgrade_evidence_bytes(
 ) -> bytes:
     # SPEC-REB-012 rule 4: the same canonical document as before, minus the
     # retired work-order packet fields, which are carried as null.
-    changed = [item for item in changes if item.action in {"add", "integrate", "update"}]
+    changed = [item for item in changes if item.action in {"add", "integrate", "update", "remove"}]
     value = {
         "schema": UPGRADE_EVIDENCE_SCHEMA,
         "work_order": None,
@@ -544,11 +612,21 @@ def apply_changes(
         for item in changes
         if item.action in safe_actions
     }
+    # Removals execute only inside an update-allowing transaction; a plan
+    # applied without update authority keeps the prior lock entries so the
+    # root never records a retirement it did not perform.
+    removals = {
+        item.path: (safe_destination(target, Path(item.path)), item.desired)
+        for item in changes
+        if item.action == "remove" and allow_updates
+    }
     evidence_destination: Path | None = None
     if allow_updates and evidence_output is not None:
         evidence_relative = validate_upgrade_evidence_path(evidence_output)
         evidence_destination = safe_destination(target, Path(evidence_relative.as_posix()))
-        if evidence_destination in destinations.values():
+        if evidence_destination in destinations.values() or any(
+            evidence_destination == destination for destination, _ in removals.values()
+        ):
             raise HarnessError("upgrade evidence path overlaps a managed destination")
         if evidence_destination.exists():
             raise HarnessError("upgrade evidence output already exists; no files were written")
@@ -557,6 +635,8 @@ def apply_changes(
         destination: destination.read_bytes() if destination.is_file() else None
         for destination in destinations.values()
     }
+    for destination, _ in removals.values():
+        snapshot.setdefault(destination, destination.read_bytes() if destination.is_file() else None)
     snapshot[lock_path] = lock_path.read_bytes() if lock_path.is_file() else None
     if evidence_destination is not None:
         snapshot[evidence_destination] = (
@@ -568,6 +648,13 @@ def apply_changes(
             destination = destinations.get(item.path)
             if destination is not None:
                 _atomic_write(destination, item.desired)
+        for destination, desired in removals.values():
+            if desired:
+                # A fragment whose owner content remains keeps that remainder.
+                _atomic_write(destination, desired)
+            else:
+                destination.unlink(missing_ok=True)
+                _prune_empty_directories(destination.parent, target)
 
         files: dict[str, dict[str, str]] = {}
         old_files = old_lock.get("files", {}) if isinstance(old_lock.get("files"), dict) else {}
@@ -577,6 +664,10 @@ def apply_changes(
             destination = target / item.path
             if item.action == "customized":
                 if item.path in old_files:
+                    files[item.path] = old_files[item.path]
+                continue
+            if item.action == "remove":
+                if item.path not in removals and item.path in old_files:
                     files[item.path] = old_files[item.path]
                 continue
             if item.mode == "seed":
