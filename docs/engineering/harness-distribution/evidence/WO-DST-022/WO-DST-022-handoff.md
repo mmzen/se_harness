@@ -80,3 +80,12 @@ interrupted apply.
   alone: 29 tests, OK. The Linux lane settles the suite hosted.
 - In-tree `doctor` exits 1 on candidate-versus-released skew alone, the
   expected boundary evidence.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #276 pass at its head `b871758`. The
+owner merged the pull request on 2026-08-29 as `edcef3e`; the push-event
+runs on `main` for that commit read Engineering Harness success, Governor
+Transition Assessment success and Publication Rehearsal success, with SE
+Harness Candidate Evidence still in progress at the time of this
+recording and settled readings quoted in the verification decision.
