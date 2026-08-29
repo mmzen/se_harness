@@ -71,7 +71,7 @@ from se_harness.workflow_result import (
 from se_harness.workflow import (
     RepositoryWorkflowError,
     failed_result,
-    focus,
+    project_selected,
     next_step,
     plan_transition,
     preparation_result,
@@ -347,12 +347,6 @@ def _next(args: argparse.Namespace) -> int:
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
-FOCUS_DEPRECATION = (
-    "harnessctl focus is deprecated and will be removed after the next release; "
-    "use harnessctl check --artifact ID without --checkpoint for the same projection."
-)
-
-
 def _check_projection(args: argparse.Namespace) -> int:
     """`check` without a checkpoint: the projection, no gate, no write (ECP-ONE-001 to -003)."""
 
@@ -368,11 +362,10 @@ def _check_projection(args: argparse.Namespace) -> int:
         if value:
             raise HarnessError(f"WEX210: {option} requires --checkpoint")
     try:
-        result = focus(
+        result = project_selected(
             Path(args.target),
             args.artifact,
             include_background=args.include_background,
-            operation="check",
         )
     except HarnessError as exc:
         message = str(exc)
@@ -519,27 +512,6 @@ def _prepare_release(args: argparse.Namespace) -> int:
         return 2
     print(_render_selected_result(result, args), end="")
     return 0
-
-
-def _focus(args: argparse.Namespace) -> int:
-    # ECP-ONE-004: a one-release alias; stdout and --json bytes are unchanged.
-    print(FOCUS_DEPRECATION, file=sys.stderr)
-    try:
-        result = focus(
-            Path(args.target),
-            args.artifact,
-            include_background=args.include_background,
-        )
-    except HarnessError as exc:
-        result = failed_result(
-            "focus",
-            args.artifact,
-            str(exc),
-            code="WEX101",
-            repository_blocker=isinstance(exc, RepositoryWorkflowError),
-        )
-    print(_render_selected_result(result, args), end="")
-    return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
 def _assignments(values: list[str], label: str) -> dict[str, str]:
@@ -1050,14 +1022,6 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--json", action="store_true")
     preflight.set_defaults(handler=_preflight)
 
-    selected_focus = commands.add_parser(
-        "focus", help="deprecated alias of `check` without --checkpoint; removed after the next release"
-    )
-    selected_focus.add_argument("target", nargs="?", default=".")
-    selected_focus.add_argument("--artifact", required=True)
-    selected_focus.add_argument("--json", action="store_true")
-    selected_focus.add_argument("--include-background", action="store_true")
-    selected_focus.set_defaults(handler=_focus)
 
     selected_next = commands.add_parser(
         "next", help="return the selected artifact's complete execution context: state, scope, reading set, next command"
@@ -1386,6 +1350,17 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    if arguments[:1] == ["focus"]:
+        # ECP-RMV-002: the alias window of SPEC-ECP-011 closed with the release
+        # after 0.10.0; a script still on `focus` fails loudly, naming its replacement.
+        selected = arguments[arguments.index("--artifact") + 1] if "--artifact" in arguments[:-1] else "ID"
+        print(
+            f"harnessctl: focus was removed after 0.10.0; run harnessctl check --artifact {selected}"
+            " (add --json for the structured result)",
+            file=sys.stderr,
+        )
+        return 2
     try:
         args = build_parser().parse_args(argv)
         return int(args.handler(args))

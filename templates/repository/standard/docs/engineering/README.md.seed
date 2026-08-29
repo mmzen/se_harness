@@ -4,8 +4,8 @@
 
 `WORKFLOW.json` and `QUALITY_GATES.json` are managed executable policy.
 `WORKFLOW.md` and `QUALITY_GATES.md` are their bound human explanations.
-Select one artifact with `harnessctl focus`; use `harnessctl check` for a
-start, pre-action, or handoff checkpoint. Use repository-wide `inspect` only as
+Project one artifact with `harnessctl check --artifact ID`; add
+`--checkpoint` for a start, pre-action, scope, or handoff checkpoint. Use repository-wide `inspect` only as
 a separate maintenance operation.
 
 ## Artifact domains

@@ -1025,7 +1025,7 @@ def selected_result(
 ) -> dict[str, Any]:
     """Build the one schema-2 result for a selected artifact (ECP-KRN-001, -003).
 
-    `focus`, `transition`, `capture-verification` and `prepare-release` all
+    `check`, `transition`, `capture-verification` and `prepare-release` all
     render through here: `select_rule` over the primary and its related
     artifacts picks the workflow rule, the rule's procedure supplies the typed
     next step, and the rule's `restitution` prose supplies what was done and
@@ -1168,11 +1168,11 @@ def focus_schema2(
     artifact_id: str,
     include_background: bool = False,
 ) -> dict[str, Any]:
-    """Selected focus; the name is kept for callers, the result is `workflow.focus` (WO-ECP-005)."""
+    """Selected projection; the name is kept for its Phase 4 caller, the result is `workflow.project_selected`."""
 
-    from se_harness.workflow import focus
+    from se_harness.workflow import project_selected
 
-    return focus(repository, artifact_id, include_background=include_background)
+    return project_selected(repository, artifact_id, include_background=include_background)
 
 
 def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:

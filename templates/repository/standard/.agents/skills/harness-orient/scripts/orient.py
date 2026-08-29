@@ -588,18 +588,25 @@ def run_orientation(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
                 deviations.append({"code": exc.code, "message": exc.message, "operation": "inspect-json"})
 
     if outcome == "completed" and artifact is not None:
-        if not _command_supported(help_text, "focus"):
+        if not _command_supported(help_text, "check"):
             outcome = "degraded"
             deviations.append({"code": "AEXORI030", "operation": "focus-json", "status": "not_assessable"})
         else:
-            focus_help = _run(launcher, ["focus", "--help"], target=target, operation="focus-help")
+            focus_help = _run(launcher, ["check", "--help"], target=target, operation="focus-help")
             operations.append(focus_help)
             focus_help_text = focus_help.stdout.decode("utf-8", "replace")
-            if focus_help.returncode != 0 or "--json" not in focus_help_text or "--artifact" not in focus_help_text:
+            # The projection is `check` without a checkpoint: an evaluator whose `check`
+            # still requires --checkpoint (0.10.0 and earlier) does not offer it.
+            if (
+                focus_help.returncode != 0
+                or "--json" not in focus_help_text
+                or "--artifact" not in focus_help_text
+                or "[--checkpoint" not in focus_help_text
+            ):
                 outcome = "degraded"
                 deviations.append({"code": "AEXORI030", "operation": "focus-json", "status": "not_assessable"})
             else:
-                focus_arguments = ["focus", str(target), "--artifact", artifact, "--json"]
+                focus_arguments = ["check", str(target), "--artifact", artifact, "--json"]
                 if "--result-schema" in focus_help_text:
                     focus_arguments.extend(["--result-schema", "2"])
                 focus_result = _run(launcher, focus_arguments, target=target, operation="focus-json")

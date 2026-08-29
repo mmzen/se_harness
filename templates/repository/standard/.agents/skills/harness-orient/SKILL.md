@@ -30,8 +30,10 @@ Then run `scripts/orient.py` with the same structured inputs. Supply the
 evaluator launcher as a JSON array, never as a shell command string. The script
 repeats the required `version`, `identity`, and `doctor` checks for its receipt,
 then runs `validate --json` and `inspect --json`. When an artifact is selected,
-it uses `focus --json` only if the verified evaluator advertises that public
-command. It runs preflight only for an explicitly selected work order and
+it uses `check --artifact ID --json` only if the verified evaluator advertises
+that public command with an optional `--checkpoint` (se-harness 0.11.0 and
+later); an evaluator whose `check` requires a checkpoint degrades the
+selected scope. It runs preflight only for an explicitly selected work order and
 requested phase.
 
 Return the script's canonical JSON result inline. Summarize its lifecycle
@@ -46,8 +48,10 @@ them as the governing result.
   external mutation.
 - Do not install or repair a missing evaluator or damaged managed content.
 - Missing required evaluator behavior blocks orientation. Missing optional
-  focus or requested preflight behavior degrades only the named output.
-- Do not parse human prose to invent selected scope when focus JSON is absent.
+  projection (`check`) or requested preflight behavior degrades only the named
+  output.
+- Do not parse human prose to invent selected scope when the projection JSON
+  is absent.
 - Do not start work, apply a transition, or claim an accountable decision.
 - Stop on ambiguous selection, conflicting owner instructions, evaluator
   identity failure, managed-integrity failure, invalid formal state, malformed

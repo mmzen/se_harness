@@ -16,7 +16,7 @@ exact external released evaluator to check:
 - installed managed-file integrity;
 - formal artifact graph validity;
 - repository-wide lifecycle and attention queues;
-- one selected WO, VREC, or RLS scope when focus JSON is supported; and
+- one selected WO, VREC, or RLS scope when the `check` projection is supported; and
 - an explicitly requested work-order preflight when that capability exists.
 
 The result names current lifecycle state, selected and repository blockers,
@@ -106,8 +106,9 @@ The minimum released evaluator is 0.5.0. Version, identity, doctor, validation
 JSON, and inspection JSON are required. A missing or unsuccessful required
 operation blocks orientation.
 
-Focus JSON and explicitly requested preflight are optional. If the verified
-evaluator does not advertise focus—for example, the supported 0.5.0
+The `check` projection (`check --artifact ID --json`, the `focus-json`
+operation) and explicitly requested preflight are optional. If the verified
+evaluator does not advertise `check`—for example, the supported 0.5.0
 capability profile—the selected scope is `not_assessable` and the overall
 result is `degraded`. Repository validation and inspection remain available.
 The skill does not parse prose or run candidate source to guess the missing

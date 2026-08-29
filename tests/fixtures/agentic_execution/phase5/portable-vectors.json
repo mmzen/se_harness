@@ -1,0 +1,59 @@
+{
+  "orientation": {
+    "current": {
+      "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+      "manifest_sha256": "0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328",
+      "schema": "se-harness-skill-contract-v1"
+    },
+    "previous": {
+      "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+      "manifest_sha256": "73d94b02dd1008f5cb8b6a828ba920c128d06b82fc6e4b9b97720b6d91ca7cea",
+      "schema": "se-harness-skill-contract-v1"
+    }
+  },
+  "origin": "WO-ECP-017 (2026-08-29): harness-orient invokes check where it invoked focus; every earlier identity is retained as `previous`.",
+  "portable_core": {
+    "current": {
+      "files": [
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "SKILL.md",
+          "sha256": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "scripts/orient.py",
+          "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "skill-contract.json",
+          "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+        }
+      ],
+      "manifest_sha256": "0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328"
+    },
+    "previous": {
+      "files": [
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "SKILL.md",
+          "sha256": "487216696f211d6668f5131df354189bb39dea29dc5e738ae90fca77d912c386"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "scripts/orient.py",
+          "sha256": "02adac90805941f2efc2e667faf3849e3bfc0b05e8ab4a80260595b8e253ee04"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "skill-contract.json",
+          "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+        }
+      ],
+      "manifest_sha256": "73d94b02dd1008f5cb8b6a828ba920c128d06b82fc6e4b9b97720b6d91ca7cea"
+    }
+  },
+  "schema": "se-harness-phase5-skill-vectors-v1",
+  "workflow_schema": "se-harness-workflow-v4"
+}

@@ -45,6 +45,7 @@ FAKE_EVALUATOR = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/fake_evalua
 VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/canonical_vectors.json"
 PHASE3_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase3/portable_vectors.json"
 PHASE4_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/portable-vectors.json"
+PHASE5_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase5/portable-vectors.json"
 PHASE4_SKILL_CASES = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/client-cases.json"
 HOST_SURFACE_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/host_activation/expected_surfaces.json"
 CLAUDE_SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills"
@@ -183,8 +184,13 @@ class SkillContractTests(unittest.TestCase):
             [item["path"] for item in manifest.value["files"]],
         )
         self.assertRegex(manifest.sha256, r"^[0-9a-f]{64}$")
-        self.assertEqual(vectors["portable_core"]["files"], manifest.value["files"])
-        self.assertEqual(vectors["portable_core"]["manifest_sha256"], manifest.sha256)
+        # ECP-RMV-005: the phase-1 portable core is retained history; the live core is
+        # the phase-5 row, whose `previous` is that history.
+        phase5 = json.loads(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual("se-harness-phase5-skill-vectors-v1", phase5["schema"])
+        self.assertEqual(vectors["portable_core"], phase5["portable_core"]["previous"])
+        self.assertEqual(phase5["portable_core"]["current"]["files"], manifest.value["files"])
+        self.assertEqual(phase5["portable_core"]["current"]["manifest_sha256"], manifest.sha256)
 
     def test_contract_rejects_duplicate_and_unknown_fields(self) -> None:
         raw = (SKILL_ROOT / "skill-contract.json").read_bytes()
@@ -258,7 +264,11 @@ class SkillContractTests(unittest.TestCase):
         for name in PHASE3_ROOTS:
             with self.subTest(skill=name):
                 self.assertEqual(phase3["skills"][name], phase4["skills"][name]["previous"])
-        expected = phase4["orientation"]
+        # ECP-RMV-005: the phase-4 orientation identity is retained as the phase-5
+        # row's `previous`; the live harness-orient core equals its `current`.
+        phase5 = json.loads(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual(phase4["orientation"], phase5["orientation"]["previous"])
+        expected = phase5["orientation"]["current"]
         contract = load_skill_contract(SKILL_ROOT / "skill-contract.json")
         self.assertEqual(expected["schema"], contract.value["schema"])
         self.assertEqual(expected["manifest_sha256"], build_skill_manifest(SKILL_ROOT).sha256)
@@ -1000,10 +1010,10 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
             self.assertEqual({"governing": False, "status": "not_assessed"}, result["candidate_source"])
             self.assertEqual("0.6.0", result["released_evaluator"]["version"])
 
-    def test_exact_0_5_without_focus_degrades_only_selected_scope(self) -> None:
+    def test_exact_0_5_without_check_degrades_only_selected_scope(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(target, mode="no-focus", version="0.5.0", artifact="WO-TST-001")
+            completed = self.invoke(target, mode="no-check", version="0.5.0", artifact="WO-TST-001")
 
             self.assertEqual(0, completed.returncode, completed.stderr)
             result = json.loads(completed.stdout)
