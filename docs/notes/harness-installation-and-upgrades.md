@@ -183,6 +183,29 @@ Schema-2 locks compare canonical UTF-8 text hashes so ordinary LF/CRLF checkout 
 
 Schema-1 and schema-2 roots remain inspectable but cannot run ordinary mutations under the enforcing release. Their single transition path is the reviewed `upgrade --apply` above, from an already-published target evaluator. Once schema 3 is installed, ordinary mutation requires exact agreement with the lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
 
+### Managed files that leave the managed set are removed on upgrade
+
+A release may retire a managed file entirely, so the new template no longer
+names a path the repository lock manages. The upgrade plan classifies such a
+path as `remove` when its bytes still match the locked digest: `--apply`
+deletes the file inside the same transaction, prunes the directories the
+deletion leaves empty, and drops the lock entry. A retired path the owner
+edited is reported as `customized` and blocks apply, exactly like an in-set
+customization; owner seed content and owner bytes around a managed fragment
+block are never deleted. With `--evidence-output`, the `remove` actions are
+recorded in the transaction evidence beside the updates.
+
+Repositories that upgraded 0.10.0 to 0.11.0 did so before this rule existed:
+the 0.11.0 release retired three skills, and that upgrade left their fifteen
+files on disk while the rewritten lock no longer names them, so no later
+evaluator can retire them mechanically. Delete these orphans by hand in such
+a repository:
+
+- `.agents/skills/harness-draft-change/` (SKILL.md, agents/openai.yaml, scripts/guard.py, skill-contract.json)
+- `.agents/skills/harness-execute-work-order/` (SKILL.md, agents/openai.yaml, scripts/check_scope.py, skill-contract.json)
+- `.agents/skills/harness-prepare-assurance/` (SKILL.md, agents/openai.yaml, scripts/check_prepare.py, skill-contract.json)
+- `.claude/skills/harness-draft-change/SKILL.md`, `.claude/skills/harness-execute-work-order/SKILL.md`, `.claude/skills/harness-prepare-assurance/SKILL.md`
+
 ### The managed `.gitattributes` block changes at the first release after 0.7.1
 
 `WO-HBI-005` (repository issue #207) removed from the canonical `.gitattributes` fragment the three `se_harness/governance_migration*` rules that only the SE Harness repository itself could satisfy, and stopped shipping the matching `governance-migration-protocol` hash-bound class. In a repository initialized or adopted with 0.7.1 or earlier, `harnessctl doctor` fails `hash-bound-class-declared` and `hash-bound-attribute-effective` after the first commit for that reason alone; there is no owner-side workaround, because the block between the `se-harness` markers is hash-locked. The `upgrade` plan for the first release that carries the change classifies `.gitattributes` as `update` in `fragment` mode: `--apply` rewrites only the managed block, and every rule the owner keeps outside the markers is preserved. A `template`-region class whose pattern matches no tracked path yet — evidence before the first verification record — is then reported as vacuously declared with `0 tracked paths` rather than failed.
