@@ -2,7 +2,7 @@
 id = "WO-ECP-014"
 type = "work_order"
 title = "Canonicalize line endings in the formal snapshot"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-29T09:09:16Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'you can start WO-ECP-014'. Start preflight PASS with no diagnostics over the approval commit 9220f97 carrying unmoved main 741a774, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T09:20:52Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-ECP-014 implemented', on the handoff check reading Completed over the Git-derived change set of 11 paths at its fixed point, result 9ab56eda, no scope amendment. formal_snapshot_digest now hashes each artifact's utf8-text-lf-v1 canonical bytes through the one function every snapshot comes from; the LF digest of the fixture chain is pinned at the raw-rule value measured before the change; candidate evidence on the CRLF Windows worktree and on the LF Linux clone at c066269 both read 51b08822; Linux suite OK; Windows workstation at its two baseline failures; SPEC-ECP-001 carries the amendment record. At the moment of this decision the pull-request lanes on #259 at e932993 were still running, 3 passing and 3 pending with none failed; the settled readings are appended to the evidence packet after this transition, and the managed lane is expected red from it on, by issue #255 on the 0.9.0 root. This authorizes no further act."
 +++
 
 # Work Order: Canonicalize line endings in the formal snapshot
