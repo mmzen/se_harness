@@ -169,3 +169,19 @@ template.
 - The exact `repository_tools` module names for the relocated self-checks.
 - Whether a rewritten `harness-execute-work-order` returns to the template
   in a later work order; this specification only sets its admission rule.
+
+## Amendment record
+
+**`ECP-SKL-004`'s removals are reported by `upgrade`, proposed 2026-08-29
+under `WO-DST-022` (issue #271; `SPEC-DST-022`).** The rule stated that
+`doctor` in an upgraded consumer reports the removed skill files as
+`remove` rather than as drift, and `WO-ECP-006`'s packet asserted this held
+by construction because the installer walks the template tree. Neither was
+true: the installer planned from the new managed set only, so the
+0.10.0-to-0.11.0 upgrade silently left the fifteen retired skill files on
+disk and `doctor` read 0 FAIL over the orphans (issue #271). The reporter
+is the upgrade transaction: under `SPEC-DST-022` the plan classifies a
+leaving-set managed path as `remove`, apply deletes it, and the lock entry
+leaves; `doctor` has no prior lock to compare once the upgrade has been
+applied, and before it, the existing lock-versus-template readings already
+fail the stale entries. Nothing else in this specification changes.

@@ -96,6 +96,12 @@ Topology acceptance headroom amendment:
 
 The implemented packet raises only the candidate distribution's SE Harness topology acceptance target from 524,288 to 2,097,152 UTF-8 bytes. It preserves bundle-v2 data and integrity, every other content budget, the existing no-sharding architecture, and the independently installed public-0.5.0 managed root. Commit, VREC, release, root upgrade, and external actions remain separate decisions.
 
+Leaving-set managed-path retirement extension (issue #271):
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-066` -> `SPEC-DST-022`, `VER-DST-022` -> `WO-DST-022`.
+
+No architecture or ADR relation is selected for `REQ-DST-066`: the retirement rule is upgrade-transaction behaviour inside the installer boundary `ARCH-DST-001` already draws, and no active architecture declares that it addresses the new requirement. `SPEC-DST-001`'s upgrade action vocabulary and `SPEC-ECP-007`'s `ECP-SKL-004` are amended by record under `WO-DST-022`.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.

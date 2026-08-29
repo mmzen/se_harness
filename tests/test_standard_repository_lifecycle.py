@@ -172,6 +172,190 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             checks = {item.name: item for item in inspect_installation(target)}
             self.assertFalse(checks["managed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
 
+    # The fifteen managed paths of the three skills 0.11.0 retired from the
+    # 0.10.0 template; the SPEC-DST-022 DST-UPR-007 conformance pair.
+    RETIRED_0_10_0_SKILL_PATHS = (
+        ".agents/skills/harness-draft-change/SKILL.md",
+        ".agents/skills/harness-draft-change/agents/openai.yaml",
+        ".agents/skills/harness-draft-change/scripts/guard.py",
+        ".agents/skills/harness-draft-change/skill-contract.json",
+        ".agents/skills/harness-execute-work-order/SKILL.md",
+        ".agents/skills/harness-execute-work-order/agents/openai.yaml",
+        ".agents/skills/harness-execute-work-order/scripts/check_scope.py",
+        ".agents/skills/harness-execute-work-order/skill-contract.json",
+        ".agents/skills/harness-prepare-assurance/SKILL.md",
+        ".agents/skills/harness-prepare-assurance/agents/openai.yaml",
+        ".agents/skills/harness-prepare-assurance/scripts/check_prepare.py",
+        ".agents/skills/harness-prepare-assurance/skill-contract.json",
+        ".claude/skills/harness-draft-change/SKILL.md",
+        ".claude/skills/harness-execute-work-order/SKILL.md",
+        ".claude/skills/harness-prepare-assurance/SKILL.md",
+    )
+
+    def install_root_with_leaving_set_paths(self, target: Path) -> dict[str, bytes]:
+        changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+        apply_changes(target, changes, old_lock, allow_updates=False)
+        lock_path = target / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        planted: dict[str, bytes] = {}
+        for relative in self.RETIRED_0_10_0_SKILL_PATHS:
+            path = target / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            content = f"retired 0.10.0 managed content: {relative}\n".encode("utf-8")
+            path.write_bytes(content)
+            lock["files"][relative] = {"mode": "managed", "sha256": canonical_sha256(content)}
+            planted[relative] = content
+        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        return planted
+
+    def test_standard_upgrade_removes_managed_files_that_left_the_managed_set(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            self.install_root_with_leaving_set_paths(target)
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertEqual(
+                {relative: "remove" for relative in self.RETIRED_0_10_0_SKILL_PATHS},
+                {relative: actions[relative] for relative in self.RETIRED_0_10_0_SKILL_PATHS},
+            )
+            apply_changes(target, changes, old_lock, allow_updates=True)
+
+            for relative in self.RETIRED_0_10_0_SKILL_PATHS:
+                self.assertFalse((target / relative).exists(), relative)
+            for retired_directory in (
+                ".agents/skills/harness-draft-change",
+                ".agents/skills/harness-execute-work-order",
+                ".agents/skills/harness-prepare-assurance",
+                ".claude/skills/harness-draft-change",
+            ):
+                self.assertFalse((target / retired_directory).exists(), retired_directory)
+            self.assertTrue((target / ".agents/skills/harness-orient/SKILL.md").is_file())
+
+            lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
+            self.assertFalse(set(self.RETIRED_0_10_0_SKILL_PATHS) & set(lock["files"]))
+            replay, _ = plan_install(target, project_name=None, mode="upgrade")
+            self.assertEqual({"unchanged"}, {item.action for item in replay})
+
+    def test_standard_upgrade_reports_a_customized_leaving_set_copy_without_writing(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            planted = self.install_root_with_leaving_set_paths(target)
+            edited = ".agents/skills/harness-execute-work-order/SKILL.md"
+            customized = planted[edited] + b"\nRepository-owned customization.\n"
+            (target / edited).write_bytes(customized)
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertEqual("customized", actions[edited])
+            with self.assertRaisesRegex(HarnessError, "conflicts or customizations"):
+                apply_changes(target, changes, old_lock, allow_updates=True)
+            self.assertEqual(customized, (target / edited).read_bytes())
+            for relative, content in planted.items():
+                if relative != edited:
+                    self.assertEqual(content, (target / relative).read_bytes())
+
+    def test_standard_upgrade_retires_seed_and_missing_leaving_set_entries_silently(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            lock_path = target / ".engineering-harness.lock"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            seed_relative = "docs/notes/legacy-seed-note.md"
+            seed_content = b"Owner-owned seed content.\n"
+            (target / seed_relative).parent.mkdir(parents=True, exist_ok=True)
+            (target / seed_relative).write_bytes(seed_content)
+            lock["files"][seed_relative] = {"mode": "seed", "state": "present"}
+            missing_relative = "docs/legacy/retired-and-deleted.md"
+            lock["files"][missing_relative] = {"mode": "managed", "sha256": canonical_sha256(b"gone\n")}
+            lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertNotIn(seed_relative, actions)
+            self.assertNotIn(missing_relative, actions)
+            apply_changes(target, changes, old_lock, allow_updates=True)
+            self.assertEqual(seed_content, (target / seed_relative).read_bytes())
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            self.assertNotIn(seed_relative, lock["files"])
+            self.assertNotIn(missing_relative, lock["files"])
+
+    def test_standard_upgrade_removes_a_leaving_set_fragment_block_preserving_owner_content(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            changes, old_lock = plan_install(target, project_name="Leaving Set", mode="init")
+            apply_changes(target, changes, old_lock, allow_updates=False)
+            lock_path = target / ".engineering-harness.lock"
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            block = b"<!-- se-harness:begin -->\nRetired fragment body.\n<!-- se-harness:end -->\n"
+            owner_remainder = b"# Owner heading\n\nOwner prose that must survive.\n\n"
+            mixed_relative = "LEGACY_POLICY.md"
+            (target / mixed_relative).write_bytes(owner_remainder + block)
+            block_only_relative = "LEGACY_BLOCK_ONLY.md"
+            (target / block_only_relative).write_bytes(block)
+            for relative in (mixed_relative, block_only_relative):
+                tracked = tracked_content("fragment", (target / relative).read_bytes())
+                assert tracked is not None
+                lock["files"][relative] = {"mode": "fragment", "sha256": canonical_sha256(tracked)}
+            lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            actions = {item.path: item.action for item in changes}
+            self.assertEqual("remove", actions[mixed_relative])
+            self.assertEqual("remove", actions[block_only_relative])
+            apply_changes(target, changes, old_lock, allow_updates=True)
+            self.assertEqual(owner_remainder, (target / mixed_relative).read_bytes())
+            self.assertFalse((target / block_only_relative).exists())
+            lock = json.loads(lock_path.read_text(encoding="utf-8"))
+            self.assertNotIn(mixed_relative, lock["files"])
+            self.assertNotIn(block_only_relative, lock["files"])
+
+    def test_standard_upgrade_records_remove_actions_in_transaction_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            self.install_root_with_leaving_set_paths(target)
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            evidence_relative = Path("docs/engineering/harness-distribution/evidence/upgrade-transition.json")
+            apply_changes(target, changes, old_lock, allow_updates=True, evidence_output=evidence_relative)
+            evidence = json.loads((target / evidence_relative).read_text(encoding="utf-8"))
+            self.assertEqual("se-harness-evaluator-upgrade-evidence-v1", evidence["schema"])
+            recorded = {item["path"]: item["action"] for item in evidence["plan"]}
+            self.assertEqual(
+                {relative: "remove" for relative in self.RETIRED_0_10_0_SKILL_PATHS},
+                {relative: recorded[relative] for relative in self.RETIRED_0_10_0_SKILL_PATHS},
+            )
+
+    def test_standard_upgrade_restores_removed_files_after_interrupted_apply(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "repository"
+            self.install_root_with_leaving_set_paths(target)
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            before = {
+                path.relative_to(target).as_posix(): path.read_bytes()
+                for path in target.rglob("*")
+                if path.is_file()
+            }
+            real_replace = os.replace
+            failed = False
+
+            def interrupt_lock_write(source: str | bytes | os.PathLike[str] | os.PathLike[bytes], destination: str | bytes | os.PathLike[str] | os.PathLike[bytes]) -> None:
+                nonlocal failed
+                if not failed and Path(destination).name == ".engineering-harness.lock":
+                    failed = True
+                    raise OSError("injected transaction interruption")
+                real_replace(source, destination)
+
+            with mock.patch("se_harness.installer.os.replace", side_effect=interrupt_lock_write):
+                with self.assertRaisesRegex(OSError, "injected transaction interruption"):
+                    apply_changes(target, changes, old_lock, allow_updates=True)
+            after = {
+                path.relative_to(target).as_posix(): path.read_bytes()
+                for path in target.rglob("*")
+                if path.is_file()
+            }
+            self.assertEqual(before, after)
+
     def test_alpha_can_convert_legacy_controls_in_a_disposable_repository(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
