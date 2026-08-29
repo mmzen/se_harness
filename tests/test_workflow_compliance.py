@@ -13,12 +13,18 @@ from unittest import mock
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_compliance import (
+    own_record_paths,
     declared_change_set,
     formal_snapshot_digest,
     normalize_path,
     path_is_admitted,
 )
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.test_revision_provenance import (
+    RELEASED_EVALUATOR_EVIDENCE,
+    create_base_chain,
+    formal,
+    write,
+)
 from tests.fixture_support import standard_repository
 
 
@@ -727,3 +733,139 @@ class CanonicalSnapshotTests(WorkflowComplianceTests):
         bound = header.split(b'formal_snapshot_sha256 = "', 1)[1][:64].decode("ascii")
         self.rewrite(b"\n")
         self.assertEqual(bound, self.digest())
+
+
+class OwnRecordAdmissionTests(ScopeCheckpointTests):
+    """REQ-ECP-023 / SPEC-ECP-012 ECP-ADM-001 to -004: the work order's own records are admitted."""
+
+    RECORD = "docs/engineering/product/verification-records/VREC-001.md"
+    EVALUATOR = "docs/engineering/product/evidence/VREC-001-evaluator.json"
+
+    def evaluator_evidence(self) -> tuple[bytes, str]:
+        # Canonical evaluator evidence matching the fixture's own standard lock, as
+        # capture-verification records it.
+        import hashlib
+
+        lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        document = dict(RELEASED_EVALUATOR_EVIDENCE, evaluator=dict(lock["evaluator"]))
+        payload = (json.dumps(document, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+        return payload, hashlib.sha256(payload).hexdigest()
+
+    def write_own_record(self, record_id: str = "VREC-001", work_order: str = "WO-001") -> None:
+        evaluator_bytes, evaluator_sha256 = self.evaluator_evidence()
+        # write_record renders the template at VREC-001's path; keep any own record
+        # already there and take the template's text without its retained-evidence file.
+        existing = (self.root / self.RECORD).read_text(encoding="utf-8") if (self.root / self.RECORD).exists() else None
+        self.write_record("ready")
+        (self.root / "docs/engineering/product/evidence/VREC-001-evidence.md").unlink()
+        text = (self.root / self.RECORD).read_text(encoding="utf-8")
+        if existing is not None:
+            (self.root / self.RECORD).write_text(existing, encoding="utf-8")
+        else:
+            (self.root / self.RECORD).unlink()
+        record = self.root / f"docs/engineering/product/verification-records/{record_id}.md"
+        evaluator = self.EVALUATOR.replace("VREC-001", record_id)
+        # The retained evidence lives in the work order's own packet directory, as
+        # capture-verification writes it; only the evaluator file sits beside the record.
+        retained = f"docs/engineering/product/evidence/{work_order}/{work_order}-handoff.md"
+        write(self.root / retained, "# retained evidence\n")
+        text = text.replace('id = "VREC-001"', f'id = "{record_id}"').replace(
+            'verifies_work_order = ["WO-001"]', f'verifies_work_order = ["{work_order}"]'
+        ).replace(
+            'evidence_paths = ["docs/engineering/product/evidence/VREC-001-evidence.md"]',
+            f'evaluator_evidence_path = "{evaluator}"\n'
+            f'evaluator_evidence_sha256 = "{evaluator_sha256}"\n'
+            f'evidence_paths = ["{retained}"]',
+        )
+        record.write_text(text, encoding="utf-8")
+        (self.root / evaluator).write_bytes(evaluator_bytes)
+
+    def implemented_base(self) -> str:
+        self.commit_base()
+        return self.set_state("implemented")
+
+    def test_own_record_and_its_evaluator_evidence_are_admitted_from_git(self) -> None:
+        base = self.implemented_base()
+        self.write_own_record()
+        code, result, error = self.scope_check(base)
+        self.assertEqual(0, code, error)
+        outcomes = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("pass", outcomes["QGP-G4I-PATHS"])
+        self.assertIn(self.RECORD, result["scope"]["changed_paths"])
+        self.assertIn(self.EVALUATOR, result["scope"]["changed_paths"])
+        # ECP-ADM-004: admission is not reported as declaration.
+        self.assertNotIn(self.RECORD, result["scope"]["declared_paths"])
+        self.assertNotIn(self.EVALUATOR, result["scope"]["declared_paths"])
+
+    def test_a_record_for_another_work_order_is_still_outside_the_scope(self) -> None:
+        base = self.implemented_base()
+        self.write_own_record()
+        self.write_own_record("VREC-002", "WO-002")
+        code, result, error = self.scope_check(base)
+        self.assertNotEqual(0, code, error)
+        self.assertEqual("blocked", result["operation"]["outcome"])
+        offending = [item for item in result["restitution"]["blocked_by"] if item.startswith("QGP-G4I-PATHS:")]
+        self.assertEqual(1, len(offending), result["restitution"]["blocked_by"])
+        self.assertIn("WEX201", offending[0])
+        self.assertIn("VREC-002", offending[0])  # the predicate names the first offending path
+        self.assertNotIn("VREC-001", offending[0])  # the own record is not the offender
+
+    def test_typed_and_manifest_change_sets_admit_the_own_record(self) -> None:
+        self.implemented_base()
+        self.write_own_record()
+        for extra in (
+            ("--changed-path", self.RECORD, "--changed-path", self.EVALUATOR, "--changes-complete"),
+            ("--change-manifest", "changes.json"),
+        ):
+            (self.root / "changes.json").write_text(
+                json.dumps({"schema": "se-harness-change-set-v1", "complete": True, "paths": [self.RECORD, self.EVALUATOR]}),
+                encoding="utf-8",
+            )
+            code, output, error = self.invoke(
+                "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope", *extra, "--json",
+            )
+            self.assertEqual(0, code, error)
+            result = json.loads(output)
+            outcomes = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+            self.assertEqual("pass", outcomes["QGP-G4I-PATHS"])
+
+    def test_handoff_admits_the_own_record(self) -> None:
+        self.commit_base()
+        base = self.set_state("in_progress")
+        self.write_own_record()
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--from-git", base, "--json",
+        )
+        result = json.loads(output)
+        outcomes = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("pass", outcomes["QGP-G4I-PATHS"], error)
+
+    def test_release_records_naming_the_work_order_are_admitted_as_exact_paths(self) -> None:
+        from types import SimpleNamespace
+
+        root = Path("/repo")
+        def record(kind, ident, relation, names, evidence=None, path=None):
+            metadata = {"evaluator_evidence_path": evidence} if evidence else {}
+            return SimpleNamespace(
+                artifact_type=kind, artifact_id=ident, relations={relation: names}, metadata=metadata,
+                path=root / (path or f"docs/engineering/x/{ident}.md"),
+            )
+        catalog = {
+            "RLS-001": record("release_record", "RLS-001", "releases_work", ["WO-001", "WO-002"], "docs/engineering/x/evidence/RLS-001-evaluator.json"),
+            "RLS-002": record("release_record", "RLS-002", "releases_work", ["WO-003"], "docs/engineering/x/evidence/RLS-002-evaluator.json"),
+            "VREC-001": record("verification_record", "VREC-001", "verifies_work_order", ["WO-001"]),
+            "WO-001": record("work_order", "WO-001", "implements", ["REQ-001"]),
+            "REQ-001": record("definition", "REQ-001", "derives_from", []),
+        }
+        admitted = own_record_paths(root, catalog, "WO-001")
+        self.assertEqual(
+            (
+                "docs/engineering/x/RLS-001.md",
+                "docs/engineering/x/VREC-001.md",
+                "docs/engineering/x/evidence/RLS-001-evaluator.json",
+            ),
+            admitted,
+        )
+        # ECP-ADM-001: exact paths, never a directory prefix.
+        self.assertFalse(any(path.endswith("/") for path in admitted))
+        self.assertEqual((), own_record_paths(root, catalog, "WO-004"))

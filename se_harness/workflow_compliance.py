@@ -689,6 +689,37 @@ def _gate_results(
     return result
 
 
+def own_record_paths(root: Path, catalog: Mapping[str, Any], work_order_id: str) -> tuple[str, ...]:
+    """SPEC-ECP-012 ECP-ADM-001/-002: the records that name the work order, as exact paths.
+
+    A verification record whose ``verifies_work_order`` and a release record whose
+    ``releases_work`` contains the selected work order are written by the harness
+    at paths derived from the work order's own identity and land on its branch;
+    each record's catalog path and its ``evaluator_evidence_path`` are admitted to
+    the change set with the work order's own file. Admission is by relation, never
+    by directory: nothing else under the records directories is admitted.
+    """
+
+    admitted: list[str] = []
+    for item in catalog.values():
+        relation = {"verification_record": "verifies_work_order", "release_record": "releases_work"}.get(
+            getattr(item, "artifact_type", None)
+        )
+        if relation is None:
+            continue
+        named = item.relations.get(relation, [])
+        if not isinstance(named, list) or work_order_id not in named:
+            continue
+        try:
+            admitted.append(item.path.relative_to(root).as_posix())
+        except ValueError:
+            continue
+        evidence = item.metadata.get("evaluator_evidence_path")
+        if isinstance(evidence, str) and evidence:
+            admitted.append(evidence)
+    return tuple(sorted(set(admitted)))
+
+
 def build_context(
     root: Path,
     report: Any,
@@ -728,6 +759,9 @@ def build_context(
                 (evidence_packet_path(root, primary, "handoff").parent.relative_to(root).as_posix() + "/",)
                 if primary.artifact_type == "work_order" else ()
             ),
+            # ECP-ADM-001: the verification and release records that name the
+            # selected work order, and their evaluator evidence, as exact paths.
+            *(own_record_paths(root, catalog, primary.artifact_id) if primary.artifact_type == "work_order" else ()),
         ),
         change_set=change_set,
         checkpoint=checkpoint,
