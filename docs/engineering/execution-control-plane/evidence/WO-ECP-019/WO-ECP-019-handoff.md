@@ -26,7 +26,9 @@ record on `SPEC-ECP-001` say so (`REQ-ECP-025`; `ECP-CTX-001` to
   this Windows checkout for every reading, the packet and the handoff check
   included.
 - Candidate: this checkout, branch `wo/ecp-019-context-and-aliases` off
-  `main` at `970a0ae`; the suite and the demonstration run candidate source.
+  `main` at `970a0ae`, with `main` at `27e40e5` (`WO-DST-022`, `VREC-DST-019`)
+  merged in at `eff7de7` without conflict; the suite and the demonstration run
+  candidate source.
 
 ## Change
 
@@ -132,7 +134,7 @@ Candidate CLI on this checkout, where `WO-ECP-019` is the single
 
 ## Complete changed-path set
 
-Every path this work order changed since `main` at `970a0ae`, packet
+Every path this work order changed since `main` at `27e40e5`, packet
 included, as Git derived it; the handoff check completed at its fixed point
 with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE` passing, run by
 the released 0.11.0 evaluator on this Windows checkout: see `handoff.json`
