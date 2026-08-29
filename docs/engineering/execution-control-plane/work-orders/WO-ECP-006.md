@@ -2,7 +2,7 @@
 id = "WO-ECP-006"
 type = "work_order"
 title = "Remove the Phase 4 envelope, bundle and broker; keep the journaled apply; retire the stubbed skills"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-29"
@@ -68,6 +68,13 @@ to = "in_progress"
 decided_at = "2026-08-29T13:30:42Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-006'. Start preflight PASS with no diagnostics over the approval commit 62a8d42 carrying unmoved main 78306e0, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no supersession transition, no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T14:00:35Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29, 'Mark WO-ECP-006 implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at edddf3f on wo/ecp-006-remove-phase4 off main 78306e0; the handoff check completed at its fixed point 73c7c23cf30f63a6b8c7ec460067ae7ad13a6f3d149a3a2dd7bc3429baba0e5e under the released 0.10.0 evaluator on this Windows checkout, every predicate of QG-G4-IMPLEMENTATION-EVIDENCE passing; all thirteen lanes of pull request #267 pass at this head. REQ-ECP-018 (ECP-DLG-008) and REQ-ECP-014 (ECP-SKL-001 to -004) are implemented; the journaled apply is retained as se_harness/journaled_apply.py with its fault matrix on both platforms; the wheel carries none of the ten removed names. The four deviations the packet records are accepted with this completion: resolve_delegation not retained as code until REQ-ECP-011's work order, the inert change-bundle-apply binding row left in the out-of-scope contract files, the stale skill names in ECP-SKL-002, and the AEX supersession transitions left to the requirements steward and technical owner. This completion authorizes no supersession transition, no verification record, no release and no publication."
 +++
 
 # Work Order: Remove the Phase 4 envelope, bundle and broker; keep the journaled apply; retire the stubbed skills
