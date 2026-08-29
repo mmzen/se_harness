@@ -2,7 +2,7 @@
 id = "REQ-ECP-020"
 type = "requirement"
 title = "Scope is enforced on the pull request in every lifecycle state"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "issue #255; pull requests #253 and #257, 2026-08-29"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T08:26:59Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'i approve the artifact packet', for the repair of issue #255: a fifth public checkpoint, scope, at which the three scope predicates of QG-G4-IMPLEMENTATION-EVIDENCE are evaluated for a work order in every lifecycle state, and a managed workflow step that runs it on every pull request while keeping the handoff check and the digest comparison for in_progress work orders; ADR-ECP-006 Option B, with the SPEC-ECP-003 amendment record and the ARCH-ECP-001 amendment that follows this approval. Measured before this transition over branch state 6f29e70 carrying unmoved main 1d19d17: validate PASS at 0 errors under the governing 0.9.0 root; start preflight reads the draft signature plus the architecture pincer W018 and W021 that the ADR approval and the ARCH-ECP-001 amendment resolve. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Requirement: Scope is enforced on the pull request in every lifecycle state

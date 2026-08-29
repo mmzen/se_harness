@@ -2,7 +2,7 @@
 id = "WO-ECP-013"
 type = "work_order"
 title = "A scope checkpoint so the pull-request gate is green in every lifecycle state"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -44,6 +44,13 @@ implements = ["REQ-ECP-020"]
 specifications = ["SPEC-ECP-009"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-006"]
 verification = ["VER-ECP-009"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T08:27:36Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'i approve the artifact packet and you can start WO-ECP-013', as a decision distinct from the approval of its definitions and of ADR-ECP-006 seconds earlier, and after the ARCH-ECP-001 amendment that addresses REQ-ECP-020. Authorizes start preflight and then only the declared scope: the scope checkpoint in the evaluator and its contracts, the managed workflow step, the managed policy documents, tests, the two notes, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file of this repository, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: A scope checkpoint so the pull-request gate is green in every lifecycle state

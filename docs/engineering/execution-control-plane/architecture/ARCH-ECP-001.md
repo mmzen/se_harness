@@ -8,8 +8,8 @@ created = "2026-08-27"
 updated = "2026-08-28"
 
 [relations]
-addresses = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-006", "REQ-ECP-007", "REQ-ECP-008", "REQ-ECP-009", "REQ-ECP-010", "REQ-ECP-011", "REQ-ECP-016", "REQ-ECP-017", "REQ-ECP-018"]
-conforms_to = ["SPEC-ECP-001", "SPEC-ECP-003", "SPEC-ECP-004", "SPEC-ECP-005", "SPEC-ECP-006"]
+addresses = ["REQ-ECP-001", "REQ-ECP-002", "REQ-ECP-006", "REQ-ECP-007", "REQ-ECP-008", "REQ-ECP-009", "REQ-ECP-010", "REQ-ECP-011", "REQ-ECP-016", "REQ-ECP-017", "REQ-ECP-018", "REQ-ECP-020"]
+conforms_to = ["SPEC-ECP-001", "SPEC-ECP-003", "SPEC-ECP-004", "SPEC-ECP-005", "SPEC-ECP-006", "SPEC-ECP-009"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -261,3 +261,9 @@ consumed by `transition`), `ADR-ECP-004` (one result schema, one selector,
 one precondition engine), and `ADR-ECP-005` (eviction of self-hosting
 machinery from the shipped product). Each carries `decides =
 ["ARCH-ECP-001"]`.
+
+## Amendment record
+
+**`REQ-ECP-020` addressed and `SPEC-ECP-009` conformed to, accepted 2026-08-29 under `WO-ECP-013` (issue #255).** The pull-request gate this architecture places at the Git boundary was implemented at the `handoff` checkpoint, which the evaluator binds to an `in_progress` work order; the boundary therefore enforced scope as a function of lifecycle state, red after completion and absent for a draft packet. The amendment names the state-independent `scope` checkpoint of `SPEC-ECP-009` as the binding the boundary uses, and records `ADR-ECP-006`, which decides it among the alternatives. It removes a way the implementation departed from this architecture's principle that enforcement sits on the diff; it introduces no new boundary, and `decision_assessment` stands as assessed with `ADR-ECP-006` added to the deciding records.
+
+Accepted after the approval of `REQ-ECP-020`, because `E016` refuses an active architecture that addresses an inactive requirement, and before the approval of `WO-ECP-013`, because `W021` refuses a selected architecture unrelated to the selected requirement; the same ordering `ARCH-RLO-004` recorded.
