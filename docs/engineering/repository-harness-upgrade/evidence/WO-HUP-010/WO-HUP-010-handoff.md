@@ -194,3 +194,17 @@ qualification rehearsals, candidate source and package evidence, and the
 integration-package build, verify and retain lanes pass. `VER-ECP-009`
 scenario 6 is read at the completion transition: the managed lane must
 stay green there.
+
+## VER-ECP-009 scenario 6, read at the completion transition
+
+At `fc8ce6e`, the commit that marked this work order `implemented`, the
+managed Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33248841550/job/99090880132) passed: the 0.10.0 root's
+step ran `check --checkpoint scope --from-git` over the pull request's diff,
+read it inside the declared scope, and reported the declared
+`Harness-Restitution` `fa6c3b94…` as bound at handoff and not recomputed
+after completion. Every completion transition since #253 had turned that
+lane red under the 0.9.0 root (issue #255); this is the first that did not,
+and the observation `REL-SEH-021`'s window named. The remaining lanes at
+`fc8ce6e` were still running when this was recorded; their verdicts are
+those of the same candidate source and are read by the assurance owner on
+the pull request.
