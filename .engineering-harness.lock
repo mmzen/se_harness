@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.8.0-py3-none-any.whl",
-    "archive_sha256": "e08aab8a96c156f9e5edf99b9a28aad96c7cffe5b18c262a2598a6b6873fadeb",
+    "archive_name": "se_harness-0.9.0-py3-none-any.whl",
+    "archive_sha256": "c4b5617585a3cb908a3b3c14b97e1039824ca731b8acce0251888d095927f364",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "ea75cc53a518cfe0f027336f1a9aabfa301175a00410091f6c2f4b50ccd92eb5",
-    "version": "0.8.0"
+    "payload_sha256": "e74ad2ae73d7298ebf2ae5125f84068c5f011d96d7c6bb75a105ff45895348f7",
+    "version": "0.9.0"
   },
   "files": {
     ".agents/skills/harness-draft-change/SKILL.md": {
@@ -97,7 +97,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "4ca842432d783e3a4119a10824228efe5342dc5c0e047e99b0bd8ca2f70332a5"
+      "sha256": "50749b3119a64d1dd16a2b8bac930c09efd821ec706406e53d00a79497145e5c"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -109,7 +109,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "db18e32ed5a8b74ece4e4b317b5f0950da91e365a365048d12eb9f3a4fc330d9"
+      "sha256": "3d3dd02dec3c4666ac622bdf579c3e8b8239c35ad4a0392316f3464fc76acc98"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -125,7 +125,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "2b4a0e41e995de5c8956e524db748c5f3f9a5cb99acfc02ea561a2d9e88ea0e2"
+      "sha256": "e5954135a8d416ea5d48995e66e63c5d4906e28d15258c4ae53d7e00af017cd2"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
@@ -161,11 +161,11 @@
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
-      "sha256": "e00970bdc395a6d9994950835295e6600cae77018bef25563b7b675bd9d407a1"
+      "sha256": "d7eea3a5a67b59d81d65357fa973b91d453f7a38230021f6391374d39643a90f"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "a83e06f4be9a37eaf6ca75b5550187b4afdaee6f8a39aa83880198439cde7da1"
+      "sha256": "968945aa5677622cd4653e355a415a6b7eb4d531b5b9eeb519baed517d2930a3"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -255,5 +255,5 @@
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.8.0"
+  "tool_version": "0.9.0"
 }
