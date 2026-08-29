@@ -2,13 +2,20 @@
 id = "VER-ECP-008"
 type = "verification"
 title = "Independent evidence for host-independent evaluator paths and the check reference"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-019"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T07:45:09Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'i approve the artifact packet', for the repair of issue #254: render the evaluator's own artifact path as POSIX before the domain resolver's text guard, prove it with PureWindowsPath tests on the Linux lane, and add the plain-English reference for harnessctl check. Measured before this transition over branch state 88d1a1f carrying unmoved main aa99773: validate PASS at 0 errors under the governing 0.9.0 root; start preflight reads only the draft signature. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for host-independent evaluator paths and the check reference

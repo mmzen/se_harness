@@ -2,7 +2,7 @@
 id = "WO-ECP-012"
 type = "work_order"
 title = "Resolve evaluator-derived paths on every host, and document the check command"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -30,6 +30,13 @@ paths = [
 implements = ["REQ-ECP-019"]
 specifications = ["SPEC-ECP-008"]
 verification = ["VER-ECP-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T07:45:12Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'i approve the artifact packet, you can start WO-ECP-012', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the two product modules, the three test modules, the check reference and its index and pointer, this domain's index and the evidence packet. It authorizes no change to a managed or hash-locked file, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Resolve evaluator-derived paths on every host, and document the check command

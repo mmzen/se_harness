@@ -2,7 +2,7 @@
 id = "REQ-ECP-019"
 type = "requirement"
 title = "Evaluator-derived artifact paths resolve on every host"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "issue #254; WO-HUP-009 evidence, measured 2026-08-29 on Windows 11 wit
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T07:45:09Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'i approve the artifact packet', for the repair of issue #254: render the evaluator's own artifact path as POSIX before the domain resolver's text guard, prove it with PureWindowsPath tests on the Linux lane, and add the plain-English reference for harnessctl check. Measured before this transition over branch state 88d1a1f carrying unmoved main aa99773: validate PASS at 0 errors under the governing 0.9.0 root; start preflight reads only the draft signature. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Requirement: Evaluator-derived artifact paths resolve on every host
