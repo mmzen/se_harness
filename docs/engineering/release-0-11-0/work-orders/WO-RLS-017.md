@@ -2,7 +2,7 @@
 id = "WO-RLS-017"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.11.0 candidate from main"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -20,6 +20,13 @@ implements = ["REQ-DST-006"]
 specifications = ["SPEC-DST-001"]
 architecture = ["ARCH-DST-001", "ADR-DST-001"]
 verification = ["VER-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T14:25:24Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29, 'Approve REL-SEH-022 and WO-RLS-017, start', after the release owner approved REL-SEH-022 seconds earlier as a distinct decision. Authorizes start preflight and then only the declared scope: the candidate's qualification readings, the recipe-bound build of record through the pinned producer, this work order's evidence packet, the domain and repository indexes and the release note. It authorizes no change to any packaged byte, managed file or template, no verification record, no release record, no tag, no publication. Start preflight has not been run."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.11.0 candidate from main

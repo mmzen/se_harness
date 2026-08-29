@@ -2,7 +2,7 @@
 id = "REL-SEH-022"
 type = "release_contract"
 title = "Release se-harness 0.11.0: the 0.10.0 root adopted, one projection command, records admitted by construction, and Phase 4 reduced to its guarantee"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ gates = ["WO-ECP-006", "WO-ECP-015", "WO-ECP-016", "WO-ECP-017", "WO-HUP-010", "
 [release_unit]
 previous_release_tag = "v0.10.0"
 untraced_exemptions = ["47f67de2d4c41b5da0cd8df1b3a5be459de74061"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T14:25:20Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-29, 'Approve REL-SEH-022 and WO-RLS-017, start', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this approval over main at 8db0b96: the five implemented, verified, unreleased work orders are exactly WO-HUP-010, WO-ECP-015, WO-ECP-016, WO-ECP-017 and WO-ECP-006, and no work order reached implemented since the packet was drafted. This approval authorizes WO-RLS-017 to be approved and started as separate acts; it authorizes no candidate, build, record, tag, publication or deployment."
 +++
 
 # Release contract: se-harness 0.11.0
