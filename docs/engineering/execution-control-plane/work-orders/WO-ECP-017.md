@@ -2,7 +2,7 @@
 id = "WO-ECP-017"
 type = "work_order"
 title = "Remove the focus alias and move harness-orient to check"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-08-29T12:27:28Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-017'. Start preflight PASS with no diagnostics over the approval commit 59e130e carrying unmoved main 01f648f, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T12:47:25Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29, 'Mark WO-ECP-017 implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at cedbd5f on wo/ecp-017-remove-focus-alias off main 01f648f; the handoff check completed at its fixed point 089a2f31b464fba1efa53642bb3882c2c2729aa70d435785c94f3646cdd62509 under the released 0.10.0 evaluator on this Windows checkout, every predicate of QG-G4-IMPLEMENTATION-EVIDENCE passing; all thirteen lanes of pull request #266 pass at this head. ECP-RMV-001 to ECP-RMV-007 are implemented with the three deviations the packet records: the focus_schema2 wrapper keeps its name for its Phase 4 caller, the orientation core probes check --help for an optional --checkpoint beyond the rule's text, and the scope amendment adding tests/test_agent_contract.py. This completion closes the ECP-ONE-007 deferral recorded on WO-ECP-015. It authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Remove the focus alias and move harness-orient to check
