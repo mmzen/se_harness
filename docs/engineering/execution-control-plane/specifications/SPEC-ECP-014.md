@@ -32,7 +32,8 @@ changes; the template `WORKFLOW.md` names the folded command.
 - **Projection:** `check` without `--checkpoint`, as `ECP-ONE-001` defines it.
 - **Context:** the object `ECP-NXT-002` defines: `reading_manifest`,
   `governing`, `declared_paths`, `state`, `next`, `decision_required`.
-- **Alias window:** the one release that ships with the deprecation notice.
+- **Alias window:** the one release that was to ship the deprecation
+  notice; closed before opening by `WO-ECP-020`.
 
 ## Behavioral rules
 
@@ -49,11 +50,13 @@ With a checkpoint `--artifact` remains required.
 canonical block with the `Context` section rendered after `Command or
 response` (`ECP-NXT-007`); the human block renders that section.
 
-**ECP-CTX-004:** `harnessctl next` remains for the alias window: it returns
-bytes identical to the projection for the same arguments, the same
-`operation.kind` and the same `result_sha256`, and prints one line on
-standard error naming `harnessctl check` as the replacement; `next_step` in
-`workflow.py` is deleted and the alias calls the projection.
+**ECP-CTX-004:** `harnessctl` has no `next` subcommand: the parser does
+not register it, `--help` does not list it, `_next` and its notice are
+deleted, and a pre-parse guard makes `harnessctl next` exit with status 2,
+empty standard output and one line on standard error naming `harnessctl
+check [--artifact ID]` as the replacement; `next_step` in `workflow.py` is
+deleted. (Amended under `WO-ECP-020`; the rule first kept `next` as a
+byte-identical alias for one release.)
 
 **ECP-CTX-005:** Every corrective the product emits that named `harnessctl
 next` names `harnessctl check` with the same arguments: the `WEX210`
@@ -72,8 +75,8 @@ are unchanged.
 **ECP-CTX-007:** The template `WORKFLOW.md` names `harnessctl check .
 --artifact WO-...` where it named `next` (step 5 and the corrective-form
 paragraph); `WORKFLOW.json` is unchanged. `docs/notes/harnessctl-reference.md`
-folds the `next` synopsis into `check` and drops the `accept-candidate`
-row and section; `harnessctl-check.md` says that `check` selects the default
+folds the `next` synopsis into `check` and drops the `next` row, the
+`accept-candidate` row and section; `harnessctl-check.md` says that `check` selects the default
 artifact and carries the context and that `next` is an alias for one
 release; `release-qualification-roles.md` says the alias is gone.
 
@@ -91,7 +94,7 @@ edited.
 ## Failure behaviour
 
 Nothing new fails. A script on `accept-candidate` fails loudly at the guard;
-a script on `next` keeps working through the window and reads the notice.
+a script on `next` fails loudly at its guard the same way.
 
 ## Compatibility and migration
 
@@ -99,6 +102,18 @@ Consumer-visible: the projection's `result_sha256` changes for every
 artifact because the block gains a section; no stored record binds a
 projection digest (handoff and checkpoint results are unaffected).
 `harnessctl check` with an explicit `--artifact` accepts every argument it
-accepted. The `next` alias is removed by a later work order after the
-window, as `WO-ECP-017` removed `focus`. The candidate-evidence workflow's
+accepted. The `next` alias is removed in the same release by `WO-ECP-020`;
+no release ships it. The candidate-evidence workflow's
 legacy branch stays as `SPEC-REB-012` rule 6 states it.
+
+## Amendment record
+
+**`ECP-CTX-004` is the refusal, not the alias, proposed 2026-08-29 under
+`WO-ECP-020`.** The rule kept `next` for one release as a byte-identical
+alias with a notice; the owner's decision of 2026-08-29 removes it before
+the release after 0.11.0 is built (see the record on `REQ-ECP-025`). The
+rule is restated in place as the guard, mirroring `ECP-RMV-002` for
+`focus` and `ECP-CTX-006` for `accept-candidate`; `ECP-CTX-007` drops the
+reference's `next` row with the synopsis, the term "alias window" and the
+failure and compatibility paragraphs read accordingly. Nothing else in
+this specification changes.

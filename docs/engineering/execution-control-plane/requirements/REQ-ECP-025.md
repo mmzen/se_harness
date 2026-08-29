@@ -92,3 +92,16 @@ names `harnessctl qualify candidate-package`.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The `next` alias is removed before it ships, proposed 2026-08-29 under
+`WO-ECP-020`.** The statement keeps `next` "as a one-release alias that
+announces its removal"; the owner decided on 2026-08-29 ("we remove next
+now") that no release ships the alias: the managed `WORKFLOW.md` and the
+evaluator always travel together, so no root instruction names `next`
+against an evaluator that lacks it, and the alias would only have served
+consumer-owned content. The required response is read as: `harnessctl
+next` is not a subcommand and is refused with a message naming
+`harnessctl check`. The failure example for a script on `accept-candidate`
+applies equally to one on `next`. Nothing else in this requirement changes.

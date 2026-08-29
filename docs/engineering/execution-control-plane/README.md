@@ -42,7 +42,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `REQ-ECP-022`: one read-only evaluator command projects and checks a selected artifact (fold `focus` into `check`; drafted 2026-08-29 with `SPEC-ECP-011`, `VER-ECP-011`, `ADR-ECP-007`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-015`).
 - `REQ-ECP-023`: the change set admits the selected work order's own verification and release records by construction (issue #264; drafted 2026-08-29 with `SPEC-ECP-012`, `VER-ECP-012`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-016`).
 - `REQ-ECP-024`: the projection has exactly one command name — the `focus` alias is removed and `harness-orient` moves to `check` (audit P1; drafted 2026-08-29 with `SPEC-ECP-013`, `VER-ECP-013`, and `WO-ECP-017`).
-- `REQ-ECP-025`: the execution context is the `check` projection and no closed alias stays on the command list: `next` folds into `check` behind a one-release alias, `accept-candidate` is retired (audit P2 and P3; drafted 2026-08-29 with `SPEC-ECP-014`, `VER-ECP-016`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-019`).
+- `REQ-ECP-025`: the execution context is the `check` projection and no closed alias stays on the command list: `next` folds into `check` behind a one-release alias, `accept-candidate` is retired (audit P2 and P3; drafted 2026-08-29 with `SPEC-ECP-014`, `VER-ECP-016`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-019`). Amended 2026-08-29 under `WO-ECP-020`: the `next` alias is removed before it ships.
 - `SPEC-ECP-001`: the next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest.
 - `SPEC-ECP-002`: evidence packets, identifier allocation, and pull-request body generation.
 - `SPEC-ECP-003`: the mandatory scope-aware pull-request gate and digest coverage.
@@ -96,6 +96,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-017` after `WO-ECP-015` (merged); removal of the `focus` alias and the deferred `ECP-ONE-007` under `REQ-ECP-024` / `SPEC-ECP-013` / `VER-ECP-013`, drafted 2026-08-29 from the command audit's P1.
 - `WO-ECP-018` after `WO-ECP-006` (merged); the delegation class under `REQ-ECP-011` / `SPEC-ECP-006` (`ECP-DLG-001` to `-007`, `-009`) / new `VER-ECP-015` (the class subset of `VER-ECP-006`), drafted 2026-08-29; the shared journaled write path (`REQ-ECP-017`) follows.
 - `WO-ECP-019` after `WO-ECP-017` (merged); the context fold, the `next` alias window and the `accept-candidate` retirement under `REQ-ECP-025` / `SPEC-ECP-014` / `VER-ECP-016`, drafted 2026-08-29 from the command audit's P2 and P3.
+- `WO-ECP-020` after `WO-ECP-019` (stacked on its branch); removal of the `next` alias before the release, by amendment records on `REQ-ECP-025` / `SPEC-ECP-014` / `VER-ECP-016`, drafted 2026-08-29 on the owner's decision.
 - `WO-ECP-008` after `WO-ECP-001`; its skill-retirement item moved to `WO-ECP-006` on 2026-08-29.
 
 This index authorizes no implementation, lifecycle transition, Git action,
