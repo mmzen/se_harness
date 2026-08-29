@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 10 declared changed path(s) are within execution scope.",
+            "message": "All 11 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -258,11 +258,12 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "6149bb78a742968b834942d2fdcdc93ff274cfd1a11359fc1aec3db24ee7080c",
+  "result_sha256": "b8546bcb1631b959d9093bfe5cd263f2f12be74b9b9521e2dd00be188b1c0c43",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-016/handoff.json",
       "docs/engineering/execution-control-plane/evidence/WO-ECP-016/WO-ECP-016-handoff.md",
       "docs/engineering/execution-control-plane/README.md",
       "docs/engineering/execution-control-plane/requirements/REQ-ECP-023.md",
