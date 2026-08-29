@@ -139,3 +139,15 @@ docs/engineering/release-0-10-0/README.md
 docs/engineering/release-0-10-0/release/REL-SEH-021.md
 docs/engineering/release-0-10-0/work-orders/WO-RLS-016.md
 ```
+
+## 7. Hosted lanes
+
+Pull request #260 at `4d16419`: every lane passes (13 pass). The managed
+Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33246651101/job/99085168635) ran the 0.9.0 root's handoff-only step, which
+completed inside the declared scope with the declared `Harness-Restitution`
+`0d2ef59a…` equal to the recomputed `result_sha256`; the Governor Transition
+Assessment (https://github.com/mmzen/se_harness/actions/runs/33246651087/job/99085168695), both candidate-evidence lanes, both migration legs (the real
+upgrade rehearsal 0.9.0 to 0.10.0 on Linux and Windows), both qualification
+rehearsals and the integration-package build, verify (Linux, Windows) and
+retain lanes pass. From the completion transition on, the managed lane is
+expected red by issue #255 on the 0.9.0 root.
