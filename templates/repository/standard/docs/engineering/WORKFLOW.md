@@ -124,9 +124,9 @@ Conformance tests MUST fail on such a difference.
    owner MAY then approve one bounded work order after
    `QG-G3-WORK-AUTHORIZATION` passes.
 5. Before implementation, the implementation actor MUST run
-   `harnessctl next . --artifact WO-...` (or `harnessctl check` and
-   `harnessctl preflight . --work-order WO-... --phase start`, which it
-   composes), read every file in the reading manifest, and receive an
+   `harnessctl check . --artifact WO-...` (which composes
+   `harnessctl preflight . --work-order WO-... --phase start` into its
+   reading manifest), read every file in that manifest, and receive an
    explicit start decision.
 6. The implementation actor MUST change only the authorized scope, retain
    work-order-keyed evidence, and run
@@ -209,7 +209,7 @@ failing predicate under `Next` and `Command or response`. A contract whose
 corrective form repeats the evaluated command fails to load with `WEX-ADS-001`.
 The completeness corrective names `harnessctl check ... --from-git <base>`,
 which derives the change set from Git; an operation that could not select or
-act names `harnessctl next . --artifact <ID>` as the retry, never the
+act names `harnessctl check . --artifact <ID>` as the retry, never the
 evaluated command.
 
 ## Transition procedure

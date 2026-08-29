@@ -1156,9 +1156,9 @@ def remediation_result(
         "decision_required": None,
         "next": {"procedure_id": procedure_id, "step_id": step_id, "action": "remediate"},
         "command_or_response": (
-            {"kind": "command", "argv": ["harnessctl", "next", ".", "--artifact", primary]}
+            {"kind": "command", "argv": ["harnessctl", "check", ".", "--artifact", primary]}
             if primary
-            else {"kind": "response", "value": "Resolve the reported blocker, then run harnessctl next . to obtain the selected context."}
+            else {"kind": "response", "value": "Resolve the reported blocker, then run harnessctl check . to obtain the selected context."}
         ),
         "alternatives": [],
     }

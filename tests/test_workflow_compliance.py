@@ -379,7 +379,7 @@ class GitDerivedChangeSetTests(WorkflowComplianceTests):
         self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-003"))
         self.assertIn("no-such-ref", result["restitution"]["blocked_by"][0])
         self.assertEqual(
-            ["harnessctl", "next", ".", "--artifact", "WO-001"],
+            ["harnessctl", "check", ".", "--artifact", "WO-001"],
             result["restitution"]["command_or_response"]["argv"],
         )
         for gate in result["compliance"]["gates"]:

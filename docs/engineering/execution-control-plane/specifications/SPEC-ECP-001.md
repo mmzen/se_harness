@@ -290,3 +290,21 @@ the selected work order, and each record's `evaluator_evidence_path`; the
 records directories themselves stay outside the scope, and
 `scope.declared_paths` is unchanged. Nothing else in this specification
 changes.
+
+## Amendment record
+
+**`ECP-NXT-001`, `ECP-NXT-004`, `ECP-NXT-007` and `ECP-NXT-008` are read
+against `check`, proposed 2026-08-29 under `WO-ECP-019` (`SPEC-ECP-014`).**
+The `next` command these rules describe is, since `SPEC-ECP-011`, the
+checkpoint-less `check` projection plus the `context` object and a default
+artifact. `SPEC-ECP-014` moves both onto the projection (`ECP-CTX-001` to
+`ECP-CTX-003`) and keeps `next` as a byte-identical alias for one release
+(`ECP-CTX-004`), so: `ECP-NXT-001`'s `operation.kind` is `check` under
+either name and the `WEX-ECP-001` selection applies to `check` without
+`--artifact`; `ECP-NXT-004`'s byte identity is exact, the two names
+returning the same block and the same `result_sha256`; `ECP-NXT-007`'s
+`Context` section is part of every projection block; and `ECP-NXT-008`'s
+`WEX210` corrective names `harnessctl check . --artifact {artifact_id}`
+(`ECP-CTX-005`). `ECP-NXT-002`, `ECP-NXT-003`, `ECP-NXT-005` and
+`ECP-NXT-006` define the context and hold unchanged on the projection.
+Nothing else in this specification changes.

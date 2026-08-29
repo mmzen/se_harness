@@ -28,10 +28,10 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
-| `next` | coding agent, first call on a work order | read-only | return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result |
+| `next` | scripts written before 0.12.0 | read-only | deprecated alias of `check` without a checkpoint, byte-identical, with a removal notice on standard error; removed after the release carrying the notice |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
-| `check` | human or agent | read-only | without a checkpoint, project one selected WO, VREC, or RLS scope and its next step; with one, evaluate that checkpoint's gates; emit the authoritative schema-2 result |
+| `check` | coding agent, first call on a work order; the managed gate | read-only | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
@@ -42,7 +42,6 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of five fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
-| `accept-candidate` | released evaluator CI | writes one derived canonical evidence manifest outside the checkout | run the verifier-owned black-box contract against an exact installed candidate wheel |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
 
@@ -100,11 +99,10 @@ selected for the artifact's exact type, state, and direct related records. Do
 not derive a new transition or next action from this reference.
 
 ```text
-harnessctl next [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json]
 harnessctl evidence [TARGET] --artifact WO-... --checkpoint start|pre-action|transition|handoff \
   [--rebound-at RFC3339] [--json]
 harnessctl pr-body [TARGET] --artifact WO-...
-harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... [--json] [--include-background]
+harnessctl check [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json] [--include-background]  # without a checkpoint: the projection
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \  # with a checkpoint:
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
@@ -114,17 +112,16 @@ harnessctl transition [TARGET] --set ID=STATUS --decision ID=ACTOR \
   [--apply] [--json]
 ```
 
-`next` is the one call an agent makes first (`WO-ECP-001`). It returns the
-checkpoint-less `check` projection of the selected artifact — the single `in_progress` work
-order when `--artifact` is absent, otherwise `WEX-ECP-001` names the candidate
-count — with the operation kind `next` and an additive `context` object:
-`reading_manifest` (the preflight manifest for the phase the state implies,
-`start` for `approved` and `in_progress`, `review` afterwards), `governing`,
-`declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the
-same step `check` selects) and `decision_required`. It writes
-nothing and needs no prior command. The human block renders the context as a
-`Context` section after `Command or response`, so its `result_sha256` differs
-from the projection's for the same artifact.
+`check` without `--checkpoint` is the one call an agent makes first (`WO-ECP-001`,
+folded from `next` by `WO-ECP-019`). It returns the projection of the selected artifact — the single
+`in_progress` work order when `--artifact` is absent, otherwise `WEX-ECP-001` names the candidate
+count — with an additive `context` object: `reading_manifest` (the preflight manifest for the
+phase the state implies, `start` for `approved` and `in_progress`, `review` afterwards),
+`governing`, `declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the same step a
+checkpoint `check` selects) and `decision_required`. It writes nothing and needs no prior command.
+The human block renders the context as a `Context` section after `Command or response`, and
+`result_sha256` binds it. `harnessctl next` is the same operation under its former name for one
+release: identical bytes, identical digest, plus one removal notice on standard error.
 
 `check` without `--checkpoint` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in
@@ -342,22 +339,13 @@ The four subcommands are separate closed parsers. They bind evaluator identity, 
 
 All operations emit `se-harness-release-qualification-v1`. The result identifies the operation, completion, outcome, evaluator, target, ordered checks, independence boundary, and its evidence-only authority. `complete-candidate` is always `candidate-controlled`, even when it passes. See [release qualification roles](release-qualification-roles.md) for the workflow map. `WO-REB-028` retired a fifth operation, `predecessor-view`, with the predecessor-bootstrap release path; its `PV001` and `PV002` codes stay reserved and no code path emits them.
 
-## Candidate acceptance
-
-```text
-harnessctl accept-candidate \
-  --wheel PATH \
-  --candidate-commit FULL_COMMIT \
-  --candidate-wheel-sha256 SHA256 \
-  --verifier-wheel-sha256 SHA256 \
-  --output PATH \
-  [--checkout-root PATH]
-```
-
-In a newly built version, `accept-candidate` is a one-cycle compatibility alias for `qualify candidate-package` and emits the typed qualification result. Exact public 0.6.0 predates the `qualify` namespace; its immutable command still emits `se-harness-functional-acceptance-v1` and is accepted only as explicitly labeled bootstrap evidence in the initial candidate workflow. That historical output is not converted into or described as canonical qualification evidence.
-
-The verifier checks the caller-selected candidate digest, snapshots those exact wheel bytes, creates a fresh environment, installs the snapshot, runs the published black-box scenario set, and rejects checkout import fallback and authority substitution. Its output is evidence for human assurance review, never a VREC transition.
-
+The pre-namespace `accept-candidate` entry point, kept as a one-cycle alias of `qualify
+candidate-package` under `REQ-REB-022`, was removed after 0.11.0 (`WO-ECP-019`); invoking it exits
+with status 2 and names the typed operation. Exact public 0.6.0 predates the `qualify` namespace;
+its immutable command still emits `se-harness-functional-acceptance-v1` and is accepted only as
+explicitly labeled bootstrap evidence in the candidate workflow's legacy branch, which runs only a
+verifier without `qualify`. That historical output is not converted into or described as canonical
+qualification evidence.
 
 Repeat `--changed-path`, `--delete-path`, `--verification`, `--evidence`, and
 `--residual-uncertainty` where applicable. JSON options name retained input
