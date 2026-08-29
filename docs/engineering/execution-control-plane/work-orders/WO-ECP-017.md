@@ -2,7 +2,7 @@
 id = "WO-ECP-017"
 type = "work_order"
 title = "Remove the focus alias and move harness-orient to check"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -41,6 +41,13 @@ implements = ["REQ-ECP-024", "REQ-ECP-022"]
 specifications = ["SPEC-ECP-013", "SPEC-ECP-011"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-007"]
 verification = ["VER-ECP-013", "VER-ECP-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T12:27:21Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-017', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the focus subcommand's removal and guard, the projection under one name, the template harness-orient core on check, the phase-5 vector fixture, the alias tests and fixture, the notes, this repository's AGENTS.md owner region, this domain's index, its verification-records directory and the evidence packet. It authorizes no change to a hash-locked root file, no skill contract, no profile, no contract file, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Remove the focus alias and move harness-orient to check

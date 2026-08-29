@@ -2,7 +2,7 @@
 id = "REQ-ECP-024"
 type = "requirement"
 title = "The projection has exactly one command name"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "harnessctl command audit of 2026-08-29 (P1); ECP-ONE-007 deferred at W
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T12:27:21Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-29 with the words 'Approve and start WO-ECP-017': the projection has exactly one command name once the alias window of REQ-ECP-022 closes."
 +++
 
 # Requirement: The projection has exactly one command name

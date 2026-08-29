@@ -2,13 +2,20 @@
 id = "SPEC-ECP-013"
 type = "specification"
 title = "Removal of the focus alias and the orientation skill's move to check"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 specifies = ["REQ-ECP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T12:27:21Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-29 with the words 'Approve and start WO-ECP-017': ECP-RMV-001 to ECP-RMV-007; the focus-json operation identifier stays as contract vocabulary and history is kept by a phase-5 vector row, never by editing a retained fixture."
 +++
 
 # Specification: Removal of the focus alias and the orientation skill's move to check

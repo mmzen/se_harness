@@ -2,13 +2,20 @@
 id = "VER-ECP-013"
 type = "verification"
 title = "Independent evidence for the removal of the focus alias"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T12:27:21Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-29 with the words 'Approve and start WO-ECP-017': refusal, orientation, vector-history and word-census scenarios; the hosted orientation of this repository stays on the 0.10.0 root copy until the next root adoption."
 +++
 
 # Verification Contract: Independent evidence for the removal of the focus alias
