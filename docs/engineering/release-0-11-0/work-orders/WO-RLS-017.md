@@ -2,7 +2,7 @@
 id = "WO-RLS-017"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.11.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-29T14:25:29Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve REL-SEH-022 and WO-RLS-017, start'. Start preflight PASS with no diagnostics over the approval commit e2a52f6 carrying unmoved main 8db0b96, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release record, no tag and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T15:56:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-RLS-017 implemented', on the handoff check reading Completed over the Git-derived change set at 579a1bb, fixed-point result 7fccd07efdcf1d8eb57fd7ac0d1d6d060f75211849cba184382e72ffd7972e8d, run by the released 0.10.0 evaluator on this Windows checkout. The candidate is c016fbb39e30c0de02604a7242a231151a5df633 with the packaged bytes of main 8db0b96: validate 1144 artifacts 0 errors, doctor 0 FAIL, review preflight PASS, distributions and portable surface PASS in all three modes, complete-candidate PASS from the Linux environment, the upgrade rehearsal 0.10.0 to 0.11.0 pass twice with one semantic digest, the Windows full-scale suite at its two baseline names, the census at the candidate exactly as REL-SEH-022 predicts, and the recipe-bound build of record exact with two byte-identical producer runs, its digests held as local readings until the hosted replay agrees. Every workflow at the candidate head and every lane at this head passes. One deviation is accepted: complete-candidate read from Linux for the RID018 boundary reason. This authorizes no verification record, no release record, no tag and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.11.0 candidate from main
