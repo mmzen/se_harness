@@ -113,3 +113,20 @@ docs/notes/harnessctl-check.md
 se_harness/workflow_compliance.py
 tests/test_workflow_compliance.py
 ```
+
+## Hosted lanes
+
+Pull request #259. At `e932993`, the head the completion decision was
+taken on while its lanes were still running: the managed Engineering
+Harness workflow (the 0.9.0 root's old handoff-only step) completed
+`success` with the declared `Harness-Restitution` `9ab56eda…` equal to the
+recomputed digest, and the Governor Transition Assessment `success`; the
+SE Harness Candidate Evidence and Publication Rehearsal workflows were
+cancelled by the push of `6185a06` under the repository's
+cancel-in-progress policy before they finished. At `6185a06` (the
+completion transition, same candidate source): Candidate Evidence and
+Publication Rehearsal `success`, Governor Transition Assessment `success`,
+and the managed workflow `failure` with `WEX210: gate
+QG-G4-CANDIDATE-READY does not apply at checkpoint handoff` — issue #255 on
+the 0.9.0 root, the condition `WO-ECP-013` removes for the next release.
+Twelve of thirteen lanes pass at `6185a06`.
