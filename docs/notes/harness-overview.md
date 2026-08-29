@@ -86,7 +86,7 @@ renderer is deterministic for terminals and exact-format consumers. A coding
 agent may explain the same result in clearer language, but it must preserve the
 artifact identities, observed effects, important non-effects, blockers,
 lifecycle state, accountable decision, and one recommended next action.
-`focus` projects the selected chain. `inspect` remains a separately labeled
+`check` without a checkpoint projects the selected chain. `inspect` remains a separately labeled
 repository-wide maintenance view whose unrelated findings are not selected
 work; inspection summarizes current attention. `harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard` remain derived observations. None of these commands approves work.
 

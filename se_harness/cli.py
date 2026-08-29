@@ -347,7 +347,45 @@ def _next(args: argparse.Namespace) -> int:
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
+FOCUS_DEPRECATION = (
+    "harnessctl focus is deprecated and will be removed after the next release; "
+    "use harnessctl check --artifact ID without --checkpoint for the same projection."
+)
+
+
+def _check_projection(args: argparse.Namespace) -> int:
+    """`check` without a checkpoint: the projection, no gate, no write (ECP-ONE-001 to -003)."""
+
+    for option, value in (
+        ("--target", args.target_state),
+        ("--procedure", args.procedure),
+        ("--changed-path", args.changed_path),
+        ("--changes-complete", args.changes_complete),
+        ("--change-manifest", args.change_manifest),
+        ("--from-git", args.from_git),
+        ("--pull-request-body", args.pull_request_body),
+    ):
+        if value:
+            raise HarnessError(f"WEX210: {option} requires --checkpoint")
+    try:
+        result = focus(
+            Path(args.target),
+            args.artifact,
+            include_background=args.include_background,
+            operation="check",
+        )
+    except HarnessError as exc:
+        message = str(exc)
+        if not message.startswith("WEX"):
+            message = f"WEX210: {message}"
+        result = failed_result("check", args.artifact, message, code="WEX210", repository_blocker=isinstance(exc, RepositoryWorkflowError))
+    print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
 def _check(args: argparse.Namespace) -> int:
+    if args.checkpoint is None:
+        return _check_projection(args)
     if args.change_manifest and (args.changed_path or args.changes_complete):
         raise HarnessError(
             "WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete"
@@ -484,6 +522,8 @@ def _prepare_release(args: argparse.Namespace) -> int:
 
 
 def _focus(args: argparse.Namespace) -> int:
+    # ECP-ONE-004: a one-release alias; stdout and --json bytes are unchanged.
+    print(FOCUS_DEPRECATION, file=sys.stderr)
     try:
         result = focus(
             Path(args.target),
@@ -1010,7 +1050,9 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.add_argument("--json", action="store_true")
     preflight.set_defaults(handler=_preflight)
 
-    selected_focus = commands.add_parser("focus", help="project one selected WO, VREC, or RLS workflow scope")
+    selected_focus = commands.add_parser(
+        "focus", help="deprecated alias of `check` without --checkpoint; removed after the next release"
+    )
     selected_focus.add_argument("target", nargs="?", default=".")
     selected_focus.add_argument("--artifact", required=True)
     selected_focus.add_argument("--json", action="store_true")
@@ -1025,12 +1067,19 @@ def build_parser() -> argparse.ArgumentParser:
     selected_next.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     selected_next.set_defaults(handler=_next)
 
-    check = commands.add_parser("check", help="evaluate one selected workflow checkpoint and emit canonical restitution")
+    check = commands.add_parser(
+        "check",
+        help="project one selected WO, VREC, or RLS scope, or evaluate one of its checkpoints, and emit canonical restitution",
+    )
     check.add_argument("target", nargs="?", default=".")
     check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
     check.add_argument(
-        "--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff", "scope"),
-        help="fixed stateless evaluation checkpoint",
+        "--checkpoint", choices=("start", "pre-action", "transition", "handoff", "scope"),
+        help="fixed stateless evaluation checkpoint; omitted, check projects the selected scope and evaluates no gate",
+    )
+    check.add_argument(
+        "--include-background", action="store_true",
+        help="with no checkpoint, list unrelated findings by category instead of one count",
     )
     check.add_argument(
         "--target", dest="target_state",

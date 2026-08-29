@@ -215,7 +215,19 @@ def _diagnostic(item: Any) -> dict[str, str]:
     }
 
 
-def focus(repository: Path, artifact_id: str, *, include_background: bool = False) -> dict[str, Any]:
+def focus(
+    repository: Path,
+    artifact_id: str,
+    *,
+    include_background: bool = False,
+    operation: str = "focus",
+) -> dict[str, Any]:
+    """Project the selected artifact's rule, procedure and next step; evaluate no gate.
+
+    `check` without a checkpoint is this projection with `operation` "check"
+    (SPEC-ECP-011, ECP-ONE-001/-002); `focus` is its one-release alias.
+    """
+
     root = ensure_target(repository, must_exist=True)
     _, report = _validation(root)
     catalog = _catalog(report)
@@ -223,7 +235,7 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
-        raise HarnessError("focus accepts only WO, VREC, or RLS artifacts")
+        raise HarnessError(f"{operation} accepts only WO, VREC, or RLS artifacts")
     governing, dependencies = project_scope(catalog, primary)
     scope_paths = {
         catalog[item].path.resolve()
@@ -263,7 +275,7 @@ def focus(repository: Path, artifact_id: str, *, include_background: bool = Fals
     blockers = [*repository, *scoped]
     return selected_result(
         root,
-        operation="focus",
+        operation=operation,
         primary=primary,
         related=[catalog[item] for item in dependencies if item in catalog],
         governing=governing,

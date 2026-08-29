@@ -19,6 +19,7 @@ every respect but one: a completed handoff check derived from Git retains its
 own result as `handoff.json` in the work order's evidence directory.
 
 ```text
+harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... [--include-background] [--json]
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \
   [--procedure PROC-...] [--from-git BASE | --changed-path PATH ... \
@@ -32,6 +33,10 @@ What it does **not** do:
 - it approves, verifies, releases, commits, pushes, or publishes nothing;
 - it does not pick the artifact for you; `harnessctl next` does that, and
   `check` needs `--artifact`;
+- without `--checkpoint` it evaluates nothing: it *projects* the selected
+  rule, procedure and next step (what `harnessctl focus` returned before
+  se-harness 0.11.0; `focus` remains one release as a byte-identical alias
+  that prints a deprecation notice);
 - it does not decide; it names the decision that is due and who owns it.
 
 ## The five checkpoints
@@ -46,6 +51,7 @@ one needs different inputs and evaluates different gates.
 | `transition` | to preview exactly what `transition --set ID=STATE` will evaluate | `--target STATE` | the predicates bound to that artifact family and target state in `QUALITY_GATES.json`, plus the structural `QGS-*` checks |
 | `handoff` | when an `in_progress` work order's implementation is offered for completion | a change set (see below) | `QG-G4-IMPLEMENTATION-EVIDENCE`: status, graph, integrity, scope, change-set completeness, path scope, review preflight, evidence packet |
 | `scope` | on every pull request, whatever the work order's state; also by hand, to ask "is this diff inside scope?" | a change set (see below) | the three scope predicates of `QG-G4-IMPLEMENTATION-EVIDENCE` only: `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`; nothing is written |
+| *(none)* | to ask "which rule applies and what is next?" without evaluating anything — the procedure steps `STEP-WO-START-FOCUS`, `STEP-FOCUS-SELECTED`, `STEP-FOCUS-RELATED`, `STEP-REMEDIATE-FOCUS` | `--include-background` optionally | no gate; the rule, procedure, current step, decision required and background count |
 
 Each gate declares the checkpoints at which it applies. A rule whose gate is
 not declared for the requested checkpoint is refused with `WEX210: gate
@@ -89,7 +95,7 @@ verification record selects `WFL-WO-READY-VREC`, never `WFL-WO-PREPARE-VREC`.
 "Definition" means an intent, capability, requirement, specification,
 architecture, ADR, verification, release contract, or operating contract.
 `check` itself accepts only a work order, a verification record, or a release
-record (`WEX210` otherwise); `focus` and `next` project the other types.
+record (`WEX210` otherwise); `next` projects the other types.
 
 The procedure is a typed list of steps, each either a `command` (an argument
 array the harness can run) or a `decision` (a decision right and its permitted
@@ -192,7 +198,7 @@ evaluation. Each names its cause.
 
 | Code | Cause |
 | --- | --- |
-| `WEX210` | the checkpoint is not one of the five; `--target` given without `transition`, or `transition` without `--target`; the artifact is not a WO, VREC, or RLS, or is unknown; `scope` on a VREC or RLS; the rule's gate does not apply at this checkpoint; repository integrity fails; the installed machine policy is invalid |
+| `WEX210` | the checkpoint is not one of the five; a checkpoint-specific option (`--target`, `--procedure`, `--changed-path`, `--changes-complete`, `--change-manifest`, `--from-git`, `--pull-request-body`) given without `--checkpoint`; `--target` given without `transition`, or `transition` without `--target`; the artifact is not a WO, VREC, or RLS, or is unknown; `scope` on a VREC or RLS; the rule's gate does not apply at this checkpoint; repository integrity fails; the installed machine policy is invalid |
 | `WEX220` | `pre-action` without `--procedure`; a `--procedure` that the selected rule neither selects nor declares as an alternative; a procedure with no steps |
 | `WEX200` | a changed path, manifest, or pull-request body that is not safe text: absolute, empty, non-normalized, escaping the repository, reserved or dot components, duplicates, an oversized or malformed manifest or body; a work order whose execution scope is empty or invalid |
 | `WEX-ECP-002` | `--from-git` combined with `--changed-path`, `--changes-complete`, or `--change-manifest` |
