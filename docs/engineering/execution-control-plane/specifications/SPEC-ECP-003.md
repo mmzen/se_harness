@@ -143,3 +143,20 @@ replaced by `--from-git`, which `WO-ECP-001` must ship first.
 - The exact log wording beyond the required identifiers.
 - Whether the digest sections render predicate messages; statuses are
   required, messages are not.
+
+## Amendment record
+
+**`ECP-GTE-001`, `ECP-GTE-002` and `ECP-GTE-004` are superseded in their
+checkpoint by `SPEC-ECP-009` (`ECP-SCP-006` to `ECP-SCP-008`), proposed
+2026-08-29 under `WO-ECP-013` (issue #255).** As written, the three rules
+bind the pull-request gate to the `handoff` checkpoint, which exists only
+for an `in_progress` work order: once the pull request carries the
+completion transition the evaluator refuses the check and the required check
+is red until merge, and while the work order is `draft` or `approved` the
+selected rule carries no gate, so nothing is enforced. Measured on pull
+requests #253 and #257. The amendment moves the unconditional evaluation to
+the `scope` checkpoint, keeps the handoff check and the digest comparison
+while the work order is `in_progress`, and reports a declared digest as
+bound at handoff otherwise. `ECP-GTE-003`, `ECP-GTE-005`, `ECP-GTE-006`
+and `ECP-GTE-007` are unchanged. `REQ-ECP-006` and `REQ-ECP-007` are not
+reopened; `ADR-ECP-006` records the decision and its alternatives.
