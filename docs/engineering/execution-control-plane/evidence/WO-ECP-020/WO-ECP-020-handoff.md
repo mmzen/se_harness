@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-ECP-020"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "5e293e81cd67b889ed2cdd0654790351a84d734be0485d472b48c9dd89a27f55"
-rebound_at = "2026-08-29T20:58:10Z"
+formal_snapshot_sha256 = "90ca5cdac65bbdfddce7b38fe04ff9d4adea147fc79562daca4b14c1979872da"
+rebound_at = "2026-08-29T21:32:03Z"
 ```
 
 # WO-ECP-020 handoff evidence
@@ -27,7 +27,10 @@ command was removed after 0.11.0. `REQ-ECP-025`, `SPEC-ECP-014` and
   included.
 - Candidate: this checkout, branch `wo/ecp-020-remove-next` stacked on
   `wo/ecp-019-context-and-aliases` at `WO-ECP-019`'s completion commit
-  `ee1e6af`; the suite and the demonstration run candidate source.
+  `ee1e6af`, then carrying that branch's record `VREC-ECP-023` and, after
+  pull request #277 merged as `70508cd`, `main` itself (merged in at
+  `ed4c6a3` without conflict); the suite and the demonstration run
+  candidate source.
 
 ## Change
 
@@ -87,8 +90,8 @@ None.
 
 ## Complete changed-path set
 
-Every path this work order changed since its base, `WO-ECP-019`'s
-completion commit `ee1e6af`, packet included, as Git derived it; the
+Every path this work order changed since `main` at `70508cd`, packet
+included, as Git derived it; the
 handoff check completed at its fixed point with every predicate of
 `QG-G4-IMPLEMENTATION-EVIDENCE` passing, run by the released 0.11.0
 evaluator on this Windows checkout: see `handoff.json` beside this file.
