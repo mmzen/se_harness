@@ -2,7 +2,7 @@
 id = "WO-ECP-019"
 type = "work_order"
 title = "Fold next into the check projection and retire accept-candidate"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -46,6 +46,13 @@ to = "approved"
 decided_at = "2026-08-29T18:39:39Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-019', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the check parser and projection context, the next alias and its notice, the accept-candidate removal and guard, the correctives, the four test modules, the template WORKFLOW.md, the three notes, the SPEC-ECP-001 amendment record, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file, WORKFLOW.json, any skill, contract file or profile, qualify, the candidate-evidence workflow, any verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T18:40:20Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-019'. Start preflight PASS with no diagnostics over the approval commit 7148b57 carrying unmoved main 970a0ae, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Fold next into the check projection and retire accept-candidate
