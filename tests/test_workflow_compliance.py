@@ -680,3 +680,50 @@ class ScopeCheckpointTests(GitDerivedChangeSetTests):
         with contextlib.redirect_stderr(io.StringIO()) as captured, self.assertRaises(SystemExit):
             build_parser().parse_args(["evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope"])
         self.assertIn("invalid choice: 'scope'", captured.getvalue())
+
+
+class CanonicalSnapshotTests(WorkflowComplianceTests):
+    """REQ-ECP-021 / SPEC-ECP-010 ECP-CSN-001 to -003: the snapshot ignores the checkout's line endings."""
+
+    # The digest of this fixture chain with LF line endings, computed under the
+    # raw-byte rule before WO-ECP-014; the canonical rule must reproduce it.
+    LF_DIGEST = "3ccc996f334394ef9cce7947f51c6780ce5250466ea42912ef040963db107d3f"
+
+    def artifact_paths(self) -> list[Path]:
+        return sorted(path for path in (self.root / "docs/engineering").rglob("*.md") if path.read_bytes().startswith(b"+++"))
+
+    def rewrite(self, newline: bytes) -> None:
+        for path in self.artifact_paths():
+            text = path.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+            path.write_bytes(text.replace(b"\n", newline))
+
+    def digest(self) -> str:
+        from se_harness.workflow import _validation
+
+        _, report = _validation(self.root)
+        return formal_snapshot_digest(self.root, report.artifacts)
+
+    def test_an_lf_tree_keeps_the_digest_fixed_before_the_change(self) -> None:
+        self.rewrite(b"\n")
+        self.assertEqual(0, sum(path.read_bytes().count(b"\r") for path in self.artifact_paths()))
+        self.assertEqual(self.LF_DIGEST, self.digest())
+
+    def test_a_crlf_tree_computes_the_lf_digest_and_content_still_counts(self) -> None:
+        self.rewrite(b"\r\n")
+        self.assertGreater(sum(path.read_bytes().count(b"\r") for path in self.artifact_paths()), 0)
+        self.assertEqual(self.LF_DIGEST, self.digest())
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.write_bytes(work_order.read_bytes().replace(b"WO-001\r\n", b"WO-001 \r\n", 1))
+        self.assertNotEqual(self.LF_DIGEST, self.digest())
+
+    def test_the_packet_bound_on_a_crlf_tree_is_fresh_on_an_lf_tree(self) -> None:
+        # The evidence header written on one line-ending convention matches the
+        # snapshot recomputed on the other.
+        self.rewrite(b"\r\n")
+        code, output, error = self.invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff")
+        self.assertEqual(0, code, error)
+        packet = self.root / "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
+        header = packet.read_bytes().split(b"```", 2)[1]
+        bound = header.split(b'formal_snapshot_sha256 = "', 1)[1][:64].decode("ascii")
+        self.rewrite(b"\n")
+        self.assertEqual(bound, self.digest())

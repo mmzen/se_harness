@@ -128,7 +128,9 @@ The predicate names say what they read:
 - `*-AUTHORING`: the definition meets the authoring policy;
 - `G4I-COMPLETE`, `G4I-PATHS`: the change set is complete and inside scope;
 - `G4I-EVIDENCE`: an evidence packet for this work order and checkpoint is
-  bound to the current formal snapshot;
+  bound to the current formal snapshot, a digest over every formal
+  artifact's line-ending-canonical bytes, so a packet bound on a CRLF
+  checkout matches the LF runner;
 - `G5P-RELEASE-UNIT`: the release unit's census resolves.
 
 For `--checkpoint transition --target STATE`, the predicates come from the

@@ -233,11 +233,27 @@ def path_is_admitted(path: str, scope: Iterable[str]) -> bool:
     )
 
 
+def _snapshot_content(raw: bytes) -> bytes:
+    """The bytes a formal snapshot hashes for one artifact (ECP-CSN-001, issue #256).
+
+    Line endings are canonicalized as `utf8-text-lf-v1`, the rule the managed-file
+    lock uses, so a CRLF checkout computes the same digest as the LF runner; content
+    that is not UTF-8 text is hashed raw, as before.
+    """
+
+    from se_harness.integrity import IntegrityError, canonical_text_bytes
+
+    try:
+        return canonical_text_bytes(raw)
+    except IntegrityError:
+        return raw
+
+
 def formal_snapshot_digest(root: Path, artifacts: Iterable[Any]) -> str:
     digest = hashlib.sha256()
     for artifact in sorted(artifacts, key=lambda item: item.path.relative_to(root).as_posix()):
         relative = artifact.path.relative_to(root).as_posix().encode("utf-8")
-        content = artifact.path.read_bytes()
+        content = _snapshot_content(artifact.path.read_bytes())
         digest.update(len(relative).to_bytes(8, "big"))
         digest.update(relative)
         digest.update(len(content).to_bytes(8, "big"))
