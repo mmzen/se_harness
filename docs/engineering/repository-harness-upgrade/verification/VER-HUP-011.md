@@ -2,12 +2,19 @@
 id = "VER-HUP-011"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.11.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 [relations]
 verifies = ["REQ-HUP-022", "REQ-HUP-023"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T16:44:31Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-HUP-011', for the adoption of exact public 0.11.0 (RLS-SEH-020, released and published 2026-08-29) as the standard root the simple way, from the 0.10.0 lock aeb73cc7, with the explicit removal of the fifteen retired skill files the installer leaves behind (issue #271) and no verification-records directory in the work order's scope."
 +++
 
 # Verification: Verify standard-root adoption of exact public 0.11.0

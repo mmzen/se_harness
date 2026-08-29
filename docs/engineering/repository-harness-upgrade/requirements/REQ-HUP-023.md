@@ -2,7 +2,7 @@
 id = "REQ-HUP-023"
 type = "requirement"
 title = "Prove complete-graph operation under the 0.11.0 root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "WO-HUP-010 evidence of what a root move touches; rehearsal of 2026-08-
 measure = "0.11.0 validate 0 errors; doctor 0 FAIL; qualify released-root passed; suite failure set equal to the same-commit control on the 0.10.0 root; evaluator_facts derive yields the 0.11.0 to 0.12.0 pair with no legacy acceptance digest; the managed lane green at the implemented head and at the verification-record head with the work order's scope naming no verification-records directory"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T16:44:31Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-HUP-011', for the adoption of exact public 0.11.0 (RLS-SEH-020, released and published 2026-08-29) as the standard root the simple way, from the 0.10.0 lock aeb73cc7, with the explicit removal of the fifteen retired skill files the installer leaves behind (issue #271) and no verification-records directory in the work order's scope."
 +++
 
 # Requirement: Prove complete-graph operation under the 0.11.0 root

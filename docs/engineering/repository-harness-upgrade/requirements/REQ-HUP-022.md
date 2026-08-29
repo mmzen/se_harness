@@ -2,7 +2,7 @@
 id = "REQ-HUP-022"
 type = "requirement"
 title = "Adopt exact public 0.11.0 as the standard root by the simple upgrade"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "RLS-SEH-020 released and published on 2026-08-29; REL-SEH-022 observat
 measure = "one command from the isolated environment; lock schema 3, tool_version 0.11.0, evaluator.version 0.11.0, archive_sha256 equal to the wheel bound in RLS-SEH-020, payload digest of the installation; replay reads every file unchanged; the 15 retired skill files absent from the tree"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T16:44:31Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-HUP-011', for the adoption of exact public 0.11.0 (RLS-SEH-020, released and published 2026-08-29) as the standard root the simple way, from the 0.10.0 lock aeb73cc7, with the explicit removal of the fifteen retired skill files the installer leaves behind (issue #271) and no verification-records directory in the work order's scope."
 +++
 
 # Requirement: Adopt exact public 0.11.0 as the standard root by the simple upgrade
