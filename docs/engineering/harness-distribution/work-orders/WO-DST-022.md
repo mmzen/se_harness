@@ -2,7 +2,7 @@
 id = "WO-DST-022"
 type = "work_order"
 title = "Retire managed files that leave the managed set on upgrade"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -32,6 +32,13 @@ paths = [
 implements = ["REQ-DST-066"]
 specifications = ["SPEC-DST-022"]
 verification = ["VER-DST-022"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:07:11Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'I approve WO-DST-022 and you can start', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the one product module, the one test module, the installation note, this domain's index, the SPEC-DST-001 and SPEC-ECP-007 amendment records and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run over this approval."
 +++
 
 # Work Order: Retire managed files that leave the managed set on upgrade
