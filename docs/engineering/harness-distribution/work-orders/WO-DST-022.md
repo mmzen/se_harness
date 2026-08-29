@@ -2,7 +2,7 @@
 id = "WO-DST-022"
 type = "work_order"
 title = "Retire managed files that leave the managed set on upgrade"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -46,6 +46,13 @@ to = "in_progress"
 decided_at = "2026-08-29T18:07:40Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'I approve WO-DST-022 and you can start'. Start preflight PASS with no diagnostics over the approval commit 739a0fc carrying unmoved main d3b5a3f, run with the governing exact public 0.11.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T18:27:19Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-DST-022 implemented', on the handoff check reading Completed over the Git-derived change set of 12 paths from main d3b5a3f at its fixed point, result 0165cc7f, packet snapshot 3ff0291c, no scope amendment. plan_install classifies leaving-set managed and fragment paths as remove when bytes match and customized when they differ; apply deletes them with directory pruning inside the one rollback transaction, keeps the lock and replay clean, and records remove in the transaction evidence; the fifteen 0.10.0-to-0.11.0 retired skill paths are pinned in conformance tests; the installation note carries the rule and the manual remediation; SPEC-DST-001 and SPEC-ECP-007 carry the amendment records. Validate reads 0 errors; the released 0.11.0 doctor reads 0 FAIL; the Windows suite is at its one baseline error reproduced on an unmodified control at the same commit; the Linux lane settles hosted on the pull request opened after this transition. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Retire managed files that leave the managed set on upgrade
