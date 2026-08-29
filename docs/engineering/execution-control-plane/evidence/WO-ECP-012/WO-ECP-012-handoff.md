@@ -118,6 +118,16 @@ tests/test_workflow_compliance.py
 
 ## Hosted lanes
 
-Not yet run: the branch has not been pushed. This section is appended with
-the pull request's lane readings before completion. The managed lane is
-expected red once the work order leaves `in_progress` (issue #255).
+Pull request #257 at `bafc534`: every lane passes (13 pass). The managed
+Engineering Harness lane () ran the handoff check over the pull
+request's diff inside the declared scope and the declared
+`Harness-Restitution` `26cda39e…` equalled the recomputed `result_sha256`;
+the Governor Transition Assessment (https://github.com/mmzen/se_harness/actions/runs/33242110353/job/99073099856) and every candidate-evidence,
+migration, qualification-rehearsal and integration-package lane pass.
+
+At `35ce28d`, the first push, the managed lane alone was red: the declared
+digest `f69deeb0…` came from a check run before its own `handoff.json`
+existed, so its change set lacked that file; `bafc534` retained the
+fixed-point result (two consecutive runs reading `26cda39e…`) and the pull
+request body was corrected before the push. The managed lane is expected
+red once the work order leaves `in_progress` (issue #255).
