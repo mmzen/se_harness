@@ -139,3 +139,40 @@ A packet file that Git checks out with CRLF (the `.gitattributes`
 (`WEX-ECP-010`), measured on the rehearsal clone against the checked-out
 `WO-RLS-016` packet. A one-line attribute for `docs/engineering/**/evidence/**/*.md`
 would close it; it is not part of this adoption.
+
+## Complete changed-path set
+
+Every path this work order changed since `main` at `47f67de`, packet
+included, as Git derived it (23 paths); the handoff check completed at its
+fixed point with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE`
+passing, run by the released 0.10.0 evaluator on this Windows checkout:
+
+```
+.engineering-harness.lock
+.engineering-harness.toml
+.github/workflows/engineering-harness.yml
+AGENTS.md
+docs/engineering/QUALITY_GATES.json
+docs/engineering/QUALITY_GATES.md
+docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-008.md
+docs/engineering/repository-harness-upgrade/evidence/WO-HUP-010-evaluator-upgrade.json
+docs/engineering/repository-harness-upgrade/evidence/WO-HUP-010/handoff.json
+docs/engineering/repository-harness-upgrade/evidence/WO-HUP-010/WO-HUP-010-handoff.md
+docs/engineering/repository-harness-upgrade/README.md
+docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-020.md
+docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-021.md
+docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-010.md
+docs/engineering/repository-harness-upgrade/verification/VER-HUP-010.md
+docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-010.md
+docs/engineering/WORKFLOW.md
+docs/notes/developing-se-harness.md
+ENGINEERING_HARNESS.md
+pyproject.toml
+README.md
+se_harness/__init__.py
+tests/test_ci_pipeline.py
+```
+
+Linux reading at the transaction commit (WSL Ubuntu 24.04, CPython
+3.12.3, LF clone): `python3 scripts/run_tests.py --scale full` OK, 4
+skips.
