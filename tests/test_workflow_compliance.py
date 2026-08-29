@@ -558,3 +558,125 @@ class EvaluatorDerivedPacketPathTests(unittest.TestCase):
         with self.assertRaises(HarnessError) as caught:
             evidence_packet_path(root, artifact, "handoff")
         self.assertIn("WEX-ECP-010: WO-D-001 is not under a domain directory", str(caught.exception))
+
+
+class ScopeCheckpointTests(GitDerivedChangeSetTests):
+    """REQ-ECP-020 / SPEC-ECP-009 ECP-SCP-001 to -005: scope is judged in every lifecycle state."""
+
+    STATES = ("draft", "approved", "in_progress", "implemented", "verified")
+    SCOPE_PREDICATES = ["QGP-G4I-SCOPE", "QGP-G4I-COMPLETE", "QGP-G4I-PATHS"]
+
+    def write_record(self, status: str) -> None:
+        # A covering verification record, so a verified work order is a valid graph.
+        lines = [
+            "+++",
+            'id = "VREC-001"',
+            'type = "verification_record"',
+            'title = "Verification candidate for WO-001"',
+            f'status = "{status}"',
+            'owners = ["assurance-owner"]',
+            'created = "2026-08-29"',
+            'updated = "2026-08-29"',
+            'commit = "0000000000000000000000000000000000000000"',
+            'git_object_format = "sha1"',
+            'worktree_state = "clean"',
+            'prepared_at = "2026-08-29T00:00:00Z"',
+            'prepared_by = "fixture"',
+            'artifact_snapshot_sha256 = "' + "0" * 64 + '"',
+            'evidence_paths = ["docs/engineering/product/evidence/VREC-001-evidence.md"]',
+        ]
+        if status == "verified":
+            lines += ['verified_at = "2026-08-29T00:00:00Z"', 'verified_by = "assurance-owner"']
+        lines += ["[relations]", 'verifies_work_order = ["WO-001"]', 'conforms_to = ["VER-001"]', "+++", "", "# Verification Record Candidate", ""]
+        write(self.root / "docs/engineering/product/verification-records/VREC-001.md", "\n".join(lines))
+        write(self.root / "docs/engineering/product/evidence/VREC-001-evidence.md", "# retained evidence\n")
+
+    def set_state(self, status: str) -> str:
+        import re
+
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        text = work_order.read_text(encoding="utf-8")
+        work_order.write_text(re.sub(r'(?m)^status = "[a-z_]+"$', f'status = "{status}"', text, count=1), encoding="utf-8")
+        record = self.root / "docs/engineering/product/verification-records/VREC-001.md"
+        if status == "verified":
+            self.write_record("verified")
+        elif record.exists():
+            record.unlink()
+        # The state change and any covering record are committed, so the diff the
+        # scope check reads is only the fixture's own edits below the returned base.
+        self.git("add", "-A", "--", "docs/engineering/product")
+        self.git("commit", "-q", "--allow-empty", "-m", f"state {status}")
+        return self.git("rev-parse", "HEAD").strip()
+
+    def scope_check(self, base: str, artifact: str = "WO-001") -> tuple[int, dict, str]:
+        code, output, error = self.invoke(
+            "check", str(self.root), "--artifact", artifact, "--checkpoint", "scope", "--from-git", base, "--json",
+        )
+        return code, (json.loads(output) if output.strip().startswith("{") else {}), error
+
+    def predicate_ids(self, result: dict) -> list[str]:
+        return [predicate["id"] for gate in result["compliance"]["gates"] for predicate in gate["predicates"]]
+
+    def test_every_state_completes_on_an_in_scope_diff_with_only_the_scope_predicates(self) -> None:
+        self.commit_base()
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        for status in self.STATES:
+            with self.subTest(status=status):
+                base = self.set_state(status)
+                code, result, error = self.scope_check(base)
+                self.assertEqual(0, code, error or result.get("restitution"))
+                self.assertEqual("completed", result["operation"]["outcome"])
+                self.assertEqual("scope", result["compliance"]["checkpoint"])
+                self.assertEqual(self.SCOPE_PREDICATES, self.predicate_ids(result))
+                self.assertEqual([f"WO-001 is {status}."], result["restitution"]["current_lifecycle_state"])
+
+    def test_every_state_blocks_on_an_out_of_scope_path_naming_it(self) -> None:
+        self.commit_base()
+        (self.root / "README-outside.md").write_text("outside\n", encoding="utf-8")
+        for status in self.STATES:
+            with self.subTest(status=status):
+                base = self.set_state(status)
+                code, result, error = self.scope_check(base)
+                self.assertEqual(1, code, error)
+                self.assertEqual("blocked", result["operation"]["outcome"])
+                self.assertTrue(
+                    any(item.startswith("QGP-G4I-PATHS:") and "WEX201" in item and "README-outside.md" in item
+                        for item in result["restitution"]["blocked_by"]),
+                    result["restitution"]["blocked_by"],
+                )
+                self.assertEqual("response", result["restitution"]["command_or_response"]["kind"])
+                self.assertIn("DR-REMEDIATION-SCOPE", result["restitution"]["command_or_response"]["value"])
+
+    def test_the_scope_checkpoint_writes_nothing_and_handoff_still_retains_its_result(self) -> None:
+        # ECP-SCP-004: only the handoff checkpoint retains handoff.json.
+        base = self.commit_base()
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        retained = self.root / "docs/engineering/product/evidence/WO-001/handoff.json"
+        code, result, _ = self.scope_check(base)
+        self.assertEqual(0, code)
+        self.assertFalse(retained.exists())
+        self.assertEqual([], result["mutation"]["writes"])
+        code, result, error = self.check_from_git(base)
+        self.assertEqual(0, code, error)
+        self.assertTrue(retained.exists())
+
+    def test_the_scope_checkpoint_is_a_work_order_checkpoint(self) -> None:
+        # ECP-SCP-001: a verification or release record is refused with WEX210.
+        self.commit_base()
+        base = self.set_state("implemented")
+        self.write_record("ready")
+        code, result, error = self.scope_check(base, artifact="VREC-001")
+        self.assertEqual(1, code)
+        blockers = result.get("restitution", {}).get("blocked_by", []) if result else []
+        self.assertTrue(
+            any("WEX210" in item and "scope checkpoint applies only to a work order" in item for item in blockers)
+            or "scope checkpoint applies only to a work order" in error,
+            (blockers, error),
+        )
+
+    def test_the_evidence_command_keeps_four_checkpoints(self) -> None:
+        from se_harness.cli import build_parser
+
+        with contextlib.redirect_stderr(io.StringIO()) as captured, self.assertRaises(SystemExit):
+            build_parser().parse_args(["evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope"])
+        self.assertIn("invalid choice: 'scope'", captured.getvalue())

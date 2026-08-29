@@ -1029,7 +1029,7 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("target", nargs="?", default=".")
     check.add_argument("--artifact", required=True, help="one selected WO, VREC, or RLS ID")
     check.add_argument(
-        "--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff"),
+        "--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff", "scope"),
         help="fixed stateless evaluation checkpoint",
     )
     check.add_argument(

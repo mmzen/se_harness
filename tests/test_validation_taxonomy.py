@@ -111,8 +111,32 @@ class ValidationTaxonomyTests(unittest.TestCase):
             retained = [line for i, line in enumerate(released_lines) if not (start <= i < end)]
             candidate_lines = set(canonical_quality.splitlines())
             self.assertEqual([], [line for line in retained if line not in candidate_lines])
-        else:
+        elif "`scope`" in quality:
+            # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
             self.assertEqual(canonical_quality, quality)
+        else:
+            # WO-ECP-013: the candidate template amended QG-010 and QG-011 for the
+            # scope checkpoint; a root released before it lacks exactly those two
+            # paragraphs' new sentences, and that divergence is declared here.
+            def without_paragraphs(text: str, *starts: str) -> list[str]:
+                lines = text.splitlines()
+                keep = []
+                skipping = False
+                for line in lines:
+                    if any(line.startswith(start) for start in starts):
+                        skipping = True
+                    if skipping and not line.strip():
+                        skipping = False
+                        continue
+                    if not skipping:
+                        keep.append(line)
+                return keep
+
+            self.assertIn("`scope`", canonical_quality)
+            self.assertEqual(
+                without_paragraphs(canonical_quality, "**QG-010:**", "**QG-011:**"),
+                without_paragraphs(quality, "**QG-010:**", "**QG-011:**"),
+            )
         self.assertIn("| `authoring_ready` |", quality)
         self.assertIn("| `release_unit_ready` |", quality)
         self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |\n", quality)

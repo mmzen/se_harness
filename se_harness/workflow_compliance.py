@@ -328,6 +328,19 @@ def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]
 
 
 EVIDENCE_HEADER_KEYS = ("artifact", "checkpoint", "formal_snapshot_sha256", "rebound_at")
+#: The gate the `scope` checkpoint evaluates for a work order in any state (ECP-SCP-002).
+SCOPE_CHECKPOINT_GATE = "QG-G4-IMPLEMENTATION-EVIDENCE"
+#: Corrective forms for a blocked scope check (ECP-SCP-005): the step the state selects
+#: may declare none for the scope predicates, so the checkpoint carries its own, the
+#: same forms STEP-WO-IMPLEMENT-CHECK declares for them at handoff.
+SCOPE_CHECKPOINT_CORRECTIVE = {
+    "QGP-G4I-SCOPE": {"kind": "escalation", "decision_right": "DR-WO-SELECT"},
+    "QGP-G4I-COMPLETE": {
+        "kind": "command",
+        "argv": ["harnessctl", "check", ".", "--artifact", "{artifact_id}", "--checkpoint", "scope", "--from-git", "<base>"],
+    },
+    "QGP-G4I-PATHS": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"},
+}
 _HEADER_OPEN = b"```toml\n"
 _HEADER_CLOSE = b"\n```\n"
 _RFC3339 = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
@@ -763,8 +776,8 @@ def check_workflow(
         raise HarnessError(
             "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
-    if checkpoint not in {"start", "pre-action", "transition", "handoff"}:
-        raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, or handoff")
+    if checkpoint not in {"start", "pre-action", "transition", "handoff", "scope"}:
+        raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, handoff, or scope")
     if checkpoint == "transition" and not target:
         raise HarnessError("WEX210: --target is required for the transition checkpoint")
     if checkpoint != "transition" and target:
@@ -783,6 +796,8 @@ def check_workflow(
         raise HarnessError(f"WEX210: unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in {"work_order", "verification_record", "release_record"}:
         raise HarnessError("WEX210: check accepts only WO, VREC, or RLS artifacts")
+    if checkpoint == "scope" and primary.artifact_type != "work_order":
+        raise HarnessError("WEX210: the scope checkpoint applies only to a work order")
     governing, dependencies = project_scope(catalog, primary)
     related = [catalog[item] for item in dependencies if item in catalog]
     rule, rule_context = select_rule(rules, primary, related=related)
@@ -807,6 +822,11 @@ def check_workflow(
     scoped, repository_errors, unrelated = context.scoped_errors, context.repository_errors, context.unrelated_count
     scope = context.declared_scope
     gate_ids = list(rule["gate_ids"])
+    if checkpoint == "scope":
+        # ECP-SCP-002: scope is judged against the diff in every lifecycle state, so
+        # the gate comes from the contract, not from the rule the state selects; the
+        # gate's predicate-level checkpoints leave only the scope predicates in play.
+        gate_ids = [SCOPE_CHECKPOINT_GATE]
     resolved = resolve_procedure(
         procedures,
         selected_procedure,
@@ -871,8 +891,17 @@ def check_workflow(
             ),
             None,
         )
+        corrective_step = current_step
+        if checkpoint == "scope":
+            declared_forms = dict(current_step.get("corrective") or {})
+            for predicate_id, form in SCOPE_CHECKPOINT_CORRECTIVE.items():
+                declared_forms.setdefault(predicate_id, {
+                    **form,
+                    **({"argv": [item.replace("{artifact_id}", artifact_id) for item in form["argv"]]} if "argv" in form else {}),
+                })
+            corrective_step = {**current_step, "corrective": declared_forms}
         action, next_command = corrective_response(
-            current_step, first_failing, formal_snapshot_sha256=context.formal_snapshot_sha256
+            corrective_step, first_failing, formal_snapshot_sha256=context.formal_snapshot_sha256
         )
         evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
         if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:

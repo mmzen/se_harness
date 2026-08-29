@@ -234,7 +234,7 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("harnessctl-check.md", self.contents[NOTES_ROOT / "harnessctl-reference.md"])
         for heading in (
             "## What the command does",
-            "## The four checkpoints",
+            "## The five checkpoints",
             "## How the artifact's state selects the rule",
             "## Gates and predicates by checkpoint",
             "## Supplying the change set",
