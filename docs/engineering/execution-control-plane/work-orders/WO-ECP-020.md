@@ -2,7 +2,7 @@
 id = "WO-ECP-020"
 type = "work_order"
 title = "Remove the next alias"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -36,6 +36,13 @@ to = "approved"
 decided_at = "2026-08-29T20:46:21Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-020', on the owner's decision 'we remove next now' of the same day. The definitions it implements are REQ-ECP-025, SPEC-ECP-014 and VER-ECP-016 as amended by the records drafted under this work order. Authorizes start preflight and then only the declared scope: the next parser, handler and notice removed behind a guard naming check, the alias test made a refusal test, the reference and check notes, the three amendment records, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file, WORKFLOW.json, any skill, contract file or profile, any verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T20:47:24Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-020'. Start preflight PASS with no diagnostics over d936295, stacked on WO-ECP-019's completion commit ee1e6af, after the unrelated architecture relations were removed (W021, W017), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Remove the next alias
