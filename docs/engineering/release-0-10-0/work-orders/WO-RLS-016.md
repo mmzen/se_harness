@@ -53,7 +53,7 @@ The census this work order carries is `REL-SEH-021`'s: five work orders in
 work-order-keyed evidence paths. At the candidate the derivation
 `harnessctl release-unit . --from v0.9.0 --to <candidate> --contract REL-SEH-021`
 is re-run and recorded; a difference beyond the contract's four recorded
-exemptions and the released `WO-RLS-015` is a stop condition.
+exemptions and the traced, released `WO-RLS-015` is a stop condition.
 
 ## In scope
 
@@ -123,7 +123,7 @@ check over the Git-derived change set.
 
 A qualification reading that is not `PASS`, a replay whose two producer runs
 differ or whose hosted dispatch disagrees, a release-unit difference beyond
-the recorded exemptions and the released `WO-RLS-015`, any work order
+the recorded exemptions and the traced, released `WO-RLS-015`, any work order
 reaching `implemented` with packaged bytes after `REL-SEH-021`'s approval,
 or a need for authority beyond the approved stage.
 

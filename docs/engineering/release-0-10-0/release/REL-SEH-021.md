@@ -62,20 +62,25 @@ pull-request seed) and `WO-ECP-014` (`workflow_compliance.py`).
 
 ### Commit census
 
-`harnessctl release-unit . --from v0.9.0 --to 3139f24` traces `WO-RLS-015`
-through the 0.9.0 release-record commits that follow the tag on the
-first-parent path — a work order released by `RLS-SEH-018` and therefore
-not a member — and reports four first-parent commits without a parseable
-`Harness-Work-Order` trailer. Each is the merge commit GitHub wrote for a
-pull request; the branch commits behind it carry the trailer in one final
-paragraph and are parseable, but the derivation walks the first-parent path
-only. Each merge is exempted in `[release_unit].untraced_exemptions` for
-that reason, and the membership above is established by the allow-list and
-by each member's own lifecycle state and evidence, as the 0.9.0 contract
-did.
+`harnessctl release-unit . --from v0.9.0 --to 3139f24` reads five
+first-parent commits, all merge commits GitHub wrote for pull requests. One,
+`7291602` (#252), carries a parseable `Harness-Work-Order: WO-RLS-015`
+trailer and traces the 0.9.0 release work order, which `RLS-SEH-018`
+released and which is therefore not a member; the other four carry no
+trailer, while the branch commits behind each carry it in one final
+paragraph, which the first-parent walk does not visit. The four are
+exempted in `[release_unit].untraced_exemptions` for the reasons below; the
+traced `7291602` cannot be exempted (an exemption covers only a commit
+without a trailer) and stays in the derivation, so the contract comparison
+reports `WO-RLS-015` as missing from `gates` by construction. It is
+excluded from the unit because `RLS-SEH-018` released it, and that finding
+is recorded evidence, not a defect, at approval and at the candidate. The
+membership above is established by the allow-list and by each member's own
+lifecycle state and evidence, as the 0.9.0 contract did for its merges.
 
 | Commit | Pull request | Reason |
 | --- | --- | --- |
+| `7291602` | #252 | merge of the 0.9.0 release record; traced to `WO-RLS-015`, released by `RLS-SEH-018`, not a member, not exemptable |
 | `aa99773` | #253 | merge of `WO-HUP-009`'s branch; GitHub merge commit, no trailer |
 | `1d19d17` | #257 | merge of `WO-ECP-012`'s branch; same |
 | `741a774` | #258 | merge of `WO-ECP-013`'s branch; same |
@@ -85,7 +90,8 @@ This contract names no `candidate_commit`: the candidate is created by
 `WO-RLS-016` after this approval. `QGP-G5P-RELEASE-UNIT` therefore passes
 unmeasured at approval, as for `REL-SEH-020`; the census above is the
 reported evidence, and `WO-RLS-016` re-runs the derivation at the candidate
-and records it, expecting the same four exemptions and `WO-RLS-016` traced.
+and records it, expecting the same four exemptions, `WO-RLS-015` traced and
+excluded, and `WO-RLS-016` traced.
 
 ## Required evidence
 

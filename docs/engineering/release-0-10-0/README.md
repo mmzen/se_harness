@@ -33,4 +33,4 @@ Five work orders: the four landed since `v0.9.0` and `WO-RLS-016`. Measured over
 
 ## Census note
 
-The four merges on the first-parent path since `v0.9.0` are GitHub merge commits without a trailer and are exempted by name in the contract; the branch commits behind each carry the `Harness-Work-Order:` trailer in one final paragraph and are parseable, but `harnessctl release-unit` walks the first-parent path only. `WO-RLS-015` is traced through the 0.9.0 release-record commits that follow the tag and is not a member: `RLS-SEH-018` released it.
+Five merges sit on the first-parent path since `v0.9.0`. `7291602` (#252), the merge of the 0.9.0 release record, carries a parseable trailer and traces `WO-RLS-015`, which `RLS-SEH-018` released: it is not a member and, being traced, cannot be exempted, so the contract comparison names it by construction. The other four are GitHub merge commits without a trailer, exempted by name; the branch commits behind each carry the `Harness-Work-Order:` trailer in one final paragraph, which `harnessctl release-unit` does not visit on its first-parent walk.
