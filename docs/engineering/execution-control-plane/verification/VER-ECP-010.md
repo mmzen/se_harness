@@ -2,13 +2,20 @@
 id = "VER-ECP-010"
 type = "verification"
 title = "Independent evidence for the line-ending-canonical formal snapshot"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-021"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T09:09:07Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'i approve the artifact packet', for the repair of issue #256: formal_snapshot_digest hashes each artifact's utf8-text-lf-v1 canonical bytes so a CRLF checkout computes the runner's digest while every LF-bound digest is unchanged; with the amendment record on SPEC-ECP-001. Measured before this transition over branch state ea8494d carrying unmoved main 741a774: validate PASS at 0 errors under the governing 0.9.0 root; start preflight reads only the draft signature. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for the line-ending-canonical formal snapshot

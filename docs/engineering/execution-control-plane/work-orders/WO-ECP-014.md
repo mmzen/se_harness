@@ -2,7 +2,7 @@
 id = "WO-ECP-014"
 type = "work_order"
 title = "Canonicalize line endings in the formal snapshot"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -29,6 +29,13 @@ paths = [
 implements = ["REQ-ECP-021"]
 specifications = ["SPEC-ECP-010"]
 verification = ["VER-ECP-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T09:09:09Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'i approve the artifact packet and you can start WO-ECP-014', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the one product module, the one test module, the check note, this domain's index, the SPEC-ECP-001 amendment record and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Canonicalize line endings in the formal snapshot
