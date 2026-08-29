@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HUP-009"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "a1bd35eb86942bd29015cf828eb3c333fda7b90f3b7a16d7fe00cc2c9677a054"
-rebound_at = "2026-08-29T06:43:22Z"
+formal_snapshot_sha256 = "eb25d0239c9ac6945c95552b8ca17fd7bab3a5316c770c47127f78af902f1875"
+rebound_at = "2026-08-29T07:09:52Z"
 ```
 
 # WO-HUP-009 handoff evidence
@@ -132,9 +132,22 @@ below, plus the identifier-allocation test, and they pass hosted.
 with released 0.9.0 outside the checkout on the Linux runtime: Completed;
 change set of 21 paths, `complete: true` (22 once the check's own retained result `handoff.json` exists beside this file); every predicate of
 `QG-G4-IMPLEMENTATION-EVIDENCE` passes (STATUS, GRAPH, INTEGRITY, SCOPE,
-COMPLETE, PATHS, PREFLIGHT, EVIDENCE). The packet header's formal snapshot
-was measured equal on the CRLF worktree and on an LF export of the same
-commit, so the hosted lane binds the same snapshot.
+COMPLETE, PATHS, PREFLIGHT, EVIDENCE).
+
+The packet header is bound from an LF tree. `formal_snapshot_digest` hashes
+every formal artifact's raw bytes, so a Windows checkout under
+`core.autocrlf=true` (1096 artifacts, every one carrying CRs) computes a
+different snapshot from the LF checkout the hosted lane makes:
+`a1bd35eb…` on the CRLF worktree against `eb25d023…` on a fresh clone at
+the same commit, measured per artifact (all 1096 differ). The first push of
+this branch carried the CRLF-bound header and the managed lane blocked on
+`QGP-G4I-EVIDENCE` naming `eb25d023…`; the header now carries the digest of
+a fresh LF clone of the transaction commit, produced by the same 0.9.0
+wheel on the Linux runtime, and the handoff check that produced the
+retained `handoff.json` and the pull request's `Harness-Restitution` digest
+ran in that clone. In the CRLF worktree the same check reads
+`QGP-G4I-EVIDENCE` as not passing, by construction. This is a second
+observation outside this work order (see below).
 
 ## Complete changed-path set
 
@@ -180,7 +193,15 @@ and `--checkpoint handoff` blocked by `WEX210: WEX-ECP-010`; the same call
 with a `PurePosixPath` or string returns the domain. The same refusal is
 the cause of 60 of the workstation-only suite failures. It is product code,
 outside `WO-HUP-009`'s scope, and is recorded here only so that it is
-not mistaken for a fact about this root move; it has no artifact ID yet.
+not mistaken for a fact about this root move; it is filed as issue #254.
+
+A second observation, also product code and also outside this work order:
+the formal snapshot an evidence packet binds is computed over raw artifact
+bytes, so it depends on the checkout's line endings. A packet written on a
+Windows checkout with `core.autocrlf=true` never matches the LF checkout of
+the managed workflow, and the unconditional pull-request gate of 0.9.0
+(`WO-ECP-003`) then blocks on `QGP-G4I-EVIDENCE` for every such packet.
+Measured here on 2026-08-29; no issue filed yet.
 
 ## Hosted lanes
 
