@@ -93,3 +93,30 @@ are not quoted in any record.
 1. `qualify complete-candidate` is read from the Linux environment, not
    this Windows interpreter, for the `RID018` boundary reason in section 3;
    the reading is the candidate's own code over the same commit and tree.
+
+## 6. Build re-verified at the bound candidate
+
+`VREC-SEH-020` binds `c5dad10`, the commit that marked this work order
+implemented, so the build of record was re-run there on 2026-08-29 through
+the same Docker daemon and the same pinned producer: state `exact`, two
+producer runs `a` and `b` byte-identical. The digests differ from section
+4's because `source_date_epoch` follows the commit; these are the readings
+`RLS-SEH-020` binds once the hosted replay agrees:
+
+| Reading | Value |
+| --- | --- |
+| commit | `c5dad1046c276806b23405c72f06ab9b3a39e1f0` |
+| wheel | `se_harness-0.11.0-py3-none-any.whl`, `ba26ab7be14321cdc26b69d59e2b894d544c3e7b529227de1f24ad9cd8f935c0` |
+| sdist | `se_harness-0.11.0.tar.gz`, `bcf8092994c1ef0ce263c3102cb92c54b3e3fb88117b080459a51640269f8a50` |
+| checksums | `SHA256SUMS`, `7cf72c98341c976c7049bed384e97aec791f2fb495eacacb8414c49724cd63c7` |
+| source manifest | `54212e178ac8b5196788eb933a43245e35b63667680ba08fdbbd0d9199479015`, `source_date_epoch` 1788019023 |
+| bundle manifest | `scripts/create_release_bundle_manifest.py`, retained as `docs/engineering/release-0-11-0/evidence/RLS-SEH-020-bundle.json` when the record is prepared |
+
+## 7. Hosted lanes
+
+At the candidate head `c016fbb` every push-event workflow completed
+`success` (Engineering Harness, Governor Transition Assessment,
+Publication Rehearsal, SE Harness Candidate Evidence); at the packet head
+`579a1bb` 19 checks passed with the three integration-package jobs
+skipping, as they do on a release branch; the lanes at the record heads are
+recorded in the pull-request and the records.
