@@ -24,6 +24,9 @@ paths = [
   "docs/notes/harnessctl-reference.md",
   "docs/engineering/execution-control-plane/README.md",
   "docs/engineering/execution-control-plane/evidence/",
+  "docs/engineering/execution-control-plane/requirements/REQ-ECP-019.md",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-008.md",
+  "docs/engineering/execution-control-plane/verification/VER-ECP-008.md",
 ]
 
 [relations]
@@ -131,6 +134,18 @@ A second caller that passes a `PurePath` and needs a behavioural decision; a
 test that cannot express the Windows form with `PureWindowsPath`; any need
 to touch a hash-locked file; a contract identifier the note needs that does
 not exist.
+
+## Scope amendment
+
+2026-08-29, after start, on the engineering owner's decision 'Amend
+WO-ECP-012 scope with the three definition paths': the three definition
+files this packet itself adds (`REQ-ECP-019`, `SPEC-ECP-008`,
+`VER-ECP-008`) are added to the execution scope. The first handoff check
+over the Git-derived change set blocked on `QGP-G4I-PATHS` naming
+`REQ-ECP-019.md`; the draft had declared the domain index and the evidence
+directory but not the definitions, which every pull request against `main`
+carries. The amendment adds no work and no product path; the evidence packet
+is rebound to the formal snapshot after this edit.
 
 ## Completion report format
 
