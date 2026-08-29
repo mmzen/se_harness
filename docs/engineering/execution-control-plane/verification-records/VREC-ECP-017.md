@@ -2,7 +2,7 @@
 id = "VREC-ECP-017"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-014"
-status = "ready"
+status = "verified"
 owners = ["Mathieu Meadele"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-014/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-017-evaluator.json"
 evaluator_evidence_sha256 = "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
 
+verified_at = "2026-08-29T09:28:45Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-014"]
 conforms_to = ["VER-ECP-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-29T09:28:45Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-29, 'I verify VREC-ECP-017 as assurance owner'. Re-measured immediately before this transition: bound commit db4a177 is an ancestor of the branch tip with a clean worktree; WO-ECP-014 is implemented; the evaluator packet matches its recorded digest. The retained evidence shows formal_snapshot_digest hashing each artifact's utf8-text-lf-v1 canonical bytes through the one function every snapshot comes from, the LF digest of the fixture chain pinned at the raw-rule value measured before the change, a CRLF tree computing the same digest and one changed character breaking it, candidate evidence on the CRLF Windows worktree and on the LF Linux clone at c066269 both reading 51b08822, the Linux suite OK, the Windows workstation at its two baseline failures, the handoff check completed at its fixed point 9ab56eda, the managed gate passing at e932993 with the declared digest matching, and at 6185a06 twelve of thirteen lanes passing with the managed lane red by issue #255 on the 0.9.0 root, as the packet records. VER-ECP-010's pass conditions are met. This verifies WO-ECP-014 only; it releases and publishes nothing."
 +++
 
 # Verification Record Candidate
