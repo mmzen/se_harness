@@ -2,7 +2,7 @@
 id = "WO-ECP-019"
 type = "work_order"
 title = "Fold next into the check projection and retire accept-candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-08-29T18:40:20Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-019'. Start preflight PASS with no diagnostics over the approval commit 7148b57 carrying unmoved main 970a0ae, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T20:31:40Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 with the words 'Mark WO-ECP-019 implemented'. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-019/ records: ECP-CTX-001 to ECP-CTX-008 implemented (the projection carries the context and the default artifact, next is a byte-identical alias with a notice, the WEX210 corrective names check, accept-candidate is refused by a guard naming qualify candidate-package, the template WORKFLOW.md, three notes and the SPEC-ECP-001 amendment record say so); nine ExecutionContextTests plus the corrective and guard tests; the affected suites 475 OK on the merged tree and the full Windows suite at its baseline; validate 1160 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check completed at its fixed point 50540ca4 over main 27e40e5 (merged in at eff7de7 without conflict) and the thirteen pull-request lanes green at the packet head 15d5188. Two deviations are accepted with this decision: the reference keeps one next row marked as the alias because the documentation test pins the table to the parser's subcommand set, and workflow_result.py is unchanged. The projection's golden digest moved as ECP-CTX-003 states. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Fold next into the check projection and retire accept-candidate
