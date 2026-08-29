@@ -260,7 +260,7 @@ class PredecessorDerivationTests(unittest.TestCase):
                 self.assertIsNone(re.search(r"[0-9a-f]{64}", text.replace("actions/", "")), "a digest literal remains")
                 # version literals: the pinned build tools are not evaluator facts
                 versions = {m.group(0) for m in re.finditer(r"\b\d+\.\d+\.\d+(?:\.post\d+)?\b", text)}
-                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1", "0.8.0"}}, versions)
+                self.assertEqual(set(), {v for v in versions if v in {"0.6.0", "0.7.0", "0.7.1", "0.8.0", "0.9.0"}}, versions)
 
     def test_workflow_derives_once_and_consumers_take_the_outputs(self) -> None:
         text = (WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8")
@@ -294,14 +294,19 @@ class PredecessorDerivationTests(unittest.TestCase):
             self._copy_repository_declarations(root)
             pyproject = root / "pyproject.toml"
             declared = tomllib.loads(pyproject.read_text(encoding="utf-8"))["project"]["version"]
-            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{declared}"', 'version = "0.9.0"', 1), encoding="utf-8")
-            self.assertEqual("0.9.0", derive(root).candidate_version)
+            # WO-HUP-009: bump past the declared root rather than to a literal, so the
+            # fixture stays a bump whatever version the lock names.
+            root_version = tomllib.loads((root / ".engineering-harness.toml").read_text(encoding="utf-8"))["harness"]["tool_version"]
+            major, minor, _patch = (int(part) for part in root_version.split("."))
+            bumped = f"{major}.{minor + 1}.0"
+            pyproject.write_text(pyproject.read_text(encoding="utf-8").replace(f'version = "{declared}"', f'version = "{bumped}"', 1), encoding="utf-8")
+            self.assertEqual(bumped, derive(root).candidate_version)
             completed = subprocess.run(
                 [sys.executable, "-m", "repository_tools.evaluator_facts", "derive", "--repository", str(root)],
                 capture_output=True, text=True, cwd=REPOSITORY_ROOT,
             )
             self.assertEqual(0, completed.returncode, completed.stderr)
-            self.assertIn('"candidate_version":"0.9.0"', completed.stdout)
+            self.assertIn(f'"candidate_version":"{bumped}"', completed.stdout)
 
     def test_disagreeing_root_declarations_fail_closed(self) -> None:
         from repository_tools.evaluator_facts import PredecessorFactsError, derive
