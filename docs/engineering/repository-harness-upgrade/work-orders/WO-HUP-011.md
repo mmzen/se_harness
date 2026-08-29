@@ -2,7 +2,7 @@
 id = "WO-HUP-011"
 type = "work_order"
 title = "Adopt exact public 0.11.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-29T16:44:45Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-HUP-011'. Start preflight PASS with no diagnostics over the approval commit b602815 carrying unmoved main 896f8fa, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T16:57:17Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-HUP-011 implemented', on the handoff check reading Completed over transaction commit adaab5e and the packet at 1aba63c, fixed-point result 2cdb6cf08c09c8fab53e33005b01d60921895b6441dfe4010762e9ad6538133e, produced by the exact public 0.11.0 evaluator that this transaction installed as the root, outside the checkout, on this Windows checkout. The root lock reads 0.11.0 by version, payload 71b4b5b6 and the archive pair of the wheel RLS-SEH-020 binds; 46 managed files, 9 updated, replay unchanged; the fifteen retired skill files removed under rule 6 (issue #271, deviation 1 accepted); exact 0.11.0 validate 0 errors, doctor 0 FAIL, released-root 113/113, dashboard identical twice, review preflight PASS, derive 0.11.0 to 0.12.0; the full-scale suite at its baseline with one identity-aware test edit named in the packet; all thirteen lanes of pull request #272 pass at this head, the governor-transition lane assessing the real 0.10.0 to 0.11.0 move with exactly one transaction document and the managed lane running the 0.11.0 gate with no verification-records directory in scope. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.11.0 as the standard root, the simple way
