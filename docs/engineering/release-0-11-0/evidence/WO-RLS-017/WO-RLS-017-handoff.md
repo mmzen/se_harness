@@ -40,5 +40,56 @@ repaired in that root).
 
 ## 3. Census re-run at the candidate
 
-Written at the candidate, after this commit exists; see the next section
-of this file in the commit that follows.
+`harnessctl release-unit . --from v0.10.0 --to c016fbb --exempt 47f67de2d4c41b5da0cd8df1b3a5be459de74061 --contract REL-SEH-022`,
+released 0.10.0: untraced 0, exempted 1; seven work orders traced, six of
+them through the second-parent trailers of the merges GitHub wrote:
+`WO-HUP-010`, `WO-ECP-015`, `WO-ECP-016`, `WO-ECP-017`, `WO-ECP-006`
+(two merges), `WO-RLS-016` through `103127c` (the merge of the 0.10.0
+release record, released by `RLS-SEH-019` and excluded, as the contract
+states by construction), and `WO-RLS-017` through its four branch commits.
+The comparison reports the four `E-CIP-001` findings the contract predicts
+at this stage: no `candidate_commit` and no top-level
+`previous_release_tag` are declared (the contract carries the tag in
+`[release_unit]`, as `REL-SEH-021` did), the gates differ by exactly
+`WO-RLS-016` (traced, released, excluded), and `WO-RLS-017` is
+`in_progress`, the state this reading is taken in.
+
+`qualify complete-candidate . --candidate-commit c016fbb` with candidate
+source, `python3 -s`, on the Linux environment (WSL Ubuntu 24.04, LF clone
+at the candidate, clean): PASS - CC001 candidate runtime bound to the
+checkout, CC002 HEAD and tracked tree match the candidate, CC003
+artifacts=1144 errors=0 warnings=479, CC004 target state unchanged. On this
+Windows interpreter the same command reads CC001 FAIL with `RID018`: a
+machine-wide `se-harness 0.8.0` distribution sits on its system
+site-packages, the candidate-source runtime boundary `AGENTS.md` documents
+and not a property of the candidate; recorded as deviation 1.
+
+## 4. Build of record
+
+Run on 2026-08-29 on this Windows workstation through Docker Desktop
+(daemon 29.7.2, linux/amd64) and the pinned producer image, at the exact
+candidate `c016fbb`:
+
+| Reading | Value |
+| --- | --- |
+| command | `python -m repository_tools.release_build replay --repository . --commit c016fbb39e30c0de02604a7242a231151a5df633 --version 0.11.0` |
+| state | `exact`; two producer runs `a` and `b` byte-identical |
+| producer | `python@sha256:2856e6af199e8128161abd320575eb9b341f3b76f017b5d0c9cd364f60d8a050`, linux/amd64, digest-pinned by `release/build-toolchain.lock` |
+| recipe | `release/build-recipe.json`, `0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc` |
+| wheel | `se_harness-0.11.0-py3-none-any.whl`, `fef2459585670c81414360d24b5d34c37c8429b5ad723df33dba73530db6c24f` |
+| sdist | `se_harness-0.11.0.tar.gz`, `2b6b4307416cca10f234816889c1de16d01a4d51398141c75dd3974eb5cd5c17` |
+| checksums | `SHA256SUMS`, `b37d081fc4582c0506e425ea4b8dc0b136d846eec9c0f7134bf666aeea9ffffc` |
+| source manifest | `ca051ce45c3abc18bea08a1a98ffd71d65fcc4985dd5a4257fccfa1ab3bec92c`, `source_date_epoch` 1788013748 |
+| bundle manifest | `scripts/create_release_bundle_manifest.py` (schema `se-harness-release-bundle/v2`); to be retained as `docs/engineering/release-0-11-0/evidence/RLS-SEH-020-bundle.json` when the record is prepared |
+| wheel walk (`VER-ECP-014` scenario 1, repeated on the build of record) | `RECORD` carries none of the ten Phase 4 names and carries `journaled_apply.py`; shipped skills `harness-operator-brief`, `harness-orient`, adapter `harness-orient`; from a disposable `-I` install 25 public submodules import, 29 help pages name no removed concept, `delegated-workflow` is an argument error |
+
+These are local replay readings. The hosted `release-candidate-replay.yml`
+dispatch on the review ref, before the release decision, must reproduce the
+wheel and sdist digests of the commit the record binds; until it does they
+are not quoted in any record.
+
+## 5. Deviations, recorded for the completion decision
+
+1. `qualify complete-candidate` is read from the Linux environment, not
+   this Windows interpreter, for the `RID018` boundary reason in section 3;
+   the reading is the candidate's own code over the same commit and tree.
