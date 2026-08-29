@@ -2,7 +2,7 @@
 id = "RLS-SEH-020"
 type = "release_record"
 title = "Release candidate 0.11.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-11-0/evidence/RLS-SEH-020-
 evaluator_evidence_sha256 = "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
 tag = "v0.11.0"
 
+released_at = "2026-08-29T16:30:28Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-022"]
 includes_verification = ["VREC-SEH-020"]
 releases_work = ["WO-ECP-006", "WO-ECP-015", "WO-ECP-016", "WO-ECP-017", "WO-HUP-010", "WO-RLS-017"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-08-29T16:30:28Z"
+decided_by = "release-owner"
+reason = "Released on 2026-08-29 by the accountable release owner, 'release RLS-SEH-020'. Re-measured immediately before this transition, every check run before this reason was written: candidate commit c5dad10 is an ancestor of the branch tip with a clean worktree; VREC-SEH-020 is verified and binds the same candidate; the record's bound wheel ba26ab7be14321cdc26b69d59e2b894d544c3e7b529227de1f24ad9cd8f935c0 and sdist bcf8092994c1ef0ce263c3102cb92c54b3e3fb88117b080459a51640269f8a50 equal the retained bundle manifest's, which binds the same candidate; the hosted release-candidate-replay dispatch on this review ref (run 33262581945) completed success, rebuilding the bound recipe twice without credentials and reading release build replay PASS for RLS-SEH-020. One lane is red at this head by a known condition, measured in its log: the release-record rehearsal expects exactly one RLS-SEH-020 at main head and finds 0 until this pull request merges, exactly as RLS-SEH-019 behaved. Every other lane passes. Releasing authorizes the publication sequence of REL-SEH-022's promotion policy; the tag, the GitHub Release, PyPI, Pages, the maintenance line and the latest markers remain the separately dispatched last mile, and the pypi environment remains a separate human approval."
 +++
 
 # Release Record Candidate
