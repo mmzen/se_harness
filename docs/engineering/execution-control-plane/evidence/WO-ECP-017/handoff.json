@@ -1,0 +1,348 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "9611832861c34815c90b2fa76367538ee14a4b3a8a257124edc820282fbae843",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-017"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-ECP-017 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-ECP-017"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-017:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-ECP-017 declares 21 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-ECP-017"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-ECP-017"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 23 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-ECP-017:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-ECP-017"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/execution-control-plane/evidence/WO-ECP-017/WO-ECP-017-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 478
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ECP-017",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-ECP-017",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-ECP-017",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-ECP-017",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-ECP-017."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-ECP-017",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-ECP-017 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-ECP-017 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-ECP-017 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-ECP-017 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-ECP-017",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-ECP-017."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "e541e0ee8166a6eb5cf4c482625ee9ad22b1ab20cd1c218b3aa90ec2bee55ee7",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "AGENTS.md",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-017/WO-ECP-017-handoff.md",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-024.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-013.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-013.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-017.md",
+      "docs/notes/harness-orient.md",
+      "docs/notes/harnessctl-check.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/workflow.py",
+      "se_harness/workflow_compliance.py",
+      "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+      "templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
+      "templates/repository/standard/docs/engineering/README.md.seed",
+      "tests/fixtures/agentic_execution/fake_evaluator.py",
+      "tests/fixtures/agentic_execution/phase5/portable-vectors.json",
+      "tests/fixtures/focus_alias/human.txt",
+      "tests/fixtures/focus_alias/result.json",
+      "tests/test_agent_contract.py",
+      "tests/test_agentic_execution.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "declared_paths": [
+      "AGENTS.md",
+      "docs/engineering/execution-control-plane/evidence/",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-024.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-013.md",
+      "docs/engineering/execution-control-plane/verification-records/",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-013.md",
+      "docs/notes/harness-orient.md",
+      "docs/notes/harnessctl-check.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/workflow.py",
+      "se_harness/workflow_compliance.py",
+      "templates/repository/standard/.agents/skills/harness-orient/",
+      "templates/repository/standard/docs/engineering/README.md.seed",
+      "tests/fixtures/agentic_execution/fake_evaluator.py",
+      "tests/fixtures/agentic_execution/phase5/",
+      "tests/fixtures/focus_alias/",
+      "tests/test_agent_contract.py",
+      "tests/test_agentic_execution.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-ECP-007",
+      "ARCH-ECP-001",
+      "CAP-ECP-001",
+      "INT-ECP-001",
+      "REQ-ECP-022",
+      "REQ-ECP-024",
+      "SPEC-ECP-011",
+      "SPEC-ECP-013",
+      "VER-ECP-011",
+      "VER-ECP-013"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-ECP-017"
+    ],
+    "primary": "WO-ECP-017"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-ECP-017",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-ECP-017",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
