@@ -2,7 +2,7 @@
 id = "WO-HUP-009"
 type = "work_order"
 title = "Adopt exact public 0.9.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-29T06:37:42Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'you can start WO-HUP-009'. Start preflight PASS with no diagnostics over the approval commit 420d74d carrying unmoved main 7291602, run with the governing exact public 0.8.0 evaluator outside the checkout. Bounded to the declared execution scope; the applying runtime is exact public 0.9.0 installed from the digest-verified PyPI wheel file into an isolated environment outside the checkout. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T07:23:02Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-HUP-009 implemented', on the handoff check reading Completed over the Git-derived change set of 22 paths, formal snapshot eb25d0239c9ac6945c95552b8ca17fd7bab3a5316c770c47127f78af902f1875, result d91dd8c0, no scope amendment. The root moved from exact public 0.8.0 to exact public 0.9.0 by one upgrade --apply from a wheel-file install outside the checkout whose digest c4b56175 equals the wheel RLS-SEH-018 binds; lock records that archive pair and payload e74ad2ae; plan 5 update, replay 61 unchanged. Readings under the 0.9.0 root, isolated mode: validate PASS at 1096 artifacts, 0 errors, 475 maintenance warnings; doctor 0 FAIL; released-root 143/143; dashboard content deterministic; derive 0.9.0 to 0.10.0. Candidate: full suite 1117 tests failing nothing a same-commit control on the unmoved root does not. All thirteen pull-request lanes pass on #253 at 5957139 and 10e1994 including the governor transition assessment of the real transition and 0.9.0's unconditional scope gate. Two product observations outside this work order are disclosed in the packet: the Windows backslash refusal (issue #254) and the line-ending-dependent formal snapshot. This authorizes no further act."
 +++
 
 # Work Order: Adopt exact public 0.9.0 as the standard root, the simple way
