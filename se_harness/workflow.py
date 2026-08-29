@@ -203,7 +203,7 @@ def project_scope(catalog: Mapping[str, Any], primary: Any) -> tuple[set[str], s
                 upstream, _ = _work_scope(catalog, catalog[work_id])
                 governing.update(upstream)
         return governing, set()
-    raise HarnessError("focus accepts only WO, VREC, or RLS artifacts")
+    raise HarnessError("check accepts only WO, VREC, or RLS artifacts")
 
 
 def _diagnostic(item: Any) -> dict[str, str]:
@@ -215,17 +215,16 @@ def _diagnostic(item: Any) -> dict[str, str]:
     }
 
 
-def focus(
+def project_selected(
     repository: Path,
     artifact_id: str,
     *,
     include_background: bool = False,
-    operation: str = "focus",
 ) -> dict[str, Any]:
     """Project the selected artifact's rule, procedure and next step; evaluate no gate.
 
-    `check` without a checkpoint is this projection with `operation` "check"
-    (SPEC-ECP-011, ECP-ONE-001/-002); `focus` is its one-release alias.
+    This is `check` without a checkpoint (SPEC-ECP-011, ECP-ONE-001/-002); the
+    `focus` alias that shared it was removed after 0.10.0 (SPEC-ECP-013).
     """
 
     root = ensure_target(repository, must_exist=True)
@@ -235,7 +234,7 @@ def focus(
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
-        raise HarnessError(f"{operation} accepts only WO, VREC, or RLS artifacts")
+        raise HarnessError("check accepts only WO, VREC, or RLS artifacts")
     governing, dependencies = project_scope(catalog, primary)
     scope_paths = {
         catalog[item].path.resolve()
@@ -275,7 +274,7 @@ def focus(
     blockers = [*repository, *scoped]
     return selected_result(
         root,
-        operation=operation,
+        operation="check",
         primary=primary,
         related=[catalog[item] for item in dependencies if item in catalog],
         governing=governing,
@@ -320,9 +319,9 @@ def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any) -> t
 def next_step(repository: Path, artifact_id: str | None = None) -> dict[str, Any]:
     """One call returning the selected artifact's complete execution context (ECP-NXT-001 to -007).
 
-    The result is the `focus` projection of the selected artifact with the
+    The result is the `check` projection of the selected artifact with the
     operation kind `next` and an additive `context` object; the next argv, the
-    procedure and the step are the ones `focus` and `check` already select, so
+    procedure and the step are the ones `check` already selects, so
     `next` holds no private mapping. It writes nothing.
     """
 
@@ -349,7 +348,7 @@ def next_step(repository: Path, artifact_id: str | None = None) -> dict[str, Any
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
         raise HarnessError("next accepts only WO, VREC, or RLS artifacts")
-    projected = focus(root, artifact_id)
+    projected = project_selected(root, artifact_id)
     declared: tuple[str, ...] = ()
     if primary.artifact_type == "work_order":
         try:

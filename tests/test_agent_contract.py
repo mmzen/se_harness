@@ -640,7 +640,13 @@ class PacketReceiptAndProfileTests(unittest.TestCase):
 
         skill_root = REPOSITORY_ROOT / "templates/repository/standard/.agents/skills/harness-orient"
         manifest = build_skill_manifest(skill_root)
-        self.assertEqual(vectors["portable_core"]["manifest_sha256"], manifest.sha256)
+        # ECP-RMV-005 (WO-ECP-017): the phase-1 portable core is retained history; the
+        # live core is the phase-5 row, whose `previous` is that history.
+        phase5 = json.loads(
+            (REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase5/portable-vectors.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(vectors["portable_core"], phase5["portable_core"]["previous"])
+        self.assertEqual(phase5["portable_core"]["current"]["manifest_sha256"], manifest.sha256)
 
     def test_logical_profiles_are_non_authoritative_provider_neutral_and_fallback_safe(self) -> None:
         profile = self.vectors["logical_profile"]["value"]

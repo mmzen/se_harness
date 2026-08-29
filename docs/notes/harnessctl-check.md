@@ -34,9 +34,9 @@ What it does **not** do:
 - it does not pick the artifact for you; `harnessctl next` does that, and
   `check` needs `--artifact`;
 - without `--checkpoint` it evaluates nothing: it *projects* the selected
-  rule, procedure and next step (what `harnessctl focus` returned before
-  se-harness 0.11.0; `focus` remains one release as a byte-identical alias
-  that prints a deprecation notice);
+  rule, procedure and next step (the former `focus` command, kept as an alias
+  through 0.10.0 and removed after it; a script still calling it is refused
+  with this replacement named);
 - it does not decide; it names the decision that is due and who owns it.
 
 ## The five checkpoints

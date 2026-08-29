@@ -19,7 +19,7 @@ Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap 
 
 ## Scope of the managed obligations
 
-`HRN-003`, the handoff rules, and the stop conditions bind an actor executing or reporting a lifecycle stage. Reading, analysis, and answering questions are unconstrained, provided no lifecycle state changes, no decision right is exercised, and no finding is presented as a formal result. `harnessctl focus` output without `--result-schema 2` is a compatibility projection, not restitution.
+`HRN-003`, the handoff rules, and the stop conditions bind an actor executing or reporting a lifecycle stage. Reading, analysis, and answering questions are unconstrained, provided no lifecycle state changes, no decision right is exercised, and no finding is presented as a formal result. `harnessctl check` without a checkpoint is a projection, not restitution.
 
 ## Do not edit these - they are hash-locked managed copies
 

@@ -22,8 +22,8 @@ def main() -> int:
         return 0
     if arguments == ["--help"]:
         commands = ["identity", "doctor", "validate", "inspect", "preflight"]
-        if MODE != "no-focus":
-            commands.append("focus")
+        if MODE != "no-check":
+            commands.append("check")
         print("commands:")
         for command in commands:
             print(f"  {command}  fake public command")
@@ -83,15 +83,15 @@ def main() -> int:
             }
         )
         return 0
-    if command == "focus":
+    if command == "check":
         if "--help" in arguments:
-            print("usage: focus --artifact ARTIFACT --json --result-schema {1,2}")
+            print("usage: check --artifact ARTIFACT [--checkpoint NAME] --json")
             return 0
         artifact = arguments[arguments.index("--artifact") + 1]
         emit(
             {
                 "findings": {"repository_blockers": [], "scoped_blockers": [], "unrelated_count": 2},
-                "operation": {"kind": "focus", "outcome": "completed"},
+                "operation": {"kind": "check", "outcome": "completed"},
                 "restitution": {
                     "command_or_response": {
                         "argv": ["harnessctl", "check", ".", "--artifact", artifact, "--checkpoint", "handoff"],

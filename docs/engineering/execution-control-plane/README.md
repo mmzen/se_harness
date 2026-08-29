@@ -41,6 +41,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `REQ-ECP-021`: the formal snapshot is independent of the checkout's line endings (issue #256; drafted 2026-08-29 with `SPEC-ECP-010`, `VER-ECP-010`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-014`).
 - `REQ-ECP-022`: one read-only evaluator command projects and checks a selected artifact (fold `focus` into `check`; drafted 2026-08-29 with `SPEC-ECP-011`, `VER-ECP-011`, `ADR-ECP-007`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-015`).
 - `REQ-ECP-023`: the change set admits the selected work order's own verification and release records by construction (issue #264; drafted 2026-08-29 with `SPEC-ECP-012`, `VER-ECP-012`, an amendment record on `SPEC-ECP-001`, and `WO-ECP-016`).
+- `REQ-ECP-024`: the projection has exactly one command name — the `focus` alias is removed and `harness-orient` moves to `check` (audit P1; drafted 2026-08-29 with `SPEC-ECP-013`, `VER-ECP-013`, and `WO-ECP-017`).
 - `SPEC-ECP-001`: the next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest.
 - `SPEC-ECP-002`: evidence packets, identifier allocation, and pull-request body generation.
 - `SPEC-ECP-003`: the mandatory scope-aware pull-request gate and digest coverage.
@@ -91,6 +92,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-014` independent; the line-ending-canonical formal snapshot under `REQ-ECP-021` / `SPEC-ECP-010` / `VER-ECP-010`, drafted 2026-08-29 (issue #256).
 - `WO-ECP-015` independent; the checkpoint-less `check` projection and the retirement of `focus` under `REQ-ECP-022` / `SPEC-ECP-011` / `ADR-ECP-007` / `VER-ECP-011`, drafted 2026-08-29 on the owner's challenge.
 - `WO-ECP-016` after `WO-ECP-013` (merged); admission of the selected work order's own records under `REQ-ECP-023` / `SPEC-ECP-012` / `VER-ECP-012`, drafted 2026-08-29 from issue #264.
+- `WO-ECP-017` after `WO-ECP-015` (merged); removal of the `focus` alias and the deferred `ECP-ONE-007` under `REQ-ECP-024` / `SPEC-ECP-013` / `VER-ECP-013`, drafted 2026-08-29 from the command audit's P1.
 - `WO-ECP-008` after `WO-ECP-001`.
 
 Every artifact in this domain is `draft`. This packet authorizes no
