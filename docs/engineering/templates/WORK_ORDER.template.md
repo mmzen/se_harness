@@ -18,27 +18,6 @@ paths = [
   "<repository-relative/component-prefix/>",
 ]
 
-# Optional. Delete this entire table when no agentic delegation is intended.
-[agentic_delegation]
-schema = "se-harness-agentic-delegation-v1"
-delegated_by = "<accountable-role>"
-delegate = "<logical-worker>"
-decision_rights = ["DR-WO-START"]
-operations = ["<closed-evaluator-operation>"]
-execution_profiles = ["<approved-logical-profile>"]
-paths = ["<path-within-execution-scope>"]
-required_evidence = [
-  { kind = "verification", path = "<retained-evidence-path>" },
-]
-valid_until = "YYYY-MM-DDTHH:MM:SSZ"
-max_retry = 0
-max_parallel_writers = 1
-child_delegation = false
-stop_before = [
-  "accountable-decision-required",
-  "action-time-authorization-required",
-]
-
 [relations]
 implements = ["REQ-xxx"]
 specifications = ["SPEC-xxx"]
@@ -58,14 +37,6 @@ ending in `/` admits that directory and its descendants. Every other entry
 admits one exact repository-relative path. Do not use absolute paths,
 backslashes, wildcards, dot components, drive prefixes, URIs, or duplicate
 case variants.
-
-The optional agentic_delegation table records a maximum delegation; it does not
-start work or grant standing authority. Delete the table when delegation is not
-intended. When retained, replace every placeholder, keep every delegated and
-evidence path within execution_scope.paths, use only managed decision rights,
-evaluator operations, logical profiles, and roles, and set a bounded UTC
-expiry. The exact released evaluator still derives a narrower, short-lived
-envelope from fresh live state for each request.
 
 Add `architecture = ["ARCH-xxx", "ADR-xxx"]` under `[relations]` when architecture applies. The relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
 

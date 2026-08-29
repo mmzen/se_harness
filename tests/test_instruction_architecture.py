@@ -965,7 +965,14 @@ class OwnerInstructionRegionTests(unittest.TestCase):
     def test_owner_region_identifies_every_managed_path_from_the_lock(self) -> None:
         region = self.owner_region()
         managed = sorted(path for path, entry in self.lock["files"].items() if entry.get("mode") == "managed")
-        self.assertEqual(55, len(managed))
+        # Identity-aware (WO-HUP-011, SPEC-HUP-011 rule 10): the managed count belongs to
+        # the root's version, not to this test. 0.10.0 managed 55 files; 0.11.0 manages 40
+        # after the three writing skills' retirement (WO-ECP-006). An unknown root fails
+        # loudly rather than silently accepting any count.
+        managed_count_by_root = {"0.10.0": 55, "0.11.0": 40}
+        root_version = self.lock["tool_version"]
+        self.assertIn(root_version, managed_count_by_root, f"declare the managed count of root {root_version}")
+        self.assertEqual(managed_count_by_root[root_version], len(managed))
         self.assertIn("docs/engineering/", region)
         self.assertIn("in `scripts/`", region)
         for path in managed:
