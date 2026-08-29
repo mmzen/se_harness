@@ -273,3 +273,20 @@ makes `check` without a checkpoint the projection itself and retires
 `focus`'s bytes are unchanged inside the alias window, so the identity
 holds against both for that release. Nothing else in this specification
 changes.
+
+## Amendment record
+
+**`ECP-CHG-007` extends to the selected work order's own records, proposed
+2026-08-29 under `WO-ECP-016` (issue #264; `SPEC-ECP-012`).** The rule
+admits the work order's own artifact path by construction because
+`transition` writes it and every Git diff carries it. The verification
+record that verifies the work order and the release record that releases it
+are written the same way, by `capture-verification` and `prepare-release`,
+and land on the same branch; judged against the declared scope they turned
+the managed gate red at every record head of pull request #263. `ECP-ADM-001`
+to `ECP-ADM-004` admit, as exact paths, every verification record whose
+`verifies_work_order` and every release record whose `releases_work` names
+the selected work order, and each record's `evaluator_evidence_path`; the
+records directories themselves stay outside the scope, and
+`scope.declared_paths` is unchanged. Nothing else in this specification
+changes.
