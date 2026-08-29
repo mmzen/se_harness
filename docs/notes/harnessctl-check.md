@@ -37,7 +37,12 @@ What it does **not** do:
   rule, procedure and next step (the former `focus` command, kept as an alias
   through 0.10.0 and removed after it; a script still calling it is refused
   with this replacement named);
-- it does not decide; it names the decision that is due and who owns it.
+- it does not decide; it names the decision that is due and who owns it;
+  for a work order carrying `[delegation] class = "execution"` at the pull
+  request's base it also says whether that decision is the actor's own: the
+  delegated command when the required check is green, a response naming
+  the check and its conclusion when it is not (see
+  [the delegation class](delegation-class.md)).
 
 ## The five checkpoints
 

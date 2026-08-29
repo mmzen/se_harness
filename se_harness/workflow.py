@@ -12,6 +12,15 @@ import os
 import re
 import tempfile
 import tomllib
+
+from se_harness.gate_source import (
+    DELEGATED_RIGHTS,
+    DELEGATED_ROLE,
+    DELEGATED_TRANSITIONS,
+    DelegationError,
+    authorize_delegated_right,
+    delegated_reason,
+)
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -696,6 +705,7 @@ def plan_transition(
     if not set(reasons).issubset(transitions):
         raise HarnessError("reasons may be supplied only for selected IDs")
     validator, report = _validation(root)
+    effective_reasons: dict[str, str] = dict(reasons)
     if report.errors:
         first = report.errors[0]
         message = f"current artifact graph is invalid [{first.code}]: {first.message}"
@@ -731,6 +741,20 @@ def plan_transition(
         if artifact is None:
             raise HarnessError(f"unknown artifact ID: {artifact_id}")
         _validate_edge(root, artifact, target, decisions[artifact_id], reasons.get(artifact_id))
+        if decisions[artifact_id] == DELEGATED_ROLE:
+            # SPEC-ECP-006 ECP-DLG-002/-003/-005/-006/-007: the delegated route.
+            right = DELEGATED_TRANSITIONS.get((_family(artifact.artifact_type), artifact.status, target))
+            try:
+                reading = authorize_delegated_right(
+                    root, work_order_metadata=artifact.metadata, work_order_path=artifact.path, right=right,
+                )
+            except DelegationError as exc:
+                raise PreconditionError(exc.code, exc.message) from exc
+            if apply:
+                from se_harness import mutation_guard
+
+                mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS[str(right)])
+            effective_reasons[artifact_id] = delegated_reason(str(right), reading, reasons.get(artifact_id))
         path = safe_destination(root, artifact.path.relative_to(root))
         original = path.read_bytes()
         # Plans intentionally expose no execution timestamp. A fixed valid value
@@ -741,7 +765,7 @@ def plan_transition(
             artifact,
             target,
             decisions[artifact_id],
-            reasons.get(artifact_id),
+            effective_reasons.get(artifact_id),
             rendered_now,
         )
         replacements[path.resolve()] = replacement
@@ -771,7 +795,7 @@ def plan_transition(
             root, report, catalog, artifact,
             checkpoint="transition", change_set=declared_change_set((), complete=False), target=target,
         )
-        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, reasons.get(artifact_id))
+        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, effective_reasons.get(artifact_id))
         for gate in transition_gate_results(quality, gates, context, structural=structural):
             gate_results.append(gate)
             for predicate in gate["predicates"]:

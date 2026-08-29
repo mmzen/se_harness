@@ -2561,6 +2561,28 @@ def _execution_scope_path_issue(value: object) -> str | None:
     return None
 
 
+def validate_work_order_delegation(
+    artifacts: list[Artifact],
+    report_root: Path,
+) -> list[Diagnostic]:
+    """SPEC-ECP-006 ECP-DLG-001: `[delegation]` carries exactly `class = "execution"` on a work order."""
+
+    errors: list[Diagnostic] = []
+    for artifact in artifacts:
+        table = artifact.metadata.get("delegation")
+        if table is None:
+            continue
+        if artifact.artifact_type != "work_order":
+            _add_error(errors, artifact, report_root, "E-ECP-001", "delegation is allowed only on work-order artifacts", plane="governance")
+            continue
+        if not isinstance(table, dict) or set(table) != {"class"}:
+            _add_error(errors, artifact, report_root, "E-ECP-001", "delegation must contain exactly class", plane="governance")
+            continue
+        if table.get("class") != "execution":
+            _add_error(errors, artifact, report_root, "E-ECP-001", f"delegation.class must be \"execution\", not {table.get('class')!r}", plane="governance")
+    return errors
+
+
 def validate_work_order_execution_scope(
     artifacts: list[Artifact],
     report_root: Path,
@@ -2850,6 +2872,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(assessment_errors)
         errors.extend(validate_work_order_assurance(artifacts, repository_root))
         errors.extend(validate_work_order_execution_scope(artifacts, repository_root))
+        errors.extend(validate_work_order_delegation(artifacts, repository_root))
         errors.extend(
             validate_revision_consistency(
                 artifacts,

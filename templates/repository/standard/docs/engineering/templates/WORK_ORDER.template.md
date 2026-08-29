@@ -18,6 +18,11 @@ paths = [
   "<repository-relative/component-prefix/>",
 ]
 
+# Optional. Delete this table unless the accountable owner delegates the three
+# mechanical decisions of this work order to a non-human actor.
+[delegation]
+class = "execution"
+
 [relations]
 implements = ["REQ-xxx"]
 specifications = ["SPEC-xxx"]
@@ -37,6 +42,14 @@ ending in `/` admits that directory and its descendants. Every other entry
 admits one exact repository-relative path. Do not use absolute paths,
 backslashes, wildcards, dot components, drive prefixes, URIs, or duplicate
 case variants.
+
+The optional `[delegation]` table with `class = "execution"` lets the
+`delegated-executor` role apply `DR-WO-START`, `DR-WO-COMPLETE` and
+`DR-VREC-PREPARE` for this work order, and nothing else, only while the
+required pull-request check for the candidate head is `success`; the class
+is read from the base of the pull request, so a branch cannot add it to
+itself. Approving a work order that carries the table is the act of
+delegating. Delete the table when every decision stays human.
 
 Add `architecture = ["ARCH-xxx", "ADR-xxx"]` under `[relations]` when architecture applies. The relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
 

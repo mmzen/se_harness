@@ -91,9 +91,10 @@ AGENTIC_OPERATION_FIELDS = frozenset(
         "mutation_operation",
     }
 )
-PHASE4_AGENTIC_OPERATIONS = (
+#: The three delegated operations of the delegation class (SPEC-ECP-006 ECP-DLG-002);
+#: the JSON key keeps its schema-v4 name `agentic_operations`.
+DELEGATED_OPERATIONS = (
     ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress", ("QG-G3-WORK-AUTHORIZATION",), "PROC-WO-START"),
-    ("change-bundle-apply", None, "in_progress", "in_progress", ("QG-G4-IMPLEMENTATION-EVIDENCE",), "PROC-WO-IMPLEMENT"),
     ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented", ("QG-G4-IMPLEMENTATION-EVIDENCE",), "PROC-WO-IMPLEMENT"),
     ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented", ("QG-G4-CANDIDATE-READY",), "PROC-WO-PREPARE-VREC"),
 )
@@ -572,14 +573,14 @@ def validate_contracts(
     _validate_transition_bindings(workflow, quality_gates, gates, predicates)
     procedures = _validate_procedures(workflow, set(gates), gate_predicates)
     raw_operations = workflow.get("agentic_operations")
-    if not isinstance(raw_operations, list) or len(raw_operations) != len(PHASE4_AGENTIC_OPERATIONS):
-        raise ContractError("workflow must declare the closed four-operation Phase 4 catalog")
-    expected_operations = [item[0] for item in PHASE4_AGENTIC_OPERATIONS]
+    if not isinstance(raw_operations, list) or len(raw_operations) != len(DELEGATED_OPERATIONS):
+        raise ContractError("workflow must declare exactly the three delegated operations")
+    expected_operations = [item[0] for item in DELEGATED_OPERATIONS]
     if [item.get("id") for item in raw_operations if isinstance(item, Mapping)] != expected_operations:
-        raise ContractError("workflow Phase 4 operation order or identity is invalid")
-    for raw, expected in zip(raw_operations, PHASE4_AGENTIC_OPERATIONS, strict=True):
+        raise ContractError("workflow delegated operation order or identity is invalid")
+    for raw, expected in zip(raw_operations, DELEGATED_OPERATIONS, strict=True):
         if not isinstance(raw, Mapping) or set(raw) != AGENTIC_OPERATION_FIELDS:
-            raise ContractError("workflow Phase 4 operation has invalid fields")
+            raise ContractError("workflow delegated operation has invalid fields")
         operation, right, current, result, gate_ids, procedure_id = expected
         observed_gate_ids = tuple(
             _strings(raw.get("gate_ids"), f"agentic operation {operation} gate_ids")
@@ -593,9 +594,9 @@ def validate_contracts(
             or raw.get("procedure_id") != procedure_id
             or raw.get("mutation_operation") != operation
         ):
-            raise ContractError(f"workflow Phase 4 operation mapping is invalid: {operation}")
+            raise ContractError(f"workflow delegated operation mapping is invalid: {operation}")
         if raw.get("procedure_id") not in procedures:
-            raise ContractError(f"workflow Phase 4 operation references unknown procedure: {operation}")
+            raise ContractError(f"workflow delegated operation references unknown procedure: {operation}")
         unknown_gates = set(observed_gate_ids) - set(gates)
         if unknown_gates:
             raise ContractError(f"workflow Phase 4 operation references unknown gate {sorted(unknown_gates)[0]}")

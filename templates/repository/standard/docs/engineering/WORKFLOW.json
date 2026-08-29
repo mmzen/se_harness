@@ -14,7 +14,6 @@
   ],
   "agentic_operations": [
     {"id": "delegated-work-order-start", "decision_right": "DR-WO-START", "current_status": "approved", "result_status": "in_progress", "gate_ids": ["QG-G3-WORK-AUTHORIZATION"], "procedure_id": "PROC-WO-START", "mutation_operation": "delegated-work-order-start"},
-    {"id": "change-bundle-apply", "decision_right": null, "current_status": "in_progress", "result_status": "in_progress", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "procedure_id": "PROC-WO-IMPLEMENT", "mutation_operation": "change-bundle-apply"},
     {"id": "delegated-work-order-complete", "decision_right": "DR-WO-COMPLETE", "current_status": "in_progress", "result_status": "implemented", "gate_ids": ["QG-G4-IMPLEMENTATION-EVIDENCE"], "procedure_id": "PROC-WO-IMPLEMENT", "mutation_operation": "delegated-work-order-complete"},
     {"id": "delegated-vrec-prepare", "decision_right": "DR-VREC-PREPARE", "current_status": "implemented", "result_status": "implemented", "gate_ids": ["QG-G4-CANDIDATE-READY"], "procedure_id": "PROC-WO-PREPARE-VREC", "mutation_operation": "delegated-vrec-prepare"}
   ],

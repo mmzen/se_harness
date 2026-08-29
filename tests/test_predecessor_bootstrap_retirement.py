@@ -162,6 +162,15 @@ ECP006_CANDIDATE_VALIDATOR_DELETIONS = (
 )
 ECP006_CANDIDATE_VALIDATOR_DELETED_LINES = 147
 
+#: `WO-ECP-018` (2026-08-29): against a root that already carries the `[agentic_delegation]`
+#: removal (0.11.0), the candidate copy adds the `[delegation]` class validator: two inserted
+#: blocks, 23 lines, declared as (root line the block follows, lines inserted, first line).
+ECP018_CANDIDATE_VALIDATOR_INSERTIONS = (
+    (2564, 22, "def validate_work_order_delegation("),
+    (2853, 1, "        errors.extend(validate_work_order_delegation(artifacts, repository_root))"),
+)
+ECP018_CANDIDATE_VALIDATOR_INSERTED_LINES = 23
+
 #: The bootstrap-era markers under the closed 0.6.0 domain, pinned as counts.
 #: The retirement removes their readers, not the data: a count that moved would
 #: mean retained history had been rewritten.
@@ -456,7 +465,14 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # candidate template byte for byte; the deletion ledger below describes the
             # 0.7.1 root and is retained for that state only.
             if "validate_agentic_delegations" not in self.root_text:
-                self.assertEqual(self.candidate_text, self.root_text)
+                if "validate_work_order_delegation" in self.root_text:
+                    self.assertEqual(self.candidate_text, self.root_text)
+                    return
+                # WO-ECP-018 (SPEC-ECP-006 ECP-DLG-001): the candidate copy is the 0.11.0 root
+                # copy with the `[delegation]` class validator inserted, declared block by block.
+                self._assert_root_plus_declared_insertions(
+                    ECP018_CANDIDATE_VALIDATOR_INSERTIONS, ECP018_CANDIDATE_VALIDATOR_INSERTED_LINES
+                )
                 return
             # WO-ECP-006 (SPEC-ECP-006 ECP-DLG-008): the candidate copy is the root copy
             # with the `[agentic_delegation]` validator removed, declared block by block
@@ -465,6 +481,24 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             self._assert_root_minus_declared_blocks(ECP006_CANDIDATE_VALIDATOR_DELETIONS, ECP006_CANDIDATE_VALIDATOR_DELETED_LINES)
             return
         self._assert_root_minus_declared_blocks(CANDIDATE_VALIDATOR_DELETIONS, CANDIDATE_VALIDATOR_DELETED_LINES)
+
+    def _assert_root_plus_declared_insertions(self, declared, inserted_lines) -> None:
+        root_lines = self.root_text.splitlines()
+        candidate_lines = self.candidate_text.splitlines()
+        self.assertEqual(inserted_lines, len(candidate_lines) - len(root_lines))
+        matcher = difflib.SequenceMatcher(a=root_lines, b=candidate_lines, autojunk=False)
+        observed = []
+        for tag, start, stop, candidate_start, candidate_stop in matcher.get_opcodes():
+            if tag == "equal":
+                continue
+            # Nothing is deleted and nothing is rewritten: the candidate copy is the root copy
+            # plus the declared blocks.
+            self.assertEqual("insert", tag, f"unexpected {tag} at root line {start + 1}")
+            observed.append((start + 1, candidate_stop - candidate_start, candidate_lines[candidate_start]))
+        self.assertEqual(len(declared), len(observed))
+        for (line, count, first), (observed_line, observed_count, observed_first) in zip(declared, observed):
+            with self.subTest(root_line=line, first=first[:48]):
+                self.assertEqual((line, count, first), (observed_line, observed_count, observed_first))
 
     def _assert_root_minus_declared_blocks(self, declared, deleted_lines) -> None:
         root_lines = self.root_text.splitlines()

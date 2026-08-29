@@ -967,6 +967,19 @@ def check_workflow(
         "command_or_response": next_command,
         "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
     }
+    if primary.artifact_type == "work_order" and passed:
+        # ECP-DLG-010: a class-bearing work order is told when the decision due is delegated.
+        from se_harness.gate_source import DelegationError, delegation_overlay
+
+        try:
+            restitution = delegation_overlay(
+                root, work_order_metadata=primary.metadata, work_order_path=primary.path,
+                artifact_id=artifact_id, restitution=restitution,
+            )
+        except DelegationError:
+            # A misconfigured gate source never turns a completed projection into a blocked
+            # one; the delegated route itself refuses with the coded reason when attempted.
+            pass
     return build_result(
         operation="check",
         outcome=outcome,
@@ -1070,6 +1083,17 @@ def selected_result(
             for identifier in rule.get("alternative_procedure_ids", [])
         ],
     }
+    if operation == "check" and primary.artifact_type == "work_order" and not blocked:
+        # ECP-DLG-010: the projection tells a class-bearing work order when its decision is delegated.
+        from se_harness.gate_source import DelegationError, delegation_overlay
+
+        try:
+            restitution = delegation_overlay(
+                root, work_order_metadata=primary.metadata, work_order_path=primary.path,
+                artifact_id=primary.artifact_id, restitution=restitution,
+            )
+        except DelegationError:
+            pass
     return build_result(
         operation=operation,
         outcome="blocked" if blocked else "completed",

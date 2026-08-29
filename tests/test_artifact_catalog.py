@@ -138,7 +138,23 @@ envelope from fresh live state for each request.
                 candidate_work_order,
             )
         else:
-            self.assertEqual(released_work_order, candidate_work_order)
+            # WO-ECP-018 (SPEC-ECP-006 ECP-DLG-001): the candidate template adds the optional
+            # `[delegation]` table and one paragraph; a root released with them takes equality.
+            class_table = (
+                "# Optional. Delete this table unless the accountable owner delegates the three\n"
+                "# mechanical decisions of this work order to a non-human actor.\n"
+                "[delegation]\n"
+                'class = "execution"\n\n'
+            )
+            paragraph_start = "The optional `[delegation]` table with `class = "
+            if class_table in candidate_work_order and class_table not in released_work_order:
+                stripped = candidate_work_order.replace(class_table, "", 1)
+                start = stripped.index(paragraph_start)
+                end = stripped.index("\n\n", start) + 2
+                stripped = stripped[:start] + stripped[end:]
+                self.assertEqual(released_work_order, stripped)
+            else:
+                self.assertEqual(released_work_order, candidate_work_order)
         self.assertNotIn("agentic_delegation", candidate_work_order)
         self.assertIn("[execution_scope]", released_work_order)
         self.assertIn("[execution_scope]", candidate_work_order)

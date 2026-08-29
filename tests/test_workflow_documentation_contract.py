@@ -48,7 +48,6 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
         self.assertEqual(
             [
                 ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress"),
-                ("change-bundle-apply", None, "in_progress", "in_progress"),
                 ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented"),
                 ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented"),
             ],

@@ -24,6 +24,9 @@ PUBLIC_MUTATION_OPERATIONS = frozenset(
     {
         "capture-verification",
         "create-artifact",
+        "delegated-vrec-prepare",
+        "delegated-work-order-complete",
+        "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
         "renumber-artifacts-apply",
