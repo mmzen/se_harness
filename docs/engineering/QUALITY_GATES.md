@@ -24,7 +24,9 @@ MUST be byte-identical to the packaged contract loaded by `harnessctl`.
 MUST be reported even after another predicate fails.
 
 **QG-010:** `harnessctl check` MUST evaluate gates at `start`, `pre-action`,
-`transition`, and `handoff`. Transition planning and apply MUST evaluate, for
+`transition`, `handoff`, and `scope`. At `scope` it MUST evaluate the scope
+predicates of `QG-G4-IMPLEMENTATION-EVIDENCE` for a work order in any
+lifecycle state, and nothing else. Transition planning and apply MUST evaluate, for
 every transitioned artifact, the predicates the transition binding index binds
 to that lifecycle edge through the same gate evaluator `check` uses, plus the
 graph-structural checks it names, and MUST NOT write when any of them is not
@@ -36,7 +38,9 @@ checkpoint service before writing a VREC or RLS.
 inherits its gate's. A predicate whose inputs a transition does not receive
 (the declared change set) is bound to `pre-action` and `handoff` only, so the
 `handoff` checkpoint evaluates a superset of what the transition to
-`implemented` evaluates, never a different set.
+`implemented` evaluates, never a different set. The `scope` checkpoint
+evaluates exactly the predicates that declare it: `QGP-G4I-SCOPE`,
+`QGP-G4I-COMPLETE`, and `QGP-G4I-PATHS`.
 
 ## Executable predicate registry
 
