@@ -44,6 +44,7 @@
 - `release-0-8-0/`: aggregate qualification, provenance, and release records for version 0.8.0.
 - `release-0-9-0/`: aggregate qualification, provenance, and release records for version 0.9.0.
 - `release-0-10-0/`: aggregate qualification, provenance, and release records for version 0.10.0.
+- `release-0-11-0/`: aggregate qualification, provenance, and release records for version 0.11.0.
 
 ## Repository-specific engineering documentation
 
