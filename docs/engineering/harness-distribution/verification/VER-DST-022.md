@@ -2,13 +2,20 @@
 id = "VER-DST-022"
 type = "verification"
 title = "Independent evidence for the retirement of leaving-set managed paths"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-DST-066"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:06:36Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'I approve the definitions packet', for the repair of issue #271: the independent evidence contract over the retirement of leaving-set managed paths, its conformance tests and its analysis rows. Measured before this transition over branch state 6f1fd05 carrying unmoved main d3b5a3f: validate reads 0 errors; start preflight reads only the draft signature. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Verification Contract: Independent evidence for the retirement of leaving-set managed paths

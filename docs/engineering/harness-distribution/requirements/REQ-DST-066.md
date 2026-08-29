@@ -2,7 +2,7 @@
 id = "REQ-DST-066"
 type = "requirement"
 title = "An upgrade retires managed files that leave the managed set"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "issue #271; upgrade rehearsal of 2026-08-29 on a clone of main 896f8fa
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:06:36Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'I approve the definitions packet', for the repair of issue #271: upgrade retires prior-lock managed paths that left the managed set - remove when tracked bytes match the recorded digest, customized and blocking when they differ, lock omission, deletion inside the one rollback transaction, evidence plan entries, the 0.10.0-to-0.11.0 conformance pair, the consumer note, and amendment records on SPEC-DST-001 and SPEC-ECP-007. Measured before this transition over branch state 6f1fd05 carrying unmoved main d3b5a3f: validate reads 1157 artifacts, 0 errors under the governing 0.11.0 root; start preflight reads only the draft signature (W005, three W013). Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Requirement: An upgrade retires managed files that leave the managed set

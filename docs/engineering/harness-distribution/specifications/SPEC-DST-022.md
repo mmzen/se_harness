@@ -2,13 +2,20 @@
 id = "SPEC-DST-022"
 type = "specification"
 title = "Retirement of managed paths that leave the managed set"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 specifies = ["REQ-DST-066"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T18:06:36Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-29 by the accountable owner, 'I approve the definitions packet', for the repair of issue #271: the DST-UPR-001..008 retirement rules over plan_install and apply_changes, with amendment records on SPEC-DST-001 and SPEC-ECP-007. Measured before this transition over branch state 6f1fd05 carrying unmoved main d3b5a3f: validate reads 0 errors; start preflight reads only the draft signature. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Specification: Retirement of managed paths that leave the managed set
