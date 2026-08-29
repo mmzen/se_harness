@@ -2,7 +2,7 @@
 id = "WO-ECP-006"
 type = "work_order"
 title = "Remove the Phase 4 envelope, bundle and broker; keep the journaled apply; retire the stubbed skills"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-27"
 updated = "2026-08-29"
@@ -54,6 +54,13 @@ implements = ["REQ-ECP-018", "REQ-ECP-014"]
 specifications = ["SPEC-ECP-006", "SPEC-ECP-007"]
 architecture = ["ARCH-ECP-001", "ADR-ECP-002"]
 verification = ["VER-ECP-014", "VER-ECP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T13:30:36Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-006', as a decision distinct from the approval of VER-ECP-014 in the same transaction, on the work order revised in place the same day to the removal of the Phase 4 envelope, bundle, broker path, delegated-workflow command, contract catalogs and skill-contract validator (REQ-ECP-018), the retirement of the three stubbed writing skills taken over from WO-ECP-008 (REQ-ECP-014), and the retention of the journaled apply with its fault matrix. Authorizes start preflight and then only the declared scope. It authorizes no change to a hash-locked root file, no contract file, no supersession transition, no verification record, no release and no publication; the shared write path (REQ-ECP-017) and the delegation class (REQ-ECP-011) remain for later work orders. Start preflight has not been run."
 +++
 
 # Work Order: Remove the Phase 4 envelope, bundle and broker; keep the journaled apply; retire the stubbed skills

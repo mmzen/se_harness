@@ -2,13 +2,20 @@
 id = "VER-ECP-014"
 type = "verification"
 title = "Independent evidence for the Phase 4 removal and the retained journaled apply"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
 
 [relations]
 verifies = ["REQ-ECP-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T13:30:36Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-29 with the words 'Approve and start WO-ECP-006': the removal subset of VER-ECP-006 - wheel and help walk, vocabulary grep, the eleven-stage fault matrix on both platforms over the retained journaled apply, and byte-unchanged history fixtures."
 +++
 
 # Verification Contract: Independent evidence for the Phase 4 removal and the retained journaled apply
