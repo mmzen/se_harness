@@ -2,7 +2,7 @@
 id = "WO-HUP-011"
 type = "work_order"
 title = "Adopt exact public 0.11.0 as the standard root, the simple way"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-29T16:44:38Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-HUP-011', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the simple upgrade transaction from the isolated 0.11.0 environment, the explicit removal of the fifteen retired skill files, the owner statements naming the new governor, the candidate move to 0.12.0, the identity-aware test assertions, this packet, the domain index, the transaction JSON and the evidence packet. It authorizes no product byte beyond the version identity, no template, no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T16:44:45Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-HUP-011'. Start preflight PASS with no diagnostics over the approval commit b602815 carrying unmoved main 896f8fa, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.11.0 as the standard root, the simple way
