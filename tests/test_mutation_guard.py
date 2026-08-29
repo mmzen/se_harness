@@ -445,6 +445,9 @@ class MutationGuardTests(unittest.TestCase):
                     owner="quality-owner",
                     output=None,
                 ),
+                lambda: guard(root, operation="delegated-work-order-start"),
+                lambda: guard(root, operation="delegated-work-order-complete"),
+                lambda: guard(root, operation="delegated-vrec-prepare"),
                 lambda: prepare_release(
                     root,
                     record_id="RLS-TST-001",
@@ -475,6 +478,9 @@ class MutationGuardTests(unittest.TestCase):
                 "transition-apply",
                 "capture-verification",
                 "prepare-release",
+                "delegated-work-order-start",
+                "delegated-work-order-complete",
+                "delegated-vrec-prepare",
             },
             set(observed),
         )

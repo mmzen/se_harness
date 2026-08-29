@@ -22,6 +22,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | --- | --- |
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [`harnessctl check` explained](harnessctl-check.md) | What does `check` evaluate at each checkpoint, how does an artifact's state select the rule and gates, and why does it refuse? |
+| [The delegation class](delegation-class.md) | How does one table on a work order let a non-human actor start it, complete it and prepare its record while the required pull-request check is green, and what stays human? |
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
 | [Single-agent workflow skills MVP](agentic-execution-skills-mvp.md) | How do the three explicit-only writing skills complement `harnessctl` and stop at accountable decision points? |

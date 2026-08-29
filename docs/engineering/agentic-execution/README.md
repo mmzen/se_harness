@@ -160,6 +160,12 @@ narrowing is in Git history and returns with the `[delegation]` class
 successor is the requirements steward's and technical owner's act, taken by
 name when the successor rules are implemented.
 
+**Delegated (2026-08-29, `WO-ECP-018`).** The delegation class is implemented:
+`[delegation] class = "execution"` on a work order, the `delegated-executor`
+role for the three mechanical rights behind the green required check, the
+class read at the pull request's base, and `check` telling the actor when
+the decision is its own (`docs/notes/delegation-class.md`).
+
 ## 3. The plan
 
 The work is scheduled in the `execution-control-plane` domain
