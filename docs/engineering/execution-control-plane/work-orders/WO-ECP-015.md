@@ -2,7 +2,7 @@
 id = "WO-ECP-015"
 type = "work_order"
 title = "Fold focus into check: the checkpoint-less projection, one name in every contract"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -57,6 +57,13 @@ to = "in_progress"
 decided_at = "2026-08-29T11:07:12Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-015'. Start preflight PASS with no diagnostics over the approval commit 3222e4e carrying unmoved main 5e5e9d6, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T11:26:45Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-ECP-015 implemented, deferring ECP-ONE-007', on the handoff check reading Completed over the Git-derived change set of 23 paths at its fixed point 408c92eb, formal snapshot 6cbbe31881d82f58716602f4f80f2e67988c55f69177c2b33982f1a6fde8cc5b, no scope amendment. check without a checkpoint is the projection focus returned, evaluating no gate and writing nothing; focus is a one-release alias with unchanged bytes and a deprecation notice; the five procedure steps and WFL-003 name check; the notes and README follow. ECP-ONE-007 is deferred by this decision: the harness-orient core is a frozen, vector-pinned surface whose manifest digest is retained history, so the skill keeps invoking the alias during the alias window and moves to check with the alias-removal work order that re-baselines the vectors; the rule stands in SPEC-ECP-011 and its deferral is recorded here and in the evidence packet's deviation 1. The Linux suite is OK and the Windows workstation at its two baseline failures; all thirteen lanes pass on #263 at 407e6f4 under the 0.10.0 root's own gate. Every reading, the packet and the handoff check were produced natively on the Windows checkout by the released 0.10.0 evaluator. This authorizes no further act."
 +++
 
 # Work Order: Fold focus into check: the checkpoint-less projection, one name in every contract
