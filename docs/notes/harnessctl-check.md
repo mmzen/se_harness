@@ -160,8 +160,11 @@ changed. Three forms are accepted, and they are mutually exclusive:
 
 Without a completeness assertion the scope predicates are `not_assessable`,
 which blocks the check. `QGP-G4I-PATHS` passes when every changed path is
-inside the work order's declared scope; the work order's own artifact file
-and its evidence directory are admitted by construction. Paths are checked as
+inside the work order's declared scope; the work order's own artifact file,
+its evidence directory, and the verification and release records that name it
+(`verifies_work_order`, `releases_work`) with their `evaluator_evidence_path`
+files are admitted by construction, each record as an exact path, so a scope
+need not list a records directory. Paths are checked as
 untrusted text: they must be relative, normalized, without `.` or `..`
 components, without reserved components, and without backslashes.
 
