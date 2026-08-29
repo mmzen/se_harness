@@ -119,7 +119,7 @@ tests/test_workflow_compliance.py
 ## Hosted lanes
 
 Pull request #257 at `bafc534`: every lane passes (13 pass). The managed
-Engineering Harness lane () ran the handoff check over the pull
+Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33242110343/job/99073099746) ran the handoff check over the pull
 request's diff inside the declared scope and the declared
 `Harness-Restitution` `26cda39e…` equalled the recomputed `result_sha256`;
 the Governor Transition Assessment (https://github.com/mmzen/se_harness/actions/runs/33242110353/job/99073099856) and every candidate-evidence,
