@@ -2,7 +2,7 @@
 id = "REQ-ECP-022"
 type = "requirement"
 title = "One read-only evaluator command projects and checks a selected artifact"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -13,6 +13,13 @@ source = "owner challenge of 2026-08-29 on the relation between focus and check;
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-29T11:06:57Z"
+decided_by = "requirements-steward"
+reason = "Approved on 2026-08-29 by the accountable owner, 'Approve and start WO-ECP-015', for folding focus into check: check without a checkpoint becomes the projection focus returns today, focus remains one release as a byte-identical alias with a deprecation notice, the five procedure steps and WFL-003 name check, the harness-orient skill and the documentation follow; ADR-ECP-007 Option B, with the SPEC-ECP-001 amendment record and the ARCH-ECP-001 amendment that follows this approval. Measured before this transition over branch state e4a3c1b carrying unmoved main 5e5e9d6: validate PASS at 0 errors under the governing 0.10.0 root; start preflight reads the draft signature plus the architecture pincer W018 and W021 that the ADR approval and the ARCH-ECP-001 amendment resolve. Approval of a definition authorizes no work; the work order is approved separately."
 +++
 
 # Requirement: One read-only evaluator command projects and checks a selected artifact
