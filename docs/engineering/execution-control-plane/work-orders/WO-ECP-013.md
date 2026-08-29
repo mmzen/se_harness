@@ -36,6 +36,7 @@ paths = [
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-003.md",
   "docs/engineering/execution-control-plane/verification/VER-ECP-009.md",
   "docs/engineering/execution-control-plane/architecture/adr/ADR-ECP-006.md",
+  "docs/engineering/execution-control-plane/architecture/ARCH-ECP-001.md",
 ]
 
 [relations]
