@@ -2,7 +2,7 @@
 id = "WO-ECP-014"
 type = "work_order"
 title = "Canonicalize line endings in the formal snapshot"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -36,6 +36,13 @@ to = "approved"
 decided_at = "2026-08-29T09:09:09Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'i approve the artifact packet and you can start WO-ECP-014', as a decision distinct from the approval of its definitions seconds earlier. Authorizes start preflight and then only the declared scope: the one product module, the one test module, the check note, this domain's index, the SPEC-ECP-001 amendment record and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T09:09:16Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'you can start WO-ECP-014'. Start preflight PASS with no diagnostics over the approval commit 9220f97 carrying unmoved main 741a774, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Canonicalize line endings in the formal snapshot
