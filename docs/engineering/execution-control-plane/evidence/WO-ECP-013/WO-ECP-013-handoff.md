@@ -162,3 +162,16 @@ tests/test_progressive_documentation.py
 tests/test_validation_taxonomy.py
 tests/test_workflow_compliance.py
 ```
+
+## Hosted lanes
+
+Pull request #258 at `94113de`: every lane passes (13 pass). The managed
+Engineering Harness lane (https://github.com/mmzen/se_harness/actions/runs/33243970048/job/99078077948) still runs the 0.9.0 root's old step
+(`check --checkpoint handoff`), which completed inside the declared scope
+with the declared `Harness-Restitution` `b27e6177…` equal to the recomputed
+`result_sha256` while the work order is `in_progress`; the Governor
+Transition Assessment (https://github.com/mmzen/se_harness/actions/runs/33243970000/job/99078077807), both candidate-evidence lanes, both migration
+legs, both qualification rehearsals and the integration-package build,
+verify (Linux, Windows) and retain lanes pass. From the completion
+transition on, that old step is expected red on this pull request, by the
+rule this work order removes (`VER-ECP-009`, residual uncertainty).
