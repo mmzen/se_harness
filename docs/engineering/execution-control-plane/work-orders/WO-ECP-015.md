@@ -2,7 +2,7 @@
 id = "WO-ECP-015"
 type = "work_order"
 title = "Fold focus into check: the checkpoint-less projection, one name in every contract"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -50,6 +50,13 @@ to = "approved"
 decided_at = "2026-08-29T11:07:05Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-29 with the words 'Approve and start WO-ECP-015', as a decision distinct from the approval of its definitions and of ADR-ECP-007 seconds earlier, and after the ARCH-ECP-001 amendment that addresses REQ-ECP-022. Authorizes start preflight and then only the declared scope: the checkpoint-less check projection, the byte-identical focus alias, the contract steps and WFL-003, the harness-orient skill, tests, the notes and README, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file of this repository, no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-29T11:07:12Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'Approve and start WO-ECP-015'. Start preflight PASS with no diagnostics over the approval commit 3222e4e carrying unmoved main 5e5e9d6, run with the governing exact public 0.10.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Fold focus into check: the checkpoint-less projection, one name in every contract
