@@ -2,7 +2,7 @@
 id = "WO-ECP-012"
 type = "work_order"
 title = "Resolve evaluator-derived paths on every host, and document the check command"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-29"
 updated = "2026-08-29"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-08-29T07:45:38Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-29, 'you can start WO-ECP-012'. Start preflight PASS with no diagnostics over the approval commit 3433b7d carrying unmoved main aa99773, run with the governing exact public 0.9.0 evaluator outside the checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-29T08:05:41Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-29 under DR-WO-COMPLETE, 'Mark WO-ECP-012 implemented', on the handoff check reading Completed over the Git-derived change set, formal snapshot f48f104e9d28ec7e176003778c877f09c101121e0fc5b8237ed251da9ea8835c, fixed-point result 26cda39e, after one scope amendment adding the packet's own three definition paths. evidence_packet_path now hands the resolver the POSIX form of the evaluator's own path and the resolver renders any PurePath as POSIX before its backslash guard, unchanged for str; PureWindowsPath regression tests; the Windows workstation suite went from 64 failing names to 2 unrelated ones with zero WEX-ECP-010; Linux OK. docs/notes/harnessctl-check.md is the check reference, indexed, linked and identifier-checked. No managed or hash-locked file moved. All thirteen pull-request lanes pass on #257 at bafc534 including the managed gate with the declared digest matching. This authorizes no further act."
 +++
 
 # Work Order: Resolve evaluator-derived paths on every host, and document the check command
