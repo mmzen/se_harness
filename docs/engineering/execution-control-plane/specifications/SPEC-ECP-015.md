@@ -2,13 +2,20 @@
 id = "SPEC-ECP-015"
 type = "specification"
 title = "The managed lane fetches the pull request live and hands the selector an event-shaped file"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 specifies = ["REQ-ECP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T17:07:52Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-30 by selecting the presented option 'Approve and start WO-ECP-021': ECP-LPB-001 to ECP-LPB-006; the selector module, the check inputs and the hash-locked root lane are unchanged."
 +++
 
 # Specification: The managed lane fetches the pull request live and hands the selector an event-shaped file

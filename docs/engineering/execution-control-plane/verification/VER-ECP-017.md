@@ -2,13 +2,20 @@
 id = "VER-ECP-017"
 type = "verification"
 title = "Independent evidence that the managed lane selects from the live body"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 verifies = ["REQ-ECP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T17:07:52Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-30 by selecting the presented option 'Approve and start WO-ECP-021': template-byte rows for ECP-LPB-001 to -004 and -006, selector rows over the reduced shape for ECP-LPB-005, and the retained root-copy and consumer-workflow assertions."
 +++
 
 # Verification Contract: Independent evidence that the managed lane selects from the live body

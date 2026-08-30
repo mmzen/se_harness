@@ -2,7 +2,7 @@
 id = "REQ-ECP-026"
 type = "requirement"
 title = "The managed lane reads the declarations from the live pull-request body"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -13,6 +13,13 @@ source = "Issue #280 (functional assessment of 2026-08-30, section 3.3); the no-
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T17:07:52Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-30 by selecting the presented option 'Approve and start WO-ECP-021': the managed lane selects the declared Harness-Work-Order and Harness-Restitution fields from the pull request's current body fetched from the hosting API during the run; issue #280 part c."
 +++
 
 # Requirement: The managed lane reads the declarations from the live pull-request body
