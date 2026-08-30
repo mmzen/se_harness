@@ -2,7 +2,7 @@
 id = "WO-ECP-021"
 type = "work_order"
 title = "Normalise the harnessctl command shape"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -48,6 +48,13 @@ to = "approved"
 decided_at = "2026-08-30T16:56:30Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-30 with the words 'Approve and start WO-ECP-021', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: cli.py and provenance.py (the workflow modules only for a leading-code strip), the nine test modules including the new tests/test_cli_shape.py, the two notes, this domain's index and the evidence packet. It authorizes no change to the schema-2 result, any gate, procedure, contract file, skill or hash-locked root file, preflight's --work-order, rehearse-recovery's shape, any verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-30T16:56:37Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-30, 'Approve and start WO-ECP-021'. Start preflight PASS with no diagnostics over the approval commit 4e3a584 carrying unmoved main 7cac025, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Normalise the harnessctl command shape
