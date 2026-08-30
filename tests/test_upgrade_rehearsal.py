@@ -44,6 +44,7 @@ class FakeEvaluators:
     predecessor_doctor_after: int = 1
     successor_doctor_after: int = 0
     validate_lines: list[str] = field(default_factory=list)
+    four_number_summary: bool = False
     lock_schema: int = 3
     lock_version: str | None = None
     lock_payload: str | None = None
@@ -89,7 +90,11 @@ class FakeEvaluators:
             return Completed(0, "upgraded managed files\n", "")
         if command == "validate":
             errors = [line for line in self.validate_lines if line.startswith("- [E")]
-            body = "\n".join([*self.validate_lines, f"Artifacts: 10 | Errors: {len(errors)} | Warnings: 0"]) + "\n"
+            # WO-AUT-004: a 0.12.0 validator prints a fourth number; an older one does not.
+            summary = f"Artifacts: 10 | Errors: {len(errors)} | Warnings: 0"
+            if self.four_number_summary:
+                summary += " | Advisories: 0"
+            body = "\n".join([*self.validate_lines, summary]) + "\n"
             return Completed(1 if errors else 0, body, "")
         raise AssertionError(f"unexpected evaluator invocation: {argv}")
 
@@ -141,6 +146,13 @@ class UpgradeRehearsalTests(unittest.TestCase):
         self.assertEqual("", subprocess.run(["git", "status", "--porcelain"], cwd=self.repository, capture_output=True, text=True).stdout)
         # Every evaluator ran with -I from its own environment.
         self.assertTrue(all(argv[1:4] == ["-I", "-m", "se_harness"] for argv in fake.calls if argv[0] != "git"))
+
+    def test_a_four_number_validate_summary_is_read_as_a_summary(self) -> None:
+        # WO-AUT-004 (SPEC-AUT-002 AUT-ADV-003): a 0.12.0 successor prints `| Advisories: N`
+        # after the warnings; the rehearsal must still find the summary line.
+        result = self.run_rehearsal(FakeEvaluators(four_number_summary=True))
+        self.assertEqual("pass", result["overall_result"], result["failure"])
+        self.assertIn(("successor-validate-after", "pass"), [(step["id"], step["outcome"]) for step in result["steps"]])
 
     def test_the_predecessor_must_own_the_root_before_the_upgrade(self) -> None:
         result = self.run_rehearsal(FakeEvaluators(predecessor_doctor_before=1))

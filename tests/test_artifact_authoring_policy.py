@@ -54,10 +54,10 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
                 text = text.replace("\n[relations]", f"\n{name} = {value}\n[relations]", 1)
         self.requirement.write_text(text, encoding="utf-8")
 
-    def diagnostics(self) -> tuple[list, list]:
+    def diagnostics(self) -> tuple[list, list, list]:
         report = _load_validator_module().validate_repository(self.root)
         mine = lambda items: [item for item in items if item.path.endswith("REQ-001.md")]
-        return mine(report.errors), mine(report.warnings)
+        return mine(report.errors), mine(report.warnings), mine(report.advisories)
 
     # ---------------------------------------------------------------- REQ-AUT-001
 
@@ -110,12 +110,14 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
             '"WHERE a risk section is configured, THE SYSTEM SHALL raise at its level."',
             '"THE Harness Explorer SHALL render the register."',
         )
+        self.set_front_matter(status='"draft"')
         for statement in clean:
             with self.subTest(statement=statement):
                 self.set_front_matter(statement=statement)
-                errors, warnings = self.diagnostics()
+                errors, warnings, advisories = self.diagnostics()
                 self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT") or item.code == "E005"])
-                self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-00") and item.code != "W-AUT-004"])
+                self.assertEqual([], [item.code for item in advisories if item.code != "W-AUT-004"])
+                self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
         cases = {
             '"The system should list the manifest and SHALL do so quickly."': {"W-AUT-001"},
             '"WHEN X, THE SYSTEM SHALL do A, and SHALL do B."': {"W-AUT-002"},
@@ -125,40 +127,42 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         for statement, expected in cases.items():
             with self.subTest(statement=statement[:40]):
                 self.set_front_matter(statement=statement)
-                _, warnings = self.diagnostics()
-                self.assertEqual(expected, {item.code for item in warnings if item.code in {"W-AUT-001", "W-AUT-002", "W-AUT-003"}})
+                _, warnings, advisories = self.diagnostics()
+                self.assertEqual(expected, {item.code for item in advisories if item.code in {"W-AUT-001", "W-AUT-002", "W-AUT-003"}})
+                self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
         self.set_front_matter(statement='"The system must respond."')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertIn("E005", {item.code for item in errors})
 
     # ---------------------------------------------------------------- REQ-AUT-004 and vocabulary
 
     def test_vocabulary_and_optional_attributes_are_validated(self) -> None:
-        self.set_front_matter(verification_method='"automated-test"')
-        errors, warnings = self.diagnostics()
-        self.assertIn("W-AUT-004", {item.code for item in warnings})
-        self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
-        self.set_front_matter(verification_method='["test", "inspection"]')
-        errors, warnings = self.diagnostics()
+        self.set_front_matter(status='"draft"', verification_method='"automated-test"')
+        errors, warnings, advisories = self.diagnostics()
+        self.assertIn("W-AUT-004", {item.code for item in advisories})
         self.assertNotIn("W-AUT-004", {item.code for item in warnings})
         self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
+        self.set_front_matter(verification_method='["test", "inspection"]')
+        errors, warnings, advisories = self.diagnostics()
+        self.assertNotIn("W-AUT-004", {item.code for item in advisories})
+        self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
         self.set_front_matter(verification_method='["manual-review"]')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertIn("E-AUT-001", {item.code for item in errors})
         self.set_front_matter(verification_method='["test", "test"]')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertIn("E-AUT-001", {item.code for item in errors})
         self.set_front_matter(verification_method='["test"]', priority='"must"', source='"CAP-001"', measure='"under 300 ms at p95"')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
         self.set_front_matter(priority='"high"')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertTrue(any(item.code == "E-AUT-002" and "priority" in item.message for item in errors))
         self.set_front_matter(priority='"should"', source='"REQ-999"')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertTrue(any(item.code == "E-AUT-002" and "REQ-999" in item.message for item in errors))
         self.set_front_matter(source='"ISO 29148 section 5.2"', measure='""')
-        errors, _ = self.diagnostics()
+        errors, _, _ = self.diagnostics()
         self.assertTrue(any(item.code == "E-AUT-002" and "measure" in item.message for item in errors))
 
     # ---------------------------------------------------------------- REQ-AUT-006
@@ -189,6 +193,54 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+    # ---------------------------------------------------------------- REQ-AUT-007
+
+    def test_advisories_are_raised_only_on_drafts(self) -> None:
+        # AUT-ADV-002: the same faults on an approved requirement raise nothing.
+        faulty = '"The system should list the manifest and SHALL do A, and SHALL do B ' + "x" * 260 + '."'
+        self.set_front_matter(status='"draft"', statement=faulty, verification_method='"automated-test"')
+        _, warnings, advisories = self.diagnostics()
+        self.assertEqual({"W-AUT-001", "W-AUT-002", "W-AUT-003", "W-AUT-004"}, {item.code for item in advisories})
+        self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
+        self.set_front_matter(status='"approved"')
+        _, warnings, advisories = self.diagnostics()
+        self.assertEqual([], advisories)
+        self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
+
+    def test_advisories_are_reported_apart_in_the_summary_the_listing_and_the_json(self) -> None:
+        # AUT-ADV-001, -003, -004, -005.
+        module = _load_validator_module()
+        self.set_front_matter(status='"draft"', statement='"WHEN X, THE SYSTEM SHALL do A, and SHALL do B."')
+        report = module.validate_repository(self.root)
+        mine = [item for item in report.advisories if item.path.endswith("REQ-001.md")]
+        self.assertEqual(["W-AUT-002"], [item.code for item in mine])
+        self.assertEqual([], [item for item in report.warnings if item.code.startswith("W-AUT-")])
+        payload = report.to_dict(self.root)
+        self.assertEqual(len(report.advisories), payload["advisory_count"])
+        self.assertEqual(len(report.warnings), payload["warning_count"])
+        self.assertEqual([item["code"] for item in payload["advisories"]], [item.code for item in sorted(report.advisories)])
+        self.assertEqual(
+            sum(counts["warnings"] for counts in payload["plane_counts"].values()), payload["warning_count"]
+        )
+        quiet = module.render_human(report)
+        loud = module.render_human(report, show_advisories=True)
+        summary = f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)} | Advisories: {len(report.advisories)}"
+        self.assertIn(summary, quiet)
+        self.assertNotIn("\nAdvisories:\n", quiet)
+        self.assertNotIn("[W-AUT-002]", quiet)
+        self.assertIn("\nAdvisories:\n", loud)
+        self.assertIn("[W-AUT-002] [maintenance]", loud)
+        self.assertIn("Planes:", quiet)
+        code, output, error = self.invoke("validate", str(self.root))
+        self.assertIn(summary, output)
+        self.assertNotIn("Advisories:\n", output)
+        code, output, error = self.invoke("validate", str(self.root), "--advisories")
+        self.assertIn("\nAdvisories:\n", output)
+        self.assertIn("[W-AUT-002]", output)
+        code, output, error = self.invoke("validate", str(self.root), "--json")
+        self.assertEqual(payload["advisory_count"], json.loads(output)["advisory_count"])
 
 
 class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
@@ -289,7 +341,7 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
         after = self.requirement.read_text(encoding="utf-8")
         self.assertIn('verification_method = ["test", "inspection"]', after)
         self.assertIn('verification_notes = "automated-test-and-manual-review"', after)
-        errors, warnings = self.diagnostics()
+        errors, warnings, advisories = self.diagnostics()
         self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
         self.assertNotIn("W-AUT-004", {item.code for item in warnings})
         subprocess.run([sys.executable, str(script), "--root", str(self.root), "--apply"], capture_output=True, text=True, check=True)

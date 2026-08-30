@@ -109,3 +109,15 @@ and the five shapes commented. Under 2,500 bytes.
 
 Warnings never block; errors and gate predicates fail closed; the policy
 grants no authority.
+
+## Amendment record
+
+**`AUT-STM-002` and `AUT-VOC-002` name advisories, proposed 2026-08-30
+under `WO-AUT-004` (`SPEC-AUT-002`).** `AUT-STM-002` reads `W-AUT-001`,
+`W-AUT-002` and `W-AUT-003` as warnings on plane `maintenance`, and
+`AUT-VOC-002` reads `W-AUT-004` the same way. Under `AUT-ADV-001` the
+four codes are advisories: the plane is unchanged, the report carries them
+in `advisories` rather than `warnings`, and under `AUT-ADV-002` they are
+raised only for an artifact in `draft`. The transition `AUT-VOC-002`
+describes (a string becomes `E-AUT-001` after the migration) is
+unchanged. Nothing else in this specification changes.

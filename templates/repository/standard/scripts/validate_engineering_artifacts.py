@@ -14,7 +14,7 @@ import json
 import re
 import sys
 from collections import Counter
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path, PurePosixPath
 from types import MappingProxyType
@@ -289,35 +289,42 @@ VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
 REQUIREMENT_PRIORITIES = ("must", "should", "could")
 
 
-def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
-    """Requirement-writing rules: statement shape signals, vocabulary, and optional attributes (SPEC-AUT-001)."""
+def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic], list[Diagnostic]]:
+    """Requirement-writing rules: statement shape signals, vocabulary, and optional attributes (SPEC-AUT-001).
+
+    The statement and vocabulary signals are advisories (SPEC-AUT-002, AUT-ADV-001):
+    they help the author of a draft and are raised only while the requirement is in
+    `draft` (AUT-ADV-002). Errors and warnings are unchanged.
+    """
 
     errors: list[Diagnostic] = []
     warnings: list[Diagnostic] = []
+    advisories: list[Diagnostic] = []
     catalog = {artifact.artifact_id for artifact in artifacts if artifact.artifact_id != "<unknown>"}
     for artifact in artifacts:
         if artifact.artifact_type != "requirement":
             continue
+        draft = artifact.status == "draft"
         statement = artifact.metadata.get("statement")
-        if isinstance(statement, str) and statement.strip():
+        if isinstance(statement, str) and statement.strip() and draft:
             text = statement.strip()
             opener_ok = text.startswith(AUTHORING_OPENERS) or AUTHORING_NAMED_SUBJECT.match(text) is not None
             if text.startswith("IF ") and " THEN " not in text:
                 opener_ok = False
             if not opener_ok:
-                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",
                     "statement does not open with one of the five shapes (THE SYSTEM SHALL, WHEN, WHILE, IF ... THEN, WHERE)", "maintenance"))
             shall_count = len(re.findall(r"\bSHALL\b", text))
             if shall_count > 1:
-                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
                     f"statement carries {shall_count} SHALL obligations; one requirement states one obligation", "maintenance"))
             if len(text) > AUTHORING_STATEMENT_LIMIT:
-                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
                     f"statement is {len(text)} characters; the review threshold is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
         method = artifact.metadata.get("verification_method")
         if isinstance(method, str):
-            if method.strip():
-                warnings.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-004",
+            if method.strip() and draft:
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-004",
                     "verification_method is a free-text string; the closed vocabulary is an array of test, analysis, inspection, demonstration", "maintenance"))
         elif isinstance(method, list):
             if not method or len(method) > len(VERIFICATION_METHODS) or len(set(method)) != len(method) or any(item not in VERIFICATION_METHODS for item in method):
@@ -338,7 +345,7 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
         measure = artifact.metadata.get("measure")
         if measure is not None and (not isinstance(measure, str) or not measure.strip()):
             _add_error(errors, artifact, report_root, "E-AUT-002", "measure must be a non-empty string when present", plane="structure")
-    return errors, warnings
+    return errors, warnings, advisories
 
 
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
@@ -405,6 +412,8 @@ class ValidationReport:
     artifacts: list[Artifact]
     errors: list[Diagnostic]
     warnings: list[Diagnostic]
+    # SPEC-AUT-002 AUT-ADV-001: the advisory class, apart from errors and warnings.
+    advisories: list[Diagnostic] = field(default_factory=list)
 
     @property
     def valid(self) -> bool:
@@ -430,8 +439,10 @@ class ValidationReport:
             "artifact_count": len(self.artifacts),
             "error_count": len(self.errors),
             "warning_count": len(self.warnings),
+            "advisory_count": len(self.advisories),
             "errors": [asdict(item) for item in sorted(self.errors)],
             "warnings": [asdict(item) for item in sorted(self.warnings)],
+            "advisories": [asdict(item) for item in sorted(self.advisories)],
             "plane_counts": plane_counts,
             "artifacts": [
                 {
@@ -2857,7 +2868,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_common_metadata(artifacts, repository_root))
         errors.extend(validate_lifecycle_events(artifacts, repository_root))
         errors.extend(validate_type_specific_metadata(artifacts, repository_root))
-        authoring_errors, authoring_warnings = validate_authoring(artifacts, repository_root)
+        authoring_errors, authoring_warnings, authoring_advisories = validate_authoring(artifacts, repository_root)
         errors.extend(authoring_errors)
         errors.extend(validate_relations(artifacts, repository_root))
         traceability_errors, traceability_warnings = validate_architecture_traceability(
@@ -2907,10 +2918,11 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         artifacts=artifacts,
         errors=sorted(set(errors)),
         warnings=sorted(set(warnings)),
+        advisories=sorted(set(authoring_advisories)),
     )
 
 
-def render_human(report: ValidationReport) -> str:
+def render_human(report: ValidationReport, *, show_advisories: bool = False) -> str:
     status = "PASS" if report.valid else "FAIL"
     plane_summary = " | ".join(
         f"{plane} E{sum(item.plane == plane for item in report.errors)}/W{sum(item.plane == plane for item in report.warnings)}"
@@ -2918,7 +2930,7 @@ def render_human(report: ValidationReport) -> str:
     )
     lines = [
         f"Engineering artifact validation: {status}",
-        f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)}",
+        f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)} | Advisories: {len(report.advisories)}",
         f"Planes: {plane_summary}",
     ]
     if report.errors:
@@ -2935,6 +2947,13 @@ def render_human(report: ValidationReport) -> str:
             lines.append(
                 f"- [{diagnostic.code}] [{diagnostic.plane}] {diagnostic.path}: {diagnostic.message}"
             )
+    if show_advisories and report.advisories:
+        lines.append("")
+        lines.append("Advisories:")
+        for diagnostic in sorted(report.advisories):
+            lines.append(
+                f"- [{diagnostic.code}] [{diagnostic.plane}] {diagnostic.path}: {diagnostic.message}"
+            )
     return "\n".join(lines)
 
 
@@ -2948,6 +2967,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Artifact directory. Relative paths are resolved below --root; default: docs/engineering.",
     )
     parser.add_argument("--json", action="store_true", dest="as_json", help="Emit a machine-readable JSON report.")
+    parser.add_argument(
+        "--advisories", action="store_true", dest="show_advisories",
+        help="List the authoring advisories (W-AUT-*) after the warnings; the JSON report always carries them.",
+    )
     return parser
 
 
@@ -2962,7 +2985,7 @@ def main(argv: Iterable[str] | None = None) -> int:
     if args.as_json:
         print(json.dumps(report.to_dict(repository_root), indent=2, sort_keys=True))
     else:
-        print(render_human(report))
+        print(render_human(report, show_advisories=args.show_advisories))
     return 0 if report.valid else 1
 
 

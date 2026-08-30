@@ -75,3 +75,15 @@ No change to `E005`.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The three statement signals are advisories, proposed 2026-08-30 under
+`WO-AUT-004` (`REQ-AUT-007`, `SPEC-AUT-002`).** The required response
+names `W-AUT-001`, `W-AUT-002` and `W-AUT-003` as maintenance warnings.
+`REQ-AUT-007` makes them advisories: still plane `maintenance`, still
+computed and carried in the JSON, but listed and counted apart from
+warnings, shown on request, and raised only while the requirement is in
+`draft`. The rationale here stands; the class is the only change. The
+sentence "a later policy may promote `W-AUT-002`" is unaffected. Nothing
+else in this requirement changes.
