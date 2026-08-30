@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-AUT-004"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "272ebb7403664e42157dc7e2f91d2c84cbbd03dd25411bc339460494864ed660"
-rebound_at = "2026-08-30T09:15:31Z"
+formal_snapshot_sha256 = "76dbc1d4da4b7adb2bb98e9ce9e3ff1e8d4dfd94eed4ede80c20befcf5c1b148"
+rebound_at = "2026-08-30T09:55:41Z"
 ```
 
 # WO-AUT-004 handoff evidence
@@ -96,10 +96,21 @@ Windows workstation, candidate source, `scripts/run_tests.py`: 1152 tests, 1 err
 - `validate_release_distributions.py`: PASS (8 records).
 - Start preflight for `WO-AUT-004`: PASS with no diagnostics over `c17d2cc`.
 
+## Scope amendment and its evidence
+
+At the first packet head `6cff19b` the two governance-migration lanes read
+`successor-validate-after: no validation summary was printed`:
+`repository_tools/upgrade_rehearsal.py` matched the summary line with an
+expression anchored at its end. On the owner's decision of 2026-08-30 the
+scope was amended with that file and `tests/test_upgrade_rehearsal.py`;
+the expression accepts an optional `| Advisories: N` tail and the test's
+fake successor prints the four-number form (one new test). No other
+consumer of the summary line exists in the repository.
+
 ## Deviations, recorded for the completion decision
 
-None. The inspect script, admitted to the scope in case the report renamed
-a key, needed no edit.
+None beyond the scope amendment above. The inspect script, admitted to the
+scope in case the report renamed a key, needed no edit.
 
 ## Complete changed-path set
 

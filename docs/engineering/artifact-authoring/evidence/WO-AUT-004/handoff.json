@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "272ebb7403664e42157dc7e2f91d2c84cbbd03dd25411bc339460494864ed660",
+    "formal_snapshot_sha256": "76dbc1d4da4b7adb2bb98e9ce9e3ff1e8d4dfd94eed4ede80c20befcf5c1b148",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -48,7 +48,7 @@
               }
             ],
             "id": "QGP-G4I-SCOPE",
-            "message": "WO-AUT-004 declares 17 normalized scope path(s).",
+            "message": "WO-AUT-004 declares 19 normalized scope path(s).",
             "status": "pass"
           },
           {
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 15 declared changed path(s) are within execution scope.",
+            "message": "All 17 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -258,7 +258,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "297ca6357f62c4162e427a0809111e66e77841cbbdef700ac8533cc9a51421ed",
+  "result_sha256": "824075dadf2e6e9561c41c15487e41b57715262b8f63883025a09adfe2de185b",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -274,10 +274,12 @@
       "docs/engineering/artifact-authoring/work-orders/WO-AUT-004.md",
       "docs/notes/harnessctl-check.md",
       "docs/notes/harnessctl-reference.md",
+      "repository_tools/upgrade_rehearsal.py",
       "se_harness/cli.py",
       "templates/repository/standard/scripts/validate_engineering_artifacts.py",
       "tests/test_artifact_authoring_policy.py",
-      "tests/test_predecessor_bootstrap_retirement.py"
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_upgrade_rehearsal.py"
     ],
     "declared_paths": [
       "docs/engineering/artifact-authoring/evidence/",
@@ -289,6 +291,7 @@
       "docs/engineering/artifact-authoring/verification/VER-AUT-002.md",
       "docs/notes/harnessctl-check.md",
       "docs/notes/harnessctl-reference.md",
+      "repository_tools/upgrade_rehearsal.py",
       "se_harness/cli.py",
       "templates/repository/standard/scripts/inspect_engineering_artifacts.py",
       "templates/repository/standard/scripts/validate_engineering_artifacts.py",
@@ -296,6 +299,7 @@
       "tests/test_harnessctl.py",
       "tests/test_inspection.py",
       "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_upgrade_rehearsal.py",
       "tests/test_validation_taxonomy.py"
     ],
     "dependencies": [],
