@@ -2,7 +2,7 @@
 id = "REQ-AUT-007"
 type = "requirement"
 title = "Authoring advisories are reported apart from errors and warnings"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -13,6 +13,13 @@ source = "functional assessment of 2026-08-30 (issue #283): 485 warnings on a cl
 
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T08:59:22Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-30 with the words 'Approve and start WO-AUT-004': authoring advisories are reported apart from errors and warnings, shown on request and raised only on drafts; issue #283 of the functional assessment."
 +++
 
 # Requirement: Authoring advisories are reported apart from errors and warnings

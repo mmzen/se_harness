@@ -2,13 +2,20 @@
 id = "SPEC-AUT-002"
 type = "specification"
 title = "The advisory class of the validator report"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 specifies = ["REQ-AUT-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T08:59:22Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-30 with the words 'Approve and start WO-AUT-004': AUT-ADV-001 to AUT-ADV-007; the W-AUT family becomes the advisory class, computed only on drafts, listed on request, complete in the JSON; the consumers change only through the report; amendment records restate AUT-STM-002 and AUT-VOC-002."
 +++
 
 # Specification: The advisory class of the validator report

@@ -2,7 +2,7 @@
 id = "WO-AUT-004"
 type = "work_order"
 title = "Report authoring advisories apart from errors and warnings"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -38,6 +38,13 @@ implements = ["REQ-AUT-007"]
 specifications = ["SPEC-AUT-002", "SPEC-AUT-001"]
 architecture = ["ARCH-AUT-001", "ADR-AUT-001"]
 verification = ["VER-AUT-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T08:59:22Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-30 with the words 'Approve and start WO-AUT-004', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the template validator's advisory class, summary and JSON, the template inspect script if the report requires it, validate --advisories in cli.py, the five test modules, the two notes, the amendment records on REQ-AUT-002 and SPEC-AUT-001, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file, any error code or plane, the authoring policy, doctor, any verification record, no release and no publication. Start preflight has not been run."
 +++
 
 # Work Order: Report authoring advisories apart from errors and warnings

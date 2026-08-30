@@ -2,13 +2,20 @@
 id = "VER-AUT-002"
 type = "verification"
 title = "Independent evidence for the advisory class"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 verifies = ["REQ-AUT-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T08:59:22Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-30 with the words 'Approve and start WO-AUT-004': classification, draft-only, rendering, JSON, CLI, consumer and repository-reading rows; the root validator stays the 0.11.0 copy until the next root adoption."
 +++
 
 # Verification Contract: Independent evidence for the advisory class
