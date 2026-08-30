@@ -2,7 +2,7 @@
 id = "WO-HUP-012"
 type = "work_order"
 title = "Enforce the lock-schema floor"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-08-30T19:20:59Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-30, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 1e3149b carrying unmoved main 7cac025, after the applicable ARCH-PMI-001 and ADR-PMI-001 were selected (W022), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-30T19:45:50Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner under the decision of 2026-08-30, made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green. The evidence packet at docs/engineering/repository-harness-upgrade/evidence/WO-HUP-012/ records: schema-3-only lock reading with the floor diagnostic and byte-identical refusal (HUP-LSF-001, HUP-LSF-004), the schema-3-only writer (HUP-LSF-003), the legacy digest machinery deleted with the sweep test (HUP-LSF-002, HUP-LSF-008), MG002 retired and reserved (HUP-LSF-005), the binary hash-bound match vocabulary (HUP-LSF-006), the narrowed transition assessment script (HUP-LSF-007), the amendment records on REQ-PMI-004, SPEC-PMI-001 and ADR-PMI-001; the affected suites 164 OK and the full Windows suite at its baseline (1150 tests, the one known test_artifact_authoring error, 26 skips); validate 1177 artifacts 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check complete:true at its fixed point result da310a07 over the packet head 53854ff, from-git origin/main 7cac025. No deviations. This decision authorizes no verification record, no release and no publication; the pull request's merge remains the owner's decision."
 +++
 
 # Work Order: Enforce the lock-schema floor
