@@ -37,7 +37,6 @@ jobs:
       predecessor_wheel: ${{ steps.predecessor.outputs.wheel }}
       predecessor_wheel_sha256: ${{ steps.predecessor.outputs.wheel_sha256 }}
       predecessor_payload_sha256: ${{ steps.predecessor.outputs.payload_sha256 }}
-      predecessor_acceptance_contract_sha256: ${{ steps.predecessor.outputs.acceptance_contract_sha256 }}
     env:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
@@ -114,7 +113,6 @@ jobs:
       RELEASED_VERIFIER_WHEEL: ${{ needs.candidate-source.outputs.predecessor_wheel }}
       RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
       RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}
-      RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -162,7 +160,7 @@ jobs:
           )
           assert not any(any(marker in name for marker in forbidden) for name in names)
           PY
-      - name: Acquire and bind the exact public predecessor as the bootstrap verifier
+      - name: Acquire and bind the exact public predecessor as the released verifier
         shell: bash
         run: |
           set -euo pipefail
@@ -188,7 +186,7 @@ jobs:
             --evaluator-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
             --entry-point "$RUNNER_TEMP/verifier-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
-      - name: Retain exact-public-predecessor candidate-package bootstrap evidence
+      - name: Qualify the candidate package with the released verifier
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
         shell: bash
@@ -198,20 +196,18 @@ jobs:
           candidate_sha256="$(sha256sum "$candidate_wheel" | awk '{print $1}')"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          # SPEC-REB-012 rule 6: a released verifier that carries the qualify
-          # namespace runs the typed candidate-package qualification; an older one
-          # runs its fixed, digest-bound accept-candidate bootstrap. The assertions
-          # match the operation that ran.
-          if "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify --help >/dev/null 2>&1; then
-            "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify candidate-package \
-              --candidate-wheel "$candidate_wheel" \
-              --candidate-commit "$GITHUB_SHA" \
-              --candidate-wheel-sha256 "$candidate_sha256" \
-              --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
-              --checkout-root "$GITHUB_WORKSPACE" \
-              --output "$RUNNER_TEMP/candidate-package-bootstrap.json" \
-              --json
-            python - "$RUNNER_TEMP/candidate-package-bootstrap.json" <<'PY'
+          # SPEC-REB-016 REB-BFH-001: the typed operation is the only acceptance
+          # path. The exact-public bootstrap fallback expired per SPEC-REB-010
+          # and was removed under WO-REB-031.
+          "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify candidate-package \
+            --candidate-wheel "$candidate_wheel" \
+            --candidate-commit "$GITHUB_SHA" \
+            --candidate-wheel-sha256 "$candidate_sha256" \
+            --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
+            --checkout-root "$GITHUB_WORKSPACE" \
+            --output "$RUNNER_TEMP/candidate-package-qualification.json" \
+            --json
+          python - "$RUNNER_TEMP/candidate-package-qualification.json" <<'PY'
           import json, pathlib, sys
           value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
           assert value["schema"] == "se-harness-release-qualification-v1"
@@ -219,30 +215,6 @@ jobs:
           assert value["independence"] == "released-verifier"
           assert value["passed"] is True
           PY
-          else
-            test -n "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" \
-              || { echo "the legacy bootstrap acceptance needs a declared contract digest" >&2; exit 1; }
-            "$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate \
-              --wheel "$candidate_wheel" \
-              --candidate-commit "$GITHUB_SHA" \
-              --candidate-wheel-sha256 "$candidate_sha256" \
-              --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \
-              --checkout-root "$GITHUB_WORKSPACE" \
-              --output "$RUNNER_TEMP/candidate-package-bootstrap.json"
-            python - "$RUNNER_TEMP/candidate-package-bootstrap.json" "$GITHUB_SHA" \
-              "$candidate_sha256" "$RELEASED_VERIFIER_WHEEL_SHA256" \
-              "$RELEASED_ACCEPTANCE_CONTRACT_SHA256" "$RELEASED_VERIFIER_VERSION" <<'PY'
-          import json, pathlib, sys
-          value = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
-          assert value["schema"] == "se-harness-functional-acceptance-v1"
-          assert value["candidate"]["commit"] == sys.argv[2]
-          assert value["candidate"]["wheel_sha256"] == sys.argv[3]
-          assert value["verifier"]["version"] == sys.argv[6]
-          assert value["verifier"]["wheel_sha256"] == sys.argv[4]
-          assert value["verifier"]["contract_sha256"] == sys.argv[5]
-          assert "independence" not in value
-          PY
-          fi
       - name: Install candidate and prove package identity
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
@@ -282,12 +254,12 @@ jobs:
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
-      - name: Retain the legacy bootstrap result without canonical relabeling
+      - name: Retain the canonical candidate-package qualification result
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}
-          path: ${{ runner.temp }}/candidate-package-bootstrap.json
+          name: candidate-package-qualification-${{ needs.candidate-source.outputs.predecessor_version }}
+          path: ${{ runner.temp }}/candidate-package-qualification.json
           if-no-files-found: warn
 
   governance-migration:

@@ -58,22 +58,11 @@ The typed operations emit `se-harness-release-qualification-v1`. A result includ
 
 An optional `--output` must name a new file outside the inspected repository. Existing evidence is never overwritten. The same result is rendered as JSON with `--json` or as concise human text without it.
 
-## Initial public-0.6.0 bootstrap
+## The retired public-0.6.0 bootstrap
 
-Public 0.6.0 already contains the hardened `accept-candidate` contract, but it was released before `harnessctl qualify` existed. Immutable released bytes cannot contain a future command.
+Public 0.6.0 was released before `harnessctl qualify` existed, so the very first deployment accepted the candidate through 0.6.0's own digest-bound `accept-candidate` contract and retained that `se-harness-functional-acceptance-v1` result under a clearly named legacy-bootstrap artifact. That path expired by its own terms once a released verifier exposed the typed command (0.7.0 did), and `WO-REB-031` removed it: candidate-package CI now runs `qualify candidate-package` unconditionally and retains only the canonical `se-harness-release-qualification-v1` result. The retained bootstrap evidence of those first runs stays valid as history and is never relabeled.
 
-For the first deployment only, candidate-package CI therefore:
-
-1. downloads exact public 0.6.0;
-2. verifies its fixed wheel and installed-payload SHA-256 values;
-3. verifies its isolated interpreter and entry point;
-4. invokes only its existing `accept-candidate` command;
-5. binds the exact candidate wheel digest and commit; and
-6. retains the original `se-harness-functional-acceptance-v1` result under a clearly named legacy-bootstrap artifact.
-
-That output is not relabeled as `se-harness-release-qualification-v1`. Another verifier version, digest, command, contract, schema, or artifact label fails the workflow. Once a released verifier exposes `qualify candidate-package`, the workflow must move to the typed operation and a later governed change removes the bootstrap path.
-
-Newly built versions kept `accept-candidate` only as a one-cycle alias to the typed handler; that alias was removed after 0.11.0 (`WO-ECP-019`) and the command now exits with status 2 naming `qualify candidate-package`. It was always different from immutable public 0.6.0's historical command, which the legacy branch above still runs when, and only when, the released verifier has no `qualify` namespace.
+Newly built versions kept `accept-candidate` only as a one-cycle alias to the typed handler; that alias was removed after 0.11.0 (`WO-ECP-019`) and the command now exits with status 2 naming `qualify candidate-package`.
 
 ## Diagnostic commands
 

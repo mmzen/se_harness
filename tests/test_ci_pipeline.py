@@ -203,8 +203,8 @@ class PredecessorDerivationTests(unittest.TestCase):
                     with self.subTest(workflow=path.name, job=job, consumed=consumed):
                         self.assertIn(consumed, declared)
 
-    def test_facts_come_from_the_lock_and_the_legacy_table(self) -> None:
-        from repository_tools.evaluator_facts import LEGACY_ACCEPTANCE_CONTRACT_SHA256, derive, released_evaluator_archive
+    def test_facts_come_from_the_lock(self) -> None:
+        from repository_tools.evaluator_facts import derive, released_evaluator_archive
 
         lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())["evaluator"]
         facts = derive(REPOSITORY_ROOT)
@@ -218,10 +218,12 @@ class PredecessorDerivationTests(unittest.TestCase):
         self.assertEqual(expected_wheel, facts.wheel)
         self.assertEqual(expected_wheel_sha256, facts.wheel_sha256)
         self.assertEqual(lock["payload_sha256"], facts.payload_sha256)
-        # WO-HUP-008: a root that carries the qualify namespace (0.8.0 and later) has no
-        # legacy accept-candidate contract; the fact is then None and the typed branch runs.
-        self.assertEqual(LEGACY_ACCEPTANCE_CONTRACT_SHA256.get(facts.version), facts.acceptance_contract_sha256)
+        # WO-REB-031 (SPEC-REB-016 REB-BFH-002): no legacy acceptance-contract
+        # fact exists; the derivation exports version, wheel, digests and the
+        # candidate version only.
+        self.assertFalse(hasattr(facts, "acceptance_contract_sha256"))
         lines = facts.github_output_lines().splitlines()
+        self.assertFalse(any(line.startswith("acceptance_contract") for line in lines), lines)
         self.assertIn(f"wheel_sha256={facts.wheel_sha256}", lines)
         # WO-ECP-010: no scenario fact exists any more; a version bump needs none.
         self.assertFalse(any(line.startswith("scenario") for line in lines), lines)
@@ -279,7 +281,8 @@ class PredecessorDerivationTests(unittest.TestCase):
         for output in ("predecessor_version", "predecessor_wheel_sha256"):
             self.assertIn(f"{output}: ${{{{ steps.predecessor.outputs.", jobs["candidate-source"])
         self.assertNotIn("migration_scenario", text)
-        self.assertIn("needs.candidate-source.outputs.predecessor_acceptance_contract_sha256", jobs["candidate-package"])
+        # WO-REB-031: no acceptance-contract output or env exists anywhere.
+        self.assertNotIn("acceptance_contract_sha256", text)
         self.assertIn("needs.candidate-source.outputs.predecessor_wheel_sha256", jobs["governance-migration"])
         self.assertIn("throw 'predecessor facts were not derived by candidate-source'", jobs["governance-migration"])
 
