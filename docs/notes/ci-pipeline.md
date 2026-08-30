@@ -1,5 +1,7 @@
 # The CI pipeline and the release path
 
+<!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 Repository-owned note. It records the measured shape of the continuous
 integration and release path so that each work order of the `ci-pipeline`
 domain can show what it removed. Authority stays with the formal artifacts

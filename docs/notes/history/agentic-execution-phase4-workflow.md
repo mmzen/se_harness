@@ -1,6 +1,8 @@
 # Phase 4 delegated workflow coordination
 
-<!-- Target expertise: 5/10. This is operator guidance, not authority. -->
+> Historical record from 2026-08-25, at `71efd2a`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](../delegation-class.md) and the journaled apply.
+
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 This note explains the candidate `WO-AEX-007` coordinator. It does not approve
 a delegation, authorize a Git or external action, verify a VREC, release an
@@ -109,7 +111,7 @@ or label an uncertain result complete.
 
 The Python API is `se_harness.delegated_workflow`. The CLI surface is
 `harnessctl delegated-workflow {catalog,execute,prepare-vrec}`; exact options
-are listed in the [`harnessctl` reference](harnessctl-reference.md).
+are listed in the [`harnessctl` reference](../harnessctl-reference.md).
 
 The implementation is candidate source stacked on the independently verified
 `WO-AEX-006` commits. It must still receive commit-bound independent assurance,

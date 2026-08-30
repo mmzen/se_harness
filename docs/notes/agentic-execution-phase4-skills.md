@@ -1,6 +1,8 @@
 # Phase 4 writing-skill integration
 
-<!-- Target expertise: 5/10. This is operator guidance, not authority. -->
+> Historical record from 2026-08-25, at `0bcbea1`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](delegation-class.md) and the journaled apply.
+
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 This note explains the candidate `WO-AEX-008` skill and package integration.
 It does not approve delegation, install or activate an evaluator, authorize

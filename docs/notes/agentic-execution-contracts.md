@@ -1,6 +1,6 @@
 # Runtime-neutral Agentic Execution contracts
 
-<!-- Target expertise: 5/10. -->
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 The Phase 2 contract layer gives SE Harness one provider-neutral way to check
 the data exchanged by future skills, agents, and mutation controls. It is a

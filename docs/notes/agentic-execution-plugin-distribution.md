@@ -1,6 +1,6 @@
 # Distributing SE Harness skills as a coding-agent plugin
 
-<!-- Target expertise: 5/10. This score describes the knowledge expected from the reader, not the document's complexity or quality. -->
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 > This is a non-authoritative exploration note. It approves nothing, authorizes
 > no implementation, delegates no decision, and changes no lifecycle state.

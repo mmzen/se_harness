@@ -1,5 +1,9 @@
 # Agentic Execution Repository Host Activation Contract-Closure Proposal
 
+> Historical record from 2026-08-24, at `284b842`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 Prepared: 2026-08-24
 
 Selected domain: `agentic-execution`
