@@ -28,6 +28,7 @@ paths = [
   "tests/test_revision_provenance.py",
   "tests/test_progressive_documentation.py",
   "tests/test_cli_shape.py",
+  "tests/test_instruction_architecture.py",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/harnessctl-check.md",
   "docs/engineering/execution-control-plane/README.md",
@@ -136,6 +137,16 @@ request's lanes; the handoff check over the Git-derived change set.
 Any need to change a schema-2 field, a skill core, a contract file or a
 hash-locked file; any existing JSON consumer test that can only pass by
 changing the consumer.
+
+## Scope amendment
+
+2026-08-30, after start, on the engineering owner's decision 'Amend
+WO-ECP-021 scope with tests/test_instruction_architecture.py': that
+module is added to the execution scope. Three of its tests assert the
+refused `upgrade --apply` message on standard error; `ECP-CLI-005` moves
+every failed result to standard output, so the three assertions read
+standard output. The amendment adds no other work and no product path; the
+evidence packet is bound after this edit.
 
 ## Completion report format
 
