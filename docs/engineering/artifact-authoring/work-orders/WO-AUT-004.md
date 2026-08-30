@@ -2,7 +2,7 @@
 id = "WO-AUT-004"
 type = "work_order"
 title = "Report authoring advisories apart from errors and warnings"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-08-30T08:59:49Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-30, 'Approve and start WO-AUT-004'. Start preflight PASS with no diagnostics over the approval commit c17d2cc carrying unmoved main d42ab2f, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-30T10:07:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-30 with the words 'Mark WO-AUT-004 implemented'. The evidence packet at docs/engineering/artifact-authoring/evidence/WO-AUT-004/ records: AUT-ADV-001 to AUT-ADV-007 implemented in the template validator and cli.py (the advisory class for W-AUT-*, raised only on drafts, the four-number summary, --advisories, the complete JSON), the amendment records on REQ-AUT-002 and SPEC-AUT-001, the two notes; the affected suites 94 OK and the full Windows suite at its baseline; the candidate reading on this tree 0 errors, 69 warnings, 0 advisories against 485 warnings under the 0.11.0 root; validate 1172 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the root; the handoff check completed at its fixed point 824075da over main 2f91797 (merged in at f76ce5f) and the thirteen pull-request lanes green at the packet head ec966b5. The scope amendment of 2026-08-30 (the upgrade rehearsal's summary expression and its test) is recorded on this work order and accepted with this decision; no other deviation. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Report authoring advisories apart from errors and warnings
