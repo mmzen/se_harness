@@ -2,7 +2,7 @@
 id = "WO-ECP-021"
 type = "work_order"
 title = "Normalise the harnessctl command shape"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-08-30T16:56:37Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-30, 'Approve and start WO-ECP-021'. Start preflight PASS with no diagnostics over the approval commit 4e3a584 carrying unmoved main 7cac025, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-30T18:55:27Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-30 with the words 'Mark WO-ECP-021 implemented'. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-021/ records: ECP-CLI-001 to ECP-CLI-009 implemented (the pinned target classification, prepare-release --owner with the --authorized-by guard, --json on every subcommand with the command-result object and every existing JSON shape unchanged, the 0/1/2 exit rule with failed results on standard output, one code per line, the four cause classes raised in the provenance module with a mutation-guard refusal as an exit-2 environment refusal, thirteen CLI-shape tests, the reference's rules section); the in-scope suites 471 OK plus the amended module 30 OK; the full Windows suite at its baseline; validate 1177 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check completed at its fixed point 516e2e4f over main 7cac025 and the thirteen pull-request lanes green at the packet head 8f1cdfd. The scope amendment of 2026-08-30 (tests/test_instruction_architecture.py, three assertions from standard error to standard output) is recorded on this work order and accepted with this decision; the requirement's two stated exclusions (preflight --work-order, rehearse-recovery's shape) stand. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Normalise the harnessctl command shape
