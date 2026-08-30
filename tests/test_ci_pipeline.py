@@ -118,6 +118,43 @@ class TriggerPolicyTests(unittest.TestCase):
         self.assertIn("fails on any path of the diff outside the work order's declared scope, whatever the work order's lifecycle state", seed)
         self.assertNotIn("reviewers remain accountable for confirming that the diff stays within its scope", seed)
 
+    def test_the_managed_lane_selects_from_the_live_pull_request_body(self) -> None:
+        # REQ-ECP-026 / ECP-LPB-001 to -004 and -006 (WO-ECP-021): the lane
+        # fetches the pull request from the API during the run, reduces it to
+        # one event-shaped file, and selects every declaration from that file,
+        # so a corrected body is honoured by a re-run without a new push.
+        template = CANDIDATE_EVIDENCE_WORKFLOWS["engineering-harness"].read_text(encoding="utf-8")
+        self.assertIn("permissions:\n  contents: read\n  pull-requests: read\n", template)
+
+        step = template.split("      - name: Read the live pull-request body\n", 1)[1]
+        step = step.split("      - name: ", 1)[0]
+        self.assertIn("if: github.event_name == 'pull_request'", step)
+        self.assertIn("PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}", step)
+        self.assertIn('"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PULL_REQUEST_NUMBER"', step)
+        self.assertIn("curl --fail", step)
+        self.assertIn("Authorization: Bearer $GH_TOKEN", step)
+        self.assertIn('"$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/pull-request.json" "$RUNNER_TEMP/live-event.json"', step)
+        self.assertIn('json.dump({"pull_request": {"body": pull_request.get("body")}}', step)
+        self.assertNotIn("${{ github.event.pull_request.body", step)
+
+        # ECP-LPB-004: both selections read the live file; the stored payload
+        # is gone from the template, and the fetch precedes the selection.
+        self.assertEqual(2, template.count('select-work-order --event "$RUNNER_TEMP/live-event.json"'))
+        self.assertNotIn("GITHUB_EVENT_PATH", template)
+        self.assertLess(
+            template.index("- name: Install the exact released evaluator"),
+            template.index("- name: Read the live pull-request body"),
+        )
+        self.assertLess(
+            template.index("- name: Read the live pull-request body"),
+            template.index("- name: Select the pull-request work order"),
+        )
+
+        # ECP-LPB-006: the change set and the guards keep their trigger-context
+        # inputs; nothing the body carries becomes an input of check.
+        self.assertIn("HARNESS_BASE_SHA: ${{ github.event.pull_request.base.sha }}", template)
+        self.assertIn('git fetch --depth=1 origin "$HARNESS_BASE_SHA"', template)
+
 
 class OneBuildPerWorkflowTests(unittest.TestCase):
     """REQ-CIP-002 / SPEC-CIP-001 CIP-ART."""
