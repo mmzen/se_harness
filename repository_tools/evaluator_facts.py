@@ -4,9 +4,9 @@
 `predecessor_facts` under `WO-ECP-010` (repository issue #210) when the
 migration scenario it once required was retired. The repository-owned
 candidate-evidence workflow used to restate the predecessor's version, wheel
-name, wheel digest, payload digest and acceptance-contract digest as
-literals, restated again in tests, so a version bump was several hand edits
-and a silent skip when one was missed. This module derives every one of them
+name, wheel digest and payload digest as literals, restated again in tests,
+so a version bump was several hand edits and a silent skip when one was
+missed. This module derives every one of them
 from `.engineering-harness.toml`, `.engineering-harness.lock`, the released
 record binding the root version, and the candidate's own version, and fails
 closed, naming what is missing, when any of them cannot be derived. Nothing
@@ -28,17 +28,6 @@ from typing import Any
 
 TOML_NAME = ".engineering-harness.toml"
 LOCK_NAME = ".engineering-harness.lock"
-
-# Exact public releases that predate the `qualify` namespace accept a candidate
-# through their fixed, digest-bound `accept-candidate` contract. The contract
-# digest is a fact of that release, not of this repository's lock, so it is
-# declared here once and asserted by tests, never restated in a workflow.
-LEGACY_ACCEPTANCE_CONTRACT_SHA256 = {
-    "0.6.0": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
-    # 0.7.1 ships the same accept-candidate contract bytes; CONTRACT_SHA256 read
-    # from the installed evaluator under WO-HUP-007.
-    "0.7.1": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
-}
 
 RELEASE_RECORDS = Path("docs/engineering")
 
@@ -124,7 +113,6 @@ class EvaluatorFacts:
     wheel: str
     wheel_sha256: str
     payload_sha256: str
-    acceptance_contract_sha256: str | None
     candidate_version: str
 
     def github_output_lines(self) -> str:
@@ -199,7 +187,6 @@ def derive(repository: Path) -> EvaluatorFacts:
         wheel=wheel,
         wheel_sha256=wheel_sha256,
         payload_sha256=payload_sha256,
-        acceptance_contract_sha256=LEGACY_ACCEPTANCE_CONTRACT_SHA256.get(version),
         candidate_version=candidate_version,
     )
 
