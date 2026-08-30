@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-ECP-022"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "845034d76738344a537a75326bce7933e9e2bf09c00b5e85cf1c92eaa48f93cd"
-rebound_at = "2026-08-30T18:17:17Z"
+formal_snapshot_sha256 = "7c5e78ae4110643d4123d18bbd4625aa2c8930c0ee96c433e8234b093d3ab208"
+rebound_at = "2026-08-30T19:20:34Z"
 ```
 
 # WO-ECP-022 handoff evidence
@@ -29,7 +29,9 @@ tests; the reference states the four rules once (`REQ-ECP-027`;
   this Windows checkout for every reading, the packet and the handoff check
   included. It keeps the old command shape until the next root adoption.
 - Candidate: this checkout, branch `wo/ecp-021-cli-shape` off `main` at
-  `7cac025`; the suite and the demonstration run candidate source.
+  `7cac025`, with `main` at `4b29d8a` (the live-PR-body chain, #293/#294)
+  merged in at `cffcb61`; the suite and the demonstration run candidate
+  source.
 
 ## Change
 
@@ -134,9 +136,19 @@ Candidate CLI on this checkout:
    three assertions moved from standard error to standard output; no
    product path.
 
+## Identifier renumbering
+
+A parallel session took the same four identifiers for the #280c chain and
+merged first with a verified record; on the owner's decision of 2026-08-30
+this chain was renumbered to `REQ-ECP-027`, `SPEC-ECP-016`, `VER-ECP-018`
+and `WO-ECP-022` (see the work order's renumbering note). `renumber-artifacts`
+refused the whole plan at inventory (`REN043` on the unrelated
+`VREC-WEX-001`) in its first operational use, so the renumbering was by
+hand; both facts stand as findings beside this packet.
+
 ## Complete changed-path set
 
-Every path this work order changed since `main` at `7cac025`, packet
+Every path this work order changed since `main` at `4b29d8a`, packet
 included, as Git derived it; the handoff check completed at its fixed point
 with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE` passing, run by
 the released 0.11.0 evaluator on this Windows checkout: see `handoff.json`
