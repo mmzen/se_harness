@@ -121,7 +121,7 @@ class ReleaseQualificationTests(unittest.TestCase):
                 ]
             )
 
-    def test_candidate_workflow_bootstrap_is_exact_legacy_evidence(self) -> None:
+    def test_candidate_workflow_acceptance_is_typed_only(self) -> None:
         workflow = (
             Path(__file__).resolve().parents[1]
             / ".github"
@@ -130,33 +130,39 @@ class ReleaseQualificationTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         # WO-CIP-003: the verifier facts are derived from the declared root by
         # repository_tools.evaluator_facts and carried as job outputs; the
-        # workflow restates none of them. The derivation itself is asserted in
-        # tests/test_ci_pipeline.py against the lock and the legacy contract table.
+        # workflow restates none of them. WO-REB-031 (SPEC-REB-016 REB-BFH-001
+        # to REB-BFH-003): the typed operation is the only acceptance path; the
+        # expired 0.6.0 bootstrap fallback, its contract fact and its retention
+        # artifact are gone.
         required = (
             "RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}",
             "RELEASED_VERIFIER_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}",
             "RELEASED_VERIFIER_PAYLOAD_SHA256: ${{ needs.candidate-source.outputs.predecessor_payload_sha256 }}",
-            "RELEASED_ACCEPTANCE_CONTRACT_SHA256: ${{ needs.candidate-source.outputs.predecessor_acceptance_contract_sha256 }}",
             "python -m repository_tools.evaluator_facts derive --repository . --github-output",
-            '"$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness accept-candidate',
-            'value["schema"] == "se-harness-functional-acceptance-v1"',
-            'assert "independence" not in value',
-            "candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}",
+            "qualify candidate-package",
+            'value["schema"] == "se-harness-release-qualification-v1"',
+            'value["operation"] == "candidate-package"',
+            'value["independence"] == "released-verifier"',
+            "candidate-package-qualification-${{ needs.candidate-source.outputs.predecessor_version }}",
         )
         self.assertTrue(all(value in workflow for value in required))
-        # WO-REB-027 (SPEC-REB-012 rule 6): the legacy bootstrap is the branch a
-        # verifier without the qualify namespace takes; a verifier that carries
-        # it runs the typed candidate-package qualification instead.
-        self.assertIn('-m se_harness qualify --help >/dev/null 2>&1; then', workflow)
-        self.assertIn("qualify candidate-package", workflow)
-        self.assertIn('value["schema"] == "se-harness-release-qualification-v1"', workflow)
-        self.assertIn('value["operation"] == "candidate-package"', workflow)
-        self.assertLess(workflow.index("qualify candidate-package"), workflow.index("-m se_harness accept-candidate"))
+        for forbidden in (
+            "accept-candidate",
+            "qualify --help",
+            "RELEASED_ACCEPTANCE_CONTRACT_SHA256",
+            "acceptance_contract_sha256",
+            "se-harness-functional-acceptance-v1",
+            "legacy-bootstrap",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, workflow)
+        # Exactly one acceptance invocation exists in the candidate-package job.
+        self.assertEqual(1, workflow.count("qualify candidate-package \\"))
         self.assertNotIn('RELEASED_VERIFIER_VERSION: "', workflow)
         for original, replacement in (
             ("RELEASED_VERIFIER_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}", 'RELEASED_VERIFIER_VERSION: "0.6.1"'),
-            ("se-harness-functional-acceptance-v1", QUALIFICATION_SCHEMA),
-            ("-m se_harness accept-candidate", "-m se_harness validate"),
+            (QUALIFICATION_SCHEMA, "se-harness-functional-acceptance-v1"),
+            ("qualify candidate-package", "accept-candidate"),
         ):
             mutated = workflow.replace(original, replacement, 1)
             with self.subTest(original=original):
