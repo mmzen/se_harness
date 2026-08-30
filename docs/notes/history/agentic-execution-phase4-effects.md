@@ -1,6 +1,8 @@
 # Phase 4 change bundles and transactional effects
 
-<!-- Target expertise: 4/10. This is explanatory guidance, not authority. -->
+> Historical record from 2026-08-25, at `45b259b`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](../delegation-class.md) and the journaled apply.
+
+<!-- Target expertise: 4/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 This guide explains the `WO-AEX-006` candidate implementation. Formal meaning
 comes from `SPEC-AEX-007`, the selected work order, and the target repository's

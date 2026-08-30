@@ -1,5 +1,7 @@
 # Lifecycle state contract
 
+<!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 The workflow contract is the source of truth for lifecycle state meaning. In
 workflow schema v3, `lifecycles` contains one row for every state admitted by
 each artifact family. Both transition planning and validation read those rows;

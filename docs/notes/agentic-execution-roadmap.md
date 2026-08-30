@@ -188,7 +188,7 @@ required role assertions, and the isolated exact-wheel evaluator applied all 16
 transitions atomically after current `main` supplied the governed schema-3 root
 lock. All selected artifacts are `approved`; Phase 1 exit criteria are met. The
 decision and transition result are recorded in
-[`agentic-execution-phase-1-approval-decision.md`](agentic-execution-phase-1-approval-decision.md).
+[`agentic-execution-phase-1-approval-decision.md`](history/agentic-execution-phase-1-approval-decision.md).
 
 ### Objective
 

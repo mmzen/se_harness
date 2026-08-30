@@ -1,5 +1,9 @@
 # Phase 1 Agentic Execution Approval Decision
 
+> Historical record from 2026-08-24, at `6268821`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 Prepared: 2026-08-24\
 Selected domain: `agentic-execution`\
 Selected packet: 16 formal artifacts, `INT-AEX-001` through `WO-AEX-001`\

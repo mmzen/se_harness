@@ -1,12 +1,14 @@
 # Single-agent workflow skills MVP
 
+> Historical record from 2026-08-24, at `284b842`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](delegation-class.md) and the journaled apply.
+
 > **Status (2026-08-29, `WO-ECP-006`):** the three writing skills this note
 > describes (`harness-draft-change`, `harness-execute-work-order`,
 > `harness-prepare-assurance`) were retired from the template under
 > `REQ-ECP-014`; they wrapped the removed `delegated-workflow` command and
 > stubbed the evaluator. `harness-orient` remains. The text below is history.
 
-<!-- Target expertise: 5/10. This score describes the knowledge expected from the reader, not the document's complexity or quality. -->
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 > This is non-authoritative operator guidance. The installed harness, exact
 > released evaluator, formal artifact state, repository instructions, and

@@ -1,5 +1,9 @@
 # Phase 2 Agentic Execution Definition-Approval Decision Packet
 
+> Historical record from 2026-08-24, at `65244b1`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 - Prepared: 2026-08-24
 - Selected domain: `agentic-execution`
 - Selected artifacts: `SPEC-AEX-003`, `ADR-AEX-003`, and `WO-AEX-002`
