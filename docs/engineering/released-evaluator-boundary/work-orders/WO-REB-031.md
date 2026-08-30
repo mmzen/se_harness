@@ -2,7 +2,7 @@
 id = "WO-REB-031"
 type = "work_order"
 title = "Remove the expired 0.6.0 bootstrap acceptance path"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -50,6 +50,13 @@ to = "in_progress"
 decided_at = "2026-08-30T18:56:38Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-30, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 1db44d2 carrying unmoved main 7cac025, after the unrelated architecture relation was removed (W021), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-30T19:12:04Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner under the decision of 2026-08-30, made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green. The evidence packet at docs/engineering/released-evaluator-boundary/evidence/WO-REB-031/ records: the typed-only acceptance step (REB-BFH-001 to REB-BFH-003), the evaluator-facts table and fact removed, the four conformance test modules re-pinned, the three notes, the amendment records on SPEC-REB-010 and SPEC-REB-012; the affected suites 82 OK and the full Windows suite at its baseline (1153 tests, the one known test_artifact_authoring error, 26 skips); validate 1177 artifacts 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check complete:true at its fixed point result 7f59f7e2 over the packet head ca1a879 with all 17 changed paths in scope, from-git origin/main 7cac025. No deviations. This decision authorizes no verification record, no release and no publication; the pull request's merge remains the owner's decision."
 +++
 
 # Work Order: Remove the expired 0.6.0 bootstrap acceptance path
