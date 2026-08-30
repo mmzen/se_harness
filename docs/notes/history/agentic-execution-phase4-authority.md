@@ -1,5 +1,9 @@
 # Phase 4 live observation and delegated authority
 
+> Historical record from 2026-08-25, at `5846dca`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](../delegation-class.md) and the journaled apply.
+
+<!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 > This is non-authoritative implementation guidance. It does not approve,
 > start, complete, verify, release, or activate delegated execution. Formal
 > authority remains in the approved artifacts and the target repository's

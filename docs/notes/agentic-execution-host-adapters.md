@@ -1,6 +1,6 @@
 # Repository host adapters for SE Harness skills
 
-<!-- Target expertise: 5/10. This score describes the knowledge expected from the reader, not the document's complexity or quality. -->
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 > This is non-authoritative operator guidance. Installed managed files, the
 > exact released evaluator, formal artifact state, and accountable decisions

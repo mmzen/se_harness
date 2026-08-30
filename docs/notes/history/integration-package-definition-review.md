@@ -1,5 +1,9 @@
 # Integration Package definition-review decision packet
 
+> Historical record from 2026-08-24, at `d0cb7e4`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 This packet is a human-readable review aid. It is not a formal engineering
 artifact and grants no lifecycle, implementation, workflow, installation, Git,
 publication or external-action authority.

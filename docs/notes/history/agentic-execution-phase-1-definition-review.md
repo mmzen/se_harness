@@ -1,5 +1,9 @@
 # Phase 1 Agentic Execution Definition-Review Decision Packet
 
+> Historical record from 2026-08-24, at `6268821`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 > **Historical review record:** Accountable content review is complete. The
 > current decision point and corrected evaluator interpretation are in
 > [`agentic-execution-phase-1-approval-decision.md`](agentic-execution-phase-1-approval-decision.md).
@@ -21,9 +25,9 @@ artifact, assert that a named person holds a role, apply a lifecycle transition,
 authorize implementation, or replace the formal artifacts.
 
 The formal packet is indexed in
-[`docs/engineering/agentic-execution/README.md`](../engineering/agentic-execution/README.md).
+[`docs/engineering/agentic-execution/README.md`](../../engineering/agentic-execution/README.md).
 The planning context is
-[`agentic-execution-roadmap.md`](agentic-execution-roadmap.md).
+[`agentic-execution-roadmap.md`](../agentic-execution-roadmap.md).
 Accountable reviewers should execute the role-specific checks in
 [`agentic-execution-phase-1-accountable-review-checklist.md`](agentic-execution-phase-1-accountable-review-checklist.md).
 

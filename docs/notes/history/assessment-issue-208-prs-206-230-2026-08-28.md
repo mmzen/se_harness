@@ -1,11 +1,13 @@
 # Assessment of issue #208 against pull requests #206 and #230
 
+> Historical record from 2026-08-28, at `42d820a`. Kept for the decision trail; it describes the tool as it was then.
+
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 Repository-owned note. It records an independent, read-only assessment made on
 2026-08-28 of whether pull requests #206 (`WO-REB-028`) and #230 (`WO-REB-029`),
 taken together as a stacked change, correctly and sufficiently resolve issue
-#208 (P0-2 of the [2026-08 complexity audit](complexity-audit-2026-08.md):
+#208 (P0-2 of the [2026-08 complexity audit](../complexity-audit-2026-08.md):
 remove the 0.5.0→0.6.0 predecessor-bootstrap bridge). It grants no approval,
 verification, or release authority and changes no lifecycle state. Every
 reading below was reproduced on the combined head `a9f3118` (the tip of #230,

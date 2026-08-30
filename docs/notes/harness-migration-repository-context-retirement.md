@@ -1,5 +1,7 @@
 # Migration note: the repository-context scaffold is withdrawn
 
+> Historical record from 2026-08-21, at `01d5351`. Kept for the decision trail; it describes the tool as it was then.
+
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 This note describes a breaking change prepared under `WO-DST-021` and `REQ-DST-065`. It applies to the next release that carries the change; the exact version increment is a separate release decision and is not asserted here. This note is human-readable guidance and grants no approval, verification, or release authority.

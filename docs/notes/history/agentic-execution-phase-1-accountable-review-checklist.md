@@ -1,5 +1,9 @@
 # Phase 1 Agentic Execution Accountable Review Checklist
 
+> Historical record from 2026-08-24, at `6268821`. Kept for the decision trail; it describes the tool as it was then.
+
+<!-- Target expertise: 8/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 > **Review complete:** This checklist is retained as the accountable content
 > review record. The current decision point and corrected evaluator
 > interpretation are in
@@ -15,7 +19,7 @@ Current review status: accountable content review complete; lifecycle readiness 
 
 Use this checklist to review the revised Phase 1 Agentic Execution formal
 packet. The formal packet is indexed in
-[`docs/engineering/agentic-execution/README.md`](../engineering/agentic-execution/README.md),
+[`docs/engineering/agentic-execution/README.md`](../../engineering/agentic-execution/README.md),
 and the decision summary is
 [`agentic-execution-phase-1-definition-review.md`](agentic-execution-phase-1-definition-review.md).
 
