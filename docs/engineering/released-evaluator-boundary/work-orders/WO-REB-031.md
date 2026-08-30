@@ -35,7 +35,6 @@ paths = [
 [relations]
 implements = ["REQ-REB-031"]
 specifications = ["SPEC-REB-016", "SPEC-REB-010", "SPEC-REB-012"]
-architecture = ["ARCH-REB-012", "ADR-REB-012"]
 verification = ["VER-REB-015"]
 
 [[lifecycle_events]]
