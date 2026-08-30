@@ -51,7 +51,7 @@ The candidate CLI may lead the released one. Confirm commands against the isolat
 
 ## Traps
 
-- Every pull-request body needs a standalone `Harness-Work-Order: WO-...` line. CI reads it from the stored event payload, so a later body edit leaves the check red until the next push.
+- Every pull-request body needs a standalone `Harness-Work-Order: WO-...` line. The 0.11.0 root lane reads the stored event payload, so a body edit stays red until a push; `WO-ECP-021`'s template lane reads the live body (re-run suffices).
 - A record cannot contain the hash of its own commit, so `VREC-*` and `RLS-*` belong in a later governance commit than the candidate they bind.
 - Artifact identifiers are shared across branches and sessions. Check every ref before numbering a new chain; the local maximum is not the next free number.
 - Never rewrite historical `VREC-*` or `RLS-*` facts, and preserve unrelated changes.
