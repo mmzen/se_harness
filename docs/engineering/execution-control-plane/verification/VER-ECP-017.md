@@ -2,13 +2,20 @@
 id = "VER-ECP-017"
 type = "verification"
 title = "Independent evidence for the harnessctl command shape"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 verifies = ["REQ-ECP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T16:56:30Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-30 with the words 'Approve and start WO-ECP-021': target classification, naming, JSON, exit-code, stdout, one-code, one-cause, CLI-coverage and reference rows, every one driven through main() with collaborators mocked at the module boundary."
 +++
 
 # Verification Contract: Independent evidence for the harnessctl command shape

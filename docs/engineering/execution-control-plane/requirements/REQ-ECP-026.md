@@ -2,7 +2,7 @@
 id = "REQ-ECP-026"
 type = "requirement"
 title = "One command shape: repository target, artifact naming, JSON, exit codes and one code per message"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -13,6 +13,13 @@ source = "functional assessment of 2026-08-30, issue #282 (FA-3)"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T16:56:30Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-30 with the words 'Approve and start WO-ECP-021': one command shape across harnessctl for the repository target, artifact naming, --json, exit codes and diagnostic codes; preflight's --work-order and rehearse-recovery's shape are stated exclusions; issue #282 of the functional assessment."
 +++
 
 # Requirement: One command shape: repository target, artifact naming, JSON, exit codes and one code per message

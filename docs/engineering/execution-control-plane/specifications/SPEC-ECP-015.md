@@ -2,13 +2,20 @@
 id = "SPEC-ECP-015"
 type = "specification"
 title = "The harnessctl command shape"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 specifies = ["REQ-ECP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T16:56:30Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-30 with the words 'Approve and start WO-ECP-021': ECP-CLI-001 to ECP-CLI-009; the command-result object for the eleven commands without JSON, the 0/1/2 exit rule with failed results on standard output, one code per line, WEX301-304 and WEX401-404 by cause class raised in the provenance module, CLI-level tests for the five uncovered commands."
 +++
 
 # Specification: The harnessctl command shape
