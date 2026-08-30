@@ -2,7 +2,7 @@
 id = "WO-ECP-021"
 type = "work_order"
 title = "The managed lane reads the live pull-request body"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-08-30T17:08:26Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-30, taken by selecting the presented option 'Approve and start WO-ECP-021'. Start checkpoint Completed with every gate pass over the approval commit e4bf728 on branch wo/ecp-live-pr-body carrying unmoved main 7cac025, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-30T18:09:03Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-30 under DR-WO-COMPLETE, by selecting the presented option 'Mark WO-ECP-021 implemented', on the handoff check reading Completed over the Git-derived change set at its fixed point 531a113c, no scope amendment. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-021/ records: the template lane's live-body read (ECP-LPB-001 to -006) with the stored event payload gone from the template, the template assertions and the selector cases over the reduced shape, the AGENTS.md trap restated for both lanes, the domain index rows; the affected suites 55 and 81 OK, the full Windows suite at its baseline (1155 tests, one known test_artifact_authoring error), validate 0 errors, doctor 0 FAIL, release distributions PASS, all under the 0.11.0 root outside the checkout. The hash-locked root lane is unchanged and keeps the stored-payload behaviour until the next root adoption. No deviations. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: The managed lane reads the live pull-request body
