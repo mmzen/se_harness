@@ -9,7 +9,6 @@ from typing import Any
 
 
 LOCK_SCHEMA = 3
-LEGACY_CANONICAL_LOCK_SCHEMA = 2
 HASH_ALGORITHM = "sha256"
 HASH_MODE = "utf8-text-lf-v1"
 EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
@@ -31,7 +30,7 @@ class IntegrityError(ValueError):
 
 
 def raw_sha256(value: bytes) -> str:
-    """Return the legacy exact-byte SHA-256 digest."""
+    """Return the exact-byte SHA-256 digest (hash-bound raw mode)."""
 
     return hashlib.sha256(value).hexdigest()
 
@@ -56,20 +55,6 @@ def canonical_text_equal(left: bytes, right: bytes) -> bool:
     return canonical_text_bytes(left) == canonical_text_bytes(right)
 
 
-def matches_legacy_newline_variant(value: bytes, expected_sha256: str) -> bool:
-    """Return true when a schema-1 digest differs only by text newlines."""
-
-    if not isinstance(expected_sha256, str) or SHA256_PATTERN.fullmatch(expected_sha256) is None:
-        return False
-    canonical = canonical_text_bytes(value)
-    variants = {
-        canonical,
-        canonical.replace(b"\n", b"\r\n"),
-        canonical.replace(b"\n", b"\r"),
-    }
-    return any(raw_sha256(item) == expected_sha256 for item in variants)
-
-
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
     for key, value in pairs:
@@ -91,13 +76,18 @@ def validate_lock(value: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise IntegrityError("lock root must be an object")
     schema = value.get("schema")
-    if type(schema) is not int or schema not in {1, LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
+    if type(schema) is int and schema in {1, 2}:
+        raise IntegrityError(
+            f"lock schema {schema} predates the supported floor (schema {LOCK_SCHEMA}); "
+            "remove the stale .engineering-harness.lock and re-adopt the repository "
+            "with harnessctl adopt"
+        )
+    if type(schema) is not int or schema != LOCK_SCHEMA:
         raise IntegrityError("unsupported lock schema")
-    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
-        if value.get("hash_algorithm") != HASH_ALGORITHM:
-            raise IntegrityError("unsupported lock hash algorithm")
-        if value.get("hash_mode") != HASH_MODE:
-            raise IntegrityError("unsupported lock hash mode")
+    if value.get("hash_algorithm") != HASH_ALGORITHM:
+        raise IntegrityError("unsupported lock hash algorithm")
+    if value.get("hash_mode") != HASH_MODE:
+        raise IntegrityError("unsupported lock hash mode")
     if schema == LOCK_SCHEMA:
         evaluator = value.get("evaluator")
         if not isinstance(evaluator, dict):
@@ -146,38 +136,12 @@ def validate_lock(value: Any) -> dict[str, Any]:
     return value
 
 
-def legacy_tracked_sha256(value: bytes, mode: str) -> str:
-    """Reproduce schema-1 hashing, including its fragment CRLF behavior."""
-
-    legacy = value.replace(b"\r\n", b"\n") if mode == "fragment" else value
-    return raw_sha256(legacy)
-
-
-def digest_for_schema(value: bytes, schema: int, mode: str) -> str:
-    if schema == 1:
-        return legacy_tracked_sha256(value, mode)
-    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
-        return canonical_sha256(value)
-    raise IntegrityError("unsupported lock schema")
-
-
 def compare_lock_entry(
     lock: dict[str, Any],
     entry: dict[str, Any],
     current: bytes,
-    *,
-    desired: bytes | None = None,
 ) -> str:
-    """Return exact, canonical, legacy-canonical, or mismatch."""
+    """Return canonical or mismatch."""
 
-    schema = lock.get("schema")
     expected = entry.get("sha256")
-    if schema in {LEGACY_CANONICAL_LOCK_SCHEMA, LOCK_SCHEMA}:
-        return "canonical" if canonical_sha256(current) == expected else "mismatch"
-    if schema == 1:
-        if legacy_tracked_sha256(current, str(entry.get("mode"))) == expected:
-            return "exact"
-        if desired is not None and canonical_text_equal(current, desired):
-            return "legacy-canonical"
-        return "mismatch"
-    raise IntegrityError("unsupported lock schema")
+    return "canonical" if canonical_sha256(current) == expected else "mismatch"

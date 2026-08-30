@@ -15,7 +15,6 @@ from se_harness.integrity import (
     HASH_MODE,
     IntegrityError,
     canonical_sha256,
-    matches_legacy_newline_variant,
     raw_sha256,
 )
 
@@ -25,9 +24,8 @@ RAW_MODE = "raw"
 CANONICAL_MODE = HASH_MODE
 MODES = frozenset({RAW_MODE, CANONICAL_MODE})
 MATCH_DECLARED = "declared"
-MATCH_LEGACY_NEWLINE = "legacy-newline-variant"
 MATCH_MISMATCH = "mismatch"
-MATCH_RESULTS = (MATCH_DECLARED, MATCH_LEGACY_NEWLINE, MATCH_MISMATCH)
+MATCH_RESULTS = (MATCH_DECLARED, MATCH_MISMATCH)
 LOCK_RELATIVE = ".engineering-harness.lock"
 REGIONS = frozenset({"template", "repository"})
 REQUIRED_ATTRIBUTES = frozenset({"text eol=lf"})
@@ -278,19 +276,16 @@ def declared_digest(
 def compare_declared_digest(
     relative: str, value: bytes, expected: str, declaration: Declaration | None = None
 ) -> str:
-    """Compare a recorded digest, reporting a legacy newline match distinctly.
+    """Compare a recorded digest under the path's declared mode.
 
-    Legacy recognition is offered only to a canonical class, whose recorded value
-    may predate the declaration and have been taken over whatever line endings a
-    checkout produced. A raw class keeps exact-byte trust, so a newline variant is
-    a mismatch there and never a match.
+    A canonical class matches through newline canonicalization only; a raw
+    class keeps exact-byte trust. The recognition of schema-1-era digests
+    recorded over foreign newlines was removed under WO-HUP-012.
     """
 
     mode = resolve_mode(relative, declaration)
     if _digest(relative, value, mode) == expected:
         return MATCH_DECLARED
-    if mode == CANONICAL_MODE and matches_legacy_newline_variant(value, expected):
-        return MATCH_LEGACY_NEWLINE
     return MATCH_MISMATCH
 
 

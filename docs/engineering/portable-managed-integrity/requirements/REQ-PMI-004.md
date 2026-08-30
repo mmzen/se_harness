@@ -42,3 +42,16 @@ An exact schema-1 target migrates safely during applied upgrade. A target canoni
 ## Open decisions
 
 None when approved.
+
+## Amendment record
+
+**Schema-1 reading is retired, 2026-08-30 under `WO-HUP-012`.** This
+requirement made the harness read a schema-1 raw-byte lock conservatively
+and migrate it only on proven equality. The owner's floor decision of
+2026-08-30 (issue #285, item #285a: "locks older than schema 3 are not
+read", taken as the hard floor) supersedes that obligation: per
+`REQ-HUP-024` and `SPEC-HUP-012`, a lock whose schema is below 3 is refused
+at read with one diagnostic naming re-adoption as the route, and the
+legacy digest machinery this requirement mandated is deleted. The
+requirement's history stays valid as the record of the 0.2.x-era
+compatibility it governed. Nothing else in this requirement changes.

@@ -29,7 +29,6 @@ from se_harness.hash_bound import (
     HashBoundError,
     LOCK_RELATIVE,
     MATCH_DECLARED,
-    MATCH_LEGACY_NEWLINE,
     MATCH_MISMATCH,
     RAW_MODE,
     assess,
@@ -1256,10 +1255,12 @@ class ModeArbitrationTests(unittest.TestCase):
             compare_declared_digest("README.md", b"synthetic\n", raw_sha256(b"synthetic\n"))
 
 
-class LegacyNewlineRecognitionTests(unittest.TestCase):
-    """A digest recorded before its class was declared stays readable and named."""
+class LegacyNewlineRetirementTests(unittest.TestCase):
+    """WO-HUP-012 (HUP-LSF-006): no newline-variant digest matches anything."""
 
     def test_the_recorded_prior_lock_digest_is_unchanged_on_disk(self) -> None:
+        # The historical work order keeps its recorded digest as retained data;
+        # nothing recomputes or rewrites it.
         text = UPGRADE_WORK_ORDER.read_text(encoding="utf-8")
         self.assertIn(f'prior_lock_sha256 = "{RECORDED_PRIOR_LOCK_SHA256}"', text)
 
@@ -1275,23 +1276,26 @@ class LegacyNewlineRecognitionTests(unittest.TestCase):
     @unittest.skipUnless(
         revision_available(RECORDED_PRIOR_LOCK_COMMIT), "the historical lock revision is unavailable"
     )
-    def test_the_recorded_digest_is_recognized_from_every_materialization(self) -> None:
+    def test_a_newline_variant_digest_no_longer_matches_any_materialization(self) -> None:
         for name, value in newline_forms(historical_lock()).items():
             with self.subTest(materialization=name):
                 self.assertEqual(
-                    MATCH_LEGACY_NEWLINE,
+                    MATCH_MISMATCH,
                     compare_declared_digest(LOCK_RELATIVE, value, RECORDED_PRIOR_LOCK_SHA256),
                 )
 
-    def test_a_legacy_match_is_reported_distinctly_and_never_silently(self) -> None:
-        self.assertEqual(3, len(set(hash_bound.MATCH_RESULTS)))
-        self.assertNotIn(MATCH_LEGACY_NEWLINE, {MATCH_DECLARED, MATCH_MISMATCH})
+    def test_the_match_vocabulary_is_binary(self) -> None:
+        self.assertEqual((MATCH_DECLARED, MATCH_MISMATCH), hash_bound.MATCH_RESULTS)
         payload = b'{"schema": 3}\n'
         self.assertEqual(
-            MATCH_LEGACY_NEWLINE,
+            MATCH_MISMATCH,
             compare_declared_digest(
                 LOCK_RELATIVE, payload, raw_sha256(payload.replace(b"\n", b"\r\n"))
             ),
+        )
+        self.assertEqual(
+            MATCH_DECLARED,
+            compare_declared_digest(LOCK_RELATIVE, payload, canonical_sha256(payload)),
         )
 
     def test_a_raw_class_is_never_relaxed_to_a_newline_variant(self) -> None:

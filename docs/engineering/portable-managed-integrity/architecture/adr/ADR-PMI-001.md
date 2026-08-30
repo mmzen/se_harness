@@ -54,3 +54,14 @@ Do not use repository-wide Git policy as the correctness mechanism. Git attribut
 ## Validation
 
 Property tests cover newline equivalence and content sensitivity. Integration tests cover schema-1 and schema-2 doctor/upgrade behavior, fragments, invalid inputs, atomic failure, and path safety. Distribution verification covers self-lock consistency, canonical template parity, wheel contents, and fresh LF/CRLF installations.
+
+## Amendment record
+
+**The schema-1 retention consequence is closed, 2026-08-30 under
+`WO-HUP-012`.** This decision retained schema-1 evidence semantics with
+conservative migration while 0.2.x roots existed. The owner's floor
+decision of 2026-08-30 (issue #285, item #285a) ends that retention: locks
+below schema 3 are not read, and the migration path is removal of the
+stale lock plus re-adoption (`REQ-HUP-024`, `SPEC-HUP-012`). The canonical
+integrity semantics this decision chose are unchanged and remain in force
+for the schema-3 lock. Nothing else in this decision record changes.
