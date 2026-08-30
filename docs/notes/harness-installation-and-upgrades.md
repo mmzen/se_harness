@@ -13,13 +13,12 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
-The repository-managed surface includes four portable skill cores under
-`.agents/skills/`: the read-only `harness-orient` skill plus the explicit-only
-`harness-draft-change`, `harness-execute-work-order`, and
-`harness-prepare-assurance` workflow skills. Each core's `SKILL.md`, strict
-`skill-contract.json`, and standard-library helper are managed files. They are
-installed with Codex activation metadata for writing skills and same-named thin
-Claude Code adapters under `.claude/skills/`. Every file is upgraded through
+The repository-managed surface includes two portable skill cores under
+`.agents/skills/`: the read-only `harness-orient` orientation skill and the
+explicit-only `harness-operator-brief` communication skill. Each core's
+`SKILL.md`, strict `skill-contract.json`, and standard-library helper are
+managed files, and a thin Claude Code adapter for `harness-orient` is
+installed under `.claude/skills/`. Every file is upgraded through
 the same ownership-aware transaction as other managed template content;
 installing only the Python package does not add them to an existing repository.
 
@@ -110,17 +109,18 @@ returns its execution receipt inline; it does not install an evaluator or
 retain evidence in the target. See
 [read-only agent orientation](harness-orient.md) for the complete procedure.
 
-The three writing skills are explicit-only, single-agent evaluator clients.
-Their v3 contracts require the exact workflow-v4 operation catalog and prohibit
-direct governed-target writes. Draft and execution requests use evaluator-owned
-delegated start, bundle, and completion; assurance requests use delegated VREC
-preparation and stop for either a separately authorized commit or independent
-assurance. An older released evaluator without that capability causes a
-zero-effect stop. See [Phase 4 writing-skill integration](agentic-execution-phase4-skills.md)
-and the retained [Phase 3 MVP contract](agentic-execution-skills-mvp.md).
-The [repository host adapter guide](agentic-execution-host-adapters.md)
-explains why the Claude files are discovery-only and how both hosts preserve
-the same explicit-only writing boundary.
+`harness-operator-brief` is an explicit-only, single-agent communication
+skill: on an explicit request it produces one decision-ready operator brief
+from a bounded supplied source under the managed technical-communication
+policy, and it changes no repository path. See
+[clear technical communication](technical-communication.md). The earlier
+`harness-draft-change`, `harness-execute-work-order`, and
+`harness-prepare-assurance` writing skills were retired and are no longer
+installed; the retained
+[Phase 4 writing-skill integration](agentic-execution-phase4-skills.md) and
+[Phase 3 MVP contract](agentic-execution-skills-mvp.md) notes record that
+design. The [repository host adapter guide](agentic-execution-host-adapters.md)
+explains why the Claude files are discovery-only.
 
 ## Upgrade an existing installation
 
