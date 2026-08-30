@@ -17,6 +17,30 @@ harnessctl COMMAND [arguments]
 
 The equivalent interpreter-scoped form is `python -m se_harness COMMAND [arguments]`. Run `harnessctl COMMAND --help` for the exact parser help installed in the selected environment.
 
+## Command shape
+
+Four rules hold on every subcommand (`WO-ECP-021`):
+
+- **The repository is the positional `TARGET`**, default `.`, on every
+  command that reads or writes one. `select-work-order` reads an event file,
+  `identity` reads a runtime environment and `qualify candidate-package`
+  reads a wheel, so they take none.
+- **Naming.** `--artifact` selects an existing artifact; `--id` names the
+  record a command creates; an option that names a relation of that record
+  keeps the relation's name (`--work-order`, `--verification`,
+  `--verification-record`, `--release-contract`). Both record commands name
+  their preparation actor `--owner`. `preflight` keeps `--work-order`
+  until it folds into `check`.
+- **`--json` everywhere.** The workflow commands print the schema-2 result;
+  `validate`, `inspect`, `renumber-artifacts`, `release-unit`, `identity`
+  and `qualify` print their own objects; every other command prints one
+  `se-harness-command-result-v1` object with the same facts as its human
+  output.
+- **Exit codes.** `0`: completed. `1`: the command ran and its result is
+  failed, blocked or not passing. `2`: the command could not run (a usage
+  error, a refusal before any result). A failed result goes to standard
+  output in both renderings; a code appears once per line.
+
 ## Command inventory
 
 | Command | Principal actor | State effect | Intended use |
@@ -47,12 +71,12 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 ## Repository setup and inspection
 
 ```text
-harnessctl init [TARGET] [--project-name NAME] [--dry-run]
-harnessctl adopt [TARGET] [--project-name NAME] [--dry-run]
+harnessctl init [TARGET] [--project-name NAME] [--dry-run] [--json]
+harnessctl adopt [TARGET] [--project-name NAME] [--dry-run] [--json]
 harnessctl validate [TARGET] [--json] [--advisories]
 harnessctl inspect [TARGET] [--json]
-harnessctl dashboard [TARGET] [--output PATH]
-harnessctl doctor [TARGET]
+harnessctl dashboard [TARGET] [--output PATH] [--json]
+harnessctl doctor [TARGET] [--json]
 ```
 
 `TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
@@ -82,7 +106,7 @@ Dashboard defaults to `target/harness-dashboard/`; its generated files are deriv
 
 ```text
 harnessctl preflight [TARGET] --work-order WO-... [--phase start|review] [--json]
-harnessctl select-work-order --event GITHUB_EVENT_PATH
+harnessctl select-work-order --event GITHUB_EVENT_PATH [--json]
 ```
 
 `start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
@@ -102,7 +126,7 @@ not derive a new transition or next action from this reference.
 ```text
 harnessctl evidence [TARGET] --artifact WO-... --checkpoint start|pre-action|transition|handoff \
   [--rebound-at RFC3339] [--json]
-harnessctl pr-body [TARGET] --artifact WO-...
+harnessctl pr-body [TARGET] --artifact WO-... [--json]
 harnessctl check [TARGET] [--artifact WO-...|VREC-...|RLS-...] [--json] [--include-background]  # without a checkpoint: the projection
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
   --checkpoint start|pre-action|transition|handoff|scope [--target STATE] \  # with a checkpoint:
@@ -245,9 +269,9 @@ presentation consumes that result; it does not replace or recompute it.
 ## Safe repository upgrade
 
 ```text
-harnessctl upgrade [TARGET]
-harnessctl upgrade [TARGET] --apply
-harnessctl upgrade [TARGET] --apply --work-order WO-... --evidence-output docs/engineering/DOMAIN/evidence/WO-...-evaluator-upgrade.json
+harnessctl upgrade [TARGET] [--json]
+harnessctl upgrade [TARGET] --apply [--json]
+harnessctl upgrade [TARGET] --apply --work-order WO-... --evidence-output docs/engineering/DOMAIN/evidence/WO-...-evaluator-upgrade.json [--json]
 ```
 
 The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. Same-identity managed repair needs no new lifecycle packet. When the installed target evaluator differs from the standard lock, apply additionally requires a distinct approved or in-progress work order with an exact `[evaluator_upgrade]` packet and a work-order-keyed JSON evidence path. The packet binds the prior lock SHA-256 and exact immutable target archive/payload identity with `scope = "standard-root-only"`; a product release decision cannot substitute for it.
@@ -257,7 +281,7 @@ Apply requires the already-published target evaluator installed from exact wheel
 ## Disposable recovery rehearsal
 
 ```text
-harnessctl rehearse-recovery OUTPUT --repository REPOSITORY --candidate-commit FULL_COMMIT [--target-version SYNTHETIC_VERSION]
+harnessctl rehearse-recovery OUTPUT --repository REPOSITORY --candidate-commit FULL_COMMIT [--target-version SYNTHETIC_VERSION] [--json]
 ```
 
 The output must be absent or empty and outside the operational repository. The command refuses recognized production publication credential signals, uses no network client, creates only a synthetic local archive and simulated publication, rejects candidate contamination and stale identity, stops synthetic conflicting chains without selection, injects an interrupted root migration, proves exact rollback, restores the normal standard workflows and absence invariants, and writes canonical `rehearsal-report.json`. It grants no real recovery or external-action authority. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md).
@@ -270,8 +294,8 @@ The former `rehearse-migration` command is retired (`WO-ECP-010`, issue #210); t
 ## Domain and artifact authoring
 
 ```text
-harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run]
-harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE [--id ID] [--dry-run] [--quiet]
+harnessctl scaffold-domain [TARGET] --domain DOMAIN [--title TITLE] [--dry-run] [--json]
+harnessctl create-artifact [TARGET] --domain DOMAIN --type TYPE [--id ID] [--dry-run] [--quiet] [--json]
 ```
 
 Domain slugs, artifact identifiers, type prefixes, templates, and destinations are validated before mutation. `create-artifact` creates only an incomplete `draft`; it does not choose owners, relations, content, approval, or authority. After creation it prints the created type's checklist from the installed `docs/engineering/ARTIFACT_AUTHORING.md`; `--quiet` suppresses it. Existing valid flat layouts remain discoverable and are not automatically migrated.
@@ -318,7 +342,7 @@ Measures a release unit (`WO-CIP-004`, `ADR-CIP-002`): walks the first-parent hi
 
 ```text
 harnessctl identity --role released-evaluator|candidate-source|candidate-package \
-  --expected-version VERSION --expected-root PATH [options]
+  --expected-version VERSION --expected-root PATH [options] [--json]
 ```
 
 Key role-specific options are `--checkout-root`, `--candidate-commit`, `--evaluator-wheel-sha256`, `--entry-point`, `--require-isolated-python`, and `--require-entry-point`. The command verifies declared runtime origin; it does not select an evaluator or approve a candidate.
@@ -374,7 +398,7 @@ harnessctl capture-verification [TARGET] \
   [--owner ROLE] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Every selected work order must be exactly `implemented`, the selected verification contracts must equal their declared union, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC. The record contains `prepared_at` and `prepared_by`, never `verified_at` or `verified_by`.
+A refusal names its cause class: `WEX301` the artifact's state (a work order not `implemented`, an invalid graph), `WEX302` revision provenance (Git, `HEAD`, a dirty worktree), `WEX303` the evaluator evidence (a managed script missing, failing or timing out), `WEX304` a record input (id, owner, evidence or output path). Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Every selected work order must be exactly `implemented`, the selected verification contracts must equal their declared union, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC. The record contains `prepared_at` and `prepared_by`, never `verified_at` or `verified_by`.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
@@ -389,11 +413,11 @@ harnessctl prepare-release [TARGET] \
   --verification-record VREC-... \
   --work-order WO-... \
   --version VERSION \
-  --authorized-by ROLE \
+  --owner ROLE \
   [--tag TAG] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-Repeat `--verification-record` and `--work-order` for aggregate releases. Every included VREC must be exactly `verified`, the selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, and every record must bind the same candidate commit.
+The same four cause classes are `WEX401` to `WEX404`. Repeat `--verification-record` and `--work-order` for aggregate releases. Every included VREC must be exactly `verified`, the selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, and every record must bind the same candidate commit.
 
 Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The record contains `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. The managed `.gitattributes` fragment applies exactly `docs/engineering/**/evidence/*.json text eol=lf`, preserving canonical evidence bytes across supported checkouts so the raw SHA-256 survives. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. A rejected contract can support only its exact rejected RLS as terminal history and remains invalid for preparation, binding, release, publication, or credential-bearing use. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 

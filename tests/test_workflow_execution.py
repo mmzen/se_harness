@@ -1233,7 +1233,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
             ["check", str(self.root), "--artifact", "WO-001"],
             ["transition", str(self.root), "--set", "WO-001=verified", "--decision", "WO-001=x"],
             ["capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001", "--verification", "VER-001", "--evidence", "x"],
-            ["prepare-release", str(self.root), "--id", "RLS-009", "--release-contract", "REL-001", "--verification-record", "VREC-001", "--work-order", "WO-001", "--version", "1.0.0", "--authorized-by", "release-owner"],
+            ["prepare-release", str(self.root), "--id", "RLS-009", "--release-contract", "REL-001", "--verification-record", "VREC-001", "--work-order", "WO-001", "--version", "1.0.0", "--owner", "release-owner"],
         ):
             with self.subTest(command=command[0]):
                 error = io.StringIO()
