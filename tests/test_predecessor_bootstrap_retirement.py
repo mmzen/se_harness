@@ -171,6 +171,36 @@ ECP018_CANDIDATE_VALIDATOR_INSERTIONS = (
 )
 ECP018_CANDIDATE_VALIDATOR_INSERTED_LINES = 23
 
+#: `WO-AUT-004` (2026-08-30): on top of the `WO-ECP-018` insertions, the candidate copy
+#: carries the advisory class (SPEC-AUT-002): every non-equal opcode of the root-to-candidate
+#: diff, declared as (tag, 1-based root line, root lines spanned, candidate lines spanned,
+#: first line of the block). Root line numbers are those of the 0.11.0 root copy.
+AUT004_CANDIDATE_VALIDATOR_EDITS = (
+    ("replace", 17, 1, 1, "from dataclasses import asdict, dataclass, field"),
+    ("replace", 292, 2, 7, "def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic], list[Diagnostic]]:"),
+    ("insert", 297, 0, 1, "    advisories: list[Diagnostic] = []"),
+    ("insert", 301, 0, 1, '        draft = artifact.status == "draft"'),
+    ("replace", 302, 1, 1, "        if isinstance(statement, str) and statement.strip() and draft:"),
+    ("replace", 308, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",'),
+    ("replace", 312, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",'),
+    ("replace", 315, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",'),
+    ("replace", 319, 2, 2, "            if method.strip() and draft:"),
+    ("replace", 341, 1, 1, "    return errors, warnings, advisories"),
+    ("insert", 408, 0, 2, "    # SPEC-AUT-002 AUT-ADV-001: the advisory class, apart from errors and warnings."),
+    ("insert", 433, 0, 1, '            "advisory_count": len(self.advisories),'),
+    ("insert", 435, 0, 1, '            "advisories": [asdict(item) for item in sorted(self.advisories)],'),
+    ("insert", 2564, 0, 22, "def validate_work_order_delegation("),
+    ("replace", 2838, 1, 1, "        authoring_errors, authoring_warnings, authoring_advisories = validate_authoring(artifacts, repository_root)"),
+    ("insert", 2853, 0, 1, "        errors.extend(validate_work_order_delegation(artifacts, repository_root))"),
+    ("insert", 2887, 0, 1, "        advisories=sorted(set(authoring_advisories)),"),
+    ("replace", 2890, 1, 1, "def render_human(report: ValidationReport, *, show_advisories: bool = False) -> str:"),
+    ("replace", 2898, 1, 1, '        f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)} | Advisories: {len(report.advisories)}",'),
+    ("insert", 2915, 0, 7, "    if show_advisories and report.advisories:"),
+    ("insert", 2928, 0, 4, "    parser.add_argument("),
+    ("replace", 2942, 1, 1, "        print(render_human(report, show_advisories=args.show_advisories))"),
+)
+AUT004_CANDIDATE_VALIDATOR_LINE_DELTA = 46
+
 #: The bootstrap-era markers under the closed 0.6.0 domain, pinned as counts.
 #: The retirement removes their readers, not the data: a count that moved would
 #: mean retained history had been rewritten.
@@ -468,6 +498,13 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
                 if "validate_work_order_delegation" in self.root_text:
                     self.assertEqual(self.candidate_text, self.root_text)
                     return
+                if "advisories" in self.candidate_text and "advisories" not in self.root_text:
+                    # WO-AUT-004 (SPEC-AUT-002): the candidate copy is the 0.11.0 root copy with
+                    # the WO-ECP-018 insertions and the advisory class, declared opcode by opcode.
+                    self._assert_root_plus_declared_edits(
+                        AUT004_CANDIDATE_VALIDATOR_EDITS, AUT004_CANDIDATE_VALIDATOR_LINE_DELTA
+                    )
+                    return
                 # WO-ECP-018 (SPEC-ECP-006 ECP-DLG-001): the candidate copy is the 0.11.0 root
                 # copy with the `[delegation]` class validator inserted, declared block by block.
                 self._assert_root_plus_declared_insertions(
@@ -481,6 +518,22 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             self._assert_root_minus_declared_blocks(ECP006_CANDIDATE_VALIDATOR_DELETIONS, ECP006_CANDIDATE_VALIDATOR_DELETED_LINES)
             return
         self._assert_root_minus_declared_blocks(CANDIDATE_VALIDATOR_DELETIONS, CANDIDATE_VALIDATOR_DELETED_LINES)
+
+    def _assert_root_plus_declared_edits(self, declared, line_delta) -> None:
+        root_lines = self.root_text.splitlines()
+        candidate_lines = self.candidate_text.splitlines()
+        self.assertEqual(line_delta, len(candidate_lines) - len(root_lines))
+        matcher = difflib.SequenceMatcher(a=root_lines, b=candidate_lines, autojunk=False)
+        observed = []
+        for tag, start, stop, candidate_start, candidate_stop in matcher.get_opcodes():
+            if tag == "equal":
+                continue
+            first = candidate_lines[candidate_start] if candidate_stop > candidate_start else root_lines[start]
+            observed.append((tag, start + 1, stop - start, candidate_stop - candidate_start, first))
+        self.assertEqual(len(declared), len(observed), observed)
+        for expected, actual in zip(declared, observed):
+            with self.subTest(root_line=expected[1], first=expected[4][:48]):
+                self.assertEqual(expected, actual)
 
     def _assert_root_plus_declared_insertions(self, declared, inserted_lines) -> None:
         root_lines = self.root_text.splitlines()

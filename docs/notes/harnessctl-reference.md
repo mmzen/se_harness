@@ -49,7 +49,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 ```text
 harnessctl init [TARGET] [--project-name NAME] [--dry-run]
 harnessctl adopt [TARGET] [--project-name NAME] [--dry-run]
-harnessctl validate [TARGET] [--json]
+harnessctl validate [TARGET] [--json] [--advisories]
 harnessctl inspect [TARGET] [--json]
 harnessctl dashboard [TARGET] [--output PATH]
 harnessctl doctor [TARGET]
@@ -58,6 +58,8 @@ harnessctl doctor [TARGET]
 `TARGET` defaults to the current directory. Installation resolves the complete destination plan before writing and fails closed on ordinary conflicts, unsafe traversal, and repository escape. Adoption observations are not approved product artifacts.
 
 Validation reports deterministic errors and warnings but does not edit artifacts. Each finding names its assessment plane: `structure`, `governance`, configured `policy`, or non-blocking `maintenance`. Planes explain the finding source; they do not change severity, pass/fail behavior, or create a score.
+
+The summary line carries a fourth number, `Advisories`. An advisory is a hint for the author of a draft requirement (the `W-AUT-*` codes: statement shape, one obligation, length, the old free-text `verification_method`). It is not a warning: it is raised only while the artifact is `draft`, it is left out of the warning count and the plane counts, and it is listed only with `--advisories`. The JSON report always carries `advisories` and `advisory_count`. On a repository whose definitions are all approved, `Advisories: 0` is the normal reading.
 
 Inspection reuses the existing validator and Harness Explorer snapshot. It
 reports `mode = repository_wide`, no selected artifact, formal validity, ready

@@ -735,7 +735,14 @@ def build_parser() -> argparse.ArgumentParser:
     validate = commands.add_parser("validate", help="validate the repository artifact graph")
     validate.add_argument("target", nargs="?", default=".")
     validate.add_argument("--json", action="store_true")
-    validate.set_defaults(handler=lambda args: _run_distribution_script(Path(args.target), "validate_engineering_artifacts.py", ["--json"] if args.json else []))
+    validate.add_argument("--advisories", action="store_true", help="list the authoring advisories (W-AUT-*) after the warnings; --json always carries them")
+    validate.set_defaults(
+        handler=lambda args: _run_distribution_script(
+            Path(args.target),
+            "validate_engineering_artifacts.py",
+            [*(["--json"] if args.json else []), *(["--advisories"] if args.advisories else [])],
+        )
+    )
 
     inspect = commands.add_parser("inspect", help="inspect repository-wide attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")

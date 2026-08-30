@@ -104,6 +104,10 @@ architecture, ADR, verification, release contract, or operating contract.
 `check` itself accepts only a work order, a verification record, or a release
 record (`WEX210` otherwise), with or without a checkpoint.
 
+Authoring advisories (`W-AUT-*`) are not findings: `validate` reports them
+apart from errors and warnings, only for drafts, so `check` never counts
+them.
+
 The procedure is a typed list of steps, each either a `command` (an argument
 array the harness can run) or a `decision` (a decision right and its permitted
 outcomes). `check` reports the step the procedure is at: after a passing
