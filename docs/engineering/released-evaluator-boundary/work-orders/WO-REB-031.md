@@ -2,7 +2,7 @@
 id = "WO-REB-031"
 type = "work_order"
 title = "Remove the expired 0.6.0 bootstrap acceptance path"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -43,6 +43,13 @@ to = "approved"
 decided_at = "2026-08-30T18:55:32Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the typed-only acceptance step, the evaluator-facts table and fact removal, the four re-pinned test modules, the three notes, the amendment records on SPEC-REB-010 and SPEC-REB-012, this domain's index and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no change to a hash-locked root file, no product module, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-30T18:56:38Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's decision of 2026-08-30, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 1db44d2 carrying unmoved main 7cac025, after the unrelated architecture relation was removed (W021), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Remove the expired 0.6.0 bootstrap acceptance path
