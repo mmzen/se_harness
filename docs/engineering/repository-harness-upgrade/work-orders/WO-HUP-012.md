@@ -38,6 +38,7 @@ paths = [
 [relations]
 implements = ["REQ-HUP-024"]
 specifications = ["SPEC-HUP-012", "SPEC-PMI-001"]
+architecture = ["ARCH-PMI-001", "ADR-PMI-001"]
 verification = ["VER-HUP-012"]
 
 [[lifecycle_events]]
