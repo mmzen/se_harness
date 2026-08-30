@@ -1,5 +1,5 @@
 +++
-id = "SPEC-ECP-015"
+id = "SPEC-ECP-016"
 type = "specification"
 title = "The harnessctl command shape"
 status = "approved"
@@ -8,7 +8,7 @@ created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
-specifies = ["REQ-ECP-026"]
+specifies = ["REQ-ECP-027"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -52,7 +52,7 @@ decides its fate. A test pins these three sets against the parser.
 **ECP-CLI-002:** `prepare-release` takes `--owner` (the preparation actor,
 recorded as the record owner; it does not authorize). `--authorized-by` is
 refused before parsing with one line naming `--owner`, exit `2`.
-`preflight` keeps `--work-order` (see `REQ-ECP-026`).
+`preflight` keeps `--work-order` (see `REQ-ECP-027`).
 
 **ECP-CLI-003:** Every subcommand accepts `--json`. The workflow commands
 (`check`, `evidence`, `transition`, `capture-verification`,
@@ -116,7 +116,7 @@ codes where it names `WEX301`.
 
 | Requirement | Rules |
 | --- | --- |
-| REQ-ECP-026 | ECP-CLI-001 to ECP-CLI-009 |
+| REQ-ECP-027 | ECP-CLI-001 to ECP-CLI-009 |
 
 ## Failure behaviour
 

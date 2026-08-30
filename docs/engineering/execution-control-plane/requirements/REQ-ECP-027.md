@@ -1,5 +1,5 @@
 +++
-id = "REQ-ECP-026"
+id = "REQ-ECP-027"
 type = "requirement"
 title = "One command shape: repository target, artifact naming, JSON, exit codes and one code per message"
 status = "approved"

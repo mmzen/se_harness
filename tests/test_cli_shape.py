@@ -1,4 +1,4 @@
-"""The harnessctl command shape (REQ-ECP-026 / SPEC-ECP-015, ECP-CLI-001 to -008).
+"""The harnessctl command shape (REQ-ECP-027 / SPEC-ECP-016, ECP-CLI-001 to -008).
 
 Every test drives ``main()``; commands that need an environment have their
 collaborator mocked at the module boundary.

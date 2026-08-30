@@ -19,7 +19,7 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 
 ## Command shape
 
-Four rules hold on every subcommand (`WO-ECP-021`):
+Four rules hold on every subcommand (`WO-ECP-022`):
 
 - **The repository is the positional `TARGET`**, default `.`, on every
   command that reads or writes one. `select-work-order` reads an event file,

@@ -1,11 +1,11 @@
 ```toml
-artifact = "WO-ECP-021"
+artifact = "WO-ECP-022"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "845034d76738344a537a75326bce7933e9e2bf09c00b5e85cf1c92eaa48f93cd"
 rebound_at = "2026-08-30T18:17:17Z"
 ```
 
-# WO-ECP-021 handoff evidence
+# WO-ECP-022 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
 
@@ -20,7 +20,7 @@ blocked result exits `1` and prints to standard output, a command that
 could not run exits `2`; a diagnostic code appears once per line;
 `capture-verification` and `prepare-release` refuse with one cause class
 per code; the five commands never driven through `main()` have CLI-level
-tests; the reference states the four rules once (`REQ-ECP-026`;
+tests; the reference states the four rules once (`REQ-ECP-027`;
 `ECP-CLI-001` to `ECP-CLI-009`).
 
 ## Evaluators
@@ -103,7 +103,7 @@ Candidate CLI on this checkout:
   eight distribution checks compare the root's 0.11.0 managed copies with the
   candidate templates (the expected candidate-versus-root skew; the root
   evaluator reads 0 FAIL).
-- `harnessctl check . --artifact REQ-ECP-026 --json`: blocker
+- `harnessctl check . --artifact REQ-ECP-027 --json`: blocker
   `WEX210: check accepts only WO, VREC, or RLS artifacts` (once; the 0.11.0
   root prints `WEX210: WEX210: …`).
 - `harnessctl capture-verification …` from the candidate copy on this
@@ -122,12 +122,12 @@ Candidate CLI on this checkout:
 - `validate .`: 1177 artifacts, 0 errors, 485 warnings.
 - `doctor .`: 0 FAIL.
 - `validate_release_distributions.py`: PASS (8 records).
-- Start preflight for `WO-ECP-021`: PASS with no diagnostics over `4e3a584`.
+- Start preflight for `WO-ECP-022`: PASS with no diagnostics over `4e3a584`.
 
 ## Deviations, recorded for the completion decision
 
 1. **`preflight` keeps `--work-order`** and **`rehearse-recovery` keeps its
-   shape**, as `REQ-ECP-026` states; not deviations from the definitions,
+   shape**, as `REQ-ECP-027` states; not deviations from the definitions,
    recorded here because they are the two places the command list still
    departs from the shape.
 2. **The scope amendment** of 2026-08-30 (`tests/test_instruction_architecture.py`):

@@ -11,18 +11,18 @@
             "evidence": [
               {
                 "kind": "artifact",
-                "reference": "WO-ECP-021"
+                "reference": "WO-ECP-022"
               }
             ],
             "id": "QGP-G4I-STATUS",
-            "message": "WO-ECP-021 status is in_progress.",
+            "message": "WO-ECP-022 status is in_progress.",
             "status": "pass"
           },
           {
             "evidence": [
               {
                 "kind": "result",
-                "reference": "formal-graph:WO-ECP-021"
+                "reference": "formal-graph:WO-ECP-022"
               }
             ],
             "id": "QGP-G4I-GRAPH",
@@ -44,18 +44,18 @@
             "evidence": [
               {
                 "kind": "artifact",
-                "reference": "WO-ECP-021:[execution_scope]"
+                "reference": "WO-ECP-022:[execution_scope]"
               }
             ],
             "id": "QGP-G4I-SCOPE",
-            "message": "WO-ECP-021 declares 22 normalized scope path(s).",
+            "message": "WO-ECP-022 declares 22 normalized scope path(s).",
             "status": "pass"
           },
           {
             "evidence": [
               {
                 "kind": "result",
-                "reference": "declared-change-set:WO-ECP-021"
+                "reference": "declared-change-set:WO-ECP-022"
               }
             ],
             "id": "QGP-G4I-COMPLETE",
@@ -66,7 +66,7 @@
             "evidence": [
               {
                 "kind": "path",
-                "reference": "declared-change-set:WO-ECP-021"
+                "reference": "declared-change-set:WO-ECP-022"
               }
             ],
             "id": "QGP-G4I-PATHS",
@@ -77,7 +77,7 @@
             "evidence": [
               {
                 "kind": "result",
-                "reference": "preflight:WO-ECP-021:review"
+                "reference": "preflight:WO-ECP-022:review"
               }
             ],
             "id": "QGP-G4I-PREFLIGHT",
@@ -88,11 +88,11 @@
             "evidence": [
               {
                 "kind": "path",
-                "reference": "work-order-evidence:WO-ECP-021"
+                "reference": "work-order-evidence:WO-ECP-022"
               }
             ],
             "id": "QGP-G4I-EVIDENCE",
-            "message": "Fresh retained evidence is bound at docs/engineering/execution-control-plane/evidence/WO-ECP-021/WO-ECP-021-handoff.md.",
+            "message": "Fresh retained evidence is bound at docs/engineering/execution-control-plane/evidence/WO-ECP-022/WO-ECP-022-handoff.md.",
             "status": "pass"
           }
         ],
@@ -125,7 +125,7 @@
           "check",
           ".",
           "--artifact",
-          "WO-ECP-021",
+          "WO-ECP-022",
           "--checkpoint",
           "handoff"
         ],
@@ -136,7 +136,7 @@
               "check",
               ".",
               "--artifact",
-              "WO-ECP-021",
+              "WO-ECP-022",
               "--checkpoint",
               "handoff",
               "--from-git",
@@ -150,7 +150,7 @@
               "evidence",
               ".",
               "--artifact",
-              "WO-ECP-021",
+              "WO-ECP-022",
               "--checkpoint",
               "handoff"
             ],
@@ -174,7 +174,7 @@
               "preflight",
               ".",
               "--work-order",
-              "WO-ECP-021",
+              "WO-ECP-022",
               "--phase",
               "review"
             ],
@@ -190,7 +190,7 @@
           }
         },
         "effects": [
-          "Evaluated implementation handoff for WO-ECP-021."
+          "Evaluated implementation handoff for WO-ECP-022."
         ],
         "gate_ids": [
           "QG-G4-IMPLEMENTATION-EVIDENCE"
@@ -202,11 +202,11 @@
         ]
       },
       {
-        "artifact": "WO-ECP-021",
+        "artifact": "WO-ECP-022",
         "decision": "whether the authorized implementation and evidence are complete",
         "decision_right": "DR-WO-COMPLETE",
         "effects": [
-          "An explicit completion decision permits only WO-ECP-021 to become implemented."
+          "An explicit completion decision permits only WO-ECP-022 to become implemented."
         ],
         "gate_ids": [
           "QG-G4-IMPLEMENTATION-EVIDENCE"
@@ -221,7 +221,7 @@
           "continue",
           "reject"
         ],
-        "response": "Mark WO-ECP-021 implemented.",
+        "response": "Mark WO-ECP-022 implemented.",
         "role": "engineering-owner"
       }
     ]
@@ -231,13 +231,13 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Mark WO-ECP-021 implemented."
+      "value": "Mark WO-ECP-022 implemented."
     },
     "current_lifecycle_state": [
-      "WO-ECP-021 is in_progress."
+      "WO-ECP-022 is in_progress."
     ],
     "decision_required": {
-      "artifact": "WO-ECP-021",
+      "artifact": "WO-ECP-022",
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "outcomes": [
@@ -248,7 +248,7 @@
       "role": "engineering-owner"
     },
     "done": [
-      "Evaluated handoff compliance for WO-ECP-021."
+      "Evaluated handoff compliance for WO-ECP-022."
     ],
     "next": {
       "action": "whether the authorized implementation and evidence are complete",
@@ -263,13 +263,13 @@
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
-      "docs/engineering/execution-control-plane/evidence/WO-ECP-021/handoff.json",
-      "docs/engineering/execution-control-plane/evidence/WO-ECP-021/WO-ECP-021-handoff.md",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-022/handoff.json",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-022/WO-ECP-022-handoff.md",
       "docs/engineering/execution-control-plane/README.md",
-      "docs/engineering/execution-control-plane/requirements/REQ-ECP-026.md",
-      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-015.md",
-      "docs/engineering/execution-control-plane/verification/VER-ECP-017.md",
-      "docs/engineering/execution-control-plane/work-orders/WO-ECP-021.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-018.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-022.md",
       "docs/notes/harnessctl-reference.md",
       "se_harness/cli.py",
       "se_harness/provenance.py",
@@ -282,9 +282,9 @@
     "declared_paths": [
       "docs/engineering/execution-control-plane/evidence/",
       "docs/engineering/execution-control-plane/README.md",
-      "docs/engineering/execution-control-plane/requirements/REQ-ECP-026.md",
-      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-015.md",
-      "docs/engineering/execution-control-plane/verification/VER-ECP-017.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-018.md",
       "docs/notes/harnessctl-check.md",
       "docs/notes/harnessctl-reference.md",
       "se_harness/cli.py",
@@ -307,28 +307,28 @@
     "governing": [
       "CAP-ECP-001",
       "INT-ECP-001",
-      "REQ-ECP-026",
-      "SPEC-ECP-015",
-      "VER-ECP-017"
+      "REQ-ECP-027",
+      "SPEC-ECP-016",
+      "VER-ECP-018"
     ],
     "mode": "selected"
   },
   "selection": {
     "artifacts": [
-      "WO-ECP-021"
+      "WO-ECP-022"
     ],
-    "primary": "WO-ECP-021"
+    "primary": "WO-ECP-022"
   },
   "state": {
     "after": [
       {
-        "id": "WO-ECP-021",
+        "id": "WO-ECP-022",
         "status": "in_progress"
       }
     ],
     "before": [
       {
-        "id": "WO-ECP-021",
+        "id": "WO-ECP-022",
         "status": "in_progress"
       }
     ]

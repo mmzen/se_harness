@@ -1,5 +1,5 @@
 +++
-id = "WO-ECP-021"
+id = "WO-ECP-022"
 type = "work_order"
 title = "Normalise the harnessctl command shape"
 status = "implemented"
@@ -33,15 +33,15 @@ paths = [
   "docs/notes/harnessctl-check.md",
   "docs/engineering/execution-control-plane/README.md",
   "docs/engineering/execution-control-plane/evidence/",
-  "docs/engineering/execution-control-plane/requirements/REQ-ECP-026.md",
-  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-015.md",
-  "docs/engineering/execution-control-plane/verification/VER-ECP-017.md",
+  "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+  "docs/engineering/execution-control-plane/verification/VER-ECP-018.md",
 ]
 
 [relations]
-implements = ["REQ-ECP-026"]
-specifications = ["SPEC-ECP-015"]
-verification = ["VER-ECP-017"]
+implements = ["REQ-ECP-027"]
+specifications = ["SPEC-ECP-016"]
+verification = ["VER-ECP-018"]
 
 [[lifecycle_events]]
 from = "draft"
@@ -62,7 +62,7 @@ from = "in_progress"
 to = "implemented"
 decided_at = "2026-08-30T18:55:27Z"
 decided_by = "engineering-owner"
-reason = "Marked implemented by the accountable engineering owner on 2026-08-30 with the words 'Mark WO-ECP-021 implemented'. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-021/ records: ECP-CLI-001 to ECP-CLI-009 implemented (the pinned target classification, prepare-release --owner with the --authorized-by guard, --json on every subcommand with the command-result object and every existing JSON shape unchanged, the 0/1/2 exit rule with failed results on standard output, one code per line, the four cause classes raised in the provenance module with a mutation-guard refusal as an exit-2 environment refusal, thirteen CLI-shape tests, the reference's rules section); the in-scope suites 471 OK plus the amended module 30 OK; the full Windows suite at its baseline; validate 1177 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check completed at its fixed point 516e2e4f over main 7cac025 and the thirteen pull-request lanes green at the packet head 8f1cdfd. The scope amendment of 2026-08-30 (tests/test_instruction_architecture.py, three assertions from standard error to standard output) is recorded on this work order and accepted with this decision; the requirement's two stated exclusions (preflight --work-order, rehearse-recovery's shape) stand. This decision authorizes no verification record, no release and no publication."
+reason = "Marked implemented by the accountable engineering owner on 2026-08-30 with the words 'Mark WO-ECP-021 implemented'. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-022/ records: ECP-CLI-001 to ECP-CLI-009 implemented (the pinned target classification, prepare-release --owner with the --authorized-by guard, --json on every subcommand with the command-result object and every existing JSON shape unchanged, the 0/1/2 exit rule with failed results on standard output, one code per line, the four cause classes raised in the provenance module with a mutation-guard refusal as an exit-2 environment refusal, thirteen CLI-shape tests, the reference's rules section); the in-scope suites 471 OK plus the amended module 30 OK; the full Windows suite at its baseline; validate 1177 artifacts, 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check completed at its fixed point 516e2e4f over main 7cac025 and the thirteen pull-request lanes green at the packet head 8f1cdfd. The scope amendment of 2026-08-30 (tests/test_instruction_architecture.py, three assertions from standard error to standard output) is recorded on this work order and accepted with this decision; the requirement's two stated exclusions (preflight --work-order, rehearse-recovery's shape) stand. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Normalise the harnessctl command shape
@@ -132,12 +132,12 @@ packet and the index.
 
 ## Required verification
 
-Execute `VER-ECP-017` in full; repository-required checks; the pull
+Execute `VER-ECP-018` in full; repository-required checks; the pull
 request's lanes; the handoff check over the Git-derived change set.
 
 ## Evidence to record
 
-`docs/engineering/execution-control-plane/evidence/WO-ECP-021/`.
+`docs/engineering/execution-control-plane/evidence/WO-ECP-022/`.
 
 ## Stop and escalate conditions
 
@@ -154,6 +154,23 @@ refused `upgrade --apply` message on standard error; `ECP-CLI-005` moves
 every failed result to standard output, so the three assertions read
 standard output. The amendment adds no other work and no product path; the
 evidence packet is bound after this edit.
+
+## Identifier renumbering
+
+2026-08-30, after completion, on the engineering owner's decision
+'Renumber the command-shape chain to WO-ECP-022': a parallel session
+drafted a different chain for issue #280c and, both sessions having read
+the same free identifier space, took the same four identifiers
+(`REQ-ECP-026`, `SPEC-ECP-015`, `VER-ECP-017`, `WO-ECP-021`); that chain
+merged to `main` first with a verified record and is immutable. This chain
+is therefore renumbered to `REQ-ECP-027`, `SPEC-ECP-016`, `VER-ECP-018`
+and `WO-ECP-022`, files, evidence directory, index rows and citations
+included. The owner's quoted decision phrases in the lifecycle events
+above keep their original words: they name the identifier as it was when
+each decision was taken. `renumber-artifacts` refused the whole plan at
+inventory (`REN043` on the unrelated `VREC-WEX-001`), so the renumbering
+is by hand; that refusal is a finding of this packet. No content beyond
+the identifiers changes.
 
 ## Completion report format
 

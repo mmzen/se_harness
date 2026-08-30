@@ -35,7 +35,7 @@ LIFECYCLE_REGISTRY = load_lifecycle_registry()
 
 
 class RecordRefusal(HarnessError):
-    """A refused record preparation, labelled by its cause class (SPEC-ECP-015, ECP-CLI-007).
+    """A refused record preparation, labelled by its cause class (SPEC-ECP-016, ECP-CLI-007).
 
     The CLI maps the class to the code suffix: state 1, provenance 2, evidence 3, inputs 4.
     """
