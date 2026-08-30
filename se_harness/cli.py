@@ -325,17 +325,6 @@ def _project(target: str, artifact: str | None, *, include_background: bool, jso
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
-def _next(args: argparse.Namespace) -> int:
-    """ECP-CTX-004: `next` is the projection under its former name for one release."""
-
-    print(
-        "harnessctl: next is an alias of check and is removed after the release carrying this notice;"
-        " run harnessctl check [--artifact ID] (add --json for the structured result)",
-        file=sys.stderr,
-    )
-    return _project(args.target, args.artifact, include_background=False, json_output=args.json)
-
-
 def _check_projection(args: argparse.Namespace) -> int:
     """`check` without a checkpoint: the projection, no gate, no write (ECP-ONE-001 to -003)."""
 
@@ -770,14 +759,6 @@ def build_parser() -> argparse.ArgumentParser:
     preflight.set_defaults(handler=_preflight)
 
 
-    selected_next = commands.add_parser(
-        "next", help="deprecated alias of check without a checkpoint; removed after the release carrying the notice"
-    )
-    selected_next.add_argument("target", nargs="?", default=".")
-    selected_next.add_argument("--artifact", help="one WO, VREC, or RLS ID; defaults to the single in_progress work order")
-    selected_next.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
-    selected_next.set_defaults(handler=_next)
-
     check = commands.add_parser(
         "check",
         help="project one selected WO, VREC, or RLS scope, or evaluate one of its checkpoints, and emit canonical restitution",
@@ -1036,6 +1017,17 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"harnessctl: focus was removed after 0.10.0; run harnessctl check --artifact {selected}"
             " (add --json for the structured result)",
+            file=sys.stderr,
+        )
+        return 2
+    if arguments[:1] == ["next"]:
+        # ECP-CTX-004 as amended under WO-ECP-020: the execution context is the
+        # checkpoint-less check projection; `next` never shipped as an alias.
+        selected = arguments[arguments.index("--artifact") + 1] if "--artifact" in arguments[:-1] else None
+        print(
+            "harnessctl: next was removed after 0.11.0; run harnessctl check"
+            + (f" --artifact {selected}" if selected else " [--artifact ID]")
+            + " (add --json for the structured result)",
             file=sys.stderr,
         )
         return 2

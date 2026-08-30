@@ -28,7 +28,6 @@ The equivalent interpreter-scoped form is `python -m se_harness COMMAND [argumen
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
-| `next` | scripts written before 0.12.0 | read-only | deprecated alias of `check` without a checkpoint, byte-identical, with a removal notice on standard error; removed after the release carrying the notice |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
 | `check` | coding agent, first call on a work order; the managed gate | read-only | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
@@ -120,8 +119,8 @@ phase the state implies, `start` for `approved` and `in_progress`, `review` afte
 `governing`, `declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the same step a
 checkpoint `check` selects) and `decision_required`. It writes nothing and needs no prior command.
 The human block renders the context as a `Context` section after `Command or response`, and
-`result_sha256` binds it. `harnessctl next` is the same operation under its former name for one
-release: identical bytes, identical digest, plus one removal notice on standard error.
+`result_sha256` binds it. The former `next` command was removed after 0.11.0 (`WO-ECP-020`);
+invoking it exits with status 2 and names `check`.
 
 `check` without `--checkpoint` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in

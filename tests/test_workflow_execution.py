@@ -1306,20 +1306,22 @@ class ExecutionContextTests(WorkflowExecutionTests):
         self.assertIn("\nContext\n", human)
         self.assertLess(human.index("Command or response"), human.index("\nContext\n"))
 
-    def test_next_is_a_byte_identical_alias_that_announces_its_removal(self) -> None:
-        # ECP-CTX-004: same bytes, same digest, one notice on standard error.
+    def test_next_is_no_subcommand_and_names_check(self) -> None:
+        # ECP-CTX-004 as amended under WO-ECP-020: refused at the guard, naming check.
         self.in_progress_work_order()
-        for arguments in ((), ("--artifact", "WO-001")):
+        for arguments, expected in (((), "harnessctl check [--artifact ID]"), (("--artifact", "WO-001"), "harnessctl check --artifact WO-001")):
             with self.subTest(arguments=arguments):
-                check_code, check_output, check_error = self.invoke("check", str(self.root), *arguments, "--json")
-                next_code, next_output, next_error = self.invoke("next", str(self.root), *arguments, "--json")
-                self.assertEqual((0, 0), (check_code, next_code), check_error + next_error)
-                self.assertEqual(check_output, next_output)
-                self.assertEqual("check", json.loads(next_output)["operation"]["kind"])
-                self.assertEqual("", check_error)
-                self.assertEqual(1, next_error.count("\n"))
-                self.assertIn("harnessctl check", next_error)
-        self.assertEqual(self.invoke("check", str(self.root))[1], self.invoke("next", str(self.root))[1])
+                code, output, error = self.invoke("next", str(self.root), *arguments, "--json")
+                self.assertEqual(2, code)
+                self.assertEqual("", output)
+                self.assertEqual(1, error.count("\n"))
+                self.assertIn(expected, error)
+        help_output = io.StringIO()
+        with contextlib.redirect_stdout(help_output), self.assertRaises(SystemExit):
+            main(["--help"])
+        self.assertNotIn(" next ", help_output.getvalue())
+        self.assertNotIn("{next", help_output.getvalue())
+        self.assertNotIn(",next", help_output.getvalue())
 
     def test_check_with_a_checkpoint_still_requires_an_artifact(self) -> None:
         self.in_progress_work_order()
@@ -1395,15 +1397,14 @@ class ExecutionContextTests(WorkflowExecutionTests):
         self.assertNotIn("rerun the same command", json.dumps(result))
         self.assertNotIn('"next", "."', json.dumps(result))
 
-    def test_nothing_names_next_as_the_command_but_the_alias_row_and_the_notes(self) -> None:
-        # ECP-CTX-007: the template and the reference name check; the reference keeps one
-        # row for the alias while it exists, and no accept-candidate row or synopsis.
+    def test_nothing_names_next_or_accept_candidate_as_a_command(self) -> None:
+        # ECP-CTX-007 as amended under WO-ECP-020: the template and the reference name
+        # check; the reference has no next row, no accept-candidate row and no synopsis.
         workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")
         self.assertNotIn("harnessctl next", workflow_md)
         self.assertIn("`harnessctl check . --artifact WO-...`", workflow_md)
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
-        self.assertEqual(1, reference.count("| `next` |"))
-        self.assertIn("alias", reference[reference.index("| `next` |"):reference.index("| `next` |") + 200])
+        self.assertEqual(0, reference.count("| `next` |"))
         self.assertNotIn("harnessctl next [", reference)
         self.assertEqual(0, reference.count("| `accept-candidate` |"))
         self.assertNotIn("harnessctl accept-candidate", reference)
@@ -1531,11 +1532,9 @@ class DigestCoverageTests(WorkflowExecutionTests):
         self.assertIn("QGP-G4I-PATHS: ", "\n".join(gates))
         self.assertLess(block.index("Command or response"), block.index("\nChange set\n"))
         self.assertLess(block.index("\nChange set\n"), block.index("\nGates\n"))
-        for command in (("check", "--artifact", "WO-001"), ("next", "--artifact", "WO-001")):
-            with self.subTest(command=command[0]):
-                human = self.invoke(command[0], str(self.root), *command[1:])[1]
-                self.assertIn("\nChange set\nNone.\ncomplete: false\n", human)
-                self.assertIn("\nGates\n", human)
+        human = self.invoke("check", str(self.root), "--artifact", "WO-001")[1]
+        self.assertIn("\nChange set\nNone.\ncomplete: false\n", human)
+        self.assertIn("\nGates\n", human)
         human = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changed-path", "src/main.py", "--changed-path", "src/a.py", "--changes-complete")[1]
         self.assertEqual(block, human.replace("\r\n", "\n"))
 

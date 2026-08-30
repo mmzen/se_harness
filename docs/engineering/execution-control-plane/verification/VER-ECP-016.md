@@ -34,11 +34,11 @@ output; the word-census tests read the template and the notes.
 |---|---|---|---|
 | `REQ-ECP-025` context on the projection | test: `check --artifact ID --json` for a WO, a VREC and an RLS | `tests/test_workflow_execution.py` | `context` present with the six members; `context.next` equals the step the transition-checkpoint `check` selects; `reading_manifest` equals preflight's for the implied phase; `operation.kind == "check"` |
 | `REQ-ECP-025` default artifact | test: `check .` with one, zero and two `in_progress` work orders | same | one: selected; zero and two: `blocked`, `WEX-ECP-001` with the count; with a checkpoint and no `--artifact`: refused |
-| `REQ-ECP-025` alias | test: `next` and `check` for the same arguments | same | identical stdout bytes and `result_sha256`; `next` writes one stderr line naming `check`; `check` writes none |
+| `REQ-ECP-025` no `next` | test: `--help`; invocation | same | help lists no `next`; invocation exits 2, empty stdout, stderr names `harnessctl check` (amended under `WO-ECP-020`; the row first asserted a byte-identical alias) |
 | `REQ-ECP-025` corrective | test: blocked `check --checkpoint start` on an `implemented` WO | same | corrective argv is `harnessctl check . --artifact ID` |
 | `REQ-ECP-025` no `accept-candidate` | test: `--help`; invocation | `tests/test_release_qualification.py` | help lists no `accept-candidate`; invocation exits 2, empty stdout, stderr names `qualify candidate-package`; the `qualify candidate-package` tests are unchanged |
 | `REQ-ECP-025` writes nothing | test: tree digest before and after `check .` | `tests/test_workflow_execution.py` | equal |
-| `SPEC-ECP-014` word census | test: the template `WORKFLOW.md` names no `harnessctl next`; the reference has no `accept-candidate` row and no `next` synopsis line | same | as stated |
+| `SPEC-ECP-014` word census | test: the template `WORKFLOW.md` names no `harnessctl next`; the reference has no `accept-candidate` row, no `next` row and no `next` synopsis line | same | as stated |
 | `SPEC-ECP-014` workflow unchanged | test: existing candidate-evidence workflow assertions | `tests/test_release_qualification.py`, `tests/test_standard_repository_lifecycle.py` | unchanged and passing |
 
 ## Acceptance scenarios
@@ -49,11 +49,10 @@ With `WO-001` `in_progress`, run `main(["check", root, "--json"])`. Assert
 outcome `completed`, `scope.selected == "WO-001"`, and `context.next.argv`
 equals `restitution.command_or_response.argv`.
 
-### Scenario 2: the alias
+### Scenario 2: the retired projection alias
 
-Run `main(["next", root, "--artifact", "WO-001", "--json"])` and the same
-through `check`. Assert byte-equal stdout; assert stderr of `next` contains
-`harnessctl check`.
+Run `main(["next", root, "--artifact", "WO-001", "--json"])`. Assert exit 2,
+stdout empty, stderr contains `harnessctl check`.
 
 ### Scenario 3: the retired alias
 
@@ -73,5 +72,13 @@ released evaluator, se-harness 0.11.0, installed outside the checkout.
 ## Residual uncertainty
 
 The root `WORKFLOW.md` is the released 0.11.0 copy and names `next` until
-the next root adoption; the alias keeps that instruction valid for the
-window.
+the next root adoption; the 0.11.0 evaluator that governs it still has the
+command, and the adoption replaces both together.
+
+## Amendment record
+
+**The alias row is a refusal row, proposed 2026-08-29 under `WO-ECP-020`.**
+`ECP-CTX-004` as amended makes `next` a refused command rather than an
+alias, so the matrix row, scenario 2, the word census and the residual
+uncertainty are restated; every other row and its pass condition is
+unchanged and stays satisfied by `WO-ECP-019`'s evidence.

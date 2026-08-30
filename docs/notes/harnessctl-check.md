@@ -34,7 +34,7 @@ What it does **not** do:
 - without a checkpoint it picks the single `in_progress` work order when you
   name none, and carries the execution context (reading manifest, governing
   chain, declared scope, state, next command) as a `Context` section — what
-  `next` used to add; `next` is its alias for one release, then goes;
+  the former `next` command added before it was removed after 0.11.0;
 - without `--checkpoint` it evaluates nothing: it *projects* the selected
   rule, procedure and next step (the former `focus` command, kept as an alias
   through 0.10.0 and removed after it; a script still calling it is refused
