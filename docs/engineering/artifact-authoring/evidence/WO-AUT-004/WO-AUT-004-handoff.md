@@ -2,7 +2,7 @@
 artifact = "WO-AUT-004"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "76dbc1d4da4b7adb2bb98e9ce9e3ff1e8d4dfd94eed4ede80c20befcf5c1b148"
-rebound_at = "2026-08-30T09:55:41Z"
+rebound_at = "2026-08-30T10:02:05Z"
 ```
 
 # WO-AUT-004 handoff evidence
@@ -27,8 +27,9 @@ advisories (`REQ-AUT-007`; `AUT-ADV-001` to `AUT-ADV-007`).
   included. Its validator is the 0.11.0 root copy and still reports the
   family as warnings.
 - Candidate: this checkout, branch `wo/aut-004-advisories` off `main` at
-  `d42ab2f`; the suite and the demonstration run the candidate template
-  script.
+  `d42ab2f`, with `main` at `2f91797` (pull requests #290 and #291, notes
+  only) merged in without conflict; the suite and the demonstration run the
+  candidate template script.
 
 ## Change
 
@@ -114,7 +115,7 @@ scope in case the report renamed a key, needed no edit.
 
 ## Complete changed-path set
 
-Every path this work order changed since `main` at `d42ab2f`, packet
+Every path this work order changed since `main` at `2f91797`, packet
 included, as Git derived it; the handoff check completed at its fixed point
 with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE` passing, run by
 the released 0.11.0 evaluator on this Windows checkout: see `handoff.json`
