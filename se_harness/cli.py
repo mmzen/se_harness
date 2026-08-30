@@ -544,6 +544,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
         )
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
     except HarnessError as exc:
+        if str(exc).startswith("mutation guard "):
+            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+            raise
         code, message = _record_code(exc, "WEX30")
         result = failed_result("capture-verification", args.record_id, message, code=code)
         print(_render_selected_result(result, args), end="")
@@ -568,6 +571,9 @@ def _prepare_release(args: argparse.Namespace) -> int:
         )
         result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
     except HarnessError as exc:
+        if str(exc).startswith("mutation guard "):
+            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+            raise
         code, message = _record_code(exc, "WEX40")
         result = failed_result("prepare-release", args.record_id, message, code=code)
         print(_render_selected_result(result, args), end="")

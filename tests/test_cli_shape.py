@@ -169,6 +169,19 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.assertEqual({"schema": SCHEMA, "command": "select-work-order", "outcome": "completed", "field": "work-order", "value": "WO-PRD-001"}, payload)
         self.assertTrue(work_order.is_file())
 
+    def test_a_mutation_guard_refusal_is_an_environment_refusal(self) -> None:
+        # ECP-CLI-004: the guard fires before any result exists, so the command could not run.
+        from se_harness.installer import HarnessError
+
+        with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=HarnessError("mutation guard MG005 (capture-verification): RID002 harness_version: resolved")):
+            code, output, error = invoke(
+                "capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001",
+                "--verification", "VER-001", "--evidence", "README.md", "--json",
+            )
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertTrue(error.startswith("harnessctl: mutation guard MG005"), error)
+
     def test_check_prints_each_code_once(self) -> None:
         # ECP-CLI-006.
         code, payload, error = self.json_of("check", str(self.root), "--artifact", "REQ-001", "--json")
