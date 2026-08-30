@@ -2,7 +2,7 @@
 id = "REQ-REB-031"
 type = "requirement"
 title = "Candidate acceptance evidence comes only from the typed operation"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -13,6 +13,13 @@ source = "issue #285 (functional assessment FA-6, item #285a) on the owner's flo
 
 [relations]
 derives_from = ["CAP-REB-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T18:55:32Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green' for WO-REB-031: candidate acceptance evidence comes only from the typed operation, on the owner's floor decision of 2026-08-30 that the 0.6.0 bootstrap path is history (issue #285, item #285a)."
 +++
 
 # Requirement: Candidate acceptance evidence comes only from the typed operation

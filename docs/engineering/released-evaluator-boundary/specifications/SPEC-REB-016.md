@@ -2,13 +2,20 @@
 id = "SPEC-REB-016"
 type = "specification"
 title = "Removal of the expired 0.6.0 bootstrap acceptance path"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 specifies = ["REQ-REB-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T18:55:32Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green' for WO-REB-031: REB-BFH-001 to REB-BFH-006; the typed-only lane, no legacy fact or artifact, amendment records on SPEC-REB-010 and SPEC-REB-012."
 +++
 
 # Specification: Removal of the expired 0.6.0 bootstrap acceptance path

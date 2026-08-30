@@ -2,13 +2,20 @@
 id = "VER-REB-015"
 type = "verification"
 title = "Independent evidence for the typed-only acceptance path"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "security-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 verifies = ["REQ-REB-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T18:55:32Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green' for WO-REB-031: workflow-shape, facts-derivation, literal-free, tombstone and lane rows; readings from the exact released 0.11.0 evaluator outside the checkout."
 +++
 
 # Verification Contract: Independent evidence for the typed-only acceptance path

@@ -2,7 +2,7 @@
 id = "WO-REB-031"
 type = "work_order"
 title = "Remove the expired 0.6.0 bootstrap acceptance path"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -37,6 +37,13 @@ implements = ["REQ-REB-031"]
 specifications = ["SPEC-REB-016", "SPEC-REB-010", "SPEC-REB-012"]
 architecture = ["ARCH-REB-012", "ADR-REB-012"]
 verification = ["VER-REB-015"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T18:55:32Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the typed-only acceptance step, the evaluator-facts table and fact removal, the four re-pinned test modules, the three notes, the amendment records on SPEC-REB-010 and SPEC-REB-012, this domain's index and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no change to a hash-locked root file, no product module, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
 +++
 
 # Work Order: Remove the expired 0.6.0 bootstrap acceptance path
