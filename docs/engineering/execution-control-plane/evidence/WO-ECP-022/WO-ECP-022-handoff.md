@@ -30,7 +30,8 @@ tests; the reference states the four rules once (`REQ-ECP-027`;
   included. It keeps the old command shape until the next root adoption.
 - Candidate: this checkout, branch `wo/ecp-021-cli-shape` off `main` at
   `7cac025`, with `main` at `4b29d8a` (the live-PR-body chain, #293/#294)
-  merged in at `cffcb61`; the suite and the demonstration run candidate
+  merged in at `cffcb61` and `main` at `8b389d5` (the 0.6.0 bootstrap
+  removal, #295) merged after completion; the suite and the demonstration run candidate
   source.
 
 ## Change
@@ -148,7 +149,7 @@ hand; both facts stand as findings beside this packet.
 
 ## Complete changed-path set
 
-Every path this work order changed since `main` at `4b29d8a`, packet
+Every path this work order changed since `main`, packet
 included, as Git derived it; the handoff check completed at its fixed point
 with every predicate of `QG-G4-IMPLEMENTATION-EVIDENCE` passing, run by
 the released 0.11.0 evaluator on this Windows checkout: see `handoff.json`
