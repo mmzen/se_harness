@@ -2,7 +2,7 @@
 id = "REQ-HUP-024"
 type = "requirement"
 title = "Only a schema-3 lock is read, and only schema 3 is written"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -13,6 +13,13 @@ source = "issue #285 (functional assessment FA-6, item #285a) on the owner's flo
 
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T19:20:01Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green' for WO-HUP-012: only a schema-3 lock is read and only schema 3 is written, on the owner's floor decision of 2026-08-30 that locks older than schema 3 are not read, taken as the hard floor by the owner's selection of the same day (issue #285, item #285a)."
 +++
 
 # Requirement: Only a schema-3 lock is read, and only schema 3 is written

@@ -2,13 +2,20 @@
 id = "SPEC-HUP-012"
 type = "specification"
 title = "The lock-schema floor"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
 
 [relations]
 specifies = ["REQ-HUP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T19:20:01Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green' for WO-HUP-012: HUP-LSF-001 to HUP-LSF-008; the floor refusal, schema-3-only writer, legacy machinery deletion, MG002 retired and reserved, and amendment records on REQ-PMI-004, SPEC-PMI-001 and ADR-PMI-001."
 +++
 
 # Specification: The lock-schema floor

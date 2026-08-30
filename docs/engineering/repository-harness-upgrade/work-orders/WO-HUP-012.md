@@ -2,7 +2,7 @@
 id = "WO-HUP-012"
 type = "work_order"
 title = "Enforce the lock-schema floor"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -39,6 +39,13 @@ paths = [
 implements = ["REQ-HUP-024"]
 specifications = ["SPEC-HUP-012", "SPEC-PMI-001"]
 verification = ["VER-HUP-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-30T19:20:01Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-30 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the five product modules made schema-3-only, the transition assessment script, the four re-pinned test modules, the installation note, the three amendment records on the portable-managed-integrity definitions, this domain's index and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no change to a hash-locked root file, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
 +++
 
 # Work Order: Enforce the lock-schema floor
