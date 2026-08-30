@@ -2,7 +2,7 @@
 id = "WO-ECP-021"
 type = "work_order"
 title = "The managed lane reads the live pull-request body"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-30"
@@ -36,6 +36,13 @@ to = "approved"
 decided_at = "2026-08-30T17:07:52Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-30 by selecting the presented option 'Approve and start WO-ECP-021', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the template workflow's permission, fetch-and-reduce step and selector event path, the two test modules, the AGENTS.md trap note, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-30T17:08:26Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-30, taken by selecting the presented option 'Approve and start WO-ECP-021'. Start checkpoint Completed with every gate pass over the approval commit e4bf728 on branch wo/ecp-live-pr-body carrying unmoved main 7cac025, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: The managed lane reads the live pull-request body
