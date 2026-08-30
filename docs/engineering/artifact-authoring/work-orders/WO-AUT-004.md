@@ -22,6 +22,8 @@ paths = [
   "tests/test_inspection.py",
   "tests/test_harnessctl.py",
   "tests/test_predecessor_bootstrap_retirement.py",
+  "repository_tools/upgrade_rehearsal.py",
+  "tests/test_upgrade_rehearsal.py",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/harnessctl-check.md",
   "docs/engineering/artifact-authoring/README.md",
@@ -130,6 +132,19 @@ request's lanes; the handoff check over the Git-derived change set.
 Any need to change an error code or a plane; any hash-locked file in the
 change set; any consumer test that can only pass by re-adding advisories
 to `warnings`.
+
+## Scope amendment
+
+2026-08-30, after start, on the engineering owner's decision 'Amend
+WO-AUT-004 scope with repository_tools/upgrade_rehearsal.py and
+tests/test_upgrade_rehearsal.py': the two files are added to the
+execution scope. The upgrade rehearsal parses the validator's summary
+line with a regular expression anchored at its end, so the fourth number
+`AUT-ADV-003` adds made the hosted governance-migration lanes read "no
+validation summary was printed" at `6cff19b`. The amendment admits an
+optional `| Advisories: N` tail in that expression and the four-number
+form in the test's fake evaluator; it adds no other work and no product
+path. The evidence packet is re-bound after this edit.
 
 ## Completion report format
 

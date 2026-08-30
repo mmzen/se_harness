@@ -44,7 +44,9 @@ TRANSACTION_EVIDENCE = "docs/engineering/evidence/upgrade-rehearsal-transaction.
 #: record binds the evaluator identity of the lock it was prepared under.
 TOLERATED_ERROR = re.compile(r"^- \[E012\] .* evaluator evidence differs from the standard lock$")
 ERROR_LINE = re.compile(r"^- \[E[0-9A-Z-]+\] ")
-SUMMARY_LINE = re.compile(r"^Artifacts: (\d+) \| Errors: (\d+) \| Warnings: (\d+)$")
+# The validator prints three numbers up to 0.11.0 and a fourth, `Advisories`, from
+# 0.12.0 (SPEC-AUT-002 AUT-ADV-003); both forms are one summary line.
+SUMMARY_LINE = re.compile(r"^Artifacts: (\d+) \| Errors: (\d+) \| Warnings: (\d+)(?: \| Advisories: (\d+))?$")
 FAIL_LINE = re.compile(r"^FAIL ")
 _SECRET = re.compile(r"(TOKEN|SECRET|PASSWORD|CREDENTIAL|_KEY$|^AWS_|^AZURE_|^GOOGLE_)", re.IGNORECASE)
 
