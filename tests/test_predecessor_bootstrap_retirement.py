@@ -201,6 +201,43 @@ AUT004_CANDIDATE_VALIDATOR_EDITS = (
 )
 AUT004_CANDIDATE_VALIDATOR_LINE_DELTA = 46
 
+#: WO-LRE-002 (SPEC-LRE-002): the candidate copy is the 0.11.0 root copy with
+#: the WO-ECP-018 insertions, the WO-AUT-004 advisory class and the legacy
+#: release-evidence machinery removed, declared opcode by opcode.
+LRE002_CANDIDATE_VALIDATOR_EDITS = (
+    ("replace", 17, 1, 1, 'from dataclasses import asdict, dataclass, field'),
+    ("replace", 58, 27, 4, '# The legacy release-evidence declaration mechanism (SPEC-LRE-001) was retired'),
+    ("replace", 292, 2, 7, 'def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic], list[Diagnostic]]:'),
+    ("insert", 297, 0, 1, '    advisories: list[Diagnostic] = []'),
+    ("insert", 301, 0, 1, '        draft = artifact.status == "draft"'),
+    ("replace", 302, 1, 1, '        if isinstance(statement, str) and statement.strip() and draft:'),
+    ("replace", 308, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",'),
+    ("replace", 312, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",'),
+    ("replace", 315, 1, 1, '                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",'),
+    ("replace", 319, 2, 2, '            if method.strip() and draft:'),
+    ("replace", 341, 1, 1, '    return errors, warnings, advisories'),
+    ("insert", 408, 0, 2, '    # SPEC-AUT-002 AUT-ADV-001: the advisory class, apart from errors and warnings.'),
+    ("insert", 433, 0, 1, '            "advisory_count": len(self.advisories),'),
+    ("insert", 435, 0, 1, '            "advisories": [asdict(item) for item in sorted(self.advisories)],'),
+    ("delete", 1166, 215, 0, 'def _legacy_declaration(work_order: dict[str, Any]) -> Any:'),
+    ("delete", 1383, 21, 0, ''),
+    ("replace", 1614, 5, 5, '            # REQ-LRE-003 (the evaluator-evidence floor, owner decision of'),
+    ("delete", 1620, 1, 0, '                and artifact.artifact_id in legacy_exemptions'),
+    ("replace", 1628, 1, 1, '                required=not unbound,'),
+    ("insert", 2564, 0, 22, 'def validate_work_order_delegation('),
+    ("replace", 2838, 1, 1, '        authoring_errors, authoring_warnings, authoring_advisories = validate_authoring(artifacts, repository_root)'),
+    ("insert", 2853, 0, 1, '        errors.extend(validate_work_order_delegation(artifacts, repository_root))'),
+    ("delete", 2869, 7, 0, '    legacy_evidence_warnings: list[Diagnostic] = []'),
+    ("delete", 2880, 1, 0, '        *legacy_evidence_warnings,'),
+    ("insert", 2887, 0, 1, '        advisories=sorted(set(authoring_advisories)),'),
+    ("replace", 2890, 1, 1, 'def render_human(report: ValidationReport, *, show_advisories: bool = False) -> str:'),
+    ("replace", 2898, 1, 1, '        f"Artifacts: {len(report.artifacts)} | Errors: {len(report.errors)} | Warnings: {len(report.warnings)} | Advisories: {len(report.advisories)}",'),
+    ("insert", 2915, 0, 7, '    if show_advisories and report.advisories:'),
+    ("insert", 2928, 0, 4, '    parser.add_argument('),
+    ("replace", 2942, 1, 1, '        print(render_human(report, show_advisories=args.show_advisories))'),
+)
+LRE002_CANDIDATE_VALIDATOR_LINE_DELTA = -222
+
 #: The bootstrap-era markers under the closed 0.6.0 domain, pinned as counts.
 #: The retirement removes their readers, not the data: a count that moved would
 #: mean retained history had been rewritten.
@@ -497,6 +534,13 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             if "validate_agentic_delegations" not in self.root_text:
                 if "validate_work_order_delegation" in self.root_text:
                     self.assertEqual(self.candidate_text, self.root_text)
+                    return
+                if "resolve_legacy_release_evidence" not in self.candidate_text and "resolve_legacy_release_evidence" in self.root_text:
+                    # WO-LRE-002 (SPEC-LRE-002): the legacy release-evidence machinery
+                    # is removed from the candidate copy on top of the earlier edits.
+                    self._assert_root_plus_declared_edits(
+                        LRE002_CANDIDATE_VALIDATOR_EDITS, LRE002_CANDIDATE_VALIDATOR_LINE_DELTA
+                    )
                     return
                 if "advisories" in self.candidate_text and "advisories" not in self.root_text:
                     # WO-AUT-004 (SPEC-AUT-002): the candidate copy is the 0.11.0 root copy with

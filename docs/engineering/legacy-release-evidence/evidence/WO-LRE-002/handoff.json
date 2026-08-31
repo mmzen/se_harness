@@ -1,0 +1,344 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "bc29da1bbba18659d8bcb292a5ff6d73d695d7a107ccb467e466377a70677297",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-LRE-002"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-LRE-002 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-LRE-002"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-LRE-002:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-LRE-002 declares 20 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-LRE-002"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-LRE-002"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 22 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-LRE-002:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-LRE-002"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/legacy-release-evidence/evidence/WO-LRE-002/WO-LRE-002-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 486
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-LRE-002",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-LRE-002",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-LRE-002",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-LRE-002",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-LRE-002."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-LRE-002",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-LRE-002 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-LRE-002 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-LRE-002 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-LRE-002 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-LRE-002",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-LRE-002."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "333bb632a9fe2f2c9246441fbbfe48cb0f722cbd5294c384423f2ba000a55fbe",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      ".github/scripts/publish_dashboard.py",
+      "docs/engineering/legacy-release-evidence/architecture/adr/ADR-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/evidence/WO-LRE-002/handoff.json",
+      "docs/engineering/legacy-release-evidence/evidence/WO-LRE-002/WO-LRE-002-handoff.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-002.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-003.md",
+      "docs/engineering/legacy-release-evidence/specifications/SPEC-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/specifications/SPEC-LRE-002.md",
+      "docs/engineering/legacy-release-evidence/verification/VER-LRE-002.md",
+      "docs/engineering/legacy-release-evidence/work-orders/WO-LRE-002.md",
+      "docs/engineering/README.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "se_harness/cli.py",
+      "se_harness/installer.py",
+      "se_harness/legacy_release_evidence.py",
+      "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+      "tests/fixtures/legacy_release_evidence/resolution_vectors.json",
+      "tests/test_dashboard_publication.py",
+      "tests/test_legacy_release_evidence.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_revision_provenance.py"
+    ],
+    "declared_paths": [
+      ".github/scripts/publish_dashboard.py",
+      "docs/engineering/legacy-release-evidence/architecture/adr/ADR-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/evidence/",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-002.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-003.md",
+      "docs/engineering/legacy-release-evidence/specifications/SPEC-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/specifications/SPEC-LRE-002.md",
+      "docs/engineering/legacy-release-evidence/verification/VER-LRE-002.md",
+      "docs/engineering/README.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "se_harness/cli.py",
+      "se_harness/installer.py",
+      "se_harness/legacy_release_evidence.py",
+      "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+      "tests/fixtures/legacy_release_evidence/",
+      "tests/test_dashboard_publication.py",
+      "tests/test_legacy_release_evidence.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_revision_provenance.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-LRE-001",
+      "ARCH-LRE-001",
+      "CAP-LRE-001",
+      "INT-LRE-001",
+      "REQ-LRE-003",
+      "SPEC-LRE-001",
+      "SPEC-LRE-002",
+      "VER-LRE-002"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-LRE-002"
+    ],
+    "primary": "WO-LRE-002"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-LRE-002",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-LRE-002",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

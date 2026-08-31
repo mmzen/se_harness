@@ -153,3 +153,16 @@ the declaring work order, because a partially bound record is never exempt.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The declaration mechanism is retired by the evaluator-evidence floor,
+2026-08-31 under `WO-LRE-002`.** This requirement made an unbound released
+record acceptable only through a dated declaration in an authority-granting
+upgrade work order, reported as `W024` debt. The owner's floor decision of
+2026-08-30 (issue #285, item #285a), taken literally by the owner's
+selection, supersedes it: per `REQ-LRE-003` and `SPEC-LRE-002`, a released
+record carrying neither evidence field is not assessed at all — no
+declaration, no warning, no frozen set. The partial-binding rule this
+requirement preserved stays in force. The requirement's history stays valid
+as the record of the mechanism it governed. Nothing else changes here.

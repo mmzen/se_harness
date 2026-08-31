@@ -879,14 +879,16 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)
 
-        unbound = historical_release
-        unbound = "\n".join(
+        # REQ-LRE-003 (WO-LRE-002): a wholly unbound released record is not
+        # assessed, so the failure case is the partial binding, which stays an
+        # error.
+        partial = historical_release
+        partial = "\n".join(
             line
-            for line in unbound.splitlines()
-            if not line.startswith("evaluator_evidence_")
+            for line in partial.splitlines()
+            if not line.startswith("evaluator_evidence_sha256")
         ) + "\n"
-        release_path.write_text(unbound, encoding="utf-8")
-        (self.root / "docs/engineering/delivery/evidence/RLS-001-evaluator.json").unlink()
+        release_path.write_text(partial, encoding="utf-8")
         completed = subprocess.run(
             [sys.executable, str(validator), "--root", str(self.root), "--json"],
             cwd=self.root,

@@ -49,19 +49,6 @@ EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 EVALUATOR_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
 EVALUATOR_VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
 EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
-# SPEC-LRE-001 rule 11: the frozen self-hosting compatibility set. These are this
-# repository's own releases, cut before evaluator-evidence enforcement existed. The set
-# is closed: no identifier is ever added to it. A consumer repository instead declares
-# its pre-enforcement records in an authorizing work order's [evaluator_upgrade] packet,
-# and the resolution of that declaration belongs to the validator, which is the only
-# authority on it. This script publishes only mmzen/se_harness, whose own exemptions are
-# this rule and nothing else, so it holds the set verbatim and defines no rule of its
-# own. Any other unbound released record refuses publication.
-LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE = frozenset(
-    {"RLS-SEH-001", "RLS-SEH-002", "RLS-SEH-004", "RLS-SEH-005", "RLS-SEH-006", "RLS-SEH-007"}
-)
-
-
 class PublicationError(RuntimeError):
     """A bounded publication invariant failed."""
 
@@ -299,10 +286,10 @@ def _validated_evaluator_binding(
     record_id = metadata.get("id")
     path = metadata.get("evaluator_evidence_path")
     digest = metadata.get("evaluator_evidence_sha256")
-    # SPEC-LRE-001 rules 7 and 11: only a wholly unbound record in the frozen
-    # self-hosting set publishes without evaluator evidence. A partially bound record is
-    # never exempt, and a declared exemption never reaches this repository's own records.
-    if path is None and digest is None and record_id in LEGACY_RELEASES_WITHOUT_EVALUATOR_EVIDENCE:
+    # REQ-LRE-003 (the evaluator-evidence floor, WO-LRE-002): a wholly unbound
+    # released record publishes without evaluator evidence; the frozen identifier
+    # set is retired. A partially bound record is never exempt.
+    if path is None and digest is None:
         return {"path": None, "sha256": None}
     if not isinstance(path, str) or not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
         raise PublicationError(f"release record {record_id} has no canonical evaluator evidence binding")

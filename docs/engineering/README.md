@@ -32,7 +32,7 @@
 - `work-order-assurance-classification/`: explicit work-order applicability for commit-bound verification and derived assurance follow-up.
 - `workflow-execution/`: deterministic bounded workflow scope, lifecycle mutation rules, and canonical agent-independent handoffs.
 - `hash-bound-integrity/`: declared hash-bound text classes, one mode per class, and fail-closed completeness assessment of their checkout bytes.
-- `legacy-release-evidence/`: declared exemptions for released records that predate evaluator-evidence enforcement, and pre-apply refusal of an upgrade that would freeze a repository.
+- `legacy-release-evidence/`: the evaluator-evidence floor — a released record carrying neither evidence field is not assessed (the earlier declaration-and-refusal mechanism is retired by dated amendment).
 - `release-0.2.0/`: historical release qualification and immutable release records for version 0.2.0.
 - `release-0.2.1/`: incremental release qualification, aggregate provenance, and GitHub-to-PyPI promotion records for version 0.2.1.
 - `release-0.2.2/`: integrated instruction-architecture and self-hosting qualification, aggregate provenance, and the released record for version 0.2.2.

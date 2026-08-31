@@ -125,3 +125,15 @@ no refusal occurs.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The pre-apply refusal is retired by the evaluator-evidence floor,
+2026-08-31 under `WO-LRE-002`.** This requirement refused an evaluator
+upgrade that would leave an undeclared unbound released record, to prevent
+the frozen-repository defect of issue #126. The owner's floor decision of
+2026-08-30 (issue #285, item #285a) removes the cause: per `REQ-LRE-003`
+and `SPEC-LRE-002`, validation does not assess an unbound released record,
+so no upgrade can freeze a repository on their account and nothing remains
+to refuse over. The requirement's history stays valid as the record of why
+the refusal existed. Nothing else changes here.
