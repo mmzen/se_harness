@@ -2,13 +2,20 @@
 id = "VER-ECP-020"
 type = "verification"
 title = "Independent evidence for the .gitattributes tail removal"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 verifies = ["REQ-ECP-029"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T14:22:20Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve WO-ECP-024 and delegate': deletion, liveness and delegation-evidence rows."
 +++
 
 # Verification: Independent evidence for the .gitattributes tail removal

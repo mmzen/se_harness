@@ -2,13 +2,20 @@
 id = "SPEC-ECP-018"
 type = "specification"
 title = "Removal of the dead .gitattributes tail"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 specifies = ["REQ-ECP-029"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T14:22:20Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve WO-ECP-024 and delegate': ECP-GAT-001 to ECP-GAT-004; the two deletions, the liveness measurement and the delegation gate configuration."
 +++
 
 # Specification: Removal of the dead .gitattributes tail

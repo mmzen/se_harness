@@ -2,7 +2,7 @@
 id = "REQ-ECP-029"
 type = "requirement"
 title = "The .gitattributes tail carries only live rules"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -14,6 +14,13 @@ measure = "the WO-ECP-010 retention comment is gone (its promise was fulfilled b
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T14:22:20Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve WO-ECP-024 and delegate': the .gitattributes tail carries only live rules (issue #285b, unblocked by the 0.12.0 root adoption)."
 +++
 
 # Requirement: The .gitattributes tail carries only live rules
