@@ -2,7 +2,7 @@
 id = "WO-HUP-013"
 type = "work_order"
 title = "Adopt exact public 0.12.0 as the standard root, the simple way"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-08-31T13:13:31Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the simple upgrade transaction from the isolated 0.12.0 environment, the owner statements naming the new governor, the candidate move to 0.13.0, the identity-aware test assertions, this packet, the domain index, the transaction JSON and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no product byte beyond the version identity, no template, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-31T13:14:04Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-31, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 036f3ce carrying unmoved main 63889f7, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.12.0 as the standard root, the simple way
