@@ -2,7 +2,7 @@
 id = "VREC-SEH-021"
 type = "verification_record"
 title = "Verification candidate for 14 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/artifact-authoring/evidence/WO-AUT-004/WO-AU
 evaluator_evidence_path = "docs/engineering/release-0-12-0/evidence/VREC-SEH-021-evaluator.json"
 evaluator_evidence_sha256 = "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
 
+verified_at = "2026-08-31T11:53:28Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-AUT-004", "WO-DST-022", "WO-ECP-018", "WO-ECP-019", "WO-ECP-020", "WO-ECP-021", "WO-ECP-022", "WO-ECP-023", "WO-HUP-011", "WO-HUP-012", "WO-LRE-002", "WO-REB-031", "WO-RLS-018", "WO-TCM-003"]
 conforms_to = ["VER-AUT-002", "VER-DST-001", "VER-DST-022", "VER-ECP-015", "VER-ECP-016", "VER-ECP-017", "VER-ECP-018", "VER-ECP-019", "VER-HUP-011", "VER-HUP-012", "VER-LRE-002", "VER-REB-015", "VER-TCM-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-08-31T11:53:28Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner on 2026-08-31 by selecting the presented option 'I verify VREC-SEH-021'. Re-measured immediately before this transition: bound commit 3dcde4b is the branch tip with a clean worktree; the fourteen gated work orders are implemented; the evaluator packet matches its recorded digest 52678c79 (the wheel-installed 0.11.0 root). The record binds the fourteen-work-order unit of REL-SEH-023 to the thirteen verification contracts and the fourteen work-order-keyed handoff packets, exactly as the contract's aggregate section demands; every member carries its own verified per-work-order record re-checked at drafting and unmoved since; the candidate qualification of REL-SEH-023 is read complete in WO-RLS-018's packet, including the census with the trace repair carrying its five members, the two-run byte-identical build of record and the two-platform upgrade rehearsal with one semantic digest; every lane of pull request #304 passes at the candidate head. No deviations. The bound change set stands over main 2761f89. This verifies the release unit's work orders only; it prepares, releases and publishes nothing."
 +++
 
 # Verification Record Candidate
