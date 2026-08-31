@@ -2,7 +2,7 @@
 id = "WO-HUP-013"
 type = "work_order"
 title = "Adopt exact public 0.12.0 as the standard root, the simple way"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -20,6 +20,13 @@ implements = ["REQ-HUP-025", "REQ-HUP-026"]
 specifications = ["SPEC-HUP-013"]
 architecture = ["ARCH-HUP-010"]
 verification = ["VER-HUP-013"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the simple upgrade transaction from the isolated 0.12.0 environment, the owner statements naming the new governor, the candidate move to 0.13.0, the identity-aware test assertions, this packet, the domain index, the transaction JSON and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no product byte beyond the version identity, no template, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
 +++
 
 # Work Order: Adopt exact public 0.12.0 as the standard root, the simple way

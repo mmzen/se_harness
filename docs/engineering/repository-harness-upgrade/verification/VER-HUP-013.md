@@ -2,12 +2,19 @@
 id = "VER-HUP-013"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.12.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 [relations]
 verifies = ["REQ-HUP-025", "REQ-HUP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-08-31 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-013: the transaction and complete-graph rows with the rehearsal-measured pass conditions."
 +++
 
 # Verification: Verify standard-root adoption of exact public 0.12.0

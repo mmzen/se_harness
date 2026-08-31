@@ -2,7 +2,7 @@
 id = "ARCH-HUP-010"
 type = "architecture"
 title = "Adopt 0.12.0 through the existing standard-root boundary, without a packet"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -14,6 +14,13 @@ outcome = "no_significant_decision"
 triggers = []
 rationale = "The boundary is unchanged from ARCH-HUP-009: one released evaluator outside the checkout writes the managed root through the installer's transaction from a wheel-file install that records its archive pair. Nothing leaves the managed set, so even the previous adoption's owner-side removal workaround is not needed; no trust boundary moves."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-31 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-013: the unchanged standard-root boundary, no significant decision."
 +++
 
 # Architecture: Adopt 0.12.0 through the existing standard-root boundary, without a packet

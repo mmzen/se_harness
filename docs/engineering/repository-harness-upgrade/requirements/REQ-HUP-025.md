@@ -2,7 +2,7 @@
 id = "REQ-HUP-025"
 type = "requirement"
 title = "Adopt exact public 0.12.0 as the standard root by the simple upgrade"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -13,6 +13,13 @@ source = "RLS-SEH-021 released and published on 2026-08-31; REL-SEH-023 observat
 measure = "one command from the isolated environment; lock schema 3, tool_version 0.12.0, evaluator.version 0.12.0, archive_sha256 equal to the wheel bound in RLS-SEH-021, payload digest of the installation; replay reads every file unchanged; no file leaves the managed set (measured), and a leaving file would be removed by the installer's own remove action (WO-DST-022)"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-31 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-013: the adoption of exact public 0.12.0 (RLS-SEH-021, released and published 2026-08-31) as the standard root the simple way, from the 0.11.0 lock e3f70394, rehearsed the same day on a throwaway clone of main 63889f7."
 +++
 
 # Requirement: Adopt exact public 0.12.0 as the standard root by the simple upgrade

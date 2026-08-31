@@ -2,13 +2,20 @@
 id = "SPEC-HUP-013"
 type = "specification"
 title = "Standard-root adoption contract for released 0.12.0, the simple way"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 specifies = ["REQ-HUP-025", "REQ-HUP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-08-31 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-013: rules 1 to 13 following SPEC-HUP-011 rule for rule with the measured 0.12.0 identities, the no-leaver plan and the identity-aware test edits the rehearsal names."
 +++
 
 # Specification: Standard-root adoption contract for released 0.12.0, the simple way

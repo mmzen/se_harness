@@ -2,7 +2,7 @@
 id = "REQ-HUP-026"
 type = "requirement"
 title = "Prove complete-graph operation under the 0.12.0 root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -13,6 +13,13 @@ source = "WO-HUP-011 evidence of what a root move touches; rehearsal of 2026-08-
 measure = "0.12.0 validate 0 errors, 65 warnings, 0 advisories; doctor 0 FAIL; qualify released-root passed 113/113; suite failure set equal to the same-commit control on the 0.11.0 root beyond the identity-aware edits the evidence names; evaluator_facts derive yields the 0.12.0 to 0.13.0 pair; the managed lane green at the implemented head and at the record heads"
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-08-31 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-013: complete-graph operation under the 0.12.0 root, with the gate's own numbers moving to 0 errors, 65 warnings, 0 advisories over the same artifacts."
 +++
 
 # Requirement: Prove complete-graph operation under the 0.12.0 root
