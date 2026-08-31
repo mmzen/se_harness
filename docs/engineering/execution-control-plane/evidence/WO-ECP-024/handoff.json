@@ -230,8 +230,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 1797c72: HTTP 422"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-ECP-024=implemented",
+        "--decision",
+        "WO-ECP-024=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-ECP-024 is in_progress."
@@ -241,8 +250,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "99525229785",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "08176d28f96c39574258381baf09a8e434790f8c"
       },
       "outcomes": [
         "implemented",
@@ -262,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "a20eedba99fcb4ccc2605a1f72600b556a5d7cffc1ce7d3c66e1fe48f8308bfd",
+  "result_sha256": "4e20266e90e74bd72fd4c17b665560ac77b631079c020906e1a696d0ddf9d8e4",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
