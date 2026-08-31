@@ -98,3 +98,13 @@ The six pre-enforcement `RLS-SEH-*` records keep their bytes. The
 partial-binding and full-binding failure paths are byte-for-byte today's
 behavior. No hash-locked root file changed. The workflow gates forcing
 evidence onto the path to `released` are untouched.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #300 pass at its head `e8c0c8e`. The
+owner merged the pull request on 2026-08-31 as `8f59e9c`, the tip of
+`main`; the push-event check runs on `main` for that commit all thirteen
+completed with success, including the candidate suite running the floor
+tests and the root-versus-candidate validator ledger, the managed
+Engineering Harness `validate` and both release-qualification rehearsal
+legs.
