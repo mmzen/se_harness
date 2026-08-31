@@ -71,3 +71,12 @@ to `TCM-DCI-006`).
 No diagnostic code, message, or emitting module changed. No hash-locked
 root file changed; the root `scripts/` copies are not scanned. No other
 note changed.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #302 pass at its head `1e8c1a2`. The
+owner merged the pull request on 2026-08-31 as `4028e72`, the tip of
+`main`; the push-event check runs on `main` for that commit all thirteen
+completed with success, including the candidate suite running the pinning
+tests over the committed index, the managed Engineering Harness
+`validate` and both release-qualification rehearsal legs.
