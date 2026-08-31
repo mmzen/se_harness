@@ -90,3 +90,12 @@ retention are gone. The lane retains the canonical result as
 No `se_harness/` product module changed. No hash-locked root file changed.
 No retained evidence file changed. The `accept-candidate` tombstone and its
 tests are untouched.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #295 pass at its head `e7ed556`. The
+owner merged the pull request on 2026-08-30 as `8b389d5`; the push-event
+check runs on `main` for that commit read all thirteen completed with
+success, including Candidate package evidence executing the typed-only
+acceptance step, the managed Engineering Harness `validate`, the Governor
+transition assessment and both release-qualification rehearsal legs.
