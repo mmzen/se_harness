@@ -54,7 +54,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
-| `check` | coding agent, first call on a work order; the managed gate | read-only | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
+| `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
@@ -195,8 +195,13 @@ packet's line endings (`WEX-ECP-011`) and when the single `in_progress` work
 order is not the one named (`WEX-ECP-012`). `QGP-G4I-EVIDENCE` reads that
 header through a TOML parser; a packet bound by the older substring lines
 still passes for one release with `W-ECP-002` naming the file and the
-`evidence` command that migrates it. A completed `check --checkpoint handoff
---from-git BASE` retains its schema-2 result as `handoff.json` in the same
+`evidence` command that migrates it. `check --checkpoint handoff
+--from-git BASE` is self-binding (`ECP-SBH-001` to `-006`): it rebinds an
+existing packet header to the current formal snapshot before evaluating —
+body preserved, `evidence`'s `WEX-ECP-010`/`WEX-ECP-011` guards unchanged,
+no packet created — and evaluates the change set with the retained result
+path included, so one run is the declared, digest-stable result. A
+completed run retains its schema-2 result as `handoff.json` in the same
 directory, written by the harness; that directory is admitted to the work
 order's scope by construction.
 

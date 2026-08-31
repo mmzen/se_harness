@@ -328,6 +328,9 @@ class GitDerivedChangeSetTests(WorkflowComplianceTests):
         self.assertEqual(0, code, error)
         self.assertEqual(
             [
+                # ECP-SBH-004: the retained result path is a member of every Git-derived
+                # handoff change set, whether or not the run's own write happened yet.
+                "docs/engineering/product/evidence/WO-001/handoff.json",
                 "src/component/deleted.py",
                 "src/component/new.py",
                 "src/component/renamed_from.py",
@@ -518,10 +521,13 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
         stored = json.loads(retained.read_text(encoding="utf-8"))
         self.assertEqual(result["result_sha256"], stored["result_sha256"])
         self.assertNotIn(b"\r", retained.read_bytes())
-        # the retained file is harness-written: the next Git-derived check admits it by construction
-        code, result, error = self.check_from_git_real(base)
-        self.assertEqual(0, code, error)
+        # ECP-SBH-004: the first run already evaluates the retained path, so it is the
+        # declared result; the repeat confirms the same digest over the same set.
         self.assertIn("docs/engineering/product/evidence/WO-001/handoff.json", result["scope"]["changed_paths"])
+        code, second, error = self.check_from_git_real(base)
+        self.assertEqual(0, code, error)
+        self.assertIn("docs/engineering/product/evidence/WO-001/handoff.json", second["scope"]["changed_paths"])
+        self.assertEqual(result["result_sha256"], second["result_sha256"])
         # a blocked handoff retains nothing
         (self.root / "outside.md").write_text("x\n", encoding="utf-8")
         before = retained.read_bytes()
@@ -530,6 +536,130 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
         self.assertEqual([], result["mutation"]["writes"])
         self.assertEqual(before, retained.read_bytes())
 
+
+
+class SelfBindingHandoffTests(GitDerivedChangeSetTests):
+    """REQ-ECP-028 / SPEC-ECP-017 ECP-SBH-001 to -006: one Git-derived handoff run is the declared result."""
+
+    PACKET = "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
+    RETAINED = "docs/engineering/product/evidence/WO-001/handoff.json"
+
+    def check_real(self, base: str) -> tuple[int, dict, str]:
+        # The packet predicate and the rebind are the subject: only review preflight is stubbed.
+        with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
+            code, output, error = self.invoke(
+                "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--from-git", base, "--json"
+            )
+        return code, json.loads(output), error
+
+    def evidence(self, *extra: str) -> tuple[int, dict, str]:
+        code, output, error = self.invoke(
+            "evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json", *extra
+        )
+        return code, json.loads(output), error
+
+    def move_snapshot(self) -> None:
+        work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        work_order.write_text(work_order.read_text(encoding="utf-8") + "\n<!-- moved -->\n", encoding="utf-8")
+
+    def test_one_run_after_the_snapshot_moves_is_the_declared_result(self) -> None:
+        from se_harness.workflow_compliance import parse_evidence_header
+
+        base = self.commit_base()
+        self.evidence("--rebound-at", "2026-08-31T08:00:00Z")
+        packet = self.root / self.PACKET
+        header_before, body_before = parse_evidence_header(packet.read_bytes())
+        self.move_snapshot()
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        code, first, error = self.check_real(base)
+        self.assertEqual(0, code, error)
+        # ECP-SBH-001: the header moved to the current snapshot; the body did not.
+        header_after, body_after = parse_evidence_header(packet.read_bytes())
+        self.assertEqual(body_before, body_after)
+        self.assertNotEqual(header_before["formal_snapshot_sha256"], header_after["formal_snapshot_sha256"])
+        self.assertNotEqual("2026-08-31T08:00:00Z", header_after["rebound_at"])
+        self.assertIn(self.RETAINED, first["scope"]["changed_paths"])
+        # ECP-SBH-005: the rebind entry beside the retained entry, outside the digest.
+        self.assertEqual(
+            [
+                {"id": "WO-001", "path": self.PACKET, "fields": ["formal_snapshot_sha256", "rebound_at"]},
+                {"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]},
+            ],
+            first["mutation"]["writes"],
+        )
+        bytes_after_first = packet.read_bytes()
+        code, second, error = self.check_real(base)
+        self.assertEqual(0, code, error)
+        # ECP-SBH-004: the first run is the declared result; the repeat only confirms it.
+        self.assertEqual(first["result_sha256"], second["result_sha256"])
+        self.assertEqual(first["scope"]["changed_paths"], second["scope"]["changed_paths"])
+        # ECP-SBH-001: a packet already bound to the current snapshot keeps its exact bytes.
+        self.assertEqual(bytes_after_first, packet.read_bytes())
+        self.assertEqual(
+            [{"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]}],
+            second["mutation"]["writes"],
+        )
+
+    def test_without_a_packet_nothing_is_created_and_a_headerless_packet_is_not_rewritten(self) -> None:
+        base = self.commit_base()
+        (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
+        code, result, error = self.check_real(base)
+        self.assertEqual(1, code, error)
+        statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
+        self.assertFalse((self.root / self.PACKET).exists())
+        # ECP-SBH-002: the legacy grace still reads a headerless packet, and the run leaves it alone.
+        report = _load_validator_module().validate_repository(self.root)
+        digest = formal_snapshot_digest(self.root, report.artifacts)
+        legacy = f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n"
+        (self.root / self.PACKET).parent.mkdir(parents=True, exist_ok=True)
+        (self.root / self.PACKET).write_text(legacy, encoding="utf-8")
+        code, result, error = self.check_real(base)
+        self.assertEqual(0, code, error)
+        self.assertEqual(legacy, (self.root / self.PACKET).read_text(encoding="utf-8"))
+        self.assertEqual(
+            [{"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]}],
+            result["mutation"]["writes"],
+        )
+
+    def test_a_foreign_header_and_a_converting_rule_refuse_without_writing(self) -> None:
+        base = self.commit_base()
+        self.evidence("--rebound-at", "2026-08-31T08:00:00Z")
+        packet = self.root / self.PACKET
+        original = packet.read_bytes()
+        packet.write_bytes(original.replace(b'artifact = "WO-001"', b'artifact = "WO-009"', 1))
+        tampered = packet.read_bytes()
+        code, result, error = self.check_real(base)
+        self.assertEqual(1, code, error)
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-010"), result["restitution"]["blocked_by"])
+        self.assertEqual(tampered, packet.read_bytes())
+        packet.write_bytes(original)
+        self.move_snapshot()
+        (self.root / ".gitattributes").write_text("*.md text eol=crlf\n", encoding="utf-8")
+        code, result, error = self.check_real(base)
+        self.assertEqual(1, code, error)
+        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-011"), result["restitution"]["blocked_by"])
+        self.assertEqual(original, packet.read_bytes())
+
+    def test_declared_change_sets_stay_read_only(self) -> None:
+        self.commit_base()
+        self.evidence("--rebound-at", "2026-08-31T08:00:00Z")
+        packet = self.root / self.PACKET
+        before = packet.read_bytes()
+        self.move_snapshot()
+        with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
+            code, output, error = self.invoke(
+                "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+                "--changed-path", "src/exact.py", "--changes-complete", "--json",
+            )
+        result = json.loads(output)
+        self.assertEqual(1, code, error)
+        # ECP-SBH-006: no rebind, no synthetic member, no write for a declared change set.
+        statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
+        self.assertEqual(before, packet.read_bytes())
+        self.assertNotIn(self.RETAINED, result["scope"]["changed_paths"])
+        self.assertEqual([], result["mutation"]["writes"])
 
 
 class EvaluatorDerivedPacketPathTests(unittest.TestCase):

@@ -456,7 +456,7 @@ def _check(args: argparse.Namespace) -> int:
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         message = str(exc)
         code = "WEX210"
-        if message.startswith("WEX-ECP-00"):
+        if message.startswith("WEX-ECP-0"):
             code, message = message.split(": ", 1)
         result = failed_result("check", args.artifact, message, code=code)
     if (
@@ -472,7 +472,11 @@ def _check(args: argparse.Namespace) -> int:
         _, report = _validation(root)
         primary = _catalog(report)[args.artifact]
         retained = retain_handoff_result(root.resolve(), primary, result)
-        result["mutation"]["writes"] = [{"id": args.artifact, "path": retained, "fields": ["result_sha256"]}]
+        # ECP-SBH-005: the retained entry joins the rebind entry rather than replacing it.
+        result["mutation"]["writes"] = [
+            *result["mutation"]["writes"],
+            {"id": args.artifact, "path": retained, "fields": ["result_sha256"]},
+        ]
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
