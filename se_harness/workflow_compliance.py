@@ -519,6 +519,50 @@ def write_evidence_packet(
     )
 
 
+def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) -> str | None:
+    """Rebind an existing handoff packet header to the current snapshot (ECP-SBH-001 to -003).
+
+    Returns the packet's repository-relative path when the header was rewritten,
+    None when there is nothing to move: no packet, no machine header (the legacy
+    grace still reads it), or a header already bound to `snapshot`. A missing
+    packet is never created; `harnessctl evidence` stays the authoring command.
+    """
+
+    path = evidence_packet_path(root, artifact, "handoff")
+    if not path.exists():
+        return None
+    relative = path.relative_to(root).as_posix()
+    if path.is_symlink() or not path.is_file():
+        raise HarnessError(f"WEX-ECP-010: {relative} is not an ordinary file")
+    existing, body = parse_evidence_header(path.read_bytes())
+    if existing is None:
+        return None
+    if existing["artifact"] != artifact.artifact_id or existing["checkpoint"] != "handoff":
+        raise HarnessError(
+            f"WEX-ECP-010: {relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
+            f"not {artifact.artifact_id} at handoff"
+        )
+    if existing["formal_snapshot_sha256"] == snapshot:
+        return None
+    conversion = _line_ending_conversion(root, relative)
+    if conversion is not None:
+        raise HarnessError(f"WEX-ECP-011: a .gitattributes rule would convert line endings of {relative} ({conversion})")
+    header = {
+        "artifact": artifact.artifact_id,
+        "checkpoint": "handoff",
+        "formal_snapshot_sha256": snapshot,
+        "rebound_at": now,
+    }
+    staged = path.with_name(path.name + ".tmp")
+    try:
+        staged.write_bytes(render_evidence_header(header) + body)
+        staged.replace(path)
+    except OSError as exc:
+        staged.unlink(missing_ok=True)
+        raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
+    return relative
+
+
 def retain_handoff_result(root: Path, artifact: Any, result: Mapping[str, Any]) -> str:
     """Retain a completed Git-derived handoff result beside the packet (ECP-PRB-002, amended)."""
 
@@ -859,12 +903,33 @@ def check_workflow(
         if procedure_id not in {selected_procedure, *alternatives}:
             raise HarnessError(f"WEX220: procedure {procedure_id} is not selected by workflow rule {rule['id']}")
         selected_procedure = procedure_id
+    rebound: str | None = None
+    self_binding = checkpoint == "handoff" and from_git is not None and primary.artifact_type == "work_order"
+    if self_binding:
+        # ECP-SBH-001: the run binds the packet to the snapshot it evaluates, before Git
+        # derives the change set, so a rewritten packet is a change-set member like any other.
+        from datetime import datetime, timezone
+
+        rebound = rebind_handoff_packet(
+            root,
+            primary,
+            formal_snapshot_digest(root, report.artifacts),
+            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        )
     if from_git is not None:
         change_set = git_change_set(root, from_git)
     elif change_manifest is not None:
         change_set = parse_change_manifest(root, change_manifest)
     else:
         change_set = declared_change_set(changed_paths, complete=changes_complete)
+    if self_binding:
+        # ECP-SBH-004: the retained result path is evaluated as a member whether or not
+        # this run's write happened yet, so the first completed run is the fixed point.
+        retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
+        if retained not in change_set.paths:
+            change_set = ChangeSet(
+                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source
+            )
     _validate_changed_targets(root, change_set)
     context = build_context(
         root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
@@ -1006,6 +1071,13 @@ def check_workflow(
         scoped_blockers=scoped,
         repository_blockers=repository_errors,
         unrelated_count=unrelated,
+        # ECP-SBH-005: the rebind is reported outside the canonical restitution block,
+        # so run one (which rebinds) and a repeat (which does not) share one digest.
+        writes=(
+            [{"id": artifact_id, "path": rebound, "fields": ["formal_snapshot_sha256", "rebound_at"]}]
+            if rebound is not None
+            else []
+        ),
     )
 
 

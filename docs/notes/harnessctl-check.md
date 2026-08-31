@@ -15,8 +15,15 @@ authority. The command surface is listed in the
 moment: *at this checkpoint, do the gates the workflow requires pass?* It
 reads the repository, evaluates predicates, and prints the result as the
 canonical schema-2 block (`--json` for the machine form). It is read-only in
-every respect but one: a completed handoff check derived from Git retains its
-own result as `handoff.json` in the work order's evidence directory.
+every respect but one: the handoff check derived from Git is self-binding
+(`ECP-SBH-001` to `-006`). Before evaluating, it rebinds an existing evidence
+packet header to the current formal snapshot — body preserved byte for byte,
+with the same guards and refusal codes as `harnessctl evidence` — and it
+evaluates the change set with the retained result path included, so that a
+completed run retains its own result as `handoff.json` in the work order's
+evidence directory and one run is the declared, digest-stable result. A
+missing packet is never created, and every other checkpoint and change-set
+form stays read-only.
 
 ```text
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... [--include-background] [--json]
@@ -193,7 +200,9 @@ The result has exactly two outcomes.
   a handoff, `Mark WO-... implemented`. With `--from-git`, the result is
   retained as `handoff.json` beside the evidence packet, and its
   `result_sha256` is the value a pull-request body declares as
-  `Harness-Restitution`.
+  `Harness-Restitution`. The retained path is a member of the evaluated
+  change set from the first run, so the first completed run is the declared
+  result and a repeat over the unchanged tree prints the same digest.
 - **Blocked.** At least one predicate did not pass, or a scoped error
   exists. `Blocked by` lists each refusing predicate by its own identifier
   with its message (for example `QGP-G4I-EVIDENCE: No readable evidence for
@@ -217,7 +226,8 @@ evaluation. Each names its cause.
 | `WEX200` | a changed path, manifest, or pull-request body that is not safe text: absolute, empty, non-normalized, escaping the repository, reserved or dot components, duplicates, an oversized or malformed manifest or body; a work order whose execution scope is empty or invalid |
 | `WEX-ECP-002` | `--from-git` combined with `--changed-path`, `--changes-complete`, or `--change-manifest` |
 | `WEX-ECP-003` | `--from-git` outside a Git checkout, with a base Git cannot resolve, or after any Git failure; no predicate is evaluated as `pass` |
-| `WEX-ECP-010` | the evidence packet path cannot be derived or the packet is malformed: the work order is not under a domain directory, the header at byte offset 0 is missing, unclosed, not TOML, or carries the wrong keys, or names another artifact or checkpoint |
+| `WEX-ECP-010` | the evidence packet path cannot be derived or the packet is malformed: the work order is not under a domain directory, the header at byte offset 0 is unclosed, not TOML, or carries the wrong keys, or names another artifact or checkpoint |
+| `WEX-ECP-011` | a `.gitattributes` rule would convert the packet's line endings, so the self-binding handoff check refuses to rewrite the header, exactly as `evidence` refuses to |
 | `WEX-ECP-014` | `--artifact` names an unknown identifier |
 
 Before se-harness 0.10.0, `WEX-ECP-010: ... is not under a domain directory`
@@ -238,11 +248,15 @@ same checkout did not raise it.
 4. Implementation happens inside the declared scope.
 5. `harnessctl evidence . --artifact WO-X --checkpoint handoff` writes the
    packet header bound to the current formal snapshot; the body is written by
-   the implementer.
+   the implementer. This first write is the only manual binding: after a
+   later merge from the base branch, the next handoff check rebinds the
+   header itself.
 6. `harnessctl check . --artifact WO-X --checkpoint handoff --from-git
-   main` evaluates `QG-G4-IMPLEMENTATION-EVIDENCE` over the Git-derived change
-   set. Completed: `DR-WO-COMPLETE` is due; `handoff.json` is retained;
-   `harnessctl pr-body` emits the body carrying its `result_sha256`.
+   main` rebinds the packet if the formal snapshot moved, then evaluates
+   `QG-G4-IMPLEMENTATION-EVIDENCE` over the Git-derived change set with the
+   retained result path included. Completed: `DR-WO-COMPLETE` is due;
+   `handoff.json` is retained; this one run's `result_sha256` is the declared
+   digest, and `harnessctl pr-body` emits the body carrying it.
 7. The accountable person decides; `transition --set WO-X=implemented
    --apply`. From here the rule for the work order changes
    (`WFL-WO-PREPARE-VREC`), and the handoff checkpoint no longer applies to
