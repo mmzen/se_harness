@@ -2,7 +2,7 @@
 id = "WO-ECP-023"
 type = "work_order"
 title = "The Git-derived handoff check self-binds in one run"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-08-31T07:45:26Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-31, taken by selecting the presented option 'Approve and start WO-ECP-023'. Start checkpoint Completed with every gate pass over the approval commit 54589f5 on branch wo/ecp-023-self-binding-handoff, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T09:01:51Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-31 under DR-WO-COMPLETE, by selecting the presented option 'Complete, verify and merge', on the handoff check reading Completed over the Git-derived change set at its fixed point a2f842d7, no scope amendment. The evidence packet at docs/engineering/execution-control-plane/evidence/WO-ECP-023/ records: the self-binding Git-derived handoff check (ECP-SBH-001 to -006) with the rebind helper, the change-set union over the retained result path and the preserved WEX-ECP-0* refusal codes; the compliance suite 145 OK with the new SelfBindingHandoffTests, the six pinning suites 310 OK, the full Windows suite at its baseline (1189 tests, the one known test_artifact_authoring teardown error), validate 0 errors, governing doctor 0 FAIL, release distributions PASS, all under the 0.11.0 root outside the checkout; the pull request's thirteen lanes green including the managed gate's digest comparison. The root evaluator keeps the two-run behaviour until the next root adoption. No deviations. This decision authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: The Git-derived handoff check self-binds in one run
