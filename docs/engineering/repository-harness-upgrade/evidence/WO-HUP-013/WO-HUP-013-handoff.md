@@ -67,3 +67,13 @@ No product byte beyond the version identity; no template byte; no release,
 tag, publication, Pages or maintenance-line change; the published 0.12.0
 did not move. The latest markers wait for this observation window per
 `REL-SEH-023`.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #306 pass at its head `7d7e626`,
+including the governor-transition lane assessing the real 0.11.0 to 0.12.0
+root move with exactly one transaction document and the released
+`RLS-SEH-021` supplying the wheel, and the managed lane running the
+0.12.0 gate the transaction installed. The owner merged the pull request
+on 2026-08-31 as `c8206cb`, the tip of `main`; the push-event check
+runs on `main` for that commit all thirteen completed with success.
