@@ -15,7 +15,7 @@ from unittest import mock
 
 from se_harness import __version__
 from se_harness.cli import main
-from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
+from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.fixture_support import standard_repository
@@ -366,7 +366,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized ENGINEERING_HARNESS.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_router, customized_router.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
 
@@ -448,7 +448,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/WORKFLOW.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_router, customized_router.read_bytes())
         self.assertEqual(original_workflow, customized_workflow.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
@@ -498,34 +498,26 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/README.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_readme, customized_readme.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
         self.assertFalse(missing.exists())
 
+        # WO-HUP-012 (HUP-LSF-001): a schema-1 lock is no longer planned over;
+        # the read refuses with the floor diagnostic and nothing is written.
         legacy = self.installed_target("legacy-newlines")
-        legacy_readme = legacy / "docs" / "engineering" / "README.md"
-        legacy_lf = b"# Legacy managed index\n\nLine two.\n"
-        legacy_readme.write_bytes(legacy_lf.replace(b"\n", b"\r\n"))
         legacy_lock_path = legacy / ".engineering-harness.lock"
         legacy_lock = json.loads(legacy_lock_path.read_text(encoding="utf-8"))
         legacy_lock["schema"] = 1
         legacy_lock.pop("hash_algorithm", None)
         legacy_lock.pop("hash_mode", None)
         legacy_lock.pop("evaluator", None)
-        legacy_lock["files"]["docs/engineering/README.md"] = {
-            "mode": "managed",
-            "sha256": canonical_sha256(legacy_lf),
-        }
         legacy_lock_path.write_text(
             json.dumps(legacy_lock, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        changes, _ = plan_install(legacy, project_name=None, mode="upgrade")
-        self.assertEqual(
-            "update",
-            {item.path: item.action for item in changes}["docs/engineering/README.md"],
-        )
+        with self.assertRaisesRegex(HarnessError, r"predates the supported floor \(schema 3\)"):
+            plan_install(legacy, project_name=None, mode="upgrade")
 
     def test_preflight_returns_deterministic_reading_manifest_without_writes(self) -> None:
         target = self.installed_target()
@@ -751,6 +743,33 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(2, code)
         self.assertIn("exceeds the size limit", error)
 
+    def test_selection_accepts_the_live_event_reduction(self) -> None:
+        # ECP-LPB-003, -005 (WO-ECP-021): the managed lane reduces the live API
+        # response to {"pull_request": {"body": ...}} and the selector reads
+        # that shape unchanged; a null body is refused as non-text rather than
+        # selected, exactly as the stored payload's null body was.
+        event = self.root / "live-event.json"
+        digest = "0f" * 32
+        event.write_text(
+            json.dumps({"pull_request": {"body": f"Harness-Work-Order: WO-IAR-001\nHarness-Restitution: {digest}\n"}}),
+            encoding="utf-8",
+        )
+        code, output, error = self.invoke("select-work-order", "--event", str(event))
+        self.assertEqual(0, code, error)
+        self.assertEqual("WO-IAR-001", output.strip())
+        code, output, error = self.invoke(
+            "select-work-order", "--event", str(event), "--field", "restitution-digest"
+        )
+        self.assertEqual(0, code, error)
+        self.assertEqual(digest, output.strip())
+
+        event.write_text(json.dumps({"pull_request": {"body": None}}), encoding="utf-8")
+        for field in ("work-order", "restitution-digest"):
+            with self.subTest(field=field):
+                code, _, error = self.invoke("select-work-order", "--event", str(event), "--field", field)
+                self.assertEqual(2, code)
+                self.assertIn("pull-request body must be text", error)
+
     def test_consumer_workflow_uses_one_released_package_evaluator(self) -> None:
         target = self.installed_target()
         workflow = (target / ".github" / "workflows" / "engineering-harness.yml").read_text(
@@ -761,10 +780,11 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', workflow)
         self.assertIn('"se-harness==$SE_HARNESS_VERSION"', workflow)
         self.assertIn("--only-binary=:all:", workflow)
-        self.assertIn("permissions:\n  contents: read", workflow)
+        self.assertIn("permissions:\n  contents: read\n  pull-requests: read", workflow)
         self.assertNotIn("-I -c", workflow)
         self.assertNotIn("'role':'consumer-evaluator'", workflow)
         self.assertIn("select-work-order --event", workflow)
+        self.assertNotIn("GITHUB_EVENT_PATH", workflow)
         self.assertIn("--phase review", workflow)
         self.assertIn("-I -m se_harness preflight .", workflow)
         self.assertIn("qualify released-root \"$GITHUB_WORKSPACE\"", workflow)

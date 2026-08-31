@@ -19,7 +19,7 @@ from se_harness.evaluator_evidence import (
     parse_evaluator_evidence,
 )
 from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
-from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED, MATCH_LEGACY_NEWLINE
+from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED
 from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.mutation_guard import (
@@ -140,8 +140,12 @@ class MutationGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(HarnessError, r"MG001 \(create-artifact\)"):
             require_mutation_authority(missing, operation="create-artifact")
 
+        # WO-HUP-012 (HUP-LSF-005): a pre-3 lock fails at read with the floor
+        # diagnostic wrapped by MG001; MG002 is retired and emitted by no path.
         legacy = self._write_identity_root(schema=2)
-        with self.assertRaisesRegex(HarnessError, r"MG002 \(create-artifact\)"):
+        with self.assertRaisesRegex(
+            HarnessError, r"MG001 \(create-artifact\).*predates the supported floor \(schema 3\)"
+        ):
             require_mutation_authority(legacy, operation="create-artifact")
 
         mismatched = self._write_identity_root(config_version="9.9.9")

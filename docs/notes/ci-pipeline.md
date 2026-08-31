@@ -161,9 +161,10 @@ The "Measured after" column is filled by each work order's evidence.
 
 - `repository_tools/evaluator_facts.py` (named `predecessor_facts.py` until
   `WO-ECP-010`): `derive` reads the declared root and the candidate version
-  and exports the predecessor's version, wheel, wheel digest, payload digest
-  and legacy acceptance-contract digest, failing closed with a `PRE0nn` code
-  that names what is missing. The migration scenario and its writer are gone:
+  and exports the predecessor's version, wheel, wheel digest and payload
+  digest, failing closed with a `PRE0nn` code that names what is missing
+  (the legacy acceptance-contract fact was removed with the 0.6.0 bootstrap
+  path under `WO-REB-031`). The migration scenario and its writer are gone:
   the `governance-migration` legs run `repository_tools/upgrade_rehearsal.py`,
   the successor's real `upgrade --apply` against a throwaway export holding
   the predecessor's lock, twice per platform with a cross-platform digest

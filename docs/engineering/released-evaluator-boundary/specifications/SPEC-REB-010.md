@@ -179,3 +179,18 @@ Human output begins with the operation, independence class, evaluator identity s
 ## Explicitly unspecified decisions
 
 Implementation may choose internal dataclass names, module-private helper boundaries, subprocess buffering, temporary-directory naming, and exact human formatting. It may not change the five operations, their trust boundaries, required identities, independence classifications, result fields, workflow mapping, or failure semantics without an approved amendment.
+
+## Amendment record
+
+**The initial 0.6.0 bootstrap exception is executed as expired, 2026-08-30
+under `WO-REB-031`.** The exception stated its own boundary: it "expires
+when a released verifier exposes the typed command." Released 0.7.0 exposed
+`qualify candidate-package`; the declared root is 0.11.0; the owner's floor
+decision of 2026-08-30 (issue #285, item #285a) states that the 0.6.0
+bootstrap path is history. The candidate-evidence workflow now invokes the
+typed operation unconditionally per `SPEC-REB-016` `REB-BFH-001` to
+`REB-BFH-003`: no capability dispatch, no legacy acceptance-contract fact
+or environment value, and no legacy bootstrap artifact. The retained 0.6.0
+bootstrap output of the first deployments stays legacy bootstrap evidence,
+preserves its original schema, and is never wrapped or relabeled, exactly
+as this exception required. Nothing else in this specification changes.

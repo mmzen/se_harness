@@ -155,12 +155,9 @@ def require_mutation_authority(
         )
         transition = evaluator_transition_required(lock, target_identity)
     else:
-        if lock.get("schema") != 3:
-            raise _failure(
-                "MG002",
-                operation,
-                "ordinary mutation requires a schema-3 evaluator identity; use a separately governed upgrade",
-            )
+        # MG002 (ordinary mutation on a pre-schema-3 lock) is retired under
+        # WO-HUP-012: a pre-3 lock now fails at read (MG001) per the lock-schema
+        # floor. The code stays reserved and is never reused.
         evaluator = lock.get("evaluator")
         if not isinstance(evaluator, dict):
             raise _failure("MG001", operation, "the standard lock evaluator identity is unavailable")

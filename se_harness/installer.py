@@ -20,12 +20,10 @@ from se_harness.integrity import (
     HASH_MODE,
     LOCK_SCHEMA,
     IntegrityError,
+    canonical_sha256,
     canonical_text_equal,
     compare_lock_entry,
-    digest_for_schema,
-    matches_legacy_newline_variant,
     parse_lock,
-    raw_sha256,
 )
 
 
@@ -62,12 +60,6 @@ class Change:
     mode: str
     desired: bytes
     current: bytes | None
-
-
-def sha256(value: bytes) -> str:
-    """Retain the legacy raw-byte helper for schema-1 compatibility."""
-
-    return raw_sha256(value)
 
 
 def template_root() -> Path:
@@ -212,7 +204,7 @@ def safe_destination(root: Path, relative: Path) -> Path:
 def _load_lock(target: Path) -> dict:
     lock_path = target / LOCK_NAME
     if not lock_path.exists():
-        return {"schema": 1, "tool_version": None, "files": {}}
+        return {"schema": LOCK_SCHEMA, "tool_version": None, "files": {}}
     try:
         value = parse_lock(lock_path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, IntegrityError) as exc:
@@ -248,7 +240,7 @@ def plan_install(
     target = ensure_target(target, must_exist=(mode != "init"))
     if mode == "init" and target.exists() and any(target.iterdir()):
         raise HarnessError("init requires an empty or absent directory; use adopt for an existing repository")
-    old_lock = _load_lock(target) if target.exists() else {"schema": 1, "tool_version": None, "files": {}}
+    old_lock = _load_lock(target) if target.exists() else {"schema": LOCK_SCHEMA, "tool_version": None, "files": {}}
     installed_at = None
     configured_project_name = None
     config_path = target / CONFIG_NAME
@@ -291,12 +283,6 @@ def plan_install(
                         if old_tracked is None:
                             raise HarnessError(f"prior managed content is unavailable: {relative}")
                         match = compare_lock_entry(old_lock, old_entry, old_tracked)
-                        if (
-                            match == "mismatch"
-                            and old_lock.get("schema") == 1
-                            and matches_legacy_newline_variant(old_tracked, old_entry.get("sha256"))
-                        ):
-                            match = "legacy-canonical"
                     except IntegrityError as exc:
                         raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                     action = "update" if mode == "upgrade" and match != "mismatch" else "customized"
@@ -328,7 +314,7 @@ def plan_install(
                     action = "conflict"
                 else:
                     try:
-                        match = compare_lock_entry(old_lock, old_entry, current_block, desired=desired_block)
+                        match = compare_lock_entry(old_lock, old_entry, current_block)
                     except IntegrityError as exc:
                         raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                     action = "update" if match != "mismatch" else "customized"
@@ -343,7 +329,7 @@ def plan_install(
                 action = "conflict"
             else:
                 try:
-                    match = compare_lock_entry(old_lock, old_entry, current, desired=desired)
+                    match = compare_lock_entry(old_lock, old_entry, current)
                 except IntegrityError as exc:
                     raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                 action = "update" if match != "mismatch" else "customized"
@@ -391,12 +377,6 @@ def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Cha
             continue
         try:
             match = compare_lock_entry(old_lock, old_entry, tracked)
-            if (
-                match == "mismatch"
-                and old_lock.get("schema") == 1
-                and matches_legacy_newline_variant(tracked, old_entry.get("sha256"))
-            ):
-                match = "legacy-canonical"
         except IntegrityError as exc:
             raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
         if match == "mismatch":
@@ -658,8 +638,6 @@ def apply_changes(
 
         files: dict[str, dict[str, str]] = {}
         old_files = old_lock.get("files", {}) if isinstance(old_lock.get("files"), dict) else {}
-        legacy_customized = any(item.action == "customized" and item.path in old_files for item in changes)
-        output_schema = 1 if old_lock.get("schema") == 1 and legacy_customized else LOCK_SCHEMA
         for item in changes:
             destination = target / item.path
             if item.action == "customized":
@@ -682,20 +660,19 @@ def apply_changes(
             tracked = tracked_content(item.mode, content)
             if tracked is not None:
                 try:
-                    digest = digest_for_schema(tracked, output_schema, item.mode)
+                    digest = canonical_sha256(tracked)
                 except IntegrityError as exc:
                     raise HarnessError(f"invalid managed text at {item.path}: {exc}") from exc
                 files[item.path] = {"mode": item.mode, "sha256": digest}
 
-        lock = {"schema": output_schema, "tool_version": __version__, "files": dict(sorted(files.items()))}
-        if output_schema == LOCK_SCHEMA:
-            lock["hash_algorithm"] = HASH_ALGORITHM
-            lock["hash_mode"] = HASH_MODE
-            try:
-                lock["evaluator"] = installed_evaluator_identity().to_lock()
-            except EvaluatorIdentityError as exc:
-                raise HarnessError(f"cannot identify the installed evaluator payload: {exc}") from exc
-        if target_identity is not None and output_schema == LOCK_SCHEMA:
+        lock = {"schema": LOCK_SCHEMA, "tool_version": __version__, "files": dict(sorted(files.items()))}
+        lock["hash_algorithm"] = HASH_ALGORITHM
+        lock["hash_mode"] = HASH_MODE
+        try:
+            lock["evaluator"] = installed_evaluator_identity().to_lock()
+        except EvaluatorIdentityError as exc:
+            raise HarnessError(f"cannot identify the installed evaluator payload: {exc}") from exc
+        if target_identity is not None:
             if lock.get("evaluator") != target_identity.to_lock():
                 raise HarnessError(
                     "installed evaluator identity changed after the authority check; no files were retained"
