@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-HUP-012"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "2bf3d6ee8478ae6289b485397955e7ed8a10c3c656d313526277e8abccd339ba"
-rebound_at = "2026-08-30T19:44:16Z"
+formal_snapshot_sha256 = "d9e56be9608c66e1e2fd51aee50bc12e14e20d87ef85ec652e54c7198a937719"
+rebound_at = "2026-08-31T05:42:30Z"
 ```
 
 # WO-HUP-012 handoff evidence
@@ -90,3 +90,16 @@ block are unchanged. `se_harness/release_qualification.py` is untouched.
 No hash-locked root file changed. Retained evidence recording
 schema-1-era digests is unchanged; the historical
 `prior_lock_sha256` stays on its work order as data.
+
+## Post-completion base merge
+
+Main moved under the implemented work order: #295 (WO-REB-031, the 0.6.0
+bootstrap removal) and #292 (WO-ECP-022, the CLI command shape) merged.
+Both were merged into this branch as true merges. The only conflict was
+`tests/test_harnessctl.py`, where WO-ECP-022 had re-shaped the two
+schema-1 customization tests this work order deletes; the deletion
+stands and the floor tests' expectations are untouched by the re-shape.
+After the merge: affected suites plus the new CLI-shape suite 179 tests
+OK; the full Windows suite at its baseline (1167 tests, the one known
+error, 26 skips); doctor 0 FAIL and validate 1191 artifacts, 0 errors
+under the 0.11.0 root. The packet is rebound at this commit's snapshot.
