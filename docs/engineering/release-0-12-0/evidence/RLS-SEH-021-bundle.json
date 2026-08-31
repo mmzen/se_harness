@@ -3,16 +3,16 @@
   "build_recipe_schema": "se-harness-release-build-recipe/v1",
   "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
   "checksums": "SHA256SUMS",
-  "checksums_content": "dc14f007291a460d5be47d7286d4332fcac67fd2ecc66e1d26f8a5b0cc301cee  se_harness-0.12.0-py3-none-any.whl\n1b0e426502d56c315f5f5d2b0175b3e9a4a112f2811670409f62ce39a998a64c  se_harness-0.12.0.tar.gz\n",
-  "checksums_sha256": "3e0ea82871b8658962a16c54e1c352c6ae53e2a45a2b2f4b93c1a9d977db9ce8",
-  "commit": "a60975fdaa215c9a0433571688251184ee459932",
+  "checksums_content": "639edbeed4bdca7c9e21a5eb2afc3b9fc993ddb3f66177eec962f1646a545811  se_harness-0.12.0-py3-none-any.whl\n3f7b22ff484dce8d95728a6ab632b86f0046713b2166498af36d526dab8ce3f2  se_harness-0.12.0.tar.gz\n",
+  "checksums_sha256": "8530b5faa3c453009455f7057c22cc84664e48d700944b167d8e764bed5d6135",
+  "commit": "3dcde4bbab4f3969fdc59ccdeee9ef68dfb90d26",
   "git_object_format": "sha1",
   "schema": "se-harness-release-bundle/v2",
   "sdist": "se_harness-0.12.0.tar.gz",
-  "sdist_sha256": "1b0e426502d56c315f5f5d2b0175b3e9a4a112f2811670409f62ce39a998a64c",
-  "source_date_epoch": 1788175573,
-  "source_manifest_sha256": "ae35d09d0504d532bbc25ddb0af7f8b622fdd0a0cbee01b0454a4d819365272f",
+  "sdist_sha256": "3f7b22ff484dce8d95728a6ab632b86f0046713b2166498af36d526dab8ce3f2",
+  "source_date_epoch": 1788177069,
+  "source_manifest_sha256": "5a9b65580d0197332dbdaf5fbc82a330f214029364cd4c0eeeffe1b016a0687e",
   "version": "0.12.0",
   "wheel": "se_harness-0.12.0-py3-none-any.whl",
-  "wheel_sha256": "dc14f007291a460d5be47d7286d4332fcac67fd2ecc66e1d26f8a5b0cc301cee"
+  "wheel_sha256": "639edbeed4bdca7c9e21a5eb2afc3b9fc993ddb3f66177eec962f1646a545811"
 }

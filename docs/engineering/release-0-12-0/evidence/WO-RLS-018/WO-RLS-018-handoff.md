@@ -85,3 +85,17 @@ agrees.
 ## Section 5: hosted lanes
 
 Recorded when the lanes complete at this branch head.
+
+## Section 4b: build re-verified at the bound candidate
+
+`RLS-SEH-021` binds `3dcde4b`, the implemented-transition commit, so the
+replay was re-run at that exact commit on the same host and image: two
+producer runs byte-identical. Wheel
+`639edbeed4bdca7c9e21a5eb2afc3b9fc993ddb3f66177eec962f1646a545811`; sdist
+`3f7b22ff484dce8d95728a6ab632b86f0046713b2166498af36d526dab8ce3f2`. The
+section-4 digests were the local reading at `a60975f`, whose packaged
+bytes are identical; the archives differ only through the commit-derived
+`SOURCE_DATE_EPOCH`. The bundle manifest retained as
+`RLS-SEH-021-bundle.json` and the record's distribution table carry the
+bound-candidate digests; the hosted `release-candidate-replay.yml`
+dispatch on this branch must reproduce them.
