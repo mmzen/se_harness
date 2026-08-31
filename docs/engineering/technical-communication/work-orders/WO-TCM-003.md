@@ -2,7 +2,7 @@
 id = "WO-TCM-003"
 type = "work_order"
 title = "Generate the diagnostic-code index"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-08-31T10:02:36Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision of 2026-08-31, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 61ccb53 carrying main 1ba3009, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T10:14:59Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner under the decision of 2026-08-31, made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green. The evidence packet at docs/engineering/technical-communication/evidence/WO-TCM-003/ records: the string-literal scanner with the curated registry and the derived composed codes (TCM-DCI-001, TCM-DCI-002), the deterministic generated page with 256 codes across 28 prefixes (TCM-DCI-003, TCM-DCI-004), the eight pinning tests and the --check mode (TCM-DCI-005), the two note links (TCM-DCI-006); the new suite with the progressive-documentation suite 26 OK and the full Windows suite at its baseline (1171 tests, the one known test_artifact_authoring error, 26 skips); validate 1207 artifacts 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root, whose environment was recreated during execution with an unchanged identity; the handoff check complete:true at its fixed point result a0099b4d over the packet head 1a81819, from-git origin/main 1ba3009. No deviations. This decision authorizes no verification record, no release and no publication; the pull request's merge remains the owner's decision."
 +++
 
 # Work Order: Generate the diagnostic-code index
