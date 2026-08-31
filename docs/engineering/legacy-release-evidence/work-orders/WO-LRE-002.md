@@ -2,7 +2,7 @@
 id = "WO-LRE-002"
 type = "work_order"
 title = "Enforce the evaluator-evidence floor"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-30"
 updated = "2026-08-31"
@@ -55,6 +55,13 @@ to = "in_progress"
 decided_at = "2026-08-31T08:38:48Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's decision, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over 13ed02d, the forward merge of main 609cb25 (pull requests #292, #295, #296 and #297 merged, as the approval required), run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T09:02:54Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner under the decision made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green. The evidence packet at docs/engineering/legacy-release-evidence/evidence/WO-LRE-002/ records: the both-absent floor gate in the template validator with the resolver, frozen set and W024 emission removed and the code retired and reserved (LRE-FLR-001, LRE-FLR-003), the package module and fixture deleted with the installer refusal, declaration write and CLI notice (LRE-FLR-004), the inert packet key (LRE-FLR-005), the dashboard both-absent rule (LRE-FLR-006), the rewritten floor suite with the deletion sweep and the root-versus-candidate ledger (LRE-FLR-007), the four amendment records; the floor suite 10 OK, the affected suites 91 OK and the full Windows suite at its baseline (1141 tests, the one known test_artifact_authoring error, 26 skips); the template validator over this tree 0 errors, 63 warnings, no W024; validate 1196 artifacts 0 errors, doctor 0 FAIL, distributions PASS under the 0.11.0 root; the handoff check complete:true at its fixed point result 333bb632 over the packet head f27ceaf, from-git origin/main 609cb25. The scope amendment of 2026-08-31 (the two re-targeted test modules) is recorded on this work order and accepted by the owner's selection 'Amend WO-LRE-002 scope'; no other deviation. This decision authorizes no verification record, no release and no publication; the pull request's merge remains the owner's decision."
 +++
 
 # Work Order: Enforce the evaluator-evidence floor
