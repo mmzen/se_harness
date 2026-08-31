@@ -3,17 +3,9 @@
 docs/engineering/**/evidence/*.json text eol=lf
 # se-harness:end
 
-# Retained from WO-ECP-010 (issue #210): the governance-migration stage machine
-# is retired and unreferenced. Released 0.7.1 declared the repository-region
-# class `governance-migration-protocol`, whose doctor required these rules in
-# the owner region and at least one tracked file per pattern, so the files
-# stayed, dead, until the root advanced. WO-HUP-008 adopted 0.8.0; the files and
-# these rules are deleted together by issue #210's follow-up work order.
-
 # Repository-owned byte rules for surfaces the candidate suite asserts byte for byte.
 # The release orchestrator qualifies the candidate in a `git worktree`, which inherits
 # the checkout's core.autocrlf, so a converted byte here fails qualification on Windows.
-se_harness/agent_contract.json text eol=lf
 se_harness/hash_bound_classes.json text eol=lf
 release/build-recipe.json text eol=lf
 release/build-toolchain.lock text eol=lf
