@@ -2,7 +2,7 @@
 id = "WO-ECP-024"
 type = "work_order"
 title = "Remove the dead .gitattributes tail, by the delegated route"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -37,6 +37,20 @@ to = "approved"
 decided_at = "2026-08-31T14:22:20Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve WO-ECP-024 and delegate', as a decision distinct from the approval of its definitions in the same transaction. The work order carries [delegation] class = execution: this approval is the act of delegating DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role, each unlocked only while the required validate check is success for the exact candidate head, per REQ-ECP-011 and SPEC-ECP-006, effective when this work order is at the base of the execution pull request. It authorizes only the declared scope: the seven dead .gitattributes lines out, the delegation gate configuration, the packet and the domain index. The verification of the prepared record and every merge remain human decisions. Start preflight has not been run; the start itself is the delegated route's."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-31T14:32:20Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 3ce230208d7504b219aca3beca125c5e8fdc46a7 (check-run 99523603905, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T14:39:19Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at e56ef320ff0100c62ddad2c2e2d36bb93a6cbe44 (check-run 99526079669, source github-checks)."
 +++
 
 # Work Order: Remove the dead .gitattributes tail, by the delegated route
