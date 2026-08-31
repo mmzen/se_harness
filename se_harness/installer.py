@@ -459,7 +459,6 @@ def _upgrade_evidence_bytes(
     old_lock: dict,
     lock: dict,
     changes: list[Change],
-    declared: tuple[str, ...] = (),
 ) -> bytes:
     # SPEC-REB-012 rule 4: the same canonical document as before, minus the
     # retired work-order packet fields, which are carried as null.
@@ -497,14 +496,6 @@ def _upgrade_evidence_bytes(
             "authorize a release, publish, tag, deploy, or grant incident authority."
         ),
     }
-    if declared:
-        # Provenance for SPEC-LRE-001 rule 5: record what the authorizing packet
-        # declared at the moment of the transition. Omitted when nothing is declared,
-        # so an evidence file's shape is unchanged for repositories without legacy
-        # releases.
-        from se_harness.legacy_release_evidence import DECLARATION_FIELD
-
-        value[DECLARATION_FIELD] = list(declared)
     return (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
 
 
@@ -520,7 +511,6 @@ def apply_changes(
     transition = False
     target_identity = None
     prior_lock_sha256: str | None = None
-    declared_legacy: tuple[str, ...] = ()
     if allow_updates:
         refreshed_changes, refreshed_lock = plan_install(
             target,
@@ -541,34 +531,10 @@ def apply_changes(
         lock_file = target / LOCK_NAME
         if lock_file.is_file():
             prior_lock_sha256 = hashlib.sha256(lock_file.read_bytes()).hexdigest()
-        if transition:
-            # REQ-LRE-002: an identity transition writes a schema-3 lock, which
-            # enforces the evaluator-evidence binding on every released record. An
-            # undeclared unbound record would leave the repository unable to
-            # validate, so refuse before the first write rather than succeed into a
-            # frozen repository.
-            from se_harness.legacy_release_evidence import (
-                DECLARATION_FIELD,
-                LegacyReleaseEvidenceError,
-                undeclared_legacy_releases,
-            )
-
-            try:
-                undeclared = undeclared_legacy_releases(target)
-                from se_harness.legacy_release_evidence import resolve_repository
-
-                declared_legacy = tuple(sorted(resolve_repository(target).exemptions))
-            except LegacyReleaseEvidenceError as exc:
-                raise HarnessError(
-                    f"cannot assess released records for evaluator evidence; no files were written: {exc}"
-                ) from exc
-            if undeclared:
-                raise HarnessError(
-                    "released records predate evaluator-evidence enforcement and are not declared; "
-                    "no files were written: "
-                    + ", ".join(undeclared)
-                    + f"; declare them in an approved work order under [evaluator_upgrade].{DECLARATION_FIELD}"
-                )
+        # REQ-LRE-003 (the evaluator-evidence floor, owner decision of
+        # 2026-08-30): a released record without evaluator evidence is not
+        # assessed, so an identity transition enumerates nothing, refuses
+        # nothing and declares nothing on unbound records' account.
     elif old_lock.get("tool_version") is not None or (target / CONFIG_NAME).exists():
         # Init and first adoption have no installed authority to prove. A direct
         # API call against an already-installed root is an ordinary mutation,
@@ -691,7 +657,6 @@ def apply_changes(
                     old_lock=old_lock,
                     lock=lock,
                     changes=changes,
-                    declared=declared_legacy,
                 ),
             )
         return lock

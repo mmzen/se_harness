@@ -267,3 +267,19 @@ open; both require a separate chain and would touch an implemented work order in
 another domain. Whether a future harness version reports `W024` as an error once
 consumers have had a migration window is likewise left open. Neither question is
 answered here, and neither is prejudged by this contract.
+
+## Amendment record
+
+**Rules 1 to 16 are retired by the evaluator-evidence floor, 2026-08-31
+under `WO-LRE-002`.** The declaration mechanism this specification defined
+— the `[evaluator_upgrade]` declaration key resolution (rules 1 to 9), the
+`W024` debt warning (rule 10), the frozen self-hosting compatibility set
+(rule 11), the pre-apply refusal (rules 12 and 13), and the two-implementation
+agreement with its vector fixture (rule 14) — is superseded by
+`SPEC-LRE-002` on the owner's floor decision of 2026-08-30 (issue #285,
+item #285a): a released record carrying neither evidence field is not
+assessed. The optional declaration key remains permitted as inert data
+(`LRE-FLR-005`), so a packet written under rule 1 stays valid; `W024` is
+retired and stays reserved. Rules 15 and 16 (no rewriting; declarations are
+data) are subsumed unchanged by the floor's own constraints. This
+specification's history stays valid as the record of the mechanism.

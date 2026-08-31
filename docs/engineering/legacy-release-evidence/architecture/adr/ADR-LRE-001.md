@@ -196,3 +196,16 @@ case is proven to produce a diagnostic on the declarer, when a refused upgrade i
 proven to leave the tree byte-identical, and when the measured freeze from issue
 #126 is reproduced against the patched validator and shown to resolve to a pass
 with one `W024`.
+
+## Amendment record
+
+**The decided mechanism is retired by the evaluator-evidence floor,
+2026-08-31 under `WO-LRE-002`.** This decision chose declared, dated
+exemptions over a hard-coded set or a relaxed rule, while validation still
+assessed every released record for the binding. The owner's floor decision
+of 2026-08-30 (issue #285, item #285a) removes that premise: per
+`REQ-LRE-003` and `SPEC-LRE-002`, a released record carrying neither
+evidence field is not assessed, so no exemption mechanism is needed. The
+workflow gates on the path to `released` remain what forces evidence onto
+new releases. This decision record stays valid as the history of why the
+mechanism existed between 2026-08-24 and its retirement.

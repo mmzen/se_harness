@@ -22,6 +22,8 @@ paths = [
   "tests/test_legacy_release_evidence.py",
   "tests/fixtures/legacy_release_evidence/",
   "tests/test_predecessor_bootstrap_retirement.py",
+  "tests/test_dashboard_publication.py",
+  "tests/test_revision_provenance.py",
   "docs/notes/harness-installation-and-upgrades.md",
   "docs/engineering/README.md",
   "docs/engineering/legacy-release-evidence/evidence/",
@@ -147,6 +149,17 @@ request's lanes; the handoff check over the Git-derived change set.
 Any need to edit a release record; any hash-locked file in the change
 set; any test that can only pass by keeping a resolver or identifier set;
 any behavior change to a record carrying one or both evidence fields.
+
+## Scope amendment
+
+2026-08-31, after start, on the engineering owner's decision made by
+selecting the presented option 'Amend WO-LRE-002 scope':
+`tests/test_dashboard_publication.py` and `tests/test_revision_provenance.py`
+join the execution scope. Both asserted the retired behavior — a wholly
+unbound released record failing publication replay and validation — and are
+re-targeted to the partial-binding case, which the floor keeps as an error.
+The amendment adds no product path and no other work. The evidence packet
+is re-bound after this edit.
 
 ## Completion report format
 

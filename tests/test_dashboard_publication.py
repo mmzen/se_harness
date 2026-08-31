@@ -192,15 +192,17 @@ releases_work = ["WO-TST-001"]
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "main integration branch"):
             PUBLICATION.resolve_release(self.root, "v1.2.3", default_ref="HEAD")
 
-    def test_missing_evaluator_binding_fails_publication_replay(self) -> None:
+    def test_partial_evaluator_binding_fails_publication_replay(self) -> None:
+        # REQ-LRE-003 (WO-LRE-002): a wholly unbound released record publishes
+        # without evaluator evidence; a partially bound record is never exempt.
         record = self.release_record("RLS-TST-001")
         record = "\n".join(
             line
             for line in record.splitlines()
-            if not line.startswith("evaluator_evidence_")
+            if not line.startswith("evaluator_evidence_sha256")
         ) + "\n"
         self.write(self.record_path, record)
-        self.commit("remove evaluator evidence binding")
+        self.commit("remove the evaluator evidence digest")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "no canonical evaluator evidence binding"):
             self.resolve()
 
