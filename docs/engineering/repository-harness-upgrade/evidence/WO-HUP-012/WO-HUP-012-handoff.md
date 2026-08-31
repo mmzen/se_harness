@@ -103,3 +103,17 @@ After the merge: affected suites plus the new CLI-shape suite 179 tests
 OK; the full Windows suite at its baseline (1167 tests, the one known
 error, 26 skips); doctor 0 FAIL and validate 1191 artifacts, 0 errors
 under the 0.11.0 root. The packet is rebound at this commit's snapshot.
+
+## Hosted lanes
+
+All thirteen lanes of pull request #296 pass at its merged head `c3b29c2`
+(the rebind commit over the base merges of #292 and #295). The owner
+merged the pull request on 2026-08-31 as `39777aa`; that merge's own
+push-event runs were superseded within the concurrency group by the
+immediately following merge of #297 (`609cb25`, the WO-REB-031
+verification record, which contains `39777aa`), and the push-event check
+runs on `main` at `609cb25` all thirteen completed with success,
+including both governance-migration legs exercising the schema-3-only
+upgrade path, the managed Engineering Harness `validate`, the Governor
+transition assessment on the narrowed script and both
+release-qualification rehearsal legs.
