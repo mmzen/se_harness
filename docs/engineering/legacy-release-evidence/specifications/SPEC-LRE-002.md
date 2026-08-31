@@ -2,13 +2,20 @@
 id = "SPEC-LRE-002"
 type = "specification"
 title = "The evaluator-evidence floor"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-30"
-updated = "2026-08-30"
+updated = "2026-08-31"
 
 [relations]
 specifies = ["REQ-LRE-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T05:25:01Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-LRE-002: LRE-FLR-001 to LRE-FLR-007; the both-absent rule, the resolver and frozen-set deletion with W024 retired and reserved, the inert packet key, and amendment records on REQ-LRE-001, REQ-LRE-002, SPEC-LRE-001 and ADR-LRE-001."
 +++
 
 # Specification: The evaluator-evidence floor

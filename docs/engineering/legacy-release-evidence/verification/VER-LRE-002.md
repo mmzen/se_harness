@@ -2,13 +2,20 @@
 id = "VER-LRE-002"
 type = "verification"
 title = "Independent evidence for the evaluator-evidence floor"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-30"
-updated = "2026-08-30"
+updated = "2026-08-31"
 
 [relations]
 verifies = ["REQ-LRE-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T05:25:01Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-LRE-002: unbound, partial, bound, upgrade, inert-key, deletion-sweep and repository rows; readings from the exact released 0.11.0 evaluator outside the checkout."
 +++
 
 # Verification Contract: Independent evidence for the evaluator-evidence floor

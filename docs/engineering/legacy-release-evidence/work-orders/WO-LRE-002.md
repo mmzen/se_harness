@@ -2,10 +2,10 @@
 id = "WO-LRE-002"
 type = "work_order"
 title = "Enforce the evaluator-evidence floor"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-30"
-updated = "2026-08-30"
+updated = "2026-08-31"
 
 [assurance]
 commit_bound_verification = "required"
@@ -39,6 +39,13 @@ implements = ["REQ-LRE-003"]
 specifications = ["SPEC-LRE-002", "SPEC-LRE-001"]
 architecture = ["ARCH-LRE-001", "ADR-LRE-001"]
 verification = ["VER-LRE-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T05:25:01Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the package module deletion, the installer refusal and declaration-write removal, the CLI notice removal, the template validator's floor gate with the resolver and frozen set deleted, the dashboard script, the rewritten tests and deleted fixture, the note, the domain-index line, the four amendment records and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. Implementation waits for pull request #296 to merge and merges main forward first. It authorizes no change to a hash-locked root file, no edit to any release record, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
 +++
 
 # Work Order: Enforce the evaluator-evidence floor

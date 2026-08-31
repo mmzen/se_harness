@@ -2,10 +2,10 @@
 id = "REQ-LRE-003"
 type = "requirement"
 title = "A release record without evaluator evidence is not assessed"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-30"
-updated = "2026-08-30"
+updated = "2026-08-31"
 statement = "WHEN validation or an evaluator upgrade examines a released release record that carries neither evaluator-evidence field, THE SYSTEM SHALL not assess it against the evaluator-evidence binding, raising no diagnostic, requiring no declaration, and refusing no transaction on its account."
 verification_method = ["test"]
 priority = "must"
@@ -13,6 +13,13 @@ source = "issue #285 (functional assessment FA-6, item #285a) on the owner's flo
 
 [relations]
 derives_from = ["CAP-LRE-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T05:25:01Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-LRE-002: a released record without evaluator evidence is not assessed, on the owner's floor decision of 2026-08-30 (issue #285, item #285a), taken literally by the owner's selection 'Literal: never assessed' of the same day."
 +++
 
 # Requirement: A release record without evaluator evidence is not assessed
