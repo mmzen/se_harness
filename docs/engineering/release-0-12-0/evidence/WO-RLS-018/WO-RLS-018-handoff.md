@@ -35,6 +35,53 @@ governance commits before this one (draft, approve, start) predate that
 convention on this branch and are exempted in the recorded census
 alongside the contract's fourteen.
 
-## Section 2: readings
+## Section 2: readings at the candidate `a60975f`
 
-Recorded below as they complete.
+| Reading | Evaluator / platform | Result |
+| --- | --- | --- |
+| `validate` | released 0.11.0, outside the checkout, `-I`, wheel-installed | 1,210 artifacts, 0 errors, 486 pre-existing maintenance warnings |
+| `doctor` | released 0.11.0 | 0 FAIL |
+| `preflight --work-order WO-RLS-018` | released 0.11.0 | PASS, no diagnostic |
+| `scripts/validate_release_distributions.py --root .` | candidate | PASS (8 distribution-bearing records) |
+| `scripts/check_portable_release_surface.py --repository .` / `--wheel` / `--harnessctl` | candidate | PASS / PASS / PASS, the latter two on an explicitly non-promotable ephemeral wheel (`217baced…`) built outside the checkout from a Git export of the candidate and installed into a disposable environment |
+| `repository_tools.upgrade_rehearsal`, twice | released 0.11.0 as predecessor, the ephemeral wheel installed outside the checkout as successor | `overall_result` pass both runs (0.11.0 -> 0.12.0); `semantic_sha256` `9850bf40d5f76513587bda1ba7bfc864a252ac80dd3c98c8e967195a6d47e7fa` both runs |
+| `python scripts/run_tests.py --scale full` | candidate, Windows 11 (CPython 3.14), CRLF checkout | 1,171 tests, 26 skipped, 1 failing name, present on `main` and outside this work order (`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`) |
+| `python scripts/run_tests.py` | candidate, Linux | the hosted candidate-source lane at this branch head, section 5 |
+| `qualify complete-candidate` | candidate, Linux | the hosted candidate-package lane at this branch head, section 5 (`RID018` boundary on Windows, as `REL-SEH-022` records) |
+| `harnessctl check --checkpoint handoff --from-git` | released 0.11.0 | section 4 |
+
+## Section 3: census re-run at the candidate
+
+`harnessctl release-unit . --from v0.11.0 --to a60975f --contract REL-SEH-023`
+with seventeen `--exempt` values (the contract's fourteen recorded
+exemptions plus this branch's three governance commits `e64f1d2`,
+`e61d2ef` and `5ae90d7`, which predate the trailer convention on this
+branch), released 0.11.0: untraced 0, exempted 17; fifteen work orders
+traced — the thirteen members, `WO-RLS-017` through #270's branch commits
+(released by `RLS-SEH-020` and excluded, as the contract states by
+construction), and `WO-RLS-018` through this branch's trailered commits.
+The five trace commits of the contract's trace repair carry their members
+exactly as predicted. The comparison reports the four `E-CIP-001` findings
+the contract predicts at this stage: no `candidate_commit` and no
+top-level `previous_release_tag` are declared (the contract carries the
+tag in `[release_unit]`, as its predecessors did), the gates differ by
+exactly `WO-RLS-017` (traced, released, excluded), and `WO-RLS-018` is
+`in_progress`, the state this reading is taken in.
+
+## Section 4: build of record
+
+`python -m repository_tools.release_build replay --repository . --commit
+a60975fdaa215c9a0433571688251184ee459932 --version 0.12.0` on this Windows
+workstation through Docker with the pinned linux/amd64 producer image: two
+producer runs byte-identical. Wheel
+`se_harness-0.12.0-py3-none-any.whl` `dc14f007291a460d5be47d7286d4332fcac67fd2ecc66e1d26f8a5b0cc301cee`;
+sdist `se_harness-0.12.0.tar.gz` `1b0e426502d56c315f5f5d2b0175b3e9a4a112f2811670409f62ce39a998a64c`;
+source manifest `ae35d09d…`; bundle manifest created by
+`scripts/create_release_bundle_manifest.py`, retained as
+`RLS-SEH-021-bundle.json` when the record is prepared. These digests are
+local readings until the hosted `release-candidate-replay.yml` dispatch
+agrees.
+
+## Section 5: hosted lanes
+
+Recorded when the lanes complete at this branch head.
