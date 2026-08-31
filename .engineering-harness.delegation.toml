@@ -1,0 +1,7 @@
+# Owner content (WO-ECP-024, SPEC-ECP-018 ECP-GAT-004): the delegation gate.
+# The managed configuration is hash-locked and never carries this.
+[delegation]
+gate_source = "github-checks"
+check_name = "validate"
+repository = "mmzen/se_harness"
+base_ref = "origin/main"
