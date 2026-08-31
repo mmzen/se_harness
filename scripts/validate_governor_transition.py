@@ -220,7 +220,7 @@ def _root_identity(root: Path, revision: str, label: str) -> dict[str, Any]:
     if not isinstance(version, str) or VERSION.fullmatch(version) is None:
         raise GovernorTransitionError(f"{label} configured governor version is invalid")
     schema = lock.get("schema")
-    if schema not in {2, 3} or lock.get("tool_version") != version:
+    if schema != 3 or lock.get("tool_version") != version:
         raise GovernorTransitionError(f"{label} configuration and lock disagree")
     if lock.get("hash_algorithm") != "sha256" or lock.get("hash_mode") != "utf8-text-lf-v1":
         raise GovernorTransitionError(f"{label} lock hash contract is unsupported")

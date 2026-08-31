@@ -123,3 +123,17 @@ Doctor and upgrade-plan output identify lock schema/mode and distinguish exact l
 ## Explicitly unspecified decisions
 
 The implementation agent may choose module and helper names, internal result types, and exact advisory phrasing. It may not alter schema names, canonicalization semantics, safe-migration proof, or authority boundaries without an approved artifact change.
+
+## Amendment record
+
+**The schema-1 compatibility rules are retired and schema 3 is the only
+lock schema, 2026-08-30 under `WO-HUP-012`.** Rules 5 and 7 (doctor and
+upgrade reading schema 1), the `legacy canonical match` advisory, and the
+schema-1 evidence semantics of this specification are superseded by the
+owner's floor decision of 2026-08-30 (issue #285, item #285a): per
+`SPEC-HUP-012` `HUP-LSF-001` to `HUP-LSF-004`, a pre-3 lock is refused at
+read before any write, and the emitted lock is always the current schema
+(3, which extended this specification's schema 2 with the evaluator
+identity). The canonical `utf8-text-lf-v1` semantics this specification
+defined are unchanged and remain the digest contract of the schema-3 lock.
+Nothing else in this specification changes.

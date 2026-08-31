@@ -15,7 +15,7 @@ from unittest import mock
 
 from se_harness import __version__
 from se_harness.cli import main
-from se_harness.installer import BEGIN_MARKER, END_MARKER, plan_install, tracked_content
+from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, plan_install, tracked_content
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.fixture_support import standard_repository
@@ -503,29 +503,21 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
         self.assertFalse(missing.exists())
 
+        # WO-HUP-012 (HUP-LSF-001): a schema-1 lock is no longer planned over;
+        # the read refuses with the floor diagnostic and nothing is written.
         legacy = self.installed_target("legacy-newlines")
-        legacy_readme = legacy / "docs" / "engineering" / "README.md"
-        legacy_lf = b"# Legacy managed index\n\nLine two.\n"
-        legacy_readme.write_bytes(legacy_lf.replace(b"\n", b"\r\n"))
         legacy_lock_path = legacy / ".engineering-harness.lock"
         legacy_lock = json.loads(legacy_lock_path.read_text(encoding="utf-8"))
         legacy_lock["schema"] = 1
         legacy_lock.pop("hash_algorithm", None)
         legacy_lock.pop("hash_mode", None)
         legacy_lock.pop("evaluator", None)
-        legacy_lock["files"]["docs/engineering/README.md"] = {
-            "mode": "managed",
-            "sha256": canonical_sha256(legacy_lf),
-        }
         legacy_lock_path.write_text(
             json.dumps(legacy_lock, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        changes, _ = plan_install(legacy, project_name=None, mode="upgrade")
-        self.assertEqual(
-            "update",
-            {item.path: item.action for item in changes}["docs/engineering/README.md"],
-        )
+        with self.assertRaisesRegex(HarnessError, r"predates the supported floor \(schema 3\)"):
+            plan_install(legacy, project_name=None, mode="upgrade")
 
     def test_preflight_returns_deterministic_reading_manifest_without_writes(self) -> None:
         target = self.installed_target()

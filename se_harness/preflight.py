@@ -213,12 +213,10 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
                 if desired_change is not None
                 else None
             )
-            result = compare_lock_entry(lock, entry, current, desired=desired)
+            result = compare_lock_entry(lock, entry, current)
             passed = result != "mismatch"
             detail = {
-                "exact": "unchanged (legacy exact)",
                 "canonical": "unchanged",
-                "legacy-canonical": "legacy canonical match; upgrade recommended",
                 "mismatch": "customized",
             }[result]
             checks.append(InstallationCheck(f"managed:{relative}", passed, detail))
