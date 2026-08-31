@@ -2,7 +2,7 @@
 id = "WO-HUP-013"
 type = "work_order"
 title = "Adopt exact public 0.12.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-31T13:14:04Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-31, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 036f3ce carrying unmoved main 63889f7, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T13:19:45Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-31 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set at b0be496, self-bound in one run at result b11ab17d, produced by the exact public 0.12.0 evaluator that this transaction installed as the root, outside the checkout, on this Windows checkout. The root lock reads 0.12.0 by version, payload 0df83ce9 and the archive pair of the wheel RLS-SEH-021 binds; 46 managed files, 8 updated, replay unchanged; nothing left the managed set; exact 0.12.0 validate 1218 artifacts 0 errors 65 warnings 0 advisories, doctor 0 FAIL, released-root 113/113, dashboard identical twice, review preflight PASS, derive 0.12.0 to 0.13.0; the full-scale suite at its one baseline name with the identity-aware edits named in the packet. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.12.0 as the standard root, the simple way
