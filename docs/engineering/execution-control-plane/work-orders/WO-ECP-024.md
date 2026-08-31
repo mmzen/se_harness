@@ -2,7 +2,7 @@
 id = "WO-ECP-024"
 type = "work_order"
 title = "Remove the dead .gitattributes tail, by the delegated route"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-08-31T14:32:20Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 3ce230208d7504b219aca3beca125c5e8fdc46a7 (check-run 99523603905, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T14:39:19Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at e56ef320ff0100c62ddad2c2e2d36bb93a6cbe44 (check-run 99526079669, source github-checks)."
 +++
 
 # Work Order: Remove the dead .gitattributes tail, by the delegated route
