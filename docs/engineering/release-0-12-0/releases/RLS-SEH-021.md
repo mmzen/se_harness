@@ -2,7 +2,7 @@
 id = "RLS-SEH-021"
 type = "release_record"
 title = "Release candidate 0.12.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-12-0/evidence/RLS-SEH-021-
 evaluator_evidence_sha256 = "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
 tag = "v0.12.0"
 
+released_at = "2026-08-31T12:10:41Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-023"]
 includes_verification = ["VREC-SEH-021"]
 releases_work = ["WO-AUT-004", "WO-DST-022", "WO-ECP-018", "WO-ECP-019", "WO-ECP-020", "WO-ECP-021", "WO-ECP-022", "WO-ECP-023", "WO-HUP-011", "WO-HUP-012", "WO-LRE-002", "WO-REB-031", "WO-RLS-018", "WO-TCM-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-08-31T12:10:41Z"
+decided_by = "release-owner"
+reason = "Released by the accountable release owner on 2026-08-31 by selecting the presented option 'I release RLS-SEH-021'. Re-measured immediately before this transition: the record binds candidate 3dcde4b with the schema-2 distribution table carrying wheel 639edbee and sdist 3f7b22ff from two byte-identical pinned-producer runs re-verified at the bound candidate; REL-SEH-023 is approved with its fourteen gates; VREC-SEH-021 is verified over the whole unit; the hosted release-candidate replay on this branch completed success, reproducing the recorded digests with read-only repository permission; every lane of pull request #304 passes. This releases se-harness 0.12.0 as a record; the tag, the GitHub Release, PyPI, Pages, the maintenance line and the latest markers follow the promotion policy as separate acts, and the pypi environment remains a separate human decision."
 +++
 
 # Release Record Candidate
