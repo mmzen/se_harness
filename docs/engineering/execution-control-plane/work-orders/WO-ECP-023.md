@@ -2,7 +2,7 @@
 id = "WO-ECP-023"
 type = "work_order"
 title = "The Git-derived handoff check self-binds in one run"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -37,6 +37,13 @@ to = "approved"
 decided_at = "2026-08-31T07:44:38Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve and start WO-ECP-023', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the compliance module's rebind helper and change-set union, the check handler's writes and refusal codes, the compliance test module, the two notes, this domain's index and the evidence packet. It authorizes no change to a hash-locked root file, no verification record, no release and no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-31T07:45:26Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-31, taken by selecting the presented option 'Approve and start WO-ECP-023'. Start checkpoint Completed with every gate pass over the approval commit 54589f5 on branch wo/ecp-023-self-binding-handoff, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: The Git-derived handoff check self-binds in one run
