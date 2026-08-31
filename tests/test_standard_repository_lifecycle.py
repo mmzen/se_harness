@@ -455,15 +455,15 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("complete-candidate-qualification", workflow)
         self.assertIn("--role candidate-package", workflow)
         self.assertIn("--role released-evaluator", workflow)
-        self.assertIn("accept-candidate", workflow)
-        self.assertIn("se-harness-functional-acceptance-v1", workflow)
+        # WO-REB-031 (SPEC-REB-016): the typed operation is the only acceptance
+        # path; the expired 0.6.0 bootstrap fallback is gone.
+        self.assertNotIn("accept-candidate", workflow)
+        self.assertNotIn("se-harness-functional-acceptance-v1", workflow)
         # WO-CIP-003: the predecessor facts are derived, not restated; the values
-        # the lock and the legacy contract table yield are asserted in
-        # tests/test_ci_pipeline.py.
-        self.assertIn("candidate-package-legacy-bootstrap-${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
+        # the lock yields are asserted in tests/test_ci_pipeline.py.
+        self.assertIn("candidate-package-qualification-${{ needs.candidate-source.outputs.predecessor_version }}", workflow)
         self.assertIn("repository_tools.evaluator_facts derive", workflow)
         self.assertNotIn("2a952eb6ff4ea137d0904c3c9a6f19c88482bfbaa18a9766e5ad4d4a6fef62f7", workflow)
-        self.assertIn('assert "independence" not in value', workflow)
         self.assertIn("check_portable_release_surface.py --repository .", workflow)
         self.assertIn("--require-isolated-python", workflow)
         self.assertIn("repository_tools.upgrade_rehearsal", workflow)  # WO-ECP-010
@@ -474,6 +474,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertNotIn("MIGRATION_SCENARIO", workflow)
         self.assertNotIn("974ba2de5f43bb7fa5987f7e6dde7f2b4d6c4c1d76011ff4abdc142957dd812f", workflow)
         self.assertNotIn("historical-0.5.0-to-0.6.0.json", workflow)
+        self.assertNotIn("RELEASED_ACCEPTANCE_CONTRACT_SHA256", workflow)
         self.assertIn("git diff --exit-code", workflow)
         self.assertNotIn("Review preflight", workflow)
         self.assertNotIn("Validate candidate artifact graph", workflow)
@@ -481,10 +482,9 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertNotIn("pull_request_target", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("id-token: write", workflow)
-        # WO-REB-027 (SPEC-REB-012 rule 6): the candidate-package operation is
-        # selected by the released verifier's capability, never by a restated
-        # version; both branches assert the shape of what ran.
-        self.assertIn("qualify --help", workflow)
+        # WO-REB-031 (SPEC-REB-016 REB-BFH-001): the typed candidate-package
+        # operation runs unconditionally; no capability probe selects a branch.
+        self.assertNotIn("qualify --help", workflow)
         self.assertIn("qualify candidate-package", workflow)
         self.assertIn('value["independence"] == "released-verifier"', workflow)
 

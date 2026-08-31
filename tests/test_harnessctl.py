@@ -266,7 +266,7 @@ class HarnessCtlTests(unittest.TestCase):
         code, output, error = self.invoke("adopt", str(target))
         self.assertEqual(1, code)
         self.assertIn("conflict", output)
-        self.assertIn("another workflow filename", error)
+        self.assertIn("another workflow filename", output)
         self.assertEqual(original, managed.read_bytes())
         self.assertFalse((target / ".engineering-harness.lock").exists())
 
@@ -280,7 +280,7 @@ class HarnessCtlTests(unittest.TestCase):
         code, output, error = self.invoke("adopt", str(target))
         self.assertEqual(1, code)
         self.assertIn("conflict", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)
         self.assertEqual(original, (target / "ENGINEERING_HARNESS.md").read_bytes())
         self.assertEqual("existing\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
         self.assertFalse((target / ".engineering-harness.lock").exists())
@@ -301,9 +301,9 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertIn("add        docs/engineering/TRACEABILITY.md", output)
         self.assertFalse(missing.exists())
 
-        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, _ = self.invoke("upgrade", str(target), "--apply")
         self.assertEqual(1, code)
-        self.assertIn("manual review; no files were written", error)
+        self.assertIn("manual review; no files were written", output)
         self.assertEqual(original, managed.read_bytes())
         self.assertFalse(missing.exists())
         self.assertIn('project_name = "Stable Name"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
@@ -329,9 +329,9 @@ class HarnessCtlTests(unittest.TestCase):
         original = workflow.read_bytes()
         missing = target / "docs" / "engineering" / "TRACEABILITY.md"
         missing.unlink()
-        code, _, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, _ = self.invoke("upgrade", str(target), "--apply")
         self.assertEqual(1, code)
-        self.assertIn("separate workflow", error)
+        self.assertIn("separate workflow", output)
         self.assertEqual(original, workflow.read_bytes())
         self.assertFalse(missing.exists())
 

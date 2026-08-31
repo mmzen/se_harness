@@ -108,3 +108,20 @@ unchanged; `archive_sha256` was already optional in it.
 Whether a future release records the archive digest for index installs
 through pip's `--require-hashes` metadata; the repository's own work-order
 policy for root changes.
+
+## Amendment record
+
+**Rule 6 and the workflow-retention sentence are restated typed-only,
+2026-08-30 under `WO-REB-031`.** Rule 6 read: the candidate-evidence lane
+"uses `qualify candidate-package` when the released verifier carries the
+`qualify` namespace and the legacy `accept-candidate` bootstrap otherwise."
+The bootstrap expired per `SPEC-REB-010`'s own exception and the owner's
+floor decision of 2026-08-30 (issue #285, item #285a); rule 6 is restated
+as: the repository-owned candidate-evidence lane uses `qualify
+candidate-package` unconditionally, and the assertions match that
+operation. The workflow-retention sentence's carve-out for the "initial
+exact-public-0.6.0 candidate-package lane" and its "distinct legacy
+bootstrap result" no longer describes a live lane: workflows retain the
+canonical role result or its digest, and the retained bootstrap evidence
+of the first deployments is history, never relabeled. Nothing else in this
+specification changes.
