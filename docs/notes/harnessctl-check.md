@@ -217,7 +217,9 @@ predicate changes it.
 ## Refusal codes
 
 These are refusals of the command itself, before or instead of predicate
-evaluation. Each names its cause.
+evaluation. Each names its cause. This table covers `check` only; the
+generated [diagnostic code index](diagnostic-codes.md) lists every code the
+source can emit, across all commands.
 
 | Code | Cause |
 | --- | --- |

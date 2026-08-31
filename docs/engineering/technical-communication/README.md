@@ -27,3 +27,5 @@ technical meaning.
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, network access, standard download, or
 external action.
+
+`REQ-TCM-005`, `SPEC-TCM-002`, `VER-TCM-002` and `WO-TCM-003` are drafted and approved on 2026-08-31 for [issue #281](https://github.com/mmzen/se_harness/issues/281) item #281b, the last piece of the functional assessment's FA-2: a generated diagnostic-code index. `repository_tools/diagnostic_code_index.py` parses the candidate source's string literals (comments and identifiers never contribute), keeps a curated registry of the diagnostic prefixes, derives the run-time-composed record-preparation codes from the same source facts, and renders `docs/notes/diagnostic-codes.md` deterministically; `tests/test_diagnostic_code_index.py` fails the suite on any drift. Artifact and specification identifiers, which share the code shape, are excluded by construction. The page is linked from the notes index and beside the `check` note's small refusal table. The hash-locked root `scripts/` copies are the released evaluator's files and are not scanned.
