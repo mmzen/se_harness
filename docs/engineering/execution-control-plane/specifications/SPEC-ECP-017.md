@@ -2,13 +2,20 @@
 id = "SPEC-ECP-017"
 type = "specification"
 title = "The handoff check self-binds its packet and closes the change set over its own write"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 specifies = ["REQ-ECP-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T07:44:38Z"
+decided_by = "technical-owner"
+reason = "Approved by the technical owner on 2026-08-31 by selecting the presented option 'Approve and start WO-ECP-023': ECP-SBH-001 to ECP-SBH-006; the evidence command, the retained-result rules, the scope checkpoint and every contract file are unchanged."
 +++
 
 # Specification: The handoff check self-binds its packet and closes the change set over its own write

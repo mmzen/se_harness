@@ -2,13 +2,20 @@
 id = "VER-ECP-019"
 type = "verification"
 title = "Independent evidence that one Git-derived handoff run is the declared result"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 verifies = ["REQ-ECP-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T07:44:38Z"
+decided_by = "assurance-owner"
+reason = "Approved by the assurance owner on 2026-08-31 by selecting the presented option 'Approve and start WO-ECP-023': CLI-driven rows for ECP-SBH-001 to -006 over Git fixtures, with digest stability asserted by comparing two independently produced results."
 +++
 
 # Verification Contract: Independent evidence that one Git-derived handoff run is the declared result

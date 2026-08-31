@@ -2,7 +2,7 @@
 id = "REQ-ECP-028"
 type = "requirement"
 title = "The Git-derived handoff check declares its result in one run"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -13,6 +13,13 @@ source = "Issue #280 (functional assessment of 2026-08-30, sections 2.1 and 3.3)
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T07:44:38Z"
+decided_by = "requirements-steward"
+reason = "Approved by the requirements steward on 2026-08-31 by selecting the presented option 'Approve and start WO-ECP-023': the Git-derived handoff check rebinds the packet to the current formal snapshot and evaluates the change set at its fixed point in one run; issue #280 part b."
 +++
 
 # Requirement: The Git-derived handoff check declares its result in one run
