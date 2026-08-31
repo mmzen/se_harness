@@ -2,7 +2,7 @@
 id = "WO-RLS-018"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.12.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-08-31T11:24:46Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-08-31, made by selecting the presented option 'Approve REL-SEH-023 and WO-RLS-018, start'. Start preflight PASS with no diagnostics over the approval commit e61d2ef carrying unmoved main 2761f89, run with the governing exact public 0.11.0 evaluator outside the checkout, installed from the digest-verified wheel, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release record, no tag and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T11:51:03Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-31 under DR-WO-COMPLETE, by selecting the presented option 'Mark WO-RLS-018 implemented', on the handoff check reading Completed over the Git-derived change set, fixed-point result ccea3b9470de, run by the released 0.11.0 evaluator on this Windows checkout. The candidate is a60975fdaa215c9a0433571688251184ee459932 with the packaged bytes of main 2761f89: validate 1210 artifacts 0 errors, doctor 0 FAIL, review preflight PASS, distributions and portable surface PASS in all three modes, complete-candidate read from the hosted Linux lane for the RID018 boundary reason, the upgrade rehearsal 0.11.0 to 0.12.0 pass twice with one semantic digest 9850bf40, the Windows full-scale suite at its one baseline name, the census at the candidate exactly as REL-SEH-023 predicts with the five trace commits carrying their members, and the recipe-bound build of record exact with two byte-identical producer runs, its digests held as local readings until the hosted replay agrees. Every workflow at the candidate head and every lane of pull request #304 at this head passes. No deviations. This authorizes no verification record, no release record, no tag and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.12.0 candidate from main
