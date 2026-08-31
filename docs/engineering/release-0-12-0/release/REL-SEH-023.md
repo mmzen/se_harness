@@ -2,7 +2,7 @@
 id = "REL-SEH-023"
 type = "release_contract"
 title = "Release se-harness 0.12.0: the assessment executed - ceremony cut, CLI normalized, advisories apart, the compatibility floor, the delegation class, and the missing pages"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -28,6 +28,13 @@ untraced_exemptions = [
   "4028e727de0f8c308268296d7ba4c183b7eda64b",
   "2761f89058063ceb4d512702344601484c520b22",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T11:24:22Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-08-31 by selecting the presented option 'Approve REL-SEH-023 and WO-RLS-018, start', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this approval over main at 2761f89: the thirteen implemented, verified, unreleased work orders are exactly the thirteen members named in gates, and no work order reached implemented since the packet was drafted. This approval authorizes WO-RLS-018 to be approved and started as separate acts; it authorizes no candidate, build, record, tag, publication or deployment."
 +++
 
 # Release contract: se-harness 0.12.0
