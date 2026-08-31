@@ -1,0 +1,157 @@
++++
+id = "WO-HUP-013"
+type = "work_order"
+title = "Adopt exact public 0.12.0 as the standard root, the simple way"
+status = "implemented"
+owners = ["repository-owner", "engineering-owner", "security-owner"]
+created = "2026-08-31"
+updated = "2026-08-31"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Every later gate, decision and release runs under the evaluator this transaction installs; the moved root, the candidate identity and the test assumptions are trusted engineering state."
+decided_by = "repository-owner"
+
+[execution_scope]
+paths = [".engineering-harness.lock", ".engineering-harness.toml", ".github/workflows/engineering-harness.yml", "AGENTS.md", "ENGINEERING_HARNESS.md", "README.md", "docs/engineering/DECISION_RIGHTS.md", "docs/engineering/WORKFLOW.json", "docs/engineering/WORKFLOW.md", "docs/engineering/templates/WORK_ORDER.template.md", "scripts/validate_engineering_artifacts.py", "pyproject.toml", "se_harness/__init__.py", "tests/", "docs/notes/developing-se-harness.md", "docs/engineering/repository-harness-upgrade/README.md", "docs/engineering/repository-harness-upgrade/evidence/", "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-025.md", "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-026.md", "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-013.md", "docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-010.md", "docs/engineering/repository-harness-upgrade/verification/VER-HUP-013.md"]
+
+[relations]
+implements = ["REQ-HUP-025", "REQ-HUP-026"]
+specifications = ["SPEC-HUP-013"]
+architecture = ["ARCH-HUP-010"]
+verification = ["VER-HUP-013"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T13:13:31Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the simple upgrade transaction from the isolated 0.12.0 environment, the owner statements naming the new governor, the candidate move to 0.13.0, the identity-aware test assertions, this packet, the domain index, the transaction JSON and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no product byte beyond the version identity, no template, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-08-31T13:14:04Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-08-31, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit 036f3ce carrying unmoved main 63889f7, run with the governing exact public 0.11.0 evaluator outside the checkout, on this Windows checkout. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-08-31T13:19:45Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-08-31 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set at b0be496, self-bound in one run at result b11ab17d, produced by the exact public 0.12.0 evaluator that this transaction installed as the root, outside the checkout, on this Windows checkout. The root lock reads 0.12.0 by version, payload 0df83ce9 and the archive pair of the wheel RLS-SEH-021 binds; 46 managed files, 8 updated, replay unchanged; nothing left the managed set; exact 0.12.0 validate 1218 artifacts 0 errors 65 warnings 0 advisories, doctor 0 FAIL, released-root 113/113, dashboard identical twice, review preflight PASS, derive 0.12.0 to 0.13.0; the full-scale suite at its one baseline name with the identity-aware edits named in the packet. This authorizes no verification record, no release and no publication."
++++
+
+# Work Order: Adopt exact public 0.12.0 as the standard root, the simple way
+
+## Lifecycle
+
+This work order requires the accountable owners' approval before start
+preflight or any declared work. Its authoritative state, and the timestamp
+and reason of every decision taken on it, are the front matter and
+`[[lifecycle_events]]` above. Commit-bound verification is `required`.
+
+Its scope names no `verification-records/` directory: the gate admits this
+work order's own records by construction on both sides of the move
+(`ECP-ADM-001`).
+
+## Objective
+
+Use exact public 0.12.0, installed outside the checkout from the wheel file
+whose digest `RLS-SEH-021` binds, to replace the 0.11.0 standard root with
+one evidence-bound 0.12.0 root by the simple upgrade — one command, no
+packet — and prove the complete graph and the repository suite under the
+new root, without changing product, release, publication, deployment,
+maintenance or external state.
+
+## In scope
+
+- Prove the installed 0.12.0 identity (version, payload digest, archive
+  pair equal to the published wheel) from the isolated environment;
+  `SPEC-HUP-013` rules 1 and 2. Rehearsed on 2026-08-31 on a throwaway
+  clone of `main` at `63889f7`: wheel `se_harness-0.12.0-py3-none-any.whl`
+  `639edbeed4bdca7c9e21a5eb2afc3b9fc993ddb3f66177eec962f1646a545811`,
+  payload `0df83ce9c9bb6d456f3244f517031753daee740bb22180a492f835d25831ee0d`.
+- Review the plan against the installer's managed set: `add` or `update`
+  only, no `customized`, no `conflict`, no unexpected `remove` (rules 3
+  and 6). Measured: 46 files, 8 `update`, 38 unchanged; nothing leaves the
+  managed set.
+- Apply with `harnessctl upgrade . --apply --evidence-output
+  docs/engineering/repository-harness-upgrade/evidence/WO-HUP-013-evaluator-upgrade.json`;
+  require the no-op replay (rules 4 and 5). Measured at rehearsal: replay
+  46 unchanged; prior lock `e3f7039416fd…`, prior `tool_version 0.11.0`.
+- Update owner content only where it must state the new governor: the
+  `se-harness==0.11.0` instruction and the stored-payload pull-request trap
+  in `AGENTS.md`'s owner region, and the candidate/root statements in
+  `docs/notes/developing-se-harness.md` (rule 9).
+- Move the candidate to `0.13.0` (`pyproject.toml`,
+  `se_harness/__init__.py`, the README install example); no scenario and
+  no legacy table exist (rule 8).
+- Replace pinned root and candidate assumptions in `tests/` with
+  identity-aware assertions, each named in the evidence (rule 10); the
+  rehearsal names exactly one test module
+  (`tests/test_instruction_architecture.py`: the managed count of root
+  0.12.0 and the live-body operational fact) beyond the owner-content
+  files.
+- Run the complete `VER-HUP-013` qualification and the suite, and retain
+  the evidence; hand off with the pull request's lanes green.
+
+## Out of scope
+
+Product source and templates other than the version identity; `RLS`, `VREC`
+and `REL` records; tags, publication, replay and Pages workflows; the
+`release/0.12` line and the latest markers (they follow `REL-SEH-023`'s
+promotion policy after this observation window); branch protection and the
+delegation demonstration (issue #284's later stages); credentials; the
+published 0.12.0 itself, which does not move; the workstation-only suite
+error the control also reads.
+
+## Authorized decision envelope
+
+The name of the external environment; the wording of the owner-content
+statements; which assertion form replaces each pinned test assumption,
+provided the released-root identity and the candidate templates are both
+still asserted; the order of readings.
+
+## Constraints
+
+- The applying runtime is exact public 0.12.0 outside the checkout, in
+  isolated mode, installed from the digest-verified wheel file; a refusal
+  by the guard is a stop, not a thing to bypass.
+- No `customized`, `conflict` or unexpected `remove` action may be waived;
+  a `null` archive pair is a stop.
+- The complete graph must pass exact 0.12.0 directly after apply.
+- Candidate template bytes must remain unchanged.
+
+## Expected change surface
+
+The 8 reviewed `update` paths and the installer-owned lock; `AGENTS.md`'s
+owner region and `docs/notes/developing-se-harness.md`; `pyproject.toml`,
+`se_harness/__init__.py`, `README.md`; the one test module the evidence
+names; this packet, the domain index, the transaction JSON and the
+evidence packet.
+
+## Required verification
+
+Execute `VER-HUP-013` in full; repository-required checks; the pull
+request's lanes green; the handoff check over the Git-derived change set.
+
+## Evidence to record
+
+`docs/engineering/repository-harness-upgrade/evidence/WO-HUP-013/` and
+`WO-HUP-013-evaluator-upgrade.json`.
+
+## Stop and escalate conditions
+
+A guard refusal, a plan path outside the managed set, customization,
+conflict, an unexpected removal, a `null` archive pair, a partial
+transaction, a failed replay, a failed graph, a suite whose failure set
+differs from the control beyond the names the evidence explains, an
+unexplained warning, a product or release byte moved beyond the version
+identity, or a need for authority beyond the approved stage.
+
+## Completion report format
+
+The evidence packet, the changed-path ledger, the handoff `check`
+restitution; the completion decision is the engineering owner's.

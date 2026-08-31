@@ -75,12 +75,15 @@ Holding one role does not grant another role. One person MAY hold several roles 
 
 ## Governed delegated execution
 
-**DR-015:** Phase 4 advance delegation MAY activate only the cataloged
-work-order start, work-order completion, and VREC-preparation rights for the
-exact recorded logical delegate, operation, work order, state, scope, evidence,
-profile, expiry, and stop boundary. It MUST NOT activate verification, release,
-delivery, Git, credential, network, child-delegation, parallel-writer, or
-external authority. Each delegated operation MUST resolve and admit current
-authority independently.
+**DR-015:** A work order MAY carry `[delegation] class = "execution"`. While
+the required pull-request check for the candidate head is `success`, read
+from the CI provider by commit id, the `delegated-executor` role MAY apply
+exactly the work-order start, work-order completion and VREC-preparation
+rights of the catalog above for that work order; the class is read at the
+base of the pull request, never from the branch. The class MUST NOT activate verification, release, delivery, Git,
+credential, network or external authority, or any definition decision, and
+delegation MUST NOT be inferred from an environment, a token or an actor
+name. Approving the work order that carries the class is the delegating
+act under `DR-007`.
 
 Workflow order is defined by [WORKFLOW.md](WORKFLOW.md). Gate predicates are defined by [QUALITY_GATES.md](QUALITY_GATES.md). Artifact relations are defined by [TRACEABILITY.md](TRACEABILITY.md).

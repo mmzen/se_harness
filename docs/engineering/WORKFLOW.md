@@ -42,31 +42,30 @@ Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1
 
 Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber apply, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
-## Delegated Phase 4 operations
+## Delegated operations
 
-`WORKFLOW.json` schema v4 defines the complete delegated operation catalog.
-Absence from this table denies an operation; a prior receipt creates no
-standing authority. Every row requires current formal delegation, the exact
-released evaluator, a fresh stable observation, a unique admitted nonce, the
-named passing gates, one logical `implementation-worker`, the `implementer`
-profile, and no recovery-required state.
+`WORKFLOW.json` schema v4 defines the three delegated operations of the
+delegation class. A work order that carries `[delegation] class =
+"execution"` at the base of its pull request lets the `delegated-executor`
+role apply them, one at a time, only while the required pull-request check
+for the candidate head reads `success` from the CI provider; the decision
+record names the check-run id and the head sha. Absence from this table
+denies an operation; every other decision right stays human.
 
 | Operation | Decision right | Current WO state | Result |
 | --- | --- | --- | --- |
-| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` plus a start receipt |
-| `change-bundle-apply` | Started-work execution; no additional right | `in_progress` | Brokered target effect plus an effect receipt |
-| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented` plus a completion receipt |
-| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC plus an assurance decision packet |
+| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` |
+| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented`, behind the same handoff gate as the human decision |
+| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC; no assurance decision |
 
-Delegated completion MUST prove an uninterrupted start/effect state chain,
-exact admitted and final changed paths, successful required tests and gates,
-retained evidence digests, explicit deviations, explicit residual uncertainty,
-and no active effect journal. Missing or not-assessable proof MUST NOT be
-treated as pass. Verification preparation MUST stop before Git when a required
-candidate commit is absent. `PROC-CANDIDATE-COMMIT` binds that stop to
-`STEP-CANDIDATE-COMMIT-AUTHORIZE`; its response requests the exact repository-
-owner action and performs no staging, commit, branch, push, merge, assurance,
-release, credential, network, or external effect.
+`harnessctl check` tells the actor when a decision due is delegated to it:
+`decision_required` names `delegated-executor` and the command to run when
+the gate is `success`, and a response naming the check, the head and the
+conclusion observed otherwise. Verification preparation MUST stop before Git
+when a required candidate commit is absent. `PROC-CANDIDATE-COMMIT` binds
+that stop to `STEP-CANDIDATE-COMMIT-AUTHORIZE`; its response requests the
+exact repository-owner action and performs no staging, commit, branch, push,
+merge, assurance, release, credential, network, or external effect.
 
 ## State model
 
@@ -125,9 +124,9 @@ Conformance tests MUST fail on such a difference.
    owner MAY then approve one bounded work order after
    `QG-G3-WORK-AUTHORIZATION` passes.
 5. Before implementation, the implementation actor MUST run
-   `harnessctl next . --artifact WO-...` (or `harnessctl check` and
-   `harnessctl preflight . --work-order WO-... --phase start`, which it
-   composes), read every file in the reading manifest, and receive an
+   `harnessctl check . --artifact WO-...` (which composes
+   `harnessctl preflight . --work-order WO-... --phase start` into its
+   reading manifest), read every file in that manifest, and receive an
    explicit start decision.
 6. The implementation actor MUST change only the authorized scope, retain
    work-order-keyed evidence, and run
@@ -210,7 +209,7 @@ failing predicate under `Next` and `Command or response`. A contract whose
 corrective form repeats the evaluated command fails to load with `WEX-ADS-001`.
 The completeness corrective names `harnessctl check ... --from-git <base>`,
 which derives the change set from Git; an operation that could not select or
-act names `harnessctl next . --artifact <ID>` as the retry, never the
+act names `harnessctl check . --artifact <ID>` as the retry, never the
 evaluated command.
 
 ## Transition procedure

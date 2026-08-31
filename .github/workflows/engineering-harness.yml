@@ -1,6 +1,8 @@
 # Managed by SE Harness. Runs the exact released evaluator outside the checkout:
 # work-order selection and review preflight on pull requests, then doctor,
-# validate and the dashboard. Trigger policy: pull requests, and pushes to
+# validate and the dashboard. The declarations are selected from the pull
+# request's current body, read from the API during the run, so a corrected
+# body needs a re-run, not a push. Trigger policy: pull requests, and pushes to
 # main, release/** and candidate/** only; a newer push to the same ref cancels
 # the older run.
 name: Engineering Harness
@@ -19,9 +21,10 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: read
 
 env:
-  SE_HARNESS_VERSION: "0.11.0"
+  SE_HARNESS_VERSION: "0.12.0"
 
 jobs:
   validate:
@@ -38,13 +41,35 @@ jobs:
           "$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \
             --disable-pip-version-check --no-deps --only-binary=:all: \
             "se-harness==$SE_HARNESS_VERSION"
+      - name: Read the live pull-request body
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          # ECP-LPB-002, -003: the declarations are selected from the pull request
+          # as it is now, not from the stored trigger snapshot, so a corrected
+          # body is honoured by re-running this check without a new push.
+          curl --fail --silent --show-error \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PULL_REQUEST_NUMBER" \
+            > "$RUNNER_TEMP/pull-request.json"
+          "$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/pull-request.json" "$RUNNER_TEMP/live-event.json" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as source:
+              pull_request = json.load(source)
+          with open(sys.argv[2], "w", encoding="utf-8") as target:
+              json.dump({"pull_request": {"body": pull_request.get("body")}}, target)
+          PY
       - name: Select the pull-request work order
         if: github.event_name == 'pull_request'
         id: work_order
         shell: bash
         run: |
           work_order="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
-            select-work-order --event "$GITHUB_EVENT_PATH")"
+            select-work-order --event "$RUNNER_TEMP/live-event.json")"
           printf 'work_order=%s\n' "$work_order" >> "$GITHUB_OUTPUT"
       - name: Review preflight
         if: github.event_name == 'pull_request'
@@ -93,7 +118,7 @@ jobs:
           PY
           )"
           declared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
-            select-work-order --event "$GITHUB_EVENT_PATH" --field restitution-digest)"
+            select-work-order --event "$RUNNER_TEMP/live-event.json" --field restitution-digest)"
           if [ "$in_progress" != "yes" ]; then
             if [ -n "$declared" ]; then
               echo "The pull request's diff is inside the declared scope; the declared Harness-Restitution $declared was bound at handoff and is not recomputed after completion."

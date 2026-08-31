@@ -42,7 +42,7 @@ This checkout is candidate source. Changes to the eight managed scripts and the 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.11.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.12.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
 An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development; that is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path makes candidate-source runtime identity fail with `RID018`.
@@ -51,7 +51,7 @@ The candidate CLI may lead the released one. Confirm commands against the isolat
 
 ## Traps
 
-- Every pull-request body needs a standalone `Harness-Work-Order: WO-...` line. The 0.11.0 root lane reads the stored event payload, so a body edit stays red until a push; `WO-ECP-021`'s template lane reads the live body (re-run suffices).
+- Every pull-request body needs a standalone `Harness-Work-Order: WO-...` line. Since the 0.12.0 root the managed lane reads the live body (`WO-ECP-021`), so a body edit needs a re-run, not a push.
 - A record cannot contain the hash of its own commit, so `VREC-*` and `RLS-*` belong in a later governance commit than the candidate they bind.
 - Artifact identifiers are shared across branches and sessions. Check every ref before numbering a new chain; the local maximum is not the next free number.
 - Never rewrite historical `VREC-*` or `RLS-*` facts, and preserve unrelated changes.
