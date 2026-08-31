@@ -366,7 +366,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized ENGINEERING_HARNESS.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_router, customized_router.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
 
@@ -448,7 +448,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/WORKFLOW.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_router, customized_router.read_bytes())
         self.assertEqual(original_workflow, customized_workflow.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
@@ -498,7 +498,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         code, output, error = self.invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/README.md", output)
-        self.assertIn("no files were written", error)
+        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
         self.assertEqual(original_readme, customized_readme.read_bytes())
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
         self.assertFalse(missing.exists())

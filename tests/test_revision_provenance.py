@@ -820,7 +820,7 @@ class RevisionCliTests(unittest.TestCase):
             "--verification-record", "VREC-001",
             "--work-order", "WO-001",
             "--version", "1.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
             "--tag", "v1.0.0",
             "--domain", "delivery",
         )
@@ -957,7 +957,7 @@ class RevisionCliTests(unittest.TestCase):
 
         (self.root / explicit_output).unlink()
         (self.root / "docs/engineering/assurance/evidence/VREC-001-evaluator.json").unlink()
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -967,8 +967,9 @@ class RevisionCliTests(unittest.TestCase):
             "--domain", "requirements",
             "--output", explicit_output,
         )
-        self.assertEqual(2, code)
-        self.assertIn("reserved", error)
+        self.assertEqual(1, code)
+        self.assertIn("reserved", output)
+        self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / explicit_output).exists())
 
         code, _, error = self.invoke(
@@ -1011,7 +1012,7 @@ class RevisionCliTests(unittest.TestCase):
     def test_capture_fails_for_dirty_worktree_without_output(self) -> None:
         self.initialize_candidate()
         (self.root / "dirty.txt").write_text("dirty\n", encoding="utf-8")
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -1019,9 +1020,26 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertIn("clean Git worktree", error)
+        self.assertEqual(1, code)
+        self.assertIn("clean Git worktree", output)
+        self.assertEqual(1, output.count("WEX302"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-001.md").exists())
+
+    def test_capture_names_the_evidence_class_when_the_dashboard_generator_fails(self) -> None:
+        # ECP-CLI-007: an evaluator-evidence failure is WEX303, not the state code.
+        from se_harness.provenance import EvidenceRefusal
+
+        self.initialize_candidate()
+        with mock.patch("se_harness.provenance._generate_snapshot", side_effect=EvidenceRefusal("dashboard generation must pass before recording verification")):
+            code, output, error = self.invoke(
+                "capture-verification", str(self.root), "--id", "VREC-002",
+                "--work-order", "WO-001", "--verification", "VER-001",
+                "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            )
+        self.assertEqual(1, code)
+        self.assertEqual("", error)
+        self.assertIn("WEX303: dashboard generation must pass", output)
+        self.assertEqual(1, output.count("WEX303"))
 
     def test_capture_requires_implemented_work_order(self) -> None:
         self.initialize_candidate()
@@ -1039,15 +1057,16 @@ class RevisionCliTests(unittest.TestCase):
         )
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(path))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "approved work only")
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification", str(self.root),
             "--id", "VREC-001",
             "--work-order", "WO-001",
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertIn("must be implemented", error)
+        self.assertEqual(1, code)
+        self.assertIn("must be implemented", output)
+        self.assertEqual(1, output.count("WEX301"), output)  # ECP-CLI-006/-007: one code, the cause class
 
     def test_capture_and_prepare_mixed_layout_aggregate_scope_deterministically(self) -> None:
         self.initialize_candidate(aggregate=True)
@@ -1115,7 +1134,7 @@ class RevisionCliTests(unittest.TestCase):
             "--work-order", "WO-002",
             "--work-order", "WO-001",
             "--version", "2.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
             "--tag", "v2.0.0",
         )
         self.assertEqual(0, code, error)
@@ -1141,7 +1160,7 @@ class RevisionCliTests(unittest.TestCase):
             "--verification-record", "VREC-001",
             "--work-order", "WO-001",
             "--version", "1.2.3",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
             "--tag", "v1.2.3",
         )
         self.assertEqual(0, code, error)
@@ -1162,7 +1181,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def test_aggregate_capture_rejects_duplicate_and_incomplete_scope(self) -> None:
         self.initialize_candidate(aggregate=True)
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1171,10 +1190,11 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertIn("duplicate", error)
+        self.assertEqual(1, code)
+        self.assertIn("duplicate", output)
+        self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
 
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1183,8 +1203,9 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertIn("missing VER-002", error)
+        self.assertEqual(1, code)
+        self.assertIn("missing VER-002", output)
+        self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
 
     def test_prepare_release_combines_multiple_records_at_one_commit(self) -> None:
@@ -1213,7 +1234,7 @@ class RevisionCliTests(unittest.TestCase):
             "--work-order", "WO-002",
             "--work-order", "WO-001",
             "--version", "2.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
         )
         self.assertEqual(0, code, error)
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
@@ -1236,7 +1257,7 @@ class RevisionCliTests(unittest.TestCase):
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "mixed verification governance")
 
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1246,10 +1267,11 @@ class RevisionCliTests(unittest.TestCase):
             "--work-order", "WO-001",
             "--work-order", "WO-002",
             "--version", "2.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
         )
-        self.assertEqual(2, code)
-        self.assertIn("one candidate commit", error)
+        self.assertEqual(1, code)
+        self.assertIn("one candidate commit", output)
+        self.assertEqual(1, output.count("WEX404"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
 
     def test_prepare_release_rejects_superseded_verification_record(self) -> None:
@@ -1269,7 +1291,7 @@ class RevisionCliTests(unittest.TestCase):
             "commit", "-m", "verification supersession governance",
         )
 
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1277,10 +1299,11 @@ class RevisionCliTests(unittest.TestCase):
             "--verification-record", "VREC-001",
             "--work-order", "WO-001",
             "--version", "2.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
         )
-        self.assertEqual(2, code)
-        self.assertIn("must be verified", error)
+        self.assertEqual(1, code)
+        self.assertIn("must be verified", output)
+        self.assertEqual(1, output.count("WEX401"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
 
     def test_prepare_release_rejects_ready_verification_record(self) -> None:
@@ -1289,23 +1312,24 @@ class RevisionCliTests(unittest.TestCase):
         write(record_path, verification_record(candidate, status="ready"))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
         self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "ready verification candidate")
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "prepare-release", str(self.root),
             "--id", "RLS-002",
             "--release-contract", "REL-001",
             "--verification-record", "VREC-001",
             "--work-order", "WO-001",
             "--version", "2.0.0",
-            "--authorized-by", "release-owner",
+            "--owner", "release-owner",
         )
-        self.assertEqual(2, code)
-        self.assertIn("must be verified", error)
+        self.assertEqual(1, code)
+        self.assertIn("must be verified", output)
+        self.assertEqual(1, output.count("WEX401"), output)  # ECP-CLI-006/-007: one code, the cause class
 
     def test_capture_refuses_existing_output(self) -> None:
         self.initialize_candidate()
         output = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         write(output, "repository owned")
-        code, _, error = self.invoke(
+        code, stdout, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -1313,8 +1337,9 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertIn("already exists", error)
+        self.assertEqual(1, code)
+        self.assertIn("already exists", stdout)
+        self.assertEqual(1, stdout.count("WEX304"), stdout)  # ECP-CLI-006/-007: one code, the cause class
         self.assertEqual("repository owned\n", output.read_text(encoding="utf-8"))
 
     def test_capture_fails_when_repository_has_no_head(self) -> None:
@@ -1323,7 +1348,7 @@ class RevisionCliTests(unittest.TestCase):
         self.git("init", "-b", "main")
         info_exclude = self.root / ".git/info/exclude"
         info_exclude.write_text("*\n", encoding="utf-8")
-        code, _, error = self.invoke(
+        code, output, error = self.invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -1331,8 +1356,9 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
-        self.assertEqual(2, code)
-        self.assertTrue("HEAD" in error or "revision" in error.lower(), error)
+        self.assertEqual(1, code)
+        self.assertTrue("HEAD" in output or "revision" in output.lower(), output)
+        self.assertEqual(1, output.count("WEX302"), output)  # ECP-CLI-006/-007: one code, the cause class
 
 
 if __name__ == "__main__":

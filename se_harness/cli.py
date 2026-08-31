@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -21,7 +23,7 @@ from se_harness.installer import (
 )
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
-from se_harness.provenance import capture_verification, prepare_release
+from se_harness.provenance import CAUSE_SUFFIX, capture_verification, prepare_release
 from se_harness.renumber import (
     RenumberError,
     apply_renumber_plan,
@@ -56,6 +58,34 @@ from se_harness.workflow import (
     plan_transition,
     preparation_result,
 )
+
+
+COMMAND_RESULT_SCHEMA = "se-harness-command-result-v1"
+#: A leading diagnostic code in a raised message (ECP-CLI-006): the code becomes the
+#: result's code and the message is the remainder, so no line prints a code twice.
+CODE_PREFIX = re.compile(r"^(WEX(?:-[A-Z]+)?-?\d{3}): (.*)$", re.S)
+
+
+def _split_code(message: str, default: str) -> tuple[str, str]:
+    match = CODE_PREFIX.match(message)
+    if match:
+        return match.group(1), match.group(2)
+    return default, message
+
+
+def _record_code(exc: HarnessError, family: str) -> tuple[str, str]:
+    """The code of a refused record preparation: its cause class, or the code it carries (ECP-CLI-007)."""
+
+    code, message = _split_code(str(exc), family + CAUSE_SUFFIX.get(getattr(exc, "cause", "state"), "1"))
+    return code, message
+
+
+def _command_result(command: str, outcome: str, **members: object) -> dict[str, object]:
+    return {"schema": COMMAND_RESULT_SCHEMA, "command": command, "outcome": outcome, **members}
+
+
+def _print_json(payload: object) -> None:
+    print(json.dumps(payload, indent=2, sort_keys=True))
 
 
 def _scan_repository(target: Path) -> bytes:
@@ -102,23 +132,27 @@ def _install(args: argparse.Namespace, mode: str) -> int:
     target = Path(args.target)
     report = _scan_repository(target.resolve()) if mode == "adopt" else None
     changes, old_lock = plan_install(target, project_name=args.project_name, mode=mode, adoption_report=report)
-    print(format_plan(changes))
-    if any(item.action == "conflict" for item in changes):
-        print("conflicts must be resolved before installation; no files were written", file=sys.stderr)
-        if any(
-            item.action == "conflict"
-            and item.path == ".github/workflows/engineering-harness.yml"
-            for item in changes
-        ):
-            print(
-                "preserve repository-specific CI under another workflow filename, then rerun installation",
-                file=sys.stderr,
-            )
+    listed = [{"action": item.action, "path": item.path} for item in changes]
+    conflicts = [item.path for item in changes if item.action == "conflict"]
+    if not args.json:
+        print(format_plan(changes))
+    if conflicts:
+        if args.json:
+            _print_json(_command_result(mode, "failed", changes=listed, written=False, conflicts=conflicts))
+        else:
+            print("conflicts must be resolved before installation; no files were written")
+            if ".github/workflows/engineering-harness.yml" in conflicts:
+                print("preserve repository-specific CI under another workflow filename, then rerun installation")
         return 1
     if args.dry_run:
+        if args.json:
+            _print_json(_command_result(mode, "completed", changes=listed, written=False))
         return 0
     apply_changes(target.resolve(), changes, old_lock, allow_updates=False)
-    print(f"installed se-harness {__version__} in {target.resolve()}")
+    if args.json:
+        _print_json(_command_result(mode, "completed", changes=listed, written=True))
+    else:
+        print(f"installed se-harness {__version__} in {target.resolve()}")
     return 0
 
 
@@ -155,23 +189,28 @@ def _report_undeclared_legacy_releases(target: Path) -> None:
 def _upgrade(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
     changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
-    print(format_plan(changes))
+    listed = [{"action": item.action, "path": item.path} for item in changes]
+    if not args.json:
+        print(format_plan(changes))
     if not args.apply:
         # REQ-LRE-002: report on the planning path what an apply would refuse, so the
         # operator learns it before the transaction rather than from a frozen gate.
         _report_undeclared_legacy_releases(target)
+        if args.json:
+            _print_json(_command_result("upgrade", "completed", changes=listed, written=False))
         return 0
-    blocked = [item for item in changes if item.action == "customized"]
+    blocked = [item.path for item in changes if item.action == "customized"]
     if blocked:
-        print("customized files require manual review; no files were written:", file=sys.stderr)
-        for item in blocked:
-            path = item.path
-            print(f"  {path}", file=sys.stderr)
-        if any(item.path == ".github/workflows/engineering-harness.yml" for item in blocked):
-            print(
-                "preserve repository-specific CI in a separate workflow and restore the managed destination before retrying",
-                file=sys.stderr,
-            )
+        if args.json:
+            _print_json(_command_result("upgrade", "failed", changes=listed, written=False, customized=blocked))
+        else:
+            print("customized files require manual review; no files were written:")
+            for path in blocked:
+                print(f"  {path}")
+            if ".github/workflows/engineering-harness.yml" in blocked:
+                print(
+                    "preserve repository-specific CI in a separate workflow and restore the managed destination before retrying"
+                )
         return 1
     apply_changes(
         target,
@@ -180,6 +219,12 @@ def _upgrade(args: argparse.Namespace) -> int:
         allow_updates=True,
         evidence_output=Path(args.evidence_output) if args.evidence_output else None,
     )
+    if args.json:
+        _print_json(_command_result(
+            "upgrade", "completed", changes=listed, written=True,
+            evidence_output=args.evidence_output if args.evidence_output else None,
+        ))
+        return 0
     print(f"upgraded managed files to se-harness {__version__}")
     if args.evidence_output:
         print(f"retained evaluator-upgrade evidence at {args.evidence_output}")
@@ -199,9 +244,13 @@ def _rehearse_recovery(args: argparse.Namespace) -> int:
         )
     except RecoveryRehearsalError as exc:
         raise HarnessError(str(exc)) from exc
-    print(f"recovery rehearsal: {report['result'].upper()}")
-    print(f"report: {(output.resolve() / 'rehearsal-report.json')}")
-    return 0
+    passed = report.get("result") == "pass"
+    if args.json:
+        _print_json(_command_result("rehearse-recovery", "completed" if passed else "failed", report=report))
+    else:
+        print(f"recovery rehearsal: {report['result'].upper()}")
+        print(f"report: {(output.resolve() / 'rehearsal-report.json')}")
+    return 0 if passed else 1
 
 
 def _distribution_script(script: str) -> Path:
@@ -272,9 +321,11 @@ def _inspect_repository(args: argparse.Namespace) -> int:
 def _doctor(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
     checks = inspect_installation(target)
-    for check in checks:
-        print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
+    if not args.json:
+        for check in checks:
+            print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
     validator = _distribution_script("validate_engineering_artifacts.py")
+    warnings: list[dict[str, str]] = []
     if validator.is_file():
         completed = subprocess.run(
             [sys.executable, "-B", str(validator), "--root", str(target), "--json"],
@@ -290,8 +341,46 @@ def _doctor(args: argparse.Namespace) -> int:
             report = {}
         for warning in report.get("warnings", []):
             if isinstance(warning, dict) and warning.get("code") == "W013":
-                print(f"WARN {warning['code']}: {warning.get('path', '<unknown>')}: {warning.get('message', '')}")
-    return 0 if all(item.passed for item in checks) else 1
+                warnings.append({
+                    "code": str(warning["code"]),
+                    "path": str(warning.get("path", "<unknown>")),
+                    "message": str(warning.get("message", "")),
+                })
+                if not args.json:
+                    print(f"WARN {warning['code']}: {warning.get('path', '<unknown>')}: {warning.get('message', '')}")
+    passed = all(item.passed for item in checks)
+    if args.json:
+        _print_json(_command_result(
+            "doctor", "completed" if passed else "failed",
+            checks=[{"name": item.name, "passed": item.passed, "detail": item.detail} for item in checks],
+            warnings=warnings,
+        ))
+    return 0 if passed else 1
+
+
+def _dashboard(args: argparse.Namespace) -> int:
+    extra = ["--output", args.output] if args.output else []
+    if not args.json:
+        return _run_distribution_script(Path(args.target), "generate_harness_dashboard.py", extra)
+    target = ensure_target(Path(args.target), must_exist=True)
+    completed = subprocess.run(
+        [sys.executable, "-B", str(_distribution_script("generate_harness_dashboard.py")), "--root", str(target), *extra],
+        cwd=target,
+        env=_distribution_environment(),
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    output = Path(args.output) if args.output else Path("target") / "harness-dashboard"
+    if not output.is_absolute():
+        output = target / output
+    manifest = output / "dashboard-manifest.json"
+    digest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+    _print_json(_command_result(
+        "dashboard", "completed" if completed.returncode == 0 else "failed",
+        output=output.as_posix(), manifest_sha256=digest,
+    ))
+    return 0 if completed.returncode == 0 else 1
 
 
 def _preflight(args: argparse.Namespace) -> int:
@@ -314,12 +403,7 @@ def _project(target: str, artifact: str | None, *, include_background: bool, jso
     try:
         result = project_selected(Path(target), artifact, include_background=include_background)
     except HarnessError as exc:
-        message = str(exc)
-        code = "WEX210"
-        if message.startswith("WEX-ECP-001: "):
-            code, message = message.split(": ", 1)
-        elif not message.startswith("WEX"):
-            message = f"WEX210: {message}"
+        code, message = _split_code(str(exc), "WEX210")
         result = failed_result("check", artifact, message, code=code, repository_blocker=isinstance(exc, RepositoryWorkflowError))
     print(render_workflow_json_v2(result) if json_output else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -426,6 +510,9 @@ def _pr_body(args: argparse.Namespace) -> int:
         )
     except SelectionError as exc:
         raise HarnessError(str(exc)) from exc
+    if args.json:
+        _print_json(_command_result("pr-body", "completed", body=body))
+        return 0
     sys.stdout.buffer.write(body.encode("utf-8"))
     sys.stdout.flush()
     return 0
@@ -433,10 +520,14 @@ def _pr_body(args: argparse.Namespace) -> int:
 
 def _select_work_order(args: argparse.Namespace) -> int:
     try:
-        print(select_from_event(Path(args.event), field=args.field))
-        return 0
+        value = select_from_event(Path(args.event), field=args.field)
     except SelectionError as exc:
         raise HarnessError(f"work-order selection: {exc}") from exc
+    if args.json:
+        _print_json(_command_result("select-work-order", "completed", field=args.field, value=value))
+    else:
+        print(value)
+    return 0
 
 
 def _capture_verification(args: argparse.Namespace) -> int:
@@ -453,9 +544,13 @@ def _capture_verification(args: argparse.Namespace) -> int:
         )
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
     except HarnessError as exc:
-        result = failed_result("capture-verification", args.record_id, str(exc), code="WEX301")
-        print(_render_selected_result(result, args), end="", file=sys.stdout if args.json else sys.stderr)
-        return 2
+        if str(exc).startswith("mutation guard "):
+            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+            raise
+        code, message = _record_code(exc, "WEX30")
+        result = failed_result("capture-verification", args.record_id, message, code=code)
+        print(_render_selected_result(result, args), end="")
+        return 1
     print(_render_selected_result(result, args), end="")
     return 0
 
@@ -469,16 +564,20 @@ def _prepare_release(args: argparse.Namespace) -> int:
             verification_record_ids=args.verification_record,
             work_order_ids=args.work_order,
             version=args.release_version,
-            authorized_by=args.authorized_by,
+            authorized_by=args.owner,
             tag=args.tag,
             output=args.output,
             domain=args.domain,
         )
         result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
     except HarnessError as exc:
-        result = failed_result("prepare-release", args.record_id, str(exc), code="WEX401")
-        print(_render_selected_result(result, args), end="", file=sys.stdout if args.json else sys.stderr)
-        return 2
+        if str(exc).startswith("mutation guard "):
+            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+            raise
+        code, message = _record_code(exc, "WEX40")
+        result = failed_result("prepare-release", args.record_id, message, code=code)
+        print(_render_selected_result(result, args), end="")
+        return 1
     print(_render_selected_result(result, args), end="")
     return 0
 
@@ -539,6 +638,12 @@ def _scaffold_domain(args: argparse.Namespace) -> int:
         title=args.title,
         dry_run=args.dry_run,
     )
+    if args.json:
+        _print_json(_command_result(
+            "scaffold-domain", "completed",
+            changes=[{"action": change.action, "path": change.path} for change in changes], dry_run=bool(args.dry_run),
+        ))
+        return 0
     for change in changes:
         print(f"{change.action:8} {change.path}")
     if args.dry_run:
@@ -556,6 +661,12 @@ def _create_artifact(args: argparse.Namespace) -> int:
         artifact_id=args.artifact_id,
         dry_run=args.dry_run,
     )
+    if args.json:
+        members: dict[str, object] = {"changes": [{"action": change.action, "path": change.path}], "dry_run": bool(args.dry_run)}
+        if change.allocated_id is not None:
+            members["allocated_id"] = change.allocated_id
+        _print_json(_command_result("create-artifact", "completed", **members))
+        return 0
     print(f"{change.action:8} {change.path}")
     if change.allocated_id is not None:
         refs = ", ".join(change.allocation_refs) if change.allocation_refs else "no local ref"
@@ -650,7 +761,10 @@ def _identity(args: argparse.Namespace) -> int:
         require_isolated_python=args.require_isolated_python,
         require_entry_point=args.require_entry_point,
     )
-    print(render_runtime_identity(report))
+    if args.json:
+        _print_json(report.to_dict())
+    else:
+        print(render_runtime_identity(report))
     return 0 if report.passed else 1
 
 
@@ -730,6 +844,7 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("target", nargs="?", default=".")
         command.add_argument("--project-name")
         command.add_argument("--dry-run", action="store_true")
+        command.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
         command.set_defaults(handler=lambda args, selected=name: _install(args, selected))
 
     validate = commands.add_parser("validate", help="validate the repository artifact graph")
@@ -752,10 +867,12 @@ def build_parser() -> argparse.ArgumentParser:
     dashboard = commands.add_parser("dashboard", help="generate the repository Harness Explorer")
     dashboard.add_argument("target", nargs="?", default=".")
     dashboard.add_argument("--output")
-    dashboard.set_defaults(handler=lambda args: _run_distribution_script(Path(args.target), "generate_harness_dashboard.py", ["--output", args.output] if args.output else []))
+    dashboard.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
+    dashboard.set_defaults(handler=_dashboard)
 
     doctor = commands.add_parser("doctor", help="check an installed harness")
     doctor.add_argument("target", nargs="?", default=".")
+    doctor.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     doctor.set_defaults(handler=_doctor)
 
     preflight = commands.add_parser("preflight", help="check work-order implementation or review readiness")
@@ -825,6 +942,7 @@ def build_parser() -> argparse.ArgumentParser:
     pr_body = commands.add_parser("pr-body", help="emit the LF-terminated pull-request body for one work order")
     pr_body.add_argument("target", nargs="?", default=".")
     pr_body.add_argument("--artifact", required=True, help="an approved or later work order")
+    pr_body.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object carrying the body")
     pr_body.set_defaults(handler=_pr_body)
 
     transition = commands.add_parser("transition", help="plan or atomically apply explicit lifecycle transitions")
@@ -845,6 +963,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--field", choices=("work-order", "restitution-digest"), default="work-order",
         help="declared field to select; restitution-digest prints empty text when absent",
     )
+    select_work.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     select_work.set_defaults(handler=_select_work_order)
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
@@ -854,6 +973,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--evidence-output",
         help="optional repository JSON path below docs/engineering/.../evidence/ for the transaction evidence",
     )
+    upgrade.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     upgrade.set_defaults(handler=_upgrade)
 
     rehearse = commands.add_parser(
@@ -864,6 +984,7 @@ def build_parser() -> argparse.ArgumentParser:
     rehearse.add_argument("--repository", default=".", help="operational repository that must remain unchanged")
     rehearse.add_argument("--candidate-commit", required=True, help="full synthetic immutable candidate commit")
     rehearse.add_argument("--target-version", default="999.0.0", help="synthetic target evaluator version")
+    rehearse.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object carrying the report")
     rehearse.set_defaults(handler=_rehearse_recovery)
 
 
@@ -872,6 +993,7 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold.add_argument("--domain", required=True)
     scaffold.add_argument("--title")
     scaffold.add_argument("--dry-run", action="store_true")
+    scaffold.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     scaffold.set_defaults(handler=_scaffold_domain)
 
     create = commands.add_parser("create-artifact", help="create one incomplete draft from the canonical artifact template")
@@ -881,6 +1003,7 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--id", dest="artifact_id", help="explicit identifier; omitted, the lowest free TYPE-DOMAIN-NNN across every local ref is allocated")
     create.add_argument("--dry-run", action="store_true")
     create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
+    create.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     create.set_defaults(handler=_create_artifact)
 
     renumber = commands.add_parser(
@@ -927,6 +1050,7 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--entry-point")
     identity.add_argument("--require-isolated-python", action="store_true")
     identity.add_argument("--require-entry-point", action="store_true")
+    identity.add_argument("--json", action="store_true", help="emit the se-harness-runtime-identity-v3 object")
     identity.set_defaults(handler=_identity)
 
     qualify = commands.add_parser(
@@ -1002,11 +1126,7 @@ def build_parser() -> argparse.ArgumentParser:
     release.add_argument("--verification-record", required=True, action="append", help="included verification record; repeat for aggregate releases")
     release.add_argument("--work-order", required=True, action="append", help="released work order; repeat for aggregate releases")
     release.add_argument("--version", required=True, dest="release_version")
-    release.add_argument(
-        "--authorized-by",
-        required=True,
-        help="retained compatibility name for the preparation actor and owner; does not authorize release",
-    )
+    release.add_argument("--owner", required=True, help="preparation actor and record owner; does not authorize the release")
     release.add_argument("--tag")
     release.add_argument("--output")
     release.add_argument("--domain", help="place the record in an explicit engineering domain")
@@ -1035,6 +1155,14 @@ def main(argv: list[str] | None = None) -> int:
             "harnessctl: next was removed after 0.11.0; run harnessctl check"
             + (f" --artifact {selected}" if selected else " [--artifact ID]")
             + " (add --json for the structured result)",
+            file=sys.stderr,
+        )
+        return 2
+    if arguments[:1] == ["prepare-release"] and "--authorized-by" in arguments:
+        # ECP-CLI-002: the preparation actor is --owner on both record commands.
+        print(
+            "harnessctl: --authorized-by was renamed after 0.11.0; run harnessctl prepare-release ... --owner ROLE"
+            " (the option names the preparation actor and record owner; it does not authorize the release)",
             file=sys.stderr,
         )
         return 2
