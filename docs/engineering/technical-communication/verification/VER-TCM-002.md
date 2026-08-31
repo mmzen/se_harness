@@ -2,13 +2,20 @@
 id = "VER-TCM-002"
 type = "verification"
 title = "Independent evidence for the diagnostic-code index"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 verifies = ["REQ-TCM-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T10:02:12Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green' for WO-TCM-003: no-drift, coverage, exclusion, shape, links and determinism rows; readings from the exact released 0.11.0 evaluator outside the checkout."
 +++
 
 # Verification Contract: Independent evidence for the diagnostic-code index

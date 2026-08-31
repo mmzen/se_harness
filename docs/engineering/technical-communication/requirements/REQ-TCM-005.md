@@ -2,7 +2,7 @@
 id = "REQ-TCM-005"
 type = "requirement"
 title = "A generated diagnostic-code index that cannot drift"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -13,6 +13,13 @@ source = "issue #281 (functional assessment FA-2, item #281b): no diagnostic-cod
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T10:02:12Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green' for WO-TCM-003: one generated diagnostic-code index that cannot drift (issue #281, item #281b of the functional assessment)."
 +++
 
 # Requirement: A generated diagnostic-code index that cannot drift

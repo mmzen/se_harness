@@ -2,7 +2,7 @@
 id = "WO-TCM-003"
 type = "work_order"
 title = "Generate the diagnostic-code index"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
@@ -30,6 +30,13 @@ paths = [
 implements = ["REQ-TCM-005"]
 specifications = ["SPEC-TCM-002"]
 verification = ["VER-TCM-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T10:02:12Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green', as a decision distinct from the approval of its definitions in the same transaction. Authorizes start preflight and then only the declared scope: the generator, the generated note, the pinning test, the two note links, this domain's index and the evidence packet; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no change to any diagnostic code or message, no hash-locked root file, no verification record, no release and no publication; the pull request's merge remains the owner's decision. Start preflight has not been run."
 +++
 
 # Work Order: Generate the diagnostic-code index

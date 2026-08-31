@@ -2,13 +2,20 @@
 id = "SPEC-TCM-002"
 type = "specification"
 title = "The generated diagnostic-code index"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-31"
 updated = "2026-08-31"
 
 [relations]
 specifies = ["REQ-TCM-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-08-31T10:02:12Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-08-31 by selecting the presented option 'Approve, start, complete on green' for WO-TCM-003: TCM-DCI-001 to TCM-DCI-006; the string-literal scanner with the curated registry, the deterministic page, the pinning test and the two links."
 +++
 
 # Specification: The generated diagnostic-code index
