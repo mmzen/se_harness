@@ -5,11 +5,11 @@ title = "Direct canonical-snapshot Explorer architecture"
 status = "implemented"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-13"
-updated = "2026-08-16"
+updated = "2026-09-01"
 
 [relations]
-addresses = ["REQ-DST-029", "REQ-DST-031", "REQ-DST-032", "REQ-DST-033"]
-conforms_to = ["SPEC-DST-008"]
+addresses = ["REQ-DST-029", "REQ-DST-031", "REQ-DST-033", "REQ-DST-067", "REQ-DST-068"]
+conforms_to = ["SPEC-DST-023"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -29,7 +29,7 @@ Harness Explorer is a static view over validator-derived repository state. The r
 - The validator owns formal graph diagnostics and never delegates authority to the UI.
 - The snapshot builder owns deterministic normalization, derived findings, definition coverage, readiness observations, revision provenance, supersession, experiments, and evidence indexes.
 - The renderer owns deterministic safe embedding into one managed HTML template.
-- The browser presentation owns only bounded in-memory view models, navigation, filtering, and visualization. It loads the pinned `3d-force-graph` bundle for the Overview topology and retains embedded non-3D views when that load fails.
+- The browser presentation owns only bounded in-memory view models, navigation, filtering, and visualization: a shell that verifies every resource it parses, the designed Overview, Lineage, Virtual Twin, and record components on a vendored component runtime and React, and the Readiness view. Everything the page executes ships inside the document.
 - The standard distribution owns canonical template copies, any reviewed local assets, managed hashes, and package parity.
 - `harnessctl dashboard` continues to dispatch to the installed target-local generator and preserve its result.
 
@@ -37,7 +37,7 @@ Harness Explorer is a static view over validator-derived repository state. The r
 
 Formal artifacts and Git observation feed the validator and snapshot builder. The renderer consumes the snapshot. The browser consumes the embedded snapshot. No data or decision flows from browser presentation back into formal artifacts, lifecycle state, verification capture, or release authority.
 
-The canonical standard-distribution template and active managed root copy are reconciled under existing managed ownership. Target repositories do not depend on this checkout or a hosted application, but viewing the optional 3D topology currently depends on `unpkg.com` serving the pinned library URL.
+The canonical standard-distribution template and active managed root copy are reconciled under existing managed ownership. Target repositories do not depend on this checkout or a hosted application, and the page requests no third-party origin.
 
 ## Data and control flow
 
@@ -47,8 +47,7 @@ repository artifacts + Git observation
   -> harness-dashboard-snapshot-v1
   -> safe deterministic HTML embedding
   -> bounded browser view models
-  -> original Overview / Lineage / Readiness composition
-  -> optional CDN-backed 3D topology plus local semantic fallback
+  -> designed Overview / Lineage / Virtual Twin / Readiness views and the record panel
   -> the five Explorer questions
 ```
 
@@ -56,7 +55,7 @@ repository artifacts + Git observation
 
 ## Trust boundaries
 
-Repository metadata, prose, paths, evidence, experiments, and Git observations are untrusted. They remain inert data throughout serialization and DOM construction and are never sent to the CDN. The public CDN and returned JavaScript are outside the repository trust boundary: the pinned version narrows accidental drift but does not provide content-addressed integrity, availability, privacy, or compromise protection. Executable repository markup remains prohibited.
+Repository metadata, prose, paths, evidence, experiments, and Git observations are untrusted. They remain inert data throughout serialization and DOM construction and are never sent to the CDN. No third-party origin participates at runtime; the vendored runtime and React builds are digest-verified at build time and evaluated as the template's own sources, never with repository text.
 
 ## Required patterns
 
@@ -65,22 +64,21 @@ Repository metadata, prose, paths, evidence, experiments, and Git observations a
 - Text-safe DOM construction and bounded graph algorithms.
 - Explicit visual and textual distinction for authority, derivation, absence, and history.
 - Transactional output and managed/package parity.
-- Preserve the reviewed prototype composition and canonical artifact-type strings.
-- Load only the exact pinned `3d-force-graph@1.79.0` URL.
-- Local fallback that retains all non-3D semantics when the optional visualization cannot run.
+- Preserve the designed composition as retained sources rebuilt by one deterministic build, and canonical artifact-type strings.
+- Name and request no remote origin; contain every resource failure to its view.
 
 ## Prohibited patterns
 
 - A persisted WebUI-specific graph, metrics, lineage, or readiness schema.
 - A timestamp in canonical snapshot data.
-- Runtime CDN other than the exact accepted `3d-force-graph@1.79.0` URL; hosted API, telemetry, npm install, or remote font requirement.
+- Any runtime CDN, hosted API, telemetry, npm install, remote font, or persistent browser storage.
 - Aggregate confidence or health scoring.
 - Inferring verified, released, covered, authoritative, or satisfied state in presentation code.
 - Dropping unknown types, rich finding fields, provenance, supersession, evidence, or experiments.
 
 ## Quality attributes and conformance
 
-The architecture prioritizes semantic fidelity, prototype fidelity, deterministic evidence, hostile-input safety, graceful degradation, accessibility, explainability, and distributable parity. Complete offline 3D availability is explicitly not guaranteed. `ADR-DST-008` records both the model-boundary decision and accepted CDN risk. `VER-DST-008` verifies contract mapping, determinism, escaping, bounded behavior, five-question coverage, exact artifact-type presentation, the permitted network boundary, fallback behavior, accessibility, managed integrity, and fresh-install parity.
+The architecture prioritizes semantic fidelity, prototype fidelity, deterministic evidence, hostile-input safety, graceful degradation, accessibility, explainability, and distributable parity. The page is complete offline. `ADR-DST-008` records both the model-boundary decision and accepted CDN risk. `VER-DST-008` verifies contract mapping, determinism, escaping, bounded behavior, five-question coverage, exact artifact-type presentation, the permitted network boundary, fallback behavior, accessibility, managed integrity, and fresh-install parity.
 
 ## Dependency reassessment: 2026-08-16
 
@@ -91,3 +89,15 @@ This consolidation strengthens the architecture's existing single-model and mana
 ## Related ADRs
 
 `ADR-DST-008` decides this architecture.
+
+## Amendment record
+
+**The presentation component becomes the designed self-contained page and the
+CDN dependency is removed, amended 2026-09-01 under `WO-DST-023` (`SPEC-DST-023`,
+`ADR-DST-013`).** The snapshot boundary, dependency direction from formal
+artifacts to presentation, safe embedding, transactional output, and
+managed parity are unchanged. The addressed requirements follow the
+supersession of `REQ-DST-032` by `REQ-DST-067` and add `REQ-DST-068`; the
+conformance target follows the supersession of `SPEC-DST-008` by
+`SPEC-DST-023`. `ADR-DST-008` continues to decide the snapshot boundary;
+`ADR-DST-013` decides the self-contained presentation.

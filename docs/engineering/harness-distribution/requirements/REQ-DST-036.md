@@ -2,10 +2,10 @@
 id = "REQ-DST-036"
 type = "requirement"
 title = "Navigate bounded context around filtered Explorer nodes"
-status = "approved"
+status = "superseded"
 owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-16"
-updated = "2026-08-16"
+updated = "2026-09-01"
 statement = "WHEN a reader filters the Explorer topology, THE SYSTEM SHALL offer bounded zero-, one-, and two-hop connected context around the matching artifacts while preserving filter meaning, relation direction and authority, deterministic limits, and an explicit distinction between matches and contextual nodes."
 verification_method = "automated-test-and-manual-review"
 
@@ -14,6 +14,14 @@ derives_from = ["CAP-DST-001"]
 +++
 
 # Requirement: Navigate bounded context around filtered Explorer nodes
+
+## Supersession
+
+Superseded on 2026-09-01 by `REQ-DST-067` under `WO-DST-023`, authorized by the
+repository owner's approval of the designed-Explorer packet. The zero-, one-, and two-hop filter context is replaced by the designed interactions: lenses that dim rather than remove on the Virtual Twin, and the lit spine of a selection on the Lineage board. The
+sections below record what the shipped product did while this artifact was
+active and are retained unchanged as history; they no longer bind the
+candidate.
 
 ## Rationale
 

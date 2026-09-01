@@ -2,16 +2,24 @@
 id = "SPEC-DST-011"
 type = "specification"
 title = "Structured and reversible Explorer Lineage"
-status = "approved"
+status = "superseded"
 owners = ["technical-owner", "product-owner", "quality-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-19"
+updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-040", "REQ-DST-041"]
 +++
 
 # Specification: Structured and reversible Explorer Lineage
+
+## Supersession
+
+Superseded on 2026-09-01 by `SPEC-DST-023` under `WO-DST-023`, authorized by the
+repository owner's approval of the designed-Explorer packet. It specified the presentation of the previous Explorer page; the designed self-contained page replaces that presentation, and `SPEC-DST-023` carries forward the source-data, determinism, and distribution obligations this contract also held. Its verification contract stays active because verified records bind it. The
+sections below record what the shipped product did while this artifact was
+active and are retained unchanged as history; they no longer bind the
+candidate.
 
 ## Scope
 

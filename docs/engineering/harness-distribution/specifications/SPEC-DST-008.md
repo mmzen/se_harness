@@ -2,16 +2,24 @@
 id = "SPEC-DST-008"
 type = "specification"
 title = "Canonical Harness Explorer WebUI"
-status = "implemented"
+status = "superseded"
 owners = ["technical-owner", "product-owner", "quality-owner", "security-owner"]
 created = "2026-08-13"
-updated = "2026-08-15"
+updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-032", "REQ-DST-033"]
 +++
 
 # Specification: Canonical Harness Explorer WebUI
+
+## Supersession
+
+Superseded on 2026-09-01 by `SPEC-DST-023` under `WO-DST-023`, authorized by the
+repository owner's approval of the designed-Explorer packet. It specified the presentation of the previous Explorer page; the designed self-contained page replaces that presentation, and `SPEC-DST-023` carries forward the source-data, determinism, and distribution obligations this contract also held. Its verification contract stays active because verified records bind it. The
+sections below record what the shipped product did while this artifact was
+active and are retained unchanged as history; they no longer bind the
+candidate.
 
 ## Scope
 

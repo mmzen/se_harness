@@ -2,16 +2,24 @@
 id = "SPEC-DST-012"
 type = "specification"
 title = "Safe content-rich Explorer artifact details"
-status = "approved"
+status = "superseded"
 owners = ["technical-owner", "product-owner", "security-owner", "quality-owner"]
 created = "2026-08-16"
-updated = "2026-08-19"
+updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-042", "REQ-DST-043", "REQ-DST-044", "REQ-DST-045", "REQ-DST-046", "REQ-DST-047"]
 +++
 
 # Specification: Safe content-rich Explorer artifact details
+
+## Supersession
+
+Superseded on 2026-09-01 by `SPEC-DST-023` under `WO-DST-023`, authorized by the
+repository owner's approval of the designed-Explorer packet. It specified the presentation of the previous Explorer page; the designed self-contained page replaces that presentation, and `SPEC-DST-023` carries forward the source-data, determinism, and distribution obligations this contract also held. Its verification contract stays active because verified records bind it. The
+sections below record what the shipped product did while this artifact was
+active and are retained unchanged as history; they no longer bind the
+candidate.
 
 ## Scope and authority
 

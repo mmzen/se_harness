@@ -2,10 +2,10 @@
 id = "REQ-DST-032"
 type = "requirement"
 title = "Render a safe and accessible Explorer with a resilient 3D view"
-status = "implemented"
+status = "superseded"
 owners = ["security-owner", "product-owner", "quality-owner"]
 created = "2026-08-13"
-updated = "2026-08-13"
+updated = "2026-09-01"
 statement = "WHEN Harness Explorer is opened from generated output, THE SYSTEM SHALL render repository data safely and responsively, keep its canonical evidence views available without the optional 3D dependency, and load only the explicitly accepted pinned 3D renderer from the documented CDN."
 verification_method = "automated-security-test-and-manual-accessibility-review"
 
@@ -14,6 +14,14 @@ derives_from = ["CAP-DST-001"]
 +++
 
 # Requirement: Render a safe local and accessible Explorer
+
+## Supersession
+
+Superseded on 2026-09-01 by `REQ-DST-067` under `WO-DST-023`, authorized by the
+repository owner's approval of the designed-Explorer packet. The obligation to load the pinned `3d-force-graph` renderer from the documented CDN is withdrawn: the designed page ships every byte it executes and names no remote location. The
+sections below record what the shipped product did while this artifact was
+active and are retained unchanged as history; they no longer bind the
+candidate.
 
 ## Rationale
 

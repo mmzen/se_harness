@@ -5,11 +5,11 @@ title = "Bounded repository-content Explorer pipeline"
 status = "implemented"
 owners = ["technical-owner", "security-owner"]
 created = "2026-08-16"
-updated = "2026-08-19"
+updated = "2026-09-01"
 
 [relations]
 addresses = ["REQ-DST-043", "REQ-DST-046"]
-conforms_to = ["SPEC-DST-012"]
+conforms_to = ["SPEC-DST-023"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -100,3 +100,11 @@ The architecture prioritizes hostile-input safety, deterministic provenance, sem
 ## Related ADRs
 
 `ADR-DST-009` decides this architecture.
+
+## Amendment record
+
+**The conformance target moves from `SPEC-DST-012` to `SPEC-DST-023`, amended
+2026-09-01 under `WO-DST-023`.** `SPEC-DST-012` is superseded by `SPEC-DST-023`, whose
+rule 16 carries the bounded, inert rendering of artifact bodies, EARS
+statements, and retained evidence this architecture conforms to. Nothing
+else in this architecture changes.
