@@ -5,7 +5,7 @@ title = "Verify deterministic progressive bundle integrity"
 status = "approved"
 owners = ["quality-owner", "security-owner", "release-owner"]
 created = "2026-08-17"
-updated = "2026-08-19"
+updated = "2026-09-01"
 
 [relations]
 verifies = ["REQ-DST-048", "REQ-DST-049", "REQ-DST-054", "REQ-DST-055"]
@@ -60,7 +60,7 @@ Verification treats the generated directory, manifest, bootstrap, and Pages inpu
 
 ## Performance and resilience checks
 
-- Measure UTF-8 bytes before compression: `index.html <= 262144`, summary `<= 262144`, and current repository topology `<= 2097152`.
+- Measure UTF-8 bytes before compression: `index.html <= 524288`, summary `<= 262144`, and current repository topology `<= 2097152`.
 - Retain 262,144-byte per-document and 16,777,216-byte total-content behavior with deterministic whole-document omission.
 - Record per-role counts/totals, largest resource, and full output size in generation summary without a score.
 - Generate larger consumer topology to prove target excess is observational while hard shell/content violations fail before promotion.
@@ -76,3 +76,9 @@ Retain exact commands/versions/exit codes; before/after byte breakdown; recursiv
 ## Residual uncertainty
 
 SHA-256 detects accidental or partial substitution only relative to the trusted generated HTML/publication context; it does not authenticate an attacker who replaces the whole site. Static hosts and browsers differ in caching and compression. Explicit governance, exact-set packaging, preparse verification, deterministic outputs, and uncompressed structural budgets bound those uncertainties.
+
+## Amendment record
+
+**The `index.html` measurement follows the 524,288-byte budget, proposed 2026-09-01
+under `WO-DST-023` (`SPEC-DST-013` amendment).** Every other measurement and check
+in this contract is unchanged.

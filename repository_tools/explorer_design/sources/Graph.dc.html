@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/styles.css">
+  <script src="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/_ds_bundle.js"></script>
+  <style>
+    :root{
+      --l-bg:#201e1d;--l-surface:#2d2b2b;--l-fg:#f3f2f2;--l-muted:#bab6b6;--l-faint:#7d7979;
+      --l-border:#444141;--l-rule:#eae9e9;--l-accent:#ff9783;--l-accent-deep:#ffc4b8;--l-soft:#4d170e;
+      --l-mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+      --s-draft:#7d7979;--s-approved:#9b9797;--s-progress:#bab6b6;--s-implemented:#d7d3d3;
+      --s-verified:#f3f2f2;--s-released:#ff9783;--s-rejected:#ff563c;--s-superseded:#7d7979;
+      --e-option:#d9b45c;--e-state:#8fc492;--e-trigger:#7cc3d2;--e-condition:#8ab4e8;--e-separator:#a3aab6;--e-subject:#c0a5e5;--e-obligation:#ff9783;--e-response:#a3b0e8;--e-unclassified:#7d7979;
+    }
+    html,body{margin:0;background:var(--l-bg);color:var(--l-fg)}
+    a{color:var(--l-accent-deep)}a:hover{color:var(--l-accent)}
+    button{font:inherit;border-radius:0}
+    :focus-visible{outline:2px solid var(--l-accent);outline-offset:2px}
+    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+  </style>
+</helmet>
+<div style="height:100vh;display:flex;font-family:var(--font-body);background:var(--l-bg);color:var(--l-fg);overflow:hidden">
+  <nav aria-label="Views" style="{{navStyle}}">
+    <div style="display:flex;align-items:center;gap:8px;padding:0 16px 16px">
+      <span style="width:12px;height:12px;background:#ec3013;flex:none"></span>
+      <sc-if value="{{navOpen}}" hint-placeholder-val="{{true}}"><span style="font-family:var(--font-heading);font-weight:800;font-size:13px">EXPLORER</span></sc-if>
+    </div>
+    <a href="Overview.dc.html" title="Home" style="display:block;padding:10px 16px;border-left:3px solid transparent;font:600 13px var(--font-body);color:var(--l-fg);text-decoration:none;white-space:nowrap;overflow:hidden" style-hover="background:var(--l-soft);color:var(--l-accent-deep)">{{homeLabel}}</a>
+    <a href="Lineage View.dc.html" title="Lineage" style="display:block;padding:10px 16px;border-left:3px solid transparent;font:600 13px var(--font-body);color:var(--l-fg);text-decoration:none;white-space:nowrap;overflow:hidden" style-hover="background:var(--l-soft);color:var(--l-accent-deep)">{{lineageLabel}}</a>
+    <a href="Graph.dc.html" aria-current="page" title="Virtual Twin" style="display:block;padding:10px 16px;border-left:3px solid var(--l-accent);background:var(--l-soft);font:700 13px var(--font-body);color:var(--l-accent-deep);text-decoration:none;white-space:nowrap;overflow:hidden">{{graphLabel}}</a>
+    <button onClick="{{toggleNav}}" aria-label="{{navBtnAria}}" title="{{navBtnAria}}" style="margin:16px 16px 0;min-height:30px;padding:0 8px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:700 11px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">{{navBtnLabel}}</button>
+  </nav>
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 24px 12px;border-bottom:2px solid var(--l-rule)">
+      <div style="min-width:0">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:14px;height:14px;background:#ec3013;flex:none"></span>
+          <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:-.01em">VERITYPLANE</span>
+          <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;color:var(--l-muted)">/ VIRTUAL TWIN</span>
+        </div>
+        <p style="margin:5px 0 0 24px;font:11px var(--l-mono);color:var(--l-muted)">{{countsLine}}</p>
+      </div>
+      <p style="margin:0;font:10.5px var(--l-mono);color:var(--l-faint);max-width:420px;text-align:right">drag to orbit · right-drag to pan · wheel to zoom · click a star to inspect · position = domain · color = stage · brightness = status · size = connectivity</p>
+    </header>
+    <div style="display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;padding:8px 24px;border-bottom:1px solid var(--l-border)">
+      <span style="font:10px var(--l-mono);letter-spacing:.07em;color:var(--l-faint);text-transform:uppercase">Stages</span>
+      <sc-for list="{{stageLegend}}" as="s" hint-placeholder-count="6">
+        <span style="display:inline-flex;align-items:center;gap:5px;font:10.5px var(--l-mono);color:var(--l-muted)"><i style="{{s.dot}}"></i>{{s.label}}</span>
+      </sc-for>
+      <span style="border-left:1px solid var(--l-border);padding-left:16px;font:10px var(--l-mono);letter-spacing:.07em;color:var(--l-faint);text-transform:uppercase">State Lens</span>
+      <sc-for list="{{lensChips}}" as="c" hint-placeholder-count="6">
+        <button onClick="{{c.onClick}}" aria-pressed="{{c.on}}" title="Dim everything else — never removes" style="{{c.style}}">{{c.label}}</button>
+      </sc-for>
+      <span style="font:10px var(--l-mono);color:var(--l-faint)">dims, never removes — the refused stay on display</span>
+    </div>
+    <div style="flex:1;min-height:0;display:flex">
+      <div ref="{{wrapRef}}" style="flex:1;min-width:0;position:relative;background:#191716">
+        <canvas ref="{{canvasRef}}" aria-label="Artifact constellation — every artifact in the repository, clustered by domain" style="position:absolute;inset:0;width:100%;height:100%;cursor:grab;display:block"></canvas>
+      </div>
+      <sc-if value="{{sel}}" hint-placeholder-val="{{false}}">
+        <aside aria-label="Selected artifact record" style="{{railStyle}}">
+          <div style="position:sticky;top:0;z-index:5;background:var(--l-surface);border-bottom:1px solid var(--l-border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <span style="min-width:0;font:10.5px var(--l-mono);color:var(--l-muted);overflow-wrap:anywhere">{{sel.domain}} constellation · {{sel.deg}} relations ({{sel.degIn}} in · {{sel.degOut}} out) · {{sel.spineNote}}</span>
+            <span style="display:flex;gap:6px;flex:none">
+              <a href="{{sel.linHref}}" style="display:inline-block;padding:6px 9px;border:1px solid var(--l-rule);font:700 11px var(--font-body);text-decoration:none;color:var(--l-fg);white-space:nowrap" style-hover="background:var(--l-soft)">Open in Lineage →</a>
+              <button onClick="{{clearSel}}" aria-label="Clear selection (Esc)" title="Clear selection (Esc)" style="padding:6px 9px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:700 11px var(--font-body)" style-hover="border-color:var(--l-accent)">✕</button>
+            </span>
+          </div>
+          <div style="padding:14px 16px 40px">
+            <dc-import name="Record" record-id="{{sel.id}}" data-root="{{dataRoot}}" source-url="{{srcUrl}}" revision="{{rev}}" dist="{{sel.dist}}" seed="{{sel.seed}}" hint-size="100%,500px"></dc-import>
+          </div>
+        </aside>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { ready: false, selId: null, lens: [], narrow: window.innerWidth < 900, navOpen: (localStorage.getItem('lin-nav-open') ?? '1') === '1' };
+  clearSel() { this._dirty = true; try { window.history.replaceState(null, '', window.location.pathname); } catch (e) {} this.setState({ selId: null }); }
+  STAGE_TYPES = [
+    ['purpose', ['intent', 'capability']],
+    ['definition', ['requirement', 'specification']],
+    ['design', ['architecture', 'adr']],
+    ['delivery', ['work_order']],
+    ['assurance', ['verification', 'verification_record']],
+    ['release', ['release_contract', 'release_record', 'operating_contract']]
+  ];
+  STAGE_COLORS = { purpose: [217, 180, 92], definition: [124, 195, 210], design: [192, 165, 229], delivery: [240, 140, 79], assurance: [143, 196, 146], release: [255, 86, 60] };
+  STAGE_LABELS = { purpose: 'Purpose', definition: 'Definition', design: 'Design', delivery: 'Delivery', assurance: 'Assurance', release: 'Release' };
+  BRIGHT = { draft: 0.4, approved: 0.62, in_progress: 0.52, implemented: 0.75, verified: 0.92, released: 1, rejected: 0.3, superseded: 0.26 };
+  KIND = { intent: 'Intent', capability: 'Capability', requirement: 'Requirement', specification: 'Specification', architecture: 'Architecture', adr: 'ADR', work_order: 'Work order', verification: 'Contract (VER)', verification_record: 'Record (VREC)', release_contract: 'Contract (REL)', release_record: 'Record (RLS)', operating_contract: 'Operating contract' };
+
+  navVals() {
+    const open = this.state.navOpen;
+    return {
+      navOpen: open,
+      navStyle: { width: open ? '170px' : '54px', flex: 'none', borderRight: '2px solid var(--l-rule)', background: 'var(--l-surface)', position: 'sticky', top: 0, alignSelf: 'flex-start', minHeight: '100vh', padding: '18px 0', transition: 'width .15s' },
+      homeLabel: open ? 'Home' : 'H', lineageLabel: open ? 'Lineage' : 'L', graphLabel: open ? 'Virtual Twin' : 'V',
+      navBtnLabel: open ? '⇤' : '⇥', navBtnAria: open ? 'Shrink the menu' : 'Expand the menu',
+      toggleNav: () => this.setState(s => { const v = !s.navOpen; try { localStorage.setItem('lin-nav-open', v ? '1' : '0'); } catch (e) {} return { navOpen: v }; })
+    };
+  }
+  hash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  rng(seed) { let a = seed; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  fib(i, n) { const y = 1 - 2 * (i + 0.5) / n; const r = Math.sqrt(Math.max(0, 1 - y * y)); const p = i * 2.39996322972865332; return [Math.cos(p) * r, y, Math.sin(p) * r]; }
+
+  componentDidMount() {
+    this._reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    Promise.all([
+      fetch('uploads/artifacts/topology.json').then(r => r.json()),
+      fetch('data/lineage-bundle.json').then(r => r.json())
+    ]).then(([topo, bundle]) => {
+      this._bundle = bundle;
+      this._lineageIds = new Set(bundle.artifacts.map(a => a.id));
+      this.buildGraph(topo);
+      const seed = this.hash(String(bundle.repository_revision || 'seed'));
+      this._angleY = (seed % 628) / 100; this._tilt = 0.34; this._zoom = 1;
+      const deep = new URLSearchParams(window.location.search).get('artifact');
+      this.setState({ ready: true, selId: deep && this._nodeById.has(deep) ? deep : null });
+      this._dirty = true;
+      this._loop = ts => { this.draw(ts); this._raf = requestAnimationFrame(this._loop); };
+      this._raf = requestAnimationFrame(this._loop);
+      this._onResize = () => { this._sized = false; this._dirty = true; const nw = window.innerWidth < 900; if (nw !== this.state.narrow) this.setState({ narrow: nw }); };
+      window.addEventListener('resize', this._onResize);
+      this._onKey = e => { if (e.key === 'Escape' && this.state.selId) this.clearSel(); };
+      window.addEventListener('keydown', this._onKey);
+    });
+  }
+  componentWillUnmount() { cancelAnimationFrame(this._raf); window.removeEventListener('resize', this._onResize); window.removeEventListener('keydown', this._onKey); }
+
+  buildGraph(topo) {
+    const stageOf = {}; this.STAGE_TYPES.forEach(([s, types]) => types.forEach(t => { stageOf[t] = s; }));
+    const arts = topo.artifacts.slice().sort((a, b) => a.id.localeCompare(b.id));
+    const ids = new Set(arts.map(a => a.id));
+    const rels = topo.relations.filter(r => ids.has(r.source) && ids.has(r.target) && r.relation !== 'superseded_by');
+    const deg = new Map(), degIn = new Map(), degOut = new Map();
+    const out = new Map(), inn = new Map();
+    rels.forEach(r => {
+      deg.set(r.source, (deg.get(r.source) || 0) + 1); deg.set(r.target, (deg.get(r.target) || 0) + 1);
+      degOut.set(r.source, (degOut.get(r.source) || 0) + 1); degIn.set(r.target, (degIn.get(r.target) || 0) + 1);
+      if (!out.has(r.source)) out.set(r.source, []); out.get(r.source).push(r);
+      if (!inn.has(r.target)) inn.set(r.target, []); inn.get(r.target).push(r);
+    });
+    this._out = out; this._in = inn;
+    const domains = [...new Set(arts.map(a => (a.id.split('-')[1] || 'MISC')))].sort();
+    const domCount = {}; arts.forEach(a => { const d = a.id.split('-')[1] || 'MISC'; domCount[d] = (domCount[d] || 0) + 1; });
+    // weighted spacing: big constellations sit on the outer shell, small ones nearer the core,
+    // and center distance scales with the whole population so clusters never swallow their gaps
+    const R = 320 + 9 * Math.sqrt(arts.length);
+    const bySize = domains.slice().sort((a, b) => domCount[b] - domCount[a] || a.localeCompare(b));
+    const centers = new Map();
+    bySize.forEach((d, i) => {
+      const [x, y, z] = this.fib(i, bySize.length);
+      const shell = R * (0.75 + 0.45 * Math.sqrt(domCount[d] / domCount[bySize[0]]));
+      centers.set(d, { x: x * shell, y: y * shell, z: z * shell, n: domCount[d], idx: 0 });
+    });
+    this._nodes = arts.map(a => {
+      const d = a.id.split('-')[1] || 'MISC';
+      const c = centers.get(d);
+      const [lx, ly, lz] = this.fib(c.idx++, c.n);
+      const rc = 10 + 6 * Math.sqrt(c.n);
+      const rnd = this.rng(this.hash(a.id));
+      const jitter = () => (rnd() - 0.5) * 6;
+      const stage = stageOf[a.type] || 'design';
+      const col = this.STAGE_COLORS[stage];
+      const bright = this.BRIGHT[a.status] ?? 0.7;
+      const ember = a.status === 'rejected' || a.status === 'superseded';
+      const mix = ember ? col.map(v => Math.round(v * 0.28 + 62 * 0.4)) : col.map(v => Math.round(v * bright + 20));
+      const dg = deg.get(a.id) || 0;
+      return {
+        id: a.id, type: a.type, status: a.status, title: a.title || '', statement: a.statement || '', path: a.path || '', domain: d, stage,
+        x: c.x + lx * rc + jitter(), y: c.y + ly * rc + jitter(), z: c.z + lz * rc + jitter(),
+        deg: dg, degIn: degIn.get(a.id) || 0, degOut: degOut.get(a.id) || 0,
+        r: 1.4 + 1.9 * Math.sqrt(dg), fill: 'rgb(' + mix.join(',') + ')', bright, ember
+      };
+    });
+    this._nodeById = new Map(this._nodes.map(n => [n.id, n]));
+    this._edges = rels;
+    this._centers = centers;
+    this._statuses = [...new Set(arts.map(a => a.status))].sort();
+    this._statusCount = {}; arts.forEach(a => { this._statusCount[a.status] = (this._statusCount[a.status] || 0) + 1; });
+    this._counts = { n: arts.length, e: rels.length };
+  }
+  spine(rootId) {
+    const nodes = new Set([rootId]); const edges = new Set();
+    const walk = dir => {
+      const q = [rootId]; const seen = new Set([rootId]);
+      while (q.length) {
+        const id = q.shift();
+        for (const r of ((dir === 'up' ? this._out : this._in).get(id) || [])) {
+          const next = dir === 'up' ? r.target : r.source;
+          edges.add(r.source + '|' + r.relation + '|' + r.target);
+          nodes.add(next);
+          if (!seen.has(next)) { seen.add(next); q.push(next); }
+        }
+      }
+    };
+    walk('up'); walk('down');
+    return { nodes, edges };
+  }
+  attach(el) {
+    if (!el || this._canvas === el) return;
+    this._canvas = el;
+    let px = 0, py = 0, moved = 0, down = false, panning = false;
+    el.addEventListener('contextmenu', e => e.preventDefault());
+    el.addEventListener('pointerdown', e => { down = true; panning = e.button === 2; moved = 0; px = e.clientX; py = e.clientY; el.setPointerCapture(e.pointerId); el.style.cursor = panning ? 'move' : 'grabbing'; });
+    el.addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - px, dy = e.clientY - py; moved += Math.abs(dx) + Math.abs(dy);
+      if (panning) { this._panX = (this._panX || 0) + dx; this._panY = (this._panY || 0) + dy; }
+      else { this._angleY -= dx * 0.005; this._tilt = Math.max(-1.2, Math.min(1.2, this._tilt + dy * 0.004)); }
+      px = e.clientX; py = e.clientY; this._dirty = true;
+    });
+    el.addEventListener('pointerup', e => {
+      const wasPan = panning;
+      down = false; panning = false; el.style.cursor = 'grab';
+      if (moved < 5 && !wasPan && e.button !== 2) this.pick(e);
+    });
+    el.addEventListener('wheel', e => { e.preventDefault(); this._zoom = Math.max(0.35, Math.min(3.2, this._zoom * (e.deltaY > 0 ? 0.92 : 1.08))); this._dirty = true; }, { passive: false });
+  }
+  pick(e) {
+    if (!this._proj) return;
+    const rect = this._canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let best = null, bd = 121;
+    for (const p of this._proj) {
+      const d = (p.sx - mx) * (p.sx - mx) + (p.sy - my) * (p.sy - my);
+      if (d < bd + p.sr * p.sr) { bd = d; best = p.id; }
+    }
+    try { window.history.replaceState(null, '', best ? '?artifact=' + encodeURIComponent(best) : window.location.pathname); } catch (err) {}
+    this.setState({ selId: best });
+  }
+  draw(ts) {
+    const cv = this._canvas, wrap = this._wrap;
+    if (!cv || !wrap || !this.state.ready) return;
+    const auto = !this._reduced;
+    if (!auto && !this._dirty && this._sized) return;
+    const dpr = window.devicePixelRatio || 1;
+    const W = wrap.clientWidth, H = wrap.clientHeight;
+    if (!this._sized || cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); this._sized = true; }
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#191716'; ctx.fillRect(0, 0, W, H);
+    const ang = this._angleY + (auto ? ts * 0.00005 : 0);
+    const cy = Math.cos(ang), sy = Math.sin(ang), cx = Math.cos(this._tilt), sx = Math.sin(this._tilt);
+    const persp = 1150, dist = 1050, zoom = this._zoom, midX = W / 2 + (this._panX || 0), midY = H / 2 + (this._panY || 0);
+    const proj = pt => {
+      const x1 = pt.x * cy + pt.z * sy, z1 = -pt.x * sy + pt.z * cy;
+      const y2 = pt.y * cx - z1 * sx, z2 = pt.y * sx + z1 * cx;
+      const s = persp / (persp + z2 + dist) * zoom;
+      return { sx: midX + x1 * s, sy: midY + y2 * s, s, z: z2 };
+    };
+    const selId = this.state.selId;
+    const sp = selId ? (this._spineCache && this._spineCache.id === selId ? this._spineCache : (this._spineCache = { id: selId, ...this.spine(selId) })) : null;
+    const lens = this.state.lens;
+    const lensOn = lens.length > 0;
+    const pass = n => !lensOn || lens.includes(n.status);
+    // edges
+    ctx.lineWidth = 0.6;
+    for (const r of this._edges) {
+      const a = this._nodeById.get(r.source), b = this._nodeById.get(r.target);
+      const pa = proj(a), pb = proj(b);
+      const onSpine = sp && sp.edges.has(r.source + '|' + r.relation + '|' + r.target);
+      let alpha = onSpine ? 0.75 : 0.07;
+      if (!onSpine && (sp || lensOn)) alpha = 0.03;
+      if (lensOn && pass(a) && pass(b) && !sp) alpha = 0.14;
+      ctx.strokeStyle = onSpine ? 'rgba(255,86,60,' + alpha + ')' : 'rgba(186,182,182,' + alpha + ')';
+      ctx.lineWidth = onSpine ? 1.2 : 0.6;
+      ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
+    }
+    // nodes, far first
+    const drawn = this._nodes.map(n => ({ n, p: proj(n) })).sort((a, b) => b.p.z - a.p.z);
+    this._proj = [];
+    for (const { n, p } of drawn) {
+      let alpha = 0.55 + 0.45 * n.bright;
+      if (lensOn && !pass(n)) alpha *= 0.13;
+      if (sp && !sp.nodes.has(n.id)) alpha *= 0.22;
+      const sr = Math.max(0.7, n.r * p.s);
+      if (n.bright >= 0.9 && alpha > 0.4) {
+        ctx.globalAlpha = 0.16 * alpha; ctx.fillStyle = n.fill;
+        ctx.beginPath(); ctx.arc(p.sx, p.sy, sr * 2.4, 0, 6.2832); ctx.fill();
+      }
+      ctx.globalAlpha = alpha; ctx.fillStyle = n.fill;
+      ctx.beginPath(); ctx.arc(p.sx, p.sy, sr, 0, 6.2832); ctx.fill();
+      if (n.id === selId) {
+        ctx.globalAlpha = 1; ctx.strokeStyle = '#ff9783'; ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.arc(p.sx, p.sy, sr + 4, 0, 6.2832); ctx.stroke();
+      }
+      this._proj.push({ id: n.id, sx: p.sx, sy: p.sy, sr: Math.max(sr, 4) });
+    }
+    ctx.globalAlpha = 1;
+    // domain labels
+    ctx.font = '10px ui-monospace,Consolas,monospace'; ctx.textAlign = 'center';
+    for (const [d, c] of this._centers) {
+      const p = proj(c);
+      ctx.fillStyle = 'rgba(125,121,121,' + (0.35 + 0.4 * Math.max(0, Math.min(1, (1050 - p.z) / 1400))) + ')';
+      ctx.fillText(d + ' · ' + c.n, p.sx, p.sy - (16 + 6 * Math.sqrt(c.n)) * p.s);
+    }
+    // selected label
+    if (selId && this._nodeById.has(selId)) {
+      const p = proj(this._nodeById.get(selId));
+      ctx.fillStyle = '#ffc4b8'; ctx.font = '700 11px ui-monospace,Consolas,monospace';
+      ctx.fillText(selId, p.sx, p.sy - 12);
+    }
+    this._dirty = false;
+  }
+  renderVals() {
+    const st = this.state;
+    const vals = { ...this.navVals(), countsLine: 'loading the full topology…', stageLegend: [], lensChips: [], sel: null, clearSel: () => {}, canvasRef: el => this.attach(el), wrapRef: el => { this._wrap = el; } };
+    if (!st.ready) return vals;
+    const b = this._bundle;
+    vals.countsLine = this._counts.n.toLocaleString('en-US') + ' artifacts · ' + this._counts.e.toLocaleString('en-US') + ' relations · every one on screen @ ' + String(b.repository_revision || '').slice(0, 7);
+    vals.stageLegend = this.STAGE_TYPES.map(([s]) => ({ label: this.STAGE_LABELS[s], dot: { display: 'inline-block', width: '9px', height: '9px', flex: 'none', background: 'rgb(' + this.STAGE_COLORS[s].join(',') + ')' } }));
+    vals.lensChips = this._statuses.map(s2 => {
+      const on = st.lens.includes(s2);
+      return {
+        label: s2.replace('_', ' ') + ' ' + this._statusCount[s2], on,
+        style: { minHeight: '24px', padding: '1px 8px', border: '1px solid ' + (on ? 'var(--l-accent)' : 'var(--l-border)'), background: on ? 'var(--l-soft)' : 'transparent', color: on ? 'var(--l-accent-deep)' : 'var(--l-muted)', cursor: 'pointer', font: (on ? '700 ' : '') + '10.5px var(--l-mono)' },
+        onClick: () => { this._dirty = true; this.setState(s3 => ({ lens: s3.lens.includes(s2) ? s3.lens.filter(x => x !== s2) : [...s3.lens, s2] })); }
+      };
+    });
+    vals.clearSel = () => this.clearSel();
+    vals.dataRoot = b.data_root || '';
+    vals.srcUrl = b.source_url || '';
+    vals.rev = String(b.repository_revision || '');
+    vals.railStyle = st.narrow
+      ? { position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 30, maxHeight: '55vh', overflowY: 'auto', background: 'var(--l-surface)', borderTop: '2px solid var(--l-rule)' }
+      : { width: '400px', flex: 'none', minWidth: 0, borderLeft: '2px solid var(--l-rule)', background: 'var(--l-surface)', overflowY: 'auto' };
+    const n = st.selId ? this._nodeById.get(st.selId) : null;
+    if (n) {
+      this._dirty = true;
+      const inL = this._lineageIds.has(n.id);
+      const spN = this._spineCache && this._spineCache.id === n.id ? this._spineCache.nodes.size : this.spine(n.id).nodes.size;
+      vals.sel = {
+        id: n.id, title: n.title, kind: this.KIND[n.type] || n.type, domain: n.domain,
+        statusLabel: String(n.status || '').replace('_', ' '),
+        dot: { display: 'inline-block', width: '8px', height: '8px', flex: 'none', background: n.fill, transform: n.ember ? 'rotate(45deg)' : 'none', borderRadius: n.ember ? 0 : '50%' },
+        deg: n.deg, degIn: n.degIn, degOut: n.degOut,
+        spineNote: 'its spine lights ' + spN + ' artifacts from orbit',
+        inLineage: inL, outOfSample: !inL,
+        dist: (b.distributions || {})[n.id] || null,
+        seed: { type: n.type, status: n.status, title: n.title, statement: n.statement || null, path: n.path || null },
+        linHref: 'Lineage View.dc.html?artifact=' + encodeURIComponent(n.id)
+      };
+    }
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

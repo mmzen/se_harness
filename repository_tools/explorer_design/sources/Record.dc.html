@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/styles.css">
+  <script src="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/_ds_bundle.js"></script>
+  <style>
+    :where(:root){--l-bg:#f3f2f2;--l-surface:#f8f4f4;--l-fg:#201e1d;--l-muted:#605d5d;--l-faint:#9b9797;--l-border:#d7d3d3;--l-rule:#201e1d;--l-accent:#ec3013;--l-accent-deep:#ae1800;--l-soft:#ffe0d9;--l-mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;--s-draft:#9b9797;--s-approved:#7d7979;--s-progress:#605d5d;--s-implemented:#444141;--s-verified:#201e1d;--s-released:#ec3013;--s-rejected:#ae1800;--s-superseded:#9b9797;--e-option:#a07d1f;--e-state:#4f8552;--e-trigger:#2f7f8f;--e-condition:#3a6ea8;--e-separator:#767d88;--e-subject:#7a5aa0;--e-obligation:#ec3013;--e-response:#5b6ab0;--e-unclassified:#9b9797}
+  </style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--l-fg);min-width:0">
+  <p style="margin:0;font:10px var(--l-mono);letter-spacing:.08em;color:var(--l-muted);text-transform:uppercase">{{typeGloss}}</p>
+  <h2 style="margin:6px 0 2px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font:800 22px var(--l-mono);letter-spacing:-.01em;overflow-wrap:anywhere">{{id}}
+    <sc-if value="{{srcHref}}" hint-placeholder-val="{{false}}">
+      <a href="{{srcHref}}" target="_blank" rel="noopener" style="font:700 10.5px var(--l-mono);letter-spacing:0;white-space:nowrap">{{srcLabel}}</a>
+    </sc-if>
+  </h2>
+  <p style="margin:0 0 10px;font-size:14.5px;line-height:1.4">{{title}}</p>
+  <p style="margin:0;display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;font:12px var(--l-mono);color:var(--l-muted)"><i style="{{dot}}"></i>{{statusLabel}}<sc-if value="{{commitBound}}" hint-placeholder-val="{{false}}"><span style="border:1px solid var(--l-rule);padding:2px 6px;font:700 10px var(--l-mono);color:var(--l-fg);white-space:nowrap">COMMIT-BOUND</span></sc-if><sc-if value="{{preparedDelegated}}" hint-placeholder-val="{{false}}"><span title="This record was prepared by the delegated non-human actor; the accountable human decision that follows is recorded in the trail" style="border:1px solid var(--l-accent-deep);padding:2px 6px;font:700 10px var(--l-mono);color:var(--l-accent-deep);white-space:nowrap">PREPARED BY DELEGATED ACTOR</span></sc-if></p>
+  <sc-if value="{{notice}}" hint-placeholder-val="{{false}}">
+    <p style="margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--s-rejected);background:var(--l-bg);font-size:12.5px;line-height:1.5">{{notice}}</p>
+  </sc-if>
+  <sc-if value="{{statement}}" hint-placeholder-val="{{false}}">
+    <blockquote style="margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)">
+      <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{statement}}</span>
+      <span aria-hidden="true" style="display:block;font-size:12.5px;line-height:1.95">{{statementNodes}}</span>
+      <span style="display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px">
+        <sc-for list="{{earsLegend}}" as="cl" hint-placeholder-count="8">
+          <span style="{{cl.style}}">{{cl.label}}</span>
+        </sc-for>
+      </span>
+      <span style="display:block;margin-top:8px;font:10px var(--l-mono);color:var(--l-faint)">{{earsNote}}</span>
+    </blockquote>
+  </sc-if>
+  <sc-if value="{{loading}}" hint-placeholder-val="{{true}}">
+    <div aria-label="Loading the record" style="margin-top:20px">
+      <div style="height:11px;width:38%;background:var(--l-border);opacity:.55"></div>
+      <div style="height:10px;width:86%;background:var(--l-border);opacity:.4;margin-top:12px"></div>
+      <div style="height:10px;width:74%;background:var(--l-border);opacity:.4;margin-top:8px"></div>
+      <div style="height:10px;width:80%;background:var(--l-border);opacity:.3;margin-top:8px"></div>
+      <p style="margin:12px 0 0;font:10px var(--l-mono);color:var(--l-faint)">reading the record…</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{err}}" hint-placeholder-val="{{false}}">
+    <p style="margin:16px 0 0;font:11px var(--l-mono);color:var(--l-muted)">The record could not be loaded — the identity above is from the topology. The graph stays usable; try again or open the artifact in Lineage.</p>
+  </sc-if>
+  <sc-if value="{{loaded}}" hint-placeholder-val="{{false}}">
+    <h3 style="margin:22px 0 2px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">Decision trail</h3>
+    <p style="margin:0 0 6px;font:10.5px var(--l-mono);color:var(--l-faint)">Verbatim from the record — who decided, when, and why.</p>
+    <sc-for list="{{events}}" as="ev" hint-placeholder-count="1">
+      <div style="{{ev.style}}">
+        <p style="margin:0;display:flex;flex-wrap:wrap;gap:4px 10px;font:700 11px var(--l-mono)">
+          <span>{{ev.from}} → {{ev.to}}</span>
+          <span style="font-weight:400;color:var(--l-muted)">{{ev.by}}</span>
+          <span style="font-weight:400;color:var(--l-faint)">{{ev.at}}</span>
+          <sc-if value="{{ev.elapsed}}" hint-placeholder-val="{{false}}"><span style="color:var(--l-muted);border:1px solid var(--l-border);padding:0 5px">{{ev.elapsed}}</span></sc-if>
+          <sc-if value="{{ev.delegated}}" hint-placeholder-val="{{false}}"><span style="color:var(--l-accent-deep)">DELEGATED · CI CHECK-RUN</span></sc-if>
+        </p>
+        <p style="margin:7px 0 0;font-size:12px;line-height:1.55;overflow-wrap:anywhere">{{ev.reason}}</p>
+      </div>
+    </sc-for>
+    <sc-if value="{{noEvents}}" hint-placeholder-val="{{false}}">
+      <p style="margin:0;font-size:12px;color:var(--l-muted)">{{noEventsNote}}</p>
+    </sc-if>
+    <sc-if value="{{hasFacts}}" hint-placeholder-val="{{false}}">
+      <h3 style="margin:22px 0 2px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">Evidence &amp; binding</h3>
+      <p style="margin:0 0 6px;font:10.5px var(--l-mono);color:var(--l-faint)">Facts you cannot fake by typing — they check out against the repository, or they don't.</p>
+      <sc-for list="{{facts}}" as="f" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px;align-items:start;padding:7px 0;border-top:1px solid var(--l-border)">
+          <span style="font:10px var(--l-mono);letter-spacing:.05em;color:var(--l-muted);text-transform:uppercase;padding-top:1px">{{f.k}}</span>
+          <span style="font:11.5px var(--l-mono);overflow-wrap:anywhere"><sc-if value="{{f.href}}" hint-placeholder-val="{{false}}"><a href="{{f.href}}" target="_blank" rel="noopener" title="Open commit on GitHub">{{f.v}}</a></sc-if><sc-if value="{{f.plain}}" hint-placeholder-val="{{true}}">{{f.v}}</sc-if></span>
+          <sc-if value="{{f.copy}}" hint-placeholder-val="{{false}}">
+            <button onClick="{{f.copy}}" aria-label="Copy value" title="Copy" style="min-height:22px;padding:0 7px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:10px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">COPY</button>
+          </sc-if>
+        </div>
+      </sc-for>
+    </sc-if>
+    <sc-if value="{{hasVerify}}" hint-placeholder-val="{{false}}">
+      <div style="margin-top:12px;padding:10px 12px;border:1px solid var(--l-rule);background:var(--l-bg)">
+        <span style="display:block;font:700 10px var(--l-mono);letter-spacing:.07em;text-transform:uppercase">Verify it yourself</span>
+        <sc-for list="{{verifyCmds}}" as="v" hint-placeholder-count="1">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:7px">
+            <span style="min-width:0">
+              <code style="display:block;font:11.5px var(--l-mono);overflow-wrap:anywhere">$ {{v.cmd}}</code>
+              <span style="display:block;font:10px var(--l-mono);color:var(--l-faint)">{{v.note}}</span>
+            </span>
+            <button onClick="{{v.copy}}" aria-label="Copy command" style="flex:none;min-height:22px;padding:0 7px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:10px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">COPY</button>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{hasDocs}}" hint-placeholder-val="{{false}}">
+      <h3 style="margin:22px 0 8px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">Retained evidence documents</h3>
+      <sc-for list="{{docs}}" as="d" hint-placeholder-count="2">
+        <div style="padding:7px 0;border-top:1px solid var(--l-border)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+            <span style="min-width:0">
+              <span style="display:block;font:700 11px var(--l-mono);overflow-wrap:anywhere">{{d.name}}</span>
+              <span style="display:block;margin-top:2px;font:10.5px var(--l-mono);color:var(--l-muted);overflow-wrap:anywhere">{{d.meta}}</span>
+            </span>
+            <sc-if value="{{d.hasText}}" hint-placeholder-val="{{false}}">
+              <button onClick="{{d.onToggle}}" aria-expanded="{{d.open}}" style="flex:none;min-height:26px;padding:0 8px;border:1px solid var(--l-border);background:transparent;color:var(--l-accent-deep);cursor:pointer;font:700 10px var(--l-mono);white-space:nowrap" style-hover="border-color:var(--l-accent);background:var(--l-soft)">{{d.openLabel}}</button>
+            </sc-if>
+          </div>
+          <sc-if value="{{d.text}}" hint-placeholder-val="{{false}}">
+            <div style="margin:8px 0 2px;padding:2px 12px 10px;max-height:420px;overflow:auto;background:var(--l-bg);border:1px solid var(--l-rule)">{{d.text}}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+      <sc-if value="{{docsMore}}" hint-placeholder-val="{{false}}">
+        <button onClick="{{showAllDocs}}" style="margin:6px 0 0;min-height:28px;padding:0 10px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:10.5px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">{{docsMore}}</button>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{hasBody}}" hint-placeholder-val="{{false}}">
+      <h3 style="margin:22px 0 2px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">The record itself</h3>
+      <p style="margin:0 0 6px;font:10.5px var(--l-mono);color:var(--l-faint)">{{bodyMeta}}</p>
+      <details open="{{bodyOpen}}" style="border:1px solid var(--l-border);background:var(--l-surface)">
+        <summary style="padding:8px 12px;cursor:pointer;font:700 11px var(--l-mono);color:var(--l-accent-deep)">Read the full body, verbatim</summary>
+        <div style="padding:2px 14px 12px;border-top:1px solid var(--l-border)">{{bodyNodes}}</div>
+      </details>
+    </sc-if>
+    <sc-if value="{{hasMeta}}" hint-placeholder-val="{{false}}">
+      <details style="margin-top:22px;border:1px solid var(--l-border);background:var(--l-surface)">
+        <summary style="padding:8px 12px;cursor:pointer;font:800 12px var(--font-heading);text-transform:uppercase;letter-spacing:.03em">Metadata</summary>
+        <div style="padding:0 12px 10px;border-top:1px solid var(--l-border)">
+          <sc-for list="{{metaFacts}}" as="m" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px;align-items:start;padding:7px 0;border-top:1px solid var(--l-border)">
+              <span style="font:10px var(--l-mono);letter-spacing:.05em;color:var(--l-muted);text-transform:uppercase;padding-top:1px">{{m.k}}</span>
+              <span style="font:11.5px var(--l-mono);overflow-wrap:anywhere">{{m.v}}</span>
+              <sc-if value="{{m.copy}}" hint-placeholder-val="{{false}}">
+                <button onClick="{{m.copy}}" aria-label="Copy value" title="Copy" style="min-height:22px;padding:0 7px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:10px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">COPY</button>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </details>
+    </sc-if>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:760},&quot;recordId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;WO-ECP-024&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;dataRoot&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;uploads/update/&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sourceUrl&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;revision&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;dist&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object | null&quot;},&quot;seed&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object | null&quot;}}">
+class Component extends DCLogic {
+  state = { detail: null, err: false, loadedId: null, openDoc: null, docsAll: false };
+  GLOSS = { intent: 'Intent — the stated purpose', capability: 'Capability — what this must let people do', requirement: 'Requirement — a testable obligation', specification: 'Specification — precisely how it is met', architecture: 'Architecture — the structural design', adr: 'Architecture decision record (ADR)', work_order: 'Work order (WO) — an authorized change', verification: 'Verification contract (VER) — what evidence is required', verification_record: 'Verification record (VREC) — evidence bound to an exact commit', release_contract: 'Release contract (REL) — what a release must prove', release_record: 'Release record (RLS) — the shipped, digest-bound unit', operating_contract: 'Operating contract' };
+  componentDidMount() { this.load(); }
+  componentDidUpdate() { if (this.props.recordId !== this._reqId) this.load(); }
+  load() {
+    const id = this.props.recordId;
+    if (!id) return;
+    this._reqId = id;
+    if (!window.__recCache) window.__recCache = new Map();
+    if (window.__recCache.has(id)) { this.setState({ detail: window.__recCache.get(id), err: false, loadedId: id, openDoc: null, docsAll: false }); return; }
+    this.setState({ detail: null, err: false, loadedId: null, openDoc: null, docsAll: false });
+    fetch((this.props.dataRoot || '') + 'artifacts/' + id + '.json')
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('http')))
+      .then(d => { window.__recCache.set(id, d); if (this.props.recordId === id) this.setState({ detail: d, err: false, loadedId: id }); })
+      .catch(() => { if (this.props.recordId === id) this.setState({ err: true }); });
+  }
+  fixText(t) {
+    const s = String(t == null ? '' : t);
+    if (!/[\u00c2\u00c3\u00e2]/.test(s)) return s;
+    const cp1252 = { 0x20AC: 0x80, 0x201A: 0x82, 0x0192: 0x83, 0x201E: 0x84, 0x2026: 0x85, 0x2020: 0x86, 0x2021: 0x87, 0x02C6: 0x88, 0x2030: 0x89, 0x0160: 0x8A, 0x2039: 0x8B, 0x0152: 0x8C, 0x017D: 0x8E, 0x2018: 0x91, 0x2019: 0x92, 0x201C: 0x93, 0x201D: 0x94, 0x2022: 0x95, 0x2013: 0x96, 0x2014: 0x97, 0x02DC: 0x98, 0x2122: 0x99, 0x0161: 0x9A, 0x203A: 0x9B, 0x0153: 0x9C, 0x017E: 0x9E, 0x0178: 0x9F };
+    try {
+      const bytes = new Uint8Array(s.length);
+      for (let i = 0; i < s.length; i++) { const c = s.codePointAt(i); const b = c <= 0xFF ? c : cp1252[c]; if (b === undefined) return s; bytes[i] = b; }
+      return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    } catch (e) { return s; }
+  }
+  fmtBytes(b) { if (b == null) return ''; if (b < 1024) return b + ' B'; return (Math.round(b / 102.4) / 10) + ' KB'; }
+  humanGap(msA, msB) { const ms = msB - msA; if (!(ms > 0)) return null; const min = Math.round(ms / 60000); if (min < 90) return min + ' min'; const h = Math.round(ms / 3600000); if (h < 48) return h + ' h'; return Math.round(ms / 86400000) + ' d'; }
+  dot(status) {
+    const m = { draft: ['var(--s-draft)', 0], approved: ['var(--s-approved)', 1], in_progress: ['var(--s-progress)', 0], implemented: ['var(--s-implemented)', 1], verified: ['var(--s-verified)', 1], released: ['var(--s-released)', 1], rejected: ['var(--s-rejected)', 2], superseded: ['var(--s-superseded)', 2] };
+    const [c, kind] = m[status] || ['var(--l-faint)', 0];
+    return { display: 'inline-block', flex: 'none', width: '8px', height: '8px', borderRadius: kind === 2 ? '0' : '50%', background: kind === 0 ? 'transparent' : c, border: kind === 0 ? '1.5px solid ' + c : 'none', transform: kind === 2 ? 'rotate(45deg)' : 'none' };
+  }
+  reasonNodes(text) {
+    const src = this.props.sourceUrl;
+    const parts = this.fixText(text).split(/([0-9a-f]{7,40}|check-run \d+|#\d{2,6})/g);
+    const codeStyle = { fontFamily: 'var(--l-mono)', fontSize: '11px', background: 'var(--l-surface)', border: '1px solid var(--l-border)', padding: '0 3px', whiteSpace: 'nowrap' };
+    return parts.map((p, i) => {
+      if (/^[0-9a-f]{7,40}$/.test(p) && src) return React.createElement('a', { key: i, href: src + '/commit/' + p, target: '_blank', rel: 'noopener', title: 'Open commit on GitHub', style: { ...codeStyle, color: 'var(--l-accent-deep)', textDecoration: 'none' } }, p);
+      if (/^([0-9a-f]{7,40}|check-run \d+|#\d{2,6})$/.test(p)) return React.createElement('code', { key: i, style: codeStyle }, p);
+      return p;
+    });
+  }
+  earsSegments(statement) {
+    const exact = this.fixText(statement);
+    const markers = [...exact.matchAll(/\b(WHERE|WHILE|WHEN|IF|THEN|THE\s+SYSTEM|SYSTEM|SHALL)\b/gi)];
+    const shall = markers.filter(m => m[1].toUpperCase() === 'SHALL');
+    const subject = markers.find(m => /SYSTEM/i.test(m[1]));
+    const complete = shall.length === 1 && subject && subject.index < shall[0].index;
+    if (!complete) return { complete: false, segments: [{ text: exact, clause: 'unclassified' }] };
+    const classes = { WHERE: 'option', WHILE: 'state', WHEN: 'trigger', IF: 'condition', THEN: 'separator', SYSTEM: 'subject', 'THE SYSTEM': 'subject', SHALL: 'obligation' };
+    const segments = []; let cursor = 0, current = 'unclassified';
+    markers.forEach(m => {
+      if (m.index > cursor) segments.push({ text: exact.slice(cursor, m.index), clause: current });
+      const key = m[1].replace(/\s+/g, ' ').toUpperCase();
+      const clause = classes[key] || 'unclassified';
+      segments.push({ text: m[0], clause });
+      current = clause === 'obligation' ? 'response' : clause;
+      cursor = m.index + m[0].length;
+    });
+    if (cursor < exact.length) segments.push({ text: exact.slice(cursor), clause: current });
+    return { complete: true, segments };
+  }
+  earsTokenStyle(clause) {
+    const c = 'var(--e-' + clause + ')';
+    return { borderBottom: clause === 'unclassified' ? '2px dashed ' + c : '2px solid ' + c, background: clause === 'unclassified' ? 'transparent' : 'color-mix(in srgb, ' + c + ' 13%, transparent)', padding: '1px 2px' };
+  }
+  earsNodes(statement) {
+    const { segments } = this.earsSegments(statement);
+    return segments.map((s, i) => React.createElement('span', { key: i, title: 'Clause: ' + s.clause, style: this.earsTokenStyle(s.clause) }, s.text));
+  }
+  mdNodes(text) {
+    const lines = this.fixText(text).split('\n');
+    const out = []; let i = 0, key = 0;
+    const inline = s => {
+      const seg = s.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
+      return seg.map((p, j) => {
+        if (/^`[^`]+`$/.test(p)) return React.createElement('code', { key: j, style: { fontFamily: 'var(--l-mono)', fontSize: '11.5px', background: 'var(--l-bg)', border: '1px solid var(--l-border)', padding: '0 3px' } }, p.slice(1, -1));
+        if (/^\*\*[^*]+\*\*$/.test(p)) return React.createElement('strong', { key: j }, p.slice(2, -2));
+        return p;
+      });
+    };
+    const preStyle = { margin: '10px 0', padding: '10px 12px', background: 'var(--l-bg)', border: '1px solid var(--l-border)', overflowX: 'auto', font: '11.5px/1.5 var(--l-mono)', whiteSpace: 'pre' };
+    while (i < lines.length) {
+      const ln = lines[i];
+      if (/^```/.test(ln)) {
+        const buf = []; i++;
+        while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i++; }
+        i++;
+        out.push(React.createElement('pre', { key: key++, style: preStyle }, buf.join('\n')));
+        continue;
+      }
+      if (/^\|/.test(ln)) {
+        const buf = [];
+        while (i < lines.length && /^\|/.test(lines[i])) { buf.push(lines[i]); i++; }
+        out.push(React.createElement('pre', { key: key++, style: preStyle }, buf.join('\n')));
+        continue;
+      }
+      const h = ln.match(/^(#{1,6})\s+(.*)$/);
+      if (h) {
+        const lvl = h[1].length;
+        out.push(React.createElement('h' + Math.min(6, lvl + 2), { key: key++, style: { margin: '16px 0 6px', fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: (lvl <= 1 ? 16 : lvl === 2 ? 14 : 13) + 'px', lineHeight: 1.25 } }, h[2]));
+        i++; continue;
+      }
+      if (/^\s*([-*]|\d+\.)\s+/.test(ln)) {
+        const items = [];
+        while (i < lines.length && /^\s*([-*]|\d+\.)\s+/.test(lines[i])) {
+          let item = lines[i].replace(/^\s*([-*]|\d+\.)\s+/, ''); i++;
+          while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && !/^\s*([-*]|\d+\.)\s+/.test(lines[i])) { item += ' ' + lines[i].trim(); i++; }
+          items.push(item);
+        }
+        out.push(React.createElement('ul', { key: key++, style: { margin: '8px 0', paddingLeft: '20px' } },
+          items.map((it, j) => React.createElement('li', { key: j, style: { margin: '3px 0', fontSize: '12.5px', lineHeight: 1.55 } }, inline(it)))));
+        continue;
+      }
+      if (/^>/.test(ln)) {
+        const buf = [];
+        while (i < lines.length && /^>/.test(lines[i])) { buf.push(lines[i].replace(/^>\s?/, '')); i++; }
+        out.push(React.createElement('blockquote', { key: key++, style: { margin: '10px 0', padding: '8px 12px', borderLeft: '3px solid var(--l-rule)', background: 'var(--l-bg)', fontSize: '12.5px', lineHeight: 1.55 } }, buf.join(' ')));
+        continue;
+      }
+      if (!ln.trim()) { i++; continue; }
+      const buf = [ln];
+      i++;
+      while (i < lines.length && lines[i].trim() && !/^(#|```|\||>|\s*([-*]|\d+\.)\s)/.test(lines[i])) { buf.push(lines[i]); i++; }
+      out.push(React.createElement('p', { key: key++, style: { margin: '8px 0', fontSize: '12.5px', lineHeight: 1.6, overflowWrap: 'anywhere' } }, inline(buf.join(' '))));
+    }
+    return out;
+  }
+  renderVals() {
+    const p = this.props;
+    const id = p.recordId || '';
+    const seed = p.seed || {};
+    const st = this.state;
+    const d = st.loadedId === id ? st.detail : null;
+    const a = d ? { id, ...seed, ...d.artifact } : { id, ...seed };
+    const loaded = !!d;
+    const srcUrl = p.sourceUrl || '', rev = String(p.revision || '');
+    const dist = p.dist || null;
+    const copyFn = v => () => { if (navigator.clipboard) navigator.clipboard.writeText(String(v)); };
+    let notice = null;
+    if (a.status === 'rejected') notice = 'Rejected — retained, not hidden.' + (a.rejection_reason ? ' Reason, verbatim: ' + this.fixText(a.rejection_reason) : ' Rejection disposes of this proposal; it does not reject any released implementation.');
+    if (a.status === 'superseded') notice = 'Superseded' + (a.superseded_at ? ' on ' + String(a.superseded_at).slice(0, 10) : '') + (a.supersession_authorized_by ? ' — authorized by ' + a.supersession_authorized_by : '') + '. The record is retained rather than deleted or falsely verified.';
+    const vals = {
+      id, typeGloss: this.GLOSS[a.type] || a.type || 'artifact', title: this.fixText(a.title || ''),
+      statusLabel: String(a.status || '').replace('_', ' '), dot: this.dot(a.status),
+      commitBound: !!a.commit, preparedDelegated: String(a.prepared_by || '').includes('delegated'),
+      srcHref: srcUrl && a.path ? srcUrl + '/blob/' + rev + '/' + a.path : false,
+      srcLabel: 'View source at ' + rev.slice(0, 7) + ' ↗',
+      notice: notice || false,
+      statement: a.statement ? this.fixText(a.statement) : false,
+      statementNodes: a.statement ? this.earsNodes(a.statement) : false,
+      earsLegend: a.statement ? ['option', 'state', 'trigger', 'condition', 'subject', 'obligation', 'response', 'unclassified'].map(cl => ({ label: cl, style: { ...this.earsTokenStyle(cl), font: '10px var(--l-mono)' } })) : false,
+      earsNote: a.statement ? (this.earsSegments(a.statement).complete ? 'EARS clause highlighting — presentation only, the exact canonical statement is preserved.' : 'Not deterministically segmented as EARS — the exact text stays unclassified.') : false,
+      loading: !loaded && !st.err && !!id, err: st.err, loaded,
+      events: [], noEvents: false, noEventsNote: '', hasFacts: false, facts: [], hasVerify: false, verifyCmds: [],
+      hasDocs: false, docs: [], docsMore: false, showAllDocs: () => {}, hasBody: false, bodyMeta: '', bodyOpen: false, bodyNodes: false, hasMeta: false, metaFacts: []
+    };
+    if (!loaded) return vals;
+    vals.events = (a.lifecycle_events || []).map((ev, ei, arr) => {
+      const prev = ei > 0 ? Date.parse(arr[ei - 1].decided_at) : NaN;
+      const cur = Date.parse(ev.decided_at);
+      const gap = ei > 0 && !isNaN(prev) && !isNaN(cur) ? this.humanGap(prev, cur) : null;
+      return {
+        from: ev.from, to: ev.to, by: ev.decided_by, at: ev.decided_at, reason: this.reasonNodes(ev.reason),
+        elapsed: gap ? '+' + gap : false,
+        delegated: String(ev.decided_by || '').includes('delegated'),
+        style: { margin: '10px 0 0', padding: '10px 12px', background: 'var(--l-bg)', borderLeft: '3px solid ' + (String(ev.decided_by || '').includes('delegated') ? 'var(--l-accent)' : 'var(--l-rule)') }
+      };
+    });
+    vals.noEvents = vals.events.length === 0;
+    vals.noEventsNote = a.status === 'draft' ? 'None yet — a draft awaits its first decision.' : 'No lifecycle transitions retained on this record.';
+    const facts = [];
+    const push = (k, v, copy, href) => { if (v !== undefined && v !== null && v !== '') facts.push({ k, v: String(v), copy: copy ? copyFn(v) : false, href: href || false, plain: !href }); };
+    push('version', a.version); push('tag', a.tag);
+    push('commit', a.commit, true, srcUrl && a.commit ? srcUrl + '/commit/' + a.commit : null);
+    if (a.worktree_state) push('worktree', a.worktree_state);
+    push('prepared', a.prepared_at ? a.prepared_at + (a.prepared_by ? ' · ' + a.prepared_by : '') : null);
+    push('verified', a.verified_at ? a.verified_at + (a.verified_by ? ' · ' + a.verified_by : '') : null);
+    push('released', a.released_at ? a.released_at + (a.authorized_by ? ' · ' + a.authorized_by : '') : null);
+    push('evaluator sha256', a.evaluator_evidence_sha256, true);
+    push('snapshot sha256', a.artifact_snapshot_sha256, true);
+    const distT = dist || a.distribution || null;
+    if (distT) {
+      push('wheel', distT.wheel);
+      push('wheel sha256', distT.wheel_sha256, true);
+      push('sdist', distT.sdist);
+      push('sdist sha256', distT.sdist_sha256, true);
+    }
+    push('superseded', a.superseded_at ? a.superseded_at + (a.supersession_authorized_by ? ' · ' + a.supersession_authorized_by : '') : null);
+    push('rejected', a.rejected_at ? a.rejected_at + (a.rejected_by ? ' · ' + a.rejected_by : '') : null);
+    vals.facts = facts; vals.hasFacts = facts.length > 0;
+    const verifyCmds = [];
+    if (a.commit && (a.type === 'verification_record' || a.type === 'release_record')) verifyCmds.push({ cmd: 'git show ' + String(a.commit).slice(0, 12), note: 'the bound candidate exists and is this change' });
+    if (a.type === 'release_record' && distT && distT.wheel) {
+      const pkg = String(distT.wheel).split('-')[0].replace(/_/g, '-');
+      if (a.version) verifyCmds.push({ cmd: 'pip download ' + pkg + '==' + a.version, note: 'fetch the published wheel' });
+      if (distT.wheel_sha256) verifyCmds.push({ cmd: 'sha256sum ' + distT.wheel, note: 'must print ' + distT.wheel_sha256.slice(0, 12) + '…' });
+    }
+    vals.verifyCmds = verifyCmds.map(v => ({ ...v, copy: copyFn(v.cmd) }));
+    vals.hasVerify = verifyCmds.length > 0;
+    const docs = d.evidence_documents || [];
+    const docCap = st.docsAll ? docs.length : 6;
+    if (!window.__recText) window.__recText = new Map();
+    vals.docs = docs.slice(0, docCap).map((doc, di) => {
+      const name = String(doc.path || '').split('/').pop();
+      const hasText = !!doc.raw_path;
+      const size = this.fmtBytes(doc.bytes);
+      const assoc = (doc.associations || []).join(', ');
+      const key = id + '|' + di;
+      const open = st.openDoc === key;
+      let meta;
+      if (hasText) meta = (size ? size + ' · ' : '') + (assoc ? 'evidence for ' + assoc : '') + (doc.sha256 ? ' · sha256 ' + doc.sha256.slice(0, 12) + '…' : '');
+      else meta = (size ? size + ' · ' : '') + 'machine evidence, retained in the repository' + (assoc ? ' · ' + assoc : '');
+      return {
+        name, meta, hasText, open,
+        openLabel: open ? 'CLOSE ×' : 'READ →',
+        text: open ? this.mdNodes(window.__recText.get(key) || 'Loading evidence text…') : false,
+        onToggle: hasText ? () => {
+          if (this.state.openDoc === key) { this.setState({ openDoc: null }); return; }
+          this.setState({ openDoc: key });
+          if (!window.__recText.has(key)) {
+            fetch((this.props.dataRoot || '') + doc.raw_path).then(r => r.ok ? r.text() : 'This evidence text could not be fetched (' + doc.raw_path + ').').catch(() => 'This evidence text could not be fetched (' + doc.raw_path + ').')
+              .then(t => { window.__recText.set(key, this.fixText(t)); if (this.state.openDoc === key) this.forceUpdate(); });
+          }
+        } : false
+      };
+    });
+    vals.hasDocs = vals.docs.length > 0;
+    vals.docsMore = !st.docsAll && docs.length > 6 ? 'Show all ' + docs.length + ' retained documents' : false;
+    vals.showAllDocs = () => this.setState({ docsAll: true });
+    if (a.content && a.content.markdown) {
+      vals.hasBody = true;
+      vals.bodyOpen = ['intent', 'capability', 'requirement', 'specification', 'architecture', 'adr'].includes(a.type);
+      vals.bodyMeta = this.fmtBytes(a.content.bytes) + (a.content.sha256 ? ' · sha256 ' + a.content.sha256.slice(0, 12) + '…' : '');
+      vals.bodyNodes = this.mdNodes(a.content.markdown);
+    }
+    const metaFacts = [];
+    const pushMeta = (k, v, copy) => { if (v !== undefined && v !== null && v !== '') metaFacts.push({ k, v: String(v), copy: copy ? copyFn(v) : false }); };
+    pushMeta('owners', (a.owners || []).join(', '));
+    pushMeta('authority', a.authority);
+    if (a.verification_method) pushMeta('method', [].concat(a.verification_method).join(', '));
+    pushMeta('created', a.created); pushMeta('updated', a.updated);
+    if (a.git_object_format) pushMeta('object format', a.git_object_format);
+    if (a.content) { pushMeta('body size', this.fmtBytes(a.content.bytes)); if (a.content.sha256) pushMeta('content sha256', a.content.sha256, true); }
+    pushMeta('source', a.path);
+    vals.metaFacts = metaFacts; vals.hasMeta = metaFacts.length > 0;
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

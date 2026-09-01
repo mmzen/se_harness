@@ -5,7 +5,7 @@ title = "Verify progressive Explorer acquisition and navigation"
 status = "approved"
 owners = ["quality-owner", "security-owner", "product-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-09-01"
 
 [relations]
 verifies = ["REQ-DST-050", "REQ-DST-051", "REQ-DST-052", "REQ-DST-053"]
@@ -30,7 +30,7 @@ Browser tests observe actual HTTP requests, delayed/reordered responses, DOM out
 
 - Start the page and assert request order: index, manifest, summary; no readiness, artifact, or evidence content before its trigger.
 - Enter Overview/Lineage and verify one topology request; enter Readiness and verify one readiness request.
-- Visit 25 artifacts, navigate Back/Forward/initial, branch from history, and confirm the 20-entry window, reveal, focus, and request/cache counts.
+- Visit several artifacts, navigate back and forward through the Lineage history controls, and confirm the request/cache counts.
 - Expand one of several evidence documents, then one shared by another artifact; verify exact requests, digest reuse, safe rendering, and metadata visibility.
 - Delay artifact A, select B, complete B then A, and prove B remains selected; repeat with abort unavailable.
 - Tamper each resource class and verify no bytes are parsed/rendered before size/digest checks.
@@ -48,7 +48,7 @@ Browser tests observe actual HTTP requests, delayed/reordered responses, DOM out
 
 - One verified-fetch boundary performs same-origin/path/HTTP/size/SHA/schema checks before parsing.
 - No `eval`, dynamic import, unsafe URL construction, persistent storage, service worker, telemetry, polling, or backend endpoint exists.
-- Existing renderer/sanitizer, EARS, relation direction/authority, semantic labels, 20-history logic, graph CDN fallback, and Readiness provenance remain intact.
+- Renderer safety, EARS clauses, relation direction/authority, semantic labels, Lineage history, and Readiness provenance remain intact; no remote origin is requested.
 - CSP permits required same-origin data while preserving active-content and external-origin restrictions.
 
 ## Security and privacy checks
@@ -76,3 +76,10 @@ Retain browser/server versions, exact request logs and order, resource hashes, d
 ## Residual uncertainty
 
 Network timing and browser scheduling vary, so correctness relies on tokens/invariants rather than timing thresholds. Web Crypto and static HTTP are required for supported progressive operation. Manual accessibility and performance review supplements, but does not replace, deterministic request and state tests.
+
+## Amendment record
+
+**History and CDN checks follow the `SPEC-DST-014` amendment, proposed 2026-09-01
+under `WO-DST-023`.** The `REQ-DST-051` matrix row's reference to the 20-visit
+window reads as the Lineage history controls of the designed page. Every
+other check is unchanged.

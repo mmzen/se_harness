@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' 'unsafe-eval'; img-src data:; connect-src 'self'; font-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Harness Explorer</title>
+  <style>
+__EXPLORER_STYLES__
+  </style>
+</head>
+<body>
+<noscript><p class="hx-fallback">Harness Explorer renders repository evidence with scripts enabled. The generated bundle beside this page remains readable as plain JSON and text.</p></noscript>
+<div id="harness-explorer-fallback" class="hx-fallback" role="alert" hidden>
+  <strong>Harness Explorer cannot load this bundle.</strong>
+  <span data-message></span>
+  <span>Every declared resource stays inspectable in the generated directory; no approval, verification, or release decision is inferred by this page.</span>
+</div>
+<x-dc>
+  <div data-explorer-root="">
+    <sc-if value="{{isOverview}}" hint-placeholder-val="{{false}}"><dc-import name="Overview" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{isLineage}}" hint-placeholder-val="{{false}}"><dc-import name="Lineage View" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{isGraph}}" hint-placeholder-val="{{false}}"><dc-import name="Graph" hint-size="100%,100vh"></dc-import></sc-if>
+    <sc-if value="{{isReadiness}}" hint-placeholder-val="{{false}}"><div ref="{{readinessRef}}"></div></sc-if>
+  </div>
+</x-dc>
+<script id="harness-dashboard-bootstrap" type="application/json">__HARNESS_BOOTSTRAP_JSON__</script>
+<script>
+__EXPLORER_RUNTIME__
+</script>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { view: window.HarnessExplorer.view() };
+  renderVals() {
+    const view = this.state.view;
+    return {
+      isOverview: view === 'overview',
+      isLineage: view === 'lineage',
+      isGraph: view === 'graph',
+      isReadiness: view === 'readiness',
+      readinessRef: element => { if (element) window.HarnessExplorer.renderReadiness(element); }
+    };
+  }
+}
+</script>
+</body>
+</html>

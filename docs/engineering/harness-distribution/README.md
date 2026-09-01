@@ -102,6 +102,12 @@ Leaving-set managed-path retirement extension (issue #271):
 
 No architecture or ADR relation is selected for `REQ-DST-066`: the retirement rule is upgrade-transaction behaviour inside the installer boundary `ARCH-DST-001` already draws, and no active architecture declares that it addresses the new requirement. `SPEC-DST-001`'s upgrade action vocabulary and `SPEC-ECP-007`'s `ECP-SKL-004` are amended by record under `WO-DST-022`.
 
+Designed self-contained Explorer:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-067`, `REQ-DST-068` -> `SPEC-DST-023`, `ARCH-DST-008` (amended), `ADR-DST-013`, `VER-DST-023` -> `WO-DST-023`.
+
+On 2026-09-01, after reviewing the designed Explorer against the complete repository bundle in a local design loop, the repository owner instructed its integration as the canonical template. The packet replaces the previous page's presentation contracts: `REQ-DST-032` and `REQ-DST-036` are superseded by `REQ-DST-067`; `SPEC-DST-008`, `SPEC-DST-010`, `SPEC-DST-011`, `SPEC-DST-012`, `SPEC-DST-016`, `SPEC-DST-017` are superseded by `SPEC-DST-023`, which carries every other approved Explorer requirement forward, while their verification contracts stay active because verified records bind them and `VER-DST-023` verifies the same requirements beside them; `SPEC-DST-013`, `VER-DST-013`, `SPEC-DST-014`, `VER-DST-014`, `ARCH-DST-008`, and `ARCH-DST-009` are amended by record; `ADR-DST-008` records the reassessment that closes its CDN exception. The designed views are retained verbatim under `repository_tools/explorer_design/sources/` and rebuilt deterministically into one self-contained template of at most 524,288 bytes that names no remote origin; the generator gains a `metrics` object and the record proof fields the page presents. The root template and generator remain the released 0.12.0 copies until the next adoption.
+
 The accountable human authorized creation and implementation of this new repository on 2026-08-11. Release remains a separate human decision governed by `REL-DST-001`.
 
 Revision-provenance support added after this packet is governed independently under `../revision-provenance/` and does not reopen `WO-DST-001`.
