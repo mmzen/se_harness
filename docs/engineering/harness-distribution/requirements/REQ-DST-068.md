@@ -2,7 +2,7 @@
 id = "REQ-DST-068"
 type = "requirement"
 title = "Emit computed governance indicators and record proof fields"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
@@ -11,6 +11,13 @@ verification_method = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # Requirement: Emit computed governance indicators and record proof fields

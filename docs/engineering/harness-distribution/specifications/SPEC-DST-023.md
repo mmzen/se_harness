@@ -2,13 +2,20 @@
 id = "SPEC-DST-023"
 type = "specification"
 title = "Designed self-contained Harness Explorer"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "product-owner", "quality-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-033", "REQ-DST-035", "REQ-DST-037", "REQ-DST-038", "REQ-DST-039", "REQ-DST-040", "REQ-DST-041", "REQ-DST-042", "REQ-DST-043", "REQ-DST-044", "REQ-DST-045", "REQ-DST-046", "REQ-DST-047", "REQ-DST-067", "REQ-DST-068"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # Specification: Designed self-contained Harness Explorer
@@ -267,6 +274,15 @@ repository write exists. The shell verifies every byte it parses.
 at most 262,144; per-document 262,144 and total 16,777,216 unchanged;
 topology acceptance target 2,097,152 (1,337,400 observed at `c065e3d`). The
 Overview issues no per-artifact request when `metrics` is present.
+
+Recorded deviation, accepted by the repository owner on 2026-09-01: the
+designed Lineage view requests every artifact detail when it opens (1,224
+same-origin, manifest-verified requests, about 7 MB at this revision) to
+merge lifecycle facts into its board, where `SPEC-DST-014` rule 7 draws
+Lineage cards from the compact topology alone. The owner accepted the
+behaviour for this integration and directed a following design round to
+load details only for the selected spine; until that round lands, rule 7
+reads as amended for the Lineage view by this deviation.
 
 ## Observability
 

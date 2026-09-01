@@ -2,7 +2,7 @@
 id = "REQ-DST-067"
 type = "requirement"
 title = "Render the designed Explorer from one self-contained document"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
@@ -11,6 +11,13 @@ verification_method = "automated-test-and-browser-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # Requirement: Render the designed Explorer from one self-contained document
@@ -34,6 +41,10 @@ commit-bound proof), what is moving (lead time, work in flight), how one change
 came to be (a stage pipeline and the decision trail of every record), and where
 an artifact sits in the whole (the domain constellation). The redesign also
 removes the CDN: every byte the page executes ships in the document.
+
+The owner selected integration of the designed views as the canonical
+template on 2026-09-01; the Readiness view is carried forward from the
+previous template so no approved obligation lapses.
 
 This requirement supersedes `REQ-DST-032`, whose obligation to load the pinned
 3D renderer is withdrawn, and `REQ-DST-036`, whose zero-, one-, and two-hop
@@ -84,6 +95,4 @@ stays usable, and no remote fallback is attempted.
 
 ## Open decisions
 
-None. The owner selected integration of the designed views as the canonical
-template on 2026-09-01; the Readiness view is carried forward from the
-previous template so no approved obligation lapses.
+None.

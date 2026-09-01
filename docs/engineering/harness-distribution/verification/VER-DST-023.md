@@ -2,13 +2,20 @@
 id = "VER-DST-023"
 type = "verification"
 title = "Verify the designed self-contained Explorer"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
 
 [relations]
 verifies = ["REQ-DST-029", "REQ-DST-030", "REQ-DST-031", "REQ-DST-033", "REQ-DST-035", "REQ-DST-037", "REQ-DST-038", "REQ-DST-039", "REQ-DST-040", "REQ-DST-041", "REQ-DST-042", "REQ-DST-043", "REQ-DST-044", "REQ-DST-045", "REQ-DST-046", "REQ-DST-047", "REQ-DST-067", "REQ-DST-068"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "quality-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # Verification Contract: Verify the designed self-contained Explorer

@@ -2,20 +2,27 @@
 id = "ADR-DST-013"
 type = "adr"
 title = "Ship the designed Explorer as one self-contained document without a runtime CDN"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner", "product-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
 
 [relations]
 decides = ["ARCH-DST-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # ADR: Ship the designed Explorer as one self-contained document without a runtime CDN
 
 ## Status
 
-Proposed.
+Accepted on 2026-09-01 by the repository owner's approval of the designed-Explorer packet.
 
 ## Context
 

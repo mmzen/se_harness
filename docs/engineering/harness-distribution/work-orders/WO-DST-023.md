@@ -2,7 +2,7 @@
 id = "WO-DST-023"
 type = "work_order"
 title = "Integrate the designed self-contained Explorer as the canonical template"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
@@ -29,6 +29,13 @@ implements = ["REQ-DST-067", "REQ-DST-068", "REQ-DST-055"]
 specifications = ["SPEC-DST-023", "SPEC-DST-013", "SPEC-DST-014"]
 architecture = ["ARCH-DST-008", "ADR-DST-013", "ADR-DST-008", "ARCH-DST-010", "ADR-DST-010"]
 verification = ["VER-DST-023", "VER-DST-013", "VER-DST-014"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-01T20:51:14Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)', after reviewing the designed Explorer against the complete repository bundle in the local design loop and instructing its integration as the canonical template. The owner also accepted, by selecting 'Accept now, next design round fixes it (Recommended)', the recorded deviation that the Lineage view prefetches every artifact detail until a following design round loads details for the selected spine only."
 +++
 
 # Work Order: Integrate the designed self-contained Explorer as the canonical template
