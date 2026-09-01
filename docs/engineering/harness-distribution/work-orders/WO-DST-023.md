@@ -2,7 +2,7 @@
 id = "WO-DST-023"
 type = "work_order"
 title = "Integrate the designed self-contained Explorer as the canonical template"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-01T20:52:07Z"
 decided_by = "engineering-owner"
 reason = "Started by the accountable engineering owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)'; the bounded implementation is already prepared on branch wo/dst-explorer-designed-ui and the deferred supersessions follow this start."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-01T20:57:08Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-01 by selecting the presented option 'Approve, start, complete on green (Recommended)': the designed self-contained template builds reproducibly from its retained sources (431,123 bytes, no remote origin), the generator carries the metrics block and record proof fields, the graph validates with zero errors, the dashboard test modules and the full suite pass at the Windows baseline, two generations are byte-identical, every view rendered headlessly with a clean console, and the evidence is retained at docs/engineering/harness-distribution/evidence/WO-DST-023-verification.md. Root managed copies, lock, release and publication are unchanged."
 +++
 
 # Work Order: Integrate the designed self-contained Explorer as the canonical template

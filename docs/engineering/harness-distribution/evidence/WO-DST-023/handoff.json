@@ -1,0 +1,363 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "a59f8a9eee0d648c33ca24a97d688720b691696ada60282b5cd62d7451602ede",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DST-023"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-DST-023 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-DST-023"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DST-023:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-DST-023 declares 8 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-DST-023"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-DST-023"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 45 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-DST-023:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-DST-023"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/harness-distribution/evidence/WO-DST-023/WO-DST-023-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 65
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-DST-023",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DST-023",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DST-023",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DST-023",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-DST-023."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-DST-023",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-DST-023 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-DST-023 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-DST-023 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-DST-023 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-DST-023",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-DST-023."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "0ea7e4698ea15e15829e6628e786e91562fa32aeca9f9a0e7227beadb3d46ec1",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/harness-distribution/architecture/adr/ADR-DST-008.md",
+      "docs/engineering/harness-distribution/architecture/adr/ADR-DST-013.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-008.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-009.md",
+      "docs/engineering/harness-distribution/evidence/WO-DST-023/handoff.json",
+      "docs/engineering/harness-distribution/evidence/WO-DST-023/WO-DST-023-handoff.md",
+      "docs/engineering/harness-distribution/README.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-032.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-036.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-067.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-068.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-008.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-010.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-011.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-012.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-013.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-014.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-016.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-017.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-023.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-013.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-014.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-023.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DST-023.md",
+      "docs/images/harness-explorer-lineage.png",
+      "docs/images/harness-explorer-overview.png",
+      "docs/images/harness-explorer-readiness.png",
+      "docs/notes/harness-dashboard-publication.md",
+      "README.md",
+      "repository_tools/explorer_design/__init__.py",
+      "repository_tools/explorer_design/build_explorer_template.py",
+      "repository_tools/explorer_design/sources/Graph.dc.html",
+      "repository_tools/explorer_design/sources/Lineage View.dc.html",
+      "repository_tools/explorer_design/sources/Overview.dc.html",
+      "repository_tools/explorer_design/sources/Record.dc.html",
+      "repository_tools/explorer_design/sources/shell/explorer.js",
+      "repository_tools/explorer_design/sources/shell/readiness.css",
+      "repository_tools/explorer_design/sources/shell/shell.html",
+      "repository_tools/explorer_design/sources/styles.css",
+      "repository_tools/explorer_design/sources/support.js",
+      "repository_tools/explorer_design/sources/vendor/react-dom.production.min.js",
+      "repository_tools/explorer_design/sources/vendor/react.production.min.js",
+      "templates/repository/standard/scripts/generate_harness_dashboard.py",
+      "templates/repository/standard/scripts/harness_explorer/index.template.html",
+      "tests/test_dashboard_webui.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/harness-distribution/",
+      "docs/images/",
+      "docs/notes/harness-dashboard-publication.md",
+      "README.md",
+      "repository_tools/explorer_design/",
+      "templates/repository/standard/scripts/generate_harness_dashboard.py",
+      "templates/repository/standard/scripts/harness_explorer/index.template.html",
+      "tests/test_dashboard_webui.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-DST-008",
+      "ADR-DST-010",
+      "ADR-DST-013",
+      "ARCH-DST-008",
+      "ARCH-DST-010",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-DST-055",
+      "REQ-DST-067",
+      "REQ-DST-068",
+      "SPEC-DST-013",
+      "SPEC-DST-014",
+      "SPEC-DST-023",
+      "VER-DST-013",
+      "VER-DST-014",
+      "VER-DST-023"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-DST-023"
+    ],
+    "primary": "WO-DST-023"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-DST-023",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-DST-023",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
