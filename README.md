@@ -141,15 +141,15 @@ The generated dashboard makes the repository's connected engineering evidence pr
 
 Explore the [live release-bound demonstration](https://mmzen.github.io/se_harness/) generated from the governance of SE Harness itself. It is a derived, read-only promotional view; repository artifacts and accountable human decisions remain authoritative.
 
-**Overview — see the artifact graph, lifecycle distribution, and current operator queue.**
+**Overview — read the repository's trust posture: requirement coverage, graph integrity, the evaluator's own gate reading, release currency, attributed decisions, refusals on the record, and lead time from approval to implementation.**
 
-![Harness Explorer Overview showing the repository graph, lifecycle distribution, and operator queue](docs/images/harness-explorer-overview.png)
+![Harness Explorer Overview showing the trust, governance, and flow indicators computed from the bundle](docs/images/harness-explorer-overview.png)
 
-**Lineage — follow a focused path from intent through definition, authorized work, and verification.**
+**Lineage — follow one change through the six-stage pipeline from purpose to release, with every record's decision trail, proof block, and evidence beside it; the Virtual Twin shows the same artifacts as one constellation clustered by domain.**
 
-![Harness Explorer Lineage showing the connected path from intent to a verification record](docs/images/harness-explorer-lineage.png)
+![Harness Explorer Lineage showing the six-stage board, the lit spine of one work order, and its decision trail](docs/images/harness-explorer-lineage.png)
 
-**Readiness — inspect the current assurance boundary and the evidence behind the next human decision.**
+**Readiness — inspect the G0-G5 gate observations, quality-gate evidence, findings, and commit-bound provenance behind the next human decision.**
 
 ![Harness Explorer Readiness showing quality-gate evidence and the pending accountable decision](docs/images/harness-explorer-readiness.png)
 

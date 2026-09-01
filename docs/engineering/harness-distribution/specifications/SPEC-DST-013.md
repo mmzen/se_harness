@@ -5,7 +5,7 @@ title = "Deterministic sharded Explorer bundle"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "release-owner"]
 created = "2026-08-17"
-updated = "2026-08-19"
+updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-048", "REQ-DST-049", "REQ-DST-054", "REQ-DST-055"]
@@ -89,7 +89,7 @@ Treat all repository content and paths as untrusted. Preserve path containment, 
 
 ## Performance and capacity
 
-- `index.html` maximum: 262,144 UTF-8 bytes.
+- `index.html` maximum: 524,288 UTF-8 bytes.
 - summary maximum: 262,144 UTF-8 bytes.
 - artifact/evidence source maximum: existing 262,144 bytes each.
 - combined projected-content maximum: existing 16,777,216 bytes.
@@ -116,3 +116,15 @@ Newly generated output uses bundle v2. Historical self-contained v1 HTML remains
 ## Explicitly unspecified decisions
 
 The implementation agent may choose internal Python structures, compact JSON property ordering, request helper names, deterministic cache implementation, and exact summary partitioning within the stated roles. Stop if implementation requires a server API, persistent browser database, service worker, new runtime origin, topology sharding, weakened digest/path checks, or changes to formal governance semantics.
+
+## Amendment record
+
+**The shell budget rises to 524,288 UTF-8 bytes, proposed 2026-09-01 under `WO-DST-023`
+(`SPEC-DST-023`, `ADR-DST-013`).** The designed Explorer inlines its component
+runtime, both React production builds, the design-system stylesheet, and its
+view components into one self-contained document so that no script ships as
+a bundle resource and no remote origin is requested; that document measures
+431,072 bytes at revision `c065e3d`. The summary, per-document, and
+total-content maxima and the topology acceptance target are unchanged, and
+no artifact body or evidence is embedded. Nothing else in this specification
+changes.

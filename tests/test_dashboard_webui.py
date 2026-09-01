@@ -134,7 +134,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(2_097_152, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
         self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", candidate_text)
         self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", managed_text)
-        self.assertEqual(candidate_text, managed_text)
+        # The candidate evolves ahead of the released root copy between
+        # adoptions; only the topology target must not regress on either side.
+        self.assertIn("MAX_INDEX_BYTES = 524_288", candidate_text)
 
     def test_topology_target_boundary_is_strict_and_bounded(self) -> None:
         target = GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES
@@ -251,35 +253,214 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(3, len(suggestions))
         self.assertTrue(all(item["automatic"] is False for item in suggestions))
 
-    def test_templates_preserve_the_reviewed_3d_design_and_canonical_boundary(self) -> None:
+    def test_canonical_template_is_the_self_contained_designed_explorer(self) -> None:
         content = self.canonical.read_text(encoding="utf-8")
-        # Candidate managed UI evolves in the distribution template. The root
-        # copy remains owned by the exact released self-hosting evaluator.
+        # The candidate managed UI evolves in the distribution template. The
+        # root copy remains owned by the exact released self-hosting evaluator
+        # until the next adoption replaces it.
         self.assertTrue(self.template.read_text(encoding="utf-8"))
         self.assertEqual(1, content.count("__HARNESS_BOOTSTRAP_JSON__"))
-        self.assertIn('id="harness-dashboard-bootstrap"', content)
-        self.assertIn('raw.schema!=="harness-dashboard-snapshot-v1"', content)
-        self.assertIn('data-current-view="overview"', content)
-        self.assertIn('data-view="lineage"', content)
-        self.assertIn('data-view="readiness"', content)
-        self.assertIn('data-od-id="three-dimensional-graph"', content)
-        self.assertIn('data-od-id="graph-color-legend"', content)
-        self.assertIn('id="lineageGraph" role="group"', content)
-        self.assertIn('data-od-id="lineage-navigation-history"', content)
-        self.assertIn('linkDirectionalArrowLength(1.8)', content)
-        self.assertIn('clip:rect(0 0 0 0)', content)
-        self.assertEqual(1, content.count("function renderLineage(focusTarget=null){"))
-        self.assertIn('const GRAPH_SOURCE="https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"', content)
-        self.assertIn('Interactive 3D topology unavailable', content)
+        self.assertIn(
+            '<script id="harness-dashboard-bootstrap" type="application/json">__HARNESS_BOOTSTRAP_JSON__</script>',
+            content,
+        )
+        self.assertEqual(3, content.count("<script"))
+        self.assertIn(
+            "content=\"default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline' 'unsafe-eval'; "
+            "img-src data:; connect-src 'self'; font-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'\"",
+            content,
+        )
+        for view in ("Overview", "Lineage View", "Graph"):
+            with self.subTest(view=view):
+                self.assertIn(f'<dc-import name="{view}"', content)
+        for component in ("./Overview.dc.html", "./Lineage%20View.dc.html", "./Graph.dc.html", "./Record.dc.html"):
+            with self.subTest(component=component):
+                self.assertIn(f'"{component}": new Blob([', content)
+        self.assertIn('<sc-if value="{{isReadiness}}"', content)
+        self.assertIn("window.HarnessExplorer = Object.freeze({", content)
+        # Component sources are embedded as JSON string literals, so their quotes are escaped.
+        self.assertIn('href=\\"?view=readiness\\"', content)
+        self.assertIn("harness-dashboard-snapshot-v1", GENERATOR.SNAPSHOT_SCHEMA)
+        self.assertIn('cache: "no-cache"', content)
+        self.assertIn('crypto.subtle.digest("SHA-256", bytes)', content)
+        self.assertIn('if (location.protocol === "file:")', content)
+        literals = set(re.findall(r"https?://[^\"'` )]+", content))
+        self.assertEqual(
+            {
+                "http://www.w3.org/1998/Math/MathML",
+                "http://www.w3.org/1999/xhtml",
+                "http://www.w3.org/1999/xlink",
+                "http://www.w3.org/2000/svg",
+                "http://www.w3.org/XML/1998/namespace",
+                "https://reactjs.org/docs/error-decoder.html?invariant=",
+            },
+            literals,
+            "the template may name only XML namespaces and React's error pointer, never a fetched origin",
+        )
         for forbidden in (
             "<script src=",
+            "<link ",
+            "googleapis",
+            "jsdelivr",
+            "unpkg",
+            "3d-force-graph",
+            "localStorage",
+            "sessionStorage",
+            "@import",
             "WebSocket(",
             "generatedAt",
             "Show complete graph",
             "Active coverage",
+            "Rationale.dc.html",
         ):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, content)
+        self.assertLessEqual(len(content.encode("utf-8")), GENERATOR.MAX_INDEX_BYTES)
+
+    def test_canonical_template_reproduces_from_its_design_sources(self) -> None:
+        from repository_tools.explorer_design import build_explorer_template as builder
+
+        built = builder.build()
+        self.assertEqual(built, self.canonical.read_text(encoding="utf-8").replace("\r\n", "\n"))
+        self.assertEqual(builder.MAX_TEMPLATE_BYTES, GENERATOR.MAX_INDEX_BYTES)
+        self.assertEqual(524_288, GENERATOR.MAX_INDEX_BYTES)
+        for name in builder.VIEWS:
+            source = (builder.SOURCES / f"{name}.dc.html").read_text(encoding="utf-8")
+            with self.subTest(source=name):
+                self.assertIn("class Component extends DCLogic", source)
+
+    def test_distribution_table_admits_only_scalar_fields(self) -> None:
+        table = GENERATOR._distribution_table(
+            {
+                "wheel": "se_harness-1.0.0-py3-none-any.whl",
+                "schema": 2,
+                "nested": {"x": 1},
+                "flag": True,
+                "Bad Key": "x",
+                "too_long": "x" * 600,
+                "wheel_sha256": "a" * 64,
+            }
+        )
+        self.assertEqual({"schema": 2, "wheel": "se_harness-1.0.0-py3-none-any.whl", "wheel_sha256": "a" * 64}, table)
+        self.assertIsNone(GENERATOR._distribution_table("python-wheel-sdist"))
+        self.assertIsNone(GENERATOR._distribution_table({"nested": {}}))
+
+    def test_github_remote_normalizes_to_one_public_url(self) -> None:
+        for spelling in (
+            "https://github.com/mmzen/se_harness.git",
+            "https://github.com/mmzen/se_harness/",
+            "git@github.com:mmzen/se_harness.git",
+            "ssh://git@github.com/mmzen/se_harness",
+        ):
+            with self.subTest(spelling=spelling):
+                match = GENERATOR.GITHUB_REMOTE.match(spelling)
+                self.assertIsNotNone(match)
+                self.assertEqual(("mmzen", "se_harness"), (match.group("owner"), match.group("name")))
+        for rejected in ("https://gitlab.com/mmzen/se_harness.git", "https://github.com/mmzen/se_harness/tree/main", "file:///tmp/repo"):
+            with self.subTest(rejected=rejected):
+                self.assertIsNone(GENERATOR.GITHUB_REMOTE.match(rejected))
+
+    def test_explorer_metrics_restate_lifecycle_and_release_facts(self) -> None:
+        def event(source: str, target: str, at: str, actor: str) -> dict:
+            return {"from": source, "to": target, "decided_at": at, "decided_by": actor, "reason": "recorded"}
+
+        snapshot = {
+            "artifacts": [
+                {
+                    "id": "WO-TST-001",
+                    "type": "work_order",
+                    "status": "implemented",
+                    "lifecycle_events": [
+                        event("draft", "approved", "2026-08-01T10:00:00Z", "repository-owner"),
+                        event("approved", "in_progress", "2026-08-01T10:10:00Z", "delegated-executor"),
+                        event("in_progress", "implemented", "2026-08-01T11:30:00Z", "delegated-executor"),
+                    ],
+                },
+                {
+                    "id": "VREC-TST-001",
+                    "type": "verification_record",
+                    "status": "verified",
+                    "prepared_by": "delegated-executor",
+                    "lifecycle_events": [event("ready", "verified", "2026-08-01T12:00:00Z", "")],
+                },
+                {
+                    "id": "REL-TST-001",
+                    "type": "release_contract",
+                    "status": "approved",
+                    "lifecycle_events": [event("draft", "approved", "2026-08-01T09:00:00Z", "release-owner")],
+                },
+                {"id": "RLS-TST-001", "type": "release_record", "status": "released", "version": "1.0.0", "released_at": "2026-08-01T13:00:00Z", "commit": "a" * 40},
+                {"id": "RLS-TST-000", "type": "release_record", "status": "released", "version": "0.9.0", "released_at": "2026-07-01T13:00:00Z", "commit": "b" * 40},
+            ],
+            "relations": [
+                {"source": "RLS-TST-001", "relation": "releases_work", "target": "WO-TST-001", "authority": "declared", "target_exists": True},
+                {"source": "RLS-TST-001", "relation": "satisfies", "target": "REL-TST-001", "authority": "declared", "target_exists": True},
+                {"source": "RLS-TST-001", "relation": "includes_verification", "target": "VREC-TST-001", "authority": "declared", "target_exists": True},
+                {"source": "VREC-TST-001", "relation": "verifies_work_order", "target": "WO-TST-001", "authority": "declared", "target_exists": True},
+                {"source": "RLS-TST-000", "relation": "releases_work", "target": "WO-TST-000", "authority": "declared", "target_exists": False},
+            ],
+        }
+        metrics = GENERATOR.build_explorer_metrics(snapshot)
+        self.assertEqual(metrics, GENERATOR.build_explorer_metrics(snapshot))
+        self.assertEqual(
+            {
+                "lifecycle_events": 5,
+                "unattributed_events": 1,
+                "decided_by": {"delegated-executor": 2, "release-owner": 1, "repository-owner": 1},
+                "delegated_transitions": 2,
+                "delegated_records": 1,
+                "delegated_artifacts": ["VREC-TST-001", "WO-TST-001"],
+                "lead_times": [{"id": "WO-TST-001", "hours": 1.5}],
+                "released_work_orders": 2,
+                "released_work_orders_verified": 1,
+                "latest_release": {
+                    "id": "RLS-TST-001",
+                    "version": "1.0.0",
+                    "released_at": "2026-08-01T13:00:00Z",
+                    "commit": "a" * 40,
+                    "verification_record": "VREC-TST-001",
+                },
+                "release_arc": {
+                    "contract_id": "REL-TST-001",
+                    "contract_approved_at": "2026-08-01T09:00:00Z",
+                    "released_at": "2026-08-01T13:00:00Z",
+                    "hours": 4.0,
+                },
+            },
+            metrics,
+        )
+        self.assertEqual(
+            {"lifecycle_events": 0, "unattributed_events": 0, "decided_by": {}, "delegated_transitions": 0, "delegated_records": 0, "delegated_artifacts": [], "lead_times": [], "released_work_orders": 0, "released_work_orders_verified": 0, "latest_release": None, "release_arc": None},
+            GENERATOR.build_explorer_metrics({"artifacts": [], "relations": []}),
+        )
+
+    def test_release_proof_fields_reach_the_summary_and_compact_topology(self) -> None:
+        snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
+        self.assertTrue(report.valid)
+        self.assertNotIn("metrics", snapshot)
+        released = [item for item in snapshot["artifacts"] if item["type"] == "release_record" and item.get("distribution")]
+        self.assertTrue(released)
+        for item in released:
+            with self.subTest(record=item["id"]):
+                self.assertRegex(item["distribution"]["wheel_sha256"], r"^[0-9a-f]{64}$")
+                self.assertRegex(item["evaluator_evidence_sha256"], r"^[0-9a-f]{64}$")
+        _, manifest, resources, _ = GENERATOR.build_dashboard_bundle(snapshot)
+        summary = json.loads(resources[manifest["entrypoints"]["summary"]["path"]])
+        metrics = summary["metrics"]
+        self.assertEqual(metrics, GENERATOR.build_explorer_metrics(snapshot))
+        self.assertEqual(0, metrics["unattributed_events"])
+        self.assertEqual(metrics["released_work_orders"], metrics["released_work_orders_verified"])
+        self.assertEqual([item["hours"] for item in metrics["lead_times"]], sorted(item["hours"] for item in metrics["lead_times"]))
+        self.assertEqual("https://github.com/mmzen/se_harness", summary["repository"].get("source_url"))
+        topology = json.loads(resources[manifest["entrypoints"]["topology"]["path"]])
+        rows = {item["id"]: item for item in topology["artifacts"]}
+        record = rows[metrics["latest_release"]["id"]]
+        self.assertEqual(metrics["latest_release"]["version"], record["version"])
+        self.assertEqual(metrics["latest_release"]["released_at"], record["released_at"])
+        self.assertRegex(record["distribution"]["wheel_sha256"], r"^[0-9a-f]{64}$")
+        self.assertTrue(all(isinstance(item.get("path"), str) for item in topology["artifacts"]))
+        self.assertTrue(all("version" not in item for item in topology["artifacts"] if item["type"] != "release_record"))
+        self.assertNotIn('"markdown"', resources[manifest["entrypoints"]["topology"]["path"]])
 
     def test_overview_is_concise_and_context_projection_is_bounded(self) -> None:
         content = self.template.read_text(encoding="utf-8")
@@ -509,7 +690,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         rendered = GENERATOR.render_dashboard(bootstrap)
         topology = json.loads(resources[manifest["entrypoints"]["topology"]["path"]])
         self.assertTrue(any(item.get("type") == "future_control" for item in topology["artifacts"]))
-        self.assertIn("new Option(v,v)", rendered)
+        self.assertIn("this.KIND[n.type] || n.type", rendered)
         self.assertEqual(GENERATOR.BUNDLE_SCHEMA, manifest["schema"])
         self.assertEqual(len(manifest["resources"]), observations["resource_count"])
         self.assertLessEqual(len(rendered.encode("utf-8")), GENERATOR.MAX_INDEX_BYTES)
@@ -827,7 +1008,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn('</script><img src=x onerror="alert(1)">', rendered)
         self.assertIn("\\u003c/script\\u003e", rendered)
         self.assertIn("\\u0026\\u2028\\u2029__HARNESS_BOOTSTRAP_JSON__", rendered)
-        self.assertEqual(2, rendered.count("<script"))
+        self.assertEqual(3, rendered.count("<script"))
         self.assertNotIn("__HARNESS_BOOTSTRAP_JSON__</script>", rendered)
 
     def test_temporal_reassessment_supports_only_governed_declared_dependencies(self) -> None:

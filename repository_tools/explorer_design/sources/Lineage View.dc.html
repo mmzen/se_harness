@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/styles.css">
+  <script src="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/_ds_bundle.js"></script>
+  <style>
+    :root{
+      --l-bg:#f3f2f2;--l-surface:#f8f4f4;--l-fg:#201e1d;--l-muted:#605d5d;--l-faint:#9b9797;
+      --l-border:#d7d3d3;--l-rule:#201e1d;--l-accent:#ec3013;--l-accent-deep:#ae1800;--l-soft:#ffe0d9;
+      --l-mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+      --s-draft:#9b9797;--s-approved:#7d7979;--s-progress:#605d5d;--s-implemented:#444141;
+      --s-verified:#201e1d;--s-released:#ec3013;--s-rejected:#ae1800;--s-superseded:#9b9797;
+    }
+    :root[data-lin-theme="dark"]{
+      --l-bg:#201e1d;--l-surface:#2d2b2b;--l-fg:#f3f2f2;--l-muted:#bab6b6;--l-faint:#7d7979;
+      --l-border:#444141;--l-rule:#eae9e9;--l-accent:#ff9783;--l-accent-deep:#ffc4b8;--l-soft:#4d170e;
+      --s-draft:#7d7979;--s-approved:#9b9797;--s-progress:#bab6b6;--s-implemented:#d7d3d3;
+      --s-verified:#f3f2f2;--s-released:#ff9783;--s-rejected:#ff563c;--s-superseded:#7d7979;
+    }
+    html,body{margin:0;background:var(--l-bg);color:var(--l-fg)}
+    a{color:var(--l-accent-deep)}a:hover{color:var(--l-accent)}
+    button{font:inherit;border-radius:0}
+    :focus-visible{outline:2px solid var(--l-accent);outline-offset:2px}
+    ::selection{background:var(--color-accent-200);color:var(--color-accent-900)}
+    :root{--e-option:#a07d1f;--e-state:#4f8552;--e-trigger:#2f7f8f;--e-condition:#3a6ea8;--e-separator:#767d88;--e-subject:#7a5aa0;--e-obligation:#ec3013;--e-response:#5b6ab0;--e-unclassified:#9b9797}
+    :root[data-lin-theme="dark"]{--e-option:#d9b45c;--e-state:#8fc492;--e-trigger:#7cc3d2;--e-condition:#8ab4e8;--e-separator:#a3aab6;--e-subject:#c0a5e5;--e-obligation:#ff9783;--e-response:#a3b0e8;--e-unclassified:#7d7979}
+    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+    @media (max-width:640px){.lin-legend{display:none!important}}
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;font-family:var(--font-body);background:var(--l-bg);color:var(--l-fg)">
+  <nav aria-label="Views" style="{{navStyle}}">
+    <div style="display:flex;align-items:center;gap:8px;padding:0 16px 16px">
+      <span style="width:12px;height:12px;background:var(--l-accent);flex:none"></span>
+      <sc-if value="{{navOpen}}" hint-placeholder-val="{{true}}"><span style="font-family:var(--font-heading);font-weight:800;font-size:13px">EXPLORER</span></sc-if>
+    </div>
+    <a href="Overview.dc.html" title="Home" style="display:block;padding:10px 16px;border-left:3px solid transparent;font:600 13px var(--font-body);color:var(--l-fg);text-decoration:none;white-space:nowrap;overflow:hidden" style-hover="background:var(--l-soft);color:var(--l-accent-deep)">{{homeLabel}}</a>
+    <a href="Lineage View.dc.html" aria-current="page" title="Lineage" style="display:block;padding:10px 16px;border-left:3px solid var(--l-accent);background:var(--l-soft);font:700 13px var(--font-body);color:var(--l-accent-deep);text-decoration:none;white-space:nowrap;overflow:hidden">{{lineageLabel}}</a>
+    <a href="Graph.dc.html" title="Virtual Twin" style="display:block;padding:10px 16px;border-left:3px solid transparent;font:600 13px var(--font-body);color:var(--l-fg);text-decoration:none;white-space:nowrap;overflow:hidden" style-hover="background:var(--l-soft);color:var(--l-accent-deep)">{{graphLabel}}</a>
+    <button onClick="{{toggleNav}}" aria-label="{{navBtnAria}}" title="{{navBtnAria}}" style="margin:16px 16px 0;min-height:30px;padding:0 8px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:700 11px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">{{navBtnLabel}}</button>
+  </nav>
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+  <header style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:18px 24px 14px;border-bottom:2px solid var(--l-rule)">
+    <div style="min-width:0">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:14px;height:14px;background:var(--l-accent);flex:none"></span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:-.01em">VERITYPLANE</span>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:17px;color:var(--l-muted)">/ LINEAGE</span>
+      </div>
+      <p style="margin:5px 0 0 24px;font:11px var(--l-mono);color:var(--l-muted)">{{countsLine}}</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <sc-if value="{{hasSelection}}" hint-placeholder-val="{{false}}">
+        <button onClick="{{clearSelection}}" style="min-height:40px;padding:0 14px;border:1px solid var(--l-rule);background:transparent;color:var(--l-fg);cursor:pointer;font-size:13px;font-weight:600" style-hover="background:var(--l-surface)">Start over</button>
+      </sc-if>
+      <div style="position:relative">
+        <input value="{{query}}" onChange="{{onQuery}}" onKeyDown="{{onSearchKey}}" placeholder="Search id or title…" aria-label="Search artifacts by id or title" style="width:min(300px,60vw);height:40px;border:1px solid var(--l-rule);background:var(--l-surface);color:var(--l-fg);padding:0 12px;font-size:13px">
+        <sc-if value="{{hasResults}}" hint-placeholder-val="{{false}}">
+          <div style="position:absolute;top:41px;left:0;right:0;z-index:40;border:1px solid var(--l-rule);background:var(--l-surface);box-shadow:var(--shadow-md)">
+            <sc-for list="{{results}}" as="r" hint-placeholder-count="0">
+              <button onClick="{{r.onClick}}" style="display:block;width:100%;text-align:left;padding:8px 12px;border:0;border-bottom:1px solid var(--l-border);background:transparent;color:var(--l-fg);cursor:pointer" style-hover="background:var(--l-soft)">
+                <span style="font:700 12px var(--l-mono)">{{r.id}}</span>
+                <span style="display:block;font-size:12px;color:var(--l-muted)">{{r.title}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+  <sc-if value="{{headline}}" hint-placeholder-val="{{false}}">
+    <strong style="{{headlineStyle}}">{{headline}}</strong>
+  </sc-if>
+  <div class="lin-legend" style="display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;padding:8px 24px;border-bottom:1px solid var(--l-border);font:11px var(--l-mono);color:var(--l-muted)">
+    <sc-for list="{{legend}}" as="s" hint-placeholder-count="8">
+      <span style="display:inline-flex;align-items:center;gap:6px"><i style="{{s.dot}}"></i>{{s.label}}</span>
+    </sc-for>
+    <span style="border-left:1px solid var(--l-border);padding-left:18px">WO work order · VREC verification record · RLS release record · REL release contract · ADR architecture decision — hover any card for its plain-language gloss</span>
+  </div>
+  <sc-if value="{{hasHistory}}" hint-placeholder-val="{{false}}">
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 24px;border-bottom:1px solid var(--l-border);overflow-x:auto">
+      <button onClick="{{histBack}}" disabled="{{backDisabled}}" aria-label="Previous visited artifact" style="min-height:32px;padding:0 10px;border:1px solid var(--l-border);background:var(--l-surface);color:var(--l-fg);cursor:pointer;font:12px var(--l-mono)">←</button>
+      <button onClick="{{histFwd}}" disabled="{{fwdDisabled}}" aria-label="Next visited artifact" style="min-height:32px;padding:0 10px;border:1px solid var(--l-border);background:var(--l-surface);color:var(--l-fg);cursor:pointer;font:12px var(--l-mono)">→</button>
+      <span style="font:10px var(--l-mono);color:var(--l-faint);text-transform:uppercase;letter-spacing:.06em;flex:none">Visited</span>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{histItems}}" as="h" hint-placeholder-count="0">
+          <button onClick="{{h.onClick}}" aria-current="{{h.current}}" style="{{h.style}}">{{h.id}}</button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{loading}}" hint-placeholder-val="{{true}}">
+    <div style="padding:60px 24px;font:12px var(--l-mono);color:var(--l-muted)">Loading snapshot bundle…</div>
+  </sc-if>
+  <sc-if value="{{showEmpty}}" hint-placeholder-val="{{false}}">
+    <section style="padding:clamp(28px,5vw,64px) 24px 48px;max-width:1200px">
+      <p style="margin:0 0 18px;font:11px var(--l-mono);letter-spacing:.09em;color:var(--l-accent-deep);text-transform:uppercase">Start somewhere meaningful</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));border:2px solid var(--l-rule)">
+        <sc-for list="{{entries}}" as="e" hint-placeholder-count="3">
+          <button onClick="{{e.onClick}}" style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;padding:20px;border:0;border-right:1px solid var(--l-rule);background:var(--l-surface);color:var(--l-fg);cursor:pointer;min-height:170px" style-hover="background:var(--l-soft)">
+            <span style="font:10px var(--l-mono);letter-spacing:.09em;color:var(--l-accent-deep);text-transform:uppercase">{{e.kicker}}</span>
+            <span style="font:800 18px var(--l-mono)">{{e.id}}</span>
+            <span style="font-size:13.5px;line-height:1.4">{{e.title}}</span>
+            <span style="font:11px var(--l-mono);color:var(--l-muted)">{{e.meta}}</span>
+            <span style="margin-top:auto;font:700 12px var(--font-body);color:var(--l-accent-deep)">Trace it →</span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin:16px 0 0;font:11px var(--l-mono);color:var(--l-muted);max-width:760px">Rejected and superseded records stay on the board — the harness records what was refused. Every lifecycle transition carries who decided, when, and their verbatim reason. <a href="Rationale.dc.html">Design rationale</a></p>
+    </section>
+  </sc-if>
+  <sc-if value="{{hasSelection}}" hint-placeholder-val="{{false}}">
+    <div style="display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding:8px 24px;border-bottom:1px solid var(--l-border)">
+      <label title="Keep artifacts outside the selected chain visible, receded, instead of hiding them" style="display:inline-flex;align-items:center;gap:8px;font:11px var(--l-mono);color:var(--l-muted);text-transform:uppercase;letter-spacing:.05em;cursor:pointer">
+        <input type="checkbox" checked="{{ctxOn}}" onChange="{{toggleCtx}}" style="width:15px;height:15px;accent-color:var(--l-accent);cursor:pointer">
+        Context cards
+      </label>
+      <span style="font:11px var(--l-mono);color:var(--l-faint)">artifacts outside this chain stay visible, receded — nothing is hidden</span>
+      <label title="Draw the typed-relation arrows between cards; the Typed relations list in the panel always carries the same facts" style="display:inline-flex;align-items:center;gap:8px;font:11px var(--l-mono);color:var(--l-muted);text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-left:1px solid var(--l-border);padding-left:22px">
+        <input type="checkbox" checked="{{connOn}}" onChange="{{toggleConn}}" style="width:15px;height:15px;accent-color:var(--l-accent);cursor:pointer">
+        Connectors
+      </label>
+      <span style="font:11px var(--l-mono);color:var(--l-faint)">verb-labelled arrows on the board; off, the Typed relations list still tells the story</span>
+    </div>
+    <div style="display:flex;align-items:stretch;flex:1;min-height:0">
+      <div style="{{boardWrapStyle}}">
+        <div ref="{{innerRef}}" style="position:relative;width:max-content;min-width:100%;min-height:100%">
+          <svg width="{{boardW}}" height="{{boardH}}" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible">
+            <defs>
+              <marker id="lin-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5 0 7z" fill="context-stroke"></path></marker>
+            </defs>
+            <sc-for list="{{edges}}" as="e" hint-placeholder-count="0">
+              <g opacity="{{e.op}}">
+                <path d="{{e.d}}" fill="none" stroke="{{e.stroke}}" stroke-width="{{e.w}}" stroke-dasharray="{{e.dash}}" marker-end="url(#lin-arrow)"></path>
+                <text x="{{e.lx}}" y="{{e.ly}}" text-anchor="middle" style="font:10px var(--l-mono);fill:var(--l-fg);paint-order:stroke;stroke:var(--l-bg);stroke-width:3px;stroke-linejoin:round">{{e.verb}}</text>
+              </g>
+            </sc-for>
+          </svg>
+          <div style="display:grid;grid-template-columns:repeat(6,264px);align-items:stretch">
+            <sc-for list="{{stages}}" as="st" hint-placeholder-count="6">
+              <section data-screen-label="{{st.label}}" style="border-right:1px solid var(--l-border);min-height:420px;padding-bottom:40px">
+                <header style="position:sticky;top:0;z-index:10;background:var(--l-bg);border-bottom:2px solid var(--l-rule);padding:12px 14px 10px">
+                  <span style="display:block;font:10px var(--l-mono);letter-spacing:.09em;color:var(--l-faint)">{{st.num}}</span>
+                  <strong style="display:block;font-family:var(--font-heading);font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.02em">{{st.label}}</strong>
+                  <span style="{{st.cueStyle}}">{{st.cue}}</span>
+                </header>
+                <sc-for list="{{st.lanes}}" as="lane" hint-placeholder-count="1">
+                  <div style="padding:10px 14px 4px">
+                    <h4 style="margin:0;display:flex;justify-content:space-between;gap:8px;font:600 10px var(--l-mono);letter-spacing:.07em;color:var(--l-muted);text-transform:uppercase"><span>{{lane.label}}</span><span style="font-weight:400">{{lane.count}}</span></h4>
+                    <sc-if value="{{lane.moreBtn}}" hint-placeholder-val="{{false}}">
+                      <button onClick="{{lane.moreBtn.onClick}}" style="display:block;width:100%;margin-top:8px;min-height:30px;padding:0 10px;text-align:left;border:1px dashed var(--l-rule);background:transparent;color:var(--l-muted);cursor:pointer;font:700 10.5px var(--l-mono)" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">{{lane.moreBtn.label}}</button>
+                    </sc-if>
+                    <sc-for list="{{lane.cards}}" as="c" hint-placeholder-count="2">
+                      <button data-lin-id="{{c.id}}" onClick="{{c.onClick}}" aria-pressed="{{c.pressed}}" aria-label="{{c.aria}}" title="{{c.gloss}}" style="{{c.style}}">
+                        <span style="display:flex;justify-content:space-between;gap:8px;font:10px var(--l-mono);letter-spacing:.05em;color:var(--l-muted);text-transform:uppercase">
+                          <span>{{c.kind}}</span>
+                          <span style="display:inline-flex;align-items:center;gap:5px;text-transform:none"><i style="{{c.dot}}"></i>{{c.statusLabel}}</span>
+                        </span>
+                        <span style="display:block;margin-top:8px;font:700 12.5px var(--l-mono);color:{{c.idColor}}">{{c.id}}</span>
+                        <span style="display:block;margin-top:3px;font-size:12px;line-height:1.35;overflow-wrap:anywhere">{{c.title}}</span>
+                        <sc-if value="{{c.ribbon}}" hint-placeholder-val="{{false}}">
+                          <span style="display:flex;justify-content:space-between;gap:6px;margin-top:8px;padding-top:6px;border-top:1px solid var(--l-border);font:10px var(--l-mono);color:var(--l-muted)">
+                            <span>{{c.ribbon}}</span>
+                            <sc-if value="{{c.delegated}}" hint-placeholder-val="{{false}}"><span style="color:var(--l-accent-deep);font-weight:700">CI-GATED</span></sc-if>
+                          </span>
+                        </sc-if>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-for>
+              </section>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <aside aria-label="Selected artifact detail" style="{{panelStyle}}">
+        <div style="padding:18px 20px 40px">
+          <div style="display:flex;justify-content:flex-end;margin:0 0 4px">
+            <button onClick="{{togglePanel}}" aria-pressed="{{panelWide}}" aria-label="{{panelBtnAria}}" title="{{panelBtnAria}}" style="min-height:30px;padding:0 10px;border:1px solid var(--l-border);background:transparent;color:var(--l-muted);cursor:pointer;font:700 10px var(--l-mono);letter-spacing:.05em" style-hover="border-color:var(--l-accent);color:var(--l-accent-deep)">{{panelBtnLabel}}</button>
+          </div>
+          <dc-import name="Record" record-id="{{selIdProp}}" data-root="{{dataRootProp}}" source-url="{{srcUrlProp}}" revision="{{revProp}}" dist="{{selDistProp}}" seed="{{selSeedProp}}" hint-size="100%,420px"></dc-import>
+          <sc-if value="{{sel.coverage}}" hint-placeholder-val="{{false}}">
+            <p style="margin:12px 0 0;font:11px var(--l-mono);color:var(--l-muted)">Coverage: {{sel.coverage}}</p>
+          </sc-if>
+          <sc-if value="{{sel.roster}}" hint-placeholder-val="{{false}}">
+            <h3 style="margin:22px 0 2px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">The release unit</h3>
+            <p style="margin:0 0 2px;font:700 11px var(--l-mono);color:var(--l-fg)">{{sel.roster.head}}</p>
+            <sc-if value="{{sel.roster.arc}}" hint-placeholder-val="{{false}}">
+              <p style="margin:0 0 6px;font:10.5px var(--l-mono);color:var(--l-accent-deep)">{{sel.roster.arc}}</p>
+            </sc-if>
+            <sc-for list="{{sel.roster.rows}}" as="r" hint-placeholder-count="3">
+              <div style="padding:8px 0;border-top:1px solid var(--l-border)">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                  <span style="min-width:0">
+                    <span style="display:flex;align-items:center;gap:7px;font:700 11.5px var(--l-mono)"><i style="{{r.dotS}}"></i>{{r.id}}<span style="font-weight:400;color:var(--l-muted)">{{r.statusLabel}}</span></span>
+                    <span style="display:block;margin-top:2px;font-size:12px;line-height:1.4;overflow-wrap:anywhere">{{r.title}}</span>
+                    <span style="display:block;margin-top:3px;font:10.5px var(--l-mono);color:var(--l-muted)">verified by <sc-if value="{{r.onVrec}}" hint-placeholder-val="{{false}}"><button onClick="{{r.onVrec}}" style="min-height:20px;padding:0 4px;border:0;background:transparent;color:var(--l-accent-deep);cursor:pointer;font:700 10.5px var(--l-mono);text-decoration:underline">{{r.vrecLabel}}</button></sc-if><sc-if value="{{r.noVrecBtn}}" hint-placeholder-val="{{false}}">{{r.vrecLabel}}</sc-if></span>
+                    <sc-if value="{{r.spanStyle}}" hint-placeholder-val="{{false}}">
+                      <span style="display:block;position:relative;height:5px;margin-top:6px;background:var(--l-border);max-width:220px"><span style="{{r.spanStyle}}"></span></span>
+                    </sc-if>
+                  </span>
+                  <sc-if value="{{r.onToggle}}" hint-placeholder-val="{{false}}">
+                    <button onClick="{{r.onToggle}}" aria-expanded="{{r.open}}" style="flex:none;min-height:26px;padding:0 8px;border:1px solid var(--l-border);background:transparent;color:var(--l-accent-deep);cursor:pointer;font:700 10px var(--l-mono);white-space:nowrap" style-hover="border-color:var(--l-accent);background:var(--l-soft)">{{r.openLabel}}</button>
+                  </sc-if>
+                </div>
+                <sc-if value="{{r.chains}}" hint-placeholder-val="{{false}}">
+                  <div style="margin-top:8px;padding:8px 10px;border:1px solid var(--l-border);background:var(--l-bg)">
+                    <sc-for list="{{r.chains}}" as="g" hint-placeholder-count="3">
+                      <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;padding:3px 0">
+                        <span style="font:10px var(--l-mono);letter-spacing:.05em;color:var(--l-faint);text-transform:uppercase;min-width:74px">{{g.label}}</span>
+                        <sc-for list="{{g.ids}}" as="n" hint-placeholder-count="2">
+                          <button onClick="{{n.onClick}}" style="min-height:22px;padding:1px 6px;border:1px solid var(--l-border);background:transparent;color:var(--l-accent-deep);cursor:pointer;font:700 10.5px var(--l-mono)" style-hover="border-color:var(--l-accent);background:var(--l-soft)">{{n.id}}</button>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                    <button onClick="{{r.onOpen}}" style="margin-top:6px;min-height:26px;padding:0 10px;border:1px solid var(--l-rule);background:transparent;color:var(--l-fg);cursor:pointer;font:700 10.5px var(--l-mono)" style-hover="background:var(--l-soft)">Open {{r.id}} in the lineage →</button>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </sc-if>
+          <h3 style="margin:22px 0 8px;font-family:var(--font-heading);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.03em">Typed relations</h3>
+          <sc-for list="{{sel.relGroups}}" as="g" hint-placeholder-count="2">
+            <div style="padding:7px 0;border-top:1px solid var(--l-border)">
+              <span style="display:block;font:10px var(--l-mono);letter-spacing:.05em;color:var(--l-muted);text-transform:uppercase">{{g.label}}</span>
+              <span style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+                <sc-for list="{{g.items}}" as="t" hint-placeholder-count="1">
+                  <sc-if value="{{t.exists}}" hint-placeholder-val="{{true}}">
+                    <button onClick="{{t.onClick}}" style="min-height:26px;padding:2px 8px;border:1px solid var(--l-border);background:transparent;color:var(--l-accent-deep);cursor:pointer;font:700 11px var(--l-mono)" style-hover="border-color:var(--l-accent);background:var(--l-soft)">{{t.id}}</button>
+                  </sc-if>
+                  <sc-if value="{{t.outside}}" hint-placeholder-val="{{false}}">
+                    <span title="Recorded in the repository, outside this view's scope" style="min-height:26px;display:inline-flex;align-items:center;padding:2px 8px;border:1px dashed var(--l-border);color:var(--l-faint);font:11px var(--l-mono)">{{t.id}} · outside scope</span>
+                  </sc-if>
+                  <sc-if value="{{t.unresolved}}" hint-placeholder-val="{{false}}">
+                    <span title="The record names this target but it does not resolve in the repository" style="min-height:26px;display:inline-flex;align-items:center;padding:2px 8px;border:1px dashed var(--s-rejected);color:var(--s-rejected);font:11px var(--l-mono)">{{t.id}} · unresolved</span>
+                  </sc-if>
+                </sc-for>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </aside>
+    </div>
+  </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;dark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Rendering&quot;},&quot;showContext&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Rendering&quot;}}">
+class Component extends DCLogic {
+  state = { data: null, selId: null, history: [], hIdx: -1, query: '', edges: [], boardW: 0, boardH: 0, detailsAt: 0, ctxOn: null, connOn: true, panelWide: false, navOpen: (localStorage.getItem('lin-nav-open') ?? '1') === '1' };
+  navVals() {
+    const open = this.state.navOpen;
+    return {
+      navOpen: open,
+      navStyle: { width: open ? '170px' : '54px', flex: 'none', borderRight: '2px solid var(--l-rule)', background: 'var(--l-surface)', position: 'sticky', top: 0, alignSelf: 'flex-start', minHeight: '100vh', padding: '18px 0', transition: 'width .15s' },
+      homeLabel: open ? 'Home' : 'H',
+      lineageLabel: open ? 'Lineage' : 'L',
+      graphLabel: open ? 'Virtual Twin' : 'V',
+      navBtnLabel: open ? '⇤' : '⇥',
+      navBtnAria: open ? 'Shrink the menu' : 'Expand the menu',
+      toggleNav: () => this.setState(s => { const v = !s.navOpen; try { localStorage.setItem('lin-nav-open', v ? '1' : '0'); } catch (e) {} return { navOpen: v }; })
+    };
+  }
+
+  STAGES = [
+    { id: 'purpose', label: 'Purpose', types: ['intent', 'capability'] },
+    { id: 'definition', label: 'Definition', types: ['requirement', 'specification'] },
+    { id: 'design', label: 'Design', types: ['architecture', 'adr'] },
+    { id: 'delivery', label: 'Delivery', types: ['work_order'] },
+    { id: 'assurance', label: 'Assurance', types: ['verification', 'verification_record'] },
+    { id: 'release-operation', label: 'Release', types: ['release_contract', 'release_record', 'operating_contract'] }
+  ];
+  VERBS = { derives_from: 'derives from', specifies: 'specifies', addresses: 'addresses', conforms_to: 'conforms to', conforms_transitively_to_requirement: 'transitively conforms to', constrains: 'constrains', decides: 'decides', implements: 'implements', specifications: 'specified by', verification: 'verified per', architecture: 'designed per', verifies: 'verifies', verifies_work_order: 'verifies', includes_verification: 'includes verification', releases_work: 'releases', gates: 'gates', satisfies: 'satisfies', assures: 'assures', superseded_by: 'superseded by' };
+  GLOSS = { intent: 'Intent — the stated purpose', capability: 'Capability — what this must let people do', requirement: 'Requirement — a testable obligation', specification: 'Specification — precisely how it is met', architecture: 'Architecture — the structural design', adr: 'Architecture decision record (ADR)', work_order: 'Work order (WO) — an authorized change', verification: 'Verification contract (VER) — what evidence is required', verification_record: 'Verification record (VREC) — evidence bound to an exact commit', release_contract: 'Release contract (REL) — what a release must prove', release_record: 'Release record (RLS) — the shipped, digest-bound unit', operating_contract: 'Operating contract' };
+  KIND = { intent: 'Intent', capability: 'Capability', requirement: 'Requirement', specification: 'Specification', architecture: 'Architecture', adr: 'ADR', work_order: 'Work order', verification: 'Contract (VER)', verification_record: 'Record (VREC)', release_contract: 'Contract (REL)', release_record: 'Record (RLS)', operating_contract: 'Operating contract' };
+  LANES = { intent: 'Intent', capability: 'Capabilities', requirement: 'Requirements', specification: 'Specifications', architecture: 'Architecture', adr: 'Decisions (ADR)', work_order: 'Work orders', verification: 'Contracts (VER)', verification_record: 'Records (VREC)', release_contract: 'Contracts (REL)', release_record: 'Records (RLS)', operating_contract: 'Operating contracts' };
+
+  componentDidMount() {
+    this._details = new Map();
+    this._onResize = () => this.scheduleMeasure();
+    window.addEventListener('resize', this._onResize);
+    this.applyTheme();
+    fetch('data/lineage-bundle.json').then(r => r.json()).then(bundle => {
+      const byId = new Map(bundle.artifacts.map(a => [a.id, a]));
+      const outE = new Map(), inE = new Map();
+      bundle.relations.forEach(r2 => {
+        if (!outE.has(r2.source)) outE.set(r2.source, []);
+        outE.get(r2.source).push(r2);
+        if (!inE.has(r2.target)) inE.set(r2.target, []);
+        inE.get(r2.target).push(r2);
+      });
+      this._byId = byId; this._out = outE; this._in = inE; this._bundle = bundle;
+      this._coverage = new Map((bundle.coverage || []).map(c => [c.requirement, c]));
+      this._stageOf = {}; this.STAGES.forEach(s => s.types.forEach(t => { this._stageOf[t] = s.id; }));
+      this._root = bundle.data_root || '';
+      this.setState({ data: bundle });
+      return Promise.all((bundle.detail_ids || []).map(id =>
+        fetch(this._root + 'artifacts/' + id + '.json').then(r => r.ok ? r.json() : null).catch(() => null).then(d => [id, d])
+      ));
+    }).then(pairs => {
+      (pairs || []).forEach(([id, d]) => { if (d) this._details.set(id, d); });
+      this._entries = this.buildEntries();
+      this.setState({ detailsAt: this._details.size });
+      const deep = new URLSearchParams(window.location.search).get('artifact');
+      if (deep && this._byId.has(deep)) this.select(deep);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.scheduleMeasure());
+    });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  componentDidUpdate() { this.applyTheme(); this.scheduleMeasure(); }
+  applyTheme() { document.documentElement.setAttribute('data-lin-theme', (this.props.dark ?? false) ? 'dark' : 'light'); }
+  merged(id) { const a = this._byId.get(id); const d = this._details.get(id); return d ? { ...a, ...d.artifact } : a; }
+  docsOf(id) { const d = this._details.get(id); return d ? (d.evidence_documents || []) : []; }
+
+  spine(rootId) {
+    const nodes = new Set([rootId]); const edges = []; const seenE = new Set();
+    const depths = new Map([[rootId, 0]]);
+    const walk = dir => {
+      const q = [[rootId, 0]]; const seen = new Set([rootId]);
+      while (q.length) {
+        const [id, dep] = q.shift();
+        const list = (dir === 'up' ? this._out : this._in).get(id) || [];
+        for (const r of list) {
+          if (r.relation === 'superseded_by') continue;
+          const next = dir === 'up' ? r.target : r.source;
+          if (!this._byId.has(next)) continue;
+          const key = r.source + '|' + r.relation + '|' + r.target;
+          if (!seenE.has(key)) { seenE.add(key); edges.push(r); }
+          nodes.add(next);
+          if (!depths.has(next) || depths.get(next) > dep + 1) depths.set(next, dep + 1);
+          if (!seen.has(next)) { seen.add(next); q.push([next, dep + 1]); }
+        }
+      }
+    };
+    walk('up'); walk('down');
+    edges.sort((a, b) => (a.source + a.relation + a.target) < (b.source + b.relation + b.target) ? -1 : 1);
+    return { nodes, edges, depths };
+  }
+  isAggregate(id) { const a = this._byId && this._byId.get(id); return !!a && (a.type === 'release_record' || a.type === 'release_contract'); }
+  boardSpine(rootId) {
+    if (!this.isAggregate(rootId)) return this.spine(rootId);
+    // a release is an aggregation of chains: the board spine is the record's own short story
+    const trunkVerbs = new Set(['satisfies', 'includes_verification', 'conforms_to']);
+    const nodes = new Set([rootId]); const edges = []; const seenE = new Set();
+    const depths = new Map([[rootId, 0]]);
+    let frontier = [rootId];
+    for (let hop = 1; hop <= 2; hop++) {
+      const next = [];
+      for (const id of frontier) {
+        const inc = [...(this._out.get(id) || []), ...(this._in.get(id) || [])];
+        for (const r of inc) {
+          if (!trunkVerbs.has(r.relation)) continue;
+          const other = r.source === id ? r.target : r.source;
+          if (!this._byId.has(other) || !this.isRecordish(other)) continue;
+          const key = r.source + '|' + r.relation + '|' + r.target;
+          if (!seenE.has(key)) { seenE.add(key); edges.push(r); }
+          if (!nodes.has(other)) { nodes.add(other); depths.set(other, hop); next.push(other); }
+        }
+      }
+      frontier = next;
+    }
+    edges.sort((a, b) => (a.source + a.relation + a.target) < (b.source + b.relation + b.target) ? -1 : 1);
+    return { nodes, edges, depths, aggregate: true };
+  }
+  isRecordish(id) { const a = this._byId.get(id); return !!a && ['release_record', 'release_contract', 'verification_record'].includes(a.type); }
+  rosterVerb(type) { return type === 'release_record' ? 'releases_work' : 'gates'; }
+  humanGap(msA, msB) {
+    const ms = msB - msA;
+    if (!(ms > 0)) return null;
+    const min = Math.round(ms / 60000);
+    if (min < 90) return min + ' min';
+    const h = Math.round(ms / 3600000);
+    if (h < 48) return h + ' h';
+    return Math.round(ms / 86400000) + ' d';
+  }
+
+  buildEntries() {
+    const arts = this._bundle.artifacts;
+    const out = [];
+    const rlsAll = arts.filter(a => a.type === 'release_record' && a.status === 'released')
+      .map(a => this.merged(a.id))
+      .sort((a, b) => String(b.released_at || '').localeCompare(String(a.released_at || '')) || a.id.localeCompare(b.id));
+    const rls = rlsAll[0];
+    if (rls) {
+      const wos = ((this._out.get(rls.id) || []).filter(r => r.relation === 'releases_work')).length;
+      const dist = (this._bundle.distributions || {})[rls.id];
+      out.push({ kicker: 'Latest release', id: rls.id, title: 'Follow ' + (rls.version || rls.id) + ' back to its purposes', meta: wos + ' work orders · commit ' + String(rls.commit || '').slice(0, 7) + (dist && dist.wheel_sha256 ? ' · wheel ' + dist.wheel_sha256.slice(0, 8) + '…' : '') });
+    }
+    let bestWo = null;
+    for (const [id, d] of this._details) {
+      const a = d.artifact;
+      if (a.type !== 'verification_record' || a.status !== 'verified' || !a.verified_at) continue;
+      for (const r of (this._out.get(id) || [])) {
+        if (r.relation !== 'verifies_work_order' || !this._byId.has(r.target)) continue;
+        if (!bestWo || a.verified_at > bestWo.at || (a.verified_at === bestWo.at && r.target < bestWo.id)) bestWo = { id: r.target, at: a.verified_at };
+      }
+    }
+    if (bestWo) {
+      const wo = this.merged(bestWo.id);
+      const deleg = (wo.lifecycle_events || []).filter(e => String(e.decided_by || '').includes('delegated')).length;
+      out.push({ kicker: 'Newest verified work order', id: wo.id, title: wo.title, meta: (deleg ? deleg + ' delegated CI-gated transitions · ' : '') + 'verified ' + bestWo.at.slice(0, 10) });
+    }
+    let bestReq = null;
+    for (const r of arts.filter(a => a.type === 'requirement')) {
+      const sp = this.spine(r.id); const lit = new Set();
+      sp.nodes.forEach(id => { const t = (this._byId.get(id) || {}).type; if (this._stageOf[t]) lit.add(this._stageOf[t]); });
+      if (!bestReq || lit.size > bestReq.score || (lit.size === bestReq.score && r.id < bestReq.a.id)) bestReq = { a: r, score: lit.size };
+    }
+    if (bestReq) out.push({ kicker: 'A fully traced requirement', id: bestReq.a.id, title: bestReq.a.title, meta: bestReq.score + '/6 stages lit, purpose to release' });
+    return out;
+  }
+
+  select(id, push = true) {
+    if (!this._byId || !this._byId.has(id)) return;
+    try { window.history.replaceState(null, '', '?artifact=' + encodeURIComponent(id)); } catch (e) {}
+    this.setState(s => {
+      let h = s.history.slice(), i = s.hIdx;
+      if (push && h[i] !== id) { h = h.slice(0, i + 1); h.push(id); if (h.length > 20) h.shift(); i = h.length - 1; }
+      return { selId: id, history: h, hIdx: i, query: '', openDoc: null, docsAll: false, rosterOpen: null, laneOpen: [] };
+    });
+  }
+  fixText(t) {
+    const s = String(t == null ? '' : t);
+    if (!/[\u00c2\u00c3\u00e2]/.test(s)) return s;
+    // cp1252-aware repair: map each char back to its byte, then decode as UTF-8
+    const cp1252 = { 0x20AC: 0x80, 0x201A: 0x82, 0x0192: 0x83, 0x201E: 0x84, 0x2026: 0x85, 0x2020: 0x86, 0x2021: 0x87, 0x02C6: 0x88, 0x2030: 0x89, 0x0160: 0x8A, 0x2039: 0x8B, 0x0152: 0x8C, 0x017D: 0x8E, 0x2018: 0x91, 0x2019: 0x92, 0x201C: 0x93, 0x201D: 0x94, 0x2022: 0x95, 0x2013: 0x96, 0x2014: 0x97, 0x02DC: 0x98, 0x2122: 0x99, 0x0161: 0x9A, 0x203A: 0x9B, 0x0153: 0x9C, 0x017E: 0x9E, 0x0178: 0x9F };
+    try {
+      const bytes = new Uint8Array(s.length);
+      for (let i = 0; i < s.length; i++) {
+        const c = s.codePointAt(i);
+        const b = c <= 0xFF ? c : cp1252[c];
+        if (b === undefined) return s; // genuine non-latin char: not mojibake, leave as-is
+        bytes[i] = b;
+      }
+      const decoded = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+      return decoded;
+    } catch (e) { return s; }
+  }
+  fmtBytes(b) {
+    if (b == null) return '';
+    if (b < 1024) return b + ' B';
+    return (Math.round(b / 102.4) / 10) + ' KB';
+  }
+  reasonNodes(text) {
+    const src = this._bundle && this._bundle.source_url;
+    const parts = this.fixText(text).split(/([0-9a-f]{7,40}|check-run \d+|#\d{2,6})/g);
+    const codeStyle = { fontFamily: 'var(--l-mono)', fontSize: '11px', background: 'var(--l-surface)', border: '1px solid var(--l-border)', padding: '0 3px', whiteSpace: 'nowrap' };
+    return parts.map((p, i) => {
+      if (/^[0-9a-f]{7,40}$/.test(p) && src) return React.createElement('a', { key: i, href: src + '/commit/' + p, target: '_blank', rel: 'noopener', title: 'Open commit on GitHub', style: { ...codeStyle, color: 'var(--l-accent-deep)', textDecoration: 'none' } }, p);
+      if (/^([0-9a-f]{7,40}|check-run \d+|#\d{2,6})$/.test(p)) return React.createElement('code', { key: i, style: codeStyle }, p);
+      return p;
+    });
+  }
+  earsSegments(statement) {
+    // mirrors the product template's earsMarkup segmentation, presentation only
+    const exact = this.fixText(statement);
+    const markers = [...exact.matchAll(/\b(WHERE|WHILE|WHEN|IF|THEN|THE\s+SYSTEM|SYSTEM|SHALL)\b/gi)];
+    const shall = markers.filter(m => m[1].toUpperCase() === 'SHALL');
+    const subject = markers.find(m => /SYSTEM/i.test(m[1]));
+    const complete = shall.length === 1 && subject && subject.index < shall[0].index;
+    if (!complete) return { complete: false, segments: [{ text: exact, clause: 'unclassified' }] };
+    const classes = { WHERE: 'option', WHILE: 'state', WHEN: 'trigger', IF: 'condition', THEN: 'separator', SYSTEM: 'subject', 'THE SYSTEM': 'subject', SHALL: 'obligation' };
+    const segments = []; let cursor = 0, current = 'unclassified';
+    markers.forEach(m => {
+      if (m.index > cursor) segments.push({ text: exact.slice(cursor, m.index), clause: current });
+      const key = m[1].replace(/\s+/g, ' ').toUpperCase();
+      const clause = classes[key] || 'unclassified';
+      segments.push({ text: m[0], clause });
+      current = clause === 'obligation' ? 'response' : clause;
+      cursor = m.index + m[0].length;
+    });
+    if (cursor < exact.length) segments.push({ text: exact.slice(cursor), clause: current });
+    return { complete: true, segments };
+  }
+  earsTokenStyle(clause) {
+    const c = 'var(--e-' + clause + ')';
+    return {
+      borderBottom: clause === 'unclassified' ? '2px dashed ' + c : '2px solid ' + c,
+      background: clause === 'unclassified' ? 'transparent' : 'color-mix(in srgb, ' + c + ' 13%, transparent)',
+      padding: '1px 2px'
+    };
+  }
+  earsNodes(statement) {
+    const { segments } = this.earsSegments(statement);
+    return segments.map((s, i) => React.createElement('span', { key: i, title: 'Clause: ' + s.clause, style: this.earsTokenStyle(s.clause) }, s.text));
+  }
+  mdNodes(text) {
+    const lines = this.fixText(text).split('\n');
+    const out = []; let i = 0, key = 0;
+    const inline = s => {
+      const seg = s.split(/(`[^`]+`|\*\*[^*]+\*\*)/g);
+      return seg.map((p, j) => {
+        if (/^`[^`]+`$/.test(p)) return React.createElement('code', { key: j, style: { fontFamily: 'var(--l-mono)', fontSize: '11.5px', background: 'var(--l-bg)', border: '1px solid var(--l-border)', padding: '0 3px' } }, p.slice(1, -1));
+        if (/^\*\*[^*]+\*\*$/.test(p)) return React.createElement('strong', { key: j }, p.slice(2, -2));
+        return p;
+      });
+    };
+    const preStyle = { margin: '10px 0', padding: '10px 12px', background: 'var(--l-bg)', border: '1px solid var(--l-border)', overflowX: 'auto', font: '11.5px/1.5 var(--l-mono)', whiteSpace: 'pre' };
+    while (i < lines.length) {
+      const ln = lines[i];
+      if (/^```/.test(ln)) {
+        const buf = []; i++;
+        while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i++; }
+        i++;
+        out.push(React.createElement('pre', { key: key++, style: preStyle }, buf.join('\n')));
+        continue;
+      }
+      if (/^\|/.test(ln)) {
+        const buf = [];
+        while (i < lines.length && /^\|/.test(lines[i])) { buf.push(lines[i]); i++; }
+        out.push(React.createElement('pre', { key: key++, style: preStyle }, buf.join('\n')));
+        continue;
+      }
+      const h = ln.match(/^(#{1,6})\s+(.*)$/);
+      if (h) {
+        const lvl = h[1].length;
+        out.push(React.createElement('h' + Math.min(6, lvl + 2), { key: key++, style: { margin: '16px 0 6px', fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: (lvl <= 1 ? 16 : lvl === 2 ? 14 : 13) + 'px', lineHeight: 1.25 } }, h[2]));
+        i++; continue;
+      }
+      if (/^\s*([-*]|\d+\.)\s+/.test(ln)) {
+        const items = [];
+        while (i < lines.length && /^\s*([-*]|\d+\.)\s+/.test(lines[i])) {
+          let item = lines[i].replace(/^\s*([-*]|\d+\.)\s+/, ''); i++;
+          while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && !/^\s*([-*]|\d+\.)\s+/.test(lines[i])) { item += ' ' + lines[i].trim(); i++; }
+          items.push(item);
+        }
+        out.push(React.createElement('ul', { key: key++, style: { margin: '8px 0', paddingLeft: '20px' } },
+          items.map((it, j) => React.createElement('li', { key: j, style: { margin: '3px 0', fontSize: '12.5px', lineHeight: 1.55 } }, inline(it)))));
+        continue;
+      }
+      if (/^>/.test(ln)) {
+        const buf = [];
+        while (i < lines.length && /^>/.test(lines[i])) { buf.push(lines[i].replace(/^>\s?/, '')); i++; }
+        out.push(React.createElement('blockquote', { key: key++, style: { margin: '10px 0', padding: '8px 12px', borderLeft: '3px solid var(--l-rule)', background: 'var(--l-bg)', fontSize: '12.5px', lineHeight: 1.55 } }, buf.join(' ')));
+        continue;
+      }
+      if (!ln.trim()) { i++; continue; }
+      const buf = [ln];
+      i++;
+      while (i < lines.length && lines[i].trim() && !/^(#|```|\||>|\s*([-*]|\d+\.)\s)/.test(lines[i])) { buf.push(lines[i]); i++; }
+      out.push(React.createElement('p', { key: key++, style: { margin: '8px 0', fontSize: '12.5px', lineHeight: 1.6, overflowWrap: 'anywhere' } }, inline(buf.join(' '))));
+    }
+    return out;
+  }
+
+  scheduleMeasure() { if (this._mFrame) cancelAnimationFrame(this._mFrame); this._mFrame = requestAnimationFrame(() => { this._mFrame = null; this.measure(); }); }
+  measure() {
+    const inner = this._inner;
+    if (!inner || !this.state.selId || !this._byId || !this.state.connOn) {
+      if (this._edgeSig !== '[]') { this._edgeSig = '[]'; this.setState({ edges: [] }); }
+      return;
+    }
+    const sp = this.boardSpine(this.state.selId);
+    const ir = inner.getBoundingClientRect();
+    const cards = new Map();
+    inner.querySelectorAll('[data-lin-id]').forEach(el => cards.set(el.getAttribute('data-lin-id'), el));
+    const pos = id => { const el = cards.get(id); if (!el) return null; const r = el.getBoundingClientRect(); return { l: Math.round(r.left - ir.left), t: Math.round(r.top - ir.top), w: Math.round(r.width), h: Math.round(r.height) }; };
+    const edges = [];
+    for (const r of sp.edges) {
+      const s = pos(r.source), t = pos(r.target); if (!s || !t) continue;
+      const active = r.source === this.state.selId || r.target === this.state.selId;
+      const sy = s.t + Math.round(s.h / 2), ty = t.t + Math.round(t.h / 2);
+      let d, lx, ly;
+      if (Math.abs(s.l - t.l) < 10) {
+        d = 'M' + s.l + ' ' + sy + ' C ' + (s.l - 34) + ' ' + sy + ', ' + (t.l - 34) + ' ' + ty + ', ' + t.l + ' ' + ty;
+        lx = s.l - 20; ly = Math.round((sy + ty) / 2);
+      } else if (s.l > t.l) {
+        const x1 = s.l, x2 = t.l + t.w;
+        d = 'M' + x1 + ' ' + sy + ' C ' + (x1 - 46) + ' ' + sy + ', ' + (x2 + 46) + ' ' + ty + ', ' + x2 + ' ' + ty;
+        lx = Math.round((x1 + x2) / 2); ly = Math.round((sy + ty) / 2);
+      } else {
+        const x1 = s.l + s.w, x2 = t.l;
+        d = 'M' + x1 + ' ' + sy + ' C ' + (x1 + 46) + ' ' + sy + ', ' + (x2 - 46) + ' ' + ty + ', ' + x2 + ' ' + ty;
+        lx = Math.round((x1 + x2) / 2); ly = Math.round((sy + ty) / 2);
+      }
+      edges.push({ d, verb: active ? (this.VERBS[r.relation] || r.relation) : '', dash: r.authority && r.authority !== 'declared' ? '5 4' : 'none', stroke: active ? 'var(--l-accent)' : 'var(--l-faint)', w: active ? 1.8 : 1.1, op: active ? 1 : 0.55, lx, ly: ly - 6 });
+    }
+    const sig = JSON.stringify(edges);
+    if (sig !== this._edgeSig) { this._edgeSig = sig; this.setState({ edges, boardW: inner.scrollWidth, boardH: inner.scrollHeight }); }
+  }
+
+  dot(status) {
+    const m = { draft: ['var(--s-draft)', 0], approved: ['var(--s-approved)', 1], in_progress: ['var(--s-progress)', 0], implemented: ['var(--s-implemented)', 1], verified: ['var(--s-verified)', 1], released: ['var(--s-released)', 1], rejected: ['var(--s-rejected)', 2], superseded: ['var(--s-superseded)', 2] };
+    const [c, kind] = m[status] || ['var(--l-faint)', 0];
+    return { display: 'inline-block', flex: 'none', width: '8px', height: '8px', borderRadius: kind === 2 ? '0' : '50%', background: kind === 0 ? 'transparent' : c, border: kind === 0 ? '1.5px solid ' + c : 'none', transform: kind === 2 ? 'rotate(45deg)' : 'none' };
+  }
+  cardStyle(role) {
+    const base = { display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer', background: 'var(--l-surface)', color: 'var(--l-fg)', padding: '10px 12px', marginTop: '8px', border: '1px solid var(--l-border)', transition: 'border-color .12s' };
+    if (role === 'selected') return { ...base, border: '2px solid var(--l-accent)', boxShadow: '0 0 0 3px var(--l-soft)', padding: '9px 11px' };
+    if (role === 'spine') return { ...base, border: '1px solid var(--l-rule)', borderLeft: '4px solid var(--l-rule)', paddingLeft: '9px' };
+    return { ...base, borderStyle: 'dashed', opacity: 0.5 };
+  }
+  cueFor(stageId, members) {
+    if (!members.length) {
+      const absent = { purpose: 'no recorded purpose in this chain', definition: 'none in this chain', design: 'none recorded — not every change needs one', delivery: 'no work order in this chain', assurance: 'not verified', 'release-operation': 'not released' };
+      return { text: absent[stageId], tone: 'absent' };
+    }
+    if (stageId === 'assurance') {
+      const vrec = members.map(m => this.merged(m.id)).find(m => m.type === 'verification_record' && m.status === 'verified');
+      if (vrec) return { text: 'verified · commit-bound' + (vrec.commit ? ' ' + vrec.commit.slice(0, 7) : ''), tone: 'good' };
+    }
+    if (stageId === 'release-operation') {
+      const rls = members.map(m => this.merged(m.id)).find(m => m.type === 'release_record' && m.status === 'released');
+      if (rls) return { text: 'shipped in ' + (rls.version || rls.id), tone: 'good' };
+      const rel = members.find(m => m.type === 'release_contract' && m.status === 'approved');
+      if (rel) return { text: 'gated by ' + rel.id + ' · not yet released', tone: 'plain' };
+    }
+    if (stageId === 'delivery' && members.length > 2) {
+      const st = [...new Set(members.map(m => m.status))];
+      return { text: members.length + ' work orders' + (st.length === 1 ? ' · all ' + st[0].replace('_', ' ') : ''), tone: 'plain' };
+    }
+    if (members.length <= 2) return { text: members.map(m => m.id).join(' · '), tone: 'plain' };
+    return { text: members.length + ' artifacts', tone: 'plain' };
+  }
+
+  renderVals() {
+    const st = this.state;
+    const loading = !st.data;
+    const showContext = st.ctxOn ?? (this.props.showContext ?? true);
+    const copyFn = v => () => { if (navigator.clipboard) navigator.clipboard.writeText(String(v)); };
+    const vals = {
+      loading, query: st.query, edges: st.edges, boardW: st.boardW || 1584, boardH: st.boardH || 600,
+      innerRef: el => { this._inner = el; },
+      onQuery: e => this.setState({ query: e.target.value }),
+      clearSelection: () => { try { window.history.replaceState(null, '', window.location.pathname); } catch (e) {} this.setState({ selId: null, openDoc: null, docsAll: false }); },
+      histBack: () => { const i = st.hIdx - 1; if (i >= 0) this.setState({ hIdx: i, selId: st.history[i] }); },
+      histFwd: () => { const i = st.hIdx + 1; if (i < st.history.length) this.setState({ hIdx: i, selId: st.history[i] }); },
+      backDisabled: st.hIdx <= 0, fwdDisabled: st.hIdx >= st.history.length - 1,
+      hasHistory: st.history.length > 0,
+      histItems: st.history.map((id, i) => ({
+        id, current: i === st.hIdx, onClick: () => this.setState({ hIdx: i, selId: id }),
+        style: { minHeight: '32px', padding: '0 10px', border: i === st.hIdx ? '1px solid var(--l-accent)' : '1px solid var(--l-border)', background: i === st.hIdx ? 'var(--l-soft)' : 'var(--l-surface)', color: i === st.hIdx ? 'var(--l-accent-deep)' : 'var(--l-fg)', cursor: 'pointer', font: (i === st.hIdx ? '700 ' : '') + '11px var(--l-mono)', whiteSpace: 'nowrap' }
+      })),
+      legend: ['draft', 'approved', 'in_progress', 'implemented', 'verified', 'released', 'rejected', 'superseded'].map(s => ({ label: s.replace('_', ' '), dot: this.dot(s) })),
+      hasSelection: false, showEmpty: false, hasResults: false, results: [], entries: [], sel: null, stages: [], countsLine: '', onSearchKey: () => {}, ...this.navVals(),
+      ctxOn: st.ctxOn ?? (this.props.showContext ?? true), connOn: st.connOn,
+      toggleCtx: e => this.setState({ ctxOn: e.target.checked }),
+      toggleConn: e => this.setState({ connOn: e.target.checked }),
+      panelWide: st.panelWide,
+      boardWrapStyle: st.panelWide ? { display: 'none' } : { flex: 1, minWidth: 0, overflowX: 'auto' },
+      panelBtnLabel: st.panelWide ? 'REDUCE ⇤' : 'EXPAND ⇥',
+      panelBtnAria: st.panelWide ? 'Reduce the detail panel to its initial width' : 'Expand the detail panel to the whole screen',
+      togglePanel: () => this.setState(s => ({ panelWide: !s.panelWide })),
+      panelStyle: st.panelWide
+        ? { width: '100%', flex: 'none', borderLeft: '2px solid var(--l-rule)', background: 'var(--l-surface)', position: 'sticky', top: 0, alignSelf: 'flex-start', maxHeight: '100vh', overflowY: 'auto' }
+        : { width: 'min(430px,42vw)', flex: 'none', borderLeft: '2px solid var(--l-rule)', background: 'var(--l-surface)', position: 'sticky', top: 0, alignSelf: 'flex-start', maxHeight: '100vh', overflowY: 'auto' }
+    };
+    if (loading) return vals;
+    const b = this._bundle;
+    const arts = b.artifacts;
+    const repo = b.repository || {};
+    const rev = b.repository_revision || repo.revision || '';
+    const srcUrl = b.source_url || '';
+    vals.countsLine = (repo.name ? repo.name.split('-2026')[0] : 'repository') + ' @ ' + rev.slice(0, 7) + (repo.valid ? ' · snapshot valid' : '') + ' · ' + (b.counts ? b.counts.artifacts + ' artifacts, ' + b.counts.relations + ' relations' : '') + ' · this view: ' + arts.length + ' in scope';
+    const c = b.counts || {};
+    if (c.coverage_active != null && c.coverage_verified != null) {
+      const total = c.coverage_verified >= c.coverage_active && c.coverage_specified >= c.coverage_active;
+      const errPart = c.finding_error != null ? ' · ' + c.finding_error + ' errors' : '';
+      vals.headline = total
+        ? c.coverage_verified + '/' + c.coverage_active + ' active requirements specified and verified' + errPart
+        : c.coverage_verified + '/' + c.coverage_active + ' verified — ' + (c.coverage_active - c.coverage_verified) + ' outstanding' + errPart;
+      vals.headlineStyle = { display: 'block', padding: '7px 24px', borderBottom: '1px solid var(--l-border)', font: '700 12px var(--l-mono)', letterSpacing: '.02em', color: total ? 'var(--l-fg)' : 'var(--l-accent-deep)', background: total ? 'var(--l-bg)' : 'var(--l-soft)' };
+    } else { vals.headline = false; }
+    vals.entries = (this._entries || []).map(e => ({ ...e, onClick: () => this.select(e.id) }));
+    const q = st.query.trim().toLowerCase();
+    const results = q ? arts.filter(a => a.id.toLowerCase().includes(q) || String(a.title || '').toLowerCase().includes(q)).slice(0, 8) : [];
+    vals.results = results.map(a => ({ id: a.id, title: a.title, onClick: () => this.select(a.id) }));
+    vals.hasResults = results.length > 0;
+    vals.onSearchKey = e => { if (e.key === 'Enter' && results.length) { e.preventDefault(); this.select(results[0].id); } if (e.key === 'Escape') this.setState({ query: '' }); };
+    const selId = st.selId && this._byId.has(st.selId) ? st.selId : null;
+    vals.hasSelection = !!selId; vals.showEmpty = !selId;
+    if (!selId) return vals;
+    const sp = this.boardSpine(selId);
+    const overBudget = !sp.aggregate && sp.nodes.size > 25;
+    vals.stages = this.STAGES.map((stage, i) => {
+      const members = arts.filter(a => this._stageOf[a.type] === stage.id && sp.nodes.has(a.id)).sort((a, b) => a.id.localeCompare(b.id));
+      let cue = this.cueFor(stage.id, members);
+      if (sp.aggregate) {
+        const rosterN = (this._out.get(selId) || []).filter(r => r.relation === this.rosterVerb(this._byId.get(selId).type)).length;
+        if (stage.id === 'delivery' && rosterN) cue = { text: rosterN + ' work orders · see the roster in the panel', tone: 'plain' };
+        if (stage.id === 'definition' || stage.id === 'design' || stage.id === 'purpose') cue = { text: 'aggregated per work order — expand a roster row', tone: 'absent' };
+      }
+      const lanes = stage.types.map(t => {
+        const all = arts.filter(a => a.type === t).sort((a, b) => a.id.localeCompare(b.id));
+        if (!all.length) return null;
+        const mk = a => {
+          const role = a.id === selId ? 'selected' : sp.nodes.has(a.id) ? 'spine' : 'context';
+          const evs = (this.merged(a.id).lifecycle_events || []);
+          const last = evs[evs.length - 1];
+          return {
+            id: a.id, title: a.title, kind: this.KIND[a.type] || a.type, gloss: this.GLOSS[a.type] || a.type,
+            status: a.status, statusLabel: String(a.status || '').replace('_', ' '), dot: this.dot(a.status),
+            style: this.cardStyle(role), pressed: role === 'selected',
+            idColor: role === 'selected' ? 'var(--l-accent-deep)' : 'var(--l-fg)',
+            aria: a.id + ', ' + (this.KIND[a.type] || a.type) + ', ' + String(a.status || '').replace('_', ' ') + ', ' + (role === 'selected' ? 'selected artifact' : role === 'spine' ? 'on the lineage spine' : 'context'),
+            ribbon: last ? '→ ' + last.to + ' · ' + last.decided_by : '',
+            delegated: !!last && String(last.decided_by || '').includes('delegated'),
+            onClick: () => this.select(a.id), role
+          };
+        };
+        let cards = all.map(mk).sort((a2, b2) => (a2.role === 'context') - (b2.role === 'context') || (sp.depths.get(a2.id) ?? 99) - (sp.depths.get(b2.id) ?? 99) || a2.id.localeCompare(b2.id)).filter(c2 => showContext || c2.role !== 'context');
+        let moreBtn = false;
+        if (overBudget) {
+          const laneKey = stage.id + '|' + t;
+          const open = (st.laneOpen || []).includes(laneKey);
+          const spineCards = cards.filter(c2 => c2.role !== 'context');
+          if (!open && spineCards.length > 3) {
+            const hidden = spineCards.length - 3;
+            const keep = new Set(spineCards.slice(0, 3).map(c2 => c2.id));
+            cards = cards.filter(c2 => c2.role === 'context' || keep.has(c2.id) || c2.role === 'selected');
+            moreBtn = { label: '+ ' + hidden + ' more in this chain — show', onClick: () => this.setState(s => ({ laneOpen: [...(s.laneOpen || []), laneKey] })) };
+          }
+        }
+        return { label: this.LANES[t] || t, count: cards.length === all.length ? String(all.length) : cards.length + ' of ' + all.length, cards, moreBtn };
+      }).filter(Boolean);
+      return {
+        num: '0' + (i + 1), label: stage.label, cue: cue.text, lanes,
+        cueStyle: { display: 'block', marginTop: '4px', font: (cue.tone === 'good' ? '700 ' : '') + '11px var(--l-mono)', fontStyle: cue.tone === 'absent' ? 'italic' : 'normal', color: cue.tone === 'good' ? 'var(--l-accent-deep)' : cue.tone === 'absent' ? 'var(--l-faint)' : 'var(--l-muted)' }
+      };
+    });
+    const a = this.merged(selId);
+    const hasDetail = this._details.has(selId);
+    const dist = (b.distributions || {})[selId];
+    const facts = [];
+    const push = (k, v, copy, href) => { if (v !== undefined && v !== null && v !== '') facts.push({ k, v: String(v), copy: copy ? copyFn(v) : false, href: href || false, plain: !href }); };
+    push('version', a.version); push('tag', a.tag);
+    push('commit', a.commit, true, srcUrl && a.commit ? srcUrl + '/commit/' + a.commit : null);
+    if (a.worktree_state) push('worktree', a.worktree_state);
+    push('prepared', a.prepared_at ? a.prepared_at + (a.prepared_by ? ' · ' + a.prepared_by : '') : null);
+    push('verified', a.verified_at ? a.verified_at + (a.verified_by ? ' · ' + a.verified_by : '') : null);
+    push('released', a.released_at ? a.released_at + (a.authorized_by ? ' · ' + a.authorized_by : '') : null);
+    push('evaluator sha256', a.evaluator_evidence_sha256, true);
+    push('snapshot sha256', a.artifact_snapshot_sha256, true);
+    if (dist) {
+      push('wheel', dist.wheel);
+      push('wheel sha256', dist.wheel_sha256, true);
+      push('sdist', dist.sdist);
+      push('sdist sha256', dist.sdist_sha256, true);
+    }
+    push('superseded', a.superseded_at ? a.superseded_at + (a.supersession_authorized_by ? ' · ' + a.supersession_authorized_by : '') : null);
+    push('rejected', a.rejected_at ? a.rejected_at + (a.rejected_by ? ' · ' + a.rejected_by : '') : null);
+    // metadata — its own collapsed section, apart from the proof block
+    const metaFacts = [];
+    const pushMeta = (k, v, copy) => { if (v !== undefined && v !== null && v !== '') metaFacts.push({ k, v: String(v), copy: copy ? copyFn(v) : false, href: false, plain: true }); };
+    pushMeta('owners', (a.owners || []).join(', '));
+    pushMeta('authority', a.authority);
+    if (a.verification_method) pushMeta('method', [].concat(a.verification_method).join(', '));
+    pushMeta('created', a.created); pushMeta('updated', a.updated);
+    if (a.git_object_format) pushMeta('object format', a.git_object_format);
+    if (a.content) { pushMeta('body size', this.fmtBytes(a.content.bytes)); if (a.content.sha256) pushMeta('content sha256', a.content.sha256, true); }
+    pushMeta('source', a.path);
+    const events = (a.lifecycle_events || []).map((ev, ei, arr) => {
+      const prev = ei > 0 ? Date.parse(arr[ei - 1].decided_at) : NaN;
+      const cur = Date.parse(ev.decided_at);
+      const gap = ei > 0 && !isNaN(prev) && !isNaN(cur) ? this.humanGap(prev, cur) : null;
+      return {
+        from: ev.from, to: ev.to, by: ev.decided_by, at: ev.decided_at, reason: this.reasonNodes(ev.reason),
+        elapsed: gap ? '+' + gap : false,
+        delegated: String(ev.decided_by || '').includes('delegated'),
+        style: { margin: '10px 0 0', padding: '10px 12px', background: 'var(--l-bg)', borderLeft: '3px solid ' + (String(ev.decided_by || '').includes('delegated') ? 'var(--l-accent)' : 'var(--l-rule)') }
+      };
+    });
+    const docs = this.docsOf(selId);
+    const docCap = st.docsAll ? docs.length : 6;
+    const shownDocs = docs.slice(0, docCap).map((d, di) => {
+      const name = String(d.path || '').split('/').pop();
+      const hasText = !!d.raw_path;
+      const size = this.fmtBytes(d.bytes);
+      const assoc = (d.associations || []).join(', ');
+      const key = selId + '|' + di;
+      const open = st.openDoc === key;
+      let meta;
+      if (hasText) meta = (size ? size + ' · ' : '') + (assoc ? 'evidence for ' + assoc : '') + (d.sha256 ? ' · sha256 ' + d.sha256.slice(0, 12) + '…' : '');
+      else meta = (size ? size + ' · ' : '') + 'machine evidence, retained in the repository' + (assoc ? ' · ' + assoc : '');
+      return {
+        name, meta, hasText, open,
+        srcHref: srcUrl && d.path ? srcUrl + '/blob/' + rev + '/' + d.path : false,
+        openLabel: open ? 'CLOSE ×' : 'READ →',
+        text: open ? this.mdNodes((this._docTexts && this._docTexts.get(key)) || 'Loading evidence text…') : false,
+        onToggle: hasText ? () => {
+          if (this.state.openDoc === key) { this.setState({ openDoc: null }); return; }
+          this.setState({ openDoc: key });
+          if (!this._docTexts) this._docTexts = new Map();
+          if (!this._docTexts.has(key)) {
+            fetch(this._root + d.raw_path).then(r => r.ok ? r.text() : 'This evidence text could not be fetched (' + d.raw_path + ').').catch(() => 'This evidence text could not be fetched (' + d.raw_path + ').')
+              .then(t => { this._docTexts.set(key, this.fixText(t)); if (this.state.openDoc === key) this.forceUpdate(); });
+          }
+        } : false
+      };
+    });
+    const cov = a.type === 'requirement' ? this._coverage.get(selId) : null;
+    const relGroups = [];
+    const mkTargets = rels => rels.map(r => {
+      const id = r.other;
+      const exists = this._byId.has(id);
+      return { id, exists, outside: !exists && r.target_exists !== false, unresolved: r.target_exists === false, onClick: () => this.select(id) };
+    });
+    const og = new Map();
+    (this._out.get(selId) || []).forEach(r => { if (!og.has(r.relation)) og.set(r.relation, []); og.get(r.relation).push({ other: r.target, target_exists: r.target_exists }); });
+    [...og.keys()].sort().forEach(verb => relGroups.push({ label: (this.VERBS[verb] || verb) + ' →', items: mkTargets(og.get(verb).sort((x, y) => x.other.localeCompare(y.other))) }));
+    const ig = new Map();
+    (this._in.get(selId) || []).forEach(r => { if (!ig.has(r.relation)) ig.set(r.relation, []); ig.get(r.relation).push({ other: r.source, target_exists: true }); });
+    [...ig.keys()].sort().forEach(verb => relGroups.push({ label: '← ' + (this.VERBS[verb] || verb) + ' this', items: mkTargets(ig.get(verb).sort((x, y) => x.other.localeCompare(y.other))) }));
+    // verify-it-yourself commands, computed from the record's own fields
+    const verifyCmds = [];
+    if (a.commit && (a.type === 'verification_record' || a.type === 'release_record')) {
+      verifyCmds.push({ cmd: 'git show ' + a.commit.slice(0, 12), note: 'the bound candidate exists and is this change' });
+    }
+    if (a.type === 'release_record' && dist && dist.wheel) {
+      const pkg = String(dist.wheel).split('-')[0].replace(/_/g, '-');
+      if (a.version) verifyCmds.push({ cmd: 'pip download ' + pkg + '==' + a.version, note: 'fetch the published wheel' });
+      if (dist.wheel_sha256) verifyCmds.push({ cmd: 'sha256sum ' + dist.wheel, note: 'must print ' + dist.wheel_sha256.slice(0, 12) + '…' });
+    }
+    // aggregate roster: a release is an aggregation of chains
+    let roster = false;
+    if (this.isAggregate(selId)) {
+      const verb = this.rosterVerb(a.type);
+      const woIds = (this._out.get(selId) || []).filter(r => r.relation === verb).map(r => r.target).sort();
+      if (woIds.length) {
+        const rows = woIds.map(wid => {
+          const wo = this._byId.has(wid) ? this.merged(wid) : null;
+          const vrecRel = wo ? (this._in.get(wid) || []).find(r => r.relation === 'verifies_work_order' && this._byId.get(r.source) && this._byId.get(r.source).type === 'verification_record' && this._byId.get(r.source).status === 'verified' && r.source !== 'VREC-SEH-021') : null;
+          const anyVrec = wo ? (this._in.get(wid) || []).filter(r => r.relation === 'verifies_work_order').map(r => r.source).sort()[0] : null;
+          const vrecId = vrecRel ? vrecRel.source : anyVrec;
+          const evs = wo ? (wo.lifecycle_events || []) : [];
+          const t0 = evs.length ? Date.parse(evs[0].decided_at) : NaN;
+          const vrec = vrecId && this._byId.has(vrecId) ? this.merged(vrecId) : null;
+          const t1 = vrec && vrec.verified_at ? Date.parse(vrec.verified_at) : (evs.length ? Date.parse(evs[evs.length - 1].decided_at) : NaN);
+          return { id: wid, exists: !!wo, title: wo ? wo.title : 'outside this scope', status: wo ? wo.status : '', vrecId, t0, t1 };
+        });
+        const times = rows.flatMap(r => [r.t0, r.t1]).filter(t => !isNaN(t));
+        const relAt = a.released_at ? Date.parse(a.released_at) : NaN;
+        if (!isNaN(relAt)) times.push(relAt);
+        const minT = Math.min(...times), maxT = Math.max(...times);
+        const spanOk = times.length > 1 && maxT > minT;
+        const verified = rows.filter(r => r.vrecId).length;
+        roster = {
+          head: rows.length + ' work orders · ' + verified + ' verified records · one bound candidate' + (a.commit ? ' ' + a.commit.slice(0, 7) : ''),
+          arc: spanOk ? 'first decision ' + new Date(minT).toISOString().slice(0, 10) + ' → ' + (isNaN(relAt) ? 'last evidence' : 'released') + ' ' + new Date(maxT).toISOString().slice(0, 10) + ' · ' + this.humanGap(minT, maxT) + ' end to end' : false,
+          rows: rows.map(r => {
+            const open = st.rosterOpen === r.id;
+            let chains = false;
+            if (open && r.exists) {
+              const wsp = this.spine(r.id);
+              chains = this.STAGES.map(sg => ({
+                label: sg.label,
+                ids: [...wsp.nodes].filter(nid => this._stageOf[(this._byId.get(nid) || {}).type] === sg.id && nid !== selId).sort().map(nid => ({ id: nid, onClick: () => this.select(nid) }))
+              })).filter(g => g.ids.length);
+            }
+            const hasSpan = spanOk && !isNaN(r.t0) && !isNaN(r.t1) && r.t1 >= r.t0;
+            return {
+              ...r, open, chains,
+              statusLabel: String(r.status || '').replace('_', ' '), dotS: this.dot(r.status),
+              vrecLabel: r.vrecId ? r.vrecId : 'no verifying record in scope',
+              onVrec: r.vrecId && this._byId.has(r.vrecId) ? () => this.select(r.vrecId) : false,
+              noVrecBtn: !(r.vrecId && this._byId.has(r.vrecId)),
+              onToggle: r.exists ? () => this.setState(s => ({ rosterOpen: s.rosterOpen === r.id ? null : r.id })) : false,
+              openLabel: open ? 'COLLAPSE ×' : 'CHAIN →',
+              onOpen: r.exists ? () => this.select(r.id) : false,
+              spanStyle: hasSpan ? { position: 'absolute', top: 0, bottom: 0, left: (Math.round(1000 * (r.t0 - minT) / (maxT - minT)) / 10) + '%', width: Math.max(1.5, Math.round(1000 * (r.t1 - r.t0) / (maxT - minT)) / 10) + '%', background: 'var(--l-accent)' } : false
+            };
+          })
+        };
+      }
+    }
+    let notice = null;
+    if (a.status === 'rejected') notice = 'Rejected — retained, not hidden.' + (a.rejection_reason ? ' Reason, verbatim: ' + a.rejection_reason : ' The record\u2019s disposition stays readable: rejection disposes of this proposal; it does not reject any released implementation.');
+    if (a.status === 'superseded') notice = 'Superseded' + (a.superseded_at ? ' on ' + a.superseded_at.slice(0, 10) : '') + (a.supersession_authorized_by ? ' — authorized by ' + a.supersession_authorized_by : '') + '. The record is retained rather than deleted or falsely verified; its successor is named under \u201csuperseded by\u201d below.';
+    vals.selIdProp = selId; vals.dataRootProp = this._root; vals.srcUrlProp = srcUrl; vals.revProp = rev;
+    vals.selDistProp = dist || null;
+    vals.selSeedProp = { type: a.type, status: a.status, title: a.title, statement: a.statement || null, path: a.path || null };
+    vals.sel = {
+      id: a.id, title: a.title, typeGloss: this.GLOSS[a.type] || a.type,
+      statusLabel: String(a.status || '').replace('_', ' '), dot: this.dot(a.status),
+      commitBound: !!a.commit, statement: a.statement || false, notice: notice || false,
+      statementNodes: a.statement ? this.earsNodes(a.statement) : false,
+      earsLegend: a.statement ? ['option', 'state', 'trigger', 'condition', 'subject', 'obligation', 'response', 'unclassified'].map(cl => ({ label: cl, style: { ...this.earsTokenStyle(cl), font: '10px var(--l-mono)' } })) : false,
+      earsNote: a.statement ? (this.earsSegments(a.statement).complete ? 'EARS clause highlighting — presentation only, the exact canonical statement is preserved.' : 'Not deterministically segmented as EARS — the exact text stays unclassified.') : false,
+      coverage: cov ? 'specified by ' + cov.specifications.join(', ') + ' · verified by ' + cov.verifications.join(', ') + (cov.verified ? ' · verified \u2713' : '') : false,
+      events, noEvents: events.length === 0,
+      noEventsNote: hasDetail ? 'No lifecycle transitions retained on this record.' : 'Full record not included in this sample bundle — the decision trail lives in its data/artifacts file.',
+      facts, relGroups, metaFacts, hasMeta: metaFacts.length > 0,
+      hasDocs: shownDocs.length > 0, docs: shownDocs,
+      docsMore: !st.docsAll && docs.length > 6 ? 'Show all ' + docs.length + ' retained documents' : false,
+      showAllDocs: () => this.setState({ docsAll: true }),
+      preparedDelegated: String(a.prepared_by || '').includes('delegated'),
+      srcHref: srcUrl && a.path ? srcUrl + '/blob/' + rev + '/' + a.path : false,
+      srcLabel: 'View source at ' + rev.slice(0, 7) + ' ↗',
+      verifyCmds: verifyCmds.map(v => ({ ...v, copy: copyFn(v.cmd) })),
+      hasVerify: verifyCmds.length > 0,
+      roster,
+      hasBody: !!(a.content && a.content.markdown),
+      bodyOpen: ['intent', 'capability', 'requirement', 'specification', 'architecture', 'adr'].includes(a.type),
+      bodyMeta: a.content && a.content.markdown ? this.fmtBytes(a.content.bytes) + (a.content.sha256 ? ' · sha256 ' + a.content.sha256.slice(0, 12) + '…' : '') : '',
+      bodyNodes: a.content && a.content.markdown ? this.mdNodes(a.content.markdown) : false
+    };
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

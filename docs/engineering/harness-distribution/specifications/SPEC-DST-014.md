@@ -5,7 +5,7 @@ title = "Verified progressive Explorer data access"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner", "product-owner"]
 created = "2026-08-17"
-updated = "2026-08-17"
+updated = "2026-09-01"
 
 [relations]
 specifies = ["REQ-DST-050", "REQ-DST-051", "REQ-DST-052", "REQ-DST-053"]
@@ -49,9 +49,9 @@ Startup progresses `shell -> manifest-verifying -> summary-verifying -> summary-
 9. Render verified artifact details through the existing curated metadata, EARS tokenizer, and safe Markdown allowlist. A detail resource cannot redefine its topology identity; mismatch fails that detail.
 10. Evidence metadata renders from the verified artifact detail. Evidence body is not requested by tab entry; the first explicit expansion fetches its declared passive content and renders only after integrity and sanitizer checks.
 11. Use request cancellation where available and a monotonically increasing selection/view token in all cases. Stale completion may populate the matching cache but cannot alter the latest panel, focus, history cursor, or view.
-12. Keep the 20-entry sliding-window history, branch truncation, no consecutive duplicates, Back/Forward/initial behavior, current-chip reveal, and selected-card focus unchanged for loaded, loading, cached, and failed detail states.
+12. Keep the Lineage view's in-memory visit history, its back and forward controls, and its visit chips consistent for loaded, loading, cached, and failed detail states; visits are navigation state and never lineage.
 13. Contain failures to the affected startup stage, view, artifact, or evidence entry. Preserve unrelated verified data and provide a keyboard-operable retry that repeats full verification.
-14. Update CSP/connect policy only as required for same-origin static data fetches. Preserve the exact existing optional 3D graph CDN exception and send it no repository data.
+14. Update CSP/connect policy only as required for same-origin static data fetches. The page names and requests no remote origin (`SPEC-DST-023` rule 7).
 15. Bound cache entries to the finite manifest resource set and clear all runtime state on page reload. No timer, analytics, telemetry, polling, repository mutation, or automatic publication is added.
 
 ## Error and recovery behavior
@@ -90,3 +90,11 @@ Preserve all current views and interactions; only acquisition timing and loading
 ## Explicitly unspecified decisions
 
 The implementation agent may choose loading indicators, retry wording, cache helper structure, prefetch none or the single current artifact after topology, and whether Overview topology begins immediately after summary or on the next rendering opportunity. It may not prefetch every detail/evidence resource, change history semantics, persist content, add a service worker, or weaken verification.
+
+## Amendment record
+
+**Rules 12 and 14 follow the designed page, proposed 2026-09-01 under `WO-DST-023`
+(`SPEC-DST-023`).** The previous page's 20-entry sliding window and its
+optional CDN exception belonged to a presentation this repository no longer
+ships; the verified progressive access this specification defines is
+unchanged and the designed shell implements it (`SPEC-DST-023` rules 8-10).

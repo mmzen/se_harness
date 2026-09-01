@@ -5,7 +5,7 @@ title = "Use the canonical snapshot as the WebUI boundary"
 status = "approved"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-13"
-updated = "2026-08-16"
+updated = "2026-09-01"
 
 [relations]
 decides = ["ARCH-DST-008"]
@@ -68,6 +68,18 @@ The accountable owner accepts these risks for the current candidate to preserve 
 The technical and security owners reaffirmed this decision after `SPEC-DST-008` and `ARCH-DST-008` were updated to remove the redundant `templates/webui/` handoff and identify the canonical standard-distribution template as the sole reusable Explorer source. That consolidation is compatible with selected option 4 and strengthens its single-model, consistent-distribution consequence.
 
 The canonical snapshot boundary, browser adapter, safe embedding, UI fidelity, exact CDN exception, fallback, accepted residual risks, and reconsideration triggers remain unchanged. No alternative, outcome, or accepted risk was modified.
+
+## Reassessment: 2026-09-01
+
+The repository owner approved the designed Explorer packet (`WO-DST-023`).
+`ADR-DST-013` decides that page: one self-contained document with a
+hand-rolled topology, no runtime CDN, and a Content Security Policy that
+names no remote origin. The exact `3d-force-graph` exception, its accepted
+CDN risk, and the reconsideration triggers above are therefore closed by
+that decision; the "dependency-free renderer" trigger fired. The canonical
+snapshot boundary, browser-side derivation, safe embedding, and
+single-model consequence of option 4 stand and continue to govern
+`ARCH-DST-008` as amended.
 
 ## Validation
 
