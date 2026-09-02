@@ -2,7 +2,7 @@
 id = "REQ-HUP-027"
 type = "requirement"
 title = "Adopt exact public 0.13.0 as the standard root by the simple upgrade"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -14,6 +14,13 @@ measure = "one command from the isolated environment; lock schema 3, tool_versio
 
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T08:31:12Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-014: the adoption of exact public 0.13.0 (RLS-SEH-022, released and published 2026-09-02) as the standard root the simple way, from the 0.12.0 lock 4d8f9d37, rehearsed the same day on a throwaway clone of main 09aa69f."
 +++
 
 # Requirement: Adopt exact public 0.13.0 as the standard root by the simple upgrade

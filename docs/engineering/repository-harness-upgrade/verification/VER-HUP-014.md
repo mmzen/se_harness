@@ -2,13 +2,20 @@
 id = "VER-HUP-014"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.13.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 verifies = ["REQ-HUP-027", "REQ-HUP-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T08:31:12Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve, start, complete on green' for WO-HUP-014: the adoption of exact public 0.13.0 (RLS-SEH-022, released and published 2026-09-02) as the standard root the simple way, from the 0.12.0 lock 4d8f9d37, rehearsed the same day on a throwaway clone of main 09aa69f. The transaction and complete-graph rows with the rehearsal-measured pass conditions."
 +++
 
 # Verification: Verify standard-root adoption of exact public 0.13.0
