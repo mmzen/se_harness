@@ -2,7 +2,7 @@
 id = "RLS-SEH-022"
 type = "release_record"
 title = "Release candidate 0.13.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-13-0/evidence/RLS-SEH-022-
 evaluator_evidence_sha256 = "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
 tag = "v0.13.0"
 
+released_at = "2026-09-02T07:36:31Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-024"]
 includes_verification = ["VREC-SEH-022"]
 releases_work = ["WO-DST-023", "WO-ECP-024", "WO-HUP-013", "WO-RLS-019"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-02T07:36:31Z"
+decided_by = "release-owner"
+reason = "Released by the accountable release owner on 2026-09-02 by selecting the presented option 'Release RLS-SEH-022, merge #313, dispatch publish-pypi'. Re-measured immediately before this transition: the record binds candidate 79d6f6f with the schema-2 distribution table carrying wheel 1bbf3b74 and sdist d1f6b60a from two byte-identical pinned-producer runs dispatched on the branch at the bound candidate; REL-SEH-024 is approved with its four gates; VREC-SEH-022 is verified over the whole unit; the hosted release-candidate replay on this branch (run 33603839879) completed success, reproducing the recorded digests from the bound record with read-only repository permission; every lane of pull request #313 at 6f43c21 passes except the release-record rehearsal, which reads the record from the head of main where it cannot exist before the merge, as REL-SEH-023's release recorded. This releases se-harness 0.13.0 as a record; the merge, the tag, the GitHub Release, PyPI, Pages, the maintenance line and the latest markers follow the promotion policy as separate acts, and the pypi environment remains a separate human decision."
 +++
 
 # Release Record Candidate
