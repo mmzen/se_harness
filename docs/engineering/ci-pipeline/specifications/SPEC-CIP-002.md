@@ -2,13 +2,20 @@
 id = "SPEC-CIP-002"
 type = "specification"
 title = "Base-aware record selection for the publication rehearsal"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 specifies = ["REQ-CIP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T15:40:23Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve; run it on the delegated route' for WO-CIP-006: on a pull-request event the publication rehearsal selects the newest schema-2 ready or released record the base branch already holds (issues #305 and #193). Rules CIP-REH-001 to CIP-REH-006."
 +++
 
 # Specification: Base-aware record selection for the publication rehearsal

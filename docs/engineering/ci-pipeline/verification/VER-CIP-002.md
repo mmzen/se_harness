@@ -2,13 +2,20 @@
 id = "VER-CIP-002"
 type = "verification"
 title = "Independent evidence for the base-aware rehearsal selection"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 verifies = ["REQ-CIP-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T15:40:23Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve; run it on the delegated route' for WO-CIP-006: on a pull-request event the publication rehearsal selects the newest schema-2 ready or released record the base branch already holds (issues #305 and #193). The selection, workflow, run-observation, no-regression and delegation rows."
 +++
 
 # Verification: Independent evidence for the base-aware rehearsal selection

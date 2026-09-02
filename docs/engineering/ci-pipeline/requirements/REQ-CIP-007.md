@@ -2,7 +2,7 @@
 id = "REQ-CIP-007"
 type = "requirement"
 title = "The pull-request rehearsal selects a record the base branch already holds"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -14,6 +14,13 @@ measure = "on a pull-request event the selector reads the records at refs/remote
 
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T15:40:23Z"
+decided_by = "product-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve; run it on the delegated route' for WO-CIP-006: on a pull-request event the publication rehearsal selects the newest schema-2 ready or released record the base branch already holds (issues #305 and #193)."
 +++
 
 # Requirement: The pull-request rehearsal selects a record the base branch already holds
