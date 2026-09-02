@@ -101,4 +101,4 @@ root move with exactly one transaction document and the released
 `RLS-SEH-022` supplying the wheel, the managed lane running the 0.13.0
 gate the transaction installed over the live pull-request body, the
 candidate-evidence lanes with the 0.13.0 to 0.14.0 upgrade rehearsal on
-both platforms, and the Publication Rehearsal in both modes. Runs: .
+both platforms, and the Publication Rehearsal in both modes. Runs: Governor Transition Assessment (pull_request, 33609997670, success); Engineering Harness (pull_request, 33609997735, success); Publication Rehearsal (pull_request, 33609997885, success); SE Harness Candidate Evidence (pull_request, 33609997668, success).
