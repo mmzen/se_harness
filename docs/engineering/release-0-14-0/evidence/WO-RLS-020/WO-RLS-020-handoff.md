@@ -129,4 +129,19 @@ Retained by the candidate-evidence run 33613351863:
 | the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
 | integration package | built, verified on Linux and Windows, retained |
 
-Recorded again below at the bound candidate head.
+### Section 5b: at the bound candidate `09625e4`
+
+Every lane success: Engineering Harness (push 33614927223, pull request
+33614931900), Governor Transition Assessment (push 33614927224, pull
+request 33614932000), Publication Rehearsal (dispatch 33614927139 on the
+head, section 4b; the pull-request run 33614932452 on the merge commit was
+cancelled by the concurrency group when the next governance commit was
+pushed), SE Harness Candidate Evidence (push 33614927275, `success` on its
+re-run after the first attempt and the pull-request run 33614931999 were
+cancelled the same way; the re-run skips only the integration-package jobs,
+which are not a release input). Retained by that run: `qualify
+complete-candidate` `passed: true`, `CC001` to `CC004`; `qualify
+candidate-package` `CP001`, `CP002` from the isolated released 0.13.0
+verifier; the upgrade rehearsal 0.13.0 -> 0.14.0 `pass` twice on Linux and
+twice on Windows, one `semantic_sha256` `7e7066a32a32b718…`; the
+non-promotable candidate wheel `d2c30b8b…` built from `09625e4`.
