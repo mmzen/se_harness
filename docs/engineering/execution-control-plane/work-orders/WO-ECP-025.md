@@ -2,7 +2,7 @@
 id = "WO-ECP-025"
 type = "work_order"
 title = "Delete the four CLI tombstone guards, by the delegated route"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -48,6 +48,13 @@ to = "approved"
 decided_at = "2026-09-02T14:38:23Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-02 by selecting the presented options 'Include the --authorized-by guard too' and 'Delegated route (the delegation class)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request through the gate WO-ECP-024 configured. It authorizes only the declared scope: the four guard blocks out of main(), the tests, the three notes, the seven amendment records, the domain index and the evidence packet. It authorizes no registered command change, no managed path, no verification decision, no release and no publication; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-02T14:47:47Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 68af51fa014b64e89cc22fe19081de2c5200f696 (check-run 100294830645, source github-checks)."
 +++
 
 # Work Order: Delete the four CLI tombstone guards, by the delegated route
