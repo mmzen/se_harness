@@ -2,7 +2,7 @@
 id = "WO-RLS-020"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.14.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-02T09:17:52Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve, start, complete on green, prepare records'. Start preflight PASS with no diagnostics over the approval commit 2f7320f carrying unmoved main d005b98, run with the governing exact public 0.13.0 evaluator outside the checkout, installed from the wheel whose digest equals RLS-SEH-022's distribution table, on this Windows checkout; the reading manifest (the harness-distribution chain INT-DST-001 to VER-DST-001 and this work order) was read. Bounded to the declared execution scope. This start authorizes no verification record, no release record, no tag and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T09:34:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-02 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green, prepare records', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set against main d005b98, fixed-point result 9d98440321fa, run by the released 0.13.0 evaluator outside the checkout on this Windows checkout. The candidate readings at 558823568451bac999d040f0f61451b055133347 with the packaged bytes of main d005b98: validate 1244 artifacts 0 errors 0 advisories, doctor 113 PASS 0 FAIL, review preflight PASS, distributions PASS, portable surface PASS in all three modes, complete-candidate and candidate-package read from the hosted Linux lanes for the RID018 boundary reason, the upgrade rehearsal 0.13.0 to 0.14.0 pass twice on Linux and twice on Windows with one semantic digest ba79f344, the Windows full-scale suite at its one baseline name, the census at the candidate exactly as REL-SEH-025 predicts with zero untraced commits and no exemption, and the hosted build of record dispatched on the branch head with two byte-identical producer runs, wheel d02db62b and sdist d5e18b07, to be re-read at this commit. Every lane at fe195bb and every lane of pull request #315 at that head passes. No deviations. This authorizes no verification record, no release record, no tag and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.14.0 candidate from main
