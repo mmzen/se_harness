@@ -2,7 +2,7 @@
 id = "WO-CIP-006"
 type = "work_order"
 title = "Let the pull-request rehearsal select a record the base already holds"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -39,6 +39,13 @@ to = "approved"
 decided_at = "2026-09-02T15:40:23Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-02 by selecting the presented option 'Approve; run it on the delegated route', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the selector's base ref, the select job's fetch and argument on pull-request events, the tests, the note and the header comment, the domain index and the evidence packet. It authorizes no change to the qualification definition, the publication workflow, any managed path, no verification decision, no release and no publication; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-02T15:49:45Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 4ab503c32467a63150fa67961a12b78276ea093c (check-run 100317639331, source github-checks)."
 +++
 
 # Work Order: Let the pull-request rehearsal select a record the base already holds
