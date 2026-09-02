@@ -2,7 +2,7 @@
 id = "WO-DPG-002"
 type = "work_order"
 title = "Let the Pages packager find its notice boundary in the designed Explorer"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "quality-owner", "security-owner", "service-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -20,6 +20,13 @@ implements = ["REQ-DPG-002"]
 specifications = ["SPEC-DPG-001"]
 architecture = ["ARCH-DPG-001", "ADR-DPG-001"]
 verification = ["VER-DPG-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T10:28:50Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-02 by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC', after the 0.14.0 publication run 33618394672 built the designed Explorer from the 0.13.0 root at 66e71f8 and failed in packaging on the previous page's notice boundary. Authorizes start preflight and then only the declared scope: the accepted-boundary registry and helper in the packager, the tests binding it to the real templates and exercising both boundaries and the rejections, one note sentence, this packet and the domain index; and authorizes marking the work order implemented once the declared evidence is green. It authorizes no change to the notice text, any workflow, any template or any managed path, no verification record and no deployment; the recovery publication remains a separate decision. Start preflight has not been run."
 +++
 
 # Work Order: Let the Pages packager find its notice boundary in the designed Explorer
