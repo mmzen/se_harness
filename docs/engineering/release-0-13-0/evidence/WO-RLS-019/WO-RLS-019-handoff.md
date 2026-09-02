@@ -98,6 +98,23 @@ Two producer runs byte-identical, `state` `exact`, image
 readings at this commit; the record binds the digests of the bound
 candidate, read the same way at that head (section 4b).
 
+## Section 4b: build re-verified at the bound candidate
+
+`RLS-SEH-022` binds `79d6f6f`, the implemented-transition commit, so the
+replay was dispatched again on `release/0.13.0` at that exact head (run
+33602457588): two producer runs byte-identical, `state` `exact`, the same
+pinned image and recipe. Wheel
+`1bbf3b747b7ebbb07fd3fd975e87e3c11049e7a6a8e1377e3d35099f4fe862ae`; sdist
+`d1f6b60ae149be5aad5509b88b768f6cfe22d9af8460f1fdc9d04bcf6670bdd4`;
+`SOURCE_DATE_EPOCH` 1788333166; source manifest `66d329f7…`. The section-4
+digests were the reading at `aa14628`, whose packaged bytes are identical;
+the archives differ only through the commit-derived `SOURCE_DATE_EPOCH`.
+The run's `release-build-replay.json` `manifest`, with `commit` equal to
+the bound candidate, is retained byte-for-byte in canonical form as
+`RLS-SEH-022-bundle.json` and is what the record's distribution table
+carries; the hosted `release-candidate-replay.yml` dispatch on this branch
+must reproduce it from the bound record.
+
 ## Section 5: hosted lanes
 
 At `aa14628`, push and pull-request events, seven runs, all `success`:
