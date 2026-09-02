@@ -44,11 +44,20 @@ merges.
 
 ### The Windows suite
 
-Recorded when the run completes.
+`PYTHONUTF8=1 python scripts/run_tests.py --scale full` at `a94104c` on this
+Windows 11 workstation (CPython 3.13, LF checkout): 1,178 tests (the two
+this work order adds included), 26 skipped, 1 error, the known baseline
+name present on `main` and outside this work order
+(`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`).
+No other name differs from the same-day readings of `WO-RLS-020` and
+`WO-HUP-014`.
 
 ### Handoff check
 
-Recorded with its self-binding result beside this packet.
+`check . --artifact WO-DPG-002 --checkpoint handoff --from-git 66e71f8`,
+exact 0.13.0: Completed; eight `QGP-G4I-*` predicates pass; seven changed
+paths, all inside the declared scope; `complete: true`; self-binding result
+`801257b28ec5…` retained as `handoff.json` beside this packet.
 
 ## Root cause and why the test missed it
 
