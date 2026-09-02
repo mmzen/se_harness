@@ -26,6 +26,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [`harnessctl check` explained](harnessctl-check.md) | What does `check` evaluate at each checkpoint, how does an artifact's state select the rule and gates, and why does it refuse? |
 | [Diagnostic code index](diagnostic-codes.md) | Which diagnostic codes exist, which component speaks each prefix, and what message text comes with a code? (generated from source; a test pins it) |
 | [Functional assessment, 2026-08-30](functional-assessment-2026-08-30.md) | What does the tool do today, how easy is it to operate, and what should change first? (point-in-time, issues #280 to #287) |
+| [Assessment of the instruction chain, 2026-09-02](assessment-instruction-chain-2026-09-02.md) | How effective, clear, redundant and heavy is the chain of documents a human or agent is told to read, and what should change first? (point-in-time, `19b6819`, one day of governed work as the field test) |
 | [The delegation class](delegation-class.md) | How does one table on a work order let a non-human actor start it, complete it and prepare its record while the required pull-request check is green, and what stays human? |
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
