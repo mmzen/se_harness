@@ -2,7 +2,7 @@
 id = "RLS-SEH-023"
 type = "release_record"
 title = "Release candidate 0.14.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-14-0/evidence/RLS-SEH-023-
 evaluator_evidence_sha256 = "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
 tag = "v0.14.0"
 
+released_at = "2026-09-02T10:01:52Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-025"]
 includes_verification = ["VREC-SEH-023"]
 releases_work = ["WO-HUP-014", "WO-RLS-020"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-02T10:01:52Z"
+decided_by = "release-owner"
+reason = "Released by the accountable release owner on 2026-09-02 by selecting the presented option 'Release RLS-SEH-023; I will merge #315 and you dispatch publish-pypi'. Re-measured immediately before this transition: the record binds candidate 09625e4 with the schema-2 distribution table carrying wheel 70d438b5 and sdist dcb3523a from two byte-identical pinned-producer runs dispatched on the branch at the bound candidate; REL-SEH-025 is approved with its two gates; VREC-SEH-023 is verified over the whole unit; the hosted release-candidate replay on this branch (run 33616347600) completed success, reproducing the recorded digests from the bound record with read-only repository permission; every lane of pull request #315 at 673ffe8 passes except the release-record rehearsal, which reads the record from the head of main where it cannot exist before the merge, as the 0.13.0 and 0.12.0 releases recorded. This releases se-harness 0.14.0 as a record, a package that changes only by version so that its integration commit carries the 0.13.0 root and the release-bound public demonstration renders the designed Explorer; the merge, the tag, the GitHub Release, PyPI, Pages, the maintenance line and the latest markers follow the promotion policy as separate acts, and the pypi environment remains a separate human decision."
 +++
 
 # Release Record Candidate
