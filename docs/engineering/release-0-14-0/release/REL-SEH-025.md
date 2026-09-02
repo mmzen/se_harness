@@ -2,7 +2,7 @@
 id = "REL-SEH-025"
 type = "release_contract"
 title = "Release se-harness 0.14.0: the 0.13.0 root adopted, so the designed Explorer reaches the public demonstration"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -13,6 +13,13 @@ gates = ["WO-HUP-014", "WO-RLS-020"]
 
 [release_unit]
 untraced_exemptions = []
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T09:17:43Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-09-02 by selecting the presented option 'Approve, start, complete on green, prepare records', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this approval over main at d005b98 with the exact public 0.13.0 evaluator outside the checkout: the one implemented, verified, unreleased work order is exactly the member named in gates, and no work order reached implemented since the packet was drafted; the census from v0.13.0 reads zero untraced commits and needs no exemption. The release owner accepts a package that changes only by version, as the honest route to the release-bound public demonstration rendering the designed Explorer. This approval authorizes WO-RLS-020 to be approved and started as separate acts; it authorizes no candidate, build, record, tag, publication or deployment."
 +++
 
 # Release contract: se-harness 0.14.0
