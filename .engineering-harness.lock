@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.12.0-py3-none-any.whl",
-    "archive_sha256": "639edbeed4bdca7c9e21a5eb2afc3b9fc993ddb3f66177eec962f1646a545811",
+    "archive_name": "se_harness-0.13.0-py3-none-any.whl",
+    "archive_sha256": "1bbf3b747b7ebbb07fd3fd975e87e3c11049e7a6a8e1377e3d35099f4fe862ae",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "0df83ce9c9bb6d456f3244f517031753daee740bb22180a492f835d25831ee0d",
-    "version": "0.12.0"
+    "payload_sha256": "9b4cdb5f2148683f3ceaad868e64b1b4ebefbadcac49cf4cd1feccd954540bfe",
+    "version": "0.13.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
@@ -37,7 +37,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "b3d39c2b9fc082179cbf577a742d240c2df27346a5dd39dd7098e310013d9dc6"
+      "sha256": "7d433db7f31904d2f3738b3b64d7a43067e7f0ceb15264150158f9beb69036fc"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -49,7 +49,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "6b122c9048182ada954807b2ae6e100eef4a8afc486d7493534c79d687e7be45"
+      "sha256": "03048d15bd393aba920006e465b89a737c3943f34044f3275ddf72d2b1ef0998"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -65,7 +65,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "b4cf59de784f19c6658ffa4d1748dad684465bc34f1386a10761caa7e0efecff"
+      "sha256": "0c4b04853110478da8c2fac973de5e2a4c1c107e2246b832fa5dc41e6e4be8bf"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
@@ -173,11 +173,11 @@
     },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
-      "sha256": "7df41908049a01b972eda9f5678248ab38b23e870d88defe523d7f479dc8843b"
+      "sha256": "3a84e1c300c7d31fb63c06f9fa77903d8a98b61b22a7a7bae37ae088c53229f8"
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "5cc567fba62463b1eae2c1d8afa373eabba1f57b15c9f73776466e3763414d99"
+      "sha256": "c21503567c7e15c5ca15f74ff36aeee78b96b503e3eb31fdb49601e18417ffe0"
     },
     "scripts/inspect_engineering_artifacts.py": {
       "mode": "managed",
@@ -195,5 +195,5 @@
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.12.0"
+  "tool_version": "0.13.0"
 }

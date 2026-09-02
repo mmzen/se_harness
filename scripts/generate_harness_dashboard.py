@@ -54,7 +54,7 @@ DEFAULT_EXPERIMENT_ROOT = Path("docs") / "engineering" / "experiments" / "result
 MAX_EXPERIMENT_BYTES = 1_000_000
 MAX_CONTENT_DOCUMENT_BYTES = 262_144
 MAX_CONTENT_TOTAL_BYTES = 16_777_216
-MAX_INDEX_BYTES = 262_144
+MAX_INDEX_BYTES = 524_288
 MAX_SUMMARY_BYTES = 262_144
 TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
 ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
@@ -235,6 +235,41 @@ def git_object_format(repository_root: Path) -> str | None:
     return value if completed.returncode == 0 and value in {"sha1", "sha256"} else None
 
 
+GITHUB_REMOTE = re.compile(
+    r"^(?:https://github\.com/|git@github\.com:|ssh://git@github\.com/)"
+    r"(?P<owner>[A-Za-z0-9_.-]+)/(?P<name>[A-Za-z0-9_.-]+?)(?:\.git)?/?$"
+)
+
+
+def git_source_url(repository_root: Path) -> str | None:
+    """A normalized public GitHub URL for the origin remote, or None.
+
+    Only a recognized GitHub remote is admitted, and every accepted spelling
+    of the same repository normalizes to one https form so the generated
+    bundle stays byte-deterministic for one repository regardless of the
+    remote protocol a checkout uses. Anything else is unknown and omitted.
+    """
+    git = shutil.which("git")
+    if git is None:
+        return None
+    try:
+        completed = subprocess.run(
+            [git, "-C", str(repository_root), "remote", "get-url", "origin"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if completed.returncode != 0:
+        return None
+    match = GITHUB_REMOTE.match(completed.stdout.strip())
+    if match is None:
+        return None
+    return f"https://github.com/{match.group('owner')}/{match.group('name')}"
+
+
 def git_commit_availability(repository_root: Path, commits: Sequence[str]) -> dict[str, bool | None]:
     unique = sorted({commit for commit in commits if re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", commit)})
     if not unique:
@@ -271,6 +306,24 @@ def _string_list(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
     return [item.strip() for item in value if isinstance(item, str) and item.strip()]
+
+
+def _distribution_table(value: Any) -> dict[str, str | int] | None:
+    """The scalar fields of a release record's ``[distribution]`` table."""
+    if not isinstance(value, dict):
+        return None
+    table: dict[str, str | int] = {}
+    for key in sorted(value):
+        item = value[key]
+        if not isinstance(key, str) or not re.fullmatch(r"[a-z0-9_]{1,64}", key):
+            continue
+        if isinstance(item, bool):
+            continue
+        if isinstance(item, int):
+            table[key] = item
+        elif isinstance(item, str) and len(item) <= 512:
+            table[key] = item
+    return table or None
 
 
 def normalize_artifacts(
@@ -364,6 +417,8 @@ def normalize_artifacts(
             item["evidence_paths"] = _string_list(artifact.metadata.get("evidence_paths"))
             item["superseded_at"] = _string(artifact.metadata.get("superseded_at")) or None
             item["supersession_authorized_by"] = _string(artifact.metadata.get("supersession_authorized_by")) or None
+            item["evaluator_evidence_path"] = _string(artifact.metadata.get("evaluator_evidence_path")) or None
+            item["evaluator_evidence_sha256"] = _string(artifact.metadata.get("evaluator_evidence_sha256")) or None
         if artifact.artifact_type == "release_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
@@ -373,6 +428,9 @@ def normalize_artifacts(
             item["prepared_by"] = _string(artifact.metadata.get("prepared_by")) or None
             item["released_at"] = _string(artifact.metadata.get("released_at")) or None
             item["authorized_by"] = _string(artifact.metadata.get("authorized_by")) or None
+            item["evaluator_evidence_path"] = _string(artifact.metadata.get("evaluator_evidence_path")) or None
+            item["evaluator_evidence_sha256"] = _string(artifact.metadata.get("evaluator_evidence_sha256")) or None
+            item["distribution"] = _distribution_table(artifact.metadata.get("distribution"))
         normalized.append(item)
     return sorted(normalized, key=lambda item: (item["id"], item["path"]))
 
@@ -1622,6 +1680,7 @@ def build_snapshot(
             "revision": observed_revision,
             "git_object_format": git_object_format(repository_root),
             "artifact_root": repository_relative(artifact_root, repository_root),
+            "source_url": git_source_url(repository_root),
             "valid": report.valid,
         },
         "artifacts": normalized_artifacts,
@@ -1696,6 +1755,123 @@ def _public_descriptor(descriptor: dict[str, Any]) -> dict[str, Any]:
 def topology_target_exceeded(topology_bytes: int) -> bool:
     """Return whether a compact topology exceeds the repository target."""
     return topology_bytes > TOPOLOGY_ACCEPTANCE_BYTES
+
+
+def _hours_between(start: Any, end: Any) -> float | None:
+    """Elapsed hours between two RFC 3339 timestamps, or None."""
+    try:
+        first = datetime.fromisoformat(str(start).replace("Z", "+00:00"))
+        last = datetime.fromisoformat(str(end).replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return None
+    if first.tzinfo is None or last.tzinfo is None:
+        return None
+    return (last - first).total_seconds() / 3600
+
+
+def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
+    """Governance indicators derived once from the canonical projection.
+
+    Every figure is a restatement of recorded lifecycle events and declared
+    relations; none is an assurance score, and none infers a decision.
+    """
+    artifacts = [item for item in snapshot.get("artifacts", []) if isinstance(item, dict) and isinstance(item.get("id"), str)]
+    relations = [item for item in snapshot.get("relations", []) if isinstance(item, dict)]
+    decided: Counter[str] = Counter()
+    event_count = 0
+    unattributed = 0
+    delegated_transitions = 0
+    delegated_records = 0
+    delegated_artifacts: set[str] = set()
+    lead_times: list[dict[str, Any]] = []
+    for artifact in artifacts:
+        events = [event for event in artifact.get("lifecycle_events") or [] if isinstance(event, dict)]
+        for event in events:
+            event_count += 1
+            actor = _string(event.get("decided_by"))
+            if actor:
+                decided[actor] += 1
+            else:
+                unattributed += 1
+            if "delegated" in actor:
+                delegated_transitions += 1
+                delegated_artifacts.add(artifact["id"])
+        if "delegated" in _string(artifact.get("prepared_by")):
+            delegated_records += 1
+            delegated_artifacts.add(artifact["id"])
+        if artifact.get("type") == "work_order":
+            approved = next((event for event in events if event.get("to") == "approved"), None)
+            implemented = next((event for event in events if event.get("to") == "implemented"), None)
+            if approved and implemented:
+                hours = _hours_between(approved.get("decided_at"), implemented.get("decided_at"))
+                if hours is not None and hours > 0:
+                    lead_times.append({"id": artifact["id"], "hours": round(hours, 2)})
+    lead_times.sort(key=lambda item: (item["hours"], item["id"]))
+    outgoing: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    incoming: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for relation in relations:
+        outgoing[str(relation.get("source"))].append(relation)
+        incoming[str(relation.get("target"))].append(relation)
+    released = [item for item in artifacts if item.get("type") == "release_record" and item.get("status") == "released"]
+    released_work = sorted(
+        {
+            str(relation.get("target"))
+            for record in released
+            for relation in outgoing[record["id"]]
+            if relation.get("relation") == "releases_work" and isinstance(relation.get("target"), str)
+        }
+    )
+    verified_work = [
+        work_order
+        for work_order in released_work
+        if any(relation.get("relation") == "verifies_work_order" for relation in incoming[work_order])
+    ]
+    latest = max(released, key=lambda item: (_string(item.get("released_at")), item["id"]), default=None)
+    latest_release: dict[str, Any] | None = None
+    release_arc: dict[str, Any] | None = None
+    if latest is not None:
+        verification_record = next(
+            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "includes_verification" and isinstance(relation.get("target"), str)),
+            None,
+        )
+        latest_release = {
+            "id": latest["id"],
+            "version": latest.get("version"),
+            "released_at": latest.get("released_at"),
+            "commit": latest.get("commit"),
+            "verification_record": verification_record,
+        }
+        contract_id = next(
+            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "satisfies" and isinstance(relation.get("target"), str)),
+            None,
+        )
+        contract = next((item for item in artifacts if item.get("id") == contract_id), None)
+        if contract is not None:
+            approved = next(
+                (event for event in contract.get("lifecycle_events") or [] if isinstance(event, dict) and event.get("to") == "approved"),
+                None,
+            )
+            if approved is not None:
+                hours = _hours_between(approved.get("decided_at"), latest.get("released_at"))
+                release_arc = {
+                    "contract_id": contract_id,
+                    "contract_approved_at": approved.get("decided_at"),
+                    "released_at": latest.get("released_at"),
+                    "hours": round(hours, 2) if hours is not None else None,
+                }
+    return {
+        "lifecycle_events": event_count,
+        "unattributed_events": unattributed,
+        "decided_by": dict(sorted(decided.items())),
+        "delegated_transitions": delegated_transitions,
+        "delegated_records": delegated_records,
+        "delegated_artifacts": sorted(delegated_artifacts),
+        "lead_times": lead_times,
+        "released_work_orders": len(released_work),
+        "released_work_orders_verified": len(verified_work),
+        "latest_release": latest_release,
+        "release_arc": release_arc,
+    }
 
 
 def build_dashboard_bundle(
@@ -1777,7 +1953,7 @@ def build_dashboard_bundle(
         compact_artifact = {
             **{
                 key: artifact.get(key)
-                for key in ("id", "type", "title", "status", "owners", "authority")
+                for key in ("id", "type", "title", "status", "owners", "authority", "path")
             },
             "detail": _public_descriptor(detail_descriptor),
         }
@@ -1785,6 +1961,10 @@ def build_dashboard_bundle(
             compact_artifact["assurance_classification"] = artifact[
                 "assurance_classification"
             ]
+        if artifact.get("type") == "release_record":
+            for key in ("version", "released_at", "distribution"):
+                if artifact.get(key) is not None:
+                    compact_artifact[key] = artifact[key]
         compact_artifacts.append(compact_artifact)
 
     summary = {
@@ -1872,6 +2052,7 @@ def build_dashboard_bundle(
                 if isinstance(item, dict) and item.get("target_exists") is False
             ),
         },
+        "metrics": build_explorer_metrics(snapshot),
     }
     topology = {
         "schema": TOPOLOGY_RESOURCE_SCHEMA,
