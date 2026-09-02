@@ -2,7 +2,7 @@
 id = "WO-HUP-014"
 type = "work_order"
 title = "Adopt exact public 0.13.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-02T08:31:56Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve, start, complete on green'. Start preflight PASS with no diagnostics over the approval commit d768e23 carrying unmoved main 09aa69f, run with the governing exact public 0.12.0 evaluator outside the checkout, on this Windows checkout; every file of the reading manifest was read. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T08:46:26Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-02 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set at a2f4677, self-bound in one run at result 60e03c50, produced by the exact public 0.13.0 evaluator that this transaction installed as the root, outside the checkout, on this Windows checkout. The root lock reads 0.13.0 by version, payload 9b4cdb5f and the archive pair of the wheel RLS-SEH-022 binds; 46 managed files, 5 updated, replay unchanged; nothing left the managed set; exact 0.13.0 validate 1241 artifacts 0 errors 67 warnings 0 advisories, doctor 0 FAIL, released-root 113/113, the designed Explorer identical twice with no remote origin, review preflight PASS, derive 0.13.0 to 0.14.0; the full-scale suite at its one baseline name with the identity-aware edits named in the packet; all thirteen lanes of pull request #314 pass at a2f4677 including the governor-transition assessment of the real root move. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.13.0 as the standard root, the simple way

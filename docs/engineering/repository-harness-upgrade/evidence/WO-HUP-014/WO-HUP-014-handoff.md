@@ -95,4 +95,10 @@ did not move. `RLS-SEH-022` and `VREC-SEH-022` are unchanged.
 
 ## Hosted lanes
 
-Recorded when the lanes complete at the pull request's head.
+All thirteen lanes of pull request #314 pass at its head `a2f4677`,
+including the governor-transition lane assessing the real 0.12.0 to 0.13.0
+root move with exactly one transaction document and the released
+`RLS-SEH-022` supplying the wheel, the managed lane running the 0.13.0
+gate the transaction installed over the live pull-request body, the
+candidate-evidence lanes with the 0.13.0 to 0.14.0 upgrade rehearsal on
+both platforms, and the Publication Rehearsal in both modes. Runs: .
