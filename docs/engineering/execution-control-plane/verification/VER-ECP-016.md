@@ -82,3 +82,5 @@ command, and the adoption replaces both together.
 alias, so the matrix row, scenario 2, the word census and the residual
 uncertainty are restated; every other row and its pass condition is
 unchanged and stays satisfied by `WO-ECP-019`'s evidence.
+
+**The "no `next`" and "no `accept-candidate`" rows' invocation halves are superseded, proposed 2026-09-02 under `WO-ECP-025` (`VER-ECP-021`).** `--help` still lists neither name; the invocations now assert argparse's refusal, not a named replacement, in `test_retired_names_are_unknown_to_the_parser`. Every other row is unchanged.

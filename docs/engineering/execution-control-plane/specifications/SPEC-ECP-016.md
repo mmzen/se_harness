@@ -132,3 +132,7 @@ a failed record preparation; failed results on stdout; new codes
 unchanged in shape. The evidence-checkpoint set (`start`, `pre-action`,
 `transition`, `handoff`) and `check`'s (`+scope`) differ on purpose: the
 scope checkpoint writes no packet.
+
+## Amendment record
+
+**The `--authorized-by` guard of `ECP-CLI-002` is closed, proposed 2026-09-02 under `WO-ECP-025` (`SPEC-ECP-019` `ECP-TMB-006`).** `prepare-release` still takes `--owner` only; the pre-parse guard that named it left `main()`, and argparse refuses `--authorized-by` as an unrecognized argument with exit status 2. Nothing else in this specification changes.

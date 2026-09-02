@@ -117,3 +117,5 @@ rule is restated in place as the guard, mirroring `ECP-RMV-002` for
 reference's `next` row with the synopsis, the term "alias window" and the
 failure and compatibility paragraphs read accordingly. Nothing else in
 this specification changes.
+
+**The guards of `ECP-CTX-004` and `ECP-CTX-006` are closed, proposed 2026-09-02 under `WO-ECP-025` (`SPEC-ECP-019` `ECP-TMB-001`, `ECP-TMB-002`).** `harnessctl` still has no `next` and no `accept-candidate` subcommand; the pre-parse guards that named the replacements left `main()` three releases after the removals shipped, and argparse refuses both names with its usage error and exit status 2. `ECP-CTX-005` and `ECP-CTX-007` are unchanged.

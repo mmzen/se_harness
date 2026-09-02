@@ -94,3 +94,7 @@ Consumer-visible: the command is gone after the alias window
 identifiers do not change, so a consumer's installed skills keep
 validating; the shipped `harness-orient` core changes digest, which the
 upgrade delivers as any managed-file change.
+
+## Amendment record
+
+**`ECP-RMV-002` is closed, proposed 2026-09-02 under `WO-ECP-025` (`SPEC-ECP-019` `ECP-TMB-001`, `ECP-TMB-002`).** The pre-parse guard for `focus` left `main()` three releases after the removal shipped; argparse refuses the name with its usage error and exit status 2, and the word no longer survives in the CLI. Nothing else in this specification changes.

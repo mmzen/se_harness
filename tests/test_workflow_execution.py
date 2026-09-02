@@ -1306,22 +1306,6 @@ class ExecutionContextTests(WorkflowExecutionTests):
         self.assertIn("\nContext\n", human)
         self.assertLess(human.index("Command or response"), human.index("\nContext\n"))
 
-    def test_next_is_no_subcommand_and_names_check(self) -> None:
-        # ECP-CTX-004 as amended under WO-ECP-020: refused at the guard, naming check.
-        self.in_progress_work_order()
-        for arguments, expected in (((), "harnessctl check [--artifact ID]"), (("--artifact", "WO-001"), "harnessctl check --artifact WO-001")):
-            with self.subTest(arguments=arguments):
-                code, output, error = self.invoke("next", str(self.root), *arguments, "--json")
-                self.assertEqual(2, code)
-                self.assertEqual("", output)
-                self.assertEqual(1, error.count("\n"))
-                self.assertIn(expected, error)
-        help_output = io.StringIO()
-        with contextlib.redirect_stdout(help_output), self.assertRaises(SystemExit):
-            main(["--help"])
-        self.assertNotIn(" next ", help_output.getvalue())
-        self.assertNotIn("{next", help_output.getvalue())
-        self.assertNotIn(",next", help_output.getvalue())
 
     def test_check_with_a_checkpoint_still_requires_an_artifact(self) -> None:
         self.in_progress_work_order()
@@ -1735,18 +1719,30 @@ class CheckProjectionTests(unittest.TestCase):
                 self.assertEqual([], check["mutation"]["writes"])
                 self.assertEqual("WO-001", check["selection"]["primary"])
 
-    def test_focus_is_refused_with_its_replacement_named(self) -> None:
-        # ECP-RMV-001/-002: no subcommand, and a loud refusal naming check.
+    def test_retired_names_are_unknown_to_the_parser(self) -> None:
+        # ECP-TMB-001 to ECP-TMB-003 (WO-ECP-025, issue #310): the focus, next and
+        # accept-candidate tombstone guards left main() three releases after their
+        # removals shipped; argparse refuses the names as it refuses any unknown
+        # command, and no guard may return.
+        import inspect
+
+        from se_harness import cli
+
+        source = inspect.getsource(cli.main)
+        for name in ("focus", "next", "accept-candidate", "--authorized-by"):
+            with self.subTest(name=name):
+                self.assertNotIn(name, source)
         _, help_text, _ = self.run_cli("--help")
-        self.assertNotIn("focus", help_text)
-        code, out, err = self.run_cli("focus", str(self.root), "--artifact", "WO-001", "--json")
-        self.assertEqual(2, code)
-        self.assertEqual("", out)
-        self.assertIn("harnessctl check --artifact WO-001", err)
-        self.assertIn("focus was removed", err)
-        code, out, err = self.run_cli("focus")
-        self.assertEqual((2, ""), (code, out))
-        self.assertIn("harnessctl check --artifact ID", err)
+        for name in ("focus", " next ", "{next", ",next", "accept-candidate"):
+            with self.subTest(name=name):
+                self.assertNotIn(name, help_text)
+        for name in ("focus", "next", "accept-candidate"):
+            with self.subTest(name=name):
+                code, out, err = self.run_cli(name, str(self.root), "--artifact", "WO-001", "--json")
+                self.assertEqual((2, ""), (code, out))
+                self.assertIn("invalid choice", err)
+                self.assertNotIn("was removed", err)
+
 
     def test_the_projection_accepts_records_and_the_background_switch(self) -> None:
         self.set_state("implemented")

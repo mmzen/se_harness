@@ -90,16 +90,21 @@ class ParserShapeTests(unittest.TestCase):
             with self.subTest(command=name):
                 self.assertIn("--json", _options(subparser))
 
-    def test_prepare_release_names_its_actor_owner_and_refuses_authorized_by(self) -> None:
-        # ECP-CLI-002.
+    def test_prepare_release_names_its_actor_owner_and_knows_no_authorized_by(self) -> None:
+        # ECP-CLI-002, amended under WO-ECP-025 (ECP-TMB-006): the pre-parse guard is
+        # gone; argparse refuses the unknown option as it refuses any other.
         choices = _subparsers(build_parser())
         self.assertIn("--owner", _options(choices["prepare-release"]))
         self.assertNotIn("--authorized-by", _options(choices["prepare-release"]))
-        code, output, error = invoke("prepare-release", ".", "--id", "RLS-001", "--authorized-by", "release-owner")
-        self.assertEqual(2, code)
-        self.assertEqual("", output)
-        self.assertIn("--owner", error)
-        self.assertEqual(1, error.count("\n"))
+        output = io.StringIO()
+        error = io.StringIO()
+        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error), self.assertRaises(SystemExit) as raised:
+            main(["prepare-release", ".", "--id", "RLS-001", "--authorized-by", "release-owner"])
+        self.assertEqual(2, raised.exception.code)
+        self.assertEqual("", output.getvalue())
+        self.assertIn("harnessctl prepare-release: error:", error.getvalue())
+        self.assertIn("--owner", error.getvalue())
+        self.assertNotIn("was renamed", error.getvalue())
 
 
 class RepositoryCommandShapeTests(unittest.TestCase):

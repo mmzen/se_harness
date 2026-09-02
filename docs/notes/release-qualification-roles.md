@@ -62,7 +62,7 @@ An optional `--output` must name a new file outside the inspected repository. Ex
 
 Public 0.6.0 was released before `harnessctl qualify` existed, so the very first deployment accepted the candidate through 0.6.0's own digest-bound `accept-candidate` contract and retained that `se-harness-functional-acceptance-v1` result under a clearly named legacy-bootstrap artifact. That path expired by its own terms once a released verifier exposed the typed command (0.7.0 did), and `WO-REB-031` removed it: candidate-package CI now runs `qualify candidate-package` unconditionally and retains only the canonical `se-harness-release-qualification-v1` result. The retained bootstrap evidence of those first runs stays valid as history and is never relabeled.
 
-Newly built versions kept `accept-candidate` only as a one-cycle alias to the typed handler; that alias was removed after 0.11.0 (`WO-ECP-019`) and the command now exits with status 2 naming `qualify candidate-package`.
+Newly built versions kept `accept-candidate` only as a one-cycle alias to the typed handler; that alias was removed after 0.11.0 (`WO-ECP-019`), and its tombstone guard left with 0.15.0 (`WO-ECP-025`); the parser now refuses the name as it refuses any unknown command.
 
 ## Diagnostic commands
 
