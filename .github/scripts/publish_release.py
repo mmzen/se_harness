@@ -361,7 +361,24 @@ def _version_key(value: str) -> tuple[int, ...]:
     return tuple(int(part) for part in value.split("."))
 
 
-def select_rehearsal_record(repository: Path, requested: str | None) -> dict[str, Any]:
+def _checkout_release_records(repository: Path) -> list[dict[str, Any]]:
+    """Front matter of every release record in the checkout tree."""
+
+    import tomllib
+
+    fronts: list[dict[str, Any]] = []
+    for path in sorted((repository / "docs/engineering").glob("*/releases/RLS-*.md")):
+        text = path.read_text(encoding="utf-8")
+        if not text.startswith("+++\n") or "\n+++\n" not in text[4:]:
+            continue
+        try:
+            fronts.append(tomllib.loads(text[4:].split("\n+++\n", 1)[0]))
+        except tomllib.TOMLDecodeError as exc:
+            raise ReleaseError(f"invalid release record front matter: {path}") from exc
+    return fronts
+
+
+def select_rehearsal_record(repository: Path, requested: str | None, base_ref: str | None = None) -> dict[str, Any]:
     """Choose the record the publication rehearsal qualifies in release-record mode.
 
     Candidates are ready or released records whose distribution is schema 2 (recipe-bound):
@@ -369,19 +386,25 @@ def select_rehearsal_record(repository: Path, requested: str | None) -> dict[str
     has no rehearsal subject. An explicitly requested record must be one of them; otherwise
     the newest by version is chosen, and an empty selection is a legitimate outcome that the
     caller reports rather than a failure.
+
+    With `base_ref` (CIP-REH-001, WO-CIP-006) the candidates are the records at that ref's
+    commit, read from the Git tree exactly as the resolver reads them, so a pull request
+    rehearses a record its base branch already holds; the checkout is not consulted.
     """
 
-    import tomllib
+    if base_ref:
+        try:
+            base_head = dashboard._resolve_commit(repository, base_ref)
+            fronts = [metadata for _, metadata in dashboard._release_records_at(repository, base_head)]
+        except dashboard.PublicationError as exc:
+            raise ReleaseError(f"cannot read release records at {base_ref}: {exc}") from exc
+        where = f" at {base_ref}"
+    else:
+        fronts = _checkout_release_records(repository)
+        where = ""
 
     candidates: list[tuple[tuple[int, ...], str, str]] = []
-    for path in sorted((repository / "docs/engineering").glob("*/releases/RLS-*.md")):
-        text = path.read_text(encoding="utf-8")
-        if not text.startswith("+++\n") or "\n+++\n" not in text[4:]:
-            continue
-        try:
-            front = tomllib.loads(text[4:].split("\n+++\n", 1)[0])
-        except tomllib.TOMLDecodeError as exc:
-            raise ReleaseError(f"invalid release record front matter: {path}") from exc
+    for front in fronts:
         status = front.get("status")
         distribution = front.get("distribution")
         version = front.get("version")
@@ -394,13 +417,13 @@ def select_rehearsal_record(repository: Path, requested: str | None) -> dict[str
     if requested:
         if requested not in by_id:
             raise ReleaseError(
-                f"{requested} is not a ready or released schema-2 record; rehearsable records: {sorted(by_id) or 'none'}"
+                f"{requested} is not a ready or released schema-2 record{where}; rehearsable records: {sorted(by_id) or 'none'}"
             )
         return {"release_record": requested, "status": by_id[requested], "reason": "requested"}
     if not candidates:
-        return {"release_record": "", "status": "", "reason": "no ready or released schema-2 record exists; only the candidate is rehearsed"}
+        return {"release_record": "", "status": "", "reason": f"no ready or released schema-2 record exists{where}; only the candidate is rehearsed"}
     _, identifier, status = max(candidates)
-    return {"release_record": identifier, "status": status, "reason": "newest ready or released schema-2 record"}
+    return {"release_record": identifier, "status": status, "reason": f"newest ready or released schema-2 record{where}"}
 
 
 def classify_github(plan: ReleasePlan, metadata: dict[str, Any]) -> dict[str, Any]:
@@ -519,6 +542,7 @@ def build_parser() -> argparse.ArgumentParser:
     result.add_argument("--stages", type=Path, required=True)
     result.add_argument("--output", type=Path, required=True)
     return parser
+    select.add_argument("--base-ref", default=None, help="read the records at this ref (a pull request's base) instead of the checkout")
 
 
 def main(argv: Iterable[str] | None = None) -> int:
@@ -531,7 +555,7 @@ def main(argv: Iterable[str] | None = None) -> int:
         elif args.command == "verify-build-manifest":
             _emit(verify_build_manifest(read_plan(args.plan), _read_json(args.manifest)), args.output, None)
         elif args.command == "select-rehearsal-record":
-            selection = select_rehearsal_record(args.repository, args.release_record or None)
+            selection = select_rehearsal_record(args.repository, args.release_record or None, args.base_ref or None)
             if args.github_output is not None:
                 with args.github_output.open("a", encoding="utf-8", newline="\n") as stream:
                     stream.write(f"release_record={selection['release_record']}\nstatus={selection['status']}\n")
