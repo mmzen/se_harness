@@ -42,8 +42,9 @@ the exact head:
 
 - `DR-WO-START`: taken at head `68af51f`, check-run `100294830645`,
   conclusion success.
-- `DR-WO-COMPLETE` and `DR-VREC-PREPARE`: recorded below as they are
-  taken, each on a fresh green reading of its own head.
+- `DR-WO-COMPLETE`: Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 41547a22fa4757c112cc13731fcb72ed07001209 (check-run 100302738602, source github-checks).
+- `DR-VREC-PREPARE`: recorded below as it is taken, on a fresh green reading
+  of its own head.
 
 The approval that granted the class, the verification of the prepared
 record, and both merges are human decisions.

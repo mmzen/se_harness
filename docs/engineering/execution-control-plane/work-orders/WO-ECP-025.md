@@ -2,7 +2,7 @@
 id = "WO-ECP-025"
 type = "work_order"
 title = "Delete the four CLI tombstone guards, by the delegated route"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -55,6 +55,13 @@ to = "in_progress"
 decided_at = "2026-09-02T14:47:47Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 68af51fa014b64e89cc22fe19081de2c5200f696 (check-run 100294830645, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T15:09:28Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 41547a22fa4757c112cc13731fcb72ed07001209 (check-run 100302738602, source github-checks)."
 +++
 
 # Work Order: Delete the four CLI tombstone guards, by the delegated route
