@@ -38,19 +38,84 @@ and the start. Every commit on this branch carries the
 `Harness-Work-Order: WO-RLS-019` trailer in its final block, so the census
 at the candidate needs no exemption.
 
-## Section 2: readings at the candidate
+## Section 2: readings at the candidate `aa14628`
 
-Recorded in the next commit, taken at this commit.
+| Reading | Evaluator / platform | Result |
+| --- | --- | --- |
+| `validate` | released 0.12.0, outside the checkout, `-I`, wheel-installed | 1,233 artifacts, 0 errors, 65 pre-existing maintenance warnings, 0 advisories |
+| `doctor` | released 0.12.0 | 113 PASS, 0 FAIL |
+| `preflight --work-order WO-RLS-019 --phase review` | released 0.12.0 | PASS, no diagnostic |
+| `check --checkpoint handoff --from-git 75d1902` | released 0.12.0 | Completed; eight `QGP-G4I-*` predicates pass; seven changed paths, all inside the declared scope; `complete: true`; section 6 |
+| `scripts/validate_release_distributions.py --root .` | candidate | PASS (9 distribution-bearing records) |
+| `scripts/check_portable_release_surface.py --repository .` / `--wheel` / `--harnessctl` | candidate | PASS / PASS / PASS, the latter two on an explicitly non-promotable ephemeral wheel (`6a4b5b9b…`) built outside the checkout from a Git export of `aa14628` and installed into a disposable environment |
+| `python scripts/run_tests.py --scale full` | candidate, Windows 11 (CPython 3.13), LF checkout | section 2b |
+| `python scripts/run_tests.py` | candidate, Linux | the hosted candidate-source lane at this branch head, section 5 |
+| `qualify complete-candidate` | candidate, Linux | the hosted candidate-package lane at this branch head, section 5 (`RID018` boundary on Windows, as `REL-SEH-023` records) |
+| `repository_tools.upgrade_rehearsal` 0.12.0 -> 0.13.0 | hosted, Linux and Windows | the governance-migration lanes at this branch head, section 5 |
+
+### Section 2b: the Windows suite
+
+`python scripts/run_tests.py --scale full` at `aa14628` on this Windows 11
+workstation (CPython 3.13, LF checkout): 1,176 tests, 26 skipped, 1 error,
+the known baseline name present on `main` and outside this work order
+(`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`,
+a Windows `PermissionError` on a temporary Git object during teardown), the
+same reading `WO-RLS-018` and `WO-HUP-013` recorded. The same run over the
+committed packet before the candidate read the same numbers.
 
 ## Section 3: census re-run at the candidate
 
-Recorded in the next commit.
+`harnessctl release-unit . --from v0.12.0 --to aa14628 --contract REL-SEH-024`,
+released 0.12.0, no `--exempt`: untraced 0, exempted 0; ten work orders
+traced: the three members, the six `RLS-SEH-021` members through the #304
+merge (released and excluded, as the contract states by construction), and
+`WO-RLS-019` through this branch's trailered commits. The comparison reports
+the three `E-CIP-001` findings the contract predicts at this stage: no
+`candidate_commit` is declared, the gates differ by exactly the six released
+members, and `WO-RLS-019` is `in_progress`, the state this reading is taken
+in.
 
 ## Section 4: build of record
 
-Recorded when the hosted Publication Rehearsal completes at the bound
-candidate.
+The pull-request event of the Publication Rehearsal builds the pull
+request's merge commit (`github.sha` of a `pull_request` event is the merge
+ref, `1eae65f` for #313 at `aa14628`), so it is not a reading of the
+candidate. The reading is the `workflow_dispatch` of
+`publication-rehearsal.yml` on `release/0.13.0`, whose commit is the branch
+head; its `candidate` job replays the head's own recipe twice on the pinned
+linux/amd64 producer image and retains `release-build-replay.json` under
+`qualification-candidate-<head>`.
+
+### Reading at `aa14628` (dispatch run 33601305042)
+
+Two producer runs byte-identical, `state` `exact`, image
+`python@sha256:2856e6af…` linux/amd64, recipe `0c3f368c…` unchanged since
+`v0.12.0`. Wheel `se_harness-0.13.0-py3-none-any.whl`
+`cc1eb84ce5a576ede74991e089068ba4cba38de5558dc2e7fe4cdee031bb6005`; sdist
+`se_harness-0.13.0.tar.gz`
+`bc6ae245a0a2bdb85c899ed0bdead4c923f5454f4cd393fe42c91cabed94b630`;
+`SOURCE_DATE_EPOCH` 1788331713; source manifest `10f48689…`. These are the
+readings at this commit; the record binds the digests of the bound
+candidate, read the same way at that head (section 4b).
 
 ## Section 5: hosted lanes
 
-Recorded when the lanes complete at the bound candidate head.
+At `aa14628`, push and pull-request events, seven runs, all `success`:
+Engineering Harness (33600676741, 33600679685: the live-body work-order
+selection, review preflight and the Git-derived handoff check pass over
+this packet), SE Harness Candidate Evidence (33600676768, 33600679686),
+Governor Transition Assessment (33600676813, 33600679714), Publication
+Rehearsal (33600679811, the pull-request merge commit; section 4).
+
+Retained by the candidate-evidence run 33600676768:
+
+| Lane | Reading |
+| --- | --- |
+| candidate source, Linux | `run_tests.py --workers 4 --scale full` pass; portable surface `--repository` PASS; non-promotable candidate wheel `fb5d2bc5…` built from `aa14628` |
+| `qualify complete-candidate`, Linux | `passed: true`; `CC001` to `CC004` pass |
+| `qualify candidate-package` from the isolated released 0.12.0 verifier | `CP001`, `CP002` pass |
+| `repository_tools.upgrade_rehearsal` 0.12.0 -> 0.13.0, Linux, twice | `overall_result` pass both runs; `semantic_sha256` `ea98ff022481cd6223fa80366a7278349d8838b5bc34707a54209ea804437ccf` both |
+| the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` `ea98ff02…` |
+| integration package | built, verified on Linux and Windows, retained |
+
+Recorded again below at the bound candidate head.
