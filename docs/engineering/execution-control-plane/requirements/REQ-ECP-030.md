@@ -2,7 +2,7 @@
 id = "REQ-ECP-030"
 type = "requirement"
 title = "A removed command name outlives its removal by one release only"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -14,6 +14,13 @@ measure = "main() in se_harness/cli.py carries no pre-parse guard for focus, nex
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T14:38:23Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented options 'Include the --authorized-by guard too' and 'Delegated route (the delegation class)' for WO-ECP-025: the four CLI tombstone guards (focus, next, accept-candidate, prepare-release --authorized-by) leave main() three releases after their removals shipped (issue #310, assessment item #285c)."
 +++
 
 # Requirement: A removed command name outlives its removal by one release only

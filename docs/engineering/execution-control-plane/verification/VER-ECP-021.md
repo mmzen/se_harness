@@ -2,13 +2,20 @@
 id = "VER-ECP-021"
 type = "verification"
 title = "Independent evidence for the tombstone retirement"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 verifies = ["REQ-ECP-030"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T14:38:23Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented options 'Include the --authorized-by guard too' and 'Delegated route (the delegation class)' for WO-ECP-025: the four CLI tombstone guards (focus, next, accept-candidate, prepare-release --authorized-by) leave main() three releases after their removals shipped (issue #310, assessment item #285c). The source-reading, plain-refusal, records, no-regression and delegation rows."
 +++
 
 # Verification: Independent evidence for the tombstone retirement

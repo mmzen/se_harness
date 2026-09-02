@@ -2,13 +2,20 @@
 id = "SPEC-ECP-019"
 type = "specification"
 title = "Retirement of the CLI tombstone guards"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 specifies = ["REQ-ECP-030"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T14:38:23Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented options 'Include the --authorized-by guard too' and 'Delegated route (the delegation class)' for WO-ECP-025: the four CLI tombstone guards (focus, next, accept-candidate, prepare-release --authorized-by) leave main() three releases after their removals shipped (issue #310, assessment item #285c). Rules ECP-TMB-001 to ECP-TMB-007: the guards out, argparse's refusal, one absence test, the notes, the dated amendment records, the fourth guard, the delegation gate of WO-ECP-024."
 +++
 
 # Specification: Retirement of the CLI tombstone guards
