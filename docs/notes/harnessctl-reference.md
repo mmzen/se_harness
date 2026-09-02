@@ -145,8 +145,8 @@ phase the state implies, `start` for `approved` and `in_progress`, `review` afte
 `governing`, `declared_paths`, `state`, `next` (`argv`, `procedure_id`, `step_id`, the same step a
 checkpoint `check` selects) and `decision_required`. It writes nothing and needs no prior command.
 The human block renders the context as a `Context` section after `Command or response`, and
-`result_sha256` binds it. The former `next` command was removed after 0.11.0 (`WO-ECP-020`);
-invoking it exits with status 2 and names `check`.
+`result_sha256` binds it. The former `next` command was removed after 0.11.0 (`WO-ECP-020`); its
+tombstone guard left with 0.15.0 (`WO-ECP-025`), so the parser now refuses the name as unknown.
 
 `check` without `--checkpoint` projects only the selected artifact's governing chain and direct
 lifecycle dependencies. It uses the ordered recommendation registry in
@@ -370,8 +370,8 @@ The four subcommands are separate closed parsers. They bind evaluator identity, 
 All operations emit `se-harness-release-qualification-v1`. The result identifies the operation, completion, outcome, evaluator, target, ordered checks, independence boundary, and its evidence-only authority. `complete-candidate` is always `candidate-controlled`, even when it passes. See [release qualification roles](release-qualification-roles.md) for the workflow map. `WO-REB-028` retired a fifth operation, `predecessor-view`, with the predecessor-bootstrap release path; its `PV001` and `PV002` codes stay reserved and no code path emits them.
 
 The pre-namespace `accept-candidate` entry point, kept as a one-cycle alias of `qualify
-candidate-package` under `REQ-REB-022`, was removed after 0.11.0 (`WO-ECP-019`); invoking it exits
-with status 2 and names the typed operation. Exact public 0.6.0 predates the `qualify` namespace;
+candidate-package` under `REQ-REB-022`, was removed after 0.11.0 (`WO-ECP-019`); its tombstone guard left with
+0.15.0 (`WO-ECP-025`), so the parser now refuses the name as unknown. Exact public 0.6.0 predates the `qualify` namespace;
 its immutable command still emits `se-harness-functional-acceptance-v1` and is accepted only as
 explicitly labeled bootstrap evidence in the candidate workflow's legacy branch, which runs only a
 verifier without `qualify`. That historical output is not converted into or described as canonical

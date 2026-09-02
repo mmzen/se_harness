@@ -74,3 +74,7 @@ The root `.agents/skills/harness-orient` copy is the released 0.10.0 one
 and still invokes `focus`; it moves when the root adopts the release
 carrying this change, and until then this repository's own orientation
 runs the alias against the 0.10.0 evaluator, which still has it.
+
+## Amendment record
+
+**The "no second name" row's invocation half is superseded, proposed 2026-09-02 under `WO-ECP-025` (`VER-ECP-021`).** `--help` still lists no `focus`; the invocation now asserts argparse's refusal, not a named replacement, in `test_retired_names_are_unknown_to_the_parser`. Every other row is unchanged.

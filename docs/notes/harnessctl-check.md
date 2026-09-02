@@ -41,11 +41,12 @@ What it does **not** do:
 - without a checkpoint it picks the single `in_progress` work order when you
   name none, and carries the execution context (reading manifest, governing
   chain, declared scope, state, next command) as a `Context` section — what
-  the former `next` command added before it was removed after 0.11.0;
+  the former `next` command added before it was removed after 0.11.0 (its
+  guard left with 0.15.0; the parser now refuses the name as unknown);
 - without `--checkpoint` it evaluates nothing: it *projects* the selected
   rule, procedure and next step (the former `focus` command, kept as an alias
-  through 0.10.0 and removed after it; a script still calling it is refused
-  with this replacement named);
+  through 0.10.0 and removed after it; since 0.15.0 the parser refuses the
+  name as it refuses any unknown command);
 - it does not decide; it names the decision that is due and who owns it;
   for a work order carrying `[delegation] class = "execution"` at the pull
   request's base it also says whether that decision is the actor's own: the

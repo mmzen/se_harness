@@ -319,25 +319,6 @@ class ReleaseQualificationTests(unittest.TestCase):
         self.assertTrue(result.passed)
         self.assertEqual("public-install-observation", result.independence)
 
-    @mock.patch("se_harness.cli.qualify_candidate_package")
-    def test_accept_candidate_is_no_subcommand_and_names_the_typed_operation(self, qualify: mock.Mock) -> None:
-        # ECP-CTX-006: the one-cycle alias REQ-REB-022 allowed is gone; the guard names
-        # qualify candidate-package and nothing runs.
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            code = main(["accept-candidate", "--wheel", "candidate.whl", "--output", str(self.root / "result.json")])
-        self.assertEqual(2, code)
-        self.assertEqual("", stdout.getvalue())
-        self.assertIn("harnessctl qualify candidate-package", stderr.getvalue())
-        self.assertEqual(1, stderr.getvalue().count("\n"))
-        qualify.assert_not_called()
-        self.assertFalse((self.root / "result.json").exists())
-        help_output = io.StringIO()
-        with contextlib.redirect_stdout(help_output), self.assertRaises(SystemExit):
-            main(["--help"])
-        self.assertNotIn("accept-candidate", help_output.getvalue())
-
 
 if __name__ == "__main__":
     unittest.main()

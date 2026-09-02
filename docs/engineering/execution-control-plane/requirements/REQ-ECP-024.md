@@ -81,3 +81,7 @@ names `harnessctl check --artifact WO-001`.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The clause "refuse focus with a message naming check" is closed, proposed 2026-09-02 under `WO-ECP-025` (`REQ-ECP-030`, `SPEC-ECP-019` `ECP-TMB-001`).** The refusal described the one-release window after 0.10.0; three releases have shipped, the pre-parse guard is gone, and the parser refuses `focus` as it refuses any unknown command. Everything else in this requirement is unchanged.

@@ -1108,45 +1108,6 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     arguments = list(sys.argv[1:] if argv is None else argv)
-    if arguments[:1] == ["focus"]:
-        # ECP-RMV-002: the alias window of SPEC-ECP-011 closed with the release
-        # after 0.10.0; a script still on `focus` fails loudly, naming its replacement.
-        selected = arguments[arguments.index("--artifact") + 1] if "--artifact" in arguments[:-1] else "ID"
-        print(
-            f"harnessctl: focus was removed after 0.10.0; run harnessctl check --artifact {selected}"
-            " (add --json for the structured result)",
-            file=sys.stderr,
-        )
-        return 2
-    if arguments[:1] == ["next"]:
-        # ECP-CTX-004 as amended under WO-ECP-020: the execution context is the
-        # checkpoint-less check projection; `next` never shipped as an alias.
-        selected = arguments[arguments.index("--artifact") + 1] if "--artifact" in arguments[:-1] else None
-        print(
-            "harnessctl: next was removed after 0.11.0; run harnessctl check"
-            + (f" --artifact {selected}" if selected else " [--artifact ID]")
-            + " (add --json for the structured result)",
-            file=sys.stderr,
-        )
-        return 2
-    if arguments[:1] == ["prepare-release"] and "--authorized-by" in arguments:
-        # ECP-CLI-002: the preparation actor is --owner on both record commands.
-        print(
-            "harnessctl: --authorized-by was renamed after 0.11.0; run harnessctl prepare-release ... --owner ROLE"
-            " (the option names the preparation actor and record owner; it does not authorize the release)",
-            file=sys.stderr,
-        )
-        return 2
-    if arguments[:1] == ["accept-candidate"]:
-        # ECP-CTX-006: the one-cycle alias REQ-REB-022 allowed is gone after 0.11.0;
-        # a script still on it fails loudly, naming the typed operation.
-        print(
-            "harnessctl: accept-candidate was removed after 0.11.0; run harnessctl qualify candidate-package"
-            " --candidate-wheel PATH --candidate-commit SHA --candidate-wheel-sha256 SHA256"
-            " --verifier-wheel-sha256 SHA256 --output PATH",
-            file=sys.stderr,
-        )
-        return 2
     try:
         args = build_parser().parse_args(argv)
         return int(args.handler(args))
