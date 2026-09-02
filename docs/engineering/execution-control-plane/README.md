@@ -111,4 +111,4 @@ release, or external action; the amendments it names on
 `legacy-release-evidence` artifacts are carried by `WO-ECP-006` and
 `WO-ECP-007` only after those work orders are approved and started by
 their accountable owners. Each artifact's own front matter is its state.
-- `REQ-ECP-030`, `SPEC-ECP-019`, `VER-ECP-021` and `WO-ECP-025` are drafted (2026-09-02) to close issue #310, assessment item #285c: the `focus`, `next` and `accept-candidate` tombstone guards leave `main()` three releases after their removals shipped, argparse refuses the names as unknown, and the rules that described the guards close by dated amendment.
+- `REQ-ECP-030`, `SPEC-ECP-019`, `VER-ECP-021` and `WO-ECP-025` are drafted (2026-09-02) to close issue #310, assessment item #285c: the `focus`, `next`, `accept-candidate` and `prepare-release --authorized-by` tombstone guards leave `main()` three releases after their removals shipped, argparse refuses the names as unknown, the rules that described the guards close by dated amendment, and the work order travels the delegated route.

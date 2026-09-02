@@ -53,19 +53,24 @@ clause "refuse focus with a message naming check"), `SPEC-ECP-013`
 `VER-ECP-013`'s "no second name" row and `VER-ECP-016`'s "no `next`" and
 "no `accept-candidate`" rows. The records keep their bytes otherwise.
 
-**ECP-TMB-006:** If the approving owner includes the `--authorized-by`
-guard of `prepare-release` in the work order's scope, `ECP-TMB-001` to
-`ECP-TMB-005` apply to it the same way: the guard block goes, argparse
-refuses the unknown option, `tests/test_cli_shape.py`'s refusal assertion
-becomes an unrecognized-argument assertion, and `SPEC-ECP-016`
-`ECP-CLI-002` closes by amendment record. Otherwise that guard is
-untouched and named as an observation.
+**ECP-TMB-006:** The `--authorized-by` guard of `prepare-release` retires
+the same way, on the owner's decision of 2026-09-02: the guard block goes,
+argparse refuses the unknown option (exit 2, usage error),
+`tests/test_cli_shape.py`'s refusal assertion becomes an
+unrecognized-argument assertion, and `SPEC-ECP-016` `ECP-CLI-002` closes by
+amendment record.
+
+**ECP-TMB-007:** The work order carries `[delegation] class = "execution"`
+and uses the gate `WO-ECP-024` configured (`github-checks`, `check_name =
+"validate"`, `base_ref = "origin/main"`). The delegated route takes
+`DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE` only; approval,
+verification and the merges stay human.
 
 ## Coverage
 
 | Requirement | Rules |
 | --- | --- |
-| REQ-ECP-030 | ECP-TMB-001 to ECP-TMB-006 |
+| REQ-ECP-030 | ECP-TMB-001 to ECP-TMB-007 |
 
 ## Failure behaviour
 
@@ -75,7 +80,8 @@ behaviour.
 
 ## Compatibility and migration
 
-Consumer-visible: a script still invoking `focus`, `next` or
-`accept-candidate` after three releases of loud refusals now receives
-argparse's generic usage error instead of the named replacement. The
+Consumer-visible: a script still invoking `focus`, `next`,
+`accept-candidate` or `prepare-release --authorized-by` after three releases
+of loud refusals now receives argparse's generic usage error instead of the
+named replacement. The
 replacements stay documented in the command reference.

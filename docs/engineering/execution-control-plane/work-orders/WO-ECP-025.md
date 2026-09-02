@@ -1,7 +1,7 @@
 +++
 id = "WO-ECP-025"
 type = "work_order"
-title = "Delete the three CLI tombstone guards"
+title = "Delete the four CLI tombstone guards, by the delegated route"
 status = "draft"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-02"
@@ -34,20 +34,29 @@ paths = [
   "docs/engineering/execution-control-plane/verification/VER-ECP-021.md",
 ]
 
+[delegation]
+class = "execution"
+
 [relations]
 implements = ["REQ-ECP-030"]
 specifications = ["SPEC-ECP-019"]
 verification = ["VER-ECP-021"]
 +++
 
-# Work Order: Delete the three CLI tombstone guards
+# Work Order: Delete the four CLI tombstone guards, by the delegated route
 
 ## Lifecycle
 
-This work order requires the accountable owners' approval before start
-preflight or any declared work. Its authoritative state, and the timestamp
-and reason of every decision taken on it, are the front matter and
-`[[lifecycle_events]]` above. Commit-bound verification is `required`.
+This work order carries `[delegation] class = "execution"`: approving it is
+the act of delegating `DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE`
+to the `delegated-executor` role, each unlocked only while the required
+`validate` check is `success` for the exact candidate head (`REQ-ECP-011`,
+`SPEC-ECP-006`; the gate configuration is the owner-content
+`.engineering-harness.delegation.toml` of `WO-ECP-024`). The class is read
+at the base of the pull request, so the approved packet merges to `main`
+first and the execution follows on a second branch. The approval below, the
+verification of the record it prepares, and every merge stay human
+decisions. Commit-bound verification is `required`.
 
 ## Objective
 
@@ -56,9 +65,9 @@ Close issue #310 (assessment item #285c): delete the `focus`, `next` and
 (`ECP-TMB-001`, `ECP-TMB-002`), delete their refusal tests and keep the
 absence assertions with a source-reading test (`ECP-TMB-003`), make the
 three notes state the plain refusal (`ECP-TMB-004`), and close the rules
-that described the guards by dated amendment record (`ECP-TMB-005`). The
-`--authorized-by` guard is included only if the approving owner says so
-(`ECP-TMB-006`); the approval reason records the choice.
+that described the guards by dated amendment record (`ECP-TMB-005`), and retire the
+fourth guard of the same kind, `prepare-release --authorized-by`, the same
+way (`ECP-TMB-006`), on the owner's decision of 2026-09-02.
 
 ## In scope
 
@@ -66,11 +75,12 @@ that described the guards by dated amendment record (`ECP-TMB-005`). The
   `main()`; nothing else in the module moves.
 - `tests/test_workflow_execution.py`, `tests/test_release_qualification.py`:
   the three refusal tests replaced by one absence test that reads `--help`
-  and `main()`'s source; `tests/test_cli_shape.py` only if
-  `--authorized-by` is included.
+  and `main()`'s source; `tests/test_cli_shape.py`'s `--authorized-by`
+  refusal assertion becomes an unrecognized-argument assertion.
 - The three notes; the amendment records on `REQ-ECP-024`, `SPEC-ECP-013`,
-  `SPEC-ECP-014`, `VER-ECP-013`, `VER-ECP-016` (and `SPEC-ECP-016` if
-  included); the domain index; this work order's evidence packet.
+  `SPEC-ECP-014`, `SPEC-ECP-016`, `VER-ECP-013`, `VER-ECP-016`; the domain
+  index; this work order's evidence packet with the delegated lifecycle
+  events quoted back.
 
 ## Out of scope
 
@@ -94,8 +104,9 @@ the note sentences.
 
 ## Expected change surface
 
-About thirty lines out of `cli.py`, three tests replaced by one, three
-note sentences, six or seven short amendment records, this packet.
+About forty lines out of `cli.py`, three tests replaced by one and one
+assertion reworded, three note sentences, seven short amendment records,
+this packet.
 
 ## Required verification
 

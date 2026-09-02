@@ -10,7 +10,7 @@ statement = "WHEN one release has shipped after a command name was removed from 
 verification_method = ["test", "inspection"]
 priority = "should"
 source = "issue #310 (functional assessment item #285c: the tombstone guards are kept for exactly one release after their removal shipped); REQ-ECP-022, REQ-ECP-024 and REQ-ECP-025, whose assumptions each promise the later removal; REQ-REB-031, which left the accept-candidate guard to this item"
-measure = "main() in se_harness/cli.py carries no pre-parse guard for focus, next or accept-candidate; each name is refused by argparse with its usage error and exit status 2; --help lists none of them; the three refusal tests are gone and the absence assertions remain; the notes state the plain refusal"
+measure = "main() in se_harness/cli.py carries no pre-parse guard for focus, next, accept-candidate or prepare-release --authorized-by; each name is refused by argparse with its usage error and exit status 2; --help lists none of them; the three refusal tests are gone and the absence assertions remain; the notes state the plain refusal"
 
 [relations]
 derives_from = ["CAP-ECP-001"]
@@ -49,9 +49,8 @@ invocation and the last place the three words survive in the CLI.
   `ECP-CTX-006` (`SPEC-ECP-014`) described the one-release window; they are
   closed by dated amendment under this requirement, not deleted.
 - The `--authorized-by` guard on `prepare-release` (`ECP-CLI-002`,
-  `SPEC-ECP-016`, renamed after 0.11.0) is the same kind of tombstone; it
-  is retired by this requirement only if the approving owner includes it
-  in `WO-ECP-025`'s scope.
+  `SPEC-ECP-016`, renamed after 0.11.0) is the same kind of tombstone and
+  is retired under this requirement on the owner's decision of 2026-09-02.
 
 ## Acceptance examples
 
