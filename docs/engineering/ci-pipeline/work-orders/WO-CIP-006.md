@@ -2,7 +2,7 @@
 id = "WO-CIP-006"
 type = "work_order"
 title = "Let the pull-request rehearsal select a record the base already holds"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -46,6 +46,13 @@ to = "in_progress"
 decided_at = "2026-09-02T15:49:45Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 4ab503c32467a63150fa67961a12b78276ea093c (check-run 100317639331, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T16:11:49Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at f233a82b7b5ca3d0cf99d77f88a8354d992147ad (check-run 100325382416, source github-checks)."
 +++
 
 # Work Order: Let the pull-request rehearsal select a record the base already holds
