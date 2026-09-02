@@ -2,7 +2,7 @@
 id = "REQ-HUP-030"
 type = "requirement"
 title = "Prove complete-graph operation under the 0.14.0 root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -14,6 +14,13 @@ measure = "0.14.0 validate 0 errors, 69 warnings, 0 advisories over main 25c0ef9
 
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T11:42:30Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC' for WO-HUP-015: the adoption of exact public 0.14.0 (RLS-SEH-023, released and published 2026-09-02) as the standard root the simple way, from the 0.13.0 lock 9dfec5b4, rehearsed the same day on a throwaway clone of main 25c0ef9. Complete-graph operation under the 0.14.0 root with every number unchanged."
 +++
 
 # Requirement: Prove complete-graph operation under the 0.14.0 root

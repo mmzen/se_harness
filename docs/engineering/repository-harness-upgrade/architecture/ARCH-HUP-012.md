@@ -2,7 +2,7 @@
 id = "ARCH-HUP-012"
 type = "architecture"
 title = "Adopt 0.14.0 through the existing standard-root boundary, without a packet"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -16,6 +16,13 @@ outcome = "no_significant_decision"
 triggers = []
 rationale = "The boundary is unchanged from ARCH-HUP-011: one released evaluator outside the checkout writes the managed root through the installer's transaction from a wheel-file install that records its archive pair. Nothing leaves the managed set and the new root carries no behavioural change. No trust boundary moves."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T11:42:30Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC' for WO-HUP-015: the adoption of exact public 0.14.0 (RLS-SEH-023, released and published 2026-09-02) as the standard root the simple way, from the 0.13.0 lock 9dfec5b4, rehearsed the same day on a throwaway clone of main 25c0ef9. The unchanged standard-root boundary, no significant decision."
 +++
 
 # Architecture: Adopt 0.14.0 through the existing standard-root boundary, without a packet

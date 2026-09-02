@@ -2,13 +2,20 @@
 id = "SPEC-HUP-015"
 type = "specification"
 title = "Standard-root adoption contract for released 0.14.0, the simple way"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
 specifies = ["REQ-HUP-029", "REQ-HUP-030"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T11:42:30Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-02 by the accountable owner by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC' for WO-HUP-015: the adoption of exact public 0.14.0 (RLS-SEH-023, released and published 2026-09-02) as the standard root the simple way, from the 0.13.0 lock 9dfec5b4, rehearsed the same day on a throwaway clone of main 25c0ef9. Rules 1 to 13 following SPEC-HUP-014 rule for rule with the measured 0.14.0 identities and the three-update plan."
 +++
 
 # Specification: Standard-root adoption contract for released 0.14.0, the simple way
