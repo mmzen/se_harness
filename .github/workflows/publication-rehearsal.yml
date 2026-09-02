@@ -3,7 +3,10 @@
 # qualification definition, .github/workflows/release-qualification.yml, in
 # candidate mode on every pull request and push to main, and in release-record
 # mode against the newest schema-2 ready or released record when one exists or
-# when dispatched with one. What is rehearsed is what the publication workflow
+# when dispatched with one. On a pull request that record is read at the base
+# branch head (WO-CIP-006, SPEC-CIP-002 CIP-REH): a release pull request
+# rehearses the previous published record, and the push to main that carries
+# the new record rehearses that one. What is rehearsed is what the publication workflow
 # executes, by construction; there is no copy to keep aligned and no digest to
 # refresh. It holds no publication authority: no credential, no environment,
 # no write permission, and no tag, release, index object, deployment, or
@@ -51,16 +54,28 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Fetch the base branch head of the pull request
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+
       - name: Select the newest schema-2 ready or released record, or the dispatched one
         id: select
         env:
           RELEASE_RECORD: ${{ inputs.release_record }}
+          # CIP-REH-003: a pull request reads the records its base already holds.
+          BASE_REF: ${{ github.event_name == 'pull_request' && format('refs/remotes/origin/{0}', github.base_ref) || '' }}
         shell: bash
         run: |
           set -euo pipefail
           python .github/scripts/publish_release.py select-rehearsal-record \
             --repository "$GITHUB_WORKSPACE" \
             --release-record "$RELEASE_RECORD" \
+            --base-ref "$BASE_REF" \
             --github-output "$GITHUB_OUTPUT" \
             --summary "$GITHUB_STEP_SUMMARY"
 

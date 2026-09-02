@@ -31,7 +31,7 @@ and it makes the documentation of the pipeline part of every increment.
 - `WO-CIP-003`: P6 (REQ-CIP-006).
 - `WO-CIP-004`: P4 (REQ-CIP-004).
 - `WO-CIP-005`: follow-up to WO-CIP-004's deviation 1 — the approval-time predicate that refuses a release contract whose census differs from the derivation (REQ-CIP-004). Draft.
-- `REQ-CIP-007`, `SPEC-CIP-002`, `VER-CIP-002`, `WO-CIP-006` (drafted 2026-09-02, issues #305 and #193): the pull-request rehearsal selects the newest schema-2 record the base branch already holds, so a release pull request's record-mode lane can be green before its own merge; delegated route.
+- `REQ-CIP-007`, `SPEC-CIP-002`, `VER-CIP-002`, `WO-CIP-006` (approved 2026-09-02, the delegating act; issues #305 and #193; executing on the delegated route): the pull-request rehearsal selects the newest schema-2 record the base branch already holds, so a release pull request's record-mode lane can be green before its own merge; delegated route.
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.

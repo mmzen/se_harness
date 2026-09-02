@@ -400,6 +400,11 @@ class QualificationDefinitionTests(unittest.TestCase):
         self.assertIn("require_status: ${{ needs.select.outputs.status }}", self.rehearsal)
         self.assertIn("default_ref: refs/remotes/origin/main", self.rehearsal)
         self.assertIn("publish_release.py select-rehearsal-record", self.rehearsal)
+        # WO-CIP-006 (SPEC-CIP-002 CIP-REH-003): a pull request reads the records at its base.
+        self.assertIn("if: github.event_name == 'pull_request'", self.rehearsal)
+        self.assertIn('git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"', self.rehearsal)
+        self.assertIn("BASE_REF: ${{ github.event_name == 'pull_request' && format('refs/remotes/origin/{0}', github.base_ref) || '' }}", self.rehearsal)
+        self.assertIn('--base-ref "$BASE_REF"', self.rehearsal)
         self.assertNotIn("matrix", self.rehearsal)
         for absent in ("rehearse_publication", "publication_rehearsal_mechanics", "check-divergence", "PyYAML", "windows-2022"):
             self.assertNotIn(absent, self.rehearsal)
@@ -476,6 +481,54 @@ class QualificationDefinitionTests(unittest.TestCase):
             self.assertEqual("ready", module.select_rehearsal_record(root, "RLS-X-002")["status"])
             with self.assertRaises(module.ReleaseError):
                 module.select_rehearsal_record(root, "RLS-X-001")
+
+    def test_rehearsal_record_selection_reads_the_base_ref_when_given(self) -> None:
+        # WO-CIP-006 (SPEC-CIP-002 CIP-REH-001, -002, -004): with a base ref the candidates are
+        # the records committed at that ref, never the checkout; without it the checkout as before.
+        import subprocess
+
+        from tests.test_release_orchestration import RELEASE as module
+
+        with tempfile.TemporaryDirectory() as scratch:
+            root = Path(scratch)
+            releases = root / "docs/engineering/release-x/releases"
+            releases.mkdir(parents=True)
+
+            def record(identifier: str, version: str, status: str) -> None:
+                (releases / f"{identifier}.md").write_text(
+                    f'+++\nid = "{identifier}"\ntype = "release_record"\nstatus = "{status}"\nversion = "{version}"\n[distribution]\nschema = 2\n+++\n# {identifier}\n',
+                    encoding="utf-8",
+                )
+
+            def git(*arguments: str) -> None:
+                subprocess.run(["git", "-C", str(root), *arguments], check=True, capture_output=True)
+
+            git("init", "-q", "-b", "main")
+            git("config", "user.email", "t@example.invalid")
+            git("config", "user.name", "t")
+            record("RLS-X-003", "0.7.1", "released")
+            git("add", "-A")
+            git("commit", "-q", "-m", "base")
+            git("update-ref", "refs/remotes/origin/main", "HEAD")
+            record("RLS-X-005", "0.8.0", "ready")  # the pull request's own record, uncommitted on the base
+
+            base = module.select_rehearsal_record(root, None, "refs/remotes/origin/main")
+            self.assertEqual(("RLS-X-003", "released"), (base["release_record"], base["status"]))
+            self.assertIn("refs/remotes/origin/main", base["reason"])
+            tree = module.select_rehearsal_record(root, None)
+            self.assertEqual("RLS-X-005", tree["release_record"])
+            with self.assertRaises(module.ReleaseError):
+                module.select_rehearsal_record(root, "RLS-X-005", "refs/remotes/origin/main")
+            with self.assertRaises(module.ReleaseError):
+                module.select_rehearsal_record(root, None, "refs/remotes/origin/nowhere")
+            # The command surface carries the option (the workflow calls it, not the function).
+            completed = subprocess.run(
+                [sys.executable, str(REPOSITORY_ROOT / ".github/scripts/publish_release.py"), "select-rehearsal-record",
+                 "--repository", str(root), "--release-record", "", "--base-ref", "refs/remotes/origin/main"],
+                capture_output=True, text=True, encoding="utf-8",
+            )
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertIn("RLS-X-003", completed.stdout + completed.stderr)
 
 
 if __name__ == "__main__":
