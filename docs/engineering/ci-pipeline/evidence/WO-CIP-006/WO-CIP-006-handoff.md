@@ -60,16 +60,31 @@ record, and both merges are human decisions.
 
 ### The Windows suite
 
-Recorded when the run completes.
+`PYTHONUTF8=1 python scripts/run_tests.py --scale full` at `9dcdd49` on this
+Windows 11 workstation (CPython 3.13, LF checkout): Ran 1177 tests in 364.846s (125 classes, 8 workers); FAILED (errors=1, skipped=26). The one
+error is the known baseline name present on `main` and outside this work
+order (`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`).
+No other name differs; the suite gains one test.
 
 ### Handoff check
 
-Recorded with its self-binding result beside this packet.
+`check . --artifact WO-CIP-006 --checkpoint handoff --from-git 0d694dc`,
+exact 0.14.0: Completed; eight `QGP-G4I-*` predicates pass; every changed
+path inside the declared scope; `complete: true`; the self-binding result
+retained as `handoff.json` beside this packet.
 
 ### Run observation
 
-Recorded when the lanes complete at this pull request's head: the `select`
-job's output and the record-mode leg's conclusion.
+Pull request #322, Publication Rehearsal run 33652518089 at `9dcdd49`: the
+`select` job fetched `main` and reported `release_record = RLS-SEH-023`
+with the reason "newest ready or released schema-2 record at
+refs/remotes/origin/main"; the record-mode leg replayed `RLS-SEH-023`'s
+bound recipe and passed; the candidate leg passed. This is the first
+release-record lane green on a pull request since the mechanism exists.
+The run at the previous head `a822fb7` (33651491281) failed in the `select`
+job because the `--base-ref` option had been registered after `return
+parser`; the command-level test added at `9dcdd49` catches that class of
+error.
 
 ## Material non-effects
 
@@ -79,4 +94,7 @@ any release or publication; the rehearsal is not made a required check.
 
 ## Hosted lanes
 
-Recorded when the lanes complete at the pull request's head.
+All lanes of pull request #322 pass at `9dcdd49`, the Publication
+Rehearsal in both modes among them; they are re-read at the completion and
+record heads below, and the delegated decisions quote the check-run id and
+head the gate read.
