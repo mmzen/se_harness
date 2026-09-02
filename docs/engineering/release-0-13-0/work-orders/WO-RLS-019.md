@@ -2,7 +2,7 @@
 id = "WO-RLS-019"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.13.0 candidate from main"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-02T06:44:35Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve REL-SEH-024 and WO-RLS-019, start'. Start preflight PASS with no diagnostics over the approval commit 535c742 carrying unmoved main 75d1902, run with the governing exact public 0.12.0 evaluator outside the checkout, installed from the wheel whose digest equals RLS-SEH-021's distribution table, on this Windows checkout; every file of the reading manifest was read. Bounded to the declared execution scope. This start authorizes no verification record, no release record, no tag and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T07:12:40Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-02 under DR-WO-COMPLETE, by selecting the presented option 'Mark WO-RLS-019 implemented and prepare VREC-SEH-022', on the handoff check reading Completed over the Git-derived change set against main 75d1902, fixed-point result 3d8ecf638b9a, run by the released 0.12.0 evaluator outside the checkout on this Windows checkout. The candidate readings at aa146287dd0af8faa9b7a666f996aefd6be454c4 with the packaged bytes of main 75d1902: validate 1233 artifacts 0 errors 0 advisories, doctor 113 PASS 0 FAIL, review preflight PASS, distributions PASS, portable surface PASS in all three modes, complete-candidate and candidate-package read from the hosted Linux lanes for the RID018 boundary reason, the upgrade rehearsal 0.12.0 to 0.13.0 pass twice on Linux and twice on Windows with one semantic digest ea98ff02, the Windows full-scale suite at its one baseline name, the census at the candidate exactly as REL-SEH-024 predicts with zero untraced commits and no exemption, and the hosted build of record dispatched on the branch head with two byte-identical producer runs, wheel cc1eb84c and sdist bc6ae245, to be re-read at this commit. Every lane at 4182b85 and every lane of pull request #313 at that head passes. No deviations. This authorizes no verification record, no release record, no tag and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.13.0 candidate from main
