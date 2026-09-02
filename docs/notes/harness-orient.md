@@ -36,7 +36,7 @@ useful, name one formal artifact. Supply the external evaluator environment if
 the agent cannot identify it unambiguously. For example:
 
 > Use `harness-orient` to orient to this repository and `WO-ABC-001`. The exact
-> released evaluator is version `0.6.0` in `C:\tools\se-harness-eval`.
+> released evaluator is version `0.14.0` in `C:\tools\se-harness-eval`.
 
 The agent reads `.agents/skills/harness-orient/SKILL.md`, establishes the
 managed skill's integrity with direct exact-evaluator identity and doctor
@@ -62,7 +62,7 @@ PowerShell, an external virtual environment can be supplied as follows:
 ```powershell
 python .agents/skills/harness-orient/scripts/orient.py . `
   --evaluator-launcher-json '["C:\\tools\\se-harness-eval\\Scripts\\python.exe","-I","-m","se_harness"]' `
-  --expected-evaluator-version 0.6.0 `
+  --expected-evaluator-version 0.14.0 `
   --expected-evaluator-root C:\tools\se-harness-eval `
   --artifact WO-ABC-001
 ```
@@ -72,7 +72,7 @@ On Linux or macOS:
 ```bash
 python .agents/skills/harness-orient/scripts/orient.py . \
   --evaluator-launcher-json '["/opt/se-harness-eval/bin/python","-I","-m","se_harness"]' \
-  --expected-evaluator-version 0.6.0 \
+  --expected-evaluator-version 0.14.0 \
   --expected-evaluator-root /opt/se-harness-eval \
   --artifact WO-ABC-001
 ```

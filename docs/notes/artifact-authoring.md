@@ -15,7 +15,6 @@ or a gate; the rest are judgement rules.
 
 - `harnessctl create-artifact` prints the checklist for the type it just
   created; `--quiet` suppresses it.
-- `harness-draft-change` applies the policy for each selected type.
 - The managed router lists it under "Authoring rules for formal artifacts".
 
 ## Requirements

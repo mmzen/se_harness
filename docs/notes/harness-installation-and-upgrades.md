@@ -169,15 +169,17 @@ the upgrade plan reports it as customized and preserves the bytes. Move
 repository-specific instructions outside the managed surface or restore the
 exact locked content before reviewing a fresh upgrade plan.
 
-Installing candidate package bytes alone does not activate the Phase 4 skill
-contracts in an existing repository. Activation requires a separately governed
-successor release, an exact external evaluator installation, and an explicit
-transactional repository upgrade. Until then, the current installed contract
-and lock remain authoritative; do not copy candidate skill files into place.
+Installing candidate package bytes alone changes nothing in an existing
+repository: its installed skills, managed files and lock stay as the lock
+records them. A newer managed surface reaches a repository only through a
+separately governed release, an exact external evaluator installation of
+that release, and an explicit transactional repository upgrade. Until then,
+the current installed contract and lock remain authoritative; do not copy
+candidate files into place.
 
 The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
 
-After a future upgrade installs a release containing the role-specific qualification interface, the managed workflow runs `qualify released-root`. That command derives the expected evaluator version, archive digest, and installed-payload digest from the repository lock, proves the current environment owns those exact bytes, and then performs managed-file and complete-graph checks. The candidate template can contain this behavior before the current root adopts it; template availability does not itself change root authority.
+The managed workflow runs `qualify released-root`. That command derives the expected evaluator version, archive digest, and installed-payload digest from the repository lock, proves the current environment owns those exact bytes, and then performs managed-file and complete-graph checks. A candidate template may carry newer behavior before the installed root adopts it; template availability does not itself change root authority.
 
 The lock compares canonical UTF-8 text hashes so ordinary LF/CRLF checkout representation does not create false customization. This portability rule does not excuse a real content mismatch.
 

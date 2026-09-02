@@ -16,7 +16,7 @@ From the directory above the checkout:
 
 ```bash
 python -m venv se-harness-eval
-se-harness-eval/Scripts/python -m pip install "se-harness==0.11.0"
+se-harness-eval/Scripts/python -m pip install "se-harness==0.14.0"
 ```
 
 Use the version your repository pins, and `se-harness-eval/bin/python` on Linux or macOS. Then always invoke the evaluator as `python -I -m se_harness`. The `-I` flag isolates Python from user packages and path variables, so the evaluator is exactly the installed release and nothing else:

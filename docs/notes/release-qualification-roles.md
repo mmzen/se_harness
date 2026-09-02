@@ -70,4 +70,4 @@ Newly built versions kept `accept-candidate` only as a one-cycle alias to the ty
 
 ## Root/template adoption boundary
 
-The candidate managed-workflow template uses `qualify released-root`, so a future governed repository upgrade installs the role-specific health check. The currently installed root workflow remains owned by its existing public 0.6.0 lock and is not edited by this change. Template drift is expected until a separately authorized upgrade adopts the new released bytes.
+The managed-workflow template uses `qualify released-root`, and this repository's installed root workflow has run it since the root adopted exact public 0.7.1 (`WO-HUP-007`); every later root adoption, through `WO-HUP-015` and exact public 0.14.0, carried it forward. A candidate template may still lead the installed root: that drift is expected until a separately authorized upgrade adopts the new released bytes, and the installed root workflow is never edited by a candidate change.

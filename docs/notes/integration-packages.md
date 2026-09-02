@@ -17,7 +17,7 @@ For an eligible successful workflow run:
 
 - the committed public base version is unchanged;
 - the disposable export receives a unique version such as
-  `0.6.0+main.g1cdc75259da8` or `0.6.0+pr128.g1cdc75259da8`;
+  `0.15.0+main.g1cdc75259da8` or `0.15.0+pr128.g1cdc75259da8`;
 - two independent builds from the exact Git commit are byte-identical;
 - `integration-manifest.json` binds the full commit, workflow run, build tools,
   overlay hashes, wheel name, size, and SHA-256;
