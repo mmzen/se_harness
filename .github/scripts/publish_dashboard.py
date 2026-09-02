@@ -43,7 +43,13 @@ RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9]+-[0-9]{3}")
 HEX_PATTERN = re.compile(r"[0-9a-f]+")
 DEFAULT_REFS = frozenset({"refs/heads/main", "refs/remotes/origin/main"})
 MAX_PAYLOAD_BYTES = 100 * 1024 * 1024
-WORKSPACE_MARKER = '<div class="workspace">'
+# WO-DPG-002: the constant demonstration notice is inserted directly after the
+# one accepted boundary that occurs exactly once in the generated page. The
+# designed self-contained Explorer (WO-DST-023, se-harness 0.13.0 and later)
+# opens its shell with the first element; the previous progressive page opened
+# its workspace with the second, and replays of older released records still
+# generate that page from their governance snapshot.
+NOTICE_BOUNDARIES = ('<main class="hx-main">', '<div class="workspace">')
 EVALUATOR_EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
 EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
 EVALUATOR_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
@@ -769,6 +775,15 @@ def _demonstration_notice(provenance: ReleaseProvenance) -> str:
     )
 
 
+def _notice_boundary(generated_html: str) -> str:
+    """Return the one accepted boundary that occurs exactly once; fail closed otherwise."""
+    present = [marker for marker in NOTICE_BOUNDARIES if generated_html.count(marker) == 1]
+    absent = all(generated_html.count(marker) == 0 for marker in NOTICE_BOUNDARIES if marker not in present)
+    if len(present) != 1 or not absent:
+        raise PublicationError("generated dashboard has no unique publication notice boundary")
+    return present[0]
+
+
 def package_dashboard(source: Path, destination: Path, provenance_path: Path) -> dict[str, Any]:
     provenance = _validated_provenance(provenance_path)
     payload = _source_payload(source.resolve())
@@ -802,12 +817,11 @@ def package_dashboard(source: Path, destination: Path, provenance_path: Path) ->
     if summary.get("resource_count") != len(resource_paths):
         raise PublicationError("generation summary resource count is incorrect")
     _validated_bootstrap(generated_html, payload["dashboard-manifest.json"], provenance.governance_commit)
-    if generated_html.count(WORKSPACE_MARKER) != 1:
-        raise PublicationError("generated dashboard has no unique publication notice boundary")
+    boundary = _notice_boundary(generated_html)
 
     published_html = generated_html.replace(
-        WORKSPACE_MARKER,
-        WORKSPACE_MARKER + _demonstration_notice(provenance),
+        boundary,
+        boundary + _demonstration_notice(provenance),
         1,
     ).encode("utf-8")
     published_dashboard_digest = _sha256(published_html)

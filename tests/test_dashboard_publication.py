@@ -323,6 +323,7 @@ class PayloadPackagingTests(unittest.TestCase):
         *,
         revision: str | None = None,
         extra_resources: list[tuple[str, str, str, bytes]] | None = None,
+        body: str = '<main class="hx-main">Explorer</main>',
     ) -> None:
         for directory in (self.source / "data", self.source / "content"):
             if directory.exists():
@@ -383,7 +384,7 @@ class PayloadPackagingTests(unittest.TestCase):
         }
         bootstrap_json = json.dumps(bootstrap, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
         self.dashboard_bytes = (
-            '<html><body><div class="workspace">Explorer</div>'
+            f"<html><body>{body}"
             f'<script id="harness-dashboard-bootstrap" type="application/json">{bootstrap_json}</script>'
             "</body></html>\n"
         ).encode("utf-8")
@@ -442,6 +443,37 @@ class PayloadPackagingTests(unittest.TestCase):
         summary = json.loads((destination / "generation-summary.json").read_text(encoding="utf-8"))
         self.assertEqual(sha256(published), summary["dashboard_sha256"])
         self.assertTrue(summary["publication"]["derived_non_authoritative"])
+
+    def test_notice_boundary_is_bound_to_both_real_templates(self) -> None:
+        # WO-DPG-002: the 0.14.0 publication failed because the boundary was the previous
+        # page's element and no test read the real templates. Each template must carry
+        # exactly one accepted boundary so a redesign fails here before it fails a run.
+        for relative in (
+            "scripts/harness_explorer/index.template.html",
+            "templates/repository/standard/scripts/harness_explorer/index.template.html",
+        ):
+            with self.subTest(template=relative):
+                content = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
+                self.assertIn(PUBLICATION._notice_boundary(content), PUBLICATION.NOTICE_BOUNDARIES)
+
+    def test_notice_is_inserted_after_either_accepted_boundary_only(self) -> None:
+        previous = '<div class="workspace">Explorer</div>'
+        self.write_bundle(body=previous)
+        published = (self.root / "previous").joinpath("index.html")
+        PUBLICATION.package_dashboard(self.source, self.root / "previous", self.provenance_path)
+        self.assertIn(b'<div class="workspace"><aside role="note"', published.read_bytes())
+        self.write_bundle()
+        PUBLICATION.package_dashboard(self.source, self.root / "designed", self.provenance_path)
+        self.assertIn(b'<main class="hx-main"><aside role="note"', (self.root / "designed" / "index.html").read_bytes())
+        for body in (
+            "<p>no boundary</p>",
+            '<main class="hx-main"></main><main class="hx-main"></main>',
+            '<main class="hx-main"></main><div class="workspace"></div>',
+        ):
+            with self.subTest(body=body):
+                self.write_bundle(body=body)
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, "no unique publication notice boundary"):
+                    PUBLICATION.package_dashboard(self.source, self.root / "rejected", self.provenance_path)
 
     def test_packaging_is_repeatable_for_identical_source_and_provenance(self) -> None:
         first = self.root / "first"

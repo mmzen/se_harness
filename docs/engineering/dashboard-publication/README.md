@@ -17,3 +17,4 @@ The site is derived, read-only, and promotional. It is not an assurance decision
 - Operating contract: `OPS-DPG-001`
 - Work order: `WO-DPG-001`
 - Retained implementation evidence: `evidence/WO-DPG-001-verification.md`
+- Corrective work order: `WO-DPG-002` (2026-09-02), letting the packager find its notice boundary in the designed self-contained Explorer after the 0.14.0 Pages job failed on the previous page's `<div class="workspace">`; its evidence under `evidence/WO-DPG-002/`.

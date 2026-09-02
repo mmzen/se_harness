@@ -70,7 +70,7 @@ The workflow rejects short commits, arbitrary branches, later main commits, ambi
 
 The Pages artifact contains only:
 
-- `index.html`, with a bounded bootstrap plus the constant demonstration, content-disclosure, and non-authority notice;
+- `index.html`, with a bounded bootstrap plus the constant demonstration, content-disclosure, and non-authority notice, inserted after the one accepted boundary that occurs exactly once in the generated page (the designed Explorer's `<main class="hx-main">`, or the previous page's `<div class="workspace">` for replays of older records; `WO-DPG-002`);
 - `dashboard-manifest.json`, which identifies every progressively loadable resource by controlled path, role, schema, byte count, and SHA-256;
 - digest-named summary, topology, readiness, per-artifact detail, and retained-evidence resources declared exactly by that manifest;
 - `generation-summary.json`, including publication hashes, size observations, and provenance; and
