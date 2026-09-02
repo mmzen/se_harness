@@ -51,7 +51,13 @@ same designed page. No public observation belongs to this adoption.
 
 ### The Windows suite
 
-Recorded when the run completes.
+`PYTHONUTF8=1 python scripts/run_tests.py --scale full` on the moved root at
+`cf8de47` (identical tests and packaged bytes at every later branch commit),
+Windows 11 (CPython 3.13), LF checkout: 1,178 tests, 26 skipped, 1 error,
+the known baseline name present on `main` and outside this work order
+(`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`),
+equal to the same-commit control on the 0.13.0 root and to the rehearsal
+after the same edits. No other name differs.
 
 ## Identity-aware edits (rules 8, 9, 10)
 
@@ -66,6 +72,22 @@ Recorded when the run completes.
   already admits this root. Rehearsal on a throwaway clone of `main` at
   `25c0ef9` predicted exactly this set.
 
+## Deviation: the prior-lock digest of rule 4
+
+`SPEC-HUP-015` rule 4 and this work order name the prior lock as
+`9dfec5b4…`, the value the rehearsal's transaction document recorded. The
+real transaction document records `7558ae28…`. Both are digests of the same
+committed 0.13.0 lock: `7558ae28…` is the LF blob as committed
+(`git show 25c0ef9:.engineering-harness.lock`), and `9dfec5b4…` is that
+blob with CRLF line endings, because the throwaway rehearsal clone was
+created with `core.autocrlf=true` and the transaction document hashes the
+working-tree bytes it replaced. The governor-transition lane compares the
+document's prior digest with the base root's committed lock and passed at
+`3aa09ca`, so the real value is the correct one; the approved specification
+keeps the rehearsal value as a measured statement of that rehearsal, and
+this note is the record of the difference. Nothing else in the transaction
+differs from the rehearsal.
+
 ## Material non-effects
 
 No product byte beyond the version identity; no template byte; no release,
@@ -74,4 +96,10 @@ did not move. `RLS-SEH-023` and `VREC-SEH-023` are unchanged.
 
 ## Hosted lanes
 
-Recorded when the lanes complete at the pull request's head.
+All lanes of pull request #317 pass at its head `3aa09ca`, including the
+governor-transition lane assessing the real 0.13.0 to 0.14.0 root move with
+exactly one transaction document and the released `RLS-SEH-023` supplying
+the wheel, the managed lane running the 0.14.0 gate the transaction
+installed, the candidate-evidence lanes with the 0.14.0 to 0.15.0 upgrade
+rehearsal on both platforms, and the Publication Rehearsal in both modes.
+Runs: Publication Rehearsal (pull_request, 33626221907, success); SE Harness Candidate Evidence (pull_request, 33626221673, success); Engineering Harness (pull_request, 33626221289, success); Governor Transition Assessment (pull_request, 33626221265, success).
