@@ -77,4 +77,10 @@ file, release record, tag, package or deployment changed.
 
 ## Hosted lanes
 
-Recorded when the lanes complete at the pull request's head.
+All lanes of pull request #316 pass at its head `085232b`: Engineering
+Harness (33621135719), SE Harness Candidate Evidence (33621135699),
+Governor Transition Assessment (33621135748), Publication Rehearsal
+(33621135986, both modes). At the previous head `3cb89c1` the
+release-record rehearsal failed once in `tests/test_revision_provenance.py`
+teardown (`OSError: Directory not empty: '.git'`), the Linux
+fixture-teardown flake of issue #269, and passed at this head unchanged.

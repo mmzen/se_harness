@@ -2,7 +2,7 @@
 id = "WO-DPG-002"
 type = "work_order"
 title = "Let the Pages packager find its notice boundary in the designed Explorer"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "quality-owner", "security-owner", "service-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-02T10:29:09Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC'. Start preflight PASS with no diagnostics over the approval commit 7b7baa4 carrying unmoved main 66e71f8, run with the governing exact public 0.13.0 evaluator outside the checkout on this Windows checkout; every file of the reading manifest was read. Bounded to the declared execution scope. This start authorizes no verification record and no deployment."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T10:52:45Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-02 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set against main 66e71f8, self-bound at result 801257b28ec5, run by the exact public 0.13.0 evaluator outside the checkout on this Windows checkout. The packager accepts the designed page's boundary and keeps the previous one; the publication tests bind the rule to the real root and canonical templates and exercise both boundaries and the rejections (25 tests OK); the end-to-end packaging of the 0.13.0 root's generated Explorer from a governance-named worktree inserts the notice after the designed boundary with four fixed files and no remote reference; validate 1247 artifacts 0 errors 0 advisories, doctor 0 FAIL, review preflight PASS; the full-scale suite at its one baseline name; all lanes of pull request #316 pass at 085232b. This authorizes no verification record and no deployment; the recovery publication remains a separate decision."
 +++
 
 # Work Order: Let the Pages packager find its notice boundary in the designed Explorer
