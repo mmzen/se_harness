@@ -24,7 +24,7 @@ permissions:
   pull-requests: read
 
 env:
-  SE_HARNESS_VERSION: "0.13.0"
+  SE_HARNESS_VERSION: "0.14.0"
 
 jobs:
   validate:

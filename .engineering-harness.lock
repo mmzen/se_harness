@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.13.0-py3-none-any.whl",
-    "archive_sha256": "1bbf3b747b7ebbb07fd3fd975e87e3c11049e7a6a8e1377e3d35099f4fe862ae",
+    "archive_name": "se_harness-0.14.0-py3-none-any.whl",
+    "archive_sha256": "70d438b501d374fec06f41e25571f674b3cd1f43178389e6e06b0269c92f4856",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "9b4cdb5f2148683f3ceaad868e64b1b4ebefbadcac49cf4cd1feccd954540bfe",
-    "version": "0.13.0"
+    "payload_sha256": "25034dc72a6be582ebef3c6b9a733c6ab9b6dcd879b9fda162d4d3e131a04306",
+    "version": "0.14.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
@@ -37,7 +37,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "7d433db7f31904d2f3738b3b64d7a43067e7f0ceb15264150158f9beb69036fc"
+      "sha256": "2c72fa0f86ae9af734becccfd0075b16f18ee9798bb505e3fefab5608e48e6ab"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -49,7 +49,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "03048d15bd393aba920006e465b89a737c3943f34044f3275ddf72d2b1ef0998"
+      "sha256": "4fa84e813301da289bdb5664e3792a7f4c3862df841e39f4a62230d9810cfacd"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -65,7 +65,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "0c4b04853110478da8c2fac973de5e2a4c1c107e2246b832fa5dc41e6e4be8bf"
+      "sha256": "fc964d38d2efa047853160c9a08e987a08ca6ba1f0d1f9180411cbde918f68ca"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
@@ -195,5 +195,5 @@
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.13.0"
+  "tool_version": "0.14.0"
 }
