@@ -2,7 +2,7 @@
 id = "WO-HUP-015"
 type = "work_order"
 title = "Adopt exact public 0.14.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-02T11:43:04Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC'. Start preflight PASS with no diagnostics over the approval commit 90baabc carrying unmoved main 25c0ef9, run with the governing exact public 0.13.0 evaluator outside the checkout on this Windows checkout; the reading manifest (INT-HUP-002, CAP-HUP-002, the five definitions of this packet and this work order) was read. Bounded to the declared execution scope. This start authorizes no verification record, no release and no publication."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-02T12:01:12Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-02 under DR-WO-COMPLETE, under the decision made by selecting the presented option 'Approve, start, complete on green, prepare and verify the VREC', which authorized this transition once the declared evidence was green, on the handoff check reading Completed over the Git-derived change set at 454696b, self-bound at result 2b4386978089, produced by the exact public 0.14.0 evaluator that this transaction installed as the root, outside the checkout, on this Windows checkout. The root lock reads 0.14.0 by version, payload 25034dc7 and the archive pair of the wheel RLS-SEH-023 binds; 46 managed files, 3 updated, replay unchanged; nothing left the managed set; exact 0.14.0 validate 1254 artifacts 0 errors 69 warnings 0 advisories, doctor 0 FAIL, released-root 113/113, the Explorer identical twice, review preflight PASS, derive 0.14.0 to 0.15.0; the full-scale suite at its one baseline name with the one identity-aware edit named in the packet; the prior-lock digest deviation of rule 4 explained in the packet as the rehearsal clone's CRLF working tree; all lanes of pull request #317 pass at 3aa09ca and at 454696b including the governor-transition assessment of the real root move. This authorizes no verification record, no release and no publication."
 +++
 
 # Work Order: Adopt exact public 0.14.0 as the standard root, the simple way
