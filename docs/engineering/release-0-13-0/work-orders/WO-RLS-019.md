@@ -2,7 +2,7 @@
 id = "WO-RLS-019"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.13.0 candidate from main"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-09-02T06:40:19Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-02 by selecting the presented option 'Approve REL-SEH-024 and WO-RLS-019, start', after the release owner approved REL-SEH-024 in the same transaction as a distinct decision. Authorizes start preflight and then only the declared scope: the candidate's qualification readings, the build of record read from the hosted pinned producer at the candidate head, this work order's evidence packet, the domain and repository indexes and the release note. It authorizes no change to any packaged byte, managed file or template, no verification record, no release record, no tag, no publication. Start preflight has not been run."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-02T06:44:35Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-02, made by selecting the presented option 'Approve REL-SEH-024 and WO-RLS-019, start'. Start preflight PASS with no diagnostics over the approval commit 535c742 carrying unmoved main 75d1902, run with the governing exact public 0.12.0 evaluator outside the checkout, installed from the wheel whose digest equals RLS-SEH-021's distribution table, on this Windows checkout; every file of the reading manifest was read. Bounded to the declared execution scope. This start authorizes no verification record, no release record, no tag and no publication."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.13.0 candidate from main
