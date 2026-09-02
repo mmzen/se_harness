@@ -2,7 +2,7 @@
 id = "REL-SEH-024"
 type = "release_contract"
 title = "Release se-harness 0.13.0: the designed self-contained Explorer, the delegated route travelled, and the 0.12.0 root"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-09-02"
 updated = "2026-09-02"
@@ -13,6 +13,13 @@ gates = ["WO-DST-023", "WO-ECP-024", "WO-HUP-013", "WO-RLS-019"]
 
 [release_unit]
 untraced_exemptions = []
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-02T06:40:19Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-09-02 by selecting the presented option 'Approve REL-SEH-024 and WO-RLS-019, start', as a decision distinct from the work order's approval. The allow-list was re-measured immediately before this approval over main at 75d1902 with the exact public 0.12.0 evaluator outside the checkout: the three implemented, verified, unreleased work orders are exactly the three members named in gates, and no work order reached implemented since the packet was drafted; the census from v0.12.0 reads zero untraced commits and needs no exemption. This approval authorizes WO-RLS-019 to be approved and started as separate acts; it authorizes no candidate, build, record, tag, publication or deployment."
 +++
 
 # Release contract: se-harness 0.13.0
