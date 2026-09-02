@@ -529,6 +529,7 @@ def build_parser() -> argparse.ArgumentParser:
     select.add_argument("--release-record", default="")
     select.add_argument("--github-output", type=Path)
     select.add_argument("--summary", type=Path)
+    select.add_argument("--base-ref", default=None, help="read the records at this ref (a pull request's base) instead of the checkout")
     github = commands.add_parser("classify-github")
     github.add_argument("--plan", type=Path, required=True)
     github.add_argument("--metadata", type=Path, required=True)
@@ -542,7 +543,6 @@ def build_parser() -> argparse.ArgumentParser:
     result.add_argument("--stages", type=Path, required=True)
     result.add_argument("--output", type=Path, required=True)
     return parser
-    select.add_argument("--base-ref", default=None, help="read the records at this ref (a pull request's base) instead of the checkout")
 
 
 def main(argv: Iterable[str] | None = None) -> int:

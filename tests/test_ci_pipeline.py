@@ -402,7 +402,7 @@ class QualificationDefinitionTests(unittest.TestCase):
         self.assertIn("publish_release.py select-rehearsal-record", self.rehearsal)
         # WO-CIP-006 (SPEC-CIP-002 CIP-REH-003): a pull request reads the records at its base.
         self.assertIn("if: github.event_name == 'pull_request'", self.rehearsal)
-        self.assertIn('git fetch --no-tags --depth=1 origin "$BASE_REF"', self.rehearsal)
+        self.assertIn('git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"', self.rehearsal)
         self.assertIn("BASE_REF: ${{ github.event_name == 'pull_request' && format('refs/remotes/origin/{0}', github.base_ref) || '' }}", self.rehearsal)
         self.assertIn('--base-ref "$BASE_REF"', self.rehearsal)
         self.assertNotIn("matrix", self.rehearsal)
@@ -521,6 +521,14 @@ class QualificationDefinitionTests(unittest.TestCase):
                 module.select_rehearsal_record(root, "RLS-X-005", "refs/remotes/origin/main")
             with self.assertRaises(module.ReleaseError):
                 module.select_rehearsal_record(root, None, "refs/remotes/origin/nowhere")
+            # The command surface carries the option (the workflow calls it, not the function).
+            completed = subprocess.run(
+                [sys.executable, str(REPOSITORY_ROOT / ".github/scripts/publish_release.py"), "select-rehearsal-record",
+                 "--repository", str(root), "--release-record", "", "--base-ref", "refs/remotes/origin/main"],
+                capture_output=True, text=True, encoding="utf-8",
+            )
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertIn("RLS-X-003", completed.stdout + completed.stderr)
 
 
 if __name__ == "__main__":
