@@ -126,6 +126,24 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.template = ROOT / "scripts/harness_explorer/index.template.html"
         self.canonical = ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html"
 
+    # Identity-aware (WO-HUP-014, SPEC-HUP-014 rule 10): the root copy of the
+    # Explorer template belongs to the root's version, not to this test. The
+    # 0.12.0 root carried the previous progressive page, whose markers the tests
+    # below assert; the 0.13.0 root carries the designed self-contained page
+    # (WO-DST-023), so under it the root copy equals the canonical template and
+    # the previous page's markers are asserted only for an older root.
+    def root_carries_designed_explorer(self) -> bool:
+        lock = json.loads((ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        version = tuple(int(part) for part in lock["tool_version"].split("."))
+        return version >= (0, 13, 0)
+
+    def assert_root_template_equals_canonical(self) -> None:
+        def normalized(path: Path) -> str:
+            with path.open(encoding="utf-8") as handle:  # universal newlines: CRLF and LF compare equal
+                return handle.read()
+
+        self.assertEqual(normalized(self.canonical), normalized(self.template))
+
     def test_candidate_topology_target_is_independent_from_the_managed_root(self) -> None:
         candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(
             encoding="utf-8"
@@ -463,6 +481,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn('"markdown"', resources[manifest["entrypoints"]["topology"]["path"]])
 
     def test_overview_is_concise_and_context_projection_is_bounded(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         self.assertNotIn('data-od-id="definition-coverage"', content)
         self.assertNotIn('id="coverageRows"', content)
@@ -486,6 +507,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('$("graphDepth").value="0"', content)
 
     def test_lineage_board_is_structured_bounded_and_reversibly_navigable(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
 
         self.assertIn('id="lineageDepth"', content)
@@ -566,6 +590,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('crypto.subtle.digest("SHA-256",bytes)', content)
 
     def test_search_clear_and_revision_presentation_preserve_state_and_provenance(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         self.assertIn('id="clearSearch"', content)
         self.assertIn('data-od-id="artifact-search-clear"', content)
@@ -596,6 +623,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 self.assertIn(f'"repository_revision":"{revision}"', rendered)
 
     def test_semantic_routes_and_authority_boundaries_remain_explicit(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         for retired_phrase in (
             "Why does this exist?",
@@ -632,6 +662,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn("switch(node.type)", content)
 
     def test_graph_analysis_modes_use_stable_distinct_category_colors(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         palette = re.findall(r"--graph-(\d+):([^;]+)", content)
         self.assertEqual([str(index) for index in range(1, 13)], [index for index, _ in palette])
@@ -788,6 +821,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertFalse(observations["topology_target_exceeded"])
 
     def test_progressive_browser_contract_is_verified_lazy_and_race_safe(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         for marker in (
             'redirect:"error",cache:"no-cache"',
@@ -964,6 +1000,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
             self.assertEqual("previous\n", (output / "index.html").read_text(encoding="utf-8"))
 
     def test_rich_detail_contract_is_local_safe_and_navigable(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         for marker in (
             'id="detailLabels"',
@@ -1129,6 +1168,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
         )
 
     def test_only_the_explicitly_accepted_runtime_url_is_present(self) -> None:
+        if self.root_carries_designed_explorer():
+            self.assert_root_template_equals_canonical()
+            return
         content = self.template.read_text(encoding="utf-8")
         self.assertEqual(1, content.count("https://unpkg.com/3d-force-graph@1.79.0/dist/3d-force-graph.min.js"))
         self.assertIn("script-src 'unsafe-inline' https://unpkg.com", content)
