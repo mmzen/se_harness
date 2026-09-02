@@ -1,0 +1,18 @@
+{
+  "build_recipe": "release/build-recipe.json",
+  "build_recipe_schema": "se-harness-release-build-recipe/v1",
+  "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+  "checksums": "SHA256SUMS",
+  "checksums_content": "70d438b501d374fec06f41e25571f674b3cd1f43178389e6e06b0269c92f4856  se_harness-0.14.0-py3-none-any.whl\ndcb3523a0ba7118a6f04f2a041be0652e2b30eea535c2a26a89729c30f96df8f  se_harness-0.14.0.tar.gz\n",
+  "checksums_sha256": "fe261ef9df03b1abb28cad37a8a8c56fdb39cab152d2e5547263e21c86191e9b",
+  "commit": "09625e41e6b8dc10ea07a601e5ce4ea21e0d5d14",
+  "git_object_format": "sha1",
+  "schema": "se-harness-release-bundle/v2",
+  "sdist": "se_harness-0.14.0.tar.gz",
+  "sdist_sha256": "dcb3523a0ba7118a6f04f2a041be0652e2b30eea535c2a26a89729c30f96df8f",
+  "source_date_epoch": 1788341712,
+  "source_manifest_sha256": "0af09311f2c3708237fd3856f78ce2634db1e6ac4677c9d40ac0f5e3ec279198",
+  "version": "0.14.0",
+  "wheel": "se_harness-0.14.0-py3-none-any.whl",
+  "wheel_sha256": "70d438b501d374fec06f41e25571f674b3cd1f43178389e6e06b0269c92f4856"
+}
