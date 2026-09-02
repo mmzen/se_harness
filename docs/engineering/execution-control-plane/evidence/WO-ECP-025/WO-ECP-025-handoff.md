@@ -63,11 +63,19 @@ record, and both merges are human decisions.
 
 ### The Windows suite
 
-Recorded when the run completes.
+`PYTHONUTF8=1 python scripts/run_tests.py --scale full` at `4212f0e` on this
+Windows 11 workstation (CPython 3.13, LF checkout): 1,176 tests (three
+refusal tests out, one absence test in), 26 skipped, 1 error, the known
+baseline name present on `main` and outside this work order
+(`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`).
+No other name differs.
 
 ### Handoff check
 
-Recorded with its self-binding result beside this packet.
+`check . --artifact WO-ECP-025 --checkpoint handoff --from-git 2689b5e`,
+exact 0.14.0: Completed; eight `QGP-G4I-*` predicates pass; every changed
+path inside the declared scope; `complete: true`; the self-binding result
+retained as `handoff.json` beside this packet.
 
 ## Material non-effects
 
@@ -78,4 +86,6 @@ acceptances the specifications name (`SPEC-ECP-001`, `SPEC-ECP-002`,
 
 ## Hosted lanes
 
-Recorded when the lanes complete at the pull request's head.
+All lanes of pull request #320 pass at `10a7d87` (the packet head) and are
+re-read at the completion and record heads below; the delegated decisions
+quote the check-run id and head the gate read.
