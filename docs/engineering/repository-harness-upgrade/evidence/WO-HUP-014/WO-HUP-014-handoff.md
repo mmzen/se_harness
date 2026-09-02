@@ -19,8 +19,20 @@ updated, replay 46 unchanged; nothing left the managed set). The candidate
 moved to 0.14.0. The 0.13.0 gate reads its own numbers over this graph:
 0 errors, 67 warnings, 0 advisories. This repository's own generated
 Explorer is now the designed self-contained page, 431,388 bytes with no
-remote origin; after the merge the Pages deployment regenerates the public
-demonstration from it, the observation `REL-SEH-024` names.
+remote origin.
+
+Correction to the objective's last sentence and to `REL-SEH-024`'s
+observation-window sentence: the public demonstration does not regenerate
+on this merge. `pages-publication.yml` generates from the governance
+snapshot at the release integration commit of a released record
+(`publish_dashboard.py resolve` rejects any other governance commit), and
+for `RLS-SEH-022` that commit is `09aa69f`, whose root generator is the
+0.12.0 page. This adoption makes this repository's own generated Explorer
+the designed page and puts the designed generator on `main`, so the next
+release's integration commit carries it; the public demonstration becomes
+the designed page when that release, 0.14.0, is published and its Pages
+job runs. No manual dispatch can bring it forward under the current
+release-bound contract.
 
 ## Evaluators
 
