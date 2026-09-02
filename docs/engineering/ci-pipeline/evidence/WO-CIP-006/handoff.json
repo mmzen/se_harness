@@ -1,0 +1,320 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "9f66eefb6ba76eb38dc0426399159b5052e492495c665023ba9b3d06ae65e7bc",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-CIP-006"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-CIP-006 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-CIP-006"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-CIP-006:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-CIP-006 declares 9 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-CIP-006"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-CIP-006"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 8 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-CIP-006:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-CIP-006"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/ci-pipeline/evidence/WO-CIP-006/WO-CIP-006-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 69
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-CIP-006",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-CIP-006",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-CIP-006",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-CIP-006",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-CIP-006."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-CIP-006",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-CIP-006 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-CIP-006 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for d5c39de: HTTP 422"
+    },
+    "current_lifecycle_state": [
+      "WO-CIP-006 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-CIP-006",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      },
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "delegated-executor"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-CIP-006."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "dc07d76ed0f82c047f85bff5ff5c90c0ee50d0071d6f25f3efc8e2003d89735d",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      ".github/scripts/publish_release.py",
+      ".github/workflows/publication-rehearsal.yml",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-006/handoff.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-006/WO-CIP-006-handoff.md",
+      "docs/engineering/ci-pipeline/README.md",
+      "docs/engineering/ci-pipeline/work-orders/WO-CIP-006.md",
+      "docs/notes/release-publication-rehearsal.md",
+      "tests/test_ci_pipeline.py"
+    ],
+    "declared_paths": [
+      ".github/scripts/publish_release.py",
+      ".github/workflows/publication-rehearsal.yml",
+      "docs/engineering/ci-pipeline/evidence/",
+      "docs/engineering/ci-pipeline/README.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-007.md",
+      "docs/engineering/ci-pipeline/specifications/SPEC-CIP-002.md",
+      "docs/engineering/ci-pipeline/verification/VER-CIP-002.md",
+      "docs/notes/release-publication-rehearsal.md",
+      "tests/test_ci_pipeline.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-CIP-001",
+      "INT-CIP-001",
+      "REQ-CIP-007",
+      "SPEC-CIP-002",
+      "VER-CIP-002"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-CIP-006"
+    ],
+    "primary": "WO-CIP-006"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-CIP-006",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-CIP-006",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
