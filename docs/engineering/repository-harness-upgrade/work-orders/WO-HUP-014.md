@@ -72,7 +72,10 @@ observation `REL-SEH-024` names.
   reports `PRE008` otherwise (rule 8).
 - Replace pinned root and candidate assumptions in `tests/` with
   identity-aware assertions, each named in the evidence (rule 10); the
-  rehearsal's suite comparison names the modules.
+  rehearsal names two modules: `tests/test_instruction_architecture.py`
+  (the managed count of root 0.13.0) and `tests/test_dashboard_webui.py`
+  (eight tests that asserted the 0.12.0 page against the root copy of the
+  Explorer template, guarded by the root's version).
 - Run the complete `VER-HUP-014` qualification and the suite, and retain
   the evidence; hand off with the pull request's lanes green.
 

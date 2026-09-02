@@ -77,10 +77,16 @@ repository's own generated dashboard.
 10. Replace pinned root and candidate assumptions in `tests/` with
     identity-aware assertions, each file named in the evidence with the
     assumption it carried. Measured by the rehearsal's suite comparison on
-    the moved root with the candidate at 0.14.0; the work order's evidence
-    names every module that differs from the same-commit control on the
-    0.12.0 root. The known pin: `tests/test_instruction_architecture.py`
-    declares the managed count of each root, and root 0.13.0 manages 40.
+    the moved root with the candidate at 0.14.0, two modules carry pins:
+    `tests/test_instruction_architecture.py` (the managed count of root
+    0.13.0 is 40; the owner region names `se-harness==0.13.0`) and
+    `tests/test_dashboard_webui.py` (eight tests assert the previous page's
+    markers against the root copy of the Explorer template; under a root of
+    0.13.0 or later the root copy equals the canonical designed template
+    modulo line endings, and the previous markers apply only to an older
+    root). The developer note's evaluator-and-candidate test reads the
+    owner content of rule 9. No other name differs from the same-commit
+    control beyond the workstation-only baseline error.
 11. This work order's execution scope names no `verification-records/`
     directory; the gate admits the work order's own records by
     construction on both sides of the move (`ECP-ADM-001`).
