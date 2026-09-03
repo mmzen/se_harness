@@ -43,6 +43,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Bounded evaluator recovery](evaluator-recovery-runbook.md) | How do maintainers rehearse and, only after separate action-time authority, recover a governance deadlock? |
 | [Rehearsing the root-evaluator handover](evaluator-migration-rehearsal.md) | How does the candidate-evidence lane rehearse the real root-evaluator upgrade before a release, and what does one run prove? |
 | [`harnessctl` command reference](harnessctl-reference.md) | Which commands exist, who normally runs them, and what can they change? |
+| [Decision artifacts](decision-artifacts.md) | How does a pending question or an implementation deviation become an artifact that blocks work until a named role answers it? |
 | [Developing SE Harness](developing-se-harness.md) | How does the implementation repository use the standard lifecycle while keeping candidate evidence separate? |
 | [The CI pipeline and the release path](ci-pipeline.md) | Why does the pipeline feel slow when every run finishes in minutes, and what does each simplification increment change? |
 | [Testing a current commit with an integration package](integration-packages.md) | How do I safely download, verify, install, test, and remove an expiring non-release build? |

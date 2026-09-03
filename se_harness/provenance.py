@@ -116,6 +116,53 @@ def require_clean_worktree(repository_root: Path) -> None:
         raise ProvenanceRefusal("revision provenance requires a clean Git worktree")
 
 
+def _decision_metadata(root: Path, item: dict[str, Any]) -> dict[str, Any]:
+    """The TOML front matter of one decision named in the validator catalog, or {}."""
+
+    path_value = item.get("path")
+    if not isinstance(path_value, str):
+        return {}
+    try:
+        text = (root / path_value).read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeError):
+        return {}
+    lines = text.replace("\r\n", "\n").split("\n")
+    if not lines or lines[0].strip() != "+++":
+        return {}
+    try:
+        closing = lines.index("+++", 1)
+        return tomllib.loads("\n".join(lines[1:closing]))
+    except (ValueError, tomllib.TOMLDecodeError):
+        return {}
+
+
+def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]], work_ids: list[str]) -> list[tuple[str, str]]:
+    """(decision id, departed rule) for every accepted deviation standing on the selected work (SPEC-DCM-001 rule 9)."""
+
+    closed: set[str] = set()
+    accepted: list[tuple[str, str, set[str]]] = []
+    for item in catalog.values():
+        if item.get("type") != "decision" or item.get("status") != "decided":
+            continue
+        metadata = _decision_metadata(root, item)
+        if metadata.get("kind") != "deviation":
+            continue
+        disposition = metadata.get("disposition") if isinstance(metadata.get("disposition"), dict) else {}
+        against = metadata.get("against") if isinstance(metadata.get("against"), str) else ""
+        relations = metadata.get("relations") if isinstance(metadata.get("relations"), dict) else {}
+        concerned = {value for value in relations.get("concerns", []) if isinstance(value, str)} if isinstance(relations.get("concerns"), list) else set()
+        option = disposition.get("option")
+        if option in {"amend", "supersede"}:
+            closed.add(against)
+        elif option == "accept" and against:
+            accepted.append((str(item.get("id")), against, concerned))
+    return sorted(
+        (decision_id, against)
+        for decision_id, against, concerned in accepted
+        if against not in closed and concerned & set(work_ids)
+    )
+
+
 def _validation_catalog(repository_root: Path) -> dict[str, dict[str, Any]]:
     script = template_root() / "scripts" / "validate_engineering_artifacts.py"
     if not script.is_file():
@@ -453,6 +500,13 @@ def capture_verification(
     work_array = _toml_array(selected_work)
     verification_array = _toml_array(selected_verification)
     readable_work = ", ".join(f"`{item}`" for item in selected_work)
+    deviations = standing_deviations_for_work(root, catalog, selected_work)
+    deviation_section = (
+        "\n\n## Standing deviations\n\nAccepted deviations standing on the selected work at this candidate; each names the rule it departs from and is retained here for the assurance decision:\n\n"
+        + "\n".join(f"- `{decision_id}` against `{against}`" for decision_id, against in deviations)
+        if deviations
+        else ""
+    )
     content = f'''+++
 id = "{record_id}"
 type = "verification_record"
@@ -480,7 +534,7 @@ conforms_to = {verification_array}
 
 This ready record binds retained evidence for {readable_work} to candidate commit `{commit}`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.{delegated_sentence}
 
-The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.
+The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.{deviation_section}
 '''
     _write_record_and_evidence(
         destination,

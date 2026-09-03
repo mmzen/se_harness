@@ -105,6 +105,8 @@ verification record selects `WFL-WO-READY-VREC`, never `WFL-WO-PREPARE-VREC`.
 | `WFL-VREC-SUPERSEDED` | verification record | `superseded` | | `PROC-FOCUS-SELECTED` | none | `DR-RELATED-RECORD-SELECT` |
 | `WFL-DEFINITION-COMPLETE` | definition | `approved` | | `PROC-DEFINITION-COMPLETE` | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` | `DR-DEFINITION-DECIDE` |
 | `WFL-DEFINITION-WORK` | definition | `implemented` | | `PROC-DEFINITION-WORK` | `QG-G3-WORK-AUTHORIZATION` | `DR-WO-SELECT` |
+| `WFL-DEC-OPEN` | decision | `open`, `deferred` | | `PROC-DEC-DISPOSE` | none | `DR-DECISION-DISPOSE` |
+| `WFL-DEC-CLOSED` | decision | `decided`, `withdrawn` | | `PROC-FOCUS-SELECTED` | none | `DR-RELATED-RECORD-SELECT` |
 | `WFL-DEFAULT-REVIEW` | any | any | | `PROC-FOCUS-SELECTED` | none | `DR-RELATED-RECORD-SELECT` |
 
 "Definition" means an intent, capability, requirement, specification,

@@ -89,6 +89,8 @@ The permitted transitions are:
 | Work order | `verified` | `released` |
 | Verification record | `ready` | `verified`, `rejected`, `superseded` |
 | Release record | `ready` | `released`, `rejected` |
+| Decision | `open` | `decided`, `deferred`, `withdrawn` |
+| Decision | `deferred` | `decided`, `withdrawn` |
 
 Rows without a listed outgoing transition are terminal. All lifecycle rows are
 historically visible. Rejected VREC and RLS rows grant no authority, reserve no
@@ -171,6 +173,8 @@ contract's `non_effects` remain mandatory.
 | `WFL-VREC-SUPERSEDED` | Focused VREC is `superseded`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Preserve the old VREC as release-ineligible history. |
 | `WFL-DEFINITION-COMPLETE` | Focused definition is `approved`. | `QG-G1-DEFINITION`, `QG-G2-ARCHITECTURE` / `DR-DEFINITION-DECIDE` | `PROC-DEFINITION-COMPLETE` | Change only the explicitly selected definition. |
 | `WFL-DEFINITION-WORK` | Focused definition is `implemented`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-SELECT` | `PROC-DEFINITION-WORK` | Selecting work changes no lifecycle state. |
+| `WFL-DEC-OPEN` | Focused decision is `open` or `deferred`. | No gate / `DR-DECISION-DISPOSE` | `PROC-DEC-DISPOSE` | Dispose only the selected decision with one declared option; the artifacts it blocks change state through their own transitions afterwards. |
+| `WFL-DEC-CLOSED` | Focused decision is `decided` or `withdrawn`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Retained history; changes nothing. |
 | `WFL-DEFAULT-REVIEW` | No earlier rule matches. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Report current state; change nothing. |
 | `WFL-FAIL-REMEDIATE` | A workflow command fails. | No gate / `DR-REMEDIATION-SCOPE` | `PROC-REMEDIATE` | Report the exact blocker and unchanged state. |
 
@@ -200,6 +204,7 @@ outcomes, and response values.
 | `PROC-REMEDIATE` | `STEP-REMEDIATE-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-DEFINITION-COMPLETE` | `STEP-DEFINITION-COMPLETE` decision `DR-DEFINITION-DECIDE`. |
 | `PROC-DEFINITION-WORK` | `STEP-DEFINITION-WORK` decision `DR-WO-SELECT`. |
+| `PROC-DEC-DISPOSE` | `STEP-DEC-DISPOSE` decision `DR-DECISION-DISPOSE`; the response is the `harnessctl decide` command with the declared option, the role and the verbatim reason. |
 
 A command step that names gates also declares one `corrective` form per
 predicate of those gates: a command argument array that differs from the

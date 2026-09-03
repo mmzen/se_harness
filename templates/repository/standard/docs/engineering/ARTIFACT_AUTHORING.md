@@ -31,7 +31,7 @@ rules for the accountable reviewer.
 - A quality requirement carries a `measure`: a value and a unit, not an adjective.
 - Rationale says why the obligation exists, not what it does.
 - Two acceptance examples, one normal and one failure, each Given/When/Then; executable scenarios live in `acceptance/<REQ-ID>.feature`.
-- `Open decisions` reads `None` before approval is requested. *(mechanical at approval, once QG-G1 carries `QGP-G1-AUTHORING`)*
+- `Open decisions` reads `None`, or lists the `DEC-` identifiers of the decision artifacts that block this definition, before approval is requested; prose there is `E-DCM-004`. *(mechanical at approval, once QG-G1 carries `QGP-G1-AUTHORING`)*
 - No template placeholder (`<…>`) survives. *(mechanical at approval, likewise)*
 
 ### Guidance
@@ -124,6 +124,22 @@ contracts and evidence can cite them exactly.
 
 - `assures` names every requirement it claims continuing assurance for.
 - Observability, support, and operating obligations are measurable.
+
+## decision
+
+A pending question becomes a `decision` (`DEC-`) when it blocks a transition
+of another artifact, concerns more than one artifact, or must survive the
+approval of the artifact that raised it. Below that threshold the actor asks
+and the answer stays in the transition's `reason`.
+
+### Checklist
+
+- `kind` is `question` (an ambiguity met while authoring or planning) or `deviation` (an implementation cannot meet one rule of one specification). *(mechanical)*
+- One `question`, `raised_by`, at least two `[[options]]` with `id` and `label`, and a `recommendation` naming one option. *(mechanical)*
+- A deviation also names `against = "SPEC-xxx#rule-N"` and the `observed` fact; its options are drawn from `amend`, `supersede`, `accept`, `stop` and include `stop`. *(mechanical)*
+- `concerns` names every artifact the question is about; `blocks` names the artifacts that cannot change state while it is `open`, each also in `concerns`. *(mechanical)*
+- The `[disposition]` table is written by `harnessctl decide`; a hand-written one is `E-DCM-003`. A deferral needs a scope and a revisit trigger; accepting a deviation needs a revisit trigger. *(mechanical)*
+- `decided` and `withdrawn` decisions are never deleted or rewritten.
 
 ## risk
 

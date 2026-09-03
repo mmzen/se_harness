@@ -288,7 +288,7 @@ paths = ["src/"]
         self.assertEqual(1, code)
         result = json.loads(output)
         self.assertEqual("blocked", result["operation"]["outcome"])
-        self.assertIn("only WO, VREC, or RLS", result["findings"]["scoped_blockers"][0]["message"])
+        self.assertIn("only WO, VREC, RLS, or DEC", result["findings"]["scoped_blockers"][0]["message"])
         self.assertEqual("PROC-REMEDIATE", result["restitution"]["next"]["procedure_id"])
 
     def test_work_order_completion_ignores_only_candidate_distribution_drift(self) -> None:
@@ -1357,7 +1357,7 @@ class ExecutionContextTests(WorkflowExecutionTests):
         self.assertTrue(result["context"]["reading_manifest"])
         code, result, error = self.context_result("--artifact", "REQ-001")
         self.assertEqual(1, code, error)
-        self.assertIn("check accepts only WO, VREC, or RLS", result["restitution"]["blocked_by"][0])
+        self.assertIn("check accepts only WO, VREC, RLS, or DEC", result["restitution"]["blocked_by"][0])
 
     def test_the_projection_writes_nothing(self) -> None:
         self.in_progress_work_order()
@@ -1767,7 +1767,7 @@ class CheckProjectionTests(unittest.TestCase):
     def test_the_projection_refuses_what_check_refuses(self) -> None:
         code, out, _ = self.run_cli("check", str(self.root), "--artifact", "INT-001", "--json")
         self.assertEqual(1, code)
-        self.assertIn("WEX210: check accepts only WO, VREC, or RLS artifacts", json.loads(out)["restitution"]["blocked_by"][0])
+        self.assertIn("WEX210: check accepts only WO, VREC, RLS, or DEC artifacts", json.loads(out)["restitution"]["blocked_by"][0])
         for option in (("--from-git", "HEAD"), ("--target", "implemented"), ("--procedure", "PROC-WO-IMPLEMENT"), ("--changes-complete",)):
             with self.subTest(option=option[0]):
                 code, out, err = self.run_cli("check", str(self.root), "--artifact", "WO-001", *option)

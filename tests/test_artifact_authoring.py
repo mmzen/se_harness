@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import importlib.util
 import io
 import json
 import os
@@ -56,14 +57,36 @@ class ArtifactAuthoringTests(unittest.TestCase):
         return code, stdout.getvalue(), stderr.getvalue()
 
     def test_portable_and_package_layout_registries_are_identical(self) -> None:
-        self.assertEqual(ARTIFACT_DIRECTORIES, portable_layout.ARTIFACT_DIRECTORIES)
-        self.assertEqual(ARTIFACT_PREFIXES, portable_layout.ARTIFACT_PREFIXES)
-        self.assertEqual(DOMAIN_PATTERN.pattern, portable_layout.DOMAIN_PATTERN.pattern)
-        self.assertEqual(RESERVED_DOMAINS, portable_layout.RESERVED_DOMAINS)
-        self.assertEqual(
-            (REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").read_bytes(),
-            (REPOSITORY_ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py").read_bytes(),
-        )
+        # The package registry is the candidate's portable registry. The root copy
+        # under scripts/ is the released evaluator's and is hash-locked until
+        # adoption; WO-DCM-001 (SPEC-DCM-001) added the decision type to the
+        # candidate, so a root released before it is that registry minus the
+        # decision entries, declared here. A root released with them takes equality.
+        candidate_path = REPOSITORY_ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py"
+        spec = importlib.util.spec_from_file_location("candidate_layout_registry", candidate_path)
+        candidate_layout = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(candidate_layout)
+        self.assertEqual(ARTIFACT_DIRECTORIES, candidate_layout.ARTIFACT_DIRECTORIES)
+        self.assertEqual(ARTIFACT_PREFIXES, candidate_layout.ARTIFACT_PREFIXES)
+        self.assertEqual(DOMAIN_PATTERN.pattern, candidate_layout.DOMAIN_PATTERN.pattern)
+        self.assertEqual(RESERVED_DOMAINS, candidate_layout.RESERVED_DOMAINS)
+        # The root module is loaded from its path: `import artifact_layout_registry`
+        # resolves to whichever scripts directory another test put first on sys.path.
+        root_path = REPOSITORY_ROOT / "scripts/artifact_layout_registry.py"
+        root_spec = importlib.util.spec_from_file_location("root_layout_registry", root_path)
+        root_layout = importlib.util.module_from_spec(root_spec)
+        root_spec.loader.exec_module(root_layout)
+        if "decision" in root_layout.ARTIFACT_DIRECTORIES:
+            self.assertEqual(root_path.read_bytes(), candidate_path.read_bytes())
+        else:
+            without_decision = {k: v for k, v in ARTIFACT_DIRECTORIES.items() if k != "decision"}
+            self.assertEqual(without_decision, root_layout.ARTIFACT_DIRECTORIES)
+            self.assertEqual(
+                {k: v for k, v in ARTIFACT_PREFIXES.items() if k != "decision"},
+                root_layout.ARTIFACT_PREFIXES,
+            )
+            self.assertEqual(RESERVED_DOMAINS - {"decisions"}, root_layout.RESERVED_DOMAINS)
+            self.assertEqual(DOMAIN_PATTERN.pattern, root_layout.DOMAIN_PATTERN.pattern)
         self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
 
     def test_scaffold_dry_run_and_apply_create_the_complete_owner_domain(self) -> None:
@@ -111,7 +134,8 @@ class ArtifactAuthoringTests(unittest.TestCase):
                 content = destination.read_text(encoding="utf-8")
                 self.assertIn(f'id = "{artifact_id}"', content)
                 self.assertIn(f'type = "{artifact_type}"', content)
-                self.assertIn('status = "draft"', content)
+                # a decision has no draft state; it is created open (SPEC-DCM-001 rule 4)
+                self.assertIn('status = "open"' if artifact_type == "decision" else 'status = "draft"', content)
         self.assertFalse((self.root / "docs/engineering/simulation/README.md").exists())
 
     def test_create_dry_run_conflict_and_invalid_input_never_overwrite(self) -> None:

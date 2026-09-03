@@ -23,6 +23,7 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Sequence
 
 HERE = Path(__file__).resolve().parent
 REPOSITORY_ROOT = HERE.parents[1]
@@ -75,7 +76,7 @@ NAV_ANCHOR_STYLE = (
     'white-space:nowrap;overflow:hidden" style-hover="background:var(--l-soft);color:var(--l-accent-deep)"'
 )
 
-PATCHES: tuple[Patch, ...] = (
+BASE_PATCHES: tuple[Patch, ...] = (
     # Self-containment: the design-system assets are inlined by the shell.
     Patch('<link rel="stylesheet" href="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/styles.css">\n', "", 4, VIEWS),
     Patch('<script src="_ds/modernist-fa553ae2-9bac-470c-a217-b75ed1439a60/_ds_bundle.js"></script>\n', "", 4, VIEWS),
@@ -193,6 +194,64 @@ PATCHES: tuple[Patch, ...] = (
     ),
 )
 
+#: WO-DCM-001 (SPEC-DCM-001 rule 13): the in-flight tile lists open and
+#: deferred decisions with their age and deciding role; the record panel
+#: shows a decision's fields, the decision trail of a concerned artifact and
+#: the standing deviations a specification, work order or record inherits.
+#: Kept apart so a root released before them can be compared to the build
+#: without them.
+DECISION_PATCHES: tuple[Patch, ...] = (
+    Patch(
+        "    const m = b.metrics || null;\n",
+        "    const m = b.metrics || null;\n"
+        "    const openDecs = b.artifacts.filter(a => a.type === 'decision' && (a.status === 'open' || a.status === 'deferred'));\n"
+        "    const decAge = a => { const t0 = Date.parse(a.created || ''), t1 = Date.parse(b.generated_at || '') || Date.now(); return isNaN(t0) ? '' : ' · ' + this.humanH(t1 - t0) + ' old'; };\n",
+        1,
+        ("Overview",),
+    ),
+    Patch(
+        "        fig: (q.draft ?? 0) + ' drafts · ' + (q.ready ?? 0) + ' ready',",
+        "        fig: (q.draft ?? 0) + ' drafts · ' + (q.ready ?? 0) + ' ready' + (openDecs.length ? ' · ' + openDecs.length + ' open decision' + (openDecs.length === 1 ? '' : 's') : ''),",
+        1,
+        ("Overview",),
+    ),
+    Patch(
+        "        chips: b.artifacts.filter(a => a.status === 'draft' || a.status === 'ready').map(a => ({ label: a.id, href: this.lin(a.id) }))",
+        "        chips: [...openDecs.map(a => ({ label: a.id + ' (' + a.status + (a.deciding_roles && a.deciding_roles.length ? ' · ' + a.deciding_roles.join(', ') : '') + decAge(a) + ')', href: this.lin(a.id) })), ...b.artifacts.filter(a => a.status === 'draft' || a.status === 'ready').map(a => ({ label: a.id, href: this.lin(a.id) }))]",
+        1,
+        ("Overview",),
+    ),
+    Patch(
+        "work_order: 'Work order (WO) — an authorized change', ",
+        "work_order: 'Work order (WO) — an authorized change', decision: 'Decision (DEC) — a pending question or an implementation deviation', ",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "    push('snapshot sha256', a.artifact_snapshot_sha256, true);\n",
+        "    push('snapshot sha256', a.artifact_snapshot_sha256, true);\n"
+        "    (a.standing_deviations || []).forEach(id => push('standing deviation', id + ' — accepted; stands until the rule is amended or superseded'));\n"
+        "    (a.decisions || []).forEach(d => push('decision ' + d.id, (d.kind || 'decision') + ' · ' + d.status + (d.option ? ' · ' + d.option : '') + (d.decided_by ? ' by ' + d.decided_by : '') + (d.question ? ' — ' + d.question : '')));\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "    pushMeta('source', a.path);\n",
+        "    if (a.type === 'decision') {\n"
+        "      pushMeta('kind', a.kind); pushMeta('question', a.question); pushMeta('raised by', a.raised_by);\n"
+        "      (a.options || []).forEach(o => pushMeta('option ' + o.id, o.label));\n"
+        "      pushMeta('recommendation', a.recommendation); pushMeta('against', a.against); pushMeta('observed', a.observed);\n"
+        "      pushMeta('blocks', (a.blocks || []).join(', ')); pushMeta('deciding role', (a.deciding_roles || []).join(', '));\n"
+        "      if (a.disposition) { const dp = a.disposition; pushMeta('disposition', (dp.option || '') + (dp.label ? ' — ' + dp.label : '') + (dp.decided_by ? ' · ' + dp.decided_by : '') + (dp.decided_at ? ' · ' + dp.decided_at : '')); pushMeta('disposition reason', dp.reason); pushMeta('revisit', dp.revisit); if (dp.scope && dp.scope.length) pushMeta('deferral scope', dp.scope.join(', ')); }\n"
+        "    }\n"
+        "    pushMeta('source', a.path);\n",
+        1,
+        ("Record",),
+    ),
+)
+
+PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES)
+
 
 def _read(relative: str) -> str:
     path = SOURCES / relative
@@ -273,7 +332,7 @@ def _token_style(overview: str) -> str:
     return match.group(1).strip() + "\n"
 
 
-def build() -> str:
+def build(patches: Sequence[Patch] = PATCHES) -> str:
     sources = {name: _read(f"{name}.dc.html") for name in VIEWS}
     runtime = _read("support.js")
     shell = _read("shell/shell.html")
@@ -281,7 +340,7 @@ def build() -> str:
     readiness_css = _read("shell/readiness.css")
     tokens = _token_style(sources["Overview"])
     stylesheet = _strip_remote_css(_read("styles.css"))
-    for patch in PATCHES:
+    for patch in patches:
         _apply(patch, sources)
     for name in VIEWS:
         text = sources[name]

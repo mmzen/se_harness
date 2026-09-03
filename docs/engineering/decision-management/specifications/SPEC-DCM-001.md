@@ -228,3 +228,20 @@ of refusal messages within the rule above, the Explorer's visual treatment
 of open decisions and standing deviations, the fixture layout of tests,
 and the `--scope` syntax details, provided a scope names artifact and
 transition pairs.
+
+## Amendment record
+
+- 2026-09-03, under `WO-DCM-001` (approved with execution delegation, PR #329),
+  by the delegated executor, recorded for the owner's verification of
+  `VREC-DCM-001`. Rule 5 and the interface contract name one predicate,
+  `QGP-DECISION-OPEN`. The quality-gates contract binds predicates per gate
+  and requires every predicate id to be unique, so the implementation
+  registers one predicate per gate with the same evaluator,
+  `decision_gate_clear`: `QGP-G1-DECISION`, `QGP-G2-DECISION`,
+  `QGP-G3-DECISION`, `QGP-G4I-DECISION`, `QGP-G4A-DECISION`,
+  `QGP-G4V-DECISION`, `QGP-G5P-DECISION` and `QGP-G5D-DECISION`. Each is
+  bound to the gate its name carries; the rule's behavior is unchanged. The
+  refusal names the predicate id of the gate that refused. The lifecycle
+  contract lists `decision` as a fifth family beside the four the workflow
+  contract already declared. `create-artifact` writes a decision as `open`,
+  since the family has no `draft` state.

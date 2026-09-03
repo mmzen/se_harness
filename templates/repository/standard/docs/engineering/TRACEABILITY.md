@@ -56,6 +56,9 @@ listed below. A validator MUST reject an undeclared pair.
 | `TRC-REL-017` | `includes_verification` | `RLS -> VREC` | A release record names one or more eligible VRECs at its candidate commit. |
 | `TRC-REL-018` | `releases_work` | `RLS -> WO` | The released-work set equals the union of work covered by the included VRECs. |
 | `TRC-REL-019` | `assures` | `OPS -> REQ` | An operating contract names every requirement for which it claims continuing assurance. |
+| `TRC-REL-020` | `concerns` | `DEC -> any type` | A decision names every artifact its question is about. |
+| `TRC-REL-021` | `blocks` | `DEC -> REQ, SPEC, VER, ARCH, ADR or WO` | A decision names the artifacts that cannot change state while it is open; each is also in `concerns`. |
+| `TRC-REL-022` | `produces` | `DEC -> REQ, SPEC, VER, ARCH, ADR or WO` | A decided decision names the artifact its answer created or amended, when the answer created one. |
 
 `TRC-003` - A selected work order MUST have complete `INT -> CAP -> REQ`
 upstream coverage and complete selected `SPEC` and `VER` coverage for every
@@ -92,6 +95,7 @@ false.
 | `verification_record` | `VREC-` | Binds work, verification contracts, retained evidence, and one clean candidate commit for assurance review. | Create after candidate commit C for work explicitly classified `assurance.commit_bound_verification = "required"`; verified or released claims require an eligible VREC. | Omit while assurance is not required or not yet proposed; one aggregate record may cover several work orders at the same commit. | Assurance owner. | `VREC.verifies_work_order -> WO`; `VREC.conforms_to -> VER`; optional `VREC.superseded_by -> VREC` |
 | `release_contract` | `REL-` | Defines the work scope, gates, rollback conditions, and authority boundary for a release. | Every release record needs an applicable active contract that gates its complete released-work set. | Omit while no release is proposed; a contract may gate several work orders when its policy genuinely covers them. | Release owner. | `REL.gates -> WO`; `RLS.satisfies -> REL` |
 | `release_record` | `RLS-` | Records the accountable release decision for eligible verified work at one exact candidate commit. | Create only when a release is proposed; `released` requires eligible VRECs and matching commit identity. | Omit for unreleased continuous delivery; one aggregate record may release several work orders through included verification. | Release owner. | `RLS.satisfies -> REL`; `RLS.includes_verification -> VREC`; `RLS.releases_work -> WO` |
+| `decision` | `DEC-` | Records one pending question with its options, its decider and the artifacts it blocks, or one implementation deviation against one rule of one specification, with the verbatim disposition. | A question blocks a transition, concerns more than one artifact, or must survive approval; or an implementation cannot meet one specification rule under a work order. | Below the threshold the answer stays in a transition's `reason`; a settled architectural decision is an ADR, not a decision. | Owner of the blocked artifact; for a deviation, the owner of the departed specification. | `DEC.concerns -> any`; `DEC.blocks -> REQ, SPEC, VER, ARCH, ADR, WO`; `DEC.produces -> REQ, SPEC, VER, ARCH, ADR, WO` |
 | `operating_contract` | `OPS-` | Defines continuing service, support, observability, or operational assurance obligations. | It applies when repository or service policy declares ongoing operational commitments at G5. | Omit when no operational assurance is claimed; absence never implies that an operational obligation is satisfied. | Service owner. | `OPS.assures -> REQ` |
 
 Evidence, acceptance scenarios, source files, candidate commits, dashboards, tickets, and conversations are not formal artifact types. They may be retained or referenced as observations, but they do not establish product authority, work authorization, verification, or release by themselves.
@@ -138,6 +142,13 @@ Mixed scope MUST be split or classified `required`.
 and verification-contract facts unchanged. Its `superseded_by` target MUST be a
 distinct `verified` or `released` VREC covering every original work order. A
 superseded VREC MUST NOT qualify a release.
+
+`TRC-015` - A `DEC` in `open` blocks every transition of the artifacts in its
+`blocks` relation; a `DEC` in `deferred` blocks those its disposition's scope
+does not admit. An accepted deviation stands on the specification it departs
+from, on the work orders it concerns, and on every verification or release
+record covering that work, until a later decided deviation against the same
+rule chose `amend` or `supersede` (`SPEC-DCM-001`).
 
 `TRC-014` - An active `OPS.assures -> REQ` claim requires an active assured
 requirement and at least one completed implementing work order. When verified

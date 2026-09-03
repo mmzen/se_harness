@@ -45,3 +45,17 @@ follows once the required `validate` check is green at the execution
 branch's head, and completion and record preparation follow the same gate.
 The verification decision on the record, merge, release and publication
 stay human.
+
+## Execution
+
+`WO-DCM-001` started on 2026-09-03 under the delegated route on the branch
+`wo/dcm-001-execution` (PR #330). The implementation is candidate source:
+`se_harness/decisions.py` and the `decide` command, the `decision` lifecycle
+family and the per-gate `QGP-*-DECISION` predicates in both contract copies,
+the validator's decision rules and standing-deviation projection, the
+`DECISION.template.md` template and layout registry entry, the Explorer's
+in-flight tile, record panel and metrics, and `tests/test_decision_management.py`.
+The reader's note is `docs/notes/decision-artifacts.md`; the command is in
+`docs/notes/harnessctl-reference.md`. `SPEC-DCM-001` carries one amendment
+record: the single predicate it names is implemented as one predicate per
+gate. The root managed copies are unchanged until the next release adoption.
