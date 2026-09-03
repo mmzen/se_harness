@@ -144,7 +144,7 @@ Field rules:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> open : harnessctl create-artifact --type decision
+    [*] --> open : harnessctl create-artifact for a decision
     open --> decided : the accountable role selects one option
     open --> deferred : the accountable role defers, with scope and revisit
     open --> withdrawn : the question no longer applies
@@ -211,7 +211,7 @@ sequenceDiagram
     participant WO as WO-Y (in_progress)
     participant VREC
 
-    Agent->>Tool: create-artifact --type decision (kind deviation, against SPEC-S#rule-7)
+    Agent->>Tool: create-artifact --type decision (kind deviation, against SPEC-S rule 7)
     Note over Tool: DEC-2 open, concerns SPEC-S WO-Y VER-V, blocks WO-Y
     Agent->>Tool: transition WO-Y=implemented
     Tool-->>Agent: refused, QGP-G4-DECISION: DEC-2 open, options amend supersede accept stop
@@ -225,7 +225,7 @@ sequenceDiagram
         Note over Tool: DEC-2 decided, standing deviation on SPEC-S and WO-Y
     else option stop
         Owner->>Tool: decide DEC-2 --option stop
-        Note over Tool: WO-Y stays in_progress or is rejected; scope is split
+        Note over Tool: WO-Y stays in_progress or is rejected, and the scope is split
     end
     Agent->>Tool: transition WO-Y=implemented
     Tool-->>Agent: completed (amend or accept)
