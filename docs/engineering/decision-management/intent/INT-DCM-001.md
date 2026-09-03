@@ -2,12 +2,19 @@
 id = "INT-DCM-001"
 type = "intent"
 title = "Make every pending decision a governed, blocking artifact"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "repository-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-03T19:10:33Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
 +++
 
 # Intent: Make every pending decision a governed, blocking artifact

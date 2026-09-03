@@ -2,7 +2,7 @@
 id = "WO-DCM-001"
 type = "work_order"
 title = "Implement the decision artifact, its gate, and its disposition command"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
@@ -25,11 +25,21 @@ paths = [
   "docs/notes/",
 ]
 
+[delegation]
+class = "execution"
+
 [relations]
 implements = ["REQ-DCM-001", "REQ-DCM-002", "REQ-DCM-003"]
 specifications = ["SPEC-DCM-001"]
 architecture = ["ARCH-DCM-001", "ADR-DCM-001"]
 verification = ["VER-DCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-03T19:10:33Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
 +++
 
 # Work Order: Implement the decision artifact, its gate, and its disposition command
@@ -40,6 +50,14 @@ Drafted on 2026-09-03 after the repository owner reviewed
 `docs/notes/decision-artifact-proposal-2026-09-03.md` and instructed the
 creation of this packet. Approval authorizes the bounded implementation
 below and nothing further. Commit-bound verification is `required`.
+
+This work order carries `[delegation] class = "execution"`. Approving it is
+the act of delegating `DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE`
+to the `delegated-executor` role, each act admitted only while the required
+`validate` check is `success` for the exact candidate head, with the class
+read from the base of the pull request. Approval of the definitions, the
+verification decision on the record, merge, release and publication stay
+human.
 
 ## Objective
 

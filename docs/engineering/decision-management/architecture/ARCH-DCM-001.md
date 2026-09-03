@@ -2,7 +2,7 @@
 id = "ARCH-DCM-001"
 type = "architecture"
 title = "Decision gating architecture"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
@@ -16,6 +16,13 @@ outcome = "adr_required"
 triggers = ["public-interface-or-protocol", "data-ownership-or-persistence", "cross-cutting-policy", "difficult-to-reverse", "material-alternatives"]
 rationale = "A new persisted artifact type with its own lifecycle family, a gate evaluated at every transition of four other families, a new CLI command and a new decision right change the public interface, the persisted model and a cross-cutting policy, and cannot be withdrawn once decisions are recorded; two alternatives were seriously considered."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-03T19:10:33Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
 +++
 
 # Architecture: Decision gating architecture

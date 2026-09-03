@@ -2,13 +2,20 @@
 id = "SPEC-DCM-001"
 type = "specification"
 title = "Decision artifact contract"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner", "product-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
 
 [relations]
 specifies = ["REQ-DCM-001", "REQ-DCM-002", "REQ-DCM-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-03T19:10:33Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
 +++
 
 # Specification: Decision artifact contract
@@ -34,7 +41,7 @@ and it does not change the ADR.
 ## Inputs
 
 - A decision artifact in TOML front matter plus Markdown body, under
-  `docs/engineering/<domain>/decisions/DEC-<DOMAIN>-NNN.md`.
+  `docs/engineering/DOMAIN/decisions/DEC-DOMAIN-NNN.md`.
 - A disposition request: decision id, option id, accountable role, reason,
   and for `deferred` or `accept` a revisit trigger and, for `deferred`, a
   scope.
@@ -90,9 +97,9 @@ against the same rule is disposed `amend` or `supersede`.
    `scope` does not admit the requested transition. The failure message
    names the decision id, the question, each option id with its label, the
    deciding role, and the corrective command `harnessctl decide`.
-6. **Disposition.** `harnessctl decide <DEC> --option <id> --decision
-   <role> --reason <text>` applies the transition `open|deferred ->
-   decided`. `--defer --scope <ARTIFACT:from->to,...> --revisit <text>`
+6. **Disposition.** `harnessctl decide DEC-ID --option OPTION-ID --decision ROLE --reason
+   TEXT` applies the transition `open|deferred -> decided`.
+   `--defer --scope ARTIFACT-ID:FROM-STATE-TO-STATE,... --revisit TEXT`
    applies `open -> deferred`. `--withdraw` applies `-> withdrawn`. The
    command writes the `[disposition]` table (option id, label copied from
    the artifact, role, UTC time, reason verbatim, revisit and scope when
@@ -206,7 +213,7 @@ ordinary upgrade. No existing artifact is rewritten.
 - Intended: a refusal reads "DEC-DST-001 is open: Does the Lineage view keep
   loading every artifact detail on entry? Options: amend, accept, stop.
   Decider: technical-owner. Next: harnessctl decide DEC-DST-001 --option
-  <id> --decision technical-owner --reason <text>".
+  OPTION-ID --decision technical-owner --reason TEXT".
 - Intended: `decide … --option accept --revisit "the next Lineage design
   round"` records the label verbatim and the deviation appears on
   `SPEC-DST-014`, `WO-DST-023`, and the next record.

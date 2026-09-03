@@ -2,7 +2,7 @@
 id = "REQ-DCM-002"
 type = "requirement"
 title = "The accountable role disposes a decision with a verbatim option"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "repository-owner", "quality-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
@@ -14,6 +14,13 @@ measure = "every disposition carries the option identifier, label, role, timesta
 
 [relations]
 derives_from = ["CAP-DCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-03T19:10:33Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
 +++
 
 # Requirement: The accountable role disposes a decision with a verbatim option
