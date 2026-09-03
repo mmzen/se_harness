@@ -53,11 +53,9 @@ An artifact gives a decision five things prose cannot give it:
 | Reach | one file | `concerns` and `blocks` any artifact |
 | Record | a reason field, if someone copies it | the question, the options and the verbatim answer, kept |
 
-Two facts from this repository argue for it. The RISK packet on pull
-requests #156, #158 and #204 has the same shape: raise, dispose by the stage
-owner, gate the threatened stage. And the way the owner already decides, by
-selecting a presented option, is recorded in every reason field but written
-in no rule. A decision artifact makes both formal with one mechanism.
+One fact from this repository argues for it. The way the owner already
+decides, by selecting a presented option, is recorded in every reason field
+but written in no rule. A decision artifact makes that channel formal.
 
 ## 2. The model
 
@@ -96,9 +94,6 @@ classDiagram
     }
     class VerificationRecord
     class ReleaseRecord
-    class Risk {
-        sibling type same lifecycle shape
-    }
 
     Decision "1" *-- "2..*" Option : options
     Decision "1" *-- "0..1" Disposition : disposition
@@ -118,7 +113,6 @@ classDiagram
 
     VerificationRecord ..> Decision : discloses accepted deviations
     ReleaseRecord ..> Decision : inherits accepted deviations
-    Risk .. Decision : shares lifecycle and gate
 ```
 
 Read the arrows from the decision. `concerns` says which artifacts the
@@ -271,14 +265,12 @@ probably wrong.
 6. **Nothing is deleted.** `decided` and `withdrawn` decisions stay. They
    join the refusals on the record, and raise-to-dispose time becomes a
    metric beside lead time.
-7. **One lifecycle for RISK and DEC.** Both are gating items: raise,
-   dispose, gate. One lifecycle family, one gate, one Explorer panel.
 
 ## 6. What it costs
 
 - A template `DECISION.template.md` and a layout registry entry
   (`docs/engineering/<domain>/decisions/DEC-DOM-NNN.md`).
-- One lifecycle family in `WORKFLOW.json`, shared with RISK.
+- One lifecycle family in `WORKFLOW.json`.
 - One gate predicate in `QUALITY_GATES.json`, evaluated at every transition
   of a blocked artifact, plus the revisit warning.
 - One decision right in `DECISION_RIGHTS.md`: `DR-DECISION-DISPOSE`.
@@ -292,10 +284,11 @@ probably wrong.
 - Tests, the notes, and a paragraph in `ARTIFACT_AUTHORING.md` for the
   threshold.
 
-The size is close to the delegation-class work order. The packet is two requirements (raise and block; dispose and defer), one
-specification, one verification contract, one ADR and one work order. The
-ADR positions the decision against the architecture ADR and the RISK. It should follow, or join, the RISK
-packet so that the two share their machinery.
+The size is close to the delegation-class work order. The packet is two
+requirements (raise and block; dispose and defer), one specification, one
+verification contract, one ADR and one work order. The ADR positions the
+decision artifact against the architecture ADR: a pending question with
+options, not a settled architectural decision.
 
 ## 7. What is authoritative
 
