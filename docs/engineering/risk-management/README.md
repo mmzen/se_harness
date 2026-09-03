@@ -34,5 +34,11 @@ scale is 5x5.
 - `VER-RSK-002`: evidence contract.
 - `WO-RSK-002`: implement the closure.
 
+## Third increment (draft)
+
+- `WO-RSK-003`: amend `REQ-RSK-007`, `SPEC-RSK-002` and `VER-RSK-002` to the
+  delegated execution model, in which the evaluator performs the risk write and
+  no skill holds a risk-raising effect class.
+
 Every draft artifact authorizes no implementation, lifecycle transition, Git
 action, or external action.
