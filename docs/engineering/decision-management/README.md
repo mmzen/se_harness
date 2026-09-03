@@ -37,7 +37,11 @@ The risk artifact is not part of this domain; the owner manages it
 separately and afterward.
 
 On 2026-09-03 the repository owner instructed the creation of this packet
-after reviewing the proposal. The packet is `draft` pending accountable
-review. Implementation, lifecycle transitions, evidence capture, commit,
-push, pull request, build, release, publication, and deployment remain
-unauthorized until the owner approves.
+after reviewing the proposal, then approved all ten artifacts the same day
+with the instruction "i approve with execution delegation" (PR #329). The
+approved packet is on `main`; `WO-DCM-001` carries the delegation class, so
+the execution travels the delegated route from here: the delegated start
+follows once the required `validate` check is green at the execution
+branch's head, and completion and record preparation follow the same gate.
+The verification decision on the record, merge, release and publication
+stay human.
