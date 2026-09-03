@@ -1,7 +1,7 @@
 {
   "schema": "se-harness-skill-contract-v3",
   "name": "harness-prepare-assurance",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "outcome": "Prepare one exact-candidate verification record through delegated evaluator preparation and stop before Git or assurance decision.",
   "activation": {
     "explicit": true,
@@ -43,7 +43,7 @@
   "mutation_class": "governed-mutation",
   "evaluator": {
     "minimum_version": "0.6.0",
-    "required_operations": ["version", "identity", "doctor", "delegated-workflow-catalog", "delegated-workflow-prepare-vrec"],
+    "required_operations": ["version", "identity", "doctor", "delegated-workflow-catalog", "delegated-workflow-prepare-vrec", "risks"],
     "optional_operations": ["validate-json", "inspect-json"],
     "missing_required": "blocked",
     "missing_optional": "degraded"

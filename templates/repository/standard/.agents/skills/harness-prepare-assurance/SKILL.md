@@ -39,7 +39,10 @@ actor. Read repository instructions and this complete core. Validate
    evaluator's Git-action packet and stop without creating a record or commit.
    Otherwise require one evaluator-prepared `ready` VREC, receipt, and assurance
    packet bound to the declared completion proof.
-6. Return the structured client result and stop before the independent
+6. Run the evaluator's `risks` operation for every selected work order and
+   include the returned register in the assurance decision packet; this skill
+   never disposes a risk.
+7. Return the structured client result and stop before the independent
    assurance decision. Do not execute a packet command.
 
 ## Boundaries

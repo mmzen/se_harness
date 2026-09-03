@@ -144,6 +144,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
     ]
     for relative in REQUIRED_PATHS:
         checks.append(InstallationCheck(relative, (target / relative).is_file(), "required"))
+    checks.append(risk_policy_check(target))
 
     claude_path = target / "CLAUDE.md"
     if claude_path.is_file():
@@ -264,6 +265,33 @@ def _load_validator_module() -> ModuleType:
 def _targets(artifact: Any, relation: str) -> list[str]:
     value = artifact.relations.get(relation, [])
     return sorted(item for item in value if isinstance(item, str)) if isinstance(value, list) else []
+
+
+def risk_policy_check(target: Path) -> InstallationCheck:
+    """C-RSK-001: the [risk] section of the installation file is absent or valid (RSK2-DOC-001)."""
+
+    path = target / CONFIG_NAME
+    if not path.is_file():
+        return InstallationCheck("risk-policy", True, "C-RSK-001: no installation file; default acceptance level 1")
+    try:
+        import tomllib
+
+        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, UnicodeError, ValueError) as exc:
+        return InstallationCheck("risk-policy", False, f"C-RSK-001: cannot read {CONFIG_NAME}: {exc}")
+    table = data.get("risk")
+    if table is None:
+        return InstallationCheck("risk-policy", True, "C-RSK-001: [risk] absent; default acceptance level 1")
+    if not isinstance(table, dict) or not set(table).issubset({"acceptance_level", "scale", "release_requires_disposition"}):
+        return InstallationCheck("risk-policy", False, "C-RSK-001: [risk] carries an unknown key")
+    level = table.get("acceptance_level", 1)
+    if type(level) is not int or not 1 <= level <= 25:
+        return InstallationCheck("risk-policy", False, f"C-RSK-001: acceptance_level must be an integer 1-25, not {level!r}")
+    if table.get("scale", "5x5") != "5x5":
+        return InstallationCheck("risk-policy", False, "C-RSK-001: scale must be 5x5")
+    if table.get("release_requires_disposition", True) is not True:
+        return InstallationCheck("risk-policy", False, "C-RSK-001: release_requires_disposition must be true")
+    return InstallationCheck("risk-policy", True, f"C-RSK-001: acceptance level {level}")
 
 
 def _commit_is_ancestor(root: Path, commit: str, reference: str = "HEAD") -> bool | None:

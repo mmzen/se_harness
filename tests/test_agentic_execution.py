@@ -213,12 +213,21 @@ class SkillContractTests(unittest.TestCase):
 
     def test_closed_phase4_contracts_and_manifests_validate(self) -> None:
         expected = {
-            "harness-draft-change": ("draft-writing", ["draft-create", "draft-revise", "planning-note-write"]),
+            "harness-draft-change": (
+                "draft-writing",
+                ["draft-create", "draft-revise", "planning-note-write"],
+                "2.0.0",
+            ),
             "harness-execute-work-order": (
                 "governed-mutation",
                 ["implementation-write", "test-execution", "evidence-write"],
+                "2.0.0",
             ),
-            "harness-prepare-assurance": ("governed-mutation", ["verification-record-prepare"]),
+            "harness-prepare-assurance": (
+                "governed-mutation",
+                ["verification-record-prepare"],
+                "2.1.0",
+            ),
         }
         for name, root in PHASE3_ROOTS.items():
             with self.subTest(skill=name):
@@ -244,7 +253,7 @@ class SkillContractTests(unittest.TestCase):
                     ] if (root / item).exists()), "skill-contract.json"]),
                     sorted(item["path"] for item in manifest.value["files"]),
                 )
-                self.assertEqual("2.0.0", contract.value["version"])
+                self.assertEqual(expected[name][2], contract.value["version"])
                 self.assertEqual(
                     b"policy:\n  allow_implicit_invocation: false\n",
                     (root / "agents/openai.yaml").read_bytes(),

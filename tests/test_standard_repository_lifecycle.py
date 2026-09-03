@@ -111,7 +111,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                     "harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"
                 }:
                     self.assertEqual("se-harness-skill-contract-v3", contract["schema"])
-                    self.assertEqual("2.0.0", contract["version"])
+                    self.assertEqual(
+                        "2.1.0" if name == "harness-prepare-assurance" else "2.0.0",
+                        contract["version"],
+                    )
                     self.assertFalse(contract["client"]["direct_target_writes"])
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(

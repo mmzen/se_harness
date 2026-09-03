@@ -30,6 +30,7 @@ PUBLIC_MUTATION_OPERATIONS = frozenset(
         "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
+        "raise-risk",
         "renumber-artifacts-apply",
         "scaffold-domain",
         "transition-apply",

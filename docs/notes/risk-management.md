@@ -99,6 +99,16 @@ released work, and derives `lists_risks` — every `accepted` or `mitigated` ris
 that does — into the ready record and its body. That list is what an
 attestation that "risks were identified and mitigated or accepted" rests on.
 
+## Skills and doctor
+
+`harness-draft-change` and `harness-execute-work-order` may raise a risk they
+notice, under the `risk-raise` effect class, which admits only a new risk
+artifact path; `harness-prepare-assurance` runs `harnessctl risks` for each
+selected work order and includes the register in its packet. No skill
+disposes a risk. `harnessctl doctor` reports `C-RSK-001` when the `[risk]`
+section of the installation file is invalid; `raise-risk` runs under its own
+mutation-guard operation.
+
 ## Boundaries
 
 Scoring is ordinal and the scale is 5x5; there is no quantitative model, no

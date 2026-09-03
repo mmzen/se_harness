@@ -298,3 +298,181 @@ class RiskManagementTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RiskDeviationClosureTests(unittest.TestCase):
+    """Evidence for REQ-RSK-007 / SPEC-RSK-002: guard operation, doctor check, skill integration, amendments."""
+
+    def test_raise_risk_is_a_registered_guard_operation_and_uses_it(self) -> None:
+        from se_harness import mutation_guard
+        from se_harness.artifact_layout import create_risk
+
+        self.assertIn("raise-risk", mutation_guard.PUBLIC_MUTATION_OPERATIONS)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.assertEqual(0, main(["init", str(root), "--project-name", "Guard Fixture"]))
+            create_base_chain(root, operating_contract_status="draft")
+            seen: list[str] = []
+
+            def fake(repository, *, operation, **_):
+                seen.append(operation)
+                return trusted_mutation_authority(repository, operation=operation)
+
+            with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=fake):
+                create_risk(
+                    root, domain="product", artifact_id="RISK-PRD-001", title="t", stage="implementation",
+                    category="process", likelihood=2, impact=2, threatens=["WO-001"], cause="c", effect="e",
+                    raised_by="test", acceptance_level=1, now="2026-08-25T00:00:00Z", dry_run=False,
+                )
+            self.assertEqual(["raise-risk"], seen)
+
+    def test_doctor_reports_c_rsk_001_only_for_an_invalid_risk_section(self) -> None:
+        from se_harness.preflight import inspect_installation, risk_policy_check
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.assertEqual(0, main(["init", str(root), "--project-name", "Doctor Fixture"]))
+            check = risk_policy_check(root)
+            self.assertTrue(check.passed, check)
+            self.assertIn("acceptance level 1", check.detail)
+            self.assertIn("risk-policy", [item.name for item in inspect_installation(root)])
+            policy = root / ".engineering-harness.toml"
+            original = policy.read_text(encoding="utf-8")
+            policy.write_text(original.replace("acceptance_level = 1", "acceptance_level = 40"), encoding="utf-8")
+            check = risk_policy_check(root)
+            self.assertFalse(check.passed)
+            self.assertIn("C-RSK-001", check.detail)
+            self.assertIn("40", check.detail)
+            failing = [item for item in inspect_installation(root) if item.name == "risk-policy"]
+            self.assertEqual(1, len(failing))
+            self.assertFalse(failing[0].passed)
+            policy.write_text(original.replace("[risk]\n", "[risk]\nunexpected = 1\n"), encoding="utf-8")
+            self.assertFalse(risk_policy_check(root).passed)
+            policy.write_text(original.split("[risk]")[0], encoding="utf-8")
+            self.assertTrue(risk_policy_check(root).passed)
+
+    def test_skill_contracts_broker_the_risk_write_and_require_the_register(self) -> None:
+        from se_harness.skill_contract import load_skill_contract
+
+        skills = Path(__file__).resolve().parents[1] / "templates/repository/standard/.agents/skills"
+        draft = load_skill_contract(skills / "harness-draft-change/skill-contract.json").value
+        execute = load_skill_contract(skills / "harness-execute-work-order/skill-contract.json").value
+        prepare = load_skill_contract(skills / "harness-prepare-assurance/skill-contract.json").value
+        self.assertIn("risks", prepare["evaluator"]["required_operations"])
+        self.assertEqual("2.1.0", prepare["version"])
+        # The evaluator owns every governed-target write, so raising a risk is not a direct skill
+        # effect and needs no operation of its own: the risk file is one more admitted path in the
+        # brokered change bundle. `risks` is a read, so only the assurance packet gains an operation.
+        for value in (draft, execute):
+            self.assertEqual("2.0.0", value["version"])
+            self.assertNotIn("raise-risk", value["evaluator"]["required_operations"])
+            self.assertNotIn("raise-risk", value["evaluator"]["optional_operations"])
+            self.assertNotIn("risk-raise", value["effects"]["permitted"])
+        self.assertNotIn("risk-raise", prepare["effects"]["permitted"])
+        for value in (draft, execute, prepare):
+            self.assertEqual([], value["effects"]["lifecycle_transitions"])
+            self.assertIn("direct-target-write", value["effects"]["prohibited"])
+            self.assertFalse(value["client"]["direct_target_writes"])
+            self.assertEqual("evaluator", value["client"]["target_writer"])
+        for name in ("harness-draft-change", "harness-execute-work-order", "harness-prepare-assurance"):
+            text = (skills / name / "SKILL.md").read_text(encoding="utf-8")
+            self.assertIn("never", text)
+            self.assertIn("disposes a risk", text)
+
+    def test_helpers_broker_a_risk_path_and_refuse_a_risk_raise_effect(self) -> None:
+        import types
+
+        skills = Path(__file__).resolve().parents[1] / "templates/repository/standard/.agents/skills"
+
+        def load(name: str, path: Path):
+            # exec the source directly: importing would write __pycache__ into the portable core,
+            # and every file under a core is bound by its manifest digest
+            module = types.ModuleType(name)
+            module.__file__ = str(path)
+            exec(compile(path.read_text(encoding="utf-8"), str(path), "exec"), module.__dict__)
+            return module
+
+        scope = load("rsk_check_scope", skills / "harness-execute-work-order/scripts/check_scope.py")
+        guard = load("rsk_guard", skills / "harness-draft-change/scripts/guard.py")
+        risk_path = "docs/engineering/product/risks/RISK-PRD-001.md"
+        self.assertNotIn("risk-raise", scope.ALLOWED_EFFECTS)
+        self.assertNotIn("risk-raise", guard.ALLOWED_EFFECTS)
+        def catalog_of(module) -> list[dict[str, str]]:
+            return [{"id": item} for item in module.PHASE4_CATALOG]
+        evaluator_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "arguments": ["delegated-workflow", "execute", ".", "--work-order", "WO-PRD-001"],
+            "delegation_sha256": "a" * 64,
+        }
+        result = {
+            "outcome": "completed-at-git-stop",
+            "work_order": "WO-PRD-001",
+            "start": {"lifecycle_proof": {}},
+            "effects": [{"receipt": {}}],
+            "completion": {"lifecycle_proof": {}},
+            "next": {"decision_packet": {}},
+        }
+        execute_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "explicit_skill": "harness-execute-work-order",
+            "workflow_schema": "se-harness-workflow-v4",
+            "interface_operation": "delegated-workflow-execute",
+            "direct_target_write": False,
+            "work_order": "WO-PRD-001",
+            "state": "approved",
+            "effect_class": "implementation-write",
+            "planned_paths": [risk_path, "src/main.py"],
+            "execution_scope": ["src/", "docs/engineering/product/risks/"],
+            "evaluator_request": evaluator_request,
+        }
+        calls: list[tuple[str, ...]] = []
+        admitted = scope.invoke_work_order_client(
+            execute_request, catalog=lambda: catalog_of(scope), client=lambda arguments: calls.append(arguments) or result
+        )
+        self.assertEqual([risk_path, "src/main.py"], admitted["planned_paths"])
+        self.assertEqual(1, len(calls))
+        calls.clear()
+        with self.assertRaisesRegex(scope.ScopeGuardError, "AEXEXE005"):
+            scope.invoke_work_order_client(
+                {**execute_request, "effect_class": "risk-raise"},
+                catalog=lambda: catalog_of(scope),
+                client=lambda arguments: calls.append(arguments),
+            )
+        self.assertEqual([], calls)
+
+        draft_request = {
+            "schema": "se-harness-evaluator-client-request-v1",
+            "explicit_skill": "harness-draft-change",
+            "workflow_schema": "se-harness-workflow-v4",
+            "interface_operation": "delegated-workflow-execute",
+            "direct_target_write": False,
+            "work_order": "WO-PRD-001",
+            "state": "approved",
+            "effect_class": "draft-create",
+            "planned_paths": [risk_path],
+            "allowed_paths": [risk_path],
+            "revisions": {},
+            "evaluator_request": evaluator_request,
+        }
+        admitted = guard.invoke_draft_client(
+            draft_request, catalog=lambda: catalog_of(guard), client=lambda arguments: calls.append(arguments) or result
+        )
+        self.assertEqual([risk_path], admitted["planned_paths"])
+        self.assertEqual(1, len(calls))
+        calls.clear()
+        with self.assertRaisesRegex(guard.DraftGuardError, "AEXDRF003"):
+            guard.invoke_draft_client(
+                {**draft_request, "effect_class": "risk-raise"},
+                catalog=lambda: catalog_of(guard),
+                client=lambda arguments: calls.append(arguments),
+            )
+        self.assertEqual([], calls)
+
+    def test_amendments_are_the_shipped_behaviour(self) -> None:
+        from se_harness.workflow_contract import load_validated_contracts
+
+        _, _, _, procedures, _ = load_validated_contracts()
+        with_step = {pid for pid, proc in procedures.items() if any(s["id"].endswith("-RISKS") for s in proc["steps"])}
+        self.assertEqual({"PROC-WO-START", "PROC-WO-IMPLEMENT"}, with_step)
+        template = Path(__file__).resolve().parents[1] / "templates/repository/standard/docs/engineering/templates/RISK.template.md"
+        self.assertNotIn("residual_likelihood =", template.read_text(encoding="utf-8").split("[risk]")[1].split("[relations]")[0])

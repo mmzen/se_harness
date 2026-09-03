@@ -15,7 +15,7 @@
       },
       "current": {
         "contract_sha256": "318ddf054dc14407ef586df79dea52d03510bd2423f2f91cb90d87a45c04d3a6",
-        "manifest_sha256": "86a8598ef98571622ab2869eed9b1771b353ac7fc9be32310707a77ea6f1aa5c",
+        "manifest_sha256": "8d8c890a3570328d24250523be1ee8c3ed041fe7716b72249a819e48e60b6487",
         "schema": "se-harness-skill-contract-v3",
         "version": "2.0.0",
         "interface_operation": "delegated-workflow-execute",
@@ -30,7 +30,7 @@
       },
       "current": {
         "contract_sha256": "dd7eebb0be2f0af680f27c5e9bb645d9662bffd6003f2a380832f9924eb92f38",
-        "manifest_sha256": "1fc827f6985b08fb0320aed188ff5506e8979e563bc11012c640edddd92eff2d",
+        "manifest_sha256": "3636d269535ec383c7d54dee682942171f8740cd1169521d18589c01b4a8a7e2",
         "schema": "se-harness-skill-contract-v3",
         "version": "2.0.0",
         "interface_operation": "delegated-workflow-execute",
@@ -44,10 +44,10 @@
         "schema": "se-harness-skill-contract-v2"
       },
       "current": {
-        "contract_sha256": "f957b423db8355e0a9c9d95ea55a9859c2dc39659f9df44c7fbd41564b2634b7",
-        "manifest_sha256": "29b3da990f5747b069e2d89b9de81c419986406ff9503a3797040a8dd7763402",
+        "contract_sha256": "9e28e8b95030891dc204ecc00bb61e930cae7b013a18c4049744b95a2c958487",
+        "manifest_sha256": "685273454d6f248a9a3a71ded18b8f3909f8eca34e72223594c9c04a1aef8fe3",
         "schema": "se-harness-skill-contract-v3",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "interface_operation": "delegated-workflow-prepare-vrec",
         "operation_catalog": ["delegated-vrec-prepare"]
       }

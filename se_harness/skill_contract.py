@@ -509,7 +509,7 @@ _V3_PROFILES = {
 _V3_PROFILES = {
     **_V3_PROFILES,
     "harness-prepare-assurance": {
-        "version": "2.0.0",
+        "version": "2.1.0",
         "mutation_class": "governed-mutation",
         "inputs": [
             ("target", "repository-path", True),
@@ -532,7 +532,7 @@ _V3_PROFILES = {
         ],
         "required_operations": [
             "version", "identity", "doctor", "delegated-workflow-catalog",
-            "delegated-workflow-prepare-vrec",
+            "delegated-workflow-prepare-vrec", "risks",
         ],
         "optional_operations": ["validate-json", "inspect-json"],
         "checkpoints": [

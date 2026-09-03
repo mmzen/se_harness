@@ -35,6 +35,9 @@ canonical destination. Only explicitly selected artifacts that are currently
    catalog; an evaluator without this capability is a stop before any effect.
 3. Build a closed plan containing only canonical draft destinations, explicitly
    selected current drafts, and at most one declared path under `docs/notes/`.
+   A risk noticed while drafting is one more canonical draft destination in the
+   same plan; the evaluator writes it through the change bundle, and this skill
+   never disposes a risk.
 4. Immediately repeat identity, integrity, and formal-state checks. Reconfirm
    identifier uniqueness and destination absence before creating candidate
    bytes.

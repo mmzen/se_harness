@@ -860,7 +860,10 @@ class InstructionArchitectureTests(unittest.TestCase):
                 self.assertEqual([], writing_contract["effects"]["lifecycle_transitions"])
                 self.assertEqual({"allowed": False, "fallback": "single-agent"}, writing_contract["delegation"])
                 if name in host_adapter_writing_skills:
-                    self.assertEqual("2.0.0", writing_contract["version"])
+                    self.assertEqual(
+                        "2.1.0" if name == "harness-prepare-assurance" else "2.0.0",
+                        writing_contract["version"],
+                    )
                     self.assertFalse(writing_contract["client"]["direct_target_writes"])
                     self.assertEqual("evaluator", writing_contract["client"]["target_writer"])
                     self.assertEqual("se-harness-workflow-v4", writing_contract["client"]["workflow_schema"])

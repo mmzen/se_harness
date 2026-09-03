@@ -31,8 +31,12 @@ digest.
    capability, invalid delegation, or a work order not in the evaluator's
    required start state stops before any effect.
 3. Construct a closed candidate plan from current `[execution_scope].paths`.
-   Operator constraints may narrow but never widen it. Produce candidate bytes
-   only in the isolated proposed workspace; do not write target paths.
+   Operator constraints may narrow but never widen it. A risk noticed during
+   implementation is one more path in that plan, admitted while `identified` or
+   `raised` by the standing risk scope exception and named in the receipt; the
+   evaluator writes it through the bundle and this skill never disposes a risk.
+   Produce candidate bytes only in the isolated proposed workspace; do not write
+   target paths.
 4. Run only structured repository-owned command arrays in their declared
    context and retain normalized results and evidence at declared paths.
 5. Pass the closed argument vector through `scripts/check_scope.py`. The helper
