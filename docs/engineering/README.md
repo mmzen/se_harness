@@ -10,6 +10,7 @@
 - `artifact-authoring/`: draft proposal for one managed authoring policy and mechanical requirement-writing rules (EARS shapes, singularity signals, closed verification vocabulary, attributes, approval predicates, slimmer template).
 - `agent-directive-surface/`: draft proposal to make every behavioural obligation on a coding agent an evaluator-computed predicate or a bounded, explicitly scoped read.
 - `execution-control-plane/`: draft proposal to make the harness an execution control plane: state, scope, identifiers, and evidence binding owned by the harness, enforcement at Git boundaries, authenticated decisions, one kernel, and a consumer-only product surface.
+- `decision-management/`: draft proposal to make every pending decision a governed, blocking artifact (`DEC-`): a question with options and a decider, or an implementation deviation against one rule, disposed verbatim by the accountable role and visible on the artifacts and records it concerns.
 - `technical-communication/`: draft managed communication policy and read-only operator-brief skill using ASD-STE100-based clarity principles without a compliance claim.
 - `evidence-keying/`: approved portable work-order evidence-attribution contract and bounded implementation work across flat and directory-organized layouts.
 - `harness-distribution/`: reusable installation, adoption, documentation, and package-distribution behavior.
