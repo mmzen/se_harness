@@ -2,7 +2,7 @@
 id = "WO-DCM-001"
 type = "work_order"
 title = "Implement the decision artifact, its gate, and its disposition command"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-03"
 updated = "2026-09-03"
@@ -40,6 +40,13 @@ to = "approved"
 decided_at = "2026-09-03T19:10:33Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-03 with the instruction 'i approve with execution delegation', after reviewing the decision-artifact proposal and the drafted packet. WO-DCM-001 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-03T19:18:57Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 2f305c0b4fd5df9101f8efa46d269871d516dab7 (check-run 100781440327, source github-checks)."
 +++
 
 # Work Order: Implement the decision artifact, its gate, and its disposition command
