@@ -57,6 +57,14 @@ This packet carries them.
 
 The three requirements are written in the reader-first shape they propose.
 They still end with `Open decisions` reading `None` because the root gate of
-0.14.0 requires it; that line is the last one of its kind. Both work orders
-carry the delegation class; approving them is the owner's act. Every
-artifact is `draft`. This packet authorizes no implementation.
+0.14.0 requires it; that line is the last one of its kind.
+
+On 2026-09-04 the repository owner approved all seven artifacts with the
+instruction "i approve the packet, the work orders can be start with
+execution delegation" (PR #335). Both work orders carry the delegation
+class, so once the packet is on `main` the execution travels the delegated
+route: `WO-TCM-005` first, then `WO-TCM-006`, each on its own branch, each
+started, completed and recorded by the delegated executor while the
+required `validate` check is green at the exact head. The verification
+decisions on the records, the merges, the release and the adoption stay
+human.

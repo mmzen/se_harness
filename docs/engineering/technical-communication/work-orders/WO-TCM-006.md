@@ -2,7 +2,7 @@
 id = "WO-TCM-006"
 type = "work_order"
 title = "Install a repository-owned glossary and report its drift"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -28,6 +28,13 @@ class = "execution"
 implements = ["REQ-TCM-007"]
 specifications = ["SPEC-TCM-003"]
 verification = ["VER-TCM-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T16:14:37Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i approve the packet, the work orders can be start with execution delegation', after reviewing PR #335 (REQ-TCM-006..008, SPEC-TCM-003, VER-TCM-003, WO-TCM-005, WO-TCM-006). WO-TCM-005 and WO-TCM-006 carry the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the base of the pull request; the verification decision, merge, release and publication stay human."
 +++
 
 # Work Order: Install a repository-owned glossary and report its drift

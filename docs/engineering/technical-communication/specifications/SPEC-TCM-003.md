@@ -2,13 +2,20 @@
 id = "SPEC-TCM-003"
 type = "specification"
 title = "Reader-first requirements, graph-read decisions and the repository-owned glossary"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
 
 [relations]
 specifies = ["REQ-TCM-006", "REQ-TCM-007", "REQ-TCM-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T16:14:37Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i approve the packet, the work orders can be start with execution delegation', after reviewing PR #335 (REQ-TCM-006..008, SPEC-TCM-003, VER-TCM-003, WO-TCM-005, WO-TCM-006)."
 +++
 
 # Specification: Reader-first requirements, graph-read decisions and the repository-owned glossary

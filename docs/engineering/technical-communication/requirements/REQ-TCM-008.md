@@ -2,7 +2,7 @@
 id = "REQ-TCM-008"
 type = "requirement"
 title = "Pending decisions are read from the graph, not from a section"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -13,6 +13,13 @@ source = "SPEC-DCM-001 rule 11 and the owner's decision of 2026-09-04: with the 
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T16:14:37Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i approve the packet, the work orders can be start with execution delegation', after reviewing PR #335 (REQ-TCM-006..008, SPEC-TCM-003, VER-TCM-003, WO-TCM-005, WO-TCM-006)."
 +++
 
 # Requirement: Pending decisions are read from the graph, not from a section
