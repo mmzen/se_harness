@@ -14,7 +14,6 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 NOTES_ROOT = REPOSITORY_ROOT / "docs" / "notes"
 
 DOCUMENTS = {
-    REPOSITORY_ROOT / "README.md": "6/10",
     NOTES_ROOT / "README.md": "4/10",
     NOTES_ROOT / "harness-overview.md": "4/10",
     NOTES_ROOT / "harness-uml-model.md": "6/10",
@@ -313,13 +312,11 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, development)
 
-    def test_readme_version_matches_package_metadata(self) -> None:
+    def test_candidate_version_matches_package_metadata(self) -> None:
         project = tomllib.loads(
             (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")
         )["project"]
-        readme = self.contents[REPOSITORY_ROOT / "README.md"]
         self.assertEqual(project["version"], __version__)
-        self.assertIn(f'se-harness=={project["version"]}', readme)
 
     def test_markdown_fences_are_balanced(self) -> None:
         for path, content in self.contents.items():

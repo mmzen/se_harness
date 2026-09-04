@@ -1,199 +1,84 @@
-# SE Harness
+## SE Harness / Verity Plane
 
-<!-- Target expertise: 6/10. This score describes the knowledge expected from the reader, not the document's complexity or quality. -->
+<h4 align="center"><em>Delegate the work. Keep the authority.</em></h4>
 
-SE Harness turns a new or existing repository into a governed software-engineering workspace for humans and coding agents. It keeps intent, requirements, design, authorized work, evidence, exact Git provenance, verification, and release decisions connected and inspectable beside the code.
+Verity Plane is an **open source harness for building software with AI coding agents under governed authority**. Define what agents may change, require independent verification of their work, and keep the decision to ship in human hands.
 
-The practical promise is simple: every material change can explain **why it exists, what was approved, what changed, how it was checked, which exact commit was assessed, and who made the verification and release decisions**. Automation assists; accountable humans retain authority.
+The harness connects intent, requirements, design, code, and evidence. You can inspect why a change exists, what was authorized, and what was verified, from the decision to build to the decision to ship.
 
-SE Harness requires Python 3.11 or later, uses no runtime dependency outside the standard library, and installs repository-local validation and Harness Explorer tooling without requiring an external service.
+**Agents operate within bounded authority. Verification stays independent. Decisions stay human.**
 
-[Live Explorer demonstration](https://mmzen.github.io/se_harness/) | [PyPI](https://pypi.org/project/se-harness/) | [Repository](https://github.com/mmzen/se_harness) | [Issues](https://github.com/mmzen/se_harness/issues) | [Releases](https://github.com/mmzen/se_harness/releases)
+[Live demo](https://mmzen.github.io/se_harness/) · [Get started](#get-started) · [Documentation](docs/notes/README.md) · [PyPI](https://pypi.org/project/se-harness/)
 
-## Who it is for
+## How it works today
 
-<!-- Target expertise: 5/10. -->
+1. **Define the change.** Record the desired outcome, requirements, design, and verification approach.
+2. **Approve the work.** A human approves a work order: a bounded plan for what may change.
+3. **Implement and check.** An agent works within that scope and retains evidence from the required checks.
+4. **Verify, then release.** An assurance owner judges the evidence for the exact candidate commit. A release owner makes a separate release decision.
 
-SE Harness is for teams where explaining why a change should be trusted matters as much as producing it:
+Independent assurance requires separation between implementation and verification. Automated checks support the human decisions.
 
-- teams adopting coding agents, where review and accountability—not code production—are becoming the bottleneck;
-- teams working on audited, safety-sensitive, security-sensitive, or high-impact systems that need durable traceability and evidence;
-- organizations seeking consistent engineering governance across repositories while preserving local policies;
-- maintainers of long-lived projects, including small teams and solo developers, where the future reviewer may be you in eighteen months.
+## A Virtual Twin of your Software
 
-It is less suitable for throwaway code or rapid experiments whose purpose is to discover the requirements, unless the associated risk justifies the additional discipline.
+Requirements and specifications often start as the blueprint, then drift as software evolves. Code becomes the de facto source of truth for what the system does and how it is built.
 
-Its strongest assurance comes from genuine role separation: implementation, verification, and release are decided by different accountable people. A solo owner still gains explicit intent, bounded scope, retained evidence, and durable history—but not independent assurance.
+Verity Plane's vision reverses that relationship: **the Virtual Twin is the source of truth and becomes the authoritative model of the intended software. Code is its implementation.** The Twin connects intent, requirements, behavior, architecture, and evidence in one graph.
 
-SE Harness structures evidence and decisions; it does not by itself certify regulatory compliance.
+We are building toward a clear contract: **change the Twin, and the code must follow.** Agents implement approved changes to the model; code is accepted only when independent verification provides evidence that it conforms. That evidence becomes part of the Twin, connecting the intended system to its verified implementation.
 
-## Install or upgrade
+## See the whole change
 
-SE Harness requires Python 3.11 or later. Install the released package in a dedicated virtual environment:
+Verity Plane Explorer lets you follow a change through its requirements, work, evidence, and decisions. Verity Plane uses it to document its own development.
 
-```powershell
-python -m venv .venv
-# Activate the environment using the command for your platform.
-python -m pip install --upgrade pip
+**Lineage**
+
+[![Verity Plane Explorer showing a work order linked to its purpose, requirements, and decision history](docs/images/harness-explorer-lineage.png)](https://mmzen.github.io/se_harness/)
+
+**Virtual Twin**
+
+[![Virtual Twin showing the artifact graph clustered by domain, with connections between engineering records](docs/images/harness-explorer-virtual-twin.png)](https://www.verityplane.ai/?view=graph)
+
+[Explore the live demo →](https://mmzen.github.io/se_harness/)
+
+## Get started
+
+Requires **Python 3.11+**. Runs on Windows, Linux, and macOS, with no Python runtime dependencies outside the standard library. No hosted service is required.
+
+For a new installation, create a tool environment **outside your repository** and install the released package:
+
+```sh
+# Linux / macOS
+python3 -m venv se-harness-env
+source se-harness-env/bin/activate
 python -m pip install se-harness
-harnessctl --version
 ```
-
-For a reproducible installation, select the exact release:
 
 ```powershell
-python -m pip install "se-harness==0.15.0"
+# Windows PowerShell
+python -m venv se-harness-env
+.\se-harness-env\Scripts\Activate.ps1
+python -m pip install se-harness
 ```
 
-Updating the package does **not** update harness-managed content already installed in a repository. Existing installations use a separate read-only plan followed by an explicitly authorized transactional apply. Installed-root mutations must run from an external released-evaluator environment matching the repository lock; candidate source and ambiguous or contaminated installs fail before writing. See [installation and safe upgrades](docs/notes/harness-installation-and-upgrades.md) for Windows, Linux, and macOS activation, launcher paths, exact-wheel upgrades, and the complete procedure.
+Then initialize a new project and check the installation:
 
-### Test an unreleased commit
-
-Successful candidate CI retains short-lived integration packages for exact
-`main` and pull-request commits. These wheels have unique commit-addressed
-versions, verified checksums, and Linux/Windows installation evidence. They are
-non-promotable test inputs—not releases or governing evaluators. See
-[testing a current commit with an integration package](docs/notes/integration-packages.md)
-for safe download, verification, isolated installation, disposable testing,
-expiration, and cleanup.
-
-## Start using it
-
-Choose `init` for an absent or empty repository, or `adopt` for an existing repository:
-
-```powershell
-harnessctl init C:\path\to\new-repository --project-name my-project
-harnessctl adopt C:\path\to\existing-repository --project-name my-project
+```sh
+harnessctl init my-project --project-name my-project
+harnessctl doctor my-project
 ```
 
-Then inspect the installed harness and its engineering information:
+For an existing project, use `harnessctl adopt path/to/repository --project-name my-project` instead of `init`.
 
-```powershell
-harnessctl doctor C:\path\to\repository
-harnessctl validate C:\path\to\repository
-harnessctl check C:\path\to\repository --artifact WO-...
-harnessctl check C:\path\to\repository --artifact WO-... --checkpoint start
-harnessctl transition C:\path\to\repository --set VREC-...=verified --decision VREC-...=assurance-owner
-harnessctl inspect C:\path\to\repository
-harnessctl dashboard C:\path\to\repository
-```
+`doctor` checks the installed harness. Next, record your project's commands and owners, then prepare its requirements, design, verification plan, and work order for approval. Follow the [getting-started guide](docs/notes/getting-started.md).
 
-`doctor` checks installed-harness integrity. `validate` checks the formal artifact graph. `check` without a checkpoint projects one selected WO, VREC, or RLS scope; with one it evaluates the selected scope, typed procedure, and executable gates and returns one concise canonical next step. `transition` plans explicit lifecycle changes by default; add `--apply` only after the accountable decision. `inspect` is explicitly repository-wide, summarizes current lifecycle attention, and never serves as selected restitution. `dashboard` generates the read-only Harness Explorer in `target/harness-dashboard/`. Serve that directory over HTTP—for example, `python -m http.server 8000 --directory target/harness-dashboard`—and open `http://localhost:8000/`; the progressive bundle intentionally does not run from `file://`.
+**Already using SE Harness?** Use the released version pinned by that repository. Updating the Python package leaves its managed files unchanged; follow the separate [repository upgrade procedure](docs/notes/harness-installation-and-upgrades.md).
 
-A standard repository installation includes two portable skills that complement `harnessctl`: `harness-orient` at `.agents/skills/harness-orient/` for [read-only agent orientation](docs/notes/harness-orient.md) without changing the repository, and the explicit-only `harness-operator-brief` for [clear operator communication](docs/notes/technical-communication.md). Codex discovers those canonical cores directly. Claude Code discovers same-named thin adapters under `.claude/skills/`, which load the canonical `.agents` core; one ships today, for `harness-orient`. The adapters do not copy the workflow or grant tools, permissions, or engineering authority. The earlier `harness-draft-change`, `harness-execute-work-order`, and `harness-prepare-assurance` writing skills were retired and no longer ship. They were designed as non-authoritative [Phase 4 evaluator clients](docs/notes/agentic-execution-phase4-skills.md) that prohibit direct governed-target writes and, on a released evaluator without the required capability, end in a zero-effect stop; the retained [Phase 3 MVP contract](docs/notes/agentic-execution-skills-mvp.md) and [repository host adapters](docs/notes/agentic-execution-host-adapters.md) notes record that design.
+## Go further
 
-Adoption preserves ordinary repository files and records bounded observations in `docs/engineering/ADOPTION_REPORT.md`; it does not invent or approve product intent. After either path, accountable owners record their build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md` and approve the first formal engineering chain. The harness does not scaffold, track, or gate that region.
+- [Understand the model](docs/notes/harness-overview.md)
+- [Follow a complete example](docs/notes/harness-lineage-example.md)
+- [Look up a command](docs/notes/harnessctl-reference.md)
+- [Develop and contribute](docs/notes/developing-se-harness.md)
 
-On GitHub, installation adds one dedicated managed `.github/workflows/engineering-harness.yml` beside any existing workflows. GitHub discovers and runs each workflow independently; repository owners separately decide whether the stable SE Harness check is required by branch protection or a ruleset.
-
-## What this looks like in practice
-
-Suppose you ask your coding agent:
-
-> Add per-customer API rate limiting. Preserve existing clients, return `429` with `Retry-After`, and prepare the engineering material for review before implementation.
-
-The agent drafts the requirements, design and verification approach, identifies significant decisions, and proposes a bounded work order. It waits for approval before changing code.
-
-> **Completed:** drafted the rate-limit packet and bounded `WO-RATE-001`.
->
-> **Current lifecycle state:** the packet is `draft`; implementation is not authorized.
->
-> **Recommended next step:** review the packet and approve it or request revisions.
->
-> **Human decision or approval required:** the named product, technical, assurance, and engineering owners decide the artifacts they own.
->
-> **Command or suggested response:** `Approve WO-RATE-001 and its governing artifacts for implementation.`
-
-> Approved. Implement the work order.
-
-The work order declares exact files and component-prefix paths. The agent implements only that scope in an isolated proposal workspace; the exact released evaluator builds and applies the admitted change bundle, performs the delegated lifecycle operations, retains evidence and receipts, and stops before Git. After a separately authorized exact candidate commit, assurance material binds that commit and returns the canonical restitution block without unrelated findings.
-An assurance owner judges the evidence; a release owner makes a later, separate
-decision.
-
-If a required check failed, the handoff would identify the diagnostic and safe retry, report `WO-RATE-001` as still `in_progress`, and say the formal state is unchanged. It would recommend remediation or escalation rather than imply completion.
-
-After an assurance owner verifies `VREC-RATE-001`, a later handoff may include **Alternative next steps:** request authorization to open or update the pull request, or—only with separate release-preparation authority—prepare a release record. The recommendation still names one preferred path and does not perform either action.
-
-```mermaid
-flowchart LR
-    HUMAN["Human-approved outcome"] --> DEF["Requirements and design"] --> WORK["Approved work"]
-    WORK --> AGENT["Agent implementation"] --> CANDIDATE["Evidence + exact commit"]
-    CANDIDATE --> VERIFY{"Human verification"} --> RELEASE{"Human release decision"}
-    EXPLORER["Harness Explorer"] -. "traceability and anomalies" .-> DEF
-    EXPLORER -. "scope" .-> WORK
-    EXPLORER -. "provenance" .-> CANDIDATE
-
-    classDef human fill:#1D4ED8,stroke:#93C5FD,color:#FFFFFF,stroke-width:2px
-    classDef engineering fill:#0F766E,stroke:#5EEAD4,color:#FFFFFF
-    classDef execution fill:#475569,stroke:#CBD5E1,color:#FFFFFF
-    classDef explorer fill:#334155,stroke:#E2E8F0,color:#FFFFFF
-    class HUMAN,VERIFY,RELEASE human
-    class DEF,WORK engineering
-    class AGENT,CANDIDATE execution
-    class EXPLORER explorer
-```
-
-When Mermaid is not rendered, the labels, decision shapes, dotted Explorer observations, and surrounding prose preserve the same authority and provenance story. Color is supplementary.
-
-### Harness Explorer in action
-
-The generated dashboard makes the repository's connected engineering evidence practical to review:
-
-Explore the [live release-bound demonstration](https://mmzen.github.io/se_harness/) generated from the governance of SE Harness itself. It is a derived, read-only promotional view; repository artifacts and accountable human decisions remain authoritative.
-
-**Overview — read the repository's trust posture: requirement coverage, graph integrity, the evaluator's own gate reading, release currency, attributed decisions, refusals on the record, and lead time from approval to implementation.**
-
-![Harness Explorer Overview showing the trust, governance, and flow indicators computed from the bundle](docs/images/harness-explorer-overview.png)
-
-**Lineage — follow one change through the six-stage pipeline from purpose to release, with every record's decision trail, proof block, and evidence beside it; the Virtual Twin shows the same artifacts as one constellation clustered by domain.**
-
-![Harness Explorer Lineage showing the six-stage board, the lit spine of one work order, and its decision trail](docs/images/harness-explorer-lineage.png)
-
-**Readiness — inspect the G0-G5 gate observations, quality-gate evidence, findings, and commit-bound provenance behind the next human decision.**
-
-![Harness Explorer Readiness showing quality-gate evidence and the pending accountable decision](docs/images/harness-explorer-readiness.png)
-
-These are derived, read-only views: they expose traceability, evidence, and anomalies without approving work, verifying a commit, or authorizing a release.
-
-## What you get
-
-- repository-native intent, requirements, specification, architecture, ADR, verification, work, evidence, and release lineage;
-- one managed instruction route for coding agents, with room for stricter repository-owned guidance;
-- one portable read-only orientation skill and three explicit-only, single-agent Phase 4 evaluator-client skills that prohibit direct target writes and stop at accountable decision points;
-- one machine-readable workflow contract for lifecycle transitions and canonical next actions;
-- deterministic integrity, preflight, graph-validation, CI, and provenance controls;
-- retained evidence and verification/release records bound to a clean exact candidate commit;
-- safe adoption and hash-based upgrades that preserve repository customization;
-- terminal inspection and Harness Explorer views answering: why work exists, whether its definition is connected, where anomalies exist, which revision is covered, and what readiness observations are available.
-
-The dashboard is derived evidence. It never approves work, verifies a commit, or releases software.
-
-## Who does what
-
-| Participant | Responsibility |
-| --- | --- |
-| Human owners | Approve intent and scope; decide significant architecture; judge evidence; authorize verification, release, publication, deployment, and operation. |
-| Coding agent | Draft artifacts; run preflight; implement approved work; execute repository checks; retain evidence; prepare ready verification and release records. |
-| Repository policy and hosting controls | Define commands, Git strategy, required checks, permissions, deployment, and operating constraints under accountable ownership. |
-
-Harness commands may prepare observations or `ready` proposals. They never commit, push, approve, verify, release, tag, publish, or deploy on their own.
-
-## Known limitations
-
-Normative gates use the exact `QG-*` IDs defined by managed
-`QUALITY_GATES.md`. Harness Explorer's G0-G5 labels are derived readiness
-groupings for navigation; they are not gate results and do not change selected
-scope. The [operational phasing](docs/notes/harness-operational-phasing.md)
-explains the distinction.
-
-## Learn more
-
-New to the project? Begin with [getting started](docs/notes/getting-started.md) and keep the [glossary](GLOSSARY.md) beside it.
-
-Then read the [overview](docs/notes/harness-overview.md), and use the [learning-notes index](docs/notes/README.md) for the conceptual model, operational timing, illustrative Git mapping, practical examples, safe upgrades, and complete command reference.
-
-The notes explain the system; they grant no authority. In an installed repository, `ENGINEERING_HARNESS.md` routes to the authoritative managed workflow, decision rights, quality gates, and traceability policy. Repository facts and product artifacts remain owner-controlled.
-
-## Developing SE Harness
-
-The PyPI path above is for released use. A source checkout and integration package are candidate development evidence, not the repository's released evaluator. Contributors should read [Developing SE Harness](docs/notes/developing-se-harness.md) for source setup, tests, repository structure, evaluator/candidate evidence separation, and release boundaries.
+[Report an issue](https://github.com/mmzen/se_harness/issues) · [Releases](https://github.com/mmzen/se_harness/releases) · [License](LICENSE)
