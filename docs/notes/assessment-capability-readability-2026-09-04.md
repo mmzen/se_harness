@@ -312,6 +312,16 @@ This note needs no work order.
 The recommendation is a front-matter field, the graph, advisory then
 blocking, and keep the layer.
 
+**Decided.** On 2026-09-04 the repository owner took the four decisions as
+recommended, with the words "i follow your recommendation": an `ability`
+front-matter field; the requirement list retired in favour of the graph,
+with the Explorer listing deriving requirements; advisory for one release,
+then blocking at approval; the capability layer kept and made cheap,
+revisited after one release of the new shape. The decision is recorded
+here because the decision artifact is not yet usable in this repository;
+the packet that implements it carries the decision into its work order's
+approval reason.
+
 ## What this note does not do
 
 It does not change a template, a rule, a capability or a gate. It does not
