@@ -320,7 +320,76 @@ INTENT_PATCHES: tuple[Patch, ...] = (
     ),
 )
 
-PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES, *INTENT_PATCHES)
+#: WO-TCM-008 (SPEC-TCM-005 TCM-RFC-006): a capability's ability line, its plain words and
+#: the requirements that derive from it, read from the graph; the lineage second stage
+#: shows the ability under the title. Kept apart for the same reason as the others.
+CAPABILITY_PATCHES: tuple[Patch, ...] = (
+    Patch(
+        "      outcome: a.outcome ? this.fixText(a.outcome) : false,\n",
+        "      outcome: a.outcome ? this.fixText(a.outcome) : false,\n"
+        "      ability: a.ability ? this.fixText(a.ability) : false,\n"
+        "      derives: (a.derived_requirements || []).map(id => ({ id, href: window.HarnessExplorer && window.HarnessExplorer.artifactHref ? window.HarnessExplorer.artifactHref(id) : false })),\n"
+        "      hasDerives: (a.derived_requirements || []).length > 0,\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Outcome</span>\n"
+        "      <span style=\"display:block;margin-top:6px;font-size:13.5px;line-height:1.6\">{{outcome}}</span>\n"
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Outcome</span>\n"
+        "      <span style=\"display:block;margin-top:6px;font-size:13.5px;line-height:1.6\">{{outcome}}</span>\n"
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n"
+        "  <sc-if value=\"{{ability}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "    <blockquote style=\"margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)\">\n"
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Ability</span>\n"
+        "      <span style=\"display:block;margin-top:6px;font-size:13.5px;line-height:1.6\">{{ability}}</span>\n"
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "      <sc-if value=\"{{hasDerives}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:10px;align-items:baseline\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Derives</span>\n"
+        "          <sc-for list=\"{{derives}}\" as=\"d\" hint-placeholder-count=\"3\">\n"
+        "            <a href=\"{{d.href}}\" style=\"font:12px var(--l-mono);color:var(--l-accent-deep);text-decoration:none\">{{d.id}}</a>\n"
+        "          </sc-for>\n"
+        "        </span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "            outcome: a.type === 'intent' && a.outcome ? this.fixText(a.outcome) : false,\n",
+        "            outcome: a.type === 'intent' && a.outcome ? this.fixText(a.outcome) : false,\n"
+        "            ability: a.type === 'capability' && a.ability ? this.fixText(a.ability) : false,\n",
+        1,
+        ("Lineage View",),
+    ),
+    Patch(
+        "                        <sc-if value=\"{{c.outcome}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "                          <span style=\"display:block;margin-top:4px;font-size:11.5px;line-height:1.35;color:var(--l-muted);overflow-wrap:anywhere\">{{c.outcome}}</span>\n"
+        "                        </sc-if>\n",
+        "                        <sc-if value=\"{{c.outcome}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "                          <span style=\"display:block;margin-top:4px;font-size:11.5px;line-height:1.35;color:var(--l-muted);overflow-wrap:anywhere\">{{c.outcome}}</span>\n"
+        "                        </sc-if>\n"
+        "                        <sc-if value=\"{{c.ability}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "                          <span style=\"display:block;margin-top:4px;font-size:11.5px;line-height:1.35;color:var(--l-muted);overflow-wrap:anywhere\">{{c.ability}}</span>\n"
+        "                        </sc-if>\n",
+        1,
+        ("Lineage View",),
+    ),
+)
+
+PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES, *INTENT_PATCHES, *CAPABILITY_PATCHES)
 
 
 def _read(relative: str) -> str:

@@ -283,6 +283,14 @@ INTENT_BODY_LIMIT = 200  # words
 INTENT_PROBLEM_WORD_LIMIT = 120
 INTENT_PROBLEM_SENTENCE_LIMIT = 5
 INTENT_CODE_IDENTIFIER_LIMIT = 2
+#: SPEC-TCM-005 TCM-RFC-002 and TCM-RFC-003: the reader-first capability budgets. The
+#: shared codes (W-AUT-005, -007, -008, -009) fire with these constants on a capability.
+CAPABILITY_ABILITY_LIMIT = 30  # words
+CAPABILITY_BODY_LIMIT = 150  # words
+CAPABILITY_NEED_WORD_LIMIT = 60
+CAPABILITY_NEED_SENTENCE_LIMIT = 3
+CAPABILITY_CODE_IDENTIFIER_LIMIT = 2
+_LEGACY_REQUIREMENT_LIST = ("Candidate requirements", "Derived requirements")
 _REPOSITORY_PATH_SPAN = re.compile(r"`[^`\s]*/[^`\s]*\.[A-Za-z0-9]{1,6}(?::\d+(?:-\d+)?)?`")
 _LINE_RANGE_SPAN = re.compile(r"`[^`]*:\d+(?:-\d+)?`")
 _ACCEPTANCE_VOCABULARY = re.compile(
@@ -340,6 +348,11 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
             intent_errors, intent_advisories = _intent_authoring(artifact, report_root)
             errors.extend(intent_errors)
             advisories.extend(intent_advisories)
+            continue
+        if artifact.artifact_type == "capability":
+            capability_errors, capability_advisories = _capability_authoring(artifact, report_root)
+            errors.extend(capability_errors)
+            advisories.extend(capability_advisories)
             continue
         if artifact.artifact_type != "requirement":
             continue
@@ -508,6 +521,63 @@ def _intent_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagn
                 if match is not None:
                     found.append(Diagnostic(path, "W-AUT-013",
                         f"success measure '{cells[0]}' is observed by {match.group(0)}; an acceptance check belongs in the verification contract", "maintenance"))
+    return errors, found
+
+
+def _capability_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-TCM-005 TCM-RFC-002 and TCM-RFC-003: the ability field and the capability draft advisories."""
+
+    errors: list[Diagnostic] = []
+    found: list[Diagnostic] = []
+    ability = artifact.metadata.get("ability")
+    if ability is not None and (not isinstance(ability, str) or not ability.strip()):
+        _add_error(errors, artifact, report_root, "E-AUT-002", "ability must be a non-empty string when present", plane="structure")
+    if artifact.status != "draft":
+        return errors, found
+    path = _display_path(artifact.path, report_root)
+    if not isinstance(ability, str) or not ability.strip():
+        found.append(Diagnostic(path, "W-AUT-016", "capability has no ability; one sentence names who can do what under which conditions", "maintenance"))
+    else:
+        ability_words = _word_count(ability)
+        lowered = {word.lower() for word in _WORD.findall(_prose(ability))}
+        if ability_words > CAPABILITY_ABILITY_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-016", f"ability is {ability_words} words; the budget is {CAPABILITY_ABILITY_LIMIT}", "maintenance"))
+        if "can" not in lowered:
+            found.append(Diagnostic(path, "W-AUT-016", "ability does not say what the actor can do; the sentence is actor, can, achievement, under conditions", "maintenance"))
+        if "under" not in lowered:
+            found.append(Diagnostic(path, "W-AUT-016", "ability names no condition; say under which conditions the actor can do it", "maintenance"))
+        ability_spans = len(_CODE_SPAN.findall(ability))
+        if ability_spans:
+            found.append(Diagnostic(path, "W-AUT-016", f"ability cites {ability_spans} code identifiers; the ability names what an actor can do, not how", "maintenance"))
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    body_words = _word_count(body)
+    if body_words > CAPABILITY_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {CAPABILITY_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    need = sections.get("Actor and need")
+    if need is not None:
+        need_words = _word_count(need)
+        need_sentences = len(_sentences(need))
+        if need_words > CAPABILITY_NEED_WORD_LIMIT or need_sentences > CAPABILITY_NEED_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-017",
+                f"Actor and need is {need_words} words in {need_sentences} sentences; the budget is {CAPABILITY_NEED_WORD_LIMIT} words or {CAPABILITY_NEED_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
+    if identifiers > CAPABILITY_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {CAPABILITY_CODE_IDENTIFIER_LIMIT}, the how belongs in the specification", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    legacy = [heading for heading in sections if heading in _LEGACY_REQUIREMENT_LIST]
+    if legacy:
+        found.append(Diagnostic(path, "W-AUT-018",
+            f"body carries a {legacy[0]} list; the requirements that derive from a capability are read from the graph and shown by the Explorer", "maintenance"))
     return errors, found
 
 

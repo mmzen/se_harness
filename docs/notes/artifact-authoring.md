@@ -90,3 +90,20 @@ transaction that adopts a released successor as this repository's evaluator.
 `ADR-AUT-001`: rules in a skill apply only while the skill runs; rules in a
 managed policy apply on every route, and rules in the validator apply
 whether anyone read the policy or not. No per-type writing skill is planned.
+
+## Capabilities
+
+`WO-TCM-008` (SPEC-TCM-005) gave the capability the same treatment. The
+template is an `ability` field, one sentence of at most 30 words with an
+actor, `can` and `under`, and three sections: `In plain words`, `Actor and
+need`, `Not decided here`. The `Capability statement`, `Boundaries`,
+`Outcomes` and `Candidate requirements` sections are gone: the statement is
+the field, the boundaries are `Not decided here`, the outcomes belong to
+the intent and the requirements, and what derives from a capability is read
+from the graph and shown by the Explorer under the ability. On capability
+drafts, `W-AUT-016` guards the ability, `W-AUT-017` the `Actor and need`
+budget (three sentences, 60 words), `W-AUT-018` a legacy requirement list,
+and the shared `W-AUT-005`, `W-AUT-007`, `W-AUT-008` and `W-AUT-009` fire
+with the capability budgets (150 words, 25 words, two identifiers). An
+`ability` that is present but empty is `E-AUT-002`. Approved capabilities
+are not rewritten.

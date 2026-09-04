@@ -165,18 +165,26 @@ class ReaderFirstRequirementTests(unittest.TestCase):
         code, output, error = self.invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         detail = next(
-            json.loads(p.read_text(encoding="utf-8"))
-            for p in (self.root / "target/harness-dashboard/data/artifacts").rglob("*")
-            if p.is_file() and '"REQ-002"' in p.read_text(encoding="utf-8")
+            candidate
+            for candidate in (
+                json.loads(p.read_text(encoding="utf-8"))
+                for p in (self.root / "target/harness-dashboard/data/artifacts").rglob("*")
+                if p.is_file()
+            )
+            if candidate.get("artifact", {}).get("id") == "REQ-002"
         )
         self.assertEqual(PLAIN, detail["artifact"]["plain_words"])
         self.write_requirement(body="\n## Why\n\n" + WHY + "\n")
         code, output, error = self.invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         detail = next(
-            json.loads(p.read_text(encoding="utf-8"))
-            for p in (self.root / "target/harness-dashboard/data/artifacts").rglob("*")
-            if p.is_file() and '"REQ-002"' in p.read_text(encoding="utf-8")
+            candidate
+            for candidate in (
+                json.loads(p.read_text(encoding="utf-8"))
+                for p in (self.root / "target/harness-dashboard/data/artifacts").rglob("*")
+                if p.is_file()
+            )
+            if candidate.get("artifact", {}).get("id") == "REQ-002"
         )
         self.assertNotIn("plain_words", detail["artifact"])
         template = (REPOSITORY_ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html").read_text(encoding="utf-8")
