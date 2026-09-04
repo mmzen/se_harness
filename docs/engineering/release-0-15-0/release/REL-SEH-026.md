@@ -134,7 +134,7 @@ orders.
 | `WO-CIP-006` | #321, #322 | member |
 | `WO-DCM-001` | #329, #330 | member |
 | `WO-TCM-004` | #331, #332 | member |
-| `WO-TCM-005` | #335, #336 | member (the packet #335 also carries `WO-TCM-006`'s and `WO-TCM-008`'s drafts) |
+| `WO-TCM-005` | #335, #336 | member (the packet #335 also carries `WO-TCM-006`'s draft) |
 | `WO-TCM-006` | #337 | member |
 | `WO-TCM-007` | #340, #341 | member |
 | `WO-TCM-008` | #342, #343 | member |
