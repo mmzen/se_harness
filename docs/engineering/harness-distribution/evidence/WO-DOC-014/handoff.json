@@ -1,0 +1,331 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-DOC-014",
+    "artifacts": [
+      "WO-DOC-014"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-DST-069",
+      "SPEC-DST-024",
+      "VER-DST-024"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/harness-distribution/evidence/WO-DOC-014/",
+      "docs/engineering/harness-distribution/README.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-069.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-024.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-024.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DOC-014.md",
+      "docs/images/harness-explorer-virtual-twin.png",
+      "README.md",
+      "tests/test_integration_package.py",
+      "tests/test_progressive_documentation.py",
+      "tests/test_public_onboarding.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/harness-distribution/evidence/WO-DOC-014/handoff.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-014/WO-DOC-014-handoff.md",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-014/WO-DOC-014-verification.md",
+      "docs/engineering/harness-distribution/README.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-069.md",
+      "docs/engineering/harness-distribution/specifications/SPEC-DST-024.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-024.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DOC-014.md",
+      "docs/images/harness-explorer-virtual-twin.png",
+      "README.md",
+      "tests/test_integration_package.py",
+      "tests/test_progressive_documentation.py",
+      "tests/test_public_onboarding.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DOC-014"
+              }
+            ],
+            "message": "WO-DOC-014 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-DOC-014"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DOC-014:[execution_scope]"
+              }
+            ],
+            "message": "WO-DOC-014 declares 11 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-DOC-014"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-DOC-014"
+              }
+            ],
+            "message": "All 13 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-DOC-014:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-DOC-014"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/harness-distribution/evidence/WO-DOC-014/WO-DOC-014-handoff.md."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "6ecd037586fda1c610d763defa52a36ead6a19fec4d838ffeec441dcc13a4e15",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-DOC-014."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-DOC-014",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DOC-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DOC-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DOC-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "An explicit completion decision permits only WO-DOC-014 to become implemented."
+        ],
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "engineering-owner",
+        "artifact": "WO-DOC-014",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-DOC-014 implemented."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-DOC-014",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-DOC-014",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 69
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-DOC-014",
+        "path": "docs/engineering/harness-distribution/evidence/WO-DOC-014/handoff.json",
+        "fields": [
+          "result_sha256"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-DOC-014."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-DOC-014 is in_progress."
+    ],
+    "decision_required": {
+      "decision_right": "DR-WO-COMPLETE",
+      "role": "engineering-owner",
+      "artifact": "WO-DOC-014",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+      "action": "whether the authorized implementation and evidence are complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-DOC-014 implemented."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "57807d0259b7bdecb657f6e0d4b9f1566c80d9a5360e02e90d42836c4e6dab57"
+}

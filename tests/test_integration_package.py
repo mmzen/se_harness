@@ -465,7 +465,11 @@ class IntegrationPackageContractTests(unittest.TestCase):
         ):
             self.assertIn(required, guide)
         self.assertIn("integration-packages.md", (REPOSITORY_ROOT / "docs" / "notes" / "README.md").read_text(encoding="utf-8"))
-        self.assertIn("integration packages", (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8").lower())
+        # SPEC-DST-024 keeps advanced operator routes in the linked notes index.
+        self.assertIn(
+            "](docs/notes/README.md)",
+            (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8"),
+        )
 
 
 if __name__ == "__main__":
