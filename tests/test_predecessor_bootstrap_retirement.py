@@ -201,6 +201,24 @@ AUT004_CANDIDATE_VALIDATOR_EDITS = (
 )
 AUT004_CANDIDATE_VALIDATOR_LINE_DELTA = 46
 
+#: WO-DCM-001 (SPEC-DCM-001): the candidate copy is the 0.14.0 root copy with the
+#: decision artifact's validation (kinds, options, relations, dispositions, standing
+#: deviations and the fifth lifecycle family), declared opcode by opcode.
+DCM001_CANDIDATE_VALIDATOR_EDITS = (
+    ('replace', 16, 1, 1, 'from collections import Counter, defaultdict'),
+    ('replace', 84, 1, 1, '_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision"}'),
+    ('replace', 121, 1, 1, '        raise RuntimeError("managed workflow contract must declare exactly the five lifecycle families")'),
+    ('replace', 198, 1, 1, '    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision"} else "definition"'),
+    ('insert', 259, 0, 2, '    ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},'),
+    ('insert', 260, 0, 5, ''),
+    ('insert', 1169, 0, 1, '        "decision": ("concerns", "blocks"),'),
+    ('insert', 2475, 0, 163, 'def _decision_against(artifact: Artifact) -> tuple[str, str] | None:'),
+    ('insert', 2598, 0, 1, '    decision_warnings: list[Diagnostic] = []'),
+    ('insert', 2627, 0, 2, '        decision_errors, decision_warnings = validate_decisions(artifacts, repository_root)'),
+    ('insert', 2647, 0, 1, '        *decision_warnings,'),
+)
+DCM001_CANDIDATE_VALIDATOR_LINE_DELTA = 175
+
 #: WO-LRE-002 (SPEC-LRE-002): the candidate copy is the 0.11.0 root copy with
 #: the WO-ECP-018 insertions, the WO-AUT-004 advisory class and the legacy
 #: release-evidence machinery removed, declared opcode by opcode.
@@ -532,6 +550,14 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # candidate template byte for byte; the deletion ledger below describes the
             # 0.7.1 root and is retained for that state only.
             if "validate_agentic_delegations" not in self.root_text:
+                if "validate_decisions" in self.candidate_text and "validate_decisions" not in self.root_text:
+                    # WO-DCM-001 (SPEC-DCM-001): the candidate copy is the 0.14.0 root copy with
+                    # the decision artifact's validation, declared opcode by opcode; a root
+                    # released with it takes the equality branch below.
+                    self._assert_root_plus_declared_edits(
+                        DCM001_CANDIDATE_VALIDATOR_EDITS, DCM001_CANDIDATE_VALIDATOR_LINE_DELTA
+                    )
+                    return
                 if "validate_work_order_delegation" in self.root_text:
                     self.assertEqual(self.candidate_text, self.root_text)
                     return

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -111,6 +112,19 @@ class ValidationTaxonomyTests(unittest.TestCase):
             retained = [line for i, line in enumerate(released_lines) if not (start <= i < end)]
             candidate_lines = set(canonical_quality.splitlines())
             self.assertEqual([], [line for line in retained if line not in candidate_lines])
+        elif "`scope`" in quality and "decision_gate_clear" not in quality:
+            # WO-DCM-001 (SPEC-DCM-001): the candidate template adds the
+            # `decision_gate_clear` evaluator row, one `QGP-G*-DECISION` predicate per
+            # gate and the decision family's binding row. A root released before them
+            # lacks exactly those additions, declared here.
+            decision_token = re.compile(r", `QGP-G[0-9A-Z]+-DECISION`")
+            reduced = [
+                decision_token.sub("", line)
+                for line in canonical_quality.splitlines()
+                if not line.startswith(("| `decision_gate_clear` |", "| decision |"))
+            ]
+            self.assertEqual(reduced, quality.splitlines())
+            self.assertIn("| `decision_gate_clear` |", canonical_quality)
         elif "`scope`" in quality:
             # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
             self.assertEqual(canonical_quality, quality)

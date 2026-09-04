@@ -142,7 +142,17 @@ class DashboardWebUIContractTests(unittest.TestCase):
             with path.open(encoding="utf-8") as handle:  # universal newlines: CRLF and LF compare equal
                 return handle.read()
 
-        self.assertEqual(normalized(self.canonical), normalized(self.template))
+        root = normalized(self.template)
+        if "openDecs" in root:
+            self.assertEqual(normalized(self.canonical), root)
+            return
+        # WO-DCM-001 (SPEC-DCM-001 rule 13): the candidate template renders decisions;
+        # a root released before them is exactly the build without the decision
+        # patches, and that divergence is declared here rather than hidden.
+        from repository_tools.explorer_design import build_explorer_template as builder
+
+        self.assertIn("openDecs", normalized(self.canonical))
+        self.assertEqual(builder.build(patches=builder.BASE_PATCHES), root)
 
     def test_candidate_topology_target_is_independent_from_the_managed_root(self) -> None:
         candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(
@@ -429,6 +439,9 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 "delegated_records": 1,
                 "delegated_artifacts": ["VREC-TST-001", "WO-TST-001"],
                 "lead_times": [{"id": "WO-TST-001", "hours": 1.5}],
+                "decisions_open": 0,
+                "decisions_decided": 0,
+                "decision_dispose_times": [],
                 "released_work_orders": 2,
                 "released_work_orders_verified": 1,
                 "latest_release": {
@@ -448,7 +461,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             metrics,
         )
         self.assertEqual(
-            {"lifecycle_events": 0, "unattributed_events": 0, "decided_by": {}, "delegated_transitions": 0, "delegated_records": 0, "delegated_artifacts": [], "lead_times": [], "released_work_orders": 0, "released_work_orders_verified": 0, "latest_release": None, "release_arc": None},
+            {"lifecycle_events": 0, "unattributed_events": 0, "decided_by": {}, "delegated_transitions": 0, "delegated_records": 0, "delegated_artifacts": [], "lead_times": [], "decisions_open": 0, "decisions_decided": 0, "decision_dispose_times": [], "released_work_orders": 0, "released_work_orders_verified": 0, "latest_release": None, "release_arc": None},
             GENERATOR.build_explorer_metrics({"artifacts": [], "relations": []}),
         )
 

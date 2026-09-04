@@ -676,6 +676,8 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return authoring_ready(context.artifact)
     if name == "release_unit_ready":
         return release_unit_ready(context.artifact, context.root, context.catalog)
+    if name == "decision_gate_clear":
+        return decision_gate_clear(context)
     raise ContractError(f"unknown predicate evaluator {name}")
 
 
@@ -889,7 +891,7 @@ def check_workflow(
     if primary is None:
         raise HarnessError(f"WEX210: unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in {"work_order", "verification_record", "release_record"}:
-        raise HarnessError("WEX210: check accepts only WO, VREC, or RLS artifacts")
+        raise HarnessError("WEX210: check --checkpoint accepts only WO, VREC, or RLS artifacts (a decision is disposed with harnessctl decide)")
     if checkpoint == "scope" and primary.artifact_type != "work_order":
         raise HarnessError("WEX210: the scope checkpoint applies only to a work order")
     governing, dependencies = project_scope(catalog, primary)
@@ -1305,6 +1307,9 @@ _DEFINITION_TYPES = {
 }
 
 
+_DECISION_LINE = re.compile(r"^-?\s*`?DEC-(?:[A-Z0-9]+-)*\d{3}`?(?:\s*\((?:open|deferred|decided|withdrawn)\))?\.?$")
+
+
 def authoring_ready(artifact: Any) -> tuple[str, str]:
     """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
 
@@ -1321,14 +1326,70 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
     match = _PLACEHOLDER.search(prose)
     if match is not None:
         return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
-    lines = prose.split("\n")
+    # the section is read with its inline code intact: the ids are written as `DEC-...`
+    lines = _FENCE.sub("", text.replace("\r\n", "\n")).split("\n")
     for index, line in enumerate(lines):
         if line.strip() == "## Open decisions":
-            body = next((item.strip() for item in lines[index + 1:] if item.strip() and not item.startswith("## ")), "")
-            if body not in {"None", "None."}:
-                return "fail", f"{artifact.artifact_id} has an open decision: {body[:120]}"
+            body_lines = []
+            for item in lines[index + 1:]:
+                if item.startswith("## "):
+                    break
+                if item.strip():
+                    body_lines.append(item.strip())
+            body = body_lines[0] if body_lines else ""
+            # SPEC-DCM-001 rule 11: the section reads None, or lists decision ids.
+            if body not in {"None", "None."} and not all(_DECISION_LINE.fullmatch(line) for line in body_lines):
+                return "fail", (
+                    f"E-DCM-004: {artifact.artifact_id} has an open decision written as prose: {body[:120]} "
+                    f"(the Open decisions section reads exactly None, or lists DEC- identifiers)"
+                )
             break
     return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
+
+
+def blocking_decisions(catalog: Mapping[str, Any], artifact: Any, target: str | None) -> list[Any]:
+    """Decisions that block `artifact` now (SPEC-DCM-001 rule 5).
+
+    An `open` decision naming the artifact in `blocks` always blocks. A
+    `deferred` one blocks unless its scope admits the requested transition;
+    without a requested transition it does not block.
+    """
+
+    from se_harness.decisions import deferral_scope, scope_admits
+
+    hits: list[Any] = []
+    for candidate in catalog.values():
+        if getattr(candidate, "artifact_type", None) != "decision":
+            continue
+        relations = candidate.relations if isinstance(getattr(candidate, "relations", None), Mapping) else {}
+        blocked = relations.get("blocks", [])
+        if not isinstance(blocked, list) or artifact.artifact_id not in blocked:
+            continue
+        if candidate.status == "open":
+            hits.append(candidate)
+        elif candidate.status == "deferred" and target is not None:
+            if not scope_admits(deferral_scope(candidate), artifact.artifact_id, artifact.status, target):
+                hits.append(candidate)
+    return sorted(hits, key=lambda item: item.artifact_id)
+
+
+def decision_gate_clear(context: CheckpointContext) -> tuple[str, str]:
+    """QGP-*-DECISION: no open or unscoped deferred decision blocks the selected artifact."""
+
+    from se_harness.decisions import declared_options, deciding_roles
+
+    hits = blocking_decisions(context.catalog, context.artifact, context.target)
+    if not hits:
+        return "pass", f"No open decision blocks {context.artifact.artifact_id}."
+    first = hits[0]
+    question = str(first.metadata.get("question") or "").strip()
+    options = "; ".join(f"{item['id']}: {item['label']}" for item in declared_options(first)) or "none declared"
+    roles = ", ".join(sorted(deciding_roles(first, context.catalog))) or "the owner of the blocked artifact"
+    return "fail", (
+        f"{first.artifact_id} is {first.status} and blocks {context.artifact.artifact_id}: {question} "
+        f"Options: {options}. Decider: {roles}. "
+        f"Next: harnessctl decide . --artifact {first.artifact_id} --option OPTION-ID --decision ROLE --reason TEXT"
+    )
 
 
 def release_unit_ready(artifact: Any, root: Path, catalog: Mapping[str, Any]) -> tuple[str, str]:

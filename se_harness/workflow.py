@@ -31,7 +31,7 @@ from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
 
 
-PRIMARY_TYPES = {"work_order", "verification_record", "release_record"}
+PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "decision"}
 DEFINITION_TYPES = {
     "intent",
     "capability",
@@ -212,7 +212,15 @@ def project_scope(catalog: Mapping[str, Any], primary: Any) -> tuple[set[str], s
                 upstream, _ = _work_scope(catalog, catalog[work_id])
                 governing.update(upstream)
         return governing, set()
-    raise HarnessError("check accepts only WO, VREC, or RLS artifacts")
+    if primary.artifact_type == "decision":
+        from se_harness.decisions import against_reference
+
+        governing = set().union(_targets(primary, "concerns"), _targets(primary, "blocks"), _targets(primary, "produces"))
+        reference = against_reference(primary)
+        if reference is not None:
+            governing.add(reference[0])
+        return governing, set()
+    raise HarnessError("check accepts only WO, VREC, RLS, or DEC artifacts")
 
 
 def _diagnostic(item: Any) -> dict[str, str]:
@@ -258,7 +266,7 @@ def project_selected(
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in PRIMARY_TYPES:
-        raise HarnessError("check accepts only WO, VREC, or RLS artifacts")
+        raise HarnessError("check accepts only WO, VREC, RLS, or DEC artifacts")
     governing, dependencies = project_scope(catalog, primary)
     scope_paths = {
         catalog[item].path.resolve()
@@ -421,6 +429,29 @@ def _set_relation(lines: list[str], relation: str, values: list[str]) -> None:
     lines.insert(end, encoded)
 
 
+def _set_disposition(lines: list[str], fields: Mapping[str, Any]) -> None:
+    """Write the decision's `[disposition]` table before its lifecycle events (SPEC-DCM-001 rule 6)."""
+
+    start = next((index for index, line in enumerate(lines) if line.strip() == "[disposition]"), None)
+    if start is not None:
+        end = next((index for index in range(start + 1, len(lines)) if lines[index].startswith("[")), len(lines))
+        del lines[start:end]
+    insert_at = next((index for index, line in enumerate(lines) if line.strip() == "[[lifecycle_events]]"), len(lines))
+    while insert_at > 0 and lines[insert_at - 1] == "":
+        insert_at -= 1
+    rendered = ["", "[disposition]"]
+    for key in ("option", "label", "decided_by", "decided_at", "reason", "revisit", "scope"):
+        value = fields.get(key)
+        if value is None:
+            continue
+        if isinstance(value, list):
+            rendered.append(f"{key} = [" + ", ".join(json.dumps(item) for item in value) + "]")
+        else:
+            rendered.append(f"{key} = {json.dumps(value)}")
+    rendered.append("")
+    lines[insert_at:insert_at] = rendered
+
+
 def _append_event(lines: list[str], source: str, target: str, actor: str, now: str, reason: str | None) -> None:
     if lines and lines[-1] != "":
         lines.append("")
@@ -435,12 +466,24 @@ def _append_event(lines: list[str], source: str, target: str, actor: str, now: s
         lines.append(f"reason = {json.dumps(reason)}")
 
 
-def _mutate(data: bytes, artifact: Any, target: str, actor: str, reason: str | None, now: str) -> tuple[bytes, tuple[str, ...]]:
+def _mutate(
+    data: bytes,
+    artifact: Any,
+    target: str,
+    actor: str,
+    reason: str | None,
+    now: str,
+    disposition: Mapping[str, Any] | None = None,
+) -> tuple[bytes, tuple[str, ...]]:
     front, body, newline, opening = _split_document(data)
     fields = {"status", "updated", "lifecycle_events"}
     _set_scalar(front, "status", target)
     _set_scalar(front, "updated", now[:10])
-    if target == "verified" and artifact.artifact_type == "verification_record":
+    if artifact.artifact_type == "decision":
+        assert disposition is not None
+        _set_disposition(front, {**disposition, "decided_at": now})
+        fields.add("disposition")
+    elif target == "verified" and artifact.artifact_type == "verification_record":
         if "prepared_at" in artifact.metadata or "verified_at" not in artifact.metadata:
             _set_scalar(front, "verified_at", now)
             fields.add("verified_at")
@@ -494,12 +537,40 @@ def _revision_policy(root: Path) -> dict[str, bool]:
     }
 
 
-def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: str | None) -> None:
+def _validate_edge(
+    root: Path,
+    artifact: Any,
+    target: str,
+    actor: str,
+    reason: str | None,
+    catalog: Mapping[str, Any] | None = None,
+    disposition: Mapping[str, Any] | None = None,
+) -> Mapping[str, Any] | None:
     family = _family(artifact.artifact_type)
     row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
     if row is None or target not in row.transitions_to:
         raise PreconditionError("QGS-EDGE", f"transition {artifact.artifact_id}: {artifact.status} -> {target} is not allowed")
     _assertion(actor, f"decision actor for {artifact.artifact_id}", limit=128)
+    if artifact.artifact_type == "decision":
+        # SPEC-DCM-001 rules 6 to 8: a decision is disposed through `decide`, which
+        # supplies the option, the scope and the revisit the transition records;
+        # without them only the lifecycle edge is checked (the planner refuses).
+        if disposition is None:
+            return None
+        from se_harness.decisions import validate_disposition_request
+
+        if reason is not None:
+            _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
+        return validate_disposition_request(
+            artifact,
+            catalog or {},
+            target=target,
+            option=disposition.get("option"),
+            actor=actor,
+            reason=reason,
+            revisit=disposition.get("revisit"),
+            scope=tuple(disposition.get("scope") or ()),
+        )
     if target in {"rejected", "superseded"}:
         if reason is None:
             detail = "successor VREC ID" if target == "superseded" else "rejection reason"
@@ -512,6 +583,7 @@ def _validate_edge(root: Path, artifact: Any, target: str, actor: str, reason: s
         setting = "required_for_verified_work" if target == "verified" else "required_for_release"
         if not policy[setting]:
             raise PreconditionError("QGS-EDGE", f"work order transition to {target} is not enabled by revision provenance policy")
+    return None
 
 
 def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> list[Any]:
@@ -527,6 +599,9 @@ def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> lis
     errors.extend(assessment_errors)
     errors.extend(validator.validate_work_order_assurance(artifacts, root))
     errors.extend(validator.validate_work_order_execution_scope(artifacts, root))
+    if hasattr(validator, "validate_decisions"):
+        decision_errors, _ = validator.validate_decisions(artifacts, root)
+        errors.extend(decision_errors)
     errors.extend(validator.validate_revision_consistency(
         artifacts,
         root,
@@ -668,8 +743,10 @@ def plan_transition(
     reasons: Mapping[str, str],
     *,
     apply: bool = False,
+    dispositions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> TransitionPlan:
     root = ensure_target(repository, must_exist=True)
+    dispositions = dict(dispositions or {})
     if not transitions:
         raise HarnessError("at least one --set ID=STATUS is required")
     if set(decisions) != set(transitions):
@@ -719,7 +796,13 @@ def plan_transition(
         artifact = catalog.get(artifact_id)
         if artifact is None:
             raise HarnessError(f"unknown artifact ID: {artifact_id}")
-        _validate_edge(root, artifact, target, decisions[artifact_id], reasons.get(artifact_id))
+        disposition_fields = _validate_edge(
+            root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog, dispositions.get(artifact_id)
+        )
+        if artifact.artifact_type == "decision" and disposition_fields is None:
+            raise HarnessError(
+                f"transition {artifact_id}: a decision is disposed with harnessctl decide . --artifact {artifact_id} --option OPTION-ID --decision ROLE --reason TEXT"
+            )
         if decisions[artifact_id] == DELEGATED_ROLE:
             # SPEC-ECP-006 ECP-DLG-002/-003/-005/-006/-007: the delegated route.
             right = DELEGATED_TRANSITIONS.get((_family(artifact.artifact_type), artifact.status, target))
@@ -746,6 +829,7 @@ def plan_transition(
             decisions[artifact_id],
             effective_reasons.get(artifact_id),
             rendered_now,
+            disposition_fields,
         )
         replacements[path.resolve()] = replacement
         writes.append(PlannedWrite(artifact_id, path, original, replacement, fields))

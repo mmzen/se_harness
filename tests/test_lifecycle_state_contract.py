@@ -57,6 +57,12 @@ EXPECTED = {
         "released": ((), True, True, False, True, "none"),
         "rejected": ((), False, False, False, True, "required"),
     },
+    "decision": {
+        "open": (("decided", "deferred", "withdrawn"), False, False, True, True, "none"),
+        "deferred": (("decided", "withdrawn"), False, False, True, True, "none"),
+        "decided": ((), False, False, False, True, "none"),
+        "withdrawn": ((), False, False, False, True, "none"),
+    },
 }
 
 
@@ -116,6 +122,7 @@ class LifecycleStateContractTests(unittest.TestCase):
             "work_order": "work_order",
             "verification_record": "verification_record",
             "release_record": "release_record",
+            "decision": "decision",
         }
         for family, states in LIFECYCLE_REGISTRY.items():
             for status, row in states.items():

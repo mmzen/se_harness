@@ -602,6 +602,37 @@ def _transition(args: argparse.Namespace) -> int:
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
 
+def _decide(args: argparse.Namespace) -> int:
+    from se_harness.decisions import dispose_decision
+
+    try:
+        plan = dispose_decision(
+            Path(args.target),
+            args.artifact,
+            option=args.option,
+            actor=args.decision,
+            reason=args.reason,
+            defer=bool(args.defer),
+            withdraw=bool(args.withdraw),
+            scope=tuple(args.scope or ()),
+            revisit=args.revisit,
+            apply=bool(args.apply),
+        )
+        result = plan.result
+    except HarnessError as exc:
+        if str(exc).startswith("mutation guard "):
+            raise
+        result = failed_result(
+            "decide",
+            args.artifact,
+            str(exc),
+            code=_refusal_code(exc),
+            repository_blocker=isinstance(exc, RepositoryWorkflowError),
+        )
+    print(_render_selected_result(result, args), end="")
+    return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
 def _scaffold_domain(args: argparse.Namespace) -> int:
     changes = scaffold_domain(
         Path(args.target),
@@ -924,6 +955,20 @@ def build_parser() -> argparse.ArgumentParser:
     transition.add_argument("--apply", action="store_true", help="apply the exact validated transaction; default is read-only planning")
     transition.add_argument("--json", action="store_true")
     transition.set_defaults(handler=_transition)
+
+    decide = commands.add_parser("decide", help="dispose one pending decision with a declared option, under DR-DECISION-DISPOSE")
+    decide.add_argument("target", nargs="?", default=".")
+    decide.add_argument("--artifact", required=True, help="the decision to dispose")
+    decide.add_argument("--option", help="the declared option identifier that answers the decision")
+    decide.add_argument("--decision", required=True, help="the accountable role disposing the decision")
+    decide.add_argument("--reason", help="the verbatim answer; required")
+    decide.add_argument("--defer", action="store_true", help="defer instead of deciding; needs --scope and --revisit")
+    decide.add_argument("--scope", action="append", help="ARTIFACT-ID:FROM-TO transition a deferral admits; repeat per transition")
+    decide.add_argument("--revisit", help="the release, date, or artifact state at which the decision is revisited; required for --defer and for accepting a deviation")
+    decide.add_argument("--withdraw", action="store_true", help="withdraw the decision because the question no longer applies")
+    decide.add_argument("--apply", action="store_true", help="apply the disposition; default is read-only planning")
+    decide.add_argument("--json", action="store_true")
+    decide.set_defaults(handler=_decide)
 
     select_work = commands.add_parser(
         "select-work-order",

@@ -13,7 +13,7 @@ import importlib.util
 import json
 import re
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path, PurePosixPath
@@ -81,7 +81,7 @@ class LifecycleStatePolicy:
     predecessor_adapter: str
 
 
-_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record"}
+_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision"}
 _LIFECYCLE_FIELDS = {
     "transitions_to",
     "grants_authority",
@@ -118,7 +118,7 @@ def _load_workflow_lifecycles() -> MappingProxyType:
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("lifecycles")
     if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
-        raise RuntimeError("managed workflow contract must declare exactly the four lifecycle families")
+        raise RuntimeError("managed workflow contract must declare exactly the five lifecycle families")
     lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
     for family in sorted(_LIFECYCLE_FAMILIES):
         raw_states = source.get(family)
@@ -195,7 +195,7 @@ ACTIVE_COVERAGE_STATUSES = frozenset({
 
 
 def _lifecycle_family(artifact_type: str) -> str:
-    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record"} else "definition"
+    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision"} else "definition"
 
 
 def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
@@ -256,7 +256,14 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("release_record", "satisfies"): {"release_contract"},
     ("release_record", "includes_verification"): {"verification_record"},
     ("release_record", "releases_work"): {"work_order"},
+    ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
+    ("decision", "produces"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
 }
+
+#: SPEC-DCM-001 rules 2 and 3: the decision kinds and the closed option set of a deviation.
+DECISION_KINDS = ("question", "deviation")
+DEVIATION_OPTIONS = frozenset({"amend", "supersede", "accept", "stop"})
+DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
 
 
 AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
@@ -1166,6 +1173,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "verification_record": ("verifies_work_order", "conforms_to"),
         "release_record": ("satisfies", "includes_verification", "releases_work"),
         "operating_contract": ("assures",),
+        "decision": ("concerns", "blocks"),
     }
 
     for artifact in artifacts:
@@ -2472,6 +2480,169 @@ def validate_decision_assessments(
     return errors, warnings
 
 
+def _decision_against(artifact: Artifact) -> tuple[str, str] | None:
+    value = artifact.metadata.get("against")
+    if not isinstance(value, str):
+        return None
+    match = re.fullmatch(r"([A-Z][A-Z0-9-]*-\d{3})#([A-Za-z0-9._-]+)", value.strip())
+    return (match.group(1), match.group(2)) if match else None
+
+
+def _decision_options(artifact: Artifact) -> list[dict[str, str]]:
+    raw = artifact.metadata.get("options")
+    if not isinstance(raw, list):
+        return []
+    return [
+        {"id": item["id"], "label": item["label"]}
+        for item in raw
+        if isinstance(item, dict) and isinstance(item.get("id"), str) and isinstance(item.get("label"), str)
+    ]
+
+
+def standing_deviations(artifacts: list[Artifact]) -> dict[str, list[str]]:
+    """Artifact id -> accepted deviations standing on it (SPEC-DCM-001 rule 9).
+
+    An accepted deviation stands on the specification it departs from, on every
+    work order it concerns, and on every verification or release record whose
+    covered work includes one of those work orders, until a later decided
+    deviation against the same rule chose `amend` or `supersede`.
+    """
+
+    closed_rules: set[str] = set()
+    accepted: list[Artifact] = []
+    for artifact in artifacts:
+        if artifact.artifact_type != "decision" or artifact.metadata.get("kind") != "deviation":
+            continue
+        disposition = artifact.metadata.get("disposition")
+        option = disposition.get("option") if isinstance(disposition, dict) else None
+        reference = _decision_against(artifact)
+        if artifact.status != "decided" or reference is None:
+            continue
+        if option in {"amend", "supersede"}:
+            closed_rules.add(f"{reference[0]}#{reference[1]}")
+        elif option == "accept":
+            accepted.append(artifact)
+    standing: dict[str, set[str]] = defaultdict(set)
+    for artifact in accepted:
+        reference = _decision_against(artifact)
+        assert reference is not None
+        if f"{reference[0]}#{reference[1]}" in closed_rules:
+            continue
+        standing[reference[0]].add(artifact.artifact_id)
+        relations = artifact.metadata.get("relations", {})
+        concerned = relations.get("concerns", []) if isinstance(relations, dict) else []
+        work_orders = {item for item in concerned if isinstance(item, str) and item.startswith("WO-")}
+        for work_order in work_orders:
+            standing[work_order].add(artifact.artifact_id)
+        for record in artifacts:
+            if record.artifact_type not in {"verification_record", "release_record"}:
+                continue
+            record_relations = record.metadata.get("relations", {})
+            if not isinstance(record_relations, dict):
+                continue
+            covered = set()
+            for relation in ("verifies_work_order", "releases_work"):
+                values = record_relations.get(relation, [])
+                covered.update(item for item in values if isinstance(item, str)) if isinstance(values, list) else None
+            if covered & work_orders:
+                standing[record.artifact_id].add(artifact.artifact_id)
+    return {key: sorted(value) for key, value in sorted(standing.items())}
+
+
+def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-DCM-001 rules 2-4, 6, 8, 10: decision fields, options, relations, dispositions, revisits."""
+
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    catalog = {artifact.artifact_id: artifact for artifact in artifacts if artifact.artifact_id != "<unknown>"}
+    accepted_by_rule: dict[str, list[str]] = defaultdict(list)
+    released_versions = {
+        str(artifact.metadata.get("version"))
+        for artifact in artifacts
+        if artifact.artifact_type == "release_record" and artifact.status == "released" and artifact.metadata.get("version")
+    }
+    for artifact in artifacts:
+        if artifact.artifact_type != "decision":
+            continue
+        kind = artifact.metadata.get("kind")
+        if kind not in DECISION_KINDS:
+            _add_error(errors, artifact, report_root, "E-DCM-002", "decision kind must be question or deviation", plane="structure")
+            continue
+        for field in ("question", "raised_by", "recommendation"):
+            if not isinstance(artifact.metadata.get(field), str) or not str(artifact.metadata.get(field)).strip():
+                _add_error(errors, artifact, report_root, "E-DCM-002", f"decision field '{field}' must be a non-empty string", plane="structure")
+        options = _decision_options(artifact)
+        option_ids = [item["id"] for item in options]
+        if len(options) < 2 or len(set(option_ids)) != len(option_ids):
+            _add_error(errors, artifact, report_root, "E-DCM-002", "a decision declares at least two options with distinct ids and labels", plane="structure")
+        recommendation = artifact.metadata.get("recommendation")
+        if isinstance(recommendation, str) and option_ids and recommendation not in option_ids:
+            _add_error(errors, artifact, report_root, "E-DCM-002", f"recommendation '{recommendation}' is not a declared option", plane="structure")
+        reference = _decision_against(artifact)
+        if kind == "deviation":
+            if reference is None:
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
+            elif reference[0] not in catalog:
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
+            elif catalog[reference[0]].artifact_type != "specification":
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
+            if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation records the observed fact in 'observed'", plane="structure")
+            if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
+        relations = artifact.metadata.get("relations", {})
+        relations = relations if isinstance(relations, dict) else {}
+        blocked = relations.get("blocks", []) if isinstance(relations.get("blocks"), list) else []
+        concerned = relations.get("concerns", []) if isinstance(relations.get("concerns"), list) else []
+        if not blocked:
+            _add_error(errors, artifact, report_root, "E-DCM-001", "a decision blocks at least one artifact", plane="governance")
+        for target in blocked:
+            if isinstance(target, str) and target not in concerned:
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"blocked artifact '{target}' is not also in concerns", plane="governance")
+        disposition = artifact.metadata.get("disposition")
+        events = artifact.metadata.get("lifecycle_events")
+        if artifact.status in DECISION_TERMINAL or artifact.status == "deferred":
+            if not isinstance(disposition, dict):
+                _add_error(errors, artifact, report_root, "E-DCM-003", f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
+            else:
+                if not isinstance(events, list) or not events:
+                    _add_error(errors, artifact, report_root, "E-DCM-003", "a disposition without a lifecycle event was written by hand", plane="governance")
+                option = disposition.get("option")
+                if artifact.status == "decided" and option not in option_ids:
+                    _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition option '{option}' is not a declared option", plane="governance")
+                for field in ("decided_by", "decided_at", "reason", "label"):
+                    if not isinstance(disposition.get(field), str) or not disposition[field].strip():
+                        _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition field '{field}' must be a non-empty string", plane="governance")
+                if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
+                    _add_error(errors, artifact, report_root, "E-DCM-003", "a deferred decision records its scope and its revisit trigger", plane="governance")
+                if artifact.status == "decided" and kind == "deviation" and option == "accept":
+                    revisit = disposition.get("revisit")
+                    if not isinstance(revisit, str) or not revisit.strip():
+                        _add_error(errors, artifact, report_root, "E-DCM-003", "an accepted deviation records its revisit trigger", plane="governance")
+                    elif reference is not None:
+                        rule = f"{reference[0]}#{reference[1]}"
+                        accepted_by_rule[rule].append(artifact.artifact_id)
+                        if any(f"v{version}" in revisit or version in revisit for version in released_versions):
+                            warnings.append(Diagnostic(
+                                _display_path(catalog[reference[0]].path, report_root) if reference[0] in catalog else _display_path(artifact.path, report_root),
+                                "W-DCM-001",
+                                f"accepted deviation {artifact.artifact_id} against {rule} is past its revisit '{revisit}'; amend or supersede the rule, or accept again with a new trigger",
+                                "maintenance",
+                            ))
+        elif isinstance(disposition, dict) and artifact.status == "open":
+            _add_error(errors, artifact, report_root, "E-DCM-003", "an open decision carries no disposition", plane="governance")
+    for rule, decisions in sorted(accepted_by_rule.items()):
+        if len(decisions) >= 2:
+            target = catalog.get(rule.split("#", 1)[0])
+            warnings.append(Diagnostic(
+                _display_path(target.path, report_root) if target is not None else rule,
+                "W-DCM-002",
+                f"{len(decisions)} accepted deviations stand against {rule} ({', '.join(decisions)}); the rule, not the implementations, is probably wrong",
+                "maintenance",
+            ))
+    return errors, warnings
+
+
 def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     active_specs = [
@@ -2595,6 +2766,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     assessment_warnings: list[Diagnostic] = []
     traceability_warnings: list[Diagnostic] = []
     authoring_warnings: list[Diagnostic] = []
+    decision_warnings: list[Diagnostic] = []
     if not selected_artifact_root.exists():
         errors.append(
             Diagnostic(
@@ -2624,6 +2796,8 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_work_order_assurance(artifacts, repository_root))
         errors.extend(validate_work_order_execution_scope(artifacts, repository_root))
         errors.extend(validate_work_order_delegation(artifacts, repository_root))
+        decision_errors, decision_warnings = validate_decisions(artifacts, repository_root)
+        errors.extend(decision_errors)
         errors.extend(
             validate_revision_consistency(
                 artifacts,
@@ -2644,6 +2818,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         *assessment_warnings,
         *traceability_warnings,
         *authoring_warnings,
+        *decision_warnings,
         *validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors),
     ]
     return ValidationReport(

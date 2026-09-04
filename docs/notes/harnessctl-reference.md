@@ -56,6 +56,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list |
 | `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
+| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `rehearse-recovery` | maintainer or CI rehearsal | writes only a fresh disposable directory outside the operational repository | prove bounded evaluator recovery and rollback without credentials, network, or external action |
@@ -270,6 +271,20 @@ Direct human and JSON output are rendered from the same semantic workflow
 result. Schema 2 always identifies exactly one typed next step and derives its
 command argument array or response from the selected procedure. Adaptive agent
 presentation consumes that result; it does not replace or recompute it.
+
+## Decision disposition
+
+```text
+harnessctl decide [TARGET] --artifact DEC-... --option OPTION-ID --decision ROLE --reason TEXT [--revisit TEXT] [--apply] [--json]
+harnessctl decide [TARGET] --artifact DEC-... --defer --scope ARTIFACT-ID:FROM-TO ... --revisit TEXT --decision ROLE --reason TEXT [--apply]
+harnessctl decide [TARGET] --artifact DEC-... --withdraw --decision ROLE --reason TEXT [--apply]
+```
+
+A decision artifact (`DEC-`) records one pending question, or one implementation deviation from one rule of one specification. While it is `open`, every artifact named in its `blocks` relation is refused its transitions by the `QGP-*-DECISION` predicate of the gate that transition would pass. The refusal names the decision, its question, its options, the deciding role, and the `decide` command that clears it.
+
+`decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
+
+The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a definition's `## Open decisions` section as `E-DCM-004`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
 
 ## Safe repository upgrade
 

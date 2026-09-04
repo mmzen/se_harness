@@ -33,6 +33,7 @@ from validate_engineering_artifacts import (
     decision_assessment_state,
     evidence_work_order_keys,
     load_revision_policy,
+    standing_deviations,
     validate_repository,
 )
 
@@ -344,6 +345,27 @@ def normalize_artifacts(
         for architecture_id in _string_list(decision.relations.get("decides")):
             active_decisions_by_architecture[architecture_id].add(decision.artifact_id)
 
+    # SPEC-DCM-001 rule 13: the decision trail of every concerned artifact and
+    # the standing deviations projected by the validator (rule 9).
+    standing = standing_deviations(list(report.artifacts))
+    decision_trail: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for decision in sorted(report.artifacts, key=lambda item: item.artifact_id):
+        if decision.artifact_type != "decision":
+            continue
+        disposition = decision.metadata.get("disposition")
+        disposition = disposition if isinstance(disposition, dict) else {}
+        entry = {
+            "id": decision.artifact_id,
+            "kind": _string(decision.metadata.get("kind")) or None,
+            "status": decision.status,
+            "question": _string(decision.metadata.get("question")) or None,
+            "option": _string(disposition.get("option")) or None,
+            "decided_by": _string(disposition.get("decided_by")) or None,
+            "decided_at": _string(disposition.get("decided_at")) or None,
+        }
+        for concerned in _string_list(decision.relations.get("concerns")):
+            decision_trail[concerned].append(entry)
+
     normalized: list[dict[str, Any]] = []
     for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
         item: dict[str, Any] = {
@@ -419,6 +441,12 @@ def normalize_artifacts(
             item["supersession_authorized_by"] = _string(artifact.metadata.get("supersession_authorized_by")) or None
             item["evaluator_evidence_path"] = _string(artifact.metadata.get("evaluator_evidence_path")) or None
             item["evaluator_evidence_sha256"] = _string(artifact.metadata.get("evaluator_evidence_sha256")) or None
+        if artifact.artifact_type == "decision":
+            item.update(_decision_projection(artifact, catalog))
+        if decision_trail.get(artifact.artifact_id):
+            item["decisions"] = decision_trail[artifact.artifact_id]
+        if standing.get(artifact.artifact_id):
+            item["standing_deviations"] = standing[artifact.artifact_id]
         if artifact.artifact_type == "release_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
@@ -433,6 +461,60 @@ def normalize_artifacts(
             item["distribution"] = _distribution_table(artifact.metadata.get("distribution"))
         normalized.append(item)
     return sorted(normalized, key=lambda item: (item["id"], item["path"]))
+
+
+def _decision_projection(artifact: Artifact, catalog: dict[str, Artifact]) -> dict[str, Any]:
+    """The decision's own fields (SPEC-DCM-001 rules 2-3, 6) and its deciding roles.
+
+    A deviation is decided by the owners of the specification it departs from;
+    a question by the owners of the artifacts it blocks. The projection restates
+    the declared owners; it infers no decision.
+    """
+
+    options = artifact.metadata.get("options")
+    disposition = artifact.metadata.get("disposition")
+    disposition = disposition if isinstance(disposition, dict) else None
+    against = _string(artifact.metadata.get("against")) or None
+    blocked = _string_list(artifact.relations.get("blocks"))
+    deciding: set[str] = set()
+    if artifact.metadata.get("kind") == "deviation" and against:
+        target = catalog.get(against.split("#", 1)[0])
+        if target is not None:
+            deciding.update(_string_list(target.metadata.get("owners")))
+    else:
+        for blocked_id in blocked:
+            target = catalog.get(blocked_id)
+            if target is not None:
+                deciding.update(_string_list(target.metadata.get("owners")))
+    if not deciding:
+        deciding.update(_string_list(artifact.metadata.get("owners")))
+    projection: dict[str, Any] = {
+        "kind": _string(artifact.metadata.get("kind")) or None,
+        "question": _string(artifact.metadata.get("question")) or None,
+        "raised_by": _string(artifact.metadata.get("raised_by")) or None,
+        "recommendation": _string(artifact.metadata.get("recommendation")) or None,
+        "against": against,
+        "observed": _string(artifact.metadata.get("observed")) or None,
+        "options": [
+            {"id": _string(option.get("id")), "label": _string(option.get("label"))}
+            for option in options
+            if isinstance(option, dict)
+        ] if isinstance(options, list) else [],
+        "blocks": blocked,
+        "deciding_roles": sorted(deciding),
+        "disposition": None,
+    }
+    if disposition is not None:
+        projection["disposition"] = {
+            "option": _string(disposition.get("option")) or None,
+            "label": _string(disposition.get("label")) or None,
+            "decided_by": _string(disposition.get("decided_by")) or None,
+            "decided_at": _string(disposition.get("decided_at")) or None,
+            "reason": _string(disposition.get("reason")) or None,
+            "revisit": _string(disposition.get("revisit")) or None,
+            "scope": _string_list(disposition.get("scope")),
+        }
+    return projection
 
 
 def build_declared_relations(artifacts: Sequence[Artifact]) -> list[dict[str, Any]]:
@@ -1807,6 +1889,24 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
                 if hours is not None and hours > 0:
                     lead_times.append({"id": artifact["id"], "hours": round(hours, 2)})
     lead_times.sort(key=lambda item: (item["hours"], item["id"]))
+    # SPEC-DCM-001 rule 13: decision counts and raise-to-dispose times. A decision
+    # is raised when created (a date, read at midnight UTC) and disposed at the
+    # time its disposition records.
+    decisions = [item for item in artifacts if item.get("type") == "decision"]
+    decisions_open = sum(1 for item in decisions if item.get("status") in {"open", "deferred"})
+    decisions_decided = sum(1 for item in decisions if item.get("status") == "decided")
+    dispose_times: list[dict[str, Any]] = []
+    for item in decisions:
+        disposition = item.get("disposition")
+        if not isinstance(disposition, dict) or item.get("status") not in {"decided", "deferred", "withdrawn"}:
+            continue
+        raised = _string(item.get("created"))
+        if len(raised) == 10:
+            raised = f"{raised}T00:00:00Z"
+        hours = _hours_between(raised, disposition.get("decided_at"))
+        if hours is not None and hours >= 0:
+            dispose_times.append({"id": item["id"], "hours": round(hours, 2)})
+    dispose_times.sort(key=lambda item: (item["hours"], item["id"]))
     outgoing: dict[str, list[dict[str, Any]]] = defaultdict(list)
     incoming: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for relation in relations:
@@ -1867,6 +1967,9 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
         "delegated_records": delegated_records,
         "delegated_artifacts": sorted(delegated_artifacts),
         "lead_times": lead_times,
+        "decisions_open": decisions_open,
+        "decisions_decided": decisions_decided,
+        "decision_dispose_times": dispose_times,
         "released_work_orders": len(released_work),
         "released_work_orders_verified": len(verified_work),
         "latest_release": latest_release,
@@ -1963,6 +2066,11 @@ def build_dashboard_bundle(
             ]
         if artifact.get("type") == "release_record":
             for key in ("version", "released_at", "distribution"):
+                if artifact.get(key) is not None:
+                    compact_artifact[key] = artifact[key]
+        if artifact.get("type") == "decision":
+            # SPEC-DCM-001 rule 13: the in-flight tile shows age and deciding role.
+            for key in ("created", "kind", "deciding_roles"):
                 if artifact.get(key) is not None:
                     compact_artifact[key] = artifact[key]
         compact_artifacts.append(compact_artifact)

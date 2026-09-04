@@ -37,6 +37,13 @@ class ArtifactCatalogTests(unittest.TestCase):
         self.assertEqual(1, self.traceability.count(CATALOG_END))
         return self.traceability.split(CATALOG_BEGIN, 1)[1].split(CATALOG_END, 1)[0]
 
+    def types_absent_from_root_catalog(self) -> set[str]:
+        """Registry types the hash-locked root catalog does not carry yet (declared, not hidden)."""
+        present = {row[0].strip("`") for row in self.catalog_rows()}
+        absent = ({"decision"} & set(ARTIFACT_DIRECTORIES)) - present
+        self.assertLessEqual(absent, {"decision"})
+        return absent
+
     def catalog_rows(self) -> list[list[str]]:
         rows: list[list[str]] = []
         for line in self.catalog_block().splitlines():
@@ -50,9 +57,12 @@ class ArtifactCatalogTests(unittest.TestCase):
         rows = self.catalog_rows()
         parsed = [(row[0].strip("`"), row[1].strip("`")) for row in rows]
         self.assertEqual(len(parsed), len({artifact_type for artifact_type, _ in parsed}))
-        self.assertEqual(set(ARTIFACT_DIRECTORIES), {artifact_type for artifact_type, _ in parsed})
+        # WO-DCM-001 (SPEC-DCM-001): the candidate registry added the decision type; the
+        # root catalog is the released root's and gains the row at adoption.
+        registry_types = set(ARTIFACT_DIRECTORIES) - self.types_absent_from_root_catalog()
+        self.assertEqual(registry_types, {artifact_type for artifact_type, _ in parsed})
         self.assertEqual(
-            ARTIFACT_PREFIXES,
+            {artifact_type: prefix for artifact_type, prefix in ARTIFACT_PREFIXES.items() if artifact_type in registry_types},
             {artifact_type: prefix for artifact_type, prefix in parsed},
         )
 
@@ -61,7 +71,7 @@ class ArtifactCatalogTests(unittest.TestCase):
         header = next(line for line in block.splitlines() if line.startswith("| Type |"))
         self.assertEqual(list(CATALOG_COLUMNS), [cell.strip() for cell in header.strip("|").split("|")])
         rows = self.catalog_rows()
-        self.assertEqual(len(ARTIFACT_DIRECTORIES), len(rows))
+        self.assertEqual(len(ARTIFACT_DIRECTORIES) - len(self.types_absent_from_root_catalog()), len(rows))
         for row in rows:
             with self.subTest(artifact_type=row[0]):
                 self.assertEqual(len(CATALOG_COLUMNS), len(row))
@@ -165,7 +175,28 @@ envelope from fresh live state for each request.
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
-        self.assertEqual(released_traceability, candidate_traceability)
+        # WO-DCM-001 (SPEC-DCM-001): the candidate TRACEABILITY.md adds the decision
+        # artifact's catalog row, relations TRC-REL-020..022 and rule TRC-015. A root
+        # released before them lacks exactly those lines, declared here; a root
+        # released with them takes the equality branch.
+        if "`TRC-REL-020`" in released_traceability:
+            self.assertEqual(released_traceability, candidate_traceability)
+        else:
+            decision_rows = ("| `TRC-REL-020`", "| `TRC-REL-021`", "| `TRC-REL-022`", "| `decision` | `DEC-` |")
+            kept: list[str] = []
+            skipping = False
+            for line in candidate_traceability.splitlines():
+                if line.startswith("`TRC-015`"):
+                    skipping = True
+                if skipping:
+                    if not line.strip():
+                        skipping = False
+                    continue
+                if line.startswith(decision_rows):
+                    continue
+                kept.append(line)
+            self.assertEqual(released_traceability.splitlines(), kept)
+            self.assertIn("`TRC-015`", candidate_traceability)
         self.assertIn("`TRC-001`", released_traceability)
         self.assertIn("`TRC-001`", candidate_traceability)
         self.assertIn("BCP 14", candidate_traceability)

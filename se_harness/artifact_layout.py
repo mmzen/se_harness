@@ -28,6 +28,7 @@ ARTIFACT_DIRECTORIES: dict[str, tuple[str, ...]] = {
     "release_contract": ("release",),
     "release_record": ("releases",),
     "operating_contract": ("operations",),
+    "decision": ("decisions",),
 }
 
 ARTIFACT_PREFIXES = {
@@ -43,6 +44,7 @@ ARTIFACT_PREFIXES = {
     "release_contract": "REL-",
     "release_record": "RLS-",
     "operating_contract": "OPS-",
+    "decision": "DEC-",
 }
 
 ARTIFACT_TEMPLATES = {
@@ -58,6 +60,7 @@ ARTIFACT_TEMPLATES = {
     "release_contract": "RELEASE_CONTRACT.template.md",
     "release_record": "RELEASE_RECORD.template.md",
     "operating_contract": "OPERATING_CONTRACT.template.md",
+    "decision": "DECISION.template.md",
 }
 
 SUPPORTING_DIRECTORIES = ("evidence", "acceptance")
@@ -78,6 +81,7 @@ RESERVED_DOMAINS = frozenset(
         "acceptance",
         "architecture",
         "capabilities",
+        "decisions",
         "evidence",
         "experiments",
         "intent",
@@ -307,7 +311,9 @@ def _render_draft(template: str, artifact_type: str, artifact_id: str) -> bytes:
     if expected_type is None or expected_type.group(1) != artifact_type:
         raise HarnessError(f"canonical template type does not match requested type: {artifact_type}")
     rendered, id_count = re.subn(r'^id = "[^"]+"$', f'id = "{artifact_id}"', normalized, count=1, flags=re.MULTILINE)
-    rendered, status_count = re.subn(r'^status = "[^"]+"$', 'status = "draft"', rendered, count=1, flags=re.MULTILINE)
+    # A decision has no draft state (SPEC-DCM-001 rule 4): it is created open.
+    initial_status = "open" if artifact_type == "decision" else "draft"
+    rendered, status_count = re.subn(r'^status = "[^"]+"$', f'status = "{initial_status}"', rendered, count=1, flags=re.MULTILINE)
     today = date.today().isoformat()
     rendered, created_count = re.subn(r'^created = "[^"]+"$', f'created = "{today}"', rendered, count=1, flags=re.MULTILINE)
     rendered, updated_count = re.subn(r'^updated = "[^"]+"$', f'updated = "{today}"', rendered, count=1, flags=re.MULTILINE)
@@ -367,7 +373,7 @@ def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
 
 
 REF_ARTIFACT_PATTERN = re.compile(r"^(INT|CAP|REQ|SPEC|ARCH|ADR|VER|VREC|WO|RLS|REL)-([A-Z][A-Z0-9]*)-(\d{3})\.md$")
-_REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS"}
+_REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS", "operating_contract": "OPS", "decision": "DEC"}
 
 
 def _git_output(root: Path, arguments: list[str]) -> bytes:

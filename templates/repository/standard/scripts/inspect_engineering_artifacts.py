@@ -43,6 +43,11 @@ QUEUE_SUGGESTION_CATALOG = {
         "artifact-owner",
         "Identify the accountable owner and review the ready artifact without assuming an outcome.",
     ),
+    "dispose-decision": (
+        "dispose-pending-decision",
+        "artifact-owner",
+        "Answer the pending decision with one declared option through harnessctl decide; the artifacts it blocks wait until then.",
+    ),
     "complete-definition": (
         "complete-or-dispose-definition",
         "artifact-owner",
@@ -390,6 +395,8 @@ def build_inspection(
         status = _text(artifact.get("status"), "artifact status")
         if status == "ready":
             decision_required.append(_queue_entry(artifact, _ready_action(artifact_type)))
+        if artifact_type == "decision" and status in {"open", "deferred"}:
+            decision_required.append(_queue_entry(artifact, "dispose-decision"))
         if status == "draft":
             definition_pending.append(_queue_entry(artifact, "complete-definition"))
         if artifact_type == "work_order" and status in {"approved", "in_progress"}:

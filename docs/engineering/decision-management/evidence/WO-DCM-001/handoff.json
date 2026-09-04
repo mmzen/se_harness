@@ -1,0 +1,360 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "d004abb2b32a3bfe6edbd2633d76f553cc2a428a4b33f22b5bb05a81caf08e53",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DCM-001"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-DCM-001 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-DCM-001"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DCM-001:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-DCM-001 declares 9 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-DCM-001"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-DCM-001"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 44 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-DCM-001:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-DCM-001"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/decision-management/evidence/WO-DCM-001/WO-DCM-001-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 69
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-DCM-001",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DCM-001",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DCM-001",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DCM-001",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-DCM-001."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-DCM-001",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-DCM-001 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-DCM-001 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head 20b9ae2 is failure, not success"
+    },
+    "current_lifecycle_state": [
+      "WO-DCM-001 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-DCM-001",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      },
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "delegated-executor"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-DCM-001."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "cbd2fd2a7c71f35bf95cc1c4165a98078ffdf8d35bc53bb5bb38acdd16b927a2",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/decision-management/evidence/WO-DCM-001-verification.md",
+      "docs/engineering/decision-management/evidence/WO-DCM-001/handoff.json",
+      "docs/engineering/decision-management/evidence/WO-DCM-001/WO-DCM-001-handoff.md",
+      "docs/engineering/decision-management/README.md",
+      "docs/engineering/decision-management/specifications/SPEC-DCM-001.md",
+      "docs/engineering/decision-management/work-orders/WO-DCM-001.md",
+      "docs/notes/decision-artifacts.md",
+      "docs/notes/harnessctl-check.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/README.md",
+      "repository_tools/explorer_design/build_explorer_template.py",
+      "se_harness/artifact_layout.py",
+      "se_harness/cli.py",
+      "se_harness/decisions.py",
+      "se_harness/provenance.py",
+      "se_harness/quality_gates_contract.json",
+      "se_harness/workflow.py",
+      "se_harness/workflow_compliance.py",
+      "se_harness/workflow_contract.json",
+      "se_harness/workflow_contract.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+      "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
+      "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+      "templates/repository/standard/docs/engineering/templates/DECISION.template.md",
+      "templates/repository/standard/docs/engineering/templates/README.md",
+      "templates/repository/standard/docs/engineering/TRACEABILITY.md",
+      "templates/repository/standard/docs/engineering/WORKFLOW.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "templates/repository/standard/scripts/artifact_layout_registry.py",
+      "templates/repository/standard/scripts/generate_harness_dashboard.py",
+      "templates/repository/standard/scripts/harness_explorer/index.template.html",
+      "templates/repository/standard/scripts/inspect_engineering_artifacts.py",
+      "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+      "tests/test_artifact_authoring.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_cli_shape.py",
+      "tests/test_dashboard_webui.py",
+      "tests/test_decision_management.py",
+      "tests/test_fixture_support.py",
+      "tests/test_lifecycle_state_contract.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_validation_taxonomy.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/decision-management/",
+      "docs/engineering/README.md",
+      "docs/notes/",
+      "repository_tools/explorer_design/",
+      "se_harness/",
+      "templates/repository/standard/.engineering-harness.toml.tpl",
+      "templates/repository/standard/docs/engineering/",
+      "templates/repository/standard/scripts/",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-DCM-001",
+      "ARCH-DCM-001",
+      "CAP-DCM-001",
+      "INT-DCM-001",
+      "REQ-DCM-001",
+      "REQ-DCM-002",
+      "REQ-DCM-003",
+      "SPEC-DCM-001",
+      "VER-DCM-001"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-DCM-001"
+    ],
+    "primary": "WO-DCM-001"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-DCM-001",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-DCM-001",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
