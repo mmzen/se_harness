@@ -112,5 +112,8 @@ rule, not the implementations, is then probably wrong.
 | `W-DCM-001` | An accepted deviation is past its revisit trigger. |
 | `W-DCM-002` | Two or more accepted deviations stand against one rule. |
 
+The generated [diagnostic code index](diagnostic-codes.md) lists these codes
+with the message text each appears in, beside every other family.
+
 The design discussion that led to this model is retained in
 [the proposal of 2026-09-03](decision-artifact-proposal-2026-09-03.md).

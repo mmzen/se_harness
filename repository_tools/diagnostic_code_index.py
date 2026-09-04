@@ -34,10 +34,12 @@ PREFIXES: dict[str, tuple[str, str]] = {
     "E": ("installed validator", "an artifact-graph or integrity error; validation fails."),
     "E-AUT": ("installed validator", "an authoring-rule error on a formal artifact."),
     "E-CIP": ("installed validator", "a CI-pipeline rule error."),
+    "E-DCM": ("installed validator", "a decision-artifact rule error."),
     "E-ECP": ("installed validator", "a control-plane rule error."),
     "W": ("installed validator", "a warning; validation still passes."),
     "W-ADS": ("installed validator", "an agent-directive-surface warning."),
     "W-AUT": ("installed validator", "an authoring-style advisory, raised only on drafts."),
+    "W-DCM": ("installed validator", "a decision-artifact warning."),
     "W-ECP": ("installed validator", "a control-plane warning."),
     "W-REB": ("installed validator", "a released-evaluator-boundary warning."),
     "W-REV": ("installed validator", "a revision-provenance warning."),
@@ -61,6 +63,12 @@ PREFIXES: dict[str, tuple[str, str]] = {
     "PV": ("release qualification", "retired predecessor-view codes, reserved and emitted by no path."),
 }
 _CODE = re.compile(r"\b([A-Z]+(?:-[A-Z]+)*?)-?(\d{3})\b")
+#: Roots whose hyphenated rule-family forms are diagnostics by construction
+#: (`E-DCM-001`, `W-AUT-002`, `WEX-ECP-030`); a family under one of these roots
+#: that is absent from the registry is a defect of the registry, not a
+#: non-diagnostic (WO-TCM-004). Artifact and rule identifiers never start with
+#: a single letter or `WEX`, so they are outside the guard by construction.
+_GUARDED_ROOTS = frozenset({"E", "W", "WEX"})
 _MESSAGE_LIMIT = 110
 _MESSAGES_SHOWN = 2
 
@@ -84,10 +92,9 @@ def _sources(repository: Path) -> list[Path]:
     return found
 
 
-def scan(repository: Path) -> dict[str, dict[str, set[str]]]:
-    """Return {prefix: {code: {message literals}}} for registered prefixes only."""
+def _literal_codes(repository: Path):
+    """Yield (prefix, code, collapsed message) for every code-shaped match in a string literal."""
 
-    codes: dict[str, dict[str, set[str]]] = {prefix: {} for prefix in PREFIXES}
     for path in _sources(repository):
         try:
             tree = ast.parse(path.read_text(encoding="utf-8"))
@@ -96,15 +103,20 @@ def scan(repository: Path) -> dict[str, dict[str, set[str]]]:
         for node in ast.walk(tree):
             if not (isinstance(node, ast.Constant) and isinstance(node.value, str)):
                 continue
+            message = " ".join(node.value.split())
+            if len(message) > _MESSAGE_LIMIT:
+                message = message[: _MESSAGE_LIMIT - 1] + "…"
             for match in _CODE.finditer(node.value):
-                prefix = match.group(1)
-                if prefix not in PREFIXES:
-                    continue
-                code = match.group(0)
-                message = " ".join(node.value.split())
-                if len(message) > _MESSAGE_LIMIT:
-                    message = message[: _MESSAGE_LIMIT - 1] + "…"
-                codes[prefix].setdefault(code, set()).add(message)
+                yield match.group(1), match.group(0), message
+
+
+def scan(repository: Path) -> dict[str, dict[str, set[str]]]:
+    """Return {prefix: {code: {message literals}}} for registered prefixes only."""
+
+    codes: dict[str, dict[str, set[str]]] = {prefix: {} for prefix in PREFIXES}
+    for prefix, code, message in _literal_codes(repository):
+        if prefix in PREFIXES:
+            codes[prefix].setdefault(code, set()).add(message)
     for code, messages in _composed_codes(repository).items():
         prefix = _CODE.fullmatch(code).group(1)
         if prefix in codes:
@@ -153,6 +165,28 @@ def _composed_codes(repository: Path) -> dict[str, set[str]]:
                 f"Composed at run time as {family} plus the cause digit ({legend}); this one is the {cause} cause."
             }
     return composed
+
+
+def unregistered_families(repository: Path) -> dict[str, set[str]]:
+    """Return {family prefix: {codes}} for guarded hyphenated families absent from the registry.
+
+    An empty result means every `E-`, `W-` and `WEX-` rule family the source
+    can emit is registered and therefore indexed; a non-empty result is the
+    case `VER-TCM-002` left to review, made mechanical.
+    """
+
+    missing: dict[str, set[str]] = {}
+    for prefix, code, _ in _literal_codes(repository):
+        if "-" in prefix and prefix.split("-", 1)[0] in _GUARDED_ROOTS and prefix not in PREFIXES:
+            missing.setdefault(prefix, set()).add(code)
+    return missing
+
+
+def _guard_report(missing: dict[str, set[str]]) -> str:
+    families = "; ".join(
+        f"{prefix} ({', '.join(sorted(codes, key=_code_order))})" for prefix, codes in sorted(missing.items())
+    )
+    return f"unregistered diagnostic families in the source: {families}; register them in PREFIXES"
 
 
 def _code_order(code: str) -> tuple[int, str]:
@@ -232,6 +266,10 @@ def main(argv: list[str] | None = None) -> int:
     action.add_argument("--check", action="store_true", help="exit 1 when the committed page differs")
     args = parser.parse_args(argv)
     repository = Path(args.repository).resolve() if args.repository else _repository_root()
+    missing = unregistered_families(repository)
+    if missing:
+        print(_guard_report(missing), file=sys.stderr)
+        return 1
     rendered = generate(repository)
     note = repository / NOTE_RELATIVE
     if args.write:

@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-256 codes across 28 registered prefixes.
+262 codes across 30 registered prefixes.
 
 ## How to read a code
 
@@ -32,10 +32,12 @@ but are not diagnostics and are not listed here.
 | `E` | installed validator | an artifact-graph or integrity error; validation fails. | 19 |
 | `E-AUT` | installed validator | an authoring-rule error on a formal artifact. | 2 |
 | `E-CIP` | installed validator | a CI-pipeline rule error. | 1 |
+| `E-DCM` | installed validator | a decision-artifact rule error. | 4 |
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
 | `W` | installed validator | a warning; validation still passes. | 19 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
 | `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 4 |
+| `W-DCM` | installed validator | a decision-artifact warning. | 2 |
 | `W-ECP` | installed validator | a control-plane warning. | 2 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
 | `W-REV` | installed validator | a revision-provenance warning. | 3 |
@@ -97,6 +99,15 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `E-CIP-001` | `CIP-RLU: a release contract that names a candidate commit declares the census the history yields. A contract …`; `E-CIP-001:` (+6 more) |
 
+### `E-DCM` — installed validator
+
+| Code | Message text in the source |
+| --- | --- |
+| `E-DCM-001` | `E-DCM-001` |
+| `E-DCM-002` | `E-DCM-002` |
+| `E-DCM-003` | `E-DCM-003` |
+| `E-DCM-004` | `E-DCM-004:` |
+
 ### `E-ECP` — installed validator
 
 | Code | Message text in the source |
@@ -142,6 +153,13 @@ but are not diagnostics and are not listed here.
 | `W-AUT-002` | `W-AUT-002` |
 | `W-AUT-003` | `W-AUT-003` |
 | `W-AUT-004` | `W-AUT-004` |
+
+### `W-DCM` — installed validator
+
+| Code | Message text in the source |
+| --- | --- |
+| `W-DCM-001` | `W-DCM-001` |
+| `W-DCM-002` | `W-DCM-002` |
 
 ### `W-ECP` — installed validator
 
