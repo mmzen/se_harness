@@ -2,10 +2,10 @@
 id = "VREC-DCM-001"
 type = "verification_record"
 title = "Verification candidate for WO-DCM-001"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-03"
-updated = "2026-09-03"
+updated = "2026-09-04"
 commit = "a7edc5ccb606ea943d1025bfab1d81c020af564d"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/decision-management/evidence/WO-DCM-001-veri
 evaluator_evidence_path = "docs/engineering/decision-management/evidence/VREC-DCM-001-evaluator.json"
 evaluator_evidence_sha256 = "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
 
+verified_at = "2026-09-04T06:28:07Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DCM-001"]
 conforms_to = ["VER-DCM-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-04T06:28:07Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-09-04 with 'i verify VREC-DCM-001', after the five disclosures recorded in docs/engineering/decision-management/evidence/WO-DCM-001-verification.md were presented: one QGP-*-DECISION predicate per gate with SPEC-DCM-001 amended by record (1); records reached through standing deviations rather than named in blocks, VER-DCM-001 row-one wording left for the owner (2); E-DCM and W-DCM absent from the generated diagnostic-code index, outside this scope (3); no separate decide-apply guard operation (4); Windows-only figures with the Linux reading from the managed check (5). Candidate a7edc5ccb606ea943d1025bfab1d81c020af564d; released 0.14.0 evaluator; graph 0 errors."
 +++
 
 # Verification Record Candidate
