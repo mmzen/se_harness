@@ -2,7 +2,7 @@
 id = "REL-SEH-026"
 type = "release_contract"
 title = "Release se-harness 0.15.0: the decision artifact, the reader-first definitions and the repository-owned glossary"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -39,6 +39,13 @@ untraced_exemptions = [
   "11babc9c3a51f989c852b9ffda5a56457db830c2",
   "2fb39a3572227b3eba30291a6bb1d63ba87f521a",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T21:36:52Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-09-04 with the instruction 'approve both', as a decision distinct from the work order's approval, after the census was re-measured on main at 2e90dc6 with every required member holding a verified record (WO-DOC-014 through VREC-DOC-007, the post-merge repair issue #347 records), the eleven notes-only merges exempted by name, and all hosted lanes green. The allow-list is exact at approval: thirteen gates."
 +++
 
 # Release contract: se-harness 0.15.0
