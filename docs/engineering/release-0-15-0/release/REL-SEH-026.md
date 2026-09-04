@@ -139,10 +139,15 @@ orders.
 | `WO-TCM-007` | #340, #341 | member |
 | `WO-TCM-008` | #342, #343 | member |
 
-`--contract REL-SEH-026` therefore reports one `E-CIP-001` finding on
-`gates` by construction, the released `WO-RLS-020`, as `REL-SEH-025`
-reported `WO-RLS-019`; and, until the candidate exists, the absence of
-`candidate_commit`. No trace repair is needed.
+`harnessctl release-unit . --from v0.14.0 --to 935b8dc --contract
+REL-SEH-026`, with each of the eleven exempted commits also passed as
+`--exempt` (the 0.14.0 command reads exemptions from its flags; the array
+above is what the approval gate reads), derives `complete: true` and
+reports two `E-CIP-001` findings, both by construction: the `gates`
+difference, the released `WO-RLS-020` present in the derivation and
+`WO-RLS-021` not yet derivable because its commits do not exist, as
+`REL-SEH-025` reported `WO-RLS-019`; and, until the candidate exists, the
+absence of `candidate_commit`. No trace repair is needed.
 
 This contract names no `candidate_commit`: the candidate is created by
 `WO-RLS-021` after this approval. `QGP-G5P-RELEASE-UNIT` therefore passes
@@ -296,7 +301,8 @@ simply stay unavailable to it.
 
 Stop condition: the candidate commit is not an ancestor of the ref being
 released, or `harnessctl release-unit --contract REL-SEH-026` reports an
-`E-CIP-001` finding beyond the one predicted by construction above. The
+`E-CIP-001` finding beyond the `gates` difference predicted by construction
+above. The
 remedy is a new contract naming a new candidate, never an in-place edit of
 `gates`.
 
