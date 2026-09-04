@@ -23,25 +23,37 @@ rules for the accountable reviewer.
 ### Checklist
 
 - One obligation: the statement contains exactly one `SHALL`; split on "and SHALL". *(mechanical: W-AUT-002)*
-- One of the five shapes opens the statement: `THE SYSTEM SHALL …` (always), `WHEN <event>, …` (event), `WHILE <state>, …` (state), `IF <unwanted condition>, THEN …` (unwanted), `WHERE <feature>, …` (optional feature). *(mechanical: W-AUT-001)*
-- The statement is one sentence; at most 300 characters. *(mechanical: W-AUT-003)*
+- One of the five shapes opens the statement: `THE SYSTEM SHALL …` (always), `WHEN <event>, …` (event), `WHILE <state>, …` (state), `IF <unwanted condition>, THEN …` (unwanted), `WHERE <feature>, …` (optional feature). The concrete component may replace `THE SYSTEM` (`THE VALIDATOR SHALL …`); name it when one exists, and keep `THE SYSTEM` for an obligation that spans components. *(mechanical: W-AUT-001)*
+- The statement is one sentence of at most 30 words. *(mechanical: W-AUT-003)*
+- A statement that opens `WHEN` names a real event, not the act of evaluating; an invariant reads `THE SYSTEM SHALL`. *(mechanical: W-AUT-010)*
 - `verification_method` lists the methods that will verify it: `test`, `analysis`, `inspection`, `demonstration`. *(mechanical)*
 - `priority` says whether it is a `must`, a `should`, or a `could`.
 - `source` names where the obligation came from: a stakeholder, a standard clause, an incident, or an artifact.
 - A quality requirement carries a `measure`: a value and a unit, not an adjective.
-- Rationale says why the obligation exists, not what it does.
-- Two acceptance examples, one normal and one failure, each Given/When/Then; executable scenarios live in `acceptance/<REQ-ID>.feature`.
-- `Open decisions` reads `None`, or lists the `DEC-` identifiers of the decision artifacts that block this definition, before approval is requested; prose there is `E-DCM-004`. *(mechanical at approval, once QG-G1 carries `QGP-G1-AUTHORING`)*
-- No template placeholder (`<…>`) survives. *(mechanical at approval, likewise)*
+- The body has four sections, in this order: `In plain words`, `Why`, `Behavior`, `Examples`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `docs/notes/glossary.md`, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Why` says why the obligation exists, not what it does, in at most five sentences and 120 words. *(mechanical: W-AUT-006)*
+- `Behavior` is one table row per trigger: the trigger the reader can observe, the response the reader can check, what happens instead on failure. That row is the requirement's acceptance condition; the cases that prove it live in the verification contract that `verifies` this requirement, and the way it is met lives in the specification that `specifies` it.
+- `Examples` holds one `Normal` and one `Failure` scenario, each Given, When, Then. They fix meaning; they are not the test plan.
+- The body stays under 250 words, every sentence under 25 words, and cites at most three code identifiers; the rest belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved requirement. An approved requirement is not rewritten for shape; it adopts the shape when it is amended for another reason.
 
 ### Guidance
 
 Write the trigger the reader can observe, the response the reader can check,
 and nothing else. Avoid escape clauses ("where appropriate", "as needed"),
 vague quantities ("fast", "adequate"), and "and/or". If a requirement needs a
-diagram or a table to be understood, the detail belongs in a specification
-that `specifies` it. A requirement that reads like a plan of work is a work
-order in disguise.
+diagram or a table beyond its Behavior row to be understood, the detail
+belongs in a specification that `specifies` it. A requirement that reads like
+a plan of work is a work order in disguise.
+
+A pending question is not written into the requirement. Below the threshold
+in the `decision` section it is asked and answered in a transition's
+`reason`; above it, it is a `DEC-` artifact that names this requirement in
+`blocks`, and the approval gate reads it from there. A legacy `Open
+decisions` section, where one still exists, reads `None` or lists `DEC-`
+identifiers; prose there is `E-DCM-004`.
 
 ## intent
 
@@ -140,6 +152,7 @@ and the answer stays in the transition's `reason`.
 - `concerns` names every artifact the question is about; `blocks` names the artifacts that cannot change state while it is `open`, each also in `concerns`. *(mechanical)*
 - The `[disposition]` table is written by `harnessctl decide`; a hand-written one is `E-DCM-003`. A deferral needs a scope and a revisit trigger; accepting a deviation needs a revisit trigger. *(mechanical)*
 - `decided` and `withdrawn` decisions are never deleted or rewritten.
+- The definition templates carry no `Open decisions` section: a definition's pending decisions are the `DEC-` artifacts that name it in `blocks`, and the approval gate reads them from the graph. A legacy section, where one remains, reads `None` or lists `DEC-` identifiers; prose there is `E-DCM-004`.
 
 ## risk
 

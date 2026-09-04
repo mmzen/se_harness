@@ -79,3 +79,13 @@ the alternative on 2026-09-04, rejecting `REQ-TCM-008` and folding the
 retirement into `REQ-TCM-006` at the cost of amendment records on
 `SPEC-TCM-003`, `VER-TCM-003` and `WO-TCM-005`, and chose to keep the
 requirement as approved ("ok for option 1").
+
+`WO-TCM-005` executes on the branch `wo/tcm-005-execution` (PR #336),
+opened on 2026-09-04 from `main` after the packet merged. It ships the
+reader-first `REQUIREMENT.template.md`, the requirement checklist of
+`ARTIFACT_AUTHORING.md`, the advisories `W-AUT-003` (30 words) and
+`W-AUT-005` to `W-AUT-010` on drafts, the Explorer's plain-words line
+beneath the statement, and the `SPEC-DCM-001` rule 11 amendment that makes
+the `Open decisions` section a legacy rule. The authoring gate needed no
+code change: it already read the section only where the heading existed.
+Its evidence packet is `evidence/WO-TCM-005/`.

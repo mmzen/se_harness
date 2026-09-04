@@ -250,7 +250,29 @@ DECISION_PATCHES: tuple[Patch, ...] = (
     ),
 )
 
-PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES)
+#: WO-TCM-005 (SPEC-TCM-003 TCM-RFR-004): a requirement's plain-words line is
+#: rendered directly beneath its statement. Kept apart for the same reason as
+#: the decision patches.
+READABILITY_PATCHES: tuple[Patch, ...] = (
+    Patch(
+        "      statement: a.statement ? this.fixText(a.statement) : false,\n",
+        "      statement: a.statement ? this.fixText(a.statement) : false,\n"
+        "      plainWords: a.plain_words ? this.fixText(a.plain_words) : false,\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "      <span style=\"display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px\">\n        <sc-for list=\"{{earsLegend}}\" as=\"cl\" hint-placeholder-count=\"8\">",
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "      <span style=\"display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px\">\n        <sc-for list=\"{{earsLegend}}\" as=\"cl\" hint-placeholder-count=\"8\">",
+        1,
+        ("Record",),
+    ),
+)
+
+PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES)
 
 
 def _read(relative: str) -> str:

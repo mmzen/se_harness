@@ -284,7 +284,7 @@ A decision artifact (`DEC-`) records one pending question, or one implementation
 
 `decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
 
-The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a definition's `## Open decisions` section as `E-DCM-004`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
+The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a legacy definition's `## Open decisions` section as `E-DCM-004`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
 
 ## Safe repository upgrade
 

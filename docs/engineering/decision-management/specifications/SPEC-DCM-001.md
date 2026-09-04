@@ -245,3 +245,13 @@ transition pairs.
   contract lists `decision` as a fifth family beside the four the workflow
   contract already declared. `create-artifact` writes a decision as `open`,
   since the family has no `draft` state.
+- 2026-09-04, under `WO-TCM-005` (`SPEC-TCM-003` rule `TCM-RFR-006`), by the
+  delegated executor, recorded for the owner's verification of the
+  record. Rule 11's second sentence becomes a legacy rule: the definition
+  templates no longer carry an `## Open decisions` section, and the
+  authoring gate does not require one. A definition's pending decisions are
+  read only from the decision artifacts that name it in `blocks`, through
+  the decision predicate of its gate (rule 5). Where a definition written
+  before this amendment still carries the section, it reads `None` or lists
+  decision ids, and prose there stays `E-DCM-004`. The threshold in the
+  first sentence is unchanged.

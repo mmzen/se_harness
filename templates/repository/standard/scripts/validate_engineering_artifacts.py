@@ -268,7 +268,45 @@ DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
 
 AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
 AUTHORING_NAMED_SUBJECT = re.compile(r"^THE [A-Z][A-Za-z0-9 _-]{0,60} SHALL\b")
-AUTHORING_STATEMENT_LIMIT = 300
+#: SPEC-TCM-003 TCM-RFR-003: the reader-first budgets, counted with code spans removed.
+AUTHORING_STATEMENT_LIMIT = 30  # words
+AUTHORING_BODY_LIMIT = 250  # words
+AUTHORING_WHY_WORD_LIMIT = 120
+AUTHORING_WHY_SENTENCE_LIMIT = 5
+AUTHORING_SENTENCE_LIMIT = 25  # words
+AUTHORING_CODE_IDENTIFIER_LIMIT = 3
+AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT = 2
+_CODE_SPAN = re.compile(r"`[^`]*`")
+_FENCE = re.compile(r"```.*?```", re.S)
+_WORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9'\-]*")
+_SENTENCE_END = re.compile(r"[.!?](?:\s|$)")
+_EVALUATION_EVENT = re.compile(r"^WHEN\s+[^,]*\b(is validated|is evaluated|is checked|runs|is run)\b[^,]*,", re.I)
+
+
+def _prose(text: str) -> str:
+    return _CODE_SPAN.sub(" ", _FENCE.sub(" ", text))
+
+
+def _word_count(text: str) -> int:
+    return len(_WORD.findall(_prose(text)))
+
+
+def _sentences(text: str) -> list[str]:
+    prose = " ".join(line.strip() for line in _prose(text).split("\n") if line.strip() and not line.strip().startswith(("|", "#", "**Given", "**When", "**Then")))
+    return [item.strip() for item in _SENTENCE_END.split(prose) if item.strip()]
+
+
+def _body_sections(body: str) -> dict[str, str]:
+    """Second-level headings to their text, fenced code removed."""
+    sections: dict[str, str] = {}
+    current = ""
+    for line in _FENCE.sub(" ", body.replace("\r\n", "\n")).split("\n"):
+        if line.startswith("## "):
+            current = line[3:].strip()
+            sections.setdefault(current, "")
+        elif current:
+            sections[current] += line + "\n"
+    return sections
 VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
 REQUIREMENT_PRIORITIES = ("must", "should", "could")
 
@@ -302,9 +340,15 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
             if shall_count > 1:
                 advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
                     f"statement carries {shall_count} SHALL obligations; one requirement states one obligation", "maintenance"))
-            if len(text) > AUTHORING_STATEMENT_LIMIT:
+            statement_words = _word_count(text)
+            if statement_words > AUTHORING_STATEMENT_LIMIT:
                 advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
-                    f"statement is {len(text)} characters; the review threshold is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
+                    f"statement is {statement_words} words; the budget is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
+            if _EVALUATION_EVENT.match(text) and " AND " not in text.split(",", 1)[0].upper():
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-010",
+                    "statement opens WHEN on an event of evaluation with no other condition; an invariant reads THE SYSTEM SHALL", "maintenance"))
+        if draft:
+            advisories.extend(_reader_first_advisories(artifact, report_root))
         method = artifact.metadata.get("verification_method")
         if isinstance(method, str):
             if method.strip() and draft:
@@ -330,6 +374,39 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
         if measure is not None and (not isinstance(measure, str) or not measure.strip()):
             _add_error(errors, artifact, report_root, "E-AUT-002", "measure must be a non-empty string when present", plane="structure")
     return errors, warnings, advisories
+
+
+def _reader_first_advisories(artifact: Artifact, report_root: Path) -> list[Diagnostic]:
+    """SPEC-TCM-003 TCM-RFR-003: the body budgets of a requirement draft, advisories only."""
+
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    path = _display_path(artifact.path, report_root)
+    found: list[Diagnostic] = []
+    body_words = _word_count(body)
+    if body_words > AUTHORING_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {AUTHORING_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    why = sections.get("Why")
+    if why is not None:
+        why_words = _word_count(why)
+        why_sentences = len(_sentences(why))
+        if why_words > AUTHORING_WHY_WORD_LIMIT or why_sentences > AUTHORING_WHY_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-006",
+                f"Why is {why_words} words in {why_sentences} sentences; the budget is {AUTHORING_WHY_WORD_LIMIT} words or {AUTHORING_WHY_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
+    if identifiers > AUTHORING_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {AUTHORING_CODE_IDENTIFIER_LIMIT}, the rest belongs in the specification", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    return found
 
 
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
