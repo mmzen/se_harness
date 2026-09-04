@@ -2,7 +2,7 @@
 id = "WO-DOC-014"
 type = "work_order"
 title = "Publish the owner-reviewed Verity Plane README"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "documentation-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-04T20:44:45Z"
 decided_by = "engineering-owner"
 reason = "Begin the owner-approved README publication after passing released-evaluator start preflight."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T20:57:13Z"
+decided_by = "engineering-owner"
+reason = "Complete the owner-authorized README implementation after the reviewed inputs match, focused checks and hosted full-source/package checks pass, and the local Windows cleanup limitation is reproduced on the base and retained as evidence."
 +++
 
 # Work order: Publish the owner-reviewed Verity Plane README

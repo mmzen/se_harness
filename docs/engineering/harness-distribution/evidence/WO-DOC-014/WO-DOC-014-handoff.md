@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-DOC-014"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "583af7a692555716aa7ef670623d386700626a9000e310ae1c633822f768d3d8"
-rebound_at = "2026-09-04T20:53:35Z"
+formal_snapshot_sha256 = "9c2581ed8191c4fe92f4658cd7a3bdd688d3781c57ca128af7066e2c36c5caa6"
+rebound_at = "2026-09-04T20:57:34Z"
 ```
 
 # WO-DOC-014 handoff evidence
@@ -11,11 +11,14 @@ The owner-reviewed README and supplied Virtual Twin image are applied unchanged.
 The public documentation tests now implement SPEC-DST-024 while retaining the
 detailed-guide and installation smoke coverage.
 
-The 32 focused documentation tests pass. Released-evaluator doctor, graph
-validation, review preflight, scope validation, release-distribution validation,
-candidate CLI help, and diff whitespace checks pass. The full unit suite is
-running; its result is required before implementation completion and integration.
+The 47 focused documentation/integration-guide tests pass. Released-evaluator
+doctor, graph validation, review preflight, scope validation, release-distribution
+validation, candidate CLI help, and diff whitespace checks pass. The corrected
+hosted full source suite and candidate package evidence pass. The local suite ran
+1,240 tests with only a pre-existing Windows fixture-cleanup error, reproduced
+against the original base. See WO-DOC-014-verification.md for results and hashes.
 
-WO-DOC-014 remains in_progress. No formal VREC decision, release record, package
-release, or deployment has been performed. The owner has explicitly requested
-publication of the reviewed README through the repository.
+The implementation is ready for the completion transition and owner-authorized
+repository publication. No formal VREC decision, release record, package release,
+or deployment has been performed. The final state is recorded in WO-DOC-014;
+formal assurance is a separate accountable decision.
