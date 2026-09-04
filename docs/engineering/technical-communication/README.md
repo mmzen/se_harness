@@ -79,3 +79,7 @@ the alternative on 2026-09-04, rejecting `REQ-TCM-008` and folding the
 retirement into `REQ-TCM-006` at the cost of amendment records on
 `SPEC-TCM-003`, `VER-TCM-003` and `WO-TCM-005`, and chose to keep the
 requirement as approved ("ok for option 1").
+
+`WO-TCM-005` executes on the branch `wo/tcm-005-execution`, opened on
+2026-09-04 from `main` after the packet merged. Its evidence packet is
+`evidence/WO-TCM-005/`.
