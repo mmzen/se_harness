@@ -2,7 +2,7 @@
 id = "WO-TCM-005"
 type = "work_order"
 title = "Ship the reader-first requirement shape and retire the Open decisions section"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-04T16:23:05Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 6762388dab7b4808fc1c3ec84b903966d3d63af7 (check-run 101094604662, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-005-execution (PR #336) opened from main after PR #335 merged the approved packet."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T16:34:19Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 93f589a93f09033eb6564938c37177dc3386122b (check-run 101097989654, source github-checks). Delegated DR-WO-COMPLETE: the reader-first requirement shape, the draft advisories, the Explorer plain-words line and the retirement of the Open decisions section are implemented in the candidate per SPEC-TCM-003 rules TCM-RFR-001 to TCM-RFR-006; evidence docs/engineering/technical-communication/evidence/WO-TCM-005/ with the retained Git-derived handoff result; Windows suite 1220 tests, zero failures, the one baseline error; released 0.14.0 validate PASS. Four disclosures are in the evidence packet."
 +++
 
 # Work Order: Ship the reader-first requirement shape and retire the Open decisions section
