@@ -194,3 +194,7 @@ class and stacks on `WO-TCM-007`: its delegated start follows once
 `WO-TCM-007` has landed the advisory type table, on a branch from that
 result. The verification decision on the record, the merge, the release and
 the adoption stay human.
+
+`WO-TCM-008` executes on the branch `wo/tcm-008-execution`, opened on
+2026-09-04 from `main` after `WO-TCM-007` merged with `VREC-TCM-007`
+verified. Its evidence packet is `evidence/WO-TCM-008/`.
