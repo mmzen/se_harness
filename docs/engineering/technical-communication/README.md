@@ -151,6 +151,21 @@ delegated executor while the required `validate` check is green at the
 exact head. The verification decision on the record, the merge, the release
 and the adoption stay human.
 
+`WO-TCM-007` executes on the branch `wo/tcm-007-execution`, opened on
+2026-09-04 from `main` after the packet merged (PR #340). Its evidence
+packet is `evidence/WO-TCM-007/`.
+
+It ships the reader-first `INTENT.template.md` with the `outcome` field
+and the four sections, the intent checklist of `ARTIFACT_AUTHORING.md`
+with the two sentences on when a new intent is warranted, the advisories
+`W-AUT-011` to `W-AUT-015` and the shared `W-AUT-005`, `W-AUT-007`,
+`W-AUT-008` and `W-AUT-009` on intent drafts with the intent budgets, the
+`E-AUT-002` refusal of an empty `outcome`, the Explorer's outcome and
+plain-words rendering on the record panel and the lineage card, and the G0
+`intent_quality` condition derived from an outcome with at least one
+success-measure row. The 33 approved intents are unchanged and raise no
+advisory. Its evidence packet is `evidence/WO-TCM-007/`.
+
 ## Reader-first capabilities (2026-09-04)
 
 The assessment `docs/notes/assessment-capability-readability-2026-09-04.md`

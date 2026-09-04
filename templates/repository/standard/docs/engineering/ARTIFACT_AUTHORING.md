@@ -66,14 +66,24 @@ identifiers; prose there is `E-DCM-004`.
 
 ### Checklist
 
-- Problem, outcome, scope boundary, and accountable product owner are each one paragraph.
-- The success measure is observable after delivery.
-- No solution language.
+- `outcome` is one sentence of at most 30 words that names who can do or observe what after delivery, and names no solution or code identifier. *(mechanical: W-AUT-011)*
+- The body has four sections, in this order: `In plain words`, `Problem`, `Success measures`, `Not this`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Problem` says what happens today, to whom, and why it is worth changing, in at most five sentences and 120 words. Evidence is cited by link to a note, an RCA or an ADR, not quoted. *(mechanical: W-AUT-012)*
+- `Success measures` is one table row per measure: `Measure`, `Today`, `When reached`, `Observed`. A measure is observed in operation, after delivery, by someone who has not read the code; `Observed` names a place and a cadence an operator recognises. A row observed by a CI run, a test, a validator run, a verification or an implementation review is an acceptance check and belongs in the verification contract. `Today` may read `not measured`. *(mechanical: W-AUT-013, W-AUT-014)*
+- `Not this` lists what the initiative deliberately leaves alone, in at most five bullets.
+- The body stays under 200 words, every sentence under 25 words, and cites at most two code identifiers and no repository path or source line range; the evidence belongs in the note it links to. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008, W-AUT-015)*
+- Who the actors are belongs in the capability's `Actor and need`; the principles later decisions must keep belong in a specification rule or an ADR; a risk is a risk artifact; an open question is a `DEC-` artifact. None of them is a section of the intent.
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved intent. An approved intent is not rewritten for shape; it adopts the shape and the `outcome` field when it is amended for another reason.
 
 ### Guidance
 
 An intent survives many requirements. Write it so that a reader can tell,
-years later, whether the outcome was reached.
+years later, whether the outcome was reached. A new intent is warranted when
+an owner would be asked about a new outcome in a year. A new thing an actor
+can do toward an outcome already stated is a capability under the existing
+intent, not a new intent.
 
 ## capability
 

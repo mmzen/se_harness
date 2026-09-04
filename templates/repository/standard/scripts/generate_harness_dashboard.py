@@ -386,6 +386,15 @@ def normalize_artifacts(
             plain_words = _plain_words(artifact.body)
             if plain_words:
                 item["plain_words"] = plain_words
+        if artifact.artifact_type == "intent":
+            # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.
+            outcome = _string(artifact.metadata.get("outcome")) or None
+            if outcome:
+                item["outcome"] = outcome
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+            item["success_measure_rows"] = _success_measure_row_count(artifact.body)
         if artifact.artifact_type == "architecture":
             item["architecture_traceability"] = architecture_traceability_state(
                 artifact,
@@ -521,6 +530,36 @@ def _decision_projection(artifact: Artifact, catalog: dict[str, Artifact]) -> di
 
 
 _PLAIN_WORDS_HEADING = "## In plain words"
+_SUCCESS_MEASURES_HEADING = "## Success measures"
+
+
+def _success_measure_row_count(body: Any) -> int:
+    """Data rows of an intent's `Success measures` table (SPEC-TCM-004 TCM-RFI-006); 0 when absent or malformed."""
+
+    if not isinstance(body, str):
+        return 0
+    inside = False
+    header_seen = False
+    rows = 0
+    for line in body.replace("\r\n", "\n").split("\n"):
+        if line.strip() == _SUCCESS_MEASURES_HEADING:
+            inside = True
+            continue
+        if inside and line.startswith("## "):
+            break
+        stripped = line.strip()
+        if not inside or not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if not header_seen:
+            header_seen = True
+            continue
+        if all(set(cell) <= set("-: ") for cell in cells):
+            continue
+        if len(cells) < 4:
+            return 0
+        rows += 1
+    return rows
 
 
 def _plain_words(body: Any) -> str | None:
@@ -1351,6 +1390,12 @@ def build_readiness(
             if artifacts.get(artifact_id, {}).get("type") == "intent"
             and artifacts[artifact_id]["status"] in ACTIVE_COVERAGE_STATUSES
         )
+        # SPEC-TCM-004 TCM-RFI-006: a derived observation, never a gate result.
+        measured_intents = [
+            artifact_id
+            for artifact_id in intents
+            if artifacts[artifact_id].get("outcome") and artifacts[artifact_id].get("success_measure_rows", 0) > 0
+        ]
         requirements = by_relation.get("implements", [])
         required_contracts = [
             artifact_id
@@ -1421,7 +1466,12 @@ def build_readiness(
                 "Intent ready",
                 [
                     _condition("intent_chain", "Approved intent is reachable", "satisfied" if intents else "unsatisfied", intents),
-                    _condition("intent_quality", "Outcome quality and stakeholder agreement", "not_assessable"),
+                    _condition(
+                        "intent_quality",
+                        "Outcome stated with a success measure",
+                        "satisfied" if measured_intents else "not_assessable",
+                        measured_intents,
+                    ),
                 ],
             ),
             _gate(

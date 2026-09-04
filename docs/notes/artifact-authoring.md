@@ -49,6 +49,26 @@ sentence over 25 words, `W-AUT-008` more than three code identifiers,
 `W-AUT-009` a missing or long In plain words, `W-AUT-010` a WHEN whose
 event is the act of evaluating. Approved requirements are not rewritten.
 
+## Intents
+
+`WO-TCM-007` (SPEC-TCM-004) gave the intent the same treatment. The template
+has four sections, `In plain words`, `Problem`, `Success measures` (a table
+of measure, today, when reached, observed) and `Not this`, and a front-matter
+`outcome`: one sentence naming who can do or observe what after delivery,
+which the Explorer shows under the title. Actors belong to the capability,
+principles to a specification or an ADR, risks and open questions to their
+own artifacts. Draft-time advisories guard it: `W-AUT-011` a missing, long
+or solution-naming outcome, `W-AUT-012` Problem over five sentences or 120
+words, `W-AUT-013` a success measure observed by a CI run, test, validator,
+verification or implementation review (an acceptance check, which belongs
+in the verification contract), `W-AUT-014` a measures table with no row,
+`W-AUT-015` a repository path or source line range cited in the body; the
+shared `W-AUT-005`, `W-AUT-007`, `W-AUT-008` and `W-AUT-009` fire on intent
+drafts with the intent budgets (200 words, 25 words, two identifiers). An
+`outcome` that is present but empty is `E-AUT-002`. Approved intents are not
+rewritten; the Explorer's G0 intent-quality condition reads `satisfied` only
+for an intent that carries an outcome and at least one measure row.
+
 ## Approval predicates and the migration
 
 Two predicates, `QGP-G1-AUTHORING` and `QGP-G2-AUTHORING`, fail a definition's
