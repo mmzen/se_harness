@@ -131,8 +131,8 @@ intent and lists requirements, boundaries state what is not decided. The
 template has five sections, two of which, `Actor and need` and `Outcomes`,
 the checklist never mentions, and one of which, the requirement list, the
 checklist demands and the graph makes redundant. No line of either is
-mechanical. The capability is the only definition type with no `W-AUT`
-advisory at all.
+mechanical. Like every definition type except the requirement, the
+capability has no `W-AUT` advisory at all.
 
 ### The layer is almost always one-to-one
 
