@@ -201,13 +201,14 @@ AUT004_CANDIDATE_VALIDATOR_EDITS = (
 )
 AUT004_CANDIDATE_VALIDATOR_LINE_DELTA = 46
 
-#: WO-DCM-001 (SPEC-DCM-001), WO-TCM-005 (SPEC-TCM-003) and WO-TCM-007
-#: (SPEC-TCM-004): the candidate copy is the 0.14.0 root copy with the decision
-#: artifact's validation (kinds, options, relations, dispositions, standing
-#: deviations, the fifth lifecycle family), the reader-first requirement
-#: advisories (W-AUT-003 at 30 words, W-AUT-005 to W-AUT-010) and the reader-first
-#: intent rules (the outcome field, W-AUT-011 to W-AUT-015, the shared codes with
-#: intent budgets), declared opcode by opcode.
+#: WO-DCM-001 (SPEC-DCM-001), WO-TCM-005 (SPEC-TCM-003), WO-TCM-007 (SPEC-TCM-004)
+#: and WO-TCM-008 (SPEC-TCM-005): the candidate copy is the 0.14.0 root copy with the
+#: decision artifact's validation (kinds, options, relations, dispositions, standing
+#: deviations, the fifth lifecycle family), the reader-first requirement advisories
+#: (W-AUT-003 at 30 words, W-AUT-005 to W-AUT-010), the reader-first intent rules
+#: (the outcome field, W-AUT-011 to W-AUT-015) and the reader-first capability rules
+#: (the ability field, W-AUT-016 to W-AUT-018, the shared codes with capability
+#: budgets), declared opcode by opcode.
 DCM001_CANDIDATE_VALIDATOR_EDITS = (
     ('replace', 16, 1, 1, 'from collections import Counter, defaultdict'),
     ('replace', 84, 1, 1, '_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision"}'),
@@ -215,18 +216,18 @@ DCM001_CANDIDATE_VALIDATOR_EDITS = (
     ('replace', 198, 1, 1, '    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision"} else "definition"'),
     ('insert', 259, 0, 2, '    ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},'),
     ('insert', 260, 0, 5, ''),
-    ('replace', 264, 1, 51, '#: SPEC-TCM-003 TCM-RFR-003: the reader-first budgets, counted with code spans removed.'),
-    ('insert', 282, 0, 5, '        if artifact.artifact_type == "intent":'),
+    ('replace', 264, 1, 59, '#: SPEC-TCM-003 TCM-RFR-003: the reader-first budgets, counted with code spans removed.'),
+    ('insert', 282, 0, 10, '        if artifact.artifact_type == "intent":'),
     ('replace', 298, 1, 2, '            statement_words = _word_count(text)'),
     ('replace', 300, 1, 6, '                    f"statement is {statement_words} words; the budget is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))'),
-    ('insert', 326, 0, 118, ''),
+    ('insert', 326, 0, 175, ''),
     ('insert', 1169, 0, 1, '        "decision": ("concerns", "blocks"),'),
     ('insert', 2475, 0, 163, 'def _decision_against(artifact: Artifact) -> tuple[str, str] | None:'),
     ('insert', 2598, 0, 1, '    decision_warnings: list[Diagnostic] = []'),
     ('insert', 2627, 0, 2, '        decision_errors, decision_warnings = validate_decisions(artifacts, repository_root)'),
     ('insert', 2647, 0, 1, '        *decision_warnings,'),
 )
-DCM001_CANDIDATE_VALIDATOR_LINE_DELTA = 354
+DCM001_CANDIDATE_VALIDATOR_LINE_DELTA = 424
 
 #: WO-LRE-002 (SPEC-LRE-002): the candidate copy is the 0.11.0 root copy with
 #: the WO-ECP-018 insertions, the WO-AUT-004 advisory class and the legacy
