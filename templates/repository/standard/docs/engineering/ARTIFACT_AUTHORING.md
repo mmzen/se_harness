@@ -89,9 +89,23 @@ intent, not a new intent.
 
 ### Checklist
 
-- Names what an actor can do, not how the system does it.
-- Derives from at least one active intent and lists its derived requirements.
-- Boundaries state what the capability does not decide.
+- `ability` is one sentence of at most 30 words: an actor, `can`, what they can do or achieve, `under` the conditions that matter. It names what an actor can do, not how the system does it, and no code identifier. *(mechanical: W-AUT-016)*
+- The body has three sections, in this order: `In plain words`, `Actor and need`, `Not decided here`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Actor and need` says who the actor is and what they need, in their words, in at most three sentences and 60 words. The outcome the need serves is the intent's and is not restated. *(mechanical: W-AUT-017)*
+- `Not decided here` lists what the capability leaves to a requirement, a specification or another capability, in at most five bullets.
+- Derives from at least one active intent. The requirements that derive from the capability are read from the graph and shown by the Explorer; the body does not list them. *(mechanical: W-AUT-018 on a legacy list)*
+- The body stays under 150 words, every sentence under 25 words, and cites at most two code identifiers; the how belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved capability. An approved capability is not rewritten for shape; it adopts the shape and the `ability` field when it is amended for another reason.
+
+### Guidance
+
+A capability is warranted when an intent needs more than one actor ability,
+or when a requirement set needs an actor it can be read against. A
+capability never contains an outcome, which is the intent's, or a behavior,
+which is a requirement's: what is left, and what only the capability says,
+is the actor, the ability and what the capability does not decide.
 
 ## specification
 

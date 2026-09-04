@@ -366,6 +366,15 @@ def normalize_artifacts(
         for concerned in _string_list(decision.relations.get("concerns")):
             decision_trail[concerned].append(entry)
 
+    # SPEC-TCM-005 TCM-RFC-005: what derives from a capability is read from the graph.
+    deriving_requirements: dict[str, list[str]] = defaultdict(list)
+    for requirement in report.artifacts:
+        if requirement.artifact_type != "requirement" or requirement.artifact_id == "<unknown>":
+            continue
+        for capability_id in _string_list(requirement.relations.get("derives_from")):
+            if capability_id.startswith("CAP-"):
+                deriving_requirements[capability_id].append(requirement.artifact_id)
+
     normalized: list[dict[str, Any]] = []
     for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
         item: dict[str, Any] = {
@@ -395,6 +404,16 @@ def normalize_artifacts(
             if plain_words:
                 item["plain_words"] = plain_words
             item["success_measure_rows"] = _success_measure_row_count(artifact.body)
+        if artifact.artifact_type == "capability":
+            # SPEC-TCM-005 TCM-RFC-005 and TCM-RFC-006: the ability line, the plain words
+            # and the requirements that derive from the capability, from the graph.
+            ability = _string(artifact.metadata.get("ability")) or None
+            if ability:
+                item["ability"] = ability
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+            item["derived_requirements"] = sorted(set(deriving_requirements.get(artifact.artifact_id, [])))
         if artifact.artifact_type == "architecture":
             item["architecture_traceability"] = architecture_traceability_state(
                 artifact,
@@ -2144,6 +2163,9 @@ def build_dashboard_bundle(
             for key in ("version", "released_at", "distribution"):
                 if artifact.get(key) is not None:
                     compact_artifact[key] = artifact[key]
+        if artifact.get("type") == "capability" and artifact.get("ability") is not None:
+            # SPEC-TCM-005 TCM-RFC-006: the lineage board shows the ability under the title.
+            compact_artifact["ability"] = artifact["ability"]
         if artifact.get("type") == "decision":
             # SPEC-DCM-001 rule 13: the in-flight tile shows age and deciding role.
             for key in ("created", "kind", "deciding_roles"):
