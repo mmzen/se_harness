@@ -2,7 +2,7 @@
 id = "VREC-TCM-006"
 type = "verification_record"
 title = "Verification candidate for WO-TCM-006"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/technical-communication/evidence/WO-TCM-006/
 evaluator_evidence_path = "docs/engineering/technical-communication/evidence/VREC-TCM-006-evaluator.json"
 evaluator_evidence_sha256 = "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
 
+verified_at = "2026-09-04T19:02:36Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-TCM-006"]
 conforms_to = ["VER-TCM-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-04T19:02:36Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-09-04 with 'i verify', after the five disclosures recorded in docs/engineering/technical-communication/evidence/WO-TCM-006/WO-TCM-006-verification.md (the glossary path moved to the repository root by the owner's instruction with REQ-TCM-007's row unchanged; two scope amendments; the decision artifact unusable until the 0.15.0 adoption; a long vocabulary report on this repository; Windows figures with the Linux reading from the pull request's validate check). The record binds commit b93ac2a4b3bf9ac95f64d417cc919beaa41a758e; validate check-run 101139912417 was success at that head."
 +++
 
 # Verification Record Candidate
