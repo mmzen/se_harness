@@ -25,8 +25,8 @@ mechanical pushes back.
 
 This note measures the 328 requirements, names the causes, and proposes a
 shorter template, a plain-language summary line, a named actor, draft-time
-advisories for length, a larger glossary, and a forward-only migration. It
-ends with the three decisions that belong to the owner.
+advisories for length, a repository-owned glossary, and a forward-only
+migration. It ends with the three decisions that belong to the owner.
 
 ## Terms
 
@@ -248,13 +248,35 @@ Advisory for one release, then blocking at approval through the existing
 threshold of 300 characters should follow the statement rule down to 30
 words, which is about 200 characters.
 
-### 4. Grow the glossary and link it
+### 4. Grow this repository's glossary, and point the template at a glossary the repository owns
 
-Add the frequent terms the glossary lacks: `candidate` and `digest` first,
-then `canonical`, `deterministic`, `schema`, `accountable`, `snapshot` (it
-is there as formal snapshot), `provenance`, `predicate`. The template's
-`In plain words` guidance points at the glossary; a term used in a
-requirement should be findable in one hop.
+Two vocabularies meet in a requirement, and the fix differs for each.
+
+- **Harness terms** are the same in every repository that uses the harness:
+  work order, verification record, decision right, checkpoint, gate. They
+  are defined once, in the managed instructions and policy documents that
+  the distribution ships. They need no glossary.
+- **Project terms** belong to one repository. `candidate`, `digest`,
+  `evaluator`, `canonical` and `deterministic` are se_harness's words; a
+  repository that builds a payment service has other words. A glossary is
+  the repository's own note, written from that repository's artifacts and
+  context. The distribution ships no glossary and no glossary content. The
+  se_harness vocabulary must never travel in the templates.
+
+For this repository: add the frequent terms `glossary.md` lacks,
+`candidate` and `digest` first, then `canonical`, `deterministic`,
+`schema`, `accountable`, `snapshot` (it is there as formal snapshot),
+`provenance`, `predicate`. The frequency list in the vocabulary table above
+is the seed; the script that produced it can produce the same list for any
+repository, so a glossary is generated from the corpus, never copied from
+here.
+
+For the template: the `In plain words` guidance points at a glossary the
+repository owns, at a path the repository chooses (`docs/notes/glossary.md`
+here), and says so. It does not name se_harness's glossary and it does not
+assume one exists. A repository without a glossary reads the guidance as an
+instruction to write one from its own terms. A term used in a requirement
+should then be findable in one hop.
 
 ### 5. Forward-only migration
 
@@ -272,8 +294,10 @@ The template, the authoring guide and the validator advisories are managed
 files. The change lands in the candidate templates under a work order,
 ships with the next release, and reaches this repository at its next root
 adoption, exactly like the decision artifact (`WO-DCM-001`). Until then only
-the candidate benefits. The glossary and this note are notes and need no
-work order.
+the candidate benefits. This repository's glossary and this note are notes
+and need no work order. The glossary is repository-owned content: the
+distribution never carries it, and no work order may move its entries into
+a template.
 
 ## Decisions that belong to the owner
 
