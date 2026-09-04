@@ -2,7 +2,7 @@
 id = "WO-TCM-008"
 type = "work_order"
 title = "Ship the reader-first capability shape and read derivation from the graph"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -30,6 +30,13 @@ class = "execution"
 implements = ["REQ-TCM-012", "REQ-TCM-013"]
 specifications = ["SPEC-TCM-005"]
 verification = ["VER-TCM-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T19:45:21Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i apprive' (approve), after reviewing PR #342 (REQ-TCM-012, REQ-TCM-013, SPEC-TCM-005, VER-TCM-005, WO-TCM-008), carrying the owner's four decisions on the capability assessment of the same day. WO-TCM-008 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the base of the pull request; the verification decision, merge, release and publication stay human. Execution stacks on WO-TCM-007."
 +++
 
 # Work Order: Ship the reader-first capability shape and read derivation from the graph

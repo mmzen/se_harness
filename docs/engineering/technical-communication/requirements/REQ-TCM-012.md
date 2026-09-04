@@ -2,7 +2,7 @@
 id = "REQ-TCM-012"
 type = "requirement"
 title = "A capability the reader understands on first reading"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -13,6 +13,13 @@ source = "docs/notes/assessment-capability-readability-2026-09-04.md: 36 capabil
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T19:45:21Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i apprive' (approve), after reviewing PR #342 (REQ-TCM-012, REQ-TCM-013, SPEC-TCM-005, VER-TCM-005, WO-TCM-008), carrying the owner's four decisions on the capability assessment of the same day."
 +++
 
 # Requirement: A capability the reader understands on first reading

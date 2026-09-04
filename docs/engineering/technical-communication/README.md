@@ -172,4 +172,10 @@ packet carries the decision.
 
 The two requirements are written in the reader-first shape and still end
 with `Open decisions` reading `None`, as the root gate of 0.14.0 requires.
-Every artifact is `draft`. This packet authorizes no implementation.
+
+On 2026-09-04 the repository owner approved all five artifacts with the
+instruction "i apprive" (PR #342). `WO-TCM-008` carries the delegation
+class and stacks on `WO-TCM-007`: its delegated start follows once
+`WO-TCM-007` has landed the advisory type table, on a branch from that
+result. The verification decision on the record, the merge, the release and
+the adoption stay human.
