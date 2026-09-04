@@ -89,3 +89,7 @@ beneath the statement, and the `SPEC-DCM-001` rule 11 amendment that makes
 the `Open decisions` section a legacy rule. The authoring gate needed no
 code change: it already read the section only where the heading existed.
 Its evidence packet is `evidence/WO-TCM-005/`.
+
+`WO-TCM-006` executes on the branch `wo/tcm-006-execution`, opened on
+2026-09-04 from `main` after `WO-TCM-005` merged with `VREC-TCM-005`
+verified. Its evidence packet is `evidence/WO-TCM-006/`.
