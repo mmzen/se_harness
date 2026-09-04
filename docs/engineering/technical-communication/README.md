@@ -150,3 +150,7 @@ delegated route on its own branch, started, completed and recorded by the
 delegated executor while the required `validate` check is green at the
 exact head. The verification decision on the record, the merge, the release
 and the adoption stay human.
+
+`WO-TCM-007` executes on the branch `wo/tcm-007-execution`, opened on
+2026-09-04 from `main` after the packet merged (PR #340). Its evidence
+packet is `evidence/WO-TCM-007/`.
