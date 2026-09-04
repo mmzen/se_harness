@@ -2,7 +2,7 @@
 id = "WO-TCM-007"
 type = "work_order"
 title = "Ship the reader-first intent shape, the success-measure rule and the Explorer's outcome line"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -37,6 +37,13 @@ to = "approved"
 decided_at = "2026-09-04T19:27:39Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i appprove the packet', after reviewing PR #340 (REQ-TCM-009..011, SPEC-TCM-004, VER-TCM-004, WO-TCM-007). WO-TCM-007 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the base of the pull request; the verification decision, merge, release and publication stay human."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-04T19:37:22Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 4afadac4acfb2e691fa54d97eae3802f407ff992 (check-run 101150403167, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-007-execution (PR #341) opened from main after PR #340 merged the approved packet."
 +++
 
 # Work Order: Ship the reader-first intent shape, the success-measure rule and the Explorer's outcome line
