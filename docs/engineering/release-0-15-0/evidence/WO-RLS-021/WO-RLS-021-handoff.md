@@ -1,3 +1,10 @@
+```toml
+artifact = "WO-RLS-021"
+checkpoint = "handoff"
+formal_snapshot_sha256 = "0000000000000000000000000000000000000000000000000000000000000000"
+rebound_at = "2026-09-04T00:00:00Z"
+```
+
 # WO-RLS-021 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
