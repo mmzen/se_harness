@@ -60,7 +60,13 @@ their theirs them themselves then there these they this those through to too und
 was we were what when where whether which while who whom why will with within without would you your yours
 yourself yourselves given then when normal failure example examples trigger response behavior plain words
 why none section sections file files path paths name names new old first second last next same different
+exact exactly state states required requires require existing exists exist complete completes completed
+remain remains remaining test tests testing source sources implementation implementations expected observed
+current later earlier retained retain named single change changes changed add added adds remove removed
+before after without within every each one two three
 """.split())
+#: The report names at most this many undefined terms, most frequent first, and counts the rest.
+VOCABULARY_REPORT_LIMIT = 25
 _TOKEN = re.compile(r"[a-z][a-z-]{2,}")
 _INLINE_CODE = re.compile(r"`[^`]*`")
 _FENCED_CODE = re.compile(r"```.*?```", re.S)
@@ -440,11 +446,13 @@ def build_vocabulary_report(
     defined: set[str] = set()
     for entry in entries:
         defined |= _entry_keys(entry)
-    undefined = [
+    undefined_all = [
         {"term": term, "count": count}
         for term, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))
         if count >= threshold and term not in HARNESS_TERMS and term not in defined
     ]
+    undefined = undefined_all[:VOCABULARY_REPORT_LIMIT]
+    omitted = len(undefined_all) - len(undefined)
     stale = sorted(
         entry for entry in entries
         if not any(counts.get(key, 0) > 0 for key in _entry_keys(entry) if " " not in key)
@@ -461,6 +469,7 @@ def build_vocabulary_report(
         "entry_count": len(entries),
         "threshold": threshold,
         "undefined_frequent_terms": undefined,
+        "undefined_frequent_terms_omitted": omitted,
         "stale_entries": [{"term": entry} for entry in stale],
         "notes": notes,
         "authority": "derived",
@@ -711,7 +720,8 @@ def _render_vocabulary(vocabulary: Mapping[str, Any] | None) -> list[str]:
         f"threshold {vocabulary.get('threshold')} occurrences"
     )
     if undefined:
-        lines.append("- frequent project terms without an entry: " + ", ".join(f"{item['term']} ({item['count']})" for item in undefined))
+        omitted = vocabulary.get("undefined_frequent_terms_omitted", 0)
+        lines.append("- frequent project terms without an entry: " + ", ".join(f"{item['term']} ({item['count']})" for item in undefined) + (f"; and {omitted} more above the threshold" if omitted else ""))
     else:
         lines.append("- every project term above the threshold has an entry")
     if stale:

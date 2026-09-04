@@ -19,6 +19,9 @@ paths = [
   "tests/",
   "docs/notes/",
   "docs/engineering/technical-communication/",
+  "pyproject.toml",
+  "GLOSSARY.md",
+  "README.md",
 ]
 
 [delegation]
@@ -133,3 +136,19 @@ a hash-locked file in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Amendment record
+
+- 2026-09-04, by the accountable engineering owner with the instruction
+  "i confirm the scope amendment", after the delegated executor reported
+  that the template root is packaged as an explicit file list in
+  `pyproject.toml`, so the glossary seed needs one data-files line there.
+  `pyproject.toml` joins `[execution_scope] paths`. Nothing else in the work
+  order changes. The formal snapshot moves with this edit; the evidence
+  header is bound after it.
+- 2026-09-04, by the accountable engineering owner with the instruction
+  "amend scope", after the delegated executor reported that the owner's
+  chosen location for this repository's glossary, `GLOSSARY.md` at the
+  repository root, and the one-line link change in `README.md` that follows
+  it, lie outside the scope above. `GLOSSARY.md` and `README.md` join
+  `[execution_scope] paths`. Nothing else in the work order changes.

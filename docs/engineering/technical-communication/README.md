@@ -101,3 +101,11 @@ paragraph of `ARTIFACT_AUTHORING.md`; this repository's glossary grown by
 the nine terms the assessment named, each citing the artifact that fixes
 its meaning; and the distribution-boundary test that keeps every glossary
 entry out of the templates. Its evidence packet is `evidence/WO-TCM-006/`.
+The work order carries one amendment record: on 2026-09-04 the owner
+confirmed adding `pyproject.toml` to its execution scope, because the
+template root is packaged as an explicit file list and the seed needs its
+own data-files line. The question was first drafted as `DEC-TCM-001`; the
+governing 0.14.0 evaluator refused the file (`E002`, unknown artifact type),
+so the decision went through the owner's chat channel and is recorded in
+the evidence packet. Decision artifacts become usable in this repository at
+the 0.15.0 adoption.
