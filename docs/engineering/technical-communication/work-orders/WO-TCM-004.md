@@ -2,7 +2,7 @@
 id = "WO-TCM-004"
 type = "work_order"
 title = "Register the decision-management diagnostic families in the code index"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -22,10 +22,20 @@ paths = [
   "docs/engineering/technical-communication/evidence/",
 ]
 
+[delegation]
+class = "execution"
+
 [relations]
 implements = ["REQ-TCM-005"]
 specifications = ["SPEC-TCM-002"]
 verification = ["VER-TCM-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T07:21:00Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-04 by selecting the presented option 'Approve with execution delegation' for WO-TCM-004, after reviewing the drafted work order. WO-TCM-004 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base, so the approved work order merges to main before execution begins. It authorizes only the declared scope: the two registry rows, the unregistered-family guard, the regenerated index, the pinning test, one link sentence, this domain's index and the evidence packet. It authorizes no change to any diagnostic code or message, no hash-locked root file, no verification decision, no release and no publication."
 +++
 
 # Work Order: Register the decision-management diagnostic families in the code index
@@ -38,6 +48,13 @@ and reason of every decision taken on it, are the front matter and
 `[[lifecycle_events]]` above.
 
 Commit-bound verification is `required`.
+
+This work order carries `[delegation] class = "execution"`. Approving it is
+the act of delegating `DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE`
+to the `delegated-executor` role, each act admitted only while the required
+`validate` check is `success` for the exact candidate head, with the class
+read from the base of the pull request. The verification decision on the
+record, merge, release and publication stay human.
 
 ## Objective
 
