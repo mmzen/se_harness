@@ -18,6 +18,7 @@ paths = [
   "docs/images/harness-explorer-virtual-twin.png",
   "tests/test_public_onboarding.py",
   "tests/test_progressive_documentation.py",
+  "tests/test_integration_package.py",
   "docs/engineering/harness-distribution/README.md",
   "docs/engineering/harness-distribution/requirements/REQ-DST-069.md",
   "docs/engineering/harness-distribution/specifications/SPEC-DST-024.md",
@@ -75,6 +76,12 @@ existing root-to-notes layering and requires no new architecture relation.
 
 Choose test assertions for the specified behavior, preserve existing note coverage,
 and use a normal fast-forward/merge workflow without rewriting published history.
+
+The full regression run identified one additional root-presentation assertion in
+tests/test_integration_package.py. Under the owner's instruction to publish the
+reviewed README and reconcile its supporting checks, this scope includes replacing
+that retired wording assertion with the root-to-notes link. All integration-package
+installation and authority-boundary assertions remain unchanged.
 
 ## Required verification and evidence
 

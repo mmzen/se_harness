@@ -35,6 +35,9 @@ authority, upgrade, and runtime obligations continue unchanged.
 The root still links to the notes index, overview, complete example, command
 reference, installation/upgrade procedure, and contributor guide. This changes
 public presentation inside the existing layered documentation architecture.
+The integration-package guide remains reachable through that notes index; its
+name need not also appear in the root README. Its detailed safety guidance and
+regression assertions continue unchanged.
 
 ## Inputs and outputs
 
