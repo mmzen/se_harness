@@ -155,3 +155,5 @@ Owner-reviewed Verity Plane public presentation:
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-069` -> `SPEC-DST-024`, `VER-DST-024` -> `WO-DOC-014`.
 
 The current README presentation contract replaces earlier root-only format inventories while preserving the linked guides and authority boundaries.
+
+`WO-DOC-015` adds the owner's supplied logo to that published README under the same presentation contract.

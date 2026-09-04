@@ -1,3 +1,7 @@
+<p align="left">
+  <img src="docs/images/verity-plane-logo.png" alt="Verity Plane" width="360">
+</p>
+
 ## SE Harness / Verity Plane
 
 <h4 align="center"><em>Delegate the work. Keep the authority.</em></h4>
