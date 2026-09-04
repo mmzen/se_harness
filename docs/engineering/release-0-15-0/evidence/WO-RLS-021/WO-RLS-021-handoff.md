@@ -103,7 +103,21 @@ head (section 4b).
 
 ## Section 4b: build re-verified at the bound candidate
 
-BUILD-B
+`VREC-SEH-024` and `RLS-SEH-024` bind `ba7ec54`, the implemented-transition
+commit, so the replay was dispatched again on `release/0.15.0` at that exact
+head (run 33923485490): two producer runs byte-identical, `state` `exact`,
+the same pinned image and recipe `0c3f368c…`. Wheel
+`eb09343f65a52ecc7511aacbe7f4cc546cfe4bf28eeed62cf3ff2bccf838d947`; sdist
+`0ad6c0d085065aaa49128ac81690ba8426aca77870390e7fece88782420ede16`;
+`SOURCE_DATE_EPOCH` 1788559098; source manifest `82d242b9…`. The section-4
+digests were the reading at `10b03bf`, whose packaged bytes are identical;
+the archives differ only through the commit-derived `SOURCE_DATE_EPOCH`.
+The run's `release-build-replay.json` `manifest`, with `commit` equal to
+the bound candidate, is retained byte-for-byte in canonical form as
+`RLS-SEH-024-bundle.json` when the record is prepared and is what the
+record's distribution table carries; the hosted
+`release-candidate-replay.yml` dispatch on this branch must reproduce it
+from the bound record.
 
 ## Section 5: hosted lanes
 
@@ -131,6 +145,36 @@ Retained by the candidate-evidence run 33922705239:
 | the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
 | integration package | built, verified on Linux and Windows, retained |
 
-### Section 5b: at the bound candidate
+### Section 5b: at the bound candidate `ba7ec54` and the record commit `12fddcc`
 
-LANES-B
+At `ba7ec54`: Engineering Harness `validate` success (check-run
+101186618619), Governor Transition Assessment success, Publication
+Rehearsal dispatch 33923485490 success (section 4b). The push-event
+Candidate Evidence and Publication Rehearsal runs at `ba7ec54` were
+cancelled by the concurrency group when the record commit `12fddcc` was
+pushed, as happened at 0.14.0's bound candidate; the packaged bytes of the
+two commits are identical, so their readings are taken at `12fddcc`.
+
+At `12fddcc`, push and pull-request events, seven runs, all `success`:
+Engineering Harness (33923557410, 33923560035), SE Harness Candidate
+Evidence (33923557431, 33923560073), Governor Transition Assessment
+(33923557407, 33923560093), Publication Rehearsal (33923560306 on the
+pull-request merge commit). Retained by the candidate-evidence run
+33923557431: `qualify complete-candidate` `passed: true`, `CC001` to
+`CC004`; `qualify candidate-package` `CP001`, `CP002` from the isolated
+released 0.14.0 verifier; the upgrade rehearsal 0.14.0 -> 0.15.0 `pass`
+twice on Linux and twice on Windows, one `semantic_sha256`
+`68c8bb7194a034ba…`; the non-promotable candidate wheel `bfedb884…` built
+from `12fddcc`; the integration package built, verified on both platforms
+and retained.
+
+## Section 6: the record
+
+`VREC-SEH-024` was prepared at `ba7ec54` by the quality owner from the
+released 0.14.0 evaluator over the thirteen gates of `REL-SEH-026`, the
+eleven verification contracts and the thirteen work-order-keyed handoff
+packets; it is `ready` in the commit that follows the candidate. The
+validator's warning count moved from 69 to 70 with it: one `W013` location
+warning, because the release domain keeps its records beside their release
+as every release domain since 0.10.0 has, the same warning the 0.14.0
+records carry. The verification decision is the assurance owner's.
