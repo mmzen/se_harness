@@ -165,3 +165,32 @@ plain-words rendering on the record panel and the lineage card, and the G0
 `intent_quality` condition derived from an outcome with at least one
 success-measure row. The 33 approved intents are unchanged and raise no
 advisory. Its evidence packet is `evidence/WO-TCM-007/`.
+
+## Reader-first capabilities (2026-09-04)
+
+The assessment `docs/notes/assessment-capability-readability-2026-09-04.md`
+measured the 36 capabilities; the owner decided its four points as
+recommended ("i follow your recommendation"): an `ability` front-matter
+field, the requirement list retired in favour of the graph, advisory for
+one release then blocking, the capability layer kept and made cheap. This
+packet carries the decision.
+
+- `REQ-TCM-012`: a capability the reader understands on first reading; the
+  ability field and draft-time advisories.
+- `REQ-TCM-013`: what derives from a capability is read from the graph and
+  shown by the Explorer.
+- `SPEC-TCM-005`: rules `TCM-RFC-001` to `TCM-RFC-007`, extending the
+  per-type advisory table of `SPEC-TCM-004`.
+- `VER-TCM-005`: the evidence contract for the two requirements.
+- `WO-TCM-008`: the template, the field, the advisories, the Explorer and
+  the guide, stacked on `WO-TCM-007` so the type table is written once.
+
+The two requirements are written in the reader-first shape and still end
+with `Open decisions` reading `None`, as the root gate of 0.14.0 requires.
+
+On 2026-09-04 the repository owner approved all five artifacts with the
+instruction "i apprive" (PR #342). `WO-TCM-008` carries the delegation
+class and stacks on `WO-TCM-007`: its delegated start follows once
+`WO-TCM-007` has landed the advisory type table, on a branch from that
+result. The verification decision on the record, the merge, the release and
+the adoption stay human.
