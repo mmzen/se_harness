@@ -2,7 +2,7 @@
 artifact = "WO-RLS-021"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "26a9e5471e734b580524cb2c558dceb554e1cadd47a13ce7d08b235296b33440"
-rebound_at = "2026-09-04T21:47:25Z"
+rebound_at = "2026-09-04T21:57:28Z"
 ```
 
 # WO-RLS-021 handoff evidence
@@ -87,9 +87,19 @@ The reading is the `workflow_dispatch` of `publication-rehearsal.yml` on
 builds the merge commit, not the head, as `WO-RLS-019` and `WO-RLS-020`
 recorded).
 
-### Reading at CANDIDATE-SHORT (dispatch run RUN-A)
+### Reading at `10b03bf` (dispatch run 33922502052)
 
-BUILD-A
+Two producer runs byte-identical, `state` `exact`, the pinned linux/amd64
+image and the recipe `0c3f368c…` unchanged since `v0.12.0`. Wheel
+`se_harness-0.15.0-py3-none-any.whl`
+`adc51fb51927be03051da91cc35acfefca9433f0753d0135dd69e635cbdf9e56`; sdist
+`se_harness-0.15.0.tar.gz`
+`4113ee5fac72278e520669b6f07a9eaf54e90aefa611a511b226afa12a60ae97`;
+`SOURCE_DATE_EPOCH` 1788558290; source manifest `b872c158…`. `10b03bf` is
+the first commit that retained this packet; its packaged bytes are those of
+every commit on this branch. These are the readings at that commit; the
+record binds the digests of the bound candidate, read the same way at that
+head (section 4b).
 
 ## Section 4b: build re-verified at the bound candidate
 
@@ -97,7 +107,29 @@ BUILD-B
 
 ## Section 5: hosted lanes
 
-LANES-A
+At `10b03bf`, the packet's first commit, the `validate` lane was `failure`:
+the packet body had been written with CRLF line endings, the evidence
+header parser reads LF bytes at offset 0, and the handoff step therefore
+found no readable evidence. The concurrency group cancelled the other lanes
+of that push. `dbb35a0` rewrote the packet in LF bytes and bound the header;
+nothing else changed, and no packaged byte differs between the two commits.
+
+At `dbb35a0`, push and pull-request events, seven runs, all `success`:
+Engineering Harness (33922705106, 33922708446), SE Harness Candidate
+Evidence (33922705239, 33922708510), Governor Transition Assessment
+(33922705206, 33922708525), Publication Rehearsal (33922708620 on the
+pull-request merge commit; the dispatch at `10b03bf` is section 4).
+
+Retained by the candidate-evidence run 33922705239:
+
+| Lane | Reading |
+| --- | --- |
+| candidate source, Linux | `run_tests.py --workers 4 --scale full` pass; portable surface `--repository` PASS; non-promotable candidate wheel `75cf83b1…` built from `dbb35a0` |
+| `qualify complete-candidate`, Linux | `passed: true`; `CC001` to `CC004` pass |
+| `qualify candidate-package` from the isolated released 0.14.0 verifier | `passed: true`; `CP001`, `CP002` pass |
+| `repository_tools.upgrade_rehearsal` 0.14.0 -> 0.15.0, Linux, twice | `overall_result` pass both runs; `semantic_sha256` `8b99564f7dff9781…` both |
+| the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
+| integration package | built, verified on Linux and Windows, retained |
 
 ### Section 5b: at the bound candidate
 
