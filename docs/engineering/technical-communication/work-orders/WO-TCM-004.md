@@ -2,7 +2,7 @@
 id = "WO-TCM-004"
 type = "work_order"
 title = "Register the decision-management diagnostic families in the code index"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -36,6 +36,13 @@ to = "approved"
 decided_at = "2026-09-04T07:21:00Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-04 by selecting the presented option 'Approve with execution delegation' for WO-TCM-004, after reviewing the drafted work order. WO-TCM-004 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the pull request's base, so the approved work order merges to main before execution begins. It authorizes only the declared scope: the two registry rows, the unregistered-family guard, the regenerated index, the pinning test, one link sentence, this domain's index and the evidence packet. It authorizes no change to any diagnostic code or message, no hash-locked root file, no verification decision, no release and no publication."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-04T07:32:56Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b0e177b493ebc69468e3da008c9a453135e001dd (check-run 100947564978, source github-checks)."
 +++
 
 # Work Order: Register the decision-management diagnostic families in the code index
