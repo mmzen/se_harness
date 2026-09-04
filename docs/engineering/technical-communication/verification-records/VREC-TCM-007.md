@@ -2,7 +2,7 @@
 id = "VREC-TCM-007"
 type = "verification_record"
 title = "Verification candidate for WO-TCM-007"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/technical-communication/evidence/WO-TCM-007/
 evaluator_evidence_path = "docs/engineering/technical-communication/evidence/VREC-TCM-007-evaluator.json"
 evaluator_evidence_sha256 = "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
 
+verified_at = "2026-09-04T20:14:30Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-TCM-007"]
 conforms_to = ["VER-TCM-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-04T20:14:30Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence on 2026-09-04 with 'i verify', after the six disclosures recorded in docs/engineering/technical-communication/evidence/WO-TCM-007/WO-TCM-007-verification.md (rendering proved on the built template's placeholder order; the G0 condition label changed to what it measures; the closed acceptance vocabulary; two test assertions corrected before any commit; the merge of main with its index-only conflict resolution after PR #342 landed; Windows figures with the Linux reading from the pull request's check). The record stays bound to 79907c6."
 +++
 
 # Verification Record Candidate
