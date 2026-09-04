@@ -2,7 +2,7 @@
 id = "VREC-DOC-007"
 type = "verification_record"
 title = "Verification candidate for WO-DOC-014"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DOC-014/WO-
 evaluator_evidence_path = "docs/engineering/harness-distribution/evidence/VREC-DOC-007-evaluator.json"
 evaluator_evidence_sha256 = "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
 
+verified_at = "2026-09-04T21:29:32Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DOC-014"]
 conforms_to = ["VER-DST-024"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-04T21:29:32Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the retained evidence of WO-DOC-014 on 2026-09-04 with 'i verify', as the post-merge repair of the assurance decision that PR #344's merge skipped (issue #347): the technical verification in docs/engineering/harness-distribution/evidence/WO-DOC-014/ matches the reviewed README inputs byte for byte and the hosted checks were green; the record binds commit 109c9f03320baa8d2a9696f5ea891966c8c17429, main after #346, a governance commit later than the merged implementation."
 +++
 
 # Verification Record Candidate
