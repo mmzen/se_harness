@@ -2,7 +2,7 @@
 id = "WO-TCM-006"
 type = "work_order"
 title = "Install a repository-owned glossary and report its drift"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-04T17:27:00Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at e4222743fec27ed3a8b88fd6808c78cd08806422 (check-run 101113465388, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-006-execution opened from main after WO-TCM-005 merged with VREC-TCM-005 verified."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T18:58:46Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 943cc6178da8c7fd75e0f6b0ba7311ea46f9c260 (check-run 101139721500, source github-checks). Delegated DR-WO-COMPLETE: the repository-owned glossary seed at the repository root, the inspect vocabulary report, the upkeep guidance and this repository's glossary are implemented in the candidate per SPEC-TCM-003 rules TCM-RFR-007 to TCM-RFR-010 as amended by record; evidence docs/engineering/technical-communication/evidence/WO-TCM-006/ with the retained Git-derived handoff result; Windows suite 1230 tests, zero failures, the one baseline error; released 0.14.0 validate PASS. Five disclosures are in the evidence packet."
 +++
 
 # Work Order: Install a repository-owned glossary and report its drift
