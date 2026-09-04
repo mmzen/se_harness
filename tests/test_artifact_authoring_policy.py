@@ -180,7 +180,7 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
             self.assertIn(shape, text)
         self.assertIn('verification_method = ["test"]', text)
         self.assertIn("| Trigger | Response | On failure |", text)
-        self.assertIn("docs/notes/glossary.md", text)
+        self.assertIn("`GLOSSARY.md` at the repository", text)
         self.assertNotIn("Open decisions", text)
         self.assertNotIn("acceptance/", text)
         for field in ("priority = ", "source = ", "measure = "):

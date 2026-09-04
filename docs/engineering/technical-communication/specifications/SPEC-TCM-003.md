@@ -94,9 +94,9 @@ section must read `None` or list `DEC-` identifiers, and prose there stays
 pending state of a definition is read only from the decision artifacts
 naming it in `blocks`, through the decision predicate of its gate.
 
-**TCM-RFR-007 (glossary seed).** The template
-`docs/notes/glossary.md.seed` is installed by `init` and `adopt` as
-`docs/notes/glossary.md` in seed mode: written when absent, never
+**TCM-RFR-007 (glossary seed).** The template `GLOSSARY.md.seed` at the
+template root is installed by `init` and `adopt` as `GLOSSARY.md` at the
+repository root in seed mode: written when absent, never
 rewritten, never hashed in the lock, ignored by `upgrade`. The seed carries
 a Summary, the two-vocabulary rule, an empty `Terms` section and the
 instruction that entries cite the artifact that fixes their meaning. It
@@ -108,13 +108,13 @@ bodies of every formal artifact with code spans removed, drops a common
 English stoplist and the harness-term stoplist shipped with the script, and
 reports: project terms whose occurrence count is at or above a threshold
 (default 50, flag `--vocabulary-threshold`) and that have no entry in
-`docs/notes/glossary.md`; glossary entries whose term occurs in no
+`GLOSSARY.md`; glossary entries whose term occurs in no
 artifact. Both are informational findings on the maintenance plane.
 A missing glossary file is reported once, not treated as an error.
 
 **TCM-RFR-009 (pointer and upkeep).** The requirement template's
-`In plain words` guidance points at `docs/notes/glossary.md` as a file the
-repository writes, and says so. The authoring guide adds two sentences: a
+`In plain words` guidance points at `GLOSSARY.md` at the repository root as
+a file the repository writes, and says so. The authoring guide adds two sentences: a
 glossary entry may cite the artifact that fixes its meaning; an amendment
 that changes a term's meaning names the entry. The glossary is a note,
 changed by pull request and review, never by a work order.
@@ -162,3 +162,17 @@ tokenizer's treatment of hyphenated terms; the visual placement of
 become blocking at approval, which is the owner's decision recorded in the
 proposal; the reading-grade estimate, which stays a manual measure and is
 not mechanized.
+
+## Amendment record
+
+- 2026-09-04, under `WO-TCM-006`, by the delegated executor on the
+  repository owner's instruction "This repository's glossary moves to
+  /GLOSSARY.md, and the notes index and the two notes that link it follow",
+  recorded for the owner's verification of the record. Rules `TCM-RFR-007`,
+  `TCM-RFR-008` and `TCM-RFR-009` name `GLOSSARY.md` at the repository root
+  where they named `docs/notes/glossary.md`; the seed is `GLOSSARY.md.seed`
+  at the template root. The reason is discoverability: a newcomer meets the
+  glossary beside the README. `REQ-TCM-007`'s Behavior row still reads the
+  old path; its obligation is unchanged and the row is not rewritten. The
+  requirement template shipped by `WO-TCM-005` is repointed under this work
+  order.

@@ -30,7 +30,7 @@ migration. It ends with the three decisions that belong to the owner.
 
 ## Terms
 
-Terms used below, in plain words. The [glossary](glossary.md) has the rest.
+Terms used below, in plain words. The [glossary](../../GLOSSARY.md) has the rest.
 
 - **Statement.** The `statement` field in a requirement's front matter: the
   one sentence that says what the harness shall do.
@@ -263,7 +263,7 @@ Two vocabularies meet in a requirement, and the fix differs for each.
   context. The distribution ships no glossary and no glossary content. The
   se_harness vocabulary must never travel in the templates.
 
-For this repository: add the frequent terms `glossary.md` lacks,
+For this repository: add the frequent terms `GLOSSARY.md` lacks,
 `candidate` and `digest` first, then `canonical`, `deterministic`,
 `schema`, `accountable`, `snapshot` (it is there as formal snapshot),
 `provenance`, `predicate`. The frequency list in the vocabulary table above
@@ -272,8 +272,8 @@ repository, so a glossary is generated from the corpus, never copied from
 here.
 
 For the template: the `In plain words` guidance points at a glossary the
-repository owns, at a path the repository chooses (`docs/notes/glossary.md`
-here), and says so. It does not name se_harness's glossary and it does not
+repository owns, at a path the repository chooses (`GLOSSARY.md` at the
+repository root here, the owner's choice of 2026-09-04), and says so. It does not name se_harness's glossary and it does not
 assume one exists. A repository without a glossary reads the guidance as an
 instruction to write one from its own terms. A term used in a requirement
 should then be findable in one hop.

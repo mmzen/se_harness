@@ -29,8 +29,8 @@ derives_from = ["CAP-xxx"]
 ## In plain words
 
 <One or two sentences a newcomer understands. A project term used here is
-defined in this repository's own glossary, `docs/notes/glossary.md`, which
-this repository writes.>
+defined in this repository's own glossary, `GLOSSARY.md` at the repository
+root, which this repository writes.>
 
 ## Why
 

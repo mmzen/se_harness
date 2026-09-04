@@ -1,0 +1,334 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "6b384e946b5ea55028322e26a5ad3d78428458aafcd0555efb932f83d7121c02",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-TCM-006"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-TCM-006 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-TCM-006"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-TCM-006:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-TCM-006 declares 8 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-TCM-006"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-TCM-006"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 23 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-TCM-006:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-TCM-006"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/technical-communication/evidence/WO-TCM-006/WO-TCM-006-handoff.md.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 69
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-TCM-006",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-TCM-006",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-TCM-006",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-TCM-006",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-TCM-006."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-TCM-006",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-TCM-006 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-TCM-006 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head 39758b6 is failure, not success"
+    },
+    "current_lifecycle_state": [
+      "WO-TCM-006 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-TCM-006",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      },
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "delegated-executor"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-TCM-006."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "566aa1b4f264bf1ef610eacbd1514cd62a08c7cf6480e4a4091352d12a95517c",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/technical-communication/evidence/WO-TCM-006/handoff.json",
+      "docs/engineering/technical-communication/evidence/WO-TCM-006/WO-TCM-006-handoff.md",
+      "docs/engineering/technical-communication/evidence/WO-TCM-006/WO-TCM-006-verification.md",
+      "docs/engineering/technical-communication/README.md",
+      "docs/engineering/technical-communication/specifications/SPEC-TCM-003.md",
+      "docs/engineering/technical-communication/work-orders/WO-TCM-006.md",
+      "docs/notes/assessment-requirement-readability-2026-09-04.md",
+      "docs/notes/getting-started.md",
+      "docs/notes/glossary.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/README.md",
+      "GLOSSARY.md",
+      "pyproject.toml",
+      "README.md",
+      "se_harness/cli.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md",
+      "templates/repository/standard/GLOSSARY.md.seed",
+      "templates/repository/standard/scripts/inspect_engineering_artifacts.py",
+      "tests/test_artifact_authoring_policy.py",
+      "tests/test_fixture_support.py",
+      "tests/test_glossary.py",
+      "tests/test_reader_first_requirements.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/technical-communication/",
+      "docs/notes/",
+      "GLOSSARY.md",
+      "pyproject.toml",
+      "README.md",
+      "se_harness/",
+      "templates/repository/standard/",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-TCM-001",
+      "INT-TCM-001",
+      "REQ-TCM-007",
+      "SPEC-TCM-003",
+      "VER-TCM-003"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-TCM-006"
+    ],
+    "primary": "WO-TCM-006"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-TCM-006",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-TCM-006",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

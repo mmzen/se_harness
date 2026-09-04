@@ -75,7 +75,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 harnessctl init [TARGET] [--project-name NAME] [--dry-run] [--json]
 harnessctl adopt [TARGET] [--project-name NAME] [--dry-run] [--json]
 harnessctl validate [TARGET] [--json] [--advisories]
-harnessctl inspect [TARGET] [--json]
+harnessctl inspect [TARGET] [--json] [--vocabulary-threshold N]
 harnessctl dashboard [TARGET] [--output PATH] [--json]
 harnessctl doctor [TARGET] [--json]
 ```
@@ -98,6 +98,8 @@ The `assurance_pending` queue contains only an `implemented` work order whose ex
 The temporal reassessment observation `W-HEX-003` is deliberately narrow: it compares dates only for supported declared dependency relations whose source can still be meaningfully reassessed. It does not reopen completed work orders, reinterpret commit-bound verification or release records, or treat derived graph projections as declared dependencies.
 
 For existing lifecycle queues and a closed set of actionable derived warning rules, inspection also reports deterministic suggested next steps. Each suggestion identifies its source, affected artifacts, action class, accountable role, and `automatic = false`. Suggestions contain no executable command and never assert eligibility or authority. Validator findings, informational observations, and unknown rules remain visible without guessed advice.
+
+Inspection ends with a vocabulary section. It counts the words of every artifact's statement and body with code removed, drops common English and the harness terms the managed instructions define, and names the project terms at or above `--vocabulary-threshold` occurrences (default 50, between 30 and 100) that have no entry in `GLOSSARY.md` at the repository root, and the entries whose term appears in no artifact. The glossary is repository content: the harness seeds it empty at installation and never rewrites it. The section is informational and never blocks.
 
 A successfully produced inspection exits zero even when formal validation failed or attention exists, so use `validate` when gate exit behavior is required. Inspection is repository-local derived evidence: it does not approve, authorize, verify, supersede, release, remediate, or independently govern the repository.
 

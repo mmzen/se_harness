@@ -2,7 +2,7 @@
 id = "WO-TCM-006"
 type = "work_order"
 title = "Install a repository-owned glossary and report its drift"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -19,6 +19,9 @@ paths = [
   "tests/",
   "docs/notes/",
   "docs/engineering/technical-communication/",
+  "pyproject.toml",
+  "GLOSSARY.md",
+  "README.md",
 ]
 
 [delegation]
@@ -35,6 +38,20 @@ to = "approved"
 decided_at = "2026-09-04T16:14:37Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i approve the packet, the work orders can be start with execution delegation', after reviewing PR #335 (REQ-TCM-006..008, SPEC-TCM-003, VER-TCM-003, WO-TCM-005, WO-TCM-006). WO-TCM-005 and WO-TCM-006 carry the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the base of the pull request; the verification decision, merge, release and publication stay human."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-04T17:27:00Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at e4222743fec27ed3a8b88fd6808c78cd08806422 (check-run 101113465388, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-006-execution opened from main after WO-TCM-005 merged with VREC-TCM-005 verified."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T18:58:46Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 943cc6178da8c7fd75e0f6b0ba7311ea46f9c260 (check-run 101139721500, source github-checks). Delegated DR-WO-COMPLETE: the repository-owned glossary seed at the repository root, the inspect vocabulary report, the upkeep guidance and this repository's glossary are implemented in the candidate per SPEC-TCM-003 rules TCM-RFR-007 to TCM-RFR-010 as amended by record; evidence docs/engineering/technical-communication/evidence/WO-TCM-006/ with the retained Git-derived handoff result; Windows suite 1230 tests, zero failures, the one baseline error; released 0.14.0 validate PASS. Five disclosures are in the evidence packet."
 +++
 
 # Work Order: Install a repository-owned glossary and report its drift
@@ -126,3 +143,19 @@ a hash-locked file in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Amendment record
+
+- 2026-09-04, by the accountable engineering owner with the instruction
+  "i confirm the scope amendment", after the delegated executor reported
+  that the template root is packaged as an explicit file list in
+  `pyproject.toml`, so the glossary seed needs one data-files line there.
+  `pyproject.toml` joins `[execution_scope] paths`. Nothing else in the work
+  order changes. The formal snapshot moves with this edit; the evidence
+  header is bound after it.
+- 2026-09-04, by the accountable engineering owner with the instruction
+  "amend scope", after the delegated executor reported that the owner's
+  chosen location for this repository's glossary, `GLOSSARY.md` at the
+  repository root, and the one-line link change in `README.md` that follows
+  it, lie outside the scope above. `GLOSSARY.md` and `README.md` join
+  `[execution_scope] paths`. Nothing else in the work order changes.

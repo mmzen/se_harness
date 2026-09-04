@@ -31,7 +31,7 @@ rules for the accountable reviewer.
 - `source` names where the obligation came from: a stakeholder, a standard clause, an incident, or an artifact.
 - A quality requirement carries a `measure`: a value and a unit, not an adjective.
 - The body has four sections, in this order: `In plain words`, `Why`, `Behavior`, `Examples`.
-- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `docs/notes/glossary.md`, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
 - `Why` says why the obligation exists, not what it does, in at most five sentences and 120 words. *(mechanical: W-AUT-006)*
 - `Behavior` is one table row per trigger: the trigger the reader can observe, the response the reader can check, what happens instead on failure. That row is the requirement's acceptance condition; the cases that prove it live in the verification contract that `verifies` this requirement, and the way it is met lives in the specification that `specifies` it.
 - `Examples` holds one `Normal` and one `Failure` scenario, each Given, When, Then. They fix meaning; they are not the test plan.
@@ -47,6 +47,13 @@ vague quantities ("fast", "adequate"), and "and/or". If a requirement needs a
 diagram or a table beyond its Behavior row to be understood, the detail
 belongs in a specification that `specifies` it. A requirement that reads like
 a plan of work is a work order in disguise.
+
+The glossary `GLOSSARY.md` at the repository root is this repository's own: the
+harness seeds it empty at installation and never rewrites it, and no term
+ships with the distribution. A glossary entry may cite the artifact that
+fixes the term's meaning; an amendment that changes a term's meaning names
+the entry. `harnessctl inspect` reports the frequent project terms that
+have no entry and the entries whose term has left the artifacts.
 
 A pending question is not written into the requirement. Below the threshold
 in the `decision` section it is asked and answered in a transition's

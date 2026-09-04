@@ -260,6 +260,7 @@ def _inspect_repository(args: argparse.Namespace) -> int:
             "--root",
             str(target),
             *(["--json"] if args.json else []),
+            *(["--vocabulary-threshold", str(args.vocabulary_threshold)] if getattr(args, "vocabulary_threshold", None) is not None else []),
         ],
         cwd=target,
         env=_distribution_environment(),
@@ -864,6 +865,12 @@ def build_parser() -> argparse.ArgumentParser:
     inspect = commands.add_parser("inspect", help="inspect repository-wide attention and lifecycle queues")
     inspect.add_argument("target", nargs="?", default=".")
     inspect.add_argument("--json", action="store_true")
+    inspect.add_argument(
+        "--vocabulary-threshold",
+        type=int,
+        default=None,
+        help="occurrences from which a project term without a glossary entry is reported (30-100; default 50)",
+    )
     inspect.set_defaults(handler=_inspect_repository)
 
     dashboard = commands.add_parser("dashboard", help="generate the repository Harness Explorer")

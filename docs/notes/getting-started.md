@@ -59,7 +59,7 @@ When a work order is implemented, a verification record is prepared for it and a
 
 ## Where to go next
 
-- [Glossary](glossary.md) for every project-specific term on this page.
+- [Glossary](../../GLOSSARY.md) for every project-specific term on this page.
 - [Tier-0 overview](harness-overview.md) for what the harness governs and why.
 - [`harnessctl check` explained](harnessctl-check.md) for what `check` evaluates at each checkpoint.
 - [Installation and safe upgrades](harness-installation-and-upgrades.md) for the complete installation and upgrade procedure.
