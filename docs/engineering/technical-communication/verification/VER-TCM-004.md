@@ -2,13 +2,20 @@
 id = "VER-TCM-004"
 type = "verification"
 title = "Independent evidence for reader-first intents and the Explorer's outcome line"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
 
 [relations]
 verifies = ["REQ-TCM-009", "REQ-TCM-010", "REQ-TCM-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T19:27:39Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i appprove the packet', after reviewing PR #340 (REQ-TCM-009..011, SPEC-TCM-004, VER-TCM-004, WO-TCM-007)."
 +++
 
 # Verification Contract: Independent evidence for reader-first intents and the Explorer's outcome line

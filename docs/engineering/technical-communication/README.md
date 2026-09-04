@@ -142,3 +142,11 @@ approving it is the owner's act of delegating its start, completion and
 record preparation while the required check is green. No approved intent
 is rewritten; the next intent adopts the shape, and an approved one only
 when amended for another reason.
+
+On 2026-09-04 the repository owner approved all six artifacts with the
+instruction "i appprove the packet" (PR #340). The work order carries the
+delegation class, so once the packet is on `main` its execution travels the
+delegated route on its own branch, started, completed and recorded by the
+delegated executor while the required `validate` check is green at the
+exact head. The verification decision on the record, the merge, the release
+and the adoption stay human.

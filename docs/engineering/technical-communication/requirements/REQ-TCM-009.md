@@ -2,7 +2,7 @@
 id = "REQ-TCM-009"
 type = "requirement"
 title = "An intent the reader understands on first reading"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -13,6 +13,13 @@ source = "docs/notes/assessment-intent-readability-2026-09-04.md: 33 intents, me
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-04T19:27:39Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i appprove the packet', after reviewing PR #340 (REQ-TCM-009..011, SPEC-TCM-004, VER-TCM-004, WO-TCM-007)."
 +++
 
 # Requirement: An intent the reader understands on first reading
