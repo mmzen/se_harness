@@ -230,8 +230,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for b58a0d6: HTTP 422"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-TCM-007=implemented",
+        "--decision",
+        "WO-TCM-007=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-TCM-007 is in_progress."
@@ -241,8 +250,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "101158600425",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "1993e3585a6477703e7b0e5562b250a8f570db6b"
       },
       "outcomes": [
         "implemented",
@@ -262,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "70b88d9f282a01c25358aa9301bbff5214315d55f35a7fe844585772f9fe17f5",
+  "result_sha256": "ff5964a2cb1adce4f97ce32d6e5505f6ff97d28f911ba195bff226be3f5fe96b",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,

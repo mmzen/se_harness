@@ -2,7 +2,7 @@
 id = "WO-TCM-007"
 type = "work_order"
 title = "Ship the reader-first intent shape, the success-measure rule and the Explorer's outcome line"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-09-04T19:37:22Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 4afadac4acfb2e691fa54d97eae3802f407ff992 (check-run 101150403167, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-007-execution (PR #341) opened from main after PR #340 merged the approved packet."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T20:07:37Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 1993e3585a6477703e7b0e5562b250a8f570db6b (check-run 101158600425, source github-checks). Delegated DR-WO-COMPLETE: the reader-first intent template with the outcome field, the intent advisories W-AUT-011 to W-AUT-015 with the shared codes at intent budgets, the success-measure acceptance rule, the reconciled checklist, the Explorer's outcome line and the derived G0 intent-quality condition are implemented in the candidate per SPEC-TCM-004 rules TCM-RFI-001 to TCM-RFI-007; evidence docs/engineering/technical-communication/evidence/WO-TCM-007/ with the retained Git-derived handoff result rebound after merging main (PR #342); Windows suite 1243 tests, zero failures, the one baseline error, 26 skips; released 0.14.0 validate PASS, doctor 0 FAIL, preflight PASS. Six disclosures are in the evidence packet."
 +++
 
 # Work Order: Ship the reader-first intent shape, the success-measure rule and the Explorer's outcome line
