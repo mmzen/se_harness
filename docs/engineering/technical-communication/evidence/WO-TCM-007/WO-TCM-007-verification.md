@@ -5,7 +5,7 @@ operational success-measure rule and the Explorer's outcome line
 (`REQ-TCM-009`, `REQ-TCM-010`, `REQ-TCM-011`; `SPEC-TCM-004` rules
 `TCM-RFI-001` to `TCM-RFI-007`). Measurements were taken on Windows 11 on
 2026-09-04 on the execution branch `wo/tcm-007-execution` (PR #341) over
-base `1e2462b` (origin/main, the merge of PR #340), with the released
+base `91f0bde` (origin/main after PR #342 was merged in; the branch opened from `1e2462b`, the merge of PR #340), with the released
 0.14.0 evaluator in `C:/Users/mathi/se-harness-eval-0140` and the candidate
 source of this checkout. Every figure is labelled with the platform it was
 read on; the Linux reading is the pull request's managed check.
@@ -22,6 +22,15 @@ read on; the Linux reading is the pull request's managed check.
   required check `validate` success at `4afadac` (check-run 101150403167).
 - No scope amendment and no pending decision. Every changed path is inside
   the seven declared prefixes; `se_harness/` was declared and not needed.
+- 2026-09-04: while this branch was in progress, PR #342 merged the
+  reader-first capability packet (`REQ-TCM-012`, `REQ-TCM-013`,
+  `SPEC-TCM-005`, `VER-TCM-005`, `WO-TCM-008`) into `main` as `91f0bde`.
+  The pull request became conflicting and GitHub produced no run for the
+  implementation commit `58b1e8b`. `origin/main` was merged into this branch
+  (`b58a0d6`, never rebased); the one conflict was the domain index, where
+  both sides appended a section and both are kept in order. The formal
+  snapshot moved, so the handoff evidence was rebound and the handoff check
+  re-run on the merged tree.
 
 ## Change inventory (candidate source only)
 
@@ -120,7 +129,10 @@ The one error is the pre-existing Windows baseline
 
 The candidate validator on this repository (`--root . --advisories`):
 PASS, 1293 artifacts, 0 errors, 69 warnings, 0 advisories. The 33 approved
-intents raise nothing.
+intents raise nothing. After the merge of `origin/main` (`91f0bde`) both
+the released and the candidate validator read PASS, 1298 artifacts, 0
+errors, 69 warnings, 0 advisories; the rebound handoff check reads
+compliance `pass` over the same 16 changed paths.
 
 ## VER-TCM-004 matrix
 
@@ -157,5 +169,10 @@ intents raise nothing.
    before any commit: a regex asserted without the multiline flag, and an
    advisory order the report does not promise. Neither touched the
    candidate code.
-5. Windows figures only. The Linux reading is the pull request's managed
+5. The branch carries a merge of `origin/main` taken under this work order
+   (PR #342's capability packet). Its only conflict resolution is in the
+   domain index, a repository-owned file with no formal authority; no
+   candidate code was touched by the resolution, and the tests and the
+   released evaluator were re-run on the merged tree.
+6. Windows figures only. The Linux reading is the pull request's managed
    `validate` check on the head commit; the delegated completion cites it.

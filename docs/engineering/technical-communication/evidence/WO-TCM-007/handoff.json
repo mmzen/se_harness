@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "b6dfc3c6f036c9e999ebae095e5b5377d9470c531b5c109e0f6a80917df71ab2",
+    "formal_snapshot_sha256": "ba582fd32e00f9d098098986998fc6c0e792cf2479b7dbf425a4c2e75b8cd1b2",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -231,7 +231,7 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head 801b988 is failure, not success"
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for b58a0d6: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-TCM-007 is in_progress."
@@ -262,7 +262,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "aabca708e890b3a7416fd3e106d0b323f201977582df50cf23fa916a4f56c893",
+  "result_sha256": "70b88d9f282a01c25358aa9301bbff5214315d55f35a7fe844585772f9fe17f5",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
