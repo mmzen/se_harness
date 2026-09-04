@@ -21,7 +21,10 @@ owner-reviewed Verity Plane README with its logo (`WO-DOC-014`,
 Drafted on 2026-09-04 on the repository owner's instruction "you can
 prepare the 0.15.0 release, however there is a work in progress, that will
 finish soon". That work landed the same day as `WO-DOC-014` and
-`WO-DOC-015`; the census was re-measured at `109c9f0` and the contract
-brought to it. Both artifacts stay `draft` until `WO-DOC-014`, whose
-assurance is `required`, holds a verified record. This packet authorizes no candidate,
+`WO-DOC-015`; `WO-DOC-014` had reached `main` without its verification
+record (issue #347), so `VREC-DOC-007` was prepared and verified as a
+post-merge repair (PR #349) before the census was re-measured at `2e90dc6`
+and the contract brought to it. Both artifacts are ready for the two
+approval acts: the contract by the release owner, the work order by the
+engineering owner. This packet authorizes no candidate,
 build or publication.
