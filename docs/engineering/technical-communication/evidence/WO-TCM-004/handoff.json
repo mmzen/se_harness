@@ -230,8 +230,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head bd796b2 is failure, not success"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-TCM-004=implemented",
+        "--decision",
+        "WO-TCM-004=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-TCM-004 is in_progress."
@@ -241,8 +250,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "100950816121",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "587eff64e94eb3fc5071604996b1fc37db266158"
       },
       "outcomes": [
         "implemented",
@@ -262,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "27022545c16aec9afa8186a770f427537babfd63c6d0a9dbcb09c8a570aad6c5",
+  "result_sha256": "b33057a2314739fb25bbaad3c865fd694dd6c44ada387139946e199c1e86db95",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,

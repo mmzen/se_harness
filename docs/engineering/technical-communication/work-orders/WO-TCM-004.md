@@ -2,7 +2,7 @@
 id = "WO-TCM-004"
 type = "work_order"
 title = "Register the decision-management diagnostic families in the code index"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-04T07:32:56Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b0e177b493ebc69468e3da008c9a453135e001dd (check-run 100947564978, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T07:46:32Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 587eff64e94eb3fc5071604996b1fc37db266158 (check-run 100950816121, source github-checks). Delegated DR-WO-COMPLETE: the E-DCM and W-DCM families are registered and indexed (262 codes across 30 prefixes) and the unregistered-family guard fails --check on any E-, W- or WEX- rule family absent from the registry; evidence docs/engineering/technical-communication/evidence/WO-TCM-004/ with the retained Git-derived handoff result; Windows suite 1209 tests, zero failures, the one baseline error; released 0.14.0 validate PASS. Three disclosures for the assurance decision are in the evidence packet."
 +++
 
 # Work Order: Register the decision-management diagnostic families in the code index
