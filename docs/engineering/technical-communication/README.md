@@ -68,3 +68,14 @@ started, completed and recorded by the delegated executor while the
 required `validate` check is green at the exact head. The verification
 decisions on the records, the merges, the release and the adoption stay
 human.
+
+One redundancy is accepted on the record. The blocking of a transition by
+an open decision is `REQ-DCM-001`'s obligation, implemented by
+`WO-DCM-001`; the first half of `REQ-TCM-008`'s statement restates that
+mechanism. The obligation `REQ-TCM-008` adds is the second half only: the
+authoring gate requires no `Open decisions` section, the templates drop
+it, and `SPEC-DCM-001` rule 11 becomes a legacy rule. The owner reviewed
+the alternative on 2026-09-04, rejecting `REQ-TCM-008` and folding the
+retirement into `REQ-TCM-006` at the cost of amendment records on
+`SPEC-TCM-003`, `VER-TCM-003` and `WO-TCM-005`, and chose to keep the
+requirement as approved ("ok for option 1").
