@@ -12,6 +12,8 @@ previous_release_tag = "v0.14.0"
 gates = [
   "WO-CIP-006",
   "WO-DCM-001",
+  "WO-DOC-014",
+  "WO-DOC-015",
   "WO-DPG-002",
   "WO-ECP-025",
   "WO-HUP-015",
@@ -50,11 +52,11 @@ deployment by itself. Every later step is the decision of the role that owns
 it, recorded on the artifact it changes. The aggregate verification record
 is `VREC-SEH-024`; the release record is `RLS-SEH-024`.
 
-This contract is drafted while one work order is still in progress on
-`main`. It is not to be approved until that work order has reached
-`implemented` with verified coverage and the census below has been
-re-measured; a member that reaches `implemented` after approval is a stop
-condition, never a widening in place.
+This contract was drafted while work was still in progress on `main` and
+re-measured on 2026-09-04 after that work landed as `WO-DOC-014` and
+`WO-DOC-015`. It is not to be approved until every member whose assurance
+is `required` holds a verified record; a member that reaches `implemented`
+after approval is a stop condition, never a widening in place.
 
 ## Release unit
 
@@ -68,9 +70,12 @@ demonstration, and the `last` alias tag and GitHub "latest" marker moved
 to it.
 
 The release-bearing work added after the immutable `v0.14.0` baseline is
-ten work orders. They were measured on `main` at `935b8dc` as active,
-`implemented`, holding work-order-keyed evidence, verified, absent from the
-`v0.14.0` tree, and unnamed by any released release record.
+twelve work orders. They were measured on `main` at `109c9f0` as active,
+`implemented`, holding work-order-keyed evidence, absent from the `v0.14.0`
+tree, and unnamed by any released release record. Ten hold verified
+coverage; `WO-DOC-014` (assurance `required`) awaits its verification
+record, and `WO-DOC-015` (assurance `not_required`) is covered by the
+aggregate record alone.
 
 | Work order | Outcome | Coverage at drafting |
 | --- | --- | --- |
@@ -84,8 +89,10 @@ ten work orders. They were measured on `main` at `935b8dc` as active,
 | `WO-TCM-006` | The repository-owned glossary seed `GLOSSARY.md`, the `inspect` vocabulary report | `VREC-TCM-006` verified |
 | `WO-TCM-007` | The reader-first intent shape, the `outcome` field, `W-AUT-011` to `W-AUT-015`, the Explorer's outcome line | `VREC-TCM-007` verified |
 | `WO-TCM-008` | The reader-first capability shape, the `ability` field, `W-AUT-016` to `W-AUT-018`, derivation read from the graph | `VREC-TCM-008` verified |
+| `WO-DOC-014` | Publish the owner-reviewed Verity Plane README | assurance `required`; no verification record at drafting, needed before approval |
+| `WO-DOC-015` | Add the supplied Verity Plane logo to the published README | assurance `not_required`; covered by `VREC-SEH-024` |
 
-`WO-RLS-021` is the eleventh member: it qualifies the candidate, takes the
+`WO-RLS-021` is the thirteenth member: it qualifies the candidate, takes the
 build of record from the hosted pinned producer, and retains the evidence;
 the candidate version already reads 0.15.0 (moved by `WO-HUP-015`). It
 receives its verified coverage from `VREC-SEH-024`.
@@ -93,7 +100,8 @@ receives its verified coverage from `VREC-SEH-024`.
 ### What this release is for
 
 0.15.0 is a content release. Since `v0.14.0` the packaged surface changed
-in 29 files: the evaluator gains the `decision` lifecycle family, the
+in 30 files, the 29 below and the README the source distribution carries as
+its long description: the evaluator gains the `decision` lifecycle family, the
 `decision_gate_clear` evaluator behind one `QGP-*-DECISION` predicate per
 gate, `harnessctl decide`, and the standing-deviation projection; the
 managed templates gain `DECISION.template.md` and the reader-first
@@ -104,8 +112,9 @@ the validator gains `E-DCM-001` to `E-DCM-004`, `W-DCM-001`, `W-DCM-002`
 and the draft-time advisories `W-AUT-005` to `W-AUT-018`; the inspection
 script gains the vocabulary report; the Explorer shows decisions, the
 plain-words lines, the outcome, the ability and what derives from a
-capability; and every repository that installs or upgrades receives an
-empty `GLOSSARY.md` seed of its own, once.
+capability; every repository that installs or upgrades receives an
+empty `GLOSSARY.md` seed of its own, once; and the published README is the
+owner-reviewed Verity Plane text with its logo (`WO-DOC-014`, `WO-DOC-015`).
 
 For this repository the release is the precondition of using any of it:
 the root is governed by 0.14.0, so a `DEC-` file fails the managed check
@@ -114,15 +123,15 @@ adoption work order that follows this release is where that changes.
 
 ### Commit census
 
-`harnessctl release-unit . --from v0.14.0 --to 935b8dc` reads 29
+`harnessctl release-unit . --from v0.14.0 --to 109c9f0` reads 31
 first-parent commits, all merge commits GitHub wrote for pull requests.
-Eighteen are traced through their branch commits' `Harness-Work-Order`
+Twenty are traced through their branch commits' `Harness-Work-Order`
 trailers. Eleven carry no trailer: the notes-only pull requests #318, #323,
 #324, #325, #326, #327, #328, #333, #334, #338 and #339, each of which
 touched only `docs/notes/`, the ungoverned path `AGENTS.md` names, and is
 therefore exempted above by the release owner's decision, with the reason
 that a notes-only pull request needs a reviewer and not a work order. With
-those eleven exemptions the census is `complete: true` with eleven work
+those eleven exemptions the census is `complete: true` with thirteen work
 orders.
 
 | Traced work order | Pull request(s) | Disposition |
@@ -138,8 +147,10 @@ orders.
 | `WO-TCM-006` | #337 | member |
 | `WO-TCM-007` | #340, #341 | member |
 | `WO-TCM-008` | #342, #343 | member |
+| `WO-DOC-014` | #344 | member |
+| `WO-DOC-015` | #346 | member |
 
-`harnessctl release-unit . --from v0.14.0 --to 935b8dc --contract
+`harnessctl release-unit . --from v0.14.0 --to 109c9f0 --contract
 REL-SEH-026`, with each of the eleven exempted commits also passed as
 `--exempt` (the 0.14.0 command reads exemptions from its flags; the array
 above is what the approval gate reads), derives `complete: true` and
@@ -159,14 +170,14 @@ unmeasured at approval; the census above is the reported evidence, and
 ### Entry criteria
 
 - Every existing member is active, `implemented`, retains work-order-keyed
-  evidence, and holds verified assurance coverage. Measured at `935b8dc`:
-  ten of ten.
+  evidence, and every member whose assurance is `required` holds verified
+  coverage. Measured at `109c9f0`: ten of eleven required members;
+  `WO-DOC-014` needs its verification record prepared and verified first.
 - No existing member is named by a released release record.
 - No stale `ready` verification or release record exists in the graph
   beyond the canonical templates.
-- The work order in progress on `main` at drafting has reached
-  `implemented` with verified coverage, or has been excluded by name, and
-  the census has been re-measured with it.
+- The work that was in progress at drafting landed as `WO-DOC-014` and
+  `WO-DOC-015` and the census was re-measured with it on 2026-09-04.
 - `WO-RLS-021` is separately reviewed and approved before start preflight
   or any edit.
 - This contract is approved by the release owner before the candidate
@@ -180,15 +191,15 @@ unmeasured at approval; the census above is the reported evidence, and
 
 ### Measured readiness at drafting
 
-Measured over `main` at `935b8dc` plus this packet, with the exact public
+Measured over `main` at `109c9f0` plus this packet, with the exact public
 0.14.0 evaluator outside the checkout in isolated mode, installed from the
 wheel whose SHA-256 `70d438b5…` equals the distribution table of
 `RLS-SEH-023`.
 
-- `validate`: 1,300 artifacts, 0 errors, 69 pre-existing maintenance
+- `validate`: 1,307 artifacts, 0 errors, 69 pre-existing maintenance
   warnings, 0 advisories.
 - `doctor`: 0 `FAIL`.
-- Hosted lanes at `935b8dc` on `main`: Engineering Harness `validate`,
+- Hosted lanes at `109c9f0` on `main`: Engineering Harness `validate`,
   Candidate source evidence, Candidate package evidence, Governance
   migration on Linux and Windows, Governor transition assessment, both
   Publication Rehearsal legs, and the integration-package build, verify and
@@ -196,16 +207,16 @@ wheel whose SHA-256 `70d438b5…` equals the distribution table of
 
 ### Exact aggregate verification
 
-**Every figure here is measured over the whole `gates` array, all eleven
+**Every figure here is measured over the whole `gates` array, all thirteen
 entries.** `VREC-SEH-024` must bind one clean 0.15.0 candidate commit to
-exactly the eleven work orders named in `gates`, to ten verification
+exactly the thirteen work orders named in `gates`, to eleven verification
 contracts (`VER-CIP-002`, `VER-DCM-001`, `VER-DPG-001`, `VER-DST-001`,
-`VER-ECP-021`, `VER-HUP-015`, `VER-TCM-002`, `VER-TCM-003`, `VER-TCM-004`,
-`VER-TCM-005`), and to eleven work-order-keyed evidence paths: each
-member's handoff packet in its domain plus `WO-RLS-021`'s packet under
-`docs/engineering/release-0-15-0/evidence/`. The requirement union of the
-ten content members is seventeen; with `REQ-DST-006` from `WO-RLS-021` it
-is eighteen. These figures are re-derived when the census is re-measured.
+`VER-DST-024`, `VER-ECP-021`, `VER-HUP-015`, `VER-TCM-002`, `VER-TCM-003`,
+`VER-TCM-004`, `VER-TCM-005`), and to thirteen work-order-keyed evidence
+paths: each member's handoff packet in its domain plus `WO-RLS-021`'s
+packet under `docs/engineering/release-0-15-0/evidence/`. The requirement
+union of the twelve content members is eighteen; with `REQ-DST-006` from
+`WO-RLS-021` it is nineteen.
 
 ### Candidate qualification
 
