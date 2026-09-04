@@ -2,7 +2,7 @@
 id = "WO-TCM-008"
 type = "work_order"
 title = "Ship the reader-first capability shape and read derivation from the graph"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-09-04T20:21:27Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 72a0c4c6d0e54c74939ca96777304a6cf655b8e1 (check-run 101162456699, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-008-execution opened from main after WO-TCM-007 merged with VREC-TCM-007 verified; the intent advisories and constants it landed are the base this work order extends."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T20:31:18Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at d497daa2ec7d943c723a84fd94d806c790209481 (check-run 101164932758, source github-checks). Delegated DR-WO-COMPLETE: the reader-first capability shape, the ability field, the capability advisories and the graph-read derivation shown by the Explorer are implemented in the candidate per SPEC-TCM-005 rules TCM-RFC-001 to TCM-RFC-007, stacked on WO-TCM-007; evidence docs/engineering/technical-communication/evidence/WO-TCM-008/ with the retained Git-derived handoff result; Windows suite 1252 tests, zero failures, the one baseline error; released 0.14.0 validate PASS. Four disclosures are in the evidence packet."
 +++
 
 # Work Order: Ship the reader-first capability shape and read derivation from the graph
