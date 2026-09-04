@@ -383,6 +383,9 @@ def normalize_artifacts(
         if artifact.artifact_type == "requirement":
             item["statement"] = _string(artifact.metadata.get("statement")) or None
             item["verification_method"] = _string(artifact.metadata.get("verification_method")) or None
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
         if artifact.artifact_type == "architecture":
             item["architecture_traceability"] = architecture_traceability_state(
                 artifact,
@@ -515,6 +518,29 @@ def _decision_projection(artifact: Artifact, catalog: dict[str, Artifact]) -> di
             "scope": _string_list(disposition.get("scope")),
         }
     return projection
+
+
+_PLAIN_WORDS_HEADING = "## In plain words"
+
+
+def _plain_words(body: Any) -> str | None:
+    """The text of a requirement's `In plain words` section (SPEC-TCM-003 TCM-RFR-004), or None."""
+
+    if not isinstance(body, str):
+        return None
+    lines = body.replace("\r\n", "\n").split("\n")
+    collected: list[str] = []
+    inside = False
+    for line in lines:
+        if line.strip() == _PLAIN_WORDS_HEADING:
+            inside = True
+            continue
+        if inside and line.startswith("## "):
+            break
+        if inside and line.strip():
+            collected.append(line.strip())
+    text = " ".join(collected).strip()
+    return text or None
 
 
 def build_declared_relations(artifacts: Sequence[Artifact]) -> list[dict[str, Any]]:

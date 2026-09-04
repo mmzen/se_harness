@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-262 codes across 30 registered prefixes.
+268 codes across 30 registered prefixes.
 
 ## How to read a code
 
@@ -36,7 +36,7 @@ but are not diagnostics and are not listed here.
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
 | `W` | installed validator | a warning; validation still passes. | 19 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
-| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 4 |
+| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 10 |
 | `W-DCM` | installed validator | a decision-artifact warning. | 2 |
 | `W-ECP` | installed validator | a control-plane warning. | 2 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
@@ -153,6 +153,12 @@ but are not diagnostics and are not listed here.
 | `W-AUT-002` | `W-AUT-002` |
 | `W-AUT-003` | `W-AUT-003` |
 | `W-AUT-004` | `W-AUT-004` |
+| `W-AUT-005` | `W-AUT-005` |
+| `W-AUT-006` | `W-AUT-006` |
+| `W-AUT-007` | `W-AUT-007` |
+| `W-AUT-008` | `W-AUT-008` |
+| `W-AUT-009` | `W-AUT-009` |
+| `W-AUT-010` | `W-AUT-010` |
 
 ### `W-DCM` — installed validator
 

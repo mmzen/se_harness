@@ -36,16 +36,25 @@ leftover placeholders and open decisions are `WO-AUT-002`. Three optional
 attributes are validated when present: `priority` (`must`, `should`,
 `could`), `source`, and `measure`.
 
-The template body is six headings: Rationale, Behavior (trigger, response,
-on failure), Assumptions and dependencies, Acceptance examples, Open
-decisions. Executable scenarios go to `acceptance/<REQ-ID>.feature` and are
-named by the verification contract.
+The template body was six headings until `WO-TCM-005` (SPEC-TCM-003):
+Rationale, Behavior, Assumptions and dependencies, Acceptance examples, Open
+decisions. It is now four: `In plain words`, `Why`, `Behavior` (a table of
+trigger, response, on failure) and `Examples` (one normal, one failure).
+The acceptance cases live in the verification contract; the method lives in
+the specification; pending decisions are `DEC-` artifacts, so the `Open
+decisions` section is gone. Six more draft-time advisories guard the
+budgets: `W-AUT-003` at 30 words for the statement, `W-AUT-005` body over
+250 words, `W-AUT-006` Why over five sentences or 120 words, `W-AUT-007` a
+sentence over 25 words, `W-AUT-008` more than three code identifiers,
+`W-AUT-009` a missing or long In plain words, `W-AUT-010` a WHEN whose
+event is the act of evaluating. Approved requirements are not rewritten.
 
 ## Approval predicates and the migration
 
 Two predicates, `QGP-G1-AUTHORING` and `QGP-G2-AUTHORING`, fail a definition's
 approval when the file still carries a template placeholder (`<…>` outside
-code) or when its `Open decisions` section says anything but `None`. They
+code) or when a legacy `Open decisions` section says anything but `None`
+or a list of `DEC-` identifiers. They
 are evaluated by `harnessctl transition` when a definition leaves `draft`.
 
 `scripts/migrate_verification_methods.py` maps free-text

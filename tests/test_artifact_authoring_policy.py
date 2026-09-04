@@ -116,19 +116,20 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
                 self.set_front_matter(statement=statement)
                 errors, warnings, advisories = self.diagnostics()
                 self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT") or item.code == "E005"])
-                self.assertEqual([], [item.code for item in advisories if item.code != "W-AUT-004"])
+                self.assertEqual([], [item.code for item in advisories if item.code not in {"W-AUT-004", "W-AUT-009"}])
                 self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
         cases = {
             '"The system should list the manifest and SHALL do so quickly."': {"W-AUT-001"},
             '"WHEN X, THE SYSTEM SHALL do A, and SHALL do B."': {"W-AUT-002"},
             '"IF a file is customized, THE SYSTEM SHALL refuse."': {"W-AUT-001"},
-            '"WHEN ' + "x" * 300 + ', THE SYSTEM SHALL respond."': {"W-AUT-003"},
+            '"WHEN ' + "x " * 32 + ', THE SYSTEM SHALL respond."': {"W-AUT-003"},
+            '"WHEN a requirement is validated, THE SYSTEM SHALL count its words."': {"W-AUT-010"},
         }
         for statement, expected in cases.items():
             with self.subTest(statement=statement[:40]):
                 self.set_front_matter(statement=statement)
                 _, warnings, advisories = self.diagnostics()
-                self.assertEqual(expected, {item.code for item in advisories if item.code in {"W-AUT-001", "W-AUT-002", "W-AUT-003"}})
+                self.assertEqual(expected, {item.code for item in advisories if item.code in {"W-AUT-001", "W-AUT-002", "W-AUT-003", "W-AUT-010"}})
                 self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
         self.set_front_matter(statement='"The system must respond."')
         errors, _, _ = self.diagnostics()
@@ -167,18 +168,21 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
 
     # ---------------------------------------------------------------- REQ-AUT-006
 
-    def test_template_carries_six_headings_five_shapes_and_the_acceptance_link(self) -> None:
+    def test_template_carries_the_reader_first_shape_and_five_shapes(self) -> None:
+        # WO-TCM-005 (SPEC-TCM-003 TCM-RFR-001): four sections, no Open decisions,
+        # the glossary pointer names a file the repository writes.
         text = TEMPLATE.read_text(encoding="utf-8")
         self.assertLess(len(text.encode("utf-8")), 2500)
         headings = re.findall(r"^## .*$", text, flags=re.MULTILINE)
-        self.assertEqual(
-            ["## Rationale", "## Behavior", "## Assumptions and dependencies", "## Acceptance examples", "## Open decisions"],
-            headings,
-        )
+        self.assertEqual(["## In plain words", "## Why", "## Behavior", "## Examples"], headings)
+        self.assertEqual(["### Normal", "### Failure"], re.findall(r"^### .*$", text, flags=re.MULTILINE))
         for shape in ("THE SYSTEM SHALL", "WHEN <event>", "WHILE <state>", "IF <unwanted condition>, THEN", "WHERE <feature"):
             self.assertIn(shape, text)
         self.assertIn('verification_method = ["test"]', text)
-        self.assertIn("acceptance/<REQ-ID>.feature", text)
+        self.assertIn("| Trigger | Response | On failure |", text)
+        self.assertIn("docs/notes/glossary.md", text)
+        self.assertNotIn("Open decisions", text)
+        self.assertNotIn("acceptance/", text)
         for field in ("priority = ", "source = ", "measure = "):
             self.assertIn(field, text)
         code, output, error = self.invoke(
@@ -199,10 +203,11 @@ if __name__ == "__main__":
 
     def test_advisories_are_raised_only_on_drafts(self) -> None:
         # AUT-ADV-002: the same faults on an approved requirement raise nothing.
-        faulty = '"The system should list the manifest and SHALL do A, and SHALL do B ' + "x" * 260 + '."'
+        faulty = '"The system should list the manifest and SHALL do A, and SHALL do B ' + "x " * 30 + '."'
         self.set_front_matter(status='"draft"', statement=faulty, verification_method='"automated-test"')
         _, warnings, advisories = self.diagnostics()
-        self.assertEqual({"W-AUT-001", "W-AUT-002", "W-AUT-003", "W-AUT-004"}, {item.code for item in advisories})
+        # W-AUT-009: the fixture body is a stub without an In plain words section (WO-TCM-005)
+        self.assertEqual({"W-AUT-001", "W-AUT-002", "W-AUT-003", "W-AUT-004", "W-AUT-009"}, {item.code for item in advisories})
         self.assertEqual([], [item.code for item in warnings if item.code.startswith("W-AUT-")])
         self.set_front_matter(status='"approved"')
         _, warnings, advisories = self.diagnostics()
@@ -289,21 +294,26 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             ('owners = ["<product/domain owner>"]', 'owners = ["product-owner"]'),
             ('statement = "WHEN <event>, THE SYSTEM SHALL <observable response>."', 'statement = "WHEN a work order is selected, THE SYSTEM SHALL list its reading manifest."'),
             ("# Requirement: <title>", "# Requirement: List the manifest"),
-            ("- Trigger: <the observable condition or event; \"always\" for an invariant>", "- Trigger: a work order is selected"),
-            ("- Response: <what the reader can check>", "- Response: the manifest is listed"),
-            ("- On failure: <what happens when the response cannot be given>", "- On failure: the command exits 1"),
-            ("<What this obligation relies on; not how it is built — that is a specification's job.>", "None."),
+            ("<the observable condition or event; \"always\" for an invariant>", "a work order is selected"),
+            ("<what the reader can check>", "the manifest is listed"),
+            ("<what happens when the response cannot be given>", "the command exits 1"),
         ):
             self.assertIn(placeholder, filled, placeholder)
             filled = filled.replace(placeholder, value)
-        # keep the acceptance/<REQ-ID>.feature sentence: it is inside inline code and must not count
-        path.write_text(filled.replace("## Open decisions\n\nNone.", "## Open decisions\n\nWhether the manifest is sorted."), encoding="utf-8")
+        # the two guidance paragraphs are placeholders too: replace them whole
+        filled = re.sub(r"<One or two sentences a newcomer understands\..*?>", "The command lists what to read.", filled, flags=re.S)
+        filled = re.sub(r"<At most five sentences\..*?>", "A reader needs the list before the work.", filled, flags=re.S)
+        self.assertNotIn("<", filled.split("+++", 2)[2].replace("<REQ", ""))
+        # WO-TCM-005: the template carries no Open decisions section; a legacy one with
+        # prose is still refused (E-DCM-004), and its absence is not.
+        path.write_text(filled + "\n## Open decisions\n\nWhether the manifest is sorted.\n", encoding="utf-8")
         code, message = approve()
         self.assertEqual(1, code)
         self.assertIn("open decision", message)
         self.assertIn("sorted", message)
 
         path.write_text(filled, encoding="utf-8")
+        self.assertNotIn("Open decisions", filled)
         code, message = approve()
         self.assertEqual(0, code, message)
         self.assertIn('status = "approved"', path.read_text(encoding="utf-8"))
