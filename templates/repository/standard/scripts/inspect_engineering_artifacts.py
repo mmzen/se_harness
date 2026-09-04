@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import Counter
 from itertools import groupby
@@ -25,6 +26,46 @@ from validate_engineering_artifacts import (
 
 
 INSPECTION_SCHEMA = "se-harness-inspection-v2"
+
+#: SPEC-TCM-003 TCM-RFR-008: the repository-owned glossary and the vocabulary report.
+GLOSSARY_RELATIVE = "GLOSSARY.md"
+VOCABULARY_DEFAULT_THRESHOLD = 50
+VOCABULARY_MINIMUM_THRESHOLD = 30
+VOCABULARY_MAXIMUM_THRESHOLD = 100
+#: Harness terms are defined once in the managed instructions the distribution
+#: ships; they are excluded from the report so only project terms are named.
+#: This list ships as exclusions, never as definitions.
+HARNESS_TERMS = frozenset({
+    "artifact", "artifacts", "intent", "capability", "capabilities", "requirement", "requirements",
+    "specification", "specifications", "architecture", "adr", "verification", "contract", "contracts",
+    "operating", "release", "releases", "record", "records", "work", "order", "orders", "lifecycle",
+    "transition", "transitions", "status", "draft", "approved", "implemented", "verified", "released",
+    "rejected", "ready", "superseded", "withdrawn", "deferred", "decided", "decision", "decisions",
+    "right", "rights", "gate", "gates", "predicate", "predicates", "checkpoint", "checkpoints",
+    "handoff", "evidence", "packet", "scope", "restitution", "projection", "check", "preflight",
+    "validate", "validation", "validator", "harness", "harnessctl", "managed", "lock", "owner", "owners",
+    "accountable", "delegation", "delegated", "executor", "relation", "relations", "domain", "domains",
+    "template", "templates", "advisory", "advisories", "warning", "warnings", "error", "errors",
+    "diagnostic", "diagnostics", "explorer", "dashboard", "inspect", "inspection", "amendment",
+    "supersede", "reason", "role", "roles", "owner", "repository", "pull", "request",
+})
+#: Common English, so the report is about vocabulary and not grammar.
+ENGLISH_STOPWORDS = frozenset("""
+a about above after again against all also always am an and any are as at be because been before being
+below between both but by can could did do does doing down during each either every few for from further
+had has have having he her here hers herself him himself his how i if in into is it its itself just least
+less let like may me might more most much must my myself never no nor not now of off on once one only or
+other our ours ourselves out over own per same shall she should since so some still such than that the
+their theirs them themselves then there these they this those through to too under until up upon us very
+was we were what when where whether which while who whom why will with within without would you your yours
+yourself yourselves given then when normal failure example examples trigger response behavior plain words
+why none section sections file files path paths name names new old first second last next same different
+""".split())
+_TOKEN = re.compile(r"[a-z][a-z-]{2,}")
+_INLINE_CODE = re.compile(r"`[^`]*`")
+_FENCED_CODE = re.compile(r"```.*?```", re.S)
+#: An entry opens with its term in bold, the period inside or just after the span.
+_GLOSSARY_ENTRY = re.compile(r"^\*\*([^*]+?)\.?\*\*[.:]?(?=\s)", re.M)
 SEVERITIES = ("error", "warning", "info")
 SEVERITY_ORDER = {value: index for index, value in enumerate(SEVERITIES)}
 QUEUE_SUGGESTION_CATALOG = {
@@ -332,9 +373,104 @@ def _diagnostic_plane_counts(
     return error_count, warning_count, counts
 
 
+def _corpus_words(artifacts: Iterable[Any]) -> Counter[str]:
+    """Word counts over statements and bodies, code removed, lowercased."""
+
+    counts: Counter[str] = Counter()
+    for artifact in artifacts:
+        metadata = getattr(artifact, "metadata", None)
+        statement = metadata.get("statement") if isinstance(metadata, Mapping) else None
+        body = getattr(artifact, "body", "")
+        text = " ".join(part for part in (statement if isinstance(statement, str) else "", body if isinstance(body, str) else "") if part)
+        text = _INLINE_CODE.sub(" ", _FENCED_CODE.sub(" ", text))
+        for token in _TOKEN.findall(text.lower()):
+            token = token.strip("-")
+            if len(token) >= 3 and token not in ENGLISH_STOPWORDS:
+                counts[token] += 1
+    return counts
+
+
+def _glossary_entries(text: str) -> list[str]:
+    """The entry heads of a glossary page: the bold term opening each entry."""
+
+    return [match.group(1).strip() for match in _GLOSSARY_ENTRY.finditer(text)]
+
+
+def _entry_keys(entry: str) -> set[str]:
+    """Lowercase words a corpus token may match for one entry, including an abbreviation."""
+
+    keys: set[str] = set()
+    head = entry.split(" versus ")[0]
+    for part in re.split(r"[(),/]", head):
+        part = part.strip().lower()
+        if not part:
+            continue
+        keys.add(part)
+        for word in _TOKEN.findall(part):
+            if word not in ENGLISH_STOPWORDS:
+                keys.add(word)
+    return keys
+
+
+def build_vocabulary_report(
+    root: Path,
+    validation_report: ValidationReport | None,
+    threshold: int = VOCABULARY_DEFAULT_THRESHOLD,
+) -> dict[str, Any]:
+    """SPEC-TCM-003 TCM-RFR-008: frequent project terms without an entry, entries without a term.
+
+    Read-only and deterministic. Harness terms and common English are excluded;
+    a missing glossary is reported once and is not an error.
+    """
+
+    if not (VOCABULARY_MINIMUM_THRESHOLD <= threshold <= VOCABULARY_MAXIMUM_THRESHOLD):
+        raise InspectionError(
+            f"vocabulary threshold must be between {VOCABULARY_MINIMUM_THRESHOLD} and {VOCABULARY_MAXIMUM_THRESHOLD}"
+        )
+    glossary_path = Path(root) / GLOSSARY_RELATIVE
+    present = glossary_path.is_file()
+    entries: list[str] = []
+    readable = True
+    if present:
+        try:
+            entries = _glossary_entries(glossary_path.read_text(encoding="utf-8-sig"))
+        except (OSError, UnicodeError):
+            readable = False
+    counts = _corpus_words(validation_report.artifacts if validation_report is not None else ())
+    defined: set[str] = set()
+    for entry in entries:
+        defined |= _entry_keys(entry)
+    undefined = [
+        {"term": term, "count": count}
+        for term, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+        if count >= threshold and term not in HARNESS_TERMS and term not in defined
+    ]
+    stale = sorted(
+        entry for entry in entries
+        if not any(counts.get(key, 0) > 0 for key in _entry_keys(entry) if " " not in key)
+        and not any(" ".join(_TOKEN.findall(key)) and all(counts.get(word, 0) > 0 for word in _TOKEN.findall(key)) for key in _entry_keys(entry) if " " in key)
+    )
+    notes: list[str] = []
+    if not present:
+        notes.append(f"{GLOSSARY_RELATIVE} is absent; the harness seeds it at installation and this repository writes it")
+    elif not readable:
+        notes.append(f"{GLOSSARY_RELATIVE} could not be read as UTF-8 text")
+    return {
+        "glossary_path": GLOSSARY_RELATIVE,
+        "present": present,
+        "entry_count": len(entries),
+        "threshold": threshold,
+        "undefined_frequent_terms": undefined,
+        "stale_entries": [{"term": entry} for entry in stale],
+        "notes": notes,
+        "authority": "derived",
+    }
+
+
 def build_inspection(
     snapshot: Mapping[str, Any],
     validation_report: ValidationReport | None = None,
+    vocabulary: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     snapshot = _mapping(snapshot, "snapshot")
     if snapshot.get("schema") != SNAPSHOT_SCHEMA:
@@ -459,6 +595,7 @@ def build_inspection(
         },
         "queues": queues,
         "findings": findings,
+        "vocabulary": dict(vocabulary) if vocabulary is not None else None,
         "suggestions": _build_suggestions(queues, findings),
     }
 
@@ -561,6 +698,27 @@ def _render_suggestions(suggestions: Sequence[Mapping[str, Any]]) -> list[str]:
     return lines
 
 
+def _render_vocabulary(vocabulary: Mapping[str, Any] | None) -> list[str]:
+    if vocabulary is None:
+        return []
+    lines = ["", "Vocabulary (derived, informational):"]
+    for note in vocabulary.get("notes", []):
+        lines.append(f"- {note}")
+    undefined = vocabulary.get("undefined_frequent_terms", [])
+    stale = vocabulary.get("stale_entries", [])
+    lines.append(
+        f"- {vocabulary.get('entry_count', 0)} glossary entries in {vocabulary.get('glossary_path')}; "
+        f"threshold {vocabulary.get('threshold')} occurrences"
+    )
+    if undefined:
+        lines.append("- frequent project terms without an entry: " + ", ".join(f"{item['term']} ({item['count']})" for item in undefined))
+    else:
+        lines.append("- every project term above the threshold has an entry")
+    if stale:
+        lines.append("- entries whose term appears in no artifact: " + ", ".join(item["term"] for item in stale))
+    return lines
+
+
 def render_human(report: Mapping[str, Any]) -> str:
     report = _mapping(report, "inspection report")
     validation = _mapping(report.get("validation"), "inspection validation")
@@ -640,6 +798,7 @@ def render_human(report: Mapping[str, Any]) -> str:
             "Inspection does not validate by exit status, approve, authorize, verify, release, or remediate.",
         ]
     )
+    lines.extend(_render_vocabulary(report.get("vocabulary")))
     return "\n".join(lines) + "\n"
 
 
@@ -649,6 +808,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--root", default=".")
     parser.add_argument("--json", action="store_true")
+    parser.add_argument(
+        "--vocabulary-threshold",
+        type=int,
+        default=VOCABULARY_DEFAULT_THRESHOLD,
+        help=f"occurrences from which a project term without a glossary entry is reported ({VOCABULARY_MINIMUM_THRESHOLD}-{VOCABULARY_MAXIMUM_THRESHOLD})",
+    )
     return parser
 
 
@@ -656,7 +821,8 @@ def main(argv: Iterable[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         snapshot, validation_report, _ = generate_snapshot(Path(args.root))
-        report = build_inspection(snapshot, validation_report)
+        vocabulary = build_vocabulary_report(Path(args.root), validation_report, args.vocabulary_threshold)
+        report = build_inspection(snapshot, validation_report, vocabulary)
         if args.json:
             sys.stdout.write(serialize_json(report))
         else:

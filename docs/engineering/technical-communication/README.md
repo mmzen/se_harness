@@ -90,6 +90,14 @@ the `Open decisions` section a legacy rule. The authoring gate needed no
 code change: it already read the section only where the heading existed.
 Its evidence packet is `evidence/WO-TCM-005/`.
 
-`WO-TCM-006` executes on the branch `wo/tcm-006-execution`, opened on
-2026-09-04 from `main` after `WO-TCM-005` merged with `VREC-TCM-005`
-verified. Its evidence packet is `evidence/WO-TCM-006/`.
+`WO-TCM-006` executes on the branch `wo/tcm-006-execution` (PR #337),
+opened on 2026-09-04 from `main` after `WO-TCM-005` merged with
+`VREC-TCM-005` verified. It ships the glossary seed
+`GLOSSARY.md.seed`, installed once per repository at the repository root
+and never rewritten (the owner moved it there from `docs/notes/` on
+2026-09-04; `SPEC-TCM-003` carries the amendment record); the `inspect` vocabulary section with its harness-term and
+English stoplists and the bounded `--vocabulary-threshold`; the upkeep
+paragraph of `ARTIFACT_AUTHORING.md`; this repository's glossary grown by
+the nine terms the assessment named, each citing the artifact that fixes
+its meaning; and the distribution-boundary test that keeps every glossary
+entry out of the templates. Its evidence packet is `evidence/WO-TCM-006/`.

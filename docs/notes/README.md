@@ -9,7 +9,7 @@ These notes explain SE Harness in progressively greater detail. They are human-r
 | Step | Guide | Question answered |
 | --- | --- | --- |
 | 0 | [Getting started](getting-started.md) | How do I install the evaluator and run my first `check`? |
-| 0 | [Glossary](glossary.md) | What does each project-specific term mean? |
+| 0 | [Glossary](../../GLOSSARY.md) | What does each project-specific term mean? |
 | 1 | [Tier-0 overview](harness-overview.md) | What is SE Harness and what does it control? |
 | 2 | [Simplified UML model](harness-uml-model.md) | What are the main concepts and relationships? |
 | 3 | [Operational phasing](harness-operational-phasing.md) | When does each concept or operation occur? |

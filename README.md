@@ -188,7 +188,7 @@ explains the distinction.
 
 ## Learn more
 
-New to the project? Begin with [getting started](docs/notes/getting-started.md) and keep the [glossary](docs/notes/glossary.md) beside it.
+New to the project? Begin with [getting started](docs/notes/getting-started.md) and keep the [glossary](GLOSSARY.md) beside it.
 
 Then read the [overview](docs/notes/harness-overview.md), and use the [learning-notes index](docs/notes/README.md) for the conceptual model, operational timing, illustrative Git mapping, practical examples, safe upgrades, and complete command reference.
 
