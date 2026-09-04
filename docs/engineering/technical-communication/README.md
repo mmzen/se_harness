@@ -109,3 +109,44 @@ governing 0.14.0 evaluator refused the file (`E002`, unknown artifact type),
 so the decision went through the owner's chat channel and is recorded in
 the evidence packet. Decision artifacts become usable in this repository at
 the 0.15.0 adoption.
+
+## Reader-first intents and the Explorer's outcome line (2026-09-04)
+
+The assessment `docs/notes/assessment-intent-readability-2026-09-04.md`
+measured the 33 intents with the method of the requirement assessment: a
+median body of 312 words at reading grade about 16, three template
+generations and nine ad hoc shapes, a checklist of four paragraphs against
+a template of seven sections, success measures that are acceptance checks
+observed "every CI run", no advisory on an intent, and an Explorer that
+renders nothing intent-specific. This packet carries its proposal, on the
+recommendations the note records: the outcome as a front-matter field,
+success measures observed in operation only, advisories first and a later
+owner decision on blocking.
+
+- `REQ-TCM-009`: an intent the reader understands on first reading; the
+  `outcome` field, the four-section shape and draft-time advisories.
+- `REQ-TCM-010`: a success measure outlives the work order; a row observed
+  by a CI run, test, validator, verification or implementation review is
+  reported as an acceptance check.
+- `REQ-TCM-011`: the Explorer shows an intent's outcome and plain words
+  beneath its title and derives the G0 intent-quality condition from them.
+- `SPEC-TCM-004`: rules `TCM-RFI-001` to `TCM-RFI-007`.
+- `VER-TCM-004`: the evidence contract for the three requirements, with the
+  33 approved intents as a negative control.
+- `WO-TCM-007`: the template, the field, the advisories, the checklist, the
+  Explorer rendering and condition, and the regenerated diagnostic index.
+
+The three requirements are written in the reader-first shape. Every
+artifact is `draft`; the work order carries the delegation class, so
+approving it is the owner's act of delegating its start, completion and
+record preparation while the required check is green. No approved intent
+is rewritten; the next intent adopts the shape, and an approved one only
+when amended for another reason.
+
+On 2026-09-04 the repository owner approved all six artifacts with the
+instruction "i appprove the packet" (PR #340). The work order carries the
+delegation class, so once the packet is on `main` its execution travels the
+delegated route on its own branch, started, completed and recorded by the
+delegated executor while the required `validate` check is green at the
+exact head. The verification decision on the record, the merge, the release
+and the adoption stay human.

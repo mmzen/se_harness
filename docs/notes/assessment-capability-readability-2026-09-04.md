@@ -6,9 +6,9 @@
 > analysis. It has no authority. The managed contract, the formal artifacts
 > and the accountable decisions stay authoritative. This note changes no
 > rule. It proposes. It is the third pass after the
-> [requirement](assessment-requirement-readability-2026-09-04.md)
-> assessment and the intent assessment of the same day (pull request
-> #338), and it uses their method and their vocabulary.
+> [requirement](assessment-requirement-readability-2026-09-04.md) and
+> [intent](assessment-intent-readability-2026-09-04.md) assessments, and
+> it uses their method and their vocabulary.
 
 ## Summary
 
