@@ -2,7 +2,7 @@
 id = "WO-TCM-008"
 type = "work_order"
 title = "Ship the reader-first capability shape and read derivation from the graph"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -37,6 +37,13 @@ to = "approved"
 decided_at = "2026-09-04T19:45:21Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-04 with the instruction 'i apprive' (approve), after reviewing PR #342 (REQ-TCM-012, REQ-TCM-013, SPEC-TCM-005, VER-TCM-005, WO-TCM-008), carrying the owner's four decisions on the capability assessment of the same day. WO-TCM-008 carries the delegation class: this approval delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated-executor role under the required validate check, with the class read from the base of the pull request; the verification decision, merge, release and publication stay human. Execution stacks on WO-TCM-007."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-04T20:21:27Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 72a0c4c6d0e54c74939ca96777304a6cf655b8e1 (check-run 101162456699, source github-checks). Delegated DR-WO-START: execution branch wo/tcm-008-execution opened from main after WO-TCM-007 merged with VREC-TCM-007 verified; the intent advisories and constants it landed are the base this work order extends."
 +++
 
 # Work Order: Ship the reader-first capability shape and read derivation from the graph
