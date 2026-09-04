@@ -276,6 +276,18 @@ AUTHORING_WHY_SENTENCE_LIMIT = 5
 AUTHORING_SENTENCE_LIMIT = 25  # words
 AUTHORING_CODE_IDENTIFIER_LIMIT = 3
 AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT = 2
+#: SPEC-TCM-004 TCM-RFI-002 to TCM-RFI-004: the reader-first intent budgets and the
+#: acceptance vocabulary that marks a success-measure row as an acceptance check.
+INTENT_OUTCOME_LIMIT = 30  # words
+INTENT_BODY_LIMIT = 200  # words
+INTENT_PROBLEM_WORD_LIMIT = 120
+INTENT_PROBLEM_SENTENCE_LIMIT = 5
+INTENT_CODE_IDENTIFIER_LIMIT = 2
+_REPOSITORY_PATH_SPAN = re.compile(r"`[^`\s]*/[^`\s]*\.[A-Za-z0-9]{1,6}(?::\d+(?:-\d+)?)?`")
+_LINE_RANGE_SPAN = re.compile(r"`[^`]*:\d+(?:-\d+)?`")
+_ACCEPTANCE_VOCABULARY = re.compile(
+    r"\b(CI|tests?|validator|validate|verification|implementation review|acceptance run|regression run|transaction)\b", re.I
+)
 _CODE_SPAN = re.compile(r"`[^`]*`")
 _FENCE = re.compile(r"```.*?```", re.S)
 _WORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9'\-]*")
@@ -324,6 +336,11 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
     advisories: list[Diagnostic] = []
     catalog = {artifact.artifact_id for artifact in artifacts if artifact.artifact_id != "<unknown>"}
     for artifact in artifacts:
+        if artifact.artifact_type == "intent":
+            intent_errors, intent_advisories = _intent_authoring(artifact, report_root)
+            errors.extend(intent_errors)
+            advisories.extend(intent_advisories)
+            continue
         if artifact.artifact_type != "requirement":
             continue
         draft = artifact.status == "draft"
@@ -407,6 +424,91 @@ def _reader_first_advisories(artifact: Artifact, report_root: Path) -> list[Diag
         found.append(Diagnostic(path, "W-AUT-009",
             f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     return found
+
+
+def _success_measure_rows(section: str) -> list[list[str]] | None:
+    """The data rows of a Success measures table as cell lists; None when the table is malformed."""
+
+    rows: list[list[str]] = []
+    header_seen = False
+    for line in section.split("\n"):
+        stripped = line.strip()
+        if not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if not header_seen:
+            header_seen = True
+            continue
+        if all(set(cell) <= set("-: ") for cell in cells):
+            continue
+        if len(cells) < 4:
+            return None
+        rows.append(cells)
+    return rows
+
+
+def _intent_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-TCM-004 TCM-RFI-002 to TCM-RFI-004: the outcome field and the intent draft advisories."""
+
+    errors: list[Diagnostic] = []
+    found: list[Diagnostic] = []
+    outcome = artifact.metadata.get("outcome")
+    if outcome is not None and (not isinstance(outcome, str) or not outcome.strip()):
+        _add_error(errors, artifact, report_root, "E-AUT-002", "outcome must be a non-empty string when present", plane="structure")
+    if artifact.status != "draft":
+        return errors, found
+    path = _display_path(artifact.path, report_root)
+    if not isinstance(outcome, str) or not outcome.strip():
+        found.append(Diagnostic(path, "W-AUT-011", "intent has no outcome; one sentence names who can do or observe what after delivery", "maintenance"))
+    else:
+        outcome_words = _word_count(outcome)
+        if outcome_words > INTENT_OUTCOME_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-011", f"outcome is {outcome_words} words; the budget is {INTENT_OUTCOME_LIMIT}", "maintenance"))
+        outcome_spans = len(_CODE_SPAN.findall(outcome))
+        if outcome_spans:
+            found.append(Diagnostic(path, "W-AUT-011", f"outcome cites {outcome_spans} code identifiers; the outcome names no solution", "maintenance"))
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    body_words = _word_count(body)
+    if body_words > INTENT_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {INTENT_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    problem = sections.get("Problem")
+    if problem is not None:
+        problem_words = _word_count(problem)
+        problem_sentences = len(_sentences(problem))
+        if problem_words > INTENT_PROBLEM_WORD_LIMIT or problem_sentences > INTENT_PROBLEM_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-012",
+                f"Problem is {problem_words} words in {problem_sentences} sentences; the budget is {INTENT_PROBLEM_WORD_LIMIT} words or {INTENT_PROBLEM_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    unfenced = _FENCE.sub(" ", body)
+    identifiers = len(_CODE_SPAN.findall(unfenced))
+    if identifiers > INTENT_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {INTENT_CODE_IDENTIFIER_LIMIT}, the evidence belongs in a note, an RCA or an ADR", "maintenance"))
+    citations = len({span for span in _CODE_SPAN.findall(unfenced) if _REPOSITORY_PATH_SPAN.fullmatch(span) or _LINE_RANGE_SPAN.fullmatch(span)})
+    if citations:
+        found.append(Diagnostic(path, "W-AUT-015",
+            f"body cites {citations} repository paths or source line ranges; evidence is cited by link to a note, an RCA or an ADR, not quoted", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    measures = sections.get("Success measures")
+    if measures is not None:
+        rows = _success_measure_rows(measures)
+        if not rows:
+            found.append(Diagnostic(path, "W-AUT-014", "Success measures has no row; a success measure is what an operator can count or time after delivery", "maintenance"))
+        else:
+            for cells in rows:
+                match = _ACCEPTANCE_VOCABULARY.search(cells[3])
+                if match is not None:
+                    found.append(Diagnostic(path, "W-AUT-013",
+                        f"success measure '{cells[0]}' is observed by {match.group(0)}; an acceptance check belongs in the verification contract", "maintenance"))
+    return errors, found
 
 
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:

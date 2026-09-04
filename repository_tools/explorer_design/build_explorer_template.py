@@ -272,7 +272,55 @@ READABILITY_PATCHES: tuple[Patch, ...] = (
     ),
 )
 
-PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES)
+#: WO-TCM-007 (SPEC-TCM-004 TCM-RFI-006): an intent's outcome line and plain words
+#: are rendered beneath its title on the record panel and on its lineage card.
+#: Applied after the readability patches, whose inserted lines they anchor on.
+INTENT_PATCHES: tuple[Patch, ...] = (
+    Patch(
+        "      plainWords: a.plain_words ? this.fixText(a.plain_words) : false,\n",
+        "      plainWords: a.plain_words ? this.fixText(a.plain_words) : false,\n"
+        "      outcome: a.outcome ? this.fixText(a.outcome) : false,\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "      <span style=\"display:block;margin-top:8px;font:10px var(--l-mono);color:var(--l-faint)\">{{earsNote}}</span>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        "      <span style=\"display:block;margin-top:8px;font:10px var(--l-mono);color:var(--l-faint)\">{{earsNote}}</span>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n"
+        "  <sc-if value=\"{{outcome}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "    <blockquote style=\"margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)\">\n"
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Outcome</span>\n"
+        "      <span style=\"display:block;margin-top:6px;font-size:13.5px;line-height:1.6\">{{outcome}}</span>\n"
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "            id: a.id, title: a.title, kind: this.KIND[a.type] || a.type, gloss: this.GLOSS[a.type] || a.type,\n",
+        "            id: a.id, title: a.title, kind: this.KIND[a.type] || a.type, gloss: this.GLOSS[a.type] || a.type,\n"
+        "            outcome: a.type === 'intent' && a.outcome ? this.fixText(a.outcome) : false,\n",
+        1,
+        ("Lineage View",),
+    ),
+    Patch(
+        "                        <span style=\"display:block;margin-top:3px;font-size:12px;line-height:1.35;overflow-wrap:anywhere\">{{c.title}}</span>\n",
+        "                        <span style=\"display:block;margin-top:3px;font-size:12px;line-height:1.35;overflow-wrap:anywhere\">{{c.title}}</span>\n"
+        "                        <sc-if value=\"{{c.outcome}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "                          <span style=\"display:block;margin-top:4px;font-size:11.5px;line-height:1.35;color:var(--l-muted);overflow-wrap:anywhere\">{{c.outcome}}</span>\n"
+        "                        </sc-if>\n",
+        1,
+        ("Lineage View",),
+    ),
+)
+
+PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES, *INTENT_PATCHES)
 
 
 def _read(relative: str) -> str:
