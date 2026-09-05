@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.14.0-py3-none-any.whl",
-    "archive_sha256": "70d438b501d374fec06f41e25571f674b3cd1f43178389e6e06b0269c92f4856",
+    "archive_name": "se_harness-0.15.0-py3-none-any.whl",
+    "archive_sha256": "eb09343f65a52ecc7511aacbe7f4cc546cfe4bf28eeed62cf3ff2bccf838d947",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "25034dc72a6be582ebef3c6b9a733c6ab9b6dcd879b9fda162d4d3e131a04306",
-    "version": "0.14.0"
+    "payload_sha256": "11e4ad03da90093dc1f4bd1ac7fed746c157162187019d7b6feb37873d3a237e",
+    "version": "0.15.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
@@ -37,7 +37,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "2c72fa0f86ae9af734becccfd0075b16f18ee9798bb505e3fefab5608e48e6ab"
+      "sha256": "2a836137eb0537379014fdbf3049772601bf1619249dccd02e7c5bf4c5fedeb2"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -49,7 +49,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "4fa84e813301da289bdb5664e3792a7f4c3862df841e39f4a62230d9810cfacd"
+      "sha256": "60f797edf688c62b686bdfefb71cddb345e1ed5a4548afb9554981c2d03c38cd"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -65,15 +65,19 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "fc964d38d2efa047853160c9a08e987a08ca6ba1f0d1f9180411cbde918f68ca"
+      "sha256": "f860d8c96d53d1e0072db41119f25ce1cfdf4edd1e02dc98621bdbacd4bcbc0d"
+    },
+    "GLOSSARY.md": {
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
-      "sha256": "b7a5232ee80ef2234e2bffac88b35427c155fcd1431578092893422dad6dcc10"
+      "sha256": "ecc5efc82d4a834dec5e699053b1596e1e8a256faa32230156a28f56eab2f3e3"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
-      "sha256": "1503b1662783ad65fe498b84076737dce4299b218ccfe04daa04125020f42926"
+      "sha256": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709"
     },
     "docs/engineering/OPERATING_CARD.md": {
       "mode": "managed",
@@ -81,11 +85,11 @@
     },
     "docs/engineering/QUALITY_GATES.json": {
       "mode": "managed",
-      "sha256": "48de81bb31acf7b86ced27547a0373f31852532555742ea304d1a26f886c4292"
+      "sha256": "a7c256bb2a96c19e3e7229a3712e2577e70f711f755f83d4635db49670e4d66f"
     },
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
-      "sha256": "92773a5fe1e4902d4bcbf517fce8e0fa00b6a66666a213388416e8d3a1273389"
+      "sha256": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
@@ -97,15 +101,15 @@
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "485f692e62ecefee06589964671971a976229b710a1a848e483428c8d9854646"
+      "sha256": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623"
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
-      "sha256": "cc4ec5c63b8eac1c9d5cc5a2c444a76e6e083909b4a32a772ef14f1bb66200cf"
+      "sha256": "b7c63cbfd9a6075aa455c36ee3a331b6f93c1f0384057f4f74dd54a9015a6194"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "8577e230021ba3a05d8c2263711bcf35614f5fe70327474cba4cd605004ca45c"
+      "sha256": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -117,11 +121,15 @@
     },
     "docs/engineering/templates/CAPABILITY.template.md": {
       "mode": "managed",
-      "sha256": "0f240b2f5c83b507df9f9d555230d115e43ac86015168047d30775bd58544fc8"
+      "sha256": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436"
+    },
+    "docs/engineering/templates/DECISION.template.md": {
+      "mode": "managed",
+      "sha256": "7b4a13d236b62f3bc76bfc829b24efdc79cb5771ce170024a12404d5a21e9ac2"
     },
     "docs/engineering/templates/INTENT.template.md": {
       "mode": "managed",
-      "sha256": "e7ece0d79a2090518700183580f2f19ff357db885d1ec10e27c260c358869c23"
+      "sha256": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c"
     },
     "docs/engineering/templates/OPERATING_CONTRACT.template.md": {
       "mode": "managed",
@@ -129,7 +137,7 @@
     },
     "docs/engineering/templates/README.md": {
       "mode": "managed",
-      "sha256": "6c2ca1fb32791313178fbdb77c7946287f2609470cd7be1bdcaecb0c80e1bab1"
+      "sha256": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e"
     },
     "docs/engineering/templates/RELEASE_CONTRACT.template.md": {
       "mode": "managed",
@@ -141,7 +149,7 @@
     },
     "docs/engineering/templates/REQUIREMENT.template.md": {
       "mode": "managed",
-      "sha256": "294a2bf9ac52c45ad0602e4d448888f1b0b5842dc4c51027c86032f1509b58e7"
+      "sha256": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee"
     },
     "docs/engineering/templates/SPECIFICATION.template.md": {
       "mode": "managed",
@@ -161,7 +169,7 @@
     },
     "scripts/artifact_layout_registry.py": {
       "mode": "managed",
-      "sha256": "c9b9601ce49449304bdd5be497f911caff780d13fa3801667451ec23bf7df7ad"
+      "sha256": "bc32c4ca37da7f1a3b11eabc1b2335e6ac845b5d86b9a06584505a1a690a69f6"
     },
     "scripts/check_engineering_harness.ps1": {
       "mode": "managed",
@@ -173,15 +181,15 @@
     },
     "scripts/generate_harness_dashboard.py": {
       "mode": "managed",
-      "sha256": "3a84e1c300c7d31fb63c06f9fa77903d8a98b61b22a7a7bae37ae088c53229f8"
+      "sha256": "38fe7aa4fe349f2514a9ed67f8ab0d7238f24b72b6a27c49a6fa4acd3be45127"
     },
     "scripts/harness_explorer/index.template.html": {
       "mode": "managed",
-      "sha256": "c21503567c7e15c5ca15f74ff36aeee78b96b503e3eb31fdb49601e18417ffe0"
+      "sha256": "148e73567aed1c1699e9ff1089ca1479baf152edbff7ef41fc4a741cb3687b39"
     },
     "scripts/inspect_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "0a8d7cae178f695967823bcbe6ee1ff89b47a32526365d0a438dfeebaab99b8a"
+      "sha256": "f40ed79469a5f34c4f36529bcb9d5f4eed80c9cfaf6a2ad1745828b4e3f75278"
     },
     "scripts/select_harness_work_order.py": {
       "mode": "managed",
@@ -189,11 +197,11 @@
     },
     "scripts/validate_engineering_artifacts.py": {
       "mode": "managed",
-      "sha256": "09425810c3a8e6e618099957d7520287b358c89ef51cc7fb4a6f0cde9d1c3892"
+      "sha256": "8fa7670f52fc4af098aa2da0613f067fbed7c58f5bac3db8938b4e4b527fcbed"
     }
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.14.0"
+  "tool_version": "0.15.0"
 }

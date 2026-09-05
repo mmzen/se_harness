@@ -1,6 +1,6 @@
 # Engineering Harness for se_harness
 
-This repository uses SE Harness 0.14.0.
+This repository uses SE Harness 0.15.0.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and

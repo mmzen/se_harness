@@ -59,6 +59,7 @@ shell command, or repository-provided executable.
 | `review_preflight_ready` | Review preflight has no lifecycle-relevant blocker. |
 | `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |
 | `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |
+| `decision_gate_clear` | No `open` decision names the selected artifact in `blocks`, and no `deferred` decision names it without a scope admitting the requested transition. The failure names the decision, its options, the deciding role and the `harnessctl decide` command. |
 | `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |
 
 Missing completeness or required evidence is `not_assessable`, never `pass`.
@@ -70,15 +71,15 @@ trusted change baseline.
 | Gate ID | Predicate IDs |
 | --- | --- |
 | `QG-G0-INTENT` | `QGP-G0-GRAPH`, `QGP-G0-INTEGRITY` |
-| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |
-| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |
-| `QG-G3-WORK-AUTHORIZATION` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` |
-| `QG-G4-IMPLEMENTATION-EVIDENCE` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` |
+| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING`, `QGP-G1-DECISION` |
+| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING`, `QGP-G2-DECISION` |
+| `QG-G3-WORK-AUTHORIZATION` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT`, `QGP-G3-DECISION` |
+| `QG-G4-IMPLEMENTATION-EVIDENCE` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE`, `QGP-G4I-DECISION` |
 | `QG-G4-CANDIDATE-READY` | `QGP-G4C-STATUS`, `QGP-G4C-GRAPH`, `QGP-G4C-INTEGRITY` |
-| `QG-G4-ASSURANCE-DECISION` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` |
-| `QG-G4-VERIFIED-COVERAGE` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` |
-| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |
-| `QG-G5-RELEASE-DECISION` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` |
+| `QG-G4-ASSURANCE-DECISION` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY`, `QGP-G4A-DECISION` |
+| `QG-G4-VERIFIED-COVERAGE` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY`, `QGP-G4V-DECISION` |
+| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT`, `QGP-G5P-DECISION` |
+| `QG-G5-RELEASE-DECISION` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY`, `QGP-G5D-DECISION` |
 | `QG-G5-EXTERNAL-ACTION` | `QGP-G5E-STATUS`, `QGP-G5E-GRAPH`, `QGP-G5E-INTEGRITY` |
 
 ## Transition binding index
@@ -89,21 +90,22 @@ graph-structural checks that stay in the evaluator. Contract loading fails with
 
 | Family | Target | Predicate IDs | Structural checks |
 | --- | --- | --- | --- |
-| definition (intent, capability, requirement, verification, operating contract) | `approved` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` | `QGS-EDGE` |
-| definition (specification, architecture, ADR) | `approved` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` | `QGS-EDGE` |
-| definition (release contract) | `approved` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` | `QGS-EDGE` |
+| definition (intent, capability, requirement, verification, operating contract) | `approved` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING`, `QGP-G1-DECISION` | `QGS-EDGE` |
+| definition (specification, architecture, ADR) | `approved` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING`, `QGP-G2-DECISION` | `QGS-EDGE` |
+| definition (release contract) | `approved` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT`, `QGP-G5P-DECISION` | `QGS-EDGE` |
 | definition | `implemented`, `rejected` | none | `QGS-EDGE` |
-| work order | `approved` | `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY` | `QGS-EDGE`, `QGS-ASSURANCE` |
-| work order | `in_progress` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` | `QGS-EDGE` |
-| work order | `implemented` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE` | `QGS-EDGE` |
-| work order | `verified` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` | `QGS-EDGE`, `QGS-VREC-COVERAGE` |
-| work order | `released` | `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` | `QGS-EDGE`, `QGS-RLS-COVERAGE` |
+| work order | `approved` | `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-DECISION` | `QGS-EDGE`, `QGS-ASSURANCE` |
+| work order | `in_progress` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT`, `QGP-G3-DECISION` | `QGS-EDGE` |
+| work order | `implemented` | `QGP-G4I-STATUS`, `QGP-G4I-GRAPH`, `QGP-G4I-INTEGRITY`, `QGP-G4I-SCOPE`, `QGP-G4I-PREFLIGHT`, `QGP-G4I-EVIDENCE`, `QGP-G4I-DECISION` | `QGS-EDGE` |
+| work order | `verified` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY`, `QGP-G4V-DECISION` | `QGS-EDGE`, `QGS-VREC-COVERAGE` |
+| work order | `released` | `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY`, `QGP-G5D-DECISION` | `QGS-EDGE`, `QGS-RLS-COVERAGE` |
 | work order | `rejected` | none | `QGS-EDGE` |
-| verification record | `verified` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` | `QGS-EDGE` |
-| verification record | `superseded` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` | `QGS-EDGE`, `QGS-SUCCESSOR` |
+| verification record | `verified` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY`, `QGP-G4A-DECISION` | `QGS-EDGE` |
+| verification record | `superseded` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY`, `QGP-G4A-DECISION` | `QGS-EDGE`, `QGS-SUCCESSOR` |
 | verification record | `rejected` | none | `QGS-EDGE` |
-| release record | `released` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` | `QGS-EDGE`, `QGS-VERIFIED-INCLUSION` |
+| release record | `released` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY`, `QGP-G5D-DECISION` | `QGS-EDGE`, `QGS-VERIFIED-INCLUSION` |
 | release record | `rejected` | none | `QGS-EDGE` |
+| decision | `decided`, `deferred`, `withdrawn` | none | `QGS-EDGE` |
 
 At the `transition` checkpoint `review_evidence_available` accepts the
 work-order evidence bound to the `handoff` checkpoint at the same formal

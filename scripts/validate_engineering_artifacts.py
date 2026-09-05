@@ -13,7 +13,7 @@ import importlib.util
 import json
 import re
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path, PurePosixPath
@@ -81,7 +81,7 @@ class LifecycleStatePolicy:
     predecessor_adapter: str
 
 
-_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record"}
+_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision"}
 _LIFECYCLE_FIELDS = {
     "transitions_to",
     "grants_authority",
@@ -118,7 +118,7 @@ def _load_workflow_lifecycles() -> MappingProxyType:
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("lifecycles")
     if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
-        raise RuntimeError("managed workflow contract must declare exactly the four lifecycle families")
+        raise RuntimeError("managed workflow contract must declare exactly the five lifecycle families")
     lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
     for family in sorted(_LIFECYCLE_FAMILIES):
         raw_states = source.get(family)
@@ -195,7 +195,7 @@ ACTIVE_COVERAGE_STATUSES = frozenset({
 
 
 def _lifecycle_family(artifact_type: str) -> str:
-    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record"} else "definition"
+    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision"} else "definition"
 
 
 def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
@@ -256,12 +256,77 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("release_record", "satisfies"): {"release_contract"},
     ("release_record", "includes_verification"): {"verification_record"},
     ("release_record", "releases_work"): {"work_order"},
+    ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
+    ("decision", "produces"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
 }
+
+#: SPEC-DCM-001 rules 2 and 3: the decision kinds and the closed option set of a deviation.
+DECISION_KINDS = ("question", "deviation")
+DEVIATION_OPTIONS = frozenset({"amend", "supersede", "accept", "stop"})
+DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
 
 
 AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
 AUTHORING_NAMED_SUBJECT = re.compile(r"^THE [A-Z][A-Za-z0-9 _-]{0,60} SHALL\b")
-AUTHORING_STATEMENT_LIMIT = 300
+#: SPEC-TCM-003 TCM-RFR-003: the reader-first budgets, counted with code spans removed.
+AUTHORING_STATEMENT_LIMIT = 30  # words
+AUTHORING_BODY_LIMIT = 250  # words
+AUTHORING_WHY_WORD_LIMIT = 120
+AUTHORING_WHY_SENTENCE_LIMIT = 5
+AUTHORING_SENTENCE_LIMIT = 25  # words
+AUTHORING_CODE_IDENTIFIER_LIMIT = 3
+AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT = 2
+#: SPEC-TCM-004 TCM-RFI-002 to TCM-RFI-004: the reader-first intent budgets and the
+#: acceptance vocabulary that marks a success-measure row as an acceptance check.
+INTENT_OUTCOME_LIMIT = 30  # words
+INTENT_BODY_LIMIT = 200  # words
+INTENT_PROBLEM_WORD_LIMIT = 120
+INTENT_PROBLEM_SENTENCE_LIMIT = 5
+INTENT_CODE_IDENTIFIER_LIMIT = 2
+#: SPEC-TCM-005 TCM-RFC-002 and TCM-RFC-003: the reader-first capability budgets. The
+#: shared codes (W-AUT-005, -007, -008, -009) fire with these constants on a capability.
+CAPABILITY_ABILITY_LIMIT = 30  # words
+CAPABILITY_BODY_LIMIT = 150  # words
+CAPABILITY_NEED_WORD_LIMIT = 60
+CAPABILITY_NEED_SENTENCE_LIMIT = 3
+CAPABILITY_CODE_IDENTIFIER_LIMIT = 2
+_LEGACY_REQUIREMENT_LIST = ("Candidate requirements", "Derived requirements")
+_REPOSITORY_PATH_SPAN = re.compile(r"`[^`\s]*/[^`\s]*\.[A-Za-z0-9]{1,6}(?::\d+(?:-\d+)?)?`")
+_LINE_RANGE_SPAN = re.compile(r"`[^`]*:\d+(?:-\d+)?`")
+_ACCEPTANCE_VOCABULARY = re.compile(
+    r"\b(CI|tests?|validator|validate|verification|implementation review|acceptance run|regression run|transaction)\b", re.I
+)
+_CODE_SPAN = re.compile(r"`[^`]*`")
+_FENCE = re.compile(r"```.*?```", re.S)
+_WORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9'\-]*")
+_SENTENCE_END = re.compile(r"[.!?](?:\s|$)")
+_EVALUATION_EVENT = re.compile(r"^WHEN\s+[^,]*\b(is validated|is evaluated|is checked|runs|is run)\b[^,]*,", re.I)
+
+
+def _prose(text: str) -> str:
+    return _CODE_SPAN.sub(" ", _FENCE.sub(" ", text))
+
+
+def _word_count(text: str) -> int:
+    return len(_WORD.findall(_prose(text)))
+
+
+def _sentences(text: str) -> list[str]:
+    prose = " ".join(line.strip() for line in _prose(text).split("\n") if line.strip() and not line.strip().startswith(("|", "#", "**Given", "**When", "**Then")))
+    return [item.strip() for item in _SENTENCE_END.split(prose) if item.strip()]
+
+
+def _body_sections(body: str) -> dict[str, str]:
+    """Second-level headings to their text, fenced code removed."""
+    sections: dict[str, str] = {}
+    current = ""
+    for line in _FENCE.sub(" ", body.replace("\r\n", "\n")).split("\n"):
+        if line.startswith("## "):
+            current = line[3:].strip()
+            sections.setdefault(current, "")
+        elif current:
+            sections[current] += line + "\n"
+    return sections
 VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
 REQUIREMENT_PRIORITIES = ("must", "should", "could")
 
@@ -279,6 +344,16 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
     advisories: list[Diagnostic] = []
     catalog = {artifact.artifact_id for artifact in artifacts if artifact.artifact_id != "<unknown>"}
     for artifact in artifacts:
+        if artifact.artifact_type == "intent":
+            intent_errors, intent_advisories = _intent_authoring(artifact, report_root)
+            errors.extend(intent_errors)
+            advisories.extend(intent_advisories)
+            continue
+        if artifact.artifact_type == "capability":
+            capability_errors, capability_advisories = _capability_authoring(artifact, report_root)
+            errors.extend(capability_errors)
+            advisories.extend(capability_advisories)
+            continue
         if artifact.artifact_type != "requirement":
             continue
         draft = artifact.status == "draft"
@@ -295,9 +370,15 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
             if shall_count > 1:
                 advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
                     f"statement carries {shall_count} SHALL obligations; one requirement states one obligation", "maintenance"))
-            if len(text) > AUTHORING_STATEMENT_LIMIT:
+            statement_words = _word_count(text)
+            if statement_words > AUTHORING_STATEMENT_LIMIT:
                 advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
-                    f"statement is {len(text)} characters; the review threshold is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
+                    f"statement is {statement_words} words; the budget is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
+            if _EVALUATION_EVENT.match(text) and " AND " not in text.split(",", 1)[0].upper():
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-010",
+                    "statement opens WHEN on an event of evaluation with no other condition; an invariant reads THE SYSTEM SHALL", "maintenance"))
+        if draft:
+            advisories.extend(_reader_first_advisories(artifact, report_root))
         method = artifact.metadata.get("verification_method")
         if isinstance(method, str):
             if method.strip() and draft:
@@ -323,6 +404,181 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
         if measure is not None and (not isinstance(measure, str) or not measure.strip()):
             _add_error(errors, artifact, report_root, "E-AUT-002", "measure must be a non-empty string when present", plane="structure")
     return errors, warnings, advisories
+
+
+def _reader_first_advisories(artifact: Artifact, report_root: Path) -> list[Diagnostic]:
+    """SPEC-TCM-003 TCM-RFR-003: the body budgets of a requirement draft, advisories only."""
+
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    path = _display_path(artifact.path, report_root)
+    found: list[Diagnostic] = []
+    body_words = _word_count(body)
+    if body_words > AUTHORING_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {AUTHORING_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    why = sections.get("Why")
+    if why is not None:
+        why_words = _word_count(why)
+        why_sentences = len(_sentences(why))
+        if why_words > AUTHORING_WHY_WORD_LIMIT or why_sentences > AUTHORING_WHY_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-006",
+                f"Why is {why_words} words in {why_sentences} sentences; the budget is {AUTHORING_WHY_WORD_LIMIT} words or {AUTHORING_WHY_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
+    if identifiers > AUTHORING_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {AUTHORING_CODE_IDENTIFIER_LIMIT}, the rest belongs in the specification", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    return found
+
+
+def _success_measure_rows(section: str) -> list[list[str]] | None:
+    """The data rows of a Success measures table as cell lists; None when the table is malformed."""
+
+    rows: list[list[str]] = []
+    header_seen = False
+    for line in section.split("\n"):
+        stripped = line.strip()
+        if not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if not header_seen:
+            header_seen = True
+            continue
+        if all(set(cell) <= set("-: ") for cell in cells):
+            continue
+        if len(cells) < 4:
+            return None
+        rows.append(cells)
+    return rows
+
+
+def _intent_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-TCM-004 TCM-RFI-002 to TCM-RFI-004: the outcome field and the intent draft advisories."""
+
+    errors: list[Diagnostic] = []
+    found: list[Diagnostic] = []
+    outcome = artifact.metadata.get("outcome")
+    if outcome is not None and (not isinstance(outcome, str) or not outcome.strip()):
+        _add_error(errors, artifact, report_root, "E-AUT-002", "outcome must be a non-empty string when present", plane="structure")
+    if artifact.status != "draft":
+        return errors, found
+    path = _display_path(artifact.path, report_root)
+    if not isinstance(outcome, str) or not outcome.strip():
+        found.append(Diagnostic(path, "W-AUT-011", "intent has no outcome; one sentence names who can do or observe what after delivery", "maintenance"))
+    else:
+        outcome_words = _word_count(outcome)
+        if outcome_words > INTENT_OUTCOME_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-011", f"outcome is {outcome_words} words; the budget is {INTENT_OUTCOME_LIMIT}", "maintenance"))
+        outcome_spans = len(_CODE_SPAN.findall(outcome))
+        if outcome_spans:
+            found.append(Diagnostic(path, "W-AUT-011", f"outcome cites {outcome_spans} code identifiers; the outcome names no solution", "maintenance"))
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    body_words = _word_count(body)
+    if body_words > INTENT_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {INTENT_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    problem = sections.get("Problem")
+    if problem is not None:
+        problem_words = _word_count(problem)
+        problem_sentences = len(_sentences(problem))
+        if problem_words > INTENT_PROBLEM_WORD_LIMIT or problem_sentences > INTENT_PROBLEM_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-012",
+                f"Problem is {problem_words} words in {problem_sentences} sentences; the budget is {INTENT_PROBLEM_WORD_LIMIT} words or {INTENT_PROBLEM_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    unfenced = _FENCE.sub(" ", body)
+    identifiers = len(_CODE_SPAN.findall(unfenced))
+    if identifiers > INTENT_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {INTENT_CODE_IDENTIFIER_LIMIT}, the evidence belongs in a note, an RCA or an ADR", "maintenance"))
+    citations = len({span for span in _CODE_SPAN.findall(unfenced) if _REPOSITORY_PATH_SPAN.fullmatch(span) or _LINE_RANGE_SPAN.fullmatch(span)})
+    if citations:
+        found.append(Diagnostic(path, "W-AUT-015",
+            f"body cites {citations} repository paths or source line ranges; evidence is cited by link to a note, an RCA or an ADR, not quoted", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    measures = sections.get("Success measures")
+    if measures is not None:
+        rows = _success_measure_rows(measures)
+        if not rows:
+            found.append(Diagnostic(path, "W-AUT-014", "Success measures has no row; a success measure is what an operator can count or time after delivery", "maintenance"))
+        else:
+            for cells in rows:
+                match = _ACCEPTANCE_VOCABULARY.search(cells[3])
+                if match is not None:
+                    found.append(Diagnostic(path, "W-AUT-013",
+                        f"success measure '{cells[0]}' is observed by {match.group(0)}; an acceptance check belongs in the verification contract", "maintenance"))
+    return errors, found
+
+
+def _capability_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-TCM-005 TCM-RFC-002 and TCM-RFC-003: the ability field and the capability draft advisories."""
+
+    errors: list[Diagnostic] = []
+    found: list[Diagnostic] = []
+    ability = artifact.metadata.get("ability")
+    if ability is not None and (not isinstance(ability, str) or not ability.strip()):
+        _add_error(errors, artifact, report_root, "E-AUT-002", "ability must be a non-empty string when present", plane="structure")
+    if artifact.status != "draft":
+        return errors, found
+    path = _display_path(artifact.path, report_root)
+    if not isinstance(ability, str) or not ability.strip():
+        found.append(Diagnostic(path, "W-AUT-016", "capability has no ability; one sentence names who can do what under which conditions", "maintenance"))
+    else:
+        ability_words = _word_count(ability)
+        lowered = {word.lower() for word in _WORD.findall(_prose(ability))}
+        if ability_words > CAPABILITY_ABILITY_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-016", f"ability is {ability_words} words; the budget is {CAPABILITY_ABILITY_LIMIT}", "maintenance"))
+        if "can" not in lowered:
+            found.append(Diagnostic(path, "W-AUT-016", "ability does not say what the actor can do; the sentence is actor, can, achievement, under conditions", "maintenance"))
+        if "under" not in lowered:
+            found.append(Diagnostic(path, "W-AUT-016", "ability names no condition; say under which conditions the actor can do it", "maintenance"))
+        ability_spans = len(_CODE_SPAN.findall(ability))
+        if ability_spans:
+            found.append(Diagnostic(path, "W-AUT-016", f"ability cites {ability_spans} code identifiers; the ability names what an actor can do, not how", "maintenance"))
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    body_words = _word_count(body)
+    if body_words > CAPABILITY_BODY_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {CAPABILITY_BODY_LIMIT}", "maintenance"))
+    sections = _body_sections(body)
+    need = sections.get("Actor and need")
+    if need is not None:
+        need_words = _word_count(need)
+        need_sentences = len(_sentences(need))
+        if need_words > CAPABILITY_NEED_WORD_LIMIT or need_sentences > CAPABILITY_NEED_SENTENCE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-017",
+                f"Actor and need is {need_words} words in {need_sentences} sentences; the budget is {CAPABILITY_NEED_WORD_LIMIT} words or {CAPABILITY_NEED_SENTENCE_LIMIT} sentences", "maintenance"))
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
+    if identifiers > CAPABILITY_CODE_IDENTIFIER_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-008",
+            f"body cites {identifiers} code identifiers; the budget is {CAPABILITY_CODE_IDENTIFIER_LIMIT}, the how belongs in the specification", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
+    legacy = [heading for heading in sections if heading in _LEGACY_REQUIREMENT_LIST]
+    if legacy:
+        found.append(Diagnostic(path, "W-AUT-018",
+            f"body carries a {legacy[0]} list; the requirements that derive from a capability are read from the graph and shown by the Explorer", "maintenance"))
+    return errors, found
 
 
 def evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
@@ -1166,6 +1422,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "verification_record": ("verifies_work_order", "conforms_to"),
         "release_record": ("satisfies", "includes_verification", "releases_work"),
         "operating_contract": ("assures",),
+        "decision": ("concerns", "blocks"),
     }
 
     for artifact in artifacts:
@@ -2472,6 +2729,169 @@ def validate_decision_assessments(
     return errors, warnings
 
 
+def _decision_against(artifact: Artifact) -> tuple[str, str] | None:
+    value = artifact.metadata.get("against")
+    if not isinstance(value, str):
+        return None
+    match = re.fullmatch(r"([A-Z][A-Z0-9-]*-\d{3})#([A-Za-z0-9._-]+)", value.strip())
+    return (match.group(1), match.group(2)) if match else None
+
+
+def _decision_options(artifact: Artifact) -> list[dict[str, str]]:
+    raw = artifact.metadata.get("options")
+    if not isinstance(raw, list):
+        return []
+    return [
+        {"id": item["id"], "label": item["label"]}
+        for item in raw
+        if isinstance(item, dict) and isinstance(item.get("id"), str) and isinstance(item.get("label"), str)
+    ]
+
+
+def standing_deviations(artifacts: list[Artifact]) -> dict[str, list[str]]:
+    """Artifact id -> accepted deviations standing on it (SPEC-DCM-001 rule 9).
+
+    An accepted deviation stands on the specification it departs from, on every
+    work order it concerns, and on every verification or release record whose
+    covered work includes one of those work orders, until a later decided
+    deviation against the same rule chose `amend` or `supersede`.
+    """
+
+    closed_rules: set[str] = set()
+    accepted: list[Artifact] = []
+    for artifact in artifacts:
+        if artifact.artifact_type != "decision" or artifact.metadata.get("kind") != "deviation":
+            continue
+        disposition = artifact.metadata.get("disposition")
+        option = disposition.get("option") if isinstance(disposition, dict) else None
+        reference = _decision_against(artifact)
+        if artifact.status != "decided" or reference is None:
+            continue
+        if option in {"amend", "supersede"}:
+            closed_rules.add(f"{reference[0]}#{reference[1]}")
+        elif option == "accept":
+            accepted.append(artifact)
+    standing: dict[str, set[str]] = defaultdict(set)
+    for artifact in accepted:
+        reference = _decision_against(artifact)
+        assert reference is not None
+        if f"{reference[0]}#{reference[1]}" in closed_rules:
+            continue
+        standing[reference[0]].add(artifact.artifact_id)
+        relations = artifact.metadata.get("relations", {})
+        concerned = relations.get("concerns", []) if isinstance(relations, dict) else []
+        work_orders = {item for item in concerned if isinstance(item, str) and item.startswith("WO-")}
+        for work_order in work_orders:
+            standing[work_order].add(artifact.artifact_id)
+        for record in artifacts:
+            if record.artifact_type not in {"verification_record", "release_record"}:
+                continue
+            record_relations = record.metadata.get("relations", {})
+            if not isinstance(record_relations, dict):
+                continue
+            covered = set()
+            for relation in ("verifies_work_order", "releases_work"):
+                values = record_relations.get(relation, [])
+                covered.update(item for item in values if isinstance(item, str)) if isinstance(values, list) else None
+            if covered & work_orders:
+                standing[record.artifact_id].add(artifact.artifact_id)
+    return {key: sorted(value) for key, value in sorted(standing.items())}
+
+
+def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-DCM-001 rules 2-4, 6, 8, 10: decision fields, options, relations, dispositions, revisits."""
+
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    catalog = {artifact.artifact_id: artifact for artifact in artifacts if artifact.artifact_id != "<unknown>"}
+    accepted_by_rule: dict[str, list[str]] = defaultdict(list)
+    released_versions = {
+        str(artifact.metadata.get("version"))
+        for artifact in artifacts
+        if artifact.artifact_type == "release_record" and artifact.status == "released" and artifact.metadata.get("version")
+    }
+    for artifact in artifacts:
+        if artifact.artifact_type != "decision":
+            continue
+        kind = artifact.metadata.get("kind")
+        if kind not in DECISION_KINDS:
+            _add_error(errors, artifact, report_root, "E-DCM-002", "decision kind must be question or deviation", plane="structure")
+            continue
+        for field in ("question", "raised_by", "recommendation"):
+            if not isinstance(artifact.metadata.get(field), str) or not str(artifact.metadata.get(field)).strip():
+                _add_error(errors, artifact, report_root, "E-DCM-002", f"decision field '{field}' must be a non-empty string", plane="structure")
+        options = _decision_options(artifact)
+        option_ids = [item["id"] for item in options]
+        if len(options) < 2 or len(set(option_ids)) != len(option_ids):
+            _add_error(errors, artifact, report_root, "E-DCM-002", "a decision declares at least two options with distinct ids and labels", plane="structure")
+        recommendation = artifact.metadata.get("recommendation")
+        if isinstance(recommendation, str) and option_ids and recommendation not in option_ids:
+            _add_error(errors, artifact, report_root, "E-DCM-002", f"recommendation '{recommendation}' is not a declared option", plane="structure")
+        reference = _decision_against(artifact)
+        if kind == "deviation":
+            if reference is None:
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
+            elif reference[0] not in catalog:
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
+            elif catalog[reference[0]].artifact_type != "specification":
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
+            if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation records the observed fact in 'observed'", plane="structure")
+            if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):
+                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
+        relations = artifact.metadata.get("relations", {})
+        relations = relations if isinstance(relations, dict) else {}
+        blocked = relations.get("blocks", []) if isinstance(relations.get("blocks"), list) else []
+        concerned = relations.get("concerns", []) if isinstance(relations.get("concerns"), list) else []
+        if not blocked:
+            _add_error(errors, artifact, report_root, "E-DCM-001", "a decision blocks at least one artifact", plane="governance")
+        for target in blocked:
+            if isinstance(target, str) and target not in concerned:
+                _add_error(errors, artifact, report_root, "E-DCM-001", f"blocked artifact '{target}' is not also in concerns", plane="governance")
+        disposition = artifact.metadata.get("disposition")
+        events = artifact.metadata.get("lifecycle_events")
+        if artifact.status in DECISION_TERMINAL or artifact.status == "deferred":
+            if not isinstance(disposition, dict):
+                _add_error(errors, artifact, report_root, "E-DCM-003", f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
+            else:
+                if not isinstance(events, list) or not events:
+                    _add_error(errors, artifact, report_root, "E-DCM-003", "a disposition without a lifecycle event was written by hand", plane="governance")
+                option = disposition.get("option")
+                if artifact.status == "decided" and option not in option_ids:
+                    _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition option '{option}' is not a declared option", plane="governance")
+                for field in ("decided_by", "decided_at", "reason", "label"):
+                    if not isinstance(disposition.get(field), str) or not disposition[field].strip():
+                        _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition field '{field}' must be a non-empty string", plane="governance")
+                if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
+                    _add_error(errors, artifact, report_root, "E-DCM-003", "a deferred decision records its scope and its revisit trigger", plane="governance")
+                if artifact.status == "decided" and kind == "deviation" and option == "accept":
+                    revisit = disposition.get("revisit")
+                    if not isinstance(revisit, str) or not revisit.strip():
+                        _add_error(errors, artifact, report_root, "E-DCM-003", "an accepted deviation records its revisit trigger", plane="governance")
+                    elif reference is not None:
+                        rule = f"{reference[0]}#{reference[1]}"
+                        accepted_by_rule[rule].append(artifact.artifact_id)
+                        if any(f"v{version}" in revisit or version in revisit for version in released_versions):
+                            warnings.append(Diagnostic(
+                                _display_path(catalog[reference[0]].path, report_root) if reference[0] in catalog else _display_path(artifact.path, report_root),
+                                "W-DCM-001",
+                                f"accepted deviation {artifact.artifact_id} against {rule} is past its revisit '{revisit}'; amend or supersede the rule, or accept again with a new trigger",
+                                "maintenance",
+                            ))
+        elif isinstance(disposition, dict) and artifact.status == "open":
+            _add_error(errors, artifact, report_root, "E-DCM-003", "an open decision carries no disposition", plane="governance")
+    for rule, decisions in sorted(accepted_by_rule.items()):
+        if len(decisions) >= 2:
+            target = catalog.get(rule.split("#", 1)[0])
+            warnings.append(Diagnostic(
+                _display_path(target.path, report_root) if target is not None else rule,
+                "W-DCM-002",
+                f"{len(decisions)} accepted deviations stand against {rule} ({', '.join(decisions)}); the rule, not the implementations, is probably wrong",
+                "maintenance",
+            ))
+    return errors, warnings
+
+
 def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     active_specs = [
@@ -2595,6 +3015,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     assessment_warnings: list[Diagnostic] = []
     traceability_warnings: list[Diagnostic] = []
     authoring_warnings: list[Diagnostic] = []
+    decision_warnings: list[Diagnostic] = []
     if not selected_artifact_root.exists():
         errors.append(
             Diagnostic(
@@ -2624,6 +3045,8 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_work_order_assurance(artifacts, repository_root))
         errors.extend(validate_work_order_execution_scope(artifacts, repository_root))
         errors.extend(validate_work_order_delegation(artifacts, repository_root))
+        decision_errors, decision_warnings = validate_decisions(artifacts, repository_root)
+        errors.extend(decision_errors)
         errors.extend(
             validate_revision_consistency(
                 artifacts,
@@ -2644,6 +3067,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         *assessment_warnings,
         *traceability_warnings,
         *authoring_warnings,
+        *decision_warnings,
         *validate_canonical_layout(artifacts, repository_root, selected_artifact_root, errors),
     ]
     return ValidationReport(
