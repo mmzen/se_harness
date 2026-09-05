@@ -38,6 +38,7 @@ Holding one role does not grant another role. One person MAY hold several roles 
 | `DR-EXTERNAL-ACTION` | Tag, publish, deploy, operate, merge, or perform another external action | Owner accountable for that exact action | Exact target and applicable gate evidence | Explicit authorization limited to the stated action |
 | `DR-RELATED-RECORD-SELECT` | Select a related VREC, RLS, or WO for inspection | No decision authority required | Exact artifact ID | Read-only selection |
 | `DR-REMEDIATION-SCOPE` | Authorize new or revised remediation scope | Owner of the affected definition or work | Failed criterion and proposed bounded remediation | New or revised governed scope |
+| `DR-DECISION-DISPOSE` | Decide, defer, or withdraw a pending decision | Owner named on the artifact the decision blocks (the engineering owner for a work order); for a deviation, the owner named on the specification it departs from | Open or deferred `DEC-` and one declared option, with a revisit trigger for a deferral or an accepted deviation | The option, its label, the role, the time and the verbatim reason recorded as the decision's disposition; the blocked artifacts unchanged |
 
 ## Explicit decisions
 

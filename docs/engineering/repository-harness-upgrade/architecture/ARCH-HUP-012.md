@@ -8,8 +8,8 @@ created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
-addresses = ["REQ-HUP-029", "REQ-HUP-030"]
-conforms_to = ["SPEC-HUP-015"]
+addresses = ["REQ-HUP-029", "REQ-HUP-030", "REQ-HUP-031", "REQ-HUP-032"]
+conforms_to = ["SPEC-HUP-015", "SPEC-HUP-016"]
 
 [decision_assessment]
 outcome = "no_significant_decision"
@@ -50,3 +50,17 @@ published 0.14.0 moves; no file leaves the managed set.
 for every earlier root. This adoption applies them and introduces no new
 trust boundary, cross-cutting policy or hard-to-reverse choice; 0.14.0 is
 0.13.0 by another version.
+
+## Amendment record
+
+- 2026-09-05, under `WO-HUP-016`, whose execution scope names this file,
+  before its start preflight and for the owner's start decision. The
+  architecture now also addresses `REQ-HUP-031` and `REQ-HUP-032` and
+  conforms to `SPEC-HUP-016`: the 0.15.0 adoption crosses the same
+  standard-root boundary the same way, one released evaluator outside the
+  checkout writing the managed root through the installer's transaction
+  from a digest-verified wheel-file install. The decision assessment is
+  unchanged. Without this relation the start preflight reported `W021`,
+  the selected architecture unrelated to the selected requirements; the
+  0.14.0 packet had drafted this architecture for its own requirements,
+  and the 0.15.0 packet reused it without extending the relation.

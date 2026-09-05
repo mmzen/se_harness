@@ -33,6 +33,7 @@ from validate_engineering_artifacts import (
     decision_assessment_state,
     evidence_work_order_keys,
     load_revision_policy,
+    standing_deviations,
     validate_repository,
 )
 
@@ -344,6 +345,36 @@ def normalize_artifacts(
         for architecture_id in _string_list(decision.relations.get("decides")):
             active_decisions_by_architecture[architecture_id].add(decision.artifact_id)
 
+    # SPEC-DCM-001 rule 13: the decision trail of every concerned artifact and
+    # the standing deviations projected by the validator (rule 9).
+    standing = standing_deviations(list(report.artifacts))
+    decision_trail: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for decision in sorted(report.artifacts, key=lambda item: item.artifact_id):
+        if decision.artifact_type != "decision":
+            continue
+        disposition = decision.metadata.get("disposition")
+        disposition = disposition if isinstance(disposition, dict) else {}
+        entry = {
+            "id": decision.artifact_id,
+            "kind": _string(decision.metadata.get("kind")) or None,
+            "status": decision.status,
+            "question": _string(decision.metadata.get("question")) or None,
+            "option": _string(disposition.get("option")) or None,
+            "decided_by": _string(disposition.get("decided_by")) or None,
+            "decided_at": _string(disposition.get("decided_at")) or None,
+        }
+        for concerned in _string_list(decision.relations.get("concerns")):
+            decision_trail[concerned].append(entry)
+
+    # SPEC-TCM-005 TCM-RFC-005: what derives from a capability is read from the graph.
+    deriving_requirements: dict[str, list[str]] = defaultdict(list)
+    for requirement in report.artifacts:
+        if requirement.artifact_type != "requirement" or requirement.artifact_id == "<unknown>":
+            continue
+        for capability_id in _string_list(requirement.relations.get("derives_from")):
+            if capability_id.startswith("CAP-"):
+                deriving_requirements[capability_id].append(requirement.artifact_id)
+
     normalized: list[dict[str, Any]] = []
     for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
         item: dict[str, Any] = {
@@ -361,6 +392,28 @@ def normalize_artifacts(
         if artifact.artifact_type == "requirement":
             item["statement"] = _string(artifact.metadata.get("statement")) or None
             item["verification_method"] = _string(artifact.metadata.get("verification_method")) or None
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+        if artifact.artifact_type == "intent":
+            # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.
+            outcome = _string(artifact.metadata.get("outcome")) or None
+            if outcome:
+                item["outcome"] = outcome
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+            item["success_measure_rows"] = _success_measure_row_count(artifact.body)
+        if artifact.artifact_type == "capability":
+            # SPEC-TCM-005 TCM-RFC-005 and TCM-RFC-006: the ability line, the plain words
+            # and the requirements that derive from the capability, from the graph.
+            ability = _string(artifact.metadata.get("ability")) or None
+            if ability:
+                item["ability"] = ability
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+            item["derived_requirements"] = sorted(set(deriving_requirements.get(artifact.artifact_id, [])))
         if artifact.artifact_type == "architecture":
             item["architecture_traceability"] = architecture_traceability_state(
                 artifact,
@@ -419,6 +472,12 @@ def normalize_artifacts(
             item["supersession_authorized_by"] = _string(artifact.metadata.get("supersession_authorized_by")) or None
             item["evaluator_evidence_path"] = _string(artifact.metadata.get("evaluator_evidence_path")) or None
             item["evaluator_evidence_sha256"] = _string(artifact.metadata.get("evaluator_evidence_sha256")) or None
+        if artifact.artifact_type == "decision":
+            item.update(_decision_projection(artifact, catalog))
+        if decision_trail.get(artifact.artifact_id):
+            item["decisions"] = decision_trail[artifact.artifact_id]
+        if standing.get(artifact.artifact_id):
+            item["standing_deviations"] = standing[artifact.artifact_id]
         if artifact.artifact_type == "release_record":
             item["commit"] = _string(artifact.metadata.get("commit")) or None
             item["git_object_format"] = _string(artifact.metadata.get("git_object_format")) or None
@@ -433,6 +492,113 @@ def normalize_artifacts(
             item["distribution"] = _distribution_table(artifact.metadata.get("distribution"))
         normalized.append(item)
     return sorted(normalized, key=lambda item: (item["id"], item["path"]))
+
+
+def _decision_projection(artifact: Artifact, catalog: dict[str, Artifact]) -> dict[str, Any]:
+    """The decision's own fields (SPEC-DCM-001 rules 2-3, 6) and its deciding roles.
+
+    A deviation is decided by the owners of the specification it departs from;
+    a question by the owners of the artifacts it blocks. The projection restates
+    the declared owners; it infers no decision.
+    """
+
+    options = artifact.metadata.get("options")
+    disposition = artifact.metadata.get("disposition")
+    disposition = disposition if isinstance(disposition, dict) else None
+    against = _string(artifact.metadata.get("against")) or None
+    blocked = _string_list(artifact.relations.get("blocks"))
+    deciding: set[str] = set()
+    if artifact.metadata.get("kind") == "deviation" and against:
+        target = catalog.get(against.split("#", 1)[0])
+        if target is not None:
+            deciding.update(_string_list(target.metadata.get("owners")))
+    else:
+        for blocked_id in blocked:
+            target = catalog.get(blocked_id)
+            if target is not None:
+                deciding.update(_string_list(target.metadata.get("owners")))
+    if not deciding:
+        deciding.update(_string_list(artifact.metadata.get("owners")))
+    projection: dict[str, Any] = {
+        "kind": _string(artifact.metadata.get("kind")) or None,
+        "question": _string(artifact.metadata.get("question")) or None,
+        "raised_by": _string(artifact.metadata.get("raised_by")) or None,
+        "recommendation": _string(artifact.metadata.get("recommendation")) or None,
+        "against": against,
+        "observed": _string(artifact.metadata.get("observed")) or None,
+        "options": [
+            {"id": _string(option.get("id")), "label": _string(option.get("label"))}
+            for option in options
+            if isinstance(option, dict)
+        ] if isinstance(options, list) else [],
+        "blocks": blocked,
+        "deciding_roles": sorted(deciding),
+        "disposition": None,
+    }
+    if disposition is not None:
+        projection["disposition"] = {
+            "option": _string(disposition.get("option")) or None,
+            "label": _string(disposition.get("label")) or None,
+            "decided_by": _string(disposition.get("decided_by")) or None,
+            "decided_at": _string(disposition.get("decided_at")) or None,
+            "reason": _string(disposition.get("reason")) or None,
+            "revisit": _string(disposition.get("revisit")) or None,
+            "scope": _string_list(disposition.get("scope")),
+        }
+    return projection
+
+
+_PLAIN_WORDS_HEADING = "## In plain words"
+_SUCCESS_MEASURES_HEADING = "## Success measures"
+
+
+def _success_measure_row_count(body: Any) -> int:
+    """Data rows of an intent's `Success measures` table (SPEC-TCM-004 TCM-RFI-006); 0 when absent or malformed."""
+
+    if not isinstance(body, str):
+        return 0
+    inside = False
+    header_seen = False
+    rows = 0
+    for line in body.replace("\r\n", "\n").split("\n"):
+        if line.strip() == _SUCCESS_MEASURES_HEADING:
+            inside = True
+            continue
+        if inside and line.startswith("## "):
+            break
+        stripped = line.strip()
+        if not inside or not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if not header_seen:
+            header_seen = True
+            continue
+        if all(set(cell) <= set("-: ") for cell in cells):
+            continue
+        if len(cells) < 4:
+            return 0
+        rows += 1
+    return rows
+
+
+def _plain_words(body: Any) -> str | None:
+    """The text of a requirement's `In plain words` section (SPEC-TCM-003 TCM-RFR-004), or None."""
+
+    if not isinstance(body, str):
+        return None
+    lines = body.replace("\r\n", "\n").split("\n")
+    collected: list[str] = []
+    inside = False
+    for line in lines:
+        if line.strip() == _PLAIN_WORDS_HEADING:
+            inside = True
+            continue
+        if inside and line.startswith("## "):
+            break
+        if inside and line.strip():
+            collected.append(line.strip())
+    text = " ".join(collected).strip()
+    return text or None
 
 
 def build_declared_relations(artifacts: Sequence[Artifact]) -> list[dict[str, Any]]:
@@ -1243,6 +1409,12 @@ def build_readiness(
             if artifacts.get(artifact_id, {}).get("type") == "intent"
             and artifacts[artifact_id]["status"] in ACTIVE_COVERAGE_STATUSES
         )
+        # SPEC-TCM-004 TCM-RFI-006: a derived observation, never a gate result.
+        measured_intents = [
+            artifact_id
+            for artifact_id in intents
+            if artifacts[artifact_id].get("outcome") and artifacts[artifact_id].get("success_measure_rows", 0) > 0
+        ]
         requirements = by_relation.get("implements", [])
         required_contracts = [
             artifact_id
@@ -1313,7 +1485,12 @@ def build_readiness(
                 "Intent ready",
                 [
                     _condition("intent_chain", "Approved intent is reachable", "satisfied" if intents else "unsatisfied", intents),
-                    _condition("intent_quality", "Outcome quality and stakeholder agreement", "not_assessable"),
+                    _condition(
+                        "intent_quality",
+                        "Outcome stated with a success measure",
+                        "satisfied" if measured_intents else "not_assessable",
+                        measured_intents,
+                    ),
                 ],
             ),
             _gate(
@@ -1807,6 +1984,24 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
                 if hours is not None and hours > 0:
                     lead_times.append({"id": artifact["id"], "hours": round(hours, 2)})
     lead_times.sort(key=lambda item: (item["hours"], item["id"]))
+    # SPEC-DCM-001 rule 13: decision counts and raise-to-dispose times. A decision
+    # is raised when created (a date, read at midnight UTC) and disposed at the
+    # time its disposition records.
+    decisions = [item for item in artifacts if item.get("type") == "decision"]
+    decisions_open = sum(1 for item in decisions if item.get("status") in {"open", "deferred"})
+    decisions_decided = sum(1 for item in decisions if item.get("status") == "decided")
+    dispose_times: list[dict[str, Any]] = []
+    for item in decisions:
+        disposition = item.get("disposition")
+        if not isinstance(disposition, dict) or item.get("status") not in {"decided", "deferred", "withdrawn"}:
+            continue
+        raised = _string(item.get("created"))
+        if len(raised) == 10:
+            raised = f"{raised}T00:00:00Z"
+        hours = _hours_between(raised, disposition.get("decided_at"))
+        if hours is not None and hours >= 0:
+            dispose_times.append({"id": item["id"], "hours": round(hours, 2)})
+    dispose_times.sort(key=lambda item: (item["hours"], item["id"]))
     outgoing: dict[str, list[dict[str, Any]]] = defaultdict(list)
     incoming: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for relation in relations:
@@ -1867,6 +2062,9 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
         "delegated_records": delegated_records,
         "delegated_artifacts": sorted(delegated_artifacts),
         "lead_times": lead_times,
+        "decisions_open": decisions_open,
+        "decisions_decided": decisions_decided,
+        "decision_dispose_times": dispose_times,
         "released_work_orders": len(released_work),
         "released_work_orders_verified": len(verified_work),
         "latest_release": latest_release,
@@ -1963,6 +2161,14 @@ def build_dashboard_bundle(
             ]
         if artifact.get("type") == "release_record":
             for key in ("version", "released_at", "distribution"):
+                if artifact.get(key) is not None:
+                    compact_artifact[key] = artifact[key]
+        if artifact.get("type") == "capability" and artifact.get("ability") is not None:
+            # SPEC-TCM-005 TCM-RFC-006: the lineage board shows the ability under the title.
+            compact_artifact["ability"] = artifact["ability"]
+        if artifact.get("type") == "decision":
+            # SPEC-DCM-001 rule 13: the in-flight tile shows age and deciding role.
+            for key in ("created", "kind", "deciding_roles"):
                 if artifact.get(key) is not None:
                     compact_artifact[key] = artifact[key]
         compact_artifacts.append(compact_artifact)

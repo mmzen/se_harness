@@ -18,6 +18,9 @@ Canonical formal-artifact locations below `docs/engineering/<domain>/` are:
 | `release_contract` | `release/` |
 | `release_record` | `releases/` |
 | `operating_contract` | `operations/` |
+| `decision` | `decisions/` |
+
+A `decision` is disposed with `harnessctl decide`, never by editing its `[disposition]` table.
 
 Use `evidence/` for retained work-order evidence and `acceptance/` for Gherkin scenarios. Stable metadata and typed relations remain authoritative; legacy flat artifacts remain valid and are never moved by upgrade.
 

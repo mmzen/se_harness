@@ -23,46 +23,89 @@ rules for the accountable reviewer.
 ### Checklist
 
 - One obligation: the statement contains exactly one `SHALL`; split on "and SHALL". *(mechanical: W-AUT-002)*
-- One of the five shapes opens the statement: `THE SYSTEM SHALL …` (always), `WHEN <event>, …` (event), `WHILE <state>, …` (state), `IF <unwanted condition>, THEN …` (unwanted), `WHERE <feature>, …` (optional feature). *(mechanical: W-AUT-001)*
-- The statement is one sentence; at most 300 characters. *(mechanical: W-AUT-003)*
+- One of the five shapes opens the statement: `THE SYSTEM SHALL …` (always), `WHEN <event>, …` (event), `WHILE <state>, …` (state), `IF <unwanted condition>, THEN …` (unwanted), `WHERE <feature>, …` (optional feature). The concrete component may replace `THE SYSTEM` (`THE VALIDATOR SHALL …`); name it when one exists, and keep `THE SYSTEM` for an obligation that spans components. *(mechanical: W-AUT-001)*
+- The statement is one sentence of at most 30 words. *(mechanical: W-AUT-003)*
+- A statement that opens `WHEN` names a real event, not the act of evaluating; an invariant reads `THE SYSTEM SHALL`. *(mechanical: W-AUT-010)*
 - `verification_method` lists the methods that will verify it: `test`, `analysis`, `inspection`, `demonstration`. *(mechanical)*
 - `priority` says whether it is a `must`, a `should`, or a `could`.
 - `source` names where the obligation came from: a stakeholder, a standard clause, an incident, or an artifact.
 - A quality requirement carries a `measure`: a value and a unit, not an adjective.
-- Rationale says why the obligation exists, not what it does.
-- Two acceptance examples, one normal and one failure, each Given/When/Then; executable scenarios live in `acceptance/<REQ-ID>.feature`.
-- `Open decisions` reads `None` before approval is requested. *(mechanical at approval, once QG-G1 carries `QGP-G1-AUTHORING`)*
-- No template placeholder (`<…>`) survives. *(mechanical at approval, likewise)*
+- The body has four sections, in this order: `In plain words`, `Why`, `Behavior`, `Examples`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Why` says why the obligation exists, not what it does, in at most five sentences and 120 words. *(mechanical: W-AUT-006)*
+- `Behavior` is one table row per trigger: the trigger the reader can observe, the response the reader can check, what happens instead on failure. That row is the requirement's acceptance condition; the cases that prove it live in the verification contract that `verifies` this requirement, and the way it is met lives in the specification that `specifies` it.
+- `Examples` holds one `Normal` and one `Failure` scenario, each Given, When, Then. They fix meaning; they are not the test plan.
+- The body stays under 250 words, every sentence under 25 words, and cites at most three code identifiers; the rest belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved requirement. An approved requirement is not rewritten for shape; it adopts the shape when it is amended for another reason.
 
 ### Guidance
 
 Write the trigger the reader can observe, the response the reader can check,
 and nothing else. Avoid escape clauses ("where appropriate", "as needed"),
 vague quantities ("fast", "adequate"), and "and/or". If a requirement needs a
-diagram or a table to be understood, the detail belongs in a specification
-that `specifies` it. A requirement that reads like a plan of work is a work
-order in disguise.
+diagram or a table beyond its Behavior row to be understood, the detail
+belongs in a specification that `specifies` it. A requirement that reads like
+a plan of work is a work order in disguise.
+
+The glossary `GLOSSARY.md` at the repository root is this repository's own: the
+harness seeds it empty at installation and never rewrites it, and no term
+ships with the distribution. A glossary entry may cite the artifact that
+fixes the term's meaning; an amendment that changes a term's meaning names
+the entry. `harnessctl inspect` reports the frequent project terms that
+have no entry and the entries whose term has left the artifacts.
+
+A pending question is not written into the requirement. Below the threshold
+in the `decision` section it is asked and answered in a transition's
+`reason`; above it, it is a `DEC-` artifact that names this requirement in
+`blocks`, and the approval gate reads it from there. A legacy `Open
+decisions` section, where one still exists, reads `None` or lists `DEC-`
+identifiers; prose there is `E-DCM-004`.
 
 ## intent
 
 ### Checklist
 
-- Problem, outcome, scope boundary, and accountable product owner are each one paragraph.
-- The success measure is observable after delivery.
-- No solution language.
+- `outcome` is one sentence of at most 30 words that names who can do or observe what after delivery, and names no solution or code identifier. *(mechanical: W-AUT-011)*
+- The body has four sections, in this order: `In plain words`, `Problem`, `Success measures`, `Not this`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Problem` says what happens today, to whom, and why it is worth changing, in at most five sentences and 120 words. Evidence is cited by link to a note, an RCA or an ADR, not quoted. *(mechanical: W-AUT-012)*
+- `Success measures` is one table row per measure: `Measure`, `Today`, `When reached`, `Observed`. A measure is observed in operation, after delivery, by someone who has not read the code; `Observed` names a place and a cadence an operator recognises. A row observed by a CI run, a test, a validator run, a verification or an implementation review is an acceptance check and belongs in the verification contract. `Today` may read `not measured`. *(mechanical: W-AUT-013, W-AUT-014)*
+- `Not this` lists what the initiative deliberately leaves alone, in at most five bullets.
+- The body stays under 200 words, every sentence under 25 words, and cites at most two code identifiers and no repository path or source line range; the evidence belongs in the note it links to. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008, W-AUT-015)*
+- Who the actors are belongs in the capability's `Actor and need`; the principles later decisions must keep belong in a specification rule or an ADR; a risk is a risk artifact; an open question is a `DEC-` artifact. None of them is a section of the intent.
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved intent. An approved intent is not rewritten for shape; it adopts the shape and the `outcome` field when it is amended for another reason.
 
 ### Guidance
 
 An intent survives many requirements. Write it so that a reader can tell,
-years later, whether the outcome was reached.
+years later, whether the outcome was reached. A new intent is warranted when
+an owner would be asked about a new outcome in a year. A new thing an actor
+can do toward an outcome already stated is a capability under the existing
+intent, not a new intent.
 
 ## capability
 
 ### Checklist
 
-- Names what an actor can do, not how the system does it.
-- Derives from at least one active intent and lists its derived requirements.
-- Boundaries state what the capability does not decide.
+- `ability` is one sentence of at most 30 words: an actor, `can`, what they can do or achieve, `under` the conditions that matter. It names what an actor can do, not how the system does it, and no code identifier. *(mechanical: W-AUT-016)*
+- The body has three sections, in this order: `In plain words`, `Actor and need`, `Not decided here`.
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes; the harness ships none. *(mechanical: W-AUT-009)*
+- `Actor and need` says who the actor is and what they need, in their words, in at most three sentences and 60 words. The outcome the need serves is the intent's and is not restated. *(mechanical: W-AUT-017)*
+- `Not decided here` lists what the capability leaves to a requirement, a specification or another capability, in at most five bullets.
+- Derives from at least one active intent. The requirements that derive from the capability are read from the graph and shown by the Explorer; the body does not list them. *(mechanical: W-AUT-018 on a legacy list)*
+- The body stays under 150 words, every sentence under 25 words, and cites at most two code identifiers; the how belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved capability. An approved capability is not rewritten for shape; it adopts the shape and the `ability` field when it is amended for another reason.
+
+### Guidance
+
+A capability is warranted when an intent needs more than one actor ability,
+or when a requirement set needs an actor it can be read against. A
+capability never contains an outcome, which is the intent's, or a behavior,
+which is a requirement's: what is left, and what only the capability says,
+is the actor, the ability and what the capability does not decide.
 
 ## specification
 
@@ -124,6 +167,23 @@ contracts and evidence can cite them exactly.
 
 - `assures` names every requirement it claims continuing assurance for.
 - Observability, support, and operating obligations are measurable.
+
+## decision
+
+A pending question becomes a `decision` (`DEC-`) when it blocks a transition
+of another artifact, concerns more than one artifact, or must survive the
+approval of the artifact that raised it. Below that threshold the actor asks
+and the answer stays in the transition's `reason`.
+
+### Checklist
+
+- `kind` is `question` (an ambiguity met while authoring or planning) or `deviation` (an implementation cannot meet one rule of one specification). *(mechanical)*
+- One `question`, `raised_by`, at least two `[[options]]` with `id` and `label`, and a `recommendation` naming one option. *(mechanical)*
+- A deviation also names `against = "SPEC-xxx#rule-N"` and the `observed` fact; its options are drawn from `amend`, `supersede`, `accept`, `stop` and include `stop`. *(mechanical)*
+- `concerns` names every artifact the question is about; `blocks` names the artifacts that cannot change state while it is `open`, each also in `concerns`. *(mechanical)*
+- The `[disposition]` table is written by `harnessctl decide`; a hand-written one is `E-DCM-003`. A deferral needs a scope and a revisit trigger; accepting a deviation needs a revisit trigger. *(mechanical)*
+- `decided` and `withdrawn` decisions are never deleted or rewritten.
+- The definition templates carry no `Open decisions` section: a definition's pending decisions are the `DEC-` artifacts that name it in `blocks`, and the approval gate reads them from the graph. A legacy section, where one remains, reads `None` or lists `DEC-` identifiers; prose there is `E-DCM-004`.
 
 ## risk
 
