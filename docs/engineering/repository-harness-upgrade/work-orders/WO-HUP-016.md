@@ -2,7 +2,7 @@
 id = "WO-HUP-016"
 type = "work_order"
 title = "Adopt exact public 0.15.0 as the standard root, the simple way"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-05"
 updated = "2026-09-05"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-09-05T08:35:42Z"
 decided_by = "repository-owner"
 reason = "Approved by the accountable repository owner on 2026-09-05 with the instruction 'i appprove' (approve), after reviewing PR #352 (REQ-HUP-031, REQ-HUP-032, SPEC-HUP-016, VER-HUP-016, WO-HUP-016) and the rehearsal of the 0.15.0 root adoption on a throwaway clone of main at e4192ed. WO-HUP-016 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-05T09:15:29Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-05, given with the words 'start, complete on green, prepare record'. Start preflight PASS after ARCH-HUP-012 was amended by record to address REQ-HUP-031 and REQ-HUP-032; the packet was approved and merged as cfd9c4d; the transaction runs from an LF clone whose lock bytes equal the committed blob."
 +++
 
 # Work Order: Adopt exact public 0.15.0 as the standard root, the simple way
