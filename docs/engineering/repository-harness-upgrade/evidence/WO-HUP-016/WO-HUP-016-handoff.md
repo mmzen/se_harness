@@ -2,7 +2,7 @@
 artifact = "WO-HUP-016"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "e1bdca2d982919f9554b8e54e4855839a3b62711d4c07d9eb666138b2dcb0843"
-rebound_at = "2026-09-05T09:23:44Z"
+rebound_at = "2026-09-05T09:31:40Z"
 ```
 
 # WO-HUP-016 handoff evidence
@@ -113,4 +113,30 @@ are unchanged. No decision artifact was raised.
 
 ## Hosted lanes
 
-LANES-SECTION
+At the evidence head `fc6dd55a` (merge ref `93d7122`), all four lanes
+green before completion:
+
+- Governor Transition Assessment: plan phase `transition_required: true`,
+  base `cfd9c4d` under 0.14.0 with canonical lock `0425fccf…`, target
+  0.15.0 with archive `eb09343f…` and canonical lock `f617ff0b…`; exactly
+  one transaction document, this work order's
+  `WO-HUP-016-evaluator-upgrade.json`, and the trusted release
+  `RLS-SEH-024` (tag `v0.15.0`) supplying the wheel; the exact target
+  evaluator assessed the moved root: `RR001` runtime matches the target
+  root lock, `RR002` 116/116 managed checks, `RR003` artifacts 1,315 errors
+  0 warnings 71, `RR004` target state unchanged; the assessment made no
+  checkout change.
+- Engineering Harness: the managed lane installed `se-harness==0.15.0`
+  from the transaction's lock and ran the 0.15.0 gate: 116/116 managed
+  checks, Explorer generation PASS over 1,315 artifacts and 4,840
+  relations, 0 errors.
+- SE Harness Candidate Evidence: source and package evidence, governance
+  migration on Linux and Windows, deterministic integration package built
+  and verified on both platforms; upgrade rehearsal PASS 0.15.0 to 0.16.0;
+  the Linux suite 1,249 tests OK; evaluator facts `candidate_version
+  0.16.0`, payload `11e4ad03…`.
+- Publication Rehearsal: candidate and release-record modes both PASS,
+  `RLS-SEH-024` selected as the record to rehearse.
+
+The completion head and the record head are checked the same way before
+each act; this packet is rebound at every change.
