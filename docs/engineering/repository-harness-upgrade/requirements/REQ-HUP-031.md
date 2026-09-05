@@ -2,7 +2,7 @@
 id = "REQ-HUP-031"
 type = "requirement"
 title = "Adopt exact public 0.15.0 as the standard root by the simple upgrade"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-05"
 updated = "2026-09-05"
@@ -13,6 +13,13 @@ source = "RLS-SEH-024, released 2026-09-05; the standing practice of adopting ea
 
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-05T08:35:42Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable repository owner on 2026-09-05 with the instruction 'i appprove' (approve), after reviewing PR #352 (REQ-HUP-031, REQ-HUP-032, SPEC-HUP-016, VER-HUP-016, WO-HUP-016) and the rehearsal of the 0.15.0 root adoption on a throwaway clone of main at e4192ed."
 +++
 
 # Requirement: Adopt exact public 0.15.0 as the standard root by the simple upgrade

@@ -62,4 +62,6 @@ moved to 0.16.0, identity-aware test edits. The rehearsal of 2026-09-05 on
 a throwaway LF clone of `main` at `e4192ed` measured 48 files with 19
 updates, one added template and this repository's own `GLOSSARY.md`
 adopted as a seed; a no-op replay; 0 errors, 71 warnings, 0 advisories
-under the 0.15.0 gate. Every artifact is `draft`.
+under the 0.15.0 gate. The repository owner approved the five artifacts on
+2026-09-05 with "i appprove" (PR #352); the work order carries no delegation
+class, so its start, completion and record are the owners' explicit acts.
