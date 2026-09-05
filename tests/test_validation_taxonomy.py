@@ -153,9 +153,12 @@ class ValidationTaxonomyTests(unittest.TestCase):
             )
         self.assertIn("| `authoring_ready` |", quality)
         self.assertIn("| `release_unit_ready` |", quality)
-        self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |\n", quality)
-        self.assertIn("| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |\n", quality)
-        self.assertIn("| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |\n", quality)
+        # Identity-aware (WO-HUP-016, SPEC-HUP-016 rule 10): a root of 0.15.0 or later
+        # appends the gate's `QGP-G*-DECISION` predicate to each row; the prefix is
+        # what every root carries.
+        self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT`", quality)
+        self.assertIn("| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING`", quality)
+        self.assertIn("| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING`", quality)
         self.assertIn("BCP 14", canonical_quality)
         self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
         for plane in VALIDATION_PLANES:

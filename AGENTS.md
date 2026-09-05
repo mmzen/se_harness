@@ -42,7 +42,7 @@ This checkout is candidate source. Changes to the eight managed scripts and the 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.14.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.15.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
 An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development; that is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path makes candidate-source runtime identity fail with `RID018`.
