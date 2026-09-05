@@ -2,7 +2,7 @@
 id = "WO-RLS-021"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.15.0 candidate from main"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-04"
 updated = "2026-09-04"
@@ -27,6 +27,20 @@ to = "approved"
 decided_at = "2026-09-04T21:36:52Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-04 with the instruction 'approve both', after the release owner approved REL-SEH-026 in the same transaction. WO-RLS-021 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-04T21:40:30Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-04, given with the words 'start, complete on green, prepare record'. Start preflight PASS with no diagnostics over the reading manifest; REL-SEH-026 approved by the release owner the same day; branch release/0.15.0 cut from main at 7e05a88."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-04T21:58:15Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-04 under DR-WO-COMPLETE, under the decision given as 'start, complete on green, prepare record': every reading of REL-SEH-026's candidate-qualification section is recorded in the evidence packet with its evaluator and platform, the hosted build of record at 10b03bf was byte-identical twice on the pinned producer, every hosted lane at dbb35a0 and at the evidence head is success, and the Git-derived handoff check completes with all eight predicates passing. This commit is the candidate the records bind."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.15.0 candidate from main
