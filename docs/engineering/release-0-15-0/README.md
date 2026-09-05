@@ -13,10 +13,11 @@ owner-reviewed Verity Plane README with its logo (`WO-DOC-014`,
   release work order, eleven notes-only merges exempted by name, the build of record
   taken from the hosted pinned producer.
 - `WO-RLS-021`: cut, qualify and build the candidate.
-- `VREC-SEH-024`: the aggregate verification record over every gate (to be
-  prepared by `WO-RLS-021`).
-- `RLS-SEH-024`: the release record binding the build of record (to be
-  prepared after verification).
+- `VREC-SEH-024`: the aggregate verification record over every gate, bound
+  to the candidate `ba7ec54`, verified on 2026-09-05.
+- `RLS-SEH-024`: the release record binding the build of record (wheel
+  `eb09343f…`, sdist `0ad6c0d0…`, run 33923485490), `ready` for the release
+  owner's decision.
 
 Drafted on 2026-09-04 on the repository owner's instruction "you can
 prepare the 0.15.0 release, however there is a work in progress, that will
