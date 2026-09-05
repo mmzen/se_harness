@@ -2,10 +2,10 @@
 id = "VREC-SEH-024"
 type = "verification_record"
 title = "Verification candidate for 13 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-09-04"
-updated = "2026-09-04"
+updated = "2026-09-05"
 commit = "ba7ec5412726bd68c0317a4b6ee29927411cc1b5"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/ci-pipeline/evidence/WO-CIP-006/WO-CIP-006-h
 evaluator_evidence_path = "docs/engineering/release-0-15-0/evidence/VREC-SEH-024-evaluator.json"
 evaluator_evidence_sha256 = "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
 
+verified_at = "2026-09-05T05:38:09Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-CIP-006", "WO-DCM-001", "WO-DOC-014", "WO-DOC-015", "WO-DPG-002", "WO-ECP-025", "WO-HUP-015", "WO-RLS-021", "WO-TCM-004", "WO-TCM-005", "WO-TCM-006", "WO-TCM-007", "WO-TCM-008"]
 conforms_to = ["VER-CIP-002", "VER-DCM-001", "VER-DPG-001", "VER-DST-001", "VER-DST-024", "VER-ECP-021", "VER-HUP-015", "VER-TCM-002", "VER-TCM-003", "VER-TCM-004", "VER-TCM-005"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-05T05:38:09Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the aggregate evidence on 2026-09-05 with 'i verify': the thirteen gates of REL-SEH-026 hold their handoff packets, every required member its own verified record, the candidate ba7ec54 passed every reading of the contract's qualification section with the released 0.14.0 evaluator and the hosted lanes, and the build of record was byte-identical twice on the pinned producer (run 33923485490, wheel eb09343f..., sdist 0ad6c0d0...). Recorded readings and disclosures are in docs/engineering/release-0-15-0/evidence/WO-RLS-021/."
 +++
 
 # Verification Record Candidate
