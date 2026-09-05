@@ -65,3 +65,16 @@ adopted as a seed; a no-op replay; 0 errors, 71 warnings, 0 advisories
 under the 0.15.0 gate. The repository owner approved the five artifacts on
 2026-09-05 with "i appprove" (PR #352); the work order carries no delegation
 class, so its start, completion and record are the owners' explicit acts.
+
+`WO-HUP-016` was started, executed and completed on 2026-09-05 (PR #353):
+the root is exact public 0.15.0 under a schema-3 lock recording archive
+`eb09343f…` and payload `11e4ad03…`, moved from the 0.14.0 lock
+`0425fccf…` by one transaction (48 managed files, 19 updated, one added,
+`GLOSSARY.md` adopted as a seed, replay 48 unchanged) retained as
+`evidence/WO-HUP-016-evaluator-upgrade.json`. Under exact 0.15.0 the graph
+reads 1,315 artifacts, 0 errors, 71 warnings, 0 advisories, 116 managed
+checks, released-root qualification PASS and two identical Explorer
+generations; the Windows suite's failure set equals its same-commit 0.14.0
+control's. The candidate is 0.16.0. `ARCH-HUP-012` was amended by record to
+address the two 0.15.0 requirements. Evidence in `evidence/WO-HUP-016/`;
+the record is `VREC-HUP-015`.

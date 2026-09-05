@@ -2,7 +2,7 @@
 id = "WO-HUP-016"
 type = "work_order"
 title = "Adopt exact public 0.15.0 as the standard root, the simple way"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-05"
 updated = "2026-09-05"
@@ -34,6 +34,13 @@ to = "in_progress"
 decided_at = "2026-09-05T09:15:29Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-05, given with the words 'start, complete on green, prepare record'. Start preflight PASS after ARCH-HUP-012 was amended by record to address REQ-HUP-031 and REQ-HUP-032; the packet was approved and merged as cfd9c4d; the transaction runs from an LF clone whose lock bytes equal the committed blob."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-05T09:38:53Z"
+decided_by = "engineering-owner"
+reason = "Completed by the accountable engineering owner on 2026-09-05 under the repository owner's instruction 'start, complete on green, prepare record' for WO-HUP-016 (PR #353). The standard root is exact public 0.15.0 by the simple upgrade from the isolated wheel-file environment (transaction a3b5c12a: 48 managed files, 19 updated, 1 added, 1 adopted, replay 48 unchanged; prior lock 0425fccf under 0.14.0, target archive eb09343f, payload 11e4ad03, document WO-HUP-016-evaluator-upgrade.json). VER-HUP-016 executed in full under exact 0.15.0: validate 1315 artifacts, 0 errors, 71 warnings, 0 advisories; doctor 116/0; released-root qualification RR001-RR004 PASS; inspect 0; identical Explorer digests twice; review preflight PASS; identity passed; derive PRE008 then 0.15.0 to 0.16.0; the Windows suite's failure set equals the same-commit 0.14.0 control's (1249 tests, the one workstation baseline error, 26 skips). Rules 8, 9 and 10 applied (pyproject, __init__, AGENTS.md, developing-se-harness.md, test_instruction_architecture, test_validation_taxonomy). All four lanes green at the evidence head fc6dd55a and at ad7430ba, the governor-transition lane assessing the real 0.14.0 to 0.15.0 move with one transaction document and RLS-SEH-024 supplying the wheel. Evidence: docs/engineering/repository-harness-upgrade/evidence/WO-HUP-016/WO-HUP-016-handoff.md, bound at handoff."
 +++
 
 # Work Order: Adopt exact public 0.15.0 as the standard root, the simple way
