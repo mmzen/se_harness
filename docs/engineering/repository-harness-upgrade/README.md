@@ -48,3 +48,18 @@ their bounded post-adoption qualification.
 - `REQ-HUP-027`, `REQ-HUP-028`, `SPEC-HUP-014`, `ARCH-HUP-011` (no significant decision) and `VER-HUP-014` are drafted for the adoption of exact public 0.13.0 (`RLS-SEH-022`, wheel `1bbf3b74…`, payload `9b4cdb5f…`) as the standard root the simple way, from the 0.12.0 lock `4d8f9d37…`, deriving from `CAP-HUP-002`; `WO-HUP-014` is approved, started and executed on 2026-09-02: the root is exact public 0.13.0 and the candidate 0.14.0. Rehearsed on a throwaway clone of `main` at `09aa69f`: 5 managed updates (the two Explorer scripts among them), replay 46 unchanged, 0.13.0 validate 0 errors / 67 warnings / 0 advisories, doctor 0 FAIL, released-root 113/113, the designed Explorer generated identically twice; the candidate moves to `0.14.0` (`PRE008` otherwise). Approval, start, the transaction, completion, verification and merge are separate acts.
 
 - `REQ-HUP-029`, `REQ-HUP-030`, `SPEC-HUP-015`, `ARCH-HUP-012` (no significant decision) and `VER-HUP-015` are drafted for the adoption of exact public 0.14.0 (`RLS-SEH-023`, wheel `70d438b5…`, payload `25034dc7…`) as the standard root the simple way, from the 0.13.0 lock `9dfec5b4…`, deriving from `CAP-HUP-002`; `WO-HUP-015` is approved, started and executed on 2026-09-02: the root is exact public 0.14.0 and the candidate 0.15.0. Rehearsed on a throwaway clone of `main` at `25c0ef9`: 3 managed updates, replay 46 unchanged, 0.14.0 validate 0 errors / 69 warnings / 0 advisories, doctor 0 FAIL, released-root pass, the Explorer generated identically twice; the candidate moves to `0.15.0` (`PRE008` otherwise). Approval, start, the transaction, completion, verification and merge are separate acts.
+
+## Adopting 0.15.0 (2026-09-05)
+
+`RLS-SEH-024` released 0.15.0 on 2026-09-05, the first content release since
+the 0.13.0 root: the decision artifact, the reader-first requirement, intent
+and capability templates, the glossary seed and the new validator rules.
+None of it applies here until the root moves. `REQ-HUP-031`, `REQ-HUP-032`,
+`SPEC-HUP-016`, `VER-HUP-016` and `WO-HUP-016` carry the adoption on the
+`WO-HUP-015` model: the simple upgrade from an isolated wheel-file install
+whose digest equals the record's, one transaction document, the candidate
+moved to 0.16.0, identity-aware test edits. The rehearsal of 2026-09-05 on
+a throwaway LF clone of `main` at `e4192ed` measured 48 files with 19
+updates, one added template and this repository's own `GLOSSARY.md`
+adopted as a seed; a no-op replay; 0 errors, 71 warnings, 0 advisories
+under the 0.15.0 gate. Every artifact is `draft`.
