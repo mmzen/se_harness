@@ -2,7 +2,7 @@
 id = "SPEC-DST-025"
 type = "specification"
 title = "Evaluator scripts ship inside the package, not in the repository template"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -10,6 +10,13 @@ contract = "The evaluator ships its validator, Explorer generator and inspector 
 
 [relations]
 specifies = ["REQ-DST-070"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:49:42Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 by selecting the presented option 'Approve all four, do not start (Recommended)', after the packet was drafted at the owner's instruction to remove the evaluator content duplicated under scripts/ in two packets. This decision approves the artifact only; implementation of WO-DST-024 is not started by it."
 +++
 
 # Specification: Evaluator scripts ship inside the package, not in the repository template

@@ -2,13 +2,20 @@
 id = "VER-DST-025"
 type = "verification"
 title = "Evidence that the installer writes no evaluator script and the evaluator runs its own"
-status = "draft"
+status = "approved"
 owners = ["quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
 
 [relations]
 verifies = ["REQ-DST-070"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:49:42Z"
+decided_by = "quality-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 by selecting the presented option 'Approve all four, do not start (Recommended)', after the packet was drafted at the owner's instruction to remove the evaluator content duplicated under scripts/ in two packets. This decision approves the artifact only; implementation of WO-DST-024 is not started by it."
 +++
 
 # Verification Contract: Evidence that the installer writes no evaluator script and the evaluator runs its own

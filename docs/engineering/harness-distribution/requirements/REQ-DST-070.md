@@ -2,7 +2,7 @@
 id = "REQ-DST-070"
 type = "requirement"
 title = "Install no evaluator script into a governed repository"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -13,6 +13,13 @@ source = "Repository owner decision on 2026-09-06 to remove the duplicated evalu
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:49:42Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 by selecting the presented option 'Approve all four, do not start (Recommended)', after the packet was drafted at the owner's instruction to remove the evaluator content duplicated under scripts/ in two packets. This decision approves the artifact only; implementation of WO-DST-024 is not started by it."
 +++
 
 # Requirement: Install no evaluator script into a governed repository
