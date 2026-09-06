@@ -91,8 +91,8 @@ class PublicOnboardingTests(unittest.TestCase):
 
         blocks = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, re.DOTALL))
         commands = re.findall(r"(?m)^harnessctl [^\r\n]+", blocks)
-        commands += re.findall(r"`(harnessctl adopt [^`]+)`", self.readme)
-        self.assertEqual({"init", "adopt", "doctor"}, {shlex.split(command)[1] for command in commands})
+        # WO-ECP-026 (ECP-INS-009): the quick start shows the one installation command.
+        self.assertEqual({"init", "doctor"}, {shlex.split(command)[1] for command in commands})
         for command in commands:
             with self.subTest(command=command):
                 build_parser().parse_args(shlex.split(command)[1:])

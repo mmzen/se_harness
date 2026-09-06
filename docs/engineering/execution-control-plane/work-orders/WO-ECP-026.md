@@ -21,6 +21,7 @@ paths = [
   "tests/test_harnessctl.py",
   "tests/test_glossary.py",
   "tests/test_repository_context_retirement.py",
+  "tests/test_public_onboarding.py",
   "README.md",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/harness-installation-and-upgrades.md",
@@ -152,3 +153,15 @@ found to invoke `adopt` from automation.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-06
+
+`tests/test_public_onboarding.py` is added to `[execution_scope].paths`. Its
+test `test_quick_start_commands_parse_against_the_current_cli` pins the
+README quick-start command set to exactly `init`, `adopt` and `doctor`, so
+it fails once the README reads as `ECP-INS-009` states; the path was missed
+when the scope was drafted. The one purpose of the widening is that
+assertion (the set becomes `init` and `doctor`, and the stale search for a
+backticked `harnessctl adopt` goes). Decided by the accountable engineering
+owner on 2026-09-06 by selecting the presented option "Widen the scope by
+amendment". Nothing else is widened.
