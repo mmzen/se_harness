@@ -6,6 +6,8 @@
 > This maps the implementation at [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055) to proposed plugin components. It authorizes no implementation or lifecycle decision.
 > Plugin skills, hooks, launchers, and adapters described as new below do not exist yet. Command examples describe the inspected source interface, not a tested integration with the released 0.15.0 evaluator.
 
+Use the [scenario template](plugin-scenario-template.md) to develop detailed scenarios with consistent workflows, component responsibilities, and implementation mappings.
+
 ## First, distinguish the components
 
 **A skill tells the agent how to do the work. A script performs a defined operation. A hook tells the host when to run a check. The evaluator applies the harness rules.**
