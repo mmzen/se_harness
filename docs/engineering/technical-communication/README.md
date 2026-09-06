@@ -266,3 +266,24 @@ The repository owner approved it on 2026-09-06 with "I approve WO-TCM-010"
 (PR #364); the engineering owner started it and applied the amendment on the
 same branch.
 
+## Advisories blocking at approval (2026-09-06)
+
+`DEC-TCM-004` disposed the specification family as "advisory for one
+release, then blocking at approval", the regime the owner had chosen for the
+requirement, intent and capability families in `SPEC-TCM-003`, `SPEC-TCM-004`
+and `SPEC-TCM-005`. `REQ-TCM-017`, `SPEC-TCM-007` (twelve rules `TCM-RFB-001`
+to `TCM-RFB-012`, written in the reader-first shape) , `VER-TCM-007` and
+`WO-TCM-011` carry the execution: the approval gate's `authoring_ready`
+evaluator reads a draft's `W-AUT` advisories through the validator and
+refuses the approval while any remains, naming each; validation, approved
+artifacts, budgets and codes are unchanged. The reading of 2026-09-06 that
+motivates it: of nine definitions drafted under the 0.15.0 root, three were
+within budget and six were approved with advisories, the two new
+specifications with more than ten each. `WO-TCM-011` starts only after
+0.16.0 is released and adopted, so the specification family has had its one
+release of advisories.
+
+On 2026-09-06 the repository owner approved the four artifacts with "i
+approve" (PR #366). `WO-TCM-011` waits, approved, for the 0.16.0 release and
+adoption before its delegated start.
+
