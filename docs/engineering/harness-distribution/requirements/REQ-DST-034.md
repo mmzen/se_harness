@@ -77,3 +77,7 @@ A documentation mismatch is reported and corrected through governed work; it is 
 ## Open decisions
 
 None when approved.
+
+## Amendment record
+
+**The ordinary human-facing command surface is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-001`).** It names `init`, `doctor`, `validate`, `inspect` and `dashboard`; `adopt` is merged into `init`. Nothing else in this requirement changes.

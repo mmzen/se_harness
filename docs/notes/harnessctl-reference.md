@@ -36,6 +36,12 @@ Four rules hold on every subcommand (`WO-ECP-022`):
   and `qualify` print their own objects; every other command prints one
   `se-harness-command-result-v1` object with the same facts as its human
   output.
+- **Plan and write.** A command that changes existing governed state
+  (`transition`, `decide`, `upgrade`, `renumber-artifacts`) plans by
+  default and writes only with `--apply`. A command that adds content
+  (`init`, `scaffold-domain`, `create-artifact`) writes by default and
+  plans with `--dry-run`; `init` into a target with content appends the
+  bounded fragments to existing files and refuses every other difference.
 - **Exit codes.** `0`: completed. `1`: the command ran and its result is
   failed, blocked or not passing. `2`: the command could not run (a usage
   error, a refusal before any result). A failed result goes to standard
@@ -45,8 +51,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 
 | Command | Principal actor | State effect | Intended use |
 | --- | --- | --- | --- |
-| `init` | repository owner or authorized agent | writes a complete standard harness | initialize an absent or empty repository |
-| `adopt` | repository owner or authorized agent | preserves existing content and writes the harness plus adoption observations | introduce the harness into an existing repository |
+| `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer |
@@ -73,7 +78,6 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 
 ```text
 harnessctl init [TARGET] [--project-name NAME] [--dry-run] [--json]
-harnessctl adopt [TARGET] [--project-name NAME] [--dry-run] [--json]
 harnessctl validate [TARGET] [--json] [--advisories]
 harnessctl inspect [TARGET] [--json] [--vocabulary-threshold N]
 harnessctl dashboard [TARGET] [--output PATH] [--json]

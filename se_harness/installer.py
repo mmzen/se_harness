@@ -237,9 +237,11 @@ def plan_install(
     mode: str,
     adoption_report: bytes | None = None,
 ) -> tuple[list[Change], dict]:
-    target = ensure_target(target, must_exist=(mode != "init"))
-    if mode == "init" and target.exists() and any(target.iterdir()):
-        raise HarnessError("init requires an empty or absent directory; use adopt for an existing repository")
+    # ECP-INS-004: two modes, "init" (installation into any target) and
+    # "upgrade". A target with content is installed into, not refused.
+    if mode not in {"init", "upgrade"}:
+        raise HarnessError(f"unknown installation mode {mode!r}; expected init or upgrade")
+    target = ensure_target(target, must_exist=(mode == "upgrade"))
     old_lock = _load_lock(target) if target.exists() else {"schema": LOCK_SCHEMA, "tool_version": None, "files": {}}
     installed_at = None
     configured_project_name = None
@@ -310,7 +312,7 @@ def plan_install(
                     raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                 if desired_match:
                     action = "unchanged"
-                elif mode in {"init", "adopt"}:
+                elif mode == "init":
                     action = "conflict"
                 else:
                     try:
@@ -325,7 +327,7 @@ def plan_install(
                 raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
             if desired_match:
                 action = "unchanged"
-            elif mode in {"init", "adopt"}:
+            elif mode == "init":
                 action = "conflict"
             else:
                 try:

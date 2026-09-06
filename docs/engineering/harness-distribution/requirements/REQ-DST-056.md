@@ -70,3 +70,7 @@ If the exact destination already contains unknown, customized, symlinked, or con
 ## Open decisions
 
 None when approved.
+
+## Amendment record
+
+**The statement's trigger is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-003`).** Where the statement and the body read `init` or `adopt`, one command, `init`, targets the GitHub repository; the obligation to install one dedicated managed workflow without modifying unrelated workflows is unchanged.

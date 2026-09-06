@@ -113,7 +113,7 @@ class GlossaryTests(unittest.TestCase):
             target = Path(temporary)
             (target / "README.md").write_text("# existing\n", encoding="utf-8")
             (target / "GLOSSARY.md").write_text("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", encoding="utf-8")
-            code, output, error = self.invoke("adopt", str(target), "--project-name", "Adopted")
+            code, output, error = self.invoke("init", str(target), "--project-name", "Adopted")
             self.assertEqual(0, code, error + output)
             self.assertEqual("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", (target / "GLOSSARY.md").read_text(encoding="utf-8"))
 

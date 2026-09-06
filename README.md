@@ -72,7 +72,7 @@ harnessctl init my-project --project-name my-project
 harnessctl doctor my-project
 ```
 
-For an existing project, use `harnessctl adopt path/to/repository --project-name my-project` instead of `init`.
+The same `init` command installs into an existing project: it keeps your files, adds the harness beside them, and writes `docs/engineering/ADOPTION_REPORT.md` with what it found.
 
 `doctor` checks the installed harness. Next, record your project's commands and owners, then prepare its requirements, design, verification plan, and work order for approval. Follow the [getting-started guide](docs/notes/getting-started.md).
 

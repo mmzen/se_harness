@@ -108,3 +108,7 @@ the evaluator identity only from a schema-3 lock; it changes no byte here.
 
 Exact diagnostic wording beyond the elements HUP-LSF-001 requires; internal
 representation of the absent-lock state; test names.
+
+## Amendment record
+
+**The re-adoption route named by `HUP-LSF-001` is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-007`).** The floor diagnostic directs the owner to remove the stale lock and re-adopt the repository with `harnessctl init`, the one installation command; `adopt` is no longer registered. The verb and every other element of the diagnostic stand. Nothing else in this specification changes.

@@ -107,3 +107,7 @@ No CLI behavior, installed template, runtime dependency, ownership mode, existin
 ## Explicitly unspecified decisions
 
 Implementation may choose concise wording, badge use, and exact placement of retained detailed sections, provided the ordering, commands, authority boundaries, metadata fields, and deterministic checks above remain satisfied.
+
+## Amendment record
+
+**The `adopt` command line of the README content rules is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-009`).** The README no longer shows `harnessctl adopt TARGET --project-name NAME` for an existing repository; it states that the same `init` installs into an existing project, keeps its files and writes the adoption report. Nothing else in this specification changes.

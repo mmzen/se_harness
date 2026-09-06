@@ -136,3 +136,7 @@ scope checkpoint writes no packet.
 ## Amendment record
 
 **The `--authorized-by` guard of `ECP-CLI-002` is closed, proposed 2026-09-02 under `WO-ECP-025` (`SPEC-ECP-019` `ECP-TMB-006`).** `prepare-release` still takes `--owner` only; the pre-parse guard that named it left `main()`, and argparse refuses `--authorized-by` as an unrecognized argument with exit status 2. Nothing else in this specification changes.
+
+## Amendment record
+
+**`ECP-CLI-001` is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-001`).** The repository-command list loses `adopt`: `init` is the one installation command and its behaviour follows the target's content. The pinned set in `tests/test_cli_shape.py` reads accordingly. Nothing else in this specification changes.

@@ -212,7 +212,7 @@ class HarnessCtlTests(unittest.TestCase):
         context_path.parent.mkdir(parents=True)
         context_path.write_text("# Owner-curated context\n", encoding="utf-8")
 
-        code, _, error = self.invoke("adopt", str(target))
+        code, _, error = self.invoke("init", str(target))
         self.assertEqual(0, code, error)
         agents = (target / "AGENTS.md").read_text(encoding="utf-8")
         claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
@@ -247,7 +247,7 @@ class HarnessCtlTests(unittest.TestCase):
         for name, content in existing.items():
             (workflows / name).write_bytes(content)
 
-        code, _, error = self.invoke("adopt", str(target), "--project-name", "Existing CI")
+        code, _, error = self.invoke("init", str(target), "--project-name", "Existing CI")
         self.assertEqual(0, code, error)
         for name, content in existing.items():
             self.assertEqual(content, (workflows / name).read_bytes())
@@ -263,7 +263,7 @@ class HarnessCtlTests(unittest.TestCase):
         original = b"name: Repository owned\non: [push]\n"
         managed.write_bytes(original)
 
-        code, output, error = self.invoke("adopt", str(target))
+        code, output, error = self.invoke("init", str(target))
         self.assertEqual(1, code)
         self.assertIn("conflict", output)
         self.assertIn("another workflow filename", output)
@@ -277,7 +277,7 @@ class HarnessCtlTests(unittest.TestCase):
         (target / "ENGINEERING_HARNESS.md").write_bytes(original)
         (target / "AGENTS.md").write_text("existing\n", encoding="utf-8")
 
-        code, output, error = self.invoke("adopt", str(target))
+        code, output, error = self.invoke("init", str(target))
         self.assertEqual(1, code)
         self.assertIn("conflict", output)
         self.assertIn("no files were written", output)
@@ -285,6 +285,32 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual("existing\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
         self.assertFalse((target / ".engineering-harness.lock").exists())
         self.assertFalse((target / "docs").exists())
+
+    def test_init_writes_the_adoption_report_only_for_a_target_with_content(self) -> None:
+        # WO-ECP-026 (ECP-INS-002, ECP-INS-003, ECP-INS-005): one command; the
+        # target's content selects the behaviour, and the JSON result names
+        # "init" in both states.
+        report = Path("docs/engineering/ADOPTION_REPORT.md")
+        empty = self.root / "empty-target"
+        empty.mkdir()
+        code, output, error = self.invoke("init", str(empty), "--project-name", "Empty", "--json")
+        self.assertEqual(0, code, error)
+        payload = json.loads(output)
+        self.assertEqual(("init", "completed", True), (payload["command"], payload["outcome"], payload["written"]))
+        self.assertNotIn(report.as_posix(), [item["path"] for item in payload["changes"]])
+        self.assertFalse((empty / report).exists())
+
+        existing = self.root / "existing-target"
+        existing.mkdir()
+        (existing / "pyproject.toml").write_text("[project]\nname = \"existing\"\n", encoding="utf-8")
+        code, output, error = self.invoke("init", str(existing), "--project-name", "Existing", "--json")
+        self.assertEqual(0, code, error)
+        payload = json.loads(output)
+        self.assertEqual(("init", "completed", True), (payload["command"], payload["outcome"], payload["written"]))
+        self.assertIn({"action": "add", "path": report.as_posix()}, payload["changes"])
+        self.assertIn("Detected ecosystems: Python", (existing / report).read_text(encoding="utf-8"))
+        lock = json.loads((existing / ".engineering-harness.lock").read_text(encoding="utf-8"))
+        self.assertNotIn(report.as_posix(), lock["files"])
 
     def test_upgrade_plan_is_read_only_and_apply_preserves_customized_file(self) -> None:
         target = self.root / "upgrade"
@@ -345,7 +371,7 @@ class HarnessCtlTests(unittest.TestCase):
         target = self.root / "bad-markers"
         target.mkdir()
         (target / "AGENTS.md").write_text(f"rules\n{BEGIN_MARKER}\nbroken\n", encoding="utf-8")
-        code, _, error = self.invoke("adopt", str(target))
+        code, _, error = self.invoke("init", str(target))
         self.assertEqual(2, code)
         self.assertIn("markers", error)
         self.assertEqual(f"rules\n{BEGIN_MARKER}\nbroken\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
@@ -353,7 +379,7 @@ class HarnessCtlTests(unittest.TestCase):
         claude_target = self.root / "bad-claude-markers"
         claude_target.mkdir()
         (claude_target / "CLAUDE.md").write_text(f"rules\n{END_MARKER}\n", encoding="utf-8")
-        code, _, error = self.invoke("adopt", str(claude_target))
+        code, _, error = self.invoke("init", str(claude_target))
         self.assertEqual(2, code)
         self.assertIn("markers", error)
         self.assertFalse((claude_target / ".engineering-harness.lock").exists())
@@ -440,7 +466,7 @@ class HarnessCtlTests(unittest.TestCase):
         lock_path = target / ".engineering-harness.lock"
         lock_path.unlink()
 
-        code, _, error = self.invoke("adopt", str(target), "--project-name", "Legacy")
+        code, _, error = self.invoke("init", str(target), "--project-name", "Legacy")
         self.assertEqual(0, code, error)
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         self.assertEqual(LOCK_SCHEMA, lock["schema"])
@@ -551,7 +577,7 @@ class HarnessCtlTests(unittest.TestCase):
     def test_lock_contains_hashes_without_generated_adoption_report(self) -> None:
         target = self.root / "lock"
         target.mkdir()
-        self.assertEqual(0, self.invoke("adopt", str(target))[0])
+        self.assertEqual(0, self.invoke("init", str(target))[0])
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual(LOCK_SCHEMA, lock["schema"])
         self.assertEqual(HASH_ALGORITHM, lock["hash_algorithm"])
@@ -575,7 +601,7 @@ class HarnessCtlTests(unittest.TestCase):
         except (OSError, NotImplementedError):
             self.skipTest("directory symlinks are unavailable")
         with self.assertRaisesRegex(Exception, "symlinked directory"):
-            plan_install(target, project_name=None, mode="adopt")
+            plan_install(target, project_name=None, mode="init")
         self.assertEqual([], list(outside.iterdir()))
 
     def test_path_traversal_and_unsafe_lock_entry_fail_closed(self) -> None:
@@ -584,7 +610,7 @@ class HarnessCtlTests(unittest.TestCase):
         with self.assertRaises(HarnessError):
             safe_destination(target, Path("../outside.txt"))
 
-        self.assertEqual(0, self.invoke("adopt", str(target))[0])
+        self.assertEqual(0, self.invoke("init", str(target))[0])
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["files"]["../outside.txt"] = {"mode": "managed", "sha256": "0" * 64}

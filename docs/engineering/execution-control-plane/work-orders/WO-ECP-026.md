@@ -2,7 +2,7 @@
 id = "WO-ECP-026"
 type = "work_order"
 title = "Merge adopt into init: one installation command keyed by the target"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -51,6 +51,13 @@ to = "approved"
 decided_at = "2026-09-06T10:51:57Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of the declared scope only: the merged init in cli.py and installer.py, the integrity.py diagnostic, the four test modules and one new test, the three notes, the seven amendment records, the domain index, the evidence packet and the verification record. Every decision stays human: no delegation table. It authorizes no release, no publication, no root adoption and no merge; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-06T10:57:50Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-06 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #359 merged the approved packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-026-merge-init-adopt within the declared scope only."
 +++
 
 # Work Order: Merge adopt into init: one installation command keyed by the target
