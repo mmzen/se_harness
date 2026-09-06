@@ -17,6 +17,7 @@ paths = [
   "docs/engineering/technical-communication/specifications/SPEC-TCM-006.md",
   "docs/engineering/technical-communication/README.md",
   "docs/engineering/technical-communication/work-orders/WO-TCM-010.md",
+  "docs/engineering/technical-communication/evidence/WO-TCM-010/",
 ]
 
 [relations]
@@ -97,8 +98,11 @@ the Git-derived change set; a read of the corrected example against
 
 ## Evidence to record
 
-None beyond the amendment record itself; commit-bound verification is not
-required.
+`docs/engineering/technical-communication/evidence/WO-TCM-010/`: the
+handoff packet the gate requires at the handoff checkpoint. Scope amended
+on 2026-09-06 by the repository owner, who selected "Amend the scope" when
+the executor reported that the draft had omitted the evidence directory;
+commit-bound verification remains not required.
 
 ## Stop and escalate conditions
 

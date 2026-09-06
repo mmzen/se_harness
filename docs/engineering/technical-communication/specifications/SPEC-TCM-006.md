@@ -164,8 +164,12 @@ reason, keeping each former number in a note beside the identifier.
 
 ## Examples
 
-**Given** a draft written as this specification is, **when** the validator
-runs, **then** no advisory of TCM-RFS-007 to TCM-RFS-012 names it.
+**Given** a draft in the shape this specification prescribes, each rule one
+sentence of at most 30 words with a normative keyword, every sentence
+outside the rules under 25 words and every specified requirement in the
+coverage table, **when** the validator runs, **then** no advisory of
+TCM-RFS-007 to TCM-RFS-012 names it (amended under `WO-TCM-010`; see the
+amendment record).
 
 **Given** `SPEC-PYP-001`, approved, with twelve numbered rules under
 `Behavioral rules`, **when** the validator runs, **then** it is silent about
@@ -201,3 +205,18 @@ runs, **then** `E-DCM-005` names the specification and the fragment
   `DEC-TCM-004` decides as a regime and a later work order executes.
 - Whether the state model and other behavioural diagrams join the
   template, which the owner set aside on 2026-09-06.
+
+## Amendment record
+
+- 2026-09-06, under `WO-TCM-010` (approved by the repository owner with "I
+  approve WO-TCM-010", PR #364), by the engineering owner. `WO-TCM-009`'s
+  evidence packet (disclosure 1) found the first example false as written:
+  read as a draft by the candidate validator, this approved specification
+  draws `W-AUT-021` on rules `TCM-RFS-003`, `TCM-RFS-010`, `TCM-RFS-012`,
+  `TCM-RFS-014` and `TCM-RFS-018`, which run to 31 to 39 words, and
+  `W-AUT-007` on a 40-word sentence in `Scope`. The example now describes a
+  draft in the prescribed shape within every budget, which the tests of
+  `VER-TCM-006` prove. The five rules and the `Scope` sentence stand as
+  written: `TCM-RFS-023` forbids a shape rewrite of an approved
+  specification, and the rules' identifiers, meaning and coverage are
+  unchanged.

@@ -262,4 +262,7 @@ in five rules and `TCM-RFS-023` forbids a shape rewrite. The example is
 rewritten to describe a draft in the prescribed shape within every budget,
 and an amendment record names the finding. Commit-bound verification is
 not required: one example sentence, no rule, code or test changes.
+The repository owner approved it on 2026-09-06 with "I approve WO-TCM-010"
+(PR #364); the engineering owner started it and applied the amendment on the
+same branch.
 
