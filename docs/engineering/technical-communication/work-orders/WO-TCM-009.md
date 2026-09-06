@@ -2,7 +2,7 @@
 id = "WO-TCM-009"
 type = "work_order"
 title = "Ship the reader-first specification shape, one rule identity, mechanical coverage and the deviation anchor"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -38,6 +38,13 @@ to = "approved"
 decided_at = "2026-09-06T10:57:11Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358 (REQ-TCM-014, REQ-TCM-015, REQ-TCM-016, SPEC-TCM-006, VER-TCM-006, WO-TCM-009), after the product owner disposed DEC-TCM-001 to DEC-TCM-004 with the options the assessment recommends: identifiers, eight-sections, mechanical-table, advisory-then-blocking. WO-TCM-009 carries the execution delegation class: approving it delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated executor while the required validate check is green at the exact head; the verification decision, merge, release and adoption stay human."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-06T11:13:29Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 6e4b59262dec67c7d18027b7351faf3482a8a85b (check-run 101476427671, source github-checks). Started by the delegated executor on 2026-09-06 under the execution delegation class WO-TCM-009 carries, granted by the repository owner's approval 'approve as recommended' (PR #358), on the execution branch wo/tcm-009-execution (PR #362) with the required validate check green at the exact head 6e4b592. Start preflight PASS under exact 0.15.0."
 +++
 
 # Work Order: Ship the reader-first specification shape, one rule identity, mechanical coverage and the deviation anchor
