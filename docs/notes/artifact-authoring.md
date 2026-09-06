@@ -107,3 +107,31 @@ and the shared `W-AUT-005`, `W-AUT-007`, `W-AUT-008` and `W-AUT-009` fire
 with the capability budgets (150 words, 25 words, two identifiers). An
 `ability` that is present but empty is `E-AUT-002`. Approved capabilities
 are not rewritten.
+
+## Specifications
+
+`WO-TCM-009` (SPEC-TCM-006) gave the specification the same treatment,
+with one difference: its rules are the substance, so code identifiers are
+not budgeted there. The template is a `contract` field, one sentence of at
+most 30 words saying what an implementation must do to conform, and eight
+sections: `In plain words`, `Scope`, `Terms`, `Rules`, `Failure behaviour`,
+`Examples`, `Coverage`, `Not decided here`. Every rule leads with a stable
+identifier (`<PREFIX>-<AREA>-NNN`) in bold and is one sentence of at most
+30 words with MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; the
+identifier is the rule's name in verification contracts, work orders,
+evidence and a deviation's `against`, and it never moves. The `Coverage`
+table maps each specified requirement to the rules that meet it; the
+validator reads it and the Explorer shows it on the specification and, as
+`Covered by`, on each requirement. The nine former sections (actors, inputs,
+outputs, state model, data contracts, security, performance, observability,
+compatibility) are optional and the guide says when each earns its place.
+On specification drafts, `W-AUT-019` guards the contract, `W-AUT-020` the
+rule identity, `W-AUT-021` the rule shape, `W-AUT-022` the coverage table,
+`W-AUT-023` a legacy `Behavioral rules`, `Open decisions` or `Approval`
+heading, and the shared `W-AUT-005`, `W-AUT-007` and `W-AUT-009` fire with
+the specification budgets (300 words of prose outside the rules, failure,
+examples and coverage sections; 25 words per sentence outside the rules).
+A deviation whose `against` fragment names no rule identifier of its
+specification is `E-DCM-005`. Approved specifications are not rewritten;
+one that is amended for another reason adopts identifiers then, keeping
+each former number in a note beside the identifier.

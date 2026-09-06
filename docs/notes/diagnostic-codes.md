@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-276 codes across 30 registered prefixes.
+282 codes across 30 registered prefixes.
 
 ## How to read a code
 
@@ -32,11 +32,11 @@ but are not diagnostics and are not listed here.
 | `E` | installed validator | an artifact-graph or integrity error; validation fails. | 19 |
 | `E-AUT` | installed validator | an authoring-rule error on a formal artifact. | 2 |
 | `E-CIP` | installed validator | a CI-pipeline rule error. | 1 |
-| `E-DCM` | installed validator | a decision-artifact rule error. | 4 |
+| `E-DCM` | installed validator | a decision-artifact rule error. | 5 |
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
 | `W` | installed validator | a warning; validation still passes. | 19 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
-| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 18 |
+| `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 23 |
 | `W-DCM` | installed validator | a decision-artifact warning. | 2 |
 | `W-ECP` | installed validator | a control-plane warning. | 2 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
@@ -107,6 +107,7 @@ but are not diagnostics and are not listed here.
 | `E-DCM-002` | `E-DCM-002` |
 | `E-DCM-003` | `E-DCM-003` |
 | `E-DCM-004` | `E-DCM-004:` |
+| `E-DCM-005` | `E-DCM-005` |
 
 ### `E-ECP` — installed validator
 
@@ -167,6 +168,11 @@ but are not diagnostics and are not listed here.
 | `W-AUT-016` | `W-AUT-016` |
 | `W-AUT-017` | `W-AUT-017` |
 | `W-AUT-018` | `W-AUT-018` |
+| `W-AUT-019` | `W-AUT-019` |
+| `W-AUT-020` | `W-AUT-020` |
+| `W-AUT-021` | `W-AUT-021` |
+| `W-AUT-022` | `W-AUT-022` |
+| `W-AUT-023` | `W-AUT-023` |
 
 ### `W-DCM` — installed validator
 

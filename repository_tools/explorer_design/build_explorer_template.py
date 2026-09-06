@@ -389,7 +389,95 @@ CAPABILITY_PATCHES: tuple[Patch, ...] = (
     ),
 )
 
-PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES, *INTENT_PATCHES, *CAPABILITY_PATCHES)
+#: WO-TCM-009 (SPEC-TCM-006 TCM-RFS-018, TCM-RFS-019, TCM-RFS-022): a specification's
+#: contract line, plain words, rules by identifier with anchors and coverage table; the
+#: rules that cover a requirement, linked to their anchors; a deviation's departed rule
+#: as a link. Applied after the capability patches, whose inserted lines they anchor on.
+SPECIFICATION_PATCHES: tuple[Patch, ...] = (
+    Patch(
+        "      hasDerives: (a.derived_requirements || []).length > 0,\n",
+        "      hasDerives: (a.derived_requirements || []).length > 0,\n"
+        "      contract: a.contract ? this.fixText(a.contract) : false,\n"
+        "      rules: (a.rules || []).map(r => ({ id: r.id, text: this.fixText(r.text) })),\n"
+        "      hasRules: (a.rules || []).length > 0,\n"
+        "      coverage: (a.coverage || []).map(c => ({ requirement: c.requirement, href: window.HarnessExplorer && window.HarnessExplorer.artifactHref ? window.HarnessExplorer.artifactHref(c.requirement) : false, rules: (c.rules || []).join(', ') })),\n"
+        "      hasCoverage: (a.coverage || []).length > 0,\n"
+        "      coveredBy: (a.covered_by || []).map(c => ({ label: c.specification + '#' + c.rule, href: window.HarnessExplorer && window.HarnessExplorer.artifactHref ? window.HarnessExplorer.artifactHref(c.specification) + '#' + c.rule : false })),\n"
+        "      hasCoveredBy: (a.covered_by || []).length > 0,\n"
+        "      against: a.against ? String(a.against) : false,\n"
+        "      againstHref: a.against && window.HarnessExplorer && window.HarnessExplorer.artifactHref ? window.HarnessExplorer.artifactHref(String(a.against).split('#')[0]) + (String(a.against).split('#')[1] ? '#' + String(a.against).split('#')[1] : '') : false,\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "          <sc-for list=\"{{derives}}\" as=\"d\" hint-placeholder-count=\"3\">\n"
+        "            <a href=\"{{d.href}}\" style=\"font:12px var(--l-mono);color:var(--l-accent-deep);text-decoration:none\">{{d.id}}</a>\n"
+        "          </sc-for>\n"
+        "        </span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        "          <sc-for list=\"{{derives}}\" as=\"d\" hint-placeholder-count=\"3\">\n"
+        "            <a href=\"{{d.href}}\" style=\"font:12px var(--l-mono);color:var(--l-accent-deep);text-decoration:none\">{{d.id}}</a>\n"
+        "          </sc-for>\n"
+        "        </span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n"
+        "  <sc-if value=\"{{contract}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "    <blockquote style=\"margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)\">\n"
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Contract</span>\n"
+        "      <span style=\"display:block;margin-top:6px;font-size:13.5px;line-height:1.6\">{{contract}}</span>\n"
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n"
+        "  <sc-if value=\"{{hasRules}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "    <blockquote style=\"margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)\">\n"
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Rules</span>\n"
+        "      <sc-for list=\"{{rules}}\" as=\"r\" hint-placeholder-count=\"3\">\n"
+        "        <span id=\"{{r.id}}\" style=\"display:block;margin-top:8px;font-size:13px;line-height:1.6\"><span style=\"font:600 12px var(--l-mono);color:var(--l-accent-deep);margin-right:8px\">{{r.id}}</span>{{r.text}}</span>\n"
+        "      </sc-for>\n"
+        "      <sc-if value=\"{{hasCoverage}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:12px;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Coverage</span>\n"
+        "        <sc-for list=\"{{coverage}}\" as=\"c\" hint-placeholder-count=\"2\">\n"
+        "          <span style=\"display:block;margin-top:6px;font-size:12.5px;line-height:1.5\"><a href=\"{{c.href}}\" style=\"font:12px var(--l-mono);color:var(--l-accent-deep);text-decoration:none;margin-right:8px\">{{c.requirement}}</a><span style=\"font:12px var(--l-mono);color:var(--l-muted)\">{{c.rules}}</span></span>\n"
+        "        </sc-for>\n"
+        "      </sc-if>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n"
+        "  <sc-if value=\"{{against}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "    <blockquote style=\"margin:14px 0 0;padding:12px 14px;border-left:3px solid var(--l-rule);background:var(--l-bg)\">\n"
+        "      <span style=\"display:block;font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Departs from</span>\n"
+        "      <a href=\"{{againstHref}}\" style=\"display:block;margin-top:6px;font:12.5px var(--l-mono);color:var(--l-accent-deep);text-decoration:none\">{{against}}</a>\n"
+        "    </blockquote>\n"
+        "  </sc-if>\n",
+        1,
+        ("Record",),
+    ),
+    Patch(
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "      <span style=\"display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px\">\n        <sc-for list=\"{{earsLegend}}\" as=\"cl\" hint-placeholder-count=\"8\">",
+        "      <sc-if value=\"{{plainWords}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:block;margin-top:10px;font-size:13px;line-height:1.6;color:var(--l-fg)\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase;margin-right:8px\">In plain words</span>{{plainWords}}</span>\n"
+        "      </sc-if>\n"
+        "      <sc-if value=\"{{hasCoveredBy}}\" hint-placeholder-val=\"{{false}}\">\n"
+        "        <span style=\"display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:10px;align-items:baseline\"><span style=\"font:600 10.5px var(--l-mono);color:var(--l-muted);letter-spacing:.04em;text-transform:uppercase\">Covered by</span>\n"
+        "          <sc-for list=\"{{coveredBy}}\" as=\"cb\" hint-placeholder-count=\"3\">\n"
+        "            <a href=\"{{cb.href}}\" style=\"font:12px var(--l-mono);color:var(--l-accent-deep);text-decoration:none\">{{cb.label}}</a>\n"
+        "          </sc-for>\n"
+        "        </span>\n"
+        "      </sc-if>\n"
+        "      <span style=\"display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px\">\n        <sc-for list=\"{{earsLegend}}\" as=\"cl\" hint-placeholder-count=\"8\">",
+        1,
+        ("Record",),
+    ),
+)
+
+PATCHES: tuple[Patch, ...] = (*BASE_PATCHES, *DECISION_PATCHES, *READABILITY_PATCHES, *INTENT_PATCHES, *CAPABILITY_PATCHES, *SPECIFICATION_PATCHES)
 
 
 def _read(relative: str) -> str:

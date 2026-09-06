@@ -111,14 +111,31 @@ is the actor, the ability and what the capability does not decide.
 
 ### Checklist
 
-- Every rule carries a stable identifier (`<PREFIX>-<AREA>-NNN`) and one testable sentence.
-- Every `specifies` target requirement is covered by at least one rule.
-- Inputs, outputs, and failure behaviour are explicit; no rule depends on prose elsewhere.
+- `contract` is one sentence of at most 30 words, no code identifier: what an implementation must do to conform. *(mechanical: W-AUT-019 on a draft; E-AUT-002 when present but empty)*
+- The body has eight sections, in this order: `In plain words`, `Scope`, `Terms`, `Rules`, `Failure behaviour`, `Examples`, `Coverage`, `Not decided here`. *(mechanical: W-AUT-023 on a legacy `Behavioral rules`, `Open decisions` or `Approval` heading)*
+- `In plain words` is one or two sentences a newcomer understands. A project term used there is defined in this repository's own glossary, `GLOSSARY.md` at the repository root, which this repository writes. *(mechanical: W-AUT-009)*
+- Every rule leads with a stable identifier (`<PREFIX>-<AREA>-NNN`) in bold and is one testable sentence of at most 30 words carrying MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses. An identifier names one rule, never moves and is never reused; it is the rule's name in verification contracts, work orders, evidence and a deviation's `against`. *(mechanical: W-AUT-020 for identity, W-AUT-021 for shape; E-DCM-005 on a deviation naming no rule)*
+- `Coverage` is a table with one row per requirement in `specifies`, naming the rule identifiers that meet it; every identifier it names exists in `Rules`. The validator reads the table and the Explorer shows it on the specification and on each requirement. *(mechanical: W-AUT-022)*
+- `Failure behaviour` is a table of trigger, response and diagnostic; `Examples` are Given, When, Then and name the rule that holds; `Not decided here` lists what is left to the implementation, at most five bullets.
+- The prose outside `Rules`, `Failure behaviour`, `Examples` and `Coverage` stays under 300 words and every sentence outside `Rules` under 25 words. Code identifiers are the substance of a rule and are not budgeted. *(mechanical: W-AUT-005, W-AUT-007; no W-AUT-008)*
+- No template placeholder (`<…>`) survives. *(mechanical at approval)*
+- Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved specification. An approved specification is not rewritten for shape; it adopts identifiers only when amended for another reason, keeping each former number in a note beside the identifier.
 
 ### Guidance
 
-A specification is where detail lives. Rules are numbered so that verification
-contracts and evidence can cite them exactly.
+A specification is where detail lives: a requirement says what must be true,
+the specification says exactly how, in rules a test can cite, a work order
+can execute and a deviation can name. Nine sections are optional and earn
+their place only when the specification has something to say in them:
+`Actors and external systems` when more than one actor or an external system
+takes part; `Inputs` and `Outputs` when the contract is a command or an
+interface with a shape worth stating apart from the rules; `State model`
+when a thing has three or more states; `Data and interface contracts` when a
+file format, schema or API is bound; `Security and privacy properties` when
+a trust boundary is crossed; `Performance and capacity` when a budget is
+part of the contract; `Observability` when the contract includes what is
+logged or reported; `Compatibility and migration` when an existing
+repository, root or record must be carried across the change.
 
 ## architecture
 
@@ -179,7 +196,7 @@ and the answer stays in the transition's `reason`.
 
 - `kind` is `question` (an ambiguity met while authoring or planning) or `deviation` (an implementation cannot meet one rule of one specification). *(mechanical)*
 - One `question`, `raised_by`, at least two `[[options]]` with `id` and `label`, and a `recommendation` naming one option. *(mechanical)*
-- A deviation also names `against = "SPEC-xxx#rule-N"` and the `observed` fact; its options are drawn from `amend`, `supersede`, `accept`, `stop` and include `stop`. *(mechanical)*
+- A deviation also names `against = "SPEC-xxx#PREFIX-AREA-NNN"`, a rule identifier the specification defines *(mechanical: E-DCM-005)*, and the `observed` fact; its options are drawn from `amend`, `supersede`, `accept`, `stop` and include `stop`. *(mechanical)*
 - `concerns` names every artifact the question is about; `blocks` names the artifacts that cannot change state while it is `open`, each also in `concerns`. *(mechanical)*
 - The `[disposition]` table is written by `harnessctl decide`; a hand-written one is `E-DCM-003`. A deferral needs a scope and a revisit trigger; accepting a deviation needs a revisit trigger. *(mechanical)*
 - `decided` and `withdrawn` decisions are never deleted or rewritten.

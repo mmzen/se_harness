@@ -143,8 +143,18 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 return handle.read()
 
         root = normalized(self.template)
-        if "openDecs" in root:
+        if "openDecs" in root and "hasRules" in root:
             self.assertEqual(normalized(self.canonical), root)
+            return
+        if "openDecs" in root:
+            # WO-TCM-009 (SPEC-TCM-006 TCM-RFS-018, -019, -022): the candidate template renders a
+            # specification's contract, rules and coverage; the 0.15.0 root is exactly the build
+            # without the specification patches, and that divergence is declared here.
+            from repository_tools.explorer_design import build_explorer_template as builder
+
+            self.assertIn("hasRules", normalized(self.canonical))
+            without = tuple(patch for patch in builder.PATCHES if patch not in builder.SPECIFICATION_PATCHES)
+            self.assertEqual(builder.build(patches=without), root)
             return
         # WO-DCM-001 (SPEC-DCM-001 rule 13): the candidate template renders decisions;
         # a root released before them is exactly the build without the decision
