@@ -241,3 +241,7 @@ and the six artifacts were approved in one transaction. `WO-TCM-009` carries
 the execution delegation class; its delegated start follows on a branch
 from `main` once this packet has merged.
 
+`WO-TCM-009` executes on the branch `wo/tcm-009-execution`, opened on
+2026-09-06 from `main` at `7642132` after PR #358 merged, under the
+execution delegation class its approval granted.
+
