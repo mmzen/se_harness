@@ -74,19 +74,18 @@ python -m se_harness --version
 
 ## Initialize or adopt a repository
 
-Choose one operation:
+Run the one installation command:
 
 ```powershell
-harnessctl init C:\path\to\new-repository --project-name my-project
-harnessctl adopt C:\path\to\existing-repository --project-name my-project
+harnessctl init C:\path\to\repository --project-name my-project
 ```
 
-- `init` expects an absent or empty target.
-- `adopt` preserves ordinary existing content, inserts bounded managed fragments where supported, and writes `docs/engineering/ADOPTION_REPORT.md` with observations.
+- An absent or empty target receives the complete standard harness.
+- A target with content keeps its ordinary files; `init` inserts bounded managed fragments where supported and writes `docs/engineering/ADOPTION_REPORT.md` with observations. A differing ordinary file is a conflict and nothing is written.
 - `--dry-run` resolves and reports the complete plan without writing.
-- Neither operation invents approved product facts. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`, and establish the first formal chain through accountable review.
+- The command invents no approved product facts. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`, and establish the first formal chain through accountable review.
 
-For GitHub repositories, both operations install one dedicated managed `.github/workflows/engineering-harness.yml`. GitHub automatically discovers it beside zero or more existing workflows; SE Harness does not edit unrelated workflow files. Workflow presence does not configure branch protection, required checks, deployment ordering, or any other hosting policy.
+For GitHub repositories, `init` installs one dedicated managed `.github/workflows/engineering-harness.yml`. GitHub automatically discovers it beside zero or more existing workflows; SE Harness does not edit unrelated workflow files. Workflow presence does not configure branch protection, required checks, deployment ordering, or any other hosting policy.
 
 If that exact destination already contains unknown content, installation reports a conflict and writes nothing. Preserve repository-specific CI under another workflow filename, then rerun installation. GitHub does not assign execution meaning to the filename itself.
 

@@ -69,3 +69,7 @@ Removing syntax must not make agent operation magical or imply that the agent ca
 ## Open decisions
 
 The implementation may combine commands into one or more short blocks if actor and target-path meaning remain clear. This requirement was revised under `WO-DOC-012`; earlier commit-bound evidence continues to describe the five-command surface that existed at those recorded candidates.
+
+## Amendment record
+
+**The permitted README subcommand list is amended, proposed 2026-09-06 under `WO-ECP-026` (`SPEC-ECP-020` `ECP-INS-009`).** `adopt` is no longer a registered command; the README's explicit examples are limited to `init`, `doctor`, `validate`, `inspect` and `dashboard`, and the `init` example covers both a new and an existing repository. Nothing else in this requirement changes.

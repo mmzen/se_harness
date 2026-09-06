@@ -128,17 +128,21 @@ def _scan_repository(target: Path) -> bytes:
     return "\n".join(lines).encode("utf-8")
 
 
-def _install(args: argparse.Namespace, mode: str) -> int:
+def _install(args: argparse.Namespace) -> int:
     target = Path(args.target)
-    report = _scan_repository(target.resolve()) if mode == "adopt" else None
-    changes, old_lock = plan_install(target, project_name=args.project_name, mode=mode, adoption_report=report)
+    # ECP-INS-002/003: the target's content selects the behaviour. An absent or
+    # empty target receives the complete harness; a target with content keeps
+    # its files, receives the bounded fragments and the adoption report.
+    existing = target.exists() and any(target.iterdir())
+    report = _scan_repository(target.resolve()) if existing else None
+    changes, old_lock = plan_install(target, project_name=args.project_name, mode="init", adoption_report=report)
     listed = [{"action": item.action, "path": item.path} for item in changes]
     conflicts = [item.path for item in changes if item.action == "conflict"]
     if not args.json:
         print(format_plan(changes))
     if conflicts:
         if args.json:
-            _print_json(_command_result(mode, "failed", changes=listed, written=False, conflicts=conflicts))
+            _print_json(_command_result("init", "failed", changes=listed, written=False, conflicts=conflicts))
         else:
             print("conflicts must be resolved before installation; no files were written")
             if ".github/workflows/engineering-harness.yml" in conflicts:
@@ -146,11 +150,11 @@ def _install(args: argparse.Namespace, mode: str) -> int:
         return 1
     if args.dry_run:
         if args.json:
-            _print_json(_command_result(mode, "completed", changes=listed, written=False))
+            _print_json(_command_result("init", "completed", changes=listed, written=False))
         return 0
     apply_changes(target.resolve(), changes, old_lock, allow_updates=False)
     if args.json:
-        _print_json(_command_result(mode, "completed", changes=listed, written=True))
+        _print_json(_command_result("init", "completed", changes=listed, written=True))
     else:
         print(f"installed se-harness {__version__} in {target.resolve()}")
     return 0
@@ -842,13 +846,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--version", action="version", version=__version__)
     commands = parser.add_subparsers(dest="command", required=True)
 
-    for name in ("init", "adopt"):
-        command = commands.add_parser(name, help=f"{name} the standard harness")
-        command.add_argument("target", nargs="?", default=".")
-        command.add_argument("--project-name")
-        command.add_argument("--dry-run", action="store_true")
-        command.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
-        command.set_defaults(handler=lambda args, selected=name: _install(args, selected))
+    # ECP-INS-001: one installation command; its behaviour follows the target.
+    init = commands.add_parser("init", help="install the standard harness into an absent, empty or existing repository")
+    init.add_argument("target", nargs="?", default=".")
+    init.add_argument("--project-name")
+    init.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
+    init.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
+    init.set_defaults(handler=_install)
+    # Alias window (WO-ECP-026, owner decision of 2026-09-06): the released
+    # 0.15.0 verifier's candidate acceptance invokes `adopt`, so the name stays
+    # registered for the 0.16.0 release only, as a plain alias of init, and is
+    # removed afterwards under REQ-ECP-030's one-release rule.
+    adopt = commands.add_parser("adopt", help="alias of init, kept for the 0.16.0 release only")
+    adopt.add_argument("target", nargs="?", default=".")
+    adopt.add_argument("--project-name")
+    adopt.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
+    adopt.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
+    adopt.set_defaults(handler=_install)
 
     validate = commands.add_parser("validate", help="validate the repository artifact graph")
     validate.add_argument("target", nargs="?", default=".")
@@ -1015,7 +1029,7 @@ def build_parser() -> argparse.ArgumentParser:
     scaffold.add_argument("target", nargs="?", default=".")
     scaffold.add_argument("--domain", required=True)
     scaffold.add_argument("--title")
-    scaffold.add_argument("--dry-run", action="store_true")
+    scaffold.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
     scaffold.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     scaffold.set_defaults(handler=_scaffold_domain)
 
@@ -1024,7 +1038,7 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--domain", required=True)
     create.add_argument("--type", required=True, dest="artifact_type")
     create.add_argument("--id", dest="artifact_id", help="explicit identifier; omitted, the lowest free TYPE-DOMAIN-NNN across every local ref is allocated")
-    create.add_argument("--dry-run", action="store_true")
+    create.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
     create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     create.set_defaults(handler=_create_artifact)

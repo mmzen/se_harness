@@ -80,7 +80,7 @@ def validate_lock(value: Any) -> dict[str, Any]:
         raise IntegrityError(
             f"lock schema {schema} predates the supported floor (schema {LOCK_SCHEMA}); "
             "remove the stale .engineering-harness.lock and re-adopt the repository "
-            "with harnessctl adopt"
+            "with harnessctl init"
         )
     if type(schema) is not int or schema != LOCK_SCHEMA:
         raise IntegrityError("unsupported lock schema")

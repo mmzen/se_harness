@@ -171,3 +171,7 @@ with content, does not conform.
 The exact wording of the note sentences and the amendment records; the
 name of the new test; whether the human rendering adds one line naming the
 report path after "installed se-harness ... in ...".
+
+## Amendment record
+
+**`ECP-INS-001`, `ECP-INS-006` and `ECP-INS-011` open a one-release alias window, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** For the 0.16.0 release only, the parser also registers `adopt` as a plain alias of `init`: the same options, the same handler, the same result (`"command": "init"`), listed in `--help` as an alias kept for 0.16.0. The refusal of `ECP-INS-006` and the command-set pin of `ECP-INS-011` apply from the candidate after 0.16.0 is adopted, by a follow-up work order under `REQ-ECP-030`. The candidate's own acceptance (`se_harness/candidate_acceptance.py`) keeps the scenario id `adopt` and runs `init` on a folder with content, so the contract digest is unchanged and the successor verifier no longer invokes the alias. The compatibility section's "No alias window" is withdrawn: the released verifier is the caller it did not count. Nothing else changes.

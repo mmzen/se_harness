@@ -349,7 +349,10 @@ def assess_candidate_wheel(
         adopted.mkdir()
         (adopted / "README.md").write_text("repository\n", encoding="utf-8")
         results.append(
-            _run("adopt", [str(harnessctl), "adopt", str(adopted)], cwd=temporary, temporary=temporary, wheel=wheel, checkout=checkout)
+            # WO-ECP-026: the scenario keeps its id and exercises `init` on a folder
+            # with content, the merged installation command; the released
+            # verifier that governs this candidate still invokes `adopt`.
+            _run("adopt", [str(harnessctl), "init", str(adopted)], cwd=temporary, temporary=temporary, wheel=wheel, checkout=checkout)
         )
         for scenario, command in (
             ("doctor", [str(harnessctl), "doctor", str(initialized)]),

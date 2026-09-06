@@ -189,7 +189,7 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         target = self.root / "guided"
         target.mkdir()
         (target / "pyproject.toml").write_text("[project]\nname = \"guided\"\n", encoding="utf-8")
-        code, _, error = self.invoke("adopt", str(target), "--project-name", "Example")
+        code, _, error = self.invoke("init", str(target), "--project-name", "Example")
         self.assertEqual(0, code, error)
         report = (target / "docs" / "engineering" / "ADOPTION_REPORT.md").read_text(encoding="utf-8")
         steps = [line for line in report.splitlines() if line[:3] in {"1. ", "2. ", "3. ", "4. ", "5. "}]

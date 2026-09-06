@@ -86,3 +86,7 @@ The three notes are read once by a reviewer for the sentences
 
 Whether any consumer outside this repository scripted `adopt`; none is
 known, and the failure mode is a loud usage error.
+
+## Amendment record
+
+**The "refusal" row is replaced for one release, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** For 0.16.0 the row reads: `REQ-ECP-031` alias | test: invoke `adopt` through `main()` on a folder with content, `--dry-run --json` | exit 0, `"command": "init"`, the same `changes` as `init` on the same folder. The refusal row returns with the follow-up work order that removes the alias.

@@ -2,7 +2,7 @@
 id = "WO-ECP-026"
 type = "work_order"
 title = "Merge adopt into init: one installation command keyed by the target"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -17,10 +17,12 @@ paths = [
   "se_harness/cli.py",
   "se_harness/installer.py",
   "se_harness/integrity.py",
+  "se_harness/candidate_acceptance.py",
   "tests/test_cli_shape.py",
   "tests/test_harnessctl.py",
   "tests/test_glossary.py",
   "tests/test_repository_context_retirement.py",
+  "tests/test_public_onboarding.py",
   "README.md",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/harness-installation-and-upgrades.md",
@@ -51,6 +53,20 @@ to = "approved"
 decided_at = "2026-09-06T10:51:57Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of the declared scope only: the merged init in cli.py and installer.py, the integrity.py diagnostic, the four test modules and one new test, the three notes, the seven amendment records, the domain index, the evidence packet and the verification record. Every decision stays human: no delegation table. It authorizes no release, no publication, no root adoption and no merge; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-06T10:57:50Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-06 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #359 merged the approved packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-026-merge-init-adopt within the declared scope only."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-06T13:25:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-06 by the accountable engineering owner with the words 'you can mark as implemented and prepare the verification record' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at fe389c3 on wo/ecp-026-merge-init-adopt (main 7642132 merged in); exact 0.15.0 evaluator: validate 0 errors, 71 warnings (the main baseline), 0 advisories; doctor 116 PASS; review preflight PASS; handoff check --from-git 7642132 completed, nine QGP-G4I predicates pass, complete: true at its fixed point, retained as handoff.json. Windows suite 1251 tests, 26 skipped, 1 error (the known baseline name), 0 failures. Hosted lanes on PR #361 at fe389c3: validate, Candidate source evidence, Candidate package evidence (the released 0.15.0 verifier accepts the candidate with the adopt alias), both qualification rehearsals, Governance migration (Linux) and Governor transition assessment pass; Governance migration (Windows) was still running. Two scope amendments of 2026-09-06 (tests/test_public_onboarding.py; se_harness/candidate_acceptance.py with the one-release adopt alias window) were the owner's selections and are recorded on this work order and on the definitions."
 +++
 
 # Work Order: Merge adopt into init: one installation command keyed by the target
@@ -145,3 +161,31 @@ found to invoke `adopt` from automation.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-06
+
+`tests/test_public_onboarding.py` is added to `[execution_scope].paths`. Its
+test `test_quick_start_commands_parse_against_the_current_cli` pins the
+README quick-start command set to exactly `init`, `adopt` and `doctor`, so
+it fails once the README reads as `ECP-INS-009` states; the path was missed
+when the scope was drafted. The one purpose of the widening is that
+assertion (the set becomes `init` and `doctor`, and the stale search for a
+backticked `harnessctl adopt` goes). Decided by the accountable engineering
+owner on 2026-09-06 by selecting the presented option "Widen the scope by
+amendment". Nothing else is widened.
+
+## Scope amendment, 2026-09-06 (second)
+
+`se_harness/candidate_acceptance.py` is added to `[execution_scope].paths`.
+The released 0.15.0 verifier's candidate acceptance runs a closed scenario
+list on the candidate wheel and its `adopt` scenario invokes
+`harnessctl adopt`; the list lives in the released evaluator, so the
+candidate cannot change what the qualification lane runs, and removing
+`adopt` outright cannot pass qualification. Decided by the accountable
+engineering owner on 2026-09-06 by selecting the presented option "One-release
+alias window": `adopt` stays registered in 0.16.0 as a plain alias of `init`,
+and the candidate's own acceptance keeps the scenario id `adopt` (the
+contract digest is unchanged) while exercising `init` on a folder with
+content, so the alias can be removed after 0.16.0 is adopted, under
+`REQ-ECP-030`'s one-release rule, by a follow-up work order. The definitions
+record the same decision by dated amendment. Nothing else is widened.
