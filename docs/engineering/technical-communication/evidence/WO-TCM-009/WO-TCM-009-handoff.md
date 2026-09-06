@@ -2,7 +2,7 @@
 artifact = "WO-TCM-009"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "4d9e32f49a7bb6a3059f8ad0b1bca31d1500e903d30b4d8403cba2b5e87bcfe0"
-rebound_at = "2026-09-06T11:35:59Z"
+rebound_at = "2026-09-06T11:42:58Z"
 ```
 
 # WO-TCM-009 handoff evidence
@@ -49,7 +49,7 @@ implemented or superseded.
 | diagnostic-code index | candidate | `--check` passes; `W-AUT-019` to `W-AUT-023` and `E-DCM-005` indexed |
 | Explorer template | candidate | `build_explorer_template --check` passes; 442,561 bytes |
 | Windows suite (`run_tests.py --scale full`) | candidate, Windows 11, CPython 3.14.6 | 1,263 tests (14 new in `test_reader_first_specifications.py`), 1 error, 26 skipped; the error is the workstation baseline `test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`, the skips are the Windows-only guards; the failure set equals the 0.15.0 adoption control (1,249 tests, the same error, 26 skips) beyond the 14 added tests |
-| Linux lane | hosted | LANES-LINE |
+| Linux lane | hosted | 1,263 tests OK, 4 skipped (Linux, 4 workers), at the evidence head `6a0916d` |
 
 ## VER-TCM-006 matrix, row by row
 
@@ -114,4 +114,18 @@ in the candidate templates, the Explorer build sources, tests and notes.
 
 ## Hosted lanes
 
-LANES-SECTION
+At the evidence head `6a0916d`, all four lanes green:
+
+- Engineering Harness: the 0.15.0 gate the root carries, 116/116 managed
+  checks, preflight PASS, and the scope step reading the pull request's
+  diff inside the declared scope. At the implementation head `6d39fd5` the
+  same lane was red at the scope step with `QGP-G4I-EVIDENCE` because the
+  handoff evidence was not yet committed; it went green once it was.
+- SE Harness Candidate Evidence: source and package evidence, governance
+  migration on Linux and Windows, the deterministic integration package
+  built and verified on both platforms; the Linux suite 1,263 tests OK with
+  4 skips.
+- Governor Transition Assessment and Publication Rehearsal: success.
+
+The completion head and the record head are checked the same way before
+each act; this packet is rebound at every change.
