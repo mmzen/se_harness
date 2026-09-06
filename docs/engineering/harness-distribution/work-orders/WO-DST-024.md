@@ -2,7 +2,7 @@
 id = "WO-DST-024"
 type = "work_order"
 title = "Stop installing evaluator scripts into governed repositories"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -34,6 +34,13 @@ to = "approved"
 decided_at = "2026-09-06T14:49:42Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-06 by selecting the presented option 'Approve all four, do not start (Recommended)', after the packet was drafted at the owner's instruction to remove the evaluator content duplicated under scripts/ in two packets. This decision approves the artifact only; implementation of WO-DST-024 is not started by it."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-06T14:53:20Z"
+decided_by = "engineering-owner"
+reason = "Started by the accountable engineering owner on 2026-09-06 with the explicit instruction 'start WO-DST-024' in the working session, after approving the packet earlier the same day. Implementation proceeds on branch wo/dst-retire-engine-footprint under the approved execution scope."
 +++
 
 # Work Order: Stop installing evaluator scripts into governed repositories
