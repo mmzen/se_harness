@@ -2,7 +2,7 @@
 id = "WO-TCM-010"
 type = "work_order"
 title = "Correct the first example of SPEC-TCM-006 by record"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -30,6 +30,13 @@ to = "approved"
 decided_at = "2026-09-06T13:47:44Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'I approve WO-TCM-010' after reviewing PR #364: one example sentence of SPEC-TCM-006 corrected by record with an amendment record, commit-bound verification not required. WO-TCM-010 carries no delegation class; its start and completion are the engineering owner's explicit acts on the same instruction."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-06T13:47:51Z"
+decided_by = "engineering-owner"
+reason = "Started by the accountable engineering owner on 2026-09-06 on the owner's instruction 'I approve WO-TCM-010' (PR #364), which the pull request stated would be followed by the start, the amendment and the completion on the same branch. Start preflight PASS under exact 0.15.0."
 +++
 
 # Work Order: Correct the first example of SPEC-TCM-006 by record
