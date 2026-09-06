@@ -2,7 +2,7 @@
 id = "WO-ECP-026"
 type = "work_order"
 title = "Merge adopt into init: one installation command keyed by the target"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -60,6 +60,13 @@ to = "in_progress"
 decided_at = "2026-09-06T10:57:50Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-06 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #359 merged the approved packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-026-merge-init-adopt within the declared scope only."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-06T13:25:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-06 by the accountable engineering owner with the words 'you can mark as implemented and prepare the verification record' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at fe389c3 on wo/ecp-026-merge-init-adopt (main 7642132 merged in); exact 0.15.0 evaluator: validate 0 errors, 71 warnings (the main baseline), 0 advisories; doctor 116 PASS; review preflight PASS; handoff check --from-git 7642132 completed, nine QGP-G4I predicates pass, complete: true at its fixed point, retained as handoff.json. Windows suite 1251 tests, 26 skipped, 1 error (the known baseline name), 0 failures. Hosted lanes on PR #361 at fe389c3: validate, Candidate source evidence, Candidate package evidence (the released 0.15.0 verifier accepts the candidate with the adopt alias), both qualification rehearsals, Governance migration (Linux) and Governor transition assessment pass; Governance migration (Windows) was still running. Two scope amendments of 2026-09-06 (tests/test_public_onboarding.py; se_harness/candidate_acceptance.py with the one-release adopt alias window) were the owner's selections and are recorded on this work order and on the definitions."
 +++
 
 # Work Order: Merge adopt into init: one installation command keyed by the target
