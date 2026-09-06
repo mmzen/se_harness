@@ -39,7 +39,8 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Lifecycle state contract](lifecycle-state-contract.md) | Which lifecycle states does each artifact family admit, and what does each state's contract row grant? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same canonical repository skills without duplicating workflow authority? |
-| [Distributing the skills as a coding-agent plugin](agentic-execution-plugin-distribution.md) | What would shipping the harness skills as a host plugin involve, and why is it not a roadmap phase yet? |
+| [Proposal: installation through Codex and Claude Code plugins, 2026-09-06](plugin-installation-proposal-2026-09-06.md) | What changes would remove manual environment setup, how would native skills, hooks, and agents fit, and which authority boundaries need independent enforcement? |
+| [Earlier exploration of plugin distribution](agentic-execution-plugin-distribution.md) | Which questions informed the proposal? (historical exploration; predates the writing-skill retirement) |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Agentic execution review, 2026-08](agentic-execution-review-2026-08.md) | How has the agentic execution model evolved, how does it work today, and where is it heading? (point-in-time, `992fd73`) |
 | [Complexity audit, 2026-08](complexity-audit-2026-08.md) | Which machinery accumulated for past, temporary, or circumstantial situations and should not become permanent? (point-in-time, `f0ecd9b`) |
