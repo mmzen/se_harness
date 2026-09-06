@@ -2,7 +2,7 @@
 id = "DEC-TCM-002"
 type = "decision"
 title = "The shape of the specification template"
-status = "open"
+status = "decided"
 owners = ["product-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -22,6 +22,20 @@ label = "The fourteen sections stay; only the rule identifier and the coverage t
 [relations]
 concerns = ["REQ-TCM-014", "SPEC-TCM-006"]
 blocks = ["REQ-TCM-014"]
+
+[disposition]
+option = "eight-sections"
+label = "A contract field and eight sections: In plain words, Scope, Terms, Rules, Failure behaviour, Examples, Coverage, Not decided here; nine former sections become optional guidance."
+decided_by = "product-owner"
+decided_at = "2026-09-06T10:56:28Z"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-06T10:56:28Z"
+decided_by = "product-owner"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
 +++
 
 # Decision: The shape of the specification template

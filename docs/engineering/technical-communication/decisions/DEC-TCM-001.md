@@ -2,7 +2,7 @@
 id = "DEC-TCM-001"
 type = "decision"
 title = "The rule identity of a specification"
-status = "open"
+status = "decided"
 owners = ["product-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -22,6 +22,20 @@ label = "Identifiers are the template's form, but a numbered list draws no advis
 [relations]
 concerns = ["REQ-TCM-014", "REQ-TCM-016", "SPEC-TCM-006"]
 blocks = ["REQ-TCM-014", "REQ-TCM-016"]
+
+[disposition]
+option = "identifiers"
+label = "Every rule of a new draft leads with a stable identifier; a numbered rule draws an advisory; the deviation reference accepts identifiers only."
+decided_by = "product-owner"
+decided_at = "2026-09-06T10:56:21Z"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-06T10:56:21Z"
+decided_by = "product-owner"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
 +++
 
 # Decision: The rule identity of a specification

@@ -233,3 +233,11 @@ proposal on 2026-09-06 and set the question of behavioural diagrams aside.
   block the three requirements until the product owner disposes them with
   `harnessctl decide`; the recommendation of each is the assessment's.
 
+On 2026-09-06 the repository owner said "approve as recommended" (PR #358).
+The product owner disposed the four decisions with `harnessctl decide`
+(`identifiers`, `eight-sections`, `mechanical-table`,
+`advisory-then-blocking`), the decision predicate `QGP-G1-DECISION` cleared,
+and the six artifacts were approved in one transaction. `WO-TCM-009` carries
+the execution delegation class; its delegated start follows on a branch
+from `main` once this packet has merged.
+

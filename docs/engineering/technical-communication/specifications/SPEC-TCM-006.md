@@ -2,7 +2,7 @@
 id = "SPEC-TCM-006"
 type = "specification"
 title = "Reader-first specifications: one rule identity, the contract field and mechanical coverage"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -10,6 +10,13 @@ contract = "A conforming specification names every rule once, states each rule a
 
 [relations]
 specifies = ["REQ-TCM-014", "REQ-TCM-015", "REQ-TCM-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:57:11Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358 (REQ-TCM-014, REQ-TCM-015, REQ-TCM-016, SPEC-TCM-006, VER-TCM-006, WO-TCM-009), after the product owner disposed DEC-TCM-001 to DEC-TCM-004 with the options the assessment recommends: identifiers, eight-sections, mechanical-table, advisory-then-blocking."
 +++
 
 # Specification: Reader-first specifications: one rule identity, the contract field and mechanical coverage

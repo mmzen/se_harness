@@ -2,7 +2,7 @@
 id = "WO-TCM-009"
 type = "work_order"
 title = "Ship the reader-first specification shape, one rule identity, mechanical coverage and the deviation anchor"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -31,6 +31,13 @@ class = "execution"
 implements = ["REQ-TCM-014", "REQ-TCM-015", "REQ-TCM-016"]
 specifications = ["SPEC-TCM-006"]
 verification = ["VER-TCM-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:57:11Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358 (REQ-TCM-014, REQ-TCM-015, REQ-TCM-016, SPEC-TCM-006, VER-TCM-006, WO-TCM-009), after the product owner disposed DEC-TCM-001 to DEC-TCM-004 with the options the assessment recommends: identifiers, eight-sections, mechanical-table, advisory-then-blocking. WO-TCM-009 carries the execution delegation class: approving it delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated executor while the required validate check is green at the exact head; the verification decision, merge, release and adoption stay human."
 +++
 
 # Work Order: Ship the reader-first specification shape, one rule identity, mechanical coverage and the deviation anchor

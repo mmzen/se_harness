@@ -2,7 +2,7 @@
 id = "REQ-TCM-016"
 type = "requirement"
 title = "A deviation names a rule that exists"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -13,6 +13,13 @@ source = "docs/notes/assessment-specification-readability-2026-09-06.md: the dev
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:57:11Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358 (REQ-TCM-014, REQ-TCM-015, REQ-TCM-016, SPEC-TCM-006, VER-TCM-006, WO-TCM-009), after the product owner disposed DEC-TCM-001 to DEC-TCM-004 with the options the assessment recommends: identifiers, eight-sections, mechanical-table, advisory-then-blocking."
 +++
 
 # Requirement: A deviation names a rule that exists

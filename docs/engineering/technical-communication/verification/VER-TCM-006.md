@@ -2,13 +2,20 @@
 id = "VER-TCM-006"
 type = "verification"
 title = "Independent evidence for reader-first specifications, coverage and the deviation anchor"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
 
 [relations]
 verifies = ["REQ-TCM-014", "REQ-TCM-015", "REQ-TCM-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:57:11Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358 (REQ-TCM-014, REQ-TCM-015, REQ-TCM-016, SPEC-TCM-006, VER-TCM-006, WO-TCM-009), after the product owner disposed DEC-TCM-001 to DEC-TCM-004 with the options the assessment recommends: identifiers, eight-sections, mechanical-table, advisory-then-blocking."
 +++
 
 # Verification Contract: Independent evidence for reader-first specifications, coverage and the deviation anchor

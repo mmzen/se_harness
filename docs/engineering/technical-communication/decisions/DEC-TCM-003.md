@@ -2,7 +2,7 @@
 id = "DEC-TCM-003"
 type = "decision"
 title = "Mechanical coverage of requirements by rules"
-status = "open"
+status = "decided"
 owners = ["product-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -22,6 +22,20 @@ label = "The specifies relation remains the only coverage statement; a coverage 
 [relations]
 concerns = ["REQ-TCM-015", "SPEC-TCM-006"]
 blocks = ["REQ-TCM-015"]
+
+[disposition]
+option = "mechanical-table"
+label = "The Coverage table is the authoritative map from requirement to rules; the validator reads it on drafts and the Explorer shows it on the specification and on each requirement."
+decided_by = "product-owner"
+decided_at = "2026-09-06T10:56:36Z"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-06T10:56:36Z"
+decided_by = "product-owner"
+reason = "Disposed by the accountable product owner on 2026-09-06 with the instruction 'approve as recommended' on PR #358, taking the option the assessment docs/notes/assessment-specification-readability-2026-09-06.md recommends."
 +++
 
 # Decision: Mechanical coverage of requirements by rules
