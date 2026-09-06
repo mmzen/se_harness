@@ -255,3 +255,11 @@ deviation naming no rule, the `contract`, `rules`, `coverage` and
 amended by record. Evidence in `evidence/WO-TCM-009/`, with five
 disclosures; the record is `VREC-TCM-009`.
 
+`WO-TCM-010` (drafted 2026-09-06) corrects the first example of
+`SPEC-TCM-006` by record: `WO-TCM-009`'s evidence found it false, since the
+approved specification read as a draft exceeds its own 30-word rule budget
+in five rules and `TCM-RFS-023` forbids a shape rewrite. The example is
+rewritten to describe a draft in the prescribed shape within every budget,
+and an amendment record names the finding. Commit-bound verification is
+not required: one example sentence, no rule, code or test changes.
+
