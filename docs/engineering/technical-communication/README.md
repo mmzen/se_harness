@@ -283,3 +283,7 @@ specifications with more than ten each. `WO-TCM-011` starts only after
 0.16.0 is released and adopted, so the specification family has had its one
 release of advisories.
 
+On 2026-09-06 the repository owner approved the four artifacts with "i
+approve" (PR #366). `WO-TCM-011` waits, approved, for the 0.16.0 release and
+adoption before its delegated start.
+

@@ -2,7 +2,7 @@
 id = "WO-TCM-011"
 type = "work_order"
 title = "Turn the four authoring-advisory families blocking at approval"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -29,6 +29,13 @@ class = "execution"
 implements = ["REQ-TCM-017"]
 specifications = ["SPEC-TCM-007"]
 verification = ["VER-TCM-007"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:54:35Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'i approve' after reviewing PR #366 (REQ-TCM-017, SPEC-TCM-007, VER-TCM-007, WO-TCM-011), which executes DEC-TCM-004 and the regime recorded for the requirement, intent and capability families: advisory for one release, then blocking at approval. WO-TCM-011 carries the execution delegation class: approving it delegates DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE to the delegated executor while the required validate check is green at the exact head; by its own constraint, execution starts only after RLS-SEH-025 (0.16.0) is released and adopted as this repository's root. The verification decision, merge, release and adoption stay human."
 +++
 
 # Work Order: Turn the four authoring-advisory families blocking at approval

@@ -2,7 +2,7 @@
 id = "SPEC-TCM-007"
 type = "specification"
 title = "Authoring advisories refuse approval of a definition draft"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -10,6 +10,13 @@ contract = "A conforming gate refuses to approve a definition draft that still d
 
 [relations]
 specifies = ["REQ-TCM-017"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:54:35Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'i approve' after reviewing PR #366 (REQ-TCM-017, SPEC-TCM-007, VER-TCM-007, WO-TCM-011), which executes DEC-TCM-004 and the regime recorded for the requirement, intent and capability families: advisory for one release, then blocking at approval."
 +++
 
 # Specification: Authoring advisories refuse approval of a definition draft

@@ -2,7 +2,7 @@
 id = "REQ-TCM-017"
 type = "requirement"
 title = "A draft that still draws an authoring advisory is not approved"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "quality-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -13,6 +13,13 @@ source = "DEC-TCM-004 (disposed 2026-09-06, advisory-then-blocking) and the same
 
 [relations]
 derives_from = ["CAP-TCM-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T14:54:35Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable repository owner on 2026-09-06 with the instruction 'i approve' after reviewing PR #366 (REQ-TCM-017, SPEC-TCM-007, VER-TCM-007, WO-TCM-011), which executes DEC-TCM-004 and the regime recorded for the requirement, intent and capability families: advisory for one release, then blocking at approval."
 +++
 
 # Requirement: A draft that still draws an authoring advisory is not approved
