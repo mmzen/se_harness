@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "fe12b9f9e4b0d1be8a4d64527b4a18ce47b7f8aef45da2b0beee53a1bd509256",
+    "formal_snapshot_sha256": "eb32aee74cfeb7873ba632ae5c14b93367325a969f7ab677e2ed6f1f22f4eab8",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",

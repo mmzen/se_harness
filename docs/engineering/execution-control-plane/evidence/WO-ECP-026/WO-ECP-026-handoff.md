@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-ECP-026"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "fe12b9f9e4b0d1be8a4d64527b4a18ce47b7f8aef45da2b0beee53a1bd509256"
-rebound_at = "2026-09-06T11:14:28Z"
+formal_snapshot_sha256 = "eb32aee74cfeb7873ba632ae5c14b93367325a969f7ab677e2ed6f1f22f4eab8"
+rebound_at = "2026-09-06T11:17:34Z"
 ```
 
 # WO-ECP-026 handoff evidence
@@ -39,7 +39,9 @@ template, contract file, result schema, skill, workflow, lock format or
   (`C:/Users/mathi/se-harness-eval-0150`), `-I`, wheel-installed, for
   every governing reading, this packet and the handoff check.
 - Candidate: this checkout, branch `wo/ecp-026-merge-init-adopt` off
-  `main` at `9598859` (the merge of the approved packet, PR #359).
+  `main` at `9598859` (the merge of the approved packet, PR #359); `main`
+  merged in at `7642132` (PR #358, a technical-communication packet that
+  touches no path of this work order) before the handoff check below.
 
 ## Readings (VER-ECP-022)
 
@@ -55,7 +57,7 @@ template, contract file, result schema, skill, workflow, lock format or
 | `init RUST --dry-run --json` (a folder with `Cargo.toml` and an owner `AGENTS.md`) | candidate | `command: init`, `completed`, `written: false`, 49 changes, `AGENTS.md` `integrate`, `docs/engineering/ADOPTION_REPORT.md` `add` (`ECP-INS-003`, `ECP-INS-005`) |
 | `python -m unittest tests.test_harnessctl tests.test_cli_shape tests.test_glossary tests.test_repository_context_retirement tests.test_mutation_guard` | candidate, Windows 11 | OK, 72 tests, 1 skipped (the Windows-only guard) |
 | `python scripts/run_tests.py` | candidate, Windows 11 | section below |
-| `check --checkpoint handoff --from-git 9598859` | exact 0.15.0 | section below |
+| `check --checkpoint handoff --from-git 7642132` | exact 0.15.0 | section below |
 
 ### The Windows suite
 
@@ -76,8 +78,8 @@ CRLF checkout), two readings:
 
 ### Handoff check
 
-`check . --artifact WO-ECP-026 --checkpoint handoff --from-git 9598859`,
-exact 0.15.0: Completed; every `QGP-G4I-*` predicate passes; every changed
+`check . --artifact WO-ECP-026 --checkpoint handoff --from-git 7642132`,
+exact 0.15.0, after the merge of `main`: Completed; every `QGP-G4I-*` predicate passes; every changed
 path inside the declared scope as amended; `complete: true`; the
 self-binding result retained as `handoff.json` beside this packet.
 
