@@ -131,61 +131,68 @@ Select the interpreter provider and catalog authentication method. Test launcher
 
 ### 1. Purpose and starting point
 
-**Purpose:** Add the harness to a project while preserving its existing content.
+**Purpose:** Connect a project to Verity Plane without replacing its existing owner content.
 
-- **Starts when:** The user asks to connect a named repository.
-- **Requires:** A trusted evaluator and authorization covering the concrete setup effects.
-- **Successful result:** Managed content is installed, host registration is reported, and installation checks pass.
+- **Starts when:** The user invokes the new `setup` skill for a named repository.
+- **Requires:** The plugin and trusted runtime from scenario 1, plus authorization covering the concrete setup effects.
+- **Successful result:** Repository installation, host registration, and installation checks each have a reported result.
 
 ### 2. Workflow
 
 ```text
-User selects a project
+User invokes setup repository [New]
         ↓
-Installer previews files and conflicts
+Agent → bin/launcher → scripts/bridge [New]
         ↓
-Review effects and resolve missing authorization
+repository-preview → existing init/adopt --dry-run → reviewed plan
         ↓
-Apply unchanged plan → register host components → check installation
+repository-apply → existing installer → separate host registration
+        ↓
+Existing doctor → report each setup phase
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Setup skill | Select `init` for an empty/absent directory or `adopt` for an existing project. |
-| 2 | Bridge and installer | Preview the target, runtime identity, file changes, and conflicts. |
-| 3 | Repository owner | Resolve conflicts and supply any setup authorization not already established. |
-| 4 | Bridge and installer | Recheck the reviewed effects, then apply only the authorized plan. |
-| 5 | Host adapter | Register any required host resources as a separately reported step. |
-| 6 | Bridge | Run installation diagnostics and report the actual result. |
+| 1 | User → `setup` skill **[New]** | **Codex:** ask “Use the verity-plane setup skill to connect REPO.” **Claude Code:** invoke `/verity-plane:setup repository REPO`. The main agent reads `skills/setup/SKILL.md` and resolves the absolute target. |
+| 2 | Agent → `bin/launcher` **[New]** | Call `runtime-status --repo REPO --json` **[New]** to check the target's runtime. If the harness is already installed, select its exact configured version and route to readiness or [upgrade](release-and-maintenance.md#scenario-16-upgrade-or-repair-the-installation). Do not run `init` again. |
+| 3 | Agent → existing shell tool | Use Codex `exec_command`, or Claude Code `Bash` / `PowerShell`, to call `bin/launcher bridge --request REQUEST_FILE --json` **[New]**. The request selects `repository-preview`, action `init` or `adopt`, the target, and project name. |
+| 4 | `scripts/bridge` **[New]** → existing installer | Confirm that `init` targets an absent or empty directory, or that `adopt` targets a nonempty directory, including one containing only `.git`. Call the selected command with `--dry-run --json`. Return a plan ID, repository changes, conflicts, and any separate host registration changes. |
+| 5 | Agent and repository owner | Review the named destinations and effects. Reuse authorization that already covers them; resolve missing authority or conflicts before applying. A successful preview does not authorize writes. |
+| 6 | Agent → `scripts/bridge` **[New]** | Send `repository-apply` with the returned `plan_id`. Recheck the target, runtime, file digests, and current authorization. If unchanged and authorized, invoke the existing installer without `--dry-run`. |
+| 7 | `scripts/bridge` **[New]** → host registration phase | Apply only the separately listed registration changes. For Codex, this can register plugin-supplied agent definitions under `.codex/agents/`; Claude Code already discovers native plugin `agents/`. Report this phase separately from repository installation. |
+| 8 | `scripts/bridge` → existing evaluator; agent | Run `harnessctl doctor REPO --json` with the selected evaluator. Report installation, registration, and diagnostics separately. Once all required setup phases pass, continue with [session readiness](#scenario-3-start-a-session). |
+
+A `SessionStart` hook never invokes repository setup. The `setup` skill instructs the agent; `scripts/bridge` performs the named operations.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Explain setup and its remaining work. | **New:** setup procedure; do not extend orient into a writer. |
-| **Hook** | Recognize an unconfigured project. | **New:** optional setup notice; no automatic adoption. |
-| **Script** | Present and apply a bounded plan. | **Adapt:** bridge wraps existing installer with reviewed-effect binding. |
-| **Tool/interface** | Preview and invoke setup. | **Adapt:** structured interface over `init`/`adopt`. |
-| **Evaluator** | Plan, apply, and inspect installation. | **Reuse:** installer and `doctor`. |
-| **Subagent** | Not used. | **Not used:** automatic inventory is enough here. |
-| **Human** | Authorize concrete repository setup. | **Reuse:** repository owner's existing authority; no product approval is inferred. |
-| **External control** | Protect later merge/publication effects. | **Not used:** this setup does not configure or satisfy those controls. |
+| **Skill** | `setup`, at `skills/setup/SKILL.md`, guides repository mode. | **New:** explicit setup instructions. Existing `harness-orient` remains read-only. |
+| **Hook** | No hook installs or adopts the project. | **Not used:** `SessionStart` can report readiness separately; it cannot authorize setup. |
+| **Script** | `bin/launcher` selects the runtime; `scripts/bridge` previews and applies the plan. | **New:** shared entry points and reviewed-plan binding around the existing installer. |
+| **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes `bin/launcher bridge --request REQUEST_FILE --json`. | **Reuse:** host shell tools. **New:** `repository-preview` and `repository-apply` structured operations. |
+| **Evaluator** | `init` / `adopt` plan and install; `doctor` checks the result. | **Reuse:** `plan_install()`, `apply_changes()`, and existing CLI commands. |
+| **Subagent** | Not used. | **Not used:** the main agent handles the review; code inventories the target. |
+| **Human** | Repository owner authorizes the listed setup effects. | **Reuse:** existing owner authority. Setup supplies no product or work-order approval. |
+| **External control** | No integration or publication occurs. | **Not used:** setup does not configure or satisfy protected remote-action controls. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Existing content conflicts with a managed destination. | Installer refuses the installation without writing the planned files. | Owner resolves the conflict; rerun the preview. |
-| Reviewed effects changed. | Proposed bridge refuses apply. | Present the refreshed plan and resolve its authorization. |
-| Repository installation succeeds but host registration fails. | Report partial setup; do not claim one atomic transaction. | Repair only the failed registration, then repeat diagnostics. |
+| Required runtime is unavailable. | `bin/launcher` returns the missing version; preview does not install it automatically. | Use the explicit runtime preparation from scenario 1, then repeat repository preview. |
+| A managed destination conflicts with existing content. | The installer reports the path and refuses to write the installation. | The owner resolves the conflict; `repository-preview` produces a fresh plan. |
+| Reviewed files, target, runtime, or authority changed. | `repository-apply` rejects the stale plan. | Review a fresh preview and resolve any missing authorization. |
+| Installation succeeds but host registration fails. | Report partial setup; do not rerun the installer blindly. | Preview the remaining registration changes and repair only that phase, then repeat diagnostics. |
 
 ### 5. Example result
 
 Illustrative output:
 
-> The harness is installed and the installation check passed.
+> Repository installation: complete through adopt. Host registration: complete. Doctor: passed.
 > Existing owner instructions were preserved. No work order was approved or started.
-> Next: record the project's engineering facts and prepare its first definition package.
+> Next: run setup readiness for this repository.
 
 ### 6. Implementation details
 
@@ -194,40 +201,48 @@ Illustrative output:
 
 **Current implementation**
 
-Inspected [`plan_install()` and `apply_changes()`](../../../se_harness/installer.py), [`_install()`](../../../se_harness/cli.py), and the baseline CLI interface:
+Inspected [`plan_install()` and `apply_changes()`](../../../se_harness/installer.py), [`_install()`](../../../se_harness/cli.py), and these existing CLI forms:
 
 ```text
 harnessctl init REPO --project-name example --dry-run --json
 harnessctl init REPO --project-name example --json
+harnessctl adopt REPO --project-name example --dry-run --json
+harnessctl adopt REPO --project-name example --json
 harnessctl doctor REPO --json
 ```
 
-For an existing project use `adopt` in the first two commands. A directory containing only `.git` is nonempty. `init` does not initialize Git. Commands illustrate inspected source; no installation was performed for this note.
+The bridge selects one install mode, not both. `init` does not initialize Git. These examples show evaluator argument lists, resolved through the trusted launcher; they are not instructions to use `harnessctl` from `PATH`. No installation was performed for this note.
 
 **Proposed additions**
 
-Bind apply to the reviewed effects at action time. Today's separate dry-run/apply calls do not supply that guarantee. Define recoverable host registration and one active skill-discovery route: today's installer still supplies repository-local skills.
+`repository-preview` and `repository-apply` are new operations of `scripts/bridge`, invoked through the shared launcher. The request contains an operation, `repo`, and operation-specific fields; preview supplies the install action and project name, while apply supplies its `plan_id`. Request files contain structured values, not arbitrary shell commands.
+
+For an unconnected target, `runtime-status --repo REPO --json` checks the catalog's default runtime; for an installed target it checks the locked version. The target-aware option is **New**.
+
+Preview binds the plan to the repository, evaluator version, input digests, and listed registration effects. Apply rechecks those inputs and current authorization. Today's separate `--dry-run` and apply calls do not provide this binding. Repository writes and host registration remain distinct phases with separate results and recovery.
+
+Today's installer still supplies repository-local skills. Setup must establish one active discovery route through a supported installation or upgrade; it must not delete or rewrite locked skill copies to suppress duplicates.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Resolved target, project name, runtime identity, installation plan, and applicable authorization.
-- **Outputs:** Written files, diagnostics, conflicts, and unfinished host steps.
-- **Writes:** Planned managed files/fragments, lock, adoption inventory where applicable, and explicitly selected host registration.
+- **Inputs:** Absolute target, project name, trusted evaluator identity, selected host, reviewed plan ID, and applicable authorization.
+- **Outputs:** Plan, conflicts, per-phase results, and `doctor` diagnostics.
+- **Writes:** Planned managed files/fragments, lock, adoption inventory where applicable, and explicitly listed host registration. Plans and request files use plugin data storage.
 
 **Host differences**
 
-- **Codex:** Initial setup may need to register agent resources under `.codex/agents/`; native plugin-agent loading is not established by the manifest documentation. [Custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents).
-- **Claude Code:** The plugin supports an `agents/` directory. Its root `CLAUDE.md` is not automatically loaded; repository instructions still matter. [Plugin reference](https://code.claude.com/docs/en/plugins-reference).
+- **Codex:** Register only the agent resources named in the reviewed plan under `.codex/agents/`. Native plugin-agent loading is not established by the manifest documentation. [Custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+- **Claude Code:** Native plugin `agents/` requires no copied project agent definitions. The plugin's root `CLAUDE.md` is not automatically loaded; repository instructions still matter. [Plugin reference](https://code.claude.com/docs/en/plugins-reference).
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Adopt an existing project → preserve owner content and pass diagnostics.
-- **Refusal:** Conflict or changed reviewed effects → no apply.
-- **Recovery:** Failed host registration → repository state remains correctly reported and repairable.
+- **Success:** Adopt a nonempty project → preserve owner content and report installation, registration, and diagnostics separately.
+- **Refusal:** Conflict or changed plan inputs → no installation apply.
+- **Recovery:** Host registration fails after installation → repair the remaining phase without reinstalling or overwriting owner files.
 
 **Open questions**
 
-Decide where reviewed-plan binding belongs and how setup removes duplicate discovery without rewriting managed files outside an authorized upgrade.
+Prove reviewed-plan binding across interrupted phases. Finalize ownership tracking for host registrations and a supported migration that avoids duplicate skill discovery.
 
 </details>
 
@@ -235,32 +250,37 @@ Decide where reviewed-plan binding belongs and how setup removes duplicate disco
 
 ### 1. Purpose and starting point
 
-**Purpose:** Give the agent verified governance rules and current project context before governed work.
+**Purpose:** Load verified governance rules and fresh project state before the agent performs governed work.
 
-- **Starts when:** The host starts or clears a session in an activated repository.
+- **Starts when:** The host emits `SessionStart` with source `startup` or `clear` in a connected repository.
 - **Requires:** Enabled trusted hooks, the exact cached evaluator, and readable installed policy.
-- **Successful result:** Complete verified governance reaches the agent. No work order is authorized.
+- **Successful result:** Complete verified governance reaches the agent. Readiness does not approve or start work.
 
 ### 2. Workflow
 
 ```text
-SessionStart event
+SessionStart startup/clear → hooks/handler [New]
         ↓
-Check repository activation and trusted cached runtime
+bin/launcher bridge → scripts/bridge: session-ready [New]
         ↓
-Verify installation → read and verify the exact governance text
+Existing identity + doctor → verify exact policy bytes
         ↓
-Inject governance plus fresh selected-work context
+Existing check for an explicit selection → current state
+        ↓
+Host receives verified governance and readiness result
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Session hook | Invoke one synchronous session-readiness script. |
-| 2 | Launcher | Select the repository's exact cached evaluator without downloading anything. |
-| 3 | Script and evaluator | Check identity and installation; refuse a readiness result on failure. |
-| 4 | Script | Verify the text it will inject: the managed `AGENTS.md` block and full `ENGINEERING_HARNESS.md`. |
-| 5 | Bridge | Read the current selected artifact's state and next action, when a selection exists. |
-| 6 | Host adapter | Inject the verified rules and bounded current-state result; report any missing context. |
+| 1 | Existing `SessionStart` → `hooks/handler` **[New]** | `hooks/hooks.json` registers one synchronous handler. The host supplies its event, session, source, and working directory. The handler identifies the repository; an unconnected project returns quietly. |
+| 2 | `hooks/handler` → `bin/launcher` **[New]** | Build a structured `session-ready` request and invoke `bin/launcher bridge --request REQUEST_FILE --json`. Select the exact trusted cached evaluator for the repository; do not download or substitute another version. |
+| 3 | `scripts/bridge` **[New]** → existing evaluator | Run `harnessctl identity` with the trusted version/root expectations, then `harnessctl doctor REPO --json`. A failure returns its diagnostics and no ready claim. |
+| 4 | `scripts/bridge` **[New]** | Read the complete managed `se-harness:begin` / `end` block in `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. Verify the bytes being returned against the lock; reject a concurrent change. |
+| 5 | `scripts/bridge` → existing `check` | If the user already selected an artifact, run `harnessctl check REPO --artifact ID --json` without a checkpoint. Return its current state and next action as a projection. With no explicit selection, report that fact. |
+| 6 | `hooks/handler` **[New]** → host context interface | Translate the result into the host's `SessionStart` context output. Include the verified rules verbatim, their source/digest information, and the selected-state result. |
+| 7 | Main agent | Use the delivered rules and report readiness. If the host returns only a preview/file reference, invoke `setup readiness` and read the complete verified content before governed work; do not treat the preview as complete governance. |
+
+No skill runs automatically in this path. For a manual retry, the user invokes `skills/setup/SKILL.md` **[New]**: ask Codex to “Use the verity-plane setup skill to check readiness for REPO,” or use `/verity-plane:setup readiness REPO` in Claude Code. The agent invokes the same `session-ready` operation through `exec_command`, `Bash`, or `PowerShell`.
 
 Use one handler: separate hooks may run concurrently and cannot guarantee verification before injection.
 
@@ -268,28 +288,29 @@ Use one handler: separate hooks may run concurrently and cannot guarantee verifi
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Explain readiness or invoke a manual retry. | **Adapt:** reuse orient's read-only principles; startup is a separate procedure. |
-| **Hook** | Trigger the readiness procedure. | **New:** `SessionStart` registration. |
-| **Script** | Verify first, then assemble context. | **New:** shared synchronous session-readiness handler. |
-| **Tool/interface** | Deliver rules to the model. | **Adapt:** host context output; manual invocation calls the same handler. |
-| **Evaluator** | Check integrity and project state. | **Reuse:** identity, `doctor`, and selected `check` projection. |
-| **Subagent** | Not used. | **Not used:** no delegated policy interpretation. |
-| **Human** | Resolve setup, selection, or conflicting instructions. | **Reuse:** existing accountable roles; session startup makes no decision. |
-| **External control** | Enforce protected effects independently. | **New:** required effect-boundary controls remain separate from context injection. |
+| **Skill** | `setup` readiness mode provides an explicit retry or full-context fallback. | **New:** `skills/setup/SKILL.md`. Neither `harness-orient` nor `harness-operator-brief` runs automatically. |
+| **Hook** | Existing `SessionStart` calls the new `hooks/handler`. | **Reuse:** host event and context output. **New:** `hooks/hooks.json` registration. |
+| **Script** | `hooks/handler` adapts host input/output; `bin/launcher` resolves the runtime; `scripts/bridge` performs `session-ready`. | **New:** one shared readiness path for automatic and explicit invocation. |
+| **Tool/interface** | Hook context delivers rules; `exec_command`, `Bash`, or `PowerShell` supports explicit readiness. | **Reuse:** host interfaces. **New:** structured `session-ready` operation. |
+| **Evaluator** | `identity`, `doctor`, and an explicit selected `check` inspect runtime, installation, and state. | **Reuse:** existing CLI and integrity helpers. `check` without a checkpoint evaluates no execution gates. |
+| **Subagent** | Not used. | **Not used:** the main session receives the rules; no delegated policy interpretation occurs. |
+| **Human** | Resolve missing setup, conflicting instructions, or ambiguous selection. | **Reuse:** existing authority. Starting a session exercises no decision right. |
+| **External control** | Protect later remote effects independently of session context. | **Not used:** this readiness operation has no remote effect; the controls in scenarios 13 and 15 remain necessary. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Missing runtime, damaged gate, or lock mismatch. | No ready result or injection of unverified policy; governed operations remain refused through evaluator/bridge checks. | Explicit setup/repair, then repeat readiness. |
-| Rules conflict or their full text cannot reach the model. | Report incomplete readiness and stop governed work. | Resolve the conflict or context delivery, then retry. |
-| Hook is skipped or times out. | No readiness guarantee exists. A warning alone cannot block arbitrary host tools. | Restore the hook and rerun checks; external authorization stays protected separately. |
+| Missing runtime, damaged managed gate, or lock mismatch. | `session-ready` returns a failure and does not inject unverified policy. Evaluator/bridge checks refuse governed operations. | Explicitly prepare the runtime or repair the installation, then repeat readiness. |
+| Rules conflict or the full text cannot reach the model. | The agent reports incomplete readiness and stops governed work. | Resolve the conflict, or use the explicit verified-read fallback before continuing. |
+| Hook is skipped or times out. | There is no readiness guarantee. A warning cannot block arbitrary host tools. | Restore hook enablement/trust and invoke `setup readiness`; protect external actions separately. |
+| Policy changes between verification and context assembly. | `scripts/bridge` rejects the stale context. | Re-read and reverify the complete policy with `session-ready`. |
 
 ### 5. Example result
 
 Illustrative output:
 
-> Installation and governance text verified. The complete managed gate and harness contract are loaded.
+> Identity: passed. Doctor: passed. Managed AGENTS block and complete harness router: verified and loaded.
 > No work order is selected; no lifecycle state changed.
 > Next: inspect the project to select the intended work.
 
@@ -300,32 +321,46 @@ Illustrative output:
 
 **Current implementation**
 
-Inspected [`inspect_installation()`](../../../se_harness/preflight.py), [integrity helpers](../../../se_harness/integrity.py), and [orient contract](../../../templates/repository/standard/.agents/skills/harness-orient/SKILL.md). Orient checks identity and installation before executing managed helpers; startup delivery is new.
+Inspected [`inspect_installation()`](../../../se_harness/preflight.py), [integrity helpers](../../../se_harness/integrity.py), the [CLI](../../../se_harness/cli.py), and the [orient contract](../../../templates/repository/standard/.agents/skills/harness-orient/SKILL.md). Orient already checks identity and installation before executing managed helpers; automatic context delivery is new.
+
+The bridge invokes these existing forms through the isolated external evaluator:
+
+```text
+harnessctl identity --role released-evaluator --expected-version VERSION --expected-root RUNTIME_ROOT --checkout-root REPO --require-isolated-python --json
+harnessctl doctor REPO --json
+harnessctl check REPO --artifact WO-DEMO-001 --json
+```
+
+The final call occurs only for that explicitly selected illustrative work order. `VERSION` and `RUNTIME_ROOT` are trusted expected values, not values accepted from the runtime's own answer. No commands were exercised for this note.
 
 **Proposed additions**
 
-Inject the verified `se-harness:begin`/`end` block and full router verbatim. Check the injected bytes against the lock; reject concurrent changes. Include bounded state and source/digest information. For oversized output, require an integrity-checked read of verified file references before readiness. No downloads, repairs, full tests, or implicit work selection.
+`session-ready` is a read-only operation of `scripts/bridge`. Its request names `repo`, the host event/source, and any explicit selection. `hooks/handler` creates that request automatically; an agent following `setup readiness` submits the same operation explicitly.
+
+Verify the exact text returned, including the managed block markers and complete router. Retain source/digest information and reject changed bytes. If context is too large, the explicit path returns verified file references and requires the agent to read their full content with Codex `exec_command` or Claude Code `Read`, with a matching integrity check. Readiness remains incomplete until complete delivery is established. The host adapter and skill must not reduce this to “the file exists.”
+
+There are no downloads, repairs, full tests, lifecycle mutations, or implicit work selection in `session-ready`.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Host event, repository path, trusted runtime, lock, managed rules, and optional selected artifact.
-- **Outputs:** Verified governance context or a concrete failure.
-- **Writes:** No repository writes; host transcript/context storage only.
+- **Inputs:** Host event/source, absolute repository path, trusted runtime, lock, managed rules, and optional explicit artifact selection.
+- **Outputs:** Verified governance text, current selected-state projection, and readiness or concrete failure.
+- **Writes:** No repository or lifecycle writes. Request/context storage may use plugin data and the host transcript.
 
 **Host differences**
 
-- **Codex:** `SessionStart` supports `startup`/`clear` and `additionalContext`; configure a tested output budget. [Hooks](https://learn.chatgpt.com/docs/hooks#sessionstart).
-- **Claude Code:** `SessionStart` supports the same sources and context output. Text over 10,000 characters becomes a file reference with preview; complete the verified-read fallback before declaring readiness. [Hooks](https://code.claude.com/docs/en/hooks#sessionstart).
+- **Codex:** `SessionStart` supports `startup` / `clear` and `additionalContext`. Configure and test the context budget and full-read fallback. Matching hooks can run concurrently. [Hooks](https://learn.chatgpt.com/docs/hooks#sessionstart).
+- **Claude Code:** `SessionStart` supports the same sources and context output. Text over 10,000 characters becomes a file reference with a preview; complete the verified-read fallback before declaring readiness. [Hooks](https://code.claude.com/docs/en/hooks#sessionstart).
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Valid installation → complete verified gate/router and fresh state delivered in order.
-- **Refusal:** Tamper, missing runtime, or oversized rules → no ready claim or automatic repair.
-- **Recovery:** Correct installation → rerun the same handler successfully.
+- **Success:** Valid installation → identity and doctor finish before exact rules and fresh selected state are delivered.
+- **Refusal:** Tamper, missing runtime, or incomplete context delivery → no ready claim or automatic repair.
+- **Recovery:** Correct the failure → explicit `setup readiness` and the hook use the same successful checks.
 
 **Open questions**
 
-Measure startup cost and context size per supported release. Define enforcement for uncovered host tools; a session hook alone does not close that gap.
+Measure startup cost and context size for each host. Demonstrate how the adapter detects full delivery and verifies fallback reads. A session hook alone does not enforce checks for uncovered host tools.
 
 </details>
 
@@ -333,62 +368,67 @@ Measure startup cost and context size per supported release. Define enforcement 
 
 ### 1. Purpose and starting point
 
-**Purpose:** Continue from verified repository state after context loss or interruption.
+**Purpose:** Resume from verified repository state without losing a pending decision or repeating an uncertain write.
 
-- **Starts when:** A session resumes, compaction finishes, or the user resumes interrupted work.
-- **Requires:** The readiness procedure from scenario 3 and access to the current repository state.
-- **Successful result:** The agent knows completed effects, pending decisions, and the current next step.
+- **Starts when:** `SessionStart` has source `compact` / `resume`, or the user explicitly resumes interrupted work.
+- **Requires:** The readiness operation from scenario 3 and access to current repository and operation results.
+- **Successful result:** Governance is restored; actual effects and the current next step are identified.
 
 ### 2. Workflow
 
 ```text
-Compaction, session resume, or explicit continuation
+SessionStart compact/resume → hooks/handler [New]
+    OR user → setup readiness [New]
         ↓
-Repeat installation verification and governance injection
+bin/launcher bridge → session-ready [New]
         ↓
-Read actual selected-work state and observed effects
+Existing identity + doctor + selected check → refreshed context
         ↓
-Return current next step; preserve any pending decision
+Main agent inspects actual interrupted effects
+        ↓
+Report observed state and pending decision; no automatic write replay
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Session hook or orient skill | Call the same session-readiness handler used at startup. |
-| 2 | Script | Refresh runtime and policy checks. |
-| 3 | Bridge | Query the selected artifact and interrupted operation's effects. |
-| 4 | Main agent | Report actual state and partial progress. |
-| 5 | Main agent or accountable human | Follow the returned next step, retaining any decision boundary. |
+| 1 | Existing `SessionStart` → `hooks/handler` **[New]** | For `compact` or `resume`, invoke the same synchronous handler as startup. It calls `bin/launcher bridge --request REQUEST_FILE --json` with `session-ready`. `PostCompact` does not reinject governance. |
+| 2 | User → `setup` readiness **[New]**, when no event occurs | An in-session interruption may emit no new `SessionStart`. Ask Codex to use `setup` readiness for the repository, or invoke `/verity-plane:setup readiness REPO` in Claude Code. The agent uses `exec_command`, `Bash`, or `PowerShell` for the same bridge call. |
+| 3 | `scripts/bridge` **[New]** → existing evaluator | Repeat `identity` and `doctor`, verify and deliver the full managed gate/router, and run `check --artifact ID --json` for the explicit selection. Read current files; never recover authority from the conversation summary. |
+| 4 | Main agent → existing read tools | Inspect the interrupted operation's actual effects. Use Git read commands for local changes/commits, the current artifact record for a transition, or the remote service's status interface for a submitted external action. A selected `check` result alone cannot prove a network action completed. |
+| 5 | Main agent following `setup` | Report completed, incomplete, or uncertain effects from those observations. Use the evaluator's current next step for the selected artifact; keep an unconfirmed external effect unresolved until its service reports a result. |
+| 6 | Main agent or accountable human | Continue only the permitted next operation. If scope, candidate, or decision changed, resolve that exact boundary first. No handler or skill automatically repeats the interrupted mutation. |
 
-An “approved” summary cannot replace an accountable decision or extend it to another candidate.
+A summary that says “approved” cannot replace an accountable decision or extend it to another candidate. The recovery route restores context; it grants no new authority.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Request explicit recovery and explain findings. | **Adapt:** read-only orient path; no hidden replay of writes. |
-| **Hook** | Refresh after compaction or session resume. | **New:** `SessionStart` with `compact`/`resume`, reusing startup code. |
-| **Script** | Restore verified context and reconcile observed state. | **Adapt:** shared readiness handler plus operation-specific read-only inspection. |
-| **Tool/interface** | Deliver refreshed rules and current results. | **Adapt:** host context output or manual structured invocation. |
-| **Evaluator** | Return actual state and next action. | **Reuse:** installed diagnostics and selected `check` projection. |
-| **Subagent** | Not used. | **Not used:** recovering the parent session does not prove subagent context is restored. |
-| **Human** | Resolve changed scope or a pending decision. | **Reuse:** original accountable decision boundaries remain in force. |
-| **External control** | Reject stale or absent external-action approval. | **New:** action-time authorization checks remain independent of conversation memory. |
+| **Skill** | `setup` readiness mode handles explicit recovery when no hook fires. | **New:** `skills/setup/SKILL.md`. Existing `harness-orient` remains a separately requested inspection skill. |
+| **Hook** | `SessionStart` with `compact` / `resume` invokes `hooks/handler`. | **Reuse:** existing events. **New:** registration reuses startup code; no `PostCompact` injection. |
+| **Script** | `hooks/handler`, `bin/launcher`, and `scripts/bridge` repeat `session-ready`. | **New:** shared readiness path; no separate recovery policy engine. |
+| **Tool/interface** | `exec_command`, `Bash`, `PowerShell`, or `Read` inspects current local results; the remote interface reports external results. | **Reuse:** host read/shell tools. **New:** protected-operation status interfaces are defined with scenarios 13 and 15. |
+| **Evaluator** | `identity`, `doctor`, and selected `check` return fresh repository state. | **Reuse:** existing diagnostics and projection; they do not attest to an external service's effects. |
+| **Subagent** | Not used. | **Not used:** restoring the parent session does not prove a subagent's context was restored. |
+| **Human** | Resolve an exact pending decision or changed authority. | **Reuse:** original accountable boundaries remain in force after interruption. |
+| **External control** | The protected service checks current authorization before an external retry. | **New:** action-time enforcement from scenarios 13 and 15; conversation memory cannot replace it. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Candidate, branch, policy, or selected artifact changed. | Discard stale readiness and do not replay the prior mutation. | Inspect the new state and follow its returned next step. |
-| Interrupted action may have completed. | Report uncertain effects; do not retry blindly. | Read files, records, or the external operation result before deciding on a retry. |
-| Verification or integration approval was pending. | Work remains at that boundary. | The responsible human makes the exact decision; the operation rechecks current eligibility. |
+| Candidate, branch, policy, or selection changed. | `session-ready` returns current facts; the agent discards stale context and does not replay the prior mutation. | Follow the refreshed evaluator result and resolve any changed authorization. |
+| Interrupted operation may have completed. | The agent reports uncertain effects and withholds a blind retry. | Read the relevant files, Git state, or remote operation status; retry only if still needed and authorized. |
+| Verification or integration approval was pending. | The selected operation remains at that decision boundary. | The responsible human makes the exact decision; the operation rechecks eligibility. |
+| Restored rules are missing or truncated. | Readiness remains incomplete. | Use the full verified-read fallback from scenario 3 before governed work. |
 
 ### 5. Example result
 
 Illustrative output:
 
-> Governance context restored. The verification record is still ready for the assurance owner's decision.
-> Compaction did not verify the record or authorize integration.
-> Next: present the existing candidate and evidence to the assurance owner.
+> Governance restored. VREC-DEMO-001 is still ready for the assurance owner's decision.
+> No verification decision was recorded; compaction did not authorize integration.
+> Next: present this candidate and its evidence to the assurance owner.
 
 ### 6. Implementation details
 
@@ -397,24 +437,26 @@ Illustrative output:
 
 **Current implementation**
 
-Inspected baseline [CLI](../../../se_harness/cli.py) and [workflow projection](../../../se_harness/workflow.py):
+Inspected the baseline [CLI](../../../se_harness/cli.py) and [workflow projection](../../../se_harness/workflow.py):
 
 ```text
 harnessctl inspect REPO --json
-harnessctl check REPO --artifact WO-DEMO-001 --json
+harnessctl check REPO --artifact VREC-DEMO-001 --json
 ```
 
-`WO-DEMO-001` is illustrative. Without a checkpoint, `check` projects state; it does not prove execution gates passed. No commands were exercised.
+`VREC-DEMO-001` is illustrative. Without a checkpoint, `check` projects state; it does not prove execution gates passed. An explicitly requested broader inspection can use `inspect`; it is not required on every context restoration. No commands were exercised.
 
 **Proposed additions**
 
-Reuse the startup handler and re-read state after interruption. An in-session interruption may have no session-start event; the recovery skill covers explicit continuation. Host transcripts are not an authoritative state store.
+Use the same `session-ready` request and response as scenario 3, with source `compact`, `resume`, or explicit readiness. The handler refreshes governance and selected state. The main agent then reads the operation-specific result; the hook does not guess whether a write completed.
+
+For example, after an interrupted commit, the agent can use its shell tool for `git status --short`, `git log -1`, and the relevant diff. After an uncertain integration request, it reads the protected service's operation status before any retry. A transcript or summary is not the authoritative state store.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Verified repository identity, current artifact, candidate, and observed operation results.
-- **Outputs:** Restored governance and current recovery/decision handoff.
-- **Writes:** No repository or lifecycle writes; host context storage only.
+- **Inputs:** Event or explicit request, verified repository identity, selected artifact, current candidate, and observed operation results.
+- **Outputs:** Restored governance, actual effect status, and one current recovery or decision handoff.
+- **Writes:** No repository or lifecycle writes. Request/context storage may use plugin data and the host transcript.
 
 **Host differences**
 
@@ -423,12 +465,12 @@ Reuse the startup handler and re-read state after interruption. An in-session in
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Manual and automatic compaction → complete rules restored before continuation.
-- **Refusal:** Stale candidate or pending approval → no write replay or inferred decision.
-- **Recovery:** Resume after a partially completed operation → report observed effects and exactly one current next step.
+- **Success:** Manual or automatic compaction → complete rules and fresh selected state arrive before governed continuation.
+- **Refusal:** Stale candidate, missing decision, or unknown external effect → no write replay or inferred approval.
+- **Recovery:** In-session interruption with no hook event → explicit `setup readiness`, inspect actual effects, then report one current next step.
 
 **Open questions**
 
-Prove behavior for both hosts across manual compaction, automatic compaction, process restart, and in-session interruption. Specify separate subagent context propagation before supporting delegated recovery.
+Prove behavior across both hosts for manual compaction, automatic compaction, process restart, and in-session interruption. Define separate subagent context propagation before supporting delegated recovery.
 
 </details>

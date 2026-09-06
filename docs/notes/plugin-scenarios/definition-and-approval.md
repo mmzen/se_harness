@@ -6,6 +6,10 @@ Scenarios 5–8 in the [scenario index](README.md), using the [scenario template
 
 **Review date:** 2026-09-06. **Implementation baseline:** [`aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source **0.16.0**. The repository's installed governing version is **0.15.0**. Source interfaces below were inspected; they were not integration-tested against that released evaluator. The plugin components are proposals. This note grants no authoring, approval, or execution authority.
 
+**[New]** marks a component or operation to build. The proposed `bin/launcher bridge --request REQUEST_FILE --json` command runs the plugin's `scripts/bridge` with the verified external evaluator. The JSON request names an operation, an absolute `repo` path, and that operation's inputs. It contains no shell command string. Request files stay outside the target repository. `harnessctl` examples below show the existing evaluator arguments that the bridge would invoke.
+
+Use the [shared calling convention](README.md#shared-component-names-and-calling-convention) for launcher calls and optional subagent delegation.
+
 ## Scenario 5: Inspect the project and identify the next action
 
 ### 1. Purpose and starting point
@@ -19,34 +23,38 @@ Scenarios 5–8 in the [scenario index](README.md), using the [scenario template
 ### 2. Workflow
 
 ```text
-User asks for status
+User invokes existing harness-orient
         ↓
-Verify evaluator and installation
+Agent → bin/launcher bridge [New], operation orient [New]
         ↓
-Inspect the graph and selected work
+Existing --version, identity, doctor → trusted orient.py
         ↓
-Explain the result and next action
+Existing validate, inspect, selected check → inline result
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Status skill | Establish the repository and selection. Ask for an exact selection if the request is ambiguous. |
-| 2 | Launcher and orient helper | Check evaluator identity and installation integrity before trusting repository helpers. |
-| 3 | Evaluator | Inspect the graph and project the selected scope. Run preflight only for an explicitly selected work order and requested phase. |
-| 4 | Agent | Explain the returned result. Keep unrelated observations separate from blockers for the selected work. |
+| 1 | User → existing `harness-orient` skill | **Codex:** ask “Use harness-orient for WO-DEMO-101 in this repository.” **Claude Code:** `/verity-plane:harness-orient WO-DEMO-101` **[New packaging]**. The main agent reads the skill and its `skill-contract.json`; resolve an ambiguous selection before proceeding. |
+| 2 | Agent → existing shell tool | Use Codex `exec_command`, or Claude Code `Bash` / `PowerShell`, to call `bin/launcher bridge --request REQUEST_FILE --json` **[New]** with operation `orient`, repository, and optional artifact/phase. |
+| 3 | `bin/launcher` and `scripts/bridge` **[New]** | Resolve the exact external evaluator. Run existing `--version`, released `identity`, and `doctor` before executing the managed helper. A failure returns a stop; no installation or repair starts. |
+| 4 | Existing `harness-orient/scripts/orient.py` | Receive the verified evaluator launcher as an argument array plus expected version/root. Repeat identity and integrity checks for its receipt; run `validate --json` and `inspect --json`. |
+| 5 | `orient.py` → existing evaluator | For a supported selected scope, call `check --artifact ID --json`. Run `preflight` only when the request explicitly names a WO and phase. Return the structured result and receipt inline. |
+| 6 | Main agent following `harness-orient` | Explain actual state, selected blockers, and the evaluator's next action. Invalid formal state remains a reported stop; orientation does not authorize repair or the lifecycle action it identifies. |
 
 Reading and analysis do not require a started work order. A status request does not authorize the next lifecycle action it reveals.
+
+The existing `harness-operator-brief` skill runs only if the user explicitly requests it, using a bounded supplied result. It is not an automatic extra step.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Guide read-only orientation. | **Adapt:** package `harness-orient` with plugin discovery and runtime resolution. |
-| **Hook** | None; the user invokes status. | **Not used:** session preparation is a separate scenario. |
-| **Script** | Collect and structure observations. | **Adapt:** retain `orient.py` checks; pass the plugin's verified launcher. |
-| **Tool/interface** | Expose status in the host. | **New:** a thin interface to the orient helper. |
-| **Evaluator** | Supply facts and the next action. | **Reuse:** `doctor`, `validate`, `inspect`, and selected `check`. |
-| **Subagent** | None. | **Not used:** today's orient contract requires one agent. |
+| **Skill** | Existing `harness-orient` guides the main agent. | **Adapt:** package `.agents/skills/harness-orient/SKILL.md`; preserve its read-only procedure. |
+| **Hook** | No status-specific hook runs. | **Not used:** `SessionStart` preparation is scenario 3; it does not invoke this skill. |
+| **Script** | `orient.py` collects observations; `scripts/bridge` supplies trusted inputs. | **Reuse:** existing helper. **New:** `orient` adapter through `bin/launcher bridge`. |
+| **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes the launcher. | **Reuse:** host shell tools. **New:** structured request transport; no new MCP server is required. |
+| **Evaluator** | `--version`, `identity`, `doctor`, `validate`, `inspect`, and selected `check` supply results. | **Reuse:** existing CLI; optional `preflight` needs an explicitly requested WO and phase. |
+| **Subagent** | No delegation occurs. | **Not used:** today's orient contract requires the complete procedure in one agent. |
 | **Human** | Clarify the selection when needed. | **Reuse:** inspection requires no lifecycle decision. |
 | **External control** | None; no protected external effect occurs. | **Not used:** this operation writes nothing. |
 
@@ -79,18 +87,20 @@ Illustrative response:
 
 **Proposed additions**
 
-- Connect plugin discovery and runtime resolution to the existing helper. Display its result without calculating another next action.
+- Add the `orient` bridge operation. Validate managed helper bytes before execution, then pass the existing helper its required `target`, `--evaluator-launcher-json`, `--expected-evaluator-version`, and `--expected-evaluator-root`; add `--artifact` and `--preflight-phase` only when selected.
+- The evaluator argument array contains the absolute external interpreter followed by `-I -m se_harness`. Expected identity comes from trusted runtime resolution. The version call is `harnessctl --version`. Display the helper's result without calculating another next action.
+- Package the portable skill and adapt Claude's wrapper. If `harness-operator-brief` is explicitly requested, follow its existing contract and `scripts/check_brief.py` using a current bounded result.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Repository, expected evaluator identity, optional artifact and requested phase.
+- **Inputs:** `operation: orient`, repository, optional artifact and requested phase; the launcher supplies trusted evaluator identity.
 - **Outputs:** Structured orientation and an explanation for the user.
-- **Writes:** None, including no saved receipt in the repository.
+- **Writes:** No repository, Git, lifecycle, runtime, or retained receipt writes. The proposed host transport uses a temporary request outside the target; it must not alter the measured project.
 
 **Host differences**
 
-- **Codex:** Package the existing portable skill; verify invocation in the supported host version.
-- **Claude Code:** Adapt the current wrapper to locate the plugin's core instead of a fixed repository-local copy. See the [host comparison](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
+- **Codex:** Explicitly name `harness-orient`; invoke the launcher through `exec_command`.
+- **Claude Code:** Proposed plugin packaging exposes `/verity-plane:harness-orient`; `Bash` or native `PowerShell` invokes the same launcher. Adapt the current repository-local wrapper. See the [host comparison](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
 
 **Checks that demonstrate the behavior**
 
@@ -117,22 +127,24 @@ Illustrative response:
 ### 2. Workflow
 
 ```text
-Requested outcome
+User → change skill [New], draft mode
         ↓
-Find reusable definitions and plan additions
+Read current definitions → identify reuse and additions
         ↓
-Create and complete individual artifacts
+Bridge [New] → existing scaffold-domain / create-artifact
         ↓
-Validate the package and present it for review
+Agent edits drafts → existing validate → review set
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Change skill and agent | Read existing definitions and authoring rules. Select necessary additions. |
-| 2 | Optional investigator | Find related definitions and report reuse candidates without editing or deciding. |
-| 3 | Bridge and evaluator | Scaffold a domain if needed. Create artifacts and return their paths and IDs. |
-| 4 | Agent | Complete content, relationships, owners, acceptance criteria, and work scope. |
-| 5 | Evaluator and agent | Validate the proposed graph and present remaining issues and decisions. |
+| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to draft an artifact package for this change.” **Claude Code:** `/verity-plane:change draft`. The agent reads `skills/change/SKILL.md` and installed `ARTIFACT_AUTHORING.md`. |
+| 2 | Main agent | Read definitions and templates with Codex `exec_command`, or Claude Code `Read` / `Bash` / `PowerShell`. List reused IDs, proposed additions, relationships, and authorized authoring paths. Resolve missing meaning or scope before writing affected content. |
+| 3 | Main agent → optional `investigator` **[New]** | Delegate “Which requirements cover exports?” with the selected scope, using the [host-specific invocation](README.md#shared-component-names-and-calling-convention). The helper returns matching IDs and source locations. The main agent prepares the proposal; the investigator edits and approves nothing. |
+| 4 | Agent → `scripts/bridge` **[New]** | Through `bin/launcher bridge`, submit operation `evaluator` with the argument array for existing `scaffold-domain --dry-run --json` if a domain is needed, then `create-artifact --dry-run --json` for each addition. Show proposed paths and IDs. |
+| 5 | Bridge → existing authoring commands | Within authorized scope, repeat each selected command without `--dry-run`. Return actual created paths and IDs after each call. Each artifact is a separate write; a partial package can remain. |
+| 6 | Agent → existing editing tool | Use Codex `apply_patch`, or Claude Code `Edit` / `Write`, to fill content, owners, relationships, acceptance criteria, and WO scope. Supported `PreToolUse` events invoke `hooks/handler` **[New]** to check the mapped authoring boundary. |
+| 7 | Agent → bridge → existing `validate` | Submit the `validate --json` argument array. Return findings, correct drafts within scope, and validate again. Present the completed review set to scenario 7. |
 
 Authoring follows repository policy. It cannot require a started implementation WO merely to draft that same WO. Ordinary definitions begin `draft`; decision artifacts begin `open`. Neither means approved.
 
@@ -140,12 +152,12 @@ Authoring follows repository policy. It cannot require a started implementation 
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Guide reuse, drafting, and review preparation. | **New:** a change skill loading existing authoring rules. |
-| **Hook** | Check covered authoring actions. | **New:** map permitted authoring scope; do not demand a valid graph after every edit. |
-| **Script** | Call authoring operations and report progress. | **New:** bridge over existing commands. |
-| **Tool/interface** | Create drafts and edit their content. | **Adapt:** structured harness calls plus ordinary host editing tools. |
-| **Evaluator** | Scaffold, allocate IDs, and validate. | **Reuse:** `scaffold-domain`, `create-artifact`, and `validate`. |
-| **Subagent** | Investigate a bounded question. | **New:** optional read-only investigator; findings remain observations. |
+| **Skill** | `change`, at `skills/change/SKILL.md`, guides draft mode. | **New:** instructions that read current authoring rules and plan the package. |
+| **Hook** | `PreToolUse` invokes `hooks/handler` for covered writes. | **Reuse:** host event. **New:** authoring-scope mapping; incomplete drafts are expected between edits. |
+| **Script** | `bin/launcher` runs `scripts/bridge` operation `evaluator`. | **New:** structured dispatch and per-file progress; no atomic package command is claimed. |
+| **Tool/interface** | Shell tools invoke the bridge; `apply_patch` or `Edit` / `Write` completes drafts. | **Reuse:** host tools. **New:** binding of those writes to authorized authoring scope. |
+| **Evaluator** | `scaffold-domain`, `create-artifact`, and `validate` create and check records. | **Reuse:** existing commands and templates. |
+| **Subagent** | `investigator` finds reusable definitions. | **New:** optional read-only agent; findings remain observations. |
 | **Human** | Clarify meaning and authorize required scope. | **Reuse:** existing authority; approval follows in scenario 7. |
 | **External control** | None at local draft creation. | **Not used:** later integration has its own boundary. |
 
@@ -173,23 +185,24 @@ Illustrative response:
 **Current implementation**
 
 - [artifact_layout.py](../../../se_harness/artifact_layout.py) creates one incomplete draft per call. [ARTIFACT_AUTHORING.md](../../engineering/ARTIFACT_AUTHORING.md) supplies content rules.
-- Example preview: `harnessctl create-artifact . --domain example-change --type requirement --id REQ-DEMO-101 --dry-run --json`.
+- Existing previews: `harnessctl scaffold-domain . --domain example-change --dry-run --json` and `harnessctl create-artifact . --domain example-change --type requirement --id REQ-DEMO-101 --dry-run --json`. Existing validation: `harnessctl validate . --json`. [cli.py](../../../se_harness/cli.py) declares these argument forms.
 - Baseline and inspection status are recorded above. There is no atomic package command or authoring-scope parameter. Automatic IDs examine local refs and the worktree, not remote-tracking refs; dry-run IDs are not reservations.
 
 **Proposed additions**
 
-- Add package planning and recoverable progress reporting. Define authoring-scope enforcement separately; the existing command cannot prove it from a WO argument.
+- Add `change` draft mode, the shared `evaluator` bridge operation, and per-file progress reporting. Define authoring-scope enforcement separately; the existing command cannot prove it from a WO argument.
+- Package `agents/investigator.md` for Claude Code. Provide a separately registered `.codex/agents/investigator.toml` for Codex; do not assume a native Codex plugin agent field. Both definitions are new.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Requested outcome, authorized authoring scope, current graph, domain, artifact types, and IDs.
+- **Inputs:** Requested outcome, authorized authoring scope, current graph, domain, artifact types, and IDs. Each `evaluator` request contains an `argv` array without the `harnessctl` executable name.
 - **Outputs:** Created paths, validation findings, and the review set.
 - **Writes:** Authorized domain scaffolding and individual artifacts. No approval or implementation state is granted.
 
 **Host differences**
 
-- **Codex:** Investigator setup may require registering the bundled agent definition in the documented project location.
-- **Claude Code:** Use native plugin agent discovery. Test both hosts' tool limits and hook coverage; see the [host comparison](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
+- **Codex:** `exec_command` invokes the launcher; `apply_patch` edits. Register `investigator` separately if used. Shell execution uses the host's `Bash` hook matcher, not an `exec_command` matcher.
+- **Claude Code:** `Bash` / `PowerShell` invokes the launcher; `Read`, `Edit`, and `Write` handle files. Native plugin agent discovery loads `investigator`. Test actual hook coverage in each host; see the [host comparison](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
 
 **Checks that demonstrate the behavior**
 
@@ -199,7 +212,7 @@ Illustrative response:
 
 **Open questions**
 
-- How will authoring scope include trusted owner exceptions without requiring an already-started WO?
+- How will authoring scope include trusted owner exceptions without requiring an already-started WO? Direct edits and arbitrary shell commands need a demonstrated control boundary; registering a hook alone does not establish it.
 
 </details>
 
@@ -216,45 +229,50 @@ Illustrative response:
 ### 2. Workflow
 
 ```text
-Present artifacts and required decisions
+change skill [New] → review-preview [New]
         ↓
-Each accountable owner decides
+decision-review [New] → each accountable owner decides
         ↓
-Preview and apply the exact authorized transitions
+review-apply [New] checks plan and decision → existing transition
         ↓
-Report changed states and remaining decisions
+Read actual states → separately review the WO
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Change skill | Present the selected content, relationships, unresolved decisions, and owners. |
-| 2 | Accountable owners | Approve their definitions after resolving blocking decisions through the applicable procedure. |
-| 3 | Bridge and evaluator | Preview the selected transitions; apply only after the exact decisions and current checks. |
-| 4 | Engineering owner | Decide the bounded WO after its governing chain and authorization gate are complete. |
-| 5 | Evaluator and agent | Read resulting states and explain the remaining next action. |
+| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to review these artifact IDs.” **Claude Code:** `/verity-plane:change review`. The agent reads the selected artifacts and installed `DECISION_RIGHTS.md`. |
+| 2 | Agent → `scripts/bridge` **[New]** | Use `exec_command`, `Bash`, or `PowerShell` to call `bin/launcher bridge` with operation `review-preview`, selected IDs/target states, and accountable roles. The bridge calls existing `transition` without `--apply`. |
+| 3 | Bridge → main agent | Return blockers and a `plan_id` **[New]** bound to selected content and relevant graph inputs. Present the exact proposed changes to each required owner; a failed plan is not ready for approval. |
+| 4 | Human → `decision-review` **[New]** | Review selected content and decision meaning. The protected review service authenticates the actor, checks the required role, and stores the exact decision with its plan/content binding. Return a `decision_ref` **[New]** for each required decision. |
+| 5 | Agent → bridge operation `review-apply` **[New]** | Submit the `plan_id` and decision references. The bridge verifies them with the protected service, rejects stale content, and reruns evaluator checks. Only then call existing `transition --apply` for the selected approved decisions. |
+| 6 | Bridge → main agent | Return actual applied states or failure. Read the resulting selected records and report exactly which approvals occurred. Related artifacts do not change automatically. |
+| 7 | Engineering owner → the same review flow | After the governing chain is complete, review the WO through a separate `review-preview` / `decision-review` / `review-apply` cycle. Approval leads to scenario 9 for the distinct start decision. |
 
 The package is a review grouping, with separate artifact approvals. Product, technical, assurance, and engineering owners retain their decisions, even when one person holds several roles.
+
+Reuse an existing explicit decision when the trusted interface establishes that it covers the exact reviewed content. Do not turn each invocation into another confirmation.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Present selected artifacts and distinct decisions. | **New:** change skill using current decision rights. |
-| **Hook** | Intervene on covered transition calls. | **New:** preserve the handoff; hooks do not authenticate owners. |
-| **Script** | Pass the exact transition packet. | **New:** bridge and decision binding; retain engine checks. |
-| **Tool/interface** | Show review content and receive decisions. | **New:** bind the selected content, roles, and requested states to the decision. |
-| **Evaluator** | Check and apply selected transitions. | **Reuse:** multi-artifact `transition` planning and application. |
-| **Subagent** | Review consistency when useful. | **New:** optional read-only reviewer; it cannot approve definitions. |
+| **Skill** | `skills/change/SKILL.md` guides review mode. | **New:** presents selected content, evaluator blockers, and separate decisions. |
+| **Hook** | `PreToolUse` routes covered transition attempts to `hooks/handler`. | **Reuse:** host event. **New:** mapped checks; the hook does not authenticate an owner. |
+| **Script** | `scripts/bridge` implements `review-preview` and `review-apply`. | **New:** content/decision binding around existing evaluator planning and application. |
+| **Tool/interface** | Shell tools invoke the bridge; humans use `decision-review`. | **Reuse:** `exec_command`, `Bash`, or `PowerShell`. **New:** protected human review interface. |
+| **Evaluator** | `transition` checks and applies selected states. | **Reuse:** `plan_transition()` and `apply_transition()`, including multi-artifact planning. |
+| **Subagent** | Optional `investigator` reports consistency findings before review. | **New:** bounded read-only analysis; no approval or use of another owner's identity. |
 | **Human** | Make artifact-specific decisions. | **Reuse:** owners named by `DECISION_RIGHTS.md`. |
-| **External control** | None in the current local transition interface. | **Not used:** authenticated decision enforcement remains a design gap; merge controls are separate. |
+| **External control** | Protect authenticated decisions from agent modification. | **New:** protected service behind `decision-review`; no such boundary exists in today's local `--decision` argument. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| A required owner has not decided. | The proposed interface holds that transition. | Obtain that owner's explicit decision over the identified content. |
-| Content changes after review. | The proposed binding rejects the stale decision. | Present the changed content and refresh the affected decision. |
+| A required owner has not decided, or the service cannot authenticate the decision. | `review-apply` refuses that transition. | Obtain or establish the exact existing decision through `decision-review`. |
+| Content or relevant graph inputs change after review. | `review-apply` rejects the stale plan. | Repeat `review-preview` and refresh affected decisions on the changed content. |
 | A gate fails or blocking decision remains open. | The evaluator refuses the transition. | Resolve the reported blocker and preview again. |
+| Application is interrupted. | Report an unknown or partial result until actual records are inspected. | Read current states before retrying; do not blindly replay the packet. |
 
 Today's actor-name argument does not prove who decided. Authenticated binding is new work.
 
@@ -279,18 +297,19 @@ Illustrative response:
 
 **Proposed additions**
 
-- An authenticated decision interface and binding to reviewed content. Apply-time checks must reject changed inputs rather than reuse a stale approval.
+- `review-preview` binds selected IDs, requested states, required roles, content hashes, and relevant graph inputs to a `plan_id`. `review-apply` consumes that plan and authenticated `decision_ref` values, then reruns the existing evaluator.
+- `decision-review` records the actor, role, exact decision, and reviewed content in a protected service. An agent-created file, arbitrary role string, or unverified reference cannot satisfy it. This service and its integration do not exist yet.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Explicit artifact/state selections, actual decisions, roles, reviewed content identity, and current graph.
-- **Outputs:** Preview or applied result, blockers, and actual states.
-- **Writes:** Selected artifact statuses and lifecycle records when application succeeds.
+- **Inputs:** Repository, selected artifacts/states, evaluator argument arrays, bound plan, and authenticated owner decisions.
+- **Outputs:** Blockers or review plan, authenticated decision references, and actual transition result.
+- **Writes:** Protected review records, then only selected artifact statuses and lifecycle records on successful application. No inferred changes to linked records.
 
 **Host differences**
 
-- **Codex:** Host tool approval is distinct from an accountable lifecycle decision.
-- **Claude Code:** The same distinction applies to tool permissions. Both adapters need the proposed decision binding; see the [authority analysis](../plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
+- **Codex:** `exec_command` invokes the bridge. A tool approval permits the command; it does not approve an artifact.
+- **Claude Code:** `Bash` / `PowerShell` invokes the same bridge. Tool permission likewise supplies no lifecycle decision. Both adapters need the trusted decision boundary; see the [authority analysis](../plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
 
 **Checks that demonstrate the behavior**
 
@@ -300,7 +319,7 @@ Illustrative response:
 
 **Open questions**
 
-- Which trusted identity and storage boundary will authenticate decisions when local files and actor strings are writable by the agent?
+- Which identity provider and storage boundary implement `decision-review`? How will controls prevent direct local edits or CLI calls from bypassing it? Protected integration must reject untrusted approval records; a local wrapper alone is insufficient.
 
 </details>
 
@@ -317,48 +336,50 @@ Illustrative response:
 ### 2. Workflow
 
 ```text
-Discover a needed change
+Affected work stops → change skill [New], amend mode
         ↓
-Stop the affected operation and inspect its impact
+Read impact → amendment-preview [New, design pending]
         ↓
-Present revised scope to the accountable owners
+Owner decides through decision-review [New]
         ↓
-Apply an authorized amendment or create new drafts
-        ↓
-Recheck affected scope; stop if the requested operation is unsupported
+amendment-apply [New, design pending] → validate and scope check
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Agent | Stop affected work. Preserve records and evidence. |
-| 2 | Investigator or main agent | Trace affected definitions, verification contracts, and WOs. Report consequences as analysis. |
-| 3 | Change skill | Present the change and required decisions. Create a decision artifact when installed rules require one. |
-| 4 | Accountable owners | Decide the proposed meaning and remediation scope. Related artifacts remain unchanged. |
-| 5 | Agent | Amend selected content under the applicable authoring and decision rules, or create authorized new drafts. |
-| 6 | Bridge and evaluator | Recheck the affected graph and work scope. Refuse unsupported lifecycle transitions. |
+| 1 | Main agent | Stop the affected implementation or approval operation. Preserve records and evidence. **Codex:** invoke the named `change` skill for an amendment. **Claude Code:** `/verity-plane:change amend`. These skill modes are **[New]**. |
+| 2 | Agent or optional `investigator` **[New]** | Read affected definitions, links, verification contracts, and WOs with existing read/shell tools. Return old meaning, proposed meaning, affected IDs, and scope consequences as analysis. |
+| 3 | Agent → `scripts/bridge` **[New]** | Through `bin/launcher bridge`, submit operation `amendment-preview` **[New; design pending]** with affected IDs, exact proposed content changes, and current hashes. Return a bound plan naming required decisions, or an unsupported-path stop. |
+| 4 | Agent following `skills/change/SKILL.md` **[New]** | If installed rules require a DEC, use existing `create-artifact --type decision` to draft it under scenario 6. Record the question, blocked IDs, and declared options. It starts `open` and does not change its targets. |
+| 5 | Accountable owners → `decision-review` **[New]** | Decide the exact amendment and any revised work scope. For a DEC, use `review-preview` / `review-apply` around existing `decide` with the authenticated decision. Selecting `amend` records the answer and leaves target artifacts unchanged. |
+| 6 | Agent → bridge operation `amendment-apply` **[New; design pending]** | Submit the plan and authenticated decisions. Reject stale inputs; apply only reviewed content under established amendment rules, or create separately authorized new drafts. Never invent an `approved → draft` transition. |
+| 7 | Agent → bridge → existing evaluator | Run `validate --json`, then the selected WO's applicable `check --checkpoint scope` using actual changed paths. Report the result and remaining decision. Resume affected work only through its permitted procedure. |
 
 The plugin cannot invent an `approved → draft` transition. Existing authoring rules allow amendments to approved definitions; there is no dedicated amendment transaction. Authorized edits follow those rules and the affected owners' decisions. A new WO can cover additional work under unchanged definitions. New reopen or replacement workflows need explicit semantics.
+
+`amendment-preview` and `amendment-apply` name proposed operations for binding edits to reviewed content. Their transaction and any approval-invalidation behavior need a governed design before implementation; the current supported authoring path remains available.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Explain impact and route the proposed revision. | **New:** change skill with explicit unsupported-path handling. |
-| **Hook** | Intervene on covered scope-changing actions. | **New:** mapped checks; broad shell coverage is not established. |
-| **Script** | Collect impact and invoke supported commands. | **New:** bridge to existing operations. |
-| **Tool/interface** | Present old and proposed meaning together. | **New:** review view with selected artifacts and consequences. |
-| **Evaluator** | Check scope and record decisions. | **Reuse:** scope checks, authoring, `decide`, and legal transitions; no revision transaction. |
-| **Subagent** | Trace affected relationships. | **New:** optional read-only investigator with a bounded question. |
+| **Skill** | `skills/change/SKILL.md` guides amend mode. | **New:** distinguishes supported authoring from unsupported lifecycle changes. |
+| **Hook** | `PreToolUse` invokes `hooks/handler` for covered scope-changing writes. | **Reuse:** host event. **New:** mapping to the reviewed amendment; arbitrary shell coverage is not established. |
+| **Script** | `scripts/bridge` previews and applies the bounded amendment. | **New:** `amendment-preview` / `amendment-apply`; transaction and content binding still need governed design. |
+| **Tool/interface** | Shell tools call the bridge; `decision-review` shows old and proposed content. | **Reuse:** `exec_command`, `Bash`, or `PowerShell`. **New:** trusted amendment review view. |
+| **Evaluator** | `create-artifact`, `decide`, `validate`, and scope `check` handle supported operations. | **Reuse:** existing commands; no general reopen or replacement command exists. |
+| **Subagent** | Optional `investigator` traces impact. | **New:** read-only findings with source IDs; no amendment or remediation decision. |
 | **Human** | Decide changed meaning and remediation scope. | **Reuse:** affected owners and `DR-REMEDIATION-SCOPE`. |
-| **External control** | Protect subsequent integration. | **New:** independent enforcement; local hooks are insufficient. |
+| **External control** | Protect authentic decisions and subsequent integration. | **New:** protected `decision-review` records and independent integration enforcement; local hooks are insufficient. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
 | Proposed work exceeds approved scope. | The relevant scope check fails; affected work stops. | Obtain remediation authority and a supported path. |
-| Amendment needs an undefined lifecycle edge. | The evaluator refuses the transition. | Define and approve amendment rules separately. |
+| Amendment needs an undefined lifecycle edge or replacement rule. | The evaluator refuses unsupported transitions; `amendment-preview` reports the missing semantics. | Define the missing rules through separate governed work. Current permitted amendments remain available. |
 | A decision selects “amend.” | The decision records the answer; its targets remain unchanged. | Perform separately authorized edits through an established procedure, then re-evaluate. |
+| Reviewed content changes before application. | The proposed `amendment-apply` rejects the stale plan. | Read current content, refresh the amendment, and obtain affected decisions. |
 
 ### 5. Example result
 
@@ -377,22 +398,24 @@ Illustrative response:
 
 - [WORKFLOW.md](../../engineering/WORKFLOW.md#state-model) declares permitted edges. No general reopen or revision command exists; historical `superseded` definition/WO vocabulary adds no transition. [Authoring rules](../../engineering/ARTIFACT_AUTHORING.md) nevertheless permit amendments to approved definitions.
 - [decisions.py](../../../se_harness/decisions.py) records a declared answer and leaves blocked artifacts unchanged. Example preview: `harnessctl decide . --artifact DEC-DEMO-101 --option amend --decision technical-owner --reason "Extend the export period to 90 days." --json`. This assumes the illustrative decision declares that option and role.
+- Example scope check after authorized edits: `harnessctl check . --artifact WO-DEMO-101 --checkpoint scope --changed-path docs/engineering/example-change/specifications/SPEC-DEMO-101.md --changes-complete --json`. The path is illustrative; actual callers derive the complete change set. Declared paths are evidence, not trusted proof of every effect.
 - Baseline and inspection status are recorded above. A DEC option named `supersede` is not a lifecycle transition for its target.
 
 **Proposed additions**
 
-- Add a structured amendment operation that preserves existing authoring and decision rules. Define reviewed-content binding and any new replacement or approval-invalidation behavior through governed design; the plugin must not invent those semantics.
+- `amendment-preview` binds current content, exact proposed changes, affected IDs, and required decisions. `amendment-apply` checks that binding and invokes only supported authoring operations. Current manual edits use `apply_patch` or `Edit` / `Write`; their guarded replacement is new work.
+- Define replacement, approval-invalidation, and multi-file recovery semantics through governed design. Until supported, return the specific missing operation; this proposal supplies no authority to invent it.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Approved records, proposed changes, impact findings, and exact owner decisions.
+- **Inputs:** Approved records, exact proposed changes, affected work/evidence, current hashes, and authentic owner decisions.
 - **Outputs:** Amended content or new drafts, re-evaluation results, or an explicit unsupported-path stop.
 - **Writes:** None during impact analysis. Authorized definition amendments, new drafts, and selected decision dispositions are separate writes. Historical VREC/RLS facts remain intact; lifecycle states do not change by inference.
 
 **Host differences**
 
-- **Codex:** Present the same unsupported-path stop through its skill and tools.
-- **Claude Code:** Follow the same engine result. Neither host supplies amendment rules; see the [shared architecture](../plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
+- **Codex:** `exec_command` invokes the bridge; current authorized content edits use `apply_patch`. Optional `investigator` needs the separate registration described in scenario 6.
+- **Claude Code:** `Bash` / `PowerShell` invokes the bridge; current authorized content edits use `Edit` / `Write`. Native plugin discovery supplies the optional investigator. Both hosts return the same unsupported-path result; see the [shared architecture](../plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
 
 **Checks that demonstrate the behavior**
 
@@ -402,6 +425,6 @@ Illustrative response:
 
 **Open questions**
 
-- What exact transaction records amendments and invalidates affected approvals? Which changes require new artifact IDs? These rules need a separate governed design.
+- What transaction records amendments and handles affected approvals? Which changes require new IDs? What proves that all writes, including direct edits, respect the transaction? These rules need separate governed design.
 
 </details>
