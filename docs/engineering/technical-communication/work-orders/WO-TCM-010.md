@@ -2,7 +2,7 @@
 id = "WO-TCM-010"
 type = "work_order"
 title = "Correct the first example of SPEC-TCM-006 by record"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -38,6 +38,13 @@ to = "in_progress"
 decided_at = "2026-09-06T13:47:51Z"
 decided_by = "engineering-owner"
 reason = "Started by the accountable engineering owner on 2026-09-06 on the owner's instruction 'I approve WO-TCM-010' (PR #364), which the pull request stated would be followed by the start, the amendment and the completion on the same branch. Start preflight PASS under exact 0.15.0."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-06T13:58:19Z"
+decided_by = "engineering-owner"
+reason = "Completed by the accountable engineering owner on 2026-09-06 on the owner's instruction 'I approve WO-TCM-010' (PR #364), which the pull request stated would be followed by the completion on the same branch. SPEC-TCM-006's first example is corrected by record with an amendment record; the rules section is byte-identical; released 0.15.0 validate 1332 artifacts, 0 errors, 71 warnings, 0 advisories; all four lanes green at the evidence head 4c0c688; the owner amended the execution scope to admit the evidence directory. Commit-bound verification is not required; no record follows."
 +++
 
 # Work Order: Correct the first example of SPEC-TCM-006 by record
