@@ -41,7 +41,7 @@ sequenceDiagram
         Engine-->>Hook: Result or refusal
         Hook-->>Host: Host-specific allow or deny response
     end
-    Note over Host,Engine: Continue only if host permits; mutations still have evaluator guards
+    Note over Host,Engine: Continue only if host permits. Mutations still have evaluator guards
     Host->>Bridge: Execute the requested harness operation
     Bridge->>Engine: Absolute isolated runtime plus argument array
     Engine->>Repo: Read or apply the operation's permitted writes
