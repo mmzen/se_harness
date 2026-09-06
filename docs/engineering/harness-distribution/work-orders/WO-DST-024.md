@@ -21,6 +21,8 @@ paths = [
   "docs/notes/harness-installation-and-upgrades.md",
   "docs/notes/developing-se-harness.md",
   "docs/engineering/harness-distribution/",
+  "repository_tools/explorer_design/build_explorer_template.py",
+  "repository_tools/diagnostic_code_index.py",
 ]
 
 [relations]
@@ -157,3 +159,16 @@ give the hosted lane result and the local control reading, each labelled;
 state that the root footprint and lock are byte-identical to `main`; name the
 adoption obligations DST-ENG-015 and DST-ENG-016 carried forward to the next
 root-adoption work order.
+
+## Amendment record
+
+- 2026-09-06, by the accountable engineering owner by selecting the presented
+  option "Amend the scope with the two exact paths (Recommended)", after the
+  implementing agent reported that two repository-owned tools still name the
+  removed template path: the Explorer build tool's default `--output` would
+  recreate `templates/repository/standard/scripts/harness_explorer/index.template.html`
+  if run without `--output`, and the diagnostic-code index lists the removed
+  directory as a scan root. `repository_tools/explorer_design/build_explorer_template.py`
+  and `repository_tools/diagnostic_code_index.py` join `[execution_scope] paths`.
+  Nothing else in the work order changes. The formal snapshot moves with this
+  edit; the evidence header is bound after it.
