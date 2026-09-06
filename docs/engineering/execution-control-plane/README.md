@@ -46,6 +46,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `REQ-ECP-026`: the managed lane reads the `Harness-Work-Order` and `Harness-Restitution` declarations from the live pull-request body, so a corrected body needs a re-run, not a push (issue #280 part c; drafted 2026-08-30 with `SPEC-ECP-015`, `VER-ECP-017`, and `WO-ECP-021`).
 - `REQ-ECP-027`: one command shape across `harnessctl` (target, artifact naming, `--json` everywhere, the 0/1/2 exit rule, one code per line, one cause per code; issue #282, drafted 2026-08-30 with `SPEC-ECP-016`, `VER-ECP-018` and `WO-ECP-022`).
 - `REQ-ECP-028`: the Git-derived handoff check declares its result in one run — the run binds the packet to the current formal snapshot and closes the change set over its own retained result (issue #280 part b; drafted 2026-08-31 with `SPEC-ECP-017`, `VER-ECP-019`, and `WO-ECP-023`).
+- `REQ-ECP-031`: one command installs the harness into any target: `adopt` merges into `init`, whose behaviour follows the target's content (functional assessment section 4.1, the owner's request of 2026-09-05; drafted 2026-09-06 with `SPEC-ECP-020`, `VER-ECP-022` and `WO-ECP-026`).
 - `SPEC-ECP-001`: the next command, Git-derived change sets, the chain-scoped snapshot, and the trimmed manifest.
 - `SPEC-ECP-002`: evidence packets, identifier allocation, and pull-request body generation.
 - `SPEC-ECP-003`: the mandatory scope-aware pull-request gate and digest coverage.
@@ -103,6 +104,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-021` independent; the managed lane reads the live pull-request body under `REQ-ECP-026` / `SPEC-ECP-015` / `VER-ECP-017`, drafted 2026-08-30 from issue #280 part c; the template only, the root lane follows on the next root adoption.
 - `WO-ECP-022` after `WO-ECP-020` (merged); the command shape under `REQ-ECP-027` / `SPEC-ECP-016` / `VER-ECP-018`, drafted 2026-08-30 from the functional assessment's issue #282; head of the assessment's critical path.
 - `WO-ECP-023` after `WO-ECP-022` (merged); the self-binding Git-derived handoff check under `REQ-ECP-028` / `SPEC-ECP-017` / `VER-ECP-019`, drafted 2026-08-31 from issue #280 part b; the candidate evaluator only, the root keeps the two-run behaviour until the next root adoption.
+- `WO-ECP-026` independent; the merged installation command under `REQ-ECP-031` / `SPEC-ECP-020` / `VER-ECP-022`, drafted 2026-09-06 from the functional assessment's combine table and the owner's request of 2026-09-05; draft, awaiting the four owner approvals; the `ARCH-ECP-001` amendment follows the requirement's approval.
 - `WO-ECP-008` after `WO-ECP-001`; its skill-retirement item moved to `WO-ECP-006` on 2026-08-29.
 
 This index authorizes no implementation, lifecycle transition, Git action,
