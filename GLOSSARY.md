@@ -84,6 +84,12 @@ artifacts.
 
 **Predicate.** One named check inside a gate, such as `QGP-G4I-PATHS`, with a fixed evaluator and the evidence it needs. A gate passes when every predicate it binds to the checkpoint passes (`QUALITY_GATES.md`).
 
+**Contract (of a specification).** The one sentence in a specification's front matter saying what an implementation must do to conform. The Explorer shows it under the title; the validator budgets it at 30 words on a draft (`SPEC-TCM-006`).
+
+**Rule identifier.** The stable name of one rule in a specification, `<PREFIX>-<AREA>-NNN`, written in bold at the start of the rule. It is how a verification contract, a work order, an evidence packet or a deviation cites the rule; it never moves and is never reused (`SPEC-TCM-006`).
+
+**Coverage table.** The table at the end of a specification mapping each requirement it specifies to the rule identifiers that meet it. The validator reads it on drafts and the Explorer shows it on the specification and, as "Covered by", on each requirement (`SPEC-TCM-006`).
+
 ## Upkeep
 
 This page is a note: change it by pull request and review, never by a work

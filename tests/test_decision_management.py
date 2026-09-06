@@ -17,6 +17,16 @@ from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
 
 
+def write_rules_on_spec_001(root: Path) -> None:
+    """SPEC-TCM-006 TCM-RFS-020: a deviation's fragment names a rule identifier the specification defines."""
+
+    write(
+        root / "docs/engineering/product/specifications/SPEC-001.md",
+        formal("SPEC-001", "specification", "implemented", {"specifies": ["REQ-001"]})
+        + "\n## Rules\n\n**BASE-RUL-003.** The field MUST be readable on every platform.\n",
+    )
+
+
 def decision_text(
     decision_id: str,
     *,
@@ -71,6 +81,7 @@ class DecisionManagementTests(unittest.TestCase):
         guard.start()
         self.addCleanup(guard.stop)
         create_base_chain(self.root, operating_contract_status="draft")
+        write_rules_on_spec_001(self.root)
 
     def invoke(self, *arguments: str) -> tuple[int, str, str]:
         output = io.StringIO()
@@ -168,7 +179,7 @@ class DecisionManagementTests(unittest.TestCase):
     def test_a_deviation_names_the_rule_the_fact_and_the_closed_option_set(self) -> None:
         deviation = dict(
             kind="deviation",
-            against="SPEC-001#rule-3",
+            against="SPEC-001#BASE-RUL-003",
             observed="The evaluator cannot read the field on Windows.",
             options=(("amend", "Amend rule 3."), ("accept", "Accept the deviation."), ("stop", "Stop the work.")),
             recommendation="accept",
@@ -180,11 +191,11 @@ class DecisionManagementTests(unittest.TestCase):
         path = self.decision_path()
         original = path.read_text(encoding="utf-8")
 
-        path.write_text(original.replace('against = "SPEC-001#rule-3"\n', ""), encoding="utf-8")
+        path.write_text(original.replace('against = "SPEC-001#BASE-RUL-003"\n', ""), encoding="utf-8")
         self.assertTrue(any("names the departed rule" in item for item in self.decision_errors()))
-        path.write_text(original.replace("SPEC-001#rule-3", "SPEC-404#rule-3"), encoding="utf-8")
+        path.write_text(original.replace("SPEC-001#BASE-RUL-003", "SPEC-404#rule-3"), encoding="utf-8")
         self.assertTrue(any("unknown artifact 'SPEC-404'" in item for item in self.decision_errors()))
-        path.write_text(original.replace("SPEC-001#rule-3", "REQ-001#rule-3"), encoding="utf-8")
+        path.write_text(original.replace("SPEC-001#BASE-RUL-003", "REQ-001#rule-3"), encoding="utf-8")
         self.assertTrue(any("departs from a specification, not a requirement" in item for item in self.decision_errors()))
         path.write_text(original.replace('id = "stop"', 'id = "punt"'), encoding="utf-8")
         self.assertTrue(any("include stop" in item for item in self.decision_errors()))
@@ -332,7 +343,7 @@ class DecisionManagementTests(unittest.TestCase):
     def test_an_accepted_deviation_is_time_bounded_and_stands_on_the_rule_the_work_and_its_records(self) -> None:
         deviation = dict(
             kind="deviation",
-            against="SPEC-001#rule-3",
+            against="SPEC-001#BASE-RUL-003",
             observed="The evaluator cannot read the field on Windows.",
             options=(("amend", "Amend rule 3."), ("accept", "Accept the deviation."), ("stop", "Stop the work.")),
             recommendation="accept",
@@ -381,7 +392,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         warnings = [item for item in self.validate().warnings if item.code == "W-DCM-002"]
         self.assertEqual(1, len(warnings), warnings)
-        self.assertIn("2 accepted deviations stand against SPEC-001#rule-3", warnings[0].message)
+        self.assertIn("2 accepted deviations stand against SPEC-001#BASE-RUL-003", warnings[0].message)
         # amending the rule closes the standing
         self.raise_decision("DEC-003", **deviation)
         code, _, error = self.invoke(
@@ -512,7 +523,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
         write(self.root / "docs/engineering/product/releases/RLS-001.md", release_record("a" * 40))
         self.assertEqual([], [f"{i.code}: {i.message}" for i in self.validate().errors])
         self.raise_decision(
-            kind="deviation", against="SPEC-001#rule-3", observed="The field is unreadable on Windows.",
+            kind="deviation", against="SPEC-001#BASE-RUL-003", observed="The field is unreadable on Windows.",
             options=(("accept", "Accept."), ("stop", "Stop.")), recommendation="accept",
             concerns=("SPEC-001", "WO-001"), blocks=("WO-001",),
         )
