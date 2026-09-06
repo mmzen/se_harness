@@ -6,7 +6,7 @@
 > This maps the implementation at [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055) to proposed plugin components. It authorizes no implementation or lifecycle decision.
 > Plugin skills, hooks, launchers, and adapters described as new below do not exist yet. Command examples describe the inspected source interface, not a tested integration with the released 0.15.0 evaluator.
 
-Use the [scenario template](plugin-scenario-template.md) to develop detailed scenarios with consistent workflows, component responsibilities, and implementation mappings.
+The [16 detailed scenarios](plugin-scenarios/README.md) expand these workflows using the [scenario template](plugin-scenario-template.md). Each includes component responsibilities, current-to-proposed mappings, decision boundaries, and recovery. The session scenarios also develop the proposed installation checks and governance injection at startup and after compaction.
 
 ## First, distinguish the components
 
@@ -284,7 +284,7 @@ The second command previews a decision, and its authorized apply changes only th
 
 | Operation | Skill and script path | Hook behavior | Effect boundary |
 | --- | --- | --- | --- |
-| Inspect / resume | **Orient skill → launcher → `doctor`, `inspect`, selected `check` without a checkpoint.** Reconstruct context from repository state. | Session hook may offer a short cached readiness summary. | No implicit installation, repair, lifecycle transition, or claim that projection passed gates. |
+| Inspect / resume | **Orient skill → launcher → `doctor`, `inspect`, selected `check` without a checkpoint.** Reconstruct context from repository state. | Proposed session handler verifies installation before injecting the managed governance text and fresh state; startup and recovery share that handler. | No implicit installation, repair, lifecycle transition, or claim that projection passed gates. |
 | Upgrade | **Setup skill → launcher obtains selected target release → `upgrade` plan → reviewed apply.** | Report missing runtime or hook trust; never upgrade from session startup. | Repository changes only through the authorized installer transaction. No separate upgrade-packet requirement is reintroduced. |
 | Explain a result | **Operator-brief skill** reads the bounded supplied result. | No hook required. | Communication only; no lifecycle or file changes. |
 
@@ -296,6 +296,8 @@ harnessctl upgrade REPO --apply --json
 ```
 
 The plugin's own update, runtime download, and repository upgrade are separate operations. After any interruption, read the actual state again; a remembered model conversation is not a workflow checkpoint.
+
+See [session startup](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) and [context restoration](plugin-scenarios/setup-and-sessions.md#scenario-4-restore-context-after-compaction-or-interruption) for the ordered verification/injection procedure, host context limits, and the use of `SessionStart` after compaction. Context injection alone does not enforce authority over arbitrary host tools.
 
 ## How the new bridge consumes today's results
 

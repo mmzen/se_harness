@@ -41,6 +41,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same canonical repository skills without duplicating workflow authority? |
 | [Proposal: installation through Codex and Claude Code plugins, 2026-09-06](plugin-installation-proposal-2026-09-06.md) | What changes would remove manual environment setup, how would native skills, hooks, and agents fit, and which authority boundaries need independent enforcement? |
 | [Plugin operation workflows, 2026-09-06](plugin-operation-workflows-2026-09-06.md) | How do init, artifact packages, work-order start, evidence, verification, and delivery map onto skills, hooks, scripts, agents, and the existing evaluator? |
+| [Detailed plugin scenarios](plugin-scenarios/README.md) | How do 16 operations work step by step, which component does each part, and where do decisions, failures, and recovery occur? |
 | [Plugin scenario template](plugin-scenario-template.md) | How should each detailed scenario explain its workflow, component roles, implementation mapping, decisions, and recovery? |
 | [Earlier exploration of plugin distribution](agentic-execution-plugin-distribution.md) | Which questions informed the proposal? (historical exploration; predates the writing-skill retirement) |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |

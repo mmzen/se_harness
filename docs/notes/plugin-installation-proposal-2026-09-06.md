@@ -71,6 +71,8 @@ For Codex, use the documented plugin browser in the desktop app or CLI, then the
 
 For concrete sequences covering initialization, artifact packages, work-order start, evidence, verification, integration, release, and upgrades, see [Plugin operation workflows](plugin-operation-workflows-2026-09-06.md). It explains what runs as a skill, hook, script, agent, or existing evaluator operation, with command examples and a source-to-component map.
 
+The [16 detailed scenarios](plugin-scenarios/README.md) expand that map into reusable workflow sections with example results, decision boundaries, recovery paths, and implementation details.
+
 Codex plugins are documented for the desktop app and CLI; the IDE extension does not currently support them. Treat the IDE extension as a separate future adapter, not a supported plugin installation target. CLI installation requires a new session. [Codex plugin surfaces](https://learn.chatgpt.com/docs/plugins)
 
 | Component | Codex | Claude Code |
@@ -171,7 +173,7 @@ These limits rule out the claim that installing this plugin guarantees all agent
 
 | Hook purpose | Proposed behavior |
 | --- | --- |
-| Session context | Detect an activated repository and show a short status using cached runtime availability. No download, repair, or full test suite. |
+| Session context | Verify an activated repository with its trusted cached evaluator, then inject the verified managed gate, harness contract, and fresh work context. Reuse the same handler after compaction or resume. No download, repair, or full test suite. |
 | Before supported mutations | Ask the evaluator whether the specific governed action is admissible. Return the host's explicit denial on refusal or a caught evaluator failure. |
 | After an action | Collect observations and evidence references. Do not describe a post-action check as prevention. |
 | Completion | Present actual lifecycle state and required human handoff. Require continuation or correction where supported; already displayed text cannot reliably be withdrawn. |
