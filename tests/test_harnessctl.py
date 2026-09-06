@@ -312,6 +312,22 @@ class HarnessCtlTests(unittest.TestCase):
         lock = json.loads((existing / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertNotIn(report.as_posix(), lock["files"])
 
+    def test_adopt_is_a_plain_alias_of_init_for_one_release(self) -> None:
+        # WO-ECP-026 alias window (owner decision of 2026-09-06): the released
+        # 0.15.0 verifier invokes `adopt`, so the name stays for 0.16.0 as an
+        # alias with init's options and init's result.
+        aliased = self.root / "aliased"
+        aliased.mkdir()
+        (aliased / "pyproject.toml").write_text("[project]\nname = \"aliased\"\n", encoding="utf-8")
+        code, output, error = self.invoke("adopt", str(aliased), "--project-name", "Aliased", "--dry-run", "--json")
+        self.assertEqual(0, code, error)
+        payload = json.loads(output)
+        self.assertEqual(("init", "completed", False), (payload["command"], payload["outcome"], payload["written"]))
+        self.assertFalse((aliased / ".engineering-harness.lock").exists())
+        code, output, error = self.invoke("init", str(aliased), "--project-name", "Aliased", "--dry-run", "--json")
+        self.assertEqual(0, code, error)
+        self.assertEqual(payload["changes"], json.loads(output)["changes"])
+
     def test_upgrade_plan_is_read_only_and_apply_preserves_customized_file(self) -> None:
         target = self.root / "upgrade"
         self.assertEqual(0, self.invoke("init", str(target), "--project-name", "Stable Name")[0])

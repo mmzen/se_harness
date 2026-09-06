@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "eb32aee74cfeb7873ba632ae5c14b93367325a969f7ab677e2ed6f1f22f4eab8",
+    "formal_snapshot_sha256": "9dae3fed87f1800188ed0d6ddaa38d833b83a2e1571d36c33f3d51c1ab781316",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -48,7 +48,7 @@
               }
             ],
             "id": "QGP-G4I-SCOPE",
-            "message": "WO-ECP-026 declares 25 normalized scope path(s).",
+            "message": "WO-ECP-026 declares 26 normalized scope path(s).",
             "status": "pass"
           },
           {
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 22 declared changed path(s) are within execution scope.",
+            "message": "All 25 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "8aac4dbc910c658dae082681f3297c60376725feaeec8e2c60bd81c40b34ae71",
+  "result_sha256": "559c080cc9b75b140c48390a156f17144e69e0cdd4040e093ab9ffe4813f4fdf",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -281,7 +281,10 @@
       "docs/engineering/execution-control-plane/evidence/WO-ECP-026/handoff.json",
       "docs/engineering/execution-control-plane/evidence/WO-ECP-026/WO-ECP-026-handoff.md",
       "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-031.md",
       "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-020.md",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-022.md",
       "docs/engineering/execution-control-plane/work-orders/WO-ECP-026.md",
       "docs/engineering/harness-distribution/requirements/REQ-DST-002.md",
       "docs/engineering/harness-distribution/requirements/REQ-DST-025.md",
@@ -292,10 +295,10 @@
       "docs/notes/harness-installation-and-upgrades.md",
       "docs/notes/harnessctl-reference.md",
       "README.md",
+      "se_harness/candidate_acceptance.py",
       "se_harness/cli.py",
       "se_harness/installer.py",
       "se_harness/integrity.py",
-      "tests/test_cli_shape.py",
       "tests/test_glossary.py",
       "tests/test_harnessctl.py",
       "tests/test_public_onboarding.py",
@@ -319,6 +322,7 @@
       "docs/notes/harness-installation-and-upgrades.md",
       "docs/notes/harnessctl-reference.md",
       "README.md",
+      "se_harness/candidate_acceptance.py",
       "se_harness/cli.py",
       "se_harness/installer.py",
       "se_harness/integrity.py",

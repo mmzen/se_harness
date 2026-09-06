@@ -23,7 +23,7 @@ from tests.test_revision_provenance import create_base_chain
 #: ECP-CLI-001: the repository commands take the positional `target`; the three
 #: non-repository commands take none; rehearse-recovery keeps its shape (issue #221).
 REPOSITORY_COMMANDS = {
-    "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
+    "init", "adopt", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
     "pr-body", "transition", "upgrade", "scaffold-domain", "create-artifact", "renumber-artifacts",
     "release-unit", "capture-verification", "prepare-release", "decide",
 }

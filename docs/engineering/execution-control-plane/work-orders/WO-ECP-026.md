@@ -17,6 +17,7 @@ paths = [
   "se_harness/cli.py",
   "se_harness/installer.py",
   "se_harness/integrity.py",
+  "se_harness/candidate_acceptance.py",
   "tests/test_cli_shape.py",
   "tests/test_harnessctl.py",
   "tests/test_glossary.py",
@@ -165,3 +166,19 @@ assertion (the set becomes `init` and `doctor`, and the stale search for a
 backticked `harnessctl adopt` goes). Decided by the accountable engineering
 owner on 2026-09-06 by selecting the presented option "Widen the scope by
 amendment". Nothing else is widened.
+
+## Scope amendment, 2026-09-06 (second)
+
+`se_harness/candidate_acceptance.py` is added to `[execution_scope].paths`.
+The released 0.15.0 verifier's candidate acceptance runs a closed scenario
+list on the candidate wheel and its `adopt` scenario invokes
+`harnessctl adopt`; the list lives in the released evaluator, so the
+candidate cannot change what the qualification lane runs, and removing
+`adopt` outright cannot pass qualification. Decided by the accountable
+engineering owner on 2026-09-06 by selecting the presented option "One-release
+alias window": `adopt` stays registered in 0.16.0 as a plain alias of `init`,
+and the candidate's own acceptance keeps the scenario id `adopt` (the
+contract digest is unchanged) while exercising `init` on a folder with
+content, so the alias can be removed after 0.16.0 is adopted, under
+`REQ-ECP-030`'s one-release rule, by a follow-up work order. The definitions
+record the same decision by dated amendment. Nothing else is widened.

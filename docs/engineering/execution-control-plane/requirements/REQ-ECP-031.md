@@ -66,3 +66,7 @@ managed fragment, the lock is written, and the adoption report names Rust.
 
 **Then** the exit status is 2, standard output is empty and standard error
 carries the parser's usage error.
+
+## Amendment record
+
+**The measure's clause "harnessctl adopt exits 2 with argparse's usage error" is deferred by one release, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** The released 0.15.0 verifier's candidate acceptance invokes `adopt`, so the name stays registered in 0.16.0 as a plain alias of `init` and is removed after 0.16.0 is adopted, under `REQ-ECP-030`'s one-release rule. The obligation, one command whose behaviour follows the target's content, is unchanged: the alias adds no behaviour.
