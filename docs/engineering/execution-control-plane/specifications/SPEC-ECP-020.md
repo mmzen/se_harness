@@ -2,13 +2,20 @@
 id = "SPEC-ECP-020"
 type = "specification"
 title = "The merged installation command: init keyed by the target's content"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
 
 [relations]
 specifies = ["REQ-ECP-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:51:57Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented: rules ECP-INS-001 to ECP-INS-011, the merged init keyed by the target's content, adopt refused by argparse without a guard, the diagnostic, the --dry-run help text, the three notes, the seven amendment records and the tests. Approval of a definition authorizes no work."
 +++
 
 # Specification: The merged installation command: init keyed by the target's content

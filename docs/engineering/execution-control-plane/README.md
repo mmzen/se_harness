@@ -104,7 +104,7 @@ at `f0ecd9b` (`docs/notes/complexity-audit-2026-08.md`).
 - `WO-ECP-021` independent; the managed lane reads the live pull-request body under `REQ-ECP-026` / `SPEC-ECP-015` / `VER-ECP-017`, drafted 2026-08-30 from issue #280 part c; the template only, the root lane follows on the next root adoption.
 - `WO-ECP-022` after `WO-ECP-020` (merged); the command shape under `REQ-ECP-027` / `SPEC-ECP-016` / `VER-ECP-018`, drafted 2026-08-30 from the functional assessment's issue #282; head of the assessment's critical path.
 - `WO-ECP-023` after `WO-ECP-022` (merged); the self-binding Git-derived handoff check under `REQ-ECP-028` / `SPEC-ECP-017` / `VER-ECP-019`, drafted 2026-08-31 from issue #280 part b; the candidate evaluator only, the root keeps the two-run behaviour until the next root adoption.
-- `WO-ECP-026` independent; the merged installation command under `REQ-ECP-031` / `SPEC-ECP-020` / `VER-ECP-022`, drafted 2026-09-06 from the functional assessment's combine table and the owner's request of 2026-09-05; draft, awaiting the four owner approvals; the `ARCH-ECP-001` amendment follows the requirement's approval.
+- `WO-ECP-026` independent; the merged installation command under `REQ-ECP-031` / `SPEC-ECP-020` / `VER-ECP-022`, drafted 2026-09-06 from the functional assessment's combine table and the owner's request of 2026-09-05; no architecture relation, as `WO-ECP-025`.
 - `WO-ECP-008` after `WO-ECP-001`; its skill-retirement item moved to `WO-ECP-006` on 2026-08-29.
 
 This index authorizes no implementation, lifecycle transition, Git action,

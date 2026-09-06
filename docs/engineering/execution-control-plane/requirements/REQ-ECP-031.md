@@ -2,7 +2,7 @@
 id = "REQ-ECP-031"
 type = "requirement"
 title = "One command installs the harness into any target"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -14,6 +14,13 @@ measure = "harnessctl --help lists init and no adopt; init on an absent or empty
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:51:57Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented: one installation command, init, whose behaviour follows the target's content (functional assessment 2026-08-30 section 4.1; the owner's request of 2026-09-05 to merge init and adopt). Approval of a definition authorizes no work."
 +++
 
 # Requirement: One command installs the harness into any target

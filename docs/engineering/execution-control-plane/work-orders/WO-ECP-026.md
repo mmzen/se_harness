@@ -2,7 +2,7 @@
 id = "WO-ECP-026"
 type = "work_order"
 title = "Merge adopt into init: one installation command keyed by the target"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
@@ -31,7 +31,6 @@ paths = [
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-020.md",
   "docs/engineering/execution-control-plane/verification/VER-ECP-022.md",
   "docs/engineering/execution-control-plane/work-orders/WO-ECP-026.md",
-  "docs/engineering/execution-control-plane/architecture/ARCH-ECP-001.md",
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
   "docs/engineering/harness-distribution/specifications/SPEC-DST-003.md",
   "docs/engineering/harness-distribution/requirements/REQ-DST-002.md",
@@ -45,6 +44,13 @@ paths = [
 implements = ["REQ-ECP-031"]
 specifications = ["SPEC-ECP-020"]
 verification = ["VER-ECP-022"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:51:57Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of the declared scope only: the merged init in cli.py and installer.py, the integrity.py diagnostic, the four test modules and one new test, the three notes, the seven amendment records, the domain index, the evidence packet and the verification record. Every decision stays human: no delegation table. It authorizes no release, no publication, no root adoption and no merge; the merges remain the owner's decisions."
 +++
 
 # Work Order: Merge adopt into init: one installation command keyed by the target
@@ -106,9 +112,10 @@ the report path.
 - The `candidate-evidence` workflow's bare `init` keeps working.
 - The suite, `validate`, `doctor` and the handoff check over the
   Git-derived change set pass before completion.
-- The `ARCH-ECP-001` amendment that addresses `REQ-ECP-031` and conforms to
-  `SPEC-ECP-020` is written after the requirement's approval and before
-  this work order's approval, the ordering its earlier records follow.
+- No active architecture addresses `REQ-ECP-031`: the requirement is a
+  routine command-surface change, not an architecturally significant one,
+  so this work order carries no `architecture` relation, as `WO-ECP-025`
+  did for `REQ-ECP-030`.
 
 ## Expected change surface
 

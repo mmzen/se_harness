@@ -2,13 +2,20 @@
 id = "VER-ECP-022"
 type = "verification"
 title = "Independent evidence for the merged installation command"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-06"
 updated = "2026-09-06"
 
 [relations]
 verifies = ["REQ-ECP-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-06T10:51:57Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-06 by the accountable owner with the words 'i approve', given after the packet PR #359 and its summary were presented: the evidence matrix over both target states, the refusal, the diagnostic, the notes and records, and no regression; independent because the former adopt tests keep their assertions byte for byte. Approval of a definition authorizes no work."
 +++
 
 # Verification Contract: Independent evidence for the merged installation command
