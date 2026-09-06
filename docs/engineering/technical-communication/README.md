@@ -241,7 +241,17 @@ and the six artifacts were approved in one transaction. `WO-TCM-009` carries
 the execution delegation class; its delegated start follows on a branch
 from `main` once this packet has merged.
 
-`WO-TCM-009` executes on the branch `wo/tcm-009-execution`, opened on
-2026-09-06 from `main` at `7642132` after PR #358 merged, under the
-execution delegation class its approval granted.
+`WO-TCM-009` executed on the branch `wo/tcm-009-execution` (PR #362),
+opened on 2026-09-06 from `main` at `7642132` after PR #358 merged, under
+the execution delegation class its approval granted: started, completed
+and its record prepared by the delegated executor with the required check
+green at each head. It ships the eight-section `SPECIFICATION.template.md`
+with the `contract` field, the specification checklist with nine optional
+sections, the rule and coverage parsers with `W-AUT-019` to `W-AUT-023`
+and the shared budgets with specification constants, `E-DCM-005` on a
+deviation naming no rule, the `contract`, `rules`, `coverage` and
+`covered_by` projections, the Explorer's anchored rules, coverage table,
+`Covered by` links and departed-rule link, and `SPEC-DCM-001` rule 3
+amended by record. Evidence in `evidence/WO-TCM-009/`, with five
+disclosures; the record is `VREC-TCM-009`.
 
