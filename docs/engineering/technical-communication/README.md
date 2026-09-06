@@ -205,3 +205,39 @@ shared budgets with capability constants beside the intent ones
 Explorer's ability line, plain words and `Derives` list on a capability
 record with the ability under the title in the lineage board. Its evidence
 packet is `evidence/WO-TCM-008/`.
+
+## Reader-first specifications (2026-09-06)
+
+The assessment `docs/notes/assessment-specification-readability-2026-09-06.md`
+(PR #357) measured the 135 specifications on `main` at `aad82a9`, the
+first commit under the 0.15.0 root: median body 760 words at reading grade
+18.4, 79 heading shapes, two rule identities because the template says
+"number rules" and the checklist says "stable identifier", 737 of 1,431
+rules with a normative verb, 26 hand-written coverage tables, and a
+deviation reference with no anchor to resolve to. The owner accepted the
+proposal on 2026-09-06 and set the question of behavioural diagrams aside.
+
+- `REQ-TCM-014`: the reader-first shape, the `contract` field, one rule
+  identity and the rule shape, reported on drafts.
+- `REQ-TCM-015`: coverage of a requirement by named rules, read by the
+  validator and shown on both sides by the Explorer.
+- `REQ-TCM-016`: a deviation names a rule that exists, `E-DCM-005`.
+- `SPEC-TCM-006`: 23 rules `TCM-RFS-001` to `TCM-RFS-023`, written in the
+  shape it prescribes, with a `contract` field and a coverage table.
+- `VER-TCM-006`: the evidence contract for the three requirements.
+- `WO-TCM-009`: the template, the guide, the validator's specification row
+  and rule parser, the generator, the Explorer, the amendment of
+  `SPEC-DCM-001` rule 3, with the execution delegation class.
+- `DEC-TCM-001` to `DEC-TCM-004`: the four owner decisions of the
+  assessment, raised as this repository's first decision artifacts. They
+  block the three requirements until the product owner disposes them with
+  `harnessctl decide`; the recommendation of each is the assessment's.
+
+On 2026-09-06 the repository owner said "approve as recommended" (PR #358).
+The product owner disposed the four decisions with `harnessctl decide`
+(`identifiers`, `eight-sections`, `mechanical-table`,
+`advisory-then-blocking`), the decision predicate `QGP-G1-DECISION` cleared,
+and the six artifacts were approved in one transaction. `WO-TCM-009` carries
+the execution delegation class; its delegated start follows on a branch
+from `main` once this packet has merged.
+
