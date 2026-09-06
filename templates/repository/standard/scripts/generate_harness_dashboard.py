@@ -375,6 +375,16 @@ def normalize_artifacts(
             if capability_id.startswith("CAP-"):
                 deriving_requirements[capability_id].append(requirement.artifact_id)
 
+    # SPEC-TCM-006 TCM-RFS-017: which rules cover a requirement is read from the
+    # coverage tables of the specifications, the same source the record panel shows.
+    covered_by: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for specification in report.artifacts:
+        if specification.artifact_type != "specification" or specification.artifact_id == "<unknown>":
+            continue
+        for requirement_id, rule_ids in _coverage_rows(specification.body) or []:
+            for rule_id in rule_ids:
+                covered_by[requirement_id].append({"specification": specification.artifact_id, "rule": rule_id})
+
     normalized: list[dict[str, Any]] = []
     for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
         item: dict[str, Any] = {
@@ -395,6 +405,25 @@ def normalize_artifacts(
             plain_words = _plain_words(artifact.body)
             if plain_words:
                 item["plain_words"] = plain_words
+            item["covered_by"] = sorted(covered_by.get(artifact.artifact_id, []), key=lambda entry: (entry["specification"], entry["rule"]))
+        if artifact.artifact_type == "specification":
+            # SPEC-TCM-006 TCM-RFS-016: the contract line, the plain words, the rules by
+            # identifier and the coverage table of a specification.
+            contract = _string(artifact.metadata.get("contract")) or None
+            if contract:
+                item["contract"] = contract
+            plain_words = _plain_words(artifact.body)
+            if plain_words:
+                item["plain_words"] = plain_words
+            item["rules"] = [
+                {"id": identifier, "text": text}
+                for identifier, text in _specification_rules(artifact.body)
+                if identifier is not None
+            ]
+            item["coverage"] = [
+                {"requirement": requirement_id, "rules": list(rule_ids)}
+                for requirement_id, rule_ids in _coverage_rows(artifact.body) or []
+            ]
         if artifact.artifact_type == "intent":
             # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.
             outcome = _string(artifact.metadata.get("outcome")) or None
@@ -578,6 +607,64 @@ def _success_measure_row_count(body: Any) -> int:
         if len(cells) < 4:
             return 0
         rows += 1
+    return rows
+
+
+_RULE_IDENTIFIER = re.compile(r"\b[A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3}\b")
+_RULE_LEAD = re.compile(r"^\*\*([A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3})(?:\s*\([^)]*\))?\.?\*\*\.?\s*")
+_FENCED = re.compile(r"```.*?```", re.S)
+
+
+def _sections(body: Any) -> dict[str, str]:
+    """Second-level headings to their text, fenced code removed (SPEC-TCM-006 TCM-RFS-006)."""
+
+    sections: dict[str, str] = {}
+    if not isinstance(body, str):
+        return sections
+    current = ""
+    for line in _FENCED.sub(" ", body.replace("\r\n", "\n")).split("\n"):
+        if line.startswith("## "):
+            current = line[3:].strip()
+            sections.setdefault(current, "")
+        elif current:
+            sections[current] += line + "\n"
+    return sections
+
+
+def _specification_rules(body: Any) -> list[tuple[str | None, str]]:
+    """The rule paragraphs of a specification: (identifier or None, sentence)."""
+
+    sections = _sections(body)
+    section = next((sections[name] for name in ("Rules", "Behavioral rules") if name in sections), None)
+    if section is None:
+        return []
+    rules: list[tuple[str | None, str]] = []
+    # A paragraph is one rule; a numbered or bulleted list item is one paragraph of
+    # its own, so a legacy numbered list reads as one rule per item.
+    for paragraph in re.split(r"\n\s*\n|\n(?=\s*(?:\d+\.|[-*])\s)", section):
+        text = " ".join(line.strip() for line in paragraph.strip().split("\n") if line.strip())
+        if not text:
+            continue
+        lead = _RULE_LEAD.match(text)
+        rules.append((None, text) if lead is None else (lead.group(1), text[lead.end():].strip()))
+    return rules
+
+
+def _coverage_rows(body: Any) -> list[tuple[str, list[str]]] | None:
+    """The rows of a specification's `Coverage` table, or None when the section is absent."""
+
+    section = _sections(body).get("Coverage")
+    if section is None:
+        return None
+    rows: list[tuple[str, list[str]]] = []
+    for line in section.split("\n"):
+        stripped = line.strip()
+        if not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if len(cells) < 2 or set(cells[0]) <= set("-: ") or cells[0].lower() == "requirement":
+            continue
+        rows.append((cells[0].strip("`"), _RULE_IDENTIFIER.findall(cells[1])))
     return rows
 
 

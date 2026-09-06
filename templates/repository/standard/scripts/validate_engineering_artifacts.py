@@ -290,6 +290,18 @@ CAPABILITY_BODY_LIMIT = 150  # words
 CAPABILITY_NEED_WORD_LIMIT = 60
 CAPABILITY_NEED_SENTENCE_LIMIT = 3
 CAPABILITY_CODE_IDENTIFIER_LIMIT = 2
+#: SPEC-TCM-006 TCM-RFS-004 and TCM-RFS-006 to TCM-RFS-013: the reader-first specification
+#: budgets and the rule grammar. The shared codes W-AUT-005, W-AUT-007 and W-AUT-009 fire
+#: with these constants on a specification draft; W-AUT-008 never does (TCM-RFS-013).
+SPECIFICATION_CONTRACT_LIMIT = 30  # words
+SPECIFICATION_RULE_LIMIT = 30  # words, one sentence
+SPECIFICATION_PROSE_LIMIT = 300  # words outside Rules, Failure behaviour, Examples and Coverage
+SPECIFICATION_RULE_SECTIONS = ("Rules", "Behavioral rules")
+SPECIFICATION_UNBUDGETED_SECTIONS = frozenset({"Rules", "Behavioral rules", "Failure behaviour", "Examples", "Coverage"})
+SPECIFICATION_LEGACY_HEADINGS = ("Behavioral rules", "Open decisions", "Approval")
+SPECIFICATION_KEYWORDS = re.compile(r"\b(MUST NOT|MUST|SHALL NOT|SHALL|MAY|refuses)\b")
+RULE_IDENTIFIER = re.compile(r"\b[A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3}\b")
+_RULE_LEAD = re.compile(r"^\*\*([A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3})(?:\s*\([^)]*\))?\.?\*\*\.?\s*")
 _LEGACY_REQUIREMENT_LIST = ("Candidate requirements", "Derived requirements")
 _REPOSITORY_PATH_SPAN = re.compile(r"`[^`\s]*/[^`\s]*\.[A-Za-z0-9]{1,6}(?::\d+(?:-\d+)?)?`")
 _LINE_RANGE_SPAN = re.compile(r"`[^`]*:\d+(?:-\d+)?`")
@@ -314,6 +326,54 @@ def _word_count(text: str) -> int:
 def _sentences(text: str) -> list[str]:
     prose = " ".join(line.strip() for line in _prose(text).split("\n") if line.strip() and not line.strip().startswith(("|", "#", "**Given", "**When", "**Then")))
     return [item.strip() for item in _SENTENCE_END.split(prose) if item.strip()]
+
+
+def _specification_rules(body: str) -> list[tuple[str | None, str]]:
+    """SPEC-TCM-006 TCM-RFS-006: the rule paragraphs of a specification.
+
+    Each paragraph of the first present rules section (`Rules`, or `Behavioral rules`
+    for a legacy file) is one rule: (identifier, sentence) when it opens with a bold
+    rule identifier, (None, text) when it does not."""
+
+    if not isinstance(body, str):
+        return []
+    sections = _body_sections(body)
+    section = next((sections[name] for name in SPECIFICATION_RULE_SECTIONS if name in sections), None)
+    if section is None:
+        return []
+    rules: list[tuple[str | None, str]] = []
+    # A paragraph is one rule; a numbered or bulleted list item is one paragraph of
+    # its own, so a legacy numbered list reads as one rule per item.
+    for paragraph in re.split(r"\n\s*\n|\n(?=\s*(?:\d+\.|[-*])\s)", section):
+        text = " ".join(line.strip() for line in paragraph.strip().split("\n") if line.strip())
+        if not text:
+            continue
+        lead = _RULE_LEAD.match(text)
+        if lead is None:
+            rules.append((None, text))
+        else:
+            rules.append((lead.group(1), text[lead.end():].strip()))
+    return rules
+
+
+def _coverage_rows(body: str) -> list[tuple[str, list[str]]] | None:
+    """SPEC-TCM-006 TCM-RFS-015: the rows of the `Coverage` table, or None when absent."""
+
+    if not isinstance(body, str):
+        return None
+    section = _body_sections(body).get("Coverage")
+    if section is None:
+        return None
+    rows: list[tuple[str, list[str]]] = []
+    for line in section.split("\n"):
+        stripped = line.strip()
+        if not stripped.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+        if len(cells) < 2 or set(cells[0]) <= set("-: ") or cells[0].lower() == "requirement":
+            continue
+        rows.append((cells[0].strip("`"), RULE_IDENTIFIER.findall(cells[1])))
+    return rows
 
 
 def _body_sections(body: str) -> dict[str, str]:
@@ -353,6 +413,11 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
             capability_errors, capability_advisories = _capability_authoring(artifact, report_root)
             errors.extend(capability_errors)
             advisories.extend(capability_advisories)
+            continue
+        if artifact.artifact_type == "specification":
+            specification_errors, specification_advisories = _specification_authoring(artifact, report_root)
+            errors.extend(specification_errors)
+            advisories.extend(specification_advisories)
             continue
         if artifact.artifact_type != "requirement":
             continue
@@ -578,6 +643,86 @@ def _capability_authoring(artifact: Artifact, report_root: Path) -> tuple[list[D
     if legacy:
         found.append(Diagnostic(path, "W-AUT-018",
             f"body carries a {legacy[0]} list; the requirements that derive from a capability are read from the graph and shown by the Explorer", "maintenance"))
+    return errors, found
+
+
+def _specification_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-TCM-006 TCM-RFS-004 and TCM-RFS-007 to TCM-RFS-014: the contract field and the specification draft advisories."""
+
+    errors: list[Diagnostic] = []
+    found: list[Diagnostic] = []
+    contract = artifact.metadata.get("contract")
+    if contract is not None and (not isinstance(contract, str) or not contract.strip()):
+        _add_error(errors, artifact, report_root, "E-AUT-002", "contract must be a non-empty string when present", plane="structure")
+    if artifact.status != "draft":
+        return errors, found
+    path = _display_path(artifact.path, report_root)
+    # TCM-RFS-007: the contract sentence.
+    if not isinstance(contract, str) or not contract.strip():
+        found.append(Diagnostic(path, "W-AUT-019", "specification has no contract; one sentence says what an implementation must do to conform", "maintenance"))
+    else:
+        contract_words = _word_count(contract)
+        contract_sentences = len(_sentences(contract))
+        contract_spans = len(_CODE_SPAN.findall(contract))
+        if contract_words > SPECIFICATION_CONTRACT_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-019", f"contract is {contract_words} words; the budget is {SPECIFICATION_CONTRACT_LIMIT}", "maintenance"))
+        if contract_sentences > 1:
+            found.append(Diagnostic(path, "W-AUT-019", f"contract is {contract_sentences} sentences; the budget is one", "maintenance"))
+        if contract_spans:
+            found.append(Diagnostic(path, "W-AUT-019", f"contract cites {contract_spans} code identifiers; the contract says what conformance is, the rules say how", "maintenance"))
+    body = artifact.body if isinstance(artifact.body, str) else ""
+    sections = _body_sections(body)
+    # TCM-RFS-008 and TCM-RFS-009: rule identity and rule shape.
+    rules = _specification_rules(body)
+    seen: set[str] = set()
+    for identifier, text in rules:
+        if identifier is None:
+            found.append(Diagnostic(path, "W-AUT-020", f"a rule opens with no identifier: {text[:60]!r}; every rule leads with <PREFIX>-<AREA>-NNN in bold", "maintenance"))
+            continue
+        if identifier in seen:
+            found.append(Diagnostic(path, "W-AUT-020", f"rule identifier {identifier} is defined twice; an identifier names one rule and is never reused", "maintenance"))
+        seen.add(identifier)
+        rule_words = _word_count(text)
+        rule_sentences = len(_sentences(text))
+        if rule_words > SPECIFICATION_RULE_LIMIT:
+            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} is {rule_words} words; the budget is {SPECIFICATION_RULE_LIMIT}", "maintenance"))
+        if rule_sentences > 1:
+            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} is {rule_sentences} sentences; a rule is one testable sentence", "maintenance"))
+        if SPECIFICATION_KEYWORDS.search(_prose(text)) is None:
+            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} carries no MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; a rule is a sentence someone can fail", "maintenance"))
+    # TCM-RFS-010: the coverage table against `specifies`.
+    specifies = [item for item in artifact.metadata.get("relations", {}).get("specifies", []) if isinstance(item, str)] if isinstance(artifact.metadata.get("relations"), dict) else []
+    rows = _coverage_rows(body)
+    if rows is None:
+        found.append(Diagnostic(path, "W-AUT-022", "body has no Coverage table; each specified requirement maps to the rule identifiers that meet it", "maintenance"))
+    else:
+        covered = {requirement for requirement, _ in rows}
+        for requirement in specifies:
+            if requirement not in covered:
+                found.append(Diagnostic(path, "W-AUT-022", f"Coverage has no row for {requirement}, which this specification specifies", "maintenance"))
+        for requirement, identifiers in rows:
+            for identifier in identifiers:
+                if identifier not in seen:
+                    found.append(Diagnostic(path, "W-AUT-022", f"Coverage row {requirement} names {identifier}, which the rules section does not define", "maintenance"))
+    # TCM-RFS-011: legacy headings.
+    legacy = [heading for heading in sections if heading in SPECIFICATION_LEGACY_HEADINGS]
+    if legacy:
+        found.append(Diagnostic(path, "W-AUT-023", f"body carries a {legacy[0]} heading; the reader-first shape names the section Rules and records decisions and approvals in their own artifacts", "maintenance"))
+    # TCM-RFS-012: the shared budgets with specification constants; TCM-RFS-013: no W-AUT-008.
+    prose = "\n".join(text for heading, text in sections.items() if heading not in SPECIFICATION_UNBUDGETED_SECTIONS)
+    prose_words = _word_count(prose)
+    if prose_words > SPECIFICATION_PROSE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-005", f"body prose outside the rules, failure, examples and coverage sections is {prose_words} words; the budget is {SPECIFICATION_PROSE_LIMIT}", "maintenance"))
+    outside_rules = "\n".join(text for heading, text in sections.items() if heading not in SPECIFICATION_RULE_SECTIONS)
+    longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(outside_rules)), default=0)
+    if longest > AUTHORING_SENTENCE_LIMIT:
+        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+    plain = sections.get("In plain words")
+    if body.strip() and plain is None:
+        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+    elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
+        found.append(Diagnostic(path, "W-AUT-009",
+            f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     return errors, found
 
 
@@ -2835,6 +2980,10 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
                 _add_error(errors, artifact, report_root, "E-DCM-001", f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
             elif catalog[reference[0]].artifact_type != "specification":
                 _add_error(errors, artifact, report_root, "E-DCM-001", f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
+            elif reference[1] not in {identifier for identifier, _ in _specification_rules(catalog[reference[0]].body) if identifier}:
+                # SPEC-TCM-006 TCM-RFS-020: the fragment names a rule identifier the specification defines.
+                _add_error(errors, artifact, report_root, "E-DCM-005",
+                    f"deviation departs from '{reference[0]}#{reference[1]}', which names no rule identifier of {reference[0]}", plane="governance")
             if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
                 _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation records the observed fact in 'observed'", plane="structure")
             if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):

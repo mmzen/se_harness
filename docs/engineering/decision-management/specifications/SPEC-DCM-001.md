@@ -79,8 +79,10 @@ against the same rule is disposed `amend` or `supersede`.
 2. **Kinds.** `kind` is `"question"` or `"deviation"`. Both need `question`
    (one sentence), `raised_by`, at least two `[[options]]` each with `id`
    and `label`, and `recommendation` naming one option id.
-3. **Deviation fields.** A deviation also needs `against` (one artifact id
-   and one rule reference, for example `SPEC-DST-014#rule-7`) and
+3. **Deviation fields.** A deviation also needs `against` (one specification
+   id and one rule identifier, for example `SPEC-TCM-006#TCM-RFS-009`; the
+   validator reports `E-DCM-005` when the fragment names no rule identifier
+   of that specification, `SPEC-TCM-006` rule `TCM-RFS-020`) and
    `observed` (the fact that cannot be met). Its options are exactly
    `amend`, `supersede`, `accept`, `stop`, in any subset of at least two
    that includes `stop`.
@@ -255,3 +257,11 @@ transition pairs.
   before this amendment still carries the section, it reads `None` or lists
   decision ids, and prose there stays `E-DCM-004`. The threshold in the
   first sentence is unchanged.
+- 2026-09-06, under `WO-TCM-009` (approved with execution delegation, PR
+  #358), by the delegated executor, recorded for the owner's verification.
+  Rule 3's example was `SPEC-DST-014#rule-7`, a fragment no specification
+  renders and nothing checked. `SPEC-TCM-006` rule `TCM-RFS-020` makes the
+  fragment a rule identifier of the named specification and the validator
+  reports `E-DCM-005` otherwise; rule 3 now shows an identifier and names
+  the check. The deviation's fields, options and decision right are
+  unchanged.

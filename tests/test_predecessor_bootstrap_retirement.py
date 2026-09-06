@@ -201,6 +201,20 @@ AUT004_CANDIDATE_VALIDATOR_EDITS = (
 )
 AUT004_CANDIDATE_VALIDATOR_LINE_DELTA = 46
 
+#: WO-TCM-009 (SPEC-TCM-006): the candidate copy is the 0.15.0 root copy plus the
+#: reader-first specification rules, inserted block by block: the specification
+#: constants and rule grammar, the rule and coverage parsers, the dispatch, the
+#: `_specification_authoring` function (W-AUT-019 to W-AUT-023 and the shared codes
+#: with specification constants) and the `E-DCM-005` branch of the deviation check.
+TCM009_CANDIDATE_VALIDATOR_INSERTIONS = (
+    (293, 12, "#: SPEC-TCM-006 TCM-RFS-004 and TCM-RFS-006 to TCM-RFS-013: the reader-first specification"),
+    (317, 48, ""),
+    (356, 5, "            continue"),
+    (581, 80, "    return errors, found"),
+    (2838, 4, "            elif reference[1] not in {identifier for identifier, _ in _specification_rules(catalog[reference[0]].body) if identifier}:"),
+)
+TCM009_CANDIDATE_VALIDATOR_INSERTED_LINES = 149
+
 #: WO-DCM-001 (SPEC-DCM-001), WO-TCM-005 (SPEC-TCM-003), WO-TCM-007 (SPEC-TCM-004)
 #: and WO-TCM-008 (SPEC-TCM-005): the candidate copy is the 0.14.0 root copy with the
 #: decision artifact's validation (kinds, options, relations, dispositions, standing
@@ -560,6 +574,15 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # candidate template byte for byte; the deletion ledger below describes the
             # 0.7.1 root and is retained for that state only.
             if "validate_agentic_delegations" not in self.root_text:
+                if "_specification_authoring" in self.candidate_text and "_specification_authoring" not in self.root_text:
+                    # WO-TCM-009 (SPEC-TCM-006): the candidate copy is the 0.15.0 root copy plus
+                    # the reader-first specification rules (the contract field, the rule parser,
+                    # W-AUT-019 to W-AUT-023, the specification constants, E-DCM-005), declared
+                    # block by block; a root released with them takes the equality branch below.
+                    self._assert_root_plus_declared_insertions(
+                        TCM009_CANDIDATE_VALIDATOR_INSERTIONS, TCM009_CANDIDATE_VALIDATOR_INSERTED_LINES
+                    )
+                    return
                 if "validate_decisions" in self.candidate_text and "validate_decisions" not in self.root_text:
                     # WO-DCM-001 (SPEC-DCM-001): the candidate copy is the 0.14.0 root copy with
                     # the decision artifact's validation, declared opcode by opcode; a root
