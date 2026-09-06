@@ -19,7 +19,7 @@ from tests.test_revision_provenance import create_base_chain, formal, write
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates"
 GUIDE = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md"
-EXPLORER_TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html"
+EXPLORER_TEMPLATE = REPOSITORY_ROOT / "se_harness/engine/harness_explorer/index.template.html"
 
 CONTRACT = "A conforming succession qualifies the exact evaluator pair under the managed check and refuses every other pair."
 PLAIN = "Moving from one released version to the next is checked the same way every time."

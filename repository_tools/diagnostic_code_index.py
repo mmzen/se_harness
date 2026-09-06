@@ -21,12 +21,13 @@ import sys
 from pathlib import Path
 
 NOTE_RELATIVE = "docs/notes/diagnostic-codes.md"
-#: The candidate source trees. The hash-locked root `scripts/` copies are the
-#: released evaluator's files and are never scanned (TCM-DCI-001).
+#: The candidate source trees. The evaluator's own scripts live under
+#: `se_harness/engine/` since WO-DST-024 (SPEC-DST-025); the hash-locked root
+#: `scripts/` copies are the released evaluator's files and are never scanned
+#: (TCM-DCI-001).
 SCAN_ROOTS = (
     "se_harness",
     "repository_tools",
-    "templates/repository/standard/scripts",
 )
 #: Diagnostic prefixes only (TCM-DCI-002): (component, one-sentence meaning),
 #: in the order the page presents them.

@@ -104,7 +104,10 @@ def _workflow_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _load_workflow_lifecycles() -> MappingProxyType:
-    path = Path(__file__).resolve().parent.parent / "docs" / "engineering" / "WORKFLOW.json"
+    # SPEC-DST-025 DST-ENG-003: the script ships inside the package and reads the
+    # package's own copy of the managed workflow contract, byte-identical to the
+    # template's docs/engineering/WORKFLOW.json.
+    path = Path(__file__).resolve().parent.parent / "workflow_contract.json"
     try:
         raw = path.read_bytes()
         if len(raw) > 2_000_000:

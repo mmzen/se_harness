@@ -24,7 +24,7 @@ from se_harness.evaluator_identity import (
     installed_evaluator_identity,
     wheel_payload_sha256,
 )
-from se_harness.installer import HarnessError, template_root
+from se_harness.installer import ENGINE_ROOT, HarnessError, template_root
 from se_harness.integrity import IntegrityError, parse_lock
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import (
@@ -323,7 +323,7 @@ def _tracked_clean(root: Path) -> bool:
 
 
 def _validator_report(root: Path) -> dict[str, Any]:
-    validator = template_root() / "scripts" / "validate_engineering_artifacts.py"
+    validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
     if not validator.is_file():
         raise HarnessError("installed engineering validator is unavailable")
     completed = _run(

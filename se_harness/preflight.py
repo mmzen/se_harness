@@ -14,6 +14,7 @@ from types import ModuleType
 from typing import Any, Iterable
 
 from se_harness.installer import (
+    ENGINE_ROOT,
     CONFIG_NAME,
     LOCK_NAME,
     HarnessError,
@@ -52,9 +53,6 @@ REQUIRED_PATHS = (
     "docs/engineering/TECHNICAL_COMMUNICATION.md",
     "docs/engineering/OPERATING_CARD.md",
     "docs/engineering/ARTIFACT_AUTHORING.md",
-    "scripts/validate_engineering_artifacts.py",
-    "scripts/generate_harness_dashboard.py",
-    "scripts/harness_explorer/index.template.html",
 )
 READING_PATHS = (
     "ENGINEERING_HARNESS.md",
@@ -241,7 +239,7 @@ def _load_validator_module() -> ModuleType:
     global _VALIDATOR_MODULE
     if _VALIDATOR_MODULE is not None:
         return _VALIDATOR_MODULE
-    path = template_root() / "scripts" / "validate_engineering_artifacts.py"
+    path = ENGINE_ROOT / "validate_engineering_artifacts.py"
     if not path.is_file():
         raise HarnessError(f"missing distribution validator: {path}")
     module_name = "_se_harness_distribution_validator"

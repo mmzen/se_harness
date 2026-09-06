@@ -691,21 +691,15 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn("FAIL distribution:AGENTS.md", output)
 
     def test_pull_request_work_order_selection_is_strict(self) -> None:
+        # SPEC-DST-025 DST-ENG-008: the selector script is retired; the
+        # `select-work-order` command is the only interface.
         target = self.installed_target()
-        script = target / "scripts" / "select_harness_work_order.py"
+        self.assertFalse((target / "scripts").exists())
         event = self.root / "event.json"
         event.write_text(
             json.dumps({"pull_request": {"body": "Summary\n\nHarness-Work-Order: WO-IAR-001\n"}}),
             encoding="utf-8",
         )
-        completed = subprocess.run(
-            [sys.executable, str(script), "--event", str(event)],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(0, completed.returncode, completed.stderr)
-        self.assertEqual("WO-IAR-001", completed.stdout.strip())
         code, output, error = self.invoke("select-work-order", "--event", str(event))
         self.assertEqual(0, code, error)
         self.assertEqual("WO-IAR-001", output.strip())
@@ -717,14 +711,6 @@ class InstructionArchitectureTests(unittest.TestCase):
             "Harness-Work-Order: WO-...\n",
         ):
             event.write_text(json.dumps({"pull_request": {"body": body}}), encoding="utf-8")
-            completed = subprocess.run(
-                [sys.executable, str(script), "--event", str(event)],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            self.assertEqual(2, completed.returncode)
-            self.assertIn("expected exactly one", completed.stderr)
             code, _, error = self.invoke("select-work-order", "--event", str(event))
             self.assertEqual(2, code)
             self.assertIn("expected exactly one", error)

@@ -12,7 +12,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CANDIDATE_SCRIPTS = ROOT / "templates/repository/standard/scripts"
+CANDIDATE_SCRIPTS = ROOT / "se_harness/engine"
 MANAGED_GENERATOR = ROOT / "scripts/generate_harness_dashboard.py"
 if str(CANDIDATE_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(CANDIDATE_SCRIPTS))
@@ -124,7 +124,7 @@ def temporal_findings(
 class DashboardWebUIContractTests(unittest.TestCase):
     def setUp(self) -> None:
         self.template = ROOT / "scripts/harness_explorer/index.template.html"
-        self.canonical = ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html"
+        self.canonical = ROOT / "se_harness/engine/harness_explorer/index.template.html"
 
     # Identity-aware (WO-HUP-014, SPEC-HUP-014 rule 10): the root copy of the
     # Explorer template belongs to the root's version, not to this test. The

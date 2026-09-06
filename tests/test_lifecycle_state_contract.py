@@ -234,12 +234,12 @@ class LifecycleStateContractTests(unittest.TestCase):
                 scripts.mkdir(parents=True)
                 engineering.mkdir(parents=True)
                 shutil.copy2(
-                    ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py",
+                    ROOT / "se_harness/engine/artifact_layout_registry.py",
                     scripts / "artifact_layout_registry.py",
                 )
                 validator_path = scripts / "validate_engineering_artifacts.py"
                 shutil.copy2(
-                    ROOT / "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+                    ROOT / "se_harness/engine/validate_engineering_artifacts.py",
                     validator_path,
                 )
                 (engineering / "WORKFLOW.json").write_text(contract, encoding="utf-8")

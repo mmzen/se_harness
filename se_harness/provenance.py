@@ -19,7 +19,7 @@ import tomllib
 from se_harness import mutation_guard
 from se_harness.gate_source import DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
-from se_harness.installer import HarnessError, ensure_target, safe_destination, template_root
+from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import load_lifecycle_registry
 
 
@@ -164,7 +164,7 @@ def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]],
 
 
 def _validation_catalog(repository_root: Path) -> dict[str, dict[str, Any]]:
-    script = template_root() / "scripts" / "validate_engineering_artifacts.py"
+    script = ENGINE_ROOT / "validate_engineering_artifacts.py"
     if not script.is_file():
         raise EvidenceRefusal(f"missing managed validator: {script}")
     completed = _run([sys.executable, str(script), "--root", str(repository_root), "--json"], cwd=repository_root)
@@ -392,7 +392,7 @@ def _timestamp() -> str:
 
 
 def _generate_snapshot(repository_root: Path) -> str:
-    script = template_root() / "scripts" / "generate_harness_dashboard.py"
+    script = ENGINE_ROOT / "generate_harness_dashboard.py"
     if not script.is_file():
         raise EvidenceRefusal(f"missing managed dashboard generator: {script}")
     completed = _run([sys.executable, str(script), "--root", str(repository_root)], cwd=repository_root)

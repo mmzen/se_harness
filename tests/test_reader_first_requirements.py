@@ -187,7 +187,7 @@ class ReaderFirstRequirementTests(unittest.TestCase):
             if candidate.get("artifact", {}).get("id") == "REQ-002"
         )
         self.assertNotIn("plain_words", detail["artifact"])
-        template = (REPOSITORY_ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html").read_text(encoding="utf-8")
+        template = (REPOSITORY_ROOT / "se_harness/engine/harness_explorer/index.template.html").read_text(encoding="utf-8")
         self.assertIn("plainWords", template)
         self.assertLess(template.index("{{statementNodes}}"), template.index("{{plainWords}}"))
 

@@ -498,7 +498,7 @@ class InspectionReportTests(unittest.TestCase):
 
     def test_released_root_remains_locked_while_candidate_reuses_snapshot(self) -> None:
         root_script = ROOT / "scripts/inspect_engineering_artifacts.py"
-        canonical = ROOT / "templates/repository/standard/scripts/inspect_engineering_artifacts.py"
+        canonical = ROOT / "se_harness/engine/inspect_engineering_artifacts.py"
         lock = json.loads((ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual(
             lock["files"]["scripts/inspect_engineering_artifacts.py"]["sha256"],
@@ -512,10 +512,13 @@ class InspectionReportTests(unittest.TestCase):
         self.assertNotIn("def validate_repository", source)
         self.assertNotIn("def _finding(", source)
         self.assertIn('"W-REB-003"', source)
-        self.assertIn(
-            '"templates/repository/standard/scripts/inspect_engineering_artifacts.py"',
+        # SPEC-DST-025 DST-ENG-001, DST-ENG-003: the inspector ships as a module of
+        # the se_harness.engine package, not as a template data file.
+        self.assertNotIn(
+            "templates/repository/standard/scripts",
             (ROOT / "pyproject.toml").read_text(encoding="utf-8"),
         )
+        self.assertTrue((ROOT / "se_harness/engine/__init__.py").is_file())
 
 
 if __name__ == "__main__":
