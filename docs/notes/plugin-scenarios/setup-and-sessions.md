@@ -14,60 +14,69 @@ The **launcher** selects the trusted evaluator outside the repository. The **bri
 
 ### 1. Purpose and starting point
 
-**Purpose:** Make Verity Plane available in the coding host without manual Python environment setup.
+**Purpose:** Install `verity-plane`, load its skills and hooks, and prepare Python plus `se-harness` without manual environment commands.
 
-- **Starts when:** The user chooses to install the plugin and prepare its runtime.
-- **Requires:** A supported host and platform, a trusted plugin source, and an approved runtime source or preloaded cache.
-- **Successful result:** Skills and hooks are discoverable, and the selected external evaluator is available. Repository setup remains a separate operation.
+- **Starts when:** The user installs the plugin for their account, before connecting a repository.
+- **Requires:** Codex or Claude Code, access to the published plugin catalog, and network access or a preloaded runtime.
+- **Successful result:** The `setup` skill is available, the evaluator's identity passes, and hook status is reported separately.
+
+**New** below means a proposed Verity Plane component or command that must be built. The proposed plugin and marketplace are both named `verity-plane`; they are not published yet. `MARKETPLACE_SOURCE` means the catalog URL or repository supplied by its publisher.
 
 ### 2. Workflow
 
 ```text
-User installs the native plugin
+User installs verity-plane → host loads its manifest
         ↓
-Host loads components and presents required trust decisions
+SessionStart → hooks/handler [New] → cached runtime check
         ↓
-User invokes setup; launcher prepares the trusted runtime
+User invokes setup [New] → agent calls bin/launcher [New]
         ↓
-Report component availability and repository setup action
+Preview → authorized runtime preparation → existing identity check
+        ↓
+Report plugin, runtime, and hook status
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User and host | Install the native package in the selected host scope. |
-| 2 | User | Complete host trust requirements for the actual hook definitions. |
-| 3 | Setup skill and launcher | Select the required release and show any runtime download before performing the authorized setup. |
-| 4 | Runtime manager | Verify distribution bytes, install into an isolated cache, and validate the evaluator identity. |
-| 5 | Setup skill | Report runtime and component readiness, including missing or unsupported components. |
+| 1 | User → existing plugin manager | **Codex:** open **Plugins**, or `/plugins` in the CLI, and install `verity-plane` from its configured catalog. **Claude Code:** register the catalog with `/plugin marketplace add MARKETPLACE_SOURCE`, then run `/plugin install verity-plane@verity-plane` in user scope. |
+| 2 | Host → plugin manifest | Read `.codex-plugin/plugin.json` or `.claude-plugin/plugin.json` **[New]**. Discover `skills/setup/SKILL.md` and register `hooks/hooks.json` **[New]**. Codex loads the plugin in a new session; Claude Code applies changes with `/reload-plugins`. |
+| 3 | User → host hook controls | In Codex, review and trust the hook definition; the CLI exposes `/hooks`. Start a fresh session after enablement/trust to exercise `SessionStart`. A skipped first event is not replayed by the setup skill. |
+| 4 | `SessionStart` → `hooks/handler` **[New]** | Call `bin/launcher runtime-status --json` **[New]**, using cached files only. Record whether the runtime is available. In an unconnected project, return quietly; do not install anything or invoke a skill. |
+| 5 | User → `setup` skill **[New]** | **Codex:** ask “Use the verity-plane setup skill to prepare its runtime.” **Claude Code:** invoke `/verity-plane:setup runtime`. The main agent reads `skills/setup/SKILL.md`. |
+| 6 | Agent → existing shell tool | Use Codex `exec_command`, or Claude Code `Bash` / native `PowerShell`, to call `bin/launcher runtime-preview --json` **[New]**. Return the exact version, downloads, cache destination, and plan ID. |
+| 7 | Agent → `bin/launcher` **[New]** | Present those effects and resolve any missing authorization. Call `runtime-prepare --plan-id PLAN_ID --json` for that plan. The launcher downloads verified Python and wheel files, installs into staging, checks identity, then activates the completed runtime. |
+| 8 | Agent following `setup` | Call `runtime-status` again. Report runtime availability from its result and hook status from observed host evidence. If no hook run was observed, say **unconfirmed**. |
+
+Installation never starts `setup` automatically. Repository initialization is [scenario 2](#scenario-2-initialize-or-adopt-a-repository); governance injection is [scenario 3](#scenario-3-start-a-session).
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | Guide explicit installation follow-up. | **New:** setup instructions; existing orient forbids installation. |
-| **Hook** | Report unavailable setup in later sessions. | **New:** session registration; it performs no installation. |
-| **Script** | Obtain and select the runtime. | **New:** trusted bootstrap, isolated cache, and platform launcher. |
-| **Tool/interface** | Present installation and setup. | **Adapt:** native plugin interface plus a structured setup operation. |
-| **Evaluator** | Report the installed evaluator identity. | **Reuse:** released version and runtime identity inspection. |
-| **Subagent** | Not used. | **Not used:** installation needs deterministic processing. |
-| **Human** | Choose the plugin source and setup effects. | **New:** host installation/trust interaction; no engineering decision is granted. |
-| **External control** | Constrain package provenance and protected effects. | **New:** trusted release catalog; remote authorization remains independently enforced. |
+| **Skill** | `setup`, at `skills/setup/SKILL.md`, guides steps 5–8. | **New:** runtime setup mode. Existing `harness-orient` and `harness-operator-brief` are not invoked; they require an installed repository. |
+| **Hook** | `SessionStart` invokes `hooks/handler` through `hooks/hooks.json`. | **Reuse:** host event. **New:** registration and handler; cached checks only. |
+| **Script** | `bin/launcher` performs runtime preview, preparation, and status. | **New:** platform executable, usable before Python exists. `scripts/bridge` is not used in this scenario. |
+| **Tool/interface** | Plugin manager installs; `exec_command`, `Bash`, or `PowerShell` runs the launcher. | **Reuse:** host interfaces. No new MCP server is needed. |
+| **Evaluator** | `harnessctl --version` and `harnessctl identity` check the installed package. | **Reuse:** existing CLI and `inspect_runtime_identity()`. No `doctor` call before repository setup. |
+| **Subagent** | Not used. | **Not used:** the main agent follows `setup`; executable code installs the runtime. |
+| **Human** | Select the plugin, complete hook trust, and authorize setup effects. | **Reuse:** existing host controls and user authorization. |
+| **External control** | No merge, release, or publication occurs. | **Not used:** this scenario establishes no external-action authority. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Required hook is untrusted or unavailable. | Setup reports incomplete readiness. | User resolves trust or selects a supported host. |
-| Download or identity check fails. | Launcher refuses to activate that runtime. | Retry from the trusted source or use a verified preloaded cache. |
-| Setup is interrupted. | Incomplete cache content remains unavailable for execution. | Runtime manager cleans up its staging area and retries; it preserves the previous working runtime. |
+| Hook is untrusted, disabled, or not observed. | Report that status; runtime success does not prove hook activation. | Resolve host enablement/trust, then observe a fresh `SessionStart`. |
+| Download, digest, or `identity` check fails. | `bin/launcher` does not activate the staged runtime. | Correct the source/cache problem and retry setup. |
+| Preparation is interrupted or the reviewed plan changes. | Keep incomplete files inactive; reject stale plan IDs. | Run `runtime-preview` again and resume only the current authorized plan. |
 
 ### 5. Example result
 
 Illustrative output:
 
-> Plugin components and the selected evaluator are available.
-> No repository files or lifecycle states changed.
-> Next: connect the intended repository through setup.
+> Plugin: loaded. Runtime: installed; version and identity checks passed. SessionStart: observed.
+> No repository files changed.
+> Next: connect the repository using setup.
 
 ### 6. Implementation details
 
@@ -76,32 +85,45 @@ Illustrative output:
 
 **Current implementation**
 
-The baseline ships a Python package and repository installer, without native manifests or a runtime manager. See [package configuration](../../../pyproject.toml) and [runtime identity](../../../se_harness/runtime_identity.py). Source inspection only.
+The baseline ships [`harness-orient` and `harness-operator-brief`](../../../pyproject.toml), plus the [identity CLI](../../../se_harness/cli.py) and [identity implementation](../../../se_harness/runtime_identity.py). It ships none of the components marked **New** above.
+
+The launcher executes the installed package through an absolute interpreter with `-I -m se_harness`; it clears inherited `PYTHONPATH`. These existing CLI forms were inspected:
+
+```text
+harnessctl --version
+harnessctl identity --role released-evaluator --expected-version VERSION --expected-root RUNTIME_ROOT --checkout-root WORKSPACE --require-isolated-python --json
+```
+
+`VERSION` and `RUNTIME_ROOT` come from the trusted catalog and authorized setup plan. `WORKSPACE` is the current project path, used to prove the evaluator is outside it. These checks do not substitute for verifying downloaded bytes before execution.
 
 **Proposed additions**
 
-Bootstrap must work without preinstalled Python. Verify the launcher, interpreter, and package before execution; use an absolute isolated interpreter. A repository cannot supply an executable or arbitrary download URL. Select each repository's exact evaluator; plugin updates do not upgrade repositories. See the [runtime trust design](../plugin-installation-proposal-2026-09-06.md#make-runtime-provisioning-a-product-feature).
+`bin/launcher` and `hooks/handler` are proposed native executables, with `.exe` builds on Windows. Their names describe functions, not Python scripts. The launcher reads `runtime/catalog.json` **[New]**: the default evaluator version and platform-specific interpreter/wheel identities from trusted release metadata.
+
+The three proposed commands are `runtime-preview`, `runtime-prepare --plan-id PLAN_ID`, and `runtime-status`. `runtime-preview` returns the plan ID; `runtime-prepare` checks that the plan and its inputs still match before writing. All support `--json`. The handler invokes the same `runtime-status` operation as the skill. Existing-repository version selection belongs to scenario 2; this first-install example uses the catalog's default.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Host/platform, trusted release metadata, and selected release identity.
-- **Outputs:** Available components, runtime identity, and unresolved setup steps.
-- **Writes:** Host plugin registration and external runtime cache; no repository writes.
+- **Inputs:** Host/platform, installed plugin root, trusted catalog, workspace boundary, and authorized plan ID.
+- **Outputs:** Plan and runtime results as JSON; separate plugin/runtime/hook status for the user.
+- **Writes:** User-level plugin registration and its persistent data directory, including setup plans, staging, and completed runtimes. No repository writes.
 
 **Host differences**
 
-- **Codex:** Native packages use `.codex-plugin/plugin.json`; plugin installation and hook trust are separate. CLI installation needs a new session. [Plugin documentation](https://learn.chatgpt.com/docs/plugins), [hook trust](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks).
-- **Claude Code:** Native packages use `.claude-plugin/plugin.json`; plugin data storage is separate from the changing plugin cache. [Plugin reference](https://code.claude.com/docs/en/plugins-reference).
+- **Codex:** [Plugins](https://learn.chatgpt.com/docs/plugins) documents installation and new sessions; [hooks](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks) documents `/hooks` and separate trust. Resolve executable paths from the installed plugin, using `PLUGIN_ROOT` / `PLUGIN_DATA` in hooks.
+- **Claude Code:** [Installation](https://code.claude.com/docs/en/discover-plugins) documents `/plugin` and `/reload-plugins`; [tools](https://code.claude.com/docs/en/tools-reference) names `Bash` and native Windows `PowerShell`. Hooks use `CLAUDE_PLUGIN_ROOT` / `CLAUDE_PLUGIN_DATA`. [Plugin paths](https://code.claude.com/docs/en/plugins-reference#environment-variables) describe their resolution.
+
+Always invoke the resolved absolute launcher path, with host-appropriate quoting. Do not rely on `PATH`. Reloading plugin definitions is not evidence that a particular hook ran.
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Clean machine without Python → verified runtime and discoverable components.
-- **Refusal:** Modified runtime bytes → no activation or candidate-source fallback.
-- **Recovery:** Interrupted or concurrent installation → one complete runtime; no partial executable selection.
+- **Success:** No Python installed → explicit `setup` installs and verifies the runtime; host evidence confirms hook execution.
+- **Refusal:** Untrusted hook or modified download → no false activation claim.
+- **Recovery:** Interrupted installation → retry without selecting partial files or damaging a working runtime.
 
 **Open questions**
 
-Choose the interpreter provider and authenticate its release metadata. Prove support on native Windows, Linux, and macOS before publishing the support matrix.
+Select the interpreter provider and catalog authentication method. Test launcher builds and hook-status observation on each supported host/platform. These remain implementation decisions; the named files and commands above are the proposed interface.
 
 </details>
 
