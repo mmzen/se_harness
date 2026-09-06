@@ -40,6 +40,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same canonical repository skills without duplicating workflow authority? |
 | [Proposal: installation through Codex and Claude Code plugins, 2026-09-06](plugin-installation-proposal-2026-09-06.md) | What changes would remove manual environment setup, how would native skills, hooks, and agents fit, and which authority boundaries need independent enforcement? |
+| [Plugin operation workflows, 2026-09-06](plugin-operation-workflows-2026-09-06.md) | How do init, artifact packages, work-order start, evidence, verification, and delivery map onto skills, hooks, scripts, agents, and the existing evaluator? |
 | [Earlier exploration of plugin distribution](agentic-execution-plugin-distribution.md) | Which questions informed the proposal? (historical exploration; predates the writing-skill retirement) |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Agentic execution review, 2026-08](agentic-execution-review-2026-08.md) | How has the agentic execution model evolved, how does it work today, and where is it heading? (point-in-time, `992fd73`) |

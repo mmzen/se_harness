@@ -69,6 +69,8 @@ For Codex, use the documented plugin browser in the desktop app or CLI, then the
 
 ## Native capabilities and their limits
 
+For concrete sequences covering initialization, artifact packages, work-order start, evidence, verification, integration, release, and upgrades, see [Plugin operation workflows](plugin-operation-workflows-2026-09-06.md). It explains what runs as a skill, hook, script, agent, or existing evaluator operation, with command examples and a source-to-component map.
+
 Codex plugins are documented for the desktop app and CLI; the IDE extension does not currently support them. Treat the IDE extension as a separate future adapter, not a supported plugin installation target. CLI installation requires a new session. [Codex plugin surfaces](https://learn.chatgpt.com/docs/plugins)
 
 | Component | Codex | Claude Code |
