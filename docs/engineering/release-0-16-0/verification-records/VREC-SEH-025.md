@@ -2,7 +2,7 @@
 id = "VREC-SEH-025"
 type = "verification_record"
 title = "Verification candidate for 6 work orders"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-026/
 evaluator_evidence_path = "docs/engineering/release-0-16-0/evidence/VREC-SEH-025-evaluator.json"
 evaluator_evidence_sha256 = "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
 
+verified_at = "2026-09-07T09:34:41Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DST-024", "WO-ECP-026", "WO-HUP-016", "WO-RLS-022", "WO-TCM-009", "WO-TCM-010"]
 conforms_to = ["VER-DST-001", "VER-DST-025", "VER-ECP-022", "VER-HUP-016", "VER-TCM-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-07T09:34:41Z"
+decided_by = "assurance-owner"
+reason = "Assurance owner accepted the aggregate evidence on 2026-09-07 by selecting the presented option 'I verify VREC-SEH-025': the six gates of REL-SEH-027 hold their handoff packets, every required member its own verified record, the candidate c103708a passed every reading of the contract's qualification section with the released 0.15.0 evaluator and the hosted lanes, and the build of record was byte-identical twice on the pinned producer (run 34102296258, wheel a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae, sdist 25d08fa133e5bf5418b7ade2af995aaf71634422aef775dc55cbdeb32655d581). Recorded readings and disclosures are in docs/engineering/release-0-16-0/evidence/WO-RLS-022/."
 +++
 
 # Verification Record Candidate
