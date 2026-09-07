@@ -2,7 +2,7 @@
 id = "VREC-ECP-032"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-029"
-status = "ready"
+status = "verified"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-029/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-032-evaluator.json"
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 
+verified_at = "2026-09-07T21:02:05Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-029"]
 conforms_to = ["VER-ECP-024"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-07T21:02:05Z"
+decided_by = "assurance-owner"
+reason = "Verified on 2026-09-07 by the accountable assurance owner with the words 'i verify' (DR-VREC-DECIDE), after the record was presented: bound to candidate commit e9f85a7 (WO-ECP-029 implemented), to the retained evidence WO-ECP-029-handoff.md and handoff.json, and to the exact 0.16.0 evaluator evidence. Hosted lanes on PR #390 at the record commit 8f43ab8: validate, both evidence lanes, the candidate rehearsal, the Linux migration lane and the transition assessment pass; the Windows migration lane and the release-record rehearsal were running at the decision. The merge of PR #390 remains the owner's decision."
 +++
 
 # Verification Record Candidate
