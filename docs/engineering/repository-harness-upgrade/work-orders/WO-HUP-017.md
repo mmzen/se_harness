@@ -2,7 +2,7 @@
 id = "WO-HUP-017"
 type = "work_order"
 title = "Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-09-07T10:57:23Z"
 decided_by = "repository-owner"
 reason = "Approved by the accountable repository owner on 2026-09-07 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #370 (REQ-HUP-033, REQ-HUP-034, SPEC-HUP-017, VER-HUP-017, WO-HUP-017) and the rehearsal of the 0.16.0 root adoption on a throwaway LF clone of main at 5df10aa9. WO-HUP-017 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T12:10:20Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-07, given by selecting the presented option 'Merged; start, complete on green, prepare record'. Start preflight PASS with no diagnostics over the reading manifest after ARCH-HUP-012 was amended by record on the packet branch; the packet was approved and merged as 6dd288d7; the transaction runs from an LF clone whose lock bytes equal the committed blob."
 +++
 
 # Work Order: Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave
