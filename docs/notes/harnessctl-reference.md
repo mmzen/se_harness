@@ -52,7 +52,6 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | Command | Principal actor | State effect | Intended use |
 | --- | --- | --- | --- |
 | `init` | repository owner or authorized agent | writes the complete standard harness into an absent or empty target; into a target with content it preserves existing files, integrates the bounded fragments and writes `docs/engineering/ADOPTION_REPORT.md` | install the harness into any repository, new or existing |
-| `adopt` | repository owner or authorized agent | alias of `init` for the 0.16.0 release only: the same options, behaviour and result | none new; kept because the released 0.15.0 verifier's candidate acceptance invokes it, removed after 0.16.0 is adopted (`REQ-ECP-030`) |
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
@@ -79,7 +78,6 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 
 ```text
 harnessctl init [TARGET] [--project-name NAME] [--dry-run] [--json]
-harnessctl adopt ...   # alias of init for the 0.16.0 release only; removed after it
 harnessctl validate [TARGET] [--json] [--advisories]
 harnessctl inspect [TARGET] [--json] [--vocabulary-threshold N]
 harnessctl dashboard [TARGET] [--output PATH] [--json]

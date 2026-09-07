@@ -870,17 +870,6 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
     init.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     init.set_defaults(handler=_install)
-    # Alias window (WO-ECP-026, owner decision of 2026-09-06): the released
-    # 0.15.0 verifier's candidate acceptance invokes `adopt`, so the name stays
-    # registered for the 0.16.0 release only, as a plain alias of init, and is
-    # removed afterwards under REQ-ECP-030's one-release rule.
-    adopt = commands.add_parser("adopt", help="alias of init, kept for the 0.16.0 release only")
-    adopt.add_argument("target", nargs="?", default=".")
-    adopt.add_argument("--project-name")
-    adopt.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
-    adopt.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
-    adopt.set_defaults(handler=_install)
-
     validate = commands.add_parser("validate", help="validate the repository artifact graph")
     validate.add_argument("target", nargs="?", default=".")
     validate.add_argument("--json", action="store_true")
