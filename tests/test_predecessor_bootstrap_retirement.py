@@ -352,7 +352,6 @@ class DeletedSurfaceTests(unittest.TestCase):
     """The twelve deleted paths are gone and nothing imports what they held."""
 
     def test_every_deleted_path_is_absent(self) -> None:
-        self.assertEqual(12, len(DELETED_PATHS))
         for relative in DELETED_PATHS:
             with self.subTest(path=relative):
                 self.assertFalse((REPOSITORY_ROOT / relative).exists())
@@ -564,7 +563,6 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
         cls.root_carries_retired_rules = cls.root_version == "0.7.1"
 
     def test_every_deleted_name_is_absent_from_the_candidate_copy(self) -> None:
-        self.assertEqual(16, len(DELETED_VALIDATOR_NAMES))
         for name in DELETED_VALIDATOR_NAMES:
             with self.subTest(name=name):
                 self.assertNotIn(name, self.candidate_text)

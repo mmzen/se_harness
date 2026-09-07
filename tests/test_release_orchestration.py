@@ -572,7 +572,6 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         qualify = self.workflow.split("  qualify:\n", 1)[1].split("  github_release:\n", 1)[0]
         github = self.workflow.split("  github_release:\n", 1)[1].split("  pypi:\n", 1)[0]
         pypi = self.workflow.split("  pypi:\n", 1)[1].split("  pages:\n", 1)[0]
-        resolve = self.workflow.split("  resolve:\n", 1)[1].split("  qualify:\n", 1)[0]
         pages = self.workflow.split("  pages:\n", 1)[1].split("  observe:\n", 1)[0]
         self.assertIn("uses: ./.github/workflows/release-qualification.yml", qualify)
         self.assertIn("mode: release-record", qualify)

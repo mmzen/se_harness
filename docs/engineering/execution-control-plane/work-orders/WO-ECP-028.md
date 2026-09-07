@@ -34,6 +34,7 @@ paths = [
   "repository_tools/release_build.py",
   "MANIFEST.in",
   "pyproject.toml",
+  "docs/notes/diagnostic-codes.md",
   ".github/workflows/release-qualification.yml",
   ".github/workflows/publish-pypi.yml",
   ".github/workflows/pages-publication.yml",
@@ -183,3 +184,14 @@ live, stop and report; any managed path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-07
+
+`docs/notes/diagnostic-codes.md` is added to `[execution_scope].paths`. The
+page is generated from the code literals of the package; two approved
+deletions of this group move it (the unreachable `WEX-ECP-013` raise in
+`artifact_layout.py` was one of its samples), and its test compares the
+committed page with the regeneration. Decided by the accountable engineering
+owner on 2026-09-07 by selecting the presented option "Widen scope; keep
+render_operating_card". The same selection withdraws `ECP-DEL-002`, recorded
+on `SPEC-ECP-022`. Nothing else is widened.

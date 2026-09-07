@@ -1,13 +1,10 @@
 from __future__ import annotations
 
-import contextlib
-import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, WORKFLOW_CONTRACT

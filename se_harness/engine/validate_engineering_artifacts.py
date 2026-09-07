@@ -12,7 +12,6 @@ import hashlib
 import importlib.util
 import json
 import re
-import sys
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
@@ -42,7 +41,7 @@ repository_record_relative_path = _LAYOUT.repository_record_relative_path
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
 VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
 
-TYPE_PREFIX = {**ARTIFACT_PREFIXES, "risk_acceptance": "RISK-"}
+TYPE_PREFIX = dict(ARTIFACT_PREFIXES)
 
 ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 EVIDENCE_WORK_ORDER_PATTERN = re.compile(
@@ -183,11 +182,6 @@ WORKFLOW_TRANSITIONS = MappingProxyType({
         {state: frozenset(row.transitions_to) for state, row in states.items()}
     )
     for family, states in WORKFLOW_LIFECYCLES.items()
-})
-ALLOWED_STATUSES = frozenset({
-    state
-    for states in WORKFLOW_LIFECYCLES.values()
-    for state in states
 })
 ACTIVE_COVERAGE_STATUSES = frozenset({
     state
@@ -1442,16 +1436,16 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
                 )
                 continue
             values: dict[str, str] = {}
-            for field in ("from", "to", "decided_at", "decided_by"):
-                value = event.get(field)
+            for key in ("from", "to", "decided_at", "decided_by"):
+                value = event.get(key)
                 if not isinstance(value, str) or not value.strip():
                     _add_error(
                         errors, artifact, report_root, "E014",
-                        f"lifecycle event {index + 1} field '{field}' must be a non-empty string",
+                        f"lifecycle event {index + 1} field '{key}' must be a non-empty string",
                         plane="governance",
                     )
                 else:
-                    values[field] = value.strip()
+                    values[key] = value.strip()
             reason = event.get("reason")
             if reason is not None and (not isinstance(reason, str) or not reason.strip()):
                 _add_error(
@@ -1714,9 +1708,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
 
         if artifact_type == "release_record":
             _validate_git_identity(artifact, errors, report_root)
-            release_version = _require_non_empty_string(
-                artifact, "version", errors, report_root, plane="governance"
-            )
+            _require_non_empty_string(artifact, "version", errors, report_root, plane="governance")
             prepared = "prepared_at" in artifact.metadata or "prepared_by" in artifact.metadata
             if prepared:
                 _validate_timestamp(artifact, "prepared_at", errors, report_root)
@@ -2965,9 +2957,9 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
         if kind not in DECISION_KINDS:
             _add_error(errors, artifact, report_root, "E-DCM-002", "decision kind must be question or deviation", plane="structure")
             continue
-        for field in ("question", "raised_by", "recommendation"):
-            if not isinstance(artifact.metadata.get(field), str) or not str(artifact.metadata.get(field)).strip():
-                _add_error(errors, artifact, report_root, "E-DCM-002", f"decision field '{field}' must be a non-empty string", plane="structure")
+        for key in ("question", "raised_by", "recommendation"):
+            if not isinstance(artifact.metadata.get(key), str) or not str(artifact.metadata.get(key)).strip():
+                _add_error(errors, artifact, report_root, "E-DCM-002", f"decision field '{key}' must be a non-empty string", plane="structure")
         options = _decision_options(artifact)
         option_ids = [item["id"] for item in options]
         if len(options) < 2 or len(set(option_ids)) != len(option_ids):
@@ -3011,9 +3003,9 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
                 option = disposition.get("option")
                 if artifact.status == "decided" and option not in option_ids:
                     _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition option '{option}' is not a declared option", plane="governance")
-                for field in ("decided_by", "decided_at", "reason", "label"):
-                    if not isinstance(disposition.get(field), str) or not disposition[field].strip():
-                        _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition field '{field}' must be a non-empty string", plane="governance")
+                for key in ("decided_by", "decided_at", "reason", "label"):
+                    if not isinstance(disposition.get(key), str) or not disposition[key].strip():
+                        _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition field '{key}' must be a non-empty string", plane="governance")
                 if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
                     _add_error(errors, artifact, report_root, "E-DCM-003", "a deferred decision records its scope and its revisit trigger", plane="governance")
                 if artifact.status == "decided" and kind == "deviation" and option == "accept":
@@ -3268,12 +3260,6 @@ def render_human(report: ValidationReport, *, show_advisories: bool = False) -> 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Validate engineering artifact identity, relations, and coverage.")
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="Repository root (default: current directory).")
-    parser.add_argument(
-        "--artifact-root",
-        type=Path,
-        default=None,
-        help="Artifact directory. Relative paths are resolved below --root; default: docs/engineering.",
-    )
     parser.add_argument("--json", action="store_true", dest="as_json", help="Emit a machine-readable JSON report.")
     parser.add_argument(
         "--advisories", action="store_true", dest="show_advisories",
@@ -3285,7 +3271,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Iterable[str] | None = None) -> int:
     args = build_parser().parse_args(list(argv) if argv is not None else None)
     repository_root = args.root.resolve()
-    artifact_root = args.artifact_root
+    artifact_root = None
     if artifact_root is not None and not artifact_root.is_absolute():
         artifact_root = repository_root / artifact_root
 

@@ -5,7 +5,6 @@ import errno
 import re
 import io
 import json
-import sys
 import os
 import statistics
 import tempfile
@@ -599,8 +598,6 @@ paths = ["src/"]
         self.assertEqual([], list(self.root.rglob("*.wex-*")))
 
     def test_unprovable_rollback_escalates_and_cleans_temporary_files(self) -> None:
-        first = self.root / "docs/engineering/product/intent/INT-001.md"
-        second = self.root / "docs/engineering/product/capabilities/CAP-001.md"
         plan = plan_transition(
             self.root,
             {"INT-001": "implemented", "CAP-001": "implemented"},
@@ -842,27 +839,6 @@ paths = ["src/"]
         self.assertEqual(1, code)
         self.assertIn("refusing to replace a symlink", output)
         self.assertEqual(original, outside.read_bytes())
-
-    def test_agent_host_marker_does_not_change_canonical_result(self) -> None:
-        fixture_path = Path(__file__).parent / "fixtures/workflow_execution/scenarios.json"
-        scenario = json.loads(fixture_path.read_text(encoding="utf-8"))["scenarios"][0]
-        observed: list[str] = []
-        for agent_host in scenario["agent_hosts"]:
-            with mock.patch.dict(os.environ, {"SE_HARNESS_AGENT_HOST": agent_host}):
-                code, output, error = self.invoke(
-                    "check", str(self.root),
-                    "--artifact", scenario["artifact"],
-                    "--json",
-                )
-            self.assertEqual(0, code, error)
-            result = json.loads(output)
-            self.assertEqual(scenario["expected"]["selection"], result["selection"])
-            self.assertEqual(scenario["expected"]["scope"], result["scope"])
-            self.assertEqual(scenario["expected"]["state"], result["state"])
-            for key, expected in scenario["expected"]["restitution"].items():
-                self.assertEqual(expected, result["restitution"][key], key)
-            observed.append(output)
-        self.assertEqual(1, len(set(observed)))
 
     def test_human_output_exposes_the_same_fixture_handoff_semantics(self) -> None:
         fixture_path = Path(__file__).parent / "fixtures/workflow_execution/scenarios.json"
@@ -1640,7 +1616,7 @@ class OnePreconditionEngineTests(WorkflowExecutionTests):
             load_quality_gate_contract(older)
 
     def test_an_unbound_lifecycle_edge_fails_contract_loading(self) -> None:
-        from se_harness.workflow_contract import ContractError, load_quality_gate_contract, load_workflow_contract, validate_contracts
+        from se_harness.workflow_contract import ContractError, load_workflow_contract, validate_contracts
 
         contract = json.loads((REPOSITORY_ROOT / "se_harness/quality_gates_contract.json").read_text(encoding="utf-8"))
         contract["transition_bindings"] = [

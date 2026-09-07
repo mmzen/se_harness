@@ -123,12 +123,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Resolve candidate version
-        id: candidate
-        shell: bash
-        run: |
-          version="$(python -c 'import se_harness; print(se_harness.__version__)')"
-          printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
       - name: Take the candidate wheel built by candidate-source
         uses: actions/download-artifact@v4
         with:
@@ -143,7 +137,7 @@ jobs:
           sha256sum --check --strict SHA256SUMS
       - name: Prove candidate wheel has the portable standard surface
         env:
-          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+          CANDIDATE_VERSION: ${{ needs.candidate-source.outputs.candidate_version }}
         shell: bash
         run: |
           candidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
@@ -188,7 +182,7 @@ jobs:
             --require-isolated-python --require-entry-point
       - name: Qualify the candidate package with the released verifier
         env:
-          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+          CANDIDATE_VERSION: ${{ needs.candidate-source.outputs.candidate_version }}
         shell: bash
         run: |
           set -euo pipefail
@@ -217,7 +211,7 @@ jobs:
           PY
       - name: Install candidate and prove package identity
         env:
-          CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
+          CANDIDATE_VERSION: ${{ needs.candidate-source.outputs.candidate_version }}
         shell: bash
         run: |
           python -m venv "$RUNNER_TEMP/candidate-env"

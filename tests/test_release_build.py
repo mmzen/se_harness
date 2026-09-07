@@ -238,10 +238,6 @@ class DeterministicSdistTests(unittest.TestCase):
             manifest,
         )
         self.assertIn(
-            "recursive-include templates/repository/standard/.agents/skills *.yaml",
-            manifest,
-        )
-        self.assertIn(
             "recursive-include templates/repository/standard/.claude/skills *.md",
             manifest,
         )

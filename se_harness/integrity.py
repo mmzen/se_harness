@@ -88,33 +88,32 @@ def validate_lock(value: Any) -> dict[str, Any]:
         raise IntegrityError("unsupported lock hash algorithm")
     if value.get("hash_mode") != HASH_MODE:
         raise IntegrityError("unsupported lock hash mode")
-    if schema == LOCK_SCHEMA:
-        evaluator = value.get("evaluator")
-        if not isinstance(evaluator, dict):
-            raise IntegrityError("schema-3 lock evaluator must be an object")
-        unknown = set(evaluator) - EVALUATOR_FIELDS
-        if unknown:
-            raise IntegrityError(f"unknown evaluator lock field: {sorted(unknown)[0]}")
-        version = evaluator.get("version")
-        if not isinstance(version, str) or VERSION_PATTERN.fullmatch(version) is None:
-            raise IntegrityError("invalid evaluator version")
-        if value.get("tool_version") != version:
-            raise IntegrityError("lock tool version and evaluator version differ")
-        if evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST:
-            raise IntegrityError("unsupported evaluator payload manifest")
-        payload_sha256 = evaluator.get("payload_sha256")
-        if not isinstance(payload_sha256, str) or SHA256_PATTERN.fullmatch(payload_sha256) is None:
-            raise IntegrityError("invalid evaluator payload SHA-256")
-        archive_name = evaluator.get("archive_name")
-        archive_sha256 = evaluator.get("archive_sha256")
-        if (archive_name is None) != (archive_sha256 is None):
-            raise IntegrityError("evaluator archive name and SHA-256 must appear together")
-        if archive_name is not None:
-            expected_name = f"se_harness-{version.replace('-', '_')}-py3-none-any.whl"
-            if not isinstance(archive_name, str) or archive_name != expected_name:
-                raise IntegrityError("invalid evaluator archive name")
-            if not isinstance(archive_sha256, str) or SHA256_PATTERN.fullmatch(archive_sha256) is None:
-                raise IntegrityError("invalid evaluator archive SHA-256")
+    evaluator = value.get("evaluator")
+    if not isinstance(evaluator, dict):
+        raise IntegrityError("schema-3 lock evaluator must be an object")
+    unknown = set(evaluator) - EVALUATOR_FIELDS
+    if unknown:
+        raise IntegrityError(f"unknown evaluator lock field: {sorted(unknown)[0]}")
+    version = evaluator.get("version")
+    if not isinstance(version, str) or VERSION_PATTERN.fullmatch(version) is None:
+        raise IntegrityError("invalid evaluator version")
+    if value.get("tool_version") != version:
+        raise IntegrityError("lock tool version and evaluator version differ")
+    if evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST:
+        raise IntegrityError("unsupported evaluator payload manifest")
+    payload_sha256 = evaluator.get("payload_sha256")
+    if not isinstance(payload_sha256, str) or SHA256_PATTERN.fullmatch(payload_sha256) is None:
+        raise IntegrityError("invalid evaluator payload SHA-256")
+    archive_name = evaluator.get("archive_name")
+    archive_sha256 = evaluator.get("archive_sha256")
+    if (archive_name is None) != (archive_sha256 is None):
+        raise IntegrityError("evaluator archive name and SHA-256 must appear together")
+    if archive_name is not None:
+        expected_name = f"se_harness-{version.replace('-', '_')}-py3-none-any.whl"
+        if not isinstance(archive_name, str) or archive_name != expected_name:
+            raise IntegrityError("invalid evaluator archive name")
+        if not isinstance(archive_sha256, str) or SHA256_PATTERN.fullmatch(archive_sha256) is None:
+            raise IntegrityError("invalid evaluator archive SHA-256")
     files = value.get("files")
     if not isinstance(files, dict):
         raise IntegrityError("lock files must be an object")
@@ -136,11 +135,7 @@ def validate_lock(value: Any) -> dict[str, Any]:
     return value
 
 
-def compare_lock_entry(
-    lock: dict[str, Any],
-    entry: dict[str, Any],
-    current: bytes,
-) -> str:
+def compare_lock_entry(entry: dict[str, Any], current: bytes) -> str:
     """Return canonical or mismatch."""
 
     expected = entry.get("sha256")

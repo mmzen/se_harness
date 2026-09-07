@@ -13,7 +13,6 @@ from __future__ import annotations
 import ast
 import contextlib
 import hashlib
-import json
 import os
 import platform
 import stat

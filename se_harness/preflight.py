@@ -23,7 +23,6 @@ from se_harness.installer import (
     plan_install,
     safe_destination,
     template_files,
-    template_root,
     tracked_content,
 )
 from se_harness.hash_bound import assess as assess_hash_bound, is_git_worktree
@@ -211,7 +210,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
                 if desired_change is not None
                 else None
             )
-            result = compare_lock_entry(lock, entry, current)
+            result = compare_lock_entry(entry, current)
             passed = result != "mismatch"
             detail = {
                 "canonical": "unchanged",

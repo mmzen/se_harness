@@ -17,7 +17,7 @@ from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
     installed_evaluator_identity,
 )
-from se_harness.installer import HarnessError, template_root
+from se_harness.installer import template_root
 
 
 IDENTITY_SCHEMA = "se-harness-runtime-identity-v3"
@@ -175,8 +175,6 @@ def inspect_runtime_identity(
         )
     except interpreter_safety.InterpreterSafetyRefusal as refusal:
         entry_refusal = refusal.case
-    except interpreter_safety.InterpreterSafetyError:
-        entry_refusal = "EPS011"
     else:
         entry_is_link = entry.entry_is_link
         binary_position = entry.binary_position
@@ -372,11 +370,3 @@ def inspect_runtime_identity(
 
 def render_runtime_identity(identity: RuntimeIdentity) -> str:
     return json.dumps(identity.to_dict(), indent=2, sort_keys=True)
-
-
-def assert_runtime_identity(**kwargs: object) -> RuntimeIdentity:
-    identity = inspect_runtime_identity(**kwargs)  # type: ignore[arg-type]
-    if identity.diagnostics:
-        details = "; ".join(f"{item.code} {item.subject}: {item.message}" for item in identity.diagnostics)
-        raise HarnessError(f"runtime identity mismatch: {details}")
-    return identity

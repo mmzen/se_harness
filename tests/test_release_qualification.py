@@ -3,7 +3,6 @@ from __future__ import annotations
 import contextlib
 import io
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,7 +10,7 @@ from types import SimpleNamespace
 from unittest import mock
 
 from se_harness import __version__
-from se_harness.cli import build_parser, main
+from se_harness.cli import build_parser
 from se_harness.installer import HarnessError
 from se_harness.release_qualification import (
     AUTHORITY,
