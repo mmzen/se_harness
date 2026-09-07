@@ -2,7 +2,7 @@
 id = "REQ-ECP-032"
 type = "requirement"
 title = "Every harnessctl failure follows the stated exit-code and one-code-per-line rules"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "check --checkpoint with an unknown artifact prints WEX210 once; trans
 
 [relations]
 derives_from = ["CAP-ECP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T19:33:14Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #382 and its summary were presented: every harnessctl failure follows the stated exit-code and one-code-per-line rules (issue #375, wave 0 of the code health assessment of 2026-09-07). Approval of a definition authorizes no work."
 +++
 
 # Requirement: Every harnessctl failure follows the stated exit-code and one-code-per-line rules

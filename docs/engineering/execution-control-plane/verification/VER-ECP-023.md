@@ -2,13 +2,20 @@
 id = "VER-ECP-023"
 type = "verification"
 title = "Independent evidence for the wave 0 correctness fixes"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 
 [relations]
 verifies = ["REQ-ECP-032"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T19:33:14Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #382 and its summary were presented: one before-and-after reading per rule, refusals observed at the process boundary, the subprocess timeout inspection, no regression. Approval of a definition authorizes no work."
 +++
 
 # Verification Contract: Independent evidence for the wave 0 correctness fixes

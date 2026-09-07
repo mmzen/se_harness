@@ -2,7 +2,7 @@
 id = "SPEC-ECP-021"
 type = "specification"
 title = "Failure paths of harnessctl: one code splitter, one guard error, bounded launches"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -10,6 +10,13 @@ contract = "Every failing command path reports one code per line, exits 1 for a 
 
 [relations]
 specifies = ["REQ-ECP-032"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T19:33:14Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #382 and its summary were presented: rules ECP-COR-001 to ECP-COR-022, one code splitter, the typed mutation-guard error, the shared exception tuple, dashboard and pr-body on the rule, bounded launches, the four latent defects, the tests and the records. Approval of a definition authorizes no work."
 +++
 
 # Specification: Failure paths of harnessctl: one code splitter, one guard error, bounded launches
