@@ -2,7 +2,7 @@
 id = "WO-ECP-027"
 type = "work_order"
 title = "Wave 0 correctness: uniform exit codes, one code per line, bounded launches, four latent defects"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -62,6 +62,13 @@ to = "approved"
 decided_at = "2026-09-07T19:33:14Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #382 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of the declared scope only: the handlers and main() in cli.py, MutationGuardError, the three launchers, the regex, the CRLF parser, the projection, the two workflows, the sixteen test modules, the two notes, the two amendment records on SPEC-ECP-016, the domain index, the evidence packet and the verification record. Every decision stays human: no delegation table. It authorizes no registered command change, no managed path, no release, no publication and no merge; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T19:37:02Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #382 merged the approved packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-027-wave0-correctness within the declared scope only."
 +++
 
 # Work Order: Wave 0 correctness: uniform exit codes, one code per line, bounded launches, four latent defects

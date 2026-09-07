@@ -403,3 +403,25 @@ class ValidatorAndSourceTests(DelegationFixture):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GateGitLauncherTests(unittest.TestCase):
+    """WO-ECP-027 (ECP-COR-013): the gate's Git launcher is bounded and never leaks a start failure."""
+
+    def test_a_missing_git_or_a_timeout_is_the_gate_refusal(self) -> None:
+        from se_harness import gate_source
+
+        for failure in (FileNotFoundError("git"), subprocess.TimeoutExpired(cmd="git", timeout=60)):
+            with self.subTest(failure=type(failure).__name__):
+                with mock.patch("se_harness.gate_source.subprocess.run", side_effect=failure):
+                    with self.assertRaises(gate_source.DelegationError) as caught:
+                        gate_source.candidate_head(Path("."))
+                self.assertEqual("WEX-ECP-040", caught.exception.code)
+
+    def test_the_launcher_passes_a_timeout(self) -> None:
+        from se_harness import gate_source
+
+        completed = subprocess.CompletedProcess(args=[], returncode=0, stdout="abc123\n", stderr="")
+        with mock.patch("se_harness.gate_source.subprocess.run", return_value=completed) as run:
+            self.assertEqual("abc123", gate_source.candidate_head(Path(".")))
+        self.assertEqual(60, run.call_args.kwargs.get("timeout"))

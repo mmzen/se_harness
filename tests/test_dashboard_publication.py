@@ -569,6 +569,11 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
             self.assertIn(f"uses: {action}@{commit} # {release}", self.workflow)
         self.assertNotRegex(self.workflow, r"uses: actions/[a-z-]+@v[0-9]")
 
+    def test_snapshot_digest_reads_an_emitted_output(self) -> None:
+        # WO-ECP-027 (ECP-COR-019): the publisher emits bundle_manifest_sha256, never snapshot_sha256.
+        self.assertNotIn("steps.package.outputs.snapshot_sha256", self.workflow)
+        self.assertIn("steps.package.outputs.bundle_manifest_sha256", self.workflow)
+
     def test_permissions_environment_and_concurrency_are_bounded(self) -> None:
         self.assertNotIn("contents: write", self.workflow)
         # the caller grants pages: write and id-token: write; the definition's deploy job declares them

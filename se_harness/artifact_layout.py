@@ -372,8 +372,11 @@ def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
     return None
 
 
-REF_ARTIFACT_PATTERN = re.compile(r"^(INT|CAP|REQ|SPEC|ARCH|ADR|VER|VREC|WO|RLS|REL)-([A-Z][A-Z0-9]*)-(\d{3})\.md$")
 _REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS", "operating_contract": "OPS", "decision": "DEC"}
+# ECP-COR-016: one prefix table; the ref scan sees every type the allocator can name.
+REF_ARTIFACT_PATTERN = re.compile(
+    r"^(" + "|".join(sorted(set(_REF_PREFIX.values()), key=len, reverse=True)) + r")-([A-Z][A-Z0-9]*)-(\d{3})\.md$"
+)
 
 
 def _git_output(root: Path, arguments: list[str]) -> bytes:
