@@ -175,3 +175,7 @@ report path after "installed se-harness ... in ...".
 ## Amendment record
 
 **`ECP-INS-001`, `ECP-INS-006` and `ECP-INS-011` open a one-release alias window, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** For the 0.16.0 release only, the parser also registers `adopt` as a plain alias of `init`: the same options, the same handler, the same result (`"command": "init"`), listed in `--help` as an alias kept for 0.16.0. The refusal of `ECP-INS-006` and the command-set pin of `ECP-INS-011` apply from the candidate after 0.16.0 is adopted, by a follow-up work order under `REQ-ECP-030`. The candidate's own acceptance (`se_harness/candidate_acceptance.py`) keeps the scenario id `adopt` and runs `init` on a folder with content, so the contract digest is unchanged and the successor verifier no longer invokes the alias. The compatibility section's "No alias window" is withdrawn: the released verifier is the caller it did not count. Nothing else changes.
+
+## Amendment record
+
+**The alias window of 2026-09-06 is closed, under `WO-ECP-029` (`SPEC-ECP-022` `ECP-DEL-015` to `ECP-DEL-018`), proposed 2026-09-07.** `ECP-INS-001`, `ECP-INS-006` and `ECP-INS-011` now hold as written: the parser registers `init` only, `adopt` is refused by argparse as any unknown command, and the pinned command set has no `adopt`. The 0.16.0 verifier that governs this repository runs `init` in its `adopt` scenario, so the one-release rule of `REQ-ECP-030` is met. Nothing else changes.

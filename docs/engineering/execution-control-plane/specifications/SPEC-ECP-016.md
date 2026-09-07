@@ -152,3 +152,7 @@ scope checkpoint writes no packet.
 ## Amendment record
 
 **`ECP-CLI-006` is made to hold on every result path, proposed 2026-09-07 under `WO-ECP-027` (`SPEC-ECP-021` `ECP-COR-001` to `ECP-COR-003`).** The checkpoint path of `check`, `evidence`, `transition` and `decide` obtain the result's code through the one splitter the projection already used, so a raised `WEX210` or `WEX200` message no longer renders its code twice; the code families the splitter recognizes are unchanged. Nothing else in this specification changes.
+
+## Amendment record
+
+**The `ECP-CLI-001` qualification of 2026-09-06 is closed, under `WO-ECP-029` (`SPEC-ECP-022` `ECP-DEL-015` to `ECP-DEL-018`), proposed 2026-09-07.** The repository-command list no longer names `adopt`; the pinned set in `tests/test_cli_shape.py` drops it. Nothing else changes.
