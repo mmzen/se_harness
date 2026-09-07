@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.15.0-py3-none-any.whl",
-    "archive_sha256": "eb09343f65a52ecc7511aacbe7f4cc546cfe4bf28eeed62cf3ff2bccf838d947",
+    "archive_name": "se_harness-0.16.0-py3-none-any.whl",
+    "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "11e4ad03da90093dc1f4bd1ac7fed746c157162187019d7b6feb37873d3a237e",
-    "version": "0.15.0"
+    "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+    "version": "0.16.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
@@ -37,7 +37,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "2a836137eb0537379014fdbf3049772601bf1619249dccd02e7c5bf4c5fedeb2"
+      "sha256": "3da952a09b2d6aeb80b7e892b9514af1bcf9efd39b56deb5892c6953082fa9cc"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -49,7 +49,7 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "60f797edf688c62b686bdfefb71cddb345e1ed5a4548afb9554981c2d03c38cd"
+      "sha256": "9956aa5624569c132ec8bf938789e5dea1f2a777c90a9a07fe79aa3e4c8dfc2e"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -65,7 +65,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "f860d8c96d53d1e0072db41119f25ce1cfdf4edd1e02dc98621bdbacd4bcbc0d"
+      "sha256": "6ff5001b2666ff971b9268b7c56814d99b5313726ccd1be29fa16efabec54a6c"
     },
     "GLOSSARY.md": {
       "mode": "seed",
@@ -73,7 +73,7 @@
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
       "mode": "managed",
-      "sha256": "ecc5efc82d4a834dec5e699053b1596e1e8a256faa32230156a28f56eab2f3e3"
+      "sha256": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
       "mode": "managed",
@@ -125,7 +125,7 @@
     },
     "docs/engineering/templates/DECISION.template.md": {
       "mode": "managed",
-      "sha256": "7b4a13d236b62f3bc76bfc829b24efdc79cb5771ce170024a12404d5a21e9ac2"
+      "sha256": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e"
     },
     "docs/engineering/templates/INTENT.template.md": {
       "mode": "managed",
@@ -153,7 +153,7 @@
     },
     "docs/engineering/templates/SPECIFICATION.template.md": {
       "mode": "managed",
-      "sha256": "53f57969eea2f3a99f46c71851328e9ef01185f9e834d6feb3b76a831a15c981"
+      "sha256": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814"
     },
     "docs/engineering/templates/VERIFICATION.template.md": {
       "mode": "managed",
@@ -166,42 +166,10 @@
     "docs/engineering/templates/WORK_ORDER.template.md": {
       "mode": "managed",
       "sha256": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b"
-    },
-    "scripts/artifact_layout_registry.py": {
-      "mode": "managed",
-      "sha256": "bc32c4ca37da7f1a3b11eabc1b2335e6ac845b5d86b9a06584505a1a690a69f6"
-    },
-    "scripts/check_engineering_harness.ps1": {
-      "mode": "managed",
-      "sha256": "59bf668130aee9a05b183d3b90d6aa98d6aa44355d75fcdad7474b82674281fe"
-    },
-    "scripts/check_engineering_harness.sh": {
-      "mode": "managed",
-      "sha256": "053f2b3f7816405c856dfd4934348eee9d32e39e3d59d265fa321b437058f67d"
-    },
-    "scripts/generate_harness_dashboard.py": {
-      "mode": "managed",
-      "sha256": "38fe7aa4fe349f2514a9ed67f8ab0d7238f24b72b6a27c49a6fa4acd3be45127"
-    },
-    "scripts/harness_explorer/index.template.html": {
-      "mode": "managed",
-      "sha256": "148e73567aed1c1699e9ff1089ca1479baf152edbff7ef41fc4a741cb3687b39"
-    },
-    "scripts/inspect_engineering_artifacts.py": {
-      "mode": "managed",
-      "sha256": "f40ed79469a5f34c4f36529bcb9d5f4eed80c9cfaf6a2ad1745828b4e3f75278"
-    },
-    "scripts/select_harness_work_order.py": {
-      "mode": "managed",
-      "sha256": "680e318370fdcf286ce026918b9b11e3406b1beb0b996b7f45088dc9d70e00aa"
-    },
-    "scripts/validate_engineering_artifacts.py": {
-      "mode": "managed",
-      "sha256": "8fa7670f52fc4af098aa2da0613f067fbed7c58f5bac3db8938b4e4b527fcbed"
     }
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.15.0"
+  "tool_version": "0.16.0"
 }
