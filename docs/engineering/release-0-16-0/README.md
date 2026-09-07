@@ -19,6 +19,10 @@ moved the candidate to 0.16.0 (`WO-HUP-016`).
 
 Drafted on 2026-09-07 on the repository owner's instruction "release
 0.16.0", with `main` at `9069ff5d`, no work order in progress and every
-required member verified. Both artifacts are ready for the two approval
-acts: the contract by the release owner, the work order by the engineering
-owner. This packet authorizes no candidate, build or publication.
+required member verified. The release owner approved the contract and the
+engineering owner approved the work order the same day, by selecting the
+presented option "Approve both" (PR #368); the engineering owner then gave
+"start, complete on green, prepare record", and `WO-RLS-022` runs on
+`release/0.16.0` off `main` at `2e46b49`. This packet authorizes no
+publication; the verification and release decisions are recorded on
+`VREC-SEH-025` and `RLS-SEH-025`.
