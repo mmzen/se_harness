@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import unittest
 from pathlib import Path
 
@@ -116,3 +117,15 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PublicationJobsInterpreterTests(unittest.TestCase):
+    """WO-ECP-027 (ECP-COR-020): every job that runs python selects the pinned interpreter first."""
+
+    def test_github_release_and_observe_select_python(self) -> None:
+        workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
+        pin = "uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0"
+        for job in ("github_release", "observe"):
+            with self.subTest(job=job):
+                section = re.split(r"\n  [a-z_]+:\n", workflow.split(f"\n  {job}:\n", 1)[1], 1)[0] if f"\n  {job}:\n" in workflow else ""
+                self.assertIn(pin, section, f"job {job} runs python without selecting it")

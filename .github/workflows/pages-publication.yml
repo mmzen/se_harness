@@ -46,7 +46,7 @@ jobs:
       release_record: ${{ steps.resolve.outputs.release_record }}
       candidate_commit: ${{ steps.resolve.outputs.candidate_commit }}
       governance_commit: ${{ steps.resolve.outputs.governance_commit }}
-      snapshot_sha256: ${{ steps.package.outputs.snapshot_sha256 }}
+      snapshot_sha256: ${{ steps.package.outputs.bundle_manifest_sha256 }}
       dashboard_sha256: ${{ steps.package.outputs.published_dashboard_sha256 }}
 
     steps:
@@ -220,7 +220,7 @@ jobs:
           RESOLVED_RELEASE_RECORD: ${{ steps.resolve.outputs.release_record }}
           RESOLVED_CANDIDATE_COMMIT: ${{ steps.resolve.outputs.candidate_commit }}
           RESOLVED_GOVERNANCE_COMMIT: ${{ steps.resolve.outputs.governance_commit }}
-          SNAPSHOT_SHA256: ${{ steps.package.outputs.snapshot_sha256 }}
+          SNAPSHOT_SHA256: ${{ steps.package.outputs.bundle_manifest_sha256 }}
           DASHBOARD_SHA256: ${{ steps.package.outputs.published_dashboard_sha256 }}
         shell: bash
         run: |

@@ -42,7 +42,8 @@ PredecessorFactsError = EvaluatorFactsError
 
 def _front_matter(path: Path) -> dict[str, Any] | None:
     try:
-        text = path.read_text(encoding="utf-8")
+        # ECP-COR-017: a CRLF checkout and a BOM yield the same metadata as LF bytes.
+        text = path.read_text(encoding="utf-8-sig").replace("\r\n", "\n").replace("\r", "\n")
     except (OSError, UnicodeError):
         return None
     if not text.startswith("+++"):

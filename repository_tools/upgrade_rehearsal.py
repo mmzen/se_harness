@@ -76,11 +76,18 @@ def _environment() -> dict[str, str]:
     return environment
 
 
+RUN_TIMEOUT_SECONDS = 600
+
+
 def run(argv: Sequence[str], cwd: Path) -> Completed:
-    completed = subprocess.run(
-        list(argv), cwd=str(cwd), env=_environment(), capture_output=True, text=True,
-        encoding="utf-8", errors="replace", check=False,
-    )
+    # ECP-COR-015: bounded; a timeout is a failed Completed, never a hang.
+    try:
+        completed = subprocess.run(
+            list(argv), cwd=str(cwd), env=_environment(), capture_output=True, text=True,
+            encoding="utf-8", errors="replace", check=False, timeout=RUN_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired:
+        return Completed(124, "", f"{argv[0]} timed out after {RUN_TIMEOUT_SECONDS} seconds")
     return Completed(completed.returncode, completed.stdout, completed.stderr)
 
 
@@ -96,7 +103,7 @@ def export_tracked_tree(repository: Path, destination: Path, runner: Runner = ru
 
     archive = subprocess.run(
         ["git", "-c", "core.autocrlf=false", "archive", "--format=tar", "HEAD"],
-        cwd=str(repository), capture_output=True, check=False,
+        cwd=str(repository), capture_output=True, check=False, timeout=RUN_TIMEOUT_SECONDS,
     )
     if archive.returncode != 0:
         raise UpgradeRehearsalError(f"cannot export the tracked tree: {archive.stderr.decode('utf-8', 'replace').strip()}")
