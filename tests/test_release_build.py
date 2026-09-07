@@ -928,7 +928,9 @@ class ReplayWorkflowTests(unittest.TestCase):
         self.assertIn("      contents: read\n", workflow)
         self.assertIn("persist-credentials: false", workflow)
         self.assertIn("python scripts/replay_release_build.py", workflow)
-        self.assertIn("python scripts/validate_engineering_artifacts.py --root .", workflow)
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-014): the graph is validated by the evaluator, not a root copy.
+        self.assertIn("python -m se_harness validate .", workflow)
+        self.assertNotIn("scripts/validate_engineering_artifacts.py", workflow)
         self.assertIn("python scripts/validate_release_distributions.py", workflow)
         self.assertIn("--require-status ready", workflow)
         self.assertIn("release-build-replay.json", workflow)

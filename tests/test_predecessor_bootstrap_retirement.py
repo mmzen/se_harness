@@ -14,6 +14,7 @@ from se_harness import release_qualification
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+from tests.root_identity_support import committed_copies, root_copy  # noqa: E402
 
 #: Every path `WO-REB-028` deleted. Pinned as an exhaustive list rather than a
 #: prefix rule: a file reappearing under any of these names is the retired path
@@ -528,10 +529,11 @@ class ExplorerPayloadTests(unittest.TestCase):
         # `harness-dashboard-bootstrap-v2` names the Explorer's embedded JSON,
         # not a release bootstrap. It is out of `WO-REB-028`'s scope and the two
         # producers plus the template must still agree on it.
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copies only while the lock names them.
         for relative in (
-            "scripts/generate_harness_dashboard.py",
+            *committed_copies("scripts/generate_harness_dashboard.py", "se_harness/engine/generate_harness_dashboard.py"),
             ".github/scripts/publish_dashboard.py",
-            "scripts/harness_explorer/index.template.html",
+            *committed_copies("scripts/harness_explorer/index.template.html", "se_harness/engine/harness_explorer/index.template.html"),
         ):
             with self.subTest(producer=relative):
                 self.assertIn(
@@ -550,7 +552,10 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.root_text = (REPOSITORY_ROOT / ROOT_VALIDATOR).read_text(encoding="utf-8")
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): since the 0.16.0 root no copy is installed;
+        # the root then runs the released candidate itself, so the root text is the candidate text.
+        root = root_copy(ROOT_VALIDATOR)
+        cls.root_text = root.read_text(encoding="utf-8") if root is not None else (REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH).read_text(encoding="utf-8")
         cls.candidate_text = (REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH).read_text(encoding="utf-8")
         cls.candidate = _load_candidate_validator()
         lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))

@@ -6,7 +6,7 @@ Owner-controlled. Read the managed harness gate at the end of this file first.
 
 - Setup: `python -m pip install -e .`
 - Test: `python scripts/run_tests.py` (parallel, same verdict); canonical serial reference `python -m unittest discover -s tests -p "test_*.py"`; `--scale full` or `SE_HARNESS_TEST_SCALE=full` for the 1,000-artifact scale tests
-- Graph: `python scripts/validate_engineering_artifacts.py --root .`
+- Graph: `python -m se_harness validate .` (candidate source); the governing reading is the isolated released evaluator's `validate .`
 - Also required: `python scripts/validate_release_distributions.py --root .`, `python -m se_harness --help`, `python -m se_harness doctor .`, and phase-appropriate `python -m se_harness preflight . --work-order WO-...`
 - Lint or format: none is configured. Do not invent one as a required gate.
 - Entry points: `se_harness/cli.py` and the `harnessctl` script declared in `pyproject.toml`.
@@ -29,20 +29,20 @@ Changes confined to `docs/notes/`, `docs/rca/`, `docs/images/`, and the roadmap 
 - `docs/engineering/WORKFLOW.md`, `WORKFLOW.json`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, `QUALITY_GATES.json`, `TRACEABILITY.md`, `ARTIFACT_AUTHORING.md`, `OPERATING_CARD.md`, `TECHNICAL_COMMUNICATION.md`
 - every file in `docs/engineering/templates/`
 - every file under `.agents/skills/` (`SKILL.md`, `skill-contract.json`, `orient.py`, `check_brief.py`) and `.claude/skills/*/SKILL.md`
-- exactly these eight in `scripts/`: `validate_engineering_artifacts.py`, `generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`, `select_harness_work_order.py`, `artifact_layout_registry.py`, `check_engineering_harness.sh`, `check_engineering_harness.ps1`, `harness_explorer/index.template.html`
+- no file under `scripts/` is managed: since the 0.16.0 root the evaluator's scripts ship inside the installed package and the installer writes no copy (`WO-DST-024`, `WO-HUP-017`)
 
-The remaining files in `scripts/` are repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`. Not all of `scripts/` is managed.
+Every file in `scripts/` is repository-owned and may change under an approved work order: `bind_release_distribution.py`, `check_portable_release_surface.py`, `create_release_bundle_manifest.py`, `normalize_sdist.py`, `replay_release_build.py`, `validate_release_distributions.py`, and the test runner and maintenance scripts beside them. Nothing in `scripts/` is managed.
 
 `AGENTS.md`, `CLAUDE.md`, and `.gitignore` are `fragment` mode: only the block between the `se-harness` markers is tracked; the rest is owner content. Reproduce the tracked block byte-for-byte; `utf8-text-lf-v1` canonicalizes line endings only, so any other whitespace change breaks the digest.
 
 ## Candidate source versus released evaluator
 
-This checkout is candidate source. Changes to the eight managed scripts and the managed policy documents belong in `templates/repository/standard/`. The root copies belong to the exact released version in `.engineering-harness.toml`; they may match unchanged candidate templates or lag later development, so compare identities and bytes rather than assuming.
+This checkout is candidate source. Changes to the managed policy documents and templates belong in `templates/repository/standard/`; the evaluator's own scripts are candidate source in `se_harness/engine/` and ship inside the wheel. The root copies belong to the exact released version in `.engineering-harness.toml`; they may match unchanged candidate templates or lag later development, so compare identities and bytes rather than assuming.
 
 Run the governing evaluator from outside the checkout:
 
     python -m venv ../se-harness-eval
-    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.15.0"
+    ../se-harness-eval/Scripts/python -m pip install "se-harness==0.16.0"
     ../se-harness-eval/Scripts/python -I -m se_harness doctor .
 
 An in-tree `python -m se_harness doctor .` may report candidate-versus-released skew after post-release development; that is boundary evidence, not authorization to overwrite root managed files. External distribution metadata on the import path makes candidate-source runtime identity fail with `RID018`.

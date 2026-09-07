@@ -654,7 +654,13 @@ class ReleaseWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("--payload-sha256 \"$payload_sha256\"", observe)
         self.assertIn("public-install-qualification.json", observe)
         self.assertNotIn('harnessctl" validate', observe)
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-015): the generator is the proven released evaluator's
+        # dashboard over the generation snapshot, the form SPEC-DPG-001 rule 8 admits.
         self.assertIn(
+            '"$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness dashboard',
+            self.pages_definition,
+        )
+        self.assertNotIn(
             'python "$RUNNER_TEMP/generation-snapshot/governance/scripts/generate_harness_dashboard.py"',
             self.pages_definition,
         )

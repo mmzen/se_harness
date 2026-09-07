@@ -89,3 +89,17 @@ Repository-local and self-contained. Consumer repositories are unaffected becaus
 ## Explicitly unspecified decisions
 
 Section order and headings within the owner region, wording of each fact, whether the managed block is relocated above the owner sections, and whether paths are listed inline or as a bulleted list are delegated to the implementation agent within rules 1 through 13.
+
+## Amendment record
+
+**Rules 6 and 8 under a 0.16.0 or later root, recorded 2026-09-07 under
+`WO-HUP-017` (`SPEC-DST-025` `DST-ENG-015`).** Since the 0.16.0 root the
+released evaluator installs none of the eight `scripts/` paths rule 6
+enumerates; the managed set is 33 hash-locked paths, the 41 of the 0.15.0
+root less those eight, and the owner region states that no file under
+`scripts/` is managed. Rule 8's candidate-source direction for the eight
+scripts points at `se_harness/engine/`, where the evaluator's scripts are
+candidate source and ship inside the wheel; the direction for the managed
+policy documents and templates is unchanged. The count and the eight names
+stay in the rules as the record of the roots they described. Nothing else
+in this specification changes.

@@ -13,6 +13,7 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+from tests.root_identity_support import committed_copies  # noqa: E402
 HELPER_PATH = REPOSITORY_ROOT / ".github" / "scripts" / "publish_dashboard.py"
 WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "publish-dashboard-pages.yml"
 
@@ -448,7 +449,8 @@ class PayloadPackagingTests(unittest.TestCase):
         # WO-DPG-002: the 0.14.0 publication failed because the boundary was the previous
         # page's element and no test read the real templates. Each template must carry
         # exactly one accepted boundary so a redesign fails here before it fails a run.
-        for relative in (
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copy only while the lock names it.
+        for relative in committed_copies(
             "scripts/harness_explorer/index.template.html",
             "se_harness/engine/harness_explorer/index.template.html",
         ):
@@ -600,7 +602,9 @@ class PagesWorkflowPolicyTests(unittest.TestCase):
         self.assertIn("--evaluator-wheel-sha256", self.workflow)
         self.assertNotIn("GOVERNOR_", self.workflow)
         self.assertNotIn("--role governor", self.workflow)
-        self.assertIn("generation-snapshot/governance/scripts/generate_harness_dashboard.py", self.workflow)
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-015): the generator is the proven released evaluator.
+        self.assertIn('"$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness dashboard', self.workflow)
+        self.assertNotIn("generation-snapshot/governance/scripts/generate_harness_dashboard.py", self.workflow)
         self.assertNotIn('--view-output "$RUNNER_TEMP/generation-snapshot/governance"', self.workflow)
         self.assertNotIn("predecessor-view", self.workflow)
         self.assertNotIn('predecessor-view-qualification.json', self.workflow)

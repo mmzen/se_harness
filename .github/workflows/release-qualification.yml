@@ -104,7 +104,7 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "$MODE" == "release-record" ]]; then
-            python scripts/validate_engineering_artifacts.py --root .
+            python -m se_harness validate .
             python scripts/validate_release_distributions.py --root . --require-record "$RELEASE_RECORD"
             python .github/scripts/publish_release.py resolve \
               --repository "$GITHUB_WORKSPACE" \

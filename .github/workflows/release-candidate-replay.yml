@@ -48,7 +48,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/validate_engineering_artifacts.py --root .
+          python -m se_harness validate .
           python scripts/validate_release_distributions.py \
             --root . \
             --require-record "${{ inputs.release_record }}"
