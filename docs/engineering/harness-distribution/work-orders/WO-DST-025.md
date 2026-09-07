@@ -2,7 +2,7 @@
 id = "WO-DST-025"
 type = "work_order"
 title = "Remove the inert keys from the installed configuration"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -39,6 +39,13 @@ to = "in_progress"
 decided_at = "2026-09-07T18:41:49Z"
 decided_by = "engineering-owner"
 reason = "Started by the accountable engineering owner on 2026-09-07 by selecting the presented option 'Approve and start immediately' in the same sitting as the approvals. Implementation proceeds on branch packet/dst-025-configuration-surface under the approved execution scope: the standard configuration template, tests, this domain, SPEC-REV-001 and REQ-SHB-009."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T19:21:47Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-07 with the instruction 'you can mark as implemented and continue', after pull request #373 ran all four hosted lanes green at commit e2da416 and the handoff checkpoint passed all nine gates. The seven inert keys left the standard configuration template, tests/test_configuration_surface.py pins the five that remain beside the module that reads each one, SPEC-REV-001 and REQ-SHB-009 are amended by record, and the evidence packet at docs/engineering/harness-distribution/evidence/WO-DST-025-verification.md holds the reader inventory, the configuration before and after, the upgrade plan, scenarios A to C from a wheel installed outside the checkout, and both the hosted lane reading and the labelled local Windows control. The root configuration and its lock are byte-identical to main; DST-CFG-015 carries the root adoption forward to the next root-adoption work order."
 +++
 
 # Work Order: Remove the inert keys from the installed configuration
