@@ -2,7 +2,7 @@
 id = "SPEC-ECP-022"
 type = "specification"
 title = "Wave 1 deletions: dead code, the adopt alias, two dormant commands, the unwired journal, unreachable contract entries"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -10,6 +10,13 @@ contract = "Everything the code health assessment found unreferenced, dormant or
 
 [relations]
 specifies = ["REQ-ECP-033"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented: rules ECP-DEL-001 to ECP-DEL-034 in three groups, dead code and hygiene, the adopt alias, the dormant surface and the two unreachable contract entries. Approval of a definition authorizes no work."
 +++
 
 # Specification: Wave 1 deletions: dead code, the adopt alias, two dormant commands, the unwired journal, unreachable contract entries

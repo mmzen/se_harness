@@ -2,13 +2,20 @@
 id = "VER-ECP-024"
 type = "verification"
 title = "Independent evidence for the wave 1 deletions"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 
 [relations]
 verifies = ["REQ-ECP-033"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented: scans before and after, the parser's own choices, the wheel file list, the contract loader, the suite at its baseline, and the amendment records. Approval of a definition authorizes no work."
 +++
 
 # Verification Contract: Independent evidence for the wave 1 deletions

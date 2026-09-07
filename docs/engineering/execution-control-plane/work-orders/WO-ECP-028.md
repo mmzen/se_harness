@@ -2,7 +2,7 @@
 id = "WO-ECP-028"
 type = "work_order"
 title = "Wave 1, group A: delete dead code, orphan fixtures, dead configuration and unconsumed workflow outputs"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -52,6 +52,13 @@ paths = [
 implements = ["REQ-ECP-033"]
 specifications = ["SPEC-ECP-022"]
 verification = ["VER-ECP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group A only: the dead symbols, pyflakes clean, the eight orphan fixtures, the manifest line and pyproject table, the vacuous environment test and self-referential pins, the nine unconsumed workflow outputs and the candidate_version consumption, the evidence packet and the verification record. Every decision stays human: no delegation table. No managed path, no release, no publication, no merge."
 +++
 
 # Work Order: Wave 1, group A: delete dead code, orphan fixtures, dead configuration and unconsumed workflow outputs

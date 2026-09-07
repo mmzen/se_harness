@@ -2,7 +2,7 @@
 id = "WO-ECP-030"
 type = "work_order"
 title = "Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -54,6 +54,13 @@ paths = [
 implements = ["REQ-ECP-033"]
 specifications = ["SPEC-ECP-022"]
 verification = ["VER-ECP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group C only: renumber-artifacts, rehearse-recovery and journaled_apply.py out with their tests, the two contract entries out of the package contracts and the candidate template copies (the root copies stay until the next adoption), the code index regenerated, the notes and runbook, the eleven amendment records, the evidence packet and the verification record. Every decision stays human. No root managed path, no release, no publication, no merge."
 +++
 
 # Work Order: Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries

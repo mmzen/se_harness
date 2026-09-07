@@ -2,7 +2,7 @@
 id = "REQ-ECP-033"
 type = "requirement"
 title = "The shipped surface carries no dead code, dormant command or unreachable contract entry"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "vulture at confidence 60 and pyflakes report nothing on se_harness, s
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented: the shipped surface carries no dead code, dormant command or unreachable contract entry (issue #376, wave 1 of the code health assessment of 2026-09-07, with the owner decisions of issue #381). Approval of a definition authorizes no work."
 +++
 
 # Requirement: The shipped surface carries no dead code, dormant command or unreachable contract entry

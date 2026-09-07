@@ -2,7 +2,7 @@
 id = "WO-ECP-029"
 type = "work_order"
 title = "Wave 1, group B: remove the adopt alias after its one release"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -35,6 +35,13 @@ paths = [
 implements = ["REQ-ECP-033"]
 specifications = ["SPEC-ECP-022"]
 verification = ["VER-ECP-024"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:27:10Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group B only: the adopt parser block, the two tests, the two reference lines, the four amendment records closing the alias window, the evidence packet and the verification record. Every decision stays human. No managed path, no release, no publication, no merge."
 +++
 
 # Work Order: Wave 1, group B: remove the adopt alias after its one release
