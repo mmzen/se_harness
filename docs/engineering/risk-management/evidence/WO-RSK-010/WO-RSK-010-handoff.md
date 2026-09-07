@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RSK-010"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "1194004262e0a40fe3595d01335f825431c33130d000f75b05fafeacf29c8e45"
-rebound_at = "2026-09-07T22:02:54Z"
+formal_snapshot_sha256 = "c01a03431296182e7af789ba8566aff80f4075a83b7c0befd28f107599aea3bf"
+rebound_at = "2026-09-07T22:14:03Z"
 ```
 
 # WO-RSK-010 handoff evidence
@@ -83,6 +83,14 @@ branch at `7d531be`, re-measured with the same evaluator: `validate .` reads
 --phase review` PASS; the scope and handoff checkpoints pass every predicate
 with a complete change set of 33 paths; the suite reads 1317 tests, 26
 skipped, the same two control-confirmed failures and no other.
+
+After merging `main` a second time (`edeb4f8`, `WO-ECP-030`) at `175ac62`:
+`RSK-MGT-034` names the command that work retired, so `DEC-RSK-001` was
+raised against it and disposed `amend` by the owner; the predicate sets equal
+`main`'s at 43 identifiers in 10 gate groups; `validate .` reads `Artifacts:
+1387 | Errors: 0 | Warnings: 73 | Advisories: 0`; the handoff checkpoint
+passes every predicate with 34 paths; the suite reads 1287 tests with the same
+two control-confirmed failures.
 
 ## The decision now due
 

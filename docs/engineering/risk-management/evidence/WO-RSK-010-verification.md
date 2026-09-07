@@ -55,7 +55,7 @@ RSK-MGT-036.
 | RSK-MGT-027 | `ScopeAdmissionTests.test_an_unrelated_added_file_and_a_modified_or_deleted_risk_file_still_need_a_declared_path`; `ScopeAdmissionTests.test_another_domains_risk_and_an_approved_work_order_are_not_admitted`; `ScopeAdmissionWithoutGitTests` |
 | RSK-MGT-031 | `RiskArtifactTests.test_layout_registry_templates_and_policy_route_the_risk_type` (`TRC-REL-023` to `TRC-REL-025`, the catalog row, `TRC-016`) |
 | RSK-MGT-033 | `BorrowedStopTests.test_risks_lists_the_threats_to_an_artifact_and_its_chain_and_writes_nothing` |
-| RSK-MGT-034 | `DisposalTests.test_renumbering_treats_the_risk_prefix_like_every_other` (prefix compatibility through the shared table; a risk is never rewritten); see the finding below |
+| RSK-MGT-034 | `DisposalTests.test_no_command_deletes_or_rewrites_a_terminal_risk` (second clause); the first clause names `renumber-artifacts`, retired on `main` by `WO-ECP-030` during this work, and is the subject of `DEC-RSK-001`, disposed `amend` |
 | RSK-MGT-036 | the whole module run against `main`'s code, below |
 
 ### RSK-MGT-036: the cases fail on the code before the change
@@ -169,6 +169,28 @@ change set complete at 33 paths, and the handoff packet was rebound to the new
 formal snapshot by the self-binding run. The suite reads 1317 tests (the merge
 removed one `adopt` case), 26 skipped, and the same two control-confirmed
 Windows failures; `tests/test_risk_management.py` 31 of 31.
+
+### After merging live `main` a second time
+
+`main` moved again to `edeb4f8` (`WO-ECP-030`: `renumber-artifacts`,
+`rehearse-recovery`, the journal and the unreachable `QG-G0-INTENT` gate
+retired) and was merged at `175ac62`, with conflicts resolved in
+`se_harness/cli.py`, `tests/test_cli_shape.py`, `tests/test_validation_taxonomy.py`
+and the regenerated `docs/notes/diagnostic-codes.md`. Two consequences were
+handled explicitly. The renumber case of `tests/test_risk_management.py` drove
+a retired command and was replaced by `test_no_command_deletes_or_rewrites_a_terminal_risk`.
+`RSK-MGT-034`'s first clause names the retired command, so, as the work order's
+stop condition requires, the deviation `DEC-RSK-001` was raised against
+`SPEC-RSK-010#RSK-MGT-034`, blocking `WO-RSK-010`; the owner disposed it
+`amend` by selecting the presented option, and the rule's text is repaired
+under a later repair work order. Re-measured at that tree: the predicate
+identifier sets of both quality-gates copies equal `main`'s, now 43
+identifiers in 10 gate groups; `validate .` reads `Artifacts: 1387 | Errors: 0
+| Warnings: 73 | Advisories: 0`; `preflight --phase review` PASS; the handoff
+checkpoint passes every predicate with a complete change set of 34 paths; the
+suite reads 1287 tests (the merge removed thirty retired cases), 26 skipped,
+and the same two control-confirmed Windows failures; `tests/test_risk_management.py`
+31 of 31.
 
 ## Governing readings, Linux (record)
 

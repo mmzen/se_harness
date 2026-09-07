@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "1194004262e0a40fe3595d01335f825431c33130d000f75b05fafeacf29c8e45",
+    "formal_snapshot_sha256": "c01a03431296182e7af789ba8566aff80f4075a83b7c0befd28f107599aea3bf",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 33 declared changed path(s) are within execution scope.",
+            "message": "All 34 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -246,7 +246,7 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 7d531be: HTTP 422"
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 30a0615: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-RSK-010 is in_progress."
@@ -277,11 +277,12 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "1e20fed5f4209cdb732df234bf7e72179a4db5951dab6b22e169d5824a996b25",
+  "result_sha256": "fc5ef1fbbf456561be55f1cc2145dbf1cf99b1ceb342909b41264c4229cfc68e",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
+      "docs/engineering/risk-management/decisions/DEC-RSK-001.md",
       "docs/engineering/risk-management/evidence/WO-RSK-010-verification.md",
       "docs/engineering/risk-management/evidence/WO-RSK-010/handoff.json",
       "docs/engineering/risk-management/evidence/WO-RSK-010/WO-RSK-010-handoff.md",
