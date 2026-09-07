@@ -426,6 +426,9 @@ def _set_relation(lines: list[str], relation: str, values: list[str]) -> None:
         if pattern.match(lines[index]):
             lines[index] = encoded
             return
+    # A new relation joins the table's last row, above the blank lines that separate tables.
+    while end > start and lines[end - 1] == "":
+        end -= 1
     lines.insert(end, encoded)
 
 
@@ -483,6 +486,17 @@ def _mutate(
         assert disposition is not None
         _set_disposition(front, {**disposition, "decided_at": now})
         fields.add("disposition")
+    elif artifact.artifact_type == "risk" and disposition is not None:
+        # SPEC-RSK-010 RSK-MGT-018 to RSK-MGT-020: the answer copied from the paired
+        # decision, and the work order or design record it names.
+        table = {key: value for key, value in disposition.items() if key not in {"mitigated_by", "avoided_by"}}
+        _set_disposition(front, {**table, "decided_at": now})
+        fields.add("disposition")
+        for relation in ("mitigated_by", "avoided_by"):
+            targets = disposition.get(relation)
+            if targets:
+                _set_relation(front, relation, list(targets))
+                fields.add(f"relations.{relation}")
     elif target == "verified" and artifact.artifact_type == "verification_record":
         if "prepared_at" in artifact.metadata or "verified_at" not in artifact.metadata:
             _set_scalar(front, "verified_at", now)
@@ -571,6 +585,14 @@ def _validate_edge(
             revisit=disposition.get("revisit"),
             scope=tuple(disposition.get("scope") or ()),
         )
+    if artifact.artifact_type == "risk":
+        # SPEC-RSK-010 RSK-MGT-016 to RSK-MGT-021: a raised risk moves only through the
+        # decision that names it; `decide` supplies the option the transition copies.
+        from se_harness.risks import validate_risk_edge
+
+        if reason is not None:
+            _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
+        return validate_risk_edge(artifact, catalog or {}, target=target, actor=actor, reason=reason, disposition=disposition)
     if target in {"rejected", "superseded"}:
         if reason is None:
             detail = "successor VREC ID" if target == "superseded" else "rejection reason"
@@ -602,6 +624,9 @@ def _validate_artifacts(validator: Any, artifacts: list[Any], root: Path) -> lis
     if hasattr(validator, "validate_decisions"):
         decision_errors, _ = validator.validate_decisions(artifacts, root)
         errors.extend(decision_errors)
+    if hasattr(validator, "validate_risks"):
+        risk_errors, _ = validator.validate_risks(artifacts, root)
+        errors.extend(risk_errors)
     errors.extend(validator.validate_revision_consistency(
         artifacts,
         root,
@@ -803,6 +828,11 @@ def plan_transition(
             raise HarnessError(
                 f"transition {artifact_id}: a decision is disposed with harnessctl decide . --artifact {artifact_id} --option OPTION-ID --decision ROLE --reason TEXT"
             )
+        if artifact.artifact_type == "risk" and disposition_fields is None:
+            # SPEC-RSK-010 RSK-MGT-021: raised or answered through its commands only.
+            from se_harness.risks import refuse_bare_risk_transition
+
+            refuse_bare_risk_transition(artifact, target, reasons.get(artifact_id))
         if decisions[artifact_id] == DELEGATED_ROLE:
             # SPEC-ECP-006 ECP-DLG-002/-003/-005/-006/-007: the delegated route.
             right = DELEGATED_TRANSITIONS.get((_family(artifact.artifact_type), artifact.status, target))

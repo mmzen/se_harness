@@ -106,6 +106,7 @@ graph-structural checks that stay in the evaluator. Contract loading fails with
 | release record | `released` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY`, `QGP-G5D-DECISION` | `QGS-EDGE`, `QGS-VERIFIED-INCLUSION` |
 | release record | `rejected` | none | `QGS-EDGE` |
 | decision | `decided`, `deferred`, `withdrawn` | none | `QGS-EDGE` |
+| risk | `raised`, `accepted`, `avoided`, `mitigating`, `mitigated`, `withdrawn` | none | `QGS-EDGE` |
 
 At the `transition` checkpoint `review_evidence_available` accepts the
 work-order evidence bound to the `handoff` checkpoint at the same formal

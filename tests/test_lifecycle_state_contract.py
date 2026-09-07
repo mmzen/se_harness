@@ -63,6 +63,16 @@ EXPECTED = {
         "decided": ((), False, False, False, True, "none"),
         "withdrawn": ((), False, False, False, True, "none"),
     },
+    # SPEC-RSK-010 RSK-MGT-007 and RSK-MGT-008: the risk family, no state granting authority.
+    "risk": {
+        "identified": (("raised", "withdrawn"), False, False, True, True, "none"),
+        "raised": (("accepted", "avoided", "mitigating", "withdrawn"), False, False, True, True, "none"),
+        "mitigating": (("mitigated", "withdrawn"), False, False, True, True, "none"),
+        "accepted": ((), False, False, False, True, "none"),
+        "avoided": ((), False, False, False, True, "none"),
+        "mitigated": ((), False, False, False, True, "none"),
+        "withdrawn": ((), False, False, False, True, "none"),
+    },
 }
 
 
@@ -123,6 +133,7 @@ class LifecycleStateContractTests(unittest.TestCase):
             "verification_record": "verification_record",
             "release_record": "release_record",
             "decision": "decision",
+            "risk": "risk",
         }
         for family, states in LIFECYCLE_REGISTRY.items():
             for status, row in states.items():

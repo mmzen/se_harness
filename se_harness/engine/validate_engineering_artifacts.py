@@ -81,7 +81,7 @@ class LifecycleStatePolicy:
     predecessor_adapter: str
 
 
-_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision"}
+_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision", "risk"}
 _LIFECYCLE_FIELDS = {
     "transitions_to",
     "grants_authority",
@@ -121,7 +121,7 @@ def _load_workflow_lifecycles() -> MappingProxyType:
         raise RuntimeError("managed workflow contract has an unsupported schema")
     source = contract.get("lifecycles")
     if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
-        raise RuntimeError("managed workflow contract must declare exactly the five lifecycle families")
+        raise RuntimeError("managed workflow contract must declare exactly the six lifecycle families")
     lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
     for family in sorted(_LIFECYCLE_FAMILIES):
         raw_states = source.get(family)
@@ -198,7 +198,7 @@ ACTIVE_COVERAGE_STATUSES = frozenset({
 
 
 def _lifecycle_family(artifact_type: str) -> str:
-    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision"} else "definition"
+    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision", "risk"} else "definition"
 
 
 def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
@@ -261,12 +261,25 @@ RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("release_record", "releases_work"): {"work_order"},
     ("decision", "blocks"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
     ("decision", "produces"): {"requirement", "specification", "verification", "architecture", "adr", "work_order"},
+    ("risk", "mitigated_by"): {"work_order"},
+    ("risk", "avoided_by"): {"adr", "decision"},
 }
 
 #: SPEC-DCM-001 rules 2 and 3: the decision kinds and the closed option set of a deviation.
 DECISION_KINDS = ("question", "deviation")
 DEVIATION_OPTIONS = frozenset({"amend", "supersede", "accept", "stop"})
 DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
+#: SPEC-RSK-010 RSK-MGT-002 to RSK-MGT-005: the risk's declared fields, the closed
+#: stage and category sets, and the five-by-five measurement.
+RISK_REQUIRED_FIELDS = ("cause", "effect", "stage", "category", "likelihood", "impact", "score", "raised_by")
+RISK_STAGES = frozenset({"definition", "architecture", "implementation", "verification", "release", "operation"})
+RISK_CATEGORIES = frozenset({"safety", "security", "compliance", "process", "schedule", "quality"})
+RISK_MEASUREMENT_RANGE = range(1, 6)
+#: RSK-MGT-008: the retained end states; RSK-MGT-018: the states a disposition writes.
+RISK_TERMINAL = frozenset({"accepted", "avoided", "mitigated", "withdrawn"})
+RISK_DISPOSED = frozenset({"accepted", "avoided", "mitigating", "mitigated", "withdrawn"})
+#: RSK-MGT-016 and RSK-MGT-020: the option of the paired decision and the risk state it names.
+RISK_OPTION_TARGETS = {"accept": "accepted", "avoid": "avoided", "mitigate": "mitigating"}
 
 
 AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
@@ -1571,6 +1584,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "release_record": ("satisfies", "includes_verification", "releases_work"),
         "operating_contract": ("assures",),
         "decision": ("concerns", "blocks"),
+        "risk": ("threatens",),
     }
 
     for artifact in artifacts:
@@ -3044,6 +3058,125 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
     return errors, warnings
 
 
+def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
+    """SPEC-RSK-010 rules 2 to 6, 12, 13 and 18 to 20: risk fields, the measurement, the pairing, the answer."""
+
+    errors: list[Diagnostic] = []
+    warnings: list[Diagnostic] = []
+    released_versions = {
+        str(artifact.metadata.get("version"))
+        for artifact in artifacts
+        if artifact.artifact_type == "release_record" and artifact.status == "released" and artifact.metadata.get("version")
+    }
+    concerned: dict[str, list[Artifact]] = defaultdict(list)
+    for decision in artifacts:
+        if decision.artifact_type != "decision":
+            continue
+        concerns = decision.relations.get("concerns", [])
+        for target in concerns if isinstance(concerns, list) else []:
+            if isinstance(target, str):
+                concerned[target].append(decision)
+    for artifact in artifacts:
+        if artifact.artifact_type != "risk":
+            continue
+        metadata = artifact.metadata
+        for field_name in ("cause", "effect", "stage", "category", "raised_by"):
+            value = metadata.get(field_name)
+            if not isinstance(value, str) or not value.strip():
+                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' must be a non-empty string", plane="structure")
+        for field_name, allowed in (("stage", RISK_STAGES), ("category", RISK_CATEGORIES)):
+            value = metadata.get(field_name)
+            if isinstance(value, str) and value.strip() and value not in allowed:
+                _add_error(errors, artifact, report_root, "E-RSK-001",
+                    f"risk field '{field_name}' must name one of {', '.join(sorted(allowed))}, not '{value}'", plane="structure")
+        for field_name in ("cause", "effect"):
+            value = metadata.get(field_name)
+            if isinstance(value, str) and len(_sentences(value)) > 1:
+                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' must be one sentence", plane="structure")
+        for field_name in ("question", "options", "recommendation", "decided_by"):
+            # ARCH-RSK-010 conformance check 3: the answer lives on the paired decision.
+            if field_name in metadata:
+                _add_error(errors, artifact, report_root, "E-RSK-001",
+                    f"risk declares the decision field '{field_name}'; the question, the options and the decider live on the paired decision", plane="structure")
+        measurement: dict[str, int] = {}
+        for field_name in ("likelihood", "impact", "score"):
+            value = metadata.get(field_name)
+            if value is None:
+                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' is missing", plane="structure")
+            elif type(value) is not int:
+                _add_error(errors, artifact, report_root, "E-RSK-002", f"risk field '{field_name}' must be an integer, not {value!r}", plane="structure")
+            elif field_name != "score" and value not in RISK_MEASUREMENT_RANGE:
+                _add_error(errors, artifact, report_root, "E-RSK-002", f"risk field '{field_name}' must be from 1 to 5, not {value}", plane="structure")
+            else:
+                measurement[field_name] = value
+        if {"likelihood", "impact", "score"} <= set(measurement):
+            product = measurement["likelihood"] * measurement["impact"]
+            if measurement["score"] != product:
+                _add_error(errors, artifact, report_root, "E-RSK-002",
+                    f"risk field 'score' is {measurement['score']}; likelihood {measurement['likelihood']} times impact {measurement['impact']} is {product}", plane="structure")
+        threatens = artifact.relations.get("threatens", [])
+        threatened = {item for item in threatens if isinstance(item, str)} if isinstance(threatens, list) else set()
+        if artifact.status == "raised":
+            pending = [item for item in concerned.get(artifact.artifact_id, []) if item.status in {"open", "deferred"}]
+            if not pending:
+                _add_error(errors, artifact, report_root, "E-RSK-003",
+                    f"raised risk {artifact.artifact_id} is named in concerns by no open or deferred decision; raise it again with "
+                    f"harnessctl raise-risk --with-decision, or create a decision that names it in concerns and blocks exactly the artifacts it threatens",
+                    plane="governance")
+            elif len(pending) > 1:
+                names = ", ".join(sorted(item.artifact_id for item in pending))
+                _add_error(errors, artifact, report_root, "E-RSK-003",
+                    f"raised risk {artifact.artifact_id} is named in concerns by {len(pending)} pending decisions ({names}); exactly one answers it", plane="governance")
+            else:
+                blocks = pending[0].relations.get("blocks", [])
+                blocked = {item for item in blocks if isinstance(item, str)} if isinstance(blocks, list) else set()
+                if blocked != threatened:
+                    _add_error(errors, artifact, report_root, "E-RSK-004",
+                        f"{pending[0].artifact_id} blocks {sorted(blocked)} but {artifact.artifact_id} threatens {sorted(threatened)}; the two sets must be equal",
+                        plane="governance")
+        disposition = metadata.get("disposition")
+        events = metadata.get("lifecycle_events")
+        expected_option = {"accepted": "accept", "avoided": "avoid", "mitigating": "mitigate", "mitigated": "mitigate", "withdrawn": "withdrawn"}
+        if artifact.status in RISK_DISPOSED - {"withdrawn"} or (artifact.status == "withdrawn" and isinstance(disposition, dict)):
+            if not isinstance(disposition, dict):
+                _add_error(errors, artifact, report_root, "E-RSK-005",
+                    f"a {artifact.status} risk carries a [disposition] table written by harnessctl decide", plane="governance")
+            else:
+                if not isinstance(events, list) or not events:
+                    _add_error(errors, artifact, report_root, "E-RSK-005", "a disposition without a lifecycle event was written by hand", plane="governance")
+                option = disposition.get("option")
+                if option != expected_option[artifact.status]:
+                    _add_error(errors, artifact, report_root, "E-RSK-005",
+                        f"disposition option '{option}' does not name the state {artifact.status}", plane="governance")
+                for field_name in ("decided_by", "decided_at", "reason", "label"):
+                    if not isinstance(disposition.get(field_name), str) or not disposition[field_name].strip():
+                        _add_error(errors, artifact, report_root, "E-RSK-005", f"disposition field '{field_name}' must be a non-empty string", plane="governance")
+                revisit = disposition.get("revisit")
+                if artifact.status == "accepted":
+                    if not isinstance(revisit, str) or not revisit.strip():
+                        _add_error(errors, artifact, report_root, "E-RSK-005", "an accepted risk records its revisit trigger", plane="governance")
+                    elif any(f"v{version}" in revisit or version in revisit for version in released_versions) and not any(
+                        item.status in {"open", "deferred"} for item in concerned.get(artifact.artifact_id, [])
+                    ):
+                        warnings.append(Diagnostic(
+                            _display_path(artifact.path, report_root),
+                            "W-RSK-001",
+                            f"accepted risk {artifact.artifact_id} is past its revisit '{revisit}' and no pending decision concerns it; raise it again or accept it again with a new trigger",
+                            "maintenance",
+                        ))
+        elif isinstance(disposition, dict):
+            _add_error(errors, artifact, report_root, "E-RSK-005", f"a {artifact.status} risk carries no disposition", plane="governance")
+        if artifact.status in {"mitigating", "mitigated"}:
+            mitigated_by = artifact.relations.get("mitigated_by", [])
+            if not isinstance(mitigated_by, list) or not mitigated_by:
+                _add_error(errors, artifact, report_root, "E-RSK-005", f"a {artifact.status} risk names its mitigating work orders in mitigated_by", plane="governance")
+        if artifact.status == "avoided":
+            avoided_by = artifact.relations.get("avoided_by", [])
+            if not isinstance(avoided_by, list) or len(avoided_by) != 1:
+                _add_error(errors, artifact, report_root, "E-RSK-005", "an avoided risk names one ADR or one decision in avoided_by", plane="governance")
+    return errors, warnings
+
+
 def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
     errors: list[Diagnostic] = []
     active_specs = [
@@ -3199,6 +3332,9 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.extend(validate_work_order_delegation(artifacts, repository_root))
         decision_errors, decision_warnings = validate_decisions(artifacts, repository_root)
         errors.extend(decision_errors)
+        risk_errors, risk_warnings = validate_risks(artifacts, repository_root)
+        errors.extend(risk_errors)
+        decision_warnings.extend(risk_warnings)
         errors.extend(
             validate_revision_consistency(
                 artifacts,

@@ -67,7 +67,7 @@ DEFINITION_TYPES = frozenset({
     "operating_contract",
 })
 LIFECYCLE_FAMILIES = frozenset(
-    {"definition", "work_order", "verification_record", "release_record", "decision"}
+    {"definition", "work_order", "verification_record", "release_record", "decision", "risk"}
 )
 LIFECYCLE_FIELDS = frozenset(
     {
@@ -125,7 +125,7 @@ def validate_lifecycle_registry(workflow: Mapping[str, Any]) -> LifecycleRegistr
 
     raw = workflow.get("lifecycles")
     if not isinstance(raw, Mapping) or set(raw) != LIFECYCLE_FAMILIES:
-        raise ContractError("workflow lifecycles must declare exactly the five artifact families")
+        raise ContractError("workflow lifecycles must declare exactly the six artifact families")
     families: dict[str, Mapping[str, LifecycleState]] = {}
     for family in sorted(LIFECYCLE_FAMILIES):
         raw_states = raw.get(family)

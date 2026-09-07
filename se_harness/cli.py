@@ -36,6 +36,7 @@ from se_harness.renumber import (
     render_json_error as render_renumber_json_error,
 )
 from se_harness.recovery_rehearsal import RecoveryRehearsalError, run_recovery_rehearsal
+from se_harness.risks import OPTION_TARGETS, RISK_CATEGORIES, RISK_STAGES
 from se_harness.release_qualification import (
     failed_qualification,
     qualify_candidate_package,
@@ -624,10 +625,12 @@ def _transition(args: argparse.Namespace) -> int:
 
 
 def _decide(args: argparse.Namespace) -> int:
-    from se_harness.decisions import dispose_decision
+    # SPEC-RSK-010 RSK-MGT-016: the disposition also moves the raised risks the
+    # decision concerns, in the same act; a decision concerning none is disposed as before.
+    from se_harness.risks import dispose_decision_with_risks
 
     try:
-        plan = dispose_decision(
+        plan = dispose_decision_with_risks(
             Path(args.target),
             args.artifact,
             option=args.option,
@@ -637,6 +640,8 @@ def _decide(args: argparse.Namespace) -> int:
             withdraw=bool(args.withdraw),
             scope=tuple(args.scope or ()),
             revisit=args.revisit,
+            mitigated_by=tuple(args.mitigated_by or ()),
+            avoided_by=tuple(args.avoided_by or ()),
             apply=bool(args.apply),
         )
         result = plan.result
@@ -653,6 +658,67 @@ def _decide(args: argparse.Namespace) -> int:
         )
     print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
+
+
+def _raise_risk(args: argparse.Namespace) -> int:
+    # SPEC-RSK-010 RSK-MGT-009 and RSK-MGT-010: one act, or a refusal before any file
+    # is written; a refusal is a HarnessError main() prints, exit 2.
+    from se_harness.risks import raise_risk
+
+    result = raise_risk(
+        Path(args.target),
+        domain=args.domain,
+        title=args.title,
+        stage=args.stage,
+        category=args.category,
+        cause=args.cause,
+        effect=args.effect,
+        likelihood=args.likelihood,
+        impact=args.impact,
+        threatens=tuple(args.threatens),
+        raised_by=args.raised_by,
+        owners=tuple(args.owner or ()),
+        artifact_id=args.artifact_id,
+        with_decision=bool(args.with_decision),
+        decision_id=args.decision_id,
+        recommendation=args.recommend,
+        dry_run=bool(args.dry_run),
+    )
+    if args.json:
+        _print_json(_command_result(
+            "raise-risk", "completed",
+            changes=[{"action": change.action, "path": change.path} for change in result.changes],
+            risk=result.risk_id, decision=result.decision_id, score=result.score, dry_run=bool(args.dry_run),
+        ))
+        return 0
+    for change in result.changes:
+        print(f"{change.action:8} {change.path}")
+    print(f"{result.risk_id}: likelihood {args.likelihood} times impact {args.impact} is score {result.score}; raised")
+    if result.decision_id is not None:
+        print(f"{result.decision_id} blocks {', '.join(args.threatens)} until it is disposed with harnessctl decide")
+    else:
+        print("no decision names this risk yet: the validator reports E-RSK-003 until one does")
+    if args.dry_run:
+        print("dry run: no files were written")
+    return 0
+
+
+def _risks(args: argparse.Namespace) -> int:
+    # SPEC-RSK-010 RSK-MGT-033: a read-only listing; every field is rendered as text.
+    from se_harness.risks import risks_threatening
+
+    rows = risks_threatening(Path(args.target), args.artifact)
+    if args.json:
+        _print_json(_command_result("risks", "completed", artifact=args.artifact, risks=rows))
+        return 0
+    if not rows:
+        print(f"no risk threatens {args.artifact} or its governing chain")
+        return 0
+    print(f"risks threatening {args.artifact} and its governing chain:")
+    for row in rows:
+        decision = row["decision"] or "none pending"
+        print(f"- {row['id']} score {row['score']} {row['status']} ({row['stage']}, {row['category']}): threatens {', '.join(row['threatens'])}; decision {decision}")
+    return 0
 
 
 def _scaffold_domain(args: argparse.Namespace) -> int:
@@ -1004,9 +1070,50 @@ def build_parser() -> argparse.ArgumentParser:
     decide.add_argument("--scope", action="append", help="ARTIFACT-ID:FROM-TO transition a deferral admits; repeat per transition")
     decide.add_argument("--revisit", help="the release, date, or artifact state at which the decision is revisited; required for --defer and for accepting a deviation")
     decide.add_argument("--withdraw", action="store_true", help="withdraw the decision because the question no longer applies")
+    decide.add_argument(
+        "--mitigated-by", action="append", dest="mitigated_by",
+        help="work order that reduces the raised risk this decision concerns; repeat per work order; the mitigate answer requires one",
+    )
+    decide.add_argument(
+        "--avoided-by", action="append", dest="avoided_by",
+        help="the ADR or decision recording the design change that avoids the raised risk; the avoid answer defaults to this decision",
+    )
     decide.add_argument("--apply", action="store_true", help="apply the disposition; default is read-only planning")
     decide.add_argument("--json", action="store_true")
     decide.set_defaults(handler=_decide)
+
+    raise_risk = commands.add_parser(
+        "raise-risk",
+        help="record one measured threat as a raised risk artifact, optionally with the decision that stops the threatened work",
+    )
+    raise_risk.add_argument("target", nargs="?", default=".")
+    raise_risk.add_argument("--domain", required=True, help="the engineering domain slug, or the identifier token of exactly one domain")
+    raise_risk.add_argument("--title", required=True, help="the threat, as a noun phrase")
+    raise_risk.add_argument("--stage", required=True, choices=RISK_STAGES, help="the stage the threat would damage")
+    raise_risk.add_argument("--category", required=True, choices=RISK_CATEGORIES)
+    raise_risk.add_argument("--cause", required=True, help="one sentence: the event that would start the damage")
+    raise_risk.add_argument("--effect", required=True, help="one sentence: the damage to governed work if it happened")
+    raise_risk.add_argument("--likelihood", required=True, type=int, help="an integer from 1 to 5")
+    raise_risk.add_argument("--impact", required=True, type=int, help="an integer from 1 to 5")
+    raise_risk.add_argument("--threatens", required=True, action="append", help="an artifact the threat would damage; repeat per artifact")
+    raise_risk.add_argument("--raised-by", required=True, dest="raised_by", help="the actor or role recording the threat; no decision right is needed")
+    raise_risk.add_argument("--owner", action="append", help="an owner of the risk; omitted, the owners of the threatened artifacts")
+    raise_risk.add_argument("--id", dest="artifact_id", help="explicit RISK-DOMAIN-NNN; omitted, the lowest free identifier across every local ref is allocated")
+    raise_risk.add_argument(
+        "--with-decision", action="store_true", dest="with_decision",
+        help="also write the open decision that blocks the threatened artifacts, with the options accept, avoid and mitigate",
+    )
+    raise_risk.add_argument("--decision-id", dest="decision_id", help="explicit DEC-DOMAIN-NNN for --with-decision")
+    raise_risk.add_argument("--recommend", choices=tuple(OPTION_TARGETS), default="mitigate", help="the option the written decision recommends")
+    raise_risk.add_argument("--dry-run", action="store_true", help="report the complete plan without writing")
+    raise_risk.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
+    raise_risk.set_defaults(handler=_raise_risk)
+
+    risks = commands.add_parser("risks", help="list the risks threatening one artifact and its governing chain; writes nothing")
+    risks.add_argument("target", nargs="?", default=".")
+    risks.add_argument("--artifact", required=True, help="the artifact whose threats are listed")
+    risks.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
+    risks.set_defaults(handler=_risks)
 
     select_work = commands.add_parser(
         "select-work-order",

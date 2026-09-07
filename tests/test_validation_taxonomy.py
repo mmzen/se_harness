@@ -128,6 +128,13 @@ class ValidationTaxonomyTests(unittest.TestCase):
             ]
             self.assertEqual(reduced, quality.splitlines())
             self.assertIn("| `decision_gate_clear` |", canonical_quality)
+        elif "`scope`" in quality and "| risk |" not in quality:
+            # WO-RSK-010 (SPEC-RSK-010 RSK-MGT-007): the candidate template adds the risk
+            # family's edge-binding row, with no predicate. A root released before it lacks
+            # exactly that row, declared here; a root released with it takes equality.
+            reduced = [line for line in canonical_quality.splitlines() if not line.startswith("| risk |")]
+            self.assertEqual(reduced, quality.splitlines())
+            self.assertIn("| risk |", canonical_quality)
         elif "`scope`" in quality:
             # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
             self.assertEqual(canonical_quality, quality)
