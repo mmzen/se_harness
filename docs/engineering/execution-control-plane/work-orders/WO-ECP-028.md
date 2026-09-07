@@ -2,7 +2,7 @@
 id = "WO-ECP-028"
 type = "work_order"
 title = "Wave 1, group A: delete dead code, orphan fixtures, dead configuration and unconsumed workflow outputs"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -67,6 +67,13 @@ to = "in_progress"
 decided_at = "2026-09-07T21:09:53Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'you can start both' (DR-WO-START, together with the other remaining wave 1 work order), after PR #390 delivered group B. Start preflight passed at the approval commit. Execution on branch wo/ecp-028-cleanup within the declared scope only (group A)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T21:55:04Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-07 by the accountable engineering owner with the words 'you can mark as complete both' (DR-WO-COMPLETE, together with WO-ECP-030). Re-measured immediately before this transition: clean worktree at 9a81d23 on wo/ecp-028-cleanup (off main 34193ca, main unmoved; the preceding commit carried only the domain-index sentence, this transition is the completion); exact 0.16.0 evaluator: validate 0 errors, 73 warnings (the main baseline), 0 advisories; doctor 0 FAIL; review preflight PASS; handoff check --from-git 34193ca completed, nine QGP-G4I predicates pass, complete: true at its fixed point. pyflakes reports nothing on production code or tests; vulture reports none of the listed symbols; the code index page equals its regeneration under the scope amendment of 2026-09-07. ECP-DEL-002 and the inspector clause of ECP-DEL-006 withdrawn by amendment on the owner's selection of the same date. Windows suite 1281 tests, 26 skipped, the two baseline names, no other failure. Hosted lanes on PR #393 at 05bc4eb: validate and the candidate-package lane pass; the remaining lanes were running at the decision."
 +++
 
 # Work Order: Wave 1, group A: delete dead code, orphan fixtures, dead configuration and unconsumed workflow outputs
