@@ -90,3 +90,7 @@ known, and the failure mode is a loud usage error.
 ## Amendment record
 
 **The "refusal" row is replaced for one release, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** For 0.16.0 the row reads: `REQ-ECP-031` alias | test: invoke `adopt` through `main()` on a folder with content, `--dry-run --json` | exit 0, `"command": "init"`, the same `changes` as `init` on the same folder. The refusal row returns with the follow-up work order that removes the alias.
+
+## Amendment record
+
+**The refusal row returns, under `WO-ECP-029` (`SPEC-ECP-022` `ECP-DEL-015` to `ECP-DEL-018`), proposed 2026-09-07.** The row of 2026-09-06 that read the alias for one release is withdrawn; the original refusal row applies: invoke `adopt` through `main()`, exit 2, empty stdout, argparse usage error on stderr, no handler called. The evidence is `WO-ECP-029`'s packet.

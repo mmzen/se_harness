@@ -2,7 +2,7 @@
 id = "WO-ECP-029"
 type = "work_order"
 title = "Wave 1, group B: remove the adopt alias after its one release"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -42,6 +42,13 @@ to = "approved"
 decided_at = "2026-09-07T20:27:10Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group B only: the adopt parser block, the two tests, the two reference lines, the four amendment records closing the alias window, the evidence packet and the verification record. Every decision stays human. No managed path, no release, no publication, no merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T20:48:10Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #388 completed the merge of the wave 1 packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-029-adopt-alias within the declared scope only; WO-ECP-028 and WO-ECP-030 wait for their own start decisions."
 +++
 
 # Work Order: Wave 1, group B: remove the adopt alias after its one release
