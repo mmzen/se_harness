@@ -2,7 +2,7 @@
 id = "VREC-ECP-034"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-028"
-status = "ready"
+status = "verified"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-028/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-034-evaluator.json"
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 
+verified_at = "2026-09-07T22:00:23Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-028"]
 conforms_to = ["VER-ECP-024"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-07T22:00:23Z"
+decided_by = "assurance-owner"
+reason = "Verified on 2026-09-07 by the accountable assurance owner with the words 'i verify both' (DR-VREC-DECIDE, together with VREC-ECP-033), after the record was presented: bound to candidate commit 8d73205 (WO-ECP-028 implemented), to the retained evidence WO-ECP-028-handoff.md and handoff.json, and to the exact 0.16.0 evaluator evidence. Hosted lanes on PR #393 at the record commit b602eb1: every lane that had finished passes, including the candidate-package lane; the Windows migration lane was running at the decision. The merge of PR #393 remains the owner's decision; main is merged into the branch first once PR #392 lands, since both touch cli.py and the domain index."
 +++
 
 # Verification Record Candidate
