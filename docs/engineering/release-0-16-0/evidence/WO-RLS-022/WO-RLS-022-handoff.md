@@ -140,3 +140,70 @@ Retained by the candidate-evidence run 34100226649:
 | `qualify candidate-package` from the isolated released 0.15.0 verifier | `passed: true`; `CP001`, `CP002` pass |
 | `repository_tools.upgrade_rehearsal` 0.15.0 -> 0.16.0, Linux, twice | `overall_result` pass both runs; `semantic_sha256` `36f3c724e45dd5b1…` both |
 | the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
+
+## Section 4b: build re-verified at the bound candidate
+
+`VREC-SEH-025` and `RLS-SEH-025` bind `c103708a`, the implemented-transition
+commit, so the replay was dispatched again on `release/0.16.0` at that exact
+head (run 34102296258): two producer runs byte-identical, `state` `exact`,
+the same pinned image `python@sha256:2856e6af…` and recipe `0c3f368c…`.
+Wheel `a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae`;
+sdist `25d08fa133e5bf5418b7ade2af995aaf71634422aef775dc55cbdeb32655d581`;
+`SOURCE_DATE_EPOCH` 1788770722; source manifest `8153df95…`; checksums
+`ba095024…`. The section-4 digests were the reading at `3caa77e8`, whose
+packaged bytes are identical; the archives differ only through the
+commit-derived `SOURCE_DATE_EPOCH`. The run's `release-build-replay.json`
+`manifest`, with `commit` equal to the bound candidate, is retained
+byte-for-byte in canonical form as `RLS-SEH-025-bundle.json` when the record
+is prepared and is what the record's distribution table carries; the hosted
+`release-candidate-replay.yml` dispatch on this branch must reproduce it
+from the bound record.
+
+## Section 5b: at the bound candidate `c103708a`
+
+Eight runs, all `success`. Push event: Engineering Harness 34102295234
+(`validate` check-run 101679245748), SE Harness Candidate Evidence
+34102295244, Governor Transition Assessment 34102295240. Pull-request event
+(PR #369, merge commit): Engineering Harness 34102299389 (`validate`
+check-run 101679257663), SE Harness Candidate Evidence 34102299306 with the
+integration package built, verified on Linux and Windows and retained,
+Governor Transition Assessment 34102299313, Publication Rehearsal
+34102299604. The dispatch 34102296258 is section 4b. The evidence packet
+commit `be80ecbc` before it read the same way: seven runs on both events,
+all `success`, the integration package built, verified and retained on the
+pull-request event.
+
+Retained by the candidate-evidence run 34102295244:
+
+| Lane | Reading |
+| --- | --- |
+| `qualify complete-candidate`, Linux | `passed: true`; `CC001` to `CC004` pass |
+| `qualify candidate-package` from the isolated released 0.15.0 verifier | `passed: true`; `CP001`, `CP002` pass |
+| `repository_tools.upgrade_rehearsal` 0.15.0 -> 0.16.0, Linux, twice | `overall_result` pass both runs; `semantic_sha256` `b850fc50ac35269b…` both |
+| the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
+| candidate source, Linux | `run_tests.py --workers 4 --scale full` pass; non-promotable candidate wheel `eff6f380…` built from `c103708a` |
+
+## Section 6: the record
+
+`VREC-SEH-025` was prepared at `c103708a` by the quality owner from the
+released 0.15.0 evaluator over the six gates of `REL-SEH-027`, the five
+verification contracts and the six work-order-keyed handoff packets; it is
+`ready` in the commit that follows the candidate, with its evaluator
+evidence `VREC-SEH-025-evaluator.json` naming the 0.15.0 wheel `eb09343f…`
+and payload `11e4ad03…`. The validator's warning count moved from 71 to 72
+with it: one `W013` location warning, because the release domain keeps its
+records beside their release as every release domain since 0.10.0 has, the
+same warning the 0.15.0 records carry. The verification decision is the
+assurance owner's.
+
+## Disclosures
+
+1. `harnessctl check --checkpoint handoff` retains `handoff.json` beside
+   the packet itself; a shell redirect of its output onto that same path
+   makes the retention fail with `WEX-ECP-010` (a Windows rename onto an
+   open file). Re-run without the redirect; nothing else changed. Recorded
+   so the next release does not repeat it.
+2. On the pull-request event the integration-package jobs run and pass;
+   `gh pr checks` lists the push-event rows of the same job names as
+   "skipping", because the lane's own condition skips them on a push to a
+   branch other than `main`. The two readings are not in conflict.

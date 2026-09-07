@@ -14,7 +14,8 @@ moved the candidate to 0.16.0 (`WO-HUP-016`).
   unit by construction, the build of record taken from the hosted pinned
   producer.
 - `WO-RLS-022`: cut, qualify and build the candidate.
-- `VREC-SEH-025`: the aggregate verification record over every gate.
+- `VREC-SEH-025`: the aggregate verification record over every gate, bound
+  to the candidate `c103708a`, `ready` for the assurance owner's decision.
 - `RLS-SEH-025`: the release record binding the build of record.
 
 Drafted on 2026-09-07 on the repository owner's instruction "release
