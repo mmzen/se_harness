@@ -50,6 +50,7 @@
 - `release-0-13-0/`: aggregate qualification, provenance, and release records for version 0.13.0.
 - `release-0-14-0/`: aggregate qualification, provenance, and release records for version 0.14.0.
 - `release-0-15-0/`: aggregate qualification, provenance, and release records for version 0.15.0.
+- `release-0-16-0/`: aggregate qualification, provenance, and release records for version 0.16.0.
 
 ## Repository-specific engineering documentation
 
