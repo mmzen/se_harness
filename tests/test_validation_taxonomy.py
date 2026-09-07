@@ -128,12 +128,17 @@ class ValidationTaxonomyTests(unittest.TestCase):
             ]
             self.assertEqual(reduced, quality.splitlines())
             self.assertIn("| `decision_gate_clear` |", canonical_quality)
-        elif "`scope`" in quality and "| risk |" not in quality:
-            # WO-RSK-010 (SPEC-RSK-010 RSK-MGT-007): the candidate template adds the risk
-            # family's edge-binding row, with no predicate. A root released before it lacks
-            # exactly that row, declared here; a root released with it takes equality.
-            reduced = [line for line in canonical_quality.splitlines() if not line.startswith("| risk |")]
-            self.assertEqual(reduced, quality.splitlines())
+        elif "| `QG-G0-INTENT` |" in quality or ("`scope`" in quality and "| risk |" not in quality):
+            # WO-ECP-030 (SPEC-ECP-022 ECP-DEL-024, ECP-DEL-028): the candidate template
+            # removed the unreachable QG-G0-INTENT gate; a root released before it carries
+            # exactly that gate's two rows. WO-RSK-010 (SPEC-RSK-010 RSK-MGT-007): the
+            # candidate template adds the risk family's edge-binding row, with no predicate;
+            # a root released before it lacks exactly that row. Both divergences are declared
+            # here rather than hidden; a root released with both takes the equality branch.
+            reduced_root = [line for line in quality.splitlines() if not line.startswith("| `QG-G0-INTENT` |")]
+            reduced_candidate = [line for line in canonical_quality.splitlines() if not line.startswith("| risk |")]
+            self.assertEqual(reduced_candidate, reduced_root)
+            self.assertNotIn("QG-G0-INTENT", canonical_quality)
             self.assertIn("| risk |", canonical_quality)
         elif "`scope`" in quality:
             # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.

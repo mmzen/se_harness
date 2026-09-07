@@ -70,7 +70,6 @@ trusted change baseline.
 
 | Gate ID | Predicate IDs |
 | --- | --- |
-| `QG-G0-INTENT` | `QGP-G0-GRAPH`, `QGP-G0-INTEGRITY` |
 | `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING`, `QGP-G1-DECISION` |
 | `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING`, `QGP-G2-DECISION` |
 | `QG-G3-WORK-AUTHORIZATION` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT`, `QGP-G3-DECISION` |
@@ -131,7 +130,6 @@ check.
 
 | ID | Evaluated when | Pass predicate | Required evidence | Failure result |
 | --- | --- | --- | --- | --- |
-| `QG-G0-INTENT` | Definition work is proposed | An approved INT defines the problem, outcome, scope boundary, and accountable product owner; approved CAP and REQ artifacts derive from it | INT, CAP, REQ metadata and bodies | Definition packet is not eligible for approval |
 | `QG-G1-DEFINITION` | A definition packet or WO is reviewed | Every selected active REQ has selected active SPEC and VER coverage | Formal graph and selected packet | Packet or WO is not eligible |
 | `QG-G2-ARCHITECTURE` | Architecture is applicable | Every selected ARCH identifies its architecturally significant requirement drivers and conforming specifications; its decision assessment is valid; each `adr_required` architecture has active deciding ADR coverage | ARCH, SPEC, REQ, ADR metadata and decision assessment | Architecture or WO is not eligible |
 | `QG-G3-WORK-AUTHORIZATION` | Implementation start is requested | One approved WO selects the complete applicable chain, declares assurance applicability, passes start preflight, and has no scoped or repository blocker | WO, reading manifest, start-preflight result | Implementation MUST NOT start |

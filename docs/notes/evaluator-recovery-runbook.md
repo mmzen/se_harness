@@ -38,13 +38,13 @@ Select one exact distribution filename and SHA-256. Multiple plausible candidate
 
 Use a clean detached worktree or immutable source archive outside the evaluator environment. Build without importing the operational checkout. Record tool versions, file list, wheel digest, and candidate commit. Candidate output remains non-authoritative until a separately authorized publication and public-install proof complete.
 
-For rehearsal only, use the synthetic local archive and simulated publication implemented by `harnessctl rehearse-recovery`. It performs no network operation.
+The former `harnessctl rehearse-recovery` command (a synthetic local archive and simulated publication) was retired under `WO-ECP-030` (issue #376): it had no workflow caller and no retained report. Rehearse a recovery in a disposable clone by hand, following this runbook, and perform no network operation.
 
 ## 6. Credential boundary
 
 A real publication requires short-lived GitHub OIDC Trusted Publishing, least permissions, protected-environment approval, and a separate action-time release-owner decision. Long-lived tokens, copied credentials, local credential files, broad workflow permissions, and credentials made available before digest verification are prohibited.
 
-The rehearsal refuses recognized publication credential signals. Never add an option that suppresses that refusal.
+A rehearsal must refuse recognized publication credential signals; never rehearse with real credentials present.
 
 ## 7. Public-install proof
 
@@ -80,13 +80,7 @@ Recovery is incomplete until all of the following are true:
 
 Run `doctor`, artifact validation, inspection, dashboard generation, supported-runtime tests, active-surface scanning, and hosted checks from the correct external released evaluator. Retain exact commands, exit codes, evaluator evidence, lock identities, changed paths, no-op result, and workflow results. Commit-bound assurance remains a separate VREC decision.
 
-Before any real recovery, rehearse with an empty directory outside the operational repository:
-
-```text
-harnessctl rehearse-recovery DISPOSABLE_OUTPUT --repository REPOSITORY --candidate-commit FULL_COMMIT --target-version SYNTHETIC_VERSION
-```
-
-Review `rehearsal-report.json`. It must show candidate-contamination rejection, stale/mismatched-identity rejection, non-automatic conflict stop, exact interrupted-transaction rollback, restored workflows/invariants, and every external action as false.
+Before any real recovery, rehearse in an empty directory outside the operational repository and record what you observed: candidate-contamination rejection, stale or mismatched-identity rejection, a non-automatic conflict stop, exact interrupted-transaction rollback, restored workflows and invariants, and every external action absent.
 
 ## 11. Rollback
 

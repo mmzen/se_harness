@@ -32,12 +32,12 @@ Four rules hold on every subcommand (`WO-ECP-022`):
   their preparation actor `--owner`. `preflight` keeps `--work-order`
   until it folds into `check`.
 - **`--json` everywhere.** The workflow commands print the schema-2 result;
-  `validate`, `inspect`, `renumber-artifacts`, `release-unit`, `identity`
+  `validate`, `inspect`, `release-unit`, `identity`
   and `qualify` print their own objects; every other command prints one
   `se-harness-command-result-v1` object with the same facts as its human
   output.
 - **Plan and write.** A command that changes existing governed state
-  (`transition`, `decide`, `upgrade`, `renumber-artifacts`) plans by
+  (`transition`, `decide`, `upgrade`) plans by
   default and writes only with `--apply`. A command that adds content
   (`init`, `scaffold-domain`, `create-artifact`) writes by default and
   plans with `--dry-run`; `init` into a target with content appends the
@@ -66,10 +66,8 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
-| `rehearse-recovery` | maintainer or CI rehearsal | writes only a fresh disposable directory outside the operational repository | prove bounded evaluator recovery and rollback without credentials, network, or external action |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
-| `renumber-artifacts` | repository owner or explicitly authorized agent | plan is read-only; `--apply` transactionally changes structured identities, typed relations, and mapped tracked paths | repair an explicit pre-assurance identifier collision and inventory semantic references for manual review |
 | `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of four fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
@@ -321,17 +319,9 @@ The first form is a read-only plan. `--apply` is an explicit transactional repos
 
 Apply requires the already-published target evaluator installed from exact wheel bytes outside the checkout, changes only eligible managed content, and stops without a partial managed update when identity, authority, customization, or conflict prevents a safe plan. Transition evidence, managed files, and the lock share the recoverable transaction, and successful replay must be a no-op. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
 
-## Disposable recovery rehearsal
-
-```text
-harnessctl rehearse-recovery OUTPUT --repository REPOSITORY --candidate-commit FULL_COMMIT [--target-version SYNTHETIC_VERSION] [--json]
-```
-
-The output must be absent or empty and outside the operational repository. The command refuses recognized production publication credential signals, uses no network client, creates only a synthetic local archive and simulated publication, rejects candidate contamination and stale identity, stops synthetic conflicting chains without selection, injects an interrupted root migration, proves exact rollback, restores the normal standard workflows and absence invariants, and writes canonical `rehearsal-report.json`. It grants no real recovery or external-action authority. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md).
-
 ## Predecessor-to-successor migration rehearsal
 
-The former `rehearse-migration` command is retired (`WO-ECP-010`, issue #210); the root-evaluator handover is rehearsed by `python -m repository_tools.upgrade_rehearsal`, a repository-owned tool described in [rehearsing the root-evaluator handover](evaluator-migration-rehearsal.md), not by a `harnessctl` subcommand.
+The former `rehearse-recovery` command is retired (`WO-ECP-030`, issue #376; it had no workflow caller and no retained report), as the former `rehearse-migration` command was (`WO-ECP-010`, issue #210); the root-evaluator handover is rehearsed by `python -m repository_tools.upgrade_rehearsal`, a repository-owned tool described in [rehearsing the root-evaluator handover](evaluator-migration-rehearsal.md), not by a `harnessctl` subcommand.
 
 
 ## Domain and artifact authoring
@@ -355,23 +345,6 @@ found, so a gap is explained. Outside a Git checkout allocation is refused
 is refused when any local ref already carries it.
 
 Non-dry-run authoring uses the common pre-write mutation guard. The invoking environment must match the schema-3 released-evaluator identity locked by the target repository; candidate source and editable or contaminated installs fail without creating the requested path.
-
-## Explicit artifact renumbering
-
-```text
-harnessctl renumber-artifacts [TARGET] \
-  --map OLD=NEW [--map OLD=NEW ...] [--json] [--apply]
-```
-
-The command requires an ordinary clean Git worktree and a full `HEAD`. Every mapping is explicit, one-to-one, type-compatible, and destination-disjoint; the command does not allocate an identifier, infer a related chain, inspect other refs, or reserve the result. Plan mode is the default and writes nothing. `--apply` changes only selected formal `id` fields, parsed typed relations, and exact mapped path components through a recoverable transaction, then validates the resulting graph and leaves an uncommitted diff.
-
-Free-form artifact bodies, documentation, source, and tests are not rewritten automatically. Human and JSON output instead separate:
-
-- `manual_references`, with the resulting repository path, line, and column for semantic review and manual change or disposition;
-- `preserved_evidence_references`, whose captured bytes remain unchanged and should not be rewritten; and
-- `unsupported_references`, for binary or non-UTF-8 paths requiring manual inspection.
-
-When manual or unsupported references remain, output sets `manual_action_required = true` and `repository_repair_complete = false` even after the structured transaction succeeds. Any selected identifier referenced by a verification or release record blocks the operation. Eligible selected artifacts are limited to `draft`, `approved`, `in_progress`, or `implemented`; later lifecycle and commit-bound history require accountable disposition rather than renumbering.
 
 ## Release unit derivation
 

@@ -17,7 +17,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
-from se_harness.cli import main
+from se_harness.cli import build_parser, main
 from se_harness.preflight import _load_validator_module
 from se_harness.risks import MEASUREMENT, OPTION_TARGETS, RISK_OPTIONS, compute_score
 from se_harness.workflow import LIFECYCLE_REGISTRY
@@ -27,10 +27,10 @@ from tests.test_revision_provenance import create_base_chain, formal, write
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering"
 PACKAGE = REPOSITORY_ROOT / "se_harness"
-#: RSK-MGT-014: the predicate identifiers of `main`'s quality-gates contract, 45 of them; the
-#: risk family adds none.
+#: RSK-MGT-014: the predicate identifiers of `main`'s quality-gates contract, 43 of them since
+#: WO-ECP-030 removed the unreachable QG-G0-INTENT gate; the risk family adds none.
 MAIN_PREDICATES = frozenset({
-    "QGP-G0-GRAPH", "QGP-G0-INTEGRITY", "QGP-G1-AUTHORING", "QGP-G1-DECISION", "QGP-G1-GRAPH", "QGP-G1-INTEGRITY",
+    "QGP-G1-AUTHORING", "QGP-G1-DECISION", "QGP-G1-GRAPH", "QGP-G1-INTEGRITY",
     "QGP-G2-AUTHORING", "QGP-G2-DECISION", "QGP-G2-GRAPH", "QGP-G2-INTEGRITY", "QGP-G3-DECISION", "QGP-G3-GRAPH",
     "QGP-G3-INTEGRITY", "QGP-G3-PREFLIGHT", "QGP-G3-SCOPE", "QGP-G3-STATUS", "QGP-G4A-DECISION", "QGP-G4A-GRAPH",
     "QGP-G4A-INTEGRITY", "QGP-G4C-GRAPH", "QGP-G4C-INTEGRITY", "QGP-G4C-STATUS", "QGP-G4I-COMPLETE", "QGP-G4I-DECISION",
@@ -52,6 +52,11 @@ RISK_EDGES = {
 RISK_PATH = "docs/engineering/product/risks/RISK-PRD-001.md"
 DECISION_PATH = "docs/engineering/product/decisions/DEC-PRD-001.md"
 GIT_IDENTITY = ("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid")
+
+
+def _subcommands() -> set[str]:
+    action = next(a for a in build_parser()._actions if getattr(a, "choices", None) and "preflight" in a.choices)
+    return set(action.choices)
 
 
 def risk_text(
@@ -585,27 +590,23 @@ class DisposalTests(RiskFixture):
         write(self.root / "docs/engineering/product/decisions/DEC-PRD-002.md", pairing_decision_text("DEC-PRD-002"))
         self.assertEqual([], [item for item in self.validate().warnings if item.code == "W-RSK-001"])
 
-    def test_renumbering_treats_the_risk_prefix_like_every_other(self) -> None:
-        # RSK-MGT-034: the plan runs through the generic path, which reads a Git checkout.
+    def test_no_command_deletes_or_rewrites_a_terminal_risk(self) -> None:
+        # RSK-MGT-034, second clause. The first clause names `renumber-artifacts`, which
+        # WO-ECP-030 retired while this work was in progress; DEC-RSK-001 records the deviation.
+        self.assertNotIn("renumber-artifacts", {action.dest for action in build_parser()._actions if action.dest} | set(_subcommands()))
         code, _, error = self.raise_risk()
         self.assertEqual(0, code, error)
-        subprocess.run(["git", "init", "-q", "-b", "main", str(self.root)], check=True, capture_output=True)
-        subprocess.run(["git", "-C", str(self.root), *GIT_IDENTITY, "add", "."], check=True, capture_output=True)
-        subprocess.run(["git", "-C", str(self.root), *GIT_IDENTITY, "commit", "-q", "-m", "base"], check=True, capture_output=True)
-        # The prefix is type-compatible like every other (REN050 reads the shared prefix table), and a
-        # risk is never rewritten: no risk state is in the pre-assurance set the tool renumbers (REN049).
-        code, output, error = self.invoke("renumber-artifacts", str(self.root), "--map", "RISK-PRD-001=WO-PRD-007", "--json")
-        self.assertIn(code, (0, 1), error)
-        payload = json.loads(output)
-        self.assertEqual("se-harness-renumber-v1", payload["schema"])
-        self.assertIn({item["code"] for item in payload["blockers"]} & {"REN049", "REN050"}, ({"REN049"}, {"REN050"}, {"REN049", "REN050"}))
-        code, output, error = self.invoke("renumber-artifacts", str(self.root), "--map", "RISK-PRD-001=RISK-PRD-007", "--json")
-        self.assertIn(code, (0, 1), error)
-        payload = json.loads(output)
-        self.assertEqual("blocked", payload["mode"])
-        self.assertEqual(["REN049"], [item["code"] for item in payload["blockers"]])
+        code, _, error = self.decide("--option", "avoid", "--reason", "Design it out.")
+        self.assertEqual(0, code, error)
+        before = self.risk_file().read_bytes()
+        for target in ("raised", "mitigating", "withdrawn", "accepted"):
+            code, output, error = self.invoke("transition", str(self.root), "--set", f"RISK-PRD-001={target}", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=x", "--apply")
+            self.assertEqual(1, code, output + error)
+            self.assertIn("is not allowed", output + error)
+        code, output, error = self.decide("--option", "accept", "--revisit", "v9", "--reason", "again")
+        self.assertEqual(1, code)
+        self.assertEqual(before, self.risk_file().read_bytes())
         self.assertTrue(self.risk_file().is_file())
-        self.assertIn('id = "RISK-PRD-001"', self.risk_file().read_text(encoding="utf-8"))
 
     def test_an_interrupted_disposal_restores_both_files(self) -> None:
         # VER-RSK-010 resilience: the second write fails; neither file is half-written.

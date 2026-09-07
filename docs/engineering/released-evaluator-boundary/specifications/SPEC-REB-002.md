@@ -130,3 +130,7 @@ Inspection groups repeated conflict instances while JSON retains each instance. 
 - Stable rule-ID suffixes and human rendering details.
 - The disposable fixture's project name and temporary directory layout.
 - The periodic rehearsal schedule after issue #81 closes; accountable repository policy sets that cadence.
+
+## Amendment record
+
+**The recovery-rehearsal example is amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-031`).** The non-conforming example "recovery rehearsal uses real Trusted Publisher credentials or mutates the operational root" now names a hand-run rehearsal per the recovery runbook: the `rehearse-recovery` command is removed. The rule stands.

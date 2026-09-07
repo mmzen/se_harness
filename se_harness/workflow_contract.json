@@ -319,13 +319,6 @@
       ]
     },
     {
-      "id": "PROC-CANDIDATE-COMMIT",
-      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
-      "steps": [
-        {"id": "STEP-CANDIDATE-COMMIT-AUTHORIZE", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "repository-owner", "artifact": "{artifact_id}", "decision": "whether the exact candidate commit may be created", "outcomes": ["authorize", "stop"], "response": "Authorize creating the exact candidate commit for {artifact_id}.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits only creation of the exact candidate commit."], "non_effects": ["This decision request does not stage, commit, branch, push, merge, or verify anything."]}
-      ]
-    },
-    {
       "id": "PROC-FOCUS-SELECTED",
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
