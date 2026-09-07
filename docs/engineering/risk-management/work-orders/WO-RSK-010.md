@@ -17,10 +17,16 @@ paths = [
   "se_harness/risks.py",
   "se_harness/artifact_layout.py",
   "se_harness/cli.py",
+  "se_harness/workflow.py",
   "se_harness/workflow_compliance.py",
+  "se_harness/workflow_contract.py",
   "se_harness/workflow_contract.json",
+  "se_harness/quality_gates_contract.json",
   "se_harness/engine/artifact_layout_registry.py",
   "se_harness/engine/validate_engineering_artifacts.py",
+  "repository_tools/diagnostic_code_index.py",
+  "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
+  "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
@@ -31,6 +37,8 @@ paths = [
   "tests/test_cli_shape.py",
   "tests/test_lifecycle_state_contract.py",
   "tests/test_validation_taxonomy.py",
+  "docs/notes/README.md",
+  "docs/notes/diagnostic-codes.md",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/risk-artifacts.md",
   "docs/engineering/README.md",
@@ -101,7 +109,11 @@ Add no gate predicate and no configuration key.
 - `DR-RISK-CLOSE` and the managed `DECISION_RIGHTS.md`: `WO-RSK-011`.
 - `SPEC-DCM-001`, `se_harness/decisions.py` and the decision family's own
   behaviour: unchanged, by ARCH-RSK-010's dependency direction.
-- Both quality-gates contract copies: unchanged, by RSK-MGT-014.
+- Any gate predicate or gate group in either quality-gates contract copy, by
+  RSK-MGT-014. The copies gain only the six edge bindings of the `risk`
+  lifecycle family, each with no predicate and the `QGS-EDGE` structural check,
+  because the kernel refuses to load a lifecycle edge that has no binding
+  (`WEX-ECP-030`, ECP-KRN-009); the predicate identifier sets stay `main`'s.
 - `.engineering-harness.toml.tpl`: unchanged, by RSK-MGT-011.
 - The repository's root managed copies: they change at the next release adoption.
 - Recording any actual risk of this repository.
@@ -144,10 +156,13 @@ resulting record, stays with the human owner.
 ## Expected change surface
 
 The risk module and the layout registry; the CLI parser and two handlers; the
-workflow contract's lifecycle families and the two template policy documents; the
-validator's artifact rules and the catalog generator; the scope check's path
-admission; one new template; one new test module and four existing test modules
-that pin type or command sets; two notes.
+workflow contract's lifecycle families, the family set the kernel accepts, the
+two quality-gates contract copies' edge bindings and the three template policy
+documents; the transition writer's risk branch; the validator's artifact rules and
+the catalog generator; the scope check's path admission; one new template; the
+diagnostic-code registry and its generated page; one new test module and four
+existing test modules that pin type or command sets; two notes and the notes
+index.
 
 ## Required verification
 
@@ -195,3 +210,22 @@ drafting error in this work order, found by `QGP-G4I-PATHS` reading `WEX201`
 against `main` and corrected before start and before any evidence was bound. No
 other field changed, and the objective, the in-scope list and the expected change
 surface are unaffected.
+
+2026-09-07, engineering owner, under `DR-REMEDIATION-SCOPE`, after the delegated
+start and before the first code change: added eight paths. The implementer's
+survey measured that the contract cannot be met within the approved paths.
+`se_harness/workflow_contract.py` holds the closed family set the kernel accepts,
+so `RSK-MGT-007` needs it. The kernel refuses to load any lifecycle edge without
+a binding in the quality-gates contract (`WEX-ECP-030`, ECP-KRN-009), so the
+`risk` family needs six bindings in `se_harness/quality_gates_contract.json`, the
+template `QUALITY_GATES.json` and one row of the template `QUALITY_GATES.md`;
+each binding carries no predicate and `QGS-EDGE` only, so `RSK-MGT-014` holds and
+the predicate identifier sets stay `main`'s. `se_harness/workflow.py` holds the
+one journalled writer and the only permitted writer of a `[disposition]` table,
+so `RSK-MGT-016`, `RSK-MGT-018`, `RSK-MGT-019` and `RSK-MGT-020` need it.
+`repository_tools/diagnostic_code_index.py` and `docs/notes/diagnostic-codes.md`
+register and list the `E-RSK` and `W-RSK` families, without which the code-index
+test fails. `docs/notes/README.md` gains the row of the new note. The
+quality-gates bullet of `Out of scope` and the expected change surface were
+reworded to match; every rule, diagnostic code, state and constraint is
+unchanged.
