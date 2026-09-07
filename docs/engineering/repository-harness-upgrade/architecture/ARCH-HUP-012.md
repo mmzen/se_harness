@@ -8,8 +8,8 @@ created = "2026-09-02"
 updated = "2026-09-02"
 
 [relations]
-addresses = ["REQ-HUP-029", "REQ-HUP-030", "REQ-HUP-031", "REQ-HUP-032"]
-conforms_to = ["SPEC-HUP-015", "SPEC-HUP-016"]
+addresses = ["REQ-HUP-029", "REQ-HUP-030", "REQ-HUP-031", "REQ-HUP-032", "REQ-HUP-033", "REQ-HUP-034"]
+conforms_to = ["SPEC-HUP-015", "SPEC-HUP-016", "SPEC-HUP-017"]
 
 [decision_assessment]
 outcome = "no_significant_decision"
@@ -64,3 +64,17 @@ trust boundary, cross-cutting policy or hard-to-reverse choice; 0.14.0 is
   the selected architecture unrelated to the selected requirements; the
   0.14.0 packet had drafted this architecture for its own requirements,
   and the 0.15.0 packet reused it without extending the relation.
+- 2026-09-07, under `WO-HUP-017`, whose execution scope names this file,
+  after the packet's approval and before its start preflight, as for
+  `WO-HUP-016`: an approved architecture may not address a draft
+  requirement (`E016`), so the relation is extended once the requirements
+  are approved, and without it the review preflight reports `W021`. The
+  architecture now also addresses `REQ-HUP-033` and `REQ-HUP-034` and
+  conforms to `SPEC-HUP-017`: the 0.16.0 adoption crosses the same
+  standard-root boundary the same way, one released evaluator outside the
+  checkout writing the managed root through the installer's transaction
+  from a digest-verified wheel-file install. For the first time files leave
+  the managed set, the eight retired script copies, through the leaving-set
+  rule the installer already carried (`SPEC-DST-025`); nothing new is
+  trusted and no boundary moves, because the same programs now run from
+  inside the installed evaluator. The decision assessment is unchanged.
