@@ -78,3 +78,29 @@ generations; the Windows suite's failure set equals its same-commit 0.14.0
 control's. The candidate is 0.16.0. `ARCH-HUP-012` was amended by record to
 address the two 0.15.0 requirements. Evidence in `evidence/WO-HUP-016/`;
 the record is `VREC-HUP-015`.
+
+## Adopting 0.16.0 (2026-09-07)
+
+`RLS-SEH-025` released 0.16.0 on 2026-09-07, the distribution release in
+which the evaluator's scripts left the installed repository for the wheel
+(`WO-DST-024`). This repository still carries the 0.15.0 evaluator's eight
+hash-locked copies under `scripts/`, and `WO-TCM-011` waits for this
+adoption by its own constraint. `REQ-HUP-033`, `REQ-HUP-034`,
+`SPEC-HUP-017`, `VER-HUP-017` and `WO-HUP-017` carry the adoption on the
+`WO-HUP-016` model: the simple upgrade from an isolated wheel-file install
+whose digest equals the record's, one transaction document, the candidate
+moved to 0.17.0, identity-aware test edits; and, as `SPEC-DST-025` rules
+`DST-ENG-015` and `DST-ENG-016` bind this work order, the three release
+workflows switched from root scripts to evaluator commands, the owner
+region's script lines rewritten and `SPEC-IAR-012` amended by record.
+`ARCH-HUP-012` is amended by record after approval and before the start
+preflight, as for `WO-HUP-016`, because an approved architecture may not
+address a draft requirement (`E016`). The rehearsal of 2026-09-07 on a throwaway LF clone of `main`
+at `5df10aa9` measured 48 files with 6 updates and the 8 expected removals;
+a no-op replay over 40 files; 0 errors, 73 warnings, 0 advisories, 97
+managed checks and a passing released-root qualification under the 0.16.0
+gate; an identical Explorer twice; and a suite on the moved root that, before
+any edit, lost six modules to the missing copies and read 5 failures and 22
+errors, every name a read of a removed copy or of an owner sentence naming
+the eight. The work order carries no delegation class, so its start,
+completion and record are the owners' explicit acts.
