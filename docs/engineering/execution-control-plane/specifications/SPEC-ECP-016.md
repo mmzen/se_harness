@@ -156,3 +156,7 @@ scope checkpoint writes no packet.
 ## Amendment record
 
 **The `ECP-CLI-001` qualification of 2026-09-06 is closed, under `WO-ECP-029` (`SPEC-ECP-022` `ECP-DEL-015` to `ECP-DEL-018`), proposed 2026-09-07.** The repository-command list no longer names `adopt`; the pinned set in `tests/test_cli_shape.py` drops it. Nothing else changes.
+
+## Amendment record
+
+**`ECP-CLI-001`, `ECP-CLI-003` and `ECP-CLI-008` are amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-021`, `ECP-DEL-031`).** `renumber-artifacts` and `rehearse-recovery` leave the command list, the own-object list of `--json` and the list of subcommands tested through `main()`; `rehearse-recovery`'s reserved `output` and `--repository` shape (issue #221) is moot. Nothing else changes.

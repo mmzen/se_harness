@@ -182,3 +182,7 @@ The command reports every affected artifact, relation, path move, non-evidence r
 ## Explicitly unspecified decisions
 
 The implementation agent may choose internal module names, bounded capacity constants, temporary-file names, stable diagnostic codes, JSON field grouping, and concise human wording. It may not change the public command shape, infer mappings, make evidence content editable, support record renumbering, weaken the clean-worktree or rollback contract, scan other refs, add network behavior, or perform Git authority actions.
+
+## Amendment record
+
+**Retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-020`, `ECP-DEL-021`, `ECP-DEL-029`).** The `renumber-artifacts` command this specification defines was never applied operationally and is removed from the product with its module, tests and reference; argparse refuses the name as any unknown command. The specification stays as the record of the contract that existed; it binds no code after 0.17.0.

@@ -203,3 +203,7 @@ candidate template are compared, **then** they are byte-equal and name no
 - Whether the three deleted test modules leave one absence test in
   `tests/test_cli_shape.py` or none.
 - The order of the three work orders' pull requests; each is independent.
+
+## Amendment record
+
+**`ECP-DEL-022` is corrected, proposed 2026-09-07 under `WO-ECP-030`.** The rule named three code prefixes to leave `diagnostic_code_index.py`: `REN`, `RR` and `JNL`. `RR` is release qualification's released-root family, live in `se_harness/release_qualification.py`; the recovery rehearsal emitted no coded diagnostics. Only `REN` and `JNL` leave the registry. Nothing else changes.

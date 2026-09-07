@@ -91,3 +91,7 @@ integrity readings come from the exact released evaluator, se-harness
 The journal is retained but not yet the write path of any command; that is
 `REQ-ECP-017`'s and `VER-ECP-006`'s scenario 5 over `transition --apply`,
 under a later work order.
+
+## Amendment record
+
+**The journaled-apply rows are retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-030`).** The fault-matrix and recovery rows over `journaled_apply` verify code that no longer ships; the removal rows stand as history.

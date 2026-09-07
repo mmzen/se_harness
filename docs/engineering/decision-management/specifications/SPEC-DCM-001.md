@@ -265,3 +265,7 @@ transition pairs.
   reports `E-DCM-005` otherwise; rule 3 now shows an identifier and names
   the check. The deviation's fields, options and decision right are
   unchanged.
+
+## Amendment record
+
+**The renumbering sentence is amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-031`).** The sentence "`renumber-artifacts` treats `DEC-` like every other prefix" describes a command that is removed; decision identifiers are never rewritten. Nothing else changes.

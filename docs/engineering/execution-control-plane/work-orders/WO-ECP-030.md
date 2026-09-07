@@ -2,7 +2,7 @@
 id = "WO-ECP-030"
 type = "work_order"
 title = "Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -61,6 +61,20 @@ to = "approved"
 decided_at = "2026-09-07T20:27:10Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group C only: renumber-artifacts, rehearse-recovery and journaled_apply.py out with their tests, the two contract entries out of the package contracts and the candidate template copies (the root copies stay until the next adoption), the code index regenerated, the notes and runbook, the eleven amendment records, the evidence packet and the verification record. Every decision stays human. No root managed path, no release, no publication, no merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T21:09:59Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'you can start both' (DR-WO-START, together with the other remaining wave 1 work order), after PR #390 delivered group B. Start preflight passed at the approval commit. Execution on branch wo/ecp-030-dormant within the declared scope only (group C)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T21:54:21Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-07 by the accountable engineering owner with the words 'you can mark as complete both' (DR-WO-COMPLETE, together with WO-ECP-028). Re-measured immediately before this transition: clean worktree at d1c20f1 on wo/ecp-030-dormant (off main 34193ca, main unmoved); exact 0.16.0 evaluator: validate 0 errors, 73 warnings (the main baseline), 0 advisories; doctor 0 FAIL, the root managed set untouched; review preflight PASS; handoff check --from-git 34193ca completed, nine QGP-G4I predicates pass, complete: true at its fixed point. Both retired commands refused by argparse; the three modules and their tests deleted; the two contract entries absent from the package contracts and the candidate template copies, byte-equal; the code index regenerated (REN and JNL out, RR kept by the corrected ECP-DEL-022). Windows suite 1256 tests, 26 skipped, the two baseline names, no other failure. Hosted lanes on PR #392 at d1c20f1: all thirteen pass, including the candidate-package lane whose 0.16.0 verifier invokes neither retired command."
 +++
 
 # Work Order: Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries

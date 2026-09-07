@@ -3,14 +3,6 @@
   "aggregation": ["fail", "not_assessable", "pass"],
   "gates": [
     {
-      "id": "QG-G0-INTENT",
-      "checkpoints": ["pre-action", "transition"],
-      "predicates": [
-        {"id": "QGP-G0-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
-        {"id": "QGP-G0-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]}
-      ]
-    },
-    {
       "id": "QG-G1-DEFINITION",
       "checkpoints": ["pre-action", "transition"],
       "predicates": [

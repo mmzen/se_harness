@@ -40,7 +40,7 @@ remain append-only.
 
 Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1` representation and binds the installed released-evaluator payload plus its archive when available. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema-1 and schema-2 locks remain readable, but ordinary mutation requires a schema-3 evaluator match; older locks migrate only through a separately reviewed upgrade whose target evaluator is installed from already-published wheel bytes. `doctor` and mutation plans are read-only, and customized, ambiguous, or identity-mismatched content is never overwritten.
 
-Lifecycle transition apply, non-dry-run domain and artifact authoring, renumber apply, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
+Lifecycle transition apply, non-dry-run domain and artifact authoring, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
 ## Delegated operations
 
@@ -62,9 +62,8 @@ denies an operation; every other decision right stays human.
 `decision_required` names `delegated-executor` and the command to run when
 the gate is `success`, and a response naming the check, the head and the
 conclusion observed otherwise. Verification preparation MUST stop before Git
-when a required candidate commit is absent. `PROC-CANDIDATE-COMMIT` binds
-that stop to `STEP-CANDIDATE-COMMIT-AUTHORIZE`; its response requests the
-exact repository-owner action and performs no staging, commit, branch, push,
+when a required candidate commit is absent; the response requests the exact
+repository-owner action and performs no staging, commit, branch, push,
 merge, assurance, release, credential, network, or external effect.
 
 ## State model
@@ -117,7 +116,7 @@ Conformance tests MUST fail on such a difference.
    each new draft. The author MUST complete accountable fields and validate the
    graph before requesting a decision.
 2. The product or domain owner MUST approve the intent, capabilities, and
-   requirements after `QG-G0-INTENT` and `QG-G1-DEFINITION` pass.
+   requirements after `QG-G1-DEFINITION` passes.
 3. The technical owner MUST approve specifications and architecture after
    `QG-G1-DEFINITION` and `QG-G2-ARCHITECTURE` pass. Each architecture MUST
    declare its decision applicability. ADR count follows coherent significant
@@ -189,7 +188,6 @@ outcomes, and response values.
 | `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl check . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff` (the `scope` checkpoint evaluates the scope predicates alone, in any state, for the pull-request gate); `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
 | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
-| `PROC-CANDIDATE-COMMIT` | `STEP-CANDIDATE-COMMIT-AUTHORIZE` decision `DR-EXTERNAL-ACTION`; request exact candidate-commit authority and perform no Git action. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl check . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
