@@ -23,8 +23,8 @@ the one-release `adopt` alias; the dormant surface the owner retired on
 ## Scope
 
 Group A (`WO-ECP-028`) is the unreferenced symbols of section 1 of the
-assessment, eight orphan fixtures and a handful of dead configuration lines,
-workflow outputs and test pins. Group B (`WO-ECP-029`) is
+assessment, eight orphan fixtures and the dead configuration, outputs and
+pins around them. Group B (`WO-ECP-029`) is
 the `adopt` alias. Group C (`WO-ECP-030`) is the two dormant commands, the
 unwired journal and two unreachable contract entries. The declared-digest chain of `hash_bound.py` stays for #377.
 
