@@ -2,10 +2,10 @@
 id = "DEC-RSK-001"
 type = "decision"
 title = "RSK-MGT-034 names a retired command"
-status = "open"
+status = "decided"
 owners = ["technical-owner", "assurance-owner"]
 created = "2026-09-08"
-updated = "2026-09-08"
+updated = "2026-09-07"
 kind = "deviation"
 question = "How does RSK-MGT-034 stand now that harnessctl renumber-artifacts is retired?"
 raised_by = "delegated-executor"
@@ -28,6 +28,20 @@ label = "Stop the work order until the specification is repaired."
 [relations]
 concerns = ["SPEC-RSK-010", "WO-RSK-010"]
 blocks = ["WO-RSK-010"]
+
+[disposition]
+option = "amend"
+label = "Amend RSK-MGT-034 to drop the retired command and keep the clause that a terminal risk is never deleted or rewritten."
+decided_by = "technical-owner"
+decided_at = "2026-09-07T22:13:55Z"
+reason = "Amended by record on 2026-09-08, the owner selecting the presented option: RSK-MGT-034 drops the retired command renumber-artifacts (WO-ECP-030) and keeps the clause that a terminal risk is never deleted or rewritten; the text is repaired under a repair work order."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-07T22:13:55Z"
+decided_by = "technical-owner"
+reason = "Amended by record on 2026-09-08, the owner selecting the presented option: RSK-MGT-034 drops the retired command renumber-artifacts (WO-ECP-030) and keeps the clause that a terminal risk is never deleted or rewritten; the text is repaired under a repair work order."
 +++
 
 # Decision: RSK-MGT-034 names a retired command
