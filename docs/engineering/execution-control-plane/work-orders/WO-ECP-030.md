@@ -2,7 +2,7 @@
 id = "WO-ECP-030"
 type = "work_order"
 title = "Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -61,6 +61,13 @@ to = "approved"
 decided_at = "2026-09-07T20:27:10Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-07 by the accountable owner with the words 'i approve', given after the packet PR #385 and its summary were presented, as a decision distinct from the approval of its definitions in the same transaction. Authorizes bounded execution of group C only: renumber-artifacts, rehearse-recovery and journaled_apply.py out with their tests, the two contract entries out of the package contracts and the candidate template copies (the root copies stay until the next adoption), the code index regenerated, the notes and runbook, the eleven amendment records, the evidence packet and the verification record. Every decision stays human. No root managed path, no release, no publication, no merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T21:09:59Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'you can start both' (DR-WO-START, together with the other remaining wave 1 work order), after PR #390 delivered group B. Start preflight passed at the approval commit. Execution on branch wo/ecp-030-dormant within the declared scope only (group C)."
 +++
 
 # Work Order: Wave 1, group C: retire renumber-artifacts, rehearse-recovery, the unwired journal and two unreachable contract entries
