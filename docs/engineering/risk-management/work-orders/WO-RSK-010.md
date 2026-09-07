@@ -33,6 +33,7 @@ paths = [
   "tests/test_validation_taxonomy.py",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/risk-artifacts.md",
+  "docs/engineering/README.md",
   "docs/engineering/risk-management/",
 ]
 
@@ -176,3 +177,14 @@ The schema-2 handoff result, then: each rule identifier with its covering test;
 the diagnostics added; the files changed against the declared scope; the
 configuration and predicate-set readings; the governing readings with commands,
 platforms and evaluator version; and the one decision now due with its role.
+
+## Amendment record
+
+2026-09-07, engineering owner, under `DR-REMEDIATION-SCOPE`: added
+`docs/engineering/README.md` to `[execution_scope].paths`. The engineering domain
+index must name a new domain from the moment the domain exists, by that file's
+own maintenance rule, so the packet's own diff touches it. Its omission was a
+drafting error in this work order, found by `QGP-G4I-PATHS` reading `WEX201`
+against `main` and corrected before start and before any evidence was bound. No
+other field changed, and the objective, the in-scope list and the expected change
+surface are unaffected.
