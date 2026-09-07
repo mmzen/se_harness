@@ -104,3 +104,19 @@ any edit, lost six modules to the missing copies and read 5 failures and 22
 errors, every name a read of a removed copy or of an owner sentence naming
 the eight. The work order carries no delegation class, so its start,
 completion and record are the owners' explicit acts.
+
+The repository owner approved the five artifacts on 2026-09-07 by selecting
+"Approve all five" (PR #370); `ARCH-HUP-012` was amended by record on the
+packet branch once the requirements were approved. `WO-HUP-017` was
+started, executed and completed on 2026-09-07 (PR #371) on the owner's
+"start, complete on green, prepare record": the root is exact public 0.16.0
+under a schema-3 lock recording archive `a969d6ab…` and payload
+`51712fcf…`, moved from the 0.15.0 lock `f617ff0b…` by one transaction (48
+managed files, 6 updated, the 8 retired script copies removed, replay 40
+unchanged) retained as `evidence/WO-HUP-017-evaluator-upgrade.json`. Under
+exact 0.16.0 the graph reads 1,351 artifacts, 0 errors, 73 warnings, 0
+advisories, 97 managed checks, released-root qualification PASS and two
+identical Explorer generations; the Windows suite's failure set equals its
+same-commit 0.15.0 control's. The candidate is 0.17.0; the three release
+workflows invoke the evaluator; `SPEC-IAR-012` carries its amendment
+record. Evidence in `evidence/WO-HUP-017/`; the record is `VREC-HUP-016`.

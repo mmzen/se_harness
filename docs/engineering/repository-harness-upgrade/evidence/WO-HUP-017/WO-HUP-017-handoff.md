@@ -170,8 +170,15 @@ lanes green before the evidence existed:
   handoff step on `QGP-G4I-EVIDENCE`, no readable evidence for this work
   order yet, the expected reading before this packet existed.
 
-The evidence head, the completion head and the record head are checked the
-same way before each act and recorded in this section as they complete.
+At the evidence head `798454cf` (pull-request event), all four lanes green
+before completion: Engineering Harness 34121295713 (`validate` check-run
+101739690280; the lane installed `se-harness==0.16.0` from the transaction's
+lock, ran the 0.16.0 gate and the handoff check over this packet), Governor
+Transition Assessment 34121295723 (the same plan as above), SE Harness
+Candidate Evidence 34121295777, Publication Rehearsal 34121295894.
+
+The completion head and the record head are checked the same way before
+each act.
 
 ## Disclosures
 
