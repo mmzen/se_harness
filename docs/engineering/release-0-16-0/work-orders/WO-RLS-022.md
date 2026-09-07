@@ -2,7 +2,7 @@
 id = "WO-RLS-022"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.16.0 candidate from main"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-09-07T07:26:08Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-07 by selecting the presented option 'Approve both (Recommended)', after the release owner approved REL-SEH-027 in the same transaction. WO-RLS-022 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T08:21:55Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-07, given by selecting the presented option 'Merged; start, complete on green, prepare record'. Start preflight PASS with no diagnostics over the reading manifest; REL-SEH-027 approved by the release owner the same day; branch release/0.16.0 cut from main at 2e46b492."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.16.0 candidate from main
