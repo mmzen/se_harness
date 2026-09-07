@@ -26,12 +26,10 @@ install are removed, and a second upgrade changes nothing.
 
 ## Why
 
-Release 0.16.0 is a distribution release: the evaluator's scripts ship
-inside the wheel, and the installer writes none of them into a repository.
-This repository still carries the 0.15.0 evaluator's eight hash-locked
-copies, so its in-tree doctor reports them as extra. The rehearsal showed
-six managed files update, the eight copies leave through the leaving-set
-rule, and a no-op replay over the forty remaining files.
+Release 0.16.0 ships the evaluator's scripts inside the wheel, and the
+installer writes none of them into a repository. This repository still
+carries the 0.15.0 evaluator's eight hash-locked copies. The rehearsal
+showed six files update, the eight copies leave, and a no-op replay.
 
 ## Behavior
 

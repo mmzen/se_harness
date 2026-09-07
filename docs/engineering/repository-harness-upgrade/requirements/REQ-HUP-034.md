@@ -20,23 +20,22 @@ derives_from = ["CAP-HUP-002"]
 ## In plain words
 
 A root move is proven by what the new evaluator reads over the whole graph
-and by the test suite staying where it was. This move also takes eight
-files away, so every workflow, instruction and test that read them must
-read the evaluator instead.
+and by the test suite staying where it was. This move also removes eight
+files, so their last readers must read the evaluator instead.
 
 ## Why
 
 The 0.16.0 gate read the rehearsal clone as 0.15.0 did: no error, no
-advisory, the same warnings, an identical Explorer twice. Before any edit
-the suite on the moved root lost six modules and read 27 failing names,
-every one a read of a removed copy or of a sentence naming the eight. The
+advisory, an identical Explorer twice. Before any edit
+the suite on the moved root lost six modules and read 27 failing names.
+Each reads a removed copy or a sentence naming the eight. The
 candidate must move to 0.17.0, or the derivation fails closed.
 
 ## Behavior
 
 | Trigger | Response | On failure |
 | --- | --- | --- |
-| The moved root | Exact 0.16.0 validation, doctor, qualification, inspection, two generations and the review preflight pass. The derivation yields the 0.16.0 to 0.17.0 pair. The three workflows invoke the evaluator. The owner region and the specification name no managed scripts path. The suite's failure set equals the control's beyond the named edits. | The work order stops; the branch is amended or abandoned under the owner's decision |
+| The moved root | Every 0.16.0 reading passes. The derivation yields the 0.16.0 to 0.17.0 pair. The three workflows invoke the evaluator. No owner sentence names a managed scripts path. The suite's failure set equals the control's. | The work order stops; the branch is amended or abandoned under the owner's decision |
 
 ## Examples
 

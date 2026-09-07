@@ -52,26 +52,27 @@ finding and `WO-TCM-011` may start.
 ## In scope
 
 - Prove the installed 0.16.0 identity from the isolated environment;
-  `SPEC-HUP-017` rules 1 and 2. Rehearsed on 2026-09-07 on a throwaway LF
+  `SPEC-HUP-017` `HUP-ADP-001` to `HUP-ADP-003`. Rehearsed on 2026-09-07 on a throwaway LF
   clone of `main` at `5df10aa9`: wheel `a969d6ab…`, payload `51712fcf…`.
-- Review the plan (rules 3 and 6). Measured: 48 files, 6 `update`, 8
+- Review the plan (`HUP-ADP-004`, `HUP-ADP-005`). Measured: 48 files, 6 `update`, 8
   `remove` (the eight retired copies, byte-identical to their lock
   entries), 34 unchanged; no `add`, `adopt`, `customized` or `conflict`.
 - Apply with `harnessctl upgrade . --apply --evidence-output
   docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017-evaluator-upgrade.json`;
-  require the no-op replay (rules 4 and 5). Measured: replay 40 unchanged;
+  require the no-op replay (`HUP-ADP-006` to `HUP-ADP-008`). Measured: replay 40 unchanged;
   prior lock `f617ff0b…` (the committed LF lock), prior `tool_version
   0.15.0`; forty lock entries, none under `scripts/`.
 - Update owner content where it must state the new governor and where
-  `DST-ENG-015` binds this work order (rule 9): `AGENTS.md`'s owner region,
+  `DST-ENG-015` binds this work order (`HUP-ADP-012`, `HUP-ADP-013`): `AGENTS.md`'s owner region,
   `docs/notes/developing-se-harness.md`, the amendment record on
   `SPEC-IAR-012`.
-- Move the candidate to `0.17.0` (rule 8).
+- Move the candidate to `0.17.0` (`HUP-ADP-011`).
 - Switch `release-qualification.yml`, `release-candidate-replay.yml` and
-  `pages-publication.yml` from root scripts to evaluator commands (rule 11,
-  `DST-ENG-016`).
+  `pages-publication.yml` from root scripts to evaluator commands
+  (`HUP-ADP-014`, `HUP-ADP-015`, `DST-ENG-016`).
 - Replace the pinned root and candidate assumptions in `tests/` with
-  identity-aware assertions (rule 10), each file named in the evidence.
+  identity-aware assertions (`HUP-ADP-016`, `HUP-ADP-017`), each file named
+  in the evidence.
 - Run the complete `VER-HUP-017` qualification and the suite, and retain
   the evidence; hand off with the pull request's lanes green.
 
