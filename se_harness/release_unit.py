@@ -98,32 +98,13 @@ def _trailers(root: Path, revision_range: str, *, first_parent: bool) -> list[tu
     return entries
 
 
-def _catalog_lookup(root: Path) -> StatusLookup:
-    from se_harness.workflow import _catalog, _validation
-
-    _, report = _validation(root)
-    catalog = _catalog(report)
-
-    def lookup(work_order: str) -> tuple[str | None, bool | None]:
-        artifact = catalog.get(work_order)
-        if artifact is None:
-            return None, None
-        status = artifact.metadata.get("status")
-        scope = artifact.metadata.get("execution_scope", {})
-        paths = scope.get("paths", []) if isinstance(scope, dict) else []
-        packaged = any(isinstance(item, str) and item.startswith(PACKAGED_SURFACE_PREFIXES) for item in paths)
-        return (status if isinstance(status, str) else None), packaged
-
-    return lookup
-
-
 def derive_release_unit(
     repository: Path,
     *,
     from_ref: str,
     to_ref: str,
     exempt: Iterable[str] = (),
-    lookup: StatusLookup | None = None,
+    lookup: StatusLookup,
 ) -> ReleaseUnit:
     """Measure the work-order census of `from_ref..to_ref` on the first-parent history."""
 
@@ -134,9 +115,6 @@ def derive_release_unit(
     for item in exempted:
         if not COMMIT_PATTERN.fullmatch(item):
             raise HarnessError(f"an exemption must be a full commit id: {item}")
-    if lookup is None:
-        lookup = _catalog_lookup(root)
-
     commits_by_work_order: dict[str, list[str]] = {}
     untraced: list[str] = []
     for sha, parents, own in _trailers(root, f"{from_commit}..{to_commit}", first_parent=True):

@@ -29,7 +29,6 @@ SCRIPTS = evaluator_scripts_dir()
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
-import artifact_layout_registry as portable_layout  # noqa: E402
 from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 from validate_engineering_artifacts import validate_repository  # noqa: E402
 from tests.fixture_support import standard_repository
@@ -380,7 +379,7 @@ class EvaluatorDerivedPathTests(unittest.TestCase):
 
         from se_harness.artifact_layout import artifact_domain_from_relative_path
 
-        text = "docs\engineering\execution-control-plane\work-orders\WO-ECP-012.md"
+        text = r"docs\engineering\execution-control-plane\work-orders\WO-ECP-012.md"
         self.assertIsNone(artifact_domain_from_relative_path(text))
         self.assertIsNone(artifact_domain_from_relative_path(PureWindowsPath("C:/repo/docs/engineering/d/work-orders/WO-D-001.md")))
         self.assertIsNone(artifact_domain_from_relative_path(PureWindowsPath("docs/engineering/WO-D-001.md")))

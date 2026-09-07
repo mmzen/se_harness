@@ -97,10 +97,6 @@ def _state(items: Iterable[tuple[str, str]]) -> list[dict[str, str]]:
     return [{"id": artifact_id, "status": status} for artifact_id, status in sorted(items)]
 
 
-def _finding_key(item: Mapping[str, Any]) -> tuple[str, str, str]:
-    return (str(item.get("code", "")), str(item.get("path", "")), str(item.get("message", "")))
-
-
 def failed_result(
     kind: str,
     primary: str | None,
@@ -393,7 +389,6 @@ def _split_document(data: bytes) -> tuple[list[str], str, str, str]:
         raise HarnessError("formal artifact has no closing front-matter delimiter") from exc
     opening_ending = lines[0][len(clean[0]) :]
     newline = opening_ending or ("\r\n" if "\r\n" in text else "\n")
-    closing_ending = lines[closing][len(clean[closing]) :]
     body = "".join(lines[closing + 1 :])
     bom = "\ufeff" if data.startswith(b"\xef\xbb\xbf") else ""
     return clean[1:closing], body, newline, bom + "+++" + newline
@@ -655,10 +650,6 @@ def _proposed_artifacts(validator: Any, report: Any, replacements: Mapping[Path,
             raise HarnessError(f"planned metadata for {artifact.artifact_id} is invalid: {exc}") from exc
         proposed.append(validator.Artifact(path=artifact.path, metadata=metadata, body=body.lstrip("\r\n")))
     return proposed
-
-
-def _status(catalog: Mapping[str, Any], replacements_catalog: Mapping[str, Any], artifact_id: str) -> str:
-    return replacements_catalog.get(artifact_id, catalog[artifact_id]).status
 
 
 def _structural(predicate_id: str, status: str, message: str, artifact_id: str) -> dict[str, Any]:

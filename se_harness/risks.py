@@ -37,8 +37,13 @@ from se_harness.artifact_layout import (
     validate_artifact_id,
     validate_domain,
 )
-from se_harness.decisions import BLOCKABLE_TYPES, declared_options
+from se_harness.decisions import declared_options
 from se_harness.installer import HarnessError, ensure_target
+
+#: SPEC-DCM-001 rule 4: the six types a decision may block. The validator enforces the
+#: set (`E011`); `raise-risk` reads it first so a threatened record is refused with the
+#: reason, before any file is written.
+BLOCKABLE_TYPES = frozenset({"requirement", "specification", "verification", "architecture", "adr", "work_order"})
 
 #: RSK-MGT-004 and RSK-MGT-005: the closed stage and category sets.
 RISK_STAGES = ("definition", "architecture", "implementation", "verification", "release", "operation")

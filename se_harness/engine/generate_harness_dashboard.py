@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
@@ -915,56 +914,6 @@ def build_evidence_documents(
 
 def _valid_relations(relations: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     return [relation for relation in relations if relation["target_exists"]]
-
-
-def compute_impact(
-    selected: str,
-    relations: Sequence[dict[str, Any]],
-) -> dict[str, list[str]]:
-    nodes = {
-        value
-        for relation in relations
-        if relation.get("target_exists", True)
-        for value in (relation["source"], relation["target"])
-    }
-    if selected not in nodes:
-        return {
-            "direct_inbound": [],
-            "direct_outbound": [],
-            "transitive_inbound": [],
-            "transitive_outbound": [],
-        }
-
-    outbound: dict[str, set[str]] = defaultdict(set)
-    inbound: dict[str, set[str]] = defaultdict(set)
-    for relation in relations:
-        if not relation.get("target_exists", True):
-            continue
-        outbound[relation["source"]].add(relation["target"])
-        inbound[relation["target"]].add(relation["source"])
-
-    def closure(start: str, adjacency: dict[str, set[str]]) -> set[str]:
-        seen = {start}
-        queue = deque(sorted(adjacency.get(start, set())))
-        while queue:
-            current = queue.popleft()
-            if current in seen:
-                continue
-            seen.add(current)
-            queue.extend(sorted(adjacency.get(current, set()) - seen))
-        seen.discard(start)
-        return seen
-
-    direct_outbound = outbound.get(selected, set())
-    direct_inbound = inbound.get(selected, set())
-    outbound_closure = closure(selected, outbound)
-    inbound_closure = closure(selected, inbound)
-    return {
-        "direct_inbound": sorted(direct_inbound),
-        "direct_outbound": sorted(direct_outbound),
-        "transitive_inbound": sorted(inbound_closure - direct_inbound),
-        "transitive_outbound": sorted(outbound_closure - direct_outbound),
-    }
 
 
 def _strongly_connected_components(
@@ -2666,12 +2615,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--root", type=Path, required=True, help="Repository root.")
     parser.add_argument(
-        "--artifact-root",
-        type=Path,
-        default=None,
-        help="Artifact directory below --root; default: docs/engineering.",
-    )
-    parser.add_argument(
         "--output",
         type=Path,
         default=None,
@@ -2691,7 +2634,7 @@ def main(argv: Iterable[str] | None = None) -> int:
     args = build_parser().parse_args(list(argv) if argv is not None else None)
     try:
         repository_root = resolve_repository_root(args.root)
-        artifact_root = resolve_artifact_root(repository_root, args.artifact_root)
+        artifact_root = resolve_artifact_root(repository_root, None)
         output_root = resolve_output_root(repository_root, artifact_root, args.output)
         report = validate_repository(repository_root, artifact_root)
         snapshot = build_snapshot(repository_root, artifact_root, report)

@@ -184,7 +184,7 @@ def validate_recipe_bytes(payload: bytes, *, path: str, lock: bytes) -> BuildRec
     installer = _exact_keys(toolchain["installer"], frozenset({"name", "version"}), "toolchain installer")
     if installer["name"] != "pip" or not isinstance(installer["version"], str):
         raise BuildRecipeError("toolchain installer must be exact pip")
-    lock_path = _safe_posix_path(toolchain["lock"], "toolchain lock")
+    _safe_posix_path(toolchain["lock"], "toolchain lock")
     lock_hash = toolchain["lock_sha256"]
     if not isinstance(lock_hash, str) or SHA256_PATTERN.fullmatch(lock_hash) is None or lock_hash != _sha256_bytes(lock):
         raise BuildRecipeError("toolchain lock_sha256 differs from the raw lock bytes")
@@ -461,7 +461,7 @@ def _producer(recipe_path: Path, lock_path: Path, source: Path, output: Path, ve
         sys.executable if argument == "python" else str(raw_output) if argument == "{raw_output}" else argument
         for argument in recipe.value["commands"][1]["argv"]
     ]
-    built = _bounded_run(build_command, cwd=source, environment=build_env, timeout=600)
+    _bounded_run(build_command, cwd=source, environment=build_env, timeout=600)
     wheel_name = recipe.value["outputs"]["wheel"].format(version=version)
     sdist_name = recipe.value["outputs"]["sdist"].format(version=version)
     wheel = raw_output / wheel_name

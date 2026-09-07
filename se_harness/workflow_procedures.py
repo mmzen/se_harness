@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from typing import Any, Iterable, Mapping
 
-from se_harness.workflow_contract import ContractError
 
 
 _PLACEHOLDER = re.compile(r"\{([a-z][a-z0-9_]*)\}")
@@ -218,10 +217,3 @@ def decision_required(step: Mapping[str, Any]) -> dict[str, Any] | None:
         "decision": step["decision"],
         "outcomes": list(step["outcomes"]),
     }
-
-
-def ensure_validated(procedures: Mapping[str, Mapping[str, Any]]) -> None:
-    """Keep a stable public failure type for callers validating injected policy."""
-
-    if not procedures:
-        raise ContractError("procedure registry is empty")

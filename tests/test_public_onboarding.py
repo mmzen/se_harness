@@ -218,8 +218,6 @@ class PublicOnboardingTests(unittest.TestCase):
 
 
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 HASH_BOUND_CHECKS = (
@@ -282,3 +280,7 @@ class FreshConsumerDoctorTests(unittest.TestCase):
         # Mirrors a Windows checkout: `core.autocrlf=true` converts every text file
         # the managed `.gitattributes` block does not pin.
         self.assert_doctor_passes("true")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,7 +1,6 @@
 """Environment entry-point safety rule for the package runtime.
 
-The rule is the ordered case list ``EVALUATION_ORDER`` and the ``evaluate``
-function below; the first matching refusal wins, so a path form yields a
+The rule is the ``evaluate`` function below; the first matching refusal wins, so a path form yields a
 stable ``EPS`` case identifier. ``WO-REB-021`` introduced the rule as a JSON
 declaration with one conforming loader per runtime; once every boundary
 outside ``se_harness/runtime_identity.py`` had been retired, ``WO-REB-030``
@@ -22,14 +21,12 @@ import os
 import stat
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
 
 
 WITHIN_EXPECTED_ROOT = "within-expected-root"
 WITHIN_CHECKOUT_ROOT = "within-checkout-root"
 OUTSIDE_DECLARED_ROOTS = "outside-declared-roots"
 POSITION_CLASSES = (OUTSIDE_DECLARED_ROOTS, WITHIN_CHECKOUT_ROOT, WITHIN_EXPECTED_ROOT)
-OUTCOMES = ("accepted", "refused")
 PLATFORMS = ("linux", "windows")
 DIGEST_BLOCK_BYTES = 1024 * 1024
 MAX_INTERPRETER_BYTES = 128 * 1024 * 1024
@@ -43,28 +40,6 @@ REPARSE_CONSTANTS = ("FILE_ATTRIBUTE_REPARSE_POINT", "IO_REPARSE_TAG_MOUNT_POINT
 #: reparse point on any path, so the junction predicate answers ``False`` by
 #: construction there rather than being unavailable.
 REPARSE_STAT_MEMBERS = ("st_file_attributes", "st_reparse_tag")
-
-
-#: The cases in evaluation order. The first refusal wins, so a path form yields
-#: a stable case identifier. The tests own an independent corpus of filesystem
-#: forms and assert the case each one yields.
-EVALUATION_ORDER = (
-    "EPS010",
-    "EPS011",
-    "EPS001",
-    "EPS002",
-    "EPS003",
-    "EPS004",
-    "EPS005",
-    "EPS006",
-    "EPS007",
-    "EPS008",
-    "EPS009",
-)
-
-
-class InterpreterSafetyError(ValueError):
-    """The interpreter-safety declaration is missing, malformed, or ambiguous."""
 
 
 class InterpreterSafetyRefusal(ValueError):

@@ -429,7 +429,7 @@ def reachable_artifact_ids(root: Path) -> dict[str, set[str]]:
     return found
 
 
-def _domain_token(root: Path, domain: str, artifact_type: str) -> str:
+def _domain_token(root: Path, domain: str) -> str:
     """The `DOMAIN` token of `TYPE-DOMAIN-NNN`, read from the domain's existing artifacts."""
 
     tokens: dict[str, int] = {}
@@ -450,9 +450,7 @@ def allocate_artifact_id(root: Path, *, domain: str, artifact_type: str) -> tupl
     """Allocate the lowest free `TYPE-DOMAIN-NNN` across every local ref (ECP-IDA-001, -005)."""
 
     selected_type = validate_artifact_type(artifact_type)
-    if selected_type not in _REF_PREFIX:
-        raise HarnessError(f"WEX-ECP-013: identifiers of type {selected_type} are not allocated automatically; pass --id")
-    prefix = f"{_REF_PREFIX[selected_type]}-{_domain_token(root, domain, selected_type)}-"
+    prefix = f"{_REF_PREFIX[selected_type]}-{_domain_token(root, domain)}-"
     reachable = reachable_artifact_ids(root)
     used = {int(identifier[len(prefix):]): refs for identifier, refs in reachable.items() if identifier.startswith(prefix)}
     number = 1

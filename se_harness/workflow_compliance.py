@@ -8,7 +8,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Callable, Iterable, Mapping
+from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import orphaned_ready_records, run_preflight
@@ -53,7 +53,6 @@ class ChangeSet:
 class CheckpointContext:
     root: Path
     artifact: Any
-    report: Any
     catalog: Mapping[str, Any]
     scoped_errors: list[dict[str, Any]]
     repository_errors: list[dict[str, Any]]
@@ -845,7 +844,6 @@ def build_context(
     return CheckpointContext(
         root=root,
         artifact=primary,
-        report=report,
         catalog=catalog,
         scoped_errors=scoped,
         repository_errors=repository_errors,
@@ -941,7 +939,7 @@ def check_workflow(
     if checkpoint != "transition" and target:
         raise HarnessError("WEX210: --target applies only to the transition checkpoint")
     root = ensure_target(repository, must_exist=True)
-    workflow_contract, quality_gates, rules, procedures, gates = load_validated_contracts()
+    _, quality_gates, rules, procedures, gates = load_validated_contracts()
     from se_harness.workflow import _catalog, _validation, project_scope
 
     _, report = _validation(root)
@@ -1325,19 +1323,6 @@ def remediation_result(
     )
 
 
-def focus_schema2(
-    repository: Path,
-    *,
-    artifact_id: str,
-    include_background: bool = False,
-) -> dict[str, Any]:
-    """Selected projection; the name is kept for its Phase 4 caller, the result is `workflow.project_selected`."""
-
-    from se_harness.workflow import project_selected
-
-    return project_selected(repository, artifact_id, include_background=include_background)
-
-
 def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
     """Report W-ADS-001 for a pull-request body whose trailer carries a carriage return."""
 
@@ -1366,12 +1351,6 @@ def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
 _PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
 _FENCE = re.compile(r"```.*?```", re.DOTALL)
 _INLINE_CODE = re.compile(r"`[^`\n]*`")
-_DEFINITION_TYPES = {
-    "intent", "capability", "requirement", "specification", "architecture", "adr",
-    "verification", "release_contract", "operating_contract",
-}
-
-
 _DECISION_LINE = re.compile(r"^-?\s*`?DEC-(?:[A-Z0-9]+-)*\d{3}`?(?:\s*\((?:open|deferred|decided|withdrawn)\))?\.?$")
 
 
