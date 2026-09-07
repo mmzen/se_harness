@@ -2,7 +2,7 @@
 id = "REL-SEH-027"
 type = "release_contract"
 title = "Release se-harness 0.16.0: the evaluator scripts leave the governed repository, one installation command, the reader-first specification shape"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -25,6 +25,13 @@ untraced_exemptions = [
   "079d6053dd5a1f075c060838e68db617475063e8",
   "2ef70ca6ec7838a33c957775e0e6257cd40c636a",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T07:26:08Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-09-07 by selecting the presented option 'Approve both (Recommended)', as a decision distinct from the work order's approval, after the census was measured on main at 9069ff5d with every required member holding a verified record (VREC-HUP-015, VREC-TCM-009, VREC-ECP-030, VREC-DST-021), the released WO-RLS-021 and the approved, waiting WO-TCM-011 excluded by construction, the four notes-class merges #348, #351, #357 and #363 exempted by name, and every hosted lane except the pre-approval review preflight green at 4deaf4f2. The allow-list is exact at approval: six gates."
 +++
 
 # Release contract: se-harness 0.16.0
