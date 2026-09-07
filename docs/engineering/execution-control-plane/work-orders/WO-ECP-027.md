@@ -2,7 +2,7 @@
 id = "WO-ECP-027"
 type = "work_order"
 title = "Wave 0 correctness: uniform exit codes, one code per line, bounded launches, four latent defects"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -69,6 +69,13 @@ to = "in_progress"
 decided_at = "2026-09-07T19:37:02Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #382 merged the approved packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-027-wave0-correctness within the declared scope only."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T20:03:43Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-07 by the accountable engineering owner with the word 'implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at a1b24ff on wo/ecp-027-wave0-correctness (off main 1fa0610); exact 0.16.0 evaluator: validate 0 errors, 73 warnings (the main baseline), 0 advisories; doctor 97 PASS 0 FAIL; review preflight PASS; handoff check --from-git 1fa0610 completed, nine QGP-G4I predicates pass, complete: true at its fixed point, retained as handoff.json. Eighteen tests, each failing on the code before the change (12 failures, 8 errors) and passing after. Windows suite 1282 tests, 26 skipped, 1 error and 1 failure, both baseline names reproduced on a fresh worktree of main (the allocation PermissionError; the AGENTS.md owner-region bound on a CRLF checkout). Hosted lanes on PR #383 at a1b24ff: validate, Candidate source and package evidence, the candidate rehearsal and the transition assessment pass; the two migration lanes and the release-record rehearsal were still running at the decision. The renumber-artifacts output, the code registry and the single Git launcher are left to #376 and #377 as the work order states."
 +++
 
 # Work Order: Wave 0 correctness: uniform exit codes, one code per line, bounded launches, four latent defects
