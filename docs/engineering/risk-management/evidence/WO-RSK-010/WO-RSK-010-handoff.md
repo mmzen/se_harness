@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RSK-010"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "4f90abb5f63d09c29247f1725fa508cf22ab5cadf1a8de484ea4c30e64129af5"
-rebound_at = "2026-09-07T21:54:18Z"
+formal_snapshot_sha256 = "1194004262e0a40fe3595d01335f825431c33130d000f75b05fafeacf29c8e45"
+rebound_at = "2026-09-07T22:02:54Z"
 ```
 
 # WO-RSK-010 handoff evidence
@@ -76,6 +76,13 @@ The test suite on Windows reads 1318 tests, 26 skipped, 2 failures that a
 control run on a clean `main` worktree also shows and that this work does not
 touch. The hosted Linux lane is the record and its identifiers are added to
 the verification evidence when its runs complete.
+
+After merging live `main` (`34193ca`, seven commits of `WO-ECP-029`) into the
+branch at `7d531be`, re-measured with the same evaluator: `validate .` reads
+`Artifacts: 1385 | Errors: 0 | Warnings: 73 | Advisories: 0`; `preflight
+--phase review` PASS; the scope and handoff checkpoints pass every predicate
+with a complete change set of 33 paths; the suite reads 1317 tests, 26
+skipped, the same two control-confirmed failures and no other.
 
 ## The decision now due
 

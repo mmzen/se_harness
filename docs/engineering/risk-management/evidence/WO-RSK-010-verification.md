@@ -158,6 +158,18 @@ as the control and therefore not this work's:
 (`PermissionError` removing read-only Git objects). `tests/test_risk_management.py`:
 31 cases, 31 pass.
 
+### After merging live `main`
+
+`main` moved to `34193ca` (`WO-ECP-029`, the `adopt` alias removal) while the
+work was in progress and was merged into the branch at `7d531be` with no
+conflict. Re-measured there with the same evaluator: `validate .` reads
+`Artifacts: 1385 | Errors: 0 | Warnings: 73 | Advisories: 0`; `preflight
+--phase review` PASS; the scope and handoff checkpoints pass every predicate,
+change set complete at 33 paths, and the handoff packet was rebound to the new
+formal snapshot by the self-binding run. The suite reads 1317 tests (the merge
+removed one `adopt` case), 26 skipped, and the same two control-confirmed
+Windows failures; `tests/test_risk_management.py` 31 of 31.
+
 ## Governing readings, Linux (record)
 
 Added when the pull request's hosted lanes complete: the `validate` check-run

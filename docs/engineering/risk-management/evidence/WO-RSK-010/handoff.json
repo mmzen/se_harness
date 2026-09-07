@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "4f90abb5f63d09c29247f1725fa508cf22ab5cadf1a8de484ea4c30e64129af5",
+    "formal_snapshot_sha256": "1194004262e0a40fe3595d01335f825431c33130d000f75b05fafeacf29c8e45",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -246,7 +246,7 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for b6843d8: HTTP 422"
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 7d531be: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-RSK-010 is in_progress."
@@ -277,7 +277,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "7601160e29b46ddfa4e256d2fee3cac0f8e3f8f9cf79e8cd0beccc9d866b037e",
+  "result_sha256": "1e20fed5f4209cdb732df234bf7e72179a4db5951dab6b22e169d5824a996b25",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
