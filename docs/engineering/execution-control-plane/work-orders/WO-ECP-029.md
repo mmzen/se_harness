@@ -2,7 +2,7 @@
 id = "WO-ECP-029"
 type = "work_order"
 title = "Wave 1, group B: remove the adopt alias after its one release"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -49,6 +49,13 @@ to = "in_progress"
 decided_at = "2026-09-07T20:48:10Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-07 by the accountable engineering owner with the words 'merged you can start' (DR-WO-START), after PR #388 completed the merge of the wave 1 packet to main. Start preflight passed at the approval commit. Execution on branch wo/ecp-029-adopt-alias within the declared scope only; WO-ECP-028 and WO-ECP-030 wait for their own start decisions."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T20:56:24Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-07 by the accountable engineering owner with the word 'implemented' (DR-WO-COMPLETE). Re-measured immediately before this transition: clean worktree at e1b0cd7 on wo/ecp-029-adopt-alias (off main 429e64c, main unmoved); exact 0.16.0 evaluator: validate 0 errors, 73 warnings (the main baseline), 0 advisories; doctor 0 FAIL; review preflight PASS; handoff check --from-git 429e64c completed, nine QGP-G4I predicates pass, complete: true at its fixed point, retained as handoff.json. Before: adopt listed and running; after: not listed, exit 2 with argparse's usage error, no guard. Windows suite 1286 tests, 26 skipped, the two baseline names, no other failure. Hosted lanes on PR #390 at e1b0cd7: every lane that had finished passes, including the candidate-package lane whose 0.16.0 verifier runs init in its adopt scenario."
 +++
 
 # Work Order: Wave 1, group B: remove the adopt alias after its one release
