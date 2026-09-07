@@ -17,8 +17,8 @@ specifies = ["REQ-HUP-033", "REQ-HUP-034"]
 ## In plain words
 
 The published 0.16.0 evaluator, installed outside the checkout, upgrades the
-managed files in one transaction that also removes the eight script copies
-it no longer installs. Everything here that still read those copies reads
+managed files in one transaction and removes the eight retired script
+copies. Everything here that still read those copies reads
 the evaluator afterwards, and the readings prove the move.
 
 ## Scope
