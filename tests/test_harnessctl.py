@@ -13,7 +13,7 @@ from pathlib import Path
 
 from se_harness import __version__
 from se_harness.cli import build_parser, main
-from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, template_root, tracked_content
+from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, _templates, plan_install, safe_destination, template_root
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, IntegrityError, canonical_sha256, canonical_text_bytes, parse_lock
 from tests.mutation_guard_support import trusted_mutation_authority
 

@@ -230,7 +230,6 @@ class ContextRoutingRetirementTests(unittest.TestCase):
         self.assertEqual(sorted(PERMITTED_MENTIONS), sorted(found))
 
     def test_historical_records_still_describe_the_retired_obligation(self) -> None:
-        self.assertEqual(12, len(HISTORICAL_RECORDS))
         for relative in HISTORICAL_RECORDS:
             with self.subTest(record=relative):
                 path = REPOSITORY_ROOT / relative

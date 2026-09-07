@@ -11,7 +11,7 @@ import tempfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path, PurePosixPath
-from typing import Any, Iterable
+from typing import Iterable
 
 from se_harness import __version__
 from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
@@ -299,7 +299,7 @@ def plan_install(
                         old_tracked = tracked_content(str(old_mode), current)
                         if old_tracked is None:
                             raise HarnessError(f"prior managed content is unavailable: {relative}")
-                        match = compare_lock_entry(old_lock, old_entry, old_tracked)
+                        match = compare_lock_entry(old_entry, old_tracked)
                     except IntegrityError as exc:
                         raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                     action = "update" if mode == "upgrade" and match != "mismatch" else "customized"
@@ -331,7 +331,7 @@ def plan_install(
                     action = "conflict"
                 else:
                     try:
-                        match = compare_lock_entry(old_lock, old_entry, current_block)
+                        match = compare_lock_entry(old_entry, current_block)
                     except IntegrityError as exc:
                         raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                     action = "update" if match != "mismatch" else "customized"
@@ -346,7 +346,7 @@ def plan_install(
                 action = "conflict"
             else:
                 try:
-                    match = compare_lock_entry(old_lock, old_entry, current)
+                    match = compare_lock_entry(old_entry, current)
                 except IntegrityError as exc:
                     raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
                 action = "update" if match != "mismatch" else "customized"
@@ -393,7 +393,7 @@ def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Cha
         if tracked is None:
             continue
         try:
-            match = compare_lock_entry(old_lock, old_entry, tracked)
+            match = compare_lock_entry(old_entry, tracked)
         except IntegrityError as exc:
             raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
         if match == "mismatch":

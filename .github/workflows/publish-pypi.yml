@@ -45,10 +45,6 @@ jobs:
       sdist_sha256: ${{ steps.plan.outputs.sdist_sha256 }}
       checksums: ${{ steps.plan.outputs.checksums }}
       checksums_sha256: ${{ steps.plan.outputs.checksums_sha256 }}
-      source_date_epoch: ${{ steps.plan.outputs.source_date_epoch }}
-      distribution_schema: ${{ steps.plan.outputs.distribution_schema }}
-      build_recipe: ${{ steps.plan.outputs.build_recipe }}
-      build_recipe_sha256: ${{ steps.plan.outputs.build_recipe_sha256 }}
     steps:
       - name: Check out trusted main history
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -182,7 +178,6 @@ jobs:
     permissions:
       contents: write
     outputs:
-      state: ${{ steps.final.outputs.state }}
       url: ${{ steps.publish.outputs.url }}
       maintenance_branch: ${{ steps.maintenance.outputs.branch }}
       maintenance_state: ${{ steps.maintenance.outputs.state }}

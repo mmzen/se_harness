@@ -17,13 +17,8 @@ from typing import Any, Mapping
 
 from se_harness.installer import HarnessError
 
-DECISION_KINDS = ("question", "deviation")
-DEVIATION_OPTIONS = ("amend", "supersede", "accept", "stop")
-BLOCKABLE_TYPES = frozenset({"requirement", "specification", "verification", "architecture", "adr", "work_order"})
-OPTION_ID = re.compile(r"^[a-z][a-z0-9-]{0,63}$")
 #: `ARTIFACT-ID:FROM-TO`, the transition a deferral admits.
 SCOPE_ENTRY = re.compile(r"^([A-Z][A-Z0-9-]*-\d{3}):([a-z_]+)-([a-z_]+)$")
-DISPOSITION_FIELDS = ("option", "label", "decided_by", "decided_at", "reason", "revisit", "scope")
 
 
 def decision_table(artifact: Any) -> Mapping[str, Any]:

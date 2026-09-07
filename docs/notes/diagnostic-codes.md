@@ -263,7 +263,7 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+10 more) |
 | `WEX-ECP-011` | `WEX-ECP-011: a .gitattributes rule would convert line endings of` |
 | `WEX-ECP-012` | `WEX-ECP-012: the working tree selects` |
-| `WEX-ECP-013` | `WEX-ECP-013:`; `WEX-ECP-013: domain` (+4 more) |
+| `WEX-ECP-013` | `WEX-ECP-013:`; `WEX-ECP-013: domain` (+3 more) |
 | `WEX-ECP-014` | `WEX-ECP-014:`; `WEX-ECP-014: the generated body does not round-trip through the selector` (+1 more) |
 | `WEX-ECP-022` | `WEX-ECP-022` |
 | `WEX-ECP-030` | `WEX-ECP-030:`; `WEX-ECP-030: duplicate transition binding` (+8 more) |

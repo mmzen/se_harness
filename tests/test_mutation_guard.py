@@ -19,9 +19,9 @@ from se_harness.evaluator_evidence import (
     parse_evaluator_evidence,
 )
 from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
-from se_harness.hash_bound import LOCK_RELATIVE, MATCH_DECLARED
+from se_harness.hash_bound import LOCK_RELATIVE
 from se_harness.installer import HarnessError, apply_changes, plan_install
-from se_harness.integrity import canonical_sha256, raw_sha256
+from se_harness.integrity import raw_sha256
 from se_harness.mutation_guard import (
     PUBLIC_MUTATION_OPERATIONS,
     require_mutation_authority,

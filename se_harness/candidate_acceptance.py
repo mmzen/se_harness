@@ -10,7 +10,6 @@ import platform
 import re
 import shutil
 import subprocess
-import sys
 import tempfile
 import venv
 import zipfile
@@ -432,18 +431,3 @@ def assess_candidate_wheel(
         python_version=platform.python_version(),
         scenarios=tuple(results),
     )
-
-
-def write_acceptance_manifest(path: Path, manifest: AcceptanceManifest) -> None:
-    destination = path.expanduser().resolve()
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    fd, temporary = tempfile.mkstemp(prefix=f".{destination.name}.", dir=destination.parent)
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(manifest.canonical_bytes())
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, destination)
-    finally:
-        if os.path.exists(temporary):
-            os.unlink(temporary)

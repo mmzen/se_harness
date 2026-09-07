@@ -20,7 +20,6 @@ from se_harness.installer import (
     ensure_target,
     format_plan,
     plan_install,
-    template_root,
 )
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.mutation_guard import MutationGuardError

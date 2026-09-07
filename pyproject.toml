@@ -76,5 +76,3 @@ se_harness = [
 "share/se-harness/templates/repository/standard/.claude/skills/harness-orient" = [
   "templates/repository/standard/.claude/skills/harness-orient/SKILL.md",
 ]
-[tool.unittest]
-start-directory = "tests"

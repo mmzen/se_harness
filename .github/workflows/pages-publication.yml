@@ -24,10 +24,6 @@ on:
       url:
         description: the deployed Pages URL
         value: ${{ jobs.deploy.outputs.url }}
-      snapshot_sha256:
-        value: ${{ jobs.build.outputs.snapshot_sha256 }}
-      dashboard_sha256:
-        value: ${{ jobs.build.outputs.dashboard_sha256 }}
 
 permissions:
   contents: read

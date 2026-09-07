@@ -4,11 +4,6 @@
     {
       "name": "implemented-work-order-focus",
       "artifact": "WO-001",
-      "agent_hosts": [
-        "ChatGPT",
-        "Claude",
-        "Codex"
-      ],
       "expected": {
         "selection": {
           "primary": "WO-001",

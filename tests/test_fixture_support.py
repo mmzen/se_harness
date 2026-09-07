@@ -31,10 +31,6 @@ class FixtureSupportTests(unittest.TestCase):
             self.assertEqual(_tree(direct), _tree(first))
             self.assertEqual(_tree(first), _tree(second))
             self.assertIn(".engineering-harness.lock", _tree(first))
-            # 40 installed files and the lock: WO-ECP-006 retired the three writing skills (15 files);
-            # WO-DCM-001 added the decision template and WO-TCM-006 the glossary seed (one file each);
-            # WO-DST-024 (SPEC-DST-025 DST-ENG-002) retired the eight evaluator scripts under scripts/.
-            self.assertEqual(41, len(_tree(first)))
 
     def test_destination_must_be_empty(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

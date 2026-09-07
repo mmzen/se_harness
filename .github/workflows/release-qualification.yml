@@ -40,13 +40,6 @@ on:
         required: false
         type: string
         default: refs/heads/main
-    outputs:
-      candidate_commit:
-        description: the qualified candidate commit
-        value: ${{ jobs.qualify.outputs.candidate_commit }}
-      version:
-        description: the qualified version
-        value: ${{ jobs.qualify.outputs.version }}
 
 permissions:
   contents: read
@@ -57,9 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    outputs:
-      candidate_commit: ${{ steps.subject.outputs.candidate_commit }}
-      version: ${{ steps.subject.outputs.version }}
     env:
       MODE: ${{ inputs.mode }}
       RELEASE_RECORD: ${{ inputs.release_record }}

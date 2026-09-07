@@ -16,7 +16,6 @@ from tests.skill_contract_support import (
     _validate_component,
     CONTRACT_SCHEMA,
     CONTRACT_SCHEMA_V2,
-    CONTRACT_SCHEMA_V3,
     MANIFEST_SCHEMA,
     SkillContractError,
     build_skill_manifest,
