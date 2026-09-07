@@ -215,7 +215,20 @@ Test files changed: `tests/test_configuration_surface.py` (new),
 | artifact graph, governing | released 0.16.0 `-I -m se_harness validate .` | `Artifacts: 1357 \| Errors: 0 \| Warnings: 73 \| Advisories: 0` |
 | release distributions | `python scripts/validate_release_distributions.py --root .` | PASS, 13 distribution-bearing records |
 | local suite, Windows control | `python -m unittest discover -s tests -p "test_*.py"` | `Ran 1270 tests`, 1 failure and 1 error, both known Windows-only controls; 26 skips |
-| hosted Linux lane, the record | GitHub Actions on the pull request | not yet run; the branch is committed and unpushed |
+| candidate suite, hosted lane, the record | `SE Harness Candidate Evidence` on pull request #373 at `e2da416` | `Ran 1270 tests in 47.552s (134 classes, 4 workers)`, `OK (skipped=4)`; run 34154160252 |
+| managed harness lane | `Engineering Harness` on pull request #373 | success; the lane read the live body's `Harness-Work-Order: WO-DST-025` |
+| governor transition | `Governor Transition Assessment` on pull request #373 | success |
+| publication rehearsal | `Publication Rehearsal` on pull request #373 | success |
+
+The hosted lane is the record and it is green. Its 1,270 tests are `main`'s
+1,265 plus this work order's five, and its four skips are the same four `main`
+skips at run 34123580408; the local Windows control skips 26 because that host
+cannot make symbolic links. The candidate-evidence workflow also rehearsed the
+real predecessor-to-successor upgrade twice on both Linux and Windows, from
+released 0.16.0 to the candidate wheel, which is the same path as scenario B,
+and exercised a disposable standard repository with the reduced configuration:
+`Artifacts: 0 | Errors: 0 | Warnings: 0 | Advisories: 0` and a dashboard
+written to `target/harness-dashboard`.
 
 The two local failures are the controls this repository already carries on
 Windows and are unrelated to this work:
