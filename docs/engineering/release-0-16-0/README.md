@@ -17,8 +17,8 @@ moved the candidate to 0.16.0 (`WO-HUP-016`).
 - `VREC-SEH-025`: the aggregate verification record over every gate, bound
   to the candidate `c103708a`, verified on 2026-09-07.
 - `RLS-SEH-025`: the release record binding the build of record (wheel
-  `a969d6ab…`, sdist `25d08fa1…`, run 34102296258), `ready` for the release
-  owner's decision.
+  `a969d6ab…`, sdist `25d08fa1…`, run 34102296258), reproduced from the bound record by run 34106992164,
+  released on 2026-09-07.
 
 Drafted on 2026-09-07 on the repository owner's instruction "release
 0.16.0", with `main` at `9069ff5d`, no work order in progress and every

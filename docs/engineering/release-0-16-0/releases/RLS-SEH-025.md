@@ -2,7 +2,7 @@
 id = "RLS-SEH-025"
 type = "release_record"
 title = "Release candidate 0.16.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-16-0/evidence/RLS-SEH-025-
 evaluator_evidence_sha256 = "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
 tag = "v0.16.0"
 
+released_at = "2026-09-07T09:48:04Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-027"]
 includes_verification = ["VREC-SEH-025"]
 releases_work = ["WO-DST-024", "WO-ECP-026", "WO-HUP-016", "WO-RLS-022", "WO-TCM-009", "WO-TCM-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-07T09:48:04Z"
+decided_by = "release-owner"
+reason = "Released by the accountable release owner on 2026-09-07 by selecting the presented option 'Release': REL-SEH-027 approved with an exact six-gate allow-list, VREC-SEH-025 verified over every gate at candidate c103708a, the build of record byte-identical twice on the pinned producer (run 34102296258) and reproduced from the bound record by the credential-free hosted replay (run 34106992164, wheel a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae, sdist 25d08fa133e5bf5418b7ade2af995aaf71634422aef775dc55cbdeb32655d581), every hosted lane success at the record commit 5c48086c on both events. Publication, the tag, the maintenance line, Pages and the latest markers follow through publish-pypi.yml dispatched from main after this record reaches it; the pypi environment stays a separate human decision."
 +++
 
 # Release Record Candidate
