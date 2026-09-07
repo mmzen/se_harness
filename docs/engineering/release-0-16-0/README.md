@@ -14,11 +14,18 @@ moved the candidate to 0.16.0 (`WO-HUP-016`).
   unit by construction, the build of record taken from the hosted pinned
   producer.
 - `WO-RLS-022`: cut, qualify and build the candidate.
-- `VREC-SEH-025`: the aggregate verification record over every gate.
-- `RLS-SEH-025`: the release record binding the build of record.
+- `VREC-SEH-025`: the aggregate verification record over every gate, bound
+  to the candidate `c103708a`, verified on 2026-09-07.
+- `RLS-SEH-025`: the release record binding the build of record (wheel
+  `a969d6ab…`, sdist `25d08fa1…`, run 34102296258), reproduced from the bound record by run 34106992164,
+  released on 2026-09-07.
 
 Drafted on 2026-09-07 on the repository owner's instruction "release
 0.16.0", with `main` at `9069ff5d`, no work order in progress and every
-required member verified. Both artifacts are ready for the two approval
-acts: the contract by the release owner, the work order by the engineering
-owner. This packet authorizes no candidate, build or publication.
+required member verified. The release owner approved the contract and the
+engineering owner approved the work order the same day, by selecting the
+presented option "Approve both" (PR #368); the engineering owner then gave
+"start, complete on green, prepare record", and `WO-RLS-022` runs on
+`release/0.16.0` off `main` at `2e46b49`. This packet authorizes no
+publication; the verification and release decisions are recorded on
+`VREC-SEH-025` and `RLS-SEH-025`.
