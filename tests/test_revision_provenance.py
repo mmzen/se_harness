@@ -23,6 +23,7 @@ from inspect_engineering_artifacts import build_inspection  # noqa: E402
 from validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
 from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 
+from se_harness.installer import ENGINE_ROOT
 from se_harness.cli import main  # noqa: E402
 from se_harness.preflight import _load_validator_module  # noqa: E402
 from se_harness.provenance import _evidence_work_order_keys  # noqa: E402
@@ -838,7 +839,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(lock_before_release, (self.root / ".engineering-harness.lock").read_bytes())
         self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
 
-        validator = self.root / "scripts/validate_engineering_artifacts.py"
+        validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
         completed = subprocess.run(
             [sys.executable, str(validator), "--root", str(self.root), "--json"],
             cwd=self.root,
@@ -911,7 +912,7 @@ class RevisionCliTests(unittest.TestCase):
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
         self.assertEqual(0, code, error)
-        validator = self.root / "scripts/validate_engineering_artifacts.py"
+        validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
         completed = subprocess.run(
             [sys.executable, str(validator), "--root", str(self.root), "--json"],
             cwd=self.root,

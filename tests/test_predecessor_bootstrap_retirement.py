@@ -99,13 +99,13 @@ RETAINED_EVIDENCE_BINDINGS = (
 #: place a retired schema name still appears in executable code.
 MANAGED_VALIDATORS = (
     "scripts/validate_engineering_artifacts.py",
-    "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+    "se_harness/engine/validate_engineering_artifacts.py",
 )
 
 #: The root copy alone. `WO-REB-029` edits the template copy, so the root copy
 #: is the only place a retired schema name still appears in executable code.
 ROOT_VALIDATOR = "scripts/validate_engineering_artifacts.py"
-CANDIDATE_VALIDATOR_PATH = "templates/repository/standard/scripts/validate_engineering_artifacts.py"
+CANDIDATE_VALIDATOR_PATH = "se_harness/engine/validate_engineering_artifacts.py"
 
 #: Every name `WO-REB-029` deleted from the candidate copy, named individually
 #: as `VER-REB-013` case 1 requires: one regular expression over the whole file
@@ -214,6 +214,21 @@ TCM009_CANDIDATE_VALIDATOR_INSERTIONS = (
     (2838, 4, "            elif reference[1] not in {identifier for identifier, _ in _specification_rules(catalog[reference[0]].body) if identifier}:"),
 )
 TCM009_CANDIDATE_VALIDATOR_INSERTED_LINES = 149
+
+#: WO-DST-024 (SPEC-DST-025 DST-ENG-003): the candidate copy is the 0.15.0 root copy
+#: plus the WO-TCM-009 insertions above, and it reads the package's own
+#: `workflow_contract.json` (byte-identical to the template's WORKFLOW.json) now that
+#: it lives in `se_harness/engine/` instead of beside `docs/engineering/`, declared
+#: opcode by opcode.
+DST024_CANDIDATE_VALIDATOR_EDITS = (
+    ('replace', 107, 1, 4, '    # SPEC-DST-025 DST-ENG-003: the script ships inside the package and reads the'),
+    ('insert', 293, 0, 12, '#: SPEC-TCM-006 TCM-RFS-004 and TCM-RFS-006 to TCM-RFS-013: the reader-first specification'),
+    ('insert', 317, 0, 48, ''),
+    ('insert', 356, 0, 5, '            continue'),
+    ('insert', 581, 0, 80, '    return errors, found'),
+    ('insert', 2838, 0, 4, '            elif reference[1] not in {identifier for identifier, _ in _specification_rules(catalog[reference[0]].body) if identifier}:'),
+)
+DST024_CANDIDATE_VALIDATOR_LINE_DELTA = 152
 
 #: WO-DCM-001 (SPEC-DCM-001), WO-TCM-005 (SPEC-TCM-003), WO-TCM-007 (SPEC-TCM-004)
 #: and WO-TCM-008 (SPEC-TCM-005): the candidate copy is the 0.14.0 root copy with the
@@ -574,6 +589,15 @@ class ConsumerValidatorRetirementTests(unittest.TestCase):
             # candidate template byte for byte; the deletion ledger below describes the
             # 0.7.1 root and is retained for that state only.
             if "validate_agentic_delegations" not in self.root_text:
+                if "workflow_contract.json" in self.candidate_text and "workflow_contract.json" not in self.root_text:
+                    # WO-DST-024 (SPEC-DST-025 DST-ENG-003): the candidate copy is the 0.15.0
+                    # root copy plus the WO-TCM-009 insertions, reading the package's own
+                    # workflow contract instead of the template's docs/engineering/WORKFLOW.json,
+                    # declared opcode by opcode; a root released with it takes the equality branch.
+                    self._assert_root_plus_declared_edits(
+                        DST024_CANDIDATE_VALIDATOR_EDITS, DST024_CANDIDATE_VALIDATOR_LINE_DELTA
+                    )
+                    return
                 if "_specification_authoring" in self.candidate_text and "_specification_authoring" not in self.root_text:
                     # WO-TCM-009 (SPEC-TCM-006): the candidate copy is the 0.15.0 root copy plus
                     # the reader-first specification rules (the contract field, the rule parser,

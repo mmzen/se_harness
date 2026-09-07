@@ -13,6 +13,17 @@ SE Harness has two related but separate installation surfaces:
 
 Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
 
+The evaluator's own scripts, the graph validator, the Explorer generator and
+the inspector, belong to the first surface only. They ship inside the package
+and are never written into a repository (`SPEC-DST-025`). Releases up to
+0.15.0 wrote eight files under `scripts/`: `validate_engineering_artifacts.py`,
+`generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`,
+`select_harness_work_order.py`, `artifact_layout_registry.py`,
+`check_engineering_harness.sh`, `check_engineering_harness.ps1` and
+`harness_explorer/index.template.html`. The next applied upgrade removes them
+under the rule below for managed files that leave the managed set;
+`harnessctl validate .` and `harnessctl dashboard .` replace the two wrappers.
+
 The repository-managed surface includes two portable skill cores under
 `.agents/skills/`: the read-only `harness-orient` orientation skill and the
 explicit-only `harness-operator-brief` communication skill. Each core's
@@ -195,6 +206,11 @@ edited is reported as `customized` and blocks apply, exactly like an in-set
 customization; owner seed content and owner bytes around a managed fragment
 block are never deleted. With `--evidence-output`, the `remove` actions are
 recorded in the transaction evidence beside the updates.
+
+The first release after 0.15.0 retires the eight `scripts/` paths named under
+"Two things are installed". A repository initialized by 0.15.0 or earlier
+sees eight `remove` actions in its upgrade plan, and none of them is
+reinstalled afterwards.
 
 Repositories that upgraded 0.10.0 to 0.11.0 did so before this rule existed:
 the 0.11.0 release retired three skills, and that upgrade left their fifteen

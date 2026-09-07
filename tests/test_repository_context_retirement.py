@@ -157,8 +157,15 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         self.assertNotIn(RETIRED_PATH, preflight_module.POLICY_PATHS)
         self.assertNotIn(RETIRED_PATH, preflight_module.REQUIRED_PATHS)
         self.assert_ordered_subsequence(expected, list(preflight_module.POLICY_PATHS))
+        # WO-DST-024 (SPEC-DST-025 DST-ENG-010): the baseline predates the retirement of the
+        # evaluator scripts from the managed set, so its three scripts/ entries left too.
+        retired_scripts = {
+            "scripts/validate_engineering_artifacts.py",
+            "scripts/generate_harness_dashboard.py",
+            "scripts/harness_explorer/index.template.html",
+        }
         self.assert_ordered_subsequence(
-            [item for item in BASELINE["preflight"]["required_paths"] if item != RETIRED_PATH],
+            [item for item in BASELINE["preflight"]["required_paths"] if item != RETIRED_PATH and item not in retired_scripts],
             list(preflight_module.REQUIRED_PATHS),
         )
 

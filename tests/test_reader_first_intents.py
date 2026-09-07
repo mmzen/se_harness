@@ -298,7 +298,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.assertNotIn("plain_words", legacy)
         requirement = self.detail("REQ-001")["artifact"]
         self.assertNotIn("outcome", requirement)
-        template = (REPOSITORY_ROOT / "templates/repository/standard/scripts/harness_explorer/index.template.html").read_text(encoding="utf-8")
+        template = (REPOSITORY_ROOT / "se_harness/engine/harness_explorer/index.template.html").read_text(encoding="utf-8")
         self.assertIn("{{outcome}}", template)
         self.assertIn("{{c.outcome}}", template)
         # the record panel: outcome, then plain words, both before the decision trail

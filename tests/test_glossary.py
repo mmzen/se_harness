@@ -20,7 +20,7 @@ from tests.test_revision_provenance import create_base_chain, formal, write
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_ROOT = REPOSITORY_ROOT / "templates/repository/standard"
 SEED = TEMPLATE_ROOT / "GLOSSARY.md.seed"
-INSPECT = TEMPLATE_ROOT / "scripts/inspect_engineering_artifacts.py"
+INSPECT = REPOSITORY_ROOT / "se_harness/engine/inspect_engineering_artifacts.py"
 
 
 _INSPECT_MODULE = None

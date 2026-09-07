@@ -28,7 +28,8 @@ from typing import Sequence
 HERE = Path(__file__).resolve().parent
 REPOSITORY_ROOT = HERE.parents[1]
 SOURCES = HERE / "sources"
-DEFAULT_OUTPUT = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "scripts" / "harness_explorer" / "index.template.html"
+#: SPEC-DST-025 DST-ENG-003: the canonical template lives inside the package.
+DEFAULT_OUTPUT = REPOSITORY_ROOT / "se_harness" / "engine" / "harness_explorer" / "index.template.html"
 BOOTSTRAP_MARKER = "__HARNESS_BOOTSTRAP_JSON__"
 MAX_TEMPLATE_BYTES = 524_288
 

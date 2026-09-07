@@ -46,7 +46,7 @@ class HarnessCtlTests(unittest.TestCase):
         release_template = (target / "docs/engineering/templates/RELEASE_RECORD.template.md").read_text(
             encoding="utf-8"
         )
-        validator_source = (target / "scripts/validate_engineering_artifacts.py").read_text(
+        validator_source = (REPOSITORY_ROOT / "se_harness/engine/validate_engineering_artifacts.py").read_text(
             encoding="utf-8"
         )
         for forbidden in (
@@ -169,13 +169,11 @@ class HarnessCtlTests(unittest.TestCase):
             "docs/engineering/templates/REQUIREMENT.template.md",
             "docs/engineering/templates/VERIFICATION_RECORD.template.md",
             "docs/engineering/templates/RELEASE_RECORD.template.md",
-            "scripts/validate_engineering_artifacts.py",
-            "scripts/inspect_engineering_artifacts.py",
-            "scripts/generate_harness_dashboard.py",
-            "scripts/harness_explorer/index.template.html",
         ]
         for relative in required:
             self.assertTrue((target / relative).is_file(), relative)
+        # SPEC-DST-025 DST-ENG-002: no evaluator script is written into the target.
+        self.assertFalse((target / "scripts").exists(), "no scripts/ path may be installed")
         self.assertIn('project_name = "Example"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertIn("schema_version = 2", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertIn("@AGENTS.md", (target / "CLAUDE.md").read_text(encoding="utf-8"))
@@ -185,20 +183,11 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", installed_lock["files"])
         self.assert_portable_release_surfaces(target)
 
-        validation = subprocess.run(
-            [sys.executable, str(target / "scripts/validate_engineering_artifacts.py"), "--root", str(target)],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(0, validation.returncode, validation.stderr)
-        dashboard = subprocess.run(
-            [sys.executable, str(target / "scripts/generate_harness_dashboard.py"), "--root", str(target)],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(0, dashboard.returncode, dashboard.stderr)
+        # SPEC-DST-025 DST-ENG-004: the commands run the package's own scripts.
+        code, _, error = self.invoke("validate", str(target))
+        self.assertEqual(0, code, error)
+        code, _, error = self.invoke("dashboard", str(target))
+        self.assertEqual(0, code, error)
         self.assertTrue((target / "target/harness-dashboard/index.html").is_file())
 
     def test_adopt_preserves_existing_content_and_labels_observations(self) -> None:
@@ -576,6 +565,7 @@ class HarnessCtlTests(unittest.TestCase):
     def test_harness_commands_execute_distribution_scripts_not_target_copies(self) -> None:
         target = self.root / "distribution-commands"
         self.assertEqual(0, self.invoke("init", str(target))[0])
+        (target / "scripts").mkdir()
         for name in (
             "validate_engineering_artifacts.py",
             "inspect_engineering_artifacts.py",
@@ -586,9 +576,12 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(0, self.invoke("validate", str(target))[0])
         self.assertEqual(0, self.invoke("inspect", str(target))[0])
         self.assertEqual(0, self.invoke("dashboard", str(target))[0])
+        # SPEC-DST-025 DST-ENG-002, DST-ENG-004: the decoys are not managed files, so
+        # doctor has nothing to say about them, and none of them was executed.
         code, output, error = self.invoke("doctor", str(target))
-        self.assertEqual(1, code, error)
-        self.assertIn("FAIL managed:scripts/validate_engineering_artifacts.py", output)
+        self.assertEqual(0, code, error)
+        self.assertNotIn("managed:scripts/", output)
+        self.assertNotIn("scripts/validate_engineering_artifacts.py", output)
 
     def test_lock_contains_hashes_without_generated_adoption_report(self) -> None:
         target = self.root / "lock"
@@ -600,8 +593,8 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(HASH_MODE, lock["hash_mode"])
         self.assertEqual(__version__, lock["evaluator"]["version"])
         self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
-        self.assertIn("scripts/validate_engineering_artifacts.py", lock["files"])
-        self.assertIn("scripts/inspect_engineering_artifacts.py", lock["files"])
+        # SPEC-DST-025 DST-ENG-002: the lock records no scripts/ path.
+        self.assertEqual([], [path for path in lock["files"] if path.startswith("scripts/")])
         self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/README.md"])
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
@@ -613,7 +606,7 @@ class HarnessCtlTests(unittest.TestCase):
         target.mkdir()
         outside.mkdir()
         try:
-            os.symlink(outside, target / "scripts", target_is_directory=True)
+            os.symlink(outside, target / "docs", target_is_directory=True)
         except (OSError, NotImplementedError):
             self.skipTest("directory symlinks are unavailable")
         with self.assertRaisesRegex(Exception, "symlinked directory"):

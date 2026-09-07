@@ -62,7 +62,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         # adoption; WO-DCM-001 (SPEC-DCM-001) added the decision type to the
         # candidate, so a root released before it is that registry minus the
         # decision entries, declared here. A root released with them takes equality.
-        candidate_path = REPOSITORY_ROOT / "templates/repository/standard/scripts/artifact_layout_registry.py"
+        candidate_path = REPOSITORY_ROOT / "se_harness/engine/artifact_layout_registry.py"
         spec = importlib.util.spec_from_file_location("candidate_layout_registry", candidate_path)
         candidate_layout = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(candidate_layout)

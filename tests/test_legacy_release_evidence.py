@@ -31,7 +31,7 @@ def load_module(name: str, path: Path):
 
 CANDIDATE_VALIDATOR = load_module(
     "evidence_floor_candidate_validator",
-    REPOSITORY_ROOT / "templates/repository/standard/scripts/validate_engineering_artifacts.py",
+    REPOSITORY_ROOT / "se_harness/engine/validate_engineering_artifacts.py",
 )
 PUBLICATION = load_module(
     "evidence_floor_publication",
@@ -163,7 +163,7 @@ class PublicationViewTests(unittest.TestCase):
 class FloorSweepTests(unittest.TestCase):
     """LRE-FLR-004 and LRE-FLR-007: nothing of the mechanism survives."""
 
-    SOURCES = ("se_harness", "templates/repository/standard/scripts", ".github/scripts", "repository_tools")
+    SOURCES = ("se_harness", ".github/scripts", "repository_tools")
 
     def sources(self) -> list[Path]:
         found = [

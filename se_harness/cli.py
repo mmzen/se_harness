@@ -14,6 +14,7 @@ from pathlib import Path
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
 from se_harness.installer import (
+    engine_script,
     HarnessError,
     apply_changes,
     ensure_target,
@@ -225,10 +226,8 @@ def _rehearse_recovery(args: argparse.Namespace) -> int:
 
 
 def _distribution_script(script: str) -> Path:
-    path = template_root() / "scripts" / script
-    if not path.is_file():
-        raise HarnessError(f"missing distribution script: {path}")
-    return path
+    # SPEC-DST-025 DST-ENG-004: resolved from the package, never from the target.
+    return engine_script(script)
 
 
 def _distribution_environment() -> dict[str, str]:

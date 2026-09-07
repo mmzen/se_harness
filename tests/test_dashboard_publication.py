@@ -450,7 +450,7 @@ class PayloadPackagingTests(unittest.TestCase):
         # exactly one accepted boundary so a redesign fails here before it fails a run.
         for relative in (
             "scripts/harness_explorer/index.template.html",
-            "templates/repository/standard/scripts/harness_explorer/index.template.html",
+            "se_harness/engine/harness_explorer/index.template.html",
         ):
             with self.subTest(template=relative):
                 content = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")

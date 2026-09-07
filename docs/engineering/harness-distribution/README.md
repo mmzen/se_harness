@@ -157,3 +157,9 @@ Owner-reviewed Verity Plane public presentation:
 The current README presentation contract replaces earlier root-only format inventories while preserving the linked guides and authority boundaries.
 
 `WO-DOC-015` adds the owner's supplied logo to that published README under the same presentation contract.
+
+Evaluator scripts leave the repository template:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-070` -> `SPEC-DST-025`, `VER-DST-025` -> `WO-DST-024`.
+
+On 2026-09-06 the repository owner decided to remove the evaluator content duplicated under `scripts/` in two packets. `WO-DST-024` moves the evaluator scripts out of the standard template and into the package so that no governed repository receives them and the next upgrade removes the eight retired paths; a later packet folds the scripts into importable modules. The owner approved the four artifacts on 2026-09-06; `WO-DST-024` is approved and not started. This repository's own root footprint changes only at the root adoption of the carrying release.

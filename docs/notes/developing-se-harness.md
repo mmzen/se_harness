@@ -27,7 +27,8 @@ python -m se_harness --version
 ```text
 se_harness/                              CLI and safe installation control plane
 templates/repository/standard/           one canonical repository installation
-scripts/                                 portable validation, Explorer, CI selection, release support
+se_harness/engine/                       the evaluator's own scripts, run as subprocesses: validator, Explorer generator, inspector, layout registry, Explorer template
+scripts/                                 repository-owned release support, plus the eight hash-locked root copies of the released evaluator's scripts until the next root adoption
 repository_tools/                        non-packaged distribution and publication policy
 release/                                 canonical repository build recipe and hash-locked toolchain
 tests/                                   installer, provenance, identity, package, and regression tests
@@ -43,7 +44,7 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/workflows/publish-dashboard-pages.yml release-bound Explorer recovery
 ```
 
-The root validator and Explorer sources remain managed by the selected released installation. Candidate templates may evolve without overwriting root managed files before the candidate is published.
+Since `WO-DST-024` (`SPEC-DST-025`) the candidate's validator, Explorer generator, inspector and layout registry live in `se_harness/engine/` and ship inside the wheel; the installer writes none of them into a repository. The root copies under `scripts/` are the released 0.15.0 evaluator's footprint, hash-locked until the root adoption of the release that stops installing them, which removes them through the leaving-set rule. Candidate engine files may evolve without touching the root copies before the candidate is published.
 
 ## Ordinary development checks
 

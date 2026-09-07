@@ -20,7 +20,7 @@ from typing import Any, Iterable
 
 from se_harness import __version__
 from se_harness.artifact_layout import ARTIFACT_PREFIXES, ID_PATTERN
-from se_harness.installer import HarnessError, ensure_target, load_lock, safe_destination, template_root
+from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, load_lock, safe_destination
 
 
 SCHEMA = "se-harness-renumber-v1"
@@ -382,7 +382,7 @@ def normalize_mappings(values: Iterable[str]) -> tuple[IdentifierMapping, ...]:
 
 
 def _validator_report(root: Path) -> dict[str, Any]:
-    script = template_root() / "scripts" / "validate_engineering_artifacts.py"
+    script = ENGINE_ROOT / "validate_engineering_artifacts.py"
     if not script.is_file():
         raise _fail("REN019", "inventory", f"missing installed validator: {script}")
     environment = os.environ.copy()
