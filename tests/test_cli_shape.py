@@ -176,9 +176,11 @@ class RepositoryCommandShapeTests(unittest.TestCase):
 
     def test_a_mutation_guard_refusal_is_an_environment_refusal(self) -> None:
         # ECP-CLI-004: the guard fires before any result exists, so the command could not run.
-        from se_harness.installer import HarnessError
+        # WO-ECP-027 (ECP-COR-004, ECP-COR-005): the guard raises its own type and the
+        # handler re-raises it by type, never by message prefix.
+        from se_harness.mutation_guard import MutationGuardError
 
-        with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=HarnessError("mutation guard MG005 (capture-verification): RID002 harness_version: resolved")):
+        with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=MutationGuardError("mutation guard MG005 (capture-verification): RID002 harness_version: resolved")):
             code, output, error = invoke(
                 "capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001",
                 "--verification", "VER-001", "--evidence", "README.md", "--json",
@@ -194,6 +196,119 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         blocker = payload["restitution"]["blocked_by"][0]
         self.assertTrue(blocker.startswith("WEX210: "), blocker)
         self.assertEqual(1, blocker.count("WEX210"))
+
+    def test_checkpoint_check_prints_each_code_once(self) -> None:
+        # WO-ECP-027 (ECP-COR-001): the checkpoint path splits the code as the projection does.
+        code, payload, error = self.json_of("check", str(self.root), "--artifact", "WO-ZZZ-999", "--checkpoint", "scope", "--json")
+        self.assertEqual(1, code, error)
+        blocker = payload["restitution"]["blocked_by"][0]
+        self.assertEqual("WEX210: unknown artifact ID: WO-ZZZ-999", blocker)
+        self.assertEqual(1, blocker.count("WEX210"))
+
+    def test_transition_guard_refusal_exits_2(self) -> None:
+        # WO-ECP-027 (ECP-COR-005): transition follows its siblings; the guard is a refusal.
+        from se_harness.mutation_guard import MutationGuardError
+
+        with mock.patch("se_harness.cli.plan_transition", side_effect=MutationGuardError("mutation guard MG005 (transition): RID002 harness_version: resolved")):
+            code, output, error = invoke("transition", str(self.root), "--apply", "--set", "WO-001=verified", "--decision", "WO-001=engineering-owner", "--json")
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertTrue(error.startswith("harnessctl: mutation guard MG005"), error)
+
+    def test_transition_option_syntax_error_is_a_refusal(self) -> None:
+        # WO-ECP-027 (ECP-COR-006): a malformed --set is a usage error, not a blocked result.
+        code, output, error = invoke("transition", str(self.root), "--set", "WO-001", "--decision", "WO-001=engineering-owner", "--json")
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertTrue(error.startswith("harnessctl: --set must use ID=VALUE"), error)
+
+    def test_result_handlers_convert_the_shared_tuple(self) -> None:
+        # WO-ECP-027 (ECP-COR-002, ECP-COR-007): every result-building handler converts the
+        # classes _check converts, with the code split once.
+        from se_harness.workflow_procedures import ProcedureError
+
+        with mock.patch("se_harness.cli.plan_transition", side_effect=ProcedureError("WEX220: no procedure binds the transition")):
+            code, payload, error = self.json_of("transition", str(self.root), "--set", "WO-001=verified", "--decision", "WO-001=engineering-owner", "--json")
+        self.assertEqual(1, code, error)
+        self.assertEqual(["WEX220: no procedure binds the transition"], payload["restitution"]["blocked_by"])
+        with mock.patch("se_harness.cli.write_evidence_packet", side_effect=ValueError("WEX230: result field missing")):
+            code, payload, error = self.json_of("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")
+        self.assertEqual(1, code, error)
+        self.assertEqual(["WEX230: result field missing"], payload["restitution"]["blocked_by"])
+        with mock.patch("se_harness.cli.capture_verification", side_effect=ProcedureError("WEX220: no procedure binds the record")):
+            code, payload, error = self.json_of(
+                "capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001",
+                "--verification", "VER-001", "--evidence", "README.md", "--json",
+            )
+        self.assertEqual(1, code, error)
+        self.assertEqual(["WEX220: no procedure binds the record"], payload["restitution"]["blocked_by"])
+
+    def test_main_refuses_a_procedure_error_that_escapes_a_handler(self) -> None:
+        # WO-ECP-027 (ECP-COR-008): no traceback; the refusal line and exit 2.
+        from se_harness.workflow_procedures import ProcedureError
+
+        with mock.patch("se_harness.cli.inspect_installation", side_effect=ProcedureError("no procedure binds doctor")):
+            code, output, error = invoke("doctor", str(self.root))
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertTrue(error.startswith("harnessctl: no procedure binds doctor"), error)
+
+    def test_dashboard_json_passes_the_engine_refusal_and_error_through(self) -> None:
+        # WO-ECP-027 (ECP-COR-009, ECP-COR-010): engine exit 2 is a refusal, engine exit 1 keeps its stderr.
+        import subprocess
+
+        refused = subprocess.CompletedProcess(args=[], returncode=2, stdout="", stderr="GenerationError: bad root\n")
+        with mock.patch("se_harness.cli.subprocess.run", return_value=refused):
+            code, output, error = invoke("dashboard", str(self.root), "--json")
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertIn("GenerationError: bad root", error)
+        failed = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="dashboard: manifest mismatch\n")
+        with mock.patch("se_harness.cli.subprocess.run", return_value=failed):
+            code, payload, error = self.json_of("dashboard", str(self.root), "--json")
+        self.assertEqual(1, code, error)
+        self.assertEqual("failed", payload["outcome"])
+        self.assertIn("manifest mismatch", payload["error"])
+
+    def test_pr_body_unknown_artifact_is_a_failed_result(self) -> None:
+        # WO-ECP-027 (ECP-COR-011, ECP-COR-012): exit 1 with the result on stdout, as check and evidence.
+        code, payload, error = self.json_of("pr-body", str(self.root), "--artifact", "WO-ZZZ-999", "--json")
+        self.assertEqual(1, code, error)
+        self.assertEqual(("pr-body", "failed", "WEX-ECP-014"), (payload["command"], payload["outcome"], payload["code"]))
+        self.assertIn("WO-ZZZ-999", payload["message"])
+        code, output, error = invoke("pr-body", str(self.root), "--artifact", "WO-ZZZ-999")
+        self.assertEqual(1, code)
+        self.assertEqual("WEX-ECP-014: unknown artifact ID: WO-ZZZ-999\n", output)
+        self.assertEqual("", error)
+
+    def test_an_engine_launch_timeout_is_a_refusal(self) -> None:
+        # WO-ECP-027 (ECP-COR-014): the engine launches are bounded and a timeout is a refusal.
+        import subprocess
+
+        with mock.patch("se_harness.cli.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
+            code, output, error = invoke("validate", str(self.root))
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertTrue(error.startswith("harnessctl: "), error)
+        self.assertEqual(1800, run.call_args.kwargs.get("timeout"))
+
+    def test_every_subprocess_launch_in_the_package_carries_a_timeout(self) -> None:
+        # WO-ECP-027 (ECP-COR-013 to ECP-COR-015): the inspection VER-ECP-023 names.
+        import ast
+
+        repository = Path(__file__).resolve().parents[1]
+        unbounded: list[str] = []
+        for base in ("se_harness", "repository_tools"):
+            for path in sorted((repository / base).rglob("*.py")):
+                tree = ast.parse(path.read_text(encoding="utf-8"))
+                for node in ast.walk(tree):
+                    if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+                        continue
+                    if not (isinstance(node.func.value, ast.Name) and node.func.value.id == "subprocess"):
+                        continue
+                    if node.func.attr in {"run", "check_output", "check_call", "Popen"} and not any(k.arg == "timeout" for k in node.keywords):
+                        unbounded.append(f"{path.relative_to(repository).as_posix()}:{node.lineno}")
+        self.assertEqual([], unbounded)
 
     def test_init_dry_run_json_and_conflict_exit_code(self) -> None:
         fresh = self.root / "fresh"

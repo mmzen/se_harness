@@ -23,6 +23,7 @@ from se_harness.installer import (
     template_root,
 )
 from se_harness.github_ci import SelectionError, select_from_event
+from se_harness.mutation_guard import MutationGuardError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import CAUSE_SUFFIX, capture_verification, prepare_release
 from se_harness.renumber import (
@@ -237,6 +238,20 @@ def _distribution_environment() -> dict[str, str]:
     return environment
 
 
+#: ECP-COR-014: every engine launch is bounded; a timeout is a refusal, never a hang.
+ENGINE_TIMEOUT_SECONDS = 1800
+
+
+def _launch_engine(script: str, argv: list[str], *, cwd: Path, capture: bool) -> subprocess.CompletedProcess:
+    try:
+        return subprocess.run(
+            argv, cwd=cwd, env=_distribution_environment(), check=False,
+            capture_output=capture, text=capture, timeout=ENGINE_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise HarnessError(f"{script} did not finish within {ENGINE_TIMEOUT_SECONDS} seconds") from exc
+
+
 def _run_distribution_script(
     target: Path,
     script: str,
@@ -244,18 +259,16 @@ def _run_distribution_script(
 ) -> int:
     target = ensure_target(target, must_exist=True)
     path = _distribution_script(script)
-    completed = subprocess.run(
-        [sys.executable, "-B", str(path), "--root", str(target), *extra],
-        cwd=target,
-        env=_distribution_environment(),
-        check=False,
+    completed = _launch_engine(
+        script, [sys.executable, "-B", str(path), "--root", str(target), *extra], cwd=target, capture=False,
     )
     return completed.returncode
 
 
 def _inspect_repository(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    completed = subprocess.run(
+    completed = _launch_engine(
+        "inspect_engineering_artifacts.py",
         [
             sys.executable,
             "-B",
@@ -266,10 +279,7 @@ def _inspect_repository(args: argparse.Namespace) -> int:
             *(["--vocabulary-threshold", str(args.vocabulary_threshold)] if getattr(args, "vocabulary_threshold", None) is not None else []),
         ],
         cwd=target,
-        env=_distribution_environment(),
-        check=False,
-        capture_output=True,
-        text=True,
+        capture=True,
     )
     output = completed.stdout
     if completed.returncode == 0 and args.json:
@@ -298,13 +308,11 @@ def _doctor(args: argparse.Namespace) -> int:
     validator = _distribution_script("validate_engineering_artifacts.py")
     warnings: list[dict[str, str]] = []
     if validator.is_file():
-        completed = subprocess.run(
+        completed = _launch_engine(
+            "validate_engineering_artifacts.py",
             [sys.executable, "-B", str(validator), "--root", str(target), "--json"],
             cwd=target,
-            env=_distribution_environment(),
-            check=False,
-            capture_output=True,
-            text=True,
+            capture=True,
         )
         try:
             report = json.loads(completed.stdout)
@@ -334,23 +342,26 @@ def _dashboard(args: argparse.Namespace) -> int:
     if not args.json:
         return _run_distribution_script(Path(args.target), "generate_harness_dashboard.py", extra)
     target = ensure_target(Path(args.target), must_exist=True)
-    completed = subprocess.run(
+    completed = _launch_engine(
+        "generate_harness_dashboard.py",
         [sys.executable, "-B", str(_distribution_script("generate_harness_dashboard.py")), "--root", str(target), *extra],
         cwd=target,
-        env=_distribution_environment(),
-        check=False,
-        capture_output=True,
-        text=True,
+        capture=True,
     )
+    if completed.returncode == 2:
+        # ECP-COR-009: the engine could not run; its refusal is ours, exit 2 as in the human rendering.
+        lines = [line for line in (completed.stderr or "").splitlines() if line.strip()]
+        raise HarnessError(lines[-1] if lines else "dashboard generation refused")
     output = Path(args.output) if args.output else Path("target") / "harness-dashboard"
     if not output.is_absolute():
         output = target / output
     manifest = output / "dashboard-manifest.json"
     digest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
-    _print_json(_command_result(
-        "dashboard", "completed" if completed.returncode == 0 else "failed",
-        output=output.as_posix(), manifest_sha256=digest,
-    ))
+    members: dict[str, object] = {"output": output.as_posix(), "manifest_sha256": digest}
+    if completed.returncode != 0:
+        # ECP-COR-010: the engine's standard error travels with the failed result.
+        members["error"] = (completed.stderr or "")[-2000:]
+    _print_json(_command_result("dashboard", "completed" if completed.returncode == 0 else "failed", **members))
     return 0 if completed.returncode == 0 else 1
 
 
@@ -373,7 +384,7 @@ def _project(target: str, artifact: str | None, *, include_background: bool, jso
 
     try:
         result = project_selected(Path(target), artifact, include_background=include_background)
-    except HarnessError as exc:
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         code, message = _split_code(str(exc), "WEX210")
         result = failed_result("check", artifact, message, code=code, repository_blocker=isinstance(exc, RepositoryWorkflowError))
     print(render_workflow_json_v2(result) if json_output else render_workflow_human_v2(result), end="")
@@ -425,10 +436,8 @@ def _check(args: argparse.Namespace) -> int:
             from_git=args.from_git,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
-        message = str(exc)
-        code = "WEX210"
-        if message.startswith("WEX-ECP-0"):
-            code, message = message.split(": ", 1)
+        # ECP-COR-001: one splitter, so no line carries a code twice.
+        code, message = _split_code(str(exc), "WEX210")
         result = failed_result("check", args.artifact, message, code=code)
     if (
         args.from_git is not None
@@ -460,11 +469,8 @@ def _evidence(args: argparse.Namespace) -> int:
         result = write_evidence_packet(
             Path(args.target), artifact_id=args.artifact, checkpoint=args.checkpoint, now=now,
         )
-    except HarnessError as exc:
-        message = str(exc)
-        code = "WEX-ECP-010"
-        if message.startswith("WEX-ECP-01"):
-            code, message = message.split(": ", 1)
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        code, message = _split_code(str(exc), "WEX-ECP-010")
         result = failed_result("evidence", args.artifact, message, code=code)
     print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -478,7 +484,14 @@ def _pr_body(args: argparse.Namespace) -> int:
     _, report = _validation(root)
     primary = _catalog(report).get(args.artifact)
     if primary is None:
-        raise HarnessError(f"WEX-ECP-014: unknown artifact ID: {args.artifact}")
+        # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence;
+        # the one splitter names the code, as on every other result path.
+        code, message = _split_code(f"WEX-ECP-014: unknown artifact ID: {args.artifact}", "WEX210")
+        if args.json:
+            _print_json(_command_result("pr-body", "failed", code=code, message=message))
+        else:
+            print(f"{code}: {message}")
+        return 1
     try:
         body = render_pull_request_body(
             root, primary, packet_directory=evidence_packet_path(root, primary, "handoff").parent,
@@ -518,9 +531,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
             domain=args.domain,
         )
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
-    except HarnessError as exc:
-        if str(exc).startswith("mutation guard "):
-            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        if isinstance(exc, MutationGuardError):
+            # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
             raise
         code, message = _record_code(exc, "WEX30")
         result = failed_result("capture-verification", args.record_id, message, code=code)
@@ -545,9 +558,9 @@ def _prepare_release(args: argparse.Namespace) -> int:
             domain=args.domain,
         )
         result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
-    except HarnessError as exc:
-        if str(exc).startswith("mutation guard "):
-            # ECP-CLI-004: an environment refusal is not a result; main() prints it and exits 2.
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        if isinstance(exc, MutationGuardError):
+            # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
             raise
         code, message = _record_code(exc, "WEX40")
         result = failed_result("prepare-release", args.record_id, message, code=code)
@@ -580,12 +593,12 @@ def _refusal_code(exc: Exception) -> str:
 
 
 def _transition(args: argparse.Namespace) -> int:
-    primary: str | None = None
+    # ECP-COR-006: option syntax is parsed before any result exists; a fault is a usage refusal.
+    transitions = _assignments(args.transitions, "--set")
+    decisions = _assignments(args.decisions, "--decision")
+    reasons = _assignments(args.reasons, "--reason")
+    primary = sorted(transitions)[0] if transitions else None
     try:
-        transitions = _assignments(args.transitions, "--set")
-        primary = sorted(transitions)[0] if transitions else None
-        decisions = _assignments(args.decisions, "--decision")
-        reasons = _assignments(args.reasons, "--reason")
         plan = plan_transition(
             Path(args.target),
             transitions,
@@ -594,12 +607,16 @@ def _transition(args: argparse.Namespace) -> int:
             apply=args.apply,
         )
         result = plan.result
-    except HarnessError as exc:
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        if isinstance(exc, MutationGuardError):
+            # ECP-COR-005: the guard is an environment refusal; main() prints it and exits 2.
+            raise
+        code, message = _split_code(str(exc), _refusal_code(exc))
         result = failed_result(
             "transition",
             primary,
-            str(exc),
-            code=_refusal_code(exc),
+            message,
+            code=code,
             repository_blocker=isinstance(exc, RepositoryWorkflowError),
         )
     print(_render_selected_result(result, args), end="")
@@ -623,14 +640,15 @@ def _decide(args: argparse.Namespace) -> int:
             apply=bool(args.apply),
         )
         result = plan.result
-    except HarnessError as exc:
-        if str(exc).startswith("mutation guard "):
+    except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
+        if isinstance(exc, MutationGuardError):
             raise
+        code, message = _split_code(str(exc), _refusal_code(exc))
         result = failed_result(
             "decide",
             args.artifact,
-            str(exc),
-            code=_refusal_code(exc),
+            message,
+            code=code,
             repository_blocker=isinstance(exc, RepositoryWorkflowError),
         )
     print(_render_selected_result(result, args), end="")
@@ -1172,14 +1190,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
-    arguments = list(sys.argv[1:] if argv is None else argv)
     try:
         args = build_parser().parse_args(argv)
         return int(args.handler(args))
     except (
         ContractError,
         HarnessError,
+        ProcedureError,
     ) as exc:
+        # ECP-COR-008: a refusal no handler converted; never a traceback.
         print(f"harnessctl: {exc}", file=sys.stderr)
         return 2
 

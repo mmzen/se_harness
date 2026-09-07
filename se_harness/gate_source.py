@@ -114,9 +114,13 @@ def load_configuration(root: Path) -> DelegationConfiguration | None:
 
 
 def _git(root: Path, *arguments: str) -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(root), *arguments], capture_output=True, text=True, check=False,
-    )
+    # ECP-COR-013: bounded, and a start failure is the gate's own refusal.
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), *arguments], capture_output=True, text=True, check=False, timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} could not run: {exc}") from exc
     if completed.returncode != 0:
         raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} failed: {completed.stderr.strip()[:200]}")
     return completed.stdout.strip()

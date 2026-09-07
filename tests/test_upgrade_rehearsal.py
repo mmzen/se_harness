@@ -280,3 +280,17 @@ class RetiredSurfaceTests(unittest.TestCase):
         self.assertIn("cross-platform semantic mismatch", workflow)
         self.assertNotIn("rehearse-migration", workflow)
         self.assertNotIn("scenario", workflow.lower())
+
+
+class RunnerTimeoutTests(unittest.TestCase):
+    """WO-ECP-027 (ECP-COR-015): the rehearsal runner is bounded; a timeout is a failed Completed."""
+
+    def test_a_timeout_becomes_a_failed_completed(self) -> None:
+        with unittest.mock.patch(
+            "repository_tools.upgrade_rehearsal.subprocess.run",
+            side_effect=subprocess.TimeoutExpired(cmd="evaluator", timeout=600),
+        ) as run:
+            completed = upgrade_rehearsal.run(["evaluator", "doctor", "."], Path("."))
+        self.assertEqual(124, completed.exit_code)
+        self.assertIn("timed out", completed.stderr)
+        self.assertEqual(600, run.call_args.kwargs.get("timeout"))

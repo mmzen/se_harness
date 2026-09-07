@@ -325,6 +325,23 @@ class IdentifierAllocationTests(unittest.TestCase):
         self.assertFalse((self.root / "docs/engineering/product/requirements/REQ-PRD-003.md").exists())
         self.assertEqual("REQ-PRD-003", self.allocate()[0])
 
+    def test_allocation_sees_operating_contract_and_decision_ids_on_another_ref(self) -> None:
+        # WO-ECP-027 (ECP-COR-016): the ref pattern covers every type _REF_PREFIX declares.
+        from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, reachable_artifact_ids
+
+        operations = "/".join(ARTIFACT_DIRECTORIES["operating_contract"])
+        decisions = "/".join(ARTIFACT_DIRECTORIES["decision"])
+        self.git("checkout", "-q", "-b", "records")
+        self.write(f"docs/engineering/product/{operations}/OPS-PRD-001.md", 'id = "OPS-PRD-001"')
+        self.write(f"docs/engineering/product/{decisions}/DEC-PRD-001.md", 'id = "DEC-PRD-001"')
+        self.git("add", "-A"); self.git("commit", "-q", "-m", "records")
+        self.git("checkout", "-q", "main")
+        seen = reachable_artifact_ids(self.root)
+        self.assertIn("OPS-PRD-001", seen)
+        self.assertIn("DEC-PRD-001", seen)
+        self.assertEqual("OPS-PRD-002", self.allocate("operating_contract")[0])
+        self.assertEqual("DEC-PRD-002", self.allocate("decision")[0])
+
     def test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref(self) -> None:
         import shutil
 

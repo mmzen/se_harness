@@ -71,8 +71,13 @@ class MutationAuthority:
         return self.evidence.sha256
 
 
-def _failure(code: str, operation: str, message: str) -> HarnessError:
-    return HarnessError(f"mutation guard {code} ({operation}): {message}")
+class MutationGuardError(HarnessError):
+    """An environment refusal of a guarded mutation (ECP-COR-004): the CLI re-raises it by
+    type so that `main()` prints it and exits 2, never rendering it as a result."""
+
+
+def _failure(code: str, operation: str, message: str) -> MutationGuardError:
+    return MutationGuardError(f"mutation guard {code} ({operation}): {message}")
 
 
 def _configured_version(root: Path, operation: str) -> str:

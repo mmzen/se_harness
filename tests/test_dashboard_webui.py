@@ -1211,3 +1211,15 @@ class DashboardWebUIContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RequirementProjectionTests(unittest.TestCase):
+    """WO-ECP-027 (ECP-COR-018): the closed-vocabulary verification_method array reaches the Explorer."""
+
+    def test_array_verification_method_projects_as_a_joined_string(self) -> None:
+        snapshot, report, _ = GENERATOR.generate_snapshot(ROOT)
+        self.assertTrue(report.valid)
+        by_id = {item["id"]: item for item in snapshot["artifacts"]}
+        self.assertEqual("test, inspection", by_id["REQ-ECP-032"]["verification_method"])
+        strings = [item for item in snapshot["artifacts"] if item["type"] == "requirement" and isinstance(item.get("verification_method"), str)]
+        self.assertTrue(strings)

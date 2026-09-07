@@ -401,7 +401,12 @@ def normalize_artifacts(
         }
         if artifact.artifact_type == "requirement":
             item["statement"] = _string(artifact.metadata.get("statement")) or None
-            item["verification_method"] = _string(artifact.metadata.get("verification_method")) or None
+            # ECP-COR-018: the closed-vocabulary array and the legacy string both reach the Explorer.
+            method = artifact.metadata.get("verification_method")
+            if isinstance(method, list):
+                item["verification_method"] = ", ".join(_string_list(method)) or None
+            else:
+                item["verification_method"] = _string(method) or None
             plain_words = _plain_words(artifact.body)
             if plain_words:
                 item["plain_words"] = plain_words

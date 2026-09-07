@@ -144,3 +144,11 @@ scope checkpoint writes no packet.
 ## Amendment record
 
 **The `ECP-CLI-001` amendment of 2026-09-06 is qualified, decided by the accountable owner on 2026-09-06 by selecting the presented option "One-release alias window" under `WO-ECP-026`.** The repository-command list keeps `adopt` for the 0.16.0 release as a plain alias of `init` taking the positional `target`; the pinned set in `tests/test_cli_shape.py` keeps it for that release and drops it with the follow-up work order that removes the alias.
+
+## Amendment record
+
+**`ECP-CLI-004` is made to hold on every writing command, proposed 2026-09-07 under `WO-ECP-027` (`SPEC-ECP-021` `ECP-COR-004` to `ECP-COR-008`).** The mutation guard raises `MutationGuardError`, a `HarnessError` subclass, and `transition`, `decide`, `capture-verification` and `prepare-release` re-raise it by type, so every guard refusal exits 2; a `--set`, `--decision` or `--reason` syntax error on `transition` is a usage refusal, exit 2; every handler that builds a schema-2 result converts the same exception classes `check` converts, and `main()` also catches `ProcedureError`, so no traceback remains reachable for those classes. `pr-body` with an unknown artifact and `dashboard --json` follow the rule as `ECP-COR-009` to `ECP-COR-012` state. Nothing else in this specification changes.
+
+## Amendment record
+
+**`ECP-CLI-006` is made to hold on every result path, proposed 2026-09-07 under `WO-ECP-027` (`SPEC-ECP-021` `ECP-COR-001` to `ECP-COR-003`).** The checkpoint path of `check`, `evidence`, `transition` and `decide` obtain the result's code through the one splitter the projection already used, so a raised `WEX210` or `WEX200` message no longer renders its code twice; the code families the splitter recognizes are unchanged. Nothing else in this specification changes.

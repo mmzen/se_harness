@@ -533,3 +533,23 @@ class QualificationDefinitionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EvaluatorFactsFrontMatterTests(unittest.TestCase):
+    """WO-ECP-027 (ECP-COR-017): a CRLF checkout yields the same release-record metadata as LF."""
+
+    def test_crlf_front_matter_parses_like_lf(self) -> None:
+        from repository_tools.evaluator_facts import _front_matter
+
+        body = '+++\nid = "RLS-TST-001"\nversion = "0.16.0"\nstatus = "released"\n+++\n\n# Record\n'
+        with tempfile.TemporaryDirectory() as scratch:
+            lf = Path(scratch) / "lf.md"
+            crlf = Path(scratch) / "crlf.md"
+            bom = Path(scratch) / "bom.md"
+            lf.write_bytes(body.encode("utf-8"))
+            crlf.write_bytes(body.replace("\n", "\r\n").encode("utf-8"))
+            bom.write_bytes(b"\xef\xbb\xbf" + body.encode("utf-8"))
+            expected = {"id": "RLS-TST-001", "version": "0.16.0", "status": "released"}
+            self.assertEqual(expected, _front_matter(lf))
+            self.assertEqual(expected, _front_matter(crlf))
+            self.assertEqual(expected, _front_matter(bom))
