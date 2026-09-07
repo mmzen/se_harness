@@ -2,7 +2,7 @@
 id = "WO-HUP-017"
 type = "work_order"
 title = "Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -20,6 +20,13 @@ implements = ["REQ-HUP-033", "REQ-HUP-034"]
 specifications = ["SPEC-HUP-017"]
 architecture = ["ARCH-HUP-012"]
 verification = ["VER-HUP-017"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T10:57:23Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable repository owner on 2026-09-07 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #370 (REQ-HUP-033, REQ-HUP-034, SPEC-HUP-017, VER-HUP-017, WO-HUP-017) and the rehearsal of the 0.16.0 root adoption on a throwaway LF clone of main at 5df10aa9. WO-HUP-017 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
 +++
 
 # Work Order: Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave

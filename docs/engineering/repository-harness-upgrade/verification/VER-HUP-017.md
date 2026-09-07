@@ -2,13 +2,20 @@
 id = "VER-HUP-017"
 type = "verification"
 title = "Verify standard-root adoption of exact public 0.16.0"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 
 [relations]
 verifies = ["REQ-HUP-033", "REQ-HUP-034"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T10:57:23Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable repository owner on 2026-09-07 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #370 (REQ-HUP-033, REQ-HUP-034, SPEC-HUP-017, VER-HUP-017, WO-HUP-017) and the rehearsal of the 0.16.0 root adoption on a throwaway LF clone of main at 5df10aa9."
 +++
 
 # Verification Contract: Verify standard-root adoption of exact public 0.16.0

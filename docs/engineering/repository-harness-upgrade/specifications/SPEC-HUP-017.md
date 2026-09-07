@@ -2,7 +2,7 @@
 id = "SPEC-HUP-017"
 type = "specification"
 title = "Standard-root adoption of released 0.16.0, the simple way, with the retired scripts leaving"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -10,6 +10,13 @@ contract = "A conforming adoption moves the root to released 0.16.0 in one verif
 
 [relations]
 specifies = ["REQ-HUP-033", "REQ-HUP-034"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T10:57:23Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-07 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #370 (REQ-HUP-033, REQ-HUP-034, SPEC-HUP-017, VER-HUP-017, WO-HUP-017) and the rehearsal of the 0.16.0 root adoption on a throwaway LF clone of main at 5df10aa9."
 +++
 
 # Specification: Standard-root adoption of released 0.16.0, the simple way, with the retired scripts leaving
