@@ -2,10 +2,10 @@
 id = "WO-DST-024"
 type = "work_order"
 title = "Stop installing evaluator scripts into governed repositories"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-06"
-updated = "2026-09-06"
+updated = "2026-09-07"
 
 [assurance]
 commit_bound_verification = "required"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-06T14:53:20Z"
 decided_by = "engineering-owner"
 reason = "Started by the accountable engineering owner on 2026-09-06 with the explicit instruction 'start WO-DST-024' in the working session, after approving the packet earlier the same day. Implementation proceeds on branch wo/dst-retire-engine-footprint under the approved execution scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T05:17:05Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner by selecting the presented option 'Mark implemented (Recommended)' after all four hosted lanes were green on pull request #365 head 0dec844c (Engineering Harness run 34041896176, Candidate Evidence run 34041896156), the released 0.15.0 evaluator's completion checkpoint reported Completed with no blocker, the scope and handoff checkpoints completed against origin/main, and the evidence was retained at docs/engineering/harness-distribution/evidence/WO-DST-024-verification.md with the handoff packet beside it. Root scripts/ copies, lock and AGENTS.md are unchanged; DST-ENG-015 and DST-ENG-016 bind the root-adoption work order."
 +++
 
 # Work Order: Stop installing evaluator scripts into governed repositories
