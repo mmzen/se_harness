@@ -25,15 +25,13 @@ the one-release `adopt` alias; the dormant surface the owner retired on
 Group A (`WO-ECP-028`) is the unreferenced symbols of section 1 of the
 assessment, eight orphan fixtures and a handful of dead configuration lines,
 workflow outputs and test pins. Group B (`WO-ECP-029`) is
-the `adopt` alias; group C (`WO-ECP-030`) is `renumber-artifacts`,
-`rehearse-recovery`, `journaled_apply.py` and two unreachable contract
-entries. The declared-digest chain of `hash_bound.py` stays for #377.
+the `adopt` alias. Group C (`WO-ECP-030`) is the two dormant commands, the
+unwired journal and two unreachable contract entries. The declared-digest chain of `hash_bound.py` stays for #377.
 
 ## Terms
 
-- **Dead symbol.** A function, constant, class or parameter with no reference
-  in `se_harness/`, `scripts/`, `repository_tools/`, `.github/`, `templates/`
-  other than its definition.
+- **Dead symbol.** A function, constant, class or parameter whose only
+  reference in the product tree is its definition.
 - **Dormant command.** A registered subcommand with no workflow caller and no
   retained operational output in this repository.
 - **Amendment record.** A dated `## Amendment record` entry on an approved
