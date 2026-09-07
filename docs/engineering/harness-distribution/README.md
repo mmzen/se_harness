@@ -163,3 +163,9 @@ Evaluator scripts leave the repository template:
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-070` -> `SPEC-DST-025`, `VER-DST-025` -> `WO-DST-024`.
 
 On 2026-09-06 the repository owner decided to remove the evaluator content duplicated under `scripts/` in two packets. `WO-DST-024` moves the evaluator scripts out of the standard template and into the package so that no governed repository receives them and the next upgrade removes the eight retired paths; a later packet folds the scripts into importable modules. The owner approved the four artifacts on 2026-09-06; `WO-DST-024` is approved and not started. This repository's own root footprint changes only at the root adoption of the carrying release.
+
+The installed configuration declares only keys the harness reads:
+
+`INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-071` -> `SPEC-DST-026`, `VER-DST-026` -> `WO-DST-025`.
+
+On 2026-09-07 the repository owner instructed that all unused configuration items be removed, after a reading found that seven of the twelve keys in `.engineering-harness.toml` have no reader anywhere in the evaluator: `artifact_root`, `dashboard_output`, `schema_version`, `require_full_commit`, `require_clean_worktree`, `verification_record_status` and `release_record_status`. The complexity audit of 2026-08 had recorded one of them as item P2-10. `WO-DST-025` removes them from the standard template, adds a test that pins the installed key set and names each key's reading module, and amends the two definitions that mention a removed key. No behaviour changes: the two surviving provenance booleans keep their meanings, defaults and diagnostics, and an unknown key stays tolerated. `DEC-DST-001` puts the fate of the schema marker to the owner and blocks `SPEC-DST-026` until it is disposed. This repository's own root configuration and lock change only at the root adoption of the carrying release.
