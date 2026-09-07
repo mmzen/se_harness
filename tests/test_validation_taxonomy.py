@@ -10,6 +10,8 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+from se_harness.installer import ENGINE_ROOT  # noqa: E402
+from tests.root_identity_support import root_copy  # noqa: E402
 SCRIPTS = REPOSITORY_ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
@@ -60,7 +62,8 @@ updated = "2026-08-15"
 
 class ValidationTaxonomyTests(unittest.TestCase):
     def test_every_diagnostic_emission_declares_a_plane(self) -> None:
-        source = (REPOSITORY_ROOT / "scripts/validate_engineering_artifacts.py").read_text(
+        # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copy when the lock names it, else the engine copy.
+        source = (root_copy("scripts/validate_engineering_artifacts.py") or ENGINE_ROOT / "validate_engineering_artifacts.py").read_text(
             encoding="utf-8"
         )
         tree = ast.parse(source)

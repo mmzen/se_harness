@@ -24,7 +24,8 @@ from se_harness.installer import HarnessError
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
+from tests.root_identity_support import evaluator_scripts_dir, root_copy  # noqa: E402
+SCRIPTS = evaluator_scripts_dir()
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -72,7 +73,13 @@ class ArtifactAuthoringTests(unittest.TestCase):
         self.assertEqual(RESERVED_DOMAINS, candidate_layout.RESERVED_DOMAINS)
         # The root module is loaded from its path: `import artifact_layout_registry`
         # resolves to whichever scripts directory another test put first on sys.path.
-        root_path = REPOSITORY_ROOT / "scripts/artifact_layout_registry.py"
+        root_path = root_copy("scripts/artifact_layout_registry.py")
+        if root_path is None:
+            # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): a 0.16.0 or later root installs no
+            # copy; the engine registry is the only one, and it is what was imported above.
+            self.assertFalse((REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").exists())
+            self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
+            return
         root_spec = importlib.util.spec_from_file_location("root_layout_registry", root_path)
         root_layout = importlib.util.module_from_spec(root_spec)
         root_spec.loader.exec_module(root_layout)

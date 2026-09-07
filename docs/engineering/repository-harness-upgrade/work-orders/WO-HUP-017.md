@@ -2,7 +2,7 @@
 id = "WO-HUP-017"
 type = "work_order"
 title = "Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -27,6 +27,20 @@ to = "approved"
 decided_at = "2026-09-07T10:57:23Z"
 decided_by = "repository-owner"
 reason = "Approved by the accountable repository owner on 2026-09-07 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #370 (REQ-HUP-033, REQ-HUP-034, SPEC-HUP-017, VER-HUP-017, WO-HUP-017) and the rehearsal of the 0.16.0 root adoption on a throwaway LF clone of main at 5df10aa9. WO-HUP-017 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T12:10:20Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-07, given by selecting the presented option 'Merged; start, complete on green, prepare record'. Start preflight PASS with no diagnostics over the reading manifest after ARCH-HUP-012 was amended by record on the packet branch; the packet was approved and merged as 6dd288d7; the transaction runs from an LF clone whose lock bytes equal the committed blob."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T12:25:38Z"
+decided_by = "engineering-owner"
+reason = "Completed by the accountable engineering owner on 2026-09-07 under DR-WO-COMPLETE, under the repository owner's decision 'Merged; start, complete on green, prepare record' for WO-HUP-017 (PR #371). The standard root is exact public 0.16.0 by the simple upgrade from the isolated wheel-file environment (transaction 4d160466: 48 managed files, 6 updated, the 8 retired script copies removed, replay 40 unchanged; prior lock f617ff0b under 0.15.0, target archive a969d6ab, payload 51712fcf, document WO-HUP-017-evaluator-upgrade.json). VER-HUP-017 executed in full under exact 0.16.0: validate 1351 artifacts, 0 errors, 73 warnings, 0 advisories; doctor 97/0; released-root qualification RR001-RR004 PASS; inspect 0; identical Explorer digests twice; review preflight PASS; identity passed; derive PRE008 then 0.16.0 to 0.17.0; the Windows suite's failure set equals the same-commit 0.15.0 control's (1265 tests, the one workstation baseline error, 26 skips). HUP-ADP-011 to HUP-ADP-016 applied: the candidate 0.17.0, the owner region, the developing note, the SPEC-IAR-012 amendment record, the three workflows switched to evaluator commands, twelve test modules identity-aware through tests/root_identity_support.py. All four lanes green at the evidence head 798454cf, the governor-transition lane assessing the real 0.15.0 to 0.16.0 move with one transaction document and RLS-SEH-025 supplying the wheel. Evidence: docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017/WO-HUP-017-handoff.md, bound at handoff."
 +++
 
 # Work Order: Adopt exact public 0.16.0 as the standard root, the simple way, and let the retired scripts leave

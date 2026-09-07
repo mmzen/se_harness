@@ -13,7 +13,10 @@ from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE_SCRIPTS = ROOT / "se_harness/engine"
-MANAGED_GENERATOR = ROOT / "scripts/generate_harness_dashboard.py"
+from tests.root_identity_support import root_copy  # noqa: E402
+
+# WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copies only while the lock names them.
+MANAGED_GENERATOR = root_copy("scripts/generate_harness_dashboard.py") or CANDIDATE_SCRIPTS / "generate_harness_dashboard.py"
 if str(CANDIDATE_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(CANDIDATE_SCRIPTS))
 
@@ -123,8 +126,9 @@ def temporal_findings(
 
 class DashboardWebUIContractTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.template = ROOT / "scripts/harness_explorer/index.template.html"
         self.canonical = ROOT / "se_harness/engine/harness_explorer/index.template.html"
+        self.root_template = root_copy("scripts/harness_explorer/index.template.html")
+        self.template = self.root_template or self.canonical
 
     # Identity-aware (WO-HUP-014, SPEC-HUP-014 rule 10): the root copy of the
     # Explorer template belongs to the root's version, not to this test. The
@@ -701,7 +705,10 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertNotIn("Math.abs(hash)%semanticPalette.length", content)
 
     def test_canonical_template_is_the_only_committed_webui_source(self) -> None:
-        self.assertTrue(self.template.is_file())
+        if self.root_template is None:
+            self.assertFalse((ROOT / "scripts/harness_explorer/index.template.html").exists())
+        else:
+            self.assertTrue(self.root_template.is_file())
         self.assertTrue(self.canonical.is_file())
         self.assertFalse((ROOT / "templates/webui").exists())
         self.assertEqual([], list(ROOT.rglob("harness-lineage-prototype.html")))

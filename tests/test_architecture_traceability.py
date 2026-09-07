@@ -14,7 +14,8 @@ from tests.mutation_guard_support import trusted_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
+from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
+SCRIPTS = evaluator_scripts_dir()
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 

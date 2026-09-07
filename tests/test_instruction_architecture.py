@@ -906,7 +906,8 @@ OWNER_EDITABLE_SCRIPTS = (
 )
 REQUIRED_OWNER_CONTENT = (
     'python -m unittest discover -s tests -p "test_*.py"',
-    "python scripts/validate_engineering_artifacts.py --root .",
+    # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-012): the Graph command is the evaluator's validate.
+    "python -m se_harness validate .",
     "python scripts/validate_release_distributions.py --root .",
     "se_harness/cli.py",
     "pyproject.toml",
@@ -977,12 +978,17 @@ class OwnerInstructionRegionTests(unittest.TestCase):
         # the root's version, not to this test. 0.10.0 managed 55 files; 0.11.0 manages 40
         # after the three writing skills' retirement (WO-ECP-006). An unknown root fails
         # loudly rather than silently accepting any count.
-        managed_count_by_root = {"0.10.0": 55, "0.11.0": 40, "0.12.0": 40, "0.13.0": 40, "0.14.0": 40, "0.15.0": 41}
+        # 0.16.0 manages 33: the 41 of 0.15.0 less the eight retired script copies (WO-HUP-017).
+        managed_count_by_root = {"0.10.0": 55, "0.11.0": 40, "0.12.0": 40, "0.13.0": 40, "0.14.0": 40, "0.15.0": 41, "0.16.0": 33}
         root_version = self.lock["tool_version"]
         self.assertIn(root_version, managed_count_by_root, f"declare the managed count of root {root_version}")
         self.assertEqual(managed_count_by_root[root_version], len(managed))
         self.assertIn("docs/engineering/", region)
-        self.assertIn("in `scripts/`", region)
+        if any(path.startswith("scripts/") for path in managed):
+            self.assertIn("in `scripts/`", region)
+        else:
+            # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-012): since the 0.16.0 root no scripts/ path is managed.
+            self.assertIn("no file under `scripts/` is managed", region)
         for path in managed:
             with self.subTest(path=path):
                 if path.startswith("docs/engineering/templates/"):
@@ -999,7 +1005,9 @@ class OwnerInstructionRegionTests(unittest.TestCase):
             for path, entry in self.lock["files"].items()
             if path.startswith("scripts/") and entry.get("mode") == "managed"
         }
-        self.assertEqual(8, len(managed_scripts))
+        # Identity-aware (WO-HUP-017, SPEC-HUP-017 HUP-ADP-016): eight until the 0.15.0 root, none since 0.16.0.
+        root = tuple(int(part) for part in self.lock["tool_version"].split("."))
+        self.assertEqual(8 if root < (0, 16, 0) else 0, len(managed_scripts))
         for name in OWNER_EDITABLE_SCRIPTS:
             with self.subTest(script=name):
                 self.assertIn(name, region)

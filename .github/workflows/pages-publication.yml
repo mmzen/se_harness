@@ -183,8 +183,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python "$RUNNER_TEMP/generation-snapshot/governance/scripts/generate_harness_dashboard.py" \
-            --root "$RUNNER_TEMP/generation-snapshot/governance" \
+          # SPEC-DPG-001 rule 8 (WO-HUP-017, SPEC-HUP-017 HUP-ADP-015): since the 0.16.0
+          # root the generator ships inside the released evaluator proven above, not in the
+          # snapshot; `harnessctl dashboard` is the admitted form.
+          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness dashboard \
+            "$RUNNER_TEMP/generation-snapshot/governance" \
             --output "$RUNNER_TEMP/generated-dashboard"
           test -z "$(git -C "$RUNNER_TEMP/governance" status --porcelain=v1 --untracked-files=all)"
 

@@ -13,6 +13,7 @@ from se_harness.integrity import canonical_sha256
 
 
 ROOT = Path(__file__).resolve().parents[1]
+from tests.root_identity_support import root_copy  # noqa: E402
 SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
@@ -497,14 +498,19 @@ class InspectionReportTests(unittest.TestCase):
         self.assertIn("inspection failed: snapshot schema", stderr.getvalue())
 
     def test_released_root_remains_locked_while_candidate_reuses_snapshot(self) -> None:
-        root_script = ROOT / "scripts/inspect_engineering_artifacts.py"
+        root_script = root_copy("scripts/inspect_engineering_artifacts.py")
         canonical = ROOT / "se_harness/engine/inspect_engineering_artifacts.py"
         lock = json.loads((ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual(
-            lock["files"]["scripts/inspect_engineering_artifacts.py"]["sha256"],
-            canonical_sha256(root_script.read_bytes()),
-        )
-        self.assertNotEqual(root_script.resolve(), canonical.resolve())
+        if root_script is None:
+            # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): a 0.16.0 or later root installs no copy.
+            self.assertNotIn("scripts/inspect_engineering_artifacts.py", lock["files"])
+            self.assertFalse((ROOT / "scripts/inspect_engineering_artifacts.py").exists())
+        else:
+            self.assertEqual(
+                lock["files"]["scripts/inspect_engineering_artifacts.py"]["sha256"],
+                canonical_sha256(root_script.read_bytes()),
+            )
+            self.assertNotEqual(root_script.resolve(), canonical.resolve())
         source = canonical.read_text(encoding="utf-8")
         self.assertIn("from generate_harness_dashboard import", source)
         self.assertIn("generate_snapshot", source)

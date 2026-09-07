@@ -13,7 +13,7 @@ question = "<One sentence ending with a question mark?>"
 raised_by = "<actor or role that raised it>"
 recommendation = "<id of the recommended option>"
 # A deviation also needs the departed rule and the observed fact:
-# against = "SPEC-xxx#rule-N"
+# against = "SPEC-xxx#PREFIX-AREA-NNN"   (a rule identifier the specification defines)
 # observed = "<what cannot be met, in one or two sentences>"
 
 # At least two options. A deviation's options are drawn from
