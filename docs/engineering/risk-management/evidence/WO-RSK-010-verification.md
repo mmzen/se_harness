@@ -192,6 +192,21 @@ suite reads 1287 tests (the merge removed thirty retired cases), 26 skipped,
 and the same two control-confirmed Windows failures; `tests/test_risk_management.py`
 31 of 31.
 
+### After merging live `main` a third time
+
+`main` moved to `a6b9aed` (`WO-ECP-028`, the dead-code cleanup) and was merged
+with one conflict, in `tests/test_fixture_support.py`, where the cleanup had
+removed the installed-file-count pin this work amended; the removal stands. The
+cleanup also deleted `BLOCKABLE_TYPES` from `se_harness/decisions.py` as unused
+code, which `risks.py` imported, so `risks.py` now declares the six-type set of
+`SPEC-DCM-001` rule 4 itself; `decisions.py` stays untouched by this work and
+the validator's `E011` remains the enforcement. Re-measured: `validate .` reads
+`Artifacts: 1388 | Errors: 0 | Warnings: 73 | Advisories: 0`; `preflight
+--phase review` PASS; the scope and handoff checkpoints pass every predicate
+with 33 paths; the predicate sets equal `main`'s at 43 in 10 groups; the suite
+reads 1282 tests, 26 skipped, and the same two control-confirmed Windows
+failures; `tests/test_risk_management.py` 31 of 31.
+
 ## Governing readings, Linux (record)
 
 Added when the pull request's hosted lanes complete: the `validate` check-run

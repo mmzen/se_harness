@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RSK-010"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "c01a03431296182e7af789ba8566aff80f4075a83b7c0befd28f107599aea3bf"
-rebound_at = "2026-09-07T22:14:03Z"
+formal_snapshot_sha256 = "25e904cdb664c86822f0b35d9b9c642de70f304de84a6f42b49fb4925c222aa1"
+rebound_at = "2026-09-07T22:20:57Z"
 ```
 
 # WO-RSK-010 handoff evidence
@@ -91,6 +91,15 @@ raised against it and disposed `amend` by the owner; the predicate sets equal
 1387 | Errors: 0 | Warnings: 73 | Advisories: 0`; the handoff checkpoint
 passes every predicate with 34 paths; the suite reads 1287 tests with the same
 two control-confirmed failures.
+
+After merging `main` a third time (`a6b9aed`, `WO-ECP-028`, the dead-code
+cleanup): that work deleted `BLOCKABLE_TYPES` from `se_harness/decisions.py`
+as unused, so `risks.py` now holds the six-type set of `SPEC-DCM-001` rule 4
+itself and `decisions.py` stays untouched by this work; the cleanup also
+dropped the installed-file-count pin this work had amended. `validate .` reads
+`Artifacts: 1388 | Errors: 0 | Warnings: 73 | Advisories: 0`; the handoff
+checkpoint passes every predicate with 33 paths; the suite reads 1282 tests
+with the same two control-confirmed failures.
 
 ## The decision now due
 

@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "c01a03431296182e7af789ba8566aff80f4075a83b7c0befd28f107599aea3bf",
+    "formal_snapshot_sha256": "25e904cdb664c86822f0b35d9b9c642de70f304de84a6f42b49fb4925c222aa1",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 34 declared changed path(s) are within execution scope.",
+            "message": "All 33 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -246,7 +246,7 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 30a0615: HTTP 422"
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for da47f6d: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-RSK-010 is in_progress."
@@ -277,7 +277,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "fc5ef1fbbf456561be55f1cc2145dbf1cf99b1ceb342909b41264c4229cfc68e",
+  "result_sha256": "915342ed138c304038984450f42a0259afef5571eefc7055643a37d53fe03d28",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -312,7 +312,6 @@
       "tests/test_artifact_authoring.py",
       "tests/test_artifact_catalog.py",
       "tests/test_cli_shape.py",
-      "tests/test_fixture_support.py",
       "tests/test_lifecycle_state_contract.py",
       "tests/test_risk_management.py",
       "tests/test_validation_taxonomy.py"
