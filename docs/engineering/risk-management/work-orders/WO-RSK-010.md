@@ -2,7 +2,7 @@
 id = "WO-RSK-010"
 type = "work_order"
 title = "Implement the risk artifact, its raise, and the decision pairing"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -52,6 +52,13 @@ to = "approved"
 decided_at = "2026-09-07T20:49:30Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Selected for execution. This work order carries [delegation] class = execution, so this approval is the delegating act under DR-015 and DR-007; the class activates only from the base of a later pull request, and every non-delegated right stays human. WO-RSK-011 stays draft until this work has merged."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T21:02:59Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 008c7b9819df62d1b0bb50f3ac6858a78ca7d1f3 (check-run 101864362911, source github-checks)."
 +++
 
 # Work Order: Implement the risk artifact, its raise, and the decision pairing
