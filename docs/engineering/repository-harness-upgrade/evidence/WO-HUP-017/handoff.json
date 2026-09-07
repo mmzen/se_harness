@@ -1,0 +1,380 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "920fcf53b02e1dd178bbc105a4d7b3489449d0c23e1144ac250f8e276b0fbcfc",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-HUP-017 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-017:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-HUP-017 declares 23 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 41 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-HUP-017:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017/WO-HUP-017-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HUP-017"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-HUP-017.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 73
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HUP-017",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HUP-017",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-HUP-017",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-HUP-017",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-HUP-017."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-HUP-017",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-HUP-017 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-HUP-017 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-HUP-017 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-HUP-017 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-HUP-017",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-HUP-017."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "17111050da90600619b2e81e1d69d2cd798bd740b9389045deda0d24caa3036a",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      ".engineering-harness.lock",
+      ".engineering-harness.toml",
+      ".github/workflows/engineering-harness.yml",
+      ".github/workflows/pages-publication.yml",
+      ".github/workflows/release-candidate-replay.yml",
+      ".github/workflows/release-qualification.yml",
+      "AGENTS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-012.md",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017-evaluator-upgrade.json",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017/handoff.json",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-017/WO-HUP-017-handoff.md",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-017.md",
+      "docs/engineering/templates/DECISION.template.md",
+      "docs/engineering/templates/SPECIFICATION.template.md",
+      "docs/notes/developing-se-harness.md",
+      "ENGINEERING_HARNESS.md",
+      "pyproject.toml",
+      "scripts/artifact_layout_registry.py",
+      "scripts/check_engineering_harness.ps1",
+      "scripts/check_engineering_harness.sh",
+      "scripts/generate_harness_dashboard.py",
+      "scripts/harness_explorer/index.template.html",
+      "scripts/inspect_engineering_artifacts.py",
+      "scripts/select_harness_work_order.py",
+      "scripts/validate_engineering_artifacts.py",
+      "se_harness/__init__.py",
+      "tests/root_identity_support.py",
+      "tests/test_adr_applicability.py",
+      "tests/test_architecture_traceability.py",
+      "tests/test_artifact_authoring.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_dashboard_publication.py",
+      "tests/test_dashboard_webui.py",
+      "tests/test_inspection.py",
+      "tests/test_instruction_architecture.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_release_build.py",
+      "tests/test_release_orchestration.py",
+      "tests/test_revision_provenance.py",
+      "tests/test_validation_taxonomy.py"
+    ],
+    "declared_paths": [
+      ".engineering-harness.lock",
+      ".engineering-harness.toml",
+      ".github/workflows/engineering-harness.yml",
+      ".github/workflows/pages-publication.yml",
+      ".github/workflows/release-candidate-replay.yml",
+      ".github/workflows/release-qualification.yml",
+      "AGENTS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-012.md",
+      "docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-012.md",
+      "docs/engineering/repository-harness-upgrade/evidence/",
+      "docs/engineering/repository-harness-upgrade/README.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-033.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-034.md",
+      "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-017.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-017.md",
+      "docs/engineering/templates/",
+      "docs/notes/developing-se-harness.md",
+      "ENGINEERING_HARNESS.md",
+      "pyproject.toml",
+      "scripts/",
+      "se_harness/__init__.py",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ARCH-HUP-012",
+      "CAP-HUP-002",
+      "INT-HUP-002",
+      "REQ-HUP-033",
+      "REQ-HUP-034",
+      "SPEC-HUP-017",
+      "VER-HUP-017"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-HUP-017"
+    ],
+    "primary": "WO-HUP-017"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-HUP-017",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-HUP-017",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
