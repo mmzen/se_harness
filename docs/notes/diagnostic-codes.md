@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-282 codes across 30 registered prefixes.
+189 codes across 28 registered prefixes.
 
 ## How to read a code
 
@@ -46,13 +46,11 @@ but are not diagnostics and are not listed here.
 | `I` | preflight | an installation check failed. | 1 |
 | `WEX` | workflow execution | a check, transition, or evidence operation is refused. | 16 |
 | `WEX-ADS` | workflow execution | a directive-surface workflow refusal. | 2 |
-| `WEX-ECP` | workflow execution | a control-plane workflow refusal. | 13 |
+| `WEX-ECP` | workflow execution | a control-plane workflow refusal. | 11 |
 | `MG` | mutation guard | an installed-root write is refused before any file changes. | 5 |
 | `RID` | runtime identity | the running evaluator's identity could not be proven. | 25 |
 | `EPS` | interpreter safety | the environment entry-point safety rule failed. | 11 |
-| `JNL` | journaled apply | the journaled writer refused or could not recover. | 10 |
 | `PRE` | evaluator-facts derivation | CI could not derive a complete fact set from the declared root. | 10 |
-| `REN` | renumber-artifacts | an identifier-renumbering plan or apply is refused. | 81 |
 | `RQ` | release qualification | a qualification result could not be produced or retained. | 2 |
 | `CC` | release qualification | a complete-candidate check. | 4 |
 | `CP` | release qualification | a candidate-package check. | 2 |
@@ -270,8 +268,6 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-022` | `WEX-ECP-022` |
 | `WEX-ECP-030` | `WEX-ECP-030:`; `WEX-ECP-030: duplicate transition binding` (+8 more) |
 | `WEX-ECP-040` | `WEX-ECP-040` |
-| `WEX-ECP-041` | `WEX-ECP-041` |
-| `WEX-ECP-042` | `WEX-ECP-042` |
 
 ### `MG` — mutation guard
 
@@ -329,21 +325,6 @@ but are not diagnostics and are not listed here.
 | `EPS010` | `EPS010` |
 | `EPS011` | `EPS011`; `Report whether this runtime can classify a path as a symbolic link or junction. Symbolic-link detection is pr…` |
 
-### `JNL` — journaled apply
-
-| Code | Message text in the source |
-| --- | --- |
-| `JNL001` | `JNL001` |
-| `JNL002` | `JNL002` |
-| `JNL003` | `JNL003` |
-| `JNL004` | `JNL004` |
-| `JNL005` | `JNL005` |
-| `JNL006` | `JNL006` |
-| `JNL007` | `JNL007` |
-| `JNL010` | `JNL010` |
-| `JNL013` | `JNL013` |
-| `JNL014` | `JNL014` |
-
 ### `PRE` — evaluator-facts derivation
 
 | Code | Message text in the source |
@@ -358,92 +339,6 @@ but are not diagnostics and are not listed here.
 | `PRE008` | `PRE008: the candidate version` |
 | `PRE014` | `PRE014:` |
 | `PRE015` | `PRE015:` |
-
-### `REN` — renumber-artifacts
-
-| Code | Message text in the source |
-| --- | --- |
-| `REN001` | `REN001` |
-| `REN002` | `REN002` |
-| `REN003` | `REN003` |
-| `REN004` | `REN004` |
-| `REN005` | `REN005` |
-| `REN006` | `REN006` |
-| `REN007` | `REN007` |
-| `REN008` | `REN008` |
-| `REN009` | `REN009` |
-| `REN010` | `REN010` |
-| `REN011` | `REN011` |
-| `REN012` | `REN012` |
-| `REN013` | `REN013` |
-| `REN014` | `REN014` |
-| `REN015` | `REN015` |
-| `REN016` | `REN016` |
-| `REN017` | `REN017` |
-| `REN018` | `REN018` |
-| `REN019` | `REN019` |
-| `REN020` | `REN020` |
-| `REN021` | `REN021` |
-| `REN022` | `REN022` |
-| `REN023` | `REN023` |
-| `REN024` | `REN024` |
-| `REN025` | `REN025` |
-| `REN026` | `REN026` |
-| `REN027` | `REN027` |
-| `REN028` | `REN028` |
-| `REN029` | `REN029` |
-| `REN030` | `REN030` |
-| `REN031` | `REN031` |
-| `REN032` | `REN032` |
-| `REN033` | `REN033` |
-| `REN034` | `REN034` |
-| `REN035` | `REN035` |
-| `REN036` | `REN036` |
-| `REN037` | `REN037` |
-| `REN038` | `REN038` |
-| `REN039` | `REN039` |
-| `REN040` | `REN040` |
-| `REN041` | `REN041` |
-| `REN042` | `REN042` |
-| `REN043` | `REN043` |
-| `REN044` | `REN044` |
-| `REN045` | `REN045` |
-| `REN046` | `REN046` |
-| `REN047` | `REN047` |
-| `REN048` | `REN048` |
-| `REN049` | `REN049` |
-| `REN050` | `REN050` |
-| `REN051` | `REN051` |
-| `REN052` | `REN052` |
-| `REN053` | `REN053` |
-| `REN054` | `REN054` |
-| `REN055` | `REN055` |
-| `REN056` | `REN056` |
-| `REN057` | `REN057` |
-| `REN058` | `REN058` |
-| `REN059` | `REN059` |
-| `REN060` | `REN060` |
-| `REN061` | `REN061` |
-| `REN062` | `REN062` |
-| `REN063` | `REN063` |
-| `REN064` | `REN064` |
-| `REN065` | `REN065` |
-| `REN066` | `REN066` |
-| `REN067` | `REN067` |
-| `REN068` | `REN068` |
-| `REN069` | `REN069` |
-| `REN070` | `REN070` |
-| `REN071` | `REN071` |
-| `REN072` | `REN072` |
-| `REN073` | `REN073` |
-| `REN074` | `REN074` |
-| `REN075` | `REN075` |
-| `REN076` | `REN076` |
-| `REN077` | `REN077` |
-| `REN078` | `REN078` |
-| `REN079` | `REN079` |
-| `REN080` | `REN080` |
-| `REN081` | `REN081` |
 
 ### `RQ` — release qualification
 

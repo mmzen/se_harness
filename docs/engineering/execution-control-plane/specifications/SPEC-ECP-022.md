@@ -206,6 +206,10 @@ candidate template are compared, **then** they are byte-equal and name no
 
 ## Amendment record
 
+**`ECP-DEL-022` is corrected, proposed 2026-09-07 under `WO-ECP-030`.** The rule named three code prefixes to leave `diagnostic_code_index.py`: `REN`, `RR` and `JNL`. `RR` is release qualification's released-root family, live in `se_harness/release_qualification.py`; the recovery rehearsal emitted no coded diagnostics. Only `REN` and `JNL` leave the registry. Nothing else changes.
+
+## Amendment record
+
 **The inspector clause of `ECP-DEL-006` is withdrawn, proposed 2026-09-07 under `WO-ECP-028`.** The `validation_report is None` branch of `inspect_engineering_artifacts._diagnostic_plane_counts` is unreachable from the script's `main`, but the library function `build_inspection` defaults `validation_report` to `None` and seven tests exercise that path on a hand-built snapshot. It is a public entry, not dead code; it stays. The other four items of the rule stand.
 
 ## Amendment record

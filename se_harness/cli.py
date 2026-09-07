@@ -25,16 +25,6 @@ from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.mutation_guard import MutationGuardError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import CAUSE_SUFFIX, capture_verification, prepare_release
-from se_harness.renumber import (
-    RenumberError,
-    apply_renumber_plan,
-    build_renumber_plan,
-    render_human as render_renumber_human,
-    render_human_error as render_renumber_human_error,
-    render_json as render_renumber_json,
-    render_json_error as render_renumber_json_error,
-)
-from se_harness.recovery_rehearsal import RecoveryRehearsalError, run_recovery_rehearsal
 from se_harness.release_qualification import (
     failed_qualification,
     qualify_candidate_package,
@@ -203,26 +193,6 @@ def _upgrade(args: argparse.Namespace) -> int:
     else:
         print("no transaction evidence retained; pass --evidence-output to keep it")
     return 0
-
-
-def _rehearse_recovery(args: argparse.Namespace) -> int:
-    output = Path(args.output)
-    try:
-        report = run_recovery_rehearsal(
-            output,
-            operational_repository=Path(args.repository),
-            candidate_commit=args.candidate_commit,
-            target_version=args.target_version,
-        )
-    except RecoveryRehearsalError as exc:
-        raise HarnessError(str(exc)) from exc
-    passed = report.get("result") == "pass"
-    if args.json:
-        _print_json(_command_result("rehearse-recovery", "completed" if passed else "failed", report=report))
-    else:
-        print(f"recovery rehearsal: {report['result'].upper()}")
-        print(f"report: {(output.resolve() / 'rehearsal-report.json')}")
-    return 0 if passed else 1
 
 
 def _distribution_script(script: str) -> Path:
@@ -709,25 +679,6 @@ def _create_artifact(args: argparse.Namespace) -> int:
     return 0
 
 
-def _renumber_artifacts(args: argparse.Namespace) -> int:
-    try:
-        plan = build_renumber_plan(Path(args.target), args.mappings)
-        if args.apply:
-            plan = apply_renumber_plan(plan)
-        print(
-            render_renumber_json(plan, applied=args.apply)
-            if args.json
-            else render_renumber_human(plan, applied=args.apply)
-        )
-        return 0
-    except RenumberError as exc:
-        if args.json:
-            print(render_renumber_json_error(exc))
-        else:
-            print(render_renumber_human_error(exc), file=sys.stderr)
-        return 1
-
-
 def _release_unit(args: argparse.Namespace) -> int:
     from se_harness.release_unit import (
         PACKAGED_SURFACE_PREFIXES,
@@ -1018,18 +969,6 @@ def build_parser() -> argparse.ArgumentParser:
     upgrade.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     upgrade.set_defaults(handler=_upgrade)
 
-    rehearse = commands.add_parser(
-        "rehearse-recovery",
-        help="run a no-network evaluator-recovery rehearsal in a disposable directory",
-    )
-    rehearse.add_argument("output", help="absent or empty directory outside the operational repository")
-    rehearse.add_argument("--repository", default=".", help="operational repository that must remain unchanged")
-    rehearse.add_argument("--candidate-commit", required=True, help="full synthetic immutable candidate commit")
-    rehearse.add_argument("--target-version", default="999.0.0", help="synthetic target evaluator version")
-    rehearse.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object carrying the report")
-    rehearse.set_defaults(handler=_rehearse_recovery)
-
-
     scaffold = commands.add_parser("scaffold-domain", help="safely create the canonical organization for one engineering domain")
     scaffold.add_argument("target", nargs="?", default=".")
     scaffold.add_argument("--domain", required=True)
@@ -1047,27 +986,6 @@ def build_parser() -> argparse.ArgumentParser:
     create.add_argument("--quiet", action="store_true", help="do not print the authoring checklist after creation")
     create.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     create.set_defaults(handler=_create_artifact)
-
-    renumber = commands.add_parser(
-        "renumber-artifacts",
-        help="plan or apply explicit structured artifact renumbering",
-    )
-    renumber.add_argument("target", nargs="?", default=".")
-    renumber.add_argument(
-        "--map",
-        required=True,
-        action="append",
-        dest="mappings",
-        metavar="OLD=NEW",
-        help="explicit type-compatible identifier mapping; repeat for a set",
-    )
-    renumber.add_argument("--json", action="store_true")
-    renumber.add_argument(
-        "--apply",
-        action="store_true",
-        help="apply the validated structured changes and path moves",
-    )
-    renumber.set_defaults(handler=_renumber_artifacts)
 
     release_unit = commands.add_parser(
         "release-unit", help="derive a release unit's work-order census from the commits between the previous release tag and a candidate commit"

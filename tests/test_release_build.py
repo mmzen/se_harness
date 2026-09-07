@@ -306,7 +306,6 @@ class DeterministicSdistTests(unittest.TestCase):
                     "agent_contract.json", "effect_contract.json",
                 ):
                     self.assertNotIn(f"se_harness/{removed}", archive.namelist())
-                self.assertIn("se_harness/journaled_apply.py", archive.namelist())
                 for contract in ("workflow_contract.json", "quality_gates_contract.json", "hash_bound_classes.json"):
                     self.assertIn(f"se_harness/{contract}", archive.namelist())
                 skill_members = [

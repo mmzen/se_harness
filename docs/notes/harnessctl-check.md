@@ -133,7 +133,6 @@ gate passes and no repository-level error is present.
 
 | Gate | Applies at | Predicates |
 | --- | --- | --- |
-| `QG-G0-INTENT` | `pre-action`, `transition` | `QGP-G0-GRAPH`, `QGP-G0-INTEGRITY` |
 | `QG-G1-DEFINITION` | `pre-action`, `transition` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING` |
 | `QG-G2-ARCHITECTURE` | `pre-action`, `transition` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING` |
 | `QG-G3-WORK-AUTHORIZATION` | `start`, `pre-action`, `transition` | `QGP-G3-STATUS`, `QGP-G3-GRAPH`, `QGP-G3-INTEGRITY`, `QGP-G3-SCOPE`, `QGP-G3-PREFLIGHT` |

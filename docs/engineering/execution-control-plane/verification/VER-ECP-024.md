@@ -88,3 +88,7 @@ A reviewer reads the amendment records and the two reference sections.
 Whether any consumer outside this repository scripted `renumber-artifacts`
 or `rehearse-recovery`; none is known, both are refused with a usage error,
 and the reference keeps their history.
+
+## Amendment record
+
+**The guard-inventory row is corrected, proposed 2026-09-07 under `WO-ECP-030`.** The pass condition reads "no `REN`, `JNL`" where it read "no `REN`, `RR`, `JNL`": `RR` is release qualification's live family (see the `SPEC-ECP-022` record of the same date).

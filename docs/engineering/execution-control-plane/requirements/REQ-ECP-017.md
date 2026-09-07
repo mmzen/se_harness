@@ -90,3 +90,7 @@ as needing recovery.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**Retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-020`, `ECP-DEL-030`).** The journaled apply module that implemented this requirement was never wired into any writer (WO-ECP-018 deferred it) and is removed with its tests. The requirement stays as history; the writers keep their own atomic replace-and-rollback paths, which #377 consolidates.

@@ -93,3 +93,7 @@ If a colliding artifact already participates in commit-bound verification or rel
 ## Open decisions
 
 The packet proposes the explicit-mapping, evidence-preserving recovery boundary above. Accountable product, technical, assurance, and engineering owners must approve or revise that boundary before implementation; no identifier-allocation or collision-prevention decision is implied.
+
+## Amendment record
+
+**Retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-029`).** The renumbering command that satisfied this requirement is removed; the requirement stays as history and is satisfied by no code after 0.17.0. Identifier collisions are prevented up front by `create-artifact`'s allocation across every local ref (`WO-ECP-002`).
