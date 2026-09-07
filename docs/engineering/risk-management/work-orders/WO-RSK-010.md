@@ -2,7 +2,7 @@
 id = "WO-RSK-010"
 type = "work_order"
 title = "Implement the risk artifact, its raise, and the decision pairing"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -69,6 +69,13 @@ to = "in_progress"
 decided_at = "2026-09-07T21:02:59Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 008c7b9819df62d1b0bb50f3ac6858a78ca7d1f3 (check-run 101864362911, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T22:31:03Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 87708bb28862b9d317d559d4bb782cbd20a4859c (check-run 101879174068, source github-checks)."
 +++
 
 # Work Order: Implement the risk artifact, its raise, and the decision pairing

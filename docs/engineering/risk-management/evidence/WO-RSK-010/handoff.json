@@ -245,8 +245,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for da47f6d: HTTP 422"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-RSK-010=implemented",
+        "--decision",
+        "WO-RSK-010=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-RSK-010 is in_progress."
@@ -256,8 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "101879174068",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "87708bb28862b9d317d559d4bb782cbd20a4859c"
       },
       "outcomes": [
         "implemented",
@@ -277,7 +288,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "915342ed138c304038984450f42a0259afef5571eefc7055643a37d53fe03d28",
+  "result_sha256": "473a2d7d4d97f58254af6c4369b12a1fdd4c63b2c4c79bcb6a031f8bc92e3f92",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
