@@ -33,8 +33,10 @@ paths = [
   "templates/repository/standard/docs/engineering/templates/RISK.template.md",
   "templates/repository/standard/docs/engineering/templates/README.md",
   "tests/test_risk_management.py",
+  "tests/test_artifact_authoring.py",
   "tests/test_artifact_catalog.py",
   "tests/test_cli_shape.py",
+  "tests/test_fixture_support.py",
   "tests/test_lifecycle_state_contract.py",
   "tests/test_validation_taxonomy.py",
   "docs/notes/README.md",
@@ -229,3 +231,15 @@ test fails. `docs/notes/README.md` gains the row of the new note. The
 quality-gates bullet of `Out of scope` and the expected change surface were
 reworded to match; every rule, diagnostic code, state and constraint is
 unchanged.
+
+2026-09-07, engineering owner, under `DR-REMEDIATION-SCOPE`, after the full
+test suite was first run against the implementation: added
+`tests/test_artifact_authoring.py` and `tests/test_fixture_support.py`. Both pin
+the installed surface and change by one line each: the first expects the state a
+created risk starts in, `identified`, as it expects `open` for a decision; the
+second counts the files `init` installs, which the risk template raises from 41
+to 42. They are of the kind the in-scope list names, "existing tests that pin
+the type sets", and were not enumerated. A control run on a clean `main`
+worktree showed the two other failing tests of the Windows run fail there too
+(the owner-region byte count and a `PermissionError` on Git objects), so they
+are not this work's.
