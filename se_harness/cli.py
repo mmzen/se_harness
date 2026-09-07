@@ -484,12 +484,13 @@ def _pr_body(args: argparse.Namespace) -> int:
     _, report = _validation(root)
     primary = _catalog(report).get(args.artifact)
     if primary is None:
-        # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence.
-        message = f"unknown artifact ID: {args.artifact}"
+        # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence;
+        # the one splitter names the code, as on every other result path.
+        code, message = _split_code(f"WEX-ECP-014: unknown artifact ID: {args.artifact}", "WEX210")
         if args.json:
-            _print_json(_command_result("pr-body", "failed", code="WEX-ECP-014", message=message))
+            _print_json(_command_result("pr-body", "failed", code=code, message=message))
         else:
-            print(f"WEX-ECP-014: {message}")
+            print(f"{code}: {message}")
         return 1
     try:
         body = render_pull_request_body(
