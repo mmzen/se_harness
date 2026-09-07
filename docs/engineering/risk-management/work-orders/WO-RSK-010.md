@@ -2,7 +2,7 @@
 id = "WO-RSK-010"
 type = "work_order"
 title = "Implement the risk artifact, its raise, and the decision pairing"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -36,11 +36,21 @@ paths = [
   "docs/engineering/risk-management/",
 ]
 
+[delegation]
+class = "execution"
+
 [relations]
 implements = ["REQ-RSK-010", "REQ-RSK-011", "REQ-RSK-012", "REQ-RSK-013", "REQ-RSK-015"]
 specifications = ["SPEC-RSK-010"]
 architecture = ["ARCH-RSK-010", "ADR-RSK-010"]
 verification = ["VER-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Selected for execution. This work order carries [delegation] class = execution, so this approval is the delegating act under DR-015 and DR-007; the class activates only from the base of a later pull request, and every non-delegated right stays human. WO-RSK-011 stays draft until this work has merged."
 +++
 
 # Work Order: Implement the risk artifact, its raise, and the decision pairing
@@ -100,6 +110,14 @@ The implementer may not decide: any rule identifier or diagnostic code of
 `SPEC-RSK-010`; the state model; whether a gate predicate is added; whether a
 configuration key is added; the dependency direction between the risk and
 decision modules; the command names.
+
+This work order carries `[delegation] class = "execution"`. Under `DR-015` the
+`delegated-executor` role may apply `DR-WO-START`, `DR-WO-COMPLETE` and
+`DR-VREC-PREPARE` for this work order alone, one at a time, only while the
+required pull-request check for the candidate head reads `success`. The class is
+read at the base of the pull request, so it activates only once this packet has
+merged. Every other decision right, including the assurance decision on the
+resulting record, stays with the human owner.
 
 ## Constraints
 

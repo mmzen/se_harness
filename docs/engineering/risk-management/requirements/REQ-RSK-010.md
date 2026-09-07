@@ -2,7 +2,7 @@
 id = "REQ-RSK-010"
 type = "requirement"
 title = "A risk carries one cause, one effect, and a measured size"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "likelihood and impact are integers 1 to 5; score equals their product
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. One cause, one effect, and a five-by-five measurement whose product is checked."
 +++
 
 # Requirement: A risk carries one cause, one effect, and a measured size

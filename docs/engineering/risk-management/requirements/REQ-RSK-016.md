@@ -2,7 +2,7 @@
 id = "REQ-RSK-016"
 type = "requirement"
 title = "A release states the risks the released work carries"
-status = "draft"
+status = "approved"
 owners = ["release-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "the prepared record carries one row per accepted, mitigating or raise
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. A release states the threats the released work carries, derived from the graph."
 +++
 
 # Requirement: A release states the risks the released work carries

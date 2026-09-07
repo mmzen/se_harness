@@ -36,7 +36,7 @@ statements survive here as `source` on the requirements; its identifiers do not.
 and the retained release evidence naming `WO-RSK-001` stays unambiguous.
 `ADR-RSK-010` records the three designs considered and why this one was chosen.
 
-## Draft definition packet
+## The packet
 
 `INT-RSK-010` -> `CAP-RSK-010` -> `REQ-RSK-010..016` -> `SPEC-RSK-010`,
 `ARCH-RSK-010`, `ADR-RSK-010`, `VER-RSK-010` -> `WO-RSK-010`, `WO-RSK-011`.
@@ -66,6 +66,16 @@ root on the assumption that #156 would land; this packet makes it true.
 
 Drafted on 2026-09-07 after the owner selected the presented option "the risk
 measures, the decision decides" from a proposal comparing it against a third
-decision kind and against re-issuing #156. Nothing is approved: a definition
-leaves `draft` only by an explicit decision under `DR-DEFINITION-DECIDE`, and
-approval of a definition authorizes no work.
+decision kind and against re-issuing #156.
+
+Approved the same day, by selection in the ratified decision channel. The eleven
+definitions are `approved` under `DR-DEFINITION-DECIDE`, each with its own
+lifecycle event naming the role that decided it. `WO-RSK-010` is `approved`
+under `DR-WO-SELECT`; it carries `[delegation] class = "execution"`, so that
+approval is also the delegating act under `DR-015`. `WO-RSK-011` stays `draft`
+until `WO-RSK-010` has merged, as its own out-of-scope statement assumes.
+
+Because the delegation class is read at the base of a pull request and never
+from the branch, it cannot activate on the branch that introduces it. The
+delegated start of `WO-RSK-010` therefore happens in a later pull request whose
+base already carries this packet.

@@ -2,7 +2,7 @@
 id = "CAP-RSK-010"
 type = "capability"
 title = "Record a threat, size it, and answer it before the stage moves"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -10,6 +10,13 @@ ability = "Anyone can record a measured threat against governed work under any s
 
 [relations]
 derives_from = ["INT-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Anyone working may record a measured threat, and the accountable owner answers it before the stage moves."
 +++
 
 # Capability: Record a threat, size it, and answer it before the stage moves

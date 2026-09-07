@@ -2,13 +2,20 @@
 id = "INT-RSK-010"
 type = "intent"
 title = "Make a threat to governed work a measured fact with a recorded answer"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 outcome = "An owner can see every known threat to governed work, its size, and the answer given to it, at the moment a stage asks to move."
 
 [relations]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. The threat a governed repository carries has nowhere to go today; this intent makes it a measured fact with a recorded answer."
 +++
 
 # Intent: Make a threat to governed work a measured fact with a recorded answer

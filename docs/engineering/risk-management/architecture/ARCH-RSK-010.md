@@ -2,7 +2,7 @@
 id = "ARCH-RSK-010"
 type = "architecture"
 title = "The risk carries the measurement; the decision carries the act"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -21,6 +21,13 @@ triggers = [
 ]
 rationale = "The risk artifact adds a family that can stop any stage of any domain, which is cross-cutting policy. Whether it stops stages itself or borrows the decision family's stop fixes the dependency direction between two artifact families and is very hard to reverse once records bind it. Three materially different designs were on the table, and the retired PR #156 chose a different one."
 assessed_by = "technical-owner"
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. The one-way dependency from the risk to the decision leaves SPEC-DCM-001 unamended."
 +++
 
 # Architecture: The risk carries the measurement; the decision carries the act

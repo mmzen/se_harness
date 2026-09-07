@@ -2,7 +2,7 @@
 id = "REQ-RSK-015"
 type = "requirement"
 title = "Recording a risk never widens a work order's authorized scope"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "the scope and handoff checks pass with one added risk file that no de
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Recording a threat mid-execution must not widen the work order that was approved."
 +++
 
 # Requirement: Recording a risk never widens a work order's authorized scope

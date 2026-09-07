@@ -2,13 +2,20 @@
 id = "VER-RSK-010"
 type = "verification"
 title = "Independent evidence for the risk artifact and its borrowed stop"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 
 [relations]
 verifies = ["REQ-RSK-010", "REQ-RSK-011", "REQ-RSK-012", "REQ-RSK-013", "REQ-RSK-014", "REQ-RSK-015", "REQ-RSK-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. The evidence contract covers all seven requirements with an independent reading."
 +++
 
 # Verification Contract: Independent evidence for the risk artifact and its borrowed stop

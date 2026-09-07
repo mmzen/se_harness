@@ -2,7 +2,7 @@
 id = "REQ-RSK-014"
 type = "requirement"
 title = "Mitigated is claimed only under verified coverage and a recorded residual"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "a risk in mitigated names at least one work order; every named work o
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "assurance-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. A mitigation claim rests on a verified record and a written residual, or it is refused."
 +++
 
 # Requirement: Mitigated is claimed only under verified coverage and a recorded residual

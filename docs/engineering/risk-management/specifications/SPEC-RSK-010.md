@@ -2,7 +2,7 @@
 id = "SPEC-RSK-010"
 type = "specification"
 title = "The risk artifact: measurement, the decision that stops the stage, and closure under verified coverage"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "assurance-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -10,6 +10,13 @@ contract = "A risk records one measured threat, is raised for an answer, is answ
 
 [relations]
 specifies = ["REQ-RSK-010", "REQ-RSK-011", "REQ-RSK-012", "REQ-RSK-013", "REQ-RSK-014", "REQ-RSK-015", "REQ-RSK-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Thirty-six rules in the area RSK-MGT, adding no gate predicate and no configuration key."
 +++
 
 # Specification: The risk artifact: measurement, the decision that stops the stage, and closure under verified coverage

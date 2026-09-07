@@ -2,7 +2,7 @@
 id = "REQ-RSK-012"
 type = "requirement"
 title = "A raised risk stops the threatened stage through a decision"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "no new gate predicate is added; a raised risk without a matching pend
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. The stop is the decision family's existing stop, not a second gate."
 +++
 
 # Requirement: A raised risk stops the threatened stage through a decision

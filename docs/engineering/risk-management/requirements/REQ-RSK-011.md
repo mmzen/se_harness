@@ -2,7 +2,7 @@
 id = "REQ-RSK-011"
 type = "requirement"
 title = "Every recorded risk is raised for an answer"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "the raise command writes status raised and the computed score in one 
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Recording is raising; no threshold decides which threat counts."
 +++
 
 # Requirement: Every recorded risk is raised for an answer

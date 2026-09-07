@@ -2,7 +2,7 @@
 id = "REQ-RSK-013"
 type = "requirement"
 title = "The answer is given once, on the decision, and copied to the risk"
-status = "draft"
+status = "approved"
 owners = ["product-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -14,6 +14,13 @@ measure = "one command disposes the decision and moves the risk; no second decis
 
 [relations]
 derives_from = ["CAP-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "product-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. The answer is given once, on the decision, and copied to the risk in the same act."
 +++
 
 # Requirement: The answer is given once, on the decision, and copied to the risk

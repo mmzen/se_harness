@@ -2,13 +2,20 @@
 id = "ADR-RSK-010"
 type = "adr"
 title = "Borrow the decision family's stop and disposal for risks"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
 
 [relations]
 decides = ["ARCH-RSK-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-07T20:49:30Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Borrowing the decision family's stop and disposal is accepted over a third decision kind and over re-issuing pull request #156."
 +++
 
 # ADR: Borrow the decision family's stop and disposal for risks
