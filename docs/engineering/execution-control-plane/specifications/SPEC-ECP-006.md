@@ -228,3 +228,7 @@ observed; for every other decision right, and for a class present only on
 the branch, the restitution is unchanged and names the human role.
 Delegation is stated by the evaluator from the class and the gate, never
 inferred by the actor. Nothing else in this specification changes.
+
+## Amendment record
+
+**`ECP-JNL-001` to `ECP-JNL-005` are retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-030`).** `se_harness/journaled_apply.py` is removed; no command performs a journaled write and `harnessctl recover` never existed. The delegation rules of this specification are unchanged.

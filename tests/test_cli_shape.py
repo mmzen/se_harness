@@ -20,11 +20,11 @@ from tests.fixture_support import standard_repository
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain
 
-#: ECP-CLI-001: the repository commands take the positional `target`; the three
-#: non-repository commands take none; rehearse-recovery keeps its shape (issue #221).
+#: ECP-CLI-001: the repository commands take the positional `target`; the
+#: non-repository commands take none (WO-ECP-030 retired rehearse-recovery and renumber-artifacts).
 REPOSITORY_COMMANDS = {
     "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
-    "pr-body", "transition", "upgrade", "scaffold-domain", "create-artifact", "renumber-artifacts",
+    "pr-body", "transition", "upgrade", "scaffold-domain", "create-artifact",
     "release-unit", "capture-verification", "prepare-release", "decide",
 }
 NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
@@ -58,7 +58,7 @@ class ParserShapeTests(unittest.TestCase):
     def test_every_subcommand_is_classified_and_takes_target_accordingly(self) -> None:
         choices = _subparsers(build_parser())
         self.assertEqual(
-            REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | {"rehearse-recovery", "qualify"},
+            REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | {"qualify"},
             set(choices),
         )
         for name in REPOSITORY_COMMANDS:
@@ -68,8 +68,6 @@ class ParserShapeTests(unittest.TestCase):
         for name in NON_REPOSITORY_COMMANDS:
             with self.subTest(command=name):
                 self.assertEqual([], _positionals(choices[name]))
-        self.assertEqual(["output"], _positionals(choices["rehearse-recovery"]))
-        self.assertIn("--repository", _options(choices["rehearse-recovery"]))
         roles = next(a for a in choices["qualify"]._actions if getattr(a, "choices", None)).choices
         self.assertEqual(REPOSITORY_QUALIFY_ROLES | NON_REPOSITORY_QUALIFY_ROLES, set(roles))
         for name in REPOSITORY_QUALIFY_ROLES:
@@ -149,14 +147,6 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.assertEqual("scaffold-domain", payload["command"])
         self.assertTrue(payload["changes"])
         self.assertTrue(payload["dry_run"])
-
-    def test_renumber_artifacts_plans_through_main(self) -> None:
-        # ECP-CLI-008: renumber-artifacts through main(); planning writes nothing.
-        code, output, error = invoke("renumber-artifacts", str(self.root), "--map", "REQ-001=REQ-009", "--json")
-        payload = json.loads(output)
-        self.assertEqual("se-harness-renumber-v1", payload["schema"])
-        self.assertIn(code, (0, 1))
-        self.assertTrue((self.root / "docs/engineering/product/requirements/REQ-001.md").is_file())
 
     def test_pr_body_and_select_work_order_json(self) -> None:
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
@@ -330,19 +320,6 @@ class RepositoryCommandShapeTests(unittest.TestCase):
 
 
 class MockedCommandShapeTests(unittest.TestCase):
-    def test_rehearse_recovery_exits_by_result_and_prints_the_report(self) -> None:
-        # ECP-CLI-008 / -004.
-        for result, expected in (("pass", 0), ("fail", 1)):
-            with self.subTest(result=result):
-                report = {"schema": "se-harness-evaluator-recovery-rehearsal-v1", "result": result}
-                with mock.patch("se_harness.cli.run_recovery_rehearsal", return_value=report) as run:
-                    code, output, error = invoke("rehearse-recovery", "out-dir", "--candidate-commit", "a" * 40, "--json")
-                self.assertEqual(expected, code)
-                payload = json.loads(output)
-                self.assertEqual((SCHEMA, "rehearse-recovery", "completed" if expected == 0 else "failed"), (payload["schema"], payload["command"], payload["outcome"]))
-                self.assertEqual(report, payload["report"])
-                self.assertEqual(Path("out-dir"), run.call_args.args[0])
-
     def test_identity_json_is_the_runtime_identity_object(self) -> None:
         # ECP-CLI-008 / -003.
         report = mock.Mock(passed=False)

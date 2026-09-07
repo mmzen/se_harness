@@ -91,3 +91,7 @@ diagnostic code, enforced by the test rather than by convention.
 
 Exact prose of the Summary and prefix meanings; the message-count bound;
 test names.
+
+## Amendment record
+
+**The registry's family list is amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-022`, `ECP-DEL-031`).** The diagnostic-code registry no longer covers journaled apply (`JNL`) or renumbering (`REN`): both families left the product. Release qualification's `RR` family stays. Nothing else changes.

@@ -149,3 +149,7 @@ Human and JSON output identify role, version, archive digest, normalized origins
 - Whether the payload manifest is materialized as a file or generated deterministically from installed metadata.
 - Exact diagnostic code numbers, provided they are stable and separately testable.
 - Workflow step names and temporary-directory layout.
+
+## Amendment record
+
+**Rules 6 and 8 are amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-022`, `ECP-DEL-031`).** The mutation inventory of rule 6 loses `renumber-artifacts --apply`, and rule 8 loses the renumber plan from its read-only list; the `renumber-artifacts-apply` operation leaves the guard's operation set. Nothing else changes.

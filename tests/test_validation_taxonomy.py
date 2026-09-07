@@ -128,6 +128,13 @@ class ValidationTaxonomyTests(unittest.TestCase):
             ]
             self.assertEqual(reduced, quality.splitlines())
             self.assertIn("| `decision_gate_clear` |", canonical_quality)
+        elif "| `QG-G0-INTENT` |" in quality:
+            # WO-ECP-030 (SPEC-ECP-022 ECP-DEL-024, ECP-DEL-028): the candidate template
+            # removed the unreachable QG-G0-INTENT gate; a root released before it carries
+            # exactly that gate's two rows, declared here rather than hidden.
+            reduced = [line for line in quality.splitlines() if not line.startswith("| `QG-G0-INTENT` |")]
+            self.assertEqual(canonical_quality.splitlines(), reduced)
+            self.assertNotIn("QG-G0-INTENT", canonical_quality)
         elif "`scope`" in quality:
             # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
             self.assertEqual(canonical_quality, quality)

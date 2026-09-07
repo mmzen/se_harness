@@ -37,9 +37,7 @@ KNOWN_CODES = (
     "MG001",
     "RID018",
     "EPS001",
-    "JNL001",
     "PRE001",
-    "REN010",
     "RR001",
     "PV001",
 )
