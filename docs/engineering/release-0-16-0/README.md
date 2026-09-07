@@ -15,8 +15,10 @@ moved the candidate to 0.16.0 (`WO-HUP-016`).
   producer.
 - `WO-RLS-022`: cut, qualify and build the candidate.
 - `VREC-SEH-025`: the aggregate verification record over every gate, bound
-  to the candidate `c103708a`, `ready` for the assurance owner's decision.
-- `RLS-SEH-025`: the release record binding the build of record.
+  to the candidate `c103708a`, verified on 2026-09-07.
+- `RLS-SEH-025`: the release record binding the build of record (wheel
+  `a969d6ab…`, sdist `25d08fa1…`, run 34102296258), `ready` for the release
+  owner's decision.
 
 Drafted on 2026-09-07 on the repository owner's instruction "release
 0.16.0", with `main` at `9069ff5d`, no work order in progress and every
