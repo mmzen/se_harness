@@ -2,7 +2,7 @@
 id = "VREC-DST-021"
 type = "verification_record"
 title = "Verification candidate for WO-DST-024"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DST-024-ver
 evaluator_evidence_path = "docs/engineering/harness-distribution/evidence/VREC-DST-021-evaluator.json"
 evaluator_evidence_sha256 = "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
 
+verified_at = "2026-09-07T05:20:24Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DST-024"]
 conforms_to = ["VER-DST-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-07T05:20:24Z"
+decided_by = "assurance-owner"
+reason = "Verified by the accountable assurance owner by selecting the presented option 'Verify VREC-DST-021' after reading the completion result: candidate 0a1155c9 on pull request #365, four hosted lanes green on 0dec844c and the candidate unchanged since except for the implemented transition, released 0.15.0 evaluator readings clean, consumer scenarios A to C passed from a wheel installed outside the checkout, local Windows control 1265 tests with only the known teardown flake. Integration and release remain separate decisions."
 +++
 
 # Verification Record Candidate
