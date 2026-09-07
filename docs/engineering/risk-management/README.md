@@ -77,5 +77,13 @@ until `WO-RSK-010` has merged, as its own out-of-scope statement assumes.
 
 Because the delegation class is read at the base of a pull request and never
 from the branch, it cannot activate on the branch that introduces it. The
-delegated start of `WO-RSK-010` therefore happens in a later pull request whose
-base already carries this packet.
+delegated start of `WO-RSK-010` therefore happened in a later pull request whose
+base already carried this packet.
+
+`WO-RSK-010` was started, implemented and handed off by the `delegated-executor`
+role on branch `wo/rsk-010-risk-artifact` (pull request #394), each delegated act
+recorded with the check-run that unlocked it. Its scope was amended three times
+under `DR-REMEDIATION-SCOPE`, recorded in its Amendment record. `DEC-RSK-001`,
+a deviation against `RSK-MGT-034` raised when `WO-ECP-030` retired the command
+that rule names, was disposed `amend`; the rule's text awaits a repair work
+order. The evidence is under `evidence/`; the verification record follows.
