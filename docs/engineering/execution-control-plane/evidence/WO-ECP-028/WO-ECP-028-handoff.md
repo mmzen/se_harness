@@ -89,9 +89,8 @@ CRLF checkout), two readings:
   a `PermissionError` on a temporary `.git` object;
   `test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound`,
   the `AGENTS.md` owner region measured on a CRLF checkout, recorded on a
-  fresh worktree of `main` under `WO-ECP-027`). Five tests fewer than
-  `main`: the vacuous environment test, and four fixture-dependent pins
-  folded into their neighbours. No other name differs.
+  fresh worktree of `main` under `WO-ECP-027`). The vacuous environment
+  test is the one test this work order removed. No other name differs.
 
 ### Handoff check
 
