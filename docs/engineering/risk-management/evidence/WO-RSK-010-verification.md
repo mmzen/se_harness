@@ -209,8 +209,22 @@ failures; `tests/test_risk_management.py` 31 of 31.
 
 ## Governing readings, Linux (record)
 
-Added when the pull request's hosted lanes complete: the `validate` check-run
-identifier and the candidate-evidence lane's suite reading.
+Pull request #394, head `ce5751a` (the `implemented` commit), hosted lanes of
+2026-09-07 UTC:
+
+| Lane | Identifier | Reading |
+| --- | --- | --- |
+| `validate` (managed lane, released 0.16.0) | run `34166971507`, check-run `101879841952` | `success`; `Review preflight: PASS`; "The pull request's diff is inside the declared scope; no restitution digest was declared"; Explorer generation `Artifacts: 1388 \| Errors: 0 \| Warnings: 359` (the lane's warning count is the Explorer's, inflated by design against the validator's 73) |
+| Candidate source evidence (`python scripts/run_tests.py` on Linux) | run `34166971504`, job `101879841588` | `Ran 1282 tests in 34.987s (143 classes, 4 workers)`, `OK (skipped=3)`: no failure; the two Windows failures do not occur there |
+| Candidate package evidence | run `34166971504`, job `101879973542` | `success` |
+| Governance migration (Linux, Windows) | run `34166971504`, jobs `101880058113`, `101880058001` | `success` |
+| Qualification rehearsals (candidate, release record) | run `34166971504`, jobs `101879842075`, `101879873819` | `success` |
+
+The check-run `101879841952` is the gate reading the delegated
+`DR-VREC-PREPARE` records. No `Harness-Restitution` line was declared on the
+pull request: a class-bearing work order's restitution embeds the live gate
+reading, so its digest is not reproducible between a workstation and the
+runner while the work order is in progress (finding 5 of the handoff).
 
 ## Findings for the accountable owner
 
