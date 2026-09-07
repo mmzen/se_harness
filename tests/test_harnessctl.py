@@ -175,7 +175,10 @@ class HarnessCtlTests(unittest.TestCase):
         # SPEC-DST-025 DST-ENG-002: no evaluator script is written into the target.
         self.assertFalse((target / "scripts").exists(), "no scripts/ path may be installed")
         self.assertIn('project_name = "Example"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
-        self.assertIn("schema_version = 2", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
+        # SPEC-DST-026 DST-CFG-005: the schema marker left the configuration with
+        # the six other inert keys; tests/test_configuration_surface.py pins the
+        # key set that remains and names each key's reader.
+        self.assertNotIn("schema_version", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertIn("@AGENTS.md", (target / "CLAUDE.md").read_text(encoding="utf-8"))
         retired = target / "docs/engineering/REPOSITORY_CONTEXT.md"
         self.assertFalse(retired.exists(), "the retired repository-context scaffold must not be installed")

@@ -37,4 +37,8 @@ When configured provenance requires commit-bound verification, formal validation
 
 ## Compatibility
 
-Configuration schema becomes 2 for newly installed or safely upgraded unmodified configuration. Existing artifact types remain valid. The two new types are optional unless a repository chooses to retain a commit-bound verification or release instance. Upgrade follows the existing hash ownership rules.
+The installed configuration declares no schema marker; the managed-file lock records the schema and the tool version. Existing artifact types remain valid. The two new types are optional unless a repository chooses to retain a commit-bound verification or release instance. Upgrade follows the existing hash ownership rules.
+
+## Amendment record
+
+- 2026-09-07, under `WO-DST-025`, following the accountable repository owner's disposition of `DEC-DST-001` by selecting the presented option "Remove it (Recommended)". The compatibility paragraph promised that the configuration schema becomes 2 for a newly installed or safely upgraded file. Nothing ever read that value, so `WO-DST-025` removed `schema_version` from the installed configuration together with six other inert keys, and the sentence now names the managed-file lock as the record of schema and tool version. No rule, relation, status or other statement of this specification changes.

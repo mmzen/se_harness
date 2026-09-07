@@ -57,7 +57,7 @@ Normal upgrade must not overwrite the implementation repository's self-hosting c
 
 ### Example: safe configuration schema addition
 
-**Given** the current accepted policy sets `require_clean_worktree = false`, and the target published schema adds a release-managed property with a safe default,
+**Given** the current accepted policy sets `required_for_release = false`, and the target published schema adds a release-managed property with a safe default,
 
 **When** reconciliation is planned and applied,
 
@@ -82,3 +82,7 @@ Normal upgrade must not overwrite the implementation repository's self-hosting c
 ## Open decisions
 
 Exact internal migration-manifest fields, stable diagnostic codes, recovery-journal representation, and documented workflow extension syntax remain delegated to the specification and implementation. The immutable-target, current-governor execution, field-ownership, role-selection, and fail-closed boundaries are not delegated.
+
+## Amendment record
+
+- 2026-09-07, under `WO-DST-025`. The first acceptance example named `require_clean_worktree`, a configuration key nothing ever read. `WO-DST-025` removed it, so the example now names `required_for_release`, a key the harness does read, and the reconciliation behaviour it illustrates is unchanged. No statement, relation, verification method or status of this requirement changes.
