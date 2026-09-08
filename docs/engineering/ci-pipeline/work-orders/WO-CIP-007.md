@@ -2,7 +2,7 @@
 id = "WO-CIP-007"
 type = "work_order"
 title = "Wave 5, CI: one qualification per pull request, one form for each pin, version and name"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -59,6 +59,13 @@ to = "in_progress"
 decided_at = "2026-09-08T19:38:34Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at fae52e1b6c570bf1cdba892728029fa38416c947 (check-run 102203255032, source github-checks). Start decided by the delegated-executor role on 2026-09-08 under the execution delegation class WO-CIP-007 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of this branch. The gate was green: the required validate check is success for the candidate head fae52e1b, the merge of the wave 5 corpus work order, and the class is declared at that base. Branch wo/cip-007-pipeline-hygiene off main at fae52e1b. The start checkpoint of the released 0.16.0 evaluator reported the decision as this role with the bound command. This decision authorizes only the declared execution scope: the eight repository-owned workflows, scripts/create_release_bundle_manifest.py and repository_tools/release_distribution.py, tests/, the three notes, the amendment record on SPEC-CIP-001, the two requirements, the specifications directory, VER-CIP-003, this work order, the domain index and the evidence packet. It authorizes no change to the managed template engineering-harness.yml or any hash-locked root file, no rename of a script or module, no change to the trigger policy or to the qualification steps of release-record mode, no release, publication or deployment. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T21:04:01Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at f70973335df543cdcabc145ce7f961a0dec5e36f (check-run 102234042105, source github-checks). Completion decided by the delegated-executor role on 2026-09-08 under the execution delegation class WO-CIP-007 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of pull request #419, main at 560973cf. Every rule CIP-ONE-001 to CIP-ONE-017 of SPEC-CIP-003 is met and mapped to its evidence in docs/engineering/ci-pipeline/evidence/WO-CIP-007/WO-CIP-007-handoff.md; the retained handoff check over the Git-derived change set from 560973cf completed with its nine predicates passing, 30 changed paths all inside the execution scope, result b498c4bc at its fixed point. Released 0.16.0 readings: validate 1,431 artifacts, 0 errors, 44 W013, 0 advisories; doctor 97 PASS, every managed path matching its distribution. Suite 1,087 tests, 11 added, none deleted, at the Windows baseline. Lanes at the implementation head e96160af and at the packet head f7097333: Candidate Evidence, Publication Rehearsal, Predecessor Evaluator Assessment and CodeQL success at both, the managed lane success at f7097333 after being blocked at e96160af on the evidence this packet adds; the candidate leg's qualification step skipped while the release-record leg ran it, so the head commit is qualified once and tested once, from twice. Disclosed in the handoff: the work order's Completion report format gives the completion decision to the engineering owner while its approval delegates DR-WO-COMPLETE to this role, and the owner refuses this completion by rejecting the pull request; ARCH-CIP-001 and REQ-CIP-002 keep the old job name outside this scope; one commit message overcounts the floating pins. Completion approves nothing: record preparation is this role's separate decision under the same gate; verification and the merge remain the accountable human owners."
 +++
 
 # Work Order: Wave 5, CI: one qualification per pull request, one form for each pin, version and name

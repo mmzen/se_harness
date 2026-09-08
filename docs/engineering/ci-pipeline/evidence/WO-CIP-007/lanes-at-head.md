@@ -111,10 +111,26 @@ declared scope — and the block is the handoff evidence this packet had not yet
 committed. This file, and the handoff `check` result beside it, are that
 evidence; the lane is read again at the record head.
 
-## Runs at the record head
+## Runs at the packet head f70973335df543cdcabc145ce7f961a0dec5e36f
 
-Recorded when the evidence packet and the handoff result are pushed; see the
-completion event of `WO-CIP-007` and the verification record prepared for it
+The commit that adds this packet and the retained `handoff.json`:
+
+| Run id | Workflow | Event | Conclusion |
+| --- | --- | --- | --- |
+| 34277506456 | SE Harness Candidate Evidence | pull_request | success |
+| 34277506885 | Publication Rehearsal | pull_request | success |
+| 34277506364 | Predecessor Evaluator Assessment | pull_request | success |
+| 34277506498 | Engineering Harness | pull_request | success |
+| 34277502856 | PR #419 (CodeQL) | dynamic | success |
+
+Five of five. The required check `validate` is check-run 102234042105,
+`success` at this sha; it is the gate the delegated `DR-WO-COMPLETE` reads.
+
+## Runs at the completion commit and the record head
+
+A file cannot carry the reading of the commit that contains it. The lanes at
+the completion commit are quoted in the `implemented` event of `WO-CIP-007`
+and in the record-preparation event; the lanes at the record head are quoted
+in the verification decision of the record prepared for this work order
 (`VREC-CIP-007`, the next free identifier: `VREC-CIP-001` to `-006` are
-declared across the remote refs) for the reading the verification decision
-rests on.
+declared across the remote refs).
