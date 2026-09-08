@@ -26,35 +26,26 @@ from se_harness.installer import HarnessError
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir, root_copy  # noqa: E402
 SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
-
-from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from tests.mutation_guard_support import patch_mutation_authority  # noqa: E402
+from tests.root_identity_support import load_evaluator_module
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+validate_repository = _validate_engineering_artifacts.validate_repository
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
+from tests.artifact_support import write
+from tests.root_identity_support import load_module
+from tests.git_support import git, init_repository
 
 
 class ArtifactAuthoringTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        self.guard.start()
-        self.addCleanup(self.guard.stop)
+        patch_mutation_authority(self)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        standard_repository(self.root, "Authoring Sample")
+        standard_repository(self.root)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            code = main(list(arguments))
-        return code, stdout.getvalue(), stderr.getvalue()
 
     def test_portable_and_package_layout_registries_are_identical(self) -> None:
         # The package registry is the candidate's portable registry. The root copy
@@ -63,9 +54,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         # candidate, so a root released before it is that registry minus the
         # decision entries, declared here. A root released with them takes equality.
         candidate_path = REPOSITORY_ROOT / "se_harness/engine/artifact_layout_registry.py"
-        spec = importlib.util.spec_from_file_location("candidate_layout_registry", candidate_path)
-        candidate_layout = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(candidate_layout)
+        candidate_layout = load_module(candidate_path, "candidate_layout_registry")
         self.assertEqual(ARTIFACT_DIRECTORIES, candidate_layout.ARTIFACT_DIRECTORIES)
         self.assertEqual(ARTIFACT_PREFIXES, candidate_layout.ARTIFACT_PREFIXES)
         self.assertEqual(DOMAIN_PATTERN.pattern, candidate_layout.DOMAIN_PATTERN.pattern)
@@ -79,9 +68,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
             self.assertFalse((REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").exists())
             self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
             return
-        root_spec = importlib.util.spec_from_file_location("root_layout_registry", root_path)
-        root_layout = importlib.util.module_from_spec(root_spec)
-        root_spec.loader.exec_module(root_layout)
+        root_layout = load_module(root_path, "root_layout_registry")
         if "decision" in root_layout.ARTIFACT_DIRECTORIES:
             self.assertEqual(root_path.read_bytes(), candidate_path.read_bytes())
         else:
@@ -96,14 +83,14 @@ class ArtifactAuthoringTests(unittest.TestCase):
         self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
 
     def test_scaffold_dry_run_and_apply_create_the_complete_owner_domain(self) -> None:
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "scaffold-domain", str(self.root), "--domain", "simulation", "--title", "Simulation", "--dry-run"
         )
         self.assertEqual(0, code, error)
         self.assertIn("dry run: no files were written", output)
         self.assertFalse((self.root / "docs/engineering/simulation").exists())
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "scaffold-domain", str(self.root), "--domain", "simulation", "--title", "Simulation"
         )
         self.assertEqual(0, code, error)
@@ -117,7 +104,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
 
         original = b"# Curated simulation navigation\n"
         index.write_bytes(original)
-        self.assertEqual(0, self.invoke("scaffold-domain", str(self.root), "--domain", "simulation")[0])
+        self.assertEqual(0, invoke("scaffold-domain", str(self.root), "--domain", "simulation")[0])
         self.assertEqual(original, index.read_bytes())
 
     def test_create_artifact_routes_every_supported_type_to_an_incomplete_draft(self) -> None:
@@ -127,7 +114,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         }
         for artifact_type, artifact_id in identifiers.items():
             with self.subTest(artifact_type=artifact_type):
-                code, output, error = self.invoke(
+                code, output, error = invoke(
                     "create-artifact",
                     str(self.root),
                     "--domain", "simulation",
@@ -147,7 +134,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
 
     def test_create_dry_run_conflict_and_invalid_input_never_overwrite(self) -> None:
         destination = self.root / "docs/engineering/simulation/requirements/REQ-SIM-001.md"
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "simulation", "--type", "requirement",
             "--id", "REQ-SIM-001", "--dry-run",
         )
@@ -158,7 +145,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         destination.parent.mkdir(parents=True)
         original = b"repository owned\n"
         destination.write_bytes(original)
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "create-artifact", str(self.root), "--domain", "simulation", "--type", "requirement",
             "--id", "REQ-SIM-001",
         )
@@ -169,7 +156,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         duplicate = self.root / "docs/engineering/other-domain/REQ-SIM-003.md"
         duplicate.parent.mkdir(parents=True)
         duplicate.write_text('+++\nid = "REQ-SIM-003"\ntype = "requirement"\n+++\n', encoding="utf-8")
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "create-artifact", str(self.root), "--domain", "simulation", "--type", "requirement",
             "--id", "REQ-SIM-003",
         )
@@ -178,13 +165,13 @@ class ArtifactAuthoringTests(unittest.TestCase):
 
         for domain in ("../escape", "Simulation", "requirements", "two/slugs", "a" * 65):
             with self.subTest(domain=domain):
-                code, _, error = self.invoke(
+                code, _, error = invoke(
                     "create-artifact", str(self.root), "--domain", domain, "--type", "requirement",
                     "--id", "REQ-SIM-002",
                 )
                 self.assertEqual(2, code)
                 self.assertTrue(error)
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "create-artifact", str(self.root), "--domain", "simulation", "--type", "requirement",
             "--id", "WO-SIM-002",
         )
@@ -193,7 +180,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
 
     def test_scaffold_failure_rolls_back_only_directories_created_by_the_command(self) -> None:
         with mock.patch("se_harness.artifact_layout._atomic_create", side_effect=HarnessError("injected failure")):
-            code, _, error = self.invoke("scaffold-domain", str(self.root), "--domain", "rollback-test")
+            code, _, error = invoke("scaffold-domain", str(self.root), "--domain", "rollback-test")
         self.assertEqual(2, code)
         self.assertIn("injected failure", error)
         self.assertFalse((self.root / "docs/engineering/rollback-test").exists())
@@ -206,7 +193,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
             os.symlink(outside, link, target_is_directory=True)
         except OSError as exc:
             self.skipTest(f"host cannot create directory symlink: {exc}")
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "create-artifact", str(self.root), "--domain", "linked-domain", "--type", "requirement",
             "--id", "REQ-LNK-001",
         )
@@ -239,7 +226,7 @@ updated = "2026-08-11"
         self.assertEqual(["W013"], [item.code for item in report.warnings])
         self.assertIn("simulation/intent/INT-SIM-001.md", report.warnings[0].message)
 
-        code, output, error = self.invoke("doctor", str(self.root))
+        code, output, error = invoke("doctor", str(self.root))
         self.assertEqual(0, code, error)
         self.assertIn("WARN W013", output)
 
@@ -255,7 +242,7 @@ updated = "2026-08-11"
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(content)
         before = {path: path.read_bytes() for path in (flat, canonical, index)}
-        self.assertEqual(0, self.invoke("upgrade", str(self.root), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(self.root), "--apply")[0])
         self.assertEqual(before, {path: path.read_bytes() for path in before})
 
 
@@ -272,25 +259,15 @@ class IdentifierAllocationTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Allocation Fixture")
+        standard_repository(self.root)
         (self.root / "docs/engineering/product/requirements").mkdir(parents=True, exist_ok=True)
-        self.write("docs/engineering/product/requirements/REQ-PRD-001.md", 'id = "REQ-PRD-001"')
-        self.write("docs/engineering/product/requirements/REQ-PRD-002.md", 'id = "REQ-PRD-002"')
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-001.md", "+++\n" + 'id = "REQ-PRD-001"' + "\n+++\n")
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-002.md", "+++\n" + 'id = "REQ-PRD-002"' + "\n+++\n")
 
-        def git(*arguments: str) -> str:
-            return subprocess.run(["git", "-C", str(self.root), *arguments], capture_output=True, text=True, check=True).stdout
-
-        self.git = git
-        git("init", "-q", "-b", "main")
-        git("config", "user.email", "fixture@example.invalid")
-        git("config", "user.name", "Fixture")
-        git("add", "-A")
-        git("commit", "-q", "-m", "base")
-
-    def write(self, relative: str, identifier_line: str) -> None:
-        path = self.root / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("+++\n" + identifier_line + "\n+++\n", encoding="utf-8")
+        self.git = lambda *arguments: git(self.root, *arguments)
+        init_repository(self.root)
+        self.git("add", "-A")
+        self.git("commit", "-q", "-m", "base")
 
     def allocate(self, artifact_type: str = "requirement"):
         from se_harness.artifact_layout import allocate_artifact_id
@@ -301,18 +278,18 @@ class IdentifierAllocationTests(unittest.TestCase):
         self.assertEqual(("REQ-PRD-003", ("refs/heads/main", "worktree")), self.allocate())
         # a higher identifier present only on an unmerged local branch
         self.git("checkout", "-q", "-b", "feature")
-        self.write("docs/engineering/product/requirements/REQ-PRD-004.md", 'id = "REQ-PRD-004"')
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-004.md", "+++\n" + 'id = "REQ-PRD-004"' + "\n+++\n")
         self.git("add", "-A"); self.git("commit", "-q", "-m", "feature")
         self.git("checkout", "-q", "main")
         self.assertEqual("REQ-PRD-003", self.allocate()[0])
         # the gap below the branch maximum is filled first, then the working tree counts
-        self.write("docs/engineering/product/requirements/REQ-PRD-003.md", 'id = "REQ-PRD-003"')
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-003.md", "+++\n" + 'id = "REQ-PRD-003"' + "\n+++\n")
         identifier, refs = self.allocate()
         self.assertEqual("REQ-PRD-005", identifier)
         self.assertIn("refs/heads/feature", refs)  # REQ-PRD-004 was found there
         # a tag (detached ref) carrying a further identifier
         self.git("checkout", "-q", "feature")
-        self.write("docs/engineering/product/requirements/REQ-PRD-005.md", 'id = "REQ-PRD-005"')
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-005.md", "+++\n" + 'id = "REQ-PRD-005"' + "\n+++\n")
         self.git("add", "-A"); self.git("commit", "-q", "-m", "more"); self.git("tag", "v-detached")
         self.git("checkout", "-q", "main")
         self.assertFalse((self.root / "docs/engineering/product/requirements/REQ-PRD-005.md").exists())
@@ -332,8 +309,8 @@ class IdentifierAllocationTests(unittest.TestCase):
         operations = "/".join(ARTIFACT_DIRECTORIES["operating_contract"])
         decisions = "/".join(ARTIFACT_DIRECTORIES["decision"])
         self.git("checkout", "-q", "-b", "records")
-        self.write(f"docs/engineering/product/{operations}/OPS-PRD-001.md", 'id = "OPS-PRD-001"')
-        self.write(f"docs/engineering/product/{decisions}/DEC-PRD-001.md", 'id = "DEC-PRD-001"')
+        write(self.root / f"docs/engineering/product/{operations}/OPS-PRD-001.md", "+++\n" + 'id = "OPS-PRD-001"' + "\n+++\n")
+        write(self.root / f"docs/engineering/product/{decisions}/DEC-PRD-001.md", "+++\n" + 'id = "DEC-PRD-001"' + "\n+++\n")
         self.git("add", "-A"); self.git("commit", "-q", "-m", "records")
         self.git("checkout", "-q", "main")
         seen = reachable_artifact_ids(self.root)
@@ -349,7 +326,7 @@ class IdentifierAllocationTests(unittest.TestCase):
         from se_harness.installer import HarnessError
 
         self.git("checkout", "-q", "-b", "feature")
-        self.write("docs/engineering/product/requirements/REQ-PRD-007.md", 'id = "REQ-PRD-007"')
+        write(self.root / "docs/engineering/product/requirements/REQ-PRD-007.md", "+++\n" + 'id = "REQ-PRD-007"' + "\n+++\n")
         self.git("add", "-A"); self.git("commit", "-q", "-m", "feature"); self.git("checkout", "-q", "main")
         with self.assertRaisesRegex(HarnessError, "already exists: REQ-PRD-007 on local ref refs/heads/feature"):
             create_artifact(self.root, domain="product", artifact_type="requirement", artifact_id="REQ-PRD-007", dry_run=True)

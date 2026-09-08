@@ -11,22 +11,15 @@ import textwrap
 import unittest
 from pathlib import Path
 from unittest import mock
+from tests.root_identity_support import load_module
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 RUNNER_PATH = REPOSITORY_ROOT / "scripts" / "run_tests.py"
 
 
-def _load_runner():
-    # imported by its real module name so spawned worker processes can import it too
-    scripts = str(RUNNER_PATH.parent)
-    if scripts not in sys.path:
-        sys.path.insert(0, scripts)
-    import run_tests
-
-    return run_tests
-
-
-RUNNER = _load_runner()
+# Loaded by its real module name so spawned worker processes can import it too; the
+# directory joins `sys.path` only while a test runs workers (SPEC-TST-002 TST-HYG-008).
+RUNNER = load_module(RUNNER_PATH, "run_tests")
 
 SCRATCH_SUITE = {
     "test_alpha.py": '''
@@ -75,7 +68,8 @@ class RunnerTests(unittest.TestCase):
 
     def _run(self, workers: int, scale: str = "reduced", timings: Path | None = None):
         stream = io.StringIO()
-        code, results = RUNNER.run(self.scratch.plan(scale), workers=workers, timings_path=timings, stream=stream)
+        with mock.patch.object(sys, "path", [str(RUNNER_PATH.parent), *sys.path]):
+            code, results = RUNNER.run(self.scratch.plan(scale), workers=workers, timings_path=timings, stream=stream)
         return code, results, stream.getvalue()
 
     def test_serial_and_parallel_report_the_same_verdict_including_the_import_error(self) -> None:
@@ -147,15 +141,8 @@ class RunnerTests(unittest.TestCase):
 class ScaleMarkerTests(unittest.TestCase):
     """REQ-TST-002: the 1,000 size runs only with SE_HARNESS_TEST_SCALE=full."""
 
-    def test_the_scale_test_reads_the_marker(self) -> None:
-        source = (REPOSITORY_ROOT / "tests" / "test_workflow_execution.py").read_text(encoding="utf-8")
-        self.assertIn('SE_HARNESS_TEST_SCALE', source)
-        self.assertIn("scale_sizes()", source)
-        self.assertIn("def scale_sizes()", source)
-        self.assertNotIn("for target_count in (100, 500, 1000):", source)
-
     def test_sizes_by_marker(self) -> None:
-        from tests.test_workflow_execution import scale_sizes
+        from tests.fixture_support import scale_sizes
 
         with mock.patch.dict(os.environ, {"SE_HARNESS_TEST_SCALE": "full"}):
             self.assertEqual((100, 500, 1000), scale_sizes())

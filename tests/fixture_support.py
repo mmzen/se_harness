@@ -14,11 +14,12 @@ from __future__ import annotations
 import atexit
 import contextlib
 import io
+import os
 import shutil
 import tempfile
 from pathlib import Path
 
-from se_harness.cli import main
+from tests.cli_support import invoke
 
 _SESSION: tempfile.TemporaryDirectory | None = None
 _CACHE: dict[str, Path] = {}
@@ -41,17 +42,15 @@ def _initialise(project_name: str) -> Path:
     if cached is not None and cached.is_dir():
         return cached
     target = _session_root() / f"repository-{len(_INITIALISATIONS) + 1}"  # monotonic: a re-initialised name never collides
-    output, errors = io.StringIO(), io.StringIO()
-    with contextlib.redirect_stdout(output), contextlib.redirect_stderr(errors):
-        code = main(["init", str(target), "--project-name", project_name])
+    code, output, errors = invoke("init", str(target), "--project-name", project_name)
     if code != 0:
-        raise RuntimeError(f"fixture init failed for {project_name!r} with exit code {code}: {errors.getvalue().strip() or output.getvalue().strip()}")
+        raise RuntimeError(f"fixture init failed for {project_name!r} with exit code {code}: {errors.strip() or output.strip()}")
     _CACHE[project_name] = target
     _INITIALISATIONS.append(project_name)
     return target
 
 
-def standard_repository(destination: Path, project_name: str) -> Path:
+def standard_repository(destination: Path, project_name: str = "Fixture") -> Path:
     """Copy a freshly initialised standard repository into `destination` (created or empty)."""
 
     destination = Path(destination)
@@ -65,3 +64,9 @@ def initialisations() -> tuple[str, ...]:
     """The project names initialised so far in this process, in order (for the cache test)."""
 
     return tuple(_INITIALISATIONS)
+
+
+def scale_sizes() -> tuple[int, ...]:
+    """REQ-TST-002: the 1,000-artifact size runs only under SE_HARNESS_TEST_SCALE=full."""
+
+    return (100, 500, 1000) if os.environ.get("SE_HARNESS_TEST_SCALE") == "full" else (100, 500)

@@ -14,6 +14,7 @@ from se_harness import provenance, workflow
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, _validate_edge
 from se_harness.workflow_contract import ContractError, load_lifecycle_registry
+from tests.root_identity_support import load_module
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -255,16 +256,8 @@ class LifecycleStateContractTests(unittest.TestCase):
                 )
                 (engineering / "WORKFLOW.json").write_text(contract, encoding="utf-8")
                 module_name = f"_invalid_lifecycle_validator_{index}"
-                spec = importlib.util.spec_from_file_location(module_name, validator_path)
-                self.assertIsNotNone(spec)
-                self.assertIsNotNone(spec.loader)
-                module = importlib.util.module_from_spec(spec)
-                sys.modules[module_name] = module
-                try:
-                    with self.assertRaises(RuntimeError):
-                        spec.loader.exec_module(module)
-                finally:
-                    sys.modules.pop(module_name, None)
+                with self.assertRaises(RuntimeError):
+                    load_module(validator_path, module_name)
 
     def test_planner_accepts_exactly_declared_edges(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

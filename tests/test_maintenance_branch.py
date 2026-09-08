@@ -5,16 +5,12 @@ import sys
 import unittest
 from pathlib import Path
 from typing import Any
+from tests.root_identity_support import load_module
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = REPOSITORY_ROOT / ".github" / "scripts" / "reconcile_maintenance_branch.py"
-SPEC = importlib.util.spec_from_file_location("maintenance_branch_test_module", SCRIPT_PATH)
-if SPEC is None or SPEC.loader is None:
-    raise RuntimeError("cannot load maintenance-line reconciliation module")
-MAINTENANCE = importlib.util.module_from_spec(SPEC)
-sys.modules[SPEC.name] = MAINTENANCE
-SPEC.loader.exec_module(MAINTENANCE)
+MAINTENANCE = load_module(SCRIPT_PATH, "maintenance_branch_test_module")
 
 CANDIDATE = "a" * 40
 DESCENDANT = "b" * 40

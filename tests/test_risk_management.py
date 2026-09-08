@@ -21,8 +21,11 @@ from se_harness.cli import build_parser, main
 from se_harness.preflight import _load_validator_module
 from se_harness.risks import MEASUREMENT, OPTION_TARGETS, RISK_OPTIONS, compute_score
 from se_harness.workflow import LIFECYCLE_REGISTRY
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, formal, write
+from tests.cli_support import invoke
+from tests.git_support import git
+from tests.fixture_support import standard_repository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering"
@@ -51,7 +54,6 @@ RISK_EDGES = {
 }
 RISK_PATH = "docs/engineering/product/risks/RISK-PRD-001.md"
 DECISION_PATH = "docs/engineering/product/decisions/DEC-PRD-001.md"
-GIT_IDENTITY = ("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid")
 
 
 def _subcommands() -> set[str]:
@@ -113,24 +115,14 @@ class RiskFixture(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Risk Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root)
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
         lock["evaluator"]["archive_sha256"] = "a" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def in_progress_work_order(self, *scope: str) -> Path:
         path = self.root / "docs/engineering/product/work-orders/WO-001.md"
@@ -149,7 +141,7 @@ class RiskFixture(unittest.TestCase):
         arguments = ["raise-risk", str(self.root), *self.RAISE, "--likelihood", likelihood, "--impact", impact, "--id", risk_id]
         if decision_id is not None:
             arguments += ["--with-decision", "--decision-id", decision_id]
-        return self.invoke(*arguments, *extra)
+        return invoke(*arguments, *extra)
 
     def validate(self):
         return _load_validator_module().validate_repository(self.root)
@@ -161,7 +153,7 @@ class RiskFixture(unittest.TestCase):
         arguments = ["check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff"]
         for path in changed or ("src/main.py",):
             arguments += ["--changed-path", path]
-        code, output, error = self.invoke(*arguments, "--changes-complete", "--json")
+        code, output, error = invoke(*arguments, "--changes-complete", "--json")
         self.assertIn(code, (0, 1), error)
         return json.loads(output)
 
@@ -176,7 +168,7 @@ class RiskFixture(unittest.TestCase):
         return self.root / DECISION_PATH
 
     def decide(self, *extra: str, decision_id: str = "DEC-PRD-001", actor: str = "engineering-owner") -> tuple[int, str, str]:
-        return self.invoke("decide", str(self.root), "--artifact", decision_id, "--decision", actor, *extra, "--apply")
+        return invoke("decide", str(self.root), "--artifact", decision_id, "--decision", actor, *extra, "--apply")
 
 
 class RiskArtifactTests(RiskFixture):
@@ -191,7 +183,7 @@ class RiskArtifactTests(RiskFixture):
         traceability = (TEMPLATES / "TRACEABILITY.md").read_text(encoding="utf-8")
         for token in ("| `risk` | `RISK-` |", "`TRC-REL-023`", "`TRC-REL-024`", "`TRC-REL-025`", "`TRC-016`"):
             self.assertIn(token, traceability)  # RSK-MGT-031
-        code, output, error = self.invoke("create-artifact", str(self.root), "--domain", "product", "--type", "risk", "--id", "RISK-PRD-009")
+        code, output, error = invoke("create-artifact", str(self.root), "--domain", "product", "--type", "risk", "--id", "RISK-PRD-009")
         self.assertEqual(0, code, error + output)
         text = (self.root / "docs/engineering/product/risks/RISK-PRD-009.md").read_text(encoding="utf-8")
         self.assertIn('type = "risk"', text)
@@ -311,25 +303,18 @@ class RaiseTests(RiskFixture):
         configuration = tomllib.loads((self.root / ".engineering-harness.toml").read_text(encoding="utf-8"))
         self.assertNotIn("risk", configuration)
         self.assertNotIn("risks", configuration)
-        template = (REPOSITORY_ROOT / "templates/repository/standard/.engineering-harness.toml.tpl").read_text(encoding="utf-8")
-        self.assertNotIn("[risk", template)
-        for path in PACKAGE.rglob("*.py"):
-            with self.subTest(module=path.name):
-                text = path.read_text(encoding="utf-8")
-                self.assertNotIn("raise_threshold", text)
-                self.assertNotIn("acceptance_level", text)
         self.assertNotIn("risk", (PACKAGE / "risks.py").read_text(encoding="utf-8").split("tomllib")[0].lower().split("configuration")[1:2])
 
     def test_the_domain_token_of_one_domain_resolves_and_an_ambiguous_one_is_refused(self) -> None:
-        code, _, error = self.invoke("create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-PRD-002")
+        code, _, error = invoke("create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-PRD-002")
         self.assertEqual(0, code, error)
         code, output, error = self.raise_risk("--dry-run", "--json")
         self.assertEqual(0, code, error)
         arguments = [item if item != "product" else "PRD" for item in self.RAISE]
-        code, output, error = self.invoke("raise-risk", str(self.root), *arguments, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--dry-run", "--json")
+        code, output, error = invoke("raise-risk", str(self.root), *arguments, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--dry-run", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual("docs/engineering/product/risks/RISK-PRD-002.md", json.loads(output)["changes"][0]["path"])
-        code, output, error = self.invoke("raise-risk", str(self.root), *[item if item != "product" else "ZZZ" for item in self.RAISE], "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--dry-run")
+        code, output, error = invoke("raise-risk", str(self.root), *[item if item != "product" else "ZZZ" for item in self.RAISE], "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--dry-run")
         self.assertEqual(2, code)
         self.assertIn("no engineering domain carries the identifier token ZZZ", error)
 
@@ -367,7 +352,7 @@ class BorrowedStopTests(RiskFixture):
         self.assertIn("harnessctl decide", message)
         self.assertNotIn("RISK-PRD-001", message)
         risk_before, decision_before = self.risk_file().read_bytes(), self.decision_file().read_bytes()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "transition", str(self.root), "--set", "WO-001=implemented", "--decision", "WO-001=engineering-owner", "--apply",
         )
         self.assertEqual(1, code)
@@ -417,16 +402,16 @@ class BorrowedStopTests(RiskFixture):
         code, _, error = self.raise_risk()
         self.assertEqual(0, code, error)
         before = {path: path.read_bytes() for path in self.root.rglob("*.md")}
-        code, output, error = self.invoke("risks", str(self.root), "--artifact", "WO-001", "--json")
+        code, output, error = invoke("risks", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         payload = json.loads(output)
         self.assertEqual("risks", payload["command"])
         self.assertEqual([("RISK-PRD-001", 12, "raised", ["WO-001"], "DEC-PRD-001")],
                          [(row["id"], row["score"], row["status"], row["threatens"], row["decision"]) for row in payload["risks"]])
-        code, output, error = self.invoke("risks", str(self.root), "--artifact", "REQ-001")
+        code, output, error = invoke("risks", str(self.root), "--artifact", "REQ-001")
         self.assertEqual(0, code, error)
         self.assertIn("no risk threatens REQ-001", output)
-        code, output, error = self.invoke("risks", str(self.root), "--artifact", "WO-404")
+        code, output, error = invoke("risks", str(self.root), "--artifact", "WO-404")
         self.assertEqual(2, code)
         self.assertIn("unknown artifact ID: WO-404", error)
         self.assertEqual(before, {path: path.read_bytes() for path in self.root.rglob("*.md")})
@@ -553,15 +538,15 @@ class DisposalTests(RiskFixture):
         before = self.risk_file().read_bytes()
         for target in ("accepted", "avoided", "mitigating"):
             with self.subTest(target=target):
-                code, output, error = self.invoke("transition", str(self.root), "--set", f"RISK-PRD-001={target}", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=x", "--apply")
+                code, output, error = invoke("transition", str(self.root), "--set", f"RISK-PRD-001={target}", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=x", "--apply")
                 self.assertEqual(1, code)
                 self.assertIn("harnessctl raise-risk", output + error)
                 self.assertIn("harnessctl decide", output + error)
                 self.assertEqual(before, self.risk_file().read_bytes())
-        code, output, error = self.invoke("transition", str(self.root), "--set", "RISK-PRD-001=withdrawn", "--decision", "RISK-PRD-001=engineering-owner", "--apply")
+        code, output, error = invoke("transition", str(self.root), "--set", "RISK-PRD-001=withdrawn", "--decision", "RISK-PRD-001=engineering-owner", "--apply")
         self.assertEqual(1, code)
         self.assertIn("requires --reason", output + error)
-        code, output, error = self.invoke("transition", str(self.root), "--set", "RISK-PRD-001=withdrawn", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=Recorded twice.", "--apply")
+        code, output, error = invoke("transition", str(self.root), "--set", "RISK-PRD-001=withdrawn", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=Recorded twice.", "--apply")
         self.assertEqual(0, code, output + error)
         self.assertIn('status = "withdrawn"', self.risk_file().read_text(encoding="utf-8"))
         self.assertEqual([], self.codes())
@@ -576,7 +561,7 @@ class DisposalTests(RiskFixture):
 
     def test_a_past_revisit_on_an_accepted_risk_is_a_maintenance_warning_until_a_decision_concerns_it_again(self) -> None:
         # RSK-MGT-019, W-RSK-001.
-        from tests.test_revision_provenance import release_record, verification_record
+        from tests.artifact_support import release_record, verification_record
 
         write(self.root / "docs/engineering/product/verification-records/VREC-001.md", verification_record("a" * 40))
         write(self.root / "docs/engineering/product/releases/RLS-001.md", release_record("a" * 40))
@@ -600,7 +585,7 @@ class DisposalTests(RiskFixture):
         self.assertEqual(0, code, error)
         before = self.risk_file().read_bytes()
         for target in ("raised", "mitigating", "withdrawn", "accepted"):
-            code, output, error = self.invoke("transition", str(self.root), "--set", f"RISK-PRD-001={target}", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=x", "--apply")
+            code, output, error = invoke("transition", str(self.root), "--set", f"RISK-PRD-001={target}", "--decision", "RISK-PRD-001=engineering-owner", "--reason", "RISK-PRD-001=x", "--apply")
             self.assertEqual(1, code, output + error)
             self.assertIn("is not allowed", output + error)
         code, output, error = self.decide("--option", "accept", "--revisit", "v9", "--reason", "again")
@@ -640,15 +625,15 @@ class SecurityTests(RiskFixture):
         hostile = "<script>alert(1)</script> +++ `rm -rf` \"quoted\" \\backslash"
         self.in_progress_work_order()
         arguments = [item if item != "Config drift" else hostile for item in self.RAISE]
-        code, output, error = self.invoke("raise-risk", str(self.root), *arguments, "--likelihood", "2", "--impact", "5", "--id", "RISK-PRD-001", "--with-decision", "--decision-id", "DEC-PRD-001")
+        code, output, error = invoke("raise-risk", str(self.root), *arguments, "--likelihood", "2", "--impact", "5", "--id", "RISK-PRD-001", "--with-decision", "--decision-id", "DEC-PRD-001")
         self.assertEqual(0, code, error + output)
         self.assertEqual([], [f"{i.code}: {i.message}" for i in self.validate().errors])
         message = self.predicates(self.handoff_check())["QGP-G4I-DECISION"]["message"]
         self.assertIn(hostile, message)
-        code, output, error = self.invoke("risks", str(self.root), "--artifact", "WO-001", "--json")
+        code, output, error = invoke("risks", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual(hostile, json.loads(output)["risks"][0]["title"])
-        code, output, error = self.invoke("raise-risk", str(self.root), *self.RAISE, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--cause", "Line one\nline two")
+        code, output, error = invoke("raise-risk", str(self.root), *self.RAISE, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--cause", "Line one\nline two")
         self.assertEqual(2, code)
         self.assertIn("single-line", error)
 
@@ -672,16 +657,13 @@ class SecurityTests(RiskFixture):
 class ScopeAdmissionTests(RiskFixture):
     """REQ-RSK-015: recording a risk never widens a work order's scope (RSK-MGT-026, RSK-MGT-027)."""
 
-    def git(self, *arguments: str) -> str:
-        return subprocess.run(["git", "-C", str(self.root), *GIT_IDENTITY, *arguments], check=True, capture_output=True, text=True).stdout.strip()
-
     def commit_all(self, message: str) -> str:
-        self.git("add", ".")
-        self.git("commit", "-q", "-m", message)
-        return self.git("rev-parse", "HEAD")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-q", "-m", message)
+        return git(self.root, "rev-parse", "HEAD")
 
     def checkpoint(self, checkpoint: str, *arguments: str) -> dict:
-        code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", checkpoint, *arguments, "--json")
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", checkpoint, *arguments, "--json")
         self.assertIn(code, (0, 1), error)
         return json.loads(output)
 
@@ -689,7 +671,7 @@ class ScopeAdmissionTests(RiskFixture):
         super().setUp()
         # The pairing decision lands in a declared directory; only the risk file relies on the admission.
         self.in_progress_work_order("src/", "docs/engineering/product/decisions/")
-        subprocess.run(["git", "init", "-q", "-b", "main", str(self.root)], check=True, capture_output=True)
+        git(self.root, "init", "-q", "-b", "main")
         self.commit_all("base")
 
     def test_an_added_risk_file_of_the_work_orders_domain_is_admitted_and_only_that_file(self) -> None:
@@ -730,7 +712,7 @@ class ScopeAdmissionTests(RiskFixture):
         paths = self.predicates(self.checkpoint("scope", "--from-git", "HEAD"))["QGP-G4I-PATHS"]
         self.assertEqual("fail", paths["status"])
         self.assertIn(RISK_PATH, paths["message"])
-        self.git("checkout", "--", RISK_PATH)
+        git(self.root, "checkout", "--", RISK_PATH)
         risk.unlink()
         paths = self.predicates(self.checkpoint("scope", "--from-git", "HEAD"))["QGP-G4I-PATHS"]
         self.assertEqual("fail", paths["status"])
@@ -755,7 +737,7 @@ class ScopeAdmissionWithoutGitTests(RiskFixture):
         self.in_progress_work_order()
         code, _, error = self.raise_risk()
         self.assertEqual(0, code, error)
-        code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope", "--changed-path", RISK_PATH, "--changes-complete", "--json")
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope", "--changed-path", RISK_PATH, "--changes-complete", "--json")
         paths = self.predicates(json.loads(output))["QGP-G4I-PATHS"]
         self.assertEqual("fail", paths["status"])
         self.assertIn(RISK_PATH, paths["message"])

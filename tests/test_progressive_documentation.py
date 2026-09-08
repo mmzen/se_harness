@@ -41,7 +41,6 @@ class ProgressiveDocumentationTests(unittest.TestCase):
                 content = self.contents[path]
                 self.assertIn(f"<!-- Target expertise: {score}.", content)
                 self.assertIn("knowledge expected from the reader", content)
-                self.assertNotIn("> **Target expertise:", content)
 
     def test_expertise_metadata_is_not_visible_rendered_content(self) -> None:
         for path, content in self.contents.items():
@@ -118,31 +117,6 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             model,
         )
 
-    def test_observations_do_not_claim_human_authority(self) -> None:
-        overview = self.contents[NOTES_ROOT / "harness-overview.md"]
-        model = self.contents[NOTES_ROOT / "harness-uml-model.md"]
-        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
-        self.assertIn("None of these commands approves work", overview)
-        self.assertIn("inspection summarizes current attention", overview)
-        self.assertIn("Only an accountable assurance decision", model)
-        self.assertIn("ready` is a proposal", phasing)
-        self.assertIn("separate human release decision", overview)
-
-    def test_validation_and_inspection_documentation_is_synchronized(self) -> None:
-        overview = self.contents[NOTES_ROOT / "harness-overview.md"]
-        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
-        installation = self.contents[NOTES_ROOT / "harness-installation-and-upgrades.md"]
-        example = self.contents[NOTES_ROOT / "harness-lineage-example.md"]
-
-        self.assertIn("`harnessctl preflight`, `validate`, `inspect`, `doctor`, and `dashboard`", overview)
-        self.assertIn("`harnessctl inspect .`", phasing)
-        self.assertIn("successfully produced `inspect` report can still show an invalid graph", phasing)
-        self.assertIn("harnessctl inspect C:\\path\\to\\repository", installation)
-        self.assertIn("successful `inspect` report production can still describe an invalid graph", installation)
-        self.assertIn("harnessctl inspect .", example)
-        self.assertIn("bounded suggestions for possible accountable next steps", example)
-        self.assertIn("it executes nothing and does not establish eligibility or approval", example)
-
     def test_active_public_command_contract_uses_six_commands(self) -> None:
         distribution = REPOSITORY_ROOT / "docs" / "engineering" / "harness-distribution"
         requirement = (distribution / "requirements" / "REQ-DST-025.md").read_text(encoding="utf-8")
@@ -156,51 +130,57 @@ class ProgressiveDocumentationTests(unittest.TestCase):
             with self.subTest(obsolete=obsolete):
                 self.assertNotIn(obsolete, requirement + specification + verification)
 
-    def test_branching_guide_is_one_explicitly_non_authoritative_model(self) -> None:
-        branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
-        self.assertIn("SE Harness does **not** require this branch model", branching)
-        self.assertEqual(2, branching.count("gitGraph"))
-        self.assertIn("Example 1: one change from implementation to release", branching)
-        self.assertIn("tag points back to **candidate C**", branching)
-        self.assertIn("Example 2: continuous integration, delayed release", branching)
-        self.assertIn("`main` is the only integration branch for normal development", branching)
-        self.assertIn("Harness-Work-Order: WO-FEAT-001", branching)
-        self.assertIn("G5: ready VREC-C binds C3", branching)
-        self.assertIn("WO-QUAL-030", branching)
-        self.assertIn("aggregate VREC re-evaluates the release-bearing work at R", branching)
-        self.assertIn("`release/0.3` is not used for new features", branching)
-        self.assertIn("v0.3.0` and `release/0.3` are created only after G10", branching)
-        self.assertIn("REL-031", branching)
-        self.assertIn("VER-FIX-014", branching)
-        self.assertIn("WO-QUAL-031", branching)
-        self.assertIn("docs/engineering/verification-records/VREC-030.md", branching)
-        self.assertIn("W013` advisory, never a validation error", branching)
-
-    def test_refused_verification_paths_are_explained_without_invented_authority(self) -> None:
-        phasing = self.contents[NOTES_ROOT / "harness-operational-phasing.md"]
-        branching = self.contents[NOTES_ROOT / "harness-branching-model.md"]
-
-        for required in (
-            "## When verification is refused",
-            "`ready -> rejected` VREC transition",
-            "The work order honestly remains `implemented`",
-            "`prepare-release` accepts only verified VRECs",
-            "A ready RLS may be explicitly released or rejected",
-            "W-REV-004",
-            "harness-uml-model.md#important-multiplicities-and-invariants",
-            "harness-branching-model.md#when-assurance-refuses-a-candidate",
-        ):
-            self.assertIn(required, phasing)
-
-        for required in (
+    # SPEC-TST-002 TST-HYG-013: the four checks below replace sentence pins on the notes with
+    # structural ones. A heading exists, a command parses, a link and its anchor resolve.
+    AUTHORITY_SECTIONS = {
+        "harness-overview.md": ("## What remains under human or repository control", "## What the tools can and cannot do"),
+        "harness-uml-model.md": ("## Important multiplicities and invariants", "## Authority is outside cardinality"),
+        "harness-operational-phasing.md": ("## When verification is refused", "## Formal gates versus Explorer readiness"),
+        "harness-branching-model.md": (
+            "## Policy boundary",
+            "## Example 1: one change from implementation to release",
+            "## Example 2: continuous integration, delayed release, and supported maintenance",
             "### When assurance refuses a candidate",
-            "does not remove the candidate from `main` or rewrite branch history",
-            "a revert is also an append-only commit and becomes its own candidate",
-            "harness-operational-phasing.md#when-verification-is-refused",
-        ):
-            self.assertIn(required, branching)
+            "## What can vary in another repository",
+        ),
+    }
 
-        self.assertEqual(2, branching.count("gitGraph"))
+    def test_authority_notes_keep_their_boundary_sections(self) -> None:
+        for note, headings in self.AUTHORITY_SECTIONS.items():
+            content = self.contents[NOTES_ROOT / note]
+            for heading in headings:
+                with self.subTest(note=note, heading=heading):
+                    self.assertIn(f"\n{heading}\n", content)
+        self.assertEqual(2, self.contents[NOTES_ROOT / "harness-branching-model.md"].count("gitGraph"))
+
+    def test_every_command_a_note_names_exists_in_the_current_cli(self) -> None:
+        parser = build_parser()
+        command_action = next(action for action in parser._actions if getattr(action, "choices", None) and "preflight" in action.choices)
+        subcommands = set(command_action.choices)
+        for path, content in self.contents.items():
+            spans = re.findall(r"`([^`\n]*)`", content) + re.findall(r"```[^\n]*\n(.*?)```", content, flags=re.DOTALL)
+            named = {match for span in spans for match in re.findall(r"harnessctl ([a-z][a-z-]+)", span)}
+            for command in sorted(named):
+                with self.subTest(note=path.name, command=command):
+                    self.assertIn(command, subcommands)
+
+    def test_every_local_anchor_in_a_note_resolves_to_a_heading(self) -> None:
+        def slug(heading: str) -> str:
+            text = heading.lstrip("#").strip().lower().replace("`", "")
+            text = re.sub(r"[^a-z0-9 _-]", "", text)
+            return text.replace(" ", "-")
+
+        for source, content in self.contents.items():
+            for raw_target in re.findall(r"\[[^]]+\]\(([^)]+)\)", content):
+                if re.match(r"(?:https?://|mailto:)", raw_target) or "#" not in raw_target:
+                    continue
+                target, anchor = raw_target.split("#", 1)
+                resolved = (source.parent / target).resolve() if target else source
+                if not resolved.is_file():
+                    continue  # the link test reports a missing file
+                headings = {slug(line) for line in resolved.read_text(encoding="utf-8").splitlines() if line.startswith("#")}
+                with self.subTest(source=source.name, anchor=raw_target):
+                    self.assertIn(anchor, headings)
 
     def test_example_commands_exist_in_current_cli(self) -> None:
         parser = build_parser()

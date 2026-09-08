@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest import mock
 
 from se_harness import __version__
 
@@ -58,3 +60,14 @@ def trusted_mutation_authority(
         evidence_sha256=hashlib.sha256(raw).hexdigest(),
         upgrade_authorization=None,
     )
+
+
+def patch_mutation_authority(case: unittest.TestCase) -> None:
+    """Trust the mutation authority for the rest of `case` (SPEC-TST-002 TST-HYG-007).
+
+    Tests outside the guard's own boundary coverage call this once in `setUp`;
+    the patch is undone by the case's cleanup.
+    """
+    guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
+    guard.start()
+    case.addCleanup(guard.stop)

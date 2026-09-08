@@ -70,8 +70,17 @@ jobs:
             --json
       - name: Prove active evaluator surface
         run: python scripts/check_portable_release_surface.py --repository .
+      - name: Restore the suite timings of the previous run
+        # SPEC-TST-002 TST-HYG-019: the runner schedules classes longest-first from the
+        # timings it wrote last time; the cache carries that file from run to run.
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: target/test-timings.json
+          key: test-timings-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            test-timings-${{ runner.os }}-
       - name: Run complete candidate-source regression
-        run: python scripts/run_tests.py --workers 4 --scale full --timings ""
+        run: python scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json
       - name: Export and build the one non-promotable candidate wheel
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}

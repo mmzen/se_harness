@@ -13,8 +13,10 @@ from unittest import mock
 
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, formal, write
+from tests.cli_support import invoke
+from tests.fixture_support import standard_repository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates"
@@ -54,19 +56,13 @@ class ReaderFirstSpecificationTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Specification Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root)
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
         lock["evaluator"]["archive_sha256"] = "a" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         self.path = self.root / "docs/engineering/product/specifications/SPEC-002.md"
         write(
@@ -74,13 +70,6 @@ class ReaderFirstSpecificationTests(unittest.TestCase):
             formal("REQ-002", "requirement", "draft", {"derives_from": ["CAP-001"]},
                    'statement = "WHEN a succession is requested, THE SYSTEM SHALL qualify it."\nverification_method = ["test"]'),
         )
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def write_specification(self, *, status: str = "draft", contract: str | None = CONTRACT, body: str | None = None,
                             specifies: tuple[str, ...] = ("REQ-001", "REQ-002")) -> None:
@@ -112,12 +101,7 @@ class ReaderFirstSpecificationTests(unittest.TestCase):
         )
         self.assertIsNotNone(re.search(r'^contract = "', text, flags=re.MULTILINE))
         self.assertIn("`GLOSSARY.md` at the repository", text)
-        for retired in ("Actors and external systems", "Inputs", "Outputs", "State model", "Behavioral rules", "Data and interface contracts",
-                        "Security and privacy properties", "Performance and capacity", "Observability", "Compatibility and migration",
-                        "Explicitly unspecified decisions", "Open decisions"):
-            self.assertNotIn(f"## {retired}", text)
-        self.assertNotIn("Number rules", text)
-        code, output, error = self.invoke("create-artifact", str(self.root), "--domain", "product", "--type", "specification", "--id", "SPEC-003", "--quiet")
+        code, output, error = invoke("create-artifact", str(self.root), "--domain", "product", "--type", "specification", "--id", "SPEC-003", "--quiet")
         self.assertEqual(0, code, error + output)
         created = (self.root / "docs/engineering/product/specifications/SPEC-003.md").read_text(encoding="utf-8")
         self.assertIn("## Coverage", created)
@@ -277,7 +261,7 @@ class ReaderFirstSpecificationTests(unittest.TestCase):
         self.assertEqual({}, self.advisories())
 
     def bundle_detail(self, artifact_id: str) -> dict:
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         for p in (self.root / "target/harness-dashboard/data/artifacts").rglob("*"):
             if p.is_file():

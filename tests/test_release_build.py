@@ -21,6 +21,7 @@ from unittest import mock
 
 from repository_tools import release_build as BUILD
 from se_harness import __version__
+from tests.git_support import git
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -101,7 +102,7 @@ class DeterministicSdistTests(unittest.TestCase):
                     for name, data in members:
                         self.add_member(archive, name, data=data, seed=seed)
 
-    def invoke(self, source: Path, output: Path) -> subprocess.CompletedProcess[str]:
+    def normalize(self, source: Path, output: Path) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [
                 sys.executable,
@@ -124,8 +125,8 @@ class DeterministicSdistTests(unittest.TestCase):
         self.write_sdist(raw_a, seed=1)
         self.write_sdist(raw_b, seed=2, reverse=True)
 
-        first = self.invoke(raw_a, output_a)
-        second = self.invoke(raw_b, output_b)
+        first = self.normalize(raw_a, output_a)
+        second = self.normalize(raw_b, output_b)
 
         self.assertEqual(0, first.returncode, first.stderr)
         self.assertEqual(0, second.returncode, second.stderr)
@@ -172,7 +173,7 @@ class DeterministicSdistTests(unittest.TestCase):
                             member.size = len(value)
                             archive.addfile(member, io.BytesIO(value))
 
-                result = self.invoke(source, output)
+                result = self.normalize(source, output)
                 self.assertEqual(2, result.returncode)
                 self.assertFalse(output.exists())
 
@@ -182,7 +183,7 @@ class DeterministicSdistTests(unittest.TestCase):
         self.write_sdist(source, seed=1)
         output.write_bytes(b"repository-owned")
 
-        result = self.invoke(source, output)
+        result = self.normalize(source, output)
 
         self.assertEqual(2, result.returncode)
         self.assertIn("already exists", result.stderr)
@@ -516,21 +517,16 @@ class BuildRecipeSchemaTests(unittest.TestCase):
 
 class ReplayBuildTests(unittest.TestCase):
     def repository(self, root: Path) -> str:
-        subprocess.run(["git", "init", "-q", str(root)], check=True)
-        subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
-        subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
+        git(root, "init", "-q")
+        git(root, "config", "user.name", "Harness Test")
+        git(root, "config", "user.email", "harness@example.invalid")
         (root / "release").mkdir()
         shutil.copyfile(RECIPE_PATH, root / "release" / "build-recipe.json")
         shutil.copyfile(LOCK_PATH, root / "release" / "build-toolchain.lock")
         (root / "source.txt").write_text("candidate\n", encoding="utf-8", newline="\n")
-        subprocess.run(["git", "-C", str(root), "add", "release", "source.txt"], check=True)
-        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
-        return subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
+        git(root, "add", "release", "source.txt")
+        git(root, "commit", "-q", "-m", "candidate")
+        return git(root, "rev-parse", "HEAD")
 
     @staticmethod
     def fake_docker_build(
@@ -713,28 +709,23 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
     BINARY = b"\x00\x01\r\n\x02\xff"
 
     def candidate(self, root: Path, attributes: str | None = None) -> str:
-        subprocess.run(["git", "init", "-q", str(root)], check=True)
+        git(root, "init", "-q")
         for key, value in (
             ("user.name", "Harness Test"),
             ("user.email", "harness@example.invalid"),
             ("core.autocrlf", "false"),
             ("core.eol", "lf"),
         ):
-            subprocess.run(["git", "-C", str(root), "config", key, value], check=True)
+            git(root, "config", key, value)
         (root / "package").mkdir()
         for name in ("module.py", "notes.md", "package/inner.py"):
             (root / name).write_bytes(self.TEXT.encode("utf-8"))
         (root / "payload.bin").write_bytes(self.BINARY)
         if attributes is not None:
             (root / ".gitattributes").write_bytes(attributes.encode("utf-8"))
-        subprocess.run(["git", "-C", str(root), "add", "-A"], check=True)
-        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
-        return subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
+        git(root, "add", "-A")
+        git(root, "commit", "-q", "-m", "candidate")
+        return git(root, "rev-parse", "HEAD")
 
     def committed(self, root: Path, commit: str) -> dict[str, bytes]:
         """Read the committed blobs independently of the export being judged.
@@ -744,18 +735,9 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
         under test.
         """
 
-        listed = subprocess.run(
-            ["git", "-C", str(root), "ls-tree", "-r", "-z", "--name-only", commit],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout
+        listed = git(root, "ls-tree", "-r", "-z", "--name-only", commit)
         return {
-            name: subprocess.run(
-                ["git", "-C", str(root), "cat-file", "blob", f"{commit}:{name}"],
-                check=True,
-                capture_output=True,
-            ).stdout
+            name: git(root, "cat-file", "blob", f"{commit}:{name}", binary=True)
             for name in listed.split("\0")
             if name
         }
@@ -834,9 +816,7 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
                 root.mkdir()
                 commit = self.candidate(root)
                 committed = self.committed(root, commit)
-                subprocess.run(
-                    ["git", "-C", str(root), "config", "core.autocrlf", configuration], check=True
-                )
+                git(root, "config", "core.autocrlf", configuration)
                 exported = self.exported(root, commit, container / "source")
                 self.assertEqual(committed, exported)
                 self.assertEqual(self.TEXT.encode("utf-8"), exported["module.py"])
@@ -849,7 +829,7 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
             root.mkdir()
             commit = self.candidate(root, attributes="* text=auto\nnotes.md text eol=lf\n")
             committed = self.committed(root, commit)
-            subprocess.run(["git", "-C", str(root), "config", "core.eol", "crlf"], check=True)
+            git(root, "config", "core.eol", "crlf")
             exported = self.exported(root, commit, container / "source")
             self.assertEqual(committed, exported)
             for name in ("module.py", "notes.md"):

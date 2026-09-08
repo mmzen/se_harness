@@ -13,6 +13,7 @@ import unittest
 from pathlib import Path
 
 from se_harness import __version__
+from tests.git_support import git
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -153,45 +154,34 @@ class PublicOnboardingTests(unittest.TestCase):
         self.assertEqual([], self.project["dependencies"])
         self.assertEqual("se_harness.cli:main", self.project["scripts"]["harnessctl"])
 
-    def test_technical_communication_note_explains_use_and_claim_boundaries(self) -> None:
-        note = TECHNICAL_COMMUNICATION_NOTE.read_text(encoding="utf-8")
-        normalized = " ".join(note.split())
-        index = (REPOSITORY_ROOT / "docs/notes/README.md").read_text(encoding="utf-8")
-        self.assertIn("technical-communication.md", index)
-        for phrase in (
-            "Target expertise: 5/10",
-            "based on ASD-STE100",
-            "does not claim compliance",
-            "operator-communication",
-            "technical-artifact-writing",
-            "harness-operator-brief",
-            "harness-orient",
-            "changes no repository path",
-            "Human review remains necessary for meaning",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, normalized)
+    # SPEC-TST-002 TST-HYG-013: the notes are checked for what can be resolved, not for wording.
+    # The expertise label is the one sentence a specification fixes (SPEC-DST-006).
+    NOTE_SECTIONS = {
+        "technical-communication.md": (
+            "5/10",
+            ("## What the policy changes", "## What the policy protects", "## Using `harness-operator-brief`", "## Boundaries", "## Contributor checks"),
+            (".agents/skills/harness-operator-brief", ".agents/skills/harness-orient"),
+        ),
+        "agentic-execution-phase4-skills.md": (
+            None,
+            ("## What changed", "## Client boundary", "## Capability and compatibility", "## Host parity and stops", "## Package qualification"),
+            (".agents/skills/harness-orient",),
+        ),
+    }
 
-    def test_phase4_skill_note_explains_capability_and_activation_boundaries(self) -> None:
-        note = (
-            REPOSITORY_ROOT / "docs/notes/agentic-execution-phase4-skills.md"
-        ).read_text(encoding="utf-8")
-        normalized = " ".join(note.split())
+    def test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths(self) -> None:
         index = (REPOSITORY_ROOT / "docs/notes/README.md").read_text(encoding="utf-8")
-        for phrase in (
-            "se-harness-skill-contract-v3",
-            "direct_target_writes: false",
-            "delegated-workflow execute",
-            "delegated-workflow prepare-vrec",
-            "No helper accepts a target-write callback",
-            "Exact public 0.6.0 has no `delegated-workflow` command",
-            "stop before any effect",
-            "does not select a successor version",
-            "independent assurance decision",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, normalized)
-        self.assertIn("agentic-execution-phase4-skills.md", index)
+        for note, (expertise, headings, shipped) in self.NOTE_SECTIONS.items():
+            content = (REPOSITORY_ROOT / "docs/notes" / note).read_text(encoding="utf-8")
+            with self.subTest(note=note):
+                self.assertIn(note, index)
+                if expertise is not None:
+                    self.assertIn(f"<!-- Target expertise: {expertise}.", content)
+                for heading in headings:
+                    self.assertIn(f"\n{heading}\n", content)
+                for relative in shipped:
+                    self.assertTrue((REPOSITORY_ROOT / relative).exists(), relative)
+                    self.assertIn(Path(relative).name, content)
 
     def test_release_links_and_public_project_routes_remain(self) -> None:
         for url in (
@@ -254,13 +244,13 @@ class FreshConsumerDoctorTests(unittest.TestCase):
             consumer = base / "consumer"
             init = self.harnessctl("init", str(consumer), "--project-name", "Consumer", cwd=base)
             self.assertEqual(0, init.returncode, init.stdout + init.stderr)
-            git = ["git", "-c", f"core.autocrlf={autocrlf}", "-C", str(consumer)]
-            subprocess.run([*git, "init", "-q", "-b", "main"], check=True, capture_output=True)
-            subprocess.run([*git, "config", "user.email", "adopter@example.invalid"], check=True)
-            subprocess.run([*git, "config", "user.name", "adopter"], check=True)
-            subprocess.run([*git, "config", "commit.gpgsign", "false"], check=True)
-            subprocess.run([*git, "add", "-A"], check=True, capture_output=True)
-            subprocess.run([*git, "commit", "-q", "-m", "init"], check=True, capture_output=True)
+            conversion = ("-c", f"core.autocrlf={autocrlf}")
+            git(consumer, *conversion, "init", "-q", "-b", "main")
+            git(consumer, *conversion, "config", "user.email", "adopter@example.invalid")
+            git(consumer, *conversion, "config", "user.name", "adopter")
+            git(consumer, *conversion, "config", "commit.gpgsign", "false")
+            git(consumer, *conversion, "add", "-A")
+            git(consumer, *conversion, "commit", "-q", "-m", "init")
             return self.harnessctl("doctor", str(consumer), cwd=base)
 
     def assert_doctor_passes(self, autocrlf: str) -> None:

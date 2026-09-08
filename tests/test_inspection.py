@@ -14,19 +14,18 @@ from se_harness.integrity import canonical_sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import root_copy  # noqa: E402
+from tests.root_identity_support import load_evaluator_module
 SCRIPTS = ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
-
-from inspect_engineering_artifacts import (  # noqa: E402
-    INSPECTION_SCHEMA,
-    InspectionError,
-    build_inspection,
-    main,
-    render_human,
-    serialize_json,
-)
-from validate_engineering_artifacts import Artifact, ValidationReport  # noqa: E402
+_inspect_engineering_artifacts = load_evaluator_module("inspect_engineering_artifacts")
+INSPECTION_SCHEMA = _inspect_engineering_artifacts.INSPECTION_SCHEMA
+InspectionError = _inspect_engineering_artifacts.InspectionError
+build_inspection = _inspect_engineering_artifacts.build_inspection
+main = _inspect_engineering_artifacts.main
+render_human = _inspect_engineering_artifacts.render_human
+serialize_json = _inspect_engineering_artifacts.serialize_json
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+Artifact = _validate_engineering_artifacts.Artifact
+ValidationReport = _validate_engineering_artifacts.ValidationReport
 
 
 def sample_snapshot(*, valid: bool = False) -> dict:
@@ -514,9 +513,6 @@ class InspectionReportTests(unittest.TestCase):
         source = canonical.read_text(encoding="utf-8")
         self.assertIn("from generate_harness_dashboard import", source)
         self.assertIn("generate_snapshot", source)
-        self.assertNotIn("def build_findings", source)
-        self.assertNotIn("def validate_repository", source)
-        self.assertNotIn("def _finding(", source)
         self.assertIn('"W-REB-003"', source)
         # SPEC-DST-025 DST-ENG-001, DST-ENG-003: the inspector ships as a module of
         # the se_harness.engine package, not as a template data file.

@@ -13,8 +13,10 @@ from unittest import mock
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, formal, write
+from tests.cli_support import invoke
+from tests.fixture_support import standard_repository
 
 
 def write_rules_on_spec_001(root: Path) -> None:
@@ -62,33 +64,20 @@ def decision_text(
     )
 
 
-class DecisionManagementTests(unittest.TestCase):
+class DecisionManagementFixture:
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Decision Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root)
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
         lock["evaluator"]["archive_sha256"] = "a" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         write_rules_on_spec_001(self.root)
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def in_progress_work_order(self) -> Path:
         path = self.root / "docs/engineering/product/work-orders/WO-001.md"
@@ -120,7 +109,7 @@ class DecisionManagementTests(unittest.TestCase):
         return sorted(f"{item.code}: {item.message}" for item in self.validate().errors if item.code.startswith("E-DCM"))
 
     def handoff_check(self) -> dict:
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
             "--changed-path", "src/main.py", "--changes-complete", "--json",
         )
@@ -133,10 +122,12 @@ class DecisionManagementTests(unittest.TestCase):
 
     # ---------------------------------------------------------------- REQ-DCM-001: the artifact and its validation
 
+
+class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):
     def test_layout_registry_and_template_route_the_decision_type(self) -> None:
         self.assertEqual(("decisions",), ARTIFACT_DIRECTORIES["decision"])
         self.assertEqual("DEC-", ARTIFACT_PREFIXES["decision"])
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "decision", "--id", "DEC-PRD-001",
         )
         self.assertEqual(0, code, error + output)
@@ -239,7 +230,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertIn("owner", predicate["message"])
         self.assertTrue(any(item.startswith("QGP-G4I-DECISION:") for item in result["restitution"]["blocked_by"]))
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-001", "--option", "keep",
             "--decision", "owner", "--reason", "One record; the split buys nothing.", "--apply", "--json",
         )
@@ -259,26 +250,26 @@ class DecisionManagementTests(unittest.TestCase):
     def test_disposition_is_refused_for_the_wrong_role_a_missing_reason_or_an_undeclared_option(self) -> None:
         self.raise_decision()
         base = ("decide", str(self.root), "--artifact", "DEC-001")
-        code, output, error = self.invoke(*base, "--option", "keep", "--decision", "release-owner", "--reason", "fine", "--apply")
+        code, output, error = invoke(*base, "--option", "keep", "--decision", "release-owner", "--reason", "fine", "--apply")
         self.assertEqual(1, code)
         self.assertIn("DR-DECISION-DISPOSE", output + error)
         self.assertIn("owner", output + error)
-        code, output, error = self.invoke(*base, "--option", "keep", "--decision", "owner", "--apply")
+        code, output, error = invoke(*base, "--option", "keep", "--decision", "owner", "--apply")
         self.assertEqual(1, code)
         self.assertIn("requires --reason", output + error)
-        code, output, error = self.invoke(*base, "--option", "burn", "--decision", "owner", "--reason", "x", "--apply")
+        code, output, error = invoke(*base, "--option", "burn", "--decision", "owner", "--reason", "x", "--apply")
         self.assertEqual(1, code)
         self.assertIn("declares options keep, split", output + error)
         self.assertIn('status = "open"', self.decision_path().read_text(encoding="utf-8"))
-        code, _, error = self.invoke(*base, "--option", "split", "--decision", "owner", "--reason", "Two records read better.", "--apply")
+        code, _, error = invoke(*base, "--option", "split", "--decision", "owner", "--reason", "Two records read better.", "--apply")
         self.assertEqual(0, code, error)
-        code, output, error = self.invoke(*base, "--option", "keep", "--decision", "owner", "--reason", "again", "--apply")
+        code, output, error = invoke(*base, "--option", "keep", "--decision", "owner", "--reason", "again", "--apply")
         self.assertEqual(1, code)
         self.assertIn("decided -> decided is not allowed", output + error)
 
     def test_a_decision_is_never_transitioned_by_hand(self) -> None:
         self.raise_decision()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "transition", str(self.root), "--set", "DEC-001=decided",
             "--decision", "DEC-001=owner", "--reason", "DEC-001=keep", "--apply",
         )
@@ -290,16 +281,16 @@ class DecisionManagementTests(unittest.TestCase):
         self.in_progress_work_order()
         self.raise_decision(concerns=("WO-001", "REQ-001"), blocks=("WO-001", "REQ-001"))
         base = ("decide", str(self.root), "--artifact", "DEC-001", "--defer", "--decision", "owner", "--reason", "Not before the field lands.")
-        code, output, error = self.invoke(*base, "--apply")
+        code, output, error = invoke(*base, "--apply")
         self.assertEqual(1, code)
         self.assertIn("requires --scope", output + error)
-        code, output, error = self.invoke(*base, "--scope", "SPEC-001:draft-approved", "--revisit", "v1.1.0", "--apply")
+        code, output, error = invoke(*base, "--scope", "SPEC-001:draft-approved", "--revisit", "v1.1.0", "--apply")
         self.assertEqual(1, code)
         self.assertIn("does not block", output + error)
-        code, output, error = self.invoke(*base, "--scope", "WO-001:in_progress-implemented", "--apply")
+        code, output, error = invoke(*base, "--scope", "WO-001:in_progress-implemented", "--apply")
         self.assertEqual(1, code)
         self.assertIn("requires --revisit", output + error)
-        code, _, error = self.invoke(*base, "--scope", "WO-001:in_progress-implemented", "--revisit", "v1.1.0", "--apply")
+        code, _, error = invoke(*base, "--scope", "WO-001:in_progress-implemented", "--revisit", "v1.1.0", "--apply")
         self.assertEqual(0, code, error)
         text = self.decision_path().read_text(encoding="utf-8")
         self.assertIn('status = "deferred"', text)
@@ -316,7 +307,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "verified")])
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["REQ-001"], "approved")])
         # a deferred decision is still disposed later
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-001", "--option", "keep",
             "--decision", "owner", "--reason", "The field landed.", "--apply",
         )
@@ -325,7 +316,7 @@ class DecisionManagementTests(unittest.TestCase):
 
     def test_withdrawal_records_a_disposition_and_closes_the_decision(self) -> None:
         self.raise_decision()
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-001", "--withdraw",
             "--decision", "owner", "--reason", "The record was removed with WO-002.", "--apply",
         )
@@ -334,7 +325,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertIn('status = "withdrawn"', text)
         self.assertIn('option = "withdrawn"', text)
         self.assertEqual([], self.decision_errors())
-        code, output, error = self.invoke("check", str(self.root), "--artifact", "DEC-001", "--json")
+        code, output, error = invoke("check", str(self.root), "--artifact", "DEC-001", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual("WFL-DEC-CLOSED", json.loads(output)["compliance"]["workflow_rule_id"])
 
@@ -352,13 +343,13 @@ class DecisionManagementTests(unittest.TestCase):
         )
         self.raise_decision(**deviation)
         base = ("decide", str(self.root), "--artifact", "DEC-001", "--option", "accept", "--decision", "owner", "--reason", "Windows lacks the field; the Linux lane proves it.")
-        code, output, error = self.invoke(*base, "--apply")
+        code, output, error = invoke(*base, "--apply")
         self.assertEqual(1, code)
         self.assertIn("acceptance is time-bounded", output + error)
-        code, output, error = self.invoke("decide", str(self.root), "--artifact", "DEC-001", "--option", "accept", "--decision", "quality-owner", "--reason", "x", "--revisit", "v2.0.0", "--apply")
+        code, output, error = invoke("decide", str(self.root), "--artifact", "DEC-001", "--option", "accept", "--decision", "quality-owner", "--reason", "x", "--revisit", "v2.0.0", "--apply")
         self.assertEqual(1, code)
         self.assertIn("DR-DECISION-DISPOSE", output + error)
-        code, _, error = self.invoke(*base, "--revisit", "v2.0.0", "--apply")
+        code, _, error = invoke(*base, "--revisit", "v2.0.0", "--apply")
         self.assertEqual(0, code, error)
         text = self.decision_path().read_text(encoding="utf-8")
         self.assertIn('status = "decided"', text)
@@ -385,7 +376,7 @@ class DecisionManagementTests(unittest.TestCase):
 
         # a second acceptance against the same rule is a maintenance warning
         self.raise_decision("DEC-002", **deviation)
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-002", "--option", "accept", "--decision", "owner",
             "--reason", "Same fact, second work order.", "--revisit", "v2.0.0", "--apply",
         )
@@ -395,7 +386,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertIn("2 accepted deviations stand against SPEC-001#BASE-RUL-003", warnings[0].message)
         # amending the rule closes the standing
         self.raise_decision("DEC-003", **deviation)
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-003", "--option", "amend", "--decision", "owner",
             "--reason", "Rule 3 now names the Linux lane.", "--apply",
         )
@@ -407,18 +398,18 @@ class DecisionManagementTests(unittest.TestCase):
     def test_check_inspect_and_dashboard_surface_the_open_decision(self) -> None:
         self.in_progress_work_order()
         self.raise_decision()
-        code, output, error = self.invoke("check", str(self.root), "--artifact", "DEC-001", "--json")
+        code, output, error = invoke("check", str(self.root), "--artifact", "DEC-001", "--json")
         self.assertEqual(0, code, error)
         projection = json.loads(output)
         self.assertEqual("WFL-DEC-OPEN", projection["compliance"]["workflow_rule_id"])
         self.assertEqual("STEP-DEC-DISPOSE", projection["restitution"]["next"]["step_id"])
         self.assertEqual("DR-DECISION-DISPOSE", projection["restitution"]["decision_required"]["decision_right"])
         self.assertIn("WO-001", projection["scope"]["governing"])
-        code, output, error = self.invoke("inspect", str(self.root), "--json")
+        code, output, error = invoke("inspect", str(self.root), "--json")
         self.assertEqual(0, code, error)
         queue = json.loads(output)["queues"]["decision_required"]
         self.assertIn(("DEC-001", "dispose-decision"), [(item["id"], item["action"]) for item in queue])
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         bundle_dir = self.root / "target/harness-dashboard"
         catalog = "".join(
@@ -434,7 +425,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertIn('"decisions_open"', summary)
 
 
-class DecisionGateFamilyTests(DecisionManagementTests):
+class DecisionGateFamilyTests(DecisionManagementFixture, unittest.TestCase):
     """VER-DCM-001: the gate per blocked family, contract coverage, and the surfaces' safety."""
 
     def write_draft_chain(self) -> dict[str, Path]:
@@ -474,7 +465,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
         for artifact_id, predicate in expected_predicate.items():
             target = "in_progress" if artifact_id == "WO-002" else "approved"
             with self.subTest(artifact=artifact_id):
-                code, output, error = self.invoke(
+                code, output, error = invoke(
                     "transition", str(self.root), "--set", f"{artifact_id}={target}",
                     "--decision", f"{artifact_id}=owner", "--reason", f"{artifact_id}=ready", "--apply",
                 )
@@ -517,7 +508,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
         self.assertEqual(first, second)
 
     def test_a_past_revisit_on_an_accepted_deviation_is_a_maintenance_warning(self) -> None:
-        from tests.test_revision_provenance import release_record, verification_record
+        from tests.artifact_support import release_record, verification_record
 
         write(self.root / "docs/engineering/product/verification-records/VREC-001.md", verification_record("a" * 40))
         write(self.root / "docs/engineering/product/releases/RLS-001.md", release_record("a" * 40))
@@ -527,7 +518,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
             options=(("accept", "Accept."), ("stop", "Stop.")), recommendation="accept",
             concerns=("SPEC-001", "WO-001"), blocks=("WO-001",),
         )
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "decide", str(self.root), "--artifact", "DEC-001", "--option", "accept", "--decision", "owner",
             "--reason", "Accepted for one release.", "--revisit", "v1.0.0", "--apply",
         )
@@ -583,7 +574,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
         text = path.read_text(encoding="utf-8").replace('question = "Which shape does the record take?"', f'question = "{hostile}"')
         path.write_text(text, encoding="utf-8")
         self.assertEqual([], self.decision_errors())
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         bundle_dir = self.root / "target/harness-dashboard"
         index = (bundle_dir / "index.html").read_text(encoding="utf-8")

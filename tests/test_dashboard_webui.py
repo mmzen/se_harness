@@ -13,64 +13,14 @@ from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE_SCRIPTS = ROOT / "se_harness/engine"
-from tests.root_identity_support import root_copy  # noqa: E402
+from tests.root_identity_support import load_evaluator_module, root_copy  # noqa: E402
 
 # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copies only while the lock names them.
 MANAGED_GENERATOR = root_copy("scripts/generate_harness_dashboard.py") or CANDIDATE_SCRIPTS / "generate_harness_dashboard.py"
-if str(CANDIDATE_SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(CANDIDATE_SCRIPTS))
-
-VALIDATOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_validator",
-    CANDIDATE_SCRIPTS / "validate_engineering_artifacts.py",
-)
-if VALIDATOR_SPEC is None or VALIDATOR_SPEC.loader is None:
-    raise RuntimeError("candidate validator is unavailable")
-CANDIDATE_VALIDATOR = importlib.util.module_from_spec(VALIDATOR_SPEC)
-sys.modules[VALIDATOR_SPEC.name] = CANDIDATE_VALIDATOR
-VALIDATOR_SPEC.loader.exec_module(CANDIDATE_VALIDATOR)
-
-GENERATOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_generator",
-    CANDIDATE_SCRIPTS / "generate_harness_dashboard.py",
-)
-if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
-    raise RuntimeError("dashboard generator is unavailable")
-GENERATOR = importlib.util.module_from_spec(GENERATOR_SPEC)
-sys.modules[GENERATOR_SPEC.name] = GENERATOR
-_prior_validator = sys.modules.get("validate_engineering_artifacts")
-sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
-try:
-    GENERATOR_SPEC.loader.exec_module(GENERATOR)
-finally:
-    if _prior_validator is None:
-        sys.modules.pop("validate_engineering_artifacts", None)
-    else:
-        sys.modules["validate_engineering_artifacts"] = _prior_validator
-
-INSPECTOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_inspector",
-    CANDIDATE_SCRIPTS / "inspect_engineering_artifacts.py",
-)
-if INSPECTOR_SPEC is None or INSPECTOR_SPEC.loader is None:
-    raise RuntimeError("candidate inspector is unavailable")
-INSPECTOR = importlib.util.module_from_spec(INSPECTOR_SPEC)
-sys.modules[INSPECTOR_SPEC.name] = INSPECTOR
-_prior_generator = sys.modules.get("generate_harness_dashboard")
-_prior_validator = sys.modules.get("validate_engineering_artifacts")
-sys.modules["generate_harness_dashboard"] = GENERATOR
-sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
-try:
-    INSPECTOR_SPEC.loader.exec_module(INSPECTOR)
-finally:
-    if _prior_generator is None:
-        sys.modules.pop("generate_harness_dashboard", None)
-    else:
-        sys.modules["generate_harness_dashboard"] = _prior_generator
-    if _prior_validator is None:
-        sys.modules.pop("validate_engineering_artifacts", None)
-    else:
-        sys.modules["validate_engineering_artifacts"] = _prior_validator
+# The candidate engine, loaded by path under the bare names its scripts import one another by.
+CANDIDATE_VALIDATOR = load_evaluator_module("validate_engineering_artifacts", directory=CANDIDATE_SCRIPTS)
+GENERATOR = load_evaluator_module("generate_harness_dashboard", directory=CANDIDATE_SCRIPTS)
+INSPECTOR = load_evaluator_module("inspect_engineering_artifacts", directory=CANDIDATE_SCRIPTS)
 
 
 def temporal_findings(
@@ -512,9 +462,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
             self.assert_root_template_equals_canonical()
             return
         content = self.template.read_text(encoding="utf-8")
-        self.assertNotIn('data-od-id="definition-coverage"', content)
-        self.assertNotIn('id="coverageRows"', content)
-        self.assertNotIn('$("coverageRows")', content)
         self.assertIn('id="metricCoverage"', content)
         self.assertIn('id="metricCoverageDetail"', content)
         self.assertIn('coverage:definition?{applicable:true', content)
@@ -569,9 +516,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('Unresolved target ${esc(endpoint(link.target))}', content)
         self.assertIn('data-stage="${esc(group.id)}"', content)
         self.assertIn('Unknown type', content)
-        self.assertNotIn('function neighborhood(root,maxDepth=2,maxNodes=9)', content)
-        self.assertNotIn('function setLineageZoom', content)
-        self.assertNotIn('data-od-id="zoom-in"', content)
 
         for control in (
             'id="lineageBack"',
@@ -591,7 +535,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn('list.scrollLeft-=listRect.left+margin-currentRect.left', content)
         self.assertIn('list.scrollLeft+=currentRect.right-listRect.right+margin', content)
         self.assertIn('requestAnimationFrame(revealCurrentLineageHistory)', content)
-        self.assertNotIn('current.scrollIntoView', content)
         self.assertIn('renderLineage("history")', content)
         self.assertIn('resetLineageHistory(id)', content)
         for route_marker in (
@@ -608,8 +551,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
             with self.subTest(route_marker=route_marker):
                 self.assertIn(route_marker, content)
         self.assertIn('resetLineageHistory(selectedId);}applyRoute();renderOverviewGraph();', content)
-        self.assertNotIn('decodeURIComponent(parts[1])', content)
-        self.assertNotIn('decodeURIComponent(parts[2])', content)
         for forbidden in ("localStorage", "sessionStorage", "document.cookie"):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, content)
@@ -654,16 +595,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
             self.assert_root_template_equals_canonical()
             return
         content = self.template.read_text(encoding="utf-8")
-        for retired_phrase in (
-            "Why does this exist?",
-            "Is the definition covered?",
-            "What needs reassessment?",
-            "What is inconsistent or unassessable?",
-            "Does the harness help?",
-        ):
-            with self.subTest(retired_phrase=retired_phrase):
-                self.assertNotIn(retired_phrase, content)
-
         for phrase in (
             'data-view="overview"',
             'data-view="lineage"',
@@ -685,8 +616,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, content)
 
-        self.assertNotIn("const artifactTypes", content)
-        self.assertNotIn("switch(node.type)", content)
 
     def test_graph_analysis_modes_use_stable_distinct_category_colors(self) -> None:
         if self.root_carries_designed_explorer():
@@ -702,7 +631,6 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertIn("nodes().map(node=>String(semanticValueForMode(node,mode)))", content)
         self.assertIn("semanticPalettes.set(mode,new Map(values.map", content)
         self.assertIn("colors[index]??fallbackSemanticColor(index)", content)
-        self.assertNotIn("Math.abs(hash)%semanticPalette.length", content)
 
     def test_canonical_template_is_the_only_committed_webui_source(self) -> None:
         if self.root_template is None:

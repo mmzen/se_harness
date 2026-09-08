@@ -5,8 +5,11 @@ scripts under `scripts/`; since the 0.16.0 root (`SPEC-DST-025`) it installs non
 runs them from inside the package. A test that read a root copy reads it only when the
 lock names it, and otherwise the engine copy the candidate carries.
 """
+import importlib.util
 import json
+import sys
 from pathlib import Path
+from types import ModuleType
 
 from se_harness.installer import ENGINE_ROOT
 
@@ -40,3 +43,56 @@ def committed_copies(root_relative: str, engine_relative: str) -> tuple[str, ...
     if root_copy(root_relative) is not None:
         copies.insert(0, root_relative)
     return tuple(copies)
+
+
+def load_module(path: Path, name: str) -> ModuleType:
+    """Load one Python file as the module `name`, registered in `sys.modules` (SPEC-TST-002 TST-HYG-008).
+
+    Registration keeps the module object unique per name, so exception classes
+    and patched attributes are the same for every importer. A module already
+    loaded from the same file is returned as is.
+    """
+    path = Path(path)
+    existing = sys.modules.get(name)
+    if existing is not None and getattr(existing, "__file__", None) == str(path):
+        return existing
+    specification = importlib.util.spec_from_file_location(name, path)
+    if specification is None or specification.loader is None:
+        raise ImportError(f"cannot load {path} as {name}")
+    module = importlib.util.module_from_spec(specification)
+    sys.modules[name] = module
+    previous = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True  # a script loaded from a shipped tree leaves no __pycache__ behind
+    try:
+        specification.loader.exec_module(module)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    finally:
+        sys.dont_write_bytecode = previous
+    return module
+
+
+# The engine's scripts import one another by bare name, in this order.
+EVALUATOR_MODULES = (
+    "artifact_layout_registry",
+    "validate_engineering_artifacts",
+    "generate_harness_dashboard",
+    "inspect_engineering_artifacts",
+)
+
+
+def load_evaluator_module(name: str, *, alias: str | None = None, directory: Path | None = None) -> ModuleType:
+    """The evaluator script `name` this root runs, loaded by path under its bare name.
+
+    The scripts a module imports are loaded first under their bare names, so no
+    test module puts a directory on `sys.path`. `alias` loads a second, distinct
+    copy under another name; `directory` reads the scripts from another root.
+    """
+    scripts = Path(directory) if directory is not None else evaluator_scripts_dir()
+    for dependency in EVALUATOR_MODULES:
+        if dependency == name:
+            break
+        if dependency not in sys.modules and (scripts / f"{dependency}.py").is_file():
+            load_module(scripts / f"{dependency}.py", dependency)
+    return load_module(scripts / f"{name}.py", alias or name)

@@ -13,16 +13,13 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-from tests.root_identity_support import committed_copies  # noqa: E402
+from tests.root_identity_support import committed_copies, load_module  # noqa: E402
+from tests.artifact_support import write
+from tests.git_support import git
 HELPER_PATH = REPOSITORY_ROOT / ".github" / "scripts" / "publish_dashboard.py"
 WORKFLOW_PATH = REPOSITORY_ROOT / ".github" / "workflows" / "publish-dashboard-pages.yml"
 
-SPEC = importlib.util.spec_from_file_location("dashboard_publication", HELPER_PATH)
-if SPEC is None or SPEC.loader is None:
-    raise RuntimeError("dashboard publication helper is unavailable")
-PUBLICATION = importlib.util.module_from_spec(SPEC)
-sys.modules[SPEC.name] = PUBLICATION
-SPEC.loader.exec_module(PUBLICATION)
+PUBLICATION = load_module(HELPER_PATH, "dashboard_publication")
 
 
 def sha256(value: bytes) -> str:
@@ -34,13 +31,13 @@ class GitReleaseFixture(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
         self.root.mkdir()
-        self.git("init", "-b", "main")
-        self.git("config", "user.name", "Harness Test")
-        self.git("config", "user.email", "harness-test@example.invalid")
-        self.write("README.md", "candidate\n")
+        git(self.root, "init", "-b", "main")
+        git(self.root, "config", "user.name", "Harness Test")
+        git(self.root, "config", "user.email", "harness-test@example.invalid")
+        write(self.root / "README.md", "candidate\n")
         self.commit("candidate")
-        self.candidate = self.git("rev-parse", "HEAD")
-        self.git("tag", "-a", "v1.2.3", "-m", "release 1.2.3")
+        self.candidate = git(self.root, "rev-parse", "HEAD")
+        git(self.root, "tag", "-a", "v1.2.3", "-m", "release 1.2.3")
         evaluator = {
             "version": "0.5.0",
             "payload_manifest": "se-harness-installed-payload-v1",
@@ -48,7 +45,7 @@ class GitReleaseFixture(unittest.TestCase):
             "archive_name": "se_harness-0.5.0-py3-none-any.whl",
             "archive_sha256": "b" * 64,
         }
-        self.write(
+        write(self.root / 
             ".engineering-harness.lock",
             json.dumps({"schema": 3, "tool_version": "0.5.0", "evaluator": evaluator, "files": {}}, sort_keys=True) + "\n",
         )
@@ -77,36 +74,21 @@ class GitReleaseFixture(unittest.TestCase):
             json.dumps(evidence, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
         )
         self.evaluator_evidence_sha256 = sha256(self.evaluator_evidence.encode("utf-8"))
-        self.write(self.evaluator_evidence_path, self.evaluator_evidence)
+        write(self.root / self.evaluator_evidence_path, self.evaluator_evidence)
         self.record_path = "docs/engineering/release/releases/RLS-TST-001.md"
-        self.write(self.record_path, self.release_record("RLS-TST-001"))
+        write(self.root / self.record_path, self.release_record("RLS-TST-001"))
         self.commit("integrate released record")
-        self.governance = self.git("rev-parse", "HEAD")
-        self.write("later.txt", "unrelated later work\n")
+        self.governance = git(self.root, "rev-parse", "HEAD")
+        write(self.root / "later.txt", "unrelated later work\n")
         self.commit("later work")
-        self.head = self.git("rev-parse", "HEAD")
+        self.head = git(self.root, "rev-parse", "HEAD")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def git(self, *arguments: str) -> str:
-        completed = subprocess.run(
-            ["git", "-C", str(self.root), *arguments],
-            check=True,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-        )
-        return completed.stdout.strip()
-
-    def write(self, relative: str, content: str) -> None:
-        path = self.root / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
-
     def commit(self, message: str) -> None:
-        self.git("add", ".")
-        self.git("commit", "-m", message)
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", message)
 
     def release_record(self, record_id: str, candidate: str | None = None) -> str:
         return f'''+++
@@ -161,12 +143,12 @@ releases_work = ["WO-TST-001"]
             self.resolve(governance_commit=self.governance[:12])
 
     def test_tag_candidate_mismatch_fails_closed(self) -> None:
-        self.git("tag", "-f", "v1.2.3", self.head)
+        git(self.root, "tag", "-f", "v1.2.3", self.head)
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "tag target differs"):
             self.resolve()
 
     def test_duplicate_released_records_for_one_tag_fail_closed(self) -> None:
-        self.write(
+        write(self.root / 
             "docs/engineering/other/releases/RLS-TST-002.md",
             self.release_record("RLS-TST-002"),
         )
@@ -181,7 +163,7 @@ releases_work = ["WO-TST-001"]
     def test_later_record_relocation_does_not_change_the_integration_commit(self) -> None:
         relocated = "docs/engineering/releases/RLS-TST-001.md"
         (self.root / relocated).parent.mkdir(parents=True, exist_ok=True)
-        self.git("mv", self.record_path, relocated)
+        git(self.root, "mv", self.record_path, relocated)
         self.commit("relocate historical release record")
         result = self.resolve()
         self.assertEqual(self.governance, result.governance_commit)
@@ -202,7 +184,7 @@ releases_work = ["WO-TST-001"]
             for line in record.splitlines()
             if not line.startswith("evaluator_evidence_sha256")
         ) + "\n"
-        self.write(self.record_path, record)
+        write(self.root / self.record_path, record)
         self.commit("remove the evaluator evidence digest")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "no canonical evaluator evidence binding"):
             self.resolve()
@@ -210,7 +192,7 @@ releases_work = ["WO-TST-001"]
     def test_modified_evaluator_evidence_fails_publication_replay(self) -> None:
         value = json.loads(self.evaluator_evidence)
         value["environment"]["isolated_python"] = False
-        self.write(
+        write(self.root / 
             self.evaluator_evidence_path,
             json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n",
         )
@@ -223,8 +205,8 @@ releases_work = ["WO-TST-001"]
         value["evaluator"]["payload_sha256"] = "c" * 64
         changed = json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
         self.evaluator_evidence_sha256 = sha256(changed.encode("utf-8"))
-        self.write(self.evaluator_evidence_path, changed)
-        self.write(self.record_path, self.release_record("RLS-TST-001"))
+        write(self.root / self.evaluator_evidence_path, changed)
+        write(self.root / self.record_path, self.release_record("RLS-TST-001"))
         self.commit("bind mismatched evaluator evidence")
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from the standard lock"):
             self.resolve()
@@ -234,7 +216,7 @@ releases_work = ["WO-TST-001"]
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["payload_sha256"] = "c" * 64
         lock["evaluator"]["archive_sha256"] = "d" * 64
-        self.write(".engineering-harness.lock", json.dumps(lock, sort_keys=True) + "\n")
+        write(self.root / ".engineering-harness.lock", json.dumps(lock, sort_keys=True) + "\n")
         self.commit("advance evaluator after release")
         result = self.resolve()
         self.assertEqual(self.governance, result.governance_commit)

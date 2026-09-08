@@ -25,8 +25,10 @@ from unittest import mock
 from se_harness.cli import main
 from se_harness.gate_source import DELEGATED_ROLE, DelegationConfiguration, read_gate
 from tests.fixture_support import standard_repository
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, write
+from tests.cli_support import invoke
+from tests.git_support import git
 
 ASSURANCE_AND_SCOPE = """[assurance]
 commit_bound_verification = "required"
@@ -53,7 +55,7 @@ class DelegationFixture(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Delegation Fixture")
+        standard_repository(self.root)
         create_base_chain(self.root, work_order_status="approved", operating_contract_status="draft")
         # Preflight requires a domain-segmented id (WO-XXX-NNN); the base chain writes WO-001.
         original = self.root / "docs/engineering/product/work-orders/WO-001.md"
@@ -70,14 +72,7 @@ class DelegationFixture(unittest.TestCase):
         self.environment = mock.patch.dict(os.environ, {"SE_HARNESS_REHEARSAL": "1"})
         self.environment.start()
         self.addCleanup(self.environment.stop)
-        guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
-        guard.start()
-        self.addCleanup(guard.stop)
-
-    def git(self, *arguments: str) -> str:
-        return subprocess.run(
-            ["git", "-C", str(self.root), *arguments], capture_output=True, text=True, check=True,
-        ).stdout.strip()
+        patch_mutation_authority(self)
 
     def declare_class(self, *, at_base: bool = True) -> None:
         text = self.work_order.read_text(encoding="utf-8")
@@ -97,44 +92,35 @@ class DelegationFixture(unittest.TestCase):
 
     def commit(self, message: str) -> str:
         if not (self.root / ".git").exists():
-            self.git("init", "-q", "-b", "main")
-            self.git("config", "user.email", "fixture@example.invalid")
-            self.git("config", "user.name", "Fixture")
-            self.git("config", "core.autocrlf", "false")
+            git(self.root, "init", "-q", "-b", "main")
+            git(self.root, "config", "user.email", "fixture@example.invalid")
+            git(self.root, "config", "user.name", "Fixture")
+            git(self.root, "config", "core.autocrlf", "false")
         ignore = self.root / ".gitignore"
         # Append to the managed fragment file; never overwrite its se-harness block.
         existing = ignore.read_text(encoding="utf-8") if ignore.exists() else ""
         if "gate.json" not in existing:
             ignore.write_text(existing.rstrip("\n") + "\ngate.json\n.engineering-harness.delegation.toml\n*.log\n", encoding="utf-8")
-        self.git("add", "-A")
-        self.git("commit", "-q", "--allow-empty", "-m", message)
-        return self.git("rev-parse", "HEAD")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "--allow-empty", "-m", message)
+        return git(self.root, "rev-parse", "HEAD")
 
     def branch(self, name: str = "wo/001") -> None:
-        self.git("checkout", "-q", "-b", name)
+        git(self.root, "checkout", "-q", "-b", name)
 
     def set_gate(self, conclusion: str | None, *, sha: str | None = None) -> None:
         gate = self.root / "gate.json"
         if conclusion is None:
             gate.unlink(missing_ok=True)
             return
-        payload = {"sha": sha or self.git("rev-parse", "HEAD"), "conclusion": conclusion, "check_run_id": "4242"}
+        payload = {"sha": sha or git(self.root, "rev-parse", "HEAD"), "conclusion": conclusion, "check_run_id": "4242"}
         gate.write_text(json.dumps(payload), encoding="utf-8")
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        out, err = io.StringIO(), io.StringIO()
-        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-            try:
-                code = main(list(arguments))
-            except SystemExit as exc:
-                code = int(exc.code or 0)
-        return code, out.getvalue(), err.getvalue()
 
     def transition(self, target: str, actor: str = DELEGATED_ROLE, *, apply: bool = True) -> tuple[int, dict, str]:
         arguments = ["transition", str(self.root), "--set", f"WO-PRD-001={target}", "--decision", f"WO-PRD-001={actor}", "--json"]
         if apply:
             arguments.append("--apply")
-        code, out, err = self.invoke(*arguments)
+        code, out, err = invoke(*arguments)
         return code, json.loads(out) if out.strip().startswith("{") else {}, err
 
     def status(self) -> str:
@@ -156,7 +142,7 @@ class DelegatedTransitionTests(DelegationFixture):
         self.assertIn(f'decided_by = "{DELEGATED_ROLE}"', text)
         self.assertIn("Delegated DR-WO-START under [delegation] class 'execution'", text)
         self.assertIn("check-run 4242", text)
-        self.assertIn(self.git("rev-parse", "HEAD"), text)
+        self.assertIn(git(self.root, "rev-parse", "HEAD"), text)
 
     def test_red_or_absent_gate_refuses_without_a_write(self) -> None:
         # Scenario 2 and ECP-DLG-003's other conclusions.
@@ -169,7 +155,7 @@ class DelegatedTransitionTests(DelegationFixture):
                 self.assertNotEqual(0, code)
                 blockers = self.blockers(result, err)
                 self.assertIn("WEX-ECP-040", blockers)
-                self.assertIn(self.git("rev-parse", "HEAD")[:7], blockers)
+                self.assertIn(git(self.root, "rev-parse", "HEAD")[:7], blockers)
                 self.assertEqual(before, self.work_order.read_bytes())
         self.set_gate("success", sha="0" * 40)
         code, result, err = self.transition("in_progress")
@@ -201,7 +187,7 @@ class DelegatedTransitionTests(DelegationFixture):
         text = self.work_order.read_text(encoding="utf-8").replace('status = "draft"', 'status = "implemented"', 1)
         self.work_order.write_text(text, encoding="utf-8")
         self.commit("implemented with a ready record"); self.set_gate("success")
-        code, out, err = self.invoke(
+        code, out, err = invoke(
             "transition", str(self.root), "--set", "VREC-001=verified", "--decision", f"VREC-001={DELEGATED_ROLE}", "--json", "--apply",
         )
         self.assertNotEqual(0, code)
@@ -250,7 +236,7 @@ class DelegatedTransitionTests(DelegationFixture):
 
 class RestitutionOverlayTests(DelegationFixture):
     def check(self) -> dict:
-        code, out, err = self.invoke("check", str(self.root), "--artifact", "WO-PRD-001", "--json")
+        code, out, err = invoke("check", str(self.root), "--artifact", "WO-PRD-001", "--json")
         return json.loads(out)
 
     def test_check_tells_the_actor_the_start_is_delegated_when_the_gate_is_green(self) -> None:
@@ -312,12 +298,12 @@ class DelegatedPreparationTests(DelegationFixture):
             "capture-verification", str(self.root), "--id", "VREC-777", "--work-order", "WO-PRD-001", "--verification", "VER-001",
             "--evidence", "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md", "--owner", DELEGATED_ROLE,
         ]
-        code, out, err = self.invoke(*arguments)
+        code, out, err = invoke(*arguments)
         self.assertNotEqual(0, code)
         self.assertIn("WEX-ECP-040", out + err)
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-777.md").exists())
         self.set_gate("success")
-        code, out, err = self.invoke(*arguments)
+        code, out, err = invoke(*arguments)
         self.assertEqual(0, code, out + err)
         record = (self.root / "docs/engineering/product/verification-records/VREC-777.md").read_text(encoding="utf-8")
         self.assertIn(f'prepared_by = "{DELEGATED_ROLE}"', record)

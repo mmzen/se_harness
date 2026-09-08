@@ -5,48 +5,14 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from tests.root_identity_support import load_evaluator_module
+from tests.artifact_support import formal, write
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = REPOSITORY_ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
-
-from validate_engineering_artifacts import validate_repository  # noqa: E402
-
-
-def write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content.strip() + "\n", encoding="utf-8")
-
-
-def formal(
-    artifact_id: str,
-    artifact_type: str,
-    status: str,
-    relations: dict[str, list[str]],
-    *,
-    extra: str = "",
-) -> str:
-    relation_lines = "\n".join(
-        f"{name} = {json.dumps(targets)}" for name, targets in relations.items()
-    )
-    return f'''+++
-id = "{artifact_id}"
-type = "{artifact_type}"
-title = "{artifact_id}"
-status = "{status}"
-owners = ["owner"]
-created = "2026-08-16"
-updated = "2026-08-16"
-{extra.strip()}
-
-[relations]
-{relation_lines}
-+++
-
-# {artifact_id}
-'''
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+validate_repository = _validate_engineering_artifacts.validate_repository
 
 
 class OperatingContractReadinessTests(unittest.TestCase):

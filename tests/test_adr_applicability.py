@@ -14,12 +14,16 @@ from se_harness.cli import main
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
 SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
-
-from generate_harness_dashboard import generate_snapshot  # noqa: E402
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from tests.root_identity_support import load_evaluator_module
+_generate_harness_dashboard = load_evaluator_module("generate_harness_dashboard")
+generate_snapshot = _generate_harness_dashboard.generate_snapshot
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+validate_repository = _validate_engineering_artifacts.validate_repository
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
+import functools
+from tests.artifact_support import formal, write
+complete_formal = functools.partial(formal, complete=True)
 
 
 SIGNIFICANT_ASSESSMENT = {
@@ -36,86 +40,14 @@ NO_DECISION_ASSESSMENT = {
 }
 
 
-def _array(values: list[str]) -> str:
-    return json.dumps(values, ensure_ascii=False)
-
-
-def formal(
-    artifact_id: str,
-    artifact_type: str,
-    status: str,
-    relations: dict[str, list[str]],
-    *,
-    assessment: dict[str, object] | None = None,
-    assessment_raw: str | None = None,
-) -> str:
-    lines = [
-        "+++",
-        f'id = "{artifact_id}"',
-        f'type = "{artifact_type}"',
-        f'title = "{artifact_id} title"',
-        f'status = "{status}"',
-        'owners = ["technical-owner"]',
-        'created = "2026-08-12"',
-        'updated = "2026-08-12"',
-    ]
-    if artifact_type == "requirement":
-        lines.extend(
-            [
-                'statement = "WHEN selected, THE SYSTEM SHALL behave deterministically."',
-                'verification_method = "automated-test"',
-            ]
-        )
-    if artifact_type == "work_order":
-        lines.extend(
-            [
-                "",
-                "[assurance]",
-                'commit_bound_verification = "required"',
-                'rationale = "The fixture changes trusted engineering behavior."',
-                'decided_by = "test-owner"',
-            ]
-        )
-    lines.extend(["", "[relations]"])
-    lines.extend(f"{name} = {_array(values)}" for name, values in relations.items())
-    if assessment is not None:
-        lines.extend(
-            [
-                "",
-                "[decision_assessment]",
-                f'outcome = {json.dumps(assessment.get("outcome"), ensure_ascii=False)}',
-                f'triggers = {_array(assessment.get("triggers", []))}',
-                f'rationale = {json.dumps(assessment.get("rationale"), ensure_ascii=False)}',
-                f'assessed_by = {json.dumps(assessment.get("assessed_by"), ensure_ascii=False)}',
-            ]
-        )
-    elif assessment_raw is not None:
-        lines.extend(["", "[decision_assessment]", assessment_raw])
-    lines.extend(["+++", "", f"# {artifact_type}: {artifact_id}", ""])
-    return "\n".join(lines)
-
-
 class AdrApplicabilityTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
-        standard_repository(self.root, "ADR Sample")
+        standard_repository(self.root)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            code = main(list(arguments))
-        return code, stdout.getvalue(), stderr.getvalue()
-
-    def write(self, relative: str, content: str) -> Path:
-        path = self.root / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
-        return path
 
     def build_chain(
         self,
@@ -127,28 +59,28 @@ class AdrApplicabilityTests(unittest.TestCase):
         shared_adr: bool = False,
     ) -> None:
         base = "docs/engineering/product"
-        self.write(f"{base}/intent/INT-ADR-001.md", formal("INT-ADR-001", "intent", "approved", {}))
-        self.write(
+        write(self.root / f"{base}/intent/INT-ADR-001.md", complete_formal("INT-ADR-001", "intent", "approved", {}))
+        write(self.root / 
             f"{base}/capabilities/CAP-ADR-001.md",
-            formal("CAP-ADR-001", "capability", "approved", {"derives_from": ["INT-ADR-001"]}),
+            complete_formal("CAP-ADR-001", "capability", "approved", {"derives_from": ["INT-ADR-001"]}),
         )
         requirements = ["REQ-ADR-001"]
-        self.write(
+        write(self.root / 
             f"{base}/requirements/REQ-ADR-001.md",
-            formal("REQ-ADR-001", "requirement", "approved", {"derives_from": ["CAP-ADR-001"]}),
+            complete_formal("REQ-ADR-001", "requirement", "approved", {"derives_from": ["CAP-ADR-001"]}),
         )
-        self.write(
+        write(self.root / 
             f"{base}/specifications/SPEC-ADR-001.md",
-            formal("SPEC-ADR-001", "specification", "approved", {"specifies": requirements}),
+            complete_formal("SPEC-ADR-001", "specification", "approved", {"specifies": requirements}),
         )
-        self.write(
+        write(self.root / 
             f"{base}/verification/VER-ADR-001.md",
-            formal("VER-ADR-001", "verification", "approved", {"verifies": requirements}),
+            complete_formal("VER-ADR-001", "verification", "approved", {"verifies": requirements}),
         )
         architecture_ids = ["ARCH-ADR-001"]
-        self.write(
+        write(self.root / 
             f"{base}/architecture/ARCH-ADR-001.md",
-            formal(
+            complete_formal(
                 "ARCH-ADR-001",
                 "architecture",
                 architecture_status,
@@ -158,9 +90,9 @@ class AdrApplicabilityTests(unittest.TestCase):
         )
         if second_architecture:
             architecture_ids.append("ARCH-ADR-002")
-            self.write(
+            write(self.root / 
                 f"{base}/architecture/ARCH-ADR-002.md",
-                formal(
+                complete_formal(
                     "ARCH-ADR-002",
                     "architecture",
                     architecture_status,
@@ -169,19 +101,19 @@ class AdrApplicabilityTests(unittest.TestCase):
                 ),
             )
         decided = architecture_ids if shared_adr else ["ARCH-ADR-001"]
-        self.write(
+        write(self.root / 
             f"{base}/architecture/adr/ADR-ADR-001.md",
-            formal("ADR-ADR-001", "adr", "approved", {"decides": decided}),
+            complete_formal("ADR-ADR-001", "adr", "approved", {"decides": decided}),
         )
         if second_architecture:
-            self.write(
+            write(self.root / 
                 f"{base}/architecture/adr/ADR-ADR-002.md",
-                formal("ADR-ADR-002", "adr", "approved", {"decides": ["ARCH-ADR-002"]}),
+                complete_formal("ADR-ADR-002", "adr", "approved", {"decides": ["ARCH-ADR-002"]}),
             )
         selected = selected_adrs if selected_adrs is not None else ["ADR-ADR-001"]
-        self.write(
+        write(self.root / 
             f"{base}/work-orders/WO-ADR-001.md",
-            formal(
+            complete_formal(
                 "WO-ADR-001",
                 "work_order",
                 "approved",
@@ -198,7 +130,7 @@ class AdrApplicabilityTests(unittest.TestCase):
         arguments = ["preflight", str(self.root), "--work-order", "WO-ADR-001"]
         if json_output:
             arguments.append("--json")
-        return self.invoke(*arguments)
+        return invoke(*arguments)
 
     def test_validator_enforces_assessment_shape_and_controlled_values(self) -> None:
         self.build_chain()
@@ -208,7 +140,7 @@ class AdrApplicabilityTests(unittest.TestCase):
         valid = architecture.read_text(encoding="utf-8")
 
         invalid_variants = {
-            "missing": formal(
+            "missing": complete_formal(
                 "ARCH-ADR-001",
                 "architecture",
                 "approved",

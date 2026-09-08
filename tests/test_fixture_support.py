@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from se_harness.cli import main
+from tests.cli_support import invoke
 from tests import fixture_support
 from tests.fixture_support import standard_repository
 
@@ -22,8 +22,8 @@ class FixtureSupportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             base = Path(temporary)
             direct = base / "direct"
-            with contextlib.redirect_stdout(io.StringIO()):
-                self.assertEqual(0, main(["init", str(direct), "--project-name", "Cache Equality"]))
+            code, _, error = invoke("init", str(direct), "--project-name", "Cache Equality")
+            self.assertEqual(0, code, error)
             before = len(fixture_support.initialisations())
             first = standard_repository(base / "first", "Cache Equality")
             second = standard_repository(base / "second", "Cache Equality")
