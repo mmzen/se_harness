@@ -23,6 +23,7 @@ from tests.skill_contract_support import (
     load_skill_contract,
     parse_skill_contract_bytes,
 )
+from tests.root_identity_support import load_module
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -52,27 +53,6 @@ def snapshot(root: Path) -> dict[str, str]:
         for path in root.rglob("*")
         if path.is_file()
     }
-
-
-def load_script(name: str, path: Path):
-    spec = importlib.util.spec_from_file_location(name, path)
-    if spec is None or spec.loader is None:
-        raise AssertionError(f"could not load {path}")
-    module = importlib.util.module_from_spec(spec)
-    prior = sys.dont_write_bytecode
-    prior_module = sys.modules.get(name)
-    sys.modules[name] = module
-    sys.dont_write_bytecode = True
-    try:
-        spec.loader.exec_module(module)
-    finally:
-        sys.dont_write_bytecode = prior
-        if prior_module is None:
-            sys.modules.pop(name, None)
-        else:
-            sys.modules[name] = prior_module
-    return module
-
 
 
 class SkillContractTests(unittest.TestCase):
@@ -281,9 +261,7 @@ class OperatorBriefAndSupportTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.brief = load_script(
-            "technical_communication_brief_check", OPERATOR_BRIEF
-        )
+        cls.brief = load_module(OPERATOR_BRIEF, "technical_communication_brief_check")
 
     def brief_request(
         self,
@@ -522,7 +500,7 @@ class OperatorBriefAndSupportTests(unittest.TestCase):
 
 
 class HarnessOrientBlackBoxTests(unittest.TestCase):
-    def invoke(
+    def run_orient(
         self,
         target: Path,
         *,
@@ -565,7 +543,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
             before = snapshot(target)
-            first = self.invoke(target, artifact="WO-TST-001")
+            first = self.run_orient(target, artifact="WO-TST-001")
             after = snapshot(target)
 
             self.assertEqual(0, first.returncode, first.stderr)
@@ -590,7 +568,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
             (target / "se_harness").mkdir()
             (target / "se_harness/__init__.py").write_text('__version__ = "999.0.0"\n', encoding="utf-8")
             (target / "private.txt").write_text("credential=do-not-expose\n", encoding="utf-8")
-            completed = self.invoke(target)
+            completed = self.run_orient(target)
 
             self.assertEqual(0, completed.returncode, completed.stderr)
             self.assertNotIn("999.0.0", completed.stdout)
@@ -602,7 +580,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_exact_0_5_without_check_degrades_only_selected_scope(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(target, mode="no-check", version="0.5.0", artifact="WO-TST-001")
+            completed = self.run_orient(target, mode="no-check", version="0.5.0", artifact="WO-TST-001")
 
             self.assertEqual(0, completed.returncode, completed.stderr)
             result = json.loads(completed.stdout)
@@ -621,7 +599,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
             before = snapshot(target)
-            completed = self.invoke(target, mode="identity-fail")
+            completed = self.run_orient(target, mode="identity-fail")
 
             self.assertEqual(2, completed.returncode)
             self.assertEqual(before, snapshot(target))
@@ -635,7 +613,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_invalid_graph_blocks_before_inspection(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(target, mode="invalid-graph")
+            completed = self.run_orient(target, mode="invalid-graph")
 
             self.assertEqual(2, completed.returncode)
             result = json.loads(completed.stdout)
@@ -648,13 +626,13 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_malformed_required_json_fails_and_large_output_is_bounded(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            malformed = self.invoke(target, mode="malformed-validation")
+            malformed = self.run_orient(target, mode="malformed-validation")
             self.assertEqual(2, malformed.returncode)
             malformed_result = json.loads(malformed.stdout)
             self.assertEqual("failed", malformed_result["outcome"])
             self.assertIn("AEXORI021", malformed.stdout)
 
-            large = self.invoke(target, mode="large-output")
+            large = self.run_orient(target, mode="large-output")
             self.assertEqual(2, large.returncode)
             large_result = json.loads(large.stdout)
             self.assertEqual("blocked", large_result["outcome"])
@@ -663,7 +641,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_managed_integrity_diagnostic_redacts_secret_and_host_paths(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(target, mode="doctor-fail")
+            completed = self.run_orient(target, mode="doctor-fail")
 
             self.assertEqual(2, completed.returncode)
             result = json.loads(completed.stdout)
@@ -675,7 +653,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_preflight_is_explicit_and_cannot_be_rendered_as_approval(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(
+            completed = self.run_orient(
                 target,
                 mode="preflight-blocked",
                 artifact="WO-TST-001",
@@ -691,7 +669,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
     def test_preflight_rejects_non_work_order_selection_without_running_evaluator(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
-            completed = self.invoke(target, artifact="REQ-TST-001", preflight_phase="start")
+            completed = self.run_orient(target, artifact="REQ-TST-001", preflight_phase="start")
 
             self.assertEqual(2, completed.returncode)
             result = json.loads(completed.stdout)
@@ -702,7 +680,7 @@ class HarnessOrientBlackBoxTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             target = self.make_target(Path(temporary))
             before = snapshot(target)
-            old = self.invoke(target, version="0.4.9")
+            old = self.run_orient(target, version="0.4.9")
             self.assertEqual(2, old.returncode)
             self.assertEqual([], json.loads(old.stdout)["execution_receipt"]["execution"]["operations"])
 

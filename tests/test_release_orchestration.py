@@ -23,33 +23,20 @@ from repository_tools.release_distribution import (
     validate_distribution_block,
     validate_record_distribution,
 )
+from tests.git_support import git
+from tests.root_identity_support import load_module
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_PATH = REPOSITORY_ROOT / ".github" / "scripts" / "publish_release.py"
-SPEC = importlib.util.spec_from_file_location("release_orchestration_test_module", SCRIPT_PATH)
-if SPEC is None or SPEC.loader is None:
-    raise RuntimeError("cannot load release orchestration module")
-RELEASE = importlib.util.module_from_spec(SPEC)
-sys.modules[SPEC.name] = RELEASE
-SPEC.loader.exec_module(RELEASE)
+RELEASE = load_module(SCRIPT_PATH, "release_orchestration_test_module")
 
 MANIFEST_SCRIPT = REPOSITORY_ROOT / "scripts" / "create_release_bundle_manifest.py"
 POLICY_SCRIPT = REPOSITORY_ROOT / "scripts" / "validate_release_distributions.py"
-MANIFEST_SPEC = importlib.util.spec_from_file_location("release_manifest_test_module", MANIFEST_SCRIPT)
-if MANIFEST_SPEC is None or MANIFEST_SPEC.loader is None:
-    raise RuntimeError("cannot load release manifest module")
-MANIFEST = importlib.util.module_from_spec(MANIFEST_SPEC)
-sys.modules[MANIFEST_SPEC.name] = MANIFEST
-MANIFEST_SPEC.loader.exec_module(MANIFEST)
+MANIFEST = load_module(MANIFEST_SCRIPT, "release_manifest_test_module")
 
 SURFACE_SCRIPT = REPOSITORY_ROOT / "scripts" / "check_portable_release_surface.py"
-SURFACE_SPEC = importlib.util.spec_from_file_location("portable_release_surface_test_module", SURFACE_SCRIPT)
-if SURFACE_SPEC is None or SURFACE_SPEC.loader is None:
-    raise RuntimeError("cannot load portable release surface module")
-SURFACE = importlib.util.module_from_spec(SURFACE_SPEC)
-sys.modules[SURFACE_SPEC.name] = SURFACE
-SURFACE_SPEC.loader.exec_module(SURFACE)
+SURFACE = load_module(SURFACE_SCRIPT, "portable_release_surface_test_module")
 
 
 def distribution_values(version: str = "1.2.3") -> dict[str, object]:
@@ -142,12 +129,7 @@ class DistributionManifestTests(unittest.TestCase):
                 SURFACE.inspect_repository(root)
 
     def test_manifest_producer_hashes_exact_files_and_candidate_tree(self) -> None:
-        commit = subprocess.run(
-            ["git", "-c", f"safe.directory={REPOSITORY_ROOT.as_posix()}", "-C", str(REPOSITORY_ROOT), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
+        commit = git(REPOSITORY_ROOT, "-c", f"safe.directory={REPOSITORY_ROOT.as_posix()}", "rev-parse", "HEAD")
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             wheel = root / "se_harness-1.2.3-py3-none-any.whl"
@@ -221,21 +203,16 @@ class DistributionManifestTests(unittest.TestCase):
                 )
 
     def _binding_repository(self, root: Path) -> tuple[str, dict[str, object], Path]:
-        subprocess.run(["git", "init", "-q", str(root)], check=True)
-        subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
-        subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
+        git(root, "init", "-q")
+        git(root, "config", "user.name", "Harness Test")
+        git(root, "config", "user.email", "harness@example.invalid")
         (root / "source.txt").write_text("candidate\n", encoding="utf-8")
         (root / "release").mkdir()
         shutil.copyfile(REPOSITORY_ROOT / "release" / "build-recipe.json", root / "release" / "build-recipe.json")
         shutil.copyfile(REPOSITORY_ROOT / "release" / "build-toolchain.lock", root / "release" / "build-toolchain.lock")
-        subprocess.run(["git", "-C", str(root), "add", "source.txt", "release"], check=True)
-        subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "candidate"], check=True)
-        commit = subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
+        git(root, "add", "source.txt", "release")
+        git(root, "commit", "-q", "-m", "candidate")
+        commit = git(root, "rev-parse", "HEAD")
         wheel = root / "se_harness-1.2.3-py3-none-any.whl"
         sdist = root / "se_harness-1.2.3.tar.gz"
         wheel.write_bytes(b"wheel")
@@ -388,15 +365,13 @@ releases_work = ["WO-TST-001"]
     def test_schema_1_is_historical_released_only(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            subprocess.run(["git", "init", "-q", str(root)], check=True)
-            subprocess.run(["git", "-C", str(root), "config", "user.name", "Harness Test"], check=True)
-            subprocess.run(["git", "-C", str(root), "config", "user.email", "harness@example.invalid"], check=True)
+            git(root, "init", "-q")
+            git(root, "config", "user.name", "Harness Test")
+            git(root, "config", "user.email", "harness@example.invalid")
             (root / "source.txt").write_text("historical\n", encoding="utf-8", newline="\n")
-            subprocess.run(["git", "-C", str(root), "add", "source.txt"], check=True)
-            subprocess.run(["git", "-C", str(root), "commit", "-q", "-m", "historical"], check=True)
-            commit = subprocess.run(
-                ["git", "-C", str(root), "rev-parse", "HEAD"], check=True, capture_output=True, text=True
-            ).stdout.strip()
+            git(root, "add", "source.txt")
+            git(root, "commit", "-q", "-m", "historical")
+            commit = git(root, "rev-parse", "HEAD")
             wheel = root / "se_harness-1.2.3-py3-none-any.whl"
             sdist = root / "se_harness-1.2.3.tar.gz"
             wheel.write_bytes(b"wheel")

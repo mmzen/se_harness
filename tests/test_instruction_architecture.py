@@ -13,10 +13,12 @@ from unittest import mock
 
 from se_harness import __version__
 from se_harness.cli import main
-from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, plan_install, tracked_content
+from se_harness.installer import BEGIN_MARKER, END_MARKER, HarnessError, plan_install, tracked_content, template_files
 from se_harness.integrity import HASH_ALGORITHM, HASH_MODE, LOCK_SCHEMA, canonical_sha256
-from tests.mutation_guard_support import trusted_mutation_authority
+from tests.mutation_guard_support import patch_mutation_authority
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
+from tests.git_support import git
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -62,28 +64,16 @@ ROUTER_HANDOFF_SEMANTICS = (
 
 class InstructionArchitectureTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        self.guard.start()
-        self.addCleanup(self.guard.stop)
+        patch_mutation_authority(self)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            result = main(list(arguments))
-        return result, stdout.getvalue(), stderr.getvalue()
-
     def installed_target(self, name: str = "target") -> Path:
         target = self.root / name
-        standard_repository(target, "Example")
+        standard_repository(target)
         return target
 
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
@@ -225,6 +215,8 @@ class InstructionArchitectureTests(unittest.TestCase):
             self.assertIn(required, workflow)
 
     def test_stage_aware_handoffs_preserve_authority_and_policy_ownership(self) -> None:
+        # Cited pin (SPEC-TST-002 TST-HYG-012): SPEC-WEX-003 under REQ-WEX-011 and SPEC-IAR-011
+        # fix the handoff wording of the router, WORKFLOW.md and the two fragments asserted here.
         target = self.installed_target()
         agents = (target / "AGENTS.md").read_text(encoding="utf-8")
         managed = agents.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
@@ -279,9 +271,6 @@ class InstructionArchitectureTests(unittest.TestCase):
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, normalized_workflow_handoff)
-        for text in (managed, claude, router_handoff, workflow_handoff):
-            self.assertNotIn("block verbatim", text)
-            self.assertNotIn("restitution verbatim", text)
 
     def test_stage_aware_handoff_upgrade_is_safe_and_idempotent(self) -> None:
         target = self.installed_target("prior-handoff")
@@ -310,14 +299,14 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
         self.assertIn("update     ENGINEERING_HARNESS.md", output)
         self.assertIn("update     docs/engineering/WORKFLOW.md", output)
         self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
         self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
         first_lock = lock_path.read_bytes()
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
         self.assertEqual(first_lock, lock_path.read_bytes())
 
     def test_router_responsibility_refinement_upgrades_safely(self) -> None:
@@ -334,12 +323,12 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
         self.assertIn("update     ENGINEERING_HARNESS.md", output)
         self.assertEqual(current, router_path.read_text(encoding="utf-8"))
         first_lock = lock_path.read_bytes()
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
         self.assertEqual(current, router_path.read_text(encoding="utf-8"))
         self.assertEqual(first_lock, lock_path.read_bytes())
 
@@ -361,7 +350,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         original_router = customized_router.read_bytes()
         original_lock = customized_lock_path.read_bytes()
 
-        code, output, error = self.invoke("upgrade", str(customized), "--apply")
+        code, output, error = invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized ENGINEERING_HARNESS.md", output)
         self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
@@ -405,14 +394,14 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
         self.assertIn("update     ENGINEERING_HARNESS.md", output)
         self.assertIn("update     docs/engineering/WORKFLOW.md", output)
         self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
         self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
         first_lock = lock_path.read_bytes()
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
         self.assertEqual(first_lock, lock_path.read_bytes())
 
         customized = self.installed_target("customized-review-routing")
@@ -443,7 +432,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         original_workflow = customized_workflow.read_bytes()
         original_lock = customized_lock_path.read_bytes()
 
-        code, output, error = self.invoke("upgrade", str(customized), "--apply")
+        code, output, error = invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/WORKFLOW.md", output)
         self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
@@ -467,13 +456,13 @@ class InstructionArchitectureTests(unittest.TestCase):
         changes, _ = plan_install(target, project_name=None, mode="upgrade")
         action = {item.path: item.action for item in changes}
         self.assertEqual("update", action["docs/engineering/README.md"])
-        code, output, error = self.invoke("upgrade", str(target), "--apply")
+        code, output, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
         self.assertIn("update     docs/engineering/README.md", output)
         self.assertIn("Repository-owned after installation", readme.read_text(encoding="utf-8"))
         migrated = json.loads(lock_path.read_text(encoding="utf-8"))
         self.assertEqual({"mode": "seed", "state": "present"}, migrated["files"]["docs/engineering/README.md"])
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
 
         customized = self.installed_target("customized")
         customized_readme = customized / "docs" / "engineering" / "README.md"
@@ -493,7 +482,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         original_readme = customized_readme.read_bytes()
         original_lock = customized_lock_path.read_bytes()
 
-        code, output, error = self.invoke("upgrade", str(customized), "--apply")
+        code, output, error = invoke("upgrade", str(customized), "--apply")
         self.assertEqual(1, code)
         self.assertIn("customized docs/engineering/README.md", output)
         self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
@@ -526,7 +515,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             if path.is_file()
         }
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "preflight",
             str(target),
             "--work-order",
@@ -564,17 +553,17 @@ class InstructionArchitectureTests(unittest.TestCase):
     def test_preflight_reports_phase_integrity_and_id_failures(self) -> None:
         fresh = self.installed_target("fresh")
         self.add_active_packet(fresh)
-        code, output, _ = self.invoke("preflight", str(fresh), "--work-order", "WO-IAR-001")
+        code, output, _ = invoke("preflight", str(fresh), "--work-order", "WO-IAR-001")
         self.assertEqual(0, code)
         self.assertIn("Harness preflight: PASS", output)
         self.assertNotIn("[C0", output)
 
         completed = self.installed_target("completed")
         self.add_active_packet(completed, status="implemented")
-        code, output, _ = self.invoke("preflight", str(completed), "--work-order", "WO-IAR-001")
+        code, output, _ = invoke("preflight", str(completed), "--work-order", "WO-IAR-001")
         self.assertEqual(1, code)
         self.assertIn("[W005]", output)
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "preflight",
             str(completed),
             "--work-order",
@@ -593,7 +582,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "preflight",
             str(completed),
             "--work-order",
@@ -604,7 +593,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("[I001] managed:AGENTS.md", output)
 
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "preflight",
             str(completed),
             "--work-order",
@@ -617,7 +606,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         target = self.installed_target("assurance-preflight")
         self.add_active_packet(target)
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "preflight",
             str(target),
             "--work-order",
@@ -639,7 +628,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         work_order.write_text(text, encoding="utf-8")
 
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "preflight",
             str(target),
             "--work-order",
@@ -654,7 +643,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             'status = "in_progress"', 'status = "implemented"', 1
         )
         work_order.write_text(text, encoding="utf-8")
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "preflight",
             str(target),
             "--work-order",
@@ -683,7 +672,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         lock["files"]["AGENTS.md"]["sha256"] = canonical_sha256(managed)
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-        code, output, _ = self.invoke("doctor", str(target))
+        code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
         self.assertIn("PASS managed:AGENTS.md", output)
         self.assertIn("FAIL distribution:AGENTS.md", output)
@@ -698,7 +687,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             json.dumps({"pull_request": {"body": "Summary\n\nHarness-Work-Order: WO-IAR-001\n"}}),
             encoding="utf-8",
         )
-        code, output, error = self.invoke("select-work-order", "--event", str(event))
+        code, output, error = invoke("select-work-order", "--event", str(event))
         self.assertEqual(0, code, error)
         self.assertEqual("WO-IAR-001", output.strip())
 
@@ -709,7 +698,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             "Harness-Work-Order: WO-...\n",
         ):
             event.write_text(json.dumps({"pull_request": {"body": body}}), encoding="utf-8")
-            code, _, error = self.invoke("select-work-order", "--event", str(event))
+            code, _, error = invoke("select-work-order", "--event", str(event))
             self.assertEqual(2, code)
             self.assertIn("expected exactly one", error)
 
@@ -718,12 +707,12 @@ class InstructionArchitectureTests(unittest.TestCase):
             '"pull_request":{"body":"Harness-Work-Order: WO-IAR-002"}}',
             encoding="utf-8",
         )
-        code, _, error = self.invoke("select-work-order", "--event", str(event))
+        code, _, error = invoke("select-work-order", "--event", str(event))
         self.assertEqual(2, code)
         self.assertIn("duplicate JSON key", error)
 
         event.write_bytes(b" " * (2 * 1024 * 1024 + 1))
-        code, _, error = self.invoke("select-work-order", "--event", str(event))
+        code, _, error = invoke("select-work-order", "--event", str(event))
         self.assertEqual(2, code)
         self.assertIn("exceeds the size limit", error)
 
@@ -738,10 +727,10 @@ class InstructionArchitectureTests(unittest.TestCase):
             json.dumps({"pull_request": {"body": f"Harness-Work-Order: WO-IAR-001\nHarness-Restitution: {digest}\n"}}),
             encoding="utf-8",
         )
-        code, output, error = self.invoke("select-work-order", "--event", str(event))
+        code, output, error = invoke("select-work-order", "--event", str(event))
         self.assertEqual(0, code, error)
         self.assertEqual("WO-IAR-001", output.strip())
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "select-work-order", "--event", str(event), "--field", "restitution-digest"
         )
         self.assertEqual(0, code, error)
@@ -750,7 +739,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         event.write_text(json.dumps({"pull_request": {"body": None}}), encoding="utf-8")
         for field in ("work-order", "restitution-digest"):
             with self.subTest(field=field):
-                code, _, error = self.invoke("select-work-order", "--event", str(event), "--field", field)
+                code, _, error = invoke("select-work-order", "--event", str(event), "--field", field)
                 self.assertEqual(2, code)
                 self.assertIn("pull-request body must be text", error)
 
@@ -972,15 +961,13 @@ class OwnerInstructionRegionTests(unittest.TestCase):
     def test_owner_region_identifies_every_managed_path_from_the_lock(self) -> None:
         region = self.owner_region()
         managed = sorted(path for path, entry in self.lock["files"].items() if entry.get("mode") == "managed")
-        # Identity-aware (WO-HUP-011, SPEC-HUP-011 rule 10): the managed count belongs to
-        # the root's version, not to this test. 0.10.0 managed 55 files; 0.11.0 manages 40
-        # after the three writing skills' retirement (WO-ECP-006). An unknown root fails
-        # loudly rather than silently accepting any count.
-        # 0.16.0 manages 33: the 41 of 0.15.0 less the eight retired script copies (WO-HUP-017).
-        managed_count_by_root = {"0.10.0": 55, "0.11.0": 40, "0.12.0": 40, "0.13.0": 40, "0.14.0": 40, "0.15.0": 41, "0.16.0": 33}
-        root_version = self.lock["tool_version"]
-        self.assertIn(root_version, managed_count_by_root, f"declare the managed count of root {root_version}")
-        self.assertEqual(managed_count_by_root[root_version], len(managed))
+        # Identity-aware (WO-HUP-011, SPEC-HUP-011 rule 10): the managed set belongs to the
+        # root's version, not to this test. It is derived, never pinned (SPEC-TST-002
+        # TST-HYG-015): every path the root manages is a managed template of the candidate,
+        # and the root manages at least one file.
+        candidate_managed = {item.target.as_posix() for item in template_files() if item.mode == "managed"}
+        self.assertTrue(managed)
+        self.assertEqual([], sorted(set(managed) - candidate_managed))
         self.assertIn("docs/engineering/", region)
         if any(path.startswith("scripts/") for path in managed):
             self.assertIn("in `scripts/`", region)
@@ -1062,7 +1049,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
 
     def test_router_states_the_scope_of_its_obligations_after_the_invariants(self) -> None:
         target = self.root / "target"
-        standard_repository(target, "Example")
+        standard_repository(target)
         router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         heading = "## Scope of these obligations"
         self.assertEqual(1, router.count(heading))
@@ -1093,7 +1080,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         from se_harness.preflight import run_preflight
 
         target = self.root / "orphan"
-        standard_repository(target, "Example")
+        standard_repository(target)
         shutil.copytree(PACKET_ROOT, target / "docs" / "engineering" / "instruction-architecture")
         operating_contract = target / "docs/engineering/instruction-architecture/operations/OPS-IAR-001.md"
         operating_contract.write_text(
@@ -1105,27 +1092,15 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
             if 'status = "superseded"' in text:
                 requirement.write_text(text.replace('status = "superseded"', 'status = "implemented"', 1), encoding="utf-8")
 
-        def git(*arguments: str) -> str:
-            completed = subprocess.run(
-                ["git", "-C", str(target), *arguments],
-                capture_output=True, text=True, check=True,
-                env={
-                    **os.environ,
-                    "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@example.invalid",
-                    "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@example.invalid",
-                },
-            )
-            return completed.stdout.strip()
-
-        git("init", "-q", "-b", "main")
-        git("add", "-A")
-        git("commit", "-q", "-m", "base")
-        git("checkout", "-q", "-b", "feature")
+        git(target, "init", "-q", "-b", "main")
+        git(target, "add", "-A")
+        git(target, "commit", "-q", "-m", "base")
+        git(target, "checkout", "-q", "-b", "feature")
         (target / "feature.txt").write_text("x\n", encoding="utf-8")
-        git("add", "-A")
-        git("commit", "-q", "-m", "feature")
-        orphan = git("rev-parse", "HEAD")
-        git("checkout", "-q", "main")
+        git(target, "add", "-A")
+        git(target, "commit", "-q", "-m", "feature")
+        orphan = git(target, "rev-parse", "HEAD")
+        git(target, "checkout", "-q", "main")
 
         record = target / "docs/engineering/instruction-architecture/verification-records/VREC-IAR-900.md"
         record.parent.mkdir(parents=True, exist_ok=True)

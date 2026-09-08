@@ -13,13 +13,11 @@ from unittest import mock
 from se_harness import release_unit
 from se_harness.cli import main
 from se_harness.installer import HarnessError
+from tests.cli_support import invoke
+from tests.git_support import git
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates/RELEASE_CONTRACT.template.md"
-
-
-def _git(root: Path, *arguments: str) -> str:
-    return subprocess.run(["git", "-C", str(root), *arguments], capture_output=True, text=True, check=True).stdout.strip()
 
 
 class _History:
@@ -27,27 +25,27 @@ class _History:
 
     def __init__(self, root: Path) -> None:
         self.root = root
-        _git(root, "init", "-q", "-b", "main")
-        _git(root, "config", "user.email", "t@example.invalid")
-        _git(root, "config", "user.name", "t")
-        _git(root, "config", "commit.gpgsign", "false")
+        git(root, "init", "-q", "-b", "main")
+        git(root, "config", "user.email", "t@example.invalid")
+        git(root, "config", "user.name", "t")
+        git(root, "config", "commit.gpgsign", "false")
         self.commit("base", trailer=None)
-        _git(root, "tag", "v1")
+        git(root, "tag", "v1")
 
     def commit(self, name: str, *, trailer: str | None) -> str:
         (self.root / f"{name}.txt").write_text(name, encoding="utf-8")
-        _git(self.root, "add", "-A")
+        git(self.root, "add", "-A")
         message = f"{name}\n\n" + (f"Harness-Work-Order: {trailer}\n" if trailer else "")
-        _git(self.root, "commit", "-q", "-m", message)
-        return _git(self.root, "rev-parse", "HEAD")
+        git(self.root, "commit", "-q", "-m", message)
+        return git(self.root, "rev-parse", "HEAD")
 
     def merge(self, branch: str, commits: list[tuple[str, str | None]]) -> str:
-        _git(self.root, "checkout", "-q", "-b", branch)
+        git(self.root, "checkout", "-q", "-b", branch)
         for name, trailer in commits:
             self.commit(name, trailer=trailer)
-        _git(self.root, "checkout", "-q", "main")
-        _git(self.root, "merge", "-q", "--no-ff", "--no-edit", "-m", f"Merge pull request from {branch}", branch)
-        return _git(self.root, "rev-parse", "HEAD")
+        git(self.root, "checkout", "-q", "main")
+        git(self.root, "merge", "-q", "--no-ff", "--no-edit", "-m", f"Merge pull request from {branch}", branch)
+        return git(self.root, "rev-parse", "HEAD")
 
 
 STATUSES = {"WO-X-001": ("implemented", True), "WO-X-002": ("implemented", False), "WO-X-003": ("in_progress", True)}
@@ -88,7 +86,7 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
         h = self.history
         h.merge("one", [("a1", "WO-X-001")])
         untraced = h.merge("docs", [("d1", None)])
-        candidate = _git(h.root, "rev-parse", "HEAD")
+        candidate = git(h.root, "rev-parse", "HEAD")
         with self.assertRaisesRegex(HarnessError, "full commit id"):
             release_unit.derive_release_unit(h.root, from_ref="v1", to_ref=candidate, exempt=["abc"], lookup=lookup)
         unit = release_unit.derive_release_unit(h.root, from_ref="v1", to_ref=candidate, exempt=[untraced], lookup=lookup)
@@ -103,7 +101,7 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
     def test_contract_comparison_reports_e_cip_001_on_every_difference(self) -> None:
         h = self.history
         h.merge("one", [("a1", "WO-X-001")])
-        candidate = _git(h.root, "rev-parse", "HEAD")
+        candidate = git(h.root, "rev-parse", "HEAD")
         unit = release_unit.derive_release_unit(h.root, from_ref="v1", to_ref=candidate, lookup=lookup)
         exact = {"candidate_commit": candidate, "previous_release_tag": "v1", "relations": {"gates": ["WO-X-001", "VER-X-001"]}}
         self.assertEqual([], release_unit.compare_with_contract(unit, exact))
@@ -114,10 +112,7 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
         self.assertIn("missing from gates: WO-X-001; not in the derivation: WO-X-002", findings[2])
 
     def test_cli_is_registered_and_the_template_names_the_unit(self) -> None:
-        output = io.StringIO()
-        with contextlib.redirect_stdout(output), self.assertRaises(SystemExit):
-            main(["release-unit", "--help"])
-        text = output.getvalue()
+        _, text, _ = invoke("release-unit", "--help")
         for option in ("--from", "--to", "--exempt", "--contract", "--json", "--toml"):
             self.assertIn(option, text)
         template = TEMPLATE.read_text(encoding="utf-8")
@@ -138,23 +133,19 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
 
         catalog = {
             "WO-X-001": _Artifact({"type": "work_order", "status": "implemented", "execution_scope": {"paths": ["se_harness/x.py"]}}),
-            "REL-X-001": _Artifact({"type": "release_contract", "candidate_commit": _git(h.root, "rev-parse", "HEAD"), "previous_release_tag": "v1", "relations": {"gates": ["WO-X-001"]}}),
+            "REL-X-001": _Artifact({"type": "release_contract", "candidate_commit": git(h.root, "rev-parse", "HEAD"), "previous_release_tag": "v1", "relations": {"gates": ["WO-X-001"]}}),
         }
         with (
             mock.patch("se_harness.workflow._validation", return_value=(None, None)),
             mock.patch("se_harness.workflow._catalog", return_value=catalog),
         ):
-            output = io.StringIO()
-            with contextlib.redirect_stdout(output):
-                code = main(["release-unit", str(h.root), "--from", "v1", "--to", "HEAD", "--contract", "REL-X-001"])
-            self.assertEqual(0, code, output.getvalue())
-            self.assertIn("Release unit: COMPLETE", output.getvalue())
-            self.assertIn("WO-X-001: implemented; packaged; 1 commit(s)", output.getvalue())
-            output = io.StringIO()
-            with contextlib.redirect_stdout(output):
-                code = main(["release-unit", str(h.root), "--from", "v1", "--to", "HEAD", "--toml"])
+            code, output, _ = invoke("release-unit", str(h.root), "--from", "v1", "--to", "HEAD", "--contract", "REL-X-001")
+            self.assertEqual(0, code, output)
+            self.assertIn("Release unit: COMPLETE", output)
+            self.assertIn("WO-X-001: implemented; packaged; 1 commit(s)", output)
+            code, output, _ = invoke("release-unit", str(h.root), "--from", "v1", "--to", "HEAD", "--toml")
             self.assertEqual(0, code)
-            self.assertEqual('gates = ["WO-X-001"]\n', output.getvalue())
+            self.assertEqual('gates = ["WO-X-001"]\n', output)
 
 
 class ApprovalPredicateTests(unittest.TestCase):
@@ -162,30 +153,28 @@ class ApprovalPredicateTests(unittest.TestCase):
 
     def setUp(self) -> None:
         from tests.fixture_support import standard_repository
-        from tests.mutation_guard_support import trusted_mutation_authority
-        from tests.test_revision_provenance import create_additional_chain, create_base_chain
+        from tests.mutation_guard_support import patch_mutation_authority
+        from tests.artifact_support import create_additional_chain, create_base_chain
 
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Release Unit Fixture")
-        guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
-        guard.start()
-        self.addCleanup(guard.stop)
+        standard_repository(self.root)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         create_additional_chain(self.root)  # WO-002 exists in the catalog but no commit carries its trailer
         (self.root / "docs/engineering/product/release/REL-001.md").unlink()
-        _git(self.root, "init", "-q", "-b", "main")
-        _git(self.root, "config", "user.email", "t@example.invalid")
-        _git(self.root, "config", "user.name", "t")
-        _git(self.root, "config", "commit.gpgsign", "false")
-        _git(self.root, "add", "-A")
-        _git(self.root, "commit", "-q", "-m", "base")
-        _git(self.root, "tag", "v1")
+        git(self.root, "init", "-q", "-b", "main")
+        git(self.root, "config", "user.email", "t@example.invalid")
+        git(self.root, "config", "user.name", "t")
+        git(self.root, "config", "commit.gpgsign", "false")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "base")
+        git(self.root, "tag", "v1")
         (self.root / "feature.txt").write_text("done", encoding="utf-8")
-        _git(self.root, "add", "-A")
-        _git(self.root, "commit", "-q", "-m", "feature\n\nHarness-Work-Order: WO-001\n")
-        self.candidate = _git(self.root, "rev-parse", "HEAD")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "feature\n\nHarness-Work-Order: WO-001\n")
+        self.candidate = git(self.root, "rev-parse", "HEAD")
 
     def contract(self, *, gates: list[str], candidate: bool = True, exemptions: list[str] | None = None) -> None:
         front = [
@@ -200,10 +189,8 @@ class ApprovalPredicateTests(unittest.TestCase):
         (self.root / "docs/engineering/product/release/REL-001.md").write_text("\n".join(front), encoding="utf-8")
 
     def approve(self) -> tuple[int, str]:
-        output, error = io.StringIO(), io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(["transition", str(self.root), "--set", "REL-001=approved", "--decision", "REL-001=release-owner", "--apply"])
-        return code, output.getvalue() + error.getvalue()
+        code, output, error = invoke("transition", str(self.root), "--set", "REL-001=approved", "--decision", "REL-001=release-owner", "--apply")
+        return code, output + error
 
     def test_a_differing_census_is_refused_and_a_matching_one_is_approved(self) -> None:
         self.contract(gates=["WO-001", "WO-002"])
@@ -225,9 +212,9 @@ class ApprovalPredicateTests(unittest.TestCase):
 
     def test_an_untraced_commit_needs_an_exemption(self) -> None:
         (self.root / "note.txt").write_text("untraced", encoding="utf-8")
-        _git(self.root, "add", "-A")
-        _git(self.root, "commit", "-q", "-m", "no trailer")
-        self.candidate = _git(self.root, "rev-parse", "HEAD")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "no trailer")
+        self.candidate = git(self.root, "rev-parse", "HEAD")
         untraced = self.candidate
         self.contract(gates=["WO-001"])
         code, message = self.approve()

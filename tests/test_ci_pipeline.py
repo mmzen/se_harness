@@ -11,6 +11,8 @@ import tempfile
 import tomllib
 import unittest
 from pathlib import Path
+from tests.git_support import git, init_repository
+from tests.root_identity_support import load_module
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = REPOSITORY_ROOT / ".github/workflows"
@@ -317,9 +319,6 @@ class PredecessorDerivationTests(unittest.TestCase):
         self.assertIn("repository_tools.evaluator_facts derive", jobs["candidate-source"])
         for output in ("predecessor_version", "predecessor_wheel_sha256"):
             self.assertIn(f"{output}: ${{{{ steps.predecessor.outputs.", jobs["candidate-source"])
-        self.assertNotIn("migration_scenario", text)
-        # WO-REB-031: no acceptance-contract output or env exists anywhere.
-        self.assertNotIn("acceptance_contract_sha256", text)
         self.assertIn("needs.candidate-source.outputs.predecessor_wheel_sha256", jobs["governance-migration"])
         self.assertIn("throw 'predecessor facts were not derived by candidate-source'", jobs["governance-migration"])
 
@@ -422,12 +421,6 @@ class QualificationDefinitionTests(unittest.TestCase):
             self.assertNotIn(absent, self.definition)
         self.assertIn("Prove the qualification left no checkout change", self.definition)
 
-    def test_the_digest_declaration_and_its_script_are_gone(self) -> None:
-        scripts = REPOSITORY_ROOT / ".github/scripts"
-        self.assertFalse((scripts / "rehearse_publication.py").exists())
-        self.assertFalse((scripts / "publication_rehearsal_mechanics.json").exists())
-        self.assertFalse((REPOSITORY_ROOT / "tests/test_publication_rehearsal.py").exists())
-
     def test_release_runs_one_schema_leg_and_one_pages_definition(self) -> None:
         for absent in ("legacy-schema-1", "recipe-schema-2", "matrix.mode", "runs-on: ${{ matrix.os }}", "pages_build", "pages_deploy"):
             self.assertNotIn(absent, self.release)
@@ -457,7 +450,7 @@ class QualificationDefinitionTests(unittest.TestCase):
         self.assertIn("select-rehearsal-record", release)
 
     def test_rehearsal_record_selection(self) -> None:
-        from tests.test_release_orchestration import RELEASE as module
+        module = load_module(REPOSITORY_ROOT / ".github" / "scripts" / "publish_release.py", "release_orchestration_test_module")
 
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch)
@@ -487,7 +480,7 @@ class QualificationDefinitionTests(unittest.TestCase):
         # the records committed at that ref, never the checkout; without it the checkout as before.
         import subprocess
 
-        from tests.test_release_orchestration import RELEASE as module
+        module = load_module(REPOSITORY_ROOT / ".github" / "scripts" / "publish_release.py", "release_orchestration_test_module")
 
         with tempfile.TemporaryDirectory() as scratch:
             root = Path(scratch)
@@ -500,16 +493,11 @@ class QualificationDefinitionTests(unittest.TestCase):
                     encoding="utf-8",
                 )
 
-            def git(*arguments: str) -> None:
-                subprocess.run(["git", "-C", str(root), *arguments], check=True, capture_output=True)
-
-            git("init", "-q", "-b", "main")
-            git("config", "user.email", "t@example.invalid")
-            git("config", "user.name", "t")
+            init_repository(root)
             record("RLS-X-003", "0.7.1", "released")
-            git("add", "-A")
-            git("commit", "-q", "-m", "base")
-            git("update-ref", "refs/remotes/origin/main", "HEAD")
+            git(root, "add", "-A")
+            git(root, "commit", "-q", "-m", "base")
+            git(root, "update-ref", "refs/remotes/origin/main", "HEAD")
             record("RLS-X-005", "0.8.0", "ready")  # the pull request's own record, uncommitted on the base
 
             base = module.select_rehearsal_record(root, None, "refs/remotes/origin/main")

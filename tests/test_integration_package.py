@@ -12,6 +12,7 @@ import tempfile
 import unittest
 from unittest import mock
 import zipfile
+from tests.root_identity_support import load_module
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -19,11 +20,7 @@ SCRIPT = REPOSITORY_ROOT / ".github" / "scripts" / "build_integration_package.py
 FIXTURES = REPOSITORY_ROOT / "tests" / "fixtures" / "integration_package"
 WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "candidate-evidence.yml"
 MODULE_NAME = "se_harness_integration_package_script"
-SPEC = importlib.util.spec_from_file_location(MODULE_NAME, SCRIPT)
-assert SPEC is not None and SPEC.loader is not None
-integration = importlib.util.module_from_spec(SPEC)
-sys.modules[MODULE_NAME] = integration
-SPEC.loader.exec_module(integration)
+integration = load_module(SCRIPT, MODULE_NAME)
 
 
 def canonical(value: object) -> bytes:

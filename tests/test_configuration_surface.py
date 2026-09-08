@@ -15,7 +15,7 @@ from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256
 from se_harness.preflight import inspect_installation
 from se_harness.workflow import _revision_policy
-from tests.mutation_guard_support import trusted_mutation_authority
+from tests.mutation_guard_support import patch_mutation_authority
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -74,12 +74,7 @@ RETIRED_KEYS = (
 
 class ConfigurationSurfaceTests(unittest.TestCase):
     def setUp(self) -> None:
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
 
     def install(self, temporary: str, *, project_name: str = "Fixture") -> Path:
         target = Path(temporary) / "repository"

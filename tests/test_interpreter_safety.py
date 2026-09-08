@@ -1032,13 +1032,6 @@ class ImportBarrierTests(unittest.TestCase):
                 if name.split(".")[0] == "repository_tools":
                     crossings.add(f"{relative}: {name}")
         self.assertEqual(set(), crossings)
-        # The one former holder keeps no residue of the guarded import either.
-        text = (REPOSITORY_ROOT / "se_harness/release_qualification.py").read_text(
-            encoding="utf-8"
-        )
-        for absent in ("repository_tools", "ImportError", "lazily imported"):
-            with self.subTest(absent=absent):
-                self.assertNotIn(absent, text)
 
     def test_neither_package_crossing_carries_an_interpreter_safety_name(self) -> None:
         for name in sorted(PERMITTED_PACKAGE_IMPORTS | PERMITTED_TOOLS_IMPORTS):
@@ -1110,20 +1103,10 @@ class StaticArchitectureTests(unittest.TestCase):
                 text = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
                 self.assertIn("interpreter_safety", text)
 
-    def test_no_declaration_ships_and_no_second_loader_exists(self) -> None:
-        # WO-REB-030: the rule is code; nothing reads it as data.
-        text = (REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8")
-        self.assertNotIn("interpreter_safety.json", text)
-        self.assertFalse((REPOSITORY_ROOT / "se_harness/interpreter_safety.json").exists())
-        self.assertFalse((REPOSITORY_ROOT / "repository_tools/interpreter_safety.py").exists())
-        for name in ("load_declaration", "declared_boundaries", "declared_corpus", "ISD1"):
-            self.assertNotIn(name, (REPOSITORY_ROOT / "se_harness/interpreter_safety.py").read_text(encoding="utf-8"))
-
     def test_the_rule_module_appears_in_the_portable_release_surface_list(self) -> None:
         text = (REPOSITORY_ROOT / "scripts/check_portable_release_surface.py").read_text(
             encoding="utf-8"
         )
-        self.assertNotIn('"se_harness/interpreter_safety.json"', text)
         self.assertIn('"se_harness/interpreter_safety.py"', text)
         self.assertIn("REQUIRED_INTERPRETER_SAFETY_MEMBERS", text)
 

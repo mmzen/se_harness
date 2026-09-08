@@ -12,30 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
-
-import validate_governor_transition as TRANSITION  # noqa: E402
-
-
-def run_git(root: Path, *args: str) -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(root), *args],
-        check=True,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    return completed.stdout.strip()
-
-
-def git_bytes(root: Path, *args: str) -> bytes:
-    completed = subprocess.run(
-        ["git", "-C", str(root), *args],
-        check=True,
-        capture_output=True,
-    )
-    return completed.stdout
+from tests.root_identity_support import load_module
+TRANSITION = load_module(SCRIPTS / "validate_governor_transition.py", "validate_governor_transition")
+from tests.root_identity_support import load_evaluator_module
+from tests.artifact_support import write
+from tests.git_support import git
 
 
 def canonical_json(value: object) -> bytes:
@@ -78,27 +59,21 @@ def lock(version: str, *, schema: int, identity: dict[str, str] | None) -> bytes
     return json.dumps(value, indent=2, sort_keys=True).encode("utf-8") + b"\n"
 
 
-def write(root: Path, relative: str, raw: bytes) -> None:
-    path = root / relative
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(raw)
-
-
 class RepositoryFixture:
     def __init__(self, root: Path) -> None:
         self.root = root
-        run_git(root, "init")
-        run_git(root, "config", "user.email", "fixture@example.invalid")
-        run_git(root, "config", "user.name", "Fixture")
+        git(root, "init")
+        git(root, "config", "user.email", "fixture@example.invalid")
+        git(root, "config", "user.name", "Fixture")
 
     def commit(self, message: str) -> str:
-        run_git(self.root, "add", "--all")
-        run_git(self.root, "commit", "-m", message)
-        return run_git(self.root, "rev-parse", "HEAD")
+        git(self.root, "add", "--all")
+        git(self.root, "commit", "-m", message)
+        return git(self.root, "rev-parse", "HEAD")
 
     def base(self, version: str = "7.4.0", *, distribution_schema: int = 2) -> str:
-        write(self.root, ".engineering-harness.toml", config(version))
-        write(self.root, ".engineering-harness.lock", lock(version, schema=3, identity=evaluator(version)))
+        write(self.root / ".engineering-harness.toml", config(version))
+        write(self.root / ".engineering-harness.lock", lock(version, schema=3, identity=evaluator(version)))
         released = evaluator("7.5.0")
         release = f'''+++
 id = "RLS-TST-001"
@@ -134,7 +109,7 @@ decided_by = "release-owner"
 
 # Released target fixture
 '''.encode("utf-8")
-        write(self.root, "docs/engineering/sample/releases/RLS-TST-001.md", release)
+        write(self.root / "docs/engineering/sample/releases/RLS-TST-001.md", release)
         return self.commit("base")
 
     def target(
@@ -156,9 +131,9 @@ decided_by = "release-owner"
         if archive == "null":
             identity["archive_name"] = None
             identity["archive_sha256"] = None
-        write(self.root, ".engineering-harness.toml", config(version))
-        write(self.root, ".engineering-harness.lock", lock(version, schema=3, identity=identity))
-        base_lock = git_bytes(self.root, "show", f"{base}:.engineering-harness.lock")
+        write(self.root / ".engineering-harness.toml", config(version))
+        write(self.root / ".engineering-harness.lock", lock(version, schema=3, identity=identity))
+        base_lock = git(self.root, "show", f"{base}:.engineering-harness.lock", binary=True)
         prior_sha = hashlib.sha256(TRANSITION._canonical_lf(base_lock, "base lock")).hexdigest()
         evidence = {
             "authority": "read-only fixture",
@@ -188,8 +163,7 @@ decided_by = "release-owner"
             "work_order": work_order,
         }
         write(
-            self.root,
-            f"docs/engineering/sample/evidence/{evidence_name}",
+            self.root / f"docs/engineering/sample/evidence/{evidence_name}",
             canonical_json(evidence),
         )
         return self.commit("target")
@@ -246,7 +220,7 @@ class GovernorTransitionTests(unittest.TestCase):
             lock_path = fixture.root / ".engineering-harness.lock"
             value = json.loads(lock_path.read_text(encoding="utf-8"))
             value["evaluator"]["archive_sha256"] = "d" * 64
-            write(fixture.root, ".engineering-harness.lock", canonical_json(value))
+            write(fixture.root / ".engineering-harness.lock", canonical_json(value))
             evidence = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
             document = json.loads(evidence.read_text(encoding="utf-8"))
             document["target"]["archive_sha256"] = "d" * 64
@@ -259,7 +233,7 @@ class GovernorTransitionTests(unittest.TestCase):
         temporary, fixture = self.fixture()
         with temporary:
             base = fixture.base()
-            write(fixture.root, "notes.txt", b"ordinary change\n")
+            write(fixture.root / "notes.txt", b"ordinary change\n")
             fixture.commit("ordinary")
             plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
             result = TRANSITION.assess(
@@ -275,7 +249,7 @@ class GovernorTransitionTests(unittest.TestCase):
             base = fixture.base()
             changed = json.loads((fixture.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
             changed["files"] = {"unexpected": {"mode": "managed", "sha256": "c" * 64}}
-            write(fixture.root, ".engineering-harness.lock", canonical_json(changed))
+            write(fixture.root / ".engineering-harness.lock", canonical_json(changed))
             fixture.commit("drift")
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
                 TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
@@ -296,10 +270,9 @@ class GovernorTransitionTests(unittest.TestCase):
     def test_target_archive_requires_one_released_record_in_the_trusted_base(self) -> None:
         temporary, fixture = self.fixture()
         with temporary:
-            write(fixture.root, ".engineering-harness.toml", config("7.4.0"))
+            write(fixture.root / ".engineering-harness.toml", config("7.4.0"))
             write(
-                fixture.root,
-                ".engineering-harness.lock",
+                fixture.root / ".engineering-harness.lock",
                 lock("7.4.0", schema=3, identity=evaluator("7.4.0")),
             )
             base = fixture.commit("base without target release")
@@ -312,7 +285,7 @@ class GovernorTransitionTests(unittest.TestCase):
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            base_raw = git_bytes(fixture.root, "show", f"{base}:.engineering-harness.lock")
+            base_raw = git(fixture.root, "show", f"{base}:.engineering-harness.lock", binary=True)
             canonical = TRANSITION._canonical_lf(base_raw, "base lock")
             crlf = canonical.decode("utf-8").replace("\n", "\r\n").encode("utf-8")
             crlf_sha = hashlib.sha256(crlf).hexdigest()
@@ -336,8 +309,7 @@ class GovernorTransitionTests(unittest.TestCase):
             fixture.target(base)
             source = fixture.root / "docs/engineering/sample/evidence/evaluator-upgrade.json"
             write(
-                fixture.root,
-                "docs/engineering/other/evidence/second-upgrade.json",
+                fixture.root / "docs/engineering/other/evidence/second-upgrade.json",
                 source.read_bytes(),
             )
             fixture.commit("duplicate")
@@ -361,7 +333,7 @@ class GovernorTransitionTests(unittest.TestCase):
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            run_git(fixture.root, "update-ref", "refs/remotes/origin/main", base)
+            git(fixture.root, "update-ref", "refs/remotes/origin/main", base)
             plan = TRANSITION.build_plan(
                 str(fixture.root), "0" * 40, "refs/remotes/origin/main"
             )
@@ -381,7 +353,7 @@ class GovernorTransitionTests(unittest.TestCase):
         with temporary:
             base = fixture.base()
             fixture.target(base)
-            write(fixture.root, "dirty.txt", b"dirty\n")
+            write(fixture.root / "dirty.txt", b"dirty\n")
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "must be clean"):
                 TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
 

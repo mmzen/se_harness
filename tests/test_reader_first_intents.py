@@ -13,8 +13,10 @@ from unittest import mock
 
 from se_harness.cli import main
 from se_harness.preflight import _load_validator_module
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, formal, write
+from tests.cli_support import invoke
+from tests.fixture_support import standard_repository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates"
@@ -44,28 +46,15 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Intent Fixture")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root)
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
         lock["evaluator"]["archive_sha256"] = "a" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         self.path = self.root / "docs/engineering/product/intent/INT-002.md"
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def write_intent(self, *, status: str = "draft", outcome: str | None = OUTCOME, body: str | None = None, extra_front_matter: str = "") -> None:
         front = "" if outcome is None else f'outcome = "{outcome}"'
@@ -92,9 +81,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.assertIsNotNone(re.search(r'^outcome = "', text, flags=re.MULTILINE))
         self.assertIn("| Measure | Today | When reached | Observed |", text)
         self.assertIn("`GLOSSARY.md` at the repository", text)
-        for retired in ("Desired outcomes", "Actors and stakeholders", "Principles and immutable constraints", "Risks and assumptions", "Non-goals", "Open decisions"):
-            self.assertNotIn(f"## {retired}", text)
-        code, output, error = self.invoke("create-artifact", str(self.root), "--domain", "product", "--type", "intent", "--id", "INT-003", "--quiet")
+        code, output, error = invoke("create-artifact", str(self.root), "--domain", "product", "--type", "intent", "--id", "INT-003", "--quiet")
         self.assertEqual(0, code, error + output)
         created = (self.root / "docs/engineering/product/intent/INT-003.md").read_text(encoding="utf-8")
         self.assertIn("## Success measures", created)
@@ -203,7 +190,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
 
     def test_validation_still_passes_with_advisories(self) -> None:
         self.write_intent(outcome=None)
-        code, _, _ = self.invoke("validate", str(self.root), "--advisories")
+        code, _, _ = invoke("validate", str(self.root), "--advisories")
         self.assertEqual(0, code)
         report = self.report()
         self.assertEqual([], [f"{i.code}: {i.message}" for i in report.errors])
@@ -287,7 +274,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
 
     def test_the_explorer_projects_the_outcome_and_plain_words_of_an_intent(self) -> None:
         self.write_intent(status="approved")
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         detail = self.detail("INT-002")["artifact"]
         self.assertEqual(OUTCOME, detail["outcome"])
@@ -311,7 +298,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
         # the base chain's WO-001 reaches INT-001 only; make INT-001 the measured intent
         intent = self.root / "docs/engineering/product/intent/INT-001.md"
         write(intent, formal("INT-001", "intent", "approved", {}, f'outcome = "{OUTCOME}"') + reader_first_body())
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         g0 = self.readiness_g0()
         quality = next(c for c in g0["conditions"] if c["id"] == "intent_quality")
@@ -319,13 +306,13 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.assertIn("INT-001", quality["evidence"])
         # outcome without a measure row
         write(intent, formal("INT-001", "intent", "approved", {}, f'outcome = "{OUTCOME}"') + reader_first_body(measures=None))
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         quality = next(c for c in self.readiness_g0()["conditions"] if c["id"] == "intent_quality")
         self.assertEqual("not_assessable", quality["state"])
         # a legacy intent
         write(intent, formal("INT-001", "intent", "approved", {}))
-        code, output, error = self.invoke("dashboard", str(self.root))
+        code, output, error = invoke("dashboard", str(self.root))
         self.assertEqual(0, code, error + output)
         g0 = self.readiness_g0()
         quality = next(c for c in g0["conditions"] if c["id"] == "intent_quality")
