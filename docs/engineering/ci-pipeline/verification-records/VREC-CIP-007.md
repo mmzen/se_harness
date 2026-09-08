@@ -2,7 +2,7 @@
 id = "VREC-CIP-007"
 type = "verification_record"
 title = "Verification candidate for WO-CIP-007"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/ci-pipeline/evidence/WO-CIP-007/WO-CIP-007-h
 evaluator_evidence_path = "docs/engineering/ci-pipeline/evidence/VREC-CIP-007-evaluator.json"
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 
+verified_at = "2026-09-08T21:26:27Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-CIP-007"]
 conforms_to = ["VER-CIP-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-08T21:26:27Z"
+decided_by = "assurance-owner"
+reason = "Verified by the assurance owner on 2026-09-08 by selecting the presented option. Re-measured immediately before this transition: bound commit bce529ad is an ancestor of the record head 5bc0a163 with a clean worktree, WO-CIP-007 is implemented, the evaluator packet matches its recorded digest e2cd0929, and both retained evidence files are tracked. Every VER-CIP-003 row passes. One run: the head commit of pull request #419 is qualified once and tested once; the candidate leg skipped its qualification step while the release-record leg ran it. Duplicate checks: the zipfile assertion and the reconcile grep are gone; the surface script holds the names. Pins and versions: 52 of 52 public actions in the pin form from 28, one python-version, the toolchain in one env block. Pages: the deploy job queues behind se-harness-pages-deploy. Probes: publish-pypi passes the payload digest unconditionally, pages-publication keeps its probe. Retired names: 28 lines to 4, all the exempt script path and its schema string; the job is upgrade-rehearsal. Manifest: refused without --build-recipe, exit 2, no git call; schema-1 records still read. Documentation: nine workflows in the note with before-and-after counts, the SPEC-CIP-001 amendment record, every header describing its file. Regression: validate 1,432 artifacts and 0 errors under the released 0.16.0 evaluator, doctor 97 PASS, 1,087 tests at the Windows baseline, five of five lanes green at e96160af, f7097333, bce529ad and 5bc0a163. Delegation: the start, implemented and preparation events name delegated-executor with the class, check-run and sha. The three acceptance scenarios were reproduced in a scratch worktree at bce529ad before this edge. Disclosed: the work order's completion sentence against its delegation, the stale job name in ARCH-CIP-001 and REQ-CIP-002, one commit message's pin overcount. This verifies WO-CIP-007 only; it releases and publishes nothing, and the merge is a separate decision under DR-DELIVERY-SELECT."
 +++
 
 # Verification Record Candidate
