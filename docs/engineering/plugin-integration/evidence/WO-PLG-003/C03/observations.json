@@ -1,0 +1,17 @@
+{
+  "case": "C03",
+  "expected": "Two fresh host sessions deliver interpreter identity and source bytes from the prepared evaluator.",
+  "observed": "Exact 0.16.0 wheel installs offline; direct identity/doctor checks pass and source bytes are emitted. No two trusted host runs yet.",
+  "conclusion": "unavailable",
+  "case_passed": false,
+  "evidence_layer": "direct calibration only",
+  "exit_statuses": [
+    0,
+    0
+  ],
+  "source_evidence": {
+    "calibration-inline-corrected/install-wheel.json": "7ad6009eb6f53a5eeb9e3bec19d3ce09fe749c67b8cf76a564a406c10dbad07a",
+    "calibration-inline-corrected/prepared-runtime.json": "e1bc7bf9ce8c432385c0226855fbae8267a7b366440d9d0934c109c0ca93c2b0"
+  },
+  "remaining": "See report.md; operator login and hook trust are not complete."
+}

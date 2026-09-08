@@ -1,0 +1,14 @@
+{
+  "layer": "direct fixture calibration, not host",
+  "argv": [
+    "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "-NoProfile",
+    "-NonInteractive",
+    "-Command",
+    "$ErrorActionPreference='Stop'; $raw=[Console]::In.ReadToEnd(); $event=$raw|ConvertFrom-Json; $data=$env:PLUGIN_DATA; if(!$data){throw 'PLUGIN_DATA absent'}; New-Item -ItemType Directory -Path $data -Force|Out-Null; [ordered]@{event=$event.hook_event_name; source=$event.source; cwd=$event.cwd; plugin_data=$data; plugin_root=$env:PLUGIN_ROOT; timestamp=[DateTimeOffset]::UtcNow.ToString('o')} |ConvertTo-Json -Compress|Add-Content -LiteralPath (Join-Path $data 'inline-events.jsonl'); $pointer=Join-Path $data 'runtime-path.txt'; if(Test-Path -LiteralPath $pointer){$python=(Get-Content -LiteralPath $pointer -Raw).Trim(); if(Test-Path -LiteralPath $python -PathType Leaf){ $raw|& $python -I (Join-Path $env:PLUGIN_ROOT 'observe_runtime.py'); exit $LASTEXITCODE}}; if($event.hook_event_name -eq 'SessionStart'){ Write-Output 'CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; do not perform governed writes.'}; exit 0"
+  ],
+  "stdin": "{\"hook_event_name\": \"SessionStart\", \"source\": \"startup\", \"cwd\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\calibration-002 inline with spaces\\\\repo\"}",
+  "exit_status": 0,
+  "stdout": "CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; do not perform governed writes.\n",
+  "stderr": ""
+}

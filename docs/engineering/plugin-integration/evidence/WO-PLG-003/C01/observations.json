@@ -1,0 +1,17 @@
+{
+  "case": "C01",
+  "expected": "Discovery, startup, resume and compaction invoke the guard or retain the precise unavailable step.",
+  "observed": "Plugin installation and skill discovery succeeded. Hooks are registered but untrusted. No handler delivery observed.",
+  "conclusion": "unavailable",
+  "case_passed": false,
+  "evidence_layer": "live host; no model completion",
+  "exit_statuses": [
+    0,
+    0
+  ],
+  "source_evidence": {
+    "host-attempts/plugin-add.json": "80c7de11979500f03efc7dfc205fa386f08d76a1f65f36bbec5702b1cc2aa141",
+    "host-attempts/prompt-input.json": "d8ca78606ba97c4cc1e741bd9fbfdf65a119cc43018d0f1701bf369be634dc41"
+  },
+  "remaining": "See report.md; operator login and hook trust are not complete."
+}

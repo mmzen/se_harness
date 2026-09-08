@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\calibration-001 with spaces\\plugin-data\\environment\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "pip",
+    "install",
+    "--no-index",
+    "--no-deps",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl"
+  ],
+  "exit_status": 0,
+  "stdout": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.16.0\n",
+  "stderr": "",
+  "duration_seconds": 2.304,
+  "timed_out": false
+}

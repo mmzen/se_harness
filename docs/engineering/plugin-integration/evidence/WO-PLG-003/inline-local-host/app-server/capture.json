@@ -1,0 +1,12 @@
+{
+  "exit_status": 0,
+  "reader_complete": [
+    true,
+    true
+  ],
+  "cleanup": {
+    "pid": 48776,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  }
+}
