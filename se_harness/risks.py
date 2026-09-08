@@ -39,6 +39,7 @@ from se_harness.artifact_layout import (
 )
 from se_harness.decisions import declared_options
 from se_harness.installer import HarnessError, ensure_target
+from se_harness.codes import E001, E003
 
 #: SPEC-DCM-001 rule 4: the six types a decision may block. The validator enforces the
 #: set (`E011`); `raise-risk` reads it first so a threatened record is refused with the
@@ -380,8 +381,8 @@ def raise_risk(
         raise HarnessError("a risk threatens at least one artifact; pass --threatens")
 
     _, report = _validation(root)
-    if any(item.code in {"E001", "E003"} for item in report.errors):
-        first = next(item for item in report.errors if item.code in {"E001", "E003"})
+    if any(item.code in {E001, E003} for item in report.errors):
+        first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
     catalog = _catalog(report)
     for item in threatened:
@@ -606,7 +607,7 @@ def dispose_decision_with_risks(
         decision_id: {"target": target, "option": option, "revisit": revisit, "scope": tuple(scope)},
     }
     _, report = _validation(root)
-    catalog = _catalog(report) if not any(item.code in {"E001", "E003"} for item in report.errors) else {}
+    catalog = _catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}
     decision = catalog.get(decision_id)
     risks = raised_risks_of(catalog, decision) if decision is not None and decision.artifact_type == "decision" else []
     if not risks and (mitigated_by or avoided_by):
@@ -646,8 +647,8 @@ def risks_threatening(repository: Path, artifact_id: str) -> list[dict[str, Any]
 
     root = ensure_target(repository, must_exist=True)
     _, report = _validation(root)
-    if any(item.code in {"E001", "E003"} for item in report.errors):
-        first = next(item for item in report.errors if item.code in {"E001", "E003"})
+    if any(item.code in {E001, E003} for item in report.errors):
+        first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
     catalog = _catalog(report)
     primary = catalog.get(artifact_id)

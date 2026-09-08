@@ -36,7 +36,8 @@ LIFECYCLE_REGISTRY = load_lifecycle_registry()
 class RecordRefusal(HarnessError):
     """A refused record preparation, labelled by its cause class (SPEC-ECP-016, ECP-CLI-007).
 
-    The CLI maps the class to the code suffix: state 1, provenance 2, evidence 3, inputs 4.
+    The CLI maps the class to a code of `codes.VERIFICATION_RECORD_REFUSALS` or
+    `codes.RELEASE_RECORD_REFUSALS`.
     """
 
     cause = "state"
@@ -57,8 +58,6 @@ class EvidenceRefusal(RecordRefusal):
 class InputRefusal(RecordRefusal):
     cause = "inputs"
 
-
-CAUSE_SUFFIX = {"state": "1", "provenance": "2", "evidence": "3", "inputs": "4"}
 
 
 def _grants_authority(family: str, status: object) -> bool:

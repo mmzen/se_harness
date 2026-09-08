@@ -30,6 +30,7 @@ from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.integrity import IntegrityError, read_toml, stage_bytes
 from se_harness.preflight import _load_validator_module
 from se_harness.workflow_contract import DEFINITION_TYPES, load_workflow_contract, validate_lifecycle_registry
+from se_harness.codes import CodedError, E001, E003, WEX001, WEX190, WEX_ECP_001, WEX_ECP_030
 
 
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "decision"}
@@ -58,6 +59,10 @@ class PreconditionError(HarnessError):
     def __init__(self, predicate_id: str, message: str) -> None:
         super().__init__(message)
         self.predicate_id = predicate_id
+        # ECP-PRM-017: the two attributes of a coded refusal; the wire form stays the bare message,
+        # the CLI labelling it with the predicate.
+        self.code = predicate_id
+        self.message = message
 
 
 @dataclass(frozen=True)
@@ -92,7 +97,7 @@ def failed_result(
     primary: str | None,
     message: str,
     *,
-    code: str = "WEX001",
+    code: str = WEX001,
     repository_blocker: bool = False,
 ) -> dict[str, Any]:
     from se_harness.workflow_compliance import remediation_result
@@ -243,8 +248,7 @@ def project_selected(
             if item.artifact_type == "work_order" and item.status == "in_progress"
         )
         if len(candidates) != 1:
-            raise HarnessError(
-                f"WEX-ECP-001: {len(candidates)} work orders are in_progress; name one with --artifact"
+            raise CodedError(WEX_ECP_001, f"{len(candidates)} work orders are in_progress; name one with --artifact"
                 + (f" ({', '.join(candidates)})" if candidates else "")
             )
         artifact_id = candidates[0]
@@ -266,7 +270,7 @@ def project_selected(
     for item in report.errors:
         diagnostic = _diagnostic(item)
         candidate = safe_destination(root, Path(item.path))
-        if item.code in {"E001", "E003"}:
+        if item.code in {E001, E003}:
             repository.append(diagnostic)
         elif candidate.resolve() in scope_paths:
             scoped.append(diagnostic)
@@ -283,7 +287,7 @@ def project_selected(
     elif counts:
         total = sum(counts.values())
         background.append({
-            "code": "WEX190",
+            "code": WEX190,
             "count": total,
             "message": f"{total} unrelated finding(s); use --include-background for categories",
         })
@@ -729,7 +733,7 @@ def structural_precondition_results(
             else:
                 results.append(_structural(check, "pass", f"{successor_id} is an eligible successor preserving the coverage of {artifact_id}.", artifact_id))
         else:  # pragma: no cover - the loader rejects unknown structural ids
-            raise HarnessError(f"WEX-ECP-030: unknown structural check {check}")
+            raise CodedError(WEX_ECP_030, f"unknown structural check {check}")
     return results
 
 
@@ -763,7 +767,7 @@ def plan_transition(
     if report.errors:
         first = report.errors[0]
         message = f"current artifact graph is invalid [{first.code}]: {first.message}"
-        if first.code in {"E001", "E003"}:
+        if first.code in {E001, E003}:
             raise RepositoryWorkflowError(message)
         raise HarnessError(message)
     catalog = _catalog(report)
@@ -856,6 +860,7 @@ def plan_transition(
     _, quality, _, _, gates = load_validated_contracts()
     gate_results: list[dict[str, Any]] = []
     blocked_by: list[str] = []
+    refusals: list[tuple[str, str]] = []
     for artifact_id, target in sorted(transitions.items()):
         artifact = catalog[artifact_id]
         context = build_context(
@@ -867,11 +872,12 @@ def plan_transition(
             gate_results.append(gate)
             for predicate in gate["predicates"]:
                 if predicate["status"] != "pass":
+                    refusals.append((str(predicate["id"]), str(predicate["message"])))
                     blocked_by.append(f"{predicate['id']}: {predicate['message']}")
-    if blocked_by and apply:
+    if refusals and apply:
         # A programmatic apply fails closed, labelled by the first refusing check
         # (ECP-KRN-008); a plan renders the blocked result instead.
-        predicate_id, _, message = blocked_by[0].partition(": ")
+        predicate_id, message = refusals[0]
         raise PreconditionError(predicate_id, "; ".join([message, *blocked_by[1:]]))
     if blocked_by:
         current = catalog[primary_id]

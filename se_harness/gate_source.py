@@ -26,6 +26,7 @@ from urllib.request import Request, urlopen
 from se_harness import front_matter
 from se_harness._process import run_git, text as _text
 from se_harness.workflow_contract import DelegatedOperation, delegated_operations
+from se_harness.codes import CodedError, WEX_ECP_022, WEX_ECP_040, W_ECP_005
 
 DELEGATED_ROLE = "delegated-executor"
 DELEGATION_CLASS = "execution"
@@ -55,14 +56,12 @@ GITHUB_API = "https://api.github.com"
 CONFIGURATION_NAME = ".engineering-harness.delegation.toml"
 
 
-class DelegationError(RuntimeError):
+class DelegationError(CodedError):
     """A coded refusal of the delegated route; the code is the check that refused."""
 
     def __init__(self, code: str, message: str) -> None:
-        super().__init__(f"{code}: {message}")
-        self.code = code
+        super().__init__(code, message)
         self.predicate_id = code
-        self.message = message
 
 
 @dataclass(frozen=True)
@@ -100,20 +99,20 @@ def load_configuration(root: Path) -> DelegationConfiguration | None:
         return None
     source = table.get("gate_source")
     if source not in {"github-checks", "local-file"}:
-        raise DelegationError("WEX-ECP-040", f"delegation.gate_source must be github-checks or local-file, not {source!r}")
+        raise DelegationError(WEX_ECP_040, f"delegation.gate_source must be github-checks or local-file, not {source!r}")
     check_name = table.get("check_name")
     if not isinstance(check_name, str) or not check_name.strip():
-        raise DelegationError("WEX-ECP-040", "delegation.check_name must name the required check")
+        raise DelegationError(WEX_ECP_040, "delegation.check_name must name the required check")
     repository = table.get("repository")
     base_ref = table.get("base_ref", "origin/main")
     local_file = table.get("local_file")
     if source == "local-file":
         if not isinstance(local_file, str) or not local_file:
-            raise DelegationError("WEX-ECP-040", "delegation.local_file is required for the local-file source")
+            raise DelegationError(WEX_ECP_040, "delegation.local_file is required for the local-file source")
         if os.environ.get("SE_HARNESS_REHEARSAL") != "1":
             # ECP-DLG-004: the local-file source exists for tests and rehearsals only.
             print(
-                "W-ECP-005: delegation.gate_source is local-file outside a rehearsal; "
+                f"{W_ECP_005}: delegation.gate_source is local-file outside a rehearsal; "
                 "the gate this run reads is not the CI provider's",
                 file=sys.stderr,
             )
@@ -130,10 +129,10 @@ def _git(root: Path, *arguments: str) -> str:
     # ECP-COR-013, ECP-PRM-003: bounded through the one launcher; a start failure is the gate's own refusal.
     completed = run_git(
         root, *arguments, timeout=60,
-        error=lambda message: DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} could not run: {message}"),
+        error=lambda message: DelegationError(WEX_ECP_040, f"git {' '.join(arguments)} could not run: {message}"),
     )
     if completed.returncode != 0:
-        raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} failed: {_text(completed.stderr).strip()[:200]}")
+        raise DelegationError(WEX_ECP_040, f"git {' '.join(arguments)} failed: {_text(completed.stderr).strip()[:200]}")
     return _text(completed.stdout).strip()
 
 
@@ -183,15 +182,15 @@ def read_gate(root: Path, configuration: DelegationConfiguration, sha: str) -> G
         try:
             value = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, ValueError) as exc:
-            raise DelegationError("WEX-ECP-040", f"gate source {path.name} unreadable at {sha[:7]}: {exc}") from exc
+            raise DelegationError(WEX_ECP_040, f"gate source {path.name} unreadable at {sha[:7]}: {exc}") from exc
         if not isinstance(value, dict) or value.get("sha") != sha:
-            raise DelegationError("WEX-ECP-040", f"gate source names no check for head {sha[:7]} (head not found)")
+            raise DelegationError(WEX_ECP_040, f"gate source names no check for head {sha[:7]} (head not found)")
         conclusion = str(value.get("conclusion", "missing"))
         reading = GateReading(sha, conclusion, str(value.get("check_run_id", "local")), configuration.check_name, "local-file")
     else:
         repository = configuration.repository or _repository_from_origin(root)
         if repository is None:
-            raise DelegationError("WEX-ECP-040", "delegation.repository is not configured and origin is not a GitHub remote")
+            raise DelegationError(WEX_ECP_040, "delegation.repository is not configured and origin is not a GitHub remote")
         url = f"{GITHUB_API}/repos/{repository}/commits/{quote(sha, safe='')}/check-runs?check_name={quote(configuration.check_name, safe='')}"
         headers = {"Accept": "application/vnd.github+json", "User-Agent": "se-harness"}
         token = os.environ.get("GITHUB_TOKEN")
@@ -202,13 +201,13 @@ def read_gate(root: Path, configuration: DelegationConfiguration, sha: str) -> G
                 payload = json.loads(response.read().decode("utf-8"))
         except HTTPError as exc:
             if exc.code == 404:
-                raise DelegationError("WEX-ECP-040", f"head {sha[:7]} not found on {repository}") from exc
-            raise DelegationError("WEX-ECP-040", f"gate source error for {sha[:7]}: HTTP {exc.code}") from exc
+                raise DelegationError(WEX_ECP_040, f"head {sha[:7]} not found on {repository}") from exc
+            raise DelegationError(WEX_ECP_040, f"gate source error for {sha[:7]}: HTTP {exc.code}") from exc
         except (URLError, OSError, ValueError) as exc:
-            raise DelegationError("WEX-ECP-040", f"gate source error for {sha[:7]}: {exc}") from exc
+            raise DelegationError(WEX_ECP_040, f"gate source error for {sha[:7]}: {exc}") from exc
         runs = [item for item in payload.get("check_runs", []) if item.get("name") == configuration.check_name]
         if not runs:
-            raise DelegationError("WEX-ECP-040", f"check {configuration.check_name!r} is missing at head {sha[:7]}")
+            raise DelegationError(WEX_ECP_040, f"check {configuration.check_name!r} is missing at head {sha[:7]}")
         latest = runs[0]
         conclusion = str(latest.get("conclusion") or latest.get("status") or "missing")
         reading = GateReading(sha, conclusion, str(latest.get("id", "")), configuration.check_name, "github-checks")
@@ -219,7 +218,7 @@ def require_passing_gate(root: Path, configuration: DelegationConfiguration, sha
     reading = read_gate(root, configuration, sha)
     if not reading.passing:
         raise DelegationError(
-            "WEX-ECP-040",
+            WEX_ECP_040,
             f"required check {reading.check_name!r} at head {sha[:7]} is {reading.conclusion}, not success",
         )
     return reading
@@ -251,17 +250,17 @@ def authorize_delegated_right(
 
     if right not in DELEGATED_RIGHTS:
         raise DelegationError(
-            "WEX-ECP-022",
+            WEX_ECP_022,
             f"{DELEGATED_ROLE} may apply only {', '.join(DELEGATED_RIGHTS)}; {right or 'this transition'} is a human decision right",
         )
     if not declares_class(work_order_metadata):
-        raise DelegationError("WEX-ECP-022", f"{work_order_path.name} declares no [delegation] class; {DELEGATED_ROLE} is refused")
+        raise DelegationError(WEX_ECP_022, f"{work_order_path.name} declares no [delegation] class; {DELEGATED_ROLE} is refused")
     configuration = load_configuration(root)
     if configuration is None:
-        raise DelegationError("WEX-ECP-040", f"no [delegation] gate source is configured in {CONFIGURATION_NAME}")
+        raise DelegationError(WEX_ECP_040, f"no [delegation] gate source is configured in {CONFIGURATION_NAME}")
     if not class_at_base(root, configuration, work_order_path):
         raise DelegationError(
-            "WEX-ECP-022",
+            WEX_ECP_022,
             f"{work_order_path.name} carries no [delegation] class at the base {configuration.base_ref}; a branch cannot widen its own delegation",
         )
     return require_passing_gate(root, configuration, candidate_head(root))

@@ -8,6 +8,13 @@ a code named in a comment or an identifier never enters the index. Only the
 prefixes registered below are diagnostics; artifact and specification
 identifiers share the code shape and are excluded by construction.
 
+The package names its codes once in `se_harness/codes.py` (SPEC-ECP-023
+ECP-PRM-016); this scanner reads that registry through the parser, never by
+import (ECP-PRM-018), and attributes a raise site to its code by the name it
+passes: `CodedError(WEX210, "message")`, `f"{WEX201}: message"`. The engine
+under `se_harness/engine/` still spells its codes and is scanned as literals
+until wave 3 moves it.
+
 This module is standard-library only; `repository_tools` may not widen its
 pinned import crossing into `se_harness` (the import-barrier tests pin it).
 """
@@ -72,6 +79,7 @@ _CODE = re.compile(r"\b([A-Z]+(?:-[A-Z]+)*?)-?(\d{3})\b")
 _GUARDED_ROOTS = frozenset({"E", "W", "WEX"})
 _MESSAGE_LIMIT = 110
 _MESSAGES_SHOWN = 2
+REGISTRY_RELATIVE = "se_harness/codes.py"
 
 
 class IndexError_(RuntimeError):
@@ -93,22 +101,111 @@ def _sources(repository: Path) -> list[Path]:
     return found
 
 
-def _literal_codes(repository: Path):
-    """Yield (prefix, code, collapsed message) for every code-shaped match in a string literal."""
+def _parse(path: Path) -> ast.Module:
+    try:
+        return ast.parse(path.read_text(encoding="utf-8"))
+    except (SyntaxError, UnicodeError) as exc:
+        raise IndexError_(f"cannot parse {path}: {exc}") from exc
 
+
+def registry(repository: Path) -> dict[str, str]:
+    """The package's code registry, {constant name: code}, read through the parser (ECP-PRM-018).
+
+    Every `NAME = "CODE"` assignment of `se_harness/codes.py` whose value has the
+    code shape is an entry; an absent registry is empty, so a checkout without the
+    package still indexes its literals.
+    """
+
+    path = repository / REGISTRY_RELATIVE
+    if not path.is_file():
+        return {}
+    names: dict[str, str] = {}
+    for node in _parse(path).body:
+        if not (isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name)):
+            continue
+        if isinstance(node.value, ast.Constant) and isinstance(node.value.value, str) and _CODE.fullmatch(node.value.value):
+            names[node.targets[0].id] = node.value.value
+    return names
+
+
+def _collapse(message: str) -> str:
+    message = " ".join(message.split())
+    if len(message) > _MESSAGE_LIMIT:
+        message = message[: _MESSAGE_LIMIT - 1] + "…"
+    return message
+
+
+def _joined_text(node: ast.AST, names: dict[str, str]) -> str:
+    """The message text of a string or f-string node, registry names rendered as their codes."""
+
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return node.value
+    if isinstance(node, ast.JoinedStr):
+        parts: list[str] = []
+        for value in node.values:
+            if isinstance(value, ast.Constant) and isinstance(value.value, str):
+                parts.append(value.value)
+            elif isinstance(value, ast.FormattedValue) and isinstance(value.value, ast.Name) and value.value.id in names:
+                parts.append(names[value.value.id])
+            else:
+                parts.append("{…}")
+        return "".join(parts)
+    return ""
+
+
+def _registry_name(node: ast.AST, names: dict[str, str]) -> str | None:
+    if isinstance(node, ast.Name) and node.id in names:
+        return node.id
+    if isinstance(node, ast.Attribute) and node.attr in names:
+        return node.attr
+    return None
+
+
+def _named_codes(tree: ast.Module, names: dict[str, str]):
+    """Yield (prefix, code, message) for every site that passes a registry name with its message.
+
+    Two shapes: a call whose first argument is a registry name and whose last string
+    argument is the message (`CodedError(WEX210, "...")`, `_check(RR001, passed,
+    subject, "...")`), and an f-string whose first piece is a registry name followed
+    by the message (`f"{WEX201}: ..."`).
+    """
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call) and node.args:
+            name = _registry_name(node.args[0], names)
+            if name is None:
+                continue
+            texts = [text for text in (_joined_text(argument, names) for argument in node.args[1:]) if text]
+            code = names[name]
+            yield _CODE.fullmatch(code).group(1), code, _collapse(f"{code}: {texts[-1]}" if texts else code)
+        elif isinstance(node, ast.JoinedStr) and node.values:
+            first = node.values[0]
+            if isinstance(first, ast.FormattedValue):
+                name = _registry_name(first.value, names)
+                if name is not None:
+                    code = names[name]
+                    yield _CODE.fullmatch(code).group(1), code, _collapse(_joined_text(node, names))
+
+
+def _literal_codes(repository: Path):
+    """Yield (prefix, code, collapsed message) for every code the source can emit.
+
+    A code-shaped match inside a string literal counts wherever it is written; in
+    the package, a raise site that passes a registry name is attributed to that
+    code with its message text (ECP-PRM-018).
+    """
+
+    names = registry(repository)
     for path in _sources(repository):
-        try:
-            tree = ast.parse(path.read_text(encoding="utf-8"))
-        except (SyntaxError, UnicodeError) as exc:
-            raise IndexError_(f"cannot parse {path}: {exc}") from exc
+        tree = _parse(path)
         for node in ast.walk(tree):
             if not (isinstance(node, ast.Constant) and isinstance(node.value, str)):
                 continue
-            message = " ".join(node.value.split())
-            if len(message) > _MESSAGE_LIMIT:
-                message = message[: _MESSAGE_LIMIT - 1] + "…"
+            message = _collapse(node.value)
             for match in _CODE.finditer(node.value):
                 yield match.group(1), match.group(0), message
+        if names and path.parent == repository / "se_harness":
+            yield from _named_codes(tree, names)
 
 
 def scan(repository: Path) -> dict[str, dict[str, set[str]]]:
@@ -118,54 +215,7 @@ def scan(repository: Path) -> dict[str, dict[str, set[str]]]:
     for prefix, code, message in _literal_codes(repository):
         if prefix in PREFIXES:
             codes[prefix].setdefault(code, set()).add(message)
-    for code, messages in _composed_codes(repository).items():
-        prefix = _CODE.fullmatch(code).group(1)
-        if prefix in codes:
-            codes[prefix].setdefault(code, set()).update(messages)
     return codes
-
-
-def _composed_codes(repository: Path) -> dict[str, set[str]]:
-    """Codes the CLI composes at run time as `family + cause digit` (ECP-CLI-007).
-
-    Both facts are read from the source through the parser, never restated:
-    the cause table from `se_harness/provenance.py` and the family literals
-    from the `_record_code(exc, "...")` call sites in `se_harness/cli.py`.
-    """
-
-    causes: dict[str, str] = {}
-    tree = ast.parse((repository / "se_harness/provenance.py").read_text(encoding="utf-8"))
-    for node in ast.walk(tree):
-        if (
-            isinstance(node, ast.Assign)
-            and any(isinstance(t, ast.Name) and t.id == "CAUSE_SUFFIX" for t in node.targets)
-            and isinstance(node.value, ast.Dict)
-        ):
-            causes = {
-                key.value: value.value
-                for key, value in zip(node.value.keys, node.value.values)
-                if isinstance(key, ast.Constant) and isinstance(value, ast.Constant)
-            }
-    families: set[str] = set()
-    tree = ast.parse((repository / "se_harness/cli.py").read_text(encoding="utf-8"))
-    for node in ast.walk(tree):
-        if (
-            isinstance(node, ast.Call)
-            and isinstance(node.func, ast.Name)
-            and node.func.id == "_record_code"
-            and len(node.args) == 2
-            and isinstance(node.args[1], ast.Constant)
-            and isinstance(node.args[1].value, str)
-        ):
-            families.add(node.args[1].value)
-    legend = ", ".join(f"{cause} {digit}" for cause, digit in causes.items())
-    composed: dict[str, set[str]] = {}
-    for family in families:
-        for cause, digit in causes.items():
-            composed[family + digit] = {
-                f"Composed at run time as {family} plus the cause digit ({legend}); this one is the {cause} cause."
-            }
-    return composed
 
 
 def unregistered_families(repository: Path) -> dict[str, set[str]]:

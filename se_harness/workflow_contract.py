@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from se_harness.integrity import unique_object_hook
+from se_harness.codes import CodedError, WEX_ADS_001, WEX_ADS_003, WEX_ECP_030, WEX_ECP_031
 from types import MappingProxyType
 from typing import Any, Iterable, Mapping, Literal
 
@@ -105,16 +106,18 @@ _DECISION_RIGHT = re.compile(r"^DR-[A-Z]+(?:-[A-Z]+)*$")
 DELEGATED_FAMILY = "work_order"
 #: The closed set of predicate, gate and compliance statuses; `aggregation` orders it.
 RESULT_STATUSES = frozenset({"pass", "fail", "not_assessable"})
-#: ECP-PRM-023: the one code a missing or malformed run-time contract section refuses with.
-RUNTIME_SECTION_CODE = "WEX-ECP-031"
-
-
 class ContractError(RuntimeError):
     """Machine policy is malformed, ambiguous, or cannot resolve."""
 
 
+class ContractRefusal(CodedError, ContractError):
+    """A coded contract refusal the CLI labels (ECP-PRM-017): a `ContractError` that carries its code."""
+
+
 def _section_refusal(detail: str) -> ContractError:
-    return ContractError(f"{RUNTIME_SECTION_CODE}: {detail}")
+    """ECP-PRM-023: the one code a missing or malformed run-time contract section refuses with."""
+
+    return ContractRefusal(WEX_ECP_031, detail)
 
 
 @dataclass(frozen=True)
@@ -349,8 +352,7 @@ def load_quality_gate_contract(path: Path | None = None) -> dict[str, Any]:
         except Exception:  # noqa: BLE001 - the original error is the one to report
             raise exc from None
         if observed in RETIRED_QUALITY_GATES_SCHEMAS:
-            raise ContractError(
-                f"WEX-ECP-030: {target} uses retired schema {observed}; the transition bindings of "
+            raise ContractRefusal(WEX_ECP_030, f"{target} uses retired schema {observed}; the transition bindings of "
                 f"{QUALITY_GATES_SCHEMA} are required, upgrade the installed contract"
             ) from exc
         raise
@@ -377,7 +379,7 @@ def transition_binding(
         if types is not None and artifact_type not in types:
             continue
         return [str(item) for item in binding.get("predicates", [])], [str(item) for item in binding.get("structural", [])]
-    raise ContractError(f"WEX-ECP-030: no transition binding for {family}:{artifact_type} -> {target}")
+    raise ContractRefusal(WEX_ECP_030, f"no transition binding for {family}:{artifact_type} -> {target}")
 
 
 def _identifier(kind: str, value: object) -> str:
@@ -454,36 +456,35 @@ def _validate_corrective(
     corrective = step.get("corrective")
     if not expected:
         if corrective is not None:
-            raise ContractError(f"WEX-ADS-001: {label} declares corrective forms without gates")
+            raise ContractRefusal(WEX_ADS_001, f"{label} declares corrective forms without gates")
         return
     if not isinstance(corrective, Mapping):
-        raise ContractError(f"WEX-ADS-001: {label} has no corrective forms for its gate predicates")
+        raise ContractRefusal(WEX_ADS_001, f"{label} has no corrective forms for its gate predicates")
     if set(corrective) != set(expected):
         missing = sorted(set(expected) - set(corrective))
         extra = sorted(set(corrective) - set(expected))
-        raise ContractError(
-            f"WEX-ADS-001: {label} corrective forms do not cover its predicates "
+        raise ContractRefusal(WEX_ADS_001, f"{label} corrective forms do not cover its predicates "
             f"(missing {missing}, extra {extra})"
         )
     for predicate_id, form in corrective.items():
         if not isinstance(form, Mapping) or form.get("kind") not in CORRECTIVE_KINDS:
-            raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} has an unknown kind")
+            raise ContractRefusal(WEX_ADS_001, f"{label} corrective for {predicate_id} has an unknown kind")
         kind = form["kind"]
         if kind == "command":
             argv = form.get("argv")
             if set(form) != {"kind", "argv"} or not isinstance(argv, list) or not argv or not all(isinstance(item, str) for item in argv):
-                raise ContractError(f"WEX-ADS-001: {label} corrective command for {predicate_id} requires argv")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective command for {predicate_id} requires argv")
             _validate_placeholders(argv, parameters, f"{label} corrective {predicate_id}")
             if argv == step.get("argv"):
-                raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} repeats the evaluated command")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective for {predicate_id} repeats the evaluated command")
         elif kind == "escalation":
             right = form.get("decision_right")
             if set(form) != {"kind", "decision_right"} or not isinstance(right, str) or not right.startswith("DR-"):
-                raise ContractError(f"WEX-ADS-001: {label} corrective escalation for {predicate_id} needs a decision right")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective escalation for {predicate_id} needs a decision right")
         else:
             value = form.get("value")
             if set(form) != {"kind", "value"} or not isinstance(value, str) or not value.strip():
-                raise ContractError(f"WEX-ADS-001: {label} corrective response for {predicate_id} needs text")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective response for {predicate_id} needs text")
             _validate_placeholders(value, parameters, f"{label} corrective {predicate_id}")
 
 
@@ -583,7 +584,7 @@ def _validate_transition_bindings(
 
     raw = quality_gates.get("transition_bindings")
     if not isinstance(raw, list) or not raw:
-        raise ContractError("WEX-ECP-030: quality-gate contract declares no transition bindings")
+        raise ContractRefusal(WEX_ECP_030, "quality-gate contract declares no transition bindings")
     owner: dict[str, str] = {}
     for gate_id, gate in gates.items():
         for predicate in gate["predicates"]:
@@ -592,28 +593,28 @@ def _validate_transition_bindings(
     bound: dict[tuple[str, str], set[str] | None] = {}
     for binding in raw:
         if not isinstance(binding, Mapping) or not {"family", "target", "predicates", "structural"}.issubset(binding) or not set(binding).issubset(BINDING_FIELDS):
-            raise ContractError("WEX-ECP-030: transition binding has invalid fields")
+            raise ContractRefusal(WEX_ECP_030, "transition binding has invalid fields")
         family = binding["family"]
         target = binding["target"]
         if family not in LIFECYCLE_FAMILIES or not isinstance(target, str) or _STATE_NAME.fullmatch(target) is None:
-            raise ContractError(f"WEX-ECP-030: transition binding names unknown family or state {family}:{target}")
+            raise ContractRefusal(WEX_ECP_030, f"transition binding names unknown family or state {family}:{target}")
         types = binding.get("artifact_types")
         if types is not None:
             types = _strings(types, f"transition binding {family}:{target} artifact_types")
             if family != "definition" or not set(types).issubset(DEFINITION_TYPES):
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} restricts artifact types it cannot")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} restricts artifact types it cannot")
         for predicate_id in _strings(binding["predicates"], f"transition binding {family}:{target} predicates"):
             gate_id = owner.get(predicate_id)
             if gate_id is None:
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown predicate {predicate_id}")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} names unknown predicate {predicate_id}")
             if "transition" not in effective_checkpoints(gates[gate_id], predicates[predicate_id]):
-                raise ContractError(f"WEX-ECP-030: predicate {predicate_id} is bound to transition but does not declare that checkpoint")
+                raise ContractRefusal(WEX_ECP_030, f"predicate {predicate_id} is bound to transition but does not declare that checkpoint")
         for structural in _strings(binding["structural"], f"transition binding {family}:{target} structural"):
             if structural not in STRUCTURAL_CHECKS:
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown structural check {structural}")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} names unknown structural check {structural}")
         key = (family, target, None if types is None else ",".join(sorted(types)))
         if key in seen:
-            raise ContractError(f"WEX-ECP-030: duplicate transition binding {family}:{target}")
+            raise ContractRefusal(WEX_ECP_030, f"duplicate transition binding {family}:{target}")
         seen.add(key)
         covered = bound.setdefault((family, target), set())
         if types is None:
@@ -628,8 +629,7 @@ def _validate_transition_bindings(
                 if covered is None:
                     continue
                 if family != "definition" or not covered or not DEFINITION_TYPES.issubset(covered):
-                    raise ContractError(
-                        f"WEX-ECP-030: lifecycle edge {family}:{source} -> {target} has no transition binding"
+                    raise ContractRefusal(WEX_ECP_030, f"lifecycle edge {family}:{source} -> {target} has no transition binding"
                     )
 
 
@@ -779,7 +779,7 @@ def render_operating_card(
     lines.append("")
     rendered = "\n".join(lines).encode("utf-8")
     if len(rendered) > OPERATING_CARD_LIMIT:
-        raise ContractError(f"WEX-ADS-003: operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")
+        raise ContractRefusal(WEX_ADS_003, f"operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")
     return rendered
 
 

@@ -232,3 +232,5 @@ inferred by the actor. Nothing else in this specification changes.
 ## Amendment record
 
 **`ECP-JNL-001` to `ECP-JNL-005` are retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-030`).** `se_harness/journaled_apply.py` is removed; no command performs a journaled write and `harnessctl recover` never existed. The delegation rules of this specification are unchanged.
+
+**The three delegated rights are read from `workflow_contract.json` `agentic_operations` at run time, under `WO-ECP-033` (`SPEC-ECP-023` `ECP-PRM-019` and `ECP-PRM-026`), recorded 2026-09-08.** `ECP-DLG-002` names `DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE`; the operative table is the contract section, which the delegation gate, the transition planner and the mutation guard read, and their Python copies are gone. The Compatibility sentence "`workflow_contract.json` drops the `agentic_operations` block" is superseded: the block stayed under its schema-v4 name and is now the one source; a missing or malformed section refuses with `WEX-ECP-031` before any read. Nothing else in this specification changes.

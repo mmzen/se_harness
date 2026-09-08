@@ -41,6 +41,26 @@ from se_harness.runtime_identity import (
     SHA256_PATTERN,
     inspect_runtime_identity,
 )
+from se_harness.codes import (
+    CC001,
+    CC002,
+    CC003,
+    CC004,
+    CP001,
+    CP002,
+    PI001,
+    PI002,
+    PI003,
+    PI004,
+    PI005,
+    PV001,
+    PV002,
+    RID000,
+    RR001,
+    RR002,
+    RR003,
+    RR004,
+)
 
 
 QUALIFICATION_SCHEMA = "se-harness-release-qualification-v1"
@@ -61,7 +81,7 @@ INDEPENDENCE = {
 #: Retired with the predecessor-bootstrap release path under WO-REB-028. The
 #: values stay reserved so no later check reuses them for another meaning; no
 #: code path emits them.
-RETIRED_CHECK_CODES = ("PV001", "PV002")
+RETIRED_CHECK_CODES = (PV001, PV002)
 
 MAX_COMMAND_OUTPUT_BYTES = 4 * 1024 * 1024
 MAX_WHEEL_BYTES = 100 * 1024 * 1024
@@ -353,7 +373,7 @@ def _runtime_summary(identity: Any, role: str) -> dict[str, Any]:
     diagnostics = getattr(identity, "diagnostics", ())
     value["diagnostics"] = [
         {
-            "code": str(getattr(item, "code", "RID000")),
+            "code": str(getattr(item, "code", RID000)),
             "subject": str(getattr(item, "subject", "runtime")),
             "message": _bounded_message(str(getattr(item, "message", "identity mismatch"))),
         }
@@ -415,7 +435,7 @@ def qualify_released_root(root: Path) -> QualificationResult:
     )
     checks.append(
         _check(
-            "RR001",
+            RR001,
             identity.passed,
             "released-evaluator",
             "runtime matches the target root lock" if identity.passed else "runtime does not match the target root lock",
@@ -425,22 +445,22 @@ def qualify_released_root(root: Path) -> QualificationResult:
         managed = inspect_installation(selected)
         checks.append(
             _check(
-                "RR002",
+                RR002,
                 bool(managed) and all(item.passed for item in managed),
                 "managed-root",
                 f"{sum(item.passed for item in managed)}/{len(managed)} managed checks passed",
             )
         )
-        checks.append(_validation_check(selected, "RR003"))
+        checks.append(_validation_check(selected, RR003))
     else:
         checks.extend(
             [
-                _check("RR002", False, "managed-root", "not run after evaluator identity failure"),
-                _check("RR003", False, "engineering-graph", "not run after evaluator identity failure"),
+                _check(RR002, False, "managed-root", "not run after evaluator identity failure"),
+                _check(RR003, False, "engineering-graph", "not run after evaluator identity failure"),
             ]
         )
     after = _repository_snapshot(selected)
-    checks.append(_check("RR004", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(RR004, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     target = {
         "kind": "released-root",
         "lock_schema": lock.get("schema"),
@@ -470,15 +490,15 @@ def qualify_complete_candidate(root: Path, *, candidate_commit: str) -> Qualific
     )
     tracked_clean = _tracked_clean(selected)
     checks = [
-        _check("CC001", identity.passed, "candidate-runtime", "candidate runtime is bound to the checkout" if identity.passed else "candidate runtime identity failed"),
-        _check("CC002", observed_commit == candidate_commit and tracked_clean, "candidate-commit", "HEAD and tracked tree match the candidate" if observed_commit == candidate_commit and tracked_clean else "HEAD or tracked tree differs from the candidate"),
+        _check(CC001, identity.passed, "candidate-runtime", "candidate runtime is bound to the checkout" if identity.passed else "candidate runtime identity failed"),
+        _check(CC002, observed_commit == candidate_commit and tracked_clean, "candidate-commit", "HEAD and tracked tree match the candidate" if observed_commit == candidate_commit and tracked_clean else "HEAD or tracked tree differs from the candidate"),
     ]
     if all(item.passed for item in checks):
-        checks.append(_validation_check(selected, "CC003"))
+        checks.append(_validation_check(selected, CC003))
     else:
-        checks.append(_check("CC003", False, "engineering-graph", "not run after candidate identity failure"))
+        checks.append(_check(CC003, False, "engineering-graph", "not run after candidate identity failure"))
     after = _repository_snapshot(selected)
-    checks.append(_check("CC004", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(CC004, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     return _result(
         "complete-candidate",
         evaluator=_runtime_summary(identity, "candidate-source"),
@@ -513,7 +533,7 @@ def qualify_candidate_package(
         require_entry_point=True,
     )
     checks = [
-        _check("CP001", identity.passed, "released-verifier", "released verifier identity is exact and isolated" if identity.passed else "released verifier identity failed"),
+        _check(CP001, identity.passed, "released-verifier", "released verifier identity is exact and isolated" if identity.passed else "released verifier identity failed"),
     ]
     manifest = None
     if identity.passed:
@@ -526,11 +546,11 @@ def qualify_candidate_package(
                 checkout_root=checkout_root,
             )
         except HarnessError as exc:
-            checks.append(_check("CP002", False, "candidate-wheel", _bounded_message(str(exc))))
+            checks.append(_check(CP002, False, "candidate-wheel", _bounded_message(str(exc))))
         else:
-            checks.append(_check("CP002", True, "candidate-wheel", f"{len(manifest.scenarios)} released-verifier scenarios passed"))
+            checks.append(_check(CP002, True, "candidate-wheel", f"{len(manifest.scenarios)} released-verifier scenarios passed"))
     else:
-        checks.append(_check("CP002", False, "candidate-wheel", "not run after verifier identity failure"))
+        checks.append(_check(CP002, False, "candidate-wheel", "not run after verifier identity failure"))
     target = {
         "kind": "candidate-package",
         "commit": candidate_commit,
@@ -645,13 +665,13 @@ def qualify_public_install(
         and all(operation.encode("ascii") in qualify_smoke.stdout for operation in OPERATIONS)
     )
     checks = [
-        _check("PI001", wheel_ok, "public-wheel", "released wheel, record, and installed archive agree" if wheel_ok else "released wheel, record, or installed archive differs"),
-        _check("PI002", payload_ok, "installed-payload", "wheel and installed payload digests agree" if payload_ok else "wheel or installed payload digest differs"),
-        _check("PI003", entry_ok and not contaminated, "installed-runtime", "entry point and resources are isolated from source" if entry_ok and not contaminated else "entry point or resources are contaminated"),
-        _check("PI004", behavior_ok, "public-cli", "installed version and qualification surface passed" if behavior_ok else "installed CLI behavior differs"),
+        _check(PI001, wheel_ok, "public-wheel", "released wheel, record, and installed archive agree" if wheel_ok else "released wheel, record, or installed archive differs"),
+        _check(PI002, payload_ok, "installed-payload", "wheel and installed payload digests agree" if payload_ok else "wheel or installed payload digest differs"),
+        _check(PI003, entry_ok and not contaminated, "installed-runtime", "entry point and resources are isolated from source" if entry_ok and not contaminated else "entry point or resources are contaminated"),
+        _check(PI004, behavior_ok, "public-cli", "installed version and qualification surface passed" if behavior_ok else "installed CLI behavior differs"),
     ]
     after = _repository_snapshot(selected)
-    checks.append(_check("PI005", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(PI005, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     return _result(
         "public-install",
         evaluator={
