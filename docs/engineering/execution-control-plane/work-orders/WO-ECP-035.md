@@ -2,7 +2,7 @@
 id = "WO-ECP-035"
 type = "work_order"
 title = "Wave 3, group B: one validation per governance command"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-09-08T17:38:49Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete, prepare the record, start group B' after WO-ECP-034 was marked implemented and VREC-ECP-038 prepared at b7444502: wave 3, group B, one validation per governance command (SPEC-ECP-024 ECP-ENG-010 to ECP-ENG-016, ECP-ENG-023 to ECP-ENG-026). Start preflight PASS. Stacked on the group A branch because the two groups edit the same modules."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T18:16:20Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete, prepare the record, start group C': each governance command validates the repository at most once and a command that validates does so exactly once (before, check --checkpoint start twice, capture-verification and prepare-release three times); the report travels into preflight, the snapshot builder, provenance and qualification; provenance reads the validator's metadata and parses no TOML twice; doctor reads W013 from the layout pass alone; preflight lists candidate-versus-released skew apart and the check applies the same classifier; SPEC-ECP-005 carries the ECP-KRN-007 amendment record. Every recorded output byte-identical to the group A code on the same target and revision; CONTRACT_SHA256 unchanged. Windows suite at its baseline (1068 tests, the one workstation error, 22 skips) at 51f25a22 and the 13 pull-request checks of #412 green at c3ffb181; validate 1428 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from the group A head passes all nine predicates over 16 paths. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-035/WO-ECP-035-handoff.md."
 +++
 
 # Work Order: Wave 3, group B: one validation per governance command
