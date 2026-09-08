@@ -57,7 +57,7 @@ class RegistryTests(unittest.TestCase):
 
     def test_no_package_module_spells_a_diagnostic_code(self) -> None:
         offenders: list[str] = []
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
+        for path in sorted((REPOSITORY_ROOT / "se_harness").rglob("*.py")):  # the engine included (ECP-ENG-009)
             if path.name in EXEMPT_MODULES:
                 continue
             tree = ast.parse(path.read_text(encoding="utf-8"))

@@ -470,7 +470,7 @@ class InspectionReportTests(unittest.TestCase):
             before = list(root.rglob("*"))
             stdout = io.StringIO()
             stderr = io.StringIO()
-            with mock.patch("inspect_engineering_artifacts.generate_snapshot", return_value=(snapshot, None, root)):
+            with mock.patch("se_harness.engine.inspect_engineering_artifacts.generate_snapshot", return_value=(snapshot, None, root)):
                 with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
                     code = main(["--root", str(root), "--json"])
             after = list(root.rglob("*"))
@@ -487,7 +487,7 @@ class InspectionReportTests(unittest.TestCase):
             stdout = io.StringIO()
             stderr = io.StringIO()
             with mock.patch(
-                "inspect_engineering_artifacts.generate_snapshot",
+                "se_harness.engine.inspect_engineering_artifacts.generate_snapshot",
                 return_value=({"schema": "unknown"}, None, root),
             ):
                 with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
@@ -511,9 +511,9 @@ class InspectionReportTests(unittest.TestCase):
             )
             self.assertNotEqual(root_script.resolve(), canonical.resolve())
         source = canonical.read_text(encoding="utf-8")
-        self.assertIn("from generate_harness_dashboard import", source)
+        self.assertIn("from se_harness.engine.generate_harness_dashboard import", source)  # ECP-ENG-001
         self.assertIn("generate_snapshot", source)
-        self.assertIn('"W-REB-003"', source)
+        self.assertIn("W_REB_003", source)  # ECP-ENG-009: the engine names its codes
         # SPEC-DST-025 DST-ENG-001, DST-ENG-003: the inspector ships as a module of
         # the se_harness.engine package, not as a template data file.
         self.assertNotIn(

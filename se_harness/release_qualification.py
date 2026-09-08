@@ -24,7 +24,8 @@ from se_harness.evaluator_identity import (
 )
 from se_harness import front_matter
 from se_harness._process import run as _launch
-from se_harness.installer import ENGINE_ROOT, HarnessError, template_root
+from se_harness.engine import validate_engineering_artifacts
+from se_harness.installer import HarnessError, template_root
 from se_harness.integrity import (
     WHEEL_VERSION_PATTERN,
     atomic_create_bytes,
@@ -309,20 +310,10 @@ def _tracked_clean(root: Path) -> bool:
 
 
 def _validator_report(root: Path) -> dict[str, Any]:
-    validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
-    if not validator.is_file():
-        raise HarnessError("installed engineering validator is unavailable")
-    completed = _run(
-        [sys.executable, "-B", str(validator), "--root", str(root), "--json"],
-        cwd=root,
-    )
-    try:
-        value = json.loads(completed.stdout.decode("utf-8"))
-    except (UnicodeError, json.JSONDecodeError) as exc:
-        raise HarnessError("installed engineering validator returned invalid JSON") from exc
-    if not isinstance(value, dict):
-        raise HarnessError("installed engineering validator returned an invalid report")
-    value["_returncode"] = completed.returncode
+    # ECP-ENG-003: the installed validator is imported and run in-process on the selected root.
+    validation = validate_engineering_artifacts.validate_repository(root)
+    value = validation.to_dict(root)
+    value["_returncode"] = 0 if validation.valid else 1
     return value
 
 

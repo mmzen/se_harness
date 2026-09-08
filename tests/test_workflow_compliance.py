@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow_compliance import (
     own_record_paths,
     declared_change_set,
@@ -109,7 +109,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         failures = [item for item in report.errors if item.code == "E020"]
         self.assertEqual(1, len(failures))
         self.assertIn("invalid execution scope path", failures[0].message)
@@ -248,7 +248,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         }
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
 
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         digest = formal_snapshot_digest(self.root, report.artifacts)
         evidence.write_text(
             f"artifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n",
@@ -485,7 +485,7 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         packet = self.root / self.PACKET
         data = packet.read_bytes()
         # a substring copy of the binding inside the body proves nothing once a header exists
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         digest = formal_snapshot_digest(self.root, report.artifacts)
         packet.write_bytes(data.replace(digest.encode("utf-8"), b"0" * 64, 1) + f"\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n".encode("utf-8"))
         code, result, error = self.check_real("--changes-complete", "--json")
@@ -602,7 +602,7 @@ class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
         self.assertFalse((self.root / self.PACKET).exists())
         # ECP-SBH-002: the legacy grace still reads a headerless packet, and the run leaves it alone.
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         digest = formal_snapshot_digest(self.root, report.artifacts)
         legacy = f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n"
         (self.root / self.PACKET).parent.mkdir(parents=True, exist_ok=True)

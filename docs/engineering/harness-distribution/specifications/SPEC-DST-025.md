@@ -132,3 +132,7 @@ run on a fresh installation that lists a `scripts/` check does not.
 The name of the engine directory. Whether each script gains a docstring
 naming its new home. The wording of the notes and the release notes. The
 order in which the tests are rewritten.
+
+## Amendment record
+
+**`DST-ENG-003` and `DST-ENG-006` are amended under `WO-ECP-034` (`SPEC-ECP-024` `ECP-ENG-001` to `ECP-ENG-004` and `ECP-ENG-025`), recorded 2026-09-08.** The engine directory is an importable package: its modules import their siblings and the package by name, the evaluator imports them in-process, and each entry module runs as `python -m se_harness.engine.<name>`, no longer as a subprocess by path with its directory first on `sys.path`. `artifact_layout_registry.py` leaves the engine; its tables have one definition in `se_harness/artifact_layout.py`, so the evaluator files that ship are the three entry modules and the Explorer template. `DST-ENG-004`, `DST-ENG-005` and `DST-ENG-007` stand: an engine module is resolved from the package alone, a missing one fails the import as an installation defect before the target is read, and arguments, output formats, exit codes and diagnostic codes are unchanged. Nothing else in this specification changes.

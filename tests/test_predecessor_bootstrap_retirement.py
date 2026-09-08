@@ -255,14 +255,10 @@ def _imported_names(source: Path) -> set[str]:
 
 
 def _load_candidate_validator():
-    """Load the copy of the managed validator consumer repositories install.
+    """The candidate validator, imported (SPEC-ECP-024 ECP-ENG-001): the engine module of this checkout."""
+    from se_harness.engine import validate_engineering_artifacts
 
-    Loaded by path, never by import name: `WO-REB-029` edits this copy only, so
-    a test that silently picked up the root copy would report the retirement as
-    incomplete or as complete for the wrong file.
-    """
-    path = REPOSITORY_ROOT / CANDIDATE_VALIDATOR_PATH
-    return load_module(path, "_reb029_candidate_validator")
+    return validate_engineering_artifacts
 
 
 class DeletedSurfaceTests(unittest.TestCase):

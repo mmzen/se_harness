@@ -10,6 +10,8 @@ document's newline convention and BOM through `split_document`.
 
 from __future__ import annotations
 
+import re
+
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
@@ -142,3 +144,20 @@ def split_document(data: bytes, *, error: type[Exception] = FrontMatterError) ->
     body = "".join(lines[closing + 1 :])
     bom = "﻿" if data.startswith(b"\xef\xbb\xbf") else ""
     return Document(tuple(clean[1:closing]), body, newline, bom + DELIMITER + newline)
+
+
+_FENCE = re.compile(r"```.*?```", re.S)
+
+
+def body_sections(body: str) -> dict[str, str]:
+    """Second-level headings to their text, fenced code removed (ECP-ENG-008: the one body parser)."""
+
+    sections: dict[str, str] = {}
+    current = ""
+    for line in _FENCE.sub(" ", body.replace("\r\n", "\n")).split("\n"):
+        if line.startswith("## "):
+            current = line[3:].strip()
+            sections.setdefault(current, "")
+        elif current:
+            sections[current] += line + "\n"
+    return sections

@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow_contract import load_quality_gate_contract, load_validated_contracts
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, WORKFLOW_CONTRACT
 from tests.fixture_support import standard_repository
@@ -110,7 +110,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                 self.assertGreaterEqual(gates.count(f"`{predicate['id']}`"), 1)
 
     def test_runtime_and_repository_validator_use_the_same_transitions(self) -> None:
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         self.assertEqual(TRANSITIONS, validator.WORKFLOW_TRANSITIONS)
         for family, states in LIFECYCLE_REGISTRY.items():
             self.assertEqual(set(states), set(validator.WORKFLOW_LIFECYCLES[family]))

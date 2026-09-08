@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """Validate specification-driven engineering artifacts.
 
-The validator intentionally uses only the Python 3.11+ standard library so it can
-run before the repository's normal toolchain is available.
+A module of the ``se_harness.engine`` package (SPEC-ECP-024 ECP-ENG-001): it reads
+the layout tables from ``se_harness.artifact_layout`` and runs in-process for every
+governance command, or as ``python -m se_harness.engine.validate_engineering_artifacts``.
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
-import importlib.util
 import json
 import re
 from collections import Counter, defaultdict
@@ -24,18 +23,26 @@ try:
 except ModuleNotFoundError as exc:  # pragma: no cover - version guard
     raise SystemExit("Python 3.11 or later is required (missing tomllib).") from exc
 
-_LAYOUT_PATH = Path(__file__).with_name("artifact_layout_registry.py")
-_LAYOUT_SPEC = importlib.util.spec_from_file_location("_se_harness_artifact_layout_registry", _LAYOUT_PATH)
-if _LAYOUT_SPEC is None or _LAYOUT_SPEC.loader is None:
-    raise RuntimeError(f"cannot load artifact layout registry: {_LAYOUT_PATH}")
-_LAYOUT = importlib.util.module_from_spec(_LAYOUT_SPEC)
-_LAYOUT_SPEC.loader.exec_module(_LAYOUT)
-ARTIFACT_DIRECTORIES = _LAYOUT.ARTIFACT_DIRECTORIES
-ARTIFACT_PREFIXES = _LAYOUT.ARTIFACT_PREFIXES
-artifact_domain_from_relative_path = _LAYOUT.artifact_domain_from_relative_path
-canonical_artifact_relative_path = _LAYOUT.canonical_artifact_relative_path
-common_artifact_domain = _LAYOUT.common_artifact_domain
-repository_record_relative_path = _LAYOUT.repository_record_relative_path
+# ECP-ENG-004: the layout tables have one definition, in the package.
+from se_harness.evaluator_evidence import (  # noqa: E402
+    MAX_EVIDENCE_BYTES,
+    EvaluatorEvidenceError,
+    canonical_evidence_bytes,
+    normalize_evaluator_identity,
+    unique_evidence_object,
+    validate_evaluator_evidence,
+)
+from se_harness.front_matter import body_sections  # noqa: E402
+from se_harness.integrity import raw_sha256  # noqa: E402
+from se_harness.artifact_layout import (  # noqa: E402
+    ARTIFACT_DIRECTORIES,
+    ARTIFACT_PREFIXES,
+    ID_PATTERN,
+    artifact_domain_from_relative_path,
+    canonical_artifact_relative_path,
+    common_artifact_domain,
+    repository_record_relative_path,
+)
 
 
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
@@ -43,17 +50,11 @@ VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
 
 TYPE_PREFIX = dict(ARTIFACT_PREFIXES)
 
-ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 EVIDENCE_WORK_ORDER_PATTERN = re.compile(
     r"^(WO-(?:[A-Z0-9-]*-)?\d{3})(?:-|\.|$)"
 )
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
-EVALUATOR_EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
-EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
-EVALUATOR_EVIDENCE_MAX_BYTES = 64 * 1024
-EVALUATOR_ORIGIN_PATTERN = re.compile(r"^<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*$")
-EVALUATOR_VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}$")
 # The legacy release-evidence declaration mechanism (SPEC-LRE-001) was retired
 # under WO-LRE-002 (the evaluator-evidence floor, owner decision of 2026-08-30):
 # a released record carrying neither evaluator-evidence field is not assessed.
@@ -63,120 +64,81 @@ GIT_COMMIT_PATTERNS = {
     "sha256": re.compile(r"^[0-9a-f]{64}$"),
 }
 
-RELEASABLE_WORK_STATUSES = {
-    "implemented",
-    "verified",
-    "released",
-}
 
 
-@dataclass(frozen=True)
-class LifecycleStatePolicy:
-    transitions_to: tuple[str, ...]
-    grants_authority: bool
-    reserves_version: bool
-    transitionable: bool
-    must_remain_visible: bool
-    predecessor_adapter: str
+# ECP-ENG-005, ECP-ENG-007: the lifecycle registry, its family map and the status set have one
+# home, in the package; the engine's former class name stays as an alias for its readers.
+from se_harness.workflow_contract import (  # noqa: E402
+    IMPLEMENTED_OR_LATER_STATUSES,
+    LifecycleState,
+    lifecycle_family as _lifecycle_family,
+    load_lifecycle_registry,
+)
+from se_harness.codes import (  # noqa: E402
+    E001,
+    E002,
+    E003,
+    E004,
+    E005,
+    E006,
+    E007,
+    E008,
+    E009,
+    E010,
+    E011,
+    E012,
+    E014,
+    E015,
+    E016,
+    E017,
+    E018,
+    E019,
+    E020,
+    E_AUT_001,
+    E_AUT_002,
+    E_DCM_001,
+    E_DCM_002,
+    E_DCM_003,
+    E_DCM_005,
+    E_ECP_001,
+    E_RSK_001,
+    E_RSK_002,
+    E_RSK_003,
+    E_RSK_004,
+    E_RSK_005,
+    W013,
+    W014,
+    W015,
+    W_AUT_001,
+    W_AUT_002,
+    W_AUT_003,
+    W_AUT_004,
+    W_AUT_005,
+    W_AUT_006,
+    W_AUT_007,
+    W_AUT_008,
+    W_AUT_009,
+    W_AUT_010,
+    W_AUT_011,
+    W_AUT_012,
+    W_AUT_013,
+    W_AUT_014,
+    W_AUT_015,
+    W_AUT_016,
+    W_AUT_017,
+    W_AUT_018,
+    W_AUT_019,
+    W_AUT_020,
+    W_AUT_021,
+    W_AUT_022,
+    W_AUT_023,
+    W_DCM_001,
+    W_DCM_002,
+    W_RSK_001,
+)
 
-
-_LIFECYCLE_FAMILIES = {"definition", "work_order", "verification_record", "release_record", "decision", "risk"}
-_LIFECYCLE_FIELDS = {
-    "transitions_to",
-    "grants_authority",
-    "reserves_version",
-    "transitionable",
-    "must_remain_visible",
-    "predecessor_adapter",
-}
-_PREDECESSOR_ADAPTER_VALUES = {"none", "required"}
-_STATE_NAME_PATTERN = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
-
-
-def _workflow_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise RuntimeError(f"managed workflow contract contains duplicate JSON key: {key}")
-        value[key] = item
-    return value
-
-
-def _load_workflow_lifecycles() -> MappingProxyType:
-    # SPEC-DST-025 DST-ENG-003: the script ships inside the package and reads the
-    # package's own copy of the managed workflow contract, byte-identical to the
-    # template's docs/engineering/WORKFLOW.json.
-    path = Path(__file__).resolve().parent.parent / "workflow_contract.json"
-    try:
-        raw = path.read_bytes()
-        if len(raw) > 2_000_000:
-            raise RuntimeError(f"managed workflow contract exceeds 2 MB: {path}")
-        contract = json.loads(raw.decode("utf-8"), object_pairs_hook=_workflow_object)
-    except RuntimeError:
-        raise
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise RuntimeError(f"cannot load managed workflow contract: {path}") from exc
-    if not isinstance(contract, dict) or contract.get("schema") != "se-harness-workflow-v4":
-        raise RuntimeError("managed workflow contract has an unsupported schema")
-    source = contract.get("lifecycles")
-    if not isinstance(source, dict) or set(source) != _LIFECYCLE_FAMILIES:
-        raise RuntimeError("managed workflow contract must declare exactly the six lifecycle families")
-    lifecycles: dict[str, dict[str, LifecycleStatePolicy]] = {}
-    for family in sorted(_LIFECYCLE_FAMILIES):
-        raw_states = source.get(family)
-        if not isinstance(raw_states, dict) or not raw_states:
-            raise RuntimeError(f"managed workflow lifecycle family {family} must contain states")
-        states: dict[str, LifecycleStatePolicy] = {}
-        for current, raw_row in raw_states.items():
-            if not isinstance(current, str) or _STATE_NAME_PATTERN.fullmatch(current) is None:
-                raise RuntimeError(f"managed workflow lifecycle family {family} has an invalid state")
-            if not isinstance(raw_row, dict) or set(raw_row) != _LIFECYCLE_FIELDS:
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid fields")
-            targets = raw_row.get("transitions_to")
-            if (
-                not isinstance(targets, list)
-                or not all(isinstance(target, str) and _STATE_NAME_PATTERN.fullmatch(target) for target in targets)
-                or len(targets) != len(set(targets))
-            ):
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid transitions_to")
-            boolean_fields = (
-                "grants_authority",
-                "reserves_version",
-                "transitionable",
-                "must_remain_visible",
-            )
-            if any(type(raw_row.get(field)) is not bool for field in boolean_fields):
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has a non-boolean property")
-            adapter = raw_row.get("predecessor_adapter")
-            if adapter not in _PREDECESSOR_ADAPTER_VALUES:
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} has invalid predecessor_adapter")
-            if raw_row["transitionable"] != bool(targets):
-                raise RuntimeError(
-                    f"managed workflow lifecycle {family}:{current} transitionable disagrees with transitions_to"
-                )
-            if not raw_row["must_remain_visible"]:
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} must remain visible")
-            if family != "release_record" and raw_row["reserves_version"]:
-                raise RuntimeError(f"managed workflow lifecycle {family}:{current} cannot reserve a version")
-            states[current] = LifecycleStatePolicy(
-                transitions_to=tuple(targets),
-                grants_authority=raw_row["grants_authority"],
-                reserves_version=raw_row["reserves_version"],
-                transitionable=raw_row["transitionable"],
-                must_remain_visible=raw_row["must_remain_visible"],
-                predecessor_adapter=adapter,
-            )
-        for current, row in states.items():
-            unknown = set(row.transitions_to) - set(states)
-            if unknown:
-                raise RuntimeError(
-                    f"managed workflow lifecycle {family}:{current} targets unknown state {sorted(unknown)[0]}"
-                )
-        lifecycles[family] = MappingProxyType(states)
-    return MappingProxyType(lifecycles)
-
-
-WORKFLOW_LIFECYCLES = _load_workflow_lifecycles()
+LifecycleStatePolicy = LifecycleState
+WORKFLOW_LIFECYCLES = load_lifecycle_registry()
 WORKFLOW_TRANSITIONS = MappingProxyType({
     family: MappingProxyType(
         {state: frozenset(row.transitions_to) for state, row in states.items()}
@@ -189,10 +151,6 @@ ACTIVE_COVERAGE_STATUSES = frozenset({
     for state, row in WORKFLOW_LIFECYCLES[family].items()
     if row.grants_authority
 })
-
-
-def _lifecycle_family(artifact_type: str) -> str:
-    return artifact_type if artifact_type in {"work_order", "verification_record", "release_record", "decision", "risk"} else "definition"
 
 
 def _lifecycle_policy(artifact_type: str, status: str) -> LifecycleStatePolicy | None:
@@ -229,7 +187,6 @@ DECISION_TRIGGERS = {
     "difficult-to-reverse",
     "material-alternatives",
 }
-LEGACY_ARCHITECTURE_STATUSES = {"implemented", "verified", "released"}
 MAX_ASSESSMENT_RATIONALE_LENGTH = 2000
 MAX_ASSESSOR_LENGTH = 128
 WORK_ORDER_ASSURANCE_VALUES = {"required", "not_required"}
@@ -347,7 +304,7 @@ def _specification_rules(body: str) -> list[tuple[str | None, str]]:
 
     if not isinstance(body, str):
         return []
-    sections = _body_sections(body)
+    sections = body_sections(body)
     section = next((sections[name] for name in SPECIFICATION_RULE_SECTIONS if name in sections), None)
     if section is None:
         return []
@@ -371,7 +328,7 @@ def _coverage_rows(body: str) -> list[tuple[str, list[str]]] | None:
 
     if not isinstance(body, str):
         return None
-    section = _body_sections(body).get("Coverage")
+    section = body_sections(body).get("Coverage")
     if section is None:
         return None
     rows: list[tuple[str, list[str]]] = []
@@ -386,17 +343,9 @@ def _coverage_rows(body: str) -> list[tuple[str, list[str]]] | None:
     return rows
 
 
-def _body_sections(body: str) -> dict[str, str]:
-    """Second-level headings to their text, fenced code removed."""
-    sections: dict[str, str] = {}
-    current = ""
-    for line in _FENCE.sub(" ", body.replace("\r\n", "\n")).split("\n"):
-        if line.startswith("## "):
-            current = line[3:].strip()
-            sections.setdefault(current, "")
-        elif current:
-            sections[current] += line + "\n"
-    return sections
+#: ECP-ENG-008: the rule and coverage readers the generator shares with the validator.
+specification_rules = _specification_rules
+coverage_rows = _coverage_rows
 VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
 REQUIREMENT_PRIORITIES = ("must", "should", "could")
 
@@ -439,45 +388,45 @@ def validate_authoring(artifacts: list[Artifact], report_root: Path) -> tuple[li
             if text.startswith("IF ") and " THEN " not in text:
                 opener_ok = False
             if not opener_ok:
-                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-001",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), W_AUT_001,
                     "statement does not open with one of the five shapes (THE SYSTEM SHALL, WHEN, WHILE, IF ... THEN, WHERE)", "maintenance"))
             shall_count = len(re.findall(r"\bSHALL\b", text))
             if shall_count > 1:
-                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-002",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), W_AUT_002,
                     f"statement carries {shall_count} SHALL obligations; one requirement states one obligation", "maintenance"))
             statement_words = _word_count(text)
             if statement_words > AUTHORING_STATEMENT_LIMIT:
-                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-003",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), W_AUT_003,
                     f"statement is {statement_words} words; the budget is {AUTHORING_STATEMENT_LIMIT}", "maintenance"))
             if _EVALUATION_EVENT.match(text) and " AND " not in text.split(",", 1)[0].upper():
-                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-010",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), W_AUT_010,
                     "statement opens WHEN on an event of evaluation with no other condition; an invariant reads THE SYSTEM SHALL", "maintenance"))
         if draft:
             advisories.extend(_reader_first_advisories(artifact, report_root))
         method = artifact.metadata.get("verification_method")
         if isinstance(method, str):
             if method.strip() and draft:
-                advisories.append(Diagnostic(_display_path(artifact.path, report_root), "W-AUT-004",
+                advisories.append(Diagnostic(_display_path(artifact.path, report_root), W_AUT_004,
                     "verification_method is a free-text string; the closed vocabulary is an array of test, analysis, inspection, demonstration", "maintenance"))
         elif isinstance(method, list):
             if not method or len(method) > len(VERIFICATION_METHODS) or len(set(method)) != len(method) or any(item not in VERIFICATION_METHODS for item in method):
-                _add_error(errors, artifact, report_root, "E-AUT-001",
+                _add_error(errors, artifact, report_root, E_AUT_001,
                     f"verification_method must list 1-4 distinct values from {', '.join(VERIFICATION_METHODS)}", plane="structure")
         notes = artifact.metadata.get("verification_notes")
         if notes is not None and (not isinstance(notes, str) or not notes.strip()):
-            _add_error(errors, artifact, report_root, "E-AUT-002", "verification_notes must be a non-empty string when present", plane="structure")
+            _add_error(errors, artifact, report_root, E_AUT_002, "verification_notes must be a non-empty string when present", plane="structure")
         priority = artifact.metadata.get("priority")
         if priority is not None and priority not in REQUIREMENT_PRIORITIES:
-            _add_error(errors, artifact, report_root, "E-AUT-002", f"priority must be one of {', '.join(REQUIREMENT_PRIORITIES)}", plane="structure")
+            _add_error(errors, artifact, report_root, E_AUT_002, f"priority must be one of {', '.join(REQUIREMENT_PRIORITIES)}", plane="structure")
         source = artifact.metadata.get("source")
         if source is not None:
             if not isinstance(source, str) or not source.strip():
-                _add_error(errors, artifact, report_root, "E-AUT-002", "source must be a non-empty string when present", plane="structure")
+                _add_error(errors, artifact, report_root, E_AUT_002, "source must be a non-empty string when present", plane="structure")
             elif ID_PATTERN.fullmatch(source.strip()) is not None and source.strip() not in catalog:
-                _add_error(errors, artifact, report_root, "E-AUT-002", f"source names an unknown artifact '{source.strip()}'", plane="structure")
+                _add_error(errors, artifact, report_root, E_AUT_002, f"source names an unknown artifact '{source.strip()}'", plane="structure")
         measure = artifact.metadata.get("measure")
         if measure is not None and (not isinstance(measure, str) or not measure.strip()):
-            _add_error(errors, artifact, report_root, "E-AUT-002", "measure must be a non-empty string when present", plane="structure")
+            _add_error(errors, artifact, report_root, E_AUT_002, "measure must be a non-empty string when present", plane="structure")
     return errors, warnings, advisories
 
 
@@ -489,27 +438,27 @@ def _reader_first_advisories(artifact: Artifact, report_root: Path) -> list[Diag
     found: list[Diagnostic] = []
     body_words = _word_count(body)
     if body_words > AUTHORING_BODY_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {AUTHORING_BODY_LIMIT}", "maintenance"))
-    sections = _body_sections(body)
+        found.append(Diagnostic(path, W_AUT_005, f"body is {body_words} words; the budget is {AUTHORING_BODY_LIMIT}", "maintenance"))
+    sections = body_sections(body)
     why = sections.get("Why")
     if why is not None:
         why_words = _word_count(why)
         why_sentences = len(_sentences(why))
         if why_words > AUTHORING_WHY_WORD_LIMIT or why_sentences > AUTHORING_WHY_SENTENCE_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-006",
+            found.append(Diagnostic(path, W_AUT_006,
                 f"Why is {why_words} words in {why_sentences} sentences; the budget is {AUTHORING_WHY_WORD_LIMIT} words or {AUTHORING_WHY_SENTENCE_LIMIT} sentences", "maintenance"))
     longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
     if longest > AUTHORING_SENTENCE_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_007, f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
     identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
     if identifiers > AUTHORING_CODE_IDENTIFIER_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-008",
+        found.append(Diagnostic(path, W_AUT_008,
             f"body cites {identifiers} code identifiers; the budget is {AUTHORING_CODE_IDENTIFIER_LIMIT}, the rest belongs in the specification", "maintenance"))
     plain = sections.get("In plain words")
     if body.strip() and plain is None:
-        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_009, "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
     elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
-        found.append(Diagnostic(path, "W-AUT-009",
+        found.append(Diagnostic(path, W_AUT_009,
             f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     return found
 
@@ -542,59 +491,59 @@ def _intent_authoring(artifact: Artifact, report_root: Path) -> tuple[list[Diagn
     found: list[Diagnostic] = []
     outcome = artifact.metadata.get("outcome")
     if outcome is not None and (not isinstance(outcome, str) or not outcome.strip()):
-        _add_error(errors, artifact, report_root, "E-AUT-002", "outcome must be a non-empty string when present", plane="structure")
+        _add_error(errors, artifact, report_root, E_AUT_002, "outcome must be a non-empty string when present", plane="structure")
     if artifact.status != "draft":
         return errors, found
     path = _display_path(artifact.path, report_root)
     if not isinstance(outcome, str) or not outcome.strip():
-        found.append(Diagnostic(path, "W-AUT-011", "intent has no outcome; one sentence names who can do or observe what after delivery", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_011, "intent has no outcome; one sentence names who can do or observe what after delivery", "maintenance"))
     else:
         outcome_words = _word_count(outcome)
         if outcome_words > INTENT_OUTCOME_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-011", f"outcome is {outcome_words} words; the budget is {INTENT_OUTCOME_LIMIT}", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_011, f"outcome is {outcome_words} words; the budget is {INTENT_OUTCOME_LIMIT}", "maintenance"))
         outcome_spans = len(_CODE_SPAN.findall(outcome))
         if outcome_spans:
-            found.append(Diagnostic(path, "W-AUT-011", f"outcome cites {outcome_spans} code identifiers; the outcome names no solution", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_011, f"outcome cites {outcome_spans} code identifiers; the outcome names no solution", "maintenance"))
     body = artifact.body if isinstance(artifact.body, str) else ""
     body_words = _word_count(body)
     if body_words > INTENT_BODY_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {INTENT_BODY_LIMIT}", "maintenance"))
-    sections = _body_sections(body)
+        found.append(Diagnostic(path, W_AUT_005, f"body is {body_words} words; the budget is {INTENT_BODY_LIMIT}", "maintenance"))
+    sections = body_sections(body)
     problem = sections.get("Problem")
     if problem is not None:
         problem_words = _word_count(problem)
         problem_sentences = len(_sentences(problem))
         if problem_words > INTENT_PROBLEM_WORD_LIMIT or problem_sentences > INTENT_PROBLEM_SENTENCE_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-012",
+            found.append(Diagnostic(path, W_AUT_012,
                 f"Problem is {problem_words} words in {problem_sentences} sentences; the budget is {INTENT_PROBLEM_WORD_LIMIT} words or {INTENT_PROBLEM_SENTENCE_LIMIT} sentences", "maintenance"))
     longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
     if longest > AUTHORING_SENTENCE_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_007, f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
     unfenced = _FENCE.sub(" ", body)
     identifiers = len(_CODE_SPAN.findall(unfenced))
     if identifiers > INTENT_CODE_IDENTIFIER_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-008",
+        found.append(Diagnostic(path, W_AUT_008,
             f"body cites {identifiers} code identifiers; the budget is {INTENT_CODE_IDENTIFIER_LIMIT}, the evidence belongs in a note, an RCA or an ADR", "maintenance"))
     citations = len({span for span in _CODE_SPAN.findall(unfenced) if _REPOSITORY_PATH_SPAN.fullmatch(span) or _LINE_RANGE_SPAN.fullmatch(span)})
     if citations:
-        found.append(Diagnostic(path, "W-AUT-015",
+        found.append(Diagnostic(path, W_AUT_015,
             f"body cites {citations} repository paths or source line ranges; evidence is cited by link to a note, an RCA or an ADR, not quoted", "maintenance"))
     plain = sections.get("In plain words")
     if body.strip() and plain is None:
-        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_009, "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
     elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
-        found.append(Diagnostic(path, "W-AUT-009",
+        found.append(Diagnostic(path, W_AUT_009,
             f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     measures = sections.get("Success measures")
     if measures is not None:
         rows = _success_measure_rows(measures)
         if not rows:
-            found.append(Diagnostic(path, "W-AUT-014", "Success measures has no row; a success measure is what an operator can count or time after delivery", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_014, "Success measures has no row; a success measure is what an operator can count or time after delivery", "maintenance"))
         else:
             for cells in rows:
                 match = _ACCEPTANCE_VOCABULARY.search(cells[3])
                 if match is not None:
-                    found.append(Diagnostic(path, "W-AUT-013",
+                    found.append(Diagnostic(path, W_AUT_013,
                         f"success measure '{cells[0]}' is observed by {match.group(0)}; an acceptance check belongs in the verification contract", "maintenance"))
     return errors, found
 
@@ -606,52 +555,52 @@ def _capability_authoring(artifact: Artifact, report_root: Path) -> tuple[list[D
     found: list[Diagnostic] = []
     ability = artifact.metadata.get("ability")
     if ability is not None and (not isinstance(ability, str) or not ability.strip()):
-        _add_error(errors, artifact, report_root, "E-AUT-002", "ability must be a non-empty string when present", plane="structure")
+        _add_error(errors, artifact, report_root, E_AUT_002, "ability must be a non-empty string when present", plane="structure")
     if artifact.status != "draft":
         return errors, found
     path = _display_path(artifact.path, report_root)
     if not isinstance(ability, str) or not ability.strip():
-        found.append(Diagnostic(path, "W-AUT-016", "capability has no ability; one sentence names who can do what under which conditions", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_016, "capability has no ability; one sentence names who can do what under which conditions", "maintenance"))
     else:
         ability_words = _word_count(ability)
         lowered = {word.lower() for word in _WORD.findall(_prose(ability))}
         if ability_words > CAPABILITY_ABILITY_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-016", f"ability is {ability_words} words; the budget is {CAPABILITY_ABILITY_LIMIT}", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_016, f"ability is {ability_words} words; the budget is {CAPABILITY_ABILITY_LIMIT}", "maintenance"))
         if "can" not in lowered:
-            found.append(Diagnostic(path, "W-AUT-016", "ability does not say what the actor can do; the sentence is actor, can, achievement, under conditions", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_016, "ability does not say what the actor can do; the sentence is actor, can, achievement, under conditions", "maintenance"))
         if "under" not in lowered:
-            found.append(Diagnostic(path, "W-AUT-016", "ability names no condition; say under which conditions the actor can do it", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_016, "ability names no condition; say under which conditions the actor can do it", "maintenance"))
         ability_spans = len(_CODE_SPAN.findall(ability))
         if ability_spans:
-            found.append(Diagnostic(path, "W-AUT-016", f"ability cites {ability_spans} code identifiers; the ability names what an actor can do, not how", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_016, f"ability cites {ability_spans} code identifiers; the ability names what an actor can do, not how", "maintenance"))
     body = artifact.body if isinstance(artifact.body, str) else ""
     body_words = _word_count(body)
     if body_words > CAPABILITY_BODY_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-005", f"body is {body_words} words; the budget is {CAPABILITY_BODY_LIMIT}", "maintenance"))
-    sections = _body_sections(body)
+        found.append(Diagnostic(path, W_AUT_005, f"body is {body_words} words; the budget is {CAPABILITY_BODY_LIMIT}", "maintenance"))
+    sections = body_sections(body)
     need = sections.get("Actor and need")
     if need is not None:
         need_words = _word_count(need)
         need_sentences = len(_sentences(need))
         if need_words > CAPABILITY_NEED_WORD_LIMIT or need_sentences > CAPABILITY_NEED_SENTENCE_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-017",
+            found.append(Diagnostic(path, W_AUT_017,
                 f"Actor and need is {need_words} words in {need_sentences} sentences; the budget is {CAPABILITY_NEED_WORD_LIMIT} words or {CAPABILITY_NEED_SENTENCE_LIMIT} sentences", "maintenance"))
     longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(body)), default=0)
     if longest > AUTHORING_SENTENCE_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_007, f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
     identifiers = len(_CODE_SPAN.findall(_FENCE.sub(" ", body)))
     if identifiers > CAPABILITY_CODE_IDENTIFIER_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-008",
+        found.append(Diagnostic(path, W_AUT_008,
             f"body cites {identifiers} code identifiers; the budget is {CAPABILITY_CODE_IDENTIFIER_LIMIT}, the how belongs in the specification", "maintenance"))
     plain = sections.get("In plain words")
     if body.strip() and plain is None:
-        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_009, "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
     elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
-        found.append(Diagnostic(path, "W-AUT-009",
+        found.append(Diagnostic(path, W_AUT_009,
             f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     legacy = [heading for heading in sections if heading in _LEGACY_REQUIREMENT_LIST]
     if legacy:
-        found.append(Diagnostic(path, "W-AUT-018",
+        found.append(Diagnostic(path, W_AUT_018,
             f"body carries a {legacy[0]} list; the requirements that derive from a capability are read from the graph and shown by the Explorer", "maintenance"))
     return errors, found
 
@@ -663,75 +612,75 @@ def _specification_authoring(artifact: Artifact, report_root: Path) -> tuple[lis
     found: list[Diagnostic] = []
     contract = artifact.metadata.get("contract")
     if contract is not None and (not isinstance(contract, str) or not contract.strip()):
-        _add_error(errors, artifact, report_root, "E-AUT-002", "contract must be a non-empty string when present", plane="structure")
+        _add_error(errors, artifact, report_root, E_AUT_002, "contract must be a non-empty string when present", plane="structure")
     if artifact.status != "draft":
         return errors, found
     path = _display_path(artifact.path, report_root)
     # TCM-RFS-007: the contract sentence.
     if not isinstance(contract, str) or not contract.strip():
-        found.append(Diagnostic(path, "W-AUT-019", "specification has no contract; one sentence says what an implementation must do to conform", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_019, "specification has no contract; one sentence says what an implementation must do to conform", "maintenance"))
     else:
         contract_words = _word_count(contract)
         contract_sentences = len(_sentences(contract))
         contract_spans = len(_CODE_SPAN.findall(contract))
         if contract_words > SPECIFICATION_CONTRACT_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-019", f"contract is {contract_words} words; the budget is {SPECIFICATION_CONTRACT_LIMIT}", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_019, f"contract is {contract_words} words; the budget is {SPECIFICATION_CONTRACT_LIMIT}", "maintenance"))
         if contract_sentences > 1:
-            found.append(Diagnostic(path, "W-AUT-019", f"contract is {contract_sentences} sentences; the budget is one", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_019, f"contract is {contract_sentences} sentences; the budget is one", "maintenance"))
         if contract_spans:
-            found.append(Diagnostic(path, "W-AUT-019", f"contract cites {contract_spans} code identifiers; the contract says what conformance is, the rules say how", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_019, f"contract cites {contract_spans} code identifiers; the contract says what conformance is, the rules say how", "maintenance"))
     body = artifact.body if isinstance(artifact.body, str) else ""
-    sections = _body_sections(body)
+    sections = body_sections(body)
     # TCM-RFS-008 and TCM-RFS-009: rule identity and rule shape.
     rules = _specification_rules(body)
     seen: set[str] = set()
     for identifier, text in rules:
         if identifier is None:
-            found.append(Diagnostic(path, "W-AUT-020", f"a rule opens with no identifier: {text[:60]!r}; every rule leads with <PREFIX>-<AREA>-NNN in bold", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_020, f"a rule opens with no identifier: {text[:60]!r}; every rule leads with <PREFIX>-<AREA>-NNN in bold", "maintenance"))
             continue
         if identifier in seen:
-            found.append(Diagnostic(path, "W-AUT-020", f"rule identifier {identifier} is defined twice; an identifier names one rule and is never reused", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_020, f"rule identifier {identifier} is defined twice; an identifier names one rule and is never reused", "maintenance"))
         seen.add(identifier)
         rule_words = _word_count(text)
         rule_sentences = len(_sentences(text))
         if rule_words > SPECIFICATION_RULE_LIMIT:
-            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} is {rule_words} words; the budget is {SPECIFICATION_RULE_LIMIT}", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_021, f"rule {identifier} is {rule_words} words; the budget is {SPECIFICATION_RULE_LIMIT}", "maintenance"))
         if rule_sentences > 1:
-            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} is {rule_sentences} sentences; a rule is one testable sentence", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_021, f"rule {identifier} is {rule_sentences} sentences; a rule is one testable sentence", "maintenance"))
         if SPECIFICATION_KEYWORDS.search(_prose(text)) is None:
-            found.append(Diagnostic(path, "W-AUT-021", f"rule {identifier} carries no MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; a rule is a sentence someone can fail", "maintenance"))
+            found.append(Diagnostic(path, W_AUT_021, f"rule {identifier} carries no MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; a rule is a sentence someone can fail", "maintenance"))
     # TCM-RFS-010: the coverage table against `specifies`.
     specifies = [item for item in artifact.metadata.get("relations", {}).get("specifies", []) if isinstance(item, str)] if isinstance(artifact.metadata.get("relations"), dict) else []
     rows = _coverage_rows(body)
     if rows is None:
-        found.append(Diagnostic(path, "W-AUT-022", "body has no Coverage table; each specified requirement maps to the rule identifiers that meet it", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_022, "body has no Coverage table; each specified requirement maps to the rule identifiers that meet it", "maintenance"))
     else:
         covered = {requirement for requirement, _ in rows}
         for requirement in specifies:
             if requirement not in covered:
-                found.append(Diagnostic(path, "W-AUT-022", f"Coverage has no row for {requirement}, which this specification specifies", "maintenance"))
+                found.append(Diagnostic(path, W_AUT_022, f"Coverage has no row for {requirement}, which this specification specifies", "maintenance"))
         for requirement, identifiers in rows:
             for identifier in identifiers:
                 if identifier not in seen:
-                    found.append(Diagnostic(path, "W-AUT-022", f"Coverage row {requirement} names {identifier}, which the rules section does not define", "maintenance"))
+                    found.append(Diagnostic(path, W_AUT_022, f"Coverage row {requirement} names {identifier}, which the rules section does not define", "maintenance"))
     # TCM-RFS-011: legacy headings.
     legacy = [heading for heading in sections if heading in SPECIFICATION_LEGACY_HEADINGS]
     if legacy:
-        found.append(Diagnostic(path, "W-AUT-023", f"body carries a {legacy[0]} heading; the reader-first shape names the section Rules and records decisions and approvals in their own artifacts", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_023, f"body carries a {legacy[0]} heading; the reader-first shape names the section Rules and records decisions and approvals in their own artifacts", "maintenance"))
     # TCM-RFS-012: the shared budgets with specification constants; TCM-RFS-013: no W-AUT-008.
     prose = "\n".join(text for heading, text in sections.items() if heading not in SPECIFICATION_UNBUDGETED_SECTIONS)
     prose_words = _word_count(prose)
     if prose_words > SPECIFICATION_PROSE_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-005", f"body prose outside the rules, failure, examples and coverage sections is {prose_words} words; the budget is {SPECIFICATION_PROSE_LIMIT}", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_005, f"body prose outside the rules, failure, examples and coverage sections is {prose_words} words; the budget is {SPECIFICATION_PROSE_LIMIT}", "maintenance"))
     outside_rules = "\n".join(text for heading, text in sections.items() if heading not in SPECIFICATION_RULE_SECTIONS)
     longest = max((len(_WORD.findall(sentence)) for sentence in _sentences(outside_rules)), default=0)
     if longest > AUTHORING_SENTENCE_LIMIT:
-        found.append(Diagnostic(path, "W-AUT-007", f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_007, f"a body sentence is {longest} words; the budget is {AUTHORING_SENTENCE_LIMIT}", "maintenance"))
     plain = sections.get("In plain words")
     if body.strip() and plain is None:
-        found.append(Diagnostic(path, "W-AUT-009", "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
+        found.append(Diagnostic(path, W_AUT_009, "body has no In plain words section; the reader-first shape opens with one or two plain sentences", "maintenance"))
     elif plain is not None and (not plain.strip() or len(_sentences(plain)) > AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT):
-        found.append(Diagnostic(path, "W-AUT-009",
+        found.append(Diagnostic(path, W_AUT_009,
             f"In plain words has {len(_sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     return errors, found
 
@@ -891,7 +840,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
     try:
         text = path.read_text(encoding="utf-8-sig")
     except (OSError, UnicodeError) as exc:
-        return None, Diagnostic(_display_path(path, report_root), "E001", f"cannot read artifact: {exc}", "structure")
+        return None, Diagnostic(_display_path(path, report_root), E001, f"cannot read artifact: {exc}", "structure")
 
     if not text.startswith("+++\n") and text != "+++":
         return None, None
@@ -902,7 +851,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
     except ValueError:
         return None, Diagnostic(
             _display_path(path, report_root),
-            "E001",
+            E001,
             "formal artifact starts TOML front matter but has no closing +++ delimiter",
             "structure",
         )
@@ -915,7 +864,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
     except tomllib.TOMLDecodeError as exc:
         return None, Diagnostic(
             _display_path(path, report_root),
-            "E001",
+            E001,
             f"invalid TOML front matter: {exc}",
             "structure",
         )
@@ -923,7 +872,7 @@ def parse_formal_artifact(path: Path, report_root: Path) -> tuple[Artifact | Non
     if not isinstance(metadata, dict):
         return None, Diagnostic(
             _display_path(path, report_root),
-            "E001",
+            E001,
             "front matter must be a TOML table",
             "structure",
         )
@@ -969,7 +918,7 @@ def _require_non_empty_string(
             errors,
             artifact,
             report_root,
-            "E002",
+            E002,
             f"field '{field}' must be a non-empty string",
             plane=plane,
         )
@@ -983,7 +932,7 @@ def _require_non_empty_string_list(
     errors: list[Diagnostic],
     report_root: Path,
     *,
-    code: str = "E002",
+    code: str = E002,
     container: dict[str, Any] | None = None,
     plane: str = "structure",
 ) -> list[str] | None:
@@ -1018,7 +967,7 @@ def _validate_git_identity(
             errors,
             artifact,
             report_root,
-            "E009",
+            E009,
             "field 'git_object_format' must be 'sha1' or 'sha256'",
             plane="governance",
         )
@@ -1027,7 +976,7 @@ def _validate_git_identity(
             errors,
             artifact,
             report_root,
-            "E009",
+            E009,
             f"field 'commit' must be a full lowercase {object_format} Git object ID",
             plane="governance",
         )
@@ -1051,7 +1000,7 @@ def _validate_timestamp(
                 errors,
                 artifact,
                 report_root,
-                "E009",
+                E009,
                 f"field '{field}' must use a valid YYYY-MM-DDTHH:MM:SSZ timestamp",
                 plane="governance",
             )
@@ -1079,7 +1028,7 @@ def _validate_evidence_paths(
                 errors,
                 artifact,
                 repository_root,
-                "E012",
+                E012,
                 f"evidence path must be a normalized repository-relative path: '{raw_path}'",
                 plane="governance",
             )
@@ -1100,7 +1049,7 @@ def _validate_evidence_paths(
                 errors,
                 artifact,
                 repository_root,
-                "E012",
+                E012,
                 f"evidence path escapes the repository: '{raw_path}'",
                 plane="governance",
             )
@@ -1110,7 +1059,7 @@ def _validate_evidence_paths(
                 errors,
                 artifact,
                 repository_root,
-                "E012",
+                E012,
                 f"evidence path must not traverse a symlink: '{raw_path}'",
                 plane="governance",
             )
@@ -1119,19 +1068,10 @@ def _validate_evidence_paths(
                 errors,
                 artifact,
                 repository_root,
-                "E012",
+                E012,
                 f"evidence path does not identify an existing file: '{raw_path}'",
                 plane="governance",
             )
-
-
-def _unique_evaluator_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise ValueError(f"duplicate evaluator evidence field: {key}")
-        value[key] = item
-    return value
 
 
 def _evaluator_binding_error(
@@ -1140,14 +1080,34 @@ def _evaluator_binding_error(
     repository_root: Path,
     message: str,
 ) -> None:
-    _add_error(errors, artifact, repository_root, "E012", message, plane="governance")
+    _add_error(errors, artifact, repository_root, E012, message, plane="governance")
 
 
-def _valid_evaluator_origin(value: Any) -> bool:
-    if not isinstance(value, str) or EVALUATOR_ORIGIN_PATTERN.fullmatch(value) is None:
-        return False
-    suffix = value.removeprefix("<evaluator-root>").removeprefix("/")
-    return not suffix or all(part not in {"", ".", ".."} for part in suffix.split("/"))
+#: ECP-ENG-006: the engine's E012 message for each reason the one evidence validator raises.
+_EVIDENCE_MESSAGES = {
+    "field_set": "evaluator evidence field set is not canonical",
+    "schema": "evaluator evidence schema or role is invalid",
+    "role": "evaluator evidence schema or role is invalid",
+    "identity_field_set": "evaluator identity field set is not canonical",
+    "payload_manifest": "evaluator payload manifest is unsupported",
+    "version": "evaluator version is invalid",
+    "payload_sha256": "evaluator payload digest is invalid",
+    "archive_pair": "evaluator archive fields must appear together",
+    "archive_name": "evaluator archive identity is invalid",
+    "archive_sha256": "evaluator archive identity is invalid",
+    "archive_required": "release evaluator evidence requires an archive name and SHA-256",
+    "origins_field_set": "evaluator origins are not canonical",
+    "origin": "evaluator origins are not canonical",
+    "environment_field_set": "evaluator environment proof is invalid",
+    "environment_boolean": "evaluator environment proof is invalid",
+    "isolated_python": "evaluator environment proof is invalid",
+    "user_site": "evaluator environment proof is invalid",
+    "pythonpath": "evaluator environment proof is invalid",
+    "entry_point": "evaluator environment proof is invalid",
+    "checkout": "evaluator environment proof is invalid",
+    "diagnostics": "evaluator environment proof is invalid",
+    "lock": "evaluator evidence differs from the standard lock",
+}
 
 
 def _validate_evaluator_evidence_binding(
@@ -1206,93 +1166,33 @@ def _validate_evaluator_evidence_binding(
             artifact, errors, repository_root, "evaluator evidence path is unavailable or escapes the repository"
         )
         return
-    if not raw or len(raw) > EVALUATOR_EVIDENCE_MAX_BYTES:
+    if not raw or len(raw) > MAX_EVIDENCE_BYTES:
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence size is invalid")
         return
-    if hashlib.sha256(raw).hexdigest() != raw_digest:
+    if raw_sha256(raw) != raw_digest:
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence digest does not match its bytes")
         return
     try:
-        value = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_evaluator_object)
+        value = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_evidence_object)
     except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
         _evaluator_binding_error(artifact, errors, repository_root, f"invalid evaluator evidence JSON: {exc}")
         return
-    canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+    canonical = canonical_evidence_bytes(value)
     if raw != canonical or not isinstance(value, dict):
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence bytes are not canonical")
         return
-    if set(value) != {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence field set is not canonical")
-        return
-    evaluator = value.get("evaluator")
-    origins = value.get("origins")
-    environment = value.get("environment")
-    if value.get("schema") != EVALUATOR_EVIDENCE_SCHEMA or value.get("role") != "released-evaluator":
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence schema or role is invalid")
-        return
-    if not isinstance(evaluator, dict) or set(evaluator) != {
-        "version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"
-    }:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator identity field set is not canonical")
-        return
-    if evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator payload manifest is unsupported")
-        return
-    evaluator_version = evaluator.get("version")
-    if not isinstance(evaluator_version, str) or EVALUATOR_VERSION_PATTERN.fullmatch(evaluator_version) is None:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator version is invalid")
-        return
-    if not isinstance(evaluator.get("payload_sha256"), str) or SHA256_PATTERN.fullmatch(evaluator["payload_sha256"]) is None:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator payload digest is invalid")
-        return
-    archive_name = evaluator.get("archive_name")
-    archive_sha256 = evaluator.get("archive_sha256")
-    if (archive_name is None) != (archive_sha256 is None):
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator archive fields must appear together")
-        return
-    if archive_name is not None and (
-        not isinstance(archive_name, str)
-        or archive_name != f"se_harness-{evaluator_version.replace('-', '_')}-py3-none-any.whl"
-        or not isinstance(archive_sha256, str)
-        or SHA256_PATTERN.fullmatch(archive_sha256) is None
-    ):
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator archive identity is invalid")
-        return
-    if require_archive and archive_name is None:
-        _evaluator_binding_error(
-            artifact,
-            errors,
-            repository_root,
-            "release evaluator evidence requires an archive name and SHA-256",
-        )
-        return
-    if not isinstance(origins, dict) or set(origins) != {
-        "python_executable", "module", "distribution", "templates", "entry_point"
-    } or any(not _valid_evaluator_origin(item) for item in origins.values()):
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator origins are not canonical")
-        return
-    expected_environment = {
-        "isolated_python", "user_site_enabled", "pythonpath_present", "entry_point_resolved", "checkout_excluded"
-    }
-    if (
-        not isinstance(environment, dict)
-        or set(environment) != expected_environment
-        or any(type(environment.get(field)) is not bool for field in expected_environment)
-        or not environment.get("isolated_python")
-        or environment.get("user_site_enabled")
-        or environment.get("pythonpath_present")
-        or not environment.get("entry_point_resolved")
-        or not environment.get("checkout_excluded")
-        or value.get("diagnostics") != []
-    ):
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator environment proof is invalid")
+    # ECP-ENG-006: one validator of the document; the engine renders its own message per reason.
+    try:
+        validate_evaluator_evidence(value, require_archive=require_archive, require_isolated_python=True)
+    except EvaluatorEvidenceError as exc:
+        _evaluator_binding_error(artifact, errors, repository_root, _EVIDENCE_MESSAGES.get(exc.reason, str(exc)))
         return
     if not match_current_lock:
         return
     try:
         lock = json.loads(
             (repository_root / ".engineering-harness.lock").read_text(encoding="utf-8"),
-            object_pairs_hook=_unique_evaluator_object,
+            object_pairs_hook=unique_evidence_object,
         )
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         _evaluator_binding_error(artifact, errors, repository_root, f"cannot read standard evaluator lock: {exc}")
@@ -1306,19 +1206,8 @@ def _validate_evaluator_evidence_binding(
     ):
         _evaluator_binding_error(artifact, errors, repository_root, "standard evaluator lock identity is invalid")
         return
-    normalized_expected = (
-        {
-            "version": expected_evaluator.get("version"),
-            "payload_manifest": expected_evaluator.get("payload_manifest"),
-            "payload_sha256": expected_evaluator.get("payload_sha256"),
-            "archive_name": expected_evaluator.get("archive_name"),
-            "archive_sha256": expected_evaluator.get("archive_sha256"),
-        }
-        if isinstance(expected_evaluator, dict)
-        else None
-    )
-    if normalized_expected is None or evaluator != normalized_expected:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence differs from the standard lock")
+    if value["evaluator"] != normalize_evaluator_identity(expected_evaluator):
+        _evaluator_binding_error(artifact, errors, repository_root, _EVIDENCE_MESSAGES["lock"])
 
 
 def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:
@@ -1340,7 +1229,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     errors,
                     artifact,
                     report_root,
-                    "E002",
+                    E002,
                     f"id '{artifact_id}' must use uppercase letters/digits/hyphens and end in a three-digit sequence",
                     plane="structure",
                 )
@@ -1350,7 +1239,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     errors,
                     artifact,
                     report_root,
-                    "E003",
+                    E003,
                     f"duplicate id '{artifact_id}' also declared in {_display_path(previous.path, report_root)}",
                     plane="structure",
                 )
@@ -1364,7 +1253,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     errors,
                     artifact,
                     report_root,
-                    "E002",
+                    E002,
                     f"unknown artifact type '{artifact_type}'",
                     plane="structure",
                 )
@@ -1373,7 +1262,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     errors,
                     artifact,
                     report_root,
-                    "E004",
+                    E004,
                     f"id '{artifact_id}' must start with '{expected_prefix}' for type '{artifact_type}'",
                     plane="structure",
                 )
@@ -1387,7 +1276,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                 errors,
                 artifact,
                 report_root,
-                "E002",
+                E002,
                 f"status '{status}' is not declared for {_lifecycle_family(artifact_type)} artifacts",
                 plane="structure",
             )
@@ -1398,7 +1287,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                     errors,
                     artifact,
                     report_root,
-                    "E002",
+                    E002,
                     f"field '{field_name}' must use YYYY-MM-DD",
                     plane="structure",
                 )
@@ -1409,7 +1298,7 @@ def validate_common_metadata(artifacts: list[Artifact], report_root: Path) -> li
                 errors,
                 artifact,
                 report_root,
-                "E006",
+                E006,
                 "field 'relations' must be a TOML table",
                 plane="structure",
             )
@@ -1431,7 +1320,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             continue
         if not isinstance(events, list) or not events:
             _add_error(
-                errors, artifact, report_root, "E014",
+                errors, artifact, report_root, E014,
                 "field 'lifecycle_events' must be a non-empty array of tables when present",
                 plane="governance",
             )
@@ -1443,7 +1332,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
         for index, event in enumerate(events):
             if not isinstance(event, dict):
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     f"lifecycle event {index + 1} must be a TOML table",
                     plane="governance",
                 )
@@ -1453,7 +1342,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
                 value = event.get(key)
                 if not isinstance(value, str) or not value.strip():
                     _add_error(
-                        errors, artifact, report_root, "E014",
+                        errors, artifact, report_root, E014,
                         f"lifecycle event {index + 1} field '{key}' must be a non-empty string",
                         plane="governance",
                     )
@@ -1462,7 +1351,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             reason = event.get("reason")
             if reason is not None and (not isinstance(reason, str) or not reason.strip()):
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     f"lifecycle event {index + 1} field 'reason' must be a non-empty string when present",
                     plane="governance",
                 )
@@ -1472,13 +1361,13 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
                     datetime.strptime(decided_at, "%Y-%m-%dT%H:%M:%SZ")
                 except ValueError:
                     _add_error(
-                        errors, artifact, report_root, "E014",
+                        errors, artifact, report_root, E014,
                         f"lifecycle event {index + 1} field 'decided_at' must use a valid YYYY-MM-DDTHH:MM:SSZ timestamp",
                         plane="governance",
                     )
                 if previous_at is not None and decided_at < previous_at:
                     _add_error(
-                        errors, artifact, report_root, "E014",
+                        errors, artifact, report_root, E014,
                         "lifecycle events must be ordered chronologically",
                         plane="governance",
                     )
@@ -1488,13 +1377,13 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             if source is not None and target is not None:
                 if target not in WORKFLOW_TRANSITIONS.get(family, {}).get(source, set()):
                     _add_error(
-                        errors, artifact, report_root, "E014",
+                        errors, artifact, report_root, E014,
                         f"lifecycle event {index + 1} contains unsupported transition {source} -> {target}",
                         plane="governance",
                     )
                 if previous_to is not None and source != previous_to:
                     _add_error(
-                        errors, artifact, report_root, "E014",
+                        errors, artifact, report_root, E014,
                         f"lifecycle event {index + 1} starts at '{source}' instead of previous target '{previous_to}'",
                         plane="governance",
                     )
@@ -1503,7 +1392,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
                 valid_events.append(values)
         if previous_to is not None and previous_to != artifact.status:
             _add_error(
-                errors, artifact, report_root, "E014",
+                errors, artifact, report_root, E014,
                 f"last lifecycle event target '{previous_to}' must equal artifact status '{artifact.status}'",
                 plane="governance",
             )
@@ -1520,13 +1409,13 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             reason = events[-1].get("reason") if isinstance(events[-1], dict) else None
             if not isinstance(reason, str) or not reason.strip():
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     "rejection lifecycle event requires a non-empty reason",
                     plane="governance",
                 )
             if artifact.metadata.get("rejection_reason") != reason:
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     "field 'rejection_reason' must equal the rejection lifecycle event reason",
                     plane="governance",
                 )
@@ -1536,7 +1425,7 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             successors = artifact.relations.get("superseded_by", [])
             if not isinstance(reason, str) or successors != [reason]:
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     "supersession lifecycle event reason must equal the single superseded_by target",
                     plane="governance",
                 )
@@ -1549,13 +1438,13 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
             )
             if not legacy_decision_record and artifact.metadata.get(timestamp_field) != latest["decided_at"]:
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     f"field '{timestamp_field}' must equal the latest lifecycle decision timestamp",
                     plane="governance",
                 )
             if not legacy_decision_record and artifact.metadata.get(actor_field) != latest["decided_by"]:
                 _add_error(
-                    errors, artifact, report_root, "E014",
+                    errors, artifact, report_root, E014,
                     f"field '{actor_field}' must equal the latest lifecycle decision actor",
                     plane="governance",
                 )
@@ -1595,7 +1484,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E005",
+                    E005,
                     "requirement statement must contain normative keyword SHALL",
                     plane="structure",
                 )
@@ -1610,7 +1499,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "field 'worktree_state' must be 'clean'",
                     plane="governance",
                 )
@@ -1627,7 +1516,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     for field_name in ("verified_at", "verified_by"):
                         if field_name in artifact.metadata:
                             _add_error(
-                                errors, artifact, report_root, "E009",
+                                errors, artifact, report_root, E009,
                                 f"prepared superseded verification_record must omit decision field '{field_name}'",
                                 plane="governance",
                             )
@@ -1645,7 +1534,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "field 'artifact_snapshot_sha256' must be a lowercase SHA-256 value",
                     plane="governance",
             )
@@ -1662,7 +1551,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "verification_record status is not declared by the workflow lifecycle registry",
                     plane="governance",
                 )
@@ -1670,7 +1559,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 for field_name in ("verified_at", "verified_by"):
                     if field_name in artifact.metadata:
                         _add_error(
-                            errors, artifact, report_root, "E009",
+                            errors, artifact, report_root, E009,
                             f"ready verification_record must omit decision field '{field_name}'",
                             plane="governance",
                         )
@@ -1686,7 +1575,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     "superseded_by",
                     errors,
                     report_root,
-                    code="E009",
+                    code=E009,
                     container=artifact.relations,
                     plane="governance",
                 )
@@ -1695,7 +1584,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                         errors,
                         artifact,
                         report_root,
-                        "E009",
+                        E009,
                         "relation 'superseded_by' must contain exactly one verification record",
                         plane="governance",
                     )
@@ -1706,7 +1595,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                             errors,
                             artifact,
                             report_root,
-                            "E009",
+                            E009,
                             f"field '{field_name}' is allowed only when verification_record status is superseded",
                             plane="governance",
                         )
@@ -1715,7 +1604,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                         errors,
                         artifact,
                         report_root,
-                        "E009",
+                        E009,
                         "relation 'superseded_by' is allowed only when verification_record status is superseded",
                         plane="governance",
                     )
@@ -1739,7 +1628,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "field 'authorized_by' must identify one of the record owners",
                     plane="governance",
                 )
@@ -1749,7 +1638,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "field 'tag' must be a non-empty string when present",
                     plane="governance",
                 )
@@ -1757,7 +1646,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 for field_name in ("released_at", "authorized_by"):
                     if field_name in artifact.metadata:
                         _add_error(
-                            errors, artifact, report_root, "E009",
+                            errors, artifact, report_root, E009,
                             f"ready release_record must omit decision field '{field_name}'",
                             plane="governance",
                         )
@@ -1770,7 +1659,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                     errors,
                     artifact,
                     report_root,
-                    "E009",
+                    E009,
                     "release_record status is not declared by the workflow lifecycle registry",
                     plane="governance",
                 )
@@ -1798,7 +1687,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 "architecture",
                 errors,
                 report_root,
-                code="E005",
+                code=E005,
                 container=artifact.relations,
             )
 
@@ -1812,7 +1701,7 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
                 relation_name,
                 errors,
                 report_root,
-                code="E005",
+                code=E005,
                 container=relations,
             )
 
@@ -1837,7 +1726,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                     errors,
                     artifact,
                     report_root,
-                    "E006",
+                    E006,
                     f"relation '{relation_name}' must be an array of artifact IDs",
                     plane="structure",
                 )
@@ -1848,7 +1737,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         errors,
                         artifact,
                         report_root,
-                        "E006",
+                        E006,
                         f"relation '{relation_name}' contains a non-string or empty target",
                         plane="structure",
                     )
@@ -1858,7 +1747,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         errors,
                         artifact,
                         report_root,
-                        "E006",
+                        E006,
                         f"artifact '{artifact.artifact_id}' must not reference itself via '{relation_name}'",
                         plane="structure",
                     )
@@ -1867,7 +1756,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                         errors,
                         artifact,
                         report_root,
-                        "E006",
+                        E006,
                         f"artifact '{artifact.artifact_id}' relation '{relation_name}' references unknown target '{target}'",
                         plane="structure",
                     )
@@ -1880,7 +1769,7 @@ def validate_relations(artifacts: list[Artifact], report_root: Path) -> list[Dia
                             errors,
                             artifact,
                             report_root,
-                            "E011",
+                            E011,
                             f"relation '{relation_name}' target '{target}' must have type {expected}, found {target_type}",
                             plane="structure",
                         )
@@ -1916,7 +1805,7 @@ def validate_revision_consistency(
                     errors,
                     work_order,
                     report_root,
-                    "E010",
+                    E010,
                     f"{work_order.status} work order requires coverage by a verified or released verification record",
                     plane="policy",
                 )
@@ -1930,7 +1819,7 @@ def validate_revision_consistency(
                         errors,
                         artifact,
                         report_root,
-                        "E010",
+                        E010,
                         f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
                         plane="governance",
                     )
@@ -1941,7 +1830,7 @@ def validate_revision_consistency(
                         errors,
                         artifact,
                         report_root,
-                        "E010",
+                        E010,
                         f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
                         plane="governance",
                     )
@@ -1961,7 +1850,7 @@ def validate_revision_consistency(
                         errors,
                         artifact,
                         report_root,
-                        "E010",
+                        E010,
                         f"active verification record requires active work order '{work_order_id}'",
                         plane="governance",
                     )
@@ -1977,7 +1866,7 @@ def validate_revision_consistency(
                         errors,
                         artifact,
                         report_root,
-                        "E010",
+                        E010,
                         f"active verification record requires active verification contract '{verification_id}'",
                         plane="governance",
                     )
@@ -1990,7 +1879,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"verification record is missing contracts declared by selected work: {', '.join(sorted(missing_verification))}",
                     plane="governance",
                 )
@@ -1999,7 +1888,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
                     plane="governance",
                 )
@@ -2016,7 +1905,7 @@ def validate_revision_consistency(
                         errors,
                         artifact,
                         report_root,
-                        "E010",
+                        E010,
                         f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
                         plane="governance",
                     )
@@ -2031,7 +1920,7 @@ def validate_revision_consistency(
                                 errors,
                                 artifact,
                                 report_root,
-                                "E010",
+                                E010,
                                 f"superseding verification record '{successor_id}' must be verified or released",
                                 plane="governance",
                             )
@@ -2041,7 +1930,7 @@ def validate_revision_consistency(
                                 errors,
                                 artifact,
                                 report_root,
-                                "E010",
+                                E010,
                                 f"superseding verification record '{successor_id}' omits work orders: {', '.join(sorted(missing_work))}",
                                 plane="governance",
                             )
@@ -2050,7 +1939,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"verification supersession cycle detected among: {', '.join(sorted(supersession_cycle_nodes))}",
                     plane="governance",
                 )
@@ -2064,7 +1953,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
                     plane="governance",
                 )
@@ -2080,13 +1969,13 @@ def validate_revision_consistency(
                 work_order is not None
                 and work_order.artifact_type == "work_order"
                 and _active_record_status(artifact.artifact_type, artifact.status)
-                and work_order.status not in RELEASABLE_WORK_STATUSES
+                and work_order.status not in IMPLEMENTED_OR_LATER_STATUSES
             ):
                 _add_error(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"active release record requires implemented, verified, or released work order '{work_order_id}'",
                     plane="governance",
                 )
@@ -2102,7 +1991,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"active release record must not include superseded verification record '{verification_id}'",
                     plane="governance",
                 )
@@ -2111,7 +2000,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"release commit does not match verification record '{verification_id}'",
                     plane="governance",
                 )
@@ -2123,7 +2012,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"released record requires verified included record '{verification_id}'",
                     plane="governance",
                 )
@@ -2133,7 +2022,7 @@ def validate_revision_consistency(
                 errors,
                 artifact,
                 report_root,
-                "E010",
+                E010,
                 f"released work orders are not covered by included verification records: {', '.join(sorted(missing_work))}",
                 plane="governance",
             )
@@ -2143,7 +2032,7 @@ def validate_revision_consistency(
                 errors,
                 artifact,
                 report_root,
-                "E010",
+                E010,
                 f"included verification records cover work orders absent from the release: {', '.join(sorted(extra_work))}",
                 plane="governance",
             )
@@ -2159,7 +2048,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"active release record requires active release contract '{contract_id}'",
                     plane="governance",
                 )
@@ -2169,7 +2058,7 @@ def validate_revision_consistency(
                     errors,
                     artifact,
                     report_root,
-                    "E010",
+                    E010,
                     f"release contract '{contract_id}' does not gate work orders: {', '.join(sorted(ungated))}",
                     plane="governance",
                 )
@@ -2183,7 +2072,7 @@ def validate_revision_consistency(
                 errors,
                 record,
                 report_root,
-                "E010",
+                E010,
                 f"duplicate release record version '{version}' among {record_ids}",
                 plane="governance",
             )
@@ -2268,7 +2157,7 @@ def validate_operating_contract_readiness(
     for work_order in artifacts:
         if (
             work_order.artifact_type != "work_order"
-            or work_order.status not in RELEASABLE_WORK_STATUSES
+            or work_order.status not in IMPLEMENTED_OR_LATER_STATUSES
         ):
             continue
         for requirement_id in _relation_targets(work_order, "implements"):
@@ -2300,7 +2189,7 @@ def validate_operating_contract_readiness(
                     errors,
                     contract,
                     report_root,
-                    "E017",
+                    E017,
                     f"active operating contract assures inactive requirement '{requirement_id}'",
                     plane="governance",
                 )
@@ -2312,7 +2201,7 @@ def validate_operating_contract_readiness(
                     errors,
                     contract,
                     report_root,
-                    "E017",
+                    E017,
                     f"active operating contract assures requirement '{requirement_id}' without completed implementing work",
                     plane="governance",
                 )
@@ -2323,7 +2212,7 @@ def validate_operating_contract_readiness(
                     errors,
                     contract,
                     report_root,
-                    "E018",
+                    E018,
                     f"active operating contract assures requirement '{requirement_id}' without a verified or released VREC covering completed implementing work",
                     plane="policy",
                 )
@@ -2430,7 +2319,7 @@ def architecture_traceability_state(
                         f"legacy target '{target_id}' has unsupported type '{target.artifact_type}'"
                     )
             state = "dual_declared"
-    elif legacy_present and artifact.status in LEGACY_ARCHITECTURE_STATUSES:
+    elif legacy_present and artifact.status in IMPLEMENTED_OR_LATER_STATUSES:
         target_types = {
             catalog[target_id].artifact_type
             for target_id in legacy_targets
@@ -2484,7 +2373,7 @@ def validate_architecture_traceability(
                 errors,
                 artifact,
                 report_root,
-                "E016",
+                E016,
                 issue,
                 plane="governance",
             )
@@ -2496,7 +2385,7 @@ def validate_architecture_traceability(
             warnings.append(
                 Diagnostic(
                     _display_path(artifact.path, report_root),
-                    "W015",
+                    W015,
                     f"architecture uses deprecated constrains relation ({traceability['state']}); migrate through accountable governance",
                     "maintenance",
                 )
@@ -2518,7 +2407,7 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
             "issues": ["decision_assessment is allowed only on architecture artifacts"] if raw is not None else [],
         }
     if raw is None:
-        legacy = artifact.status in LEGACY_ARCHITECTURE_STATUSES
+        legacy = artifact.status in IMPLEMENTED_OR_LATER_STATUSES
         return {
             "state": "legacy_missing" if legacy else "missing",
             "outcome": None,
@@ -2677,7 +2566,7 @@ def validate_work_order_assurance(
                 errors,
                 artifact,
                 report_root,
-                "E019",
+                E019,
                 issue,
                 plane="governance",
             )
@@ -2690,7 +2579,7 @@ def validate_work_order_assurance(
                 errors,
                 artifact,
                 report_root,
-                "E019",
+                E019,
                 "approved or in-progress work order requires an explicit assurance classification",
                 plane="governance",
             )
@@ -2735,13 +2624,13 @@ def validate_work_order_delegation(
         if table is None:
             continue
         if artifact.artifact_type != "work_order":
-            _add_error(errors, artifact, report_root, "E-ECP-001", "delegation is allowed only on work-order artifacts", plane="governance")
+            _add_error(errors, artifact, report_root, E_ECP_001, "delegation is allowed only on work-order artifacts", plane="governance")
             continue
         if not isinstance(table, dict) or set(table) != {"class"}:
-            _add_error(errors, artifact, report_root, "E-ECP-001", "delegation must contain exactly class", plane="governance")
+            _add_error(errors, artifact, report_root, E_ECP_001, "delegation must contain exactly class", plane="governance")
             continue
         if table.get("class") != "execution":
-            _add_error(errors, artifact, report_root, "E-ECP-001", f"delegation.class must be \"execution\", not {table.get('class')!r}", plane="governance")
+            _add_error(errors, artifact, report_root, E_ECP_001, f"delegation.class must be \"execution\", not {table.get('class')!r}", plane="governance")
     return errors
 
 
@@ -2765,7 +2654,7 @@ def validate_work_order_execution_scope(
                 errors,
                 artifact,
                 report_root,
-                "E020",
+                E020,
                 "execution_scope must contain only paths",
                 plane="governance",
             )
@@ -2776,7 +2665,7 @@ def validate_work_order_execution_scope(
                 errors,
                 artifact,
                 report_root,
-                "E020",
+                E020,
                 "execution_scope.paths must be a non-empty array",
                 plane="governance",
             )
@@ -2789,7 +2678,7 @@ def validate_work_order_execution_scope(
                     errors,
                     artifact,
                     report_root,
-                    "E020",
+                    E020,
                     f"invalid execution scope path {value!r}: {issue}",
                     plane="governance",
                 )
@@ -2800,7 +2689,7 @@ def validate_work_order_execution_scope(
                     errors,
                     artifact,
                     report_root,
-                    "E020",
+                    E020,
                     f"duplicate or case-ambiguous execution scope path: {value!r}",
                     plane="governance",
                 )
@@ -2829,7 +2718,7 @@ def validate_decision_assessments(
                     errors,
                     artifact,
                     report_root,
-                    "E014",
+                    E014,
                     issue,
                     plane="governance",
                 )
@@ -2842,7 +2731,7 @@ def validate_decision_assessments(
                     errors,
                     artifact,
                     report_root,
-                    "E014",
+                    E014,
                     issue,
                     plane="governance",
                 )
@@ -2852,7 +2741,7 @@ def validate_decision_assessments(
             warnings.append(
                 Diagnostic(
                     _display_path(artifact.path, report_root),
-                    "W014",
+                    W014,
                     "completed legacy architecture has no decision_assessment; migrate during the compatibility window",
                     "maintenance",
                 )
@@ -2862,7 +2751,7 @@ def validate_decision_assessments(
                     errors,
                     artifact,
                     report_root,
-                    "E015",
+                    E015,
                     "completed legacy architecture without decision_assessment requires an active deciding ADR",
                     plane="governance",
                 )
@@ -2876,7 +2765,7 @@ def validate_decision_assessments(
                 errors,
                 artifact,
                 report_root,
-                "E015",
+                E015,
                 "adr_required architecture has no active ADR whose decides relation targets it",
                 plane="governance",
             )
@@ -2969,81 +2858,81 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
             continue
         kind = artifact.metadata.get("kind")
         if kind not in DECISION_KINDS:
-            _add_error(errors, artifact, report_root, "E-DCM-002", "decision kind must be question or deviation", plane="structure")
+            _add_error(errors, artifact, report_root, E_DCM_002, "decision kind must be question or deviation", plane="structure")
             continue
         for key in ("question", "raised_by", "recommendation"):
             if not isinstance(artifact.metadata.get(key), str) or not str(artifact.metadata.get(key)).strip():
-                _add_error(errors, artifact, report_root, "E-DCM-002", f"decision field '{key}' must be a non-empty string", plane="structure")
+                _add_error(errors, artifact, report_root, E_DCM_002, f"decision field '{key}' must be a non-empty string", plane="structure")
         options = _decision_options(artifact)
         option_ids = [item["id"] for item in options]
         if len(options) < 2 or len(set(option_ids)) != len(option_ids):
-            _add_error(errors, artifact, report_root, "E-DCM-002", "a decision declares at least two options with distinct ids and labels", plane="structure")
+            _add_error(errors, artifact, report_root, E_DCM_002, "a decision declares at least two options with distinct ids and labels", plane="structure")
         recommendation = artifact.metadata.get("recommendation")
         if isinstance(recommendation, str) and option_ids and recommendation not in option_ids:
-            _add_error(errors, artifact, report_root, "E-DCM-002", f"recommendation '{recommendation}' is not a declared option", plane="structure")
+            _add_error(errors, artifact, report_root, E_DCM_002, f"recommendation '{recommendation}' is not a declared option", plane="structure")
         reference = _decision_against(artifact)
         if kind == "deviation":
             if reference is None:
-                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
+                _add_error(errors, artifact, report_root, E_DCM_002, "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
             elif reference[0] not in catalog:
-                _add_error(errors, artifact, report_root, "E-DCM-001", f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
+                _add_error(errors, artifact, report_root, E_DCM_001, f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
             elif catalog[reference[0]].artifact_type != "specification":
-                _add_error(errors, artifact, report_root, "E-DCM-001", f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
+                _add_error(errors, artifact, report_root, E_DCM_001, f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
             elif reference[1] not in {identifier for identifier, _ in _specification_rules(catalog[reference[0]].body) if identifier}:
                 # SPEC-TCM-006 TCM-RFS-020: the fragment names a rule identifier the specification defines.
-                _add_error(errors, artifact, report_root, "E-DCM-005",
+                _add_error(errors, artifact, report_root, E_DCM_005,
                     f"deviation departs from '{reference[0]}#{reference[1]}', which names no rule identifier of {reference[0]}", plane="governance")
             if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
-                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation records the observed fact in 'observed'", plane="structure")
+                _add_error(errors, artifact, report_root, E_DCM_002, "a deviation records the observed fact in 'observed'", plane="structure")
             if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):
-                _add_error(errors, artifact, report_root, "E-DCM-002", "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
+                _add_error(errors, artifact, report_root, E_DCM_002, "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
         relations = artifact.metadata.get("relations", {})
         relations = relations if isinstance(relations, dict) else {}
         blocked = relations.get("blocks", []) if isinstance(relations.get("blocks"), list) else []
         concerned = relations.get("concerns", []) if isinstance(relations.get("concerns"), list) else []
         if not blocked:
-            _add_error(errors, artifact, report_root, "E-DCM-001", "a decision blocks at least one artifact", plane="governance")
+            _add_error(errors, artifact, report_root, E_DCM_001, "a decision blocks at least one artifact", plane="governance")
         for target in blocked:
             if isinstance(target, str) and target not in concerned:
-                _add_error(errors, artifact, report_root, "E-DCM-001", f"blocked artifact '{target}' is not also in concerns", plane="governance")
+                _add_error(errors, artifact, report_root, E_DCM_001, f"blocked artifact '{target}' is not also in concerns", plane="governance")
         disposition = artifact.metadata.get("disposition")
         events = artifact.metadata.get("lifecycle_events")
         if artifact.status in DECISION_TERMINAL or artifact.status == "deferred":
             if not isinstance(disposition, dict):
-                _add_error(errors, artifact, report_root, "E-DCM-003", f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
+                _add_error(errors, artifact, report_root, E_DCM_003, f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
             else:
                 if not isinstance(events, list) or not events:
-                    _add_error(errors, artifact, report_root, "E-DCM-003", "a disposition without a lifecycle event was written by hand", plane="governance")
+                    _add_error(errors, artifact, report_root, E_DCM_003, "a disposition without a lifecycle event was written by hand", plane="governance")
                 option = disposition.get("option")
                 if artifact.status == "decided" and option not in option_ids:
-                    _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition option '{option}' is not a declared option", plane="governance")
+                    _add_error(errors, artifact, report_root, E_DCM_003, f"disposition option '{option}' is not a declared option", plane="governance")
                 for key in ("decided_by", "decided_at", "reason", "label"):
                     if not isinstance(disposition.get(key), str) or not disposition[key].strip():
-                        _add_error(errors, artifact, report_root, "E-DCM-003", f"disposition field '{key}' must be a non-empty string", plane="governance")
+                        _add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be a non-empty string", plane="governance")
                 if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
-                    _add_error(errors, artifact, report_root, "E-DCM-003", "a deferred decision records its scope and its revisit trigger", plane="governance")
+                    _add_error(errors, artifact, report_root, E_DCM_003, "a deferred decision records its scope and its revisit trigger", plane="governance")
                 if artifact.status == "decided" and kind == "deviation" and option == "accept":
                     revisit = disposition.get("revisit")
                     if not isinstance(revisit, str) or not revisit.strip():
-                        _add_error(errors, artifact, report_root, "E-DCM-003", "an accepted deviation records its revisit trigger", plane="governance")
+                        _add_error(errors, artifact, report_root, E_DCM_003, "an accepted deviation records its revisit trigger", plane="governance")
                     elif reference is not None:
                         rule = f"{reference[0]}#{reference[1]}"
                         accepted_by_rule[rule].append(artifact.artifact_id)
                         if any(f"v{version}" in revisit or version in revisit for version in released_versions):
                             warnings.append(Diagnostic(
                                 _display_path(catalog[reference[0]].path, report_root) if reference[0] in catalog else _display_path(artifact.path, report_root),
-                                "W-DCM-001",
+                                W_DCM_001,
                                 f"accepted deviation {artifact.artifact_id} against {rule} is past its revisit '{revisit}'; amend or supersede the rule, or accept again with a new trigger",
                                 "maintenance",
                             ))
         elif isinstance(disposition, dict) and artifact.status == "open":
-            _add_error(errors, artifact, report_root, "E-DCM-003", "an open decision carries no disposition", plane="governance")
+            _add_error(errors, artifact, report_root, E_DCM_003, "an open decision carries no disposition", plane="governance")
     for rule, decisions in sorted(accepted_by_rule.items()):
         if len(decisions) >= 2:
             target = catalog.get(rule.split("#", 1)[0])
             warnings.append(Diagnostic(
                 _display_path(target.path, report_root) if target is not None else rule,
-                "W-DCM-002",
+                W_DCM_002,
                 f"{len(decisions)} accepted deviations stand against {rule} ({', '.join(decisions)}); the rule, not the implementations, is probably wrong",
                 "maintenance",
             ))
@@ -3075,55 +2964,55 @@ def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[D
         for field_name in ("cause", "effect", "stage", "category", "raised_by"):
             value = metadata.get(field_name)
             if not isinstance(value, str) or not value.strip():
-                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' must be a non-empty string", plane="structure")
+                _add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' must be a non-empty string", plane="structure")
         for field_name, allowed in (("stage", RISK_STAGES), ("category", RISK_CATEGORIES)):
             value = metadata.get(field_name)
             if isinstance(value, str) and value.strip() and value not in allowed:
-                _add_error(errors, artifact, report_root, "E-RSK-001",
+                _add_error(errors, artifact, report_root, E_RSK_001,
                     f"risk field '{field_name}' must name one of {', '.join(sorted(allowed))}, not '{value}'", plane="structure")
         for field_name in ("cause", "effect"):
             value = metadata.get(field_name)
             if isinstance(value, str) and len(_sentences(value)) > 1:
-                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' must be one sentence", plane="structure")
+                _add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' must be one sentence", plane="structure")
         for field_name in ("question", "options", "recommendation", "decided_by"):
             # ARCH-RSK-010 conformance check 3: the answer lives on the paired decision.
             if field_name in metadata:
-                _add_error(errors, artifact, report_root, "E-RSK-001",
+                _add_error(errors, artifact, report_root, E_RSK_001,
                     f"risk declares the decision field '{field_name}'; the question, the options and the decider live on the paired decision", plane="structure")
         measurement: dict[str, int] = {}
         for field_name in ("likelihood", "impact", "score"):
             value = metadata.get(field_name)
             if value is None:
-                _add_error(errors, artifact, report_root, "E-RSK-001", f"risk field '{field_name}' is missing", plane="structure")
+                _add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' is missing", plane="structure")
             elif type(value) is not int:
-                _add_error(errors, artifact, report_root, "E-RSK-002", f"risk field '{field_name}' must be an integer, not {value!r}", plane="structure")
+                _add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be an integer, not {value!r}", plane="structure")
             elif field_name != "score" and value not in RISK_MEASUREMENT_RANGE:
-                _add_error(errors, artifact, report_root, "E-RSK-002", f"risk field '{field_name}' must be from 1 to 5, not {value}", plane="structure")
+                _add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be from 1 to 5, not {value}", plane="structure")
             else:
                 measurement[field_name] = value
         if {"likelihood", "impact", "score"} <= set(measurement):
             product = measurement["likelihood"] * measurement["impact"]
             if measurement["score"] != product:
-                _add_error(errors, artifact, report_root, "E-RSK-002",
+                _add_error(errors, artifact, report_root, E_RSK_002,
                     f"risk field 'score' is {measurement['score']}; likelihood {measurement['likelihood']} times impact {measurement['impact']} is {product}", plane="structure")
         threatens = artifact.relations.get("threatens", [])
         threatened = {item for item in threatens if isinstance(item, str)} if isinstance(threatens, list) else set()
         if artifact.status == "raised":
             pending = [item for item in concerned.get(artifact.artifact_id, []) if item.status in {"open", "deferred"}]
             if not pending:
-                _add_error(errors, artifact, report_root, "E-RSK-003",
+                _add_error(errors, artifact, report_root, E_RSK_003,
                     f"raised risk {artifact.artifact_id} is named in concerns by no open or deferred decision; raise it again with "
                     f"harnessctl raise-risk --with-decision, or create a decision that names it in concerns and blocks exactly the artifacts it threatens",
                     plane="governance")
             elif len(pending) > 1:
                 names = ", ".join(sorted(item.artifact_id for item in pending))
-                _add_error(errors, artifact, report_root, "E-RSK-003",
+                _add_error(errors, artifact, report_root, E_RSK_003,
                     f"raised risk {artifact.artifact_id} is named in concerns by {len(pending)} pending decisions ({names}); exactly one answers it", plane="governance")
             else:
                 blocks = pending[0].relations.get("blocks", [])
                 blocked = {item for item in blocks if isinstance(item, str)} if isinstance(blocks, list) else set()
                 if blocked != threatened:
-                    _add_error(errors, artifact, report_root, "E-RSK-004",
+                    _add_error(errors, artifact, report_root, E_RSK_004,
                         f"{pending[0].artifact_id} blocks {sorted(blocked)} but {artifact.artifact_id} threatens {sorted(threatened)}; the two sets must be equal",
                         plane="governance")
         disposition = metadata.get("disposition")
@@ -3131,41 +3020,41 @@ def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[D
         expected_option = {"accepted": "accept", "avoided": "avoid", "mitigating": "mitigate", "mitigated": "mitigate", "withdrawn": "withdrawn"}
         if artifact.status in RISK_DISPOSED - {"withdrawn"} or (artifact.status == "withdrawn" and isinstance(disposition, dict)):
             if not isinstance(disposition, dict):
-                _add_error(errors, artifact, report_root, "E-RSK-005",
+                _add_error(errors, artifact, report_root, E_RSK_005,
                     f"a {artifact.status} risk carries a [disposition] table written by harnessctl decide", plane="governance")
             else:
                 if not isinstance(events, list) or not events:
-                    _add_error(errors, artifact, report_root, "E-RSK-005", "a disposition without a lifecycle event was written by hand", plane="governance")
+                    _add_error(errors, artifact, report_root, E_RSK_005, "a disposition without a lifecycle event was written by hand", plane="governance")
                 option = disposition.get("option")
                 if option != expected_option[artifact.status]:
-                    _add_error(errors, artifact, report_root, "E-RSK-005",
+                    _add_error(errors, artifact, report_root, E_RSK_005,
                         f"disposition option '{option}' does not name the state {artifact.status}", plane="governance")
                 for field_name in ("decided_by", "decided_at", "reason", "label"):
                     if not isinstance(disposition.get(field_name), str) or not disposition[field_name].strip():
-                        _add_error(errors, artifact, report_root, "E-RSK-005", f"disposition field '{field_name}' must be a non-empty string", plane="governance")
+                        _add_error(errors, artifact, report_root, E_RSK_005, f"disposition field '{field_name}' must be a non-empty string", plane="governance")
                 revisit = disposition.get("revisit")
                 if artifact.status == "accepted":
                     if not isinstance(revisit, str) or not revisit.strip():
-                        _add_error(errors, artifact, report_root, "E-RSK-005", "an accepted risk records its revisit trigger", plane="governance")
+                        _add_error(errors, artifact, report_root, E_RSK_005, "an accepted risk records its revisit trigger", plane="governance")
                     elif any(f"v{version}" in revisit or version in revisit for version in released_versions) and not any(
                         item.status in {"open", "deferred"} for item in concerned.get(artifact.artifact_id, [])
                     ):
                         warnings.append(Diagnostic(
                             _display_path(artifact.path, report_root),
-                            "W-RSK-001",
+                            W_RSK_001,
                             f"accepted risk {artifact.artifact_id} is past its revisit '{revisit}' and no pending decision concerns it; raise it again or accept it again with a new trigger",
                             "maintenance",
                         ))
         elif isinstance(disposition, dict):
-            _add_error(errors, artifact, report_root, "E-RSK-005", f"a {artifact.status} risk carries no disposition", plane="governance")
+            _add_error(errors, artifact, report_root, E_RSK_005, f"a {artifact.status} risk carries no disposition", plane="governance")
         if artifact.status in {"mitigating", "mitigated"}:
             mitigated_by = artifact.relations.get("mitigated_by", [])
             if not isinstance(mitigated_by, list) or not mitigated_by:
-                _add_error(errors, artifact, report_root, "E-RSK-005", f"a {artifact.status} risk names its mitigating work orders in mitigated_by", plane="governance")
+                _add_error(errors, artifact, report_root, E_RSK_005, f"a {artifact.status} risk names its mitigating work orders in mitigated_by", plane="governance")
         if artifact.status == "avoided":
             avoided_by = artifact.relations.get("avoided_by", [])
             if not isinstance(avoided_by, list) or len(avoided_by) != 1:
-                _add_error(errors, artifact, report_root, "E-RSK-005", "an avoided risk names one ADR or one decision in avoided_by", plane="governance")
+                _add_error(errors, artifact, report_root, E_RSK_005, "an avoided risk names one ADR or one decision in avoided_by", plane="governance")
     return errors, warnings
 
 
@@ -3198,7 +3087,7 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
                 errors,
                 artifact,
                 report_root,
-                "E007",
+                E007,
                 f"active requirement '{artifact.artifact_id}' has no active specification coverage",
                 plane="governance",
             )
@@ -3207,7 +3096,7 @@ def validate_requirement_coverage(artifacts: list[Artifact], report_root: Path) 
                 errors,
                 artifact,
                 report_root,
-                "E008",
+                E008,
                 f"active requirement '{artifact.artifact_id}' has no active verification coverage",
                 plane="governance",
             )
@@ -3273,7 +3162,7 @@ def validate_canonical_layout(
             warnings.append(
                 Diagnostic(
                     actual,
-                    "W013",
+                    W013,
                     f"artifact '{artifact_id}' is valid outside its canonical location; expected '{expected_text}'",
                     "maintenance",
                 )
@@ -3297,7 +3186,7 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
         errors.append(
             Diagnostic(
                 _display_path(selected_artifact_root, repository_root),
-                "E001",
+                E001,
                 "artifact root does not exist",
                 "structure",
             )

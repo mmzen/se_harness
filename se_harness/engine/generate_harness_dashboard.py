@@ -4,7 +4,8 @@
 The generator reuses the repository validator as the authoritative parser and
 validation core. It adds read-only graph projection, coverage, impact support,
 derived consistency findings, readiness evidence, controlled experiment import,
-and a progressively loaded viewer. Only the Python 3.11+ standard library is used.
+and a progressively loaded viewer. A module of the ``se_harness.engine`` package
+(SPEC-ECP-024 ECP-ENG-001), runnable as ``python -m se_harness.engine.generate_harness_dashboard``.
 """
 
 from __future__ import annotations
@@ -23,17 +24,35 @@ from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Sequence
 
-from validate_engineering_artifacts import (
+from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
+from se_harness.engine.validate_engineering_artifacts import (
     ACTIVE_COVERAGE_STATUSES,
     Artifact,
     Diagnostic,
     ValidationReport,
     architecture_traceability_state,
+    coverage_rows as _coverage_rows,
     decision_assessment_state,
     evidence_work_order_keys,
+    specification_rules as _specification_rules,
     load_revision_policy,
     standing_deviations,
     validate_repository,
+)
+from se_harness.codes import (  # noqa: E402
+    I_REV_001,
+    W_HEX_001,
+    W_HEX_002,
+    W_HEX_003,
+    W_HEX_004,
+    W_HEX_005,
+    W_HEX_006,
+    W_REB_001,
+    W_REB_002,
+    W_REB_003,
+    W_REV_002,
+    W_REV_003,
+    W_REV_004,
 )
 
 
@@ -59,7 +78,6 @@ MAX_SUMMARY_BYTES = 262_144
 TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
 ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
 ACTIVE_WORK_ORDER_STATUSES = ACTIVE_COVERAGE_STATUSES
-IMPLEMENTED_STATUSES = {"implemented", "verified", "released"}
 INACTIVE_GOVERNING_STATUSES = {"draft", "rejected", "superseded"}
 SEVERITY_ORDER = {"error": 0, "warning": 1, "info": 2}
 WORK_ORDER_RELATIONS = ("implements", "specifications", "architecture", "verification")
@@ -614,64 +632,6 @@ def _success_measure_row_count(body: Any) -> int:
     return rows
 
 
-_RULE_IDENTIFIER = re.compile(r"\b[A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3}\b")
-_RULE_LEAD = re.compile(r"^\*\*([A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3})(?:\s*\([^)]*\))?\.?\*\*\.?\s*")
-_FENCED = re.compile(r"```.*?```", re.S)
-
-
-def _sections(body: Any) -> dict[str, str]:
-    """Second-level headings to their text, fenced code removed (SPEC-TCM-006 TCM-RFS-006)."""
-
-    sections: dict[str, str] = {}
-    if not isinstance(body, str):
-        return sections
-    current = ""
-    for line in _FENCED.sub(" ", body.replace("\r\n", "\n")).split("\n"):
-        if line.startswith("## "):
-            current = line[3:].strip()
-            sections.setdefault(current, "")
-        elif current:
-            sections[current] += line + "\n"
-    return sections
-
-
-def _specification_rules(body: Any) -> list[tuple[str | None, str]]:
-    """The rule paragraphs of a specification: (identifier or None, sentence)."""
-
-    sections = _sections(body)
-    section = next((sections[name] for name in ("Rules", "Behavioral rules") if name in sections), None)
-    if section is None:
-        return []
-    rules: list[tuple[str | None, str]] = []
-    # A paragraph is one rule; a numbered or bulleted list item is one paragraph of
-    # its own, so a legacy numbered list reads as one rule per item.
-    for paragraph in re.split(r"\n\s*\n|\n(?=\s*(?:\d+\.|[-*])\s)", section):
-        text = " ".join(line.strip() for line in paragraph.strip().split("\n") if line.strip())
-        if not text:
-            continue
-        lead = _RULE_LEAD.match(text)
-        rules.append((None, text) if lead is None else (lead.group(1), text[lead.end():].strip()))
-    return rules
-
-
-def _coverage_rows(body: Any) -> list[tuple[str, list[str]]] | None:
-    """The rows of a specification's `Coverage` table, or None when the section is absent."""
-
-    section = _sections(body).get("Coverage")
-    if section is None:
-        return None
-    rows: list[tuple[str, list[str]]] = []
-    for line in section.split("\n"):
-        stripped = line.strip()
-        if not stripped.startswith("|"):
-            continue
-        cells = [cell.strip() for cell in stripped.strip("|").split("|")]
-        if len(cells) < 2 or set(cells[0]) <= set("-: ") or cells[0].lower() == "requirement":
-            continue
-        rows.append((cells[0].strip("`"), _RULE_IDENTIFIER.findall(cells[1])))
-    return rows
-
-
 def _plain_words(body: Any) -> str | None:
     """The text of a requirement's `In plain words` section (SPEC-TCM-003 TCM-RFR-004), or None."""
 
@@ -1042,12 +1002,12 @@ def build_findings(
     for artifact in normalized_artifacts:
         if (
             artifact["type"] == "work_order"
-            and artifact["status"] in IMPLEMENTED_STATUSES
+            and artifact["status"] in IMPLEMENTED_OR_LATER_STATUSES
             and not evidence_by_work_order.get(artifact["id"])
         ):
             findings.append(
                 _finding(
-                    "W-HEX-001",
+                    W_HEX_001,
                     "warning",
                     f"{artifact['id']} is {artifact['status']} but has no evidence document keyed to its ID.",
                     [artifact["id"]],
@@ -1072,7 +1032,7 @@ def build_findings(
         if invalid_governing:
             findings.append(
                 _finding(
-                    "W-HEX-002",
+                    W_HEX_002,
                     "warning",
                     f"{artifact['id']} references inactive governing artifacts: {', '.join(sorted(invalid_governing))}.",
                     [artifact["id"], *invalid_governing],
@@ -1097,7 +1057,7 @@ def build_findings(
             stale_relations.add(relation_key)
             findings.append(
                 _finding(
-                    "W-HEX-003",
+                    W_HEX_003,
                     "warning",
                     f"{source['id']} predates newer declared {relation['relation']} target {target['id']} and may require reassessment.",
                     [source["id"], target["id"]],
@@ -1113,7 +1073,7 @@ def build_findings(
     for component in components:
         findings.append(
             _finding(
-                "W-HEX-004",
+                W_HEX_004,
                 "warning",
                 f"Declared dependency traversal contains a cycle among: {', '.join(component)}.",
                 component,
@@ -1130,7 +1090,7 @@ def build_findings(
         if artifact["type"] != "intent" and artifact["id"] not in connected:
             findings.append(
                 _finding(
-                    "W-HEX-005",
+                    W_HEX_005,
                     "warning",
                     f"{artifact['id']} has no valid declared edge after invalid targets are removed.",
                     [artifact["id"]],
@@ -1147,7 +1107,7 @@ def build_findings(
             paths = [artifacts[source]["path"]] if source in artifacts else []
             findings.append(
                 _finding(
-                    "W-HEX-006",
+                    W_HEX_006,
                     "warning",
                     f"{source} repeats target {target} {count} times in relation {relation_name}.",
                     [source, target],
@@ -1167,7 +1127,7 @@ def build_findings(
         if entry["match_state"] == "different" and entry["status"] != "superseded":
             findings.append(
                 _finding(
-                    "I-REV-001",
+                    I_REV_001,
                     "info",
                     f"Observed checkout differs from declared candidate commit on {entry['id']}; this can be expected in a later governance commit.",
                     [entry["id"]],
@@ -1177,7 +1137,7 @@ def build_findings(
         if entry["commit_available"] is False:
             findings.append(
                 _finding(
-                    "W-REV-003",
+                    W_REV_003,
                     "warning",
                     f"Declared candidate commit on {entry['id']} is unavailable in the current clone.",
                     [entry["id"]],
@@ -1200,7 +1160,7 @@ def build_findings(
         if possible_successors:
             findings.append(
                 _finding(
-                    "W-REV-004",
+                    W_REV_004,
                     "warning",
                     f"{source['id']} is ready but its work is fully covered by verified or released records; review possible supersession without inferring authority.",
                     [source["id"], *possible_successors],
@@ -1222,7 +1182,7 @@ def build_findings(
         proposals = sorted(proposals, key=lambda item: item["id"])
         findings.append(
             _finding(
-                "W-REB-001",
+                W_REB_001,
                 "warning",
                 f"Multiple draft or ready release records declare version {version}; accountable release review is required without automatic selection.",
                 [entry["id"] for entry in proposals],
@@ -1245,7 +1205,7 @@ def build_findings(
                 continue
             findings.append(
                 _finding(
-                    "W-REB-002",
+                    W_REB_002,
                     "warning",
                     "Ready verification records at different commits overlap work-order coverage without a governed supersession disposition.",
                     [left["id"], right["id"], *overlap],
@@ -1293,7 +1253,7 @@ def build_findings(
             contract_ids = sorted(set(left["contracts"]) | set(right["contracts"]))
             findings.append(
                 _finding(
-                    "W-REB-003",
+                    W_REB_003,
                     "warning",
                     "Active release contracts and associated proposals compete for the same version and governed work.",
                     [left["id"], right["id"], *contract_ids, *work_overlap],
@@ -1320,7 +1280,7 @@ def build_findings(
         ):
             findings.append(
                 _finding(
-                    "W-REV-002",
+                    W_REV_002,
                     "warning",
                     f"{artifact['id']} is released but has no released commit-bound release record.",
                     [artifact["id"]],
@@ -1555,7 +1515,7 @@ def build_readiness(
                 "G3",
                 "Implementation complete",
                 [
-                    _condition("implementation_status", "Work order records implementation completion", "satisfied" if work_order["status"] in IMPLEMENTED_STATUSES else "unsatisfied", [work_order["id"]]),
+                    _condition("implementation_status", "Work order records implementation completion", "satisfied" if work_order["status"] in IMPLEMENTED_OR_LATER_STATUSES else "unsatisfied", [work_order["id"]]),
                     _condition("verification_evidence", "Work-order evidence is retained", "satisfied" if evidence_paths else "unsatisfied", evidence_paths),
                     _condition(
                         "verified_revision",

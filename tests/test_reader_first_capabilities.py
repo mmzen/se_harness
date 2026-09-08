@@ -12,7 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain, formal, write
 from tests.cli_support import invoke
@@ -61,7 +61,7 @@ class ReaderFirstCapabilityTests(unittest.TestCase):
             )
 
     def report(self):
-        return _load_validator_module().validate_repository(self.root)
+        return validate_engineering_artifacts.validate_repository(self.root)
 
     def advisories(self, path_suffix: str = "CAP-002.md") -> dict[str, list[str]]:
         report = self.report()
@@ -175,7 +175,7 @@ class ReaderFirstCapabilityTests(unittest.TestCase):
         self.assertNotIn("W-AUT-005", found)  # 180 words are within the intent budget of 200
 
     def test_this_repository_corpus_raises_no_capability_advisory(self) -> None:
-        report = _load_validator_module().validate_repository(REPOSITORY_ROOT)
+        report = validate_engineering_artifacts.validate_repository(REPOSITORY_ROOT)
         capability_paths = {str(p) for p in (REPOSITORY_ROOT / "docs/engineering").glob("*/capabilities/CAP-*.md")}
         found = [f"{i.path}: {i.code}" for i in report.advisories if any(i.path.replace("/", "\\") in path or i.path in path for path in capability_paths)]
         self.assertEqual([], found)

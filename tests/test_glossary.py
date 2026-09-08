@@ -13,7 +13,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain, formal, write
 from tests.cli_support import invoke
@@ -57,7 +57,7 @@ class GlossaryTests(unittest.TestCase):
 
     def report(self, threshold: int = 50) -> dict:
         module = load_inspect()
-        validation = _load_validator_module().validate_repository(self.root)
+        validation = validate_engineering_artifacts.validate_repository(self.root)
         return module.build_vocabulary_report(self.root, validation, threshold)
 
     # ---------------------------------------------------------------- TCM-RFR-007: the seed

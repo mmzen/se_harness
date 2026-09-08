@@ -11,9 +11,9 @@ identifiers share the code shape and are excluded by construction.
 The package names its codes once in `se_harness/codes.py` (SPEC-ECP-023
 ECP-PRM-016); this scanner reads that registry through the parser, never by
 import (ECP-PRM-018), and attributes a raise site to its code by the name it
-passes: `CodedError(WEX210, "message")`, `f"{WEX201}: message"`. The engine
-under `se_harness/engine/` still spells its codes and is scanned as literals
-until wave 3 moves it.
+passes: `CodedError(WEX210, "message")`, `Diagnostic(path, E012, message, plane)`,
+`f"{WEX201}: message"`. Since WO-ECP-034 the engine under `se_harness/engine/`
+names its codes the same way (ECP-ENG-009).
 
 This module is standard-library only; `repository_tools` may not widen its
 pinned import crossing into `se_harness` (the import-barrier tests pin it).
@@ -54,6 +54,7 @@ PREFIXES: dict[str, tuple[str, str]] = {
     "W-REV": ("installed validator", "a revision-provenance warning."),
     "W-RSK": ("installed validator", "a risk-artifact warning."),
     "W-HEX": ("dashboard and inspection scripts", "a Harness Explorer publication warning."),
+    "I-REV": ("dashboard and inspection scripts", "an informational revision-provenance finding."),
     "A": ("preflight", "the artifact graph could not be read or validated."),
     "I": ("preflight", "an installation check failed."),
     "WEX": ("workflow execution", "a check, transition, or evidence operation is refused."),
@@ -164,20 +165,36 @@ def _registry_name(node: ast.AST, names: dict[str, str]) -> str | None:
 def _named_codes(tree: ast.Module, names: dict[str, str]):
     """Yield (prefix, code, message) for every site that passes a registry name with its message.
 
-    Two shapes: a call whose first argument is a registry name and whose last string
-    argument is the message (`CodedError(WEX210, "...")`, `_check(RR001, passed,
-    subject, "...")`), and an f-string whose first piece is a registry name followed
-    by the message (`f"{WEX201}: ..."`).
+    Three shapes: a call whose arguments carry a registry name, the message being the
+    longest string argument after it (`CodedError(WEX210, "...")`, `Diagnostic(path,
+    E012, "...", plane)`, `_finding(W_HEX_001, "warning", "...")`); a dictionary keyed
+    by a registry name whose value carries the text (`{W_REB_003: (owner, "...")}`);
+    and an f-string whose first piece is a registry name followed by the message
+    (`f"{WEX201}: ..."`).
     """
 
     for node in ast.walk(tree):
         if isinstance(node, ast.Call) and node.args:
-            name = _registry_name(node.args[0], names)
-            if name is None:
+            positions = [index for index, argument in enumerate(node.args) if _registry_name(argument, names) is not None]
+            if not positions:
                 continue
-            texts = [text for text in (_joined_text(argument, names) for argument in node.args[1:]) if text]
-            code = names[name]
-            yield _CODE.fullmatch(code).group(1), code, _collapse(f"{code}: {texts[-1]}" if texts else code)
+            first = positions[0]
+            code = names[_registry_name(node.args[first], names)]
+            texts = [_joined_text(argument, names) for argument in node.args[first + 1 :]]
+            texts.extend(_joined_text(keyword.value, names) for keyword in node.keywords)
+            texts = [text for text in texts if text]
+            message = max(texts, key=len) if texts else ""
+            yield _CODE.fullmatch(code).group(1), code, _collapse(f"{code}: {message}" if message else code)
+        elif isinstance(node, ast.Dict):
+            for key, value in zip(node.keys, node.values):
+                name = _registry_name(key, names) if key is not None else None
+                if name is None:
+                    continue
+                code = names[name]
+                texts = [_joined_text(item, names) for item in ast.walk(value) if isinstance(item, (ast.Constant, ast.JoinedStr))]
+                texts = [text for text in texts if text]
+                message = max(texts, key=len) if texts else ""
+                yield _CODE.fullmatch(code).group(1), code, _collapse(f"{code}: {message}" if message else code)
         elif isinstance(node, ast.JoinedStr) and node.values:
             first = node.values[0]
             if isinstance(first, ast.FormattedValue):
@@ -204,7 +221,7 @@ def _literal_codes(repository: Path):
             message = _collapse(node.value)
             for match in _CODE.finditer(node.value):
                 yield match.group(1), match.group(0), message
-        if names and path.parent == repository / "se_harness":
+        if names and (repository / "se_harness") in path.parents:
             yield from _named_codes(tree, names)
 
 
