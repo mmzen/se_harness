@@ -40,7 +40,11 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Lifecycle state contract](lifecycle-state-contract.md) | Which lifecycle states does each artifact family admit, and what does each state's contract row grant? |
 | [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same canonical repository skills without duplicating workflow authority? |
-| [Distributing the skills as a coding-agent plugin](agentic-execution-plugin-distribution.md) | What would shipping the harness skills as a host plugin involve, and why is it not a roadmap phase yet? |
+| [Proposal: installation through Codex and Claude Code plugins, 2026-09-06](plugin-installation-proposal-2026-09-06.md) | How would a plugin use provided Python, prepare the evaluator, add three skills and two hook scripts, and preserve the existing authority boundaries? Revised 2026-09-08. |
+| [Plugin operation workflows, 2026-09-06](plugin-operation-workflows-2026-09-06.md) | How do init, artifact packages, work-order start, evidence, verification, and delivery map onto skills, hooks, scripts, agents, and the existing evaluator? |
+| [Detailed plugin scenarios](plugin-scenarios/README.md) | How do 16 operations work step by step, which component does each part, and where do decisions, failures, and recovery occur? |
+| [Plugin scenario template](plugin-scenario-template.md) | How should each detailed scenario explain its workflow, component roles, implementation mapping, decisions, and recovery? |
+| [Earlier exploration of plugin distribution](agentic-execution-plugin-distribution.md) | Which questions informed the proposal? (historical exploration; predates the writing-skill retirement) |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Agentic execution review, 2026-08](agentic-execution-review-2026-08.md) | How has the agentic execution model evolved, how does it work today, and where is it heading? (point-in-time, `992fd73`) |
 | [Complexity audit, 2026-08](complexity-audit-2026-08.md) | Which machinery accumulated for past, temporary, or circumstantial situations and should not become permanent? (point-in-time, `f0ecd9b`) |

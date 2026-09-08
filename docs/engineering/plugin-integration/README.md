@@ -2,7 +2,9 @@
 
 **16 small work packages, all proposed.** Each package has focused requirements, one specification, one verification contract, and one bounded work order. Two shared architecture decisions cover the significant boundaries. Five open decisions identify choices that still need an owner.
 
-These artifacts develop the [plugin proposal in PR #360](https://github.com/mmzen/se_harness/pull/360), including the [provided-Python revision](https://github.com/mmzen/se_harness/blob/9e894e996a18810e7c976f4d583da43f550cb307/docs/notes/plugin-installation-proposal-2026-09-06.md). They were prepared against main `fae52e1b`, with candidate source 0.17.0 and governing evaluator 0.16.0.
+These artifacts develop the [plugin proposal](../../notes/plugin-installation-proposal-2026-09-06.md), [operation workflows](../../notes/plugin-operation-workflows-2026-09-06.md), and [16 scenarios](../../notes/plugin-scenarios/README.md). The notes and artifacts are reviewed together in [PR #416](https://github.com/mmzen/se_harness/pull/416), which incorporates the notes from PR #360 at `9e894e99`.
+
+The artifacts were prepared against main `fae52e1b`, with candidate source 0.17.0 and governing evaluator 0.16.0. The notes retain their earlier analysis baseline; approved artifact contracts and the selected released evaluator govern implementation.
 
 No implementation, approval, verification record, or release record is included. All definitions and work orders remain `draft`; the five decision records remain `open`. File creation and validation do not authorize work.
 
