@@ -2,7 +2,7 @@
 id = "WO-TST-004"
 type = "work_order"
 title = "Wave 4: one run per test, shared support modules, one retired-surface table, cited pins"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -37,6 +37,13 @@ to = "approved"
 decided_at = "2026-09-08T12:53:14Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work. WO-TST-004 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions, after the wave 2 work orders and WO-TCM-011 merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T13:27:20Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner with the word 'start' (DR-WO-START), after PR #401 merged the approved packet to main at 13a70218. Start preflight and the start checkpoint passed at that commit with the released 0.16.0 evaluator. The owner starts before the wave 2 work orders (WO-ECP-031, WO-ECP-032, WO-ECP-033, PRs #398 to #400) and WO-TCM-011 merge, accepting the merge burden as the work order's Lifecycle section allows; those branches touch seven test modules and add two. Execution on branch wo/tst-004-test-suite-hygiene within the declared scope only."
 +++
 
 # Work Order: Wave 4: one run per test, shared support modules, one retired-surface table, cited pins
