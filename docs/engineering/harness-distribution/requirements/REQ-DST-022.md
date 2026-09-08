@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN branching guidance illustrates the SE Harness lifecycle, THE SYSTEM SHALL document one coherent practical Git model at expertise level 6.5/10 while clearly preserving SE Harness independence from that repository policy."
-verification_method = "manual-review-and-static-inspection"
+verification_method = ["inspection"]
+verification_notes = "manual-review-and-static-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

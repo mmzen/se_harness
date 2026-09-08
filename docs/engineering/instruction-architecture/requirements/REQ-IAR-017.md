@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN repository inspection exposes an existing lifecycle queue item or supported derived finding, SE Harness SHALL offer deterministic non-authoritative next-step guidance without inferring eligibility, changing the observation, or performing the action."
-verification_method = "Automated catalog, projection, determinism, no-write, boundary, compatibility, distribution, and regression tests"
+verification_method = ["test"]
+verification_notes = "Automated catalog, projection, determinism, no-write, boundary, compatibility, distribution, and regression tests"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

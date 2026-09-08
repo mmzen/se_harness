@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN the standard harness installs or upgrades, THE SYSTEM SHALL provide one managed, hash-locked authoring policy at docs/engineering/ARTIFACT_AUTHORING.md, routed from the managed router, listed by preflight, applied by the harness-draft-change skill without restatement, and summarised per artifact type by create-artifact when it creates a draft."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN a candidate repository change is evaluated against a caller-selected trusted base revision, THE SYSTEM SHALL reject illegal lifecycle transitions, missing or premature decision metadata, forbidden coupled mutations, immutable provenance changes, and direct-edit bypasses of the active lifecycle contract."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

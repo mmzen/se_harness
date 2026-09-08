@@ -7,7 +7,8 @@ owners = ["service-owner", "repository-owner", "security-owner"]
 created = "2026-08-16"
 updated = "2026-08-18"
 statement = "WHEN the release dashboard workflow uploads or deploys a Pages artifact, THE SYSTEM SHALL use least privilege, serialize deployments, retain observable provenance, and support an idempotent authorized replay without committing generated output."
-verification_method = "automated-workflow-policy-test-and-deployment-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-workflow-policy-test-and-deployment-review"
 
 [relations]
 derives_from = ["CAP-DPG-001"]

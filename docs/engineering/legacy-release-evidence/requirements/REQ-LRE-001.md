@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a released release record carries neither evaluator-evidence field, THE SYSTEM SHALL accept it as unbound only if an authority-granting upgrade work order declares its identifier and was approved after the record was released, SHALL report every accepted record as an outstanding maintenance diagnostic, and SHALL reject a declaration that does not resolve to such a record."
-verification_method = "automated-validator-and-cross-implementation-test"
+verification_method = ["test"]
+verification_notes = "automated-validator-and-cross-implementation-test"
 
 [relations]
 derives_from = ["CAP-LRE-001"]

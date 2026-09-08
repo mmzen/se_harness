@@ -7,7 +7,8 @@ owners = ["repository-owner", "requirements-steward", "quality-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN a coding agent completes a lifecycle stage and yields control, SE Harness SHALL require a stage-aware handoff that reports the completed work, current lifecycle state, recommended next authorized step, required human authority, an applicable exact command or suggested response, and valid alternatives without performing separately authorized actions."
-verification_method = "Automated installed-template, responsibility-boundary, README, upgrade, and regression tests plus accountable semantic review"
+verification_method = ["test", "inspection"]
+verification_notes = "Automated installed-template, responsibility-boundary, README, upgrade, and regression tests plus accountable semantic review"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

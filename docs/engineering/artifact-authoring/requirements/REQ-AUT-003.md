@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a requirement is validated, THE SYSTEM SHALL require verification_method to be a non-empty array drawn from test, analysis, inspection, and demonstration, SHALL accept an optional free-text verification_notes field, and SHALL provide one governed migration that maps every existing string value to the vocabulary before the rule becomes an error."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

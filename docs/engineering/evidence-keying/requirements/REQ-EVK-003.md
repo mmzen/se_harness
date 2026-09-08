@@ -7,7 +7,8 @@ owners = ["security-owner", "quality-owner", "engineering-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN the expanded evidence-attribution convention is installed or used, THE SYSTEM SHALL preserve existing flat filename behavior, historical evidence and record paths, filesystem safety controls, repository customizations, and the single standard installation."
-verification_method = "automated-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-EVK-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "engineering-owner", "quality-owner", "securit
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN pull-request or release-candidate CI evaluates the harness repository, THE SYSTEM SHALL run distinct governor, candidate-source, and candidate-package gates with non-overlapping integrity targets and explicit dependency semantics."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

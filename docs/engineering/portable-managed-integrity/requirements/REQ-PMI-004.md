@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the harness reads a schema-1 raw-byte lock, THE SYSTEM SHALL preserve legacy compatibility and migrate to canonical schema-2 evidence only when unchanged desired content can be proven without overwriting customization."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

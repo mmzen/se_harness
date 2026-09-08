@@ -7,7 +7,8 @@ owners = ["product-owner", "release-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN any repository prepares a release record through portable SE Harness, THE SYSTEM SHALL bind only format-neutral governance identities and expose no se_harness-package, build-format, checksum-layout, publication-channel, or deployment semantics."
-verification_method = "automated-package-template-and-cli-boundary-test"
+verification_method = ["test"]
+verification_notes = "automated-package-template-and-cli-boundary-test"
 
 [relations]
 derives_from = ["CAP-RLO-002"]

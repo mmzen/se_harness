@@ -5,10 +5,11 @@ title = "Conditional architecture-decision assurance"
 status = "implemented"
 owners = ["technical-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["REQ-IAR-012"]
+addresses = ["REQ-IAR-012"]
+conforms_to = ["SPEC-IAR-004"]
 
 [decision_assessment]
 outcome = "adr_required"
@@ -86,3 +87,13 @@ Metadata matrix tests, per-architecture preflight coverage, legacy compatibility
 
 - `ADR-IAR-001`: Use a thin adapter, one managed router, and modular policy.
 - `ADR-IAR-004`: Use explicit conditional ADR applicability rather than unconditional or implicit selection.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation, amended 2026-09-08 under `WO-AUT-005`
+(`SPEC-AUT-003`).** The addressed requirement becomes `REQ-IAR-012` and
+`conforms_to` names `SPEC-IAR-004`, the active specification that specifies
+it. This architecture already carried a `[decision_assessment]` before this
+work order; it is unchanged. Title, status, statement and ADR relations are
+unchanged.

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN a candidate-evidence job needs the predecessor evaluator, THE SYSTEM SHALL derive its version, wheel digest and migration scenario path from the repository's declared governor and lock rather than from workflow constants, and SHALL fail closed when any of the three cannot be derived."
-verification_method = "automated-workflow-inspection-and-derivation-test"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-workflow-inspection-and-derivation-test"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

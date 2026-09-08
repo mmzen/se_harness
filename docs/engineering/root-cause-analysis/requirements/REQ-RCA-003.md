@@ -7,7 +7,8 @@ owners = ["repository-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the RCA is published or referenced for follow-up, THE REPOSITORY SHALL keep it outside the formal artifact graph, state its non-authoritative role, and link prevention work to GitHub issue 81 without authorizing that work."
-verification_method = "graph-validation-link-check-and-manual-review"
+verification_method = ["inspection"]
+verification_notes = "graph-validation-link-check-and-manual-review"
 
 [relations]
 derives_from = ["CAP-RCA-001"]

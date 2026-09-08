@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner", "quality-o
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN an approved governance record delegates a defined preparatory or execution decision right to a single agent, THE SYSTEM SHALL permit only the corresponding evaluator-governed workflow advancement, produce the required canonical evidence and next-decision packet, and stop before every non-delegated accountable decision or external effect."
-verification_method = "inspection-and-automated-test"
+verification_method = ["test", "inspection"]
+verification_notes = "inspection-and-automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

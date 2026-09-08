@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a ready se_harness release record is proposed for approval, THE SYSTEM SHALL replay its exact bound build recipe in a hosted no-credential lane and require the rebuilt wheel and normalized sdist to equal both the accepted bytes and the release-record hashes."
-verification_method = "hosted-exact-recipe-replay"
+verification_method = ["analysis"]
+verification_notes = "hosted-exact-recipe-replay"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

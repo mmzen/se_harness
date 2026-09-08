@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a phase-appropriate preflight runs or a coding agent reads the owner region of this repository, THE SYSTEM SHALL emit a reading manifest closed to the managed router, the operating card, the selected work order with its governing chain, and the owner-region file; the operating card SHALL carry only the stop conditions and the managed trap list; and the owner region SHALL name no retired scaffold file, pointing instead to a repository-owned note for the release sequences."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

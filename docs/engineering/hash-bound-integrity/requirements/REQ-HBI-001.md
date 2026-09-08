@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a committed text file's bytes are bound by a recorded SHA-256, THE SYSTEM SHALL resolve that file to a declared hash-bound class carrying an explicit byte rule, and SHALL fail closed when a raw-mode class has no effective versioned Git attribute preserving those bytes."
-verification_method = "automated-cross-platform-checkout-test"
+verification_method = ["test"]
+verification_notes = "automated-cross-platform-checkout-test"
 
 [relations]
 derives_from = ["CAP-HBI-001"]

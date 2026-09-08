@@ -5,7 +5,7 @@ title = "Authoring policy, requirement template, validator signals, attributes, 
 status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-25"
-updated = "2026-08-25"
+updated = "2026-09-08"
 
 [relations]
 specifies = ["REQ-AUT-001", "REQ-AUT-002", "REQ-AUT-003", "REQ-AUT-004", "REQ-AUT-005", "REQ-AUT-006"]
@@ -121,3 +121,19 @@ in `advisories` rather than `warnings`, and under `AUT-ADV-002` they are
 raised only for an artifact in `draft`. The transition `AUT-VOC-002`
 describes (a string becomes `E-AUT-001` after the migration) is
 unchanged. Nothing else in this specification changes.
+
+**`AUT-VOC-003`'s migration ran under `WO-AUT-005`, applied 2026-09-08.**
+`AUT-VOC-003` places the one-shot script under `WO-AUT-002`. That work order
+wrote the script and retained its mapping table in
+`evidence/WO-AUT-002/verification-method-mapping.json`, but the run itself was
+never applied: the root evaluator of the day still required a string
+`verification_method`. `WO-AUT-005` applied it once over the 32 `requirements/`
+directories under `SPEC-AUT-003` rules `AUT-MIG-005` and `AUT-MIG-006`: 267
+strings mapped by the rules of `REQ-AUT-003`, and the four the rules cannot
+map (`REQ-REB-004`, `REQ-REB-011`, `REQ-REB-014`, `REQ-REB-018`) set to
+`["test"]` as recorded steward decisions. Each migrated requirement keeps its
+original string in `verification_notes`. The script, the applied and
+second-run reports and the four decisions with their reasons are retained in
+`evidence/WO-AUT-005/`; under `AUT-MIG-007` the script then left `scripts/`.
+The vocabulary, the mapping rules and the transition `AUT-VOC-002` describes
+are unchanged; nothing else in this specification changes.

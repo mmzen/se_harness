@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN the standard harness is installed, upgraded, or evaluated for implementation readiness, THE SYSTEM SHALL scaffold and require only material the harness itself governs, SHALL NOT create or require a repository-local operational context document, and SHALL leave any existing owner-authored context file untouched while omitting the retired path from the regenerated lock."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

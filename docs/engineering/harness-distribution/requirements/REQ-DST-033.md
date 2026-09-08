@@ -7,7 +7,8 @@ owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-13"
 updated = "2026-08-13"
 statement = "WHEN the standard harness is used from source or installed into a repository, THE SYSTEM SHALL provide the same managed Explorer generator, template, assets, and integrity behavior."
-verification_method = "automated-package-parity-test"
+verification_method = ["test"]
+verification_notes = "automated-package-parity-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

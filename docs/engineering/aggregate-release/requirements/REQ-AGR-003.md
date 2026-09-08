@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN aggregate verification or release provenance is active, THE SYSTEM SHALL require all included records to identify the same full Git commit and object format as the final release candidate."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

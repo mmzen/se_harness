@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN a ready verification or release record is prepared or later decided, THE SYSTEM SHALL record preparation provenance separately from accountable decision provenance and shall not populate verification, release, rejection, or supersession decision actors or times before the corresponding accountable decision occurs."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

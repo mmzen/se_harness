@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN validation or repository-inspection behavior changes, THE SYSTEM SHALL keep the active public command contract, progressive human documentation, and focused documentation checks synchronized with the implemented semantics while preserving historical evidence and accountable authority boundaries."
-verification_method = "automated-test-and-manual-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

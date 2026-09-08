@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN the system represents a human decision actor, delegated worker, skill, or runtime permission, THE SYSTEM SHALL distinguish the accountable role, agent execution profile, executable procedure, delegated scope, and technical permission; and SHALL NOT infer an engineering decision right from an agent name, model, prompt, tool, sandbox, runtime configuration, or successful command."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

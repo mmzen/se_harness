@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN an operator executes or reports work for one selected workflow scope, THE SYSTEM SHALL classify surfaced findings, governed artifact mutations, declared implementation-path changes, and restitution items against that scope; reject out-of-scope governed mutations; exclude unrelated findings and actions from primary restitution; and enter repository-wide analysis only through an explicit repository-wide mode."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

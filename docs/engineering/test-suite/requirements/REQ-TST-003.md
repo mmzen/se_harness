@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN a test fixture needs a fresh standard repository, THE SYSTEM SHALL copy it from one repository initialised once per test session and SHALL yield bytes identical to a direct init."
-verification_method = "automated-test-and-timed-comparison"
+verification_method = ["test"]
+verification_notes = "automated-test-and-timed-comparison"
 [relations]
 derives_from = ["CAP-TST-001"]
 

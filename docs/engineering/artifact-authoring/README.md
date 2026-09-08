@@ -35,5 +35,16 @@ of `REQUIREMENT.template.md` measured on this repository's 255 requirements.
 - `WO-AUT-004`: report authoring advisories apart from errors and warnings (REQ-AUT-007), drafted 2026-08-30 from the functional assessment's issue #283.
 - `REQ-AUT-008`, `SPEC-AUT-003`, `VER-AUT-003`, `WO-AUT-005` (drafted 2026-09-08 for issues #380 and #381, owner decision 3 of 2026-09-07: migrate the corpus, then close the windows): the fifteen legacy architectures take `addresses` and `conforms_to`, the fourteen without a decision assessment gain one naming their deciding ADR, the verification-method migration of `AUT-VOC-003` is applied once with four steward decisions, and the script leaves the repository. Closing the `W014`/`W015` branches is the following work order, drafted after this one merges. No delegation table: every decision is the engineering owner's.
 
-Every artifact remains `draft`. This packet authorizes no implementation,
-lifecycle transition, Git action, or external action.
+`WO-AUT-001` to `WO-AUT-004` are implemented with verification records
+`VREC-AUT-001` to `VREC-AUT-004`. The wave 5 packet was approved on 2026-09-08
+and `WO-AUT-005` started the same day: the fifteen legacy architectures now
+carry `addresses` and `conforms_to`, fourteen carry a retroactive
+`[decision_assessment]` naming their deciding ADR, the vocabulary migration
+of `AUT-VOC-003` ran once over 271 requirements with four steward decisions
+on `REQ-REB-004`, `-011`, `-014` and `-018`, and
+`scripts/migrate_verification_methods.py` left the repository with its test
+and its note paragraph. `SPEC-AUT-001` carries the amendment record of
+`AUT-MIG-008`, and the rewrite scripts and reports are retained under
+`evidence/WO-AUT-005/`. Each artifact's own front matter is its state.
+Closing the `W014` and `W015` validator branches is the following work order,
+drafted after `WO-AUT-005` merges; this index authorizes nothing.

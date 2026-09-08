@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN the managed router is rendered, THE SYSTEM SHALL state that `HRN-003`, the lifecycle-restitution rules, and the stop conditions bind an actor executing or reporting a lifecycle stage, and that reading, analysis, and answering questions are unconstrained provided no state changes and no finding is presented as a formal result."
-verification_method = "manual-review"
+verification_method = ["inspection"]
+verification_notes = "manual-review"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

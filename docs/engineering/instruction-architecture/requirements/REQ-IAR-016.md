@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN an operator requests repository inspection, SE Harness SHALL produce a deterministic read-only attention report from existing validation, lifecycle, and Explorer observations without changing gates or exercising accountable authority."
-verification_method = "Automated command, projection, determinism, no-write, distribution, and regression tests"
+verification_method = ["test"]
+verification_notes = "Automated command, projection, determinism, no-write, distribution, and regression tests"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

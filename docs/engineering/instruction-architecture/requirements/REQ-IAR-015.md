@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "SE Harness SHALL assign every validator diagnostic to one stable assessment plane and expose that plane without changing existing validation rules, severities, or exit behavior."
-verification_method = "Automated taxonomy coverage, output-compatibility, managed-parity, and regression tests"
+verification_method = ["test"]
+verification_notes = "Automated taxonomy coverage, output-compatibility, managed-parity, and regression tests"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

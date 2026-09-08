@@ -1,0 +1,41 @@
+{
+  "applied": true,
+  "decided_by": "requirements-steward",
+  "decisions": {
+    "REQ-REB-004": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-active-surface-invariant",
+      "path": "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-004.md",
+      "reason": "The measure is an invariant over the released evaluator's active surface, asserted by the candidate suite on every run. It is executed, not read, so the closed vocabulary word is test; no human reading is required for the verdict."
+    },
+    "REQ-REB-011": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-release-version-lifecycle-matrix",
+      "path": "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-011.md",
+      "reason": "A matrix of release versions and lifecycle states is a parametrised automated suite. The word matrix names the shape of the cases, not a second method, so the vocabulary word is test."
+    },
+    "REQ-REB-014": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-python311-linux-windows-failure-injection-matrix",
+      "path": "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-014.md",
+      "reason": "Failure injection across two platforms and one interpreter version is executed by the hosted lanes and the local suite. Platform coverage is a case dimension, so the vocabulary word is test."
+    },
+    "REQ-REB-018": {
+      "mapped": [
+        "test"
+      ],
+      "original": "automated-contract-consumer-conformance",
+      "path": "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-018.md",
+      "reason": "Consumer conformance to the published contract is asserted by executing the consumer against it. Conformance here is an executed comparison rather than an inspected one, so the vocabulary word is test."
+    }
+  },
+  "rule": "AUT-MIG-006",
+  "schema": "se-harness-steward-decision-record-v1",
+  "work_order": "WO-AUT-005"
+}

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN revision_provenance.required_for_verified_work is true, THE SYSTEM SHALL reject every verified or released work order not covered by a verified or released verification record."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WLC-001"]

@@ -7,7 +7,8 @@ owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a progressive dashboard request fails, times out, is superseded by newer navigation, or returns invalid data, THE SYSTEM SHALL contain the outcome to its requesting panel and preserve the latest verified user selection without presenting partial data as authoritative."
-verification_method = "automated-browser-test-and-failure-injection"
+verification_method = ["test"]
+verification_notes = "automated-browser-test-and-failure-injection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["service-owner", "repository-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN an operating contract is validated, SE Harness SHALL enforce requirement-only assurance targets and SHALL reject every active assurance claim that lacks an active requirement, completed implementing work, or configured commit-bound verification coverage."
-verification_method = "automated target-type, lifecycle, reachability, policy, migration, parity, and regression tests"
+verification_method = ["test"]
+verification_notes = "automated target-type, lifecycle, reachability, policy, migration, parity, and regression tests"
 
 [relations]
 derives_from = ["CAP-OCA-001"]

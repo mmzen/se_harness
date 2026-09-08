@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a phase-appropriate preflight runs, THE SYSTEM SHALL emit the complete mandatory reading set for that phase, and the managed router SHALL name that manifest plus one contract-generated operating card of at most 3072 bytes as the reading an agent must complete before acting; other routed policies SHALL be reference material."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "engineering-owner", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the instruction architecture is installed or upgraded, THE SYSTEM SHALL apply deterministic ownership-mode migrations without overwriting customized, ambiguous, or repository-owned content."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

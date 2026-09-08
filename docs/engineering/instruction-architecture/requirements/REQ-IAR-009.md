@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner", "release-
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN instructions, preflight, CI, or dashboards report engineering state, THE SYSTEM SHALL treat their outputs as guidance or evidence and SHALL NOT convert them into product, verification, release, or publication authority."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-18"
 statement = "WHEN production publication is requested, THE SYSTEM SHALL accept one released RLS identifier from main, derive its final semantic-version GitHub release and exact distribution identities, and reject missing, draft, prerelease, partial, or mismatched state."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PYP-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN Harness Explorer colors graph nodes by state, artifact type, or assurance, THE SYSTEM SHALL assign every category in that analysis mode a stable distinct color while retaining authoritative text labels and non-color cues."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

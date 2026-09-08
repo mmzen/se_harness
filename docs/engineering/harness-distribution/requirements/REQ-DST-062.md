@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the SE Harness repository acceptance suite evaluates its compact Explorer topology, THE SYSTEM SHALL use a 2,097,152-byte UTF-8 acceptance target while continuing to report the exact observed size."
-verification_method = "automated-performance-budget-test"
+verification_method = ["test"]
+verification_notes = "automated-performance-budget-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

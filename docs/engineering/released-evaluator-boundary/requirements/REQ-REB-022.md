@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner", "release-
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN repository-owned candidate, release, or publication automation claims release qualification, THE SYSTEM SHALL invoke the matching role-specific operation and test that the workflow cannot substitute a raw validator or incompatible evaluator-target combination."
-verification_method = "automated-workflow-contract-test"
+verification_method = ["test"]
+verification_notes = "automated-workflow-contract-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

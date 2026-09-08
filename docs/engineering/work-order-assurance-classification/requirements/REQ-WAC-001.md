@@ -7,7 +7,8 @@ owners = ["quality-owner", "repository-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a work order becomes actionable, SE Harness SHALL require an explicit accountable declaration of whether commit-bound verification is required and SHALL expose that declaration during preflight."
-verification_method = "validator, preflight, template, and lifecycle tests"
+verification_method = ["test"]
+verification_notes = "validator, preflight, template, and lifecycle tests"
 
 [relations]
 derives_from = ["CAP-WAC-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "technical-owner", "qualit
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an eligible candidate commit enters the integration-package lane, THE SYSTEM SHALL derive a unique PEP 440 local version from the unchanged base version, event channel, and commit, SHALL apply that overlay only to a disposable exact-commit export, and SHALL bind the resulting wheel, overlay, build environment, and workflow run in a canonical manifest and checksum set."
-verification_method = "automated-package-provenance-test"
+verification_method = ["test"]
+verification_notes = "automated-package-provenance-test"
 
 [relations]
 derives_from = ["CAP-IPK-001"]

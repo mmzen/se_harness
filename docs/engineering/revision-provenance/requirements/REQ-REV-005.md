@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN capture-verification or prepare-release is invoked, THE SYSTEM SHALL derive bounded Git metadata and create a reviewable ready record without committing, tagging, approving, releasing, or publishing it."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REV-001"]

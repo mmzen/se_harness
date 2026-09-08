@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-22"
 updated = "2026-08-27"
 statement = "WHEN an authorized publication transaction uses a predecessor evaluator that cannot parse retained rejected-bootstrap history, THE SYSTEM SHALL validate the complete governance graph with current semantics and validate an exact read-only compatibility view with that predecessor before any privileged publication stage."
-verification_method = "automated-publication-view-provenance-and-zero-mutation-test"
+verification_method = ["test"]
+verification_notes = "automated-publication-view-provenance-and-zero-mutation-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

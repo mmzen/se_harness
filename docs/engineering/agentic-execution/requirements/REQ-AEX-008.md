@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an operator explicitly invokes a supported SE Harness skill to prepare draft definitions, execute one already-started bounded work order, or prepare commit-bound assurance material, THE SYSTEM SHALL execute the applicable command-equivalent single-agent procedure using current released-evaluator state, constrain effects to the declared preparation or work-order boundary, retain deterministic evidence, and stop before every accountable approval, work-completion decision, assurance decision, delivery choice, release decision, Git mutation, credential use, or external action."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

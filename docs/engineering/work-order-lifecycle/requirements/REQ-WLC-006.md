@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN legacy completed governance work has a misleading approved or uncovered verified status, THE SYSTEM SHALL normalize only the work-order status to implemented while preserving its scope, evidence, decisions, commits, verification records, and release records."
-verification_method = "inspection"
+verification_method = ["inspection"]
+verification_notes = "inspection"
 
 [relations]
 derives_from = ["CAP-WLC-001"]

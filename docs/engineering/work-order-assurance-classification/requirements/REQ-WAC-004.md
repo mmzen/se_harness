@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN assurance classification is introduced into an existing repository, SE Harness SHALL preserve completed legacy work without inferred classification and SHALL allow governance-only verification, release, supersession, and publication work to terminate without recursive VREC obligations."
-verification_method = "legacy repository, lifecycle, governance-only, and no-inference regression tests"
+verification_method = ["test"]
+verification_notes = "legacy repository, lifecycle, governance-only, and no-inference regression tests"
 
 [relations]
 derives_from = ["CAP-WAC-001"]

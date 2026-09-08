@@ -7,7 +7,8 @@ owners = ["product-owner", "engineering-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the standard harness is installed, adopted, or upgraded, THE SYSTEM SHALL integrate the shared harness contract into AGENTS.md and provide a CLAUDE.md adapter that imports AGENTS.md without replacing repository-owned instructions."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

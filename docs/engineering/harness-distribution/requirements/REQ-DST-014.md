@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a prospective user evaluates SE Harness from the public README, THE SYSTEM SHALL demonstrate a representative human-and-coding-agent workflow and SHALL visualize the resulting governed traceability chain from approved outcome through exact verified revision and separately authorized release."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a reader installs or updates SE Harness, THE SYSTEM SHALL distinguish Python-package installation from repository-managed-content upgrade and require explicit owner-controlled application of repository changes."
-verification_method = "automated-documentation-test"
+verification_method = ["test"]
+verification_notes = "automated-documentation-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-19"
 statement = "WHEN an Explorer bundle is generated and acceptance-tested, THE SYSTEM SHALL enforce fixed shell and initial-summary budgets, exclude deferred Markdown from the initial path, and report deterministic resource-size measurements without converting them into an assurance score."
-verification_method = "automated-performance-budget-test"
+verification_method = ["test"]
+verification_notes = "automated-performance-budget-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

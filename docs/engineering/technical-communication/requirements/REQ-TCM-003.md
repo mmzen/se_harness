@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a supported agent authors eligible operator-facing or technical-artifact English prose, THE SYSTEM SHALL select the declared communication profile, apply its bounded clarity principles during drafting rather than as an uncontrolled rewrite pass, and retain the profile and any material deviation in the result or review evidence."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-TCM-001"]

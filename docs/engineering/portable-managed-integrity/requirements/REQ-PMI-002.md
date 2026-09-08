@@ -7,7 +7,8 @@ owners = ["quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN doctor evaluates a canonical-mode managed file or fragment, THE SYSTEM SHALL treat LF, CRLF, and CR representations of the same text as unchanged while reporting real content differences as failures."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

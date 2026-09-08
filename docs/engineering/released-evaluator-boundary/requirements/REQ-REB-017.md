@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "security-owner", "release-ow
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN a migration-required successor is qualified for release, THE SYSTEM SHALL execute a deterministic no-credential predecessor-to-successor rehearsal covering preparation, complete validation, rejection, replacement, hosted assessment, release and publication planning, rendering, and separately gated post-publication adoption, and SHALL fail qualification if the rehearsal cannot preserve every declared authority and immutability boundary."
-verification_method = "automated-cross-version-migration-rehearsal"
+verification_method = ["demonstration"]
+verification_notes = "automated-cross-version-migration-rehearsal"
 
 [relations]
 derives_from = ["CAP-REB-001"]

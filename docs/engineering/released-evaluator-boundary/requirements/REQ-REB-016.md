@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN a successor changes governance behavior that the locked released predecessor cannot completely create or interpret, THE SYSTEM SHALL require one machine-readable migration contract that defines every evaluator role, artifact view, authority effect, compatibility boundary, failure condition, and post-publication adoption exit before that successor can qualify for release."
-verification_method = "automated-contract-and-boundary-test"
+verification_method = ["test"]
+verification_notes = "automated-contract-and-boundary-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]
