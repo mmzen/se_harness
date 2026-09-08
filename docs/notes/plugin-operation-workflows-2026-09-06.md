@@ -3,9 +3,9 @@
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 > Revised 2026-09-08. Companion to the [installation proposal](plugin-installation-proposal-2026-09-06.md).
-> Maps [source `aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate 0.16.0, governed at that baseline by released evaluator 0.15.0. The [implementation packets](../engineering/plugin-integration/README.md) use a newer baseline. The proposed plugin is not implemented; examples describe inspected CLI syntax, not a tested plugin.
+> Uses the [shared proposal baseline](plugin-installation-proposal-2026-09-06.md): candidate source 0.17.0 at `fae52e1b`, governing evaluator 0.16.0. The plugin remains proposed.
 
-Inspect the selected released evaluator before using these commands. Released 0.16.0 retains `adopt` as a transitional alias; candidate 0.17.0 uses unified `init`. Relative source links open the current branch, which may differ from the inspected baseline.
+Commands use released evaluator 0.16.0, including its transitional `adopt` alias. Follow the [shared calling convention](plugin-scenarios/README.md#shared-component-names-and-calling-convention).
 
 ## First, distinguish the components
 
@@ -50,9 +50,9 @@ Each row links to the full sequence, including current commands, new components,
 
 | Operation | Skill / agent action | Hook or script role | Required handoff |
 | --- | --- | --- | --- |
-| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | `setup` uses the host shell to check Python 3.11+, then creates the environment and installs the included wheel. | After setup succeeds, activate and test `session-context.py` and `check-tool-action.py` through environment Python. | If Python is missing or unusable, stop and tell the operator to install/provide it before continuing. Resolve required host trust. |
+| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | `setup` uses the host shell to check Python 3.11+, then creates the environment and installs the included wheel. | A host shell guard reports setup required until the runtime can run; then the Python handlers perform full checks. Observe actual hook activation after setup. | If Python is missing or unusable, stop and tell the operator to install/provide it before continuing. Resolve required host trust. |
 | [Connect repository](plugin-scenarios/setup-and-sessions.md#scenario-2-initialize-or-adopt-a-repository) | `setup` previews existing `init` or `adopt`, then runs the authorized operation. | `session-context` checks readiness afterward. | User approves the concrete repository changes. |
-| [Start / restore session](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) | `harness-orient` reads the selected state when needed. | `SessionStart` calls `session-context`: identity, `doctor`, then governance injection; repeat on compact/resume. | Resolve failed checks or incomplete context before governed work. |
+| [Start / restore session](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) | `harness-orient` reads the selected state when needed. | `SessionStart` uses a shell guard, then `session-context`: identity, `doctor`, governance injection; repeat on compact/resume. | Resolve failed checks or incomplete context before governed work. |
 | [Create package](plugin-scenarios/definition-and-approval.md#scenario-6-create-an-artifact-package) | `change` uses `scaffold-domain`, `create-artifact`, and editing tools. | Same installed evaluator; optional investigator locates existing definitions. | Review connected drafts. Creation does not approve them. |
 | [Approve / revise](plugin-scenarios/definition-and-approval.md#scenario-7-review-and-approve-the-package) | `change` presents exact content and existing transition previews. | CLI checks legality; editing follows the applicable amendment procedure. | Actual owners decide; apply only their selected changes. |
 | [Start WO](plugin-scenarios/implementation-and-integration.md#scenario-9-start-a-work-order) | `change` runs `preflight` and an authorized `transition` to `in_progress`. | `check-tool-action` checks covered tool actions. | Human or qualifying existing delegation supplies start authority. |
@@ -64,7 +64,7 @@ Each row links to the full sequence, including current commands, new components,
 
 ## What a direct call looks like
 
-In these notes, `harnessctl` is shorthand for `ENV_PYTHON -I -m se_harness`, using the verified environment's absolute Python path. There is no custom wrapper or normal command lookup on `PATH`. Hooks use `ENV_PYTHON -I ABS_SCRIPT` with verified absolute script paths. `REPO`, `ACTOR`, and example IDs are placeholders, not literal inputs.
+In these notes, `harnessctl` is shorthand for `ENV_PYTHON -I -m se_harness`, using the verified environment's absolute Python path. There is no launcher binary, evaluator lookup on `PATH`, or second protocol. Hook commands may use a thin shell guard before `ENV_PYTHON -I ABS_SCRIPT`. `REPO`, `ACTOR`, and example IDs are placeholders, not literal inputs.
 
 For a new or empty directory, the setup skill instructs the agent to run:
 

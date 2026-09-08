@@ -12,7 +12,18 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["plugins/verity-plane/common/skills/harness-orient/", "plugins/verity-plane/common/skills/harness-operator-brief/", "tests/plugin_integration/retained-skills/", "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md", "docs/engineering/plugin-integration/evidence/WO-PLG-012/"]
+paths = [
+  "plugins/verity-plane/common/skills/harness-orient/",
+  "plugins/verity-plane/common/skills/harness-operator-brief/",
+  "tests/plugin_integration/retained-skills/",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-012/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-020.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-021.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-012.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-012.md",
+]
 
 [relations]
 implements = ["REQ-PLG-020", "REQ-PLG-021"]
@@ -32,11 +43,14 @@ Adapt retained orientation and operator-brief cores for plugin installation with
 
 ## In scope
 
-Plugin skill copies, existing helpers/contracts, invocation-path adaptation and preservation tests. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Plugin skill copies, existing helpers/contracts, invocation-path adaptation and preservation tests. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+Definition introduction D07 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 
-Root managed skill edits, changed schemas, automatic briefing, lifecycle mutation, or retired outcome skills. No other packet or managed root changes.
+Root managed skill edits, changed schemas, automatic briefing, lifecycle mutation, or retired outcome skills. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 

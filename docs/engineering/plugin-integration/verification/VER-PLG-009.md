@@ -15,43 +15,56 @@ verifies = ["REQ-PLG-015", "REQ-PLG-016"]
 
 ## Independence
 
-The assurance owner retains original repository bytes and expects results from inspected released installer behavior. Discovery is judged through actual host selection, not skill filenames.
+Expected file ownership and installer behavior come from the released command help and existing installer contracts. Host discovery is observed directly, not inferred from filenames.
 
 ## Requirement-to-evidence matrix
 
-| Requirement | Method | Case/evidence | Pass condition |
+| Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-015 | test | New/existing target; explicit upgrade; customized managed file | Only the reviewed authorized installer operation changes the target; conflicts preserve files. |
-| REQ-PLG-016 | test | Repository/plugin duplicate names and incompatible local contracts | One approved compatible implementation is active, or readiness is blocked without destructive migration. |
+| REQ-PLG-015 | test, inspection | C01–C04, C07, C08 | Only the authorized released installer changes the reviewed target; ownership conflicts preserve files. |
+| REQ-PLG-016 | test, inspection | C05, C06 | Actual host discovery selects one approved compatible definition, or stays unready without deleting managed files. |
 
 ## Acceptance scenarios
 
-Use disposable repositories and the selected released evaluator. Live coexistence acceptance requires resolution of DEC-PLG-004 and its supported route.
+Each case creates new test evidence under `evidence/WO-PLG-009/Cnn/`: `actions.txt`, `stdout.txt`, `stderr.txt`, and `observations.json`; these are not plugin APIs.
+`observations.json` records expected/observed values, exit status, source evidence paths and a pass/fail/unavailable conclusion. The Evidence column names additional captures.
+
+| Case | Starting fixture | Action | Observable result | Evidence |
+| --- | --- | --- | --- | --- |
+| C01 | Empty new target; released evaluator 0.16.0 | Run init REPO --dry-run --json, inspect, then authorized init REPO --json. | Preview writes nothing; application creates the planned managed files, including .engineering-harness.lock; doctor exits 0 on the intact fixture. | help; plan/result JSON; before/after inventory; doctor |
+| C02 | Existing target; explicitly selected target release and upgrade authority | Run upgrade REPO --json, then upgrade REPO --apply --json. | Only the reviewed installer changes managed content/lock; requested installer evidence identifies actual changes. | reviewed plan; result; lock hashes; evidence output |
+| C03 | Customized managed file, conflicting target path, or uncertain ownership | Attempt the relevant released installer operation. | The conflict is reported; customized owner bytes are unchanged and no manual deletion occurs. | installer finding; file hashes; tool trace |
+| C04 | Reviewed operation followed by changed target/scope; interrupted application | Resume the setup skill. | Changed inputs trigger renewed checking or an authority blocker; partial writes are inventoried before retry. | old/new plans; authority transcript; partial inventory |
+| C05 | Duplicate repository/plugin skills; positively accepted DEC-PLG-004 route | Connect and invoke each duplicated name in the host. | Discovery resolves exactly one compatible implementation per name, with retained source path and digest. | decision reference; host discovery and invocation log |
+| C06 | No compatible route or unresolved DEC-PLG-004 | Attempt connection with duplicate skills. | Discovery remains unready; locked skill bytes and repository ownership records remain unchanged. | blocker output; managed-file/lock hashes |
+| C07 | Ready repository; plugin-only update and repeated unchanged request | Reload setup without requesting repository upgrade. | Repository lock/owner bytes stay unchanged; no duplicate decision prompt or installer write is introduced. | before/after hashes; tool and prompt transcript |
+| C08 | Existing repository with owner README/AGENTS content and no harness | Run released 0.16.0 adopt REPO --dry-run --json, then authorized adopt REPO --json. | Preview writes nothing; application preserves owner content and inserts only planned managed content; actual result matches the reviewed target. | command help; plan/result; owner-file diff; lock |
 
 ## Property and invariant tests
 
-Compare owner content, managed digests and version lock before/after. A plugin-only update cannot silently upgrade the repository.
+C01–C04 and C07 compare complete owner/managed inventories and locks. C05 retains the host-selected implementation path for each duplicate name.
 
 ## Static and architecture checks
 
-Review PLG-REPO-001 through PLG-REPO-005 against current installer contracts and SPEC-AEX-005. Verify examples against released command help.
+Map to PLG-REPO-001–005 and SPEC-AEX-005. The example forms are confirmed against released 0.16.0; retain help for any selected later release.
 
 ## Security and privacy checks
 
-Exercise conflicting target paths and customized files. No manual locked-file deletion or new installer behavior is accepted under this packet.
+C03/C06 prohibit manual locked-file deletion. Disposable fixtures isolate target conflicts from the developer’s actual repository.
 
 ## Performance and resilience checks
 
-Record setup operations and prompts. Reuse an unchanged covered request; rerun affected checks when the reviewed target or operation changes.
+C04/C07 retain interruption points, repeated operations and decision prompts. Do not silently reuse a changed reviewed operation.
 
 ## Manual assessments
 
-Observe actual host skill resolution on each claimed platform. A clean new repository alone does not qualify existing-repository migration.
+Record provided Python, selected evaluator and every claimed host/platform. Live coexistence requires the positively selected supported route and approved governing definitions.
 
 ## Evidence retention
 
-Retain commands, outputs, failures and platform identities under `evidence/WO-PLG-009/`; bind the later verification record to the exact implementation candidate.
+Retain each case’s fixture revision, argv, exit status, raw output and listed observations under `evidence/WO-PLG-009/Cnn/`.
+Record expected and observed values separately, with a pass/fail/unavailable conclusion. Keep original failures and bind later assurance to the exact implementation candidate.
 
 ## Residual uncertainty
 
-Existing ownership compatibility remains undecided until DEC-PLG-004 is disposed. Evidence described here is planned, not an executed migration result.
+An unresolved ownership decision blocks connection acceptance. A clean-repository demonstration alone cannot qualify migration.

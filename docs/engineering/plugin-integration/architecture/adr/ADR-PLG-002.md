@@ -38,7 +38,7 @@ One policy owner, supported installation, honest coverage claims, and retained h
 
 The proposed choice is two host bindings around session-context.py and check-tool-action.py.
 Skills invoke the same existing evaluator.
-Each production binding follows an evidenced activation route; an unsupported host remains unqualified.
+Each binding uses a thin host-shell guard and an evidenced activation route. Missing runtime produces setup guidance; Python handlers still verify readiness. An unsupported host remains unqualified.
 Optional helpers remain read-only and can be replaced by the main agent.
 
 ## Consequences

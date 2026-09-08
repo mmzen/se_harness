@@ -15,43 +15,55 @@ verifies = ["REQ-PLG-013", "REQ-PLG-014"]
 
 ## Independence
 
-The assurance owner defines allowed and refused effects independently of the adapter's classifier. Compare evaluator observations and actual target changes, not just hook exit codes.
+Expected allowed/refused effects derive from the installed evaluator contract. The assurance owner compares raw results and target changes independently of adapter classification.
 
 ## Requirement-to-evidence matrix
 
-| Requirement | Method | Case/evidence | Pass condition |
+| Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-013 | test | Covered in-scope/out-of-scope edits; failed or interrupted checks | Current required checks precede effect; refusals leave the target unchanged. |
-| REQ-PLG-014 | test | Malformed/ambiguous governed actions on refusing and non-refusing host protocols | Refusal precedes effect where supported; otherwise report unenforced. Never claim checked success. |
+| REQ-PLG-013 | test, inspection | C01–C03, C06, C07 | Current evaluator checks precede mapped effects; refused targets remain unchanged. |
+| REQ-PLG-014 | test, inspection | C04, C05, C07 | Unmapped effects are refused where possible and otherwise explicitly identified as unenforced. |
 
 ## Acceptance scenarios
 
-Run explicitly captured host-event fixtures with the released evaluator. Retain exact event, invocation/result, response and simulated target effects; label protocol/OS/Python/evaluator identities.
+Each case creates new test evidence under `evidence/WO-PLG-008/Cnn/`: `actions.txt`, `stdout.txt`, `stderr.txt`, and `observations.json`; these are not plugin APIs.
+`observations.json` records expected/observed values, exit status, source evidence paths and a pass/fail/unavailable conclusion. The Evidence column names additional captures.
+
+| Case | Starting fixture | Action | Observable result | Evidence |
+| --- | --- | --- | --- | --- |
+| C01 | Selected approved WO; mapped in-scope edit; target sentinel | Replay the captured host event through check-tool-action.py. | The evaluator receives the selected artifact/checkpoint/path before the fixture effect; the permitted target change follows its result. | event; evaluator argv/result; ordered effect log |
+| C02 | Mapped edit outside the WO scope | Request the fixture edit. | The host-protocol refusal precedes execution; target SHA-256 and effect count remain unchanged. | refusal response; before/after hash; effect count |
+| C03 | Required evaluator check fails, times out, or is interrupted | Attempt the mapped effect for each condition. | The failure is retained and no target effect occurs; failure is not converted into a checked-success response. | exit/timeout trace; raw response; target hash |
+| C04 | Malformed or ambiguous governed event; refusal-capable protocol | Replay missing fields and ambiguous shell writes. | The response refuses the governed action and identifies unavailable coverage; effect count stays zero. | raw events; refusal; effect log |
+| C05 | Same unmappable event; protocol cannot enforce refusal | Replay the event through that protocol fixture. | Output identifies the route as unenforced and does not claim readiness or checked success for that action. | protocol definition; output; observed effect log |
+| C06 | Prior passing result; artifact, checkpoint or actual path then changes | Replay the changed action. | A fresh check uses the changed inputs; the earlier result is not reused to permit the new effect. | old/new argv; check invocation count; result bindings |
+| C07 | Spoofed path, recursive check marker, unobserved tool or continuing shell session | Attempt an unrelated governed effect through each gap. | A recursion marker does not exempt the unrelated effect; observed refusals and unobserved routes are separately recorded, without universal-coverage claims. | event sources; recursion trace; effect/coverage logs |
 
 ## Property and invariant tests
 
-Vary artifact, checkpoint and path inputs. A stale result cannot authorize a changed action. Ambiguous/malformed governed actions leave fixture targets unchanged when refusal is supported.
+C01–C04 establish effect ordering and unchanged refusal targets. C06 binds checking to current inputs; C07 limits recursion exemptions.
 
 ## Static and architecture checks
 
-Review PLG-HOOK-001 through PLG-HOOK-006 and ARCH-PLG-002/ADR-PLG-002. Confirm evaluator checks are reused without embedded policy copies.
+Map cases to PLG-HOOK-001–006 and ARCH-PLG-002/ADR-PLG-002. Retain evidence that checks call the released evaluator rather than copied policy.
 
 ## Security and privacy checks
 
-Attempt malformed paths, event spoofing and recursive checking. A recursion guard cannot exempt unrelated governed effects. Document unobserved tools and continuing shell sessions.
+C07 uses synthetic spoofing inputs. Do not treat an unobserved route as denied merely because its log is empty.
 
 ## Performance and resilience checks
 
-Measure evaluator time and added adapter time separately, including slow refusals. No required check may be skipped for speed.
+Retain separate event, evaluator and effect timestamps, including slow refusals; never omit required checks from timing runs.
 
 ## Manual assessments
 
-Inspect refusal-before-effect ordering in the fixture runner. Real host interception/refusal belongs to VER-PLG-005/006 and VER-PLG-015; assess remaining gaps affecting issue #347 explicitly.
+Use captured host-protocol fixtures with recorded OS/Python/evaluator versions. Real host interception and refusal require VER-PLG-005/006 and VER-PLG-015.
 
 ## Evidence retention
 
-Retain commands, outputs, failures and platform identities under `evidence/WO-PLG-008/`; bind the later verification record to the exact implementation candidate.
+Retain each case’s fixture revision, argv, exit status, raw output and listed observations under `evidence/WO-PLG-008/Cnn/`.
+Record expected and observed values separately, with a pass/fail/unavailable conclusion. Keep original failures and bind later assurance to the exact implementation candidate.
 
 ## Residual uncertainty
 
-Fixture acceptance qualifies the handler without waiting for production adapters. It cannot prove live interception or independent external authorization. No check result is asserted here.
+Fixture refusal proves the handler response, not independent external authorization. Issue #347 remains a separate control boundary.

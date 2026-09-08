@@ -18,6 +18,11 @@ paths = [
   "tests/plugin_integration/change_skill/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-010.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-010/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-017.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-018.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-010.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-010.md",
 ]
 
 [relations]
@@ -39,6 +44,9 @@ Guide artifact packages and WO execution using current operations, with automati
 ## In scope
 
 The new change skill and operation references; drafting, amendment, approval/start/completion guidance and focused interaction fixtures.
+
+
+Definition introduction D05 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 

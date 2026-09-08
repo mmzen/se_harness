@@ -16,55 +16,54 @@ specifies = ["REQ-PLG-003", "REQ-PLG-004", "REQ-PLG-005"]
 
 ## In plain words
 
-Setup prepares the checking tool using existing Python. Its files stay outside the project.
+Setup uses existing Python outside the project.
 
 ## Scope
 
-This governs setup commands. SPEC-PLG-001 supplies the wheel; repository initialization and host activation remain separate.
+Plugin readiness; SPEC-PLG-001 supplies the verified wheel.
 
 ## Terms
 
-- **Private environment.** The isolated installation in persistent plugin data.
+- **Private environment.** Installation in persistent plugin data.
+- **Expected identity.** Version, payload digest and archive digest derived from the independently verified bundled wheel, never the unchecked installation.
 
 ## Rules
 
-**PLG-ENV-001.** Setup MUST establish Python 3.11 or newer, usable `venv`, and usable `ensurepip` before environment creation.
+**PLG-ENV-001.** Setup MUST establish Python 3.11+, usable `venv`, and usable `ensurepip` before creation.
 
-**PLG-ENV-002.** Missing prerequisites MUST produce installation guidance without downloading Python, installing Python, or changing the target repository.
+**PLG-ENV-002.** Missing prerequisites MUST produce guidance without downloading or installing Python or changing the repository.
 
-**PLG-ENV-003.** Authorized setup MUST create its private environment outside the target checkout, beneath the host's selected persistent plugin-data directory.
+**PLG-ENV-003.** Authorized setup MUST create its private environment outside the checkout in selected persistent plugin data.
 
-**PLG-ENV-004.** Installation MUST use the supplied wheel offline, without indexes, dependency downloads, or source builds.
+**PLG-ENV-004.** Installation MUST recheck the bundled wheel against its trusted digest and install offline without indexes, dependencies or source builds.
 
-**PLG-ENV-005.** Setup MUST verify the installed release and payload through existing evaluator identity checks before making the environment available.
+**PLG-ENV-005.** Readiness MUST verify expected identity through existing checks and require observed `evaluator_archive_sha256` present and equal; supplied `evaluator_wheel_sha256` alone proves no observation.
 
-**PLG-ENV-006.** Governed use MUST invoke the verified absolute environment interpreter with `-I -m se_harness`, matching the repository lock.
+**PLG-ENV-006.** Governed use MUST invoke verified absolute environment Python with `-I -m se_harness`, matching the repository lock.
 
-**PLG-ENV-007.** Setup MUST reuse a matching verified environment and refuse incomplete, mismatched, or ambiguous installations.
+**PLG-ENV-007.** Setup MUST reuse matching verified environments and refuse incomplete, mismatched or ambiguous installations.
 
-**PLG-ENV-008.** Repository upgrades MUST follow the existing separately authorized target-evaluator procedure; a plugin update cannot silently change the repository lock.
+**PLG-ENV-008.** Repository upgrades MUST follow the separately authorized target-evaluator procedure; plugin updates cannot change the lock silently.
 
-**PLG-ENV-009.** Setup MUST discover an explicit Python path using host or shell facilities before invoking any Python-dependent plugin component.
+**PLG-ENV-009.** Setup MUST discover explicit Python using host or shell facilities before Python-dependent components.
 
-**PLG-ENV-010.** Evaluator subprocesses MUST clear inherited `PYTHONPATH` and use controlled `PATH` with the verified environment's `bin` or `Scripts` directory first.
+**PLG-ENV-010.** Evaluator subprocesses MUST clear `PYTHONPATH` and put the verified environment's `bin` or `Scripts` first in controlled `PATH`.
 
-**PLG-ENV-011.** Identity commands MUST name `--expected-root ENV_DIR` and `--entry-point` pointing to that environment's pip-installed entry point.
+**PLG-ENV-011.** Identity commands MUST supply `--expected-version`, `--evaluator-payload-sha256`, `--evaluator-wheel-sha256`, `--expected-root ENV_DIR`, and `--entry-point` identifying the environment's installed entry point.
 
-**PLG-ENV-012.** Setup MUST require neither manual shell activation nor a system `PATH` change.
+**PLG-ENV-012.** Setup MUST require neither manual activation nor system `PATH` changes.
 
 ## Failure behaviour
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| Python support missing | Stop before creation | Missing prerequisite and remedy |
-| Installation interrupted | Keep the environment unavailable | Incomplete setup |
-| Identity fails | Stop governed use | Existing identity diagnostics |
+| Missing Python support | Stop before creation | Prerequisite and remedy |
+| Interrupted install | Remain unavailable | Incomplete setup |
+| Identity or archive observation fails | Refuse readiness | Existing diagnostic or missing/mismatched archive |
 
 ## Examples
 
-**Given** supported Python, **when** setup completes, **then** PLG-ENV-005 establishes identity.
-
-**Given** an incomplete environment, **when** readiness runs, **then** PLG-ENV-007 refuses it.
+**Given** absent archive metadata, **when** readiness runs, **then** PLG-ENV-005 refuses plugin readiness.
 
 ## Coverage
 
@@ -76,6 +75,5 @@ This governs setup commands. SPEC-PLG-001 supplies the wheel; repository initial
 
 ## Not decided here
 
-- Internal directory names.
-- New helpers or Python installation.
-- Identity semantics: reuse SPEC-REB-001, SPEC-REB-011 rules 1–11, and SPEC-REB-015.
+- Directory names, repository initialization and host activation.
+- Core identity semantics remain SPEC-REB-001/011/015 and REQ-REB-028; the archive observation requirement applies only to plugin-managed readiness.

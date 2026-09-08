@@ -15,44 +15,57 @@ verifies = ["REQ-PLG-010", "REQ-PLG-011", "REQ-PLG-012"]
 
 ## Independence
 
-The assurance owner fixes expected source bytes and failure outcomes before reviewing implementation evidence. Handler output alone cannot establish complete delivery.
+The assurance owner captures complete expected source bytes before exercising the handler. Output is compared with those bytes independently of the handler’s readiness claim.
 
 ## Requirement-to-evidence matrix
 
-| Requirement | Method | Case/evidence | Pass condition |
+| Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-010 | test | Intact/damaged sources; wrong evaluator; source changed after verification | Only complete content matching verified bytes reaches readiness. |
-| REQ-PLG-011 | test | Resume and compaction after source/runtime changes | Current verification repeats; stale readiness never passes. |
-| REQ-PLG-012 | test | Output limit; complete/failed fallback; fallback bytes changed | Changed content is rejected and reverified before readiness. |
+| REQ-PLG-010 | test, inspection | C01, C02, C06–C08 | Only complete verified gate/router bytes reach readiness. |
+| REQ-PLG-011 | test, inspection | C03, C07 | Resume/compaction rechecks current state; a missing interpreter gives no handler success. |
+| REQ-PLG-012 | test, inspection | C04–C06 | Incomplete or changed fallback bytes cannot establish readiness. |
 
 ## Acceptance scenarios
 
-Run explicitly captured Codex/Claude protocol fixtures against the released evaluator. Record protocol/OS/Python versions, evaluator identity and repository lock. Live delivery belongs to VER-PLG-005/006 and VER-PLG-015.
+Each case creates new test evidence under `evidence/WO-PLG-007/Cnn/`: `actions.txt`, `stdout.txt`, `stderr.txt`, and `observations.json`; these are not plugin APIs.
+`observations.json` records expected/observed values, exit status, source evidence paths and a pass/fail/unavailable conclusion. The Evidence column names additional captures.
+
+| Case | Starting fixture | Action | Observable result | Evidence |
+| --- | --- | --- | --- | --- |
+| C01 | Intact repository; independent copies of managed AGENTS.md block and ENGINEERING_HARNESS.md | Run session-context.py with a captured supported startup event. | Verification precedes delivery; delivered gate/router bytes equal both complete source copies, including end markers. | invocation order; source/output bytes and SHA-256 |
+| C02 | Wrong evaluator identity, modified gate, or modified router | Run each startup fixture. | Existing identity/doctor refusal is retained; none of the variants emits content as verified or reports ready. | evaluator results; script output; source digests |
+| C03 | Prior ready session; then source/runtime identity changes | Send supported resume and compaction events. | New evaluator invocations inspect current inputs; stale readiness and old source digests cannot substitute. | two event sequences; identity and source comparisons |
+| C04 | Direct-output capacity smaller than the required governance content | Deliver through the accepted complete-read fallback. | The full fallback read matches verified source bytes before a readiness declaration. | capacity setting; fallback read; readiness ordering |
+| C05 | Fallback unavailable, interrupted, or truncated | Attempt restoration for each condition. | Output identifies blocked delivery; no readiness declaration follows the partial read. | read trace; partial bytes; blocker output |
+| C06 | Gate/router changes after verification or before fallback reading | Inject the change at each boundary. | Changed bytes are rejected and reverified; output never labels the changed content with the earlier verified identity. | injection point; old/new hashes; repeated verification trace |
+| C07 | Prepared environment interpreter removed | Attempt the configured host invocation. | Host-launch failure is captured; no handler output or verification result is fabricated. | host launch error; empty handler invocation log |
+| C08 | Repeated events; outside credential sentinel and path-escape fixture | Replay events and attempted unsafe reads. | Repository inventory is unchanged; output contains neither unrelated content nor the sentinel value. | before/after inventory; output scan; read trace |
 
 ## Property and invariant tests
 
-Change gate/router bytes between verification and direct return or fallback reading: reject and reverify. Repeated events write nothing; damaged content remains unready. Missing Python produces host-launch failure, not handler output.
+C01/C04 compare exact bytes; C06 covers verification-to-use races. C08 compares the full repository inventory across repeated events.
 
 ## Static and architecture checks
 
-Review PLG-CTX-001 through PLG-CTX-006 and ARCH-PLG-002/ADR-PLG-002. Confirm one verification-then-delivery path.
+Map cases to PLG-CTX-001–006 and ARCH-PLG-002/ADR-PLG-002. Retain the single verification-before-delivery call path.
 
 ## Security and privacy checks
 
-Exercise untrusted paths, altered managed content and interrupted reads. Confirm unrelated credentials and repository content are absent from output.
+Use a synthetic credential sentinel for C08. Retain its hash and match result, not any real secret.
 
 ## Performance and resilience checks
 
-Record typical and slow startup/restoration times, including fallback. Required verification and completeness checks remain enabled.
+Retain startup/restoration timestamps for direct and fallback cases, including slow and interrupted reads; verification remains enabled.
 
 ## Manual assessments
 
-Inspect complete fixture outputs and readiness behavior. Actual agent-context inspection remains required in host qualification; this handler contract does not claim live delivery.
+Run captured Codex/Claude protocol fixtures with recorded OS, Python and released-evaluator identity. Live context delivery belongs to VER-PLG-005/006 and VER-PLG-015.
 
 ## Evidence retention
 
-Retain commands, outputs, failures and platform identities under `evidence/WO-PLG-007/`; bind the later verification record to the exact implementation candidate.
+Retain each case’s fixture revision, argv, exit status, raw output and listed observations under `evidence/WO-PLG-007/Cnn/`.
+Record expected and observed values separately, with a pass/fail/unavailable conclusion. Keep original failures and bind later assurance to the exact implementation candidate.
 
 ## Residual uncertainty
 
-Fixture acceptance qualifies the handler only, without waiting for production adapters. Host delivery remains a separate qualification boundary. These planned checks have not run.
+Fixture acceptance qualifies the shared handler only. These cases do not claim completed host delivery or execution results.

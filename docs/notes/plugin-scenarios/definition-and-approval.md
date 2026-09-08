@@ -4,11 +4,7 @@
 
 Scenarios 5–8 in the [scenario index](README.md), using the [scenario template](../plugin-scenario-template.md).
 
-**Review date:** 2026-09-08. **Inspected baseline:** [aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source **0.16.0**, governed at that baseline by released evaluator **0.15.0**. The [implementation packets](../../engineering/plugin-integration/README.md) use a newer baseline. These interfaces were inspected, not integration-tested against that release. **New** means proposed work.
-
-`harnessctl` below means the verified invocation `ENV_PYTHON -I -m se_harness`. `ENV_PYTHON` is the absolute interpreter path in the private environment prepared by `setup`, outside the target repository in persistent plugin data. It never means a command found on `PATH`. See the [shared calling convention](README.md#shared-component-names-and-calling-convention).
-
-Setup requires Python 3.11+ supplied by the operator or host. It creates that environment and installs the plugin's released evaluator wheel from `packages/` offline, including its metadata and templates. If Python is missing, setup stops with installation guidance. The plugin ships no interpreter, native executable, or custom CLI wrapper; skills call the installed released evaluator directly.
+**New** marks components to build. Commands use released evaluator 0.16.0 through the verified environment; see the [shared baseline and calling convention](README.md#shared-component-names-and-calling-convention). These scenarios are proposals, not authority or test results.
 
 The `change` skill examples are optional ways to begin. During an authorized task, the agent follows the skill across stages without asking the user to invoke it again. Existing authority applies only to the same content and action; missing decisions or changed scope still require the responsible owner. The two existing read-only skills retain their activation and single-agent contracts; `harness-operator-brief` requires an explicit request.
 
@@ -175,7 +171,7 @@ Illustrative response:
 **Proposed additions**
 
 - Add the `change` skill and install the released evaluator from the plugin-provided wheel during setup. Keep creation, content editing, and validation as explicit steps.
-- Optionally package `agents/investigator.md` for Claude Code and a separate `.codex/agents/investigator.toml` registration for Codex. Both are new and read-only.
+- Optionally package `agents/investigator.md` for Claude Code and qualify Codex loading from the plugin's `agents/` directory. Both are new and read-only; unsupported loading uses the main agent, with no project agent-file writes.
 
 **Inputs, outputs, and writes**
 

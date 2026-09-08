@@ -19,6 +19,19 @@ paths = [
   "tests/plugin_integration/package_assembly/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-001.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-001/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/architecture/ARCH-PLG-001.md",
+  "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-001.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-001.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-002.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-003.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-004.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-005.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-001.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-002.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-001.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-002.md",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-002.md",
 ]
 
 [relations]
@@ -44,6 +57,9 @@ Implement package assembly from one selected published evaluator wheel and share
 
 Assembly inputs, release-digest checks, shared-file inventories, host-specific output selection, and bounded failure handling.
 
+
+Definition introduction D03 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
+
 ## Out of scope
 
 Core evaluator changes, managed repository controls, approved definition amendments, public release or publication, and installation outside disposable host fixtures.
@@ -60,7 +76,7 @@ The proposal source is PR #360 at `9e894e99`; this work order's approved relatio
 ## Expected change surface
 
 Two assembly entry files and focused package-assembly fixtures.
-Only this work order and its evidence directory may also change.
+Definition delivery may also change its exact declared records and assigned index files.
 
 ## Required verification
 

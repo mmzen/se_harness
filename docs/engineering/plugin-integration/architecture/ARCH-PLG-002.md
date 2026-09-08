@@ -29,7 +29,7 @@ Shared scripts use the existing evaluator; host differences remain explicit.
 
 | Component | Responsibility |
 | --- | --- |
-| Codex and Claude adapters | Register components through the mechanism demonstrated for that host. |
+| Codex and Claude adapters | Register components and a shell guard through the documented route demonstrated for that host. |
 | Session script | Verify installation, then return complete verified governance. |
 | Tool-action script | Translate covered events into existing evaluator checks and host responses. |
 | Skills | Explain and invoke the current workflow under actual authority. |
@@ -42,7 +42,7 @@ Lifecycle policy never flows from a skill or host callback into a second impleme
 
 ## Data and control flow
 
-Setup prepares the interpreter before Python-dependent hooks activate.
+Hooks can register before setup. A thin host-shell guard reports setup required if the interpreter cannot run; otherwise it invokes the Python handler. Setup alone prepares the environment. Interpreter existence does not establish readiness.
 Session verification and context delivery execute in order within one handler.
 Compaction and resume use the demonstrated session event; manual readiness remains available.
 A tool-action result reports both the evaluator verdict and actual interception coverage.

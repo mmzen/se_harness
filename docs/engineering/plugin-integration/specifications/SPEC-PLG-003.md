@@ -16,12 +16,12 @@ specifies = ["REQ-PLG-006"]
 
 ## In plain words
 
-Prove how Codex can activate this plugin before building its production adapter.
+Test the documented Codex shell-guard route before building its production adapter.
 An unsuccessful attempt is useful evidence when its exact limitation is recorded.
 
 ## Scope
 
-This contract governs disposable compatibility probes.
+Disposable probes test: shell guard reports setup required when the runtime cannot run; otherwise the Python handler checks readiness. No automatic installation occurs.
 SPEC-PLG-005 governs the production adapter after DEC-PLG-001 resolves its supported activation path.
 
 ## Terms
@@ -36,7 +36,7 @@ SPEC-PLG-005 governs the production adapter after DEC-PLG-001 resolves its suppo
 
 **PLG-CDXP-003.** Probes MUST assess manifest loading, skill discovery, event registration, trust requirements, and event delivery during new, resumed, and compacted sessions.
 
-**PLG-CDXP-004.** Probes MUST test interpreter resolution before environment setup and after setup, including paths containing spaces and plugin data persistence.
+**PLG-CDXP-004.** Probes MUST test a host-shell guard before setup, after setup, and after interpreter removal, including paths containing spaces and persistent plugin data.
 
 **PLG-CDXP-005.** Probes MUST record missing-Python and inactive-hook outcomes without silently installing Python or asserting readiness.
 

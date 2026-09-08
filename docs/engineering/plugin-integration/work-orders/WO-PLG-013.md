@@ -12,7 +12,18 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["plugins/verity-plane/common/skills/setup/SKILL.md", "plugins/verity-plane/common/skills/setup/references/maintenance.md", "tests/plugin_integration/maintenance/", "docs/engineering/plugin-integration/work-orders/WO-PLG-013.md", "docs/engineering/plugin-integration/evidence/WO-PLG-013/"]
+paths = [
+  "plugins/verity-plane/common/skills/setup/SKILL.md",
+  "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+  "tests/plugin_integration/maintenance/",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-013.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-013/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-022.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-023.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-013.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-013.md",
+]
 
 [relations]
 implements = ["REQ-PLG-022", "REQ-PLG-023"]
@@ -32,17 +43,22 @@ Add setup maintenance instructions for fresh environment replacement and explici
 
 ## In scope
 
-Maintenance reference, setup skill link, and failure/recovery tests using shared environment operations. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Maintenance reference, setup skill link, and failure/recovery tests using shared environment operations. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+Definition introduction D09 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 
-Changing initial setup semantics, runtime management, installer code, automatic Python installation, or historical records. No other packet or managed root changes.
+Changing initial setup semantics, runtime management, installer code, automatic Python installation, or historical records. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 
 After approval, choose names, fixtures and wording within SPEC-PLG-013. Scope, acceptance criteria and decision ownership remain accountable-owner decisions.
 
 ## Constraints
+
+Apply shared setup changes in order: WO-PLG-002, WO-PLG-009, then this WO. Rebase after the preceding integration and recheck the full Git diff.
 
 Prerequisite/environment packets must supply tested operations first. Use existing upgrade semantics and project evidence. No additional approval packet is invented.
 

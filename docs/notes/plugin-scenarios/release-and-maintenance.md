@@ -4,11 +4,7 @@
 
 [All scenarios](README.md) · [Workflow overview](../plugin-operation-workflows-2026-09-06.md) · [Scenario template](../plugin-scenario-template.md)
 
-Proposal updated 2026-09-08. **[New]** marks components to build. Current implementation means source at [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055): candidate 0.16.0, governed at that baseline by released evaluator 0.15.0. The [implementation packets](../../engineering/plugin-integration/README.md) use a newer baseline. Interfaces were inspected; the plugin has not been implemented or tested against that released evaluator. This note grants no authority.
-
-`harnessctl` means the absolute verified `ENV_PYTHON -I -m se_harness` invocation, as described in the [shared calling convention](README.md#shared-component-names-and-calling-convention). It is not a custom wrapper or a `PATH` lookup. `REPO` is the selected absolute repository path. `*-DEMO-*` identifiers and version `1.2.0` are illustrative.
-
-The operator or host provides Python 3.11 or later; the plugin ships no Python binary. Setup checks that Python, creates an isolated environment in persistent plugin data outside the repository, and installs the plugin's exact published pure-Python wheel from `packages/` offline. If Python is missing or too old, setup and readiness stop and tell the operator to install it; the plugin never downloads or installs Python. Hooks run `scripts/session-context.py` or `scripts/check-tool-action.py` using verified `ENV_PYTHON -I ABS_SCRIPT` paths.
+These proposed scenarios use the [shared baseline](README.md) and [calling convention](README.md#shared-component-names-and-calling-convention). Examples target governing released evaluator 0.16.0. **[New]** marks components to build; `*-DEMO-*` IDs and version `1.2.0` are illustrative.
 
 Continue automatically from an applicable evaluator next step while the request and actual authority cover the action. The skill invocations below are optional direct entry points, not a required prompt at every stage. Reuse decisions that still cover the exact action, content, candidate, and destination; ask only for missing authority or a material change. Neither an evaluator next step nor a reused decision removes any required gate.
 
@@ -37,9 +33,9 @@ Existing transition records that exact decision
 | Step | Who acts | Action and result |
 | --- | --- | --- |
 | 1 | Main agent → `evidence` **[New]** | Continue from the selected release-preparation step within the existing request. Optional direct entry: ask Codex to use the evidence skill, or invoke `/verity-plane:evidence release-prepare` in Claude Code. Read `skills/evidence/SKILL.md` and the project's release procedure. |
-| 2 | Agent and preparation owner | Identify the exact REL, WO, VREC, version, candidate, and outputs. Reuse actual preparation and build authority that covers them; ask only if something is missing or changed. Run authorized builds through existing project tools and reuse eligible retained evidence. |
+| 2 | Agent and preparation owner | Identify the exact REL, WO, VREC, version, candidate, and outputs. Reuse matching preparation/build authority. For SE Harness, recheck the REL's derived release unit, then obtain the exact candidate build using the local or hosted route below. |
 | 3 | Agent → `harnessctl` | Run `prepare-release` with those inputs. It writes immediately, creating a `ready` RLS and evidence if checks pass. Do not use it as a preview. |
-| 4 | Agent → project tools | Complete required binding and candidate checks. Present their actual results with the exact ready RLS to the release owner. |
+| 4 | Agent → project tools | Bind the candidate's retained distribution manifest into the ready RLS, then run the bound-record candidate replay. Present those results and the exact RLS to the release owner. |
 | 5 | Agent and release owner → existing decision process | Reuse the owner's actual decision if it still covers this exact RLS, candidate, and evidence. Otherwise present only the missing or changed release decision. Preparation, tests, and agent recommendations do not decide it. |
 | 6 | Authorized actor → `harnessctl` | Run the transition checkpoint and preview for the selected RLS, then apply the applicable owner's decision after current checks. Report the observed state and continue to [publication](#scenario-15-publish-or-deploy-the-release) only when its separate authority and controls are satisfied. No extra skill invocation is required. |
 
@@ -64,6 +60,7 @@ Existing transition records that exact decision
 | Version or RLS already exists. | Inspect the existing result rather than retrying blindly. | Owner selects the appropriate next action. |
 | RLS is ready but the owner's decision is absent. | Stop at the decision handoff. | Owner decides the exact record; recheck before apply. |
 | Evidence changed or release was rejected. | Preserve the record and history. | Follow authorized remediation and the evaluator's next step. |
+| SE Harness release-unit derivation or build candidate differs. | Stop before binding or deciding the RLS. | Correct the selected inputs through the authorized procedure; recheck their identity. |
 
 ### 5. Example result
 
@@ -87,7 +84,13 @@ harnessctl transition REPO --set RLS-DEMO-001=released --decision RLS-DEMO-001=r
 
 Preparation writes immediately. The transition shown previews; an authorized application adds `--apply`. `--owner` and `--decision` do not authenticate a human. The RLS records an earlier candidate commit; it cannot bind its own commit. Only the selected record changes state.
 
-For **SE Harness itself**, read [Release sequences](../developing-se-harness.md#release-sequences) first. The order is: authorized `repository_tools.release_build replay`, then `scripts/create_release_bundle_manifest.py`; `prepare-release`; `scripts/bind_release_distribution.py`; `release-candidate-replay.yml`; release-owner decision. These existing project tools are not portable plugin defaults.
+For **SE Harness itself**, follow [Release sequences](../developing-se-harness.md#release-sequences) in this order. These project tools are not portable plugin defaults.
+
+1. **Derive and recheck the release unit.** When drafting the REL, record `candidate_commit`, `previous_release_tag`, and the `gates` from `harnessctl release-unit REPO --from TAG --to COMMIT --toml`. Recheck with `harnessctl release-unit REPO --from TAG --to COMMIT --contract REL-ID`, using the tag and candidate recorded in that approved REL; a differing unit is a blocker.
+2. **Obtain the exact candidate build.** With Docker, run authorized `python -m repository_tools.release_build replay`, then `scripts/create_release_bundle_manifest.py`. If Docker is unavailable, dispatch `publication-rehearsal.yml` in candidate mode on the release branch at the candidate head. Download `release-build-replay.json`, check `candidate.commit` against the selected candidate, and retain its `.manifest` as the bundle. A PR-triggered build of the merge commit is not this candidate-head build of record.
+3. **Prepare and bind.** Run `prepare-release`, then `scripts/bind_release_distribution.py` with that retained schema-2 bundle. This writes the ready RLS's distribution binding; it does not decide release.
+4. **Replay the bound record.** Dispatch `release-candidate-replay.yml` on the review ref with `release_record=RLS-ID`. Its retained replay must reproduce the already-bound recipe and hashes before the owner decides.
+5. **Record the release decision.** Apply only the release owner's decision over that exact record and evidence after the current gates pass. Publication follows scenario 15.
 
 **Proposed additions**
 
@@ -105,7 +108,7 @@ Both hosts use the installed evaluator and project procedure, automatically foll
 
 **Checks that demonstrate the behavior**
 
-Check exact candidate coverage, immediate preparation writes, and reuse of a still-applicable release decision without another prompt. Missing or changed decisions stop the affected action. Verify interrupted preparation is inspected before retry and rejected history remains intact; current gates still run.
+Check release-unit mismatch, exact candidate coverage, immediate preparation writes, and retained bundle/replay identity. Exercise both local Docker and hosted candidate-head build routes; reject a hosted result for the merge commit. Matching release authority adds no duplicate prompt; missing authority stops the decision. Inspect interrupted preparation before retry and preserve rejected history.
 
 **Open questions**
 
@@ -138,11 +141,12 @@ Agent reads workflow and destination results → report actual delivery
 | Step | Who acts | Action and result |
 | --- | --- | --- |
 | 1 | Main agent → `evidence` **[New]** | Continue from the selected publication step within the existing request. Optional direct entry: ask Codex to use the evidence skill, or invoke `/verity-plane:evidence publish` in Claude Code. Read the project's publication procedure. |
-| 2 | Agent → existing read tools | Identify the released RLS, immutable deliverables, destination, workflow, and required external-action decision. Present those exact effects to the owner. |
+| 2 | Agent → existing read tools | Identify the released RLS, immutable deliverables, destination, workflow, and required external-action decision. For SE Harness, verify the released record is committed in `main` before dispatch; a release-branch record alone is insufficient. |
 | 3 | Agent and accountable owner → existing project controls | Reuse the owner's exact external-action decision while it still covers the deliverables, destination, workflow, and effects. Ask only for missing or changed authority. Release or verification approval and local shell permission do not imply publication authority. |
 | 4 | Authorized agent or human → project workflow | Check all current gates and independently enforced external controls. When they are demonstrated, dispatch through the existing protected interface. An agent uses the project's existing tools, with applicable `scripts/check-tool-action.py` checks before covered calls. Missing or unproven external enforcement disables agent automation and produces a specific enforcement blocker. |
 | 5 | Existing workflow | Check and publish the approved inputs. For SE Harness, use `publish-pypi.yml` on `main` with the `release_record` input; details below. |
 | 6 | Agent → existing GitHub/destination read interfaces | Inspect the run and destination objects. Report each completed, failed, pending, or unknown effect. A green workflow alone is not proof that every destination serves the intended bytes. |
+| 7 | Authorized actor → existing project tools | For SE Harness, wait for the contract's observation window. Under the release owner's authority for these effects, promote both GitHub Latest and the `last` tag, then verify each points to the intended release. Publication alone does not complete these promotions. |
 
 The accountable human keeps the decision right; execution may be performed by an authorized agent or human. Where agent enforcement is missing, a human may use an existing permitted protected route. This is a response to an explicit blocker, not a permanent requirement for a human to operate every publication.
 
@@ -168,6 +172,8 @@ The accountable human keeps the decision right; execution may be performed by an
 | Deliverable identity differs from the release record. | Publication must refuse the wrong bytes. | Investigate through authorized remediation. |
 | Only some destinations succeeded. | Report separate outcomes; no blanket rollback claim. | Inspect remote state and follow the authorized repair/retry procedure. |
 | Dispatch or publication times out. | Outcome is unknown. | Locate the existing run/object before any retry. |
+| SE Harness's released RLS is absent from `main`. | Do not dispatch publication. | Integrate the reviewed released record through its separate authorized route, then inspect `main`. |
+| Observation window is open or latest-promotion authority is missing. | Report latest promotion as pending. | Finish the window and obtain only the missing authority before moving either marker. |
 
 ### 5. Example result
 
@@ -183,7 +189,7 @@ The accountable human keeps the decision right; execution may be performed by an
 
 [PROC-EXTERNAL-ACTION](../../engineering/WORKFLOW.json) owns the authority boundary. There is no generic `harnessctl publish` command.
 
-For **SE Harness itself**, [publish-pypi.yml](../../../.github/workflows/publish-pypi.yml) runs on `main` with sole input `release_record=RLS-ID`. Its `resolve` job reads committed release authority; `qualify` calls [release qualification](../../../.github/workflows/release-qualification.yml); `github_release`, `pypi`, and `pages` perform separate effects; `observe` retains `release-result.json` and public observations. Read [Release sequences](../developing-se-harness.md#release-sequences) for the complete project procedure.
+For **SE Harness itself**, the RLS must be `released` and its governance commit integrated into `main` before [publish-pypi.yml](../../../.github/workflows/publish-pypi.yml) is dispatched from `main` with sole input `release_record=RLS-ID`. Integration has its own authority; an RLS transition does not merge it. The `resolve` job reads committed release authority; `qualify` calls [release qualification](../../../.github/workflows/release-qualification.yml); `github_release`, `pypi`, and `pages` perform separate effects; `observe` retains `release-result.json` and public observations.
 
 The declared `pypi` environment does not prove live reviewer settings or protect every GitHub/Pages path. Verify those settings and alternate credentials independently.
 
@@ -194,6 +200,19 @@ gh workflow run publish-pypi.yml --repo mmzen/se_harness --ref main --raw-field 
 ```
 
 Use the actual release record and preserve the workflow's enforced checks at its privileged effects. This SE Harness example is not a portable default for other projects. Changing the destination, deliverables, or workflow requires checking whether existing authority still covers the action.
+
+**Finish both latest markers.** The workflow deliberately creates the GitHub Release with `--latest=false` and does not move `last`. After the release contract's observation window, use the release owner's explicit authority for both promotions. An existing decision may be reused only if it covers these exact effects:
+
+```text
+gh release edit vX.Y.Z --repo mmzen/se_harness --latest
+git tag -f last vX.Y.Z
+git push --force origin refs/tags/last
+gh release list --repo mmzen/se_harness --json tagName,isLatest
+git rev-parse "last^{commit}"
+git ls-remote origin refs/tags/last "refs/tags/last^{}"
+```
+
+Verify that only the intended GitHub release is latest and the local and remote `last` tag resolve to the RLS candidate commit. Report publication and marker outcomes separately. Follow [Release sequences](../developing-se-harness.md#release-sequences); a green workflow with stale markers is incomplete.
 
 **Proposed additions**
 
@@ -211,7 +230,7 @@ Both hosts use the same project publication process. Codex `exec_command` and Cl
 
 **Checks that demonstrate the behavior**
 
-Verify publication refusal for wrong bytes or missing authority with local hooks disabled. Matching existing authority should allow controlled execution without another prompt; changed inputs must be reassessed. Inspect partial and timed-out runs before retry, reusing retry authority only when it covers the remaining effects. Cover direct dispatch, alternate credentials, administrator bypasses, and all current gates.
+Verify refusal for wrong bytes, a released record absent from `main`, or missing authority, with local hooks disabled. Exercise stale latest markers and an unfinished observation window; the report must identify pending promotions. Matching authority permits controlled execution without duplicate prompts. Inspect partial/timed-out runs before retry and verify both remote markers afterward. Cover alternate credentials and bypass settings.
 
 **Open questions**
 

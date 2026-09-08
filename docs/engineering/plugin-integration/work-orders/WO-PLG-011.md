@@ -12,7 +12,16 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["plugins/verity-plane/common/skills/evidence/", "tests/plugin_integration/evidence-skill/", "docs/engineering/plugin-integration/work-orders/WO-PLG-011.md", "docs/engineering/plugin-integration/evidence/WO-PLG-011/"]
+paths = [
+  "plugins/verity-plane/common/skills/evidence/",
+  "tests/plugin_integration/evidence-skill/",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-011.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-019.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-011.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-011.md",
+]
 
 [relations]
 implements = ["REQ-PLG-019"]
@@ -32,11 +41,14 @@ Implement evidence-skill instructions over existing lifecycle commands, retainin
 
 ## In scope
 
-Skill instructions and references; evidence, verification-preparation, release-preparation and refusal tests. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Skill instructions and references; evidence, verification-preparation, release-preparation and refusal tests. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+Definition introduction D06 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 
-New evaluator commands, changed gates, assurance decisions, automatic merge/publication, and release builds. No other packet or managed root changes.
+New evaluator commands, changed gates, assurance decisions, automatic merge/publication, and release builds. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 

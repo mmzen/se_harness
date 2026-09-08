@@ -4,15 +4,7 @@
 
 Part of the [scenario guide](README.md), using the [scenario template](../plugin-scenario-template.md). See the [operation overview](../plugin-operation-workflows-2026-09-06.md) for the shared component model.
 
-**Review date:** 2026-09-08. **Source baseline:** [`aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source 0.16.0, governed at that baseline by released evaluator 0.15.0. The [implementation packets](../../engineering/plugin-integration/README.md) use a newer baseline. Existing interfaces were inspected, not exercised against that released evaluator. The proposed plugin workflows have not been integration-tested.
-
-These scenarios grant no work or decision authority. **New** means a component must be built; **Reuse** retains an existing implementation or responsibility; **Adapt** changes its packaging; **Not used** means it is unnecessary here. A *work order* (WO) defines authorized work. A *verification record* (VREC) binds evidence to an exact candidate commit.
-
-The operator or host supplies Python 3.11 or later. Setup checks it first; if it is missing or too old, setup and readiness stop and ask the operator to install Python. The plugin never downloads or installs Python. It ships one exact published pure-Python evaluator wheel under `packages/`, including its templates and metadata. Setup uses the provided Python to create an isolated environment in persistent plugin data outside the repository and installs that wheel offline.
-
-In the commands below, `harnessctl` means the absolute verified `ENV_PYTHON -I -m se_harness` invocation, not a custom wrapper or a `PATH` lookup. `REPO` is the absolute target repository path. The environment must be ready and its evaluator must match the repository's required version before these scenarios run. If the provided Python or environment is removed or changed, return to setup checks; do not silently substitute another interpreter. No user environment activation or global pip install is needed.
-
-These scenarios use the new before-tool hook script `scripts/check-tool-action.py`, registered in `hooks/hooks.json` and invoked as `ENV_PYTHON -I ABS_SCRIPT` using verified absolute paths. It translates supported host events into existing `harnessctl` checks. Session readiness uses `scripts/session-context.py` through the same interpreter. See the [shared calling convention](README.md#shared-component-names-and-calling-convention) for host paths and optional subagent invocation.
+**New** marks components to build. Commands use released evaluator 0.16.0 through the verified environment; see the [shared baseline and calling convention](README.md#shared-component-names-and-calling-convention). These scenarios are proposals, not authority or test results.
 
 **Known boundary:** `--decision ID=ACTOR` records an actor assertion; it does not authenticate a human decision. Skills must use actual authority, but instructions and local hooks cannot guarantee that an agent obeys. Deterministic enforcement remains an open requirement in [issue #347](https://github.com/mmzen/se_harness/issues/347).
 

@@ -47,4 +47,4 @@ Compaction can remove instructions, and an inactive session can outlive changes 
 
 **When** the session resumes,
 
-**Then** the host's hook launch fails because the Python handler cannot run. Setup recovery is required; earlier success cannot establish current readiness.
+**Then** the host-shell guard reports setup required because the Python handler cannot run. Earlier success cannot establish current readiness.

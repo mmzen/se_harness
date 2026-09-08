@@ -8,13 +8,13 @@ created = "2026-09-08"
 updated = "2026-09-08"
 
 kind = "question"
-question = "Which supported Claude Code mechanism will keep setup available before Python hooks can run?"
+question = "Does the documented shell-guard activation route satisfy the contract on the assessed Claude Code versions and platforms?"
 raised_by = "implementation-planner"
 recommendation = "prove-supported-route"
 
 [[options]]
 id = "prove-supported-route"
-label = "Adopt a supported route demonstrated by the Claude Code probe."
+label = "Accept the documented route for combinations demonstrated by the Claude Code probe."
 
 [[options]]
 id = "exclude-claude"
@@ -29,13 +29,13 @@ blocks = ["SPEC-PLG-006"]
 
 ## Question
 
-Which supported Claude Code mechanism will keep setup available before Python hooks can run?
+Does the documented shell-guard activation route satisfy the contract on the assessed Claude Code versions and platforms?
 
-Automatic hook discovery may precede environment preparation. Setup cannot depend on a Python handler reporting its own missing interpreter.
+A shell hook command can report setup required before the environment exists, then invoke the Python readiness handler after setup. The probe tests that documented route, including persistent data, reload, and Windows quoting. Dependency installation remains an authorized setup operation.
 
 ## Options
 
-**prove-supported-route.** Adopt a supported route demonstrated by the Claude Code probe.
+**prove-supported-route.** Accept the documented route for combinations demonstrated by the Claude Code probe.
 
 **exclude-claude.** Decline Claude Code support if no supported route meets the contract. This supplies no production activation route.
 

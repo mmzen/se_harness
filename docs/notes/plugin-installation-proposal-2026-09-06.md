@@ -3,12 +3,12 @@
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 > Revised 2026-09-08. Proposal only; this note authorizes no implementation or lifecycle decision.
-> Source baseline: [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source 0.16.0; that baseline uses released evaluator 0.15.0. The proposed plugin has not been built or integration-tested.
+> Shared baseline: main `fae52e1b`, candidate source 0.17.0, governing released evaluator 0.16.0. The proposed plugin has not been built or integration-tested.
 > This replaces the [earlier exploration](agentic-execution-plugin-distribution.md).
 
-The [16 implementation packets](../engineering/plugin-integration/README.md) turn this proposal into draft contracts and bounded work orders. They use a newer baseline and are reviewed with these notes in [PR #416](https://github.com/mmzen/se_harness/pull/416).
+The [16 implementation packets](../engineering/plugin-integration/README.md) turn this proposal into draft contracts and bounded work orders. They use the same baseline and are reviewed with these notes in [PR #416](https://github.com/mmzen/se_harness/pull/416).
 
-Inspect the selected released evaluator before using these commands. Released 0.16.0 retains `adopt` as a transitional alias; candidate 0.17.0 uses unified `init`. Relative source links open the current branch, which may differ from the inspected baseline.
+Commands target released evaluator **0.16.0**, including its transitional `adopt` alias. Candidate source 0.17.0 uses unified `init`; relative source links are navigation aids, not the executable command contract. The notes originated in PR #360 at `9e894e99` and are now aligned with the packets.
 
 ## Recommendation
 
@@ -39,11 +39,12 @@ The two host adapters target Codex and Claude Code. Each uses the same two purpo
 ```text
 Setup       -> host shell checks Python -> prepare evaluator environment
 User request -> skill -> host tool -> environment Python -> evaluator
-SessionStart -> environment Python -> session-context.py -> verified rules
-PreToolUse   -> environment Python -> check-tool-action.py -> host response
+SessionStart -> host shell guard -> environment Python -> session-context.py
+                  missing runtime: report setup required; never declare ready
+PreToolUse   -> guarded host binding -> check-tool-action.py -> host response
 ```
 
-The plugin uses the **existing** CLI through `ENV_PYTHON -I -m se_harness`. `ENV_PYTHON` means the verified environment's absolute Python path. Examples shorten that invocation to `harnessctl`; no custom command wrapper or native executable is needed.
+The plugin uses the **existing** CLI through `ENV_PYTHON -I -m se_harness`. `ENV_PYTHON` means the verified environment's absolute Python path. Examples shorten that invocation to `harnessctl`. There is no launcher binary, evaluator lookup on `PATH`, or second command protocol. A thin shell guard in the host hook command is allowed.
 
 ```text
 verity-plane/
@@ -80,11 +81,13 @@ ENV_PYTHON -I -m pip install --no-index --no-deps EVALUATOR_WHEEL
 
 These uppercase names are absolute path placeholders. The wheel contains **one exact released evaluator**, package metadata, and templates. Its Python dependency list is empty in the inspected source. Installation uses that local wheel, without a package-index download. The environment is created locally from the supplied Python installation; it is not a shipped interpreter. Calling its Python directly requires no activation. [Package definition](../../pyproject.toml), [Python environments](https://docs.python.org/3/library/venv.html), [pip bootstrap](https://docs.python.org/3/library/ensurepip.html).
 
-Use the existing identity checks and isolated imports (`-I`); reject candidate-source imports or an unexpected package identity. All evaluator calls and hook scripts use that same verified environment. If Python is later removed or the environment breaks, report the plugin as unready and rerun setup's shell checks. [Runtime identity](../../se_harness/runtime_identity.py).
+Before installation, compare the wheel archive digest with independently trusted release metadata. Derive the expected version and payload from that verified wheel. Pass all three expected values to the existing isolated identity check. Plugin readiness additionally requires the observed `evaluator_archive_sha256` to be present and equal to the verified archive digest. A supplied expected value is not proof of what was installed. [Exact readiness contract](../engineering/plugin-integration/specifications/SPEC-PLG-002.md).
 
 Normal operations require that evaluator to match the repository's governing version and identity. On mismatch, stop: install a compatible plugin release, or explicitly upgrade the repository using the target evaluator. Updating the plugin alone never changes the repository lock. The first version does not need a general runtime download manager.
 
-Downloading plugin files may precede the Python check; it does not make the plugin ready to use. Enable and test Python-dependent hooks only after environment setup succeeds. Prove that activation sequence on both hosts rather than assuming a native pre-install callback.
+Hooks may be registered before the environment exists. Their host shell guard checks whether the absolute environment interpreter can run. If absent or broken, it reports **setup required** without installing anything; the setup skill remains available. Otherwise it invokes the Python handler, which checks identity and repository integrity before readiness. Test this documented route separately on both hosts, including Windows, trust, reload, and recovery. Interpreter existence alone never establishes readiness.
+
+**Avoid a bootstrap loop.** Registered tool hooks must leave already-authorized setup and repair usable through ordinary host permissions. While the runtime is unavailable, report setup required and absent governance coverage; never return checked success or override permissions. The guard cannot enforce the distinction between setup and governed work. Governed automation remains unavailable until readiness succeeds. If a declared governed effect can run without its required check, that route fails qualification unless independent host controls refuse it. The live probes test both real setup and a disposable governed-write attempt.
 
 ### Keep skills small
 
@@ -108,11 +111,11 @@ Use two scripts with explicit responsibilities. Both call the same `harnessctl` 
 
 | Event | Script | Action |
 | --- | --- | --- |
-| `SessionStart` | `scripts/session-context.py` | Verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
+| `SessionStart` | Shell guard → `scripts/session-context.py` | Report setup required if the runtime is absent; otherwise verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
 | `SessionStart` after compact or resume | `scripts/session-context.py` | Repeat those checks and load fresh governance and selected work context. |
 | `PreToolUse` | `scripts/check-tool-action.py` | For explicitly supported actions, run the corresponding existing checkpoint and return the host's supported allow/deny response. |
 
-Invoke each script as `ENV_PYTHON -I ABS_SCRIPT`, with verified absolute paths and separate arguments. Keep verification and injection together, in order, inside **`session-context.py`**: matching hooks can run concurrently. The setup skill can also call `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
+After its shell guard, invoke each script as `ENV_PYTHON -I ABS_SCRIPT`, with absolute paths and separate arguments. A missing runtime reports unready; a covered tool event uses that host's demonstrated refusal format. Host failure behavior must be observed rather than assumed. Keep verification and injection together, in order, inside **`session-context.py`**: matching hooks can run concurrently. The setup skill can also call `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
 
 Hooks do not initialize repositories, upgrade locks, or make human decisions. In an unrelated repository, startup writes nothing. A missing or untrusted hook is a readiness failure for the proposed workflow, not proof that the host has blocked every tool.
 
@@ -133,7 +136,7 @@ In Claude's manifest, `commands` means Markdown skills and `dependencies` means 
 | Host | Installation and component loading |
 | --- | --- |
 | Claude Code | Native manifest, skills, hooks, and `agents/`. Use `/reload-plugins` when required after changes. Plugin-root `CLAUDE.md` is not automatically loaded. [Plugin guide](https://code.claude.com/docs/en/plugins). |
-| Codex desktop / CLI | Native manifest, skills, and hooks; confirm hook trust separately and start a new session where required. Native plugin-agent loading is not established: optional agents may need project registration under `.codex/agents/`. [Plugins](https://learn.chatgpt.com/docs/plugins), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents). |
+| Codex desktop / CLI | Native manifest, skills, and hooks; confirm hook trust separately and start a new session where required. Native plugin-agent loading is not established. Qualify packaged helper loading, or use the main agent; these packets do not authorize writing project `.codex/agents/` files. [Plugins](https://learn.chatgpt.com/docs/plugins), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents). |
 
 Test each host independently, including Windows. Identical component names do not imply identical permissions or hook coverage.
 
@@ -141,7 +144,7 @@ Test each host independently, including Windows. Identical component names do no
 
 Build both host packages from one release source. Keep artifacts and evidence in the repository, outside disposable plugin caches. Preserve the existing pip/CLI route for CI and non-plugin use.
 
-Adapt the two skill cores for plugin paths and identity checks. Select one active discovery route during migration; remove duplicates only through an ownership-aware, authorized change. Reuse `init`, `adopt`, and `upgrade`, including conflict checks. Repository setup and host registration are separate operations, not one atomic transaction. [Installer](../../se_harness/installer.py).
+Adapt the two skill cores for plugin paths and identity checks. Select one active discovery route during migration; remove duplicates only through an ownership-aware, authorized change. **DEC-PLG-004 is a critical prerequisite:** released 0.16.0 has no demonstrated ownership-aware migration for this route. If the technical owner selects migration, separate evaluator work, its release, and repository adoption must precede package 09. Retaining repository skills instead requires revising the conflicting plugin scope. Reuse `init`, `adopt`, and `upgrade`, including conflict checks. Repository setup and host registration are separate operations, not one atomic transaction. [Installer](../../se_harness/installer.py).
 
 ## Delivery and open choices
 
@@ -152,6 +155,6 @@ Adapt the two skill cores for plugin paths and identity checks. Select one activ
 
 The current [`check` path](../../se_harness/workflow_compliance.py) runs repository validation. Repeating that work before every edit may be expensive. Map each supported action to its required check and measure the cost before finalizing the adapter. Any reuse of prior results must remain in the evaluator, detect changed relevant inputs, and preserve refusals. Performance work must not skip required pre-effect checks, use stale approval, or add approval prompts for routine permitted actions.
 
-Challenge two choices: can one released evaluator version serve the first supported users, and can each host reliably activate hooks after setup succeeds? Test Python discovery, paths containing spaces, and environment recovery on supported platforms. Keep the prerequisite explicit; avoid adding a Python installer, runtime download manager, or another command protocol.
+Challenge two choices: can one released evaluator version serve the first supported users, and does the documented shell-guard route work on each claimed host/platform? Test Python discovery, paths containing spaces, and environment recovery on supported platforms. Keep the prerequisite explicit; avoid adding a Python installer, runtime download manager, or another command protocol.
 
-Continue with the [operation map](plugin-operation-workflows-2026-09-06.md) and [16 detailed scenarios](plugin-scenarios/README.md), which name the commands, components, events, and decisions for each operation.
+Use the [packet delivery plan](../engineering/plugin-integration/README.md#review-and-delivery) for staged definition delivery, then the [operation map](plugin-operation-workflows-2026-09-06.md) and [16 detailed scenarios](plugin-scenarios/README.md), which name the commands, components, events, and decisions for each operation.

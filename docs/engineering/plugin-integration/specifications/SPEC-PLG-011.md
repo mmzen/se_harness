@@ -20,11 +20,12 @@ The agent prepares evidence for selected work. It reports facts and the next rea
 
 ## Scope
 
-This contract governs the evidence skill. Existing workflow and provenance contracts retain lifecycle authority; SPEC-PLG-012 covers the separate read-only skills.
+This governs the evidence skill. Existing workflow and provenance contracts retain lifecycle authority; SPEC-PLG-012 covers the separate read-only skills.
 
 ## Terms
 
 - **Preparation.** Recording evidence before the separate accountable decision.
+- **Applicable authority.** The existing decision covers the action-specific inputs in SPEC-PLG-010's applicability table.
 
 ## Rules
 
@@ -36,7 +37,7 @@ This contract governs the evidence skill. Existing workflow and provenance contr
 
 **PLG-EVD-004.** Record preparation MUST remain separate from the assurance or release decision; the skill MUST NOT supply approval on the owner's behalf.
 
-**PLG-EVD-005.** The skill MUST retain unchanged valid authority and stop at missing decisions, failed prerequisites, changed scope, or uncertain effects.
+**PLG-EVD-005.** The skill MUST reuse applicable authority under SPEC-PLG-010, stopping affected actions when governing inputs change, authority is missing, gates fail or effects are uncertain.
 
 **PLG-EVD-006.** Agent merge or publication MUST require exact action authority and demonstrated independent external enforcement; otherwise the skill MUST report the automation blocker.
 
@@ -46,13 +47,15 @@ This contract governs the evidence skill. Existing workflow and provenance contr
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| Missing check or owner decision | Report the missing fact or decision; do not invent success. | existing evaluator refusal or missing decision |
-| Handoff check has writing effects | Require covered write authority and retain the resulting evidence changes. | actual operation result |
-| Dirty or uncommitted verification candidate | Stop capture; preserve results for the required candidate commit. | existing capture refusal |
+| Missing check or owner decision | Report the missing fact or decision | Existing refusal or missing right |
+| Writing handoff lacks applicable authority | Stop before evidence changes | Missing write authority |
+| Candidate changed, dirty or uncommitted | Stop the affected candidate-bound operation | Identity mismatch or capture refusal |
 
 ## Examples
 
-**Given** a failed check, **when** evidence is prepared, **then** that failure remains visible and assurance remains undecided (PLG-EVD-002, PLG-EVD-004).
+**Given** a failed check, **when** evidence is prepared, **then** the failure remains visible and assurance stays undecided (PLG-EVD-002, PLG-EVD-004).
+
+**Given** authority for candidate A, **when** candidate B is selected, **then** PLG-EVD-005 stops reuse of candidate A's decision.
 
 ## Coverage
 

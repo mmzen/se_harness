@@ -18,6 +18,9 @@ paths = [
   "tests/plugin_integration/codex_adapter/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-005.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-005/",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-008.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
 ]
 
 [relations]
@@ -43,6 +46,9 @@ Connect accepted Codex host discovery and event bindings to the shared plugin co
 
 Codex manifests, supported event argument/result mapping, shared skill discovery, and activation failure reporting.
 
+
+The [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md) introduces this packet in D04 under WO-PLG-007. This WO's definition paths support its own introduction and separately authorized decisions.
+
 ## Out of scope
 
 Core evaluator changes, managed repository controls, approved definition amendments, public release or publication, and installation outside disposable host fixtures.
@@ -60,7 +66,7 @@ The proposal source is PR #360 at `9e894e99`; this work order's approved relatio
 ## Expected change surface
 
 The Codex adapter component and its focused integration tests.
-Only this work order and its evidence directory may also change.
+Definition delivery may also change its exact declared records and assigned index files.
 
 ## Required verification
 
