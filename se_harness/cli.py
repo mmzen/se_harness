@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import argparse
 import json
-import hashlib
 import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
+from se_harness.integrity import pretty_json_bytes, raw_sha256
+from se_harness.workflow_contract import CHECKPOINT_ORDER, EVIDENCE_CHECKPOINTS
 from se_harness import __version__
 from se_harness._process import run as _launch, text as _text
 from se_harness.artifact_layout import create_artifact, scaffold_domain
@@ -262,7 +263,7 @@ def _inspect_repository(args: argparse.Namespace) -> int:
         else:
             report["mode"] = "repository_wide"
             report["selection"] = {"primary": None, "artifacts": []}
-            output = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            output = pretty_json_bytes(report, ensure_ascii=False).decode("utf-8")
     elif completed.returncode == 0:
         output = output.replace("Harness inspection", "Harness inspection (repository_wide)", 1)
     print(output, end="")
@@ -328,7 +329,7 @@ def _dashboard(args: argparse.Namespace) -> int:
     if not output.is_absolute():
         output = target / output
     manifest = output / "dashboard-manifest.json"
-    digest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+    digest = raw_sha256(manifest.read_bytes()) if manifest.is_file() else None
     members: dict[str, object] = {"output": output.as_posix(), "manifest_sha256": digest}
     if completed.returncode != 0:
         # ECP-COR-010: the engine's standard error travels with the failed result.
@@ -940,7 +941,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="one selected WO, VREC, or RLS ID; without a checkpoint it defaults to the single in_progress work order",
     )
     check.add_argument(
-        "--checkpoint", choices=("start", "pre-action", "transition", "handoff", "scope"),
+        "--checkpoint", choices=CHECKPOINT_ORDER,  # ECP-PRM-012
         help="fixed stateless evaluation checkpoint; omitted, check projects the selected scope and evaluates no gate",
     )
     check.add_argument(
@@ -981,7 +982,7 @@ def build_parser() -> argparse.ArgumentParser:
     evidence = commands.add_parser("evidence", help="write or rebind one work order's evidence packet to the current formal snapshot")
     evidence.add_argument("target", nargs="?", default=".")
     evidence.add_argument("--artifact", required=True, help="the work order the packet is keyed by")
-    evidence.add_argument("--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff"))
+    evidence.add_argument("--checkpoint", required=True, choices=EVIDENCE_CHECKPOINTS)  # ECP-PRM-012
     evidence.add_argument("--rebound-at", help="RFC 3339 UTC timestamp to record; defaults to now")
     evidence.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     evidence.set_defaults(handler=_evidence)

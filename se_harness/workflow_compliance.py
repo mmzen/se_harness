@@ -14,7 +14,11 @@ from se_harness import front_matter
 from se_harness._process import ProcessError, run_git, text as _text
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import orphaned_ready_records, run_preflight
+from se_harness.integrity import atomic_write_bytes, canonical_text, pretty_json_bytes, unique_object_hook
 from se_harness.workflow_contract import (
+    CHECKPOINTS,
+    EVIDENCE_CHECKPOINTS,
+    Checkpoint,
     ContractError,
     effective_checkpoints,
     load_validated_contracts,
@@ -62,18 +66,12 @@ class CheckpointContext:
     declared_scope: tuple[str, ...]
     admitted_scope: tuple[str, ...]
     change_set: ChangeSet
-    checkpoint: str
+    checkpoint: Checkpoint  # ECP-PRM-013
     formal_snapshot_sha256: str
     target: str | None = None
 
 
-def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise HarnessError(f"WEX200: duplicate JSON key in change manifest: {key}")
-        result[key] = value
-    return result
+_pairs = unique_object_hook(lambda key: HarnessError(f"WEX200: duplicate JSON key in change manifest: {key}"))
 
 
 def normalize_path(value: object, *, directory_allowed: bool = False) -> str:
@@ -442,7 +440,7 @@ def write_evidence_packet(
 
     from se_harness.workflow import _catalog, _validation, project_scope
 
-    if checkpoint not in {"start", "pre-action", "transition", "handoff"}:
+    if checkpoint not in EVIDENCE_CHECKPOINTS:  # ECP-PRM-012: the contract module's set
         raise HarnessError("WEX-ECP-010: the checkpoint must be start, pre-action, transition, or handoff")
     if not _RFC3339.fullmatch(now):
         raise HarnessError("WEX-ECP-010: rebound_at must be RFC 3339 UTC at second precision")
@@ -493,13 +491,9 @@ def write_evidence_packet(
             "Retained by `harnessctl evidence`; body content is owner-authored.\n"
         ).encode("utf-8")
     content = render_evidence_header(header) + body
-    path.parent.mkdir(parents=True, exist_ok=True)
-    staged = path.with_name(path.name + ".tmp")
     try:
-        staged.write_bytes(content)
-        staged.replace(path)
+        atomic_write_bytes(path, content)  # ECP-PRM-008: fsync, then replace
     except OSError as exc:
-        staged.unlink(missing_ok=True)
         raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
     governing, dependencies = project_scope(catalog, primary)
     return selected_result(
@@ -552,12 +546,9 @@ def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) ->
         "formal_snapshot_sha256": snapshot,
         "rebound_at": now,
     }
-    staged = path.with_name(path.name + ".tmp")
     try:
-        staged.write_bytes(render_evidence_header(header) + body)
-        staged.replace(path)
+        atomic_write_bytes(path, render_evidence_header(header) + body)  # ECP-PRM-008
     except OSError as exc:
-        staged.unlink(missing_ok=True)
         raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
     return relative
 
@@ -566,14 +557,9 @@ def retain_handoff_result(root: Path, artifact: Any, result: Mapping[str, Any]) 
     """Retain a completed Git-derived handoff result beside the packet (ECP-PRB-002, amended)."""
 
     path = evidence_packet_path(root, artifact, "handoff").with_name("handoff.json")
-    path.parent.mkdir(parents=True, exist_ok=True)
-    data = (json.dumps(result, indent=2, ensure_ascii=True, sort_keys=True) + "\n").encode("utf-8")
-    staged = path.with_name(path.name + ".tmp")
     try:
-        staged.write_bytes(data)
-        staged.replace(path)
+        atomic_write_bytes(path, pretty_json_bytes(result, ensure_ascii=True))  # ECP-PRM-006, ECP-PRM-008
     except OSError as exc:
-        staged.unlink(missing_ok=True)
         raise HarnessError(f"WEX-ECP-010: cannot retain the handoff result: {exc}") from exc
     return path.relative_to(root).as_posix()
 
@@ -925,7 +911,7 @@ def check_workflow(
         raise HarnessError(
             "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
-    if checkpoint not in {"start", "pre-action", "transition", "handoff", "scope"}:
+    if checkpoint not in CHECKPOINTS:  # ECP-PRM-012: the contract module's set
         raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, handoff, or scope")
     if checkpoint == "transition" and not target:
         raise HarnessError("WEX210: --target is required for the transition checkpoint")
@@ -1354,7 +1340,7 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
         text = artifact.path.read_text(encoding="utf-8-sig")
     except (OSError, UnicodeError) as exc:
         return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
-    prose = _INLINE_CODE.sub("", _FENCE.sub("", text.replace("\r\n", "\n")))
+    prose = _INLINE_CODE.sub("", _FENCE.sub("", canonical_text(text)))  # ECP-PRM-010
     # the template's five shape comments live in the front matter; markdown headings stay
     split = front_matter.partition(prose)  # ECP-PRM-005: line-anchored on the normalized text
     if split is not None:
@@ -1365,7 +1351,7 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
     if match is not None:
         return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
     # the section is read with its inline code intact: the ids are written as `DEC-...`
-    lines = _FENCE.sub("", text.replace("\r\n", "\n")).split("\n")
+    lines = _FENCE.sub("", canonical_text(text)).split("\n")
     for index, line in enumerate(lines):
         if line.strip() == "## Open decisions":
             body_lines = []

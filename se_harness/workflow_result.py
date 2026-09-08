@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import shlex
 from typing import Any, Iterable, Mapping
+from se_harness.integrity import raw_sha256
 
 
 SCHEMA = "se-harness-workflow-result-v2"
@@ -129,7 +129,7 @@ def canonical_block_bytes(result: Mapping[str, Any]) -> bytes:
 
 
 def restitution_digest(result: Mapping[str, Any]) -> str:
-    return hashlib.sha256(canonical_block_bytes(result)).hexdigest()
+    return raw_sha256(canonical_block_bytes(result))
 
 
 def render_json(result: Mapping[str, Any]) -> str:

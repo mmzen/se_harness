@@ -6,8 +6,10 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
+
+from se_harness.integrity import unique_object_hook
 from types import MappingProxyType
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Mapping, Literal
 
 
 WORKFLOW_SCHEMA = "se-harness-workflow-v4"
@@ -28,7 +30,12 @@ STEP_KINDS = {"command", "decision", "reference"}
 CORRECTIVE_KINDS = {"command", "escalation", "response"}
 PARAMETER_CARDINALITIES = {"one", "zero_or_one", "one_or_more"}
 PARAMETER_TYPES = {"artifact_id", "actor", "path", "path_list", "status", "text"}
-CHECKPOINTS = {"start", "pre-action", "transition", "handoff", "scope"}
+#: ECP-PRM-012: the one definition of the checkpoint set; `cli.py` and `workflow_compliance.py` import it.
+CHECKPOINT_ORDER: tuple[str, ...] = ("start", "pre-action", "transition", "handoff", "scope")
+CHECKPOINTS = frozenset(CHECKPOINT_ORDER)
+#: The checkpoints an evidence packet may be keyed by: every checkpoint but the scope projection.
+EVIDENCE_CHECKPOINTS: tuple[str, ...] = CHECKPOINT_ORDER[:-1]
+Checkpoint = Literal["start", "pre-action", "transition", "handoff", "scope"]
 #: The prose a rule contributes to a schema-2 result (WO-ECP-005): what the
 #: operation did and the lifecycle state it leaves. Every other restitution
 #: field is derived from the bound procedure step.
@@ -187,13 +194,7 @@ def load_lifecycle_registry(path: Path | None = None) -> LifecycleRegistry:
     return validate_lifecycle_registry(load_workflow_contract(path))
 
 
-def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ContractError(f"duplicate JSON key: {key}")
-        result[key] = value
-    return result
+_object = unique_object_hook(lambda key: ContractError(f"duplicate JSON key: {key}"))
 
 
 def _load(path: Path, schema: str) -> dict[str, Any]:

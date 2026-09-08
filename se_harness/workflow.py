@@ -10,7 +10,6 @@ from __future__ import annotations
 import json
 import os
 import re
-import tempfile
 import tomllib
 
 from se_harness import front_matter
@@ -28,22 +27,12 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
+from se_harness.integrity import IntegrityError, read_toml, stage_bytes
 from se_harness.preflight import _load_validator_module
-from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
+from se_harness.workflow_contract import DEFINITION_TYPES, load_workflow_contract, validate_lifecycle_registry
 
 
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "decision"}
-DEFINITION_TYPES = {
-    "intent",
-    "capability",
-    "requirement",
-    "specification",
-    "architecture",
-    "adr",
-    "verification",
-    "release_contract",
-    "operating_contract",
-}
 
 WORKFLOW_CONTRACT = load_workflow_contract()
 LIFECYCLE_REGISTRY = validate_lifecycle_registry(WORKFLOW_CONTRACT)
@@ -519,12 +508,13 @@ def _grants_authority(family: str, status: str) -> bool:
 
 
 def _revision_policy(root: Path) -> dict[str, bool]:
+    # ECP-PRM-011: the one configuration reader; an unreadable file is the policy's default.
     path = root / ".engineering-harness.toml"
     if not path.is_file():
         return {"required_for_verified_work": False, "required_for_release": False}
     try:
-        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        data = read_toml(path)
+    except IntegrityError:
         return {"required_for_verified_work": False, "required_for_release": False}
     table = data.get("revision_provenance", {})
     return {
@@ -541,6 +531,7 @@ def _validate_edge(
     reason: str | None,
     catalog: Mapping[str, Any] | None = None,
     disposition: Mapping[str, Any] | None = None,
+    policy: Mapping[str, bool] | None = None,
 ) -> Mapping[str, Any] | None:
     family = _family(artifact.artifact_type)
     row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
@@ -582,7 +573,8 @@ def _validate_edge(
         _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
     elif reason is not None:
         _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
-    policy = _revision_policy(root)
+    if policy is None:
+        policy = _revision_policy(root)  # ECP-PRM-011: the planner passes its one reading
     if family == "work_order" and artifact.status in {"implemented", "verified"}:
         setting = "required_for_verified_work" if target == "verified" else "required_for_release"
         if not policy[setting]:
@@ -655,6 +647,7 @@ def structural_precondition_results(
     artifact: Any,
     target: str,
     reason: str | None,
+    policy: Mapping[str, bool] | None = None,
 ) -> list[dict[str, Any]]:
     """Evaluate the graph-structural checks bound to one edge (ECP-KRN-005).
 
@@ -676,7 +669,8 @@ def structural_precondition_results(
             if row is None or target not in row.transitions_to:
                 results.append(_structural(check, "fail", f"transition {artifact_id}: {artifact.status} -> {target} is not allowed", artifact_id))
                 continue
-            policy = _revision_policy(root)
+            if policy is None:
+                policy = _revision_policy(root)
             if family == "work_order" and artifact.status in {"implemented", "verified"}:
                 setting = "required_for_verified_work" if target == "verified" else "required_for_release"
                 if not policy[setting]:
@@ -749,6 +743,7 @@ def plan_transition(
     dispositions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> TransitionPlan:
     root = ensure_target(repository, must_exist=True)
+    policy = _revision_policy(root)  # ECP-PRM-011: read once per plan
     dispositions = dict(dispositions or {})
     if not transitions:
         raise HarnessError("at least one --set ID=STATUS is required")
@@ -800,7 +795,8 @@ def plan_transition(
         if artifact is None:
             raise HarnessError(f"unknown artifact ID: {artifact_id}")
         disposition_fields = _validate_edge(
-            root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog, dispositions.get(artifact_id)
+            root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog, dispositions.get(artifact_id),
+            policy=policy,  # ECP-PRM-011: the planner's one reading
         )
         if artifact.artifact_type == "decision" and disposition_fields is None:
             raise HarnessError(
@@ -866,7 +862,7 @@ def plan_transition(
             root, report, catalog, artifact,
             checkpoint="transition", change_set=declared_change_set((), complete=False), target=target,
         )
-        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, effective_reasons.get(artifact_id))
+        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, effective_reasons.get(artifact_id), policy=policy)
         for gate in transition_gate_results(quality, gates, context, structural=structural):
             gate_results.append(gate)
             for predicate in gate["predicates"]:
@@ -935,17 +931,8 @@ def plan_transition(
 
 
 def _stage(path: Path, content: bytes) -> Path:
-    descriptor, name = tempfile.mkstemp(prefix=f".{path.name}.wex-", dir=path.parent)
-    staged = Path(name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-    except Exception:
-        staged.unlink(missing_ok=True)
-        raise
-    return staged
+    # ECP-PRM-008: the transaction stages every file through integrity's one writer, then replaces them all.
+    return stage_bytes(path, content, prefix=f".{path.name}.wex-")
 
 
 def _replace(staged: Path, target: Path) -> None:
