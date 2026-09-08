@@ -2,7 +2,7 @@
 id = "WO-CIP-007"
 type = "work_order"
 title = "Wave 5, CI: one qualification per pull request, one form for each pin, version and name"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -45,6 +45,13 @@ class = "execution"
 implements = ["REQ-CIP-008", "REQ-CIP-009"]
 specifications = ["SPEC-CIP-003"]
 verification = ["VER-CIP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:55:49Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the eight repository-owned workflows, the manifest script and its module, the tests, the three notes, the amendment record on SPEC-CIP-001, the domain index and the evidence packet. It authorizes no change to the managed template or any managed path, no verification decision, no release and no publication; the merges remain the owner's decisions."
 +++
 
 # Work Order: Wave 5, CI: one qualification per pull request, one form for each pin, version and name

@@ -2,7 +2,7 @@
 id = "SPEC-CIP-003"
 type = "specification"
 title = "Wave 5 pipeline hygiene: one qualification per pull request, one form for each pin, version and name"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -10,6 +10,13 @@ contract = "Each pull request qualifies and tests its commit once, every reposit
 
 [relations]
 specifies = ["REQ-CIP-008", "REQ-CIP-009"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:55:49Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all three (Recommended)', given after the three wave 5 packets for issue #380 (code health assessment 2026-09-07, sections 2.2 and 4 and the wave 5 plan; issue #381 owner decision 3) were presented. Approval of a definition authorizes no work. Rules CIP-ONE-001 to CIP-ONE-017."
 +++
 
 # Specification: Wave 5 pipeline hygiene: one qualification per pull request, one form for each pin, version and name
