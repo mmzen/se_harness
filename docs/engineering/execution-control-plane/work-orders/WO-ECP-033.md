@@ -2,7 +2,7 @@
 id = "WO-ECP-033"
 type = "work_order"
 title = "Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -64,6 +64,13 @@ to = "approved"
 decided_at = "2026-09-08T09:17:36Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work. WO-ECP-033 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T12:21:17Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete, prepare the record, start group C' after WO-ECP-032 was marked implemented and VREC-ECP-036 prepared at c829bdd5: wave 2, group C, the diagnostic-code registry and the four contract tables read at run time (SPEC-ECP-023 ECP-PRM-016 to ECP-PRM-023 and ECP-PRM-026). Start preflight PASS. Stacked on the group B branch because the two groups edit the same modules."
 +++
 
 # Work Order: Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time
