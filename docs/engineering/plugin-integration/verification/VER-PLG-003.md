@@ -15,49 +15,54 @@ verifies = ["REQ-PLG-006"]
 
 ## Independence
 
-Derive expected observations from SPEC-PLG-003 and the exact host documentation assessed.
-Compare those expectations with observed host events, not fixture claims.
+Expected event names and host behavior come from SPEC-PLG-003 and the exact Codex documentation assessed. An observation fixture records the host; it does not simulate proof of host support.
 
 ## Requirement-to-evidence matrix
 
-| Requirement | Method | Case/evidence | Pass condition |
+| Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-006 | Demonstration, inspection | Repeated activation; missing Python; inactive event | Every assessed combination has reproducible actions and evidence of activation or a precise incompatibility. |
+| REQ-PLG-006 | test, inspection | C01–C07 | Each claimed capability has a retained host observation; absent capability is recorded as incompatible or unavailable. |
 
 ## Acceptance scenarios
 
-Attempt discovery and new-session activation in a disposable Codex profile.
-Attempt resume and compaction, before and after private evaluator preparation.
-Repeat the observed working route; retain missing-Python and disabled-hook outcomes.
+Each case creates new test evidence under `evidence/WO-PLG-003/Cnn/`: `actions.txt`, `stdout.txt`, `stderr.txt`, and `observations.json`; these are not plugin APIs.
+`observations.json` records expected/observed values, exit status, source evidence paths and a pass/fail/unavailable conclusion. The Evidence column names additional captures.
+
+| Case | Starting fixture | Action | Observable result | Evidence |
+| --- | --- | --- | --- | --- |
+| C01 | Disposable host profile; documented shell guard; no prepared evaluator | Attempt skill discovery, new-session activation, resume and compaction. | The guard requests setup without invoking missing Python; setup remains reachable, or the probe records the precise incompatible host behavior. | guard command; discovery output; ordered host transcript |
+| C02 | Provided Python missing, older than 3.11, or without usable venv/ensurepip | Attempt the observed setup entry for each condition. | Operator guidance identifies the prerequisite; no Python installation, environment readiness, or repository initialization is claimed. | guidance; process trace; before/after repository inventory |
+| C03 | Provided Python and an environment containing the selected released evaluator | Repeat the observed startup route twice from fresh sessions. | Each run records the discovered setup skill, event names, invoked interpreter and delivered governance bytes, or a reproducible incompatibility. | two host transcripts; interpreter identity; delivered bytes |
+| C04 | Prepared environment; repository governance changed since the prior session | Resume and compact using the host’s documented actions. | The report identifies fresh event and content delivery, or records the unsupported restoration route; prior-session output is not evidence of fresh delivery. | event timestamps; old/new source digests; context capture |
+| C05 | Codex hook trust denied and then granted | Start sessions in both configurations. | The report records the permission/enablement interaction and distinguishes an absent event from a handler result. | trust/settings transcript; event log |
+| C06 | Plugin path contains spaces; plugin update/reload; removed environment interpreter | Repeat activation across each change. | Actual argv, persistent-data location, required restarts and launch failures are retained; removed Python is not attributed a successful script result. | argv log; data-directory inventory; launch/reload transcript |
+| C07 | Session/tool hooks registered; no environment; verified provided Python and user-authorized setup | Through real Codex shell tools, create the external venv and install the exact bundled wheel offline. Before readiness, attempt a disposable governed write; after readiness, remove the interpreter and repeat authorized repair. | Ordinary host permissions remain active. The guard does not blanket-veto this bounded setup; governance stays unready until fresh identity/context checks. Retain the governed-write result: absent required refusal is a coverage failure, not checked success. Blocked setup/repair records bootstrap incompatibility. | real tool/event/permission transcript; venv/pip argv; governed-target hashes; repository inventory; identity/context results |
 
 ## Property and invariant tests
 
-Each support statement points to recorded host/version/platform evidence.
-An unavailable check cannot become a passing observation.
+Each C01–C07 row names the host version and source transcript. C07 requires actual setup and repair; skill discovery alone cannot establish bootstrap compatibility.
 
 ## Static and architecture checks
 
-The fixture contains observation code only; it adds no alternative evaluator policy.
+Review the probe against its specification. Retain fixture source showing observation-only behavior and no second evaluator policy.
 
 ## Security and privacy checks
 
-Normal host configuration and repositories remain unchanged.
-Redact credentials from retained host transcripts.
+Use a disposable profile and repository. Compare normal-profile and repository inventories before/after; redact authentication material from event logs.
 
 ## Performance and resilience checks
 
-Record required restarts, trust interactions, and activation durations.
+C03–C06 record activation duration, restart count and every trust/permission interaction; retain both repeated runs.
 
 ## Manual assessments
 
-Assess available Windows, Linux, and macOS combinations.
-Record host version, Python version, and selected published evaluator version; mark every other combination unavailable or unsupported with reasons.
+Assess available Windows, Linux and macOS profiles for Codex, with provided Python and the named released evaluator. Evidence must distinguish observed, incompatible and unavailable combinations.
 
 ## Evidence retention
 
-Retain fixture revision, referenced documentation, ordered actions, event transcripts, and compatibility table under `evidence/WO-PLG-003/`.
+Retain each case’s fixture revision, argv, exit status, raw output and listed observations under `evidence/WO-PLG-003/Cnn/`.
+Record expected and observed values separately, with a pass/fail/unavailable conclusion. Keep original failures and bind later assurance to the exact implementation candidate.
 
 ## Residual uncertainty
 
-A documented incompatibility can satisfy this investigation.
-Production support remains undecided until DEC-PLG-001; absent evidence cannot authorize a production adapter.
+A reproducible incompatibility can complete this investigation. Production support still requires a positive route selected through DEC-PLG-001; no support decision is made here.

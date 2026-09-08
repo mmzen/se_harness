@@ -8,13 +8,13 @@ created = "2026-09-08"
 updated = "2026-09-08"
 
 kind = "question"
-question = "Which supported Codex mechanism will keep setup available before Python hooks can run?"
+question = "Does the documented shell-guard activation route satisfy the contract on the assessed Codex versions and platforms?"
 raised_by = "implementation-planner"
 recommendation = "prove-supported-route"
 
 [[options]]
 id = "prove-supported-route"
-label = "Adopt a supported route demonstrated by the Codex probe."
+label = "Accept the documented route for combinations demonstrated by the Codex probe."
 
 [[options]]
 id = "exclude-codex"
@@ -29,13 +29,13 @@ blocks = ["SPEC-PLG-005"]
 
 ## Question
 
-Which supported Codex mechanism will keep setup available before Python hooks can run?
+Does the documented shell-guard activation route satisfy the contract on the assessed Codex versions and platforms?
 
-Plugin installation can discover hooks before the private interpreter exists. Editing cached payloads or assuming a pre-install callback is not an accepted solution.
+The documented route registers a shell hook command before the private interpreter exists. It reports setup required if the interpreter cannot run; otherwise the Python handler checks identity and readiness. The probe tests this route, including hook trust and Windows quoting. No cache editing or pre-install callback is needed.
 
 ## Options
 
-**prove-supported-route.** Adopt a supported route demonstrated by the Codex probe.
+**prove-supported-route.** Accept the documented route for combinations demonstrated by the Codex probe.
 
 **exclude-codex.** Decline Codex support if no supported route meets the contract. This supplies no production activation route.
 

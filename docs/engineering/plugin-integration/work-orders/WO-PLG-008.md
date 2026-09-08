@@ -18,6 +18,10 @@ paths = [
   "tests/plugin_integration/tool_action/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-008/",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
 ]
 
 [relations]
@@ -40,6 +44,9 @@ Map supported host actions to current evaluator checks and return effective refu
 ## In scope
 
 One Python tool-event handler, explicit coverage mapping, refusal translation and focused effect-boundary tests.
+
+
+The [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md) introduces this packet in D04 under WO-PLG-007. This WO's definition paths support its own introduction and separately authorized decisions.
 
 ## Out of scope
 

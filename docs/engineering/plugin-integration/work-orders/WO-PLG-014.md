@@ -12,7 +12,17 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["plugins/verity-plane/common/agents/", "plugins/verity-plane/claude-code/agents/", "plugins/verity-plane/codex/agents/", "tests/plugin_integration/helpers/", "docs/engineering/plugin-integration/work-orders/WO-PLG-014.md", "docs/engineering/plugin-integration/evidence/WO-PLG-014/"]
+paths = [
+  "plugins/verity-plane/common/agents/",
+  "plugins/verity-plane/claude-code/agents/",
+  "plugins/verity-plane/codex/agents/",
+  "tests/plugin_integration/helpers/",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-014.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-014/",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-024.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-014.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-014.md",
+]
 
 [relations]
 implements = ["REQ-PLG-024"]
@@ -33,11 +43,14 @@ Provide optional investigator and evidence-reviewer definitions with demonstrate
 
 ## In scope
 
-Shared roles, supported host registrations, and permission/refusal/fallback tests. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Shared roles, supported host registrations, and permission/refusal/fallback tests. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+The [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md) introduces this packet in D04 under WO-PLG-007. This WO's definition paths support its own introduction and separately authorized decisions.
 
 ## Out of scope
 
-Mandatory helpers, privileged tools, autonomous implementation, decision delegation, or changed retained-skill contracts. No other packet or managed root changes.
+Mandatory helpers, privileged tools, autonomous implementation, decision delegation, or changed retained-skill contracts. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 

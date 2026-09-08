@@ -12,7 +12,18 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["tests/plugin_integration/qualification/", ".github/workflows/plugin-qualification.yml", "docs/engineering/plugin-integration/work-orders/WO-PLG-015.md", "docs/engineering/plugin-integration/evidence/WO-PLG-015/"]
+paths = [
+  "tests/plugin_integration/qualification/",
+  ".github/workflows/plugin-qualification.yml",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-015.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-015/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-005.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-025.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-026.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-015.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-015.md",
+]
 
 [relations]
 implements = ["REQ-PLG-025", "REQ-PLG-026"]
@@ -32,11 +43,14 @@ Implement reproducible qualification scenarios and measurement reporting after t
 
 ## In scope
 
-Qualification fixtures, reporting helpers, selected CI workflow, and retained host demonstrations. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Qualification fixtures, reporting helpers, selected CI workflow, and retained host demonstrations. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+Definition introduction D10 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 
-Package publication, untested support claims, invented performance limits, production hook changes, or automatic decision disposition. No other packet or managed root changes.
+Package publication, untested support claims, invented performance limits, production hook changes, or automatic decision disposition. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 

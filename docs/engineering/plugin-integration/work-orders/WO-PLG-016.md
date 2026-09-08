@@ -12,7 +12,17 @@ rationale = "Later decisions rely on changed plugin behavior or trusted guidance
 decided_by = "engineering-owner"
 
 [execution_scope]
-paths = ["docs/notes/plugin-installation-guide.md", "tests/plugin_integration/onboarding/", "docs/engineering/plugin-integration/work-orders/WO-PLG-016.md", "docs/engineering/plugin-integration/evidence/WO-PLG-016/"]
+paths = [
+  "docs/notes/plugin-installation-guide.md",
+  "tests/plugin_integration/onboarding/",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-016.md",
+  "docs/engineering/plugin-integration/evidence/WO-PLG-016/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-003.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-027.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-016.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-016.md",
+]
 
 [relations]
 implements = ["REQ-PLG-027"]
@@ -32,11 +42,14 @@ Write and check a focused installation guide after the installation-direction de
 
 ## In scope
 
-Focused guide and command/link/scenario checks against the named available release. Retain only this work order's evidence and lifecycle metadata within its engineering paths.
+Focused guide and command/link/scenario checks against the named available release. Retain this work order's evidence; definition delivery uses only the exact declared artifact paths.
+
+
+Definition introduction D11 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
 
 ## Out of scope
 
-README replacement, automatic Python installation, production code, package publication, or amendment of existing approved installation artifacts. No other packet or managed root changes.
+README replacement, automatic Python installation, production code, package publication, or amendment of existing approved installation artifacts. No other packet's implementation or managed root changes.
 
 ## Authorized decision envelope
 

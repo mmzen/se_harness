@@ -6,9 +6,9 @@ These 16 scenarios explain how a proposed Verity Plane plugin would support the 
 
 They extend the [operation workflows](../plugin-operation-workflows-2026-09-06.md) and [installation proposal](../plugin-installation-proposal-2026-09-06.md). They are design notes, not formal artifacts or authorization to implement the plugin.
 
-**Reviewed:** 2026-09-08. **Analysis baseline:** [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source 0.16.0, governed at that baseline by released evaluator 0.15.0. The [implementation packets](../../engineering/plugin-integration/README.md) use a newer baseline. These examples do not establish compatibility with a selected released evaluator. The plugin workflows are not implemented or integration-tested.
+**Reviewed:** 2026-09-08. These scenarios and the [implementation packets](../../engineering/plugin-integration/README.md) share main `fae52e1b`: candidate source 0.17.0, governing released evaluator 0.16.0. The plugin is proposed; examples are not implementation evidence.
 
-Inspect the selected released evaluator before using these commands. Released 0.16.0 retains `adopt` as a transitional alias; candidate 0.17.0 uses unified `init`. Relative source links open the current branch, which may differ from the inspected baseline.
+Commands target released evaluator 0.16.0, including its transitional `adopt` alias. Candidate source 0.17.0 uses unified `init`; relative source links show the candidate, not a substitute executable.
 
 ## Installation and session readiness
 
@@ -81,13 +81,13 @@ A skill instructs the agent. A host tool runs a command. A hook invokes its regi
 
 ### Commands in the examples
 
-`harnessctl` means `ENV_PYTHON -I -m se_harness`, using the **verified environment's absolute Python path**. It is shorthand for the existing CLI, not a new wrapper or a lookup on `PATH`.
+`harnessctl` means `ENV_PYTHON -I -m se_harness`, using the **verified environment's absolute Python path**. It is shorthand for the existing CLI. No launcher binary, evaluator lookup on `PATH`, or second protocol is added; a thin host-shell hook guard is permitted.
 
 The operator or host provides **Python 3.11+ with `venv` and `ensurepip`**. Setup uses the host shell to find and check it before any Python-dependent handler runs. If unavailable or unusable, setup stops and tells the operator to install or provide Python before continuing installation and using the plugin. Setup never downloads or installs Python.
 
 Setup automatically creates an isolated environment in persistent plugin data, outside the target repository, and installs the included evaluator wheel offline. No manual environment creation or activation is required. One plugin release supplies one exact evaluator version; normal use requires a matching repository lock. Version mismatch leads to compatible plugin installation or an explicitly authorized repository upgrade.
 
-Both hook scripts run as `ENV_PYTHON -I ABS_SCRIPT`. Resolve scripts from `${CLAUDE_PLUGIN_ROOT}` in Claude Code or `${PLUGIN_ROOT}` in Codex. For a manual readiness retry, the setup skill calls `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO`. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write. If the environment cannot run, return to setup's shell-based Python check.
+The registered host-shell guard reports setup required if the environment interpreter cannot run; otherwise the hook script runs as `ENV_PYTHON -I ABS_SCRIPT`. The script still checks full identity and readiness. Resolve scripts from `${CLAUDE_PLUGIN_ROOT}` in Claude Code or `${PLUGIN_ROOT}` in Codex. For a manual readiness retry, the setup skill calls `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO`. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write. If the environment cannot run, return to setup's shell-based Python check.
 
 For evaluator and helper processes, clear inherited `PYTHONPATH` and prepend the verified environment's `bin/` or `Scripts/` directory to that process's `PATH`. This lets existing internal identity checks find the environment-installed console command instead of an unrelated global `harnessctl`. Keep direct invocations absolute. This changes only those processes, not the user's shell settings; no activation step is needed.
 
@@ -97,7 +97,7 @@ Codex uses `exec_command` and its editing tools. Claude Code uses `Bash` or nati
 
 ### Optional subagents
 
-Claude Code can load `agents/investigator.md` and `agents/evidence-reviewer.md`; its `Agent` tool selects `verity-plane:investigator` or `verity-plane:evidence-reviewer` as the subagent type. Codex may need separately registered `.codex/agents/investigator.toml` and `.codex/agents/evidence-reviewer.toml`; confirm named delegation on the supported client. See [host differences](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
+Claude Code can load `agents/investigator.md` and `agents/evidence-reviewer.md`; its `Agent` tool selects `verity-plane:investigator` or `verity-plane:evidence-reviewer` as the subagent type. For Codex, qualify host loading of the packaged helper definitions; if unsupported, use the main agent. WO-PLG-014 does not include project `.codex/agents/` writes. See [host differences](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
 
 Supply the selected scope, question, governance context, read-only tool limits, and expected findings. If the role or its restrictions are unavailable, the main agent does the work. The existing `harness-orient` and `harness-operator-brief` skills remain single-agent.
 
@@ -105,7 +105,7 @@ Supply the selected scope, question, governance context, read-only tool limits, 
 
 The agent identifies the exact operation and affected records, checks existing authority, and asks the accountable human only for a missing or changed required decision. A valid decision covering unchanged action and inputs is reused. A transition preview, passing tests, a tool permission, or `--decision ID=ACTOR` cannot authenticate approval. Existing qualifying delegation applies only to its stated scope.
 
-Recheck the inputs that each decision actually governs. Ordinary code edits within an unchanged approved WO scope do not require approving the WO again. Candidate-bound verification or delivery decisions must still match their exact candidate, and all applicable gates continue to apply.
+Use the operation-specific comparison table in [SPEC-PLG-010](../../engineering/plugin-integration/specifications/SPEC-PLG-010.md#terms) to recheck the inputs that each decision actually governs. Ordinary code edits within an unchanged approved WO scope do not require approving the WO again. Candidate-bound verification or delivery decisions must still match their exact candidate, and all applicable gates continue to apply.
 
 Owners retain the integration and publication decisions. An authorized agent or human may execute the exact action through existing tools when required gates and independent enforcement permit it. The plugin does not require owners personally to operate those tools. Missing or unproven enforcement blocks agent execution and is reported as a control limitation, with any existing permitted human route identified. Deterministic approval binding and protection of remote effects remain separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347).
 

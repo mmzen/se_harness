@@ -38,7 +38,7 @@ This contract governs package assembly. SPEC-PLG-002 owns environment creation; 
 
 **PLG-PKG-005.** Assembly MUST combine shared assets with only the selected host's manifest and integration files.
 
-**PLG-PKG-006.** Each output MUST retain an inventory identifying its source revision, evaluator release, and packaged file digests.
+**PLG-PKG-006.** Each output MUST inventory its source revision, evaluator version, archive SHA-256, canonical payload SHA-256 computed from the verified wheel, and packaged file digests.
 
 **PLG-PKG-007.** Assembly MUST refuse conflicting paths, escaped destinations, and incomplete inventories before marking an output usable.
 

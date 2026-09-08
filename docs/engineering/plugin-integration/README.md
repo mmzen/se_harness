@@ -4,7 +4,7 @@
 
 These artifacts develop the [plugin proposal](../../notes/plugin-installation-proposal-2026-09-06.md), [operation workflows](../../notes/plugin-operation-workflows-2026-09-06.md), and [16 scenarios](../../notes/plugin-scenarios/README.md). The notes and artifacts are reviewed together in [PR #416](https://github.com/mmzen/se_harness/pull/416), which incorporates the notes from PR #360 at `9e894e99`.
 
-The artifacts were prepared against main `fae52e1b`, with candidate source 0.17.0 and governing evaluator 0.16.0. The notes retain their earlier analysis baseline; approved artifact contracts and the selected released evaluator govern implementation.
+The notes and artifacts use main `fae52e1b`, with candidate source 0.17.0 and governing evaluator 0.16.0. Approved artifact contracts and the selected released evaluator govern implementation.
 
 No implementation, approval, verification record, or release record is included. All definitions and work orders remain `draft`; the five decision records remain `open`. File creation and validation do not authorize work.
 
@@ -22,7 +22,7 @@ Open a work order for its exact change scope. Its metadata selects the requireme
 | [06. Register the Claude Code adapter](work-orders/WO-PLG-006.md) | REQ-PLG-009 | [Specification](specifications/SPEC-PLG-006.md) · [Verification](verification/VER-PLG-006.md) | 01, 02, 04, 07, 08 and shared skills; accepted route from DEC-PLG-002. |
 | [07. Deliver verified session context](work-orders/WO-PLG-007.md) | REQ-PLG-010–012 | [Specification](specifications/SPEC-PLG-007.md) · [Verification](verification/VER-PLG-007.md) | 02; protocol fixtures precede live adapter qualification. |
 | [08. Check supported tool actions](work-orders/WO-PLG-008.md) | REQ-PLG-013–014 | [Specification](specifications/SPEC-PLG-008.md) · [Verification](verification/VER-PLG-008.md) | 02; protocol fixtures precede live adapter qualification. |
-| [09. Connect repositories and select skill discovery](work-orders/WO-PLG-009.md) | REQ-PLG-015–016 | [Specification](specifications/SPEC-PLG-009.md) · [Verification](verification/VER-PLG-009.md) | 02; supported ownership route from DEC-PLG-004. |
+| [09. Connect repositories and select skill discovery](work-orders/WO-PLG-009.md) | REQ-PLG-015–016 | [Specification](specifications/SPEC-PLG-009.md) · [Verification](verification/VER-PLG-009.md) | 02; DEC-PLG-004. Its recommended migration needs separate evaluator work, release and root adoption; 0.16.0 does not provide it. |
 | [10. Guide artifact and work-order changes](work-orders/WO-PLG-010.md) | REQ-PLG-017–018 | [Specification](specifications/SPEC-PLG-010.md) · [Verification](verification/VER-PLG-010.md) | 02; live integration follows the applicable adapter. |
 | [11. Guide evidence and assurance handoffs](work-orders/WO-PLG-011.md) | REQ-PLG-019 | [Specification](specifications/SPEC-PLG-011.md) · [Verification](verification/VER-PLG-011.md) | 02 and the change workflow in 10. |
 | [12. Adapt the two read-only skills](work-orders/WO-PLG-012.md) | REQ-PLG-020–021 | [Specification](specifications/SPEC-PLG-012.md) · [Verification](verification/VER-PLG-012.md) | 02; live coexistence follows 09. |
@@ -72,8 +72,45 @@ Authenticated decisions remain separate work in [WO-ECP-004](../execution-contro
 
 ## Review and delivery
 
-Review the small packages independently. Start with package assembly, setup, and the two host probes; resolve their definitions and architecture before approving work.
+Keep PR #416 as the umbrella review. Deliver definitions through the eleven groups below, with one selected work order per PR. The [full delivery plan](../../notes/plugin-definition-delivery-2026-09-08.md) gives every introduced identifier, exact scope ownership, approval conditions and the measured rehearsal.
 
-Every work order proposes commit-bound verification as `required`. The verification files define future checks; none records a passing implementation. A later verification record must bind actual retained evidence and an exact candidate.
+| Introduction | Packets | Selected work order | Shared records introduced | Formal artifacts |
+| --- | --- | --- | --- | ---: |
+| D01 | 03 | [WO-PLG-003](work-orders/WO-PLG-003.md) | First index, glossary and delivery-note changes | 4 |
+| D02 | 04 | [WO-PLG-004](work-orders/WO-PLG-004.md) | None | 4 |
+| D03 | 01, 02 | [WO-PLG-001](work-orders/WO-PLG-001.md) | ARCH-PLG-001, ADR-PLG-001 | 13 |
+| D04 | 05, 06, 07, 08, 14 | [WO-PLG-007](work-orders/WO-PLG-007.md) | ARCH-PLG-002, ADR-PLG-002, DEC-PLG-001, DEC-PLG-002 | 27 |
+| D05 | 10 | [WO-PLG-010](work-orders/WO-PLG-010.md) | None | 5 |
+| D06 | 11 | [WO-PLG-011](work-orders/WO-PLG-011.md) | None | 4 |
+| D07 | 12 | [WO-PLG-012](work-orders/WO-PLG-012.md) | None | 5 |
+| D08 | 09 | [WO-PLG-009](work-orders/WO-PLG-009.md) | DEC-PLG-004 | 6 |
+| D09 | 13 | [WO-PLG-013](work-orders/WO-PLG-013.md) | None | 5 |
+| D10 | 15 | [WO-PLG-015](work-orders/WO-PLG-015.md) | DEC-PLG-005 | 6 |
+| D11 | 16 | [WO-PLG-016](work-orders/WO-PLG-016.md) | DEC-PLG-003 | 5 |
 
-This combined draft review does not represent completion of one large implementation work order. Approval, implementation, independent verification, and integration remain separate steps for the selected bounded package.
+Each group contains every new artifact its metadata references, or relies on an earlier group.
+The shared architecture links make D03 and D04 larger. Keeping complete packets and those links gives 13 and 27 artifacts respectively; the plan does not hide that review cost.
+DEC-PLG-004 names WO-PLG-012, so D07 precedes D08.
+
+All sixteen draft scopes now name their own definition files. Each selected introduction WO additionally names only its group's shared and peer records.
+D01 owns the initial glossary, engineering index and exact delivery-note changes; every introduction selector owns the exact domain index path.
+Each delivered index links only to artifacts already present. This complete umbrella index is not the D01 index.
+
+No broad carrier work order or whole-domain scope is created. There are 16 draft scope edits, no typed-relation changes, and no approved-artifact amendment records.
+Definition carriage grants no permission to implement a sibling work order or approve its artifacts.
+
+Approve each selected governing chain and work order before its definition PR becomes review-eligible.
+After D01 and D02 integrate, the probes still need explicit starts, actual findings and the existing independent-assurance route.
+D04 then needs positive host-route decisions and approval of its shared governing chain. A negative probe result can complete the investigation but cannot supply adapter authority.
+
+The recommended DEC-PLG-004 migration is not available in released 0.16.0. Before affected repository connection, it needs a separate evaluator packet, approval, public release and root adoption.
+WO-PLG-009 cannot implement that missing capability. A retain-repository or rejection choice requires the owner to amend or reject incompatible proposed scope.
+D10 also waits for its qualification decision; D11 waits for onboarding reconciliation.
+
+Shared setup changes run in this order: WO-PLG-002, WO-PLG-009, WO-PLG-013.
+Rebase after the preceding integration and recheck the complete PR diff. This is an explicit sequencing constraint; no new work-order dependency mechanism is claimed.
+
+The eleven cumulative scratch slices passed released-0.16 graph validation and Git-derived scope checks: zero errors, 44 baseline warnings, no advisories.
+Every PLG record remained draft or open. These observations prove reference closure and path coverage only; they do not establish approval, review-preflight eligibility or a passing GitHub check.
+
+Every implementation WO still requires commit-bound verification. Retained implementation evidence, a later VREC, its independent decision, and each integration remain separate work.

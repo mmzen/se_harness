@@ -32,7 +32,7 @@ Governs the repository procedures of `setup`. Runtime creation belongs to SPEC-P
 
 **PLG-REPO-002.** Setup MUST apply only the still-authorized reviewed operation and verify its actual result through existing installer and integrity checks.
 
-**PLG-REPO-003.** Setup MUST preserve owner content, customized managed files, and repository version locks except where the existing authorized installer operation explicitly changes them.
+**PLG-REPO-003.** Setup MUST preserve owner and customized managed content under existing installer rules; SPEC-PLG-002 governs repository lock preservation.
 
 **PLG-REPO-004.** Overlapping skills MUST have one active implementation through the approved compatibility choice and supported host and installer behavior.
 

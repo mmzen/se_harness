@@ -17,6 +17,10 @@ paths = [
   "tests/plugin_integration/claude_probe/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-004.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-004/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-007.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-004.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-004.md",
 ]
 
 [relations]
@@ -41,6 +45,9 @@ Produce observed Claude Code activation evidence and a compatibility report befo
 
 Disposable manifest and logging fixtures, isolated host profiles, activation attempts, missing-prerequisite cases, and a versioned compatibility table.
 
+
+Definition introduction D02 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
+
 ## Out of scope
 
 Core evaluator changes, managed repository controls, approved definition amendments, public release or publication, and installation outside disposable host fixtures.
@@ -58,7 +65,7 @@ The proposal source is PR #360 at `9e894e99`; this work order's approved relatio
 ## Expected change surface
 
 Claude Code probe fixtures and their retained report only.
-Only this work order and its evidence directory may also change.
+Definition delivery may also change its exact declared records and assigned index files.
 
 ## Required verification
 

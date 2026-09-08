@@ -48,7 +48,7 @@ The repository lock chooses the governing evaluator version; updating plugin fil
 ## Trust boundaries
 
 The supplied Python installation is a trusted prerequisite. Trusted release metadata identifies the wheel.
-Existing evaluator checks establish installed identity, import isolation, and interpreter-path boundaries; they do not prove the interpreter itself trustworthy.
+SPEC-PLG-002 requires trusted expected identities and an observed matching archive digest in addition to existing identity checks. These checks do not prove the supplied interpreter itself trustworthy.
 Repository content cannot select executable commands or replace expected identities.
 Persistent plugin data is local storage, not authenticated human authority.
 
@@ -59,7 +59,7 @@ Retain repository evidence outside plugin caches.
 
 ## Prohibited patterns
 
-No distributed Python binary, custom runtime wrapper, editable checkout import, automatic Python installer, or separate policy engine.
+No distributed Python binary, launcher binary, evaluator lookup on PATH, editable checkout import, automatic Python installer, or separate policy engine. Thin host-shell hook guards are permitted.
 
 ## Quality attributes
 

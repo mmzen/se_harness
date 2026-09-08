@@ -19,6 +19,12 @@ paths = [
   "tests/plugin_integration/repository_connection/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-009.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-009/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-004.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-015.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-016.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-009.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-009.md",
 ]
 
 [relations]
@@ -41,6 +47,9 @@ Add precise setup procedures for reviewed installer operations and compatible re
 
 The setup entry's repository mode, its repository reference, and disposable-target connection/discovery tests.
 
+
+Definition introduction D08 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
+
 ## Out of scope
 
 Core installer changes, manual locked-file edits/deletions, runtime setup changes, new migration flags and unrequested repository upgrades.
@@ -50,6 +59,8 @@ Core installer changes, manual locked-file edits/deletions, runtime setup change
 After approval and DEC-PLG-004 resolution, choose procedure wording and fixtures within the supported compatibility decision. Existing installer and SPEC-AEX-005 contracts remain authoritative.
 
 ## Constraints
+
+WO-PLG-002 supplies initial setup first. Rebase after its integration before modifying the shared setup entry.
 
 Use the inspected selected released CLI; never assume a unified-init alias. Reuse still-covered requests and decisions. A plugin update cannot independently change the repository lock.
 

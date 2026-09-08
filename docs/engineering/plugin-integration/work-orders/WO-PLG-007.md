@@ -18,6 +18,33 @@ paths = [
   "tests/plugin_integration/session_context/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-007.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-007/",
+  "docs/engineering/plugin-integration/README.md",
+  "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+  "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-001.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-002.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-008.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-010.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-011.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-012.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
+  "docs/engineering/plugin-integration/requirements/REQ-PLG-024.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-007.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+  "docs/engineering/plugin-integration/specifications/SPEC-PLG-014.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-007.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+  "docs/engineering/plugin-integration/verification/VER-PLG-014.md",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-005.md",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
+  "docs/engineering/plugin-integration/work-orders/WO-PLG-014.md",
 ]
 
 [relations]
@@ -41,9 +68,12 @@ Deliver current verified governance at startup, resume and compaction recovery, 
 
 One Python session handler and focused fixtures for identity, integrity, context completeness and failure behavior.
 
+
+Definition introduction D04 selects this WO and the exact records listed in the [definition-delivery plan](../../../notes/plugin-definition-delivery-2026-09-08.md). Those paths cover draft introduction and separately authorized decisions, not implementation of another WO.
+
 ## Out of scope
 
-Host registration, Python installation, evaluator changes, new governance rules and any authority to merge or publish.
+Host registration implementation, Python installation, evaluator changes, new governance rules and any authority to merge or publish.
 
 ## Authorized decision envelope
 
@@ -51,11 +81,13 @@ After approval, choose internal parsing, diagnostics and fixture structure withi
 
 ## Constraints
 
+D04 delivery waits for evidenced positive host-route decisions and approval of the shared governing chain. The probe work orders run first; graph and scope checks do not supply those decisions.
+
 Use the verified environment's absolute Python with `-I`; reuse existing identity and integrity checks. Preserve full gate/router content. Remain read-only.
 
 ## Expected change surface
 
-The new handler, its tests, this WO and its retained evidence only.
+The handler, its tests, this WO, its evidence, and the exact D04 definition-introduction paths.
 
 ## Required verification
 

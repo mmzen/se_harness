@@ -16,18 +16,17 @@ specifies = ["REQ-PLG-008"]
 
 ## In plain words
 
-The Codex adapter connects the host to the same plugin components used by the other host.
-It translates host inputs and results without creating another governance engine.
+The host binds shared components without adding governance policy.
 
 ## Scope
 
 This contract covers Codex bindings after the technical owner selects a supported route through DEC-PLG-001.
-SPEC-PLG-003 governs the required compatibility evidence.
-SPEC-PLG-002 owns evaluator selection; SPEC-PLG-007 and SPEC-PLG-008 own shared event behaviour.
+SPEC-PLG-003 governs probe evidence.
+SPEC-PLG-002 owns runtime identity; SPEC-PLG-007/008 own shared handlers.
 
 ## Terms
 
-- **Host adapter.** The host-specific manifest and bindings that connect supported events to shared components.
+- **Shell guard.** A host hook command reporting missing runtime before invoking Python.
 
 ## Rules
 
@@ -35,28 +34,28 @@ SPEC-PLG-002 owns evaluator selection; SPEC-PLG-007 and SPEC-PLG-008 own shared 
 
 **PLG-CDXA-002.** The adapter MUST expose the packaged shared skills through the host's proven discovery mechanism, preserving each skill's invocation contract.
 
-**PLG-CDXA-003.** Supported session events MUST call `scripts/session-context.py`; supported tool-action events MUST call `scripts/check-tool-action.py`.
+**PLG-CDXA-003.** A host-shell guard MUST precede `session-context.py` for session events and `check-tool-action.py` for supported tool events, without installing dependencies.
 
 **PLG-CDXA-004.** Bindings MUST translate host event fields and script results without duplicating evaluator rules or granting decision rights.
 
 **PLG-CDXA-005.** Script invocation MUST preserve arguments and absolute paths under the selected interpreter route, including paths containing spaces.
 
-**PLG-CDXA-006.** Missing required fields, failed scripts, or inactive required bindings MUST produce a visible failure without reporting the integration ready.
+**PLG-CDXA-006.** Missing runtime, required fields, failed scripts, or inactive bindings MUST report unready; interpreter existence MUST NOT establish readiness.
 
-**PLG-CDXA-007.** The adapter MUST identify unsupported event and tool coverage without representing it as enforcement.
+**PLG-CDXA-007.** The adapter MUST report absent coverage; a declared governed effect escaping required refusal MUST remain unqualified under SPEC-PLG-008.
+
+**PLG-CDXA-008.** Unready guards MUST preserve ordinary host permissions and already-authorized setup access without checked-success claims or permission overrides.
 
 ## Failure behaviour
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| No positively accepted route, including an exclusion decision | Refuse implementation readiness; a decided decision alone grants no support. | None |
+| No accepted route | Refuse readiness. | None |
 | Unsupported host or platform | Refuse readiness and identify the supported combination. | None |
+| Missing runtime | Report setup required in the demonstrated host format. | Setup-required message |
 | Malformed event or failed script | Preserve the failure in the host's supported result format. | Shared script or host output |
-| Required binding is inactive | Report incomplete activation. | None |
 
 ## Examples
-
-**Given** an accepted Codex profile, **when** a session event arrives, **then** its binding invokes the shared script under PLG-CDXA-003.
 
 **Given** a missing event field, **when** the adapter receives a tool action, **then** it reports failure under PLG-CDXA-006.
 
@@ -64,10 +63,8 @@ SPEC-PLG-002 owns evaluator selection; SPEC-PLG-007 and SPEC-PLG-008 own shared 
 
 | Requirement | Rules |
 | --- | --- |
-| `REQ-PLG-008` | PLG-CDXA-001, PLG-CDXA-002, PLG-CDXA-003, PLG-CDXA-004, PLG-CDXA-005, PLG-CDXA-006, PLG-CDXA-007 |
+| `REQ-PLG-008` | PLG-CDXA-001, PLG-CDXA-002, PLG-CDXA-003, PLG-CDXA-004, PLG-CDXA-005, PLG-CDXA-006, PLG-CDXA-007, PLG-CDXA-008 |
 
 ## Not decided here
 
-- Shared script policy, skill workflows, or additional evaluator APIs.
-- Operator approval rights or remote-action authorization.
-- Host support beyond the accepted compatibility evidence.
+- Setup eligibility is instruction-level; the guard does not authenticate authority or enforce an action classifier.

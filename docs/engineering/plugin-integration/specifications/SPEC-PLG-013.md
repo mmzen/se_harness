@@ -20,7 +20,7 @@ Repair makes a clean replacement. Updating plugin files alone never updates proj
 
 ## Scope
 
-This contract covers setup maintenance instructions. Package inputs and initial environment setup remain with SPEC-PLG-001 and SPEC-PLG-002.
+Setup maintenance instructions. SPEC-PLG-001 supplies trusted package inputs; SPEC-PLG-002 defines setup identity and plugin readiness.
 
 ## Terms
 
@@ -32,7 +32,7 @@ This contract covers setup maintenance instructions. Package inputs and initial 
 
 **PLG-MNT-002.** Setup MUST create an empty isolated replacement outside the repository and install only the verified bundled wheel with --no-index --no-deps.
 
-**PLG-MNT-003.** Active selection MUST change only after exact identity and environment checks pass; failure MUST preserve a usable previous selection.
+**PLG-MNT-003.** Active selection MUST change only after SPEC-PLG-002's identity and readiness checks pass; failure MUST preserve any usable previous selection.
 
 **PLG-MNT-004.** Maintenance MUST use absolute isolated Python, cleared PYTHONPATH and controlled subprocess PATH without importing repository code.
 
@@ -44,11 +44,12 @@ This contract covers setup maintenance instructions. Package inputs and initial 
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| Replacement identity failure or installer conflict | Preserve the previous selection or unchanged repository. | existing identity or installer refusal |
+| Replacement identity failure | Keep previous selection; reject replacement | Existing identity result or missing/mismatched archive |
+| Installer conflict | Preserve repository | Existing installer refusal |
 
 ## Examples
 
-**Given** a working environment and failed replacement, **when** repair stops, **then** the working selection remains unchanged (PLG-MNT-003).
+**Given** a working environment, **when** replacement archive metadata is absent, **then** PLG-MNT-003 keeps the working selection.
 
 ## Coverage
 
