@@ -79,8 +79,11 @@ base_ref = "origin/main"        # where the class is read from
 
 `github-checks` reads `GET /repos/{repository}/commits/{sha}/check-runs`
 filtered by `check_name`, with `GITHUB_TOKEN` from the environment when
-present. `local-file` exists for tests and rehearsals; used elsewhere it
-prints `W-ECP-005` on every read.
+present. `local-file` exists for tests and rehearsals, and a rehearsal
+announces itself with `SE_HARNESS_REHEARSAL=1` in the environment of the
+process that reads the gate; used elsewhere, or without that variable, it
+prints `W-ECP-005` on every read (`SPEC-ECP-006` `ECP-DLG-004`, amended by
+record under `WO-DST-026`).
 
 ## The one step the harness cannot take
 
