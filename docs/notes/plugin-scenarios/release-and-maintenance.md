@@ -4,9 +4,9 @@
 
 [All scenarios](README.md) · [Workflow overview](../plugin-operation-workflows-2026-09-06.md) · [Scenario template](../plugin-scenario-template.md)
 
-Design proposal, reviewed 2026-09-06. Current implementation means source at [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055): candidate source 0.16.0, with a repository governed by released 0.15.0. These identities are different. Interfaces below were inspected; the plugin integration has not been implemented or exercised against the released evaluator.
+Proposal updated 2026-09-08. **[New]** marks components to build. Current implementation means source at [`aad82a9`](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055): candidate 0.16.0, with this repository governed by released evaluator 0.15.0. Interfaces were inspected; the plugin has not been implemented or tested against that released evaluator. This note grants no authority.
 
-Names marked **[New]** are proposed components, not available commands. The [shared component names and calling convention](README.md#shared-component-names-and-calling-convention) apply throughout this page. Existing `harnessctl` examples mean calls through the bridge to the selected external evaluator. `REPO` means the selected absolute repository path; `*-DEMO-*` identifiers and version `1.2.0` describe a fictional consumer project.
+`harnessctl` means the plugin's absolute `scripts/harnessctl` path (`scripts/harnessctl.exe` on Windows), as described in the [shared calling convention](README.md#shared-component-names-and-calling-convention). `REPO` is the selected absolute repository path. `*-DEMO-*` identifiers and version `1.2.0` are illustrative.
 
 ## Scenario 14: Prepare and approve a release
 
@@ -14,66 +14,57 @@ Names marked **[New]** are proposed components, not available commands. The [sha
 
 **Purpose:** Give the release owner an exact candidate and its evidence to decide on.
 
-- **Starts when:** The release owner selects release preparation for identified work.
-- **Requires:** An approved release contract, eligible work orders, verified coverage for one candidate commit, and the applicable preparation checks.
-- **Successful result:** One release record, called an RLS, records the owner's decision. Publication remains a separate operation.
+- **Starts when:** Release preparation is requested for identified work.
+- **Requires:** An approved release contract, eligible work orders, verified coverage for one candidate, and authority for preparation.
+- **Successful result:** A release record, called an RLS, records the owner's decision. Publication is separate.
 
 ### 2. Workflow
 
 ```text
-User invokes evidence release-prepare [New]
+User → evidence [New] → read project release procedure
         ↓
-Read the project procedure → Retain any required candidate build
+Authorized build/evidence steps → existing prepare-release
         ↓
-scripts/bridge [New] previews inputs → Owner authorizes preparation
+Ready RLS → remaining project checks → release owner decides
         ↓
-Existing prepare-release creates a ready RLS → Project checks run
-        ↓
-decision-review [New] records the owner's decision
-        ↓
-scripts/bridge rechecks inputs → Existing transition records the decision
+Existing transition records that exact decision
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `evidence` skill **[New]** | **Codex:** ask “Use the verity-plane evidence skill to prepare this release.” **Claude Code:** invoke `/verity-plane:evidence release-prepare`. The agent reads `skills/evidence/SKILL.md` and collects the exact REL, WO, VREC, version, and candidate identifiers. |
-| 2 | Agent following `evidence` → project build process | Read the project's release procedure and retain any prerequisite build. In SE Harness, an authorized release WO permits existing `repository_tools.release_build replay`, followed by `scripts/create_release_bundle_manifest.py`. Reuse eligible retained results; preparation authority alone does not authorize a build. |
-| 3 | Agent → shell tool → `scripts/bridge` **[New]** | Use Codex `exec_command`, or Claude Code `Bash` / `PowerShell`, to invoke `bin/launcher bridge --request REQUEST_FILE --json` **[New]**. A `review-preview` request for `prepare-release` returns the selected inputs, proposed record/evidence paths, and `plan_id`. It does not run the writing command. |
-| 4 | Release owner → `decision-review` **[New]** | Inspect that preparation plan. The interface records the exact authorized action and returns `decision_ref`. Reuse an existing decision if it covers these effects and inputs. This authorizes preparation, not release. |
-| 5 | Agent → `scripts/bridge` → existing `prepare-release` | Send `review-apply` with `plan_id` and `decision_ref`. The bridge verifies their binding and calls the evaluator. Passing prerequisites creates a `ready` RLS and retained evaluator evidence; a refusal is returned unchanged. |
-| 6 | Agent → project binding and verification process | Complete the contract's authorized evidence steps. In SE Harness, existing `scripts/bind_release_distribution.py` binds the retained bundle to the ready RLS; `release-candidate-replay.yml` then replays it before the release decision. Retain the actual results. |
-| 7 | Agent → bridge → release owner | Request `review-preview` for the selected RLS transition. The bridge runs the existing transition checkpoint and transition preview, then presents the resulting record, candidate, and evidence through `decision-review`. The owner decides this exact release or rejection. |
-| 8 | Agent → bridge → existing `transition` | Send `review-apply` with the new plan and decision references. After fresh checks, invoke the selected transition with `--apply`. Report the RLS's observed state; publication continues in [scenario 15](#scenario-15-publish-or-deploy-the-release). |
+| 1 | User → `evidence` **[New]** | Ask Codex to use the evidence skill to prepare the release, or invoke `/verity-plane:evidence release-prepare` in Claude Code. The agent reads `skills/evidence/SKILL.md` and the project's release procedure. |
+| 2 | Agent and preparation owner | Identify the exact REL, WO, VREC, version, candidate, and intended outputs. Confirm applicable preparation authority; separately authorized builds run through the project's existing tools. Reuse eligible retained evidence. |
+| 3 | Agent → `scripts/harnessctl` | Run `prepare-release` with those inputs. It writes immediately, creating a `ready` RLS and evidence if checks pass. Do not use it as a preview. |
+| 4 | Agent → project tools | Complete required binding and candidate checks. Present their actual results with the exact ready RLS to the release owner. |
+| 5 | Release owner → existing decision process | Decide this release. Preparation, passing tests, and an agent's recommendation do not make the decision. |
+| 6 | Authorized actor → `scripts/harnessctl` | Run the transition checkpoint and preview for the selected RLS. Apply only the owner's exact decision after fresh checks. Report its observed state; [publication](#scenario-15-publish-or-deploy-the-release) remains separate. |
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | `skills/evidence/SKILL.md` guides `release-prepare` and `release-review`. | **New:** named entry points to the current release procedure. |
-| **Hook** | `PreToolUse` → `hooks/handler` checks supported shell calls before the bridge runs. | **Reuse:** host event. **New:** `hooks/hooks.json` registration and handler; neither approves release. |
-| **Script** | `bin/launcher` runs `scripts/bridge`; project scripts produce additional release evidence. | **New:** launcher and bridge. **Reuse:** SE Harness build replay, bundle-manifest, and distribution-binding scripts where this is the consumer project. |
-| **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes the launcher; `decision-review` presents exact inputs to the owner. | **Reuse:** shell tools. **New:** authenticated review interface. |
-| **Evaluator** | Validate coverage, prepare the record, and evaluate transitions. | **Reuse:** `prepare-release`, `check`, and `transition`. |
-| **Subagent** | Optional `evidence-reviewer` reports missing or inconsistent evidence to the main agent. | **New:** read-only role; use the [host-specific registrations](README.md#shared-component-names-and-calling-convention). Its report is not the release decision. |
-| **Human** | The release owner authorizes preparation, then decides the exact RLS. | **Reuse:** existing decision rights. **New:** `decision-review` binds the actor to each reviewed action. |
-| **External control** | Existing CI protects any selected remote build; the protected decision service backs `decision-review`. | **Reuse:** project controls where present. **New:** authenticated decision binding; publishing uses `publication-gate` in scenario 15. |
+| **Skill** | `skills/evidence/SKILL.md` guides preparation and the release handoff. | **New:** instructions using existing release procedures. |
+| **Hook** | `PreToolUse` calls `scripts/hook-handler` for supported actions. | **Reuse:** host event. **New:** adapter; it cannot approve release. |
+| **Script** | `scripts/harnessctl` runs the evaluator; project scripts build and bind evidence. | **New:** packaged entry point. **Reuse:** project release tools. |
+| **Tool/interface** | Codex `exec_command` or Claude Code `Bash` / `PowerShell` calls the scripts. | **Reuse:** shell tools and current decision process. |
+| **Evaluator** | `prepare-release`, `check`, and `transition` evaluate the selected record. | **Reuse:** existing CLI. |
+| **Subagent** | Optional `evidence-reviewer` identifies missing or inconsistent evidence. | **New:** read-only helper; it is not the release owner. |
+| **Human** | Authorize preparation, then decide the exact release. | **Reuse:** existing decision rights. |
+| **External control** | Existing project controls protect any remote build or decision route. | **Adapt:** verify actor authentication and permissions; no new generic service. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Coverage is incomplete or names different commits. | The evaluator refuses preparation. | Supply eligible coverage for one candidate and recheck. |
-| The version is already reserved. | Preparation refuses a conflicting record. | Inspect the existing RLS; the owner selects the appropriate next action. |
-| The RLS is ready but no release decision exists. | The proposed decision interface withholds apply. An actor-name argument alone is not authenticated authority today. | Obtain the owner's decision over the exact record, then recheck it. |
-| Evidence changes or the owner rejects the release. | Release does not proceed; history remains visible. | Follow the evaluator's remediation route with authorized scope. |
+| Coverage is incomplete or names different candidates. | Evaluator refuses preparation. | Supply eligible coverage for one candidate. |
+| Version or RLS already exists. | Inspect the existing result rather than retrying blindly. | Owner selects the appropriate next action. |
+| RLS is ready but the owner's decision is absent. | Stop at the decision handoff. | Owner decides the exact record; recheck before apply. |
+| Evidence changed or release was rejected. | Preserve the record and history. | Follow authorized remediation and the evaluator's next step. |
 
 ### 5. Example result
 
-Illustrative handoff before the release decision:
-
 > RLS-DEMO-001 is ready for version 1.2.0. Its verification records cover the selected candidate.
-> Preparation created the record and its evidence. No release decision or publication occurred.
-> The release owner must decide RLS-DEMO-001.
+> No release decision or publication occurred. Next: the release owner decides this record.
 
 ### 6. Implementation details
 
@@ -82,7 +73,7 @@ Illustrative handoff before the release decision:
 
 **Current implementation**
 
-The baseline above provides [`prepare_release()`](../../../se_harness/provenance.py), [decision rights](../../engineering/DECISION_RIGHTS.md), and [release procedures](../../engineering/WORKFLOW.json). Inspected command forms:
+Reuse [`prepare_release()`](../../../se_harness/provenance.py), [decision rights](../../engineering/DECISION_RIGHTS.md), and the [workflow](../../engineering/WORKFLOW.json):
 
 ```text
 harnessctl prepare-release REPO --id RLS-DEMO-001 --release-contract REL-DEMO-001 --verification-record VREC-DEMO-001 --work-order WO-DEMO-001 --version 1.2.0 --owner release-owner --json
@@ -90,34 +81,31 @@ harnessctl check REPO --artifact RLS-DEMO-001 --checkpoint transition --target r
 harnessctl transition REPO --set RLS-DEMO-001=released --decision RLS-DEMO-001=release-owner --json
 ```
 
-Preparation writes immediately; it has no preview flag. The transition shown only previews; authorized application adds `--apply`. The command's `--owner` or `--decision` value does not authenticate a human. The RLS follows the candidate commit it records; it cannot bind its own commit. Only the selected RLS changes state.
+Preparation writes immediately. The transition shown previews; an authorized application adds `--apply`. `--owner` and `--decision` do not authenticate a human. The RLS records an earlier candidate commit; it cannot bind its own commit. Only the selected record changes state.
+
+For **SE Harness itself**, read [Release sequences](../developing-se-harness.md#release-sequences) first. The order is: authorized `repository_tools.release_build replay`, then `scripts/create_release_bundle_manifest.py`; `prepare-release`; `scripts/bind_release_distribution.py`; `release-candidate-replay.yml`; release-owner decision. These existing project tools are not portable plugin defaults.
 
 **Proposed additions**
 
-The `evidence` skill's `release-prepare` mode builds the preparation request; `release-review` resumes with an existing ready RLS. The new bridge operations are `review-preview` and `review-apply`. The first records exact inputs and intended effects; it must not simulate preview by running `prepare-release`. The second authenticates the decision and rechecks the inputs before the evaluator writes. `decision-review` is the proposed human interface; an agent-supplied `--owner` or `decision_ref` is not proof by itself.
-
-Consumer-specific build and binding remain in the project's release process. For **SE Harness itself**, [Release sequences](../developing-se-harness.md#release-sequences) defines this order: authorized `repository_tools.release_build replay` and `scripts/create_release_bundle_manifest.py` produce the candidate bundle; `prepare-release` creates the ready RLS; `scripts/bind_release_distribution.py` binds that bundle; `release-candidate-replay.yml` supplies the replay evidence before the release decision. An earlier retained build can satisfy the build step. The skill reads this procedure instead of inventing generic build commands. These are existing project components, not portable plugin defaults.
+The evidence skill presents the exact inputs and outputs before any writing command and follows the existing decision process. No extra release API or decision service is introduced. Human authentication and decision-to-content binding remain control gaps to enforce independently; a skill cannot supply that guarantee.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Exact contract, verification records, work orders, version, preparation authority, and later release decision.
-- **Outputs:** Ready RLS, retained evidence, then the observed decision result.
-- **Writes:** New RLS and evaluator evidence; later selected lifecycle fields. No tag, upload, deployment, or inferred changes to included records.
+- **Inputs:** Contract, verified candidate coverage, work orders, version, preparation authority, later release decision.
+- **Outputs:** Ready RLS and evidence, then the observed decision result.
+- **Writes:** RLS and retained evidence; later only its selected lifecycle fields. No publication.
 
 **Host differences**
 
-- **Codex:** Explicitly request the `evidence` skill; the agent calls the launcher with `exec_command`. `PreToolUse` uses the documented `Bash` matcher for this shell tool.
-- **Claude Code:** `/verity-plane:evidence release-prepare` or `release-review` selects the proposed mode. The agent calls the launcher with `Bash` or native `PowerShell`. In both hosts, shell permissions and hook success do not prove a release decision. See the [host comparison](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits).
+Both hosts use the packaged CLI and project procedure. Claude Code invokes the skill as `/verity-plane:evidence release-prepare`; Codex users request it by name. Shell permission and hook success are not release approval.
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Authorized exact inputs produce one ready record; a later release decision changes only that record.
-- **Refusal:** Missing coverage, duplicate version, or missing owner decision prevents the corresponding operation.
-- **Recovery:** After interruption, inspect whether the RLS exists before retrying. Preserve rejected and historical records.
+Check exact candidate coverage, immediate preparation writes, and decision handoff. Verify an interrupted preparation is inspected before retry and rejected history remains intact.
 
 **Open questions**
 
-Choose the protected service behind `decision-review` and prove its actor/content binding before enabling `review-apply`. Define how each consumer registers its release-build and evidence operations; the plugin must not assume SE Harness's own scripts exist everywhere.
+Demonstrate authenticated decision enforcement in each consumer's process before claiming the plugin enforces human approval. Keep the read-only evidence reviewer optional.
 
 </details>
 
@@ -125,62 +113,59 @@ Choose the protected service behind `decision-review` and prove its actor/conten
 
 ### 1. Purpose and starting point
 
-**Purpose:** Deliver the approved release through the project's protected publication process.
+**Purpose:** Deliver the approved release through the project's controlled publication process.
 
 - **Starts when:** The accountable owner requests a specific publication or deployment.
-- **Requires:** The selected released RLS, exact destination and candidate, applicable evidence, and authority for that external action.
-- **Successful result:** The requested effect is observed at its destination, with a truthful report of completed and pending steps.
+- **Requires:** A released RLS, exact deliverables/destination, applicable evidence, and authority for that external action.
+- **Successful result:** Each requested external effect is observed and reported accurately.
 
 ### 2. Workflow
 
 ```text
-User invokes evidence publish [New]
+User → evidence [New] → inspect released record and project procedure
         ↓
-publication-preview [New] → Owner reviews the exact external action
+Present exact release, destination, and workflow to the owner
         ↓
-publication-submit [New] → publication-gate [New] checks authority
+Human operator runs the existing protected publication workflow
         ↓
-Existing project workflow runs → publication-status [New] reports results
+Agent reads workflow and destination results → report actual delivery
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `evidence` skill **[New]** | **Codex:** ask “Use the verity-plane evidence skill to publish this release.” **Claude Code:** invoke `/verity-plane:evidence publish`. The agent reads the project's publication procedure and selects the released RLS and destinations. |
-| 2 | Agent → shell tool → `scripts/bridge` **[New]** | Invoke the launcher with a `publication-preview` request. The bridge asks `publication-gate` **[New]** to resolve the approved record, immutable deliverables, configured workflow, and destinations. Return these exact effects with `plan_id`; nothing is dispatched. |
-| 3 | External-action owner → `decision-review` **[New]** | Review the plan and authorize its external effects. Return an authenticated `decision_ref`, or reuse one that already covers them. A released RLS alone does not supply this decision. |
-| 4 | Agent → bridge → `publication-gate` **[New]** | Send `publication-submit` with `plan_id` and `decision_ref`. The protected service rechecks current authority and identities, then dispatches only the configured project workflow. Return `operation_id` and, when available, the provider's run ID. |
-| 5 | Existing project publication workflow | Run its protected jobs and environment decisions. In SE Harness, `publish-pypi.yml` on `main`, with input `release_record`, qualifies and publishes the bound release; see the concrete mapping below. |
-| 6 | Agent → bridge `publication-status` **[New]** | Query `operation_id`. Read workflow results and destination observations, then report each completed, failed, pending, or unknown effect. A dispatched or green workflow is not enough to assert that every destination serves the expected bytes. |
+| 1 | User → `evidence` **[New]** | Ask Codex to use the evidence skill for publication, or invoke `/verity-plane:evidence publish` in Claude Code. The agent reads the project's publication procedure. |
+| 2 | Agent → existing read tools | Identify the released RLS, immutable deliverables, destination, workflow, and required external-action decision. Present those exact effects to the owner. |
+| 3 | Accountable owner → existing project controls | Authorize the external action. A released RLS or local shell permission alone does not authorize publication. |
+| 4 | Human operator → project workflow | Dispatch the existing workflow through its protected interface. The initial plugin hands this action to the human; automated dispatch is deferred until deterministic authority controls are demonstrated. |
+| 5 | Existing workflow | Check and publish the approved inputs. For SE Harness, use `publish-pypi.yml` on `main` with the `release_record` input; details below. |
+| 6 | Agent → existing GitHub/destination read interfaces | Inspect the run and destination objects. Report each completed, failed, pending, or unknown effect. A green workflow alone is not proof that every destination serves the intended bytes. |
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | `skills/evidence/SKILL.md`, `publish` mode, guides the handoff. | **New:** named entry point to the configured project process. |
-| **Hook** | `PreToolUse` → `hooks/handler` inspects supported local bridge calls. | **Reuse:** host event. **New:** local handler; it does not protect remote credentials. |
-| **Script** | `bin/launcher` runs `scripts/bridge` for `publication-preview`, `publication-submit`, and `publication-status`. | **New:** bounded client operations. **Reuse:** existing project publication scripts. |
-| **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` calls the launcher; the gate uses the provider's workflow API. | **Reuse:** host tools and provider API. **New:** `decision-review` and the gate's configured dispatch mapping. |
-| **Evaluator** | Check the RLS and applicable external-action prerequisites. | **Reuse:** selected `check` and existing release contracts. |
-| **Subagent** | Not used. | **Not used:** publication credentials stay outside reviewer roles. |
-| **Human** | Decide the specific external action in `decision-review`; complete any required environment review. | **Reuse:** accountable owner and existing environment decisions. **New:** exact plan binding. |
-| **External control** | `publication-gate` enforces authority at dispatch and each privileged effect. | **New:** protected service binding. **Adapt:** project credentials, environments, and bypass controls. |
+| **Skill** | `skills/evidence/SKILL.md` prepares the publication handoff and reads results. | **New:** instructions for the current project procedure. |
+| **Hook** | No hook authorizes or performs publication. | **Not used:** local intervention cannot protect remote credentials. |
+| **Script** | Existing project scripts qualify and publish deliverables. | **Reuse:** project publication implementation. |
+| **Tool/interface** | Human uses the workflow UI; agent reads existing run/destination interfaces. | **Reuse:** project and provider interfaces. |
+| **Evaluator** | RLS checks and release contracts supply prerequisites. | **Reuse:** existing evaluator; no generic publish command. |
+| **Subagent** | Not used. | **Not used:** publication needs no extra agent. |
+| **Human** | Decide the exact external action and dispatch the workflow. | **Reuse:** accountable owner and operator roles. |
+| **External control** | Workflow permissions, protected environments, and credentials enforce publication boundaries. | **Adapt:** verify every privileged route and bypass setting. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| There is no authority for the exact destination. | The proposed protected service refuses dispatch or publication. | Obtain the applicable decision; a local tool grant is insufficient. |
-| Deliverable identity differs from the record. | The publication process rejects those bytes. | Investigate through authorized remediation; preserve existing records. |
-| Some destinations succeeded and others failed. | The result reports each observed effect. There is no blanket rollback claim. | Inspect remote state, then use the project's authorized retry or repair path. |
-| A request times out after dispatch. | Its outcome is unknown. | Find the existing run or remote object before retrying; avoid duplicate effects. |
+| Exact external-action authority is missing. | Stop before dispatch. | Obtain the accountable decision over those effects. |
+| Deliverable identity differs from the release record. | Publication must refuse the wrong bytes. | Investigate through authorized remediation. |
+| Only some destinations succeeded. | Report separate outcomes; no blanket rollback claim. | Inspect remote state and follow the authorized repair/retry procedure. |
+| Dispatch or publication times out. | Outcome is unknown. | Locate the existing run/object before any retry. |
 
 ### 5. Example result
 
-Illustrative partial result, where retry is outside the original authorization:
-
-> Version 1.2.0 is available in the approved package registry with the expected digest. Documentation deployment failed.
-> The package remains published. The release is not reported as fully delivered.
-> The deployment owner must authorize retrying the failed documentation deployment.
+> Version 1.2.0 is available in the approved registry with the expected digest. Documentation deployment failed.
+> The package remains published. Next: inspect the failed deployment and its authorized retry path.
 
 ### 6. Implementation details
 
@@ -189,36 +174,33 @@ Illustrative partial result, where retry is outside the original authorization:
 
 **Current implementation**
 
-At the stated baseline, [PROC-EXTERNAL-ACTION](../../engineering/WORKFLOW.json) describes the decision boundary. There is no generic `harnessctl publish` operation. The inspected [`publish-pypi.yml`](../../../.github/workflows/publish-pypi.yml) is this repository's implementation, not a portable consumer default. It resolves a released record on `main`, calls [release qualification](../../../.github/workflows/release-qualification.yml), and declares a `pypi` environment. Its live reviewer and bypass settings require separate verification; the YAML does not prove them.
+[PROC-EXTERNAL-ACTION](../../engineering/WORKFLOW.json) owns the authority boundary. There is no generic `harnessctl publish` command.
+
+For **SE Harness itself**, [publish-pypi.yml](../../../.github/workflows/publish-pypi.yml) runs on `main` with sole input `release_record=RLS-ID`. Its `resolve` job reads committed release authority; `qualify` calls [release qualification](../../../.github/workflows/release-qualification.yml); `github_release`, `pypi`, and `pages` perform separate effects; `observe` retains `release-result.json` and public observations. Read [Release sequences](../developing-se-harness.md#release-sequences) for the complete project procedure.
+
+The declared `pypi` environment does not prove live reviewer settings or protect every GitHub/Pages path. Verify those settings and alternate credentials independently.
 
 **Proposed additions**
 
-`publication-gate` is a proposed protected service, not an existing host hook or `harnessctl` command. The bridge exposes three named client operations: `publication-preview` returns `plan_id`; `publication-submit` verifies that plan and `decision_ref`, then returns `operation_id`; `publication-status` reads the existing operation. Workflow, permitted ref, destinations, and credential policy come from the service's protected project configuration. The agent cannot submit an arbitrary workflow or destination as an approved replacement.
-
-For **SE Harness itself**, the dispatch mapping is the existing `.github/workflows/publish-pypi.yml`, ref `main`, with the sole workflow input `release_record=RLS-ID`. Its `resolve` job reads committed authority; `qualify` calls `release-qualification.yml`; `github_release`, `pypi`, and `pages` perform the separate effects; `observe` retains `release-result.json` and public observations. The new gate must cover every privileged path, including direct workflow dispatch and alternate credentials. A `pypi` environment alone does not establish protection for GitHub or Pages. This mapping names existing workflow behavior; it does not claim its live controls already satisfy the proposal.
-
-Until that protection is demonstrated, the skill hands the reviewed request to the human operator. See [incident #347](https://github.com/mmzen/se_harness/issues/347). A local bridge refusal cannot prevent another client from using unprotected credentials.
+Add the evidence skill's publication handoff. Reuse each project's actual workflow, without inventing a universal publication service. As [incident #347](https://github.com/mmzen/se_harness/issues/347) showed, local instructions alone cannot enforce the authority boundary. Keep dispatch with the human until checks are enforced where the privileged effects occur.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Released RLS, destination, approved action, immutable deliverable identities, and workflow reference.
-- **Outputs:** Run identifier, per-destination results, observed identities, and remaining decisions.
-- **Writes:** Only authorized external effects and their retained evidence. This repository also has separately controlled latest markers described in [Release sequences](../developing-se-harness.md#release-sequences).
+- **Inputs:** Released RLS, immutable deliverables, destination, workflow, external-action decision.
+- **Outputs:** Run identifier, observed destination identities, partial failures, pending decisions.
+- **Writes:** Existing workflow's explicitly authorized external effects and evidence; the skill itself reads and presents.
 
 **Host differences**
 
-- **Codex:** `exec_command` invokes `bin/launcher`; request the `evidence` skill by name.
-- **Claude Code:** `Bash` or `PowerShell` invokes the same launcher after `/verity-plane:evidence publish`. Both hosts use the same remote gate. [Local hook coverage](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement) does not protect calls made elsewhere.
+Both hosts hand off to the same project publication process. Native shell tools or connectors do not gain publication authority merely because they are available.
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Approved immutable inputs produce the expected destination objects and verifiable results.
-- **Refusal:** Missing authority or wrong digests are denied even with local hooks disabled.
-- **Recovery:** A timed-out dispatch is reconciled against its existing run before any retry. Partial publication never triggers an automatic destructive undo.
+Verify publication refusal for wrong bytes or missing authority with local hooks disabled. Inspect partial and timed-out runs before retry. Cover direct dispatch, alternate credentials, and administrator bypasses.
 
 **Open questions**
 
-Choose the service behind `publication-gate`, its authenticated decision store, and its project configuration format. Verify all credential, direct-dispatch, and administrator routes before claiming enforcement; test status reconciliation for partial or timed-out publication.
+Which consumer workflow and credential controls satisfy the required boundary? Until proven, describe the plugin as preparing publication, not enforcing or autonomously performing it.
 
 </details>
 
@@ -226,65 +208,58 @@ Choose the service behind `publication-gate`, its authenticated decision store, 
 
 ### 1. Purpose and starting point
 
-**Purpose:** Restore or update the plugin without silently changing a project's governing version.
+**Purpose:** Restore or update installation without silently changing the project's governing version.
 
-- **Starts when:** A user requests an upgrade, or diagnostics identify a missing or incompatible installation component.
-- **Requires:** The selected host, repository lock, current and target component identities, trusted distribution metadata, and authority for the proposed changes.
-- **Successful result:** The selected components work together, owner content remains intact, and the report identifies every version or file change.
+- **Starts when:** The user requests maintenance or diagnostics identify an installation problem.
+- **Requires:** Current/target identities, trusted plugin distribution, repository ownership information, and authority for the changes.
+- **Successful result:** Components are compatible, owner content is preserved, and each change is reported.
 
 ### 2. Workflow
 
 ```text
-User invokes setup maintain [New]
+User → setup [New] → inspect plugin, required version, and doctor result
         ↓
-bin/launcher runtime-status [New] → Existing identity / doctor checks
+Choose compatible plugin reinstall/update OR explicit repository upgrade
         ↓
-Select plugin update, runtime repair, or repository upgrade
-        ↓
-Owning component previews → Authorized apply → Fresh readiness check
+Apply the selected authorized change → repeat readiness
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `setup` skill **[New]** | **Codex:** ask “Use the verity-plane setup skill to inspect and maintain this installation.” **Claude Code:** invoke `/verity-plane:setup maintain`. The agent reads `skills/setup/SKILL.md`; it does not invoke `harness-orient` while installation may be broken. |
-| 2 | Agent → shell tool → `bin/launcher` **[New]** | Use `exec_command`, `Bash`, or `PowerShell` to call `runtime-status --repo REPO --json`. Inspect the repository lock and host registration. Where a trusted runtime is available, the bridge runs existing `identity` and `doctor`. Report which layer needs attention. |
-| 3 | Agent following `setup` → owner | Present separate plugin, runtime, and repository changes, with current and target identities. Resolve missing authority for only the selected changes; repository policy determines whether a work order is required. |
-| 4a | User → existing plugin manager | For a **plugin update**, use Codex **Plugins** / `/plugins` or Claude Code `/plugin`. Select the intended plugin version, then reload as in [scenario 1](setup-and-sessions.md#scenario-1-install-and-activate-the-plugin). This does not authorize changing the repository's governing version. |
-| 4b | Agent → `bin/launcher` **[New]** | For a **runtime repair**, call `runtime-preview --repo REPO --json` to plan the exact locked runtime. After authorization, call `runtime-prepare --plan-id PLAN_ID --json`. Verify staged bytes and identity before activation; repository files remain unchanged. |
-| 4c | Agent → launcher → `scripts/bridge` **[New]** | For a **repository upgrade**, first prepare the explicitly selected target released runtime. Send `repository-preview` with action `upgrade` and that target identity; it calls existing `upgrade` without `--apply`. Review the returned file plan. `repository-apply` rechecks `plan_id` and authority, then calls `upgrade --apply`, retaining installer evidence where required. |
-| 5 | Agent following `setup` → host controls and bridge | Inspect host registration and hook trust separately. Then call `session-ready` **[New]** to recheck the resulting runtime and managed files and reload governance using [scenario 3](setup-and-sessions.md#scenario-3-start-a-session). Report each layer's observed result. Resume the selected work only when its applicable readiness checks pass. |
+| 1 | User → `setup` **[New]** | Ask Codex to use setup for maintenance, or invoke `/verity-plane:setup maintain` in Claude Code. The agent reads the required repository version and installed plugin identity. |
+| 2 | Agent → `scripts/harnessctl` | Run identity and `doctor` where the trusted command is available. Report whether the package, host registration, or repository installation needs attention. |
+| 3a | User → plugin manager | For a damaged or incompatible package, reinstall a verified compatible plugin version. This restores the bundled runtime; no separate runtime manager is needed. Reload the plugin and recheck hook trust. |
+| 3b | Agent and owner → `scripts/harnessctl` | For an explicitly requested repository upgrade, select the plugin containing the target released evaluator. Run `upgrade` without `--apply`, review the file plan and resolve required work authority, then run `upgrade --apply`. Retain installer evidence where required. |
+| 4 | Agent following `setup` | Run `doctor` and the readiness routine from [scenario 3](setup-and-sessions.md#scenario-3-start-a-session). Report the plugin version, repository version, changed files, and actual hook status before resuming work. |
 
-Steps 4a–4c are alternatives; a runtime repair does not require a repository upgrade. A `SessionStart` hook may report a problem, but it never starts maintenance automatically.
+Steps 3a and 3b are alternatives. A plugin update does not authorize changing the repository lock. A startup hook reports problems; it never starts an upgrade.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | `skills/setup/SKILL.md`, `maintain` mode, diagnoses and guides the selected repair. | **New:** setup mode. Existing `harness-orient` is used only after readiness is restored, if inspection is requested. |
-| **Hook** | `SessionStart` → `hooks/handler` can report a readiness failure. | **Reuse:** host event. **New:** handler; no automatic update or download. |
-| **Script** | `bin/launcher` owns runtime repair; `scripts/bridge` owns reviewed installer invocation and readiness checks. | **New:** named wrappers around the existing evaluator and installer. |
-| **Tool/interface** | Host plugin manager changes the plugin; `exec_command`, `Bash`, or `PowerShell` runs the launcher. | **Reuse:** host interfaces. **New:** runtime and repository plan binding. |
-| **Evaluator** | Plan and apply managed-file changes; check integrity. | **Reuse:** `upgrade`, `doctor`, identity checks, and installer conflict handling. |
-| **Subagent** | Not used. | **Not used:** deterministic diagnostics suffice. |
-| **Human** | Authorize the selected changes and resolve conflicts. | **Reuse:** installation or repository owner; normal repository work authority still applies. |
-| **External control** | Control plugin supply and runtime downloads. | **Adapt:** host installation controls; **New:** trusted release metadata and compatibility checks. |
+| **Skill** | `skills/setup/SKILL.md` diagnoses and guides the selected maintenance. | **New:** setup maintenance instructions. |
+| **Hook** | `SessionStart` can report failure and recheck after repair. | **Reuse:** event. **New:** shared `scripts/hook-handler`; no automatic upgrade. |
+| **Script** | `scripts/harnessctl` runs the selected bundled evaluator. | **New:** packaged entry point. **Reuse:** installer implementation. |
+| **Tool/interface** | Plugin manager reinstalls/updates; shell tools invoke the CLI. | **Reuse:** host interfaces. |
+| **Evaluator** | `identity`, `upgrade`, and `doctor` inspect and change managed installation. | **Reuse:** current commands and conflict handling. |
+| **Subagent** | Not used. | **Not used:** diagnostics and owner review suffice. |
+| **Human** | Choose the change and resolve conflicts or required work authority. | **Reuse:** installation and repository ownership. |
+| **External control** | Trusted plugin supply and host installation controls protect delivery. | **Adapt:** release authenticity and compatibility checks. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| A compatible runtime is missing offline. | The launcher refuses governed operations; it does not use ambient Python. | Restore the trusted cache or authorize downloading the exact supported runtime. |
-| A managed file is customized or its ownership is unclear. | The installer refuses the unsafe apply. | The owner resolves the conflict with a reviewed repair; the plugin does not overwrite it. |
-| The plugin update is incompatible with the locked evaluator. | The proposed compatibility check blocks that pairing. | Select a compatible plugin build, or separately authorize a repository upgrade. |
-| An apply or host registration fails. | Report the actual restored and remaining state. | Inspect before retrying. Do not assume all layers rolled back together. |
+| Required evaluator differs from the bundled version. | Normal governed operations refuse that pairing. | Install a compatible plugin or authorize an explicit repository upgrade. |
+| Compatible package is unavailable offline. | Do not substitute ambient Python or another version. | Restore the verified package through the host's installation route. |
+| Managed content conflicts or ownership is unclear. | Installer refuses unsafe application. | Owner resolves the specific conflict; preview again. |
+| Apply or host registration fails. | Report actual restored and remaining state. | Inspect before retry; do not assume all layers rolled back. |
 
 ### 5. Example result
 
-Illustrative runtime repair:
-
-> The missing runtime was restored and installation checks passed. This repository still uses evaluator 0.15.0.
-> No managed project files or lifecycle states changed.
-> Reload the session context before resuming the selected work.
+> A compatible plugin was reinstalled and readiness passed. This repository still uses evaluator 0.15.0.
+> No managed project files or lifecycle states changed. Next: resume the selected work.
 
 ### 6. Implementation details
 
@@ -293,7 +268,7 @@ Illustrative runtime repair:
 
 **Current implementation**
 
-The inspected baseline has [`plan_install()` and `apply_changes()`](../../../se_harness/installer.py) and the [simple upgrade contract](../../engineering/released-evaluator-boundary/specifications/SPEC-REB-012.md). There is no generic repair command. For a repository upgrade, the launcher selects the explicitly chosen target released evaluator, then uses:
+Reuse the [installer](../../../se_harness/installer.py) and [simple upgrade contract](../../engineering/released-evaluator-boundary/specifications/SPEC-REB-012.md):
 
 ```text
 harnessctl upgrade REPO --json
@@ -301,35 +276,30 @@ harnessctl upgrade REPO --apply --json
 harnessctl doctor REPO --json
 ```
 
-The first command plans; the second writes. Ordinary operations continue to use the repository's locked evaluator. The installer has snapshot restoration for caught failures and reports incomplete rollback. This does not prove recovery from every process crash or atomicity across the host, cache, and repository.
+The first command plans; the second writes using the explicitly selected target released evaluator. No generic repair command exists. Snapshot restoration handles caught installer failures and reports incomplete rollback; it does not prove crash-safe recovery across plugin, host, and repository.
 
 **Proposed additions**
 
-The `setup maintain` mode routes each repair to its owner. The proposed launcher extends `runtime-preview` and `runtime-status` with `--repo REPO` for the locked runtime; preview also accepts `--version TARGET_VERSION` for an explicitly selected upgrade target. These are **New** options. Selecting a target for preparation does not change the repository lock or the runtime used for ordinary work. `runtime-prepare` consumes the exact returned plan as in scenario 1.
+Bundle one exact evaluator per plugin release. Normal calls require a version match. The setup skill allows the existing explicit `upgrade` path to use a selected target evaluator; it must not bypass identity or installer checks. No automatic version resolver or separate runtime cache manager is introduced.
 
-The bridge's `repository-preview` / `repository-apply` operations from scenario 2 also accept action `upgrade`. Their plan binds the target runtime, prior lock, managed/owner bytes, changes, evidence path, and applicable authority. Separate existing dry-run/apply calls do not provide that binding. If a prior digest fails, diagnostics may report it, but ordinary mutation remains blocked; only an explicitly authorized repair route may address it.
-
-Plugin rollback selects a compatible build; repository downgrade is not an assumed repair method. Remove duplicate skill or Codex `.codex/agents/` registrations only through an ownership-aware migration. Preserve governance and evidence on disconnect or plugin removal; uninstalling the host plugin does not prove project registrations were cleaned up.
+Preserve governance and evidence during plugin removal or rollback. Remove duplicate skills or optional Codex agent registrations only through supported ownership-aware migration, never by deleting hash-locked files manually.
 
 **Inputs, outputs, and writes**
 
-- **Inputs:** Exact current/target identities, lock, ownership information, repair plan, and relevant authorization.
-- **Outputs:** Per-layer result and fresh health checks.
-- **Writes:** Selected host registration/cache changes; managed files and lock only for authorized repository changes. Optional `--evidence-output` retains installer evidence. This repository requires that evidence for a governor transition; see [Advancing the root evaluator](../developing-se-harness.md#advancing-the-root-evaluator). No separate evaluator-upgrade approval packet is reintroduced.
+- **Inputs:** Current/target identities, lock, ownership information, reviewed changes, applicable authority.
+- **Outputs:** Per-layer results and fresh readiness checks.
+- **Writes:** Selected plugin/host changes; managed files and lock only for authorized repository upgrades. Optional `--evidence-output` retains installer evidence. This repository requires it for a governor transition; see [Advancing the root evaluator](../developing-se-harness.md#advancing-the-root-evaluator). No separate evaluator-upgrade approval packet is introduced.
 
 **Host differences**
 
-- **Codex:** **Plugins** / `/plugins` owns plugin management; `exec_command` calls the launcher. Use persistent `PLUGIN_DATA` for cached runtimes and resolve the current `PLUGIN_ROOT` after an update. Recheck hook trust and project agent registrations.
-- **Claude Code:** `/plugin` owns plugin management and `/reload-plugins` reloads definitions; `Bash` or `PowerShell` calls the launcher. Use `CLAUDE_PLUGIN_DATA` and the current `CLAUDE_PLUGIN_ROOT`, not a remembered cache path. Consult the [host differences](../plugin-installation-proposal-2026-09-06.md#native-capabilities-and-their-limits) and [migration plan](../plugin-installation-proposal-2026-09-06.md#distribution-updates-and-migration).
+Use Codex **Plugins** / `/plugins` or Claude Code `/plugin` for package changes. Resolve the current `PLUGIN_ROOT` / `CLAUDE_PLUGIN_ROOT` after updates, rather than remembering an old cache path. Claude Code's persistent plugin data survives updates but is normally removed on final uninstall; durable governance stays in the repository. [Plugin data](https://code.claude.com/docs/en/plugins-reference#persistent-data-directory).
 
 **Checks that demonstrate the behavior**
 
-- **Success:** Updating the plugin or repairing its runtime leaves repository policy unchanged; an authorized repository upgrade changes only its reviewed owned content.
-- **Refusal:** Wrong identity, owner-content conflict, or incompatible versions prevent the selected operation.
-- **Recovery:** Interrupt each layer independently; preserve owner bytes and historical evidence, then demonstrate retry or compatible plugin rollback.
+Test compatible reinstall without lock changes, explicit repository upgrade, wrong-version refusal, owner-content conflicts, and interrupted repair. Verify both the new installation and historical evidence remain truthful.
 
 **Open questions**
 
-Which host versions and evaluator releases will the first plugin support? Demonstrate plan binding, crash recovery, and ownership-aware registration cleanup for that matrix.
+Publish a clear plugin/evaluator compatibility table and prove supported rollback. Projects needing different governing versions may need different compatible plugin installations; multi-version management is deferred.
 
 </details>
