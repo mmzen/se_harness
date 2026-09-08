@@ -2,7 +2,7 @@
 id = "WO-DST-026"
 type = "work_order"
 title = "Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-09-08T21:39:59Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at fd4584ccd47110d137fb87eeea40a2fa0f726724 (check-run 102246942278, source github-checks). Start decided by the delegated-executor role on 2026-09-08 under the execution delegation class WO-DST-026 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of this branch: main at fd4584ccd47110d137fb87eeea40a2fa0f726724, the merge of WO-CIP-007, where the required validate check is success. Branch wo/dst-026-managed-template off main at fd4584cc. This decision authorizes only the declared execution scope: the standard template engineering-harness.yml, se_harness/installer.py, tests/, the two notes, the amendment record on SPEC-ECP-006, the four requirements, SPEC-DST-027, VER-DST-027, this work order, the domain index and the evidence file. It authorizes no change to any hash-locked root managed byte, the lock, the root .gitignore block, the installer's transaction rules, the skills or the gate source's behaviour, and no build, release, publication or adoption. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T22:14:12Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 18af8c09b7d66d331866370078b043cb148a8e6c (check-run 102255329206, source github-checks). Completion decided by the delegated-executor role on 2026-09-09 under the execution delegation class WO-DST-026 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of pull request #420, main at fd4584cc. Rules DST-MWF-001 to -013 of SPEC-DST-027 are met and mapped to evidence in docs/engineering/harness-distribution/evidence/WO-DST-026/WO-DST-026-handoff.md and WO-DST-026-verification.md; DST-MWF-014 is carried to the root-adoption work order of the carrying release. The retained handoff check from fd4584cc completed, nine predicates passing, 11 changed paths in scope, result ae487118 at its fixed point. Released 0.16.0: validate 1,432 artifacts, 0 errors, 44 W013; doctor 97 PASS, every managed path matching; review preflight PASS. Suite 1,098 tests, 11 added, at the Windows baseline; the hosted suite passed. VER-DST-027 scenarios A, B and C ran outside the checkout from a non-promotable candidate wheel: install writes hash markers, doctor passes; a repository initialized by released 0.16.0 upgrades with .gitignore as a fragment update, owner bytes identical, doctor passing, and a block edited inside is refused unchanged; the embedded readers print a refusal and exit with its status on an empty result and judge parsed results as before, no traceback. Lanes: five of five success at the packet head 18af8c09; at 3dda64d1 the managed lane was blocked on QGP-G4I-EVIDENCE only. Every root managed byte is identical to main. Disclosed: the environment inventory reads three names where the rule counted two; an empty result with status 0 fails with 1; no existing test moved; the work order's completion sentence gives the decision to the engineering owner while its approval delegates DR-WO-COMPLETE, and the owner refuses this completion by rejecting the pull request. Completion approves nothing: record preparation is this role's separate decision; verification and the merge remain the human owners."
 +++
 
 # Work Order: Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory
