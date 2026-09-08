@@ -245,17 +245,24 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.assertTrue(error.startswith("harnessctl: WEX220: no procedure binds doctor"), error)  # ECP-PRM-017: the refusal carries its code
 
     def test_dashboard_json_passes_the_engine_refusal_and_error_through(self) -> None:
-        # WO-ECP-027 (ECP-COR-009, ECP-COR-010): engine exit 2 is a refusal, engine exit 1 keeps its stderr.
-        import subprocess
+        # WO-ECP-027 (ECP-COR-009, ECP-COR-010): engine exit 2 is a refusal, engine exit 1 keeps its
+        # standard error; since WO-ECP-034 (ECP-ENG-003) the engine runs in-process.
+        import sys
 
-        refused = subprocess.CompletedProcess(args=[], returncode=2, stdout="", stderr="GenerationError: bad root\n")
-        with mock.patch("se_harness._process.subprocess.run", return_value=refused):
+        def refusing(argv):
+            print("GenerationError: bad root", file=sys.stderr)
+            return 2
+
+        def failing(argv):
+            print("dashboard: manifest mismatch", file=sys.stderr)
+            return 1
+
+        with mock.patch("se_harness.cli.generate_harness_dashboard.main", side_effect=refusing):
             code, output, error = invoke("dashboard", str(self.root), "--json")
         self.assertEqual(2, code)
         self.assertEqual("", output)
         self.assertIn("GenerationError: bad root", error)
-        failed = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="dashboard: manifest mismatch\n")
-        with mock.patch("se_harness._process.subprocess.run", return_value=failed):
+        with mock.patch("se_harness.cli.generate_harness_dashboard.main", side_effect=failing):
             code, payload, error = self.json_of("dashboard", str(self.root), "--json")
         self.assertEqual(1, code, error)
         self.assertEqual("failed", payload["outcome"])
@@ -272,16 +279,20 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.assertEqual("WEX-ECP-014: unknown artifact ID: WO-ZZZ-999\n", output)
         self.assertEqual("", error)
 
-    def test_an_engine_launch_timeout_is_a_refusal(self) -> None:
-        # WO-ECP-027 (ECP-COR-014): the engine launches are bounded and a timeout is a refusal.
+    def test_the_engine_runs_in_process_and_its_exit_code_is_ours(self) -> None:
+        # WO-ECP-034 (SPEC-ECP-024 ECP-ENG-003): no engine subprocess exists to time out; the
+        # validator runs in-process and the command returns its exit code.
         import subprocess
 
-        with mock.patch("se_harness._process.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
+        with mock.patch("se_harness._process.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1)) as run:
             code, output, error = invoke("validate", str(self.root))
-        self.assertEqual(2, code)
-        self.assertEqual("", output)
-        self.assertTrue(error.startswith("harnessctl: "), error)
-        self.assertEqual(1800, run.call_args.kwargs.get("timeout"))
+        self.assertEqual(0, code, error)
+        self.assertIn("Engineering artifact validation: PASS", output)
+        self.assertFalse(run.called)
+        with mock.patch("se_harness.cli.validate_engineering_artifacts.main", return_value=1) as main:
+            code, output, error = invoke("validate", str(self.root), "--json")
+        self.assertEqual(1, code)
+        self.assertEqual(["--root", str(self.root.resolve()), "--json"], main.call_args.args[0])
 
     def test_every_subprocess_launch_in_the_package_carries_a_timeout(self) -> None:
         # WO-ECP-027 (ECP-COR-013 to ECP-COR-015): the inspection VER-ECP-023 names.
