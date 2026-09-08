@@ -140,8 +140,9 @@ class ArtifactAuthoringTests(unittest.TestCase):
                 content = destination.read_text(encoding="utf-8")
                 self.assertIn(f'id = "{artifact_id}"', content)
                 self.assertIn(f'type = "{artifact_type}"', content)
-                # a decision has no draft state; it is created open (SPEC-DCM-001 rule 4)
-                self.assertIn('status = "open"' if artifact_type == "decision" else 'status = "draft"', content)
+                # a decision has no draft state; it is created open (SPEC-DCM-001 rule 4), and a
+                # risk is created identified (SPEC-RSK-010 RSK-MGT-007)
+                self.assertIn({"decision": 'status = "open"', "risk": 'status = "identified"'}.get(artifact_type, 'status = "draft"'), content)
         self.assertFalse((self.root / "docs/engineering/simulation/README.md").exists())
 
     def test_create_dry_run_conflict_and_invalid_input_never_overwrite(self) -> None:

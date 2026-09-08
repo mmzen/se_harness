@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-189 codes across 28 registered prefixes.
+195 codes across 30 registered prefixes.
 
 ## How to read a code
 
@@ -34,6 +34,7 @@ but are not diagnostics and are not listed here.
 | `E-CIP` | installed validator | a CI-pipeline rule error. | 1 |
 | `E-DCM` | installed validator | a decision-artifact rule error. | 5 |
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
+| `E-RSK` | installed validator | a risk-artifact rule error. | 5 |
 | `W` | installed validator | a warning; validation still passes. | 19 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
 | `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 23 |
@@ -41,6 +42,7 @@ but are not diagnostics and are not listed here.
 | `W-ECP` | installed validator | a control-plane warning. | 2 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
 | `W-REV` | installed validator | a revision-provenance warning. | 3 |
+| `W-RSK` | installed validator | a risk-artifact warning. | 1 |
 | `W-HEX` | dashboard and inspection scripts | a Harness Explorer publication warning. | 6 |
 | `A` | preflight | the artifact graph could not be read or validated. | 1 |
 | `I` | preflight | an installation check failed. | 1 |
@@ -112,6 +114,16 @@ but are not diagnostics and are not listed here.
 | Code | Message text in the source |
 | --- | --- |
 | `E-ECP-001` | `E-ECP-001` |
+
+### `E-RSK` — installed validator
+
+| Code | Message text in the source |
+| --- | --- |
+| `E-RSK-001` | `E-RSK-001` |
+| `E-RSK-002` | `E-RSK-002` |
+| `E-RSK-003` | `E-RSK-003`; `no decision names this risk yet: the validator reports E-RSK-003 until one does` |
+| `E-RSK-004` | `E-RSK-004` |
+| `E-RSK-005` | `E-RSK-005` |
 
 ### `W` — installed validator
 
@@ -201,6 +213,12 @@ but are not diagnostics and are not listed here.
 | `W-REV-002` | `W-REV-002` |
 | `W-REV-003` | `W-REV-003` |
 | `W-REV-004` | `W-REV-004` |
+
+### `W-RSK` — installed validator
+
+| Code | Message text in the source |
+| --- | --- |
+| `W-RSK-001` | `W-RSK-001` |
 
 ### `W-HEX` — dashboard and inspection scripts
 

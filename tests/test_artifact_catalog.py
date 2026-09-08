@@ -40,8 +40,10 @@ class ArtifactCatalogTests(unittest.TestCase):
     def types_absent_from_root_catalog(self) -> set[str]:
         """Registry types the hash-locked root catalog does not carry yet (declared, not hidden)."""
         present = {row[0].strip("`") for row in self.catalog_rows()}
-        absent = ({"decision"} & set(ARTIFACT_DIRECTORIES)) - present
-        self.assertLessEqual(absent, {"decision"})
+        # WO-DCM-001 added the decision type and WO-RSK-010 the risk type to the
+        # candidate registry; each root gains its row at adoption.
+        absent = ({"decision", "risk"} & set(ARTIFACT_DIRECTORIES)) - present
+        self.assertLessEqual(absent, {"decision", "risk"})
         return absent
 
     def catalog_rows(self) -> list[list[str]]:
@@ -179,8 +181,28 @@ envelope from fresh live state for each request.
         # artifact's catalog row, relations TRC-REL-020..022 and rule TRC-015. A root
         # released before them lacks exactly those lines, declared here; a root
         # released with them takes the equality branch.
-        if "`TRC-REL-020`" in released_traceability:
+        if "`TRC-REL-023`" in released_traceability:
             self.assertEqual(released_traceability, candidate_traceability)
+        elif "`TRC-REL-020`" in released_traceability:
+            # WO-RSK-010 (SPEC-RSK-010): the candidate TRACEABILITY.md adds the risk
+            # artifact's catalog row, relations TRC-REL-023..025 and rule TRC-016. A root
+            # released before them lacks exactly those lines, declared here; a root
+            # released with them takes the equality branch above.
+            risk_rows = ("| `TRC-REL-023`", "| `TRC-REL-024`", "| `TRC-REL-025`", "| `risk` | `RISK-` |")
+            kept: list[str] = []
+            skipping = False
+            for line in candidate_traceability.splitlines():
+                if line.startswith("`TRC-016`"):
+                    skipping = True
+                if skipping:
+                    if not line.strip():
+                        skipping = False
+                    continue
+                if line.startswith(risk_rows):
+                    continue
+                kept.append(line)
+            self.assertEqual(released_traceability.splitlines(), kept)
+            self.assertIn("`TRC-016`", candidate_traceability)
         else:
             decision_rows = ("| `TRC-REL-020`", "| `TRC-REL-021`", "| `TRC-REL-022`", "| `decision` | `DEC-` |")
             kept: list[str] = []

@@ -90,6 +90,9 @@ The permitted transitions are:
 | Release record | `ready` | `released`, `rejected` |
 | Decision | `open` | `decided`, `deferred`, `withdrawn` |
 | Decision | `deferred` | `decided`, `withdrawn` |
+| Risk | `identified` | `raised`, `withdrawn` |
+| Risk | `raised` | `accepted`, `avoided`, `mitigating`, `withdrawn` |
+| Risk | `mitigating` | `mitigated`, `withdrawn` |
 
 Rows without a listed outgoing transition are terminal. All lifecycle rows are
 historically visible. Rejected VREC and RLS rows grant no authority, reserve no

@@ -45,6 +45,8 @@ class ChangeSet:
     paths: tuple[str, ...]
     complete: bool
     source: str
+    #: The members that are new files, known only when Git derived the set (RSK-MGT-027).
+    added: tuple[str, ...] = ()
 
 
 @dataclass
@@ -190,8 +192,13 @@ def git_change_set(root: Path, base: str) -> ChangeSet:
     if not (root / ".git").exists():
         raise HarnessError(f"WEX-ECP-003: {root} is not a Git checkout; --from-git needs one")
     _git_lines(root, ["rev-parse", "--verify", "--quiet", f"{base}^{{commit}}"], base=base)
-    changed = _git_lines(root, ["diff", "-z", "--name-only", "--no-renames", base, "--"], base=base)
+    # `-z --name-status` alternates one status letter and one path; an `A` names a
+    # file absent from the base (SPEC-RSK-010 RSK-MGT-027 reads that fact).
+    status = _git_lines(root, ["diff", "-z", "--name-status", "--no-renames", base, "--"], base=base)
+    changed = list(status[1::2])
+    new = {item for letter, item in zip(status[0::2], status[1::2]) if letter.startswith("A")}
     untracked = _git_lines(root, ["ls-files", "-z", "--others", "--exclude-standard"], base=base)
+    new.update(untracked)
     ordered: list[str] = []
     for item in [*changed, *untracked]:
         if item not in ordered:
@@ -200,7 +207,7 @@ def git_change_set(root: Path, base: str) -> ChangeSet:
         paths = _unique_paths(ordered, directory_allowed=False)
     except HarnessError as exc:
         raise HarnessError(f"WEX-ECP-003: the Git change set is not a normalized path set: {exc}") from exc
-    return ChangeSet(paths=paths, complete=True, source="git")
+    return ChangeSet(paths=paths, complete=True, source="git", added=tuple(item for item in paths if item in new))
 
 
 def _validate_changed_targets(root: Path, change_set: ChangeSet) -> None:
@@ -765,6 +772,58 @@ def own_record_paths(root: Path, catalog: Mapping[str, Any], work_order_id: str)
     return tuple(sorted(set(admitted)))
 
 
+_RISK_PATH = re.compile(r"^docs/engineering/([a-z0-9]+(?:-[a-z0-9]+)*)/risks/RISK-[A-Z][A-Z0-9]*-\d{3}\.md$")
+
+
+def added_paths(root: Path, change_set: ChangeSet) -> frozenset[str]:
+    """The change-set members that are new files (SPEC-RSK-010 RSK-MGT-027).
+
+    A Git-derived set names them. A declared or manifest set is read against the
+    checkout, where a member is new when it is untracked or staged as an addition;
+    without a checkout nothing is provably new, so nothing is admitted as added.
+    """
+
+    if change_set.source == "git":
+        return frozenset(change_set.added)
+    if not (root / ".git").exists():
+        return frozenset()
+    try:
+        untracked = _git_lines(root, ["ls-files", "-z", "--others", "--exclude-standard"], base="HEAD")
+        staged = _git_lines(root, ["diff", "-z", "--cached", "--name-only", "--diff-filter=A", "--"], base="HEAD")
+    except HarnessError:
+        return frozenset()
+    new = set(untracked) | set(staged)
+    return frozenset(path for path in change_set.paths if path in new)
+
+
+def risk_admissions(root: Path, primary: Any, change_set: ChangeSet) -> tuple[str, ...]:
+    """SPEC-RSK-010 RSK-MGT-026 and RSK-MGT-027: the risk files an in-progress work order may add.
+
+    Anyone may record a threat mid-execution, so an added
+    `docs/engineering/<domain>/risks/RISK-<DOMAIN>-NNN.md` of the work order's own
+    domain is admitted to its change set. A modified or deleted risk file, or one
+    of another domain, still needs a declared path; the admission reads nothing
+    but the work order's own path and the change set.
+    """
+
+    from se_harness.artifact_layout import artifact_domain_from_relative_path
+
+    if getattr(primary, "artifact_type", None) != "work_order" or primary.status != "in_progress":
+        return ()
+    try:
+        domain = artifact_domain_from_relative_path(primary.path.relative_to(root))
+    except ValueError:
+        return ()
+    if domain is None:
+        return ()
+    new = added_paths(root, change_set)
+    admitted = [
+        path for path in change_set.paths
+        if path in new and (match := _RISK_PATH.match(path)) is not None and match.group(1) == domain
+    ]
+    return tuple(sorted(admitted))
+
+
 def build_context(
     root: Path,
     report: Any,
@@ -806,6 +865,9 @@ def build_context(
             # ECP-ADM-001: the verification and release records that name the
             # selected work order, and their evaluator evidence, as exact paths.
             *(own_record_paths(root, catalog, primary.artifact_id) if primary.artifact_type == "work_order" else ()),
+            # SPEC-RSK-010 RSK-MGT-026: a risk recorded mid-execution, added in the
+            # work order's own domain, never widens the declared scope.
+            *risk_admissions(root, primary, change_set),
         ),
         change_set=change_set,
         checkpoint=checkpoint,
@@ -889,7 +951,10 @@ def check_workflow(
     if primary is None:
         raise HarnessError(f"WEX210: unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in {"work_order", "verification_record", "release_record"}:
-        raise HarnessError("WEX210: check --checkpoint accepts only WO, VREC, or RLS artifacts (a decision is disposed with harnessctl decide)")
+        raise HarnessError(
+            "WEX210: check --checkpoint accepts only WO, VREC, or RLS artifacts "
+            "(a decision is disposed with harnessctl decide; a risk is raised with harnessctl raise-risk and listed with harnessctl risks)"
+        )
     if checkpoint == "scope" and primary.artifact_type != "work_order":
         raise HarnessError("WEX210: the scope checkpoint applies only to a work order")
     governing, dependencies = project_scope(catalog, primary)
@@ -928,7 +993,7 @@ def check_workflow(
         retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
         if retained not in change_set.paths:
             change_set = ChangeSet(
-                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source
+                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source, added=change_set.added
             )
     _validate_changed_targets(root, change_set)
     context = build_context(

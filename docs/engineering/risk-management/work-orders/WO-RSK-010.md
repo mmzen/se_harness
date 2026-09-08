@@ -2,7 +2,7 @@
 id = "WO-RSK-010"
 type = "work_order"
 title = "Implement the risk artifact, its raise, and the decision pairing"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-07"
 updated = "2026-09-07"
@@ -17,20 +17,30 @@ paths = [
   "se_harness/risks.py",
   "se_harness/artifact_layout.py",
   "se_harness/cli.py",
+  "se_harness/workflow.py",
   "se_harness/workflow_compliance.py",
+  "se_harness/workflow_contract.py",
   "se_harness/workflow_contract.json",
+  "se_harness/quality_gates_contract.json",
   "se_harness/engine/artifact_layout_registry.py",
   "se_harness/engine/validate_engineering_artifacts.py",
+  "repository_tools/diagnostic_code_index.py",
+  "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
+  "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
   "templates/repository/standard/docs/engineering/TRACEABILITY.md",
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "templates/repository/standard/docs/engineering/templates/RISK.template.md",
   "templates/repository/standard/docs/engineering/templates/README.md",
   "tests/test_risk_management.py",
+  "tests/test_artifact_authoring.py",
   "tests/test_artifact_catalog.py",
   "tests/test_cli_shape.py",
+  "tests/test_fixture_support.py",
   "tests/test_lifecycle_state_contract.py",
   "tests/test_validation_taxonomy.py",
+  "docs/notes/README.md",
+  "docs/notes/diagnostic-codes.md",
   "docs/notes/harnessctl-reference.md",
   "docs/notes/risk-artifacts.md",
   "docs/engineering/README.md",
@@ -52,6 +62,20 @@ to = "approved"
 decided_at = "2026-09-07T20:49:30Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable owner on 2026-09-07, by selecting the presented option in the ratified decision channel. Selected for execution. This work order carries [delegation] class = execution, so this approval is the delegating act under DR-015 and DR-007; the class activates only from the base of a later pull request, and every non-delegated right stays human. WO-RSK-011 stays draft until this work has merged."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-07T21:02:59Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 008c7b9819df62d1b0bb50f3ac6858a78ca7d1f3 (check-run 101864362911, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-07T22:31:03Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 87708bb28862b9d317d559d4bb782cbd20a4859c (check-run 101879174068, source github-checks)."
 +++
 
 # Work Order: Implement the risk artifact, its raise, and the decision pairing
@@ -94,7 +118,11 @@ Add no gate predicate and no configuration key.
 - `DR-RISK-CLOSE` and the managed `DECISION_RIGHTS.md`: `WO-RSK-011`.
 - `SPEC-DCM-001`, `se_harness/decisions.py` and the decision family's own
   behaviour: unchanged, by ARCH-RSK-010's dependency direction.
-- Both quality-gates contract copies: unchanged, by RSK-MGT-014.
+- Any gate predicate or gate group in either quality-gates contract copy, by
+  RSK-MGT-014. The copies gain only the six edge bindings of the `risk`
+  lifecycle family, each with no predicate and the `QGS-EDGE` structural check,
+  because the kernel refuses to load a lifecycle edge that has no binding
+  (`WEX-ECP-030`, ECP-KRN-009); the predicate identifier sets stay `main`'s.
 - `.engineering-harness.toml.tpl`: unchanged, by RSK-MGT-011.
 - The repository's root managed copies: they change at the next release adoption.
 - Recording any actual risk of this repository.
@@ -137,10 +165,13 @@ resulting record, stays with the human owner.
 ## Expected change surface
 
 The risk module and the layout registry; the CLI parser and two handlers; the
-workflow contract's lifecycle families and the two template policy documents; the
-validator's artifact rules and the catalog generator; the scope check's path
-admission; one new template; one new test module and four existing test modules
-that pin type or command sets; two notes.
+workflow contract's lifecycle families, the family set the kernel accepts, the
+two quality-gates contract copies' edge bindings and the three template policy
+documents; the transition writer's risk branch; the validator's artifact rules and
+the catalog generator; the scope check's path admission; one new template; the
+diagnostic-code registry and its generated page; one new test module and four
+existing test modules that pin type or command sets; two notes and the notes
+index.
 
 ## Required verification
 
@@ -188,3 +219,34 @@ drafting error in this work order, found by `QGP-G4I-PATHS` reading `WEX201`
 against `main` and corrected before start and before any evidence was bound. No
 other field changed, and the objective, the in-scope list and the expected change
 surface are unaffected.
+
+2026-09-07, engineering owner, under `DR-REMEDIATION-SCOPE`, after the delegated
+start and before the first code change: added eight paths. The implementer's
+survey measured that the contract cannot be met within the approved paths.
+`se_harness/workflow_contract.py` holds the closed family set the kernel accepts,
+so `RSK-MGT-007` needs it. The kernel refuses to load any lifecycle edge without
+a binding in the quality-gates contract (`WEX-ECP-030`, ECP-KRN-009), so the
+`risk` family needs six bindings in `se_harness/quality_gates_contract.json`, the
+template `QUALITY_GATES.json` and one row of the template `QUALITY_GATES.md`;
+each binding carries no predicate and `QGS-EDGE` only, so `RSK-MGT-014` holds and
+the predicate identifier sets stay `main`'s. `se_harness/workflow.py` holds the
+one journalled writer and the only permitted writer of a `[disposition]` table,
+so `RSK-MGT-016`, `RSK-MGT-018`, `RSK-MGT-019` and `RSK-MGT-020` need it.
+`repository_tools/diagnostic_code_index.py` and `docs/notes/diagnostic-codes.md`
+register and list the `E-RSK` and `W-RSK` families, without which the code-index
+test fails. `docs/notes/README.md` gains the row of the new note. The
+quality-gates bullet of `Out of scope` and the expected change surface were
+reworded to match; every rule, diagnostic code, state and constraint is
+unchanged.
+
+2026-09-07, engineering owner, under `DR-REMEDIATION-SCOPE`, after the full
+test suite was first run against the implementation: added
+`tests/test_artifact_authoring.py` and `tests/test_fixture_support.py`. Both pin
+the installed surface and change by one line each: the first expects the state a
+created risk starts in, `identified`, as it expects `open` for a decision; the
+second counts the files `init` installs, which the risk template raises from 41
+to 42. They are of the kind the in-scope list names, "existing tests that pin
+the type sets", and were not enumerated. A control run on a clean `main`
+worktree showed the two other failing tests of the Windows run fail there too
+(the owner-region byte count and a `PermissionError` on Git objects), so they
+are not this work's.

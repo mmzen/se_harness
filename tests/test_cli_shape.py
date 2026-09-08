@@ -25,7 +25,7 @@ from tests.test_revision_provenance import create_base_chain
 REPOSITORY_COMMANDS = {
     "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
     "pr-body", "transition", "upgrade", "scaffold-domain", "create-artifact",
-    "release-unit", "capture-verification", "prepare-release", "decide",
+    "release-unit", "capture-verification", "prepare-release", "decide", "raise-risk", "risks",
 }
 NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
 REPOSITORY_QUALIFY_ROLES = {"released-root", "complete-candidate", "public-install"}

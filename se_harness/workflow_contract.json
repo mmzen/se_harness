@@ -57,6 +57,15 @@
       "deferred": {"transitions_to": ["decided", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
       "decided": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
       "withdrawn": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
+    },
+    "risk": {
+      "identified": {"transitions_to": ["raised", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "raised": {"transitions_to": ["accepted", "avoided", "mitigating", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigating": {"transitions_to": ["mitigated", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "accepted": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "avoided": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigated": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "withdrawn": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
     }
   },
   "failure": {

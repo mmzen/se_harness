@@ -29,6 +29,7 @@ ARTIFACT_DIRECTORIES: dict[str, tuple[str, ...]] = {
     "release_record": ("releases",),
     "operating_contract": ("operations",),
     "decision": ("decisions",),
+    "risk": ("risks",),
 }
 
 ARTIFACT_PREFIXES = {
@@ -45,6 +46,7 @@ ARTIFACT_PREFIXES = {
     "release_record": "RLS-",
     "operating_contract": "OPS-",
     "decision": "DEC-",
+    "risk": "RISK-",
 }
 
 ARTIFACT_TEMPLATES = {
@@ -61,6 +63,7 @@ ARTIFACT_TEMPLATES = {
     "release_record": "RELEASE_RECORD.template.md",
     "operating_contract": "OPERATING_CONTRACT.template.md",
     "decision": "DECISION.template.md",
+    "risk": "RISK.template.md",
 }
 
 SUPPORTING_DIRECTORIES = ("evidence", "acceptance")
@@ -90,6 +93,7 @@ RESERVED_DOMAINS = frozenset(
         "release",
         "releases",
         "requirements",
+        "risks",
         "specifications",
         "target",
         "templates",
@@ -311,8 +315,9 @@ def _render_draft(template: str, artifact_type: str, artifact_id: str) -> bytes:
     if expected_type is None or expected_type.group(1) != artifact_type:
         raise HarnessError(f"canonical template type does not match requested type: {artifact_type}")
     rendered, id_count = re.subn(r'^id = "[^"]+"$', f'id = "{artifact_id}"', normalized, count=1, flags=re.MULTILINE)
-    # A decision has no draft state (SPEC-DCM-001 rule 4): it is created open.
-    initial_status = "open" if artifact_type == "decision" else "draft"
+    # A decision has no draft state (SPEC-DCM-001 rule 4): it is created open. A risk
+    # has none either (SPEC-RSK-010 RSK-MGT-007): it is created identified.
+    initial_status = {"decision": "open", "risk": "identified"}.get(artifact_type, "draft")
     rendered, status_count = re.subn(r'^status = "[^"]+"$', f'status = "{initial_status}"', rendered, count=1, flags=re.MULTILINE)
     today = date.today().isoformat()
     rendered, created_count = re.subn(r'^created = "[^"]+"$', f'created = "{today}"', rendered, count=1, flags=re.MULTILINE)
@@ -372,7 +377,7 @@ def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
     return None
 
 
-_REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS", "operating_contract": "OPS", "decision": "DEC"}
+_REF_PREFIX = {"intent": "INT", "capability": "CAP", "requirement": "REQ", "specification": "SPEC", "architecture": "ARCH", "adr": "ADR", "verification": "VER", "work_order": "WO", "verification_record": "VREC", "release_contract": "REL", "release_record": "RLS", "operating_contract": "OPS", "decision": "DEC", "risk": "RISK"}
 # ECP-COR-016: one prefix table; the ref scan sees every type the allocator can name.
 REF_ARTIFACT_PATTERN = re.compile(
     r"^(" + "|".join(sorted(set(_REF_PREFIX.values()), key=len, reverse=True)) + r")-([A-Z][A-Z0-9]*)-(\d{3})\.md$"

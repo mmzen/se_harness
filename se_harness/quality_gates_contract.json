@@ -125,6 +125,12 @@
     {"family": "release_record", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]},
     {"family": "decision", "target": "decided", "predicates": [], "structural": ["QGS-EDGE"]},
     {"family": "decision", "target": "deferred", "predicates": [], "structural": ["QGS-EDGE"]},
-    {"family": "decision", "target": "withdrawn", "predicates": [], "structural": ["QGS-EDGE"]}
+    {"family": "decision", "target": "withdrawn", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "raised", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "accepted", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "avoided", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "mitigating", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "mitigated", "predicates": [], "structural": ["QGS-EDGE"]},
+    {"family": "risk", "target": "withdrawn", "predicates": [], "structural": ["QGS-EDGE"]}
   ]
 }

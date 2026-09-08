@@ -61,7 +61,9 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list; an unknown artifact is a failed result on standard output, exit 1, as for `check` and `evidence` |
 | `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
-| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
+| `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
+| `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
+| `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
@@ -289,6 +291,21 @@ A decision artifact (`DEC-`) records one pending question, or one implementation
 `decide` is the only way a decision changes state; `transition` refuses it. Without `--apply` the command plans and reports; with `--apply` it writes the `[disposition]` table (the option, its label, the role, the time, and the verbatim reason) and one lifecycle event. `--option` must name one of the options the artifact declares. A deferral needs one `--scope` entry per transition it admits and a `--revisit` trigger; the scoped transitions pass, every other blocked transition still waits. Accepting a deviation needs `--revisit`, because acceptance is time-bounded. The wrong role is refused with `DR-DECISION-DISPOSE`.
 
 The validator reports a malformed decision as `E-DCM-001` to `E-DCM-003`, prose in a legacy definition's `## Open decisions` section as `E-DCM-004`, a deviation whose `against` fragment is not a rule identifier of the named specification (`SPEC-xxx#PREFIX-AREA-NNN`) as `E-DCM-005`, and an accepted deviation past its revisit or accepted twice against the same rule as `W-DCM-001` and `W-DCM-002`. See [decision artifacts](decision-artifacts.md) for the model.
+
+When the decision concerns a raised risk, `--apply` also moves that risk to the state the option names, in the same act: `accept` needs `--revisit`, `mitigate` needs `--mitigated-by WO-...`, and `avoid` records `--avoided-by` (an ADR or a decision; it defaults to the disposing decision). A deferral leaves the risk `raised`; a withdrawal withdraws it.
+
+## Risk recording
+
+```text
+harnessctl raise-risk [TARGET] --domain SLUG --title TEXT --stage STAGE --category CATEGORY --cause TEXT --effect TEXT --likelihood N --impact N --threatens ID [--threatens ID ...] --raised-by ACTOR [--owner ROLE ...] [--id RISK-...] [--with-decision [--decision-id DEC-...] [--recommend accept|avoid|mitigate]] [--dry-run] [--json]
+harnessctl risks [TARGET] --artifact ID [--json]
+```
+
+A risk artifact (`RISK-`) records one measured threat: one cause, one effect, the stage it threatens, `likelihood` and `impact` from 1 to 5, and their product as `score`. `raise-risk` computes the score, writes the file in `raised` and records the raise as a lifecycle event, in one act; a measurement outside the range or an identifier already declared anywhere is refused before anything is written, exit 2. `--domain` takes the domain slug or the identifier token of exactly one domain. With `--with-decision` the command also writes the open decision that blocks the threatened artifacts, with the options `accept`, `avoid` and `mitigate`. No gate reads risks: the stop is the paired decision's `QGP-*-DECISION` predicate, and the refusal names the decision, not the risk.
+
+`risks` lists every risk threatening the named artifact or, for a work order, its governing chain; it writes nothing.
+
+The validator reports a missing or invalid field as `E-RSK-001`, a wrong measurement or score as `E-RSK-002`, a raised risk that no pending decision names as `E-RSK-003`, a paired decision whose `blocks` differs from the risk's `threatens` as `E-RSK-004`, a disposition typed by hand as `E-RSK-005`, and an accepted risk past its revisit as `W-RSK-001`. See [risk artifacts](risk-artifacts.md) for the model.
 
 ## Safe repository upgrade
 
