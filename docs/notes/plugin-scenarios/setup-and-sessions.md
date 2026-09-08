@@ -4,7 +4,7 @@
 
 [All scenarios](README.md) · [Operation workflows](../plugin-operation-workflows-2026-09-06.md) · [Scenario template](../plugin-scenario-template.md)
 
-**New** marks components to build. Use the [shared baseline and calling convention](README.md#shared-component-names-and-calling-convention): main `fae52e1b`, governing released evaluator 0.16.0. `harnessctl` means the verified absolute `ENV_PYTHON -I -m se_harness` invocation. `REPO` is the selected absolute project path. The plugin remains proposed.
+**New** marks components to build. Use the [shared baseline and calling convention](README.md#shared-component-names-and-calling-convention): main `560973cf`, governing released evaluator 0.16.0. `harnessctl` means the verified absolute `ENV_PYTHON -I -m se_harness` invocation. `REPO` is the selected absolute project path. The plugin remains proposed.
 
 Setup examples show ways to enter the operation. After a concrete setup request is authorized, the agent follows the permitted steps without asking the user to invoke each one. Host installation/trust, missing decisions, changed scope, and unresolved conflicts remain explicit interactions.
 
@@ -35,13 +35,17 @@ Complete host trust/reload → new SessionStart → full readiness checks
 | Step | Who acts | Action and result |
 | --- | --- | --- |
 | 1 | User → plugin manager | **Codex:** install from **Plugins** or `/plugins`. **Claude Code:** register the catalog with `/plugin marketplace add MARKETPLACE_SOURCE`, then `/plugin install verity-plane@verity-plane`. These proposed names are not published yet. Downloading files does not establish readiness. |
-| 2 | User → `setup` **[New]** | Ask Codex to use the setup skill, or invoke `/verity-plane:setup` in Claude Code. The agent reads `skills/setup/SKILL.md`. Hooks may already be registered: their shell guard reports setup required until the environment can run. Setup remains accessible. |
+| 2 | User → `setup` **[New]** | Ask Codex to use the setup skill, or invoke `/verity-plane:setup` in Claude Code. The agent reads `skills/setup/SKILL.md`; the [shared guard](#bootstrap-guard) handles hooks registered before setup. |
 | 3 | Agent → existing host shell | Find supplied Python using shell discovery first, such as PowerShell `Get-Command` or POSIX `command -v`. Resolve its absolute executable, then check Python 3.11+, `venv`, and `ensurepip`. The host is not assumed to supply Python. If missing, too old, or unusable, give the operator the message below and stop. |
 | 4 | Agent → supplied Python | Compare the bundled wheel archive SHA-256 with independently trusted release metadata. Reject a mismatch before installation. Under the authorized setup request, create the environment in persistent plugin data using `venv`; install that exact wheel with `pip --no-index --no-deps`. No manual activation is needed. |
 | 5 | Agent → environment Python | Run isolated `identity` with expected version, payload digest, and archive digest from the verified wheel, plus expected root and entry point. Require observed `evaluator_archive_sha256` to be present and equal. Reject missing provenance, wrong identity, or repository-local imports. A different repository lock requires a compatible plugin or explicit upgrade. |
-| 6 | User/agent → host activation controls | Complete required host trust/reload for the packaged shell-guard bindings. Start a fresh session and observe `SessionStart`: guard → absolute environment Python → `session-context.py` → identity and integrity checks. Follow [scenario 3](#scenario-3-start-a-session) for a connected repository. If no hook run is observed, report activation as **unconfirmed**. |
+| 6 | User/agent → host activation controls | Complete required hook trust/reload. Start a fresh session and observe `SessionStart` and the checks in [scenario 3](#scenario-3-start-a-session). If no hook run is observed, report activation as **unconfirmed**. |
 
-The live probe must execute setup and repair through actual host tools while hooks are registered. A menu entry is insufficient. Before readiness, the guard reports missing governance coverage without checked success or a permission override; only already-authorized setup may continue under ordinary host permissions. This instruction is not an enforced action classifier. A governed effect that escapes its required refusal makes that route unqualified.
+<a id="bootstrap-guard"></a>
+
+**Shared bootstrap guard.** Packaged `SessionStart` and `PreToolUse` commands use the host shell before Python is available. If the absolute environment interpreter cannot run, the guard reports **setup required / governance coverage unavailable**. It installs nothing, returns no checked-success result and overrides no host permission. Otherwise it invokes `ENV_PYTHON -I ABS_SCRIPT`; full identity, integrity and context checks still determine readiness.
+
+Already-authorized setup and repair remain usable under ordinary host permissions. Skills refuse governed writes while context is unestablished; the guard neither classifies actions nor independently enforces that distinction. The live probes must perform setup and repair with hooks registered, then attempt a disposable governed write. An effect escaping its required refusal makes the route unqualified.
 
 Setup never installs or downloads Python. It does not initialize a repository unless that additional action is requested and authorized. Installation may download plugin files before prerequisites are checked; there is no assumed native pre-install callback.
 
@@ -50,8 +54,8 @@ Setup never installs or downloads Python. It does not initialize a repository un
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/setup/SKILL.md` directs prerequisite checks, environment setup, and activation. | **New:** instructions using existing shell/Python commands. |
-| **Hook** | `SessionStart` runs a shell guard, then `session-context` when the runtime can run. | **Reuse:** host event and shell. **New:** guarded registration. |
-| **Script** | `scripts/session-context.py` delivers verified rules; `scripts/check-tool-action.py` checks supported actions. | **New:** two Python scripts; a thin shell guard lives in the hook command. |
+| **Hook** | Guarded `SessionStart` and `PreToolUse` registrations use the sequence above. | **Reuse:** host events and shell. **New:** guarded registration. |
+| **Script** | `scripts/session-context.py` delivers verified rules; `scripts/check-tool-action.py` checks supported actions. | **New:** two Python scripts. |
 | **Tool/interface** | Host shell discovers Python before any Python script is called. | **Reuse:** `exec_command`, `Bash` / `PowerShell`, plugin manager, `venv`, and `pip`. |
 | **Evaluator** | Exact released wheel under `packages/`, including templates and metadata. | **Reuse:** published evaluator and identity checks. **New:** plugin packaging. |
 | **Subagent** | Not used. | **Not used:** setup requires no delegated agent. |
@@ -97,7 +101,7 @@ harnessctl identity --role released-evaluator --expected-version VERSION --expec
 
 **Proposed additions**
 
-Ship one exact released pure-Python evaluator wheel under `packages/`, skills, and the two `.py` hook scripts. The setup skill prepares the environment from supplied Python. Packaged hook commands include a thin shell guard; it reports setup required when the environment cannot run and never installs dependencies. No Python binary, launcher binary, evaluator lookup on `PATH`, second protocol, or runtime download manager is shipped.
+Package the exact released wheel, skills, two Python handlers and [guarded bindings](#bootstrap-guard). Setup uses supplied Python; no interpreter, launcher binary, second protocol or runtime download manager is shipped.
 
 **Inputs, outputs, and writes**
 
@@ -110,11 +114,11 @@ Ship one exact released pure-Python evaluator wheel under `packages/`, skills, a
 - **Codex:** Use `PLUGIN_ROOT` / `PLUGIN_DATA` for installed files and persistent environment storage. Complete separate [hook trust](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks).
 - **Claude Code:** Use `CLAUDE_PLUGIN_ROOT` / `CLAUDE_PLUGIN_DATA`. Keep Python scripts under `scripts/`; organization distribution rejects top-level `bin/`. Manifest `dependencies` names plugins, not Python packages. [Plugin reference](https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema), [organization distribution](https://code.claude.com/docs/en/plugin-marketplaces#keep-executables-out-of-the-top-level-bin-directory).
 
-On Windows, the environment's Python is normally under `Scripts/`; on POSIX, under `bin/`. Those are directories in plugin data, not a top-level plugin `bin/`. Neither host is assumed to install Python for the user. The shell guard can run before Python setup; full readiness cannot. The two host probes must demonstrate trust, quoting, reload, and actual event behavior on claimed versions.
+The environment's Python is under `Scripts/` on Windows or `bin/` on POSIX, inside plugin data. Both host probes must demonstrate quoting, trust, reload and actual event behavior.
 
 **Checks that demonstrate the behavior**
 
-Missing/old Python or unavailable `venv`/`ensurepip` produces setup guidance without repository writes. Retain guard output before setup, full identity/context after setup, and recovery after interpreter removal. Test wrong payload, different archive, absent archive metadata, tampered wheel, and failed repair preserving the prior environment.
+Exercise the [bootstrap probe](#bootstrap-guard), missing/old Python and unavailable `venv`/`ensurepip`. Retain before-setup, after-setup and removed-interpreter observations. Reject wrong payload, different archive, absent archive metadata and tampered wheels; failed repair preserves the prior environment.
 
 **Open questions**
 
@@ -241,13 +245,13 @@ Host receives complete rules → agent follows the current workflow
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Host → `scripts/session-context.py` **[New]** | `hooks/hooks.json` runs a shell guard. Missing/broken runtime yields setup guidance; otherwise it invokes `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py`. The handler identifies the repository; an unconnected project needs repository setup. |
+| 1 | Host → `scripts/session-context.py` **[New]** | `hooks/hooks.json` uses the [shared guard](#bootstrap-guard) to invoke `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py`. The handler identifies the repository; an unconnected project needs repository setup. |
 | 2 | Handler → environment Python | Repeat the full [SPEC-PLG-002 identity check](../../engineering/plugin-integration/specifications/SPEC-PLG-002.md), compare the repository lock, then run `doctor`. An existing interpreter or earlier successful setup is insufficient. |
 | 3 | Handler | Verify the exact bytes it will return: the complete `se-harness:begin` / `end` block in `AGENTS.md` and full `ENGINEERING_HARNESS.md` router. Reject changes during the read. |
 | 4 | Handler → host context | Return those rules verbatim with source/digest information. One handler keeps verification before injection; separate matching hooks can run concurrently. |
 | 5 | Main agent | Follow the rules. If the host returns a truncated preview or file reference, use `setup` readiness to obtain and read the complete verified text before governed work. |
 
-For explicit readiness, `setup` tells the agent to call `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` through the host's shell tool, with absolute paths and appropriate quoting. This **[New]** internal adapter option runs the same checks and returns verified context for the agent to read; it does not prove a host hook fired. No startup hook installs, repairs, approves, or starts work.
+For explicit readiness, `setup` calls `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` through the host shell with absolute, correctly quoted paths. This **[New]** internal option returns the same verified context for the agent to read; it does not prove a host hook fired or start work.
 
 ### 3. Components and implementation mapping
 
@@ -266,7 +270,7 @@ For explicit readiness, `setup` tells the agent to call `ENV_PYTHON -I ABS_PLUGI
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Python was removed or its environment cannot run. | The hook cannot establish readiness; a missing interpreter cannot report its own failure. | Use setup through the host shell to rediscover/repair supplied Python and recreate the environment. |
+| Python was removed or its environment cannot run. | The [shared guard](#bootstrap-guard) reports setup required. | Run authorized setup/repair through the host shell, then retry readiness. |
 | Version, identity, or integrity mismatch. | No ready claim and no unverified policy injection. | Explicit setup/maintenance, then retry. |
 | Rules conflict or are incomplete in context. | Governed work stops. | Resolve the conflict or complete the verified-read fallback. |
 | Hook is skipped or times out. | Readiness is unconfirmed; the hook cannot block every tool. | Restore hook activation and run explicit readiness. |
@@ -292,7 +296,7 @@ harnessctl doctor REPO --json
 
 **Proposed additions**
 
-`scripts/session-context.py` performs ordered checks and context delivery. Both event-driven startup and the setup skill's explicit readiness route use this routine. Verify returned bytes against the managed lock and retain their identities for full-read fallback. File existence alone is insufficient.
+Startup and explicit readiness share `scripts/session-context.py`. Verify returned bytes against the managed lock and retain their identities for full-read fallback.
 
 **Inputs, outputs, and writes**
 
@@ -306,7 +310,7 @@ Both hosts support `SessionStart` context. Codex has a configurable context budg
 
 **Checks that demonstrate the behavior**
 
-Verify execution order, missing/removed Python, a conflicting global `harnessctl`, modified policy refusal, concurrent file changes, and oversized context. Explicit readiness must produce the same checks as startup. Measure startup cost on representative repositories and confirm successful readiness adds no approval prompt.
+Alongside scenario 1's bootstrap cases, test execution order, a conflicting global `harnessctl`, modified policy, concurrent file changes and oversized context. Explicit readiness runs the same checks. Measure startup cost and confirm readiness adds no approval prompt.
 
 **Open questions**
 

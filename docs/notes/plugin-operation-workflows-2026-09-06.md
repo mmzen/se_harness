@@ -3,7 +3,7 @@
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 > Revised 2026-09-08. Companion to the [installation proposal](plugin-installation-proposal-2026-09-06.md).
-> Uses the [shared proposal baseline](plugin-installation-proposal-2026-09-06.md): candidate source 0.17.0 at `fae52e1b`, governing evaluator 0.16.0. The plugin remains proposed.
+> Uses the [shared proposal baseline](plugin-installation-proposal-2026-09-06.md): candidate source 0.17.0 at `560973cf`, governing evaluator 0.16.0. The plugin remains proposed.
 
 Commands use released evaluator 0.16.0, including its transitional `adopt` alias. Follow the [shared calling convention](plugin-scenarios/README.md#shared-component-names-and-calling-convention).
 

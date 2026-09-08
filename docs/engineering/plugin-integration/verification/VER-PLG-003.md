@@ -17,6 +17,8 @@ verifies = ["REQ-PLG-006"]
 
 Expected event names and host behavior come from SPEC-PLG-003 and the exact Codex documentation assessed. An observation fixture records the host; it does not simulate proof of host support.
 
+A passing probe means complete, reproducible observations under PLG-CDXP-006/007, not a favorable host answer. An evidenced incompatibility is a valid finding; missing or unreproducible observations do not pass.
+
 ## Requirement-to-evidence matrix
 
 | Requirement | Method | Cases | Pass condition |

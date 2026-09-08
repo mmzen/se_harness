@@ -16,49 +16,59 @@ specifies = ["REQ-PLG-013", "REQ-PLG-014"]
 
 ## In plain words
 
-The hook checks supported actions through the evaluator. It reports coverage gaps explicitly.
+The hook must return refusals before the host stops waiting. Missing output proves no protection.
 
 ## Scope
 
-`check-tool-action.py` only; SPEC-PLG-005/006 own host integration. Existing [workflow rules](../../WORKFLOW.md) retain policy.
+`check-tool-action.py`; SPEC-PLG-005/006 own bindings. [Workflow](../../WORKFLOW.md) retains policy.
 
 ## Terms
 
-- **Covered action.** An intercepted action reliably mapped to an applicable evaluator check using its actual inputs and effect.
+- **Covered action.** An action reliably mapped to its evaluator check.
+- **Inner deadline.** One time budget for evaluator work, ending before the host timeout with room for startup, cleanup and response.
 
 ## Rules
 
-**PLG-HOOK-001.** Each covered action MUST use the existing evaluator with its selected artifact, applicable procedure checkpoint and actual paths.
+**PLG-HOOK-001.** Each covered action MUST use the existing evaluator with its selected artifact, applicable checkpoint and actual paths.
 
-**PLG-HOOK-002.** The handler MUST obtain the current required check before a covered effect and translate failure into host refusal.
+**PLG-HOOK-002.** The handler MUST obtain the current required check before a covered effect and translate failure into supported host refusal.
 
-**PLG-HOOK-003.** Malformed or unmappable actions MUST report unavailable coverage and MUST NOT be presented as successfully governance-checked.
+**PLG-HOOK-003.** Malformed or unmappable actions MUST report unavailable coverage without claiming a successful governance check.
 
-**PLG-HOOK-004.** Unenforceable refusal MUST produce an explicit unenforced-route result, without automation readiness for that governed action.
+**PLG-HOOK-004.** Unavailable refusal MUST be recorded as an unenforced route without governed-automation readiness; missing handler output MUST NOT be treated as refusal.
 
-**PLG-HOOK-005.** The adapter MUST preserve required checks and evaluator policy; successful invocation MUST NOT grant action authority.
+**PLG-HOOK-005.** The adapter MUST preserve required checks and evaluator policy; successful invocation MUST NOT grant authority.
 
-**PLG-HOOK-006.** For ambiguous, malformed or unmapped governed actions, a refusal-capable host MUST receive refusal before effect, with unavailable coverage reported.
+**PLG-HOOK-006.** Ambiguous, malformed or unmapped governed actions MUST receive refusal before effect on refusal-capable routes, with unavailable coverage reported.
+
+**PLG-HOOK-007.** Each invocation MUST enforce one monotonic inner deadline across evaluator work, reserving measured startup, cleanup and response margins before the configured host timeout.
+
+**PLG-HOOK-008.** On inner expiry or evaluator failure, the running handler MUST stop evaluator process trees, collect exits and emit supported refusal before the host deadline.
+
+**PLG-HOOK-009.** Host timeout, launch failure or missing required denial MUST trigger effect inspection before retry; escaped required refusal MUST remain unqualified.
 
 ## Failure behaviour
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| Covered check fails or cannot complete | Refuse the effect on the supported host route. | Existing finding or check failure |
-| Ambiguous, malformed or unmapped governed action | Refuse before effect if supported; otherwise identify the unenforced route. | Explicit coverage blocker |
+| Evaluator failure/inner expiry; handler running | Stop children; return timely denial | Evaluator error/inner timeout |
+| Ambiguous governed action | Refuse on supported route | Coverage blocker |
+| Host cancels hook or guard never starts | Inspect effects; no assumed refusal | Host failure/unenforced route |
 
 ## Examples
 
-**Given** an ambiguous governed shell action, **when** a host supports refusal, **then** PLG-HOOK-006 refuses before effect; PLG-HOOK-003 reports unavailable coverage.
+**Given** stalled evaluation, **when** the inner deadline expires, **then** PLG-HOOK-008 returns denial before the host deadline.
+
+**Given** host cancellation, **when** no decision arrives, **then** PLG-HOOK-009 requires effect inspection.
 
 ## Coverage
 
 | Requirement | Rules |
 | --- | --- |
-| `REQ-PLG-013` | PLG-HOOK-001, PLG-HOOK-002, PLG-HOOK-005 |
-| `REQ-PLG-014` | PLG-HOOK-003, PLG-HOOK-004, PLG-HOOK-006 |
+| `REQ-PLG-013` | PLG-HOOK-001, PLG-HOOK-002, PLG-HOOK-005, PLG-HOOK-007, PLG-HOOK-008, PLG-HOOK-009 |
+| `REQ-PLG-014` | PLG-HOOK-003, PLG-HOOK-004, PLG-HOOK-006, PLG-HOOK-009 |
 
 ## Not decided here
 
-- Independent external authorization enforcement: issue #347.
-- Live host coverage: adapter qualification.
+- Exact timing values and live host qualification.
+- Independent external authorization: issue #347.

@@ -46,6 +46,7 @@ Hooks can register before setup. A thin host-shell guard reports setup required 
 Session verification and context delivery execute in order within one handler.
 Compaction and resume use the demonstrated session event; manual readiness remains available.
 A tool-action result reports both the evaluator verdict and actual interception coverage.
+The shared tool handler owns its inner deadline and evaluator cleanup; each host binding owns the outer timeout and supported refusal format. Qualification observes startup, timely denial and actual effects separately. A host timeout or missing response proves no prevention.
 
 ## Trust boundaries
 

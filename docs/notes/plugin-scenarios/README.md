@@ -6,7 +6,7 @@ These 16 scenarios explain how a proposed Verity Plane plugin would support the 
 
 They extend the [operation workflows](../plugin-operation-workflows-2026-09-06.md) and [installation proposal](../plugin-installation-proposal-2026-09-06.md). They are design notes, not formal artifacts or authorization to implement the plugin.
 
-**Reviewed:** 2026-09-08. These scenarios and the [implementation packets](../../engineering/plugin-integration/README.md) share main `fae52e1b`: candidate source 0.17.0, governing released evaluator 0.16.0. The plugin is proposed; examples are not implementation evidence.
+**Reviewed:** 2026-09-08. These scenarios and the [implementation packets](../../engineering/plugin-integration/README.md) share main `560973cf`: candidate source 0.17.0, governing released evaluator 0.16.0. The plugin is proposed; examples are not implementation evidence.
 
 Commands target released evaluator 0.16.0, including its transitional `adopt` alias. Candidate source 0.17.0 uses unified `init`; relative source links show the candidate, not a substitute executable.
 
@@ -105,7 +105,7 @@ Supply the selected scope, question, governance context, read-only tool limits, 
 
 The agent identifies the exact operation and affected records, checks existing authority, and asks the accountable human only for a missing or changed required decision. A valid decision covering unchanged action and inputs is reused. A transition preview, passing tests, a tool permission, or `--decision ID=ACTOR` cannot authenticate approval. Existing qualifying delegation applies only to its stated scope.
 
-Use the operation-specific comparison table in [SPEC-PLG-010](../../engineering/plugin-integration/specifications/SPEC-PLG-010.md#terms) to recheck the inputs that each decision actually governs. Ordinary code edits within an unchanged approved WO scope do not require approving the WO again. Candidate-bound verification or delivery decisions must still match their exact candidate, and all applicable gates continue to apply.
+Use the operation-specific comparison rules in [SPEC-PLG-010](../../engineering/plugin-integration/specifications/SPEC-PLG-010.md#rules) to recheck the inputs that each decision actually governs. Ordinary code edits within an unchanged approved WO scope do not require approving the WO again. Candidate-bound verification or delivery decisions must still match their exact candidate, and all applicable gates continue to apply.
 
 Owners retain the integration and publication decisions. An authorized agent or human may execute the exact action through existing tools when required gates and independent enforcement permit it. The plugin does not require owners personally to operate those tools. Missing or unproven enforcement blocks agent execution and is reported as a control limitation, with any existing permitted human route identified. Deterministic approval binding and protection of remote effects remain separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347).
 

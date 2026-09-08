@@ -21,7 +21,7 @@ Before execution, the assurance owner defines expected states and allowed action
 
 | Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-017 | test, inspection | CHG01–CHG03, CHG08, CHG09 | Existing commands preserve authoring states, lifecycle distinctions and actual partial effects. |
+| REQ-PLG-017 | test, inspection | CHG01–CHG03, CHG08–CHG10 | Existing commands preserve authoring states, lifecycle distinctions and actual partial effects; unready context prevents skill-directed writes. |
 | REQ-PLG-018 | test, inspection | CHG02–CHG08 | Actual applicable decisions continue without duplicate prompts; changed inputs or missing authority stop affected actions. |
 
 ## Acceptance scenarios
@@ -39,10 +39,13 @@ Use disposable repositories and the exact verified external evaluator. Supply on
 | CHG07 | Execution delegation present at PR base with live successful exact-candidate CI; separate branch-only and stale-CI variants | Request delegated start, completion and VREC preparation | Existing DR-015 route proceeds without a fresh owner prompt; branch-only/stale variants stop; no other right inferred | `chg07.json` |
 | CHG08 | Creation partly succeeds or transition application is interrupted | Resume the same request | Existing effects inspected before retry; no duplicate successful operation or unchanged decision prompt; uncertainty reported | `chg08.json`, `chg08-diff.txt` |
 | CHG09 | Draft WO; fixture provides approval alone | Apply approval, then ask for the next action without start authority | WO is approved, never started or completed by implication; exact next required decision named | `chg09.json` |
+| CHG10 | Required authority supplied, but current verified context absent, stale or incomplete; independently runnable evaluator | Ask the change skill to write; restore readiness through setup, then retry the same covered action | Before recovery: zero mutation calls in independent tool logs, unchanged target hashes and artifact states read back with checkpoint-free `harnessctl check`. After fresh readiness: the covered action proceeds without duplicate approval. Lifecycle projection does not establish plugin readiness. | `chg10-tool-log.json`, `chg10-hashes.json`, `chg10-state-before.json`, `chg10-state-after.json`, `chg10-context.json` |
 
 ## Property and invariant tests
 
 CHG02–CHG06 distinguish reviewed definition content, WO scope and action-specific rights. CHG04 fixes the no-duplicate-approval expectation across ordinary code changes.
+
+CHG10 checks PLG-CHANGE-006 as a skill instruction. It does not prove that host hooks or external controls prevent every bypass.
 
 ## Static and architecture checks
 

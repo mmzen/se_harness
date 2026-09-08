@@ -194,6 +194,8 @@ Use the actual selected action's paths and comparison base. `--changes-complete`
 
 The two skill modes and `scripts/check-tool-action.py` call this same CLI. The hook adapter needs explicit supported-action mappings and must avoid recursion. The optional `evidence-reviewer` follows the [shared host registration](README.md#shared-component-names-and-calling-convention).
 
+The handler's inner deadline leaves time to stop evaluator subprocesses and return denial before the host timeout. Test both the denial and unchanged target state. If the guard never starts or the host stops waiting, inspect actual effects before retrying; silence does not establish prevention. See the [timeout contract](../../engineering/plugin-integration/specifications/SPEC-PLG-008.md).
+
 **Inputs, outputs, and writes**
 
 - **Inputs:** Selected WO, approved criteria, intended paths, actual Git changes, comparison base, commands, and results.

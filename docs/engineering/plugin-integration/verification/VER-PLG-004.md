@@ -17,6 +17,8 @@ verifies = ["REQ-PLG-007"]
 
 Expected event names and host behavior come from SPEC-PLG-004 and the exact Claude Code documentation assessed. An observation fixture records the host; it does not simulate proof of host support.
 
+A passing probe means complete, reproducible observations under PLG-CLCP-006/007, not a favorable host answer. An evidenced incompatibility is a valid finding; missing or unreproducible observations do not pass.
+
 ## Requirement-to-evidence matrix
 
 | Requirement | Method | Cases | Pass condition |

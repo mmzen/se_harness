@@ -3,7 +3,7 @@
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 > Revised 2026-09-08. Proposal only; this note authorizes no implementation or lifecycle decision.
-> Shared baseline: main `fae52e1b`, candidate source 0.17.0, governing released evaluator 0.16.0. The proposed plugin has not been built or integration-tested.
+> Shared baseline: main `560973cf`, candidate source 0.17.0, governing released evaluator 0.16.0. The proposed plugin has not been built or integration-tested.
 > This replaces the [earlier exploration](agentic-execution-plugin-distribution.md).
 
 The [16 implementation packets](../engineering/plugin-integration/README.md) turn this proposal into draft contracts and bounded work orders. They use the same baseline and are reviewed with these notes in [PR #416](https://github.com/mmzen/se_harness/pull/416).
@@ -101,6 +101,8 @@ Hooks may be registered before the environment exists. Their host shell guard ch
 
 A skill instructs the agent to use existing commands. The evaluator determines what is allowed. Preserve its blockers, actual writes, and required decisions; a successful command does not approve the next action.
 
+The `change` and `evidence` skills refuse governed writes until current verified context is established, and direct recovery to `setup`. This instruction is tested separately from deterministic host enforcement.
+
 Skill commands in the scenarios are optional ways to enter a workflow. They are not additional approval stops. The agent can move from `change` to `evidence` when the existing workflow and authority permit it. Keep the contracts of the existing read-only skills; `harness-operator-brief` still requires an explicit request.
 
 The main agent implements the work. Optional `investigator` and `evidence-reviewer` subagents provide read-only findings. Neither replaces the accountable human's verification or release decision.
@@ -118,6 +120,8 @@ Use two scripts with explicit responsibilities. Both call the same `harnessctl` 
 After its shell guard, invoke each script as `ENV_PYTHON -I ABS_SCRIPT`, with absolute paths and separate arguments. A missing runtime reports unready; a covered tool event uses that host's demonstrated refusal format. Host failure behavior must be observed rather than assumed. Keep verification and injection together, in order, inside **`session-context.py`**: matching hooks can run concurrently. The setup skill can also call `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
 
 Hooks do not initialize repositories, upgrade locks, or make human decisions. In an unrelated repository, startup writes nothing. A missing or untrusted hook is a readiness failure for the proposed workflow, not proof that the host has blocked every tool.
+
+**A timeout is not a refusal.** Give the tool-check handler an internal deadline shorter than the host's configured timeout, allowing time to stop evaluator subprocesses and return a supported denial. Test the deadline and actual denied effect on each supported host. If the host stops waiting or the guard never starts, inspect what happened before retrying; no handler response means no demonstrated protection. Claude explicitly documents non-blocking command-hook timeouts and launch failures. Codex failure behavior still needs observation on each claimed profile. [Claude timeout behavior](https://code.claude.com/docs/en/hooks#timeouts), [contract and live checks](../engineering/plugin-integration/specifications/SPEC-PLG-008.md).
 
 ### The merge boundary must stand on its own
 

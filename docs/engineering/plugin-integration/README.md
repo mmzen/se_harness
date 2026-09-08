@@ -4,7 +4,7 @@
 
 These artifacts develop the [plugin proposal](../../notes/plugin-installation-proposal-2026-09-06.md), [operation workflows](../../notes/plugin-operation-workflows-2026-09-06.md), and [16 scenarios](../../notes/plugin-scenarios/README.md). The notes and artifacts are reviewed together in [PR #416](https://github.com/mmzen/se_harness/pull/416), which incorporates the notes from PR #360 at `9e894e99`.
 
-The notes and artifacts use main `fae52e1b`, with candidate source 0.17.0 and governing evaluator 0.16.0. Approved artifact contracts and the selected released evaluator govern implementation.
+The notes and artifacts use main `560973cf`, with candidate source 0.17.0 and governing evaluator 0.16.0. Approved artifact contracts and the selected released evaluator govern implementation.
 
 No implementation, approval, verification record, or release record is included. All definitions and work orders remain `draft`; the five decision records remain `open`. File creation and validation do not authorize work.
 
@@ -95,6 +95,7 @@ DEC-PLG-004 names WO-PLG-012, so D07 precedes D08.
 All sixteen draft scopes now name their own definition files. Each selected introduction WO additionally names only its group's shared and peer records.
 D01 owns the initial glossary, engineering index and exact delivery-note changes; every introduction selector owns the exact domain index path.
 Each delivered index links only to artifacts already present. This complete umbrella index is not the D01 index.
+D01 omits the proposal, operation-map and scenario links until those notes are delivered; its index links only its four probe records and the delivery note.
 
 No broad carrier work order or whole-domain scope is created. There are 16 draft scope edits, no typed-relation changes, and no approved-artifact amendment records.
 Definition carriage grants no permission to implement a sibling work order or approve its artifacts.

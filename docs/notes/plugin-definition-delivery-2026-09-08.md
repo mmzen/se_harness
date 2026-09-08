@@ -3,7 +3,7 @@
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 This is the definition-delivery plan for the 16 implementation packets in [PR #416](https://github.com/mmzen/se_harness/pull/416).
-The baseline is main `fae52e1b`: candidate source 0.17.0, governing evaluator 0.16.0.
+The baseline is main `560973cf`: candidate source 0.17.0, governing evaluator 0.16.0.
 All current PLG records remain draft or open. This plan approves nothing.
 
 ## Why split delivery this way
@@ -48,6 +48,7 @@ ARCHs use `architecture/`; ADRs use `architecture/adr/`. Each filename is its fu
 D01 also carries the one-time changes to `GLOSSARY.md`, `docs/engineering/README.md`, and this exact delivery-note file.
 Each selected introduction WO owns the exact domain `README.md` path for its slice update.
 The slice index links only to already introduced files. Do not copy the complete umbrella index into D01.
+In D01, link only the four probe artifacts and this delivery note. Omit the full proposal, operation map and scenario links until those notes exist on the delivery branch. Check every local link before submitting each slice.
 
 Other notes may be delivered separately under the repository's existing notes-only exception.
 This delivery note is explicitly in D01's scope; remaining proposal notes are not silently added to that diff.
@@ -65,6 +66,15 @@ This 27-artifact group is the cost of preserving complete packets and the curren
 It is not a claim that 27 is the smallest possible graph.
 Smaller introductions would require partial packets, redesigned architecture boundaries, or temporary relation changes with later amendments.
 
+The review suggested separating shared handlers from native adapters. That is a plausible design boundary, but the extra records have a cost:
+
+| Option | Largest affected introductions | Total introduction groups | Total artifacts |
+| --- | --- | ---: | ---: |
+| Current shared architecture | One group of 27 | 11 | 84 |
+| Separate handlers and native adapters | Two groups of 13 and 16 | 12 | 86 |
+
+The alternative adds one ARCH and one ADR. A finer split into 14 or 15 groups needs three or four additional ARCH/ADR pairs respectively. Retain the current proposal for the probes; before approving ARCH-PLG-002, use their findings to decide whether independent handler delivery justifies the two-boundary split. No approval or typed-relation change is implied by this comparison.
+
 DEC-PLG-004 names WO-PLG-012, so D07 precedes D08.
 Each decision arrives with the definition it blocks.
 Neither probe carries unrelated architecture records or all five decisions.
@@ -77,6 +87,15 @@ Only each group's named records are introduced through its selected WO; the othe
 
 D01 and D02 first need their named requirement, specification and verification approvals, followed by the engineering owner's WO approval.
 Their definition PRs may then be reviewed and integrated under explicit repository-owner authority.
+
+| Owner | Codex probe | Claude Code probe |
+| --- | --- | --- |
+| Requirements steward | REQ-PLG-006 | REQ-PLG-007 |
+| Technical owner | SPEC-PLG-003 | SPEC-PLG-004 |
+| Assurance owner | VER-PLG-003 | VER-PLG-004 |
+| Engineering owner | WO-PLG-003 | WO-PLG-004 |
+
+Read-only start and review preflights on main `560973cf` plus these drafts report those four inactive records for each probe, with no upstream or identity blocker. This is a readiness diagnosis, not approval. After actual decisions and definition integration, rerun the current preflight and obtain the separate start decision.
 
 Afterward, the owner can start the probes.
 Each probe needs actual retained results, completion and independent assurance through the existing workflow.
@@ -122,8 +141,8 @@ The existing Git-diff gate enforces each selected WO's declared paths. It does n
 
 ## Rehearsal and its limits
 
-On 2026-09-08, the revised draft scopes were rehearsed against main `fae52e1b` in disposable local repositories.
-The artifacts came from the working proposal based on `3575f727`; no lifecycle state was changed.
+On 2026-09-08, the revised draft scopes were rehearsed against main `560973cf` in disposable local repositories.
+The artifacts came from the working proposal based on merge `1ed43d38`; no lifecycle state was changed.
 
 For each row, the fixture introduced exactly that group's records and its assigned index changes.
 The cumulative index linked only to records already present.

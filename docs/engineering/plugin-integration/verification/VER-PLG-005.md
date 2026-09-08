@@ -15,13 +15,13 @@ verifies = ["REQ-PLG-008"]
 
 ## Independence
 
-Expected mappings come from SPEC-PLG-005, DEC-PLG-001 and the retained WO-PLG-003 host proof. Expected script effects come from SPEC-PLG-007/008.
+Expected mappings come from SPEC-PLG-005, DEC-PLG-001 and the retained WO-PLG-003 host proof. Expected script effects come from SPEC-PLG-007/008. Fix timing budgets and expected target effects before execution; an independent observer records target hashes and effect counts outside hook logs.
 
 ## Requirement-to-evidence matrix
 
 | Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
-| REQ-PLG-008 | test, inspection | C01–C08 | Observed discovery, invocation and refusal agree with the positively accepted host mapping. |
+| REQ-PLG-008 | test, inspection | C01–C12 | Accepted discovery/invocation mapping and timely refusal hold; missing required enforcement or invalid timing refuses qualification. |
 
 ## Acceptance scenarios
 
@@ -38,6 +38,10 @@ Each case creates new test evidence under `evidence/WO-PLG-005/Cnn/`: `actions.t
 | C06 | Paths and arguments containing spaces/quotes; an unsupported tool | Trigger supported and unsupported calls. | Supported argv boundaries match input exactly; the unsupported route is labeled as a coverage gap, without a checked-success result. | input/argv comparison; coverage output |
 | C07 | Excluded or unaccepted host profile; changed decision status without a positive route | Attempt to qualify the production adapter. | No supported-profile result is issued; repository lifecycle states and helper-spawn log remain unchanged. | profile decision; result; state snapshots; spawn log |
 | C08 | Thin host guard; interpreter absent, then present with wrong evaluator identity | Trigger startup before setup, after removal and with the wrong environment. | Absent runtime produces setup-required guidance without a Python call; existing runtime runs full identity/context checks and cannot report ready on identity failure. | guard output; interpreter invocation count; identity refusal; context output |
+| C09 | Live accepted host profile; synchronous binding; fixed host/inner budgets; separately failed, interrupted and stalled evaluator children | Repeat VER-PLG-008 C03 through the real host's mapped edit tool | Running handler stops its evaluator process tree and returns the documented denial before the host timeout; target SHA-256 unchanged, effect count zero | configured budgets; monotonic startup/evaluator/cleanup/response timestamps; child exits; raw denial; independent target hashes/effect count |
+| C10 | Live disposable profile; handler hangs past the configured host timeout | Repeat VER-PLG-008 C08; observe the pending edit after host cancellation | Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified; inspect before retry | host cancellation/output trace; independent target hashes/effect count; qualification result |
+| C11 | Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output | Repeat VER-PLG-008 C09 through the real host | Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails qualification | launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity |
+| C12 | Disposable live-host bindings with insufficient timeout margin or asynchronous before-tool execution | Load each binding and evaluate it against VER-PLG-008 C10 and the adapter timing rule | Actual configured mode/budgets are retained; asynchronous or insufficient-budget routes cannot qualify, even if an isolated check passes | loaded binding; host configuration; timing comparison; rejected qualification result |
 
 ## Property and invariant tests
 
@@ -45,7 +49,7 @@ C02 and C06 compare complete argument arrays. C03 checks actual target bytes, no
 
 ## Static and architecture checks
 
-Retain a mapping from each host binding to its shared source under ARCH-PLG-002/ADR-PLG-002; no copied evaluator policy is accepted.
+Retain a mapping from each host binding to its shared source under ARCH-PLG-002/ADR-PLG-002; no copied evaluator policy is accepted. C09–C12 verify PLG-CDXA-009/010 against actual host bindings; C12 also rejects asynchronous enforcement.
 
 ## Security and privacy checks
 
@@ -53,11 +57,11 @@ C03–C06 separate actual refusal from unsupported coverage. Keep external crede
 
 ## Performance and resilience checks
 
-Retain event-receipt, script-start and script-end timestamps so adapter dispatch cost can be separated from evaluator time.
+Retain event-receipt, script-start and script-end timestamps so adapter dispatch cost can be separated from evaluator time. C09 includes process-tree cleanup and response margins; C10 separates host cancellation from the handler's inner timeout.
 
 ## Manual assessments
 
-Run every positively accepted Codex/OS combination with recorded Python and evaluator versions. Offline protocol fixtures alone cannot satisfy C01–C06 live-host evidence.
+Run every positively accepted Codex/OS combination with recorded host, Python and evaluator versions. C09–C12 repeat the shared failure cases on real bindings; protocol fixtures alone cannot satisfy live-host evidence.
 
 ## Evidence retention
 
@@ -66,4 +70,4 @@ Record expected and observed values separately, with a pass/fail/unavailable con
 
 ## Residual uncertainty
 
-Native interception covers only the demonstrated host surface. Independent privileged-action controls in issue #347 remain separate.
+A truthful failure observation is not a passing enforcement result. Native interception covers only demonstrated behavior and does not guarantee future startability. Independent privileged-action controls in issue #347 remain separate.

@@ -16,20 +16,20 @@ specifies = ["REQ-PLG-019"]
 
 ## In plain words
 
-The agent prepares evidence for selected work. It reports facts and the next real decision without inventing approval.
+Prepare observed evidence and identify the next accountable decision.
 
 ## Scope
 
-This governs the evidence skill. Existing workflow and provenance contracts retain lifecycle authority; SPEC-PLG-012 covers the separate read-only skills.
+Existing workflow/provenance rules govern lifecycle decisions; SPEC-PLG-012 covers read-only skills.
 
 ## Terms
 
 - **Preparation.** Recording evidence before the separate accountable decision.
-- **Applicable authority.** The existing decision covers the action-specific inputs in SPEC-PLG-010's applicability table.
+- **Applicable authority.** Action inputs match SPEC-PLG-010's applicability rules.
 
 ## Rules
 
-**PLG-EVD-001.** The evidence skill MUST follow the selected procedure from WORKFLOW.json using the exact verified external evaluator.
+**PLG-EVD-001.** The skill MUST follow the selected WORKFLOW.json procedure using the exact verified external evaluator.
 
 **PLG-EVD-002.** Retained evidence MUST identify actual commands, outcomes, candidate identity and relevant files; missing or failed observations MUST remain visible.
 
@@ -37,11 +37,13 @@ This governs the evidence skill. Existing workflow and provenance contracts reta
 
 **PLG-EVD-004.** Record preparation MUST remain separate from the assurance or release decision; the skill MUST NOT supply approval on the owner's behalf.
 
-**PLG-EVD-005.** The skill MUST reuse applicable authority under SPEC-PLG-010, stopping affected actions when governing inputs change, authority is missing, gates fail or effects are uncertain.
+**PLG-EVD-005.** The skill MUST reuse applicable authority under SPEC-PLG-010; changed inputs, missing authority, failed gates or uncertain effects MUST stop affected actions.
 
 **PLG-EVD-006.** Agent merge or publication MUST require exact action authority and demonstrated independent external enforcement; otherwise the skill MUST report the automation blocker.
 
 **PLG-EVD-007.** When required, capture-verification MUST bind the clean committed candidate; the resulting VREC MUST be retained in a later governance commit, never its own bound candidate.
+
+**PLG-EVD-008.** The skill MUST refuse governed writes until current verified governance context is established, and route readiness recovery through setup.
 
 ## Failure behaviour
 
@@ -50,10 +52,11 @@ This governs the evidence skill. Existing workflow and provenance contracts reta
 | Missing check or owner decision | Report the missing fact or decision | Existing refusal or missing right |
 | Writing handoff lacks applicable authority | Stop before evidence changes | Missing write authority |
 | Candidate changed, dirty or uncommitted | Stop the affected candidate-bound operation | Identity mismatch or capture refusal |
+| Governance context unestablished | Refuse governed writes; recover through setup | Readiness blocker |
 
 ## Examples
 
-**Given** a failed check, **when** evidence is prepared, **then** the failure remains visible and assurance stays undecided (PLG-EVD-002, PLG-EVD-004).
+**Given** unestablished context, **when** writing evidence is requested, **then** PLG-EVD-008 refuses the write.
 
 **Given** authority for candidate A, **when** candidate B is selected, **then** PLG-EVD-005 stops reuse of candidate A's decision.
 
@@ -61,9 +64,9 @@ This governs the evidence skill. Existing workflow and provenance contracts reta
 
 | Requirement | Rules |
 | --- | --- |
-| `REQ-PLG-019` | PLG-EVD-001, PLG-EVD-002, PLG-EVD-003, PLG-EVD-004, PLG-EVD-005, PLG-EVD-006, PLG-EVD-007 |
+| `REQ-PLG-019` | PLG-EVD-001, PLG-EVD-002, PLG-EVD-003, PLG-EVD-004, PLG-EVD-005, PLG-EVD-006, PLG-EVD-007, PLG-EVD-008 |
 
 ## Not decided here
 
 - Project-specific build and release commands.
-- Lifecycle predicates and external authorization.
+- Lifecycle predicates and external authorization; skill instructions are not deterministic enforcement.

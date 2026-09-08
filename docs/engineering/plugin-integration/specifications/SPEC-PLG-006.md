@@ -16,55 +16,59 @@ specifies = ["REQ-PLG-009"]
 
 ## In plain words
 
-The host binds shared components without adding governance policy.
+The host connects shared components. A failed or missing hook does not prove an action was blocked.
 
 ## Scope
 
-This contract covers Claude Code bindings after the technical owner selects a supported route through DEC-PLG-002.
-SPEC-PLG-004 governs probe evidence.
-SPEC-PLG-002 owns runtime identity; SPEC-PLG-007/008 own shared handlers.
+Claude Code bindings after DEC-PLG-002; SPEC-PLG-004 owns probe evidence, SPEC-PLG-002 identity, and SPEC-PLG-007/008 shared handlers.
 
 ## Terms
 
-- **Shell guard.** A host hook command reporting missing runtime before invoking Python.
+- **Shell guard.** A host command checking runtime availability before Python.
+- **Host timeout.** The configured time limit for the entire hook command.
 
 ## Rules
 
-**PLG-CLCA-001.** The adapter MUST use only a positively accepted supported route and host/platform combinations recorded through DEC-PLG-002.
+**PLG-CLCA-001.** The adapter MUST use only positively accepted routes and profiles recorded through DEC-PLG-002.
 
-**PLG-CLCA-002.** The adapter MUST expose the packaged shared skills through the host's proven discovery mechanism, preserving each skill's invocation contract.
+**PLG-CLCA-002.** Packaged shared skills MUST use proven host discovery and preserve their invocation contracts.
 
-**PLG-CLCA-003.** A host-shell guard MUST precede `session-context.py` for session events and `check-tool-action.py` for supported tool events, without installing dependencies.
+**PLG-CLCA-003.** Host-shell guards MUST precede `session-context.py` for sessions and `check-tool-action.py` for supported tool events, without installing dependencies.
 
-**PLG-CLCA-004.** Bindings MUST translate host event fields and script results without duplicating evaluator rules or granting decision rights.
+**PLG-CLCA-004.** Bindings MUST translate host fields and results without duplicating evaluator rules or granting authority.
 
-**PLG-CLCA-005.** Script invocation MUST preserve arguments and absolute paths under the selected interpreter route, including paths containing spaces.
+**PLG-CLCA-005.** Invocation MUST preserve arguments and absolute interpreter/script paths, including paths containing spaces.
 
-**PLG-CLCA-006.** Missing runtime, required fields, failed scripts, or inactive bindings MUST report unready; interpreter existence MUST NOT establish readiness.
+**PLG-CLCA-006.** Missing runtime or required fields, failed scripts, or inactive bindings MUST report unready; interpreter existence alone MUST NOT establish readiness.
 
-**PLG-CLCA-007.** The adapter MUST report absent coverage; a declared governed effect escaping required refusal MUST remain unqualified under SPEC-PLG-008.
+**PLG-CLCA-007.** The adapter MUST report absent coverage; effects escaping required refusal MUST remain unqualified under SPEC-PLG-008.
 
 **PLG-CLCA-008.** Unready guards MUST preserve ordinary host permissions and already-authorized setup access without checked-success claims or permission overrides.
+
+**PLG-CLCA-009.** Before-tool bindings MUST run synchronously with explicit host timeouts exceeding SPEC-PLG-008's inner deadline plus measured startup, cancellation and response margins.
+
+**PLG-CLCA-010.** Qualification MUST observe guard startup and accepted denial on each claimed profile; host timeout, launch failure or missing output MUST NOT imply prevented effects.
 
 ## Failure behaviour
 
 | Trigger | Response | Diagnostic |
 | --- | --- | --- |
-| No accepted route | Refuse readiness. | None |
-| Unsupported host or platform | Refuse readiness and identify the supported combination. | None |
-| Missing runtime | Report setup required in the demonstrated host format. | Setup-required message |
-| Malformed event or failed script | Preserve the failure in the host's supported result format. | Shared script or host output |
+| Unsupported route/profile | Refuse readiness | Unsupported combination |
+| Runnable guard; missing Python | Keep setup accessible, governance unready | Setup required |
+| Handler returns a valid refusal | Observe host rejection before effect | Host-accepted denial |
+| Host timeout, launch failure or invalid output | Inspect effects; record missing enforcement | Host failure/coverage gap |
 
 ## Examples
 
-**Given** a missing event field, **when** the adapter receives a tool action, **then** it reports failure under PLG-CLCA-006.
+**Given** a stopped hook, **when** output is absent, **then** PLG-CLCA-010 requires observing effects rather than assuming refusal.
 
 ## Coverage
 
 | Requirement | Rules |
 | --- | --- |
-| `REQ-PLG-009` | PLG-CLCA-001, PLG-CLCA-002, PLG-CLCA-003, PLG-CLCA-004, PLG-CLCA-005, PLG-CLCA-006, PLG-CLCA-007, PLG-CLCA-008 |
+| `REQ-PLG-009` | PLG-CLCA-001, PLG-CLCA-002, PLG-CLCA-003, PLG-CLCA-004, PLG-CLCA-005, PLG-CLCA-006, PLG-CLCA-007, PLG-CLCA-008, PLG-CLCA-009, PLG-CLCA-010 |
 
 ## Not decided here
 
-- Setup eligibility is instruction-level; the guard does not authenticate authority or enforce an action classifier.
+- Setup eligibility remains instruction-level, without an authority classifier.
+- Host responses follow the assessed [official reference](https://code.claude.com/docs/en/hooks#timeouts); qualification establishes actual behavior, not future availability.
