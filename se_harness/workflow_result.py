@@ -6,11 +6,18 @@ import json
 import shlex
 from typing import Any, Iterable, Mapping
 from se_harness.integrity import raw_sha256
+from se_harness.workflow_contract import RESULT_STATUSES, restitution_fields
+from se_harness.codes import CodedError, WEX230
 
 
 SCHEMA = "se-harness-workflow-result-v2"
+
+
+class RestitutionError(CodedError, ValueError):
+    """A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers."""
+
 OUTCOMES = {"completed", "blocked"}
-STATUSES = {"pass", "fail", "not_assessable"}
+STATUSES = RESULT_STATUSES
 
 
 def _text(value: object) -> str:
@@ -30,39 +37,29 @@ def _sentences(values: Iterable[object]) -> list[str]:
 
 
 def _validate_restitution(value: Mapping[str, Any], outcome: str) -> None:
-    required = {
-        "outcome",
-        "done",
-        "not_done",
-        "blocked_by",
-        "current_lifecycle_state",
-        "decision_required",
-        "next",
-        "command_or_response",
-        "alternatives",
-    }
-    if set(value) != required:
-        raise ValueError("WEX230: restitution fields do not match schema 2")
+    # ECP-PRM-020: the schema-2 field set is the contract's `restitution_fields`.
+    if set(value) != set(restitution_fields()):
+        raise RestitutionError(WEX230, "restitution fields do not match schema 2")
     if value.get("outcome") != outcome:
-        raise ValueError("WEX230: restitution outcome does not match operation outcome")
+        raise RestitutionError(WEX230, "restitution outcome does not match operation outcome")
     for name in ("done", "not_done", "blocked_by", "current_lifecycle_state", "alternatives"):
         if not isinstance(value.get(name), list):
-            raise ValueError(f"WEX230: restitution {name} must be an array")
+            raise RestitutionError(WEX230, f"restitution {name} must be an array")
     if outcome == "completed" and value["blocked_by"]:
-        raise ValueError("WEX230: completed restitution cannot contain blockers")
+        raise RestitutionError(WEX230, "completed restitution cannot contain blockers")
     if outcome == "blocked" and not value["blocked_by"]:
-        raise ValueError("WEX230: blocked restitution requires an exact blocker")
+        raise RestitutionError(WEX230, "blocked restitution requires an exact blocker")
     next_step = value.get("next")
     if not isinstance(next_step, dict) or set(next_step) != {"procedure_id", "step_id", "action"}:
-        raise ValueError("WEX230: restitution must contain exactly one typed next step")
+        raise RestitutionError(WEX230, "restitution must contain exactly one typed next step")
     command = value.get("command_or_response")
     if not isinstance(command, dict) or command.get("kind") not in {"command", "response"}:
-        raise ValueError("WEX230: command_or_response must be command or response")
+        raise RestitutionError(WEX230, "command_or_response must be command or response")
     if command["kind"] == "command":
         if set(command) != {"kind", "argv"} or not isinstance(command["argv"], list):
-            raise ValueError("WEX230: command authority must be an argument array")
+            raise RestitutionError(WEX230, "command authority must be an argument array")
     elif set(command) != {"kind", "value"} or not isinstance(command["value"], str):
-        raise ValueError("WEX230: response authority must be text")
+        raise RestitutionError(WEX230, "response authority must be text")
 
 
 def build_result(
@@ -87,10 +84,10 @@ def build_result(
     writes: Iterable[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     if outcome not in OUTCOMES:
-        raise ValueError(f"WEX230: invalid schema-2 outcome {outcome!r}")
+        raise RestitutionError(WEX230, f"invalid schema-2 outcome {outcome!r}")
     status = compliance.get("status")
     if status not in STATUSES:
-        raise ValueError(f"WEX230: invalid compliance status {status!r}")
+        raise RestitutionError(WEX230, f"invalid compliance status {status!r}")
     _validate_restitution(restitution, outcome)
     result = {
         "schema": SCHEMA,
@@ -145,7 +142,7 @@ def _render_decision(value: object) -> list[str]:
     if value is None:
         return ["None."]
     if not isinstance(value, Mapping):
-        raise ValueError("WEX230: decision_required must be null or an object")
+        raise RestitutionError(WEX230, "decision_required must be null or an object")
     outcomes = ", ".join(_text(item) for item in value.get("outcomes", []))
     return [
         (
@@ -164,10 +161,10 @@ def _render_command(value: Mapping[str, Any]) -> list[str]:
 
 def render_human(result: Mapping[str, Any]) -> str:
     if result.get("schema") != SCHEMA:
-        raise ValueError("WEX230: canonical restitution requires schema 2")
+        raise RestitutionError(WEX230, "canonical restitution requires schema 2")
     restitution = result.get("restitution")
     if not isinstance(restitution, Mapping):
-        raise ValueError("WEX230: schema-2 result has no restitution")
+        raise RestitutionError(WEX230, "schema-2 result has no restitution")
     outcome = str(result.get("operation", {}).get("outcome", ""))
     _validate_restitution(restitution, outcome)
     next_step = restitution["next"]
@@ -225,7 +222,7 @@ def _render_context(value: object) -> list[str]:
     """Render the `next` context as ordered, labelled lines (ECP-NXT-007)."""
 
     if not isinstance(value, Mapping):
-        raise ValueError("WEX230: context must be an object")
+        raise RestitutionError(WEX230, "context must be an object")
     state = value.get("state", {})
     step = value.get("next", {})
     argv = [_text(item) for item in step.get("argv", [])]

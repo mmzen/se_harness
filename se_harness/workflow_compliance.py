@@ -20,6 +20,7 @@ from se_harness.workflow_contract import (
     EVIDENCE_CHECKPOINTS,
     Checkpoint,
     ContractError,
+    aggregation_order,
     effective_checkpoints,
     load_validated_contracts,
     select_rule,
@@ -34,6 +35,27 @@ from se_harness.workflow_procedures import (
     select_current_step,
 )
 from se_harness.workflow_result import build_result
+from se_harness.codes import (
+    CodedError,
+    E001,
+    E003,
+    E_CIP_001,
+    E_DCM_004,
+    I001,
+    WEX200,
+    WEX201,
+    WEX210,
+    WEX220,
+    WEX_ADS_001,
+    WEX_ECP_002,
+    WEX_ECP_003,
+    WEX_ECP_010,
+    WEX_ECP_011,
+    WEX_ECP_012,
+    W_ADS_001,
+    W_ADS_002,
+    W_ECP_002,
+)
 
 
 CHANGE_SET_SCHEMA = "se-harness-change-set-v1"
@@ -43,7 +65,7 @@ _RESERVED = {
     *(f"COM{index}" for index in range(1, 10)),
     *(f"LPT{index}" for index in range(1, 10)),
 }
-_REPOSITORY_ERROR_CODES = {"E001", "E003"}
+_REPOSITORY_ERROR_CODES = {E001, E003}
 
 
 @dataclass(frozen=True)
@@ -71,30 +93,30 @@ class CheckpointContext:
     target: str | None = None
 
 
-_pairs = unique_object_hook(lambda key: HarnessError(f"WEX200: duplicate JSON key in change manifest: {key}"))
+_pairs = unique_object_hook(lambda key: CodedError(WEX200, f"duplicate JSON key in change manifest: {key}"))
 
 
 def normalize_path(value: object, *, directory_allowed: bool = False) -> str:
     if not isinstance(value, str) or not value or len(value) > 4096:
-        raise HarnessError("WEX200: path must be non-empty UTF-8 text of at most 4096 characters")
+        raise CodedError(WEX200, "path must be non-empty UTF-8 text of at most 4096 characters")
     if _CONTROL.search(value) or "\\" in value or ":" in value or any(token in value for token in ("*", "?", "[", "]")):
-        raise HarnessError(f"WEX200: path is not a normalized repository path: {value!r}")
+        raise CodedError(WEX200, f"path is not a normalized repository path: {value!r}")
     directory = value.endswith("/")
     if directory and not directory_allowed:
-        raise HarnessError(f"WEX200: changed path must name a file or component: {value!r}")
+        raise CodedError(WEX200, f"changed path must name a file or component: {value!r}")
     candidate = value[:-1] if directory else value
     if not candidate or candidate.startswith("/") or candidate.startswith("//"):
-        raise HarnessError(f"WEX200: absolute or empty path is forbidden: {value!r}")
+        raise CodedError(WEX200, f"absolute or empty path is forbidden: {value!r}")
     parts = PurePosixPath(candidate).parts
     if not parts or any(part in {"", ".", ".."} for part in parts):
-        raise HarnessError(f"WEX200: dot or empty path component is forbidden: {value!r}")
+        raise CodedError(WEX200, f"dot or empty path component is forbidden: {value!r}")
     for part in parts:
         stem = part.rstrip(". ").split(".", 1)[0].upper()
         if stem in _RESERVED or part.endswith((".", " ")):
-            raise HarnessError(f"WEX200: reserved path component is forbidden: {value!r}")
+            raise CodedError(WEX200, f"reserved path component is forbidden: {value!r}")
     normalized = PurePosixPath(*parts).as_posix() + ("/" if directory else "")
     if normalized != value:
-        raise HarnessError(f"WEX200: path is not normalized: {value!r}")
+        raise CodedError(WEX200, f"path is not normalized: {value!r}")
     return normalized
 
 
@@ -105,7 +127,7 @@ def _unique_paths(values: Iterable[object], *, directory_allowed: bool) -> tuple
         path = normalize_path(value, directory_allowed=directory_allowed)
         key = path.casefold()
         if key in folded:
-            raise HarnessError(f"WEX200: duplicate or case-ambiguous path: {path!r}")
+            raise CodedError(WEX200, f"duplicate or case-ambiguous path: {path!r}")
         folded[key] = path
         result.append(path)
     return tuple(result)
@@ -118,7 +140,7 @@ def parse_change_manifest(root: Path, manifest: Path) -> ChangeSet:
             candidate = manifest.resolve(strict=True)
             candidate.relative_to(root)
         except (OSError, ValueError) as exc:
-            raise HarnessError("WEX200: change manifest must remain inside the repository") from exc
+            raise CodedError(WEX200, "change manifest must remain inside the repository") from exc
     else:
         normalized = normalize_path(raw)
         candidate = safe_destination(root, Path(normalized))
@@ -126,24 +148,24 @@ def parse_change_manifest(root: Path, manifest: Path) -> ChangeSet:
             candidate = candidate.resolve(strict=True)
             candidate.relative_to(root)
         except (OSError, ValueError) as exc:
-            raise HarnessError("WEX200: change manifest cannot resolve safely") from exc
+            raise CodedError(WEX200, "change manifest cannot resolve safely") from exc
     if candidate.is_symlink() or not candidate.is_file():
-        raise HarnessError("WEX200: change manifest must be one ordinary file")
+        raise CodedError(WEX200, "change manifest must be one ordinary file")
     try:
         data = candidate.read_bytes()
         if len(data) > 10_000_000:
-            raise HarnessError("WEX200: change manifest exceeds 10 MB")
+            raise CodedError(WEX200, "change manifest exceeds 10 MB")
         value = json.loads(data.decode("utf-8"), object_pairs_hook=_pairs)
     except HarnessError:
         raise
     except (OSError, UnicodeError, json.JSONDecodeError, RecursionError) as exc:
-        raise HarnessError(f"WEX200: invalid change manifest: {exc}") from exc
+        raise CodedError(WEX200, f"invalid change manifest: {exc}") from exc
     if not isinstance(value, dict) or set(value) != {"schema", "complete", "paths"}:
-        raise HarnessError("WEX200: change manifest fields must be schema, complete, and paths")
+        raise CodedError(WEX200, "change manifest fields must be schema, complete, and paths")
     if value.get("schema") != CHANGE_SET_SCHEMA or not isinstance(value.get("complete"), bool):
-        raise HarnessError("WEX200: change manifest schema or completeness value is invalid")
+        raise CodedError(WEX200, "change manifest schema or completeness value is invalid")
     if not isinstance(value.get("paths"), list):
-        raise HarnessError("WEX200: change manifest paths must be an array")
+        raise CodedError(WEX200, "change manifest paths must be an array")
     return ChangeSet(
         paths=_unique_paths(value["paths"], directory_allowed=False),
         complete=value["complete"],
@@ -163,12 +185,11 @@ def _git_lines(root: Path, arguments: list[str], *, base: str) -> list[str]:
     # ECP-PRM-003: the one launcher.
     completed = run_git(
         root, *arguments, timeout=120,
-        error=lambda message: HarnessError(f"WEX-ECP-003: git is unavailable for base {base!r}: {message}"),
+        error=lambda message: CodedError(WEX_ECP_003, f"git is unavailable for base {base!r}: {message}"),
     )
     if completed.returncode != 0:
         detail = _text(completed.stderr).strip().splitlines()
-        raise HarnessError(
-            f"WEX-ECP-003: git {arguments[0]} failed for base {base!r} with exit status {completed.returncode}"
+        raise CodedError(WEX_ECP_003, f"git {arguments[0]} failed for base {base!r} with exit status {completed.returncode}"
             + (f": {detail[0]}" if detail else "")
         )
     return [item.decode("utf-8") for item in completed.stdout.split(b"\0") if item]
@@ -184,9 +205,9 @@ def git_change_set(root: Path, base: str) -> ChangeSet:
     """
 
     if not isinstance(base, str) or not base.strip() or base.startswith("-"):
-        raise HarnessError(f"WEX-ECP-003: the Git base must be a revision, not {base!r}")
+        raise CodedError(WEX_ECP_003, f"the Git base must be a revision, not {base!r}")
     if not (root / ".git").exists():
-        raise HarnessError(f"WEX-ECP-003: {root} is not a Git checkout; --from-git needs one")
+        raise CodedError(WEX_ECP_003, f"{root} is not a Git checkout; --from-git needs one")
     _git_lines(root, ["rev-parse", "--verify", "--quiet", f"{base}^{{commit}}"], base=base)
     # `-z --name-status` alternates one status letter and one path; an `A` names a
     # file absent from the base (SPEC-RSK-010 RSK-MGT-027 reads that fact).
@@ -202,7 +223,7 @@ def git_change_set(root: Path, base: str) -> ChangeSet:
     try:
         paths = _unique_paths(ordered, directory_allowed=False)
     except HarnessError as exc:
-        raise HarnessError(f"WEX-ECP-003: the Git change set is not a normalized path set: {exc}") from exc
+        raise CodedError(WEX_ECP_003, f"the Git change set is not a normalized path set: {exc}") from exc
     return ChangeSet(paths=paths, complete=True, source="git", added=tuple(item for item in paths if item in new))
 
 
@@ -215,16 +236,16 @@ def _validate_changed_targets(root: Path, change_set: ChangeSet) -> None:
             resolved = candidate.resolve(strict=True)
             resolved.relative_to(root)
         except (OSError, ValueError) as exc:
-            raise HarnessError(f"WEX200: changed path escapes the repository: {value}") from exc
+            raise CodedError(WEX200, f"changed path escapes the repository: {value}") from exc
 
 
 def execution_scope(artifact: Any) -> tuple[str, ...]:
     table = artifact.metadata.get("execution_scope")
     if not isinstance(table, dict) or set(table) != {"paths"} or not isinstance(table.get("paths"), list):
-        raise HarnessError(f"WEX200: {artifact.artifact_id} has no valid [execution_scope].paths declaration")
+        raise CodedError(WEX200, f"{artifact.artifact_id} has no valid [execution_scope].paths declaration")
     paths = _unique_paths(table["paths"], directory_allowed=True)
     if not paths:
-        raise HarnessError(f"WEX200: {artifact.artifact_id} execution scope is empty")
+        raise CodedError(WEX200, f"{artifact.artifact_id} execution scope is empty")
     return paths
 
 
@@ -291,7 +312,7 @@ def _classify(report: Any, catalog: Mapping[str, Any], primary: Any, root: Path)
         try:
             candidate = safe_destination(root, Path(item.path)).resolve()
         except HarnessError:
-            repository.append({**diagnostic, "code": "WEX200"})
+            repository.append({**diagnostic, "code": WEX200})
             continue
         if candidate in scope_paths:
             scoped.append(diagnostic)
@@ -325,10 +346,10 @@ def lifecycle_relevant_diagnostics(root: Path, report: Any) -> list[Any]:
 
     def relevant(item: Any) -> bool:
         path = str(item.path)
-        if item.code == "I001" and path.startswith("distribution:"):
+        if item.code == I001 and path.startswith("distribution:"):
             return False
         candidate = path.removeprefix("lock-entry:")
-        if item.code == "I001" and item.message in {"missing", "required"} and candidate not in lock_files:
+        if item.code == I001 and item.message in {"missing", "required"} and candidate not in lock_files:
             return False
         return True
 
@@ -376,15 +397,14 @@ def parse_evidence_header(data: bytes) -> tuple[dict[str, str] | None, bytes]:
         return None, data
     end = data.find(_HEADER_CLOSE, len(_HEADER_OPEN))
     if end < 0:
-        raise HarnessError("WEX-ECP-010: the evidence packet header fence is not closed")
+        raise CodedError(WEX_ECP_010, "the evidence packet header fence is not closed")
     raw = data[len(_HEADER_OPEN):end]
     try:
         parsed = tomllib.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, tomllib.TOMLDecodeError) as exc:
-        raise HarnessError(f"WEX-ECP-010: the evidence packet header is not valid TOML: {exc}") from exc
+        raise CodedError(WEX_ECP_010, f"the evidence packet header is not valid TOML: {exc}") from exc
     if set(parsed) != set(EVIDENCE_HEADER_KEYS) or not all(isinstance(parsed[key], str) for key in EVIDENCE_HEADER_KEYS):
-        raise HarnessError(
-            "WEX-ECP-010: the evidence packet header must carry exactly "
+        raise CodedError(WEX_ECP_010, "the evidence packet header must carry exactly "
             + ", ".join(EVIDENCE_HEADER_KEYS)
         )
     return {key: parsed[key] for key in EVIDENCE_HEADER_KEYS}, data[end + len(_HEADER_CLOSE):]
@@ -404,7 +424,7 @@ def evidence_packet_path(root: Path, artifact: Any, checkpoint: str) -> Path:
     # a WindowsPath renders with them; hand it the POSIX form of the evaluator's own path.
     domain = artifact_domain_from_relative_path(artifact.path.relative_to(root).as_posix())
     if domain is None:
-        raise HarnessError(f"WEX-ECP-010: {artifact.artifact_id} is not under a domain directory")
+        raise CodedError(WEX_ECP_010, f"{artifact.artifact_id} is not under a domain directory")
     return root / "docs" / "engineering" / domain / "evidence" / artifact.artifact_id / f"{artifact.artifact_id}-{checkpoint}.md"
 
 
@@ -441,30 +461,29 @@ def write_evidence_packet(
     from se_harness.workflow import _catalog, _validation, project_scope
 
     if checkpoint not in EVIDENCE_CHECKPOINTS:  # ECP-PRM-012: the contract module's set
-        raise HarnessError("WEX-ECP-010: the checkpoint must be start, pre-action, transition, or handoff")
+        raise CodedError(WEX_ECP_010, "the checkpoint must be start, pre-action, transition, or handoff")
     if not _RFC3339.fullmatch(now):
-        raise HarnessError("WEX-ECP-010: rebound_at must be RFC 3339 UTC at second precision")
+        raise CodedError(WEX_ECP_010, "rebound_at must be RFC 3339 UTC at second precision")
     root = ensure_target(repository, must_exist=True)
     _, report = _validation(root)
     catalog = _catalog(report)
     primary = catalog.get(artifact_id)
     if primary is None:
-        raise HarnessError(f"WEX-ECP-010: unknown artifact ID: {artifact_id}")
+        raise CodedError(WEX_ECP_010, f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type != "work_order":
-        raise HarnessError("WEX-ECP-010: evidence packets are keyed by a work order")
+        raise CodedError(WEX_ECP_010, "evidence packets are keyed by a work order")
     in_progress = sorted(
         item.artifact_id for item in catalog.values()
         if item.artifact_type == "work_order" and item.status == "in_progress"
     )
     if len(in_progress) == 1 and in_progress[0] != artifact_id:
-        raise HarnessError(
-            f"WEX-ECP-012: the working tree selects {in_progress[0]} (the one in_progress work order), not {artifact_id}"
+        raise CodedError(WEX_ECP_012, f"the working tree selects {in_progress[0]} (the one in_progress work order), not {artifact_id}"
         )
     path = evidence_packet_path(root, primary, checkpoint)
     relative = path.relative_to(root).as_posix()
     conversion = _line_ending_conversion(root, relative)
     if conversion is not None:
-        raise HarnessError(f"WEX-ECP-011: a .gitattributes rule would convert line endings of {relative} ({conversion})")
+        raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
     snapshot = formal_snapshot_digest(root, report.artifacts)
     header = {
         "artifact": artifact_id,
@@ -475,13 +494,12 @@ def write_evidence_packet(
     action = "create"
     if path.exists():
         if path.is_symlink() or not path.is_file():
-            raise HarnessError(f"WEX-ECP-010: {relative} is not an ordinary file")
+            raise CodedError(WEX_ECP_010, f"{relative} is not an ordinary file")
         existing, body = parse_evidence_header(path.read_bytes())
         if existing is None:
-            raise HarnessError(f"WEX-ECP-010: {relative} carries no evidence packet header at byte offset 0")
+            raise CodedError(WEX_ECP_010, f"{relative} carries no evidence packet header at byte offset 0")
         if existing["artifact"] != artifact_id or existing["checkpoint"] != checkpoint:
-            raise HarnessError(
-                f"WEX-ECP-010: {relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
+            raise CodedError(WEX_ECP_010, f"{relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
                 f"not {artifact_id} at {checkpoint}"
             )
         action = "rebind"
@@ -494,7 +512,7 @@ def write_evidence_packet(
     try:
         atomic_write_bytes(path, content)  # ECP-PRM-008: fsync, then replace
     except OSError as exc:
-        raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
+        raise CodedError(WEX_ECP_010, f"cannot write the evidence packet: {exc}") from exc
     governing, dependencies = project_scope(catalog, primary)
     return selected_result(
         root,
@@ -526,20 +544,19 @@ def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) ->
         return None
     relative = path.relative_to(root).as_posix()
     if path.is_symlink() or not path.is_file():
-        raise HarnessError(f"WEX-ECP-010: {relative} is not an ordinary file")
+        raise CodedError(WEX_ECP_010, f"{relative} is not an ordinary file")
     existing, body = parse_evidence_header(path.read_bytes())
     if existing is None:
         return None
     if existing["artifact"] != artifact.artifact_id or existing["checkpoint"] != "handoff":
-        raise HarnessError(
-            f"WEX-ECP-010: {relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
+        raise CodedError(WEX_ECP_010, f"{relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
             f"not {artifact.artifact_id} at handoff"
         )
     if existing["formal_snapshot_sha256"] == snapshot:
         return None
     conversion = _line_ending_conversion(root, relative)
     if conversion is not None:
-        raise HarnessError(f"WEX-ECP-011: a .gitattributes rule would convert line endings of {relative} ({conversion})")
+        raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
     header = {
         "artifact": artifact.artifact_id,
         "checkpoint": "handoff",
@@ -549,7 +566,7 @@ def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) ->
     try:
         atomic_write_bytes(path, render_evidence_header(header) + body)  # ECP-PRM-008
     except OSError as exc:
-        raise HarnessError(f"WEX-ECP-010: cannot write the evidence packet: {exc}") from exc
+        raise CodedError(WEX_ECP_010, f"cannot write the evidence packet: {exc}") from exc
     return relative
 
 
@@ -560,7 +577,7 @@ def retain_handoff_result(root: Path, artifact: Any, result: Mapping[str, Any]) 
     try:
         atomic_write_bytes(path, pretty_json_bytes(result, ensure_ascii=True))  # ECP-PRM-006, ECP-PRM-008
     except OSError as exc:
-        raise HarnessError(f"WEX-ECP-010: cannot retain the handoff result: {exc}") from exc
+        raise CodedError(WEX_ECP_010, f"cannot retain the handoff result: {exc}") from exc
     return path.relative_to(root).as_posix()
 
 
@@ -613,7 +630,7 @@ def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
     if legacy is not None:
         # Compatibility for one release: substring-bound packets still pass, named by W-ECP-002.
         return "pass", (
-            f"Fresh retained evidence is bound at {legacy}. W-ECP-002: the packet carries no machine header; "
+            f"Fresh retained evidence is bound at {legacy}. {W_ECP_002}: the packet carries no machine header; "
             f"migrate it with harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
         )
     return "not_assessable", (
@@ -649,7 +666,7 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
             return "not_assessable", "Changed-path scope cannot pass without an explicit completeness assertion."
         outside = [path for path in context.change_set.paths if not path_is_admitted(path, context.admitted_scope)]
         if outside:
-            return "fail", f"WEX201: changed path is outside execution scope: {outside[0]}"
+            return "fail", f"{WEX201}: changed path is outside execution scope: {outside[0]}"
         return "pass", f"All {len(context.change_set.paths)} declared changed path(s) are within execution scope."
     if name == "start_preflight_ready":
         return _preflight_status(context, "start")
@@ -667,12 +684,11 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
 
 
 def _aggregate(statuses: Iterable[str]) -> str:
+    """ECP-PRM-021: the first status of the contract's `aggregation` that is present wins."""
+
     values = set(statuses)
-    if "fail" in values:
-        return "fail"
-    if "not_assessable" in values:
-        return "not_assessable"
-    return "pass"
+    order = aggregation_order()
+    return next((status for status in order if status in values), order[-1])
 
 
 def _evidence(descriptors: Iterable[Mapping[str, Any]], artifact_id: str, checkpoint: str) -> list[dict[str, Any]]:
@@ -698,8 +714,7 @@ def _gate_results(
     for gate_id in gate_ids:
         gate = gates[gate_id]
         if context.checkpoint not in gate["checkpoints"]:
-            raise HarnessError(
-                f"WEX210: gate {gate_id} does not apply at checkpoint {context.checkpoint}"
+            raise CodedError(WEX210, f"gate {gate_id} does not apply at checkpoint {context.checkpoint}"
             )
         predicates: list[dict[str, Any]] = []
         for predicate in gate["predicates"]:
@@ -875,7 +890,7 @@ def transition_gate_results(
     from se_harness.workflow import _family
 
     if context.target is None:
-        raise HarnessError("WEX210: the transition checkpoint requires a target state")
+        raise CodedError(WEX210, "the transition checkpoint requires a target state")
     predicate_ids, _ = transition_binding(
         quality_gates, _family(context.artifact.artifact_type), context.artifact.artifact_type, context.target
     )
@@ -908,15 +923,14 @@ def check_workflow(
     from_git: str | None = None,
 ) -> dict[str, Any]:
     if from_git is not None and (list(changed_paths) or changes_complete or change_manifest is not None):
-        raise HarnessError(
-            "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
+        raise CodedError(WEX_ECP_002, "--from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
     if checkpoint not in CHECKPOINTS:  # ECP-PRM-012: the contract module's set
-        raise HarnessError("WEX210: public check checkpoint must be start, pre-action, transition, handoff, or scope")
+        raise CodedError(WEX210, "public check checkpoint must be start, pre-action, transition, handoff, or scope")
     if checkpoint == "transition" and not target:
-        raise HarnessError("WEX210: --target is required for the transition checkpoint")
+        raise CodedError(WEX210, "--target is required for the transition checkpoint")
     if checkpoint != "transition" and target:
-        raise HarnessError("WEX210: --target applies only to the transition checkpoint")
+        raise CodedError(WEX210, "--target applies only to the transition checkpoint")
     root = ensure_target(repository, must_exist=True)
     _, quality_gates, rules, procedures, gates = load_validated_contracts()
     from se_harness.workflow import _catalog, _validation, project_scope
@@ -925,27 +939,26 @@ def check_workflow(
     try:
         catalog = _catalog(report)
     except HarnessError as exc:
-        raise HarnessError(f"WEX210: {exc}") from exc
+        raise CodedError(WEX210, f"{exc}") from exc
     primary = catalog.get(artifact_id)
     if primary is None:
-        raise HarnessError(f"WEX210: unknown artifact ID: {artifact_id}")
+        raise CodedError(WEX210, f"unknown artifact ID: {artifact_id}")
     if primary.artifact_type not in {"work_order", "verification_record", "release_record"}:
-        raise HarnessError(
-            "WEX210: check --checkpoint accepts only WO, VREC, or RLS artifacts "
+        raise CodedError(WEX210, "check --checkpoint accepts only WO, VREC, or RLS artifacts "
             "(a decision is disposed with harnessctl decide; a risk is raised with harnessctl raise-risk and listed with harnessctl risks)"
         )
     if checkpoint == "scope" and primary.artifact_type != "work_order":
-        raise HarnessError("WEX210: the scope checkpoint applies only to a work order")
+        raise CodedError(WEX210, "the scope checkpoint applies only to a work order")
     governing, dependencies = project_scope(catalog, primary)
     related = [catalog[item] for item in dependencies if item in catalog]
     rule, rule_context = select_rule(rules, primary, related=related)
     selected_procedure = str(rule["procedure_id"])
     alternatives = list(rule.get("alternative_procedure_ids", []))
     if checkpoint == "pre-action" and procedure_id is None:
-        raise HarnessError("WEX220: --procedure is required for pre-action")
+        raise CodedError(WEX220, "--procedure is required for pre-action")
     if procedure_id is not None:
         if procedure_id not in {selected_procedure, *alternatives}:
-            raise HarnessError(f"WEX220: procedure {procedure_id} is not selected by workflow rule {rule['id']}")
+            raise CodedError(WEX220, f"procedure {procedure_id} is not selected by workflow rule {rule['id']}")
         selected_procedure = procedure_id
     rebound: str | None = None
     self_binding = checkpoint == "handoff" and from_git is not None and primary.artifact_type == "work_order"
@@ -1023,10 +1036,10 @@ def check_workflow(
     trap_blockers: list[str] = []
     if checkpoint == "handoff" and primary.artifact_type == "work_order":
         trap_blockers.extend(
-            f"W-ADS-002: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
+            f"{W_ADS_002}: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
         )
         if pull_request_body is not None:
-            trap_blockers.extend(f"W-ADS-001: {message}" for message in _pull_request_body_findings(root, pull_request_body))
+            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in _pull_request_body_findings(root, pull_request_body))
     if trap_blockers:
         passed = False
         outcome = "blocked"
@@ -1064,7 +1077,7 @@ def check_workflow(
         )
         evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
         if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:
-            raise HarnessError("WEX-ADS-001: the corrective command repeats the evaluated command")
+            raise CodedError(WEX_ADS_001, "the corrective command repeats the evaluated command")
     restitution = {
         "outcome": outcome,
         "done": [f"Evaluated {checkpoint} compliance for {artifact_id}."],
@@ -1311,13 +1324,13 @@ def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
         with body_path.open("rb") as handle:
             raw = handle.read(MAX_EVENT_BYTES + 1)
     except OSError as exc:
-        raise HarnessError(f"WEX200: cannot read pull-request body: {exc}") from exc
+        raise CodedError(WEX200, f"cannot read pull-request body: {exc}") from exc
     if len(raw) > MAX_EVENT_BYTES:
-        raise HarnessError("WEX200: pull-request body exceeds the size limit")
+        raise CodedError(WEX200, "pull-request body exceeds the size limit")
     try:
         body = raw.decode("utf-8")
     except UnicodeDecodeError as exc:
-        raise HarnessError("WEX200: pull-request body must be UTF-8") from exc
+        raise CodedError(WEX200, "pull-request body must be UTF-8") from exc
     return [
         (
             f"the Harness-Work-Order line ends with a carriage return at byte offset {offset}; "
@@ -1364,7 +1377,7 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
             # SPEC-DCM-001 rule 11: the section reads None, or lists decision ids.
             if body not in {"None", "None."} and not all(_DECISION_LINE.fullmatch(line) for line in body_lines):
                 return "fail", (
-                    f"E-DCM-004: {artifact.artifact_id} has an open decision written as prose: {body[:120]} "
+                    f"{E_DCM_004}: {artifact.artifact_id} has an open decision written as prose: {body[:120]} "
                     f"(the Open decisions section reads exactly None, or lists DEC- identifiers)"
                 )
             break
@@ -1432,11 +1445,11 @@ def release_unit_ready(artifact: Any, root: Path, catalog: Mapping[str, Any]) ->
         return "pass", f"{artifact.artifact_id} declares no candidate_commit; the allow-list form is not re-measured."
     previous_tag = metadata.get("previous_release_tag")
     if not isinstance(previous_tag, str) or not previous_tag:
-        return "fail", f"E-CIP-001: {artifact.artifact_id} names candidate_commit but no previous_release_tag."
+        return "fail", f"{E_CIP_001}: {artifact.artifact_id} names candidate_commit but no previous_release_tag."
     section = metadata.get("release_unit", {})
     exemptions = section.get("untraced_exemptions", []) if isinstance(section, dict) else []
     if not isinstance(exemptions, list) or not all(isinstance(item, str) for item in exemptions):
-        return "fail", f"E-CIP-001: {artifact.artifact_id} release_unit.untraced_exemptions must be an array of full commit ids."
+        return "fail", f"{E_CIP_001}: {artifact.artifact_id} release_unit.untraced_exemptions must be an array of full commit ids."
     from se_harness.release_unit import PACKAGED_SURFACE_PREFIXES, compare_with_contract, derive_release_unit
 
     def lookup(work_order: str) -> tuple[str | None, bool | None]:
@@ -1472,7 +1485,7 @@ def ensure_governed_checkpoint(
     try:
         load_validated_contracts()
     except ContractError as exc:
-        raise HarnessError(f"WEX210: invalid machine policy: {exc}") from exc
+        raise CodedError(WEX210, f"invalid machine policy: {exc}") from exc
     from se_harness.workflow import _catalog, _validation
 
     if report is None:
@@ -1481,10 +1494,10 @@ def ensure_governed_checkpoint(
         catalog = _catalog(report)
     for artifact_id in artifact_ids:
         if artifact_id not in catalog:
-            raise HarnessError(f"WEX210: unknown governed artifact {artifact_id}")
+            raise CodedError(WEX210, f"unknown governed artifact {artifact_id}")
     repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
     if repository_errors:
-        raise HarnessError(f"WEX210: repository integrity prevents governed action: {repository_errors[0].message}")
+        raise CodedError(WEX210, f"repository integrity prevents governed action: {repository_errors[0].message}")
     # The authoring and release-unit predicates a definition needs before it
     # leaves draft are evaluated by the contract's transition bindings
     # (QGP-G1/G2-AUTHORING, QGP-G5P-RELEASE-UNIT), not re-implemented here (WO-ECP-009).

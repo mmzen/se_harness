@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 from typing import Any
 from se_harness.integrity import unique_object_hook
+from se_harness.codes import CodedError, WEX_ECP_014, W_ADS_001
 
 
 MAX_EVENT_BYTES = 2 * 1024 * 1024
@@ -27,6 +28,10 @@ FIELDS = ("work-order", "restitution-digest")
 
 class SelectionError(ValueError):
     """A bounded pull-request work-order selection error."""
+
+
+class SelectionRefusal(CodedError, SelectionError):
+    """A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code."""
 
 
 _unique_object = unique_object_hook(lambda key: SelectionError(f"duplicate JSON key: {key}"))
@@ -50,8 +55,7 @@ def select_work_order(body: str) -> str:
     if len(matches) != 1:
         offsets = carriage_return_trailer_offsets(body)
         if offsets:
-            raise SelectionError(
-                f"W-ADS-001: the Harness-Work-Order line ends with a carriage return at byte offset {offsets[0]}; "
+            raise SelectionRefusal(W_ADS_001, f"the Harness-Work-Order line ends with a carriage return at byte offset {offsets[0]}; "
                 "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) and push again"
             )
         raise SelectionError(
@@ -105,16 +109,16 @@ def render_pull_request_body(root: Path, artifact: Any, *, packet_directory: Pat
     """
 
     if artifact.artifact_type != "work_order":
-        raise SelectionError(f"WEX-ECP-014: {artifact.artifact_id} is not a work order")
+        raise SelectionRefusal(WEX_ECP_014, f"{artifact.artifact_id} is not a work order")
     if artifact.status == "draft":
-        raise SelectionError(f"WEX-ECP-014: {artifact.artifact_id} is draft; a pull request needs an approved or later work order")
+        raise SelectionRefusal(WEX_ECP_014, f"{artifact.artifact_id} is draft; a pull request needs an approved or later work order")
     lines = [f"Harness-Work-Order: {artifact.artifact_id}"]
     handoff = packet_directory / "handoff.json"
     if handoff.is_file():
         try:
             value = json.loads(handoff.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-            raise SelectionError(f"WEX-ECP-014: {handoff.relative_to(root).as_posix()} is not readable JSON: {exc}") from exc
+            raise SelectionRefusal(WEX_ECP_014, f"{handoff.relative_to(root).as_posix()} is not readable JSON: {exc}") from exc
         digest = value.get("result_sha256") if isinstance(value, dict) else None
         if value.get("schema") == "se-harness-workflow-result-v2" and isinstance(digest, str) and RESTITUTION_LINE.fullmatch(f"Harness-Restitution: {digest}"):
             lines.append(f"Harness-Restitution: {digest}")
@@ -128,6 +132,6 @@ def render_pull_request_body(root: Path, artifact: Any, *, packet_directory: Pat
     lines.extend([f"- {path}" for path in evidence] or ["- No retained evidence under the packet directory yet."])
     body = "\n".join(lines).replace("\r", "") + "\n"
     if select_work_order(body) != artifact.artifact_id or carriage_return_trailer_offsets(body):
-        raise SelectionError("WEX-ECP-014: the generated body does not round-trip through the selector")
+        raise SelectionRefusal(WEX_ECP_014, "the generated body does not round-trip through the selector")
     return body
 

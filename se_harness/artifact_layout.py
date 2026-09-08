@@ -12,6 +12,7 @@ from se_harness.integrity import atomic_create_bytes, canonical_text
 from se_harness import front_matter, mutation_guard
 from se_harness._process import run_git
 from se_harness.installer import HarnessError, ensure_target, safe_destination
+from se_harness.codes import CodedError, WEX_ECP_013
 
 
 ARTIFACT_DIRECTORIES: dict[str, tuple[str, ...]] = {
@@ -379,10 +380,10 @@ def _git_output(root: Path, arguments: list[str]) -> bytes:
     # ECP-PRM-003: the one launcher; a start failure or a timeout is this module's own refusal.
     completed = run_git(
         root, *arguments, timeout=120,
-        error=lambda message: HarnessError(f"WEX-ECP-013: git is unavailable: {message}"),
+        error=lambda message: CodedError(WEX_ECP_013, f"git is unavailable: {message}"),
     )
     if completed.returncode != 0:
-        raise HarnessError(f"WEX-ECP-013: git {arguments[0]} failed with exit status {completed.returncode}")
+        raise CodedError(WEX_ECP_013, f"git {arguments[0]} failed with exit status {completed.returncode}")
     return completed.stdout
 
 
@@ -394,7 +395,7 @@ def reachable_artifact_ids(root: Path) -> dict[str, set[str]]:
     """
 
     if not (root / ".git").exists():
-        raise HarnessError(f"WEX-ECP-013: {root} is not a Git checkout; identifiers are allocated across local refs")
+        raise CodedError(WEX_ECP_013, f"{root} is not a Git checkout; identifiers are allocated across local refs")
     found: dict[str, set[str]] = {}
     refs = _git_output(root, ["for-each-ref", "--format=%(refname)%00%(objectname)"])
     for line in refs.decode("utf-8", "replace").splitlines():
@@ -432,8 +433,7 @@ def _domain_token(root: Path, domain: str) -> str:
             if match:
                 tokens[match.group(2)] = tokens.get(match.group(2), 0) + 1
     if not tokens:
-        raise HarnessError(
-            f"WEX-ECP-013: domain {domain} has no artifact to read its identifier token from; pass --id explicitly"
+        raise CodedError(WEX_ECP_013, f"domain {domain} has no artifact to read its identifier token from; pass --id explicitly"
         )
     return sorted(tokens.items(), key=lambda item: (-item[1], item[0]))[0][0]
 
@@ -449,7 +449,7 @@ def allocate_artifact_id(root: Path, *, domain: str, artifact_type: str) -> tupl
     while number in used:
         number += 1
     if number > 999:
-        raise HarnessError(f"WEX-ECP-013: no free three-digit identifier remains for {prefix}NNN")
+        raise CodedError(WEX_ECP_013, f"no free three-digit identifier remains for {prefix}NNN")
     below = used.get(number - 1, set())
     return f"{prefix}{number:03d}", tuple(sorted(below))
 

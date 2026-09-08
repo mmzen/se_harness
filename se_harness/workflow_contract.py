@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import functools
 import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
 
 from se_harness.integrity import unique_object_hook
+from se_harness.codes import CodedError, WEX_ADS_001, WEX_ADS_003, WEX_ECP_030, WEX_ECP_031
 from types import MappingProxyType
 from typing import Any, Iterable, Mapping, Literal
 
@@ -99,17 +101,141 @@ AGENTIC_OPERATION_FIELDS = frozenset(
         "mutation_operation",
     }
 )
-#: The three delegated operations of the delegation class (SPEC-ECP-006 ECP-DLG-002);
-#: the JSON key keeps its schema-v4 name `agentic_operations`.
-DELEGATED_OPERATIONS = (
-    ("delegated-work-order-start", "DR-WO-START", "approved", "in_progress", ("QG-G3-WORK-AUTHORIZATION",), "PROC-WO-START"),
-    ("delegated-work-order-complete", "DR-WO-COMPLETE", "in_progress", "implemented", ("QG-G4-IMPLEMENTATION-EVIDENCE",), "PROC-WO-IMPLEMENT"),
-    ("delegated-vrec-prepare", "DR-VREC-PREPARE", "implemented", "implemented", ("QG-G4-CANDIDATE-READY",), "PROC-WO-PREPARE-VREC"),
-)
-
-
+_DECISION_RIGHT = re.compile(r"^DR-[A-Z]+(?:-[A-Z]+)*$")
+#: The family the delegation class binds (SPEC-ECP-006 ECP-DLG-001): a work order carries it.
+DELEGATED_FAMILY = "work_order"
+#: The closed set of predicate, gate and compliance statuses; `aggregation` orders it.
+RESULT_STATUSES = frozenset({"pass", "fail", "not_assessable"})
 class ContractError(RuntimeError):
     """Machine policy is malformed, ambiguous, or cannot resolve."""
+
+
+class ContractRefusal(CodedError, ContractError):
+    """A coded contract refusal the CLI labels (ECP-PRM-017): a `ContractError` that carries its code."""
+
+
+def _section_refusal(detail: str) -> ContractError:
+    """ECP-PRM-023: the one code a missing or malformed run-time contract section refuses with."""
+
+    return ContractRefusal(WEX_ECP_031, detail)
+
+
+@dataclass(frozen=True)
+class DelegatedOperation:
+    """One entry of `workflow_contract.json` `agentic_operations` (ECP-PRM-019).
+
+    The JSON key keeps its schema-v4 name; the delegation class of `SPEC-ECP-006`
+    reads the three delegated rights, their edges and their guard operations here.
+    """
+
+    id: str
+    decision_right: str
+    current_status: str
+    result_status: str
+    gate_ids: tuple[str, ...]
+    procedure_id: str
+    mutation_operation: str
+
+    @property
+    def transition(self) -> tuple[str, str, str] | None:
+        """The lifecycle edge the right applies, or None when it applies none."""
+
+        if self.current_status == self.result_status:
+            return None
+        return (DELEGATED_FAMILY, self.current_status, self.result_status)
+
+
+def _runtime_section(contract: Mapping[str, Any], key: str, owner: str) -> object:
+    if not isinstance(contract, Mapping) or key not in contract:
+        raise _section_refusal(f"the {owner} contract declares no {key} section")
+    return contract[key]
+
+
+def _name(item: Mapping[str, Any], field: str, label: str, pattern: re.Pattern[str] | None = None) -> str:
+    value = item.get(field)
+    if not isinstance(value, str) or not value or (pattern is not None and not pattern.match(value)):
+        raise _section_refusal(f"{label} has an invalid {field}")
+    return value
+
+
+def delegated_operations_of(workflow: Mapping[str, Any]) -> tuple[DelegatedOperation, ...]:
+    """Read and validate `agentic_operations` (ECP-PRM-019, ECP-PRM-023).
+
+    Every entry carries exactly the seven fields, names its own guard operation by
+    its id, a decision right of the `DR-` grammar and two lifecycle state names;
+    ids and rights are unique. A missing or malformed section refuses with
+    `WEX-ECP-031` before any reader sees it.
+    """
+
+    raw = _runtime_section(workflow, "agentic_operations", "workflow")
+    if not isinstance(raw, list) or not raw:
+        raise _section_refusal("agentic_operations must be a non-empty array")
+    operations: list[DelegatedOperation] = []
+    for index, item in enumerate(raw):
+        label = f"agentic_operations[{index}]"
+        if not isinstance(item, Mapping) or set(item) != AGENTIC_OPERATION_FIELDS:
+            raise _section_refusal(f"{label} must carry exactly {', '.join(sorted(AGENTIC_OPERATION_FIELDS))}")
+        gate_ids = item.get("gate_ids")
+        if not isinstance(gate_ids, list) or not gate_ids or not all(isinstance(gate, str) and gate for gate in gate_ids):
+            raise _section_refusal(f"{label} has an invalid gate_ids")
+        operation = DelegatedOperation(
+            id=_name(item, "id", label),
+            decision_right=_name(item, "decision_right", label, _DECISION_RIGHT),
+            current_status=_name(item, "current_status", label, _STATE_NAME),
+            result_status=_name(item, "result_status", label, _STATE_NAME),
+            gate_ids=tuple(gate_ids),
+            procedure_id=_name(item, "procedure_id", label),
+            mutation_operation=_name(item, "mutation_operation", label),
+        )
+        if operation.mutation_operation != operation.id:
+            raise _section_refusal(f"{label} must name its guard operation by its id")
+        if any(known.id == operation.id or known.decision_right == operation.decision_right for known in operations):
+            raise _section_refusal(f"{label} repeats an id or a decision right")
+        operations.append(operation)
+    return tuple(operations)
+
+
+def restitution_fields_of(workflow: Mapping[str, Any]) -> tuple[str, ...]:
+    """Read and validate `restitution_fields`, the schema-2 field set (ECP-PRM-020, ECP-PRM-023)."""
+
+    raw = _runtime_section(workflow, "restitution_fields", "workflow")
+    if not isinstance(raw, list) or not raw or not all(isinstance(item, str) and _STATE_NAME.match(item) for item in raw):
+        raise _section_refusal("restitution_fields must be a non-empty array of field names")
+    if len(set(raw)) != len(raw):
+        raise _section_refusal("restitution_fields repeats a field")
+    if "outcome" not in raw or not RULE_RESTITUTION_FIELDS.issubset(raw):
+        raise _section_refusal("restitution_fields must carry outcome, done and current_lifecycle_state")
+    return tuple(raw)
+
+
+def aggregation_of(quality_gates: Mapping[str, Any]) -> tuple[str, ...]:
+    """Read and validate `aggregation`, the status precedence, first wins (ECP-PRM-021, ECP-PRM-023)."""
+
+    raw = _runtime_section(quality_gates, "aggregation", "quality-gate")
+    if not isinstance(raw, list) or len(raw) != len(RESULT_STATUSES) or set(raw) != RESULT_STATUSES:
+        raise _section_refusal(f"aggregation must order exactly {', '.join(sorted(RESULT_STATUSES))}")
+    return tuple(raw)
+
+
+@functools.lru_cache(maxsize=1)
+def delegated_operations() -> tuple[DelegatedOperation, ...]:
+    """The delegated operations of the installed workflow contract, read once."""
+
+    return delegated_operations_of(load_workflow_contract())
+
+
+@functools.lru_cache(maxsize=1)
+def restitution_fields() -> tuple[str, ...]:
+    """The schema-2 restitution field set of the installed workflow contract, read once."""
+
+    return restitution_fields_of(load_workflow_contract())
+
+
+@functools.lru_cache(maxsize=1)
+def aggregation_order() -> tuple[str, ...]:
+    """The status precedence of the installed quality-gate contract, read once."""
+
+    return aggregation_of(load_quality_gate_contract())
 
 
 @dataclass(frozen=True)
@@ -226,8 +352,7 @@ def load_quality_gate_contract(path: Path | None = None) -> dict[str, Any]:
         except Exception:  # noqa: BLE001 - the original error is the one to report
             raise exc from None
         if observed in RETIRED_QUALITY_GATES_SCHEMAS:
-            raise ContractError(
-                f"WEX-ECP-030: {target} uses retired schema {observed}; the transition bindings of "
+            raise ContractRefusal(WEX_ECP_030, f"{target} uses retired schema {observed}; the transition bindings of "
                 f"{QUALITY_GATES_SCHEMA} are required, upgrade the installed contract"
             ) from exc
         raise
@@ -254,7 +379,7 @@ def transition_binding(
         if types is not None and artifact_type not in types:
             continue
         return [str(item) for item in binding.get("predicates", [])], [str(item) for item in binding.get("structural", [])]
-    raise ContractError(f"WEX-ECP-030: no transition binding for {family}:{artifact_type} -> {target}")
+    raise ContractRefusal(WEX_ECP_030, f"no transition binding for {family}:{artifact_type} -> {target}")
 
 
 def _identifier(kind: str, value: object) -> str:
@@ -331,36 +456,35 @@ def _validate_corrective(
     corrective = step.get("corrective")
     if not expected:
         if corrective is not None:
-            raise ContractError(f"WEX-ADS-001: {label} declares corrective forms without gates")
+            raise ContractRefusal(WEX_ADS_001, f"{label} declares corrective forms without gates")
         return
     if not isinstance(corrective, Mapping):
-        raise ContractError(f"WEX-ADS-001: {label} has no corrective forms for its gate predicates")
+        raise ContractRefusal(WEX_ADS_001, f"{label} has no corrective forms for its gate predicates")
     if set(corrective) != set(expected):
         missing = sorted(set(expected) - set(corrective))
         extra = sorted(set(corrective) - set(expected))
-        raise ContractError(
-            f"WEX-ADS-001: {label} corrective forms do not cover its predicates "
+        raise ContractRefusal(WEX_ADS_001, f"{label} corrective forms do not cover its predicates "
             f"(missing {missing}, extra {extra})"
         )
     for predicate_id, form in corrective.items():
         if not isinstance(form, Mapping) or form.get("kind") not in CORRECTIVE_KINDS:
-            raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} has an unknown kind")
+            raise ContractRefusal(WEX_ADS_001, f"{label} corrective for {predicate_id} has an unknown kind")
         kind = form["kind"]
         if kind == "command":
             argv = form.get("argv")
             if set(form) != {"kind", "argv"} or not isinstance(argv, list) or not argv or not all(isinstance(item, str) for item in argv):
-                raise ContractError(f"WEX-ADS-001: {label} corrective command for {predicate_id} requires argv")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective command for {predicate_id} requires argv")
             _validate_placeholders(argv, parameters, f"{label} corrective {predicate_id}")
             if argv == step.get("argv"):
-                raise ContractError(f"WEX-ADS-001: {label} corrective for {predicate_id} repeats the evaluated command")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective for {predicate_id} repeats the evaluated command")
         elif kind == "escalation":
             right = form.get("decision_right")
             if set(form) != {"kind", "decision_right"} or not isinstance(right, str) or not right.startswith("DR-"):
-                raise ContractError(f"WEX-ADS-001: {label} corrective escalation for {predicate_id} needs a decision right")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective escalation for {predicate_id} needs a decision right")
         else:
             value = form.get("value")
             if set(form) != {"kind", "value"} or not isinstance(value, str) or not value.strip():
-                raise ContractError(f"WEX-ADS-001: {label} corrective response for {predicate_id} needs text")
+                raise ContractRefusal(WEX_ADS_001, f"{label} corrective response for {predicate_id} needs text")
             _validate_placeholders(value, parameters, f"{label} corrective {predicate_id}")
 
 
@@ -460,7 +584,7 @@ def _validate_transition_bindings(
 
     raw = quality_gates.get("transition_bindings")
     if not isinstance(raw, list) or not raw:
-        raise ContractError("WEX-ECP-030: quality-gate contract declares no transition bindings")
+        raise ContractRefusal(WEX_ECP_030, "quality-gate contract declares no transition bindings")
     owner: dict[str, str] = {}
     for gate_id, gate in gates.items():
         for predicate in gate["predicates"]:
@@ -469,28 +593,28 @@ def _validate_transition_bindings(
     bound: dict[tuple[str, str], set[str] | None] = {}
     for binding in raw:
         if not isinstance(binding, Mapping) or not {"family", "target", "predicates", "structural"}.issubset(binding) or not set(binding).issubset(BINDING_FIELDS):
-            raise ContractError("WEX-ECP-030: transition binding has invalid fields")
+            raise ContractRefusal(WEX_ECP_030, "transition binding has invalid fields")
         family = binding["family"]
         target = binding["target"]
         if family not in LIFECYCLE_FAMILIES or not isinstance(target, str) or _STATE_NAME.fullmatch(target) is None:
-            raise ContractError(f"WEX-ECP-030: transition binding names unknown family or state {family}:{target}")
+            raise ContractRefusal(WEX_ECP_030, f"transition binding names unknown family or state {family}:{target}")
         types = binding.get("artifact_types")
         if types is not None:
             types = _strings(types, f"transition binding {family}:{target} artifact_types")
             if family != "definition" or not set(types).issubset(DEFINITION_TYPES):
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} restricts artifact types it cannot")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} restricts artifact types it cannot")
         for predicate_id in _strings(binding["predicates"], f"transition binding {family}:{target} predicates"):
             gate_id = owner.get(predicate_id)
             if gate_id is None:
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown predicate {predicate_id}")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} names unknown predicate {predicate_id}")
             if "transition" not in effective_checkpoints(gates[gate_id], predicates[predicate_id]):
-                raise ContractError(f"WEX-ECP-030: predicate {predicate_id} is bound to transition but does not declare that checkpoint")
+                raise ContractRefusal(WEX_ECP_030, f"predicate {predicate_id} is bound to transition but does not declare that checkpoint")
         for structural in _strings(binding["structural"], f"transition binding {family}:{target} structural"):
             if structural not in STRUCTURAL_CHECKS:
-                raise ContractError(f"WEX-ECP-030: transition binding {family}:{target} names unknown structural check {structural}")
+                raise ContractRefusal(WEX_ECP_030, f"transition binding {family}:{target} names unknown structural check {structural}")
         key = (family, target, None if types is None else ",".join(sorted(types)))
         if key in seen:
-            raise ContractError(f"WEX-ECP-030: duplicate transition binding {family}:{target}")
+            raise ContractRefusal(WEX_ECP_030, f"duplicate transition binding {family}:{target}")
         seen.add(key)
         covered = bound.setdefault((family, target), set())
         if types is None:
@@ -505,8 +629,7 @@ def _validate_transition_bindings(
                 if covered is None:
                     continue
                 if family != "definition" or not covered or not DEFINITION_TYPES.issubset(covered):
-                    raise ContractError(
-                        f"WEX-ECP-030: lifecycle edge {family}:{source} -> {target} has no transition binding"
+                    raise ContractRefusal(WEX_ECP_030, f"lifecycle edge {family}:{source} -> {target} has no transition binding"
                     )
 
 
@@ -519,23 +642,11 @@ def validate_contracts(
     }
     if set(workflow) != allowed_workflow:
         raise ContractError("workflow contract contains unknown or missing top-level fields")
-    if workflow.get("restitution_fields") != [
-        "outcome",
-        "done",
-        "not_done",
-        "blocked_by",
-        "current_lifecycle_state",
-        "decision_required",
-        "next",
-        "command_or_response",
-        "alternatives",
-    ]:
-        raise ContractError("workflow restitution fields are not canonical")
-    validate_lifecycle_registry(workflow)
+    restitution_fields_of(workflow)
+    registry = validate_lifecycle_registry(workflow)
     if set(quality_gates) != {"schema", "aggregation", "gates", "transition_bindings"}:
         raise ContractError("quality-gate contract contains unknown or missing top-level fields")
-    if quality_gates.get("aggregation") != ["fail", "not_assessable", "pass"]:
-        raise ContractError("quality-gate aggregation must be fail > not_assessable > pass")
+    aggregation_of(quality_gates)
     gates_raw = quality_gates.get("gates")
     if not isinstance(gates_raw, list):
         raise ContractError("quality gates must be an array")
@@ -574,32 +685,16 @@ def validate_contracts(
     }
     _validate_transition_bindings(workflow, quality_gates, gates, predicates)
     procedures = _validate_procedures(workflow, set(gates), gate_predicates)
-    raw_operations = workflow.get("agentic_operations")
-    if not isinstance(raw_operations, list) or len(raw_operations) != len(DELEGATED_OPERATIONS):
-        raise ContractError("workflow must declare exactly the three delegated operations")
-    expected_operations = [item[0] for item in DELEGATED_OPERATIONS]
-    if [item.get("id") for item in raw_operations if isinstance(item, Mapping)] != expected_operations:
-        raise ContractError("workflow delegated operation order or identity is invalid")
-    for raw, expected in zip(raw_operations, DELEGATED_OPERATIONS, strict=True):
-        if not isinstance(raw, Mapping) or set(raw) != AGENTIC_OPERATION_FIELDS:
-            raise ContractError("workflow delegated operation has invalid fields")
-        operation, right, current, result, gate_ids, procedure_id = expected
-        observed_gate_ids = tuple(
-            _strings(raw.get("gate_ids"), f"agentic operation {operation} gate_ids")
-        )
-        if (
-            raw.get("id") != operation
-            or raw.get("decision_right") != right
-            or raw.get("current_status") != current
-            or raw.get("result_status") != result
-            or observed_gate_ids != gate_ids
-            or raw.get("procedure_id") != procedure_id
-            or raw.get("mutation_operation") != operation
-        ):
-            raise ContractError(f"workflow delegated operation mapping is invalid: {operation}")
-        if raw.get("procedure_id") not in procedures:
-            raise ContractError(f"workflow delegated operation references unknown procedure: {operation}")
-        unknown_gates = set(observed_gate_ids) - set(gates)
+    delegated_states = registry.get(DELEGATED_FAMILY, {})
+    for operation in delegated_operations_of(workflow):
+        if operation.current_status not in delegated_states or operation.result_status not in delegated_states:
+            raise _section_refusal(f"agentic operation {operation.id} names a status outside the {DELEGATED_FAMILY} lifecycle")
+        edge = operation.transition
+        if edge is not None and edge[2] not in delegated_states[edge[1]].transitions_to:
+            raise _section_refusal(f"agentic operation {operation.id} names an edge the {DELEGATED_FAMILY} lifecycle lacks")
+        if operation.procedure_id not in procedures:
+            raise ContractError(f"workflow delegated operation references unknown procedure: {operation.id}")
+        unknown_gates = set(operation.gate_ids) - set(gates)
         if unknown_gates:
             raise ContractError(f"workflow Phase 4 operation references unknown gate {sorted(unknown_gates)[0]}")
     rules_raw = workflow.get("recommendations")
@@ -684,7 +779,7 @@ def render_operating_card(
     lines.append("")
     rendered = "\n".join(lines).encode("utf-8")
     if len(rendered) > OPERATING_CARD_LIMIT:
-        raise ContractError(f"WEX-ADS-003: operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")
+        raise ContractRefusal(WEX_ADS_003, f"operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")
     return rendered
 
 

@@ -50,6 +50,10 @@ class InterpreterSafetyRefusal(ValueError):
         self.case = case
         self.subject = subject
         self.detail = detail
+        # SPEC-ECP-023 ECP-PRM-017: the two attributes of a coded refusal, without importing the
+        # registry; SPEC-REB-015 rule 2 keeps this module standard-library only.
+        self.code = case
+        self.message = f"{subject}: {detail}"
 
 
 @dataclass(frozen=True)

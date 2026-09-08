@@ -15,7 +15,8 @@ from typing import Any
 from se_harness.integrity import atomic_create_bytes, raw_sha256
 from se_harness import front_matter, mutation_guard
 from se_harness._process import run as _launch, text as _text
-from se_harness.gate_source import DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
+from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
+from se_harness.hash_bound import HashBoundError, declared_digest
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import load_lifecycle_registry
@@ -35,7 +36,8 @@ LIFECYCLE_REGISTRY = load_lifecycle_registry()
 class RecordRefusal(HarnessError):
     """A refused record preparation, labelled by its cause class (SPEC-ECP-016, ECP-CLI-007).
 
-    The CLI maps the class to the code suffix: state 1, provenance 2, evidence 3, inputs 4.
+    The CLI maps the class to a code of `codes.VERIFICATION_RECORD_REFUSALS` or
+    `codes.RELEASE_RECORD_REFUSALS`.
     """
 
     cause = "state"
@@ -56,8 +58,6 @@ class EvidenceRefusal(RecordRefusal):
 class InputRefusal(RecordRefusal):
     cause = "inputs"
 
-
-CAUSE_SUFFIX = {"state": "1", "provenance": "2", "evidence": "3", "inputs": "4"}
 
 
 def _grants_authority(family: str, status: object) -> bool:
@@ -326,6 +326,15 @@ def _evaluator_evidence_output(
     return destination, relative.as_posix()
 
 
+def _evidence_digest(relative: str, content: bytes) -> str:
+    """ECP-PRM-022: the evidence digest under the mode `hash_bound_classes.json` declares for its path."""
+
+    try:
+        return declared_digest(relative, content)
+    except HashBoundError as exc:
+        raise EvidenceRefusal(f"cannot hash evaluator evidence {relative}: {exc}") from exc
+
+
 def _write_record_and_evidence(
     record: Path,
     content: str,
@@ -413,7 +422,7 @@ def capture_verification(
                 )
             except DelegationError as exc:
                 raise StateRefusal(f"{exc.code}: {exc.message}") from exc
-            mutation_guard.require_mutation_authority(root, operation="delegated-vrec-prepare")
+            mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS["DR-VREC-PREPARE"])
             delegated_sentence = " " + delegated_reason("DR-VREC-PREPARE", gate, None)
         else:
             delegated_sentence = ""
@@ -451,6 +460,7 @@ def capture_verification(
         record_id,
         selected_domain,
     )
+    evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
     snapshot_hash = _generate_snapshot(root)
@@ -484,7 +494,7 @@ prepared_by = "{owner}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
 evaluator_evidence_path = "{evaluator_evidence_path}"
-evaluator_evidence_sha256 = "{authority.evidence_sha256}"
+evaluator_evidence_sha256 = "{evidence_sha256}"
 
 [relations]
 verifies_work_order = {work_array}
@@ -593,6 +603,7 @@ def prepare_release(
         record_id,
         selected_domain,
     )
+    evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
@@ -613,7 +624,7 @@ git_object_format = "{object_format}"
 prepared_at = "{now}"
 prepared_by = "{authorized_by}"
 evaluator_evidence_path = "{evaluator_evidence_path}"
-evaluator_evidence_sha256 = "{authority.evidence_sha256}"
+evaluator_evidence_sha256 = "{evidence_sha256}"
 {tag_line}
 [relations]
 satisfies = ["{release_contract_id}"]

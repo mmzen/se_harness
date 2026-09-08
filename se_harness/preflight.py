@@ -27,6 +27,28 @@ from se_harness.installer import (
 from se_harness._process import ProcessError, run_git
 from se_harness.hash_bound import assess as assess_hash_bound, is_git_worktree
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
+from se_harness.codes import (
+    A001,
+    I001,
+    W001,
+    W002,
+    W003,
+    W004,
+    W005,
+    W010,
+    W011,
+    W012,
+    W013,
+    W016,
+    W017,
+    W018,
+    W019,
+    W020,
+    W021,
+    W022,
+    W023,
+    W_ADS_002,
+)
 
 
 PREFLIGHT_SCHEMA = "se-harness-preflight-v2"
@@ -283,7 +305,7 @@ def _commit_is_ancestor(root: Path, commit: str, reference: str = "HEAD") -> boo
 
 
 def orphaned_ready_records(root: Path, artifacts: Iterable[Any], work_order_id: str) -> list[str]:
-    """W-ADS-002: ready verification records for the work order whose candidate left HEAD."""
+    ""f"{W_ADS_002}: ready verification records for the work order whose candidate left HEAD."""
 
     messages: list[str] = []
     for artifact in sorted(artifacts, key=lambda item: item.artifact_id):
@@ -321,7 +343,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
     diagnostics: list[PreflightDiagnostic] = []
     for check in inspect_installation(root):
         if not check.passed:
-            diagnostics.append(PreflightDiagnostic("I001", check.name, check.detail))
+            diagnostics.append(PreflightDiagnostic(I001, check.name, check.detail))
 
     artifacts: list[Any] = []
     validator: ModuleType | None = None
@@ -334,7 +356,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
             for item in validation.errors
         )
     except Exception as exc:
-        diagnostics.append(PreflightDiagnostic("A001", "docs/engineering", f"validator unavailable: {exc}"))
+        diagnostics.append(PreflightDiagnostic(A001, "docs/engineering", f"validator unavailable: {exc}"))
 
     work_order: Any | None = None
     work_order_summary = {"id": work_order_id, "status": "unknown", "path": ""}
@@ -344,13 +366,13 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
         "decided_by": "",
     }
     if WORK_ORDER_PATTERN.fullmatch(work_order_id) is None:
-        diagnostics.append(PreflightDiagnostic("W001", work_order_id, "invalid work-order ID"))
+        diagnostics.append(PreflightDiagnostic(W001, work_order_id, "invalid work-order ID"))
     else:
         matches = [item for item in artifacts if item.artifact_id == work_order_id]
         if not matches:
-            diagnostics.append(PreflightDiagnostic("W002", work_order_id, "unknown work-order ID"))
+            diagnostics.append(PreflightDiagnostic(W002, work_order_id, "unknown work-order ID"))
         elif len(matches) > 1:
-            diagnostics.append(PreflightDiagnostic("W003", work_order_id, "work-order ID is not unique"))
+            diagnostics.append(PreflightDiagnostic(W003, work_order_id, "work-order ID is not unique"))
         else:
             candidate = matches[0]
             work_order_summary = {
@@ -359,7 +381,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                 "path": _relative(candidate.path, root),
             }
             if candidate.artifact_type != "work_order":
-                diagnostics.append(PreflightDiagnostic("W004", work_order_id, "selected artifact is not a work order"))
+                diagnostics.append(PreflightDiagnostic(W004, work_order_id, "selected artifact is not a work order"))
             else:
                 work_order = candidate
                 if validator is not None:
@@ -376,7 +398,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                             details = "assurance classification is missing"
                         diagnostics.append(
                             PreflightDiagnostic(
-                                "W023",
+                                W023,
                                 work_order_summary["path"],
                                 "selected work order requires an accountable explicit assurance decision: "
                                 + details,
@@ -387,7 +409,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                     expected = ", ".join(sorted(allowed))
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W005",
+                            W005,
                             work_order_summary["path"],
                             f"status {candidate.status!r} is not eligible for {phase}; expected one of {expected}",
                         )
@@ -406,7 +428,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
         if required and not targets:
             diagnostics.append(
                 PreflightDiagnostic(
-                    "W010",
+                    W010,
                     _relative(source.path, root),
                     f"required relation {relation!r} is empty",
                 )
@@ -415,12 +437,12 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
         for artifact_id in targets:
             target_artifact = catalog.get(artifact_id)
             if target_artifact is None:
-                diagnostics.append(PreflightDiagnostic("W011", artifact_id, f"missing target of {relation!r}"))
+                diagnostics.append(PreflightDiagnostic(W011, artifact_id, f"missing target of {relation!r}"))
                 continue
             if target_artifact.artifact_type not in allowed_types:
                 diagnostics.append(
                     PreflightDiagnostic(
-                        "W012",
+                        W012,
                         _relative(target_artifact.path, root),
                         f"{relation!r} targets type {target_artifact.artifact_type!r}",
                     )
@@ -429,7 +451,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
             if target_artifact.status not in ACTIVE_CHAIN_STATUSES:
                 diagnostics.append(
                     PreflightDiagnostic(
-                        "W013",
+                        W013,
                         _relative(target_artifact.path, root),
                         f"governing artifact {artifact_id} is not active",
                     )
@@ -476,7 +498,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
             if missing:
                 diagnostics.append(
                     PreflightDiagnostic(
-                        "W016",
+                        W016,
                         work_order_summary["path"],
                         f"{coverage_type} coverage is missing {', '.join(missing)}",
                     )
@@ -487,7 +509,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
             if not selected_architecture_ids.intersection(_targets(decision, "decides")):
                 diagnostics.append(
                     PreflightDiagnostic(
-                        "W017",
+                        W017,
                         _relative(decision.path, root),
                         "ADR does not decide a selected architecture",
                     )
@@ -510,7 +532,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                 if not relevant:
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W021",
+                            W021,
                             _relative(architecture.path, root),
                             f"selected architecture {architecture.artifact_id} is unrelated to selected specifications or requirements",
                         )
@@ -537,7 +559,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                 if applicable:
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W022",
+                            W022,
                             _relative(architecture.path, root),
                             f"applicable architecture {architecture.artifact_id} is not selected by the work order",
                         )
@@ -557,7 +579,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                     details = "; ".join(assessment["issues"]) or "invalid decision assessment"
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W020",
+                            W020,
                             _relative(architecture.path, root),
                             f"architecture {architecture.artifact_id} has no valid decision assessment: {details}",
                         )
@@ -565,7 +587,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                 elif assessment["state"] == "legacy_missing" and not selected_deciding:
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W019",
+                            W019,
                             _relative(architecture.path, root),
                             f"legacy architecture {architecture.artifact_id} has no selected active deciding ADR",
                         )
@@ -573,7 +595,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                 elif assessment["outcome"] == "adr_required" and not selected_deciding:
                     diagnostics.append(
                         PreflightDiagnostic(
-                            "W018",
+                            W018,
                             _relative(architecture.path, root),
                             f"adr_required architecture {architecture.artifact_id} has no selected active deciding ADR",
                         )
@@ -581,7 +603,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
 
     if phase == "review" and work_order is not None:
         for message in orphaned_ready_records(root, artifacts, work_order.artifact_id):
-            diagnostics.append(PreflightDiagnostic("W-ADS-002", work_order.artifact_id, message))
+            diagnostics.append(PreflightDiagnostic(W_ADS_002, work_order.artifact_id, message))
 
     artifact_order = (
         sorted({item.artifact_id: item for item in intents}.values(), key=lambda item: item.artifact_id)

@@ -1060,8 +1060,8 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionTests):
         self.assertEqual([b"## Stop when", b"## Traps"], re.findall(rb"^## .*$", rendered, flags=re.MULTILINE))
         self.assertNotIn(b"| Class |", rendered)
         mutated = json.loads(json.dumps(load_workflow_contract()))
-        mutated["restitution_fields"].append("extra")
-        with self.assertRaises(Exception):
+        mutated["restitution_fields"].remove("outcome")  # ECP-PRM-020: the contract is the field set; a malformed one refuses
+        with self.assertRaisesRegex(Exception, "WEX-ECP-031"):
             render_operating_card(mutated, load_quality_gate_contract())
 
         installed = self.root / "docs/engineering/OPERATING_CARD.md"
