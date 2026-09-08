@@ -2,6 +2,11 @@
 
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
+> Historical exploration. The [2026-09-06 installation proposal](plugin-installation-proposal-2026-09-06.md)
+> is the current planning reference. This earlier note predates the writing-skill
+> retirement; its skill inventory, generic fingerprinting API, and host capability
+> descriptions must not be treated as the current implementation.
+
 > This is a non-authoritative exploration note. It approves nothing, authorizes
 > no implementation, delegates no decision, and changes no lifecycle state.
 > Formal authority comes from `ENGINEERING_HARNESS.md`, its managed policies,

@@ -4,6 +4,7 @@
 
 ## Product and governance domains
 
+- [plugin-integration/](plugin-integration/README.md): 16 proposed implementation packages for native coding-agent plugins using provided Python, with shared architecture and explicit unresolved decisions.
 - `test-suite/`: draft proposal for a repository-owned parallel test runner over unittest, a marker for the scale tests, and a cached fixture install, keeping the serial run canonical.
 - `ci-pipeline/`: draft proposal to run each CI check once per commit, define the release qualification once for the rehearsal and the release, and freeze a release unit by candidate commit rather than by work-order allow-list.
 - `agentic-execution/`: draft proposal for skill-driven, bounded agent execution with explicit delegation and accountable human decision points.
