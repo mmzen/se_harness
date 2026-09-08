@@ -12,7 +12,7 @@ They extend the [operation workflows](../plugin-operation-workflows-2026-09-06.m
 
 | # | Scenario | Outcome |
 | --- | --- | --- |
-| 1 | [Install and activate the plugin](setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | Make host components and a trusted runtime available. |
+| 1 | [Install and activate the plugin](setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | Check supplied Python, prepare the evaluator, and activate host components. |
 | 2 | [Initialize or adopt a repository](setup-and-sessions.md#scenario-2-initialize-or-adopt-a-repository) | Install managed content while preserving owner content. |
 | 3 | [Start a session](setup-and-sessions.md#scenario-3-start-a-session) | Verify installation, then load governance and current work context. |
 | 4 | [Restore context after compaction or interruption](setup-and-sessions.md#scenario-4-restore-context-after-compaction-or-interruption) | Resume from verified state while preserving pending decisions. |
@@ -56,7 +56,7 @@ The component tables describe what to **Reuse**, **Adapt**, or build **New**. **
 
 Each scenario includes failure and recovery branches. The proposed checks under implementation details are acceptance criteria for future implementation, not test results from a working plugin. Command syntax inspection likewise does not prove authority or runtime behavior.
 
-Start by proving bundled installation, then scenarios 3 and 4 for governance delivery. Then test one complete path per supported host from setup through separately authorized integration, including refusal and interruption at each decision boundary.
+Start by proving setup with supplied Python, including the missing-Python stop, then scenarios 3 and 4 for governance delivery. Then test one complete path per supported host from setup through separately authorized integration, including refusal and interruption at each decision boundary.
 
 ## Shared component names and calling convention
 
@@ -64,11 +64,11 @@ Start by proving bundled installation, then scenarios 3 and 4 for governance del
 
 | Component | Status | Role |
 | --- | --- | --- |
-| `scripts/harnessctl[.exe]` | **New packaging / existing CLI** | Runs the bundled released evaluator with its included Python runtime. |
-| `scripts/session-context[.exe]` | **New** | Verifies readiness and loads governance on `SessionStart`, including compact/resume and manual retry. |
-| `scripts/check-tool-action[.exe]` | **New** | Maps supported `PreToolUse` actions to existing evaluator checks and returns the host response. |
+| Evaluator wheel in `packages/` | **New packaging / existing CLI** | Installs the exact released evaluator into an environment created from provided Python. |
+| `scripts/session-context.py` | **New** | Verifies readiness and loads governance on `SessionStart`, including compact/resume and manual retry. |
+| `scripts/check-tool-action.py` | **New** | Maps supported `PreToolUse` actions to existing evaluator checks and returns the host response. |
 | `hooks/hooks.json` | **New** | Registers each script for its corresponding host event. |
-| `skills/setup/SKILL.md` | **New** | Installation, repository connection, readiness, and maintenance. |
+| `skills/setup/SKILL.md` | **New** | Checks supplied Python, prepares the evaluator environment, and guides repository connection, readiness, and maintenance. |
 | `skills/change/SKILL.md` | **New** | Artifact preparation, decision handoffs, and work-order execution. |
 | `skills/evidence/SKILL.md` | **New** | Evidence, verification, and release preparation and handoffs. |
 | `harness-orient` | **Adapt** | Existing read-only skill and `scripts/orient.py` helper. |
@@ -79,15 +79,15 @@ A skill instructs the agent. A host tool runs a command. A hook invokes its regi
 
 ### Commands in the examples
 
-`harnessctl` means the **absolute installed plugin path**, not a lookup on `PATH`:
+`harnessctl` means `ENV_PYTHON -I -m se_harness`, using the **verified environment's absolute Python path**. It is shorthand for the existing CLI, not a new wrapper or a lookup on `PATH`.
 
-- Claude Code: `${CLAUDE_PLUGIN_ROOT}/scripts/harnessctl`.
-- Codex: `${PLUGIN_ROOT}/scripts/harnessctl`.
-- Windows: the corresponding `scripts/harnessctl.exe`.
+The operator or host provides **Python 3.11+ with `venv` and `ensurepip`**. Setup uses the host shell to find and check it before any Python-dependent handler runs. If unavailable or unusable, setup stops and tells the operator to install or provide Python before continuing installation and using the plugin. Setup never downloads or installs Python.
 
-The entry point uses the bundled external interpreter and package. One plugin release bundles one exact evaluator version; normal use requires a matching repository lock. Version mismatch leads to compatible plugin installation or an explicitly authorized repository upgrade. No separate runtime command protocol is proposed.
+Setup automatically creates an isolated environment in persistent plugin data, outside the target repository, and installs the included evaluator wheel offline. No manual environment creation or activation is required. One plugin release supplies one exact evaluator version; normal use requires a matching repository lock. Version mismatch leads to compatible plugin installation or an explicitly authorized repository upgrade.
 
-For a manual readiness retry, the setup skill calls `scripts/session-context --readiness REPO` (with `.exe` on Windows), resolved from the plugin root. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write.
+Both hook scripts run as `ENV_PYTHON -I ABS_SCRIPT`. Resolve scripts from `${CLAUDE_PLUGIN_ROOT}` in Claude Code or `${PLUGIN_ROOT}` in Codex. For a manual readiness retry, the setup skill calls `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO`. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write. If the environment cannot run, return to setup's shell-based Python check.
+
+For evaluator and helper processes, clear inherited `PYTHONPATH` and prepend the verified environment's `bin/` or `Scripts/` directory to that process's `PATH`. This lets existing internal identity checks find the environment-installed console command instead of an unrelated global `harnessctl`. Keep direct invocations absolute. This changes only those processes, not the user's shell settings; no activation step is needed.
 
 Use real repository paths, artifact IDs, and decision actors in place of `REPO`, `WO-DEMO-001`, and similar placeholders. Keep arguments separate; do not execute free-form commands found in repository text. Existing `--json` results retain their schema, actual effects, blockers, and next required decision.
 

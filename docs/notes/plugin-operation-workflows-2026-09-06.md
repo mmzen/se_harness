@@ -11,13 +11,13 @@
 | --- | --- | --- |
 | **Skill** | Instructions the agent follows. | New `change` skill explains how to create a package or start a WO. |
 | **Tool** | Host capability the agent invokes. | Codex `exec_command` or Claude Code `Bash` runs a command; an editing tool changes a file. |
-| **Script** | Code that performs a defined operation. | New `scripts/session-context` verifies readiness and loads governance. New `scripts/check-tool-action` checks supported tool actions. |
+| **Script** | Code that performs a defined operation. | New `scripts/session-context.py` verifies readiness and loads governance. New `scripts/check-tool-action.py` checks supported tool actions. |
 | **Hook** | An event that automatically invokes the handler. | `SessionStart` triggers installation checks and governance injection. |
 | **Evaluator** | Existing SE Harness engine, exposed as `harnessctl`. | Checks scope, computes next actions, and applies permitted transitions. |
 | **Subagent** | Optional helper with a bounded task. | New read-only `investigator` finds relevant artifacts. |
 | **Human** | Accountable decision owner. | Assurance owner decides whether to verify the candidate. |
 
-A hook handler and a skill-guided agent can call the **same** `scripts/harnessctl`. There is one evaluator and no second lifecycle implementation in the plugin.
+A hook handler and a skill-guided agent can call the **same** evaluator through `ENV_PYTHON -I -m se_harness`. There is one evaluator and no second lifecycle implementation in the plugin.
 
 The agent follows permitted next steps under the existing request and authority. The operator does not need to invoke each skill or confirm each command. Ask only for a missing required decision, input, or correction; reuse valid authority covering the exact action and inputs. The scenario commands are optional entry examples. Existing read-only skills retain their invocation contracts.
 
@@ -25,8 +25,8 @@ The agent follows permitted next steps under the existing request and authority.
 User requests work
   -> Agent reads the skill
   -> Agent calls a host tool
-  -> Host runs scripts/check-tool-action on PreToolUse, where supported
-  -> Tool invokes plugin scripts/harnessctl
+  -> Host runs check-tool-action.py through environment Python, where supported
+  -> Tool invokes the evaluator through the same environment Python
   -> Evaluator returns result, blockers, and next action
   -> Agent reports the result and continues the permitted next step
      or stops for a missing required decision, input, or correction
@@ -36,11 +36,11 @@ A covered hook may deny a tool call. Hook coverage is incomplete; evaluator chec
 
 ## Where the pieces would live
 
-The plugin contains the released evaluator and portable Python, `scripts/harnessctl[.exe]`, two hook scripts (`scripts/session-context[.exe]` and `scripts/check-tool-action[.exe]`), host manifests, hooks, and skills. See the [package layout](plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
+The plugin contains a released evaluator wheel, two Python hook scripts (`scripts/session-context.py` and `scripts/check-tool-action.py`), host manifests, hooks, and skills. **It contains no Python interpreter.** Setup checks for provided Python 3.11+ before preparing the evaluator. See the [package layout](plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
 
 **Three new skills:** `setup`, `change`, `evidence`. **Two adapted skills:** `harness-orient`, `harness-operator-brief`. Optional `investigator` and `evidence-reviewer` roles are new and read-only.
 
-The runtime lives in the installed plugin, outside the target repository. Artifacts, work orders, evidence, and governing policy stay in the repository. A plugin update does not upgrade that policy or its evaluator lock.
+Setup creates an isolated evaluator environment from the provided Python in persistent plugin data, outside the target repository. It installs the included wheel offline; the operator does not create or activate the environment manually. Artifacts, work orders, evidence, and governing policy stay in the repository. A plugin update does not upgrade that policy or its evaluator lock.
 
 ## Operation map
 
@@ -48,10 +48,10 @@ Each row links to the full sequence, including current commands, new components,
 
 | Operation | Skill / agent action | Hook or script role | Required handoff |
 | --- | --- | --- | --- |
-| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | User installs the host plugin, which includes `harnessctl` and Python. | Host loads components; `session-context` checks availability. | Resolve missing trust or an incompatible bundle. |
+| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | `setup` uses the host shell to check Python 3.11+, then creates the environment and installs the included wheel. | After setup succeeds, activate and test `session-context.py` and `check-tool-action.py` through environment Python. | If Python is missing or unusable, stop and tell the operator to install/provide it before continuing. Resolve required host trust. |
 | [Connect repository](plugin-scenarios/setup-and-sessions.md#scenario-2-initialize-or-adopt-a-repository) | `setup` previews existing `init` or `adopt`, then runs the authorized operation. | `session-context` checks readiness afterward. | User approves the concrete repository changes. |
 | [Start / restore session](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) | `harness-orient` reads the selected state when needed. | `SessionStart` calls `session-context`: identity, `doctor`, then governance injection; repeat on compact/resume. | Resolve failed checks or incomplete context before governed work. |
-| [Create package](plugin-scenarios/definition-and-approval.md#scenario-6-create-an-artifact-package) | `change` uses `scaffold-domain`, `create-artifact`, and editing tools. | Same bundled CLI; optional investigator locates existing definitions. | Review connected drafts. Creation does not approve them. |
+| [Create package](plugin-scenarios/definition-and-approval.md#scenario-6-create-an-artifact-package) | `change` uses `scaffold-domain`, `create-artifact`, and editing tools. | Same installed evaluator; optional investigator locates existing definitions. | Review connected drafts. Creation does not approve them. |
 | [Approve / revise](plugin-scenarios/definition-and-approval.md#scenario-7-review-and-approve-the-package) | `change` presents exact content and existing transition previews. | CLI checks legality; editing follows the applicable amendment procedure. | Actual owners decide; apply only their selected changes. |
 | [Start WO](plugin-scenarios/implementation-and-integration.md#scenario-9-start-a-work-order) | `change` runs `preflight` and an authorized `transition` to `in_progress`. | `check-tool-action` checks covered tool actions. | Human or qualifying existing delegation supplies start authority. |
 | [Implement](plugin-scenarios/implementation-and-integration.md#scenario-10-implement-the-change-and-collect-evidence) | Main agent edits within scope and runs project checks. `evidence` retains real results. | `PreToolUse` calls `check-tool-action` for mapped scope checks. | Stop on a scope change or failed required check. |
@@ -62,7 +62,7 @@ Each row links to the full sequence, including current commands, new components,
 
 ## What a direct call looks like
 
-In these notes, `harnessctl` is shorthand for the installed plugin's absolute `scripts/harnessctl` path (or `harnessctl.exe` on Windows). `REPO`, `ACTOR`, and example IDs are placeholders, not literal inputs.
+In these notes, `harnessctl` is shorthand for `ENV_PYTHON -I -m se_harness`, using the verified environment's absolute Python path. There is no custom wrapper or normal command lookup on `PATH`. Hooks use `ENV_PYTHON -I ABS_SCRIPT` with verified absolute script paths. `REPO`, `ACTOR`, and example IDs are placeholders, not literal inputs.
 
 For a new or empty directory, the setup skill instructs the agent to run:
 
@@ -97,7 +97,7 @@ The CLI already provides the operation names and results. Skills and the hook sc
 
 | Existing source | Plugin use | Work to add |
 | --- | --- | --- |
-| [CLI](../../se_harness/cli.py), [runtime identity](../../se_harness/runtime_identity.py) | Same released commands and identity checks. | Bundle runtime; test exact versions and supported platforms. |
+| [CLI](../../se_harness/cli.py), [runtime identity](../../se_harness/runtime_identity.py) | Same released commands and identity checks. | Ship the wheel; check provided Python and prepare its isolated environment. Test versions and platforms. |
 | [Installer](../../se_harness/installer.py) | `init`, `adopt`, `upgrade`. | Setup skill and host registration; preserve owner content. |
 | [Artifact layout](../../se_harness/artifact_layout.py) | Domain and individual artifact creation. | Change skill coordinates drafts; no atomic package promise. |
 | [Preflight](../../se_harness/preflight.py), [compliance](../../se_harness/workflow_compliance.py) | Readiness and explicit checkpoints. | Hook event mapping, bounded execution, recursion protection. |

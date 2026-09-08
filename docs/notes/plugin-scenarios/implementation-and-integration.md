@@ -8,9 +8,11 @@ Part of the [scenario guide](README.md), using the [scenario template](../plugin
 
 These scenarios grant no work or decision authority. **New** means a component must be built; **Reuse** retains an existing implementation or responsibility; **Adapt** changes its packaging; **Not used** means it is unnecessary here. A *work order* (WO) defines authorized work. A *verification record* (VREC) binds evidence to an exact candidate commit.
 
-The plugin supplies `scripts/harnessctl` **[New packaging]** (`scripts/harnessctl.exe` on Windows), with portable Python, a published evaluator, its templates, and package metadata outside the target repository. Skills and hooks call this entry point directly. The commands below use `harnessctl` as shorthand for that plugin path; `REPO` is the absolute target repository path. The installed evaluator must match the repository's required version before these scenarios run.
+The operator or host supplies Python 3.11 or later. Setup checks it first; if it is missing or too old, setup and readiness stop and ask the operator to install Python. The plugin never downloads or installs Python. It ships one exact published pure-Python evaluator wheel under `packages/`, including its templates and metadata. Setup uses the provided Python to create an isolated environment in persistent plugin data outside the repository and installs that wheel offline.
 
-These scenarios use the new before-tool hook script `scripts/check-tool-action`, registered in `hooks/hooks.json`. It translates supported host events into existing `harnessctl` checks. See the [shared calling convention](README.md#shared-component-names-and-calling-convention) for host paths and optional subagent invocation.
+In the commands below, `harnessctl` means the absolute verified `ENV_PYTHON -I -m se_harness` invocation, not a custom wrapper or a `PATH` lookup. `REPO` is the absolute target repository path. The environment must be ready and its evaluator must match the repository's required version before these scenarios run. If the provided Python or environment is removed or changed, return to setup checks; do not silently substitute another interpreter. No user environment activation or global pip install is needed.
+
+These scenarios use the new before-tool hook script `scripts/check-tool-action.py`, registered in `hooks/hooks.json` and invoked as `ENV_PYTHON -I ABS_SCRIPT` using verified absolute paths. It translates supported host events into existing `harnessctl` checks. Session readiness uses `scripts/session-context.py` through the same interpreter. See the [shared calling convention](README.md#shared-component-names-and-calling-convention) for host paths and optional subagent invocation.
 
 **Known boundary:** `--decision ID=ACTOR` records an actor assertion; it does not authenticate a human decision. Skills must use actual authority, but instructions and local hooks cannot guarantee that an agent obeys. Deterministic enforcement remains an open requirement in [issue #347](https://github.com/mmzen/se_harness/issues/347).
 
@@ -42,10 +44,10 @@ Existing transition → preview → apply → check actual state
 | --- | --- | --- |
 | 1 | Main agent → `change` skill **[New]** | Continue from the applicable next step within the existing request. Optional direct entry: ask Codex to use `verity-plane change` to start WO-DEMO-009, or invoke `/verity-plane:change start WO-DEMO-009` in Claude Code. Read `skills/change/SKILL.md`; no repeated invocation is needed. |
 | 2 | Main agent → file tools | Read the selected WO, `docs/engineering/OPERATING_CARD.md`, and the phase reading manifest's governing artifacts. |
-| 3 | Agent → shell tool → bundled `harnessctl` | Run `check REPO --artifact WO-DEMO-009 --json`, then `preflight REPO --work-order WO-DEMO-009 --phase start --json`. The first projects state; the second checks start readiness. Neither starts work. |
+| 3 | Agent → shell tool → `harnessctl` | Run `check REPO --artifact WO-DEMO-009 --json`, then `preflight REPO --work-order WO-DEMO-009 --phase start --json`. The first projects state; the second checks start readiness. Neither starts work. |
 | 4 | Engineering owner, or eligible delegate | Establish the exact start authority. Reuse an existing decision if it covers this start. Otherwise obtain the engineering owner's decision. Use DR-015 delegation only when its required facts are proven. |
-| 5 | Agent → bundled `harnessctl` | Run `transition` for `WO-DEMO-009=in_progress` with the actual permitted actor, first without `--apply`. Inspect the preview, then repeat with `--apply` while the selected content and authority still match. |
-| 6 | Agent → bundled `harnessctl` | Run `check` for the WO again and report its actual state and next step. A preview or failed apply is not a start. |
+| 5 | Agent → `harnessctl` | Run `transition` for `WO-DEMO-009=in_progress` with the actual permitted actor, first without `--apply`. Inspect the preview, then repeat with `--apply` while the selected content and authority still match. |
+| 6 | Agent → `harnessctl` | Run `check` for the WO again and report its actual state and next step. A preview or failed apply is not a start. |
 
 For DR-015, `[delegation] class = "execution"` must exist at the PR base, and the required live CI check must pass for the exact candidate head. A class added only on the working branch cannot authorize itself. Eligible delegation does not require another human start decision.
 
@@ -54,8 +56,8 @@ For DR-015, `[delegation] class = "execution"` must exist at the PR base, and th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides start mode. | **New:** follows existing `PROC-WO-START`. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered actions. | **Reuse:** host event. **New:** required applicable checks; the hook does not grant start authority. |
-| **Script** | `scripts/harnessctl` runs the external published evaluator. | **Adapt:** package the existing CLI with its runtime. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action.py` before covered actions. | **Reuse:** host event. **New:** required applicable checks; the hook does not grant start authority. |
+| **Script** | Invoke the existing `se_harness` module with the verified environment's Python. | **Reuse:** current CLI. **Not used:** no custom CLI wrapper. |
 | **Tool/interface** | Codex `exec_command`, or Claude Code `Bash` / native `PowerShell`, calls `harnessctl`. | **Reuse:** existing shell tools and CLI arguments. |
 | **Evaluator** | `check`, start `preflight`, and `transition` determine readiness and update the WO. | **Reuse:** existing gates, workflow engine, and delegation checks. |
 | **Subagent** | Not used. | **Not used:** the main agent handles the start sequence. |
@@ -96,7 +98,7 @@ harnessctl check REPO --artifact WO-DEMO-009 --json
 
 **Proposed additions**
 
-`change` start mode calls the packaged CLI directly. `scripts/check-tool-action` runs existing checks for supported tool events; it does not implement lifecycle rules or authenticate the actor.
+`change` start mode calls the installed evaluator directly. `scripts/check-tool-action.py` runs existing checks for supported tool events; it does not implement lifecycle rules or authenticate the actor.
 
 **Inputs, outputs, and writes**
 
@@ -106,7 +108,7 @@ harnessctl check REPO --artifact WO-DEMO-009 --json
 
 **Host differences**
 
-Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell`. Both call the installed plugin path. Hook coverage is host-specific and must be demonstrated; see the [hook limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement).
+Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell`. Both invoke the installed evaluator with verified `ENV_PYTHON -I -m se_harness`. Hook coverage is host-specific and must be demonstrated; see the [hook limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement).
 
 **Checks that demonstrate the behavior**
 
@@ -133,7 +135,7 @@ How will authenticated human authority be enforced at the effect boundary? The c
 ```text
 change implement [New] → main agent prepares an in-scope edit
         ↓
-Supported PreToolUse → scripts/check-tool-action [New] → harnessctl check
+Supported PreToolUse → scripts/check-tool-action.py [New] → harnessctl check
         ↓
 Agent edits and runs the repository's actual checks
         ↓
@@ -144,11 +146,11 @@ evidence prepare [New] → retain results → harnessctl handoff check
 | --- | --- | --- |
 | 1 | Main agent → `change` skill **[New]** | Continue after the authorized start without waiting for another implementation prompt. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change implement WO-DEMO-010` in Claude Code. Read `skills/change/SKILL.md` and the WO's required context. |
 | 2 | Agent → edit tools | Prepare an edit through Codex `apply_patch`, or Claude Code `Edit` / `Write`. The main agent implements the change. |
-| 3 | Host `PreToolUse` → `scripts/check-tool-action` **[New]**, for covered edits | Run the applicable existing `check` pre-action gates for the selected WO, `PROC-WO-IMPLEMENT`, and actual declared paths before the effect. Translate the result into the host's hook response. Do not skip required gates to reduce latency; report actions the adapter cannot cover. |
+| 3 | Host `PreToolUse` → `scripts/check-tool-action.py` **[New]**, for covered edits | Run the applicable existing `check` pre-action gates for the selected WO, `PROC-WO-IMPLEMENT`, and actual declared paths before the effect. Translate the result into the host's hook response. Do not skip required gates to reduce latency; report actions the adapter cannot cover. |
 | 4 | Agent → shell tool | Run the commands required by the repository's owner instructions and verification contract. Retain their actual command, exit result, and evidence location, including failures. |
 | 5 | Agent following `evidence` prepare mode **[New]** | Read `skills/evidence/SKILL.md`. Run `harnessctl evidence REPO --artifact WO-DEMO-010 --checkpoint handoff --json`, then fill its packet with the actual results and references. An empty packet proves nothing. |
 | 6 | Main agent → optional `evidence-reviewer` **[New]** | Supply only the selected criteria, diff, and retained results. The read-only helper reports omissions; it cannot decide completion or independent assurance. |
-| 7 | Agent → bundled `harnessctl` | Run review `preflight`, then `check --checkpoint handoff --from-git BASE`. Report the actual handoff result and completion decision. The Git-based handoff may update evidence and `handoff.json`, so invoke it deliberately. |
+| 7 | Agent → `harnessctl` | Run review `preflight`, then `check --checkpoint handoff --from-git BASE`. Report the actual handoff result and completion decision. The Git-based handoff may update evidence and `handoff.json`, so invoke it deliberately. |
 
 Evidence preparation is also directly available: ask Codex to use the `verity-plane evidence` skill, or invoke `/verity-plane:evidence prepare WO-DEMO-010` in Claude Code. Skills provide instructions; tools execute the named commands.
 
@@ -157,8 +159,8 @@ Evidence preparation is also directly available: ask Codex to use the `verity-pl
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides implementation; `skills/evidence/SKILL.md` guides evidence preparation. | **New:** modes call existing commands. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported intended edits. | **Reuse:** host event. **New:** action mapping, registrations, and recursion protection. |
-| **Script** | `scripts/harnessctl` runs harness checks; repository scripts run the project's checks. | **Adapt:** package the existing CLI. **Reuse:** actual project scripts. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action.py` for supported intended edits. | **Reuse:** host event. **New:** action mapping, registrations, and recursion protection. |
+| **Script** | The existing `se_harness` module runs harness checks; repository scripts run project checks. | **Reuse:** current CLI and project scripts; no CLI wrapper. |
 | **Tool/interface** | `apply_patch`, `Edit`, or `Write` edits; `exec_command`, `Bash`, or `PowerShell` runs commands. | **Reuse:** existing host tools. |
 | **Evaluator** | Pre-action and handoff `check`, `evidence`, and review `preflight` evaluate scope and evidence. | **Reuse:** workflow compliance and evidence operations. |
 | **Subagent** | `evidence-reviewer` optionally reports evidence gaps. | **New:** read-only helper with no artifact write or decision right. |
@@ -198,7 +200,7 @@ Use the actual selected action's paths and comparison base. `--changes-complete`
 
 **Proposed additions**
 
-The two skill modes and `scripts/check-tool-action` call this same CLI. The hook adapter needs explicit supported-action mappings and must avoid recursion. The optional `evidence-reviewer` follows the [shared host registration](README.md#shared-component-names-and-calling-convention).
+The two skill modes and `scripts/check-tool-action.py` call this same CLI. The hook adapter needs explicit supported-action mappings and must avoid recursion. The optional `evidence-reviewer` follows the [shared host registration](README.md#shared-component-names-and-calling-convention).
 
 **Inputs, outputs, and writes**
 
@@ -246,11 +248,11 @@ Existing capture-verification → ready VREC → assurance handoff
 | --- | --- | --- |
 | 1 | Main agent → `change` skill **[New]** | Follow the applicable completion step without requiring a new invocation. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change complete WO-DEMO-011` in Claude Code. Read the skill and refresh the handoff if its inputs changed. |
 | 2 | Engineering owner, or eligible delegate | Establish the completion decision. Reuse existing authority when it covers this action. DR-015 delegation requires the PR-base class and current successful CI for the exact head. |
-| 3 | Agent → bundled `harnessctl` | Preview `transition` to `WO-DEMO-011=implemented` with the actual actor, then apply while the reviewed content and authority still match. Run `check` for the WO and follow its next step. |
+| 3 | Agent → `harnessctl` | Preview `transition` to `WO-DEMO-011=implemented` with the actual actor, then apply while the reviewed content and authority still match. Run `check` for the WO and follow its next step. |
 | 4 | Agent following `evidence` prepare mode **[New]** | If commit-bound verification is required, read `skills/evidence/SKILL.md`, identify the verification contracts and retained evidence, and establish an eligible clean candidate. Any Git commit needs its own actual authorization. |
 | 5 | Agent and preparation actor | Present the proposed VREC ID, WOs, verification contracts, evidence paths, and current candidate. Reuse actual preparation authority or eligible DR-015 delegation that covers those inputs. Ask only if that authority is missing or no longer applies; completion authority alone does not imply it. |
-| 6 | Agent → bundled `harnessctl` | Call `capture-verification` with those inputs. This existing command writes the ready VREC and evaluator evidence immediately; it has no preview flag. |
-| 7 | Agent → bundled `harnessctl` | Run `check` for the new VREC. Report its actual state, bound commit, evidence, and assurance decision. Preparation is not verification. |
+| 6 | Agent → `harnessctl` | Call `capture-verification` with those inputs. This existing command writes the ready VREC and evaluator evidence immediately; it has no preview flag. |
+| 7 | Agent → `harnessctl` | Run `check` for the new VREC. Report its actual state, bound commit, evidence, and assurance decision. Preparation is not verification. |
 
 For `commit_bound_verification = "not_required"`, follow the evaluator's next step without creating an unnecessary VREC. [TRC-012](../../engineering/TRACEABILITY.md) allows this only for work that solely records or transports an already authorized governance decision. Applicable evidence and decisions still apply; mixed scope must be split or classified `required`.
 
@@ -259,8 +261,8 @@ For `commit_bound_verification = "not_required"`, follow the evaluator's next st
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides completion; `skills/evidence/SKILL.md` guides preparation. | **New:** distinct modes follow existing procedures. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered calls. | **Reuse:** host event. **New:** required applicable checks; no inferred completion or preparation authority. |
-| **Script** | `scripts/harnessctl` runs the existing evaluator and provenance functions. | **Adapt:** bundle the runtime and CLI; no new preparation API. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action.py` before covered calls. | **Reuse:** host event. **New:** required applicable checks; no inferred completion or preparation authority. |
+| **Script** | The existing `se_harness` module runs evaluator and provenance functions in the prepared environment. | **Reuse:** existing CLI; no wrapper or new preparation API. |
 | **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes `harnessctl` and separately authorized Git commands. | **Reuse:** existing tools. |
 | **Evaluator** | `transition`, `capture-verification`, and `check` record completion and prepare evidence. | **Reuse:** workflow and provenance engine. |
 | **Subagent** | `evidence-reviewer` may inspect selected evidence before preparation. | **New:** optional read-only helper; no preparation or assurance authority. |
@@ -301,7 +303,7 @@ harnessctl check REPO --artifact VREC-DEMO-011 --json
 
 **Proposed additions**
 
-The skill modes call the existing commands through `scripts/harnessctl`. Completion, preparation, and Git actions each need applicable authority, but authority already covering them is retained. Continue automatically through covered steps and present only a missing or changed decision. No extra transaction protocol is introduced.
+The skill modes call the existing commands through `harnessctl`. Completion, preparation, and Git actions each need applicable authority, but authority already covering them is retained. Continue automatically through covered steps and present only a missing or changed decision. No extra transaction protocol is introduced.
 
 **Inputs, outputs, and writes**
 
@@ -311,7 +313,7 @@ The skill modes call the existing commands through `scripts/harnessctl`. Complet
 
 **Host differences**
 
-Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell`. Both use the bundled CLI. The optional reviewer and [hook limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement) are the same as scenario 10.
+Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell`. Both use the installed evaluator. The optional reviewer and [hook limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement) are the same as scenario 10.
 
 **Checks that demonstrate the behavior**
 
@@ -351,8 +353,8 @@ Existing transition → preview → apply → report actual VREC state
 | 2 | Agent → file and shell tools | Read the VREC, exact candidate, verification criteria, and retained evidence. Run `harnessctl check REPO --artifact VREC-DEMO-012 --checkpoint transition --target verified --json`. Present its gate results and unresolved findings. |
 | 3 | Main agent → optional `evidence-reviewer` **[New]** | Ask the read-only helper to inspect the selected evidence and report gaps. Its observations support the human reviewer; they do not authorize verification. |
 | 4 | Agent and assurance owner | Reuse the owner's actual independent assurance decision if it still covers this VREC, candidate, and evidence. Otherwise present only the missing or changed decision for the owner's review. DR-015 execution delegation does not cover assurance. |
-| 5 | Agent → bundled `harnessctl` | Preview `transition` for the selected VREC and chosen outcome with the actual actor. Apply only while the reviewed VREC, candidate, evidence, and decision remain applicable. |
-| 6 | Agent → bundled `harnessctl` | Run `check` for the VREC again. Report its actual outcome and next decision. Related WOs and release records do not change by inference; no merge occurs. |
+| 5 | Agent → `harnessctl` | Preview `transition` for the selected VREC and chosen outcome with the actual actor. Apply only while the reviewed VREC, candidate, evidence, and decision remain applicable. |
+| 6 | Agent → `harnessctl` | Run `check` for the VREC again. Report its actual outcome and next decision. Related WOs and release records do not change by inference; no merge occurs. |
 
 The owner may choose a valid rejection or supersession instead. Rejection needs its reason; supersession needs an eligible successor. A separate model or a reviewer label does not establish independent human assurance: the review must satisfy the repository's role-separation policy.
 
@@ -361,8 +363,8 @@ The owner may choose a valid rejection or supersession instead. Rejection needs 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/evidence/SKILL.md` guides review mode. | **New:** follows `PROC-VREC-DECIDE` and valid alternatives. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for a supported transition call. | **Reuse:** host event. **New:** mapping; it cannot authenticate the assurance owner. |
-| **Script** | `scripts/harnessctl` runs the existing assurance checks and transition. | **Adapt:** package the current evaluator. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action.py` for a supported transition call. | **Reuse:** host event. **New:** mapping; it cannot authenticate the assurance owner. |
+| **Script** | The existing `se_harness` module runs assurance checks and transitions in the prepared environment. | **Reuse:** current evaluator; no CLI wrapper. |
 | **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` runs the CLI; the agent presents evidence to the owner. | **Reuse:** existing tools and human conversation. |
 | **Evaluator** | Assurance checkpoint `check` and `transition` validate and record the selected outcome. | **Reuse:** gates and transition engine. |
 | **Subagent** | `evidence-reviewer` optionally reports gaps for this candidate. | **New:** read-only helper; observations only. |
@@ -449,9 +451,9 @@ Agent reads remote state and reports the actual result
 | Step | Who acts | Action and result |
 | --- | --- | --- |
 | 1 | Main agent → `change` skill **[New]** | Continue when integration is the applicable selected step and the request covers it. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change integrate PR_URL` in Claude Code. Read `skills/change/SKILL.md`. |
-| 2 | Agent → bundled `harnessctl` | Run `check` for the selected WO or VREC and follow the returned delivery procedure. Present applicable coverage and the repository owner's integration decision. The existing integration procedure performs no merge. |
+| 2 | Agent → `harnessctl` | Run `check` for the selected WO or VREC and follow the returned delivery procedure. Present applicable coverage and the repository owner's integration decision. The existing integration procedure performs no merge. |
 | 3 | Agent → shell tool → existing `gh` | Read the exact PR, current head, target branch and commit, reviews, and checks through the existing GitHub interfaces. Reuse the actual owner decision only while it covers that action, head, target, and method. Ask only for missing or materially changed authority. Green CI alone does not authorize merging. |
-| 4 | Authorized agent or human → protected GitHub route | Check all current gates and independently enforced external controls. When they are demonstrated, the authorized agent may execute with existing `gh pr merge` and the permitted method; a human may use the same permitted project route. A covered tool call also runs `scripts/check-tool-action` before the effect. Missing or unproven external enforcement disables agent automation and produces a specific enforcement blocker. |
+| 4 | Authorized agent or human → protected GitHub route | Check all current gates and independently enforced external controls. When they are demonstrated, the authorized agent may execute with existing `gh pr merge` and the permitted method; a human may use the same permitted project route. A covered tool call also runs `scripts/check-tool-action.py` before the effect. Missing or unproven external enforcement disables agent automation and produces a specific enforcement blocker. |
 | 5 | Agent → existing `gh` | Read the PR state and resulting merge commit after execution. Report merged, still open, or unknown from observed remote facts. Do not infer WO, VREC, or release-state changes. |
 
 There is no `harnessctl merge`. The human retains the decision right; an authorized agent may execute it. Verification or release approval does not imply merge authority. Agent execution requires demonstrated independent enforcement under [issue #347](https://github.com/mmzen/se_harness/issues/347); this note does not claim those controls already exist. When they are missing, report that exact blocker. A human may use an existing permitted protected route, but an extra human execution step is not a permanent plugin requirement.
@@ -461,8 +463,8 @@ There is no `harnessctl merge`. The human retains the decision right; an authori
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides integrate mode, reusing applicable authority. | **New:** follows existing `PROC-REPOSITORY-INTEGRATION`. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered external-action requests. | **Reuse:** host event. **New:** required applicable checks; these do not replace independent merge controls. |
-| **Script** | `scripts/harnessctl` runs the selected harness check. | **Adapt:** package the existing CLI; no merge script. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action.py` before covered external-action requests. | **Reuse:** host event. **New:** required applicable checks; these do not replace independent merge controls. |
+| **Script** | The existing `se_harness` module runs the selected harness check. | **Reuse:** current CLI; no wrapper or merge script. |
 | **Tool/interface** | Shell tools run harness and GitHub reads, then authorized `gh pr merge`; a human can use GitHub. | **Reuse:** existing CLI and protected project interfaces. |
 | **Evaluator** | `check` reports applicable coverage and the delivery decision. | **Reuse:** existing procedure; no integration command is added. |
 | **Subagent** | Not used. | **Not used:** another agent cannot authorize integration. |
@@ -527,7 +529,7 @@ VRECs live in later governance commits than their verified candidate. A future e
 
 **Host differences**
 
-Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell` for the same GitHub CLI. Covered execution requests run the applicable `scripts/check-tool-action` checks. Both hosts have [coverage limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement), so neither substitutes for independent protections.
+Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell` for the same GitHub CLI. Covered execution requests run the applicable `scripts/check-tool-action.py` checks. Both hosts have [coverage limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement), so neither substitutes for independent protections.
 
 **Checks that demonstrate the behavior**
 

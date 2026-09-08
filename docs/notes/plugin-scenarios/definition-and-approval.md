@@ -6,7 +6,9 @@ Scenarios 5–8 in the [scenario index](README.md), using the [scenario template
 
 **Review date:** 2026-09-08. **Inspected baseline:** [aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055](https://github.com/mmzen/se_harness/tree/aad82a9d03e142b27cb3dc3d0a1ecc38d2d7e055), candidate source **0.16.0**. The installed governing evaluator is **0.15.0**. These interfaces were inspected, not integration-tested against that release. **New** means proposed work.
 
-`harnessctl` below means the plugin's exact `scripts/harnessctl` path (`scripts/harnessctl.exe` on Windows), with its bundled runtime. It never means a command found on `PATH`. See the [shared calling convention](README.md#shared-component-names-and-calling-convention). Skills call the existing CLI directly; there is no separate launcher or bridge API.
+`harnessctl` below means the verified invocation `ENV_PYTHON -I -m se_harness`. `ENV_PYTHON` is the absolute interpreter path in the private environment prepared by `setup`, outside the target repository in persistent plugin data. It never means a command found on `PATH`. See the [shared calling convention](README.md#shared-component-names-and-calling-convention).
+
+Setup requires Python 3.11+ supplied by the operator or host. It creates that environment and installs the plugin's released evaluator wheel from `packages/` offline, including its metadata and templates. If Python is missing, setup stops with installation guidance. The plugin ships no interpreter, native executable, or custom CLI wrapper; skills call the installed released evaluator directly.
 
 The `change` skill examples are optional ways to begin. During an authorized task, the agent follows the skill across stages without asking the user to invoke it again. Existing authority applies only to the same content and action; missing decisions or changed scope still require the responsible owner. The two existing read-only skills retain their activation and single-agent contracts; `harness-operator-brief` requires an explicit request.
 
@@ -32,7 +34,7 @@ User → existing harness-orient skill
 | Step | Who acts | Action and result |
 | --- | --- | --- |
 | 1 | User → existing `harness-orient` skill | Example entry: “Use harness-orient for WO-DEMO-101.” Claude Code exposes `/verity-plane:harness-orient WO-DEMO-101` through **New** plugin packaging. This read-only procedure is not a mandatory extra stage of every change. |
-| 2 | Main agent → existing shell tool | Follow the skill's identity and integrity checks using the bundled evaluator. Read the existing `skill-contract.json`; stop if the installation or selection is unsuitable. |
+| 2 | Main agent → existing shell tool | Follow the skill's identity and integrity checks using the installed released evaluator. Read the existing `skill-contract.json`; stop if the installation or selection is unsuitable. |
 | 3 | Main agent → existing `orient.py` | Supply the verified external interpreter, expected version/root, repository, and selected artifact. The helper runs `validate`, `inspect`, and the supported selected `check`. |
 | 4 | Main agent | Explain the returned state, blockers, and next action. Run optional `preflight` only when the user explicitly selected a WO and phase. |
 
@@ -44,7 +46,7 @@ Inspection does not authorize the next action. The existing `harness-operator-br
 | --- | --- | --- |
 | **Skill** | `harness-orient` guides the complete procedure. | **Adapt:** package the existing read-only skill. |
 | **Hook** | No status-specific hook is needed. | **Not used:** session preparation is scenario 3. |
-| **Script** | `harness-orient/scripts/orient.py` collects observations. | **Reuse:** pass the bundled evaluator's verified interpreter and identity. |
+| **Script** | `harness-orient/scripts/orient.py` collects observations. | **Reuse:** pass the private environment's verified interpreter and evaluator identity. |
 | **Tool/interface** | Codex `exec_command` or Claude Code `Bash` invokes commands. | **Reuse:** existing shell tools. |
 | **Evaluator** | Identity, installation, graph, and selected scope checks. | **Reuse:** existing `identity`, `doctor`, `validate`, `inspect`, and `check`. |
 | **Subagent** | No delegation. | **Not used:** the current skill requires one agent to complete the procedure. |
@@ -77,8 +79,9 @@ Illustrative response:
 
 **Proposed additions**
 
-- Package the existing skill and helper. Supply `target`, `--evaluator-launcher-json`, `--expected-evaluator-version`, and `--expected-evaluator-root` from verified plugin paths and release metadata. This existing argument name does not require a new launcher command.
-- The argument array contains the absolute bundled interpreter followed by `-I -m se_harness`. Add `--artifact` and `--preflight-phase` only when selected; preserve the helper's checks and receipt.
+- Package the existing skill and helper. Supply `target`, `--evaluator-launcher-json`, `--expected-evaluator-version`, and `--expected-evaluator-root` from verified environment paths and release metadata. This existing argument name does not require a new launcher command.
+- The argument array contains the absolute private-environment interpreter followed by `-I -m se_harness`. Setup creates this environment from operator- or host-provided Python; the plugin does not ship Python. Add `--artifact` and `--preflight-phase` only when selected; preserve the helper's checks and receipt.
+- Apply the [shared process environment](README.md#commands-in-the-examples) to the helper so its internal identity check finds the environment's console entry point. The expected evaluator root is the created environment directory.
 
 **Inputs, outputs, and writes**
 
@@ -126,7 +129,7 @@ Current request → agent follows change skill [New]
 | 2 | Main agent | Identify existing artifacts to reuse, necessary additions, links, and authorized paths. Optional `investigator` **New** finds relevant IDs and sources without editing. |
 | 3 | Main agent → `harnessctl` | Preview `scaffold-domain --dry-run --json` only if a domain is needed. Preview `create-artifact --dry-run --json` for each addition. Show proposed paths and IDs. |
 | 4 | Main agent → `harnessctl` | If the preview fits existing authoring authority, repeat the selected commands without `--dry-run`; do not request that same authority again. Record actual created IDs and paths after each call. |
-| 5 | Main agent → editing tool | Fill content, owners, relationships, acceptance criteria, and WO scope. The proposed `scripts/check-tool-action` checks supported mapped write events; it does not grant authoring authority. |
+| 5 | Main agent → editing tool | Fill content, owners, relationships, acceptance criteria, and WO scope. The proposed `scripts/check-tool-action.py` checks supported mapped write events; it does not grant authoring authority. |
 | 6 | Main agent → `harnessctl validate . --json` | Correct draft findings within scope, then present the artifacts and pending approvals. |
 
 Ordinary definitions start `draft`; decisions start `open`. Neither authorizes implementation. Drafting a WO cannot require starting that same WO first; follow the repository's authoring rules.
@@ -136,8 +139,8 @@ Ordinary definitions start `draft`; decisions start `open`. Neither authorizes i
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides authoring. | **New:** instructions using current rules and templates. |
-| **Hook** | `PreToolUse` checks supported write events. | **Adapt:** host event calls **New** `scripts/check-tool-action`; coverage must be demonstrated. |
-| **Script** | `scripts/harnessctl` runs the existing CLI. | **New:** bundled entry point; no package transaction engine. |
+| **Hook** | `PreToolUse` checks supported write events. | **Adapt:** host event calls **New** `scripts/check-tool-action.py`; coverage must be demonstrated. |
+| **Script** | `scripts/check-tool-action.py` maps covered writes to existing checks. | **New:** plain Python host adapter; no package transaction engine. |
 | **Tool/interface** | Shell and editing tools create and complete drafts. | **Reuse:** Codex `exec_command` / `apply_patch`; Claude Code `Bash` / `Read` / `Edit` / `Write`. |
 | **Evaluator** | `scaffold-domain`, `create-artifact`, and `validate`. | **Reuse:** existing authoring commands. |
 | **Subagent** | Optional `investigator` locates reusable definitions. | **New:** read-only helper; the main agent authors the package. |
@@ -171,7 +174,7 @@ Illustrative response:
 
 **Proposed additions**
 
-- Add the `change` skill and bundle the existing CLI. Keep creation, content editing, and validation as explicit steps.
+- Add the `change` skill and install the released evaluator from the plugin-provided wheel during setup. Keep creation, content editing, and validation as explicit steps.
 - Optionally package `agents/investigator.md` for Claude Code and a separate `.codex/agents/investigator.toml` registration for Codex. Both are new and read-only.
 
 **Inputs, outputs, and writes**
@@ -181,7 +184,7 @@ Illustrative response:
 
 **Host differences**
 
-- Both hosts call the same bundled CLI. File editing and optional subagent registration use their native interfaces; see the [calling convention](README.md#shared-component-names-and-calling-convention).
+- Both hosts call the same installed released evaluator through its verified private-environment interpreter. File editing and optional subagent registration use their native interfaces; see the [calling convention](README.md#shared-component-names-and-calling-convention).
 
 **Checks that demonstrate the behavior**
 
@@ -227,8 +230,8 @@ change skill [New] → harnessctl transition (preview)
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `change` presents content, checks, and required decisions. | **New:** human handoff when the exact decision is missing; otherwise continue within existing authority. |
-| **Hook** | `PreToolUse` checks covered transition commands. | **Adapt:** host event calls **New** `scripts/check-tool-action`; it cannot authenticate an owner. |
-| **Script** | `scripts/harnessctl` runs preview and application. | **New:** packaging of the existing CLI; no review service. |
+| **Hook** | `PreToolUse` checks covered transition commands. | **Adapt:** host event calls **New** `scripts/check-tool-action.py`; it cannot authenticate an owner. |
+| **Script** | `scripts/check-tool-action.py` maps covered commands to existing checks. | **New:** plain Python host adapter; no review service. |
 | **Tool/interface** | Shell tool invokes the CLI; human uses the accepted review process. | **Reuse:** host tools and repository review process. |
 | **Evaluator** | `transition` plans and applies selected changes. | **Reuse:** existing lifecycle checks, including multi-artifact planning. |
 | **Subagent** | No helper is needed for the decision. | **Not used:** an agent cannot supply an owner's approval. |
@@ -323,8 +326,8 @@ There is no general `approved → draft` transition or amendment transaction. Th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `change` guides impact analysis, decisions, and amendments. | **New:** instructions using existing authoring and lifecycle rules. |
-| **Hook** | `PreToolUse` checks covered write operations. | **Adapt:** host event calls **New** `scripts/check-tool-action`; it does not create amendment authority. |
-| **Script** | `scripts/harnessctl` runs supported operations. | **New:** packaging of existing commands; no amendment API. |
+| **Hook** | `PreToolUse` checks covered write operations. | **Adapt:** host event calls **New** `scripts/check-tool-action.py`; it does not create amendment authority. |
+| **Script** | `scripts/check-tool-action.py` maps covered writes to existing checks. | **New:** plain Python host adapter; no amendment API. |
 | **Tool/interface** | Shell and editing tools apply authorized changes. | **Reuse:** Codex `exec_command` / `apply_patch`; Claude Code `Bash` / `Edit` / `Write`. |
 | **Evaluator** | `create-artifact`, `decide`, `validate`, and scope `check`. | **Reuse:** current behavior; no general reopen command. |
 | **Subagent** | Optional `investigator` traces affected artifacts. | **New:** read-only findings; no remediation decision. |

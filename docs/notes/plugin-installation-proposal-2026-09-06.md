@@ -10,7 +10,9 @@
 
 **Install the plugin. Connect your repository. Start working.**
 
-The plugin supplies `harnessctl`, its Python runtime, skills, and hooks. The user does not install Python, create a virtual environment, or learn another command layer.
+The plugin supplies the released SE Harness package, skills, and hooks. **Python 3.11 or later must already be available.** Setup checks that prerequisite first; if it is missing, the operator must install or provide Python before continuing installation and using the plugin.
+
+The plugin does not bundle or install Python. Once Python is available, setup automatically prepares an isolated environment for SE Harness. The operator does not create or activate that environment manually.
 
 Ship native Codex and Claude Code packages built from the same engine and skill sources. Keep the existing harness rules, installer, and CI commands. Add a small amount of host integration code.
 
@@ -20,32 +22,32 @@ Ship native Codex and Claude Code packages built from the same engine and skill 
 
 | Today | Proposed experience |
 | --- | --- |
-| Install Python and `se-harness` separately. | Install one plugin containing a ready-to-run evaluator. |
+| Install Python, create an environment, and install `se-harness`. | Provide Python; plugin setup checks it and prepares the evaluator environment automatically. |
 | Run `harnessctl init` or `adopt` manually. | Ask the new `setup` skill to connect the repository. It uses those same commands. |
 | Repository files provide agent instructions. | Session hooks verify the installation and load those instructions automatically. |
 | Two existing read-only skills. | Reuse both and add three skills: `setup`, `change`, and `evidence`. |
-| No native plugin manifests or hooks. | Add host manifests and two scripts: `session-context` and `check-tool-action`. |
+| No native plugin manifests or hooks. | Add host manifests and two Python scripts: `session-context.py` and `check-tool-action.py`. |
 
 ## Architecture: one engine, two adapters
 
 The two host adapters target Codex and Claude Code. Each uses the same two purpose-specific scripts and existing evaluator.
 
 ```text
-User request -> skill -> agent's tool -> scripts/harnessctl -> repository
-SessionStart -> scripts/session-context -> verify installation and load rules
-PreToolUse   -> scripts/check-tool-action -> evaluate action -> host response
+Setup       -> host shell checks Python -> prepare evaluator environment
+User request -> skill -> host tool -> environment Python -> evaluator
+SessionStart -> environment Python -> session-context.py -> verified rules
+PreToolUse   -> environment Python -> check-tool-action.py -> host response
 ```
 
-`scripts/harnessctl` is the packaged entry point to the **existing** CLI. On Windows, ship `scripts/harnessctl.exe`. It starts the included Python interpreter and package; its arguments remain the current `harnessctl` arguments.
+The plugin uses the **existing** CLI through `ENV_PYTHON -I -m se_harness`. `ENV_PYTHON` means the verified environment's absolute Python path. Examples shorten that invocation to `harnessctl`; no custom command wrapper or native executable is needed.
 
 ```text
 verity-plane/
   .claude-plugin/plugin.json       New Claude manifest
   OR .codex-plugin/plugin.json     New Codex manifest
-  scripts/harnessctl[.exe]         New packaging of the existing CLI
-  scripts/session-context[.exe]    New readiness checks and governance loading
-  scripts/check-tool-action[.exe]  New checks before supported tool actions
-  runtime/                        Bundled Python + released package + templates
+  packages/                       One exact released evaluator wheel
+  scripts/session-context.py      New readiness checks and governance loading
+  scripts/check-tool-action.py    New checks before supported tool actions
   hooks/hooks.json                 New host event registrations
   skills/setup/                    New
   skills/change/                   New
@@ -55,21 +57,36 @@ verity-plane/
   agents/                         Optional host-specific helper definitions
 ```
 
-Use the installed plugin's absolute paths: `${CLAUDE_PLUGIN_ROOT}/scripts/harnessctl` in Claude Code, `${PLUGIN_ROOT}/scripts/harnessctl` in Codex. Do not depend on a globally installed command or a copy inside the target repository. [Claude paths](https://code.claude.com/docs/en/plugins-reference#environment-variables), [Codex packaging](https://developers.openai.com/plugins/build/plugins).
+Resolve scripts and the wheel from the installed plugin root: `${CLAUDE_PLUGIN_ROOT}` in Claude Code and `${PLUGIN_ROOT}` in Codex. Keep the created environment in persistent plugin data, outside the target repository. Normal commands use its verified interpreter, without a global command lookup. [Claude paths](https://code.claude.com/docs/en/plugins-reference#environment-variables), [Codex packaging](https://developers.openai.com/plugins/build/plugins).
 
-### Bundle the runtime
+### Use an existing Python installation
 
-Start with **one exact released evaluator per plugin release**, including portable Python, package metadata, and templates. Keep it outside the target checkout. Use the existing identity checks and an absolute interpreter with isolated imports (`-I`); reject ambient Python and candidate-source imports. Preserve the published Python package rather than assuming a frozen executable satisfies today's identity contract. [Runtime identity](../../se_harness/runtime_identity.py).
+The setup skill starts with the host's existing shell. It finds Python, resolves its absolute path, and checks **Python 3.11+, `venv`, and `ensurepip`**. Neither coding host is assumed to include Python. This first check cannot depend on a Python hook script already running.
+
+If the check fails, stop setup, activation, and repository initialization with a clear message:
+
+> Python 3.11 or newer is required to install and use this plugin. Install or provide Python with working venv and ensurepip, then run setup again.
+
+If it passes, setup verifies the plugin's released wheel and runs:
+
+```text
+PROVIDED_PYTHON -I -m venv ENV_DIR
+ENV_PYTHON -I -m pip install --no-index --no-deps EVALUATOR_WHEEL
+```
+
+These uppercase names are absolute path placeholders. The wheel contains **one exact released evaluator**, package metadata, and templates. Its Python dependency list is empty in the inspected source. Installation uses that local wheel, without a package-index download. The environment is created locally from the supplied Python installation; it is not a shipped interpreter. Calling its Python directly requires no activation. [Package definition](../../pyproject.toml), [Python environments](https://docs.python.org/3/library/venv.html), [pip bootstrap](https://docs.python.org/3/library/ensurepip.html).
+
+Use the existing identity checks and isolated imports (`-I`); reject candidate-source imports or an unexpected package identity. All evaluator calls and hook scripts use that same verified environment. If Python is later removed or the environment breaks, report the plugin as unready and rerun setup's shell checks. [Runtime identity](../../se_harness/runtime_identity.py).
 
 Normal operations require that evaluator to match the repository's governing version and identity. On mismatch, stop: install a compatible plugin release, or explicitly upgrade the repository using the target evaluator. Updating the plugin alone never changes the repository lock. The first version does not need a general runtime download manager.
 
-Packaging still needs proof: select a redistributable Python build, verify release contents, and test each supported OS and architecture on a machine without Python. Validate platform selection and package size against each host's distribution mechanism.
+Downloading plugin files may precede the Python check; it does not make the plugin ready to use. Enable and test Python-dependent hooks only after environment setup succeeds. Prove that activation sequence on both hosts rather than assuming a native pre-install callback.
 
 ### Keep skills small
 
 | Skill | Responsibility |
 | --- | --- |
-| `setup` — **New** | Connect a repository, check readiness, and guide an explicit upgrade or repair. |
+| `setup` — **New** | Check supplied Python, prepare the environment, connect a repository, and guide readiness, upgrade, or repair. |
 | `change` — **New** | Draft artifacts, present decisions, and guide the authorized work order. |
 | `evidence` — **New** | Retain results, prepare verification and release records, and present required decisions. |
 | `harness-orient` — **Adapt** | Inspect current state and explain the evaluator's next step. |
@@ -87,11 +104,11 @@ Use two scripts with explicit responsibilities. Both call the same `harnessctl` 
 
 | Event | Script | Action |
 | --- | --- | --- |
-| `SessionStart` | `scripts/session-context` | Verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
-| `SessionStart` after compact or resume | `scripts/session-context` | Repeat those checks and load fresh governance and selected work context. |
-| `PreToolUse` | `scripts/check-tool-action` | For explicitly supported actions, run the corresponding existing checkpoint and return the host's supported allow/deny response. |
+| `SessionStart` | `scripts/session-context.py` | Verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
+| `SessionStart` after compact or resume | `scripts/session-context.py` | Repeat those checks and load fresh governance and selected work context. |
+| `PreToolUse` | `scripts/check-tool-action.py` | For explicitly supported actions, run the corresponding existing checkpoint and return the host's supported allow/deny response. |
 
-Keep verification and injection together, in order, inside **`session-context`**: matching hooks can run concurrently. The setup skill can also call `session-context --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
+Invoke each script as `ENV_PYTHON -I ABS_SCRIPT`, with verified absolute paths and separate arguments. Keep verification and injection together, in order, inside **`session-context.py`**: matching hooks can run concurrently. The setup skill can also call `ENV_PYTHON -I ABS_PLUGIN/scripts/session-context.py --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
 
 Hooks do not initialize repositories, upgrade locks, or make human decisions. In an unrelated repository, startup writes nothing. A missing or untrusted hook is a readiness failure for the proposed workflow, not proof that the host has blocked every tool.
 
@@ -105,9 +122,9 @@ The owner decides; an authorized agent or human may execute through the project'
 
 ## Native capabilities and their limits
 
-Claude Code supports bundled executables. However, distribution through **claude.ai Organization settings rejects top-level `bin/`**. Put executables in `scripts/` and reference them through the plugin root. [Executable placement](https://code.claude.com/docs/en/plugin-marketplaces#keep-executables-out-of-the-top-level-bin-directory).
+Keep the two Python scripts in `scripts/` and reference them through the plugin root. Distribution through **claude.ai Organization settings rejects top-level `bin/`**; this proposal needs no such directory. [Script placement](https://code.claude.com/docs/en/plugin-marketplaces#keep-executables-out-of-the-top-level-bin-directory).
 
-In Claude's manifest, `commands` means Markdown skills and `dependencies` means other plugins. Neither installs Python. Hooks may prepare Python dependencies in `CLAUDE_PLUGIN_DATA`; bundling the runtime is our product choice to avoid that setup on first use. [Manifest schema](https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema), [persistent data](https://code.claude.com/docs/en/plugins-reference#persistent-data-directory).
+In Claude's manifest, `commands` means Markdown skills and `dependencies` means other plugins. Neither installs Python. Setup uses `CLAUDE_PLUGIN_DATA` for its locally created environment; the operator or host supplies the base interpreter. Use Codex's `PLUGIN_DATA` equivalent. [Manifest schema](https://code.claude.com/docs/en/plugins-reference#plugin-manifest-schema), [Claude persistent data](https://code.claude.com/docs/en/plugins-reference#persistent-data-directory), [Codex packaging](https://developers.openai.com/plugins/build/plugins).
 
 | Host | Installation and component loading |
 | --- | --- |
@@ -124,13 +141,13 @@ Adapt the two skill cores for plugin paths and identity checks. Select one activ
 
 ## Delivery and open choices
 
-1. **Prove packaging:** install on a clean supported machine; run the bundled evaluator; reject a mismatched or modified installation. Confirm marketplace acceptance and offline use after installation.
+1. **Prove setup:** on each supported platform, missing or outdated Python must stop setup with operator guidance. With suitable Python, create the environment, install the wheel offline, and verify evaluator identity and hook activation. Reject modified packages and mismatched versions; never install Python automatically.
 2. **Prove fewer manual steps:** run the same authorized change with and without the plugin. Preserve the required decisions and delegation, require no repeated skill invocation, and ask no duplicate approval for unchanged authorized inputs. Include setup, compaction, and recovery on both hosts.
 3. **Measure execution cost:** compare startup, supported tool checks, and total task time on small and large repositories. Record operator interactions as well as processing time, and agree performance limits before release. No performance result is claimed yet.
 4. **Prove authority separately:** demonstrate that missing approval, changed candidates, disabled hooks, and alternate access routes cannot authorize protected effects before enabling merge or publication automation. A valid existing decision must not trigger a second approval prompt.
 
 The current [`check` path](../../se_harness/workflow_compliance.py) runs repository validation. Repeating that work before every edit may be expensive. Map each supported action to its required check and measure the cost before finalizing the adapter. Any reuse of prior results must remain in the evaluator, detect changed relevant inputs, and preserve refusals. Performance work must not skip required pre-effect checks, use stale approval, or add approval prompts for routine permitted actions.
 
-Challenge two choices: can one bundled version serve the first supported users, and does portable Python fit the host's distribution limits? Change packaging if testing shows it is needed. Avoid adding a runtime manager or another command protocol in advance.
+Challenge two choices: can one released evaluator version serve the first supported users, and can each host reliably activate hooks after setup succeeds? Test Python discovery, paths containing spaces, and environment recovery on supported platforms. Keep the prerequisite explicit; avoid adding a Python installer, runtime download manager, or another command protocol.
 
 Continue with the [operation map](plugin-operation-workflows-2026-09-06.md) and [16 detailed scenarios](plugin-scenarios/README.md), which name the commands, components, events, and decisions for each operation.
