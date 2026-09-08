@@ -2,7 +2,7 @@
 id = "WO-AUT-005"
 type = "work_order"
 title = "Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -79,6 +79,13 @@ to = "in_progress"
 decided_at = "2026-09-08T17:40:06Z"
 decided_by = "engineering-owner"
 reason = "Start decided by the accountable engineering owner on 2026-09-08, instructing this session in prose to start WO-AUT-005 after reading the two closing comments on issue #380, which order this work order first under owner decision 3 of issue #381. The start checkpoint of the released 0.16.0 evaluator reported every gate passing (QGP-G3-STATUS, -GRAPH, -INTEGRITY, -SCOPE, -PREFLIGHT, -DECISION) on branch wo/aut-005-corpus off main at 517dc5f6. The decision authorizes only the declared execution scope: the fifteen legacy architectures, the 271 requirements holding a string verification method, the migration script and its test, the note paragraph, the amendment record on SPEC-AUT-001, the corpus test, the domain index and the evidence packet. It authorizes no change to se_harness/, no closing of a validator window, no managed path, no verification decision and no release; completion, record preparation, verification and the merge remain the owner separate decisions."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T18:44:16Z"
+decided_by = "engineering-owner"
+reason = "Completion decided by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Mark it implemented (Recommended)', after the handoff restitution of the released 0.16.0 evaluator reported every QG-G4-IMPLEMENTATION-EVIDENCE predicate passing over 304 Git-derived changed paths, all within the declared execution scope. Delivered: the fifteen legacy architectures on addresses and conforms_to with fourteen retroactive decision assessments naming their deciding ADR; 271 requirements on the closed verification vocabulary, 267 mapped by rule and four as steward decisions, each keeping its original string in verification_notes; the one-shot script, its two tests and its note paragraph deleted with the script retained in the evidence; the amendment record on SPEC-AUT-001; the corpus test; the domain index; the packet under evidence/WO-AUT-005/. The released evaluator reads 0 errors and no W014 or W015 with W013 at 44 and 0 advisories, equal to the baseline on main at 517dc5f6. Pull request 413 is green on seventeen lanes. Completion verifies nothing and releases nothing: VREC-AUT-005, its verification and the merge remain separate decisions of this owner."
 +++
 
 # Work Order: Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method
