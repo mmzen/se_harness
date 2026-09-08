@@ -27,15 +27,15 @@ from se_harness.artifact_layout import (
     ID_PATTERN,
     REF_ARTIFACT_PATTERN,
     AuthoringChange,
-    _atomic_create,
-    _existing_artifact_path,
-    _rollback_directories,
-    _validate_existing_chain,
     allocate_artifact_id,
+    atomic_create,
     canonical_artifact_relative_path,
+    existing_artifact_path,
     reachable_artifact_ids,
+    rollback_directories,
     validate_artifact_id,
     validate_domain,
+    validate_existing_chain,
 )
 from se_harness.decisions import declared_options
 from se_harness.installer import HarnessError, ensure_target
@@ -185,7 +185,7 @@ def _free_identifier(root: Path, artifact_id: str, artifact_type: str) -> str:
     """RSK-MGT-010: an explicit identifier declared anywhere, on any local ref, is refused."""
 
     selected = validate_artifact_id(artifact_id, artifact_type)
-    existing = _existing_artifact_path(root, selected)
+    existing = existing_artifact_path(root, selected)
     if existing is not None:
         raise HarnessError(f"artifact ID already exists: {selected} at {existing.relative_to(root).as_posix()}")
     if (root / ".git").exists():
@@ -407,7 +407,7 @@ def raise_risk(
     else:
         risk_id = _free_identifier(root, artifact_id, "risk")
     risk_relative = canonical_artifact_relative_path(selected_domain, "risk", risk_id)
-    risk_path = _validate_existing_chain(root, risk_relative, final_kind="file")
+    risk_path = validate_existing_chain(root, risk_relative, final_kind="file")
     if risk_path.exists():
         raise HarnessError(f"artifact destination already exists: {risk_relative.as_posix()}")
     changes = [AuthoringChange("create", risk_relative.as_posix(), allocated, allocation_refs)]
@@ -420,7 +420,7 @@ def raise_risk(
         else:
             paired_id = _free_identifier(root, decision_id, "decision")
         decision_relative = canonical_artifact_relative_path(selected_domain, "decision", paired_id)
-        decision_path = _validate_existing_chain(root, decision_relative, final_kind="file")
+        decision_path = validate_existing_chain(root, decision_relative, final_kind="file")
         if decision_path.exists():
             raise HarnessError(f"artifact destination already exists: {decision_relative.as_posix()}")
         changes.append(AuthoringChange("create", decision_relative.as_posix()))
@@ -460,15 +460,15 @@ def raise_risk(
                 if not probe.exists():
                     probe.mkdir()
                     created_directories.append(probe)
-        _atomic_create(risk_path, risk_bytes)
+        atomic_create(risk_path, risk_bytes)
         written.append(risk_path)
         if decision_path is not None and decision_bytes is not None:
-            _atomic_create(decision_path, decision_bytes)
+            atomic_create(decision_path, decision_bytes)
             written.append(decision_path)
     except (OSError, HarnessError) as exc:
         for path in reversed(written):
             path.unlink(missing_ok=True)
-        _rollback_directories(created_directories)
+        rollback_directories(created_directories)
         if isinstance(exc, HarnessError):
             raise HarnessError(f"raise-risk wrote nothing: {exc}") from exc
         raise HarnessError(f"raise-risk wrote nothing: {exc}") from exc

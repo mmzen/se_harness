@@ -340,27 +340,19 @@ def distribution_table(value: Any) -> dict[str, str | int] | None:
     return table or None
 
 
-def normalize_artifacts(
-    report: ValidationReport,
-    repository_root: Path,
-    content_budget: ContentBudget | None = None,
-) -> list[dict[str, Any]]:
-    budget = content_budget or ContentBudget()
-    catalog = {
-        artifact.artifact_id: artifact
-        for artifact in report.artifacts
-        if artifact.artifact_id != "<unknown>"
-    }
+def _active_decisions_by_architecture(report: ValidationReport) -> dict[str, set[str]]:
+    """The active ADRs that decide each architecture, keyed by architecture identifier."""
     active_decisions_by_architecture: dict[str, set[str]] = defaultdict(set)
     for decision in report.artifacts:
         if decision.artifact_type != "adr" or decision.status not in ACTIVE_COVERAGE_STATUSES:
             continue
         for architecture_id in text_list(decision.relations.get("decides")):
             active_decisions_by_architecture[architecture_id].add(decision.artifact_id)
+    return active_decisions_by_architecture
 
-    # SPEC-DCM-001 rule 13: the decision trail of every concerned artifact and
-    # the standing deviations projected by the validator (rule 9).
-    standing = standing_deviations(list(report.artifacts))
+
+def _decision_trail(report: ValidationReport) -> dict[str, list[dict[str, Any]]]:
+    """The decision trail of every concerned artifact (SPEC-DCM-001 rule 13)."""
     decision_trail: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for decision in sorted(report.artifacts, key=lambda item: item.artifact_id):
         if decision.artifact_type != "decision":
@@ -378,7 +370,11 @@ def normalize_artifacts(
         }
         for concerned in text_list(decision.relations.get("concerns")):
             decision_trail[concerned].append(entry)
+    return decision_trail
 
+
+def _deriving_requirements(report: ValidationReport) -> dict[str, list[str]]:
+    """The requirements deriving from each capability, read from the graph (TCM-RFC-005)."""
     # SPEC-TCM-005 TCM-RFC-005: what derives from a capability is read from the graph.
     deriving_requirements: dict[str, list[str]] = defaultdict(list)
     for requirement in report.artifacts:
@@ -387,7 +383,11 @@ def normalize_artifacts(
         for capability_id in text_list(requirement.relations.get("derives_from")):
             if capability_id.startswith("CAP-"):
                 deriving_requirements[capability_id].append(requirement.artifact_id)
+    return deriving_requirements
 
+
+def _covered_by(report: ValidationReport) -> dict[str, list[dict[str, str]]]:
+    """The specification rules covering each requirement, from the coverage tables (TCM-RFS-017)."""
     # SPEC-TCM-006 TCM-RFS-017: which rules cover a requirement is read from the
     # coverage tables of the specifications, the same source the record panel shows.
     covered_by: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -397,6 +397,190 @@ def normalize_artifacts(
         for requirement_id, rule_ids in coverage_rows(specification.body) or []:
             for rule_id in rule_ids:
                 covered_by[requirement_id].append({"specification": specification.artifact_id, "rule": rule_id})
+    return covered_by
+
+
+def _project_requirement_fields(
+    item: dict[str, Any],
+    artifact: Artifact,
+    covered_by: dict[str, list[dict[str, str]]],
+) -> None:
+    """The requirement's statement, verification method, plain words and coverage."""
+    item["statement"] = text_value(artifact.metadata.get("statement")) or None
+    # ECP-COR-018: the closed-vocabulary array and the legacy string both reach the Explorer.
+    method = artifact.metadata.get("verification_method")
+    if isinstance(method, list):
+        item["verification_method"] = ", ".join(text_list(method)) or None
+    else:
+        item["verification_method"] = text_value(method) or None
+    plain_words = _plain_words(artifact.body)
+    if plain_words:
+        item["plain_words"] = plain_words
+    item["covered_by"] = sorted(covered_by.get(artifact.artifact_id, []), key=lambda entry: (entry["specification"], entry["rule"]))
+
+
+def _project_specification_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The specification's contract line, plain words, rules and coverage table."""
+    # SPEC-TCM-006 TCM-RFS-016: the contract line, the plain words, the rules by
+    # identifier and the coverage table of a specification.
+    contract = text_value(artifact.metadata.get("contract")) or None
+    if contract:
+        item["contract"] = contract
+    plain_words = _plain_words(artifact.body)
+    if plain_words:
+        item["plain_words"] = plain_words
+    item["rules"] = [
+        {"id": identifier, "text": text}
+        for identifier, text in specification_rules(artifact.body)
+        if identifier is not None
+    ]
+    item["coverage"] = [
+        {"requirement": requirement_id, "rules": list(rule_ids)}
+        for requirement_id, rule_ids in coverage_rows(artifact.body) or []
+    ]
+
+
+def _project_intent_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The intent's outcome line, plain words and success-measure row count."""
+    # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.
+    outcome = text_value(artifact.metadata.get("outcome")) or None
+    if outcome:
+        item["outcome"] = outcome
+    plain_words = _plain_words(artifact.body)
+    if plain_words:
+        item["plain_words"] = plain_words
+    item["success_measure_rows"] = _success_measure_row_count(artifact.body)
+
+
+def _project_capability_fields(
+    item: dict[str, Any],
+    artifact: Artifact,
+    deriving_requirements: dict[str, list[str]],
+) -> None:
+    """The capability's ability line, plain words and derived requirements."""
+    # SPEC-TCM-005 TCM-RFC-005 and TCM-RFC-006: the ability line, the plain words
+    # and the requirements that derive from the capability, from the graph.
+    ability = text_value(artifact.metadata.get("ability")) or None
+    if ability:
+        item["ability"] = ability
+    plain_words = _plain_words(artifact.body)
+    if plain_words:
+        item["plain_words"] = plain_words
+    item["derived_requirements"] = sorted(set(deriving_requirements.get(artifact.artifact_id, [])))
+
+
+def _project_architecture_fields(
+    item: dict[str, Any],
+    artifact: Artifact,
+    catalog: dict[str, Artifact],
+    active_decisions_by_architecture: dict[str, set[str]],
+) -> None:
+    """The architecture's traceability state and decision-assessment projection."""
+    item["architecture_traceability"] = architecture_traceability_state(
+        artifact,
+        catalog,
+    )
+    assessment = decision_assessment_state(artifact)
+    deciding_adrs = sorted(active_decisions_by_architecture.get(artifact.artifact_id, set()))
+    if assessment["state"] == "valid":
+        if assessment["outcome"] == "adr_required":
+            state = "adr_required_covered" if deciding_adrs else "adr_required_missing"
+        else:
+            state = "no_significant_decision_justified"
+    elif assessment["state"] == "legacy_missing":
+        state = "legacy_adr_covered" if deciding_adrs else "legacy_adr_missing"
+    else:
+        state = f"assessment_{assessment['state']}"
+    item["decision_assessment"] = {
+        "state": state,
+        "outcome": assessment["outcome"],
+        "triggers": assessment["triggers"],
+        "rationale": assessment["rationale"],
+        "assessed_by": assessment["assessed_by"],
+        "deciding_adrs": deciding_adrs,
+    }
+
+
+def _project_work_order_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The work order's assurance classification, when declared."""
+    assurance = artifact.metadata.get("assurance")
+    if isinstance(assurance, dict):
+        item["assurance_classification"] = {
+            "commit_bound_verification": text_value(assurance.get("commit_bound_verification")) or None,
+            "rationale": text_value(assurance.get("rationale")) or None,
+            "decided_by": text_value(assurance.get("decided_by")) or None,
+        }
+
+
+def _project_lifecycle_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The lifecycle events and the rejection fields every artifact carries."""
+    lifecycle_events = artifact.metadata.get("lifecycle_events")
+    item["lifecycle_events"] = [
+        {
+            key: text_value(event.get(key)) or None
+            for key in ("from", "to", "decided_at", "decided_by", "reason")
+        }
+        for event in lifecycle_events
+        if isinstance(event, dict)
+    ] if isinstance(lifecycle_events, list) else []
+    item["rejected_at"] = text_value(artifact.metadata.get("rejected_at")) or None
+    item["rejected_by"] = text_value(artifact.metadata.get("rejected_by")) or None
+    item["rejection_reason"] = text_value(artifact.metadata.get("rejection_reason")) or None
+
+
+def _project_verification_record_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The verification record's commit binding, preparation, verification and evidence fields."""
+    item["commit"] = text_value(artifact.metadata.get("commit")) or None
+    item["git_object_format"] = text_value(artifact.metadata.get("git_object_format")) or None
+    item["worktree_state"] = text_value(artifact.metadata.get("worktree_state")) or None
+    item["prepared_at"] = text_value(artifact.metadata.get("prepared_at")) or None
+    item["prepared_by"] = text_value(artifact.metadata.get("prepared_by")) or None
+    item["verified_at"] = text_value(artifact.metadata.get("verified_at")) or None
+    item["verified_by"] = text_value(artifact.metadata.get("verified_by")) or None
+    item["artifact_snapshot_sha256"] = text_value(artifact.metadata.get("artifact_snapshot_sha256")) or None
+    item["evidence_paths"] = text_list(artifact.metadata.get("evidence_paths"))
+    item["superseded_at"] = text_value(artifact.metadata.get("superseded_at")) or None
+    item["supersession_authorized_by"] = text_value(artifact.metadata.get("supersession_authorized_by")) or None
+    item["evaluator_evidence_path"] = text_value(artifact.metadata.get("evaluator_evidence_path")) or None
+    item["evaluator_evidence_sha256"] = text_value(artifact.metadata.get("evaluator_evidence_sha256")) or None
+
+
+def _project_release_record_fields(item: dict[str, Any], artifact: Artifact) -> None:
+    """The release record's commit binding, version, authorization and distribution fields."""
+    item["commit"] = text_value(artifact.metadata.get("commit")) or None
+    item["git_object_format"] = text_value(artifact.metadata.get("git_object_format")) or None
+    item["version"] = text_value(artifact.metadata.get("version")) or None
+    item["tag"] = text_value(artifact.metadata.get("tag")) or None
+    item["prepared_at"] = text_value(artifact.metadata.get("prepared_at")) or None
+    item["prepared_by"] = text_value(artifact.metadata.get("prepared_by")) or None
+    item["released_at"] = text_value(artifact.metadata.get("released_at")) or None
+    item["authorized_by"] = text_value(artifact.metadata.get("authorized_by")) or None
+    item["evaluator_evidence_path"] = text_value(artifact.metadata.get("evaluator_evidence_path")) or None
+    item["evaluator_evidence_sha256"] = text_value(artifact.metadata.get("evaluator_evidence_sha256")) or None
+    item["distribution"] = distribution_table(artifact.metadata.get("distribution"))
+
+
+def normalize_artifacts(
+    report: ValidationReport,
+    repository_root: Path,
+    content_budget: ContentBudget | None = None,
+) -> list[dict[str, Any]]:
+    budget = content_budget or ContentBudget()
+    catalog = {
+        artifact.artifact_id: artifact
+        for artifact in report.artifacts
+        if artifact.artifact_id != "<unknown>"
+    }
+    active_decisions_by_architecture = _active_decisions_by_architecture(report)
+
+    # SPEC-DCM-001 rule 13: the decision trail of every concerned artifact and
+    # the standing deviations projected by the validator (rule 9).
+    standing = standing_deviations(list(report.artifacts))
+    decision_trail = _decision_trail(report)
+
+    deriving_requirements = _deriving_requirements(report)
+
+    covered_by = _covered_by(report)
 
     normalized: list[dict[str, Any]] = []
     for artifact in sorted(report.artifacts, key=lambda item: (item.artifact_id, str(item.path))):
@@ -413,112 +597,20 @@ def normalize_artifacts(
             "content": budget.project(artifact.body),
         }
         if artifact.artifact_type == "requirement":
-            item["statement"] = text_value(artifact.metadata.get("statement")) or None
-            # ECP-COR-018: the closed-vocabulary array and the legacy string both reach the Explorer.
-            method = artifact.metadata.get("verification_method")
-            if isinstance(method, list):
-                item["verification_method"] = ", ".join(text_list(method)) or None
-            else:
-                item["verification_method"] = text_value(method) or None
-            plain_words = _plain_words(artifact.body)
-            if plain_words:
-                item["plain_words"] = plain_words
-            item["covered_by"] = sorted(covered_by.get(artifact.artifact_id, []), key=lambda entry: (entry["specification"], entry["rule"]))
+            _project_requirement_fields(item, artifact, covered_by)
         if artifact.artifact_type == "specification":
-            # SPEC-TCM-006 TCM-RFS-016: the contract line, the plain words, the rules by
-            # identifier and the coverage table of a specification.
-            contract = text_value(artifact.metadata.get("contract")) or None
-            if contract:
-                item["contract"] = contract
-            plain_words = _plain_words(artifact.body)
-            if plain_words:
-                item["plain_words"] = plain_words
-            item["rules"] = [
-                {"id": identifier, "text": text}
-                for identifier, text in specification_rules(artifact.body)
-                if identifier is not None
-            ]
-            item["coverage"] = [
-                {"requirement": requirement_id, "rules": list(rule_ids)}
-                for requirement_id, rule_ids in coverage_rows(artifact.body) or []
-            ]
+            _project_specification_fields(item, artifact)
         if artifact.artifact_type == "intent":
-            # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.
-            outcome = text_value(artifact.metadata.get("outcome")) or None
-            if outcome:
-                item["outcome"] = outcome
-            plain_words = _plain_words(artifact.body)
-            if plain_words:
-                item["plain_words"] = plain_words
-            item["success_measure_rows"] = _success_measure_row_count(artifact.body)
+            _project_intent_fields(item, artifact)
         if artifact.artifact_type == "capability":
-            # SPEC-TCM-005 TCM-RFC-005 and TCM-RFC-006: the ability line, the plain words
-            # and the requirements that derive from the capability, from the graph.
-            ability = text_value(artifact.metadata.get("ability")) or None
-            if ability:
-                item["ability"] = ability
-            plain_words = _plain_words(artifact.body)
-            if plain_words:
-                item["plain_words"] = plain_words
-            item["derived_requirements"] = sorted(set(deriving_requirements.get(artifact.artifact_id, [])))
+            _project_capability_fields(item, artifact, deriving_requirements)
         if artifact.artifact_type == "architecture":
-            item["architecture_traceability"] = architecture_traceability_state(
-                artifact,
-                catalog,
-            )
-            assessment = decision_assessment_state(artifact)
-            deciding_adrs = sorted(active_decisions_by_architecture.get(artifact.artifact_id, set()))
-            if assessment["state"] == "valid":
-                if assessment["outcome"] == "adr_required":
-                    state = "adr_required_covered" if deciding_adrs else "adr_required_missing"
-                else:
-                    state = "no_significant_decision_justified"
-            elif assessment["state"] == "legacy_missing":
-                state = "legacy_adr_covered" if deciding_adrs else "legacy_adr_missing"
-            else:
-                state = f"assessment_{assessment['state']}"
-            item["decision_assessment"] = {
-                "state": state,
-                "outcome": assessment["outcome"],
-                "triggers": assessment["triggers"],
-                "rationale": assessment["rationale"],
-                "assessed_by": assessment["assessed_by"],
-                "deciding_adrs": deciding_adrs,
-            }
+            _project_architecture_fields(item, artifact, catalog, active_decisions_by_architecture)
         if artifact.artifact_type == "work_order":
-            assurance = artifact.metadata.get("assurance")
-            if isinstance(assurance, dict):
-                item["assurance_classification"] = {
-                    "commit_bound_verification": text_value(assurance.get("commit_bound_verification")) or None,
-                    "rationale": text_value(assurance.get("rationale")) or None,
-                    "decided_by": text_value(assurance.get("decided_by")) or None,
-                }
-        lifecycle_events = artifact.metadata.get("lifecycle_events")
-        item["lifecycle_events"] = [
-            {
-                key: text_value(event.get(key)) or None
-                for key in ("from", "to", "decided_at", "decided_by", "reason")
-            }
-            for event in lifecycle_events
-            if isinstance(event, dict)
-        ] if isinstance(lifecycle_events, list) else []
-        item["rejected_at"] = text_value(artifact.metadata.get("rejected_at")) or None
-        item["rejected_by"] = text_value(artifact.metadata.get("rejected_by")) or None
-        item["rejection_reason"] = text_value(artifact.metadata.get("rejection_reason")) or None
+            _project_work_order_fields(item, artifact)
+        _project_lifecycle_fields(item, artifact)
         if artifact.artifact_type == "verification_record":
-            item["commit"] = text_value(artifact.metadata.get("commit")) or None
-            item["git_object_format"] = text_value(artifact.metadata.get("git_object_format")) or None
-            item["worktree_state"] = text_value(artifact.metadata.get("worktree_state")) or None
-            item["prepared_at"] = text_value(artifact.metadata.get("prepared_at")) or None
-            item["prepared_by"] = text_value(artifact.metadata.get("prepared_by")) or None
-            item["verified_at"] = text_value(artifact.metadata.get("verified_at")) or None
-            item["verified_by"] = text_value(artifact.metadata.get("verified_by")) or None
-            item["artifact_snapshot_sha256"] = text_value(artifact.metadata.get("artifact_snapshot_sha256")) or None
-            item["evidence_paths"] = text_list(artifact.metadata.get("evidence_paths"))
-            item["superseded_at"] = text_value(artifact.metadata.get("superseded_at")) or None
-            item["supersession_authorized_by"] = text_value(artifact.metadata.get("supersession_authorized_by")) or None
-            item["evaluator_evidence_path"] = text_value(artifact.metadata.get("evaluator_evidence_path")) or None
-            item["evaluator_evidence_sha256"] = text_value(artifact.metadata.get("evaluator_evidence_sha256")) or None
+            _project_verification_record_fields(item, artifact)
         if artifact.artifact_type == "decision":
             item.update(_decision_projection(artifact, catalog))
         if decision_trail.get(artifact.artifact_id):
@@ -526,17 +618,7 @@ def normalize_artifacts(
         if standing.get(artifact.artifact_id):
             item["standing_deviations"] = standing[artifact.artifact_id]
         if artifact.artifact_type == "release_record":
-            item["commit"] = text_value(artifact.metadata.get("commit")) or None
-            item["git_object_format"] = text_value(artifact.metadata.get("git_object_format")) or None
-            item["version"] = text_value(artifact.metadata.get("version")) or None
-            item["tag"] = text_value(artifact.metadata.get("tag")) or None
-            item["prepared_at"] = text_value(artifact.metadata.get("prepared_at")) or None
-            item["prepared_by"] = text_value(artifact.metadata.get("prepared_by")) or None
-            item["released_at"] = text_value(artifact.metadata.get("released_at")) or None
-            item["authorized_by"] = text_value(artifact.metadata.get("authorized_by")) or None
-            item["evaluator_evidence_path"] = text_value(artifact.metadata.get("evaluator_evidence_path")) or None
-            item["evaluator_evidence_sha256"] = text_value(artifact.metadata.get("evaluator_evidence_sha256")) or None
-            item["distribution"] = distribution_table(artifact.metadata.get("distribution"))
+            _project_release_record_fields(item, artifact)
         normalized.append(item)
     return sorted(normalized, key=lambda item: (item["id"], item["path"]))
 
@@ -975,27 +1057,12 @@ def _supports_temporal_reassessment(
     return True
 
 
-def build_findings(
+def _finding_missing_evidence_rules(
     normalized_artifacts: Sequence[dict[str, Any]],
-    relations: Sequence[dict[str, Any]],
-    diagnostics: Sequence[dict[str, Any]],
     evidence_by_work_order: dict[str, list[str]],
-    revision_provenance: Sequence[dict[str, Any]],
-    revision_policy: dict[str, bool],
 ) -> list[dict[str, Any]]:
-    artifacts = {artifact["id"]: artifact for artifact in normalized_artifacts}
-    findings = [
-        _finding(
-            diagnostic["code"],
-            diagnostic["severity"],
-            diagnostic["message"],
-            diagnostic["artifacts"],
-            [diagnostic["path"]],
-            authority="validator",
-        )
-        for diagnostic in diagnostics
-    ]
-
+    """W_HEX_001: implemented-or-later work orders without an evidence document."""
+    findings: list[dict[str, Any]] = []
     for artifact in normalized_artifacts:
         if (
             artifact["type"] == "work_order"
@@ -1011,7 +1078,16 @@ def build_findings(
                     [artifact["path"]],
                 )
             )
+    return findings
 
+
+def _finding_inactive_governing_rules(
+    normalized_artifacts: Sequence[dict[str, Any]],
+    relations: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_HEX_002: active work orders referencing inactive governing artifacts."""
+    findings: list[dict[str, Any]] = []
     relations_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for relation in relations:
         relations_by_source[relation["source"]].append(relation)
@@ -1036,7 +1112,15 @@ def build_findings(
                     [artifact["path"], *(artifacts[item]["path"] for item in invalid_governing)],
                 )
             )
+    return findings
 
+
+def _finding_stale_relation_rules(
+    relations: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_HEX_003: declared edges whose source predates a newer target."""
+    findings: list[dict[str, Any]] = []
     stale_relations: set[tuple[str, str, str]] = set()
     for relation in relations:
         if not relation["target_exists"]:
@@ -1065,7 +1149,15 @@ def build_findings(
                     ],
                 )
             )
+    return findings
 
+
+def _finding_cycle_rules(
+    relations: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_HEX_004: cycles in the declared dependency traversal."""
+    findings: list[dict[str, Any]] = []
     components = _strongly_connected_components(sorted(artifacts), _valid_relations(relations))
     for component in components:
         findings.append(
@@ -1077,7 +1169,15 @@ def build_findings(
                 [artifacts[item]["path"] for item in component if item in artifacts],
             )
         )
+    return findings
 
+
+def _finding_disconnected_rules(
+    normalized_artifacts: Sequence[dict[str, Any]],
+    relations: Sequence[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_HEX_005: non-intent artifacts with no valid declared edge."""
+    findings: list[dict[str, Any]] = []
     connected: set[str] = set()
     for relation in relations:
         if relation["target_exists"]:
@@ -1094,7 +1194,15 @@ def build_findings(
                     [artifact["path"]],
                 )
             )
+    return findings
 
+
+def _finding_duplicate_relation_rules(
+    relations: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_HEX_006: a source repeating the same target in the same relation."""
+    findings: list[dict[str, Any]] = []
     relation_counts = Counter(
         (relation["source"], relation["relation"], relation["target"])
         for relation in relations
@@ -1112,7 +1220,14 @@ def build_findings(
                     [f"duplicate_count={count}"],
                 )
             )
+    return findings
 
+
+def _finding_revision_entry_rules(
+    revision_provenance: Sequence[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], dict[str, set[str]], dict[str, set[str]]]:
+    """I_REV_001 and W_REV_003 per provenance entry, with the verified and released records by work order."""
+    findings: list[dict[str, Any]] = []
     verified_by_work: dict[str, set[str]] = defaultdict(set)
     released_by_work: dict[str, set[str]] = defaultdict(set)
     for entry in revision_provenance:
@@ -1141,8 +1256,15 @@ def build_findings(
                     evidence=[f"declared={entry['commit']}"],
                 )
             )
+    return findings, verified_by_work, released_by_work
 
-    verification_entries = [entry for entry in revision_provenance if entry["kind"] == "verification"]
+
+def _finding_possible_supersession_rules(
+    verification_entries: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_REV_004: ready verification records whose work is fully covered by verified or released ones."""
+    findings: list[dict[str, Any]] = []
     for source in verification_entries:
         source_work = set(source["work_orders"])
         if source["status"] != "ready" or not source_work or source["superseded_by"]:
@@ -1165,11 +1287,15 @@ def build_findings(
                     [f"possible_successors={','.join(possible_successors)}"],
                 )
             )
+    return findings
 
-    release_entries = [entry for entry in revision_provenance if entry["kind"] == "release"]
-    proposed_releases = [
-        entry for entry in release_entries if entry["status"] in {"draft", "ready"} and entry["version"]
-    ]
+
+def _finding_competing_version_rules(
+    proposed_releases: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_REB_001: several draft or ready release records declaring the same version."""
+    findings: list[dict[str, Any]] = []
     proposals_by_version: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for entry in proposed_releases:
         proposals_by_version[str(entry["version"])].append(entry)
@@ -1190,7 +1316,15 @@ def build_findings(
                 ],
             )
         )
+    return findings
 
+
+def _finding_ready_overlap_rules(
+    verification_entries: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_REB_002: ready verification records at different commits with overlapping work orders."""
+    findings: list[dict[str, Any]] = []
     ready_verifications = sorted(
         (entry for entry in verification_entries if entry["status"] == "ready"),
         key=lambda item: item["id"],
@@ -1214,7 +1348,17 @@ def build_findings(
                     ],
                 )
             )
+    return findings
 
+
+def _finding_competing_contract_rules(
+    normalized_artifacts: Sequence[dict[str, Any]],
+    relations: Sequence[dict[str, Any]],
+    artifacts: dict[str, dict[str, Any]],
+    proposed_releases: Sequence[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """W_REB_003: release contracts and proposals competing for the same version and governed work."""
+    findings: list[dict[str, Any]] = []
     active_contract_ids = {
         artifact["id"]
         for artifact in normalized_artifacts
@@ -1266,7 +1410,16 @@ def build_findings(
                     ],
                 )
             )
+    return findings
 
+
+def _finding_unreleased_record_rules(
+    normalized_artifacts: Sequence[dict[str, Any]],
+    revision_policy: dict[str, bool],
+    released_by_work: dict[str, set[str]],
+) -> list[dict[str, Any]]:
+    """W_REV_002: released work orders without a released commit-bound release record."""
+    findings: list[dict[str, Any]] = []
     for artifact in normalized_artifacts:
         if artifact["type"] != "work_order":
             continue
@@ -1284,6 +1437,59 @@ def build_findings(
                     [artifact["path"]],
                 )
             )
+    return findings
+
+
+def build_findings(
+    normalized_artifacts: Sequence[dict[str, Any]],
+    relations: Sequence[dict[str, Any]],
+    diagnostics: Sequence[dict[str, Any]],
+    evidence_by_work_order: dict[str, list[str]],
+    revision_provenance: Sequence[dict[str, Any]],
+    revision_policy: dict[str, bool],
+) -> list[dict[str, Any]]:
+    artifacts = {artifact["id"]: artifact for artifact in normalized_artifacts}
+    findings = [
+        _finding(
+            diagnostic["code"],
+            diagnostic["severity"],
+            diagnostic["message"],
+            diagnostic["artifacts"],
+            [diagnostic["path"]],
+            authority="validator",
+        )
+        for diagnostic in diagnostics
+    ]
+
+    findings.extend(_finding_missing_evidence_rules(normalized_artifacts, evidence_by_work_order))
+
+    findings.extend(_finding_inactive_governing_rules(normalized_artifacts, relations, artifacts))
+
+    findings.extend(_finding_stale_relation_rules(relations, artifacts))
+
+    findings.extend(_finding_cycle_rules(relations, artifacts))
+
+    findings.extend(_finding_disconnected_rules(normalized_artifacts, relations))
+
+    findings.extend(_finding_duplicate_relation_rules(relations, artifacts))
+
+    revision_findings, verified_by_work, released_by_work = _finding_revision_entry_rules(revision_provenance)
+    findings.extend(revision_findings)
+
+    verification_entries = [entry for entry in revision_provenance if entry["kind"] == "verification"]
+    findings.extend(_finding_possible_supersession_rules(verification_entries, artifacts))
+
+    release_entries = [entry for entry in revision_provenance if entry["kind"] == "release"]
+    proposed_releases = [
+        entry for entry in release_entries if entry["status"] in {"draft", "ready"} and entry["version"]
+    ]
+    findings.extend(_finding_competing_version_rules(proposed_releases, artifacts))
+
+    findings.extend(_finding_ready_overlap_rules(verification_entries, artifacts))
+
+    findings.extend(_finding_competing_contract_rules(normalized_artifacts, relations, artifacts, proposed_releases))
+
+    findings.extend(_finding_unreleased_record_rules(normalized_artifacts, revision_policy, released_by_work))
 
     return sorted(
         findings,
@@ -1360,6 +1566,133 @@ def _gate(gate_id: str, label: str, conditions: Sequence[dict[str, Any]]) -> dic
     states = {condition["state"] for condition in conditions}
     state = "unsatisfied" if "unsatisfied" in states else "not_assessable" if "not_assessable" in states else "satisfied"
     return {"gate": gate_id, "label": label, "state": state, "conditions": list(conditions)}
+
+
+def _work_order_record_ids(
+    work_order: dict[str, Any],
+    inbound: dict[str, list[dict[str, Any]]],
+    artifacts: dict[str, dict[str, Any]],
+) -> tuple[list[str], list[str], list[str]]:
+    """The verified verification records and the ready or released release records bound to a work order."""
+    verification_record_ids = sorted(
+        {
+            relation["source"]
+            for relation in inbound.get(work_order["id"], [])
+            if relation["relation"] == "verifies_work_order"
+            and artifacts.get(relation["source"], {}).get("type") == "verification_record"
+            and artifacts[relation["source"]]["status"] in {"verified", "released"}
+        }
+    )
+    release_record_ids = sorted(
+        {
+            relation["source"]
+            for relation in inbound.get(work_order["id"], [])
+            if relation["relation"] == "releases_work"
+            and artifacts.get(relation["source"], {}).get("type") == "release_record"
+            and artifacts[relation["source"]]["status"] in {"ready", "released"}
+        }
+    )
+    released_record_ids = [
+        artifact_id for artifact_id in release_record_ids if artifacts[artifact_id]["status"] == "released"
+    ]
+    return verification_record_ids, release_record_ids, released_record_ids
+
+
+def _work_order_gates(
+    work_order: dict[str, Any],
+    revision_policy: dict[str, bool],
+    intents: list[str],
+    measured_intents: list[str],
+    requirements: list[str],
+    requirements_active: bool,
+    requirements_clean: bool,
+    required_contracts: list[str],
+    governing_active: bool,
+    evidence_paths: list[str],
+    verification_record_ids: list[str],
+    release_ids: list[str],
+    release_active: bool,
+    release_record_ids: list[str],
+    operations_ids: list[str],
+    operations_active: bool,
+    released_record_ids: list[str],
+) -> list[dict[str, Any]]:
+    """The G0-G5 readiness gates of one work order from its derived observations."""
+    return [
+        _gate(
+            "G0",
+            "Intent ready",
+            [
+                _condition("intent_chain", "Approved intent is reachable", "satisfied" if intents else "unsatisfied", intents),
+                _condition(
+                    "intent_quality",
+                    "Outcome stated with a success measure",
+                    "satisfied" if measured_intents else "not_assessable",
+                    measured_intents,
+                ),
+            ],
+        ),
+        _gate(
+            "G1",
+            "Requirement ready",
+            [
+                _condition("requirements_declared", "In-scope requirements are active", "satisfied" if requirements_active else "unsatisfied", requirements),
+                _condition("requirement_metadata", "Requirement metadata has no validator error", "satisfied" if requirements_clean else "unsatisfied", requirements),
+                _condition("requirement_semantics", "Domain meaning and examples are adequate", "not_assessable"),
+            ],
+        ),
+        _gate(
+            "G2",
+            "Engineering ready",
+            [
+                _condition("governing_contracts", "Specification, architecture, and verification are active", "satisfied" if governing_active else "unsatisfied", required_contracts),
+                _condition("work_authorization", "Work order is active", "satisfied" if work_order["status"] in ACTIVE_WORK_ORDER_STATUSES else "unsatisfied", [work_order["id"]]),
+            ],
+        ),
+        _gate(
+            "G3",
+            "Implementation complete",
+            [
+                _condition("implementation_status", "Work order records implementation completion", "satisfied" if work_order["status"] in IMPLEMENTED_OR_LATER_STATUSES else "unsatisfied", [work_order["id"]]),
+                _condition("verification_evidence", "Work-order evidence is retained", "satisfied" if evidence_paths else "unsatisfied", evidence_paths),
+                _condition(
+                    "verified_revision",
+                    "A verified record binds the candidate commit",
+                    "satisfied" if verification_record_ids else "unsatisfied" if revision_policy["required_for_verified_work"] else "not_assessable",
+                    verification_record_ids,
+                ),
+                _condition("repository_checks", "All required implementation checks passed", "not_assessable"),
+            ],
+        ),
+        _gate(
+            "G4",
+            "Release ready",
+            [
+                _condition("release_contract", "An active release contract gates the work", "satisfied" if release_active else "unsatisfied", release_ids),
+                _condition(
+                    "release_revision",
+                    "A release record identifies the verified commit",
+                    "satisfied" if release_record_ids else "unsatisfied" if revision_policy["required_for_release"] else "not_assessable",
+                    release_record_ids,
+                ),
+                _condition("promotion_evidence", "Security, provenance, compatibility, and rollback evidence passed", "not_assessable"),
+            ],
+        ),
+        _gate(
+            "G5",
+            "Operationally accepted",
+            [
+                _condition("operating_contract", "An active operating contract assures the chain", "satisfied" if operations_active else "unsatisfied", operations_ids),
+                _condition(
+                    "released_revision",
+                    "An authorized release record binds the released commit",
+                    "satisfied" if released_record_ids else "unsatisfied" if revision_policy["required_for_release"] and work_order["status"] == "released" else "not_assessable",
+                    released_record_ids,
+                ),
+                _condition("observation_window", "Post-release operating evidence is within bounds", "not_assessable"),
+            ],
+        ),
+    ]
 
 
 def build_readiness(
@@ -1455,103 +1788,31 @@ def build_readiness(
             artifacts[item]["status"] in ACTIVE_COVERAGE_STATUSES for item in operations_ids
         )
         evidence_paths = evidence_by_work_order.get(work_order["id"], [])
-        verification_record_ids = sorted(
-            {
-                relation["source"]
-                for relation in inbound.get(work_order["id"], [])
-                if relation["relation"] == "verifies_work_order"
-                and artifacts.get(relation["source"], {}).get("type") == "verification_record"
-                and artifacts[relation["source"]]["status"] in {"verified", "released"}
-            }
+        verification_record_ids, release_record_ids, released_record_ids = _work_order_record_ids(
+            work_order,
+            inbound,
+            artifacts,
         )
-        release_record_ids = sorted(
-            {
-                relation["source"]
-                for relation in inbound.get(work_order["id"], [])
-                if relation["relation"] == "releases_work"
-                and artifacts.get(relation["source"], {}).get("type") == "release_record"
-                and artifacts[relation["source"]]["status"] in {"ready", "released"}
-            }
-        )
-        released_record_ids = [
-            artifact_id for artifact_id in release_record_ids if artifacts[artifact_id]["status"] == "released"
-        ]
 
-        gates = [
-            _gate(
-                "G0",
-                "Intent ready",
-                [
-                    _condition("intent_chain", "Approved intent is reachable", "satisfied" if intents else "unsatisfied", intents),
-                    _condition(
-                        "intent_quality",
-                        "Outcome stated with a success measure",
-                        "satisfied" if measured_intents else "not_assessable",
-                        measured_intents,
-                    ),
-                ],
-            ),
-            _gate(
-                "G1",
-                "Requirement ready",
-                [
-                    _condition("requirements_declared", "In-scope requirements are active", "satisfied" if requirements_active else "unsatisfied", requirements),
-                    _condition("requirement_metadata", "Requirement metadata has no validator error", "satisfied" if requirements_clean else "unsatisfied", requirements),
-                    _condition("requirement_semantics", "Domain meaning and examples are adequate", "not_assessable"),
-                ],
-            ),
-            _gate(
-                "G2",
-                "Engineering ready",
-                [
-                    _condition("governing_contracts", "Specification, architecture, and verification are active", "satisfied" if governing_active else "unsatisfied", required_contracts),
-                    _condition("work_authorization", "Work order is active", "satisfied" if work_order["status"] in ACTIVE_WORK_ORDER_STATUSES else "unsatisfied", [work_order["id"]]),
-                ],
-            ),
-            _gate(
-                "G3",
-                "Implementation complete",
-                [
-                    _condition("implementation_status", "Work order records implementation completion", "satisfied" if work_order["status"] in IMPLEMENTED_OR_LATER_STATUSES else "unsatisfied", [work_order["id"]]),
-                    _condition("verification_evidence", "Work-order evidence is retained", "satisfied" if evidence_paths else "unsatisfied", evidence_paths),
-                    _condition(
-                        "verified_revision",
-                        "A verified record binds the candidate commit",
-                        "satisfied" if verification_record_ids else "unsatisfied" if revision_policy["required_for_verified_work"] else "not_assessable",
-                        verification_record_ids,
-                    ),
-                    _condition("repository_checks", "All required implementation checks passed", "not_assessable"),
-                ],
-            ),
-            _gate(
-                "G4",
-                "Release ready",
-                [
-                    _condition("release_contract", "An active release contract gates the work", "satisfied" if release_active else "unsatisfied", release_ids),
-                    _condition(
-                        "release_revision",
-                        "A release record identifies the verified commit",
-                        "satisfied" if release_record_ids else "unsatisfied" if revision_policy["required_for_release"] else "not_assessable",
-                        release_record_ids,
-                    ),
-                    _condition("promotion_evidence", "Security, provenance, compatibility, and rollback evidence passed", "not_assessable"),
-                ],
-            ),
-            _gate(
-                "G5",
-                "Operationally accepted",
-                [
-                    _condition("operating_contract", "An active operating contract assures the chain", "satisfied" if operations_active else "unsatisfied", operations_ids),
-                    _condition(
-                        "released_revision",
-                        "An authorized release record binds the released commit",
-                        "satisfied" if released_record_ids else "unsatisfied" if revision_policy["required_for_release"] and work_order["status"] == "released" else "not_assessable",
-                        released_record_ids,
-                    ),
-                    _condition("observation_window", "Post-release operating evidence is within bounds", "not_assessable"),
-                ],
-            ),
-        ]
+        gates = _work_order_gates(
+            work_order,
+            revision_policy,
+            intents,
+            measured_intents,
+            requirements,
+            requirements_active,
+            requirements_clean,
+            required_contracts,
+            governing_active,
+            evidence_paths,
+            verification_record_ids,
+            release_ids,
+            release_active,
+            release_record_ids,
+            operations_ids,
+            operations_active,
+            released_record_ids,
+        )
         readiness.append(
             {
                 "work_order": work_order["id"],

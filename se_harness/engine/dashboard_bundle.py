@@ -89,14 +89,10 @@ def _hours_between(start: Any, end: Any) -> float | None:
     return (last - first).total_seconds() / 3600
 
 
-def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
-    """Governance indicators derived once from the canonical projection.
-
-    Every figure is a restatement of recorded lifecycle events and declared
-    relations; none is an assurance score, and none infers a decision.
-    """
-    artifacts = [item for item in snapshot.get("artifacts", []) if isinstance(item, dict) and isinstance(item.get("id"), str)]
-    relations = [item for item in snapshot.get("relations", []) if isinstance(item, dict)]
+def _tally_lifecycle_events(
+    artifacts: list[dict[str, Any]],
+) -> tuple[Counter[str], int, int, int, int, set[str], list[dict[str, Any]]]:
+    """Count lifecycle events, their attribution and delegation, and collect work-order lead times."""
     decided: Counter[str] = Counter()
     event_count = 0
     unattributed = 0
@@ -126,6 +122,68 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
                 hours = _hours_between(approved.get("decided_at"), implemented.get("decided_at"))
                 if hours is not None and hours > 0:
                     lead_times.append({"id": artifact["id"], "hours": round(hours, 2)})
+    return decided, event_count, unattributed, delegated_transitions, delegated_records, delegated_artifacts, lead_times
+
+
+def _latest_release_metrics(
+    released: list[dict[str, Any]],
+    outgoing: dict[str, list[dict[str, Any]]],
+    artifacts: list[dict[str, Any]],
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    """Describe the latest released record and its contract-approval-to-release arc."""
+    latest = max(released, key=lambda item: (text_value(item.get("released_at")), item["id"]), default=None)
+    latest_release: dict[str, Any] | None = None
+    release_arc: dict[str, Any] | None = None
+    if latest is not None:
+        verification_record = next(
+            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "includes_verification" and isinstance(relation.get("target"), str)),
+            None,
+        )
+        latest_release = {
+            "id": latest["id"],
+            "version": latest.get("version"),
+            "released_at": latest.get("released_at"),
+            "commit": latest.get("commit"),
+            "verification_record": verification_record,
+        }
+        contract_id = next(
+            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "satisfies" and isinstance(relation.get("target"), str)),
+            None,
+        )
+        contract = next((item for item in artifacts if item.get("id") == contract_id), None)
+        if contract is not None:
+            approved = next(
+                (event for event in contract.get("lifecycle_events") or [] if isinstance(event, dict) and event.get("to") == "approved"),
+                None,
+            )
+            if approved is not None:
+                hours = _hours_between(approved.get("decided_at"), latest.get("released_at"))
+                release_arc = {
+                    "contract_id": contract_id,
+                    "contract_approved_at": approved.get("decided_at"),
+                    "released_at": latest.get("released_at"),
+                    "hours": round(hours, 2) if hours is not None else None,
+                }
+    return latest_release, release_arc
+
+
+def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
+    """Governance indicators derived once from the canonical projection.
+
+    Every figure is a restatement of recorded lifecycle events and declared
+    relations; none is an assurance score, and none infers a decision.
+    """
+    artifacts = [item for item in snapshot.get("artifacts", []) if isinstance(item, dict) and isinstance(item.get("id"), str)]
+    relations = [item for item in snapshot.get("relations", []) if isinstance(item, dict)]
+    (
+        decided,
+        event_count,
+        unattributed,
+        delegated_transitions,
+        delegated_records,
+        delegated_artifacts,
+        lead_times,
+    ) = _tally_lifecycle_events(artifacts)
     lead_times.sort(key=lambda item: (item["hours"], item["id"]))
     # SPEC-DCM-001 rule 13: decision counts and raise-to-dispose times. A decision
     # is raised when created (a date, read at midnight UTC) and disposed at the
@@ -164,39 +222,7 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
         for work_order in released_work
         if any(relation.get("relation") == "verifies_work_order" for relation in incoming[work_order])
     ]
-    latest = max(released, key=lambda item: (text_value(item.get("released_at")), item["id"]), default=None)
-    latest_release: dict[str, Any] | None = None
-    release_arc: dict[str, Any] | None = None
-    if latest is not None:
-        verification_record = next(
-            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "includes_verification" and isinstance(relation.get("target"), str)),
-            None,
-        )
-        latest_release = {
-            "id": latest["id"],
-            "version": latest.get("version"),
-            "released_at": latest.get("released_at"),
-            "commit": latest.get("commit"),
-            "verification_record": verification_record,
-        }
-        contract_id = next(
-            (relation["target"] for relation in outgoing[latest["id"]] if relation.get("relation") == "satisfies" and isinstance(relation.get("target"), str)),
-            None,
-        )
-        contract = next((item for item in artifacts if item.get("id") == contract_id), None)
-        if contract is not None:
-            approved = next(
-                (event for event in contract.get("lifecycle_events") or [] if isinstance(event, dict) and event.get("to") == "approved"),
-                None,
-            )
-            if approved is not None:
-                hours = _hours_between(approved.get("decided_at"), latest.get("released_at"))
-                release_arc = {
-                    "contract_id": contract_id,
-                    "contract_approved_at": approved.get("decided_at"),
-                    "released_at": latest.get("released_at"),
-                    "hours": round(hours, 2) if hours is not None else None,
-                }
+    latest_release, release_arc = _latest_release_metrics(released, outgoing, artifacts)
     return {
         "lifecycle_events": event_count,
         "unattributed_events": unattributed,
@@ -215,28 +241,13 @@ def build_explorer_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_dashboard_bundle(
-    snapshot: dict[str, Any],
-) -> tuple[dict[str, Any], dict[str, Any], dict[str, str], dict[str, Any]]:
-    """Partition one canonical projection into deterministic progressive resources."""
-
-    source_repository = snapshot.get("repository")
-    if not isinstance(source_repository, dict):
-        raise GenerationError("dashboard snapshot has no repository descriptor")
-    repository = dict(source_repository)
-    source_revision = repository.get("revision")
-    revision = source_revision if isinstance(source_revision, str) and source_revision else "unavailable"
-    repository["revision"] = revision
-
-    evidence_documents = [
-        document
-        for document in snapshot.get("evidence_documents", [])
-        if isinstance(document, dict)
-    ]
-    evidence_by_artifact: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    resource_files: dict[str, str] = {}
-    resource_descriptors: list[dict[str, Any]] = []
-
+def _collect_evidence_resources(
+    evidence_documents: list[dict[str, Any]],
+    evidence_by_artifact: dict[str, list[dict[str, Any]]],
+    resource_files: dict[str, str],
+    resource_descriptors: list[dict[str, Any]],
+) -> None:
+    """Index evidence documents by artifact and register included Markdown as content resources."""
     for document in evidence_documents:
         public_document = {
             key: value
@@ -265,6 +276,15 @@ def build_dashboard_bundle(
         if not any(item["path"] == descriptor["path"] for item in resource_descriptors):
             resource_descriptors.append(descriptor)
 
+
+def _build_artifact_resources(
+    snapshot: dict[str, Any],
+    revision: str,
+    evidence_by_artifact: dict[str, list[dict[str, Any]]],
+    resource_files: dict[str, str],
+    resource_descriptors: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Emit one detail resource per artifact and build its compact topology entry."""
     compact_artifacts: list[dict[str, Any]] = []
     for artifact in snapshot.get("artifacts", []):
         if not isinstance(artifact, dict):
@@ -315,6 +335,40 @@ def build_dashboard_bundle(
                 if artifact.get(key) is not None:
                     compact_artifact[key] = artifact[key]
         compact_artifacts.append(compact_artifact)
+    return compact_artifacts
+
+
+def build_dashboard_bundle(
+    snapshot: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, str], dict[str, Any]]:
+    """Partition one canonical projection into deterministic progressive resources."""
+
+    source_repository = snapshot.get("repository")
+    if not isinstance(source_repository, dict):
+        raise GenerationError("dashboard snapshot has no repository descriptor")
+    repository = dict(source_repository)
+    source_revision = repository.get("revision")
+    revision = source_revision if isinstance(source_revision, str) and source_revision else "unavailable"
+    repository["revision"] = revision
+
+    evidence_documents = [
+        document
+        for document in snapshot.get("evidence_documents", [])
+        if isinstance(document, dict)
+    ]
+    evidence_by_artifact: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    resource_files: dict[str, str] = {}
+    resource_descriptors: list[dict[str, Any]] = []
+
+    _collect_evidence_resources(evidence_documents, evidence_by_artifact, resource_files, resource_descriptors)
+
+    compact_artifacts = _build_artifact_resources(
+        snapshot,
+        revision,
+        evidence_by_artifact,
+        resource_files,
+        resource_descriptors,
+    )
 
     summary = {
         "schema": SUMMARY_RESOURCE_SCHEMA,

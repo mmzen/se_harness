@@ -130,11 +130,11 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W001` | `W001`; `W001: invalid work-order ID` |
+| `W001` | `Resolve the selected work order, its summary and assurance summary, appending W001-W005/W023 diagnostics.`; `W001` (+1 more) |
 | `W002` | `W002`; `W002: unknown work-order ID` |
 | `W003` | `W003`; `W003: work-order ID is not unique` |
 | `W004` | `W004`; `W004: selected artifact is not a work order` |
-| `W005` | `W005`; `W005: status {…} is not eligible for {…}; expected one of {…}` |
+| `W005` | `Resolve the selected work order, its summary and assurance summary, appending W001-W005/W023 diagnostics.`; `W005` (+1 more) |
 | `W010` | `W010`; `W010: required relation {…} is empty` |
 | `W011` | `W011`; `W011: missing target of {…}` |
 | `W012` | `W012`; `W012: {…} targets type {…}` |
@@ -143,12 +143,12 @@ but are not diagnostics and are not listed here.
 | `W015` | `W015`; `W015: architecture uses deprecated constrains relation ({…}); migrate through accountable governance` |
 | `W016` | `W016`; `W016: {…} coverage is missing {…}` |
 | `W017` | `W017`; `W017: ADR does not decide a selected architecture` |
-| `W018` | `W018`; `W018: adr_required architecture {…} has no selected active deciding ADR` |
-| `W019` | `W019`; `W019: legacy architecture {…} has no selected active deciding ADR` |
-| `W020` | `W020`; `W020: architecture {…} has no valid decision assessment: {…}` |
-| `W021` | `W021`; `W021: selected architecture {…} is unrelated to selected specifications or requirements` |
-| `W022` | `W022`; `W022: applicable architecture {…} is not selected by the work order` |
-| `W023` | `W023` |
+| `W018` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W018` (+1 more) |
+| `W019` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W019` (+1 more) |
+| `W020` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W020` (+1 more) |
+| `W021` | `Append W021 for each selected architecture unrelated to the selected specifications or requirements.`; `W021` (+1 more) |
+| `W022` | `Append W022 for each active, unselected architecture that applies to the selected requirements.`; `W022` (+1 more) |
+| `W023` | `Resolve the selected work order, its summary and assurance summary, appending W001-W005/W023 diagnostics.`; `W023` |
 
 ### `W-ADS` — installed validator
 

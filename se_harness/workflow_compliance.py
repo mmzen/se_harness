@@ -391,6 +391,104 @@ def transition_gate_results(
     return results
 
 
+def _resolve_change_set(
+    root: Path,
+    report: Any,
+    primary: Any,
+    *,
+    checkpoint: str,
+    from_git: str | None,
+    change_manifest: Path | None,
+    changed_paths: Iterable[str],
+    changes_complete: bool,
+) -> tuple[str | None, bool, ChangeSet]:
+    """Rebind a self-binding handoff packet, derive the change set, and retain the handoff result path in it."""
+    rebound: str | None = None
+    self_binding = checkpoint == "handoff" and from_git is not None and primary.artifact_type == "work_order"
+    if self_binding:
+        # ECP-SBH-001: the run binds the packet to the snapshot it evaluates, before Git
+        # derives the change set, so a rewritten packet is a change-set member like any other.
+        from datetime import datetime, timezone
+
+        rebound = rebind_handoff_packet(
+            root,
+            primary,
+            formal_snapshot_digest(root, report.artifacts),
+            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        )
+    if from_git is not None:
+        change_set = git_change_set(root, from_git)
+    elif change_manifest is not None:
+        change_set = parse_change_manifest(root, change_manifest)
+    else:
+        change_set = declared_change_set(changed_paths, complete=changes_complete)
+    if self_binding:
+        # ECP-SBH-004: the retained result path is evaluated as a member whether or not
+        # this run's write happened yet, so the first completed run is the fixed point.
+        retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
+        if retained not in change_set.paths:
+            change_set = ChangeSet(
+                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source, added=change_set.added
+            )
+    return rebound, self_binding, change_set
+
+
+def _handoff_trap_blockers(
+    root: Path,
+    catalog: Mapping[str, Any],
+    primary: Any,
+    *,
+    artifact_id: str,
+    checkpoint: str,
+    pull_request_body: Path | None,
+) -> list[str]:
+    """Collect the work-order handoff trap blockers: orphaned ready records and pull-request body findings."""
+    trap_blockers: list[str] = []
+    if checkpoint == "handoff" and primary.artifact_type == "work_order":
+        trap_blockers.extend(
+            f"{W_ADS_002}: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
+        )
+        if pull_request_body is not None:
+            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in pull_request_body_findings(root, pull_request_body))
+    return trap_blockers
+
+
+def _corrective_action(
+    current_step: Mapping[str, Any],
+    gate_results: list[dict[str, Any]],
+    *,
+    artifact_id: str,
+    checkpoint: str,
+    formal_snapshot_sha256: str,
+) -> tuple[str, dict[str, Any]]:
+    """Select the corrective action and command for a blocked checkpoint from its first failing predicate."""
+    first_failing = next(
+        (
+            predicate
+            for gate in gate_results
+            for predicate in gate["predicates"]
+            if predicate["status"] != "pass"
+        ),
+        None,
+    )
+    corrective_step = current_step
+    if checkpoint == "scope":
+        declared_forms = dict(current_step.get("corrective") or {})
+        for predicate_id, form in SCOPE_CHECKPOINT_CORRECTIVE.items():
+            declared_forms.setdefault(predicate_id, {
+                **form,
+                **({"argv": [item.replace("{artifact_id}", artifact_id) for item in form["argv"]]} if "argv" in form else {}),
+            })
+        corrective_step = {**current_step, "corrective": declared_forms}
+    action, next_command = corrective_response(
+        corrective_step, first_failing, formal_snapshot_sha256=formal_snapshot_sha256
+    )
+    evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
+    if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:
+        raise CodedError(WEX_ADS_001, "the corrective command repeats the evaluated command")
+    return action, next_command
+
+
 def check_workflow(
     repository: Path,
     *,
@@ -441,33 +539,16 @@ def check_workflow(
         if procedure_id not in {selected_procedure, *alternatives}:
             raise CodedError(WEX220, f"procedure {procedure_id} is not selected by workflow rule {rule['id']}")
         selected_procedure = procedure_id
-    rebound: str | None = None
-    self_binding = checkpoint == "handoff" and from_git is not None and primary.artifact_type == "work_order"
-    if self_binding:
-        # ECP-SBH-001: the run binds the packet to the snapshot it evaluates, before Git
-        # derives the change set, so a rewritten packet is a change-set member like any other.
-        from datetime import datetime, timezone
-
-        rebound = rebind_handoff_packet(
-            root,
-            primary,
-            formal_snapshot_digest(root, report.artifacts),
-            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        )
-    if from_git is not None:
-        change_set = git_change_set(root, from_git)
-    elif change_manifest is not None:
-        change_set = parse_change_manifest(root, change_manifest)
-    else:
-        change_set = declared_change_set(changed_paths, complete=changes_complete)
-    if self_binding:
-        # ECP-SBH-004: the retained result path is evaluated as a member whether or not
-        # this run's write happened yet, so the first completed run is the fixed point.
-        retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
-        if retained not in change_set.paths:
-            change_set = ChangeSet(
-                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source, added=change_set.added
-            )
+    rebound, self_binding, change_set = _resolve_change_set(
+        root,
+        report,
+        primary,
+        checkpoint=checkpoint,
+        from_git=from_git,
+        change_manifest=change_manifest,
+        changed_paths=changed_paths,
+        changes_complete=changes_complete,
+    )
     validate_changed_targets(root, change_set)
     context = build_context(
         root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
@@ -512,13 +593,9 @@ def check_workflow(
         f"{item['code']}: {item['message']}"
         for item in [*repository_errors, *scoped]
     ]
-    trap_blockers: list[str] = []
-    if checkpoint == "handoff" and primary.artifact_type == "work_order":
-        trap_blockers.extend(
-            f"{W_ADS_002}: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
-        )
-        if pull_request_body is not None:
-            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in pull_request_body_findings(root, pull_request_body))
+    trap_blockers = _handoff_trap_blockers(
+        root, catalog, primary, artifact_id=artifact_id, checkpoint=checkpoint, pull_request_body=pull_request_body
+    )
     if trap_blockers:
         passed = False
         outcome = "blocked"
@@ -533,30 +610,13 @@ def check_workflow(
     )
     next_command = command_or_response(current_step)
     if not passed:
-        first_failing = next(
-            (
-                predicate
-                for gate in gate_results
-                for predicate in gate["predicates"]
-                if predicate["status"] != "pass"
-            ),
-            None,
+        action, next_command = _corrective_action(
+            current_step,
+            gate_results,
+            artifact_id=artifact_id,
+            checkpoint=checkpoint,
+            formal_snapshot_sha256=context.formal_snapshot_sha256,
         )
-        corrective_step = current_step
-        if checkpoint == "scope":
-            declared_forms = dict(current_step.get("corrective") or {})
-            for predicate_id, form in SCOPE_CHECKPOINT_CORRECTIVE.items():
-                declared_forms.setdefault(predicate_id, {
-                    **form,
-                    **({"argv": [item.replace("{artifact_id}", artifact_id) for item in form["argv"]]} if "argv" in form else {}),
-                })
-            corrective_step = {**current_step, "corrective": declared_forms}
-        action, next_command = corrective_response(
-            corrective_step, first_failing, formal_snapshot_sha256=context.formal_snapshot_sha256
-        )
-        evaluated = ["harnessctl", "check", ".", "--artifact", artifact_id, "--checkpoint", checkpoint]
-        if next_command.get("kind") == "command" and list(next_command.get("argv", [])) == evaluated:
-            raise CodedError(WEX_ADS_001, "the corrective command repeats the evaluated command")
     restitution = {
         "outcome": outcome,
         "done": [f"Evaluated {checkpoint} compliance for {artifact_id}."],

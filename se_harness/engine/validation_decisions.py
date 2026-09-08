@@ -550,6 +550,78 @@ def standing_deviations(artifacts: list[Artifact]) -> dict[str, list[str]]:
     return {key: sorted(value) for key, value in sorted(standing.items())}
 
 
+def _check_deviation_fields(
+    artifact: Artifact,
+    reference: tuple[str, str] | None,
+    option_ids: list[str],
+    catalog: dict[str, Artifact],
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check a deviation's departed rule reference, observed fact and option set."""
+    if reference is None:
+        add_error(errors, artifact, report_root, E_DCM_002, "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
+    elif reference[0] not in catalog:
+        add_error(errors, artifact, report_root, E_DCM_001, f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
+    elif catalog[reference[0]].artifact_type != "specification":
+        add_error(errors, artifact, report_root, E_DCM_001, f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
+    elif reference[1] not in {identifier for identifier, _ in specification_rules(catalog[reference[0]].body) if identifier}:
+        # SPEC-TCM-006 TCM-RFS-020: the fragment names a rule identifier the specification defines.
+        add_error(errors, artifact, report_root, E_DCM_005,
+            f"deviation departs from '{reference[0]}#{reference[1]}', which names no rule identifier of {reference[0]}", plane="governance")
+    if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
+        add_error(errors, artifact, report_root, E_DCM_002, "a deviation records the observed fact in 'observed'", plane="structure")
+    if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):
+        add_error(errors, artifact, report_root, E_DCM_002, "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
+
+
+def _check_decision_disposition(
+    artifact: Artifact,
+    kind: Any,
+    option_ids: list[str],
+    reference: tuple[str, str] | None,
+    catalog: dict[str, Artifact],
+    released_versions: set[str],
+    accepted_by_rule: dict[str, list[str]],
+    errors: list[Diagnostic],
+    warnings: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check a decision's [disposition] table against its status, options and accepted-deviation revisit."""
+    disposition = artifact.metadata.get("disposition")
+    events = artifact.metadata.get("lifecycle_events")
+    if artifact.status in DECISION_TERMINAL or artifact.status == "deferred":
+        if not isinstance(disposition, dict):
+            add_error(errors, artifact, report_root, E_DCM_003, f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
+        else:
+            if not isinstance(events, list) or not events:
+                add_error(errors, artifact, report_root, E_DCM_003, "a disposition without a lifecycle event was written by hand", plane="governance")
+            option = disposition.get("option")
+            if artifact.status == "decided" and option not in option_ids:
+                add_error(errors, artifact, report_root, E_DCM_003, f"disposition option '{option}' is not a declared option", plane="governance")
+            for key in ("decided_by", "decided_at", "reason", "label"):
+                if not isinstance(disposition.get(key), str) or not disposition[key].strip():
+                    add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be a non-empty string", plane="governance")
+            if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
+                add_error(errors, artifact, report_root, E_DCM_003, "a deferred decision records its scope and its revisit trigger", plane="governance")
+            if artifact.status == "decided" and kind == "deviation" and option == "accept":
+                revisit = disposition.get("revisit")
+                if not isinstance(revisit, str) or not revisit.strip():
+                    add_error(errors, artifact, report_root, E_DCM_003, "an accepted deviation records its revisit trigger", plane="governance")
+                elif reference is not None:
+                    rule = f"{reference[0]}#{reference[1]}"
+                    accepted_by_rule[rule].append(artifact.artifact_id)
+                    if any(f"v{version}" in revisit or version in revisit for version in released_versions):
+                        warnings.append(Diagnostic(
+                            display_path(catalog[reference[0]].path, report_root) if reference[0] in catalog else display_path(artifact.path, report_root),
+                            W_DCM_001,
+                            f"accepted deviation {artifact.artifact_id} against {rule} is past its revisit '{revisit}'; amend or supersede the rule, or accept again with a new trigger",
+                            "maintenance",
+                        ))
+    elif isinstance(disposition, dict) and artifact.status == "open":
+        add_error(errors, artifact, report_root, E_DCM_003, "an open decision carries no disposition", plane="governance")
+
+
 def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
     """SPEC-DCM-001 rules 2-4, 6, 8, 10: decision fields, options, relations, dispositions, revisits."""
 
@@ -581,20 +653,7 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
             add_error(errors, artifact, report_root, E_DCM_002, f"recommendation '{recommendation}' is not a declared option", plane="structure")
         reference = _decision_against(artifact)
         if kind == "deviation":
-            if reference is None:
-                add_error(errors, artifact, report_root, E_DCM_002, "a deviation names the departed rule as against = \"ARTIFACT-ID#rule\"", plane="structure")
-            elif reference[0] not in catalog:
-                add_error(errors, artifact, report_root, E_DCM_001, f"deviation departs from unknown artifact '{reference[0]}'", plane="governance")
-            elif catalog[reference[0]].artifact_type != "specification":
-                add_error(errors, artifact, report_root, E_DCM_001, f"a deviation departs from a specification, not a {catalog[reference[0]].artifact_type}", plane="governance")
-            elif reference[1] not in {identifier for identifier, _ in specification_rules(catalog[reference[0]].body) if identifier}:
-                # SPEC-TCM-006 TCM-RFS-020: the fragment names a rule identifier the specification defines.
-                add_error(errors, artifact, report_root, E_DCM_005,
-                    f"deviation departs from '{reference[0]}#{reference[1]}', which names no rule identifier of {reference[0]}", plane="governance")
-            if not isinstance(artifact.metadata.get("observed"), str) or not str(artifact.metadata.get("observed")).strip():
-                add_error(errors, artifact, report_root, E_DCM_002, "a deviation records the observed fact in 'observed'", plane="structure")
-            if option_ids and (not set(option_ids).issubset(DEVIATION_OPTIONS) or "stop" not in option_ids):
-                add_error(errors, artifact, report_root, E_DCM_002, "a deviation's options are drawn from amend, supersede, accept, stop and include stop", plane="structure")
+            _check_deviation_fields(artifact, reference, option_ids, catalog, errors, report_root)
         relations = artifact.metadata.get("relations", {})
         relations = relations if isinstance(relations, dict) else {}
         blocked = relations.get("blocks", []) if isinstance(relations.get("blocks"), list) else []
@@ -604,38 +663,7 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
         for target in blocked:
             if isinstance(target, str) and target not in concerned:
                 add_error(errors, artifact, report_root, E_DCM_001, f"blocked artifact '{target}' is not also in concerns", plane="governance")
-        disposition = artifact.metadata.get("disposition")
-        events = artifact.metadata.get("lifecycle_events")
-        if artifact.status in DECISION_TERMINAL or artifact.status == "deferred":
-            if not isinstance(disposition, dict):
-                add_error(errors, artifact, report_root, E_DCM_003, f"a {artifact.status} decision carries a [disposition] table written by the transition", plane="governance")
-            else:
-                if not isinstance(events, list) or not events:
-                    add_error(errors, artifact, report_root, E_DCM_003, "a disposition without a lifecycle event was written by hand", plane="governance")
-                option = disposition.get("option")
-                if artifact.status == "decided" and option not in option_ids:
-                    add_error(errors, artifact, report_root, E_DCM_003, f"disposition option '{option}' is not a declared option", plane="governance")
-                for key in ("decided_by", "decided_at", "reason", "label"):
-                    if not isinstance(disposition.get(key), str) or not disposition[key].strip():
-                        add_error(errors, artifact, report_root, E_DCM_003, f"disposition field '{key}' must be a non-empty string", plane="governance")
-                if artifact.status == "deferred" and (not isinstance(disposition.get("scope"), list) or not disposition.get("revisit")):
-                    add_error(errors, artifact, report_root, E_DCM_003, "a deferred decision records its scope and its revisit trigger", plane="governance")
-                if artifact.status == "decided" and kind == "deviation" and option == "accept":
-                    revisit = disposition.get("revisit")
-                    if not isinstance(revisit, str) or not revisit.strip():
-                        add_error(errors, artifact, report_root, E_DCM_003, "an accepted deviation records its revisit trigger", plane="governance")
-                    elif reference is not None:
-                        rule = f"{reference[0]}#{reference[1]}"
-                        accepted_by_rule[rule].append(artifact.artifact_id)
-                        if any(f"v{version}" in revisit or version in revisit for version in released_versions):
-                            warnings.append(Diagnostic(
-                                display_path(catalog[reference[0]].path, report_root) if reference[0] in catalog else display_path(artifact.path, report_root),
-                                W_DCM_001,
-                                f"accepted deviation {artifact.artifact_id} against {rule} is past its revisit '{revisit}'; amend or supersede the rule, or accept again with a new trigger",
-                                "maintenance",
-                            ))
-        elif isinstance(disposition, dict) and artifact.status == "open":
-            add_error(errors, artifact, report_root, E_DCM_003, "an open decision carries no disposition", plane="governance")
+        _check_decision_disposition(artifact, kind, option_ids, reference, catalog, released_versions, accepted_by_rule, errors, warnings, report_root)
     for rule, decisions in sorted(accepted_by_rule.items()):
         if len(decisions) >= 2:
             target = catalog.get(rule.split("#", 1)[0])
@@ -646,6 +674,104 @@ def validate_decisions(artifacts: list[Artifact], report_root: Path) -> tuple[li
                 "maintenance",
             ))
     return errors, warnings
+
+
+def _check_risk_measurement(
+    artifact: Artifact,
+    metadata: dict[str, Any],
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check the risk measurement: likelihood, impact and score are integers and score is their product."""
+    measurement: dict[str, int] = {}
+    for field_name in ("likelihood", "impact", "score"):
+        value = metadata.get(field_name)
+        if value is None:
+            add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' is missing", plane="structure")
+        elif type(value) is not int:
+            add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be an integer, not {value!r}", plane="structure")
+        elif field_name != "score" and value not in RISK_MEASUREMENT_RANGE:
+            add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be from 1 to 5, not {value}", plane="structure")
+        else:
+            measurement[field_name] = value
+    if {"likelihood", "impact", "score"} <= set(measurement):
+        product = measurement["likelihood"] * measurement["impact"]
+        if measurement["score"] != product:
+            add_error(errors, artifact, report_root, E_RSK_002,
+                f"risk field 'score' is {measurement['score']}; likelihood {measurement['likelihood']} times impact {measurement['impact']} is {product}", plane="structure")
+
+
+def _check_risk_pairing(
+    artifact: Artifact,
+    concerned: dict[str, list[Artifact]],
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check that a raised risk is answered by exactly one pending decision blocking what it threatens."""
+    threatens = artifact.relations.get("threatens", [])
+    threatened = {item for item in threatens if isinstance(item, str)} if isinstance(threatens, list) else set()
+    if artifact.status == "raised":
+        pending = [item for item in concerned.get(artifact.artifact_id, []) if item.status in {"open", "deferred"}]
+        if not pending:
+            add_error(errors, artifact, report_root, E_RSK_003,
+                f"raised risk {artifact.artifact_id} is named in concerns by no open or deferred decision; raise it again with "
+                f"harnessctl raise-risk --with-decision, or create a decision that names it in concerns and blocks exactly the artifacts it threatens",
+                plane="governance")
+        elif len(pending) > 1:
+            names = ", ".join(sorted(item.artifact_id for item in pending))
+            add_error(errors, artifact, report_root, E_RSK_003,
+                f"raised risk {artifact.artifact_id} is named in concerns by {len(pending)} pending decisions ({names}); exactly one answers it", plane="governance")
+        else:
+            blocks = pending[0].relations.get("blocks", [])
+            blocked = {item for item in blocks if isinstance(item, str)} if isinstance(blocks, list) else set()
+            if blocked != threatened:
+                add_error(errors, artifact, report_root, E_RSK_004,
+                    f"{pending[0].artifact_id} blocks {sorted(blocked)} but {artifact.artifact_id} threatens {sorted(threatened)}; the two sets must be equal",
+                    plane="governance")
+
+
+def _check_risk_disposition(
+    artifact: Artifact,
+    metadata: dict[str, Any],
+    concerned: dict[str, list[Artifact]],
+    released_versions: set[str],
+    errors: list[Diagnostic],
+    warnings: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check a disposed risk's [disposition] table and an accepted risk's revisit trigger."""
+    disposition = metadata.get("disposition")
+    events = metadata.get("lifecycle_events")
+    expected_option = {"accepted": "accept", "avoided": "avoid", "mitigating": "mitigate", "mitigated": "mitigate", "withdrawn": "withdrawn"}
+    if artifact.status in RISK_DISPOSED - {"withdrawn"} or (artifact.status == "withdrawn" and isinstance(disposition, dict)):
+        if not isinstance(disposition, dict):
+            add_error(errors, artifact, report_root, E_RSK_005,
+                f"a {artifact.status} risk carries a [disposition] table written by harnessctl decide", plane="governance")
+        else:
+            if not isinstance(events, list) or not events:
+                add_error(errors, artifact, report_root, E_RSK_005, "a disposition without a lifecycle event was written by hand", plane="governance")
+            option = disposition.get("option")
+            if option != expected_option[artifact.status]:
+                add_error(errors, artifact, report_root, E_RSK_005,
+                    f"disposition option '{option}' does not name the state {artifact.status}", plane="governance")
+            for field_name in ("decided_by", "decided_at", "reason", "label"):
+                if not isinstance(disposition.get(field_name), str) or not disposition[field_name].strip():
+                    add_error(errors, artifact, report_root, E_RSK_005, f"disposition field '{field_name}' must be a non-empty string", plane="governance")
+            revisit = disposition.get("revisit")
+            if artifact.status == "accepted":
+                if not isinstance(revisit, str) or not revisit.strip():
+                    add_error(errors, artifact, report_root, E_RSK_005, "an accepted risk records its revisit trigger", plane="governance")
+                elif any(f"v{version}" in revisit or version in revisit for version in released_versions) and not any(
+                    item.status in {"open", "deferred"} for item in concerned.get(artifact.artifact_id, [])
+                ):
+                    warnings.append(Diagnostic(
+                        display_path(artifact.path, report_root),
+                        W_RSK_001,
+                        f"accepted risk {artifact.artifact_id} is past its revisit '{revisit}' and no pending decision concerns it; raise it again or accept it again with a new trigger",
+                        "maintenance",
+                    ))
+    elif isinstance(disposition, dict):
+        add_error(errors, artifact, report_root, E_RSK_005, f"a {artifact.status} risk carries no disposition", plane="governance")
 
 
 def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[Diagnostic], list[Diagnostic]]:
@@ -688,74 +814,9 @@ def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[D
             if field_name in metadata:
                 add_error(errors, artifact, report_root, E_RSK_001,
                     f"risk declares the decision field '{field_name}'; the question, the options and the decider live on the paired decision", plane="structure")
-        measurement: dict[str, int] = {}
-        for field_name in ("likelihood", "impact", "score"):
-            value = metadata.get(field_name)
-            if value is None:
-                add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' is missing", plane="structure")
-            elif type(value) is not int:
-                add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be an integer, not {value!r}", plane="structure")
-            elif field_name != "score" and value not in RISK_MEASUREMENT_RANGE:
-                add_error(errors, artifact, report_root, E_RSK_002, f"risk field '{field_name}' must be from 1 to 5, not {value}", plane="structure")
-            else:
-                measurement[field_name] = value
-        if {"likelihood", "impact", "score"} <= set(measurement):
-            product = measurement["likelihood"] * measurement["impact"]
-            if measurement["score"] != product:
-                add_error(errors, artifact, report_root, E_RSK_002,
-                    f"risk field 'score' is {measurement['score']}; likelihood {measurement['likelihood']} times impact {measurement['impact']} is {product}", plane="structure")
-        threatens = artifact.relations.get("threatens", [])
-        threatened = {item for item in threatens if isinstance(item, str)} if isinstance(threatens, list) else set()
-        if artifact.status == "raised":
-            pending = [item for item in concerned.get(artifact.artifact_id, []) if item.status in {"open", "deferred"}]
-            if not pending:
-                add_error(errors, artifact, report_root, E_RSK_003,
-                    f"raised risk {artifact.artifact_id} is named in concerns by no open or deferred decision; raise it again with "
-                    f"harnessctl raise-risk --with-decision, or create a decision that names it in concerns and blocks exactly the artifacts it threatens",
-                    plane="governance")
-            elif len(pending) > 1:
-                names = ", ".join(sorted(item.artifact_id for item in pending))
-                add_error(errors, artifact, report_root, E_RSK_003,
-                    f"raised risk {artifact.artifact_id} is named in concerns by {len(pending)} pending decisions ({names}); exactly one answers it", plane="governance")
-            else:
-                blocks = pending[0].relations.get("blocks", [])
-                blocked = {item for item in blocks if isinstance(item, str)} if isinstance(blocks, list) else set()
-                if blocked != threatened:
-                    add_error(errors, artifact, report_root, E_RSK_004,
-                        f"{pending[0].artifact_id} blocks {sorted(blocked)} but {artifact.artifact_id} threatens {sorted(threatened)}; the two sets must be equal",
-                        plane="governance")
-        disposition = metadata.get("disposition")
-        events = metadata.get("lifecycle_events")
-        expected_option = {"accepted": "accept", "avoided": "avoid", "mitigating": "mitigate", "mitigated": "mitigate", "withdrawn": "withdrawn"}
-        if artifact.status in RISK_DISPOSED - {"withdrawn"} or (artifact.status == "withdrawn" and isinstance(disposition, dict)):
-            if not isinstance(disposition, dict):
-                add_error(errors, artifact, report_root, E_RSK_005,
-                    f"a {artifact.status} risk carries a [disposition] table written by harnessctl decide", plane="governance")
-            else:
-                if not isinstance(events, list) or not events:
-                    add_error(errors, artifact, report_root, E_RSK_005, "a disposition without a lifecycle event was written by hand", plane="governance")
-                option = disposition.get("option")
-                if option != expected_option[artifact.status]:
-                    add_error(errors, artifact, report_root, E_RSK_005,
-                        f"disposition option '{option}' does not name the state {artifact.status}", plane="governance")
-                for field_name in ("decided_by", "decided_at", "reason", "label"):
-                    if not isinstance(disposition.get(field_name), str) or not disposition[field_name].strip():
-                        add_error(errors, artifact, report_root, E_RSK_005, f"disposition field '{field_name}' must be a non-empty string", plane="governance")
-                revisit = disposition.get("revisit")
-                if artifact.status == "accepted":
-                    if not isinstance(revisit, str) or not revisit.strip():
-                        add_error(errors, artifact, report_root, E_RSK_005, "an accepted risk records its revisit trigger", plane="governance")
-                    elif any(f"v{version}" in revisit or version in revisit for version in released_versions) and not any(
-                        item.status in {"open", "deferred"} for item in concerned.get(artifact.artifact_id, [])
-                    ):
-                        warnings.append(Diagnostic(
-                            display_path(artifact.path, report_root),
-                            W_RSK_001,
-                            f"accepted risk {artifact.artifact_id} is past its revisit '{revisit}' and no pending decision concerns it; raise it again or accept it again with a new trigger",
-                            "maintenance",
-                        ))
-        elif isinstance(disposition, dict):
-            add_error(errors, artifact, report_root, E_RSK_005, f"a {artifact.status} risk carries no disposition", plane="governance")
+        _check_risk_measurement(artifact, metadata, errors, report_root)
+        _check_risk_pairing(artifact, concerned, errors, report_root)
+        _check_risk_disposition(artifact, metadata, concerned, released_versions, errors, warnings, report_root)
         if artifact.status in {"mitigating", "mitigated"}:
             mitigated_by = artifact.relations.get("mitigated_by", [])
             if not isinstance(mitigated_by, list) or not mitigated_by:

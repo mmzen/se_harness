@@ -18,6 +18,273 @@ from se_harness.engine.validation_evidence import evidence_path_is_keyed_to
 from se_harness.engine.validation_lifecycle import active_record_status, grants_authority, reserves_version
 
 
+def _check_verification_record(
+    artifact: Artifact,
+    catalog: dict[str, Artifact],
+    supersession_cycle_nodes: set[str],
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check one verification record: duplicates, work and contract links, evidence keying, supersession."""
+    for field_name in ("evidence_paths",):
+        duplicates = duplicate_strings(artifact.metadata.get(field_name))
+        if duplicates:
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
+                plane="governance",
+            )
+    for relation_name in ("verifies_work_order", "conforms_to", "superseded_by"):
+        duplicates = duplicate_strings(artifact.relations.get(relation_name))
+        if duplicates:
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                plane="governance",
+            )
+    work_order_ids = relation_targets(artifact, "verifies_work_order")
+    verification_ids = relation_targets(artifact, "conforms_to")
+    declared_verification: set[str] = set()
+    for work_order_id in work_order_ids:
+        work_order = catalog.get(work_order_id)
+        if work_order is None or work_order.artifact_type != "work_order":
+            continue
+        declared_verification.update(relation_targets(work_order, "verification"))
+        if (
+            active_record_status(artifact.artifact_type, artifact.status)
+            and not grants_authority(work_order.artifact_type, work_order.status)
+        ):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"active verification record requires active work order '{work_order_id}'",
+                plane="governance",
+            )
+    for verification_id in verification_ids:
+        verification = catalog.get(verification_id)
+        if (
+            verification is not None
+            and verification.artifact_type == "verification"
+            and active_record_status(artifact.artifact_type, artifact.status)
+            and not grants_authority(verification.artifact_type, verification.status)
+        ):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"active verification record requires active verification contract '{verification_id}'",
+                plane="governance",
+            )
+    missing_verification = declared_verification - verification_ids
+    extra_verification = verification_ids - declared_verification
+    if missing_verification and (
+        "prepared_at" in artifact.metadata or len(work_order_ids) > 1
+    ):
+        add_error(
+            errors,
+            artifact,
+            report_root,
+            E010,
+            f"verification record is missing contracts declared by selected work: {', '.join(sorted(missing_verification))}",
+            plane="governance",
+        )
+    if extra_verification:
+        add_error(
+            errors,
+            artifact,
+            report_root,
+            E010,
+            f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
+            plane="governance",
+        )
+    if len(work_order_ids) > 1:
+        evidence_paths = artifact.metadata.get("evidence_paths", [])
+        normalized_paths = [item for item in evidence_paths if isinstance(item, str)] if isinstance(evidence_paths, list) else []
+        uncovered = [
+            work_order_id
+            for work_order_id in sorted(work_order_ids)
+            if not any(evidence_path_is_keyed_to(path, work_order_id) for path in normalized_paths)
+        ]
+        if uncovered:
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
+                plane="governance",
+            )
+    if artifact.status == "superseded":
+        successor_ids = sorted(relation_targets(artifact, "superseded_by"))
+        if len(successor_ids) == 1:
+            successor_id = successor_ids[0]
+            successor = catalog.get(successor_id)
+            if successor is not None and successor.artifact_type == "verification_record":
+                if not grants_authority(successor.artifact_type, successor.status):
+                    add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        E010,
+                        f"superseding verification record '{successor_id}' must be verified or released",
+                        plane="governance",
+                    )
+                missing_work = work_order_ids - relation_targets(successor, "verifies_work_order")
+                if missing_work:
+                    add_error(
+                        errors,
+                        artifact,
+                        report_root,
+                        E010,
+                        f"superseding verification record '{successor_id}' omits work orders: {', '.join(sorted(missing_work))}",
+                        plane="governance",
+                    )
+    if artifact.artifact_id in supersession_cycle_nodes:
+        add_error(
+            errors,
+            artifact,
+            report_root,
+            E010,
+            f"verification supersession cycle detected among: {', '.join(sorted(supersession_cycle_nodes))}",
+            plane="governance",
+        )
+
+
+def _check_release_record(
+    artifact: Artifact,
+    catalog: dict[str, Artifact],
+    release_versions: dict[str, list[Artifact]],
+    errors: list[Diagnostic],
+    report_root: Path,
+) -> None:
+    """Check one release record: duplicate relations, version reservation, released work, included records, contracts."""
+    for relation_name in ("satisfies", "includes_verification", "releases_work"):
+        duplicates = duplicate_strings(artifact.relations.get(relation_name))
+        if duplicates:
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
+                plane="governance",
+            )
+    version = artifact.metadata.get("version")
+    if reserves_version(artifact.status) and isinstance(version, str) and version.strip():
+        release_versions.setdefault(version.strip(), []).append(artifact)
+    release_commit = artifact.metadata.get("commit")
+    release_format = artifact.metadata.get("git_object_format")
+    released_work = relation_targets(artifact, "releases_work")
+    for work_order_id in released_work:
+        work_order = catalog.get(work_order_id)
+        if (
+            work_order is not None
+            and work_order.artifact_type == "work_order"
+            and active_record_status(artifact.artifact_type, artifact.status)
+            and work_order.status not in IMPLEMENTED_OR_LATER_STATUSES
+        ):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"active release record requires implemented, verified, or released work order '{work_order_id}'",
+                plane="governance",
+            )
+    verification_work: set[str] = set()
+    for verification_id in relation_targets(artifact, "includes_verification"):
+        verification = catalog.get(verification_id)
+        if verification is None or verification.artifact_type != "verification_record":
+            continue
+        if active_record_status(verification.artifact_type, verification.status):
+            verification_work.update(relation_targets(verification, "verifies_work_order"))
+        if active_record_status(artifact.artifact_type, artifact.status) and verification.status == "superseded":
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"active release record must not include superseded verification record '{verification_id}'",
+                plane="governance",
+            )
+        if release_commit != verification.metadata.get("commit") or release_format != verification.metadata.get("git_object_format"):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"release commit does not match verification record '{verification_id}'",
+                plane="governance",
+            )
+        if (
+            grants_authority(artifact.artifact_type, artifact.status)
+            and not grants_authority(verification.artifact_type, verification.status)
+        ):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"released record requires verified included record '{verification_id}'",
+                plane="governance",
+            )
+    missing_work = released_work - verification_work
+    if missing_work:
+        add_error(
+            errors,
+            artifact,
+            report_root,
+            E010,
+            f"released work orders are not covered by included verification records: {', '.join(sorted(missing_work))}",
+            plane="governance",
+        )
+    extra_work = verification_work - released_work
+    if extra_work:
+        add_error(
+            errors,
+            artifact,
+            report_root,
+            E010,
+            f"included verification records cover work orders absent from the release: {', '.join(sorted(extra_work))}",
+            plane="governance",
+        )
+    for contract_id in relation_targets(artifact, "satisfies"):
+        contract = catalog.get(contract_id)
+        if contract is None or contract.artifact_type != "release_contract":
+            continue
+        if (
+            active_record_status(artifact.artifact_type, artifact.status)
+            and not grants_authority(contract.artifact_type, contract.status)
+        ):
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"active release record requires active release contract '{contract_id}'",
+                plane="governance",
+            )
+        ungated = released_work - relation_targets(contract, "gates")
+        if ungated:
+            add_error(
+                errors,
+                artifact,
+                report_root,
+                E010,
+                f"release contract '{contract_id}' does not gate work orders: {', '.join(sorted(ungated))}",
+                plane="governance",
+            )
+
+
 def validate_revision_consistency(
     artifacts: list[Artifact],
     report_root: Path,
@@ -54,256 +321,11 @@ def validate_revision_consistency(
 
     for artifact in artifacts:
         if artifact.artifact_type == "verification_record":
-            for field_name in ("evidence_paths",):
-                duplicates = duplicate_strings(artifact.metadata.get(field_name))
-                if duplicates:
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E010,
-                        f"field '{field_name}' contains duplicate values: {', '.join(duplicates)}",
-                        plane="governance",
-                    )
-            for relation_name in ("verifies_work_order", "conforms_to", "superseded_by"):
-                duplicates = duplicate_strings(artifact.relations.get(relation_name))
-                if duplicates:
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E010,
-                        f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
-                        plane="governance",
-                    )
-            work_order_ids = relation_targets(artifact, "verifies_work_order")
-            verification_ids = relation_targets(artifact, "conforms_to")
-            declared_verification: set[str] = set()
-            for work_order_id in work_order_ids:
-                work_order = catalog.get(work_order_id)
-                if work_order is None or work_order.artifact_type != "work_order":
-                    continue
-                declared_verification.update(relation_targets(work_order, "verification"))
-                if (
-                    active_record_status(artifact.artifact_type, artifact.status)
-                    and not grants_authority(work_order.artifact_type, work_order.status)
-                ):
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E010,
-                        f"active verification record requires active work order '{work_order_id}'",
-                        plane="governance",
-                    )
-            for verification_id in verification_ids:
-                verification = catalog.get(verification_id)
-                if (
-                    verification is not None
-                    and verification.artifact_type == "verification"
-                    and active_record_status(artifact.artifact_type, artifact.status)
-                    and not grants_authority(verification.artifact_type, verification.status)
-                ):
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E010,
-                        f"active verification record requires active verification contract '{verification_id}'",
-                        plane="governance",
-                    )
-            missing_verification = declared_verification - verification_ids
-            extra_verification = verification_ids - declared_verification
-            if missing_verification and (
-                "prepared_at" in artifact.metadata or len(work_order_ids) > 1
-            ):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"verification record is missing contracts declared by selected work: {', '.join(sorted(missing_verification))}",
-                    plane="governance",
-                )
-            if extra_verification:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
-                    plane="governance",
-                )
-            if len(work_order_ids) > 1:
-                evidence_paths = artifact.metadata.get("evidence_paths", [])
-                normalized_paths = [item for item in evidence_paths if isinstance(item, str)] if isinstance(evidence_paths, list) else []
-                uncovered = [
-                    work_order_id
-                    for work_order_id in sorted(work_order_ids)
-                    if not any(evidence_path_is_keyed_to(path, work_order_id) for path in normalized_paths)
-                ]
-                if uncovered:
-                    add_error(
-                        errors,
-                        artifact,
-                        report_root,
-                        E010,
-                        f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
-                        plane="governance",
-                    )
-            if artifact.status == "superseded":
-                successor_ids = sorted(relation_targets(artifact, "superseded_by"))
-                if len(successor_ids) == 1:
-                    successor_id = successor_ids[0]
-                    successor = catalog.get(successor_id)
-                    if successor is not None and successor.artifact_type == "verification_record":
-                        if not grants_authority(successor.artifact_type, successor.status):
-                            add_error(
-                                errors,
-                                artifact,
-                                report_root,
-                                E010,
-                                f"superseding verification record '{successor_id}' must be verified or released",
-                                plane="governance",
-                            )
-                        missing_work = work_order_ids - relation_targets(successor, "verifies_work_order")
-                        if missing_work:
-                            add_error(
-                                errors,
-                                artifact,
-                                report_root,
-                                E010,
-                                f"superseding verification record '{successor_id}' omits work orders: {', '.join(sorted(missing_work))}",
-                                plane="governance",
-                            )
-            if artifact.artifact_id in supersession_cycle_nodes:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"verification supersession cycle detected among: {', '.join(sorted(supersession_cycle_nodes))}",
-                    plane="governance",
-                )
+            _check_verification_record(artifact, catalog, supersession_cycle_nodes, errors, report_root)
 
         if artifact.artifact_type != "release_record":
             continue
-        for relation_name in ("satisfies", "includes_verification", "releases_work"):
-            duplicates = duplicate_strings(artifact.relations.get(relation_name))
-            if duplicates:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"relation '{relation_name}' contains duplicate targets: {', '.join(duplicates)}",
-                    plane="governance",
-                )
-        version = artifact.metadata.get("version")
-        if reserves_version(artifact.status) and isinstance(version, str) and version.strip():
-            release_versions.setdefault(version.strip(), []).append(artifact)
-        release_commit = artifact.metadata.get("commit")
-        release_format = artifact.metadata.get("git_object_format")
-        released_work = relation_targets(artifact, "releases_work")
-        for work_order_id in released_work:
-            work_order = catalog.get(work_order_id)
-            if (
-                work_order is not None
-                and work_order.artifact_type == "work_order"
-                and active_record_status(artifact.artifact_type, artifact.status)
-                and work_order.status not in IMPLEMENTED_OR_LATER_STATUSES
-            ):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"active release record requires implemented, verified, or released work order '{work_order_id}'",
-                    plane="governance",
-                )
-        verification_work: set[str] = set()
-        for verification_id in relation_targets(artifact, "includes_verification"):
-            verification = catalog.get(verification_id)
-            if verification is None or verification.artifact_type != "verification_record":
-                continue
-            if active_record_status(verification.artifact_type, verification.status):
-                verification_work.update(relation_targets(verification, "verifies_work_order"))
-            if active_record_status(artifact.artifact_type, artifact.status) and verification.status == "superseded":
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"active release record must not include superseded verification record '{verification_id}'",
-                    plane="governance",
-                )
-            if release_commit != verification.metadata.get("commit") or release_format != verification.metadata.get("git_object_format"):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"release commit does not match verification record '{verification_id}'",
-                    plane="governance",
-                )
-            if (
-                grants_authority(artifact.artifact_type, artifact.status)
-                and not grants_authority(verification.artifact_type, verification.status)
-            ):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"released record requires verified included record '{verification_id}'",
-                    plane="governance",
-                )
-        missing_work = released_work - verification_work
-        if missing_work:
-            add_error(
-                errors,
-                artifact,
-                report_root,
-                E010,
-                f"released work orders are not covered by included verification records: {', '.join(sorted(missing_work))}",
-                plane="governance",
-            )
-        extra_work = verification_work - released_work
-        if extra_work:
-            add_error(
-                errors,
-                artifact,
-                report_root,
-                E010,
-                f"included verification records cover work orders absent from the release: {', '.join(sorted(extra_work))}",
-                plane="governance",
-            )
-        for contract_id in relation_targets(artifact, "satisfies"):
-            contract = catalog.get(contract_id)
-            if contract is None or contract.artifact_type != "release_contract":
-                continue
-            if (
-                active_record_status(artifact.artifact_type, artifact.status)
-                and not grants_authority(contract.artifact_type, contract.status)
-            ):
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"active release record requires active release contract '{contract_id}'",
-                    plane="governance",
-                )
-            ungated = released_work - relation_targets(contract, "gates")
-            if ungated:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E010,
-                    f"release contract '{contract_id}' does not gate work orders: {', '.join(sorted(ungated))}",
-                    plane="governance",
-                )
+        _check_release_record(artifact, catalog, release_versions, errors, report_root)
 
     for version, records in sorted(release_versions.items()):
         if len(records) < 2:
