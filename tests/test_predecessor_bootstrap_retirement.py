@@ -303,6 +303,8 @@ class RetainedHistoryTests(unittest.TestCase):
                 )
 
     def test_the_hash_bound_declaration_still_carries_the_retired_path_fields(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-REB-013 rule 8 and VER-REB-013 case 5, the
+        # retained bindings keep verifying after the producer is gone.
         # Retiring the producer must not retire the binding: an unclaimed digest
         # field in a retained record would stop being checked at all.
         declaration = (REPOSITORY_ROOT / "se_harness" / "hash_bound_classes.json").read_text(

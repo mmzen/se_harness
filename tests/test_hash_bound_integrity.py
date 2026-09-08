@@ -458,6 +458,8 @@ class CheckContractTests(unittest.TestCase):
         self.assertEqual(CHECK_NAMES, tuple(name for name, _, _ in assess(ROOT)))
 
     def test_no_new_diagnostic_code_family(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 8, the assessment introduces no
+        # diagnostic code family of its own.
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
         self.assertIsNone(re.search(r"\b[A-Z]{2,}\d{3}\b", source))
 
@@ -1287,6 +1289,8 @@ class LockCallerAgreementTests(unittest.TestCase):
     """The remaining lock callers take their mode from the declaration."""
 
     def test_no_lock_caller_decides_the_mode_locally(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 5, every caller obtains the mode
+        # from the declared class and none compares digests of its own.
         # The upgrade-authorization packet loader was retired by WO-REB-027 and the
         # release-bootstrap old-root validation by WO-REB-028, which deleted the
         # module that carried the last repository-owned lock comparison. The
@@ -1321,6 +1325,8 @@ class ProducerNewlineTests(unittest.TestCase):
         self.assertGreater(observed, 0)
 
     def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 13, the producer writes explicit
+        # bytes and newlines, through the one serializer (SPEC-ECP-023 ECP-PRM-006).
         source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
         # WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006): the lock bytes come from integrity's one pretty serializer.
         self.assertIn("lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)", source)
@@ -1347,6 +1353,8 @@ class ProducerNewlineTests(unittest.TestCase):
 
 class SafetyTests(unittest.TestCase):
     def test_no_repository_content_reaches_a_shell(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 3, a declaration is data and no
+        # repository content reaches a shell.
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
         # WO-ECP-031 (SPEC-ECP-023 ECP-PRM-003): the launch lives in the one launcher, which fixes shell=False.
         launcher = (ROOT / "se_harness" / "_process.py").read_text(encoding="utf-8")
@@ -1415,6 +1423,8 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
         self.assertEqual(3, integrity.LOCK_SCHEMA)
 
     def test_preflight_diagnostic_codes_are_unchanged(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 14, the assessment adds nothing to
+        # preflight's codes; the code is the registry's name (SPEC-ECP-023 ECP-PRM-016).
         source = (ROOT / "se_harness" / "preflight.py").read_text(encoding="utf-8")
         self.assertIn("PreflightDiagnostic(I001", source)  # the code is the registry's name (ECP-PRM-016)
         self.assertNotIn("hash-bound", source.split("def _hash_bound_checks")[0])

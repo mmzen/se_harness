@@ -524,6 +524,10 @@ class ReleaseStateTests(unittest.TestCase):
 
 
 class ReleaseWorkflowPolicyTests(unittest.TestCase):
+    """The lane definitions and the resolver script read as text (TST-HYG-011): SPEC-REB-013 rules 4
+    to 6 fix the publication, Pages and dashboard-publisher surfaces, SPEC-DPG-001 rule 8 the Pages
+    definition."""
+
     @classmethod
     def setUpClass(cls) -> None:
         workflows = REPOSITORY_ROOT / ".github" / "workflows"
