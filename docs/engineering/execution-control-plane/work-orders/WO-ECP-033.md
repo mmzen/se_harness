@@ -2,7 +2,7 @@
 id = "WO-ECP-033"
 type = "work_order"
 title = "Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -72,6 +72,13 @@ to = "in_progress"
 decided_at = "2026-09-08T12:21:17Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete, prepare the record, start group C' after WO-ECP-032 was marked implemented and VREC-ECP-036 prepared at c829bdd5: wave 2, group C, the diagnostic-code registry and the four contract tables read at run time (SPEC-ECP-023 ECP-PRM-016 to ECP-PRM-023 and ECP-PRM-026). Start preflight PASS. Stacked on the group B branch because the two groups edit the same modules."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T13:54:03Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete and prepare the record': se_harness/codes.py names every code the package raises once (118 constants), CodedError is the one base of a coded refusal and every refusal class exposes code and message, 270 literal sites in 19 modules are gone with the standard-library-only loader excepted, the CLI reads the two attributes and keeps one split, the index reads the registry through the parser and the page is regenerated; agentic_operations, restitution_fields, aggregation and the declared hash mode drive the gate, the guard, the result validator, the aggregator and the two writers at run time, each section validated at load and refusing with WEX-ECP-031, the Python copies gone. No recorded digest moved (CONTRACT_SHA256 a443e93d unchanged). Windows suite at its baseline (1324 tests, the one workstation error, 26 skips) at 2cd0e671 and the 13 pull-request checks of #400 green at dfa0bb7f; validate 1399 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from 76dc6859 passes all nine predicates over 32 paths. DEC-ECP-002 (ECP-PRM-027, three engine blocks for wave 3) accepted by the technical owner with revisit at the merge of wave 3; scope amended under DR-REMEDIATION-SCOPE for decisions/. SPEC-ECP-006 carries the ECP-PRM-026 amendment record. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-033/WO-ECP-033-handoff.md."
 +++
 
 # Work Order: Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time
