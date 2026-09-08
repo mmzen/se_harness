@@ -2,7 +2,7 @@
 id = "REQ-DST-074"
 type = "requirement"
 title = "Pin the managed workflow's actions and describe only the steps it runs"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -14,6 +14,13 @@ measure = "three uses lines pinned to 40-hex digests with exact tag comments; ev
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:56:54Z"
+decided_by = "product-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all three (Recommended)', given after the three wave 5 packets for issue #380 (code health assessment 2026-09-07, sections 2.2 and 4 and the wave 5 plan; issue #381 owner decision 3) were presented. Approval of a definition authorizes no work. The managed-template packet: the workflow's failure surface, header and pins, the gitignore markers, the environment inventory."
 +++
 
 # Requirement: Pin the managed workflow's actions and describe only the steps it runs

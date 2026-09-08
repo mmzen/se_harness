@@ -2,13 +2,20 @@
 id = "VER-DST-027"
 type = "verification"
 title = "Evidence for the wave 5 managed template hygiene"
-status = "draft"
+status = "approved"
 owners = ["quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
 
 [relations]
 verifies = ["REQ-DST-072", "REQ-DST-073", "REQ-DST-074", "REQ-DST-075"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:56:54Z"
+decided_by = "quality-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all three (Recommended)', given after the three wave 5 packets for issue #380 (code health assessment 2026-09-07, sections 2.2 and 4 and the wave 5 plan; issue #381 owner decision 3) were presented. Approval of a definition authorizes no work. The template, reader, header, pin, marker, upgrade, inventory, inspection, regression and delegation rows."
 +++
 
 # Verification Contract: Evidence for the wave 5 managed template hygiene

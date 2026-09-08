@@ -2,7 +2,7 @@
 id = "SPEC-DST-027"
 type = "specification"
 title = "Wave 5 managed template hygiene: the workflow's failure surface, header and pins, the gitignore markers, the environment inventory"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -10,6 +10,13 @@ contract = "The managed workflow fails with the evaluator's own refusal, pins it
 
 [relations]
 specifies = ["REQ-DST-072", "REQ-DST-073", "REQ-DST-074", "REQ-DST-075"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:56:54Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all three (Recommended)', given after the three wave 5 packets for issue #380 (code health assessment 2026-09-07, sections 2.2 and 4 and the wave 5 plan; issue #381 owner decision 3) were presented. Approval of a definition authorizes no work. Rules DST-MWF-001 to DST-MWF-014."
 +++
 
 # Specification: Wave 5 managed template hygiene: the workflow's failure surface, header and pins, the gitignore markers, the environment inventory

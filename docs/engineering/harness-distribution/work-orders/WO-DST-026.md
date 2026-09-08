@@ -2,7 +2,7 @@
 id = "WO-DST-026"
 type = "work_order"
 title = "Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -39,6 +39,13 @@ class = "execution"
 implements = ["REQ-DST-072", "REQ-DST-073", "REQ-DST-074", "REQ-DST-075"]
 specifications = ["SPEC-DST-027"]
 verification = ["VER-DST-027"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:56:54Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the standard template of the managed workflow, the installer's fragment writer, the tests, the two notes, the amendment record on SPEC-ECP-006, the domain index and the evidence file. It authorizes no change to any root managed byte, no verification decision, no release, no publication and no adoption; the merges remain the owner's decisions."
 +++
 
 # Work Order: Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory
