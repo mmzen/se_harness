@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "venv",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\calibration-003 inline with spaces\\plugin-data\\environment"
+  ],
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "",
+  "duration_seconds": 8.507,
+  "timed_out": false
+}

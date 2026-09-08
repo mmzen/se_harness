@@ -1,0 +1,10 @@
+{
+  "ClientRequest.json": "05c82ead1a820c765c23d3a1d262e4ae54889785276ee1acf7c494141fd94d70",
+  "v1\\InitializeParams.json": "6f0094be9a65242ec779a40794cbd4fdfa32fca1e45084a16adfb50501d33ea2",
+  "v2\\HooksListParams.json": "07638c3a8a3690cf368fa92c7ff697fdd0132865e8c59d53f6e5789e5a260053",
+  "v2\\HooksListResponse.json": "891dd10ef7f78e59631fce05fff2becddb8004b3c0338dbbbd6b4f17ef1fa64f",
+  "v2\\SkillsListParams.json": "1d245374e64c5acc9739dfc68a4fe5114c6c9147af04c480886f1846d2ca6239",
+  "v2\\ThreadStartParams.json": "25f490368ec6df52a2a3b82a5469d2413307eb93439121b309f415b5648eee7a",
+  "v2\\ThreadResumeParams.json": "324e96004c49de35935cade3386958431c93a4fd3997a839f9796772ea4c8072",
+  "v2\\ThreadCompactStartParams.json": "684b20adf20213a9fcbca31b59108feadcd5a8b693c16431c20d701049df3737"
+}

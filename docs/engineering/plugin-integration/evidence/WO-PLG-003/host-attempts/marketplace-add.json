@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "marketplace",
+    "add",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\marketplace with spaces",
+    "--json"
+  ],
+  "exit_status": 0,
+  "stdout": "{\n  \"marketplaceName\": \"codex-probe-local\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\marketplace with spaces\",\n  \"alreadyAdded\": false\n}\n",
+  "stderr": "",
+  "duration_seconds": 0.069,
+  "timed_out": false
+}

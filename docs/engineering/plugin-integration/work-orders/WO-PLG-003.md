@@ -2,7 +2,7 @@
 id = "WO-PLG-003"
 type = "work_order"
 title = "Probe Codex plugin activation in isolated fixtures"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -37,6 +37,13 @@ to = "approved"
 decided_at = "2026-09-08T21:39:49Z"
 decided_by = "engineering-owner"
 reason = "Operator explicitly approved the Codex probe packet reviewed at be8b4126 and authorized its work in this Codex task. Scope and required commit-bound assurance are unchanged; start is recorded separately."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T21:41:01Z"
+decided_by = "engineering-owner"
+reason = "Operator explicitly authorized starting the Codex probe work after approving its packet in this Codex task. Current start checks passed. No completion, assurance or external integration decision is inferred."
 +++
 
 # Work Order: Probe Codex plugin activation in isolated fixtures

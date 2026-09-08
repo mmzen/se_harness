@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_probe",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "test_credentials_and_user_paths_are_not_inherited (test_probe.ProbeSafetyTests.test_credentials_and_user_paths_are_not_inherited) ... ok\ntest_existing_evidence_is_never_overwritten (test_probe.ProbeSafetyTests.test_existing_evidence_is_never_overwritten) ... ok\ntest_existing_sandbox_is_never_erased (test_probe.ProbeSafetyTests.test_existing_sandbox_is_never_erased) ... ok\ntest_hook_no_trust_or_permissions_bypass (test_probe.ProbeSafetyTests.test_hook_no_trust_or_permissions_bypass) ... ok\ntest_inline_variant_does_not_evaluate_the_refused_script (test_probe.ProbeSafetyTests.test_inline_variant_does_not_evaluate_the_refused_script) ... ok\ntest_manifest_resolves_inside_marketplace_and_declares_real_skill (test_probe.ProbeSafetyTests.test_manifest_resolves_inside_marketplace_and_declares_real_skill) ... ok\ntest_nonzero_exit_and_raw_output_are_preserved (test_probe.ProbeSafetyTests.test_nonzero_exit_and_raw_output_are_preserved) ... ok\ntest_real_child_timeout_is_not_reported_as_success (test_probe.ProbeSafetyTests.test_real_child_timeout_is_not_reported_as_success) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.242s\n\nOK\n",
+  "duration_seconds": 0.514,
+  "timed_out": false
+}

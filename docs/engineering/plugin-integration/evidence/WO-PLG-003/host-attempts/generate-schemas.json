@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "app-server",
+    "generate-json-schema",
+    "--experimental",
+    "--out",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\schemas"
+  ],
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "",
+  "duration_seconds": 0.775,
+  "timed_out": false
+}
