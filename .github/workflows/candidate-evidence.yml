@@ -1,7 +1,11 @@
 # Candidate evidence for one commit: source regression, one non-promotable
 # wheel built once and handed to every consumer, acceptance by the exact public
-# predecessor, the N-1 to N migration rehearsal on both platforms, and the
-# expiring integration package. Trigger policy (WO-CIP-001, SPEC-CIP-001
+# predecessor, the N-1 to N upgrade rehearsal on both platforms, and the
+# expiring integration package. This is the only lane that qualifies the
+# complete candidate graph and runs the test suite for a pull request's commit
+# (WO-CIP-007, SPEC-CIP-003 CIP-ONE-002); it states each check once and leaves
+# the definition of a forbidden wheel member or a retired command to
+# scripts/check_portable_release_surface.py. Trigger policy (WO-CIP-001, SPEC-CIP-001
 # CIP-TRG): pull requests, and pushes to main, release/** and candidate/**
 # only; a newer push to the same ref cancels the older run. The predecessor
 # evaluator's version, wheel and digests are derived once from the declared
@@ -41,11 +45,11 @@ jobs:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
       - name: Resolve candidate version
@@ -99,7 +103,7 @@ jobs:
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
       - name: Hand the candidate wheel to the consuming jobs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: candidate-wheel-non-promotable-${{ github.sha }}
           path: ${{ runner.temp }}/candidate-dist/
@@ -107,7 +111,7 @@ jobs:
           retention-days: 1
       - name: Retain the complete-candidate role result
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: complete-candidate-qualification
           path: ${{ runner.temp }}/complete-candidate.json
@@ -125,15 +129,15 @@ jobs:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
       - name: Take the candidate wheel built by candidate-source
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: candidate-wheel-non-promotable-${{ github.sha }}
           path: ${{ runner.temp }}/candidate-dist
@@ -149,20 +153,11 @@ jobs:
           CANDIDATE_VERSION: ${{ needs.candidate-source.outputs.candidate_version }}
         shell: bash
         run: |
+          # SPEC-CIP-003 CIP-ONE-003: the script's FORBIDDEN_MEMBERS is the one
+          # definition of the members a portable wheel may not carry; this step
+          # states no second copy of that list.
           candidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
           python scripts/check_portable_release_surface.py --wheel "$candidate_wheel"
-          python - "$candidate_wheel" <<'PY'
-          import sys, zipfile
-          with zipfile.ZipFile(sys.argv[1]) as archive:
-              names = archive.namelist()
-          forbidden = (
-              "share/se-harness/self-hosting/",
-              "se_harness/governor_reconciliation.py",
-              "se_harness/self_hosting.py",
-              "se_harness/self_hosting_policy.py",
-          )
-          assert not any(any(marker in name for marker in forbidden) for name in names)
-          PY
       - name: Acquire and bind the exact public predecessor as the released verifier
         shell: bash
         run: |
@@ -242,6 +237,9 @@ jobs:
       - name: Exercise a disposable standard repository
         shell: bash
         run: |
+          # SPEC-CIP-003 CIP-ONE-004: no --help grep here. The step above runs
+          # check_portable_release_surface.py --harnessctl, which refuses every
+          # retired command in its FORBIDDEN_CLI, the one definition of the set.
           harnessctl="$RUNNER_TEMP/candidate-env/bin/harnessctl"
           cd "$RUNNER_TEMP"
           "$harnessctl" init candidate-target --project-name CandidatePackage
@@ -249,24 +247,20 @@ jobs:
           "$harnessctl" validate candidate-target
           "$harnessctl" dashboard candidate-target
           "$harnessctl" upgrade candidate-target --apply
-          if "$harnessctl" --help | grep -q 'reconcile-governor'; then
-            echo "retired reconcile-governor command is still exposed" >&2
-            exit 1
-          fi
       - name: Prove package evidence made no checkout change
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
       - name: Retain the canonical candidate-package qualification result
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: candidate-package-qualification-${{ needs.candidate-source.outputs.predecessor_version }}
           path: ${{ runner.temp }}/candidate-package-qualification.json
           if-no-files-found: warn
 
-  governance-migration:
-    name: Governance migration (${{ matrix.platform }})
+  upgrade-rehearsal:
+    name: Upgrade rehearsal (${{ matrix.platform }})
     needs: [candidate-source, candidate-package]
     strategy:
       fail-fast: false
@@ -288,11 +282,11 @@ jobs:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
       - name: Require the derived predecessor facts
@@ -313,7 +307,7 @@ jobs:
           $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()
           if ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }
       - name: Take the exact successor wheel built by candidate-source
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: candidate-wheel-non-promotable-${{ github.sha }}
           path: ${{ runner.temp }}/candidate-dist
@@ -350,8 +344,8 @@ jobs:
           # fixture, no network inside the rehearsal, no write to this checkout.
           $predecessorPython = Join-Path (Join-Path '${{ runner.temp }}' 'predecessor-env') '${{ matrix.python }}'
           $successorPython = Join-Path (Join-Path '${{ runner.temp }}' 'successor-env') '${{ matrix.python }}'
-          $first = Join-Path '${{ runner.temp }}' 'migration-result-1'
-          $second = Join-Path '${{ runner.temp }}' 'migration-result-2'
+          $first = Join-Path '${{ runner.temp }}' 'rehearsal-result-1'
+          $second = Join-Path '${{ runner.temp }}' 'rehearsal-result-2'
           python -m repository_tools.upgrade_rehearsal --repository . `
             --predecessor-python $predecessorPython --successor-python $successorPython --output $first
           if ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }
@@ -366,16 +360,16 @@ jobs:
         id: digest
         shell: pwsh
         run: |
-          $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'migration-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
+          $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
           "${{ matrix.platform }}=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
-      - name: Retain the bounded migration evidence
+      - name: Retain the bounded upgrade rehearsal evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: governance-migration-${{ matrix.platform }}
-          path: ${{ runner.temp }}/migration-result-*/upgrade-rehearsal-result.json
+          name: upgrade-rehearsal-${{ matrix.platform }}
+          path: ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
           if-no-files-found: warn
-      - name: Prove migration evidence made no checkout change
+      - name: Prove the upgrade rehearsal made no checkout change
         shell: pwsh
         run: |
           git diff --exit-code
@@ -388,7 +382,7 @@ jobs:
     needs:
       - candidate-source
       - candidate-package
-      - governance-migration
+      - upgrade-rehearsal
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -396,23 +390,29 @@ jobs:
       INTEGRATION_REF: ${{ github.ref }}
       INTEGRATION_PR: ${{ github.event.pull_request.number || '' }}
       INTEGRATION_RETENTION_DAYS: ${{ github.event_name == 'pull_request' && '3' || '14' }}
-      MIGRATION_DIGEST_LINUX: ${{ needs.governance-migration.outputs.Linux }}
-      MIGRATION_DIGEST_WINDOWS: ${{ needs.governance-migration.outputs.Windows }}
+      REHEARSAL_DIGEST_LINUX: ${{ needs.upgrade-rehearsal.outputs.Linux }}
+      REHEARSAL_DIGEST_WINDOWS: ${{ needs.upgrade-rehearsal.outputs.Windows }}
+      # SPEC-CIP-003 CIP-ONE-007: the one statement of the integration build
+      # toolchain; the install step and the --expect-*-version arguments below
+      # both read these three values.
+      INTEGRATION_BUILD_VERSION: 1.2.2.post1
+      INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+      INTEGRATION_WHEEL_VERSION: 0.45.1
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - name: Require one cross-platform migration semantic result
+      - name: Require one cross-platform upgrade rehearsal semantic result
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$MIGRATION_DIGEST_LINUX" || { echo "Linux migration digest is missing" >&2; exit 1; }
-          test -n "$MIGRATION_DIGEST_WINDOWS" || { echo "Windows migration digest is missing" >&2; exit 1; }
-          if [[ "$MIGRATION_DIGEST_LINUX" != "$MIGRATION_DIGEST_WINDOWS" ]]; then
-            echo "cross-platform semantic mismatch: Linux=$MIGRATION_DIGEST_LINUX Windows=$MIGRATION_DIGEST_WINDOWS" >&2
+          test -n "$REHEARSAL_DIGEST_LINUX" || { echo "Linux upgrade rehearsal digest is missing" >&2; exit 1; }
+          test -n "$REHEARSAL_DIGEST_WINDOWS" || { echo "Windows upgrade rehearsal digest is missing" >&2; exit 1; }
+          if [[ "$REHEARSAL_DIGEST_LINUX" != "$REHEARSAL_DIGEST_WINDOWS" ]]; then
+            echo "cross-platform semantic mismatch: Linux=$REHEARSAL_DIGEST_LINUX Windows=$REHEARSAL_DIGEST_WINDOWS" >&2
             exit 1
           fi
-          echo "upgrade rehearsal semantic result (resulting lock, canonical): $MIGRATION_DIGEST_LINUX"
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+          echo "upgrade rehearsal semantic result (resulting lock, canonical): $REHEARSAL_DIGEST_LINUX"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           "fetch-depth": 0
           "persist-credentials": false
@@ -420,7 +420,13 @@ jobs:
         with:
           "python-version": "3.11"
       - name: Install exact integration build tools
-        run: python -m pip install --disable-pip-version-check build==1.2.2.post1 setuptools==75.8.0 wheel==0.45.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check \
+            "build==$INTEGRATION_BUILD_VERSION" \
+            "setuptools==$INTEGRATION_SETUPTOOLS_VERSION" \
+            "wheel==$INTEGRATION_WHEEL_VERSION"
       - name: Build twice and stage one canonical non-promotable payload
         shell: bash
         run: |
@@ -436,9 +442,9 @@ jobs:
             --run-id "$GITHUB_RUN_ID"
             --run-attempt "$GITHUB_RUN_ATTEMPT"
             --retention-days "$INTEGRATION_RETENTION_DAYS"
-            --expect-build-version 1.2.2.post1
-            --expect-setuptools-version 75.8.0
-            --expect-wheel-version 0.45.1
+            --expect-build-version "$INTEGRATION_BUILD_VERSION"
+            --expect-setuptools-version "$INTEGRATION_SETUPTOOLS_VERSION"
+            --expect-wheel-version "$INTEGRATION_WHEEL_VERSION"
             --output "$RUNNER_TEMP/integration-payload"
           )
           if [[ -n "$INTEGRATION_PR" ]]; then
@@ -474,7 +480,7 @@ jobs:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           "fetch-depth": 0
           "persist-credentials": false
@@ -524,7 +530,7 @@ jobs:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           "fetch-depth": 0
           "persist-credentials": false

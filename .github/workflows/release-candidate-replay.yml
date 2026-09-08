@@ -1,3 +1,13 @@
+# Read-only corroboration of a ready recipe-bound release record: it validates
+# the graph on the selected review ref and replays that record's bound recipe
+# twice on a hosted runner, so the operator reads the same digests the release
+# will produce before the release decision (REQ-CIP-007, SPEC-CIP-002).
+# It holds no publication authority: `permissions: {}` at the top level,
+# read-only in the one job, no credential, no environment, and no tag, release,
+# index object, deployment or lifecycle transition. Trigger policy
+# (SPEC-CIP-001 CIP-TRG): manual dispatch only, on this repository only; runs
+# for one ref and record queue rather than cancel. Described in
+# docs/notes/developing-se-harness.md, "Release sequences".
 name: Replay ready release build recipe
 
 on:
@@ -28,10 +38,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Select trusted orchestration Python 3.11.9
+      - name: Select the one trusted orchestration Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: "3.11.9"
+          python-version: "3.11"
 
       - name: Validate the sole release-record input
         env:
@@ -66,7 +76,7 @@ jobs:
 
       - name: Retain bounded replay evidence
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-build-replay-${{ inputs.release_record }}
           path: ${{ runner.temp }}/release-build-replay.json

@@ -2,8 +2,11 @@
 # Explorer demonstration: the recovery path for the deployment the release
 # workflow performs. It is a thin caller of the one Pages definition,
 # .github/workflows/pages-publication.yml (WO-CIP-002, SPEC-CIP-001 CIP-LEG 2).
-# Repository- and main-only; it takes the released record and the governance
-# commit the operator expects and refuses any other. Described in
+# It takes the released record and the governance commit the operator expects
+# and refuses any other.
+# Trigger policy (SPEC-CIP-001 CIP-TRG):
+# manual dispatch from this repository and main only; a deployment in progress
+# is never cancelled. Described in
 # docs/notes/harness-dashboard-publication.md.
 name: Publish Dashboard Pages
 

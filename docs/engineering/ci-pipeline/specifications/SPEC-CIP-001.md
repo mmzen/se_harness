@@ -5,7 +5,7 @@ title = "Triggers, artifact handoff, the reusable qualification, release-unit de
 status = "approved"
 owners = ["technical-owner", "release-owner"]
 created = "2026-08-26"
-updated = "2026-08-26"
+updated = "2026-09-08"
 
 [relations]
 specifies = ["REQ-CIP-001", "REQ-CIP-002", "REQ-CIP-003", "REQ-CIP-004", "REQ-CIP-005", "REQ-CIP-006"]
@@ -139,3 +139,43 @@ Each work order updates, in the same change:
 A work order that leaves a duplicated build, a digest declaration, a
 version literal or an idle matrix leg in its scope fails its own
 acceptance; the evidence lists the grep commands that prove absence.
+
+## Amendment record
+
+**The rehearsal's candidate leg no longer qualifies or tests, amended
+2026-09-08 under `WO-CIP-007` (`REQ-CIP-008`, `SPEC-CIP-003` `CIP-ONE-001`,
+`CIP-ONE-002`, `CIP-ONE-015`).** `CIP-QLF` 2 lists the qualification steps in
+one order for both modes, and `CIP-QLF` 3 says the rehearsal calls the
+definition "in both modes on both platforms". Both readings are amended:
+
+- `qualify complete-candidate`, `unittest discover` and the CLI smoke run
+  under `inputs.mode == 'release-record'` only. In `candidate` mode the
+  definition exports the tree and replays the recipe twice, and nothing else:
+  `candidate-evidence.yml` has already qualified the same commit as
+  candidate-controlled and run its suite, so a pull request qualifies and
+  tests its commit once. The remaining steps of `CIP-QLF` 2 and their order
+  are unchanged, as are every step of release-record mode.
+- The definition runs on `ubuntu-latest` only, and has since `WO-CIP-002`
+  removed the schema-1 build path the Windows leg exercised; the `platform`
+  input is retained and the rehearsal passes `Linux`. `CIP-QLF` 3's "on both
+  platforms" is a statement of the mechanism at the time it was written.
+
+**The rehearsal job of `candidate-evidence.yml` is `upgrade-rehearsal`,
+amended 2026-09-08 under `WO-CIP-007` (`REQ-CIP-009`, `SPEC-CIP-003`
+`CIP-ONE-012`, `CIP-ONE-015`).** `CIP-ART` 3 and the target job list of
+`CIP-ART` 5 name the job `governance-migration`, after the stage machine
+`WO-ECP-010` removed. The job, its retained artifact
+`upgrade-rehearsal-<platform>`, the `needs` entry of
+`integration-package-build` and every `needs.<job>.outputs` reference now
+name `upgrade-rehearsal`. What the job does is unchanged: since `WO-ECP-010`
+it runs `repository_tools.upgrade_rehearsal` twice per platform and outputs
+`semantic_sha256`, and a step of the dependent job compares the two
+platforms' outputs. `CIP-ART` 3's "runs the scenario" is a statement of the
+mechanism at the time it was written; no scenario has existed since
+`WO-ECP-010`. `ARCH-CIP-001` and `REQ-CIP-002` still carry the old job name;
+`WO-CIP-007` places their repair out of scope.
+
+Nothing else in this specification changes. `CIP-TRG`, `CIP-LEG`, `CIP-RLU`,
+`CIP-PRE` and `CIP-DOC` stand as written, and `CIP-DOC` 4 is what obliges
+every changed workflow's header comment to describe the file after the
+change.

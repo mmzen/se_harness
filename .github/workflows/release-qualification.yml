@@ -3,15 +3,23 @@
 # workflow invoke this workflow; what is rehearsed is, by construction, what
 # the release executes. It holds no publication authority: read permission
 # only, no secret input, no environment, and no tag, release, index object,
-# deployment, or lifecycle transition. Described in
+# deployment, or lifecycle transition.
+# Trigger policy (SPEC-CIP-001 CIP-TRG):
+# called only, never triggered directly; each caller holds its own concurrency
+# and passes the mode. Described in
 # docs/notes/developing-se-harness.md, "Release sequences", and
 # docs/notes/release-publication-rehearsal.md.
 #
-# mode: candidate      qualify the calling commit and replay its own recipe
-#                      build twice (repository_tools.release_build replay).
+# mode: candidate      replay the calling commit's own recipe build twice
+#                      (repository_tools.release_build replay), and nothing else.
+#                      The complete-candidate qualification, the suite and the
+#                      --help smoke are not repeated here: candidate-evidence.yml
+#                      has already run them on the same commit (WO-CIP-007,
+#                      SPEC-CIP-003 CIP-ONE-001 and CIP-ONE-002).
 # mode: release-record resolve a bound schema-2 release record, qualify its
-#                      candidate commit, replay the bound recipe twice, and
-#                      verify the rebuilt bundle against the record.
+#                      candidate commit, run the suite and the --help smoke,
+#                      replay the bound recipe twice, and verify the rebuilt
+#                      bundle against the record.
 name: Release Qualification
 
 on:
@@ -66,10 +74,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Select trusted orchestration Python 3.11.9
+      - name: Select the one trusted orchestration Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: "3.11.9"
+          python-version: "3.11"
 
       - name: Validate the inputs
         shell: bash
@@ -113,6 +121,10 @@ jobs:
           fi
 
       - name: Qualify the exact candidate without publication credentials
+        # Release-record mode only: in candidate mode candidate-evidence.yml has
+        # already qualified and tested this very commit (SPEC-CIP-003
+        # CIP-ONE-001, CIP-ONE-002).
+        if: inputs.mode == 'release-record'
         env:
           CANDIDATE_COMMIT: ${{ steps.subject.outputs.candidate_commit }}
         shell: bash
@@ -179,7 +191,7 @@ jobs:
 
       - name: Retain the candidate-controlled qualification result
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: qualification-${{ inputs.mode }}-${{ inputs.release_record || github.sha }}
           path: |
@@ -191,7 +203,7 @@ jobs:
 
       - name: Transfer only verified inert release bytes
         if: inputs.mode == 'release-record'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-bundle-${{ inputs.release_record }}
           path: ${{ runner.temp }}/release-bundle/

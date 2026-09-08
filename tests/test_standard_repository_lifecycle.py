@@ -434,15 +434,19 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         workflow = (REPOSITORY_ROOT / ".github/workflows/candidate-evidence.yml").read_text(encoding="utf-8")
         self.assertRegex(workflow, r"(?m)^  candidate-source:$")
         self.assertRegex(workflow, r"(?m)^  candidate-package:$")
-        self.assertRegex(workflow, r"(?m)^  governance-migration:$")
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-012): the job is named for what it does.
+        self.assertRegex(workflow, r"(?m)^  upgrade-rehearsal:$")
         # WO-CIP-001 folded the reconcile-only job into a step on job outputs
-        self.assertNotIn("governance-migration-reconcile", workflow)
-        self.assertEqual(3, workflow.count("actions/checkout@v4"))
+        self.assertNotIn("upgrade-rehearsal-reconcile", workflow)
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-006): no floating tag remains; the six
+        # checkouts name one digest, and the pin form is pinned in test_ci_pipeline.
+        self.assertEqual(0, workflow.count("actions/checkout@v4"))
+        self.assertEqual(6, workflow.count("actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0"))
         self.assertEqual(3, workflow.count("fetch-depth: 0"))
         self.assertEqual(3, workflow.count("persist-credentials: false"))
         self.assertRegex(workflow, r"(?s)candidate-package:.*?needs: candidate-source")
-        self.assertRegex(workflow, r"(?s)governance-migration:.*?needs: \[candidate-source, candidate-package\]")
-        self.assertIn("needs.governance-migration.outputs.Linux", workflow)
+        self.assertRegex(workflow, r"(?s)upgrade-rehearsal:.*?needs: \[candidate-source, candidate-package\]")
+        self.assertIn("needs.upgrade-rehearsal.outputs.Linux", workflow)
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)
         self.assertIn("python scripts/run_tests.py --workers 4 --scale full", workflow)  # WO-TST-001

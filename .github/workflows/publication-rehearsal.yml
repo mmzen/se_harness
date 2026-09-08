@@ -10,9 +10,13 @@
 # executes, by construction; there is no copy to keep aligned and no digest to
 # refresh. It holds no publication authority: no credential, no environment,
 # no write permission, and no tag, release, index object, deployment, or
-# formal lifecycle transition. Trigger policy (SPEC-CIP-001 CIP-TRG): pull
-# requests and pushes to main; a newer push cancels the older run. Described
-# in docs/notes/release-publication-rehearsal.md.
+# formal lifecycle transition. The candidate leg replays this commit's own
+# recipe and nothing else; candidate-evidence.yml has already qualified and
+# tested the same commit, so no pull request qualifies or runs the suite twice
+# (WO-CIP-007, SPEC-CIP-003 CIP-ONE-001 and CIP-ONE-002). Trigger policy
+# (SPEC-CIP-001 CIP-TRG): pull requests and pushes to main; a newer push
+# cancels the older run. Described in
+# docs/notes/release-publication-rehearsal.md.
 name: Publication Rehearsal
 
 on:

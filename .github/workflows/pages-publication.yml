@@ -4,8 +4,11 @@
 # immutable governance commit of a released record, validated by the exact
 # released evaluator, and deploys it to the github-pages environment. The
 # caller grants the Pages and OIDC write permissions; this workflow takes no
-# secret input and creates no tag, release, or index object. Described in
-# docs/notes/harness-dashboard-publication.md.
+# secret input and creates no tag, release, or index object. Trigger policy
+# (SPEC-CIP-001 CIP-TRG): called only, never triggered directly; the deploy job
+# holds the one Pages queue, group se-harness-pages-deploy, so deployments from
+# any caller queue rather than cancel (WO-CIP-007, SPEC-CIP-003 CIP-ONE-008).
+# Described in docs/notes/harness-dashboard-publication.md.
 name: Pages Publication
 
 on:
@@ -154,6 +157,10 @@ jobs:
             --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"
             --require-isolated-python --require-entry-point
           )
+          # SPEC-CIP-003 CIP-ONE-010: this probe stays. The evaluator proven here
+          # is the released record's own governance root, an arbitrarily old
+          # release that may predate --evaluator-payload-sha256; passing the flag
+          # unconditionally would fail the publication of an older record.
           if "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'; then
             identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
           fi
@@ -234,6 +241,12 @@ jobs:
     name: Deploy the public demonstration
     needs: build
     runs-on: ubuntu-latest
+    # SPEC-CIP-003 CIP-ONE-008: one Pages environment, one queue. Whichever
+    # caller invokes this definition, a second deployment waits for the first
+    # instead of cancelling it.
+    concurrency:
+      group: se-harness-pages-deploy
+      cancel-in-progress: false
     permissions:
       contents: read
       pages: write

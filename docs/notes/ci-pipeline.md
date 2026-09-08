@@ -270,6 +270,76 @@ Four modules that imported the engine by bare name after another module had
 put `se_harness/engine` on `sys.path` now load it through
 `tests/root_identity_support.py`, so each runs alone as well as in the suite.
 
+### After `WO-CIP-007`
+
+Wave 5 of the code health assessment of 2026-09-07 (issue #380). The nine
+workflows this repository owns, measured on the branch against `main` at
+`560973cf`. The managed `engineering-harness.yml` is `SPEC-DST-027`'s and is
+listed only so the count of files under `.github/workflows/` adds up.
+
+| Workflow | Trigger | Jobs | Steps | Lines | Public `uses:` in pin form |
+| --- | --- | ---: | ---: | ---: | --- |
+| `candidate-evidence.yml` | PR + push to `main`, `release/**`, `candidate/**` | 6 | 49 | 570 | 23 of 23 (was 11) |
+| `release-qualification.yml` | called only | 1 | 10 | 211 | 4 of 4 (was 2) |
+| `publication-rehearsal.yml` | PR + push to `main` | 3 | 4 | 107 | 2 of 2 |
+| `pages-publication.yml` | called only | 2 | 17 | 284 | 5 of 5 |
+| `publish-pypi.yml` | dispatch, `main` | 6 | 26 | 504 | 12 of 12 (was 6) |
+| `publish-dashboard-pages.yml` | dispatch, `main` | 1 | 0 | 45 | none (a thin caller) |
+| `predecessor-evaluator-assessment.yml` | PR + push to `main`, `release/**`, `candidate/**` | 1 | 9 | 165 | 3 of 3 (was 0) |
+| `release-candidate-replay.yml` | dispatch | 1 | 6 | 84 | 3 of 3 (was 2) |
+| `engineering-harness.yml` (managed) | PR + push, per the release | 1 | 10 | 167 | 0 of 3, and out of scope |
+
+Repository-owned public action pins: 52 of 52 in pin form, from 28; floating
+tags 15 to 0, digests with an inexact tag comment 9 to 0. Every
+`python-version` is `"3.11"`, once as
+`publish-pypi.yml`'s `PYTHON_VERSION`. Workflow YAML grew 2,082 to 2,137
+lines: the conditions, the `env` block and the headers are text, and nothing
+was deleted except two inline re-checks.
+
+Per pull request, on one commit:
+
+| Work | Before | After |
+| --- | ---: | ---: |
+| `qualify complete-candidate` on the head commit | 2 | 1 |
+| full suite on the head commit | 2 | 1 |
+| `qualify complete-candidate`, all commits | 3 | 2 |
+| full suite, all commits | 3 | 2 |
+
+The remaining second qualification and suite run belong to the rehearsal's
+release-record leg, which qualifies the commit a release record binds, not
+this pull request's. `ADR-CIP-001` keeps those steps inside the definition
+the release executes, so they stay.
+
+What else changed:
+
+- The candidate leg of the rehearsal replays the recipe twice and does
+  nothing else. `candidate-evidence.yml` is the one lane that qualifies the
+  complete candidate graph and runs the suite for a pull request's commit.
+- Two inline re-checks are gone: the `zipfile` assertion over the wheel's
+  members, and the `--help` grep for a retired command. Both restated what
+  `scripts/check_portable_release_surface.py` already refuses.
+- The `governance-migration` job is `upgrade-rehearsal`, and the
+  predecessor-assessment workflow is named `Predecessor Evaluator
+  Assessment` down to its job, concurrency group, artifact and temporary
+  files. Three occurrences of a retired name remain,
+  all in `predecessor-evaluator-assessment.yml`: the path
+  `scripts/validate_governor_transition.py` and the schema string that
+  script emits, which `WO-CIP-007` places out of scope. `ARCH-CIP-001` and
+  `REQ-CIP-002` still name the old job; they are definitions of earlier
+  waves and are corrected by their own repair, not here.
+- Every Pages deployment queues behind `se-harness-pages-deploy` with
+  `cancel-in-progress: false`, whichever caller invoked the one definition.
+- `publish-pypi.yml` passes `--evaluator-payload-sha256` unconditionally: the
+  evaluator it resolves is the one `main` declares. `pages-publication.yml`
+  keeps its `--help` probe, because there the evaluator is the released
+  record's own governance root and may predate the flag.
+- The integration build's `build`, `setuptools` and `wheel` versions are one
+  `env` block, read by the install and by the three `--expect-*-version`
+  arguments.
+- `scripts/create_release_bundle_manifest.py` requires `--build-recipe` and
+  `create_manifest` refuses `build_recipe=None`: no schema-1 bundle manifest
+  can be written. Reading one is unchanged, for the records that carry it.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the

@@ -372,8 +372,18 @@ def create_manifest(
     wheel: Path,
     sdist: Path,
     *,
-    build_recipe: PurePosixPath | None = None,
+    build_recipe: PurePosixPath,
 ) -> dict[str, object]:
+    """Write one recipe-bound schema-2 bundle manifest.
+
+    SPEC-CIP-003 CIP-ONE-013: there is no writer of a schema-1 manifest. The
+    reader keeps schema-1 for the historical records that carry it.
+    """
+
+    if build_recipe is None:
+        raise ReleaseDistributionError(
+            "a bundle manifest must bind a candidate build recipe; schema-1 manifests are historical and no longer written"
+        )
     repository = repository.resolve()
     expected_wheel, expected_sdist = expected_distribution_names(version)
     object_format = str(_run_git(repository, "rev-parse", "--show-object-format"))
@@ -394,7 +404,7 @@ def create_manifest(
     if not epoch.isdigit() or int(epoch) < 1:
         raise ReleaseDistributionError("candidate commit timestamp is invalid")
     result: dict[str, object] = {
-        "schema": BUNDLE_SCHEMA_V2 if build_recipe is not None else BUNDLE_SCHEMA_V1,
+        "schema": BUNDLE_SCHEMA_V2,
         "version": version,
         "commit": candidate,
         "git_object_format": object_format,
@@ -408,19 +418,18 @@ def create_manifest(
         "checksums_content": checksums_content,
         "source_manifest_sha256": source_manifest_sha256(repository, candidate),
     }
-    if build_recipe is not None:
-        recipe_path = _safe_posix_path(build_recipe.as_posix(), "build recipe")
-        try:
-            recipe = load_build_recipe_at(repository, candidate, path=recipe_path)
-        except (OSError, RuntimeError) as exc:
-            raise ReleaseDistributionError(f"cannot bind candidate build recipe: {exc}") from exc
-        result.update(
-            {
-                "build_recipe_schema": RECIPE_SCHEMA,
-                "build_recipe": recipe.path,
-                "build_recipe_sha256": recipe.sha256,
-            }
-        )
+    recipe_path = _safe_posix_path(build_recipe.as_posix(), "build recipe")
+    try:
+        recipe = load_build_recipe_at(repository, candidate, path=recipe_path)
+    except (OSError, RuntimeError) as exc:
+        raise ReleaseDistributionError(f"cannot bind candidate build recipe: {exc}") from exc
+    result.update(
+        {
+            "build_recipe_schema": RECIPE_SCHEMA,
+            "build_recipe": recipe.path,
+            "build_recipe_sha256": recipe.sha256,
+        }
+    )
     return result
 
 

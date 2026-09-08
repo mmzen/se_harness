@@ -414,16 +414,17 @@ class IntegrationPackageContractTests(unittest.TestCase):
         for prerequisite in (
             "candidate-source",
             "candidate-package",
-            "governance-migration",
+            "upgrade-rehearsal",
         ):
             self.assertIn(f"      - {prerequisite}\n", lane)
-        # WO-CIP-001: the cross-platform migration reconciliation is the lane's
+        # WO-CIP-001: the cross-platform rehearsal reconciliation is the lane's
         # first step, not a job of its own.
-        self.assertNotIn("governance-migration-reconcile", workflow)
-        self.assertIn("needs.governance-migration.outputs.Linux", lane)
-        self.assertIn("needs.governance-migration.outputs.Windows", lane)
+        self.assertNotIn("upgrade-rehearsal-reconcile", workflow)
+        self.assertIn("needs.upgrade-rehearsal.outputs.Linux", lane)
+        self.assertIn("needs.upgrade-rehearsal.outputs.Windows", lane)
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-006): one digest per action, workflow-wide.
         actions = {
-            "actions/checkout": "11bd71901bbe5b1630ceea73d27597364c9af683",
+            "actions/checkout": "11d5960a326750d5838078e36cf38b85af677262",
             "actions/setup-python": "a26af69be951a213d495a4c3e4e4022e16d87065",
             "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02",
             "actions/download-artifact": "d3f86a106a0bac45b974a628896c90dbdf5c8093",
@@ -431,7 +432,13 @@ class IntegrationPackageContractTests(unittest.TestCase):
         for action, commit in actions.items():
             self.assertIn(f"uses: {action}@{commit}", lane)
         self.assertNotRegex(lane, r"uses: actions/[a-z-]+@v[0-9]")
-        self.assertIn("build==1.2.2.post1 setuptools==75.8.0 wheel==0.45.1", lane)
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-007): the toolchain is stated once, in
+        # the job's env, and read by both the install and the expectations.
+        self.assertIn("INTEGRATION_BUILD_VERSION: 1.2.2.post1", lane)
+        self.assertIn("INTEGRATION_SETUPTOOLS_VERSION: 75.8.0", lane)
+        self.assertIn("INTEGRATION_WHEEL_VERSION: 0.45.1", lane)
+        self.assertIn('"build==$INTEGRATION_BUILD_VERSION"', lane)
+        self.assertIn('--expect-wheel-version "$INTEGRATION_WHEEL_VERSION"', lane)
         self.assertIn("integration-package-staging-${{ github.sha }}", lane)
         self.assertIn("se-harness-integration-${{ github.sha }}", lane)
         self.assertIn("retention-days: 1", lane)
