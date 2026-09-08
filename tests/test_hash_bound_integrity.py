@@ -42,6 +42,8 @@ from se_harness.hash_bound import (
 )
 from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.preflight import inspect_installation
+from tests.artifact_support import write
+from tests.git_support import git, git_available, run_git
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -96,29 +98,6 @@ SYNTHETIC_FILES = {
 }
 
 
-def git(root: Path, *arguments: str, check: bool = True) -> bytes:
-    completed = subprocess.run(
-        ["git", "-C", str(root), *arguments],
-        check=check,
-        capture_output=True,
-    )
-    return completed.stdout
-
-
-def git_available() -> bool:
-    try:
-        subprocess.run(["git", "--version"], check=True, capture_output=True)
-    except (OSError, subprocess.SubprocessError):
-        return False
-    return True
-
-
-def write(root: Path, relative: str, payload: bytes) -> None:
-    path = root / relative
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(payload)
-
-
 def build_source(root: Path, attributes: bytes, files: dict[str, bytes] | None = None) -> None:
     """Create a committed repository whose blobs are exactly the bytes given."""
 
@@ -128,8 +107,8 @@ def build_source(root: Path, attributes: bytes, files: dict[str, bytes] | None =
     git(root, "config", "user.name", "assurance")
     git(root, "config", "commit.gpgsign", "false")
     for relative, payload in (files or SYNTHETIC_FILES).items():
-        write(root, relative, payload)
-    write(root, ".gitattributes", attributes)
+        write(root / relative, payload)
+    write(root / ".gitattributes", attributes)
     git(root, "add", "-A")
     git(root, "-c", "core.autocrlf=false", "commit", "-q", "-m", "synthetic")
 
@@ -154,7 +133,7 @@ def clone(source: Path, destination: Path, autocrlf: str) -> Path:
 def committed_attributes() -> bytes:
     """Return the repository's .gitattributes as committed, independent of checkout."""
 
-    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes")
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
 
 
 def working_tree_attributes() -> bytes:
@@ -173,16 +152,11 @@ def revision_available(revision: str) -> bool:
 
     if not git_available():
         return False
-    completed = subprocess.run(
-        ["git", "-C", str(ROOT), "cat-file", "-e", f"{revision}^{{commit}}"],
-        check=False,
-        capture_output=True,
-    )
-    return completed.returncode == 0
+    return run_git(ROOT, "cat-file", "-e", f"{revision}^{{commit}}", check=False).returncode == 0
 
 
 def historical_lock() -> bytes:
-    return git(ROOT, "cat-file", "blob", f"{RECORDED_PRIOR_LOCK_COMMIT}:{LOCK_RELATIVE}")
+    return git(ROOT, "cat-file", "blob", f"{RECORDED_PRIOR_LOCK_COMMIT}:{LOCK_RELATIVE}", binary=True)
 
 
 def newline_forms(payload: bytes) -> dict[str, bytes]:
@@ -243,7 +217,7 @@ authorized_by = "engineering-owner"
 
 Synthetic.
 """
-    write(root, "docs/engineering/upgrade/work-orders/WO-TST-001.md", body.encode("utf-8"))
+    write(root / "docs/engineering/upgrade/work-orders/WO-TST-001.md", body.encode("utf-8"))
 
 
 #: Paths that exist only in candidate source. REQ-HBI-004: nothing the wheel ships
@@ -484,6 +458,8 @@ class CheckContractTests(unittest.TestCase):
         self.assertEqual(CHECK_NAMES, tuple(name for name, _, _ in assess(ROOT)))
 
     def test_no_new_diagnostic_code_family(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 8, the assessment introduces no
+        # diagnostic code family of its own.
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
         self.assertIsNone(re.search(r"\b[A-Z]{2,}\d{3}\b", source))
 
@@ -528,11 +504,11 @@ class RepositoryAssessmentTests(unittest.TestCase):
             path: (ROOT / path).read_bytes()
             for path in (".gitattributes", ".engineering-harness.lock", ".engineering-harness.toml")
         }
-        status_before = git(ROOT, "status", "--porcelain")
+        status_before = git(ROOT, "status", "--porcelain", binary=True)
         assess(ROOT)
         for path, payload in before.items():
             self.assertEqual(payload, (ROOT / path).read_bytes(), path)
-        self.assertEqual(status_before, git(ROOT, "status", "--porcelain"))
+        self.assertEqual(status_before, git(ROOT, "status", "--porcelain", binary=True))
 
     def test_managed_attribute_block_still_matches_its_recorded_digest(self) -> None:
         lock = json.loads(LOCK.read_bytes().decode("utf-8"))
@@ -605,7 +581,7 @@ class ByteExactSurfaceTests(unittest.TestCase):
                 self.assertEqual("lf", attributes.get("eol"), attributes)
 
     def test_no_surface_is_converted_in_this_working_tree(self) -> None:
-        payload = git(ROOT, "ls-files", "--eol", "-z", "--", *self.paths)
+        payload = git(ROOT, "ls-files", "--eol", "-z", "--", *self.paths, binary=True)
         reported = {}
         for record in payload.decode("utf-8").split("\0"):
             if not record.strip():
@@ -853,7 +829,7 @@ class FreshCheckoutMatrixTests(unittest.TestCase):
                 if relative == ".gitattributes" or relative == "README.md":
                     continue
                 item = resolve_class(relative, declaration)
-                blob = git(root, "cat-file", "blob", f"HEAD:{relative}")
+                blob = git(root, "cat-file", "blob", f"HEAD:{relative}", binary=True)
                 worktree = (root / relative).read_bytes()
                 with self.subTest(autocrlf=value, path=relative, mode=item.mode):
                     if item.mode == RAW_MODE:
@@ -867,7 +843,7 @@ class FreshCheckoutMatrixTests(unittest.TestCase):
     def test_canonical_class_tolerates_a_crlf_checkout(self) -> None:
         root = self.clones["true"]
         worktree = (root / ".engineering-harness.lock").read_bytes()
-        blob = git(root, "cat-file", "blob", "HEAD:.engineering-harness.lock")
+        blob = git(root, "cat-file", "blob", "HEAD:.engineering-harness.lock", binary=True)
         self.assertEqual(b"\r\n", worktree[-2:])
         self.assertNotEqual(raw_sha256(blob), raw_sha256(worktree))
         self.assertEqual(canonical_sha256(blob), canonical_sha256(worktree))
@@ -1313,6 +1289,8 @@ class LockCallerAgreementTests(unittest.TestCase):
     """The remaining lock callers take their mode from the declaration."""
 
     def test_no_lock_caller_decides_the_mode_locally(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 5, every caller obtains the mode
+        # from the declared class and none compares digests of its own.
         # The upgrade-authorization packet loader was retired by WO-REB-027 and the
         # release-bootstrap old-root validation by WO-REB-028, which deleted the
         # module that carried the last repository-owned lock comparison. The
@@ -1347,6 +1325,8 @@ class ProducerNewlineTests(unittest.TestCase):
         self.assertGreater(observed, 0)
 
     def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 13, the producer writes explicit
+        # bytes and newlines, through the one serializer (SPEC-ECP-023 ECP-PRM-006).
         source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
         # WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006): the lock bytes come from integrity's one pretty serializer.
         self.assertIn("lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)", source)
@@ -1373,6 +1353,8 @@ class ProducerNewlineTests(unittest.TestCase):
 
 class SafetyTests(unittest.TestCase):
     def test_no_repository_content_reaches_a_shell(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 3, a declaration is data and no
+        # repository content reaches a shell.
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
         # WO-ECP-031 (SPEC-ECP-023 ECP-PRM-003): the launch lives in the one launcher, which fixes shell=False.
         launcher = (ROOT / "se_harness" / "_process.py").read_text(encoding="utf-8")
@@ -1441,6 +1423,8 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
         self.assertEqual(3, integrity.LOCK_SCHEMA)
 
     def test_preflight_diagnostic_codes_are_unchanged(self) -> None:
+        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 14, the assessment adds nothing to
+        # preflight's codes; the code is the registry's name (SPEC-ECP-023 ECP-PRM-016).
         source = (ROOT / "se_harness" / "preflight.py").read_text(encoding="utf-8")
         self.assertIn("PreflightDiagnostic(I001", source)  # the code is the registry's name (ECP-PRM-016)
         self.assertNotIn("hash-bound", source.split("def _hash_bound_checks")[0])

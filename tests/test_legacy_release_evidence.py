@@ -15,24 +15,15 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from tests.root_identity_support import load_module
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
-def load_module(name: str, path: Path):
-    specification = importlib.util.spec_from_file_location(name, path)
-    if specification is None or specification.loader is None:
-        raise RuntimeError(f"cannot load test module: {path}")
-    module = importlib.util.module_from_spec(specification)
-    sys.modules[name] = module
-    specification.loader.exec_module(module)
-    return module
-
-
 from se_harness.engine import validate_engineering_artifacts as CANDIDATE_VALIDATOR  # noqa: E402
 PUBLICATION = load_module(
-    "evidence_floor_publication",
     REPOSITORY_ROOT / ".github/scripts/publish_dashboard.py",
+    "evidence_floor_publication",
 )
 
 

@@ -126,7 +126,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_fresh_install_contains_managed_machine_contract(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary)
-            standard_repository(target, "Contract Fixture")
+            standard_repository(target)
             installed = target / "docs" / "engineering" / "WORKFLOW.json"
             expected_workflow = INSTALLED_CONTRACT.read_text(encoding="utf-8").encode("utf-8")
             expected_gates = INSTALLED_GATES.read_text(encoding="utf-8").encode("utf-8")
@@ -160,6 +160,8 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
                     self.assertNotIn(phrase, text.lower())
 
     def test_handoff_policy_separates_structured_authority_from_presentation(self) -> None:
+        # Cited pin (SPEC-TST-002 TST-HYG-012): SPEC-WEX-003 under REQ-WEX-011 fixes the
+        # handoff wording of the router, WORKFLOW.md and the two fragments asserted here.
         router = (STANDARD_ROOT / "ENGINEERING_HARNESS.md.tpl").read_text(encoding="utf-8")
         workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
         agents = (STANDARD_ROOT / "AGENTS.md.fragment").read_text(encoding="utf-8")
@@ -185,9 +187,6 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
 
         self.assertIn("schema-2 structured result as\nauthoritative", agents)
         self.assertIn("authoritative schema-2 result", claude)
-        for text in (router, workflow, agents, claude):
-            self.assertNotIn("block verbatim", text)
-            self.assertNotIn("restitution verbatim", text)
 
 
 if __name__ == "__main__":

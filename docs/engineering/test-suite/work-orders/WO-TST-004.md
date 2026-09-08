@@ -2,7 +2,7 @@
 id = "WO-TST-004"
 type = "work_order"
 title = "Wave 4: one run per test, shared support modules, one retired-surface table, cited pins"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -37,6 +37,20 @@ to = "approved"
 decided_at = "2026-09-08T12:53:14Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work. WO-TST-004 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions, after the wave 2 work orders and WO-TCM-011 merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T13:27:20Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner with the word 'start' (DR-WO-START), after PR #401 merged the approved packet to main at 13a70218. Start preflight and the start checkpoint passed at that commit with the released 0.16.0 evaluator. The owner starts before the wave 2 work orders (WO-ECP-031, WO-ECP-032, WO-ECP-033, PRs #398 to #400) and WO-TCM-011 merge, accepting the merge burden as the work order's Lifecycle section allows; those branches touch seven test modules and add two. Execution on branch wo/tst-004-test-suite-hygiene within the declared scope only."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T15:24:57Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented on 2026-09-08 by the accountable engineering owner by selecting the presented option 'Implemented, prepare the record (Recommended)' (DR-WO-COMPLETE), after the seven disclosures of the evidence packet were presented. Re-measured immediately before this transition at 9966a37a on wo/tst-004-test-suite-hygiene (main f8ccc5b1 merged in): released 0.16.0 evaluator validate 0 errors, 73 warnings (the main baseline), 0 advisories; doctor 0 FAIL; review preflight PASS; handoff check --from-git origin/main completed, retained as handoff.json. Windows suite: 1,054 tests discovered for 1,054 defined (main: 1,282 for 1,020), parallel 369 s and canonical serial 961 s, both with the failure set equal to this machine's two baseline names on main. Hosted lanes on PR #402 at 9966a37a: all 13 pass (the release-record rehearsal after a re-run of a 403 artifact-upload error); the Linux suite step 45 s against 51 s on main."
 +++
 
 # Work Order: Wave 4: one run per test, shared support modules, one retired-surface table, cited pins

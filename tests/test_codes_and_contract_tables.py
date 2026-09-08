@@ -25,8 +25,7 @@ from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.workflow_compliance import _aggregate
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPOSITORY_ROOT))
-from repository_tools.diagnostic_code_index import PREFIXES, _CODE, registry, scan  # noqa: E402
+from repository_tools.diagnostic_code_index import PREFIXES, _CODE, registry, scan
 
 #: The registry itself and the standard-library-only loader (SPEC-REB-015 rule 2) spell codes.
 EXEMPT_MODULES = {"codes.py", "interpreter_safety.py"}

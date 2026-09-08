@@ -13,36 +13,26 @@ from unittest import mock
 
 from se_harness.cli import main
 from se_harness.engine import validate_engineering_artifacts
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
+from tests.root_identity_support import load_module
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md"
 POLICY = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md"
 
 
-class ArtifactAuthoringPolicyTests(unittest.TestCase):
+class ArtifactAuthoringPolicyFixture:
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Authoring Fixture")
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        standard_repository(self.root)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         self.requirement = self.root / "docs/engineering/product/requirements/REQ-001.md"
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def set_front_matter(self, **fields: str) -> None:
         text = self.requirement.read_text(encoding="utf-8")
@@ -61,6 +51,8 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
 
     # ---------------------------------------------------------------- REQ-AUT-001
 
+
+class ArtifactAuthoringPolicyTests(ArtifactAuthoringPolicyFixture, unittest.TestCase):
     def test_policy_is_managed_routed_once_listed_and_printed_by_create_artifact(self) -> None:
         installed = self.root / "docs/engineering/ARTIFACT_AUTHORING.md"
         self.assertTrue(installed.is_file())
@@ -75,26 +67,26 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", REQUIRED_PATHS)
         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", POLICY_PATHS)
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-002"
         )
         self.assertEqual(0, code, error)
         self.assertIn("authoring checklist for requirement", output)
         self.assertIn("One obligation", output)
         self.assertIn("five shapes", output)
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-003", "--quiet"
         )
         self.assertEqual(0, code, error)
         self.assertNotIn("authoring checklist", output)
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "verification_record", "--id", "VREC-009"
         )
         self.assertEqual(0, code, error)
         self.assertNotIn("authoring checklist", output)
         # the checklist comes from the installed file, not package text
         installed.write_text(installed.read_text(encoding="utf-8").replace("- One obligation:", "- ONE OBLIGATION EDITED:"), encoding="utf-8")
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-004"
         )
         self.assertEqual(0, code, error)
@@ -181,11 +173,9 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.assertIn('verification_method = ["test"]', text)
         self.assertIn("| Trigger | Response | On failure |", text)
         self.assertIn("`GLOSSARY.md` at the repository", text)
-        self.assertNotIn("Open decisions", text)
-        self.assertNotIn("acceptance/", text)
         for field in ("priority = ", "source = ", "measure = "):
             self.assertIn(field, text)
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-005", "--quiet"
         )
         self.assertEqual(0, code, error)
@@ -238,17 +228,17 @@ if __name__ == "__main__":
         self.assertIn("\nAdvisories:\n", loud)
         self.assertIn("[W-AUT-002] [maintenance]", loud)
         self.assertIn("Planes:", quiet)
-        code, output, error = self.invoke("validate", str(self.root))
+        code, output, error = invoke("validate", str(self.root))
         self.assertIn(summary, output)
         self.assertNotIn("Advisories:\n", output)
-        code, output, error = self.invoke("validate", str(self.root), "--advisories")
+        code, output, error = invoke("validate", str(self.root), "--advisories")
         self.assertIn("\nAdvisories:\n", output)
         self.assertIn("[W-AUT-002]", output)
-        code, output, error = self.invoke("validate", str(self.root), "--json")
+        code, output, error = invoke("validate", str(self.root), "--json")
         self.assertEqual(payload["advisory_count"], json.loads(output)["advisory_count"])
 
 
-class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
+class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyFixture, unittest.TestCase):
     """Evidence for REQ-AUT-003 (built, not applied here) and REQ-AUT-005 (WO-AUT-002)."""
 
     def test_definition_gates_carry_the_authoring_predicate(self) -> None:
@@ -259,7 +249,7 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
         self.assertIn("QGP-G2-AUTHORING", [p["id"] for p in gates["QG-G2-ARCHITECTURE"]["predicates"]])
 
     def test_approval_is_refused_while_a_placeholder_or_an_open_decision_remains(self) -> None:
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-002", "--quiet"
         )
         self.assertEqual(0, code, error)
@@ -277,7 +267,7 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
             )
 
         def approve() -> tuple[int, str]:
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "transition", str(self.root), "--set", "REQ-002=approved", "--decision", "REQ-002=requirements-steward", "--apply"
             )
             return code, output + error
@@ -324,13 +314,7 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyTests):
         import sys
 
         script = REPOSITORY_ROOT / "scripts/migrate_verification_methods.py"
-        spec = importlib.util.spec_from_file_location("migrate_verification_methods", script)
-        module = importlib.util.module_from_spec(spec)
-        sys.dont_write_bytecode = True
-        try:
-            spec.loader.exec_module(module)
-        finally:
-            sys.dont_write_bytecode = False
+        module = load_module(script, "migrate_verification_methods")
         self.assertEqual(["test"], module.map_value("automated-test"))
         self.assertEqual(["test", "inspection"], module.map_value("automated-test-and-manual-review"))
         self.assertEqual(["analysis"], module.map_value("hosted-exact-recipe-replay"))

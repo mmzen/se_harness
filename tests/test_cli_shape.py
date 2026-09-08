@@ -18,8 +18,9 @@ from se_harness.cli import build_parser, main
 from se_harness.codes import MG005, WEX220
 from se_harness.release_qualification import failed_qualification
 from tests.fixture_support import standard_repository
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain
+from tests.cli_support import invoke
 
 #: ECP-CLI-001: the repository commands take the positional `target`; the
 #: non-repository commands take none (WO-ECP-030 retired rehearse-recovery and renumber-artifacts).
@@ -32,14 +33,6 @@ NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
 REPOSITORY_QUALIFY_ROLES = {"released-root", "complete-candidate", "public-install"}
 NON_REPOSITORY_QUALIFY_ROLES = {"candidate-package"}
 SCHEMA = "se-harness-command-result-v1"
-
-
-def invoke(*arguments: str) -> tuple[int, str, str]:
-    output = io.StringIO()
-    error = io.StringIO()
-    with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-        code = main(list(arguments))
-    return code, output.getvalue(), error.getvalue()
 
 
 def _subparsers(parser):
@@ -95,15 +88,12 @@ class ParserShapeTests(unittest.TestCase):
         choices = _subparsers(build_parser())
         self.assertIn("--owner", _options(choices["prepare-release"]))
         self.assertNotIn("--authorized-by", _options(choices["prepare-release"]))
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error), self.assertRaises(SystemExit) as raised:
-            main(["prepare-release", ".", "--id", "RLS-001", "--authorized-by", "release-owner"])
-        self.assertEqual(2, raised.exception.code)
-        self.assertEqual("", output.getvalue())
-        self.assertIn("harnessctl prepare-release: error:", error.getvalue())
-        self.assertIn("--owner", error.getvalue())
-        self.assertNotIn("was renamed", error.getvalue())
+        code, output, error = invoke("prepare-release", ".", "--id", "RLS-001", "--authorized-by", "release-owner")
+        self.assertEqual(2, code)
+        self.assertEqual("", output)
+        self.assertIn("harnessctl prepare-release: error:", error)
+        self.assertIn("--owner", error)
+        self.assertNotIn("was renamed", error)
 
 
 class RepositoryCommandShapeTests(unittest.TestCase):
@@ -111,10 +101,8 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Shape Fixture")
-        guard = mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=trusted_mutation_authority)
-        guard.start()
-        self.addCleanup(guard.stop)
+        standard_repository(self.root)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
 
     def json_of(self, *arguments: str) -> tuple[int, dict, str]:

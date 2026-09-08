@@ -12,49 +12,16 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from se_harness.installer import ENGINE_ROOT  # noqa: E402
 from tests.root_identity_support import root_copy  # noqa: E402
-
-from se_harness.engine.validate_engineering_artifacts import (  # noqa: E402
-    TAXONOMY_VERSION,
-    VALIDATION_PLANES,
-    Diagnostic,
-    ValidationReport,
-    render_human,
-    validate_repository,
-)
-
-
-def write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content.strip() + "\n", encoding="utf-8")
-
-
-def formal(
-    artifact_id: str,
-    artifact_type: str,
-    status: str,
-    relations: dict[str, list[str]],
-    *,
-    extra: str = "",
-) -> str:
-    relation_lines = "\n".join(
-        f"{name} = {json.dumps(targets)}" for name, targets in relations.items()
-    )
-    return f'''+++
-id = "{artifact_id}"
-type = "{artifact_type}"
-title = "{artifact_id}"
-status = "{status}"
-owners = ["owner"]
-created = "2026-08-15"
-updated = "2026-08-15"
-{extra.strip()}
-
-[relations]
-{relation_lines}
-+++
-
-# {artifact_id}
-'''
+from tests.root_identity_support import load_evaluator_module
+from tests.artifact_support import formal, write
+SCRIPTS = REPOSITORY_ROOT / "scripts"
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+TAXONOMY_VERSION = _validate_engineering_artifacts.TAXONOMY_VERSION
+VALIDATION_PLANES = _validate_engineering_artifacts.VALIDATION_PLANES
+Diagnostic = _validate_engineering_artifacts.Diagnostic
+ValidationReport = _validate_engineering_artifacts.ValidationReport
+render_human = _validate_engineering_artifacts.render_human
+validate_repository = _validate_engineering_artifacts.validate_repository
 
 
 class ValidationTaxonomyTests(unittest.TestCase):

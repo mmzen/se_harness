@@ -3,15 +3,15 @@ from __future__ import annotations
 import sys
 import unittest
 from pathlib import Path
+from tests.root_identity_support import load_evaluator_module
 
 
 ROOT = Path(__file__).resolve().parents[1]
-
-from se_harness.engine.validate_engineering_artifacts import (  # noqa: E402
-    Artifact,
-    validate_work_order_assurance,
-    work_order_assurance_state,
-)
+SCRIPTS = ROOT / "scripts"
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+Artifact = _validate_engineering_artifacts.Artifact
+validate_work_order_assurance = _validate_engineering_artifacts.validate_work_order_assurance
+work_order_assurance_state = _validate_engineering_artifacts.work_order_assurance_state
 
 
 MISSING = object()

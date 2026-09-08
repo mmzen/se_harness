@@ -12,8 +12,9 @@ from se_harness import preflight as preflight_module
 from se_harness.cli import main
 from se_harness.installer import plan_install, template_files, template_root
 from se_harness.preflight import render_preflight, run_preflight
-from tests.mutation_guard_support import trusted_mutation_authority
+from tests.mutation_guard_support import patch_mutation_authority
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -36,50 +37,20 @@ OWNER_CONTENT_CASES = (
 
 class RepositoryContextRetirementTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        self.guard.start()
-        self.addCleanup(self.guard.stop)
+        patch_mutation_authority(self)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            result = main(list(arguments))
-        return result, stdout.getvalue(), stderr.getvalue()
-
     def installed_target(self, name: str) -> Path:
         target = self.root / name
-        standard_repository(target, "Example")
+        standard_repository(target)
         return target
 
     def lock_bytes(self, target: Path) -> bytes:
         return (target / ".engineering-harness.lock").read_bytes()
-
-    def test_no_template_maps_to_the_retired_path_or_a_successor_scaffold(self) -> None:
-        seeds = [item for item in template_files() if item.mode == "seed"]
-        self.assertNotIn(RETIRED_PATH, [item.target.as_posix() for item in seeds])
-        self.assertNotIn(RETIRED_PATH, [item.target.as_posix() for item in template_files()])
-        for item in seeds:
-            text = item.source.read_text(encoding="utf-8")
-            for label in RETIRED_LABELS:
-                with self.subTest(seed=item.target.as_posix(), label=label):
-                    self.assertNotIn(f"- {label}:", text)
-        root = template_root()
-        self.assertEqual([], sorted(path.relative_to(root).as_posix() for path in root.rglob("*CONTEXT*")))
-
-    def test_fresh_installation_creates_no_file_and_no_lock_entry(self) -> None:
-        target = self.installed_target("fresh")
-        self.assertFalse((target / RETIRED_PATH).exists())
-        lock = json.loads(self.lock_bytes(target).decode("utf-8"))
-        self.assertNotIn(RETIRED_PATH, lock["files"])
 
     def test_start_preflight_is_ready_without_the_retired_family_or_path(self) -> None:
         target = self.installed_target("ready")
@@ -108,7 +79,7 @@ class RepositoryContextRetirementTests(unittest.TestCase):
                 (target / RETIRED_PATH).write_bytes(owner_bytes)
             lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-            code, output, error = self.invoke("upgrade", str(target), "--apply")
+            code, output, error = invoke("upgrade", str(target), "--apply")
             self.assertEqual(0, code, error)
             self.assertNotIn(RETIRED_PATH, output)
             regenerated = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -124,10 +95,10 @@ class RepositoryContextRetirementTests(unittest.TestCase):
 
     def test_repeated_upgrade_is_idempotent(self) -> None:
         target = self.installed_target("idempotent")
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
         first = self.lock_bytes(target)
         before = self.snapshot(target)
-        self.assertEqual(0, self.invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
         self.assertEqual(first, self.lock_bytes(target))
         self.assertEqual(before, self.snapshot(target))
 
@@ -137,10 +108,10 @@ class RepositoryContextRetirementTests(unittest.TestCase):
                 target = self.installed_target(f"owner-{name}")
                 owner_path = target / RETIRED_PATH
                 owner_path.write_bytes(content)
-                code, _, error = self.invoke("upgrade", str(target), "--apply")
+                code, _, error = invoke("upgrade", str(target), "--apply")
                 self.assertEqual(0, code, error)
                 self.assertEqual(content, owner_path.read_bytes())
-                code, output, _ = self.invoke("doctor", str(target))
+                code, output, _ = invoke("doctor", str(target))
                 self.assertEqual(0, code, output)
                 self.assertNotIn(RETIRED_PATH, output)
                 lock = json.loads(self.lock_bytes(target).decode("utf-8"))
@@ -196,7 +167,7 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         target = self.root / "guided"
         target.mkdir()
         (target / "pyproject.toml").write_text("[project]\nname = \"guided\"\n", encoding="utf-8")
-        code, _, error = self.invoke("init", str(target), "--project-name", "Example")
+        code, _, error = invoke("init", str(target), "--project-name", "Example")
         self.assertEqual(0, code, error)
         report = (target / "docs" / "engineering" / "ADOPTION_REPORT.md").read_text(encoding="utf-8")
         steps = [line for line in report.splitlines() if line[:3] in {"1. ", "2. ", "3. ", "4. ", "5. "}]

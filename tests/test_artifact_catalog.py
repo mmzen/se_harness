@@ -8,8 +8,11 @@ from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
-
-from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES  # noqa: E402
+from tests.root_identity_support import load_evaluator_module
+SCRIPTS = evaluator_scripts_dir()
+_artifact_layout_registry = load_evaluator_module("artifact_layout_registry")
+ARTIFACT_DIRECTORIES = _artifact_layout_registry.ARTIFACT_DIRECTORIES
+ARTIFACT_PREFIXES = _artifact_layout_registry.ARTIFACT_PREFIXES
 CATALOG_BEGIN = "<!-- artifact-catalog:begin -->"
 CATALOG_END = "<!-- artifact-catalog:end -->"
 CATALOG_COLUMNS = (

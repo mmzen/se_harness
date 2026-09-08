@@ -14,19 +14,22 @@ from unittest import mock
 
 from se_harness.cli import main
 from se_harness.engine import validate_engineering_artifacts
-from tests.mutation_guard_support import trusted_mutation_authority
-from tests.test_revision_provenance import create_base_chain, formal, write
+from tests.mutation_guard_support import patch_mutation_authority
+from tests.artifact_support import create_base_chain, formal, write
+from tests.cli_support import invoke
+from tests.root_identity_support import load_evaluator_module
+from tests.fixture_support import standard_repository
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_ROOT = REPOSITORY_ROOT / "templates/repository/standard"
 SEED = TEMPLATE_ROOT / "GLOSSARY.md.seed"
+INSPECT = REPOSITORY_ROOT / "se_harness/engine/inspect_engineering_artifacts.py"
+
 
 
 def load_inspect():
-    """The candidate inspector, imported (ECP-ENG-001) so its exception classes stay identical."""
-    from se_harness.engine import inspect_engineering_artifacts
-
-    return inspect_engineering_artifacts
+    """The candidate inspection script, loaded by path once so its exception classes stay identical."""
+    return load_evaluator_module("inspect_engineering_artifacts", directory=INSPECT.parent)
 
 
 class GlossaryTests(unittest.TestCase):
@@ -34,28 +37,15 @@ class GlossaryTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        code, _, error = self.invoke("init", str(self.root), "--project-name", "Ledger Service")
-        self.assertEqual(0, code, error)
+        standard_repository(self.root, "Ledger Service")
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["archive_name"] = f"se_harness-{lock['tool_version'].replace('-', '_')}-py3-none-any.whl"
         lock["evaluator"]["archive_sha256"] = "a" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        guard.start()
-        self.addCleanup(guard.stop)
+        patch_mutation_authority(self)
         create_base_chain(self.root, operating_contract_status="draft")
         self.glossary = self.root / "GLOSSARY.md"
-
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
 
     def write_corpus(self, *, ledger: int = 80, tally: int = 10, checkpoint: int = 80) -> None:
         body = "\n## Why\n\n" + " ".join(["The ledger keeps every posting."] * ledger) + "\n\n" + " ".join(["A tally is kept."] * tally) + "\n\n" + " ".join(["The checkpoint gate holds."] * checkpoint) + "\n"
@@ -88,10 +78,10 @@ class GlossaryTests(unittest.TestCase):
         edited = self.glossary.read_text(encoding="utf-8").replace("## Terms\n", "## Terms\n\n**Posting.** One movement of value on the ledger.\n")
         self.glossary.write_text(edited, encoding="utf-8")
         before = self.glossary.read_bytes()
-        code, output, error = self.invoke("upgrade", str(self.root), "--apply")
+        code, output, error = invoke("upgrade", str(self.root), "--apply")
         self.assertEqual(0, code, error + output)
         self.assertEqual(before, self.glossary.read_bytes())
-        code, output, error = self.invoke("doctor", str(self.root))
+        code, output, error = invoke("doctor", str(self.root))
         self.assertEqual(0, code, error + output)
         self.assertNotIn("glossary.md: FAIL", output)
 
@@ -100,7 +90,7 @@ class GlossaryTests(unittest.TestCase):
             target = Path(temporary)
             (target / "README.md").write_text("# existing\n", encoding="utf-8")
             (target / "GLOSSARY.md").write_text("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", encoding="utf-8")
-            code, output, error = self.invoke("init", str(target), "--project-name", "Adopted")
+            code, output, error = invoke("init", str(target), "--project-name", "Adopted")
             self.assertEqual(0, code, error + output)
             self.assertEqual("# Ours\n\n## Terms\n\n**Posting.** Ours.\n", (target / "GLOSSARY.md").read_text(encoding="utf-8"))
 
@@ -144,16 +134,16 @@ class GlossaryTests(unittest.TestCase):
 
     def test_inspect_carries_the_vocabulary_section_in_json_and_text(self) -> None:
         self.write_corpus()
-        code, output, error = self.invoke("inspect", str(self.root), "--json")
+        code, output, error = invoke("inspect", str(self.root), "--json")
         self.assertEqual(0, code, error)
         report = json.loads(output)
         self.assertEqual("derived", report["vocabulary"]["authority"])
         self.assertIn("ledger", [item["term"] for item in report["vocabulary"]["undefined_frequent_terms"]])
-        code, output, error = self.invoke("inspect", str(self.root), "--vocabulary-threshold", "30")
+        code, output, error = invoke("inspect", str(self.root), "--vocabulary-threshold", "30")
         self.assertEqual(0, code, error)
         self.assertIn("Vocabulary (derived, informational):", output)
         self.assertIn("ledger (", output)
-        code, output, error = self.invoke("inspect", str(self.root), "--vocabulary-threshold", "5")
+        code, output, error = invoke("inspect", str(self.root), "--vocabulary-threshold", "5")
         self.assertEqual(2, code)
         self.assertIn("vocabulary threshold must be between 30 and 100", error)
 

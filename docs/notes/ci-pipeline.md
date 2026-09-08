@@ -242,6 +242,34 @@ qualification (and the rehearsal's candidate mode on every pull request)
 runs the 1,000-artifact scale size; its suite step stays the canonical
 serial command.
 
+### After `WO-TST-004`
+
+Wave 4 of the code health assessment of 2026-09-07 (issue #379). Every
+defined test runs once: mixins replace the six test-carrying base classes
+whose subclasses re-ran their tests. Five support modules replace the copied
+helpers (`cli_support`, `git_support`, `artifact_support`, the mutation
+authority patch, the module loader), `tests/test_retired_surface.py` holds
+every tombstone, un-cited prose pins on the notes became structural checks,
+fixtures share one cached project name, and the hosted lane restores the
+runner's timings from the previous run (`actions/cache`, one key per run id)
+so classes are scheduled longest-first there too. Measured 2026-09-08 on the
+workstation (twelve CPUs), `wo/tst-004-test-suite-hygiene` after the wave 2
+merge, against `main`:
+
+| Run | Wall | Verdict |
+| --- | ---: | --- |
+| loader count, `main` at `13a70218` | | 1,282 discovered for 1,020 defined: 262 inherited re-runs |
+| loader count, candidate | | 1,054 discovered for 1,054 defined; no class carrying tests is subclassed |
+| `python scripts/run_tests.py` (8 workers), `main` at `50f9cda5` | 409 s | 1,282 tests; the two Windows baseline names |
+| `python scripts/run_tests.py` (8 workers), candidate | 369 s | 1,054 tests, 22 skips; the same two names |
+| `python -m unittest discover` (canonical serial), candidate | 961 s | the same verdict |
+| hosted `candidate-source` suite step, `main` at `4dc59d0a` (`--timings ""`) | 51 s | success |
+| hosted `candidate-source` suite step, candidate (timings restored) | 45 s (run 34242510375, 15:05:46 to 15:06:31; the first run finds no cached timings and seeds the cache for the next) | success |
+
+Four modules that imported the engine by bare name after another module had
+put `se_harness/engine` on `sys.path` now load it through
+`tests/root_identity_support.py`, so each runs alone as well as in the suite.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the

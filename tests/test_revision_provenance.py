@@ -15,17 +15,40 @@ from unittest import mock
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
+SCRIPTS = evaluator_scripts_dir()
+from tests.root_identity_support import load_evaluator_module
+_generate_harness_dashboard = load_evaluator_module("generate_harness_dashboard")
+build_dashboard_bundle = _generate_harness_dashboard.build_dashboard_bundle
+generate_snapshot = _generate_harness_dashboard.generate_snapshot
+_inspect_engineering_artifacts = load_evaluator_module("inspect_engineering_artifacts")
+build_inspection = _inspect_engineering_artifacts.build_inspection
+_validate_engineering_artifacts = load_evaluator_module("validate_engineering_artifacts")
+evidence_work_order_keys = _validate_engineering_artifacts.evidence_work_order_keys
+validate_repository = _validate_engineering_artifacts.validate_repository
+from tests.mutation_guard_support import patch_mutation_authority  # noqa: E402
 
-from se_harness.engine.generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
-from se_harness.engine.inspect_engineering_artifacts import build_inspection  # noqa: E402
-from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
-from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
-
-from se_harness.installer import ENGINE_ROOT
 from se_harness.cli import main  # noqa: E402
-from se_harness.engine import validate_engineering_artifacts  # noqa: E402
-from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys as _evidence_work_order_keys  # noqa: E402
+from se_harness.engine import validate_engineering_artifacts
+_evidence_work_order_keys = evidence_work_order_keys  # one function serves the validator and provenance (ECP-ENG-008)
 from tests.fixture_support import standard_repository
+from tests.artifact_support import (
+    RELEASED_EVALUATOR_EVIDENCE,
+    RELEASED_EVALUATOR_EVIDENCE_BYTES,
+    RELEASED_EVALUATOR_EVIDENCE_PATH,
+    RELEASED_EVALUATOR_EVIDENCE_SHA256,
+    aggregate_release_record,
+    aggregate_verification_record,
+    create_additional_chain,
+    create_base_chain,
+    formal,
+    release_record,
+    superseded_record,
+    verification_record,
+    write,
+    write_revision_policy,
+)
+from tests.cli_support import invoke
+from tests.git_support import git
 
 
 EVIDENCE_KEY_CASES = (
@@ -48,264 +71,6 @@ EVIDENCE_KEY_CASES = (
     ),
     ("reports/WO-ABC-001.md", ("WO-ABC-001",)),
 )
-
-RELEASED_EVALUATOR_EVIDENCE_PATH = (
-    "docs/engineering/product/evidence/released-evaluator.json"
-)
-RELEASED_EVALUATOR_EVIDENCE = {
-    "schema": "se-harness-evaluator-evidence-v1",
-    "role": "released-evaluator",
-    "evaluator": {
-        "version": "0.6.0",
-        "payload_manifest": "se-harness-installed-payload-v1",
-        "payload_sha256": "a" * 64,
-        "archive_name": "se_harness-0.6.0-py3-none-any.whl",
-        "archive_sha256": "b" * 64,
-    },
-    "origins": {
-        "python_executable": "<evaluator-root>/bin/python",
-        "module": "<evaluator-root>/lib/se_harness/runtime_identity.py",
-        "distribution": "<evaluator-root>/lib/site-packages",
-        "templates": "<evaluator-root>/share/se-harness/templates/repository/standard",
-        "entry_point": "<evaluator-root>/bin/harnessctl",
-    },
-    "environment": {
-        "isolated_python": True,
-        "user_site_enabled": False,
-        "pythonpath_present": False,
-        "entry_point_resolved": True,
-        "checkout_excluded": True,
-    },
-    "diagnostics": [],
-}
-RELEASED_EVALUATOR_EVIDENCE_BYTES = (
-    json.dumps(
-        RELEASED_EVALUATOR_EVIDENCE,
-        ensure_ascii=True,
-        separators=(",", ":"),
-        sort_keys=True,
-    )
-    + "\n"
-).encode("utf-8")
-RELEASED_EVALUATOR_EVIDENCE_SHA256 = hashlib.sha256(
-    RELEASED_EVALUATOR_EVIDENCE_BYTES
-).hexdigest()
-
-
-def write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content.strip() + "\n", encoding="utf-8")
-
-
-def write_revision_policy(root: Path, *, required_for_verified_work: bool) -> None:
-    write(
-        root / ".engineering-harness.toml",
-        f'''[revision_provenance]
-required_for_verified_work = {str(required_for_verified_work).lower()}
-required_for_release = false''',
-    )
-
-
-def formal(
-    artifact_id: str,
-    artifact_type: str,
-    status: str,
-    relations: dict[str, list[str]],
-    extra: str = "",
-) -> str:
-    relation_lines = "\n".join(
-        f"{name} = [{', '.join(json.dumps(item) for item in targets)}]"
-        for name, targets in relations.items()
-    )
-    return f'''+++
-id = "{artifact_id}"
-type = "{artifact_type}"
-title = "{artifact_id}"
-status = "{status}"
-owners = ["owner"]
-created = "2026-08-11"
-updated = "2026-08-11"
-{extra.strip()}
-
-[relations]
-{relation_lines}
-+++
-
-# {artifact_id}
-'''
-
-
-def create_base_chain(
-    root: Path,
-    *,
-    work_order_status: str = "implemented",
-    operating_contract_status: str = "approved",
-) -> None:
-    base = root / "docs/engineering/product"
-    write(base / "intent/INT-001.md", formal("INT-001", "intent", "approved", {}))
-    write(base / "capabilities/CAP-001.md", formal("CAP-001", "capability", "approved", {"derives_from": ["INT-001"]}))
-    write(
-        base / "requirements/REQ-001.md",
-        formal(
-            "REQ-001",
-            "requirement",
-            "implemented",
-            {"derives_from": ["CAP-001"]},
-            'statement = "THE SYSTEM SHALL retain revision provenance."\nverification_method = "automated-test"',
-        ),
-    )
-    write(base / "specifications/SPEC-001.md", formal("SPEC-001", "specification", "implemented", {"specifies": ["REQ-001"]}))
-    write(base / "architecture/ARCH-001.md", formal("ARCH-001", "architecture", "implemented", {"constrains": ["REQ-001"]}))
-    write(base / "architecture/adr/ADR-001.md", formal("ADR-001", "adr", "approved", {"decides": ["ARCH-001"]}))
-    write(base / "verification/VER-001.md", formal("VER-001", "verification", "approved", {"verifies": ["REQ-001"]}))
-    write(
-        base / "work-orders/WO-001.md",
-        formal(
-            "WO-001",
-            "work_order",
-            work_order_status,
-            {
-                "implements": ["REQ-001"],
-                "specifications": ["SPEC-001"],
-                "architecture": ["ARCH-001", "ADR-001"],
-                "verification": ["VER-001"],
-            },
-        ),
-    )
-    write(base / "release/REL-001.md", formal("REL-001", "release_contract", "approved", {"gates": ["WO-001"]}))
-    write(
-        base / "operations/OPS-001.md",
-        formal(
-            "OPS-001",
-            "operating_contract",
-            operating_contract_status,
-            {"assures": ["REQ-001"]},
-        ),
-    )
-    write(base / "evidence/WO-001-verification.md", "# Evidence\n\nCandidate checks passed.")
-    evaluator_evidence_path = root / RELEASED_EVALUATOR_EVIDENCE_PATH
-    evaluator_evidence_path.parent.mkdir(parents=True, exist_ok=True)
-    evaluator_evidence_path.write_bytes(RELEASED_EVALUATOR_EVIDENCE_BYTES)
-
-
-def create_additional_chain(root: Path, *, work_order_status: str = "implemented") -> None:
-    base = root / "docs/engineering/product"
-    write(
-        base / "requirements/REQ-002.md",
-        formal(
-            "REQ-002",
-            "requirement",
-            "implemented",
-            {"derives_from": ["CAP-001"]},
-            'statement = "THE SYSTEM SHALL retain aggregate release scope."\nverification_method = "automated-test"',
-        ),
-    )
-    write(base / "specifications/SPEC-002.md", formal("SPEC-002", "specification", "implemented", {"specifies": ["REQ-002"]}))
-    write(base / "architecture/ARCH-002.md", formal("ARCH-002", "architecture", "implemented", {"constrains": ["REQ-002"]}))
-    write(base / "architecture/adr/ADR-002.md", formal("ADR-002", "adr", "approved", {"decides": ["ARCH-002"]}))
-    write(base / "verification/VER-002.md", formal("VER-002", "verification", "approved", {"verifies": ["REQ-002"]}))
-    write(
-        base / "work-orders/WO-002.md",
-        formal(
-            "WO-002",
-            "work_order",
-            work_order_status,
-            {
-                "implements": ["REQ-002"],
-                "specifications": ["SPEC-002"],
-                "architecture": ["ARCH-002", "ADR-002"],
-                "verification": ["VER-002"],
-            },
-        ),
-    )
-    write(base / "release/REL-001.md", formal("REL-001", "release_contract", "approved", {"gates": ["WO-001", "WO-002"]}))
-    write(base / "evidence/WO-002-verification.md", "# Evidence\n\nAggregate candidate checks passed.")
-
-
-def verification_record(commit: str, object_format: str = "sha1", *, status: str = "verified", evidence: str = "docs/engineering/product/evidence/WO-001-verification.md") -> str:
-    return formal(
-        "VREC-001",
-        "verification_record",
-        status,
-        {"verifies_work_order": ["WO-001"], "conforms_to": ["VER-001"]},
-        f'''commit = "{commit}"
-git_object_format = "{object_format}"
-worktree_state = "clean"
-verified_at = "2026-08-11T12:00:00Z"
-artifact_snapshot_sha256 = "{'c' * 64}"
-evidence_paths = ["{evidence}"]''',
-    )
-
-
-def release_record(commit: str, object_format: str = "sha1", *, record_id: str = "RLS-001", version: str = "1.0.0", status: str = "released") -> str:
-    return formal(
-        record_id,
-        "release_record",
-        status,
-        {
-            "satisfies": ["REL-001"],
-            "includes_verification": ["VREC-001"],
-            "releases_work": ["WO-001"],
-        },
-        f'''version = "{version}"
-commit = "{commit}"
-git_object_format = "{object_format}"
-released_at = "2026-08-11T14:00:00Z"
-authorized_by = "release-owner"
-tag = "v{version}"
-evaluator_evidence_path = "{RELEASED_EVALUATOR_EVIDENCE_PATH}"
-evaluator_evidence_sha256 = "{RELEASED_EVALUATOR_EVIDENCE_SHA256}"''',
-    ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
-
-
-def aggregate_verification_record(commit: str, *, status: str = "verified") -> str:
-    return formal(
-        "VREC-002",
-        "verification_record",
-        status,
-        {"verifies_work_order": ["WO-001", "WO-002"], "conforms_to": ["VER-001", "VER-002"]},
-        f'''commit = "{commit}"
-git_object_format = "sha1"
-worktree_state = "clean"
-verified_at = "2026-08-11T12:00:00Z"
-artifact_snapshot_sha256 = "{'d' * 64}"
-evidence_paths = ["docs/engineering/product/evidence/WO-001-verification.md", "docs/engineering/product/evidence/WO-002-verification.md"]''',
-    )
-
-
-def aggregate_release_record(commit: str, *, status: str = "released") -> str:
-    return formal(
-        "RLS-002",
-        "release_record",
-        status,
-        {
-            "satisfies": ["REL-001"],
-            "includes_verification": ["VREC-002"],
-            "releases_work": ["WO-001", "WO-002"],
-        },
-        f'''version = "2.0.0"
-commit = "{commit}"
-git_object_format = "sha1"
-released_at = "2026-08-11T14:00:00Z"
-authorized_by = "release-owner"
-tag = "v2.0.0"
-evaluator_evidence_path = "{RELEASED_EVALUATOR_EVIDENCE_PATH}"
-evaluator_evidence_sha256 = "{RELEASED_EVALUATOR_EVIDENCE_SHA256}"''',
-    ).replace('owners = ["owner"]', 'owners = ["release-owner"]')
-
-
-def superseded_record(record: str, successor_id: str) -> str:
-    lines = record.splitlines()
-    lines = ['status = "superseded"' if line.startswith("status = ") else line for line in lines]
-    relation_index = lines.index("[relations]")
-    lines[relation_index:relation_index] = [
-        'superseded_at = "2026-08-11T15:00:00Z"',
-        'supersession_authorized_by = "quality-owner"',
-        "",
-    ]
-    closing_index = lines.index("+++", relation_index)
-    lines[closing_index:closing_index] = [f'superseded_by = ["{successor_id}"]']
-    return "\n".join(lines) + "\n"
 
 
 class EvidenceKeyContractTests(unittest.TestCase):
@@ -535,16 +300,16 @@ class RevisionValidatorTests(unittest.TestCase):
         self.assertEqual("a" * 40, vrec["commit"])
 
     def test_dashboard_reports_exact_and_different_checkout_states(self) -> None:
-        subprocess.run(["git", "init", "-b", "main", str(self.root)], check=True, capture_output=True)
-        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", "."], check=True, capture_output=True)
-        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "candidate"], check=True, capture_output=True)
-        candidate = subprocess.run(["git", "-C", str(self.root), "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip()
+        git(self.root, "init", "-b", "main")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "candidate")
+        candidate = git(self.root, "rev-parse", "HEAD")
         write(self.root / "docs/engineering/product/verification-records/VREC-001.md", verification_record(candidate))
         snapshot, _, _ = generate_snapshot(self.root)
         self.assertEqual("exact", snapshot["revision_provenance"][0]["match_state"])
         self.assertTrue(snapshot["revision_provenance"][0]["commit_available"])
-        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", "."], check=True, capture_output=True)
-        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "governance"], check=True, capture_output=True)
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "governance")
         snapshot, _, _ = generate_snapshot(self.root)
         self.assertEqual("different", snapshot["revision_provenance"][0]["match_state"])
         self.assertIn("I-REV-001", {item["rule"] for item in snapshot["findings"]})
@@ -726,37 +491,15 @@ class RevisionValidatorTests(unittest.TestCase):
 
 class RevisionCliTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        self.guard.start()
-        self.addCleanup(self.guard.stop)
+        patch_mutation_authority(self)
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name) / "repository"
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
 
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        stdout = io.StringIO()
-        stderr = io.StringIO()
-        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
-            code = main(list(arguments))
-        return code, stdout.getvalue(), stderr.getvalue()
-
-    def git(self, *arguments: str) -> str:
-        completed = subprocess.run(
-            ["git", "-C", str(self.root), *arguments],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(0, completed.returncode, completed.stderr)
-        return completed.stdout.strip()
-
     def initialize_candidate(self, *, aggregate: bool = False) -> str:
-        standard_repository(self.root, "Revision Sample")
+        standard_repository(self.root)
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         evaluator = lock["evaluator"]
@@ -766,14 +509,14 @@ class RevisionCliTests(unittest.TestCase):
         create_base_chain(self.root, operating_contract_status="draft")
         if aggregate:
             create_additional_chain(self.root)
-        self.git("init", "-b", "main")
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", ".")
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "candidate")
-        return self.git("rev-parse", "HEAD")
+        git(self.root, "init", "-b", "main")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "candidate")
+        return git(self.root, "rev-parse", "HEAD")
 
     def test_capture_and_prepare_bind_candidate_without_commits_or_tags(self) -> None:
         candidate = self.initialize_candidate()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -788,11 +531,11 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('status = "ready"', vrec_path.read_text(encoding="utf-8"))
         self.assertIn('prepared_by = "quality-owner"', vrec_path.read_text(encoding="utf-8"))
         self.assertNotIn("verified_at =", vrec_path.read_text(encoding="utf-8"))
-        self.assertEqual(candidate, self.git("rev-parse", "HEAD"))
-        self.assertEqual("", self.git("tag", "--list"))
+        self.assertEqual(candidate, git(self.root, "rev-parse", "HEAD"))
+        self.assertEqual("", git(self.root, "tag", "--list"))
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "transition", str(self.root),
             "--set", "VREC-001=verified",
             "--decision", "VREC-001=quality-owner",
@@ -802,16 +545,16 @@ class RevisionCliTests(unittest.TestCase):
 
         evaluator_evidence = self.root / "docs/engineering/product/evidence/VREC-001-evaluator.json"
         self.assertTrue(evaluator_evidence.is_file())
-        self.git(
+        git(self.root, 
             "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
             "add", str(vrec_path), str(evaluator_evidence),
         )
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
-        governance = self.git("rev-parse", "HEAD")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
+        governance = git(self.root, "rev-parse", "HEAD")
         self.assertNotEqual(candidate, governance)
         lock_before_release = (self.root / ".engineering-harness.lock").read_bytes()
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-001",
@@ -832,8 +575,8 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('prepared_by = "release-owner"', release_text)
         self.assertNotIn("released_at =", release_text)
         self.assertNotIn("authorized_by =", release_text)
-        self.assertEqual(governance, self.git("rev-parse", "HEAD"))
-        self.assertEqual("", self.git("tag", "--list"))
+        self.assertEqual(governance, git(self.root, "rev-parse", "HEAD"))
+        self.assertEqual("", git(self.root, "tag", "--list"))
         self.assertEqual(lock_before_release, (self.root / ".engineering-harness.lock").read_bytes())
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
@@ -903,7 +646,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def test_installed_validator_rejects_modified_evaluator_evidence(self) -> None:
         self.initialize_candidate()
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -944,7 +687,7 @@ class RevisionCliTests(unittest.TestCase):
     def test_explicit_domain_and_output_precedence_are_deterministic(self) -> None:
         self.initialize_candidate()
         explicit_output = "docs/engineering/governance/VREC-001.md"
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -961,7 +704,7 @@ class RevisionCliTests(unittest.TestCase):
 
         (self.root / explicit_output).unlink()
         (self.root / "docs/engineering/assurance/evidence/VREC-001-evaluator.json").unlink()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -976,7 +719,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / explicit_output).exists())
 
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -993,10 +736,10 @@ class RevisionCliTests(unittest.TestCase):
         source = self.root / "docs/engineering/product/work-orders/WO-002.md"
         destination = self.root / "docs/engineering/billing/work-orders/WO-002.md"
         destination.parent.mkdir(parents=True)
-        self.git("mv", str(source), str(destination))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "place second work order in billing")
+        git(self.root, "mv", str(source), str(destination))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "place second work order in billing")
 
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1016,7 +759,7 @@ class RevisionCliTests(unittest.TestCase):
     def test_capture_fails_for_dirty_worktree_without_output(self) -> None:
         self.initialize_candidate()
         (self.root / "dirty.txt").write_text("dirty\n", encoding="utf-8")
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -1035,7 +778,7 @@ class RevisionCliTests(unittest.TestCase):
 
         self.initialize_candidate()
         with mock.patch("se_harness.provenance._generate_snapshot", side_effect=EvidenceRefusal("dashboard generation must pass before recording verification")):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "capture-verification", str(self.root), "--id", "VREC-002",
                 "--work-order", "WO-001", "--verification", "VER-001",
                 "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
@@ -1059,9 +802,9 @@ class RevisionCliTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(path))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "approved work only")
-        code, output, error = self.invoke(
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(path))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "approved work only")
+        code, output, error = invoke(
             "capture-verification", str(self.root),
             "--id", "VREC-001",
             "--work-order", "WO-001",
@@ -1076,12 +819,12 @@ class RevisionCliTests(unittest.TestCase):
         self.initialize_candidate(aggregate=True)
         directory_evidence = "docs/engineering/product/evidence/WO-002/check.md"
         (self.root / directory_evidence).parent.mkdir(parents=True)
-        self.git(
+        git(self.root, 
             "mv",
             "docs/engineering/product/evidence/WO-002-verification.md",
             directory_evidence,
         )
-        self.git(
+        git(self.root, 
             "-c",
             "user.name=Harness Test",
             "-c",
@@ -1090,8 +833,8 @@ class RevisionCliTests(unittest.TestCase):
             "-m",
             "organize evidence by work order",
         )
-        candidate = self.git("rev-parse", "HEAD")
-        code, output, error = self.invoke(
+        candidate = git(self.root, "rev-parse", "HEAD")
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1112,7 +855,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn(directory_evidence, vrec)
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "transition", str(self.root),
             "--set", "VREC-002=verified",
             "--decision", "VREC-002=quality-owner",
@@ -1122,14 +865,14 @@ class RevisionCliTests(unittest.TestCase):
 
         evaluator_evidence = self.root / "docs/engineering/product/evidence/VREC-002-evaluator.json"
         self.assertTrue(evaluator_evidence.is_file())
-        self.git(
+        git(self.root, 
             "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
             "add", str(vrec_path), str(evaluator_evidence),
         )
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "aggregate verification governance")
-        governance = self.git("rev-parse", "HEAD")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "aggregate verification governance")
+        governance = git(self.root, "rev-parse", "HEAD")
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1146,17 +889,17 @@ class RevisionCliTests(unittest.TestCase):
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', release)
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
-        self.assertEqual(governance, self.git("rev-parse", "HEAD"))
-        self.assertEqual("", self.git("tag", "--list"))
+        self.assertEqual(governance, git(self.root, "rev-parse", "HEAD"))
+        self.assertEqual("", git(self.root, "tag", "--list"))
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_prepare_release_remains_format_neutral(self) -> None:
         candidate = self.initialize_candidate()
         record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         write(record_path, verification_record(candidate))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
-        code, _, error = self.invoke(
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
+        code, _, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1185,7 +928,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def test_aggregate_capture_rejects_duplicate_and_incomplete_scope(self) -> None:
         self.initialize_candidate(aggregate=True)
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1198,7 +941,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn("duplicate", output)
         self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-002",
@@ -1225,10 +968,10 @@ class RevisionCliTests(unittest.TestCase):
         second_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
         write(first_path, first)
         write(second_path, second)
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
 
-        code, _, error = self.invoke(
+        code, _, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1258,10 +1001,10 @@ class RevisionCliTests(unittest.TestCase):
             .replace("VER-001", "VER-002")
         )
         write(second_path, second)
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "mixed verification governance")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "mixed verification governance")
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1284,18 +1027,18 @@ class RevisionCliTests(unittest.TestCase):
         successor_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
         write(source_path, superseded_record(verification_record(candidate), "VREC-002"))
         write(successor_path, aggregate_verification_record(candidate))
-        self.git(
+        git(self.root, 
             "-c", "user.name=Harness Test",
             "-c", "user.email=harness@example.invalid",
             "add", str(source_path), str(successor_path),
         )
-        self.git(
+        git(self.root, 
             "-c", "user.name=Harness Test",
             "-c", "user.email=harness@example.invalid",
             "commit", "-m", "verification supersession governance",
         )
 
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "prepare-release",
             str(self.root),
             "--id", "RLS-002",
@@ -1314,9 +1057,9 @@ class RevisionCliTests(unittest.TestCase):
         candidate = self.initialize_candidate()
         record_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         write(record_path, verification_record(candidate, status="ready"))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
-        self.git("-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "ready verification candidate")
-        code, output, error = self.invoke(
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(record_path))
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "ready verification candidate")
+        code, output, error = invoke(
             "prepare-release", str(self.root),
             "--id", "RLS-002",
             "--release-contract", "REL-001",
@@ -1333,7 +1076,7 @@ class RevisionCliTests(unittest.TestCase):
         self.initialize_candidate()
         output = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         write(output, "repository owned")
-        code, stdout, error = self.invoke(
+        code, stdout, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",
@@ -1347,12 +1090,12 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual("repository owned\n", output.read_text(encoding="utf-8"))
 
     def test_capture_fails_when_repository_has_no_head(self) -> None:
-        standard_repository(self.root, "No Head")
+        standard_repository(self.root)
         create_base_chain(self.root, operating_contract_status="draft")
-        self.git("init", "-b", "main")
+        git(self.root, "init", "-b", "main")
         info_exclude = self.root / ".git/info/exclude"
         info_exclude.write_text("*\n", encoding="utf-8")
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "capture-verification",
             str(self.root),
             "--id", "VREC-001",

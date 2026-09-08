@@ -1,0 +1,387 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "341d8fc31fb22d809b71fd5083bc2273984ed5147ef560004345423d88affc06",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-TST-004 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-TST-004:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-TST-004 declares 10 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 63 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-TST-004:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/test-suite/evidence/WO-TST-004/WO-TST-004-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-TST-004"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-TST-004.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 73
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-TST-004",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-TST-004",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-TST-004",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-TST-004",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-TST-004."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-TST-004",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-TST-004 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-TST-004 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-TST-004 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-TST-004 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-TST-004",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-TST-004."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "deaa4340332c17e5487e508cb39fb4eb451df03b8641e11687296bcaf8621a8a",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/test-suite/evidence/WO-TST-004/handoff.json",
+      "docs/engineering/test-suite/evidence/WO-TST-004/WO-TST-004-handoff.md",
+      "docs/engineering/test-suite/README.md",
+      "docs/engineering/test-suite/work-orders/WO-TST-004.md",
+      "docs/notes/ci-pipeline.md",
+      "tests/artifact_support.py",
+      "tests/cli_support.py",
+      "tests/fixture_support.py",
+      "tests/git_support.py",
+      "tests/mutation_guard_support.py",
+      "tests/root_identity_support.py",
+      "tests/test_adr_applicability.py",
+      "tests/test_agentic_execution.py",
+      "tests/test_architecture_traceability.py",
+      "tests/test_artifact_authoring.py",
+      "tests/test_artifact_authoring_policy.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_ci_pipeline.py",
+      "tests/test_cli_shape.py",
+      "tests/test_codes_and_contract_tables.py",
+      "tests/test_configuration_surface.py",
+      "tests/test_context_routing_retirement.py",
+      "tests/test_dashboard_publication.py",
+      "tests/test_dashboard_webui.py",
+      "tests/test_decision_management.py",
+      "tests/test_delegation_class.py",
+      "tests/test_fixture_support.py",
+      "tests/test_glossary.py",
+      "tests/test_governor_transition.py",
+      "tests/test_harnessctl.py",
+      "tests/test_hash_bound_integrity.py",
+      "tests/test_inspection.py",
+      "tests/test_instruction_architecture.py",
+      "tests/test_integration_package.py",
+      "tests/test_interpreter_safety.py",
+      "tests/test_legacy_release_evidence.py",
+      "tests/test_lifecycle_state_contract.py",
+      "tests/test_maintenance_branch.py",
+      "tests/test_operating_contract_readiness.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_progressive_documentation.py",
+      "tests/test_public_onboarding.py",
+      "tests/test_reader_first_capabilities.py",
+      "tests/test_reader_first_intents.py",
+      "tests/test_reader_first_requirements.py",
+      "tests/test_reader_first_specifications.py",
+      "tests/test_release_build.py",
+      "tests/test_release_orchestration.py",
+      "tests/test_release_unit.py",
+      "tests/test_repository_context_retirement.py",
+      "tests/test_retired_surface.py",
+      "tests/test_revision_provenance.py",
+      "tests/test_risk_management.py",
+      "tests/test_run_tests.py",
+      "tests/test_standard_repository_lifecycle.py",
+      "tests/test_suite_hygiene.py",
+      "tests/test_upgrade_rehearsal.py",
+      "tests/test_validation_taxonomy.py",
+      "tests/test_work_order_assurance.py",
+      "tests/test_workflow_compliance.py",
+      "tests/test_workflow_documentation_contract.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "declared_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/test-suite/evidence/",
+      "docs/engineering/test-suite/README.md",
+      "docs/engineering/test-suite/requirements/REQ-TST-004.md",
+      "docs/engineering/test-suite/specifications/SPEC-TST-002.md",
+      "docs/engineering/test-suite/verification-records/",
+      "docs/engineering/test-suite/verification/VER-TST-002.md",
+      "docs/engineering/test-suite/work-orders/WO-TST-004.md",
+      "docs/notes/ci-pipeline.md",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-TST-001",
+      "INT-TST-001",
+      "REQ-TST-004",
+      "SPEC-TST-002",
+      "VER-TST-002"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-TST-004"
+    ],
+    "primary": "WO-TST-004"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-TST-004",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-TST-004",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

@@ -14,7 +14,6 @@ from se_harness.workflow_procedures import resolve_procedure
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_ROUTER = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "ENGINEERING_HARNESS.md.tpl"
 PACKAGED_FRAGMENT = REPOSITORY_ROOT / "templates" / "repository" / "standard" / "AGENTS.md.fragment"
-RETIRED_PATH = "docs/engineering/REPOSITORY_CONTEXT.md"
 RETIRED_ACTION_PREFIX = "CTX-ACT-"
 BASELINE_RULE_IDS = ("HRN-001", "HRN-002", "HRN-003", "HRN-004", "HRN-005", "HRN-006", "HRN-007", "HRN-008")
 BASELINE_ROUTING_ROWS = (
@@ -209,25 +208,6 @@ class ContextRoutingRetirementTests(unittest.TestCase):
                 for step in first["steps"]:
                     if step.get("kind") == "reference":
                         self.assertEqual({"id", "kind", "procedure_id"}, set(step) & {"id", "kind", "procedure_id", "action_id"})
-
-    def test_no_product_code_path_reads_the_retired_path(self) -> None:
-        for source in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            with self.subTest(module=source.name):
-                text = source.read_text(encoding="utf-8")
-                self.assertNotIn("REPOSITORY_CONTEXT", text)
-                self.assertNotIn(RETIRED_ACTION_PREFIX, text)
-                self.assertNotIn("repository_commands", text)
-                self.assertNotIn("repository_context", text)
-
-    def test_only_recorded_files_name_the_retired_path(self) -> None:
-        found: dict[str, str] = {}
-        for path in sorted(REPOSITORY_ROOT.rglob("*.md")):
-            relative = path.relative_to(REPOSITORY_ROOT).as_posix()
-            if relative.startswith(("target/", "tests/", "templates/")) or ".venv" in relative:
-                continue
-            if "REPOSITORY_CONTEXT" in path.read_text(encoding="utf-8"):
-                found[relative] = "present"
-        self.assertEqual(sorted(PERMITTED_MENTIONS), sorted(found))
 
     def test_historical_records_still_describe_the_retired_obligation(self) -> None:
         for relative in HISTORICAL_RECORDS:

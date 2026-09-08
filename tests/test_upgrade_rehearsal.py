@@ -17,14 +17,11 @@ from pathlib import Path
 from repository_tools import upgrade_rehearsal
 from repository_tools.upgrade_rehearsal import Completed, UpgradeRehearsalError, canonical_sha256, rehearse
 from tests.fixture_support import standard_repository
+from tests.git_support import git
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PREDECESSOR = Path("/env/predecessor/bin/python")
 SUCCESSOR = Path("/env/successor/bin/python")
-
-
-def _git(root: Path, *arguments: str) -> None:
-    subprocess.run(["git", *arguments], cwd=root, check=True, capture_output=True)
 
 
 @dataclass
@@ -105,18 +102,18 @@ class UpgradeRehearsalTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         base = Path(self.temporary.name)
         self.repository = base / "repository"
-        standard_repository(self.repository, "Rehearsal Fixture")
+        standard_repository(self.repository)
         lock_path = self.repository / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         lock["evaluator"]["version"] = "0.7.1"
         lock["tool_version"] = "0.7.1"
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
-        _git(self.repository, "init", "-q", "-b", "main")
-        _git(self.repository, "config", "user.email", "t@example.invalid")
-        _git(self.repository, "config", "user.name", "t")
-        _git(self.repository, "config", "commit.gpgsign", "false")
-        _git(self.repository, "add", "-A")
-        _git(self.repository, "commit", "-q", "-m", "fixture")
+        git(self.repository, "init", "-q", "-b", "main")
+        git(self.repository, "config", "user.email", "t@example.invalid")
+        git(self.repository, "config", "user.name", "t")
+        git(self.repository, "config", "commit.gpgsign", "false")
+        git(self.repository, "add", "-A")
+        git(self.repository, "commit", "-q", "-m", "fixture")
         self.output = base / "out"
         self.workspace = base / "work"
         self.workspace.mkdir()
@@ -142,7 +139,7 @@ class UpgradeRehearsalTests(unittest.TestCase):
         self.assertEqual(result, written)
         # The operational repository is untouched: its lock still names the predecessor.
         self.assertEqual("0.7.1", json.loads((self.repository / ".engineering-harness.lock").read_text(encoding="utf-8"))["evaluator"]["version"])
-        self.assertEqual("", subprocess.run(["git", "status", "--porcelain"], cwd=self.repository, capture_output=True, text=True).stdout)
+        self.assertEqual("", git(self.repository, "status", "--porcelain"))
         # Every evaluator ran with -I from its own environment.
         self.assertTrue(all(argv[1:4] == ["-I", "-m", "se_harness"] for argv in fake.calls if argv[0] != "git"))
 

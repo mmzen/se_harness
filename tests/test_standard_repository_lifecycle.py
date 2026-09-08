@@ -24,9 +24,10 @@ from se_harness.candidate_acceptance import (
 from se_harness.installer import HarnessError, apply_changes, plan_install, tracked_content
 from tests.skill_contract_support import build_skill_manifest
 from se_harness.integrity import canonical_sha256
-from tests.mutation_guard_support import trusted_mutation_authority
+from tests.mutation_guard_support import patch_mutation_authority
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import _lexically_within, _within, inspect_runtime_identity
+from tests.git_support import git, run_git
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -38,12 +39,7 @@ FAILED_PR_RECORDS = (
 
 class StandardRepositoryLifecycleTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.guard = mock.patch(
-            "se_harness.mutation_guard.require_mutation_authority",
-            side_effect=trusted_mutation_authority,
-        )
-        self.guard.start()
-        self.addCleanup(self.guard.stop)
+        patch_mutation_authority(self)
 
     def make_candidate_wheel(self, root: Path, version: str = "0.4.1") -> tuple[Path, str]:
         wheel = root / f"se_harness-{version}-py3-none-any.whl"
@@ -575,40 +571,15 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertEqual("fragment", lock["files"][".gitattributes"]["mode"])
             evidence_relative = "docs/engineering/product/evidence/RLS-TST-001-evaluator.json"
-            subprocess.run(
-                ["git", "-C", str(target), "init"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            subprocess.run(
-                ["git", "-C", str(target), "config", "user.name", "Harness Test"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            subprocess.run(
-                ["git", "-C", str(target), "config", "user.email", "harness@example.invalid"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
+            git(target, "init")
+            git(target, "config", "user.name", "Harness Test")
+            git(target, "config", "user.email", "harness@example.invalid")
             evidence = target / evidence_relative
             evidence.parent.mkdir(parents=True, exist_ok=True)
             evidence_bytes = b'{"schema":"se-harness-evaluator-evidence-v1"}\n'
             evidence.write_bytes(evidence_bytes)
-            subprocess.run(
-                ["git", "-C", str(target), "-c", "core.autocrlf=false", "add", "."],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            subprocess.run(
-                ["git", "-C", str(target), "commit", "-m", "canonical evidence"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
+            git(target, "-c", "core.autocrlf=false", "add", ".")
+            git(target, "commit", "-m", "canonical evidence")
 
             isolated_git = os.environ.copy()
             isolated_git["GIT_CONFIG_NOSYSTEM"] = "1"
@@ -617,51 +588,35 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             expected_digest = hashlib.sha256(evidence_bytes).hexdigest()
             for autocrlf, eol in (("true", "crlf"), ("input", "crlf"), ("false", "crlf")):
                 clone = Path(temporary) / f"clone-{autocrlf}"
-                subprocess.run(
-                    [
-                        "git",
-                        "-c",
-                        "protocol.file.allow=always",
-                        "clone",
-                        "-c",
-                        f"core.autocrlf={autocrlf}",
-                        "-c",
-                        f"core.eol={eol}",
-                        "--no-local",
-                        str(target),
-                        str(clone),
-                    ],
-                    capture_output=True,
-                    text=True,
-                    check=True,
+                git(
+                    temporary,
+                    "-c",
+                    "protocol.file.allow=always",
+                    "clone",
+                    "-c",
+                    f"core.autocrlf={autocrlf}",
+                    "-c",
+                    f"core.eol={eol}",
+                    "--no-local",
+                    str(target),
+                    str(clone),
                     env=isolated_git,
                 )
                 checked_out = (clone / evidence_relative).read_bytes()
                 self.assertEqual(evidence_bytes, checked_out)
                 self.assertEqual(expected_digest, hashlib.sha256(checked_out).hexdigest())
-                completed = subprocess.run(
-                    ["git", "-C", str(clone), "check-attr", "text", "eol", "--", evidence_relative],
-                    capture_output=True,
-                    text=True,
-                    check=True,
-                    env=isolated_git,
-                )
-                self.assertEqual("", completed.stderr)
-                self.assertIn(f"{evidence_relative}: text: set", completed.stdout)
-                self.assertIn(f"{evidence_relative}: eol: lf", completed.stdout)
+                completed = run_git(clone, "check-attr", "text", "eol", "--", evidence_relative, env=isolated_git)
+                self.assertEqual(b"", completed.stderr)
+                attributes = completed.stdout.decode("utf-8")
+                self.assertIn(f"{evidence_relative}: text: set", attributes)
+                self.assertIn(f"{evidence_relative}: eol: lf", attributes)
 
             conflict = Path(temporary) / "clone-true"
             (conflict / Path(evidence_relative).parent / ".gitattributes").write_text(
                 "*.json eol=crlf\n", encoding="utf-8", newline="\n"
             )
-            completed = subprocess.run(
-                ["git", "-C", str(conflict), "check-attr", "eol", "--", evidence_relative],
-                capture_output=True,
-                text=True,
-                check=True,
-                env=isolated_git,
-            )
-            self.assertIn(f"{evidence_relative}: eol: crlf", completed.stdout)
+            attributes = git(conflict, "check-attr", "eol", "--", evidence_relative, env=isolated_git)
+            self.assertIn(f"{evidence_relative}: eol: crlf", attributes)
 
     def test_standard_upgrade_restores_every_file_after_interrupted_apply(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

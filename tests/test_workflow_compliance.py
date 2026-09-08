@@ -19,21 +19,23 @@ from se_harness.workflow_compliance import (
     normalize_path,
     path_is_admitted,
 )
-from tests.test_revision_provenance import (
+from tests.artifact_support import (
     RELEASED_EVALUATOR_EVIDENCE,
     create_base_chain,
     formal,
     write,
 )
 from tests.fixture_support import standard_repository
+from tests.cli_support import invoke
+from tests.git_support import git
 
 
-class WorkflowComplianceTests(unittest.TestCase):
+class WorkflowComplianceFixture:
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        standard_repository(self.root, "Compliance Fixture")
+        standard_repository(self.root)
         create_base_chain(self.root, work_order_status="in_progress", operating_contract_status="draft")
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         text = work_order.read_text(encoding="utf-8")
@@ -55,19 +57,12 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
         (self.root / "src/exact.py").write_text("exact = True\n", encoding="utf-8")
         (self.root / "src/component/inside.py").write_text("inside = True\n", encoding="utf-8")
 
-    def invoke(self, *arguments: str) -> tuple[int, str, str]:
-        output = io.StringIO()
-        error = io.StringIO()
-        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
-            code = main(list(arguments))
-        return code, output.getvalue(), error.getvalue()
-
     def check(self, *extra: str) -> tuple[int, dict, str]:
         with (
             mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")),
             mock.patch("se_harness.workflow_compliance._review_evidence", return_value=("pass", "Evidence is current.")),
         ):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check",
                 str(self.root),
                 "--artifact",
@@ -79,6 +74,8 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             )
         return code, json.loads(output), error
 
+
+class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
     def test_exact_and_component_boundary_scope_matching(self) -> None:
         scope = ("src/exact.py", "src/component/")
         self.assertTrue(path_is_admitted("src/exact.py", scope))
@@ -142,7 +139,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Start preflight is ready."),
         ):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "start", "--json"
             )
         self.assertEqual(0, code, error)
@@ -156,12 +153,12 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
         )
 
     def test_pre_action_requires_selected_procedure(self) -> None:
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action", "--json"
         )
         self.assertEqual(1, code)
         self.assertIn("--procedure is required", output)
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action",
             "--procedure", "PROC-WO-START", "--json",
         )
@@ -219,7 +216,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             '{"schema":"se-harness-change-set-v1","complete":true,"paths":[],"extra":1}',
             encoding="utf-8",
         )
-        code, output, _ = self.invoke(
+        code, output, _ = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
             "--change-manifest", "changes.json", "--json",
         )
@@ -238,7 +235,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Review preflight is ready."),
         ):
-            code, output, _ = self.invoke(
+            code, output, _ = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
                 "--changes-complete", "--json",
             )
@@ -261,7 +258,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Review preflight is ready."),
         ):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
                 "--changes-complete", "--json",
             )
@@ -293,30 +290,26 @@ if __name__ == "__main__":
     unittest.main()
 
 
-class GitDerivedChangeSetTests(WorkflowComplianceTests):
+class GitDerivedChangeSetFixture(WorkflowComplianceFixture):
     """REQ-ECP-002 / ECP-CHG-001 to -007: the change set read from Git, not typed."""
 
-    def git(self, *arguments: str) -> str:
-        completed = subprocess.run(
-            ["git", "-C", str(self.root), *arguments], capture_output=True, text=True, check=True,
-        )
-        return completed.stdout
-
     def commit_base(self) -> str:
-        self.git("init", "-q")
-        self.git("config", "user.email", "fixture@example.invalid")
-        self.git("config", "user.name", "Fixture")
-        self.git("config", "core.autocrlf", "false")
+        git(self.root, "init", "-q")
+        git(self.root, "config", "user.email", "fixture@example.invalid")
+        git(self.root, "config", "user.name", "Fixture")
+        git(self.root, "config", "core.autocrlf", "false")
         (self.root / ".gitignore").write_text("*.log\n", encoding="utf-8")
         (self.root / "src/component/renamed_from.py").write_text("old = True\n", encoding="utf-8")
         (self.root / "src/component/deleted.py").write_text("gone = True\n", encoding="utf-8")
-        self.git("add", "-A")
-        self.git("commit", "-q", "-m", "base")
-        return self.git("rev-parse", "HEAD").strip()
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "base")
+        return git(self.root, "rev-parse", "HEAD").strip()
 
     def check_from_git(self, base: str) -> tuple[int, dict, str]:
         return self.check("--from-git", base, "--json")
 
+
+class GitDerivedChangeSetTests(GitDerivedChangeSetFixture, unittest.TestCase):
     def test_from_git_derives_modified_deleted_renamed_and_untracked_paths_and_ignores_ignored(self) -> None:
         base = self.commit_base()
         (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
@@ -370,7 +363,7 @@ class GitDerivedChangeSetTests(WorkflowComplianceTests):
 
     def test_from_git_is_exclusive_with_typed_paths_and_fails_closed_on_a_bad_base(self) -> None:
         base = self.commit_base()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
             "--from-git", base, "--changed-path", "src/exact.py", "--changes-complete",
         )
@@ -396,7 +389,7 @@ class GitDerivedChangeSetTests(WorkflowComplianceTests):
         self.assertIn("not a Git checkout", result["restitution"]["blocked_by"][0])
 
 
-class EvidencePacketTests(GitDerivedChangeSetTests):
+class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
     """REQ-ECP-003 / ECP-EVD-001 to -007 and the retained handoff result (ECP-PRB-002 amended)."""
 
     PACKET = "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
@@ -404,11 +397,11 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
     def check_real(self, *extra: str) -> tuple[int, dict, str]:
         # The evidence predicate is the subject here: only review preflight is stubbed.
         with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
-            code, output, error = self.invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", *extra)
+            code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", *extra)
         return code, json.loads(output), error
 
     def evidence(self, *extra: str) -> tuple[int, dict, str]:
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json", *extra
         )
         return code, json.loads(output), error
@@ -478,7 +471,7 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
             encoding="utf-8",
         )
         second.write_text(second.read_text(encoding="utf-8").replace('status = "approved"', 'status = "in_progress"', 1), encoding="utf-8")
-        code, output, error = self.invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")
+        code, output, error = invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")
         self.assertEqual(1, code, error)
         self.assertIn("WEX-ECP-012: the working tree selects WO-002", json.loads(output)["restitution"]["blocked_by"][0])
 
@@ -538,7 +531,7 @@ class EvidencePacketTests(GitDerivedChangeSetTests):
 
 
 
-class SelfBindingHandoffTests(GitDerivedChangeSetTests):
+class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
     """REQ-ECP-028 / SPEC-ECP-017 ECP-SBH-001 to -006: one Git-derived handoff run is the declared result."""
 
     PACKET = "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
@@ -547,13 +540,13 @@ class SelfBindingHandoffTests(GitDerivedChangeSetTests):
     def check_real(self, base: str) -> tuple[int, dict, str]:
         # The packet predicate and the rebind are the subject: only review preflight is stubbed.
         with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--from-git", base, "--json"
             )
         return code, json.loads(output), error
 
     def evidence(self, *extra: str) -> tuple[int, dict, str]:
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json", *extra
         )
         return code, json.loads(output), error
@@ -648,7 +641,7 @@ class SelfBindingHandoffTests(GitDerivedChangeSetTests):
         before = packet.read_bytes()
         self.move_snapshot()
         with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")):
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
                 "--changed-path", "src/exact.py", "--changes-complete", "--json",
             )
@@ -696,7 +689,7 @@ class EvaluatorDerivedPacketPathTests(unittest.TestCase):
         self.assertIn("WEX-ECP-010: WO-D-001 is not under a domain directory", str(caught.exception))
 
 
-class ScopeCheckpointTests(GitDerivedChangeSetTests):
+class ScopeCheckpointFixture(GitDerivedChangeSetFixture):
     """REQ-ECP-020 / SPEC-ECP-009 ECP-SCP-001 to -005: scope is judged in every lifecycle state."""
 
     STATES = ("draft", "approved", "in_progress", "implemented", "verified")
@@ -740,12 +733,12 @@ class ScopeCheckpointTests(GitDerivedChangeSetTests):
             record.unlink()
         # The state change and any covering record are committed, so the diff the
         # scope check reads is only the fixture's own edits below the returned base.
-        self.git("add", "-A", "--", "docs/engineering/product")
-        self.git("commit", "-q", "--allow-empty", "-m", f"state {status}")
-        return self.git("rev-parse", "HEAD").strip()
+        git(self.root, "add", "-A", "--", "docs/engineering/product")
+        git(self.root, "commit", "-q", "--allow-empty", "-m", f"state {status}")
+        return git(self.root, "rev-parse", "HEAD").strip()
 
     def scope_check(self, base: str, artifact: str = "WO-001") -> tuple[int, dict, str]:
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "check", str(self.root), "--artifact", artifact, "--checkpoint", "scope", "--from-git", base, "--json",
         )
         return code, (json.loads(output) if output.strip().startswith("{") else {}), error
@@ -753,6 +746,8 @@ class ScopeCheckpointTests(GitDerivedChangeSetTests):
     def predicate_ids(self, result: dict) -> list[str]:
         return [predicate["id"] for gate in result["compliance"]["gates"] for predicate in gate["predicates"]]
 
+
+class ScopeCheckpointTests(ScopeCheckpointFixture, unittest.TestCase):
     def test_every_state_completes_on_an_in_scope_diff_with_only_the_scope_predicates(self) -> None:
         self.commit_base()
         (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
@@ -818,7 +813,7 @@ class ScopeCheckpointTests(GitDerivedChangeSetTests):
         self.assertIn("invalid choice: 'scope'", captured.getvalue())
 
 
-class CanonicalSnapshotTests(WorkflowComplianceTests):
+class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
     """REQ-ECP-021 / SPEC-ECP-010 ECP-CSN-001 to -003: the snapshot ignores the checkout's line endings."""
 
     # The digest of this fixture chain with LF line endings, computed under the
@@ -856,7 +851,7 @@ class CanonicalSnapshotTests(WorkflowComplianceTests):
         # The evidence header written on one line-ending convention matches the
         # snapshot recomputed on the other.
         self.rewrite(b"\r\n")
-        code, output, error = self.invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff")
+        code, output, error = invoke("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff")
         self.assertEqual(0, code, error)
         packet = self.root / "docs/engineering/product/evidence/WO-001/WO-001-handoff.md"
         header = packet.read_bytes().split(b"```", 2)[1]
@@ -865,7 +860,7 @@ class CanonicalSnapshotTests(WorkflowComplianceTests):
         self.assertEqual(bound, self.digest())
 
 
-class OwnRecordAdmissionTests(ScopeCheckpointTests):
+class OwnRecordAdmissionTests(ScopeCheckpointFixture, unittest.TestCase):
     """REQ-ECP-023 / SPEC-ECP-012 ECP-ADM-001 to -004: the work order's own records are admitted."""
 
     RECORD = "docs/engineering/product/verification-records/VREC-001.md"
@@ -951,7 +946,7 @@ class OwnRecordAdmissionTests(ScopeCheckpointTests):
                 json.dumps({"schema": "se-harness-change-set-v1", "complete": True, "paths": [self.RECORD, self.EVALUATOR]}),
                 encoding="utf-8",
             )
-            code, output, error = self.invoke(
+            code, output, error = invoke(
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "scope", *extra, "--json",
             )
             self.assertEqual(0, code, error)
@@ -963,7 +958,7 @@ class OwnRecordAdmissionTests(ScopeCheckpointTests):
         self.commit_base()
         base = self.set_state("in_progress")
         self.write_own_record()
-        code, output, error = self.invoke(
+        code, output, error = invoke(
             "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--from-git", base, "--json",
         )
         result = json.loads(output)
