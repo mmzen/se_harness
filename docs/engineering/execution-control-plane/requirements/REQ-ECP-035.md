@@ -2,7 +2,7 @@
 id = "REQ-ECP-035"
 type = "requirement"
 title = "One engine, imported once and run once per command"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -14,6 +14,13 @@ source = "issue #378 (code health assessment 2026-09-07, sections 2.1, 2.2, 3.6 
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:13:26Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #404, #405 and #406 and their summary were presented: wave 3 of the code health assessment of 2026-09-07 (issue #378) and the revisit triggers of DEC-ECP-001 and DEC-ECP-002, the engine as an import surface, one validation per governance command, the three largest modules split along their seams, every recorded output byte-identical. Approval of a definition authorizes no work."
 +++
 
 # Requirement: One engine, imported once and run once per command
