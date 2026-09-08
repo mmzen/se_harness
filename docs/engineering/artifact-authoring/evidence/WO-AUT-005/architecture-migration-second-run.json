@@ -1,0 +1,12 @@
+{
+  "applied": false,
+  "architectures": {},
+  "counts": {
+    "addresses_derived": 0,
+    "architectures": 0,
+    "assessments_added": 0,
+    "omitted_addresses": 0
+  },
+  "schema": "se-harness-architecture-relation-migration-v1",
+  "work_order": "WO-AUT-005"
+}
