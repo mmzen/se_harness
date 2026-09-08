@@ -42,6 +42,7 @@ paths = [
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-023.md",
   "docs/engineering/execution-control-plane/verification/VER-ECP-025.md",
   "docs/engineering/execution-control-plane/work-orders/WO-ECP-031.md",
+  "docs/engineering/execution-control-plane/decisions/",
 ]
 
 [relations]
@@ -159,3 +160,15 @@ JSON byte; any managed or engine path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`docs/engineering/execution-control-plane/decisions/` is added to
+`[execution_scope].paths`. The execution met a rule that cannot be met as
+written: `ECP-PRM-003` and three sibling rules assume `repository_tools`
+imports the package, which the import barrier of `ARCH-REB-013` and
+`SPEC-REB-015` rule 2 forbids and two tests refuse. The work order's stop
+condition for such a rule is a deviation decision, `DEC-ECP-001`, raised in
+this domain's `decisions/` directory, which the scope did not name. Decided
+by the accountable engineering owner on 2026-09-08 by selecting the presented
+option "Amend, and widen the scope". Nothing else is widened.
