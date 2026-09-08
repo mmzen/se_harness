@@ -248,13 +248,13 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         import subprocess
 
         refused = subprocess.CompletedProcess(args=[], returncode=2, stdout="", stderr="GenerationError: bad root\n")
-        with mock.patch("se_harness.cli.subprocess.run", return_value=refused):
+        with mock.patch("se_harness._process.subprocess.run", return_value=refused):
             code, output, error = invoke("dashboard", str(self.root), "--json")
         self.assertEqual(2, code)
         self.assertEqual("", output)
         self.assertIn("GenerationError: bad root", error)
         failed = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="dashboard: manifest mismatch\n")
-        with mock.patch("se_harness.cli.subprocess.run", return_value=failed):
+        with mock.patch("se_harness._process.subprocess.run", return_value=failed):
             code, payload, error = self.json_of("dashboard", str(self.root), "--json")
         self.assertEqual(1, code, error)
         self.assertEqual("failed", payload["outcome"])
@@ -275,7 +275,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # WO-ECP-027 (ECP-COR-014): the engine launches are bounded and a timeout is a refusal.
         import subprocess
 
-        with mock.patch("se_harness.cli.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
+        with mock.patch("se_harness._process.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
             code, output, error = invoke("validate", str(self.root))
         self.assertEqual(2, code)
         self.assertEqual("", output)

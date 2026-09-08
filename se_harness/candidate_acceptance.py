@@ -9,7 +9,6 @@ import os
 import platform
 import re
 import shutil
-import subprocess
 import tempfile
 import venv
 import zipfile
@@ -19,6 +18,7 @@ from typing import Any
 
 from se_harness import __version__
 from se_harness.hash_bound import LOCK_RELATIVE
+from se_harness._process import run as _launch, text as _text
 from se_harness.installer import HarnessError
 from se_harness.runtime_identity import COMMIT_PATTERN, SHA256_PATTERN
 
@@ -199,20 +199,16 @@ def _run(
     checkout: Path | None,
     expected_returncode: int = 0,
 ) -> ScenarioResult:
-    completed = subprocess.run(
-        command,
-        cwd=cwd,
-        env=_environment(),
-        capture_output=True,
-        text=True,
-        timeout=120,
-        check=False,
+    # ECP-PRM-001: the one launcher, decoded as UTF-8 so the acceptance never depends on the locale.
+    completed = _launch(
+        command, cwd=cwd, env=_environment(), timeout=120,
+        error=lambda message: HarnessError(f"candidate scenario {scenario_id} could not run: {message}"),
     )
     return _result(
         scenario_id,
         returncode=completed.returncode,
-        stdout=completed.stdout,
-        stderr=completed.stderr,
+        stdout=_text(completed.stdout),
+        stderr=_text(completed.stderr),
         temporary=temporary,
         wheel=wheel,
         checkout=checkout,
@@ -290,18 +286,13 @@ def assess_candidate_wheel(
         staged_wheel.write_bytes(wheel_bytes)
         venv.EnvBuilder(with_pip=True, clear=True).create(environment)
         python = _launcher(environment, "python")
-        try:
-            subprocess.run(
-                [str(python), "-I", "-m", "pip", "install", "--no-deps", str(staged_wheel)],
-                cwd=temporary,
-                env=_environment(),
-                capture_output=True,
-                text=True,
-                timeout=120,
-                check=True,
-            )
-        except (OSError, subprocess.SubprocessError) as exc:
-            raise HarnessError(f"candidate wheel installation failed: {type(exc).__name__}") from exc
+        installed = _launch(
+            [str(python), "-I", "-m", "pip", "install", "--no-deps", str(staged_wheel)],
+            cwd=temporary, env=_environment(), timeout=120,
+            error=lambda message: HarnessError(f"candidate wheel installation failed: {message}"),
+        )
+        if installed.returncode != 0:
+            raise HarnessError(f"candidate wheel installation failed: exit status {installed.returncode}")
         harnessctl = _launcher(environment, "harnessctl")
         results: list[ScenarioResult] = []
         results.append(

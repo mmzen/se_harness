@@ -2,7 +2,7 @@
 id = "WO-ECP-031"
 type = "work_order"
 title = "Wave 2, group A: one process launcher and one front-matter parser"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -42,6 +42,7 @@ paths = [
   "docs/engineering/execution-control-plane/specifications/SPEC-ECP-023.md",
   "docs/engineering/execution-control-plane/verification/VER-ECP-025.md",
   "docs/engineering/execution-control-plane/work-orders/WO-ECP-031.md",
+  "docs/engineering/execution-control-plane/decisions/",
 ]
 
 [relations]
@@ -55,6 +56,20 @@ to = "approved"
 decided_at = "2026-09-08T09:16:54Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work. WO-ECP-031 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T09:38:40Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-08, given with the words 'start the work orders' for the three wave 2 work orders after the packet pull requests #395, #396 and #397 merged. Start preflight PASS. Executes on wo/ecp-031-process-front-matter; groups B and C follow in sequence because the three groups edit overlapping modules."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T10:54:34Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete and prepare the record, then start group B': se_harness/_process.py carries every subprocess launch of the package and se_harness/front_matter.py every front-matter read, each caller keeping its exception class and timeout; twelve boundary tests; the Windows suite at its baseline (1294 tests, the one workstation error, 26 skips) and the Linux lane green; validate 1396 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set passes all nine predicates at 93962ad0 with the validate check-run 102028711179 success. DEC-ECP-001 (repository_tools stays behind the import barrier) disposed amend by the technical owner and recorded on SPEC-ECP-023. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-031/WO-ECP-031-handoff.md."
 +++
 
 # Work Order: Wave 2, group A: one process launcher and one front-matter parser
@@ -152,3 +167,15 @@ JSON byte; any managed or engine path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`docs/engineering/execution-control-plane/decisions/` is added to
+`[execution_scope].paths`. The execution met a rule that cannot be met as
+written: `ECP-PRM-003` and three sibling rules assume `repository_tools`
+imports the package, which the import barrier of `ARCH-REB-013` and
+`SPEC-REB-015` rule 2 forbids and two tests refuse. The work order's stop
+condition for such a rule is a deviation decision, `DEC-ECP-001`, raised in
+this domain's `decisions/` directory, which the scope did not name. Decided
+by the accountable engineering owner on 2026-09-08 by selecting the presented
+option "Amend, and widen the scope". Nothing else is widened.

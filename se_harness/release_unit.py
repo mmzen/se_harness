@@ -20,11 +20,11 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping
 
+from se_harness._process import run_git, text as _text
 from se_harness.installer import HarnessError
 
 RELEASE_UNIT_SCHEMA = "se-harness-release-unit-v1"
@@ -68,15 +68,11 @@ StatusLookup = Callable[[str], tuple[str | None, bool | None]]
 
 
 def _git(root: Path, *arguments: str) -> str:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), *arguments], capture_output=True, text=True, encoding="utf-8", check=False, timeout=120
-        )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise HarnessError(f"git is unavailable: {exc}") from exc
+    # ECP-PRM-003: the one launcher.
+    completed = run_git(root, *arguments, timeout=120, error=lambda message: HarnessError(f"git is unavailable: {message}"))
     if completed.returncode != 0:
-        raise HarnessError(f"git {' '.join(arguments[:2])} failed: {completed.stderr.strip() or completed.returncode}")
-    return completed.stdout
+        raise HarnessError(f"git {' '.join(arguments[:2])} failed: {_text(completed.stderr).strip() or completed.returncode}")
+    return _text(completed.stdout)
 
 
 def _resolve(root: Path, ref: str) -> str:

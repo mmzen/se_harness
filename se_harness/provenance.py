@@ -14,9 +14,9 @@ from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-import tomllib
 
-from se_harness import mutation_guard
+from se_harness import front_matter, mutation_guard
+from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, safe_destination
@@ -73,17 +73,12 @@ def _reserves_version(status: object) -> bool:
 
 
 def _run(command: list[str], *, cwd: Path, refusal: type[RecordRefusal] = EvidenceRefusal) -> subprocess.CompletedProcess[str]:
-    try:
-        return subprocess.run(
-            command,
-            cwd=cwd,
-            check=False,
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise refusal(f"command failed to start safely: {command[0]}: {exc}") from exc
+    # ECP-PRM-001: the one launcher, decoded as UTF-8 so the record never depends on the locale.
+    completed = _launch(
+        command, cwd=cwd, timeout=30,
+        error=lambda message: refusal(f"command failed to start safely: {command[0]}: {message}"),
+    )
+    return subprocess.CompletedProcess(completed.args, completed.returncode, _text(completed.stdout), _text(completed.stderr))
 
 
 def _git(repository_root: Path, *arguments: str) -> str:
@@ -122,18 +117,8 @@ def _decision_metadata(root: Path, item: dict[str, Any]) -> dict[str, Any]:
     path_value = item.get("path")
     if not isinstance(path_value, str):
         return {}
-    try:
-        text = (root / path_value).read_text(encoding="utf-8-sig")
-    except (OSError, UnicodeError):
-        return {}
-    lines = text.replace("\r\n", "\n").split("\n")
-    if not lines or lines[0].strip() != "+++":
-        return {}
-    try:
-        closing = lines.index("+++", 1)
-        return tomllib.loads("\n".join(lines[1:closing]))
-    except (ValueError, tomllib.TOMLDecodeError):
-        return {}
+    # ECP-PRM-005: the one parser.
+    return front_matter.read_or_none(root / path_value) or {}
 
 
 def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]], work_ids: list[str]) -> list[tuple[str, str]]:
@@ -195,11 +180,8 @@ def _require_artifact(catalog: dict[str, dict[str, Any]], artifact_id: str, arti
 def _load_metadata(repository_root: Path, artifact: dict[str, Any]) -> dict[str, Any]:
     path = safe_destination(repository_root, Path(artifact["path"]))
     try:
-        text = path.read_text(encoding="utf-8-sig")
-        lines = text.splitlines()
-        closing = lines.index("+++", 1)
-        return tomllib.loads("\n".join(lines[1:closing]))
-    except (OSError, UnicodeError, ValueError, tomllib.TOMLDecodeError) as exc:
+        return front_matter.read(path)
+    except front_matter.FrontMatterError as exc:
         raise InputRefusal(f"cannot read formal metadata for {artifact['id']}: {exc}") from exc
 
 

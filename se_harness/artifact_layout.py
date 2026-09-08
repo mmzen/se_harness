@@ -5,13 +5,13 @@ from __future__ import annotations
 import os
 import re
 import stat
-import subprocess
 import tempfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path, PurePath
 
-from se_harness import mutation_guard
+from se_harness import front_matter, mutation_guard
+from se_harness._process import run_git
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 
 
@@ -372,7 +372,9 @@ def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
             text = path.read_text(encoding="utf-8-sig")
         except (OSError, UnicodeError):
             continue
-        if text.startswith("+++\n") and declaration.search(text.partition("\n+++\n")[0]):
+        # ECP-PRM-005: the one parser, so a CRLF checkout finds its artifacts too.
+        found = front_matter.front_matter_lines(text)
+        if found is not None and found[1] and declaration.search("\n".join(found[0])):
             return path
     return None
 
@@ -385,10 +387,11 @@ REF_ARTIFACT_PATTERN = re.compile(
 
 
 def _git_output(root: Path, arguments: list[str]) -> bytes:
-    try:
-        completed = subprocess.run(["git", "-C", str(root), *arguments], capture_output=True, check=False, timeout=120)
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise HarnessError(f"WEX-ECP-013: git is unavailable: {exc}") from exc
+    # ECP-PRM-003: the one launcher; a start failure or a timeout is this module's own refusal.
+    completed = run_git(
+        root, *arguments, timeout=120,
+        error=lambda message: HarnessError(f"WEX-ECP-013: git is unavailable: {message}"),
+    )
     if completed.returncode != 0:
         raise HarnessError(f"WEX-ECP-013: git {arguments[0]} failed with exit status {completed.returncode}")
     return completed.stdout

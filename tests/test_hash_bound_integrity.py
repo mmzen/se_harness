@@ -1373,7 +1373,11 @@ class ProducerNewlineTests(unittest.TestCase):
 class SafetyTests(unittest.TestCase):
     def test_no_repository_content_reaches_a_shell(self) -> None:
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
-        self.assertIn("shell=False", source)
+        # WO-ECP-031 (SPEC-ECP-023 ECP-PRM-003): the launch lives in the one launcher, which fixes shell=False.
+        launcher = (ROOT / "se_harness" / "_process.py").read_text(encoding="utf-8")
+        self.assertIn("from se_harness._process import run_git", source)
+        self.assertIn("shell=False", launcher)
+        self.assertNotIn("shell=True", launcher)
         self.assertNotIn("shell=True", source)
         self.assertNotIn("os.system", source)
         self.assertNotIn("os.popen", source)
