@@ -5,6 +5,7 @@ scripts under `scripts/`; since the 0.16.0 root (`SPEC-DST-025`) it installs non
 runs them from inside the package. A test that read a root copy reads it only when the
 lock names it, and otherwise the engine copy the candidate carries.
 """
+import importlib
 import importlib.util
 import json
 import sys
@@ -73,9 +74,9 @@ def load_module(path: Path, name: str) -> ModuleType:
     return module
 
 
-# The engine's scripts import one another by bare name, in this order.
+#: The engine's entry modules (SPEC-ECP-024 ECP-ENG-001); the layout registry's tables live in
+#: `se_harness.artifact_layout` since WO-ECP-034 and its former name resolves there.
 EVALUATOR_MODULES = (
-    "artifact_layout_registry",
     "validate_engineering_artifacts",
     "generate_harness_dashboard",
     "inspect_engineering_artifacts",
@@ -83,16 +84,14 @@ EVALUATOR_MODULES = (
 
 
 def load_evaluator_module(name: str, *, alias: str | None = None, directory: Path | None = None) -> ModuleType:
-    """The evaluator script `name` this root runs, loaded by path under its bare name.
+    """The evaluator module `name`, imported from the package (ECP-ENG-001 to -003).
 
-    The scripts a module imports are loaded first under their bare names, so no
-    test module puts a directory on `sys.path`. `alias` loads a second, distinct
-    copy under another name; `directory` reads the scripts from another root.
+    The engine is an import surface: no test loads it by path or puts a directory on
+    `sys.path`. `alias` and `directory` are accepted for the callers written when the
+    engine was loaded by path; the package's one module is returned either way.
     """
-    scripts = Path(directory) if directory is not None else evaluator_scripts_dir()
-    for dependency in EVALUATOR_MODULES:
-        if dependency == name:
-            break
-        if dependency not in sys.modules and (scripts / f"{dependency}.py").is_file():
-            load_module(scripts / f"{dependency}.py", dependency)
-    return load_module(scripts / f"{name}.py", alias or name)
+    if name == "artifact_layout_registry":
+        return importlib.import_module("se_harness.artifact_layout")
+    if name not in EVALUATOR_MODULES:
+        raise ImportError(f"{name} is not an engine module")
+    return importlib.import_module(f"se_harness.engine.{name}")

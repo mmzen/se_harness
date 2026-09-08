@@ -18,7 +18,7 @@ from unittest import mock
 
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
 from se_harness.cli import build_parser, main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.risks import MEASUREMENT, OPTION_TARGETS, RISK_OPTIONS, compute_score
 from se_harness.workflow import LIFECYCLE_REGISTRY
 from tests.mutation_guard_support import patch_mutation_authority
@@ -144,7 +144,7 @@ class RiskFixture(unittest.TestCase):
         return invoke(*arguments, *extra)
 
     def validate(self):
-        return _load_validator_module().validate_repository(self.root)
+        return validate_engineering_artifacts.validate_repository(self.root)
 
     def codes(self, prefix: str = "E-RSK") -> list[str]:
         return sorted(f"{item.code}: {item.message}" for item in self.validate().errors if item.code.startswith(prefix))
@@ -248,7 +248,7 @@ class RiskArtifactTests(RiskFixture):
         self.assertFalse(any(row.grants_authority for row in LIFECYCLE_REGISTRY["risk"].values()))
         terminal = {state for state, row in LIFECYCLE_REGISTRY["risk"].items() if not row.transitionable}
         self.assertEqual({"accepted", "avoided", "mitigated", "withdrawn"}, terminal)
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         self.assertEqual(RISK_EDGES, {state: set(row.transitions_to) for state, row in validator.WORKFLOW_LIFECYCLES["risk"].items()})
         workflow_policy = (TEMPLATES / "WORKFLOW.md").read_text(encoding="utf-8")
         for row in ("| Risk | `identified` | `raised`, `withdrawn` |", "| Risk | `raised` | `accepted`, `avoided`, `mitigating`, `withdrawn` |", "| Risk | `mitigating` | `mitigated`, `withdrawn` |"):
@@ -508,10 +508,10 @@ class DisposalTests(RiskFixture):
         self.assertIn('status = "deferred"', self.decision_file().read_text(encoding="utf-8"))
         self.assertEqual([], self.codes())
         self.assertEqual("pass", self.predicates(self.handoff_check())["QGP-G4I-DECISION"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import blocking_decisions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual(["DEC-PRD-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "verified")])
         code, _, error = self.decide("--option", "accept", "--revisit", "v1.2.0", "--reason", "The field landed; we live with it.")
         self.assertEqual(0, code, error)
@@ -688,10 +688,10 @@ class ScopeAdmissionTests(RiskFixture):
             with self.subTest(checkpoint=checkpoint, source="declared"):
                 result = self.checkpoint(checkpoint, "--changed-path", RISK_PATH, "--changed-path", DECISION_PATH, "--changes-complete")
                 self.assertEqual("pass", self.predicates(result)["QGP-G4I-PATHS"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import git_change_set, risk_admissions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual((RISK_PATH,), risk_admissions(self.root, catalog["WO-001"], git_change_set(self.root, "HEAD")))
 
     def test_an_unrelated_added_file_and_a_modified_or_deleted_risk_file_still_need_a_declared_path(self) -> None:

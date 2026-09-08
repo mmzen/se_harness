@@ -213,3 +213,5 @@ drops the re-export from `repository_tools/json_bytes.py`; `ECP-PRM-015`
 serves `candidate_acceptance` and `release_qualification`. The copies the
 assessment counted in the tools are the accepted price of the barrier.
 Nothing else in this specification changes.
+
+**`ECP-PRM-008`'s writers live in two modules after `WO-ECP-036` (`SPEC-ECP-024` `ECP-ENG-019`), recorded 2026-09-08.** The compliance module is split along its seams: `write_evidence_packet` stays in `workflow_compliance.py`, and the handoff rebind and the retained result write from `workflow_evidence_packet.py`; all three still write through `atomic_write_bytes`, so the rule holds as written and only the home of two writers moves. `ECP-PRM-012`'s import stands: `workflow_compliance.py` imports the checkpoint set from `workflow_contract.py`. Nothing else in this specification changes.

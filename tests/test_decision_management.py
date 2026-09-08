@@ -12,7 +12,7 @@ from unittest import mock
 
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain, formal, write
 from tests.cli_support import invoke
@@ -102,7 +102,7 @@ class DecisionManagementFixture:
         return path
 
     def validate(self):
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         return validator.validate_repository(self.root)
 
     def decision_errors(self) -> list[str]:
@@ -299,10 +299,10 @@ class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):
         self.assertEqual([], self.decision_errors())
         # the admitted transition passes; every other blocked transition still waits
         self.assertEqual("pass", self.predicates(self.handoff_check())["QGP-G4I-DECISION"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import blocking_decisions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual([], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "implemented")])
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "verified")])
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["REQ-001"], "approved")])
@@ -356,7 +356,7 @@ class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):
         self.assertIn('revisit = "v2.0.0"', text)
         self.assertEqual([], self.decision_errors())
 
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         report = self.validate()
         standing = validator.standing_deviations(report.artifacts)
         self.assertEqual({"SPEC-001": ["DEC-001"], "WO-001": ["DEC-001"]}, standing)
@@ -528,7 +528,7 @@ class DecisionGateFamilyTests(DecisionManagementFixture, unittest.TestCase):
         self.assertIn("past its revisit 'v1.0.0'", warnings[0].message)
         self.assertEqual(
             {"RLS-001": ["DEC-001"], "SPEC-001": ["DEC-001"], "VREC-001": ["DEC-001"], "WO-001": ["DEC-001"]},
-            _load_validator_module().standing_deviations(self.validate().artifacts),
+            validate_engineering_artifacts.standing_deviations(self.validate().artifacts),
         )
 
     def test_contract_copies_carry_the_family_the_predicates_and_the_policy_rows(self) -> None:

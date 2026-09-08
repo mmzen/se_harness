@@ -12,7 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain, formal, write
 from tests.cli_support import invoke
@@ -62,7 +62,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
         write(self.path, text + (reader_first_body() if body is None else body))
 
     def report(self):
-        return _load_validator_module().validate_repository(self.root)
+        return validate_engineering_artifacts.validate_repository(self.root)
 
     def advisories(self) -> dict[str, list[str]]:
         report = self.report()
@@ -182,7 +182,7 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.assertNotIn("W-AUT-008", requirement_codes)
 
     def test_the_corpus_of_approved_intents_raises_nothing(self) -> None:
-        report = _load_validator_module().validate_repository(REPOSITORY_ROOT)
+        report = validate_engineering_artifacts.validate_repository(REPOSITORY_ROOT)
         intents = sorted(CORPUS.glob("*/intent/INT-*.md"))
         self.assertGreaterEqual(len(intents), 33)
         self.assertEqual([], [f"{i.path}: {i.code}" for i in report.advisories if "/intent/" in i.path.replace("\\", "/")])

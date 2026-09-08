@@ -2,7 +2,7 @@
 id = "WO-ECP-034"
 type = "work_order"
 title = "Wave 3, group A: the engine as an import surface and its twins folded into the package"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -28,6 +28,7 @@ paths = [
   "se_harness/workflow.py",
   "se_harness/workflow_compliance.py",
   "se_harness/workflow_contract.py",
+  "se_harness/workflow_procedures.py",
   "repository_tools/diagnostic_code_index.py",
   "docs/notes/diagnostic-codes.md",
   "tests/",
@@ -54,6 +55,20 @@ to = "approved"
 decided_at = "2026-09-08T15:13:26Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #404, #405 and #406 and their summary were presented: wave 3 of the code health assessment of 2026-09-07 (issue #378) and the revisit triggers of DEC-ECP-001 and DEC-ECP-002, the engine as an import surface, one validation per governance command, the three largest modules split along their seams, every recorded output byte-identical. Approval of a definition authorizes no work."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T15:32:45Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner with the word 'start', after the wave 3 packet (#404, #405, #406) merged to main at 0e7d718b: wave 3, group A, the engine as an import surface and its five twins folded into the package (SPEC-ECP-024 ECP-ENG-001 to ECP-ENG-009, ECP-ENG-016, ECP-ENG-023 to ECP-ENG-026). Start preflight PASS."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T17:37:23Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete, prepare the record, start group B': se_harness/engine is an import surface the CLI, preflight, the workflow, provenance and qualification import in-process, the path loader and the four command-line assemblies gone, each entry module still runnable as python -m se_harness.engine.<name>; the five twins have one definition (layout tables, lifecycle registry, evaluator-evidence validator with per-reason engine messages, implemented-or-later status set checked at load, body parser and artifact-id pattern); the engine's 73 codes join codes.py and the index attributes them by name; SPEC-DST-025, SPEC-ECP-021 and SPEC-IAR-008 carry amendment records. Every recorded output byte-identical between main's code and the candidate on the same target and revision; CONTRACT_SHA256 unchanged. Windows suite at its baseline (1063 tests after the merge of main's test-suite hygiene, the one workstation error, 22 skips) at 5094aea7 and the 17 pull-request checks of #407 green at cf573862; validate 1427 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from main passes all nine predicates over 47 paths. Scope amended under DR-REMEDIATION-SCOPE for se_harness/workflow_procedures.py. Duplication scan 3 blocks to 0, so ECP-PRM-027 of SPEC-ECP-023 is met and DEC-ECP-002's revisit arrives with this merge. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-034/WO-ECP-034-handoff.md."
 +++
 
 # Work Order: Wave 3, group A: the engine as an import surface and its twins folded into the package
@@ -158,3 +173,14 @@ written, which is a deviation decision in this domain's `decisions/`.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`se_harness/workflow_procedures.py` is added to `[execution_scope].paths`.
+`ECP-ENG-008` requires one compiled artifact-id pattern for the package, and
+that module carried a fourth copy of it; the scope listed every other module
+the group touches and omitted this one. The handoff check refused the change
+set on `QGP-G4I-PATHS` (`WEX201`) for that path alone, the other eight
+predicates passing. Decided by the accountable engineering owner on
+2026-09-08 under DR-REMEDIATION-SCOPE by selecting the presented option
+"Amend the scope". Nothing else is widened.

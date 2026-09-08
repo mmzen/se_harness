@@ -12,7 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain, formal, write
 from tests.cli_support import invoke
@@ -62,7 +62,7 @@ class ReaderFirstRequirementTests(unittest.TestCase):
         write(self.path, text + (reader_first_body() if body is None else body))
 
     def advisories(self) -> dict[str, str]:
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         self.assertEqual([], [f"{i.code}: {i.message}" for i in report.errors if i.path.endswith("REQ-002.md")])
         return {item.code: item.message for item in report.advisories if item.path.endswith("REQ-002.md")}
 
@@ -142,7 +142,7 @@ class ReaderFirstRequirementTests(unittest.TestCase):
         self.write_requirement(statement="WHEN " + " ".join(f"w{i}" for i in range(40)) + ", THE SYSTEM SHALL respond.")
         code, _, _ = invoke("validate", str(self.root), "--advisories")
         self.assertEqual(0, code)
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         self.assertEqual([], [f"{i.code}: {i.message}" for i in report.errors])
         self.assertIn("W-AUT-003", {item.code for item in report.advisories if item.path.endswith("REQ-002.md")})
         self.assertEqual([], [item.code for item in report.warnings if item.code.startswith("W-AUT-")])

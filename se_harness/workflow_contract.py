@@ -78,6 +78,9 @@ DEFINITION_TYPES = frozenset({
 LIFECYCLE_FAMILIES = frozenset(
     {"definition", "work_order", "verification_record", "release_record", "decision", "risk"}
 )
+#: ECP-ENG-007: the work-order states at or after implementation, defined once and checked
+#: against the lifecycle registry at load (every state declared, the set closed under its edges).
+IMPLEMENTED_OR_LATER_STATUSES = frozenset({"implemented", "verified", "released"})
 LIFECYCLE_FIELDS = frozenset(
     {
         "transitions_to",
@@ -311,7 +314,19 @@ def validate_lifecycle_registry(workflow: Mapping[str, Any]) -> LifecycleRegistr
                     f"workflow lifecycle {family}:{state} targets unknown state {sorted(unknown)[0]}"
                 )
         families[family] = MappingProxyType(states)
+    work_order_states = families["work_order"]
+    for state in sorted(IMPLEMENTED_OR_LATER_STATUSES):
+        if state not in work_order_states:
+            raise ContractError(f"workflow lifecycle work_order must declare the {state} state")
+        if not set(work_order_states[state].transitions_to) <= IMPLEMENTED_OR_LATER_STATUSES:
+            raise ContractError(f"workflow lifecycle work_order:{state} leaves the implemented-or-later states")
     return MappingProxyType(families)
+
+
+def lifecycle_family(artifact_type: str) -> str:
+    """The lifecycle family of an artifact type: its own for the five governed families, else definition."""
+
+    return artifact_type if artifact_type in LIFECYCLE_FAMILIES and artifact_type != "definition" else "definition"
 
 
 def load_lifecycle_registry(path: Path | None = None) -> LifecycleRegistry:

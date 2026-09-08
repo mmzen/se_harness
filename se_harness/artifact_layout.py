@@ -196,7 +196,7 @@ def _is_link_like(path: Path) -> bool:
     return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
 
 
-def _validate_existing_chain(root: Path, relative: Path, *, final_kind: str) -> Path:
+def validate_existing_chain(root: Path, relative: Path, *, final_kind: str) -> Path:
     destination = safe_destination(root, relative)
     probe = root
     for index, part in enumerate(relative.parts):
@@ -215,7 +215,7 @@ def _validate_existing_chain(root: Path, relative: Path, *, final_kind: str) -> 
     return destination
 
 
-def _atomic_create(path: Path, content: bytes) -> None:
+def atomic_create(path: Path, content: bytes) -> None:
     # ECP-PRM-008: the one create-once writer, with this module's wording.
     atomic_create_bytes(
         path,
@@ -225,7 +225,7 @@ def _atomic_create(path: Path, content: bytes) -> None:
     )
 
 
-def _rollback_directories(paths: list[Path]) -> None:
+def rollback_directories(paths: list[Path]) -> None:
     for path in reversed(paths):
         try:
             path.rmdir()
@@ -237,7 +237,7 @@ def _rollback_directories(paths: list[Path]) -> None:
 
 def _validate_installed_templates(root: Path) -> Path:
     relative = Path("docs") / "engineering" / "templates"
-    templates = _validate_existing_chain(root, relative, final_kind="directory")
+    templates = validate_existing_chain(root, relative, final_kind="directory")
     if not templates.is_dir():
         raise HarnessError("the target does not contain installed engineering artifact templates")
     return templates
@@ -258,12 +258,12 @@ def scaffold_domain(
         raise HarnessError("domain title must use 1-128 safe single-line letters, numbers, spaces, or ._()/-")
 
     domain_relative = Path("docs") / "engineering" / selected_domain
-    _validate_existing_chain(root, domain_relative, final_kind="directory")
+    validate_existing_chain(root, domain_relative, final_kind="directory")
     directory_relatives = [domain_relative / Path(*parts) for parts in canonical_directory_paths()]
     for relative in [domain_relative, *directory_relatives]:
-        _validate_existing_chain(root, relative, final_kind="directory")
+        validate_existing_chain(root, relative, final_kind="directory")
     index_relative = domain_relative / "README.md"
-    index = _validate_existing_chain(root, index_relative, final_kind="file")
+    index = validate_existing_chain(root, index_relative, final_kind="file")
 
     changes = [
         AuthoringChange("present" if (root / relative).is_dir() else "create", relative.as_posix())
@@ -290,9 +290,9 @@ def scaffold_domain(
                 "Use the canonical type directories below and retain domain-specific navigation or "
                 "instructions here.\n"
             ).encode("utf-8")
-            _atomic_create(index, content)
+            atomic_create(index, content)
     except (OSError, HarnessError) as exc:
-        _rollback_directories(created_directories)
+        rollback_directories(created_directories)
         if isinstance(exc, HarnessError):
             raise
         raise HarnessError(f"cannot scaffold domain safely: {exc}") from exc
@@ -321,7 +321,7 @@ def authoring_checklist(repository: Path, artifact_type: str) -> list[str]:
     """Return the installed authoring policy's checklist bullets for one artifact type (AUT-POL-003)."""
 
     root = ensure_target(repository, must_exist=True)
-    policy = _validate_existing_chain(root, Path("docs") / "engineering" / "ARTIFACT_AUTHORING.md", final_kind="file")
+    policy = validate_existing_chain(root, Path("docs") / "engineering" / "ARTIFACT_AUTHORING.md", final_kind="file")
     if not policy.is_file():
         return []
     try:
@@ -344,7 +344,7 @@ def authoring_checklist(repository: Path, artifact_type: str) -> list[str]:
     return bullets
 
 
-def _existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
+def existing_artifact_path(root: Path, artifact_id: str) -> Path | None:
     artifact_root = root / "docs" / "engineering"
     if not artifact_root.is_dir():
         return None
@@ -472,10 +472,10 @@ def create_artifact(
         artifact_id = allocated
     selected_id = validate_artifact_id(artifact_id, selected_type)
     destination_relative = canonical_artifact_relative_path(domain, selected_type, selected_id)
-    destination = _validate_existing_chain(root, destination_relative, final_kind="file")
+    destination = validate_existing_chain(root, destination_relative, final_kind="file")
     if destination.exists():
         raise HarnessError(f"artifact destination already exists: {destination_relative.as_posix()}")
-    existing = _existing_artifact_path(root, selected_id)
+    existing = existing_artifact_path(root, selected_id)
     if existing is not None:
         raise HarnessError(f"artifact ID already exists: {selected_id} at {existing.relative_to(root).as_posix()}")
     if allocated is None and (root / ".git").exists():
@@ -488,7 +488,7 @@ def create_artifact(
             raise HarnessError(f"artifact ID already exists: {selected_id} on local ref {on_refs[0]}")
 
     template_relative = Path("docs") / "engineering" / "templates" / ARTIFACT_TEMPLATES[selected_type]
-    template_path = _validate_existing_chain(root, template_relative, final_kind="file")
+    template_path = validate_existing_chain(root, template_relative, final_kind="file")
     if not template_path.is_file():
         raise HarnessError(f"canonical artifact template is missing: {template_relative.as_posix()}")
     try:
@@ -497,7 +497,7 @@ def create_artifact(
         raise HarnessError(f"cannot read canonical artifact template: {exc}") from exc
 
     parent_relative = destination_relative.parent
-    _validate_existing_chain(root, parent_relative, final_kind="directory")
+    validate_existing_chain(root, parent_relative, final_kind="directory")
     change = AuthoringChange("create", destination_relative.as_posix(), allocated, allocation_refs)
     if dry_run:
         return change
@@ -514,9 +514,9 @@ def create_artifact(
         for directory in missing:
             directory.mkdir()
             created_directories.append(directory)
-        _atomic_create(destination, content)
+        atomic_create(destination, content)
     except (OSError, HarnessError) as exc:
-        _rollback_directories(created_directories)
+        rollback_directories(created_directories)
         if isinstance(exc, HarnessError):
             raise
         raise HarnessError(f"cannot create artifact safely: {exc}") from exc

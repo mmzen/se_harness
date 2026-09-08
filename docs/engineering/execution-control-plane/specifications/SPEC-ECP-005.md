@@ -202,3 +202,7 @@ governed"). `SPEC-CIP-001` line 96 mentions `[--result-schema 2]` on
   `check --checkpoint focus`; the equality rules hold either way.
 - Internal caching of validation between the plan and the apply, provided
   the stale-input check of `TransitionPlan` is kept.
+
+## Amendment record
+
+**`ECP-KRN-007`'s filter moves to preflight under `WO-ECP-035` (`SPEC-ECP-024` `ECP-ENG-014` and `ECP-ENG-025`), recorded 2026-09-08.** The one preflight-diagnostic filter is `preflight.lifecycle_relevant`; `run_preflight` applies it, reporting candidate-versus-released skew apart and never blocking on it, and `workflow_compliance.lifecycle_relevant_diagnostics` applies the same classifier to any report it is handed, so `check --checkpoint start` and `preflight` read one verdict. The conformance test of the rule stands. Nothing else in this specification changes.

@@ -1,80 +1,28 @@
 from __future__ import annotations
 
 import copy
-import importlib.util
 import json
-import shutil
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
 
 from se_harness import provenance, workflow
-from se_harness.preflight import _load_validator_module
-from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, _validate_edge
-from se_harness.workflow_contract import ContractError, load_lifecycle_registry
-from tests.root_identity_support import load_module
+from se_harness.engine import validate_engineering_artifacts
+from se_harness.workflow_edges import LIFECYCLE_REGISTRY, TRANSITIONS, grants_authority, validate_edge
+from se_harness.workflow_contract import (
+    IMPLEMENTED_OR_LATER_STATUSES,
+    ContractError,
+    LifecycleState,
+    lifecycle_family,
+    load_lifecycle_registry,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_CONTRACT = ROOT / "se_harness/workflow_contract.json"
 MANAGED_CONTRACT = ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.json"
-VALIDATOR = _load_validator_module()
-
-
-EXPECTED = {
-    "definition": {
-        "draft": (("approved", "rejected"), False, False, True, True, "none"),
-        "ready": ((), False, False, False, True, "none"),
-        "approved": (("implemented", "rejected"), True, False, True, True, "none"),
-        "in_progress": ((), True, False, False, True, "none"),
-        "implemented": ((), True, False, False, True, "none"),
-        "verified": ((), True, False, False, True, "none"),
-        "released": ((), True, False, False, True, "none"),
-        "superseded": ((), False, False, False, True, "none"),
-        "rejected": ((), False, False, False, True, "none"),
-    },
-    "work_order": {
-        "draft": (("approved", "rejected"), False, False, True, True, "none"),
-        "ready": ((), False, False, False, True, "none"),
-        "approved": (("in_progress", "rejected"), True, False, True, True, "none"),
-        "in_progress": (("implemented", "rejected"), True, False, True, True, "none"),
-        "implemented": (("verified", "released"), True, False, True, True, "none"),
-        "verified": (("released",), True, False, True, True, "none"),
-        "released": ((), True, False, False, True, "none"),
-        "superseded": ((), False, False, False, True, "none"),
-        "rejected": ((), False, False, False, True, "none"),
-    },
-    "verification_record": {
-        "ready": (("verified", "rejected", "superseded"), False, False, True, True, "none"),
-        "verified": ((), True, False, False, True, "none"),
-        "released": ((), True, False, False, True, "none"),
-        "superseded": ((), False, False, False, True, "none"),
-        "rejected": ((), False, False, False, True, "required"),
-    },
-    "release_record": {
-        "ready": (("released", "rejected"), False, True, True, True, "none"),
-        "released": ((), True, True, False, True, "none"),
-        "rejected": ((), False, False, False, True, "required"),
-    },
-    "decision": {
-        "open": (("decided", "deferred", "withdrawn"), False, False, True, True, "none"),
-        "deferred": (("decided", "withdrawn"), False, False, True, True, "none"),
-        "decided": ((), False, False, False, True, "none"),
-        "withdrawn": ((), False, False, False, True, "none"),
-    },
-    # SPEC-RSK-010 RSK-MGT-007 and RSK-MGT-008: the risk family, no state granting authority.
-    "risk": {
-        "identified": (("raised", "withdrawn"), False, False, True, True, "none"),
-        "raised": (("accepted", "avoided", "mitigating", "withdrawn"), False, False, True, True, "none"),
-        "mitigating": (("mitigated", "withdrawn"), False, False, True, True, "none"),
-        "accepted": ((), False, False, False, True, "none"),
-        "avoided": ((), False, False, False, True, "none"),
-        "mitigated": ((), False, False, False, True, "none"),
-        "withdrawn": ((), False, False, False, True, "none"),
-    },
-}
+VALIDATOR = validate_engineering_artifacts
 
 
 def row_value(row: object) -> tuple[tuple[str, ...], bool, bool, bool, bool, str]:
@@ -89,8 +37,13 @@ def row_value(row: object) -> tuple[tuple[str, ...], bool, bool, bool, bool, str
 
 
 class LifecycleStateContractTests(unittest.TestCase):
-    def test_exact_matrix_is_shared_by_package_and_standalone_consumers(self) -> None:
+    def test_one_loader_serves_the_package_and_the_engine(self) -> None:
+        # SPEC-ECP-024 ECP-ENG-005: the validator reads the registry through the package loader;
+        # its former copy and the hand-written matrix this test carried are gone. The contract
+        # file is the one source, byte-identical to the managed template.
         self.assertEqual(RUNTIME_CONTRACT.read_bytes(), MANAGED_CONTRACT.read_bytes())
+        self.assertIs(VALIDATOR.load_lifecycle_registry, load_lifecycle_registry)
+        self.assertIs(VALIDATOR.LifecycleStatePolicy, LifecycleState)
         runtime = {
             family: {state: row_value(row) for state, row in states.items()}
             for family, states in LIFECYCLE_REGISTRY.items()
@@ -99,15 +52,33 @@ class LifecycleStateContractTests(unittest.TestCase):
             family: {state: row_value(row) for state, row in states.items()}
             for family, states in VALIDATOR.WORKFLOW_LIFECYCLES.items()
         }
-        self.assertEqual(EXPECTED, runtime)
-        self.assertEqual(EXPECTED, standalone)
+        self.assertEqual(runtime, standalone)
         self.assertEqual(
-            {
-                family: {state: set(values[0]) for state, values in states.items()}
-                for family, states in EXPECTED.items()
-            },
+            {family: {state: set(row.transitions_to) for state, row in states.items()} for family, states in LIFECYCLE_REGISTRY.items()},
             TRANSITIONS,
         )
+        self.assertEqual(
+            {family: {state: frozenset(row.transitions_to) for state, row in states.items()} for family, states in LIFECYCLE_REGISTRY.items()},
+            {family: dict(states) for family, states in VALIDATOR.WORKFLOW_TRANSITIONS.items()},
+        )
+        source = (ROOT / "se_harness/engine/validate_engineering_artifacts.py").read_text(encoding="utf-8")
+        self.assertNotIn("def _load_workflow_lifecycles", source)
+        self.assertNotIn("class LifecycleStatePolicy", source)
+
+    def test_the_family_map_and_the_status_set_have_one_definition(self) -> None:
+        # ECP-ENG-007: the implemented-or-later states are declared once and checked at load.
+        self.assertEqual(frozenset({"implemented", "verified", "released"}), IMPLEMENTED_OR_LATER_STATUSES)
+        self.assertIs(VALIDATOR.IMPLEMENTED_OR_LATER_STATUSES, IMPLEMENTED_OR_LATER_STATUSES)
+        for state in IMPLEMENTED_OR_LATER_STATUSES:
+            self.assertIn(state, LIFECYCLE_REGISTRY["work_order"])
+            self.assertTrue(set(LIFECYCLE_REGISTRY["work_order"][state].transitions_to) <= IMPLEMENTED_OR_LATER_STATUSES)
+        for artifact_type, family in (
+            ("requirement", "definition"), ("adr", "definition"), ("work_order", "work_order"),
+            ("verification_record", "verification_record"), ("release_record", "release_record"),
+            ("decision", "decision"), ("risk", "risk"), ("unknown", "definition"),
+        ):
+            self.assertEqual(family, lifecycle_family(artifact_type))
+            self.assertEqual(family, VALIDATOR.lifecycle_family(artifact_type))
 
     def test_registry_is_immutable_and_rejected_rows_are_terminal_history(self) -> None:
         with self.assertRaises(TypeError):
@@ -138,15 +109,15 @@ class LifecycleStateContractTests(unittest.TestCase):
         }
         for family, states in LIFECYCLE_REGISTRY.items():
             for status, row in states.items():
-                self.assertEqual(row.grants_authority, workflow._grants_authority(family, status))
+                self.assertEqual(row.grants_authority, grants_authority(family, status))
                 self.assertEqual(row.grants_authority, provenance._grants_authority(family, status))
                 self.assertEqual(
                     row.grants_authority,
-                    VALIDATOR._grants_authority(artifact_type[family], status),
+                    VALIDATOR.grants_authority(artifact_type[family], status),
                 )
                 if family == "release_record":
                     self.assertEqual(row.reserves_version, provenance._reserves_version(status))
-                    self.assertEqual(row.reserves_version, VALIDATOR._reserves_version(status))
+                    self.assertEqual(row.reserves_version, VALIDATOR.reserves_version(status))
 
     def test_strict_loader_rejects_each_structural_inconsistency(self) -> None:
         source = json.loads(RUNTIME_CONTRACT.read_text(encoding="utf-8"))
@@ -175,6 +146,16 @@ class LifecycleStateContractTests(unittest.TestCase):
         def wrong_boolean(value: dict) -> None:
             value["lifecycles"]["release_record"]["ready"]["reserves_version"] = 1
 
+        def missing_implemented(value: dict) -> None:
+            # ECP-ENG-007: the status set is checked against the registry at load.
+            value["lifecycles"]["work_order"].pop("released")
+            value["lifecycles"]["work_order"]["implemented"]["transitions_to"] = ["verified"]
+            value["lifecycles"]["work_order"]["verified"]["transitions_to"] = []
+            value["lifecycles"]["work_order"]["verified"]["transitionable"] = False
+
+        def leaking_implemented(value: dict) -> None:
+            value["lifecycles"]["work_order"]["verified"]["transitions_to"] = ["released", "rejected"]
+
         for name, mutate in (
             ("missing-family", missing_family),
             ("missing-field", missing_field),
@@ -184,6 +165,8 @@ class LifecycleStateContractTests(unittest.TestCase):
             ("illegal-reservation", illegal_reservation),
             ("hidden-history", hidden_history),
             ("wrong-boolean", wrong_boolean),
+            ("missing-implemented-or-later", missing_implemented),
+            ("leaking-implemented-or-later", leaking_implemented),
         ):
             with self.subTest(case=name), tempfile.TemporaryDirectory() as temporary:
                 malformed = copy.deepcopy(source)
@@ -223,7 +206,9 @@ class LifecycleStateContractTests(unittest.TestCase):
             with self.assertRaisesRegex(ContractError, "cannot load machine policy"):
                 load_lifecycle_registry(non_utf8)
 
-    def test_standalone_validator_rejects_invalid_managed_registry_before_import(self) -> None:
+    def test_the_one_loader_refuses_the_malformed_managed_registries(self) -> None:
+        # Formerly a copy of the validator was executed against each of these; the validator
+        # now imports the package loader, so the loader's refusal is the engine's (ECP-ENG-005).
         original = MANAGED_CONTRACT.read_text(encoding="utf-8")
         cases = {
             "v3": original.replace("se-harness-workflow-v4", "se-harness-workflow-v3", 1),
@@ -238,26 +223,13 @@ class LifecycleStateContractTests(unittest.TestCase):
                 1,
             ),
         }
-        for index, (name, contract) in enumerate(cases.items()):
+        for name, contract in cases.items():
             with self.subTest(case=name), tempfile.TemporaryDirectory() as temporary:
-                standard = Path(temporary) / "standard"
-                scripts = standard / "scripts"
-                engineering = standard / "docs/engineering"
-                scripts.mkdir(parents=True)
-                engineering.mkdir(parents=True)
-                shutil.copy2(
-                    ROOT / "se_harness/engine/artifact_layout_registry.py",
-                    scripts / "artifact_layout_registry.py",
-                )
-                validator_path = scripts / "validate_engineering_artifacts.py"
-                shutil.copy2(
-                    ROOT / "se_harness/engine/validate_engineering_artifacts.py",
-                    validator_path,
-                )
-                (engineering / "WORKFLOW.json").write_text(contract, encoding="utf-8")
-                module_name = f"_invalid_lifecycle_validator_{index}"
-                with self.assertRaises(RuntimeError):
-                    load_module(validator_path, module_name)
+                path = Path(temporary) / "WORKFLOW.json"
+                path.write_text(contract, encoding="utf-8")
+                with self.assertRaises(RuntimeError) as raised:
+                    load_lifecycle_registry(path)
+                self.assertIsInstance(raised.exception, ContractError)
 
     def test_planner_accepts_exactly_declared_edges(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -280,10 +252,10 @@ class LifecycleStateContractTests(unittest.TestCase):
                     for target in universe:
                         reason = "VREC-NEXT-001" if target == "superseded" else "review decision" if target == "rejected" else None
                         if target in row.transitions_to:
-                            _validate_edge(root, artifact, target, "test-owner", reason)
+                            validate_edge(root, artifact, target, "test-owner", reason)
                         else:
                             with self.assertRaisesRegex(Exception, "is not allowed"):
-                                _validate_edge(root, artifact, target, "test-owner", reason)
+                                validate_edge(root, artifact, target, "test-owner", reason)
 
     def test_validator_admits_exactly_the_registry_vocabulary_per_family(self) -> None:
         fixtures = {
@@ -292,7 +264,7 @@ class LifecycleStateContractTests(unittest.TestCase):
             "verification_record": ("VREC-TST-001", "verification_record"),
             "release_record": ("RLS-TST-001", "release_record"),
         }
-        all_states = set().union(*(set(states) for states in EXPECTED.values())) | {"unknown"}
+        all_states = set().union(*(set(states) for states in LIFECYCLE_REGISTRY.values())) | {"unknown"}
         for family, (artifact_id, artifact_type) in fixtures.items():
             for status in all_states:
                 artifact = VALIDATOR.Artifact(
@@ -312,7 +284,7 @@ class LifecycleStateContractTests(unittest.TestCase):
                 diagnostics = VALIDATOR.validate_common_metadata([artifact], ROOT)
                 status_errors = [item for item in diagnostics if "status" in item.message]
                 self.assertEqual(
-                    status not in EXPECTED[family],
+                    status not in LIFECYCLE_REGISTRY[family],
                     bool(status_errors),
                     f"{family}:{status}: {[item.message for item in diagnostics]}",
                 )

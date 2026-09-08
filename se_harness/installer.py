@@ -24,7 +24,6 @@ from se_harness.integrity import (
     compare_lock_entry,
     parse_lock,
     pretty_json_bytes,
-    raw_sha256,
     read_toml,
 )
 
@@ -73,15 +72,6 @@ class Change:
 #: the package and are resolved from here, never from the target repository, the
 #: working directory or a ``share/`` prefix.
 ENGINE_ROOT = Path(__file__).resolve().parent / "engine"
-
-
-def engine_script(name: str) -> Path:
-    """Return the packaged evaluator script ``name`` (SPEC-DST-025 DST-ENG-004, DST-ENG-005)."""
-
-    path = ENGINE_ROOT / name
-    if not path.is_file():
-        raise HarnessError(f"missing distribution script: {path}")
-    return path
 
 
 def template_root() -> Path:

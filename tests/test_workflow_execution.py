@@ -16,7 +16,7 @@ from types import SimpleNamespace
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow import PreconditionError, apply_transition, plan_transition, project_selected
 from se_harness.workflow_compliance import check_workflow
 from tests.mutation_guard_support import trusted_mutation_authority
@@ -117,10 +117,10 @@ paths = ["src/"]
     def bind_handoff_evidence(self, work_order_id: str = "WO-001") -> Path:
         """Retain evidence bound to the handoff checkpoint at the current formal snapshot."""
 
-        from se_harness.workflow import _validation
+        from se_harness.repository_graph import validated_repository
         from se_harness.workflow_compliance import formal_snapshot_digest
 
-        _, report = _validation(self.root)
+        _, report = validated_repository(self.root)
         snapshot = formal_snapshot_digest(self.root, report.artifacts)
         path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -414,7 +414,7 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertIn('verified_by = "assurance-owner"', text)
         self.assertIn("[[lifecycle_events]]", text)
         self.assertEqual(work_before, work_order.read_bytes())
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_ready_prepared_vrec_can_be_superseded_without_verification_decision_fields(self) -> None:
         source = self.ready_vrec()
@@ -448,13 +448,13 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertIn('superseded_by = ["VREC-002"]', updated)
         self.assertIn('reason = "VREC-002"', updated)
         self.assertNotEqual(before, updated)
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_transition_uses_the_same_checkpoint_before_plan_and_apply(self) -> None:
         self.ready_vrec()
-        with mock.patch(
-            "se_harness.workflow_compliance.ensure_governed_checkpoint"
-        ) as checkpoint:
+        # WO-ECP-036 (SPEC-ECP-024 ECP-ENG-019): the workflow binds the checkpoint at import time,
+        # the cycle that forced a lazy import being gone; the patch lands where the planner looks.
+        with mock.patch("se_harness.workflow.ensure_governed_checkpoint") as checkpoint:
             plan_transition(
                 self.root,
                 {"VREC-001": "verified"},
@@ -615,7 +615,7 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
             'prepared_by = "quality-owner"',
             'prepared_by = "quality-owner"\nverified_at = "2026-08-20T10:00:00Z"',
         ), encoding="utf-8")
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         self.assertTrue(any("must omit decision field 'verified_at'" in item.message for item in report.errors))
 
     def test_transition_preserves_bom_crlf_and_body_bytes(self) -> None:
@@ -844,7 +844,7 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertIn(restitution["command_or_response"]["value"], human_output)
 
     def test_projection_and_planning_scale_to_one_thousand_artifacts(self) -> None:
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         measurements: list[tuple[int, float, float, float]] = []
 
         def median_runtime(operation: object) -> tuple[float, object]:
@@ -1125,7 +1125,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         git(self.root, "checkout", "-q", "main")
         reachable = git(self.root, "rev-parse", "HEAD")
 
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
 
         def artifacts() -> list:
             return list(validator.validate_repository(self.root).artifacts)

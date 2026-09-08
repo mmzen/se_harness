@@ -384,26 +384,23 @@ class MutationGuardTests(unittest.TestCase):
         retained.parent.mkdir(parents=True, exist_ok=True)
         retained.write_text("test evidence\n", encoding="utf-8")
 
-        catalog = {
-            "WO-TST-001": {"id": "WO-TST-001", "type": "work_order", "status": "implemented"},
-            "VER-TST-001": {"id": "VER-TST-001", "type": "verification", "status": "approved"},
-            "REL-TST-001": {"id": "REL-TST-001", "type": "release_contract", "status": "approved"},
-            "VREC-TST-001": {"id": "VREC-TST-001", "type": "verification_record", "status": "verified"},
-        }
+        def artifact(artifact_id: str, artifact_type: str, status: str, metadata: dict[str, object]) -> SimpleNamespace:
+            # The validator's artifact shape (ECP-ENG-011): provenance reads metadata here, never a file.
+            return SimpleNamespace(
+                artifact_id=artifact_id, artifact_type=artifact_type, status=status,
+                path=root / "docs" / "engineering" / f"{artifact_id}.md",
+                metadata={"id": artifact_id, "type": artifact_type, "status": status, **metadata},
+            )
 
-        def metadata(_root: Path, artifact: dict[str, object]) -> dict[str, object]:
-            artifact_id = artifact["id"]
-            if artifact_id == "WO-TST-001":
-                return {"relations": {"verification": ["VER-TST-001"]}}
-            if artifact_id == "REL-TST-001":
-                return {"relations": {"gates": ["WO-TST-001"]}}
-            if artifact_id == "VREC-TST-001":
-                return {
-                    "commit": "a" * 40,
-                    "git_object_format": "sha1",
-                    "relations": {"verifies_work_order": ["WO-TST-001"]},
-                }
-            return {"relations": {}}
+        catalog = {
+            "WO-TST-001": artifact("WO-TST-001", "work_order", "implemented", {"relations": {"verification": ["VER-TST-001"]}}),
+            "VER-TST-001": artifact("VER-TST-001", "verification", "approved", {"relations": {}}),
+            "REL-TST-001": artifact("REL-TST-001", "release_contract", "approved", {"relations": {"gates": ["WO-TST-001"]}}),
+            "VREC-TST-001": artifact(
+                "VREC-TST-001", "verification_record", "verified",
+                {"commit": "a" * 40, "git_object_format": "sha1", "relations": {"verifies_work_order": ["WO-TST-001"]}},
+            ),
+        }
 
         rejected = HarnessError("injected mutation guard rejection")
         before = self._snapshot(root)
@@ -419,9 +416,6 @@ class MutationGuardTests(unittest.TestCase):
         ), mock.patch(
             "se_harness.provenance._validation_catalog",
             return_value=catalog,
-        ), mock.patch(
-            "se_harness.provenance._load_metadata",
-            side_effect=metadata,
         ), mock.patch(
             "se_harness.provenance._record_domain",
             return_value="test",

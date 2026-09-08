@@ -2,23 +2,22 @@
 
 from __future__ import annotations
 
-from typing import Mapping
+from typing import Callable, Mapping
 
 import argparse
+import contextlib
+import io
 import json
-import os
 import re
-import subprocess
 import sys
 from pathlib import Path
 
 from se_harness.integrity import pretty_json_bytes, raw_sha256
 from se_harness.workflow_contract import CHECKPOINT_ORDER, EVIDENCE_CHECKPOINTS
 from se_harness import __version__
-from se_harness._process import run as _launch, text as _text
 from se_harness.artifact_layout import create_artifact, scaffold_domain
+from se_harness.engine import generate_harness_dashboard, inspect_engineering_artifacts, validate_engineering_artifacts
 from se_harness.installer import (
-    engine_script,
     HarnessError,
     apply_changes,
     ensure_target,
@@ -40,7 +39,7 @@ from se_harness.release_qualification import (
     write_qualification_result,
 )
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
-from se_harness.workflow_compliance import check_workflow, evidence_packet_path, retain_handoff_result, write_evidence_packet
+from se_harness.workflow_compliance import check_workflow, evidence_packet_path, write_evidence_packet
 from se_harness.workflow_contract import ContractError
 from se_harness.workflow_procedures import ProcedureError
 from se_harness.workflow_result import (
@@ -224,64 +223,34 @@ def _upgrade(args: argparse.Namespace) -> int:
     return 0
 
 
-def _distribution_script(script: str) -> Path:
-    # SPEC-DST-025 DST-ENG-004: resolved from the package, never from the target.
-    return engine_script(script)
+def _run_engine(target: Path, entry: Callable[[list[str] | None], int], extra: list[str]) -> int:
+    """ECP-ENG-003: run an engine entry module in-process on the target; its exit code is ours."""
 
-
-def _distribution_environment() -> dict[str, str]:
-    environment = os.environ.copy()
-    environment.pop("PYTHONPATH", None)
-    environment["PYTHONNOUSERSITE"] = "1"
-    return environment
-
-
-#: ECP-COR-014: every engine launch is bounded; a timeout is a refusal, never a hang.
-ENGINE_TIMEOUT_SECONDS = 1800
-
-
-def _launch_engine(script: str, argv: list[str], *, cwd: Path, capture: bool) -> subprocess.CompletedProcess:
-    # ECP-PRM-001: the one launcher; a timeout or a start failure is a refusal that names the script.
-    completed = _launch(
-        argv, cwd=cwd, env=_distribution_environment(), timeout=ENGINE_TIMEOUT_SECONDS, capture=capture,
-        error=lambda message: HarnessError(f"{script}: {message}"),
-    )
-    if not capture:
-        return completed
-    return subprocess.CompletedProcess(completed.args, completed.returncode, _text(completed.stdout), _text(completed.stderr))
-
-
-def _run_distribution_script(
-    target: Path,
-    script: str,
-    extra: list[str],
-) -> int:
     target = ensure_target(target, must_exist=True)
-    path = _distribution_script(script)
-    completed = _launch_engine(
-        script, [sys.executable, "-B", str(path), "--root", str(target), *extra], cwd=target, capture=False,
-    )
-    return completed.returncode
+    return entry(["--root", str(target), *extra])
+
+
+def _capture_engine(entry: Callable[[list[str] | None], int], argv: list[str]) -> tuple[int, str, str]:
+    """Run an engine entry module in-process and capture what it prints."""
+
+    stdout, stderr = io.StringIO(), io.StringIO()
+    with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+        code = entry(argv)
+    return code, stdout.getvalue(), stderr.getvalue()
 
 
 def _inspect_repository(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    completed = _launch_engine(
-        "inspect_engineering_artifacts.py",
+    code, output, error = _capture_engine(
+        inspect_engineering_artifacts.main,
         [
-            sys.executable,
-            "-B",
-            str(_distribution_script("inspect_engineering_artifacts.py")),
             "--root",
             str(target),
             *(["--json"] if args.json else []),
             *(["--vocabulary-threshold", str(args.vocabulary_threshold)] if getattr(args, "vocabulary_threshold", None) is not None else []),
         ],
-        cwd=target,
-        capture=True,
     )
-    output = completed.stdout
-    if completed.returncode == 0 and args.json:
+    if code == 0 and args.json:
         try:
             report = json.loads(output)
         except json.JSONDecodeError:
@@ -290,12 +259,12 @@ def _inspect_repository(args: argparse.Namespace) -> int:
             report["mode"] = "repository_wide"
             report["selection"] = {"primary": None, "artifacts": []}
             output = pretty_json_bytes(report, ensure_ascii=False).decode("utf-8")
-    elif completed.returncode == 0:
+    elif code == 0:
         output = output.replace("Harness inspection", "Harness inspection (repository_wide)", 1)
     print(output, end="")
-    if completed.stderr:
-        print(completed.stderr, end="", file=sys.stderr)
-    return completed.returncode
+    if error:
+        print(error, end="", file=sys.stderr)
+    return code
 
 
 def _doctor(args: argparse.Namespace) -> int:
@@ -304,28 +273,13 @@ def _doctor(args: argparse.Namespace) -> int:
     if not args.json:
         for check in checks:
             print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
-    validator = _distribution_script("validate_engineering_artifacts.py")
+    # ECP-ENG-012: the layout pass alone yields W013; the graph passes do not run.
     warnings: list[dict[str, str]] = []
-    if validator.is_file():
-        completed = _launch_engine(
-            "validate_engineering_artifacts.py",
-            [sys.executable, "-B", str(validator), "--root", str(target), "--json"],
-            cwd=target,
-            capture=True,
-        )
-        try:
-            report = json.loads(completed.stdout)
-        except json.JSONDecodeError:
-            report = {}
-        for warning in report.get("warnings", []):
-            if isinstance(warning, dict) and warning.get("code") == W013:
-                warnings.append({
-                    "code": str(warning["code"]),
-                    "path": str(warning.get("path", "<unknown>")),
-                    "message": str(warning.get("message", "")),
-                })
-                if not args.json:
-                    print(f"WARN {warning['code']}: {warning.get('path', '<unknown>')}: {warning.get('message', '')}")
+    for item in validate_engineering_artifacts.canonical_layout_diagnostics(target):
+        if item.code == W013:
+            warnings.append({"code": item.code, "path": item.path, "message": item.message})
+            if not args.json:
+                print(f"WARN {item.code}: {item.path}: {item.message}")
     passed = all(item.passed for item in checks)
     if args.json:
         _print_json(_command_result(
@@ -339,17 +293,12 @@ def _doctor(args: argparse.Namespace) -> int:
 def _dashboard(args: argparse.Namespace) -> int:
     extra = ["--output", args.output] if args.output else []
     if not args.json:
-        return _run_distribution_script(Path(args.target), "generate_harness_dashboard.py", extra)
+        return _run_engine(Path(args.target), generate_harness_dashboard.main, extra)
     target = ensure_target(Path(args.target), must_exist=True)
-    completed = _launch_engine(
-        "generate_harness_dashboard.py",
-        [sys.executable, "-B", str(_distribution_script("generate_harness_dashboard.py")), "--root", str(target), *extra],
-        cwd=target,
-        capture=True,
-    )
-    if completed.returncode == 2:
+    code, _, error = _capture_engine(generate_harness_dashboard.main, ["--root", str(target), *extra])
+    if code == 2:
         # ECP-COR-009: the engine could not run; its refusal is ours, exit 2 as in the human rendering.
-        lines = [line for line in (completed.stderr or "").splitlines() if line.strip()]
+        lines = [line for line in error.splitlines() if line.strip()]
         raise HarnessError(lines[-1] if lines else "dashboard generation refused")
     output = Path(args.output) if args.output else Path("target") / "harness-dashboard"
     if not output.is_absolute():
@@ -357,11 +306,11 @@ def _dashboard(args: argparse.Namespace) -> int:
     manifest = output / "dashboard-manifest.json"
     digest = raw_sha256(manifest.read_bytes()) if manifest.is_file() else None
     members: dict[str, object] = {"output": output.as_posix(), "manifest_sha256": digest}
-    if completed.returncode != 0:
+    if code != 0:
         # ECP-COR-010: the engine's standard error travels with the failed result.
-        members["error"] = (completed.stderr or "")[-2000:]
-    _print_json(_command_result("dashboard", "completed" if completed.returncode == 0 else "failed", **members))
-    return 0 if completed.returncode == 0 else 1
+        members["error"] = error[-2000:]
+    _print_json(_command_result("dashboard", "completed" if code == 0 else "failed", **members))
+    return 0 if code == 0 else 1
 
 
 def _preflight(args: argparse.Namespace) -> int:
@@ -431,29 +380,14 @@ def _check(args: argparse.Namespace) -> int:
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
             target=args.target_state,
             from_git=args.from_git,
+            # ECP-PRB-002 (amended), ECP-ENG-010: the completed Git-derived handoff result is
+            # retained by the run that produced it, from the one validation it holds.
+            retain_handoff=args.from_git is not None and args.checkpoint == "handoff",
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         # ECP-COR-001: one splitter, so no line carries a code twice.
         code, message = _split_code(exc, WEX210)
         result = failed_result("check", args.artifact, message, code=code)
-    if (
-        args.from_git is not None
-        and args.checkpoint == "handoff"
-        and result["operation"]["outcome"] == "completed"
-    ):
-        # ECP-PRB-002 (amended): a completed Git-derived handoff result is retained
-        # beside the packet by the harness, never authored by the agent.
-        from se_harness.workflow import _catalog, _validation
-
-        root = Path(args.target)
-        _, report = _validation(root)
-        primary = _catalog(report)[args.artifact]
-        retained = retain_handoff_result(root.resolve(), primary, result)
-        # ECP-SBH-005: the retained entry joins the rebind entry rather than replacing it.
-        result["mutation"]["writes"] = [
-            *result["mutation"]["writes"],
-            {"id": args.artifact, "path": retained, "fields": ["result_sha256"]},
-        ]
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
@@ -475,11 +409,11 @@ def _evidence(args: argparse.Namespace) -> int:
 
 def _pr_body(args: argparse.Namespace) -> int:
     from se_harness.github_ci import render_pull_request_body
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = Path(args.target).resolve()
-    _, report = _validation(root)
-    primary = _catalog(report).get(args.artifact)
+    _, report = validated_repository(root)
+    primary = artifact_catalog(report).get(args.artifact)
     if primary is None:
         # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence;
         # the one splitter names the code, as on every other result path.
@@ -517,6 +451,8 @@ def _select_work_order(args: argparse.Namespace) -> int:
 
 def _capture_verification(args: argparse.Namespace) -> int:
     try:
+        # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
+        report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
         output = capture_verification(
             Path(args.target),
             record_id=args.record_id,
@@ -526,8 +462,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
             owner=args.owner,
             output=args.output,
             domain=args.domain,
+            report=report,
         )
-        result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
+        result = preparation_result(Path(args.target), args.record_id, "capture-verification", output, report)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
@@ -542,6 +479,8 @@ def _capture_verification(args: argparse.Namespace) -> int:
 
 def _prepare_release(args: argparse.Namespace) -> int:
     try:
+        # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
+        report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
         output = prepare_release(
             Path(args.target),
             record_id=args.record_id,
@@ -553,8 +492,9 @@ def _prepare_release(args: argparse.Namespace) -> int:
             tag=args.tag,
             output=args.output,
             domain=args.domain,
+            report=report,
         )
-        result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
+        result = preparation_result(Path(args.target), args.record_id, "prepare-release", output, report)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
@@ -780,11 +720,11 @@ def _release_unit(args: argparse.Namespace) -> int:
         render_gates_toml,
         render_release_unit,
     )
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = Path(args.target)
-    _, report = _validation(root)
-    catalog = _catalog(report)
+    _, report = validated_repository(root)
+    catalog = artifact_catalog(report)
 
     def lookup(work_order: str) -> tuple[str | None, bool | None]:
         artifact = catalog.get(work_order)
@@ -918,9 +858,9 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--json", action="store_true")
     validate.add_argument("--advisories", action="store_true", help="list the authoring advisories (W-AUT-*) after the warnings; --json always carries them")
     validate.set_defaults(
-        handler=lambda args: _run_distribution_script(
+        handler=lambda args: _run_engine(
             Path(args.target),
-            "validate_engineering_artifacts.py",
+            validate_engineering_artifacts.main,
             [*(["--json"] if args.json else []), *(["--advisories"] if args.advisories else [])],
         )
     )
