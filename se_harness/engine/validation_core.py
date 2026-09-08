@@ -15,15 +15,11 @@ from se_harness.codes import E001, E002
 
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"
 
-
 VALIDATION_PLANES = ("structure", "governance", "policy", "maintenance")
-
 
 TYPE_PREFIX = dict(ARTIFACT_PREFIXES)
 
-
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-
 
 EXCLUDED_DIRECTORY_NAMES = {"templates", "evidence", ".git", ".idea", "target", "node_modules"}
 

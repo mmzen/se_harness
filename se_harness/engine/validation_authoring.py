@@ -40,104 +40,73 @@ from se_harness.engine.validation_core import Artifact, Diagnostic, add_error, d
 
 AUTHORING_OPENERS = ("THE SYSTEM SHALL", "WHEN ", "WHILE ", "IF ", "WHERE ")
 
-
 AUTHORING_NAMED_SUBJECT = re.compile(r"^THE [A-Z][A-Za-z0-9 _-]{0,60} SHALL\b")
-
 
 #: SPEC-TCM-003 TCM-RFR-003: the reader-first budgets, counted with code spans removed.
 AUTHORING_STATEMENT_LIMIT = 30  # words
 
-
 AUTHORING_BODY_LIMIT = 250  # words
-
 
 AUTHORING_WHY_WORD_LIMIT = 120
 
-
 AUTHORING_WHY_SENTENCE_LIMIT = 5
-
 
 AUTHORING_SENTENCE_LIMIT = 25  # words
 
-
 AUTHORING_CODE_IDENTIFIER_LIMIT = 3
 
-
 AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT = 2
-
 
 #: SPEC-TCM-004 TCM-RFI-002 to TCM-RFI-004: the reader-first intent budgets and the
 #: acceptance vocabulary that marks a success-measure row as an acceptance check.
 INTENT_OUTCOME_LIMIT = 30  # words
 
-
 INTENT_BODY_LIMIT = 200  # words
-
 
 INTENT_PROBLEM_WORD_LIMIT = 120
 
-
 INTENT_PROBLEM_SENTENCE_LIMIT = 5
 
-
 INTENT_CODE_IDENTIFIER_LIMIT = 2
-
 
 #: SPEC-TCM-005 TCM-RFC-002 and TCM-RFC-003: the reader-first capability budgets. The
 #: shared codes (W-AUT-005, -007, -008, -009) fire with these constants on a capability.
 CAPABILITY_ABILITY_LIMIT = 30  # words
 
-
 CAPABILITY_BODY_LIMIT = 150  # words
-
 
 CAPABILITY_NEED_WORD_LIMIT = 60
 
-
 CAPABILITY_NEED_SENTENCE_LIMIT = 3
 
-
 CAPABILITY_CODE_IDENTIFIER_LIMIT = 2
-
 
 #: SPEC-TCM-006 TCM-RFS-004 and TCM-RFS-006 to TCM-RFS-013: the reader-first specification
 #: budgets and the rule grammar. The shared codes W-AUT-005, W-AUT-007 and W-AUT-009 fire
 #: with these constants on a specification draft; W-AUT-008 never does (TCM-RFS-013).
 SPECIFICATION_CONTRACT_LIMIT = 30  # words
 
-
 SPECIFICATION_RULE_LIMIT = 30  # words, one sentence
-
 
 SPECIFICATION_PROSE_LIMIT = 300  # words outside Rules, Failure behaviour, Examples and Coverage
 
-
 SPECIFICATION_RULE_SECTIONS = ("Rules", "Behavioral rules")
-
 
 SPECIFICATION_UNBUDGETED_SECTIONS = frozenset({"Rules", "Behavioral rules", "Failure behaviour", "Examples", "Coverage"})
 
-
 SPECIFICATION_LEGACY_HEADINGS = ("Behavioral rules", "Open decisions", "Approval")
-
 
 SPECIFICATION_KEYWORDS = re.compile(r"\b(MUST NOT|MUST|SHALL NOT|SHALL|MAY|refuses)\b")
 
-
 RULE_IDENTIFIER = re.compile(r"\b[A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3}\b")
-
 
 _RULE_LEAD = re.compile(r"^\*\*([A-Z][A-Z0-9]*-[A-Z0-9]+-\d{3})(?:\s*\([^)]*\))?\.?\*\*\.?\s*")
 
-
 _LEGACY_REQUIREMENT_LIST = ("Candidate requirements", "Derived requirements")
-
 
 _REPOSITORY_PATH_SPAN = re.compile(r"`[^`\s]*/[^`\s]*\.[A-Za-z0-9]{1,6}(?::\d+(?:-\d+)?)?`")
 
-
 _LINE_RANGE_SPAN = re.compile(r"`[^`]*:\d+(?:-\d+)?`")
-
 
 _ACCEPTANCE_VOCABULARY = re.compile(
     r"\b(CI|tests?|validator|validate|verification|implementation review|acceptance run|regression run|transaction)\b", re.I
@@ -146,15 +115,11 @@ _ACCEPTANCE_VOCABULARY = re.compile(
 
 _CODE_SPAN = re.compile(r"`[^`]*`")
 
-
 _FENCE = re.compile(r"```.*?```", re.S)
-
 
 _WORD = re.compile(r"[A-Za-z0-9][A-Za-z0-9'\-]*")
 
-
 _SENTENCE_END = re.compile(r"[.!?](?:\s|$)")
-
 
 _EVALUATION_EVENT = re.compile(r"^WHEN\s+[^,]*\b(is validated|is evaluated|is checked|runs|is run)\b[^,]*,", re.I)
 
@@ -221,7 +186,6 @@ def coverage_rows(body: str) -> list[tuple[str, list[str]]] | None:
 
 
 VERIFICATION_METHODS = ("test", "analysis", "inspection", "demonstration")
-
 
 REQUIREMENT_PRIORITIES = ("must", "should", "could")
 

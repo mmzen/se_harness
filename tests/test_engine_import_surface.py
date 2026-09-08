@@ -15,7 +15,7 @@ import sys
 import unittest
 from pathlib import Path
 
-from se_harness import artifact_layout, cli, evaluator_evidence, front_matter, preflight, provenance, workflow, workflow_contract, workflow_procedures
+from se_harness import artifact_layout, cli, evaluator_evidence, front_matter, preflight, provenance, repository_graph, workflow, workflow_contract, workflow_procedures
 from se_harness.engine import generate_harness_dashboard, inspect_engineering_artifacts, validate_engineering_artifacts
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +59,7 @@ class ImportSurfaceTests(unittest.TestCase):
             if re.search(r"validate_engineering_artifacts\.py|generate_harness_dashboard\.py|inspect_engineering_artifacts\.py", source):
                 offenders.append(f"{path.name}: script path")
         self.assertEqual([], offenders)
-        self.assertIs(workflow._validator_module, validate_engineering_artifacts)
+        self.assertIs(repository_graph._validator_module, validate_engineering_artifacts)
         self.assertIs(preflight.validate_engineering_artifacts, validate_engineering_artifacts)
         self.assertIs(cli.validate_engineering_artifacts, validate_engineering_artifacts)
         self.assertIs(provenance.generate_harness_dashboard, generate_harness_dashboard)

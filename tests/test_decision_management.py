@@ -299,10 +299,10 @@ class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):
         self.assertEqual([], self.decision_errors())
         # the admitted transition passes; every other blocked transition still waits
         self.assertEqual("pass", self.predicates(self.handoff_check())["QGP-G4I-DECISION"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import blocking_decisions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual([], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "implemented")])
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "verified")])
         self.assertEqual(["DEC-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["REQ-001"], "approved")])

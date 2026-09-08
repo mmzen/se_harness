@@ -18,24 +18,17 @@ from se_harness.engine.dashboard_snapshot import GenerationError, is_within, tex
 
 BUNDLE_SCHEMA = "harness-dashboard-bundle-v2"
 
-
 BOOTSTRAP_SCHEMA = "harness-dashboard-bootstrap-v2"
-
 
 SUMMARY_RESOURCE_SCHEMA = "harness-dashboard-summary-v2"
 
-
 TOPOLOGY_RESOURCE_SCHEMA = "harness-dashboard-topology-v2"
-
 
 READINESS_RESOURCE_SCHEMA = "harness-dashboard-readiness-v2"
 
-
 ARTIFACT_RESOURCE_SCHEMA = "harness-dashboard-artifact-v2"
 
-
 MAX_SUMMARY_BYTES = 262_144
-
 
 TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152
 

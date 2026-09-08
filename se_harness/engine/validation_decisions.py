@@ -43,7 +43,6 @@ from se_harness.engine.validation_lifecycle import grants_authority
 
 DECISION_ASSESSMENT_OUTCOMES = {"adr_required", "no_significant_decision"}
 
-
 DECISION_TRIGGERS = {
     "system-boundary",
     "responsibility-or-dependency-direction",
@@ -62,12 +61,9 @@ DECISION_TRIGGERS = {
 
 MAX_ASSESSMENT_RATIONALE_LENGTH = 2000
 
-
 MAX_ASSESSOR_LENGTH = 128
 
-
 WORK_ORDER_ASSURANCE_VALUES = {"required", "not_required"}
-
 
 WORK_ORDER_ASSURANCE_FIELDS = {
     "commit_bound_verification",
@@ -78,40 +74,29 @@ WORK_ORDER_ASSURANCE_FIELDS = {
 
 MAX_ASSURANCE_RATIONALE_LENGTH = 2000
 
-
 MAX_ASSURANCE_DECIDER_LENGTH = 128
-
 
 #: SPEC-DCM-001 rules 2 and 3: the decision kinds and the closed option set of a deviation.
 DECISION_KINDS = ("question", "deviation")
 
-
 DEVIATION_OPTIONS = frozenset({"amend", "supersede", "accept", "stop"})
 
-
 DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
-
 
 #: SPEC-RSK-010 RSK-MGT-002 to RSK-MGT-005: the risk's declared fields, the closed
 #: stage and category sets, and the five-by-five measurement.
 RISK_REQUIRED_FIELDS = ("cause", "effect", "stage", "category", "likelihood", "impact", "score", "raised_by")
 
-
 RISK_STAGES = frozenset({"definition", "architecture", "implementation", "verification", "release", "operation"})
-
 
 RISK_CATEGORIES = frozenset({"safety", "security", "compliance", "process", "schedule", "quality"})
 
-
 RISK_MEASUREMENT_RANGE = range(1, 6)
-
 
 #: RSK-MGT-008: the retained end states; RSK-MGT-018: the states a disposition writes.
 RISK_TERMINAL = frozenset({"accepted", "avoided", "mitigated", "withdrawn"})
 
-
 RISK_DISPOSED = frozenset({"accepted", "avoided", "mitigating", "mitigated", "withdrawn"})
-
 
 #: RSK-MGT-016 and RSK-MGT-020: the option of the paired decision and the risk state it names.
 RISK_OPTION_TARGETS = {"accept": "accepted", "avoid": "avoided", "mitigate": "mitigating"}

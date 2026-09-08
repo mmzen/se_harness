@@ -9,7 +9,7 @@ from types import SimpleNamespace
 
 from se_harness import provenance, workflow
 from se_harness.engine import validate_engineering_artifacts
-from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, _validate_edge
+from se_harness.workflow_edges import LIFECYCLE_REGISTRY, TRANSITIONS, grants_authority, validate_edge
 from se_harness.workflow_contract import (
     IMPLEMENTED_OR_LATER_STATUSES,
     ContractError,
@@ -109,7 +109,7 @@ class LifecycleStateContractTests(unittest.TestCase):
         }
         for family, states in LIFECYCLE_REGISTRY.items():
             for status, row in states.items():
-                self.assertEqual(row.grants_authority, workflow._grants_authority(family, status))
+                self.assertEqual(row.grants_authority, grants_authority(family, status))
                 self.assertEqual(row.grants_authority, provenance._grants_authority(family, status))
                 self.assertEqual(
                     row.grants_authority,
@@ -252,10 +252,10 @@ class LifecycleStateContractTests(unittest.TestCase):
                     for target in universe:
                         reason = "VREC-NEXT-001" if target == "superseded" else "review decision" if target == "rejected" else None
                         if target in row.transitions_to:
-                            _validate_edge(root, artifact, target, "test-owner", reason)
+                            validate_edge(root, artifact, target, "test-owner", reason)
                         else:
                             with self.assertRaisesRegex(Exception, "is not allowed"):
-                                _validate_edge(root, artifact, target, "test-owner", reason)
+                                validate_edge(root, artifact, target, "test-owner", reason)
 
     def test_validator_admits_exactly_the_registry_vocabulary_per_family(self) -> None:
         fixtures = {

@@ -2,26 +2,19 @@
 
 from __future__ import annotations
 
-import hashlib
-import tomllib
-import json
-import re
-from dataclasses import dataclass
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from se_harness import front_matter
-from se_harness._process import ProcessError, run_git, text as _text
-from se_harness.installer import HarnessError, ensure_target, safe_destination
+from se_harness.installer import HarnessError, ensure_target
 from se_harness.preflight import lifecycle_relevant, lock_files, orphaned_ready_records, run_preflight
-from se_harness.integrity import atomic_write_bytes, canonical_text, pretty_json_bytes, unique_object_hook
+from se_harness.integrity import atomic_write_bytes
 from se_harness.workflow_contract import (
     CHECKPOINTS,
     EVIDENCE_CHECKPOINTS,
-    Checkpoint,
     ContractError,
     aggregation_order,
     effective_checkpoints,
+    lifecycle_family,
     load_validated_contracts,
     select_rule,
     transition_binding,
@@ -34,300 +27,64 @@ from se_harness.workflow_procedures import (
     resolve_procedure,
     select_current_step,
 )
+from se_harness.repository_graph import (
+    REPOSITORY_ERROR_CODES,
+    artifact_catalog,
+    classify_diagnostics,
+    project_scope,
+    validated_repository,
+)
+from se_harness.workflow_edges import structural_precondition_results
 from se_harness.workflow_result import build_result
 from se_harness.codes import (
     CodedError,
-    E001,
-    E003,
-    E_CIP_001,
-    E_DCM_004,
-    I001,
-    WEX200,
     WEX201,
     WEX210,
     WEX220,
     WEX_ADS_001,
     WEX_ECP_002,
-    WEX_ECP_003,
     WEX_ECP_010,
     WEX_ECP_011,
     WEX_ECP_012,
     W_ADS_001,
     W_ADS_002,
-    W_ECP_002,
 )
 
-
-CHANGE_SET_SCHEMA = "se-harness-change-set-v1"
-_CONTROL = re.compile(r"[\x00-\x1f\x7f]")
-_RESERVED = {
-    "CON", "PRN", "AUX", "NUL",
-    *(f"COM{index}" for index in range(1, 10)),
-    *(f"LPT{index}" for index in range(1, 10)),
-}
-_REPOSITORY_ERROR_CODES = {E001, E003}
-
-
-@dataclass(frozen=True)
-class ChangeSet:
-    paths: tuple[str, ...]
-    complete: bool
-    source: str
-    #: The members that are new files, known only when Git derived the set (RSK-MGT-027).
-    added: tuple[str, ...] = ()
-
-
-@dataclass
-class CheckpointContext:
-    root: Path
-    artifact: Any
-    catalog: Mapping[str, Any]
-    scoped_errors: list[dict[str, Any]]
-    repository_errors: list[dict[str, Any]]
-    unrelated_count: int
-    declared_scope: tuple[str, ...]
-    admitted_scope: tuple[str, ...]
-    change_set: ChangeSet
-    checkpoint: Checkpoint  # ECP-PRM-013
-    formal_snapshot_sha256: str
-    target: str | None = None
-    #: ECP-ENG-010: the validation this checkpoint was built from, so no predicate validates again.
-    report: Any = None
-
-
-_pairs = unique_object_hook(lambda key: CodedError(WEX200, f"duplicate JSON key in change manifest: {key}"))
-
-
-def normalize_path(value: object, *, directory_allowed: bool = False) -> str:
-    if not isinstance(value, str) or not value or len(value) > 4096:
-        raise CodedError(WEX200, "path must be non-empty UTF-8 text of at most 4096 characters")
-    if _CONTROL.search(value) or "\\" in value or ":" in value or any(token in value for token in ("*", "?", "[", "]")):
-        raise CodedError(WEX200, f"path is not a normalized repository path: {value!r}")
-    directory = value.endswith("/")
-    if directory and not directory_allowed:
-        raise CodedError(WEX200, f"changed path must name a file or component: {value!r}")
-    candidate = value[:-1] if directory else value
-    if not candidate or candidate.startswith("/") or candidate.startswith("//"):
-        raise CodedError(WEX200, f"absolute or empty path is forbidden: {value!r}")
-    parts = PurePosixPath(candidate).parts
-    if not parts or any(part in {"", ".", ".."} for part in parts):
-        raise CodedError(WEX200, f"dot or empty path component is forbidden: {value!r}")
-    for part in parts:
-        stem = part.rstrip(". ").split(".", 1)[0].upper()
-        if stem in _RESERVED or part.endswith((".", " ")):
-            raise CodedError(WEX200, f"reserved path component is forbidden: {value!r}")
-    normalized = PurePosixPath(*parts).as_posix() + ("/" if directory else "")
-    if normalized != value:
-        raise CodedError(WEX200, f"path is not normalized: {value!r}")
-    return normalized
-
-
-def _unique_paths(values: Iterable[object], *, directory_allowed: bool) -> tuple[str, ...]:
-    result: list[str] = []
-    folded: dict[str, str] = {}
-    for value in values:
-        path = normalize_path(value, directory_allowed=directory_allowed)
-        key = path.casefold()
-        if key in folded:
-            raise CodedError(WEX200, f"duplicate or case-ambiguous path: {path!r}")
-        folded[key] = path
-        result.append(path)
-    return tuple(result)
-
-
-def parse_change_manifest(root: Path, manifest: Path) -> ChangeSet:
-    raw = manifest.as_posix()
-    if manifest.is_absolute():
-        try:
-            candidate = manifest.resolve(strict=True)
-            candidate.relative_to(root)
-        except (OSError, ValueError) as exc:
-            raise CodedError(WEX200, "change manifest must remain inside the repository") from exc
-    else:
-        normalized = normalize_path(raw)
-        candidate = safe_destination(root, Path(normalized))
-        try:
-            candidate = candidate.resolve(strict=True)
-            candidate.relative_to(root)
-        except (OSError, ValueError) as exc:
-            raise CodedError(WEX200, "change manifest cannot resolve safely") from exc
-    if candidate.is_symlink() or not candidate.is_file():
-        raise CodedError(WEX200, "change manifest must be one ordinary file")
-    try:
-        data = candidate.read_bytes()
-        if len(data) > 10_000_000:
-            raise CodedError(WEX200, "change manifest exceeds 10 MB")
-        value = json.loads(data.decode("utf-8"), object_pairs_hook=_pairs)
-    except HarnessError:
-        raise
-    except (OSError, UnicodeError, json.JSONDecodeError, RecursionError) as exc:
-        raise CodedError(WEX200, f"invalid change manifest: {exc}") from exc
-    if not isinstance(value, dict) or set(value) != {"schema", "complete", "paths"}:
-        raise CodedError(WEX200, "change manifest fields must be schema, complete, and paths")
-    if value.get("schema") != CHANGE_SET_SCHEMA or not isinstance(value.get("complete"), bool):
-        raise CodedError(WEX200, "change manifest schema or completeness value is invalid")
-    if not isinstance(value.get("paths"), list):
-        raise CodedError(WEX200, "change manifest paths must be an array")
-    return ChangeSet(
-        paths=_unique_paths(value["paths"], directory_allowed=False),
-        complete=value["complete"],
-        source=candidate.relative_to(root).as_posix(),
-    )
-
-
-def declared_change_set(paths: Iterable[str], *, complete: bool) -> ChangeSet:
-    return ChangeSet(
-        paths=_unique_paths(paths, directory_allowed=False),
-        complete=bool(complete),
-        source="arguments",
-    )
-
-
-def _git_lines(root: Path, arguments: list[str], *, base: str) -> list[str]:
-    # ECP-PRM-003: the one launcher.
-    completed = run_git(
-        root, *arguments, timeout=120,
-        error=lambda message: CodedError(WEX_ECP_003, f"git is unavailable for base {base!r}: {message}"),
-    )
-    if completed.returncode != 0:
-        detail = _text(completed.stderr).strip().splitlines()
-        raise CodedError(WEX_ECP_003, f"git {arguments[0]} failed for base {base!r} with exit status {completed.returncode}"
-            + (f": {detail[0]}" if detail else "")
-        )
-    return [item.decode("utf-8") for item in completed.stdout.split(b"\0") if item]
-
-
-def git_change_set(root: Path, base: str) -> ChangeSet:
-    """Derive the change set from Git (ECP-CHG-002 to -004).
-
-    The set is the union of `git diff --name-only BASE` against the working
-    tree, renames contributing both names, and the untracked files Git does not
-    ignore; every member passes `normalize_path`, and any Git failure blocks
-    with `WEX-ECP-003` so no predicate is evaluated as `pass`.
-    """
-
-    if not isinstance(base, str) or not base.strip() or base.startswith("-"):
-        raise CodedError(WEX_ECP_003, f"the Git base must be a revision, not {base!r}")
-    if not (root / ".git").exists():
-        raise CodedError(WEX_ECP_003, f"{root} is not a Git checkout; --from-git needs one")
-    _git_lines(root, ["rev-parse", "--verify", "--quiet", f"{base}^{{commit}}"], base=base)
-    # `-z --name-status` alternates one status letter and one path; an `A` names a
-    # file absent from the base (SPEC-RSK-010 RSK-MGT-027 reads that fact).
-    status = _git_lines(root, ["diff", "-z", "--name-status", "--no-renames", base, "--"], base=base)
-    changed = list(status[1::2])
-    new = {item for letter, item in zip(status[0::2], status[1::2]) if letter.startswith("A")}
-    untracked = _git_lines(root, ["ls-files", "-z", "--others", "--exclude-standard"], base=base)
-    new.update(untracked)
-    ordered: list[str] = []
-    for item in [*changed, *untracked]:
-        if item not in ordered:
-            ordered.append(item)
-    try:
-        paths = _unique_paths(ordered, directory_allowed=False)
-    except HarnessError as exc:
-        raise CodedError(WEX_ECP_003, f"the Git change set is not a normalized path set: {exc}") from exc
-    return ChangeSet(paths=paths, complete=True, source="git", added=tuple(item for item in paths if item in new))
-
-
-def _validate_changed_targets(root: Path, change_set: ChangeSet) -> None:
-    for value in change_set.paths:
-        candidate = safe_destination(root, Path(value))
-        if not candidate.exists() and not candidate.is_symlink():
-            continue
-        try:
-            resolved = candidate.resolve(strict=True)
-            resolved.relative_to(root)
-        except (OSError, ValueError) as exc:
-            raise CodedError(WEX200, f"changed path escapes the repository: {value}") from exc
-
-
-def execution_scope(artifact: Any) -> tuple[str, ...]:
-    table = artifact.metadata.get("execution_scope")
-    if not isinstance(table, dict) or set(table) != {"paths"} or not isinstance(table.get("paths"), list):
-        raise CodedError(WEX200, f"{artifact.artifact_id} has no valid [execution_scope].paths declaration")
-    paths = _unique_paths(table["paths"], directory_allowed=True)
-    if not paths:
-        raise CodedError(WEX200, f"{artifact.artifact_id} execution scope is empty")
-    return paths
-
-
-def path_is_admitted(path: str, scope: Iterable[str]) -> bool:
-    return any(
-        path.startswith(entry) if entry.endswith("/") else path == entry
-        for entry in scope
-    )
-
-
-def _snapshot_content(raw: bytes) -> bytes:
-    """The bytes a formal snapshot hashes for one artifact (ECP-CSN-001, issue #256).
-
-    Line endings are canonicalized as `utf8-text-lf-v1`, the rule the managed-file
-    lock uses, so a CRLF checkout computes the same digest as the LF runner; content
-    that is not UTF-8 text is hashed raw, as before.
-    """
-
-    from se_harness.integrity import IntegrityError, canonical_text_bytes
-
-    try:
-        return canonical_text_bytes(raw)
-    except IntegrityError:
-        return raw
-
-
-def formal_snapshot_digest(root: Path, artifacts: Iterable[Any]) -> str:
-    digest = hashlib.sha256()
-    for artifact in sorted(artifacts, key=lambda item: item.path.relative_to(root).as_posix()):
-        relative = artifact.path.relative_to(root).as_posix().encode("utf-8")
-        content = _snapshot_content(artifact.path.read_bytes())
-        digest.update(len(relative).to_bytes(8, "big"))
-        digest.update(relative)
-        digest.update(len(content).to_bytes(8, "big"))
-        digest.update(content)
-    return digest.hexdigest()
-
-
-def _diagnostic(item: Any) -> dict[str, Any]:
-    return {"code": item.code, "path": item.path, "message": item.message, "plane": item.plane}
-
-
-def _classify(report: Any, catalog: Mapping[str, Any], primary: Any, root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
-    from se_harness.workflow import PRIMARY_TYPES, project_scope
-
-    if primary.artifact_type in PRIMARY_TYPES:
-        governing, dependencies = project_scope(catalog, primary)
-    else:
-        # A definition's selected scope is itself (transition checkpoint, ECP-KRN-004).
-        governing, dependencies = set(), set()
-    scope_paths = {
-        catalog[identifier].path.resolve()
-        for identifier in governing | dependencies | {primary.artifact_id}
-        if identifier in catalog
-    }
-    scoped: list[dict[str, Any]] = []
-    repository: list[dict[str, Any]] = []
-    unrelated = 0
-    for item in report.errors:
-        diagnostic = _diagnostic(item)
-        if item.code in _REPOSITORY_ERROR_CODES:
-            repository.append(diagnostic)
-            continue
-        try:
-            candidate = safe_destination(root, Path(item.path)).resolve()
-        except HarnessError:
-            repository.append({**diagnostic, "code": WEX200})
-            continue
-        if candidate in scope_paths:
-            scoped.append(diagnostic)
-        else:
-            unrelated += 1
-    for item in report.warnings:
-        try:
-            selected = safe_destination(root, Path(item.path)).resolve() in scope_paths
-        except HarnessError:
-            selected = False
-        if not selected:
-            unrelated += 1
-    return scoped, repository, unrelated
+# The seams of this module (SPEC-ECP-024 ECP-ENG-019): every public name stays importable here.
+from se_harness.workflow_change_set import (  # noqa: F401
+    CHANGE_SET_SCHEMA,
+    ChangeSet,
+    added_paths,
+    validate_changed_targets,
+    declared_change_set,
+    execution_scope,
+    formal_snapshot_digest,
+    git_change_set,
+    normalize_path,
+    own_record_paths,
+    parse_change_manifest,
+    path_is_admitted,
+    risk_admissions,
+)
+from se_harness.workflow_evidence_packet import (  # noqa: F401
+    EVIDENCE_HEADER_KEYS,
+    RFC3339_TIMESTAMP,
+    evidence_packet_path,
+    line_ending_conversion,
+    parse_evidence_header,
+    rebind_handoff_packet,
+    render_evidence_header,
+    retain_handoff_result,
+)
+from se_harness.workflow_predicates import (  # noqa: F401
+    CheckpointContext,
+    authoring_ready,
+    blocking_decisions,
+    decision_gate_clear,
+    pull_request_body_findings,
+    release_unit_ready,
+    review_evidence,
+)
 
 
 def lifecycle_relevant_diagnostics(root: Path, report: Any) -> list[Any]:
@@ -354,7 +111,6 @@ def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]
     return "pass", f"Released-installation {phase} preflight inputs are ready."
 
 
-EVIDENCE_HEADER_KEYS = ("artifact", "checkpoint", "formal_snapshot_sha256", "rebound_at")
 #: The gate the `scope` checkpoint evaluates for a work order in any state (ECP-SCP-002).
 SCOPE_CHECKPOINT_GATE = "QG-G4-IMPLEMENTATION-EVIDENCE"
 #: Corrective forms for a blocked scope check (ECP-SCP-005): the step the state selects
@@ -368,73 +124,6 @@ SCOPE_CHECKPOINT_CORRECTIVE = {
     },
     "QGP-G4I-PATHS": {"kind": "escalation", "decision_right": "DR-REMEDIATION-SCOPE"},
 }
-_HEADER_OPEN = b"```toml\n"
-_HEADER_CLOSE = b"\n```\n"
-_RFC3339 = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
-
-
-def parse_evidence_header(data: bytes) -> tuple[dict[str, str] | None, bytes]:
-    """Split a packet into its machine header and retained body (ECP-EVD-002, -004).
-
-    Returns `(None, data)` when no fenced TOML block starts at byte offset 0.
-    A block that starts there but is not valid TOML with exactly the four
-    header keys raises `WEX-ECP-010`.
-    """
-
-    if not data.startswith(_HEADER_OPEN):
-        return None, data
-    end = data.find(_HEADER_CLOSE, len(_HEADER_OPEN))
-    if end < 0:
-        raise CodedError(WEX_ECP_010, "the evidence packet header fence is not closed")
-    raw = data[len(_HEADER_OPEN):end]
-    try:
-        parsed = tomllib.loads(raw.decode("utf-8"))
-    except (UnicodeDecodeError, tomllib.TOMLDecodeError) as exc:
-        raise CodedError(WEX_ECP_010, f"the evidence packet header is not valid TOML: {exc}") from exc
-    if set(parsed) != set(EVIDENCE_HEADER_KEYS) or not all(isinstance(parsed[key], str) for key in EVIDENCE_HEADER_KEYS):
-        raise CodedError(WEX_ECP_010, "the evidence packet header must carry exactly "
-            + ", ".join(EVIDENCE_HEADER_KEYS)
-        )
-    return {key: parsed[key] for key in EVIDENCE_HEADER_KEYS}, data[end + len(_HEADER_CLOSE):]
-
-
-def render_evidence_header(fields: Mapping[str, str]) -> bytes:
-    lines = [f'{key} = "{fields[key]}"' for key in EVIDENCE_HEADER_KEYS]
-    return _HEADER_OPEN + "\n".join(lines).encode("utf-8") + _HEADER_CLOSE
-
-
-def evidence_packet_path(root: Path, artifact: Any, checkpoint: str) -> Path:
-    """`DOMAIN/evidence/WO-ID/WO-ID-CHECKPOINT.md` (ECP-EVD-001)."""
-
-    from se_harness.artifact_layout import artifact_domain_from_relative_path
-
-    # ECP-HST-001 (issue #254): the resolver's text guard rejects a backslash, and
-    # a WindowsPath renders with them; hand it the POSIX form of the evaluator's own path.
-    domain = artifact_domain_from_relative_path(artifact.path.relative_to(root).as_posix())
-    if domain is None:
-        raise CodedError(WEX_ECP_010, f"{artifact.artifact_id} is not under a domain directory")
-    return root / "docs" / "engineering" / domain / "evidence" / artifact.artifact_id / f"{artifact.artifact_id}-{checkpoint}.md"
-
-
-def _line_ending_conversion(root: Path, relative: str) -> str | None:
-    """The attribute rule that would convert this path's line endings, if any (ECP-EVD-006)."""
-
-    if not (root / ".git").exists():
-        return None
-    try:
-        completed = run_git(root, "check-attr", "-z", "text", "eol", "--", relative, timeout=60, error=ProcessError)
-    except ProcessError:
-        return None
-    if completed.returncode != 0:
-        return None
-    fields = completed.stdout.split(b"\0")
-    values: dict[str, str] = {}
-    for index in range(0, len(fields) - 2, 3):
-        values[fields[index + 1].decode("utf-8", "replace")] = fields[index + 2].decode("utf-8", "replace")
-    text, eol = values.get("text", "unspecified"), values.get("eol", "unspecified")
-    if text in {"set", "auto"} and eol != "lf":
-        return f"text={text} eol={eol}"
-    return None
 
 
 def write_evidence_packet(
@@ -446,15 +135,13 @@ def write_evidence_packet(
 ) -> dict[str, Any]:
     """Write or rebind one evidence packet and return the schema-2 result (ECP-EVD-001 to -007)."""
 
-    from se_harness.workflow import _catalog, _validation, project_scope
-
     if checkpoint not in EVIDENCE_CHECKPOINTS:  # ECP-PRM-012: the contract module's set
         raise CodedError(WEX_ECP_010, "the checkpoint must be start, pre-action, transition, or handoff")
-    if not _RFC3339.fullmatch(now):
+    if not RFC3339_TIMESTAMP.fullmatch(now):
         raise CodedError(WEX_ECP_010, "rebound_at must be RFC 3339 UTC at second precision")
     root = ensure_target(repository, must_exist=True)
-    _, report = _validation(root)
-    catalog = _catalog(report)
+    _, report = validated_repository(root)
+    catalog = artifact_catalog(report)
     primary = catalog.get(artifact_id)
     if primary is None:
         raise CodedError(WEX_ECP_010, f"unknown artifact ID: {artifact_id}")
@@ -469,7 +156,7 @@ def write_evidence_packet(
         )
     path = evidence_packet_path(root, primary, checkpoint)
     relative = path.relative_to(root).as_posix()
-    conversion = _line_ending_conversion(root, relative)
+    conversion = line_ending_conversion(root, relative)
     if conversion is not None:
         raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
     snapshot = formal_snapshot_digest(root, report.artifacts)
@@ -518,115 +205,6 @@ def write_evidence_packet(
     )
 
 
-def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) -> str | None:
-    """Rebind an existing handoff packet header to the current snapshot (ECP-SBH-001 to -003).
-
-    Returns the packet's repository-relative path when the header was rewritten,
-    None when there is nothing to move: no packet, no machine header (the legacy
-    grace still reads it), or a header already bound to `snapshot`. A missing
-    packet is never created; `harnessctl evidence` stays the authoring command.
-    """
-
-    path = evidence_packet_path(root, artifact, "handoff")
-    if not path.exists():
-        return None
-    relative = path.relative_to(root).as_posix()
-    if path.is_symlink() or not path.is_file():
-        raise CodedError(WEX_ECP_010, f"{relative} is not an ordinary file")
-    existing, body = parse_evidence_header(path.read_bytes())
-    if existing is None:
-        return None
-    if existing["artifact"] != artifact.artifact_id or existing["checkpoint"] != "handoff":
-        raise CodedError(WEX_ECP_010, f"{relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
-            f"not {artifact.artifact_id} at handoff"
-        )
-    if existing["formal_snapshot_sha256"] == snapshot:
-        return None
-    conversion = _line_ending_conversion(root, relative)
-    if conversion is not None:
-        raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
-    header = {
-        "artifact": artifact.artifact_id,
-        "checkpoint": "handoff",
-        "formal_snapshot_sha256": snapshot,
-        "rebound_at": now,
-    }
-    try:
-        atomic_write_bytes(path, render_evidence_header(header) + body)  # ECP-PRM-008
-    except OSError as exc:
-        raise CodedError(WEX_ECP_010, f"cannot write the evidence packet: {exc}") from exc
-    return relative
-
-
-def retain_handoff_result(root: Path, artifact: Any, result: Mapping[str, Any]) -> str:
-    """Retain a completed Git-derived handoff result beside the packet (ECP-PRB-002, amended)."""
-
-    path = evidence_packet_path(root, artifact, "handoff").with_name("handoff.json")
-    try:
-        atomic_write_bytes(path, pretty_json_bytes(result, ensure_ascii=True))  # ECP-PRM-006, ECP-PRM-008
-    except OSError as exc:
-        raise CodedError(WEX_ECP_010, f"cannot retain the handoff result: {exc}") from exc
-    return path.relative_to(root).as_posix()
-
-
-def _review_evidence(context: CheckpointContext) -> tuple[str, str]:
-    if context.artifact.artifact_type != "work_order":
-        return "pass", "Work-order implementation evidence does not apply to this artifact type."
-    evidence_root = context.root / "docs" / "engineering"
-    candidates = [
-        path for path in evidence_root.rglob("*")
-        if path.is_file()
-        and "evidence" in path.parts
-        and any(part.startswith(context.artifact.artifact_id) for part in path.parts[path.parts.index("evidence") + 1 :])
-    ]
-    binding = f"formal_snapshot_sha256: {context.formal_snapshot_sha256}"
-    # The handoff checkpoint is the one that retains evidence; a transition to
-    # implemented accepts the handoff-bound document for the same snapshot, so
-    # the transition can never pass on weaker evidence than check evaluated.
-    checkpoint = "handoff" if context.checkpoint == "transition" else context.checkpoint
-    legacy: str | None = None
-    for path in sorted(candidates):
-        try:
-            data = path.read_bytes()
-        except OSError:
-            continue
-        relative = path.relative_to(context.root).as_posix()
-        # ECP-EVD-005: the machine header is read through the TOML parser, never by substring.
-        try:
-            header, _ = parse_evidence_header(data)
-        except HarnessError:
-            header = None
-        if header is not None:
-            if (
-                header["artifact"] == context.artifact.artifact_id
-                and header["checkpoint"] == checkpoint
-                and header["formal_snapshot_sha256"] == context.formal_snapshot_sha256
-            ):
-                return "pass", f"Fresh retained evidence is bound at {relative}."
-            continue
-        try:
-            text = data.decode("utf-8")
-        except UnicodeError:
-            continue
-        if (
-            legacy is None
-            and f"artifact: {context.artifact.artifact_id}" in text
-            and f"checkpoint: {checkpoint}" in text
-            and binding in text
-        ):
-            legacy = relative
-    if legacy is not None:
-        # Compatibility for one release: substring-bound packets still pass, named by W-ECP-002.
-        return "pass", (
-            f"Fresh retained evidence is bound at {legacy}. {W_ECP_002}: the packet carries no machine header; "
-            f"migrate it with harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
-        )
-    return "not_assessable", (
-        f"No readable evidence for {context.artifact.artifact_id}, checkpoint {checkpoint}, "
-        f"and formal snapshot {context.formal_snapshot_sha256} is available."
-    )
-
-
 def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContext) -> tuple[str, str]:
     if name == "artifact_status":
         statuses = predicate.get("statuses", [])
@@ -661,7 +239,7 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
     if name == "review_preflight_ready":
         return _preflight_status(context, "review")
     if name == "review_evidence_available":
-        return _review_evidence(context)
+        return review_evidence(context)
     if name == "authoring_ready":
         return authoring_ready(context.artifact)
     if name == "release_unit_ready":
@@ -723,89 +301,6 @@ def _gate_results(
     return result
 
 
-def own_record_paths(root: Path, catalog: Mapping[str, Any], work_order_id: str) -> tuple[str, ...]:
-    """SPEC-ECP-012 ECP-ADM-001/-002: the records that name the work order, as exact paths.
-
-    A verification record whose ``verifies_work_order`` and a release record whose
-    ``releases_work`` contains the selected work order are written by the harness
-    at paths derived from the work order's own identity and land on its branch;
-    each record's catalog path and its ``evaluator_evidence_path`` are admitted to
-    the change set with the work order's own file. Admission is by relation, never
-    by directory: nothing else under the records directories is admitted.
-    """
-
-    admitted: list[str] = []
-    for item in catalog.values():
-        relation = {"verification_record": "verifies_work_order", "release_record": "releases_work"}.get(
-            getattr(item, "artifact_type", None)
-        )
-        if relation is None:
-            continue
-        named = item.relations.get(relation, [])
-        if not isinstance(named, list) or work_order_id not in named:
-            continue
-        try:
-            admitted.append(item.path.relative_to(root).as_posix())
-        except ValueError:
-            continue
-        evidence = item.metadata.get("evaluator_evidence_path")
-        if isinstance(evidence, str) and evidence:
-            admitted.append(evidence)
-    return tuple(sorted(set(admitted)))
-
-
-_RISK_PATH = re.compile(r"^docs/engineering/([a-z0-9]+(?:-[a-z0-9]+)*)/risks/RISK-[A-Z][A-Z0-9]*-\d{3}\.md$")
-
-
-def added_paths(root: Path, change_set: ChangeSet) -> frozenset[str]:
-    """The change-set members that are new files (SPEC-RSK-010 RSK-MGT-027).
-
-    A Git-derived set names them. A declared or manifest set is read against the
-    checkout, where a member is new when it is untracked or staged as an addition;
-    without a checkout nothing is provably new, so nothing is admitted as added.
-    """
-
-    if change_set.source == "git":
-        return frozenset(change_set.added)
-    if not (root / ".git").exists():
-        return frozenset()
-    try:
-        untracked = _git_lines(root, ["ls-files", "-z", "--others", "--exclude-standard"], base="HEAD")
-        staged = _git_lines(root, ["diff", "-z", "--cached", "--name-only", "--diff-filter=A", "--"], base="HEAD")
-    except HarnessError:
-        return frozenset()
-    new = set(untracked) | set(staged)
-    return frozenset(path for path in change_set.paths if path in new)
-
-
-def risk_admissions(root: Path, primary: Any, change_set: ChangeSet) -> tuple[str, ...]:
-    """SPEC-RSK-010 RSK-MGT-026 and RSK-MGT-027: the risk files an in-progress work order may add.
-
-    Anyone may record a threat mid-execution, so an added
-    `docs/engineering/<domain>/risks/RISK-<DOMAIN>-NNN.md` of the work order's own
-    domain is admitted to its change set. A modified or deleted risk file, or one
-    of another domain, still needs a declared path; the admission reads nothing
-    but the work order's own path and the change set.
-    """
-
-    from se_harness.artifact_layout import artifact_domain_from_relative_path
-
-    if getattr(primary, "artifact_type", None) != "work_order" or primary.status != "in_progress":
-        return ()
-    try:
-        domain = artifact_domain_from_relative_path(primary.path.relative_to(root))
-    except ValueError:
-        return ()
-    if domain is None:
-        return ()
-    new = added_paths(root, change_set)
-    admitted = [
-        path for path in change_set.paths
-        if path in new and (match := _RISK_PATH.match(path)) is not None and match.group(1) == domain
-    ]
-    return tuple(sorted(admitted))
-
-
 def build_context(
     root: Path,
     report: Any,
@@ -818,7 +313,7 @@ def build_context(
 ) -> CheckpointContext:
     """The one context builder `check` and `transition` share (ECP-KRN-004)."""
 
-    scoped, repository_errors, unrelated = _classify(report, catalog, primary, root)
+    scoped, repository_errors, unrelated = classify_diagnostics(report, catalog, primary, root)
     try:
         scope = execution_scope(primary) if primary.artifact_type == "work_order" else ()
     except HarnessError:
@@ -876,12 +371,10 @@ def transition_gate_results(
     refusal always names its check.
     """
 
-    from se_harness.workflow import _family
-
     if context.target is None:
         raise CodedError(WEX210, "the transition checkpoint requires a target state")
     predicate_ids, _ = transition_binding(
-        quality_gates, _family(context.artifact.artifact_type), context.artifact.artifact_type, context.target
+        quality_gates, lifecycle_family(context.artifact.artifact_type), context.artifact.artifact_type, context.target
     )
     gate_order: list[str] = []
     for gate_id, gate in gates.items():
@@ -923,11 +416,9 @@ def check_workflow(
         raise CodedError(WEX210, "--target applies only to the transition checkpoint")
     root = ensure_target(repository, must_exist=True)
     _, quality_gates, rules, procedures, gates = load_validated_contracts()
-    from se_harness.workflow import _catalog, _validation, project_scope
-
-    _, report = _validation(root)
+    _, report = validated_repository(root)
     try:
-        catalog = _catalog(report)
+        catalog = artifact_catalog(report)
     except HarnessError as exc:
         raise CodedError(WEX210, f"{exc}") from exc
     primary = catalog.get(artifact_id)
@@ -977,7 +468,7 @@ def check_workflow(
             change_set = ChangeSet(
                 paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source, added=change_set.added
             )
-    _validate_changed_targets(root, change_set)
+    validate_changed_targets(root, change_set)
     context = build_context(
         root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
     )
@@ -1003,8 +494,6 @@ def check_workflow(
         first = resolved["steps"][0]
         gate_ids = list(dict.fromkeys([*gate_ids, *first.get("gate_ids", [])]))
     if checkpoint == "transition":
-        from se_harness.workflow import structural_precondition_results
-
         structural = structural_precondition_results(root, catalog, catalog, primary, str(target), None)
         gate_results = transition_gate_results(quality_gates, gates, context, structural=structural)
     else:
@@ -1029,7 +518,7 @@ def check_workflow(
             f"{W_ADS_002}: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
         )
         if pull_request_body is not None:
-            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in _pull_request_body_findings(root, pull_request_body))
+            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in pull_request_body_findings(root, pull_request_body))
     if trap_blockers:
         passed = False
         outcome = "blocked"
@@ -1316,163 +805,6 @@ def remediation_result(
     )
 
 
-def _pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
-    """Report W-ADS-001 for a pull-request body whose trailer carries a carriage return."""
-
-    from se_harness.github_ci import MAX_EVENT_BYTES, carriage_return_trailer_offsets
-
-    try:
-        with body_path.open("rb") as handle:
-            raw = handle.read(MAX_EVENT_BYTES + 1)
-    except OSError as exc:
-        raise CodedError(WEX200, f"cannot read pull-request body: {exc}") from exc
-    if len(raw) > MAX_EVENT_BYTES:
-        raise CodedError(WEX200, "pull-request body exceeds the size limit")
-    try:
-        body = raw.decode("utf-8")
-    except UnicodeDecodeError as exc:
-        raise CodedError(WEX200, "pull-request body must be UTF-8") from exc
-    return [
-        (
-            f"the Harness-Work-Order line ends with a carriage return at byte offset {offset}; "
-            "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) before pushing"
-        )
-        for offset in carriage_return_trailer_offsets(body)
-    ]
-
-
-_PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
-_FENCE = re.compile(r"```.*?```", re.DOTALL)
-_INLINE_CODE = re.compile(r"`[^`\n]*`")
-_DECISION_LINE = re.compile(r"^-?\s*`?DEC-(?:[A-Z0-9]+-)*\d{3}`?(?:\s*\((?:open|deferred|decided|withdrawn)\))?\.?$")
-
-
-def authoring_ready(artifact: Any) -> tuple[str, str]:
-    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
-
-    try:
-        text = artifact.path.read_text(encoding="utf-8-sig")
-    except (OSError, UnicodeError) as exc:
-        return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
-    prose = _INLINE_CODE.sub("", _FENCE.sub("", canonical_text(text)))  # ECP-PRM-010
-    # the template's five shape comments live in the front matter; markdown headings stay
-    split = front_matter.partition(prose)  # ECP-PRM-005: line-anchored on the normalized text
-    if split is not None:
-        head, body = split
-        head = "\n".join(line for line in head.split("\n") if not line.lstrip().startswith("#"))
-        prose = head + "\n+++\n" + body
-    match = _PLACEHOLDER.search(prose)
-    if match is not None:
-        return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."
-    # the section is read with its inline code intact: the ids are written as `DEC-...`
-    lines = _FENCE.sub("", canonical_text(text)).split("\n")
-    for index, line in enumerate(lines):
-        if line.strip() == "## Open decisions":
-            body_lines = []
-            for item in lines[index + 1:]:
-                if item.startswith("## "):
-                    break
-                if item.strip():
-                    body_lines.append(item.strip())
-            body = body_lines[0] if body_lines else ""
-            # SPEC-DCM-001 rule 11: the section reads None, or lists decision ids.
-            if body not in {"None", "None."} and not all(_DECISION_LINE.fullmatch(line) for line in body_lines):
-                return "fail", (
-                    f"{E_DCM_004}: {artifact.artifact_id} has an open decision written as prose: {body[:120]} "
-                    f"(the Open decisions section reads exactly None, or lists DEC- identifiers)"
-                )
-            break
-    return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
-
-
-def blocking_decisions(catalog: Mapping[str, Any], artifact: Any, target: str | None) -> list[Any]:
-    """Decisions that block `artifact` now (SPEC-DCM-001 rule 5).
-
-    An `open` decision naming the artifact in `blocks` always blocks. A
-    `deferred` one blocks unless its scope admits the requested transition;
-    without a requested transition it does not block.
-    """
-
-    from se_harness.decisions import deferral_scope, scope_admits
-
-    hits: list[Any] = []
-    for candidate in catalog.values():
-        if getattr(candidate, "artifact_type", None) != "decision":
-            continue
-        relations = candidate.relations if isinstance(getattr(candidate, "relations", None), Mapping) else {}
-        blocked = relations.get("blocks", [])
-        if not isinstance(blocked, list) or artifact.artifact_id not in blocked:
-            continue
-        if candidate.status == "open":
-            hits.append(candidate)
-        elif candidate.status == "deferred" and target is not None:
-            if not scope_admits(deferral_scope(candidate), artifact.artifact_id, artifact.status, target):
-                hits.append(candidate)
-    return sorted(hits, key=lambda item: item.artifact_id)
-
-
-def decision_gate_clear(context: CheckpointContext) -> tuple[str, str]:
-    """QGP-*-DECISION: no open or unscoped deferred decision blocks the selected artifact."""
-
-    from se_harness.decisions import declared_options, deciding_roles
-
-    hits = blocking_decisions(context.catalog, context.artifact, context.target)
-    if not hits:
-        return "pass", f"No open decision blocks {context.artifact.artifact_id}."
-    first = hits[0]
-    question = str(first.metadata.get("question") or "").strip()
-    options = "; ".join(f"{item['id']}: {item['label']}" for item in declared_options(first)) or "none declared"
-    roles = ", ".join(sorted(deciding_roles(first, context.catalog))) or "the owner of the blocked artifact"
-    return "fail", (
-        f"{first.artifact_id} is {first.status} and blocks {context.artifact.artifact_id}: {question} "
-        f"Options: {options}. Decider: {roles}. "
-        f"Next: harnessctl decide . --artifact {first.artifact_id} --option OPTION-ID --decision ROLE --reason TEXT"
-    )
-
-
-def release_unit_ready(artifact: Any, root: Path, catalog: Mapping[str, Any]) -> tuple[str, str]:
-    """CIP-RLU: a release contract that names a candidate commit declares the census the history yields.
-
-    A contract without `candidate_commit` is the retained allow-list form and passes. A contract
-    with one is re-measured with `se_harness.release_unit`; every `E-CIP-001` finding fails it.
-    An unavailable history (no git, no tag) is `not_assessable`, never a pass.
-    """
-
-    metadata = artifact.metadata
-    if artifact.artifact_type != "release_contract":
-        return "not_assessable", f"{artifact.artifact_id} is not a release contract."
-    candidate = metadata.get("candidate_commit")
-    if not isinstance(candidate, str) or not candidate:
-        return "pass", f"{artifact.artifact_id} declares no candidate_commit; the allow-list form is not re-measured."
-    previous_tag = metadata.get("previous_release_tag")
-    if not isinstance(previous_tag, str) or not previous_tag:
-        return "fail", f"{E_CIP_001}: {artifact.artifact_id} names candidate_commit but no previous_release_tag."
-    section = metadata.get("release_unit", {})
-    exemptions = section.get("untraced_exemptions", []) if isinstance(section, dict) else []
-    if not isinstance(exemptions, list) or not all(isinstance(item, str) for item in exemptions):
-        return "fail", f"{E_CIP_001}: {artifact.artifact_id} release_unit.untraced_exemptions must be an array of full commit ids."
-    from se_harness.release_unit import PACKAGED_SURFACE_PREFIXES, compare_with_contract, derive_release_unit
-
-    def lookup(work_order: str) -> tuple[str | None, bool | None]:
-        entry = catalog.get(work_order)
-        if entry is None:
-            return None, None
-        status = entry.metadata.get("status")
-        scope = entry.metadata.get("execution_scope", {})
-        paths = scope.get("paths", []) if isinstance(scope, dict) else []
-        packaged = any(isinstance(item, str) and item.startswith(PACKAGED_SURFACE_PREFIXES) for item in paths)
-        return (status if isinstance(status, str) else None), packaged
-
-    try:
-        unit = derive_release_unit(root, from_ref=previous_tag, to_ref=candidate, exempt=exemptions, lookup=lookup)
-    except HarnessError as exc:
-        return "not_assessable", f"{artifact.artifact_id}: the release unit cannot be derived here: {exc}"
-    findings = compare_with_contract(unit, metadata)
-    if findings:
-        return "fail", f"{artifact.artifact_id}: " + " ".join(findings)
-    return "pass", f"{artifact.artifact_id} gates equal the census derived over {previous_tag}..{unit.to_commit[:12]} ({len(unit.gates)} work orders)."
-
-
 def ensure_governed_checkpoint(
     repository: Path,
     artifact_ids: Iterable[str],
@@ -1487,16 +819,14 @@ def ensure_governed_checkpoint(
         load_validated_contracts()
     except ContractError as exc:
         raise CodedError(WEX210, f"invalid machine policy: {exc}") from exc
-    from se_harness.workflow import _catalog, _validation
-
     if report is None:
-        _, report = _validation(root)
+        _, report = validated_repository(root)
     if catalog is None:
-        catalog = _catalog(report)
+        catalog = artifact_catalog(report)
     for artifact_id in artifact_ids:
         if artifact_id not in catalog:
             raise CodedError(WEX210, f"unknown governed artifact {artifact_id}")
-    repository_errors = [item for item in report.errors if item.code in _REPOSITORY_ERROR_CODES]
+    repository_errors = [item for item in report.errors if item.code in REPOSITORY_ERROR_CODES]
     if repository_errors:
         raise CodedError(WEX210, f"repository integrity prevents governed action: {repository_errors[0].message}")
     # The authoring and release-unit predicates a definition needs before it

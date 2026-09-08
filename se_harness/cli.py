@@ -409,11 +409,11 @@ def _evidence(args: argparse.Namespace) -> int:
 
 def _pr_body(args: argparse.Namespace) -> int:
     from se_harness.github_ci import render_pull_request_body
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = Path(args.target).resolve()
-    _, report = _validation(root)
-    primary = _catalog(report).get(args.artifact)
+    _, report = validated_repository(root)
+    primary = artifact_catalog(report).get(args.artifact)
     if primary is None:
         # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence;
         # the one splitter names the code, as on every other result path.
@@ -720,11 +720,11 @@ def _release_unit(args: argparse.Namespace) -> int:
         render_gates_toml,
         render_release_unit,
     )
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = Path(args.target)
-    _, report = _validation(root)
-    catalog = _catalog(report)
+    _, report = validated_repository(root)
+    catalog = artifact_catalog(report)
 
     def lookup(work_order: str) -> tuple[str | None, bool | None]:
         artifact = catalog.get(work_order)

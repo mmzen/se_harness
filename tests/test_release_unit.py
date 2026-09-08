@@ -136,8 +136,8 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
             "REL-X-001": _Artifact({"type": "release_contract", "candidate_commit": git(h.root, "rev-parse", "HEAD"), "previous_release_tag": "v1", "relations": {"gates": ["WO-X-001"]}}),
         }
         with (
-            mock.patch("se_harness.workflow._validation", return_value=(None, None)),
-            mock.patch("se_harness.workflow._catalog", return_value=catalog),
+            mock.patch("se_harness.repository_graph.validated_repository", return_value=(None, None)),
+            mock.patch("se_harness.repository_graph.artifact_catalog", return_value=catalog),
         ):
             code, output, _ = invoke("release-unit", str(h.root), "--from", "v1", "--to", "HEAD", "--contract", "REL-X-001")
             self.assertEqual(0, code, output)

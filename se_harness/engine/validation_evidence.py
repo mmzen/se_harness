@@ -36,7 +36,6 @@ EVIDENCE_WORK_ORDER_PATTERN = re.compile(
 
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 
-
 # The legacy release-evidence declaration mechanism (SPEC-LRE-001) was retired
 # under WO-LRE-002 (the evaluator-evidence floor, owner decision of 2026-08-30):
 # a released record carrying neither evaluator-evidence field is not assessed.

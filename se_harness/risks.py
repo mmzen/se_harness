@@ -356,7 +356,7 @@ def raise_risk(
     needs no decision right and reads no configuration key (RSK-MGT-011).
     """
 
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = ensure_target(repository, must_exist=True)
     selected_domain = resolve_domain(root, domain)
@@ -380,11 +380,11 @@ def raise_risk(
     if not threatened:
         raise HarnessError("a risk threatens at least one artifact; pass --threatens")
 
-    _, report = _validation(root)
+    _, report = validated_repository(root)
     if any(item.code in {E001, E003} for item in report.errors):
         first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
-    catalog = _catalog(report)
+    catalog = artifact_catalog(report)
     for item in threatened:
         target = catalog.get(item)
         if target is None:
@@ -594,7 +594,8 @@ def dispose_decision_with_risks(
     withdraws them; a decided option moves each to the state it names.
     """
 
-    from se_harness.workflow import _catalog, _validation, plan_transition
+    from se_harness.repository_graph import artifact_catalog, validated_repository
+    from se_harness.workflow import plan_transition
 
     if defer and withdraw:
         raise HarnessError("--defer and --withdraw are exclusive")
@@ -606,8 +607,8 @@ def dispose_decision_with_risks(
     dispositions: dict[str, Mapping[str, Any]] = {
         decision_id: {"target": target, "option": option, "revisit": revisit, "scope": tuple(scope)},
     }
-    _, report = _validation(root)
-    catalog = _catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}
+    _, report = validated_repository(root)
+    catalog = artifact_catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}
     decision = catalog.get(decision_id)
     risks = raised_risks_of(catalog, decision) if decision is not None and decision.artifact_type == "decision" else []
     if not risks and (mitigated_by or avoided_by):
@@ -643,14 +644,14 @@ def dispose_decision_with_risks(
 def risks_threatening(repository: Path, artifact_id: str) -> list[dict[str, Any]]:
     """RSK-MGT-033: the risks threatening one artifact and its governing chain; reads only."""
 
-    from se_harness.workflow import PRIMARY_TYPES, _catalog, _validation, project_scope
+    from se_harness.repository_graph import PRIMARY_TYPES, artifact_catalog, project_scope, validated_repository
 
     root = ensure_target(repository, must_exist=True)
-    _, report = _validation(root)
+    _, report = validated_repository(root)
     if any(item.code in {E001, E003} for item in report.errors):
         first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
-    catalog = _catalog(report)
+    catalog = artifact_catalog(report)
     primary = catalog.get(artifact_id)
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")

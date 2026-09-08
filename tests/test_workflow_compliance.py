@@ -60,7 +60,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
     def check(self, *extra: str) -> tuple[int, dict, str]:
         with (
             mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Review preflight is ready.")),
-            mock.patch("se_harness.workflow_compliance._review_evidence", return_value=("pass", "Evidence is current.")),
+            mock.patch("se_harness.workflow_compliance.review_evidence", return_value=("pass", "Evidence is current.")),
         ):
             code, output, error = invoke(
                 "check",
@@ -829,9 +829,9 @@ class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
             path.write_bytes(text.replace(b"\n", newline))
 
     def digest(self) -> str:
-        from se_harness.workflow import _validation
+        from se_harness.repository_graph import validated_repository
 
-        _, report = _validation(self.root)
+        _, report = validated_repository(self.root)
         return formal_snapshot_digest(self.root, report.artifacts)
 
     def test_an_lf_tree_keeps_the_digest_fixed_before_the_change(self) -> None:

@@ -23,7 +23,7 @@ from se_harness.engine.validate_engineering_artifacts import ValidationReport, v
 from se_harness.engine.validate_engineering_artifacts import coverage_rows, specification_rules  # noqa: F401
 from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES  # noqa: F401
 
-# The seams of this module (SPEC-ECP-024 ECP-ENG-017): every public name stays importable here.
+# The seams of this module (SPEC-ECP-024 ECP-ENG-018): every public name stays importable here.
 from se_harness.engine.dashboard_snapshot import (  # noqa: F401
     ACTIVE_WORK_ORDER_STATUSES,
     ALLOWED_EVIDENCE_SUFFIXES,

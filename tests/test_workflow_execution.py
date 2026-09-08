@@ -117,10 +117,10 @@ paths = ["src/"]
     def bind_handoff_evidence(self, work_order_id: str = "WO-001") -> Path:
         """Retain evidence bound to the handoff checkpoint at the current formal snapshot."""
 
-        from se_harness.workflow import _validation
+        from se_harness.repository_graph import validated_repository
         from se_harness.workflow_compliance import formal_snapshot_digest
 
-        _, report = _validation(self.root)
+        _, report = validated_repository(self.root)
         snapshot = formal_snapshot_digest(self.root, report.artifacts)
         path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -452,9 +452,9 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
 
     def test_transition_uses_the_same_checkpoint_before_plan_and_apply(self) -> None:
         self.ready_vrec()
-        with mock.patch(
-            "se_harness.workflow_compliance.ensure_governed_checkpoint"
-        ) as checkpoint:
+        # WO-ECP-036 (SPEC-ECP-024 ECP-ENG-019): the workflow binds the checkpoint at import time,
+        # the cycle that forced a lazy import being gone; the patch lands where the planner looks.
+        with mock.patch("se_harness.workflow.ensure_governed_checkpoint") as checkpoint:
             plan_transition(
                 self.root,
                 {"VREC-001": "verified"},

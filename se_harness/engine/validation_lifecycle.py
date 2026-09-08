@@ -24,9 +24,7 @@ from se_harness.engine.validation_core import (
 
 LifecycleStatePolicy = LifecycleState
 
-
 WORKFLOW_LIFECYCLES = load_lifecycle_registry()
-
 
 WORKFLOW_TRANSITIONS = MappingProxyType({
     family: MappingProxyType(

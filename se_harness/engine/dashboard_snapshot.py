@@ -45,48 +45,33 @@ from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
 
 SNAPSHOT_SCHEMA = "harness-dashboard-snapshot-v1"
 
-
 EXPERIMENT_SCHEMA = "harness-experiment-result-v1"
-
 
 FINDING_RULES_VERSION = "harness-findings-v9"
 
-
 QUALITY_GATES_VERSION = "quality-gates-2026-08-10"
-
 
 DEFAULT_ARTIFACT_ROOT = Path("docs") / "engineering"
 
-
 DEFAULT_OUTPUT_ROOT = Path("target") / "harness-dashboard"
-
 
 DEFAULT_EXPERIMENT_ROOT = Path("docs") / "engineering" / "experiments" / "results"
 
-
 MAX_EXPERIMENT_BYTES = 1_000_000
-
 
 MAX_CONTENT_DOCUMENT_BYTES = 262_144
 
-
 MAX_CONTENT_TOTAL_BYTES = 16_777_216
-
 
 ALLOWED_EVIDENCE_SUFFIXES = {".md", ".markdown", ".txt"}
 
-
 ACTIVE_WORK_ORDER_STATUSES = ACTIVE_COVERAGE_STATUSES
-
 
 INACTIVE_GOVERNING_STATUSES = {"draft", "rejected", "superseded"}
 
-
 SEVERITY_ORDER = {"error": 0, "warning": 1, "info": 2}
 
-
 WORK_ORDER_RELATIONS = ("implements", "specifications", "architecture", "verification")
-
 
 TEMPORAL_REASSESSMENT_RELATIONS = {
     "capability": frozenset({"derives_from"}),
@@ -103,9 +88,7 @@ TEMPORAL_REASSESSMENT_RELATIONS = {
 
 TEMPORAL_REASSESSMENT_INACTIVE_STATUSES = frozenset({"rejected", "superseded"})
 
-
 TEMPORAL_REASSESSMENT_WORK_ORDER_STATUSES = frozenset({"draft", "approved", "in_progress"})
-
 
 EXPERIMENT_MEASURES = (
     "clarifications",
@@ -613,7 +596,6 @@ def _decision_projection(artifact: Artifact, catalog: dict[str, Artifact]) -> di
 
 
 _PLAIN_WORDS_HEADING = "## In plain words"
-
 
 _SUCCESS_MEASURES_HEADING = "## Success measures"
 
