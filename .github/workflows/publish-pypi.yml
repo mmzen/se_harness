@@ -4,8 +4,10 @@
 # publication rehearsal invokes), materialize the exact tag and GitHub
 # Release, promote to PyPI under the pypi environment decision, publish the
 # Explorer through the one Pages definition (.github/workflows/
-# pages-publication.yml), and observe. Manually dispatched from main with one
-# input; never cancelled in progress. Described in
+# pages-publication.yml), and observe.
+# Trigger policy (SPEC-CIP-001 CIP-TRG):
+# manual dispatch from main only, with one input; a publication in progress is
+# never cancelled. Described in
 # docs/notes/developing-se-harness.md, "Release sequences".
 name: Publish authorized SE Harness release
 
@@ -97,19 +99,20 @@ jobs:
             --disable-pip-version-check --no-deps "$RUNNER_TEMP/$EVALUATOR_WHEEL"
           cd "$RUNNER_TEMP"
           export PYTHONNOUSERSITE=1 PYTHONPATH=
-          identity_args=(
-            --role released-evaluator
-            --expected-version "$EVALUATOR_VERSION"
-            --expected-root "$RUNNER_TEMP/evaluator-env"
-            --checkout-root "$GITHUB_WORKSPACE"
-            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256"
-            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl"
+          # SPEC-CIP-003 CIP-ONE-009: the payload digest is passed unconditionally.
+          # The evaluator resolved here is the one this repository's main declares,
+          # which postdates --evaluator-payload-sha256; no probe decides the
+          # argument list. pages-publication.yml keeps its probe, because there the
+          # evaluator is the released record's own governance root (CIP-ONE-010).
+          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity \
+            --role released-evaluator \
+            --expected-version "$EVALUATOR_VERSION" \
+            --expected-root "$RUNNER_TEMP/evaluator-env" \
+            --checkout-root "$GITHUB_WORKSPACE" \
+            --evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256" \
+            --evaluator-wheel-sha256 "$EVALUATOR_WHEEL_SHA256" \
+            --entry-point "$RUNNER_TEMP/evaluator-env/bin/harnessctl" \
             --require-isolated-python --require-entry-point
-          )
-          if "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'; then
-            identity_args+=(--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256")
-          fi
-          "$RUNNER_TEMP/evaluator-env/bin/python" -I -m se_harness identity "${identity_args[@]}"
 
       - name: Derive one canonical release plan
         id: plan
@@ -130,7 +133,7 @@ jobs:
 
       - name: Retain the canonical release plan
         if: success()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-plan-${{ inputs.release_record }}
           path: |
@@ -150,7 +153,7 @@ jobs:
 
       - name: Upload the resolution refusal
         if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-refusal
           path: |
@@ -195,7 +198,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Download trusted plan and qualified bundle
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           pattern: release-*-${{ inputs.release_record }}
           path: ${{ runner.temp }}/transfer
@@ -366,7 +369,7 @@ jobs:
 
       - name: Publish exact distributions with Trusted Publishing
         if: steps.state.outputs.publish == 'true'
-        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2 peeled commit
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
         with:
           packages-dir: dist/
           verify-metadata: true
@@ -406,7 +409,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Download the canonical plan
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           name: release-plan-${{ inputs.release_record }}
           path: ${{ runner.temp }}/plan
@@ -491,7 +494,7 @@ jobs:
           } >>"$GITHUB_STEP_SUMMARY"
 
       - name: Retain machine-readable release result
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-result-${{ inputs.release_record }}
           path: |

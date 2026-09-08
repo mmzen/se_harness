@@ -1,10 +1,14 @@
-# Plans and assesses the transition of this repository's root evaluator to the
-# release the candidate would become, credential-free. Trigger policy
-# (WO-CIP-001, SPEC-CIP-001 CIP-TRG): pull requests, and pushes to main,
-# release/** and candidate/** only; a newer push cancels the older run.
-# Described in docs/notes/developing-se-harness.md, "Advancing the root
-# evaluator".
-name: Governor Transition Assessment
+# Plans and assesses the transition of this repository's root evaluator, the
+# exact released predecessor, to the release the candidate would become,
+# credential-free. Every workflow-level name is the predecessor evaluator
+# assessment's (WO-CIP-007, SPEC-CIP-003 CIP-ONE-011); the script it calls,
+# scripts/validate_governor_transition.py, and the schema string that script
+# emits keep their historical names, which WO-CIP-007 places out of scope.
+# Trigger policy (WO-CIP-001, SPEC-CIP-001 CIP-TRG):
+# pull requests, and pushes to main, release/** and candidate/** only; a newer
+# push cancels the older run. Described in
+# docs/notes/developing-se-harness.md, "Advancing the root evaluator".
+name: Predecessor Evaluator Assessment
 
 on:
   pull_request:
@@ -15,25 +19,25 @@ on:
       - "candidate/**"
 
 concurrency:
-  group: governor-transition-${{ github.ref }}
+  group: predecessor-evaluator-assessment-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
-  governor-transition:
-    name: Governor transition assessment
+  predecessor-evaluator-assessment:
+    name: Predecessor evaluator assessment
     runs-on: ubuntu-latest
     env:
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
       - name: Make the default-branch base available without credentials
@@ -44,7 +48,7 @@ jobs:
           set -euo pipefail
           git fetch --no-tags origin \
             "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
-      - name: Plan the exact governor transition
+      - name: Plan the exact root evaluator transition
         id: plan
         env:
           BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
@@ -56,9 +60,9 @@ jobs:
             --repository . \
             --base-revision "$BASE_REVISION" \
             --default-branch-ref "refs/remotes/origin/$DEFAULT_BRANCH" \
-            --output "$RUNNER_TEMP/governor-transition-plan.json" \
-            --json | tee "$RUNNER_TEMP/governor-transition-plan-result.json"
-          python - "$RUNNER_TEMP/governor-transition-plan.json" "$GITHUB_OUTPUT" <<'PY'
+            --output "$RUNNER_TEMP/evaluator-transition-plan.json" \
+            --json | tee "$RUNNER_TEMP/evaluator-transition-plan-result.json"
+          python - "$RUNNER_TEMP/evaluator-transition-plan.json" "$GITHUB_OUTPUT" <<'PY'
           import json
           import pathlib
           import sys
@@ -106,7 +110,7 @@ jobs:
           python -m venv "$RUNNER_TEMP/target-evaluator"
           "$RUNNER_TEMP/target-evaluator/bin/python" -m pip install \
             --disable-pip-version-check --no-deps "$wheel"
-      - name: Assess the current root with the exact target governor
+      - name: Assess the current root with the exact target evaluator
         env:
           BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
@@ -119,7 +123,7 @@ jobs:
             --repository .
             --base-revision "$BASE_REVISION"
             --default-branch-ref "refs/remotes/origin/$DEFAULT_BRANCH"
-            --output "$RUNNER_TEMP/governor-transition-assessment.json"
+            --output "$RUNNER_TEMP/evaluator-transition-assessment.json"
             --json
           )
           if [[ "$TRANSITION_REQUIRED" == "true" ]]; then
@@ -130,7 +134,7 @@ jobs:
             )
           fi
           python -S scripts/validate_governor_transition.py assess "${args[@]}" \
-            | tee "$RUNNER_TEMP/governor-transition-assessment-result.json"
+            | tee "$RUNNER_TEMP/evaluator-transition-assessment-result.json"
       - name: Qualify transitioned root ownership with the exact target evaluator
         if: steps.plan.outputs.transition_required == 'true'
         shell: bash
@@ -148,14 +152,14 @@ jobs:
         run: |
           git diff --exit-code
           test -z "$(git status --porcelain=v1 --untracked-files=all)"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
-          name: governor-transition-assessment
+          name: predecessor-evaluator-assessment
           if-no-files-found: warn
           path: |
-            ${{ runner.temp }}/governor-transition-plan.json
-            ${{ runner.temp }}/governor-transition-plan-result.json
-            ${{ runner.temp }}/governor-transition-assessment.json
-            ${{ runner.temp }}/governor-transition-assessment-result.json
+            ${{ runner.temp }}/evaluator-transition-plan.json
+            ${{ runner.temp }}/evaluator-transition-plan-result.json
+            ${{ runner.temp }}/evaluator-transition-assessment.json
+            ${{ runner.temp }}/evaluator-transition-assessment-result.json
             ${{ runner.temp }}/target-released-root-qualification.json
