@@ -2,7 +2,7 @@
 id = "WO-AUT-005"
 type = "work_order"
 title = "Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -72,6 +72,13 @@ to = "approved"
 decided_at = "2026-09-08T15:58:19Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction, and as the technical owner's acceptance that the fourteen retroactive decision assessments will be written in that role's name from each deciding ADR. WO-AUT-005 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions. It authorizes only the declared scope: the fifteen architectures and 271 requirements measured on main at a68caf70, the script and its test, the note paragraph, the amendment record on SPEC-AUT-001, the corpus test, the domain index and the evidence packet. It authorizes no change to se_harness/, no closing of a validator window, no managed path, no verification decision and no release; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T17:40:06Z"
+decided_by = "engineering-owner"
+reason = "Start decided by the accountable engineering owner on 2026-09-08, instructing this session in prose to start WO-AUT-005 after reading the two closing comments on issue #380, which order this work order first under owner decision 3 of issue #381. The start checkpoint of the released 0.16.0 evaluator reported every gate passing (QGP-G3-STATUS, -GRAPH, -INTEGRITY, -SCOPE, -PREFLIGHT, -DECISION) on branch wo/aut-005-corpus off main at 517dc5f6. The decision authorizes only the declared execution scope: the fifteen legacy architectures, the 271 requirements holding a string verification method, the migration script and its test, the note paragraph, the amendment record on SPEC-AUT-001, the corpus test, the domain index and the evidence packet. It authorizes no change to se_harness/, no closing of a validator window, no managed path, no verification decision and no release; completion, record preparation, verification and the merge remain the owner separate decisions."
 +++
 
 # Work Order: Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method
