@@ -45,6 +45,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Detailed plugin scenarios](plugin-scenarios/README.md) | How do 16 operations work step by step, which component does each part, and where do decisions, failures, and recovery occur? |
 | [Plugin scenario template](plugin-scenario-template.md) | How should each detailed scenario explain its workflow, component roles, implementation mapping, decisions, and recovery? |
 | [Earlier exploration of plugin distribution](agentic-execution-plugin-distribution.md) | Which questions informed the proposal? (historical exploration; predates the writing-skill retirement) |
+| [Assessment of the plugin proposal, 2026-09-08](assessment-plugin-proposal-2026-09-08.md) | How sound is the plugin proposal and its 16 packets, what became of the PR #360 review findings, which three things block approving any work order, and how does each axis score from 0 to 10? (point-in-time, PR #416 at `3575f727`, proposal) |
 | [Agentic execution roadmap](agentic-execution-roadmap.md) | How could SE Harness move toward skill-driven, delegated execution with humans at accountable decision points? |
 | [Agentic execution review, 2026-08](agentic-execution-review-2026-08.md) | How has the agentic execution model evolved, how does it work today, and where is it heading? (point-in-time, `992fd73`) |
 | [Complexity audit, 2026-08](complexity-audit-2026-08.md) | Which machinery accumulated for past, temporary, or circumstantial situations and should not become permanent? (point-in-time, `f0ecd9b`) |
