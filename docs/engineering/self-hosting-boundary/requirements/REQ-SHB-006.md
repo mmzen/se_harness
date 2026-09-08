@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "release-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN source, managed distribution content, CI behavior, or release payload changes after commit-bound verification or release approval, THE SYSTEM SHALL preserve the prior records as history, block their use for the changed payload, and require a new candidate, verification record, and release decision."
-verification_method = "automated-test-and-human-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-human-review"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

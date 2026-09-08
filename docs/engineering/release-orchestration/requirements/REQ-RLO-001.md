@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN last-mile publication is dispatched from main, THE SYSTEM SHALL accept one released RLS identifier and derive every version, tag, candidate, verification, distribution, and governance identity without duplicate operator-supplied release parameters."
-verification_method = "automated-resolution-and-failure-test"
+verification_method = ["test"]
+verification_notes = "automated-resolution-and-failure-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

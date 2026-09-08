@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "documentation-owner", "quality-ow
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an installed repository contains valid artifacts outside the canonical type directories, THE SYSTEM SHALL preserve their validity, report deterministic advisory guidance, and SHALL NOT move or rewrite repository-owned artifacts during upgrade."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

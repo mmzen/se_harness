@@ -7,7 +7,8 @@ owners = ["requirements-steward", "security-owner", "technical-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN an installed repository lifecycle operation would write managed controls or formal lifecycle state, THE SYSTEM SHALL prove that the invoking runtime matches the repository's locked released-evaluator identity and SHALL reject any candidate, missing, or ambiguous identity before the first write."
-verification_method = "automated-boundary-and-failure-test"
+verification_method = ["test"]
+verification_notes = "automated-boundary-and-failure-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

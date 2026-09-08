@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a candidate change is evaluated in required CI, THE SYSTEM SHALL execute repository and work-order checks with an exactly pinned harness distribution that is independent from candidate-controlled checker files."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

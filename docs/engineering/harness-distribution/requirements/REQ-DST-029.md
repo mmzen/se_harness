@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner"]
 created = "2026-08-13"
 updated = "2026-08-13"
 statement = "WHEN Harness Explorer renders a repository, THE SYSTEM SHALL consume the deterministic harness-dashboard-snapshot-v1 contract directly without introducing a second authoritative or persisted dashboard schema."
-verification_method = "automated-contract-test"
+verification_method = ["test"]
+verification_notes = "automated-contract-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

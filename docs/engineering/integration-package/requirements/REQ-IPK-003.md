@@ -7,7 +7,8 @@ owners = ["requirements-steward", "release-owner", "security-owner", "repository
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an integration package is built, retained, downloaded, or installed, THE SYSTEM SHALL identify it as non-promotable candidate material, SHALL create no release or external publication state, and SHALL require operators to select and verify it explicitly without replacing the target repository's governing evaluator."
-verification_method = "automated-authority-boundary-and-documentation-test"
+verification_method = ["test"]
+verification_notes = "automated-authority-boundary-and-documentation-test"
 
 [relations]
 derives_from = ["CAP-IPK-001"]

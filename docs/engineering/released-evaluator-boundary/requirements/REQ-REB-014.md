@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "security-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
 statement = "WHEN assurance injects exclusive-create or between-write failures, THE SYSTEM SHALL intercept only the repository adapter boundary and SHALL remain compatible with supported platform cleanup implementations."
-verification_method = "automated-python311-linux-windows-failure-injection-matrix"
+verification_method = ["test"]
+verification_notes = "automated-python311-linux-windows-failure-injection-matrix"
 
 [relations]
 derives_from = ["CAP-REB-001"]

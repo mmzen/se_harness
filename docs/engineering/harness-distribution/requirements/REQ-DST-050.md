@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a reader enters an Explorer view, THE SYSTEM SHALL request and verify only the coarse view dataset needed for that view while preserving independently usable loading and failure states for other views."
-verification_method = "automated-browser-test"
+verification_method = ["test"]
+verification_notes = "automated-browser-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

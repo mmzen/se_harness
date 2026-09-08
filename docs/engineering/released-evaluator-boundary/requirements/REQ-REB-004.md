@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "security-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN the product package, standard template, root governance, or active repository automation is validated, THE SYSTEM SHALL reject executable special self-hosting profiles, descriptors, workflows, packaged templates, promotion commands, and retired runtime roles while preserving explicitly historical documentation and fixtures."
-verification_method = "automated-active-surface-invariant"
+verification_method = ["test"]
+verification_notes = "automated-active-surface-invariant"
 
 [relations]
 derives_from = ["CAP-REB-001"]

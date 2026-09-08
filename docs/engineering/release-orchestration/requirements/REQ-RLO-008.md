@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner", "service-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN release orchestration completes or stops, THE SYSTEM SHALL retain a machine-readable result and human summary that distinguish authorization, derived checks, external mutations, public observations, and any incomplete stage."
-verification_method = "automated-result-schema-and-public-smoke-test"
+verification_method = ["test"]
+verification_notes = "automated-result-schema-and-public-smoke-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN an operator explicitly invokes `harness-operator-brief` with one bounded supported source, THE SYSTEM SHALL produce one inline decision-ready English brief and execution receipt under the managed operator-communication profile, preserve protected content, and perform no repository, lifecycle, Git, credential, network, or external mutation."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-TCM-001"]

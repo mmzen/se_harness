@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a human reader opens the repository root README, THE SYSTEM SHALL present the essential SE Harness value, safe starting path, authority boundary, current limitations, and deeper-documentation routes in no more than 200 physical lines."
-verification_method = "automated-test-and-reader-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-reader-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN exact candidate qualification succeeds, THE SYSTEM SHALL create or verify the declared immutable tag and publish one final GitHub Release containing exactly the verified wheel, normalized sdist, and checksum manifest."
-verification_method = "automated-github-state-and-fixture-test"
+verification_method = ["test"]
+verification_notes = "automated-github-state-and-fixture-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a definition artifact is evaluated for approval under QG-G1-DEFINITION or QG-G2-ARCHITECTURE, THE SYSTEM SHALL fail the gate when the artifact still contains a template placeholder of the form <...>, or when its Open decisions section is present and states anything other than None."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

@@ -7,7 +7,8 @@ owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN an operator plans or applies a standard repository upgrade with a newer released SE Harness package, THE SYSTEM SHALL synchronize the managed consumer workflow to that same evaluator version through the existing safe upgrade transaction without a separate CI or governor-reconciliation command."
-verification_method = "automated-upgrade-and-migration-test"
+verification_method = ["test"]
+verification_notes = "automated-upgrade-and-migration-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

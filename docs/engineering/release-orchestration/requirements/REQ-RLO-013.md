@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN the se_harness repository binds accepted Python distributions to a new ready release record, THE SYSTEM SHALL bind one complete machine-readable build recipe covering the exact producer platform, Python runtime, complete build toolchain, controlled environment, epoch derivation, normalization behavior, commands, and output contract."
-verification_method = "automated-schema-binding-and-failure-test"
+verification_method = ["test"]
+verification_notes = "automated-schema-binding-and-failure-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

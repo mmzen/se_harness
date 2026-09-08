@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN `harnessctl check --json` renders a restitution block, THE SYSTEM SHALL include `result_sha256`, the lowercase SHA-256 of the canonical schema-2 block bytes, and WHEN a pull-request body declares `Harness-Restitution: <sha256>`, the managed CI workflow SHALL recompute the block at the same formal snapshot and fail on mismatch."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

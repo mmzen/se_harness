@@ -7,7 +7,8 @@ owners = ["product-owner", "engineering-owner", "security-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN init or adopt targets a GitHub repository with zero or more existing workflows, THE SYSTEM SHALL install one dedicated managed SE Harness workflow without modifying unrelated workflow files or implying that external merge enforcement has been configured."
-verification_method = "automated-installation-and-workflow-test"
+verification_method = ["test"]
+verification_notes = "automated-installation-and-workflow-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a supported agent invokes an SE Harness workflow through a skill, THE SYSTEM SHALL provide a portable outcome-oriented skill contract that declares trigger scope, preconditions, required inputs, harness checkpoints, mutation class, evidence obligations, structured outputs, escalation conditions, and fallback behavior; and SHALL derive lifecycle legality from machine-readable harness contracts rather than skill prose or runtime-specific configuration."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "THE SYSTEM SHALL execute the release qualification from one reusable definition invoked by both the publication-rehearsal lane and the publication workflow, with no separate declaration of step digests to keep aligned."
-verification_method = "automated-workflow-inspection-and-rehearsal-run"
+verification_method = ["inspection", "demonstration"]
+verification_notes = "automated-workflow-inspection-and-rehearsal-run"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

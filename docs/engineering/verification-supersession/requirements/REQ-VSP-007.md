@@ -7,7 +7,8 @@ owners = ["engineering-owner", "security-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN verification supersession support is distributed, THE SYSTEM SHALL preserve existing records, the single standard installation, safe upgrades, deterministic validation, and separate verification and release authority."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

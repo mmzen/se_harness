@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "service-owner", "repository-
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an integration wheel has been built deterministically, THE SYSTEM SHALL verify the exact staged bytes on Linux and Windows in fresh isolated environments, SHALL retain one final artifact only after both platforms pass, and SHALL make artifact expiration and exact installation inputs explicit."
-verification_method = "hosted-cross-platform-installation-test"
+verification_method = ["test"]
+verification_notes = "hosted-cross-platform-installation-test"
 
 [relations]
 derives_from = ["CAP-IPK-001"]

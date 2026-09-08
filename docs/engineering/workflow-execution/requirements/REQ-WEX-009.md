@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN a bounded workflow iteration completes, blocks, or reaches a stop condition, THE SYSTEM SHALL emit one concise canonical restitution that states the outcome, work done, expected work not done, current lifecycle state, exact decision required, exactly one next step, and an exact command or suggested response, with alternatives only when the workflow contract declares them."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

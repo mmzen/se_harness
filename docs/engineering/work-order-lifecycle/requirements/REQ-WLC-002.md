@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a governance-only work order completes without being selected into a commit-bound verification record, THE SYSTEM SHALL record it as implemented rather than verified."
-verification_method = "inspection"
+verification_method = ["inspection"]
+verification_notes = "inspection"
 
 [relations]
 derives_from = ["CAP-WLC-001"]

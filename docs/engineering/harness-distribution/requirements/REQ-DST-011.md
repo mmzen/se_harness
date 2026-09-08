@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a user updates se-harness, THE SYSTEM SHALL distinguish updating the installed Python distribution from planning and applying managed-file changes in a harness-enabled repository."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

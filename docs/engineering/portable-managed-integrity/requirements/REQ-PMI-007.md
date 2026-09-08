@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN portable integrity support is introduced, THE SYSTEM SHALL preserve the single standard installation, path and symlink safety, atomic non-overwrite behavior, existing CLI compatibility, and separate human verification and release authority."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

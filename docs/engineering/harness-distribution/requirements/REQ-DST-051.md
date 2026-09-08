@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a reader focuses an artifact whose detail has not been loaded for the current revision, THE SYSTEM SHALL fetch and verify exactly that artifact detail before rendering its metadata and body through the existing safe presentation boundary."
-verification_method = "automated-browser-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-browser-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

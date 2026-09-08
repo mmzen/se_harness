@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner", "engineering-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN the credential-free mechanics declared by the publication orchestrator and the mechanics covered by the cross-platform rehearsal differ in either direction, THE SYSTEM SHALL fail a required check that names the divergence, and SHALL NOT treat an uncovered or stale mechanic as rehearsed."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-RLO-003"]

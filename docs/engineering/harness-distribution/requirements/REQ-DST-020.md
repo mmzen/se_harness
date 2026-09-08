@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a reader uses the root README to understand or install SE Harness, THE SYSTEM SHALL accurately describe the current released implementation, concepts, terminology, commands, repository structure, and authority boundaries for a 6/10 reader."
-verification_method = "automated-test-and-manual-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

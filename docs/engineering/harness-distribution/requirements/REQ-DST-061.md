@@ -7,7 +7,8 @@ owners = ["product-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN an unrelated engineering artifact chain collides on identifiers before commit-bound assurance or release facts exist for the selected claimant, THE SYSTEM SHALL provide a deterministic transactional renumbering operation that updates explicitly mapped identities, parsed typed relations, and mapped paths, identifies hard references for manual repair, and preserves retained evidence bytes and established governance history."
-verification_method = "automated-boundary-failure-and-transaction-tests"
+verification_method = ["test"]
+verification_notes = "automated-boundary-failure-and-transaction-tests"
 
 [relations]
 derives_from = ["CAP-DST-001"]

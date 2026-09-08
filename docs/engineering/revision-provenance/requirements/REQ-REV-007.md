@@ -7,7 +7,8 @@ owners = ["technical-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN provenance workflow guidance is installed, THE SYSTEM SHALL define a candidate commit followed by a later governance record so no artifact claims the hash of the commit containing itself."
-verification_method = "document-review-and-automated-test"
+verification_method = ["test", "inspection"]
+verification_notes = "document-review-and-automated-test"
 
 [relations]
 derives_from = ["CAP-REV-001"]

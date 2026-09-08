@@ -7,7 +7,8 @@ owners = ["release-owner", "engineering-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN the repository-specific workflow materializes an authorized SE Harness release, THE SYSTEM SHALL create or verify its derived release/MAJOR.MINOR maintenance branch at a history containing the exact released candidate without moving an existing branch."
-verification_method = "automated-workflow-policy-and-state-test"
+verification_method = ["test"]
+verification_notes = "automated-workflow-policy-and-state-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

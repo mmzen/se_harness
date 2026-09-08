@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner", "product-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a reader explicitly expands an included retained-evidence document, THE SYSTEM SHALL fetch, verify, and safely render only that declared document while keeping its identity and integrity metadata visible before expansion."
-verification_method = "automated-browser-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-browser-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

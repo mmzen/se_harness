@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN the harness repository is developed, THE SYSTEM SHALL govern the repository through one exact independently published harness distribution whose version, artifact, source, and digest are pinned separately from the candidate version."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

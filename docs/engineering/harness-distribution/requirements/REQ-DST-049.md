@@ -7,7 +7,8 @@ owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN dashboard generation completes successfully, THE SYSTEM SHALL emit one deterministic versioned manifest that identifies the exact bounded resource set, byte size, media role, and SHA-256 of every progressively loadable data resource."
-verification_method = "automated-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

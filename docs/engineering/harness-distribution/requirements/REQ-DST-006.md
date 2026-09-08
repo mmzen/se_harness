@@ -7,7 +7,8 @@ owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the project is packaged or used from source, THE SYSTEM SHALL expose a versioned harnessctl entry point and include the complete standard template and CI integration."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

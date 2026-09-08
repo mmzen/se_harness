@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "documentation-owner", "quality-ow
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN engineering artifacts are authored for a product domain, THE SYSTEM SHALL prescribe one canonical domain-and-type directory layout while retaining stable artifact metadata and typed relations as the only governance authority."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

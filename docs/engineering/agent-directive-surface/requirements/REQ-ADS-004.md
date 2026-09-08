@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a handoff check or review preflight runs in a Git checkout, THE SYSTEM SHALL warn when a pull-request body under evaluation carries a carriage return inside the `Harness-Work-Order` trailer line, and SHALL warn when a `ready` verification record binds a candidate commit that is not an ancestor of `HEAD`."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN `harnessctl check` reports a blocked or failed outcome for a selected artifact, THE SYSTEM SHALL render under `Next` and `Command or response` either one command that differs from the evaluated command and addresses the first reported failing predicate, or one accountable escalation naming the role; it SHALL NOT render the evaluated command unchanged."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

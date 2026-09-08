@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner", "release-owner", "documentation-owne
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the public README describes package versions, release provenance, or independent CI assurance, THE SYSTEM SHALL keep version examples synchronized with project metadata and SHALL distinguish current configuration from immutable release history and future promotion decisions."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

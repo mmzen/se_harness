@@ -7,7 +7,8 @@ owners = ["release-owner", "engineering-owner", "quality-owner", "security-owner
 created = "2026-08-27"
 updated = "2026-08-27"
 statement = "WHEN the recipe-bound release interpreter prepares the exact candidate for a producer instance, THE SYSTEM SHALL present the committed bytes and one declared file-mode set to that producer on every host platform, and SHALL NOT allow the calling host's platform, Git configuration, or filesystem to reach the produced distributions."
-verification_method = "automated-test-and-exact-rebuild"
+verification_method = ["test"]
+verification_notes = "automated-test-and-exact-rebuild"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

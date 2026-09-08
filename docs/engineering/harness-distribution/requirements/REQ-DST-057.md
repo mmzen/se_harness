@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN consumer CI evaluates a governed revision, THE SYSTEM SHALL install one exact declared released SE Harness version in an isolated environment and use that runtime for every SE Harness check without a second bootstrap version."
-verification_method = "automated-workflow-and-runtime-identity-test"
+verification_method = ["test"]
+verification_notes = "automated-workflow-and-runtime-identity-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

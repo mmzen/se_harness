@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "security-owner", "release-ow
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN candidate source or a candidate package is qualified for future release or governor use, THE SYSTEM SHALL execute a replayable functional acceptance contract with pinned identities, inputs, commands, outcomes, and output hashes that distinguishes candidate-produced evidence from released-governor assessment."
-verification_method = "automated-test-and-human-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-human-review"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

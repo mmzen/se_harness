@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a user or coding agent scaffolds an engineering domain or creates an artifact, THE SYSTEM SHALL route the requested content to the canonical location using conflict-safe, traversal-safe, non-authorizing writes."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

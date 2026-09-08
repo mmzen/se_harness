@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a requirement declares priority, source, or measure, THE SYSTEM SHALL validate priority as one of must, should, could, source as a non-empty string or artifact ID, and measure as a non-empty string, and SHALL leave a requirement without them valid."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

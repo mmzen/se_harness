@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHILE the SE_HARNESS_TEST_SCALE environment marker is absent, THE SYSTEM SHALL run the artifact-scale tests at their reduced sizes and SHALL run the one-thousand-artifact size when the marker is present."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-TST-001"]
 

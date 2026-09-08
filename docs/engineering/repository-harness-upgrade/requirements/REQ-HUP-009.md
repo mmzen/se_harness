@@ -7,7 +7,8 @@ owners = ["quality-owner", "engineering-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN tests compare a released root with candidate templates, THE SYSTEM SHALL derive evaluator-role separation from canonical lock integrity, distinct paths and origins, and declared authority, while accepting either canonical-byte convergence or governed candidate drift independently of checkout line endings."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HUP-003"]

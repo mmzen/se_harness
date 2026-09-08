@@ -7,7 +7,8 @@ owners = ["product-owner", "security-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a focused formal artifact has a Markdown body, THE SYSTEM SHALL render its readable structure without executing repository content or causing an undeclared network request."
-verification_method = "automated-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner", "product-owner"]
 created = "2026-08-16"
 updated = "2026-08-19"
 statement = "WHEN a focused artifact has an allowed retained-evidence reference, THE SYSTEM SHALL present its repository identity, safe rendered content, and portable raw source within the generated dashboard boundary."
-verification_method = "automated-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

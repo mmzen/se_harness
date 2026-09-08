@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a prospective user reads the public project entry point, THE SYSTEM SHALL present installation of the released se-harness package from PyPI as the primary path and SHALL distinguish source-checkout installation as a development path."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

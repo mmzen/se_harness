@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-21"
 updated = "2026-08-27"
 statement = "WHEN an approved product release first activates evaluator-evidence rules that the currently selected predecessor evaluator cannot emit, THE SYSTEM SHALL permit exactly one contract-bound bootstrap release record to retain canonical proof of that predecessor evaluator and SHALL validate and publish it without granting candidate code root-evaluator authority or weakening the ordinary schema-3 rule."
-verification_method = "automated-schema-provenance-publication-and-negative-boundary-test"
+verification_method = ["test"]
+verification_notes = "automated-schema-provenance-publication-and-negative-boundary-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

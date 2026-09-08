@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a generated Harness Explorer is opened over its supported static HTTP boundary, THE SYSTEM SHALL present its application shell and bounded repository summary without embedding artifact bodies or retained-evidence content in the HTML document."
-verification_method = "automated-test-and-browser-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-browser-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

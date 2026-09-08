@@ -7,7 +7,8 @@ owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN installation, upgrade, lock generation, or doctor evaluates managed integrity, THE SYSTEM SHALL use one shared implementation of schema validation, canonicalization, fragment extraction, and digest comparison."
-verification_method = "architecture-review"
+verification_method = ["inspection"]
+verification_notes = "architecture-review"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

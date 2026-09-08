@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN a released RLS passes resolution, THE SYSTEM SHALL qualify and build its exact candidate twice in credential-free jobs and proceed only when deterministic outputs match each other and the RLS distribution identities."
-verification_method = "automated-exact-candidate-replay"
+verification_method = ["analysis"]
+verification_notes = "automated-exact-candidate-replay"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

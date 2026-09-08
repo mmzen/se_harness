@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "engineering-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN autonomous execution can modify repository content or lifecycle state, THE SYSTEM SHALL require and validate an explicit autonomy envelope bound to the selected work order, current repository state, permitted operations, path scope, execution profiles, evidence obligations, retry limits, and accountable-decision-required stops; and SHALL reject stale, ambiguous, self-expanded, or out-of-scope execution before any write."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]
