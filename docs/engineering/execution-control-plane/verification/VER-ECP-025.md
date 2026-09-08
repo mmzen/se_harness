@@ -2,13 +2,20 @@
 id = "VER-ECP-025"
 type = "verification"
 title = "Verify wave 2: one primitive per family and the wired contract tables"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
 
 [relations]
 verifies = ["REQ-ECP-034"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T09:16:54Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work."
 +++
 
 # Verification Contract: Verify wave 2: one primitive per family and the wired contract tables

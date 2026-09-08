@@ -2,7 +2,7 @@
 id = "REQ-ECP-034"
 type = "requirement"
 title = "One primitive per family, and the contract tables drive the code that reads them"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -14,6 +14,13 @@ source = "issue #377 (code health assessment 2026-09-07, section 2.1 and the wav
 
 [relations]
 derives_from = ["CAP-ECP-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T09:16:54Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work."
 +++
 
 # Requirement: One primitive per family, and the contract tables drive the code that reads them
