@@ -20,6 +20,9 @@ paths = [
   "docs/engineering/test-suite/README.md",
   "docs/engineering/test-suite/evidence/",
   "docs/engineering/test-suite/verification-records/",
+  "docs/engineering/test-suite/requirements/REQ-TST-004.md",
+  "docs/engineering/test-suite/specifications/SPEC-TST-002.md",
+  "docs/engineering/test-suite/verification/VER-TST-002.md",
   "docs/engineering/test-suite/work-orders/WO-TST-004.md",
 ]
 
@@ -150,3 +153,19 @@ that needs a product edit to resolve.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`docs/engineering/test-suite/requirements/REQ-TST-004.md`,
+`docs/engineering/test-suite/specifications/SPEC-TST-002.md` and
+`docs/engineering/test-suite/verification/VER-TST-002.md` are added to
+`[execution_scope].paths`. The managed scope lane reads every pull request
+carrying this work order's identifier against the declared scope, the packet
+pull request #401 carries the three definitions, and the wave 2 work orders
+listed their sibling definitions for that reason; the paths were missed when
+the scope was drafted, and the lane refused with `WEX201`. The one purpose of
+the widening is that the packet and its later amendment records pass the
+lane; the execution of the work order does not edit the definitions except
+by dated amendment record. Decided by the accountable engineering owner on
+2026-09-08 by selecting the presented option "Widen the scope by amendment
+(Recommended)". Nothing else is widened.
