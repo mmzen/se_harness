@@ -2,7 +2,7 @@
 id = "WO-CIP-007"
 type = "work_order"
 title = "Wave 5, CI: one qualification per pull request, one form for each pin, version and name"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -52,6 +52,13 @@ to = "approved"
 decided_at = "2026-09-08T15:55:49Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the eight repository-owned workflows, the manifest script and its module, the tests, the three notes, the amendment record on SPEC-CIP-001, the domain index and the evidence packet. It authorizes no change to the managed template or any managed path, no verification decision, no release and no publication; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T19:38:34Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at fae52e1b6c570bf1cdba892728029fa38416c947 (check-run 102203255032, source github-checks). Start decided by the delegated-executor role on 2026-09-08 under the execution delegation class WO-CIP-007 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of this branch. The gate was green: the required validate check is success for the candidate head fae52e1b, the merge of the wave 5 corpus work order, and the class is declared at that base. Branch wo/cip-007-pipeline-hygiene off main at fae52e1b. The start checkpoint of the released 0.16.0 evaluator reported the decision as this role with the bound command. This decision authorizes only the declared execution scope: the eight repository-owned workflows, scripts/create_release_bundle_manifest.py and repository_tools/release_distribution.py, tests/, the three notes, the amendment record on SPEC-CIP-001, the two requirements, the specifications directory, VER-CIP-003, this work order, the domain index and the evidence packet. It authorizes no change to the managed template engineering-harness.yml or any hash-locked root file, no rename of a script or module, no change to the trigger policy or to the qualification steps of release-record mode, no release, publication or deployment. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
 +++
 
 # Work Order: Wave 5, CI: one qualification per pull request, one form for each pin, version and name
