@@ -15,7 +15,7 @@ Because the release invokes the definition rather than a copy of it, what was re
 
 ## What a rehearsal proves
 
-- `candidate` mode: the commit qualifies as candidate-controlled, its suite passes, and its own `release/build-recipe.json` produces byte-identical distributions across two fresh builds on the pinned Linux/amd64 producer. A candidate that could not be released by recipe fails here, on the pull request, not during a release.
+- `candidate` mode: the commit's own `release/build-recipe.json` produces byte-identical distributions across two fresh builds on the pinned Linux/amd64 producer. A candidate that could not be released by recipe fails here, on the pull request, not during a release. Since `WO-CIP-007` (`SPEC-CIP-003` `CIP-ONE-001`) the leg replays the recipe and nothing else: `candidate-evidence.yml` has already qualified the same commit as candidate-controlled and run its suite, and a pull request qualifies and tests its commit once.
 - `release-record` mode: the record resolves to one plan, the bound recipe replays byte-identically, and the rebuilt bundle matches the record's declared digests. Without a schema-2 ready or released record the job is skipped and the run's summary says why; it is not a failure.
 
 The definition runs on `ubuntu-latest` only. The recipe producer is a Linux/amd64 container, and the release runs the same definition on the same runner type; the Windows leg of the earlier rehearsal exercised the legacy schema-1 build path, which no longer exists.
