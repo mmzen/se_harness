@@ -2,7 +2,7 @@
 id = "WO-ECP-032"
 type = "work_order"
 title = "Wave 2, group B: the integrity primitives, the closed sets and the two grammars"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -67,6 +67,13 @@ to = "in_progress"
 decided_at = "2026-09-08T10:55:39Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-08, given with the words 'start the work orders' and confirmed by selecting the presented option 'Complete and prepare the record, then start group B' after WO-ECP-031 completed. Start preflight PASS. Executes on wo/ecp-032-integrity-primitives, stacked on the group A branch because the two groups edit the same modules; DEC-ECP-001 already bounds ECP-PRM-009 and ECP-PRM-015 to the package."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T12:19:50Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete, prepare the record, start group C': se_harness/integrity.py is the one home of the digest, canonical-text, JSON, duplicate-key, staging, atomic-write primitives and the configuration reader; workflow_contract.py defines the checkpoint and definition-type sets once; checkpoint, phase, install-mode and change-action values are typed; both wheel parsers apply one grammar; one environment builder serves both qualification runtimes; the transition planner reads the revision policy once. No recorded digest moved (CONTRACT_SHA256 a443e93d unchanged). Windows suite at its baseline (1309 tests, the one workstation error, 26 skips) at b72c9652 and the 13 pull-request checks of #399 green at 35f83f4f; validate 1397 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from 3d2bee39 passes all nine predicates over 26 paths. Scope amended under DR-REMEDIATION-SCOPE for se_harness/preflight.py. Duplication scan 6 blocks on main to 4; ECP-PRM-027 is read at group C. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-032/WO-ECP-032-handoff.md."
 +++
 
 # Work Order: Wave 2, group B: the integrity primitives, the closed sets and the two grammars
