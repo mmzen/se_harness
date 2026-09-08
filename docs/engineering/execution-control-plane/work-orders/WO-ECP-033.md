@@ -43,6 +43,7 @@ paths = [
   "docs/notes/diagnostic-codes.md",
   "tests/",
   "docs/engineering/execution-control-plane/README.md",
+  "docs/engineering/execution-control-plane/decisions/",
   "docs/engineering/execution-control-plane/evidence/",
   "docs/engineering/execution-control-plane/verification-records/",
   "docs/engineering/execution-control-plane/requirements/REQ-ECP-034.md",
@@ -168,3 +169,15 @@ JSON byte; any managed or engine path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`docs/engineering/execution-control-plane/decisions/` is added to
+`[execution_scope].paths`. The execution met a rule that cannot be met by this
+wave: `ECP-PRM-027` counts three cross-file blocks that each pair a copy inside
+`se_harness/engine/`, which the specification and this work order leave to wave
+3 (#378). The work order's stop condition for such a rule is a deviation
+decision, `DEC-ECP-002`, raised in this domain's `decisions/` directory, which
+the scope did not name. Decided by the accountable engineering owner on
+2026-09-08 by selecting the presented option "Accept, and widen the scope".
+Nothing else is widened.

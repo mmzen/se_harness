@@ -2,7 +2,7 @@
 id = "DEC-ECP-002"
 type = "decision"
 title = "ECP-PRM-027 counts three engine blocks wave 2 may not touch"
-status = "open"
+status = "decided"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -28,6 +28,21 @@ label = "Stop WO-ECP-033 until the specification and the wave plan are reconcile
 [relations]
 concerns = ["SPEC-ECP-023", "WO-ECP-033", "WO-ECP-031", "WO-ECP-032"]
 blocks = ["WO-ECP-033"]
+
+[disposition]
+option = "accept"
+label = "Accept the deviation for this wave: the rule stands as written, is met for the four package-side blocks, and is read again when wave 3 (#378) decides the engine's import surface and moves or shares its three copies."
+decided_by = "technical-owner"
+decided_at = "2026-09-08T13:22:16Z"
+reason = "Accepted by the technical owner on 2026-09-08, selecting the presented option 'Accept, and widen the scope': ECP-PRM-027 stands as written and is met for the four package-side blocks the assessment counted (one removed in wave 1, the atomic writer and DEFINITION_TYPES in WO-ECP-032, the restitution fields in WO-ECP-033); the three blocks the scan still reports each pair a copy inside se_harness/engine/, which SPEC-ECP-023 and the three wave 2 work orders leave to wave 3 (#378). The deviation stays visible on SPEC-ECP-023, WO-ECP-033 and the records until wave 3 removes or keeps the engine copies. WO-ECP-033's scope is widened to the domain's decisions/ directory by the same decision."
+revisit = "the merge of wave 3 (#378), which decides the engine's import surface and its three copies"
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-08T13:22:16Z"
+decided_by = "technical-owner"
+reason = "Accepted by the technical owner on 2026-09-08, selecting the presented option 'Accept, and widen the scope': ECP-PRM-027 stands as written and is met for the four package-side blocks the assessment counted (one removed in wave 1, the atomic writer and DEFINITION_TYPES in WO-ECP-032, the restitution fields in WO-ECP-033); the three blocks the scan still reports each pair a copy inside se_harness/engine/, which SPEC-ECP-023 and the three wave 2 work orders leave to wave 3 (#378). The deviation stays visible on SPEC-ECP-023, WO-ECP-033 and the records until wave 3 removes or keeps the engine copies. WO-ECP-033's scope is widened to the domain's decisions/ directory by the same decision."
 +++
 
 # Decision: ECP-PRM-027 counts three engine blocks wave 2 may not touch
