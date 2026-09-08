@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN an active workflow rule directs an action, THE SYSTEM SHALL bind that directive to an exact parameterized command, a fixed procedure identifier containing ordered typed steps, or an exact human decision request; expose the same binding to machine and human consumers; and reject unbound or ambiguous natural-language imperatives."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

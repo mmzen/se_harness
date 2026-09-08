@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner", "security-
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a governed single-agent execution requests a repository mutation under an approved and started work order with recorded advance delegation, THE SYSTEM SHALL have the target repository's exact released evaluator observe a stable current repository state and derive a least-authority, operation-bound, expiring autonomy envelope before any effect is admitted."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

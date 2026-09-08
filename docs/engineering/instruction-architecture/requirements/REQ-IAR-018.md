@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN repository inspection compares artifact update dates, SE Harness SHALL report temporal reassessment only for explicitly supported declared dependency relations whose source remains meaningfully reassessable."
-verification_method = "Automated predicate, lifecycle, relation-authority, compatibility, determinism, distribution, and regression tests"
+verification_method = ["test"]
+verification_notes = "Automated predicate, lifecycle, relation-authority, compatibility, determinism, distribution, and regression tests"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

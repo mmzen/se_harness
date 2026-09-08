@@ -7,7 +7,8 @@ owners = ["security-owner", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the PyPI publisher authenticates, THE SYSTEM SHALL use GitHub OIDC from a main-only protected pypi environment with job-scoped id-token write and contents read permissions and SHALL store no PyPI credential."
-verification_method = "inspection-and-automated-test"
+verification_method = ["test", "inspection"]
+verification_notes = "inspection-and-automated-test"
 
 [relations]
 derives_from = ["CAP-PYP-001"]

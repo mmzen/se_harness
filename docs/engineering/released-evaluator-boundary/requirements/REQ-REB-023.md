@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "release-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an evaluator-identity boundary receives the interpreter path of an ordinary virtual environment whose final path component is a terminal interpreter link, THE SYSTEM SHALL treat that lexical path as the environment entry point, derive the environment root from it without dereferencing, and continue identity verification."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

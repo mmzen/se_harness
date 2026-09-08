@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the dashboard contains verification records, THE SYSTEM SHALL project supersession lineage, separate historical records from active candidates, and report potentially stale ready records as derived non-authoritative findings."
-verification_method = "snapshot-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "snapshot-test-and-review"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

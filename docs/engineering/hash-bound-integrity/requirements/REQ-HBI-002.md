@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN the harness computes or compares a SHA-256 over a committed hash-bound text file, THE SYSTEM SHALL take the hash mode from that file's declared class, and SHALL NOT apply two different modes to one class."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HBI-001"]

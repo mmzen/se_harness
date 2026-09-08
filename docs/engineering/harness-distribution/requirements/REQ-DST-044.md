@@ -7,7 +7,8 @@ owners = ["requirements-steward", "product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a focused requirement has a canonical EARS statement, THE SYSTEM SHALL visually distinguish its recognized EARS clauses while preserving the exact statement and avoiding a false validation claim."
-verification_method = "automated-test-and-accessibility-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-accessibility-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

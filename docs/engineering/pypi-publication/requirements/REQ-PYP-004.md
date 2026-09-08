@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN publication preflight passes, THE SYSTEM SHALL submit only the verified GitHub wheel and source distribution to PyPI with metadata verification and attestations enabled, without rebuilding or tolerating an existing filename."
-verification_method = "inspection-and-end-to-end"
+verification_method = ["inspection", "demonstration"]
+verification_notes = "inspection-and-end-to-end"
 
 [relations]
 derives_from = ["CAP-PYP-001"]

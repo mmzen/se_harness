@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a requirement is validated, THE SYSTEM SHALL accept a statement that opens with one of the five EARS shapes (ubiquitous, WHEN, WHILE, IF-THEN, WHERE) and contains SHALL, SHALL report a maintenance warning when the opener matches none of them, when the statement contains more than one SHALL, or when it exceeds 300 characters, and the requirement template SHALL show all five shapes."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

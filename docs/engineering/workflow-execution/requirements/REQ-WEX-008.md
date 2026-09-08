@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN a selected workflow operation reaches its start, pre-action, transition, or final-handoff checkpoint, THE SYSTEM SHALL resolve the applicable workflow rule, evaluate each required quality-gate predicate as pass, fail, or not_assessable with exact evidence, and prevent a governed action or completion claim unless every required gate reports pass."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

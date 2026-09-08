@@ -7,7 +7,8 @@ owners = ["product-owner", "engineering-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a user initializes, adopts, or upgrades the harness, THE SYSTEM SHALL use exactly one complete standard template without a minimal, offline, or other selectable profile."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

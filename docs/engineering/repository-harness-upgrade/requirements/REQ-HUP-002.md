@@ -7,7 +7,8 @@ owners = ["engineering-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN an accountable owner authorizes the 0.5.0 root upgrade, THE SYSTEM SHALL update only managed standard-root files proven safe against the current lock, regenerate managed integrity transactionally, and preserve every repository-owned or ambiguous surface."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HUP-001"]

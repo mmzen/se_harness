@@ -1,0 +1,663 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "e1a25c87b0af11eb0c04b4041d7e899d36513082d22437ca5c0fe1bd46ff1a24",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-AUT-005 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-AUT-005:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-AUT-005 declares 45 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 304 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-AUT-005:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/artifact-authoring/evidence/WO-AUT-005/WO-AUT-005-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-AUT-005"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-AUT-005.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 44
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-AUT-005",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-AUT-005",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-AUT-005",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-AUT-005",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-AUT-005."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-AUT-005",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-AUT-005 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-AUT-005 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-AUT-005 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-AUT-005 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-AUT-005",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-AUT-005."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "f661092671401d275a3d5c94b2fd196bfe8e81b08494f553e0ed67513dfca9d3",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-001.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-002.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-003.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-004.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-005.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-006.md",
+      "docs/engineering/agent-directive-surface/requirements/REQ-ADS-007.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-001.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-002.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-003.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-004.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-005.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-006.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-007.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-008.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-010.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-011.md",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-012.md",
+      "docs/engineering/aggregate-release/architecture/ARCH-AGR-001.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-001.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-002.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-003.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-004.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-005.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-006.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-007.md",
+      "docs/engineering/aggregate-release/requirements/REQ-AGR-008.md",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/amend_spec_aut_001.py",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/apply_steward_decisions.py",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/architecture-migration-report.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/architecture-migration-second-run.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/handoff.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/migrate_architecture_relations.py",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/migrate_verification_methods.py",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/steward-decisions.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/validator-readings.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/verification-method-migration-report.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/verification-method-second-run.json",
+      "docs/engineering/artifact-authoring/evidence/WO-AUT-005/WO-AUT-005-handoff.md",
+      "docs/engineering/artifact-authoring/README.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-001.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-002.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-003.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-004.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-005.md",
+      "docs/engineering/artifact-authoring/requirements/REQ-AUT-006.md",
+      "docs/engineering/artifact-authoring/specifications/SPEC-AUT-001.md",
+      "docs/engineering/artifact-authoring/work-orders/WO-AUT-005.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-001.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-002.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-003.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-004.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-005.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-006.md",
+      "docs/engineering/dashboard-publication/requirements/REQ-DPG-001.md",
+      "docs/engineering/dashboard-publication/requirements/REQ-DPG-002.md",
+      "docs/engineering/dashboard-publication/requirements/REQ-DPG-003.md",
+      "docs/engineering/evidence-keying/requirements/REQ-EVK-001.md",
+      "docs/engineering/evidence-keying/requirements/REQ-EVK-002.md",
+      "docs/engineering/evidence-keying/requirements/REQ-EVK-003.md",
+      "docs/engineering/evidence-keying/requirements/REQ-EVK-004.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-001.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-002.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-003.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-004.md",
+      "docs/engineering/harness-distribution/architecture/ARCH-DST-005.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-001.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-002.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-003.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-004.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-005.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-006.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-007.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-008.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-009.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-010.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-011.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-012.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-013.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-014.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-015.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-016.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-017.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-018.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-019.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-020.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-021.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-022.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-023.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-024.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-025.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-026.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-027.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-028.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-029.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-030.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-031.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-032.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-033.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-034.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-035.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-036.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-037.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-038.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-039.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-040.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-041.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-042.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-043.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-044.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-045.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-046.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-047.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-048.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-049.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-050.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-051.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-052.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-053.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-054.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-055.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-056.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-057.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-058.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-059.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-060.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-061.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-062.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-063.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-064.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-065.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-067.md",
+      "docs/engineering/harness-distribution/requirements/REQ-DST-068.md",
+      "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-001.md",
+      "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-002.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-001.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-002.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-003.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-004.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-001.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-002.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-003.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-004.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-005.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-006.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-007.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-008.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-009.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-010.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-011.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-012.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-013.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-014.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-015.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-016.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-017.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-018.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-019.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-020.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-021.md",
+      "docs/engineering/integration-package/requirements/REQ-IPK-001.md",
+      "docs/engineering/integration-package/requirements/REQ-IPK-002.md",
+      "docs/engineering/integration-package/requirements/REQ-IPK-003.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-001.md",
+      "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-002.md",
+      "docs/engineering/operating-contract-activation/requirements/REQ-OCA-001.md",
+      "docs/engineering/operating-contract-activation/requirements/REQ-OCA-002.md",
+      "docs/engineering/portable-managed-integrity/architecture/ARCH-PMI-001.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-001.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-002.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-003.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-004.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-005.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-006.md",
+      "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-007.md",
+      "docs/engineering/pypi-publication/architecture/ARCH-PYP-001.md",
+      "docs/engineering/pypi-publication/requirements/REQ-PYP-001.md",
+      "docs/engineering/pypi-publication/requirements/REQ-PYP-002.md",
+      "docs/engineering/pypi-publication/requirements/REQ-PYP-003.md",
+      "docs/engineering/pypi-publication/requirements/REQ-PYP-004.md",
+      "docs/engineering/pypi-publication/requirements/REQ-PYP-005.md",
+      "docs/engineering/release-contract-disposition/requirements/REQ-RCD-001.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-001.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-002.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-003.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-004.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-005.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-006.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-007.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-008.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-009.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-010.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-011.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-012.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-013.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-014.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-015.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-016.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-017.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-001.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-002.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-003.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-004.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-005.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-006.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-007.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-008.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-009.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-010.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-011.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-012.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-013.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-014.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-015.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-016.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-017.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-018.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-019.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-020.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-021.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-022.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-023.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-024.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-025.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-026.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-027.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-028.md",
+      "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-029.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-001.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-002.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-003.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-004.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-005.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-006.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-008.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-009.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-012.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-013.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-014.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-015.md",
+      "docs/engineering/revision-provenance/architecture/ARCH-REV-001.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-001.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-002.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-003.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-004.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-005.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-006.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-007.md",
+      "docs/engineering/revision-provenance/requirements/REQ-REV-008.md",
+      "docs/engineering/root-cause-analysis/requirements/REQ-RCA-001.md",
+      "docs/engineering/root-cause-analysis/requirements/REQ-RCA-002.md",
+      "docs/engineering/root-cause-analysis/requirements/REQ-RCA-003.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-001.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-002.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-003.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-004.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-005.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-006.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-007.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-008.md",
+      "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-009.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-001.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-002.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-003.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-004.md",
+      "docs/engineering/test-suite/requirements/REQ-TST-001.md",
+      "docs/engineering/test-suite/requirements/REQ-TST-002.md",
+      "docs/engineering/test-suite/requirements/REQ-TST-003.md",
+      "docs/engineering/verification-supersession/architecture/ARCH-VSP-001.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-001.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-002.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-003.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-004.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-005.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-006.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-007.md",
+      "docs/engineering/verification-supersession/requirements/REQ-VSP-008.md",
+      "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-001.md",
+      "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-002.md",
+      "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-003.md",
+      "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-004.md",
+      "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-005.md",
+      "docs/engineering/work-order-lifecycle/architecture/ARCH-WLC-001.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-001.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-002.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-003.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-004.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-005.md",
+      "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-006.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-001.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-002.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-003.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-004.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-005.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-006.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-007.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-008.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-009.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-010.md",
+      "docs/engineering/workflow-execution/requirements/REQ-WEX-011.md",
+      "docs/notes/artifact-authoring.md",
+      "scripts/migrate_verification_methods.py",
+      "tests/test_artifact_authoring_policy.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/agent-directive-surface/requirements/",
+      "docs/engineering/agentic-execution/requirements/",
+      "docs/engineering/aggregate-release/architecture/",
+      "docs/engineering/aggregate-release/requirements/",
+      "docs/engineering/artifact-authoring/evidence/",
+      "docs/engineering/artifact-authoring/README.md",
+      "docs/engineering/artifact-authoring/requirements/",
+      "docs/engineering/artifact-authoring/specifications/",
+      "docs/engineering/artifact-authoring/verification-records/",
+      "docs/engineering/artifact-authoring/verification/VER-AUT-003.md",
+      "docs/engineering/artifact-authoring/work-orders/WO-AUT-005.md",
+      "docs/engineering/ci-pipeline/requirements/",
+      "docs/engineering/dashboard-publication/requirements/",
+      "docs/engineering/evidence-keying/requirements/",
+      "docs/engineering/harness-distribution/architecture/",
+      "docs/engineering/harness-distribution/requirements/",
+      "docs/engineering/hash-bound-integrity/requirements/",
+      "docs/engineering/instruction-architecture/architecture/",
+      "docs/engineering/instruction-architecture/requirements/",
+      "docs/engineering/integration-package/requirements/",
+      "docs/engineering/legacy-release-evidence/requirements/",
+      "docs/engineering/operating-contract-activation/requirements/",
+      "docs/engineering/portable-managed-integrity/architecture/",
+      "docs/engineering/portable-managed-integrity/requirements/",
+      "docs/engineering/pypi-publication/architecture/",
+      "docs/engineering/pypi-publication/requirements/",
+      "docs/engineering/release-contract-disposition/requirements/",
+      "docs/engineering/release-orchestration/requirements/",
+      "docs/engineering/released-evaluator-boundary/requirements/",
+      "docs/engineering/repository-harness-upgrade/requirements/",
+      "docs/engineering/revision-provenance/architecture/",
+      "docs/engineering/revision-provenance/requirements/",
+      "docs/engineering/root-cause-analysis/requirements/",
+      "docs/engineering/self-hosting-boundary/requirements/",
+      "docs/engineering/technical-communication/requirements/",
+      "docs/engineering/test-suite/requirements/",
+      "docs/engineering/verification-supersession/architecture/",
+      "docs/engineering/verification-supersession/requirements/",
+      "docs/engineering/work-order-assurance-classification/requirements/",
+      "docs/engineering/work-order-lifecycle/architecture/",
+      "docs/engineering/work-order-lifecycle/requirements/",
+      "docs/engineering/workflow-execution/requirements/",
+      "docs/notes/artifact-authoring.md",
+      "scripts/migrate_verification_methods.py",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-AUT-001",
+      "INT-AUT-001",
+      "REQ-AUT-008",
+      "SPEC-AUT-003",
+      "VER-AUT-003"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-AUT-005"
+    ],
+    "primary": "WO-AUT-005"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-AUT-005",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-AUT-005",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

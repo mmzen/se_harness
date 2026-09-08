@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN `harnessctl focus` and `harnessctl check` evaluate the same selected artifact at the same formal snapshot, THE SYSTEM SHALL resolve the same `WORKFLOW.json` procedure step and render the schema-2 restitution headings by default."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-ADS-001"]
 

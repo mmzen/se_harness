@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an operator asks a supported agent to understand an installed repository or one selected formal artifact, THE SYSTEM SHALL provide a read-only `harness-orient` skill that verifies installed integrity, validates and inspects the repository, focuses selected scope when supported, reports lifecycle state and blockers, identifies the next accountable decision point and required role, emits an execution receipt, and performs no repository, Git, lifecycle, or external mutation."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

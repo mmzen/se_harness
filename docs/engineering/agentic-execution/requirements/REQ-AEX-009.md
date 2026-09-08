@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a standard SE Harness repository is initialized, adopted, or explicitly upgraded with supported outcome skills, THE SYSTEM SHALL install managed repository-scoped discovery and activation surfaces that make the same authoritative skill cores available to Codex and Claude Code, preserve each skill's declared invocation policy and evaluator boundary, and fail without partial writes or duplicated workflow authority when a surface is missing, invalid, stale, or customized."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

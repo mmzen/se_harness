@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN architecture traceability is authored or evaluated, THE SYSTEM SHALL distinguish the requirements that drive architecture from the specifications to which architecture conforms and SHALL evaluate their typed direct and transitive relationships deterministically."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

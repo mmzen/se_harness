@@ -17,7 +17,6 @@ from tests.mutation_guard_support import patch_mutation_authority
 from tests.artifact_support import create_base_chain
 from tests.fixture_support import standard_repository
 from tests.cli_support import invoke
-from tests.root_identity_support import load_module
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md"
@@ -238,8 +237,8 @@ if __name__ == "__main__":
         self.assertEqual(payload["advisory_count"], json.loads(output)["advisory_count"])
 
 
-class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyFixture, unittest.TestCase):
-    """Evidence for REQ-AUT-003 (built, not applied here) and REQ-AUT-005 (WO-AUT-002)."""
+class ApprovalPredicateTests(ArtifactAuthoringPolicyFixture, unittest.TestCase):
+    """Evidence for REQ-AUT-005 (WO-AUT-002); REQ-AUT-003's migration ran under WO-AUT-005."""
 
     def test_definition_gates_carry_the_authoring_predicate(self) -> None:
         from se_harness.workflow_contract import load_validated_contracts
@@ -308,86 +307,87 @@ class ApprovalPredicateAndMigrationTests(ArtifactAuthoringPolicyFixture, unittes
         self.assertEqual(0, code, message)
         self.assertIn('status = "approved"', path.read_text(encoding="utf-8"))
 
-    def test_migration_maps_strings_keeps_originals_and_is_idempotent(self) -> None:
-        import importlib.util
-        import subprocess
-        import sys
 
-        script = REPOSITORY_ROOT / "scripts/migrate_verification_methods.py"
-        module = load_module(script, "migrate_verification_methods")
-        self.assertEqual(["test"], module.map_value("automated-test"))
-        self.assertEqual(["test", "inspection"], module.map_value("automated-test-and-manual-review"))
-        self.assertEqual(["analysis"], module.map_value("hosted-exact-recipe-replay"))
-        self.assertEqual(["demonstration"], module.map_value("inspection-and-end-to-end")[1:])
-        self.assertEqual([], module.map_value("automated-active-surface-invariant"))
+class CorpusMigrationTests(unittest.TestCase):
+    """Evidence for REQ-AUT-008 (WO-AUT-005): SPEC-AUT-003 AUT-MIG-009 over this corpus."""
 
-        self.set_front_matter(verification_method='"automated-test-and-manual-review"')
-        before = self.requirement.read_text(encoding="utf-8")
-        completed = subprocess.run(
-            [sys.executable, str(script), "--root", str(self.root)], capture_output=True, text=True, check=True
-        )
-        self.assertEqual(before, self.requirement.read_text(encoding="utf-8"), "dry run must not write")
-        report = json.loads(completed.stdout)
-        entry = report["files"]["docs/engineering/product/requirements/REQ-001.md"]
-        self.assertEqual({"state": "mapped", "original": "automated-test-and-manual-review", "mapped": ["test", "inspection"]}, entry)
+    ENGINEERING = REPOSITORY_ROOT / "docs/engineering"
+    EXCLUDED = {"templates", "evidence"}
+    TRIGGERS = frozenset(
+        {
+            "system-boundary",
+            "responsibility-or-dependency-direction",
+            "public-interface-or-protocol",
+            "data-ownership-or-persistence",
+            "security-privacy-or-trust-boundary",
+            "deployment-or-operating-model",
+            "concurrency-consistency-reliability-or-failure-strategy",
+            "technology-framework-vendor-or-external-service",
+            "material-performance-scalability-or-cost-tradeoff",
+            "cross-cutting-policy",
+            "difficult-to-reverse",
+            "material-alternatives",
+        }
+    )
+    COMPLETED = frozenset({"implemented", "verified", "released"})
+    METHODS = frozenset({"test", "analysis", "inspection", "demonstration"})
 
-        subprocess.run([sys.executable, str(script), "--root", str(self.root), "--apply"], capture_output=True, text=True, check=True)
-        after = self.requirement.read_text(encoding="utf-8")
-        self.assertIn('verification_method = ["test", "inspection"]', after)
-        self.assertIn('verification_notes = "automated-test-and-manual-review"', after)
-        errors, warnings, advisories = self.diagnostics()
-        self.assertEqual([], [item for item in errors if item.code.startswith("E-AUT")])
-        self.assertNotIn("W-AUT-004", {item.code for item in warnings})
-        subprocess.run([sys.executable, str(script), "--root", str(self.root), "--apply"], capture_output=True, text=True, check=True)
-        self.assertEqual(after, self.requirement.read_text(encoding="utf-8"), "second run must be a no-op")
+    def artifacts(self, artifact_type: str) -> list[tuple[str, dict]]:
+        from se_harness import front_matter
 
-        self.requirement.write_text("+++\nid = \"REQ-001\"\nverification_method = \"x\"\n", encoding="utf-8")
-        completed = subprocess.run([sys.executable, str(script), "--root", str(self.root)], capture_output=True, text=True)
-        self.assertEqual(2, completed.returncode)
-        self.assertIn("refusing", completed.stderr)
+        found = []
+        for path in sorted(self.ENGINEERING.rglob("*.md")):
+            if self.EXCLUDED & set(path.relative_to(self.ENGINEERING).parts):
+                continue
+            metadata = front_matter.read_or_none(path)
+            if metadata is None or metadata.get("type") != artifact_type:
+                continue
+            found.append((path.relative_to(REPOSITORY_ROOT).as_posix(), metadata))
+        self.assertNotEqual([], found, artifact_type)
+        return found
 
-    def test_repository_dry_run_report_is_retained_and_matches_a_fresh_run(self) -> None:
-        import subprocess
-        import sys
+    def test_no_architecture_carries_the_legacy_relation(self) -> None:
+        legacy = [
+            path
+            for path, metadata in self.artifacts("architecture")
+            if "constrains" in (metadata.get("relations") or {})
+        ]
+        self.assertEqual([], legacy, "AUT-MIG-001: constrains is retired")
 
-        retained = REPOSITORY_ROOT / "docs/engineering/artifact-authoring/evidence/WO-AUT-002/verification-method-mapping.json"
-        self.assertTrue(retained.is_file())
-        report = json.loads(retained.read_text(encoding="utf-8"))
-        self.assertFalse(report["applied"])
-        self.assertEqual(0, report["counts"]["skipped"])
-        completed = subprocess.run(
-            [sys.executable, str(REPOSITORY_ROOT / "scripts/migrate_verification_methods.py"), "--root", str(REPOSITORY_ROOT)],
-            capture_output=True, text=True, check=True,
-        )
-        fresh = json.loads(completed.stdout)
-        # WO-CIP-004: the retained report is a dry run at one commit; later requirements may
-        # extend the fresh report, but every retained observation must remain stable.
-        retained_paths = set(report["files"])
-        fresh_paths = set(fresh["files"])
-        self.assertLessEqual(retained_paths, fresh_paths)
-        self.assertEqual(
-            report["files"],
-            {path: fresh["files"][path] for path in retained_paths},
-            "retained historical observations must remain stable",
-        )
-        added = fresh_paths - retained_paths
-        expected_counts = dict(report["counts"])
-        for path in added:
-            state = fresh["files"][path]["state"]
-            expected_counts[state] += 1
-        self.assertEqual(expected_counts, fresh["counts"])
-        # WO-AUT-003: the migration was built and not applied, so every requirement the
-        # retained dry run observed still carries its original string form. Requirements
-        # drafted after the report follow REQ-AUT-003 and carry the array form; they are
-        # exactly the ones the retained report does not list.
-        array_form = re.compile(r"^verification_method = \[", re.MULTILINE)
-        for path in sorted(retained_paths):
+    def test_every_completed_architecture_carries_a_valid_assessment(self) -> None:
+        for path, metadata in self.artifacts("architecture"):
+            if metadata.get("status") not in self.COMPLETED:
+                continue
             with self.subTest(path=path):
-                self.assertIsNone(array_form.search((REPOSITORY_ROOT / path).read_text(encoding="utf-8")))
-        array_requirements = sorted(
-            f.relative_to(REPOSITORY_ROOT).as_posix()
-            for f in (REPOSITORY_ROOT / "docs/engineering").rglob("requirements/REQ-*.md")
-            if array_form.search(f.read_text(encoding="utf-8"))
-        )
-        self.assertEqual([], [path for path in array_requirements if path in retained_paths])
-        self.assertEqual(set(array_requirements), {path for path in added if fresh["files"][path]["state"] == "skipped"})
+                assessment = metadata.get("decision_assessment")
+                self.assertIsInstance(assessment, dict, "AUT-MIG-003: an assessment is required")
+                self.assertIn(assessment.get("outcome"), {"adr_required", "no_significant_decision"})
+                triggers = assessment.get("triggers")
+                self.assertIsInstance(triggers, list)
+                if assessment["outcome"] == "adr_required":
+                    self.assertNotEqual([], triggers)
+                self.assertEqual([], [t for t in triggers if t not in self.TRIGGERS])
+                self.assertTrue((assessment.get("rationale") or "").strip())
+                self.assertTrue((assessment.get("assessed_by") or "").strip())
+
+    def test_no_requirement_holds_a_string_verification_method(self) -> None:
+        for path, metadata in self.artifacts("requirement"):
+            with self.subTest(path=path):
+                method = metadata.get("verification_method")
+                self.assertIsInstance(method, list, "AUT-MIG-007: the vocabulary form is an array")
+                self.assertNotEqual([], method)
+                self.assertEqual([], [item for item in method if item not in self.METHODS])
+
+    def test_the_one_shot_migration_left_the_repository(self) -> None:
+        # AUT-MIG-007: the script, its test and its note paragraph are gone. The
+        # name is assembled so that this assertion is not its own counterexample.
+        script = "migrate_" + "verification_methods"
+        self.assertFalse((REPOSITORY_ROOT / "scripts" / f"{script}.py").exists())
+        for path in sorted((REPOSITORY_ROOT / "tests").glob("test_*.py")):
+            self.assertNotIn(script, path.read_text(encoding="utf-8"), path.name)
+        note = (REPOSITORY_ROOT / "docs/notes/artifact-authoring.md").read_text(encoding="utf-8")
+        self.assertNotIn(script, note)
+        specification = (
+            REPOSITORY_ROOT / "docs/engineering/artifact-authoring/specifications/SPEC-AUT-001.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("WO-AUT-005", specification, "AUT-MIG-008: the amendment record")

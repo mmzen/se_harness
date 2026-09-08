@@ -7,7 +7,8 @@ owners = ["quality-owner", "repository-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN commit-bound verification is declared not required, SE Harness SHALL retain an accountable rationale, SHALL preserve ordinary implementation verification and evidence obligations, and SHALL NOT treat the declaration as an assurance decision or release waiver."
-verification_method = "metadata, decision-rights, negative-path, and release-regression tests"
+verification_method = ["test"]
+verification_notes = "metadata, decision-rights, negative-path, and release-regression tests"
 
 [relations]
 derives_from = ["CAP-WAC-001"]

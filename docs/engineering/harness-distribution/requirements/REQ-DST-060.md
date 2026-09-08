@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN public or repository-owned explanatory documentation describes current behavior, navigation, lifecycle coverage, or self-hosting identity, THE SYSTEM SHALL agree with the active implementation, formal records, and exact selected governor."
-verification_method = "automated-consistency-checks-and-manual-review"
+verification_method = ["inspection"]
+verification_notes = "automated-consistency-checks-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

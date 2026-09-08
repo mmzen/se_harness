@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "technical-owner", "qualit
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN an authorized self-hosting change selects a different published governor or adopts its control schema, THE SYSTEM SHALL plan and transactionally reconcile the governor descriptor, repository policy, role-correct GitHub workflow, and integrity lock from immutable release inputs while preserving repository-owned policy and requiring explicit decisions for authority-bearing changes."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

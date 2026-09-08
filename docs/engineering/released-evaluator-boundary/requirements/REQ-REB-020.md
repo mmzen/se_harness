@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner", "release-
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a repository, candidate, candidate package, predecessor view, or public installation is qualified for release, THE SYSTEM SHALL expose a closed role-specific operation that binds the permitted evaluator, target, checks, and independence claim before execution."
-verification_method = "automated-interface-and-adversarial-test"
+verification_method = ["test"]
+verification_notes = "automated-interface-and-adversarial-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

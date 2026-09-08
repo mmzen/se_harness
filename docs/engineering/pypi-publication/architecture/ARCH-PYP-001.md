@@ -5,10 +5,17 @@ title = "Separated exact-asset PyPI publication boundary"
 status = "implemented"
 owners = ["engineering-owner", "security-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-18"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
+addresses = ["REQ-PYP-001", "REQ-PYP-002", "REQ-PYP-003", "REQ-PYP-004", "REQ-PYP-005"]
+conforms_to = ["SPEC-PYP-001"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["security-privacy-or-trust-boundary", "deployment-or-operating-model", "technology-framework-vendor-or-external-service", "difficult-to-reverse", "material-alternatives"]
+rationale = "ADR-PYP-001 chose manual promotion of exact GitHub release assets through OIDC trusted publishing, over three build-and-publish alternatives. It ties production distribution to an external index whose published filenames are immutable."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Separated exact-asset PyPI publication boundary
@@ -67,3 +74,14 @@ Artifact validation, static workflow tests, workflow syntax validation on GitHub
 ## Related ADRs
 
 `ADR-PYP-001` selects Trusted Publishing and promotion of existing release assets.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-PYP-001`).** The five
+requirements of the legacy relation become `addresses`; `conforms_to` names
+`SPEC-PYP-001`, the active specification that specifies them. The assessment
+reads the drivers and four considered options of `ADR-PYP-001`, the one active
+ADR that decides this architecture. Title, status, statement and ADR relations
+are unchanged.

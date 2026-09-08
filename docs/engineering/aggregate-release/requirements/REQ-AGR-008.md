@@ -7,7 +7,8 @@ owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an installed harness is upgraded, THE SYSTEM SHALL deliver aggregate release commands, validation, templates, workflow guidance, and Explorer behavior without invalidating existing single-work-order records or overwriting customized files."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a ready verification record is superseded, THE SYSTEM SHALL preserve its captured candidate identity and evidence metadata and SHALL require an explicit retained human decision."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

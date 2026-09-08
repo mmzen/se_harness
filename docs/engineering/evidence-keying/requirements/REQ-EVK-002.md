@@ -7,7 +7,8 @@ owners = ["quality-owner", "engineering-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN evidence attribution is used by capture-verification, formal validation, inspection, or Harness Explorer, THE SYSTEM SHALL apply one deterministic contract and produce equivalent work-order associations for equivalent paths."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-EVK-001"]

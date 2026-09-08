@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN the standard harness installs the requirement template, THE SYSTEM SHALL provide a body of Rationale, Behavior (trigger, response, on failure), Assumptions and dependencies, Acceptance examples, and Open decisions, SHALL show the five statement shapes and the optional attributes, and SHALL point executable scenarios to acceptance/<REQ-ID>.feature for a verification contract to name."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 [relations]
 derives_from = ["CAP-AUT-001"]
 

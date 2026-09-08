@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a reader opens focused Lineage for an artifact, THE SYSTEM SHALL present its bounded relationship context in a deterministic stage-and-type board that preserves exact artifact identity, lifecycle state, relation direction, and relation authority without implying a new formal lifecycle."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

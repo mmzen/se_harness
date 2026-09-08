@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "security-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
 statement = "WHEN Harness Explorer is opened from generated output, THE SYSTEM SHALL render the designed Overview, Lineage, Virtual Twin, Readiness, and record views from one self-contained HTML document that requests only same-origin, manifest-declared resources and names no remote location."
-verification_method = "automated-test-and-browser-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-browser-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

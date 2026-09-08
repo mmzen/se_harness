@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "assurance-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a governed autonomous stage completes or stops, THE SYSTEM SHALL produce a deterministic execution receipt that binds the selected scope, autonomy envelope when applicable, execution profiles, skill identities and digests, normalized commands and results, changed paths, retained evidence, subagent contributions, final validation, and repository identity; and SHALL represent the receipt as non-authoritative evidence that cannot approve, verify, release, or expand scope."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

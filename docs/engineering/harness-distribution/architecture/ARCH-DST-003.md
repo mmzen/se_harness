@@ -5,10 +5,17 @@ title = "Public onboarding and package-metadata boundary"
 status = "implemented"
 owners = ["technical-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["REQ-DST-009", "REQ-DST-010", "REQ-DST-011", "REQ-DST-012", "REQ-DST-013"]
+addresses = ["REQ-DST-009", "REQ-DST-010", "REQ-DST-011", "REQ-DST-012", "REQ-DST-013"]
+conforms_to = ["SPEC-DST-003"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["public-interface-or-protocol", "technology-framework-vendor-or-external-service", "material-alternatives"]
+rationale = "ADR-DST-003 chose one README serving as repository entry point and PyPI long description, over a separate package README and over build-time generation. It binds public packaging metadata to an external index and its rendering."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Public onboarding and package-metadata boundary
@@ -63,3 +70,14 @@ The README may point toward formal and release evidence, but no documentation, b
 ## Quality attributes and conformance
 
 Onboarding shall be usable in one screen before deep governance material, while the retained detail remains accurate. Metadata and version examples shall be deterministic, parseable without third-party runtime dependencies, and compatible with Python 3.11+. Conformance is checked by `VER-DST-003`, full regression tests, graph validation, doctor, preflight, and manual README review.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-DST-003`).** The five
+requirements of the legacy relation become `addresses`; `conforms_to` names
+`SPEC-DST-003`, the active specification that specifies them. The assessment
+reads the drivers and rejected options of `ADR-DST-003`, the one active ADR
+that decides this architecture. Title, status, statement and ADR relations are
+unchanged.

@@ -7,7 +7,8 @@ owners = ["engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an existing harness installation upgrades, THE SYSTEM SHALL add revision-record templates and schema documentation without invalidating existing artifact types or overwriting customized managed files."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REV-001"]

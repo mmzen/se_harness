@@ -5,10 +5,17 @@ title = "Typed verification-supersession lineage"
 status = "implemented"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["SPEC-VSP-001"]
+addresses = ["REQ-VSP-001", "REQ-VSP-002", "REQ-VSP-003", "REQ-VSP-004", "REQ-VSP-005", "REQ-VSP-006", "REQ-VSP-007"]
+conforms_to = ["SPEC-VSP-001"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["public-interface-or-protocol", "data-ownership-or-persistence", "difficult-to-reverse", "material-alternatives"]
+rationale = "ADR-VSP-001 chose a terminal superseded state with one typed human-authorized successor, over five alternatives including deletion and automatic supersession. The lifecycle value and record edge preserve immutable provenance and cannot be walked back."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Typed verification-supersession lineage
@@ -68,3 +75,14 @@ Tests cover all lifecycle shapes, typed targets, coverage sets, cycles, release 
 ## Related ADRs
 
 `ADR-VSP-001` selects explicit terminal state plus a typed successor edge on the existing VREC artifact.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-VSP-001`).** The legacy
+relation named only `SPEC-VSP-001`, which becomes the conformance target;
+`addresses` takes the seven requirements that specification specifies, all of
+them active. The assessment reads the drivers and six considered options of
+`ADR-VSP-001`, the one active ADR that decides this architecture. Title,
+status, statement and ADR relations are unchanged.

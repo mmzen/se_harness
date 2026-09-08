@@ -7,7 +7,8 @@ owners = ["repository-owner", "requirements-steward", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-25"
 statement = "WHEN a coding agent loads the always-available instruction surface of this repository, the se_harness repository SHALL state, in the owner-controlled region of AGENTS.md, the operational entry point for commands, the authoritative managed-path boundary together with its candidate-source counterpart, and the known pull-request and evaluator failure conditions, and SHALL NOT restate an obligation that a governed requirement already owns."
-verification_method = "Automated managed-integrity, lock-derived path-set, and content-presence tests plus accountable review of the drift and authority boundary"
+verification_method = ["test", "inspection"]
+verification_notes = "Automated managed-integrity, lock-derived path-set, and content-presence tests plus accountable review of the drift and authority boundary"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

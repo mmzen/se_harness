@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN a normalized retained-evidence path is assessed for a work-order key, THE SYSTEM SHALL recognize the exact case-sensitive work-order ID at the existing filename boundary or in a path component at or below a literal evidence directory."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-EVK-001"]

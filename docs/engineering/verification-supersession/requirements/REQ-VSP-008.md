@@ -7,7 +7,8 @@ owners = ["quality-owner", "repository-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a verification record produced by the supported preparation path is explicitly superseded, THE SYSTEM SHALL preserve its preparation provenance and complete the declared transition without fabricating a verification decision."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

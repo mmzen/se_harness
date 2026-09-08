@@ -1,0 +1,413 @@
+{
+  "applied": true,
+  "architectures": {
+    "ARCH-AGR-001": {
+      "addresses": [
+        "REQ-AGR-001",
+        "REQ-AGR-002",
+        "REQ-AGR-003",
+        "REQ-AGR-004",
+        "REQ-AGR-005",
+        "REQ-AGR-006",
+        "REQ-AGR-007",
+        "REQ-AGR-008"
+      ],
+      "addresses_derived_from_specification": true,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-AGR-001"
+      ],
+      "legacy_constrains": [
+        "SPEC-AGR-001"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/aggregate-release/architecture/ARCH-AGR-001.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "data-ownership-or-persistence",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-DST-001": {
+      "addresses": [
+        "REQ-DST-001",
+        "REQ-DST-002",
+        "REQ-DST-003",
+        "REQ-DST-004",
+        "REQ-DST-005",
+        "REQ-DST-006"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-DST-001"
+      ],
+      "legacy_constrains": [
+        "REQ-DST-001",
+        "REQ-DST-002",
+        "REQ-DST-003",
+        "REQ-DST-004",
+        "REQ-DST-005",
+        "REQ-DST-006"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/harness-distribution/architecture/ARCH-DST-001.md",
+      "triggers": [
+        "system-boundary",
+        "data-ownership-or-persistence",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-DST-002": {
+      "addresses": [
+        "REQ-DST-007"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-DST-002"
+      ],
+      "legacy_constrains": [
+        "REQ-DST-007",
+        "REQ-DST-008"
+      ],
+      "omitted_from_addresses": [
+        "REQ-DST-008"
+      ],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/harness-distribution/architecture/ARCH-DST-002.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "responsibility-or-dependency-direction",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-DST-003": {
+      "addresses": [
+        "REQ-DST-009",
+        "REQ-DST-010",
+        "REQ-DST-011",
+        "REQ-DST-012",
+        "REQ-DST-013"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-DST-003"
+      ],
+      "legacy_constrains": [
+        "REQ-DST-009",
+        "REQ-DST-010",
+        "REQ-DST-011",
+        "REQ-DST-012",
+        "REQ-DST-013"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/harness-distribution/architecture/ARCH-DST-003.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "technology-framework-vendor-or-external-service",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-DST-004": {
+      "addresses": [
+        "REQ-DST-014"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-DST-004"
+      ],
+      "legacy_constrains": [
+        "REQ-DST-014"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/harness-distribution/architecture/ARCH-DST-004.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "technology-framework-vendor-or-external-service",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-DST-005": {
+      "addresses": [
+        "REQ-DST-015",
+        "REQ-DST-016",
+        "REQ-DST-017",
+        "REQ-DST-018"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-DST-005"
+      ],
+      "legacy_constrains": [
+        "REQ-DST-015",
+        "REQ-DST-016",
+        "REQ-DST-017",
+        "REQ-DST-018"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/harness-distribution/architecture/ARCH-DST-005.md",
+      "triggers": [
+        "cross-cutting-policy",
+        "responsibility-or-dependency-direction",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-IAR-001": {
+      "addresses": [
+        "REQ-IAR-001",
+        "REQ-IAR-002",
+        "REQ-IAR-003",
+        "REQ-IAR-004",
+        "REQ-IAR-006",
+        "REQ-IAR-007",
+        "REQ-IAR-008",
+        "REQ-IAR-009"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-IAR-001"
+      ],
+      "legacy_constrains": [
+        "REQ-IAR-001",
+        "REQ-IAR-002",
+        "REQ-IAR-003",
+        "REQ-IAR-004",
+        "REQ-IAR-005",
+        "REQ-IAR-006",
+        "REQ-IAR-007",
+        "REQ-IAR-008",
+        "REQ-IAR-009"
+      ],
+      "omitted_from_addresses": [
+        "REQ-IAR-005"
+      ],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/instruction-architecture/architecture/ARCH-IAR-001.md",
+      "triggers": [
+        "system-boundary",
+        "responsibility-or-dependency-direction",
+        "cross-cutting-policy",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-IAR-002": {
+      "addresses": [
+        "REQ-IAR-010"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-IAR-002"
+      ],
+      "legacy_constrains": [
+        "REQ-IAR-010"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/instruction-architecture/architecture/ARCH-IAR-002.md",
+      "triggers": [
+        "responsibility-or-dependency-direction",
+        "cross-cutting-policy",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-IAR-003": {
+      "addresses": [
+        "REQ-IAR-011"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-IAR-003"
+      ],
+      "legacy_constrains": [
+        "REQ-IAR-011"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/instruction-architecture/architecture/ARCH-IAR-003.md",
+      "triggers": [
+        "responsibility-or-dependency-direction",
+        "cross-cutting-policy"
+      ]
+    },
+    "ARCH-IAR-004": {
+      "addresses": [
+        "REQ-IAR-012"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": false,
+      "conforms_to": [
+        "SPEC-IAR-004"
+      ],
+      "legacy_constrains": [
+        "REQ-IAR-012"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/instruction-architecture/architecture/ARCH-IAR-004.md",
+      "triggers": []
+    },
+    "ARCH-PMI-001": {
+      "addresses": [
+        "REQ-PMI-001",
+        "REQ-PMI-002",
+        "REQ-PMI-003",
+        "REQ-PMI-004",
+        "REQ-PMI-005",
+        "REQ-PMI-006",
+        "REQ-PMI-007"
+      ],
+      "addresses_derived_from_specification": true,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-PMI-001"
+      ],
+      "legacy_constrains": [
+        "SPEC-PMI-001"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/portable-managed-integrity/architecture/ARCH-PMI-001.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "security-privacy-or-trust-boundary",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-PYP-001": {
+      "addresses": [
+        "REQ-PYP-001",
+        "REQ-PYP-002",
+        "REQ-PYP-003",
+        "REQ-PYP-004",
+        "REQ-PYP-005"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-PYP-001"
+      ],
+      "legacy_constrains": [
+        "REQ-PYP-001",
+        "REQ-PYP-002",
+        "REQ-PYP-003",
+        "REQ-PYP-004",
+        "REQ-PYP-005"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/pypi-publication/architecture/ARCH-PYP-001.md",
+      "triggers": [
+        "security-privacy-or-trust-boundary",
+        "deployment-or-operating-model",
+        "technology-framework-vendor-or-external-service",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-REV-001": {
+      "addresses": [
+        "REQ-REV-001",
+        "REQ-REV-002",
+        "REQ-REV-003",
+        "REQ-REV-004",
+        "REQ-REV-005",
+        "REQ-REV-006",
+        "REQ-REV-007",
+        "REQ-REV-008"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-REV-001"
+      ],
+      "legacy_constrains": [
+        "REQ-REV-001",
+        "REQ-REV-002",
+        "REQ-REV-003",
+        "REQ-REV-004",
+        "REQ-REV-005",
+        "REQ-REV-006",
+        "REQ-REV-007",
+        "REQ-REV-008"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/revision-provenance/architecture/ARCH-REV-001.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "data-ownership-or-persistence",
+        "cross-cutting-policy",
+        "difficult-to-reverse"
+      ]
+    },
+    "ARCH-VSP-001": {
+      "addresses": [
+        "REQ-VSP-001",
+        "REQ-VSP-002",
+        "REQ-VSP-003",
+        "REQ-VSP-004",
+        "REQ-VSP-005",
+        "REQ-VSP-006",
+        "REQ-VSP-007"
+      ],
+      "addresses_derived_from_specification": true,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-VSP-001"
+      ],
+      "legacy_constrains": [
+        "SPEC-VSP-001"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/verification-supersession/architecture/ARCH-VSP-001.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "data-ownership-or-persistence",
+        "difficult-to-reverse",
+        "material-alternatives"
+      ]
+    },
+    "ARCH-WLC-001": {
+      "addresses": [
+        "REQ-WLC-001",
+        "REQ-WLC-002",
+        "REQ-WLC-003",
+        "REQ-WLC-004",
+        "REQ-WLC-005",
+        "REQ-WLC-006"
+      ],
+      "addresses_derived_from_specification": false,
+      "assessment_added": true,
+      "conforms_to": [
+        "SPEC-WLC-001"
+      ],
+      "legacy_constrains": [
+        "REQ-WLC-001",
+        "REQ-WLC-002",
+        "REQ-WLC-003",
+        "REQ-WLC-004",
+        "REQ-WLC-005",
+        "REQ-WLC-006"
+      ],
+      "omitted_from_addresses": [],
+      "path": "C:/Users/mathi/se_harness-20260908-193626-454/docs/engineering/work-order-lifecycle/architecture/ARCH-WLC-001.md",
+      "triggers": [
+        "public-interface-or-protocol",
+        "cross-cutting-policy",
+        "material-alternatives"
+      ]
+    }
+  },
+  "counts": {
+    "addresses_derived": 3,
+    "architectures": 15,
+    "assessments_added": 14,
+    "omitted_addresses": 2
+  },
+  "schema": "se-harness-architecture-relation-migration-v1",
+  "work_order": "WO-AUT-005"
+}

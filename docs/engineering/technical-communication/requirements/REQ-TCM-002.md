@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a supported agent applies the technical-communication policy, THE SYSTEM SHALL preserve exact protected content byte for byte, preserve the meaning and force of semantically protected content, and stop rather than simplify when the applicable boundary is ambiguous."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-TCM-001"]

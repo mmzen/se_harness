@@ -7,7 +7,8 @@ owners = ["release-owner", "security-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN a released se_harness RLS drives the publication workflow, THE SYSTEM SHALL validate its repository-owned distribution provenance from trusted main and preserve the existing one-input, deterministic-build, credential-separation, immutable-state, replay, and observation guarantees."
-verification_method = "automated-workflow-policy-state-and-failure-test"
+verification_method = ["test"]
+verification_notes = "automated-workflow-policy-state-and-failure-test"
 
 [relations]
 derives_from = ["CAP-RLO-002"]

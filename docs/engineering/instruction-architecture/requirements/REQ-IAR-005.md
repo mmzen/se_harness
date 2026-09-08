@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-21"
 statement = "WHEN implementation readiness is evaluated, THE SYSTEM SHALL require owner-curated repository context while preventing that context from granting product or governance authority."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

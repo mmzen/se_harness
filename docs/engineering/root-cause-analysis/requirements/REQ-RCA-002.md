@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner", "security-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the RCA states a material release, recovery, integrity, or verification fact, THE REPOSITORY SHALL identify inspectable evidence and SHALL distinguish technical observation from lifecycle authority."
-verification_method = "evidence-reconciliation-and-manual-review"
+verification_method = ["inspection"]
+verification_notes = "evidence-reconciliation-and-manual-review"
 
 [relations]
 derives_from = ["CAP-RCA-001"]

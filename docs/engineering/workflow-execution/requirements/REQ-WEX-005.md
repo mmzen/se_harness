@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN selected workflow state is inspected or a permitted lifecycle action completes or fails, THE SYSTEM SHALL emit stable machine-readable and human-readable handoffs containing the completed action, current lifecycle state, scoped blockers, exactly one recommended next authorized step, required authority, exact command or suggested response, and only currently valid bounded alternatives."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

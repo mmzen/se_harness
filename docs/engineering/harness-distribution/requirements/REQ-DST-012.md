@@ -7,7 +7,8 @@ owners = ["product-owner", "release-owner", "documentation-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a se-harness distribution is built, THE SYSTEM SHALL identify the root README as its Markdown long description and SHALL expose the project license and canonical project, source, issue, and release URLs in package metadata."
-verification_method = "automated-test-and-release-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-release-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

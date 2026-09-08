@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
 updated = "2026-08-15"
 statement = "WHEN the root README demonstrates routine repository operation, THE SYSTEM SHALL limit explicit harness subcommand examples to init, adopt, doctor, validate, inspect, and dashboard while describing agent-only mechanics without requiring humans to learn their syntax."
-verification_method = "automated-static-test"
+verification_method = ["test"]
+verification_notes = "automated-static-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

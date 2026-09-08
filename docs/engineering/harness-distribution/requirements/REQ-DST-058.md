@@ -7,7 +7,8 @@ owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN the managed consumer workflow selects authorized work or assesses repository state, THE SYSTEM SHALL execute work-order selection, preflight, installation diagnosis, graph validation, and Explorer generation from the isolated released package while treating checkout content only as untrusted input and retained evidence."
-verification_method = "automated-adversarial-integration-test"
+verification_method = ["test"]
+verification_notes = "automated-adversarial-integration-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

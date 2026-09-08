@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN a verification record or release record changes lifecycle state, THE SYSTEM SHALL mutate only that selected record and its applicable decision metadata, preserve the lifecycle state of related work orders and provenance records, and derive assurance and release projections from the typed records rather than synchronizing related statuses."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

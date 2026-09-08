@@ -7,7 +7,8 @@ owners = ["release-owner", "repository-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a draft release contract was not selected as release authority and all of its gated work was released through a different authoritative contract and release record, SE Harness SHALL retain the proposal as rejected and SHALL identify the actual release lineage without rewriting historical authority."
-verification_method = "artifact-graph validation and exact lineage inspection"
+verification_method = ["inspection"]
+verification_notes = "artifact-graph validation and exact lineage inspection"
 
 [relations]
 derives_from = ["CAP-RCD-001"]

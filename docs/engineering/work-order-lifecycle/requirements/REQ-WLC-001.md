@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a work order changes lifecycle state, THE SYSTEM SHALL distinguish authorization as approved, execution completion as implemented, commit-bound assurance as verified, and release inclusion as released."
-verification_method = "inspection"
+verification_method = ["inspection"]
+verification_notes = "inspection"
 
 [relations]
 derives_from = ["CAP-WLC-001"]

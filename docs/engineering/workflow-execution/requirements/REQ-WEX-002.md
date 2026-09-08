@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN a formal lifecycle mutation or provenance-record preparation is requested, THE SYSTEM SHALL validate the selected artifact type, source state, allowed target state, governing prerequisites, required actor inputs, immutable fields, and permitted mutation set before writing, and fail without partial writes when any condition is unmet."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

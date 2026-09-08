@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN the managed harness contract presents verification and release guidance, THE SYSTEM SHALL retain non-waivable provenance and authority invariants while routing ordered lifecycle procedure to the focused policy modules without duplicating that procedure."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

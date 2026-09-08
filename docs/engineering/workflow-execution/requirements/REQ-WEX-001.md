@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN an operator selects a work order, verification record, or release record, THE SYSTEM SHALL produce a deterministic working set containing the selected object, its governing artifacts, and its direct lifecycle dependencies; distinguish scoped blockers, repository-wide integrity blockers, and background findings; and not present unrelated background findings as actions for the selected scope."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

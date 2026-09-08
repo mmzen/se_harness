@@ -7,7 +7,8 @@ owners = ["quality-owner", "technical-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN one verification record supersedes another, THE SYSTEM SHALL require the successor to cover every work order covered by the superseded record and SHALL reject cyclic supersession lineage."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

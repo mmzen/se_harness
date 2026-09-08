@@ -5,10 +5,17 @@ title = "Metadata-authoritative domain authoring boundary"
 status = "implemented"
 owners = ["technical-owner", "quality-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["REQ-DST-015", "REQ-DST-016", "REQ-DST-017", "REQ-DST-018"]
+addresses = ["REQ-DST-015", "REQ-DST-016", "REQ-DST-017", "REQ-DST-018"]
+conforms_to = ["SPEC-DST-005"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["cross-cutting-policy", "responsibility-or-dependency-direction", "difficult-to-reverse", "material-alternatives"]
+rationale = "ADR-DST-005 chose advisory canonical paths with safe authoring commands, over validation errors, a repository-wide type tree and automatic reorganization. It keeps authority in typed relations and lifecycle state rather than in paths, across every domain."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Metadata-authoritative domain authoring boundary
@@ -91,3 +98,14 @@ Repository-wide `verification-records/` and `releases/` remain architectural agg
 ## Quality attributes and conformance
 
 The design prioritizes safety, deterministic behavior, backwards compatibility, navigability, and explainability. `VER-DST-005` verifies mapping completeness, path security, transaction boundaries, owner-content preservation, CLI behavior, provenance routing, advisory semantics, package parity, full graph validation, diagnostics, dashboard generation, and regression behavior.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-DST-005`).** The four
+requirements of the legacy relation become `addresses`; `conforms_to` names
+`SPEC-DST-005`, the active specification that specifies them. The assessment
+reads the drivers and rejected options of `ADR-DST-005`, the one active ADR
+that decides this architecture. Title, status, statement and ADR relations are
+unchanged.

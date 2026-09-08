@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner", "security-
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN a governed single-agent execution submits a deterministic change bundle admitted by a current evaluator-derived autonomy envelope, THE SYSTEM SHALL validate and apply the complete bundle through an evaluator-owned transactional effect broker and either produce a state-bound receipt for the exact result, restore the proven prior repository state, or enter an explicit recovery-required stop that permits no further governed advancement."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

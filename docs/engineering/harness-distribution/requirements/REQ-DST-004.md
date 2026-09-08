@@ -7,7 +7,8 @@ owners = ["engineering-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an upgrade is inspected or applied, THE SYSTEM SHALL classify managed files from retained hashes and preserve files whose managed content was customized."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]
