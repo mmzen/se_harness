@@ -28,7 +28,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--build-recipe",
         type=PurePosixPath,
-        help="candidate-relative canonical recipe; omit only for historical schema-1 replay",
+        required=True,
+        help="candidate-relative canonical recipe bound into the manifest; every manifest this script writes is schema-2 (SPEC-CIP-003 CIP-ONE-013)",
     )
     parser.add_argument("--output", type=Path, required=True)
     return parser
