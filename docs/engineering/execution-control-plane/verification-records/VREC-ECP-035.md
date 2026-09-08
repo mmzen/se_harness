@@ -2,7 +2,7 @@
 id = "VREC-ECP-035"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-031"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-031/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-035-evaluator.json"
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 
+verified_at = "2026-09-08T14:46:40Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-031"]
 conforms_to = ["VER-ECP-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-08T14:46:40Z"
+decided_by = "assurance-owner"
+reason = "Verified on 2026-09-08 by the accountable assurance owner with the words 'you can switch VREC-ECP-035 to verified' (DR-VREC-DECIDE), after the record was presented: bound to candidate commit 334b2b4f of wo/ecp-031-process-front-matter (PR #398, merged to main as 9275f72b with its checks green), retaining the WO-ECP-031 handoff evidence whose handoff check passes all nine predicates, the Windows suite at its baseline, validate 1396 artifacts with 0 errors, and no recorded digest moved; DEC-ECP-001 disposed amend and recorded on SPEC-ECP-023."
 +++
 
 # Verification Record Candidate
