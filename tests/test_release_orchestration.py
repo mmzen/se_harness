@@ -15,6 +15,7 @@ from pathlib import Path, PurePosixPath
 from repository_tools import release_distribution as DISTRIBUTION
 from repository_tools.release_distribution import (
     BUNDLE_SCHEMA,
+    BUNDLE_SCHEMA_V2,
     ReleaseDistributionError,
     bind_distribution,
     checksum_manifest_bytes,
@@ -145,10 +146,51 @@ class DistributionManifestTests(unittest.TestCase):
                 },
                 clear=False,
             ):
-                result = MANIFEST.create_manifest(REPOSITORY_ROOT, commit, "1.2.3", wheel, sdist)
-        self.assertEqual(BUNDLE_SCHEMA, result["schema"])
+                result = MANIFEST.create_manifest(
+                    REPOSITORY_ROOT,
+                    commit,
+                    "1.2.3",
+                    wheel,
+                    sdist,
+                    build_recipe=PurePosixPath("release/build-recipe.json"),
+                )
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-013): every manifest this producer
+        # writes binds the candidate's recipe and is schema-2.
+        self.assertEqual(BUNDLE_SCHEMA_V2, result["schema"])
+        self.assertEqual("release/build-recipe.json", result["build_recipe"])
         self.assertEqual(hashlib.sha256(b"wheel").hexdigest(), result["wheel_sha256"])
         self.assertRegex(result["source_manifest_sha256"], r"\A[0-9a-f]{64}\Z")
+
+    def test_manifest_producer_refuses_to_write_a_schema_1_bundle(self) -> None:
+        # SPEC-CIP-003 CIP-ONE-013: there is no writer of a schema-1 bundle manifest.
+        # The command refuses before any Git call, and the function refuses the
+        # keyword its caller could still pass as None.
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(MANIFEST_SCRIPT),
+                "--commit", "0" * 40,
+                "--version", "1.2.3",
+                "--wheel", "se_harness-1.2.3-py3-none-any.whl",
+                "--sdist", "se_harness-1.2.3.tar.gz",
+                "--output", "bundle.json",
+            ],
+            capture_output=True,
+            text=True,
+            cwd=REPOSITORY_ROOT,
+        )
+        self.assertEqual(2, completed.returncode, completed.stdout + completed.stderr)
+        self.assertIn("--build-recipe", completed.stderr)
+        self.assertFalse((REPOSITORY_ROOT / "bundle.json").exists())
+        with self.assertRaisesRegex(ReleaseDistributionError, "build recipe"):
+            create_manifest(
+                REPOSITORY_ROOT,
+                "0" * 40,
+                "1.2.3",
+                REPOSITORY_ROOT / "se_harness-1.2.3-py3-none-any.whl",
+                REPOSITORY_ROOT / "se_harness-1.2.3.tar.gz",
+                build_recipe=None,
+            )
 
     def test_complete_block_is_valid_and_historical_absence_is_separate(self) -> None:
         result = validate_distribution_block(distribution_values(), "1.2.3")
@@ -321,6 +363,7 @@ releases_work = ["WO-TST-001"]
                 "1.2.3",
                 root / "se_harness-1.2.3-py3-none-any.whl",
                 root / "se_harness-1.2.3.tar.gz",
+                build_recipe=PurePosixPath("release/build-recipe.json"),
             )["source_manifest_sha256"]
             (root / "bundle.json").write_text(json.dumps(manifest), encoding="utf-8")
             record.write_text(
@@ -369,14 +412,27 @@ releases_work = ["WO-TST-001"]
             git(root, "config", "user.name", "Harness Test")
             git(root, "config", "user.email", "harness@example.invalid")
             (root / "source.txt").write_text("historical\n", encoding="utf-8", newline="\n")
-            git(root, "add", "source.txt")
+            # WO-CIP-007 (CIP-ONE-013): the producer always binds a recipe, so even
+            # this historical-record fixture carries one; what is historical here is
+            # the record's own [distribution] schema = 1 block, not the manifest.
+            (root / "release").mkdir()
+            shutil.copyfile(REPOSITORY_ROOT / "release" / "build-recipe.json", root / "release" / "build-recipe.json")
+            shutil.copyfile(REPOSITORY_ROOT / "release" / "build-toolchain.lock", root / "release" / "build-toolchain.lock")
+            git(root, "add", "source.txt", "release")
             git(root, "commit", "-q", "-m", "historical")
             commit = git(root, "rev-parse", "HEAD")
             wheel = root / "se_harness-1.2.3-py3-none-any.whl"
             sdist = root / "se_harness-1.2.3.tar.gz"
             wheel.write_bytes(b"wheel")
             sdist.write_bytes(b"sdist")
-            manifest = create_manifest(root, commit, "1.2.3", wheel, sdist)
+            manifest = create_manifest(
+                root,
+                commit,
+                "1.2.3",
+                wheel,
+                sdist,
+                build_recipe=PurePosixPath("release/build-recipe.json"),
+            )
             distribution = validate_distribution_block(
                 {
                     "schema": 1,

@@ -20,10 +20,28 @@ TEMPLATE_WORKFLOWS = REPOSITORY_ROOT / "templates/repository/standard/.github/wo
 
 CANDIDATE_EVIDENCE_WORKFLOWS = {
     "candidate-evidence": WORKFLOWS / "candidate-evidence.yml",
-    "governor-transition": WORKFLOWS / "predecessor-evaluator-assessment.yml",
+    # WO-CIP-007 (CIP-ONE-011): the concurrency group is the workflow's own name.
+    "predecessor-evaluator-assessment": WORKFLOWS / "predecessor-evaluator-assessment.yml",
     "engineering-harness": TEMPLATE_WORKFLOWS / "engineering-harness.yml",
 }
 PROTECTED_LINES = ("main", '"release/**"', '"candidate/**"')
+
+# WO-CIP-007: the workflows this repository owns. The managed template is
+# SPEC-DST-027's and its hash-locked root copy follows a release, so neither is
+# subject to the rules of SPEC-CIP-003.
+REPOSITORY_OWNED = tuple(
+    sorted(path for path in WORKFLOWS.glob("*.yml") if path.name != "engineering-harness.yml")
+)
+# SPEC-CIP-003, Terms: a retired name is governor, governor-transition or
+# governance-migration. Two literals are exempt because WO-CIP-007 places
+# "renaming scripts/validate_governor_transition.py or any script, module or
+# test file" out of scope: the script's path, and the schema string it emits.
+RETIRED_NAME = re.compile(r"governor|governance.migration", re.IGNORECASE)
+RETIRED_NAME_EXEMPTIONS = (
+    "scripts/validate_governor_transition.py",
+    "se-harness-governor-transition-v1",
+)
+PIN_FORM = re.compile(r"^[\w.-]+/[\w./-]+@[0-9a-f]{40} # v\d+\.\d+\.\d+(?:\.post\d+)?$")
 
 
 def _job_blocks(workflow: str) -> dict[str, str]:
@@ -36,6 +54,12 @@ def _job_blocks(workflow: str) -> dict[str, str]:
         end = names[index + 1][0] if index + 1 < len(names) else len(body)
         blocks[name] = body[start:end]
     return blocks
+
+
+def _step_blocks(job: str) -> list[str]:
+    """Split one job block into its step texts."""
+
+    return re.split(r"(?m)^      - ", job)[1:]
 
 
 class TriggerPolicyTests(unittest.TestCase):
@@ -173,7 +197,7 @@ class OneBuildPerWorkflowTests(unittest.TestCase):
         self.assertIn("name: candidate-wheel-non-promotable-${{ github.sha }}", source)
         for consumer, check in (
             ("candidate-package", "sha256sum --check --strict SHA256SUMS"),
-            ("governance-migration", "Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName"),
+            ("upgrade-rehearsal", "Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName"),
         ):
             with self.subTest(job=consumer):
                 block = self.jobs[consumer]
@@ -191,24 +215,28 @@ class OneBuildPerWorkflowTests(unittest.TestCase):
         self.assertNotIn("pip wheel", block)
 
     def test_reconcile_and_retain_only_jobs(self) -> None:
+        # WO-CIP-007 (CIP-ONE-012): the rehearsal job, its artifact, its needs entry
+        # and its output references all read upgrade-rehearsal.
         self.assertNotIn("governance-migration-reconcile", self.jobs)
-        migration = self.jobs["governance-migration"]
-        self.assertIn("outputs:\n      Linux: ${{ steps.digest.outputs.Linux }}\n      Windows: ${{ steps.digest.outputs.Windows }}", migration)
+        rehearsal = self.jobs["upgrade-rehearsal"]
+        self.assertIn("outputs:\n      Linux: ${{ steps.digest.outputs.Linux }}\n      Windows: ${{ steps.digest.outputs.Windows }}", rehearsal)
+        self.assertIn("name: upgrade-rehearsal-${{ matrix.platform }}", rehearsal)
         build = self.jobs["integration-package-build"]
-        self.assertIn("Require one cross-platform migration semantic result", build)
-        self.assertIn("MIGRATION_DIGEST_LINUX: ${{ needs.governance-migration.outputs.Linux }}", build)
+        self.assertIn("Require one cross-platform upgrade rehearsal semantic result", build)
+        self.assertIn("REHEARSAL_DIGEST_LINUX: ${{ needs.upgrade-rehearsal.outputs.Linux }}", build)
+        self.assertIn("      - upgrade-rehearsal\n", build)
         # SPEC-IPK-001 rule 5 keeps the retention job downstream of every matrix member
         self.assertIn("integration-package-retain", self.jobs)
         self.assertEqual(
-            ["candidate-source", "candidate-package", "governance-migration",
+            ["candidate-source", "candidate-package", "upgrade-rehearsal",
              "integration-package-build", "integration-package-verify", "integration-package-retain"],
             list(self.jobs),
         )
 
     def test_the_double_rehearsal_per_platform_is_kept(self) -> None:
         # REQ-REB-017's acceptance example runs the rehearsal twice per platform.
-        migration = self.jobs["governance-migration"]
-        self.assertEqual(2, migration.count("-m repository_tools.upgrade_rehearsal"))
+        rehearsal = self.jobs["upgrade-rehearsal"]
+        self.assertEqual(2, rehearsal.count("-m repository_tools.upgrade_rehearsal"))
 
 
 class PredecessorDerivationTests(unittest.TestCase):
@@ -319,8 +347,8 @@ class PredecessorDerivationTests(unittest.TestCase):
         self.assertIn("repository_tools.evaluator_facts derive", jobs["candidate-source"])
         for output in ("predecessor_version", "predecessor_wheel_sha256"):
             self.assertIn(f"{output}: ${{{{ steps.predecessor.outputs.", jobs["candidate-source"])
-        self.assertIn("needs.candidate-source.outputs.predecessor_wheel_sha256", jobs["governance-migration"])
-        self.assertIn("throw 'predecessor facts were not derived by candidate-source'", jobs["governance-migration"])
+        self.assertIn("needs.candidate-source.outputs.predecessor_wheel_sha256", jobs["upgrade-rehearsal"])
+        self.assertIn("throw 'predecessor facts were not derived by candidate-source'", jobs["upgrade-rehearsal"])
 
     def _copy_repository_declarations(self, root: Path) -> None:
         for relative in (".engineering-harness.toml", ".engineering-harness.lock", "pyproject.toml"):
@@ -517,6 +545,134 @@ class QualificationDefinitionTests(unittest.TestCase):
             )
             self.assertEqual(0, completed.returncode, completed.stderr)
             self.assertIn("RLS-X-003", completed.stdout + completed.stderr)
+
+
+class PipelineHygieneTests(unittest.TestCase):
+    """REQ-CIP-008 and REQ-CIP-009 / SPEC-CIP-003 (WO-CIP-007), CIP-ONE-016."""
+
+    def setUp(self) -> None:
+        self.texts = {path.name: path.read_text(encoding="utf-8") for path in REPOSITORY_OWNED}
+
+    def test_the_qualification_definition_qualifies_and_tests_release_records_only(self) -> None:
+        # CIP-ONE-001: candidate mode replays the recipe; the qualification, the
+        # suite and the smoke run under the release-record guard only.
+        qualify = _job_blocks(self.texts["release-qualification.yml"])["qualify"]
+        for command in ("qualify complete-candidate", "unittest discover", "-m se_harness --help"):
+            with self.subTest(command=command):
+                holding = [step for step in _step_blocks(qualify) if command in step]
+                self.assertEqual(1, len(holding), command)
+                self.assertIn("if: inputs.mode == 'release-record'", holding[0])
+        replay = [step for step in _step_blocks(qualify) if "release_build replay" in step]
+        self.assertEqual(1, len(replay))
+        self.assertNotIn("if: inputs.mode == 'release-record'", replay[0])
+
+    def test_candidate_source_is_the_only_lane_that_qualifies_and_tests_a_pull_request(self) -> None:
+        # CIP-ONE-002: one qualification and one suite run per pull-request commit.
+        jobs = _job_blocks(self.texts["candidate-evidence.yml"])
+        for command in ("qualify complete-candidate", "scripts/run_tests.py"):
+            with self.subTest(command=command):
+                holders = [name for name, block in jobs.items() if command in block]
+                self.assertEqual(["candidate-source"], holders)
+                self.assertEqual(1, self.texts["candidate-evidence.yml"].count(command))
+        for name, text in self.texts.items():
+            if name in {"candidate-evidence.yml", "release-qualification.yml"}:
+                continue
+            with self.subTest(workflow=name):
+                for command in ("qualify complete-candidate", "run_tests.py", "unittest discover"):
+                    self.assertNotIn(command, text, command)
+
+    def test_no_step_restates_a_check_a_script_already_performs(self) -> None:
+        # CIP-ONE-003 and CIP-ONE-004: the script holds the one definition of the
+        # forbidden wheel members and of the retired command surface.
+        package = _job_blocks(self.texts["candidate-evidence.yml"])["candidate-package"]
+        self.assertIn("check_portable_release_surface.py --wheel", package)
+        self.assertRegex(package, r"check_portable_release_surface\.py\" \\\n\s+--harnessctl ")
+        self.assertNotIn("zipfile", package)
+        self.assertNotIn("forbidden", package)
+        self.assertNotIn("--help | grep", package)
+        self.assertNotIn("--help | ", package)
+
+    def test_one_python_version_string(self) -> None:
+        # CIP-ONE-005: publish-pypi.yml may hold it in PYTHON_VERSION; every other
+        # occurrence is the literal "3.11".
+        for name, text in self.texts.items():
+            with self.subTest(workflow=name):
+                values = re.findall(r"(?m)^\s+(?:\"python-version\"|python-version): (.+)$", text)
+                allowed = {'"3.11"'}
+                if name == "publish-pypi.yml":
+                    allowed.add("${{ env.PYTHON_VERSION }}")
+                    self.assertIn('PYTHON_VERSION: "3.11"', text)
+                else:
+                    self.assertNotIn("PYTHON_VERSION", text)
+                self.assertEqual(set(), set(values) - allowed, values)
+
+    def test_every_public_action_takes_the_pin_form(self) -> None:
+        # CIP-ONE-006: a full commit digest and the exact tag it was peeled from.
+        for name, text in self.texts.items():
+            for line in re.findall(r"(?m)^\s+(?:- )?uses: (.+)$", text):
+                with self.subTest(workflow=name, uses=line):
+                    if line.startswith("./.github/workflows/"):
+                        continue
+                    self.assertRegex(line, PIN_FORM)
+        # one digest per action within a file: no file names two generations at once
+        for name, text in self.texts.items():
+            pins: dict[str, set[str]] = {}
+            for line in re.findall(r"(?m)^\s+(?:- )?uses: ([\w.-]+/[\w./-]+)@([0-9a-f]{40})", text):
+                pins.setdefault(line[0], set()).add(line[1])
+            for action, digests in pins.items():
+                with self.subTest(workflow=name, action=action):
+                    self.assertEqual(1, len(digests), digests)
+
+    def test_the_integration_build_toolchain_is_stated_once(self) -> None:
+        # CIP-ONE-007: one env block read by the install and by the expectations.
+        build = _job_blocks(self.texts["candidate-evidence.yml"])["integration-package-build"]
+        for variable in ("INTEGRATION_BUILD_VERSION", "INTEGRATION_SETUPTOOLS_VERSION", "INTEGRATION_WHEEL_VERSION"):
+            with self.subTest(variable=variable):
+                self.assertRegex(build, rf"(?m)^      {variable}: \S+$")
+                self.assertEqual(3, build.count(variable), variable)
+        self.assertIn('"build==$INTEGRATION_BUILD_VERSION"', build)
+        self.assertIn('--expect-build-version "$INTEGRATION_BUILD_VERSION"', build)
+        for literal in ("1.2.2.post1", "75.8.0", "0.45.1"):
+            with self.subTest(literal=literal):
+                self.assertEqual(1, build.count(literal), literal)
+
+    def test_every_pages_deployment_queues_behind_one_group(self) -> None:
+        # CIP-ONE-008: whichever caller invokes the definition.
+        deploy = _job_blocks(self.texts["pages-publication.yml"])["deploy"]
+        self.assertIn("    concurrency:\n      group: se-harness-pages-deploy\n      cancel-in-progress: false\n", deploy)
+
+    def test_the_payload_digest_is_probed_only_where_the_evaluator_may_predate_it(self) -> None:
+        # CIP-ONE-009 and CIP-ONE-010.
+        release = self.texts["publish-pypi.yml"]
+        self.assertIn('--evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256"', release)
+        self.assertNotIn("identity --help", release)
+        pages = self.texts["pages-publication.yml"]
+        self.assertIn("identity --help", pages)
+        probe = pages.split("identity --help", 1)[0].rsplit("- name:", 1)[1]
+        self.assertIn("governance root", probe)
+
+    def test_no_retired_name_survives_in_a_repository_owned_workflow(self) -> None:
+        # CIP-ONE-011 and CIP-ONE-012.
+        for name, text in self.texts.items():
+            with self.subTest(workflow=name):
+                stripped = text
+                for exemption in RETIRED_NAME_EXEMPTIONS:
+                    stripped = stripped.replace(exemption, "")
+                found = RETIRED_NAME.search(stripped)
+                self.assertIsNone(found, found.group(0) if found else "")
+        assessment = self.texts["predecessor-evaluator-assessment.yml"]
+        self.assertIn("name: Predecessor Evaluator Assessment\n", assessment)
+        self.assertIn("  predecessor-evaluator-assessment:\n", assessment)
+        self.assertIn("name: predecessor-evaluator-assessment\n", assessment)
+
+    def test_every_repository_owned_workflow_carries_a_header_comment(self) -> None:
+        # CIP-ONE-017 with SPEC-CIP-001 CIP-DOC 4: purpose, trigger policy, note.
+        for name, text in self.texts.items():
+            with self.subTest(workflow=name):
+                header = text.split("\nname:", 1)[0]
+                self.assertTrue(text.startswith("# "), "workflow header comment missing")
+                self.assertIn("docs/notes/", header)
+                self.assertIn("Trigger policy", header)
 
 
 if __name__ == "__main__":

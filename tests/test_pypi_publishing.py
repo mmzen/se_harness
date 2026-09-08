@@ -45,15 +45,17 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
         # release workflow itself acquires the released evaluator once, in resolve.
         self.assertEqual(1, self.workflow.count("publish_dashboard.py evaluator"))
         self.assertEqual(1, self.workflow.count("--role released-evaluator"))
-        self.assertEqual(
-            1, self.workflow.count("identity_args+=(--evaluator-payload-sha256")
-        )
+        # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-009): the evaluator resolved here is the
+        # one main declares, so the payload digest is passed unconditionally and no
+        # capability probe builds the argument list.
         self.assertEqual(
             1,
             self.workflow.count(
-                "identity --help 2>&1 | grep -q -- '--evaluator-payload-sha256'"
+                '            --evaluator-payload-sha256 "$EVALUATOR_PAYLOAD_SHA256" \\\n'
             ),
         )
+        self.assertNotIn("identity_args", self.workflow)
+        self.assertNotIn("identity --help", self.workflow)
         self.assertEqual(1, self.workflow.count("--evaluator-wheel-sha256"))
         for retired in (
             "publish_dashboard.py governor",
@@ -84,7 +86,9 @@ class PyPIPublishingWorkflowTests(unittest.TestCase):
 
     def test_publisher_is_immutable_and_strict_replay_does_not_use_skip_existing(self) -> None:
         self.assertIn(
-            f"uses: pypa/gh-action-pypi-publish@{PUBLISH_ACTION_SHA} # v1.14.2 peeled commit",
+            # WO-CIP-007 (SPEC-CIP-003 CIP-ONE-006): digest, then the exact tag it
+            # was peeled from, and nothing else.
+            f"uses: pypa/gh-action-pypi-publish@{PUBLISH_ACTION_SHA} # v1.14.2\n",
             self.pypi_job,
         )
         self.assertNotIn(PUBLISH_ACTION_TAG_OBJECT_SHA, self.pypi_job)
