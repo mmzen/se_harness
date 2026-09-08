@@ -2,7 +2,7 @@
 id = "DEC-ECP-001"
 type = "decision"
 title = "SPEC-ECP-023 asks repository_tools to import the package across the import barrier"
-status = "open"
+status = "decided"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -28,6 +28,20 @@ label = "Stop WO-ECP-031 until the specification and the barrier are reconciled 
 [relations]
 concerns = ["SPEC-ECP-023", "WO-ECP-031", "WO-ECP-032", "ARCH-REB-013"]
 blocks = ["WO-ECP-031"]
+
+[disposition]
+option = "amend"
+label = "Amend the four rules by record so they bind the package only; repository_tools keeps its own standard-library launchers, parser, serializers and environment builder behind the barrier, and the duplication the assessment counted there is accepted as the price of ARCH-REB-013."
+decided_by = "technical-owner"
+decided_at = "2026-09-08T10:23:52Z"
+reason = "Amended by record on 2026-09-08, the owner selecting the presented option 'Amend, and widen the scope': ECP-PRM-003, ECP-PRM-005, ECP-PRM-009 and ECP-PRM-015 bind the package only; repository_tools keeps its standard-library launchers, parser, serializers and environment builder behind the import barrier of ARCH-REB-013 and SPEC-REB-015 rule 2, and the copies the assessment counted there are the accepted price of that barrier. The amendment record is written on SPEC-ECP-023 under WO-ECP-031, whose scope names it."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-08T10:23:52Z"
+decided_by = "technical-owner"
+reason = "Amended by record on 2026-09-08, the owner selecting the presented option 'Amend, and widen the scope': ECP-PRM-003, ECP-PRM-005, ECP-PRM-009 and ECP-PRM-015 bind the package only; repository_tools keeps its standard-library launchers, parser, serializers and environment builder behind the import barrier of ARCH-REB-013 and SPEC-REB-015 rule 2, and the copies the assessment counted there are the accepted price of that barrier. The amendment record is written on SPEC-ECP-023 under WO-ECP-031, whose scope names it."
 +++
 
 # Decision: SPEC-ECP-023 asks repository_tools to import the package across the import barrier
