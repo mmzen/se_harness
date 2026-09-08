@@ -153,3 +153,7 @@ error and the exit status is 2 (ECP-COR-004, ECP-COR-005).
 - The wording of the reference rows and the amendment records.
 - Whether the engine timeout is a module constant or a parameter.
 - Whether the `error` member is trimmed at the head or the tail.
+
+## Amendment record
+
+**`ECP-COR-014` and the engine timeout row of the failure table are withdrawn under `WO-ECP-034` (`SPEC-ECP-024` `ECP-ENG-003` and `ECP-ENG-025`), recorded 2026-09-08.** The evaluator imports the validator, the generator and the inspector and runs them in-process: the four engine launches of `cli.py` are gone, so no engine subprocess exists to bound or to exceed a timeout; the row's Git clause stands, and `WEX-ECP-040` stays the gate's code. `ECP-COR-009` and `ECP-COR-010` stand, read on the engine's return code and the standard error it writes in-process. The unspecified decision on the engine timeout constant is moot. Nothing else in this specification changes.

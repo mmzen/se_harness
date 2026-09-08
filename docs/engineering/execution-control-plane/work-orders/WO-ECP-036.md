@@ -2,7 +2,7 @@
 id = "WO-ECP-036"
 type = "work_order"
 title = "Wave 3, group C: the validator, the generator and the compliance module split along their seams"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -40,6 +40,20 @@ to = "approved"
 decided_at = "2026-09-08T15:14:16Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #404, #405 and #406 and their summary were presented: wave 3 of the code health assessment of 2026-09-07 (issue #378) and the revisit triggers of DEC-ECP-001 and DEC-ECP-002, the engine as an import surface, one validation per governance command, the three largest modules split along their seams, every recorded output byte-identical. Approval of a definition authorizes no work."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T18:17:07Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete, prepare the record, start group C' after WO-ECP-035 was marked implemented and VREC-ECP-039 prepared at ebd60b10: wave 3, group C, the validator, the generator and the compliance module split along their seams (SPEC-ECP-024 ECP-ENG-016 to ECP-ENG-026). Start preflight PASS. Stacked on the group B branch because the groups edit the same modules."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T19:41:11Z"
+decided_by = "engineering-owner"
+reason = "Completed on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete and prepare the record' after the handoff evidence packet (7edf17b3: 43 changed paths, every gate predicate passing, complete) and the green lanes of PR #414 were presented: the validator, the generator and the compliance module split along their seams, the workflow graph and edge names given public homes, the workflow cycle gone, no private cross-module import, no function above complexity 60, every recorded output byte-identical to the group B code at the same revision (SPEC-ECP-024 ECP-ENG-016 to ECP-ENG-026)."
 +++
 
 # Work Order: Wave 3, group C: the validator, the generator and the compliance module split along their seams

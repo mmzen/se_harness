@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from se_harness.artifact_layout import ID_PATTERN
 from se_harness.codes import CodedError, WEX220, WEX221, WEX_ADS_001
 
 import re
@@ -10,7 +11,6 @@ from typing import Any, Iterable, Mapping
 
 
 _PLACEHOLDER = re.compile(r"\{([a-z][a-z0-9_]*)\}")
-_ARTIFACT_ID = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 
 
@@ -21,7 +21,7 @@ class ProcedureError(CodedError):
 def _typed(value: str, parameter_type: str, name: str) -> str:
     if not value or len(value) > 4096 or _CONTROL.search(value):
         raise ProcedureError(WEX221, f"procedure parameter {name} has an invalid value")
-    if parameter_type == "artifact_id" and _ARTIFACT_ID.fullmatch(value) is None:
+    if parameter_type == "artifact_id" and ID_PATTERN.fullmatch(value) is None:
         raise ProcedureError(WEX221, f"procedure parameter {name} is not an artifact ID")
     if parameter_type == "path":
         parts = value.split("/")

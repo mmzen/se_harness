@@ -20,10 +20,7 @@ from tests.root_identity_support import load_module
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
-CANDIDATE_VALIDATOR = load_module(
-    REPOSITORY_ROOT / "se_harness/engine/validate_engineering_artifacts.py",
-    "evidence_floor_candidate_validator",
-)
+from se_harness.engine import validate_engineering_artifacts as CANDIDATE_VALIDATOR  # noqa: E402
 PUBLICATION = load_module(
     REPOSITORY_ROOT / ".github/scripts/publish_dashboard.py",
     "evidence_floor_publication",

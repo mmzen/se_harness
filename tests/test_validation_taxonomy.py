@@ -27,24 +27,26 @@ validate_repository = _validate_engineering_artifacts.validate_repository
 class ValidationTaxonomyTests(unittest.TestCase):
     def test_every_diagnostic_emission_declares_a_plane(self) -> None:
         # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copy when the lock names it, else the engine copy.
-        source = (root_copy("scripts/validate_engineering_artifacts.py") or ENGINE_ROOT / "validate_engineering_artifacts.py").read_text(
-            encoding="utf-8"
-        )
-        tree = ast.parse(source)
-        missing: list[int] = []
-        for node in ast.walk(tree):
-            if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Name):
-                continue
-            if node.func.id == "_add_error" and not any(
-                keyword.arg == "plane" for keyword in node.keywords
-            ):
-                missing.append(node.lineno)
-            if (
-                node.func.id == "Diagnostic"
-                and len(node.args) < 4
-                and not any(keyword.arg == "plane" for keyword in node.keywords)
-            ):
-                missing.append(node.lineno)
+        # WO-ECP-036 (SPEC-ECP-024 ECP-ENG-017): the validator is split along its seams, so every
+        # engine module is read, the entry file and the validation_* seams alike.
+        root_source = root_copy("scripts/validate_engineering_artifacts.py")
+        sources = [root_source] if root_source is not None else sorted(ENGINE_ROOT.glob("*.py"))
+        missing: list[str] = []
+        for path in sources:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Name):
+                    continue
+                if node.func.id in {"add_error", "_add_error"} and not any(
+                    keyword.arg == "plane" for keyword in node.keywords
+                ):
+                    missing.append(f"{path.name}:{node.lineno}")
+                if (
+                    node.func.id == "Diagnostic"
+                    and len(node.args) < 4
+                    and not any(keyword.arg == "plane" for keyword in node.keywords)
+                ):
+                    missing.append(f"{path.name}:{node.lineno}")
         self.assertEqual([], missing)
 
     def test_policy_and_operator_reference_define_the_same_small_vocabulary(self) -> None:

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import importlib.util
 import json
 import platform
 import re
@@ -12,8 +11,9 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable, Literal
 
+from se_harness.engine import validate_engineering_artifacts
+from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
 from se_harness.installer import (
-    ENGINE_ROOT,
     CONFIG_NAME,
     LOCK_NAME,
     HarnessError,
@@ -54,7 +54,7 @@ from se_harness.codes import (
 PREFLIGHT_SCHEMA = "se-harness-preflight-v2"
 WORK_ORDER_PATTERN = re.compile(r"^WO-[A-Z][A-Z0-9-]*-\d{3}$")
 START_STATUSES = {"approved", "in_progress"}
-REVIEW_STATUSES = START_STATUSES | {"implemented", "verified", "released"}
+REVIEW_STATUSES = START_STATUSES | IMPLEMENTED_OR_LATER_STATUSES  # ECP-ENG-007
 ACTIVE_CHAIN_STATUSES = REVIEW_STATUSES
 AUTHORITY_BOUNDARY = (
     "Preflight is derived, read-only evidence. It does not approve artifacts, "
@@ -93,7 +93,6 @@ POLICY_PATHS = (
     "docs/engineering/TECHNICAL_COMMUNICATION.md",
     "docs/engineering/ARTIFACT_AUTHORING.md",
 )
-_VALIDATOR_MODULE: ModuleType | None = None
 
 #: ECP-PRM-013: the two preflight phases, typed.
 Phase = Literal["start", "review"]
@@ -121,6 +120,9 @@ class PreflightReport:
     assurance: dict[str, str]
     diagnostics: tuple[PreflightDiagnostic, ...]
     reading_manifest: tuple[str, ...]
+    #: ECP-ENG-014: candidate-versus-released skew, reported but never blocking; the one
+    #: classifier serves this report and `check --checkpoint start`.
+    skew: tuple[PreflightDiagnostic, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -130,9 +132,39 @@ class PreflightReport:
             "work_order": self.work_order,
             "assurance": self.assurance,
             "diagnostics": [asdict(item) for item in self.diagnostics],
+            "skew": [asdict(item) for item in self.skew],
             "reading_manifest": list(self.reading_manifest),
             "authority_boundary": AUTHORITY_BOUNDARY,
         }
+
+
+def lock_files(root: Path) -> frozenset[str]:
+    """The paths the standard lock names, or none when it cannot be read."""
+
+    try:
+        lock = json.loads((root / ".engineering-harness.lock").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return frozenset()
+    if isinstance(lock, dict) and isinstance(lock.get("files"), dict):
+        return frozenset(str(path) for path in lock["files"])
+    return frozenset()
+
+
+def lifecycle_relevant(item: Any, locked: frozenset[str]) -> bool:
+    """The one skew classifier (ECP-ENG-014, formerly ECP-KRN-007's filter in the check).
+
+    Candidate-distribution comparisons and lock entries the released root never
+    recorded are candidate-versus-released skew, not installation facts; every
+    other diagnostic blocks a lifecycle stage.
+    """
+
+    path = str(item.path)
+    if item.code == I001 and path.startswith("distribution:"):
+        return False
+    candidate = path.removeprefix("lock-entry:")
+    if item.code == I001 and item.message in {"missing", "required"} and candidate not in locked:
+        return False
+    return True
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -261,28 +293,6 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
     return sorted(checks) + _hash_bound_checks(target)
 
 
-def _load_validator_module() -> ModuleType:
-    global _VALIDATOR_MODULE
-    if _VALIDATOR_MODULE is not None:
-        return _VALIDATOR_MODULE
-    path = ENGINE_ROOT / "validate_engineering_artifacts.py"
-    if not path.is_file():
-        raise HarnessError(f"missing distribution validator: {path}")
-    module_name = "_se_harness_distribution_validator"
-    spec = importlib.util.spec_from_file_location(module_name, path)
-    if spec is None or spec.loader is None:
-        raise HarnessError(f"cannot load distribution validator: {path}")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    try:
-        spec.loader.exec_module(module)
-    except Exception:
-        sys.modules.pop(module_name, None)
-        raise
-    _VALIDATOR_MODULE = module
-    return module
-
-
 def _targets(artifact: Any, relation: str) -> list[str]:
     value = artifact.relations.get(relation, [])
     return sorted(item for item in value if isinstance(item, str)) if isinstance(value, list) else []
@@ -334,29 +344,15 @@ def _unique_paths(items: Iterable[str]) -> tuple[str, ...]:
     return tuple(result)
 
 
-def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -> PreflightReport:
-    """Evaluate implementation or review readiness without mutating the repository."""
-
-    root = ensure_target(target, must_exist=True)
-    if phase not in {"start", "review"}:
-        raise HarnessError("preflight phase must be start or review")
-    diagnostics: list[PreflightDiagnostic] = []
-    for check in inspect_installation(root):
-        if not check.passed:
-            diagnostics.append(PreflightDiagnostic(I001, check.name, check.detail))
-
-    artifacts: list[Any] = []
-    validator: ModuleType | None = None
-    try:
-        validator = _load_validator_module()
-        validation = validator.validate_repository(root)
-        artifacts = list(validation.artifacts)
-        diagnostics.extend(
-            PreflightDiagnostic(f"A-{item.code}", item.path, item.message)
-            for item in validation.errors
-        )
-    except Exception as exc:
-        diagnostics.append(PreflightDiagnostic(A001, "docs/engineering", f"validator unavailable: {exc}"))
+def _select_work_order(
+    work_order_id: str,
+    artifacts: list[Any],
+    validator: ModuleType | None,
+    root: Path,
+    phase: Phase,
+    diagnostics: list[PreflightDiagnostic],
+) -> tuple[Any | None, dict[str, Any], dict[str, Any]]:
+    """Resolve the selected work order, its summary and assurance summary, appending W001-W005/W023 diagnostics."""
 
     work_order: Any | None = None
     work_order_summary = {"id": work_order_id, "status": "unknown", "path": ""}
@@ -414,6 +410,163 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                             f"status {candidate.status!r} is not eligible for {phase}; expected one of {expected}",
                         )
                     )
+    return work_order, work_order_summary, assurance_summary
+
+
+def _selected_architecture_relevance_diagnostics(
+    validator: ModuleType,
+    architectures: list[Any],
+    catalog: dict[str, Any],
+    selected_specification_ids: set[str],
+    requirement_ids: set[str],
+    root: Path,
+    diagnostics: list[PreflightDiagnostic],
+) -> None:
+    """Append W021 for each selected architecture unrelated to the selected specifications or requirements."""
+
+    for architecture in architectures:
+        traceability = validator.architecture_traceability_state(architecture, catalog)
+        if traceability["state"] in {"typed", "dual_declared"}:
+            relevant = bool(
+                selected_specification_ids.intersection(traceability["conforms_to"])
+            )
+        elif traceability["state"] == "legacy_requirement_trace":
+            relevant = bool(requirement_ids.intersection(traceability["legacy_targets"]))
+        elif traceability["state"] == "legacy_specification_trace":
+            relevant = bool(
+                selected_specification_ids.intersection(traceability["legacy_targets"])
+            )
+        else:
+            relevant = True
+        if not relevant:
+            diagnostics.append(
+                PreflightDiagnostic(
+                    W021,
+                    _relative(architecture.path, root),
+                    f"selected architecture {architecture.artifact_id} is unrelated to selected specifications or requirements",
+                )
+            )
+
+
+def _unselected_architecture_diagnostics(
+    validator: ModuleType,
+    artifacts: list[Any],
+    catalog: dict[str, Any],
+    selected_architecture_ids: set[str],
+    requirement_ids: set[str],
+    selected_specification_ids: set[str],
+    root: Path,
+    diagnostics: list[PreflightDiagnostic],
+) -> None:
+    """Append W022 for each active, unselected architecture that applies to the selected requirements."""
+
+    for architecture in artifacts:
+        if (
+            architecture.artifact_type != "architecture"
+            or architecture.status not in ACTIVE_CHAIN_STATUSES
+            or architecture.artifact_id in selected_architecture_ids
+        ):
+            continue
+        traceability = validator.architecture_traceability_state(architecture, catalog)
+        if traceability["state"] in {"typed", "dual_declared"}:
+            applicable = bool(requirement_ids.intersection(traceability["addresses"]))
+        elif traceability["state"] == "legacy_requirement_trace":
+            applicable = bool(requirement_ids.intersection(traceability["legacy_targets"]))
+        elif traceability["state"] == "legacy_specification_trace":
+            applicable = bool(
+                selected_specification_ids.intersection(traceability["legacy_targets"])
+            )
+        else:
+            applicable = False
+        if applicable:
+            diagnostics.append(
+                PreflightDiagnostic(
+                    W022,
+                    _relative(architecture.path, root),
+                    f"applicable architecture {architecture.artifact_id} is not selected by the work order",
+                )
+            )
+
+
+def _decision_assessment_diagnostics(
+    validator: ModuleType,
+    architectures: list[Any],
+    decisions: list[Any],
+    root: Path,
+    diagnostics: list[PreflightDiagnostic],
+) -> None:
+    """Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR."""
+
+    active_decisions = [
+        item for item in decisions if item.status in ACTIVE_CHAIN_STATUSES
+    ]
+    for architecture in architectures:
+        assessment = validator.decision_assessment_state(architecture)
+        selected_deciding = [
+            decision
+            for decision in active_decisions
+            if architecture.artifact_id in _targets(decision, "decides")
+        ]
+        if assessment["state"] in {"missing", "invalid"}:
+            details = "; ".join(assessment["issues"]) or "invalid decision assessment"
+            diagnostics.append(
+                PreflightDiagnostic(
+                    W020,
+                    _relative(architecture.path, root),
+                    f"architecture {architecture.artifact_id} has no valid decision assessment: {details}",
+                )
+            )
+        elif assessment["state"] == "legacy_missing" and not selected_deciding:
+            diagnostics.append(
+                PreflightDiagnostic(
+                    W019,
+                    _relative(architecture.path, root),
+                    f"legacy architecture {architecture.artifact_id} has no selected active deciding ADR",
+                )
+            )
+        elif assessment["outcome"] == "adr_required" and not selected_deciding:
+            diagnostics.append(
+                PreflightDiagnostic(
+                    W018,
+                    _relative(architecture.path, root),
+                    f"adr_required architecture {architecture.artifact_id} has no selected active deciding ADR",
+                )
+            )
+
+
+def run_preflight(
+    target: Path, *, work_order_id: str, phase: Phase = "start", report: Any | None = None
+) -> PreflightReport:
+    """Evaluate implementation or review readiness without mutating the repository.
+
+    `report` is the validation the caller already holds (ECP-ENG-010, ECP-ENG-011);
+    without it the repository is validated once here.
+    """
+
+    root = ensure_target(target, must_exist=True)
+    if phase not in {"start", "review"}:
+        raise HarnessError("preflight phase must be start or review")
+    diagnostics: list[PreflightDiagnostic] = []
+    for check in inspect_installation(root):
+        if not check.passed:
+            diagnostics.append(PreflightDiagnostic(I001, check.name, check.detail))
+
+    artifacts: list[Any] = []
+    validator: ModuleType | None = None
+    try:
+        validator = validate_engineering_artifacts  # ECP-ENG-003: the engine is imported, not loaded by path
+        validation = report if report is not None else validator.validate_repository(root)
+        artifacts = list(validation.artifacts)
+        diagnostics.extend(
+            PreflightDiagnostic(f"A-{item.code}", item.path, item.message)
+            for item in validation.errors
+        )
+    except Exception as exc:
+        diagnostics.append(PreflightDiagnostic(A001, "docs/engineering", f"validator unavailable: {exc}"))
+
+    work_order, work_order_summary, assurance_summary = _select_work_order(
+        work_order_id, artifacts, validator, root, phase, diagnostics
+    )
 
     catalog = {item.artifact_id: item for item in artifacts}
 
@@ -515,91 +668,28 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
                     )
                 )
         if validator is not None:
-            for architecture in architectures:
-                traceability = validator.architecture_traceability_state(architecture, catalog)
-                if traceability["state"] in {"typed", "dual_declared"}:
-                    relevant = bool(
-                        selected_specification_ids.intersection(traceability["conforms_to"])
-                    )
-                elif traceability["state"] == "legacy_requirement_trace":
-                    relevant = bool(requirement_ids.intersection(traceability["legacy_targets"]))
-                elif traceability["state"] == "legacy_specification_trace":
-                    relevant = bool(
-                        selected_specification_ids.intersection(traceability["legacy_targets"])
-                    )
-                else:
-                    relevant = True
-                if not relevant:
-                    diagnostics.append(
-                        PreflightDiagnostic(
-                            W021,
-                            _relative(architecture.path, root),
-                            f"selected architecture {architecture.artifact_id} is unrelated to selected specifications or requirements",
-                        )
-                    )
+            _selected_architecture_relevance_diagnostics(
+                validator,
+                architectures,
+                catalog,
+                selected_specification_ids,
+                requirement_ids,
+                root,
+                diagnostics,
+            )
 
-            for architecture in artifacts:
-                if (
-                    architecture.artifact_type != "architecture"
-                    or architecture.status not in ACTIVE_CHAIN_STATUSES
-                    or architecture.artifact_id in selected_architecture_ids
-                ):
-                    continue
-                traceability = validator.architecture_traceability_state(architecture, catalog)
-                if traceability["state"] in {"typed", "dual_declared"}:
-                    applicable = bool(requirement_ids.intersection(traceability["addresses"]))
-                elif traceability["state"] == "legacy_requirement_trace":
-                    applicable = bool(requirement_ids.intersection(traceability["legacy_targets"]))
-                elif traceability["state"] == "legacy_specification_trace":
-                    applicable = bool(
-                        selected_specification_ids.intersection(traceability["legacy_targets"])
-                    )
-                else:
-                    applicable = False
-                if applicable:
-                    diagnostics.append(
-                        PreflightDiagnostic(
-                            W022,
-                            _relative(architecture.path, root),
-                            f"applicable architecture {architecture.artifact_id} is not selected by the work order",
-                        )
-                    )
+            _unselected_architecture_diagnostics(
+                validator,
+                artifacts,
+                catalog,
+                selected_architecture_ids,
+                requirement_ids,
+                selected_specification_ids,
+                root,
+                diagnostics,
+            )
 
-            active_decisions = [
-                item for item in decisions if item.status in ACTIVE_CHAIN_STATUSES
-            ]
-            for architecture in architectures:
-                assessment = validator.decision_assessment_state(architecture)
-                selected_deciding = [
-                    decision
-                    for decision in active_decisions
-                    if architecture.artifact_id in _targets(decision, "decides")
-                ]
-                if assessment["state"] in {"missing", "invalid"}:
-                    details = "; ".join(assessment["issues"]) or "invalid decision assessment"
-                    diagnostics.append(
-                        PreflightDiagnostic(
-                            W020,
-                            _relative(architecture.path, root),
-                            f"architecture {architecture.artifact_id} has no valid decision assessment: {details}",
-                        )
-                    )
-                elif assessment["state"] == "legacy_missing" and not selected_deciding:
-                    diagnostics.append(
-                        PreflightDiagnostic(
-                            W019,
-                            _relative(architecture.path, root),
-                            f"legacy architecture {architecture.artifact_id} has no selected active deciding ADR",
-                        )
-                    )
-                elif assessment["outcome"] == "adr_required" and not selected_deciding:
-                    diagnostics.append(
-                        PreflightDiagnostic(
-                            W018,
-                            _relative(architecture.path, root),
-                            f"adr_required architecture {architecture.artifact_id} has no selected active deciding ADR",
-                        )
-                    )
+            _decision_assessment_diagnostics(validator, architectures, decisions, root, diagnostics)
 
     if phase == "review" and work_order is not None:
         for message in orphaned_ready_records(root, artifacts, work_order.artifact_id):
@@ -619,13 +709,17 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
         list(READING_PATHS) + [_relative(item.path, root) for item in artifact_order]
     )
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
+    locked = lock_files(root)
+    relevant = tuple(item for item in ordered_diagnostics if lifecycle_relevant(item, locked))
+    skew = tuple(item for item in ordered_diagnostics if not lifecycle_relevant(item, locked))
     return PreflightReport(
-        ready=not ordered_diagnostics,
+        ready=not relevant,
         phase=phase,
         work_order=work_order_summary,
         assurance=assurance_summary,
-        diagnostics=ordered_diagnostics,
+        diagnostics=relevant,
         reading_manifest=manifest,
+        skew=skew,
     )
 
 
@@ -646,6 +740,12 @@ def render_preflight(report: PreflightReport) -> str:
         lines.extend(
             f"- [{item.code}] {item.path}: {item.message}"
             for item in report.diagnostics
+        )
+    if report.skew:
+        lines.extend(["", "Candidate-versus-released skew (not blocking):"])
+        lines.extend(
+            f"- [{item.code}] {item.path}: {item.message}"
+            for item in report.skew
         )
     if report.reading_manifest:
         lines.extend(["", "Reading manifest:"])

@@ -1,0 +1,370 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "8a734d806bd730a04f81d0a41a4e3f7511b9680da4274d2d7316ebd6239c3234",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-ECP-036 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-ECP-036:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-ECP-036 declares 13 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 43 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-ECP-036:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/execution-control-plane/evidence/WO-ECP-036/WO-ECP-036-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-ECP-036"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-ECP-036.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 73
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ECP-036",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-ECP-036",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-ECP-036",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-ECP-036",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-ECP-036."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-ECP-036",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-ECP-036 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-ECP-036 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-ECP-036 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-ECP-036 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-ECP-036",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-ECP-036."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "d3e05ed4c4b9a37ec48083982a64c0a2220956af67ab1d04313efcd34c1e75e2",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-036/handoff.json",
+      "docs/engineering/execution-control-plane/evidence/WO-ECP-036/WO-ECP-036-handoff.md",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-023.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-036.md",
+      "docs/notes/diagnostic-codes.md",
+      "se_harness/artifact_layout.py",
+      "se_harness/cli.py",
+      "se_harness/engine/dashboard_bundle.py",
+      "se_harness/engine/dashboard_snapshot.py",
+      "se_harness/engine/generate_harness_dashboard.py",
+      "se_harness/engine/validate_engineering_artifacts.py",
+      "se_harness/engine/validation_architecture.py",
+      "se_harness/engine/validation_authoring.py",
+      "se_harness/engine/validation_core.py",
+      "se_harness/engine/validation_decisions.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/engine/validation_layout.py",
+      "se_harness/engine/validation_lifecycle.py",
+      "se_harness/engine/validation_report.py",
+      "se_harness/engine/validation_revision.py",
+      "se_harness/preflight.py",
+      "se_harness/repository_graph.py",
+      "se_harness/risks.py",
+      "se_harness/workflow.py",
+      "se_harness/workflow_change_set.py",
+      "se_harness/workflow_compliance.py",
+      "se_harness/workflow_edges.py",
+      "se_harness/workflow_evidence_packet.py",
+      "se_harness/workflow_predicates.py",
+      "tests/test_artifact_authoring.py",
+      "tests/test_configuration_surface.py",
+      "tests/test_dashboard_webui.py",
+      "tests/test_decision_management.py",
+      "tests/test_engine_import_surface.py",
+      "tests/test_lifecycle_state_contract.py",
+      "tests/test_module_seams.py",
+      "tests/test_predecessor_bootstrap_retirement.py",
+      "tests/test_release_unit.py",
+      "tests/test_risk_management.py",
+      "tests/test_validation_taxonomy.py",
+      "tests/test_workflow_compliance.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/execution-control-plane/decisions/",
+      "docs/engineering/execution-control-plane/evidence/",
+      "docs/engineering/execution-control-plane/README.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-035.md",
+      "docs/engineering/execution-control-plane/specifications/",
+      "docs/engineering/execution-control-plane/verification-records/",
+      "docs/engineering/execution-control-plane/verification/VER-ECP-026.md",
+      "docs/engineering/execution-control-plane/work-orders/WO-ECP-036.md",
+      "docs/engineering/workflow-execution/specifications/",
+      "docs/notes/diagnostic-codes.md",
+      "repository_tools/diagnostic_code_index.py",
+      "se_harness/",
+      "tests/"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-ECP-003",
+      "INT-ECP-001",
+      "REQ-ECP-035",
+      "SPEC-ECP-024",
+      "VER-ECP-026"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-ECP-036"
+    ],
+    "primary": "WO-ECP-036"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-ECP-036",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-ECP-036",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

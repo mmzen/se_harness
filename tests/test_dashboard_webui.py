@@ -119,13 +119,14 @@ class DashboardWebUIContractTests(unittest.TestCase):
         self.assertEqual(builder.build(patches=builder.BASE_PATCHES), root)
 
     def test_candidate_topology_target_is_independent_from_the_managed_root(self) -> None:
-        candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(
-            encoding="utf-8"
-        )
-        managed_text = MANAGED_GENERATOR.read_text(encoding="utf-8")
+        # WO-ECP-036 (SPEC-ECP-024 ECP-ENG-018): the target is defined once in the bundle seam and
+        # imported by the entry module; the literal is pinned where it is defined.
+        bundle_text = (CANDIDATE_SCRIPTS / "dashboard_bundle.py").read_text(encoding="utf-8")
+        candidate_text = (CANDIDATE_SCRIPTS / "generate_harness_dashboard.py").read_text(encoding="utf-8")
         self.assertEqual(2_097_152, GENERATOR.TOPOLOGY_ACCEPTANCE_BYTES)
-        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", candidate_text)
-        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", managed_text)
+        self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", bundle_text)
+        if root_copy("scripts/generate_harness_dashboard.py") is not None:
+            self.assertIn("TOPOLOGY_ACCEPTANCE_BYTES = 2_097_152", MANAGED_GENERATOR.read_text(encoding="utf-8"))
         # The candidate evolves ahead of the released root copy between
         # adoptions; only the topology target must not regress on either side.
         self.assertIn("MAX_INDEX_BYTES = 524_288", candidate_text)
@@ -322,7 +323,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 self.assertIn("class Component extends DCLogic", source)
 
     def test_distribution_table_admits_only_scalar_fields(self) -> None:
-        table = GENERATOR._distribution_table(
+        table = GENERATOR.distribution_table(
             {
                 "wheel": "se_harness-1.0.0-py3-none-any.whl",
                 "schema": 2,
@@ -334,8 +335,8 @@ class DashboardWebUIContractTests(unittest.TestCase):
             }
         )
         self.assertEqual({"schema": 2, "wheel": "se_harness-1.0.0-py3-none-any.whl", "wheel_sha256": "a" * 64}, table)
-        self.assertIsNone(GENERATOR._distribution_table("python-wheel-sdist"))
-        self.assertIsNone(GENERATOR._distribution_table({"nested": {}}))
+        self.assertIsNone(GENERATOR.distribution_table("python-wheel-sdist"))
+        self.assertIsNone(GENERATOR.distribution_table({"nested": {}}))
 
     def test_github_remote_normalizes_to_one_public_url(self) -> None:
         for spelling in (
@@ -874,7 +875,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             evidence_root.mkdir(parents=True)
             valid = evidence_root / "WO-TST-001-verification.md"
             valid.write_bytes(b"# Evidence\r\n\r\nExact.\r\n")
-            projected = GENERATOR._project_evidence_document(
+            projected = GENERATOR.project_evidence_document(
                 root,
                 "docs/engineering/example/evidence/WO-TST-001-verification.md",
                 ["WO-TST-001", "VREC-TST-001"],
@@ -893,7 +894,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
                 return content
 
             with mock.patch.object(Path, "read_bytes", read_then_change):
-                changed = GENERATOR._project_evidence_document(
+                changed = GENERATOR.project_evidence_document(
                     root,
                     "docs/engineering/example/evidence/WO-TST-001-verification.md",
                     ["WO-TST-001"],
@@ -913,7 +914,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             )
             for path, reason in cases:
                 with self.subTest(path=path):
-                    omitted = GENERATOR._project_evidence_document(
+                    omitted = GENERATOR.project_evidence_document(
                         root,
                         path,
                         ["WO-TST-002"],
@@ -928,7 +929,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             except OSError:
                 pass
             else:
-                omitted = GENERATOR._project_evidence_document(
+                omitted = GENERATOR.project_evidence_document(
                     root,
                     "docs/engineering/example/evidence/WO-TST-003-verification.md",
                     ["WO-TST-003"],
