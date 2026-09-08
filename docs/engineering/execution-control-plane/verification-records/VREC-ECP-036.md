@@ -2,7 +2,7 @@
 id = "VREC-ECP-036"
 type = "verification_record"
 title = "Verification candidate for WO-ECP-032"
-status = "ready"
+status = "verified"
 owners = ["quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-032/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-036-evaluator.json"
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 
+verified_at = "2026-09-08T14:06:41Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-032"]
 conforms_to = ["VER-ECP-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-08T14:06:41Z"
+decided_by = "assurance-owner"
+reason = "Verified on 2026-09-08 by the accountable assurance owner with the words 'i verify both' (DR-VREC-DECIDE, together with VREC-ECP-037), after the record was presented: bound to candidate commit c829bdd5 of wo/ecp-032-integrity-primitives (PR #399, 13 checks green), retaining the WO-ECP-032 handoff evidence whose handoff check passes all nine predicates, the Windows suite at its baseline, validate 1397 artifacts with 0 errors, and the four ECP-PRM digest rules met with no recorded digest moved."
 +++
 
 # Verification Record Candidate
