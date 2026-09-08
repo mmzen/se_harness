@@ -2,7 +2,7 @@
 id = "WO-AUT-005"
 type = "work_order"
 title = "Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -65,6 +65,13 @@ paths = [
 implements = ["REQ-AUT-008"]
 specifications = ["SPEC-AUT-003"]
 verification = ["VER-AUT-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:58:19Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction, and as the technical owner's acceptance that the fourteen retroactive decision assessments will be written in that role's name from each deciding ADR. WO-AUT-005 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions. It authorizes only the declared scope: the fifteen architectures and 271 requirements measured on main at a68caf70, the script and its test, the note paragraph, the amendment record on SPEC-AUT-001, the corpus test, the domain index and the evidence packet. It authorizes no change to se_harness/, no closing of a validator window, no managed path, no verification decision and no release; the merges remain the owner's decisions."
 +++
 
 # Work Order: Wave 5, corpus: typed architecture relations, decision assessments, the vocabulary verification method
