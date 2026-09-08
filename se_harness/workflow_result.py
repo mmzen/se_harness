@@ -6,11 +6,12 @@ import json
 import shlex
 from typing import Any, Iterable, Mapping
 from se_harness.integrity import raw_sha256
+from se_harness.workflow_contract import RESULT_STATUSES, restitution_fields
 
 
 SCHEMA = "se-harness-workflow-result-v2"
 OUTCOMES = {"completed", "blocked"}
-STATUSES = {"pass", "fail", "not_assessable"}
+STATUSES = RESULT_STATUSES
 
 
 def _text(value: object) -> str:
@@ -30,18 +31,8 @@ def _sentences(values: Iterable[object]) -> list[str]:
 
 
 def _validate_restitution(value: Mapping[str, Any], outcome: str) -> None:
-    required = {
-        "outcome",
-        "done",
-        "not_done",
-        "blocked_by",
-        "current_lifecycle_state",
-        "decision_required",
-        "next",
-        "command_or_response",
-        "alternatives",
-    }
-    if set(value) != required:
+    # ECP-PRM-020: the schema-2 field set is the contract's `restitution_fields`.
+    if set(value) != set(restitution_fields()):
         raise ValueError("WEX230: restitution fields do not match schema 2")
     if value.get("outcome") != outcome:
         raise ValueError("WEX230: restitution outcome does not match operation outcome")

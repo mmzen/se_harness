@@ -542,7 +542,13 @@ def apply_changes(
         target_identity = getattr(authority, "target_identity", None)
         lock_file = target / LOCK_NAME
         if lock_file.is_file():
-            prior_lock_sha256 = raw_sha256(lock_file.read_bytes())
+            # ECP-PRM-022: the lock's digest under the mode its hash-bound class declares.
+            from se_harness.hash_bound import HashBoundError, declared_digest
+
+            try:
+                prior_lock_sha256 = declared_digest(LOCK_NAME, lock_file.read_bytes())
+            except HashBoundError as exc:
+                raise HarnessError(f"cannot hash the prior lock: {exc}") from exc
         # REQ-LRE-003 (the evaluator-evidence floor, owner decision of
         # 2026-08-30): a released record without evaluator evidence is not
         # assessed, so an identity transition enumerates nothing, refuses

@@ -20,6 +20,7 @@ from se_harness.workflow_contract import (
     EVIDENCE_CHECKPOINTS,
     Checkpoint,
     ContractError,
+    aggregation_order,
     effective_checkpoints,
     load_validated_contracts,
     select_rule,
@@ -667,12 +668,11 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
 
 
 def _aggregate(statuses: Iterable[str]) -> str:
+    """ECP-PRM-021: the first status of the contract's `aggregation` that is present wins."""
+
     values = set(statuses)
-    if "fail" in values:
-        return "fail"
-    if "not_assessable" in values:
-        return "not_assessable"
-    return "pass"
+    order = aggregation_order()
+    return next((status for status in order if status in values), order[-1])
 
 
 def _evidence(descriptors: Iterable[Mapping[str, Any]], artifact_id: str, checkpoint: str) -> list[dict[str, Any]]:

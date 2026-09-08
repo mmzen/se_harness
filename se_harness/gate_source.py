@@ -25,19 +25,30 @@ from urllib.request import Request, urlopen
 
 from se_harness import front_matter
 from se_harness._process import run_git, text as _text
+from se_harness.workflow_contract import DelegatedOperation, delegated_operations
 
 DELEGATED_ROLE = "delegated-executor"
 DELEGATION_CLASS = "execution"
+#: ECP-PRM-019: the delegated rights and the guard operation each applies, read from
+#: `workflow_contract.json` `agentic_operations`; nothing here restates the contract.
 DELEGATED_RIGHTS: Mapping[str, str] = {
-    "DR-WO-START": "delegated-work-order-start",
-    "DR-WO-COMPLETE": "delegated-work-order-complete",
-    "DR-VREC-PREPARE": "delegated-vrec-prepare",
+    operation.decision_right: operation.mutation_operation for operation in delegated_operations()
 }
 #: The transition a delegated right applies, by (family, current status, target status).
 DELEGATED_TRANSITIONS: Mapping[tuple[str, str, str], str] = {
-    ("work_order", "approved", "in_progress"): "DR-WO-START",
-    ("work_order", "in_progress", "implemented"): "DR-WO-COMPLETE",
+    operation.transition: operation.decision_right
+    for operation in delegated_operations()
+    if operation.transition is not None
 }
+
+
+def delegated_operation(right: str) -> DelegatedOperation:
+    """The contract entry of one delegated right; KeyError for a human right."""
+
+    for operation in delegated_operations():
+        if operation.decision_right == right:
+            return operation
+    raise KeyError(right)
 GITHUB_API = "https://api.github.com"
 #: Owner-controlled configuration, beside the managed `.engineering-harness.toml` and never
 #: inside it: the managed file is hash-locked, and a consumer editing it reads as customization.
@@ -305,10 +316,9 @@ def delegation_overlay(
                 "value": f"Wait for or repair the required check before the delegated {right}: {exc.message}",
             },
         }
-    if right == "DR-WO-START":
-        argv = ["harnessctl", "transition", ".", "--set", f"{artifact_id}=in_progress", "--decision", f"{artifact_id}={DELEGATED_ROLE}", "--apply"]
-    elif right == "DR-WO-COMPLETE":
-        argv = ["harnessctl", "transition", ".", "--set", f"{artifact_id}=implemented", "--decision", f"{artifact_id}={DELEGATED_ROLE}", "--apply"]
+    operation = delegated_operation(right)
+    if operation.transition is not None:
+        argv = ["harnessctl", "transition", ".", "--set", f"{artifact_id}={operation.result_status}", "--decision", f"{artifact_id}={DELEGATED_ROLE}", "--apply"]
     else:
         argv = ["harnessctl", "capture-verification", ".", "--work-order", artifact_id, "--owner", DELEGATED_ROLE, "--id", "VREC-...", "--verification", "VER-...", "--evidence", "..."]
     return {
@@ -334,6 +344,7 @@ __all__ = [
     "candidate_head",
     "class_at_base",
     "declares_class",
+    "delegated_operation",
     "delegated_reason",
     "delegation_overlay",
     "load_configuration",

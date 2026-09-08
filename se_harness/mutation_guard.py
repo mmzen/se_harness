@@ -18,21 +18,24 @@ from se_harness.evaluator_identity import (
 )
 from se_harness.installer import CONFIG_NAME, HarnessError, ensure_target, load_lock, safe_destination
 from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identity
+from se_harness.workflow_contract import delegated_operations
 
 
-PUBLIC_MUTATION_OPERATIONS = frozenset(
+#: The guarded operations a human decision drives; the delegated ones join from the contract.
+_HUMAN_MUTATION_OPERATIONS = frozenset(
     {
         "capture-verification",
         "create-artifact",
-        "delegated-vrec-prepare",
-        "delegated-work-order-complete",
-        "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
         "scaffold-domain",
         "transition-apply",
         "upgrade-apply",
     }
+)
+#: ECP-PRM-019: the three delegated names are the contract's `mutation_operation` values.
+PUBLIC_MUTATION_OPERATIONS = _HUMAN_MUTATION_OPERATIONS | frozenset(
+    operation.mutation_operation for operation in delegated_operations()
 )
 
 
