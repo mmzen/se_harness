@@ -2,7 +2,7 @@
 id = "WO-ECP-033"
 type = "work_order"
 title = "Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -57,6 +57,13 @@ paths = [
 implements = ["REQ-ECP-034"]
 specifications = ["SPEC-ECP-023"]
 verification = ["VER-ECP-025"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T09:17:36Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work. WO-ECP-033 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
 +++
 
 # Work Order: Wave 2, group C: the diagnostic-code registry and the four contract tables read at run time
