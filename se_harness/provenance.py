@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import contextlib
+import io
 import json
 import re
 import shutil
 import subprocess
-import sys
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -18,7 +19,8 @@ from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.hash_bound import HashBoundError, declared_digest
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
-from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, safe_destination
+from se_harness.engine import generate_harness_dashboard, validate_engineering_artifacts
+from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import load_lifecycle_registry
 
 
@@ -147,15 +149,10 @@ def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]],
 
 
 def _validation_catalog(repository_root: Path) -> dict[str, dict[str, Any]]:
-    script = ENGINE_ROOT / "validate_engineering_artifacts.py"
-    if not script.is_file():
-        raise EvidenceRefusal(f"missing managed validator: {script}")
-    completed = _run([sys.executable, str(script), "--root", str(repository_root), "--json"], cwd=repository_root)
-    try:
-        report = json.loads(completed.stdout)
-    except json.JSONDecodeError as exc:
-        raise EvidenceRefusal("validator did not return its JSON contract") from exc
-    if completed.returncode != 0 or not report.get("valid"):
+    # ECP-ENG-003: the validator runs in-process; its report is the one the JSON contract renders.
+    validation = validate_engineering_artifacts.validate_repository(repository_root)
+    report = validation.to_dict(repository_root)
+    if not validation.valid:
         errors = report.get("errors", [])
         first = errors[0].get("message") if errors and isinstance(errors[0], dict) else "artifact graph is invalid"
         raise StateRefusal(f"artifact graph must be valid before recording provenance: {first}")
@@ -362,11 +359,10 @@ def _timestamp() -> str:
 
 
 def _generate_snapshot(repository_root: Path) -> str:
-    script = ENGINE_ROOT / "generate_harness_dashboard.py"
-    if not script.is_file():
-        raise EvidenceRefusal(f"missing managed dashboard generator: {script}")
-    completed = _run([sys.executable, str(script), "--root", str(repository_root)], cwd=repository_root)
-    if completed.returncode != 0:
+    # ECP-ENG-003: the generator runs in-process; its report lines are not ours to print.
+    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+        code = generate_harness_dashboard.main(["--root", str(repository_root)])
+    if code != 0:
         raise EvidenceRefusal("dashboard generation must pass before recording verification")
     manifest = repository_root / "target" / "harness-dashboard" / "dashboard-manifest.json"
     if not manifest.is_file():

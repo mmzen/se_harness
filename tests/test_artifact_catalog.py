@@ -8,11 +8,8 @@ from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
-SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from artifact_layout_registry import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES  # noqa: E402
+from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES  # noqa: E402
 CATALOG_BEGIN = "<!-- artifact-catalog:begin -->"
 CATALOG_END = "<!-- artifact-catalog:end -->"
 CATALOG_COLUMNS = (

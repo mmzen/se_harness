@@ -14,11 +14,8 @@ from se_harness.integrity import canonical_sha256
 
 ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import root_copy  # noqa: E402
-SCRIPTS = ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from inspect_engineering_artifacts import (  # noqa: E402
+from se_harness.engine.inspect_engineering_artifacts import (  # noqa: E402
     INSPECTION_SCHEMA,
     InspectionError,
     build_inspection,
@@ -26,7 +23,7 @@ from inspect_engineering_artifacts import (  # noqa: E402
     render_human,
     serialize_json,
 )
-from validate_engineering_artifacts import Artifact, ValidationReport  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import Artifact, ValidationReport  # noqa: E402
 
 
 def sample_snapshot(*, valid: bool = False) -> dict:
@@ -471,7 +468,7 @@ class InspectionReportTests(unittest.TestCase):
             before = list(root.rglob("*"))
             stdout = io.StringIO()
             stderr = io.StringIO()
-            with mock.patch("inspect_engineering_artifacts.generate_snapshot", return_value=(snapshot, None, root)):
+            with mock.patch("se_harness.engine.inspect_engineering_artifacts.generate_snapshot", return_value=(snapshot, None, root)):
                 with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
                     code = main(["--root", str(root), "--json"])
             after = list(root.rglob("*"))
@@ -512,7 +509,7 @@ class InspectionReportTests(unittest.TestCase):
             )
             self.assertNotEqual(root_script.resolve(), canonical.resolve())
         source = canonical.read_text(encoding="utf-8")
-        self.assertIn("from generate_harness_dashboard import", source)
+        self.assertIn("from se_harness.engine.generate_harness_dashboard import", source)  # ECP-ENG-001
         self.assertIn("generate_snapshot", source)
         self.assertNotIn("def build_findings", source)
         self.assertNotIn("def validate_repository", source)

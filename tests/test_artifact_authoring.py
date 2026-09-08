@@ -25,12 +25,9 @@ from se_harness.installer import HarnessError
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir, root_copy  # noqa: E402
-SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
 from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import validate_repository  # noqa: E402
 from tests.fixture_support import standard_repository
 
 
@@ -56,43 +53,18 @@ class ArtifactAuthoringTests(unittest.TestCase):
             code = main(list(arguments))
         return code, stdout.getvalue(), stderr.getvalue()
 
-    def test_portable_and_package_layout_registries_are_identical(self) -> None:
-        # The package registry is the candidate's portable registry. The root copy
-        # under scripts/ is the released evaluator's and is hash-locked until
-        # adoption; WO-DCM-001 (SPEC-DCM-001) added the decision type to the
-        # candidate, so a root released before it is that registry minus the
-        # decision entries, declared here. A root released with them takes equality.
-        candidate_path = REPOSITORY_ROOT / "se_harness/engine/artifact_layout_registry.py"
-        spec = importlib.util.spec_from_file_location("candidate_layout_registry", candidate_path)
-        candidate_layout = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(candidate_layout)
-        self.assertEqual(ARTIFACT_DIRECTORIES, candidate_layout.ARTIFACT_DIRECTORIES)
-        self.assertEqual(ARTIFACT_PREFIXES, candidate_layout.ARTIFACT_PREFIXES)
-        self.assertEqual(DOMAIN_PATTERN.pattern, candidate_layout.DOMAIN_PATTERN.pattern)
-        self.assertEqual(RESERVED_DOMAINS, candidate_layout.RESERVED_DOMAINS)
-        # The root module is loaded from its path: `import artifact_layout_registry`
-        # resolves to whichever scripts directory another test put first on sys.path.
-        root_path = root_copy("scripts/artifact_layout_registry.py")
-        if root_path is None:
-            # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): a 0.16.0 or later root installs no
-            # copy; the engine registry is the only one, and it is what was imported above.
-            self.assertFalse((REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").exists())
-            self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
-            return
-        root_spec = importlib.util.spec_from_file_location("root_layout_registry", root_path)
-        root_layout = importlib.util.module_from_spec(root_spec)
-        root_spec.loader.exec_module(root_layout)
-        if "decision" in root_layout.ARTIFACT_DIRECTORIES:
-            self.assertEqual(root_path.read_bytes(), candidate_path.read_bytes())
-        else:
-            without_decision = {k: v for k, v in ARTIFACT_DIRECTORIES.items() if k != "decision"}
-            self.assertEqual(without_decision, root_layout.ARTIFACT_DIRECTORIES)
-            self.assertEqual(
-                {k: v for k, v in ARTIFACT_PREFIXES.items() if k != "decision"},
-                root_layout.ARTIFACT_PREFIXES,
-            )
-            self.assertEqual(RESERVED_DOMAINS - {"decisions"}, root_layout.RESERVED_DOMAINS)
-            self.assertEqual(DOMAIN_PATTERN.pattern, root_layout.DOMAIN_PATTERN.pattern)
+    def test_the_engine_reads_the_one_layout_registry(self) -> None:
+        # SPEC-ECP-024 ECP-ENG-004: the tables have one definition, in se_harness.artifact_layout;
+        # the validator imports them and the engine copy is gone.
+        from se_harness import artifact_layout
+        from se_harness.engine import validate_engineering_artifacts as validator
+
+        self.assertIs(artifact_layout.ARTIFACT_DIRECTORIES, validator.ARTIFACT_DIRECTORIES)
+        self.assertIs(artifact_layout.ARTIFACT_PREFIXES, validator.ARTIFACT_PREFIXES)
+        self.assertIs(artifact_layout.canonical_artifact_relative_path, validator.canonical_artifact_relative_path)
+        self.assertIs(artifact_layout.repository_record_relative_path, validator.repository_record_relative_path)
+        self.assertFalse((REPOSITORY_ROOT / "se_harness/engine/artifact_layout_registry.py").exists())
+        self.assertFalse((REPOSITORY_ROOT / "scripts/artifact_layout_registry.py").exists())
         self.assertEqual(set(ARTIFACT_DIRECTORIES), set(ARTIFACT_TEMPLATES))
 
     def test_scaffold_dry_run_and_apply_create_the_complete_owner_domain(self) -> None:

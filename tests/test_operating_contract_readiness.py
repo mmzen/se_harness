@@ -8,11 +8,8 @@ from pathlib import Path
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = REPOSITORY_ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import validate_repository  # noqa: E402
 
 
 def write(path: Path, content: str) -> None:

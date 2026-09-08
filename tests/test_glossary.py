@@ -13,33 +13,20 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_ROOT = REPOSITORY_ROOT / "templates/repository/standard"
 SEED = TEMPLATE_ROOT / "GLOSSARY.md.seed"
-INSPECT = REPOSITORY_ROOT / "se_harness/engine/inspect_engineering_artifacts.py"
-
-
-_INSPECT_MODULE = None
 
 
 def load_inspect():
-    """The candidate inspection script, loaded by path once so its exception classes stay identical."""
-    global _INSPECT_MODULE
-    if _INSPECT_MODULE is None:
-        import sys
+    """The candidate inspector, imported (ECP-ENG-001) so its exception classes stay identical."""
+    from se_harness.engine import inspect_engineering_artifacts
 
-        scripts = str(TEMPLATE_ROOT / "scripts")
-        if scripts not in sys.path:
-            sys.path.insert(0, scripts)
-        spec = importlib.util.spec_from_file_location("candidate_inspect", INSPECT)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        _INSPECT_MODULE = module
-    return _INSPECT_MODULE
+    return inspect_engineering_artifacts
 
 
 class GlossaryTests(unittest.TestCase):
@@ -80,7 +67,7 @@ class GlossaryTests(unittest.TestCase):
 
     def report(self, threshold: int = 50) -> dict:
         module = load_inspect()
-        validation = _load_validator_module().validate_repository(self.root)
+        validation = validate_engineering_artifacts.validate_repository(self.root)
         return module.build_vocabulary_report(self.root, validation, threshold)
 
     # ---------------------------------------------------------------- TCM-RFR-007: the seed

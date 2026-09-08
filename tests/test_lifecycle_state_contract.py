@@ -11,7 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from se_harness import provenance, workflow
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow import LIFECYCLE_REGISTRY, TRANSITIONS, _validate_edge
 from se_harness.workflow_contract import ContractError, load_lifecycle_registry
 
@@ -19,7 +19,7 @@ from se_harness.workflow_contract import ContractError, load_lifecycle_registry
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_CONTRACT = ROOT / "se_harness/workflow_contract.json"
 MANAGED_CONTRACT = ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.json"
-VALIDATOR = _load_validator_module()
+VALIDATOR = validate_engineering_artifacts
 
 
 EXPECTED = {
@@ -244,10 +244,6 @@ class LifecycleStateContractTests(unittest.TestCase):
                 engineering = standard / "docs/engineering"
                 scripts.mkdir(parents=True)
                 engineering.mkdir(parents=True)
-                shutil.copy2(
-                    ROOT / "se_harness/engine/artifact_layout_registry.py",
-                    scripts / "artifact_layout_registry.py",
-                )
                 validator_path = scripts / "validate_engineering_artifacts.py"
                 shutil.copy2(
                     ROOT / "se_harness/engine/validate_engineering_artifacts.py",

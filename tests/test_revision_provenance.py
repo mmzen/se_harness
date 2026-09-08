@@ -15,13 +15,10 @@ from unittest import mock
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
-SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
-from inspect_engineering_artifacts import build_inspection  # noqa: E402
-from validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
+from se_harness.engine.generate_harness_dashboard import build_dashboard_bundle, generate_snapshot  # noqa: E402
+from se_harness.engine.inspect_engineering_artifacts import build_inspection  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys, validate_repository  # noqa: E402
 from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E402
 
 from se_harness.installer import ENGINE_ROOT
@@ -580,7 +577,7 @@ class RevisionValidatorTests(unittest.TestCase):
 
     def test_prepared_supersession_uses_preparation_not_verification_decision_fields(self) -> None:
         create_additional_chain(self.root, work_order_status="released")
-        candidate_validator = _load_validator_module()
+        candidate_validator = validate_engineering_artifacts
         current_source = verification_record("a" * 40).replace(
             'verified_at = "2026-08-11T12:00:00Z"',
             'prepared_at = "2026-08-11T12:00:00Z"\nprepared_by = "quality-owner"',
@@ -793,7 +790,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertNotIn("verified_at =", vrec_path.read_text(encoding="utf-8"))
         self.assertEqual(candidate, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
         code, _, error = self.invoke(
             "transition", str(self.root),
@@ -838,12 +835,12 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
         self.assertEqual(lock_before_release, (self.root / ".engineering-harness.lock").read_bytes())
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
-        validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            [sys.executable, "-m", "se_harness.engine.validate_engineering_artifacts", "--root", str(self.root), "--json"],
             cwd=self.root,
+            env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)},
             capture_output=True,
             text=True,
             check=False,
@@ -913,10 +910,10 @@ class RevisionCliTests(unittest.TestCase):
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
         )
         self.assertEqual(0, code, error)
-        validator = ENGINE_ROOT / "validate_engineering_artifacts.py"
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            [sys.executable, "-m", "se_harness.engine.validate_engineering_artifacts", "--root", str(self.root), "--json"],
             cwd=self.root,
+            env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)},
             capture_output=True,
             text=True,
             check=False,
@@ -1011,7 +1008,7 @@ class RevisionCliTests(unittest.TestCase):
         aggregate = self.root / "docs/engineering/verification-records/VREC-002.md"
         self.assertTrue(aggregate.is_file())
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_capture_fails_for_dirty_worktree_without_output(self) -> None:
         self.initialize_candidate()
@@ -1110,7 +1107,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('verifies_work_order = ["WO-001", "WO-002"]', vrec)
         self.assertIn('conforms_to = ["VER-001", "VER-002"]', vrec)
         self.assertIn(directory_evidence, vrec)
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
         code, _, error = self.invoke(
             "transition", str(self.root),
@@ -1148,7 +1145,7 @@ class RevisionCliTests(unittest.TestCase):
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
         self.assertEqual(governance, self.git("rev-parse", "HEAD"))
         self.assertEqual("", self.git("tag", "--list"))
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_prepare_release_remains_format_neutral(self) -> None:
         candidate = self.initialize_candidate()
@@ -1171,7 +1168,7 @@ class RevisionCliTests(unittest.TestCase):
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertNotIn("[distribution]", release)
         self.assertNotIn("wheel", release.lower())
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
         release_path = self.root / "docs/engineering/product/releases/RLS-002.md"
         release_path.write_text(
@@ -1181,7 +1178,7 @@ class RevisionCliTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_aggregate_capture_rejects_duplicate_and_incomplete_scope(self) -> None:
         self.initialize_candidate(aggregate=True)
@@ -1244,7 +1241,7 @@ class RevisionCliTests(unittest.TestCase):
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
         self.assertIn('includes_verification = ["VREC-001", "VREC-002"]', release)
         self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
-        self.assertTrue(_load_validator_module().validate_repository(self.root).valid)
+        self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
     def test_prepare_release_rejects_verification_records_at_different_commits(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)

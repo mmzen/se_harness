@@ -4,7 +4,8 @@
 The generator reuses the repository validator as the authoritative parser and
 validation core. It adds read-only graph projection, coverage, impact support,
 derived consistency findings, readiness evidence, controlled experiment import,
-and a progressively loaded viewer. Only the Python 3.11+ standard library is used.
+and a progressively loaded viewer. A module of the ``se_harness.engine`` package
+(SPEC-ECP-024 ECP-ENG-001), runnable as ``python -m se_harness.engine.generate_harness_dashboard``.
 """
 
 from __future__ import annotations
@@ -23,7 +24,7 @@ from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Sequence
 
-from validate_engineering_artifacts import (
+from se_harness.engine.validate_engineering_artifacts import (
     ACTIVE_COVERAGE_STATUSES,
     Artifact,
     Diagnostic,

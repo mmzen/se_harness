@@ -28,7 +28,7 @@ from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.integrity import IntegrityError, read_toml, stage_bytes
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts as _validator_module
 from se_harness.workflow_contract import DEFINITION_TYPES, load_workflow_contract, validate_lifecycle_registry
 from se_harness.codes import CodedError, E001, E003, WEX001, WEX190, WEX_ECP_001, WEX_ECP_030
 
@@ -113,7 +113,7 @@ def _terminal_text(value: object) -> str:
 
 def _validation(root: Path) -> tuple[Any, Any]:
     try:
-        validator = _load_validator_module()
+        validator = _validator_module  # ECP-ENG-003: imported, never loaded by path
         return validator, validator.validate_repository(root)
     except HarnessError as exc:
         raise RepositoryWorkflowError(str(exc)) from exc

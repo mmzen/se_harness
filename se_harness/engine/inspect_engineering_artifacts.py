@@ -12,12 +12,12 @@ from itertools import groupby
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
-from generate_harness_dashboard import (
+from se_harness.engine.generate_harness_dashboard import (
     GenerationError,
     SNAPSHOT_SCHEMA,
     generate_snapshot,
 )
-from validate_engineering_artifacts import (
+from se_harness.engine.validate_engineering_artifacts import (
     TAXONOMY_VERSION,
     VALIDATION_PLANES,
     ValidationReport,

@@ -17,60 +17,10 @@ from tests.root_identity_support import root_copy  # noqa: E402
 
 # WO-HUP-017 (SPEC-HUP-017 HUP-ADP-016): the root copies only while the lock names them.
 MANAGED_GENERATOR = root_copy("scripts/generate_harness_dashboard.py") or CANDIDATE_SCRIPTS / "generate_harness_dashboard.py"
-if str(CANDIDATE_SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(CANDIDATE_SCRIPTS))
-
-VALIDATOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_validator",
-    CANDIDATE_SCRIPTS / "validate_engineering_artifacts.py",
-)
-if VALIDATOR_SPEC is None or VALIDATOR_SPEC.loader is None:
-    raise RuntimeError("candidate validator is unavailable")
-CANDIDATE_VALIDATOR = importlib.util.module_from_spec(VALIDATOR_SPEC)
-sys.modules[VALIDATOR_SPEC.name] = CANDIDATE_VALIDATOR
-VALIDATOR_SPEC.loader.exec_module(CANDIDATE_VALIDATOR)
-
-GENERATOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_generator",
-    CANDIDATE_SCRIPTS / "generate_harness_dashboard.py",
-)
-if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
-    raise RuntimeError("dashboard generator is unavailable")
-GENERATOR = importlib.util.module_from_spec(GENERATOR_SPEC)
-sys.modules[GENERATOR_SPEC.name] = GENERATOR
-_prior_validator = sys.modules.get("validate_engineering_artifacts")
-sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
-try:
-    GENERATOR_SPEC.loader.exec_module(GENERATOR)
-finally:
-    if _prior_validator is None:
-        sys.modules.pop("validate_engineering_artifacts", None)
-    else:
-        sys.modules["validate_engineering_artifacts"] = _prior_validator
-
-INSPECTOR_SPEC = importlib.util.spec_from_file_location(
-    "dashboard_webui_inspector",
-    CANDIDATE_SCRIPTS / "inspect_engineering_artifacts.py",
-)
-if INSPECTOR_SPEC is None or INSPECTOR_SPEC.loader is None:
-    raise RuntimeError("candidate inspector is unavailable")
-INSPECTOR = importlib.util.module_from_spec(INSPECTOR_SPEC)
-sys.modules[INSPECTOR_SPEC.name] = INSPECTOR
-_prior_generator = sys.modules.get("generate_harness_dashboard")
-_prior_validator = sys.modules.get("validate_engineering_artifacts")
-sys.modules["generate_harness_dashboard"] = GENERATOR
-sys.modules["validate_engineering_artifacts"] = CANDIDATE_VALIDATOR
-try:
-    INSPECTOR_SPEC.loader.exec_module(INSPECTOR)
-finally:
-    if _prior_generator is None:
-        sys.modules.pop("generate_harness_dashboard", None)
-    else:
-        sys.modules["generate_harness_dashboard"] = _prior_generator
-    if _prior_validator is None:
-        sys.modules.pop("validate_engineering_artifacts", None)
-    else:
-        sys.modules["validate_engineering_artifacts"] = _prior_validator
+# ECP-ENG-001: the engine is an import surface; the candidate modules are the package's.
+from se_harness.engine import generate_harness_dashboard as GENERATOR  # noqa: E402
+from se_harness.engine import inspect_engineering_artifacts as INSPECTOR  # noqa: E402
+from se_harness.engine import validate_engineering_artifacts as CANDIDATE_VALIDATOR  # noqa: E402
 
 
 def temporal_findings(

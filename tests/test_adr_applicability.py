@@ -13,12 +13,9 @@ from se_harness.cli import main
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from tests.root_identity_support import evaluator_scripts_dir  # noqa: E402
-SCRIPTS = evaluator_scripts_dir()
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from generate_harness_dashboard import generate_snapshot  # noqa: E402
-from validate_engineering_artifacts import validate_repository  # noqa: E402
+from se_harness.engine.generate_harness_dashboard import generate_snapshot  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import validate_repository  # noqa: E402
 from tests.fixture_support import standard_repository
 
 

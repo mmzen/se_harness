@@ -12,7 +12,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain
 from tests.fixture_support import standard_repository
@@ -55,7 +55,7 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
         self.requirement.write_text(text, encoding="utf-8")
 
     def diagnostics(self) -> tuple[list, list, list]:
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         mine = lambda items: [item for item in items if item.path.endswith("REQ-001.md")]
         return mine(report.errors), mine(report.warnings), mine(report.advisories)
 
@@ -189,7 +189,7 @@ class ArtifactAuthoringPolicyTests(unittest.TestCase):
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-005", "--quiet"
         )
         self.assertEqual(0, code, error)
-        report = _load_validator_module().validate_repository(self.root)
+        report = validate_engineering_artifacts.validate_repository(self.root)
         mine = [item for item in report.errors if item.path.endswith("REQ-005.md")]
         # an unfilled draft is structurally valid apart from its relation placeholder
         self.assertTrue(all("CAP-xxx" in item.message or item.code == "E006" for item in mine), mine)
@@ -216,7 +216,7 @@ if __name__ == "__main__":
 
     def test_advisories_are_reported_apart_in_the_summary_the_listing_and_the_json(self) -> None:
         # AUT-ADV-001, -003, -004, -005.
-        module = _load_validator_module()
+        module = validate_engineering_artifacts
         self.set_front_matter(status='"draft"', statement='"WHEN X, THE SYSTEM SHALL do A, and SHALL do B."')
         report = module.validate_repository(self.root)
         mine = [item for item in report.advisories if item.path.endswith("REQ-001.md")]

@@ -12,7 +12,7 @@ from unittest import mock
 
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
 from se_harness.cli import main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from tests.mutation_guard_support import trusted_mutation_authority
 from tests.test_revision_provenance import create_base_chain, formal, write
 
@@ -113,7 +113,7 @@ class DecisionManagementTests(unittest.TestCase):
         return path
 
     def validate(self):
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         return validator.validate_repository(self.root)
 
     def decision_errors(self) -> list[str]:
@@ -365,7 +365,7 @@ class DecisionManagementTests(unittest.TestCase):
         self.assertIn('revisit = "v2.0.0"', text)
         self.assertEqual([], self.decision_errors())
 
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         report = self.validate()
         standing = validator.standing_deviations(report.artifacts)
         self.assertEqual({"SPEC-001": ["DEC-001"], "WO-001": ["DEC-001"]}, standing)
@@ -537,7 +537,7 @@ class DecisionGateFamilyTests(DecisionManagementTests):
         self.assertIn("past its revisit 'v1.0.0'", warnings[0].message)
         self.assertEqual(
             {"RLS-001": ["DEC-001"], "SPEC-001": ["DEC-001"], "VREC-001": ["DEC-001"], "WO-001": ["DEC-001"]},
-            _load_validator_module().standing_deviations(self.validate().artifacts),
+            validate_engineering_artifacts.standing_deviations(self.validate().artifacts),
         )
 
     def test_contract_copies_carry_the_family_the_predicates_and_the_policy_rows(self) -> None:

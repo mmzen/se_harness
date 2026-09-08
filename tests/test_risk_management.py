@@ -18,7 +18,7 @@ from unittest import mock
 
 from se_harness.artifact_layout import ARTIFACT_DIRECTORIES, ARTIFACT_PREFIXES
 from se_harness.cli import build_parser, main
-from se_harness.preflight import _load_validator_module
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.risks import MEASUREMENT, OPTION_TARGETS, RISK_OPTIONS, compute_score
 from se_harness.workflow import LIFECYCLE_REGISTRY
 from tests.mutation_guard_support import trusted_mutation_authority
@@ -152,7 +152,7 @@ class RiskFixture(unittest.TestCase):
         return self.invoke(*arguments, *extra)
 
     def validate(self):
-        return _load_validator_module().validate_repository(self.root)
+        return validate_engineering_artifacts.validate_repository(self.root)
 
     def codes(self, prefix: str = "E-RSK") -> list[str]:
         return sorted(f"{item.code}: {item.message}" for item in self.validate().errors if item.code.startswith(prefix))
@@ -256,7 +256,7 @@ class RiskArtifactTests(RiskFixture):
         self.assertFalse(any(row.grants_authority for row in LIFECYCLE_REGISTRY["risk"].values()))
         terminal = {state for state, row in LIFECYCLE_REGISTRY["risk"].items() if not row.transitionable}
         self.assertEqual({"accepted", "avoided", "mitigated", "withdrawn"}, terminal)
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts
         self.assertEqual(RISK_EDGES, {state: set(row.transitions_to) for state, row in validator.WORKFLOW_LIFECYCLES["risk"].items()})
         workflow_policy = (TEMPLATES / "WORKFLOW.md").read_text(encoding="utf-8")
         for row in ("| Risk | `identified` | `raised`, `withdrawn` |", "| Risk | `raised` | `accepted`, `avoided`, `mitigating`, `withdrawn` |", "| Risk | `mitigating` | `mitigated`, `withdrawn` |"):

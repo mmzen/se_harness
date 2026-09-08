@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Validate specification-driven engineering artifacts.
 
-The validator intentionally uses only the Python 3.11+ standard library so it can
-run before the repository's normal toolchain is available.
+A module of the ``se_harness.engine`` package (SPEC-ECP-024 ECP-ENG-001): it reads
+the layout tables from ``se_harness.artifact_layout`` and runs in-process for every
+governance command, or as ``python -m se_harness.engine.validate_engineering_artifacts``.
 """
 
 from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib.util
 import json
 import re
 from collections import Counter, defaultdict
@@ -24,18 +24,15 @@ try:
 except ModuleNotFoundError as exc:  # pragma: no cover - version guard
     raise SystemExit("Python 3.11 or later is required (missing tomllib).") from exc
 
-_LAYOUT_PATH = Path(__file__).with_name("artifact_layout_registry.py")
-_LAYOUT_SPEC = importlib.util.spec_from_file_location("_se_harness_artifact_layout_registry", _LAYOUT_PATH)
-if _LAYOUT_SPEC is None or _LAYOUT_SPEC.loader is None:
-    raise RuntimeError(f"cannot load artifact layout registry: {_LAYOUT_PATH}")
-_LAYOUT = importlib.util.module_from_spec(_LAYOUT_SPEC)
-_LAYOUT_SPEC.loader.exec_module(_LAYOUT)
-ARTIFACT_DIRECTORIES = _LAYOUT.ARTIFACT_DIRECTORIES
-ARTIFACT_PREFIXES = _LAYOUT.ARTIFACT_PREFIXES
-artifact_domain_from_relative_path = _LAYOUT.artifact_domain_from_relative_path
-canonical_artifact_relative_path = _LAYOUT.canonical_artifact_relative_path
-common_artifact_domain = _LAYOUT.common_artifact_domain
-repository_record_relative_path = _LAYOUT.repository_record_relative_path
+# ECP-ENG-004: the layout tables have one definition, in the package.
+from se_harness.artifact_layout import (  # noqa: E402
+    ARTIFACT_DIRECTORIES,
+    ARTIFACT_PREFIXES,
+    artifact_domain_from_relative_path,
+    canonical_artifact_relative_path,
+    common_artifact_domain,
+    repository_record_relative_path,
+)
 
 
 TAXONOMY_VERSION = "se-harness-validation-taxonomy-v1"

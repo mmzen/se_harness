@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import importlib.util
 import json
 import platform
 import re
@@ -12,8 +11,8 @@ from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable, Literal
 
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.installer import (
-    ENGINE_ROOT,
     CONFIG_NAME,
     LOCK_NAME,
     HarnessError,
@@ -93,7 +92,6 @@ POLICY_PATHS = (
     "docs/engineering/TECHNICAL_COMMUNICATION.md",
     "docs/engineering/ARTIFACT_AUTHORING.md",
 )
-_VALIDATOR_MODULE: ModuleType | None = None
 
 #: ECP-PRM-013: the two preflight phases, typed.
 Phase = Literal["start", "review"]
@@ -261,28 +259,6 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
     return sorted(checks) + _hash_bound_checks(target)
 
 
-def _load_validator_module() -> ModuleType:
-    global _VALIDATOR_MODULE
-    if _VALIDATOR_MODULE is not None:
-        return _VALIDATOR_MODULE
-    path = ENGINE_ROOT / "validate_engineering_artifacts.py"
-    if not path.is_file():
-        raise HarnessError(f"missing distribution validator: {path}")
-    module_name = "_se_harness_distribution_validator"
-    spec = importlib.util.spec_from_file_location(module_name, path)
-    if spec is None or spec.loader is None:
-        raise HarnessError(f"cannot load distribution validator: {path}")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    try:
-        spec.loader.exec_module(module)
-    except Exception:
-        sys.modules.pop(module_name, None)
-        raise
-    _VALIDATOR_MODULE = module
-    return module
-
-
 def _targets(artifact: Any, relation: str) -> list[str]:
     value = artifact.relations.get(relation, [])
     return sorted(item for item in value if isinstance(item, str)) if isinstance(value, list) else []
@@ -348,7 +324,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
     artifacts: list[Any] = []
     validator: ModuleType | None = None
     try:
-        validator = _load_validator_module()
+        validator = validate_engineering_artifacts  # ECP-ENG-003: the engine is imported, not loaded by path
         validation = validator.validate_repository(root)
         artifacts = list(validation.artifacts)
         diagnostics.extend(

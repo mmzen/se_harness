@@ -12,11 +12,8 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 from se_harness.installer import ENGINE_ROOT  # noqa: E402
 from tests.root_identity_support import root_copy  # noqa: E402
-SCRIPTS = REPOSITORY_ROOT / "scripts"
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
-from validate_engineering_artifacts import (  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import (  # noqa: E402
     TAXONOMY_VERSION,
     VALIDATION_PLANES,
     Diagnostic,

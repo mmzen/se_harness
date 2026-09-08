@@ -29,10 +29,7 @@ def load_module(name: str, path: Path):
     return module
 
 
-CANDIDATE_VALIDATOR = load_module(
-    "evidence_floor_candidate_validator",
-    REPOSITORY_ROOT / "se_harness/engine/validate_engineering_artifacts.py",
-)
+from se_harness.engine import validate_engineering_artifacts as CANDIDATE_VALIDATOR  # noqa: E402
 PUBLICATION = load_module(
     "evidence_floor_publication",
     REPOSITORY_ROOT / ".github/scripts/publish_dashboard.py",
