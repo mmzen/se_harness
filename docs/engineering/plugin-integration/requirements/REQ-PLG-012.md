@@ -1,0 +1,50 @@
++++
+id = "REQ-PLG-012"
+type = "requirement"
+title = "Complete governance delivery despite context limits"
+status = "draft"
+owners = ["requirements-steward"]
+created = "2026-09-08"
+updated = "2026-09-08"
+statement = "IF host limits prevent complete governance injection, THEN THE SESSION HANDLER SHALL keep governance context unready until the complete verified content is read through a supported fallback."
+verification_method = ["test"]
+priority = "must"
+source = "PR #360 at 9e894e99; plugin implementation request, 2026-09-08"
+
+[relations]
+derives_from = ["CAP-IAR-001"]
++++
+
+# Requirement: Complete governance delivery despite context limits
+
+## In plain words
+
+A short excerpt must never be mistaken for the complete rules. If the host cannot deliver the full text directly, the agent needs a verified way to read everything.
+
+## Why
+
+Hosts differ in how much hook output reaches a conversation. Silent truncation can remove the very rule that requires a stop. The fallback must preserve the same content and readiness boundary, without asking the user to repeat a decision.
+
+## Behavior
+
+| Trigger | Response | On failure |
+| --- | --- | --- |
+| Direct context delivery cannot carry all required governance content. | Identify complete verified content for a supported full read before readiness. | Report a delivery blocker if completeness cannot be established. |
+
+## Examples
+
+### Normal
+
+**Given** the host can perform a complete file read but its hook context is too small,
+
+**When** governance delivery exceeds that limit,
+
+**Then** the supported full-read route restores the verified complete content before governed work.
+
+### Failure
+
+**Given** the host truncates both direct output and the available fallback,
+
+**When** context restoration is attempted,
+
+**Then** readiness remains false; a summary is not accepted as a substitute.
