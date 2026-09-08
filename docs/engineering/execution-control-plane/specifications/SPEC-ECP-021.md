@@ -153,3 +153,7 @@ error and the exit status is 2 (ECP-COR-004, ECP-COR-005).
 - The wording of the reference rows and the amendment records.
 - Whether the engine timeout is a module constant or a parameter.
 - Whether the `error` member is trimmed at the head or the tail.
+
+## Amendment record
+
+**The engine timeout row of the failure table is withdrawn under `WO-ECP-034` (`SPEC-ECP-024` `ECP-ENG-003` and `ECP-ENG-025`), recorded 2026-09-08.** The evaluator imports the validator, the generator and the inspector and runs them in-process, so no engine subprocess exists to exceed a timeout; the row's Git clause stands, and `WEX-ECP-040` stays the gate's code. The unspecified decision on the engine timeout constant is moot. Nothing else in this specification changes.

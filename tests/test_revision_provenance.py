@@ -23,8 +23,8 @@ from tests.mutation_guard_support import trusted_mutation_authority  # noqa: E40
 
 from se_harness.installer import ENGINE_ROOT
 from se_harness.cli import main  # noqa: E402
-from se_harness.preflight import _load_validator_module  # noqa: E402
-from se_harness.provenance import _evidence_work_order_keys  # noqa: E402
+from se_harness.engine import validate_engineering_artifacts  # noqa: E402
+from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys as _evidence_work_order_keys  # noqa: E402
 from tests.fixture_support import standard_repository
 
 
@@ -870,8 +870,9 @@ class RevisionCliTests(unittest.TestCase):
         lock["evaluator"]["archive_sha256"] = "b" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            [sys.executable, "-m", "se_harness.engine.validate_engineering_artifacts", "--root", str(self.root), "--json"],
             cwd=self.root,
+            env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)},
             capture_output=True,
             text=True,
             check=False,
@@ -889,8 +890,9 @@ class RevisionCliTests(unittest.TestCase):
         ) + "\n"
         release_path.write_text(partial, encoding="utf-8")
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            [sys.executable, "-m", "se_harness.engine.validate_engineering_artifacts", "--root", str(self.root), "--json"],
             cwd=self.root,
+            env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)},
             capture_output=True,
             text=True,
             check=False,
@@ -928,8 +930,9 @@ class RevisionCliTests(unittest.TestCase):
             encoding="utf-8",
         )
         completed = subprocess.run(
-            [sys.executable, str(validator), "--root", str(self.root), "--json"],
+            [sys.executable, "-m", "se_harness.engine.validate_engineering_artifacts", "--root", str(self.root), "--json"],
             cwd=self.root,
+            env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)},
             capture_output=True,
             text=True,
             check=False,

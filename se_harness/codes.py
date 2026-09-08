@@ -1,8 +1,8 @@
 """Every diagnostic code the package raises, named once (SPEC-ECP-023 ECP-PRM-016, ECP-PRM-017).
 
 A module raises `CodedError(CODE, message)`, one of its subclasses, or builds its
-diagnostics from these names; no package module spells a code as a literal. The one
-exception is `interpreter_safety.py`: SPEC-REB-015 rule 2 binds it to the standard
+diagnostics from these names; no package module, the engine included, spells a code as a
+literal. The one exception is `interpreter_safety.py`: SPEC-REB-015 rule 2 binds it to the standard
 library, so it spells its `EPS` codes itself and this registry names them for the index.
 A name is its code with `-` written `_`. `repository_tools/diagnostic_code_index.py`
 reads this file through the parser (ECP-PRM-018), never by import, to render
@@ -186,6 +186,105 @@ E_DCM_004 = "E-DCM-004"
 
 # Risk-artifact codes the CLI names in its advisories; the validator raises them.
 E_RSK_003 = "E-RSK-003"
+
+
+# --- The engine's codes (SPEC-ECP-024 ECP-ENG-009): the validator, the generator and the inspector
+# --- name theirs here and spell none; the index attributes each raise site by the name it passes.
+
+# Installed validator: an artifact-graph or integrity error; validation fails.
+E002 = "E002"
+E004 = "E004"
+E005 = "E005"
+E006 = "E006"
+E007 = "E007"
+E008 = "E008"
+E009 = "E009"
+E010 = "E010"
+E011 = "E011"
+E012 = "E012"
+E014 = "E014"
+E015 = "E015"
+E016 = "E016"
+E017 = "E017"
+E018 = "E018"
+E019 = "E019"
+E020 = "E020"
+
+# Installed validator: an authoring-rule error on a formal artifact.
+E_AUT_001 = "E-AUT-001"
+E_AUT_002 = "E-AUT-002"
+
+# Installed validator: a decision-artifact rule error.
+E_DCM_001 = "E-DCM-001"
+E_DCM_002 = "E-DCM-002"
+E_DCM_003 = "E-DCM-003"
+E_DCM_005 = "E-DCM-005"
+
+# Installed validator: a control-plane rule error.
+E_ECP_001 = "E-ECP-001"
+
+# Installed validator: a risk-artifact rule error.
+E_RSK_001 = "E-RSK-001"
+E_RSK_002 = "E-RSK-002"
+E_RSK_004 = "E-RSK-004"
+E_RSK_005 = "E-RSK-005"
+
+# Installed validator: a warning; validation still passes.
+W014 = "W014"
+W015 = "W015"
+
+# Installed validator: an authoring-style advisory, raised only on drafts.
+W_AUT_001 = "W-AUT-001"
+W_AUT_002 = "W-AUT-002"
+W_AUT_003 = "W-AUT-003"
+W_AUT_004 = "W-AUT-004"
+W_AUT_005 = "W-AUT-005"
+W_AUT_006 = "W-AUT-006"
+W_AUT_007 = "W-AUT-007"
+W_AUT_008 = "W-AUT-008"
+W_AUT_009 = "W-AUT-009"
+W_AUT_010 = "W-AUT-010"
+W_AUT_011 = "W-AUT-011"
+W_AUT_012 = "W-AUT-012"
+W_AUT_013 = "W-AUT-013"
+W_AUT_014 = "W-AUT-014"
+W_AUT_015 = "W-AUT-015"
+W_AUT_016 = "W-AUT-016"
+W_AUT_017 = "W-AUT-017"
+W_AUT_018 = "W-AUT-018"
+W_AUT_019 = "W-AUT-019"
+W_AUT_020 = "W-AUT-020"
+W_AUT_021 = "W-AUT-021"
+W_AUT_022 = "W-AUT-022"
+W_AUT_023 = "W-AUT-023"
+
+# Installed validator: a decision-artifact warning.
+W_DCM_001 = "W-DCM-001"
+W_DCM_002 = "W-DCM-002"
+
+# Installed validator: a risk-artifact warning.
+W_RSK_001 = "W-RSK-001"
+
+# Explorer generator and inspector: a Harness Explorer publication finding.
+W_HEX_001 = "W-HEX-001"
+W_HEX_002 = "W-HEX-002"
+W_HEX_003 = "W-HEX-003"
+W_HEX_004 = "W-HEX-004"
+W_HEX_005 = "W-HEX-005"
+W_HEX_006 = "W-HEX-006"
+
+# Explorer generator and inspector: a released-evaluator-boundary finding.
+W_REB_001 = "W-REB-001"
+W_REB_002 = "W-REB-002"
+W_REB_003 = "W-REB-003"
+
+# Explorer generator and inspector: a revision-provenance finding.
+W_REV_002 = "W-REV-002"
+W_REV_003 = "W-REV-003"
+W_REV_004 = "W-REV-004"
+
+# Explorer generator: an informational revision-provenance finding.
+I_REV_001 = "I-REV-001"
 
 #: The record preparations the CLI labels by cause class (SPEC-ECP-016 ECP-CLI-007):
 #: a refused verification record and a refused release record, per cause.

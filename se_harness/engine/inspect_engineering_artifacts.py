@@ -23,6 +23,20 @@ from se_harness.engine.validate_engineering_artifacts import (
     ValidationReport,
     work_order_assurance_state,
 )
+from se_harness.codes import (  # noqa: E402
+    W_HEX_001,
+    W_HEX_002,
+    W_HEX_003,
+    W_HEX_004,
+    W_HEX_005,
+    W_HEX_006,
+    W_REB_001,
+    W_REB_002,
+    W_REB_003,
+    W_REV_002,
+    W_REV_003,
+    W_REV_004,
+)
 
 
 INSPECTION_SCHEMA = "se-harness-inspection-v2"
@@ -117,62 +131,62 @@ QUEUE_SUGGESTION_CATALOG = {
     ),
 }
 FINDING_SUGGESTION_CATALOG = {
-    "W-HEX-001": (
+    W_HEX_001: (
         "retain-work-order-evidence",
         "engineering-owner",
         "Retain evidence keyed to the implemented work order and reassess the observation.",
     ),
-    "W-HEX-002": (
+    W_HEX_002: (
         "review-governing-scope",
         "engineering-owner",
         "Review inactive governing references before continuing active work.",
     ),
-    "W-HEX-003": (
+    W_HEX_003: (
         "reassess-dependent-artifact",
         "artifact-owner",
         "Reassess the older source against its newer declared dependency or parent.",
     ),
-    "W-HEX-004": (
+    W_HEX_004: (
         "review-relation-cycle",
         "technical-owner",
         "Determine whether the declared cycle is intentional and correct unintended edges through governed work.",
     ),
-    "W-HEX-005": (
+    W_HEX_005: (
         "review-unlinked-artifact",
         "artifact-owner",
         "Declare the applicable relation or explicitly dispose of an artifact that is no longer applicable.",
     ),
-    "W-HEX-006": (
+    W_HEX_006: (
         "deduplicate-relation",
         "artifact-owner",
         "Remove an unintended repeated relation through governed work.",
     ),
-    "W-REV-002": (
+    W_REV_002: (
         "review-release-provenance",
         "release-owner",
         "Reconcile the released work claim with an eligible commit-bound release record.",
     ),
-    "W-REV-003": (
+    W_REV_003: (
         "restore-candidate-availability",
         "repository-owner",
         "Make the declared candidate commit available for assessment without changing its recorded identity.",
     ),
-    "W-REV-004": (
+    W_REV_004: (
         "review-verification-supersession",
         "assurance-owner",
         "Assess explicit supersession against one eligible verified or released successor; do not transition automatically.",
     ),
-    "W-REB-001": (
+    W_REB_001: (
         "review-competing-release-proposals",
         "release-owner",
         "Review same-version release proposals and record an accountable disposition without automatic selection.",
     ),
-    "W-REB-002": (
+    W_REB_002: (
         "review-overlapping-verification-candidates",
         "assurance-owner",
         "Review overlapping ready verification candidates and govern any supersession explicitly.",
     ),
-    "W-REB-003": (
+    W_REB_003: (
         "review-competing-release-contracts",
         "release-owner",
         "Review competing release contracts and proposals without changing either chain automatically.",

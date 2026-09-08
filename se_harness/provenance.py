@@ -18,20 +18,16 @@ from se_harness import front_matter, mutation_guard
 from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.hash_bound import HashBoundError, declared_digest
-from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
+from se_harness.artifact_layout import ID_PATTERN, common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.engine import generate_harness_dashboard, validate_engineering_artifacts
+from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys
 from se_harness.installer import HarnessError, ensure_target, safe_destination
-from se_harness.workflow_contract import load_lifecycle_registry
+from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES, load_lifecycle_registry
 
 
-ID_PATTERN = re.compile(r"^[A-Z][A-Z0-9-]*-\d{3}$")
-EVIDENCE_WORK_ORDER_PATTERN = re.compile(
-    r"^(WO-(?:[A-Z0-9-]*-)?\d{3})(?:-|\.|$)"
-)
 VERSION_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._+-]{0,63}$")
 OWNER_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9@._ -]{0,127}$")
 TAG_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/+-]{0,127}$")
-RELEASABLE_WORK_STATUSES = {"implemented", "verified", "released"}
 LIFECYCLE_REGISTRY = load_lifecycle_registry()
 
 
@@ -218,24 +214,8 @@ def _toml_array(values: list[str]) -> str:
     return "[" + ", ".join(json.dumps(item) for item in values) + "]"
 
 
-def _evidence_work_order_keys(evidence_path: str) -> tuple[str, ...]:
-    """Extract exact work-order keys from a normalized repository path."""
-    parts = PurePosixPath(evidence_path).parts
-    if not parts:
-        return ()
-    candidates = [parts[-1]]
-    if "evidence" in parts:
-        candidates.extend(parts[parts.index("evidence") + 1 :])
-    keys = {
-        match.group(1)
-        for component in candidates
-        if (match := EVIDENCE_WORK_ORDER_PATTERN.match(component)) is not None
-    }
-    return tuple(sorted(keys))
-
-
 def _evidence_is_keyed_to(evidence_path: str, work_order_id: str) -> bool:
-    return work_order_id in _evidence_work_order_keys(evidence_path)
+    return work_order_id in evidence_work_order_keys(evidence_path)
 
 
 def _supported_commit(metadata: dict[str, Any], record_id: str) -> tuple[str, str]:
@@ -551,7 +531,7 @@ def prepare_release(
     contract_metadata = _load_metadata(root, contract)
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.get("status") not in RELEASABLE_WORK_STATUSES:
+        if work_order.get("status") not in IMPLEMENTED_OR_LATER_STATUSES:
             raise StateRefusal(f"work order {work_order_id} must be implemented, verified, or released")
     for artifact in catalog.values():
         if artifact.get("type") != "release_record":

@@ -69,3 +69,7 @@ These labels aid navigation only. They do not infer eligibility or authorize the
 ## Explicitly unspecified decisions
 
 Exact whitespace and decorative punctuation in human output may be chosen during implementation. Filtering, remediation, configurable thresholds, new findings, and dashboard redesign are not delegated implementation choices and remain out of scope.
+
+## Amendment record
+
+**Behavioral rule 1 and the standard-library clause of Compatibility are superseded under `WO-ECP-034` (`SPEC-ECP-024` `ECP-ENG-001`, `ECP-ENG-003` and `ECP-ENG-025`), recorded 2026-09-08.** The CLI imports `se_harness.engine.inspect_engineering_artifacts` and runs it in-process; no target-local script is resolved or executed, as `WO-DST-024` had already moved the inspector into the package. The inspector imports its siblings and the package by name, so it is no longer a standard-library-only program. Rule 2 stands: the inspection reuses the snapshot and the validator and parses no formal artifact itself. Nothing else in this specification changes.

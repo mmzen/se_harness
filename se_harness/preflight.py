@@ -12,6 +12,7 @@ from types import ModuleType
 from typing import Any, Iterable, Literal
 
 from se_harness.engine import validate_engineering_artifacts
+from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
 from se_harness.installer import (
     CONFIG_NAME,
     LOCK_NAME,
@@ -53,7 +54,7 @@ from se_harness.codes import (
 PREFLIGHT_SCHEMA = "se-harness-preflight-v2"
 WORK_ORDER_PATTERN = re.compile(r"^WO-[A-Z][A-Z0-9-]*-\d{3}$")
 START_STATUSES = {"approved", "in_progress"}
-REVIEW_STATUSES = START_STATUSES | {"implemented", "verified", "released"}
+REVIEW_STATUSES = START_STATUSES | IMPLEMENTED_OR_LATER_STATUSES  # ECP-ENG-007
 ACTIVE_CHAIN_STATUSES = REVIEW_STATUSES
 AUTHORITY_BOUNDARY = (
     "Preflight is derived, read-only evidence. It does not approve artifacts, "

@@ -270,6 +270,9 @@ class DeterministicSdistTests(unittest.TestCase):
             for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*")):
                 if path.is_file() and path.suffix in {".py", ".json"}:
                     members[f"se_harness/{path.name}"] = path.read_bytes()
+            # ECP-ENG-001: the engine is a subpackage the CLI imports; a wheel without it does not start.
+            for path in sorted((REPOSITORY_ROOT / "se_harness/engine").glob("*.py")):
+                members[f"se_harness/engine/{path.name}"] = path.read_bytes()
             template_root = REPOSITORY_ROOT / "templates/repository/standard"
             for path in sorted(template_root.rglob("*")):
                 if path.is_file() and "__pycache__" not in path.parts:

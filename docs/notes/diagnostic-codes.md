@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-196 codes across 30 registered prefixes.
+197 codes across 31 registered prefixes.
 
 ## How to read a code
 
@@ -44,6 +44,7 @@ but are not diagnostics and are not listed here.
 | `W-REV` | installed validator | a revision-provenance warning. | 3 |
 | `W-RSK` | installed validator | a risk-artifact warning. | 1 |
 | `W-HEX` | dashboard and inspection scripts | a Harness Explorer publication warning. | 6 |
+| `I-REV` | dashboard and inspection scripts | an informational revision-provenance finding. | 1 |
 | `A` | preflight | the artifact graph could not be read or validated. | 1 |
 | `I` | preflight | an installation check failed. | 1 |
 | `WEX` | workflow execution | a check, transition, or evidence operation is refused. | 16 |
@@ -66,32 +67,32 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `E001` | `E001` |
-| `E002` | `E002` |
-| `E003` | `E003` |
-| `E004` | `E004` |
-| `E005` | `E005` |
-| `E006` | `E006` |
-| `E007` | `E007` |
-| `E008` | `E008` |
-| `E009` | `E009` |
-| `E010` | `E010` |
-| `E011` | `E011` |
-| `E012` | `E012`; `Rehearse the real root-evaluator handover: the successor's `upgrade --apply`. `WO-ECP-010` (`REQ-ECP-012`, `S…` (+3 more) |
-| `E014` | `E014` |
-| `E015` | `E015` |
-| `E016` | `E016` |
-| `E017` | `E017` |
-| `E018` | `E018` |
-| `E019` | `E019` |
-| `E020` | `E020` |
+| `E001` | `E001`; `E001: artifact root does not exist` (+4 more) |
+| `E002` | `E002`; `E002: field '{…}' must be a non-empty string` (+4 more) |
+| `E003` | `E003`; `E003: duplicate id '{…}' also declared in {…}` |
+| `E004` | `E004`; `E004: id '{…}' must start with '{…}' for type '{…}'` |
+| `E005` | `E005`; `E005: requirement statement must contain normative keyword SHALL` |
+| `E006` | `E006`; `E006: artifact '{…}' must not reference itself via '{…}'` (+4 more) |
+| `E007` | `E007`; `E007: active requirement '{…}' has no active specification coverage` |
+| `E008` | `E008`; `E008: active requirement '{…}' has no active verification coverage` |
+| `E009` | `E009`; `E009: field 'artifact_snapshot_sha256' must be a lowercase SHA-256 value` (+14 more) |
+| `E010` | `E010`; `E010: active release record must not include superseded verification record '{…}'` (+19 more) |
+| `E011` | `E011`; `E011: relation '{…}' target '{…}' must have type {…}, found {…}` |
+| `E012` | `E012`; `E012: evidence path does not identify an existing file: '{…}'` (+10 more) |
+| `E014` | `E014`; `E014: field 'lifecycle_events' must be a non-empty array of tables when present` (+14 more) |
+| `E015` | `E015`; `E015: adr_required architecture has no active ADR whose decides relation targets it` (+1 more) |
+| `E016` | `E016`; `E016: governance` |
+| `E017` | `E017`; `E017: active operating contract assures inactive requirement '{…}'` (+1 more) |
+| `E018` | `E018`; `E018: active operating contract assures requirement '{…}' without a verified or released VREC covering comple…` |
+| `E019` | `E019`; `E019: approved or in-progress work order requires an explicit assurance classification` (+1 more) |
+| `E020` | `E020`; `E020: duplicate or case-ambiguous execution scope path: {…}` (+3 more) |
 
 ### `E-AUT` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-AUT-001` | `E-AUT-001` |
-| `E-AUT-002` | `E-AUT-002` |
+| `E-AUT-001` | `E-AUT-001`; `E-AUT-001: verification_method must list 1-4 distinct values from {…}` |
+| `E-AUT-002` | `E-AUT-002`; `E-AUT-002: ability must be a non-empty string when present` (+7 more) |
 
 ### `E-CIP` — installed validator
 
@@ -103,27 +104,27 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-DCM-001` | `E-DCM-001` |
-| `E-DCM-002` | `E-DCM-002` |
-| `E-DCM-003` | `E-DCM-003` |
+| `E-DCM-001` | `E-DCM-001`; `E-DCM-001: a decision blocks at least one artifact` (+3 more) |
+| `E-DCM-002` | `E-DCM-002`; `E-DCM-002: a decision declares at least two options with distinct ids and labels` (+6 more) |
+| `E-DCM-003` | `E-DCM-003`; `E-DCM-003: a deferred decision records its scope and its revisit trigger` (+6 more) |
 | `E-DCM-004` | `E-DCM-004`; `E-DCM-004: {…} has an open decision written as prose: {…} (the Open decisions section reads exactly None, or …` |
-| `E-DCM-005` | `E-DCM-005` |
+| `E-DCM-005` | `E-DCM-005`; `E-DCM-005: deviation departs from '{…}#{…}', which names no rule identifier of {…}` |
 
 ### `E-ECP` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-ECP-001` | `E-ECP-001` |
+| `E-ECP-001` | `E-ECP-001`; `E-ECP-001: delegation is allowed only on work-order artifacts` (+2 more) |
 
 ### `E-RSK` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-RSK-001` | `E-RSK-001` |
-| `E-RSK-002` | `E-RSK-002` |
-| `E-RSK-003` | `E-RSK-003` |
-| `E-RSK-004` | `E-RSK-004` |
-| `E-RSK-005` | `E-RSK-005` |
+| `E-RSK-001` | `E-RSK-001`; `E-RSK-001: risk declares the decision field '{…}'; the question, the options and the decider live on the pair…` (+4 more) |
+| `E-RSK-002` | `E-RSK-002`; `E-RSK-002: risk field 'score' is {…}; likelihood {…} times impact {…} is {…}` (+2 more) |
+| `E-RSK-003` | `E-RSK-003`; `E-RSK-003: raised risk {…} is named in concerns by no open or deferred decision; raise it again with harnessc…` (+1 more) |
+| `E-RSK-004` | `E-RSK-004`; `E-RSK-004: {…} blocks {…} but {…} threatens {…}; the two sets must be equal` |
+| `E-RSK-005` | `E-RSK-005`; `E-RSK-005: a disposition without a lifecycle event was written by hand` (+7 more) |
 
 ### `W` — installed validator
 
@@ -137,9 +138,9 @@ but are not diagnostics and are not listed here.
 | `W010` | `W010`; `W010: required relation {…} is empty` |
 | `W011` | `W011`; `W011: missing target of {…}` |
 | `W012` | `W012`; `W012: {…} targets type {…}` |
-| `W013` | `W013`; `W013: governing artifact {…} is not active` |
-| `W014` | `W014` |
-| `W015` | `W015` |
+| `W013` | `W013`; `W013: artifact '{…}' is valid outside its canonical location; expected '{…}'` (+1 more) |
+| `W014` | `W014`; `W014: completed legacy architecture has no decision_assessment; migrate during the compatibility window` |
+| `W015` | `W015`; `W015: architecture uses deprecated constrains relation ({…}); migrate through accountable governance` |
 | `W016` | `W016`; `W016: {…} coverage is missing {…}` |
 | `W017` | `W017`; `W017: ADR does not decide a selected architecture` |
 | `W018` | `W018`; `W018: adr_required architecture {…} has no selected active deciding ADR` |
@@ -160,36 +161,36 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-AUT-001` | `W-AUT-001` |
-| `W-AUT-002` | `W-AUT-002` |
-| `W-AUT-003` | `W-AUT-003` |
-| `W-AUT-004` | `W-AUT-004` |
-| `W-AUT-005` | `W-AUT-005` |
-| `W-AUT-006` | `W-AUT-006` |
-| `W-AUT-007` | `W-AUT-007` |
-| `W-AUT-008` | `W-AUT-008` |
-| `W-AUT-009` | `W-AUT-009` |
-| `W-AUT-010` | `W-AUT-010` |
-| `W-AUT-011` | `W-AUT-011` |
-| `W-AUT-012` | `W-AUT-012` |
-| `W-AUT-013` | `W-AUT-013` |
-| `W-AUT-014` | `W-AUT-014` |
-| `W-AUT-015` | `W-AUT-015` |
-| `W-AUT-016` | `W-AUT-016` |
-| `W-AUT-017` | `W-AUT-017` |
-| `W-AUT-018` | `W-AUT-018` |
-| `W-AUT-019` | `W-AUT-019` |
-| `W-AUT-020` | `W-AUT-020` |
-| `W-AUT-021` | `W-AUT-021` |
-| `W-AUT-022` | `W-AUT-022` |
-| `W-AUT-023` | `W-AUT-023` |
+| `W-AUT-001` | `W-AUT-001`; `W-AUT-001: statement does not open with one of the five shapes (THE SYSTEM SHALL, WHEN, WHILE, IF ... THEN, W…` |
+| `W-AUT-002` | `W-AUT-002`; `W-AUT-002: statement carries {…} SHALL obligations; one requirement states one obligation` |
+| `W-AUT-003` | `W-AUT-003`; `W-AUT-003: statement is {…} words; the budget is {…}` |
+| `W-AUT-004` | `W-AUT-004`; `W-AUT-004: verification_method is a free-text string; the closed vocabulary is an array of test, analysis, in…` |
+| `W-AUT-005` | `W-AUT-005`; `W-AUT-005: body is {…} words; the budget is {…}` (+1 more) |
+| `W-AUT-006` | `W-AUT-006`; `W-AUT-006: Why is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
+| `W-AUT-007` | `W-AUT-007`; `W-AUT-007: a body sentence is {…} words; the budget is {…}` |
+| `W-AUT-008` | `W-AUT-008`; `W-AUT-008: body cites {…} code identifiers; the budget is {…}, the evidence belongs in a note, an RCA or an A…` (+2 more) |
+| `W-AUT-009` | `W-AUT-009`; `W-AUT-009: In plain words has {…} sentences; the budget is {…}` (+1 more) |
+| `W-AUT-010` | `W-AUT-010`; `W-AUT-010: statement opens WHEN on an event of evaluation with no other condition; an invariant reads THE SYS…` |
+| `W-AUT-011` | `W-AUT-011`; `W-AUT-011: intent has no outcome; one sentence names who can do or observe what after delivery` (+2 more) |
+| `W-AUT-012` | `W-AUT-012`; `W-AUT-012: Problem is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
+| `W-AUT-013` | `W-AUT-013`; `W-AUT-013: success measure '{…}' is observed by {…}; an acceptance check belongs in the verification contract` |
+| `W-AUT-014` | `W-AUT-014`; `W-AUT-014: Success measures has no row; a success measure is what an operator can count or time after delivery` |
+| `W-AUT-015` | `W-AUT-015`; `W-AUT-015: body cites {…} repository paths or source line ranges; evidence is cited by link to a note, an RCA…` |
+| `W-AUT-016` | `W-AUT-016`; `W-AUT-016: ability cites {…} code identifiers; the ability names what an actor can do, not how` (+4 more) |
+| `W-AUT-017` | `W-AUT-017`; `W-AUT-017: Actor and need is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
+| `W-AUT-018` | `W-AUT-018`; `W-AUT-018: body carries a {…} list; the requirements that derive from a capability are read from the graph an…` |
+| `W-AUT-019` | `W-AUT-019`; `W-AUT-019: contract cites {…} code identifiers; the contract says what conformance is, the rules say how` (+3 more) |
+| `W-AUT-020` | `W-AUT-020`; `W-AUT-020: a rule opens with no identifier: {…}; every rule leads with <PREFIX>-<AREA>-NNN in bold` (+1 more) |
+| `W-AUT-021` | `W-AUT-021`; `W-AUT-021: rule {…} carries no MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; a rule is a sentence someone…` (+2 more) |
+| `W-AUT-022` | `W-AUT-022`; `W-AUT-022: Coverage has no row for {…}, which this specification specifies` (+2 more) |
+| `W-AUT-023` | `W-AUT-023`; `W-AUT-023: body carries a {…} heading; the reader-first shape names the section Rules and records decisions a…` |
 
 ### `W-DCM` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-DCM-001` | `W-DCM-001` |
-| `W-DCM-002` | `W-DCM-002` |
+| `W-DCM-001` | `W-DCM-001`; `W-DCM-001: accepted deviation {…} against {…} is past its revisit '{…}'; amend or supersede the rule, or acce…` |
+| `W-DCM-002` | `W-DCM-002`; `W-DCM-002: {…} accepted deviations stand against {…} ({…}); the rule, not the implementations, is probably wr…` |
 
 ### `W-ECP` — installed validator
 
@@ -202,34 +203,40 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-REB-001` | `W-REB-001` |
-| `W-REB-002` | `W-REB-002` |
-| `W-REB-003` | `W-REB-003` |
+| `W-REB-001` | `W-REB-001`; `W-REB-001: Multiple draft or ready release records declare version {…}; accountable release review is require…` (+1 more) |
+| `W-REB-002` | `W-REB-002`; `W-REB-002: Ready verification records at different commits overlap work-order coverage without a governed sup…` (+1 more) |
+| `W-REB-003` | `W-REB-003`; `W-REB-003: Active release contracts and associated proposals compete for the same version and governed work.` (+1 more) |
 
 ### `W-REV` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-REV-002` | `W-REV-002` |
-| `W-REV-003` | `W-REV-003` |
-| `W-REV-004` | `W-REV-004` |
+| `W-REV-002` | `W-REV-002`; `W-REV-002: Reconcile the released work claim with an eligible commit-bound release record.` (+1 more) |
+| `W-REV-003` | `W-REV-003`; `W-REV-003: Declared candidate commit on {…} is unavailable in the current clone.` (+1 more) |
+| `W-REV-004` | `W-REV-004`; `W-REV-004: Assess explicit supersession against one eligible verified or released successor; do not transitio…` (+1 more) |
 
 ### `W-RSK` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-RSK-001` | `W-RSK-001` |
+| `W-RSK-001` | `W-RSK-001`; `W-RSK-001: accepted risk {…} is past its revisit '{…}' and no pending decision concerns it; raise it again or…` |
 
 ### `W-HEX` — dashboard and inspection scripts
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-HEX-001` | `W-HEX-001` |
-| `W-HEX-002` | `W-HEX-002` |
-| `W-HEX-003` | `W-HEX-003` |
-| `W-HEX-004` | `W-HEX-004` |
-| `W-HEX-005` | `W-HEX-005` |
-| `W-HEX-006` | `W-HEX-006` |
+| `W-HEX-001` | `W-HEX-001`; `W-HEX-001: Retain evidence keyed to the implemented work order and reassess the observation.` (+1 more) |
+| `W-HEX-002` | `W-HEX-002`; `W-HEX-002: Review inactive governing references before continuing active work.` (+1 more) |
+| `W-HEX-003` | `W-HEX-003`; `W-HEX-003: Reassess the older source against its newer declared dependency or parent.` (+1 more) |
+| `W-HEX-004` | `W-HEX-004`; `W-HEX-004: Declared dependency traversal contains a cycle among: {…}.` (+1 more) |
+| `W-HEX-005` | `W-HEX-005`; `W-HEX-005: Declare the applicable relation or explicitly dispose of an artifact that is no longer applicable.` (+1 more) |
+| `W-HEX-006` | `W-HEX-006`; `W-HEX-006: Remove an unintended repeated relation through governed work.` (+1 more) |
+
+### `I-REV` — dashboard and inspection scripts
+
+| Code | Message text in the source |
+| --- | --- |
+| `I-REV-001` | `I-REV-001`; `I-REV-001: Observed checkout differs from declared candidate commit on {…}; this can be expected in a later g…` |
 
 ### `A` — preflight
 
@@ -386,7 +393,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `RR001` | `RR001`; `RR001: released-evaluator` (+1 more) |
+| `RR001` | `RR001`; `RR001: released-evaluator` |
 | `RR002` | `RR002`; `RR002: not run after evaluator identity failure` (+1 more) |
 | `RR003` | `RR003`; `RR003: not run after evaluator identity failure` |
 | `RR004` | `RR004`; `RR004: repository-state` |
