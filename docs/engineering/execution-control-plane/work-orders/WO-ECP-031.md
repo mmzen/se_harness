@@ -2,7 +2,7 @@
 id = "WO-ECP-031"
 type = "work_order"
 title = "Wave 2, group A: one process launcher and one front-matter parser"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -63,6 +63,13 @@ to = "in_progress"
 decided_at = "2026-09-08T09:38:40Z"
 decided_by = "engineering-owner"
 reason = "Started on the engineering owner's explicit start decision of 2026-09-08, given with the words 'start the work orders' for the three wave 2 work orders after the packet pull requests #395, #396 and #397 merged. Start preflight PASS. Executes on wo/ecp-031-process-front-matter; groups B and C follow in sequence because the three groups edit overlapping modules."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T10:54:34Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete and prepare the record, then start group B': se_harness/_process.py carries every subprocess launch of the package and se_harness/front_matter.py every front-matter read, each caller keeping its exception class and timeout; twelve boundary tests; the Windows suite at its baseline (1294 tests, the one workstation error, 26 skips) and the Linux lane green; validate 1396 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set passes all nine predicates at 93962ad0 with the validate check-run 102028711179 success. DEC-ECP-001 (repository_tools stays behind the import barrier) disposed amend by the technical owner and recorded on SPEC-ECP-023. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-031/WO-ECP-031-handoff.md."
 +++
 
 # Work Order: Wave 2, group A: one process launcher and one front-matter parser
