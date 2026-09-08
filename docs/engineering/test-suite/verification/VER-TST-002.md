@@ -2,13 +2,20 @@
 id = "VER-TST-002"
 type = "verification"
 title = "Verify wave 4: one run per test, shared support modules, one retired-surface table, cited pins"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
 
 [relations]
 verifies = ["REQ-TST-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T12:53:14Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work."
 +++
 
 # Verification Contract: Verify wave 4: one run per test, shared support modules, one retired-surface table, cited pins

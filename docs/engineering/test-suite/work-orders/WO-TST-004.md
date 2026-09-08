@@ -2,7 +2,7 @@
 id = "WO-TST-004"
 type = "work_order"
 title = "Wave 4: one run per test, shared support modules, one retired-surface table, cited pins"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -27,6 +27,13 @@ paths = [
 implements = ["REQ-TST-004"]
 specifications = ["SPEC-TST-002"]
 verification = ["VER-TST-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T12:53:14Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work. WO-TST-004 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions, after the wave 2 work orders and WO-TCM-011 merge."
 +++
 
 # Work Order: Wave 4: one run per test, shared support modules, one retired-surface table, cited pins

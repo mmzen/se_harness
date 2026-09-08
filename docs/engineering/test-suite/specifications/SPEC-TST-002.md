@@ -2,7 +2,7 @@
 id = "SPEC-TST-002"
 type = "specification"
 title = "Wave 4 test-suite hygiene: mixins, shared support modules, one retired-surface table, cited pins"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -10,6 +10,13 @@ contract = "Every defined test runs once, each fixture need has one shared helpe
 
 [relations]
 specifies = ["REQ-TST-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T12:53:14Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work."
 +++
 
 # Specification: Wave 4 test-suite hygiene: mixins, shared support modules, one retired-surface table, cited pins

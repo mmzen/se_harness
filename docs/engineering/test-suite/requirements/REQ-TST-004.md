@@ -2,7 +2,7 @@
 id = "REQ-TST-004"
 type = "requirement"
 title = "Run each test once, share one helper per fixture need, and pin only cited wording"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -14,6 +14,13 @@ source = "issue #379 (code health assessment 2026-09-07, section 5 and the wave 
 
 [relations]
 derives_from = ["CAP-TST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T12:53:14Z"
+decided_by = "repository-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the wave 4 packet for issue #379 (code health assessment 2026-09-07, section 5 and the wave 4 plan) was presented: one run per test, shared support modules, one retired-surface table, cited pins. Approval of a definition authorizes no work."
 +++
 
 # Requirement: Run each test once, share one helper per fixture need, and pin only cited wording
