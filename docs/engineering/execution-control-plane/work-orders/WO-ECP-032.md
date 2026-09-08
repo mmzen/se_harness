@@ -2,7 +2,7 @@
 id = "WO-ECP-032"
 type = "work_order"
 title = "Wave 2, group B: the integrity primitives, the closed sets and the two grammars"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -59,6 +59,13 @@ to = "approved"
 decided_at = "2026-09-08T09:17:17Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work. WO-ECP-032 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T10:55:39Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-08, given with the words 'start the work orders' and confirmed by selecting the presented option 'Complete and prepare the record, then start group B' after WO-ECP-031 completed. Start preflight PASS. Executes on wo/ecp-032-integrity-primitives, stacked on the group A branch because the two groups edit the same modules; DEC-ECP-001 already bounds ECP-PRM-009 and ECP-PRM-015 to the package."
 +++
 
 # Work Order: Wave 2, group B: the integrity primitives, the closed sets and the two grammars
