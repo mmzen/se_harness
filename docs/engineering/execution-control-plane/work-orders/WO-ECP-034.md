@@ -2,7 +2,7 @@
 id = "WO-ECP-034"
 type = "work_order"
 title = "Wave 3, group A: the engine as an import surface and its twins folded into the package"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -47,6 +47,13 @@ paths = [
 implements = ["REQ-ECP-035"]
 specifications = ["SPEC-ECP-024"]
 verification = ["VER-ECP-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-08T15:13:26Z"
+decided_by = "engineering-owner"
+reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #404, #405 and #406 and their summary were presented: wave 3 of the code health assessment of 2026-09-07 (issue #378) and the revisit triggers of DEC-ECP-001 and DEC-ECP-002, the engine as an import surface, one validation per governance command, the three largest modules split along their seams, every recorded output byte-identical. Approval of a definition authorizes no work."
 +++
 
 # Work Order: Wave 3, group A: the engine as an import surface and its twins folded into the package
