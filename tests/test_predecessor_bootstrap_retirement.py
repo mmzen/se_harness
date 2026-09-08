@@ -399,14 +399,15 @@ class RetiredNameReservationTests(unittest.TestCase):
         self.assertEqual(("PV001", "PV002"), release_qualification.RETIRED_CHECK_CODES)
         for code in release_qualification.RETIRED_CHECK_CODES:
             with self.subTest(code=code):
-                # The declaration reserves the value; no other package or
-                # repository-owned source may produce it.
+                # The declaration reserves the value and the registry names it
+                # (SPEC-ECP-023 ECP-PRM-016); no other package or repository-owned
+                # source may produce it.
                 holders = set()
                 for tree in ("se_harness", "repository_tools", "scripts", ".github/scripts"):
                     for source in _python_sources(tree):
                         if code in source.read_text(encoding="utf-8"):
                             holders.add(source.relative_to(REPOSITORY_ROOT).as_posix())
-                self.assertEqual({"se_harness/release_qualification.py"}, holders)
+                self.assertEqual({"se_harness/codes.py", "se_harness/release_qualification.py"}, holders)
 
     def test_the_retired_operation_is_absent_from_the_published_surface(self) -> None:
         self.assertNotIn("predecessor-view", release_qualification.OPERATIONS)

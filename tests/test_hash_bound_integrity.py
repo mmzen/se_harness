@@ -1442,7 +1442,7 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
 
     def test_preflight_diagnostic_codes_are_unchanged(self) -> None:
         source = (ROOT / "se_harness" / "preflight.py").read_text(encoding="utf-8")
-        self.assertIn('PreflightDiagnostic("I001"', source)
+        self.assertIn("PreflightDiagnostic(I001", source)  # the code is the registry's name (ECP-PRM-016)
         self.assertNotIn("hash-bound", source.split("def _hash_bound_checks")[0])
 
     @unittest.skipUnless(git_available(), "git is unavailable")
