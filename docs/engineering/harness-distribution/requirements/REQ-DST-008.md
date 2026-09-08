@@ -7,7 +7,8 @@ owners = ["product-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-21"
 statement = "WHEN the standard harness is first installed or an older installation is upgraded, THE SYSTEM SHALL add an absent repository-context scaffold, preserve any existing context, and treat the resulting file as repository-owned rather than inferred product authority."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

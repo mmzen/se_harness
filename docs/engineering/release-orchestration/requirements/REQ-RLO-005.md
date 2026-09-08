@@ -7,7 +7,8 @@ owners = ["release-owner", "security-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN the exact final GitHub Release exists and the protected PyPI deployment is approved, THE SYSTEM SHALL publish only its verified wheel and sdist through the configured top-level Trusted Publisher without checkout, rebuild, stored credentials, or duplicate suppression."
-verification_method = "automated-policy-preflight-and-authorized-deployment-review"
+verification_method = ["inspection"]
+verification_notes = "automated-policy-preflight-and-authorized-deployment-review"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

@@ -7,7 +7,8 @@ owners = ["quality-owner", "release-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a harness release candidate is verified, THE SYSTEM SHALL prove that source managed files, canonical templates, lock entries, wheel contents, and a fresh installation use consistent canonical integrity semantics."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

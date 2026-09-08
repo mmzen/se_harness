@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN the repository plans or applies successor-governor adoption, THE SYSTEM SHALL use an isolated installation of the immutable public se-harness 0.6.0 wheel and prove its version, archive digest, installed payload digest, module root, entry point, and checkout separation before relying on it."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [[lifecycle_events]]
 from = "draft"

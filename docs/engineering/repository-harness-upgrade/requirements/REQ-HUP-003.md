@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the governor-upgrade candidate is reviewed locally or in hosted CI, THE SYSTEM SHALL prove that released-evaluator, candidate-source, and candidate-package roles remain distinct, fail closed on cross-role execution, and retain sufficient evidence to restore the prior 0.5.0a1 root before merge."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HUP-001"]

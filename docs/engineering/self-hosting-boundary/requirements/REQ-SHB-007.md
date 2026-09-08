@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "technical-owner", "qualit
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN standard repository upgrade evaluates the se-harness implementation repository, THE SYSTEM SHALL preserve its declared repository-specific self-hosting controls when they match their current lock, report consumer-template divergence without overwriting, and fail transactionally on missing, ambiguous, or modified controls."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

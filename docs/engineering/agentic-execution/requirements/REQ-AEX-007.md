@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "technical-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a supported workflow delegates work to multiple agents or materializes runtime-native agent configuration, THE SYSTEM SHALL preserve the same selected scope, permitted operations, stop decisions, evidence obligations, and final validation as the single-agent procedure; constrain concurrent writers to explicit disjoint scopes with one final integration owner; treat generated runtime configuration as derived and replaceable; and provide a deterministic single-agent fallback."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

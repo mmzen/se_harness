@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-21"
 updated = "2026-08-27"
 statement = "WHEN a predecessor-bootstrap release record and its exact release contract are explicitly rejected, THE SYSTEM SHALL continue validating their immutable historical tuple and evidence without treating the rejected contract as active bootstrap authority or permitting its reuse."
-verification_method = "automated-lifecycle-provenance-and-negative-authority-test"
+verification_method = ["test"]
+verification_notes = "automated-lifecycle-provenance-and-negative-authority-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

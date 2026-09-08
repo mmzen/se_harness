@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN the managed router presents review and visualization guidance, THE SYSTEM SHALL retain the evidence-and-authority boundary while routing exact review commands and ordered activity to WORKFLOW.md without duplicating them."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

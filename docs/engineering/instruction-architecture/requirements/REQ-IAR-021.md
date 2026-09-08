@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN the managed instruction surface routes an agent to repository-local operational facts, THE SYSTEM SHALL name the owner-controlled region of AGENTS.md as their location, SHALL NOT name a harness-scaffolded context document, and SHALL NOT make the presence or completeness of ungoverned owner content a harness stop condition."
-verification_method = "Automated managed-integrity, routing-content, and workflow-conformance tests plus accountable review of the authority boundary"
+verification_method = ["test", "inspection"]
+verification_notes = "Automated managed-integrity, routing-content, and workflow-conformance tests plus accountable review of the authority boundary"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

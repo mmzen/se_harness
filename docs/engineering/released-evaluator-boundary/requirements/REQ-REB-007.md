@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN maintainers assess governance-deadlock recovery readiness, THE SYSTEM SHALL provide a maintainer-only bounded recovery runbook and a disposable rehearsal that prove immutable source selection, isolated evaluator installation, restricted publication authority, public-install verification, and restoration of normal standard controls."
-verification_method = "disposable-repository-rehearsal-and-manual-security-review"
+verification_method = ["inspection", "demonstration"]
+verification_notes = "disposable-repository-rehearsal-and-manual-security-review"
 
 [relations]
 derives_from = ["CAP-REB-001"]

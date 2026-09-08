@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN any evaluator-identity boundary validates an interpreter path, THE SYSTEM SHALL apply one declared interpreter-safety rule shared by the package runtime and the repository-tools runtime, and a conformance check shall fail when a boundary implements its own variant or omits a declared refusal."
-verification_method = "automated-architecture-conformance-test"
+verification_method = ["test"]
+verification_notes = "automated-architecture-conformance-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

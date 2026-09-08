@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN GitHub release assets are staged for PyPI, THE SYSTEM SHALL require explicit lowercase SHA-256 values and prove that the wheel, source distribution, and checksum manifest agree before publication."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PYP-001"]

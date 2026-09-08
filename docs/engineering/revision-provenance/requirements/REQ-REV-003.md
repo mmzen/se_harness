@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a release record becomes active, THE SYSTEM SHALL require a version, full commit, release timestamp, authorizing owner, release contract, verification record, and released work order whose declared commits agree."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REV-001"]

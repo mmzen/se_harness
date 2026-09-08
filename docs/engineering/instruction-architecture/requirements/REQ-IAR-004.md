@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an actor reaches the managed harness contract, THE SYSTEM SHALL expose each focused policy module directly and identify the decision point at which it applies."
-verification_method = "inspection"
+verification_method = ["inspection"]
+verification_notes = "inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

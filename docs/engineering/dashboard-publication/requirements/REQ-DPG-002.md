@@ -7,7 +7,8 @@ owners = ["product-owner", "security-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a release dashboard is published publicly, THE SYSTEM SHALL preserve canonical Explorer semantics, identify the site as a derived SE Harness development demonstration, and deploy only the bounded generated static payload."
-verification_method = "automated-content-boundary-and-manual-semantic-review"
+verification_method = ["inspection"]
+verification_notes = "automated-content-boundary-and-manual-semantic-review"
 
 [relations]
 derives_from = ["CAP-DPG-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN se-harness is installed into a Python virtual environment, THE SYSTEM SHALL explain how activation exposes harnessctl, where the launcher is stored on supported platform families, and how to invoke the module without assuming a global executable."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

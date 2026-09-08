@@ -7,7 +7,8 @@ owners = ["quality-owner", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an accountable assurance owner retires a ready verification record, THE SYSTEM SHALL accept an explicit transition from ready to superseded only when all supersession invariants hold."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

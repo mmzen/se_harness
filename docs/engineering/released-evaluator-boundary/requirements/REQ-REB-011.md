@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "release-owner"]
 created = "2026-08-22"
 updated = "2026-08-22"
 statement = "WHEN one or more release attempts for an unpublished version are terminally rejected, THE SYSTEM SHALL retain those records without letting them claim the version against at most one ready or released successor."
-verification_method = "automated-release-version-lifecycle-matrix"
+verification_method = ["test"]
+verification_notes = "automated-release-version-lifecycle-matrix"
 
 [relations]
 derives_from = ["CAP-REB-001"]

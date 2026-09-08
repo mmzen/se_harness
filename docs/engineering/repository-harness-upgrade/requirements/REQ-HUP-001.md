@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the repository evaluates or applies the root governor upgrade, THE SYSTEM SHALL use an isolated public se-harness 0.5.0 installation outside the checkout and prove its version, distribution root, entry point, and immutable wheel digest before relying on it."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HUP-001"]

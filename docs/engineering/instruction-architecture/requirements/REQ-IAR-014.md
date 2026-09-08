@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-15"
 updated = "2026-08-15"
 statement = "WHEN a human or coding agent selects, authors, or reviews SE Harness engineering material, THE SYSTEM SHALL provide one authoritative and complete artifact-applicability catalog that defines every standard formal artifact's objective, applicability, omission and reuse rules, accountable owner, and primary traceability relations and SHALL keep executable validation consistent with that catalog."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

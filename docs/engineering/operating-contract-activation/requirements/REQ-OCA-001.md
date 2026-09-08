@@ -7,7 +7,8 @@ owners = ["service-owner", "repository-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN an existing operating contract is proposed for activation, THE REPOSITORY SHALL require current requirement-only traceability, complete actionable operating controls, and explicit accountable approval without changing release authority."
-verification_method = "artifact inspection and deterministic repository validation"
+verification_method = ["inspection"]
+verification_notes = "artifact inspection and deterministic repository validation"
 
 [relations]
 derives_from = ["CAP-OCA-001"]

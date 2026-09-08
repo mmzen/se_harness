@@ -7,7 +7,8 @@ owners = ["requirements-steward", "engineering-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the standard harness is initialized or safely upgraded, THE SYSTEM SHALL install lifecycle documentation, templates, validation, and Explorer behavior equivalent to the distribution repository."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WLC-001"]

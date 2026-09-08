@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-25"
 updated = "2026-08-25"
 statement = "WHEN SE Harness installs, upgrades, or routes a supported coding agent, THE SYSTEM SHALL provide one integrity-protected technical-communication policy that applies selected ASD-STE100-based clarity principles to eligible English prose, explicitly disclaims compliance or ASD endorsement, and requires no download or bundled copy of the external standard."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-TCM-001"]

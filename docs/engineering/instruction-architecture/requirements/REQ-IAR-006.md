@@ -7,7 +7,8 @@ owners = ["requirements-steward", "engineering-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a work order is selected for implementation, THE SYSTEM SHALL provide a deterministic read-only preflight that validates readiness and enumerates the complete governing inputs without inferring authority."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

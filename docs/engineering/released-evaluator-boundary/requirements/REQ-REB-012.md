@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-22"
 updated = "2026-08-27"
 statement = "WHEN the locked predecessor evaluator cannot parse an exact closed rejected-bootstrap pair, THE SYSTEM SHALL let that evaluator prepare the successor record through a deterministic contract-bound view that omits only that pair and proves the complete repository unchanged before and after preparation."
-verification_method = "automated-projection-provenance-and-zero-write-negative-test"
+verification_method = ["test"]
+verification_notes = "automated-projection-provenance-and-zero-write-negative-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

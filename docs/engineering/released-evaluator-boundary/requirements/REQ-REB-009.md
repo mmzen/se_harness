@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN canonical evaluator-evidence JSON is retained in Git, THE SYSTEM SHALL preserve its exact LF bytes and bound SHA-256 across supported checkout line-ending configurations without weakening exact-byte validation."
-verification_method = "automated-cross-platform-checkout-and-provenance-test"
+verification_method = ["test"]
+verification_notes = "automated-cross-platform-checkout-and-provenance-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

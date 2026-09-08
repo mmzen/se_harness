@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-19"
 statement = "WHEN a reader follows artifact selections in focused Lineage, THE SYSTEM SHALL retain a bounded reversible navigation history so earlier and later focused boards can be restored without representing visits as formal artifact ancestry or governance relations."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

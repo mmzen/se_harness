@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN release orchestration is replayed or observes prior external state, THE SYSTEM SHALL continue only across complete exact matches and shall fail closed on partial, ambiguous, or mismatched state without rewriting immutable history."
-verification_method = "automated-state-machine-and-failure-injection-test"
+verification_method = ["test"]
+verification_notes = "automated-state-machine-and-failure-injection-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

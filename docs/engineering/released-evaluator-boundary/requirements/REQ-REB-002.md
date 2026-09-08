@@ -7,7 +7,8 @@ owners = ["requirements-steward", "release-owner", "security-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN a release or release-bound Explorer workflow evaluates a governance snapshot, THE SYSTEM SHALL resolve and verify the exact released evaluator from the snapshot's standard configuration and lock without consulting a special self-hosting descriptor, profile, or role."
-verification_method = "automated-workflow-contract-and-integration-test"
+verification_method = ["test"]
+verification_notes = "automated-workflow-contract-and-integration-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

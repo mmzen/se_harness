@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward", "assurance-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN autonomous execution reaches an accountable-decision-required decision, exception, failed gate, unresolved scope conflict, or action-time-authorization-required action, THE SYSTEM SHALL stop before the associated effect and emit one canonical decision packet containing the exact subject, candidate identity, required role, gate results, evidence bindings, recommendation, complete alternatives, unresolved findings, effects, non-effects, and exact transition preview or proposed external action."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AEX-001"]

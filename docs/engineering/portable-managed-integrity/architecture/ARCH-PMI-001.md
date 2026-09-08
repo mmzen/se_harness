@@ -5,10 +5,17 @@ title = "Single integrity boundary for managed text"
 status = "implemented"
 owners = ["engineering-owner", "security-owner"]
 created = "2026-08-11"
-updated = "2026-08-11"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["SPEC-PMI-001"]
+addresses = ["REQ-PMI-001", "REQ-PMI-002", "REQ-PMI-003", "REQ-PMI-004", "REQ-PMI-005", "REQ-PMI-006", "REQ-PMI-007"]
+conforms_to = ["SPEC-PMI-001"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["public-interface-or-protocol", "security-privacy-or-trust-boundary", "difficult-to-reverse", "material-alternatives"]
+rationale = "ADR-PMI-001 chose versioned canonical UTF-8 LF integrity in lock schema 2, over raw byte digests, enforced Git attributes and per-platform digests. It changed a cryptographic integrity contract whose migration runs one way only."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Single integrity boundary for managed text
@@ -69,3 +76,14 @@ Static search for unmanaged hash call sites; unit properties for canonicalizatio
 ## Related ADRs
 
 `ADR-PMI-001` selects a versioned canonical UTF-8 LF digest and explicit schema-2 migration instead of Git-policy enforcement or implicit raw-hash reinterpretation.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-PMI-001`).** The legacy
+relation named only `SPEC-PMI-001`, which becomes the conformance target;
+`addresses` takes the seven requirements that specification specifies, all of
+them active. The assessment reads the drivers and four considered options of
+`ADR-PMI-001`, the one active ADR that decides this architecture. Title,
+status, statement and ADR relations are unchanged.

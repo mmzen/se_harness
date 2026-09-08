@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN verification or release provenance is captured for work belonging to one engineering domain, THE SYSTEM SHALL default the record to that domain while preserving explicit output control and repository-wide placement for aggregate or ambiguous records."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

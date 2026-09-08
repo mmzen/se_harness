@@ -7,7 +7,8 @@ owners = ["engineering-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN init or adopt is requested, THE SYSTEM SHALL plan all changes before writing, stop on ordinary-file conflicts, and integrate bounded managed blocks into existing agent and ignore files."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

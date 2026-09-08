@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN a commit is pushed to a branch that has an open pull request, THE SYSTEM SHALL run each candidate-evidence workflow once for that commit and cancel any in-progress run of the same workflow for a superseded commit on the same ref."
-verification_method = "automated-workflow-inspection-and-run-observation"
+verification_method = ["inspection"]
+verification_notes = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

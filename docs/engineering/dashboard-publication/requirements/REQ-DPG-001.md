@@ -7,7 +7,8 @@ owners = ["repository-owner", "release-owner"]
 created = "2026-08-16"
 updated = "2026-08-18"
 statement = "WHEN publication is requested for a completed SE Harness release, THE SYSTEM SHALL deploy an Explorer generated from one validated immutable governance commit whose released record and candidate commit match the published Git tag."
-verification_method = "automated-provenance-and-deployment-test"
+verification_method = ["test"]
+verification_notes = "automated-provenance-and-deployment-test"
 
 [relations]
 derives_from = ["CAP-DPG-001"]

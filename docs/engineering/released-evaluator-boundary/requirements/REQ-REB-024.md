@@ -7,7 +7,8 @@ owners = ["requirements-steward", "security-owner", "repository-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an evaluator-identity boundary receives an interpreter path whose enclosing directories traverse a symbolic link or a Windows junction, whose final component is a non-symbolic link, whose lexical path or resolved target lies inside the candidate checkout, or whose resolved target itself traverses a link, THE SYSTEM SHALL refuse the interpreter with a stable diagnostic before establishing any environment identity or executing any target validation."
-verification_method = "automated-adversarial-test"
+verification_method = ["test"]
+verification_notes = "automated-adversarial-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

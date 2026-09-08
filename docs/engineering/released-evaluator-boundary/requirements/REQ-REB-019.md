@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "release-owner", "security-ow
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN a verification record or release record is rejected, THE SYSTEM SHALL retain it as immutable visible terminal history with attributed rejection metadata, SHALL grant it no assurance or release authority, SHALL not let it reserve an active release version, and SHALL require remediation to use a distinct record."
-verification_method = "automated-rejected-history-and-succession-test"
+verification_method = ["test"]
+verification_notes = "automated-rejected-history-and-succession-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

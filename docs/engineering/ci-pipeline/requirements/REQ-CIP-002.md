@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN the candidate-evidence workflow runs, THE SYSTEM SHALL build the candidate wheel in one job and provide it to every consuming job as a downloaded artifact whose digest the consumer verifies."
-verification_method = "automated-workflow-inspection-and-run-observation"
+verification_method = ["inspection"]
+verification_notes = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

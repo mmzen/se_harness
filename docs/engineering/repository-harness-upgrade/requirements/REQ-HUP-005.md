@@ -7,7 +7,8 @@ owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN exact public se-harness 0.6.0 is authorized to replace the schema-2 root, THE SYSTEM SHALL require one approved evaluator-upgrade work order bound to the prior lock and target evaluator, apply only the reviewed standard-root plan atomically, retain canonical evidence, and fail closed on customization, plan drift, or postcondition failure."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [[lifecycle_events]]
 from = "draft"

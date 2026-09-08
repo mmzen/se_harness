@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN a release contract is drafted, THE SYSTEM SHALL identify the release unit by one candidate commit and derive the gated work-order list from the Harness-Work-Order trailers of the commits between the previous release tag and that commit."
-verification_method = "automated-derivation-test-and-template-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-derivation-test-and-template-inspection"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

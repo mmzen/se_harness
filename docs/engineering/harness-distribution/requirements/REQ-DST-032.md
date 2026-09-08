@@ -7,7 +7,8 @@ owners = ["security-owner", "product-owner", "quality-owner"]
 created = "2026-08-13"
 updated = "2026-09-01"
 statement = "WHEN Harness Explorer is opened from generated output, THE SYSTEM SHALL render repository data safely and responsively, keep its canonical evidence views available without the optional 3D dependency, and load only the explicitly accepted pinned 3D renderer from the documented CDN."
-verification_method = "automated-security-test-and-manual-accessibility-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-security-test-and-manual-accessibility-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

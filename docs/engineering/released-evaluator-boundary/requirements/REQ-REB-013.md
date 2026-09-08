@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "security-owner", "release
 created = "2026-08-22"
 updated = "2026-08-22"
 statement = "WHEN the locked predecessor evaluator cannot parse an exact closed rejected-bootstrap pair during hosted assessment, THE SYSTEM SHALL run that unchanged evaluator against the same deterministic two-artifact compatibility view while separately retaining its exact full-checkout refusal and complete-graph candidate validation."
-verification_method = "automated-hosted-predecessor-assessment-view-and-exact-refusal-replay"
+verification_method = ["analysis"]
+verification_notes = "automated-hosted-predecessor-assessment-view-and-exact-refusal-replay"
 
 [relations]
 derives_from = ["CAP-REB-001"]

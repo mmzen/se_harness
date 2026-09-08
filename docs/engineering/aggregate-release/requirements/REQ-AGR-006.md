@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the Harness Explorer renders aggregate provenance, THE SYSTEM SHALL show one release version and candidate commit connected to every included verification record, work order, requirement, capability, and intent."
-verification_method = "automated-test-and-visual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-visual-review"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

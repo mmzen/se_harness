@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN the publication workflow has resolved a release record, THE SYSTEM SHALL run exactly the qualification leg for that record's distribution schema and deploy the Pages payload through one job definition shared with the standalone dashboard workflow."
-verification_method = "automated-workflow-inspection-and-run-observation"
+verification_method = ["inspection"]
+verification_notes = "automated-workflow-inspection-and-run-observation"
 [relations]
 derives_from = ["CAP-CIP-001"]
 

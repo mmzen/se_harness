@@ -7,7 +7,8 @@ owners = ["requirements-steward", "security-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN any self-hosting CI lane invokes harness behavior, THE SYSTEM SHALL emit and verify machine-assessable runtime identity sufficient to detect version ambiguity, current-directory import shadowing, and source-versus-wheel substitution."
-verification_method = "automated-test-and-security-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-security-review"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

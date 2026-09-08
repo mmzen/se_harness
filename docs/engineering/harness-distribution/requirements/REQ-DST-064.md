@@ -7,7 +7,8 @@ owners = ["technical-owner", "security-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the topology acceptance target is increased, THE SYSTEM SHALL preserve all existing progressive-resource, integrity, content, publication, and released-evaluator boundaries and SHALL change only the candidate distribution contract until a later released upgrade is authorized."
-verification_method = "automated-boundary-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-boundary-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

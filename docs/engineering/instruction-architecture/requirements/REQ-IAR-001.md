@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN an engineering agent starts repository work, THE SYSTEM SHALL route the agent through one canonical managed entry contract without duplicating mandatory harness navigation across adapter files."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

@@ -7,7 +7,8 @@ owners = ["quality-owner", "technical-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a verification record has status superseded, THE SYSTEM SHALL require exactly one distinct verification record in its superseded_by relation and require that successor to be verified or released."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

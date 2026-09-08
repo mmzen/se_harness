@@ -7,7 +7,8 @@ owners = ["quality-owner", "engineering-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN an implemented work order explicitly requires commit-bound verification and no active VREC proposal covers it, SE Harness SHALL report non-authoritative assurance follow-up and SHALL cease that follow-up when the lifecycle has progressed to an applicable VREC state."
-verification_method = "deterministic inspection queue, suggestion, coverage-state, aggregate, and rendering tests"
+verification_method = ["test", "inspection"]
+verification_notes = "deterministic inspection queue, suggestion, coverage-state, aggregate, and rendering tests"
 
 [relations]
 derives_from = ["CAP-WAC-001"]

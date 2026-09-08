@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN the se_harness repository binds a Python distribution to a ready release record, THE SYSTEM SHALL use repository-owned tooling to validate and atomically retain the exact candidate, version, epoch, filenames, hashes, and canonical checksum identity."
-verification_method = "automated-repository-binder-and-schema-test"
+verification_method = ["test"]
+verification_notes = "automated-repository-binder-and-schema-test"
 
 [relations]
 derives_from = ["CAP-RLO-002"]
