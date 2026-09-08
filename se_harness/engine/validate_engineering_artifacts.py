@@ -3247,6 +3247,18 @@ def validate_repository(repository_root: Path, artifact_root: Path | None = None
     )
 
 
+def canonical_layout_diagnostics(repository_root: Path, artifact_root: Path | None = None) -> list[Diagnostic]:
+    """The canonical-location warnings alone (ECP-ENG-012): the artifacts are loaded and the
+    layout pass runs; the graph passes do not. Parse errors exclude their files as in a full run."""
+
+    repository_root = repository_root.resolve()
+    selected_artifact_root = (artifact_root or repository_root / "docs" / "engineering").resolve()
+    if not selected_artifact_root.exists():
+        return []
+    artifacts, parse_errors = load_artifacts(selected_artifact_root, repository_root)
+    return validate_canonical_layout(artifacts, repository_root, selected_artifact_root, list(parse_errors))
+
+
 def render_human(report: ValidationReport, *, show_advisories: bool = False) -> str:
     status = "PASS" if report.valid else "FAIL"
     plane_summary = " | ".join(

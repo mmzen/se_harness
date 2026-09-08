@@ -2589,74 +2589,92 @@ def _display_output(output_root: Path, repository_root: Path) -> str:
     return "<explicit-external-output>"
 
 
+def generate_bundle(
+    repository_root: Path,
+    artifact_root: Path | None = None,
+    output: Path | None = None,
+    *,
+    report: ValidationReport | None = None,
+    started: float | None = None,
+) -> tuple[ValidationReport, dict[str, Any], dict[str, Any]]:
+    """Validate once (or take the caller's report, ECP-ENG-011), build the snapshot and the
+    bundle, and write the output transactionally; return the report, the snapshot and the
+    generation summary. `main` prints from them; provenance takes the manifest digest."""
+
+    started = time.perf_counter() if started is None else started
+    repository_root = resolve_repository_root(repository_root)
+    artifact_root = resolve_artifact_root(repository_root, artifact_root)
+    output_root = resolve_output_root(repository_root, artifact_root, output)
+    if report is None:
+        report = validate_repository(repository_root, artifact_root)
+    snapshot = build_snapshot(repository_root, artifact_root, report)
+    bootstrap, manifest, resource_files, bundle_observations = build_dashboard_bundle(snapshot)
+    manifest_text = serialize_json(manifest)
+    dashboard_text = render_dashboard(bootstrap)
+    dashboard_bytes = len(dashboard_text.encode("utf-8"))
+    if dashboard_bytes > MAX_INDEX_BYTES:
+        raise GenerationError(
+            f"dashboard index exceeds {MAX_INDEX_BYTES} UTF-8 bytes"
+        )
+    content_records = [
+        artifact["content"]
+        for artifact in snapshot["artifacts"]
+        if isinstance(artifact.get("content"), dict)
+    ] + list(snapshot.get("evidence_documents", []))
+    outcome = "generated-valid" if report.valid else "generated-invalid"
+    summary = {
+        "schema": GENERATION_SCHEMA,
+        "outcome": outcome,
+        "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+        "repository_revision": snapshot["repository"]["revision"],
+        "artifact_count": len(snapshot["artifacts"]),
+        "relation_count": len(snapshot["relations"]),
+        "validator_error_count": len(report.errors),
+        "warning_count": sum(1 for item in snapshot["findings"] if item["severity"] == "warning"),
+        "content_document_count": sum(1 for item in content_records if item.get("state") == "included"),
+        "content_omitted_count": sum(1 for item in content_records if item.get("state") == "omitted"),
+        "content_projected_bytes": sum(
+            int(item.get("bytes") or 0)
+            for item in content_records
+            if item.get("state") == "included"
+        ),
+        "output": _display_output(output_root, repository_root),
+        "bundle_schema": BUNDLE_SCHEMA,
+        "manifest_sha256": _sha256(manifest_text),
+        "dashboard_sha256": _sha256(dashboard_text),
+        "dashboard_bytes": dashboard_bytes,
+        "manifest_bytes": len(manifest_text.encode("utf-8")),
+        "resource_count": bundle_observations["resource_count"],
+        "resource_bytes": bundle_observations["resource_bytes"],
+        "resource_role_counts": bundle_observations["role_counts"],
+        "resource_role_bytes": bundle_observations["role_bytes"],
+        "largest_resource": bundle_observations["largest_resource"],
+        "topology_acceptance_bytes": TOPOLOGY_ACCEPTANCE_BYTES,
+        "topology_target_exceeded": bundle_observations["topology_target_exceeded"],
+        "elapsed_ms": int((time.perf_counter() - started) * 1000),
+    }
+    summary["output_bytes_excluding_summary"] = (
+        dashboard_bytes
+        + len(manifest_text.encode("utf-8"))
+        + int(bundle_observations["resource_bytes"])
+    )
+    write_output_transactionally(
+        output_root,
+        {
+            "dashboard-manifest.json": manifest_text,
+            "generation-summary.json": serialize_json(summary),
+            "index.html": dashboard_text,
+            **resource_files,
+        },
+    )
+    return report, snapshot, summary
+
+
 def main(argv: Iterable[str] | None = None) -> int:
     started = time.perf_counter()
     args = build_parser().parse_args(list(argv) if argv is not None else None)
     try:
-        repository_root = resolve_repository_root(args.root)
-        artifact_root = resolve_artifact_root(repository_root, None)
-        output_root = resolve_output_root(repository_root, artifact_root, args.output)
-        report = validate_repository(repository_root, artifact_root)
-        snapshot = build_snapshot(repository_root, artifact_root, report)
-        bootstrap, manifest, resource_files, bundle_observations = build_dashboard_bundle(snapshot)
-        manifest_text = serialize_json(manifest)
-        dashboard_text = render_dashboard(bootstrap)
-        dashboard_bytes = len(dashboard_text.encode("utf-8"))
-        if dashboard_bytes > MAX_INDEX_BYTES:
-            raise GenerationError(
-                f"dashboard index exceeds {MAX_INDEX_BYTES} UTF-8 bytes"
-            )
-        content_records = [
-            artifact["content"]
-            for artifact in snapshot["artifacts"]
-            if isinstance(artifact.get("content"), dict)
-        ] + list(snapshot.get("evidence_documents", []))
-        outcome = "generated-valid" if report.valid else "generated-invalid"
-        summary = {
-            "schema": GENERATION_SCHEMA,
-            "outcome": outcome,
-            "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
-            "repository_revision": snapshot["repository"]["revision"],
-            "artifact_count": len(snapshot["artifacts"]),
-            "relation_count": len(snapshot["relations"]),
-            "validator_error_count": len(report.errors),
-            "warning_count": sum(1 for item in snapshot["findings"] if item["severity"] == "warning"),
-            "content_document_count": sum(1 for item in content_records if item.get("state") == "included"),
-            "content_omitted_count": sum(1 for item in content_records if item.get("state") == "omitted"),
-            "content_projected_bytes": sum(
-                int(item.get("bytes") or 0)
-                for item in content_records
-                if item.get("state") == "included"
-            ),
-            "output": _display_output(output_root, repository_root),
-            "bundle_schema": BUNDLE_SCHEMA,
-            "manifest_sha256": _sha256(manifest_text),
-            "dashboard_sha256": _sha256(dashboard_text),
-            "dashboard_bytes": dashboard_bytes,
-            "manifest_bytes": len(manifest_text.encode("utf-8")),
-            "resource_count": bundle_observations["resource_count"],
-            "resource_bytes": bundle_observations["resource_bytes"],
-            "resource_role_counts": bundle_observations["role_counts"],
-            "resource_role_bytes": bundle_observations["role_bytes"],
-            "largest_resource": bundle_observations["largest_resource"],
-            "topology_acceptance_bytes": TOPOLOGY_ACCEPTANCE_BYTES,
-            "topology_target_exceeded": bundle_observations["topology_target_exceeded"],
-            "elapsed_ms": int((time.perf_counter() - started) * 1000),
-        }
-        summary["output_bytes_excluding_summary"] = (
-            dashboard_bytes
-            + len(manifest_text.encode("utf-8"))
-            + int(bundle_observations["resource_bytes"])
-        )
-        write_output_transactionally(
-            output_root,
-            {
-                "dashboard-manifest.json": manifest_text,
-                "generation-summary.json": serialize_json(summary),
-                "index.html": dashboard_text,
-                **resource_files,
-            },
-        )
+        report, snapshot, summary = generate_bundle(args.root, None, args.output, started=started)
         label = "PASS" if report.valid else "INVALID"
         print(
             "Harness Explorer generation: "

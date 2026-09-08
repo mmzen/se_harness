@@ -39,7 +39,7 @@ from se_harness.release_qualification import (
     write_qualification_result,
 )
 from se_harness.runtime_identity import inspect_runtime_identity, render_runtime_identity
-from se_harness.workflow_compliance import check_workflow, evidence_packet_path, retain_handoff_result, write_evidence_packet
+from se_harness.workflow_compliance import check_workflow, evidence_packet_path, write_evidence_packet
 from se_harness.workflow_contract import ContractError
 from se_harness.workflow_procedures import ProcedureError
 from se_harness.workflow_result import (
@@ -273,17 +273,13 @@ def _doctor(args: argparse.Namespace) -> int:
     if not args.json:
         for check in checks:
             print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
-    report = validate_engineering_artifacts.validate_repository(target).to_dict(target)
+    # ECP-ENG-012: the layout pass alone yields W013; the graph passes do not run.
     warnings: list[dict[str, str]] = []
-    for warning in report.get("warnings", []):
-        if isinstance(warning, dict) and warning.get("code") == W013:
-            warnings.append({
-                "code": str(warning["code"]),
-                "path": str(warning.get("path", "<unknown>")),
-                "message": str(warning.get("message", "")),
-            })
+    for item in validate_engineering_artifacts.canonical_layout_diagnostics(target):
+        if item.code == W013:
+            warnings.append({"code": item.code, "path": item.path, "message": item.message})
             if not args.json:
-                print(f"WARN {warning['code']}: {warning.get('path', '<unknown>')}: {warning.get('message', '')}")
+                print(f"WARN {item.code}: {item.path}: {item.message}")
     passed = all(item.passed for item in checks)
     if args.json:
         _print_json(_command_result(
@@ -384,29 +380,14 @@ def _check(args: argparse.Namespace) -> int:
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
             target=args.target_state,
             from_git=args.from_git,
+            # ECP-PRB-002 (amended), ECP-ENG-010: the completed Git-derived handoff result is
+            # retained by the run that produced it, from the one validation it holds.
+            retain_handoff=args.from_git is not None and args.checkpoint == "handoff",
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         # ECP-COR-001: one splitter, so no line carries a code twice.
         code, message = _split_code(exc, WEX210)
         result = failed_result("check", args.artifact, message, code=code)
-    if (
-        args.from_git is not None
-        and args.checkpoint == "handoff"
-        and result["operation"]["outcome"] == "completed"
-    ):
-        # ECP-PRB-002 (amended): a completed Git-derived handoff result is retained
-        # beside the packet by the harness, never authored by the agent.
-        from se_harness.workflow import _catalog, _validation
-
-        root = Path(args.target)
-        _, report = _validation(root)
-        primary = _catalog(report)[args.artifact]
-        retained = retain_handoff_result(root.resolve(), primary, result)
-        # ECP-SBH-005: the retained entry joins the rebind entry rather than replacing it.
-        result["mutation"]["writes"] = [
-            *result["mutation"]["writes"],
-            {"id": args.artifact, "path": retained, "fields": ["result_sha256"]},
-        ]
     print(render_workflow_json_v2(result) if args.json else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
 
@@ -470,6 +451,8 @@ def _select_work_order(args: argparse.Namespace) -> int:
 
 def _capture_verification(args: argparse.Namespace) -> int:
     try:
+        # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
+        report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
         output = capture_verification(
             Path(args.target),
             record_id=args.record_id,
@@ -479,8 +462,9 @@ def _capture_verification(args: argparse.Namespace) -> int:
             owner=args.owner,
             output=args.output,
             domain=args.domain,
+            report=report,
         )
-        result = preparation_result(Path(args.target), args.record_id, "capture-verification", output)
+        result = preparation_result(Path(args.target), args.record_id, "capture-verification", output, report)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
@@ -495,6 +479,8 @@ def _capture_verification(args: argparse.Namespace) -> int:
 
 def _prepare_release(args: argparse.Namespace) -> int:
     try:
+        # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
+        report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
         output = prepare_release(
             Path(args.target),
             record_id=args.record_id,
@@ -506,8 +492,9 @@ def _prepare_release(args: argparse.Namespace) -> int:
             tag=args.tag,
             output=args.output,
             domain=args.domain,
+            report=report,
         )
-        result = preparation_result(Path(args.target), args.record_id, "prepare-release", output)
+        result = preparation_result(Path(args.target), args.record_id, "prepare-release", output, report)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.

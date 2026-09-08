@@ -319,7 +319,7 @@ def project_selected(
     step = projected["restitution"]["next"]
     result = dict(projected)
     result["context"] = {
-        "reading_manifest": list(_reading_manifest(root, catalog, primary)),
+        "reading_manifest": list(_reading_manifest(root, catalog, primary, report)),
         "governing": list(projected["scope"]["governing"]),
         "declared_paths": list(declared),
         "state": {"status": primary.status, "family": _family(primary.artifact_type)},
@@ -338,7 +338,7 @@ def _next_phase(status: str) -> str:
     return "start" if status in {"approved", "in_progress"} else "review"
 
 
-def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any) -> tuple[str, ...]:
+def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any, report: Any | None = None) -> tuple[str, ...]:
     """The preflight reading manifest for the phase the selected state implies (ECP-NXT-005).
 
     A work order reads its own preflight. A verification or release record has
@@ -357,7 +357,7 @@ def _reading_manifest(root: Path, catalog: Mapping[str, Any], primary: Any) -> t
             return ()
         work_order_id, phase = targets[0], "review"
     try:
-        return tuple(run_preflight(root, work_order_id=work_order_id, phase=phase).reading_manifest)
+        return tuple(run_preflight(root, work_order_id=work_order_id, phase=phase, report=report).reading_manifest)
     except HarnessError:
         return ()
 
@@ -996,10 +996,19 @@ def apply_transition(plan: TransitionPlan) -> None:
             path.unlink(missing_ok=True)
 
 
-def preparation_result(repository: Path, artifact_id: str, kind: str, path: Path) -> dict[str, Any]:
+def preparation_result(repository: Path, artifact_id: str, kind: str, path: Path, report: Any | None = None) -> dict[str, Any]:
     root = ensure_target(repository, must_exist=True)
-    _, report = _validation(root)
-    catalog = _catalog(report)
+    if report is None:
+        _, report = _validation(root)
+        catalog = _catalog(report)
+    else:
+        # ECP-ENG-010: the graph was validated before the write; the one new record is parsed
+        # alone and joins that catalog, so the command validates once.
+        catalog = _catalog(report)
+        prepared, error = _validator_module.parse_formal_artifact(path, root)
+        if prepared is None:
+            raise HarnessError(f"prepared artifact is not readable: {error.message if error else artifact_id}")
+        catalog[prepared.artifact_id] = prepared
     artifact = catalog.get(artifact_id)
     if artifact is None:
         raise HarnessError(f"prepared artifact is not discoverable: {artifact_id}")

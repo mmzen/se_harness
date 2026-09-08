@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import contextlib
-import io
 import json
 import re
 import shutil
@@ -14,7 +12,7 @@ from typing import Any
 
 
 from se_harness.integrity import atomic_create_bytes, raw_sha256
-from se_harness import front_matter, mutation_guard
+from se_harness import mutation_guard
 from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.hash_bound import HashBoundError, declared_digest
@@ -107,25 +105,19 @@ def require_clean_worktree(repository_root: Path) -> None:
         raise ProvenanceRefusal("revision provenance requires a clean Git worktree")
 
 
-def _decision_metadata(root: Path, item: dict[str, Any]) -> dict[str, Any]:
-    """The TOML front matter of one decision named in the validator catalog, or {}."""
+def standing_deviations_for_work(root: Path, catalog: dict[str, Any], work_ids: list[str]) -> list[tuple[str, str]]:
+    """(decision id, departed rule) for every accepted deviation standing on the selected work (SPEC-DCM-001 rule 9).
 
-    path_value = item.get("path")
-    if not isinstance(path_value, str):
-        return {}
-    # ECP-PRM-005: the one parser.
-    return front_matter.read_or_none(root / path_value) or {}
+    Read from the validated artifacts' metadata (ECP-ENG-011): nothing is parsed again.
+    """
 
-
-def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]], work_ids: list[str]) -> list[tuple[str, str]]:
-    """(decision id, departed rule) for every accepted deviation standing on the selected work (SPEC-DCM-001 rule 9)."""
-
+    del root
     closed: set[str] = set()
     accepted: list[tuple[str, str, set[str]]] = []
     for item in catalog.values():
-        if item.get("type") != "decision" or item.get("status") != "decided":
+        if item.artifact_type != "decision" or item.status != "decided":
             continue
-        metadata = _decision_metadata(root, item)
+        metadata = item.metadata
         if metadata.get("kind") != "deviation":
             continue
         disposition = metadata.get("disposition") if isinstance(metadata.get("disposition"), dict) else {}
@@ -136,7 +128,7 @@ def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]],
         if option in {"amend", "supersede"}:
             closed.add(against)
         elif option == "accept" and against:
-            accepted.append((str(item.get("id")), against, concerned))
+            accepted.append((item.artifact_id, against, concerned))
     return sorted(
         (decision_id, against)
         for decision_id, against, concerned in accepted
@@ -144,36 +136,37 @@ def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]],
     )
 
 
-def _validation_catalog(repository_root: Path) -> dict[str, dict[str, Any]]:
-    # ECP-ENG-003: the validator runs in-process; its report is the one the JSON contract renders.
-    validation = validate_engineering_artifacts.validate_repository(repository_root)
-    report = validation.to_dict(repository_root)
+def _validation_catalog(repository_root: Path, report: Any | None = None) -> dict[str, Any]:
+    """The validated artifacts by id (ECP-ENG-010, ECP-ENG-011): the caller's report, or one validation."""
+
+    validation = report if report is not None else validate_engineering_artifacts.validate_repository(repository_root)
     if not validation.valid:
-        errors = report.get("errors", [])
-        first = errors[0].get("message") if errors and isinstance(errors[0], dict) else "artifact graph is invalid"
+        first = validation.errors[0].message if validation.errors else "artifact graph is invalid"
         raise StateRefusal(f"artifact graph must be valid before recording provenance: {first}")
-    return {
-        item["id"]: item
-        for item in report.get("artifacts", [])
-        if isinstance(item, dict) and isinstance(item.get("id"), str)
-    }
+    return {artifact.artifact_id: artifact for artifact in validation.artifacts}
 
 
-def _require_artifact(catalog: dict[str, dict[str, Any]], artifact_id: str, artifact_type: str) -> dict[str, Any]:
+def _require_artifact(catalog: dict[str, Any], artifact_id: str, artifact_type: str) -> Any:
     artifact = catalog.get(artifact_id)
     if artifact is None:
         raise InputRefusal(f"unknown artifact ID: {artifact_id}")
-    if artifact.get("type") != artifact_type:
+    if artifact.artifact_type != artifact_type:
         raise InputRefusal(f"artifact {artifact_id} must have type {artifact_type}")
     return artifact
 
 
-def _load_metadata(repository_root: Path, artifact: dict[str, Any]) -> dict[str, Any]:
-    path = safe_destination(repository_root, Path(artifact["path"]))
+def _load_metadata(repository_root: Path, artifact: Any) -> dict[str, Any]:
+    """The artifact's front matter as the validator parsed it (ECP-ENG-011): no second read."""
+
+    del repository_root
+    return dict(artifact.metadata)
+
+
+def _relative_path(repository_root: Path, artifact: Any) -> str:
     try:
-        return front_matter.read(path)
-    except front_matter.FrontMatterError as exc:
-        raise InputRefusal(f"cannot read formal metadata for {artifact['id']}: {exc}") from exc
+        return artifact.path.resolve().relative_to(repository_root.resolve()).as_posix()
+    except ValueError:
+        return artifact.path.as_posix()
 
 
 def _relation_targets(metadata: dict[str, Any], name: str) -> set[str]:
@@ -250,7 +243,8 @@ def _output_path(repository_root: Path, supplied: str | None, default: Path) -> 
 
 
 def _record_domain(
-    catalog: dict[str, dict[str, Any]],
+    repository_root: Path,
+    catalog: dict[str, Any],
     work_order_ids: list[str],
     explicit_domain: str | None,
 ) -> str | None:
@@ -262,10 +256,9 @@ def _record_domain(
     paths: list[str] = []
     for work_order_id in work_order_ids:
         artifact = catalog.get(work_order_id)
-        path = artifact.get("path") if isinstance(artifact, dict) else None
-        if not isinstance(path, str):
+        if artifact is None:
             return None
-        paths.append(path)
+        paths.append(_relative_path(repository_root, artifact))
     return common_artifact_domain(paths)
 
 
@@ -338,11 +331,14 @@ def _timestamp() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _generate_snapshot(repository_root: Path) -> str:
-    # ECP-ENG-003: the generator runs in-process; its report lines are not ours to print.
-    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-        code = generate_harness_dashboard.main(["--root", str(repository_root)])
-    if code != 0:
+def _generate_snapshot(repository_root: Path, report: Any) -> str:
+    # ECP-ENG-003, ECP-ENG-015: the generator runs in-process from the validation this
+    # command already holds; a generation fault or an invalid graph refuses.
+    try:
+        generate_harness_dashboard.generate_bundle(repository_root, report=report)
+    except (generate_harness_dashboard.GenerationError, OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise EvidenceRefusal(f"dashboard generation must pass before recording verification: {exc}") from exc
+    if not report.valid:
         raise EvidenceRefusal("dashboard generation must pass before recording verification")
     manifest = repository_root / "target" / "harness-dashboard" / "dashboard-manifest.json"
     if not manifest.is_file():
@@ -362,6 +358,7 @@ def capture_verification(
     owner: str,
     output: str | None,
     domain: str | None = None,
+    report: Any | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "VREC-")
@@ -378,14 +375,17 @@ def capture_verification(
     )
     from se_harness.workflow_compliance import ensure_governed_checkpoint
 
-    ensure_governed_checkpoint(root, selected_work)
-    catalog = _validation_catalog(root)
+    # ECP-ENG-010: one validation serves the governed checkpoint, the catalog and the snapshot;
+    # the CLI hands in the one it took for the prepared result.
+    report = report if report is not None else validate_engineering_artifacts.validate_repository(root)
+    ensure_governed_checkpoint(root, selected_work, report=report)
+    catalog = _validation_catalog(root, report)
     if record_id in catalog:
         raise InputRefusal(f"artifact ID already exists: {record_id}")
     declared_verification: set[str] = set()
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.get("status") != "implemented":
+        if work_order.status != "implemented":
             raise StateRefusal(f"work order {work_order_id} must be implemented")
         work_order_metadata = _load_metadata(root, work_order)
         declared_verification.update(_relation_targets(work_order_metadata, "verification"))
@@ -394,7 +394,7 @@ def capture_verification(
             try:
                 gate = authorize_delegated_right(
                     root, work_order_metadata=work_order_metadata,
-                    work_order_path=root / str(work_order["path"]), right="DR-VREC-PREPARE",
+                    work_order_path=work_order.path, right="DR-VREC-PREPARE",
                 )
             except DelegationError as exc:
                 raise StateRefusal(f"{exc.code}: {exc.message}") from exc
@@ -404,7 +404,7 @@ def capture_verification(
             delegated_sentence = ""
     for verification_id in selected_verification:
         verification = _require_artifact(catalog, verification_id, "verification")
-        if not _grants_authority("definition", verification.get("status")):
+        if not _grants_authority("definition", verification.status):
             raise StateRefusal(f"verification contract {verification_id} must be active")
     supplied_verification = set(selected_verification)
     missing_verification = declared_verification - supplied_verification
@@ -425,7 +425,7 @@ def capture_verification(
         ]
         if uncovered:
             raise InputRefusal(f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}")
-    selected_domain = _record_domain(catalog, selected_work, domain)
+    selected_domain = _record_domain(root, catalog, selected_work, domain)
     destination = _output_path(
         root,
         output,
@@ -439,7 +439,7 @@ def capture_verification(
     evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
-    snapshot_hash = _generate_snapshot(root)
+    snapshot_hash = _generate_snapshot(root, report)
     require_clean_worktree(root)
     now = _timestamp()
     title_scope = selected_work[0] if len(selected_work) == 1 else f"{len(selected_work)} work orders"
@@ -504,6 +504,7 @@ def prepare_release(
     tag: str | None,
     output: str | None,
     domain: str | None = None,
+    report: Any | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "RLS-")
@@ -521,20 +522,23 @@ def prepare_release(
     )
     from se_harness.workflow_compliance import ensure_governed_checkpoint
 
-    ensure_governed_checkpoint(root, [*selected_verification_records, *selected_work])
-    catalog = _validation_catalog(root)
+    # ECP-ENG-010: one validation serves the governed checkpoint and the catalog; the CLI hands
+    # in the one it took for the prepared result.
+    report = report if report is not None else validate_engineering_artifacts.validate_repository(root)
+    ensure_governed_checkpoint(root, [*selected_verification_records, *selected_work], report=report)
+    catalog = _validation_catalog(root, report)
     if record_id in catalog:
         raise InputRefusal(f"artifact ID already exists: {record_id}")
     contract = _require_artifact(catalog, release_contract_id, "release_contract")
-    if not _grants_authority("definition", contract.get("status")):
+    if not _grants_authority("definition", contract.status):
         raise StateRefusal("release contract must be active")
     contract_metadata = _load_metadata(root, contract)
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.get("status") not in IMPLEMENTED_OR_LATER_STATUSES:
+        if work_order.status not in IMPLEMENTED_OR_LATER_STATUSES:
             raise StateRefusal(f"work order {work_order_id} must be implemented, verified, or released")
     for artifact in catalog.values():
-        if artifact.get("type") != "release_record":
+        if artifact.artifact_type != "release_record":
             continue
         existing_metadata = _load_metadata(root, artifact)
         if not _reserves_version(existing_metadata.get("status")):
@@ -548,7 +552,7 @@ def prepare_release(
     identities: set[tuple[str, str]] = set()
     for verification_record_id in selected_verification_records:
         verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-        if not _grants_authority("verification_record", verification_record.get("status")):
+        if not _grants_authority("verification_record", verification_record.status):
             raise StateRefusal(
                 f"verification record {verification_record_id} must be verified or released authority"
             )
@@ -568,7 +572,7 @@ def prepare_release(
     if len(identities) != 1:
         raise InputRefusal("included verification records do not identify one candidate commit and object format")
     commit, object_format = next(iter(identities))
-    selected_domain = _record_domain(catalog, selected_work, domain)
+    selected_domain = _record_domain(root, catalog, selected_work, domain)
     destination = _output_path(
         root,
         output,

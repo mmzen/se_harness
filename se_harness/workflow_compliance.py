@@ -13,7 +13,7 @@ from typing import Any, Iterable, Mapping
 from se_harness import front_matter
 from se_harness._process import ProcessError, run_git, text as _text
 from se_harness.installer import HarnessError, ensure_target, safe_destination
-from se_harness.preflight import orphaned_ready_records, run_preflight
+from se_harness.preflight import lifecycle_relevant, lock_files, orphaned_ready_records, run_preflight
 from se_harness.integrity import atomic_write_bytes, canonical_text, pretty_json_bytes, unique_object_hook
 from se_harness.workflow_contract import (
     CHECKPOINTS,
@@ -91,6 +91,8 @@ class CheckpointContext:
     checkpoint: Checkpoint  # ECP-PRM-013
     formal_snapshot_sha256: str
     target: str | None = None
+    #: ECP-ENG-010: the validation this checkpoint was built from, so no predicate validates again.
+    report: Any = None
 
 
 _pairs = unique_object_hook(lambda key: CodedError(WEX200, f"duplicate JSON key in change manifest: {key}"))
@@ -336,30 +338,16 @@ def lifecycle_relevant_diagnostics(root: Path, report: Any) -> list[Any]:
     other diagnostic blocks a lifecycle stage.
     """
 
-    lock_files: set[str] = set()
-    try:
-        lock = json.loads((root / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        if isinstance(lock, dict) and isinstance(lock.get("files"), dict):
-            lock_files = {str(path) for path in lock["files"]}
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        pass
-
-    def relevant(item: Any) -> bool:
-        path = str(item.path)
-        if item.code == I001 and path.startswith("distribution:"):
-            return False
-        candidate = path.removeprefix("lock-entry:")
-        if item.code == I001 and item.message in {"missing", "required"} and candidate not in lock_files:
-            return False
-        return True
-
-    return [item for item in report.diagnostics if relevant(item)]
+    # ECP-ENG-014: the classifier lives with preflight, which reports skew apart already;
+    # applying it here keeps a report built elsewhere on the same footing.
+    locked = lock_files(root)
+    return [item for item in report.diagnostics if lifecycle_relevant(item, locked)]
 
 
 def _preflight_status(context: CheckpointContext, phase: str) -> tuple[str, str]:
     if context.artifact.artifact_type != "work_order":
         return "pass", f"{phase} preflight does not apply to {context.artifact.artifact_type}."
-    report = run_preflight(context.root, work_order_id=context.artifact.artifact_id, phase=phase)
+    report = run_preflight(context.root, work_order_id=context.artifact.artifact_id, phase=phase, report=context.report)
     relevant = lifecycle_relevant_diagnostics(context.root, report)
     if relevant:
         return "fail", relevant[0].message
@@ -839,6 +827,7 @@ def build_context(
         root=root,
         artifact=primary,
         catalog=catalog,
+        report=report,
         scoped_errors=scoped,
         repository_errors=repository_errors,
         unrelated_count=unrelated,
@@ -921,6 +910,7 @@ def check_workflow(
     pull_request_body: Path | None = None,
     target: str | None = None,
     from_git: str | None = None,
+    retain_handoff: bool = False,
 ) -> dict[str, Any]:
     if from_git is not None and (list(changed_paths) or changes_complete or change_manifest is not None):
         raise CodedError(WEX_ECP_002, "--from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
@@ -1102,7 +1092,7 @@ def check_workflow(
             # A misconfigured gate source never turns a completed projection into a blocked
             # one; the delegated route itself refuses with the coded reason when attempted.
             pass
-    return build_result(
+    result = build_result(
         operation="check",
         outcome=outcome,
         primary=artifact_id,
@@ -1136,6 +1126,17 @@ def check_workflow(
             else []
         ),
     )
+    if retain_handoff and self_binding and result["operation"]["outcome"] == "completed":
+        # ECP-PRB-002 (amended): a completed Git-derived handoff result is retained beside
+        # the packet by the harness, never authored by the agent; ECP-ENG-010: from this
+        # run's own catalog, not a second validation. ECP-SBH-005: the retained entry
+        # joins the rebind entry rather than replacing it.
+        retained = retain_handoff_result(root.resolve(), primary, result)
+        result["mutation"]["writes"] = [
+            *result["mutation"]["writes"],
+            {"id": artifact_id, "path": retained, "fields": ["result_sha256"]},
+        ]
+    return result
 
 
 def _rule_prose(rule: Mapping[str, Any], context: Mapping[str, str]) -> tuple[list[str], list[str]]:
