@@ -155,10 +155,11 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         self.add_selected_work_order(target)
         payload = run_preflight(target, work_order_id="WO-EX-001", phase="start").to_dict()
         baseline_keys = list(BASELINE["preflight"]["payload_keys"])
-        self.assertEqual(
-            [key for key in baseline_keys if key != "repository_commands"],
-            list(payload),
-        )
+        expected = [key for key in baseline_keys if key != "repository_commands"]
+        # WO-ECP-035 (SPEC-ECP-024 ECP-ENG-014): the payload reports candidate-versus-released
+        # skew apart from the blocking diagnostics, one additive member after them.
+        expected.insert(expected.index("diagnostics") + 1, "skew")
+        self.assertEqual(expected, list(payload))
         self.assertEqual("se-harness-preflight-v2", payload["schema"])
         self.assertNotEqual(BASELINE["preflight"]["schema"], payload["schema"])
         self.assertNotIn("repository_commands", json.dumps(payload))

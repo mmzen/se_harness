@@ -120,6 +120,9 @@ class PreflightReport:
     assurance: dict[str, str]
     diagnostics: tuple[PreflightDiagnostic, ...]
     reading_manifest: tuple[str, ...]
+    #: ECP-ENG-014: candidate-versus-released skew, reported but never blocking; the one
+    #: classifier serves this report and `check --checkpoint start`.
+    skew: tuple[PreflightDiagnostic, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -129,9 +132,39 @@ class PreflightReport:
             "work_order": self.work_order,
             "assurance": self.assurance,
             "diagnostics": [asdict(item) for item in self.diagnostics],
+            "skew": [asdict(item) for item in self.skew],
             "reading_manifest": list(self.reading_manifest),
             "authority_boundary": AUTHORITY_BOUNDARY,
         }
+
+
+def lock_files(root: Path) -> frozenset[str]:
+    """The paths the standard lock names, or none when it cannot be read."""
+
+    try:
+        lock = json.loads((root / ".engineering-harness.lock").read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return frozenset()
+    if isinstance(lock, dict) and isinstance(lock.get("files"), dict):
+        return frozenset(str(path) for path in lock["files"])
+    return frozenset()
+
+
+def lifecycle_relevant(item: Any, locked: frozenset[str]) -> bool:
+    """The one skew classifier (ECP-ENG-014, formerly ECP-KRN-007's filter in the check).
+
+    Candidate-distribution comparisons and lock entries the released root never
+    recorded are candidate-versus-released skew, not installation facts; every
+    other diagnostic blocks a lifecycle stage.
+    """
+
+    path = str(item.path)
+    if item.code == I001 and path.startswith("distribution:"):
+        return False
+    candidate = path.removeprefix("lock-entry:")
+    if item.code == I001 and item.message in {"missing", "required"} and candidate not in locked:
+        return False
+    return True
 
 
 def _relative(path: Path, root: Path) -> str:
@@ -311,8 +344,14 @@ def _unique_paths(items: Iterable[str]) -> tuple[str, ...]:
     return tuple(result)
 
 
-def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -> PreflightReport:
-    """Evaluate implementation or review readiness without mutating the repository."""
+def run_preflight(
+    target: Path, *, work_order_id: str, phase: Phase = "start", report: Any | None = None
+) -> PreflightReport:
+    """Evaluate implementation or review readiness without mutating the repository.
+
+    `report` is the validation the caller already holds (ECP-ENG-010, ECP-ENG-011);
+    without it the repository is validated once here.
+    """
 
     root = ensure_target(target, must_exist=True)
     if phase not in {"start", "review"}:
@@ -326,7 +365,7 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
     validator: ModuleType | None = None
     try:
         validator = validate_engineering_artifacts  # ECP-ENG-003: the engine is imported, not loaded by path
-        validation = validator.validate_repository(root)
+        validation = report if report is not None else validator.validate_repository(root)
         artifacts = list(validation.artifacts)
         diagnostics.extend(
             PreflightDiagnostic(f"A-{item.code}", item.path, item.message)
@@ -596,13 +635,17 @@ def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -
         list(READING_PATHS) + [_relative(item.path, root) for item in artifact_order]
     )
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
+    locked = lock_files(root)
+    relevant = tuple(item for item in ordered_diagnostics if lifecycle_relevant(item, locked))
+    skew = tuple(item for item in ordered_diagnostics if not lifecycle_relevant(item, locked))
     return PreflightReport(
-        ready=not ordered_diagnostics,
+        ready=not relevant,
         phase=phase,
         work_order=work_order_summary,
         assurance=assurance_summary,
-        diagnostics=ordered_diagnostics,
+        diagnostics=relevant,
         reading_manifest=manifest,
+        skew=skew,
     )
 
 
@@ -623,6 +666,12 @@ def render_preflight(report: PreflightReport) -> str:
         lines.extend(
             f"- [{item.code}] {item.path}: {item.message}"
             for item in report.diagnostics
+        )
+    if report.skew:
+        lines.extend(["", "Candidate-versus-released skew (not blocking):"])
+        lines.extend(
+            f"- [{item.code}] {item.path}: {item.message}"
+            for item in report.skew
         )
     if report.reading_manifest:
         lines.extend(["", "Reading manifest:"])

@@ -309,16 +309,17 @@ def _tracked_clean(root: Path) -> bool:
     return not status
 
 
-def _validator_report(root: Path) -> dict[str, Any]:
-    # ECP-ENG-003: the installed validator is imported and run in-process on the selected root.
-    validation = validate_engineering_artifacts.validate_repository(root)
+def _validator_report(root: Path, report: Any | None = None) -> dict[str, Any]:
+    # ECP-ENG-003, ECP-ENG-011: the installed validator is imported and run in-process on the
+    # selected root, once; a caller holding the report hands it in.
+    validation = report if report is not None else validate_engineering_artifacts.validate_repository(root)
     value = validation.to_dict(root)
     value["_returncode"] = 0 if validation.valid else 1
     return value
 
 
-def _validation_check(root: Path, check_id: str) -> QualificationCheck:
-    report = _validator_report(root)
+def _validation_check(root: Path, check_id: str, report: Any | None = None) -> QualificationCheck:
+    report = _validator_report(root, report)
     passed = report.get("valid") is True and report.get("_returncode") == 0
     errors = report.get("errors")
     warnings = report.get("warnings")
