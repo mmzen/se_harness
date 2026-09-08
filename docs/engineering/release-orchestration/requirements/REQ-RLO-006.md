@@ -7,7 +7,8 @@ owners = ["release-owner", "service-owner", "security-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN the final GitHub Release is available, THE SYSTEM SHALL generate and deploy the SE Harness demonstration from the immutable main-history governance snapshot while the Pages deployment remains in a main-authorized workflow context."
-verification_method = "automated-provenance-pages-policy-and-replay-test"
+verification_method = ["test", "analysis"]
+verification_notes = "automated-provenance-pages-policy-and-replay-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

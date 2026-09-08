@@ -7,7 +7,8 @@ owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN an evaluator upgrade would write a schema-3 lock, THE SYSTEM SHALL refuse the transaction before any write if the repository holds a released release record that carries neither evaluator-evidence field and is neither declared by an authority-granting upgrade work order nor a member of the self-hosting compatibility set, and SHALL name every such record and the work order that must declare it."
-verification_method = "automated-installer-refusal-test"
+verification_method = ["test"]
+verification_notes = "automated-installer-refusal-test"
 
 [relations]
 derives_from = ["CAP-LRE-001"]

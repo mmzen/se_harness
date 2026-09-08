@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN verification coverage is evaluated for release preparation or validation, THE SYSTEM SHALL exclude superseded verification records and SHALL prevent supersession of a record referenced by an active release record."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-VSP-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a reader enters the public or explanatory SE Harness documentation, THE SYSTEM SHALL state the expected reader expertise for every in-scope document and SHALL provide a coherent path from conceptual understanding through practical use."
-verification_method = "automated-inspection-and-manual-review"
+verification_method = ["inspection"]
+verification_notes = "automated-inspection-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner", "engineering-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "BEFORE release approval, THE SYSTEM SHALL execute every credential-free publication mechanic on both the Linux and the Windows runner type using the same shells, virtual-environment layouts, temporary paths, build commands, tests, bundle checks, and teardown behavior the publication orchestrator uses, and SHALL create no tag, release, package, deployment, or lifecycle record."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-RLO-003"]

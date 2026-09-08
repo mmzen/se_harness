@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN a reader selects a resolved artifact reference in the Relations tab, THE SYSTEM SHALL focus that exact artifact through the reversible Lineage navigation session."
-verification_method = "automated-browser-test"
+verification_method = ["test"]
+verification_notes = "automated-browser-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

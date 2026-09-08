@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a 7/10 reader needs to apply SE Harness, THE SYSTEM SHALL provide realistic end-to-end examples that connect formal artifacts, authorized operations, retained evidence, exact commits, validation observations, accountable verification, and release decisions."
-verification_method = "manual-walkthrough-and-command-inspection"
+verification_method = ["inspection"]
+verification_notes = "manual-walkthrough-and-command-inspection"
 
 [relations]
 derives_from = ["CAP-DST-001"]

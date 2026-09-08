@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "security-owner", "release-ow
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a role-specific release qualification operation completes, THE SYSTEM SHALL emit a deterministic result that identifies the operation, evaluator, target, checks, independence boundary, and outcome without overstating authority."
-verification_method = "automated-schema-and-replay-test"
+verification_method = ["test", "analysis"]
+verification_notes = "automated-schema-and-replay-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

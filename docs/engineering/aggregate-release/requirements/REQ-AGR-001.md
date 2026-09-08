@@ -7,7 +7,8 @@ owners = ["quality-owner", "requirements-steward"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN verification is captured for a release candidate containing multiple release-bearing work orders, THE SYSTEM SHALL create one ready verification record that explicitly enumerates every selected work order, applicable verification contract, and retained evidence path at one clean full commit."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

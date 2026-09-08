@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN an artifact detail is displayed, THE SYSTEM SHALL label its type, lifecycle state, and derived assurance signal separately without presenting definition coverage as assurance."
-verification_method = "automated-test-and-accessibility-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-accessibility-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

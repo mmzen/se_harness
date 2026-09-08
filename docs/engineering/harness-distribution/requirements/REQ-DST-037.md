@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner", "security-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN Harness Explorer presents repository provenance in its bounded navigation area, THE SYSTEM SHALL show a legible presentation-only abbreviation of a valid full Git revision while preserving the complete canonical value, its accessibility, and its exclusive use for identity and assurance decisions."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN Harness Explorer renders the Overview, THE SYSTEM SHALL summarize definition coverage without presenting an exhaustive requirement-by-requirement coverage listing, while preserving the underlying coverage evidence and artifact-level inspection paths."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

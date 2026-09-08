@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-13"
 updated = "2026-08-13"
 statement = "WHEN a reader explores harness state, THE SYSTEM SHALL preserve the current artifact, relation, finding, coverage, readiness, provenance, supersession, evidence, and experiment semantics while answering all five Harness Explorer questions."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

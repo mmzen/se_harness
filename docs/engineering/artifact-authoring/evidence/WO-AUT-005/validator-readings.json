@@ -1,0 +1,39 @@
+{
+  "doctor_after": {
+    "checks": 97,
+    "checks_failed": 0,
+    "outcome": "completed",
+    "warnings": {
+      "W013": 44
+    }
+  },
+  "evaluator": "se-harness 0.16.0, released, outside the checkout, -I",
+  "readings": {
+    "1-baseline-main-517dc5f6": {
+      "advisories": {},
+      "errors": {},
+      "warnings": {
+        "W013": 44,
+        "W014": 14,
+        "W015": 15
+      }
+    },
+    "2-after-the-architecture-rewrite": {
+      "advisories": {},
+      "errors": {},
+      "warnings": {
+        "W013": 44
+      }
+    },
+    "3-after-the-vocabulary-migration": {
+      "advisories": {},
+      "errors": {},
+      "warnings": {
+        "W013": 44
+      }
+    }
+  },
+  "rule": "AUT-MIG-010",
+  "schema": "se-harness-validator-readings-v1",
+  "work_order": "WO-AUT-005"
+}

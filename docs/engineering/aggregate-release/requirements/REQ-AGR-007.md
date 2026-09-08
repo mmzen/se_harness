@@ -7,7 +7,8 @@ owners = ["release-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN aggregate provenance is prepared, THE SYSTEM SHALL create only ready review artifacts and SHALL NOT infer release scope, approve verification, authorize release, mutate Git, create tags, build packages, or publish artifacts."
-verification_method = "automated-test-and-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-review"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

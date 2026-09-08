@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-08-16"
 statement = "WHEN SE Harness is installed or safely upgraded, the managed work-order template, policy, validation, preflight, inspection, documentation, and package SHALL expose consistent assurance-classification behavior without overwriting repository-specific decisions."
-verification_method = "managed parity, package, fresh-install, upgrade, CLI, documentation, and full regression tests"
+verification_method = ["test"]
+verification_notes = "managed parity, package, fresh-install, upgrade, CLI, documentation, and full regression tests"
 
 [relations]
 derives_from = ["CAP-WAC-001"]

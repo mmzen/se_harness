@@ -7,7 +7,8 @@ owners = ["repository-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN upgrade or doctor observes a non-newline difference in managed content, THE SYSTEM SHALL preserve the existing customization and require manual review rather than overwrite or relabel it as unchanged."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN release readiness or repository attention is inspected, THE SYSTEM SHALL report structurally overlapping or conflicting draft and ready governing chains with their affected identities and SHALL NOT select, reject, supersede, or promote any chain automatically."
-verification_method = "deterministic-inspection-test-and-human-review"
+verification_method = ["test", "inspection"]
+verification_notes = "deterministic-inspection-test-and-human-review"
 
 [relations]
 derives_from = ["CAP-REB-001"]

@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the artifact graph is validated, THE SYSTEM SHALL reject aggregate verification and release records with incomplete contract coverage, unequal verified and released work sets, incompatible lifecycle states, or commit disagreement."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-AGR-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-27"
 statement = "WHEN a repository selects a newer released evaluator, THE SYSTEM SHALL require a separately governed standard-root upgrade after immutable publication and SHALL NOT infer that upgrade authority from product implementation or release authorization."
-verification_method = "policy-validation-and-human-review"
+verification_method = ["inspection"]
+verification_notes = "policy-validation-and-human-review"
 
 [relations]
 derives_from = ["CAP-REB-001"]

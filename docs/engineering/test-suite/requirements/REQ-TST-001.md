@@ -7,7 +7,8 @@ owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
 updated = "2026-08-26"
 statement = "WHEN the suite is run through the repository-owned runner, THE SYSTEM SHALL distribute discovered test classes across the requested number of worker processes, longest known first, and SHALL return one aggregated report whose pass, fail, error and skip sets equal the serial run's on the same commit."
-verification_method = "automated-test-and-timed-comparison"
+verification_method = ["test"]
+verification_notes = "automated-test-and-timed-comparison"
 [relations]
 derives_from = ["CAP-TST-001"]
 

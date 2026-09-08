@@ -7,7 +7,8 @@ owners = ["quality-owner", "security-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the harness records integrity for managed UTF-8 text or a managed text fragment, THE SYSTEM SHALL compute SHA-256 over an explicitly versioned canonical newline representation."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-PMI-001"]

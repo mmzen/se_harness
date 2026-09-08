@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-09-01"
 updated = "2026-09-01"
 statement = "WHEN a dashboard bundle is generated, THE SYSTEM SHALL emit deterministic governance indicators and record proof fields derived only from recorded lifecycle events, declared relations, and record front matter, without inferring any approval, verification, or release decision."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

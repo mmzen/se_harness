@@ -7,7 +7,8 @@ owners = ["quality-owner", "repository-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN the 0.6.0 root candidate is produced, THE SYSTEM SHALL prove exact released-evaluator doctor, integrity, complete-graph validation, inspection, dashboard, workflow, and supported-runtime behavior without a compatibility view, while demonstrating that product, release, tag, publication, deployment, maintenance, and historical governance identities did not change."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [[lifecycle_events]]
 from = "draft"

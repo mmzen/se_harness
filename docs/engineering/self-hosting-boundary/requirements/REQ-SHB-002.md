@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN candidate source or a candidate package executes, THE SYSTEM SHALL identify it as evidence-producing code under test and SHALL restrict it to its declared source-test or package-acceptance targets."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

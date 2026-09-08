@@ -7,7 +7,8 @@ owners = ["quality-owner", "technical-owner"]
 created = "2026-08-13"
 updated = "2026-08-13"
 statement = "WHEN Explorer output is generated repeatedly from unchanged repository state, THE SYSTEM SHALL preserve byte-deterministic dashboard-data.json output and its commit-bound artifact snapshot meaning."
-verification_method = "automated-determinism-test"
+verification_method = ["test"]
+verification_notes = "automated-determinism-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

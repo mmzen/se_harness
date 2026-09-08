@@ -1,0 +1,1479 @@
+{
+  "applied": true,
+  "counts": {
+    "mapped": 0,
+    "skipped": 363,
+    "unmatched": 4
+  },
+  "files": {
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agent-directive-surface/requirements/REQ-ADS-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/agentic-execution/requirements/REQ-AEX-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/aggregate-release/requirements/REQ-AGR-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/artifact-authoring/requirements/REQ-AUT-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/dashboard-publication/requirements/REQ-DPG-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/decision-management/requirements/REQ-DCM-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/decision-management/requirements/REQ-DCM-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/decision-management/requirements/REQ-DCM-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/evidence-keying/requirements/REQ-EVK-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-018.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-019.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-020.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-021.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-022.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-023.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-024.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-025.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-026.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-028.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-029.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-030.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-031.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-032.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-033.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-034.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-035.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-018.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-019.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-020.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-021.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-022.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-023.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-024.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-025.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-026.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-027.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-028.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-029.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-030.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-031.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-032.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-033.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-034.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-035.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-036.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-037.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-038.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-039.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-040.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-041.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-042.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-043.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-044.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-045.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-046.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-047.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-048.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-049.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-050.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-051.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-052.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-053.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-054.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-055.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-056.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-057.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-058.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-059.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-060.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-061.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-062.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-063.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-064.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-065.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-066.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-067.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-068.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-069.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-070.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-071.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-072.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-073.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-074.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/harness-distribution/requirements/REQ-DST-075.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/hash-bound-integrity/requirements/REQ-HBI-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-018.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-019.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-020.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-021.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/integration-package/requirements/REQ-IPK-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/legacy-release-evidence/requirements/REQ-LRE-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/operating-contract-activation/requirements/REQ-OCA-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/operating-contract-activation/requirements/REQ-OCA-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/portable-managed-integrity/requirements/REQ-PMI-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/pypi-publication/requirements/REQ-PYP-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-contract-disposition/requirements/REQ-RCD-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/release-orchestration/requirements/REQ-RLO-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-004.md": {
+      "original": "automated-active-surface-invariant",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-011.md": {
+      "original": "automated-release-version-lifecycle-matrix",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-014.md": {
+      "original": "automated-python311-linux-windows-failure-injection-matrix",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-018.md": {
+      "original": "automated-contract-consumer-conformance",
+      "state": "unmatched"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-019.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-020.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-021.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-022.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-023.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-024.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-025.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-026.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-027.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-028.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-029.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-030.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/released-evaluator-boundary/requirements/REQ-REB-031.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-018.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-019.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-020.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-021.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-022.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-023.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-024.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-025.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-026.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-027.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-028.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-029.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-030.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-031.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-032.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-033.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-034.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/revision-provenance/requirements/REQ-REV-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/risk-management/requirements/REQ-RSK-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/root-cause-analysis/requirements/REQ-RCA-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/self-hosting-boundary/requirements/REQ-SHB-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-012.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-013.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-014.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-015.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-016.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/technical-communication/requirements/REQ-TCM-017.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/test-suite/requirements/REQ-TST-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/test-suite/requirements/REQ-TST-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/test-suite/requirements/REQ-TST-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/test-suite/requirements/REQ-TST-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/verification-supersession/requirements/REQ-VSP-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-assurance-classification/requirements/REQ-WAC-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/work-order-lifecycle/requirements/REQ-WLC-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-001.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-002.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-003.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-004.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-005.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-006.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-007.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-008.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-009.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-010.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    },
+    "docs/engineering/workflow-execution/requirements/REQ-WEX-011.md": {
+      "reason": "no string verification_method",
+      "state": "skipped"
+    }
+  },
+  "schema": "se-harness-verification-method-migration-v1"
+}

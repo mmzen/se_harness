@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "security-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a runtime-identity observation accepts an external or installed interpreter, THE SYSTEM SHALL record the lexical entry path, whether that entry is a terminal link, the position class of the resolved interpreter relative to the declared environment root, and the resolved interpreter's content digest, and shall verify each recorded fact against independently derived expectations without changing the bound evaluator-evidence document."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

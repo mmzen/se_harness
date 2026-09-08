@@ -7,7 +7,8 @@ owners = ["requirements-steward", "engineering-owner", "repository-owner"]
 created = "2026-08-11"
 updated = "2026-08-21"
 statement = "WHEN instruction and policy files are installed, THE SYSTEM SHALL record an explicit ownership mode for every file so managed policy, managed fragments, and repository-owned seeds cannot be confused."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

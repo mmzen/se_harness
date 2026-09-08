@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN a PyPI publication is contemplated or completed, THE SYSTEM SHALL require a separate accountable release-owner authorization and retain the workflow run, PyPI URLs, hashes, attestations, and installation result as evidence."
-verification_method = "manual-assessment"
+verification_method = ["analysis"]
+verification_notes = "manual-assessment"
 
 [relations]
 derives_from = ["CAP-PYP-001"]

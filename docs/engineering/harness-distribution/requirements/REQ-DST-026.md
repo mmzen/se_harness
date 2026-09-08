@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN detailed setup, command, agent-operation, release, or contributor material is removed from the root README, THE SYSTEM SHALL retain the relevant current information in expertise-labeled and locally linked notes without duplicating managed governance policy."
-verification_method = "automated-link-and-content-test"
+verification_method = ["test"]
+verification_notes = "automated-link-and-content-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

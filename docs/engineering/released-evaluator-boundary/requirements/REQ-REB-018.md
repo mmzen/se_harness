@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "quality-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "THE SYSTEM SHALL derive each formal artifact family's admissible states, permitted transitions, authority effect, version-reservation effect, transitionability, visibility obligation, and predecessor-adapter requirement from one versioned machine-readable lifecycle state registry."
-verification_method = "automated-contract-consumer-conformance"
+verification_method = ["test"]
+verification_notes = "automated-contract-consumer-conformance"
 
 [relations]
 derives_from = ["CAP-REB-001"]

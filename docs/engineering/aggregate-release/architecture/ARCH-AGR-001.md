@@ -5,10 +5,17 @@ title = "Aggregate release provenance architecture"
 status = "implemented"
 owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-11"
-updated = "2026-08-19"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["SPEC-AGR-001"]
+addresses = ["REQ-AGR-001", "REQ-AGR-002", "REQ-AGR-003", "REQ-AGR-004", "REQ-AGR-005", "REQ-AGR-006", "REQ-AGR-007", "REQ-AGR-008"]
+conforms_to = ["SPEC-AGR-001"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["public-interface-or-protocol", "data-ownership-or-persistence", "difficult-to-reverse", "material-alternatives"]
+rationale = "ADR-AGR-001 chose one aggregate verification record at the final release candidate over four rejected models. It changed the public record relations, the persisted provenance of every release, and a boundary that published records make hard to reverse."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Aggregate release provenance architecture
@@ -68,3 +75,14 @@ Architecture tests exercise multi-item set validation, exact commit agreement, f
 ## Related ADRs
 
 `ADR-AGR-001` selects aggregate use of existing record types and a single final-candidate anchor.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-AGR-001`).** The legacy
+relation named only `SPEC-AGR-001`, which becomes the conformance target;
+`addresses` takes the eight requirements that specification specifies, all of
+them active. The assessment reads the drivers and rejected options of
+`ADR-AGR-001`, the one active ADR that decides this architecture. Title,
+status, statement and ADR relations are unchanged.

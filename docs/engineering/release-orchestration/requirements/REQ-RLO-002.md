@@ -7,7 +7,8 @@ owners = ["release-owner", "quality-owner"]
 created = "2026-08-18"
 updated = "2026-08-18"
 statement = "WHEN a Python distribution release record is prepared, THE SYSTEM SHALL bind a complete structured distribution manifest containing the candidate epoch, exact filenames, lowercase SHA-256 values, and checksum-manifest identity."
-verification_method = "automated-schema-cli-and-compatibility-test"
+verification_method = ["test"]
+verification_notes = "automated-schema-cli-and-compatibility-test"
 
 [relations]
 derives_from = ["CAP-RLO-001"]

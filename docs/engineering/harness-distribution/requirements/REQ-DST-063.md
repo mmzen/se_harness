@@ -7,7 +7,8 @@ owners = ["quality-owner", "engineering-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN topology capacity is qualified, THE SYSTEM SHALL exercise the exact branch and pull-request merge histories that contribute revision provenance and SHALL apply the same declared target on supported platforms."
-verification_method = "automated-cross-platform-and-hosted-test"
+verification_method = ["test"]
+verification_notes = "automated-cross-platform-and-hosted-test"
 
 [relations]
 derives_from = ["CAP-DST-001"]

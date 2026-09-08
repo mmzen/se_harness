@@ -7,7 +7,8 @@ owners = ["product-owner", "repository-owner"]
 created = "2026-08-20"
 updated = "2026-08-20"
 statement = "WHEN the 0.5.0 governance incident is documented for repository maintainers, THE REPOSITORY SHALL provide one canonical Markdown RCA covering impact, detection, root cause, contributing factors, recovery, corrective actions, preventive actions, evidence, and lessons."
-verification_method = "static-inspection-and-manual-review"
+verification_method = ["inspection"]
+verification_notes = "static-inspection-and-manual-review"
 
 [relations]
 derives_from = ["CAP-RCA-001"]

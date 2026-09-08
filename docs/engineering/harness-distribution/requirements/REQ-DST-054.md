@@ -7,7 +7,8 @@ owners = ["product-owner", "release-owner", "security-owner"]
 created = "2026-08-17"
 updated = "2026-08-17"
 statement = "WHEN a progressive Explorer bundle is generated or selected for publication, THE SYSTEM SHALL remain a self-contained static HTTP site whose exact declared resources are validated before publication and whose generation alone performs no transmission or deployment."
-verification_method = "automated-publication-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-publication-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

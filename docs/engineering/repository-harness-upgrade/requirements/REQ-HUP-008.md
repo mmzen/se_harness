@@ -7,7 +7,8 @@ owners = ["repository-owner", "quality-owner", "security-owner"]
 created = "2026-08-23"
 updated = "2026-08-23"
 statement = "WHEN hosted CI observes a candidate whose selected governor differs from its trusted base revision, THE SYSTEM SHALL validate one approved exact governor-transition contract, immutable target evaluator identity, canonical transaction evidence, and complete target-root qualification without running the predecessor evaluator against the successor root or hard-coding a concrete version pair."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-HUP-003"]

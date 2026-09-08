@@ -7,7 +7,8 @@ owners = ["product-owner", "technical-owner", "quality-owner"]
 created = "2026-08-16"
 updated = "2026-09-01"
 statement = "WHEN a reader filters the Explorer topology, THE SYSTEM SHALL offer bounded zero-, one-, and two-hop connected context around the matching artifacts while preserving filter meaning, relation direction and authority, deterministic limits, and an explicit distinction between matches and contextual nodes."
-verification_method = "automated-test-and-manual-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-manual-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "technical-owner", "quality-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN architecture is defined or selected for implementation, THE SYSTEM SHALL require an explicit accountable assessment of significant decision applicability and SHALL require ADR coverage for every architecture assessed as containing a significant decision."
-verification_method = "automated-test-and-inspection"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-inspection"
 
 [relations]
 derives_from = ["CAP-IAR-001"]

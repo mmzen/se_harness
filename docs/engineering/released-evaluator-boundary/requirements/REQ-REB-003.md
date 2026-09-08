@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner", "release-owner"]
 created = "2026-08-21"
 updated = "2026-08-21"
 statement = "WHEN release readiness is prepared, THE SYSTEM SHALL retain one canonical evaluator identity observation containing the exact version, distribution digest, bounded runtime origins, and checkout-exclusion proof and SHALL bind that observation to the ready release record."
-verification_method = "automated-schema-provenance-and-boundary-test"
+verification_method = ["test"]
+verification_notes = "automated-schema-provenance-and-boundary-test"
 
 [relations]
 derives_from = ["CAP-REB-001"]

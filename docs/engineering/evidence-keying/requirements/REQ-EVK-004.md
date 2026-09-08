@@ -7,7 +7,8 @@ owners = ["technical-owner", "security-owner", "quality-owner"]
 created = "2026-08-19"
 updated = "2026-08-19"
 statement = "WHEN evidence paths are assessed on supported platforms or across installed-package and repository-local execution planes, THE SYSTEM SHALL produce deterministic platform-independent key sets without making standalone repository scripts depend on candidate package code."
-verification_method = "automated-test-and-architecture-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-architecture-review"
 
 [relations]
 derives_from = ["CAP-EVK-001"]

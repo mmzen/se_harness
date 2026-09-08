@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-24"
 updated = "2026-08-24"
 statement = "WHEN a lifecycle stage completes or reaches a stop condition, THE SYSTEM SHALL make the schema-2 workflow result authoritative and permit an agent to present a clear human handoff only when it preserves every decision-relevant fact and exactly one recommended next action."
-verification_method = "automated-test-and-human-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-human-review"
 
 [relations]
 derives_from = ["CAP-WEX-001"]

@@ -7,7 +7,8 @@ owners = ["requirements-steward", "repository-owner", "release-owner", "quality-
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN a candidate has been immutably published and selected for self-hosting, THE SYSTEM SHALL advance the operational governor only through a separate governed upgrade that verifies the published artifact and preserves the prior governor as rollback provenance."
-verification_method = "automated-test-and-human-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-human-review"
 
 [relations]
 derives_from = ["CAP-SHB-001"]

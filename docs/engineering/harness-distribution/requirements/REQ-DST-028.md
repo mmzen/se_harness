@@ -7,7 +7,8 @@ owners = ["product-owner", "documentation-owner"]
 created = "2026-08-12"
 updated = "2026-08-12"
 statement = "WHEN the root README is condensed, THE SYSTEM SHALL retain a persuasive user-centered scenario, a compact lineage visualization, the human-agent-repository responsibility boundary, Harness Explorer value, material known limitations, and a contributor route."
-verification_method = "automated-test-and-reader-review"
+verification_method = ["test", "inspection"]
+verification_notes = "automated-test-and-reader-review"
 
 [relations]
 derives_from = ["CAP-DST-001"]

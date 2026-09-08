@@ -7,7 +7,8 @@ owners = ["product-owner", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN the Harness Explorer is generated, THE SYSTEM SHALL display declared verification and release commits in lineage and distinguish them from the observed checkout revision and any exact-match drift state."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-REV-001"]

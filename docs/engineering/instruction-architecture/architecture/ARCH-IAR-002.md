@@ -5,10 +5,17 @@ title = "Responsibility-separated managed instruction layers"
 status = "implemented"
 owners = ["technical-owner", "engineering-owner", "quality-owner"]
 created = "2026-08-12"
-updated = "2026-08-12"
+updated = "2026-09-08"
 
 [relations]
-constrains = ["REQ-IAR-010"]
+addresses = ["REQ-IAR-010"]
+conforms_to = ["SPEC-IAR-002"]
+
+[decision_assessment]
+outcome = "adr_required"
+triggers = ["responsibility-or-dependency-direction", "cross-cutting-policy", "material-alternatives"]
+rationale = "ADR-IAR-002 chose to keep non-waivable invariants in the router and ordered procedure in WORKFLOW.md, over three alternatives. It set a responsibility boundary every managed policy file now depends on."
+assessed_by = "technical-owner"
 +++
 
 # Architecture: Responsibility-separated managed instruction layers
@@ -74,3 +81,13 @@ Maintainability through one procedural owner; usability through a compact entry 
 
 - `ADR-IAR-001`: Use a thin adapter, one managed router, and modular policy.
 - `ADR-IAR-002`: Keep invariant summaries in the router and procedure in focused policy.
+
+## Amendment record
+
+**Typed `addresses` and `conforms_to` relations replace the legacy
+`constrains` relation and a decision assessment is recorded, amended
+2026-09-08 under `WO-AUT-005` (`SPEC-AUT-003`, `ADR-IAR-002`).** The addressed
+requirement becomes `REQ-IAR-010` and `conforms_to` names `SPEC-IAR-002`, the
+active specification that specifies it. The assessment reads the drivers and
+four considered options of `ADR-IAR-002`, the one active ADR that decides this
+architecture. Title, status, statement and ADR relations are unchanged.

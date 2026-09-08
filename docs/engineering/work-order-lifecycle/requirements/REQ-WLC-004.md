@@ -7,7 +7,8 @@ owners = ["requirements-steward", "quality-owner"]
 created = "2026-08-11"
 updated = "2026-08-11"
 statement = "WHEN uncovered verified work is an authoritative validation failure, THE SYSTEM SHALL expose the validator diagnostic in Harness Explorer and SHALL NOT add a duplicate derived W-REV-001 finding."
-verification_method = "automated-test"
+verification_method = ["test"]
+verification_notes = "automated-test"
 
 [relations]
 derives_from = ["CAP-WLC-001"]
