@@ -288,7 +288,7 @@ Preserve governance and evidence during plugin removal or rollback. Remove dupli
 
 - **Inputs:** Current/target identities, lock, ownership information, reviewed changes, applicable authority.
 - **Outputs:** Per-layer results and fresh readiness checks.
-- **Writes:** Selected plugin/host changes; managed files and lock only for authorized repository upgrades. Optional `--evidence-output` retains installer evidence. This repository requires it for a governor transition; see [Advancing the root evaluator](../developing-se-harness.md#advancing-the-root-evaluator). No separate evaluator-upgrade approval packet is introduced.
+- **Writes:** Selected plugin/host changes; managed files and lock only for authorized repository upgrades. Optional `--evidence-output` retains installer evidence. This repository requires it when changing the governing evaluator; see [Advancing the root evaluator](../developing-se-harness.md#advancing-the-root-evaluator). No separate evaluator-upgrade approval packet is introduced.
 
 **Host differences**
 
