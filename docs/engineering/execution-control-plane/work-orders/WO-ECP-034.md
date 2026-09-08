@@ -2,7 +2,7 @@
 id = "WO-ECP-034"
 type = "work_order"
 title = "Wave 3, group A: the engine as an import surface and its twins folded into the package"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -62,6 +62,13 @@ to = "in_progress"
 decided_at = "2026-09-08T15:32:45Z"
 decided_by = "engineering-owner"
 reason = "Started on 2026-09-08 by the accountable engineering owner with the word 'start', after the wave 3 packet (#404, #405, #406) merged to main at 0e7d718b: wave 3, group A, the engine as an import surface and its five twins folded into the package (SPEC-ECP-024 ECP-ENG-001 to ECP-ENG-009, ECP-ENG-016, ECP-ENG-023 to ECP-ENG-026). Start preflight PASS."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T17:37:23Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete, prepare the record, start group B': se_harness/engine is an import surface the CLI, preflight, the workflow, provenance and qualification import in-process, the path loader and the four command-line assemblies gone, each entry module still runnable as python -m se_harness.engine.<name>; the five twins have one definition (layout tables, lifecycle registry, evaluator-evidence validator with per-reason engine messages, implemented-or-later status set checked at load, body parser and artifact-id pattern); the engine's 73 codes join codes.py and the index attributes them by name; SPEC-DST-025, SPEC-ECP-021 and SPEC-IAR-008 carry amendment records. Every recorded output byte-identical between main's code and the candidate on the same target and revision; CONTRACT_SHA256 unchanged. Windows suite at its baseline (1063 tests after the merge of main's test-suite hygiene, the one workstation error, 22 skips) at 5094aea7 and the 17 pull-request checks of #407 green at cf573862; validate 1427 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from main passes all nine predicates over 47 paths. Scope amended under DR-REMEDIATION-SCOPE for se_harness/workflow_procedures.py. Duplication scan 3 blocks to 0, so ECP-PRM-027 of SPEC-ECP-023 is met and DEC-ECP-002's revisit arrives with this merge. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-034/WO-ECP-034-handoff.md."
 +++
 
 # Work Order: Wave 3, group A: the engine as an import surface and its twins folded into the package
